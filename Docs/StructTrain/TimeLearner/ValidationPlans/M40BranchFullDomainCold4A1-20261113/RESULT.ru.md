@@ -9,3 +9,5 @@
 Read-only научный отчёт с полной source проверкой и заранее заданным выбором графиков запущен отдельным job s03-branch-full-domain-report-m40-a1; результат/visual acceptance пока pending. Научная классификация этой модели не проверялась.
 
 Уточнение: read-only A1 имел ошибки выбора ролей/перечня отказов. Принят исправленный A3; см. ../M40BranchFullDomainReportA3-20261113/RESULT.ru.md и ../../BranchSharedBankScientificReport-20261113.ru.md. Группа108 полна, selection valid, но не потреблена контроллером.
+
+Уточнение по полному inventory: из52 domains 27 shared-lock и25 unlocked. У unlocked [27,27,26,1] также timing-ready, но измерено только Rs86M. Первый проход broad geometry-first N1 откладывает остальные Rs; shared-bank lock не является единственной причиной отсутствия нормализации. Приоритет — bounded local Rs exploration на измеренной timing-ready геометрии с сохранением fairness и fresh verification.
