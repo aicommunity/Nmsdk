@@ -4,6 +4,8 @@
 
 ## Последний завершённый Train и текущее задание
 
+[Текущее задание: холодный Classic N4/N1 recovery4](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/STATUS.ru.md) запущено на M40 на принятом SDK74e5/Pulse7c6c/runtime105ccc46. Подтверждён running kernel handle; научного исхода ещё нет. Job/initial/profile подготовлены production-путём и не меняются. Это текущий протокол с4 допустимыми восстановлениями, а не same-budget сравнение с прежним Classic recovery16. Автоматического Test/threshold tuning нет.
+
 [Cold Branch N4/N1 coupled-search](ValidationPlans/M40N1CoupledBranchTrainA1-20261113/RESULT.ru.md) завершён: production1/1 PASS, native/outer closed. Один реально измеренный кандидат input2 одновременно удовлетворяет timing/amplitude допускам; следующий input1 дал5 ambiguous rejections. Итог invalid_observation, certificate=null, all-input verification отсутствует. Это локальный прогресс относительно прежних0 jointly-ready, не работа всей модели/классификатора.
 
 Source SDK root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8, runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Actual job/initial bytes равны baseline; scientific limits не изменены. SDK A4[93/93](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md) принята адресно; A1/A2/A3 failures сохранены. Этапы1–12 остаются частичными.

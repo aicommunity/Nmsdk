@@ -31,3 +31,21 @@ A2 завершилась до запуска93 cases: два SCOPED_TRACE на 
 ## Текущее подтверждение после A4
 
 Fresh A4 root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8:93/93 cases PASS, все kernel groups закрыты; [полные исходники/результаты проверки](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md). Старые failure outcomes сохранены. Same-budget cold Branch s07-n1-coupled-branch-train-m40-a1 запущен после gate; preflight completed и начались native raw trials. Scientific outcome/классификация нового варианта пока не установлены. Прежний измеренный bracket A3 относится к другому коду9656b420 и не перенесён на новый run как сертификат.
+
+## Уточнение14.11 после фактического завершения
+
+[Новый Branch Train](N1CoupledScientificReport-20261113.ru.md) завершён: одна jointly-ready input2, затем invalid_observation input1. [Реальный fixed-threshold diagnostic](BranchCoupledThresholdScientificReport-20261114.ru.md) дал TP1/FP5/FN0/TN2, target до последнего входа. Ранний текст «outcome ещё не установлен» выше относится к моменту запуска и больше не описывает текущее состояние.
+
+Проверен recovery_ledger исходного native/train_stopped_summary.json (16103173B, SHA25694f28cc3abf9d31bdcf70a2cec653e055b60533e89cae0a84f126b3b2163e060; весь файл сохранён в [Train primary](ValidationPlans/M40N1CoupledPrimaryA1-20261113/RESULT.ru.md)). Пять ambiguous отказов относятся к разным полным векторам:
+
+| search | epoch | L0,L1,L2,L3 | Rs0,Rs1,Rs2,Rs3 | disposition |
+|---|---:|---|---|---|
+|90|21|28,28,27,1|86M,86M,21.232304307596M,86M|cursor_advanced|
+|95|22|29,28,27,1|86M,86M,21.232304307596M,86M|cursor_advanced|
+|99|23|29,29,27,1|86M,86M,21.232304307596M,86M|cursor_advanced|
+|103|24|30,29,27,1|86M,86M,21.232304307596M,86M|cursor_advanced|
+|107|25|28,27,27,1|86M,21.232304307596M,21.232304307596M,86M|invalid_budget_stop|
+
+Это не повтор одной точки и не дефект отсутствия продвижения cursor. Первые4 восстановления расходуют объявленный общий allowance4; пятое невалидное наблюдение останавливает поиск. Ни одна из этих точек не становится measured timing/amplitude candidate. Нельзя исправлять этот исход повышением allowance или объявлением merged peak valid.
+
+Открыт вопрос порядка исследования геометрий и возможности отдельно измеримого раннего пика при общем кабеле. Пока причинная коррекция алгоритма из этих данных не доказана. [Сопоставимый текущему Branch-budget холодный Classic контроль](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/STATUS.ru.md) выполняется на том же SDK, но прежний Classic recovery16 остаётся другим протоколом. После результата сравнить реальные assigned observations и причины остановки до новых изменений поиска.
