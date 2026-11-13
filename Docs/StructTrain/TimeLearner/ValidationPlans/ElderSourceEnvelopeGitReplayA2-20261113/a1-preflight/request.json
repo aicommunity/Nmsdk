@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-source-envelope-git-replay-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "929dbc176a0804910544539aaf79bdc4a02aa82a",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 1073741824
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-envelope-git-fixture-a1",
+      "commit": "dac0d75de000596ddd0414b0221c33b9669dc6f7"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/source-envelope-git-replay-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderSourceEnvelopeGitReplayA1-20261113/suite.json",
+      "sha256": "61f66c52b8e9390cadb1b48a3a091c29cffc349959aae87b6e3fc686df5a114e"
+    },
+    "fixtures": {
+      "TIMELEARNER_SOURCE_ENVELOPE_PRODUCED": "/home/user/timelearner-refactor/source-envelope-git-fixture-a1/Reports/StructTrain/TimeLearner/SourceEnvelopeFormatFixture-M40-20261113",
+      "TIMELEARNER_SOURCE_ENVELOPE_PRODUCED_XZ": "/home/user/timelearner-refactor/source-envelope-git-fixture-a1/Reports/StructTrain/TimeLearner/SourceEnvelopeFormatFixture-M40-20261113",
+      "TIMELEARNER_SOURCE_ENVELOPE_LEGACY_PACKAGE": "/home/user/timelearner-refactor/source-envelope-git-fixture-a1/Reports/StructTrain/TimeLearner/ProbeReadbackSixAccepted-M40-20261113"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 67108864,
+      "maximum_total_bytes": 268435456
+    }
+  }
+}

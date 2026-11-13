@@ -1,0 +1,1 @@
+Independent Elder restore exclusively from exact Root Git fixture blobs, with no original M40 directories. Full original byte namespace and eighteen source jobs restored before six production primary audits. No fresh native execution or scientific verdict. Same complete scope as A1; disk output cap200MiB based on actual183144448-byte peak, minimum free floor remains2GiB.
