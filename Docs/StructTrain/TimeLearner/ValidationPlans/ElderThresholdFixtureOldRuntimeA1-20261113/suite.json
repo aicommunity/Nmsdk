@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s08-threshold-fixture-old-runtime-elder-a1",
+  "package_fingerprint": "26481c5396f08547e5df3982b365b3cffcf762dd6b1ffe1fda67f0e58a626450",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_threshold_fixture_old_runtime"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_threshold_fixture_old_runtime.ThresholdFixtureOldRuntimeTest.test_original_sdk_preconditions_are_measured_without_assuming_pass_or_failure"
+  ],
+  "fixtures": {
+    "TIMELEARNER_OLD_THRESHOLD_GATE": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "18de47660b91e094e7dc51c60e707ce12b318ed14c220b48e0a1e202ec12222e"
+    },
+    "TIMELEARNER_OLD_THRESHOLD_RUNTIME": {
+      "pattern": "Test_PulseLib_StorageComponents*",
+      "files": 1,
+      "fingerprint": "9af9b8458bec070dd05e63516cabe72e9b1420cbfc572d39621f35c061c7d399"
+    },
+    "TIMELEARNER_OLD_THRESHOLD_SDK": {
+      "pattern": "Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp",
+      "files": 1,
+      "fingerprint": "bc27a45f0c647ad536a29ed44ff7713dbf9553121906a5a5098de6fce71d34ab"
+    }
+  }
+}

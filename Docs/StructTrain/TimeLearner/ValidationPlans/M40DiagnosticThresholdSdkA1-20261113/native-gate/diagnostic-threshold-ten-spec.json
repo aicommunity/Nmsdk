@@ -1,0 +1,25 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 3,
+  "runtime_manifest": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-diagnostic-threshold-sdk-m40-a1/diagnostic-threshold-ten-runtime.json",
+  "source_root": "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-sdk-a3",
+  "expected_test_ids": [
+    "NativeDiagnosticThreshold/ClassicN1",
+    "NativeDiagnosticThreshold/BranchN1",
+    "NativeThresholdCandidate/ClassicN0_2000",
+    "NativeThresholdCandidate/ClassicN1_2000",
+    "NativeThresholdCandidate/BranchN0_2000",
+    "NativeThresholdCandidate/BranchN1_2000",
+    "NativeThresholdCandidate/ClassicN0_20000",
+    "NativeThresholdCandidate/ClassicN1_20000",
+    "NativeThresholdCandidate/BranchN0_20000",
+    "NativeThresholdCandidate/BranchN1_20000"
+  ],
+  "maximum_wall_seconds": 1800,
+  "asan_options": "",
+  "cooperative_runtime_capture": true,
+  "process_limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 128
+  }
+}

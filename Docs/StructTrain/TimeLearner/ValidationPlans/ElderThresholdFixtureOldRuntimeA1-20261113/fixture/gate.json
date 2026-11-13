@@ -1,0 +1,17 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 3,
+  "runtime_manifest": "/home/user/timelearner-refactor/requests/threshold-old-runtime-control-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderThresholdFixtureOldRuntimeA1-20261113/fixture/runtime.json",
+  "source_root": "/home/user/timelearner-refactor/source-publication-receipt-sdk-a1",
+  "expected_test_ids": [
+    "NativeThresholdCandidate/ClassicN1_2000",
+    "NativeThresholdCandidate/BranchN1_2000"
+  ],
+  "maximum_wall_seconds": 600,
+  "asan_options": "",
+  "cooperative_runtime_capture": true,
+  "process_limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 64
+  }
+}

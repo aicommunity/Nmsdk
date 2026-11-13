@@ -1,0 +1,59 @@
+{
+    "armed": true,
+    "begin": 23.2537,
+    "censored": true,
+    "closed_at": 23.2537,
+    "complete": false,
+    "end": 23.3737,
+    "evaluation_verdict": null,
+    "frequency_hz": 2000,
+    "kind": "native_recognition_trial",
+    "label": "target",
+    "maximum_samples": 1000000,
+    "model_after": "4e0312ad3547ae19a3a90971b9f41a4102a603a4525d135d148a3cfa7633b0cc",
+    "model_before": "4e0312ad3547ae19a3a90971b9f41a4102a603a4525d135d148a3cfa7633b0cc",
+    "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+    "pattern_isi": [
+        0.01,
+        0.08
+    ],
+    "reason": "recognition_sample_gap",
+    "relative_spike_times": [
+    ],
+    "relative_stimulus_times": [
+    ],
+    "reset_policy": "reset_per_trial",
+    "run_id": "Classic_2000_N1_diagnostic_threshold_frozen",
+    "sample_id": "training_target",
+    "samples": [
+        {
+            "lt_output": 0,
+            "lt_potential": 0,
+            "soma": [
+                0,
+                0
+            ],
+            "spike_history": [
+            ],
+            "stimulus": 0,
+            "stimulus_history": [
+            ],
+            "time": 23.2537
+        }
+    ],
+    "schema_version": 2,
+    "spike_count": 0,
+    "spike_times": [
+    ],
+    "stimulus_onset": null,
+    "stimulus_times": [
+    ],
+    "threshold_potential_source": {
+        "class": "Classic_2000_N1_diagnostic_threshold_LTZone",
+        "path": "$.LTZone.Potential",
+        "sample_phase": "native_after_children",
+        "units": "model_units_SI_unverified"
+    },
+    "trial_id": "trial_5",
+    "valid": false
+}

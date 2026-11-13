@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_native_test_gate_result",
+  "schema_version": 1,
+  "execution": "process_error",
+  "validity": "valid",
+  "assertion_status": "failed",
+  "reason": "complete_declared_test_inventory",
+  "inventory": {
+    "expected": 2,
+    "observed": 2,
+    "failed_test_ids": [
+      "NativeThresholdCandidate/ClassicN1_2000",
+      "NativeThresholdCandidate/BranchN1_2000"
+    ],
+    "assertion_status": "failed",
+    "sha256": "af92d6f0c86d0aeca9b620c29b9b6ef370868b30396005e986841f2b887e6b63"
+  },
+  "scientific_verdict": null
+}
