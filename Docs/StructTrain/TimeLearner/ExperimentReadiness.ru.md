@@ -6,7 +6,7 @@
 
 ## Что уже можно читать
 
-- [L22: сопротивление и принадлежность ранней вершины — промежуточный отчёт](L22BurstResistanceScientificReport-20261113.ru.md). Полная численная сетка86/64.5/43/21.5МОм, два просмотренных original control PNG; остальные Rs-графики/restore ещё проверяются, классификация не заявляется.
+- [L22: сопротивление и принадлежность ранней вершины — диагностический отчёт](L22BurstResistanceScientificReport-20261113.ru.md). Полная численная сетка86/64.5/43/21.5МОм, report2/2, restore1/1,8 выбранных PNG просмотрены; классификация не заявляется.
 
 - [Новый полный временной отчёт Classic budget16](Budget16DiagnosticScientificReport-20261113.ru.md):32 пары pattern×soma,14 просмотренных originals, все8 паттернов. Source training=budget_exhausted; fixed threshold100, target пропущен.
 - [Историческое холодное Train→Test:4/8–6/8](HistoricalAugustColdStart.ru.md). Сохраняется значение августовских визуальных наблюдений исходного протокола.
@@ -39,6 +39,12 @@
 
 [Диагностический отчёт об обрыве Train L22](ValidationPlans/M40L22CensoredTemporalA2-20261113/STATUS.ru.md) проверяется на M40 по уже имеющимся original primary, без нового Train. У terminal input0 есть два полных observations и один415-sample censored; недостающие пробы не достраиваются. Это адресный анализ причины остановки, не новая оценка классификации.
 
-Текущие работающие задачи — [read-only отчёты в проверенном plot interpreter](ValidationPlans/M40L22RecordedReportsA1-20261113/STATUS.ru.md) и [компактная упаковка закрытого N4 corpus](ValidationPlans/M40L22PrimaryEnvelopeA1-20261113/STATUS.ru.md). Прежние handles Rs-series и censored A2 закрыты; их plot failures сохраняются. Новый Train и повторные native probes не запускаются.
+Read-only отчёты и compact collection/restore завершены. [Rs/censored report2/2](ValidationPlans/M40L22RecordedReportsA1-20261113/RESULT.ru.md), [L14/L15/L21 report1/1](ValidationPlans/M40L14L15TransitionA1-20261113/RESULT.ru.md), [large restore1/1](ValidationPlans/M40L22PrimaryRestoreA1-20261113/RESULT.ru.md). Все перечисленные группы закрыты; original failures сохранены.
 
-[Большой N4 primary restore принят](ValidationPlans/M40L22PrimaryRestoreA1-20261113/RESULT.ru.md):3301 regular restored files/3306 logical members,15 exact jobs, original source и5 native audits после восстановления,1/1 passed351.980s. Collector иrestore закрыты, native data сохранены в48.78MB Git package. Сейчас остаётся running read-only report job; его handle находится в [M40L22RecordedReportsA1](ValidationPlans/M40L22RecordedReportsA1-20261113/STATUS.ru.md). [Сопоставление18 CSV](ValidationPlans/M40L22RecordedReportsA1-20261113/REUSED_CONTROLS.json) доказывает переиспользование прежних графиков L3/L54/L45, не независимые повторы. Полные этапы1–12 остаются частичными.
+[Большой N4 primary restore принят](ValidationPlans/M40L22PrimaryRestoreA1-20261113/RESULT.ru.md):3301 regular restored files/3306 logical members,15 exact jobs, original source и5 native audits после восстановления,1/1 passed351.980s. Collector иrestore закрыты, native data сохранены в48.78MB Git package. Read-only report job завершён2/2; его handle находится в [M40L22RecordedReportsA1](ValidationPlans/M40L22RecordedReportsA1-20261113/STATUS.ru.md). [Сопоставление18 CSV](ValidationPlans/M40L22RecordedReportsA1-20261113/REUSED_CONTROLS.json) доказывает переиспользование прежних графиков L3/L54/L45, не независимые повторы. Полные этапы1–12 остаются частичными.
+
+## Последний завершённый научный разбор
+
+[Переход L14→L15](L14L15AssignmentTransitionScientificReport-20261113.ru.md): полные controls подтверждают4→3 вершины и потерю unique assignment input0; приL14 выбран ранний меньший пик, но timing/amplitude residuals вне допусков. [Rs серия L22](L22BurstResistanceScientificReport-20261113.ru.md) усилила ответ без восстановления отдельной вершины на четырёх проверенных Rs.12 selected originals просмотрены; полные56 views остаются M40 cache. Во всех перечисленных jobs теперь terminal/closure подтверждены.
+
+Следующий конкретный шаг — локальный Y focus слабой впадины L14 по исходным native frames310→331, без изменения peak criterion, tolerances или новых Train. Затем продолжить обязательную матрицу и исправления алгоритмов по измеренным причинам. Полные стадии1–12 остаются частичными; подтверждённой новой классификации нет.
