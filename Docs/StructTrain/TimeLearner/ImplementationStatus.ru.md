@@ -4,7 +4,7 @@
 
 ## Последний завершённый Train и текущее задание
 
-[Холодный Classic N4/N1 recovery4 завершён](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md): production1/1/DATA/physical audit приняты, native/outer закрыты.14 measured candidates,0 jointly-ready, затем5 ambiguous input0 на L54/52/50/48/45; certificate=null, классификация не оценивалась. Это не same-budget сравнение с прежним Classic recovery16. [Весь compact primary29.285MB сохранён вGit](ValidationPlans/M40N1CoupledClassicPrimaryA1-20261114/RESULT.ru.md), [временной отчёт всех4 soma выбранных групп строится](ValidationPlans/M40ClassicCoupledTrainingReportA1-20261114/STATUS.ru.md); нового Train/Test/threshold tuning нет.
+[Холодный Classic N4/N1 recovery4 завершён](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md): production1/1/DATA/physical audit приняты, native/outer закрыты.14 measured candidates,0 jointly-ready, затем5 ambiguous input0 на L54/52/50/48/45; certificate=null, классификация не оценивалась. Это не same-budget сравнение с прежним Classic recovery16. [Весь compact primary29.285MB сохранён вGit](ValidationPlans/M40N1CoupledClassicPrimaryA1-20261114/RESULT.ru.md), [научный отчёт готов:12 просмотренных overview всех4 soma выбранных групп](ClassicCoupledCold4ScientificReport-20261114.ru.md); нового Train/Test/threshold tuning нет.
 
 [Cold Branch N4/N1 coupled-search](ValidationPlans/M40N1CoupledBranchTrainA1-20261113/RESULT.ru.md) завершён: production1/1 PASS, native/outer closed. Один реально измеренный кандидат input2 одновременно удовлетворяет timing/amplitude допускам; следующий input1 дал5 ambiguous rejections. Итог invalid_observation, certificate=null, all-input verification отсутствует. Это локальный прогресс относительно прежних0 jointly-ready, не работа всей модели/классификатора.
 
@@ -67,7 +67,7 @@ Git содержит compact primary/models/metrics/selected figures. Полны
 
 ## Следующий научный шаг и ограничения
 
-Same-budget cold Branch N4/N1 завершён: один measured jointly-ready input2, затем ambiguous input1; общая сходимость не принята. Frozen8 baseline подтвердил импорт полного terminal state и неизменность модели. Один заранее определённый Same-Matrix порог0.03578062022182049 проверен: TP1/FP5/FN0/TN2,32 выбранных графика просмотрены и опубликованы. Текущий холодный Classic recovery4 выполняется на том же SDK; повышения budget/tolerances нет. Exact требует свежей проверки всех входов. Sign bracket, local timing readiness, Done и завершённый процесс не заменяют это требование. BudgetExhausted/SearchUnresolved не доказывают PhysicalInfeasible.
+Same-budget cold Branch N4/N1 завершён: один measured jointly-ready input2, затем ambiguous input1; общая сходимость не принята. Frozen8 baseline подтвердил импорт полного terminal state и неизменность модели. Один заранее определённый Same-Matrix порог0.03578062022182049 проверен: TP1/FP5/FN0/TN2,32 выбранных графика просмотрены и опубликованы. Холодный Classic recovery4 на том же SDK завершён:14 measured candidates/0 jointly-ready, invalid_observation;12 обзорных графиков просмотрены. Повышения budget/tolerances нет. Exact требует свежей проверки всех входов. Sign bracket, local timing readiness, Done и завершённый процесс не заменяют это требование. BudgetExhausted/SearchUnresolved не доказывают PhysicalInfeasible.
 
 Дальше остаются legacy/V2 A/B и полная физическая/режимная матрица, frozen order/ITI/reset и согласованные stage merges children-first через--no-ff. Полные открытые требования перечислены выше; этот научный шаг не подменяет их.
 

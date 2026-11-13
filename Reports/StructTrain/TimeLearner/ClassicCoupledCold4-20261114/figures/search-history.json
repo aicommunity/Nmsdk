@@ -1,0 +1,2291 @@
+{
+  "kind": "timelearner_native_search_history_report",
+  "schema_version": 2,
+  "source_manifest": {
+    "source_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-classic-cold4-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/run-manifest.json",
+    "bytes": 234702,
+    "sha256": "5850803578a6394c36b5c69ceea17e67e4c33503d3bff93dde8f2f1a808bb2f3"
+  },
+  "source_summary": {
+    "source_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-classic-cold4-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native/train_stopped_summary.json",
+    "bytes": 12479315,
+    "sha256": "19642e90bcbf66a1440833c97fadd41ffac245086a5718bfa86bb303bceacbef"
+  },
+  "source_run_execution": "completed",
+  "source_run_validity": "valid",
+  "runtime_fingerprint": "105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a",
+  "data_audit": {
+    "run_evidence_consistent": true,
+    "operation": "train",
+    "native_execution_verified": false,
+    "independent_partition_verified": false,
+    "evaluation_verdict": null
+  },
+  "native_execution_attested": false,
+  "topology": "Classic",
+  "normalization": "N1",
+  "input_count": 4,
+  "anchor_index": 3,
+  "outcome": "invalid_observation",
+  "reason": "rejected_candidate_window:ambiguous",
+  "actual_model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+  "actual_parameters": [
+    {
+      "length": 45,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "reference_complete": true,
+  "candidate_history_retained": true,
+  "actual_model_candidate_trial_ids": [],
+  "actual_model_matched_in_candidate_history": false,
+  "final_verification_group_ids": [],
+  "producer_reported_search_probes": 38,
+  "producer_reported_edits": 18,
+  "recorded_candidate_measurements": [
+    {
+      "amplitude_residual": 0,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/1/composite/5",
+      "anchor_semantic_proof_id": "4cb3f766ebdc6567dd0ca2e8fa7d79955e18090201119525da573049800a4ae0",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/1",
+      "full_parameters": [
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/2/composite/6",
+      "model_epoch": 0,
+      "model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+      "parameter_change_cost": 0,
+      "parameters": {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "0ddb9565658c6c67635b14570d170851d45bc35aa4e4418bd0c994302849ae57",
+      "timing_high": -0.480000000000004,
+      "timing_low": -0.480000000000004,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/2",
+      "within_amplitude": true,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": 0.3308828437836624,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/5/composite/7",
+      "anchor_semantic_proof_id": "e7609b9c45cbd6455d1b1d1db053519cbd59c13cf180b352abe733fd3edd442b",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/5",
+      "full_parameters": [
+        {
+          "length": 1,
+          "resistance": 2880071.5552629367,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/6/composite/8",
+      "model_epoch": 1,
+      "model_revision": "c2e32de91e3a48a5af9fbf6dbf295840923b1b9a9f9b4564a7b266507d295d17",
+      "parameter_change_cost": 3.3965321568368925,
+      "parameters": {
+        "length": 1,
+        "resistance": 2880071.5552629367,
+        "synapses": 1
+      },
+      "semantic_proof_id": "79c8e3e8e42fdac9d9248100425e935b85bc7acf691a950567faf25244f0e776",
+      "timing_high": -0.4825000000000017,
+      "timing_low": -0.4825000000000017,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/6",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.0034625576736122543,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/9/composite/9",
+      "anchor_semantic_proof_id": "d780a7ff9f7d65c61daff542ca73c7ff8a5faf6fac6ce8097d4ec96ee21b8cf3",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/9",
+      "full_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/10/composite/10",
+      "model_epoch": 2,
+      "model_revision": "057406ce975b5d47e13c266c3639ff474e3893c4464b341758442dea8009d899",
+      "parameter_change_cost": 1,
+      "parameters": {
+        "length": 2,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "cd84e5b4aa1bc933b22561dbcdb1fd99c277030836fdc308aad52e57013481b6",
+      "timing_high": -0.47050000000000125,
+      "timing_low": -0.47050000000000125,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/10",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.005368698033123009,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/13/composite/11",
+      "anchor_semantic_proof_id": "9979bce7b780613b9a726e011920aa6237e9ce5a54c0b24e1c8149cae27ba0bf",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/13",
+      "full_parameters": [
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/14/composite/12",
+      "model_epoch": 3,
+      "model_revision": "30821510099ab090fabacf0dcbcd610b841a39f27b063d11ea0210b8fb27c523",
+      "parameter_change_cost": 2,
+      "parameters": {
+        "length": 3,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "9fda117335f0f78f51ce4da6b921aa4fc9b23d9ede04799e81267028fd831d12",
+      "timing_high": -0.4615000000000009,
+      "timing_low": -0.4615000000000009,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/14",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.006605702978675132,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/21/composite/15",
+      "anchor_semantic_proof_id": "eadcc9fc4a8182837e089bdd52af9ef11610238fcb065845dc1e58d95e88752e",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/21",
+      "full_parameters": [
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/22/composite/16",
+      "model_epoch": 5,
+      "model_revision": "698ca89faf5afa0fc7234f38d3dbb65ead5c95e030ab842921b4632e230bdebe",
+      "parameter_change_cost": 3,
+      "parameters": {
+        "length": 4,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "0a4af3b60101dc33577feb7c7e17b00b08018d6f18ade0ea4e3931d28922db8b",
+      "timing_high": -0.4519999999999982,
+      "timing_low": -0.4519999999999982,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/22",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.007488893267201924,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/29/composite/19",
+      "anchor_semantic_proof_id": "b7476f634e9678fb3e48dae0d046c1d8d9c26731c6d40814c0e3279473682fdc",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/29",
+      "full_parameters": [
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/30/composite/20",
+      "model_epoch": 7,
+      "model_revision": "6c6193bcaf1c2b489ae0c71a86bc880cbb4545924259aa85135170da571be928",
+      "parameter_change_cost": 4,
+      "parameters": {
+        "length": 5,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "95eaf2a0312a4ec2d2e7f983f4f562789ecb85f851bc4b0e863de99e7745e62c",
+      "timing_high": -0.44249999999996703,
+      "timing_low": -0.44249999999996703,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/30",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.008159176330618911,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/33/composite/21",
+      "anchor_semantic_proof_id": "4a17b841fbfed671cb1e97db897fdc194b40d89bdb351eedf34ded859c36b5ac",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/33",
+      "full_parameters": [
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/34/composite/22",
+      "model_epoch": 8,
+      "model_revision": "456fbfd29db327568d0a995e184e6bc276c3f6a4ff1fd7275ae6130e090fcdac",
+      "parameter_change_cost": 5,
+      "parameters": {
+        "length": 6,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "9d76b4aa6fbe9bf0001067a1179290aba558852af33eb9e5a642898818f8cf98",
+      "timing_high": -0.4329999999999927,
+      "timing_low": -0.4329999999999927,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/34",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.008689980810023257,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/37/composite/23",
+      "anchor_semantic_proof_id": "a7fa5b780c8a0f72e8a9e3a0d90af3f9a78d0fccc6f285e0e2f7b8e1f8744801",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/37",
+      "full_parameters": [
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/38/composite/24",
+      "model_epoch": 9,
+      "model_revision": "76cf084e47734951408fcef297d577c51e0318d965169de3659d0e2ab3616c44",
+      "parameter_change_cost": 6,
+      "parameters": {
+        "length": 7,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "a10dc67db773113c9a8932fb2f2ada07028d04fc55cf9ce5b3201ae6da8b2c88",
+      "timing_high": -0.4235000000000184,
+      "timing_low": -0.4235000000000184,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/38",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.00912367427906735,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/41/composite/25",
+      "anchor_semantic_proof_id": "a75100963170702335bbe8f2dbb8c46f22ddce86b7997d8fa1831dc20ad25338",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/41",
+      "full_parameters": [
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/42/composite/26",
+      "model_epoch": 10,
+      "model_revision": "426acea82c800e4898b46f59ef44e39d1cb864a0e24a0f499df3f8597fc07c94",
+      "parameter_change_cost": 7,
+      "parameters": {
+        "length": 8,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "84881cc4926b315dbba63b70de2e9c5896e3702cdea8539769f3859b1b7723d8",
+      "timing_high": -0.41399999999998727,
+      "timing_low": -0.41399999999998727,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/42",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.009486511760646521,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/45/composite/27",
+      "anchor_semantic_proof_id": "7292940f2d2ea47f89a44e3a45ab0337893e0f74e4edc19e1d71cd6956441aa3",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/45",
+      "full_parameters": [
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/46/composite/28",
+      "model_epoch": 11,
+      "model_revision": "049f543af75d01ba6d128d5938879641527b2cf05c572047a22271866d52b40c",
+      "parameter_change_cost": 8,
+      "parameters": {
+        "length": 9,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "8cbbea29219f401da45808a45cbb8b4a4cf67457b90c6d26f04290c91cf8f426",
+      "timing_high": -0.40449999999998454,
+      "timing_low": -0.40449999999998454,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/46",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.009794163939163547,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/49/composite/29",
+      "anchor_semantic_proof_id": "3d5f2a2d84cf16bd6ba12fd7e03067fee7f65e7dd88a23f65973cc05704b342f",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/49",
+      "full_parameters": [
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/50/composite/30",
+      "model_epoch": 12,
+      "model_revision": "ef3254e88c30dd7b4e210c97558b18da0e74adebc763d8d200022f9f66f3987d",
+      "parameter_change_cost": 9,
+      "parameters": {
+        "length": 10,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "73f45dfa6d4c53972723e9dcb9697ff5147ee8732d7f4d810987640a64bc9eaa",
+      "timing_high": -0.3949999999999818,
+      "timing_low": -0.3949999999999818,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/50",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010053700635831886,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/53/composite/31",
+      "anchor_semantic_proof_id": "c7b246d09244aea254803e46cd2872cfff7fab73ff63e40e79a2ede5ac21ffa1",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/53",
+      "full_parameters": [
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/54/composite/32",
+      "model_epoch": 13,
+      "model_revision": "2f8ed79a3fb741223e1a7c11e2739d0d84b6ac62da32a12e07f1ae969625a1d0",
+      "parameter_change_cost": 10,
+      "parameters": {
+        "length": 11,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "2f040aa36e5ed770be6049a94d39932e2ff86cda8cd2125b597344b1779936a3",
+      "timing_high": -0.38500000000004775,
+      "timing_low": -0.38500000000004775,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/54",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010267730793052765,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/61/composite/35",
+      "anchor_semantic_proof_id": "cd7b6883555f33953e21c80bd05fe3d7ea246d4a9034f46ab396653121d2b181",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/61",
+      "full_parameters": [
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/62/composite/36",
+      "model_epoch": 15,
+      "model_revision": "d614b402576067da580ce5230b3f735a6697970580e17eb2d52b0db3e1ebe0a1",
+      "parameter_change_cost": 11,
+      "parameters": {
+        "length": 12,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "3db97fd282cc36cb9a12d2eb59f19a13f1340b2959fced3ac69e6cd3b7290152",
+      "timing_high": -0.37450000000006867,
+      "timing_low": -0.37450000000006867,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/62",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010436733241943275,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/69/composite/39",
+      "anchor_semantic_proof_id": "531f1696c67929ddc3e3bb29c84992138404b9c19d6bea8f07a80812f6006ef3",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/69",
+      "full_parameters": [
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/70/composite/40",
+      "model_epoch": 17,
+      "model_revision": "dce0c3028b90ae2425a3a9495cb9db2fe3c3ee47767ddcf6b49fcafda0458b93",
+      "parameter_change_cost": 12,
+      "parameters": {
+        "length": 13,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "03406b40d587a874a798547b6689db7cd740f14fcd5b172b31f0f3124b6c0d5a",
+      "timing_high": -0.36299999999999955,
+      "timing_low": -0.36299999999999955,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/70",
+      "within_amplitude": false,
+      "within_timing": false
+    }
+  ],
+  "recorded_rejections": [
+    {
+      "reason": "rejected_candidate_window:ambiguous",
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/18"
+    },
+    {
+      "reason": "rejected_candidate_window:ambiguous",
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/26"
+    },
+    {
+      "reason": "rejected_candidate_window:ambiguous",
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/58"
+    },
+    {
+      "reason": "rejected_candidate_window:ambiguous",
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/66"
+    },
+    {
+      "reason": "rejected_candidate_window:ambiguous",
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/74"
+    }
+  ],
+  "assessed_resistance_domains": [
+    {
+      "input_index": 0,
+      "base_model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+      "geometry": [
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "c2e32de91e3a48a5af9fbf6dbf295840923b1b9a9f9b4564a7b266507d295d17",
+      "geometry": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "057406ce975b5d47e13c266c3639ff474e3893c4464b341758442dea8009d899",
+      "geometry": [
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "30821510099ab090fabacf0dcbcd610b841a39f27b063d11ea0210b8fb27c523",
+      "geometry": [
+        {
+          "length": 54,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+      "geometry": [
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "698ca89faf5afa0fc7234f38d3dbb65ead5c95e030ab842921b4632e230bdebe",
+      "geometry": [
+        {
+          "length": 52,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "01bbf608abf0d7ff6854552b0ec3a4318ee70e4a7b93f534d7b82713e36ad9e4",
+      "geometry": [
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "6c6193bcaf1c2b489ae0c71a86bc880cbb4545924259aa85135170da571be928",
+      "geometry": [
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "456fbfd29db327568d0a995e184e6bc276c3f6a4ff1fd7275ae6130e090fcdac",
+      "geometry": [
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "76cf084e47734951408fcef297d577c51e0318d965169de3659d0e2ab3616c44",
+      "geometry": [
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "426acea82c800e4898b46f59ef44e39d1cb864a0e24a0f499df3f8597fc07c94",
+      "geometry": [
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "049f543af75d01ba6d128d5938879641527b2cf05c572047a22271866d52b40c",
+      "geometry": [
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "ef3254e88c30dd7b4e210c97558b18da0e74adebc763d8d200022f9f66f3987d",
+      "geometry": [
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "2f8ed79a3fb741223e1a7c11e2739d0d84b6ac62da32a12e07f1ae969625a1d0",
+      "geometry": [
+        {
+          "length": 50,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "c8fc6c1059a9e505826fd6f41a61f2d674d83dc0fce5f85156ff4bbcd910c0ea",
+      "geometry": [
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "d614b402576067da580ce5230b3f735a6697970580e17eb2d52b0db3e1ebe0a1",
+      "geometry": [
+        {
+          "length": 48,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "f077cf45b25eec18a8299174c7fc92d9c59666d97f40afdf88541bed48044405",
+      "geometry": [
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 0,
+      "base_model_revision": "dce0c3028b90ae2425a3a9495cb9db2fe3c3ee47767ddcf6b49fcafda0458b93",
+      "geometry": [
+        {
+          "length": 45,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    }
+  ],
+  "tolerances": {
+    "amplitude_absolute": 1e-05,
+    "amplitude_relative": 0,
+    "sync": 0.02
+  },
+  "domain_assessments_are_not_presentations": true,
+  "attempt_total_independently_recounted": false,
+  "training_or_final_verification_verdict": null,
+  "scientific_verdict": null,
+  "recorded_recovery_deliveries": [
+    {
+      "event": {
+        "accepted_composite_observations": 9,
+        "applied_edits": 4,
+        "candidate_witness_id": "d6047ac6e3e9af6a26500840db6fc61dd94d519d67ce7b3fb74bca774e9ad91e",
+        "event_id": "8166e18ad14031615685368e6ac27aa6a630b04827a4451020c7bed225feff5d",
+        "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/18/composite/14",
+        "issued_probes": 10,
+        "kind": "timelearner_candidate_window_recovery_event",
+        "owner_scope": "154052a81196097c75e7f41c2fff8aa834568dd62328bc56a8d9e9ffa5e5a849",
+        "rejected_content_id": "6eef9a66502642ad1dbc6f49bd720ebbe1c113ff6e884ba59efdc31ed729e02d",
+        "schema_version": 1,
+        "source_origin": "da6243cb53ef3a6b707a4bf7fb5ebe5a1f905b7d50a72e92df5273602ab30750",
+        "transition": {
+          "action_serial": 18,
+          "base_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+          "candidate_input_index": 0,
+          "capacitance": null,
+          "disposition": "cursor_advanced",
+          "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+          "full_parameters": [
+            {
+              "length": 54,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            }
+          ],
+          "input_index": 0,
+          "invalid_after": 1,
+          "invalid_before": 0,
+          "model_epoch": 4,
+          "phase": "input",
+          "reason_after": "",
+          "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "status_after": "searching",
+          "sweep": 0,
+          "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/18",
+          "validity": "ambiguous"
+        }
+      },
+      "runtime_plan": {
+        "composite_measurement": {
+          "attempt_limits": {
+            "maximum_groups": 512,
+            "maximum_native_probes": 3072,
+            "maximum_total_samples": 11074560
+          },
+          "candidate_window_policy": {
+            "coordinate_mode": "relative_native_frame_interval",
+            "inputs": [
+              {
+                "base_left_guard_frames": 49,
+                "base_right_guard_frames": 3551,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 209,
+                "base_right_guard_frames": 3391,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 529,
+                "base_right_guard_frames": 3071,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 1009,
+                "base_right_guard_frames": 2591,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              }
+            ],
+            "maximum_feature_terms": 4096,
+            "policy_id": "reference-anchored-candidate-window-v1",
+            "proposals_per_logical_request": 1,
+            "schema_version": 1,
+            "seed_rule": "immutable_reference_full_before"
+          },
+          "context_policy": {
+            "baseline_absolute": 1e-12,
+            "comparison_radius_ticks": 1,
+            "influence_absolute": 1e-06,
+            "influence_relative": 0,
+            "maximum_native_probes": 6,
+            "maximum_samples": 3605,
+            "maximum_total_samples": 21630,
+            "repeatability_absolute": 1e-10,
+            "repeatability_relative": 0,
+            "schema_version": 1,
+            "time_comparison_tolerance": 1e-10
+          },
+          "geometry_policy": {
+            "maximum_inputs": 4,
+            "maximum_samples": 3605,
+            "maximum_total_samples": 21630,
+            "repeatability_absolute": 1e-10,
+            "schema_version": 1
+          },
+          "maximum_group_model_seconds": 20,
+          "maximum_group_wall_seconds": 300,
+          "maximum_total_primary_bytes": 536870912,
+          "method_id": "declared-window-basin-necessity-v1",
+          "schema_version": 2
+        },
+        "initial_model_epoch": 0,
+        "initial_model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+        "maximum_invalid_reference_probes": 0,
+        "maximum_model_seconds": 7200,
+        "maximum_reference_probes": 8,
+        "maximum_wall_seconds": 1800,
+        "protocol_binding": "81a72a61933dbe1d171a64dc30edd3da69e82e4b0ecfdc5e9e539f43ababec31",
+        "record_capacitance_history": false,
+        "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+        "schema_version": 3,
+        "search": {
+          "bounds": [
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 1,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            }
+          ],
+          "capacitance_search": null,
+          "invalid_measurement_recovery": "advance_rejected_candidate_window",
+          "maximum_candidates_per_input": 128,
+          "maximum_edits": 1280,
+          "maximum_invalid_observations": 4,
+          "maximum_probes": 128,
+          "maximum_sweeps": 4,
+          "n0_candidate_repeats": 1,
+          "normalization": "N1",
+          "resistance_subdivision_depth": 8,
+          "tolerances": {
+            "amplitude_absolute": 1e-05,
+            "amplitude_relative": 0,
+            "sync": 0.02
+          }
+        }
+      }
+    },
+    {
+      "event": {
+        "accepted_composite_observations": 12,
+        "applied_edits": 6,
+        "candidate_witness_id": "70c95506a2b17c75c852eb0adfce3913508bd21399fba24e3d80760565fefd8e",
+        "event_id": "73ecd12333cc8a8a8488b08793e0ce5f424c04cb83a5a57433045376df4fc6f1",
+        "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/26/composite/18",
+        "issued_probes": 14,
+        "kind": "timelearner_candidate_window_recovery_event",
+        "owner_scope": "154052a81196097c75e7f41c2fff8aa834568dd62328bc56a8d9e9ffa5e5a849",
+        "rejected_content_id": "45cf83f55d0a71b748280172005f809b8c0cfe16cd2e2c322877771256f1a80f",
+        "schema_version": 1,
+        "source_origin": "da6243cb53ef3a6b707a4bf7fb5ebe5a1f905b7d50a72e92df5273602ab30750",
+        "transition": {
+          "action_serial": 26,
+          "base_model_revision": "01bbf608abf0d7ff6854552b0ec3a4318ee70e4a7b93f534d7b82713e36ad9e4",
+          "candidate_input_index": 0,
+          "capacitance": null,
+          "disposition": "cursor_advanced",
+          "effective_model_revision": "01bbf608abf0d7ff6854552b0ec3a4318ee70e4a7b93f534d7b82713e36ad9e4",
+          "full_parameters": [
+            {
+              "length": 52,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            }
+          ],
+          "input_index": 0,
+          "invalid_after": 2,
+          "invalid_before": 1,
+          "model_epoch": 6,
+          "phase": "input",
+          "reason_after": "",
+          "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "status_after": "searching",
+          "sweep": 0,
+          "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/26",
+          "validity": "ambiguous"
+        }
+      },
+      "runtime_plan": {
+        "composite_measurement": {
+          "attempt_limits": {
+            "maximum_groups": 512,
+            "maximum_native_probes": 3072,
+            "maximum_total_samples": 11074560
+          },
+          "candidate_window_policy": {
+            "coordinate_mode": "relative_native_frame_interval",
+            "inputs": [
+              {
+                "base_left_guard_frames": 49,
+                "base_right_guard_frames": 3551,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 209,
+                "base_right_guard_frames": 3391,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 529,
+                "base_right_guard_frames": 3071,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 1009,
+                "base_right_guard_frames": 2591,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              }
+            ],
+            "maximum_feature_terms": 4096,
+            "policy_id": "reference-anchored-candidate-window-v1",
+            "proposals_per_logical_request": 1,
+            "schema_version": 1,
+            "seed_rule": "immutable_reference_full_before"
+          },
+          "context_policy": {
+            "baseline_absolute": 1e-12,
+            "comparison_radius_ticks": 1,
+            "influence_absolute": 1e-06,
+            "influence_relative": 0,
+            "maximum_native_probes": 6,
+            "maximum_samples": 3605,
+            "maximum_total_samples": 21630,
+            "repeatability_absolute": 1e-10,
+            "repeatability_relative": 0,
+            "schema_version": 1,
+            "time_comparison_tolerance": 1e-10
+          },
+          "geometry_policy": {
+            "maximum_inputs": 4,
+            "maximum_samples": 3605,
+            "maximum_total_samples": 21630,
+            "repeatability_absolute": 1e-10,
+            "schema_version": 1
+          },
+          "maximum_group_model_seconds": 20,
+          "maximum_group_wall_seconds": 300,
+          "maximum_total_primary_bytes": 536870912,
+          "method_id": "declared-window-basin-necessity-v1",
+          "schema_version": 2
+        },
+        "initial_model_epoch": 0,
+        "initial_model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+        "maximum_invalid_reference_probes": 0,
+        "maximum_model_seconds": 7200,
+        "maximum_reference_probes": 8,
+        "maximum_wall_seconds": 1800,
+        "protocol_binding": "81a72a61933dbe1d171a64dc30edd3da69e82e4b0ecfdc5e9e539f43ababec31",
+        "record_capacitance_history": false,
+        "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+        "schema_version": 3,
+        "search": {
+          "bounds": [
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 1,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            }
+          ],
+          "capacitance_search": null,
+          "invalid_measurement_recovery": "advance_rejected_candidate_window",
+          "maximum_candidates_per_input": 128,
+          "maximum_edits": 1280,
+          "maximum_invalid_observations": 4,
+          "maximum_probes": 128,
+          "maximum_sweeps": 4,
+          "n0_candidate_repeats": 1,
+          "normalization": "N1",
+          "resistance_subdivision_depth": 8,
+          "tolerances": {
+            "amplitude_absolute": 1e-05,
+            "amplitude_relative": 0,
+            "sync": 0.02
+          }
+        }
+      }
+    },
+    {
+      "event": {
+        "accepted_composite_observations": 27,
+        "applied_edits": 14,
+        "candidate_witness_id": "4377946f81b6089909dff244d856ab406ed4a06293391b1b599d8d66d13724f3",
+        "event_id": "ccb44a6f123a59ba10a40ed2dd3d54e4c70205cc144f40e42960ab47603b7da1",
+        "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/58/composite/34",
+        "issued_probes": 30,
+        "kind": "timelearner_candidate_window_recovery_event",
+        "owner_scope": "154052a81196097c75e7f41c2fff8aa834568dd62328bc56a8d9e9ffa5e5a849",
+        "rejected_content_id": "2ec906d417e14bb02f4a5de2be511867365cdf98b4534ebd70d12dcefa0cc4f3",
+        "schema_version": 1,
+        "source_origin": "da6243cb53ef3a6b707a4bf7fb5ebe5a1f905b7d50a72e92df5273602ab30750",
+        "transition": {
+          "action_serial": 58,
+          "base_model_revision": "c8fc6c1059a9e505826fd6f41a61f2d674d83dc0fce5f85156ff4bbcd910c0ea",
+          "candidate_input_index": 0,
+          "capacitance": null,
+          "disposition": "cursor_advanced",
+          "effective_model_revision": "c8fc6c1059a9e505826fd6f41a61f2d674d83dc0fce5f85156ff4bbcd910c0ea",
+          "full_parameters": [
+            {
+              "length": 50,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            }
+          ],
+          "input_index": 0,
+          "invalid_after": 3,
+          "invalid_before": 2,
+          "model_epoch": 14,
+          "phase": "input",
+          "reason_after": "",
+          "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "status_after": "searching",
+          "sweep": 0,
+          "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/58",
+          "validity": "ambiguous"
+        }
+      },
+      "runtime_plan": {
+        "composite_measurement": {
+          "attempt_limits": {
+            "maximum_groups": 512,
+            "maximum_native_probes": 3072,
+            "maximum_total_samples": 11074560
+          },
+          "candidate_window_policy": {
+            "coordinate_mode": "relative_native_frame_interval",
+            "inputs": [
+              {
+                "base_left_guard_frames": 49,
+                "base_right_guard_frames": 3551,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 209,
+                "base_right_guard_frames": 3391,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 529,
+                "base_right_guard_frames": 3071,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 1009,
+                "base_right_guard_frames": 2591,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              }
+            ],
+            "maximum_feature_terms": 4096,
+            "policy_id": "reference-anchored-candidate-window-v1",
+            "proposals_per_logical_request": 1,
+            "schema_version": 1,
+            "seed_rule": "immutable_reference_full_before"
+          },
+          "context_policy": {
+            "baseline_absolute": 1e-12,
+            "comparison_radius_ticks": 1,
+            "influence_absolute": 1e-06,
+            "influence_relative": 0,
+            "maximum_native_probes": 6,
+            "maximum_samples": 3605,
+            "maximum_total_samples": 21630,
+            "repeatability_absolute": 1e-10,
+            "repeatability_relative": 0,
+            "schema_version": 1,
+            "time_comparison_tolerance": 1e-10
+          },
+          "geometry_policy": {
+            "maximum_inputs": 4,
+            "maximum_samples": 3605,
+            "maximum_total_samples": 21630,
+            "repeatability_absolute": 1e-10,
+            "schema_version": 1
+          },
+          "maximum_group_model_seconds": 20,
+          "maximum_group_wall_seconds": 300,
+          "maximum_total_primary_bytes": 536870912,
+          "method_id": "declared-window-basin-necessity-v1",
+          "schema_version": 2
+        },
+        "initial_model_epoch": 0,
+        "initial_model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+        "maximum_invalid_reference_probes": 0,
+        "maximum_model_seconds": 7200,
+        "maximum_reference_probes": 8,
+        "maximum_wall_seconds": 1800,
+        "protocol_binding": "81a72a61933dbe1d171a64dc30edd3da69e82e4b0ecfdc5e9e539f43ababec31",
+        "record_capacitance_history": false,
+        "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+        "schema_version": 3,
+        "search": {
+          "bounds": [
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 1,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            }
+          ],
+          "capacitance_search": null,
+          "invalid_measurement_recovery": "advance_rejected_candidate_window",
+          "maximum_candidates_per_input": 128,
+          "maximum_edits": 1280,
+          "maximum_invalid_observations": 4,
+          "maximum_probes": 128,
+          "maximum_sweeps": 4,
+          "n0_candidate_repeats": 1,
+          "normalization": "N1",
+          "resistance_subdivision_depth": 8,
+          "tolerances": {
+            "amplitude_absolute": 1e-05,
+            "amplitude_relative": 0,
+            "sync": 0.02
+          }
+        }
+      }
+    },
+    {
+      "event": {
+        "accepted_composite_observations": 30,
+        "applied_edits": 16,
+        "candidate_witness_id": "b846b1e8d754fd87d48c9e49cb27aa20f0fe7215c4283c0e54e9d15069d15522",
+        "event_id": "a3e6c5ec1054cd6ac9bac4980e91c645d3926f15285f14fa6ccb521ab3b23fb2",
+        "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/66/composite/38",
+        "issued_probes": 34,
+        "kind": "timelearner_candidate_window_recovery_event",
+        "owner_scope": "154052a81196097c75e7f41c2fff8aa834568dd62328bc56a8d9e9ffa5e5a849",
+        "rejected_content_id": "9efdd033746151940d81271a4665ec42a5b1c137a04af5158447c0e4edc2a4de",
+        "schema_version": 1,
+        "source_origin": "da6243cb53ef3a6b707a4bf7fb5ebe5a1f905b7d50a72e92df5273602ab30750",
+        "transition": {
+          "action_serial": 66,
+          "base_model_revision": "f077cf45b25eec18a8299174c7fc92d9c59666d97f40afdf88541bed48044405",
+          "candidate_input_index": 0,
+          "capacitance": null,
+          "disposition": "cursor_advanced",
+          "effective_model_revision": "f077cf45b25eec18a8299174c7fc92d9c59666d97f40afdf88541bed48044405",
+          "full_parameters": [
+            {
+              "length": 48,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            }
+          ],
+          "input_index": 0,
+          "invalid_after": 4,
+          "invalid_before": 3,
+          "model_epoch": 16,
+          "phase": "input",
+          "reason_after": "",
+          "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "status_after": "searching",
+          "sweep": 0,
+          "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/66",
+          "validity": "ambiguous"
+        }
+      },
+      "runtime_plan": {
+        "composite_measurement": {
+          "attempt_limits": {
+            "maximum_groups": 512,
+            "maximum_native_probes": 3072,
+            "maximum_total_samples": 11074560
+          },
+          "candidate_window_policy": {
+            "coordinate_mode": "relative_native_frame_interval",
+            "inputs": [
+              {
+                "base_left_guard_frames": 49,
+                "base_right_guard_frames": 3551,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 209,
+                "base_right_guard_frames": 3391,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 529,
+                "base_right_guard_frames": 3071,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 1009,
+                "base_right_guard_frames": 2591,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              }
+            ],
+            "maximum_feature_terms": 4096,
+            "policy_id": "reference-anchored-candidate-window-v1",
+            "proposals_per_logical_request": 1,
+            "schema_version": 1,
+            "seed_rule": "immutable_reference_full_before"
+          },
+          "context_policy": {
+            "baseline_absolute": 1e-12,
+            "comparison_radius_ticks": 1,
+            "influence_absolute": 1e-06,
+            "influence_relative": 0,
+            "maximum_native_probes": 6,
+            "maximum_samples": 3605,
+            "maximum_total_samples": 21630,
+            "repeatability_absolute": 1e-10,
+            "repeatability_relative": 0,
+            "schema_version": 1,
+            "time_comparison_tolerance": 1e-10
+          },
+          "geometry_policy": {
+            "maximum_inputs": 4,
+            "maximum_samples": 3605,
+            "maximum_total_samples": 21630,
+            "repeatability_absolute": 1e-10,
+            "schema_version": 1
+          },
+          "maximum_group_model_seconds": 20,
+          "maximum_group_wall_seconds": 300,
+          "maximum_total_primary_bytes": 536870912,
+          "method_id": "declared-window-basin-necessity-v1",
+          "schema_version": 2
+        },
+        "initial_model_epoch": 0,
+        "initial_model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+        "maximum_invalid_reference_probes": 0,
+        "maximum_model_seconds": 7200,
+        "maximum_reference_probes": 8,
+        "maximum_wall_seconds": 1800,
+        "protocol_binding": "81a72a61933dbe1d171a64dc30edd3da69e82e4b0ecfdc5e9e539f43ababec31",
+        "record_capacitance_history": false,
+        "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+        "schema_version": 3,
+        "search": {
+          "bounds": [
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 1,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            }
+          ],
+          "capacitance_search": null,
+          "invalid_measurement_recovery": "advance_rejected_candidate_window",
+          "maximum_candidates_per_input": 128,
+          "maximum_edits": 1280,
+          "maximum_invalid_observations": 4,
+          "maximum_probes": 128,
+          "maximum_sweeps": 4,
+          "n0_candidate_repeats": 1,
+          "normalization": "N1",
+          "resistance_subdivision_depth": 8,
+          "tolerances": {
+            "amplitude_absolute": 1e-05,
+            "amplitude_relative": 0,
+            "sync": 0.02
+          }
+        }
+      }
+    },
+    {
+      "event": {
+        "accepted_composite_observations": 33,
+        "applied_edits": 18,
+        "candidate_witness_id": "822ef5277134f5fbbbbc327f6782435116412cde25102da3520ecfb7ac121a29",
+        "event_id": "4e9bcbffe872db44b1cea519ce54c6e67880434a78e0ac4c05d5cbdca7d92125",
+        "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/74/composite/42",
+        "issued_probes": 38,
+        "kind": "timelearner_candidate_window_recovery_event",
+        "owner_scope": "154052a81196097c75e7f41c2fff8aa834568dd62328bc56a8d9e9ffa5e5a849",
+        "rejected_content_id": "c875dd89839d85b937acd7b4d2c15fc1ea5f4f5bd164858df79b3343a13b35c8",
+        "schema_version": 1,
+        "source_origin": "da6243cb53ef3a6b707a4bf7fb5ebe5a1f905b7d50a72e92df5273602ab30750",
+        "transition": {
+          "action_serial": 74,
+          "base_model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+          "candidate_input_index": 0,
+          "capacitance": null,
+          "disposition": "invalid_budget_stop",
+          "effective_model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+          "full_parameters": [
+            {
+              "length": 45,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            }
+          ],
+          "input_index": 0,
+          "invalid_after": 5,
+          "invalid_before": 4,
+          "model_epoch": 18,
+          "phase": "input",
+          "reason_after": "rejected_candidate_window:ambiguous",
+          "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "status_after": "invalid_observation",
+          "sweep": 0,
+          "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/74",
+          "validity": "ambiguous"
+        }
+      },
+      "runtime_plan": {
+        "composite_measurement": {
+          "attempt_limits": {
+            "maximum_groups": 512,
+            "maximum_native_probes": 3072,
+            "maximum_total_samples": 11074560
+          },
+          "candidate_window_policy": {
+            "coordinate_mode": "relative_native_frame_interval",
+            "inputs": [
+              {
+                "base_left_guard_frames": 49,
+                "base_right_guard_frames": 3551,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 209,
+                "base_right_guard_frames": 3391,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 529,
+                "base_right_guard_frames": 3071,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              },
+              {
+                "base_left_guard_frames": 1009,
+                "base_right_guard_frames": 2591,
+                "capacitance_change_guard_frames": 0,
+                "delay_frames_per_segment": 0,
+                "hard_first_frame": 0,
+                "hard_last_frame": 3600,
+                "length_guard_frames": 0,
+                "maximum_window_frames": 3601,
+                "resistance_change_guard_frames": 0,
+                "synapse_count_guard_frames": 0
+              }
+            ],
+            "maximum_feature_terms": 4096,
+            "policy_id": "reference-anchored-candidate-window-v1",
+            "proposals_per_logical_request": 1,
+            "schema_version": 1,
+            "seed_rule": "immutable_reference_full_before"
+          },
+          "context_policy": {
+            "baseline_absolute": 1e-12,
+            "comparison_radius_ticks": 1,
+            "influence_absolute": 1e-06,
+            "influence_relative": 0,
+            "maximum_native_probes": 6,
+            "maximum_samples": 3605,
+            "maximum_total_samples": 21630,
+            "repeatability_absolute": 1e-10,
+            "repeatability_relative": 0,
+            "schema_version": 1,
+            "time_comparison_tolerance": 1e-10
+          },
+          "geometry_policy": {
+            "maximum_inputs": 4,
+            "maximum_samples": 3605,
+            "maximum_total_samples": 21630,
+            "repeatability_absolute": 1e-10,
+            "schema_version": 1
+          },
+          "maximum_group_model_seconds": 20,
+          "maximum_group_wall_seconds": 300,
+          "maximum_total_primary_bytes": 536870912,
+          "method_id": "declared-window-basin-necessity-v1",
+          "schema_version": 2
+        },
+        "initial_model_epoch": 0,
+        "initial_model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+        "maximum_invalid_reference_probes": 0,
+        "maximum_model_seconds": 7200,
+        "maximum_reference_probes": 8,
+        "maximum_wall_seconds": 1800,
+        "protocol_binding": "81a72a61933dbe1d171a64dc30edd3da69e82e4b0ecfdc5e9e539f43ababec31",
+        "record_capacitance_history": false,
+        "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+        "schema_version": 3,
+        "search": {
+          "bounds": [
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 100,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 1000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 1,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            }
+          ],
+          "capacitance_search": null,
+          "invalid_measurement_recovery": "advance_rejected_candidate_window",
+          "maximum_candidates_per_input": 128,
+          "maximum_edits": 1280,
+          "maximum_invalid_observations": 4,
+          "maximum_probes": 128,
+          "maximum_sweeps": 4,
+          "n0_candidate_repeats": 1,
+          "normalization": "N1",
+          "resistance_subdivision_depth": 8,
+          "tolerances": {
+            "amplitude_absolute": 1e-05,
+            "amplitude_relative": 0,
+            "sync": 0.02
+          }
+        }
+      }
+    }
+  ],
+  "recovery_ledger_provenance": {
+    "independent_delivery_completeness_verified": false,
+    "kind": "timelearner_candidate_window_recovery_ledger",
+    "measurement_archive_document_id": "2f9f113bc99efb6dcb7686ea468102acf0b74aee69dbb6692c5b9178a6498332",
+    "owner_family_binding": "154052a81196097c75e7f41c2fff8aa834568dd62328bc56a8d9e9ffa5e5a849",
+    "producer_log_intact": true,
+    "schema_version": 1,
+    "sha256": "00f5d0ba91352048192429119e33fb474bb71fae4db0b4926c16fc4d85961e97",
+    "source_origin": "da6243cb53ef3a6b707a4bf7fb5ebe5a1f905b7d50a72e92df5273602ab30750"
+  }
+}

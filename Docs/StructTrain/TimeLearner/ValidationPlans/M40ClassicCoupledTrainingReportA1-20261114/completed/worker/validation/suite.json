@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-classic-coupled-training-report-m40-a1",
+  "package_fingerprint": "c54363077183e1ab19705eaa242f3eeb0ec5d4a196132d3cfeccd67e0f807673",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_coupled_classic_training_report"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_coupled_classic_training_report.CoupledClassicTrainingReportTest.test_actual_closest_measured_candidate_and_two_ambiguous_groups"
+  ],
+  "fixtures": {
+    "TIMELEARNER_COUPLED_CLASSIC_TRAIN_RUN": {
+      "pattern": "**/*.json",
+      "files": 320,
+      "fingerprint": "d2c5bbee3d21d0f1d29eecebe8f6359a1a90c941ffe7c546ca0f1f8557e00977"
+    }
+  }
+}

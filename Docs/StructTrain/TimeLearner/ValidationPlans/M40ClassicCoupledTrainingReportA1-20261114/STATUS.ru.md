@@ -1,3 +1,3 @@
-# Подготовлен report-only контроль
+# Завершён и принят в ограниченной области
 
-После принятого Classic cold4 Train выбран ближайший реально измеренный timing candidate (без заявления сходимости), первый и последний ambiguous candidate. Production render покажет все4 soma и6 full/omission/repeat traces для каждой из3 групп:24 PNG/SVG/PDF views. Actual input overlays, полные окна и исходные отсчёты; без нового Train/Test/threshold. 12 обзорных PNG предполагаются для компактного Git, полный cache наM40. Серверное построение и визуальная приёмка ещё не выполнены.
+Report-only1/1 PASS; process group closed. Все12 выбранных overview PNG просмотрены, полный24-PNG cache не принят вручную целиком. [Результат и ограничения](RESULT.ru.md), [научный отчёт](../../ClassicCoupledCold4ScientificReport-20261114.ru.md). Training invalid_observation сохраняется.
