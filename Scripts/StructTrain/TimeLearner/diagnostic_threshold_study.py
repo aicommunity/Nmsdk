@@ -99,8 +99,9 @@ def run(source_manifest, controls):
     manifest = load(Path(source_manifest))
     records = {r['path']: r for r in manifest['artifacts']}
     job_raw, job_record = _frozen(root/'input/job.json', 384*1024**2)
-    require(all(source_before[k] == records['input/source/train_stopped_state.json'][k] and
-                job_record[k] == records['input/job.json'][k] for k in ('bytes', 'sha256')),
+    require(source_before['size'] == records['input/source/train_stopped_state.json']['bytes'] and
+            source_before['sha256'] == records['input/source/train_stopped_state.json']['sha256'] and
+            all(job_record[k] == records['input/job.json'][k] for k in ('bytes', 'sha256')),
             'threshold_study_source_binding_changed')
     original_job = parse_json_bytes(job_raw)
     del job_raw
