@@ -1,0 +1,101 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "a181307a5ccf7d819fd58aa7337e0d55dccaad03a5ef82b23e300353b7d28309",
+      "unit": "timelearner-d29ef7df-defc-4668-b27e-95f64ef03405.service",
+      "invocation_id": "9d6448dda63f4f9abeb6a54f89029859",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d29ef7df-defc-4668-b27e-95f64ef03405.service",
+      "initial_main_pid": 2682920,
+      "initial_start_ticks": "417483341",
+      "sha256": "de3f75468bf1220246e20323f32c520fcc70354a3f409a889396eee8874b182b"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-d29ef7df-defc-4668-b27e-95f64ef03405.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "d9ee69b7-7c78-4382-a401-7093d9c34fe5",
+      "job_id": "s09-migration357-cli-elder-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2682920,
+        "start_ticks": "417483341",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/metadata-migration357-a1/Bin",
+          "requested_path": "/home/user/timelearner-refactor/metadata-migration357-a1/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/metadata-migration357-a1/PulseLib",
+          "requested_path": "/home/user/timelearner-refactor/metadata-migration357-a1/PulseLib"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/metadata-migration357-a1/root",
+          "requested_path": "/home/user/timelearner-refactor/metadata-migration357-a1/root"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-migration357-cli-elder-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-migration357-cli-elder-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/requests/migration357-cli-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderMigration357A1-20261114",
+          "requested_path": "/home/user/timelearner-refactor/requests/migration357-cli-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderMigration357A1-20261114"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/requests/migration357-cli-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderMigration357A1-20261114/fixture",
+          "requested_path": "/home/user/timelearner-refactor/requests/migration357-cli-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderMigration357A1-20261114/fixture"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-migration357-cli-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-migration357-cli-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794605063.7754729,
+      "deadline": 1794605203.789717,
+      "updated": 1794605089.840184,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "demands": {
+        "disk_bytes": 134217728,
+        "memory_bytes": 1073741824,
+        "slots": 1
+      },
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

@@ -389,3 +389,5 @@ Python; это не приёмка всех оставшихся legacy launcher
 records, restored-path negative,113-entry source diff,86126 остальных Reports
 blobs и412 production Python source hashes. Полные SHA и сохранённый collector
 refusal приведены в RootReportSnapshotRetirement. complete=false остаётся.
+
+14.11: [Production CLI357 и restored-last-path negative](Migration357CliVerification.ru.md) приняты на M40 и независимо на Elder; positive receipts побайтово равны. Manifest353 retired+4 moved, complete=false. Исторические scripts не материализуются, весь необходимый metadata набор3.24MB доступен в Git. A1 отказ неполного incremental fixture сохранён; A2 не меняет verifier/manifest/aliases. Полный этап9 и активные Bin tools/callers остаются открыты.
