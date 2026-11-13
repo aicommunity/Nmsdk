@@ -1,4 +1,4 @@
-# Состояние реализации TimeLearner — 13.11.2026
+# Состояние реализации TimeLearner — 14.11.2026
 
 Полностью принят исходный этап0. Этапы1–12 частичны: адресные проверки и реальные эксперименты существуют, но полная обязательная матрица и завершение миграции не приняты. Научный результат8/8 не является условием завершения; количество инженерных PASS не доказывает работу классификатора. Источники требований: [утверждённый план](RefactoringPlan.ru.md), [исходный аудит](PlanCompletionAudit-2026-10-25.ru.md).
 
@@ -8,7 +8,7 @@
 
 Source SDK root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8, runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Actual job/initial bytes равны baseline; scientific limits не изменены. SDK A4[93/93](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md) принята адресно; A1/A2/A3 failures сохранены. Этапы1–12 остаются частичными.
 
-[Научный отчёт](N1CoupledScientificReport-20261113.ru.md) готов: read-only report1/1 PASS, все4 original PNG с actual input overlays просмотрены. Full primary24.11MB сохранён в Git. Frozen diagnostic8pattern evaluation фактического terminal state принят1/1: полные8observations, модель неизменна, TP0/FP0/FN1/TN7 при100. Сейчас выполняется [проверка одного fixed Same-Matrix threshold](ValidationPlans/M40N1CoupledThresholdA1-20261113/STATUS.ru.md) реальными спайками; его научный исход ещё не установлен.
+[Научный отчёт](N1CoupledScientificReport-20261113.ru.md) готов: read-only report1/1 PASS, все4 original PNG с actual input overlays просмотрены. Full primary24.11MB сохранён в Git. Frozen diagnostic8pattern evaluation фактического terminal state принят1/1: полные8observations, модель неизменна, TP0/FP0/FN1/TN7 при100. [Реальный fixed Same-Matrix threshold опыт завершён](BranchCoupledThresholdScientificReport-20261114.ru.md): TP1/FP5/FN0/TN2, target0.262s раньше последнего входа0.49s. Все16 observations complete/valid, models frozen;32 selected temporal originals просмотрены. Это плохая разделимость остановленного состояния, не завершённое обучение. Полный primary69.875324MB сохранён; независимый restore нового архива открыт.
 
 ## Последние научные результаты
 

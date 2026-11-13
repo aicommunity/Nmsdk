@@ -1,0 +1,7 @@
+# Весь primary реального paired threshold опыта сохранён
+
+Collector s07-n1-coupled-threshold-primary-m40-a1 completed/closed92.162860682s, operation_passed=true, heartbeat errors0. Snapshot всего закрытого s07-n1-coupled-threshold-m40-a1:826regular files+2verified aliases,3closed owned units. Native baseline100 и реальный candidate0.03578062022182049 завершены/валидны, models frozen; actual candidateTP1/FP5/FN0/TN2, targetevent0.262 раньше finalinput0.49. Source training остаётся invalid_observation/ambiguous, certificate=null.
+
+[primary.tar.xz](../../../../../Reports/StructTrain/TimeLearner/N1CoupledBranch-20261113/threshold-primary/primary.tar.xz):69875324B, SHA256ae966e7fdd8c507d240d1a73e54d9fff741828dc2d753af465fcf41c69e5600b. [bundle.json](../../../../../Reports/StructTrain/TimeLearner/N1CoupledBranch-20261113/threshold-primary/bundle.json):828logical members, expanded1576292998B, unique literal923105083B, schema2. Оригинальные модели, jobs, все16observations и execution/controller receipts восстанавливаются изGit; native JSON не переписан. Применена только дедупликация одинаковых literal bytes. Новый архив ещё не проходил independent restore.
+
+Control d36e7f000dcc0e73cb0357fff60c7289932ff6bf. Producer b7fd70ca14ac51cc6e0bb9c1c613fa126435b484, Git pack70011893B SHA2565510910b045c07800953b50d828cba1ba73891bae96aee2ce93d14ce73b1cbde. [Source snapshot/proof](completed/worker/primary-bundle-proof.json), [closure](completed/process/whole-group-closure.json), [принятые результаты](../M40N1CoupledThresholdA1-20261113/RESULT.ru.md).

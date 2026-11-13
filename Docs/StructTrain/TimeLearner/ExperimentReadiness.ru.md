@@ -1,4 +1,4 @@
-# Научные результаты TimeLearner и готовность — 13.11.2026
+# Научные результаты TimeLearner и готовность — 14.11.2026
 
 Современные реальные эксперименты уже выполнены и опубликованы с первичными данными. Успешное завершение обучения и надёжная классификация завершённого паттерна на современных моделях пока не подтверждены. Исторические визуальные4/8–6/8 сохраняют силу для своего исходного протокола. Полный план остаётся активным: полностью принят этап0, этапы1–12 частичны.
 
@@ -6,7 +6,7 @@
 
 | Отчёт | Основной результат | Что нельзя из него заключать |
 |---|---|---|
-|[Branch N1: локально выполнены оба допуска](N1CoupledScientificReport-20261113.ru.md)|Один реально измеренный input2 candidate timing+amplitude-ready; затем5 ambiguous rejections input1. Полный primary24.11MB и4 просмотренных temporal originals.|Общего сертификата/all-input verification нет; terminal vector отличается от локально успешного. Frozen8pattern diagnostic принят: TP0/FP0/FN1/TN7 при100, модель неизменна. Fixed-threshold spiking опыт выполняется.|
+|[Branch N1: локально выполнены оба допуска](N1CoupledScientificReport-20261113.ru.md)|Один реально измеренный input2 candidate timing+amplitude-ready; затем5 ambiguous rejections input1. Полный primary24.11MB и4 просмотренных temporal originals.|Общего сертификата/all-input verification нет; terminal vector отличается от локально успешного. Frozen8pattern diagnostic принят: TP0/FP0/FN1/TN7 при100, модель неизменна. [Fixed-threshold spiking опыт завершён](BranchCoupledThresholdScientificReport-20261114.ru.md): TP1/FP5/FN0/TN2; target до последнего входа. Все8 Soma overview и выбранные LT/zoom доступны,32 originals просмотрены.|
 |[Branch N1: измеренный интервал нормализации](N1LocalTurnScientificReport-20261113.ru.md)|Same-budget холодное обучение завершено completed/valid, но BudgetExhausted. На одной геометрии Rs86M/2.880071555M дают opposite amplitude residuals при timing-valid. Есть четыре просмотренных временных графика с полными пачками, actual inputs и omission controls.|Bracket не является сходимостью. Ни один consumed candidate не удовлетворяет обоим допускам; классификация не измерялась.|
 |[Classic: фактический fixed-threshold опыт на8 паттернах](ActualThresholdScientificReport-20261113.ru.md)|TP1/FP2/FN0/TN5 при заранее выбранном пороге0.013048873000159292. Реальные спайки и полные окна; report1/1, выбранные Soma/LT figures, полная32-soma/8-LT gallery.|Target event0.2645s раньше последнего входа0.49s. Partial6/8 Same-Matrix остановленной модели не является детекцией завершённого паттерна или независимым Test.|
 |[Branch: coherent shared-bank Rs intervention](BranchSharedBankScientificReport-20261113.ru.md)|Общий максимум Soma1 растёт примерно4.10× при86M→21.5M; replay/source/clocks/inputs проверены, три originals просмотрены.|Глобальный максимум не заменяет максимум закреплённого импульса. Assigned certificate/классификация не получены.|
@@ -20,13 +20,13 @@
 
 ## Что выполняется сейчас
 
-[Cold Branch N4/N1 coupled-search Train](N1CoupledScientificReport-20261113.ru.md) завершён: одна local-ready input2, затем invalid_observation/ambiguous input1. Production CLI/DATA1/1 и report1/1 приняты, общая сходимость не подтверждена. [Frozen8pattern diagnostic](ValidationPlans/M40N1CoupledFrozenA1-20261113/RESULT.ru.md) фактического terminal state принят1/1,8полных observations, модель неизменна. При100 все молчат. [Один Same-Matrix threshold](ValidationPlans/M40N1CoupledThresholdA1-20261113/STATUS.ru.md) проверяется настоящими спайками.
+[Cold Branch N4/N1 coupled-search Train](N1CoupledScientificReport-20261113.ru.md) завершён: одна local-ready input2, затем invalid_observation/ambiguous input1. Production CLI/DATA1/1 и report1/1 приняты, общая сходимость не подтверждена. [Frozen8pattern diagnostic](ValidationPlans/M40N1CoupledFrozenA1-20261113/RESULT.ru.md) фактического terminal state принят1/1,8полных observations, модель неизменна. При100 все молчат. [Один Same-Matrix threshold проверен настоящими спайками](BranchCoupledThresholdScientificReport-20261114.ru.md): TP1/FP5/FN0/TN2, target на228ms раньше последнего input. Report1/1,32 selected originals просмотрены, primary69.875324MB сохранён.
 
 [SDK A4 принята93/93](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md), native/outer groups закрыты. Source root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8; runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Положительный SDK verdict не является научной сходимостью и не закрывает полную physical matrix.
 
 Новый опыт использует прежний native job SHA25693556039955e15a3de1ec88b55d546b2f54bb7e680deb3fc1e499799a524c55d, initial model и reference-origin bytes. Изменён порядок исследования L/Rs:bounded coupled-family length proposals, finite local normalization allowance и safeguarded measured log-secant. CapturedPerInput, fixed anchor и исходные tolerances/budgets сохранены. В совместном варианте measured joint-ready count вырос0→1; вклад отдельных изменений не изолирован.
 
-Исходные SDK A1(91/93),A2(compile failure) иA3(canonical fresh-build refusal) сохранены отдельно. A4 использовала чистую сборку; guard не ослаблялся. Synthetic helper bound64 не меняет controller allowance<=12 или scientific budget. Отдельно объявленный threshold100 diagnostic нужен для измерения actual waveform/LT response нового изменённого terminal state, без completed-training или classifier PASS. После него возможен заранее фиксируемый Same-Matrix threshold и реальная spiking проверка; silent accuracy не является успехом.
+Исходные SDK A1(91/93),A2(compile failure) иA3(canonical fresh-build refusal) сохранены отдельно. A4 использовала чистую сборку; guard не ослаблялся. Synthetic helper bound64 не меняет controller allowance<=12 или scientific budget. Отдельно объявленный threshold100 diagnostic нужен для измерения actual waveform/LT response нового изменённого terminal state, без completed-training или classifier PASS. Один заранее фиксированный Same-Matrix threshold уже проверен: TP1/FP5/FN0/TN2. Silent accuracy при100 не является успехом. Следующая задача — незавершённое обучение и fresh all-input verification, без повторного подбора порога по тем же результатам.
 
 ## Что уже сохранено для повторного анализа
 
@@ -36,7 +36,7 @@
 
 ## Что осталось до итогового научного сравнения
 
-- Завершить frozen diagnostic новой stopped модели, оценить Same-Matrix margin и при наличии допустимого кандидата подтвердить один заранее объявленный порог реальными спайками. Отдельно исследовать неоднозначную раннюю вершину; получить fresh all-input verification до утверждения Exact.
+- Frozen diagnostic и один объявленный spiking threshold завершены; результат отрицателен по разделимости. Исследовать неоднозначную раннюю вершину в обучении; получить fresh all-input verification до утверждения Exact. Не перебирать пороги заново по тому же Test.
 - Завершить legacy/V2 A/B и обязательную матрицу моделей, N0/N1, физики, частот, bounds/quantization, reset/inhibition/PostTune/calibration. Детальная карта каждого исходного этапа — [ImplementationStatus](ImplementationStatus.ru.md).
 - Зафиксировать модель и подтверждённый настоящим прогоном порог перед independent frozen Test. Same-Matrix оценивать отдельно; target в каждой позиции, order/ITI и reset-per-trial/continuous — отдельные протоколы. Partial observations не достраиваются до полной матрицы.
 - Закрыть оставшиеся требования этапов1–12 и children-first--no-ff merges в develop. Нет требования получить8/8 ради завершения рефакторинга; необходимы корректная реализация и проверка полного заявленного scope.

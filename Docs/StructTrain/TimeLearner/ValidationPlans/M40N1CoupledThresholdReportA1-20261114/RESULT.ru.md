@@ -1,0 +1,9 @@
+# Временной отчёт всех8паттернов принят
+
+M40 s07-n1-coupled-threshold-report-m40-a1: production1/1 PASS457.799s, outer completed/closed487.4853125908412s, heartbeat errors0. Использованы production test_diagnostic_threshold_study_report и неизменённые render_diagnostic_evaluation/render_soma. Повторного расчёта модели для графиков нет. Фактический scorer воспроизводит TP1/FP5/FN0/TN2.
+
+Сгенерированы8 Soma и8 LT decision наборов; полная1087PNG+SVG/PDF gallery остаётсяM40 cache /media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-threshold-report-m40-a1/worker/tmp/fixed-threshold-eight-pattern-gallery. В Git отобраны32 оригинальных PNG4753640B: все8 Soma overview, все8 LT overview и по одному spike/max zoom для каждого. Все32 просмотрены; подписи и входные импульсы читаемы. Полный ручной просмотр gallery не заявляется. Original metadata visual_acceptance_complete=false не переписан; эта приёмка ограничена выбранными файлами.
+
+1920×960, native sample step0.0005s, zoom0.05s и14.208pixels/native tick; без downsampling. Overview signed shared Y; выбранные тихие details строк1/3 имеют local_detail Y. [Научный отчёт со всеми8 Soma](../../BranchCoupledThresholdScientificReport-20261114.ru.md), [selection+checksums](../../../../../Reports/StructTrain/TimeLearner/N1CoupledBranch-20261113/threshold-figures/selected-originals.json), [test log](completed/worker/validation/unittest.log), [closure](completed/process/whole-group-closure.json).
+
+Control d66579f875d207f244fdc84bd6654ec3a60b8a06, Python source563b21fb501f341da5453349d9ce1b0d80c33423. Producer259f5dd1ec7ec77cad22b7fc6a5019da7928be1e, pack4346418B SHA256ad735cd97c9cf8bc8c295c1d0689062437450d089984292a54daf85821c22e58. Это приёмка отчётности; source Train остаётся invalid_observation, certificate=null, научный результат отрицателен по разделимости.
