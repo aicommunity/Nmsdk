@@ -233,12 +233,13 @@ def main(argv: list[str] | None = None) -> int:
     cold.add_argument("--controller", type=Path)
     cold.add_argument("--output", type=Path, required=True)
     pilot = commands.add_parser("stock-candidate-window-study", help="prepare, preflight or cold Train stock N4 with measured-reference window proposals")
-    pilot.add_argument("action", choices=("prepare", "prepare-recovery", "prepare-full-window", "preflight", "train"))
+    pilot.add_argument("action", choices=("prepare", "prepare-recovery", "prepare-full-window", "prepare-N0", "preflight", "train"))
     pilot.add_argument("source", type=Path)
     pilot.add_argument("--runtime-manifest", type=Path, required=True)
     pilot.add_argument("--controller", type=Path)
     pilot.add_argument("--case", choices=("Classic-stock-cold7-N1", "Branch-stock-cold7-N1",
-                                         "Classic-stock-cold8-N1", "Branch-stock-cold8-N1"))
+                                         "Classic-stock-cold8-N1", "Branch-stock-cold8-N1",
+                                         "Classic-stock-cold8-N0", "Branch-stock-cold8-N0"))
     pilot.add_argument("--finalization-seconds", type=float, default=0.,
         help="train only: extra process time for native stop/export; preserves the native search wall budget (default 0: historical equal deadlines)")
     pilot.add_argument("--output", type=Path, required=True)
@@ -870,13 +871,15 @@ def main(argv: list[str] | None = None) -> int:
             return 2
     elif args.command == "stock-candidate-window-study":
         from .native_evidence import EvidenceError, require
-        from .stock_candidate_window_study import prepare, prepare_recovery, run
+        from .stock_candidate_window_study import prepare, prepare_recovery, prepare_normalization, run
         try:
             require(args.action == 'train' or args.finalization_seconds == 0.,
                 'stock_cold7_finalization_allowance_requires_train')
-            if args.action in ('prepare', 'prepare-recovery', 'prepare-full-window'):
+            if args.action in ('prepare', 'prepare-recovery', 'prepare-full-window', 'prepare-N0'):
                 require(args.controller is args.case is None, 'stock_cold7_prepare_execution_arguments')
-                if args.action == 'prepare-full-window':
+                if args.action == 'prepare-N0':
+                    result = prepare_normalization(args.source, args.runtime_manifest, args.output)
+                elif args.action == 'prepare-full-window':
                     result = prepare_recovery(args.source, args.runtime_manifest, args.output,
                         full_observation=True)
                 else:
@@ -887,7 +890,7 @@ def main(argv: list[str] | None = None) -> int:
                 result = run(args.source, args.runtime_manifest, args.controller, args.case, args.output,
                     preflight_only=args.action == 'preflight', finalization_seconds=args.finalization_seconds)
             print(json.dumps(result, allow_nan=False))
-            return 0 if args.action in ('prepare', 'prepare-recovery', 'prepare-full-window') or result['validity'] == 'valid' else 2
+            return 0 if args.action in ('prepare', 'prepare-recovery', 'prepare-full-window', 'prepare-N0') or result['validity'] == 'valid' else 2
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
             print(json.dumps({'execution': 'failed', 'reason': str(error), 'scientific_verdict': None}), file=sys.stderr)
             return 2

@@ -30,6 +30,7 @@ ALGORITHMS = {
     1: 'stock-measured-reference-cold7-N4-N1-pilot-v1',
     2: 'stock-measured-reference-cold8-N4-N1-pilot-v1',
     3: 'stock-observation-domain-cold8-N4-N1-pilot-v1',
+    4: 'stock-observation-domain-cold8-N4-N0-control-v1',
 }
 
 
@@ -314,6 +315,93 @@ def prepare_recovery(source, runtime_path, output, *, full_observation=False):
     return result
 
 
+def normalization_declaration(job, name):
+    """Declare N0's integer search; preserve the cold physics and probe policy.
+
+    This is a new condition, not an overlay on a learned N1 state. Resistance
+    stays at each input's initial value; only non-anchor synapse counts may
+    range from 1 to 128. Global budgets and all measurement tolerances remain
+    those of the original N1 declaration.
+    """
+    validate_job('train', job)
+    require(job == _resign(job), 'stock_n0_source_job_digest')
+    config = job['configuration'];model = config['model'];bounds = config['search']['bounds']
+    require(config['schema_version'] == 8 and model['normalization'] == 'N1' and
+        len(model['inputs']) == len(bounds) == 4 and job['profile_archives'] == [] and
+        config['invalid_measurement_recovery'] == 'advance_rejected_candidate_window' and
+        config['search']['tolerances'] == dict(amplitude_absolute=1e-5, amplitude_relative=0., sync=.02) and
+        config['minimum_amplitude'] == 1e-6 and
+        all(p['synapses'] == 1 and b['minimum_synapses'] == b['maximum_synapses'] == 1
+            for p, b in zip(model['inputs'], bounds)), 'stock_n0_requires_strict_cold_N1')
+    require(bounds[-1]['minimum_length'] == bounds[-1]['maximum_length'] == model['inputs'][-1]['attachment'],
+        'stock_n0_anchor_length_not_fixed')
+    rows = config['composite_measurement']['candidate_window_policy']['inputs']
+    require(len(rows) == 4 and all(r['hard_first_frame'] == 0 and
+        r['maximum_window_frames'] == r['hard_last_frame']+1 and
+        all(r[k] == 0 for k in ('delay_frames_per_segment', 'length_guard_frames',
+            'synapse_count_guard_frames', 'resistance_change_guard_frames', 'capacitance_change_guard_frames'))
+        for r in rows), 'stock_n0_requires_full_observation_domain')
+    changed = deepcopy(job);c = changed['configuration']
+    changed['implementation_id'] = ALGORITHMS[4]
+    c.update(run_id=name, protocol_revision=ALGORITHMS[4])
+    c['model']['normalization'] = 'N0'
+    for i, (p, b) in enumerate(zip(c['model']['inputs'], c['search']['bounds'])):
+        b.update(minimum_resistance=p['resistance'], maximum_resistance=p['resistance'],
+            minimum_synapses=1, maximum_synapses=1 if i == 3 else 128)
+    changed = _resign(changed)
+    validate_job('preflight', changed);validate_job('train', changed)
+    return changed
+
+
+def prepare_normalization(source, runtime_path, output):
+    """Derive a separately fingerprinted N0 cohort from a frozen N1 plan."""
+    source = Path(source).resolve(strict=True);output = Path(output)
+    require(not output.exists(), 'stock_n0_preparation_exists')
+    index = load(source/'index.json');runtime = load(Path(runtime_path));verify_runtime(runtime)
+    require(index['kind'] == 'timelearner_stock_candidate_window_plan' and index['schema_version'] == 3 and
+        set(index['jobs']) == {'Classic-stock-cold8-N1', 'Branch-stock-cold8-N1'}, 'stock_n0_source_inventory')
+    require(runtime == load(source/'runtime.json'), 'stock_n0_source_runtime_changed')
+    code = dict(pulse_core=runtime['source_closure']['Libraries/Nmsdk-PulseLib']['head'],
+        rdk_core=runtime['source_closure']['Rdk']['head'], console_driver=runtime['source_closure']['root']['head'])
+    origins = load(source/'reference-origin.json')
+    require(origins['references_recaptured_by_new_train'] is True and origins['learned_state_imported'] is False,
+        'stock_n0_original_reference_scope')
+    before = {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
+        for p in sorted(source.rglob('*.json'))}
+    prepared = []
+    for old_name, expected_hash in index['jobs'].items():
+        old = load(source/'jobs'/(old_name+'.json'))
+        require(old['sha256'] == expected_hash, 'stock_n0_original_job_changed')
+        identity = load(source/'initial'/(old_name+'.json'))
+        audit_stock_profile(identity, branch=old['configuration']['model']['branch'])
+        require(load(source/'conditions'/(old_name+'.json')) ==
+            _condition(old, identity, code, runtime, algorithm_id=ALGORITHMS[3]), 'stock_n0_original_condition_changed')
+        name = old_name.removesuffix('-N1')+'-N0'
+        job = normalization_declaration(old, name)
+        validate_candidate_envelopes(job['configuration'], origins['characterization'][old_name], full_observation=True)
+        prepared.append((old_name, name, job, identity))
+    require(before == {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
+        for p in sorted(source.rglob('*.json'))}, 'stock_n0_source_changed_during_read')
+    output.mkdir(parents=True)
+    for directory in ('jobs', 'conditions', 'initial'):(output/directory).mkdir()
+    for _, name, job, identity in prepared:
+        _write(output/'jobs'/(name+'.json'), job)
+        _write(output/'initial'/(name+'.json'), identity)
+        _write(output/'conditions'/(name+'.json'), _condition(job, identity, code, runtime, algorithm_id=ALGORITHMS[4]))
+    _write(output/'runtime.json', runtime)
+    _write(output/'reference-origin.json', dict(
+        characterization={name:origins['characterization'][old_name] for old_name,name,_,_ in prepared},
+        references_recaptured_by_new_train=True, learned_state_imported=False,
+        delay_model_is_initial_total_latency_hypothesis=False, scientific_verdict=None))
+    _write(output/'source-plan.json', dict(path=str(source), files=before, source_runtime=runtime,
+        measured_coordinate_role='diagnostic_proposal_only', effective_native_preflight_required=True,
+        changed_factor='normalization_search_actuator', native_search_budgets_unchanged=True, scientific_verdict=None))
+    result = dict(kind='timelearner_stock_candidate_window_plan', schema_version=4,
+        jobs={name:job['sha256'] for _,name,job,_ in prepared}, scientific_verdict=None)
+    _write(output/'index.json', result)
+    return result
+
+
 def run(source, runtime_path, controller, case, output, *, preflight_only=False, finalization_seconds=0.):
     finalization_seconds = number(finalization_seconds)
     require(finalization_seconds >= 0., 'stock_cold7_invalid_execution_limits')
@@ -326,7 +414,7 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False,
     index = load(source/'index.json')
     require(index['kind'] == 'timelearner_stock_candidate_window_plan' and count(index['schema_version']) in ALGORITHMS
         and case in index['jobs'], 'stock_cold7_unknown_plan_or_case')
-    recovery = index['schema_version'] in (2, 3)
+    recovery = index['schema_version'] in (2, 3, 4)
     runtime = load(Path(runtime_path));verify_runtime(runtime)
     require(runtime == load(source/'runtime.json'), 'stock_cold7_runtime_changed')
     job_path = source/'jobs'/(case+'.json');job = load(job_path)
