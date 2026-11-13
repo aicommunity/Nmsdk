@@ -6,7 +6,11 @@ from .recognition_trial_evidence import _audit_recognition_trial
 
 def audit_diagnostic_recognition(package, source_case):
     try:
-        result = _audit_derivation(package, source_case, diagnostic=True)
+        if package.get('kind') == 'timelearner_diagnostic_threshold_candidate':
+            from .threshold_candidate_evidence import audit_diagnostic_threshold_candidate
+            result = audit_diagnostic_threshold_candidate(package, source_case)
+        else:
+            result = _audit_derivation(package, source_case, diagnostic=True)
         return {**result, "diagnostic_only": True, "certificate_present": False,
                 "training_outcome": source_case[0]["training_outcome"],
                 "training_reason": source_case[0]["reason"], "evaluation_verdict": None}

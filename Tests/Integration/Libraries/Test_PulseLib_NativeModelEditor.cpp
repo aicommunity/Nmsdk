@@ -6331,6 +6331,54 @@ TEST(NativeDiagnosticRecognition,OrdinaryBranchFullPatternRegression)
 {LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,false,RecognitionCase::OwnedFreshScaled);}
 
 namespace {
+template<class Learner> void DiagnosticThresholdBoundary()
+{
+    EditingRig<Learner> rig(2000,1,"diagnostic_threshold");
+    auto plan=TrainingPlan(rig);RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
+    for(auto& bound:plan.search.bounds)
+    {bound.maximumLength=bound.minimumLength;bound.maximumSynapses=bound.minimumSynapses;bound.maximumResistance=bound.minimumResistance;}
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned tick=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick)
+    {ASSERT_LT(tick,20000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    ASSERT_FALSE(rig.learner->NativeTrainingController().Certificate());
+    const std::string implementation="native-learned-boundary-fixture-v1";
+    const auto stopped=rig.learner->ExportNativeLearnedState(implementation);
+    ASSERT_EQ(stopped["kind"],QJsonValue("timelearner_stopped_state"));
+    const auto summary=EncodeNativeTrainingState(rig.learner->NativeTrainingController(),rig.Revision(),rig.learner->ReadNativeParameters());
+    const auto base=ConvertNativeStoppedToDiagnosticRecognition(stopped,{},rig.learner->GetStorage(),rig.environment,implementation);
+    const auto before=rig.Revision();const auto clock=rig.environment->GetTime().GetDoubleTime();
+    const auto candidate=CreateNativeDiagnosticThresholdCandidate(base,.01,rig.learner->GetStorage(),rig.environment,implementation);
+    EXPECT_EQ(candidate["kind"],QJsonValue("timelearner_diagnostic_threshold_candidate"));
+    EXPECT_EQ(candidate["state_kind"],QJsonValue("diagnostic_recognition"));
+    EXPECT_EQ(candidate["source_recognition"],QJsonValue(base));EXPECT_TRUE(candidate["recognition_certificate"].isNull());
+    EXPECT_EQ(rig.Revision(),before);EXPECT_EQ(rig.environment->GetTime().GetDoubleTime(),clock);
+    EXPECT_THROW(CreateNativeThresholdCandidate(base,.01,rig.learner->GetStorage(),rig.environment,implementation),std::invalid_argument);
+    EXPECT_THROW(PrepareNativeRecognitionState(candidate,rig.learner->GetStorage(),rig.environment,implementation),std::invalid_argument);
+    EXPECT_THROW(CreateNativeDiagnosticThresholdCandidate(candidate,.02,rig.learner->GetStorage(),rig.environment,implementation),std::invalid_argument);
+    const auto rejected=rig.learner->ImportNativeRecognitionState(candidate,implementation);
+    EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);EXPECT_FALSE(rejected.modelMayHaveChanged);
+    const auto imported=rig.learner->ImportNativeDiagnosticRecognitionState(candidate,implementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    rig.learner->Build();rig.learner->Init();rig.model->Init();rig.model->Reset();
+    rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    ASSERT_TRUE(rig.neuron);ASSERT_TRUE(rig.source);rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+    auto zone=rig.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(zone);
+    EXPECT_DOUBLE_EQ(zone->Threshold.GetData(),.01);
+    EXPECT_FALSE(rig.learner->NativeTrainingController().Certificate());
+    EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),candidate);
+    Artifact(rig.name+"_stopped_package.json",QJsonDocument(stopped).toJson());
+    Artifact(rig.name+"_training_outcome.json",QJsonDocument(summary).toJson());
+    Artifact(rig.name+"_diagnostic_recognition.json",QJsonDocument(base).toJson());
+    Artifact(rig.name+"_diagnostic_threshold.json",QJsonDocument(candidate).toJson());
+    FrozenTrialChecks(rig,candidate,true);
+    EXPECT_EQ(candidate["source_recognition"].toObject()["source_solo"],QJsonValue(stopped));
+}
+}
+TEST(NativeDiagnosticThreshold,ClassicN1){DiagnosticThresholdBoundary<NNeuronTimeLearner>();}
+TEST(NativeDiagnosticThreshold,BranchN1){DiagnosticThresholdBoundary<NNeuronTimeLearnerBranch>();}
+
+namespace {
 template<class Learner> void HistoryLearnedBoundary(int normalization,bool configured=false,unsigned repeats=1,bool dormant=false,bool automatic=false)
 {
     LearnedBoundary<Learner>(normalization,.2,2000,2,configured,{},automatic,1.,repeats,3600.,BoundaryExpectation::Completed,true,dormant,{.trackedCapacitance=true});

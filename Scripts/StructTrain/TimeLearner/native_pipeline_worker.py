@@ -88,10 +88,13 @@ def validate_job(mode, job, source_case=None):
             require(source_case is None, "cold_probe_does_not_import_learned_state")
         return result
     live = mode in ("train", "preflight") and type(job.get("schema_version")) is int and job["schema_version"] == 2
-    require(set(job) == FIELDS[mode] | {"kind", "schema_version", "sha256"} | ({"finalization_plan"} if live else set())
+    diagnostic_threshold = mode == 'diagnostic-evaluate' and type(job.get('schema_version')) is int and job['schema_version'] == 2
+    require(set(job) == FIELDS[mode] | {"kind", "schema_version", "sha256"} | ({"finalization_plan"} if live else set()) | ({'diagnostic_threshold'} if diagnostic_threshold else set())
             and job["kind"] == "timelearner_native_"+KINDS[mode]+"_job" and
-            type(job["schema_version"]) is int and job["schema_version"] == (2 if live else 1), "unknown_native_pipeline_job")
+            type(job["schema_version"]) is int and job["schema_version"] == (2 if live or diagnostic_threshold else 1), "unknown_native_pipeline_job")
     _digest(job)
+    if diagnostic_threshold:
+        number(job['diagnostic_threshold'])
     require(type(job["implementation_id"]) is str and bool(job["implementation_id"].strip()), "pipeline_implementation_missing")
     if mode in ("train", "preflight"):
         require(source_case is None, "cold_training_does_not_import_learned_state")
@@ -328,7 +331,13 @@ def audit_execution(mode, directory, job, source_case=None):
     diagnostic_audit = None
     if diagnostic:
         from .diagnostic_recognition_evidence import audit_diagnostic_recognition
-        require(model["source_solo"] == job["source_stopped"] and model["conversion_spec"] == job["conversion_spec"]
+        threshold_candidate = job['schema_version'] == 2
+        require(model['kind'] == ('timelearner_diagnostic_threshold_candidate' if threshold_candidate else 'timelearner_diagnostic_recognition_state'),
+                'pipeline_diagnostic_model_kind_changed')
+        context = model['source_recognition'] if threshold_candidate else model
+        if threshold_candidate:
+            require(number(model['threshold']) == number(job['diagnostic_threshold']), 'pipeline_diagnostic_threshold_changed')
+        require(context["source_solo"] == job["source_stopped"] and context["conversion_spec"] == job["conversion_spec"]
                 and execution["diagnostic_only"] is True and execution["source_stopped_sha256"] == job["source_stopped"]["sha256"]
                 and execution["training_outcome"] == job["source_stopped"]["training_outcome"]
                 and execution["training_reason"] == job["source_stopped"]["reason"], "pipeline_diagnostic_model_changed")

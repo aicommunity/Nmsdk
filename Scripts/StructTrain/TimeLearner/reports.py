@@ -52,8 +52,11 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
     analysis = (score_partial_diagnostic_evaluation(spec, observations, package, source_case)
                 if diagnostic else scorer(spec, observations, package))
     calibrated = package.get("kind") == "timelearner_calibrated_recognition_state"
+    diagnostic_candidate = diagnostic and package.get('kind') == 'timelearner_diagnostic_threshold_candidate'
+    if diagnostic_candidate:
+        context_label += ' | fixed diagnostic threshold '+str(package['threshold'])+'; not calibrated'
     context = package["source_candidate"]["source_recognition"] if calibrated else (
-        package["source_recognition"] if calibration_probe else package)
+        package["source_recognition"] if calibration_probe or diagnostic_candidate else package)
     # Descriptors: native binding enumerates Soma1..N (Branch has one soma).
     count = 1 if context["source_solo"]["configuration"]["model"]["branch"] else len(context["recognition_inputs"])
     nodes = {node["path"]: node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]}

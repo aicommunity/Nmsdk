@@ -26,9 +26,11 @@ def _audit_recognition_trial(observation, package, *, diagnostic=False):
     try:
         o = observation
         require(type(package) is dict, "unsupported_trial_model_package")
+        diagnostic_candidate = diagnostic and package.get("kind") == "timelearner_diagnostic_threshold_candidate"
         if diagnostic:
-            require(package.get("kind") == "timelearner_diagnostic_recognition_state"
-                    and package.get("source_solo", {}).get("kind") == "timelearner_stopped_state",
+            source = package.get("source_recognition", {}) if diagnostic_candidate else package
+            require(source.get("kind") == "timelearner_diagnostic_recognition_state"
+                    and source.get("source_solo", {}).get("kind") == "timelearner_stopped_state",
                     "diagnostic_trial_requires_stopped_source")
         if not diagnostic and package.get("kind") == "timelearner_calibrated_recognition_state":
             from .calibrated_evidence import audit_calibrated_state
@@ -40,10 +42,10 @@ def _audit_recognition_trial(observation, package, *, diagnostic=False):
         require(type(o) is dict, "unknown_recognition_trial_schema")
         schema = o.get("schema_version")
         require(type(schema) is int and schema in (1, 2), "unknown_recognition_trial_schema")
-        candidate = not diagnostic and package.get("kind") == "timelearner_recognition_threshold_candidate"
+        candidate = diagnostic_candidate or (not diagnostic and package.get("kind") == "timelearner_recognition_threshold_candidate")
         if candidate:
-            from .threshold_candidate_evidence import audit_threshold_candidate
-            audit_threshold_candidate(package)
+            from .threshold_candidate_evidence import audit_threshold_candidate, audit_diagnostic_threshold_candidate
+            (audit_diagnostic_threshold_candidate if diagnostic_candidate else audit_threshold_candidate)(package)
         context = package["source_recognition"] if candidate else package
         require(set(o) == FIELDS | ({"threshold_potential_source"} if schema == 2 else set()), "recognition_trial_field_set_mismatch")
         require(o["kind"] == "native_recognition_trial", "unknown_recognition_trial_schema")
