@@ -8,4 +8,6 @@ Control Git a8b156dda8d8acb6c836beade5a13fec5e01edc5. Python actor Rootda64c4c7e
 
 Пять Console runs: replay86, matched86 и Rs64.5/43/21.5МОм input0. Native domain checks обязательны. Geometry, storage, target, порог и остальные входы сохраняются. Outer Python memory8GiB, native leaf8GiB, whole wall14400s, каждый native probe900s, output budget8GiB/free floor8GiB. Проверка большого исходного архива предшествует пробам; launch/kernel STARTED не означает завершённое наблюдение.
 
-На текущем снимке результата и графиков серии ещё нет. Training, assigned-peak measurement и classification verdict не заявляются. После завершения требуются проверка actual conditions/полноты, визуальная проверка графиков всех сом и компактная Git-публикация. Большие полные gallery остаются кэшем M40.
+Последующий live readback того же kernel handle подтвердил running. Первый replay при86МОм завершён: Console completed/exit0, native window complete,3601 samples; production run/manifest audit принят, model revision совпала с исходной3b8a160f.... Начата подготовка matched-control. Это ещё не сравнение Rs и не полный результат объявленной серии. Исходный replay job234,679,308 bytes укладывается в штатный256MiB native input limit; увеличивать его не потребовалось.
+
+На текущем снимке итогового результата и графиков серии ещё нет. Training, assigned-peak measurement и classification verdict не заявляются. После завершения требуются проверка actual conditions/полноты, визуальная проверка графиков всех сом и компактная Git-публикация. Большие полные gallery остаются кэшем M40.

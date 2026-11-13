@@ -1,0 +1,22 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s10-source-job-envelope-data-m40-a1",
+  "package_fingerprint": "22a070c20cf48bd58e64f27d702dfd7ef7af9ca0f25c12d28c6740b8d6ba3aa0",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_source_job_envelope.SourceJobEnvelopeRecordedTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_source_job_envelope.SourceJobEnvelopeRecordedTest.test_actual_python_and_qt_jobs_restore_every_original_byte",
+    "Scripts.StructTrain.TimeLearner.tests.test_source_job_envelope.SourceJobEnvelopeRecordedTest.test_changed_reference_and_prepared_reference_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_source_job_envelope.SourceJobEnvelopeRecordedTest.test_corrupt_literals_original_digest_and_unknown_schema_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_source_job_envelope.SourceJobEnvelopeRecordedTest.test_unsupported_layout_or_missing_source_stays_literal"
+  ],
+  "fixtures": {
+    "TIMELEARNER_SOURCE_ENVELOPE_RECORDED": {
+      "pattern": "**/*.json",
+      "files": 216,
+      "fingerprint": "a6b538d8058b65702e27ffc9106816c2525d55c1a660f3178ba90c62bd3fde1c"
+    }
+  }
+}
