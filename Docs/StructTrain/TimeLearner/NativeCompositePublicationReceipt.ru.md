@@ -7,3 +7,8 @@ PublishCheckedNativeCompositeArchive выполняет прежние пров�
 Wrapper может использовать объект только при точном равенстве package и descriptor с сохранёнными значениями. Подмена даже с новым digest отклоняется. Это не флаг trusted, не глобальный cache и не новый wire schema. Без объекта wrapper выполняет прежний полный DATA replay. Старый PublishNativeCompositeArchive остаётся совместимым API. Оба Console-пути используют объект своей текущей публикации; lifecycle, физика, search, tolerances и бюджет не меняются.
 
 Адресная проверка расширяет существующие4 Classic/Branch completed/stopped NativeRecoveryConsoleArtifact cases: signed execution равен независимому полному replay для base1/base2; изменённые package и descriptor отклоняются. Существующий тест foreign ledger обязан отказывать до появления файлов. Preflight/before-source semantics сохраняются. Локально численные проверки не выполняются; серверная сборка и runtime-проверка пока открыты. Факт устранения timeout большого N4 ещё не подтверждён.
+
+
+## Проверка M40
+
+[Fresh Release/O3 build и7/7 actual cases приняты](ValidationPlans/M40PublicationReceiptSdkA1-20261113/RESULT.ru.md). Full namespace4166 подтверждён, оба native groups закрыты. Прежнее указание «серверная проверка открыта» выше — исторический снимок подготовки; Elder и большой N4 performance остаются открыты.
