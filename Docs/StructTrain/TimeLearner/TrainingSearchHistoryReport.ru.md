@@ -34,7 +34,7 @@
 |13|86.0000000|-0.3630|-1.043673e-2|
 |14|86.0000000|-0.3495|-1.055690e-2|
 
-При Rs86МОм увеличение L уменьшает модуль временной ошибки и одновременно увеличивает модуль амплитудной. Единственная сохранённая complete точка с другим Rs относится к L1; по ней нельзя заключать, что нормализация при L14 или L22 невозможна. Все13 retained rejections имеют reason rejected_candidate_window:ambiguous. Принадлежность каждого отказа конкретной геометрии требует связи с исходной пробой; один список rejections такой связи не доказывает.28 оценённых Rs-интервалов не означают28 измеренных Rs-кандидатов.
+При Rs86МОм увеличение L уменьшает модуль временной ошибки и одновременно увеличивает модуль амплитудной. Единственная сохранённая complete точка с другим Rs относится к L1; по ней нельзя заключать, что нормализация при L14 или L22 невозможна. Все13 retained rejections имеют reason rejected_candidate_window:ambiguous. Один список rejections такой связи не доказывает; ниже добавлена прямая привязка к window_proposal исходных measurement records.28 оценённых Rs-интервалов не означают28 измеренных Rs-кандидатов.
 
 ## Следующее решение об алгоритме
 
@@ -53,3 +53,26 @@ Production-модуль native_burst_resistance_study выполняет имп�
 В исходном пакете найдены62 measurement records. Терминальной revision3b8a160f... соответствуют61 (input3, complete/valid) и62 (input0, incomplete). У62 сохранены два полных CSV full-before/omit-0 по3601 samples и censored omit-1 на415 samples, закончившийся по native_training_time_budget_exhausted. Это не три полные пробы и не завершённая omission group. Исходные bytes уже входят в опубликованный Train primary; новые предъявления перед их разбором не требуются.
 
 composite_training_temporal получает явный --allow-incomplete-groups для диагностического показа таких данных: полный production package audit сохраняется, статусы взяты из связанных native packets, неполученная часть окна затенена, отсутствующие пробы не создаются. Без флага incomplete group по-прежнему отвергается. Schema3 отчёта не даёт assignment/certificate/scientific verdict. Серверная проверка на фактической группе62 и визуальная приёмка ещё ожидаются.
+
+## Геометрия отклонённых проб: что реально исследовал поиск
+
+Прочитаны исходные measurement_archive.records этого же опубликованного Train, а не только15 сохранённых valid candidate records. Для каждой строки ниже L взято из window_proposal.candidate.parameters[0], revision из logical_request.base_model_revision, validity из selection.geometry. Все прочие входы имеют L1/Rs86МОм/Ns1; input0 также Rs86МОм/Ns1. Полный model identity и raw primary остаются в исходном пакете; строки не создают новый сертификат.
+
+|Порядковый group|L input0|Исход выбора|Полнота|Model revision|
+|---:|---:|---|---|---|
+|14|54|ambiguous|true|913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04|
+|18|52|ambiguous|true|01bbf608abf0d7ff6854552b0ec3a4318ee70e4a7b93f534d7b82713e36ad9e4|
+|34|50|ambiguous|true|c8fc6c1059a9e505826fd6f41a61f2d674d83dc0fce5f85156ff4bbcd910c0ea|
+|38|48|ambiguous|true|f077cf45b25eec18a8299174c7fc92d9c59666d97f40afdf88541bed48044405|
+|42|45|ambiguous|true|35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263|
+|46|40|ambiguous|true|82a853618e171805b70d69a229321a0b771c92bf0a500b07fe098c4c1cc9651d|
+|48|15|ambiguous|true|784847f96d7735c202a74b07603ba00ffe79d4d54aec0a903eb1df9d51efea00|
+|50|16|ambiguous|true|fdffc0b4894a5475ddc4adffab4a5e166bb7fa6768e3e8a8405997904e81cf4e|
+|52|17|ambiguous|true|606ce36d082a584bc2cbe08da77db2332575cc5f5569d8bca97597745f9b84bc|
+|54|18|ambiguous|true|51ecd5a636fe4a1c3af438bc947b234eff00e0c39da18112929eea4a88a10326|
+|56|19|ambiguous|true|f9b1049a1b078003c7bac07735bfd80483523beea486e22edcc05750327f9184|
+|58|20|ambiguous|true|c9aaa3be4d317c68efbc6d1716e3e1e34ca957081da547d2202e18f953142426|
+|60|21|ambiguous|true|72fe21cdf315fb8fdf51996849dc8d35a84387708accaaf4fe2e2689b2b6bbe1|
+|62|22|not selected|false|3b8a160f2fe6f5ace6aa377f5d42117bcc922bcdd746358ca8d7c34fc67a6b1c|
+
+Фактическое начало candidate trajectory: L1/Rs86 → L1/Rs2.88007156 → L2/Rs86 → L3/Rs86 → L54/Rs86 → L4/Rs86 → L52/Rs86. Следовательно, predictor действительно предлагает длинные кандидаты; отсутствие L54/L52 в таблице valid candidates объясняется ambiguity, а не отсутствием пробы. Group14 revision913bd90b0a27... — L54, а не терминальный L22. Нельзя обосновывать изменение порядка поиска утверждением, что проверялись только длины1–14. Полная причина каждого ambiguity требует его собственных omission waveforms; это не глобальное доказательство физической невозможности. Терминальная группа62 отдельно incomplete по time budget и не входит в13 завершённых ambiguity refusals.
