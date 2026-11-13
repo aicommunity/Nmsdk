@@ -1315,7 +1315,11 @@ TEST(BoundedTrainingN1LocalTurn, TimingReadyAmplitudeMissTriesAnotherRsBeforeOth
         EXPECT_EQ(measured[0].parameters,(InputParameters{2,1,10.}));
         EXPECT_EQ(measured[1].parameters,(InputParameters{2,1,10.}));
         EXPECT_EQ(measured[2].parameters,(InputParameters{2,1,2.}));
-        EXPECT_EQ(measured[3].parameters.length,3);
+        // Two extra points here: a quarter of the ten remaining candidates.
+        // A valid local endpoint may lose timing; the finite turn still yields.
+        EXPECT_EQ(measured[3].parameters.length,2);
+        EXPECT_EQ(measured[4].parameters.length,3);
+        if(losesTiming)EXPECT_FALSE(measured[2].withinTiming);
         EXPECT_NE(measured[1].anchorTrialId,measured[2].anchorTrialId);
         EXPECT_NE(measured[1].modelRevision,measured[2].modelRevision);
         EXPECT_GT(assessments[2],1);
@@ -1348,6 +1352,40 @@ TEST(BoundedTrainingN1LocalTurn, SingletonDomainYieldsAndGlobalProbeBudgetStillS
             EXPECT_FALSE(session.Certificate());
         }
     }
+}
+
+TEST(BoundedTrainingBranchFamily, CoupledGrowthProposesDistantLengthsWithoutChangingTheAnchorOrGlobalBudgets)
+{
+    const auto p=Protocol(4,ProbeRouting::BranchSoloBurst);auto cfg=Configuration(4,Normalization::TipResistance);
+    cfg.bounds.assign(4,{1,40,1,1,1.,100.});cfg.bounds[3]={1,1,1,1,10.,10.};
+    cfg.maximumProbes=40;cfg.maximumCandidatesPerInput=128;cfg.resistanceSubdivisionDepth=8;
+    BoundedTrainingSession session(References(p),cfg,std::vector<InputParameters>(4,{1,1,10.}),true);
+    DriveTraining(session,p,[](const auto& a,auto& delay,auto& raw) {
+        delay[2]=.03+.01*(a.parameters[2].length-1);raw[2]+=.001;
+    },[](const auto& a) {
+        auto d=FairDomain(a);d.sourceAmplitude=1.;
+        const auto i=a.inputIndex;
+        if(a.parameters[i].length==a.parameters[i+1].length ||
+           (i && a.parameters[i].length==a.parameters[i-1].length))
+            d.minimumResistance=d.maximumResistance=a.parameters[i].resistance;
+        return d;
+    });
+    std::size_t first4=10000,first6=10000,first11=10000,index=0;
+    for(const auto& e:session.Evidence())
+    {
+        ASSERT_EQ(e.inputIndex,2u);
+        if(e.parameters.length==4)first4=std::min(first4,index);
+        if(e.parameters.length==6)first6=std::min(first6,index);
+        if(e.parameters.length==11)first11=std::min(first11,index);
+        EXPECT_EQ(e.fullParameters[3],(InputParameters{1,1,10.}));
+        for(std::size_t i=0;i<3;++i)EXPECT_GE(e.fullParameters[i].length,e.fullParameters[i+1].length);
+        ++index;
+    }
+    EXPECT_LT(first6,first4);EXPECT_LT(first11,first4);
+    EXPECT_LT(first11,12u); // Not an entire 1..11 traversal of both bank variants.
+    EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+    EXPECT_LE(session.IssuedProbes(),cfg.maximumProbes);
+    EXPECT_FALSE(session.Certificate());
 }
 
 TEST(BoundedTrainingFairDomains,ValidMeasurementsVisitGeometriesIndependentlyOfRecovery)

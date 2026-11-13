@@ -191,3 +191,7 @@ PulseLib объединён в develop merge
 `8e6825653cccc475670fa78be22325d30172a76c`. Сравнение с неполным ASan a1
 сохранено в metadata; общая отрисовка для них не заявляется. Это не расширяет
 доказанный nonzero-refinement режим до20000 Гц.
+
+## Следующий вариант после N1 A3 (13.11.2026)
+
+A3 подтвердил valid opposite-sign amplitudes на[26,26,25,1], Rs86M и2.880071555M, при допустимом timing обеих точек; exact не достигнут. В следующей реализации bounded local turn допускает дополнительные свежие точки в прежних global budgets. Для подходящего measured bracket proposer использует safeguarded log(Rs) secant с fraction[0.25,0.75]; это очередность исследования, не свидетельство измеренной амплитуды. Старый midpoint остаётся частным случаем symmetric residuals. Domain, source amplitude, repeated-data consistency, timing и physical-scope guards сохранены; невалидные/немонотонные данные возвращают mesh fallback. Новые native tests и real same-budget Train ещё требуются; исторические PASS выше относятся к прежнему коду.
