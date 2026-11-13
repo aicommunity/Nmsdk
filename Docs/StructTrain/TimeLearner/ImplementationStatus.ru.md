@@ -4,11 +4,11 @@
 
 ## Текущее выполняемое задание
 
-[Повторная SDK-проверка A2](ValidationPlans/M40N1CoupledSdkA2-20261113/STATUS.ru.md) завершилась ошибкой компиляции тестовой диагностики: два SCOPED_TRACE на одной строке создавали одинаковое имя.0 из93 cases исполнены; научный Train не запускался. Исправление разносит макросы по строкам, production Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8 не меняется. [Canonical A3 отверг существующий build](ValidationPlans/M40N1CoupledSdkA3-20261113/RESULT.ru.md); контроль сохранён. [A4 запущена](ValidationPlans/M40N1CoupledSdkA4-20261113/STATUS.ru.md) с новым чистым build/runtime, source74e5d206d/Pulse7c6c9478; живой kernel handle и компиляция подтверждены. Прежние runtimes защищены.
+[Cold Branch N4/N1 coupled-search Train](ValidationPlans/M40N1CoupledBranchTrainA1-20261113/STATUS.ru.md) выполняется на M40 после принятой [A4 SDK-проверки93/93](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md). Native cold preflight completed/closed1.716s, подтверждены живые outer/native kernel handles и145 live raw CSV на промежуточном снимке. Итог обучения/полнота всех проб/классификация ещё не установлены.
 
-[Первая сборка A1 завершилась91/93](ValidationPlans/M40N1CoupledSdkA1-20261113/RESULT.ru.md). Уточнены два synthetic test contracts: малый budget при Branch factor-two guard должен давать честную остановку; safeguard log-secant не обещает сходимость произвольной нелинейной функции за12 calls. Production Pulse code, controller local allowance<=12 и scientific budgets/tolerances не менялись. Исходный FAIL сохранён, в PASS не переименован.
+Source SDK root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8, runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Новый commit Pulse documentation не изменяет этот зафиксированный код. Production prepare_recovery подтвердил прежние Branch job/initial/reference-origin bytes; budgets/tolerances/CapturedPerInput/fixed anchor сохранены. Source/runtime работающего задания не обновляются.
 
-Новый scientific Train ещё не запущен: требуется93/93 и закрытие всех kernel groups. Затем выполняется тот же cold Branch case с прежними job/initial/reference-origin bytes и исходными допусками. Не предусматривается автоматический повтор silent threshold100 Test ещё одной необученной модели.
+SDK A4:все93 declared cases выполнены и прошли, native/outer groups закрыты,0 heartbeat/final capture errors. Это адресная helper/controller приёмка, не full CTest/physical matrix и не сходимость N4. [A1:91/93](ValidationPlans/M40N1CoupledSdkA1-20261113/RESULT.ru.md), [A2:compile failure](ValidationPlans/M40N1CoupledSdkA2-20261113/RESULT.ru.md), [A3:fresh-build refusal](ValidationPlans/M40N1CoupledSdkA3-20261113/RESULT.ru.md) сохранены исходными неудачами. Тестовые ожидания/макрос исправлены; production Pulse, scientific limits и fresh-build guard не менялись. A4 использовала чистые build/runtime.
 
 ## Последние научные результаты
 
@@ -65,7 +65,7 @@ Git содержит compact primary/models/metrics/selected figures. Полны
 
 ## Следующий научный шаг и ограничения
 
-После принятой A2 сборки — same-budget cold Branch N4/N1 и анализ фактически потреблённых candidates: изменились ли исследованные длины/Rs, достигнуто ли simultaneous timing/amplitude, сохранены ли остальные входы. Exact требует свежей проверки всех входов. Sign bracket, local timing readiness, Done и завершённый процесс не заменяют это требование. BudgetExhausted/SearchUnresolved не доказывают PhysicalInfeasible.
+После принятой A4 сборки выполняется same-budget cold Branch N4/N1. По завершении — анализ фактически потреблённых candidates: изменились ли исследованные длины/Rs, достигнуто ли simultaneous timing/amplitude, сохранены ли остальные входы. Exact требует свежей проверки всех входов. Sign bracket, local timing readiness, Done и завершённый процесс не заменяют это требование. BudgetExhausted/SearchUnresolved не доказывают PhysicalInfeasible.
 
 Дальше остаются legacy/V2 A/B и полная физическая/режимная матрица, frozen order/ITI/reset и согласованные stage merges children-first через--no-ff. Полные открытые требования перечислены выше; этот научный шаг не подменяет их.
 

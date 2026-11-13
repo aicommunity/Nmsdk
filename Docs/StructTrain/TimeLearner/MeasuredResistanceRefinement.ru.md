@@ -195,3 +195,7 @@ PulseLib объединён в develop merge
 ## Следующий вариант после N1 A3 (13.11.2026)
 
 A3 подтвердил valid opposite-sign amplitudes на[26,26,25,1], Rs86M и2.880071555M, при допустимом timing обеих точек; exact не достигнут. В следующей реализации bounded local turn допускает дополнительные свежие точки в прежних global budgets. Для подходящего measured bracket proposer использует safeguarded log(Rs) secant с fraction[0.25,0.75]; это очередность исследования, не свидетельство измеренной амплитуды. Старый midpoint остаётся частным случаем symmetric residuals. Domain, source amplitude, repeated-data consistency, timing и physical-scope guards сохранены; невалидные/немонотонные данные возвращают mesh fallback. Новые native tests и real same-budget Train ещё требуются; исторические PASS выше относятся к прежнему коду.
+
+## Coupled N1 variant: адресная приёмка13.11
+
+[Fresh SDK A4 принята93/93](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md), source74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8, все native/outer groups закрыты. Safeguarded log-secant проверен в production helper/controller; nonlinear1/R fixture сохраняет strict1e-8 с математически обоснованным64-call bound. Это отдельный pure-helper bound, controller local allowance<=12 и scientific budgets не увеличены. Ранние91/93/compile/canonical failures сохранены. [Same-budget Branch N4](ValidationPlans/M40N1CoupledBranchTrainA1-20261113/STATUS.ru.md) выполняется; физическая сходимость и классификация этого нового варианта ещё не установлены.
