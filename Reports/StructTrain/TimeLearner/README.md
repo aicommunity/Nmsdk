@@ -658,3 +658,7 @@ lease recovery и production pipeline integration остаются открыт�
 - [Current-package public coordinator regression8](s10-managed-public-coordinator-normal-a4/README.ru.md):20 actual Console phases, complete data; live6, new temporal report and scientific matrix pending.
 
 - FastResponse/FastSpan historical tool retirement: [Elder](s09-fast-tools-elder-a1/README.ru.md), [M40](s09-fast-tools-m40-a1/README.ru.md),184 retrieval records and restored-path refusal on each worker; original configurations/models/data/report bodies retained, complete migration pending.
+
+## Branch N1 coupled-search,13.11.2026
+
+[N1CoupledBranch-20261113](N1CoupledBranch-20261113/primary/bundle.json): полный primary24.11MB,1214logical members, literal XZ/container2. Один input2 candidate выполняет timing/amplitude tolerances; итог invalid_observation/ambiguous input1, certificate=null. Четыре просмотренных original PNG и metadata — figures; полная SVG/PDF gallery M40 cache. [Научный отчёт](../../../Docs/StructTrain/TimeLearner/N1CoupledScientificReport-20261113.ru.md).

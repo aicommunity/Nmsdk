@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-n1-coupled-frozen-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "25ad607296da751e05881a4a45149c8331814d25",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 256,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 8589934592
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-n1-coupled-frozen-a1",
+      "commit": "25ad607296da751e05881a4a45149c8331814d25"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-coupled-frozen-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledFrozenA1-20261113/suite.json",
+      "sha256": "02376403090618b798fbc1abdca406c204f7c93620d6953972c5627f219cfa9c"
+    },
+    "fixtures": {
+      "TIMELEARNER_COUPLED_TRAIN_RUN": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-branch-train-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train",
+      "TIMELEARNER_COUPLED_FROZEN_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/n1-coupled-frozen-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledFrozenA1-20261113/fixture"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 2147483648
+    }
+  }
+}

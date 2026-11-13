@@ -8,7 +8,7 @@
 
 Source SDK root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8, runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Actual job/initial bytes равны baseline; scientific limits не изменены. SDK A4[93/93](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md) принята адресно; A1/A2/A3 failures сохранены. Этапы1–12 остаются частичными.
 
-Сейчас строится read-only отчёт групп48/58 с actual input overlays; полные первичные данные упакованы для Git, графическая галерея остаётся кэшем M40. Следующий научный шаг — frozen diagnostic8pattern evaluation фактического остановленного состояния без completed-training claim и template fallback.
+[Научный отчёт](N1CoupledScientificReport-20261113.ru.md) готов: read-only report1/1 PASS, все4 original PNG с actual input overlays просмотрены. Full primary24.11MB сохранён в Git. Сейчас выполняется frozen diagnostic8pattern evaluation фактического terminal state; исходный threshold100 характеризует waveform и не является classifier PASS.
 
 ## Последние научные результаты
 
