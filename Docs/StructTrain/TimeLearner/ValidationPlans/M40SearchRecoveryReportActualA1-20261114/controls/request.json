@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-search-recovery-report-actual-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "6734dec146063f5f2553fd44871e4256470f0a4b",
+  "limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 8589934592,
+    "maximum_output_bytes": 536870912
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-search-recovery-report-a1",
+      "commit": "6734dec146063f5f2553fd44871e4256470f0a4b"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/search-recovery-report-actual-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40SearchRecoveryReportActualA1-20261114/suite.json",
+      "sha256": "b38f77a1ca9b2b3b655c0fea931c1c78a2ce1edf4cda883a7d79dec007d07616"
+    },
+    "fixtures": {
+      "TIMELEARNER_COUPLED_RECOVERY_REPORT_RUN": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-branch-train-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 2147483648
+    }
+  }
+}

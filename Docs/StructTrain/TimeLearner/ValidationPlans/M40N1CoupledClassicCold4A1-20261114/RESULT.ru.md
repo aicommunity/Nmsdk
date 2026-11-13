@@ -1,0 +1,13 @@
+# Холодный Classic recovery4 завершён; сходимость не получена
+
+M40 s07-n1-coupled-classic-cold4-m40-a1: production1/1 PASS1946.809s, outer completed/closed1970.9424482989125s, heartbeat errors0. Native Train completed/closed1272.6064461749047s. Эти PASS означают корректное выполнение/DATA/physical audit, не успешное обучение.
+
+Итог invalid_observation, reason rejected_candidate_window:ambiguous;14 принятых candidate measurements,0 jointly timing+amplitude-ready,38 search probes,18 edits. Сохранены42 полные logical groups/252 native trials/907452 frames. Общего certificate и final verification нет, classification_assessed=false. Terminal parameters L=[45,1,1,1], Rs=86M у всех, Ns=1. Model revision35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263.
+
+Пять отказов относятся к input0 на L54/52/50/48/45; первые4 cursor_advanced, пятый invalid_budget_stop. Они не включены в14 измеренных timing/amplitude кандидатов. Полный raw ledger хранится в stopped summary и сохраняется whole-primary collector; отказ не трактуется как PhysicalInfeasible.
+
+Физика stock без LTMembrane: проверены52 membranes/104 channels, threshold и feedback connections сохранены. Частота2000Гц, CapturedPerInput, anchorN−1, tolerances ampabs1e-5/relative0/sync.02. Native budgets wall1800/probes128/edits1280/candidates128/sweeps4/invalid4 сохранены; process finalization300s отдельно. Это recovery4, как у последнего Branch; прежний Classic recovery16 — другой протокол, не same-budget A/B. Сам topology comparison не заменяет legacy/V2 A/B или полную physical matrix.
+
+[Run index с DATA/physical proof](completed/worker/native-full-domain/Classic-stock-cold8-N1/index.json), [native execution](completed/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native/execution.json), [actual native job](completed/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native/job.json), [test log](completed/worker/validation/unittest.log), [closure](completed/process/whole-group-closure.json). Source SDK root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8, runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Actual native job SHA256d5cd229d8387ede1277e84d2a74cfe88624a001781f104f2d2ba75a6cfb566ae. Full primary collection запущена отдельно после closure; temporal report по измеренным/отвергнутым группам готовится. Test/порог автоматически не запускаются.
+
+Producerfbabdefdf35781dcf8bdf49913f2561f36827439, pack131414B SHA2568ecf9dc51c983f3c7de12d05ebb703908eae6a879ba6049f78f51d482de4c700;24 исходных файла сохранены без JSON rewrite. Это конкретный отрицательный исход текущего холодного протокола и не опровержение августовских визуальных4/8–6/8.
