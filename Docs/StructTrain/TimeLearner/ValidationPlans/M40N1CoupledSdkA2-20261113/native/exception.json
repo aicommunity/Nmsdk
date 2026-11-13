@@ -1,0 +1,4 @@
+{
+  "reason": "command_failed:build.log:2",
+  "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a2/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 582, in run\n    self.command([\"cmake\",\"--build\",self.paths[\"build\"],\"--target\",\"Test_PulseLib_StorageComponents\",\"NeuroModelerConsole\",\n  File \"/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a2/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 381, in command\n    _require(code == 0, \"command_failed:\"+name+\":\"+str(code))\n  File \"/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a2/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 26, in _require\n    raise ValueError(reason)\nValueError: command_failed:build.log:2\n"
+}
