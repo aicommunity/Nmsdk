@@ -160,4 +160,5 @@ def run(source_manifest, controls):
         _write(output/'result.json', result)
         return result
     finally:
-        registry.release(lease['token'])
+        registry.release(lease['token'],
+                         note='Paired diagnostic threshold native groups closed; training remains stopped.')
