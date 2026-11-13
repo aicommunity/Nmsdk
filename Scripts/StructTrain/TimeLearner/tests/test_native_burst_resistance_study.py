@@ -9,6 +9,8 @@ from ..native_evidence import load
 
 class NativeBurstResistanceStudyTest(unittest.TestCase):
     def test_declared_grid_on_actual_stopped_model(self):
+        from ..plotting import plotting_runtime
+        plotting_runtime()  # Fail before native experiments if their report cannot run.
         native = Path(os.environ['TIMELEARNER_BURST_STUDY_SOURCE']).resolve(strict=True)
         controls = Path(os.environ['TIMELEARNER_BURST_STUDY_CONTROLS'])
         result = run(native/'train_stopped_state.json', controls)

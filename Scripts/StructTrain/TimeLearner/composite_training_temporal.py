@@ -26,6 +26,7 @@ def render(native, output, group_numbers, *, native_window_zooms=False, allow_in
             len(set(group_numbers)) == len(group_numbers), 'training_report_group_inventory')
     require(type(native_window_zooms) is bool, 'training_report_native_zoom_flag')
     require(type(allow_incomplete_groups) is bool, 'training_report_incomplete_flag')
+    runtime = plotting_runtime()
     packages = [native/n for n in ('train_stopped_state.json', 'train_learned_state.json')
                 if (native/n).is_file()]
     require(len(packages) == 1, 'training_report_package_missing_or_ambiguous')
@@ -67,7 +68,6 @@ def render(native, output, group_numbers, *, native_window_zooms=False, allow_in
         prepared.append((ordinal, record, series))
     require(raw_package == package_path.read_bytes() and raw_summary == summary_path.read_bytes(),
             'training_report_package_changed_after_audit')
-    runtime = plotting_runtime()
     import matplotlib.pyplot as plt
     output.mkdir(parents=True, exist_ok=False)
     figures, groups = [], []
