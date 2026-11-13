@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-diagnostic-threshold-science-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "5d2eed8944c88584ac8d54e036d0f29204e889cd",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 256,
+    "maximum_wall_seconds": 9000
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 8589934592
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-science-a2",
+      "commit": "5d2eed8944c88584ac8d54e036d0f29204e889cd"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-science-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdScienceA1-20261113/suite.json",
+      "sha256": "25c53ac3f3a43ca8d0c1115c819f83975313f706cd938478e14ed7c04e75db68"
+    },
+    "fixtures": {
+      "TIMELEARNER_THRESHOLD_SOURCE_RUN": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-frozen-diagnostic8-m40-a1/classic",
+      "TIMELEARNER_THRESHOLD_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-science-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdScienceA1-20261113/fixture",
+      "TIMELEARNER_THRESHOLD_RUNTIME": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 2147483648
+    }
+  }
+}

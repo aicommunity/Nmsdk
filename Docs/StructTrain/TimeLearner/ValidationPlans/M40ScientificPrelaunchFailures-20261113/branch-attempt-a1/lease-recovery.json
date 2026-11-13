@@ -1,0 +1,95 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "60a79b0b-6dfe-4c49-b309-743593b311af",
+  "job_id": "s07-branch-shared-bank-rs-m40-a1",
+  "recorded_unix": 1794573666.028632,
+  "administrator": {
+    "pid": 638506,
+    "start_ticks": "364883296",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python",
+    "pid": 641875,
+    "start_ticks": "364883758",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-shared-bank-rs-m40-a1/process/contained",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "86439f9024844d4835ac7a2d68391bbab982a55ad038bdcfd96210d4e01e416a",
+      "unit": "timelearner-abbb0c8a-11b8-4749-98e6-12b0fb93406f.service",
+      "invocation_id": "17bd09aa28ac4ab997e0c1f48e1097d2",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-abbb0c8a-11b8-4749-98e6-12b0fb93406f.service",
+      "initial_main_pid": 641875,
+      "initial_start_ticks": "364883758",
+      "sha256": "a81d218a92e3d1f1c3bc6759ce1eb27ac3d1fc06ebaa1575bb029ad9a3ed0820"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "8589934592",
+      "TasksMax": "256",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt abbb0c8a-11b8-4749-98e6-12b0fb93406f",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "17bd09aa28ac4ab997e0c1f48e1097d2"
+    },
+    "memory_max": 8589934592,
+    "tasks_max": 256,
+    "scientific_verdict": null
+  },
+  "note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train/native",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train/native"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-shared-bank-rs-m40-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-shared-bank-rs-m40-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/branch-shared-bank-rs-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40BranchSharedBankRsA1-20261113",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/branch-shared-bank-rs-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40BranchSharedBankRsA1-20261113"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/branch-shared-bank-rs-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40BranchSharedBankRsA1-20261113/fixture",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/branch-shared-bank-rs-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40BranchSharedBankRsA1-20261113/fixture"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-science-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-science-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

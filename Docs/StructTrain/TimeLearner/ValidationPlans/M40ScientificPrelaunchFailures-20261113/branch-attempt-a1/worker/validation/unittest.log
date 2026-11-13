@@ -1,0 +1,24 @@
+test_declared_grid_on_actual_stopped_model (Scripts.StructTrain.TimeLearner.tests.test_native_burst_resistance_study.NativeBurstResistanceStudyTest.test_declared_grid_on_actual_stopped_model) ... ERROR
+
+======================================================================
+ERROR: test_declared_grid_on_actual_stopped_model (Scripts.StructTrain.TimeLearner.tests.test_native_burst_resistance_study.NativeBurstResistanceStudyTest.test_declared_grid_on_actual_stopped_model)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-science-a2/Scripts/StructTrain/TimeLearner/tests/test_native_burst_resistance_study.py", line 16, in test_declared_grid_on_actual_stopped_model
+    result = run(native/'train_stopped_state.json', controls)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-science-a2/Scripts/StructTrain/TimeLearner/native_burst_resistance_study.py", line 79, in run
+    policy = policy_for_reservation(registry, lease['token'], memory_bytes=leaf_memory, tasks=64)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-science-a2/Scripts/StructTrain/TimeLearner/native_process_policy.py", line 105, in policy_for_reservation
+    _open_reservation(value)
+  File "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-science-a2/Scripts/StructTrain/TimeLearner/native_process_policy.py", line 90, in _open_reservation
+    require(lease["controller"]["memory_bytes"]+policy["memory_bytes"] <= lease["demands"]["memory_bytes"] and
+  File "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-science-a2/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: native_resource_context_budget_exhausted
+
+----------------------------------------------------------------------
+Ran 1 test in 4.424s
+
+FAILED (errors=1)

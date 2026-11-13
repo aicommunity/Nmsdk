@@ -1,5 +1,17 @@
 # Готовность к научным экспериментам — 13.11.2026
 
+## Текущий научный шаг — 13.11.2026, после полного Branch Train
+
+[Новый Branch-отчёт с тремя просмотренными графиками](BranchSharedBankScientificReport-20261113.ru.md): Train валиден, но budget_exhausted/certificate=null. Из51 кандидата четыре timing-ready, ни одного одновременно amplitude-ready. Полный inventory52 domains содержит27 shared-lock и25 unlocked: одна блокировка банка не объясняет весь исход; broad geometry-first проход проверил только исходный Rs86M даже в подходящих по времени unlocked геометриях. Следующий алгоритмический приоритет — bounded local Rs exploration с fresh domains и сохранением fairness, без ослабления допусков.
+
+[Первичный Branch corpus сжат без потерь до44.06MB](ValidationPlans/M40BranchFullDomainPrimaryA1-20261113/RESULT.ru.md), все2164 logical members доступны в Git. Независимое восстановление/production DATA audit выполняется на Elder: s07-branch-full-domain-primary-replay-elder-a2; control31f9e5b3dd48cd52a0bf0c9765c984ea0ebc1c28. Статус приёмки восстановления пока pending.
+
+На M40 выполняются два конечных контроля: s11-diagnostic-threshold-science-m40-a2 — baseline100 и фактические8 паттернов с единственным фиксированным Same-Matrix диагностическим порогом; s07-branch-shared-bank-rs-m40-a2 — replay/matched86M/согласованная правка банка21.5M на фиксированной геометрии. Это остановленные модели, не Exact и не independent Test. Actual classification нового порога ещё не получена; proxy TP1/FP2 не выдаётся за измерение. Source/runtime не обновляются внутри заданий.
+
+Диагностический пороговый путь имеет2/2 native и5/5 DATA проверок, но общий10-case SDK cohort остаётся FAILED:8 ordinary fixtures не доходят до threshold constructor из-за предварительного maximum_sweeps_exhausted. Два таких отказа воспроизведены на прежнем Elder SDK; остальные шесть старых baseline cases не проверены повторно. [Исходные результаты SDK](ValidationPlans/M40DiagnosticThresholdSdkA1-20261113/RESULT.ru.md), [старый контроль](ValidationPlans/ElderThresholdFixtureOldRuntimeA1-20261113/RESULT.ru.md).
+
+Обнаруженное under-accounting задач controller+native исправлено29ed8764aa6fa98cf7d05e8334377348d4ca7b9a. Неудачные prelaunch A1 сохранены отдельно; новые A2 не меняют научную задачу. Цель всего плана остаётся активной; полностью принят только этап0, этапы1–12 частичны. Ни этот отчёт, ни диагностические проверки не завершают исходный план.
+
 Реальные N4 эксперименты уже выполняются. Надёжная классификация современными остановленными моделями пока не подтверждена. Полностью завершённого научного сравнения всех моделей/режимов исходного плана ещё нет.
 
 [Единая карта этапов, принятых результатов и текущих handles](ImplementationStatus.ru.md) — источник текущего состояния. [Все прежние оперативные записи сохранены без изменения исходных байтов](ExperimentReadiness-History-through-20261113-before-publication-train.ru.md); их статусы работающих заданий относятся к своим снимкам.

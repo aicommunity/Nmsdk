@@ -1,0 +1,15 @@
+{
+  "arguments": [
+    "-B",
+    "-m",
+    "Scripts.StructTrain.TimeLearner.owned_python_job",
+    "_worker",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-shared-bank-rs-m40-a1/request.json"
+  ],
+  "working_directory": "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-science-a2",
+  "maximum_wall_seconds": 7200,
+  "cancel_file": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-shared-bank-rs-m40-a1/process/cancel.request",
+  "memory_bytes": 8589934592,
+  "tasks": 256,
+  "cooperative_capture": false
+}
