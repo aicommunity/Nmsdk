@@ -15,7 +15,9 @@
 
 ## Что выполняется сейчас
 
-1. [Внешний DATA audit нового cold Classic N4/N1](ValidationPlans/M40PublicationReceiptBudget16TrainA1-20261113/NATIVE_COMPLETED.ru.md). Сам native Console completed/exit0 за2070.92s в прежнем2100s лимите; state/summary/execution записаны. Training=budget_exhausted, certificate=null, L22,1,1,1;58 probes/28 edits. Полный внешний Python cohort ещё не принят. Не запускать новый Train автоматически.
+Новый cold Classic N4/N1 полностью завершён: native2070.92s и внешний CLI/DATA audit3070.16s,1/1 passed, все группы закрыты/lease released. [Полный исход](ValidationPlans/M40PublicationReceiptBudget16TrainA1-20261113/RESULT.ru.md), [1281-member compact primary46.04MB](ValidationPlans/M40PublicationReceiptBudget16PrimaryA1-20261113/RESULT.ru.md). Training=budget_exhausted, сертификата нет. Конечный L22 не совпадает с15 valid candidate records L1..14; это остановленный снимок, не обученный input.
+
+Следующая адресная работа — [production анализ search history](TrainingSearchHistoryReport.ru.md): отдельные candidates/rejections/domains/terminal graph,7 unit+1 actual CLI check на исходных данных. Новый код ещё требует server runtime приёмки. Новых Train, изменения budgets/tolerances и возобновления SeriesD нет.
 
 [Report2/2 и visual review14 originals завершены](ValidationPlans/M40Budget16DiagnosticReportA1-20261113/RESULT.ru.md). [Exact original-model export/restore/rescore10/10](ValidationPlans/M40DeclaredDiagnosticPrimaryA1-20261113/RESULT.ru.md) также принят:28 members/320.08MB в19.58MB XZ. [Независимый Elder compact replay1/1 принят](ValidationPlans/ElderBudget16CompactReplayA1-20261113/RESULT.ru.md): весь original readback совпал без original M40 directories. Эти результаты относятся к прежнему frozen model89681..., а не новому native model3b8a160f... из пункта1.
 
@@ -23,7 +25,7 @@
 
 ## Что отделяет нас от итогового научного сравнения
 
-- Завершить внешний audit нового Train и проверить полную цепочку execution/model/summary/primary. При отрицательном outcome разбирать конкретные измерения и решения поиска; не повышать бюджеты автоматически и не выдавать остановленное обучение за Exact.
+- Разобрать проверенную историю поиска нового Train и подтвердить production анализатор; затем поставить только обоснованную конечную L/Rs диагностику. Не повышать бюджеты автоматически и не выдавать остановленное обучение за Exact.
 - Читаемый отчёт предыдущего budget16 состояния опубликован; independent compact replay принят; далее анализировать новый Train по его собственным данным и outcome.
 - Выполнить оставшиеся legacy/V2 A/B и обязательную матрицу моделей, нормализации, физики, частот, bounds, reset/inhibition/PostTune/calibration. Для независимого Test сначала фиксируются модель и подтверждённый реальным прогоном порог. Same-Matrix отмечается отдельно.
 - Проверить target в каждой позиции, order/ITI и reset-per-trial/continuous отдельно. Partial observations и all-silent7/8 не являются успешной детекцией. Не требовать8/8 как условия завершения рефакторинга; валидные отрицательные и unresolved результаты входят в карту.
