@@ -1,0 +1,93 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "14d7ca96c01bce923b7fb9285e1e892f887af0833aa0035a4fb693d173ab30b3",
+      "unit": "timelearner-fb84c39d-ebf1-4217-98ff-8e0c2747cba2.service",
+      "invocation_id": "17788caf1f654b9098c54063a4787773",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fb84c39d-ebf1-4217-98ff-8e0c2747cba2.service",
+      "initial_main_pid": 1495176,
+      "initial_start_ticks": "366104070",
+      "sha256": "6bfc49fe782b4c13f8b2dabab4caff64d09faa9298831df30b5467f497b3bdbc"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "2147483648",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt fb84c39d-ebf1-4217-98ff-8e0c2747cba2",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "17788caf1f654b9098c54063a4787773"
+    },
+    "memory_max": 2147483648,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "9d9a8623-40b1-47c3-9d21-f478b27425b6",
+      "job_id": "s07-n1-local-turn-branch-train-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 1495176,
+        "start_ticks": "366104070",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-local-turn-branch-train-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-local-turn-branch-train-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-branch-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnBranchTrainA1-20261113",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-branch-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnBranchTrainA1-20261113"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-branch-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnBranchTrainA1-20261113/fixture",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-branch-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnBranchTrainA1-20261113/fixture"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-branch-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnBranchTrainA1-20261113/prepared",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-branch-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnBranchTrainA1-20261113/prepared"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-local-turn-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-local-turn-sdk-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-shared-bank-primary-replay-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-shared-bank-primary-replay-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794585843.224215,
+      "deadline": 1794585973.2680619,
+      "updated": 1794585861.99995,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}
