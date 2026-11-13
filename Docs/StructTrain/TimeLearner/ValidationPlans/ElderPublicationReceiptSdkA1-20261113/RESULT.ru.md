@@ -5,3 +5,5 @@ SourceRoot92ad93cdf453967ac29108a9bbef5fd3905da59d / Pulse dfb9a98244f91b4f4029d
 Это независимая проверка того же shared publication receipt, принятая и на M40:4 Classic/Branch completed/stopped cases, independent full replay equality для base1/base2, отказ подмене package/descriptor и foreign ledger, прежние preflight/before-source semantics. Порог/physics/search не менялись. Большой N4 Train после исправления не повторялся; его performance и исходный план0–12 не приняты этим7-case scope. Полный Elder primary corpus ещё следует сохранить; receipts не заменяют модели и CSV.
 
 A1 capacity refusal произошёл до native controller и сохранён в CAPACITY-A2.ru.md. A2 использовал1.25GiB measured disk reservation, сохранив2GiB free floor и8GiB memory limits. Удалений не было.
+
+Полный original corpus позднее сохранён: [498 logical members/1.83MB XZ](../ElderPublicationReceipt7PrimaryA1-20261113/RESULT.ru.md). Это устраняет отсутствие primary выше; независимый semantic corpus replay остаётся открытым.

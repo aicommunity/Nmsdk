@@ -18,3 +18,7 @@ Console записал native/model.json282794133B. Прежний compact matri
 ## Серверная проверка schema2
 
 M40: 34/34 passed, job `s02-content-reference-primary-m40-a1`, Tool `c97ff92cc0b7cb11e714133e6342d16a35aaf01c`; исходные данные неизменны, процессы закрыты, lease released. Фактические две копии classic.qz: schema1 76248036 B → schema2 38160432 B, byte-exact независимое восстановление. [Отчёт и raw receipts](ValidationPlans/M40ContentReferencePrimaryA1-20261113/RESULT.ru.md). Более поздний explicit 384MiB member budget пока не проверен этим запуском.
+
+## Проверка большого original model завершена
+
+[Actual export/restore/rescore10/10 на M40](ValidationPlans/M40DeclaredDiagnosticPrimaryA1-20261113/RESULT.ru.md) принят:28 logical members/320078865B →19575080B XZ, original model282794133B и все8 observations сохранены без перекодирования, исходные метрики совпали. Default256MiB не изменён; explicit384MiB ограничен отдельным вызовом. Whole group closed/lease released. Это последующее подтверждение, уточняющее раннее «runtime проверка открыта» выше; независимый перенос на Elder пока отдельный pending gate.
