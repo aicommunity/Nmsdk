@@ -421,11 +421,16 @@ def audit_execution(directory):
                     source_import['training_started'] is False, 'characterization_source_import_changed')
         control = load(directory/'controller-before.json');_digest(control)
         summary = control['summary']
-        expected_history = [] if profiled else source['observed_packets']
+        composite_controller = not profiled and source['schema_version'] in (5, 6, 7)
+        expected_history = [] if profiled or composite_controller else source['observed_packets']
         require(control == load(directory/'controller-after.json') and control['kind'] == 'native_probe_controller_snapshot' and
-                control['schema_version'] == 1 and summary['state'] == 'idle' and summary['certificate'] is None and
+                type(control['schema_version']) is int and control['schema_version'] == (2 if composite_controller else 1) and
+                summary['state'] == 'idle' and summary['certificate'] is None and
                 summary['reference_probes'] == 0 and control['observed_packet_count'] == len(expected_history) and
                 control['observed_packets_sha256'] == sha(expected_history), 'characterization_imported_controller_changed')
+        if composite_controller:
+            from .probe_controller_readback import audit_idle_composite_controller
+            audit_idle_composite_controller(summary, source)
         require(initial['parameters'] == (expected_import_parameters(job) if applied else source['trained_inputs']),
                 'characterization_import_parameters_changed')
         if not profiled:

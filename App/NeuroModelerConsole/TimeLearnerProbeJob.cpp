@@ -188,9 +188,43 @@ template<class Owner> int Execute(const Job& j,const QString& output)
                 "profile_probe_lifecycle_changed_dataset");
         }
         const auto controlSnapshot=[&]() {
-            QJsonArray packets;for(const auto& p:owner->NativeTrainingController().ObservedPackets())packets.append(EncodeNativeProbeEvidence(p));
-            return Signed({{"kind","native_probe_controller_snapshot"},{"schema_version",1},
-                {"summary",EncodeNativeTrainingState(owner->NativeTrainingController(),restoredIdentity["sha256"].toString().toStdString(),built.effective)},
+            const auto& service=owner->NativeTrainingController();
+            QJsonArray packets;for(const auto& p:service.ObservedPackets())packets.append(EncodeNativeProbeEvidence(p));
+            const bool composite=service.Plan().protocol.schemaVersion>=4;
+            QJsonObject summary;
+            if(composite) {
+                // A normal Reset leaves an idle controller with retained DATA.
+                // It is not an owned finished training/export boundary. Never
+                // relax that boundary's serializer to inspect a frozen probe.
+                QJsonArray records,recoveries,refs,referenceGroups,finalGroups;
+                for(const auto& r:service.CompositeMeasurements())records.append(QJsonObject{
+                    {"group_id",QString::fromStdString(r.groupId)},{"attempt_id",QString::fromStdString(r.attemptId)},
+                    {"consumed",r.consumed},{"semantic_proof_id",QString::fromStdString(r.semanticProofId)}});
+                for(const auto& r:service.CandidateWindowRecoveryDeliveries())recoveries.append(QJsonObject{
+                    {"event",EncodeCandidateWindowRecoveryEvidence(r.event)},{"runtime_plan",r.runtimePlan}});
+                if(service.References())for(const auto& r:service.References()->Inputs())refs.append(QJsonObject{
+                    {"input_id",QString::fromStdString(r.id)},{"raw_potential",r.rawPotential},
+                    {"group_id",QString::fromStdString(r.measurementGroupId)},
+                    {"semantic_proof_id",QString::fromStdString(r.semanticProofId)}});
+                for(const auto& id:service.CompositeReferenceGroupIds())referenceGroups.append(QString::fromStdString(id));
+                for(const auto& id:service.CompositeFinalGroupIds())finalGroups.append(QString::fromStdString(id));
+                summary={{"kind","native_probe_idle_controller_readback"},{"schema_version",1},
+                    {"state",NativeTrainingStateName(service.State())},
+                    {"certificate",service.Certificate()?QJsonValue(EncodeTrainingCertificate(*service.Certificate())):QJsonValue(QJsonValue::Null)},
+                    {"reference_probes",double(service.IssuedReferenceProbes())},{"search_present",bool(service.Search())},
+                    {"session_attempt",double(service.SessionAttempt())},{"model_epoch",double(service.ModelEpoch())},
+                    {"protocol_sha256",NmsdkTools::CanonicalModelDataSha256(EncodeVerificationProtocol(service.Plan().protocol))},
+                    {"source_binding_sha256",NmsdkTools::CanonicalModelDataSha256(service.CompositeSourceBinding())},
+                    {"initial_configuration_sha256",NmsdkTools::CanonicalModelDataSha256(service.CompositeInitialConfiguration())},
+                    {"record_signatures_sha256",NmsdkTools::CanonicalModelDataSha256(records)},
+                    {"recovery_deliveries_sha256",NmsdkTools::CanonicalModelDataSha256(recoveries)},
+                    {"recovery_delivery_log_intact",service.CandidateWindowRecoveryDeliveryLogIntact()},
+                    {"reference_rows",refs},{"reference_group_ids",referenceGroups},{"final_group_ids",finalGroups},
+                    {"groups",double(service.CompositeGroups())},{"native_probes",double(service.CompositeNativeProbes())},
+                    {"sampled_frames",double(service.CompositeSampledFrames())},{"primary_bytes",double(service.CompositePrimaryBytes())}};
+            } else summary=EncodeNativeTrainingState(service,restoredIdentity["sha256"].toString().toStdString(),built.effective);
+            return Signed({{"kind","native_probe_controller_snapshot"},{"schema_version",composite?2:1},
+                {"summary",summary},
                 {"observed_packet_count",double(packets.size())},{"observed_packets_sha256",NmsdkTools::CanonicalModelDataSha256(packets)}});
         };
         const auto controlBaseline=controlSnapshot();
@@ -204,7 +238,9 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         artifacts.append(Write(output,"job.json",j.document));
         artifacts.append(Write(output,"owner-configuration.json",EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(owner->ControllerConfiguration.GetData()))));
         if(imported) {
-            Require(controlBaseline["observed_packets_sha256"]==QJsonValue(NmsdkTools::CanonicalModelDataSha256(derived?QJsonValue(QJsonArray{}):j.stopped["observed_packets"])),"probe_import_history_changed");
+            const bool composite=owner->NativeTrainingController().Plan().protocol.schemaVersion>=4;
+            Require(controlBaseline["observed_packets_sha256"]==QJsonValue(NmsdkTools::CanonicalModelDataSha256(
+                derived || composite?QJsonValue(QJsonArray{}):j.stopped["observed_packets"])),"probe_import_history_changed");
             if(derived)artifacts.append(Write(output,"source-import.json",derived->record));
             else artifacts.append(Write(output,"source-import.json",Signed({{"kind","native_probe_source_import"},{"schema_version",1},
                 {"source_stopped_sha256",j.stopped["sha256"]},{"identity",restoredIdentity},{"parameters",Parameters(built.effective)},
