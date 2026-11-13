@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-coupled-train-primary-replay-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "720d89cac628a9d82f1aef8e8d1be1998928c657",
+  "limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 1073741824,
+    "maximum_output_bytes": 805306368
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-search-recovery-replay-a1",
+      "commit": "720d89cac628a9d82f1aef8e8d1be1998928c657"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/coupled-train-primary-replay-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderCoupledTrainPrimaryReplayA1-20261114/suite.json",
+      "sha256": "c34f11872d48fa3ef93a1a6d1444401f3bada8616676184562ca9ae4a181c1d4"
+    },
+    "fixtures": {
+      "TIMELEARNER_COUPLED_TRAIN_PRIMARY": "/home/user/timelearner-refactor/input-coupled-train-primary-a1/Reports/StructTrain/TimeLearner/N1CoupledBranch-20261113/primary"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 134217728,
+      "maximum_total_bytes": 134217728
+    }
+  }
+}

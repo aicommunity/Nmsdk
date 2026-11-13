@@ -1,0 +1,23 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s07-coupled-train-primary-replay-elder-a1",
+  "package_fingerprint": "4934e526948b766a056ad15db4034b537126871afac59d7a111f23ddf58fdba2",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_coupled_recovery_compact_primary.CoupledRecoveryCompactPrimaryTest.test_restored_original_train_keeps_recovery_history_and_rejects_changed_csv"
+  ],
+  "executed_tests": 1,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_COUPLED_TRAIN_PRIMARY": {
+      "path": "/home/user/timelearner-refactor/input-coupled-train-primary-a1/Reports/StructTrain/TimeLearner/N1CoupledBranch-20261113/primary",
+      "files": 2,
+      "fingerprint": "c034faa208e7483920722c55199141975c03688c4d7039c935e8999751ba39dd"
+    }
+  },
+  "scientific_verdict": null
+}
