@@ -15,6 +15,14 @@ from .probe_diagnostics import audit_recorded_wave_diagnostics, read_partial_pro
 
 def _trace(folder, stem='probe_trial_1'):
     packet, path = load(folder/(stem+'.json')), folder/(stem+'.csv')
+    if (packet.get('observation') or {}).get('schema_version') == 6:
+        from .stimulus_subset_evidence import read_console_subset_observation
+        job=load(folder/'job.json')
+        require(job['schema_version'] in (6,7) and stem in ('probe_trial_1','baseline_trial_1'),
+                'matched_subset_job_or_trace_kind')
+        observation,spec,samples,_=read_console_subset_observation(packet,path,job['model']['initial_isi'],
+            expected_trial_id=job['probe']['trial_id']+('/source-baseline' if stem=='baseline_trial_1' else ''))
+        return packet,spec,samples
     checked = audit_probe(packet, path)
     if checked['valid_observation']:
         observation = packet['observation'];spec = observation['specification']

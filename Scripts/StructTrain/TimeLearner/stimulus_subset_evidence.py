@@ -28,7 +28,35 @@ def _audit_subset(p, rows, legacy, expected_trial_id):
               'training_target_restored','scientific_training_result'}
     if p['schema_version']==2:expected|={'training_pattern_after','dataset_pattern_after','physical_input_count_after'}
     require(set(p)==expected,'unknown_stimulus_subset_wrapper_fields')
-    e=p['evidence'];o=e['observation'];s=o['specification'];q=e['requested_specification'];prepared=e['prepared']
+    result = audit_subset_observation(p['evidence'], rows, p['source_pattern'],
+                                      expected_trial_id=expected_trial_id)
+    for key in ['model_before','model_after']:
+        graph=p[key];require(graph['valid'] is True and graph['sha256']==result['model_revision'] and
+            canonical_model_sha256(graph['model'])==result['model_revision'], 'subset_effective_graph_changed')
+    restored='unknown'
+    if p['schema_version']==2:
+        for key in ['training_pattern_after','dataset_pattern_after']:
+            require(type(p[key]) is list and all(number(v)==v for v in p[key]),'invalid_subset_restoration_readback')
+        require(type(p['physical_input_count_after']) is int and
+                p['physical_input_count_after']==result['physical_input_count'] and
+                p['training_pattern_after']==p['source_pattern'] and p['dataset_pattern_after']==p['source_pattern'] and
+                p['training_target_restored'] is True, 'subset_training_pattern_not_restored')
+        restored='validated_readback'
+    return dict(result, restoration=restored)
+
+
+def audit_subset_observation(e, rows, source_pattern, *, expected_trial_id=None):
+    """Check waveform only; graph/restoration require their separate readbacks."""
+    try:
+        return _audit_subset_observation(e, rows, source_pattern, expected_trial_id)
+    except EvidenceError:
+        raise
+    except (KeyError, TypeError, ValueError, IndexError, OverflowError) as error:
+        raise EvidenceError('malformed_stimulus_subset_observation:'+str(error)) from error
+
+
+def _audit_subset_observation(e, rows, source_pattern, expected_trial_id):
+    o=e['observation'];s=o['specification'];q=e['requested_specification'];prepared=e['prepared']
     require(e['kind']=='timelearner_native_probe_evidence' and type(e['evidence_schema_version']) is int and
             e['evidence_schema_version']==2 and e['native_status']=='completed' and
             e['requires_fresh_verification'] is False and e['reasons']==[], 'subset_execution_not_complete')
@@ -54,7 +82,7 @@ def _audit_subset(p, rows, legacy, expected_trial_id):
     c=s['stimulus_subset'];require(c==q['stimulus_subset'] and set(c)=={
         'purpose','source_training_pattern_hash','physical_input_count','source_ordinals'} and
         c['purpose']=='stimulus_subset_characterization', 'unknown_subset_presentation_metadata')
-    n=count(c['physical_input_count']);indices=c['source_ordinals'];source=p['source_pattern']
+    n=count(c['physical_input_count']);indices=c['source_ordinals'];source=source_pattern
     require(n>0 and type(source) is list and len(source)==n and type(indices) is list and
             0<len(indices)<=n and all(type(i) is int and 0<=i<n for i in indices) and
             all(b>a for a,b in zip(indices,indices[1:])), 'invalid_subset_source_ordinals')
@@ -73,9 +101,6 @@ def _audit_subset(p, rows, legacy, expected_trial_id):
     revision=e['current_base_revision']
     require(type(revision) is str and len(revision)==64 and prepared['base_model_revision']==revision and
             prepared['effective_model_revision']==s['effective_model_revision'], 'subset_revision_mismatch')
-    for key in ['model_before','model_after']:
-        graph=p[key];require(graph['valid'] is True and graph['sha256']==revision and
-            canonical_model_sha256(graph['model'])==revision, 'subset_effective_graph_changed')
     routing=prepared['routing'];require(routing in ('classic_burst','branch_solo_burst'), 'unknown_subset_routing')
     channels=n if routing=='classic_burst' else 1
     require(len(s['baseline'])==channels and all(number(v)==v for v in s['baseline']), 'subset_baseline_shape_mismatch')
@@ -101,21 +126,27 @@ def _audit_subset(p, rows, legacy, expected_trial_id):
                 equal(number(event['relative_to_trial_start']),time-number(s['begin'])),
                 'subset_stimulus_not_in_actual_trace')
     require(equal(number(o['first_stimulus_time']),event_times[0]), 'subset_first_stimulus_mismatch')
-    restored='unknown'
-    if p['schema_version']==2:
-        for key in ['training_pattern_after','dataset_pattern_after']:
-            require(type(p[key]) is list and all(number(v)==v for v in p[key]),'invalid_subset_restoration_readback')
-        require(type(p['physical_input_count_after']) is int and p['physical_input_count_after']==n and
-                p['training_pattern_after']==source and p['dataset_pattern_after']==source and
-                p['training_target_restored'] is True, 'subset_training_pattern_not_restored')
-        restored='validated_readback'
     return {'kind':'native_stimulus_subset_trace_audit','schema_version':1,'run_id':s['run_id'],
             'model_revision':revision,'routing':routing,'physical_input_count':n,'channel_count':channels,
             'source_ordinals':indices,'source_pattern_hash':c['source_training_pattern_hash'],
             'presented_pattern_hash':s['pattern_hash'],'actual_stimuli':events,'frequency_hz':frequency,
-            'sample_count':len(times),'recorded_window_complete':True,'restoration':restored,
+            'sample_count':len(times),'recorded_window_complete':True,'restoration':'not_checked',
             'source_timing':'observed; paired full control required to establish retained timing invariance',
             'spike_response':'unknown','peak_assignment':'not_performed','scientific_verdict':None}
+
+
+def read_console_subset_observation(packet, trace, source_pattern, *, expected_trial_id):
+    """Lossless Console CSV header adapter; no graph/restoration attestation."""
+    with Path(trace).open(newline='', encoding='utf-8') as stream:rows=list(csv.reader(stream))
+    channels=len(source_pattern) if packet['prepared']['routing']=='classic_burst' else 1
+    require(rows and rows[0]==['time','stimulus']+['soma'+str(i) for i in range(channels)],
+            'unknown_console_subset_trace')
+    rows[0]=['native_tick_start_s','stimulus']+['raw_soma_'+str(i) for i in range(channels)]
+    quality=audit_subset_observation(packet,rows,source_pattern,expected_trial_id=expected_trial_id)
+    samples=[dict(time=number(float(r[0])),stimulus=number(float(r[1])),
+                  soma=[number(float(v)) for v in r[2:]]) for r in rows[1:]]
+    observation=packet['observation']
+    return observation,observation['specification'],samples,quality
 
 
 def read_subset(path, *, allow_draft_without_restoration=False):

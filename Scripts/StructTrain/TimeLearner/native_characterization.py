@@ -462,10 +462,15 @@ def audit_execution(directory):
                     baseline['requested_specification']['trial_id'] == job['probe']['trial_id']+'/source-baseline' and
                     baseline['prepared']['base_model_revision'] == source['model_revision'], 'characterization_edit_boundary_not_measured')
             baseline_trace = directory/'baseline_trial_1.csv'
-            base_audit = audit_probe(baseline, baseline_trace)
-            if not base_audit['valid_observation']:
-                observation, spec, _, samples, _, quality = read_partial_probe(baseline, baseline_trace)
-                audit_recorded_wave_diagnostics(observation, spec, samples, quality)
+            if subset:
+                from .stimulus_subset_evidence import read_console_subset_observation
+                read_console_subset_observation(baseline, baseline_trace, job['model']['initial_isi'],
+                    expected_trial_id=job['probe']['trial_id']+'/source-baseline')
+            else:
+                base_audit = audit_probe(baseline, baseline_trace)
+                if not base_audit['valid_observation']:
+                    observation, spec, _, samples, _, quality = read_partial_probe(baseline, baseline_trace)
+                    audit_recorded_wave_diagnostics(observation, spec, samples, quality)
     require(initial['training_started'] is False and initial['search_executed'] is False and initial['dynamics_checkpoint'] is False,
             'characterization_initial_training_claim')
     require(initial['identity'] == final['identity'] and initial['parameters'] == final['parameters'] and
