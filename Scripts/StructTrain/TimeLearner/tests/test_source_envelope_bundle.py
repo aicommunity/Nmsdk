@@ -5,6 +5,7 @@ import tempfile
 import unittest
 
 from ..native_characterization import audit_execution
+from ..native_calibration_worker import _write
 from ..native_evidence import EvidenceError, load
 from ..portable_primary import ALIAS_ADAPTER, restore_native_bundle
 from ..source_envelope_bundle import create
@@ -91,3 +92,31 @@ class SourceEnvelopeBundleRecordedTest(unittest.TestCase):
         self.assertEqual(validate_manifest(legacy),[self.root])
         bad=dict(manifest,source_envelopes=[dict(target='runs/missing.json',source='runs/missing-source.json')])
         with self.assertRaises(EvidenceError):validate_manifest(bad)
+
+
+class SourceEnvelopeProducedTest(unittest.TestCase):
+    def test_actual_manifest3_collector_package_restores_before_primary_audits(self):
+        package=Path(os.environ['TIMELEARNER_SOURCE_ENVELOPE_PRODUCED']).resolve(strict=True)
+        previous=Path(os.environ['TIMELEARNER_SOURCE_ENVELOPE_LEGACY_PACKAGE']).resolve(strict=True)
+        index=load(package/'bundle.json')
+        self.assertEqual(len(index['recipes']),18)
+        self.assertEqual(index['literal_fallbacks'],{})
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            result=restore_native_bundle(package/'bundle.json',root/'restored',compatibility=ALIAS_ADAPTER)
+            self.assertTrue(result['all_primary_bytes_verified'])
+            self.assertEqual(result['reconstructed_job_files'],18)
+            runs=root/'restored/console-six-a4/worker/tmp/native-burst-readback-small/runs'
+            cases=[]
+            for topology in ('Classic','Branch'):
+                for variant in ('replay','matched','changed'):
+                    audit=audit_execution(runs/(topology+'-'+variant)/'native')
+                    self.assertEqual(audit['execution'],'completed')
+                    self.assertTrue(audit['primary_evidence_checked'])
+                    cases.append(topology+'-'+variant)
+            _write(Path(os.environ['TMPDIR'])/'source-envelope-produced-proof.json',
+                dict(kind='source_envelope_produced_package_restore',schema_version=1,
+                    restored=result,primary_audits=cases,original_members=len(index['members']),
+                    schema3_package_bytes=sum(p.stat().st_size for p in package.rglob('*') if p.is_file()),
+                    legacy_package_bytes=sum(p.stat().st_size for p in previous.rglob('*') if p.is_file()),
+                    original_manifests_rewritten=False,native_execution_attested=False,scientific_verdict=None))
