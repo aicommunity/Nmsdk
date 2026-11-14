@@ -1,6 +1,6 @@
 # N0: локальная нормализация следующей временно допустимой геометрии
 
-Статус: ограничение текущего production-порядка подтверждено кодом и [завершённым Branch N0](ValidationPlans/M40StockN0BranchTrainA1-20261114/RESULT.ru.md); исправление ещё не реализовано/не проверено. Исходный native SDK root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8; локальный Pulse04a10aa94da7adb887ccabd73a7b7ea2d8dd7600 добавлял документы и сохраняет этот алгоритм. Старый runtime не изменяется.
+Статус: ограничение текущего production-порядка подтверждено кодом и [завершённым Branch N0](ValidationPlans/M40StockN0BranchTrainA1-20261114/RESULT.ru.md); кандидат исправления реализован в Pulse58c6e6d51c749a13a79498a681e14ea2fe353ed7, серверная проверка ещё не выполнена. Исходный native SDK root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8; локальный Pulse04a10aa94da7adb887ccabd73a7b7ea2d8dd7600 добавлял документы и сохраняет этот алгоритм. Старый runtime не изменяется.
 
 ## Доказательство
 
@@ -45,3 +45,11 @@ BoundedTraining.cpp::Consume, после завершения повторов �
 6. Сохранить полный primary, собственные читаемые waveforms/actual inputs и сведения об итоговом actual model. Если новый бюджет снова исчерпан, зафиксировать этот исход; не повторять Train с повышенным лимитом ради положительного отчёта.
 
 Фактическая восьмипаттернная frozen-диагностика исходных N0 моделей выполняется отдельно на старом runtime и не заменяется новой реализацией. Эта корректировка не отменяет прежних наблюдений или текущего budget_exhausted и не закрывает весь этап7.
+
+## Кандидат реализации перед gate
+
+Pulse58c6e6d51c749a13a79498a681e14ea2fe353ed7 добавляет PrioritizeN0Neighbors и отдельные N0GeometryTurn в cursor. Scope совпадает по full parameters, кроме active Ns, и EquivalentTrainingCapacitance; global best/Rank не меняется. После полной группы K repeats новая timing-ready scope получает allowance=min(12,remaining candidates,remaining probes/2/K,remaining edits,max(4,remaining candidates/4)). Только локальное улучшение может продолжить очередь, уникальное enqueue расходует allowance, повторный визит его не пополняет. Whole-domain fallback и полная deduplication сохранены.
+
+Один и тот же новый6-case production-session корпус зафиксирован до правки в root9d9dd4f206a7dacb850b5a7a8bfc7175a29e93ce с Pulse04a10aa94da7adb887ccabd73a7b7ea2d8dd7600. Новый test файл Test_PulseLib_N0Geometry.cpp использует общий fixture header; тела прежних fixture functions и75 явных старых TEST declarations побайтово/по inventory сохранены. Kernel-runner теперь принимает regular Git headers в test_paths и компилирует только cpp. Это зависимость реальных общих fixtures, не извлечение production-функции в тестовую копию.
+
+Требуется фактический old/new kernel run на обоих workers с одинаковыми тестами, сохранёнными failure IDs старого варианта и полным успешным candidate. Затем native SDK/real-component regressions и объявленный same-budget physical A/B. Ни новый C++ runtime, ни новые научные результаты этой правки пока не получены; текущий frozen8 использует старый SDK.
