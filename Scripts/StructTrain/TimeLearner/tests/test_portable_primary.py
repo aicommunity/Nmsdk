@@ -6,6 +6,7 @@ import hashlib
 import io
 import json
 from pathlib import Path
+from ..external_archive import locate
 import tarfile
 import tempfile
 import unittest
@@ -50,7 +51,7 @@ class PortablePrimaryTest(unittest.TestCase):
         self.provenance = json.loads((fixture/'source.json').read_text())
         self.files = {}
         for row in self.provenance['members']:
-            compressed = (fixture/row['path']).read_bytes()
+            compressed = locate(fixture/row['path']).read_bytes()
             self.assertEqual(hashlib.sha256(compressed).hexdigest(), row['gzip_sha256'])
             raw = gzip.decompress(compressed)
             self.assertEqual(len(raw), row['raw_bytes'])

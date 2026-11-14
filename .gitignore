@@ -155,3 +155,7 @@ Bin/**/settings.qt
 /Reports/StructTrain/TimeLearner/**/*.bin
 /Reports/StructTrain/TimeLearner/**/*.qz
 /.structtrain-cache/
+
+# Explicitly restored native regression fixtures are local archive caches.
+/Tests/Integration/Data/NativeWindowPackage6Classic/learned-state.json.qz
+/Tests/Integration/Data/NativeWindowPackage6BranchC0/learned-state.json.qz

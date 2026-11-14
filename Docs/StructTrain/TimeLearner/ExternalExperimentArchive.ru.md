@@ -105,6 +105,24 @@ SHA256 проверяются до распаковки. Отсутствующ�
 пересылки между workers. Код и настройки по-прежнему синхронизируются через Git.
 Выбор и подключение такого транспорта не выполняются скрыто при import.
 
+## Регрессионные fixtures
+
+Python fixtures читают исходные проверенные байты через `locate`; исходные
+source/member hashes сохраняются. Для native LoadHistory-тестов, которым нужен
+файл в source tree, перед запуском явно восстановить два кэша:
+
+```text
+python3 -m Scripts.StructTrain.TimeLearner.external_archive materialize Tests/Integration/Data/NativeWindowPackage6Classic/learned-state.json.qz.archive.json Tests/Integration/Data/NativeWindowPackage6Classic/learned-state.json.qz
+python3 -m Scripts.StructTrain.TimeLearner.external_archive materialize Tests/Integration/Data/NativeWindowPackage6BranchC0/learned-state.json.qz.archive.json Tests/Integration/Data/NativeWindowPackage6BranchC0/learned-state.json.qz
+```
+
+Команды выполняются после замены истории, когда sidecars уже существуют.
+Оригинальные файлы входят в ignore как кэши. Отсутствие архива означает отказ
+подготовки теста; пропуск теста или подстановка другого learned state запрещены.
+Приватные aliases веток/stash хранятся в common Git metadata, в
+`info/structtrain-root-revision-aliases.json`; linked worktrees используют
+одну таблицу. Они не публикуются вместе с публичной картой commits.
+
 ## Обязательная последовательность замены истории
 
 1. Инвентаризировать origin, локальную машину, Elder `.11`, M40 `.17`, Windows

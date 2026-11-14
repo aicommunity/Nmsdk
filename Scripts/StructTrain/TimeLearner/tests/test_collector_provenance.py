@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from ..external_archive import locate
 import subprocess
 import sys
 import tarfile
@@ -35,7 +36,7 @@ def signed(value):
 class CollectorProvenanceTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.fixture = json.loads(gzip.decompress((FIXTURE/"actual-metadata.json.gz").read_bytes()))
+        cls.fixture = json.loads(gzip.decompress(locate(FIXTURE/"actual-metadata.json.gz").read_bytes()))
         cls.contents = {}
         for name, row in cls.fixture["members"].items():
             raw = base64.b64decode(row["base64"], validate=True)
@@ -45,7 +46,7 @@ class CollectorProvenanceTest(unittest.TestCase):
         cls.gitroot = Path(cls.git_tmp.name)/"source"
         cls.gitroot.mkdir()
         cls.git("init", "--quiet")
-        pack = (FIXTURE/"source-git-objects.pack").read_bytes()
+        pack = locate(FIXTURE/"source-git-objects.pack").read_bytes()
         row = cls.fixture["source_git_pack"]
         assert len(pack) == row["bytes"] and hashlib.sha256(pack).hexdigest() == row["sha256"]
         cls.git("index-pack", "--stdin", "--promisor", data=pack)

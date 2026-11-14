@@ -4,6 +4,7 @@ import gzip
 import hashlib
 import json
 from pathlib import Path
+from ..external_archive import locate
 import tempfile
 import unittest
 
@@ -21,7 +22,7 @@ class PipelineConditionTest(unittest.TestCase):
         source = json.loads((folder/"source.json").read_text())
         cls.records = {}
         for row in source["members"]:
-            compressed = (folder/row["path"]).read_bytes()
+            compressed = locate(folder/row["path"]).read_bytes()
             if hashlib.sha256(compressed).hexdigest() != row["gzip_sha256"]:
                 raise RuntimeError("fixture compressed primary changed")
             raw = gzip.decompress(compressed)

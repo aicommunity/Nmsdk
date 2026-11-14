@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from ..external_archive import locate
 import subprocess
 import sys
 import tempfile
@@ -27,12 +28,12 @@ CPP = "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp"
 class NativePreparationTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.fixture = json.loads(gzip.decompress((FIXTURE/"actual-metadata.json.gz").read_bytes()))
+        cls.fixture = json.loads(gzip.decompress(locate(FIXTURE/"actual-metadata.json.gz").read_bytes()))
         cls.tmp = tempfile.TemporaryDirectory(prefix="native-preparation-git-")
         cls.root = Path(cls.tmp.name)/"source"
         cls.root.mkdir()
         cls.git("init", "--quiet")
-        raw = (FIXTURE/"source-git-objects.pack").read_bytes()
+        raw = locate(FIXTURE/"source-git-objects.pack").read_bytes()
         assert len(raw) == cls.fixture["pack"]["bytes"]
         assert hashlib.sha256(raw).hexdigest() == cls.fixture["pack"]["sha256"]
         cls.git("index-pack", "--stdin", "--promisor", data=raw)
