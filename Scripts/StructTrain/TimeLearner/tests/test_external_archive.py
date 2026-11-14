@@ -1,6 +1,7 @@
 """Exercise production archive I/O, collision handling and tamper rejection."""
 import json
 import gzip
+import os
 from pathlib import Path
 import subprocess
 import tempfile
@@ -55,6 +56,29 @@ class ExternalArchiveTest(unittest.TestCase):
         sidecar.write_text(json.dumps(record)); self.source.unlink()
         self.assertEqual(archive.locate(self.source, self.root).read_bytes(), b'\x00actual archived bytes\xff'*100)
         self.assertFalse(self.source.exists())
+
+    @unittest.skipUnless(os.name == 'nt', 'Windows extended path handling')
+    def test_long_historical_reference_and_native_cache_roundtrip(self):
+        record = archive.store(self.source, self.root)
+        parent = Path(self.temp.name)/('directory-'+100*'a')/('directory-'+100*'b')
+        original = parent/'native-state.tar.xz'
+        self.assertGreater(len(str(original)), 260)
+        prefix = chr(92)*2+'?'+chr(92)
+        def native(path):
+            return Path(prefix+str(path.absolute()))
+        sidecar = original.with_name(original.name+'.archive.json')
+        native(parent).mkdir(parents=True)
+        try:
+            native(sidecar).write_text(json.dumps(record))
+            self.assertEqual(archive.locate(original, self.root).read_bytes(), self.source.read_bytes())
+            self.assertEqual(archive.materialize(record, original, self.root).read_bytes(), self.source.read_bytes())
+            self.assertEqual(archive.store(original, self.root), record)
+            self.assertEqual(archive.locate(original, self.root).read_bytes(), self.source.read_bytes())
+        finally:
+            native(sidecar).unlink(missing_ok=True)
+            native(original).unlink(missing_ok=True)
+            native(parent).rmdir()
+            native(parent.parent).rmdir()
 
     def test_source_change_during_store_does_not_publish_object(self):
         with patch.object(archive, '_sha', return_value='0'*64):
