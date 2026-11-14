@@ -13,6 +13,8 @@ MAX_TOTAL_BYTES = 64*1024**3
 
 
 def _record(path):
+    from .external_archive import locate
+    path = locate(path)
     return dict(bytes=path.stat().st_size, sha256=portable_primary._sha(path))
 
 
@@ -91,7 +93,9 @@ def create(sources, rows, output, *, maximum_total_bytes, dictionary_bytes=32*10
 
 def restore(bundle_path, output, *, compatibility=None):
     """Restore all original bytes before any production artifact audit."""
-    bundle_path=Path(bundle_path).resolve(strict=True);package=bundle_path.parent
+    bundle_path=Path(bundle_path)
+    bundle_path=bundle_path.resolve(strict=True) if bundle_path.is_file() else bundle_path.absolute()
+    package=bundle_path.parent
     index=load(bundle_path);_digest(index)
     require(set(index) == {'kind','schema_version','members','recipes','literal_fallbacks','literals_bundle',
         'maximum_total_bytes','expanded_bytes','native_execution_attested','scientific_verdict','sha256'} and
@@ -116,10 +120,8 @@ def restore(bundle_path, output, *, compatibility=None):
         portable_primary._record(row['record']);expected.add(row['path'])
         require(not (package/row['path']).is_symlink() and _record(package/row['path']) == row['record'],
                 'envelope_bundle_recipe_bytes_changed')
-    actual=set()
-    for p in package.rglob('*'):
-        require(not p.is_symlink(), 'envelope_bundle_package_symlink')
-        if p.is_file():actual.add(p.relative_to(package).as_posix())
+    from .external_archive import logical_file_names
+    actual=logical_file_names(package)
     require(actual == expected, 'envelope_bundle_package_namespace_changed')
     literal=index['literals_bundle']
     require(type(literal) is dict and set(literal) == {'path','record'} and literal['path'] == 'literals/bundle.json',

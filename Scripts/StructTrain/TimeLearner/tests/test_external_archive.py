@@ -1,5 +1,6 @@
 """Exercise production archive I/O, collision handling and tamper rejection."""
 import json
+import gzip
 from pathlib import Path
 import subprocess
 import tempfile
@@ -69,11 +70,32 @@ class ExternalArchiveTest(unittest.TestCase):
         record = archive.store(payload, self.root)
         payload.with_name(payload.name+'.archive.json').write_text(json.dumps(record))
         payload.unlink()
+        index = folder/'bundle.json'; index_record = archive.store(index, self.root)
+        index.with_name(index.name+'.archive.json').write_text(json.dumps(index_record)); index.unlink()
         output = Path(self.temp.name)/'restored'
         with patch.dict('os.environ', {archive.ROOT_ENV: str(self.root)}):
             restore_native_bundle(folder/'bundle.json', output)
         self.assertEqual((output/'signals.csv').read_bytes(), self.source.read_bytes())
         self.assertFalse(payload.exists())
+
+    def test_json_reader_keeps_compression_and_integer_precision(self):
+        from ..native_evidence import load
+        path = Path(self.temp.name)/'metadata.json.gz'
+        path.write_bytes(gzip.compress(b'{"timestamp_ns":1794650123456789123}\n'))
+        reference = archive.store(path, self.root)
+        path.with_name(path.name+'.archive.json').write_text(json.dumps(reference)); path.unlink()
+        with patch.dict('os.environ', {archive.ROOT_ENV: str(self.root)}):
+            self.assertEqual(load(path), {'timestamp_ns': 1794650123456789123})
+
+    def test_materialization_is_explicit_and_never_overwrites_different_bytes(self):
+        record = archive.store(self.source, self.root)
+        cache = Path(self.temp.name)/'cache'/'native-state.bin'
+        archive.materialize(record, cache, self.root)
+        self.assertEqual(archive.materialize(record, cache, self.root).read_bytes(), self.source.read_bytes())
+        cache.write_bytes(b'user modification')
+        with self.assertRaisesRegex(EvidenceError, 'archive_cache_collision'):
+            archive.materialize(record, cache, self.root)
+        self.assertEqual(cache.read_bytes(), b'user modification')
 
     def test_historical_reader_composes_rewrites_and_preserves_exact_bytes(self):
         from ..history import read_bytes, resolve_revision

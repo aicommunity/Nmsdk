@@ -179,7 +179,8 @@ def _alias_plan(root, members):
 
 def restore_native_bundle(bundle_path, output, *, compatibility=None):
     require(compatibility in (None, ALIAS_ADAPTER), "unknown_bundle_restoration_adapter")
-    bundle_path = Path(bundle_path).resolve(strict=True)
+    bundle_path = Path(bundle_path)
+    bundle_path = bundle_path.resolve(strict=True) if bundle_path.is_file() else bundle_path.absolute()
     bundle = load(bundle_path)
     if bundle.get('kind') == 'timelearner_source_enveloped_primary':
         from .source_envelope_bundle import restore

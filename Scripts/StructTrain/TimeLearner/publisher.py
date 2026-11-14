@@ -14,6 +14,8 @@ from urllib.parse import urlsplit
 
 from .native_evidence import EvidenceError, require
 from .publication_lock import hold as hold_publication_lock, recover as recover_lock, git_lock_arguments
+from .history_guard import (MAX_GIT_EXPERIMENT_BYTES, EXTERNAL_RESULT_SUFFIXES,
+                            artifact_policy, check_history)
 
 
 LOOSE_REPORT_SCRIPT_SUFFIXES = frozenset({
@@ -22,33 +24,11 @@ LOOSE_REPORT_SCRIPT_SUFFIXES = frozenset({
     '.tcl', '.ipynb', '.vbs', '.wsf', '.command', '.c', '.cmake',
 })
 
-MAX_GIT_EXPERIMENT_BYTES = 1024**2
-EXTERNAL_RESULT_SUFFIXES = frozenset({
-    '.xz', '.gz', '.bz2', '.zip', '.7z', '.tar', '.zst', '.pack', '.bundle',
-    '.bin', '.qz', '.npy', '.npz', '.h5', '.hdf5', '.pkl', '.pickle',
-})
-
-
-def _experiment_artifact(name):
-    folded = name.casefold()
-    return any(folded.startswith(prefix) for prefix in (
-        'reports/structtrain/timelearner/', 'docs/structtrain/timelearner/',
-        'docs/audit/timelearner-', 'scripts/structtrain/timelearner/tests/fixtures/',
-        'tests/integration/data/native'))
-
-
 def _external_result_policy(name, size, header=b''):
-    if not _experiment_artifact(name):
-        return
-    require(size <= MAX_GIT_EXPERIMENT_BYTES, 'large_experiment_artifact_requires_archive:'+name)
-    require(PurePosixPath(name).suffix.casefold() not in EXTERNAL_RESULT_SUFFIXES,
-            'binary_experiment_artifact_requires_archive:'+name)
-    if _report_artifact(name):
-        if PurePosixPath(name).suffix.casefold() in {'.png', '.svg', '.pdf'}:
-            require('selected' in [p.casefold() for p in PurePosixPath(name).parts[3:-1]],
-                    'full_report_figure_requires_archive:'+name)
-        require(b'\0' not in header or PurePosixPath(name).suffix.casefold() in {'.png', '.pdf'},
-                'binary_experiment_artifact_requires_archive:'+name)
+    try:
+        artifact_policy(name, size, header)
+    except ValueError as error:
+        raise EvidenceError(str(error)) from error
 
 
 def verify_experiment_tree(directory, commit):
@@ -381,6 +361,10 @@ def publication_plan(root: Path, specification, *, enforce_new_artifact_policy=F
     if enforce_new_artifact_policy:
         for directory, record in ordered:
             verify_experiment_tree(directory, record['commit'])
+            try:
+                check_history(directory, record['commit'])
+            except ValueError as error:
+                raise EvidenceError(str(error)) from error
     return ordered
 
 

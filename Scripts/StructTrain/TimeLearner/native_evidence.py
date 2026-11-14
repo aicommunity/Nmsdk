@@ -82,7 +82,11 @@ def parse_json_bytes(raw: bytes) -> Any:
 
 def load_json(path: Path) -> Any:
     """Strict JSON value reader, including runtime mapping arrays."""
-    raw = path.read_bytes()
+    physical = path
+    if not path.is_file() and path.with_name(path.name+'.archive.json').is_file():
+        from .external_archive import locate
+        physical = locate(path)
+    raw = physical.read_bytes()
     if path.suffix == ".gz":
         try:
             raw = gzip.decompress(raw)

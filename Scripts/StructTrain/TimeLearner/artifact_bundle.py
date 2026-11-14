@@ -326,7 +326,8 @@ def _read_archive(bundle, manifest, output=None, maximum_bytes=8*1024**3):
         expected[name] = entry
     require(sum(e["bytes"] for e in entries) <= maximum_bytes, "primary_bundle_exceeds_extraction_budget")
     seen = set()
-    with gzip.open(bundle/"primary.tar.gz", "rb") as zipped:
+    from .external_archive import locate
+    with gzip.open(locate(bundle/"primary.tar.gz"), "rb") as zipped:
         with tarfile.open(fileobj=zipped, mode="r:") as tar:
             for member in tar:
                 name = _name(member.name)
@@ -358,11 +359,13 @@ def verify_bundle(bundle, maximum_bytes=8*1024**3):
             and manifest["schema_version"] == 1 and manifest["scientific_verdict"] is None
             and manifest["global_visual_acceptance"] is False, "unknown_primary_artifact_bundle")
     archive = manifest["archive"]
+    from .external_archive import locate, logical_file_names
+    primary = locate(root/'primary.tar.gz')
     require(type(archive) is dict and set(archive) == {"file", "bytes", "sha256"}
             and archive["file"] == "primary.tar.gz" and type(archive["bytes"]) is int and archive["bytes"] > 0
             and type(archive["sha256"]) is str and re.fullmatch("[0-9a-f]{64}", archive["sha256"]) is not None
             and not (root/archive["file"]).is_symlink()
-            and (root/archive["file"]).stat().st_size == archive["bytes"] and _sha(root/archive["file"]) == archive["sha256"],
+            and primary.stat().st_size == archive["bytes"] and _sha(primary) == archive["sha256"],
             "primary_archive_checksum_mismatch")
     _read_archive(root, manifest, maximum_bytes=maximum_bytes)
     seen = set()
@@ -370,16 +373,17 @@ def verify_bundle(bundle, maximum_bytes=8*1024**3):
     for figure in manifest["selected_figures"]:
         name = _name(figure["path"])
         require(name.startswith("selected/") and name.endswith(".png") and name not in seen, "invalid_bundle_selected_figure")
-        path = root/name
-        require(path.resolve(strict=True).is_relative_to(root) and not path.is_symlink()
+        logical = root/name
+        path = locate(logical)
+        require(logical.resolve().is_relative_to(root) and not logical.is_symlink()
                 and path.stat().st_size == figure["bytes"] and _sha(path) == figure["sha256"], "selected_figure_checksum_mismatch")
         seen.add(name)
     checksums = load(root/"SHA256SUMS.json")
     require(set(checksums) == seen | {"manifest.json", "primary.tar.gz"}, "unexpected_primary_bundle_checksum_set")
-    actual_files = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file() and p != root/"SHA256SUMS.json"}
+    actual_files = logical_file_names(root)-{'SHA256SUMS.json'}
     require(actual_files == set(checksums), "unaccounted_primary_bundle_file")
     for name, expected in checksums.items():
-        path = root/_name(name)
+        path = locate(root/_name(name))
         require(not path.is_symlink() and type(expected) is str and _sha(path) == expected, "primary_bundle_file_checksum_mismatch")
     return manifest
 

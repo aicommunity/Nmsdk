@@ -12,14 +12,18 @@ def resolve_revision(repository, original, mapping_file=None):
         maps = sorted((repository/'Docs/StructTrain/TimeLearner/History').glob('RootRevisionMap-*.json'))
     else:
         maps = [mapping_file]
-    mapped=original
+    aliases = {}
     for mapping_file in maps:
         if mapping_file.is_file():
             record=load(mapping_file)
             require(record.get("kind")=="nmsdk_root_revision_aliases" and type(record.get("schema_version")) is int
                     and record["schema_version"]==1 and type(record.get("mapping")) is dict, "unknown_root_revision_map")
-            mapped=record["mapping"].get(mapped,mapped)
-            require(type(mapped) is str and re.fullmatch('[0-9a-f]{40}', mapped), 'invalid_mapped_commit_sha')
+            aliases.update(record['mapping'])
+    mapped=original; seen=set()
+    while mapped in aliases and aliases[mapped] != mapped:
+        require(mapped not in seen, 'cyclic_root_revision_map'); seen.add(mapped)
+        mapped=aliases[mapped]
+        require(type(mapped) is str and re.fullmatch('[0-9a-f]{40}', mapped), 'invalid_mapped_commit_sha')
     require(type(mapped) is str and re.fullmatch("[0-9a-f]{40}",mapped) is not None, "invalid_mapped_commit_sha")
     result=subprocess.run(["git","-C",str(repository),"cat-file","-t",mapped],text=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     require(result.returncode==0 and result.stdout.strip()=="commit", "mapped_revision_not_available")

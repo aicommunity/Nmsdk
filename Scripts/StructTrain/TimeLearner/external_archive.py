@@ -112,17 +112,65 @@ def locate(path, root=None):
     return resolve(load(sidecar), root)
 
 
+def logical_file_names(directory):
+    """Original package namespace, with explicit references instead of payloads."""
+    result = set()
+    directory = Path(directory)
+    for path in directory.rglob('*'):
+        require(not path.is_symlink(), 'archive_package_symlink')
+        if not path.is_file():
+            continue
+        name = path.relative_to(directory).as_posix()
+        if name.endswith('.archive.json'):
+            validate_reference(load(path))
+            name = name[:-len('.archive.json')]
+        result.add(name)
+    return result
+
+
+def materialize(reference, output, root=None):
+    """Create an explicit local cache file for native tools requiring a filename."""
+    source = resolve(reference, root)
+    output = Path(output).absolute()
+    require('.git' not in output.parts, 'archive_materialization_inside_git_metadata')
+    require(not any(p.is_symlink() for p in (output, *output.parents)), 'archive_cache_symlink')
+    if output.exists():
+        require(output.is_file() and output.stat().st_size == reference['bytes']
+                and _sha(output) == reference['sha256'], 'archive_cache_collision')
+        return output
+    output.parent.mkdir(parents=True, exist_ok=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(dir=output.parent, prefix='.archive-cache-', delete=False) as target:
+            temporary = Path(target.name)
+            with source.open('rb') as stream:
+                for chunk in iter(lambda: stream.read(1024**2), b''):
+                    target.write(chunk)
+            target.flush(); os.fsync(target.fileno())
+        require(temporary.stat().st_size == reference['bytes'] and _sha(temporary) == reference['sha256'],
+                'archive_cache_copy_digest')
+        os.link(temporary, output)
+        return output
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', default=None)
     actions = parser.add_subparsers(dest='action', required=True)
     actions.add_parser('store').add_argument('source', type=Path)
     actions.add_parser('verify').add_argument('reference', type=Path)
+    cache = actions.add_parser('materialize')
+    cache.add_argument('reference', type=Path); cache.add_argument('output', type=Path)
     arguments = parser.parse_args(argv)
     if arguments.action == 'store':
         result = store(arguments.source, arguments.root)
-    else:
+    elif arguments.action == 'verify':
         result = {'verified_path': str(resolve(load(arguments.reference), arguments.root))}
+    else:
+        result = {'cache_path': str(materialize(load(arguments.reference), arguments.output, arguments.root))}
     print(json.dumps(result, indent=2))
     return 0
 
