@@ -1,0 +1,28 @@
+test_actual_fixed_threshold_keeps_stopped_training_role (Scripts.StructTrain.TimeLearner.tests.test_coupled_stopped_threshold_native.CoupledStoppedThresholdNativeTest.test_actual_fixed_threshold_keeps_stopped_training_role) ... ERROR
+
+======================================================================
+ERROR: test_actual_fixed_threshold_keeps_stopped_training_role (Scripts.StructTrain.TimeLearner.tests.test_coupled_stopped_threshold_native.CoupledStoppedThresholdNativeTest.test_actual_fixed_threshold_keeps_stopped_training_role)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1/Scripts/StructTrain/TimeLearner/tests/test_coupled_stopped_threshold_native.py", line 11, in test_actual_fixed_threshold_keeps_stopped_training_role
+    result=run(Path(os.environ['TIMELEARNER_COUPLED_MATRIX_RUN'])/'run-manifest.json',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1/Scripts/StructTrain/TimeLearner/diagnostic_threshold_study.py", line 132, in run
+    result = run_job('diagnostic-evaluate', job_path, source, runtime_path, folder,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py", line 430, in run_job
+    runtime = load(Path(runtime_path).resolve(strict=True));executable = verify_runtime(runtime)
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1/Scripts/StructTrain/TimeLearner/process_runner.py", line 29, in verify_runtime
+    require(path.is_file() and path.stat().st_size == record["size"] and digest_file(path) == record["sha256"],
+  File "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: runtime_content_changed:/usr/lib/x86_64-linux-gnu/libc.so.6
+
+----------------------------------------------------------------------
+Ran 1 test in 735.684s
+
+FAILED (errors=1)

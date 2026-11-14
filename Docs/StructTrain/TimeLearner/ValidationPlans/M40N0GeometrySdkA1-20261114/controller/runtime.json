@@ -1,0 +1,118 @@
+{
+  "schema_version": 2,
+  "source_closure": {
+    "Bin": {
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "head": "58c6e6d51c749a13a79498a681e14ea2fe353ed7",
+      "recorded_gitlink": "58c6e6d51c749a13a79498a681e14ea2fe353ed7",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "status": ""
+    },
+    "root": {
+      "head": "0286ddb07064d3446dd37ce8536937d89576f345",
+      "status": ""
+    }
+  },
+  "executable": {
+    "path": "/usr/bin/python3.12",
+    "sha256": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+    "size": 8020928
+  },
+  "app_ini": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-geometry-sdk-m40-a1-controller/inputs/job.json",
+    "sha256": "1bbddea4f1eff0cf93387f74d71e3ce0812ebc8e54308389f473cd3766e723c7",
+    "size": 2416
+  },
+  "compiler": {
+    "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+    "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+    "size": 1027128
+  },
+  "resolved_libraries": [
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+      "size": 2129424
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libexpat.so.1.9.1",
+      "sha256": "286682ecbc5e59a638963b1a4e6351e65eb32fcf4bdcb9cb7569b6a61fe06a8d",
+      "size": 186624
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "sha256": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0",
+      "size": 952616
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libz.so.1.3",
+      "sha256": "f61677c7bdb7c2aa2a243ea781bfd16afcb361cede7b4ef76127a9d8eb9a5242",
+      "size": 113000
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+      "size": 236616
+    }
+  ],
+  "loaded_process_files": null,
+  "loader_environment": {},
+  "build_flags": {
+    "role": "Python owned-native controller, not a compiled C++ runtime",
+    "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+    "module_sha256": "0a875aca17489ce03adcf5f3eda41bfe36422e7ac73ac860ed8f7a00c709b2fe",
+    "job_sha256": "1bbddea4f1eff0cf93387f74d71e3ce0812ebc8e54308389f473cd3766e723c7",
+    "preparation_sha256": "1d4dce7eb622ee54308d3be9f17dd067513463f0ff0b0e430794551625752eb2"
+  },
+  "runtime_identity": {
+    "kind": "timelearner_runtime_content",
+    "schema_version": 2,
+    "executable": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+    "app_ini": "1bbddea4f1eff0cf93387f74d71e3ce0812ebc8e54308389f473cd3766e723c7",
+    "resolved_libraries": [
+      "286682ecbc5e59a638963b1a4e6351e65eb32fcf4bdcb9cb7569b6a61fe06a8d",
+      "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+      "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+      "f61677c7bdb7c2aa2a243ea781bfd16afcb361cede7b4ef76127a9d8eb9a5242",
+      "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0"
+    ],
+    "build_flags": {
+      "role": "Python owned-native controller, not a compiled C++ runtime",
+      "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+      "module_sha256": "0a875aca17489ce03adcf5f3eda41bfe36422e7ac73ac860ed8f7a00c709b2fe",
+      "job_sha256": "1bbddea4f1eff0cf93387f74d71e3ce0812ebc8e54308389f473cd3766e723c7",
+      "preparation_sha256": "1d4dce7eb622ee54308d3be9f17dd067513463f0ff0b0e430794551625752eb2"
+    },
+    "compiler": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+    "loaded_process_files": null
+  },
+  "runtime_fingerprint": "821a3bef831f5da54d5bed7341da5cb41987c8538933fb182bc044454dfef999"
+}

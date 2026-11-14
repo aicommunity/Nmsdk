@@ -31,3 +31,11 @@ Train и успех этапа11 пока не подтверждены. Даж�
 Важное ограничение интерпретации: выбор N0/N1 включает уже реализованные mode-specific порядки поиска, а не только чистый Ns/Rs actuator при искусственно одинаковой траектории. В Classic N0 третий отказ — L49, в N1 — L50; остальные отказавшие L54/52/48/45 совпали. Общий terminal logical vector и reported revision совпали, но это не доказывает эквивалентность алгоритмов или checkpoint dynamics. Для причинного разделения поиска и нормализации нужен отдельно объявленный A/B, а вывод о действии Ns нельзя делать до реально применённого Ns>1. После закрытия timed Branch собраны оба полных N0 primary:28.456MB Classic и38.090MB Branch; собственные графики ещё ожидаются. [Ограничение global-best gate и постановка правки](N0GeometryNormalizationReview-20261114.ru.md) зафиксированы отдельно.
 
 [Отдельно объявленная frozen-диагностика всех8 паттернов](StockN0FrozenEvaluation.ru.md) использует actual stopped export и исходный threshold100; Classic frozen diagnostic сейчас выполняется; Branch diagnostic ещё не запущен. Он не подменяет сходимость и не возобновляет старые серии.
+
+## Смена runtime и сравнение N0 per-geometry 14.11
+
+Новый SDK Pulse58c/root0286 прошёл99/99 declared C++ cases после одинакового six-case old/new корпуса на Elder/M40. Физическое Branch N0 before/after A2 запущено в одной post-update OS/dependency среде, исходные configuration/initial identity и научные budgets прежние. A1 остановлен до native execution: prepare-N0 правильно требует runtime своего N1 source plan.
+
+При неизменных физике/частоте/протоколе сначала применять штатный prepare-full-window к исходному cold7 с новым runtime, проверять полное равенство прежних configuration/initial identity, затем prepare-N0 к вновь созданному N1 plan. Не переписывать runtime.json старого плана и не ослаблять same-runtime guard. При смене физики/частоты/протокола старое characterization нельзя считать новой проверкой; требуются новые измерения. Каждый Train заново проходит native preflight и recaptures references.
+
+[Classic frozen report](ClassicN0FrozenScientificReport-20261114.ru.md), [Branch frozen report](BranchN0FrozenScientificReport-20261114.ru.md) относятся к прежнему SDK: оба молчат при100, не являются результатом нового поиска.

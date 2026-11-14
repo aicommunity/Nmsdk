@@ -1,0 +1,35 @@
+{
+  "backend": {
+    "manager_version": "255.4-1ubuntu8.18",
+    "cgroup_v2": true
+  },
+  "memory_available": 42920652800,
+  "disk_free": 225226657792,
+  "job_sha256": "1bbddea4f1eff0cf93387f74d71e3ce0812ebc8e54308389f473cd3766e723c7",
+  "preparation_sha256": "1d4dce7eb622ee54308d3be9f17dd067513463f0ff0b0e430794551625752eb2",
+  "configure_arguments": [
+    "cmake",
+    "-S",
+    "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1",
+    "-B",
+    "/media/user/Data/TimeLearnerRefactor/build-n0-geometry-sdk-a1",
+    "-DCMAKE_BUILD_TYPE:STRING=Release",
+    "-DNMSDK_DEPLOY_ROOT:PATH=/media/user/Data/TimeLearnerRefactor/runtime-n0-geometry-sdk-a1",
+    "-DNMSDK_RESOURCE_ROOT:PATH=/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+    "-DNMSDK_BUILD_PARALLEL_JOBS=2",
+    "-DFETCHCONTENT_SOURCE_DIR_GOOGLETEST:PATH=/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+    "-DFETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON",
+    "-DFETCHCONTENT_UPDATES_DISCONNECTED:BOOL=ON",
+    "-DCMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+    "-DCMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+    "-DCMAKE_C_FLAGS:STRING=",
+    "-DCMAKE_CXX_FLAGS:STRING=",
+    "-DCMAKE_EXE_LINKER_FLAGS:STRING=",
+    "-DCMAKE_SHARED_LINKER_FLAGS:STRING=",
+    "-DCMAKE_MODULE_LINKER_FLAGS:STRING=",
+    "-DCMAKE_STATIC_LINKER_FLAGS:STRING=",
+    "-DRDK_USE_LLM:BOOL=OFF",
+    "-DRDK_LLM_BUILD_EMBEDDED:BOOL=OFF",
+    "-DNMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS:BOOL=ON"
+  ]
+}

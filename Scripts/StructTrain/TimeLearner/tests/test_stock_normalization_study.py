@@ -31,7 +31,7 @@ class StockNormalizationStudyTest(unittest.TestCase):
             with patch.dict(os.environ, runtime['loader_environment']), \
                  contextlib.redirect_stdout(transcript), contextlib.redirect_stderr(transcript):
                 self.assertEqual(main(['stock-candidate-window-study', 'prepare-N0', str(source),
-                    '--runtime-manifest', str(runtime_path), '--output', str(prepared)]), 0)
+                    '--runtime-manifest', str(runtime_path), '--output', str(prepared)]), 0, transcript.getvalue())
                 self.assertEqual(load(prepared/'index.json')['schema_version'], 4)
                 for case in spec['cases']:
                     original = load(source/'jobs'/(case.removesuffix('-N0')+'-N1.json'))
