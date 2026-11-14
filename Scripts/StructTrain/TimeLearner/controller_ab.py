@@ -85,7 +85,7 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
         require(type(values) is list and values and all(type(v) is str for v in values) and
                 len(values) == len(set(values)), 'invalid_controller_ab_inventory')
     require(all(n.startswith('Core/TimeLearner/') and n.endswith(('.h', '.cpp')) for n in spec['production_paths']) and
-            all(n.startswith('Tests/Integration/Libraries/Test_PulseLib_') and n.endswith('.cpp') for n in spec['test_paths']),
+            all(n.startswith('Tests/Integration/Libraries/Test_PulseLib_') and n.endswith(('.h', '.cpp')) for n in spec['test_paths']),
             'unsupported_controller_ab_source_scope')
     root_repository, pulse_repository = (Path(p).resolve(strict=True) for p in (root_repository, pulse_repository))
     compiler = Path(compiler).resolve(strict=True)

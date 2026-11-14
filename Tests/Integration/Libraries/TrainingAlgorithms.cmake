@@ -5,6 +5,7 @@ set(_tl_core "${NMSDK_TRAINING_ALGORITHM_SOURCE_ROOT}/Libraries/Nmsdk-PulseLib/C
 set(_tl_tests "${NMSDK_TRAINING_ALGORITHM_SOURCE_ROOT}/Tests/Integration")
 add_executable(Test_PulseLib_TrainingAlgorithms
     "${_tl_tests}/Libraries/Test_PulseLib_BoundedTraining.cpp"
+    "${_tl_tests}/Libraries/Test_PulseLib_N0Geometry.cpp"
     "${_tl_tests}/Libraries/Test_PulseLib_MeasuredResistanceSearch.cpp"
     "${_tl_tests}/Libraries/Test_PulseLib_MeasuredLengthSearch.cpp"
     "${_tl_tests}/Libraries/Test_PulseLib_MeasuredCapacitanceSearch.cpp"
