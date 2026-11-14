@@ -60,6 +60,20 @@ class ExternalArchiveTest(unittest.TestCase):
                 archive.store(self.source, self.root)
         self.assertEqual(list((self.root/'objects/sha256').rglob('*')), [])
 
+    def test_native_primary_roundtrip_uses_external_sidecar(self):
+        from ..portable_primary import create_native_bundle, restore_native_bundle
+        folder = Path(self.temp.name)/'bundle'
+        create_native_bundle({'signals.csv': self.source}, folder, dictionary_bytes=8*1024**2)
+        payload = folder/'primary.tar.xz'
+        record = archive.store(payload, self.root)
+        payload.with_name(payload.name+'.archive.json').write_text(json.dumps(record))
+        payload.unlink()
+        output = Path(self.temp.name)/'restored'
+        with patch.dict('os.environ', {archive.ROOT_ENV: str(self.root)}):
+            restore_native_bundle(folder/'bundle.json', output)
+        self.assertEqual((output/'signals.csv').read_bytes(), self.source.read_bytes())
+        self.assertFalse(payload.exists())
+
 
 if __name__ == '__main__':
     unittest.main()
