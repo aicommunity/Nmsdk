@@ -58,7 +58,7 @@ class Publication7CompactReplayTest(unittest.TestCase):
             self.assertEqual(junit['assertion_status'], 'passed')
             corpus = root/'native/publication-receipt-seven/native-composite/package7/NativeRecoveryConsoleArtifact'
             self.assertEqual({p.name for p in corpus.iterdir() if p.is_dir()},
-                             set((*cases, *before_source, foreign_case)))
+                             set((*cases, *before_source)))
             rows = []
             for name in cases:
                 directory = corpus/name/'console-artifacts'
@@ -98,9 +98,12 @@ class Publication7CompactReplayTest(unittest.TestCase):
                     else:
                         self.assertIsNone(counters['attempt'])
                         self.assertIsNone(counters['archive'])
-            foreign_root = corpus/foreign_case
-            foreign = load(foreign_root/'source-package.json')
-            foreign_summary = load(foreign_root/'source-summary.json')
+            # The seventh C++ case rejects before publication and leaves no
+            # persistent case directory. Replay that mutation on the genuine
+            # Classic source package retained by the first positive case.
+            foreign_root = corpus/cases[0]/'console-artifacts'
+            foreign = load(foreign_root/'train_stopped_state.json')
+            foreign_summary = load(foreign_root/'train_stopped_summary.json')
             audit_candidate_window_recovery_package(foreign, foreign_summary,
                 external_resolver=filesystem_primary_resolver(foreign_root))
             changed = deepcopy(foreign)
