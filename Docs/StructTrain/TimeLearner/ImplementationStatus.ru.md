@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 14.11.2026
 
+[Весь новый Classic cold4 primary независимо восстановлен и проанализирован на Elder](ValidationPlans/ElderClassicCold4PrimaryReplayA2-20261114/RESULT.ru.md):1/1 PASS,910 logical members, corrupted-extracted-CSV refusal.14 measured candidates/0 jointly-ready и invalid_observation сохранены; нового нейронного исполнения нет.
+
 [Отдельный N0-контроль](StockNormalizationControl.ru.md):11/11 declaration regressions приняты на M40 и Elder; оба native cold preflight Classic/Branch приняты1/1 на прежнем SDK. [Холодный Classic N0 запущен](ValidationPlans/M40StockN0ClassicTrainA1-20261114/STATUS.ru.md), исходные controls сохранены. Outcome ещё неизвестен; N0 готовность всей матрицы или сходимость этим не подтверждены. Branch N0 ждёт closure Classic.
 
 Полностью принят исходный этап0. Этапы1–12 частичны: адресные проверки и реальные эксперименты существуют, но полная обязательная матрица и завершение миграции не приняты. Научный результат8/8 не является условием завершения; количество инженерных PASS не доказывает работу классификатора. Источники требований: [утверждённый план](RefactoringPlan.ru.md), [исходный аудит](PlanCompletionAudit-2026-10-25.ru.md).

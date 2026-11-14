@@ -1,3 +1,5 @@
+Independent14.11: [new Classic cold4 complete primary restore/DATA replay1/1 accepted on Elder](../../../Docs/StructTrain/TimeLearner/ValidationPlans/ElderClassicCold4PrimaryReplayA2-20261114/RESULT.ru.md): all910 members,14 measured candidates/0 jointly-ready retained, corrupted extracted CSV refused. No neural model rerun.
+
 # TimeLearner reproducibility artifacts
 
 Published14.11: [Classic scientific report with12 reviewed temporal overview PNGs](../../../Docs/StructTrain/TimeLearner/ClassicCoupledCold4ScientificReport-20261114.ru.md). Preserved14.11: [whole Classic coupled cold4 primary](ClassicCoupledCold4-20261114/primary/bundle.json),29.285MB literal XZ/910 logical members. Actual Train completed/valid DATA,14 measured candidates/0 jointly-ready, invalid_observation/ambiguous, no classification. [Result](../../../Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md). [Branch coupled Train24.11MB independent Elder restore/full-DATA1/1 accepted](../../../Docs/StructTrain/TimeLearner/ValidationPlans/ElderCoupledTrainPrimaryReplayA1-20261114/RESULT.ru.md), all1214 members and corrupt-extracted-CSV refusal verified.

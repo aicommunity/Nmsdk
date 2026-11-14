@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s11-classic-cold4-primary-replay-elder-a1",
+  "package_fingerprint": "e18d83e7af2bd7d43e492fe3953a384ff6c0fe8a3e42999df539ea51f26cc057",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_classic_cold4_compact_primary"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_classic_cold4_compact_primary.ClassicCold4CompactPrimaryTest.test_restored_original_train_keeps_recovery_history_and_rejects_changed_csv"
+  ],
+  "fixtures": {
+    "TIMELEARNER_CLASSIC_COLD4_PRIMARY": {
+      "pattern": "*",
+      "files": 2,
+      "fingerprint": "6896064da91e5802cff3a07f7c721f6ad9393b8435c47d389b943c224b3fc736"
+    }
+  }
+}
