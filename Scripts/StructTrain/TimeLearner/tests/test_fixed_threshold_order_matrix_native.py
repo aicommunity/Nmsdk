@@ -93,6 +93,9 @@ class FixedThresholdOrderMatrixNativeTest(unittest.TestCase):
         output = Path(os.environ['TMPDIR'])/'fixed-threshold-order-matrix'
         output.mkdir(); (output/'baseline').mkdir()
         _write(output/'matrix.json', matrix); _write(output/'job.json', job)
+        # Do not retain a second hundred-megabyte embedded training archive
+        # while the production CLI independently reads and audits its inputs.
+        del original_job, job, package
         (output/'baseline/source-run-manifest.json').write_bytes((source/'run-manifest.json').read_bytes())
         (output/'baseline/evaluation.json').write_bytes(original('native/evaluation.json', 16*1024**2))
         baseline_spec = load(output/'baseline/evaluation.json')
