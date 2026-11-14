@@ -120,3 +120,30 @@ Y-scale подписан, форму слабого хвоста можно ср
 Поэтому manifest имеет status=diagnostic, visual_acceptance_complete=false
 и evaluation_verdict=null. Исполнение renderer не доказывает новый научный
 результат и не пересматривает августовские 4/8–6/8.
+
+## Дополнение14.11: отдельная положительная Y-шкала
+
+В actual Classic N0 fixed-threshold опыте отрицательный reset около−0.38
+сжимает положительные ответы порядка0.003..0.02 на общем диапазоне.
+Дополнительный positive-response Y-detail использует те же полные samples,
+actual input и LT events; отрицательная часть ниже оси явно помечена clipped.
+Он обязан сопровождаться полным shared-range overview: скрывать reset либо
+выдавать Y-detail за полный диапазон запрещено. Общая positive Y-шкала одного
+канала одинакова для всех восьми паттернов. LTZone.Potential получает собственное
+название оси и порог; отдельные Soma.SumPotential порога LT не наследуют.
+
+Новый необязательный аргумент render_soma(include_native_tiles=False) позволяет
+не повторять тысячи уже существующих native tiles при выпуске дополнительной
+Y-шкалы. Default True сохраняет прежний полный набор временных увеличений.
+Переключатель принимает только bool, не меняет observations/scorer и сам по себе
+не свидетельствует о визуальной приёмке или сходимости.
+
+[Actual report](ClassicN0ThresholdScientificReport-20261114.ru.md) содержит все8
+Soma1/input curves и3 остальных сомы target. [A1 companion](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/RESULT.ru.md)
+прошёл unit1/1;11 выбранных Soma PNG просмотрены. Его8 LT companions не приняты
+из-за ошибочного текста оси. Исправление root6410bfb76cb6cf189c41863fc2511c125045b250
+готово; адресный server rerender ждёт восстановления связи, его PASS не заявлен.
+
+[Branch N0 A/B report](N0GeometryPhysicalScientificReport-20261114.ru.md) имеет6
+просмотренных waveform overview. Native boundary views у0с показывают clock/input,
+а не назначенный пик; приёмку peak-centered zoom ими подменять нельзя.
