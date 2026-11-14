@@ -6,6 +6,7 @@ import json
 import lzma
 import os
 import unittest
+from unittest.mock import patch
 
 from . import test_publisher as fixtures
 from ..native_evidence import EvidenceError
@@ -75,6 +76,30 @@ class ReportArtifactPolicyTest(unittest.TestCase):
         self.assertEqual(result['repositories_published_before_failure'], [])
         self.assertEqual(self._remotes(), before)
         self.assertEqual(fixtures.git(self.root, 'diff', '--cached', '--raw', '-z'), index)
+
+    def test_external_reference_requires_available_exact_bytes_before_stage_and_child_push(self):
+        from ..external_archive import ARCHIVE_KIND, DEFAULT_ROOT, store
+        archive = self.base/'external-archive'; archive.mkdir()
+        (archive/'archive.root.json').write_text(json.dumps({'kind': ARCHIVE_KIND,
+            'schema_version': 1, 'authoritative_root': DEFAULT_ROOT}))
+        source = self.base/'original-primary'; source.write_bytes(b'original primary bytes')
+        reference = store(source, archive); external = archive/reference['object']
+        manifest, digest = self._inventory({'primary.tar.xz.archive.json':
+            (json.dumps(reference)+'\n').encode()})
+        with patch.dict(os.environ, {'NMSDK_STRUCTTRAIN_ARCHIVE_ROOT': str(archive)}):
+            external.unlink()
+            before = fixtures.git(self.root, 'diff', '--cached', '--raw', '-z')
+            with self.assertRaisesRegex(EvidenceError, 'archive_object_missing_or_size'):
+                stage_artifact_set(self.root, manifest, digest)
+            self.assertEqual(fixtures.git(self.root, 'diff', '--cached', '--raw', '-z'), before)
+            store(source, archive); stage_artifact_set(self.root, manifest, digest)
+            self._commit(manifest, digest, change_child=True)
+            external.write_bytes(b'x'*reference['bytes'])
+            remotes = self._remotes(); result = publish_closure(self.root, self.spec)
+            self.assertEqual(result['publication'], 'failed', result)
+            self.assertIn('archive_object_digest', result['reason'])
+            self.assertEqual(result['repositories_published_before_failure'], [])
+            self.assertEqual(self._remotes(), remotes)
 
     def test_small_text_models_metrics_and_selected_figures_publish(self):
         png = base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jH0kAAAAASUVORK5CYII=')

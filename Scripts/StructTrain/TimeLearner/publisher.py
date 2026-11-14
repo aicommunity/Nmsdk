@@ -12,7 +12,7 @@ import stat
 import subprocess
 from urllib.parse import urlsplit
 
-from .native_evidence import EvidenceError, require
+from .native_evidence import EvidenceError, parse_json_bytes, require
 from .publication_lock import hold as hold_publication_lock, recover as recover_lock, git_lock_arguments
 from .history_guard import (MAX_GIT_EXPERIMENT_BYTES, EXTERNAL_RESULT_SUFFIXES,
                             artifact_policy, check_history)
@@ -31,6 +31,13 @@ def _external_result_policy(name, size, header=b''):
         raise EvidenceError(str(error)) from error
 
 
+def _verify_external_reference(name, raw):
+    if name.endswith('.archive.json'):
+        from .external_archive import resolve
+        require(len(raw) <= 64*1024, 'archive_reference_budget')
+        resolve(parse_json_bytes(raw))
+
+
 def verify_experiment_tree(directory, commit):
     """Reject unlisted large results too; a short artifact manifest is no bypass."""
     raw = subprocess.check_output(['git', '--no-replace-objects', '-C', str(directory),
@@ -39,9 +46,14 @@ def verify_experiment_tree(directory, commit):
         if not entry:
             continue
         metadata, name = entry.split(b'\t', 1)
-        _, kind, _, size = metadata.decode('ascii').split()
+        _, kind, oid, size = metadata.decode('ascii').split()
         if kind == 'blob':
             _external_result_policy(name.decode('utf-8'), int(size))
+            if name.endswith(b'.archive.json'):
+                require(int(size) <= 64*1024, 'archive_reference_budget')
+                reference = subprocess.check_output(['git', '--no-replace-objects', '-C',
+                    str(directory), 'cat-file', 'blob', oid], timeout=120)
+                _verify_external_reference(name.decode('utf-8'), reference)
 
 
 def _report_artifact(name):
@@ -184,6 +196,10 @@ def verify_artifact_set(directory, commit, record, *, enforce_new_artifact_polic
         if enforce_new_artifact_policy:_external_result_policy(path, int(_git(directory, 'cat-file', '-s', oid)))
         require(_blob_sha256(directory, oid, new_report_path=path if enforce_new_artifact_policy else None) == expected,
                 "committed_artifact_content_changed:"+path)
+        if enforce_new_artifact_policy and path.endswith('.archive.json'):
+            require(int(_git(directory, 'cat-file', '-s', oid)) <= 64*1024, 'archive_reference_budget')
+            _verify_external_reference(path, subprocess.check_output(['git', '--no-replace-objects',
+                '-C', str(directory), 'cat-file', 'blob', oid], timeout=120))
     return {**record, "files_verified": len(inventory)+1}
 
 
@@ -217,6 +233,9 @@ def stage_artifact_set(directory: Path, manifest: str, manifest_sha256: str):
             _new_report_artifact_policy(name.as_posix(),
                 _working_git_mode(directory, name.as_posix(), actual), header)
         _external_result_policy(name.as_posix(), actual.stat().st_size, header)
+        if name.as_posix().endswith('.archive.json'):
+            require(actual.stat().st_size <= 64*1024, 'archive_reference_budget')
+            _verify_external_reference(name.as_posix(), actual.read_bytes())
         if name != relative:
             require(digest == inventory[name.relative_to(relative.parent).as_posix()],
                     "working_artifact_content_changed:"+name.as_posix())
