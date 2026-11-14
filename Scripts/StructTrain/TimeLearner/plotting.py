@@ -172,7 +172,7 @@ def time_views(begin, end, frequency):
 
 def render_soma(observation, channel, label, limits, output: Path, *,
                 potential_axis_label="Soma SumPotential [model units; SI unverified]",
-                reference_level=None, context_label=None):
+                reference_level=None, context_label=None, include_native_tiles=True):
     # Lazy backend import: inventory/analyze and module import need no GUI/backend.
     import matplotlib
     matplotlib.use("Agg")
@@ -191,10 +191,16 @@ def render_soma(observation, channel, label, limits, output: Path, *,
             times.append((time+previous)/2);soma.append(float("nan"));stimulus.append(float("nan"))
         times.append(time);soma.append(sample["soma"][channel]);stimulus.append(sample["stimulus"])
         previous = time
+    require(type(include_native_tiles) is bool, "invalid_native_tile_plot_flag")
     rows = []
     with plt.rc_context({"font.size": 12, "axes.titlesize": 12, "svg.fonttype": "none"}):
         views = []
-        for name, left, right in time_views(observation["begin"], observation["end"], frequency):
+        windows = time_views(observation["begin"], observation["end"], frequency)
+        if not include_native_tiles:
+            # A companion Y-detail reuses the original full-resolution tiles.
+            # The default still renders every native time window.
+            windows = windows[:1]
+        for name, left, right in windows:
             views.append((name, left, right, limits, "shared", name))
             detail = detail_limits(samples, channel, left, right, limits)
             if detail is not None:
