@@ -1,3 +1,5 @@
+Preserved14.11: whole stock N0 cold Train primaries — [Classic28,455,532B](StockN0Classic-20261114/primary/bundle.json), [Branch38,089,640B](StockN0Branch-20261114/primary/bundle.json). Actual negative outcomes retained: Classic ambiguous before Ns activation, Branch time-budget exhausted after measured Ns1..5; neither has a training certificate. [N0 protocol and results](../../../Docs/StructTrain/TimeLearner/StockNormalizationControl.ru.md).
+
 Independent14.11: [new Classic cold4 complete primary restore/DATA replay1/1 accepted on Elder](../../../Docs/StructTrain/TimeLearner/ValidationPlans/ElderClassicCold4PrimaryReplayA2-20261114/RESULT.ru.md): all910 members,14 measured candidates/0 jointly-ready retained, corrupted extracted CSV refused. No neural model rerun.
 
 # TimeLearner reproducibility artifacts
