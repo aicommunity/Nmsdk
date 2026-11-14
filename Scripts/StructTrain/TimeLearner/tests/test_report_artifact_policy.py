@@ -109,6 +109,11 @@ class ReportArtifactPolicyTest(unittest.TestCase):
                 with self.assertRaisesRegex(EvidenceError, 'large_experiment_artifact_requires_archive'):
                     stage_artifact_set(self.root, manifest, digest)
 
+    def test_small_full_gallery_figure_is_external_too(self):
+        manifest, digest = self._inventory({'gallery/probe-0001.svg': b'<svg/>'})
+        with self.assertRaisesRegex(EvidenceError, 'full_report_figure_requires_archive'):
+            stage_artifact_set(self.root, manifest, digest)
+
     def test_committed_archive_blocks_child_pushes_before_publication(self):
         manifest, digest = self._inventory({'primary.tar.xz': lzma.compress(b'data')})
         self._commit(manifest, digest, change_child=True)

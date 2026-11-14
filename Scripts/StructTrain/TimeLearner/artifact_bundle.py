@@ -117,7 +117,8 @@ def verify_pipeline_archive(archive, bundle, maximum_bytes=8*1024**3):
     No extraction, rewriting, process attestation or scientific verdict occurs.
     Model/run audits and fresh worker closure remain separate mandatory gates.
     """
-    archive = Path(archive).resolve(strict=True)
+    from .external_archive import locate
+    archive = locate(archive).resolve(strict=True)
     require(type(maximum_bytes) is int and maximum_bytes > 0 and type(bundle) is dict and
             type(bundle.get("members")) is dict and bundle["members"], "invalid_pipeline_archive_inventory")
     require(type(bundle.get("archive_bytes")) is int and archive.stat().st_size == bundle["archive_bytes"] and

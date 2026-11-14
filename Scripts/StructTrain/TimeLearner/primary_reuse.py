@@ -42,14 +42,13 @@ def _records(records):
 def _git_archive(repository, reference):
     require(type(reference['commit']) is str and re.fullmatch('[0-9a-f]{40}', reference['commit']), 'reuse_requires_full_git_commit')
     path = _name(reference['archive_path'])
-    prefix = ['git', '-C', str(Path(repository).resolve(strict=True))]
-    obj = reference['commit']+':'+path
+    from .history import read_bytes
     try:
-        size = int(subprocess.check_output(prefix+['cat-file', '-s', obj], stderr=subprocess.PIPE))
-        require(0 < size <= 512*1024**2, 'reuse_reference_compressed_budget_exceeded')
-        raw = subprocess.check_output(prefix+['show', obj], stderr=subprocess.PIPE)
-    except subprocess.CalledProcessError as error:
-        raise EvidenceError('reuse_git_archive_unavailable') from error
+        raw = read_bytes(repository, reference['commit'], path, maximum_bytes=512*1024**2)
+    except EvidenceError as error:
+        if str(error) == 'historical_blob_budget_exceeded':
+            raise EvidenceError('reuse_reference_compressed_budget_exceeded') from error
+        raise EvidenceError('reuse_git_archive_unavailable:'+str(error)) from error
     require(0 < len(raw) <= 512*1024**2, 'reuse_reference_compressed_budget_exceeded')
     if 'archive_sha256' in reference:
         require(hashlib.sha256(raw).hexdigest() == reference['archive_sha256'], 'reuse_git_archive_changed')
@@ -133,7 +132,8 @@ def restore(bundle, repository, output):
     reference = metadata['reference']
     require(type(reference) is dict and set(reference) == {'commit', 'archive_path', 'archive_sha256'}, 'invalid_reuse_git_reference')
     reference_raw = _git_archive(repository, reference)
-    compressed = (bundle/'primary.tar.xz').read_bytes()
+    from .external_archive import locate
+    compressed = locate(bundle/'primary.tar.xz').read_bytes()
     require(len(compressed) == count(metadata['archive_bytes']) and hashlib.sha256(compressed).hexdigest() == metadata['archive_sha256'],
             'reuse_primary_archive_changed')
     output.mkdir(parents=True);written = set()

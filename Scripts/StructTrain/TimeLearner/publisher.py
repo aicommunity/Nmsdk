@@ -44,6 +44,9 @@ def _external_result_policy(name, size, header=b''):
     require(PurePosixPath(name).suffix.casefold() not in EXTERNAL_RESULT_SUFFIXES,
             'binary_experiment_artifact_requires_archive:'+name)
     if _report_artifact(name):
+        if PurePosixPath(name).suffix.casefold() in {'.png', '.svg', '.pdf'}:
+            require('selected' in [p.casefold() for p in PurePosixPath(name).parts[3:-1]],
+                    'full_report_figure_requires_archive:'+name)
         require(b'\0' not in header or PurePosixPath(name).suffix.casefold() in {'.png', '.pdf'},
                 'binary_experiment_artifact_requires_archive:'+name)
 

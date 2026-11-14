@@ -1,6 +1,7 @@
 """Exercise production archive I/O, collision handling and tamper rejection."""
 import json
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -73,6 +74,32 @@ class ExternalArchiveTest(unittest.TestCase):
             restore_native_bundle(folder/'bundle.json', output)
         self.assertEqual((output/'signals.csv').read_bytes(), self.source.read_bytes())
         self.assertFalse(payload.exists())
+
+    def test_historical_reader_composes_rewrites_and_preserves_exact_bytes(self):
+        from ..history import read_bytes, resolve_revision
+        repo = Path(self.temp.name)/'source'; repo.mkdir()
+        def git(*args):
+            return subprocess.check_output(['git', '-C', str(repo), *args], stderr=subprocess.STDOUT).decode().strip()
+        git('init', '-b', 'original'); git('config', 'user.name', 'Archive test')
+        git('config', 'user.email', 'archive@test.invalid')
+        (repo/'note.txt').write_text('original')
+        git('add', '.'); git('commit', '-m', 'original'); original = git('rev-parse', 'HEAD')
+        (repo/'note.txt').write_text('intermediate')
+        git('add', '.'); git('commit', '-m', 'intermediate'); intermediate = git('rev-parse', 'HEAD')
+        record = archive.store(self.source, self.root)
+        (repo/'primary.tar.xz.archive.json').write_text(json.dumps(record))
+        git('add', '.'); git('commit', '-m', 'external reference'); final = git('rev-parse', 'HEAD')
+        maps = repo/'Docs/StructTrain/TimeLearner/History'; maps.mkdir(parents=True)
+        for name, mapping in (('2026-10-30', {original: intermediate}), ('2026-11-14', {intermediate: final})):
+            (maps/('RootRevisionMap-'+name+'.json')).write_text(json.dumps({
+                'kind': 'nmsdk_root_revision_aliases', 'schema_version': 1, 'mapping': mapping}))
+        self.assertEqual(resolve_revision(repo, original)['resolved_revision'], final)
+        with patch.dict('os.environ', {archive.ROOT_ENV: str(self.root)}):
+            self.assertEqual(read_bytes(repo, original, 'primary.tar.xz'), self.source.read_bytes())
+            with self.assertRaisesRegex(EvidenceError, 'historical_blob_budget_exceeded'):
+                read_bytes(repo, original, 'primary.tar.xz', maximum_bytes=1)
+            with self.assertRaisesRegex(EvidenceError, 'historical_blob_or_archive_reference_missing'):
+                read_bytes(repo, original, 'missing.tar.xz')
 
 
 if __name__ == '__main__':
