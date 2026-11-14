@@ -29,6 +29,13 @@ class FixedThresholdOrderMatrixNativeTest(unittest.TestCase):
         controls = Path(os.environ['TIMELEARNER_FIXED_ORDER_CONTROLS']).resolve(strict=True)
         source = Path(os.environ['TIMELEARNER_FIXED_ORDER_SOURCE_RUN']).resolve(strict=True)
         declaration = load(controls/'declaration.json')
+        # Managed reservations require the contained main process itself.
+        # Refuse the wrong job mode before auditing a large source archive.
+        live = inspect(declaration['controller'])
+        self.assertEqual((live['execution'], live['binding']['initial_main_pid']),
+                         ('running', os.getpid()))
+        self.assertEqual(Path('/proc/self/cgroup').read_text().strip(),
+                         '0::'+live['binding']['control_group'])
         require(set(declaration) == {'controller', 'source_manifest_sha256', 'source_job_sha256',
             'source_package_sha256', 'source_model_revision', 'threshold', 'matrix_revision',
             'maximum_wall_seconds', 'leaf_memory_bytes'}, 'fixed_order_control_fields')
@@ -85,12 +92,6 @@ class FixedThresholdOrderMatrixNativeTest(unittest.TestCase):
         runtime = load(runtime_path)
         self.assertTrue(runtime == load(source/'process/runtime.json'), 'source runtime changed')
         verify_runtime(runtime)
-        live = inspect(declaration['controller'])
-        self.assertEqual(live['execution'], 'running')
-        # unittest is a child of the owned worker; its PID is not the unit's
-        # initial main PID. Verify actual membership in that exact group.
-        self.assertEqual(Path('/proc/self/cgroup').read_text().strip(),
-                         '0::'+live['binding']['control_group'])
         wall, memory = declaration['maximum_wall_seconds'], declaration['leaf_memory_bytes']
         require(type(wall) is int and 1 <= wall <= 7200 and type(memory) is int and
                 1024**3 <= memory <= 8*1024**3, 'fixed_order_native_limits')

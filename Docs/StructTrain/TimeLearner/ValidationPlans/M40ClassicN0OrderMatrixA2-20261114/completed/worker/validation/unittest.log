@@ -1,0 +1,22 @@
+test_same_frozen_model_and_threshold_with_target_in_every_position (Scripts.StructTrain.TimeLearner.tests.test_fixed_threshold_order_matrix_native.FixedThresholdOrderMatrixNativeTest.test_same_frozen_model_and_threshold_with_target_in_every_position) ... ERROR
+
+======================================================================
+ERROR: test_same_frozen_model_and_threshold_with_target_in_every_position (Scripts.StructTrain.TimeLearner.tests.test_fixed_threshold_order_matrix_native.FixedThresholdOrderMatrixNativeTest.test_same_frozen_model_and_threshold_with_target_in_every_position)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-order-matrix-a2/Scripts/StructTrain/TimeLearner/tests/test_fixed_threshold_order_matrix_native.py", line 112, in test_same_frozen_model_and_threshold_with_target_in_every_position
+    lease = registry.reserve('actual-fixed-threshold-counterbalanced-order',
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-order-matrix-a2/Scripts/StructTrain/TimeLearner/resource_reservations.py", line 295, in reserve
+    controller = capture_controller(controller_directory, owner, demands)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-order-matrix-a2/Scripts/StructTrain/TimeLearner/managed_reservation_graph.py", line 31, in capture_controller
+    _require(not state["all_processes_closed"] and binding["initial_main_pid"] == owner["pid"] and
+  File "/media/user/Data/TimeLearnerRefactor/source-order-matrix-a2/Scripts/StructTrain/TimeLearner/resource_reservations.py", line 25, in _require
+    raise ReservationError(reason)
+Scripts.StructTrain.TimeLearner.resource_reservations.ReservationError: managed_controller_not_lease_owner
+
+----------------------------------------------------------------------
+Ran 1 test in 557.011s
+
+FAILED (errors=1)
