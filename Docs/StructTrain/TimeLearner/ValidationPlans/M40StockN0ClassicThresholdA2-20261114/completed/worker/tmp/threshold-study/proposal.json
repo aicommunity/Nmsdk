@@ -1,0 +1,157 @@
+{
+  "kind": "stopped_model_same_matrix_threshold_proposal",
+  "schema_version": 1,
+  "rule": "midpoint_of_target_maximum_and_highest_strictly_lower_foil_maximum",
+  "source_manifest": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-frozen-m40-a1/worker/tmp/stock-n0-stopped-matrix/run/run-manifest.json",
+    "sha256": "1fd84dc8e2931ef5e6c47ad2a7c5161abba4438bdd0225fb5b76f2506147e593",
+    "size": 184790
+  },
+  "source_model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+  "source_training_outcome": "invalid_observation",
+  "rows": [
+    {
+      "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/0",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+      "lt_maximum": 0.01300367280159831,
+      "first_maximum_frame": 1009,
+      "maximum_time": 0.5045,
+      "samples": 4001,
+      "threshold_potential_source": {
+        "class": "NPulseLTZoneThreshold",
+        "path": "$.LTZone.Potential",
+        "sample_phase": "native_after_children",
+        "units": "model_units_SI_unverified"
+      }
+    },
+    {
+      "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/1",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+      "lt_maximum": 0.012527424884825084,
+      "first_maximum_frame": 849,
+      "maximum_time": 2.425,
+      "samples": 4001,
+      "threshold_potential_source": {
+        "class": "NPulseLTZoneThreshold",
+        "path": "$.LTZone.Potential",
+        "sample_phase": "native_after_children",
+        "units": "model_units_SI_unverified"
+      }
+    },
+    {
+      "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/2",
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+      "lt_maximum": 0.01250835257452465,
+      "first_maximum_frame": 1009,
+      "maximum_time": 4.5055,
+      "samples": 4001,
+      "threshold_potential_source": {
+        "class": "NPulseLTZoneThreshold",
+        "path": "$.LTZone.Potential",
+        "sample_phase": "native_after_children",
+        "units": "model_units_SI_unverified"
+      }
+    },
+    {
+      "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/3",
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+      "lt_maximum": 0.012503890006992147,
+      "first_maximum_frame": 1009,
+      "maximum_time": 6.506,
+      "samples": 4001,
+      "threshold_potential_source": {
+        "class": "NPulseLTZoneThreshold",
+        "path": "$.LTZone.Potential",
+        "sample_phase": "native_after_children",
+        "units": "model_units_SI_unverified"
+      }
+    },
+    {
+      "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/4",
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+      "lt_maximum": 0.017207756229443066,
+      "first_maximum_frame": 83,
+      "maximum_time": 8.0435,
+      "samples": 4001,
+      "threshold_potential_source": {
+        "class": "NPulseLTZoneThreshold",
+        "path": "$.LTZone.Potential",
+        "sample_phase": "native_after_children",
+        "units": "model_units_SI_unverified"
+      }
+    },
+    {
+      "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/5",
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+      "lt_maximum": 0.017701234067608485,
+      "first_maximum_frame": 1003,
+      "maximum_time": 10.504,
+      "samples": 4001,
+      "threshold_potential_source": {
+        "class": "NPulseLTZoneThreshold",
+        "path": "$.LTZone.Potential",
+        "sample_phase": "native_after_children",
+        "units": "model_units_SI_unverified"
+      }
+    },
+    {
+      "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/6",
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+      "lt_maximum": 0.013672511562340145,
+      "first_maximum_frame": 1009,
+      "maximum_time": 12.5075,
+      "samples": 4001,
+      "threshold_potential_source": {
+        "class": "NPulseLTZoneThreshold",
+        "path": "$.LTZone.Potential",
+        "sample_phase": "native_after_children",
+        "units": "model_units_SI_unverified"
+      }
+    },
+    {
+      "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/7",
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+      "lt_maximum": 0.013677235967145374,
+      "first_maximum_frame": 927,
+      "maximum_time": 14.467,
+      "samples": 4001,
+      "threshold_potential_source": {
+        "class": "NPulseLTZoneThreshold",
+        "path": "$.LTZone.Potential",
+        "sample_phase": "native_after_children",
+        "units": "model_units_SI_unverified"
+      }
+    }
+  ],
+  "threshold": 0.012765548843211696,
+  "lower_peak": 0.012527424884825084,
+  "upper_peak": 0.01300367280159831,
+  "full_matrix_peak_margin": -0.004697561266010175,
+  "nonspiking_proxy": {
+    "TP": 1,
+    "FN": 0,
+    "FP": 4,
+    "TN": 3
+  },
+  "protocol": "historical_same_matrix",
+  "calibrated": false,
+  "classification_assessed": false,
+  "training_completed": false,
+  "scientific_verdict": null
+}

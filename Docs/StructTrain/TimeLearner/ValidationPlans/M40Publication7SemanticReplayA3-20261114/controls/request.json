@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s02-publication7-semantic-replay-m40-a3",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "958730c9f591cf2fb3c80001030011a5de1f7a54",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 64,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 268435456
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-publication7-replay-a3",
+      "commit": "958730c9f591cf2fb3c80001030011a5de1f7a54"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/publication7-semantic-replay-a3/Docs/StructTrain/TimeLearner/ValidationPlans/M40Publication7SemanticReplayA3-20261114/suite.json",
+      "sha256": "a61aa301d1db5bc4180435652e21ef2e5a019b3dc565b961917bda42db627b08"
+    },
+    "fixtures": {
+      "TIMELEARNER_PUBLICATION7_PRIMARY": "/media/user/Data/TimeLearnerRefactor/source-publication7-replay-a3/Reports/StructTrain/TimeLearner/PublicationReceipt7-Elder-20261113"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 4194304,
+      "maximum_total_bytes": 8388608
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "7a49120dde11983ad2d1cafc604498588f6713a023066f27410e1f1616bb5af8",
+      "unit": "timelearner-61be3fc6-3e53-4f1f-aee3-8c8f50de31d8.service",
+      "invocation_id": "95e3a4163d174fd8a744d0c7ba02c269",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-61be3fc6-3e53-4f1f-aee3-8c8f50de31d8.service",
+      "initial_main_pid": 4157785,
+      "initial_start_ticks": "370384241",
+      "sha256": "fb48c236d76046fa66af2d90d2185472a702a4f9bdbd335cba587d66527395b4"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-61be3fc6-3e53-4f1f-aee3-8c8f50de31d8.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "80742b06-b063-4ca9-9844-7a845b40c51b",
+      "job_id": "s11-n0-geometry-before-train-m40-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 4157785,
+        "start_ticks": "370384241",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-before-train-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-before-train-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-before-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryBeforeTrainA2-20261114",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-before-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryBeforeTrainA2-20261114"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-before-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryBeforeTrainA2-20261114/fixture",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-before-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryBeforeTrainA2-20261114/fixture"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-before-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryBeforeTrainA2-20261114/prepared-n1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-before-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryBeforeTrainA2-20261114/prepared-n1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794628644.9626455,
+      "deadline": 1794631336.5724144,
+      "updated": 1794631224.3917062,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

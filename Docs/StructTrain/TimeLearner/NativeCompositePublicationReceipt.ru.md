@@ -12,3 +12,7 @@ Wrapper может использовать объект только при т�
 ## Проверка M40
 
 [Fresh Release/O3 build и7/7 actual cases приняты](ValidationPlans/M40PublicationReceiptSdkA1-20261113/RESULT.ru.md). Full namespace4166 подтверждён, оба native groups закрыты. Прежнее указание «серверная проверка открыта» выше — исторический снимок подготовки; Elder и большой N4 performance остаются открыты.
+
+## Последующее подтверждение
+
+[Elder7/7 принят](ValidationPlans/ElderPublicationReceiptSdkA1-20261113/RESULT.ru.md); [большой N4 native export и внешний DATA audit завершились в прежнем лимите](ValidationPlans/M40PublicationReceiptBudget16TrainA1-20261113/RESULT.ru.md). [Весь исходный Elder corpus независимо восстановлен на M40](ValidationPlans/M40Publication7SemanticReplayA3-20261114/RESULT.ru.md):498 archived members, production package/summary/wrapper replay, foreign ledger и corrupted CSV отказ. Ранее открытые пункты выше относятся к снимку подготовки. Replay не запускает новую модель; fixture wrapper counters не превращаются в native Console attestation.

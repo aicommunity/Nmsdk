@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s02-publication7-semantic-replay-m40-a3",
+  "package_fingerprint": "7141b63b8c07fd62317335fd6f929b750a1682072c115088b7437d937ed82292",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_publication7_compact_replay.Publication7CompactReplayTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_publication7_compact_replay.Publication7CompactReplayTest.test_original_seven_case_corpus_and_both_wire_bases_replay_independently"
+  ],
+  "fixtures": {
+    "TIMELEARNER_PUBLICATION7_PRIMARY": {
+      "pattern": "*",
+      "files": 9,
+      "fingerprint": "b2bf4a76428df70cf731f0f6de670d5f8c63f52b758793568d1d140038e59c8f"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s11-n0-geometry-after-train-m40-a2",
+  "package_fingerprint": "207f43b744bf56c1230e72458af184b86eb08a93d14631a5d0185fd61c007c8c",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_normalization_study.StockNormalizationStudyTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_normalization_study.StockNormalizationStudyTest.test_declared_operation_preserves_cold_physics_and_honest_outcome"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_N0_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "90565a745827a008a0eb8de02319c80f39924e86fc895a9ec2730ddf102cadbb"
+    },
+    "TIMELEARNER_STOCK_N0_SOURCE": {
+      "pattern": "**/*.json",
+      "files": 10,
+      "fingerprint": "0a4259148e13f3d09ef6c296e0df5933ef0c6535d443e44b5d7c2d67b45b309d"
+    },
+    "TIMELEARNER_STOCK_N0_RUNTIME": {
+      "pattern": "NeuroModelerConsole",
+      "files": 1,
+      "fingerprint": "5d6c1778d8f226f6553d8f2234cfe78ee0d7ca90fcf047c83ce8a1ad788fa0da"
+    }
+  }
+}

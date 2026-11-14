@@ -1,0 +1,11 @@
+# Независимый semantic replay publication7: принят на M40
+
+Job s02-publication7-semantic-replay-m40-a3: production1/1 PASS, outer completed56.05857523018494с, все процессы закрыты, operation_passed=true. Восстановлены все498 logical members исходного Elder архива1,827,912B, SHA256b2cb195ba2df4fdb6f6e72194cf4bffbeeddcdc6d57c5fc3c2b889fc0a35a296. Исходный Elder output на M40 отсутствовал; оригинальный архив не изменён.
+
+Четыре Classic/Branch completed/stopped package7/summary8 проверены через production DATA auditor со всеми внешними CSV; исходные execution5 wrappers base1/base2 проверены независимо. Два pre-source случая сохранили null ledger и различие zero/unknown counters. Повторно подписанный foreign source_origin отвергнут без summary, чтобы несовпадение summary digest не маскировало доменную проверку; повреждённый реально извлечённый CSV также отвергнут.
+
+Седьмой C++ case исходно отказывал до публикации и не оставлял persistent directory. Его отрицательная мутация при replay применяется к сохранённому подлинному Classic package первого положительного case; отсутствующие файлы не выдумываются. Старый schema1 container уже разыменовал glog alias: восстановлены498 regular bytes, не исходная файловая link topology. Исходные C++ wrapper counters являются явными аргументами fixtures: actual_console_process_executed=false, native_execution_verified=false. Нового Console/нейронного исполнения и научного результата этот replay не создаёт.
+
+[Literal replay proof](completed/worker/tmp/publication7-replay.json), [unit](completed/worker/validation/result.json), [closure](completed/process/whole-group-closure.json), [integrity](integrity.json). Producer 5d0796b701430c789c0422235cdbe59e3f56c325, pack SHA256f46e4ed5ae1c62707d03f9d6fbbb0ba776242b5cd8ffd4c740ee890468fa69f6. Source root958730c9f591cf2fb3c80001030011a5de1f7a54. Предыдущие fixture failures [A1](previous-attempts/a1/worker/validation/unittest.log) и [A2](previous-attempts/a2/worker/validation/unittest.log) сохранены без переименования в PASS: исправлены ожидания498/497 и предположение о наличии не опубликованного negative-case directory. Production auditor не ослаблялся.
+
+Закрыта адресная independent replay проверка этого корпуса, но полные этапы2/10, остальные архивы и вся матрица остаются частичными.
