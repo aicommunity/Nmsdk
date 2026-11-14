@@ -17,7 +17,7 @@ ARCHIVE_KIND = 'nmsdk_structtrain_external_experiment_archive'
 REFERENCE_KIND = 'nmsdk_structtrain_external_object'
 DEFAULT_ROOT = '/media/user/Data/Nmsdk-StructTrainExpArchive'
 ROOT_ENV = 'NMSDK_STRUCTTRAIN_ARCHIVE_ROOT'
-SMB_WINDOWS_ROOT = '//10.245.1.17/Nmsdk-StructTrainExpArchive'
+SMB_WINDOWS_ROOT = '//10.245.1.12/Nmsdk-StructTrainExpArchive'
 SMB_LINUX_ROOT = '/mnt/nmsdk-structtrain-archive'
 
 

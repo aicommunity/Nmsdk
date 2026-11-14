@@ -1,3 +1,5 @@
+> 14.11.2026: архив доступен локально через `//10.245.1.12/Nmsdk-StructTrainExpArchive`; данные остаются на M40. Полная Git-проекция проверена (14 103 commits / 31 447 refs), 189 инструментальных проверок приняты. Подготовка индексов рабочих копий продолжается; origin ещё не заменён. Это техническая миграция, без новых научных результатов.
+
 # Состояние реализации TimeLearner — 14.11.2026
 
 [Весь новый Classic cold4 primary независимо восстановлен и проанализирован на Elder](ValidationPlans/ElderClassicCold4PrimaryReplayA2-20261114/RESULT.ru.md):1/1 PASS,910 logical members, corrupted-extracted-CSV refusal.14 measured candidates/0 jointly-ready и invalid_observation сохранены; нового нейронного исполнения нет.
