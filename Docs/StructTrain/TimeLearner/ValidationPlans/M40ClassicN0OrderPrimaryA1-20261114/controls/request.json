@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-classic-n0-order-matrix-m40-a3-primary",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "09cdc605104c7c4d50ec6b90a927ec9b8ebada87",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 201326592
+  },
+  "operation": {
+    "kind": "closed-primary-bundle",
+    "manifest": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-n0-order-matrix-a3-primary/Docs/StructTrain/TimeLearner/ValidationPlans/M40ClassicN0OrderPrimaryA1-20261114/collection-manifest.json",
+      "sha256": "0005197d40a608362d12de3f9606004e7dc53a8d047dba58d4016184107eae5c"
+    }
+  }
+}
