@@ -45,8 +45,11 @@ class Publication7CompactReplayTest(unittest.TestCase):
             root = Path(temporary)/'restored'
             restoration = restore_native_bundle(source/'bundle.json', root, compatibility=ALIAS_ADAPTER)
             self.assertEqual(restoration['archive_members_verified'], 498)
-            self.assertEqual(restoration['retained_regular_files'], 497)
-            self.assertEqual(len(restoration['omitted_redundant_aliases']), 1)
+            # This old schema1 container already dereferenced the original
+            # source's glog alias. All498 archived members are regular bytes;
+            # restoration must not claim to recreate source link topology.
+            self.assertEqual(restoration['retained_regular_files'], 498)
+            self.assertEqual(len(restoration['omitted_redundant_aliases']), 0)
             self.assertFalse(restoration['native_execution_attested'])
             old_output = Path(load(root/'native/job.json')['paths']['output'])
             self.assertTrue(old_output.is_absolute())
