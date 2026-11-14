@@ -10,11 +10,22 @@ def resolve_revision(repository, original, mapping_file=None):
     original=original.lower();repository=repository.resolve(strict=True)
     if mapping_file is None:
         maps = sorted((repository/'Docs/StructTrain/TimeLearner/History').glob('RootRevisionMap-*.json'))
+        # Unpublished branches and stash aliases belong to this common store,
+        # outside the public history and shared by its linked worktrees.
+        common = subprocess.run(['git', '--no-replace-objects', '-C', str(repository),
+                                 'rev-parse', '--path-format=absolute', '--git-common-dir'],
+                                capture_output=True, text=True, timeout=30)
+        require(common.returncode == 0, 'history_repository_unavailable')
+        private = Path(common.stdout.strip())/'info/structtrain-root-revision-aliases.json'
+        if private.exists():
+            require(not private.is_symlink() and private.is_file(), 'invalid_private_revision_map')
+            maps.append(private)
     else:
         maps = [mapping_file]
     aliases = {}
     for mapping_file in maps:
         if mapping_file.is_file():
+            require(mapping_file.stat().st_size <= 16*1024**2, 'root_revision_map_budget')
             record=load(mapping_file)
             require(record.get("kind")=="nmsdk_root_revision_aliases" and type(record.get("schema_version")) is int
                     and record["schema_version"]==1 and type(record.get("mapping")) is dict, "unknown_root_revision_map")

@@ -113,6 +113,28 @@ class ExternalArchiveTest(unittest.TestCase):
             restore_native_bundle(output/'package/bundle.json', Path(self.temp.name)/'publication-restored')
         self.assertEqual((Path(self.temp.name)/'publication-restored/signals.csv').read_bytes(), self.source.read_bytes())
 
+
+    def test_private_revision_alias_is_shared_with_linked_worktree(self):
+        from ..history import resolve_revision
+        repo = Path(self.temp.name)/'private-source'; repo.mkdir()
+        def git(*args):
+            return subprocess.check_output(['git', '-C', str(repo), *args], stderr=subprocess.STDOUT).decode().strip()
+        git('init', '-b', 'main'); git('config', 'user.name', 'Archive test')
+        git('config', 'user.email', 'archive@example.invalid')
+        (repo/'code.txt').write_text('preserved code')
+        git('add', '.'); git('commit', '-m', 'preserved source'); final = git('rev-parse', 'HEAD')
+        common = Path(git('rev-parse', '--path-format=absolute', '--git-common-dir'))
+        aliases = common/'info/structtrain-root-revision-aliases.json'
+        aliases.write_text(json.dumps({'kind': 'nmsdk_root_revision_aliases', 'schema_version': 1,
+                                      'mapping': {'1'*40: final}}))
+        linked = Path(self.temp.name)/'linked-private-source'
+        git('worktree', 'add', '--detach', str(linked), final)
+        self.assertEqual(resolve_revision(linked, '1'*40)['resolved_revision'], final)
+        aliases.write_text(json.dumps({'kind': 'nmsdk_root_revision_aliases', 'schema_version': 1,
+                                      'mapping': {'1'*40: '2'*40, '2'*40: '1'*40}}))
+        with self.assertRaisesRegex(EvidenceError, 'cyclic_root_revision_map'):
+            resolve_revision(linked, '1'*40)
+
     def test_historical_reader_composes_rewrites_and_preserves_exact_bytes(self):
         from ..history import read_bytes, resolve_revision
         repo = Path(self.temp.name)/'source'; repo.mkdir()
