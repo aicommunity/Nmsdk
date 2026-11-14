@@ -38,6 +38,8 @@ class ThresholdPositiveResponseReportTest(unittest.TestCase):
                 bounds = lt_limits if lt else limits[channel]
                 views = render_soma(projected,0 if lt else channel,label,bounds,folder,
                     reference_level=threshold if lt else None, include_native_tiles=False,
+                    potential_axis_label=("LT decision potential [model units; SI unverified]" if lt
+                        else "Soma SumPotential [model units; SI unverified]"),
                     context_label='Positive-response Y detail; negative reset clipped; see full-range overview')
                 self.assertTrue(all(v['time_view'] == 'overview' and not v['downsampling'] for v in views))
                 for view in views:
