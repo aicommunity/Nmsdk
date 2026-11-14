@@ -27,7 +27,7 @@
 
 ## Что выполняется сейчас
 
-[Контроль target на каждой из восьми позиций A3](ValidationPlans/M40ClassicN0OrderMatrixA3-20261114/PLAN.ru.md) подготовлен. A1/A2 остановлены до native execution: неверно выбран python-validation вместо штатного python-controller-validation для владельца managed reservations. Строгий PID/start_ticks контроль сохранён и перенесён перед долгим source audit.64 пробы остаются с теми же моделью/порогом/2с/reset-per-trial; результатов перестановок пока нет.
+[Контроль target на каждой из восьми позиций A3](ValidationPlans/M40ClassicN0OrderMatrixA3-20261114/STATUS.ru.md) запущен на M40; пока выполняется source audit, новый native output не подтверждён. A1/A2 остановлены до native execution: неверно выбран python-validation вместо штатного python-controller-validation для владельца managed reservations. Строгий PID/start_ticks контроль сохранён и перенесён перед долгим source audit.64 пробы остаются с теми же моделью/порогом/2с/reset-per-trial; результатов перестановок пока нет.
 
 
 [Холодный Classic N4/N1 recovery4 завершён](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md): production1/1/DATA/physical audit приняты, native/outer закрыты.14 measured candidates,0 jointly-ready, затем5 ambiguous input0 на L54/52/50/48/45; certificate=null, классификация не оценивалась. Это не same-budget сравнение с прежним Classic recovery16. [Весь compact primary29.285MB сохранён вGit](ValidationPlans/M40N1CoupledClassicPrimaryA1-20261114/RESULT.ru.md), [научный отчёт готов:12 просмотренных overview всех4 soma выбранных групп](ClassicCoupledCold4ScientificReport-20261114.ru.md); нового Train/Test/threshold tuning нет.
