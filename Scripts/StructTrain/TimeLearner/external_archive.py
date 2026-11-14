@@ -31,6 +31,19 @@ def _configured_root(root):
     return DEFAULT_ROOT if Path(DEFAULT_ROOT).is_dir() else SMB_LINUX_ROOT
 
 
+def _native_path(value):
+    """Use extended Windows paths for historical names beyond the Win32 limit."""
+    path = Path(value)
+    if os.name == 'nt':
+        absolute = str(path.absolute())
+        slash = chr(92)
+        prefix = slash*2+'?'+slash
+        if len(absolute) >= 240 and not absolute.startswith(prefix):
+            return Path(prefix+'UNC'+slash+absolute[2:] if absolute.startswith(slash*2)
+                        else prefix+absolute)
+    return path
+
+
 def _sha(path):
     digest = hashlib.sha256()
     with path.open('rb') as stream:
@@ -78,7 +91,7 @@ def resolve(record, root=None):
 
 def store(source, root=None):
     """Copy exact bytes, verify the destination, and return a Git-sized reference."""
-    source = Path(source).resolve(strict=True)
+    source = _native_path(source).resolve(strict=True)
     require(source.is_file(), 'archive_source_not_file')
     root = _root(_configured_root(root))
     directory = root/'objects'/'sha256'
@@ -116,7 +129,7 @@ def store(source, root=None):
 
 def locate(path, root=None):
     """Compatibility for materialized bundles: original bytes or a checked sidecar."""
-    path = Path(path)
+    path = _native_path(path)
     if path.is_file():
         return path
     sidecar = path.with_name(path.name+'.archive.json')
@@ -143,7 +156,7 @@ def logical_file_names(directory):
 def materialize(reference, output, root=None):
     """Create an explicit local cache file for native tools requiring a filename."""
     source = resolve(reference, root)
-    output = Path(output).absolute()
+    output = _native_path(output).absolute()
     require('.git' not in output.parts, 'archive_materialization_inside_git_metadata')
     require(not any(p.is_symlink() for p in (output, *output.parents)), 'archive_cache_symlink')
     if output.exists():

@@ -1,5 +1,7 @@
 # План рефакторинга TimeLearner
 
+> Действующая политика с 14.11.2026: тяжёлые результаты и полные галереи хранятся в [архиве M40](ExternalExperimentArchive.ru.md), в Git — код, настройки, компактные метаданные и проверяемые `*.archive.json`. Указания ниже о сохранении primary/изображений непосредственно в Git описывают прежний снимок и больше не применяются к новым публикациям. Исходные научные наблюдения и контрольные суммы пакетов сохраняются.
+
 Принят пользователем 25.10.2026. Полная постановка включает код Classic/Branch,
 storage physics, измерения, export/import, pipeline и документы. Научный PASS
 8/8 не является условием завершения. Нормативные решения: [Decisions](Decisions.ru.md).
@@ -9,7 +11,7 @@ storage physics, измерения, export/import, pipeline и документ
 |---|---|---|
 | 0 | --no-ff merge текущих PulseLib, Bin, root в develop; согласовать gitlinks | child commits опубликованы до root, чистая closure |
 | 1 | evidence ledger с августа, режимы, property inventory, defect status, script blobs | вывод прослеживается до SHA/path, old/new gates разделены |
-| 2 | изолированный deploy root для всех targets; runtime manifest; Reports exception | две сборки не перезаписывают runtime, artifacts доступны через Git |
+| 2 | изолированный deploy root для всех targets; runtime manifest; Reports exception | две сборки не перезаписывают runtime; metadata/ссылки доступны через Git, payload — из проверенного архива M40 |
 | 3 | строгая схема analyzer/scorer, IDs, completeness, timestamps, arbitrary N; полные soma/stimulus traces для визуальных отчётов | permutation invariant, malformed/incomplete не дают PASS; все soma и фактические входные импульсы доступны без обрезки |
 | 4 | native storage/lifecycle fixtures; graph, caches, dt coefficients, reuse/load/growth | одинаковый effective graph и отклик, без learner-specific wakeup Build |
 | 5 | ModelSpec + LearnedSoloState + RecognitionState; полный native export/import | asymmetric/heterogeneous roundtrip, обнаружение потерянных узлов/связей |
