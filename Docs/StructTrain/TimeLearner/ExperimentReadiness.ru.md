@@ -27,6 +27,9 @@
 
 ## Что выполняется сейчас
 
+[Контроль target на каждой из восьми позиций подготовлен](ValidationPlans/M40ClassicN0OrderMatrixA1-20261114/PLAN.ru.md), но ещё не запущен:64 реальные пробы той же Classic N0 stopped модели, тот же заранее выбранный threshold, прежние2с/reset-per-trial. Первые8 waveform обязаны воспроизвести baseline; результаты остальных порядков неизвестны. ITI/continuous, новое обучение и независимые случайные повторы этой постановкой не заявляются. Серверная проверка ждёт доступа через jump; исходные4/8 и новые A/B outcomes не переименовываются в её результат.
+
+
 [Холодный Classic N4/N1 recovery4 завершён](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md): production1/1/DATA/physical audit приняты, native/outer закрыты.14 measured candidates,0 jointly-ready, затем5 ambiguous input0 на L54/52/50/48/45; certificate=null, классификация не оценивалась. Это не same-budget сравнение с прежним Classic recovery16. [Весь compact primary29.285MB сохранён вGit](ValidationPlans/M40N1CoupledClassicPrimaryA1-20261114/RESULT.ru.md), [научный отчёт готов:12 просмотренных overview всех4 soma выбранных групп](ClassicCoupledCold4ScientificReport-20261114.ru.md); нового Train/Test/threshold tuning нет.
 
 [Cold Branch N4/N1 coupled-search Train](N1CoupledScientificReport-20261113.ru.md) завершён: одна local-ready input2, затем invalid_observation/ambiguous input1. Production CLI/DATA1/1 и report1/1 приняты, общая сходимость не подтверждена. [Frozen8pattern diagnostic](ValidationPlans/M40N1CoupledFrozenA1-20261113/RESULT.ru.md) фактического terminal state принят1/1,8полных observations, модель неизменна. При100 все молчат. [Один Same-Matrix threshold проверен настоящими спайками](BranchCoupledThresholdScientificReport-20261114.ru.md): TP1/FP5/FN0/TN2, target на228ms раньше последнего input. Report1/1,32 selected originals просмотрены, primary69.875324MB сохранён.
