@@ -1,0 +1,17 @@
+test_native_inputs_and_responses_with_full_and_positive_scales (Scripts.StructTrain.TimeLearner.tests.test_fixed_order_temporal_report.FixedOrderTemporalReportTest.test_native_inputs_and_responses_with_full_and_positive_scales) ... ERROR
+
+======================================================================
+ERROR: test_native_inputs_and_responses_with_full_and_positive_scales (Scripts.StructTrain.TimeLearner.tests.test_fixed_order_temporal_report.FixedOrderTemporalReportTest.test_native_inputs_and_responses_with_full_and_positive_scales)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-order-report-a1/Scripts/StructTrain/TimeLearner/tests/test_fixed_order_temporal_report.py", line 64, in test_native_inputs_and_responses_with_full_and_positive_scales
+    views = render_soma(projected, soma_channel, label, limits, folder,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-order-report-a1/Scripts/StructTrain/TimeLearner/plotting.py", line 177, in render_soma
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+
+----------------------------------------------------------------------
+Ran 1 test in 832.163s
+
+FAILED (errors=1)

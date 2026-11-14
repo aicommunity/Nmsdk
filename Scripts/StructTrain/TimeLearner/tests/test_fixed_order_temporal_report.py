@@ -6,7 +6,7 @@ import unittest
 from ..native_calibration_worker import _write
 from ..native_evidence import load
 from ..native_pipeline_worker import audit_run_manifest
-from ..plotting import padded_limits, render_soma
+from ..plotting import padded_limits, plotting_runtime, render_soma
 from ..recognition_metrics import load_diagnostic_evaluation
 from ..runtime import file_record
 
@@ -14,6 +14,7 @@ from ..runtime import file_record
 class FixedOrderTemporalReportTest(unittest.TestCase):
     def test_native_inputs_and_responses_with_full_and_positive_scales(self):
         from PIL import Image
+        environment = plotting_runtime()  # Verify dependencies before any large source audit.
         source = Path(os.environ['TIMELEARNER_FIXED_ORDER_COMPLETED']).resolve(strict=True)
         before = {name: file_record(source/name)
                   for name in ('result.json', 'run/run-manifest.json')}
@@ -82,6 +83,7 @@ class FixedOrderTemporalReportTest(unittest.TestCase):
         _write(output/'analysis.json', result['metrics'])
         _write(output/'manifest.json', dict(kind='fixed_order_native_temporal_report',
             schema_version=1, observed_trials=64, plotted_trials=selected, figures=figures,
+            plotting_environment=environment,
             scope='all eight patterns in rotation0 and target in each of eight positions',
             shared_scales_computed_over_all_64_trials=True, native_samples_changed=False,
             peak_assignment_changed=False, negative_reset_clipping_explicit=True,
