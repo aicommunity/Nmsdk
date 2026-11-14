@@ -1,0 +1,63 @@
+{
+  "root": "d69c463ab8b99c36e3424502fe24bc55f96162a6",
+  "pulselib": "04a10aa94da7adb887ccabd73a7b7ea2d8dd7600",
+  "compile": {
+    "execution": "completed",
+    "returncode": 0,
+    "wall_seconds": 30.871026642620564
+  },
+  "execution": "process_error",
+  "validity": "valid",
+  "assertion_status": "failed",
+  "executable": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-geometry-ab-m40-a1/worker/tmp/n0-geometry-controller-ab/baseline/controller-tests",
+    "sha256": "aa9362dd04dedf5a0f3b824c4342bcdadbf427b396631ca384f24535d12871ad",
+    "size": 1037640
+  },
+  "resolved_libraries": [
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+      "size": 2129424
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "sha256": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+      "size": 183024
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "sha256": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0",
+      "size": 952616
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33",
+      "sha256": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+      "size": 2592224
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+      "size": 236616
+    }
+  ],
+  "actual_loaded_files_captured": false,
+  "test": {
+    "execution": "process_error",
+    "returncode": 1,
+    "wall_seconds": 0.007894687820225954
+  },
+  "inventory": {
+    "expected": 6,
+    "observed": 6,
+    "failed_test_ids": [
+      "BoundedTrainingN0Geometry/ClassicLaterGeometryNormalizesDespiteWorseStartingAmplitude",
+      "BoundedTrainingN0Geometry/BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude",
+      "BoundedTrainingN0Geometry/BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement",
+      "BoundedTrainingN0Geometry/LocalHistoryWaitsForCompleteRepeatedCandidates",
+      "BoundedTrainingN0Geometry/ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength"
+    ],
+    "assertion_status": "failed",
+    "sha256": "c0f53105e399e4142c9c6b3ac95d267be24fc38452e7e6b54ab3158e9665c6e9"
+  }
+}

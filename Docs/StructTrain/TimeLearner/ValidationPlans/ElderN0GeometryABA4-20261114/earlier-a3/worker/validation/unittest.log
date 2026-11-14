@@ -1,0 +1,15 @@
+test_old_starvation_and_new_complete_scoped_corpus (Scripts.StructTrain.TimeLearner.tests.test_n0_geometry_controller_ab.N0GeometryControllerABTest) ... FAIL
+
+======================================================================
+FAIL: test_old_starvation_and_new_complete_scoped_corpus (Scripts.StructTrain.TimeLearner.tests.test_n0_geometry_controller_ab.N0GeometryControllerABTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-n0-geometry-ab-root-a2/Scripts/StructTrain/TimeLearner/tests/test_n0_geometry_controller_ab.py", line 38, in test_old_starvation_and_new_complete_scoped_corpus
+    self.assertCountEqual(before['inventory']['failed_test_ids'],
+AssertionError: Element counts were not equal:
+First has 1, Second has 0:  'BoundedTrainingN0Geometry/WorseNeighborDoesNotRemoveANonmonotoneFallbackSolution'
+
+----------------------------------------------------------------------
+Ran 1 test in 66.200s
+
+FAILED (failures=1)

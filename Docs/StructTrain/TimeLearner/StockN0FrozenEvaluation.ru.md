@@ -23,3 +23,7 @@ Worker fixture test_stock_n0_stopped_matrix_native читает и полнос�
 Если затем выполняется отдельный Same-Matrix threshold experiment, объявить его до spiking run, использовать штатный diagnostic_threshold_study и единственное заранее определённое midpoint rule. Nonspiking maxima только предлагают кандидат; фактический исход определяется реальным запуском с выбранным порогом. Отсутствие допустимого кандидата, nonseparable proxy и scientific nonseparability не смешивать с invalid observations и не скрывать. Independent Test и calibration certificate эта процедура не создаёт.
 
 Тяжёлые audit/render и новые native evaluation запускаются после закрытия текущего timed Branch Train, чтобы не менять его ресурсные условия. Начальная runtime/physics/mode matrix всего плана остаётся частичной.
+
+## Подтверждённое выполнение 14.11.2026
+
+[Classic frozen8 принят](ValidationPlans/M40StockN0ClassicFrozenA1-20261114/RESULT.ru.md), [Branch frozen8 принят](ValidationPlans/M40StockN0BranchFrozenA1-20261114/RESULT.ru.md). Обе actual terminal models сохранены при import/frozen probes. При фиксированном100 в обоих случаях TP0/FP0/FN1/TN7; это молчание с пропуском target, без успешной детекции. Classic temporal gallery строится, собственный Branch report и compact frozen primary ещё открыты. Новая правка N0 прошла отдельный controller kernel на обоих workers и не использовалась в этих наблюдениях.

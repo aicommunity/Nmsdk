@@ -1,0 +1,56 @@
+Running main() from /home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/googletest/src/gtest_main.cc
+Note: Google Test filter = BoundedTrainingN0Geometry.ClassicLaterGeometryNormalizesDespiteWorseStartingAmplitude:BoundedTrainingN0Geometry.BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude:BoundedTrainingN0Geometry.BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement:BoundedTrainingN0Geometry.LocalHistoryWaitsForCompleteRepeatedCandidates:BoundedTrainingN0Geometry.ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength:BoundedTrainingN0Geometry.WorseNeighborDoesNotRemoveANonmonotoneFallbackSolution
+[==========] Running 6 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 6 tests from BoundedTrainingN0Geometry
+[ RUN      ] BoundedTrainingN0Geometry.ClassicLaterGeometryNormalizesDespiteWorseStartingAmplitude
+/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29: Failure
+Expected equality of these values:
+  session.Status()
+    Which is: 4-byte object <04-00 00-00>
+  TrainingStatus::Exact
+    Which is: 4-byte object <02-00 00-00>
+[  FAILED  ] BoundedTrainingN0Geometry.ClassicLaterGeometryNormalizesDespiteWorseStartingAmplitude (0 ms)
+[ RUN      ] BoundedTrainingN0Geometry.BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude
+/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29: Failure
+Expected equality of these values:
+  session.Status()
+    Which is: 4-byte object <04-00 00-00>
+  TrainingStatus::Exact
+    Which is: 4-byte object <02-00 00-00>
+[  FAILED  ] BoundedTrainingN0Geometry.BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude (0 ms)
+[ RUN      ] BoundedTrainingN0Geometry.BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement
+/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29: Failure
+Expected equality of these values:
+  session.Status()
+    Which is: 4-byte object <04-00 00-00>
+  TrainingStatus::Exact
+    Which is: 4-byte object <02-00 00-00>
+[  FAILED  ] BoundedTrainingN0Geometry.BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement (0 ms)
+[ RUN      ] BoundedTrainingN0Geometry.LocalHistoryWaitsForCompleteRepeatedCandidates
+/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29: Failure
+Expected equality of these values:
+  session.Status()
+    Which is: 4-byte object <04-00 00-00>
+  TrainingStatus::Exact
+    Which is: 4-byte object <02-00 00-00>
+[  FAILED  ] BoundedTrainingN0Geometry.LocalHistoryWaitsForCompleteRepeatedCandidates (0 ms)
+[ RUN      ] BoundedTrainingN0Geometry.ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength
+/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:72: Failure
+Expected: (other) != (points.end()), actual: 8-byte object <58-A2 1D-30 9C-5E 00-00> vs 8-byte object <58-A2 1D-30 9C-5E 00-00>
+[  FAILED  ] BoundedTrainingN0Geometry.ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength (2 ms)
+[ RUN      ] BoundedTrainingN0Geometry.WorseNeighborDoesNotRemoveANonmonotoneFallbackSolution
+[       OK ] BoundedTrainingN0Geometry.WorseNeighborDoesNotRemoveANonmonotoneFallbackSolution (0 ms)
+[----------] 6 tests from BoundedTrainingN0Geometry (5 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 1 test suite ran. (5 ms total)
+[  PASSED  ] 1 test.
+[  FAILED  ] 5 tests, listed below:
+[  FAILED  ] BoundedTrainingN0Geometry.ClassicLaterGeometryNormalizesDespiteWorseStartingAmplitude
+[  FAILED  ] BoundedTrainingN0Geometry.BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude
+[  FAILED  ] BoundedTrainingN0Geometry.BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement
+[  FAILED  ] BoundedTrainingN0Geometry.LocalHistoryWaitsForCompleteRepeatedCandidates
+[  FAILED  ] BoundedTrainingN0Geometry.ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength
+
+ 5 FAILED TESTS

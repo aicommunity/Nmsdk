@@ -1,0 +1,43 @@
+Running main() from /home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a3/worker/tmp/n0-geometry-controller-ab/googletest/src/gtest_main.cc
+Note: Google Test filter = BoundedTrainingN0Geometry.ClassicLaterGeometryNormalizesDespiteWorseStartingAmplitude:BoundedTrainingN0Geometry.BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude:BoundedTrainingN0Geometry.BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement:BoundedTrainingN0Geometry.LocalHistoryWaitsForCompleteRepeatedCandidates:BoundedTrainingN0Geometry.ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength:BoundedTrainingN0Geometry.WorseNeighborDoesNotRemoveANonmonotoneFallbackSolution
+[==========] Running 6 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 6 tests from BoundedTrainingN0Geometry
+[ RUN      ] BoundedTrainingN0Geometry.ClassicLaterGeometryNormalizesDespiteWorseStartingAmplitude
+[       OK ] BoundedTrainingN0Geometry.ClassicLaterGeometryNormalizesDespiteWorseStartingAmplitude (0 ms)
+[ RUN      ] BoundedTrainingN0Geometry.BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude
+/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a3/worker/tmp/n0-geometry-controller-ab/candidate/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:39: Failure
+Expected: (first) != (history.end()), actual: 8-byte object <78-66 69-0D 13-64 00-00> vs 8-byte object <78-66 69-0D 13-64 00-00>
+[  FAILED  ] BoundedTrainingN0Geometry.BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude (0 ms)
+[ RUN      ] BoundedTrainingN0Geometry.BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement
+/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a3/worker/tmp/n0-geometry-controller-ab/candidate/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:39: Failure
+Expected: (first) != (history.end()), actual: 8-byte object <C8-9A 69-0D 13-64 00-00> vs 8-byte object <C8-9A 69-0D 13-64 00-00>
+[  FAILED  ] BoundedTrainingN0Geometry.BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement (0 ms)
+[ RUN      ] BoundedTrainingN0Geometry.LocalHistoryWaitsForCompleteRepeatedCandidates
+[       OK ] BoundedTrainingN0Geometry.LocalHistoryWaitsForCompleteRepeatedCandidates (0 ms)
+[ RUN      ] BoundedTrainingN0Geometry.ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength
+/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a3/worker/tmp/n0-geometry-controller-ab/candidate/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:70: Failure
+Expected: (points.size()) <= (cfg.maximumCandidatesPerInput), actual: 31 vs 30
+/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a3/worker/tmp/n0-geometry-controller-ab/candidate/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:70: Failure
+Expected: (points.size()) <= (cfg.maximumCandidatesPerInput), actual: 31 vs 30
+[  FAILED  ] BoundedTrainingN0Geometry.ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength (5 ms)
+[ RUN      ] BoundedTrainingN0Geometry.WorseNeighborDoesNotRemoveANonmonotoneFallbackSolution
+/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a3/worker/tmp/n0-geometry-controller-ab/candidate/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:86: Failure
+Expected equality of these values:
+  session.Status()
+    Which is: 4-byte object <04-00 00-00>
+  TrainingStatus::Exact
+    Which is: 4-byte object <02-00 00-00>
+[  FAILED  ] BoundedTrainingN0Geometry.WorseNeighborDoesNotRemoveANonmonotoneFallbackSolution (1 ms)
+[----------] 6 tests from BoundedTrainingN0Geometry (9 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 1 test suite ran. (9 ms total)
+[  PASSED  ] 2 tests.
+[  FAILED  ] 4 tests, listed below:
+[  FAILED  ] BoundedTrainingN0Geometry.BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude
+[  FAILED  ] BoundedTrainingN0Geometry.BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement
+[  FAILED  ] BoundedTrainingN0Geometry.ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength
+[  FAILED  ] BoundedTrainingN0Geometry.WorseNeighborDoesNotRemoveANonmonotoneFallbackSolution
+
+ 4 FAILED TESTS

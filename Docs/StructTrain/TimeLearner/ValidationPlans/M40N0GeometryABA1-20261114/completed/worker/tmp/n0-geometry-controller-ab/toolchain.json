@@ -1,0 +1,229 @@
+{
+  "compiler": {
+    "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+    "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+    "size": 1027128
+  },
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "LANG": "C",
+    "LC_ALL": "C"
+  },
+  "version": "x86_64-linux-gnu-g++-13 (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "googletest": {
+    "repository": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1",
+    "commit": "58d77fa8070e8cec2dc1ed015d66b454c8d78850",
+    "files": [
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest-assertion-result.h",
+        "sha256": "9e5c5e6d3ff7d2325c434e4ae2622cea4f9aedba0c6dc3fca266cbf56d69f64e",
+        "size": 8502,
+        "relative_path": "include/gtest/gtest-assertion-result.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest-death-test.h",
+        "sha256": "ab4c290687921aa08a9eec43a939e6b936e180da5368aed9632c016d4d8bf421",
+        "size": 14886,
+        "relative_path": "include/gtest/gtest-death-test.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest-matchers.h",
+        "sha256": "2ccaf4fca12a5061dde5f5387e77fbc5228e5d409df8915064ebe3f49ecc83df",
+        "size": 33615,
+        "relative_path": "include/gtest/gtest-matchers.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest-message.h",
+        "sha256": "1aa2fbd390273f0b60a3bb4abca8852c6f35c7c84edae44abdd4ff65c58ecd81",
+        "size": 8109,
+        "relative_path": "include/gtest/gtest-message.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest-param-test.h",
+        "sha256": "9a7ef3c1a34a73194c7b90c415097fa9329d28a592a40c81d24eb66959155c8b",
+        "size": 22870,
+        "relative_path": "include/gtest/gtest-param-test.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest-printers.h",
+        "sha256": "f7d10deb547407bcd80b2eca97b8b69cb8b007d75338e656ad9571ee10d40208",
+        "size": 36608,
+        "relative_path": "include/gtest/gtest-printers.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest-spi.h",
+        "sha256": "d3099e75ffcfeba1ec7c212822465089fb7245f2b4b7463a0239dfc610b594be",
+        "size": 12824,
+        "relative_path": "include/gtest/gtest-spi.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest-test-part.h",
+        "sha256": "51183b770149e7489aeb5b552231a026d8a9e79b1080dea242534a130273839d",
+        "size": 7111,
+        "relative_path": "include/gtest/gtest-test-part.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest-typed-test.h",
+        "sha256": "e4607bf400b336cc1eb3a466826d1d9ba8af59f11ab2e737cc6f063e3659b52d",
+        "size": 15921,
+        "relative_path": "include/gtest/gtest-typed-test.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest.h",
+        "sha256": "a5fb1618b06a3b3a8f63675fead4823d69773eaccf639fe240111444de8d04b9",
+        "size": 89715,
+        "relative_path": "include/gtest/gtest.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest_pred_impl.h",
+        "sha256": "85e850e735a42ebb5f9a01a018708c1c0b9b7d83c94b14b7d5d29512c00b6ffd",
+        "size": 12783,
+        "relative_path": "include/gtest/gtest_pred_impl.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/gtest_prod.h",
+        "sha256": "3c6301ef533db8686e474dd5a0de4d98a31cbb630e2273f712472d1be25aa261",
+        "size": 2502,
+        "relative_path": "include/gtest/gtest_prod.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/internal/custom/gtest-port.h",
+        "sha256": "5e06747c9e8b86e9d841fabd61c2f045b2bb1133716f127be4a963ced1c44e01",
+        "size": 1873,
+        "relative_path": "include/gtest/internal/custom/gtest-port.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/internal/custom/gtest-printers.h",
+        "sha256": "b95afda2426e8c4f09c11d3296d522fb336b248c0da7e078388db4bb072c2166",
+        "size": 2094,
+        "relative_path": "include/gtest/internal/custom/gtest-printers.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/internal/custom/gtest.h",
+        "sha256": "21d20a1c64ea38c20c4b12337c261a1a18989d2a30710a83dfb5cd9a3bb3c55e",
+        "size": 1858,
+        "relative_path": "include/gtest/internal/custom/gtest.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/internal/gtest-death-test-internal.h",
+        "sha256": "39c623bc75b3199edc0419b3f5c9f36af909365d7f559f7006339b8895991308",
+        "size": 13916,
+        "relative_path": "include/gtest/internal/gtest-death-test-internal.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/internal/gtest-filepath.h",
+        "sha256": "57ec9f19952e3c10bdab36801a1d5719846e51cba529ad8c81de2fdd93f9e4d2",
+        "size": 9817,
+        "relative_path": "include/gtest/internal/gtest-filepath.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/internal/gtest-internal.h",
+        "sha256": "e223ecc360bbbddda774dc6f8f62436533d1f514c99d1c0b23c23929454d85d7",
+        "size": 63795,
+        "relative_path": "include/gtest/internal/gtest-internal.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/internal/gtest-param-util.h",
+        "sha256": "5b6f82fdfb9de582b0e153e80a9f9619a989ed270480589c144f29ebe093d8f2",
+        "size": 35637,
+        "relative_path": "include/gtest/internal/gtest-param-util.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/internal/gtest-port-arch.h",
+        "sha256": "c8cc2fa25f9e5693cb2d4cae49d853ff6eb69b295d36d2b001be50f1ae374080",
+        "size": 4127,
+        "relative_path": "include/gtest/internal/gtest-port-arch.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/internal/gtest-port.h",
+        "sha256": "f33493bc84eed4f6921e010bff897683e6c624a4500f0e827612413ada68bb07",
+        "size": 87637,
+        "relative_path": "include/gtest/internal/gtest-port.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/internal/gtest-string.h",
+        "sha256": "67e97a51ff7f178fff1e858898aab12502b65be7d82844ee5559dc47f8d9f190",
+        "size": 7301,
+        "relative_path": "include/gtest/internal/gtest-string.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/include/gtest/internal/gtest-type-util.h",
+        "sha256": "f0d7432a5bc819faf8ff158854c301cb8fbab7d5a1952b1f9419cefd66889d75",
+        "size": 6247,
+        "relative_path": "include/gtest/internal/gtest-type-util.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest-all.cc",
+        "sha256": "972d3016860f9aa6452e078cf77406290fb7003b66fd6c0744a030bd1c323606",
+        "size": 2201,
+        "relative_path": "src/gtest-all.cc"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest-assertion-result.cc",
+        "sha256": "9626aafa4ee7e9d2f0dbbe20fb3d3eacd557f8bec122336be0d795af9aa76363",
+        "size": 3021,
+        "relative_path": "src/gtest-assertion-result.cc"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest-death-test.cc",
+        "sha256": "61b5fa622aeaa223ddcba9645f5b6505e749c705c31a06b46854968b02e24b20",
+        "size": 63129,
+        "relative_path": "src/gtest-death-test.cc"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest-filepath.cc",
+        "sha256": "d554c1c2ea6dc52ca598033ee00a7d5bc7c560a76d944903517e4284cccba331",
+        "size": 14054,
+        "relative_path": "src/gtest-filepath.cc"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest-internal-inl.h",
+        "sha256": "5835adb94ed5318d8bf4ee5e14b1c05af5994c73f52df1311582d00e54577417",
+        "size": 47662,
+        "relative_path": "src/gtest-internal-inl.h"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest-matchers.cc",
+        "sha256": "e4ce9edf33493625353cc147a14caac14fdba7390d76166d101fa2fe9d16bbda",
+        "size": 3724,
+        "relative_path": "src/gtest-matchers.cc"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest-port.cc",
+        "sha256": "3f857086ba7b1b4946a85eb1b1d8ff3a9b07870084f7b9413c1c743932f040ba",
+        "size": 47857,
+        "relative_path": "src/gtest-port.cc"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest-printers.cc",
+        "sha256": "8ba75ca58c475b06e437c68d8782da640c95e443151c932170b1657aafc96bab",
+        "size": 18478,
+        "relative_path": "src/gtest-printers.cc"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest-test-part.cc",
+        "sha256": "1bd741196ad3fefe4292e95017c889b71f4e7938bad5dedafa27c3f9bcc370a2",
+        "size": 4024,
+        "relative_path": "src/gtest-test-part.cc"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest-typed-test.cc",
+        "sha256": "7a05b3a4a039bfaf888fdcc989cf3c67bf413d220acb5dad8b74306c6a6c8344",
+        "size": 3768,
+        "relative_path": "src/gtest-typed-test.cc"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest.cc",
+        "sha256": "e9b38f44311c1f57dacdcf84fe86cbef48e84e08660cbe9276eed5b4b2e18b82",
+        "size": 255540,
+        "relative_path": "src/gtest.cc"
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest/src/gtest_main.cc",
+        "sha256": "3aa4a145fec923430748a260d453fbb2b493dc24b4805d3d8c2c9a84fda7ac58",
+        "size": 1967,
+        "relative_path": "src/gtest_main.cc"
+      }
+    ]
+  }
+}

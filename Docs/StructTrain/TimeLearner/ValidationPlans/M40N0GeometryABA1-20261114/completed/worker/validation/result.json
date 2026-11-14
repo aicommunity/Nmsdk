@@ -1,0 +1,38 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s07-n0-geometry-ab-m40-a1",
+  "package_fingerprint": "6b350625b148c59e8a66860f232a449596ff3c3dfa0234e8a51411f63767d86f",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n0_geometry_controller_ab.N0GeometryControllerABTest.test_old_starvation_and_new_complete_scoped_corpus"
+  ],
+  "executed_tests": 1,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_N0_GEOMETRY_AB_CONTROLS": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-ab-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryABA1-20261114/fixture",
+      "files": 2,
+      "fingerprint": "eec9a201fdf5add16d3b20eb925ab648508661fc846a9bfbe4424cbba97068df"
+    },
+    "TIMELEARNER_N0_GEOMETRY_AB_ROOT": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-ab-root-a1",
+      "files": 3,
+      "fingerprint": "2ae073a055ef78b81c65a753d9f926f8e472f20109a2a2d84bced88be74e61ef"
+    },
+    "TIMELEARNER_N0_GEOMETRY_AB_PULSE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-ab-pulse-a1",
+      "files": 2,
+      "fingerprint": "0decabaeeec5d4c6acd4f99e3885a310d076bee041056f0a5219ab19260ad5bc"
+    },
+    "TIMELEARNER_N0_GEOMETRY_AB_GTEST": {
+      "path": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest",
+      "files": 76,
+      "fingerprint": "7613953054ea77affa21ee0ba153ab08f73d738e2f2bf9aac13cf2411f86a6f9"
+    }
+  },
+  "scientific_verdict": null
+}

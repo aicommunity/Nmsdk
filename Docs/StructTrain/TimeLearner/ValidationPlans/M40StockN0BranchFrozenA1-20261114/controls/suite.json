@@ -1,0 +1,34 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s11-stock-n0-branch-frozen-m40-a1",
+  "package_fingerprint": "332ea3d20d01a696b6042fe702fcc4b2a2536b9dee34a46a50af5572e5b030a8",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_n0_stopped_matrix_native.StockN0StoppedMatrixNativeTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_n0_stopped_matrix_native.StockN0StoppedMatrixNativeTest.test_actual_N0_source_and_all_eight_complete_frozen_responses"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_N0_MATRIX_CONTROLS": {
+      "pattern": "*",
+      "files": 4,
+      "fingerprint": "ba1a9ab932df3c4e7de30ae50b90c2743190628228f89b9cf9205f011f9d261d"
+    },
+    "TIMELEARNER_STOCK_N0_MATRIX_TRAIN": {
+      "pattern": "**/*.json",
+      "files": 649,
+      "fingerprint": "73ac3888e7acbc2184364db619a59434d73b25ae6db1ad6d2f89c4c941af0cd8"
+    },
+    "TIMELEARNER_STOCK_N0_MATRIX_CSV": {
+      "pattern": "**/*.csv",
+      "files": 1068,
+      "fingerprint": "78e7a46deef4626e78cd118f7c2b99f573fc76d2729efd643b355d08704e853c"
+    },
+    "TIMELEARNER_STOCK_N0_MATRIX_RUNTIME": {
+      "pattern": "NeuroModelerConsole",
+      "files": 1,
+      "fingerprint": "c219c7fe1f3cfb6b8794e1a758bea92e4382cdbb680f45a5a4b09fa321abd501"
+    }
+  }
+}

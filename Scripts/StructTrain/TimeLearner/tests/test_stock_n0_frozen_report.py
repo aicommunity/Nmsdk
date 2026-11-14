@@ -4,6 +4,7 @@ from pathlib import Path
 import unittest
 
 from ..native_evidence import load, require
+from ..recognition_metrics import load_diagnostic_evaluation
 from ..reports import render_diagnostic_evaluation
 
 
@@ -22,6 +23,11 @@ class StockN0FrozenReportTest(unittest.TestCase):
         self.assertFalse(actual['training_completed'])
         self.assertEqual(actual['effective_threshold'], 100.)
         self.assertIsNone(actual['evaluation_verdict'])
+        _, observations = load_diagnostic_evaluation(source/'native/evaluation.json')
+        expected_pairs = sum(len(o['samples'][0]['soma']) for o in observations)
+        self.assertGreater(expected_pairs, 0)
+        self.assertTrue(all(len(s['soma']) == len(o['samples'][0]['soma'])
+                            for o in observations for s in o['samples']))
         output = Path(os.environ['TMPDIR']).resolve(strict=True)/'stock-n0-frozen-gallery'
         result = render_diagnostic_evaluation(source/'native/evaluation.json',
             source/'native/model.json', source/'input/source/train_stopped_state.json', output)
@@ -32,8 +38,8 @@ class StockN0FrozenReportTest(unittest.TestCase):
         self.assertTrue(all(t['complete'] and t['sample_count'] > 0
                             for t in manifest['declared_trials']))
         self.assertEqual(result['trial_soma_pairs'], manifest['expected_trial_soma_pairs'])
-        self.assertEqual(manifest['expected_trial_soma_pairs'], 32)
-        self.assertEqual(len(manifest['figures']), 32)
+        self.assertEqual(manifest['expected_trial_soma_pairs'], expected_pairs)
+        self.assertEqual(len(manifest['figures']), expected_pairs)
         self.assertEqual({f['sample_id'] for f in manifest['figures']},
                          {t['sample_id'] for t in actual['trials']})
         self.assertFalse(manifest['visual_acceptance_complete'])

@@ -1,0 +1,34 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-n0-geometry-ab-elder-a4",
+  "package_fingerprint": "6b350625b148c59e8a66860f232a449596ff3c3dfa0234e8a51411f63767d86f",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n0_geometry_controller_ab.N0GeometryControllerABTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n0_geometry_controller_ab.N0GeometryControllerABTest.test_old_starvation_and_new_complete_scoped_corpus"
+  ],
+  "fixtures": {
+    "TIMELEARNER_N0_GEOMETRY_AB_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "2c46282ef5383448e1c3b25cf3905805ffba13412093a78094fd10ac3f2bfda2"
+    },
+    "TIMELEARNER_N0_GEOMETRY_AB_ROOT": {
+      "pattern": ".git/objects/pack/*.pack",
+      "files": 5,
+      "fingerprint": "4407724ce3d775570cacd4b339bf261e44e51abe4645340460fbe11856256a55"
+    },
+    "TIMELEARNER_N0_GEOMETRY_AB_PULSE": {
+      "pattern": ".git/objects/pack/*.pack",
+      "files": 2,
+      "fingerprint": "0decabaeeec5d4c6acd4f99e3885a310d076bee041056f0a5219ab19260ad5bc"
+    },
+    "TIMELEARNER_N0_GEOMETRY_AB_GTEST": {
+      "pattern": "**/*.cc",
+      "files": 76,
+      "fingerprint": "7613953054ea77affa21ee0ba153ab08f73d738e2f2bf9aac13cf2411f86a6f9"
+    }
+  }
+}

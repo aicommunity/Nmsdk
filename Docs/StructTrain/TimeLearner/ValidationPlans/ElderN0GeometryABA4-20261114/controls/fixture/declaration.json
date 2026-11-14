@@ -1,0 +1,13 @@
+{
+  "root_repository": "/home/user/timelearner-refactor/source-n0-geometry-ab-root-a2",
+  "pulse_repository": "/home/user/timelearner-refactor/source-n0-geometry-ab-pulse-a1",
+  "compiler": "/usr/bin/x86_64-linux-gnu-g++-11",
+  "gtest_source": "/home/user/timelearner-refactor/build-n1-measured-refinement-normal-a1/_deps/googletest-src/googletest",
+  "expected_baseline_failures": [
+    "BoundedTrainingN0Geometry/ClassicLaterGeometryNormalizesDespiteWorseStartingAmplitude",
+    "BoundedTrainingN0Geometry/BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude",
+    "BoundedTrainingN0Geometry/BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement",
+    "BoundedTrainingN0Geometry/LocalHistoryWaitsForCompleteRepeatedCandidates",
+    "BoundedTrainingN0Geometry/ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength"
+  ]
+}

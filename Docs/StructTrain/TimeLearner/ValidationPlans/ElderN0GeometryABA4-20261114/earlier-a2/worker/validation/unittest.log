@@ -1,0 +1,18 @@
+test_old_starvation_and_new_complete_scoped_corpus (Scripts.StructTrain.TimeLearner.tests.test_n0_geometry_controller_ab.N0GeometryControllerABTest) ... ERROR
+
+======================================================================
+ERROR: test_old_starvation_and_new_complete_scoped_corpus (Scripts.StructTrain.TimeLearner.tests.test_n0_geometry_controller_ab.N0GeometryControllerABTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-n0-geometry-ab-root-a1/Scripts/StructTrain/TimeLearner/tests/test_n0_geometry_controller_ab.py", line 28, in test_old_starvation_and_new_complete_scoped_corpus
+    result = run_controller_ab(controls/'specification.json',
+  File "/home/user/timelearner-refactor/source-n0-geometry-ab-root-a1/Scripts/StructTrain/TimeLearner/controller_ab.py", line 93, in run_controller_ab
+    require(not any(output == p or p in output.parents for p in (root_repository, pulse_repository)),
+  File "/home/user/timelearner-refactor/source-n0-geometry-ab-root-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: controller_ab_output_must_be_outside_sources
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (errors=1)
