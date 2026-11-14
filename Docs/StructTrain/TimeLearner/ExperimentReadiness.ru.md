@@ -2,7 +2,7 @@
 
 [Весь новый Classic cold4 primary независимо восстановлен и проанализирован на Elder](ValidationPlans/ElderClassicCold4PrimaryReplayA2-20261114/RESULT.ru.md):1/1 PASS,910 logical members, corrupted-extracted-CSV refusal.14 measured candidates/0 jointly-ready и invalid_observation сохранены; нового нейронного исполнения нет.
 
-[Отдельный N0-контроль](StockNormalizationControl.ru.md):11/11 declaration regressions приняты на M40 и Elder; оба native cold preflight Classic/Branch приняты1/1 на прежнем SDK. [Холодный Classic N0 запущен](ValidationPlans/M40StockN0ClassicTrainA1-20261114/STATUS.ru.md), исходные controls сохранены. Outcome ещё неизвестен; N0 готовность всей матрицы или сходимость этим не подтверждены. Branch N0 ждёт closure Classic.
+[Отдельный N0-контроль](StockNormalizationControl.ru.md):11/11 declaration regressions приняты на M40 и Elder; оба native cold preflight Classic/Branch приняты1/1 на прежнем SDK. [Classic N0 завершён, полный DATA/physical1/1 принят](ValidationPlans/M40StockN0ClassicTrainA1-20261114/RESULT.ru.md):13 measured candidates/0 timing-ready, invalid_observation/ambiguous; Ns>1 не применён, certificate=null. [Branch N0 запущен после closure Classic](ValidationPlans/M40StockN0BranchTrainA1-20261114/STATUS.ru.md), outcome ещё неизвестен. Полный N0 primary/графики ожидаются; вся матрица не принята.
 
 Современные реальные эксперименты уже выполнены и опубликованы с первичными данными. Успешное завершение обучения и надёжная классификация завершённого паттерна на современных моделях пока не подтверждены. Исторические визуальные4/8–6/8 сохраняют силу для своего исходного протокола. Полный план остаётся активным: полностью принят этап0, этапы1–12 частичны.
 

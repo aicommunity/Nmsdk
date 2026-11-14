@@ -1,0 +1,3 @@
+# Холодный Branch N0 запущен
+
+s11-stock-n0-branch-train-m40-a1, control commitae2ae412f5bb8c267828202b9a92982378e6337a. После completed/closed Classic N0 и полного DATA/physical1/1 запущен отдельный холодный Branch N0 на прежнем native SDK/runtime и Python source69e985df6654ac64cc34571e6862119cf26b90c5. Declared stock physics/target/measurement windows/budgets/tolerances сохранены, N0 управляет Ns1..128 неопорным при фиксированном индивидуальном Rs. Научный исход ещё неизвестен. [Постановка](../../StockNormalizationControl.ru.md), [результат Classic](../M40StockN0ClassicTrainA1-20261114/RESULT.ru.md).
