@@ -18,6 +18,7 @@ import socket
 import subprocess
 import sys
 import threading
+import tempfile
 import uuid
 
 from . import collector_provenance as provenance
@@ -553,10 +554,10 @@ def collect_prepared(prepared, output_root):
     return result
 
 
-def stage_collection_artifacts(output_root, repository):
+def stage_collection_artifacts(output_root, repository, *, publication_output=None, archive_root=None):
     """Require durable final controls before the existing Git staging owner."""
     output = provenance._canonical(Path(output_root));repository = provenance._canonical(Path(repository))
-    require(output.is_relative_to(repository), 'closed_collection_stage_repository')
+    # The closed source package may be in a worker cache outside Git.
     inventory_raw, inventory_record = provenance._frozen(output/'artifact-inventory.json', 1024**2)
     inventory = provenance._json(inventory_raw)
     require(set(inventory) == {'verification.json', 'capture-proof.json', 'packed/bundle.json', 'packed/primary.tar.xz'},
@@ -576,7 +577,27 @@ def stage_collection_artifacts(output_root, repository):
     rows = [r for r in ledger['leases'] if r['job_id'] == receipt['collection_id']]
     require(len(rows) == 1, 'closed_collection_final_lease_missing')
     compare_released_lease(receipt['collection_released_lease'], rows[0])
-    return publisher.stage_artifact_set(repository, (output/'artifact-inventory.json').relative_to(repository).as_posix(), inventory_record['sha256'])
+    from .external_archive import prepare_publication
+    require(publication_output is not None, 'closed_collection_external_publication_output_required')
+    publication = Path(publication_output).absolute()
+    require(publication.resolve().is_relative_to(repository) and not publication.exists(),
+        'closed_collection_new_publication_directory_required')
+    cache = repository/'.structtrain-cache'
+    require(not cache.is_symlink(), 'closed_collection_cache_symlink')
+    cache.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=cache, prefix='closed-publication-') as temporary:
+        selected = Path(temporary)
+        for name, expected in {**inventory, 'artifact-inventory.json':inventory_record['sha256']}.items():
+            source = output/name; destination = selected/name; destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
+            require(hashlib.sha256(destination.read_bytes()).hexdigest() == expected,
+                'closed_collection_final_artifact_changed')
+        prepared = prepare_publication(selected, publication, archive_root)
+    staged = publisher.stage_artifact_set(repository,
+        (publication/'SHA256SUMS.json').relative_to(repository).as_posix(), prepared['manifest_sha256'])
+    return {**staged, 'external_publication':prepared,
+        'original_inventory_sha256':inventory_record['sha256'],
+        'original_gate':receipt['original_gate'], 'scientific_verdict':None}
 
 
 def main(argv=None):
@@ -587,10 +608,13 @@ def main(argv=None):
     collect.add_argument('--output', required=True, type=Path)
     stage = commands.add_parser('stage')
     stage.add_argument('output', type=Path);stage.add_argument('--repository', required=True, type=Path)
+    stage.add_argument('--publication-output', required=True, type=Path)
+    stage.add_argument('--archive-root', type=Path)
     args = parser.parse_args(argv)
     try:
         result = (collect_prepared(prepare_closed_collection(args.manifest, args.manifest_sha256), args.output)
-            if args.action == 'collect' else stage_collection_artifacts(args.output, args.repository))
+            if args.action == 'collect' else stage_collection_artifacts(args.output, args.repository,
+                publication_output=args.publication_output, archive_root=args.archive_root))
     except (EvidenceError, OSError, ValueError, TypeError, KeyError, subprocess.SubprocessError) as error:
         print(json.dumps({'kind':'closed_python_validation_collection_result', 'collection_status':'failed',
             'original_gate_outcome':'not_assessed', 'reason':str(error), 'scientific_verdict':None}))

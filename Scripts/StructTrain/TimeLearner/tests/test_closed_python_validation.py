@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import sqlite3
+import subprocess
 import tempfile
 from types import SimpleNamespace
 import unittest
@@ -217,6 +218,43 @@ class ClosedPythonValidationTest(unittest.TestCase):
                 with mock.patch('sys.stdout',new=io.StringIO()):
                     status = subject.main(['collect',str(path),'--manifest-sha256',hashlib.sha256(path.read_bytes()).hexdigest(),'--output',str(root/'out')])
             self.assertEqual(status,2);self.assertFalse((root/'out').exists())
+
+    def test_stage_archives_closed_payload_and_preserves_original_controls(self):
+        from ..external_archive import ARCHIVE_KIND, DEFAULT_ROOT, resolve
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory);repo=base/'repo';repo.mkdir();output=base/'closed-cache';output.mkdir()
+            subprocess.check_output(['git','init',str(repo)],stderr=subprocess.STDOUT)
+            (output/'packed').mkdir();(output/'packed/primary.tar.xz').write_bytes(b'synthetic primary only')
+            (output/'packed/bundle.json').write_text('{}')
+            gate={'gate_outcome':'passed','scientific_verdict':None};lease=released()
+            (output/'capture-proof.json').write_text(json.dumps({'collection_status':'capture_prepared','original_gate':gate}))
+            hashes={name:hashlib.sha256((output/name).read_bytes()).hexdigest() for name in
+                ('packed/primary.tar.xz','packed/bundle.json','capture-proof.json')}
+            receipt={'kind':'closed_python_validation_collection_receipt','schema_version':1,
+                'collection_status':'completed','scientific_verdict':None,'nested_kernel_closure_attested':False,
+                'artifact_hashes':hashes,'original_gate':gate,'execution_root':str(base),'collection_id':'synthetic',
+                'collection_released_lease':lease}
+            (output/'verification.json').write_text(json.dumps(receipt))
+            inventory={**hashes,'verification.json':hashlib.sha256((output/'verification.json').read_bytes()).hexdigest()}
+            raw=(json.dumps(inventory)+'\n').encode();(output/'artifact-inventory.json').write_bytes(raw)
+            # The collector has intermediates too; these are outside its declared publication.
+            (output/'not-in-inventory.log').write_bytes(b'not published')
+            archive=base/'archive';archive.mkdir();(archive/'archive.root.json').write_text(json.dumps({
+                'kind':ARCHIVE_KIND,'schema_version':1,'authoritative_root':DEFAULT_ROOT}))
+            publication=repo/'Reports/StructTrain/TimeLearner/closed-external'
+            with mock.patch.object(subject.resource_reservations.Reservations,'read_snapshot',return_value={'leases':[lease]}), \
+                 mock.patch.dict(os.environ,{'NMSDK_STRUCTTRAIN_ARCHIVE_ROOT':str(archive)}):
+                result=subject.stage_collection_artifacts(output,repo,publication_output=publication,archive_root=archive)
+            self.assertEqual((output/'artifact-inventory.json').read_bytes(),raw)
+            self.assertEqual(result['original_gate'],gate);self.assertFalse(result['committed'])
+            self.assertFalse((publication/'package/packed/primary.tar.xz').exists())
+            reference=json.loads((publication/'package/packed/primary.tar.xz.archive.json').read_text())
+            self.assertEqual(resolve(reference,archive).read_bytes(),b'synthetic primary only')
+            self.assertEqual((publication/'package/artifact-inventory.json').read_bytes(),raw)
+            self.assertFalse((publication/'package/not-in-inventory.log').exists())
+            staged=subprocess.check_output(['git','-C',str(repo),'ls-files']).decode().splitlines()
+            self.assertIn('Reports/StructTrain/TimeLearner/closed-external/package/packed/primary.tar.xz.archive.json',staged)
+            self.assertFalse(any(name.endswith('.xz') for name in staged))
 
     def test_stage_refuses_missing_last_marker_before_git_index_change(self):
         with tempfile.TemporaryDirectory() as directory:

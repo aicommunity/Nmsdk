@@ -45,6 +45,12 @@ owned units и явные ограничения размера. Коллект�
 проверка восстановления и Git closure остаются отдельными обязательными шагами.
 Windows этой операцией пока не поддерживается.
 
+Для staging закрытого Python-пакета использовать `closed_python_validation stage
+CLOSED_CACHE --repository REPOSITORY --publication-output NEW_REPORT_DIRECTORY`.
+Команда сохраняет payload в общем архиве M40 и передаёт Git только metadata
+и проверенные ссылки. Старый режим staging сырого primary.tar.xz прекращён.
+Полные команды и политика: [внешний архив](../../../Docs/StructTrain/TimeLearner/ExternalExperimentArchive.ru.md).
+
 `stock-candidate-window-study prepare COLD_CHARACTERIZATION --runtime-manifest RUNTIME
 --output JOBS` создаёт два stock N4/N1 cold7 задания по проверенным начальным
 наблюдениям. `preflight JOBS` и `train JOBS` требуют явные `--case`, `--controller`,

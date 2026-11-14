@@ -48,12 +48,12 @@ def verify_experiment_tree(directory, commit):
         metadata, name = entry.split(b'\t', 1)
         _, kind, oid, size = metadata.decode('ascii').split()
         if kind == 'blob':
-            _external_result_policy(name.decode('utf-8'), int(size))
+            _external_result_policy(name.decode('utf-8', 'surrogateescape'), int(size))
             if name.endswith(b'.archive.json'):
                 require(int(size) <= 64*1024, 'archive_reference_budget')
                 reference = subprocess.check_output(['git', '--no-replace-objects', '-C',
                     str(directory), 'cat-file', 'blob', oid], timeout=120)
-                _verify_external_reference(name.decode('utf-8'), reference)
+                _verify_external_reference(name.decode('utf-8', 'surrogateescape'), reference)
 
 
 def _report_artifact(name):
