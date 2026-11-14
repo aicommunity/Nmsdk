@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s11-classic-n0-order-report-m40-a2",
+  "package_fingerprint": "a5e983f05addf94b7c07c31242cebfe49d78c343876250c7e96bd0b76ac65b8d",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_fixed_order_temporal_report"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_fixed_order_temporal_report.FixedOrderTemporalReportTest.test_native_inputs_and_responses_with_full_and_positive_scales"
+  ],
+  "fixtures": {
+    "TIMELEARNER_FIXED_ORDER_COMPLETED": {
+      "pattern": "**/*.json",
+      "files": 105,
+      "fingerprint": "cf54f86d8212ae0659949e53728721eff91c308d514d4164238e3425a116cf6d"
+    }
+  }
+}

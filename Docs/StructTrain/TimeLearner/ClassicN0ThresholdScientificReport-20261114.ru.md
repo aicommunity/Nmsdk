@@ -100,3 +100,7 @@
 ![Early foil4 event](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0004-lt-decision/zoom-001.png)
 
 Ранний foil4 spike8.0355с появляется после двух близких входов, задолго до конца его пачки8.492с. Возможное накопление быстрых ответов — визуальная гипотеза причины FP, а не подтверждённое вмешательством объяснение.
+
+## Дополнительная проверка порядка той же модели
+
+[64 новые реальные пробы приняты1/1](ClassicN0OrderScientificReport-20261114.ru.md): target в каждой позиции, та же модель/порог,2с/reset_per_trial. По каждому pattern класс ответа одинаков во всех8 позициях, TP8/FP32/FN0/TN24, target13мс после последнего input. First8 waveform и frozen model exact. Это не новые cold Train/ITI/continuous/independent Test; false responses остаются4/7. Новый отчёт содержит проверенные собственные target-position figures и native peak details; whole primary55.53MB вGit.

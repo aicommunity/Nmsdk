@@ -149,3 +149,9 @@ Soma1/input curves и3 остальных сомы target. [A1 companion](Valida
 а не назначенный пик; приёмку peak-centered zoom ими подменять нельзя.
 
 [Два реальных назначенных N0 пика](ValidationPlans/M40N0GeometryPeakFocusA1-20261114/RESULT.ru.md) отдельно приняты1/1 и просмотрены: frames920..1040,121 native sample,0.46..0.52с. Full-before в заголовке означает пробу до omission; это применимо к обеим версиям алгоритма. Y local каждого view, числовые оси не тождественны между моделями.
+
+## Actual64 order report
+
+[Собственный A2 report принят1/1](ValidationPlans/M40ClassicN0OrderReportA2-20261114/RESULT.ru.md):15 trials (первые8 patterns и target в каждой позиции),4 сомы+LT,full/positive scales,150 channel-scale groups,267 PNG. ВGit13 выбранных original PNG, все13 просмотрены; остальная gallery — M40 cache. Для всех8 baseline patterns исходные уже просмотренные figures явно повторно используются только после точного сравнения первых8 новых waveform samples. Нельзя выдавать15 plotted trials за64 plotted trials или13 ручных просмотров за267.
+
+Новый worker вызывает plotting_runtime до большого source audit и записывает environment в manifest. A1 неверный системный Python отказал без matplotlib; A2 использует ранее проверенное plot-python-owned-copy-a1/bin/python. Нейронная модель/порог/scorer не менялись. Native maximum views — максимум полного Test-отклика, не assigned Train peak. Все21 samples видны; для большого absolute time Matplotlib печатает X offset, который пояснён в scientific report.

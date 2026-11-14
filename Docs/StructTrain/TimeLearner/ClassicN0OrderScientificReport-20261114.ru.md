@@ -42,7 +42,7 @@ Source model revision35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f
 
 ## Все8 паттернов: проверенная исходная матрица
 
-Ниже явно повторно использованы проверенные рисунки [исходного реального опыта](ClassicN0ThresholdScientificReport-20261114.ru.md). Первые8 новых waveform samples, inputs и model_before **точно совпали** с его candidate run, поэтому это визуализация воспроизведённого baseline, а не подмена нового порядка старым. Оранжевый — actual input, пунктир — actual LT events; единицы модели, SI не подтверждён. Для положительного диапазона Y отрицательный reset clipped; полный диапазон и LT decision figures доступны в исходном отчёте. Новая собственная gallery для каждого положения target строится отдельно.
+Ниже явно повторно использованы проверенные рисунки [исходного реального опыта](ClassicN0ThresholdScientificReport-20261114.ru.md). Первые8 новых waveform samples, inputs и model_before **точно совпали** с его candidate run, поэтому это визуализация воспроизведённого baseline, а не подмена нового порядка старым. Оранжевый — actual input, пунктир — actual LT events; единицы модели, SI не подтверждён. Для положительного диапазона Y отрицательный reset clipped; полный диапазон и LT decision figures доступны в исходном отчёте. [Новая собственная gallery принята1/1](ValidationPlans/M40ClassicN0OrderReportA2-20261114/RESULT.ru.md):15 trials×5 каналов×2 шкалы,267 PNG. Ниже добавлены8 новых target views и выбранные LT/native details; все13 новых публикуемых original PNG просмотрены.
 
 ### phasea-row-0:target,TP
 
@@ -75,6 +75,58 @@ Source model revision35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f
 ### phasea-row-7:foil,FP
 
 ![Воспроизведённый baseline Soma1 pattern7](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0007-soma-001/overview.png)
+
+## Новые target responses во всех восьми позициях
+
+Это actual64-trial run, а не baseline figures. У всех8 Soma1 views одна положительная Y-шкала, рассчитанная по всем64 observations; отрицательный reset выходит ниже оси и показан отдельно далее. Ось X — полное native абсолютное время собственной пробы. Класс ответа и события взяты из первичных записей.
+
+### Target в позиции1
+
+![Actual target position1](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0000-soma-001-positive/overview.png)
+
+### Target в позиции2
+
+![Actual target position2](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0057-soma-001-positive/overview.png)
+
+### Target в позиции3
+
+![Actual target position3](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0050-soma-001-positive/overview.png)
+
+### Target в позиции4
+
+![Actual target position4](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0043-soma-001-positive/overview.png)
+
+### Target в позиции5
+
+![Actual target position5](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0036-soma-001-positive/overview.png)
+
+### Target в позиции6
+
+![Actual target position6](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0029-soma-001-positive/overview.png)
+
+### Target в позиции7
+
+![Actual target position7](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0022-soma-001-positive/overview.png)
+
+### Target в позиции8
+
+![Actual target position8](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0015-soma-001-positive/overview.png)
+
+## LT decision channel и native максимум сомы
+
+LT threshold относится к LTZone.Potential; его нельзя читать как порог отдельной Soma1. Ниже первый и последний по времени target, каждый имеет реальное LT event после четвёртого input. Полный отрицательный reset сохранён отдельно.
+
+![LT actual target trial0000](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0000-lt-decision-positive/overview.png)
+
+![LT actual target trial0057](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0057-lt-decision-positive/overview.png)
+
+![LT full range with reset](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0000-lt-decision-full/overview.png)
+
+На увеличениях далее виден максимум полного Soma1-отклика, sample975,0.4875с от начала пробы. Он возникает до последнего input0.49с; это не противоречит позднему LT spike0.503с суммарного нейрона с четырьмя сомами. Принадлежность этого максимума закреплённому импульсу Train здесь не сертифицируется. Все21 native sample вокруг максимума показаны с маркерами без прореживания;71.04px/tick. Последняя ось X использует offset+114.51с: отметка0.006 означает114.516с абсолютного времени.
+
+![Native Soma1 maximum trial0000](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0000-soma-001-positive/measured-peak-00975-detail.png)
+
+![Native Soma1 maximum trial0057](ValidationPlans/M40ClassicN0OrderReportA2-20261114/completed/worker/tmp/fixed-order-temporal-gallery/trial-0057-soma-001-positive/measured-peak-00975-detail.png)
 
 ## Границы вывода
 
