@@ -10,7 +10,10 @@ void N0LocalGeometryAfterBetterGlobalCandidate(ProbeRouting routing,std::size_t 
     const auto p=Protocol(n,routing);auto cfg=Configuration(n);
     cfg.maximumCandidatesPerInput=n==2?4:5;cfg.n0CandidateRepeats=repeats;
     cfg.bounds.assign(n,{1,20,1,2,1.,100.});cfg.bounds.back()={1,1,1,1,1.,100.};
-    std::vector<InputParameters> initial(n,{1,1,10.});
+    // A Branch input at the anchor's L1 shares its bank and cannot have
+    // another Ns. Start the adjustable bank at L2 so both counts are legal.
+    const int firstLength=routing==ProbeRouting::BranchSoloBurst?2:1;
+    std::vector<InputParameters> initial(n,{firstLength,1,10.});initial.back().length=1;
     BoundedTrainingSession session(References(p),cfg,initial);
     const auto input=n-2;
     DriveTraining(session,p,[&](const TrainingAction& action,auto& delay,auto& raw) {
@@ -19,27 +22,27 @@ void N0LocalGeometryAfterBetterGlobalCandidate(ProbeRouting routing,std::size_t 
         // normalization at L2, whose initial Ns1 is globally much worse.
         for(std::size_t i=0;i+1<n;++i)delay[i]=.03+.1*(n-1-i);
         const auto& candidate=action.parameters[input];
-        if(candidate.length==1)raw[input]+=candidate.synapses==2?.0002:.002;
-        else if(candidate.length==2)raw[input]+=candidate.synapses==2?0.:.003;
+        if(candidate.length==firstLength)raw[input]+=candidate.synapses==2?.0002:.002;
+        else if(candidate.length==firstLength+1)raw[input]+=candidate.synapses==2?0.:.003;
         else {raw[input]+=.004;delay[input]=.03;}
     });
     ASSERT_EQ(session.Status(),TrainingStatus::Exact);ASSERT_TRUE(session.Certificate());
     EXPECT_TRUE(session.Certificate()->Exact());EXPECT_EQ(session.Certificate()->Residuals().size(),n);
-    EXPECT_EQ(session.Parameters()[input],(InputParameters{2,2,10.}));
+    EXPECT_EQ(session.Parameters()[input],(InputParameters{firstLength+1,2,10.}));
     const auto& history=session.Evidence();
     const auto first=std::find_if(history.begin(),history.end(),[&](const auto& e) {
-        return e.inputIndex==input && e.parameters.length==1 && e.parameters.synapses==2;
+        return e.inputIndex==input && e.parameters.length==firstLength && e.parameters.synapses==2;
     });
     const auto later=std::find_if(history.begin(),history.end(),[&](const auto& e) {
-        return e.inputIndex==input && e.parameters.length==2 && e.parameters.synapses==1;
+        return e.inputIndex==input && e.parameters.length==firstLength+1 && e.parameters.synapses==1;
     });
     const auto exact=std::find_if(history.begin(),history.end(),[&](const auto& e) {
-        return e.inputIndex==input && e.parameters.length==2 && e.parameters.synapses==2 && e.withinAmplitude;
+        return e.inputIndex==input && e.parameters.length==firstLength+1 && e.parameters.synapses==2 && e.withinAmplitude;
     });
     ASSERT_NE(first,history.end());ASSERT_NE(later,history.end());ASSERT_NE(exact,history.end());
     EXPECT_LT(first,later);EXPECT_LT(later,exact);
     EXPECT_LT(std::fabs(first->amplitudeResidual),std::fabs(later->amplitudeResidual));
-    if(n==4)EXPECT_EQ(exact->fullParameters,(std::vector<InputParameters>{{3,1,10.},{3,1,10.},{2,2,10.},{1,1,10.}}));
+    if(n==4)EXPECT_EQ(exact->fullParameters,(std::vector<InputParameters>{{4,1,10.},{4,1,10.},{3,2,10.},{1,1,10.}}));
     if(repeats>1)
         for(const auto& group:session.CandidateRepeats())
         {EXPECT_TRUE(group.complete);EXPECT_EQ(group.trialIds.size(),repeats);EXPECT_EQ(group.anchorTrialIds.size(),repeats);}
@@ -67,7 +70,16 @@ TEST(BoundedTrainingN0Geometry, ImprovingCountsCannotConsumeTheWholeBudgetBefore
         const auto& points=session.Evidence();
         const auto other=std::find_if(points.begin(),points.end(),[](const auto& e){return e.parameters.length==2;});
         ASSERT_NE(other,points.end());EXPECT_LT(std::distance(points.begin(),other),15);
-        EXPECT_LE(points.size(),cfg.maximumCandidatesPerInput);
+        // The controller freshly restores/measures the best point after the
+        // proposal budget. This existing extra observation is not proposal31.
+        ASSERT_EQ(points.size(),cfg.maximumCandidatesPerInput+1);
+        EXPECT_TRUE(std::any_of(points.begin(),std::prev(points.end()),[&](const auto& e) {
+            return e.fullParameters==points.back().fullParameters;
+        }));
+        std::vector<std::vector<InputParameters>> unique;
+        for(const auto& e:points)
+            if(std::find(unique.begin(),unique.end(),e.fullParameters)==unique.end())unique.push_back(e.fullParameters);
+        EXPECT_LE(unique.size(),cfg.maximumCandidatesPerInput);
         if(session.Certificate())EXPECT_FALSE(session.Certificate()->Exact());
     }
 }
@@ -76,14 +88,14 @@ TEST(BoundedTrainingN0Geometry, WorseNeighborDoesNotRemoveANonmonotoneFallbackSo
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
     {
         const auto p=Protocol(2,routing);auto cfg=Configuration();cfg.maximumCandidatesPerInput=6;
-        cfg.bounds={{1,2,1,3,1.,100.},{1,1,1,1,1.,100.}};
-        BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
+        cfg.bounds={{2,3,1,3,1.,100.},{1,1,1,1,1.,100.}};
+        BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}});
         DriveTraining(session,p,[](const TrainingAction& a,auto& delay,auto& raw) {
             const auto& point=a.parameters[0];delay[0]=.13;
-            if(point.length==1)raw[0]+=point.synapses==3?0.:.001*(point.synapses+1);
+            if(point.length==2)raw[0]+=point.synapses==3?0.:.001*(point.synapses+1);
             else raw[0]+=.004+.001*point.synapses;
         });
         ASSERT_EQ(session.Status(),TrainingStatus::Exact);ASSERT_TRUE(session.Certificate());
-        EXPECT_TRUE(session.Certificate()->Exact());EXPECT_EQ(session.Parameters()[0],(InputParameters{1,3,10.}));
+        EXPECT_TRUE(session.Certificate()->Exact());EXPECT_EQ(session.Parameters()[0],(InputParameters{2,3,10.}));
     }
 }
