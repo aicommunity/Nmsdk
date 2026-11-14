@@ -97,6 +97,22 @@ class ExternalArchiveTest(unittest.TestCase):
             archive.materialize(record, cache, self.root)
         self.assertEqual(cache.read_bytes(), b'user modification')
 
+    def test_publication_view_keeps_checksums_and_restores_external_primary(self):
+        from ..portable_primary import create_native_bundle, restore_native_bundle
+        source = Path(self.temp.name)/'native-package'
+        create_native_bundle({'signals.csv': self.source}, source, dictionary_bytes=8*1024**2)
+        before = {p.name: p.read_bytes() for p in source.iterdir()}
+        output = Path(self.temp.name)/'publication'
+        receipt = archive.prepare_publication(source, output, self.root)
+        self.assertIsNone(receipt['scientific_verdict'])
+        self.assertEqual(receipt['payloads_externalized'], 1)
+        self.assertFalse((output/'package/primary.tar.xz').exists())
+        self.assertEqual((output/'package/bundle.json').read_bytes(), before['bundle.json'])
+        self.assertEqual({p.name: p.read_bytes() for p in source.iterdir()}, before)
+        with patch.dict('os.environ', {archive.ROOT_ENV: str(self.root)}):
+            restore_native_bundle(output/'package/bundle.json', Path(self.temp.name)/'publication-restored')
+        self.assertEqual((Path(self.temp.name)/'publication-restored/signals.csv').read_bytes(), self.source.read_bytes())
+
     def test_historical_reader_composes_rewrites_and_preserves_exact_bytes(self):
         from ..history import read_bytes, resolve_revision
         repo = Path(self.temp.name)/'source'; repo.mkdir()
