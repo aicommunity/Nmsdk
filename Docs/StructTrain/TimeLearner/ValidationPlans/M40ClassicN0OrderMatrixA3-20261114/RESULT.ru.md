@@ -1,0 +1,9 @@
+# A3:64 реальные frozen пробы приняты
+
+M40: outer completed3706.5094792968594с, whole group закрыта, operation_passed=true; production unit1/1 PASS,3669.498с,0 failures/errors/skips. Основной diagnostic-evaluate completed/valid. Все64 observations complete/valid;8 targets/56 foils. Первые8 waveform samples и model_before точно совпали с исходным принятым8-trial опытом. Native model.json и model-after.json побайтно равны исходной модели; source package/manifest не изменены.
+
+Канонический scorer: **TP8/FP32/FN0/TN24**, accuracy0.5, foil response32/56. В каждом rotation TP1/FP4/FN0/TN3. Для каждого из8 sample IDs класс ответа одинаков во всех позициях. Target во всех8 позициях дал один спайк примерно0.503с от начала пробы,13мс после последнего actual input. Ранние foil responses учитываются полностью. Нет нового Train, подбора порога, независимых случайных повторов или independent evaluation. Это stopped model исходного invalid_observation/ambiguous Train, certificate=null. ITI/continuous здесь не проверены.
+
+[Полный result](completed/worker/tmp/fixed-threshold-order-matrix/result.json), [канонический manifest](completed/worker/tmp/fixed-threshold-order-matrix/run/run-manifest.json), [64-trial specification](completed/worker/tmp/fixed-threshold-order-matrix/run/native/evaluation.json), [native execution](completed/worker/tmp/fixed-threshold-order-matrix/run/native/execution.json), [unit log](completed/worker/validation/unittest.log), [integrity](integrity.json). Literal producer 453561b9d9b7f8a451e30e6883a6d916303dd473, pack143897B SHA256d602e9b910bb2415c853ca382535c11d2e8d72358ee4c3d975d810d811b69e3a.
+
+Полный compact primary и собственные новые temporal figures собираются отдельными принятыми по условиям запуска заданиями; их успешное завершение пока не заявляется. A1/A2 технические отказы сохранены, не считаются новыми опытами модели. Полная приёмка этапов1–12 не достигнута.
