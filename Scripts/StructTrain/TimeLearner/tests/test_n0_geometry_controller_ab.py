@@ -28,7 +28,7 @@ class N0GeometryControllerABTest(unittest.TestCase):
         result = run_controller_ab(controls/'specification.json',
             declaration['root_repository'], declaration['pulse_repository'],
             declaration['compiler'], declaration['gtest_source'],
-            Path('tmp/n0-geometry-controller-ab').resolve())
+            Path(os.environ['TMPDIR']).resolve(strict=True)/'n0-geometry-controller-ab')
         before, after = (result['cases'][name] for name in ('baseline', 'candidate'))
         self.assertEqual(before['compile']['execution'], 'completed')
         self.assertEqual(after['compile']['execution'], 'completed')
