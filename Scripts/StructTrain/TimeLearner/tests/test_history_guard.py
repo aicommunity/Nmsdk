@@ -26,6 +26,15 @@ class ExperimentHistoryGuardTest(unittest.TestCase):
         self.git('add',name);self.git('commit','-m','record candidate')
         return self.git('rev-parse','HEAD')
 
+    def test_legacy_non_utf8_source_filename_is_preserved(self):
+        blob = subprocess.check_output(['git', '-C', str(self.repo), 'hash-object', '-w', '--stdin'],
+            input=b'preserved source code').strip()
+        tree = subprocess.check_output(['git', '-C', str(self.repo), 'mktree', '-z'],
+            input=b'100644 blob '+blob+b'\tlegacy-\xc8.cpp\0').strip()
+        commit = subprocess.check_output(['git', '-C', str(self.repo), 'commit-tree', tree.decode(),
+            '-p', self.baseline, '-m', 'legacy byte filename']).decode().strip()
+        self.assertEqual(check_history(self.repo, commit)['commit'], commit)
+
     def test_clean_code_and_small_metrics_pass(self):
         head=self.payload('Reports/StructTrain/TimeLearner/run/metrics.json',b'{"validity":"valid"}')
         self.assertEqual(check_history(self.repo,head)['commit'],head)

@@ -87,7 +87,7 @@ def check_history(repository, commit, *, old=None):
                 continue
             if name.startswith(b'"'):
                 name = ast.literal_eval('b'+name.decode('ascii'))
-            name = name.decode('utf-8')
+            name = name.decode('utf-8', 'surrogateescape')
             if experiment_artifact(name):
                 artifact_policy(name, 0)
                 candidates.setdefault(oid.decode('ascii'), set()).add(name)
