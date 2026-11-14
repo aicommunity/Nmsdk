@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-stock-n0-branch-report-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "0286ddb07064d3446dd37ce8536937d89576f345",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 4294967296
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1",
+      "commit": "0286ddb07064d3446dd37ce8536937d89576f345"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/stock-n0-branch-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockN0BranchReportA1-20261114/suite.json",
+      "sha256": "efa23d1026ad77d61a97628a1a66a7ae04d8c48dc31d132fab417a07dbdda4b3"
+    },
+    "fixtures": {
+      "TIMELEARNER_STOCK_N0_FROZEN_REPORT_RUN": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-branch-frozen-m40-a1/worker/tmp/stock-n0-stopped-matrix/run"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 8589934592
+    }
+  }
+}
