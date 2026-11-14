@@ -45,7 +45,23 @@ Windows этой операцией пока не поддерживается.
 `--runtime-manifest`, `--output`. Новое обучение само захватывает per-input references;
 характеристика задаёт только proposal windows. Исходный SyncTolerance=.02 сохранён.
 Линейный прогноз задержки является гипотезой; его нельзя считать измерением или
-доказательством сходимости. Runtime-приёмка нового pilot остаётся отдельной.
+доказательством сходимости. Версии плана и выполненные проверки необходимо
+сопоставлять по фактическим source/runtime/job bindings конкретного запуска.
+
+`stock-candidate-window-study prepare-full-window COLD7_PLAN --runtime-manifest
+RUNTIME --output JOBS` создаёт N1 plan3/configuration8 с полной областью
+наблюдения кандидата; reference capture windows остаются исходными.
+`stock-candidate-window-study prepare-N0 FROZEN_N1_PLAN --runtime-manifest
+RUNTIME --output NEW_JOBS` принимает именно такой plan3 и создаёт отдельный
+N0 plan4. У неопорных входов Ns=1..128, каждый Rs фиксирован в собственном
+исходном значении; опорный вход N−1 не меняется. Физический cold graph,
+паттерн, частота, допуски и общие бюджеты сохраняются. Это новый fingerprint
+условия, не импорт обученной N1-модели. Имена N0 cases:
+`Classic-stock-cold8-N0` и `Branch-stock-cold8-N0`.
+Последующие `preflight`/`train` выполняются через owned controller с явными
+bindings. До Train необходим настоящий native preflight; успешное чтение
+декларации не подтверждает сходимость или фактическое изменение Ns.
+[Постановка и текущая серверная приёмка N0](../../../Docs/StructTrain/TimeLearner/StockNormalizationControl.ru.md).
 
 Для новых Train явно задавать `--finalization-seconds 300`: внешний timeout
 процесса становится native search wall budget +300 s. Сам бюджет поиска,
@@ -56,9 +72,11 @@ Windows этой операцией пока не поддерживается.
 Без флага сохраняется исторический режим одинаковых deadlines. Для `prepare`
 и `preflight` ненулевой запас запрещён как неиспользуемый фактор. Внешний
 controller budget следует назначать отдельно, учитывая также последующий аудит
-primary data. Эта правка требует серверной проверки: равные deadlines являются
-подтверждённым риском постановки, но причинная роль в старом Classic timeout
-пока не доказана.
+primary data. [Завершённый Classic cold4 с отдельным allowance и полным DATA
+аудитом](../../../Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md)
+подтверждает этот путь на указанном снимке. Равные deadlines остаются риском
+постановки; причинная роль в конкретном старом timeout требует его собственного
+контроля и не выводится из более позднего успешного завершения.
 
 `stock-cold-characterization prepare --topology both --output JOBS` объявляет
 восемь диагностических проб свежей `NSPNeuronGen`: Classic/Branch × четыре
