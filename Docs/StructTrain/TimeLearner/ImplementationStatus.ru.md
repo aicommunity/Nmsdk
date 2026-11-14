@@ -33,7 +33,7 @@ Source SDK root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d
 - [Branch Rs whole primary27.42MB](ValidationPlans/M40BranchSharedBankPrimaryA2-20261113/RESULT.ru.md):[restore2087regular files и3 DATA audits1/1](ValidationPlans/M40BranchSharedBankPrimaryReplayA1-20261113/RESULT.ru.md).
 - [Threshold whole primary56.37MB](ValidationPlans/M40ThresholdPrimaryRecompressionA2-20261113/RESULT.ru.md):точное сохранение uncompressed tar,881-file production restore1/1,1931.572s; первичные size failures сохранены.
 
-Git содержит compact primary/models/metrics/selected figures. Полные PNG/SVG/PDF galleries — воспроизводимый M40 cache. Raw receipts сохраняются побайтово; ns timestamps не проходят через binary64 JSON rewrite.
+Размещение данных пересмотрено пользователем 14.11: primary/binary models и полные отчёты сохраняются во внешнем [архиве M40](ExternalExperimentArchive.ru.md), доступном по Samba. Git содержит код, настройки, небольшие метрики/manifests и references. Миграция истории выполняется до продолжения научных этапов и пока не завершена. Raw receipts сохраняются побайтово; ns timestamps не проходят через binary64 JSON rewrite. Научные статусы и границы приёмки ниже не меняются от переноса данных.
 
 ## Проверенное состояние
 

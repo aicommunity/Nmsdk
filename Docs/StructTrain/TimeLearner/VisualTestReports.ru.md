@@ -101,11 +101,14 @@ NaN, missing ticks и censored хвост видны как разрывы/от�
 - Этап 11: report generator принимает ожидаемое множество испытаний из job spec
   и versioned analysis. Создаёт переносимый HTML/Markdown index, крупные overview,
   zoom views, vector exports, previews и manifest рисунков. Ссылки относительные;
-  отчёт открывается из чистого checkout без CDN, сервера или внешних файлов.
-- Этап 10, уточнён пользователем 30.10.2026: компактный Git хранит lossless
-  compressed primary data, модели, конфиги, метрики, manifests и выбранные
-  контрольные figures в Reports/StructTrain/TimeLearner. Полный переносимый
-  report всех ожидаемых trial/soma пар — воспроизводимый cache на M40.
+  развёрнутый отчёт открывается локально без CDN после получения проверенных
+  данных из общего архива.
+- Этап 10, пересмотрен пользователем 14.11.2026: Git хранит код, настройки,
+  небольшие метрики/manifests и архивные references. Lossless compressed primary,
+  бинарные модели и полные отчёты хранятся в
+  `/media/user/Data/Nmsdk-StructTrainExpArchive`, доступном по Samba. См.
+  [контракт архива](ExternalExperimentArchive.ru.md). Полный переносимый
+  report всех ожидаемых trial/soma пар архивируется; его развёрнутая копия — кэш.
   Сохранять renderer/runtime recipe и hashes; проверить реальную распаковку и
   регенерацию. Отсутствие требуемого графика в полном cache делает именно этот
   report неполным; хранение выбранных рисунков в Git не выдаётся за просмотр

@@ -1,3 +1,8 @@
+> Политика хранения пересмотрена 14.11.2026: primary bundles и полные галереи
+> сохраняются во внешнем общем архиве M40. В Git — metadata и проверенные
+> `*.archive.json` ссылки. [Доступ и восстановление](../../../Docs/StructTrain/TimeLearner/ExternalExperimentArchive.ru.md).
+> Замена истории ещё выполняется и не означает научную приёмку.
+
 # Поддерживаемый пакет TimeLearner
 
 Перед выбором протокола: [принятые возможности и отдельно проверяемый кандидат](../../../Docs/StructTrain/TimeLearner/ControllerCapabilities.ru.md).
@@ -15,7 +20,8 @@
 все отсчёты сохраняются. Полоса окна — только прогноз, она не обозначает найденный
 пик. Отказы selection и исходный outcome остаются в manifest. Графики не создают
 сертификат, не заменяют frozen Test и требуют визуальной проверки. Полный набор
-хранить кэшем M40, в Git — выбранные рисунки и сжатые необходимые primary data.
+хранить кэшем M40, в Git — выбранные небольшие рисунки и проверенные ссылки на primary data
+в общем архиве M40.
 
 `python -m Scripts.StructTrain.TimeLearner.candidate_window_diagnostic_replay
 NATIVE OUTPUT.json --groups 12 14 18` независимо пересчитывает геометрию исходного
