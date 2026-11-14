@@ -142,8 +142,10 @@ Y-шкалы. Default True сохраняет прежний полный наб
 Soma1/input curves и3 остальных сомы target. [A1 companion](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/RESULT.ru.md)
 прошёл unit1/1;11 выбранных Soma PNG просмотрены. Его8 LT companions не приняты
 из-за ошибочного текста оси. Исправление root6410bfb76cb6cf189c41863fc2511c125045b250
-готово; адресный server rerender ждёт восстановления связи, его PASS не заявлен.
+[проверено адресным A2 server rerender1/1](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/RESULT.ru.md);8 исправленных LT originals просмотрены,11 Soma PNG byte-identical принятой A1.
 
 [Branch N0 A/B report](N0GeometryPhysicalScientificReport-20261114.ru.md) имеет6
 просмотренных waveform overview. Native boundary views у0с показывают clock/input,
 а не назначенный пик; приёмку peak-centered zoom ими подменять нельзя.
+
+[Два реальных назначенных N0 пика](ValidationPlans/M40N0GeometryPeakFocusA1-20261114/RESULT.ru.md) отдельно приняты1/1 и просмотрены: frames920..1040,121 native sample,0.46..0.52с. Full-before в заголовке означает пробу до omission; это применимо к обеим версиям алгоритма. Y local каждого view, числовые оси не тождественны между моделями.

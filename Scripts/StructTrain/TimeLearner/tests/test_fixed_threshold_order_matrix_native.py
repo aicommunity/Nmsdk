@@ -86,7 +86,11 @@ class FixedThresholdOrderMatrixNativeTest(unittest.TestCase):
         self.assertTrue(runtime == load(source/'process/runtime.json'), 'source runtime changed')
         verify_runtime(runtime)
         live = inspect(declaration['controller'])
-        self.assertEqual((live['execution'], live['binding']['initial_main_pid']), ('running', os.getpid()))
+        self.assertEqual(live['execution'], 'running')
+        # unittest is a child of the owned worker; its PID is not the unit's
+        # initial main PID. Verify actual membership in that exact group.
+        self.assertEqual(Path('/proc/self/cgroup').read_text().strip(),
+                         '0::'+live['binding']['control_group'])
         wall, memory = declaration['maximum_wall_seconds'], declaration['leaf_memory_bytes']
         require(type(wall) is int and 1 <= wall <= 7200 and type(memory) is int and
                 1024**3 <= memory <= 8*1024**3, 'fixed_order_native_limits')

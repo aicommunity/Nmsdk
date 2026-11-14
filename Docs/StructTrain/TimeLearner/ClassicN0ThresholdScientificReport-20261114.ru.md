@@ -29,7 +29,7 @@
 
 ## Визуальная проверка и воспроизводимость
 
-[Собственный read-only отчёт принят1/1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/RESULT.ru.md) из actual candidate run: все8 паттернов ×4 записанные сомы с фактическими входными импульсами; отдельно LTZone.Potential, настоящий threshold и реальные LT events. Общий максимум при Test описывает полный отклик, а не подменяет assigned-impulse максимум Train. Порог LTZone не наносится на отдельные Soma.SumPotential как будто это одна величина. Единицы модели, перевод в SI/mV не подтверждён. Просмотрены27 исходных выбранных PNG и11 дополнительных Soma Y-details. Полная gallery2534 PNG не выдаётся за целиком просмотренную. Отрицательный reset на full-range рисунках около−0.38 существенно больше положительного отклика; ниже отдельно показана положительная часть с явным clipping отрицательного участка. Это выбор масштаба оси, не удаление samples. В дополнительном LT Y-detail A1 найдена неверная подпись оси; его8 LT PNG не используются до исправленного server render. Исходные LT figures ниже подписаны корректно.
+[Собственный read-only отчёт принят1/1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/RESULT.ru.md) из actual candidate run: все8 паттернов ×4 записанные сомы с фактическими входными импульсами; отдельно LTZone.Potential, настоящий threshold и реальные LT events. Общий максимум при Test описывает полный отклик, а не подменяет assigned-impulse максимум Train. Порог LTZone не наносится на отдельные Soma.SumPotential как будто это одна величина. Единицы модели, перевод в SI/mV не подтверждён. Просмотрены27 исходных выбранных PNG и11 дополнительных Soma Y-details. Полная gallery2534 PNG не выдаётся за целиком просмотренную. Отрицательный reset на full-range рисунках около−0.38 существенно больше положительного отклика; ниже отдельно показана положительная часть с явным clipping отрицательного участка. Это выбор масштаба оси, не удаление samples. В A1 найдена неверная подпись оси8 LT companions. [Исправленный A2 принят1/1](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/RESULT.ru.md), все8 новых LT PNG просмотрены;11 Soma PNG побайтно равны принятой A1.
 
 [Полные модели, первичные трассы и receipts сохранены в Git без JSON rewrite](ValidationPlans/M40StockN0ClassicThresholdPrimaryA2-20261114/RESULT.ru.md):83,917,844B XZ/612 members; полная производная gallery остаётся кэшем M40. [Исходный fixed100 отчёт](ClassicN0FrozenScientificReport-20261114.ru.md) сохраняет свой отдельный результат. [Предыдущая A1](ValidationPlans/M40StockN0ClassicThresholdA1-20261114/RESULT.ru.md) отказала до новых native runs при несовпадении runtime; её proxy не выдаётся за эти actual spikes.
 
@@ -39,59 +39,59 @@
 
 ### phasea-row-0: target, TP
 
-![Soma1 pattern0](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0000-soma-001/overview.png)
+![Soma1 pattern0](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0000-soma-001/overview.png)
 
-[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0000-soma-001/overview.png), [фактический LT decision channel](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0000-lt-decision/overview.png).
+[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0000-soma-001/overview.png), [LT: положительный отклик](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0000-lt-decision/overview.png), [LT: полный reset](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0000-lt-decision/overview.png).
 
 ### phasea-row-1: foil, TN
 
-![Soma1 pattern1](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0001-soma-001/overview.png)
+![Soma1 pattern1](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0001-soma-001/overview.png)
 
-[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0001-soma-001/overview.png), [фактический LT decision channel](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0001-lt-decision/overview-detail.png).
+[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0001-soma-001/overview.png), [LT: положительный отклик](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0001-lt-decision/overview.png), [LT: полный reset](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0001-lt-decision/overview.png).
 
 ### phasea-row-2: foil, TN
 
-![Soma1 pattern2](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0002-soma-001/overview.png)
+![Soma1 pattern2](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0002-soma-001/overview.png)
 
-[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0002-soma-001/overview.png), [фактический LT decision channel](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0002-lt-decision/overview-detail.png).
+[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0002-soma-001/overview.png), [LT: положительный отклик](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0002-lt-decision/overview.png), [LT: полный reset](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0002-lt-decision/overview.png).
 
 ### phasea-row-3: foil, TN
 
-![Soma1 pattern3](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0003-soma-001/overview.png)
+![Soma1 pattern3](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0003-soma-001/overview.png)
 
-[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0003-soma-001/overview.png), [фактический LT decision channel](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0003-lt-decision/overview-detail.png).
+[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0003-soma-001/overview.png), [LT: положительный отклик](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0003-lt-decision/overview.png), [LT: полный reset](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0003-lt-decision/overview.png).
 
 ### phasea-row-4: foil, FP
 
-![Soma1 pattern4](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0004-soma-001/overview.png)
+![Soma1 pattern4](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0004-soma-001/overview.png)
 
-[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0004-soma-001/overview.png), [фактический LT decision channel](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0004-lt-decision/overview.png).
+[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0004-soma-001/overview.png), [LT: положительный отклик](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0004-lt-decision/overview.png), [LT: полный reset](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0004-lt-decision/overview.png).
 
 ### phasea-row-5: foil, FP
 
-![Soma1 pattern5](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0005-soma-001/overview.png)
+![Soma1 pattern5](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0005-soma-001/overview.png)
 
-[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0005-soma-001/overview.png), [фактический LT decision channel](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0005-lt-decision/overview.png).
+[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0005-soma-001/overview.png), [LT: положительный отклик](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0005-lt-decision/overview.png), [LT: полный reset](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0005-lt-decision/overview.png).
 
 ### phasea-row-6: foil, FP
 
-![Soma1 pattern6](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0006-soma-001/overview.png)
+![Soma1 pattern6](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0006-soma-001/overview.png)
 
-[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0006-soma-001/overview.png), [фактический LT decision channel](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0006-lt-decision/overview.png).
+[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0006-soma-001/overview.png), [LT: положительный отклик](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0006-lt-decision/overview.png), [LT: полный reset](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0006-lt-decision/overview.png).
 
 ### phasea-row-7: foil, FP
 
-![Soma1 pattern7](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0007-soma-001/overview.png)
+![Soma1 pattern7](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0007-soma-001/overview.png)
 
-[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0007-soma-001/overview.png), [фактический LT decision channel](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0007-lt-decision/overview.png).
+[Полный диапазон Soma1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0007-soma-001/overview.png), [LT: положительный отклик](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0007-lt-decision/overview.png), [LT: полный reset](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0007-lt-decision/overview.png).
 
 ## Target: остальные сомы и момент спайка
 
-![Target Soma2](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0000-soma-002/overview.png)
+![Target Soma2](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0000-soma-002/overview.png)
 
-![Target Soma3](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0000-soma-003/overview.png)
+![Target Soma3](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0000-soma-003/overview.png)
 
-![Target Soma4](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0000-soma-004/overview.png)
+![Target Soma4](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/completed/worker/tmp/fixed-threshold-positive-response-gallery/trial-0000-soma-004/overview.png)
 
 ![Target LT native zoom](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/completed/worker/tmp/fixed-threshold-eight-pattern-gallery/trial-0000-lt-decision/zoom-011.png)
 

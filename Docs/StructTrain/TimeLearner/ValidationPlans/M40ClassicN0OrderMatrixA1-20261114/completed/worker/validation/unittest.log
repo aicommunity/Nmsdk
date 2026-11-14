@@ -1,0 +1,25 @@
+test_same_frozen_model_and_threshold_with_target_in_every_position (Scripts.StructTrain.TimeLearner.tests.test_fixed_threshold_order_matrix_native.FixedThresholdOrderMatrixNativeTest.test_same_frozen_model_and_threshold_with_target_in_every_position) ... FAIL
+
+======================================================================
+FAIL: test_same_frozen_model_and_threshold_with_target_in_every_position (Scripts.StructTrain.TimeLearner.tests.test_fixed_threshold_order_matrix_native.FixedThresholdOrderMatrixNativeTest.test_same_frozen_model_and_threshold_with_target_in_every_position)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-science-order-focus-a1/Scripts/StructTrain/TimeLearner/tests/test_fixed_threshold_order_matrix_native.py", line 89, in test_same_frozen_model_and_threshold_with_target_in_every_position
+    self.assertEqual((live['execution'], live['binding']['initial_main_pid']), ('running', os.getpid()))
+AssertionError: Tuples differ: ('running', 753407) != ('running', 773132)
+
+First differing element 1:
+753407
+773132
+
+- ('running', 753407)
+?              ^ ^^^
+
++ ('running', 773132)
+?              ^ ^^^
+
+
+----------------------------------------------------------------------
+Ran 1 test in 566.151s
+
+FAILED (failures=1)

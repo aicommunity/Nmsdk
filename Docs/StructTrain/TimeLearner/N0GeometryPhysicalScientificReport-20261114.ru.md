@@ -70,3 +70,11 @@ Rs=86M на всех входах. Best candidate и actual terminal state ра�
 ### after: лучший измеренный timing-ready кандидат
 
 ![after group000074](ValidationPlans/M40N0GeometryTrainingReportA1-20261114/completed/worker/tmp/N0-geometry-after-training-gallery/group-000074-soma-000-overview.png)
+
+## Назначенный пик в native масштабе
+
+[Отдельный focus принят1/1](ValidationPlans/M40N0GeometryPeakFocusA1-20261114/RESULT.ru.md): оба оригинальных PNG просмотрены,121 sample frames920..1040 без downsampling. Ниже full-before — проба до omission в каждой из моделей; Y local, сравнивать числовые оси. Before maximum frame978 и after frame996 находятся внутри изображений. Это дополнение к полным omission controls, без новых измерений и переоценки assignment.
+
+![Before assigned peak](ValidationPlans/M40N0GeometryPeakFocusA1-20261114/completed/worker/tmp/N0-geometry-before-peak-focus/native-frame-focus.png)
+
+![After assigned peak](ValidationPlans/M40N0GeometryPeakFocusA1-20261114/completed/worker/tmp/N0-geometry-after-peak-focus/native-frame-focus.png)

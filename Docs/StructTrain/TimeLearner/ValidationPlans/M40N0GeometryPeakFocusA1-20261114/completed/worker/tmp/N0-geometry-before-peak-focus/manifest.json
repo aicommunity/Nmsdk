@@ -1,0 +1,46 @@
+{
+  "kind": "recorded_training_native_frame_focus",
+  "schema_version": 1,
+  "source_package_sha256": "1ccdc3d29f9064139bc9dbb6975fc9619409fc27c12fe359866dfe0203fe63f6",
+  "source_summary_sha256": "810b78888be14cdb6f6c016863bea1105a50230b947b6e6f840ae1a94487e1a8",
+  "rows": [
+    {
+      "group": 62,
+      "model_revision": "2bc83f6f8cd9b2effb1fd7184f7e595ac732c170ee9b4740b0f9b7836d052197",
+      "primary_reference": {
+        "bytes": 150259,
+        "relative_path": "composite-measurements/group-000062/full-before.csv",
+        "sha256": "d18427fbb05d49d676e879c140e3af8ccd5577037df6b94a15b391c5ab3b0ebd"
+      },
+      "first_frame": 920,
+      "last_frame": 1040,
+      "samples": 121,
+      "x_bounds": [
+        0.4600000000000364,
+        0.5199999999999818
+      ],
+      "original_selection": "valid"
+    }
+  ],
+  "channel": 0,
+  "y_limits": [
+    0.013314432778724359,
+    0.016294998585046117
+  ],
+  "minimum_native_tick_pixels": 17.5,
+  "files": [
+    "native-frame-focus.png",
+    "native-frame-focus.svg",
+    "native-frame-focus.pdf"
+  ],
+  "plotting_environment": {
+    "python": "3.12.3",
+    "python_executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python",
+    "matplotlib": "3.9.4",
+    "pillow": "13.0.0"
+  },
+  "downsampling": false,
+  "scientific_verdict": null,
+  "assignment_changed": false,
+  "display_only": true
+}
