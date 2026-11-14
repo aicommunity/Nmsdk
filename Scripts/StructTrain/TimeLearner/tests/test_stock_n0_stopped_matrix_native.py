@@ -79,9 +79,11 @@ class StockN0StoppedMatrixNativeTest(unittest.TestCase):
             self.assertEqual((metrics['pooled_counts']['targets'], metrics['pooled_counts']['foils']), (1, 7))
             self.assertEqual(metrics['effective_threshold'], 100.)
             model = load(output/'run/native/model.json')
-            self.assertEqual(model, load(output/'run/native/model-after.json'))
-            self.assertEqual(model['source_solo'], package)
-            self.assertEqual(model['neuron']['graph']['identity'], package['neuron']['graph']['identity'])
+            # Keep failure diagnostics bounded for hundred-megabyte archives.
+            self.assertTrue(model == load(output/'run/native/model-after.json'), 'frozen model changed')
+            self.assertTrue(model['source_solo'] == package, 'original stopped package was replaced')
+            self.assertTrue(model['neuron']['graph']['identity'] == package['neuron']['graph']['identity'],
+                            'effective imported neuron graph differs from the stopped source')
             self.assertEqual(source_before, file_record(source))
             _write(output/'result.json', dict(kind='actual_stock_N0_stopped_matrix_result', schema_version=1,
                 source=source_before, topology=spec['topology'], metrics=metrics, model_frozen=True,
