@@ -41,4 +41,32 @@ Rs=86M на всех входах. Best candidate и actual terminal state ра�
 
 На проверенной новой геометрии Ns3/4/5 дают соответственно amp residuals −0.003971548037342454 /+0.0000452931682249913 /+0.004050080126674294 при timing-ready. Это наблюдаемая дискретная сетка, не доказательство глобальной недостижимости амплитудной цели: другие геометрии и физические режимы не исчерпаны. Нельзя автоматически ослабить допуск, включить C-trim либо выдать лучший остаток за Exact.
 
-Собственные Train waveforms и независимое восстановление новых полных compact archives остаются отдельными проверками. Полная приёмка этапов1–12 и всей матрицы не заявляется.
+Полные compact archives сохранены в Git: [before32,720,612B](ValidationPlans/M40N0GeometryBeforeTrainPrimaryA2-20261114/RESULT.ru.md), [after32,932,880B](ValidationPlans/M40N0GeometryAfterTrainPrimaryA2-20261114/RESULT.ru.md). [Собственные Train waveforms приняты production1/1](ValidationPlans/M40N0GeometryTrainingReportA1-20261114/RESULT.ru.md),6 выбранных полных waveform PNG и2 boundary clock views просмотрены; независимое восстановление этих новых archives ещё открыто. Полная приёмка этапов1–12 и всей матрицы не заявляется.
+
+## Собственные waveforms и omission controls
+
+Каждый рисунок содержит шесть полных реальных проб: full-before, четыре omission и full-after. Y одинаков внутри группы, но между разными моделями следует читать числовые оси: Ns меняет амплитуду. Фиолетовая область здесь — полный proposed measurement window0..1.8с, не доказанная принадлежность всей кривой одному импульсу. Принадлежность проверена отдельными production selection/omission доказательствами. Overview позволяет видеть широкие вершины; сверхточная оценка остатков берётся из чисел, не с картинки. Native boundary views в архиве не увеличивают назначенный пик и не выдаются за его визуальную приёмку.
+
+### before: последний общий кандидат
+
+![before group000066](ValidationPlans/M40N0GeometryTrainingReportA1-20261114/completed/worker/tmp/N0-geometry-before-training-gallery/group-000066-soma-000-overview.png)
+
+### before: первый различающийся кандидат
+
+![before group000068](ValidationPlans/M40N0GeometryTrainingReportA1-20261114/completed/worker/tmp/N0-geometry-before-training-gallery/group-000068-soma-000-overview.png)
+
+### before: лучший измеренный timing-ready кандидат
+
+![before group000062](ValidationPlans/M40N0GeometryTrainingReportA1-20261114/completed/worker/tmp/N0-geometry-before-training-gallery/group-000062-soma-000-overview.png)
+
+### after: последний общий кандидат
+
+![after group000066](ValidationPlans/M40N0GeometryTrainingReportA1-20261114/completed/worker/tmp/N0-geometry-after-training-gallery/group-000066-soma-000-overview.png)
+
+### after: первый различающийся кандидат
+
+![after group000068](ValidationPlans/M40N0GeometryTrainingReportA1-20261114/completed/worker/tmp/N0-geometry-after-training-gallery/group-000068-soma-000-overview.png)
+
+### after: лучший измеренный timing-ready кандидат
+
+![after group000074](ValidationPlans/M40N0GeometryTrainingReportA1-20261114/completed/worker/tmp/N0-geometry-after-training-gallery/group-000074-soma-000-overview.png)

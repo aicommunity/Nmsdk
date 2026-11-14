@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-stock-n0-classic-threshold-m40-a2-primary",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "0286ddb07064d3446dd37ce8536937d89576f345",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 201326592
+  },
+  "operation": {
+    "kind": "closed-primary-bundle",
+    "manifest": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/stock-n0-classic-threshold-a2-primary/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockN0ClassicThresholdPrimaryA2-20261114/collection-manifest.json",
+      "sha256": "0861963221ce190c8b958fb4084fce6025577d487cf346defddeb3ec1efaf074"
+    }
+  }
+}

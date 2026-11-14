@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s11-n0-geometry-training-report-m40-a1",
+  "package_fingerprint": "41e24273aca67d63210b20432d7241685dde02ceca01abc7dd5c0bab08a418b8",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n0_geometry_training_report.N0GeometryTrainingReportTest.test_shared_prefix_divergence_and_best_measured_groups"
+  ],
+  "executed_tests": 1,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_N0_GEOMETRY_BEFORE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-before-train-m40-a2/worker/native-n0-geometry-before-train/Branch-stock-cold8-N0/runs/train/native",
+      "files": 551,
+      "fingerprint": "a253655daa719c7e3856b3be4d5dd9ee61b8d6acfdc05e51d213bba56a0c6813"
+    },
+    "TIMELEARNER_N0_GEOMETRY_AFTER": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-after-train-m40-a2/worker/native-n0-geometry-after-train/Branch-stock-cold8-N0/runs/train/native",
+      "files": 559,
+      "fingerprint": "32ea7e4621fb86b9165c4665967ea39cfd0b7a15d509af9abdc886f38a678172"
+    }
+  },
+  "scientific_verdict": null
+}

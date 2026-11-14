@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-n0-geometry-training-report-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "e5d6f00f77faddaf541016c5fc0898bc5526348c",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 2147483648
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-training-report-a1",
+      "commit": "e5d6f00f77faddaf541016c5fc0898bc5526348c"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-training-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryTrainingReportA1-20261114/suite.json",
+      "sha256": "02dd5fa342d5125a62447f90f7d019756115bc2f86fbcdfa7730ce3459035ffc"
+    },
+    "fixtures": {
+      "TIMELEARNER_N0_GEOMETRY_BEFORE": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-before-train-m40-a2/worker/native-n0-geometry-before-train/Branch-stock-cold8-N0/runs/train/native",
+      "TIMELEARNER_N0_GEOMETRY_AFTER": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-after-train-m40-a2/worker/native-n0-geometry-after-train/Branch-stock-cold8-N0/runs/train/native"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 2147483648
+    }
+  }
+}

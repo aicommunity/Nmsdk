@@ -299,7 +299,7 @@ review does not imply acceptance of an entire report collection.
 | Explicit cold native builder/adoption, preserved forced Build, multi-synapse and inhibition routing; A1/A2/A3 | [Elder-1](s06-native-builder-elder1/README.md), [M40 + ASan](s06-native-builder-m40/README.md) |
 | Actual typed revision observer, lifecycle/property replacement and native full-provider A/B | [Elder-1](s06-model-observer-elder1/README.md), [M40](s06-model-observer-m40/README.md) |
 | Explicit assigned-wave selection, native wide-window traces and backward evidence audit | [Elder-1](s07-assigned-selection-elder1/README.md), [M40](s07-assigned-selection-m40/README.md) |
-| Isolated runtime, Qt5/Qt6, observations | [Elder-1](s02-elder1/README.md), [M40](s02-m40/README.md) |
+| Isolated runtime, Qt5/Qt6, observations | [Elder-1](s02-elder1/README.md), [M40 runtime manifest](s02-m40/runtime_manifest.json) |
 | Frequency/lifecycle and native CSV collector | [Elder-1](s03-s04-elder1/README.md) |
 | Effective model graph and indexed property bindings | [Elder-1](s04-inspection-elder1/README.md), [M40](s04-inspection-m40/README.md) |
 | Native Copy/XML, explicit order and impulse traces | [Elder-1](s04-roundtrip-elder1/README.md), [M40](s04-roundtrip-m40/README.md) |
@@ -674,3 +674,10 @@ lease recovery и production pipeline integration остаются открыт�
 [N1CoupledBranch-20261113](N1CoupledBranch-20261113/primary/bundle.json): полный primary24.11MB,1214logical members, literal XZ/container2. Один input2 candidate выполняет timing/amplitude tolerances; итог invalid_observation/ambiguous input1, certificate=null. Четыре просмотренных original PNG и metadata — figures; полная SVG/PDF gallery M40 cache. [Научный отчёт](../../../Docs/StructTrain/TimeLearner/N1CoupledScientificReport-20261113.ru.md).
 
 Frozen8 baseline того же actual terminal state: [frozen-primary/bundle.json](N1CoupledBranch-20261113/frozen-primary/bundle.json),42.32MB XZ,436logical members. Completed/valid, unchanged model,8complete observations; при100 TP0/FP0/FN1/TN7. [Приёмка](../../../Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledFrozenA1-20261113/RESULT.ru.md).
+
+## Новые N0 эксперименты,14.11.2026
+
+- [Classic actual fixed-threshold8 primary](StockN0ClassicThreshold-20261114/primary/bundle.json):83,917,844B XZ,612 logical members. TP1/FP4/FN0/TN3; target0.503 после последнего input0.49; stopped-model Same-Matrix. [Разбор](../../../Docs/StructTrain/TimeLearner/ClassicN0ThresholdScientificReport-20261114.ru.md).
+- [Branch before primary](N0GeometryBeforeTrain-20261114/primary/bundle.json):32,720,612B,1601 members; [after primary](N0GeometryAfterTrain-20261114/primary/bundle.json):32,932,880B,1623 members. Оба budget_exhausted/0 jointly-ready.31 shared measured candidates; новый поиск нормализует новую геометрию, лучший timing-ready amp residual6.80× меньше, но4.53× выше допуска. [Разбор](../../../Docs/StructTrain/TimeLearner/N0GeometryPhysicalScientificReport-20261114.ru.md).
+
+Все модели, исходные/частичные данные и receipts сохранены literal schema2; full derived galleries — cache M40. Новые3 archives суммарно149,571,336B, отдельный independent restore ещё открыт.

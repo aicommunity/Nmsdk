@@ -1,0 +1,2783 @@
+{
+  "manifest": {
+    "kind": "timelearner_closed_primary_bundle",
+    "schema_version": 1,
+    "base": "/media/user/Data/TimeLearnerRefactor",
+    "roots": [
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2",
+        "prefix": "threshold",
+        "files": {
+          "closure-and-reservation.json": {
+            "bytes": 3811,
+            "sha256": "a15f4f0a8656596f80a6405bbb3871c06e9e8b69b3067b6709bda067e731bfc5"
+          },
+          "controller-result.json": {
+            "bytes": 1177,
+            "sha256": "6ed187dfa6c2bbe5a452b72d948dc242fbfe0bbae941f727e2c3ad77da1d8aae"
+          },
+          "launch-context.json": {
+            "bytes": 175,
+            "sha256": "237b4333e17391b01182be1e2ad1fea3a148a14d747b5c239503a7578d12e264"
+          },
+          "lease-recovery.json": {
+            "bytes": 3882,
+            "sha256": "7ddbfceaf1f07110fdbe896472bb8483665639546cfda6bc6abcafe7322d45dd"
+          },
+          "monitor-final.json": {
+            "bytes": 134,
+            "sha256": "35857a821de79b94126c493b3d96d49ae356e24729686715f55f4aa05119bf2e"
+          },
+          "monitor.jsonl": {
+            "bytes": 396406,
+            "sha256": "ee42c42653371ba0005a8394526c235859bb60b94650938e67378bd7820d17d8"
+          },
+          "preflight.json": {
+            "bytes": 75,
+            "sha256": "3e7969b3a0563560c7e6c69a9712a7e04443a5426766e4ba4164c728c4d29c5f"
+          },
+          "process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "process/contained/limits-readback.json": {
+            "bytes": 1070,
+            "sha256": "ee6dbd6107f8e0214eee66273f5184ba7bd2142e5a84f3c46ea669eefc25fb1b"
+          },
+          "process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "b4d227959f2d4427f7e8f9223038c60498b3f9ed0f805a4a4e3b229d20f9e596"
+          },
+          "process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "537a03a4205c9ee217de3616903f2eec2fd4533444c77c8ba8b6d688dfedb648"
+          },
+          "process/contained/request.json": {
+            "bytes": 954,
+            "sha256": "53fa70b1c3d177ee1149f47939b8cdac4af58bbfc854351ed3bf81d31d1881c3"
+          },
+          "process/contained/runtime.json": {
+            "bytes": 2963,
+            "sha256": "3629af6c2d18179d291d1621b3c8f9bf308485f70174856aa52fe96c91420a40"
+          },
+          "process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/loaded-files.json": {
+            "bytes": 976,
+            "sha256": "226946488871a3a07dbcf60d6b3aead04439d4c6427eb0c7961d6be2f629aaac"
+          },
+          "process/owned-process.json": {
+            "bytes": 587,
+            "sha256": "3cc5e3e107d087e1670bee0b9de6fc349c171170f473806f326f9392295d4c36"
+          },
+          "process/request.json": {
+            "bytes": 547,
+            "sha256": "620a53109103095c23a1b7015eb9a2ddde4ebf0a52b6a478df3dd438616b6ee5"
+          },
+          "process/result.json": {
+            "bytes": 1177,
+            "sha256": "6ed187dfa6c2bbe5a452b72d948dc242fbfe0bbae941f727e2c3ad77da1d8aae"
+          },
+          "process/runtime.json": {
+            "bytes": 2963,
+            "sha256": "3629af6c2d18179d291d1621b3c8f9bf308485f70174856aa52fe96c91420a40"
+          },
+          "process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/terminal-unit-state.json": {
+            "bytes": 1300,
+            "sha256": "8558a1d8b5614e92eb9a5857081f82b58f5d7bb42894e7dc9d021c35ea6d2928"
+          },
+          "process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "bbb2787075cde9d5ac6b3abc46dee76b0fde8969aabb7408b39015544b99261b"
+          },
+          "request.json": {
+            "bytes": 1503,
+            "sha256": "cd80aba781f11ca69f8213eb5bf753586f72ea06571f70918172cb556b1c53df"
+          },
+          "supervisor.log": {
+            "bytes": 554,
+            "sha256": "95c337aea9deb6b62859a4b8f72be11bef623d8d0bc84668352cd5dbe8709f0c"
+          },
+          "worker/fixtures-after.json": {
+            "bytes": 13583,
+            "sha256": "a77d9c9b4b84b8871a8e0d7ca4632ed4656caa8843322472bfe865c61d7a0589"
+          },
+          "worker/fixtures-before.json": {
+            "bytes": 13583,
+            "sha256": "a77d9c9b4b84b8871a8e0d7ca4632ed4656caa8843322472bfe865c61d7a0589"
+          },
+          "worker/reservation.json": {
+            "bytes": 2000,
+            "sha256": "83a359e743b85aedb8645daffcdf1ca74735ea33499f48684ff660bd15ee9c41"
+          },
+          "worker/temporary-environment.json": {
+            "bytes": 371,
+            "sha256": "027e6cffc179e46f9b33d509f99c5d5c484ef5d8835197675c59e51d9b71809a"
+          },
+          "worker/terminal.json": {
+            "bytes": 259,
+            "sha256": "5f9ab9b5b527b3eacc9b6f4657c7fe14a36807d8403057e09042c95317d4d554"
+          },
+          "worker/tmp/threshold-study/jobs/baseline100.json": {
+            "bytes": 153853447,
+            "sha256": "40de460ecb4d8df93fa65c711c024ddfcb42e40b146373a8898d0af8bee04b27"
+          },
+          "worker/tmp/threshold-study/jobs/candidate.json": {
+            "bytes": 153853477,
+            "sha256": "13f853ffd5e7852904e3c075f70f34217c5cfd5e467b6f900d730c1aff274958"
+          },
+          "worker/tmp/threshold-study/leases.sqlite3": {
+            "bytes": 36864,
+            "sha256": "fd37213bd33831b21c7af08df536d677e92e608232cebd84028ebbf4de5781a8"
+          },
+          "worker/tmp/threshold-study/proposal.json": {
+            "bytes": 5785,
+            "sha256": "289c18dd8303e3333c37cd96931834bb05f069931f73d1bbb9f35c1f2c9b585b"
+          },
+          "worker/tmp/threshold-study/result.json": {
+            "bytes": 120964,
+            "sha256": "a42e4fc5e4f3486dd45df9c49397530af36f5c02a86bf27eb730c0566db4e1bd"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/job.json": {
+            "bytes": 153853447,
+            "sha256": "40de460ecb4d8df93fa65c711c024ddfcb42e40b146373a8898d0af8bee04b27"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/process-policy.json": {
+            "bytes": 530,
+            "sha256": "ca922ea3a6711b90600d94d3a39addfcec20cf823319f9f924e69406c0da4dc5"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000001/full-after.csv": {
+            "bytes": 389997,
+            "sha256": "a946f68cf573b695e07de7d961c7810cdda1a6bcfacb7249fac6648aa7e5eb8d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000001/full-before.csv": {
+            "bytes": 390316,
+            "sha256": "1fdf97cd5ae82864f607aa31e9303204380fc8f43fac602e6e44f1a1521cb62d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000001/omit-0.csv": {
+            "bytes": 377681,
+            "sha256": "f3f51b996abda508dc73c429cfa88080559ee3a0aae9c096906b476032a49764"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000001/omit-1.csv": {
+            "bytes": 396011,
+            "sha256": "2556ef0adeef375baa9916ab88adb14a9bcd89e9e09cc3317e613faeeb823c34"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000001/omit-2.csv": {
+            "bytes": 397210,
+            "sha256": "03be17f22445ba0264543ca2602346a20248cdfa4a28893b0d635a55ceaae769"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000001/omit-3.csv": {
+            "bytes": 398988,
+            "sha256": "8732dd132ee2e7d6f30b88342795ead7cc497c628dc265b87408bfedf5761790"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000002/full-after.csv": {
+            "bytes": 390246,
+            "sha256": "89a6d9825ee91d0d289cc4908c22b34773abd94dbb1e9d0cf929b8df1929ce30"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000002/full-before.csv": {
+            "bytes": 378275,
+            "sha256": "2a92a6f07b886c49941015d5132f52f6aaac531144ce3afbffbb8840cd882ba8"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000002/omit-0.csv": {
+            "bytes": 365614,
+            "sha256": "317a5ddb768f0f2dbc984777ddbe2fd9e8d8863b6d157472f89be0b067b823ef"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000002/omit-1.csv": {
+            "bytes": 380302,
+            "sha256": "b211b50f76160c948f15f07f14fbb09459bea9b07e3936a5a70d0dead15420f5"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000002/omit-2.csv": {
+            "bytes": 390965,
+            "sha256": "1ae1a6c6d33705480e38d3760ab0480f1a3dbd84f6068fd5125d405d029917dd"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000002/omit-3.csv": {
+            "bytes": 391175,
+            "sha256": "78c11866706ffc6b223a3270901e06d6dc3194cdd77209b143187ca88be552e3"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000003/full-after.csv": {
+            "bytes": 391657,
+            "sha256": "e8ac88c864247597dd6c29fe4a38b305076be294a54f953e4af5a5bc96cf44d3"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000003/full-before.csv": {
+            "bytes": 390294,
+            "sha256": "832e6eb9a9533a576cd12d77976e802936506ff7a5b991f3535388182c4c2e2e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000003/omit-0.csv": {
+            "bytes": 377624,
+            "sha256": "5a6e409b1eb016936ff723fc6a36f3ae8e0867b45743d031e2f9484495be72ac"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000003/omit-1.csv": {
+            "bytes": 390881,
+            "sha256": "bb2722ff6605efe120bd10128bc66e71eaa4f1c67f20dc7df9dd9b9fdbe7ff34"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000003/omit-2.csv": {
+            "bytes": 391003,
+            "sha256": "48ee8195d43ccba31d11ef3256ddcb63ddaa96051aeb57c686e0207b21e32ad2"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000003/omit-3.csv": {
+            "bytes": 391149,
+            "sha256": "85f7cafea43cb9cc7710bda14f71b44d3617e60ef5b5e4ab24c678adda8094a3"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000004/full-after.csv": {
+            "bytes": 396232,
+            "sha256": "0ce3a06011a21148000e66326ef6517a9d29d5f5deda23a287d0f5de6cb9d335"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000004/full-before.csv": {
+            "bytes": 396232,
+            "sha256": "ad0177e5830a7a6304baff40f0829a879cf36edf3e13d138970cf896f88de578"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000004/omit-0.csv": {
+            "bytes": 383575,
+            "sha256": "bf004d302a8c56c8b9b715f3e3d723a39e643bcb8f532c4675176bb5dc7e3b28"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000004/omit-1.csv": {
+            "bytes": 396951,
+            "sha256": "d4b3fadccb58483ab6197f5b635dcb9a6bac18638fa056891cd3c00231a5954b"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000004/omit-2.csv": {
+            "bytes": 397032,
+            "sha256": "3a8ba1486739c7c029888303106edc3eef9267bcc1c92b75248ca011eacc7a44"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000004/omit-3.csv": {
+            "bytes": 397113,
+            "sha256": "3841e78e51a9a7bdf4a52ed8dc345687d7a853635cf07b618114f95ab0445ca2"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000005/full-after.csv": {
+            "bytes": 396231,
+            "sha256": "8cca0afbe33b5ed28abbdd3746c4379b83f4ca4c15dc305ea2c2bb23db9cbeca"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000005/full-before.csv": {
+            "bytes": 396231,
+            "sha256": "39042a501c79178696623d9621eb92471b1ce47771c17679e10dc6c626aa4d6e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000005/omit-0.csv": {
+            "bytes": 383648,
+            "sha256": "71170b4df83f9b94d20d5c24bf0a742492daa5a5f6bea839772998713320cca8"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000005/omit-1.csv": {
+            "bytes": 396948,
+            "sha256": "9210916ef710b6a6ad75d2db6dcededf3f9228b6b11ba950bd4a8bc7a912d844"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000005/omit-2.csv": {
+            "bytes": 396964,
+            "sha256": "ebb056a41310dbc6bfddcdce6bbd774fe1f2ff8a109935e15e5e8a2be07106b7"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000005/omit-3.csv": {
+            "bytes": 397112,
+            "sha256": "bc6ef18ce239b42e9fee82c407a8df1e8fb47491ec45a90c0b57fe265b007240"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000006/full-after.csv": {
+            "bytes": 397508,
+            "sha256": "aea81078b63d9e24440aaa8fddbb7c31e21fbc5b86c4c48d5dd2acde82787b40"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000006/full-before.csv": {
+            "bytes": 396293,
+            "sha256": "f028b700a1df3bc7bb6bdadd023efb7e6016d94422f8b676d47e7618aba35b78"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000006/omit-0.csv": {
+            "bytes": 383656,
+            "sha256": "d8f6e53adc2ecfb164740aee34de3648e1e1ee38b0ff7dde00b7bde6ded73d7c"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000006/omit-1.csv": {
+            "bytes": 396903,
+            "sha256": "6210fcdc860fc3d22207654a1846a185c68f44fba16a658c21994e845d3c4ff6"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000006/omit-2.csv": {
+            "bytes": 396940,
+            "sha256": "1edbc7177822ee3d26fa7bd8b2914a2aa7be32087a7b7ae97c08f5e6dc333e29"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000006/omit-3.csv": {
+            "bytes": 397111,
+            "sha256": "2ab4d0766bf1d3b05a925986931b1840c3f4e937df691d7b65e4037956be13a3"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000007/full-after.csv": {
+            "bytes": 398891,
+            "sha256": "f9bf2c9681690a8b81b538329f264cb9531eee064705788bdfb30fbba38a7820"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000007/full-before.csv": {
+            "bytes": 398891,
+            "sha256": "f196265da8cbad00c1b7e8ecce6f936c14ef5054073a83d7cd84df1cb37065d3"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000007/omit-0.csv": {
+            "bytes": 386247,
+            "sha256": "7527e177086849a02bffaa6d8445b9dba5ede626f5cd4d462307c1dcfbff6a21"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000007/omit-1.csv": {
+            "bytes": 399499,
+            "sha256": "5391197879114355e8d4f63b6c4fb68113fdc7c248ef5b0572edf8549709237e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000007/omit-2.csv": {
+            "bytes": 399577,
+            "sha256": "4b92ea765d6d505522895a9f42c1b162f0dd33f486fb4c017dfa3cf0b55caf56"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000007/omit-3.csv": {
+            "bytes": 399763,
+            "sha256": "15a968c305c9089ef8e482f456a4f7ee07310c1db0144cbd54f8fe1d09732267"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000008/full-after.csv": {
+            "bytes": 398892,
+            "sha256": "8772614acd864dbe7efb587dde0495a426517bfd4d4a554151edf679ea738357"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000008/full-before.csv": {
+            "bytes": 398892,
+            "sha256": "5ce2776329f2299349357c9b403e4a6284820747938e669d4a9ba6085ab647f0"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000008/omit-0.csv": {
+            "bytes": 386218,
+            "sha256": "ed8d7fd099b926fe4cec897f84861fda8129049380887720110eab79fe65cca0"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000008/omit-1.csv": {
+            "bytes": 399489,
+            "sha256": "9360511c6cedbf0c56d8fba40b5c05734fbae7a3e8c886f4c8379938caceab5b"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000008/omit-2.csv": {
+            "bytes": 399590,
+            "sha256": "86b4da485cdad0cb463c9f0eb8d45fee8e53441bc6f5d8bfa55b4386d4cf7338"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000008/omit-3.csv": {
+            "bytes": 399788,
+            "sha256": "bfa51c6519e9e0f4b2aacb1bf4084a7542ccb623b9225c03826c24d3b3e48983"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000009/full-after.csv": {
+            "bytes": 398861,
+            "sha256": "4af9e305a16259d147a982076aa97a73b0f1e6e0bb35e51abb00bcb0ffa73f3d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000009/full-before.csv": {
+            "bytes": 398850,
+            "sha256": "2b1553bcf04cd535030aa65288adfce52e2fd300567196f437d6aa67eef26929"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000009/omit-0.csv": {
+            "bytes": 386135,
+            "sha256": "8436cb56290467d3336aee08c0fc5ceb72ede7ad52c5955b7f3d29a6616b75cb"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000009/omit-1.csv": {
+            "bytes": 399451,
+            "sha256": "841e368c0e4bec9a10c5f3bd479b764ec939b78940b4114b31dfaa65391be7e0"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000009/omit-2.csv": {
+            "bytes": 399568,
+            "sha256": "afa6cbde313632200709f172a88eec596afad20d72998c0b205f889fe264713a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000009/omit-3.csv": {
+            "bytes": 399780,
+            "sha256": "7110edf6b4141e0bebaf742e3ec5c2b37bcd545f616c567ca77f0e1989ae0e3b"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000010/full-after.csv": {
+            "bytes": 375378,
+            "sha256": "68d9d9d3a89d63b479214610b6e0f717ee8b8866d8b9f3b1d00c3927ab27ba61"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000010/full-before.csv": {
+            "bytes": 398818,
+            "sha256": "e7aa0441e8e2a7b1d4d1070f931f60cfc5e973f8676dfd9c237b1aad5fb942a7"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000010/omit-0.csv": {
+            "bytes": 375292,
+            "sha256": "d90bba3d07346cfc5dfaebd50c3943637e6860e5f05ec28dd315155d4d08f650"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000010/omit-1.csv": {
+            "bytes": 375997,
+            "sha256": "c86c4216d8d775ea323a2518bc9d12d9b52fe3f8e4785ffa96d2274b74d4db91"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000010/omit-2.csv": {
+            "bytes": 376137,
+            "sha256": "1101070a09b7c03f4921d7bf88750ce4be7269d09a1d2dbc4f7fe083948f3641"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000010/omit-3.csv": {
+            "bytes": 376299,
+            "sha256": "300be530e7a5be96c8ea894005b02cd0f61ea615dad838c19df57e2208df82db"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000011/full-after.csv": {
+            "bytes": 368625,
+            "sha256": "2adbab545a91235b23bd6410e160a3562f576373fd916b4fdbcb3f735ab9e28a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000011/full-before.csv": {
+            "bytes": 368624,
+            "sha256": "877d8a7677d342c042f444eb0d3f2a18cf169346bfde4dbbfbc4fbc595dbfbfa"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000011/omit-0.csv": {
+            "bytes": 355931,
+            "sha256": "f5da76bc0a2ef7c68397187395480bdcc01491db4e5809df23e7f6dfa8b3165a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000011/omit-1.csv": {
+            "bytes": 369096,
+            "sha256": "1e8831462175e9e4c9c0916246567c025ac28d34933e220c005e64714ff8ffbe"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000011/omit-2.csv": {
+            "bytes": 369552,
+            "sha256": "14b0ca3831b742e8fe66de4e08500c22cb031e435739cda590f771488d925292"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000011/omit-3.csv": {
+            "bytes": 369326,
+            "sha256": "340a3b61975c9e2bd8ab93d9bb346e5009b6855bb66f19ceffa9d586d498d06d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000012/full-after.csv": {
+            "bytes": 380826,
+            "sha256": "2de5c99d0f0c4976b77936864e9baa0508e4393b3bee2ebe018698d7b4c1fe5f"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000012/full-before.csv": {
+            "bytes": 368619,
+            "sha256": "6a5472ecedf3a33cffd60aaa5a44f1fc3ac9da4c6d4654d471b6c641c9cdd38f"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000012/omit-0.csv": {
+            "bytes": 355944,
+            "sha256": "7d633a4ce1576ee1feb56e2f7c6320243dce5718b2b64388d3c5d4f0e9743468"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000012/omit-1.csv": {
+            "bytes": 369107,
+            "sha256": "4a60ca826d81fe2d270fb1cd9c83fc2bd4c1610bfd2324f0452f3cb32cbe5cd9"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000012/omit-2.csv": {
+            "bytes": 369528,
+            "sha256": "69f580387d7f97de99096356039aae4a934614c1823951ba08d69ca31be6ac80"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000012/omit-3.csv": {
+            "bytes": 369332,
+            "sha256": "3ad01ba12ac8fa18c15b4ff20a5ae62cba1b2734e9e19fabf9724b7006ac4492"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000013/full-after.csv": {
+            "bytes": 388800,
+            "sha256": "3a86a4e8f28f23f2c2c840d267e9dc6ad6c7fef1e4d7dcd4615a3c65abe11cfa"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000013/full-before.csv": {
+            "bytes": 388802,
+            "sha256": "20e960cbfe86d9cfc956862fb3910cc006486c2ae5b95482c0dd6bb165491bf7"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000013/omit-0.csv": {
+            "bytes": 376140,
+            "sha256": "d88144072bfda6ca907ed118ee3ad7c7326e888d18c13e5e63fbbf31b4ae4322"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000013/omit-1.csv": {
+            "bytes": 389453,
+            "sha256": "a42db9e840c91e83b008aeb79008462f7f89444b30ec5ec3f4467e654f46e85c"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000013/omit-2.csv": {
+            "bytes": 389531,
+            "sha256": "1dfbf184da2d298454004065579110a136db531ea10ca8c92a0f13b5fee520ff"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000013/omit-3.csv": {
+            "bytes": 389680,
+            "sha256": "8de593e3473c11233cf9463205b58de5424b4e659d303eebb3669b78398f4796"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000014/full-after.csv": {
+            "bytes": 388809,
+            "sha256": "3c34956d0cf526755d78557e6fb92c199bef7973fe4a1ba473568df5f369d732"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000014/full-before.csv": {
+            "bytes": 388812,
+            "sha256": "05e7ca9b5197bae4254ea2182cdd931f2d4aa6fbf41681d256f5b51c250e8692"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000014/omit-0.csv": {
+            "bytes": 376128,
+            "sha256": "a7a0475aee61115d689d616e17a4e86c955fe24f95df7ca6e2991c950ca9c5c1"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000014/omit-1.csv": {
+            "bytes": 389457,
+            "sha256": "1cd507c6fddb597f89060103e16b087c611fa167e9c0c5385528fb8fa1c913e4"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000014/omit-2.csv": {
+            "bytes": 389527,
+            "sha256": "9d86c6e69e2b65a0eb30a49bd4cb52ab4814ff76d5fee22c254db025ec25773c"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000014/omit-3.csv": {
+            "bytes": 389682,
+            "sha256": "932e5a4732b8f01b4b0ee31ae5bf550fc15a354740685d60fc3c2185ce2c4a4a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000015/full-after.csv": {
+            "bytes": 382541,
+            "sha256": "ec744a906a58e62ecfc9efdb3eacdd11b2ee138f9725159c6feadc8b507c6bad"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000015/full-before.csv": {
+            "bytes": 382543,
+            "sha256": "d5f5a6d860039e2ca7685ce84fc82f1a45ea1fbab5be14001ec3dfb1c1fd81e6"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000015/omit-0.csv": {
+            "bytes": 369844,
+            "sha256": "2900459d379c9165fb612c30bf6f205632324c8969d8c00c51d996bbbf94c553"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000015/omit-1.csv": {
+            "bytes": 382985,
+            "sha256": "ed0786e53d927ab56b051f1a762ff54ef07956d43f0a8b3dbf12b5a1c63e6f9d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000015/omit-2.csv": {
+            "bytes": 383462,
+            "sha256": "c6abf418b1b3009a5d3496a551c3bf1bce09b43e58d0900ccd18efa7c8774ba3"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000015/omit-3.csv": {
+            "bytes": 383759,
+            "sha256": "a4515f34ff19d0b7b5935cb4aaf835d4d6c5a9d3be1c6ea1e7b24875c2757c4a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000016/full-after.csv": {
+            "bytes": 382533,
+            "sha256": "bbb0c6cc7e74f194636d7adc77fe720c63ad506bf91c6cef6814382634f0fe59"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000016/full-before.csv": {
+            "bytes": 382535,
+            "sha256": "a5a9a1779f2ee4c54468dc99d72023afb5eff49de8e6dbe425b3519dd5ce79ba"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000016/omit-0.csv": {
+            "bytes": 369840,
+            "sha256": "9ce3483729b68e0ff3c9299e261e65a0f613678c55e6e01fa94976ffaeff01b0"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000016/omit-1.csv": {
+            "bytes": 382987,
+            "sha256": "30d6225c4257a9fe1b40329e9ed464bf47dd7087512bd08dfd9746b760c53620"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000016/omit-2.csv": {
+            "bytes": 383460,
+            "sha256": "75f826e94a31d98aa04b8cb1caf41163f10e7c851ea2e0c88ecdf516ed7d1cbf"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000016/omit-3.csv": {
+            "bytes": 383771,
+            "sha256": "6c4160d79e5fab3554171dfb5b5393259f7e5d4e146c48421fd14fdc27bbe546"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000017/full-after.csv": {
+            "bytes": 388749,
+            "sha256": "7bbc94aa2ba49fc830626821bee355626c33e1e60af12c4409e32202e2ac984e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000017/full-before.csv": {
+            "bytes": 388752,
+            "sha256": "fd18d69f8fc4899e616d66d3b2c66ccdf306b9cddaaaa20aacacfa450c069fc8"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000017/omit-0.csv": {
+            "bytes": 376067,
+            "sha256": "fbb5b57d13e729f49997c4635e3271fdb82285bf91652f1a115ab2ff4fe6948a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000017/omit-1.csv": {
+            "bytes": 389373,
+            "sha256": "615c4232dbfed616bbb9d7e1be0e5de5408faaa19e44a318e1a6f360572a1204"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000017/omit-2.csv": {
+            "bytes": 389492,
+            "sha256": "b06b444887b1e5d66779ae51f83b3066e0e470a7c3d563aea4b8953a608e98ab"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000017/omit-3.csv": {
+            "bytes": 389675,
+            "sha256": "f626c60a50d4c4f84f941a11c72bf8496e965fb3921b3e2602eedcaa204bf086"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000018/full-after.csv": {
+            "bytes": 388753,
+            "sha256": "c07af49f5d1a6e5641bb21ddb3f5eff48db5560cb7ef66312b4900a9e0cfde11"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000018/full-before.csv": {
+            "bytes": 388755,
+            "sha256": "e96011aa0d92fd359dc482ed43be8642fb5ab6cce3dbaf47afc652b097f43b6a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000018/omit-0.csv": {
+            "bytes": 376065,
+            "sha256": "e380eff40026947693a801ce7be6831c56bbaefbf516b4c84c710b93e9e07d95"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000018/omit-1.csv": {
+            "bytes": 389374,
+            "sha256": "41c1aeac9d60c1f2ca9fbdaeef782a8e5be20d1f094942ca00cb1acacac961cb"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000018/omit-2.csv": {
+            "bytes": 389496,
+            "sha256": "97dab5a0612e3a28b56bae02397e94afddd5026b41d758e0a8d71c4389d90383"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000018/omit-3.csv": {
+            "bytes": 389669,
+            "sha256": "c24dbfd521d2123651a03b84d440247e7bb3f594bdad2531314d2b89e8c84b3f"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000019/full-after.csv": {
+            "bytes": 388715,
+            "sha256": "18aa257582afb33ea9cfa094e74ca5359939866ab97d814ff2a9385539552b38"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000019/full-before.csv": {
+            "bytes": 388716,
+            "sha256": "b593d16bddcf12fdd6e53a831e9769731bac7599d4338e5a36e82570bd711408"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000019/omit-0.csv": {
+            "bytes": 376037,
+            "sha256": "b25492e4c5c32926494890b15b1b2b3f0b70301d270aae3d381b72ffa9fc3465"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000019/omit-1.csv": {
+            "bytes": 389369,
+            "sha256": "01212717c8b4d4ac0c3fa47a0cf105b38d27d7f468a425fbf710c29d3e93c461"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000019/omit-2.csv": {
+            "bytes": 389442,
+            "sha256": "4e3594ea98eeb6c602cb4549a7ae11b1aa6056d8110c5fd15960c8376fbf5c8b"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000019/omit-3.csv": {
+            "bytes": 389622,
+            "sha256": "c078e2f34e63ca22f404dc4f9d66244c28062f21641f5d5071e11b92e79c6805"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000020/full-after.csv": {
+            "bytes": 388716,
+            "sha256": "f593a431f64caefb889bdb9350e3299d620cb8df67db0de93b7dfa60b8aab71f"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000020/full-before.csv": {
+            "bytes": 388718,
+            "sha256": "2200a29f875d0862bfad1c261b7c290f9b0739e9e8c1aeb67cd0fa72a962e7f5"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000020/omit-0.csv": {
+            "bytes": 376049,
+            "sha256": "e6f55ab21e66f5d9cacc9989b62b1e844f505fe604aedbe67bc26bd185478e5c"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000020/omit-1.csv": {
+            "bytes": 389344,
+            "sha256": "8705e5444d179d61bf51b0a3a54c63a94dbb4cfc7180442937f96cb7576adbc9"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000020/omit-2.csv": {
+            "bytes": 389445,
+            "sha256": "5a13a3230af07b46ce226f6a765f959e9dfa59776caab5ac6d28820f3d501939"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000020/omit-3.csv": {
+            "bytes": 389620,
+            "sha256": "78ee2539468ce710435d56f853c0bf0dac807fce22c3ee4c15a4b1a8f091661b"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000021/full-after.csv": {
+            "bytes": 388679,
+            "sha256": "55de5fb3714b65a9c7f4eba1df9605d4f9d52a7438b729416a546dca4efee271"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000021/full-before.csv": {
+            "bytes": 388691,
+            "sha256": "bfb367e2684949ae87f63df8bb0e6e5ec8aae034ea618fb9cfa5d0cfc72117e5"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000021/omit-0.csv": {
+            "bytes": 375998,
+            "sha256": "f16687a3fbc9061d9e4c065e58233a3d8c452639ef87af91ba261caef4418b3a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000021/omit-1.csv": {
+            "bytes": 389311,
+            "sha256": "f710c769d0ac097b38688e34a8c93a1688c66d9e4ba6bf409aa7f1d525f05ec1"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000021/omit-2.csv": {
+            "bytes": 389415,
+            "sha256": "2d1469dd60bb7b37e3eaab7be9f28ac46c07c7938ba1d1988165dd9e3864b312"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000021/omit-3.csv": {
+            "bytes": 389602,
+            "sha256": "84af25d6be8c59506ad355ff79a4ffcae79999de9ef1956aae9b31aef4b97756"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000022/full-after.csv": {
+            "bytes": 388699,
+            "sha256": "cd2a652bd98e235ab22c6d56ea2d2ab2accf03138125b0c49e2f18a11bd6bb52"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000022/full-before.csv": {
+            "bytes": 388688,
+            "sha256": "89fc4997d3518a72f1b72e6c318592c70bb268350116aba9c12f31701e98b83f"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000022/omit-0.csv": {
+            "bytes": 375990,
+            "sha256": "6ed8082c6287f2251b360a2fdce3fe680b5878559b96be7c48002d70c53e7155"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000022/omit-1.csv": {
+            "bytes": 389309,
+            "sha256": "3d902a885b7f7635671899e68ee49dabc964249faf82dd2f03c283b1f395cf9f"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000022/omit-2.csv": {
+            "bytes": 389416,
+            "sha256": "306918ab02c6e1c64a2f4bcdd211ac54b75e9a0fc0259da18e99d409efd459b5"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000022/omit-3.csv": {
+            "bytes": 389602,
+            "sha256": "00b24a8b11599fff04ec9edb463bed5afdddac64d5146fe697eddfa3d24af703"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000023/full-after.csv": {
+            "bytes": 388625,
+            "sha256": "5311a8fa8a1cc764d425723b2834297a870e54ca657cd01287bac7ade2578d3a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000023/full-before.csv": {
+            "bytes": 388625,
+            "sha256": "ec1a541ef7ea8ca0f806f221b765d89ffaaff3961bbea7667ba6680414d463e8"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000023/omit-0.csv": {
+            "bytes": 375940,
+            "sha256": "05623867946cad5a5c29c434564e672255a5e8aa85f42acab989b970ca6f9cbb"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000023/omit-1.csv": {
+            "bytes": 389268,
+            "sha256": "e609282d207a3659d8b652226c12d27550b4fdcad9e7e565d334427ccac827a9"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000023/omit-2.csv": {
+            "bytes": 389372,
+            "sha256": "da92fac95da0a127c9192380cc68a37b308b98e87a369a7d855b33bdeca09c67"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000023/omit-3.csv": {
+            "bytes": 389572,
+            "sha256": "15ee390b70c04594b8f5b15a84d0982976d71097778a257d0831902891645292"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000024/full-after.csv": {
+            "bytes": 395309,
+            "sha256": "ff20254e866a337f24c43f04f56d10c1a8ac055352ebc1fd6313d74b0266cfb1"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000024/full-before.csv": {
+            "bytes": 388623,
+            "sha256": "88ed5bad687775b2ea8afbb8c41f7f91c7622a3334d7bfbd0f968c0d42e9675d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000024/omit-0.csv": {
+            "bytes": 375942,
+            "sha256": "d9766a8a351517caf00bf07b16b94f19b2551470c120145357f2fa0a0a8f8723"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000024/omit-1.csv": {
+            "bytes": 389268,
+            "sha256": "54ac90e4a8f5963534c2fa3bead153ac3ec3694a768664fd7d48680473e4af75"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000024/omit-2.csv": {
+            "bytes": 389382,
+            "sha256": "275583a5f2b6b6f3567f619d8d86503717af244abd05e5536e9e3f68d310a6ed"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000024/omit-3.csv": {
+            "bytes": 395088,
+            "sha256": "04a7fa8d36243dd6e02baeec25c80891736e439c695fdd271e617f9756b4c3ce"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000025/full-after.csv": {
+            "bytes": 395291,
+            "sha256": "54a5901bd640965dcadb711a74b0657c02ff4188fb96de7bd92be49b8db5f85c"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000025/full-before.csv": {
+            "bytes": 395290,
+            "sha256": "77da81d81050f30a4ae1ecab34b24880f242ef7a1a58041799e4afa90436072e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000025/omit-0.csv": {
+            "bytes": 382612,
+            "sha256": "4783f16652235b58f398ea31a778ed14ade153594f26a9ef8046082c0929baff"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000025/omit-1.csv": {
+            "bytes": 395915,
+            "sha256": "e2338b4701bcf604a1a003e1009ec43a18f1e281722c7b0db98b445fe64099fd"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000025/omit-2.csv": {
+            "bytes": 396088,
+            "sha256": "1c3837eea9a2dc2cc86fa793ce4c1560f3ed9801a701543bd49c1cd479f90e25"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000025/omit-3.csv": {
+            "bytes": 396246,
+            "sha256": "1b8c009411438a4195c0b8e76c521af54bb569287024a2c81b620c3fff159df8"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000026/full-after.csv": {
+            "bytes": 395292,
+            "sha256": "4be61a91f3cd46c8d3131caec4e2457d40003eca86bd2416e3b4a0dd21aa503b"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000026/full-before.csv": {
+            "bytes": 395292,
+            "sha256": "c8f94a2275c6842baa1cd0222e36250e48077967391d72c3ee377cc041b939fd"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000026/omit-0.csv": {
+            "bytes": 382610,
+            "sha256": "417510e0c9f33cfc42a56dbbc3f82c73f6162e45ee6d56d1a47a902f2bdf2bea"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000026/omit-1.csv": {
+            "bytes": 395928,
+            "sha256": "8a9df6e3dbda912d4ab0aa14820e5e626ca9682cb714f913609e65631f5ce1b1"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000026/omit-2.csv": {
+            "bytes": 396085,
+            "sha256": "c79bf9b2dabc134a4f2cd615c4e7756472d826650836f576c90ceb9f89e0c4c7"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000026/omit-3.csv": {
+            "bytes": 396247,
+            "sha256": "f815096318bd13c7b9990e69df777a81d7f9dc418422324c77964495ce4367cf"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000027/full-after.csv": {
+            "bytes": 395270,
+            "sha256": "863f99d4bfe286528dbb2e375d681fa1a2ef1d239abcb7dcc1a42f43800651ed"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000027/full-before.csv": {
+            "bytes": 395269,
+            "sha256": "44e70260e18604959e2abe5e671592ccbffcd46ae02166a7ef9e461e80a676af"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000027/omit-0.csv": {
+            "bytes": 382594,
+            "sha256": "8a711dacff52326227cccd65c1661389b91f8869af318fcf92868c41297bf4a3"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000027/omit-1.csv": {
+            "bytes": 395906,
+            "sha256": "f30d3933d8d5dcba72997f94dc33844ff2e1c7a5cdd2343c42e0a9497923a6c4"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000027/omit-2.csv": {
+            "bytes": 396047,
+            "sha256": "ce9131c6c35a848b052631da6d6c469c7e53375314c7bf898ad3613f57aee15e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000027/omit-3.csv": {
+            "bytes": 396233,
+            "sha256": "cb30faa1decf41bcb2e4df071b5f54a02e889e496d4650855cbf6b4448c75ddb"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000028/full-after.csv": {
+            "bytes": 395270,
+            "sha256": "1581e31c1b85a43ac2f13c7bed226e9c4a04432f267ec02c354d8524f966b293"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000028/full-before.csv": {
+            "bytes": 395269,
+            "sha256": "ec2bafd3b362dd6f1040a4dbb89e6a4c7d484d14c5618103de030615cccb6713"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000028/omit-0.csv": {
+            "bytes": 382594,
+            "sha256": "3d1ee4a9aed12ded0a5a7e85dc56b80465c0260446f88f1224bf0a8c981392b0"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000028/omit-1.csv": {
+            "bytes": 395906,
+            "sha256": "a28523c0576d4d74a5924aa98fc6d3942c7e4c5eba85da9545c5ef36a9e2b0e5"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000028/omit-2.csv": {
+            "bytes": 396049,
+            "sha256": "1c12fc68282754d9fe182fcab14b2f76950b76aa9470a4e6b38941305a683af1"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000028/omit-3.csv": {
+            "bytes": 396231,
+            "sha256": "4b2fc1f9a21f969b712cce1418f82ac635865dd3efbde1949c5b46f6afcfd97a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000029/full-after.csv": {
+            "bytes": 395217,
+            "sha256": "cb9b82078c4ef460b436f29529e99989666ae001ca37d68dc5cac55f14526950"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000029/full-before.csv": {
+            "bytes": 395206,
+            "sha256": "4129d1ba9ceed681c087cf9a1a70fd56f33fb06de2353d7078b4cecb842644bf"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000029/omit-0.csv": {
+            "bytes": 382499,
+            "sha256": "304d9c800501b260bc42b17f3df3f51508c221f3fd250f7347d63a05e130b732"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000029/omit-1.csv": {
+            "bytes": 395839,
+            "sha256": "20cd5363adad60b77e15753799f135f4f2f39d2488f3f0ffa05c5438f5e6c61b"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000029/omit-2.csv": {
+            "bytes": 395983,
+            "sha256": "bb552e81b6599a62cabf9d0941632c1efe89916f007df60b5f68461af636f78f"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000029/omit-3.csv": {
+            "bytes": 396175,
+            "sha256": "64313fd85d4af607ac982f63e58a44d76d87aef40e72f4e757a4c32eedde7a75"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000030/full-after.csv": {
+            "bytes": 395206,
+            "sha256": "47c9fa800c5d8dbd480c33a45ed92786de593a42dd29006523ba812b89084622"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000030/full-before.csv": {
+            "bytes": 395204,
+            "sha256": "3f1ddd9cb02c2d34444e40d7d3712b2c848aa7924754a081349fb3334cc180fd"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000030/omit-0.csv": {
+            "bytes": 382501,
+            "sha256": "b72b2dd9eaa51a1cd47d8eb298692ba7de03e1a24b89b4565caa1399db9b2731"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000030/omit-1.csv": {
+            "bytes": 395837,
+            "sha256": "88e065407786eb1abd681f3d8bb7aed4fb346b5008eba34934804910ff53329d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000030/omit-2.csv": {
+            "bytes": 395983,
+            "sha256": "4cb7b360b942cafb83162287faf0a8ade37378816b994e854b0a4e2036ed94b7"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000030/omit-3.csv": {
+            "bytes": 396176,
+            "sha256": "307a33dcd41afa1a039b9acc7487b92e730ab8c44c03ad63b3911d97de4feb53"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000031/full-after.csv": {
+            "bytes": 389839,
+            "sha256": "02586d381eec58815bed5997a0cb2173963c3bf7703ab23e21e90a03da1fbdcc"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000031/full-before.csv": {
+            "bytes": 389838,
+            "sha256": "4f931321680d601a37b0a8e241126d45696b02f3bf6378009a85d5f615034c4a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000031/omit-0.csv": {
+            "bytes": 377164,
+            "sha256": "b84cf68309c4880460a2e48fb88468cbf56b52368617b9a9fa18660000d429fc"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000031/omit-1.csv": {
+            "bytes": 390328,
+            "sha256": "190cc5ab47b2f60452905f4f2a3f4eedb435d2888a50bf8be8795e338c33f0d2"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000031/omit-2.csv": {
+            "bytes": 390759,
+            "sha256": "444f14148fa764b3ac9720b64372508efe7d3913aa0fe9c54765b0c4705c1178"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000031/omit-3.csv": {
+            "bytes": 391059,
+            "sha256": "a6a2a5ea7ef7204e76d19912d21c2b8fc507c12a9b3732974af519dc4ddb759d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000032/full-after.csv": {
+            "bytes": 389837,
+            "sha256": "0e6404d4594a78065a8e4d40a654a0acf5ecb1aed62809e0487efa1b8b10a4b4"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000032/full-before.csv": {
+            "bytes": 389836,
+            "sha256": "65af6bd9a369457cb3faa0fc7064b86e6f14396f605a9abd667c3e5184802ef9"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000032/omit-0.csv": {
+            "bytes": 377164,
+            "sha256": "7a363fa3456905e39aedc489bc9cd01990e9ecc6d5b57d32d7de241a0066e449"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000032/omit-1.csv": {
+            "bytes": 390329,
+            "sha256": "4951e5a50e4cb76d795e295e03251aafdb9301cc01126b9341a32a83b004a50f"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000032/omit-2.csv": {
+            "bytes": 390759,
+            "sha256": "5d11f286b2adcb63cbb213d7f0b79960a4f5b230f5e6bc847977b1aa4b8bc948"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000032/omit-3.csv": {
+            "bytes": 391060,
+            "sha256": "4f4dc98653d6ad7365a131a5ebdfe1a68a59a41373fbc891cc78b26094c6e8d9"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000033/full-after.csv": {
+            "bytes": 395185,
+            "sha256": "4b264fadcba11fb6fc2bcbf6ac31e00a31e3330c893face5638c31132177164e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000033/full-before.csv": {
+            "bytes": 395184,
+            "sha256": "e578d070c2c105a2827b4b8d1c2a49c0c9f7837221fd13ff5b56705a28fdde25"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000033/omit-0.csv": {
+            "bytes": 382506,
+            "sha256": "d0a8d838dac6d05e94ca43d1b11c25f67e1fb6f1fc148a3b6b5893ca3dc1ba5d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000033/omit-1.csv": {
+            "bytes": 395811,
+            "sha256": "0d7bc4f2636cbd3868f0397a82210e748d026e67a827b6458c4a35307d0f326b"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000033/omit-2.csv": {
+            "bytes": 395962,
+            "sha256": "75c58e278db08fd822c0995807ed0201018ac5f445711791648c312ce3c903b9"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000033/omit-3.csv": {
+            "bytes": 396131,
+            "sha256": "a7b4aa9ff0e0a4b7f56f5aa87c767aedef38c229f8174782f620189dea244929"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000034/full-after.csv": {
+            "bytes": 395186,
+            "sha256": "1b75f665616fd6828a06869782309b29c31d7cb813b66b3ff7c1d53d5c94c7dc"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000034/full-before.csv": {
+            "bytes": 395185,
+            "sha256": "56d8e83cf7fd8c40be5e5c46a84d1c5b32a4a1849cf4e14ea533662d80bc85d9"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000034/omit-0.csv": {
+            "bytes": 382505,
+            "sha256": "bd85f699da88c035195d3953676a206eeee9f188fdb71e4cfa4aca15101414cd"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000034/omit-1.csv": {
+            "bytes": 395814,
+            "sha256": "b376778821338500b6a47ce7d8cc7473146bedb152d60a191368820979b5b8f9"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000034/omit-2.csv": {
+            "bytes": 395959,
+            "sha256": "a25408895df8b584cd1c026e29c6a881dbaee1ec4e873ac47cb2386fc52e84f8"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000034/omit-3.csv": {
+            "bytes": 396131,
+            "sha256": "91f4db5be522afe334280769c8e51b497df96abd0086db224e60c5cf3372339e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000035/full-after.csv": {
+            "bytes": 389697,
+            "sha256": "bce9f1dfe09b71ff0449038fad67a0afd1700cc43274560a889f0dcb9c193ac8"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000035/full-before.csv": {
+            "bytes": 389696,
+            "sha256": "4881b5b7f071ea29bbabf9eb01e323acf805098b866d6029515f657305549826"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000035/omit-0.csv": {
+            "bytes": 377005,
+            "sha256": "d0bacc08746934c83afa536a15cec304b0fe177c854dea3e07daae0d1eb31dbd"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000035/omit-1.csv": {
+            "bytes": 390178,
+            "sha256": "0b01a4d53abbf64116ecdbb26148ac454659a688d6ad92a6385bcfc52afb848c"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000035/omit-2.csv": {
+            "bytes": 390628,
+            "sha256": "29bfb6be7dba2ac12e40532e08382215ec4c3f14c216de2f4359a19c2bdfb9cc"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000035/omit-3.csv": {
+            "bytes": 390416,
+            "sha256": "b64a33b535c77f002788ba366e141ff955c47f47f93d4e0fc2b3f8e23a399ade"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000036/full-after.csv": {
+            "bytes": 389701,
+            "sha256": "e7fc64e9ff42c94ff8cc8dd4b7fc9326982fd5a193862a9c68dd2617ea762ea5"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000036/full-before.csv": {
+            "bytes": 389711,
+            "sha256": "fd7ddf51f32689b4f08e18400653437e286fcfd1a543039b9cb92ea52be352f4"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000036/omit-0.csv": {
+            "bytes": 377002,
+            "sha256": "99cca842266c5533dabf4326d2dec64e974ff617b5916d48aeeb62113be21c4c"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000036/omit-1.csv": {
+            "bytes": 390178,
+            "sha256": "3488e0670d74f65071fa81102728283eef7c8dc97128954000973b6e81657184"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000036/omit-2.csv": {
+            "bytes": 390629,
+            "sha256": "0f75c000e8bacb0c203eefadc7fb026457aa083231199b47730498d8e35538d1"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000036/omit-3.csv": {
+            "bytes": 390414,
+            "sha256": "09cde0feda45739091ef42b8ab036ad84ea1d44b3ff13b6db731b1f165fff00f"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000037/full-after.csv": {
+            "bytes": 395072,
+            "sha256": "630ecb4f340e769c42e7115eb177512a41aa073059bc185b4d1a3db80484e90e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000037/full-before.csv": {
+            "bytes": 395071,
+            "sha256": "eed507312daaa3085e83157e7f97980b6168115500f0680a12ae216f2c179f7d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000037/omit-0.csv": {
+            "bytes": 382382,
+            "sha256": "e2d59898bf569a9ba42f0fcf5725d8a4af36b55885cded90b3fd64855721fe22"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000037/omit-1.csv": {
+            "bytes": 395736,
+            "sha256": "52ca5f90cfa20bb9fd8a660ba4319999e728432a31689f772036034037e99111"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000037/omit-2.csv": {
+            "bytes": 395895,
+            "sha256": "d6adea6c5dc79a3d8a1980d17d27a9164f11a8a64fd9cbeb58eaec2247a91a04"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000037/omit-3.csv": {
+            "bytes": 396062,
+            "sha256": "b89b1f6f80f154d56a66e457f9d8f654a436d94e02dcaf8ad3d74b4dce39a9ff"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000038/full-after.csv": {
+            "bytes": 395072,
+            "sha256": "47c1c53aa3adf0504cdd4d81d5de4af3c48fe4a1cb5054245013425287b27698"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000038/full-before.csv": {
+            "bytes": 395071,
+            "sha256": "18d35f8ca70b3d02285853c368e56eeff5c08da999dc12b13b22442bac5e4112"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000038/omit-0.csv": {
+            "bytes": 382383,
+            "sha256": "83905e519f18d1bbba40ae813effdf1cbbf7c7b66b72c530c69dd59448ca9ea0"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000038/omit-1.csv": {
+            "bytes": 395734,
+            "sha256": "816e4f5cb404ee935bfd9cd1a1cce24baff3de217388bb1e2fe4ff753aed67ed"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000038/omit-2.csv": {
+            "bytes": 395900,
+            "sha256": "56ac1f3fc4c7d49b37630ab3976df18c9ff05a1bd77fbc9eaf1979a6b6959c7b"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000038/omit-3.csv": {
+            "bytes": 396058,
+            "sha256": "357509463974ab8603113c42e0c621b87088eaafe9b49bf7a13f9cbdbf1874f6"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000039/full-after.csv": {
+            "bytes": 390602,
+            "sha256": "22aa5e7a4c30088e37f7d7079eab1b1819b8e4d8a0e6e46753f3dfbcc42b2ac0"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000039/full-before.csv": {
+            "bytes": 390602,
+            "sha256": "9d2df17d1764c9801a18a13eba507d130f4c962bd41e7e99763a8012b93567df"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000039/omit-0.csv": {
+            "bytes": 377909,
+            "sha256": "933bd8fb76fa159394dad0427a4d0209a92049f078050e3d46aef99e5d0be0ac"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000039/omit-1.csv": {
+            "bytes": 391066,
+            "sha256": "7d1ee68cc8bbc64c49f4fc88316042f686f2d6e5ea1a058b9f571034e9a73a38"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000039/omit-2.csv": {
+            "bytes": 391528,
+            "sha256": "719c9c35cd85115ec566e7e1f16d1f63247e80f4afaf2002d17b1259dd0704da"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000039/omit-3.csv": {
+            "bytes": 391808,
+            "sha256": "3499140e61891ab70d687323957006bf981b356dccb3418a78813b1327eb22be"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000040/full-after.csv": {
+            "bytes": 390600,
+            "sha256": "940755be4b60a82555ee69d8604166227ae701a88df22aaab9bf90d67cd2dd34"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000040/full-before.csv": {
+            "bytes": 390599,
+            "sha256": "a06a27f7cefa503b8fed3e48f8870c758a2626561d4eccac39e60c6bc8dec253"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000040/omit-0.csv": {
+            "bytes": 377914,
+            "sha256": "ad18699b80e346566494ff29f97456bf456ccee70ce716a583dc0732add4567e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000040/omit-1.csv": {
+            "bytes": 391063,
+            "sha256": "f6033b534aa3eef7bd7563e4ee2908d23f59c26e90754f9f1701cbbcf4c2be33"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000040/omit-2.csv": {
+            "bytes": 391517,
+            "sha256": "f9785ff4aac1814fb9cd083b9281428fb14d8bcdb0f34351088bd929dfcae52b"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/composite-measurements/group-000040/omit-3.csv": {
+            "bytes": 391809,
+            "sha256": "b2ed553ba3de6fd3d00629e38a352146d33d94c626b3bebf228e0c15d10b1776"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/train_stopped_state.json": {
+            "bytes": 168103224,
+            "sha256": "d8d545f9d0e9a038e7dc232ad86de94213496ac94481a1c32a822b3b98c3f070"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/input/source/train_stopped_summary.json": {
+            "bytes": 92737,
+            "sha256": "d16df968b5b5eba67b11659ac2d87d148386d4dda7f23876c4ace44bfa9afe6b"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/evaluation.json": {
+            "bytes": 4150,
+            "sha256": "f44317cd0cfaeba968f2d8b037327329555abfc26050c4fcf3b13138f20a3627"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/execution.json": {
+            "bytes": 3098,
+            "sha256": "bc05cad7da7a6d51764abe28125da650f1b9998733d15f43ed34e03dbe36afae"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/job.json": {
+            "bytes": 171167225,
+            "sha256": "6d6b7928b62bdcb25e2eadd96e7e242c31687539ff114daa63865b8f7b153b3e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/model-after.json": {
+            "bytes": 173921677,
+            "sha256": "af1887ff06c29aefe79f64924296f311e5dd654a3c0ad0deacf2bad9e1d1a4a5"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/model.json": {
+            "bytes": 173921677,
+            "sha256": "af1887ff06c29aefe79f64924296f311e5dd654a3c0ad0deacf2bad9e1d1a4a5"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/trial-0.json": {
+            "bytes": 1758005,
+            "sha256": "cbf2c551a41cab67a5d4912cb0d6542bf1353f1920a2ac69601fa53f85401aac"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/trial-1.json": {
+            "bytes": 1758092,
+            "sha256": "606496554cb8c8c9a495c776d4a6459897d895961cbaab20c972aaf85313d93a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/trial-2.json": {
+            "bytes": 1758025,
+            "sha256": "a71ebdefe7c0593e0aeb7a5dc631b5b2b76eb3ddcd1529cc95adf0a9e2ef723e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/trial-3.json": {
+            "bytes": 1758062,
+            "sha256": "ffdfc699f791175da8aff9bd60d0d7d34395fc2e7903bb49197252b7f54dff77"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/trial-4.json": {
+            "bytes": 1758277,
+            "sha256": "c9563c49dd4dde36056f3f9075ba6d619b868438506913124f9ae266a867616d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/trial-5.json": {
+            "bytes": 1762299,
+            "sha256": "96b5474b1c4fc273eb7ddbbe0273a704bb058c41cbe4e2759cc7ec85656d39dc"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/trial-6.json": {
+            "bytes": 1762457,
+            "sha256": "859642d6df6b23e87aa161d103e9080aeec88c39423e447b7aaa9827ac066e12"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native/trial-7.json": {
+            "bytes": 1762454,
+            "sha256": "61b7effa4a55deb7a9a1675041d567fbfcbc3589bf5eddb88bf721bd4ca1a24f"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261114-065539.4144618": {
+            "bytes": 291,
+            "sha256": "705eef556b526e446c3a503e0f977e6213cd61ccb87843b3a83d5c27e3353e08"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/capture-ack.json": {
+            "bytes": 114,
+            "sha256": "ed046a0184853503d204edbef529bd998884bcb664084511aa8521e21b17f3f4"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/capture-ready.json": {
+            "bytes": 98,
+            "sha256": "8e616cde51baa771dfab9ca6e49fab9c36ebc81a5a97599d880668b1cb8ede18"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/contained/limits-readback.json": {
+            "bytes": 1070,
+            "sha256": "51bb4487d6d0df87581de719410840ccae259f497421618eb6b4d5161be80d3a"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "8cd1d4faa563120ee3e04d6f133b91280dea18165ca0ae559cd045f2d9ad574f"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "0ed8598bb0219da7f15b3ee3dfe82e7fa94f9ff2bb302d5e0dc65445fa815874"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/contained/request.json": {
+            "bytes": 1516,
+            "sha256": "5af80bc49f00f8077a74678b0e7aace426a6f980515312a7a83032a43f76eeea"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/contained/runtime.json": {
+            "bytes": 12622,
+            "sha256": "72d38d6fff440ee8c2cc23991ff67550f2daf8a0341e220efc5a4d23abb25458"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/loaded-files.json": {
+            "bytes": 4822,
+            "sha256": "757c4ababb08c3b8273e17a980b0b228889d2720ed8b592203cfca7134a8f87d"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/owned-process.json": {
+            "bytes": 650,
+            "sha256": "6dd350a92eb772b164852e9e93054596959a58d337f403a06c618084a0c06f41"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/request.json": {
+            "bytes": 868,
+            "sha256": "438f73720ee1c9e21a1d42110abfa779070b7a070a02268903ef19b541676df2"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/reservation-context.json": {
+            "bytes": 3063,
+            "sha256": "1e94eedf970054bdc8bb6be5e18516f4e9f69de86134c8e359eacc468a3a0ff2"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/result.json": {
+            "bytes": 1177,
+            "sha256": "51f6c76c52dbc1786a585dfd9f46e16ee79a160f9137a1dbfb85f918aca3e9f7"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/runtime.json": {
+            "bytes": 12622,
+            "sha256": "72d38d6fff440ee8c2cc23991ff67550f2daf8a0341e220efc5a4d23abb25458"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/terminal-unit-state.json": {
+            "bytes": 1300,
+            "sha256": "d6bf2040086aeffaed6074d8278bd3020fa7885d784a81223cab7e872ab605a9"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "1118a3e19fdf9de76c928d5940c0b783410afc23d9f461082240b949bdd02928"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/run-manifest.json": {
+            "bytes": 184774,
+            "sha256": "c3d8d1c4c0c89766e9d71afea9b4f2cf370bd250d889bb0cab4f19ec6014016e"
+          },
+          "worker/tmp/threshold-study/runs/baseline100/runtime-cli-interface.json": {
+            "bytes": 5515,
+            "sha256": "8e7c187e6a23867fe0d9858b845f574d3b4eb4ad6c12426c489bf7f958377e74"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/job.json": {
+            "bytes": 153853477,
+            "sha256": "13f853ffd5e7852904e3c075f70f34217c5cfd5e467b6f900d730c1aff274958"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/process-policy.json": {
+            "bytes": 530,
+            "sha256": "ca922ea3a6711b90600d94d3a39addfcec20cf823319f9f924e69406c0da4dc5"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000001/full-after.csv": {
+            "bytes": 389997,
+            "sha256": "a946f68cf573b695e07de7d961c7810cdda1a6bcfacb7249fac6648aa7e5eb8d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000001/full-before.csv": {
+            "bytes": 390316,
+            "sha256": "1fdf97cd5ae82864f607aa31e9303204380fc8f43fac602e6e44f1a1521cb62d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000001/omit-0.csv": {
+            "bytes": 377681,
+            "sha256": "f3f51b996abda508dc73c429cfa88080559ee3a0aae9c096906b476032a49764"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000001/omit-1.csv": {
+            "bytes": 396011,
+            "sha256": "2556ef0adeef375baa9916ab88adb14a9bcd89e9e09cc3317e613faeeb823c34"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000001/omit-2.csv": {
+            "bytes": 397210,
+            "sha256": "03be17f22445ba0264543ca2602346a20248cdfa4a28893b0d635a55ceaae769"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000001/omit-3.csv": {
+            "bytes": 398988,
+            "sha256": "8732dd132ee2e7d6f30b88342795ead7cc497c628dc265b87408bfedf5761790"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000002/full-after.csv": {
+            "bytes": 390246,
+            "sha256": "89a6d9825ee91d0d289cc4908c22b34773abd94dbb1e9d0cf929b8df1929ce30"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000002/full-before.csv": {
+            "bytes": 378275,
+            "sha256": "2a92a6f07b886c49941015d5132f52f6aaac531144ce3afbffbb8840cd882ba8"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000002/omit-0.csv": {
+            "bytes": 365614,
+            "sha256": "317a5ddb768f0f2dbc984777ddbe2fd9e8d8863b6d157472f89be0b067b823ef"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000002/omit-1.csv": {
+            "bytes": 380302,
+            "sha256": "b211b50f76160c948f15f07f14fbb09459bea9b07e3936a5a70d0dead15420f5"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000002/omit-2.csv": {
+            "bytes": 390965,
+            "sha256": "1ae1a6c6d33705480e38d3760ab0480f1a3dbd84f6068fd5125d405d029917dd"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000002/omit-3.csv": {
+            "bytes": 391175,
+            "sha256": "78c11866706ffc6b223a3270901e06d6dc3194cdd77209b143187ca88be552e3"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000003/full-after.csv": {
+            "bytes": 391657,
+            "sha256": "e8ac88c864247597dd6c29fe4a38b305076be294a54f953e4af5a5bc96cf44d3"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000003/full-before.csv": {
+            "bytes": 390294,
+            "sha256": "832e6eb9a9533a576cd12d77976e802936506ff7a5b991f3535388182c4c2e2e"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000003/omit-0.csv": {
+            "bytes": 377624,
+            "sha256": "5a6e409b1eb016936ff723fc6a36f3ae8e0867b45743d031e2f9484495be72ac"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000003/omit-1.csv": {
+            "bytes": 390881,
+            "sha256": "bb2722ff6605efe120bd10128bc66e71eaa4f1c67f20dc7df9dd9b9fdbe7ff34"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000003/omit-2.csv": {
+            "bytes": 391003,
+            "sha256": "48ee8195d43ccba31d11ef3256ddcb63ddaa96051aeb57c686e0207b21e32ad2"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000003/omit-3.csv": {
+            "bytes": 391149,
+            "sha256": "85f7cafea43cb9cc7710bda14f71b44d3617e60ef5b5e4ab24c678adda8094a3"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000004/full-after.csv": {
+            "bytes": 396232,
+            "sha256": "0ce3a06011a21148000e66326ef6517a9d29d5f5deda23a287d0f5de6cb9d335"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000004/full-before.csv": {
+            "bytes": 396232,
+            "sha256": "ad0177e5830a7a6304baff40f0829a879cf36edf3e13d138970cf896f88de578"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000004/omit-0.csv": {
+            "bytes": 383575,
+            "sha256": "bf004d302a8c56c8b9b715f3e3d723a39e643bcb8f532c4675176bb5dc7e3b28"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000004/omit-1.csv": {
+            "bytes": 396951,
+            "sha256": "d4b3fadccb58483ab6197f5b635dcb9a6bac18638fa056891cd3c00231a5954b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000004/omit-2.csv": {
+            "bytes": 397032,
+            "sha256": "3a8ba1486739c7c029888303106edc3eef9267bcc1c92b75248ca011eacc7a44"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000004/omit-3.csv": {
+            "bytes": 397113,
+            "sha256": "3841e78e51a9a7bdf4a52ed8dc345687d7a853635cf07b618114f95ab0445ca2"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000005/full-after.csv": {
+            "bytes": 396231,
+            "sha256": "8cca0afbe33b5ed28abbdd3746c4379b83f4ca4c15dc305ea2c2bb23db9cbeca"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000005/full-before.csv": {
+            "bytes": 396231,
+            "sha256": "39042a501c79178696623d9621eb92471b1ce47771c17679e10dc6c626aa4d6e"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000005/omit-0.csv": {
+            "bytes": 383648,
+            "sha256": "71170b4df83f9b94d20d5c24bf0a742492daa5a5f6bea839772998713320cca8"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000005/omit-1.csv": {
+            "bytes": 396948,
+            "sha256": "9210916ef710b6a6ad75d2db6dcededf3f9228b6b11ba950bd4a8bc7a912d844"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000005/omit-2.csv": {
+            "bytes": 396964,
+            "sha256": "ebb056a41310dbc6bfddcdce6bbd774fe1f2ff8a109935e15e5e8a2be07106b7"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000005/omit-3.csv": {
+            "bytes": 397112,
+            "sha256": "bc6ef18ce239b42e9fee82c407a8df1e8fb47491ec45a90c0b57fe265b007240"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000006/full-after.csv": {
+            "bytes": 397508,
+            "sha256": "aea81078b63d9e24440aaa8fddbb7c31e21fbc5b86c4c48d5dd2acde82787b40"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000006/full-before.csv": {
+            "bytes": 396293,
+            "sha256": "f028b700a1df3bc7bb6bdadd023efb7e6016d94422f8b676d47e7618aba35b78"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000006/omit-0.csv": {
+            "bytes": 383656,
+            "sha256": "d8f6e53adc2ecfb164740aee34de3648e1e1ee38b0ff7dde00b7bde6ded73d7c"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000006/omit-1.csv": {
+            "bytes": 396903,
+            "sha256": "6210fcdc860fc3d22207654a1846a185c68f44fba16a658c21994e845d3c4ff6"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000006/omit-2.csv": {
+            "bytes": 396940,
+            "sha256": "1edbc7177822ee3d26fa7bd8b2914a2aa7be32087a7b7ae97c08f5e6dc333e29"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000006/omit-3.csv": {
+            "bytes": 397111,
+            "sha256": "2ab4d0766bf1d3b05a925986931b1840c3f4e937df691d7b65e4037956be13a3"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000007/full-after.csv": {
+            "bytes": 398891,
+            "sha256": "f9bf2c9681690a8b81b538329f264cb9531eee064705788bdfb30fbba38a7820"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000007/full-before.csv": {
+            "bytes": 398891,
+            "sha256": "f196265da8cbad00c1b7e8ecce6f936c14ef5054073a83d7cd84df1cb37065d3"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000007/omit-0.csv": {
+            "bytes": 386247,
+            "sha256": "7527e177086849a02bffaa6d8445b9dba5ede626f5cd4d462307c1dcfbff6a21"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000007/omit-1.csv": {
+            "bytes": 399499,
+            "sha256": "5391197879114355e8d4f63b6c4fb68113fdc7c248ef5b0572edf8549709237e"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000007/omit-2.csv": {
+            "bytes": 399577,
+            "sha256": "4b92ea765d6d505522895a9f42c1b162f0dd33f486fb4c017dfa3cf0b55caf56"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000007/omit-3.csv": {
+            "bytes": 399763,
+            "sha256": "15a968c305c9089ef8e482f456a4f7ee07310c1db0144cbd54f8fe1d09732267"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000008/full-after.csv": {
+            "bytes": 398892,
+            "sha256": "8772614acd864dbe7efb587dde0495a426517bfd4d4a554151edf679ea738357"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000008/full-before.csv": {
+            "bytes": 398892,
+            "sha256": "5ce2776329f2299349357c9b403e4a6284820747938e669d4a9ba6085ab647f0"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000008/omit-0.csv": {
+            "bytes": 386218,
+            "sha256": "ed8d7fd099b926fe4cec897f84861fda8129049380887720110eab79fe65cca0"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000008/omit-1.csv": {
+            "bytes": 399489,
+            "sha256": "9360511c6cedbf0c56d8fba40b5c05734fbae7a3e8c886f4c8379938caceab5b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000008/omit-2.csv": {
+            "bytes": 399590,
+            "sha256": "86b4da485cdad0cb463c9f0eb8d45fee8e53441bc6f5d8bfa55b4386d4cf7338"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000008/omit-3.csv": {
+            "bytes": 399788,
+            "sha256": "bfa51c6519e9e0f4b2aacb1bf4084a7542ccb623b9225c03826c24d3b3e48983"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000009/full-after.csv": {
+            "bytes": 398861,
+            "sha256": "4af9e305a16259d147a982076aa97a73b0f1e6e0bb35e51abb00bcb0ffa73f3d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000009/full-before.csv": {
+            "bytes": 398850,
+            "sha256": "2b1553bcf04cd535030aa65288adfce52e2fd300567196f437d6aa67eef26929"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000009/omit-0.csv": {
+            "bytes": 386135,
+            "sha256": "8436cb56290467d3336aee08c0fc5ceb72ede7ad52c5955b7f3d29a6616b75cb"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000009/omit-1.csv": {
+            "bytes": 399451,
+            "sha256": "841e368c0e4bec9a10c5f3bd479b764ec939b78940b4114b31dfaa65391be7e0"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000009/omit-2.csv": {
+            "bytes": 399568,
+            "sha256": "afa6cbde313632200709f172a88eec596afad20d72998c0b205f889fe264713a"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000009/omit-3.csv": {
+            "bytes": 399780,
+            "sha256": "7110edf6b4141e0bebaf742e3ec5c2b37bcd545f616c567ca77f0e1989ae0e3b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000010/full-after.csv": {
+            "bytes": 375378,
+            "sha256": "68d9d9d3a89d63b479214610b6e0f717ee8b8866d8b9f3b1d00c3927ab27ba61"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000010/full-before.csv": {
+            "bytes": 398818,
+            "sha256": "e7aa0441e8e2a7b1d4d1070f931f60cfc5e973f8676dfd9c237b1aad5fb942a7"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000010/omit-0.csv": {
+            "bytes": 375292,
+            "sha256": "d90bba3d07346cfc5dfaebd50c3943637e6860e5f05ec28dd315155d4d08f650"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000010/omit-1.csv": {
+            "bytes": 375997,
+            "sha256": "c86c4216d8d775ea323a2518bc9d12d9b52fe3f8e4785ffa96d2274b74d4db91"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000010/omit-2.csv": {
+            "bytes": 376137,
+            "sha256": "1101070a09b7c03f4921d7bf88750ce4be7269d09a1d2dbc4f7fe083948f3641"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000010/omit-3.csv": {
+            "bytes": 376299,
+            "sha256": "300be530e7a5be96c8ea894005b02cd0f61ea615dad838c19df57e2208df82db"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000011/full-after.csv": {
+            "bytes": 368625,
+            "sha256": "2adbab545a91235b23bd6410e160a3562f576373fd916b4fdbcb3f735ab9e28a"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000011/full-before.csv": {
+            "bytes": 368624,
+            "sha256": "877d8a7677d342c042f444eb0d3f2a18cf169346bfde4dbbfbc4fbc595dbfbfa"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000011/omit-0.csv": {
+            "bytes": 355931,
+            "sha256": "f5da76bc0a2ef7c68397187395480bdcc01491db4e5809df23e7f6dfa8b3165a"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000011/omit-1.csv": {
+            "bytes": 369096,
+            "sha256": "1e8831462175e9e4c9c0916246567c025ac28d34933e220c005e64714ff8ffbe"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000011/omit-2.csv": {
+            "bytes": 369552,
+            "sha256": "14b0ca3831b742e8fe66de4e08500c22cb031e435739cda590f771488d925292"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000011/omit-3.csv": {
+            "bytes": 369326,
+            "sha256": "340a3b61975c9e2bd8ab93d9bb346e5009b6855bb66f19ceffa9d586d498d06d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000012/full-after.csv": {
+            "bytes": 380826,
+            "sha256": "2de5c99d0f0c4976b77936864e9baa0508e4393b3bee2ebe018698d7b4c1fe5f"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000012/full-before.csv": {
+            "bytes": 368619,
+            "sha256": "6a5472ecedf3a33cffd60aaa5a44f1fc3ac9da4c6d4654d471b6c641c9cdd38f"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000012/omit-0.csv": {
+            "bytes": 355944,
+            "sha256": "7d633a4ce1576ee1feb56e2f7c6320243dce5718b2b64388d3c5d4f0e9743468"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000012/omit-1.csv": {
+            "bytes": 369107,
+            "sha256": "4a60ca826d81fe2d270fb1cd9c83fc2bd4c1610bfd2324f0452f3cb32cbe5cd9"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000012/omit-2.csv": {
+            "bytes": 369528,
+            "sha256": "69f580387d7f97de99096356039aae4a934614c1823951ba08d69ca31be6ac80"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000012/omit-3.csv": {
+            "bytes": 369332,
+            "sha256": "3ad01ba12ac8fa18c15b4ff20a5ae62cba1b2734e9e19fabf9724b7006ac4492"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000013/full-after.csv": {
+            "bytes": 388800,
+            "sha256": "3a86a4e8f28f23f2c2c840d267e9dc6ad6c7fef1e4d7dcd4615a3c65abe11cfa"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000013/full-before.csv": {
+            "bytes": 388802,
+            "sha256": "20e960cbfe86d9cfc956862fb3910cc006486c2ae5b95482c0dd6bb165491bf7"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000013/omit-0.csv": {
+            "bytes": 376140,
+            "sha256": "d88144072bfda6ca907ed118ee3ad7c7326e888d18c13e5e63fbbf31b4ae4322"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000013/omit-1.csv": {
+            "bytes": 389453,
+            "sha256": "a42db9e840c91e83b008aeb79008462f7f89444b30ec5ec3f4467e654f46e85c"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000013/omit-2.csv": {
+            "bytes": 389531,
+            "sha256": "1dfbf184da2d298454004065579110a136db531ea10ca8c92a0f13b5fee520ff"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000013/omit-3.csv": {
+            "bytes": 389680,
+            "sha256": "8de593e3473c11233cf9463205b58de5424b4e659d303eebb3669b78398f4796"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000014/full-after.csv": {
+            "bytes": 388809,
+            "sha256": "3c34956d0cf526755d78557e6fb92c199bef7973fe4a1ba473568df5f369d732"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000014/full-before.csv": {
+            "bytes": 388812,
+            "sha256": "05e7ca9b5197bae4254ea2182cdd931f2d4aa6fbf41681d256f5b51c250e8692"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000014/omit-0.csv": {
+            "bytes": 376128,
+            "sha256": "a7a0475aee61115d689d616e17a4e86c955fe24f95df7ca6e2991c950ca9c5c1"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000014/omit-1.csv": {
+            "bytes": 389457,
+            "sha256": "1cd507c6fddb597f89060103e16b087c611fa167e9c0c5385528fb8fa1c913e4"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000014/omit-2.csv": {
+            "bytes": 389527,
+            "sha256": "9d86c6e69e2b65a0eb30a49bd4cb52ab4814ff76d5fee22c254db025ec25773c"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000014/omit-3.csv": {
+            "bytes": 389682,
+            "sha256": "932e5a4732b8f01b4b0ee31ae5bf550fc15a354740685d60fc3c2185ce2c4a4a"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000015/full-after.csv": {
+            "bytes": 382541,
+            "sha256": "ec744a906a58e62ecfc9efdb3eacdd11b2ee138f9725159c6feadc8b507c6bad"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000015/full-before.csv": {
+            "bytes": 382543,
+            "sha256": "d5f5a6d860039e2ca7685ce84fc82f1a45ea1fbab5be14001ec3dfb1c1fd81e6"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000015/omit-0.csv": {
+            "bytes": 369844,
+            "sha256": "2900459d379c9165fb612c30bf6f205632324c8969d8c00c51d996bbbf94c553"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000015/omit-1.csv": {
+            "bytes": 382985,
+            "sha256": "ed0786e53d927ab56b051f1a762ff54ef07956d43f0a8b3dbf12b5a1c63e6f9d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000015/omit-2.csv": {
+            "bytes": 383462,
+            "sha256": "c6abf418b1b3009a5d3496a551c3bf1bce09b43e58d0900ccd18efa7c8774ba3"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000015/omit-3.csv": {
+            "bytes": 383759,
+            "sha256": "a4515f34ff19d0b7b5935cb4aaf835d4d6c5a9d3be1c6ea1e7b24875c2757c4a"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000016/full-after.csv": {
+            "bytes": 382533,
+            "sha256": "bbb0c6cc7e74f194636d7adc77fe720c63ad506bf91c6cef6814382634f0fe59"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000016/full-before.csv": {
+            "bytes": 382535,
+            "sha256": "a5a9a1779f2ee4c54468dc99d72023afb5eff49de8e6dbe425b3519dd5ce79ba"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000016/omit-0.csv": {
+            "bytes": 369840,
+            "sha256": "9ce3483729b68e0ff3c9299e261e65a0f613678c55e6e01fa94976ffaeff01b0"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000016/omit-1.csv": {
+            "bytes": 382987,
+            "sha256": "30d6225c4257a9fe1b40329e9ed464bf47dd7087512bd08dfd9746b760c53620"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000016/omit-2.csv": {
+            "bytes": 383460,
+            "sha256": "75f826e94a31d98aa04b8cb1caf41163f10e7c851ea2e0c88ecdf516ed7d1cbf"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000016/omit-3.csv": {
+            "bytes": 383771,
+            "sha256": "6c4160d79e5fab3554171dfb5b5393259f7e5d4e146c48421fd14fdc27bbe546"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000017/full-after.csv": {
+            "bytes": 388749,
+            "sha256": "7bbc94aa2ba49fc830626821bee355626c33e1e60af12c4409e32202e2ac984e"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000017/full-before.csv": {
+            "bytes": 388752,
+            "sha256": "fd18d69f8fc4899e616d66d3b2c66ccdf306b9cddaaaa20aacacfa450c069fc8"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000017/omit-0.csv": {
+            "bytes": 376067,
+            "sha256": "fbb5b57d13e729f49997c4635e3271fdb82285bf91652f1a115ab2ff4fe6948a"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000017/omit-1.csv": {
+            "bytes": 389373,
+            "sha256": "615c4232dbfed616bbb9d7e1be0e5de5408faaa19e44a318e1a6f360572a1204"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000017/omit-2.csv": {
+            "bytes": 389492,
+            "sha256": "b06b444887b1e5d66779ae51f83b3066e0e470a7c3d563aea4b8953a608e98ab"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000017/omit-3.csv": {
+            "bytes": 389675,
+            "sha256": "f626c60a50d4c4f84f941a11c72bf8496e965fb3921b3e2602eedcaa204bf086"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000018/full-after.csv": {
+            "bytes": 388753,
+            "sha256": "c07af49f5d1a6e5641bb21ddb3f5eff48db5560cb7ef66312b4900a9e0cfde11"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000018/full-before.csv": {
+            "bytes": 388755,
+            "sha256": "e96011aa0d92fd359dc482ed43be8642fb5ab6cce3dbaf47afc652b097f43b6a"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000018/omit-0.csv": {
+            "bytes": 376065,
+            "sha256": "e380eff40026947693a801ce7be6831c56bbaefbf516b4c84c710b93e9e07d95"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000018/omit-1.csv": {
+            "bytes": 389374,
+            "sha256": "41c1aeac9d60c1f2ca9fbdaeef782a8e5be20d1f094942ca00cb1acacac961cb"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000018/omit-2.csv": {
+            "bytes": 389496,
+            "sha256": "97dab5a0612e3a28b56bae02397e94afddd5026b41d758e0a8d71c4389d90383"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000018/omit-3.csv": {
+            "bytes": 389669,
+            "sha256": "c24dbfd521d2123651a03b84d440247e7bb3f594bdad2531314d2b89e8c84b3f"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000019/full-after.csv": {
+            "bytes": 388715,
+            "sha256": "18aa257582afb33ea9cfa094e74ca5359939866ab97d814ff2a9385539552b38"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000019/full-before.csv": {
+            "bytes": 388716,
+            "sha256": "b593d16bddcf12fdd6e53a831e9769731bac7599d4338e5a36e82570bd711408"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000019/omit-0.csv": {
+            "bytes": 376037,
+            "sha256": "b25492e4c5c32926494890b15b1b2b3f0b70301d270aae3d381b72ffa9fc3465"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000019/omit-1.csv": {
+            "bytes": 389369,
+            "sha256": "01212717c8b4d4ac0c3fa47a0cf105b38d27d7f468a425fbf710c29d3e93c461"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000019/omit-2.csv": {
+            "bytes": 389442,
+            "sha256": "4e3594ea98eeb6c602cb4549a7ae11b1aa6056d8110c5fd15960c8376fbf5c8b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000019/omit-3.csv": {
+            "bytes": 389622,
+            "sha256": "c078e2f34e63ca22f404dc4f9d66244c28062f21641f5d5071e11b92e79c6805"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000020/full-after.csv": {
+            "bytes": 388716,
+            "sha256": "f593a431f64caefb889bdb9350e3299d620cb8df67db0de93b7dfa60b8aab71f"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000020/full-before.csv": {
+            "bytes": 388718,
+            "sha256": "2200a29f875d0862bfad1c261b7c290f9b0739e9e8c1aeb67cd0fa72a962e7f5"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000020/omit-0.csv": {
+            "bytes": 376049,
+            "sha256": "e6f55ab21e66f5d9cacc9989b62b1e844f505fe604aedbe67bc26bd185478e5c"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000020/omit-1.csv": {
+            "bytes": 389344,
+            "sha256": "8705e5444d179d61bf51b0a3a54c63a94dbb4cfc7180442937f96cb7576adbc9"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000020/omit-2.csv": {
+            "bytes": 389445,
+            "sha256": "5a13a3230af07b46ce226f6a765f959e9dfa59776caab5ac6d28820f3d501939"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000020/omit-3.csv": {
+            "bytes": 389620,
+            "sha256": "78ee2539468ce710435d56f853c0bf0dac807fce22c3ee4c15a4b1a8f091661b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000021/full-after.csv": {
+            "bytes": 388679,
+            "sha256": "55de5fb3714b65a9c7f4eba1df9605d4f9d52a7438b729416a546dca4efee271"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000021/full-before.csv": {
+            "bytes": 388691,
+            "sha256": "bfb367e2684949ae87f63df8bb0e6e5ec8aae034ea618fb9cfa5d0cfc72117e5"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000021/omit-0.csv": {
+            "bytes": 375998,
+            "sha256": "f16687a3fbc9061d9e4c065e58233a3d8c452639ef87af91ba261caef4418b3a"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000021/omit-1.csv": {
+            "bytes": 389311,
+            "sha256": "f710c769d0ac097b38688e34a8c93a1688c66d9e4ba6bf409aa7f1d525f05ec1"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000021/omit-2.csv": {
+            "bytes": 389415,
+            "sha256": "2d1469dd60bb7b37e3eaab7be9f28ac46c07c7938ba1d1988165dd9e3864b312"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000021/omit-3.csv": {
+            "bytes": 389602,
+            "sha256": "84af25d6be8c59506ad355ff79a4ffcae79999de9ef1956aae9b31aef4b97756"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000022/full-after.csv": {
+            "bytes": 388699,
+            "sha256": "cd2a652bd98e235ab22c6d56ea2d2ab2accf03138125b0c49e2f18a11bd6bb52"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000022/full-before.csv": {
+            "bytes": 388688,
+            "sha256": "89fc4997d3518a72f1b72e6c318592c70bb268350116aba9c12f31701e98b83f"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000022/omit-0.csv": {
+            "bytes": 375990,
+            "sha256": "6ed8082c6287f2251b360a2fdce3fe680b5878559b96be7c48002d70c53e7155"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000022/omit-1.csv": {
+            "bytes": 389309,
+            "sha256": "3d902a885b7f7635671899e68ee49dabc964249faf82dd2f03c283b1f395cf9f"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000022/omit-2.csv": {
+            "bytes": 389416,
+            "sha256": "306918ab02c6e1c64a2f4bcdd211ac54b75e9a0fc0259da18e99d409efd459b5"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000022/omit-3.csv": {
+            "bytes": 389602,
+            "sha256": "00b24a8b11599fff04ec9edb463bed5afdddac64d5146fe697eddfa3d24af703"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000023/full-after.csv": {
+            "bytes": 388625,
+            "sha256": "5311a8fa8a1cc764d425723b2834297a870e54ca657cd01287bac7ade2578d3a"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000023/full-before.csv": {
+            "bytes": 388625,
+            "sha256": "ec1a541ef7ea8ca0f806f221b765d89ffaaff3961bbea7667ba6680414d463e8"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000023/omit-0.csv": {
+            "bytes": 375940,
+            "sha256": "05623867946cad5a5c29c434564e672255a5e8aa85f42acab989b970ca6f9cbb"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000023/omit-1.csv": {
+            "bytes": 389268,
+            "sha256": "e609282d207a3659d8b652226c12d27550b4fdcad9e7e565d334427ccac827a9"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000023/omit-2.csv": {
+            "bytes": 389372,
+            "sha256": "da92fac95da0a127c9192380cc68a37b308b98e87a369a7d855b33bdeca09c67"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000023/omit-3.csv": {
+            "bytes": 389572,
+            "sha256": "15ee390b70c04594b8f5b15a84d0982976d71097778a257d0831902891645292"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000024/full-after.csv": {
+            "bytes": 395309,
+            "sha256": "ff20254e866a337f24c43f04f56d10c1a8ac055352ebc1fd6313d74b0266cfb1"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000024/full-before.csv": {
+            "bytes": 388623,
+            "sha256": "88ed5bad687775b2ea8afbb8c41f7f91c7622a3334d7bfbd0f968c0d42e9675d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000024/omit-0.csv": {
+            "bytes": 375942,
+            "sha256": "d9766a8a351517caf00bf07b16b94f19b2551470c120145357f2fa0a0a8f8723"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000024/omit-1.csv": {
+            "bytes": 389268,
+            "sha256": "54ac90e4a8f5963534c2fa3bead153ac3ec3694a768664fd7d48680473e4af75"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000024/omit-2.csv": {
+            "bytes": 389382,
+            "sha256": "275583a5f2b6b6f3567f619d8d86503717af244abd05e5536e9e3f68d310a6ed"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000024/omit-3.csv": {
+            "bytes": 395088,
+            "sha256": "04a7fa8d36243dd6e02baeec25c80891736e439c695fdd271e617f9756b4c3ce"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000025/full-after.csv": {
+            "bytes": 395291,
+            "sha256": "54a5901bd640965dcadb711a74b0657c02ff4188fb96de7bd92be49b8db5f85c"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000025/full-before.csv": {
+            "bytes": 395290,
+            "sha256": "77da81d81050f30a4ae1ecab34b24880f242ef7a1a58041799e4afa90436072e"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000025/omit-0.csv": {
+            "bytes": 382612,
+            "sha256": "4783f16652235b58f398ea31a778ed14ade153594f26a9ef8046082c0929baff"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000025/omit-1.csv": {
+            "bytes": 395915,
+            "sha256": "e2338b4701bcf604a1a003e1009ec43a18f1e281722c7b0db98b445fe64099fd"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000025/omit-2.csv": {
+            "bytes": 396088,
+            "sha256": "1c3837eea9a2dc2cc86fa793ce4c1560f3ed9801a701543bd49c1cd479f90e25"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000025/omit-3.csv": {
+            "bytes": 396246,
+            "sha256": "1b8c009411438a4195c0b8e76c521af54bb569287024a2c81b620c3fff159df8"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000026/full-after.csv": {
+            "bytes": 395292,
+            "sha256": "4be61a91f3cd46c8d3131caec4e2457d40003eca86bd2416e3b4a0dd21aa503b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000026/full-before.csv": {
+            "bytes": 395292,
+            "sha256": "c8f94a2275c6842baa1cd0222e36250e48077967391d72c3ee377cc041b939fd"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000026/omit-0.csv": {
+            "bytes": 382610,
+            "sha256": "417510e0c9f33cfc42a56dbbc3f82c73f6162e45ee6d56d1a47a902f2bdf2bea"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000026/omit-1.csv": {
+            "bytes": 395928,
+            "sha256": "8a9df6e3dbda912d4ab0aa14820e5e626ca9682cb714f913609e65631f5ce1b1"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000026/omit-2.csv": {
+            "bytes": 396085,
+            "sha256": "c79bf9b2dabc134a4f2cd615c4e7756472d826650836f576c90ceb9f89e0c4c7"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000026/omit-3.csv": {
+            "bytes": 396247,
+            "sha256": "f815096318bd13c7b9990e69df777a81d7f9dc418422324c77964495ce4367cf"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000027/full-after.csv": {
+            "bytes": 395270,
+            "sha256": "863f99d4bfe286528dbb2e375d681fa1a2ef1d239abcb7dcc1a42f43800651ed"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000027/full-before.csv": {
+            "bytes": 395269,
+            "sha256": "44e70260e18604959e2abe5e671592ccbffcd46ae02166a7ef9e461e80a676af"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000027/omit-0.csv": {
+            "bytes": 382594,
+            "sha256": "8a711dacff52326227cccd65c1661389b91f8869af318fcf92868c41297bf4a3"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000027/omit-1.csv": {
+            "bytes": 395906,
+            "sha256": "f30d3933d8d5dcba72997f94dc33844ff2e1c7a5cdd2343c42e0a9497923a6c4"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000027/omit-2.csv": {
+            "bytes": 396047,
+            "sha256": "ce9131c6c35a848b052631da6d6c469c7e53375314c7bf898ad3613f57aee15e"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000027/omit-3.csv": {
+            "bytes": 396233,
+            "sha256": "cb30faa1decf41bcb2e4df071b5f54a02e889e496d4650855cbf6b4448c75ddb"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000028/full-after.csv": {
+            "bytes": 395270,
+            "sha256": "1581e31c1b85a43ac2f13c7bed226e9c4a04432f267ec02c354d8524f966b293"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000028/full-before.csv": {
+            "bytes": 395269,
+            "sha256": "ec2bafd3b362dd6f1040a4dbb89e6a4c7d484d14c5618103de030615cccb6713"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000028/omit-0.csv": {
+            "bytes": 382594,
+            "sha256": "3d1ee4a9aed12ded0a5a7e85dc56b80465c0260446f88f1224bf0a8c981392b0"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000028/omit-1.csv": {
+            "bytes": 395906,
+            "sha256": "a28523c0576d4d74a5924aa98fc6d3942c7e4c5eba85da9545c5ef36a9e2b0e5"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000028/omit-2.csv": {
+            "bytes": 396049,
+            "sha256": "1c12fc68282754d9fe182fcab14b2f76950b76aa9470a4e6b38941305a683af1"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000028/omit-3.csv": {
+            "bytes": 396231,
+            "sha256": "4b2fc1f9a21f969b712cce1418f82ac635865dd3efbde1949c5b46f6afcfd97a"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000029/full-after.csv": {
+            "bytes": 395217,
+            "sha256": "cb9b82078c4ef460b436f29529e99989666ae001ca37d68dc5cac55f14526950"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000029/full-before.csv": {
+            "bytes": 395206,
+            "sha256": "4129d1ba9ceed681c087cf9a1a70fd56f33fb06de2353d7078b4cecb842644bf"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000029/omit-0.csv": {
+            "bytes": 382499,
+            "sha256": "304d9c800501b260bc42b17f3df3f51508c221f3fd250f7347d63a05e130b732"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000029/omit-1.csv": {
+            "bytes": 395839,
+            "sha256": "20cd5363adad60b77e15753799f135f4f2f39d2488f3f0ffa05c5438f5e6c61b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000029/omit-2.csv": {
+            "bytes": 395983,
+            "sha256": "bb552e81b6599a62cabf9d0941632c1efe89916f007df60b5f68461af636f78f"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000029/omit-3.csv": {
+            "bytes": 396175,
+            "sha256": "64313fd85d4af607ac982f63e58a44d76d87aef40e72f4e757a4c32eedde7a75"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000030/full-after.csv": {
+            "bytes": 395206,
+            "sha256": "47c9fa800c5d8dbd480c33a45ed92786de593a42dd29006523ba812b89084622"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000030/full-before.csv": {
+            "bytes": 395204,
+            "sha256": "3f1ddd9cb02c2d34444e40d7d3712b2c848aa7924754a081349fb3334cc180fd"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000030/omit-0.csv": {
+            "bytes": 382501,
+            "sha256": "b72b2dd9eaa51a1cd47d8eb298692ba7de03e1a24b89b4565caa1399db9b2731"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000030/omit-1.csv": {
+            "bytes": 395837,
+            "sha256": "88e065407786eb1abd681f3d8bb7aed4fb346b5008eba34934804910ff53329d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000030/omit-2.csv": {
+            "bytes": 395983,
+            "sha256": "4cb7b360b942cafb83162287faf0a8ade37378816b994e854b0a4e2036ed94b7"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000030/omit-3.csv": {
+            "bytes": 396176,
+            "sha256": "307a33dcd41afa1a039b9acc7487b92e730ab8c44c03ad63b3911d97de4feb53"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000031/full-after.csv": {
+            "bytes": 389839,
+            "sha256": "02586d381eec58815bed5997a0cb2173963c3bf7703ab23e21e90a03da1fbdcc"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000031/full-before.csv": {
+            "bytes": 389838,
+            "sha256": "4f931321680d601a37b0a8e241126d45696b02f3bf6378009a85d5f615034c4a"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000031/omit-0.csv": {
+            "bytes": 377164,
+            "sha256": "b84cf68309c4880460a2e48fb88468cbf56b52368617b9a9fa18660000d429fc"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000031/omit-1.csv": {
+            "bytes": 390328,
+            "sha256": "190cc5ab47b2f60452905f4f2a3f4eedb435d2888a50bf8be8795e338c33f0d2"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000031/omit-2.csv": {
+            "bytes": 390759,
+            "sha256": "444f14148fa764b3ac9720b64372508efe7d3913aa0fe9c54765b0c4705c1178"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000031/omit-3.csv": {
+            "bytes": 391059,
+            "sha256": "a6a2a5ea7ef7204e76d19912d21c2b8fc507c12a9b3732974af519dc4ddb759d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000032/full-after.csv": {
+            "bytes": 389837,
+            "sha256": "0e6404d4594a78065a8e4d40a654a0acf5ecb1aed62809e0487efa1b8b10a4b4"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000032/full-before.csv": {
+            "bytes": 389836,
+            "sha256": "65af6bd9a369457cb3faa0fc7064b86e6f14396f605a9abd667c3e5184802ef9"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000032/omit-0.csv": {
+            "bytes": 377164,
+            "sha256": "7a363fa3456905e39aedc489bc9cd01990e9ecc6d5b57d32d7de241a0066e449"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000032/omit-1.csv": {
+            "bytes": 390329,
+            "sha256": "4951e5a50e4cb76d795e295e03251aafdb9301cc01126b9341a32a83b004a50f"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000032/omit-2.csv": {
+            "bytes": 390759,
+            "sha256": "5d11f286b2adcb63cbb213d7f0b79960a4f5b230f5e6bc847977b1aa4b8bc948"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000032/omit-3.csv": {
+            "bytes": 391060,
+            "sha256": "4f4dc98653d6ad7365a131a5ebdfe1a68a59a41373fbc891cc78b26094c6e8d9"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000033/full-after.csv": {
+            "bytes": 395185,
+            "sha256": "4b264fadcba11fb6fc2bcbf6ac31e00a31e3330c893face5638c31132177164e"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000033/full-before.csv": {
+            "bytes": 395184,
+            "sha256": "e578d070c2c105a2827b4b8d1c2a49c0c9f7837221fd13ff5b56705a28fdde25"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000033/omit-0.csv": {
+            "bytes": 382506,
+            "sha256": "d0a8d838dac6d05e94ca43d1b11c25f67e1fb6f1fc148a3b6b5893ca3dc1ba5d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000033/omit-1.csv": {
+            "bytes": 395811,
+            "sha256": "0d7bc4f2636cbd3868f0397a82210e748d026e67a827b6458c4a35307d0f326b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000033/omit-2.csv": {
+            "bytes": 395962,
+            "sha256": "75c58e278db08fd822c0995807ed0201018ac5f445711791648c312ce3c903b9"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000033/omit-3.csv": {
+            "bytes": 396131,
+            "sha256": "a7b4aa9ff0e0a4b7f56f5aa87c767aedef38c229f8174782f620189dea244929"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000034/full-after.csv": {
+            "bytes": 395186,
+            "sha256": "1b75f665616fd6828a06869782309b29c31d7cb813b66b3ff7c1d53d5c94c7dc"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000034/full-before.csv": {
+            "bytes": 395185,
+            "sha256": "56d8e83cf7fd8c40be5e5c46a84d1c5b32a4a1849cf4e14ea533662d80bc85d9"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000034/omit-0.csv": {
+            "bytes": 382505,
+            "sha256": "bd85f699da88c035195d3953676a206eeee9f188fdb71e4cfa4aca15101414cd"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000034/omit-1.csv": {
+            "bytes": 395814,
+            "sha256": "b376778821338500b6a47ce7d8cc7473146bedb152d60a191368820979b5b8f9"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000034/omit-2.csv": {
+            "bytes": 395959,
+            "sha256": "a25408895df8b584cd1c026e29c6a881dbaee1ec4e873ac47cb2386fc52e84f8"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000034/omit-3.csv": {
+            "bytes": 396131,
+            "sha256": "91f4db5be522afe334280769c8e51b497df96abd0086db224e60c5cf3372339e"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000035/full-after.csv": {
+            "bytes": 389697,
+            "sha256": "bce9f1dfe09b71ff0449038fad67a0afd1700cc43274560a889f0dcb9c193ac8"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000035/full-before.csv": {
+            "bytes": 389696,
+            "sha256": "4881b5b7f071ea29bbabf9eb01e323acf805098b866d6029515f657305549826"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000035/omit-0.csv": {
+            "bytes": 377005,
+            "sha256": "d0bacc08746934c83afa536a15cec304b0fe177c854dea3e07daae0d1eb31dbd"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000035/omit-1.csv": {
+            "bytes": 390178,
+            "sha256": "0b01a4d53abbf64116ecdbb26148ac454659a688d6ad92a6385bcfc52afb848c"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000035/omit-2.csv": {
+            "bytes": 390628,
+            "sha256": "29bfb6be7dba2ac12e40532e08382215ec4c3f14c216de2f4359a19c2bdfb9cc"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000035/omit-3.csv": {
+            "bytes": 390416,
+            "sha256": "b64a33b535c77f002788ba366e141ff955c47f47f93d4e0fc2b3f8e23a399ade"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000036/full-after.csv": {
+            "bytes": 389701,
+            "sha256": "e7fc64e9ff42c94ff8cc8dd4b7fc9326982fd5a193862a9c68dd2617ea762ea5"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000036/full-before.csv": {
+            "bytes": 389711,
+            "sha256": "fd7ddf51f32689b4f08e18400653437e286fcfd1a543039b9cb92ea52be352f4"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000036/omit-0.csv": {
+            "bytes": 377002,
+            "sha256": "99cca842266c5533dabf4326d2dec64e974ff617b5916d48aeeb62113be21c4c"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000036/omit-1.csv": {
+            "bytes": 390178,
+            "sha256": "3488e0670d74f65071fa81102728283eef7c8dc97128954000973b6e81657184"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000036/omit-2.csv": {
+            "bytes": 390629,
+            "sha256": "0f75c000e8bacb0c203eefadc7fb026457aa083231199b47730498d8e35538d1"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000036/omit-3.csv": {
+            "bytes": 390414,
+            "sha256": "09cde0feda45739091ef42b8ab036ad84ea1d44b3ff13b6db731b1f165fff00f"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000037/full-after.csv": {
+            "bytes": 395072,
+            "sha256": "630ecb4f340e769c42e7115eb177512a41aa073059bc185b4d1a3db80484e90e"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000037/full-before.csv": {
+            "bytes": 395071,
+            "sha256": "eed507312daaa3085e83157e7f97980b6168115500f0680a12ae216f2c179f7d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000037/omit-0.csv": {
+            "bytes": 382382,
+            "sha256": "e2d59898bf569a9ba42f0fcf5725d8a4af36b55885cded90b3fd64855721fe22"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000037/omit-1.csv": {
+            "bytes": 395736,
+            "sha256": "52ca5f90cfa20bb9fd8a660ba4319999e728432a31689f772036034037e99111"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000037/omit-2.csv": {
+            "bytes": 395895,
+            "sha256": "d6adea6c5dc79a3d8a1980d17d27a9164f11a8a64fd9cbeb58eaec2247a91a04"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000037/omit-3.csv": {
+            "bytes": 396062,
+            "sha256": "b89b1f6f80f154d56a66e457f9d8f654a436d94e02dcaf8ad3d74b4dce39a9ff"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000038/full-after.csv": {
+            "bytes": 395072,
+            "sha256": "47c1c53aa3adf0504cdd4d81d5de4af3c48fe4a1cb5054245013425287b27698"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000038/full-before.csv": {
+            "bytes": 395071,
+            "sha256": "18d35f8ca70b3d02285853c368e56eeff5c08da999dc12b13b22442bac5e4112"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000038/omit-0.csv": {
+            "bytes": 382383,
+            "sha256": "83905e519f18d1bbba40ae813effdf1cbbf7c7b66b72c530c69dd59448ca9ea0"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000038/omit-1.csv": {
+            "bytes": 395734,
+            "sha256": "816e4f5cb404ee935bfd9cd1a1cce24baff3de217388bb1e2fe4ff753aed67ed"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000038/omit-2.csv": {
+            "bytes": 395900,
+            "sha256": "56ac1f3fc4c7d49b37630ab3976df18c9ff05a1bd77fbc9eaf1979a6b6959c7b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000038/omit-3.csv": {
+            "bytes": 396058,
+            "sha256": "357509463974ab8603113c42e0c621b87088eaafe9b49bf7a13f9cbdbf1874f6"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000039/full-after.csv": {
+            "bytes": 390602,
+            "sha256": "22aa5e7a4c30088e37f7d7079eab1b1819b8e4d8a0e6e46753f3dfbcc42b2ac0"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000039/full-before.csv": {
+            "bytes": 390602,
+            "sha256": "9d2df17d1764c9801a18a13eba507d130f4c962bd41e7e99763a8012b93567df"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000039/omit-0.csv": {
+            "bytes": 377909,
+            "sha256": "933bd8fb76fa159394dad0427a4d0209a92049f078050e3d46aef99e5d0be0ac"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000039/omit-1.csv": {
+            "bytes": 391066,
+            "sha256": "7d1ee68cc8bbc64c49f4fc88316042f686f2d6e5ea1a058b9f571034e9a73a38"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000039/omit-2.csv": {
+            "bytes": 391528,
+            "sha256": "719c9c35cd85115ec566e7e1f16d1f63247e80f4afaf2002d17b1259dd0704da"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000039/omit-3.csv": {
+            "bytes": 391808,
+            "sha256": "3499140e61891ab70d687323957006bf981b356dccb3418a78813b1327eb22be"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000040/full-after.csv": {
+            "bytes": 390600,
+            "sha256": "940755be4b60a82555ee69d8604166227ae701a88df22aaab9bf90d67cd2dd34"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000040/full-before.csv": {
+            "bytes": 390599,
+            "sha256": "a06a27f7cefa503b8fed3e48f8870c758a2626561d4eccac39e60c6bc8dec253"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000040/omit-0.csv": {
+            "bytes": 377914,
+            "sha256": "ad18699b80e346566494ff29f97456bf456ccee70ce716a583dc0732add4567e"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000040/omit-1.csv": {
+            "bytes": 391063,
+            "sha256": "f6033b534aa3eef7bd7563e4ee2908d23f59c26e90754f9f1701cbbcf4c2be33"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000040/omit-2.csv": {
+            "bytes": 391517,
+            "sha256": "f9785ff4aac1814fb9cd083b9281428fb14d8bcdb0f34351088bd929dfcae52b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/composite-measurements/group-000040/omit-3.csv": {
+            "bytes": 391809,
+            "sha256": "b2ed553ba3de6fd3d00629e38a352146d33d94c626b3bebf228e0c15d10b1776"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/train_stopped_state.json": {
+            "bytes": 168103224,
+            "sha256": "d8d545f9d0e9a038e7dc232ad86de94213496ac94481a1c32a822b3b98c3f070"
+          },
+          "worker/tmp/threshold-study/runs/candidate/input/source/train_stopped_summary.json": {
+            "bytes": 92737,
+            "sha256": "d16df968b5b5eba67b11659ac2d87d148386d4dda7f23876c4ace44bfa9afe6b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/evaluation.json": {
+            "bytes": 4148,
+            "sha256": "65e45dabf1fb6653febcc93c7eaf70ca2199dbbb6925d7da47dfacd1dc7730d9"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/execution.json": {
+            "bytes": 3096,
+            "sha256": "1ea592dcc8b00b7d2f19d2ae02ec2a78422913c6883ab85e84096c7db525e77b"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/job.json": {
+            "bytes": 171167257,
+            "sha256": "67e7f8a79f57b8b369923830784631b9bd96e3ec63e4f4b0da90efe2fe0d4249"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/model-after.json": {
+            "bytes": 179892364,
+            "sha256": "751ed4df219ac0d77336596ce0068eb6f9314e923d107526ea5d9dc4c74ba9ca"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/model.json": {
+            "bytes": 179892364,
+            "sha256": "751ed4df219ac0d77336596ce0068eb6f9314e923d107526ea5d9dc4c74ba9ca"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/trial-0.json": {
+            "bytes": 1833662,
+            "sha256": "51b9abbfa72c23f984e5969c3026cfc27620bd2bf97b28c7d69335c5cf50f71c"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/trial-1.json": {
+            "bytes": 1758090,
+            "sha256": "f498d58ae0d1b334669e73b393ae7e4db5999fd8347b71a609795a658fbf77ba"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/trial-2.json": {
+            "bytes": 1758023,
+            "sha256": "139af60a3afe3a19039635ca4d5644f7471d1979f7b6fdb7376afd6af5f512f7"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/trial-3.json": {
+            "bytes": 1758060,
+            "sha256": "7bde3a97112066fa5b69533200ee7fcd52bdf73874cad7926c04f63d352bfb0f"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/trial-4.json": {
+            "bytes": 1887567,
+            "sha256": "b6e94cca49bf6ca95926555ca809483189beee46c7db87b4dbfc25f8497a8a69"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/trial-5.json": {
+            "bytes": 1840872,
+            "sha256": "01f7d00a581c4c47a60ee8015060e8810163a6fe9bda125268978c8a5871f802"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/trial-6.json": {
+            "bytes": 1890589,
+            "sha256": "57eb162109b249b4fef735b9f4eb74c75f69e7daf62e514abd9345585a8ce3d9"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native/trial-7.json": {
+            "bytes": 1845317,
+            "sha256": "77e71502be2dafc11a53d49ce73c3a8e69505de5c4e2a467f4f85c4710b8e197"
+          },
+          "worker/tmp/threshold-study/runs/candidate/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261114-071740.209000": {
+            "bytes": 290,
+            "sha256": "f3eee31d8f7a735f4f490539adc725614d9502560d299cc270dc322899dd2a57"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/capture-ack.json": {
+            "bytes": 113,
+            "sha256": "e98052bb3634b69092918d6ee456dac07b0f1427b29a861f7c3c97da719acc04"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/capture-ready.json": {
+            "bytes": 97,
+            "sha256": "5f770d7919f1ff0c9caf49fc469148e1e3b5d5b5310730c5661445b0bec64f7f"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/contained/limits-readback.json": {
+            "bytes": 1068,
+            "sha256": "593809df43f45227e2220cdcf7920f58b9f0e66d6ef26bb93eea9cb566ad9f46"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/contained/owned-unit.json": {
+            "bytes": 565,
+            "sha256": "3bc115d78580a0562307a03487fad8fc24de1dc56d65986d5920ca7f4fc23c89"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/contained/ready.json": {
+            "bytes": 43,
+            "sha256": "81bb0b10ab118514b44efa94de3eac9ab5d6c7e104acc7b8d4414db0ff22c640"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/contained/request.json": {
+            "bytes": 1510,
+            "sha256": "05e626e5a988e357e66aed0e8ecf5150b7ab95bfa9cab76dda71733004a428ff"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/contained/runtime.json": {
+            "bytes": 12622,
+            "sha256": "72d38d6fff440ee8c2cc23991ff67550f2daf8a0341e220efc5a4d23abb25458"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/loaded-files.json": {
+            "bytes": 4822,
+            "sha256": "757c4ababb08c3b8273e17a980b0b228889d2720ed8b592203cfca7134a8f87d"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/owned-process.json": {
+            "bytes": 649,
+            "sha256": "7a61b7e7c6ef155299bd255bf8042ad8a19bb9d3983d9a4d9b8a1cbebed5a649"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/request.json": {
+            "bytes": 862,
+            "sha256": "c9ade19401bf669f48b32451371fdb09e03a96fee68485f1fde9ce63b9335dc8"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/reservation-context.json": {
+            "bytes": 3061,
+            "sha256": "5e7fb1ad8d66f255a236b7202e8249d69476090ee47c7259f133cddbf0fc09a3"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/result.json": {
+            "bytes": 1176,
+            "sha256": "96aa581aebb706d6c702ec2f93bab90861ba75c05c33191083e6b14657aea3ea"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/runtime.json": {
+            "bytes": 12622,
+            "sha256": "72d38d6fff440ee8c2cc23991ff67550f2daf8a0341e220efc5a4d23abb25458"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/terminal-unit-state.json": {
+            "bytes": 1299,
+            "sha256": "a4f771f906b7968f5f1b095b99cadfb58b0b4c38565f0afe5f02e9a4d1b9aaad"
+          },
+          "worker/tmp/threshold-study/runs/candidate/process/whole-group-closure.json": {
+            "bytes": 1212,
+            "sha256": "6f202c2943fcb629d46b1990e3fba444bdb05c41a54d136012bb3d9307315ef8"
+          },
+          "worker/tmp/threshold-study/runs/candidate/run-manifest.json": {
+            "bytes": 191313,
+            "sha256": "62fe37b0b0e3afff8ea696b8c6dd4ec4d06365d475e7a36e4b64d9a6d9aa7e49"
+          },
+          "worker/tmp/threshold-study/runs/candidate/runtime-cli-interface.json": {
+            "bytes": 5515,
+            "sha256": "f8542864c13d04eb7cb2b097641487e203818fb1321db8ce2b1b5b8f2af5c463"
+          },
+          "worker/tool-source-after.json": {
+            "bytes": 317658,
+            "sha256": "11f043109df2eeb1ee4c9a333f45b933d3508cb224c3679843ff05ff730e9672"
+          },
+          "worker/tool-source-before.json": {
+            "bytes": 317658,
+            "sha256": "11f043109df2eeb1ee4c9a333f45b933d3508cb224c3679843ff05ff730e9672"
+          },
+          "worker/validation/result.json": {
+            "bytes": 1247,
+            "sha256": "7c407a3f3d40870ceb0803cdbda907174454d5920db058ac1becd142163369a4"
+          },
+          "worker/validation/suite.json": {
+            "bytes": 953,
+            "sha256": "992e348ff9e6b54cbfe9f64f93d397d8046adef4b70155bb38435477544a8ce2"
+          },
+          "worker/validation/unittest.log": {
+            "bytes": 331,
+            "sha256": "c9690f54dd1ab9555da96bcb0401ab035f11f2ef0962bcccc7bd6ab8ba4ca9b6"
+          },
+          "worker/validation-process.json": {
+            "bytes": 153,
+            "sha256": "f8f40a4b81f3b7221718e5819e63d253bac8acf1ffa08bc799a5d8cef2f0e705"
+          },
+          "worker/validation-source-after.json": {
+            "bytes": 317658,
+            "sha256": "11f043109df2eeb1ee4c9a333f45b933d3508cb224c3679843ff05ff730e9672"
+          },
+          "worker/validation-source-before.json": {
+            "bytes": 317658,
+            "sha256": "11f043109df2eeb1ee4c9a333f45b933d3508cb224c3679843ff05ff730e9672"
+          }
+        },
+        "links": {
+          "worker/tmp/threshold-study/runs/baseline100/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              58888063,
+              54,
+              1794628539192610239,
+              1794628539192610239,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261114-065539.4144618",
+            "link_not_followed": true
+          },
+          "worker/tmp/threshold-study/runs/candidate/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              58983239,
+              53,
+              1794629860989751896,
+              1794629860989751896,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261114-071740.209000",
+            "link_not_followed": true
+          }
+        }
+      }
+    ],
+    "closed_units": [
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/worker/tmp/threshold-study/runs/baseline100/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "733c7fc01aa29c3ec278044cd85b6b56f030cdef06a4f65720aa97c5b59c1cf8",
+          "unit": "timelearner-d5ad1617-b1ee-4a39-bef4-05b825612cb2.service",
+          "invocation_id": "de655b0cd33e4fa095b358bcd3bac4b0",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d5ad1617-b1ee-4a39-bef4-05b825612cb2.service",
+          "initial_main_pid": 4144618,
+          "initial_start_ticks": "370373662",
+          "sha256": "3036b27892e1ad106614c1ddfd3216f973f9c50d0b40d22cda4a1c2a323d90ac"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/worker/tmp/threshold-study/runs/candidate/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "afab8bea4cc23f1e1384360eda7b6d3c635a649441d468abb5acd16410620f83",
+          "unit": "timelearner-fbc3f9cf-bcd1-4215-817e-2fea11ee620a.service",
+          "invocation_id": "82a90a66ef5b499e8d33a2bcf87b7f52",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fbc3f9cf-bcd1-4215-817e-2fea11ee620a.service",
+          "initial_main_pid": 209000,
+          "initial_start_ticks": "370505839",
+          "sha256": "f0f7fc90ef1de0413ab5281beec9d59cb8425321b2c34a942b168ce91383db5a"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "0f2232e41f01d616ce3d9fb11ead7b7b6961f2ab2e84d1a45f411d8705ea790f",
+          "unit": "timelearner-15265171-98e8-4aac-ab03-57bc8ace8f8e.service",
+          "invocation_id": "2b7a6d983c2746b4be00e0f039d03cba",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-15265171-98e8-4aac-ab03-57bc8ace8f8e.service",
+          "initial_main_pid": 4056323,
+          "initial_start_ticks": "370281603",
+          "sha256": "21f169c72284ef6e4e42c56a106fb108134975e0c85778c3913bdc5b376e51dc"
+        }
+      }
+    ],
+    "bounds": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 3221225472,
+      "maximum_archive_bytes": 167772160
+    },
+    "scientific_verdict": null
+  },
+  "before": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/worker/tmp/threshold-study/runs/baseline100/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "733c7fc01aa29c3ec278044cd85b6b56f030cdef06a4f65720aa97c5b59c1cf8",
+          "unit": "timelearner-d5ad1617-b1ee-4a39-bef4-05b825612cb2.service",
+          "invocation_id": "de655b0cd33e4fa095b358bcd3bac4b0",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d5ad1617-b1ee-4a39-bef4-05b825612cb2.service",
+          "initial_main_pid": 4144618,
+          "initial_start_ticks": "370373662",
+          "sha256": "3036b27892e1ad106614c1ddfd3216f973f9c50d0b40d22cda4a1c2a323d90ac"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-d5ad1617-b1ee-4a39-bef4-05b825612cb2.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/worker/tmp/threshold-study/runs/candidate/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "afab8bea4cc23f1e1384360eda7b6d3c635a649441d468abb5acd16410620f83",
+          "unit": "timelearner-fbc3f9cf-bcd1-4215-817e-2fea11ee620a.service",
+          "invocation_id": "82a90a66ef5b499e8d33a2bcf87b7f52",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fbc3f9cf-bcd1-4215-817e-2fea11ee620a.service",
+          "initial_main_pid": 209000,
+          "initial_start_ticks": "370505839",
+          "sha256": "f0f7fc90ef1de0413ab5281beec9d59cb8425321b2c34a942b168ce91383db5a"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-fbc3f9cf-bcd1-4215-817e-2fea11ee620a.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "0f2232e41f01d616ce3d9fb11ead7b7b6961f2ab2e84d1a45f411d8705ea790f",
+          "unit": "timelearner-15265171-98e8-4aac-ab03-57bc8ace8f8e.service",
+          "invocation_id": "2b7a6d983c2746b4be00e0f039d03cba",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-15265171-98e8-4aac-ab03-57bc8ace8f8e.service",
+          "initial_main_pid": 4056323,
+          "initial_start_ticks": "370281603",
+          "sha256": "21f169c72284ef6e4e42c56a106fb108134975e0c85778c3913bdc5b376e51dc"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-15265171-98e8-4aac-ab03-57bc8ace8f8e.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    }
+  ],
+  "after": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/worker/tmp/threshold-study/runs/baseline100/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "733c7fc01aa29c3ec278044cd85b6b56f030cdef06a4f65720aa97c5b59c1cf8",
+          "unit": "timelearner-d5ad1617-b1ee-4a39-bef4-05b825612cb2.service",
+          "invocation_id": "de655b0cd33e4fa095b358bcd3bac4b0",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d5ad1617-b1ee-4a39-bef4-05b825612cb2.service",
+          "initial_main_pid": 4144618,
+          "initial_start_ticks": "370373662",
+          "sha256": "3036b27892e1ad106614c1ddfd3216f973f9c50d0b40d22cda4a1c2a323d90ac"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-d5ad1617-b1ee-4a39-bef4-05b825612cb2.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/worker/tmp/threshold-study/runs/candidate/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "afab8bea4cc23f1e1384360eda7b6d3c635a649441d468abb5acd16410620f83",
+          "unit": "timelearner-fbc3f9cf-bcd1-4215-817e-2fea11ee620a.service",
+          "invocation_id": "82a90a66ef5b499e8d33a2bcf87b7f52",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fbc3f9cf-bcd1-4215-817e-2fea11ee620a.service",
+          "initial_main_pid": 209000,
+          "initial_start_ticks": "370505839",
+          "sha256": "f0f7fc90ef1de0413ab5281beec9d59cb8425321b2c34a942b168ce91383db5a"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-fbc3f9cf-bcd1-4215-817e-2fea11ee620a.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "0f2232e41f01d616ce3d9fb11ead7b7b6961f2ab2e84d1a45f411d8705ea790f",
+          "unit": "timelearner-15265171-98e8-4aac-ab03-57bc8ace8f8e.service",
+          "invocation_id": "2b7a6d983c2746b4be00e0f039d03cba",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-15265171-98e8-4aac-ab03-57bc8ace8f8e.service",
+          "initial_main_pid": 4056323,
+          "initial_start_ticks": "370281603",
+          "sha256": "21f169c72284ef6e4e42c56a106fb108134975e0c85778c3913bdc5b376e51dc"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-15265171-98e8-4aac-ab03-57bc8ace8f8e.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    }
+  ],
+  "bundle": {
+    "kind": "compact_native_primary",
+    "schema_version": 2,
+    "archive_bytes": 83917844,
+    "archive_sha256": "e4f4c50a328919a8f5d7c823e969b26a830ffb190454a5313aa67c130e821541",
+    "compression": {
+      "codec": "xz-lzma2",
+      "dictionary_bytes": 33554432,
+      "member_order": "content_sha256_then_logical_name",
+      "content_references": "earlier-regular-member-sha256-size-v1"
+    },
+    "expanded_bytes": 2219424279,
+    "unique_content_bytes": 1295377523
+  },
+  "collection_status": "completed",
+  "original_files_rewritten": false,
+  "original_outcome_unchanged": true,
+  "scientific_verdict": null
+}
