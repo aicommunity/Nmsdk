@@ -146,3 +146,12 @@ Bin/**/settings.qt
 /Reports/StructTrain/TimeLearner/**/*.svg
 /Reports/StructTrain/TimeLearner/**/*.pdf
 !/Reports/StructTrain/TimeLearner/**/primary-bundle/selected/*.png
+
+# Experiment payloads live in Nmsdk-StructTrainExpArchive; references stay in Git.
+/Reports/StructTrain/TimeLearner/**/*.xz
+/Reports/StructTrain/TimeLearner/**/*.gz
+/Reports/StructTrain/TimeLearner/**/*.zip
+/Reports/StructTrain/TimeLearner/**/*.pack
+/Reports/StructTrain/TimeLearner/**/*.bin
+/Reports/StructTrain/TimeLearner/**/*.qz
+/.structtrain-cache/

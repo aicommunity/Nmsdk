@@ -22,6 +22,44 @@ LOOSE_REPORT_SCRIPT_SUFFIXES = frozenset({
     '.tcl', '.ipynb', '.vbs', '.wsf', '.command', '.c', '.cmake',
 })
 
+MAX_GIT_EXPERIMENT_BYTES = 1024**2
+EXTERNAL_RESULT_SUFFIXES = frozenset({
+    '.xz', '.gz', '.bz2', '.zip', '.7z', '.tar', '.zst', '.pack', '.bundle',
+    '.bin', '.qz', '.npy', '.npz', '.h5', '.hdf5', '.pkl', '.pickle',
+})
+
+
+def _experiment_artifact(name):
+    folded = name.casefold()
+    return any(folded.startswith(prefix) for prefix in (
+        'reports/structtrain/timelearner/', 'docs/structtrain/timelearner/',
+        'docs/audit/timelearner-', 'scripts/structtrain/timelearner/tests/fixtures/',
+        'tests/integration/data/native'))
+
+
+def _external_result_policy(name, size, header=b''):
+    if not _experiment_artifact(name):
+        return
+    require(size <= MAX_GIT_EXPERIMENT_BYTES, 'large_experiment_artifact_requires_archive:'+name)
+    require(PurePosixPath(name).suffix.casefold() not in EXTERNAL_RESULT_SUFFIXES,
+            'binary_experiment_artifact_requires_archive:'+name)
+    if _report_artifact(name):
+        require(b'\0' not in header or PurePosixPath(name).suffix.casefold() in {'.png', '.pdf'},
+                'binary_experiment_artifact_requires_archive:'+name)
+
+
+def verify_experiment_tree(directory, commit):
+    """Reject unlisted large results too; a short artifact manifest is no bypass."""
+    raw = subprocess.check_output(['git', '--no-replace-objects', '-C', str(directory),
+                                   'ls-tree', '-r', '-l', '-z', commit], timeout=120)
+    for entry in raw.split(b'\0'):
+        if not entry:
+            continue
+        metadata, name = entry.split(b'\t', 1)
+        _, kind, _, size = metadata.decode('ascii').split()
+        if kind == 'blob':
+            _external_result_policy(name.decode('utf-8'), int(size))
+
 
 def _report_artifact(name):
     return tuple(part.casefold() for part in PurePosixPath(name).parts[:3]) == (
@@ -149,6 +187,7 @@ def verify_artifact_set(directory, commit, record, *, enforce_new_artifact_polic
     mode, oid = _blob_entry(directory, commit, manifest.as_posix())
     if enforce_new_artifact_policy:_new_report_artifact_policy(manifest.as_posix(), mode)
     size = int(_git(directory, "cat-file", "-s", oid))
+    if enforce_new_artifact_policy:_external_result_policy(manifest.as_posix(), size)
     require(size <= 16*1024*1024, "artifact_manifest_too_large")
     raw = subprocess.check_output(["git", "--no-replace-objects", "-C", str(directory),
                                    "cat-file", "blob", oid], timeout=120)
@@ -159,6 +198,7 @@ def verify_artifact_set(directory, commit, record, *, enforce_new_artifact_polic
         path = (manifest.parent/_artifact_path(name)).as_posix()
         mode, oid = _blob_entry(directory, commit, path)
         if enforce_new_artifact_policy:_new_report_artifact_policy(path, mode)
+        if enforce_new_artifact_policy:_external_result_policy(path, int(_git(directory, 'cat-file', '-s', oid)))
         require(_blob_sha256(directory, oid, new_report_path=path if enforce_new_artifact_policy else None) == expected,
                 "committed_artifact_content_changed:"+path)
     return {**record, "files_verified": len(inventory)+1}
@@ -193,6 +233,7 @@ def stage_artifact_set(directory: Path, manifest: str, manifest_sha256: str):
         if _report_artifact(name.as_posix()):
             _new_report_artifact_policy(name.as_posix(),
                 _working_git_mode(directory, name.as_posix(), actual), header)
+        _external_result_policy(name.as_posix(), actual.stat().st_size, header)
         if name != relative:
             require(digest == inventory[name.relative_to(relative.parent).as_posix()],
                     "working_artifact_content_changed:"+name.as_posix())
@@ -334,6 +375,9 @@ def publication_plan(root: Path, specification, *, enforce_new_artifact_policy=F
                                        enforce_new_artifact_policy=enforce_new_artifact_policy)
             key = (proof["repository"], proof["manifest"])
             require(key not in seen, "duplicate_publication_artifact_set");seen.add(key)
+    if enforce_new_artifact_policy:
+        for directory, record in ordered:
+            verify_experiment_tree(directory, record['commit'])
     return ordered
 
 

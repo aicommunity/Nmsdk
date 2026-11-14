@@ -76,11 +76,9 @@ class ReportArtifactPolicyTest(unittest.TestCase):
         self.assertEqual(self._remotes(), before)
         self.assertEqual(fixtures.git(self.root, 'diff', '--cached', '--raw', '-z'), index)
 
-    def test_compact_archive_models_metrics_and_selected_figures_publish(self):
+    def test_small_text_models_metrics_and_selected_figures_publish(self):
         png = base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jH0kAAAAASUVORK5CYII=')
-        payloads = {'primary.tar.xz': lzma.compress(b'#!/bin/sh\necho archived producer\n'),
-                    'model.bin': b'\x00model\x00#!not-a-first-line-shebang',
-                    'model.xml': b'<model/>\n', 'metrics.json': b'{"validity":"valid"}\n',
+        payloads = {'model.xml': b'<model/>\n', 'metrics.json': b'{"validity":"valid"}\n',
                     'trials.csv': b'trial_id,hit\ntarget,1\n',
                     'selected/trace.PY.png': png,
                     'selected/trace.svg': b'<svg xmlns="http://www.w3.org/2000/svg"/>',
@@ -93,6 +91,47 @@ class ReportArtifactPolicyTest(unittest.TestCase):
         self.assertEqual(result['publication'], 'published', result)
         self.assertEqual(fixtures.git(self.remote, 'rev-parse', 'refs/heads/develop'),
                          fixtures.git(self.root, 'rev-parse', 'HEAD'))
+
+    def test_compressed_primary_and_binary_models_require_external_archive(self):
+        for name, raw in (('primary.tar.xz', lzma.compress(b'primary data')),
+                          ('model.bin', b'\x00model'), ('snapshot.qz', b'qcompressed')):
+            with self.subTest(name=name):
+                manifest, digest = self._inventory({name: raw})
+                before = fixtures.git(self.root, 'diff', '--cached', '--raw', '-z')
+                with self.assertRaisesRegex(EvidenceError, 'binary_experiment_artifact_requires_archive'):
+                    stage_artifact_set(self.root, manifest, digest)
+                self.assertEqual(fixtures.git(self.root, 'diff', '--cached', '--raw', '-z'), before)
+
+    def test_large_text_or_selected_image_cannot_bypass_size_limit(self):
+        for name in ('raw.jsonl', 'selected/trace.png'):
+            with self.subTest(name=name):
+                manifest, digest = self._inventory({name: b'x'*(1024**2+1)})
+                with self.assertRaisesRegex(EvidenceError, 'large_experiment_artifact_requires_archive'):
+                    stage_artifact_set(self.root, manifest, digest)
+
+    def test_committed_archive_blocks_child_pushes_before_publication(self):
+        manifest, digest = self._inventory({'primary.tar.xz': lzma.compress(b'data')})
+        self._commit(manifest, digest, change_child=True)
+        before = self._remotes()
+        result = publish_closure(self.root, self.spec)
+        self.assertEqual(result['publication'], 'failed', result)
+        self.assertIn('binary_experiment_artifact_requires_archive', result['reason'])
+        self.assertEqual(result['repositories_published_before_failure'], [])
+        self.assertEqual(self._remotes(), before)
+
+    def test_unlisted_archive_cannot_bypass_publication_inventory(self):
+        manifest, digest = self._inventory({'metrics.json': b'{}', 'unlisted.tar.xz': lzma.compress(b'data')})
+        self._commit(manifest, digest)
+        # Schema 1 has no declared artifact inventory at all.
+        self.spec['schema_version'] = 1
+        self.spec.pop('artifacts')
+        for record in self.spec['repositories']:
+            record.pop('push_url')
+        before = self._remotes()
+        result = publish_closure(self.root, self.spec)
+        self.assertEqual(result['publication'], 'failed', result)
+        self.assertIn('binary_experiment_artifact_requires_archive', result['reason'])
+        self.assertEqual(self._remotes(), before)
 
     def test_every_known_script_suffix_is_refused_before_staging(self):
         for suffix in sorted(LOOSE_REPORT_SCRIPT_SUFFIXES):

@@ -201,7 +201,8 @@ def restore_native_bundle(bundle_path, output, *, compatibility=None):
                 'bundle_content_reference_totals_invalid')
     require(compatibility == ALIAS_ADAPTER or not any(_alias(n) for n in members),
             "bundle_legacy_alias_requires_explicit_adapter")
-    archive = bundle_path.parent/"primary.tar.xz"
+    from .external_archive import locate
+    archive = locate(bundle_path.parent/"primary.tar.xz")
     before = archive.stat()
     require(type(bundle.get("archive_bytes")) is int and bundle["archive_bytes"] == before.st_size
             and type(bundle.get("archive_sha256")) is str and _sha(archive) == bundle["archive_sha256"],
