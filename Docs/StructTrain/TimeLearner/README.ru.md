@@ -6,6 +6,7 @@
 
 [Branch N0: измеренный поиск длины,32 frozen probes и отрицательная разделимость](N0BranchLengthScientificReport-20261115.ru.md),
 [Branch N0: локальный бюджет12, переход к input1 и5 ambiguous кандидатов](N0LocalBudget12ScientificReport-20261115.ru.md).
+[Все32 frozen пробы: полная временная галерея](N0BranchLengthFrozenReport-20261115.json), [дополнительные Soma/LT масштабы](N0BranchLengthPositiveReport-20261115.json).
 
 [Classic cold4: результат и12 проверенных временных графиков](ClassicCoupledCold4ScientificReport-20261114.ru.md),
 [Branch: локальная нормализация и последующая неоднозначность](N1CoupledScientificReport-20261113.ru.md),

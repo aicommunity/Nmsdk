@@ -1,0 +1,721 @@
+{
+  "kind": "n0_length_paired_frozen_temporal_report",
+  "schema_version": 1,
+  "archive": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/8d/8dc138bc2b6d1697663b59a7314b445815a2758a4c69e0e95ea6ed60ee599b51",
+    "sha256": "8dc138bc2b6d1697663b59a7314b445815a2758a4c69e0e95ea6ed60ee599b51",
+    "bytes": 448325990
+  },
+  "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-15/n0-branch-length-frozen",
+  "source_job": "s11-n0-length-frozen-report-m40-a1",
+  "source_root": "8237dd5d459fbce7511042571a80204d1f7aa263",
+  "conditions": [
+    {
+      "run": "baseline-wave100",
+      "role": "baseline",
+      "threshold": 100,
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0,
+        "foil_response_rate": 0
+      },
+      "trial_soma_pairs": 8,
+      "views": 496,
+      "native_tick_pixels_min": 14.208
+    },
+    {
+      "run": "baseline-fixed00117",
+      "role": "baseline",
+      "threshold": 0.0117,
+      "counts": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 1,
+        "accuracy": 0.125,
+        "target_hit_rate": 1,
+        "foil_response_rate": 1
+      },
+      "trial_soma_pairs": 8,
+      "views": 489,
+      "native_tick_pixels_min": 14.208
+    },
+    {
+      "run": "candidate-wave100",
+      "role": "candidate",
+      "threshold": 100,
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0,
+        "foil_response_rate": 0
+      },
+      "trial_soma_pairs": 8,
+      "views": 503,
+      "native_tick_pixels_min": 14.208
+    },
+    {
+      "run": "candidate-fixed00117",
+      "role": "candidate",
+      "threshold": 0.0117,
+      "counts": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 1,
+        "accuracy": 0.125,
+        "target_hit_rate": 1,
+        "foil_response_rate": 1
+      },
+      "trial_soma_pairs": 8,
+      "views": 495,
+      "native_tick_pixels_min": 14.208
+    }
+  ],
+  "selected": [
+    {
+      "run": "baseline-wave100",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "overview",
+      "file": "baseline-wave100/trial-0000-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/88/88a94d2d5debf9b8bb10ad8072a5cdb846abf9ff328db98d1aead2a130d23390",
+        "sha256": "88a94d2d5debf9b8bb10ad8072a5cdb846abf9ff328db98d1aead2a130d23390",
+        "bytes": 160417
+      }
+    },
+    {
+      "run": "baseline-wave100",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "zoom-001",
+      "time_focus": 0.018,
+      "file": "baseline-wave100/trial-0000-soma-001/zoom-001.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/10/10e6f3f88b2a9e95b790297207fa912250164b957c9aed40a602ac507da4100e",
+        "sha256": "10e6f3f88b2a9e95b790297207fa912250164b957c9aed40a602ac507da4100e",
+        "bytes": 143870
+      }
+    },
+    {
+      "run": "baseline-wave100",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "zoom-010",
+      "time_focus": 0.4915,
+      "file": "baseline-wave100/trial-0000-soma-001/zoom-010.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/09/092772c924c2cb3c2ea7f6bb029201cde8c6c804b0a032fddffe6d2e7a233940",
+        "sha256": "092772c924c2cb3c2ea7f6bb029201cde8c6c804b0a032fddffe6d2e7a233940",
+        "bytes": 137657
+      }
+    },
+    {
+      "run": "baseline-wave100",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-wave100/trial-0001-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a2/a27dff2c50557da0a08b7594f10258359157681d2590431356d10103ab702a2a",
+        "sha256": "a27dff2c50557da0a08b7594f10258359157681d2590431356d10103ab702a2a",
+        "bytes": 158249
+      }
+    },
+    {
+      "run": "baseline-wave100",
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-wave100/trial-0002-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/3f/3f7fbee6ca52b5842e873d73aabcafd862f93880296b2cc29c0daa725e637ebc",
+        "sha256": "3f7fbee6ca52b5842e873d73aabcafd862f93880296b2cc29c0daa725e637ebc",
+        "bytes": 159767
+      }
+    },
+    {
+      "run": "baseline-wave100",
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-wave100/trial-0003-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/56/56e27cda0089e83a81634747ceaa9d1888a43f7c8d358adf827138712cbbc77d",
+        "sha256": "56e27cda0089e83a81634747ceaa9d1888a43f7c8d358adf827138712cbbc77d",
+        "bytes": 155481
+      }
+    },
+    {
+      "run": "baseline-wave100",
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-wave100/trial-0004-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/63/63fc94545f36932dffe738b20831f67935f41cf24bbab14d1a99aa9d7cd9f3d9",
+        "sha256": "63fc94545f36932dffe738b20831f67935f41cf24bbab14d1a99aa9d7cd9f3d9",
+        "bytes": 162749
+      }
+    },
+    {
+      "run": "baseline-wave100",
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-wave100/trial-0005-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/3e/3ee954f9104cebe5e3c2644e8c34b009f0a27f47a9d8d3eb2aafedba6dacd0be",
+        "sha256": "3ee954f9104cebe5e3c2644e8c34b009f0a27f47a9d8d3eb2aafedba6dacd0be",
+        "bytes": 161066
+      }
+    },
+    {
+      "run": "baseline-wave100",
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-wave100/trial-0006-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f1/f11412ea2f392bbed2688f880f6e93eabec22e218c2f9adaa1050b7537f53f4d",
+        "sha256": "f11412ea2f392bbed2688f880f6e93eabec22e218c2f9adaa1050b7537f53f4d",
+        "bytes": 159720
+      }
+    },
+    {
+      "run": "baseline-wave100",
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-wave100/trial-0007-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/44/44d72d17743df6b493a68ff706f652ffddcf8e30409c917fe42ddbb69ba1113f",
+        "sha256": "44d72d17743df6b493a68ff706f652ffddcf8e30409c917fe42ddbb69ba1113f",
+        "bytes": 160592
+      }
+    },
+    {
+      "run": "baseline-fixed00117",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "overview",
+      "file": "baseline-fixed00117/trial-0000-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/15/154b4387820988f3c4d32799c036d2b4cf7326d18ac14109b62286e5ef22496d",
+        "sha256": "154b4387820988f3c4d32799c036d2b4cf7326d18ac14109b62286e5ef22496d",
+        "bytes": 168019
+      }
+    },
+    {
+      "run": "baseline-fixed00117",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "zoom-001",
+      "time_focus": 0.018,
+      "file": "baseline-fixed00117/trial-0000-soma-001/zoom-001.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/41/41c5b83822a475dae78143eb3ed9f6d29efab0edfa44b462c44176153e3ce089",
+        "sha256": "41c5b83822a475dae78143eb3ed9f6d29efab0edfa44b462c44176153e3ce089",
+        "bytes": 148733
+      }
+    },
+    {
+      "run": "baseline-fixed00117",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "zoom-010",
+      "time_focus": 0.4915,
+      "file": "baseline-fixed00117/trial-0000-soma-001/zoom-010.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/36/36e339dff5e2895ac107ed18d269db03327387f2aad858b0abd35a394a6e9764",
+        "sha256": "36e339dff5e2895ac107ed18d269db03327387f2aad858b0abd35a394a6e9764",
+        "bytes": 144438
+      }
+    },
+    {
+      "run": "baseline-fixed00117",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-fixed00117/trial-0001-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/07/07f2dc5beaa60d24d531af6fa3fbd41305facaded6c33e1b2992d40506383c5e",
+        "sha256": "07f2dc5beaa60d24d531af6fa3fbd41305facaded6c33e1b2992d40506383c5e",
+        "bytes": 172478
+      }
+    },
+    {
+      "run": "baseline-fixed00117",
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-fixed00117/trial-0002-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/4d/4d8f62ec8cba729717175bebe9a8cc8c8be1e496611e55c2bb021d1653a3d295",
+        "sha256": "4d8f62ec8cba729717175bebe9a8cc8c8be1e496611e55c2bb021d1653a3d295",
+        "bytes": 168486
+      }
+    },
+    {
+      "run": "baseline-fixed00117",
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-fixed00117/trial-0003-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/40/40de719e1905053a93474445df7a0e9885aeb83a675857007ae7322fe5c6a55e",
+        "sha256": "40de719e1905053a93474445df7a0e9885aeb83a675857007ae7322fe5c6a55e",
+        "bytes": 156747
+      }
+    },
+    {
+      "run": "baseline-fixed00117",
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-fixed00117/trial-0004-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/e2/e2c97f3d7125e719654551c74da2daa4b966e3914c2a3dc8bf619e4550667d1c",
+        "sha256": "e2c97f3d7125e719654551c74da2daa4b966e3914c2a3dc8bf619e4550667d1c",
+        "bytes": 164578
+      }
+    },
+    {
+      "run": "baseline-fixed00117",
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-fixed00117/trial-0005-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/71/7171eea2b5d4692698e4d891f73f371b2d91a7039c1f8104cb0a4e2745d159c5",
+        "sha256": "7171eea2b5d4692698e4d891f73f371b2d91a7039c1f8104cb0a4e2745d159c5",
+        "bytes": 172023
+      }
+    },
+    {
+      "run": "baseline-fixed00117",
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-fixed00117/trial-0006-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/76/76376defacc7e5a4e3f3b10821a4652a3ad176115f3be4b4830747f46b5c753b",
+        "sha256": "76376defacc7e5a4e3f3b10821a4652a3ad176115f3be4b4830747f46b5c753b",
+        "bytes": 175862
+      }
+    },
+    {
+      "run": "baseline-fixed00117",
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "view": "overview",
+      "file": "baseline-fixed00117/trial-0007-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a8/a88537a78e5f5aed50369ee289447be53e71a6d9a06c689d74cc1ae09916fcf6",
+        "sha256": "a88537a78e5f5aed50369ee289447be53e71a6d9a06c689d74cc1ae09916fcf6",
+        "bytes": 176717
+      }
+    },
+    {
+      "run": "candidate-wave100",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "overview",
+      "file": "candidate-wave100/trial-0000-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ef/ef63e5c5b60a193d0edfd678b2928532db76665d9e11fbae573660b13703dc94",
+        "sha256": "ef63e5c5b60a193d0edfd678b2928532db76665d9e11fbae573660b13703dc94",
+        "bytes": 161504
+      }
+    },
+    {
+      "run": "candidate-wave100",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "zoom-001",
+      "time_focus": 0.018,
+      "file": "candidate-wave100/trial-0000-soma-001/zoom-001.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/2a/2a0124f90e30bd51c5f34d1d3e7561f107f5b7857c887e5e8cfdbb1e3f7dfdaf",
+        "sha256": "2a0124f90e30bd51c5f34d1d3e7561f107f5b7857c887e5e8cfdbb1e3f7dfdaf",
+        "bytes": 145704
+      }
+    },
+    {
+      "run": "candidate-wave100",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "zoom-010",
+      "time_focus": 0.4915,
+      "file": "candidate-wave100/trial-0000-soma-001/zoom-010.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/fd/fd1a70bd297eb1c092602ea528c4f74441bbb7355b42f47a21c132caa631e887",
+        "sha256": "fd1a70bd297eb1c092602ea528c4f74441bbb7355b42f47a21c132caa631e887",
+        "bytes": 138404
+      }
+    },
+    {
+      "run": "candidate-wave100",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-wave100/trial-0001-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/2d/2decfa9efa0d95194a17b0b9bd7f12ef9fc5d05a2b87456169305abfafd7c6c6",
+        "sha256": "2decfa9efa0d95194a17b0b9bd7f12ef9fc5d05a2b87456169305abfafd7c6c6",
+        "bytes": 159666
+      }
+    },
+    {
+      "run": "candidate-wave100",
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-wave100/trial-0002-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/fb/fb722273c3c713ee061a5b11fbaf4e1ff7ddd038e58840ea9371e7a4f56182e2",
+        "sha256": "fb722273c3c713ee061a5b11fbaf4e1ff7ddd038e58840ea9371e7a4f56182e2",
+        "bytes": 161685
+      }
+    },
+    {
+      "run": "candidate-wave100",
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-wave100/trial-0003-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6d/6d48852dc523ecb04038e3790f9f3d27d6523710161cfa6a03d41f651e274176",
+        "sha256": "6d48852dc523ecb04038e3790f9f3d27d6523710161cfa6a03d41f651e274176",
+        "bytes": 156976
+      }
+    },
+    {
+      "run": "candidate-wave100",
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-wave100/trial-0004-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b5/b5781b016bbded7db2b048df242c9262a07f156cdc2087506eebe1971ef74247",
+        "sha256": "b5781b016bbded7db2b048df242c9262a07f156cdc2087506eebe1971ef74247",
+        "bytes": 163860
+      }
+    },
+    {
+      "run": "candidate-wave100",
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-wave100/trial-0005-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ff/ffadf7c7a8f8656c4ff590c76ee810732204dc4337c9b844f7ad8267aefebe2a",
+        "sha256": "ffadf7c7a8f8656c4ff590c76ee810732204dc4337c9b844f7ad8267aefebe2a",
+        "bytes": 162187
+      }
+    },
+    {
+      "run": "candidate-wave100",
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-wave100/trial-0006-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/25/25f28f3a350d15fb34c5d7ec001dda1083cea2ef529fbd28757cc8a524eb076a",
+        "sha256": "25f28f3a350d15fb34c5d7ec001dda1083cea2ef529fbd28757cc8a524eb076a",
+        "bytes": 161100
+      }
+    },
+    {
+      "run": "candidate-wave100",
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-wave100/trial-0007-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/64/64e92a43468514e22c2663986b2b24db3f131a5300a8c7e78e0149224d22a476",
+        "sha256": "64e92a43468514e22c2663986b2b24db3f131a5300a8c7e78e0149224d22a476",
+        "bytes": 161920
+      }
+    },
+    {
+      "run": "candidate-fixed00117",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "overview",
+      "file": "candidate-fixed00117/trial-0000-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a5/a5a23f1d23e8db3920594f62863d4c7df75c82b286bc8e9ce43a81f611e24bcb",
+        "sha256": "a5a23f1d23e8db3920594f62863d4c7df75c82b286bc8e9ce43a81f611e24bcb",
+        "bytes": 168744
+      }
+    },
+    {
+      "run": "candidate-fixed00117",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "zoom-001",
+      "time_focus": 0.018,
+      "file": "candidate-fixed00117/trial-0000-soma-001/zoom-001.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/00/008ae82fc65ed5e06c6e17a5a6eea9d869f259ccf75bbe0587e2fd121a186bfb",
+        "sha256": "008ae82fc65ed5e06c6e17a5a6eea9d869f259ccf75bbe0587e2fd121a186bfb",
+        "bytes": 148543
+      }
+    },
+    {
+      "run": "candidate-fixed00117",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "view": "zoom-010",
+      "time_focus": 0.4915,
+      "file": "candidate-fixed00117/trial-0000-soma-001/zoom-010.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/9e/9e075742196e53777b9c132a3bafffdc80db5274bc16412607ffe63cf68431bf",
+        "sha256": "9e075742196e53777b9c132a3bafffdc80db5274bc16412607ffe63cf68431bf",
+        "bytes": 143138
+      }
+    },
+    {
+      "run": "candidate-fixed00117",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-fixed00117/trial-0001-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/52/52e7003efeefdb2a729c9a4d06a912f48de688d02333827eafa6abe7cf55faaf",
+        "sha256": "52e7003efeefdb2a729c9a4d06a912f48de688d02333827eafa6abe7cf55faaf",
+        "bytes": 172348
+      }
+    },
+    {
+      "run": "candidate-fixed00117",
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-fixed00117/trial-0002-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/82/82d528039dea17cf92cba6e9855929b10b36acb2e7dd07cd9b7867da39ce5ea3",
+        "sha256": "82d528039dea17cf92cba6e9855929b10b36acb2e7dd07cd9b7867da39ce5ea3",
+        "bytes": 169012
+      }
+    },
+    {
+      "run": "candidate-fixed00117",
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-fixed00117/trial-0003-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/d9/d9f54c62122fa08d2175c4c317eb02d6af1b1dab50e1ee904ecfdba7273c56e5",
+        "sha256": "d9f54c62122fa08d2175c4c317eb02d6af1b1dab50e1ee904ecfdba7273c56e5",
+        "bytes": 157486
+      }
+    },
+    {
+      "run": "candidate-fixed00117",
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-fixed00117/trial-0004-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/1f/1f1c853af93ea455e0b8a962d562c0d9553ac6146e1627816cf8cdcc472d42e5",
+        "sha256": "1f1c853af93ea455e0b8a962d562c0d9553ac6146e1627816cf8cdcc472d42e5",
+        "bytes": 164812
+      }
+    },
+    {
+      "run": "candidate-fixed00117",
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-fixed00117/trial-0005-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/e6/e628784afa839734d21cef0423b0e80881d2e7d9fb478ffc151c2a9f8084c412",
+        "sha256": "e628784afa839734d21cef0423b0e80881d2e7d9fb478ffc151c2a9f8084c412",
+        "bytes": 170553
+      }
+    },
+    {
+      "run": "candidate-fixed00117",
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-fixed00117/trial-0006-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/d4/d434c54d72fedc0cacd58b0b7d682d15a8105c0f5ed5d31825caad4ccfbbede8",
+        "sha256": "d434c54d72fedc0cacd58b0b7d682d15a8105c0f5ed5d31825caad4ccfbbede8",
+        "bytes": 175124
+      }
+    },
+    {
+      "run": "candidate-fixed00117",
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "view": "overview",
+      "file": "candidate-fixed00117/trial-0007-soma-001/overview.png",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/8b/8b0d626557fb1b306c73c898dd6c9efa6f5fdc9ac04d0be2cdb5df46e71f06e5",
+        "sha256": "8b0d626557fb1b306c73c898dd6c9efa6f5fdc9ac04d0be2cdb5df46e71f06e5",
+        "bytes": 176506
+      }
+    }
+  ],
+  "total_png": 1995,
+  "trials": 32,
+  "all_processes_closed": true,
+  "validation_tests_passed": 1,
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null,
+  "source_wrapper_failures_retained": true,
+  "layout_adjustment": "Case HTML original1920px width; per-case index hash updated; source PNG/SVG/PDF/primary unchanged.",
+  "manual_visual_review": {
+    "overviews": 6,
+    "native_zooms": 2,
+    "all_32_trials_manually_accepted": false,
+    "total_png": 1995
+  }
+}

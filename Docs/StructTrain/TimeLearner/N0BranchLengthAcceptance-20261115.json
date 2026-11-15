@@ -133,7 +133,7 @@
       "files": 68
     }
   },
-  "documentation_pulse": "0841554de4499cd6fe1479002fc4171ba6cbe5e0",
+  "documentation_pulse": "ea7a6c397a3475fafd20181fdb34fa3535b05d97",
   "executed_core_tree": "489559ab94c04ae2ab9365ef753fd2184788d085",
   "model_spec_readback": {
     "neuron_class": "NSPNeuronGen",
@@ -146,7 +146,7 @@
     "initial_resistance": 86000000
   },
   "frozen_evaluation": {
-    "status": "32_native_trials_completed_valid_original_wrappers_failed_readonly_revalidation_running",
+    "status": "32_native_trials_completed_valid_original_wrappers_failed_separate_readonly_revalidation_passed_and_closed",
     "models": [
       "baseline",
       "candidate"
@@ -177,7 +177,31 @@
     "native_trials": 32,
     "metrics_catalog": "N0BranchLengthFrozen-20261115.json",
     "read_only_revalidation_job": "s11-n0-length-frozen-report-m40-a1",
-    "primary_catalog": "N0BranchLengthFrozenPrimary-20261115.json"
+    "primary_catalog": "N0BranchLengthFrozenPrimary-20261115.json",
+    "read_only_revalidation": {
+      "tests_passed": 1,
+      "all_processes_closed": true,
+      "new_native_execution": false,
+      "source_root": "8237dd5d459fbce7511042571a80204d1f7aa263"
+    },
+    "temporal_report": {
+      "catalog": "N0BranchLengthFrozenReport-20261115.json",
+      "png": 1995,
+      "trials": 32,
+      "manually_inspected_overviews": 6,
+      "manually_inspected_native_zooms": 2,
+      "visual_acceptance_complete": false
+    },
+    "positive_response_companion": {
+      "catalog": "N0BranchLengthPositiveReport-20261115.json",
+      "tests_passed": 1,
+      "all_processes_closed": true,
+      "new_native_execution": false,
+      "figure_groups": 48,
+      "trials": 16,
+      "manually_inspected_selected": 8,
+      "visual_acceptance_complete": false
+    }
   },
   "sdk_source_root_a1": "22e0f4cb171a9d7affe94164e517df6d054742c6",
   "training_temporal_report": {
@@ -222,5 +246,7 @@
       "selected_overviews_inspected": 3,
       "visual_acceptance_complete": false
     }
-  }
+  },
+  "pulse_develop_merge": "64f452ec7538d3fba1eff0334e00803e4fab82d3",
+  "scope": "Accepted measured-length proposal substage only; original plan stages1-12 remain partial, no converged model or scientific PASS."
 }
