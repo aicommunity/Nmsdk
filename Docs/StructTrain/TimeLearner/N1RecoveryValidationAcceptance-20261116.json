@@ -1,0 +1,94 @@
+{
+  "kind": "timelearner_n1_rejected_search_scoped_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "baseline": {
+    "root": "47d67e8fa0d8ea9e2cf61e49ad7e7019dd91c50f",
+    "pulse": "5052cfe1683ca38920b514aedfc3c37f4bd41aef"
+  },
+  "candidate": {
+    "root": "860ee87057196f0afb5b3a98cbd0bdacf378543a",
+    "pulse": "42e35b63b6c25f59629f0436b9476a35d20cb2c4"
+  },
+  "native": {
+    "worker": "M40",
+    "sdk_job": "s07-n1-recovery-candidate-sdk-m40-a1",
+    "passed": 147,
+    "expected": 147,
+    "all_processes_closed": true,
+    "record_errors": [],
+    "new_addressed_cases": 5,
+    "baseline_counterexample_job": "s07-n1-recovery-baseline-counterexamples-m40-a1",
+    "baseline_expected_native_failures": 5,
+    "original_baseline_sdk_passed": false
+  },
+  "kernel": {
+    "worker": "Elder-1",
+    "job": "s07-n1-recovery-kernel-elder-a4",
+    "same_original_source_corpus": true,
+    "before_passed": 109,
+    "after_passed": 109,
+    "all_processes_closed": true,
+    "native_rdk_integration_verified": false,
+    "actual_loaded_library_capture": false,
+    "early_failed_attempts_retained": [
+      "a1",
+      "a2",
+      "a3"
+    ]
+  },
+  "primary": {
+    "m40": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/04/0451fd666029e619d70bb1450b23c8338bdef29f3268c15e9a25997b1ff75a4d",
+      "sha256": "0451fd666029e619d70bb1450b23c8338bdef29f3268c15e9a25997b1ff75a4d",
+      "bytes": 28448514
+    },
+    "elder": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/3b/3baab610075685040e07cf05dd5263d8ba0c55d6ccd2e01234848bf08237ffc2",
+      "sha256": "3baab610075685040e07cf05dd5263d8ba0c55d6ccd2e01234848bf08237ffc2",
+      "bytes": 5178089
+    }
+  },
+  "scientific_followup": {
+    "job": "s11-uniform-profile0-N1-recovery-train-m40-a1",
+    "control_commit": "3d1768eb42a600dfed71514645241ce9efa297b1",
+    "execution": "completed",
+    "same_complete_job_except_run_id": true,
+    "same_scientific_tolerances_and_budgets": true,
+    "training_outcome": "budget_exhausted",
+    "classification_assessed": false,
+    "validity": "valid",
+    "all_processes_closed": true,
+    "training_reason": "native_composite_group_time_budget_exhausted",
+    "consumed_scalar_candidates": 22,
+    "jointly_ready_candidates": 1,
+    "exact_scalar_prefix_with_baseline": 22,
+    "training_certificate": null,
+    "terminal_has_scalar": false,
+    "terminal_group": {
+      "ordinal": 53,
+      "input_index": 3,
+      "measurement": null
+    },
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/45/45aa3d1db8fdc2600ac438f304d5ad0ab199b136fea6cb71553f7413a0c3782c",
+      "sha256": "45aa3d1db8fdc2600ac438f304d5ad0ab199b136fea6cb71553f7413a0c3782c",
+      "bytes": 47478203
+    },
+    "primary_files": 1123,
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-16/n1-recovery-coverage/stock-N1-recovery-train-a1.json",
+    "temporal_report_status": "not_yet_built"
+  },
+  "scientific_verdict": "No improvement in measured candidate count or all-input convergence; changed recovery proposals require further scientific evaluation.",
+  "whole_plan_complete": false,
+  "stage7_complete": false
+}

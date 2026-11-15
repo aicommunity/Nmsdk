@@ -1,0 +1,124 @@
+{
+  "kind": "timelearner_fast_profile_cold_N1_wall_budget_scientific_evidence",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "cases": {
+    "wall1800": {
+      "job": "s11-uniform-profile3-N1-train-m40-a2",
+      "native_wall_seconds": 1800,
+      "scalar_candidates": 16,
+      "timing_ready": 1,
+      "jointly_ready": 0,
+      "outcome": "budget_exhausted"
+    },
+    "wall3600": {
+      "job": "s11-uniform-profile3-N1-train-m40-a3",
+      "native_wall_seconds": 3600,
+      "scalar_candidates": 20,
+      "timing_ready": 5,
+      "jointly_ready": 0,
+      "outcome": "budget_exhausted",
+      "producer_passed": true,
+      "full_data_and_physics_accepted": true,
+      "all_processes_closed": true,
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/7d/7d9c5bf2e527cd5955d3ea1cf39a173b5233237c6af332bf0baa48f425cd687e",
+        "sha256": "7d9c5bf2e527cd5955d3ea1cf39a173b5233237c6af332bf0baa48f425cd687e",
+        "bytes": 28108316
+      },
+      "primary_files": 982
+    }
+  },
+  "same_runtime": {
+    "root": "cfcfd327b0b809ebeee1e5abf049c1661d17a860",
+    "pulse": "5052cfe1683ca38920b514aedfc3c37f4bd41aef"
+  },
+  "same_scientific_configuration_except_declared_wall_and_run_id": true,
+  "exact_numeric_scalar_prefix": 16,
+  "reference_raw_potentials_equal": true,
+  "last_complete_measurement": {
+    "input": 2,
+    "L": [
+      122,
+      122,
+      121,
+      1
+    ],
+    "Rs": [
+      86000000,
+      86000000,
+      10871143.923391603,
+      86000000
+    ],
+    "amplitude_residual": -0.0023612200739181466,
+    "timing_residual": -0.00050000000004502
+  },
+  "terminal": {
+    "L": [
+      122,
+      122,
+      121,
+      1
+    ],
+    "Rs": [
+      86000000,
+      86000000,
+      9772503.178596893,
+      86000000
+    ],
+    "has_consumed_scalar": false,
+    "certificate": null
+  },
+  "report": {
+    "job": "s11-fast-profile-wall-report-m40-a1",
+    "source": "60b617e4c6de4db5fce9783239225701810e72a6",
+    "control_commit": "9313e9599b3578e59c986dd059ded91d7524d27e",
+    "operation_passed": true,
+    "all_processes_closed": true,
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/13/13bf49daf89ce8050237aff1be50d768276932ac179a59677eebed597a55004b",
+      "sha256": "13bf49daf89ce8050237aff1be50d768276932ac179a59677eebed597a55004b",
+      "bytes": 13791668
+    },
+    "files": 123,
+    "png_figures": 24,
+    "selected_groups": {
+      "wall1800": [
+        4,
+        36,
+        37
+      ],
+      "wall3600": [
+        4,
+        44,
+        46
+      ]
+    },
+    "minimum_native_tick_pixels": 22.46399999999998,
+    "manually_reviewed_overviews": {
+      "wall1800": [
+        4,
+        36,
+        37
+      ],
+      "wall3600": [
+        4,
+        44,
+        46
+      ]
+    },
+    "all_figures_manually_reviewed": false,
+    "visual_acceptance_complete": false,
+    "cache": "//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/fast-profile-wall-budget/index.html"
+  },
+  "new_N1_recovery_code_assessed_by_this_study": false,
+  "classification_assessed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

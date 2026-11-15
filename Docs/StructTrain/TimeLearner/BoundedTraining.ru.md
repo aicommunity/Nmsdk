@@ -119,3 +119,9 @@ declared individual bounds с effective interval и учитывает shared ba
 кандидата принят адресно: [контракт, baseline и обе серверные проверки](N0CandidateOrdering.ru.md).
 Это изменение порядка ограниченного исследования, не новая амплитудная цель
 и не доказательство глобальной сходимости. Полный stage7 остаётся открытым.
+
+## N1 после sealed rejected-window:16.11.2026
+
+[Контракт и псевдокод PulseLib](../../../Libraries/Nmsdk-PulseLib/Docs/TimeLearner/N1RejectedCandidateCoverage.ru.md): первый recovery проверяет допустимый независимый Rs при той же длине; последующие покрывают неиспытанные legal L. Каждый полный граф требует нового native domain, apply/readback и свежего anchor. Singleton с уже испытанным полным вектором разрешает один domain-only fallback. Невалидная вершина не становится residual; допуски и бюджеты не меняются, N0 и valid N1 scheduling сохранены.
+
+Пять контрпримеров подтверждены на прежнем коде, те же пять и весь147-case native SDK проходят на кандидате; Elder109/109 до/после проверяет прежний общий корпус. [Источники, оставшиеся ограничения и отдельный cold Train](N1RecoveryAndFastAmplitude-20261115.ru.md). Полная матрица stage7 не закрыта; завершение процесса и число инженерных PASS не являются сертификатом обучения.

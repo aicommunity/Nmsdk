@@ -1,3 +1,5 @@
+> 16.11, обновление после завершения Stock: [актуальная сводка полного плана](CurrentStatus-20261116.ru.md). Новый same-condition cold Branch N1 на исправленной реализации завершён и принят CLI/DATA/physical;22 scalar measurements совпали с baseline,1 locally jointly-ready input2, сертификата нет. После изменения recovery модель остановилась по времени контрольной группы; terminal measurement неполная. Primary47.48MB сохранён во внешнем архиве M40, собственный сравнительный временной отчёт ещё не построен. SDK147/147 и Elder109/109 до/после подтверждают адресную реализацию, а не сходимость.
+
 > 15.11: [новая пара cold Branch N1 на исходном и C/4+fast storage-профилях завершена](FastProfilePhysicsScientificReport-20261115.ru.md). Оба production CLI/DATA/physical1/1 приняты, процессы закрыты. Исходный:22 scalar candidates,1 locally jointly-ready input2, затем ambiguous input1. Быстрый:16 candidates, timing-ready L121, амплитуда вне допуска, BudgetExhausted. Сертификатов нет; классификация этой пары не проверялась. [Отчёт28 временных видов готов](FastProfilePhysicsAcceptance-20261115.json),7 overview просмотрены, primary и галерея только в external M40 CAS. Исправлены профильная привязка окон и renderer reference_time; [следующий адресный алгоритмический вопрос — N1 rejected-search coverage](N1RejectedSearchCoverage-20261115.ru.md). Это частичная приёмка этапов4/7/11, не завершение исходного плана.
 
 > Текущий подэтап15.11: [сравнительный cold Branch N0 Train завершён](N0RecoveryCoverageScientificReport-20261115.ru.md). Порядок после rejected-window действительно изменился28..32→28,100,64,46,82 при тех же настройках; все5 input1 observations ambiguous, certificate=null. Первые13 scalar measurements совпали. Production CLI/DATA/physical1/1, read-only report1/1 и SDK142/142 приняты с закрытием процессов. [16 временных видов](N0RecoveryCoverageTemporalReport-20261115.json),4 overview просмотрены. Primary и галерея сохранены во внешнем архиве M40, в Git только проверяемые ссылки. Новый8-pattern Test не выполнялся; полный план остаётся частичным.
@@ -8,7 +10,7 @@
 
 > Действующая политика с 14.11.2026: тяжёлые результаты и полные галереи хранятся в [архиве M40](ExternalExperimentArchive.ru.md), в Git — код, настройки, компактные метаданные и проверяемые `*.archive.json`. Указания ниже о сохранении primary/изображений непосредственно в Git описывают прежний снимок и больше не применяются к новым публикациям. Исходные научные наблюдения и контрольные суммы пакетов сохраняются.
 
-# Состояние реализации TimeLearner — 15.11.2026
+# Состояние реализации TimeLearner — 16.11.2026
 
 [Весь новый Classic cold4 primary независимо восстановлен и проанализирован на Elder](ValidationPlans/ElderClassicCold4PrimaryReplayA2-20261114/RESULT.ru.md):1/1 PASS,910 logical members, corrupted-extracted-CSV refusal.14 measured candidates/0 jointly-ready и invalid_observation сохранены; нового нейронного исполнения нет.
 
