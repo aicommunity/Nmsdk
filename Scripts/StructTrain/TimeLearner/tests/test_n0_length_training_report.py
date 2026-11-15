@@ -5,14 +5,42 @@ import unittest
 
 from ..composite_training_temporal import render
 from ..native_calibration_worker import _write
-from ..native_evidence import load
+from ..native_evidence import load, require
 
 
 class N0LengthTrainingReportTest(unittest.TestCase):
     def test_shared_prefix_divergence_and_best_measured_groups(self):
         from PIL import Image
-        roots = {role: Path(os.environ['TIMELEARNER_N0_LENGTH_REPORT_'+role.upper()]).resolve(strict=True)
-                 for role in ('before', 'after')}
+        binding = os.environ.get('TIMELEARNER_N0_LENGTH_TRAINING_ARCHIVE_CONTROLS')
+        if binding:
+            from ..external_archive import materialize
+            from ..portable_primary import ALIAS_ADAPTER, restore_native_bundle
+            controls = Path(binding).resolve(strict=True)
+            declaration = load(controls/'declaration.json')
+            require(set(declaration) == {'archives', 'native_paths'} and
+                    set(declaration['archives']) == set(declaration['native_paths']) == {'before', 'after'},
+                    'n0_length_training_archive_declaration')
+            roots = {}
+            for role in ('before', 'after'):
+                cache = Path(os.environ['TMPDIR'])/('N0-length-'+role+'-restoration')
+                cache.mkdir(exist_ok=False)
+                refs = declaration['archives'][role]
+                require(set(refs) == {'archive', 'manifest'}, 'n0_length_training_archive_references')
+                materialize(refs['manifest'], cache/'bundle.json')
+                _write(cache/'primary.tar.xz.archive.json', refs['archive'])
+                restored = cache/'restored'
+                proof = restore_native_bundle(cache/'bundle.json', restored, compatibility=ALIAS_ADAPTER)
+                self.assertFalse(proof['source_archive_modified'])
+                self.assertFalse(proof['native_execution_attested'])
+                relative = Path(declaration['native_paths'][role])
+                require(not relative.is_absolute() and '..' not in relative.parts,
+                        'n0_length_training_native_path')
+                roots[role] = (restored/relative).resolve(strict=True)
+                self.assertTrue(roots[role].is_relative_to(restored))
+                _write(cache/'restoration.json', proof)
+        else:
+            roots = {role: Path(os.environ['TIMELEARNER_N0_LENGTH_REPORT_'+role.upper()]).resolve(strict=True)
+                     for role in ('before', 'after')}
         summaries = {role: load(root/'train_stopped_summary.json') for role, root in roots.items()}
         fields = ('input_index', 'full_parameters', 'parameters', 'amplitude_residual',
                   'timing_low', 'timing_high', 'within_amplitude', 'within_timing')
