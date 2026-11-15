@@ -5,7 +5,7 @@
   "baseline_root": "d074fdf1b6b9d5f196fc4e4d366a94e31f94763c",
   "candidate_root": "a8c5a59f3525c05e6da38f16c55c675152ebb85b",
   "candidate_pulse": "5fc6bb4131d49f8ef884f82ccede66270e9d0c5c",
-  "sdk_source_root": "22e0f4cb171a9d7affe94164e517df6d054742c6",
+  "sdk_source_root": "549fba9761e4f4be1a9861736170e182cb3567f4",
   "worker": "M40",
   "controller_ab": {
     "same_test_sources": true,
@@ -86,7 +86,7 @@
       }
     }
   },
-  "native_model_train": "not_started",
+  "native_model_train": "completed_valid_budget_exhausted_no_certificate",
   "scientific_verdict": null,
   "workers": {
     "M40": {
@@ -161,5 +161,24 @@
     "reject_target_outside_window": true,
     "diagnostic_only": true,
     "scientific_verdict": null
+  },
+  "sdk_source_root_a1": "22e0f4cb171a9d7affe94164e517df6d054742c6",
+  "training_temporal_report": {
+    "status": "completed_passed_and_closed",
+    "worker": "Elder-1",
+    "tests_passed": 1,
+    "independent_primary_restore": true,
+    "figures": 24,
+    "catalog": "N0BranchLengthTrainingReport-20261115.json",
+    "manual_visual_scope": "6 selected overviews (5 unique) plus one boundary-native view; not all24",
+    "visual_acceptance_complete": false
+  },
+  "follow_up": {
+    "job": "s11-n0-local-budget12-train-m40-a1",
+    "status": "running",
+    "changed_factor": "maximum_candidates_per_input128_to12",
+    "exploratory_after_previous_data": true,
+    "original_tolerances_preserved": true,
+    "global_budgets_preserved": true
   }
 }
