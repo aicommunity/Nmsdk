@@ -45,7 +45,7 @@ class UniformProfileTrainingReportTest(unittest.TestCase):
             def rank(c):
                 timing=max(abs(c['timing_low']),abs(c['timing_high']))/tol['sync']
                 amplitude=abs(c['amplitude_residual'])/tol['amplitude_absolute']
-                return (max(0.,timing-1.),max(0.,amplitude-1.),timing+amplitude)
+                return (not c['within_timing'],not c['within_amplitude'],timing+amplitude)
             best={}
             for i in sorted({c['input_index'] for c in candidates}):
                 c=min((c for c in candidates if c['input_index']==i),key=rank)
@@ -61,7 +61,8 @@ class UniformProfileTrainingReportTest(unittest.TestCase):
                 reference_complete=summary['reference_complete'],references=summary['references'],
                 actual_parameters=summary['actual_parameters'],accepted_parameters=summary['accepted_parameters'],
                 search_probes=summary['search_probes'],applied_edits=summary['applied_edits'],
-                composite_counters=summary['composite_counters'],best_measured_by_input=best,
+                composite_counters=summary['composite_counters'],selected_measured_by_input=best,
+                report_selection_rank='outside timing, outside amplitude, normalized sum, first observed tie; controller edit cost not replayed',
                 all_scalar_candidates=candidates,rejections=summary['rejections'],
                 resistance_domains=summary['resistance_domains'],selected_groups=selected,
                 terminal_has_consumed_scalar=any(c['full_parameters']==summary['actual_parameters'] for c in candidates),
