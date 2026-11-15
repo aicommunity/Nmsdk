@@ -24,7 +24,7 @@ from .stock_candidate_window_study import training_execution_limits
 from .uniform_profile_physics import audit_uniform_profile
 
 
-def declare_case(original, archive, variant):
+def declare_case(original, archive, variant, reference_frames=None):
     require(variant in (0,3), 'uniform_study_unknown_profile')
     c=original['configuration']
     require(c['schema_version']==8 and c['model']['branch'] is True and
@@ -43,6 +43,22 @@ def declare_case(original, archive, variant):
         bound['maximum_length']=256
     require(q['search']['bounds'][-1]==c['search']['bounds'][-1] and
             q['search']['bounds'][-1]['maximum_length']==1, 'uniform_study_anchor_changed')
+    if reference_frames is not None:
+        require(type(reference_frames) is list and len(reference_frames)==4,
+                'uniform_study_reference_window_dimensions')
+        policy=q['composite_measurement']['candidate_window_policy']
+        for p,frames in zip(policy['inputs'],reference_frames):
+            require(set(frames)=={'first_frame','last_frame','frame_count'} and
+                    all(type(v) is int for v in frames.values()) and
+                    0<frames['first_frame']<=frames['last_frame']<frames['frame_count']-1 and
+                    frames['frame_count']==3601 and p['hard_first_frame']==0 and
+                    p['hard_last_frame']==3600 and p['maximum_window_frames']==3601 and
+                    all(p[k]==0 for k in ('delay_frames_per_segment','length_guard_frames',
+                        'synapse_count_guard_frames','resistance_change_guard_frames','capacitance_change_guard_frames')),
+                    'uniform_study_not_full_observation_recipe')
+            p['base_left_guard_frames']=frames['first_frame']
+            p['base_right_guard_frames']=3600-frames['last_frame']
+        q['run_id']+='/measured-window-rebased'
     result['profile_archives']=[deepcopy(archive)]
     result=_signed({k:v for k,v in result.items() if k!='sha256'})
     validate_job('preflight',result);validate_job('train',result)
@@ -129,3 +145,26 @@ def run(job_path,runtime_path,controller,expected_initial_path,output,*,finaliza
         condition_fingerprint=digest(condition['condition']),classification_assessed=False,scientific_verdict=None)
     _write(output/'index.json',record)
     return record
+
+
+def reference_window_frames(native):
+    """Audited characterization coordinates only; new Train recaptures references."""
+    from .candidate_window_binding_evidence import reference_seed
+    native=Path(native).resolve(strict=True)
+    paths=[native/n for n in ('train_stopped_state.json','train_learned_state.json') if (native/n).is_file()]
+    require(len(paths)==1,'uniform_study_reference_package_missing')
+    p=load(paths[0]);summary=load(paths[0].with_name(paths[0].name.replace('_state.','_summary.')))
+    audit=audit_candidate_window_recovery_package(p,summary=summary,
+                                                external_resolver=filesystem_primary_resolver(native))
+    require(p['reference_complete'] is True and p['configuration']['model']['branch'] is True and
+            p['configuration']['model']['normalization']=='N1','uniform_study_reference_source_not_complete')
+    source=p['measurement_archive']['source_binding']
+    records=[r for r in p['measurement_archive']['records'] if r['purpose']=='reference']
+    require(len(records)==4 and {r['logical_request']['input_index'] for r in records}==set(range(4)),
+            'uniform_study_reference_inventory')
+    records.sort(key=lambda r:r['logical_request']['input_index'])
+    seeds=[reference_seed(r,source,p['protocol']) for r in records]
+    frames=[{k:seed[k] for k in ('first_frame','last_frame','frame_count')} for seed in seeds]
+    return dict(frames=frames,source_package_sha256=frozen_digest(paths[0],256*1024**2),
+                source_origin=p['measurement_archive']['source_origin'],source_data_audited=True,
+                references_imported_into_train=False,training_certificate_verified=False,scientific_verdict=None)
