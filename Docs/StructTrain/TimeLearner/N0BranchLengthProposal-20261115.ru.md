@@ -23,3 +23,11 @@ Elder-1 независимо повторил тот же A2-корпус на �
 ### Исправление регистрации SDK-корпуса
 
 В source22e0f4c новый C++ файл добавлен в отдельную TrainingAlgorithms, но пропущен в общем StorageComponents, который собирает native acceptance worker. Поэтому заявленные105 случаев не могут быть приняты в A1. Добавлена регистрация того же файла в StorageComponents. Существующий runtime не дополняется: после закрытия A1 предусмотрена отдельная fresh A2 сборка/runtime; production Pulse5fc6bb4, весь шестисценарный корпус и научные условия прежние. A1 сохранён как ошибочная постановка SDK-gate. Число параллельных задач следующей сборки выбирается по ресурсам сервера; научные budgets не меняются.
+
+### SDK и запуск физического обучения
+
+Fresh SDK A2 на source `549fba9761e4f4be1a9861736170e182cb3567f4` / исполняемом Pulse `5fc6bb4131d49f8ef884f82ccede66270e9d0c5c` прошёл105/105 C++ случаев. Native supervisor/leaf groups закрыты, record errors, heartbeat errors и final capture errors отсутствуют. Raw SDK A1 сохраняет отказ compiled_selected_cohort_missing и0 выполненных случаев; canonical A2 отказал до сборки из-за неподдерживаемого parallel8, canonical A3 со штатным parallel2 принят. Полный архив280 файлов — external SHA256 `a4a2fe182163dc069b9fdf9996c35a5920ae301aa9661d81e432e4030cceba24`, 5570725 байт. Успех105-case cohort не является сходимостью физической модели.
+
+Начат cold Branch N0 `s11-n0-branch-length-train-m40-a1`, runtime fingerprint `64c67d93b53065bed5a31e9b87563804fbca235a5adceeb1ae2212e62b3cadc5`; native preflight завершён, Train выполняется. Исходный математический протокол и бюджеты1800/128/1280/128/4/4 сохранены, finalization300. Итог обучения, certificate и классификация ещё не установлены.
+
+Commit Pulse `0841554de4499cd6fe1479002fc4171ba6cbe5e0` добавляет только документацию: его Core tree совпадает с исполняемым5fc6bb4 (`489559ab94c04ae2ab9365ef753fd2184788d085`). Runtime продолжает использовать исходную неизменяемую Git closure.

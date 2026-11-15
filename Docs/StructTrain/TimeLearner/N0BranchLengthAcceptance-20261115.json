@@ -31,7 +31,48 @@
     "manifest": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/n0-branch-length/ab-evidence-a2.json",
     "files": 137
   },
-  "native_sdk": "A1 builds new tests only in separate algorithm target; main StorageComponents registration omitted, A2 corrects it",
+  "native_sdk": {
+    "source_root": "549fba9761e4f4be1a9861736170e182cb3567f4",
+    "candidate_pulse": "5fc6bb4131d49f8ef884f82ccede66270e9d0c5c",
+    "A1": {
+      "execution": "refused",
+      "reason": "compiled_selected_cohort_missing",
+      "expected": 105,
+      "executed": 0,
+      "source_root": "22e0f4cb171a9d7affe94164e517df6d054742c6"
+    },
+    "canonical_A2": {
+      "execution": "refused_before_build",
+      "reason": "build_profile: parallel8 is unsupported by worker (1/2 only)"
+    },
+    "canonical_A3": {
+      "status": "passed_and_closed",
+      "parallel": 2,
+      "leaf_memory_bytes": 8589934592
+    },
+    "model_train": {
+      "status": "running",
+      "job": "s11-n0-branch-length-train-m40-a1",
+      "runtime_fingerprint": "64c67d93b53065bed5a31e9b87563804fbca235a5adceeb1ae2212e62b3cadc5",
+      "scientific_verdict": null
+    },
+    "SDK_A2": {
+      "assertion_passed_cases": 105,
+      "expected_cpp_cases": 105,
+      "failed_cpp_ids": [],
+      "heartbeat_errors": [],
+      "final_capture_errors": [],
+      "outer": "closed",
+      "external_evidence": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a4/a4a2fe182163dc069b9fdf9996c35a5920ae301aa9661d81e432e4030cceba24",
+        "sha256": "a4a2fe182163dc069b9fdf9996c35a5920ae301aa9661d81e432e4030cceba24",
+        "bytes": 5570725
+      }
+    }
+  },
   "native_model_train": "not_started",
   "scientific_verdict": null,
   "workers": {
@@ -54,5 +95,31 @@
       "whole_group_closed": true,
       "compiler": "/usr/bin/g++ (resolved in archived toolchain)"
     }
-  }
+  },
+  "external_evidence_workers": {
+    "M40": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/64/64ee475e1b751da2ef7f6c16b2bd17d108e6e727e63c4ced0ad2df74ce25d8cf",
+      "sha256": "64ee475e1b751da2ef7f6c16b2bd17d108e6e727e63c4ced0ad2df74ce25d8cf",
+      "bytes": 581072,
+      "logical_name": "n0-branch-length-ab-evidence-a2.tar.gz",
+      "manifest": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/n0-branch-length/ab-evidence-a2.json",
+      "files": 137
+    },
+    "Elder-1": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e0/e0d202b07a5c15a676f08c11530f9798c8f13b65e4ce6ef9ed1f652d6083411f",
+      "sha256": "e0d202b07a5c15a676f08c11530f9798c8f13b65e4ce6ef9ed1f652d6083411f",
+      "bytes": 291247,
+      "logical_name": "n0-branch-length-ab-evidence-elder-a2.tar.gz",
+      "manifest": "/mnt/nmsdk-structtrain-archive/experiments/2026-11-15/n0-branch-length/ab-evidence-elder-a2.json",
+      "files": 68
+    }
+  },
+  "documentation_pulse": "0841554de4499cd6fe1479002fc4171ba6cbe5e0",
+  "executed_core_tree": "489559ab94c04ae2ab9365ef753fd2184788d085"
 }

@@ -41,6 +41,20 @@ Branch N4, N1, 2 000 Гц, CapturedPerInput, опорный входN−1. Т�
 
 Overview и detail здесь оба охватывают 0–1.8 с: окно измерения занимает всю пробу. Название detail не означает дополнительного увеличения по времени; для анализа формы этих широких пиков показанный масштаб достаточен, анализа отдельных timestep по этим изображениям не заявляется. [Исходные metadata/selection](../../../Reports/StructTrain/TimeLearner/N1CoupledBranch-20261113/figures/manifest.json), [detail48](../../../Reports/StructTrain/TimeLearner/N1CoupledBranch-20261113/figures/group-000048-soma-000-detail.png), [detail58](../../../Reports/StructTrain/TimeLearner/N1CoupledBranch-20261113/figures/group-000058-soma-000-detail.png).
 
-[Весь primary](ValidationPlans/M40N1CoupledPrimaryA1-20261113/RESULT.ru.md) сохраняется в Git в XZ 24.11 МБ без изменения исходных данных вместе с моделями и receipts; полные SVG/PDF остаются воспроизводимым M40 cache. [Независимый Elder restore и полный DATA replay этого Train primary приняты1/1](ValidationPlans/ElderCoupledTrainPrimaryReplayA1-20261114/RESULT.ru.md); повреждённый извлечённый CSV отвергнут. [Итог Train и полная provenance](ValidationPlans/M40N1CoupledBranchTrainA1-20261113/RESULT.ru.md), [report receipts](ValidationPlans/M40N1CoupledReportA1-20261113/RESULT.ru.md).
+[Весь primary](ValidationPlans/M40N1CoupledPrimaryA1-20261113/RESULT.ru.md) сохранён без изменения исходных данных вместе с моделями и receipts. Исходная публикация13.11 использовала XZ24.11МБ в Git; после коррекции истории payload находится во внешнем архиве M40, а Git содержит проверяемые ссылки. Полные SVG/PDF остаются воспроизводимым M40 cache; [актуальная политика и материализация данных](ExternalExperimentArchive.ru.md). [Независимый Elder restore и полный DATA replay этого Train primary приняты1/1](ValidationPlans/ElderCoupledTrainPrimaryReplayA1-20261114/RESULT.ru.md); повреждённый извлечённый CSV отвергнут. [Итог Train и полная provenance](ValidationPlans/M40N1CoupledBranchTrainA1-20261113/RESULT.ru.md), [report receipts](ValidationPlans/M40N1CoupledReportA1-20261113/RESULT.ru.md).
 
 Следующий отдельно объявленный опыт — [frozen diagnostic на 8 паттернах](ValidationPlans/M40N1CoupledFrozenA1-20261113/STATUS.ru.md) фактического остановленного состояния, без template fallback. Исходный порог 100 сначала нужен для измерения waveform/LT response; молчание при нём не является успешной классификацией. Подбор Same-Matrix порога требует последующего реального spiking прогона и не становится independent Test. Frozen8 baseline принят: production1/1 PASS, все8наблюдений полны, модель неизменна, TP0/FP0/FN1/TN7 при100. Молчание не является успехом. [Отдельный fixed-threshold опыт завершён](BranchCoupledThresholdScientificReport-20261114.ru.md): TP1/FP5/FN0/TN2, target0.262s раньше последнего input0.49s. В отчёте все8 Soma overview с actual inputs, LT и увеличения;32 selected originals просмотрены. Этот отрицательный результат разделимости не меняет исход обучения.
+
+## Уточнение recovery по первичным данным (15.11.2026)
+
+Проверен сохранённый producer ledger этого исторического Train (`sha256=f3a63ab4383dd5f7765fbf84aa4496c4fc56fcc0a354ffec56b03485f544546d`). Это не повторное обучение текущим кодом. Пять отклонений относятся к разным кандидатам; ошибочного повторения одного состояния не обнаружено.
+
+| Группа | Полные L | Rs input1 | Переход |
+|---|---|---:|---|
+| 50 | [28,28,27,1] | 86000000 | cursor_advanced |
+| 52 | [29,28,27,1] | 86000000 | cursor_advanced |
+| 54 | [29,29,27,1] | 86000000 | cursor_advanced |
+| 56 | [30,29,27,1] | 86000000 | cursor_advanced |
+| 58 | [28,27,27,1] | 21232304.307596028 | invalid_budget_stop |
+
+Все пять наблюдений были ambiguous, C-trim отсутствовал; первые четыре перехода действительно продвигали cursor, пятый исчерпал invalid budget. Для input1 фактически исследована только окрестность L27–29 из допустимого27–100 после фиксации input2. Это ограничивает отрицательный вывод, но не позволяет считать неоднозначную вершину валидной или автоматически повышать бюджет. Возможные изменения порядка кандидатов следует проверять отдельно; воспроизведение этой остановки текущей версией ещё не заявлено. Флаг independent_delivery_completeness_verified исходного ledger остаётся false; дополнительная проверка пяти переходов не подменяет полную независимую сертификацию журнала.
