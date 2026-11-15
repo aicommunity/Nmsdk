@@ -141,13 +141,15 @@
   "scientific_verdict": null,
   "whole_plan_complete": false,
   "revalidation": {
-    "status": "preparing",
-    "job": "s07-recovery-coverage-native-revalidation-m40-a1",
-    "method": "maintained native_gate already-built execution contract, per-case outputs",
-    "runtime_unchanged": "runtime-recovery-coverage-sdk-a1",
-    "source_and_binary_unchanged": true,
-    "cpp_cases": 142,
-    "leaves": 30,
-    "fresh_sdk_build": false
+    "status": "A3_stopped_on_real_native_edit_refusal",
+    "attempts": {
+      "A1": "Path argument reader error before native gates",
+      "A2": "113 common cases passed; progress record NewOnly error after next native call",
+      "A3": "113 common passed; new wide-missing native fixture rejected L64 because its ModelSpec allowed only8"
+    },
+    "fixture_fix": "NativeCompositeFixture maximumCableLength64 for wide=true; search bounds already64; production unchanged",
+    "cpp_test_source_changed": true,
+    "source_algorithm_unchanged": true,
+    "scientific_verdict": null
   }
 }

@@ -4077,7 +4077,7 @@ namespace {
 enum class WindowRecoveryCase { Advance, RepeatedN0, DefaultRetry, StringOnly, InvalidBudget, ProbeBudget, EditBudget, ExternalStop, WrongRevision };
 
 template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=false,bool ambiguous=false,bool wide=false) {
-    NativeCompositeFixture<Owner> f(2000,false,64,false,!n1,false,2,1800.,false,ambiguous?1.8:0.,ambiguous?64:8);
+    NativeCompositeFixture<Owner> f(2000,false,64,false,!n1,false,2,1800.,false,ambiguous?1.8:0.,(ambiguous || wide)?64:8);
     EnableCandidateWindow(f,"candidate-attempt",128u*1024u*1024u,[&](auto& contract) {
         if(ambiguous) {
             // Shared-cable growth may also move the freshly measured anchor.
