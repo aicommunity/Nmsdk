@@ -1,7 +1,7 @@
-"""Owned native readback of stock and fast class images before expensive Train.
+"""Owned native readback of immutable profile archives before expensive Train.
 
-The baseline mode demonstrates the known C25 alias defect; it cannot authorize
-training with a mismatched factor. Corrected mode requires every declared value.
+Legacy parent-default fast images are intentionally not admitted by V2.
+The original refused A1 remains evidence, never a passing factor check.
 """
 from copy import deepcopy
 import os
@@ -35,14 +35,15 @@ def inspect_profile(identity, name, capacity, dissociation):
     require(membranes == {'$.Soma1', '$.Dendrite1_1'}, 'fast_profile_cold_branch_graph')
     capacities, kinetics = [], []
     for p in sorted(membranes):
-        require(nodes[p]['class'] == 'NPMembraneBio', 'fast_profile_membrane_class')
+        require(nodes[p]['class'] == 'NPMembraneBio' or nodes[p]['class'].endswith('_Body_Membrane'), 'fast_profile_membrane_class')
         for role in ('Exc', 'Inh'):
             node = nodes[p+'.'+role+'Channel']
-            require(node['class'] == 'NP'+role+'ChannelBio', 'fast_profile_channel_class')
+            require(_property(node, 'Type') == (-1 if role=='Exc' else 1), 'fast_profile_channel_role')
             for field in ('Resistance', 'RestingResistance', 'FBResistance'):
                 require(_property(node, field) == 1e7, 'fast_profile_other_channel_physics:'+field)
             capacities.append(_property(node, 'Capacity'))
-        synapses = [n for path, n in nodes.items() if path.startswith(p+'.') and n['class']=='NPSynapseBio']
+        synapses = [n for path, n in nodes.items() if path.startswith(p+'.') and
+                    re.fullmatch(re.escape(p)+r'\.(?:Exc|Inh)Synapse\d+',path)]
         require(bool(synapses), 'fast_profile_synapses_missing')
         for node in synapses:
             for field, expected in {'Resistance': 86e6, 'SecretionTC': .001,
@@ -59,14 +60,19 @@ class FastProfilePhysicsPreflightTest(unittest.TestCase):
     def test_actual_registered_children_apply_the_declared_factor(self):
         controls = Path(os.environ['TIMELEARNER_FAST_PROFILE_CONTROLS']).resolve(strict=True)
         declaration = load(controls/'declaration.json')
-        require(set(declaration)=={'mode', 'runtime'} and declaration['mode'] in ('baseline', 'corrected'),
+        require(set(declaration)=={'runtime', 'profiles'} and len(declaration['profiles'])==4,
                 'fast_profile_controls')
         template = load(controls/'template.json')
         output = Path(os.environ['TMPDIR'])/'fast-profile-native-preflight';output.mkdir(exist_ok=False)
+        cases=[('NSPNeuronGen',1e-9,.005,[])]
+        for index, (capacity,tc) in enumerate([(1e-9,.005),(5e-10,.005),(2.5e-10,.005),(2.5e-10,.002)]):
+            archive=load(controls/declaration['profiles'][index])
+            cases.append(('TLNativeFast'+str(index)+'F2000_Neuron',capacity,tc,[archive]))
         jobs=[]
-        for name, capacity, dissociation in PROFILES:
+        for name, capacity, dissociation, archives in cases:
             job=deepcopy(template);job['configuration']['run_id']='fast-profile-'+name
             job['configuration']['model']['neuron_class']=name
+            job['profile_archives']=archives
             job=_signed({k:v for k,v in job.items() if k!='sha256'})
             path=output/(name+'.json');_write(path,job);jobs.append((path,name,capacity,dissociation))
         rows=[]
@@ -77,12 +83,9 @@ class FastProfilePhysicsPreflightTest(unittest.TestCase):
                 self.assertEqual(result['execution'],'completed');self.assertEqual(result['validity'],'valid')
                 audit=audit_run_manifest(run/'run-manifest.json')
             row=inspect_profile(load(run/'native/initial-state.json')['identity'],name,capacity,dissociation)
-            self.assertEqual(row['capacity_applied'], not(declaration['mode']=='baseline' and
-                             name=='NSPNeuronGenD005C25e11'))
-            if not row['capacity_applied']:
-                self.assertEqual(set(row['effective_capacities']),{5e-10})
+            self.assertTrue(row['capacity_applied'])
             rows.append(dict(physics=row,run_audit=audit))
         _write(output/'comparison.json',dict(kind='timelearner_fast_profile_native_readback',schema_version=1,
-            mode=declaration['mode'],rows=rows,all_factors_applied=all(r['physics']['capacity_applied'] for r in rows),
-            training_authorized=declaration['mode']=='corrected' and all(r['physics']['capacity_applied'] for r in rows),
+            rows=rows,all_factors_applied=all(r['physics']['capacity_applied'] for r in rows),
+            training_authorized=all(r['physics']['capacity_applied'] for r in rows),
             new_model_calculation=False,scientific_verdict=None))

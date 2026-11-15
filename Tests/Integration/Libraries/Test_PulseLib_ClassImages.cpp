@@ -4,7 +4,11 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseSynapse.h"
-#include <tuple>
+#include "TimeLearner/StorageProfiles.h"
+#include "TimeLearner/ModelArchive.h"
+#include <cstdlib>
+#include <filesystem>
+#include <fstream>
 #include "TimeLearner/ModelInspection.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
@@ -214,63 +218,88 @@ TEST(TimeLearnerClassImages, DeleteReturnedImageRefusesOutstandingLease)
  core.storage->ReturnObject(source);
 }
 
-struct FastImageExpectation { const char* name; double capacity,dissociation; };
-const FastImageExpectation FastImages[] = {
- {"NSPNeuronGenD005C5e10",5e-10,.005}, {"NSPNeuronGenD005C25e11",2.5e-10,.005},
- {"NSPNeuronGenD002C1e9",1e-9,.002}, {"NSPNeuronGenD002C5e10",5e-10,.002},
- {"NSPNeuronGenD002C25e11",2.5e-10,.002}, {"NSPNeuronGenD001C1e9",1e-9,.001},
- {"NSPNeuronGenD001C5e10",5e-10,.001}, {"NSPNeuronGenD001C25e11",2.5e-10,.001}
-};
-void CheckFastImage(UEPtr<NPulseNeuron> neuron,const FastImageExpectation& expected,unsigned frequency)
+
+void NativeFastProfile(unsigned variant,unsigned frequency)
 {
- EXPECT_TRUE(neuron->UseElementDefaults.GetData());
- EXPECT_DOUBLE_EQ(neuron->MembraneCapacity.GetData(),expected.capacity);
- EXPECT_DOUBLE_EQ(neuron->SynapseDissociationTC.GetData(),expected.dissociation);
- std::vector<NameT> names;neuron->GetComponentsList(names);unsigned checked=0;
- for(const auto& name:names)
- {
-  EXPECT_NE(name,"LTMembrane");
-  auto membrane=dynamic_pointer_cast<NPulseMembrane>(neuron->GetComponent(name,true));
-  if(!membrane)continue;
-  for(const auto& role:{"Exc","Inh"})
-  {
-   auto channel=membrane->GetComponentL<NPulseChannel>(std::string(role)+"Channel",true);
-   ASSERT_TRUE(channel);EXPECT_DOUBLE_EQ(channel->Capacity.GetData(),expected.capacity);
-   EXPECT_EQ(channel->GetTimeStep(),frequency);++checked;
-  }
-  std::vector<NameT> children;membrane->GetComponentsList(children);
-  for(const auto& child:children)
-  {
-   auto synapse=dynamic_pointer_cast<NPulseSynapse>(membrane->GetComponent(child,true));
-   if(!synapse)continue;
-   EXPECT_DOUBLE_EQ(synapse->DissociationTC.GetData(),expected.dissociation);
-   EXPECT_DOUBLE_EQ(synapse->Resistance.GetData(),86e6);
-   EXPECT_EQ(synapse->GetTimeStep(),frequency);
-  }
- }
- EXPECT_GE(checked,2u);
- const auto report=NmsdkTools::InspectModel(neuron);
- EXPECT_TRUE(report["valid"].toBool())<<QJsonDocument(report["diagnostics"].toArray()).toJson().constData();
-}
-class FastStorageImageFamily : public ::testing::TestWithParam<std::tuple<unsigned,unsigned>> {};
-TEST_P(FastStorageImageFamily, FreshReuseResetAndGrowthKeepDeclaredPhysics)
-{
+ using namespace NMSDK::TimeLearner;
  const auto& core=NmsdkTests::InitEngineForPulseLibTests();
- const auto expected=FastImages[std::get<0>(GetParam())];
- const unsigned frequency=std::get<1>(GetParam());
+ const double capacities[]={1e-9,5e-10,2.5e-10,2.5e-10};
+ const double dissociations[]={.005,.005,.005,.002};
+ const double cap=capacities[variant],tc=dissociations[variant];
+ auto stock=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject("NSPNeuronGen"));ASSERT_TRUE(stock);
+ stock->SetEnvironment(core.environment);stock->SetGlobalTimeStep(frequency);stock->Init();
+ auto membrane=stock->GetComponentL<NPulseMembrane>("Soma1",true);ASSERT_TRUE(membrane);
+ StorageProfileSpec spec;spec.name="TLNativeFast"+std::to_string(variant)+"F"+std::to_string(frequency);
+ spec.frequencyHz=frequency;spec.neuronBaseClass="NSPNeuronGen";
+ spec.ltZoneBaseClass=stock->LTZoneClassName.GetData();
+ spec.positiveGeneratorBaseClass=stock->ExcGeneratorClassName.GetData();
+ spec.negativeGeneratorBaseClass=stock->InhGeneratorClassName.GetData();
+ spec.initialThreshold=stock->LTZone->Threshold.GetData();
+ spec.body.baseClass=membrane->GetCompClassName();
+ spec.body.useAveragePotential=membrane->UseAveragePotential.GetData();
+ spec.body.feedbackGain=membrane->FeedbackGain.GetData();
+ for(const auto& role:{std::string("Exc"),std::string("Inh")})
+ {
+  auto ch=membrane->GetComponentL<NPulseChannel>(role+"Channel",true);ASSERT_TRUE(ch);
+  auto sy=membrane->GetComponentL<NPulseSynapse>(role+"Synapse1",true);ASSERT_TRUE(sy);
+  auto& channel=role=="Exc"?spec.body.excChannel:spec.body.inhChannel;
+  channel={ch->GetCompClassName(),cap,ch->Resistance.GetData(),ch->RestingResistance.GetData()};
+  auto& synapse=role=="Exc"?spec.body.excSynapse:spec.body.inhSynapse;
+  synapse.baseClass=sy->GetCompClassName();synapse.resistance=sy->Resistance.GetData();
+  synapse.secretionTC=sy->SecretionTC.GetData();synapse.dissociationTC=tc;
+  synapse.pulseDuration=sy->TypicalPulseDuration.GetData();synapse.pulseAmplitude=sy->PulseAmplitude.GetData();
+  synapse.usePulseSignal=sy->UsePulseSignal.GetData();synapse.usePresynapticInhibition=sy->UsePresynapticInhibition.GetData();
+  synapse.inhibitionCoefficient=sy->InhibitionCoeff.GetData();
+ }
+ core.storage->ReturnObject(stock);
+ const auto profile=RegisterStorageProfile(core.storage,core.environment,spec);
  for(int reuse=0;reuse<2;++reuse)
  {
-  auto neuron=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject(expected.name));ASSERT_TRUE(neuron);
+  auto neuron=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject(profile.neuronClass));ASSERT_TRUE(neuron);
   neuron->SetEnvironment(core.environment);neuron->SetGlobalTimeStep(frequency);neuron->Init();
-  CheckFastImage(neuron,expected,frequency);
+  EXPECT_FALSE(neuron->UseElementDefaults.GetData());EXPECT_DOUBLE_EQ(neuron->MembraneCapacity.GetData(),0.);
   neuron->StructureBuildMode=2;neuron->NumSomaMembraneParts=1;
   neuron->NumDendriteMembranePartsVec=std::vector<int>{2};neuron->Build();neuron->Init();
-  ASSERT_TRUE(neuron->GetComponent("Dendrite1_2",true));CheckFastImage(neuron,expected,frequency);
-  neuron->Reset();CheckFastImage(neuron,expected,frequency);
+  for(const auto& path:{"Soma1","Dendrite1_1","Dendrite1_2"})
+  {
+   auto part=neuron->GetComponentL<NPulseMembrane>(path,true);ASSERT_TRUE(part);
+   for(const auto& role:{std::string("Exc"),std::string("Inh")})
+   {
+    auto ch=part->GetComponentL<NPulseChannel>(role+"Channel",true);ASSERT_TRUE(ch);
+    auto sy=part->GetComponentL<NPulseSynapse>(role+"Synapse1",true);ASSERT_TRUE(sy);
+    EXPECT_DOUBLE_EQ(ch->Capacity.GetData(),cap);EXPECT_EQ(ch->GetTimeStep(),frequency);
+    EXPECT_DOUBLE_EQ(sy->DissociationTC.GetData(),tc);EXPECT_EQ(sy->GetTimeStep(),frequency);
+   }
+  }
+  neuron->Reset();const auto identity=NmsdkTools::InspectModel(neuron);
+  ASSERT_TRUE(identity["valid"].toBool())<<QJsonDocument(identity["diagnostics"].toArray()).toJson().constData();
+  if(reuse==0)
+  {
+   QJsonObject metadata{{"implementation_id","timelearner-native-fast-profile-v1"},{"state_kind","model_spec"},
+    {"training",QJsonObject{{"status","not_trained"}}},
+    {"calibration",QJsonObject{{"status","fixed"},{"protocol","profile-default-not-calibrated"},
+      {"threshold",spec.initialThreshold},{"ltzone_path","$.LTZone"}}},
+    {"conversion",QJsonObject{{"mode","none"}}}};
+   const auto archive=NmsdkTools::ExportModelArchive(neuron,metadata,{},profile.classNames);
+   const char* directory=std::getenv("TIMELEARNER_PROFILE_TEST_DIR");
+   if(!directory)directory=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");
+   if(directory)
+   {
+    std::filesystem::create_directories(directory);
+    const auto path=std::filesystem::path(directory)/(spec.name+".json");
+    std::ofstream out(path,std::ios::binary);out<<QJsonDocument(archive).toJson().constData();ASSERT_TRUE(out.good());
+   }
+  }
   core.storage->ReturnObject(neuron);
  }
 }
-INSTANTIATE_TEST_SUITE_P(AllFastProfiles,FastStorageImageFamily,
- ::testing::Combine(::testing::Range(0u,8u),::testing::Values(2000u,20000u)));
+TEST(NativeFastStorageProfiles, Stock2000) {NativeFastProfile(0,2000);}
+TEST(NativeFastStorageProfiles, Stock20000) {NativeFastProfile(0,20000);}
+TEST(NativeFastStorageProfiles, HalfC2000) {NativeFastProfile(1,2000);}
+TEST(NativeFastStorageProfiles, HalfC20000) {NativeFastProfile(1,20000);}
+TEST(NativeFastStorageProfiles, QuarterC2000) {NativeFastProfile(2,2000);}
+TEST(NativeFastStorageProfiles, QuarterC20000) {NativeFastProfile(2,20000);}
+TEST(NativeFastStorageProfiles, QuarterCFast2000) {NativeFastProfile(3,2000);}
+TEST(NativeFastStorageProfiles, QuarterCFast20000) {NativeFastProfile(3,20000);}
 
 }
