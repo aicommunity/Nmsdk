@@ -4,6 +4,8 @@ from pathlib import Path
 import unittest
 
 from ..native_evidence import load, require
+from ..contained_process import inspect
+from ..native_pipeline_worker import audit_run_manifest
 from ..n1_protocol_robustness import _write
 from ..recognition_metrics import load_diagnostic_evaluation
 from ..reports import render_diagnostic_evaluation_case
@@ -31,6 +33,8 @@ class N0LengthFrozenReportTest(unittest.TestCase):
                 require(run['operation'] == 'diagnostic-evaluate' and
                         (run['execution'], run['validity']) == ('completed', 'valid'),
                         'n0_length_report_requires_completed_diagnostic')
+                self.assertTrue(inspect(source/'process/contained')['all_processes_closed'])
+                audit_run_manifest(source/'run-manifest.json')
                 actual = run['analysis']['metrics']
                 thresholds.append(actual['effective_threshold'])
                 self.assertEqual(len(actual['trials']), 8)
@@ -47,7 +51,9 @@ class N0LengthFrozenReportTest(unittest.TestCase):
                 self.assertEqual(package, case[0])
                 model = load(source/'native/model.json')
                 self.assertEqual(model, load(source/'native/model-after.json'))
-                self.assertEqual(model['source_solo'], case[0])
+                recognition = (model['source_recognition']
+                    if model['kind'] == 'timelearner_diagnostic_threshold_candidate' else model)
+                self.assertEqual(recognition['source_solo'], case[0])
                 self.assertIsNone(case[0]['certificate'])
                 self.assertEqual(case[0]['training_outcome'], 'budget_exhausted')
                 _, observations = load_diagnostic_evaluation(source/'native/evaluation.json')

@@ -87,7 +87,8 @@ class N0LengthFrozenPairTest(unittest.TestCase):
                     self.assertIsNone(metrics['evaluation_verdict'])
                     model = load(output/'runs'/name/'native/model.json')
                     self.assertEqual(model, load(output/'runs'/name/'native/model-after.json'))
-                    self.assertEqual(model['source_solo'], package)
+                    recognition = model['source_recognition'] if threshold != 100. else model
+                    self.assertEqual(recognition['source_solo'], package)
                     rows.append(dict(role=role, threshold=threshold, run=name, metrics=metrics))
                     _write(output/'progress.json', dict(rows=rows, scientific_verdict=None))
         registry.release(lease['token'], note='All paired frozen native groups closed; no convergence claim.')
