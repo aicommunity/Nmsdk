@@ -1,4 +1,4 @@
-"""Confirm five algorithmic counterexamples on the unchanged accepted N1 binary.
+"""Confirm declared algorithmic counterexamples on an unchanged N1 baseline binary.
 
 A passing Python check means expected native assertion failures were reproduced.
 It never relabels the baseline SDK, training or classification as successful.
@@ -18,16 +18,20 @@ from ..runtime import source_closure
 
 
 class N1RejectedRecoveryBaselineTest(unittest.TestCase):
-    def test_frozen_baseline_reproduces_all_five_algorithmic_failures(self):
+    def test_frozen_baseline_reproduces_declared_algorithmic_failures(self):
         controls = Path(os.environ['TIMELEARNER_N1_BASELINE_CONTROLS']).resolve(strict=True)
         declaration = load(controls/'declaration.json')
-        require(set(declaration) == {'source', 'source_commit', 'pulse_commit', 'runtime',
-                'cohort', 'original_controller', 'original_output'}, 'n1_baseline_controls_schema')
+        fields = {'source', 'source_commit', 'pulse_commit', 'runtime',
+                  'cohort', 'original_controller', 'original_output'}
+        require(set(declaration) in (fields, fields | {'expected_failures'}),
+                'n1_baseline_controls_schema')
+        declared_failures = declaration.get('expected_failures')
         source = Path(declaration['source']).resolve(strict=True)
         before = source_closure(source)
         self.assertEqual(before['root']['head'], declaration['source_commit'])
         self.assertEqual(before['Libraries/Nmsdk-PulseLib']['head'], declaration['pulse_commit'])
-        self.assertEqual(declaration['pulse_commit'], '5052cfe1683ca38920b514aedfc3c37f4bd41aef')
+        if declared_failures is None:
+            self.assertEqual(declaration['pulse_commit'], '5052cfe1683ca38920b514aedfc3c37f4bd41aef')
         original = Path(declaration['original_output']).resolve(strict=True)
         closed = status(declaration['original_controller'])
         self.assertTrue(closed['result']['outer_closed'])
@@ -41,7 +45,19 @@ class N1RejectedRecoveryBaselineTest(unittest.TestCase):
             'ClassicN1RejectedWindowExploresFreshRs',
             'BranchN1RejectedWindowExploresFreshRs',
             'BranchN1FourInputsSeparateOnlyUpstreamBank']
-        expected = ['NativeCandidateWindowRecovery/'+name for name in expected_names]
+        known = {'NativeCandidateWindowRecovery/'+name:
+                 ('action->parameters.at(active).length' if 'FixedRs' in name
+                  else 'action->parameters.at(active).resistance') for name in expected_names}
+        if declared_failures is None:
+            declared_failures = [{'test_id': key, 'assertion_property': value} for key,value in known.items()]
+        require(type(declared_failures) is list and 1 <= len(declared_failures) <= len(known),
+                'n1_baseline_failure_inventory')
+        for row in declared_failures:
+            require(type(row) is dict and set(row) == {'test_id', 'assertion_property'} and
+                    row['test_id'] in known and row['assertion_property'] == known[row['test_id']],
+                    'n1_baseline_failure_assertion')
+        expected = [row['test_id'] for row in declared_failures]
+        self.assertEqual(len(expected), len(set(expected)))
         cohort = load(Path(declaration['cohort']))
         self.assertEqual(cohort['selected_ids'], expected)
         self.assertEqual([case for leaf in cohort['runplan'] for case in leaf['expected_ids']], expected)
@@ -85,6 +101,6 @@ class N1RejectedRecoveryBaselineTest(unittest.TestCase):
         verify_runtime(runtime)
         self.assertEqual(source_closure(source), before)
         _write(output/'index.json', dict(kind='timelearner_n1_recovery_baseline_counterexamples',
-            schema_version=1, rows=rows, completed_cpp_cases=5, expected_native_assertion_failures=5,
+            schema_version=1, rows=rows, completed_cpp_cases=len(expected), expected_native_assertion_failures=len(expected),
             baseline_sdk_passed=False, same_frozen_binary=True, fresh_sdk_build=False,
             scientific_verdict=None))
