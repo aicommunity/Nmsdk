@@ -5,6 +5,33 @@
 
 namespace {
 using namespace NMSDK::TimeLearner;
+TEST(UnvisitedLengthSearch, RejectedNeighbourhoodDoesNotConfineTheDeclaredDomain)
+{
+    EXPECT_EQ(ProposeUnvisitedLength({28},28,100),100);
+    EXPECT_EQ(ProposeUnvisitedLength({28,100},28,100),64);
+    EXPECT_EQ(ProposeUnvisitedLength({28,100,64},28,100),46);
+    EXPECT_EQ(ProposeUnvisitedLength({28,100,64,46},28,100),82);
+}
+TEST(UnvisitedLengthSearch, DuplicateOutsideAndFullyVisitedPointsDoNotCreateCandidates)
+{
+    EXPECT_FALSE(ProposeUnvisitedLength({},28,100));
+    EXPECT_FALSE(ProposeUnvisitedLength({1,101},28,100));
+    EXPECT_EQ(ProposeUnvisitedLength({1,28,28,101},28,100),100);
+    EXPECT_FALSE(ProposeUnvisitedLength({28,29,30},28,30));
+    EXPECT_FALSE(ProposeUnvisitedLength({28},28,28));
+}
+TEST(UnvisitedLengthSearch, TiesAndVeryWideBoundsAreDeterministicWithoutDomainEnumeration)
+{
+    EXPECT_EQ(ProposeUnvisitedLength({4},1,7),1);
+    const int maximum=std::numeric_limits<int>::max();
+    EXPECT_EQ(ProposeUnvisitedLength({1},1,maximum),maximum);
+    EXPECT_EQ(ProposeUnvisitedLength({1,maximum},1,maximum),1+(maximum-1)/2);
+}
+TEST(UnvisitedLengthSearch, InvalidDeclaredBoundsCannotAuthorizeAProposal)
+{
+    EXPECT_THROW(ProposeUnvisitedLength({1},0,100),std::invalid_argument);
+    EXPECT_THROW(ProposeUnvisitedLength({1},10,1),std::invalid_argument);
+}
 TEST(BranchLengthProposalFamily, OrdinaryAndSeparatedBanksRemainDistinctMeasuredFamilies)
 {
     const std::vector<InputParameters> base(4,{1,1,10.});

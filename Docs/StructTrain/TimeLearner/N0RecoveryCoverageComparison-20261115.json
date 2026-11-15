@@ -1,0 +1,258 @@
+{
+  "kind": "timelearner_n0_recovery_coverage_summary_comparison",
+  "schema_version": 1,
+  "common_scalar_prefix": 13,
+  "shared_reference_fields": {
+    "capture_revision": true,
+    "source_origin": true,
+    "owner_family_binding": true
+  },
+  "facts": {
+    "before": {
+      "outcome": "invalid_observation",
+      "reason": "rejected_candidate_window:ambiguous",
+      "candidates": 13,
+      "search_probes": 36,
+      "edits": 16,
+      "certificate": null,
+      "measured_inputs": [
+        2
+      ],
+      "last_measured": {
+        "amplitude_residual": -0.00019937766289823688,
+        "anchor_group_id": "Branch-stock-cold8-N0/session/1/search/37/composite/29",
+        "anchor_semantic_proof_id": "d616e9ad1b482529e44ecd91bb671ef0557ab7fb5b2b5766b60af95b3414c73a",
+        "anchor_trial_id": "Branch-stock-cold8-N0/session/1/search/37",
+        "full_parameters": [
+          {
+            "length": 28,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 28,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 27,
+            "resistance": 86000000,
+            "synapses": 4
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "input_index": 2,
+        "measurement_group_id": "Branch-stock-cold8-N0/session/1/search/38/composite/30",
+        "model_epoch": 12,
+        "model_revision": "aba314054683d83f054c3630b615c541a80b9b8f177697c376070906eab54a47",
+        "parameter_change_cost": 83,
+        "parameters": {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 4
+        },
+        "semantic_proof_id": "777cbcc31fcc2d8b7f4ecaae141e61b79d5c8a16519b9ec7441f17f114eaa4bc",
+        "timing_high": 0.002999999999985903,
+        "timing_low": 0.002999999999985903,
+        "trial_id": "Branch-stock-cold8-N0/session/1/search/38",
+        "within_amplitude": false,
+        "within_timing": true
+      },
+      "rejection_lengths": [
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "terminal_parameters": [
+        {
+          "length": 32,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 32,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 4
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ]
+    },
+    "after": {
+      "outcome": "invalid_observation",
+      "reason": "rejected_candidate_window:ambiguous",
+      "candidates": 13,
+      "search_probes": 36,
+      "edits": 16,
+      "certificate": null,
+      "measured_inputs": [
+        2
+      ],
+      "last_measured": {
+        "amplitude_residual": -0.00019937766289823688,
+        "anchor_group_id": "Branch-stock-cold8-N0/session/1/search/37/composite/29",
+        "anchor_semantic_proof_id": "f0b21925c790e65f2ec388c8503d81231ad8644cde66b31d54b56d3363d2ed56",
+        "anchor_trial_id": "Branch-stock-cold8-N0/session/1/search/37",
+        "full_parameters": [
+          {
+            "length": 28,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 28,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 27,
+            "resistance": 86000000,
+            "synapses": 4
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "input_index": 2,
+        "measurement_group_id": "Branch-stock-cold8-N0/session/1/search/38/composite/30",
+        "model_epoch": 12,
+        "model_revision": "aba314054683d83f054c3630b615c541a80b9b8f177697c376070906eab54a47",
+        "parameter_change_cost": 83,
+        "parameters": {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 4
+        },
+        "semantic_proof_id": "c8650638cdc6cec5ec4fbd2ddd531e5052fe9733681df5bc4f189a434d451fcd",
+        "timing_high": 0.002999999999985903,
+        "timing_low": 0.002999999999985903,
+        "trial_id": "Branch-stock-cold8-N0/session/1/search/38",
+        "within_amplitude": false,
+        "within_timing": true
+      },
+      "rejection_lengths": [
+        28,
+        100,
+        64,
+        46,
+        82
+      ],
+      "terminal_parameters": [
+        {
+          "length": 82,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 82,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 4
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ]
+    }
+  },
+  "source_roots": {
+    "before": "549fba9761e4f4be1a9861736170e182cb3567f4",
+    "after": "c787bd2e2116c0190ad46725ac5c2a586080af67"
+  },
+  "pulse": {
+    "before": "5fc6bb4131d49f8ef884f82ccede66270e9d0c5c",
+    "after": "a82a7cd08a4334c5924839b7136ae9df5884da53"
+  },
+  "package_audit": {
+    "auditor_version": 2,
+    "package_digest_verified": true,
+    "summary_checked": true,
+    "logical_groups": 40,
+    "native_probes": 240,
+    "sampled_frames": 864240,
+    "primary_files_checked": 240,
+    "training_outcome": "invalid_observation",
+    "certificate": null,
+    "source_execution_separately_bound": true,
+    "service_ledger_completeness_verified": false
+  },
+  "classification_assessed": false,
+  "scientific_verdict": null,
+  "physical_audit": {
+    "lt_membrane": false,
+    "membranes_checked": 83,
+    "channels_checked": 166,
+    "threshold_unchanged": true,
+    "feedback_connections_unchanged": true
+  },
+  "outer_controller": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 1873.838364652358,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "56bbfc2e140990addd66c2285b9d6431ce7e5f7b92f7323071fedf3fb8cff229",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "outer_operation_passed": true,
+  "heartbeat_errors": [],
+  "read_only_comparison": {
+    "job": "s11-n0-recovery-coverage-report-m40-a1",
+    "passed": true,
+    "source": "38c015466b8298d34a92f1b446912b89a4eb4e3c",
+    "all_processes_closed": true
+  }
+}

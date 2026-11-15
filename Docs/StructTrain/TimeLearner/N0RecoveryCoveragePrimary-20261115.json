@@ -1,0 +1,48 @@
+{
+  "kind": "timelearner_n0_recovery_coverage_primary_reference",
+  "schema_version": 1,
+  "primary": {
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/0c/0c4f07e6c10a7586768a759ec95d73f7f356aa5daf90b17717a2ae3c72efb55a",
+      "sha256": "0c4f07e6c10a7586768a759ec95d73f7f356aa5daf90b17717a2ae3c72efb55a",
+      "bytes": 17074560
+    },
+    "manifest": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/83/83d10fd28eb5f46482b062d2742744cb7b8870086d05ca98fad3518e58dffe0d",
+      "sha256": "83d10fd28eb5f46482b062d2742744cb7b8870086d05ca98fad3518e58dffe0d",
+      "bytes": 210080
+    }
+  },
+  "archive_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/recovery-coverage/train-primary-a1.json",
+  "bundle": {
+    "kind": "compact_native_primary",
+    "schema_version": 2,
+    "archive_bytes": 17074560,
+    "archive_sha256": "0c4f07e6c10a7586768a759ec95d73f7f356aa5daf90b17717a2ae3c72efb55a",
+    "compression": {
+      "codec": "xz-lzma2",
+      "dictionary_bytes": 33554432,
+      "member_order": "content_sha256_then_logical_name",
+      "content_references": "earlier-regular-member-sha256-size-v1"
+    },
+    "expanded_bytes": 302133983,
+    "unique_content_bytes": 266021334
+  },
+  "regular_files": 880,
+  "aliases": 2,
+  "primary_collection_completed": true,
+  "original_files_rewritten": false,
+  "source_root": "c787bd2e2116c0190ad46725ac5c2a586080af67",
+  "pulse": "a82a7cd08a4334c5924839b7136ae9df5884da53",
+  "runtime_fingerprint": "7ab8c6f4f11d81f77d99d947d88021ab1dc249bbf189d78df12be6a087207132",
+  "training_outcome": "invalid_observation",
+  "training_certificate": null,
+  "classification_assessed": false,
+  "scientific_verdict": null
+}
