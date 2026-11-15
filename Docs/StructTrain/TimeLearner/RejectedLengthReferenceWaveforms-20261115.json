@@ -1,0 +1,76 @@
+{
+  "kind": "timelearner_fixture_logging_waveform_comparison",
+  "schema_version": 1,
+  "before_source": "1a10165507c0aa2c4c63b010f1a199b6b35c6779",
+  "after_source": "c787bd2e2116c0190ad46725ac5c2a586080af67",
+  "compared_files": 8,
+  "all_bytes_equal": true,
+  "rows": [
+    {
+      "file": "native-recovery-16/native-composite/classic-native-window5/reference-0/raw-0.csv",
+      "before_sha256": "2218251c8ce49a827fde0f7c021e1b0db50947e0c962749bc72127c133db681b",
+      "after_sha256": "2218251c8ce49a827fde0f7c021e1b0db50947e0c962749bc72127c133db681b",
+      "before_bytes": 228344,
+      "after_bytes": 228344,
+      "bytes_equal": true
+    },
+    {
+      "file": "native-recovery-16/native-composite/classic-native-window5/reference-0/raw-1.csv",
+      "before_sha256": "a98240ae02013591ef6fafbf49a334e9e9bba481e76ebc1086f210680dae3b30",
+      "after_sha256": "a98240ae02013591ef6fafbf49a334e9e9bba481e76ebc1086f210680dae3b30",
+      "before_bytes": 221879,
+      "after_bytes": 221879,
+      "bytes_equal": true
+    },
+    {
+      "file": "native-recovery-16/native-composite/classic-native-window5/reference-0/raw-2.csv",
+      "before_sha256": "da4701977a5b157b1ff426d4cf6f17dd244b46f0777fa312be50721995d803ce",
+      "after_sha256": "da4701977a5b157b1ff426d4cf6f17dd244b46f0777fa312be50721995d803ce",
+      "before_bytes": 233623,
+      "after_bytes": 233623,
+      "bytes_equal": true
+    },
+    {
+      "file": "native-recovery-16/native-composite/classic-native-window5/reference-0/raw-3.csv",
+      "before_sha256": "cabcd8fc1e82bf4bb5c9a2f99e54c0a53f766d0544971524bc41d826ffc71b34",
+      "after_sha256": "cabcd8fc1e82bf4bb5c9a2f99e54c0a53f766d0544971524bc41d826ffc71b34",
+      "before_bytes": 234548,
+      "after_bytes": 234548,
+      "bytes_equal": true
+    },
+    {
+      "file": "native-recovery-16/native-composite/classic-native-window5/reference-1/raw-0.csv",
+      "before_sha256": "957f4f3e99c106156147f089fa17bc5ed3927ed4b4f942a05b5739c5125380fe",
+      "after_sha256": "957f4f3e99c106156147f089fa17bc5ed3927ed4b4f942a05b5739c5125380fe",
+      "before_bytes": 236128,
+      "after_bytes": 236128,
+      "bytes_equal": true
+    },
+    {
+      "file": "native-recovery-16/native-composite/classic-native-window5/reference-1/raw-1.csv",
+      "before_sha256": "93bceb023bc37686a41a0f40b1126d6caca5de736b42b3e4519c6f9518827a6d",
+      "after_sha256": "93bceb023bc37686a41a0f40b1126d6caca5de736b42b3e4519c6f9518827a6d",
+      "before_bytes": 221526,
+      "after_bytes": 221526,
+      "bytes_equal": true
+    },
+    {
+      "file": "native-recovery-16/native-composite/classic-native-window5/reference-1/raw-2.csv",
+      "before_sha256": "fd58844a96759a4ab6fdeadb84a3bad9667c547a17cf8a64952dca5b17399c11",
+      "after_sha256": "fd58844a96759a4ab6fdeadb84a3bad9667c547a17cf8a64952dca5b17399c11",
+      "before_bytes": 216524,
+      "after_bytes": 216524,
+      "bytes_equal": true
+    },
+    {
+      "file": "native-recovery-16/native-composite/classic-native-window5/reference-1/raw-3.csv",
+      "before_sha256": "e72769206e659a03597e42e54e440858d250015455552a398187181106bd6553",
+      "after_sha256": "e72769206e659a03597e42e54e440858d250015455552a398187181106bd6553",
+      "before_bytes": 216316,
+      "after_bytes": 216316,
+      "bytes_equal": true
+    }
+  ],
+  "scope": "Two original cold reference groups; all4 native full/omission/repeat CSV each. No new model run, no general timing benchmark.",
+  "scientific_verdict": null
+}

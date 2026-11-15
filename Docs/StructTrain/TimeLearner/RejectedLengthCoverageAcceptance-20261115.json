@@ -136,7 +136,15 @@
     "reason": "canonical_source_or_fresh_build",
     "build_reused": false
   },
-  "model_train": "not_started",
+  "model_train": {
+    "job": "s11-n0-recovery-coverage-train-m40-a1",
+    "status": "started_result_pending",
+    "control_commit": "a8687c0315945fba9a4e8d0544601afe5e3f0dfb",
+    "runtime_fingerprint": "7ab8c6f4f11d81f77d99d947d88021ab1dc249bbf189d78df12be6a087207132",
+    "same_complete_scientific_configuration": true,
+    "source_root": "c787bd2e2116c0190ad46725ac5c2a586080af67",
+    "pulse": "a82a7cd08a4334c5924839b7136ae9df5884da53"
+  },
   "external_sdk_evidence": "failed_attempts_archived; successful_SDK_evidence_pending",
   "scientific_verdict": null,
   "whole_plan_complete": false,
@@ -174,10 +182,17 @@
     "native_job": "s07-recovery-coverage-sdk-m40-a5",
     "canonical_job": "s07-recovery-coverage-sdk-canonical-m40-a5",
     "canonical_control_commit": "7754193a47948fb0d8549ee76238017d07f95184",
-    "status": "canonical_preparation",
+    "status": "passed142_and_closed",
     "production_core_unchanged": true,
     "fixture_change": "Scoped removal/restoration of RDK_SYS_DEBUG_PROPERTIES only during native numerical ticks; actual samples and other diagnostics unchanged",
-    "expected_cpp": 142
+    "expected_cpp": 142,
+    "passed_cpp": 142,
+    "failed_cpp_ids": [],
+    "leaf_gates": 30,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "record_errors": [],
+    "all_processes_closed": true
   },
   "canonical_A3": {
     "status": "refused_before_build",
@@ -199,5 +214,11 @@
     "remaining_cases_unverified": 14,
     "heartbeat_errors": [],
     "final_capture_errors": []
+  },
+  "reference_waveform_comparison": {
+    "catalog": "RejectedLengthReferenceWaveforms-20261115.json",
+    "compared_files": 8,
+    "all_bytes_equal": true,
+    "scope": "Cold references only; not a general physics or performance proof."
   }
 }
