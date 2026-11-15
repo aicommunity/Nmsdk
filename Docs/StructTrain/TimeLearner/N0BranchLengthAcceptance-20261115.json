@@ -146,7 +146,7 @@
     "initial_resistance": 86000000
   },
   "frozen_evaluation": {
-    "status": "running",
+    "status": "32_native_trials_completed_valid_original_wrappers_failed_readonly_revalidation_running",
     "models": [
       "baseline",
       "candidate"
@@ -160,7 +160,23 @@
     "criterion_anchor": "last_stimulus",
     "reject_target_outside_window": true,
     "diagnostic_only": true,
-    "scientific_verdict": null
+    "scientific_verdict": null,
+    "source_wrappers": {
+      "baseline": {
+        "execution": "process_error",
+        "failure": "KeyError: 'source_solo'",
+        "all_processes_closed": true
+      },
+      "candidate": {
+        "execution": "process_error",
+        "failure": "KeyError: 'source_solo'",
+        "all_processes_closed": true
+      }
+    },
+    "native_conditions": 4,
+    "native_trials": 32,
+    "metrics_catalog": "N0BranchLengthFrozen-20261115.json",
+    "read_only_revalidation_job": "s11-n0-length-frozen-report-m40-a1"
   },
   "sdk_source_root_a1": "22e0f4cb171a9d7affe94164e517df6d054742c6",
   "training_temporal_report": {
