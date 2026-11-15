@@ -67,7 +67,7 @@ class N1RejectedRecoveryBaselineTest(unittest.TestCase):
                    dict(rows=rows, scientific_verdict=None))
             self.assertTrue(inspect(output/leaf['name']/'process/contained')['all_processes_closed'])
             self.assertEqual((result['execution'], result['validity'], result['assertion_status']),
-                             ('completed', 'valid', 'failed'))
+                             ('process_error', 'valid', 'failed'))
             self.assertEqual(result['inventory']['observed'], 1)
             self.assertEqual(result['inventory']['failed_test_ids'], leaf['expected_ids'])
             cases = list(ET.parse(output/leaf['name']/'native.xml').getroot().iter('testcase'))
