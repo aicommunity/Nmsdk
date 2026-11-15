@@ -19,3 +19,11 @@
 Порядок работы: воспроизвести текущую production-последовательность; определить ограниченный порядок новых legal candidates; реализовать отдельно от valid-observation scheduling; kernel A/B с реальным контроллером на Elder/M40; isolated native SDK; cold same-condition N1-проверка и все выбранные full/omission/repeat графики. Не менять работающий runtime exploratory опыта. Не повышать допуски и не подтверждать синхронность прогнозом.
 
 Всю приёмку фиксировать результатами и полными commit SHA. Child-first --no-ff merge, затем root; без переписывания истории. Предыдущий цикл дал реальные новые результаты и опубликованные артефакты (progress); исходный план по-прежнему активен, этапы1–12 частичны.
+
+## Кандидат реализации: требуется приёмка
+
+В Core/TimeLearner/BoundedTraining.{h,cpp} подготовлен отдельный opt-in путь для sealed rejected CandidateWindow при N1. Первый recovery предлагает тот же активный L, отделяет upstream bank Branch и первым проверяет нижнюю границу нового фактического Rs-domain. Следующие recovery используют ограниченное покрытие неиспытанных длин (наибольший пробел), сохраняя downstream/anchor. Если первый same-length domain оказался singleton/Unavailable/не имеет новых Rs, разрешён один domain-only переход к дальней длине. Ни одна непринятая проба не становится scalar residual; свежие native domain, apply/readback и anchor/input обязательны. Допуски, бюджеты и обычное расписание по valid observations не меняются.
+
+В production integration corpus добавлены пять cases NativeCandidateWindowRecovery: ClassicN1FixedRsExploresBeyondNearestMesh, BranchN1FixedRsExploresBeyondNearestMesh, ClassicN1RejectedWindowExploresFreshRs, BranchN1RejectedWindowExploresFreshRs, BranchN1FourInputsSeparateOnlyUpstreamBank. Первый снимок root сохраняет Pulse5052 для baseline; затем отдельный снимок закрепит candidate Pulse. Требуется выполнить одинаковый corpus на обеих версиях, сохранить исходные failures и положительную проверку candidate. Native fixture использует реальный storage/Environment/scheduler, а не копию функции или поддельный rejected token.
+
+На момент этой записи исправление не принято, научное улучшение не заявляется.

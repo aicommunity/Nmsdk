@@ -4090,8 +4090,12 @@ TEST(NativeCandidateWindowRejection,CapabilityExpiresAfterExternalStop){Rejected
 namespace {
 enum class WindowRecoveryCase { Advance, RepeatedN0, DefaultRetry, StringOnly, InvalidBudget, ProbeBudget, EditBudget, ExternalStop, WrongRevision };
 
-template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=false,bool ambiguous=false,bool wide=false) {
-    NativeCompositeFixture<Owner> f(2000,false,64,false,!n1,false,2,1800.,false,ambiguous?1.8:0.,(ambiguous || wide)?64:8);
+template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=false,bool ambiguous=false,bool wide=false,bool varyResistance=false,std::size_t dimension=2) {
+    constexpr bool branch=NativeCompositeFixture<Owner>::branch;
+    const std::size_t active=branch?dimension-2:0;
+    const double groupLimit=ambiguous || dimension>2?12.:2.;
+    NativeCompositeFixture<Owner> f(2000,false,64,false,!n1,false,dimension,1800.,false,
+        ambiguous || dimension>2?1.8:0.,(ambiguous || wide)?64:8);
     EnableCandidateWindow(f,"candidate-attempt",128u*1024u*1024u,[&](auto& contract) {
         if(ambiguous) {
             // Shared-cable growth may also move the freshly measured anchor.
@@ -4103,13 +4107,13 @@ template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=fa
             }
             return;
         }
-        auto& policy=contract.candidateWindowPolicy.inputs[0];
+        auto& policy=contract.candidateWindowPolicy.inputs[active];
         policy.delayFramesPerSegment=3*f.frequency/100;policy.baseLeftGuardFrames=policy.baseRightGuardFrames=2;
     });
     f.attempt->EnableRejectedSearchAdmission();
-    const auto references=CaptureWindowReferences(f,true,"reference","candidate-attempt",ambiguous?10.:2.);
+    const auto references=CaptureWindowReferences(f,true,"reference","candidate-attempt",groupLimit);
     if(ambiguous) {
-        auto current=f.owner->ReadNativeParameters();current[0].length=54;
+        auto current=f.owner->ReadNativeParameters();current[active].length=54;
         ASSERT_EQ(f.owner->ApplyNativeParameters(current).status,NativeEditStatus::Applied);
     }
     const auto initial=f.owner->ReadNativeParameters();
@@ -4122,22 +4126,46 @@ template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=fa
     cfg.invalidMeasurementRecovery=mode==WindowRecoveryCase::DefaultRetry?
         InvalidMeasurementRecovery::RetrySameCandidate:InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;
     for(const auto& p:initial)cfg.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
-    cfg.bounds[0].maximumLength=wide?64:ambiguous?55:4;
+    cfg.bounds[active].maximumLength=wide?64:ambiguous?55:4;
+    for(std::size_t i=0;i<active;++i)cfg.bounds[i].maximumLength=64;
+    if(varyResistance)cfg.bounds[active].minimumResistance=1e6;
     BoundedTrainingSession search(references,*f.attempt->CandidateWindowReferences(),cfg,initial,n1,
         f.owner->ReadNativeTrainingCapacitance());
     std::size_t logical=0,domains=0;bool recovered=false,editedAfterRecovery=false;
     std::vector<InputParameters> rejectedPoint;std::size_t probesAtFailure=0;
+    std::optional<ResistanceDomainAssessment> recoveryDomain;
     while(const auto action=search.NextAction()) {
         ASSERT_LT(++logical,64u);
         if(action->kind==TrainingActionKind::ResistanceDomain) {
             const auto revision=f.Revision();
             const auto domain=f.owner->AssessNativeTrainingResistanceDomain(action->parameters,action->inputIndex,action->capacitance);
-            EXPECT_EQ(f.Revision(),revision);search.AssessedDomain(action->serial,domain,revision);++domains;continue;
+            EXPECT_EQ(f.Revision(),revision);
+            if(recovered)recoveryDomain=domain;
+            search.AssessedDomain(action->serial,domain,revision);++domains;continue;
         }
         if(action->kind==TrainingActionKind::Edit) {
             if(recovered) {
-                EXPECT_NE(action->parameters.at(0).length,rejectedPoint.at(0).length);
-                if(wide)EXPECT_EQ(action->parameters.at(0).length,64); // outside the four-length nearest mesh
+                if(varyResistance) {
+                    ASSERT_TRUE(recoveryDomain);ASSERT_EQ(recoveryDomain->status,ResistanceDomainStatus::Available);
+                    EXPECT_EQ(action->parameters.at(active).length,rejectedPoint.at(active).length);
+                    EXPECT_LT(action->parameters.at(active).resistance,rejectedPoint.at(active).resistance);
+                    EXPECT_DOUBLE_EQ(action->parameters.at(active).resistance,
+                        std::max(cfg.bounds[active].minimumResistance,recoveryDomain->minimumResistance));
+                    EXPECT_LE(action->parameters.at(active).resistance,recoveryDomain->maximumResistance);
+                    for(std::size_t i=0;i<initial.size();++i) {
+                        EXPECT_EQ(action->parameters[i].synapses,rejectedPoint[i].synapses);
+                        if(i!=active)EXPECT_EQ(action->parameters[i].resistance,rejectedPoint[i].resistance);
+                        if(!branch || i>active)EXPECT_EQ(action->parameters[i].length,rejectedPoint[i].length);
+                    }
+                    if(branch && active) {
+                        // The active bank must become independently adjustable,
+                        // while every downstream/committed input stays fixed.
+                        EXPECT_GT(action->parameters[active-1].length,action->parameters[active].length);
+                    }
+                } else {
+                    EXPECT_NE(action->parameters.at(active).length,rejectedPoint.at(active).length);
+                    if(wide)EXPECT_EQ(action->parameters.at(active).length,64); // outside nearest mesh
+                }
                 EXPECT_EQ(f.owner->ReadNativeParameters(),rejectedPoint); // queued edits have no physical side effects
                 editedAfterRecovery=true;
             }
@@ -4154,7 +4182,7 @@ template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=fa
             return;
         }
         f.Run(f.Request(action->inputIndex,action->runId,action->trialId,action->modelEpoch),CompositeMeasurementPurpose::Search,
-            [&,serial=action->serial](const auto& p){search.ArmCandidateWindow(serial,p);},{},ambiguous?10.:2.);
+            [&,serial=action->serial](const auto& p){search.ArmCandidateWindow(serial,p);},{},groupLimit);
         if(f.attempt->Measurement()) {
             SaveCandidateWindowGroup(f,"core-valid-"+std::to_string(action->serial));
             search.ConsumeCandidateWindow(*f.attempt->Measurement(),f.Revision());continue;
@@ -4297,6 +4325,11 @@ TEST(NativeCandidateWindowRecovery,ClassicN0AdvancesAndRejectsReplay){WindowReco
 TEST(NativeCandidateWindowRecovery,BranchN0AdvancesAndRejectsReplay){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance);}
 TEST(NativeCandidateWindowRecovery,ClassicN1ReassessesActualDomains){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::Advance,true);}
 TEST(NativeCandidateWindowRecovery,BranchN1ReassessesActualDomains){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance,true);}
+TEST(NativeCandidateWindowRecovery,ClassicN1FixedRsExploresBeyondNearestMesh){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::Advance,true,false,true);}
+TEST(NativeCandidateWindowRecovery,BranchN1FixedRsExploresBeyondNearestMesh){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance,true,false,true);}
+TEST(NativeCandidateWindowRecovery,ClassicN1RejectedWindowExploresFreshRs){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::Advance,true,false,false,true);}
+TEST(NativeCandidateWindowRecovery,BranchN1RejectedWindowExploresFreshRs){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance,true,false,false,true);}
+TEST(NativeCandidateWindowRecovery,BranchN1FourInputsSeparateOnlyUpstreamBank){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance,true,false,false,true,4);}
 TEST(NativeCandidateWindowRecovery,ClassicN0RepeatedCandidatesRequireFreshAnchor){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::RepeatedN0);}
 TEST(NativeCandidateWindowRecovery,BranchN0RepeatedCandidatesRequireFreshAnchor){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::RepeatedN0);}
 TEST(NativeCandidateWindowRecovery,ClassicDefaultPolicyCannotAdvance){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::DefaultRetry);}
