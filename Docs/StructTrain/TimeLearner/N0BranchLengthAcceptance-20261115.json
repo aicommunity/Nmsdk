@@ -1,0 +1,58 @@
+{
+  "kind": "timelearner_n0_branch_length_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-15",
+  "baseline_root": "d074fdf1b6b9d5f196fc4e4d366a94e31f94763c",
+  "candidate_root": "a8c5a59f3525c05e6da38f16c55c675152ebb85b",
+  "candidate_pulse": "5fc6bb4131d49f8ef884f82ccede66270e9d0c5c",
+  "sdk_source_root": "22e0f4cb171a9d7affe94164e517df6d054742c6",
+  "worker": "M40",
+  "controller_ab": {
+    "same_test_sources": true,
+    "cases": 6,
+    "baseline_failures": [
+      "BoundedTrainingN0LengthFamily/BranchN4MeasuresDistantCandidateWithinOriginalBudget",
+      "BoundedTrainingN0LengthFamily/BranchN5MeasuresDistantCandidateWithinOriginalBudget"
+    ],
+    "candidate_failed_test_ids": [],
+    "expected_comparison_passed": true,
+    "raw_ab_assertion_status": "failed",
+    "initial_attempt": "A1 retains two erroneous L16 control expectations in addition to two intended baseline failures",
+    "corrected_attempt": "A2: unchanged production, both control expectations corrected to sampled direct L19"
+  },
+  "external_evidence": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/64/64ee475e1b751da2ef7f6c16b2bd17d108e6e727e63c4ced0ad2df74ce25d8cf",
+    "sha256": "64ee475e1b751da2ef7f6c16b2bd17d108e6e727e63c4ced0ad2df74ce25d8cf",
+    "bytes": 581072,
+    "logical_name": "n0-branch-length-ab-evidence-a2.tar.gz",
+    "manifest": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/n0-branch-length/ab-evidence-a2.json",
+    "files": 137
+  },
+  "native_sdk": "A1 builds new tests only in separate algorithm target; main StorageComponents registration omitted, A2 corrects it",
+  "native_model_train": "not_started",
+  "scientific_verdict": null,
+  "workers": {
+    "M40": {
+      "cases": 6,
+      "baseline_failed_test_ids": [
+        "BoundedTrainingN0LengthFamily/BranchN4MeasuresDistantCandidateWithinOriginalBudget",
+        "BoundedTrainingN0LengthFamily/BranchN5MeasuresDistantCandidateWithinOriginalBudget"
+      ],
+      "candidate_failed_test_ids": [],
+      "whole_group_closed": true
+    },
+    "Elder-1": {
+      "cases": 6,
+      "baseline_failed_test_ids": [
+        "BoundedTrainingN0LengthFamily/BranchN4MeasuresDistantCandidateWithinOriginalBudget",
+        "BoundedTrainingN0LengthFamily/BranchN5MeasuresDistantCandidateWithinOriginalBudget"
+      ],
+      "candidate_failed_test_ids": [],
+      "whole_group_closed": true,
+      "compiler": "/usr/bin/g++ (resolved in archived toolchain)"
+    }
+  }
+}

@@ -194,6 +194,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_FinalVerification.cpp
     Test_PulseLib_BoundedTraining.cpp
     Test_PulseLib_N0Geometry.cpp
+    Test_PulseLib_N0LengthFamily.cpp
     Test_PulseLib_CompositeTraining.cpp
     Test_PulseLib_CandidateWindowDeclarations.cpp
     Test_PulseLib_CandidateWindowProposalData.cpp
