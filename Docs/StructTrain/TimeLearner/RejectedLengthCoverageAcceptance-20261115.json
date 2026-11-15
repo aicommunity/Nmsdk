@@ -1,7 +1,7 @@
 {
   "kind": "timelearner_rejected_length_coverage_acceptance",
   "schema_version": 1,
-  "source_root": "1a10165507c0aa2c4c63b010f1a199b6b35c6779",
+  "source_root": "c787bd2e2116c0190ad46725ac5c2a586080af67",
   "pulse": "a82a7cd08a4334c5924839b7136ae9df5884da53",
   "stage_scope": "Branch N0 typed rejected-window length proposal only",
   "cpp_inventory": 142,
@@ -166,22 +166,38 @@
     "manifest": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/recovery-coverage/failed-attempts-a1.json"
   },
   "fresh_sdk_retry": {
-    "source_root": "1a10165507c0aa2c4c63b010f1a199b6b35c6779",
+    "source_root": "c787bd2e2116c0190ad46725ac5c2a586080af67",
     "pulse": "a82a7cd08a4334c5924839b7136ae9df5884da53",
-    "source": "/media/user/Data/TimeLearnerRefactor/source-recovery-coverage-sdk-a3",
-    "build": "/media/user/Data/TimeLearnerRefactor/build-recovery-coverage-sdk-a3",
-    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a3",
-    "native_job": "s07-recovery-coverage-sdk-m40-a3",
-    "canonical_job": "s07-recovery-coverage-sdk-canonical-m40-a4",
-    "canonical_control_commit": "4e906351f12d7fbc326ee2e531e84e3db404e961",
+    "source": "/media/user/Data/TimeLearnerRefactor/source-recovery-coverage-sdk-a5",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-recovery-coverage-sdk-a5",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a5",
+    "native_job": "s07-recovery-coverage-sdk-m40-a5",
+    "canonical_job": "s07-recovery-coverage-sdk-canonical-m40-a5",
+    "canonical_control_commit": "7754193a47948fb0d8549ee76238017d07f95184",
     "status": "canonical_preparation",
-    "source_test_fix": "wide fixture native maximumCableLength64 to match existing search max64",
     "production_core_unchanged": true,
+    "fixture_change": "Scoped removal/restoration of RDK_SYS_DEBUG_PROPERTIES only during native numerical ticks; actual samples and other diagnostics unchanged",
     "expected_cpp": 142
   },
   "canonical_A3": {
     "status": "refused_before_build",
     "reason": "native_preparation_leaf_union_or_order",
     "fix": "A4 selected IDs explicitly follow flattened runplan; same142-case set"
+  },
+  "fresh_sdk_A3": {
+    "source_root": "1a10165507c0aa2c4c63b010f1a199b6b35c6779",
+    "job": "s07-recovery-coverage-sdk-m40-a3",
+    "completed_cpp": 128,
+    "passed_cpp": 128,
+    "failed_cpp_ids": [],
+    "completed_leaf_gates": 17,
+    "timeout_case": "NativeCandidateWindowRecovery/ClassicAmbiguousSearchQueuesFreshCandidate",
+    "timeout_seconds": 300,
+    "validity": "incomplete_test_observation",
+    "assertion_status": "not_assessed",
+    "reason": "native_gate_loaded_runtime_missing",
+    "remaining_cases_unverified": 14,
+    "heartbeat_errors": [],
+    "final_capture_errors": []
   }
 }
