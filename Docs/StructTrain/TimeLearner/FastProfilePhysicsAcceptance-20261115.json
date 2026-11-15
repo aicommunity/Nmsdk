@@ -58,5 +58,83 @@
       "cold": "45bc179c233e46e110e7d01ec90478905752ca0f23db09489482836b4856b87b",
       "grown": "51be6e1e79a5b72198a871de59c7e4caba2d3fd0a197799f6dafaa95d28b6902"
     }
+  },
+  "uniform_profile_physics": {
+    "job": "s04-uniform-profile-audit-m40-a1",
+    "source": "38050b149b94d4e4cb7ed9036ca71cd7fd8bc3c6",
+    "passed_tests": 2,
+    "closed": true,
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/1a/1a9716787815331c5b506b1b39ee46136b1d5750bbbffb1875d6ca9371dea702",
+      "sha256": "1a9716787815331c5b506b1b39ee46136b1d5750bbbffb1875d6ca9371dea702",
+      "bytes": 275412
+    },
+    "scope": "actual cold/grown data consistency; hash-consistent corruption rejected; no native execution claim"
+  },
+  "measured_window_regression": {
+    "job": "s03-uniform-window-regression-m40-a1",
+    "source": "02f61f97ff06d3d9965a8e47f0e5d3aeee5e1763",
+    "passed_tests": 1,
+    "closed": true,
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ce/cee021f14032d77b851c066c18c56027b25bf519581415a313ed5a7684cf103a",
+      "sha256": "cee021f14032d77b851c066c18c56027b25bf519581415a313ed5a7684cf103a",
+      "bytes": 307702
+    },
+    "scope": "old fast-profile arithmetic rejected; actual measured-reference guards produce same full frame domain at L1/28/100/256"
+  },
+  "baseline_temporal_report": {
+    "job": "s11-fast-baseline-report-m40-a3",
+    "source": "de39f469d6c9a502661c64f057b11249a4964042",
+    "passed_tests": 1,
+    "closed": true,
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/89/894004a3b1c58c1f377c72bed46b1565720a15cd858b7eb746665dd3b2cb0856",
+      "sha256": "894004a3b1c58c1f377c72bed46b1565720a15cd858b7eb746665dd3b2cb0856",
+      "bytes": 32344164
+    },
+    "files": 782,
+    "png_figures": 238,
+    "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-15/fast-profile-baseline/index.html",
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/fast-profile-physics/baseline-temporal-report-a3.json",
+    "visually_reviewed": [
+      "cold-original/soma-001/overview.png",
+      "cold-storage-baseline/soma-001/overview.png",
+      "grown-original/soma-001/overview.png",
+      "grown-storage-baseline/soma-001/overview.png"
+    ],
+    "all_figures_manually_reviewed": false,
+    "observations": "four separate cold crests; three grown crests with early shared response; stock and storage curves visually equal; all four CSV byte equality separately verified",
+    "classification_assessed": false
+  },
+  "training": {
+    "stock": "s11-uniform-profile0-N1-train-m40-a1",
+    "fast_corrected": "s11-uniform-profile3-N1-train-m40-a2",
+    "status": "native_running; no training or classification success claimed",
+    "first_fast": {
+      "job": "s11-uniform-profile3-N1-train-m40-a1",
+      "outcome": "invalid_model",
+      "reason": "candidate_window_proposal_arithmetic_rejected",
+      "scientific_validity": "invalid_config",
+      "references": 4,
+      "candidates": 0,
+      "archive": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/7a/7a5d80842a7479d3132d3aaf5da0a818fcbd50a94337a1ae60aec9328e0f3ea7",
+        "sha256": "7a5d80842a7479d3132d3aaf5da0a818fcbd50a94337a1ae60aec9328e0f3ea7",
+        "bytes": 2624617
+      }
+    }
   }
 }
