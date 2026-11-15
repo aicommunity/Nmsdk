@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-native-search-history-elder-a1",
+  "package_fingerprint": "281557dcfd0a170fd2e4e93eba7f99c77ed1916b26a57067126de067c6c59e3c",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_training_search_report.TrainingSearchReportTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_training_search_report.TrainingSearchReportTest.test_branch_n0_more_than_four_inputs_and_extra_candidate_fields_survive",
+    "Scripts.StructTrain.TimeLearner.tests.test_training_search_report.TrainingSearchReportTest.test_cli_refuses_output_inside_original_run_before_any_audit",
+    "Scripts.StructTrain.TimeLearner.tests.test_training_search_report.TrainingSearchReportTest.test_duplicate_trial_unknown_schema_and_nonfinite_residual_are_refused",
+    "Scripts.StructTrain.TimeLearner.tests.test_training_search_report.TrainingSearchReportTest.test_exact_revision_and_parameters_match_is_not_a_certificate",
+    "Scripts.StructTrain.TimeLearner.tests.test_training_search_report.TrainingSearchReportTest.test_parameters_alone_do_not_prove_actual_model_was_measured",
+    "Scripts.StructTrain.TimeLearner.tests.test_training_search_report.TrainingSearchReportTest.test_summary_changed_after_full_audit_cannot_be_projected",
+    "Scripts.StructTrain.TimeLearner.tests.test_training_search_report.TrainingSearchReportTest.test_unretained_history_is_unknown_instead_of_unmeasured"
+  ],
+  "fixtures": {}
+}

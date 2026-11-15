@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-shared-export-sdk-canonical-elder-a2",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "c73575fe545b00cc7c9bf170c81c185c30b7026a",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "native-canonical-preparation",
+    "plan": {
+      "path": "/home/user/timelearner-refactor/requests/shared-export-sdk102-elder-a2/Docs/StructTrain/TimeLearner/ValidationPlans/ElderSharedExportBoundarySdkA2-20261112/canonical-plan.json",
+      "sha256": "3dd33eede7d69fde38e9e3f9343359a0a30d5383f7d6df6f3c6a8dd5a290ca47"
+    }
+  }
+}

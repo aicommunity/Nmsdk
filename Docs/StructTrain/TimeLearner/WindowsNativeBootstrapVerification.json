@@ -1,0 +1,32 @@
+{
+  "kind": "independent_windows_native_bootstrap_metadata_verification",
+  "evidence_commit": "6c4b2eb16e999c5f3f1159d3f535f951271f8d88",
+  "source_root": "a1d722259a6fe89a91a289080aa546168be5966a",
+  "PulseLib": "c17ebd2cc75abd3a1562492907c90782232c2ea6",
+  "archive_members_verified": 257,
+  "archive_bytes": 1170620,
+  "archive_sha256": "04107af94866a748d5c0b4073d65252b1ebd8cf13eae0f01c36d3976a79789c2",
+  "repository_source_groups_verified": 8,
+  "tracked_materialized_source_files_verified": 4118,
+  "build_passed": true,
+  "checks": [
+    {
+      "group": "probe-algorithms",
+      "passed": 34,
+      "wall_seconds": 0.0414646
+    },
+    {
+      "group": "dataset-clock",
+      "passed": 20,
+      "wall_seconds": 144.3530913
+    }
+  ],
+  "runtime_inventory_files_unchanged": 51,
+  "actual_loaded_dll_capture": false,
+  "os_memory_quota_enforced": false,
+  "scientific_worker_admitted": false,
+  "classification_experiments_executed": false,
+  "prior_failures_preserved": 3,
+  "local_native_execution_or_trace_arithmetic": false,
+  "whole_plan_complete": false
+}

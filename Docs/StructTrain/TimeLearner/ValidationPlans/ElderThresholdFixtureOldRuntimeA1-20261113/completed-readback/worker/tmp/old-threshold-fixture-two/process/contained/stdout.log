@@ -1,0 +1,28 @@
+Note: Google Test filter = NativeThresholdCandidate.ClassicN1_2000:NativeThresholdCandidate.BranchN1_2000
+[==========] Running 2 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 2 tests from NativeThresholdCandidate
+[ RUN      ] NativeThresholdCandidate.ClassicN1_2000
+/home/user/timelearner-refactor/source-publication-receipt-sdk-a1/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3672: Failure
+Value of: service.Certificate()
+  Actual: false
+Expected: true
+maximum_sweeps_exhausted
+[  FAILED  ] NativeThresholdCandidate.ClassicN1_2000 (15378 ms)
+[ RUN      ] NativeThresholdCandidate.BranchN1_2000
+/home/user/timelearner-refactor/source-publication-receipt-sdk-a1/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3672: Failure
+Value of: service.Certificate()
+  Actual: false
+Expected: true
+maximum_sweeps_exhausted
+[  FAILED  ] NativeThresholdCandidate.BranchN1_2000 (10583 ms)
+[----------] 2 tests from NativeThresholdCandidate (25962 ms total)
+
+[----------] Global test environment tear-down
+[==========] 2 tests from 1 test suite ran. (25962 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 2 tests, listed below:
+[  FAILED  ] NativeThresholdCandidate.ClassicN1_2000
+[  FAILED  ] NativeThresholdCandidate.BranchN1_2000
+
+ 2 FAILED TESTS

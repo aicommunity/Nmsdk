@@ -1,0 +1,26 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 3,
+  "runtime_manifest": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native119-m40-a2/common-codec-11-runtime.json",
+  "source_root": "/media/user/Data/TimeLearnerRefactor/source-package6-native119-m40-a2",
+  "expected_test_ids": [
+    "NativeCompositeDeclarations/ClassicCold6AndProtocol4StrictRoundtrip",
+    "NativeCompositeDeclarations/BranchCold6AndProtocol4StrictRoundtrip",
+    "NativeCompositeDeclarations/ClassicCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCompositeDeclarations/BranchCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCompositeConsoleArtifacts/PreflightKnownZeroAccounting",
+    "NativeCompositeConsoleArtifacts/FailedStartNeverInventsArchiveAccounting",
+    "NativeCompositeConsoleArtifacts/BaseSchemasKeepOwningNumericTypeAndAllFieldsThroughBytes",
+    "NativeCandidateWindowCold7/ClassicInitialDeclarationUsesActualParametersRatherThanTemplate",
+    "NativeCandidateWindowCold7/BranchInitialDeclarationUsesActualParametersRatherThanTemplate",
+    "NativeCandidateWindowCold7/ClassicAllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCandidateWindowCold7/BranchAllBaseSchemasKeepNumericTypeThroughSerializedBytes"
+  ],
+  "maximum_wall_seconds": 600,
+  "asan_options": "detect_leaks=0",
+  "cooperative_runtime_capture": true,
+  "process_limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 128
+  }
+}

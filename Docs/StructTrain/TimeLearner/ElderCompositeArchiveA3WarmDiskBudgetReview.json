@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "attempt": "s07-composite-archive-elder-normal-a3",
+  "proposed_only_not_dispatched": false,
+  "root": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+  "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+  "source_TU_sha256": "44acf89749caa4ff7644ffbba6726a60a8f6b8de91398679e52a61ecd39f1cca",
+  "source_review": {
+    "fixture_line": 404,
+    "production_assignment": "Core/TimeLearner/ConfiguredNativeTraining.cpp:151",
+    "production_validator": "Core/TimeLearner/NativeTrainingServiceComposite.cpp:26",
+    "production_code_changed": false
+  },
+  "read_only_actual_basis": {
+    "A2_watchdog_peak_bytes": 210640896,
+    "A2_prior_summary_peak_bytes": 207884288,
+    "larger_actual_peak_used": true,
+    "A2_runtime_allocated_bytes": 131166208,
+    "A2_OUT_allocated_bytes": 39550976,
+    "A2_Composite_object_allocated_bytes": 2600960,
+    "fresh_free_bytes": 1438830592
+  },
+  "source_bounds": {
+    "dimension": 2,
+    "frequency_hz": 2000,
+    "duration": 0.17,
+    "maximum_samples_per_trial": 540,
+    "native_trials_per_group": 4,
+    "maximum_total_samples_per_group": 2160,
+    "CSV_reservation_row_bytes": 133,
+    "CSV_headers_bytes_per_group": 320,
+    "CSV_primary_bytes_per_group": 287600,
+    "complete_bundle_count": 4,
+    "maximum_reference_groups_per_complete_bundle": 2,
+    "maximum_search_and_final_groups_per_complete_bundle": 32,
+    "complete_bundle_max_records": 34,
+    "partial_bundle_max_records": 1,
+    "ambiguous_bundle_max_records": 2,
+    "all_6_records_derived": 139,
+    "rounded_all_6_records_budget": 140,
+    "warm_restart_keeps_only_reference_groups": "NativeTrainingServiceComposite.cpp:96-99",
+    "search_reference_budget_sources": "Test_PulseLib_CompositeTraining.cpp:405-419; NativeTrainingServiceComposite.cpp:235-268",
+    "all_six_bundle_primary_CSV_bound_bytes": 40264000,
+    "embedded_base64_index_bound_bytes": 53685336,
+    "growth_groups": 8,
+    "growth_primary_bound_bytes": 2300800
+  },
+  "engineering_estimate_components_MiB": {
+    "hot_compile_fresh_runtime_scripts_only_donor_source_and_ordinary_receipts": 230,
+    "six_bundle_raw_CSV_and_embedded_base64_rounded": 90,
+    "record_JSON_index_and_sidecars_1MiB_per_copy_140_records_two_copies": 280,
+    "growth_CSV_and_JSON": 19,
+    "boundary_configuration_and_model_JSON": 8,
+    "additional_margin_within_cap": 141
+  },
+  "total_proposed_incremental_cap_bytes": 805306368,
+  "unchanged_minimum_free_bytes": 536870912,
+  "new_preflight_bytes": 1342177280,
+  "old_A2_incremental_cap_bytes": 1073741824,
+  "old_A2_preflight_bytes": 1610612736,
+  "honesty_limits": [
+    "CSV primary bound is source-derived using production PrimaryReservation; JSON/donor/compiler/provenance allocations are conservative engineering reservations, not a new serializer-enforced universal mathematical size limit.",
+    "Watchdog still hard-stops only this owned group if total increment exceeds768MiB or physical free falls below512MiB, preserving the original reason.",
+    "Git publication runs only after closed capture and must preflight actual frozen corpus size/free space separately; compression success/space is not assumed to prove numeric acceptance.",
+    "No A2 budget or result is changed; full206 still required; no cleanup performed."
+  ],
+  "order": {
+    "kind": "service22_then_archive23_then_all_remaining_unchanged206",
+    "leaf_count": 96,
+    "expected_case_count": 206,
+    "same_id_union_as_A2": true,
+    "old_plan_sha256": "b562bfcde2fd264095e10eef61aba58085d39ea7ee8cc3ef4738a30c6bc850c6",
+    "new_plan_sha256": "4c09128f17f7ae265fa227992b8749da3fc193a64a123f4ef33ac3a550d013f7",
+    "first_leaf": "composite-native-46",
+    "archive_leaf_index_zero_based": 22
+  },
+  "review_state": "parent_reviewed_explicit_new_A3_budget",
+  "dispatch_state_at_review": "not_dispatched",
+  "approval_scope": "New A3 only: 768MiB increment +512MiB physical floor, 1280MiB fresh preflight; no deletion and no retroactive A2 budget change"
+}

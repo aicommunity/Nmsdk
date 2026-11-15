@@ -1,0 +1,252 @@
+{
+  "kind": "timelearner_n0_branch_length_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-15",
+  "baseline_root": "d074fdf1b6b9d5f196fc4e4d366a94e31f94763c",
+  "candidate_root": "a8c5a59f3525c05e6da38f16c55c675152ebb85b",
+  "candidate_pulse": "5fc6bb4131d49f8ef884f82ccede66270e9d0c5c",
+  "sdk_source_root": "549fba9761e4f4be1a9861736170e182cb3567f4",
+  "worker": "M40",
+  "controller_ab": {
+    "same_test_sources": true,
+    "cases": 6,
+    "baseline_failures": [
+      "BoundedTrainingN0LengthFamily/BranchN4MeasuresDistantCandidateWithinOriginalBudget",
+      "BoundedTrainingN0LengthFamily/BranchN5MeasuresDistantCandidateWithinOriginalBudget"
+    ],
+    "candidate_failed_test_ids": [],
+    "expected_comparison_passed": true,
+    "raw_ab_assertion_status": "failed",
+    "initial_attempt": "A1 retains two erroneous L16 control expectations in addition to two intended baseline failures",
+    "corrected_attempt": "A2: unchanged production, both control expectations corrected to sampled direct L19"
+  },
+  "external_evidence": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/64/64ee475e1b751da2ef7f6c16b2bd17d108e6e727e63c4ced0ad2df74ce25d8cf",
+    "sha256": "64ee475e1b751da2ef7f6c16b2bd17d108e6e727e63c4ced0ad2df74ce25d8cf",
+    "bytes": 581072,
+    "logical_name": "n0-branch-length-ab-evidence-a2.tar.gz",
+    "manifest": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/n0-branch-length/ab-evidence-a2.json",
+    "files": 137
+  },
+  "native_sdk": {
+    "source_root": "549fba9761e4f4be1a9861736170e182cb3567f4",
+    "candidate_pulse": "5fc6bb4131d49f8ef884f82ccede66270e9d0c5c",
+    "A1": {
+      "execution": "refused",
+      "reason": "compiled_selected_cohort_missing",
+      "expected": 105,
+      "executed": 0,
+      "source_root": "22e0f4cb171a9d7affe94164e517df6d054742c6"
+    },
+    "canonical_A2": {
+      "execution": "refused_before_build",
+      "reason": "build_profile: parallel8 is unsupported by worker (1/2 only)"
+    },
+    "canonical_A3": {
+      "status": "passed_and_closed",
+      "parallel": 2,
+      "leaf_memory_bytes": 8589934592
+    },
+    "model_train": {
+      "job": "s11-n0-branch-length-train-m40-a1",
+      "execution": "completed",
+      "validity": "valid",
+      "outcome": "budget_exhausted",
+      "certificate": null,
+      "consumed_candidates": 43,
+      "search_probes": 87,
+      "inputs_seen": [
+        2
+      ],
+      "joint_ready": 0,
+      "best_amplitude_residual": 0.0000452931682249913,
+      "source_root": "549fba9761e4f4be1a9861736170e182cb3567f4",
+      "pulse": "5fc6bb4131d49f8ef884f82ccede66270e9d0c5c",
+      "runtime_fingerprint": "64c67d93b53065bed5a31e9b87563804fbca235a5adceeb1ae2212e62b3cadc5",
+      "outer_closed": true,
+      "primary_catalog": "N0BranchLengthPrimary-20261115.json"
+    },
+    "SDK_A2": {
+      "assertion_passed_cases": 105,
+      "expected_cpp_cases": 105,
+      "failed_cpp_ids": [],
+      "heartbeat_errors": [],
+      "final_capture_errors": [],
+      "outer": "closed",
+      "external_evidence": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a4/a4a2fe182163dc069b9fdf9996c35a5920ae301aa9661d81e432e4030cceba24",
+        "sha256": "a4a2fe182163dc069b9fdf9996c35a5920ae301aa9661d81e432e4030cceba24",
+        "bytes": 5570725
+      }
+    }
+  },
+  "native_model_train": "completed_valid_budget_exhausted_no_certificate",
+  "scientific_verdict": null,
+  "workers": {
+    "M40": {
+      "cases": 6,
+      "baseline_failed_test_ids": [
+        "BoundedTrainingN0LengthFamily/BranchN4MeasuresDistantCandidateWithinOriginalBudget",
+        "BoundedTrainingN0LengthFamily/BranchN5MeasuresDistantCandidateWithinOriginalBudget"
+      ],
+      "candidate_failed_test_ids": [],
+      "whole_group_closed": true
+    },
+    "Elder-1": {
+      "cases": 6,
+      "baseline_failed_test_ids": [
+        "BoundedTrainingN0LengthFamily/BranchN4MeasuresDistantCandidateWithinOriginalBudget",
+        "BoundedTrainingN0LengthFamily/BranchN5MeasuresDistantCandidateWithinOriginalBudget"
+      ],
+      "candidate_failed_test_ids": [],
+      "whole_group_closed": true,
+      "compiler": "/usr/bin/g++ (resolved in archived toolchain)"
+    }
+  },
+  "external_evidence_workers": {
+    "M40": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/64/64ee475e1b751da2ef7f6c16b2bd17d108e6e727e63c4ced0ad2df74ce25d8cf",
+      "sha256": "64ee475e1b751da2ef7f6c16b2bd17d108e6e727e63c4ced0ad2df74ce25d8cf",
+      "bytes": 581072,
+      "logical_name": "n0-branch-length-ab-evidence-a2.tar.gz",
+      "manifest": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/n0-branch-length/ab-evidence-a2.json",
+      "files": 137
+    },
+    "Elder-1": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e0/e0d202b07a5c15a676f08c11530f9798c8f13b65e4ce6ef9ed1f652d6083411f",
+      "sha256": "e0d202b07a5c15a676f08c11530f9798c8f13b65e4ce6ef9ed1f652d6083411f",
+      "bytes": 291247,
+      "logical_name": "n0-branch-length-ab-evidence-elder-a2.tar.gz",
+      "manifest": "/mnt/nmsdk-structtrain-archive/experiments/2026-11-15/n0-branch-length/ab-evidence-elder-a2.json",
+      "files": 68
+    }
+  },
+  "documentation_pulse": "ea7a6c397a3475fafd20181fdb34fa3535b05d97",
+  "executed_core_tree": "489559ab94c04ae2ab9365ef753fd2184788d085",
+  "model_spec_readback": {
+    "neuron_class": "NSPNeuronGen",
+    "frequency_hz": 2000,
+    "initial_threshold": 100,
+    "normalization": "N0",
+    "input_count": 4,
+    "initial_attachment": 1,
+    "initial_synapses": 1,
+    "initial_resistance": 86000000
+  },
+  "frozen_evaluation": {
+    "status": "32_native_trials_completed_valid_original_wrappers_failed_separate_readonly_revalidation_passed_and_closed",
+    "models": [
+      "baseline",
+      "candidate"
+    ],
+    "thresholds": [
+      100,
+      0.0117
+    ],
+    "pattern_revision": "1c1464e248f8744e858bd66df0be99e39969fd65",
+    "trials_per_condition": 8,
+    "criterion_anchor": "last_stimulus",
+    "reject_target_outside_window": true,
+    "diagnostic_only": true,
+    "scientific_verdict": null,
+    "source_wrappers": {
+      "baseline": {
+        "execution": "process_error",
+        "failure": "KeyError: 'source_solo'",
+        "all_processes_closed": true
+      },
+      "candidate": {
+        "execution": "process_error",
+        "failure": "KeyError: 'source_solo'",
+        "all_processes_closed": true
+      }
+    },
+    "native_conditions": 4,
+    "native_trials": 32,
+    "metrics_catalog": "N0BranchLengthFrozen-20261115.json",
+    "read_only_revalidation_job": "s11-n0-length-frozen-report-m40-a1",
+    "primary_catalog": "N0BranchLengthFrozenPrimary-20261115.json",
+    "read_only_revalidation": {
+      "tests_passed": 1,
+      "all_processes_closed": true,
+      "new_native_execution": false,
+      "source_root": "8237dd5d459fbce7511042571a80204d1f7aa263"
+    },
+    "temporal_report": {
+      "catalog": "N0BranchLengthFrozenReport-20261115.json",
+      "png": 1995,
+      "trials": 32,
+      "manually_inspected_overviews": 6,
+      "manually_inspected_native_zooms": 2,
+      "visual_acceptance_complete": false
+    },
+    "positive_response_companion": {
+      "catalog": "N0BranchLengthPositiveReport-20261115.json",
+      "tests_passed": 1,
+      "all_processes_closed": true,
+      "new_native_execution": false,
+      "figure_groups": 48,
+      "trials": 16,
+      "manually_inspected_selected": 8,
+      "visual_acceptance_complete": false
+    }
+  },
+  "sdk_source_root_a1": "22e0f4cb171a9d7affe94164e517df6d054742c6",
+  "training_temporal_report": {
+    "status": "completed_passed_and_closed",
+    "worker": "Elder-1",
+    "tests_passed": 1,
+    "independent_primary_restore": true,
+    "figures": 24,
+    "catalog": "N0BranchLengthTrainingReport-20261115.json",
+    "manual_visual_scope": "6 selected overviews (5 unique) plus one boundary-native view; not all24",
+    "visual_acceptance_complete": false
+  },
+  "follow_up": {
+    "job": "s11-n0-local-budget12-train-m40-a1",
+    "status": "completed_valid_invalid_observation_no_certificate",
+    "changed_factor": "maximum_candidates_per_input128_to12",
+    "exploratory_after_previous_data": true,
+    "original_tolerances_preserved": true,
+    "global_budgets_preserved": true,
+    "report": "N0LocalBudget12ScientificReport-20261115.ru.md",
+    "tests_passed": 1,
+    "all_processes_closed": true,
+    "attempted_input_indices": [
+      2,
+      1
+    ],
+    "valid_scalar_input_indices": [
+      2
+    ],
+    "input1_rejected_lengths": [
+      28,
+      29,
+      30,
+      31,
+      32
+    ],
+    "primary": "N0LocalBudget12Primary-20261115.json",
+    "temporal_report": {
+      "status": "completed_passed_and_closed",
+      "catalog": "N0LocalBudget12TrainingReport-20261115.json",
+      "figures": 12,
+      "selected_overviews_inspected": 3,
+      "visual_acceptance_complete": false
+    }
+  },
+  "pulse_develop_merge": "64f452ec7538d3fba1eff0334e00803e4fab82d3",
+  "scope": "Accepted measured-length proposal substage only; original plan stages1-12 remain partial, no converged model or scientific PASS."
+}

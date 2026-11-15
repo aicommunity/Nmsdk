@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-l22-primary-restore-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 8589934592
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-l22-envelope-restore-a1",
+      "commit": "2532ada91e56b18bf22f91b90e65edfd8b9b6206"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/l22-primary-restore-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40L22PrimaryRestoreA1-20261113/suite.json",
+      "sha256": "c9879c006e94bc7c192a73289a30b6a77c176ec354d42737871b42a38761584e"
+    },
+    "fixtures": {
+      "TIMELEARNER_L22_ENVELOPE_PACKAGE": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-l22-primary-envelope-m40-a1/worker/packed-primary",
+      "TIMELEARNER_L22_ENVELOPE_XZ": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-l22-primary-envelope-m40-a1/worker/packed-primary"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 1073741824
+    }
+  }
+}

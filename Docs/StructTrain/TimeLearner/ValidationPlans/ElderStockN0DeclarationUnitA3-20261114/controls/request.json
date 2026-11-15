@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-stock-n0-declaration-unit-elder-a3",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "69e985df6654ac64cc34571e6862119cf26b90c5",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 300
+  },
+  "disk": {
+    "minimum_free_bytes": 1073741824,
+    "maximum_output_bytes": 67108864
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-stock-n0-control-a3",
+      "commit": "69e985df6654ac64cc34571e6862119cf26b90c5"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/stock-n0-declaration-unit-a3/Docs/StructTrain/TimeLearner/ValidationPlans/ElderStockN0DeclarationUnitA3-20261114/suite.json",
+      "sha256": "514d4394a1d35e5561c65873c0eb295c30976c97ff8674d85bcb293e3e473ee3"
+    },
+    "fixtures": {},
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 1048576,
+      "maximum_total_bytes": 1048576
+    }
+  }
+}

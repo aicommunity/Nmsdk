@@ -1,0 +1,247 @@
+{
+  "kind": "closed_production_Classic_LT_overview_render",
+  "schema_version": 1,
+  "root_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "original_terminal": {
+    "render_completed": true,
+    "all_processes_closed": true,
+    "guard_reason": null,
+    "peak_combined_allocated_bytes": 68689920,
+    "minimum_free_bytes": 337049219072,
+    "scientific_verdict": null,
+    "visual_QA_complete": false,
+    "lease_released": true
+  },
+  "controller": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 203.13368098717183,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "16dd334805794c2c221c1f624c9a938ae062b5556760b250002deffcc29e3b3b",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 84,
+          "sha256": "5abfb48ddb66e92b4204a883f8d7ac4506f0c37ef92f7b12938c4369da78aeca"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "fresh_closure": {
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "c27339bc6ec4724a4a5412ee762e8e854da63d8ebf7cdfcae3ec4f3c282d9d53",
+        "unit": "timelearner-cd6c0dab-b3a1-4ade-88d4-218c726d4d04.service",
+        "invocation_id": "f30deac52893499c8abf6c98fac27b1c",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-cd6c0dab-b3a1-4ade-88d4-218c726d4d04.service",
+        "initial_main_pid": 109283,
+        "initial_start_ticks": "325202573",
+        "sha256": "9c6a6cb2c4a0452f64e7d067ab05145c8880024eef6e872d1bc47f9e149e516e"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-cd6c0dab-b3a1-4ade-88d4-218c726d4d04.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "lease": {
+      "token": "18c0f4e4-87fb-4c23-97c2-2d089b6ea27b",
+      "job_id": "s07-channel-lt-overview-render-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1/bin/python",
+        "pid": 106938,
+        "start_ticks": "325202063",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/channel-lt-overview-readable-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/channel-lt-overview-readable-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/data-channel-lt-overview-fixtures-m40-a1/high",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/data-channel-lt-overview-fixtures-m40-a1/high"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-high-threshold-classic-normal-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-high-threshold-classic-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/plan-channel-lt-overview-render-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/plan-channel-lt-overview-render-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-lt-overview-render-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-lt-overview-render-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1794176823.0552416,
+      "deadline": 1794177148.4506724,
+      "updated": 1794177035.848468,
+      "release_note": "One reviewed production renderer CLI returned; exact contained group closed or never submitted. Render/visual/scientific outcomes remain separate.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    "outside_controller_lease_linked_to_request_controller": true
+  },
+  "source_files": 632,
+  "source_inputs_environment_before_after_equal": true,
+  "native_files_byte_equal_to_Git": 12,
+  "primary_source_reference": {
+    "commit": "cd8d32168c3580948d0684f6ccad9f64f8527d94",
+    "archive_path": "Reports/StructTrain/TimeLearner/s07-high-threshold-classic-normal-m40-a1/primary.tar.xz",
+    "native_member_prefix": "runs/Classic-threshold-training100-retry32-burst/native"
+  },
+  "source_archive_sha256": "68ed19d2cc07afbd72336a25fc442bcdd31887dbec55ade32999101b74a4b872",
+  "somas": 4,
+  "views": 163,
+  "cache_files": 492,
+  "all_cache_checksums_verified": true,
+  "cache": "/media/user/Data/TimeLearnerRefactor/ReportsCache/channel-lt-overview-readable-m40-a1",
+  "selected_cache_relative_path": "soma-001/overview.png",
+  "selected_Git_relative_path": "selected/Classic-burst-Soma1-overview.png",
+  "selected": {
+    "bytes": 295230,
+    "sha256": "2612389f37b46267ea35b971e887bdf99b484697efcf20fe2d469a9fc7fd0651"
+  },
+  "selected_view_metadata": {
+    "view": "overview",
+    "begin": 0,
+    "end": 1.8,
+    "files": [
+      "overview.png",
+      "overview.svg",
+      "overview.pdf"
+    ],
+    "renderer_version": 3,
+    "png_width": 1920,
+    "png_height": 1920,
+    "downsampling": false,
+    "minimum_visible_text_fontsize_pt": 12.0,
+    "legend_layout": {
+      "title_gap_pixels": 27.76666666666665,
+      "first_panel_gap_pixels": 27.766666666666424,
+      "minimum_required_gap_pixels": 12,
+      "axes_top_fraction": 0.77
+    },
+    "minimum_native_tick_pixels": null,
+    "y_scale": "shared_per_panel",
+    "panel_y_limits": [
+      [
+        -0.0003603855324721739,
+        0.004865204688374347
+      ],
+      [
+        -0.0003603855324721739,
+        0.004865204688374347
+      ],
+      [
+        -1e-12,
+        1e-12
+      ],
+      [
+        -0.001012706629479947,
+        0.013671539497979284
+      ]
+    ],
+    "shared_panel_y_limits": [
+      [
+        -0.0003603855324721739,
+        0.004865204688374347
+      ],
+      [
+        -0.0003603855324721739,
+        0.004865204688374347
+      ],
+      [
+        -1e-12,
+        1e-12
+      ],
+      [
+        -0.001012706629479947,
+        0.013671539497979284
+      ]
+    ],
+    "sample_markers": false,
+    "threshold_outside_local_Y": false,
+    "threshold_outside_displayed_Y": true,
+    "lt_threshold_display": {
+      "source": "$.LTZone.Threshold",
+      "value": 100.0,
+      "value_text": "100",
+      "position": "above",
+      "line_drawn": false,
+      "annotation": "Actual LT threshold 100 (above displayed Y)",
+      "axis_range_policy": "recorded_values_only"
+    }
+  },
+  "selected_visual_QA_complete": false,
+  "full_corpus_visual_QA_complete": false,
+  "new_Cpp_model_or_scientific_run": false,
+  "scientific_verdict": null,
+  "superseded_unexecuted_collector_draft_sha256": "e6057e863bcf47f6293048d1066bd9156c4f2af4902bf1d1a793299d98bed408",
+  "primary_Git_bytes_are_authoritative_cache_is_reproducible_staging": true
+}

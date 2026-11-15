@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-native-progress-failure20-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "6bb8baeba6e01999860ad31813ab089b7a194e65",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-native-progress-failure-m40-a1",
+      "commit": "d0089dad4e59fe7a13a6b596fdb99ffcb221a67f"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/native-progress-failure-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeProgressFailure20A2-20261110/suite.json",
+      "sha256": "0cffc41ab818df9ba8b5e8979c6860caf430daf0911f1c9190819fcf36e9575b"
+    },
+    "fixtures": {
+      "TIMELEARNER_NATIVE_GATE_DIR": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native119-m40-a2/common-codec-11",
+      "TIMELEARNER_NATIVE_GATE_SPEC": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native119-m40-a2/common-codec-11"
+    }
+  }
+}

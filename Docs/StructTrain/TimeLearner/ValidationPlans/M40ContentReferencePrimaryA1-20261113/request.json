@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s02-content-reference-primary-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "c97ff92cc0b7cb11e714133e6342d16a35aaf01c",
+  "limits": {
+    "memory_bytes": 1073741824,
+    "tasks": 64,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 536870912
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-content-reference-primary-a1",
+      "commit": "c97ff92cc0b7cb11e714133e6342d16a35aaf01c"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/content-reference-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ContentReferencePrimaryA1-20261113/suite.json",
+      "sha256": "98f51bd6f1a8a81e8c4465502fd1b6655849a2d2a8206978141c5f948565142e"
+    },
+    "fixtures": {
+      "TIMELEARNER_LARGE_BUNDLE_SOURCE": "/media/user/Data/TimeLearnerRefactor/publications/data-sdk-budget16-diagnostic-inputs-a1/inputs"
+    }
+  }
+}

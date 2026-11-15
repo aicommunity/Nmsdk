@@ -1,0 +1,38 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "controller-join11-a1",
+  "package_fingerprint": "e1a1c5485133152c0d876160d670f4d08e2999cbbee89bca82dbd852faa4878e",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_closed_primary_bundle.ClosedPrimaryBundleTest.test_streamed_archive_roundtrip_retains_every_model_and_alias_byte",
+    "Scripts.StructTrain.TimeLearner.tests.test_closed_primary_bundle.ClosedPrimaryBundleTest.test_live_unit_refuses_before_archive_creation",
+    "Scripts.StructTrain.TimeLearner.tests.test_closed_primary_bundle.ClosedPrimaryBundleTest.test_changed_and_extra_source_files_cannot_pass_subset_hashes",
+    "Scripts.StructTrain.TimeLearner.tests.test_closed_primary_bundle.ClosedPrimaryBundleTest.test_undeclared_binding_file_is_not_hidden_as_opaque_metadata",
+    "Scripts.StructTrain.TimeLearner.tests.test_closed_primary_bundle.ClosedPrimaryBundleTest.test_alias_escape_and_unknown_schema_refuse",
+    "Scripts.StructTrain.TimeLearner.tests.test_closed_primary_bundle.ClosedPrimaryBundleTest.test_budget_and_output_overlap_are_not_silently_adjusted",
+    "Scripts.StructTrain.TimeLearner.tests.test_closed_primary_bundle.ClosedPrimaryBundleTest.test_operation_is_explicit_and_manifest_bound",
+    "Scripts.StructTrain.TimeLearner.tests.test_closed_primary_bundle.ClosedPrimaryBundleTest.test_version2_requires_explicit_native_controller_join",
+    "Scripts.StructTrain.TimeLearner.tests.test_closed_primary_bundle.ClosedPrimaryBundleTest.test_version1_never_claims_controller_join",
+    "Scripts.StructTrain.TimeLearner.tests.test_closed_primary_bundle.ClosedPrimaryBundleTest.test_source_mutation_after_pack_never_emits_completed_proof",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_n4_roundtrip_primary.RecordedN4RoundtripPrimaryTest.test_original_two_junit_cases_and_three_closed_groups"
+  ],
+  "executed_tests": 11,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_RECORDED_N4_ROUNDTRIP_BUNDLE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-roundtrip-m40-a1/Reports/StructTrain/TimeLearner/RecordedN4RoundtripPrimary-M40-20261112",
+      "files": 5,
+      "fingerprint": "82c57a8d51870ab5b1a3ef5bd46599e0b47a8230521a6c450fe998516a4db85f"
+    },
+    "TIMELEARNER_RECORDED_N4_EXECUTION_PROOF": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-controller-join10-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedN4NativeRoundtrip2A3-20261112/completed",
+      "files": 7,
+      "fingerprint": "b98d47c426ee4903748f65d35dafb55e4869880b239f0e440b1190dd0fa1ff5a"
+    }
+  },
+  "scientific_verdict": null
+}

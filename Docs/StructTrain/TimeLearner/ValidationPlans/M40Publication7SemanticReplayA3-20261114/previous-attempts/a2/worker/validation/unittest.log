@@ -1,0 +1,15 @@
+test_original_seven_case_corpus_and_both_wire_bases_replay_independently (Scripts.StructTrain.TimeLearner.tests.test_publication7_compact_replay.Publication7CompactReplayTest.test_original_seven_case_corpus_and_both_wire_bases_replay_independently) ... FAIL
+
+======================================================================
+FAIL: test_original_seven_case_corpus_and_both_wire_bases_replay_independently (Scripts.StructTrain.TimeLearner.tests.test_publication7_compact_replay.Publication7CompactReplayTest.test_original_seven_case_corpus_and_both_wire_bases_replay_independently)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-publication7-replay-a2/Scripts/StructTrain/TimeLearner/tests/test_publication7_compact_replay.py", line 60, in test_original_seven_case_corpus_and_both_wire_bases_replay_independently
+    self.assertEqual({p.name for p in corpus.iterdir() if p.is_dir()},
+AssertionError: Items in the second set but not the first:
+'RehashedForeignLedgerRejectedBeforeAnyPublication'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.626s
+
+FAILED (failures=1)

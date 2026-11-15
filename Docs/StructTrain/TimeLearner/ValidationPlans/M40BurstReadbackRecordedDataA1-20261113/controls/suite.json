@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-burst-readback-recorded-data-m40-a1",
+  "package_fingerprint": "f5f3d4a33d2d6e3edd026b5e2c76e3bbf36b7514936181222f5d04e04b0c1248",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_burst_readback_recorded.BurstReadbackRecordedTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_burst_readback_recorded.BurstReadbackRecordedTest.test_complete_console_outputs_pass_full_production_audit",
+    "Scripts.StructTrain.TimeLearner.tests.test_burst_readback_recorded.BurstReadbackRecordedTest.test_corrupt_waveform_and_window_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_burst_readback_recorded.BurstReadbackRecordedTest.test_schema6_reader_does_not_claim_graph_restoration_or_training_peak",
+    "Scripts.StructTrain.TimeLearner.tests.test_burst_readback_recorded.BurstReadbackRecordedTest.test_shared_trace_reader_accepts_main_and_source_baseline",
+    "Scripts.StructTrain.TimeLearner.tests.test_burst_readback_recorded.BurstReadbackRecordedTest.test_wrapper_still_requires_native_graph_and_restoration"
+  ],
+  "fixtures": {
+    "TIMELEARNER_BURST_READBACK_RECORDED": {
+      "pattern": "**/*.json",
+      "files": 70,
+      "fingerprint": "c0920e554b17878a72365fc48573c2460f6171bb24012926948f812b6dc3f2ee"
+    },
+    "TIMELEARNER_BURST_READBACK_RECORDED_CSV": {
+      "pattern": "**/*.csv",
+      "files": 99,
+      "fingerprint": "10e5d70c5cac2b9eee448fe938bd74dac9ff91f8d160fad45512927afe16e706"
+    }
+  }
+}

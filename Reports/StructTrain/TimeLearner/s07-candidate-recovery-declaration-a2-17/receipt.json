@@ -1,0 +1,110 @@
+{
+  "kind": "candidate_recovery_declaration_gate",
+  "schema_version": 1,
+  "host": "10.245.1.17",
+  "source_commit": "7e06a570236563a332722ff0357017dfcfd90401",
+  "source_repository": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-declaration-a1",
+  "source_files": [
+    {
+      "path": "Scripts/StructTrain/TimeLearner/candidate_recovery.py",
+      "bytes": 2878,
+      "sha256": "b7975b80febee7fda6a9c3e7e618f5793c71b20b601c92f4bbc1f585c5d5a871"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/native_evidence.py",
+      "bytes": 40330,
+      "sha256": "b8dad10ed97dff9646f51dd8c2a424fae704efd47592c825ffb78b5e62325eae"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/native_pipeline_worker.py",
+      "bytes": 38208,
+      "sha256": "d9ceaadaee4a78d397a48cb7cd5e8b654eb8ac9b62ce31228772ceda8be601dd"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/stopped_evidence.py",
+      "bytes": 8319,
+      "sha256": "2909c4578854e9c11fa251cfaa783c8e0006c756aa285a46f01e940b86eaba6f"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/pipeline_condition.py",
+      "bytes": 4617,
+      "sha256": "44bfe4c0d081d5501753c7c5b9fae200201cda1bee7f33908648e849b14ca37c"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/condition.py",
+      "bytes": 8930,
+      "sha256": "9428f580ec416f186fe8972fa251dfffc4830876e9569ae613f902c19e51dc71"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/tests/test_candidate_recovery.py",
+      "bytes": 6961,
+      "sha256": "6d47cda26ac7b93c5b10b489b1cc3cced77043b12ee66528d8e1cf8a56565f94"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/tests/test_condition.py",
+      "bytes": 7195,
+      "sha256": "092a16bcc53767ce7470fb0987482557be4a6a76dff37465e1e3e17d6faa469c"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/tests/test_pipeline_condition.py",
+      "bytes": 11510,
+      "sha256": "73fbc79e55accd0a8e47bbcc539d50ed0ae657b58234841504f6a7517a68b9bc"
+    }
+  ],
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.39",
+  "parent_pid": 1017233,
+  "parent_start_ticks": "304459339",
+  "started_unix": 1793969395.7977488,
+  "finished_unix": 1793969404.0686705,
+  "returncode": 0,
+  "tests": {
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery.CandidateRecoveryDeclarationTest.test_binding_rejects_one_sided_policy_base_or_allowance_change",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery.CandidateRecoveryDeclarationTest.test_each_base_projects_without_mutation_or_loss",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery.CandidateRecoveryDeclarationTest.test_envelope_acceptance_cannot_certify_training",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery.CandidateRecoveryDeclarationTest.test_existing_repeat_validator_uses_bound_base_without_changing_source",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery.CandidateRecoveryDeclarationTest.test_legacy_policy_is_explicitly_retry_and_copied",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery.CandidateRecoveryDeclarationTest.test_unknown_modes_and_invalid_allowances_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery.CandidateRecoveryDeclarationTest.test_unknown_nested_missing_or_boolean_versions_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery.CandidateRecoveryDeclarationTest.test_unversioned_envelope_fields_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_attempt_and_deployment_metadata_cannot_leak_into_condition_artifacts",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_attempt_ids_are_separate_from_condition",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_corrupt_hash_payload_and_role_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_duplicate_and_escaped_duplicate_keys_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_every_role_is_required",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_execution_stall_limit_and_trial_order_change_condition",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_nonfinite_large_integer_invalid_strings_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_numeric_spelling_zero_and_key_order_have_one_identity",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_other_case_changes_matrix_but_not_this_case",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_roundtrip_uses_all_content_references",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_scorer_changes_analysis_not_experiment_condition",
+      "Scripts.StructTrain.TimeLearner.tests.test_condition.ConditionIdentityTest.test_unknown_schema_fields_bool_versions_and_goal_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_actual_binary_content_is_part_of_algorithm_identity",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_attempt_run_and_trial_renaming_preserves_scientific_identity",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_binding_is_declarative_and_does_not_attest_execution_or_random_replicates",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_calibration_evaluation_order_and_phase_budget_change_identity",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_candidate_recovery_policy_is_bound_without_projection_of_the_job",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_coordinator_envelope_version_is_not_a_mathematical_factor",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_four_actual_declarations_resolve_all_condition_roles",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_legacy_and_new_audits_never_invent_effective_model_attestation",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_new_journal_requires_binding_and_rejects_missing_or_corrupt_binding",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_physics_tolerance_and_probe_parameters_change_identity",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_rehashed_arbitrary_condition_artifact_cannot_replace_declaration",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_relocating_identical_runtime_preserves_condition",
+      "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_runtime_digest_cannot_mask_changed_content"
+    ],
+    "tests_run": 33,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "unexpected_successes": 0,
+    "expected_failures": 0,
+    "successful": true
+  },
+  "scope": "declaration/repeat binding/preflight/condition identity only",
+  "native_execution_verified": false,
+  "scientific_verdict": null,
+  "primary_audit_schema5_supported": false,
+  "source_tracked_clean": true
+}

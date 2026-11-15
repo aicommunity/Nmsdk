@@ -1,0 +1,59 @@
+{
+  "kind": "independent_domain_temporal_report_verification",
+  "renderer_root": "b7312b9fd6abaf7fae74e2f54f63a924fa9892f4",
+  "workers": [
+    {
+      "worker": "m40",
+      "evidence_commit": "23e78e7e0e9fbd44a6052468b600ad247f02eaae",
+      "archive_members_verified": 32,
+      "archive_bytes": 56264,
+      "archive_sha256": "e5d09cb5897cfe22207292c34848c09771062c45ca7ae19d95617fe3937ee83d",
+      "checks_passed": 5,
+      "test_ids_matched_source": [
+        "test_actual_render_all_somas_two_frequencies_and_full_tick_views",
+        "test_all_packets_audited_before_any_output_or_backend",
+        "test_changed_csv_is_rejected_before_report_creation",
+        "test_duplicate_trial_is_not_silently_rendered_twice",
+        "test_empty_corpus_bad_revision_and_primary_overlap_are_rejected"
+      ],
+      "source_files_verified": 469,
+      "all_groups_closed_and_lease_released": true,
+      "cases": 4,
+      "trial_soma_pairs": 6,
+      "figures": 132,
+      "figure_files_server_hash_checked": 265,
+      "selected_pngs_hash_and_size_checked": 8,
+      "primary_files_bound_to_original_git_archive": 8,
+      "plotting_venv_used": true,
+      "first_system_matplotlib_failure_preserved": false,
+      "visual_review": {
+        "selected_pngs_reviewed": 8,
+        "overview_pngs_identical_to_previously_reviewed_schema1": 6,
+        "new_input_views_reviewed_at_original_1920x960": 2,
+        "all_132_manually_reviewed": false
+      },
+      "cache": "/media/user/Data/TimeLearnerRefactor/ReportsCache/domain-evidence-normal-a3/figures/index.html"
+    },
+    {
+      "worker": "elder",
+      "evidence_commit": "b093dd227d0c9cba728343120922fcb6eaf92c01",
+      "archive_members_verified": 25,
+      "archive_bytes": 36176,
+      "archive_sha256": "219cf38546bcdc892e2d7fc80d2610255510620ba426e64a30a5fc36e224baae",
+      "checks_passed": 5,
+      "test_ids_matched_source": [
+        "test_actual_render_all_somas_two_frequencies_and_full_tick_views",
+        "test_all_packets_audited_before_any_output_or_backend",
+        "test_changed_csv_is_rejected_before_report_creation",
+        "test_duplicate_trial_is_not_silently_rendered_twice",
+        "test_empty_corpus_bad_revision_and_primary_overlap_are_rejected"
+      ],
+      "source_files_verified": 469,
+      "all_groups_closed_and_lease_released": true
+    }
+  ],
+  "numerical_tests_and_rendering_executed_locally": false,
+  "training_certificate_eligible": false,
+  "whole_plan_complete": false,
+  "report_schema_version": 2
+}

@@ -1,0 +1,1 @@
+Production manifest3 collection of the same complete closed A4 job: exact seven closed units, original namespace, eighteen source-job envelopes, all original bytes recoverable. No native calculation/scientific verdict.

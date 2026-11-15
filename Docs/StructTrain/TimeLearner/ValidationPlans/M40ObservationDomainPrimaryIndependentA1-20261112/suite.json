@@ -1,0 +1,25 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "full-domain-N4-complete-Git-primary-independent-a1",
+  "package_fingerprint": "ac53d7c6913d149ff1c234385e23271c9857ea592448f782d2f4f6639e227e94",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_observation_domain_compact_primary"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_observation_domain_compact_primary.ObservationDomainCompactPrimaryTest.test_combined_keeps_classic_ambiguity_and_branch_timeout",
+    "Scripts.StructTrain.TimeLearner.tests.test_observation_domain_compact_primary.ObservationDomainCompactPrimaryTest.test_branch_retry_keeps_valid_budget_exhausted_model"
+  ],
+  "fixtures": {
+    "TIMELEARNER_OBSERVATION_DOMAIN_COMBINED_PRIMARY": {
+      "pattern": "*",
+      "files": 5,
+      "fingerprint": "507507d9427dfad80fd5c5b330736bffd15a92e4514d3fcaf909c205420fdc9b"
+    },
+    "TIMELEARNER_OBSERVATION_DOMAIN_BRANCH_PRIMARY": {
+      "pattern": "*",
+      "files": 5,
+      "fingerprint": "33c31dbdeff67a09a7955adf34ed4616c7adb313dc13c4ca7a9e4c7647a846de"
+    }
+  }
+}

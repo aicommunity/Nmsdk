@@ -45,9 +45,10 @@ def unpack_calibration(bundle, output):
     """Verify the original declared archive, including every primary byte."""
     bundle = Path(bundle).resolve(strict=True)
     sums = load(bundle/'SHA256SUMS.json')
+    from .external_archive import locate
     require(set(sums) == {'README.md', 'manifest.json', 'primary.tar.xz'}, 'n1_source_bundle_checksum_schema')
     for name, digest in sums.items():
-        require(hashlib.sha256((bundle/name).read_bytes()).hexdigest() == digest, 'n1_source_bundle_checksum')
+        require(hashlib.sha256(locate(bundle/name).read_bytes()).hexdigest() == digest, 'n1_source_bundle_checksum')
     manifest = load(bundle/'manifest.json')
     require(manifest['kind'] == 'positive_n1_measured_calibration_primary' and
             type(manifest['schema_version']) is int and manifest['schema_version'] == 1 and manifest['operations'] == 2 and
@@ -57,7 +58,7 @@ def unpack_calibration(bundle, output):
             all(type(r['bytes']) is int and r['bytes'] >= 0 for r in expected.values()) and
             sum(r['bytes'] for r in expected.values()) <= 512*1024**2, 'n1_source_bundle_budget')
     files = {}
-    with tarfile.open(bundle/'primary.tar.xz', 'r:xz') as archive:
+    with tarfile.open(locate(bundle/'primary.tar.xz'), 'r:xz') as archive:
         for member in archive:
             name = PurePosixPath(member.name)
             require(member.isfile() and not name.is_absolute() and '..' not in name.parts and

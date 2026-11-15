@@ -1,0 +1,116 @@
+{
+  "kind": "independent_windows_bounded_build_preparation_verification",
+  "attempt": "a5",
+  "evidence_commit": "c0f1297e2f66f0f2e5216a016d74d56dba238a2d",
+  "root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "archive_members_verified": 46,
+  "archive_bytes": 145804,
+  "archive_sha256": "689a0a0dff1d4e8fb82c904f0669e5627d00ac4e97fdcc613ce6c09ee6076030",
+  "pack_bytes": 182836,
+  "pack_sha256": "a4cc1eae0f880899fdf2b33fb5043e986001aba8fe306ba289ea260f72edc1e9",
+  "native_git_transfer": true,
+  "execution": "completed",
+  "validity": "valid",
+  "reason": "exit_zero",
+  "returncode": 0,
+  "child_resumed": true,
+  "all_processes_closed": true,
+  "fresh_kernel_job_state": "absent",
+  "build_execution_accepted": true,
+  "compile_or_link_observed": false,
+  "no_op_established": true,
+  "source_closure_unchanged": true,
+  "all_three_runtime_inventories_unchanged": true,
+  "build_metadata_changed": [
+    ".ninja_log"
+  ],
+  "backend_verified_against_root_git": true,
+  "installed_vsdevcmd_hash_and_guard_verified": true,
+  "environment_profile": {
+    "kind": "windows_private_build_environment_profile",
+    "only_operational_change_from_a3": false,
+    "operational_changes_from_a3": [
+      "owned_cmd VSCMD_SKIP_SENDTELEMETRY=1",
+      "memory budget 4GiB to 256MiB for warm/no-op diagnostic only"
+    ],
+    "memory_budget_bytes": 268435456,
+    "a3_measured_peak_job_memory_bytes": 99479552,
+    "budget_rationale": "bounded warm/no-op diagnostic; not full build or native gates; backend reserve remains 256MiB",
+    "environment_delta": {
+      "VSCMD_SKIP_SENDTELEMETRY": {
+        "parent_value": null,
+        "owned_cmd_value": "1"
+      }
+    },
+    "scope": "SETLOCAL batch assignment before vcvars64; no registry or global settings",
+    "installed_vsdevcmd": {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\VsDevCmd.bat",
+      "sha256": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+      "size": 11526
+    },
+    "installed_guard_excerpt": [
+      {
+        "line": 248,
+        "text": ""
+      },
+      {
+        "line": 249,
+        "text": "@REM Send Telemetry if user's VS is opted-in"
+      },
+      {
+        "line": 250,
+        "text": "if \"%VSCMD_SKIP_SENDTELEMETRY%\"==\"\" ("
+      },
+      {
+        "line": 251,
+        "text": "    if \"%VSCMD_DEBUG%\" NEQ \"\" ("
+      },
+      {
+        "line": 252,
+        "text": "        @echo [DEBUG:%~nx0] Sending telemetry"
+      },
+      {
+        "line": 253,
+        "text": "        powershell.exe -NoProfile -Command \"& {Import-Module '%~dp0\\Microsoft.VisualStudio.DevShell.dll'; Send-VsDevShellTelemetry -NewInstanceType Cmd;}\""
+      },
+      {
+        "line": 254,
+        "text": "    ) else ("
+      },
+      {
+        "line": 255,
+        "text": "        START \"\" /B powershell.exe -NoProfile -Command \"& {if($PSVersionTable.PSVersion.Major -ge 3){Import-Module '%~dp0\\Microsoft.VisualStudio.DevShell.dll'; Send-VsDevShellTelemetry -NewInstanceType Cmd; }}\" > NUL"
+      },
+      {
+        "line": 256,
+        "text": "    )"
+      },
+      {
+        "line": 257,
+        "text": ")"
+      },
+      {
+        "line": 258,
+        "text": ""
+      },
+      {
+        "line": 259,
+        "text": "@REM Script clean-up of environment variables used to track"
+      }
+    ],
+    "vcvars64": {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat",
+      "sha256": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209",
+      "size": 39
+    },
+    "backend_unchanged": true,
+    "a3_descendant_causal_identity_established": false
+  },
+  "producer_sha256": "9348f24b8917ae9d66f7160a43b005a295e523cdba112fe78c094b445e098f34",
+  "internal_archive_prefix": "attempt-a5",
+  "native_tests_started": 0,
+  "numerical_tests_executed_locally": false,
+  "scientific_worker_admitted": false,
+  "prior_failed_attempts_reclassified": false,
+  "whole_plan_complete": false
+}

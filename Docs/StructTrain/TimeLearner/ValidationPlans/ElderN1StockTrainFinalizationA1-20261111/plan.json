@@ -1,0 +1,37 @@
+{
+  "kind": "n1_stock_N4_training_after_geometry_fix",
+  "status": "prepared_not_launched",
+  "cpp_source_commit": "fcfd8bdff149c14cbe67149e996945d122bf954d",
+  "pulse_source_commit": "5f1a4ac6f9aff208ada7f8bcf62645c9d79a6615",
+  "python_actor_commit": "fd55a9936ba6018ca86e583c0e844b10fb582d56",
+  "python_actor_path": "/home/user/timelearner-refactor/source-n1-stock-train-finalization-a1",
+  "runtime_fingerprint": "bd84cac4d3637ff4b2579197c07fbe1c3fb1ffadafa6db3da09806ff95359138",
+  "required_characterization": "/home/user/timelearner-refactor/readbacks/s11-n1-after-cold4-probes8-elder-a1/worker/native-stock-cold4/result",
+  "requires": [
+    "Native119 terminal acceptance, full group closure and released SDK lease",
+    "Eight valid complete new-runtime stock assigned-impulse observations",
+    "Effective initial stock physics readback and public Train preflight",
+    "Immutable source/fixture inventory generated from completed characterization before expensive Train"
+  ],
+  "planned_cases": [
+    "Classic-stock-cold7-N1",
+    "Branch-stock-cold7-N1"
+  ],
+  "native_search_wall_seconds": 1800,
+  "process_finalization_seconds": 300,
+  "process_maximum_wall_seconds": 2100,
+  "controller_maximum_wall_seconds": 3600,
+  "maximum_search_probes": 128,
+  "amplitude_goal": "CapturedPerInput",
+  "amplitude_absolute": 0.00001,
+  "amplitude_relative": 0,
+  "minimum_amplitude": 0.000001,
+  "sync_tolerance": 0.02,
+  "anchor_input": 3,
+  "source_reference_recaptured": true,
+  "normalization": "N1",
+  "post_tune": "Off",
+  "c_trim": "Off",
+  "automatic_test_after_incomplete_train": false,
+  "notes": "Native math/search wall budget unchanged. Extra process time covers startup/stop/export; runtime acceptance of new Python option remains pending. Characterization inputs are not complete yet; no placeholder fingerprints or generated model-state overlays."
+}

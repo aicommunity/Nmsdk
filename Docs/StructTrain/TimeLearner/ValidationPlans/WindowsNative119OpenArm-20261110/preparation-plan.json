@@ -1,0 +1,77 @@
+{
+  "kind": "timelearner_windows_sdk_preparation",
+  "schema_version": 1,
+  "source_commit": "8ec5ec265a5995df75e35cebdb78aab5e89dcfe3",
+  "namespace_blob": "29cc6ac348bb5a2af5c9d3624b79e06215cc2f92",
+  "expected_source_files": 4078,
+  "expected_repositories": 8,
+  "roles": [
+    {
+      "role": "root",
+      "commit": "8ec5ec265a5995df75e35cebdb78aab5e89dcfe3",
+      "destination": "C:/Projects/TimeLearnerWorker/source-branch-open-arm-order-win-a1",
+      "pack_bytes": 8492146,
+      "pack_sha256": "4f94f621f588bb7a7edfce518abb50fb6ec4640b63077ade14656db9c34305d0",
+      "specification_blob": "a4245c025e6d39e1d19b26c806ec41eff336279f"
+    },
+    {
+      "role": "Libraries/Nmsdk-PulseLib",
+      "commit": "165d49da7e65cd6ac59bca2812ce52884ddd50c2",
+      "destination": "C:/Projects/TimeLearnerWorker/source-branch-open-arm-order-win-a1/Libraries/Nmsdk-PulseLib",
+      "pack_bytes": 840383,
+      "pack_sha256": "6114f1e65962475a9a0a7a6036bf535b6af65d6c98fb245ecaa11f5d0cd2726d",
+      "specification_blob": "bf9c632355adee0897c1c54da954f5ff55d17d7a"
+    },
+    {
+      "role": "Libraries/Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "destination": "C:/Projects/TimeLearnerWorker/source-branch-open-arm-order-win-a1/Libraries/Nmsdk-MotionControlLib",
+      "pack_bytes": 178984,
+      "pack_sha256": "308866bda24d72cd573b3a7f740f51524fb1d4c0dd78601fda12076190f78fc2",
+      "specification_blob": "c1c8bec6c6df5d3627164ba69e855baec70a58fd"
+    },
+    {
+      "role": "Libraries/Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "destination": "C:/Projects/TimeLearnerWorker/source-branch-open-arm-order-win-a1/Libraries/Rdk-HardwareLib",
+      "pack_bytes": 1979858,
+      "pack_sha256": "7cd4d0b8a18e18f44ba70150f068a5afc11aab2e76d176335557137c518d35e2",
+      "specification_blob": "fc0d75f0ee7f74c4f5fdd570a6b1ffae7372fcf8"
+    },
+    {
+      "role": "Libraries/Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "destination": "C:/Projects/TimeLearnerWorker/source-branch-open-arm-order-win-a1/Libraries/Rdk-CvBasicLib",
+      "pack_bytes": 184269,
+      "pack_sha256": "bd982b4debd477c392a05ab9a91915b5e06f22754cba8bdd9b3f828d30c67da5",
+      "specification_blob": "ffb4196378e855504b9314339d3dea3b881ea990"
+    },
+    {
+      "role": "Libraries/Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "destination": "C:/Projects/TimeLearnerWorker/source-branch-open-arm-order-win-a1/Libraries/Rdk-BasicLib",
+      "pack_bytes": 30869,
+      "pack_sha256": "b94f6a232750488db95636d1ed0b465935f61730b325ac9308781f0543c24eb1",
+      "specification_blob": "5ec4a685d76e2fcc7258fa7bb89601067a81d942"
+    },
+    {
+      "role": "Bin",
+      "commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "destination": "C:/Projects/TimeLearnerWorker/source-branch-open-arm-order-win-a1/Bin",
+      "pack_bytes": 707895,
+      "pack_sha256": "56a5b832bf751836431f6862da1bfe60130bf82bd3f8b6df901c0ed80252f890",
+      "specification_blob": "100a117096d75efd96f9219fffbd51ef03fa55f4"
+    },
+    {
+      "role": "Rdk",
+      "commit": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "destination": "C:/Projects/TimeLearnerWorker/source-branch-open-arm-order-win-a1/Rdk",
+      "pack_bytes": 12363988,
+      "pack_sha256": "4d6d9a28697979e814659650cfa90247d1ce5e4ed57a426d4c9222288105c048",
+      "specification_blob": "390acf0635adfeeaa620fe90f927718eb20c871f"
+    }
+  ],
+  "build_specification_blob": "3ae09e7abe239e43eb919b8d798b19c3cf890571",
+  "scientific_worker_admitted": false,
+  "scientific_verdict": null
+}

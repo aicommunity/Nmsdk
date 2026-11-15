@@ -1,0 +1,75 @@
+{
+  "kind": "timelearner_controller_ab_evidence",
+  "schema_version": 1,
+  "root": "216e8a9a8d1103c6fde5796fdd1955901440a24c",
+  "baseline_root": "2194eeadcb3f29e1b2047ae1bcf3e6e7e48e4747",
+  "candidate_pulselib": "03b004aa36121766b8eac3040a282e272b392eb5",
+  "result": {
+    "kind": "timelearner_controller_ab_result",
+    "schema_version": 1,
+    "cases": {
+      "baseline": {
+        "root": "2194eeadcb3f29e1b2047ae1bcf3e6e7e48e4747",
+        "pulselib": "21435c8d5a11d2670cdc1609757d3a9973877314",
+        "compile": {
+          "execution": "process_error",
+          "returncode": 1,
+          "wall_seconds": 39.84439866198227
+        },
+        "execution": "not_started",
+        "validity": "not_assessed",
+        "assertion_status": "not_assessed"
+      },
+      "candidate": {
+        "root": "216e8a9a8d1103c6fde5796fdd1955901440a24c",
+        "pulselib": "03b004aa36121766b8eac3040a282e272b392eb5",
+        "compile": {
+          "execution": "process_error",
+          "returncode": 1,
+          "wall_seconds": 39.99506144411862
+        },
+        "execution": "not_started",
+        "validity": "not_assessed",
+        "assertion_status": "not_assessed"
+      }
+    },
+    "assertion_status": "failed",
+    "same_test_sources": true,
+    "native_rdk_integration_verified": false,
+    "operation_trace_equivalence_verified": false,
+    "capacitance_search_enabled": false,
+    "scientific_verdict": null
+  },
+  "acceptance_status": "not_accepted",
+  "members": {
+    "cli-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cli-stdout.log": "596cc5d90d7dadec145bf8f9933c7a1182fdd20fcd031ab548b8c0ee9dbc8039",
+    "gate/baseline/compile/owned-process.json": "0c52068715e8d3902d5624628fd1dae1f95a9ccb7cef09006a5df928a14dcb5f",
+    "gate/baseline/compile/result.json": "7efcadc8f35f15ff6a571f5e33403beb3cab5ebc69b4a4ec1351b9ff1c2e9882",
+    "gate/baseline/compile/stderr.log": "b2acad51cbe2a431276d4a7852c9b9701097055199414bb890bb6818b6939f1b",
+    "gate/baseline/compile/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gate/baseline/result.json": "6f99ecc8732a6adb9cd16135d76453d6e629dfaf2d0d036a2b50d85578b4028a",
+    "gate/baseline/sources.json": "499703de661e2680d9589552e9f387005553e159e094c7a92cc4ce8e515f51f7",
+    "gate/candidate/compile/owned-process.json": "1931732abee57cf048d6953dfb204e30db9583fad55842617074d096609b142e",
+    "gate/candidate/compile/result.json": "3ff475950e5aea91abdd2449f2c9516cc325252c6f1c604dc2a51777783f1819",
+    "gate/candidate/compile/stderr.log": "e8673a5f56c2199e5ffbf267a967ef7aa27035b04a6dcb0329557ee7e7a39a7b",
+    "gate/candidate/compile/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gate/candidate/result.json": "8862833a2b68888c025ccb033d2d62fa134e8f3e2e200fa2ee57ae9009f65788",
+    "gate/candidate/sources.json": "a99ada9188251f4b9586543747e2fdc954ebde74184442b920ce50780dad98da",
+    "gate/result.json": "6bc1bdde04684baac082c251ccdea74de40c453b9f43b63f2b9e1340dcca32ec",
+    "gate/specification.json": "c6e6da3892d37efa51fb2c1b981d689d815472624437f1037478b36cb302c790",
+    "gate/toolchain.json": "418eb33086fea28c7685af20e99c2270769dfdefa015b733e766cbf55441a882",
+    "job.json": "c6e6da3892d37efa51fb2c1b981d689d815472624437f1037478b36cb302c790",
+    "owned-cli.json": "a76030d3217d3dd8639f173a021e53258ceebe7e739ded23229c006d04dd5913",
+    "owned-supervisor.json": "e9c02507fc944fa63c7df2071be7849729375972027e2220d3385dbb5e59079e",
+    "predecessor-failure.json": "6a6f1139bf0ae315214441af59f88c309f7a8dc8f23de44afc99dabc21c151b1",
+    "predecessor-toolchain-failure.json": "6f26d1626720a2b67d53e19eb19adb118f884bfeb9bdfed9553561f59a28b801",
+    "private-object-store.log": "0fd4b2d961216c1248573d920fee4ae75046f81563620336d291ccafe25a90e5",
+    "runner-source-hashes.json": "a7a546e951b5c2cf47ee950ebb7a7176e9329032c67e55a3cd17559ea6b418d3",
+    "terminal.json": "17cb37d59ab985ec422ddad9f2d5764ac9f828a9e84d8fb04c232662ea933d09"
+  },
+  "archive_sha256": "9b61ad140fae1f6392b2ebc07651a593276794cb56cb584d1eb4f1438795f381",
+  "archive_bytes": 25002,
+  "scope": "Production root controller-ab CLI compiles17 complete original pure controller sources/headers and7 identical test files at baseline/candidate Git closures in separate immutable directories.130 cases per binary. This is the mechanical CandidateCursor grouping only; no native Rdk integration, operation-trace equivalence, C-search On or scientific recognition claim. Derived source copies/binaries are worker cache; source hashes and all test/compile receipts remain in Git.",
+  "scientific_verdict": null
+}

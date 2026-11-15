@@ -1,0 +1,78 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeLoadHistory.cpp",
+      "suites": [
+        "NativeClassImageReplay",
+        "NativeLoadHistory"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeClassImageReplay/ActualMembraneCopyAndLoadStages",
+    "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease",
+    "NativeLoadHistory/FreshAt2000",
+    "NativeLoadHistory/ConnectedChildAt2000",
+    "NativeLoadHistory/DetachedChildAt2000",
+    "NativeLoadHistory/FreshAt20000",
+    "NativeLoadHistory/ConnectedChildAt20000",
+    "NativeLoadHistory/DetachedChildAt20000"
+  ],
+  "runplan": [
+    {
+      "name": "actual-membrane-stages",
+      "expected_ids": [
+        "NativeClassImageReplay/ActualMembraneCopyAndLoadStages"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "native-load-history-6",
+      "expected_ids": [
+        "NativeLoadHistory/FreshAt2000",
+        "NativeLoadHistory/ConnectedChildAt2000",
+        "NativeLoadHistory/DetachedChildAt2000",
+        "NativeLoadHistory/FreshAt20000",
+        "NativeLoadHistory/ConnectedChildAt20000",
+        "NativeLoadHistory/DetachedChildAt20000"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "actual-class-image-replay",
+      "expected_ids": [
+        "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease"
+      ],
+      "wall_seconds": 1200
+    }
+  ],
+  "partitions": [
+    {
+      "name": "actual-membrane-stages",
+      "count": 1,
+      "ids": [
+        "NativeClassImageReplay/ActualMembraneCopyAndLoadStages"
+      ]
+    },
+    {
+      "name": "actual-saved-model-replay",
+      "count": 1,
+      "ids": [
+        "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease"
+      ]
+    },
+    {
+      "name": "native-load-history",
+      "count": 6,
+      "ids": [
+        "NativeLoadHistory/FreshAt2000",
+        "NativeLoadHistory/ConnectedChildAt2000",
+        "NativeLoadHistory/DetachedChildAt2000",
+        "NativeLoadHistory/FreshAt20000",
+        "NativeLoadHistory/ConnectedChildAt20000",
+        "NativeLoadHistory/DetachedChildAt20000"
+      ]
+    }
+  ]
+}

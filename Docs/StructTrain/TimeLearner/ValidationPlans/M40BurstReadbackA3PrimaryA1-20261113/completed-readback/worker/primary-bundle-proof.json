@@ -1,0 +1,1462 @@
+{
+  "manifest": {
+    "kind": "timelearner_closed_primary_bundle",
+    "schema_version": 1,
+    "base": "/media/user/Data/TimeLearnerRefactor",
+    "roots": [
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a3",
+        "prefix": "console-six-a3",
+        "files": {
+          "closure-and-reservation.json": {
+            "bytes": 4217,
+            "sha256": "50140fb4bb469cd2530bb8aeb2925e5043fe23e8c18ea37460efc7cd629c1f61"
+          },
+          "controller-result.json": {
+            "bytes": 1187,
+            "sha256": "34e6bace456b0e17d6d87a5242cca31f3025c2d0377d512275ff6079c71fae09"
+          },
+          "launch-context.json": {
+            "bytes": 175,
+            "sha256": "5a5fdb11fd39047502af52344eca13bc27b9dc6380e53fc7c060dd9bc1031a80"
+          },
+          "lease-recovery.json": {
+            "bytes": 4267,
+            "sha256": "00f9e4016e3f5e919e5ac43070f7caed5904306617e98dd1654cb14f999838dc"
+          },
+          "monitor-final.json": {
+            "bytes": 132,
+            "sha256": "4ce622015a44ed4d2ae84602205b3c788ec4a6da4dfd171bd6d0493c23053d2f"
+          },
+          "monitor.jsonl": {
+            "bytes": 11152,
+            "sha256": "f5a459607f4f1fcb02e63a699766babca377ad5b243a48d8ff360308ad4ffb31"
+          },
+          "preflight.json": {
+            "bytes": 75,
+            "sha256": "f6999e40b950c85bab05d0d391c8331a6d6af617c2e6ecedd02a8fb9319088c5"
+          },
+          "process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "process/contained/limits-readback.json": {
+            "bytes": 1070,
+            "sha256": "413dd193d2539caba6398dfe240ad2c0dba25b13bef1b692b57d180576b36214"
+          },
+          "process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "9418890350b9a329952e0b54069ac59e4c4bc382971b501973cfcfa325b38dc4"
+          },
+          "process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "64a506a30e222809c62fe2a3e96447d48fb431aeb0ad46d9480529e0b2283c55"
+          },
+          "process/contained/request.json": {
+            "bytes": 968,
+            "sha256": "b0deb4805faf1f872ddaa9e4950f566aa351a590ef82b36fa4ec1dfd330c1b18"
+          },
+          "process/contained/runtime.json": {
+            "bytes": 2963,
+            "sha256": "1632a66498615ab285aa2c3bc6d9b030aec28407a325fd25ca593bd99fe89a4f"
+          },
+          "process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/loaded-files.json": {
+            "bytes": 976,
+            "sha256": "5db1cd600717b928b17c897be8b83233874937be4f56f87d03f9db48a09c5d28"
+          },
+          "process/owned-process.json": {
+            "bytes": 587,
+            "sha256": "61b1bc7d7c2d88519cbc096259203b8c11d240394af5bf62e4c915c6fcf49594"
+          },
+          "process/request.json": {
+            "bytes": 561,
+            "sha256": "76ce079289c2d0a63164eb6178de890eb5af7716633b821c8088ea336e6da9a2"
+          },
+          "process/result.json": {
+            "bytes": 1187,
+            "sha256": "34e6bace456b0e17d6d87a5242cca31f3025c2d0377d512275ff6079c71fae09"
+          },
+          "process/runtime.json": {
+            "bytes": 2963,
+            "sha256": "1632a66498615ab285aa2c3bc6d9b030aec28407a325fd25ca593bd99fe89a4f"
+          },
+          "process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/terminal-unit-state.json": {
+            "bytes": 1302,
+            "sha256": "7ed712a9ff3168c613455d4296f10a436ebb312620eb7e7bf4a4112eaaef78ed"
+          },
+          "process/whole-group-closure.json": {
+            "bytes": 1302,
+            "sha256": "7ed712a9ff3168c613455d4296f10a436ebb312620eb7e7bf4a4112eaaef78ed"
+          },
+          "request.json": {
+            "bytes": 1535,
+            "sha256": "e9e7a9cf649773623056801148806f5634d2da1555fe98130d0b03c811f88aa4"
+          },
+          "supervisor.log": {
+            "bytes": 554,
+            "sha256": "254cc74c9d119a69ba233471285416682ab89f28e1d0524d235e0b6dc01e9c51"
+          },
+          "worker/exception.json": {
+            "bytes": 626,
+            "sha256": "4e4479772889662b7ec9ffb464a3898a5d1bfa3f92435e98d1a71327a2410db3"
+          },
+          "worker/fixtures-after.json": {
+            "bytes": 6930,
+            "sha256": "e4f05de61dbf90ef2f9785a1a4df26fe688d516403e66f2a296cd7c0fe07bbc5"
+          },
+          "worker/fixtures-before.json": {
+            "bytes": 6930,
+            "sha256": "e4f05de61dbf90ef2f9785a1a4df26fe688d516403e66f2a296cd7c0fe07bbc5"
+          },
+          "worker/reservation.json": {
+            "bytes": 2292,
+            "sha256": "c125d03209c9bdc3657e32f211add64ba7388d2b07fee79d707d93575a2960c3"
+          },
+          "worker/temporary-environment.json": {
+            "bytes": 371,
+            "sha256": "bf82a8d3aba798c34f436f2e9da8c7494e0f4beff44d6bed2a4b8f50dbd39cdf"
+          },
+          "worker/terminal.json": {
+            "bytes": 260,
+            "sha256": "79268ba8c75bdde2aa39b91e749e0be2a8465f360b3bf19cb23fe5a39ddf2967"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/matched-job.json": {
+            "bytes": 5675887,
+            "sha256": "7a38f9cb8e2ae43d0c2ebf471a56fbccf35c1c22ca27d6e9fd8d5ffa736367e5"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/replay-job.json": {
+            "bytes": 5675816,
+            "sha256": "de9e4ae4d28d262fc85aae47c52178bb669bb29ebeb356397aacc79c28644277"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000001/full-after.csv": {
+            "bytes": 21688,
+            "sha256": "4856dcad07ad979d036e09c2d41383651d25951e3bd1347d8ef931d1e3423de1"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000001/full-before.csv": {
+            "bytes": 20784,
+            "sha256": "4750dac9a51d088d8a4be1a3d2f17a53d652f1614d9867accfac7de87968feb6"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000001/omit-0.csv": {
+            "bytes": 14239,
+            "sha256": "ddcd086115a1077233dbf51b586ba95d3567278fc935644d9735a9346c187292"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000001/omit-1.csv": {
+            "bytes": 21310,
+            "sha256": "36af494c7f74a70db7e708a45d7507e465630845806805dc630a05e3ebd06ed3"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000002/full-after.csv": {
+            "bytes": 19646,
+            "sha256": "15eba6d82b7af256a81358774cce7f67dc347d60bec44cce03f17a25b6fbc522"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000002/full-before.csv": {
+            "bytes": 21559,
+            "sha256": "2c8eeb42f6551bf102b48550d8598caf8b6806d6aa71943d7632d495eb2c48ba"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000002/omit-0.csv": {
+            "bytes": 14785,
+            "sha256": "cdbfd9d494a994c6f9af3434820a8eacfd772fa0bffb93875512380945d78e84"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000002/omit-1.csv": {
+            "bytes": 19889,
+            "sha256": "68fe67f158a692b9de7e96048369402b26da1b962d22ac7e30988c03d0bdc96e"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000003/full-after.csv": {
+            "bytes": 19935,
+            "sha256": "53431db6c19e1fd3d239f36c82ad539942480490f54e8139e7c4ae36c04ffdb7"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000003/full-before.csv": {
+            "bytes": 19721,
+            "sha256": "bb3c79c97f180a9852fc13c3f9f02a73a049fabac159019d9deeff81895889e5"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000003/omit-0.csv": {
+            "bytes": 13192,
+            "sha256": "523c968b90cbf6d03f23a3b08561f3923140c115d5db48e4f500e0a91f13c4d1"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000003/omit-1.csv": {
+            "bytes": 19877,
+            "sha256": "7017f914d28402f15145b5e8a33b52eb721ae1dd4972dd2b6d1d77b1e75e4788"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000004/full-after.csv": {
+            "bytes": 20671,
+            "sha256": "59a8df7e84c7befe97cf432359867020a2d224bb656653e7ceb1f9ef3c7b4679"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000004/full-before.csv": {
+            "bytes": 20658,
+            "sha256": "5581d56db42816a10fced3339d64e2c3664b1f55d42036f36343c5a69ed293c8"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000004/omit-0.csv": {
+            "bytes": 14151,
+            "sha256": "25fdbd4c56a489288b27ae3d8fb931f679740928fe16888b4bc5fc177cbda7c6"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000004/omit-1.csv": {
+            "bytes": 20809,
+            "sha256": "252c680039ed7987aad0eaccc669fec49d8977d8bc6309cf8ad891b33652abe0"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000005/full-after.csv": {
+            "bytes": 20628,
+            "sha256": "2dffc8fe535f397053d989838aa8b7a63f021d5613deecfdb872fa22fa6865e6"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000005/full-before.csv": {
+            "bytes": 20640,
+            "sha256": "3f192f60f91c0efdea79bc5f199872a3c151766db261ee7c74b44dda1be55f8e"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000005/omit-0.csv": {
+            "bytes": 14129,
+            "sha256": "9e61cd9971e79cd93482554268cbb987873ace1da070a9969332a5f18a18900b"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000005/omit-1.csv": {
+            "bytes": 20788,
+            "sha256": "0d5fdce217bbea29c74da0ca9f9f9bb9138d3912ecd6869d336bb2bc23190512"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000006/full-after.csv": {
+            "bytes": 20900,
+            "sha256": "47d8fa46245a7ea3a57094eeff0450f355fa685a7e6e1a856105446731e4bb49"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000006/full-before.csv": {
+            "bytes": 20639,
+            "sha256": "b4de1ceff2089945b7f73258a168e78fa4379dc234b92c3985c81eb4e7111118"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000006/omit-0.csv": {
+            "bytes": 14119,
+            "sha256": "212260ce5d702aa6ed308aee30a304a83a062d06dbbc32b49e94b78e17a61d69"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000006/omit-1.csv": {
+            "bytes": 20789,
+            "sha256": "ee1ee5abf84ad9d2bb3422dbcfed70e14607a9d58737fde005379e0d91ee0f93"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000007/full-after.csv": {
+            "bytes": 21094,
+            "sha256": "e2f230fe51696a18bb22fe15aef8ba6dccdf6396ea697ac7eef38edd67958d54"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000007/full-before.csv": {
+            "bytes": 21081,
+            "sha256": "d4bd3d021a6fafc22e4d99069ea71aa9a5af9ff983b77b76e176747dda0e998c"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000007/omit-0.csv": {
+            "bytes": 14577,
+            "sha256": "693615b262cdf9f5996853f036c81c3583c72a90e93f44b734238a2c25daad2a"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000007/omit-1.csv": {
+            "bytes": 21252,
+            "sha256": "51c87c86cc6c88f4cb2fb836d861dc8de0fd917917d6e6fbc498d157b9e5a83d"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000008/full-after.csv": {
+            "bytes": 21083,
+            "sha256": "b3574b155dda7e577f84a060be709580fa1a95451cd8e55de23ee3f6385403d0"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000008/full-before.csv": {
+            "bytes": 21083,
+            "sha256": "cfc1f434ef5a585931acd42e492dd2e997e2862396aeb144d6f3995cfba5efcb"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000008/omit-0.csv": {
+            "bytes": 14559,
+            "sha256": "e81e96000e72f7c91e8cd5fa2d6e3ff484e1302f13fe15fc5a35acafdd39a758"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000008/omit-1.csv": {
+            "bytes": 21253,
+            "sha256": "3f54393058c6fe245233482e25a717fdcc4dee5706bace80218bdd89e3b6ee63"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000009/full-after.csv": {
+            "bytes": 21141,
+            "sha256": "55b0e62306a1776996d09fc49e030254ad31a64fc651a88f20059cdc74375ee2"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000009/full-before.csv": {
+            "bytes": 21130,
+            "sha256": "44633b9b37de6a1e75e9270ef9c64eedb31d69ee218b8dbae4e86886fb7723c1"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000009/omit-0.csv": {
+            "bytes": 14616,
+            "sha256": "413d33459ec57f0a06cd9a9f2a46591eb3f3713a12812aa1cc1bbd73546a49bf"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000009/omit-1.csv": {
+            "bytes": 21313,
+            "sha256": "22a68e8e5a3f17d4811d33049c005273a22e8a491841c9d3daf8959135ff4cb3"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000010/full-after.csv": {
+            "bytes": 21131,
+            "sha256": "934afe8d7ffc38a213363608ded54eacc8d634fdc811f762c121d1f9adc05376"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000010/full-before.csv": {
+            "bytes": 21131,
+            "sha256": "5b0810f117eae4acfab45c2942552aa468fa67c922dc783e80e9de8685d7c917"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000010/omit-0.csv": {
+            "bytes": 14605,
+            "sha256": "bd1409fd097c4e2186818be6fe1cef407720092811d16a69deadc0a6c4000614"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000010/omit-1.csv": {
+            "bytes": 21311,
+            "sha256": "d0d0880fbd1903e2f04b580a2b10667f8fcf06ff7ce76d70348295f499170318"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000011/full-after.csv": {
+            "bytes": 21130,
+            "sha256": "7c7b9b1c2fc9cbc827f9f22dd1a38d648aeed107469bcdaf173cd86a6d113ebf"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000011/full-before.csv": {
+            "bytes": 21128,
+            "sha256": "1ae71cbfd45a17a66335914d9654730dc26bc0f31709805acd9f70e63ad0c6a9"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000011/omit-0.csv": {
+            "bytes": 14630,
+            "sha256": "3b0f374c58cd26b3f0f6990feb6a5a8c55179bd6abb1dbdf7d8c82a81a68e6f5"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000011/omit-1.csv": {
+            "bytes": 21312,
+            "sha256": "dc8617142adc07db9ffb63f3ccc79963152ce962820efee582c30ebbf5bfc5a1"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000012/full-after.csv": {
+            "bytes": 21409,
+            "sha256": "92ad57c014e509952bb88a3009fd176219bbe1137c7098d9d95f4c7f190baf0d"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000012/full-before.csv": {
+            "bytes": 21120,
+            "sha256": "5d11c4a9810dfd80165f34dbbf248dfea9d7692fecab89f59f4d56b6b417d482"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000012/omit-0.csv": {
+            "bytes": 14616,
+            "sha256": "7296e7ecea7a81f31cd7d02d2e7339ebf44a96564aefede405f64c7cb5f3b538"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/composite-measurements/group-000012/omit-1.csv": {
+            "bytes": 21359,
+            "sha256": "f977591d394b125929794d636338bbb94ebad2638809cdeb116585a7ba3c218a"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/train_stopped_state.json": {
+            "bytes": 7499260,
+            "sha256": "1b4583e0d9a9312962f1ba2dcefd9aea202d4c445d57310e267507b145a7b4df"
+          },
+          "worker/tmp/native-burst-readback-small/Classic/source/train_stopped_summary.json": {
+            "bytes": 1151950,
+            "sha256": "afd451795ae92ae9111c4954c64768533e747b9031b3107ff3fe4b6f4342f6cf"
+          },
+          "worker/tmp/native-burst-readback-small/leases-final.json": {
+            "bytes": 4779,
+            "sha256": "f42b8e94e46fd01e13ad5a8979a8fc1a1d6bdba71d65a6860dd4b96c0a580a5d"
+          },
+          "worker/tmp/native-burst-readback-small/leases.sqlite3": {
+            "bytes": 36864,
+            "sha256": "0f23d153180fc0612b5d7e7cb59de1e344c969130a1328ab68f9013c441bcf13"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/job.json": {
+            "bytes": 5675887,
+            "sha256": "7a38f9cb8e2ae43d0c2ebf471a56fbccf35c1c22ca27d6e9fd8d5ffa736367e5"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/process-policy.json": {
+            "bytes": 540,
+            "sha256": "6d65f4e5b3636f37c680993f9df20344a5212d28a9d673af95f8acd9650720b8"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000001/full-after.csv": {
+            "bytes": 21688,
+            "sha256": "4856dcad07ad979d036e09c2d41383651d25951e3bd1347d8ef931d1e3423de1"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000001/full-before.csv": {
+            "bytes": 20784,
+            "sha256": "4750dac9a51d088d8a4be1a3d2f17a53d652f1614d9867accfac7de87968feb6"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000001/omit-0.csv": {
+            "bytes": 14239,
+            "sha256": "ddcd086115a1077233dbf51b586ba95d3567278fc935644d9735a9346c187292"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000001/omit-1.csv": {
+            "bytes": 21310,
+            "sha256": "36af494c7f74a70db7e708a45d7507e465630845806805dc630a05e3ebd06ed3"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000002/full-after.csv": {
+            "bytes": 19646,
+            "sha256": "15eba6d82b7af256a81358774cce7f67dc347d60bec44cce03f17a25b6fbc522"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000002/full-before.csv": {
+            "bytes": 21559,
+            "sha256": "2c8eeb42f6551bf102b48550d8598caf8b6806d6aa71943d7632d495eb2c48ba"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000002/omit-0.csv": {
+            "bytes": 14785,
+            "sha256": "cdbfd9d494a994c6f9af3434820a8eacfd772fa0bffb93875512380945d78e84"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000002/omit-1.csv": {
+            "bytes": 19889,
+            "sha256": "68fe67f158a692b9de7e96048369402b26da1b962d22ac7e30988c03d0bdc96e"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000003/full-after.csv": {
+            "bytes": 19935,
+            "sha256": "53431db6c19e1fd3d239f36c82ad539942480490f54e8139e7c4ae36c04ffdb7"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000003/full-before.csv": {
+            "bytes": 19721,
+            "sha256": "bb3c79c97f180a9852fc13c3f9f02a73a049fabac159019d9deeff81895889e5"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000003/omit-0.csv": {
+            "bytes": 13192,
+            "sha256": "523c968b90cbf6d03f23a3b08561f3923140c115d5db48e4f500e0a91f13c4d1"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000003/omit-1.csv": {
+            "bytes": 19877,
+            "sha256": "7017f914d28402f15145b5e8a33b52eb721ae1dd4972dd2b6d1d77b1e75e4788"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000004/full-after.csv": {
+            "bytes": 20671,
+            "sha256": "59a8df7e84c7befe97cf432359867020a2d224bb656653e7ceb1f9ef3c7b4679"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000004/full-before.csv": {
+            "bytes": 20658,
+            "sha256": "5581d56db42816a10fced3339d64e2c3664b1f55d42036f36343c5a69ed293c8"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000004/omit-0.csv": {
+            "bytes": 14151,
+            "sha256": "25fdbd4c56a489288b27ae3d8fb931f679740928fe16888b4bc5fc177cbda7c6"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000004/omit-1.csv": {
+            "bytes": 20809,
+            "sha256": "252c680039ed7987aad0eaccc669fec49d8977d8bc6309cf8ad891b33652abe0"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000005/full-after.csv": {
+            "bytes": 20628,
+            "sha256": "2dffc8fe535f397053d989838aa8b7a63f021d5613deecfdb872fa22fa6865e6"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000005/full-before.csv": {
+            "bytes": 20640,
+            "sha256": "3f192f60f91c0efdea79bc5f199872a3c151766db261ee7c74b44dda1be55f8e"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000005/omit-0.csv": {
+            "bytes": 14129,
+            "sha256": "9e61cd9971e79cd93482554268cbb987873ace1da070a9969332a5f18a18900b"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000005/omit-1.csv": {
+            "bytes": 20788,
+            "sha256": "0d5fdce217bbea29c74da0ca9f9f9bb9138d3912ecd6869d336bb2bc23190512"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000006/full-after.csv": {
+            "bytes": 20900,
+            "sha256": "47d8fa46245a7ea3a57094eeff0450f355fa685a7e6e1a856105446731e4bb49"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000006/full-before.csv": {
+            "bytes": 20639,
+            "sha256": "b4de1ceff2089945b7f73258a168e78fa4379dc234b92c3985c81eb4e7111118"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000006/omit-0.csv": {
+            "bytes": 14119,
+            "sha256": "212260ce5d702aa6ed308aee30a304a83a062d06dbbc32b49e94b78e17a61d69"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000006/omit-1.csv": {
+            "bytes": 20789,
+            "sha256": "ee1ee5abf84ad9d2bb3422dbcfed70e14607a9d58737fde005379e0d91ee0f93"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000007/full-after.csv": {
+            "bytes": 21094,
+            "sha256": "e2f230fe51696a18bb22fe15aef8ba6dccdf6396ea697ac7eef38edd67958d54"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000007/full-before.csv": {
+            "bytes": 21081,
+            "sha256": "d4bd3d021a6fafc22e4d99069ea71aa9a5af9ff983b77b76e176747dda0e998c"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000007/omit-0.csv": {
+            "bytes": 14577,
+            "sha256": "693615b262cdf9f5996853f036c81c3583c72a90e93f44b734238a2c25daad2a"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000007/omit-1.csv": {
+            "bytes": 21252,
+            "sha256": "51c87c86cc6c88f4cb2fb836d861dc8de0fd917917d6e6fbc498d157b9e5a83d"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000008/full-after.csv": {
+            "bytes": 21083,
+            "sha256": "b3574b155dda7e577f84a060be709580fa1a95451cd8e55de23ee3f6385403d0"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000008/full-before.csv": {
+            "bytes": 21083,
+            "sha256": "cfc1f434ef5a585931acd42e492dd2e997e2862396aeb144d6f3995cfba5efcb"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000008/omit-0.csv": {
+            "bytes": 14559,
+            "sha256": "e81e96000e72f7c91e8cd5fa2d6e3ff484e1302f13fe15fc5a35acafdd39a758"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000008/omit-1.csv": {
+            "bytes": 21253,
+            "sha256": "3f54393058c6fe245233482e25a717fdcc4dee5706bace80218bdd89e3b6ee63"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000009/full-after.csv": {
+            "bytes": 21141,
+            "sha256": "55b0e62306a1776996d09fc49e030254ad31a64fc651a88f20059cdc74375ee2"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000009/full-before.csv": {
+            "bytes": 21130,
+            "sha256": "44633b9b37de6a1e75e9270ef9c64eedb31d69ee218b8dbae4e86886fb7723c1"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000009/omit-0.csv": {
+            "bytes": 14616,
+            "sha256": "413d33459ec57f0a06cd9a9f2a46591eb3f3713a12812aa1cc1bbd73546a49bf"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000009/omit-1.csv": {
+            "bytes": 21313,
+            "sha256": "22a68e8e5a3f17d4811d33049c005273a22e8a491841c9d3daf8959135ff4cb3"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000010/full-after.csv": {
+            "bytes": 21131,
+            "sha256": "934afe8d7ffc38a213363608ded54eacc8d634fdc811f762c121d1f9adc05376"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000010/full-before.csv": {
+            "bytes": 21131,
+            "sha256": "5b0810f117eae4acfab45c2942552aa468fa67c922dc783e80e9de8685d7c917"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000010/omit-0.csv": {
+            "bytes": 14605,
+            "sha256": "bd1409fd097c4e2186818be6fe1cef407720092811d16a69deadc0a6c4000614"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000010/omit-1.csv": {
+            "bytes": 21311,
+            "sha256": "d0d0880fbd1903e2f04b580a2b10667f8fcf06ff7ce76d70348295f499170318"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000011/full-after.csv": {
+            "bytes": 21130,
+            "sha256": "7c7b9b1c2fc9cbc827f9f22dd1a38d648aeed107469bcdaf173cd86a6d113ebf"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000011/full-before.csv": {
+            "bytes": 21128,
+            "sha256": "1ae71cbfd45a17a66335914d9654730dc26bc0f31709805acd9f70e63ad0c6a9"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000011/omit-0.csv": {
+            "bytes": 14630,
+            "sha256": "3b0f374c58cd26b3f0f6990feb6a5a8c55179bd6abb1dbdf7d8c82a81a68e6f5"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000011/omit-1.csv": {
+            "bytes": 21312,
+            "sha256": "dc8617142adc07db9ffb63f3ccc79963152ce962820efee582c30ebbf5bfc5a1"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000012/full-after.csv": {
+            "bytes": 21409,
+            "sha256": "92ad57c014e509952bb88a3009fd176219bbe1137c7098d9d95f4c7f190baf0d"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000012/full-before.csv": {
+            "bytes": 21120,
+            "sha256": "5d11c4a9810dfd80165f34dbbf248dfea9d7692fecab89f59f4d56b6b417d482"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000012/omit-0.csv": {
+            "bytes": 14616,
+            "sha256": "7296e7ecea7a81f31cd7d02d2e7339ebf44a96564aefede405f64c7cb5f3b538"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/composite-measurements/group-000012/omit-1.csv": {
+            "bytes": 21359,
+            "sha256": "f977591d394b125929794d636338bbb94ebad2638809cdeb116585a7ba3c218a"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/train_stopped_state.json": {
+            "bytes": 7499260,
+            "sha256": "1b4583e0d9a9312962f1ba2dcefd9aea202d4c445d57310e267507b145a7b4df"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/input/source/train_stopped_summary.json": {
+            "bytes": 1151950,
+            "sha256": "afd451795ae92ae9111c4954c64768533e747b9031b3107ff3fe4b6f4342f6cf"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/baseline_trial_1.csv": {
+            "bytes": 20766,
+            "sha256": "798004fa717e662368fbf85dcf267ac92c92f6d10ae9baaf7a92ad254a05d2a1"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/baseline_trial_1.json": {
+            "bytes": 4598,
+            "sha256": "7c83af004e4c29edb90eff82dded91669531c20cd945e283fbec02fa889eb32d"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/controller-after.json": {
+            "bytes": 2290,
+            "sha256": "c0953360fff5ead18cf5f60510f336c4c09833cb59f57d9b1b36fff358ae9d57"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/controller-before.json": {
+            "bytes": 2290,
+            "sha256": "c0953360fff5ead18cf5f60510f336c4c09833cb59f57d9b1b36fff358ae9d57"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/execution.json": {
+            "bytes": 3971,
+            "sha256": "a044c907456cf94d8c16a7287efdbb46db2e2b477ada6f94d952c8ee0f30febf"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/final-state.json": {
+            "bytes": 149931,
+            "sha256": "a9d91208c5d2fe64177c4f5a9622b151a4fdfa671bc70156293045c7171cdfd7"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/initial-state.json": {
+            "bytes": 149970,
+            "sha256": "0da9fb2d2f2c89aeefca97ec54f2a3ba1d7b6c1547dac456d9142f4ab259b27b"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/job.json": {
+            "bytes": 7907637,
+            "sha256": "2a7ae114722267fe6955cd1854cad3ecd6d458aa9f4e865ea702725233fa2868"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/owner-configuration.json": {
+            "bytes": 5741,
+            "sha256": "b0465ebab38b04834ed6c17005da8b88c3c0c7b6623997b05cd6636f462f4c99"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/probe-configuration.json": {
+            "bytes": 3120,
+            "sha256": "6e25721b743b941d80b0fc311f8abe89b509cb384b927a7e6dfdadc4c48f48b3"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/probe_diagnostics_1.json": {
+            "bytes": 183030,
+            "sha256": "0a1300d50429d335bc54714402722e16ff114e31855313762417e018880a446e"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/probe_diagnostics_2.json": {
+            "bytes": 183019,
+            "sha256": "455716fea2588d111fe3d20cc28b03a426c527320b216ef0059d6f9ee38921cf"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/probe_trial_1.csv": {
+            "bytes": 20754,
+            "sha256": "66b567e1a89f484376535fb84f50ad8c727a1679afd9026203366b70ce27a516"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/probe_trial_1.json": {
+            "bytes": 4580,
+            "sha256": "e0a8474b611981743a0db522966419549f67094bdca3b2a7d440cc21df2631ad"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/resistance-domains.json": {
+            "bytes": 165843,
+            "sha256": "6e71666c3c3dda1992d3eb16fd5465eee8b45de6769f4af4395f9c704a091f49"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/source-import.json": {
+            "bytes": 150121,
+            "sha256": "3c26b4b479890bac2e27bc7daa9321bc203e3040bcea9bd07c4e360d1d7aab3a"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native/subset-restoration.json": {
+            "bytes": 299673,
+            "sha256": "6e17ccde07a00a0a64cac708c14374a5a5eb71646113e0f8764418e5f7932ce8"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261113-095653.3429047": {
+            "bytes": 291,
+            "sha256": "142977a01207493bceba29676ac46bc4b51116650645bd0f7f601d8158454851"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/capture-ack.json": {
+            "bytes": 114,
+            "sha256": "cb1571d6f19287a81b80b8851ede8a27f73c9678c5915d6fd115b10e8d5a9b14"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/capture-ready.json": {
+            "bytes": 98,
+            "sha256": "be98e1c76b43f267d98d226c2b964483a213747ea47b268c41d4f5756d439e0d"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained/limits-readback.json": {
+            "bytes": 1068,
+            "sha256": "5a11dbbae34bf771a07495a97ce98c4591a2ce4bb34181c70dcf2721c081eec5"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "04e8f916663a8f402d70e598f675db1511e891e398480c6951afde09731a5b89"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "f475a7bfaeda86a6699b771e61906f84738741845980cb8ae1057d23c1fc3726"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained/request.json": {
+            "bytes": 1577,
+            "sha256": "6720007fe0f69087d1d6c7e622673e5749a446899c3b97071cf22a0e41b78461"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained/runtime.json": {
+            "bytes": 12649,
+            "sha256": "9377de0116cefa35c36ef280f048ff1925b5b14887dc651165821beff5aac780"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/loaded-files.json": {
+            "bytes": 4831,
+            "sha256": "c998531db1a2c12079053b8cebe0269a59c73631665ce172a8d487f9ad77ca14"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/owned-process.json": {
+            "bytes": 659,
+            "sha256": "602122adaabb591b7055ab792920c3a4b35e97fe356f06af7b69e4d39c6222cc"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/request.json": {
+            "bytes": 920,
+            "sha256": "4d3bde91dc0486a04470b9c877e21236dbbb0b534c2987d62e1af076a53ba326"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/reservation-context.json": {
+            "bytes": 3109,
+            "sha256": "75393e4b63a8df33e1d43216f3e47b65567e1b64602c7fea21d3c3b4aebd1662"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/result.json": {
+            "bytes": 1176,
+            "sha256": "67c991aa50c01ffc23833d4daa9193fdb0c1f07172e34a6ac21043c560743b23"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/runtime.json": {
+            "bytes": 12649,
+            "sha256": "9377de0116cefa35c36ef280f048ff1925b5b14887dc651165821beff5aac780"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/terminal-unit-state.json": {
+            "bytes": 1298,
+            "sha256": "ae5fc819e7f26936321bf46ece98338061a293813ba49627874545c0e611c8a2"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "825f7b8efef96d0d49fd1d9e4ab60821f0820ea3e16354333359df3437fd7ab4"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/runtime-cli-interface.json": {
+            "bytes": 5495,
+            "sha256": "44d27001cdef04c4f626c42e3de56f5f8912be3dab1f9f91510fde18c23e4a30"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/job.json": {
+            "bytes": 5675816,
+            "sha256": "de9e4ae4d28d262fc85aae47c52178bb669bb29ebeb356397aacc79c28644277"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/process-policy.json": {
+            "bytes": 540,
+            "sha256": "6d65f4e5b3636f37c680993f9df20344a5212d28a9d673af95f8acd9650720b8"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000001/full-after.csv": {
+            "bytes": 21688,
+            "sha256": "4856dcad07ad979d036e09c2d41383651d25951e3bd1347d8ef931d1e3423de1"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000001/full-before.csv": {
+            "bytes": 20784,
+            "sha256": "4750dac9a51d088d8a4be1a3d2f17a53d652f1614d9867accfac7de87968feb6"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000001/omit-0.csv": {
+            "bytes": 14239,
+            "sha256": "ddcd086115a1077233dbf51b586ba95d3567278fc935644d9735a9346c187292"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000001/omit-1.csv": {
+            "bytes": 21310,
+            "sha256": "36af494c7f74a70db7e708a45d7507e465630845806805dc630a05e3ebd06ed3"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000002/full-after.csv": {
+            "bytes": 19646,
+            "sha256": "15eba6d82b7af256a81358774cce7f67dc347d60bec44cce03f17a25b6fbc522"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000002/full-before.csv": {
+            "bytes": 21559,
+            "sha256": "2c8eeb42f6551bf102b48550d8598caf8b6806d6aa71943d7632d495eb2c48ba"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000002/omit-0.csv": {
+            "bytes": 14785,
+            "sha256": "cdbfd9d494a994c6f9af3434820a8eacfd772fa0bffb93875512380945d78e84"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000002/omit-1.csv": {
+            "bytes": 19889,
+            "sha256": "68fe67f158a692b9de7e96048369402b26da1b962d22ac7e30988c03d0bdc96e"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000003/full-after.csv": {
+            "bytes": 19935,
+            "sha256": "53431db6c19e1fd3d239f36c82ad539942480490f54e8139e7c4ae36c04ffdb7"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000003/full-before.csv": {
+            "bytes": 19721,
+            "sha256": "bb3c79c97f180a9852fc13c3f9f02a73a049fabac159019d9deeff81895889e5"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000003/omit-0.csv": {
+            "bytes": 13192,
+            "sha256": "523c968b90cbf6d03f23a3b08561f3923140c115d5db48e4f500e0a91f13c4d1"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000003/omit-1.csv": {
+            "bytes": 19877,
+            "sha256": "7017f914d28402f15145b5e8a33b52eb721ae1dd4972dd2b6d1d77b1e75e4788"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000004/full-after.csv": {
+            "bytes": 20671,
+            "sha256": "59a8df7e84c7befe97cf432359867020a2d224bb656653e7ceb1f9ef3c7b4679"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000004/full-before.csv": {
+            "bytes": 20658,
+            "sha256": "5581d56db42816a10fced3339d64e2c3664b1f55d42036f36343c5a69ed293c8"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000004/omit-0.csv": {
+            "bytes": 14151,
+            "sha256": "25fdbd4c56a489288b27ae3d8fb931f679740928fe16888b4bc5fc177cbda7c6"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000004/omit-1.csv": {
+            "bytes": 20809,
+            "sha256": "252c680039ed7987aad0eaccc669fec49d8977d8bc6309cf8ad891b33652abe0"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000005/full-after.csv": {
+            "bytes": 20628,
+            "sha256": "2dffc8fe535f397053d989838aa8b7a63f021d5613deecfdb872fa22fa6865e6"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000005/full-before.csv": {
+            "bytes": 20640,
+            "sha256": "3f192f60f91c0efdea79bc5f199872a3c151766db261ee7c74b44dda1be55f8e"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000005/omit-0.csv": {
+            "bytes": 14129,
+            "sha256": "9e61cd9971e79cd93482554268cbb987873ace1da070a9969332a5f18a18900b"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000005/omit-1.csv": {
+            "bytes": 20788,
+            "sha256": "0d5fdce217bbea29c74da0ca9f9f9bb9138d3912ecd6869d336bb2bc23190512"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000006/full-after.csv": {
+            "bytes": 20900,
+            "sha256": "47d8fa46245a7ea3a57094eeff0450f355fa685a7e6e1a856105446731e4bb49"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000006/full-before.csv": {
+            "bytes": 20639,
+            "sha256": "b4de1ceff2089945b7f73258a168e78fa4379dc234b92c3985c81eb4e7111118"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000006/omit-0.csv": {
+            "bytes": 14119,
+            "sha256": "212260ce5d702aa6ed308aee30a304a83a062d06dbbc32b49e94b78e17a61d69"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000006/omit-1.csv": {
+            "bytes": 20789,
+            "sha256": "ee1ee5abf84ad9d2bb3422dbcfed70e14607a9d58737fde005379e0d91ee0f93"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000007/full-after.csv": {
+            "bytes": 21094,
+            "sha256": "e2f230fe51696a18bb22fe15aef8ba6dccdf6396ea697ac7eef38edd67958d54"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000007/full-before.csv": {
+            "bytes": 21081,
+            "sha256": "d4bd3d021a6fafc22e4d99069ea71aa9a5af9ff983b77b76e176747dda0e998c"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000007/omit-0.csv": {
+            "bytes": 14577,
+            "sha256": "693615b262cdf9f5996853f036c81c3583c72a90e93f44b734238a2c25daad2a"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000007/omit-1.csv": {
+            "bytes": 21252,
+            "sha256": "51c87c86cc6c88f4cb2fb836d861dc8de0fd917917d6e6fbc498d157b9e5a83d"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000008/full-after.csv": {
+            "bytes": 21083,
+            "sha256": "b3574b155dda7e577f84a060be709580fa1a95451cd8e55de23ee3f6385403d0"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000008/full-before.csv": {
+            "bytes": 21083,
+            "sha256": "cfc1f434ef5a585931acd42e492dd2e997e2862396aeb144d6f3995cfba5efcb"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000008/omit-0.csv": {
+            "bytes": 14559,
+            "sha256": "e81e96000e72f7c91e8cd5fa2d6e3ff484e1302f13fe15fc5a35acafdd39a758"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000008/omit-1.csv": {
+            "bytes": 21253,
+            "sha256": "3f54393058c6fe245233482e25a717fdcc4dee5706bace80218bdd89e3b6ee63"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000009/full-after.csv": {
+            "bytes": 21141,
+            "sha256": "55b0e62306a1776996d09fc49e030254ad31a64fc651a88f20059cdc74375ee2"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000009/full-before.csv": {
+            "bytes": 21130,
+            "sha256": "44633b9b37de6a1e75e9270ef9c64eedb31d69ee218b8dbae4e86886fb7723c1"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000009/omit-0.csv": {
+            "bytes": 14616,
+            "sha256": "413d33459ec57f0a06cd9a9f2a46591eb3f3713a12812aa1cc1bbd73546a49bf"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000009/omit-1.csv": {
+            "bytes": 21313,
+            "sha256": "22a68e8e5a3f17d4811d33049c005273a22e8a491841c9d3daf8959135ff4cb3"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000010/full-after.csv": {
+            "bytes": 21131,
+            "sha256": "934afe8d7ffc38a213363608ded54eacc8d634fdc811f762c121d1f9adc05376"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000010/full-before.csv": {
+            "bytes": 21131,
+            "sha256": "5b0810f117eae4acfab45c2942552aa468fa67c922dc783e80e9de8685d7c917"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000010/omit-0.csv": {
+            "bytes": 14605,
+            "sha256": "bd1409fd097c4e2186818be6fe1cef407720092811d16a69deadc0a6c4000614"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000010/omit-1.csv": {
+            "bytes": 21311,
+            "sha256": "d0d0880fbd1903e2f04b580a2b10667f8fcf06ff7ce76d70348295f499170318"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000011/full-after.csv": {
+            "bytes": 21130,
+            "sha256": "7c7b9b1c2fc9cbc827f9f22dd1a38d648aeed107469bcdaf173cd86a6d113ebf"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000011/full-before.csv": {
+            "bytes": 21128,
+            "sha256": "1ae71cbfd45a17a66335914d9654730dc26bc0f31709805acd9f70e63ad0c6a9"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000011/omit-0.csv": {
+            "bytes": 14630,
+            "sha256": "3b0f374c58cd26b3f0f6990feb6a5a8c55179bd6abb1dbdf7d8c82a81a68e6f5"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000011/omit-1.csv": {
+            "bytes": 21312,
+            "sha256": "dc8617142adc07db9ffb63f3ccc79963152ce962820efee582c30ebbf5bfc5a1"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000012/full-after.csv": {
+            "bytes": 21409,
+            "sha256": "92ad57c014e509952bb88a3009fd176219bbe1137c7098d9d95f4c7f190baf0d"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000012/full-before.csv": {
+            "bytes": 21120,
+            "sha256": "5d11c4a9810dfd80165f34dbbf248dfea9d7692fecab89f59f4d56b6b417d482"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000012/omit-0.csv": {
+            "bytes": 14616,
+            "sha256": "7296e7ecea7a81f31cd7d02d2e7339ebf44a96564aefede405f64c7cb5f3b538"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/composite-measurements/group-000012/omit-1.csv": {
+            "bytes": 21359,
+            "sha256": "f977591d394b125929794d636338bbb94ebad2638809cdeb116585a7ba3c218a"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/train_stopped_state.json": {
+            "bytes": 7499260,
+            "sha256": "1b4583e0d9a9312962f1ba2dcefd9aea202d4c445d57310e267507b145a7b4df"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/input/source/train_stopped_summary.json": {
+            "bytes": 1151950,
+            "sha256": "afd451795ae92ae9111c4954c64768533e747b9031b3107ff3fe4b6f4342f6cf"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/controller-after.json": {
+            "bytes": 2290,
+            "sha256": "c0953360fff5ead18cf5f60510f336c4c09833cb59f57d9b1b36fff358ae9d57"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/controller-before.json": {
+            "bytes": 2290,
+            "sha256": "c0953360fff5ead18cf5f60510f336c4c09833cb59f57d9b1b36fff358ae9d57"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/execution.json": {
+            "bytes": 3200,
+            "sha256": "cf8dd15513e203be7f569532bffe62b66fcf5573afcb0a0a386678b536a55766"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/final-state.json": {
+            "bytes": 149931,
+            "sha256": "a9d91208c5d2fe64177c4f5a9622b151a4fdfa671bc70156293045c7171cdfd7"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/initial-state.json": {
+            "bytes": 149970,
+            "sha256": "0da9fb2d2f2c89aeefca97ec54f2a3ba1d7b6c1547dac456d9142f4ab259b27b"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/job.json": {
+            "bytes": 7907551,
+            "sha256": "0687f3e1aefde30054d79e868cba893a46e518f34de7110f72c3de91cf2dd243"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/owner-configuration.json": {
+            "bytes": 5741,
+            "sha256": "b0465ebab38b04834ed6c17005da8b88c3c0c7b6623997b05cd6636f462f4c99"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/probe-configuration.json": {
+            "bytes": 3120,
+            "sha256": "6e25721b743b941d80b0fc311f8abe89b509cb384b927a7e6dfdadc4c48f48b3"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/probe_diagnostics_1.json": {
+            "bytes": 183013,
+            "sha256": "07553661ea594bfddb119db1dead3cf43786a3e436ba3059df9b6ecbff619a41"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/probe_trial_1.csv": {
+            "bytes": 20766,
+            "sha256": "798004fa717e662368fbf85dcf267ac92c92f6d10ae9baaf7a92ad254a05d2a1"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/probe_trial_1.json": {
+            "bytes": 4564,
+            "sha256": "2aecbbb1f04b3aeeb41c8fea6a112dcb76325d534619b9f9dbd8f9c472e1d036"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/source-import.json": {
+            "bytes": 150121,
+            "sha256": "3c26b4b479890bac2e27bc7daa9321bc203e3040bcea9bd07c4e360d1d7aab3a"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native/subset-restoration.json": {
+            "bytes": 299673,
+            "sha256": "6e17ccde07a00a0a64cac708c14374a5a5eb71646113e0f8764418e5f7932ce8"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261113-095616.3426968": {
+            "bytes": 291,
+            "sha256": "077a7183f16c9a9da25f43d1f29f232631a32e42fe82a6af217f898386c5d866"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/capture-ack.json": {
+            "bytes": 114,
+            "sha256": "6c1f3fb813730c4a82ce7ebe93990900430c193aa0fc3e7d020984c05d9a4360"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/capture-ready.json": {
+            "bytes": 98,
+            "sha256": "1a55834d8093fedc8496fa74d02fa304c309addc1855348ba1358a6872e979f7"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained/limits-readback.json": {
+            "bytes": 1068,
+            "sha256": "3b4550ced577ccc223203de6da02620a4022bc6cdc01f5de9562e3a01af4b8ef"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "8926cfb7ed0d13c902960750870b22447723cc337782777b3162382407a6cc7b"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "5e9d61ac3d8910868ab30d694792b0195ee79e64ea5f6bc9e2db0e8dea1952fc"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained/request.json": {
+            "bytes": 1574,
+            "sha256": "b3022371f8246ba81b720fcc4b6df6a0a3651d93f45d57207b9c4bda85dceb37"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained/runtime.json": {
+            "bytes": 12649,
+            "sha256": "9377de0116cefa35c36ef280f048ff1925b5b14887dc651165821beff5aac780"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/loaded-files.json": {
+            "bytes": 4831,
+            "sha256": "c998531db1a2c12079053b8cebe0269a59c73631665ce172a8d487f9ad77ca14"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/owned-process.json": {
+            "bytes": 659,
+            "sha256": "fbb9f3bf51a523684264d13861d84e8431707f6a7e00c240b4c4d8470fa659f6"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/request.json": {
+            "bytes": 917,
+            "sha256": "d5877098f875bfc2bab4e258fa7fb4b2981aec5a052bc8cb02de0a0931bbb168"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/reservation-context.json": {
+            "bytes": 3108,
+            "sha256": "958d43a18a668bb4c36b51f9e352f67d365144e8e3cb257611925fef1597ed89"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/result.json": {
+            "bytes": 1176,
+            "sha256": "40b9f500e89058ee66c92c3288847a1ffe08b76379d4ccd66e640a78ee0a2af6"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/runtime.json": {
+            "bytes": 12649,
+            "sha256": "9377de0116cefa35c36ef280f048ff1925b5b14887dc651165821beff5aac780"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/terminal-unit-state.json": {
+            "bytes": 1298,
+            "sha256": "4c8f7f3fe11509642163a63be25cda651bf4889ae1118b0779155cff2c424e97"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "0774491030efdfb8403722caec579b04633cb2defd195c0d7222976639c12bc0"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/run-manifest.json": {
+            "bytes": 50846,
+            "sha256": "e1f25c145454f68b1db495e04de2d0e87e4e479bcaebb20db71fb68766d99279"
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/runtime-cli-interface.json": {
+            "bytes": 5496,
+            "sha256": "7321da77a2cddc1a3bdc35517fa498243f193826eb238f23cc3e14083789b622"
+          },
+          "worker/tool-source-after.json": {
+            "bytes": 313358,
+            "sha256": "ae9b2cfc9b1fd2248c24e693e3041b3f59653400a7fd6abd6667b4c3bf8c77c0"
+          },
+          "worker/tool-source-before.json": {
+            "bytes": 313358,
+            "sha256": "ae9b2cfc9b1fd2248c24e693e3041b3f59653400a7fd6abd6667b4c3bf8c77c0"
+          },
+          "worker/validation/result.json": {
+            "bytes": 1683,
+            "sha256": "c5cd8bbebfe757bbc96c49c1f4151ad7f6722916eab71029f7b97d772d6303cb"
+          },
+          "worker/validation/suite.json": {
+            "bytes": 1166,
+            "sha256": "5159e66b0e285600e986c867abe366a7dcdf5c97a7af80877558dde572c19b62"
+          },
+          "worker/validation/unittest.log": {
+            "bytes": 3587,
+            "sha256": "fbfe4a69a0e2819ed8ef799014616b2e295c94a3f6c2af4505dd61087504f7c9"
+          },
+          "worker/validation-process.json": {
+            "bytes": 153,
+            "sha256": "155cdf4ee929352a42814758c7b51fbcade43136ca483a1f536ec9f3cb379763"
+          },
+          "worker/validation-source-after.json": {
+            "bytes": 313358,
+            "sha256": "ae9b2cfc9b1fd2248c24e693e3041b3f59653400a7fd6abd6667b4c3bf8c77c0"
+          },
+          "worker/validation-source-before.json": {
+            "bytes": 313358,
+            "sha256": "ae9b2cfc9b1fd2248c24e693e3041b3f59653400a7fd6abd6667b4c3bf8c77c0"
+          }
+        },
+        "links": {
+          "worker/tmp/native-burst-readback-small/runs/Classic-matched/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              58480995,
+              54,
+              1794553013001427519,
+              1794553013001427519,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261113-095653.3429047",
+            "link_not_followed": true
+          },
+          "worker/tmp/native-burst-readback-small/runs/Classic-replay/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              58480882,
+              54,
+              1794552976328852853,
+              1794552976328852853,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261113-095616.3426968",
+            "link_not_followed": true
+          }
+        }
+      }
+    ],
+    "closed_units": [
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a3/worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "4421d2de5ac5912fb2956db8ee7e759b38fdcf53c6b0bca2275b2fce84dc2b36",
+          "unit": "timelearner-d8618bc5-15bf-4e64-8a1c-1c11e254a843.service",
+          "invocation_id": "f4889b176f324220be3caf5d0f27808a",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d8618bc5-15bf-4e64-8a1c-1c11e254a843.service",
+          "initial_main_pid": 3426968,
+          "initial_start_ticks": "362817375",
+          "sha256": "04a6da65922dbab9e5cdbbfc5414a85b0c7f3ddf1ce9e7eeb090e1203ce3f638"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a3/worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "62316a5884fd089aa9779ae64300468b2896330d0a61ce8cbb5aca6a30873e70",
+          "unit": "timelearner-47b033c0-318f-4be7-a073-530acf1fcc35.service",
+          "invocation_id": "6d5ad4759fbf4db1ab07ad073cb9e3b6",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-47b033c0-318f-4be7-a073-530acf1fcc35.service",
+          "initial_main_pid": 3429047,
+          "initial_start_ticks": "362821043",
+          "sha256": "3f115e39b75a9f68d02e30247954744c9bb7c833197c3606ea1acb22d3ec3563"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a3/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "45774010a9db57ea30deb484be73cc84f7fd58eb9cdc69ce81e16ad30620930b",
+          "unit": "timelearner-f066755e-b755-4c7b-98e6-22a95a8aca2b.service",
+          "invocation_id": "d7917ac9c12f4af686f5377915181102",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f066755e-b755-4c7b-98e6-22a95a8aca2b.service",
+          "initial_main_pid": 3419082,
+          "initial_start_ticks": "362814071",
+          "sha256": "c7143776df74f26542b6e094e65c03751a30515fe6be7d2daf0f905b346918fe"
+        }
+      }
+    ],
+    "bounds": {
+      "maximum_file_bytes": 67108864,
+      "maximum_total_bytes": 1073741824,
+      "maximum_archive_bytes": 134217728
+    },
+    "scientific_verdict": null
+  },
+  "before": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a3/worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "4421d2de5ac5912fb2956db8ee7e759b38fdcf53c6b0bca2275b2fce84dc2b36",
+          "unit": "timelearner-d8618bc5-15bf-4e64-8a1c-1c11e254a843.service",
+          "invocation_id": "f4889b176f324220be3caf5d0f27808a",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d8618bc5-15bf-4e64-8a1c-1c11e254a843.service",
+          "initial_main_pid": 3426968,
+          "initial_start_ticks": "362817375",
+          "sha256": "04a6da65922dbab9e5cdbbfc5414a85b0c7f3ddf1ce9e7eeb090e1203ce3f638"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-d8618bc5-15bf-4e64-8a1c-1c11e254a843.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a3/worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "62316a5884fd089aa9779ae64300468b2896330d0a61ce8cbb5aca6a30873e70",
+          "unit": "timelearner-47b033c0-318f-4be7-a073-530acf1fcc35.service",
+          "invocation_id": "6d5ad4759fbf4db1ab07ad073cb9e3b6",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-47b033c0-318f-4be7-a073-530acf1fcc35.service",
+          "initial_main_pid": 3429047,
+          "initial_start_ticks": "362821043",
+          "sha256": "3f115e39b75a9f68d02e30247954744c9bb7c833197c3606ea1acb22d3ec3563"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-47b033c0-318f-4be7-a073-530acf1fcc35.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a3/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "45774010a9db57ea30deb484be73cc84f7fd58eb9cdc69ce81e16ad30620930b",
+          "unit": "timelearner-f066755e-b755-4c7b-98e6-22a95a8aca2b.service",
+          "invocation_id": "d7917ac9c12f4af686f5377915181102",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f066755e-b755-4c7b-98e6-22a95a8aca2b.service",
+          "initial_main_pid": 3419082,
+          "initial_start_ticks": "362814071",
+          "sha256": "c7143776df74f26542b6e094e65c03751a30515fe6be7d2daf0f905b346918fe"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "Result": "exit-code",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "1",
+          "ControlGroup": "",
+          "MemoryMax": "3221225472",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt f066755e-b755-4c7b-98e6-22a95a8aca2b",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "InvocationID": "d7917ac9c12f4af686f5377915181102"
+        },
+        "memory_max": 3221225472,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "after": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a3/worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "4421d2de5ac5912fb2956db8ee7e759b38fdcf53c6b0bca2275b2fce84dc2b36",
+          "unit": "timelearner-d8618bc5-15bf-4e64-8a1c-1c11e254a843.service",
+          "invocation_id": "f4889b176f324220be3caf5d0f27808a",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d8618bc5-15bf-4e64-8a1c-1c11e254a843.service",
+          "initial_main_pid": 3426968,
+          "initial_start_ticks": "362817375",
+          "sha256": "04a6da65922dbab9e5cdbbfc5414a85b0c7f3ddf1ce9e7eeb090e1203ce3f638"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-d8618bc5-15bf-4e64-8a1c-1c11e254a843.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a3/worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "62316a5884fd089aa9779ae64300468b2896330d0a61ce8cbb5aca6a30873e70",
+          "unit": "timelearner-47b033c0-318f-4be7-a073-530acf1fcc35.service",
+          "invocation_id": "6d5ad4759fbf4db1ab07ad073cb9e3b6",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-47b033c0-318f-4be7-a073-530acf1fcc35.service",
+          "initial_main_pid": 3429047,
+          "initial_start_ticks": "362821043",
+          "sha256": "3f115e39b75a9f68d02e30247954744c9bb7c833197c3606ea1acb22d3ec3563"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-47b033c0-318f-4be7-a073-530acf1fcc35.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a3/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "45774010a9db57ea30deb484be73cc84f7fd58eb9cdc69ce81e16ad30620930b",
+          "unit": "timelearner-f066755e-b755-4c7b-98e6-22a95a8aca2b.service",
+          "invocation_id": "d7917ac9c12f4af686f5377915181102",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f066755e-b755-4c7b-98e6-22a95a8aca2b.service",
+          "initial_main_pid": 3419082,
+          "initial_start_ticks": "362814071",
+          "sha256": "c7143776df74f26542b6e094e65c03751a30515fe6be7d2daf0f905b346918fe"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "Result": "exit-code",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "1",
+          "ControlGroup": "",
+          "MemoryMax": "3221225472",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt f066755e-b755-4c7b-98e6-22a95a8aca2b",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "InvocationID": "d7917ac9c12f4af686f5377915181102"
+        },
+        "memory_max": 3221225472,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "bundle": {
+    "kind": "compact_native_primary",
+    "schema_version": 1,
+    "archive_bytes": 507916,
+    "archive_sha256": "393acd9144ea16bfcb8f3fbfe6fa391934b354d5fe77f04067996ca93bec2bfc",
+    "compression": {
+      "codec": "xz-lzma2",
+      "dictionary_bytes": 33554432,
+      "member_order": "content_sha256_then_logical_name"
+    },
+    "expanded_bytes": 71077321,
+    "unique_content_bytes": 38790084
+  },
+  "collection_status": "completed",
+  "original_files_rewritten": false,
+  "original_outcome_unchanged": true,
+  "scientific_verdict": null
+}

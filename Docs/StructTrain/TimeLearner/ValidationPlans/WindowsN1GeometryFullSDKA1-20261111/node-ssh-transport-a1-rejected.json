@@ -1,0 +1,7 @@
+{
+  "execution": "transport_error",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\r\n  File \"C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner_windows14_deliver_n1_full_a1.py\", line 17, in <module>\r\n    assert remote(pscode)=='EMPTY_ACCEPTED'\r\n           ~~~~~~^^^^^^^^\r\n  File \"C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner_windows14_deliver_n1_full_a1.py\", line 10, in remote\r\n    if p.returncode:raise RuntimeError(json.dumps({'exit_code':p.returncode,'stdout':p.stdout.decode('utf-8',errors='replace'),'stderr':p.stderr.decode('utf-8',errors='replace')}))\r\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nRuntimeError: {\"exit_code\": 255, \"stdout\": \"\", \"stderr\": \"\"}\r\n",
+  "build_started": false
+}

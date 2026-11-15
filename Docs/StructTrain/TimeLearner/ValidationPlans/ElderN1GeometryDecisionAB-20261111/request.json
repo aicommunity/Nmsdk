@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-n1-geometry-decision-ab-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "199e7223b69fc2a5bdfa2c9b3ca5b446940d59c9",
+  "limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 64,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 1073741824
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-n1-geometry-decision-after-a1",
+      "commit": "199e7223b69fc2a5bdfa2c9b3ca5b446940d59c9"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/n1-geometry-decision-ab-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderN1GeometryDecisionAB-20261111/suite.json",
+      "sha256": "78948c7597c43402094d0edbd17ed7a20fa90530cf51a78d5eb8d6b9f970f234"
+    },
+    "fixtures": {
+      "TIMELEARNER_N1_GEOMETRY_CPP_CONTROLS": "/home/user/timelearner-refactor/requests/n1-geometry-decision-ab-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderN1GeometryDecisionAB-20261111/fixture"
+    }
+  }
+}

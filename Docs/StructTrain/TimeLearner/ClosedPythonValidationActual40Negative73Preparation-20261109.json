@@ -1,0 +1,85 @@
+{
+  "kind": "closed_python_validation_actual_collection_preparation",
+  "schema_version": 1,
+  "status": "source_Git_JSON_only_not_delivered_or_dispatched",
+  "collector_source": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+  "required_before_execution": [
+    "Root review actual66A2 full66PASS and exactclosure already observed; its maintained publication remains separate",
+    "Root review of these exact manifests and fresh read-only original-job/source/fixture/registry checks",
+    "Fresh Git-only observer projection15 files+all5controls frome682; no mutation of source35/plan42/originaljob40",
+    "Fresh output paths absent and owned collection resource lifetime reviewed"
+  ],
+  "actual40": {
+    "original_outcome": "passed",
+    "original_tests": 40,
+    "job_plan_binding_is_nested_control_directory": true,
+    "Git_plan_repository_is_separate_root": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1",
+    "observer_commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+    "observer_projection": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+    "observer_patterns": [
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40KernelOutput.json.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40Request.json.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootControlsDelivery.json.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootFreshPreflight.json.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootPreparedMetadata.json.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootReadOnlyLeasePreflight.json.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunCommand.txt.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunTransport.stderr.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunTransport.stdout.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootSourceDelivery.json.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootTerminalReadback.json.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40Suite.json.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/index.json",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/nested-kernel-observer-v2.py.gz",
+      "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/nested-kernel-readback.json.gz",
+      "/.gitattributes",
+      "/.gitignore",
+      "/.gitmodules",
+      "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+      "/LLM/.gitignore"
+    ],
+    "observer_regular_files": 15,
+    "observer_controls": 5,
+    "extra_file_semantics": "opaque metadata; owning Root observer retains separate11units/9cases proof, not attested by generic collector",
+    "kernel_case_files": "entire frozen original-job metadata inventory includes existing raw kernel caseSQLite/requests/closures; no new model/native run"
+  },
+  "negative73": {
+    "original_outcome": "failed",
+    "executed": 73,
+    "passed": 72,
+    "failures": [
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_C_region_and_context_count_limits_are_checked"
+    ],
+    "errors": 0,
+    "skipped": 0,
+    "primary_reference_repository": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1",
+    "primary_reference_HEAD": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+    "primary_commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "primary_payload_not_duplicated": true,
+    "fixture_files": 157,
+    "fixture_fingerprint": "78f286701300c7d365e16d25bb64fca430a06b23e08b638396249a87b89056db",
+    "failed_fixture_boundary_not_production_math_claim": "actual source1292 retained;263/264 future fixture correction is independent"
+  },
+  "outputs": {
+    "ClosedPythonValidationActual40Collection-20261109.manifest.json": {
+      "bytes": 39617,
+      "sha256": "19a5e38c6019e68c7337dc11ac073464572219d21387098d9495275aa88011cb"
+    },
+    "ClosedPythonValidationNegative73Collection-20261109.manifest.json": {
+      "bytes": 29456,
+      "sha256": "bf953ac282bb79d734c359c35af75515bfbf93a94258c0c3778182d0c4058109"
+    }
+  },
+  "production_CLI": "/usr/bin/python3.12 -B -m Scripts.StructTrain.TimeLearner.closed_python_validation collect <tracked manifest> --manifest-sha256 <canonical Git hash> --output <new owned output>",
+  "original_test_execution": false,
+  "new_scientific_or_kernel_attestation": false,
+  "scientific_verdict": null,
+  "next66A2_collection_constraint": {
+    "status": "not_representable_by_current_hardcoded_suite_basename",
+    "source": "Scripts/StructTrain/TimeLearner/closed_python_validation.py",
+    "current_join": "job.plan.path / suite.json",
+    "actual66A2_basename": "ClosedPythonValidation66A2Preparation-20261109.suite.json",
+    "prohibited_workaround": "no flatcopy, symlink or alias to disguise originalrequest",
+    "followup": "Root-reviewed explicit suite relative-path binding and meaningful metadata regression; no source9ed/artifact mutation"
+  }
+}

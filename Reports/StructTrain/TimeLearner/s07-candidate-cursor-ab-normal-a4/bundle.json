@@ -1,0 +1,176 @@
+{
+  "kind": "timelearner_controller_ab_evidence",
+  "schema_version": 1,
+  "root": "c04850a81bb7f1918519d72bc4c18214438d9ed0",
+  "baseline_root": "2194eeadcb3f29e1b2047ae1bcf3e6e7e48e4747",
+  "candidate_pulselib": "03b004aa36121766b8eac3040a282e272b392eb5",
+  "result": {
+    "kind": "timelearner_controller_ab_result",
+    "schema_version": 1,
+    "cases": {
+      "baseline": {
+        "root": "2194eeadcb3f29e1b2047ae1bcf3e6e7e48e4747",
+        "pulselib": "21435c8d5a11d2670cdc1609757d3a9973877314",
+        "compile": {
+          "execution": "completed",
+          "returncode": 0,
+          "wall_seconds": 48.810136813204736
+        },
+        "execution": "completed",
+        "validity": "valid",
+        "assertion_status": "passed",
+        "executable": {
+          "path": "/home/user/timelearner-refactor/readbacks/s07-candidate-cursor-ab-normal-a4/gate/baseline/controller-tests",
+          "sha256": "dd205ff8b58b578c4116c8be753c3e703465b16f25e518d6b36f2be232cd882e",
+          "size": 1985496
+        },
+        "resolved_libraries": [
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+            "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+            "size": 2220400
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+            "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+            "size": 125488
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+            "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+            "size": 940560
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+            "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+            "size": 2260296
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+            "size": 240936
+          }
+        ],
+        "actual_loaded_files_captured": false,
+        "test": {
+          "execution": "completed",
+          "returncode": 0,
+          "wall_seconds": 0.06438235007226467
+        },
+        "inventory": {
+          "expected": 130,
+          "observed": 130,
+          "failed_test_ids": [],
+          "assertion_status": "passed",
+          "sha256": "e4d90e4f88ab6feccb41d04b005828010536fe731a7bb57b7a8b899bf3106dc1"
+        }
+      },
+      "candidate": {
+        "root": "c04850a81bb7f1918519d72bc4c18214438d9ed0",
+        "pulselib": "03b004aa36121766b8eac3040a282e272b392eb5",
+        "compile": {
+          "execution": "completed",
+          "returncode": 0,
+          "wall_seconds": 49.01061190105975
+        },
+        "execution": "completed",
+        "validity": "valid",
+        "assertion_status": "passed",
+        "executable": {
+          "path": "/home/user/timelearner-refactor/readbacks/s07-candidate-cursor-ab-normal-a4/gate/candidate/controller-tests",
+          "sha256": "b9f68e2b6bfe2bd2b5c9813204bdc89e7d131e0f690a66b974fdc7707ee98eae",
+          "size": 1984864
+        },
+        "resolved_libraries": [
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+            "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+            "size": 2220400
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+            "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+            "size": 125488
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+            "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+            "size": 940560
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+            "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+            "size": 2260296
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+            "size": 240936
+          }
+        ],
+        "actual_loaded_files_captured": false,
+        "test": {
+          "execution": "completed",
+          "returncode": 0,
+          "wall_seconds": 0.06443024007603526
+        },
+        "inventory": {
+          "expected": 130,
+          "observed": 130,
+          "failed_test_ids": [],
+          "assertion_status": "passed",
+          "sha256": "72ac0594f9c57f119f189e5f73a25881311e47e2f63ad4cc1409e623beabe9fd"
+        }
+      }
+    },
+    "assertion_status": "passed",
+    "same_test_sources": true,
+    "native_rdk_integration_verified": false,
+    "operation_trace_equivalence_verified": false,
+    "capacitance_search_enabled": false,
+    "scientific_verdict": null
+  },
+  "acceptance_status": "passed",
+  "members": {
+    "cli-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cli-stdout.log": "d6c6ee9a22e3f8b2707adb3baa10d82035ab5163b84b77c3682e8c05363c9eed",
+    "gate/baseline/compile/owned-process.json": "b22034d196d7ed4504bbf6b6aeba3067347f5a87622ab179f243a529a8ee1cdd",
+    "gate/baseline/compile/result.json": "29a565e4bcf2dc9be318fb482284f026667f8c8a85e7e26e9a4a91e1968534d4",
+    "gate/baseline/compile/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gate/baseline/compile/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gate/baseline/junit.xml": "e4d90e4f88ab6feccb41d04b005828010536fe731a7bb57b7a8b899bf3106dc1",
+    "gate/baseline/result.json": "08aee58b3a97b3f17f7393548e6ac0c060415862d1ed2fc824450801d1f2b259",
+    "gate/baseline/sources.json": "030a36915e23b1290aa17e3e8bb3f9497572634328d53e3e4383d85d7d9259a8",
+    "gate/baseline/test/owned-process.json": "2cf266537ba11064078057bea8ce0d9e681c38071289e091d80aaf8973142779",
+    "gate/baseline/test/result.json": "941366c11db582d1bbe20508091ed0cc1c1ead150348ae67a703daa37a9c6ade",
+    "gate/baseline/test/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gate/baseline/test/stdout.log": "6fd037875d832b3830fe9b599b45836b32bd176f2258a645829392f89be71c0a",
+    "gate/candidate/compile/owned-process.json": "cdeb2589d3cbc15617170bc84dbfe7e50e4b76602054f6cdf5393f230e711489",
+    "gate/candidate/compile/result.json": "bce2f5ff252718595c652352eccd736c097fc8cee900f6851ccc82b8fb09fe40",
+    "gate/candidate/compile/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gate/candidate/compile/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gate/candidate/junit.xml": "72ac0594f9c57f119f189e5f73a25881311e47e2f63ad4cc1409e623beabe9fd",
+    "gate/candidate/result.json": "7e0f1843743d9397cde830a85b02dd8dcbebee4e033eb9f97a7d79874aa0d5b9",
+    "gate/candidate/sources.json": "4406398f6b3a5065d108d50faa5e3583327fdf6a86f247fee1b5a06c61061424",
+    "gate/candidate/test/owned-process.json": "518aafd31d62640a3eab620be5837bccd6cd5d70ab17ab3656d12510d18a341b",
+    "gate/candidate/test/result.json": "da9dd05dd06cf88db7dc6dfd61bd9db5b3e14f15514c564aa12fc68ae64eb6fe",
+    "gate/candidate/test/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gate/candidate/test/stdout.log": "142daf2ccacc554674adb5fd5e5eb7018742ab049fc5e04ba8b1f69847aacfa4",
+    "gate/result.json": "3a2607b96bef48bfd3044626f67f7928839a289734c9f6085604d53f6bfc2e62",
+    "gate/specification.json": "b6411b8dc2fa82595c3f25b9cf408905602478444856c3146c94db23e850977f",
+    "gate/toolchain.json": "418eb33086fea28c7685af20e99c2270769dfdefa015b733e766cbf55441a882",
+    "job.json": "b6411b8dc2fa82595c3f25b9cf408905602478444856c3146c94db23e850977f",
+    "owned-cli.json": "0f2077c0014863936f926efc4d91b72fdbf6a707be429db6760ed0dfa27bc1d3",
+    "owned-supervisor.json": "97dba27d47d6ea084d016e248bf7ed82d191a986a4a8d8ea4fe2eca8b4a43943",
+    "predecessor-failure.json": "d8078ff4c20a52d0ad9fdd98edaf015bf704240b2a416325a214d2468ba18f63",
+    "predecessor-layout-failure.json": "9ae4d726757e5a0ac1c4b6c7073ac55ad3d4bb04dfc97b59ab4dcb2fc541b07e",
+    "predecessor-toolchain-failure.json": "6f26d1626720a2b67d53e19eb19adb118f884bfeb9bdfed9553561f59a28b801",
+    "private-object-store.log": "0214357e1e51e9af285e13679212e77e4e795d26554a57b53cd97f535acd38db",
+    "runner-source-hashes.json": "ef4749bdb5353a4a6c6a380f1b56c2bc80f6f9931f6be237df595ac011557354",
+    "terminal.json": "a0333f7d2c43bfd24106fb51450fe6503e913f88078e62d40b873db0a33f77a1"
+  },
+  "archive_sha256": "0e0b65a20da78e9b670a3f77e52db3b577cdc65850c40d066931d6272226dca7",
+  "archive_bytes": 45377,
+  "scope": "Production root controller-ab CLI compiles17 complete original pure controller sources/headers and7 identical test files at baseline/candidate Git closures in separate immutable directories.130 cases per binary. This is the mechanical CandidateCursor grouping only; no native Rdk integration, operation-trace equivalence, C-search On or scientific recognition claim. Derived source copies/binaries are worker cache; source hashes and all test/compile receipts remain in Git.",
+  "scientific_verdict": null
+}

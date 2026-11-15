@@ -1,0 +1,83 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "b2a4feb6bf6af39d0c8887573b6a7bc51c953fa85ec231ddfde7df14f2b3252d",
+      "unit": "timelearner-f5fc50b6-12bd-40ec-8d73-bb0133a41b66.service",
+      "invocation_id": "f40a1c101d0c498aaec2564e3dccad08",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f5fc50b6-12bd-40ec-8d73-bb0133a41b66.service",
+      "initial_main_pid": 3175378,
+      "initial_start_ticks": "352611982",
+      "sha256": "7754007fb74406e9dd993db9c9d857c9e0c44f0a341ee4f2c477e2a062039f86"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "1073741824",
+      "TasksMax": "32",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt f5fc50b6-12bd-40ec-8d73-bb0133a41b66",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "f40a1c101d0c498aaec2564e3dccad08"
+    },
+    "memory_max": 1073741824,
+    "tasks_max": 32,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "7378290f-9da4-4276-8bfa-ee4eaf83f8c2",
+      "job_id": "s08-observation-domain-branch-corpus-m40-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3175378,
+        "start_ticks": "352611982",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-branch-finalize-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-branch-finalize-m40-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-observation-domain-branch-corpus-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-observation-domain-branch-corpus-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-closed-primary-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainBranchClosedCorpusA2-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-closed-primary-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainBranchClosedCorpusA2-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4"
+        }
+      ],
+      "state": "released",
+      "created": 1794450922.43223,
+      "deadline": 1794451062.6347604,
+      "updated": 1794450950.6776257,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

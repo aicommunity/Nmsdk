@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-burst-readback-console-six-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "49689590cbdc0bbe5abccfb91374ad716f0ff977",
+  "limits": {
+    "memory_bytes": 3221225472,
+    "tasks": 128,
+    "maximum_wall_seconds": 2400
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 1073741824
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-idle-probe-console-validation-a1",
+      "commit": "49689590cbdc0bbe5abccfb91374ad716f0ff977"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/burst-readback-console-six-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40BurstReadbackConsoleSixA2-20261113/suite.json",
+      "sha256": "9f838ff13683026f35cb4b0a73558873cacd962b7e6f0cc25a308572ac31ccef"
+    },
+    "fixtures": {
+      "TIMELEARNER_BURST_READBACK_SOURCE": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-idle-probe-readback-sdk-m40-a1/idle-probe-readback-sdk-two/native-composite/package7",
+      "TIMELEARNER_BURST_READBACK_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/burst-readback-console-six-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40BurstReadbackConsoleSixA2-20261113/fixture",
+      "TIMELEARNER_BURST_READBACK_RUNTIME": "/media/user/Data/TimeLearnerRefactor/runtime-idle-probe-readback-sdk-a1"
+    }
+  }
+}

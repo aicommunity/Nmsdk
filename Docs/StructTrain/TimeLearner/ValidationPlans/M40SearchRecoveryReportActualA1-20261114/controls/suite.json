@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-search-recovery-report-actual-m40-a1",
+  "package_fingerprint": "00145521d8187eecc9793457e8c8baeedb1bdd47e1faa9d09214fcfa448a9082",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_training_search_report.CoupledRecoverySearchReportActualTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_training_search_report.CoupledRecoverySearchReportActualTest.test_production_cli_keeps_five_distinct_failed_candidates_outside_measured_history"
+  ],
+  "fixtures": {
+    "TIMELEARNER_COUPLED_RECOVERY_REPORT_RUN": {
+      "pattern": "**/*.json",
+      "files": 432,
+      "fingerprint": "83f9c33cb935596b99e36411ad2a1bd8e180802536fabab61311f2732abaa981"
+    }
+  }
+}

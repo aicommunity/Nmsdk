@@ -1,0 +1,83 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "4302874d-c072-4f47-bd0d-2f672a3338bd",
+  "job_id": "s07-profile-probe-admission-a2",
+  "recorded_unix": 1794026067.7447739,
+  "administrator": {
+    "pid": 1499049,
+    "start_ticks": "310125315",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1499058,
+    "start_ticks": "310125327",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-profile-probe-admission-a2-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "ab3a5a745ed1f4a606ef330f01fb73236be3960bf2196e5abc8f2ba8fe2843bc",
+      "unit": "timelearner-8aa83358-d14f-4ba7-baac-665636c19565.service",
+      "invocation_id": "82a44ee4a40f45fabfef4e2f061d3b74",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8aa83358-d14f-4ba7-baac-665636c19565.service",
+      "initial_main_pid": 1499058,
+      "initial_start_ticks": "310125327",
+      "sha256": "eff378f963e1978d6b2e11c90d02776071d529dafeda3b846666a6879a02fdb7"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-8aa83358-d14f-4ba7-baac-665636c19565.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Admission controls closed; no native runtime or physical experiment performed.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-profile-probe-admission-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-profile-probe-admission-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2/study",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2/study"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-profile-probe-admission-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-profile-probe-admission-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

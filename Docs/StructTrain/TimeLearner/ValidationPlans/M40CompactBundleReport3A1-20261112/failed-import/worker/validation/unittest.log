@@ -1,0 +1,34 @@
+test_backend_failure_precedes_archive_restore (Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportBoundsTest.test_backend_failure_precedes_archive_restore) ... ok
+test_report_cannot_replace_bundle_or_restore_tree (Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportBoundsTest.test_report_cannot_replace_bundle_or_restore_tree) ... ok
+test_published_bundle_renders_all_forty_trial_soma_pairs (Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportActualTest.test_published_bundle_renders_all_forty_trial_soma_pairs) ... ERROR
+
+======================================================================
+ERROR: test_published_bundle_renders_all_forty_trial_soma_pairs (Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportActualTest.test_published_bundle_renders_all_forty_trial_soma_pairs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-compact-report-a1/Scripts/StructTrain/TimeLearner/tests/test_recorded_matrix_primary.py", line 41, in test_published_bundle_renders_all_forty_trial_soma_pairs
+    result = report_primary(root/'bundle.json', temporary/'compact-report-restored',
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-compact-report-a1/Scripts/StructTrain/TimeLearner/recorded_matrix_primary.py", line 157, in report_primary
+    result = render_diagnostic_evaluation_case(root/'native/evaluation.json',
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-compact-report-a1/Scripts/StructTrain/TimeLearner/reports.py", line 38, in render_diagnostic_evaluation_case
+    return _render_evaluation(source, model, output, source_case=source_case)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-compact-report-a1/Scripts/StructTrain/TimeLearner/reports.py", line 42, in _render_evaluation
+    runtime = plotting_runtime()
+              ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1193, in _execute_mock_call
+    raise effect
+ValueError: test_backend_unavailable
+
+----------------------------------------------------------------------
+Ran 3 tests in 288.009s
+
+FAILED (errors=1)

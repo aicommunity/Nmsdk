@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-recognition7-legacy-regression-elder-f1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-recognition7-legacy-regression-f1",
+      "commit": "ca8be945377d9833a789a847ee5b7cae9241050f"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/recognition7-legacy-regression-f1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRecognition7LegacyRegressionF1-20261111/suite.json",
+      "sha256": "98b61f0dc561833565f503de65f0b43e9d101ee2ff2668e4ae299e10c757af9b"
+    },
+    "fixtures": {
+      "TIMELEARNER_RECOGNITION_EVIDENCE_DIR": "/home/user/timelearner-refactor/readbacks/s08-recognition-normal-a4/native"
+    }
+  }
+}

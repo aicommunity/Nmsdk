@@ -1,5 +1,9 @@
 # Git publication: замыкание commits и объявленных артефактов
 
+> Действующая политика с 14.11.2026: тяжёлые результаты и полные галереи хранятся в [архиве M40](ExternalExperimentArchive.ru.md), в Git — код, настройки, компактные метаданные и проверяемые `*.archive.json`. Указания ниже о сохранении primary/изображений непосредственно в Git описывают прежний снимок и больше не применяются к новым публикациям. Исходные научные наблюдения и контрольные суммы пакетов сохраняются.
+
+Новая публикация сначала сохраняет и проверяет закрытый пакет на M40 через `external_archive prepare-publication`. Наружный `SHA256SUMS.json` описывает физические metadata/ссылки в Git; внутренние logical checksums исходного пакета не пересчитываются. Publisher разрешает каждую архивную ссылку и проверяет размер/SHA256 до первого push. Недоступный архив запрещает публикацию результата, но не нарушает целостность Git и сборку кода. Полная история предлагаемой ветки проверяется на повторное внесение payload.
+
 `Scripts/StructTrain/TimeLearner/publisher.py` сохраняет schema 1 для прежних
 callers: только точная children-first Git closure. Для новых публикаций schema 2
 добавляет обязательный непустой массив `artifacts` и явный `push_url` каждого
@@ -40,6 +44,23 @@ receipt перечисляет `artifact_sets_verified`; scientific verdict ос
 Если Git filters/line endings меняют байты, helper отказывает и оставляет index
 для проверки. Автоматически продолжать commit/push после такого отказа нельзя.
 
+Для новых artifact sets под `Reports/StructTrain/TimeLearner` staging и новый
+publish preflight запрещают loose исполняемые исходники: известные script
+suffixes без учёта регистра, Git mode100755 и shebang в первой строке.
+Проверка выполняется до add и до первого child push; отказ имеет reason
+`loose_report_script_forbidden:<suffix|git_executable_mode|shebang>:<path>`.
+Автоматического переименования, упаковки или изменения input hashes нет.
+Provenance source хранится внутри primary archive либо извлекается по immutable
+Git reference; активные инструменты принадлежат корневому Scripts-пакету.
+В прежней политике модели XML/JSON/BIN, metrics, primary archives и выбранные PNG/SVG/PDF разрешались
+при обычной проверке inventory. На Windows не используется X_OK: учитывается
+Git index mode, а для новых файлов — suffix/shebang. Read-only
+`verify_artifact_set` и `publication_plan` по умолчанию сохраняют историческую
+проверку байтов; она не является разрешением повторно публиковать старый script
+artifact set. Schema1 по-прежнему не аттестует artifact inventory. Policy не
+анализирует произвольный язык в неизвестном текстовом формате и не заменяет
+отдельный retirement уже существующих loose snapshots.
+
 Эти проверки не доказывают полноту самого объявленного inventory, валидность
 primary schema, присутствие всех trials внутри архива или научный результат.
 Это остаётся обязанностью production auditors/packager до подготовки публикации.
@@ -75,3 +96,10 @@ Child refs на момент проверки уже совпадали с gitli
 не утверждение о миграции всех producers. Квитанции фиксируют конкретные
 коммиты и состояние refs во время выполнения: дальнейшее продвижение веток
 не превращает их в проверку нового HEAD. Новые gitlinks требуют новой closure.
+
+
+Новая loose-script policy принята на root91323406:32/32 real Git tests на
+каждом Linux worker,20 regressions и12 policy methods. [Область, failed attempts
+и конкретная административная reconciliation](LooseReportScriptPolicy.ru.md),
+[независимая квитанция](LooseReportScriptPolicyVerification.json). Это не удаление
+уже существующих109 исторических loose sources и не завершение всего publisher.

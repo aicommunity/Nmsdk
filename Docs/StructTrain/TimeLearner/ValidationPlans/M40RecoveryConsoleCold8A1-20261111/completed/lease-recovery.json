@@ -1,0 +1,93 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "47afd170-c643-4a0c-8d03-6b0061ef4686",
+  "job_id": "s08-recovery-console-cold8-m40-a1",
+  "recorded_unix": 1794429190.1602817,
+  "administrator": {
+    "pid": 1791822,
+    "start_ticks": "350350931",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1794805,
+    "start_ticks": "350351659",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-recovery-console-cold8-m40-a1/process/contained",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "dd83051a64f005e9f9a648fc7ae3425681d3ca2cd06bd185be15d44f53414454",
+      "unit": "timelearner-85c2edf6-7377-4b7b-b5ea-0272c8090aa8.service",
+      "invocation_id": "d82f445329c74e7097a04ddf10684575",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-85c2edf6-7377-4b7b-b5ea-0272c8090aa8.service",
+      "initial_main_pid": 1794805,
+      "initial_start_ticks": "350351659",
+      "sha256": "209db7832feb12a3d0c1a5f2946331e3ecc4f1c3a5650f71f79165177a167793"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-85c2edf6-7377-4b7b-b5ea-0272c8090aa8.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/recovery-recognition7-native10-elder-a2/Reports/StructTrain/TimeLearner/RecoveryRecognition7Native10ClosedCorpus-20261111",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/recovery-recognition7-native10-elder-a2/Reports/StructTrain/TimeLearner/RecoveryRecognition7Native10ClosedCorpus-20261111"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-recovery-console-cold8-m40-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-recovery-console-cold8-m40-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/recovery-console-cold8-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecoveryConsoleCold8A1-20261111",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/recovery-console-cold8-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecoveryConsoleCold8A1-20261111"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/recovery-console-cold8-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecoveryConsoleCold8A1-20261111/fixture",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/recovery-console-cold8-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecoveryConsoleCold8A1-20261111/fixture"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-recovery-console-cold8-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-recovery-console-cold8-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

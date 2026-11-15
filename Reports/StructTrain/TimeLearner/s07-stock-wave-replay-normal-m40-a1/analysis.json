@@ -1,0 +1,45 @@
+{
+  "kind": "stock_exact_invalid_wave_replay_analysis",
+  "schema_version": 1,
+  "rows": [
+    {
+      "name": "Branch-threshold-low-retry32",
+      "actual_model_revision": "57d366c6b4fb725d71e7f034aa0db18e35d5180ba94e437dcb4768238b16b8f4",
+      "same_sample_count": true,
+      "relative_clock_equal_with_roundoff": true,
+      "stimulus_samples_exactly_equal": true,
+      "soma_samples_exactly_equal": true,
+      "original_reasons": [
+        "burst_ambiguous:0",
+        "peak_ambiguous:input2"
+      ],
+      "replay_reasons": [
+        "burst_ambiguous:0",
+        "peak_ambiguous:input2"
+      ],
+      "exact_waveform_reproduced": true,
+      "scientific_verdict": null
+    },
+    {
+      "name": "Classic-threshold-low-retry32",
+      "actual_model_revision": "aeeb20de9f62d39563de925366990cd1547ba560e7fe3101baac820c9335524c",
+      "same_sample_count": true,
+      "relative_clock_equal_with_roundoff": true,
+      "stimulus_samples_exactly_equal": true,
+      "soma_samples_exactly_equal": true,
+      "original_reasons": [
+        "burst_ambiguous:0",
+        "peak_ambiguous:input0"
+      ],
+      "replay_reasons": [
+        "burst_ambiguous:0",
+        "peak_ambiguous:input0"
+      ],
+      "exact_waveform_reproduced": true,
+      "scientific_verdict": null
+    }
+  ],
+  "training_started": false,
+  "scientific_verdict": null,
+  "causal_physics_explanation_attested": false
+}

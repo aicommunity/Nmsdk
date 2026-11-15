@@ -1,0 +1,193 @@
+{
+  "facts": {
+    "kind": "combined_wire67_collector39_passed_gate",
+    "schema_version": 1,
+    "tool_root": "bf163c2dc9eb8932193b22b48f82b5aaa1caaa09",
+    "expected_tests": 106,
+    "observed_tests": 106,
+    "passed_tests": 106,
+    "wire_tests": 67,
+    "collector_tests": 39,
+    "package_fingerprint": "4800e17e5a25677a90f0b8ba0393234562c31c5172d172347cb843b447361782",
+    "TimeLearner_python_files": 433,
+    "actual_log_case_ids_and_JUnit_verified": true,
+    "production_validation_runner": true,
+    "no_real_native_archive_reader": true,
+    "error_tests": 0,
+    "failures": [],
+    "original_terminal": {
+      "combined_script_gate_passed": true,
+      "expected_python_cases": 106,
+      "actual_python_cases": 106,
+      "heartbeat_errors": [],
+      "CPP_compile_or_run": false,
+      "SDK_source_build_runtime_read_or_write": false,
+      "new_model_runs": 0,
+      "kernel_closure_attested_by_worker": false,
+      "scientific_verdict": null,
+      "whole_plan_complete": false,
+      "source_root": "bf163c2dc9eb8932193b22b48f82b5aaa1caaa09",
+      "lease_release_policy": "Supervisor only after exact outer kernel group is closed"
+    },
+    "kernel_and_lease": {
+      "kernel": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "5caad1526bfecf511ba9e49af2301644a3ecd88c59baa9e8ad172c63a43c1389",
+          "unit": "timelearner-67eb6910-8795-4e98-8f17-6fd92ecc976b.service",
+          "invocation_id": "3c99c9f3ac50452dad22df23d61a5de0",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-67eb6910-8795-4e98-8f17-6fd92ecc976b.service",
+          "initial_main_pid": 3259696,
+          "initial_start_ticks": "322718572",
+          "sha256": "087857cf91b8ade7893bdf558bbaede77fc1c1cec324bc3038e970fe7e22b3d5"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-67eb6910-8795-4e98-8f17-6fd92ecc976b.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      },
+      "lease": {
+        "token": "7ed8b2ec-2374-4926-8d35-4b28819a44d6",
+        "job_id": "s10-wire-collector-combined106-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 3259696,
+          "start_ticks": "322718572",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-wire-collector-combined106-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-wire-collector-combined106-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-wire-collector-combined106-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-wire-collector-combined106-m40-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1794151988.2132072,
+        "deadline": 1794152118.2268293,
+        "updated": 1794152002.3006203,
+        "release_note": "Exact metadata worker kernel group closed; all Git/unittest child processes belonged to this group. No SDK/model job was started.",
+        "heartbeat_expired": false,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      }
+    },
+    "guard": {
+      "guard_triggered": false,
+      "original_reason": null,
+      "peak_owned_allocated_bytes": 53600256,
+      "minimum_free_bytes": 341611655168,
+      "outer_closed": true
+    },
+    "source_files_Git_verified": 621,
+    "actual_python_loaded_files_verified": 19,
+    "actual_supervisor_log_bound_by_maintained_helper": true,
+    "helper_used_only_after_independent_106_test_pass_and_external_closure": true,
+    "helper_used_as_own_test_success_authority": false,
+    "frozen_staged_inputs_used_for_bundle": true,
+    "prior_collector39_evidence": "54574d03581e04d233b832b331979f27c871bfa1",
+    "SDK_source_build_runtime_read_or_written": false,
+    "CPP_or_models_run": false,
+    "scientific_verdict": null,
+    "created_utc": "2026-11-08T15:34:24.560167+00:00"
+  },
+  "worker_controller_unchanged": true,
+  "fresh_after_bundle": {
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "5caad1526bfecf511ba9e49af2301644a3ecd88c59baa9e8ad172c63a43c1389",
+        "unit": "timelearner-67eb6910-8795-4e98-8f17-6fd92ecc976b.service",
+        "invocation_id": "3c99c9f3ac50452dad22df23d61a5de0",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-67eb6910-8795-4e98-8f17-6fd92ecc976b.service",
+        "initial_main_pid": 3259696,
+        "initial_start_ticks": "322718572",
+        "sha256": "087857cf91b8ade7893bdf558bbaede77fc1c1cec324bc3038e970fe7e22b3d5"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-67eb6910-8795-4e98-8f17-6fd92ecc976b.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "lease": {
+      "token": "7ed8b2ec-2374-4926-8d35-4b28819a44d6",
+      "job_id": "s10-wire-collector-combined106-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3259696,
+        "start_ticks": "322718572",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-wire-collector-combined106-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-wire-collector-combined106-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-wire-collector-combined106-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-wire-collector-combined106-m40-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794151988.2132072,
+      "deadline": 1794152118.2268293,
+      "updated": 1794152002.3006203,
+      "release_note": "Exact metadata worker kernel group closed; all Git/unittest child processes belonged to this group. No SDK/model job was started.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  },
+  "archive_members": 50,
+  "space_preflight_free_bytes": 341631229952,
+  "expanded_member_bytes": 1176044
+}

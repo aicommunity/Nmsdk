@@ -1,0 +1,115 @@
+{
+  "kind": "stock_recovery_analysis",
+  "schema_version": 1,
+  "validity": "valid",
+  "training_runs": 8,
+  "preflight_runs": 8,
+  "rows": [
+    {
+      "name": "Classic-threshold-low-retry32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "aeeb20de9f62d39563de925366990cd1547ba560e7fe3101baac820c9335524c",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 8,
+        "channels_checked": 16,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Classic-threshold-low-advance32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "da8ab2daf5adb049c39ac13811b175bc2bddf64d1df20597f7f6196ef253a350",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 9,
+        "channels_checked": 18,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Classic-threshold-training100-retry32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 61,
+        "channels_checked": 122,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Classic-threshold-training100-advance32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "3941183928f345e604832cccdc0c8b071e7471cea6d0a5bda97e28193588dcc9",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 59,
+        "channels_checked": 118,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Branch-threshold-low-retry32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "57d366c6b4fb725d71e7f034aa0db18e35d5180ba94e437dcb4768238b16b8f4",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 3,
+        "channels_checked": 6,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Branch-threshold-low-advance32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "751f15fe94b1a79059952e3f3d1261b70220a7d0eedcde00fdf1981ea8a3b2e6",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 5,
+        "channels_checked": 10,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Branch-threshold-training100-retry32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 16,
+        "channels_checked": 32,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Branch-threshold-training100-advance32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "0e6c038665ebe4350b18978b37c0b81b0d53de5eccb9648f14d49a4dfe2e5af5",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 18,
+        "channels_checked": 36,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    }
+  ],
+  "classification_assessed": false,
+  "scientific_verdict": null
+}

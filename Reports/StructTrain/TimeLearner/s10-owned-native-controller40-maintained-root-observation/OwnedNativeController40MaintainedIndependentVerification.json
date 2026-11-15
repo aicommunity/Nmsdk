@@ -1,0 +1,80 @@
+{
+  "kind": "owned_native_controller40_maintained_independent_metadata_verification",
+  "schema_version": 1,
+  "status": "passed",
+  "evidence_commit": "ef2586fa043507a6a6c9e5f6d218568665edd6f9",
+  "parent": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+  "artifact_inventory_sha256": "569c5eef3973701a224e376d9ed5cd48a0ab3c8224df7cb299342f8f221bd6cf",
+  "committed_files": 5,
+  "archive": {
+    "bytes": 231604,
+    "sha256": "e50f1b2098bcff36477faf1781c2c6c89816e0e67bec32db193bb38ada8f4d40",
+    "members": 325,
+    "expanded_bytes": 2959489,
+    "all_member_hashes_verified": true
+  },
+  "original_job_files": 297,
+  "original_gate": {
+    "tests": 40,
+    "passed": 40,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_snapshots": {
+    "collector": {
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "Scripts": 637
+    },
+    "original_tool": {
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "Scripts": 632
+    },
+    "source": {
+      "commit": "35fba3d1544f98b60401fa738aaba4ea2c6d1bff",
+      "Scripts": 638
+    }
+  },
+  "Git_roles": 28,
+  "opaque_Rootobserver": {
+    "owning_commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+    "files": 15,
+    "cases": 9,
+    "bound_units": 11,
+    "case_file_hashes": 256,
+    "dedicated_leases_released": 7,
+    "dedicated_leases_held_preserved": 2,
+    "joins_verified_against_Git_bytes": true,
+    "fresh_kernel_inspected_locally": false
+  },
+  "original_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "58ccbc83eb1d35256a2d58440a8692f273199683b2b8b2639c9b8bde22b462fb",
+    "unit": "timelearner-7df3b0d8-52bd-417e-b10b-5e5ed8795aac.service",
+    "invocation_id": "8858920168a444f7bcd9b07d816dbd8d",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7df3b0d8-52bd-417e-b10b-5e5ed8795aac.service",
+    "initial_main_pid": 1306191,
+    "initial_start_ticks": "329451371",
+    "sha256": "aa50e4f0d1d4e73e048b8681ec88065b624e21a0f6c3b85227c0d6944cc45f5b"
+  },
+  "collection_binding_from_Root_terminal": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "f9e54a955ba1fbf754f80ab5211783e45ee6d7bfff328d793183e10265e6d8ff",
+    "unit": "timelearner-8e7b634b-f680-4188-adcc-fb8e6bb94fa3.service",
+    "invocation_id": "1352cd28c6334cd9901dfe2aa4d98a93",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8e7b634b-f680-4188-adcc-fb8e6bb94fa3.service",
+    "initial_main_pid": 1436440,
+    "initial_start_ticks": "329978905",
+    "sha256": "c049ca8ec5d43e8abe93561fc26f5ac96d7393d39da60cb23449a2430ce3b658"
+  },
+  "collection_own_released_lease_token": "f5f1c2e0-5af2-47cb-9858-b5aece25e963",
+  "Root_terminal_raw_sha256": "09ef2defd716565c53e93b031bdb1c8a94bfd5bd9759692fdbef07e9bfd67524",
+  "evidence_pack_sha256": "5b944b2e6551cda05076610e9d86b256646b387f6680e68525b055317c1329f1",
+  "reader_sha256": "05cd930c869981d1929c52d57e50329bacdaa3bb933837fe4965e801085acc1a",
+  "nested_kernel_closure_attested": false,
+  "SDK_source_verified": false,
+  "local_test_model_numeric_plot_execution": false,
+  "scientific_verdict": null
+}

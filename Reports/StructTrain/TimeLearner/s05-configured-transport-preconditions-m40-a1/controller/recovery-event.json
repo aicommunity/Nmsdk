@@ -1,0 +1,113 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "ef77c0d1-da93-4bc6-9bfd-00a34f0e7ff0",
+  "job_id": "s07-configured-transport-preconditions-normal-a1",
+  "recorded_unix": 1793967229.9941852,
+  "administrator": {
+    "pid": 974375,
+    "start_ticks": "304089046",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 974394,
+    "start_ticks": "304089059",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-configured-transport-preconditions-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "d4b02eb1a1455e3af3b87024000d02017e643cd9de315b3bf7560cf5fafd8b2a",
+      "unit": "timelearner-4c433bcc-6bcc-4f1c-92a2-2e13acf9cc7e.service",
+      "invocation_id": "60bba1ba01724d82bca91a6725d08590",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4c433bcc-6bcc-4f1c-92a2-2e13acf9cc7e.service",
+      "initial_main_pid": 974394,
+      "initial_start_ticks": "304089059",
+      "sha256": "1ad1e6e3f5f85bef578ad235ada39119b4fdc269df0aa2ef63bb098dd7bb247a"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-4c433bcc-6bcc-4f1c-92a2-2e13acf9cc7e.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Fixed-controller normal worker and all compiler/test/archive descendants freshly closed; result must be read from original native JUnit and baseline verdict.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-transport-preconditions-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-transport-preconditions-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-configured-transport-preconditions-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-configured-transport-preconditions-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-configured-transport-preconditions-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-configured-transport-preconditions-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-fixed-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-fixed-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-configured-transport-preconditions-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-configured-transport-preconditions-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

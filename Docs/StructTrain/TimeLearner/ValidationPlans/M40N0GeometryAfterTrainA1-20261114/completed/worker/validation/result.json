@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s11-n0-geometry-after-train-m40-a1",
+  "package_fingerprint": "207f43b744bf56c1230e72458af184b86eb08a93d14631a5d0185fd61c007c8c",
+  "execution": "completed",
+  "assertion_status": "failed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_normalization_study.StockNormalizationStudyTest.test_declared_operation_preserves_cold_physics_and_honest_outcome"
+  ],
+  "executed_tests": 1,
+  "failures": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_normalization_study.StockNormalizationStudyTest.test_declared_operation_preserves_cold_physics_and_honest_outcome"
+  ],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_STOCK_N0_CONTROLS": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-after-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryAfterTrainA1-20261114/fixture",
+      "files": 2,
+      "fingerprint": "3b782be85e2bbcfc34c3ff978c5ec110f947668e25ffb2322aae20701518ad67"
+    },
+    "TIMELEARNER_STOCK_N0_SOURCE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-coupled-branch-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledBranchTrainA1-20261113/prepared",
+      "files": 10,
+      "fingerprint": "952daa7927273bc494dd8ababc0df750bbb153fc7141adfc98946694bdb24a22"
+    },
+    "TIMELEARNER_STOCK_N0_RUNTIME": {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-n0-geometry-sdk-a1",
+      "files": 1,
+      "fingerprint": "5d6c1778d8f226f6553d8f2234cfe78ee0d7ca90fcf047c83ce8a1ad788fa0da"
+    }
+  },
+  "scientific_verdict": null
+}

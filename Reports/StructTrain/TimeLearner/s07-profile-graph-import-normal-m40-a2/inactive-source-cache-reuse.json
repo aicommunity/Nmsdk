@@ -1,0 +1,62 @@
+{
+  "previous_root": "8302e8f7622eae2c597c971dfbfa2b8a45108e55",
+  "new_root": "8978f104a1cef31fe520df4d0a63cf9c56b06c1e",
+  "source": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+  "build_cache": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+  "prior_closed_released": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s07-profile-graph-import-normal-a1",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-profile-graph-import-normal-a1-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "ce2782f69098a04aef6a27f8d2a987722f5b73b013be8179194f3b3cf0f42062",
+        "unit": "timelearner-2f6f2aed-6029-489f-8e97-1763be3a748f.service",
+        "invocation_id": "1e5e669b279046529fbef1b35fa64aee",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2f6f2aed-6029-489f-8e97-1763be3a748f.service",
+        "initial_main_pid": 1461419,
+        "initial_start_ticks": "309722181",
+        "sha256": "8ad1cb5c963d4c669314f7786894ea0f5f709e7a33e63524f7ea8a8732bca96c"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-2f6f2aed-6029-489f-8e97-1763be3a748f.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "4bfeaac6-3536-481f-91c0-3ee2c04cf2a4",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "changed_native_CPP_files": [
+    "Libraries/Nmsdk-PulseLib",
+    "Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp"
+  ],
+  "old_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-console-normal-a1",
+  "new_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-profile-graph-import-normal-a2",
+  "old_runtime_bytes_protected": true
+}

@@ -1,0 +1,135 @@
+{
+  "kind": "timelearner_measured_capacitance_kernel_unit_gate",
+  "schema_version": 1,
+  "root": "b951fb3d44eb713a21d5aefd69b13f0e9440ac77",
+  "pulselib": "0832d3ea17fa0a224a332d802f0cee00514c7cec",
+  "worker": "asan",
+  "tests": 23,
+  "new_capacitance_tests": 12,
+  "production_sources_verified": [
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-measured-capacitance-kernel-asan-a1/production/Core/TimeLearner/MeasuredCapacitanceSearch.h",
+      "git_commit": "0832d3ea17fa0a224a332d802f0cee00514c7cec",
+      "git_path": "Core/TimeLearner/MeasuredCapacitanceSearch.h",
+      "sha256": "339bd887c4b3ad5f89f9aace161e81178530214691879fa44f407554fd05de0a"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-measured-capacitance-kernel-asan-a1/production/Core/TimeLearner/MeasuredCapacitanceSearch.cpp",
+      "git_commit": "0832d3ea17fa0a224a332d802f0cee00514c7cec",
+      "git_path": "Core/TimeLearner/MeasuredCapacitanceSearch.cpp",
+      "sha256": "c727528c8d20d8e7fc94119435317f95d3b01a722a07b3bf0469a02626729d0b"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-measured-capacitance-kernel-asan-a1/production/Tests/Integration/Libraries/Test_PulseLib_MeasuredCapacitanceSearch.cpp",
+      "git_commit": "b951fb3d44eb713a21d5aefd69b13f0e9440ac77",
+      "git_path": "Tests/Integration/Libraries/Test_PulseLib_MeasuredCapacitanceSearch.cpp",
+      "sha256": "ee8a014f77a132c3934bfe087a5c937ddd56ca551bea566de5248bd2ad161b95"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-measured-capacitance-kernel-asan-a1/production/Core/TimeLearner/MeasuredLengthSearch.h",
+      "git_commit": "0832d3ea17fa0a224a332d802f0cee00514c7cec",
+      "git_path": "Core/TimeLearner/MeasuredLengthSearch.h",
+      "sha256": "8c3147e449cc6fb22ccf26deb9d0832b8fcf4cba8d400847ddab5eece9fa9aeb"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-measured-capacitance-kernel-asan-a1/production/Core/TimeLearner/MeasuredLengthSearch.cpp",
+      "git_commit": "0832d3ea17fa0a224a332d802f0cee00514c7cec",
+      "git_path": "Core/TimeLearner/MeasuredLengthSearch.cpp",
+      "sha256": "6afb63cc6a2cca687eb8abbc398bd51516ff9409f00d58c35f1de246b66c6dc4"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-measured-capacitance-kernel-asan-a1/production/Tests/Integration/Libraries/Test_PulseLib_MeasuredLengthSearch.cpp",
+      "git_commit": "b951fb3d44eb713a21d5aefd69b13f0e9440ac77",
+      "git_path": "Tests/Integration/Libraries/Test_PulseLib_MeasuredLengthSearch.cpp",
+      "sha256": "bff8e89b41c193ca4e7c0810165ac82cc08aa87572aad59adfad3f85fe743e8d"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-measured-capacitance-kernel-asan-a1/production/Core/TimeLearner/MeasuredResistanceSearch.h",
+      "git_commit": "0832d3ea17fa0a224a332d802f0cee00514c7cec",
+      "git_path": "Core/TimeLearner/MeasuredResistanceSearch.h",
+      "sha256": "a3683465371237832520c9f9ace99e046eb733448a53ff81cdda3386c118168e"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-measured-capacitance-kernel-asan-a1/production/Core/TimeLearner/MeasuredResistanceSearch.cpp",
+      "git_commit": "0832d3ea17fa0a224a332d802f0cee00514c7cec",
+      "git_path": "Core/TimeLearner/MeasuredResistanceSearch.cpp",
+      "sha256": "6053283e3bc2da53a6d88c11962a6b66d3b3c6b8d8fa19b49bc1acd988374b72"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-measured-capacitance-kernel-asan-a1/production/Tests/Integration/Libraries/Test_PulseLib_MeasuredResistanceSearch.cpp",
+      "git_commit": "b951fb3d44eb713a21d5aefd69b13f0e9440ac77",
+      "git_path": "Tests/Integration/Libraries/Test_PulseLib_MeasuredResistanceSearch.cpp",
+      "sha256": "abc0ab50d61db2db0b3f9998b168fc237b6239a0c038c51835ac9958d7b58a81"
+    }
+  ],
+  "records": [
+    {
+      "path": "active-context-after.json",
+      "bytes": 1304,
+      "sha256": "f09eea5cecb8cef41bdaef1a0c6febf0a23a36562c72517b97a166f123a68c3f"
+    },
+    {
+      "path": "active-context-before.json",
+      "bytes": 1304,
+      "sha256": "f09eea5cecb8cef41bdaef1a0c6febf0a23a36562c72517b97a166f123a68c3f"
+    },
+    {
+      "path": "binary-ldd.txt",
+      "bytes": 447,
+      "sha256": "e20c1f7acf38609537dc7ed88e43133e1b5613c83dca3c93f9dcdc2c090d74b3"
+    },
+    {
+      "path": "compile-request.json",
+      "bytes": 7406,
+      "sha256": "5b723245db99464349bf39944006de59b389d8dd783281be5745b2decbf3f9c7"
+    },
+    {
+      "path": "compile-terminal.json",
+      "bytes": 22,
+      "sha256": "1e3f6691f455051e8adb15d961e4bf3c7a17e83dd88b2afdd13315cc288250bb"
+    },
+    {
+      "path": "compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "compiler-version.txt",
+      "bytes": 246,
+      "sha256": "88b7c4b67564a146863224148116065fee418539f0a408f3636a68f3bde51805"
+    },
+    {
+      "path": "job.py",
+      "bytes": 8381,
+      "sha256": "d0e5df4a9f1420276b47f9a3574b2bc68d1b9990348393986b0f14d60b5336b3"
+    },
+    {
+      "path": "pid.json",
+      "bytes": 51,
+      "sha256": "b09180c3689f0292370a670fe5c3568d8e46cfff0f21afb84f6fc1cfda5f4930"
+    },
+    {
+      "path": "stderr.log",
+      "bytes": 7532,
+      "sha256": "9d14209c8fc24b1c763cc59c58014e2864e276656ef913780a1e5b3d999b0c62"
+    },
+    {
+      "path": "stdout.log",
+      "bytes": 4777,
+      "sha256": "abecdc6fb664c265145a8823b56cd8efafdd4d42d814325e1b40696eabafad0c"
+    },
+    {
+      "path": "tests.xml",
+      "bytes": 9263,
+      "sha256": "1df5f0789d11a84a02b4adfa99a5628b3724f4146247958dc26580db775f131c"
+    },
+    {
+      "path": "unit-result.json",
+      "bytes": 304,
+      "sha256": "d2840577deb184e1c7d371c854f5b2a57c3237f7e72697516b0e1399ebb4088d"
+    }
+  ],
+  "archive_sha256": "c3d9b521d99031d0fbe0521c37e62682912119c1542c502bc2079da99c9737ca",
+  "native_integration_attested": false,
+  "scientific_verdict": null
+}

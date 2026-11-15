@@ -1,0 +1,113 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeRecoveryRecognition7"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil",
+    "NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil",
+    "NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil",
+    "NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil",
+    "NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil",
+    "NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil",
+    "NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil",
+    "NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil",
+    "NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil",
+    "NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil"
+  ],
+  "runplan": [
+    {
+      "name": "native-001",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-002",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-003",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-004",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-005",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-006",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-007",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-008",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-009",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-010",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    }
+  ],
+  "partitions": [
+    {
+      "name": "source7-frozen-target-foil-and-diagnostic",
+      "ids": [
+        "NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil",
+        "NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil",
+        "NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil",
+        "NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil",
+        "NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil",
+        "NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil",
+        "NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil",
+        "NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil",
+        "NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil",
+        "NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil"
+      ],
+      "count": 10
+    }
+  ]
+}

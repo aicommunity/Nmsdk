@@ -1,0 +1,89 @@
+{
+  "kind": "independent_matched_omission_asan_metadata_verification",
+  "evidence_commit": "9e301ba0b28be4ec64a85ac143ea9db94d6fd884",
+  "compiled_root": "58f5b5181c217e70afd9ab08f18cd966f4640f99",
+  "PulseLib": "fcc3fed0dc63fc0d8ae8dcfdb0f85bd5d004baf8",
+  "archive_members_verified": 460,
+  "archive_bytes": 323488,
+  "archive_sha256": "782b71e122c1823e514f337887ad635ba028be1f3645814fb8d4dcbfeb5fc617",
+  "junit_checks_passed": 57,
+  "source_fixture_hashes_verified": 23,
+  "all_junit_ids_matched_declared_source": true,
+  "native_cases": [
+    {
+      "test_id": "NativeMatchedOmissionExecution/Classic2000",
+      "assignment": "ambiguous",
+      "native_probes": 4,
+      "primary_csvs": 4
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/Branch2000",
+      "assignment": "ambiguous",
+      "native_probes": 4,
+      "primary_csvs": 4
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/Classic20000",
+      "assignment": "ambiguous",
+      "native_probes": 4,
+      "primary_csvs": 4
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/Branch20000",
+      "assignment": "ambiguous",
+      "native_probes": 4,
+      "primary_csvs": 4
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/ClassicExternalStopBetweenControls",
+      "assignment": "not_available",
+      "native_probes": 1,
+      "primary_csvs": 1
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/BranchExternalStopBetweenControls",
+      "assignment": "not_available",
+      "native_probes": 1,
+      "primary_csvs": 1
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/ClassicPhysicalEditBetweenControls",
+      "assignment": "not_available",
+      "native_probes": 1,
+      "primary_csvs": 1
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/BranchPhysicalEditBetweenControls",
+      "assignment": "not_available",
+      "native_probes": 1,
+      "primary_csvs": 1
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/ClassicSeparatedControl2000",
+      "assignment": "valid",
+      "native_probes": 4,
+      "primary_csvs": 4
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/BranchSeparatedControl2000",
+      "assignment": "valid",
+      "native_probes": 4,
+      "primary_csvs": 4
+    }
+  ],
+  "current_and_previous_runtimes_unchanged": true,
+  "owned_group_closed_and_released": true,
+  "asan_gate": true,
+  "asan_options": "detect_leaks=0",
+  "independent_python_assignment_recomputation": false,
+  "completed_native_bursts": 28,
+  "separated_positive_groups": 2,
+  "coupled_ambiguous_groups": 4,
+  "stop_edit_groups": 4,
+  "complete_first_trace_of_stop_edit_exported": true,
+  "artifact_metadata_includes_policy_supports_reasons": true,
+  "numerical_tests_executed_locally": false,
+  "native_training_service_integrated": false,
+  "training_certificate_eligible": false,
+  "whole_plan_complete": false
+}

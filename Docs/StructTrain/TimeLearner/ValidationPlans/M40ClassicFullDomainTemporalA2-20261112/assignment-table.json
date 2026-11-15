@@ -1,0 +1,349 @@
+{
+  "kind": "timelearner_derived_assignment_table",
+  "source_job": "s07-observation-domain-train-m40-a1",
+  "package_sha256": "6107b4b0762ae2d5247bc2356a8fb533d872af2f0aafeb972783aeb85555a078",
+  "summary_sha256": "3d2e927c3676a4ffb43156d38fb6f1b17b65a62eac45e8bf66b7bcdc19965cb7",
+  "outcome": "invalid_observation",
+  "reason": "rejected_candidate_window:ambiguous",
+  "search_probes": 38,
+  "rows": [
+    {
+      "group": 14,
+      "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/18/composite/14",
+      "lengths": [
+        54,
+        1,
+        1,
+        1
+      ],
+      "reason": [
+        "highest_window_basin_peak_has_ambiguous_necessity"
+      ],
+      "disposition": "cursor_advanced",
+      "invalid_before": 0,
+      "invalid_after": 1,
+      "peaks": [
+        {
+          "time_since_probe_start": 0.5730000000000075,
+          "amplitude": 0.004504819155902173,
+          "status": "no_necessary_input",
+          "necessary_inputs": [],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "preserved"
+          ]
+        },
+        {
+          "time_since_probe_start": 0.7330000000000041,
+          "amplitude": 0.003117082976405783,
+          "status": "unique_necessary",
+          "necessary_inputs": [
+            2
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin",
+            "preserved"
+          ]
+        },
+        {
+          "time_since_probe_start": 1.0050000000000239,
+          "amplitude": 0.0026546124107139635,
+          "status": "unique_necessary",
+          "necessary_inputs": [
+            3
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin"
+          ]
+        }
+      ]
+    },
+    {
+      "group": 18,
+      "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/26/composite/18",
+      "lengths": [
+        52,
+        1,
+        1,
+        1
+      ],
+      "reason": [
+        "highest_window_basin_peak_has_ambiguous_necessity"
+      ],
+      "disposition": "cursor_advanced",
+      "invalid_before": 1,
+      "invalid_after": 2,
+      "peaks": [
+        {
+          "time_since_probe_start": 0.554000000000002,
+          "amplitude": 0.0045589772638074955,
+          "status": "no_necessary_input",
+          "necessary_inputs": [],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "preserved"
+          ]
+        },
+        {
+          "time_since_probe_start": 0.7195000000000107,
+          "amplitude": 0.0031277043290841577,
+          "status": "unique_necessary",
+          "necessary_inputs": [
+            2
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin",
+            "preserved"
+          ]
+        },
+        {
+          "time_since_probe_start": 0.9865000000000066,
+          "amplitude": 0.0027002218614661233,
+          "status": "unique_necessary",
+          "necessary_inputs": [
+            3
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin"
+          ]
+        }
+      ]
+    },
+    {
+      "group": 34,
+      "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/58/composite/34",
+      "lengths": [
+        50,
+        1,
+        1,
+        1
+      ],
+      "reason": [
+        "highest_window_basin_peak_has_ambiguous_necessity"
+      ],
+      "disposition": "cursor_advanced",
+      "invalid_before": 2,
+      "invalid_after": 3,
+      "peaks": [
+        {
+          "time_since_probe_start": 0.535000000000025,
+          "amplitude": 0.004615686256817408,
+          "status": "no_necessary_input",
+          "necessary_inputs": [],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "preserved"
+          ]
+        },
+        {
+          "time_since_probe_start": 0.7050000000000409,
+          "amplitude": 0.003143834952652913,
+          "status": "unique_necessary",
+          "necessary_inputs": [
+            2
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin",
+            "preserved"
+          ]
+        },
+        {
+          "time_since_probe_start": 0.9675000000000296,
+          "amplitude": 0.002748985516986324,
+          "status": "unique_necessary",
+          "necessary_inputs": [
+            3
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin"
+          ]
+        }
+      ]
+    },
+    {
+      "group": 38,
+      "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/66/composite/38",
+      "lengths": [
+        48,
+        1,
+        1,
+        1
+      ],
+      "reason": [
+        "highest_window_basin_peak_has_ambiguous_necessity"
+      ],
+      "disposition": "cursor_advanced",
+      "invalid_before": 3,
+      "invalid_after": 4,
+      "peaks": [
+        {
+          "time_since_probe_start": 0.5160000000000196,
+          "amplitude": 0.004675022003055029,
+          "status": "no_necessary_input",
+          "necessary_inputs": [],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "preserved"
+          ]
+        },
+        {
+          "time_since_probe_start": 0.6890000000000214,
+          "amplitude": 0.003165205613334554,
+          "status": "unique_necessary",
+          "necessary_inputs": [
+            2
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin",
+            "preserved"
+          ]
+        },
+        {
+          "time_since_probe_start": 0.9490000000000123,
+          "amplitude": 0.0028011797010325523,
+          "status": "unique_necessary",
+          "necessary_inputs": [
+            3
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin"
+          ]
+        }
+      ]
+    },
+    {
+      "group": 42,
+      "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/74/composite/42",
+      "lengths": [
+        45,
+        1,
+        1,
+        1
+      ],
+      "reason": [
+        "highest_window_basin_peak_has_ambiguous_necessity"
+      ],
+      "disposition": "invalid_budget_stop",
+      "invalid_before": 4,
+      "invalid_after": 5,
+      "peaks": [
+        {
+          "time_since_probe_start": 0.48750000000001137,
+          "amplitude": 0.004769066150259738,
+          "status": "no_necessary_input",
+          "necessary_inputs": [],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "preserved"
+          ]
+        },
+        {
+          "time_since_probe_start": 0.6650000000000205,
+          "amplitude": 0.0032071841869667495,
+          "status": "unique_necessary",
+          "necessary_inputs": [
+            2
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin",
+            "preserved"
+          ]
+        },
+        {
+          "time_since_probe_start": 0.9205000000000041,
+          "amplitude": 0.002886692450570605,
+          "status": "unique_necessary",
+          "necessary_inputs": [
+            3
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin"
+          ]
+        }
+      ]
+    }
+  ],
+  "candidate_count": 14,
+  "candidate_example": [
+    {
+      "amplitude_residual": 0,
+      "anchor_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/1/composite/5",
+      "anchor_semantic_proof_id": "2ffbee1ae09974ece08f6b45fb719da7b2a7540f3d29d22a3f93e3ca970b36bf",
+      "anchor_trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/1",
+      "full_parameters": [
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 0,
+      "measurement_group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/2/composite/6",
+      "model_epoch": 0,
+      "model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+      "parameter_change_cost": 0,
+      "parameters": {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "368eb322c18a924f6118c61939f6227f61d90eee677ddfa327e8619283304dd5",
+      "timing_high": -0.480000000000004,
+      "timing_low": -0.480000000000004,
+      "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/2",
+      "within_amplitude": true,
+      "within_timing": false
+    }
+  ],
+  "scientific_verdict": null
+}

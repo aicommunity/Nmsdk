@@ -1,0 +1,1 @@
+Проверка production native-search-history без нового Train и без изменения исходных артефактов. 7 unit controls и 1 полный CLI audit реального N4 Train. Успех тестов не является сертификатом обучения.

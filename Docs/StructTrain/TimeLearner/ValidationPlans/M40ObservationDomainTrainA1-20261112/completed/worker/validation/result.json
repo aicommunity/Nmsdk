@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "actual-strict-N4-N1-full-observation-domain-Classic-Branch-Train-a1",
+  "package_fingerprint": "16bd2c2c6b022834223013ea5259312379f29de1c574262136b8a652b28003a5",
+  "execution": "completed",
+  "assertion_status": "failed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_train.StockObservationDomainTrainTest.test_classic_actual_strict_N4_cold8_train_retains_honest_outcome",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_train.StockObservationDomainTrainTest.test_branch_actual_strict_N4_cold8_train_retains_honest_outcome"
+  ],
+  "executed_tests": 2,
+  "failures": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_train.StockObservationDomainTrainTest.test_branch_actual_strict_N4_cold8_train_retains_honest_outcome"
+  ],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD8_TRAIN_CONTROLS": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainTrainA1-20261112/fixture",
+      "files": 2,
+      "fingerprint": "47e86faf29b0d0c62d5eea5b02d0deb3d9ffc240aeee1ebea54e91e0d70d549c"
+    },
+    "TIMELEARNER_STOCK_COLD8_TRAIN_SOURCE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-preflight-m40-a1/worker/native-full-domain-preflight/prepared",
+      "files": 10,
+      "fingerprint": "3dcd3f210c4dbeab80234153e94d19ad5916874c9b4285ed14c5082c93f6ee13"
+    },
+    "TIMELEARNER_STOCK_COLD8_TRAIN_RUNTIME": {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1",
+      "files": 2,
+      "fingerprint": "ec9b6cfa640025f0d4994bfc48488f0c151c5f3dfdf774d4ae3a5c92b63a9edc"
+    }
+  },
+  "scientific_verdict": null
+}

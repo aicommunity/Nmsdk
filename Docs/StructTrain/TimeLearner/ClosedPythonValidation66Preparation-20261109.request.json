@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-closed-python-validation66-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 240
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a1",
+      "commit": "382180add59275c9c8bcc449a973cc0577015918"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a1/Docs/StructTrain/TimeLearner/ClosedPythonValidation66Preparation-20261109.suite.json",
+      "sha256": "37ca965284a789ea25e5fd9e57eea78f7de88345e14e456cb3a01113ab318b77"
+    },
+    "fixtures": {}
+  }
+}

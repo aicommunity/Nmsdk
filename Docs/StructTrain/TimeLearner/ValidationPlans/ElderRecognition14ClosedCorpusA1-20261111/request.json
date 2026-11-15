@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-recognition14-closed-corpus-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 1073741824,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 1073741824,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "closed-primary-bundle",
+    "manifest": {
+      "path": "/home/user/timelearner-refactor/requests/recognition14-closed-corpus-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRecognition14ClosedCorpusA1-20261111/manifest.json",
+      "sha256": "bfa23ed814357c4ad389b1ac2197206cb212d3102d7c0515a6154bb4d31c73d0"
+    }
+  }
+}

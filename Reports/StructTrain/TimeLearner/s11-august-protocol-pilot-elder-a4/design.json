@@ -1,0 +1,32 @@
+{
+  "kind": "historical_frozen_protocol_2x2_pilot",
+  "cases": [
+    {
+      "id": "original-order-gap1.5",
+      "rotation": 0,
+      "iti": 1.5
+    },
+    {
+      "id": "original-order-gap3",
+      "rotation": 0,
+      "iti": 3.0
+    },
+    {
+      "id": "rotated-order-gap1.5",
+      "rotation": 1,
+      "iti": 1.5
+    },
+    {
+      "id": "rotated-order-gap3",
+      "rotation": 1,
+      "iti": 3.0
+    }
+  ],
+  "training": false,
+  "threshold": 0.0135,
+  "declared_native_operations": 8,
+  "new_native_operations": 6,
+  "reused_native_operations": 2,
+  "original_control_must_pass_first": true,
+  "whole16_condition_matrix": false
+}

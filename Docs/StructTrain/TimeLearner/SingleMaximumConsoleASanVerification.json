@@ -1,0 +1,174 @@
+{
+  "kind": "independent_ASan_Console_metadata_verification",
+  "evidence_commit": "c843acedc2c84804808c054ed6f746815abe64f2",
+  "compiled_root": "e91b64cb2340ef1df01897db8dad81fc29bd1cf1",
+  "PulseLib": "217dc53c4b1cc010ad6938852a91ee6d2df09e3c",
+  "build_prerequisite_evidence": "3ebe18aab850a180d58f67a1e2cd2257551c07cc",
+  "archive_members_verified": 459,
+  "archive_bytes": 2155572,
+  "archive_sha256": "b340af2ff69504d3ffae78cb0ddd65d6137f976cdcf0970b60b7b67fa166a220",
+  "tool_source_hashes_verified": 384,
+  "run_manifest_artifact_bindings_verified": 424,
+  "external_exact_duplicate_source_members_verified": 216,
+  "actual_Console_operations_passed": 4,
+  "design_tests_passed": 5,
+  "loaded_processes": [
+    {
+      "case": "Classic",
+      "policy": "isolated_window",
+      "loaded_file_records": 103,
+      "actual_libasan": {
+        "path": "/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0",
+        "sha256": "8d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558",
+        "size": 10924208
+      }
+    },
+    {
+      "case": "Classic",
+      "policy": "single_impulse_maximum",
+      "loaded_file_records": 103,
+      "actual_libasan": {
+        "path": "/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0",
+        "sha256": "8d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558",
+        "size": 10924208
+      }
+    },
+    {
+      "case": "Branch",
+      "policy": "isolated_window",
+      "loaded_file_records": 103,
+      "actual_libasan": {
+        "path": "/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0",
+        "sha256": "8d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558",
+        "size": 10924208
+      }
+    },
+    {
+      "case": "Branch",
+      "policy": "single_impulse_maximum",
+      "loaded_file_records": 103,
+      "actual_libasan": {
+        "path": "/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0",
+        "sha256": "8d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558",
+        "size": 10924208
+      }
+    }
+  ],
+  "runtime_bindings_unchanged": 13,
+  "server_observed_rows": [
+    {
+      "id": "Classic",
+      "comparison": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_waveform_reproduced": true
+      },
+      "original_baseline": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_waveform_reproduced": true
+      },
+      "old_peak": {
+        "amplitude": null,
+        "candidate_count": 3,
+        "delay_from_stimulus": null,
+        "input_id": "input0",
+        "plateau_end": null,
+        "raw_potential": null,
+        "relative_to_trial_start": null,
+        "stimulus_id": "pulse0",
+        "time": null,
+        "validity": "ambiguous"
+      },
+      "new_peak": {
+        "amplitude": 0.23209749260986,
+        "candidate_count": 3,
+        "delay_from_stimulus": 0.017,
+        "input_id": "input0",
+        "plateau_end": 0.027,
+        "raw_potential": 0.23209749260986,
+        "relative_to_trial_start": 0.027,
+        "stimulus_id": "pulse0",
+        "time": 0.027,
+        "validity": "valid"
+      },
+      "quality": {
+        "recorded_window_complete": true,
+        "context_observed": true,
+        "measured_peak_validity": "valid",
+        "sample_count": 3601,
+        "diagnostic_only": true,
+        "training_eligible": false,
+        "source_pattern_independently_verified": false,
+        "evaluation_verdict": null
+      },
+      "physical_input_count": 4,
+      "selected_input_index": 0
+    },
+    {
+      "id": "Branch",
+      "comparison": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_waveform_reproduced": true
+      },
+      "original_baseline": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_waveform_reproduced": true
+      },
+      "old_peak": {
+        "amplitude": null,
+        "candidate_count": 2,
+        "delay_from_stimulus": null,
+        "input_id": "input2",
+        "plateau_end": null,
+        "raw_potential": null,
+        "relative_to_trial_start": null,
+        "stimulus_id": "pulse0",
+        "time": null,
+        "validity": "ambiguous"
+      },
+      "new_peak": {
+        "amplitude": 0.011859327741041703,
+        "candidate_count": 2,
+        "delay_from_stimulus": 0.019999999999999997,
+        "input_id": "input2",
+        "plateau_end": 0.03,
+        "raw_potential": 0.011859327741041703,
+        "relative_to_trial_start": 0.03,
+        "stimulus_id": "pulse0",
+        "time": 0.03,
+        "validity": "valid"
+      },
+      "quality": {
+        "recorded_window_complete": true,
+        "context_observed": true,
+        "measured_peak_validity": "valid",
+        "sample_count": 3601,
+        "diagnostic_only": true,
+        "training_eligible": false,
+        "source_pattern_independently_verified": false,
+        "evaluation_verdict": null
+      },
+      "physical_input_count": 4,
+      "selected_input_index": 2
+    }
+  ],
+  "ASan_verified": true,
+  "ASan_options_requested": "detect_leaks=0",
+  "live_ASan_options_readback_available": false,
+  "leak_detection_verified": false,
+  "local_trace_arithmetic_executed": false,
+  "training_or_classification_accepted": false,
+  "whole_burst_assignment_verified": false,
+  "scientific_verdict": null
+}

@@ -1,0 +1,41 @@
+# Отдельный холодный контроль N0 после coupled N1
+
+Постановка14.11.2026. [Classic N1](ClassicCoupledCold4ScientificReport-20261114.ru.md) не имеет jointly-ready кандидатов и остановлен на ambiguous input0; [Branch N1](N1CoupledScientificReport-20261113.ru.md) имеет одну локальную jointly-ready input2, затем ambiguous input1. Требуется проверить, меняется ли эта траектория при штатной N0-нормализации. Успех N0 не предрешён; отрицательный результат сохраняется.
+
+## Единственный объявленный фактор
+
+Меняется механизм нормализации: N1 управляет TipRs при Ns=1; N0 управляет целым Ns в пределах1..128 у неопорных входов при фиксированном исходном индивидуальном Rs. Опорный входN−1 сохраняет Ns=1, исходный Rs и длину. Изменение допустимого актуатора и его границ является частью фактора N0/N1; это не изолированное сравнение одной числовой переменной при одинаковом поисковом пространстве.
+
+Физический начальный граф и исходные input L/Ns/Rs сохраняются. Stock storage без LTMembrane,2000Гц, пачка target, reference capture windows, full observation candidate domain, CapturedPerInput и исходные ampabs1e-5/relative0/min1e-6/sync.02 сохраняются. Общие budgets wall1800s/probes128/edits1280/candidates128/input/sweeps4/invalid4 не увеличиваются;300s process finalization отдельно, только при Train. C-trim/PostTune/threshold calibration выключены. Каждая проба проходит штатные native механизмы; старое learned state не импортируется, Train заново захватывает references.
+
+## Production-путь
+
+Команда stock-candidate-window-study prepare-N0 принимает только исходный schema3 N1 full-observation план с согласованными job/condition/runtime/initial fingerprints. Создаёт новый schema4 план с algorithm id stock-observation-domain-cold8-N4-N0-control-v1 и именами Classic-stock-cold8-N0 / Branch-stock-cold8-N0. Исходные файлы не меняются. Новый job и ConditionSpec пересчитываются штатным сериализатором; N1 fingerprints не переносятся на N0 как идентичность условия. Поддержка старых plan1–3 сохраняется.
+
+Штатный stock-candidate-window-study preflight/train использует production run_job, immutable runtime, owned processes, cold identity comparison и полный DATA/physical audit. Новый Python-only оператор не требует смены C++ SDK: всё нейронное исполнение использует уже проверенный Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8/root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Эффективная поддержка N0 всё равно требует native preflight.
+
+## Проверки и порядок
+
+1. На M40 и Elder:11 declaration regressions (4 recovery,4 full-observation,3 N0), без skip. Проверяется неизменность физики, references и budgets; Ns128 только неопорным, индивидуальный фиксированный Rs, отказ stale digest/повторного N0/сдвига окон/подвижного anchor/ослабления допуска. Это проверки деклараций, не научная проверка модели.
+2. На M40: оба настоящих N0 preflight через public CLI и исходный runtime, exact cold identity и job bindings, closure. До их приёмки Train не запускать.
+3. Два отдельных холодных Train, по одному на топологию, последовательно на immutable M40 runtime. Два завершённых N1 controls уже есть на том же SDK. Не требовать различий результата ради PASS: проверяется применение режима и честность измерений.
+4. Сохранить весь primary в сжатом Git bundle, прочитать typed recovery и measured histories отдельно, проверить frozen конечное состояние при отдельно объявленном Test. Если Train остановлен, diagnostic Test не выдавать за законченное обучение.
+5. Отчёт: исходы/остатки/Ns/quantization/saturation/budget и assigned waveforms с actual inputs, читаемый масштаб и selected originals. Совпавшие детерминированные состояния не считать независимыми seeds.
+
+Train и успех этапа11 пока не подтверждены. Даже совпадение N0/N1 исходов не доказывает эквивалентность алгоритмов, глобальную недостижимость или отсутствие влияния физики. Исходные августовские наблюдения относятся к своему протоколу и сохраняются.
+
+## Проверено и запущено14.11
+
+[Declaration11/11 M40](ValidationPlans/M40StockN0DeclarationUnitA2-20261114/RESULT.ru.md) и [11/11 Elder](ValidationPlans/ElderStockN0DeclarationUnitA3-20261114/RESULT.ru.md) приняты; исходные ранние отказы launcher сохранены. [Настоящие оба preflight1/1 M40](ValidationPlans/M40StockN0PreflightA1-20261114/RESULT.ru.md) приняты на прежнем native SDK. [Classic N0 завершён и полный аудит принят1/1](ValidationPlans/M40StockN0ClassicTrainA1-20261114/RESULT.ru.md):13 measured candidates/0 timing-ready/0 jointly-ready, затем invalid_observation/ambiguous. Ns>1 на этой траектории не применён. После closure Classic [Branch N0 завершён и принят1/1](ValidationPlans/M40StockN0BranchTrainA1-20261114/RESULT.ru.md):budget_exhausted,42 measured/9 timing-ready/0 jointly-ready, Ns1..5 реально измерены. Параллельных изменений runtime нет.
+
+Важное ограничение интерпретации: выбор N0/N1 включает уже реализованные mode-specific порядки поиска, а не только чистый Ns/Rs actuator при искусственно одинаковой траектории. В Classic N0 третий отказ — L49, в N1 — L50; остальные отказавшие L54/52/48/45 совпали. Общий terminal logical vector и reported revision совпали, но это не доказывает эквивалентность алгоритмов или checkpoint dynamics. Для причинного разделения поиска и нормализации нужен отдельно объявленный A/B, а вывод о действии Ns нельзя делать до реально применённого Ns>1. После закрытия timed Branch собраны оба полных N0 primary:28.456MB Classic и38.090MB Branch; собственные графики ещё ожидаются. [Ограничение global-best gate и постановка правки](N0GeometryNormalizationReview-20261114.ru.md) зафиксированы отдельно.
+
+[Отдельно объявленная frozen-диагностика всех8 паттернов](StockN0FrozenEvaluation.ru.md) использует actual stopped export и исходный threshold100; Classic frozen diagnostic сейчас выполняется; Branch diagnostic ещё не запущен. Он не подменяет сходимость и не возобновляет старые серии.
+
+## Смена runtime и сравнение N0 per-geometry 14.11
+
+Новый SDK Pulse58c/root0286 прошёл99/99 declared C++ cases после одинакового six-case old/new корпуса на Elder/M40. Физическое Branch N0 before/after A2 запущено в одной post-update OS/dependency среде, исходные configuration/initial identity и научные budgets прежние. A1 остановлен до native execution: prepare-N0 правильно требует runtime своего N1 source plan.
+
+При неизменных физике/частоте/протоколе сначала применять штатный prepare-full-window к исходному cold7 с новым runtime, проверять полное равенство прежних configuration/initial identity, затем prepare-N0 к вновь созданному N1 plan. Не переписывать runtime.json старого плана и не ослаблять same-runtime guard. При смене физики/частоты/протокола старое characterization нельзя считать новой проверкой; требуются новые измерения. Каждый Train заново проходит native preflight и recaptures references.
+
+[Classic frozen report](ClassicN0FrozenScientificReport-20261114.ru.md), [Branch frozen report](BranchN0FrozenScientificReport-20261114.ru.md) относятся к прежнему SDK: оба молчат при100, не являются результатом нового поиска.

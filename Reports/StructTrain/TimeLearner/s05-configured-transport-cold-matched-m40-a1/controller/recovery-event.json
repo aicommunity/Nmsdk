@@ -1,0 +1,103 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "2456aa6a-4619-405a-ab5b-22af4562db14",
+  "job_id": "s05-configured-transport-cold-matched-a1",
+  "recorded_unix": 1793967642.0560708,
+  "administrator": {
+    "pid": 998425,
+    "start_ticks": "304277434",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 998445,
+    "start_ticks": "304277453",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-configured-transport-cold-matched-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "d88fd320424b47de617d593a6a842eb294d114139bb8aab528668ea59f40e2c3",
+      "unit": "timelearner-0ea9da1a-056f-4db4-8897-b5aa7751a5e4.service",
+      "invocation_id": "7e5cc42757b847f5a9bd0de3fe53d92c",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0ea9da1a-056f-4db4-8897-b5aa7751a5e4.service",
+      "initial_main_pid": 998445,
+      "initial_start_ticks": "304277453",
+      "sha256": "e1f1f8e69710e154da68113d6d0c7e0b721fcd74bb26697b7a7fc989d22f1566"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-0ea9da1a-056f-4db4-8897-b5aa7751a5e4.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Fixed-controller native integration worker and all compiler/test/archive descendants freshly closed; result must be read from original native JUnit and baseline verdict.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-configured-transport-cold-matched-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-configured-transport-cold-matched-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-fixed-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-fixed-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-configured-transport-preconditions-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-configured-transport-preconditions-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-attempt-invalid-budget-fixed-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-attempt-invalid-budget-fixed-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-configured-transport-preconditions-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-configured-transport-preconditions-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-fixed-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-fixed-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-configured-transport-preconditions-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-configured-transport-preconditions-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

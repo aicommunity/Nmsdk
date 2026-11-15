@@ -102,6 +102,10 @@ def _audit_derivation(package: dict, source_case: tuple, *, diagnostic=False) ->
         source_audit = audit_stopped_state(*source_case)
     else:
         source_audit = audit_learned_state(*source_case)
+        # The general learned DATA reader also accepts stopped composite
+        # exports for inspection. Ordinary recognition must not promote them.
+        require(source.get('kind') == 'timelearner_completed_state' and
+                source.get('state_kind') == 'learned_solo', 'recognition_requires_completed_solo')
     require(isinstance(package["implementation_id"], str) and bool(package["implementation_id"].strip()), "missing_recognition_implementation")
     require(package["source_solo"] == source and package["implementation_id"] == source["implementation_id"]
             and package["dataset"] == source["dataset"], "recognition_source_mismatch")
@@ -135,7 +139,12 @@ def _audit_derivation(package: dict, source_case: tuple, *, diagnostic=False) ->
     else:
         require(declaration["branch"] and declaration["normalization"] == "N1" and len(bounds) == n,
                 "unsupported_historical_conversion")
-        if diagnostic:
+        if source.get('schema_version') in (5,6,7):
+            from .composite_certificate_evidence import reference_amplitudes
+            require(source['reference_complete'] is True, 'composite_conversion_requires_complete_references')
+            refs = reference_amplitudes(source)
+            amplitudes = [refs[item['id']] for item in source['protocol']['inputs']]
+        elif diagnostic:
             require(source["reference_complete"] is True, "diagnostic_conversion_requires_complete_references")
             amplitudes = [number(v) for v in source["neuron"]["metadata"]["training"]["captured_per_input"]]
             require(len(amplitudes) == n, "diagnostic_conversion_reference_dimension")

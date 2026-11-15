@@ -1,0 +1,35 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeCandidateWindowPackage"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip"
+  ],
+  "runplan": [
+    {
+      "name": "baseline-native-package2",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip"
+      ],
+      "wall_seconds": 600
+    }
+  ],
+  "partitions": [
+    {
+      "name": "baseline-roundtrip",
+      "ids": [
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip"
+      ],
+      "count": 2
+    }
+  ]
+}

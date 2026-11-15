@@ -1,0 +1,38 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-n0-geometry-ab-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "8dbfa1f6db2d9c7e17e3084f02dfaca812a4c89c",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 64,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 1073741824,
+    "maximum_output_bytes": 268435456
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-ab-root-a1",
+      "commit": "8dbfa1f6db2d9c7e17e3084f02dfaca812a4c89c"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-ab-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryABA1-20261114/suite.json",
+      "sha256": "ec80a9b85b63b55fc4baf21585aca1e72c502be9e649d9a721cdbc0ad28dc12e"
+    },
+    "fixtures": {
+      "TIMELEARNER_N0_GEOMETRY_AB_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-ab-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryABA1-20261114/fixture",
+      "TIMELEARNER_N0_GEOMETRY_AB_ROOT": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-ab-root-a1",
+      "TIMELEARNER_N0_GEOMETRY_AB_PULSE": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-ab-pulse-a1",
+      "TIMELEARNER_N0_GEOMETRY_AB_GTEST": "/media/user/Data/TimeLearnerRefactor/dependency-googletest-58d77fa-a1/googletest"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 33554432,
+      "maximum_total_bytes": 67108864
+    }
+  }
+}

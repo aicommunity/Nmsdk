@@ -1,0 +1,7 @@
+# Удаление подтверждённых дублей XML на Elder
+
+Удалены6336 XML materializations из двух старых изолированных копий source-s06-model-owner-a1 и source-capacitance-state-normal-b1, только внутри Bin/Configs/SpikeSamples. Каждый файл побайтно совпал по полному SHA256 с сохраняемым XML по соответствующему пути source/Bin/Configs/SpikeSamples. Уникальные XML/первичные данные, исходный код, Git и runtime не удалялись. Ранее разрешённая пользователем очистка распространяется только на подтверждённые дубли и кэши.
+
+Плановый allocated объём4806131712bytes; physical free3090427904→7888142336bytes. Перед операцией получена whole-root write lease при отсутствии активных builders/native jobs; все target files проверены fuser. Identity и SHA target/keeper повторно проверены перед каждым unlink, журнал fsync до удаления; retained keeper paths и полные SHA сохранены в [плане](raw/plan.json). [Журнал](raw/journal.jsonl), [результат](raw/result.json), [контроль исходных байтов](raw/readback-integrity.json). Исходные uint64 timestamps сохранены как raw bytes, не пересериализованы JavaScript. Старые materializations считаются retired; восстановление при необходимости выполняется по указанным keeper mappings или их сохранённой Git-истории.
+
+Это отдельное обслуживание диска, не научный результат или закрытие stages. В совокупности с [объектными кэшами и дублями логов](../ElderBuildSpaceCleanupA1-20261112/RESULT.ru.md) оно даёт место для [fresh SDK102 A2](../ElderSharedExportBoundarySdkA2-20261112/PLAN.ru.md); physical floor2GiB сохраняется.

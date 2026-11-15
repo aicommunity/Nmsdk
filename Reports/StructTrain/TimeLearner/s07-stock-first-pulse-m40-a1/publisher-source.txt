@@ -1,0 +1,71 @@
+from pathlib import Path
+import sys,subprocess,json,hashlib,tarfile
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-stock-first-pulse-normal-a1'
+folder=base/'readbacks/s07-stock-first-pulse-normal-a1';repo=base/'evidence-stock-first-pulse-normal-a1'
+parent='eab9a7789906471410cb8ad93ed53c5bff1bb3d3';prefix='Reports/StructTrain/TimeLearner/s07-stock-first-pulse-m40-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_evidence import load
+from Scripts.StructTrain.TimeLearner.stopped_evidence import load_case
+from Scripts.StructTrain.TimeLearner.stock_wave_replay import select_packet
+from Scripts.StructTrain.TimeLearner.stock_first_pulse import audit_prefix
+registry=Reservations(base/'resource-reservations.sqlite3');closed=inspect_worker_dependency(Path(str(folder)+'-container'),registry,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+bundle=load(folder/'bundle.json');archive=folder/'primary.tar.xz';assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256'];seen=set()
+with tarfile.open(archive,'r:xz') as tf:
+ for m in tf:
+  assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tf.extractfile(m).read();assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+assert seen==set(bundle['members'])
+assert load(folder/'tests.json')=={'tests_run':4,'successful':True,'failures':0,'errors':0,'skipped':0}
+assert load(folder/'terminal.json')['first_pulse_prefix_audit_complete']
+analysis=load(folder/'analysis.json');assert len(analysis['rows'])==2
+training=base/'readbacks/s07-stock-fair-domains-normal-a2'
+original=load(training/'bundle.json');bindings={}
+for row in analysis['rows']:
+ state=training/'study/runs'/row['name']/'native/train_stopped_state.json'
+ case=load_case(state);packet=select_packet(case[0]);trace=case[3][packet['requested_specification']['trial_id']]
+ assert audit_prefix(packet,trace,case[0]['protocol'])==row['prefix']
+ for path in [state,trace,trace.with_suffix('.json')]:
+  raw=path.read_bytes();record={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()};relative=path.relative_to(training).as_posix();assert original['members'][relative]==record;bindings[relative]=record
+payloads={};updates={}
+for p in folder.iterdir():
+ if p.is_file() and (p.suffix=='.json' or p.name in ('primary.tar.xz','producer.txt')):payloads[prefix+'/'+p.name]=p.read_bytes()
+for p in Path(str(folder)+'-container').iterdir():
+ if p.is_file() and p.suffix=='.json':payloads[prefix+'/controller/'+p.name]=p.read_bytes()
+payloads[prefix+'/primary-bindings.json']=(json.dumps({'reference_commit':'a1ea63709dbd9a40a54a0e0a0b38fee2b02f9af8','reference_archive':'Reports/StructTrain/TimeLearner/s07-stock-fair-domains-native-m40-a2/primary.tar.xz','members':bindings},indent=2)+'\n').encode()
+payloads[prefix+'/fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode();payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for p in (source/'.git/objects/pack').glob('*.pack'):
+ with p.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve audited first-stimulus prefixes: three Classic and one Branch maxima before second actual input\n')
+git('update-ref','refs/heads/codex/stock-first-pulse-evidence',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256'],'tests_passed':4,'primary_bindings':len(bindings)}))

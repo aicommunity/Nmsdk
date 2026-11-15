@@ -1,0 +1,15 @@
+{
+  "arguments": [
+    "-B",
+    "-m",
+    "Scripts.StructTrain.TimeLearner.owned_python_job",
+    "_worker",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-canonical-m40-a1/request.json"
+  ],
+  "working_directory": "/media/user/Data/TimeLearnerRefactor/source-bounded-science-taskfix-a1",
+  "maximum_wall_seconds": 600,
+  "cancel_file": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-canonical-m40-a1/process/cancel.request",
+  "memory_bytes": 536870912,
+  "tasks": 32,
+  "cooperative_capture": false
+}

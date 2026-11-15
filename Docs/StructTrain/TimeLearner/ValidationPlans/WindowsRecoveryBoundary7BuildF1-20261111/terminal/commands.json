@@ -1,0 +1,42 @@
+{
+  "configure": [
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+    "-S",
+    "C:\\Projects\\TimeLearnerWorker\\source-recovery-boundary7-win-f1",
+    "-B",
+    "C:\\Projects\\TimeLearnerWorker\\build-recovery-boundary7-win-f1",
+    "-G",
+    "Ninja",
+    "-DCMAKE_MAKE_PROGRAM=C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja\\ninja.exe",
+    "-DCMAKE_CXX_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+    "-DVCPKG_MANIFEST_DIR=C:\\Projects\\TimeLearnerWorker\\source-recovery-boundary7-win-f1\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026",
+    "-DVCPKG_OVERLAY_TRIPLETS=C:\\Projects\\TimeLearnerWorker\\source-recovery-boundary7-win-f1\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\triplets",
+    "-DVCPKG_TARGET_TRIPLET=x64-windows-tl",
+    "-DVCPKG_INSTALLED_DIR=C:\\Projects\\TimeLearnerWorker\\build-a4\\vcpkg_installed",
+    "-DVCPKG_MANIFEST_INSTALL=OFF",
+    "-DQT_MAJOR=5",
+    "-DRDK_USE_LLM=OFF",
+    "-DRDK_USE_OPENCV=OFF",
+    "-DRDK_USE_PYTHON=OFF",
+    "-DRDK_USE_ODESOLVER=OFF",
+    "-DBUILD_TESTING=ON",
+    "-DRDK_BUILD_LEGACY_ENGINE_UNIT_TESTS=OFF",
+    "-DNMSDK_BUILD_PARALLEL_JOBS=1",
+    "-DNMSDK_DEPLOY_ROOT=C:\\Projects\\TimeLearnerWorker\\runtime-recovery-boundary7-win-f1",
+    "-DNMSDK_RESOURCE_ROOT=C:\\Projects\\TimeLearnerWorker\\source-recovery-boundary7-win-f1\\Bin"
+  ],
+  "build": [
+    "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+    "--build",
+    "C:\\Projects\\TimeLearnerWorker\\build-recovery-boundary7-win-f1",
+    "--target",
+    "NeuroModelerConsole",
+    "Test_PulseLib_StorageComponents",
+    "--parallel",
+    "1"
+  ],
+  "dependency_install_disabled": true,
+  "compiler_jobs": 1
+}

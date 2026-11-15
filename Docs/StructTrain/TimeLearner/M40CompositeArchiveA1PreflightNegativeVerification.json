@@ -1,0 +1,118 @@
+{
+  "kind": "independent_M40_archive206_preflight_refusal_metadata_verification",
+  "schema_version": 1,
+  "evidence_commit": "c19d2eb325541667ef770eacee8e8f132ad99ba3",
+  "parent_tool_root": "540179d70ddf3764334eb6bb59b7fef691054eee",
+  "actual_unchanged_sdk_root": "d92022a41d6f448852d2ecfc6f87ca5a719843bc",
+  "actual_unchanged_pulse": "e183bee14be285862663c094b0b36b3f0dc15747",
+  "archive_members_verified": 55,
+  "archive_bytes": 655976,
+  "archive_sha256": "86b81cc4979dbc4514d071d346803f0d69edda08c9cf37092c648281526f6f61",
+  "pack_bytes": 692668,
+  "pack_sha256": "ea521423f85af50ad0e9ded3d16dab536360dc1baedf95e15bcbd128779f5887",
+  "source_files_independently_Git_verified": 3680,
+  "source_repositories": [
+    {
+      "scope": "root",
+      "repository": "E:\\Science-Repo\\nmsdk-storage-recipes",
+      "commit": "d92022a41d6f448852d2ecfc6f87ca5a719843bc",
+      "files": 968
+    },
+    {
+      "scope": "Bin",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Bin",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    },
+    {
+      "scope": "Libraries/Nmsdk-MotionControlLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "files": 93
+    },
+    {
+      "scope": "Libraries/Nmsdk-PulseLib",
+      "repository": "E:\\Science-Repo\\pulselib-matched-omission",
+      "commit": "e183bee14be285862663c094b0b36b3f0dc15747",
+      "files": 306
+    },
+    {
+      "scope": "Libraries/Rdk-BasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "files": 43
+    },
+    {
+      "scope": "Libraries/Rdk-CvBasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "files": 132
+    },
+    {
+      "scope": "Libraries/Rdk-HardwareLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "files": 356
+    },
+    {
+      "scope": "Rdk",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    }
+  ],
+  "actual_CPP_or_Python_test_cases": 0,
+  "native_model_executions": 0,
+  "build_started": false,
+  "lease_created": false,
+  "source_or_cache_updated": false,
+  "original_failed_unit_metadata_preserved": true,
+  "kernel_whole_group_closed": true,
+  "new_runtime_and_before_snapshots_absence_preserved": true,
+  "original_unknown_process_contexts_preserved": [
+    {
+      "pid": 3395,
+      "ticks": "46935",
+      "comm": "(sd-pam)",
+      "cmdline": [
+        "(sd-pam) "
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/init.scope",
+      "unreadable": [
+        "maps",
+        "cwd",
+        "exe",
+        "fd"
+      ]
+    },
+    {
+      "pid": 121820,
+      "ticks": "2251923",
+      "comm": "ssh-agent",
+      "cmdline": [
+        "ssh-agent -s "
+      ],
+      "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/app-org.gnome.Terminal.slice/vte-spawn-462a2dba-fac3-4820-a08d-8faee1da1a82.scope",
+      "unreadable": [
+        "maps",
+        "cwd",
+        "exe",
+        "fd"
+      ]
+    }
+  ],
+  "baseline_contexts_not_reclassified_in_original_failure": true,
+  "old143_runtime_before_after_postclosure_equal_on_server": true,
+  "planned540_f925_not_claimed_as_compiled_or_executed": true,
+  "actual_Linux_worker_sha256": "96abf7a8e1aa7ce0dcb1bc6b70d7352fc32964460e2f3ef4c98fc4b93d251d9e",
+  "local_read_text_UTF8_LF_hash_matches_actual_Linux_producer": true,
+  "failed_publication_observer_a1_and_misnamed_original_log_preserved": true,
+  "corrected_publication_observer_attempt": "observer-a2",
+  "ASan_acceptance": false,
+  "leak_check_claimed": false,
+  "archive6_export_completed": false,
+  "local_CPP_or_scientific_numerical_execution": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "git_import": "unpack-objects_no_checkout_no_refs"
+}

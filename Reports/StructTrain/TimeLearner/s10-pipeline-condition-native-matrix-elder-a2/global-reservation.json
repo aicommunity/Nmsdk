@@ -1,0 +1,65 @@
+{
+  "token": "578b8da3-66ee-4ddd-b792-8e76a9592a9a",
+  "job_id": "s10-pipeline-condition-native-matrix-a2",
+  "owner": {
+    "pid": 3866839,
+    "start_ticks": "351579834",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "resources": [
+    {
+      "requested_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1",
+      "canonical_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-pipeline-condition-native-matrix-a2",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-pipeline-condition-native-matrix-a2",
+      "access": "write"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+      "canonical_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/source-pipeline-condition-matrix-a1",
+      "canonical_path": "/home/user/timelearner-refactor/source-pipeline-condition-matrix-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1/Bin",
+      "canonical_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1/Bin",
+      "access": "read"
+    }
+  ],
+  "state": "held",
+  "demands": {
+    "slots": 1,
+    "memory_bytes": 4831838208,
+    "disk_bytes": 1342177280
+  },
+  "scientific_verdict": null
+}

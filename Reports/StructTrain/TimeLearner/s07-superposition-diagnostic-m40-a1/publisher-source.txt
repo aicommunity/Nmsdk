@@ -1,0 +1,67 @@
+from pathlib import Path
+import sys,json,hashlib,tarfile,subprocess
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-superposition-diagnostic-a1-delivery'
+folder=base/'readbacks/s07-superposition-diagnostic-normal-a1';container=Path(str(folder)+'-container')
+repo=base/'evidence-superposition-diagnostic-normal-a1';parent='9ab6784d7bca3ca2873225be742a1b68727c6215'
+prefix='Reports/StructTrain/TimeLearner/s07-superposition-diagnostic-m40-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+registry=Reservations(base/'resource-reservations.sqlite3');closed=inspect_worker_dependency(container,registry,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['diagnostic_complete'] and terminal['heartbeat_errors']==[]
+assert json.loads((folder/'tests.json').read_text())=={'tests_run':4,'successful':True,'failures':0,'errors':0,'skipped':0}
+bundle=json.loads((folder/'bundle.json').read_text());raw=(folder/'primary.tar.xz').read_bytes()
+assert len(raw)==bundle['archive_bytes'] and hashlib.sha256(raw).hexdigest()==bundle['archive_sha256']
+seen=set()
+with tarfile.open(folder/'primary.tar.xz','r:xz') as tf:
+ for m in tf:
+  assert m.isfile() and m.name not in seen;seen.add(m.name);data=tf.extractfile(m).read()
+  assert bundle['members'][m.name]=={'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}
+assert seen==set(bundle['members'])
+sources={'2ba950373a79e896d3f7817d3cbdbeb1bad192ee':base/'readbacks/s07-high-threshold-single-normal-a1',
+         'cd8d32168c3580948d0684f6ccad9f64f8527d94':base/'readbacks/s07-high-threshold-classic-normal-a1'}
+bindings=json.loads((folder/'input-bindings.json').read_text());assert len(bindings)==12
+for path,row in bindings.items():
+ original=sources[row['source_primary']];p=Path(path);assert p==original/row['source_member']
+ original_bundle=json.loads((original/'bundle.json').read_text())
+ assert hashlib.sha256(p.read_bytes()).hexdigest()==row['sha256']==original_bundle['members'][row['source_member']]['sha256']
+analysis=json.loads((folder/'analysis.json').read_text());assert len(analysis['rows'])==2
+assert all(v['input_reconstruction_exact'] and v['samples']==3601 and not v['assigned_impulse_peaks_certified'] for v in analysis['rows'])
+payloads={prefix+'/'+f.name:f.read_bytes() for f in folder.iterdir() if f.is_file() and (f.suffix=='.json' or f.name=='primary.tar.xz')}
+for f in container.iterdir():
+ if f.is_file() and f.suffix=='.json':payloads[prefix+'/controller/'+f.name]=f.read_bytes()
+payloads[prefix+'/fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+# Reuse two existing full-scale native figures, not a new rendering/model run.
+case='Classic-threshold-training100-retry32-burst';cache=base/'ReportsCache/high-threshold-joint-normal-a1'/case
+checksums=json.loads((cache/'SHA256SUMS.json').read_text());selection=[]
+for name in ['soma-003/overview.png','soma-003/measured-peak-00209-detail.png']:
+ data=(cache/name).read_bytes();digest=hashlib.sha256(data).hexdigest();assert checksums[name]==digest
+ published='Classic-Soma4-'+Path(name).name;payloads[prefix+'/'+published]=data
+ selection.append({'published_file':published,'source_cache_case':case,'source_cache_file':name,'sha256':digest,'bytes':len(data),
+                   'original_render_commit':'8bc32a401e5b330597ee4f0328b6683f69ad6a7a','new_rendering':False})
+payloads[prefix+'/selection.json']=(json.dumps({'figures':selection},indent=2)+'\n').encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (source/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args,data=None):return subprocess.check_output(['git','-C',str(repo),*args],input=data).decode().strip()
+def tree(base_tree,changes):
+ entries={}
+ if base_tree:
+  for item in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',base_tree]).split(b'\0'):
+   if item:
+    header,name=item.split(b'\t',1);mode,kind,sha=header.decode().split();entries[name.decode()]=(mode,kind,sha)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=('100644','blob',git('hash-object','-w','--stdin',data=value))
+ for name,sub in groups.items():
+  previous=entries.get(name);entries[name]=('040000','tree',tree(previous[2] if previous else None,sub))
+ raw=b''.join((mode+' '+kind+' '+sha+'\t'+name).encode()+b'\0' for name,(mode,kind,sha) in sorted(entries.items()))
+ return git('mktree','-z','--missing',data=raw)
+commit=git('-c','user.name=Codex','-c','user.email=codex@openai.com','commit-tree',tree(git('rev-parse',parent+'^{tree}'),payloads),'-p',parent,data=b'Publish bounded diagnostic of burst response overlap and Soma4 counterexample\n')
+git('update-ref','refs/heads/evidence',commit)
+print(json.dumps({'evidence_commit':commit,'parent':parent,'repository':str(repo),'archive_members':len(seen),'archive_bytes':len(raw),'archive_sha256':bundle['archive_sha256'],'input_bindings':len(bindings),'figures':selection,'whole_group_closed':True,'lease_released':True}))

@@ -1,0 +1,60 @@
+{
+  "kind": "independent_closed_windows_noop_build_rejection_verification",
+  "evidence_commit": "550c95eda4ddf9bd559e5db55c025688c1a35033",
+  "root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "archive_members_verified": 46,
+  "archive_bytes": 142896,
+  "archive_sha256": "ba38ad0efacc789cc797b0590a90aa30f9f87cda11f53045de5b1ba59a023fac",
+  "pack_bytes": 179208,
+  "pack_sha256": "7d550162f083830cbe8c64c06f05cb95a4adbbed2089c69a7d2ce5560e23d915",
+  "native_git_transfer": true,
+  "build_returncode": 0,
+  "execution": "descendants_remaining",
+  "wall_seconds": 4.053788700141013,
+  "ninja_no_work_observed": true,
+  "compile_or_link_observed": false,
+  "build_execution_accepted": false,
+  "descendants_at_main_exit": [
+    11540,
+    16712
+  ],
+  "remaining_descendant_identities": [
+    {
+      "pid": 11540,
+      "executable": "C:\\Windows\\System32\\conhost.exe",
+      "creation_filetime": "134385910581877149",
+      "observed_utc": "2026-11-08T05:57:38Z",
+      "executable_file": {
+        "path": "C:\\Windows\\System32\\conhost.exe",
+        "sha256": "b02ee54fb2ec69673386d41119ee8ed083a6eab3bfca6aa2155d20ce68ef8963",
+        "size": 867840
+      }
+    },
+    {
+      "pid": 16712,
+      "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "creation_filetime": "134385910599643538",
+      "observed_utc": "2026-11-08T05:57:39Z",
+      "executable_file": {
+        "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "sha256": "9785001b0dcf755eddb8af294a373c0b87b2498660f724e76c4d53f9c217c7a3",
+        "size": 455680
+      }
+    }
+  ],
+  "all_owned_processes_closed": true,
+  "fresh_kernel_job_state": "absent",
+  "source_closure_unchanged": true,
+  "all_three_runtime_inventories_unchanged": true,
+  "build_metadata_changed": [
+    ".ninja_log"
+  ],
+  "backend_verified_against_root_git": true,
+  "internal_archive_prefix": "attempt-a3",
+  "historical_pid9556_identity": "unknown_not_retroactively_inferred",
+  "native_tests_started": 0,
+  "scientific_worker_admitted": false,
+  "numerical_tests_executed_locally": false,
+  "prior_failed_attempts_reclassified": false,
+  "whole_plan_complete": false
+}

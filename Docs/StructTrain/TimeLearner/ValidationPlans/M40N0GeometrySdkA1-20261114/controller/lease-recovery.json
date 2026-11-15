@@ -1,0 +1,118 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "b69ace62-7808-4577-9ceb-a17f6fc5d818",
+  "job_id": "s07-n0-geometry-sdk-m40-a1",
+  "recorded_unix": 1794627659.241695,
+  "administrator": {
+    "pid": 3901969,
+    "start_ticks": "370174569",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 3908549,
+    "start_ticks": "370175451",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-geometry-sdk-m40-a1-controller/process/contained",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "0ec2cf3652721e47cf743bdbef3dd1356f85e9146e6138b8d70be46796494df2",
+      "unit": "timelearner-9db674fb-f649-45a0-a7ba-720456c09630.service",
+      "invocation_id": "652b38f7d54b40f6a5424955c668e2be",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9db674fb-f649-45a0-a7ba-720456c09630.service",
+      "initial_main_pid": 3908549,
+      "initial_start_ticks": "370175451",
+      "sha256": "920fb2e19ff20d9511adad20376c29e2077b7e913ed434da9a61906df442a865"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-9db674fb-f649-45a0-a7ba-720456c09630.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-n0-geometry-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-n0-geometry-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-geometry-sdk-m40-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-geometry-sdk-m40-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-n0-geometry-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-n0-geometry-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a4",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a4"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-local-turn-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-local-turn-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

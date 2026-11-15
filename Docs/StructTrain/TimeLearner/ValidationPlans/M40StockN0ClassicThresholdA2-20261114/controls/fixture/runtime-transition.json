@@ -1,0 +1,59 @@
+{
+  "kind": "explicit_same_binary_post_os_update_runtime_capture",
+  "schema_version": 1,
+  "reason": "M40 dpkg libc6/libc-bin2.39-0ubuntu8.9->8.12 2026-11-14 06:23:48-49",
+  "predecessor_runtime_sha256": "ae6629004c18082fccfeb3ab88875b0660c3c07c1e8f12493bbab65e2dac443a",
+  "predecessor_runtime_fingerprint": "105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a",
+  "runtime_fingerprint": "377e0ebdee7bb1fa1cc11346438a1d2102b2124f08e3054b6347400c10a4f335",
+  "changes": [
+    {
+      "before": {
+        "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+        "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+        "size": 2129424
+      },
+      "after": {
+        "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+        "sha256": "755a371e86cc9f564ab54f66140747700fb0a103f698f659f2060f707897e09a",
+        "size": 2129424
+      }
+    },
+    {
+      "before": {
+        "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+        "sha256": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0",
+        "size": 952616
+      },
+      "after": {
+        "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+        "sha256": "5dcc4d25466e29ca390ed6fabb371c69b65dff6fa4e91c34561057a020d6994a",
+        "size": 952616
+      }
+    },
+    {
+      "before": {
+        "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+        "sha256": "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+        "size": 236616
+      },
+      "after": {
+        "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+        "sha256": "5fc0940888e9d2e1a00e66d6b1a559c36364ee867683652e1074fa576952cc3f",
+        "size": 236616
+      }
+    }
+  ],
+  "unchanged": [
+    "executable",
+    "app_ini",
+    "compiler",
+    "source_closure",
+    "build_flags",
+    "loader_environment"
+  ],
+  "source_closure_origin": "inherited from accepted original SDK manifest for the byte-identical executable; no recompile",
+  "expected_threshold": 0.012765548843211696,
+  "required_fresh_baseline_waveforms_equal": true,
+  "active_or_predecessor_runtime_modified": false,
+  "scientific_verdict": null
+}

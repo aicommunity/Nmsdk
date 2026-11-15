@@ -1,0 +1,55 @@
+{
+  "kind": "candidate_recovery_public_reader_verification",
+  "schema_version": 1,
+  "source_commit": "5a6dd77dedca3595087570fa4153cff3c78309fe",
+  "hosts": [
+    {
+      "host": "10.245.1.11",
+      "evidence_commit": "751598bef2a6fa388ecd4e5b58f4d80b1bffffc3",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-api-a2-11",
+      "tests_run": 60,
+      "source_files_verified": 20,
+      "wall_seconds": 142.13602137565613
+    },
+    {
+      "host": "10.245.1.17",
+      "evidence_commit": "6bb449edd7942d0046e5e4fb0d3b95e396a66ea5",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-api-a1-17",
+      "tests_run": 60,
+      "source_files_verified": 20,
+      "wall_seconds": 103.26435136795044
+    }
+  ],
+  "new_native_training_verified": false,
+  "scientific_verdict": null,
+  "full_schema5_pipeline_verified": false,
+  "corpus_cases": 18,
+  "corpus_files_verified": 312,
+  "corpus_bytes": 77806588,
+  "corpus_identical_on_both_hosts": true,
+  "original_archive_members_verified": 2100,
+  "original_archives": [
+    {
+      "evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "report_path": "s07-candidate-recovery-journal-m40-a1",
+      "archive_bytes": 1173568,
+      "archive_sha256": "7f1121c24ef4ca8e12bc1a0d3eda37505f15d6a342c31a0b23c8ee5fe44dde1e",
+      "members_verified": 834
+    },
+    {
+      "evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "report_path": "s07-joint-asan44-a3",
+      "archive_bytes": 4329632,
+      "archive_sha256": "af260d751cb8bc2e16388bd36bc6d6c3b7f98d7ce837efe7ec677b9b4e6bd8d1",
+      "members_verified": 1266
+    }
+  ],
+  "scope": "Public readers over original base1..4 primary with hypothetical schema5 envelopes; no new Train or native schema5 pipeline execution",
+  "elder_previous_attempt": {
+    "execution": "timeout",
+    "wall_budget_seconds": 120,
+    "counts_known": false,
+    "partial_stdout_retained": false,
+    "evidence": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-api-a2-11/previous-timeout.json"
+  }
+}

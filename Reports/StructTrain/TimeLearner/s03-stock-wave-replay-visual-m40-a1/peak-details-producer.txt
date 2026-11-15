@@ -1,0 +1,41 @@
+from pathlib import Path
+import json,subprocess,hashlib
+base=Path('/media/user/Data/TimeLearnerRefactor');repo=base/'evidence-stock-wave-replay-normal-a1'
+parent='2fc1131d30e27a414c8485f287c2af90170126bd';prefix='Reports/StructTrain/TimeLearner/s03-stock-wave-replay-visual-m40-a1'
+payloads={};updates={};rows=[]
+for name,left,right in [('Branch-threshold-low-retry32',.18,.20),('Classic-threshold-low-retry32',.04,.06)]:
+ cache=base/'ReportsCache/stock-wave-replay-normal-a1'/name;manifest=json.loads((cache/'manifest.json').read_text());checks=json.loads((cache/'SHA256SUMS.json').read_text());fig=manifest['figures'][0]
+ views=[v for v in fig['views'] if 'peak_detail' in v and left<v['peak_detail']['peak_sample_time']<right];assert len(views)==1,(name,len(views))
+ view=views[0];file=next(f for f in view['files'] if f.endswith('.png'));raw=(cache/file).read_bytes();assert hashlib.sha256(raw).hexdigest()==checks[file]
+ target=name+'-soma1-'+view['view']+'.png';payloads[prefix+'/'+target]=raw
+ rows.append({'published_file':target,'case':name,'channel':0,'view':view,'bytes':len(raw),'sha256':checks[file],'manual_visual_review_complete':False,'source_trace_sha256':manifest['source_trace_sha256']})
+payloads[prefix+'/peak-details-selection.json']=(json.dumps({'kind':'exact_replay_measured_peak_details','source_cache_evidence':parent,'figures':rows,'new_render_executed':False,'scientific_verdict':None},indent=2)+'\n').encode();payloads[prefix+'/peak-details-producer.txt']=PUBLISHER_SOURCE.encode()
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve native-sample magnifications of weak Branch and third Classic positive maxima\n');git('update-ref','refs/heads/codex/stock-wave-replay-peak-details',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'selected_details':len(rows),'png_bytes':sum(r['bytes'] for r in rows)}))

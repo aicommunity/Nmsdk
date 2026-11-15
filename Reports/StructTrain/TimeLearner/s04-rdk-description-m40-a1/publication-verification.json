@@ -1,0 +1,58 @@
+{
+  "kind": "bounded_rdk_description_loading_acceptance",
+  "root_before": "cedf394ba06f5950438565a2ebfa27b106b65fa8",
+  "root_after": "7aa1a2906405355fd2a15df7ede37eb264105ce3",
+  "Rdk_before": "10e9d05aa658dd2203c89bc84ba9166595b50014",
+  "Rdk_after": "b3438347fe7dd6d7aeeb49e61236b705e76708b9",
+  "metadata_before": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "process_error",
+    "validity": "valid",
+    "assertion_status": "failed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 2,
+      "observed": 2,
+      "failed_test_ids": [
+        "RuntimeDescriptions/LoadsWhenOwnBoundedGroupHasNoSpareThreadSlots"
+      ],
+      "assertion_status": "failed",
+      "sha256": "de2b12082ac0cb0a0282b05745dbf432eb5fba1049f614614c296cdbba0151c3"
+    },
+    "scientific_verdict": null
+  },
+  "metadata_after": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 2,
+      "observed": 2,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "d50c1a83302682b5337d17094322f619d60b176373a4021a2dd9dbef36228af6"
+    },
+    "scientific_verdict": null
+  },
+  "physical_checks_passed": 5,
+  "clean_replay_comparison": {
+    "original": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-subset-study-a2/corpus/Classic-6/native/probe_trial_1.csv",
+    "new": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-rdk-description-fixed-a1/clean-replay/native/probe_trial_1.csv",
+    "sha256": "d7eb3bd851fd21e76188b715e0fa20ec9a305ab9ba04d1a6cbcb5ccd096e8d98",
+    "all_soma_and_stimulus_bytes_identical": true,
+    "new_stderr_empty": true,
+    "prior_resource_error_not_erased": true
+  },
+  "runtime_files_unchanged": true,
+  "all_groups_closed_and_released": true,
+  "first_setup_link_failure_preserved": true,
+  "original_runtime_error_not_erased": true,
+  "specific_old_exception_stack_source_proven": false,
+  "second_worker_verified": false,
+  "scientific_classification_evaluated": false,
+  "whole_plan_complete": false
+}

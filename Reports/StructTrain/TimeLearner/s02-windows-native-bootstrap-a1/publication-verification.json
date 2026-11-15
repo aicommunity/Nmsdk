@@ -1,0 +1,120 @@
+{
+  "kind": "windows_native_build_bootstrap_evidence",
+  "source_root": "a1d722259a6fe89a91a289080aa546168be5966a",
+  "PulseLib": "c17ebd2cc75abd3a1562492907c90782232c2ea6",
+  "build_passed": true,
+  "checks": [
+    {
+      "group": "probe-algorithms",
+      "tests": 34,
+      "xml_sha256": "fd0cf40fa95d7435839fde2d767a770af2d5c4b08ba4ddb8a9eec0b2477fec26",
+      "wall_seconds": 0.0414646,
+      "exit_code": 0
+    },
+    {
+      "group": "dataset-clock",
+      "tests": 20,
+      "xml_sha256": "8f744d3ef3816451e50bff99064579152a19dea06fc57e54c2436069cfbf0e2d",
+      "wall_seconds": 144.3530913,
+      "exit_code": 0
+    }
+  ],
+  "built_targets": [
+    {
+      "name": "NeuroModelerConsole.exe",
+      "bytes": 10869760,
+      "sha256": "5909890cee347e7e02a102305a803a7515b322ab12a7a0da42a82bd7b3074845"
+    },
+    {
+      "name": "Test_PulseLib_ProbeAlgorithms.exe",
+      "bytes": 275968,
+      "sha256": "ad6a6b7558c7399723b7c3a511593945f95a650a602c0bb38c92fef4a6329813"
+    },
+    {
+      "name": "Test_PulseLib_StorageComponents.exe",
+      "bytes": 19093504,
+      "sha256": "050f0f28fa4dc21df45724e9c585647a0803c21ae0c35e20516ceb60e428fcb6"
+    }
+  ],
+  "runtime_hashes_unchanged": true,
+  "compiler": {
+    "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe",
+    "sha256": "b0a1818ebae6da7f18230a84e76ce839212584ac4c2ab55b97a0d5268085da57"
+  },
+  "MSVC_storage_bigobj_verified_in_ninja_commands": true,
+  "previous_attempts": [
+    {
+      "attempt": "windows-bootstrap-a3",
+      "terminal": {
+        "scientific_worker_admitted": false,
+        "scientific_experiments_executed": false,
+        "build_passed": false,
+        "scientific_verdict": null,
+        "whole_plan_complete": false,
+        "configured": true
+      }
+    },
+    {
+      "attempt": "windows-bootstrap-a4",
+      "terminal": {
+        "scientific_worker_admitted": false,
+        "scientific_experiments_executed": false,
+        "build_passed": false,
+        "scientific_verdict": null,
+        "whole_plan_complete": false,
+        "configured": true
+      }
+    },
+    {
+      "attempt": "windows-bootstrap-a5",
+      "terminal": {
+        "scientific_worker_admitted": false,
+        "scientific_experiments_executed": false,
+        "build_passed": false,
+        "scientific_verdict": null,
+        "whole_plan_complete": false,
+        "configured": true
+      }
+    },
+    {
+      "attempt": "windows-bootstrap-a6",
+      "terminal": {
+        "scientific_worker_admitted": false,
+        "scientific_experiments_executed": false,
+        "build_passed": true,
+        "scientific_verdict": null,
+        "whole_plan_complete": false,
+        "configured": true
+      }
+    },
+    {
+      "attempt": "windows-bootstrap-a5-transport-a1",
+      "terminal": {
+        "pid": 4028,
+        "native_build_restarted": false,
+        "source_revision": "00eeba76384b4eabc410a38c670578235c77c31a",
+        "reason": "stdin loader waiting before file materialization; replace EOF-dependent read with bounded payload",
+        "worker_started": false,
+        "start_unix_ms": 1794068325469,
+        "worker_script_materialized": false,
+        "child_count": 0
+      }
+    },
+    {
+      "attempt": "windows-native-bootstrap-a1",
+      "terminal": {
+        "scientific_worker_admitted": false,
+        "scientific_experiments_executed": false,
+        "native_bootstrap_passed": true,
+        "scientific_verdict": null,
+        "whole_plan_complete": false,
+        "actual_loaded_dll_capture": false
+      }
+    }
+  ],
+  "actual_loaded_dll_capture": false,
+  "os_memory_quota_enforced": false,
+  "scientific_worker_admitted": false,
+  "classification_experiments_executed": false,
+  "whole_plan_complete": false
+}

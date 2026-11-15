@@ -1,0 +1,170 @@
+{
+    "base_schema_version": 1,
+    "composite_measurement": {
+        "attempt_limits": {
+            "maximum_groups": 64,
+            "maximum_native_probes": 256,
+            "maximum_total_samples": 138240
+        },
+        "candidate_window_policy": {
+            "coordinate_mode": "relative_native_frame_interval",
+            "inputs": [
+                {
+                    "base_left_guard_frames": 20,
+                    "base_right_guard_frames": 20,
+                    "capacitance_change_guard_frames": 0,
+                    "delay_frames_per_segment": 20,
+                    "hard_first_frame": 1,
+                    "hard_last_frame": 539,
+                    "length_guard_frames": 0,
+                    "maximum_window_frames": 100,
+                    "resistance_change_guard_frames": 0,
+                    "synapse_count_guard_frames": 0
+                },
+                {
+                    "base_left_guard_frames": 20,
+                    "base_right_guard_frames": 20,
+                    "capacitance_change_guard_frames": 0,
+                    "delay_frames_per_segment": 20,
+                    "hard_first_frame": 1,
+                    "hard_last_frame": 539,
+                    "length_guard_frames": 0,
+                    "maximum_window_frames": 100,
+                    "resistance_change_guard_frames": 0,
+                    "synapse_count_guard_frames": 0
+                }
+            ],
+            "maximum_feature_terms": 4096,
+            "policy_id": "reference-anchored-candidate-window-v1",
+            "proposals_per_logical_request": 1,
+            "schema_version": 1,
+            "seed_rule": "immutable_reference_full_before"
+        },
+        "context_policy": {
+            "baseline_absolute": 1e-12,
+            "comparison_radius_ticks": 1,
+            "influence_absolute": 1e-06,
+            "influence_relative": 0,
+            "maximum_native_probes": 4,
+            "maximum_samples": 540,
+            "maximum_total_samples": 2160,
+            "repeatability_absolute": 1e-10,
+            "repeatability_relative": 0,
+            "schema_version": 1,
+            "time_comparison_tolerance": 1e-10
+        },
+        "geometry_policy": {
+            "maximum_inputs": 2,
+            "maximum_samples": 540,
+            "maximum_total_samples": 2160,
+            "repeatability_absolute": 1e-10,
+            "schema_version": 1
+        },
+        "maximum_group_model_seconds": 2,
+        "maximum_group_wall_seconds": 300,
+        "maximum_total_primary_bytes": 67108864,
+        "method_id": "declared-window-basin-necessity-v1",
+        "schema_version": 2
+    },
+    "duration": 0.16999999999999998,
+    "kind": "timelearner_native_cold_configuration",
+    "maximum_invalid_reference_probes": 0,
+    "maximum_model_seconds": 120,
+    "maximum_reference_probes": 4,
+    "maximum_sample_gap": 5e-04,
+    "maximum_samples": 540,
+    "maximum_wall_seconds": 1800,
+    "minimum_amplitude": 1e-06,
+    "model": {
+        "allocated_cable_lengths": [
+        ],
+        "allow_muted_input_baseline": false,
+        "branch": false,
+        "configured_minimum_resistance": 0,
+        "dataset_class": "NDatasetMatrix",
+        "frequency_hz": 2000,
+        "generator_class": "NPulseGeneratorTransit",
+        "inhibition": [
+        ],
+        "initial_isi": [
+            0.01,
+            0.08
+        ],
+        "inputs": [
+            {
+                "attachment": 2,
+                "resistance": null,
+                "synapses": 1
+            },
+            {
+                "attachment": 1,
+                "resistance": null,
+                "synapses": 1
+            }
+        ],
+        "maximum_cable_length": 8,
+        "maximum_resistance_ratio": 1000,
+        "neuron_class": "NativeCandidateWindowRecovery_ClassicVersionedWireRoundtripDoesNotEnableService_Neuron",
+        "neuron_structure_mode": 2,
+        "normalization": "N0",
+        "preserve_allocated_cable": false,
+        "scale_inhibition_with_input": true,
+        "schema_version": 1
+    },
+    "peak_selection": "isolated_window",
+    "protocol_revision": "native-declared-basin-train-fixture-v1",
+    "record_spikes": false,
+    "run_id": "cold6-native-service",
+    "sample_id": "sample0",
+    "schema_version": 7,
+    "search": {
+        "bounds": [
+            {
+                "maximum_length": 2,
+                "maximum_resistance": 86000000,
+                "maximum_synapses": 1,
+                "minimum_length": 2,
+                "minimum_resistance": 86000000,
+                "minimum_synapses": 1
+            },
+            {
+                "maximum_length": 1,
+                "maximum_resistance": 86000000,
+                "maximum_synapses": 1,
+                "minimum_length": 1,
+                "minimum_resistance": 86000000,
+                "minimum_synapses": 1
+            }
+        ],
+        "maximum_candidates_per_input": 1,
+        "maximum_edits": 4,
+        "maximum_invalid_observations": 0,
+        "maximum_probes": 32,
+        "maximum_sweeps": 1,
+        "resistance_subdivision_depth": 4,
+        "tolerances": {
+            "amplitude_absolute": 1e-05,
+            "amplitude_relative": 0,
+            "sync": 0.2
+        }
+    },
+    "stimulus_profile": {
+        "amplitude": 1,
+        "frequency_deviation": 0,
+        "frequency_hz": 2000,
+        "generator_class": "NPulseGeneratorTransit",
+        "pulse_length": 0.001,
+        "use_pattern_output": false,
+        "use_transit_signal": false
+    },
+    "windows": [
+        {
+            "begin": 0.009,
+            "end": 0.035
+        },
+        {
+            "begin": 0.089,
+            "end": 0.15
+        }
+    ]
+}

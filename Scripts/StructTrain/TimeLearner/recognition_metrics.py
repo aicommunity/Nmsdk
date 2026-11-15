@@ -17,6 +17,18 @@ TRIAL_FIELDS = {"trial_id", "sample_id", "label", "pattern_hash", "reset_policy"
 CRITERION_FIELDS = {"id", "anchor", "begin_offset", "end_offset", "reject_target_outside_window"}
 
 
+def validate_response_criterion(criterion):
+    """Shared declaration checks; actual window placement needs observations."""
+    require(type(criterion) is dict and set(criterion) == CRITERION_FIELDS and
+            criterion["id"] == "post_anchor_target_whole_window_foil_v1" and
+            criterion["anchor"] in ("onset", "last_stimulus") and
+            type(criterion["reject_target_outside_window"]) is bool, "unknown_response_criterion")
+    start = number(criterion["begin_offset"])
+    stop = None if criterion["end_offset"] is None else number(criterion["end_offset"])
+    require(start >= 0 and (stop is None or stop >= start), "invalid_response_window")
+    return start, stop
+
+
 def _counts(rows):
     counts = {key: sum(row["classification"] == key for row in rows) for key in ("TP", "FP", "FN", "TN")}
     targets, foils = counts["TP"]+counts["FN"], counts["FP"]+counts["TN"]
@@ -31,6 +43,7 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
     try:
         require(type(package) is dict, "unsupported_evaluation_model_package")
         candidate = package.get("kind") == "timelearner_recognition_threshold_candidate"
+        diagnostic_candidate = diagnostic and package.get("kind") == "timelearner_diagnostic_threshold_candidate"
         calibrated = package.get("kind") == "timelearner_calibrated_recognition_state"
         require(candidate is calibration_probe, "threshold_candidates_require_explicit_calibration_scoring")
         calibrated_audit = None
@@ -38,7 +51,7 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
             from .calibrated_evidence import audit_calibrated_state
             calibrated_audit = audit_calibrated_state(package)
         physical_package = package["source_candidate"] if calibrated else package
-        context = physical_package["source_recognition"] if candidate or calibrated else package
+        context = physical_package["source_recognition"] if candidate or calibrated or diagnostic_candidate else package
         require(set(spec) == SPEC_FIELDS | ({"diagnostic_only", "source_stopped_sha256", "training_outcome"} if diagnostic else set())
                 and spec["kind"] == ("timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec")
                 and type(spec["schema_version"]) is int and spec["schema_version"] == 1, "unknown_evaluation_spec")
@@ -61,13 +74,7 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
                 and source["dynamic_checkpoint"] is False and type(source["certificate"]) is dict
                 and source["training_outcome"] in ("exact", "search_unresolved"), "unsupported_evaluation_source_state")
         criterion = spec["criterion"]
-        require(type(criterion) is dict and set(criterion) == CRITERION_FIELDS and
-                criterion["id"] == "post_anchor_target_whole_window_foil_v1" and
-                criterion["anchor"] in ("onset", "last_stimulus") and
-                type(criterion["reject_target_outside_window"]) is bool, "unknown_response_criterion")
-        start = number(criterion["begin_offset"])
-        stop = None if criterion["end_offset"] is None else number(criterion["end_offset"])
-        require(start >= 0 and (stop is None or stop >= start), "invalid_response_window")
+        start, stop = validate_response_criterion(criterion)
         require(type(spec["trials"]) is list and len(spec["trials"]) >= 2, "incomplete_evaluation_design")
         expected, positions, samples = {}, set(), {}
         target_hash = canonical_model_sha256(source["configuration"]["model"]["initial_isi"])
@@ -109,9 +116,9 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
         require((diagnostic and partial_diagnostic) or set(actual) == set(expected), "missing_evaluation_trial")
         invalid = sorted((set(expected)-set(actual)) | {key for key, audit in audits.items() if not audit["valid_observation"]})
         calibration = package["neuron"]["metadata"]["calibration"]
-        if candidate:
-            from .threshold_candidate_evidence import audit_threshold_candidate
-            audit_threshold_candidate(package)
+        if candidate or diagnostic_candidate:
+            from .threshold_candidate_evidence import audit_threshold_candidate, audit_diagnostic_threshold_candidate
+            (audit_diagnostic_threshold_candidate if diagnostic_candidate else audit_threshold_candidate)(package)
         elif not calibrated:
             require(calibration["status"] == "fixed" and calibration["protocol"] == "fixed-inherited-from-solo"
                     and calibration["source_solo_sha256"] == source["sha256"], "unsupported_evaluation_calibration_claim")
@@ -131,6 +138,8 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
             result["calibration_probe"] = True
         if diagnostic:
             result.update(diagnostic_only=True, training_completed=False, training_certificate_present=False)
+            if diagnostic_candidate:
+                result.update(diagnostic_threshold_experiment=True, calibration_performed=False)
         if calibrated:
             result.update(calibration_evidence_checked=calibrated_audit["calibration_evidence_consistent"],
                           calibration_proof_sha256=package["calibration_proof"]["sha256"],

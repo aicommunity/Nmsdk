@@ -1,0 +1,121 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "f214a93c4e3bbc03890af6d9104c54b825fdf77a849e9a09f987f8b3c703d1b5",
+      "unit": "timelearner-7e9369f5-c2d3-4108-a337-6cd3e29b0714.service",
+      "invocation_id": "468f6851199f4b3888f0f1d01e06874f",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7e9369f5-c2d3-4108-a337-6cd3e29b0714.service",
+      "initial_main_pid": 1808976,
+      "initial_start_ticks": "366698668",
+      "sha256": "90fc1922cbb5e21b7fd7ecffa69d7a726d45ed618794acafcb1673f38cf783cd"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-7e9369f5-c2d3-4108-a337-6cd3e29b0714.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "00e039d2-fdbb-4f5d-9a56-a9f4268b8c3f",
+      "job_id": "s07-n1-coupled-sdk-canonical-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 1808976,
+        "start_ticks": "366698668",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-canonical-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-canonical-m40-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-prepared-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-prepared-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/n1-coupled-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledSdkA1-20261113",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/n1-coupled-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledSdkA1-20261113"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-local-turn-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-local-turn-sdk-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-bounded-science-taskfix-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-bounded-science-taskfix-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794591789.2771122,
+      "deadline": 1794591979.3541598,
+      "updated": 1794591861.266627,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

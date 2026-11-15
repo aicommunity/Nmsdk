@@ -1,0 +1,42 @@
+{
+  "bundles": [
+    {
+      "attempt": "s07-high-threshold-classic-normal-a1",
+      "members": 633,
+      "archive_bytes": 6265296,
+      "archive_sha256": "68ed19d2cc07afbd72336a25fc442bcdd31887dbec55ade32999101b74a4b872"
+    }
+  ],
+  "terminal": {
+    "high_threshold_combined_diagnostic_complete": true,
+    "new_native_probes_expected": 2,
+    "reused_native_probes": 2,
+    "source_threshold_selected": 100.0,
+    "native_rebuilt": false,
+    "threshold_changed": false,
+    "new_training_started": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "combined_case_count": 2,
+  "new_native_probes_completed": 2,
+  "native_probes_reused": 2,
+  "original_Branch_primary_commit": "2ba950373a79e896d3f7817d3cbdbeb1bad192ee",
+  "reused_native_bindings_verified": 2088,
+  "source_threshold": 100.0,
+  "analyzer_extraction_AB": [
+    {
+      "name": "Branch-threshold-low-retry32",
+      "all_summary_fields_equal_to_published_low_result": true
+    },
+    {
+      "name": "Classic-threshold-low-retry32",
+      "all_summary_fields_equal_to_published_low_result": true
+    }
+  ],
+  "runtime_unchanged": true,
+  "classification_evaluated": false,
+  "ASan_verified": false,
+  "second_host_verified": false,
+  "scientific_verdict": null
+}

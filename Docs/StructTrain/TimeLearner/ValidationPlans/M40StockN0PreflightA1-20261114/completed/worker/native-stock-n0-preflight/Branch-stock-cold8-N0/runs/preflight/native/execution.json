@@ -1,0 +1,79 @@
+{
+    "artifacts": [
+        {
+            "bytes": 9363,
+            "path": "job.json",
+            "sha256": "5b767972dffb316c6d45fb26383b08be4b18c6b1e0549cad3ba4e2e4ac963e73"
+        },
+        {
+            "bytes": 72380,
+            "path": "initial-state.json",
+            "sha256": "4f7bd99b0b1046d493a4ee536285ab5ab365db3b12be9a6680b7557cd099777f"
+        }
+    ],
+    "base_schema_version": 1,
+    "composite_counters": {
+        "archive": {
+            "groups": 0,
+            "native_probes": 0,
+            "primary_bytes": 0,
+            "sampled_frames": 0
+        },
+        "attempt": {
+            "logical_groups": 0,
+            "native_probes": 0,
+            "sampled_frames": 0
+        },
+        "execution": {
+            "native_trials": 0,
+            "sampled_frames": 0
+        }
+    },
+    "controller_state": "idle",
+    "evaluation_verdict": null,
+    "execution": "completed",
+    "frequency_hz": 2000,
+    "integration": {
+        "channels": [
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Dendrite1_1.ExcChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Dendrite1_1.InhChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Soma1.ExcChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Soma1.InhChannel"
+            }
+        ],
+        "reason": "",
+        "valid": true
+    },
+    "job_sha256": "82aa786e6b56ce6de3419d35156dfe6184f83411a53cfa40b5fd2b545d9adab9",
+    "kind": "timelearner_native_preflight_execution",
+    "measurement_archive": null,
+    "measurement_method": "declared-window-basin-necessity-v1",
+    "model_revision": "5a916bc7c77f2176c065d57e3d68dd0783902b40418eec42cf089eb10b36abf5",
+    "model_semantic_hash": "5a916bc7c77f2176c065d57e3d68dd0783902b40418eec42cf089eb10b36abf5",
+    "model_ticks": 0,
+    "model_time_begin": 0,
+    "model_time_end": 0,
+    "observed_probes": 0,
+    "recovery_delivery_count": null,
+    "recovery_ledger_sha256": null,
+    "reference_probes": 0,
+    "schema_version": 5,
+    "sha256": "d5efd431882c781b56090fa9317924508b514e2df2fc8558aa94d5b777a601c3",
+    "source_origin": null,
+    "training_started": false
+}

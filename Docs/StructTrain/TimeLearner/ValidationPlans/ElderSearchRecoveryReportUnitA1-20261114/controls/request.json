@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-search-recovery-report-unit-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "6734dec146063f5f2553fd44871e4256470f0a4b",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 300
+  },
+  "disk": {
+    "minimum_free_bytes": 1073741824,
+    "maximum_output_bytes": 67108864
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-search-recovery-report-a1",
+      "commit": "6734dec146063f5f2553fd44871e4256470f0a4b"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/search-recovery-report-unit-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderSearchRecoveryReportUnitA1-20261114/suite.json",
+      "sha256": "85d7c107098edd068fbfd7ece1b139907b4017d12df785c2daf650225b86d2e3"
+    },
+    "fixtures": {},
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 1048576,
+      "maximum_total_bytes": 1048576
+    }
+  }
+}

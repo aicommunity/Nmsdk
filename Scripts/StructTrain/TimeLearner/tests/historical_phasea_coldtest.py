@@ -12,82 +12,8 @@ from ..model_identity import canonical_model_sha256
 from ..native_evidence import load, require
 from ..process_runner import execute, verify_runtime
 from ..runtime import source_closure
-from .historical_phasea_replay import (ROOT, BIN, PULSE, CASES, prepare_case,
-                                       add_native_temporal_observer, write)
-
-
-def neuron_destination(connector):
-    name = (connector.text or "").strip()
-    return name == "NeuronTimeLearner.Neuron" or name.startswith("NeuronTimeLearner.Neuron.")
-
-
-def transfer_model(work, cold_model, threshold):
-    """Import the entire fresh learner graph; replace only declared probe data."""
-    source = ET.parse(cold_model).getroot().find("./Model")
-    tree = ET.parse(work/"Model_00.xml");model = tree.getroot().find("./Model")
-    components = model.find("./Components")
-    old = components.find("./NeuronTimeLearner")
-    fresh = copy.deepcopy(source.find("./Components/NeuronTimeLearner"))
-    require(fresh is not None and old is not None, "historical_transfer_learner_missing")
-    require(fresh.find("./Parameters/IsNeedToTrain").text.strip() == "0", "historical_train_not_done")
-    dataset = old.find("./Components/DatasetMatrix")
-    children = fresh.find("./Components");previous = children.find("./DatasetMatrix")
-    require(dataset is not None and previous is not None, "historical_probe_dataset_missing")
-    position = list(children).index(previous);children.remove(previous)
-    children.insert(position, copy.deepcopy(dataset))
-    params = fresh.find("./Parameters")
-    # Preserve the original historical load protocol: Model mode1 initializes
-    # dimensioned learner caches, followed by Parameters mode0. Mode0 in both
-    # files leaves the old learner's default two-row amplitude buffer for N4.
-    model_mode = old.find("./Parameters/StructureBuildMode").text.strip()
-    require(model_mode == "1", "historical_model_load_mode_changed")
-    for key, value in {"StructureBuildMode": model_mode, "IsNeedToTrain": "0",
-                       "LTZThreshold": str(threshold), "FixedLTZThreshold": str(threshold),
-                       "UseFixedLTZThreshold": "0"}.items():
-        matches = params.findall("./"+key)
-        require(len(matches) == 1, "historical_frozen_parameter_ambiguous:"+key);matches[0].text = value
-    position = list(components).index(old);components.remove(old);components.insert(position, fresh)
-    links = model.find("./Links")
-    require(links is not None, "historical_transfer_links_missing")
-    # Preserve native monitoring links, replacing every neuron inbound edge with
-    # the fresh trained export. There is no fallback to the template's graph.
-    for link in list(links):
-        for connector in list(link.findall("./Connector")):
-            if neuron_destination(connector):link.remove(connector)
-        if not link.findall("./Connector"):links.remove(link)
-    for link in source.findall("./Links/*"):
-        copied = copy.deepcopy(link)
-        for connector in list(copied.findall("./Connector")):
-            if not neuron_destination(connector):copied.remove(connector)
-        if copied.findall("./Connector"):links.append(copied)
-    links.set("Size", str(len(links)));tree.write(work/"Model_00.xml", encoding="utf-8")
-    return fresh
-
-
-def parameter_export(work):
-    # Native parameter files contain the complete fresh component parameter tree,
-    # not a template overlay with stale child Rs, C, morphology or dataset rows.
-    root = ET.parse(work/"Parameters_00.xml").getroot()
-    old = root.find("./Model");require(old is not None, "historical_parameters_root_missing")
-    mode = old.find("./Components/NeuronTimeLearner/Parameters/StructureBuildMode")
-    require(mode is not None and mode.text.strip() == "0", "historical_parameter_load_mode_changed")
-    root.remove(old)
-    model = copy.deepcopy(ET.parse(work/"Model_00.xml").getroot().find("./Model"))
-    for node in model.iter():
-        for child in list(node):
-            if child.tag == "Links":node.remove(child)
-    model.find("./Components/NeuronTimeLearner/Parameters/StructureBuildMode").text = "0"
-    root.append(model);ET.ElementTree(root).write(work/"Parameters_00.xml", encoding="utf-8")
-
-
-def recognition_identity(solo, threshold):
-    snapshot = copy.deepcopy(solo["snapshot"])
-    nodes = [n for n in snapshot["nodes_in_native_order"] if n["path"] == "NeuronTimeLearner.Neuron.LTZone"]
-    require(len(nodes) == 1, "historical_ltz_node_ambiguous")
-    props = [p for p in nodes[0]["parameters"] if p["tag"] == "Threshold"]
-    require(len(props) == 1 and props[0]["value"]["kind"] == "binary64", "historical_ltz_threshold_unsupported")
-    props[0]["value"]["values"] = [float(threshold).hex()]
-    return canonical_model_sha256(snapshot)
+from ..historical_phasea_native import (ROOT, BIN, PULSE, CASES, prepare_case,
+    add_native_temporal_observer, write, transfer_model, parameter_export, recognition_identity)
 
 
 def main():

@@ -1,0 +1,25 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "m40-compact-bundle-report3-a2",
+  "package_fingerprint": "21bd06f31689e6f5a4393417d56d709935993d9630ef177e49e1309bee3c4eaf",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportBoundsTest.test_report_cannot_replace_bundle_or_restore_tree",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportBoundsTest.test_backend_failure_precedes_archive_restore",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportActualTest.test_published_bundle_renders_all_forty_trial_soma_pairs"
+  ],
+  "executed_tests": 3,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_RECORDED_MATRIX_BUNDLE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-primary-a1/Reports/StructTrain/TimeLearner/RecordedN4DiagnosticPrimary-M40-20261112",
+      "files": 6,
+      "fingerprint": "730cabfee0a332c2fd58dd6077d9f4281c9cf3100e7524d2c3c00aa30dfd0fac"
+    }
+  },
+  "scientific_verdict": null
+}

@@ -1,0 +1,111 @@
+{
+  "kind": "collector_provenance_metadata39_passed_gate",
+  "schema_version": 1,
+  "tool_root": "dfd534da637e411bcce5eff8acc37f821069d9bf",
+  "expected_tests": 39,
+  "observed_tests": 39,
+  "passed_tests": 39,
+  "error_tests": 0,
+  "failures": [],
+  "original_terminal": {
+    "collector_metadata_gate_passed": true,
+    "expected_python_cases": 39,
+    "actual_python_cases": 39,
+    "heartbeat_errors": [],
+    "CPP_compile_or_run": false,
+    "SDK_source_build_runtime_read_or_write": false,
+    "new_model_runs": 0,
+    "kernel_closure_attested_by_worker": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "source_root": "dfd534da637e411bcce5eff8acc37f821069d9bf",
+    "lease_release_policy": "Supervisor only after exact outer kernel group is closed"
+  },
+  "kernel_and_lease": {
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "8dcb866d0123663d87e0b9513f47a935504bfde9d3ec22b49e10cf049a6431f2",
+        "unit": "timelearner-e7919177-94ca-40e9-82e0-64ecf04cec5b.service",
+        "invocation_id": "42f8256e75db44a4bf4b4f9e71e01b06",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e7919177-94ca-40e9-82e0-64ecf04cec5b.service",
+        "initial_main_pid": 3249446,
+        "initial_start_ticks": "322563362",
+        "sha256": "7d8e92f1afe677177044c131b095e07dd2156a422401ebc1ce0abec8e707c6aa"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-e7919177-94ca-40e9-82e0-64ecf04cec5b.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "lease": {
+      "token": "2e115e1f-9f9b-49d5-9ecf-760db476a4e0",
+      "job_id": "s10-collector-provenance-m40-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3249446,
+        "start_ticks": "322563362",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collector-provenance-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collector-provenance-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-collector-provenance-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-collector-provenance-m40-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1794150436.1092064,
+      "deadline": 1794150556.1092064,
+      "updated": 1794150438.1332145,
+      "release_note": "Exact metadata worker kernel group closed; all Git/unittest child processes belonged to this group. No SDK/model job was started.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  },
+  "guard": {
+    "guard_triggered": false,
+    "original_reason": null,
+    "peak_owned_allocated_bytes": 32972800,
+    "minimum_free_bytes": 341697699840,
+    "outer_closed": true
+  },
+  "source_files_Git_verified": 609,
+  "actual_python_loaded_files_verified": 19,
+  "actual_supervisor_log_bound_by_maintained_helper": true,
+  "helper_used_only_after_independent_39_test_pass_and_external_closure": true,
+  "helper_used_as_own_test_success_authority": false,
+  "frozen_staged_inputs_used_for_bundle": true,
+  "prior_metadata38_negative_evidence": "0c2f50da9641f6dc9d31867a617eb5766ff5996d",
+  "SDK_source_build_runtime_read_or_written": false,
+  "CPP_or_models_run": false,
+  "scientific_verdict": null,
+  "created_utc": "2026-11-08T15:08:48.520624+00:00"
+}

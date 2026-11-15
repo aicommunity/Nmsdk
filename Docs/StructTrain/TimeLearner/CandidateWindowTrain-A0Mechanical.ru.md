@@ -1,0 +1,9 @@
+# STEP3-A0: общий numeric preflight
+
+Статус: отдельный mechanical source pin, без compile/numeric/runtime acceptance. После source-reviewed `9f69883`/`feb3b18` budget fix, включённого merge --no-ff, выделены два private helpers `BoundedTrainingDetail::ValidateInputShape` и `ValidateInputRanges`. Объявления — `Core/TimeLearner/BoundedTrainingValidation.h`, определения остаются в существующем `BoundedTraining.cpp`. Нового .cpp или Qt/Rdk/CMake dependency нет.
+
+Первый helper проверяет прежние counts/config/dimensions, второй — ровно прежние tolerances/per-input bounds. Protocol admission остаётся у прежнего public validator: ProtocolValid, explicit5 refusal, invalid-recovery validation, shape + legacy3/4 check, ranges, composite recovery, C-policy, actual-parameter legality. Условие legacy3/4 извлечено из OR-expression с ТЕМ ЖЕ `invalid_bounded_training_configuration`; остальные члены — pure field comparisons/container sizes без side effects. Нового допуска5 или public authority из успеха numeric preflight нет.
+
+Текстовая проверка отдельно сверила body ranges на точное равенство, shape — на единственное удаление protocol schema predicate/замену repeated input count аргументом, и реконструированный прежний public body — на точное равенство исходнику `feb3b18`. Это source-level check, не численная эквивалентность исполнения. Residual math, ranking, candidate order, integer/log search, default tolerances, old failures и raw/typed5 блокировки не менялись.
+
+`CandidateWindowTrainA0GateInventory.json` сохраняет literal old97 IDs из Root `d92022a41d6f448852d2ecfc6f87ca5a719843bc`: Bounded74, Final23. Macro body `TrainingInvalidBudget.name` исключён, четыре реальные macro expansions включены. Оба maintained test blobs совпадают с baseline Git bytes. Remote gate должен crosscheck actual compiled list и отдельно проверить old3/4 behavior; source metadata не считается PASS. Frozen STEP2/callback snapshots и active caches не меняются.

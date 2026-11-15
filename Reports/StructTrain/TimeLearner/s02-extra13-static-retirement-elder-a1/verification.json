@@ -1,0 +1,160 @@
+{
+  "kind": "closed_owned_python_job_observation",
+  "schema_version": 1,
+  "job_id": "s02-extra13-static-retirement-elder-a1",
+  "tool_root": "edaaa836e27b0ecef1c2f9203fb04ee82d62bd93",
+  "operation": "duplicate-static-archives",
+  "operation_passed": true,
+  "original_terminal": {
+    "operation_passed": true,
+    "operation": "duplicate-static-archives",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "original_controller_result": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 12.981783860828727,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "790b7fea3d33dfb91d93266cc969230c41ef964b40f61569eff926d18f7323c6",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2,
+      "reasons": [],
+      "examples": [
+        {
+          "stream": "stderr.log",
+          "chunk": 1,
+          "severity": "unclassified",
+          "excerpt": "warning: lazy fetching disabled; some objects may not be available"
+        },
+        {
+          "stream": "stderr.log",
+          "chunk": 2,
+          "severity": "unclassified",
+          "excerpt": "warning: lazy fetching disabled; some objects may not be available"
+        }
+      ],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 134,
+          "sha256": "68be4927aa8241991f56007e23f06f95714f2d962211a726d8b737c0ec22efe0"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "expected_tests": 0,
+  "executed_tests": 0,
+  "validation_result": null,
+  "kernel_and_reservation": {
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "ad1bf0fb05889703d97beb5194e2a3387975f4b9996d94c7e03b57e4aa32c6e5",
+        "unit": "timelearner-bfafc3f3-3296-4153-8e6a-8c835b60fa55.service",
+        "invocation_id": "dffe4a055c664c10971190238a825bc8",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bfafc3f3-3296-4153-8e6a-8c835b60fa55.service",
+        "initial_main_pid": 2367181,
+        "initial_start_ticks": "372997746",
+        "sha256": "a7faf45f5667d678d7c5385e4d0c726ff323622ac11b15f6f573809ebca604f8"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "38260",
+        "KillMode": "control-group",
+        "Description": "timelearner-bfafc3f3-3296-4153-8e6a-8c835b60fa55.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "leases": [
+      {
+        "token": "9c116d40-5da5-4d56-ae89-1121d6390be5",
+        "job_id": "s02-extra13-static-retirement-elder-a1",
+        "owner": {
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "executable": "/usr/bin/python3.10",
+          "pid": 2367181,
+          "start_ticks": "372997746",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/home/user/timelearner-refactor",
+            "requested_path": "/home/user/timelearner-refactor"
+          }
+        ],
+        "state": "released",
+        "created": 1794160207.8350556,
+        "deadline": 1794160337.842704,
+        "updated": 1794160220.5997646,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "demands": {
+          "disk_bytes": 67108864,
+          "memory_bytes": 268435456,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      }
+    ]
+  },
+  "source_capture_phase": "postclosure",
+  "source_pre_after_comparisons_available": {
+    "worker/tool-source-before.json": true,
+    "worker/tool-source-after.json": true
+  },
+  "tool_materialized_Scripts_files_Git_verified": 179,
+  "guard": {
+    "guard_triggered": false,
+    "original_reason": null,
+    "peak_allocated_bytes": 1933312,
+    "minimum_free_bytes": 1813864448
+  },
+  "original_failure": null,
+  "SDK_or_CPP_or_models_run": false,
+  "scientific_verdict": null,
+  "collector_descriptor_is_not_kernel_or_test_success_authority": true,
+  "created_utc": "2026-11-08T17:52:59.490403+00:00"
+}

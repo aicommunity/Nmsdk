@@ -1,0 +1,89 @@
+{
+  "kind": "closed_native_acceptance_preservation_receipt",
+  "schema_version": 3,
+  "collection_status": "completed",
+  "original_outcome": {
+    "planned": 18,
+    "executed": 14,
+    "passed": 13,
+    "failed_ids": [
+      "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+    ],
+    "not_completed_ids": [
+      "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+      "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip",
+      "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+      "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+    ]
+  },
+  "manifest_sha256": "b3d736d3b2920765f2cf1a03de378699458b6282632034ac35bb4c4b1964febe",
+  "artifact_hashes": {
+    "packed/primary.tar.xz": "17ef5ba78b9777d99a8212fd8751ff1d1ab92c724c5aa4cec8fd83634e09b9af",
+    "packed/bundle.json": "186607ae6798308832b2178066ad60b59c02d0e723009adb8f64adb010e72e17",
+    "capture-proof.json": "5bca8854042673516e32263c859c2eb5259dcddea1d0fdf8f1d5a43ad6e12156"
+  },
+  "released_collection_lease": {
+    "token": "84c22435-d144-4ca3-a8a4-26900d698957",
+    "job_id": "s07-rest-observed18-m40-a1",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 3683222,
+      "start_ticks": "334835646",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-rest-observed-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/build-rest-observed-m40-a2"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-rest-observed18-m40-a1/Reports/StructTrain/TimeLearner/s07-rest-observed18-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-rest-observed18-m40-a1/Reports/StructTrain/TimeLearner/s07-rest-observed18-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-rest-observed18-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-rest-observed18-m40-a2"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-rest-observed18-m40-a2-controller",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-rest-observed18-m40-a2-controller"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/rest-observed18-collection-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/RestObserved18Collection-20261110",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/rest-observed18-collection-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/RestObserved18Collection-20261110"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-rest-observed18-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-rest-observed18-m40-a2"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native119-a2-preservation-m40-a3",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native119-a2-preservation-m40-a3"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-rest-observed-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-rest-observed-m40-a2"
+      }
+    ],
+    "state": "released",
+    "created": 1794273171.9337358,
+    "deadline": 1794273321.9895759,
+    "updated": 1794273205.9794147,
+    "release_note": "Closed native metadata preserved or collection failed; original outcome unchanged.",
+    "heartbeat_expired": false,
+    "owner_status": "identity_live",
+    "inspection_required": false,
+    "scientific_verdict": null
+  },
+  "collector_external_cgroup_attested": false,
+  "scientific_verdict": null
+}

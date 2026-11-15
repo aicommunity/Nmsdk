@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s03-branch-full-domain-report-m40-a3",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 3200
+  },
+  "disk": {
+    "minimum_free_bytes": 8589934592,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-branch-report-and-baseline-a3",
+      "commit": "03aa223834e024f6941bd4053cc0ee95f1352ad5"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/branch-full-domain-report-a3/Docs/StructTrain/TimeLearner/ValidationPlans/M40BranchFullDomainReportA3-20261113/suite.json",
+      "sha256": "860c42f7116cf60f1a9e476bf5aaa6253c768a7e24e5a19788c5aed4c594b78b"
+    },
+    "fixtures": {
+      "TIMELEARNER_BRANCH_TRAIN_RUN": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train",
+      "TIMELEARNER_BRANCH_TRAIN_CSV": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 2147483648
+    }
+  }
+}

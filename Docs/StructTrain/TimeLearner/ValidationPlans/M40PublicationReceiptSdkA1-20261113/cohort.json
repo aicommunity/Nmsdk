@@ -1,0 +1,50 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeRecoveryConsoleArtifact"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters",
+    "NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger",
+    "NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication"
+  ],
+  "runplan": [
+    {
+      "name": "publication-receipt-seven",
+      "expected_ids": [
+        "NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters",
+        "NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger",
+        "NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication"
+      ],
+      "wall_seconds": 900
+    }
+  ],
+  "partitions": [
+    {
+      "name": "publication-wrapper-and-negative-bindings",
+      "ids": [
+        "NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters",
+        "NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger",
+        "NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication"
+      ],
+      "count": 7
+    }
+  ]
+}

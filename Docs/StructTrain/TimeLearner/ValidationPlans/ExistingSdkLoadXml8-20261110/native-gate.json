@@ -1,0 +1,23 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 3,
+  "runtime_manifest": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-archive-contract17-m40-a1/actual-class-image-replay/runtime.json",
+  "source_root": "/media/user/Data/TimeLearnerRefactor/source-native-archive-contract-m40-a1",
+  "expected_test_ids": [
+    "TimeLearnerModelArchive/RejectsContradictoryNativeImageXmlWithExistingClass",
+    "TimeLearnerModelArchive/RejectsContradictoryDerivedImageXmlWithExistingClass",
+    "NativeLoadHistory/FreshAt2000",
+    "NativeLoadHistory/ConnectedChildAt2000",
+    "NativeLoadHistory/DetachedChildAt2000",
+    "NativeLoadHistory/FreshAt20000",
+    "NativeLoadHistory/ConnectedChildAt20000",
+    "NativeLoadHistory/DetachedChildAt20000"
+  ],
+  "maximum_wall_seconds": 1200,
+  "asan_options": "detect_leaks=0",
+  "cooperative_runtime_capture": false,
+  "process_limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 128
+  }
+}

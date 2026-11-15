@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-n0-geometry-after-train-m40-a2-primary",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "0286ddb07064d3446dd37ce8536937d89576f345",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "closed-primary-bundle",
+    "manifest": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-after-train-a2-primary/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryAfterTrainPrimaryA2-20261114/collection-manifest.json",
+      "sha256": "0339cf87ca6a6ff0c138121b2ceed665d1647b4d3597bbc8b7d0abd2c59afb9f"
+    }
+  }
+}

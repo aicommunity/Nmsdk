@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s11-stock-n0-preflight-m40-a1",
+  "package_fingerprint": "d0a3bac517ebc74e5068043b28f0f42c4f451ab7a463369f157c08427f68b211",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_normalization_study.StockNormalizationStudyTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_normalization_study.StockNormalizationStudyTest.test_declared_operation_preserves_cold_physics_and_honest_outcome"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_N0_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "a77a27c4240cae9b11c4e4796e5326b43b5eefbcc7aa478e0f0fbf79045f8e6a"
+    },
+    "TIMELEARNER_STOCK_N0_SOURCE": {
+      "pattern": "**/*.json",
+      "files": 10,
+      "fingerprint": "952daa7927273bc494dd8ababc0df750bbb153fc7141adfc98946694bdb24a22"
+    },
+    "TIMELEARNER_STOCK_N0_RUNTIME": {
+      "pattern": "NeuroModelerConsole",
+      "files": 1,
+      "fingerprint": "c219c7fe1f3cfb6b8794e1a758bea92e4382cdbb680f45a5a4b09fa321abd501"
+    }
+  }
+}

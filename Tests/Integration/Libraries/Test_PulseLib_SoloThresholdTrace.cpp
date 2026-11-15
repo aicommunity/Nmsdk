@@ -25,7 +25,7 @@ template<class Owner> void Measure(Scenario scenario)
     const auto solo=job["source_recognition"].toObject()["source_solo"].toObject();
     const auto implementation=job["implementation_id"].toString().toStdString();
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();core.environment->DestroyModel();
-    EXPECT_EQ(NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
+    const auto ownerResult=NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
         "SoloThresholdOwner",[&](auto,auto environment,auto model,auto owner) {
         model->Init();model->Reset();
         const auto installed=owner->ImportNativeLearnedState(solo,implementation);
@@ -173,7 +173,8 @@ template<class Owner> void Measure(Scenario scenario)
                 QJsonObject{{"source_trace_sha256",report["sha256"]},{"proposals",references}});
         }
         return ::testing::Test::HasFailure()?2:0;
-    }),0);
+    });
+    EXPECT_EQ(ownerResult,0);
 }
 }
 TEST(NativeSoloThresholdTrace,ClassicComplete){Measure<NNeuronTimeLearner>(Scenario::Complete);}

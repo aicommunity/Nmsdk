@@ -1,0 +1,27 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s11-stock-n0-declaration-unit-elder-a3",
+  "package_fingerprint": "d0a3bac517ebc74e5068043b28f0f42c4f451ab7a463369f157c08427f68b211",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_recovery_declaration.StockCandidateRecoveryDeclarationTest.test_corrupt_job_digest_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_recovery_declaration.StockCandidateRecoveryDeclarationTest.test_only_recovery_envelope_and_attempt_identity_change",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_recovery_declaration.StockCandidateRecoveryDeclarationTest.test_repeated_upgrade_is_not_silently_reinterpreted",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_recovery_declaration.StockCandidateRecoveryDeclarationTest.test_technical_N2_or_relaxed_tolerance_cannot_be_called_strict_N4",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_declaration.StockObservationDomainDeclarationTest.test_bad_reference_inventory_or_domain_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_declaration.StockObservationDomainDeclarationTest.test_full_domain_does_not_move_with_length_Ns_Rs_or_C_changes",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_declaration.StockObservationDomainDeclarationTest.test_preserves_physics_reference_windows_objective_and_search_budget",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_declaration.StockObservationDomainDeclarationTest.test_tampered_source_digest_cannot_be_rebound",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_normalization_declaration.StockNormalizationDeclarationTest.test_only_declared_actuator_bounds_mode_and_condition_labels_change",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_normalization_declaration.StockNormalizationDeclarationTest.test_rejects_repeated_conversion_stale_digest_nonfull_window_and_moving_anchor",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_normalization_declaration.StockNormalizationDeclarationTest.test_retains_heterogeneous_initial_resistances_without_global_intersection"
+  ],
+  "executed_tests": 11,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {},
+  "scientific_verdict": null
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-source-envelope-bundle-data-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "limits": {
+    "memory_bytes": 1073741824,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 1073741824
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-envelope-bundle-a1",
+      "commit": "5fda947e4d3bac6d4cebcc33a6e7a41aa372c5e3"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/source-envelope-bundle-data-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40SourceEnvelopeBundleA1-20261113/suite.json",
+      "sha256": "e7c5d11a9caaa92b512cca7e262337db24d32808a8cc8b09c337074ef3f30817"
+    },
+    "fixtures": {
+      "TIMELEARNER_SOURCE_ENVELOPE_RECORDED": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs",
+      "TIMELEARNER_SOURCE_ENVELOPE_RECORDED_CSV": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 67108864,
+      "maximum_total_bytes": 268435456
+    }
+  }
+}

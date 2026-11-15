@@ -1,0 +1,43 @@
+{
+  "kind": "independent_subset_temporal_metadata_verification",
+  "commit": "33873312e271bfcf83ed094b31e430ab51276381",
+  "archive_members": 25,
+  "archive_sha256": "a886c603e7ea05d1a838ce38bb1b76fa28067c624cd685ed87026cb0d5980138",
+  "all_archive_members_verified": true,
+  "cases": 6,
+  "figures": 12,
+  "cache_image_files": 24,
+  "selected": {
+    "01-Classic-overview.png": {
+      "bytes": 391405,
+      "sha256": "ef495f917e996505946780b9425621813e5bd13010d8c820c9634a09b0f78e7c",
+      "dimensions": [
+        2240,
+        2520
+      ]
+    },
+    "04-Branch-overview.png": {
+      "bytes": 160138,
+      "sha256": "38808c3f43cc9a016eb87ef60f336fd2bbd22d420ed794f7110a24b482cefe15",
+      "dimensions": [
+        2240,
+        1008
+      ]
+    }
+  },
+  "effective_source_threshold": 0.0117,
+  "source_conditions_explicit": true,
+  "input_primary_members_verified_by_server": 706,
+  "redundant_log_aliases_omitted_from_derived_cache": 6,
+  "source_primary_unchanged": true,
+  "source_hashes_matched_git": 400,
+  "closed_and_released": true,
+  "selected_visual_QA": {
+    "01-Classic-overview.png": "passed: four soma panels, actual input overlay, readable axes and base/measured revisions",
+    "04-Branch-overview.png": "passed: soma panel, actual input overlay and distinct base/measured solo revisions"
+  },
+  "new_native_simulations": false,
+  "whole_plan_complete": false,
+  "full_cache_visual_QA": "not claimed",
+  "base_and_effective_revision_fields_verified": true
+}

@@ -1,0 +1,34 @@
+from pathlib import Path
+import json,hashlib,subprocess
+base=Path('/media/user/Data/TimeLearnerRefactor');repo=base/'evidence-superposition-diagnostic-normal-a1'
+parent='cb0982122952ebd13c8a53089db418d4d1b339b9';prefix='Reports/StructTrain/TimeLearner/s07-superposition-diagnostic-m40-a1'
+def git(*args,data=None):return subprocess.check_output(['git','-C',str(repo),*args],input=data).decode().strip()
+assert git('rev-parse','refs/heads/evidence')==parent
+old=json.loads(git('show',parent+':'+prefix+'/selection.json'));selection=[];payloads={}
+case='Classic-threshold-training100-retry32-burst';cache=base/'ReportsCache/high-threshold-joint-normal-a1'/case
+checksums=json.loads((cache/'SHA256SUMS.json').read_text())
+for name in ['soma-004/overview.png','soma-004/measured-peak-00209-detail.png']:
+ data=(cache/name).read_bytes();digest=hashlib.sha256(data).hexdigest();assert checksums[name]==digest
+ published='Classic-Soma4-'+Path(name).name;payloads[prefix+'/'+published]=data
+ selection.append({'published_file':published,'source_cache_case':case,'source_cache_file':name,'sha256':digest,'bytes':len(data),'original_render_commit':'8bc32a401e5b330597ee4f0328b6683f69ad6a7a','new_rendering':False})
+payloads[prefix+'/selection.json']=(json.dumps({'figures':selection},indent=2)+'\n').encode()
+payloads[prefix+'/selection-correction.json']=(json.dumps({'previous_commit':parent,'previous_selection':old,'reason':'Visual inspection found that cache folder soma-003 is named Soma3, not zero-based Soma4. Select actual folder soma-004 for the Soma4 counterexample.','primary_numeric_analysis_changed':False,'new_native_calculations':0,'new_rendering':False},indent=2)+'\n').encode()
+payloads[prefix+'/selection-correction-source.txt']=PUBLISHER_SOURCE.encode()
+def tree(base_tree,changes):
+ entries={}
+ if base_tree:
+  for item in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',base_tree]).split(b'\0'):
+   if item:
+    header,name=item.split(b'\t',1);mode,kind,sha=header.decode().split();entries[name.decode()]=(mode,kind,sha)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=('100644','blob',git('hash-object','-w','--stdin',data=value))
+ for name,sub in groups.items():
+  previous=entries.get(name);entries[name]=('040000','tree',tree(previous[2] if previous else None,sub))
+ raw=b''.join((mode+' '+kind+' '+sha+'\t'+name).encode()+b'\0' for name,(mode,kind,sha) in sorted(entries.items()))
+ return git('mktree','-z','--missing',data=raw)
+commit=git('-c','user.name=Codex','-c','user.email=codex@openai.com','commit-tree',tree(git('rev-parse',parent+'^{tree}'),payloads),'-p',parent,data=b'Correct Soma4 figure selection after individual visual inspection\n')
+git('update-ref','refs/heads/evidence',commit,parent)
+print(json.dumps({'evidence_commit':commit,'parent':parent,'repository':str(repo),'figures':selection,'primary_numeric_analysis_changed':False}))

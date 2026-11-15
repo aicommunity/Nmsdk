@@ -1,0 +1,113 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "ec179a67-755a-4eba-bc66-8c152d1fec02",
+  "job_id": "s07-attempt-invalid-budget-baseline-normal-a1",
+  "recorded_unix": 1793962990.062268,
+  "administrator": {
+    "pid": 923491,
+    "start_ticks": "303693092",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 923510,
+    "start_ticks": "303693105",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-baseline-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "e6ec642c76f16b8621697a133d8d635b96d824f3e98965e3e65c5a8b2cae06de",
+      "unit": "timelearner-5bacc6aa-3843-4c3b-8797-da8459a97d55.service",
+      "invocation_id": "22cbda25a66c4002b18afc6f5efe13ca",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5bacc6aa-3843-4c3b-8797-da8459a97d55.service",
+      "initial_main_pid": 923510,
+      "initial_start_ticks": "303693105",
+      "sha256": "2a686c8b576a1ffab5f41f659a5926345d4c2bc8d01ec9d3b24efbb5f94bd099"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-5bacc6aa-3843-4c3b-8797-da8459a97d55.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Original-controller baseline worker and all compiler/test/archive descendants freshly closed; result must be read from original native JUnit and baseline verdict.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-attempt-invalid-budget-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-attempt-invalid-budget-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-baseline-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-attempt-invalid-budget-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-attempt-invalid-budget-baseline-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-acceptance-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-acceptance-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

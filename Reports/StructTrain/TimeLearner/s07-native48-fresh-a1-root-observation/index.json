@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native48_fresh_a1_negative_root_observation",
+  "schema_version": 1,
+  "source_root": "956443560ebdb788a0642856381c9c6a7a554b76",
+  "source_pulse": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+  "built": true,
+  "expected_cpp": 48,
+  "actual_cpp": 11,
+  "passed": 9,
+  "failed": 2,
+  "not_run": 37,
+  "completed_leaves": 1,
+  "failed_ids": [
+    "NativeCandidateWindowCold7/ClassicInitialDeclarationUsesActualParametersRatherThanTemplate",
+    "NativeCandidateWindowCold7/BranchInitialDeclarationUsesActualParametersRatherThanTemplate"
+  ],
+  "reason": "native_edit_requires_consumed_probe_boundary",
+  "outer_closed": true,
+  "actual_leaf_closed": true,
+  "lease_token": "f0b1fa9d-c7fc-4cb3-b0b1-67899cfc965b",
+  "lease_state": "released",
+  "full_original_artifact_publication": "pending",
+  "scientific_verdict": null,
+  "artifacts": {
+    "Native48FreshA1TerminalFiles.json.gz": "ec3dff7d8dae1cb3d6635d0cc31731de89b7dff75cbc6e10654e84f8e0a39c79",
+    "Native48FreshA1RootClosure.json.gz": "37d49aa06412744851a06cc8bdcbda2960eeae22d844d377e8a1e8f1440e59a2"
+  }
+}

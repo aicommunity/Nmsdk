@@ -1,0 +1,299 @@
+[==========] Running 98 tests from 17 test suites.
+[----------] Global test environment set-up.
+[----------] 1 test from BoundedTrainingN1GeometryFairness
+[ RUN      ] BoundedTrainingN1GeometryFairness.ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:144: Failure
+Value of: lengths.contains(3)
+  Actual: false
+Expected: true
+Google Test trace:
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:118: 0/0
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:144: Failure
+Value of: lengths.contains(4)
+  Actual: false
+Expected: true
+Google Test trace:
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:118: 0/0
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:149: Failure
+Expected equality of these values:
+  candidates
+    Which is: { { 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <02-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <03-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <04-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 F0-3F>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> } }
+  retryCandidates
+    Which is: { { 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 F0-3F>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 59-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <01-00 00-00 01-00 00-00 01-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <01-00 00-00 01-00 00-00 53-5B DA-3A 58-4C 09-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> } }
+Google Test trace:
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:118: 0/1
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:144: Failure
+Value of: lengths.contains(3)
+  Actual: false
+Expected: true
+Google Test trace:
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:118: 1/0
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:144: Failure
+Value of: lengths.contains(4)
+  Actual: false
+Expected: true
+Google Test trace:
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:118: 1/0
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:149: Failure
+Expected equality of these values:
+  candidates
+    Which is: { { 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <02-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <03-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <04-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <02-00 00-00 01-00 00-00 00-00 00-00 00-00 F0-3F>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> } }
+  retryCandidates
+    Which is: { { 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <02-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <02-00 00-00 01-00 00-00 00-00 00-00 00-00 F0-3F>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <02-00 00-00 01-00 00-00 00-00 00-00 00-00 59-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> }, { 16-byte object <02-00 00-00 01-00 00-00 01-00 00-00 00-00 24-40>, 16-byte object <01-00 00-00 01-00 00-00 00-00 00-00 00-00 24-40> } }
+Google Test trace:
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:118: 1/1
+[  FAILED  ] BoundedTrainingN1GeometryFairness.ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode (2 ms)
+[----------] 1 test from BoundedTrainingN1GeometryFairness (2 ms total)
+
+[----------] 8 tests from BoundedTrainingFiniteRanking
+[ RUN      ] BoundedTrainingFiniteRanking.ClassicN0Zero
+[       OK ] BoundedTrainingFiniteRanking.ClassicN0Zero (1 ms)
+[ RUN      ] BoundedTrainingFiniteRanking.ClassicN1Zero
+[       OK ] BoundedTrainingFiniteRanking.ClassicN1Zero (1 ms)
+[ RUN      ] BoundedTrainingFiniteRanking.BranchN0Zero
+[       OK ] BoundedTrainingFiniteRanking.BranchN0Zero (0 ms)
+[ RUN      ] BoundedTrainingFiniteRanking.BranchN1Zero
+[       OK ] BoundedTrainingFiniteRanking.BranchN1Zero (0 ms)
+[ RUN      ] BoundedTrainingFiniteRanking.ClassicN0Overflow
+[       OK ] BoundedTrainingFiniteRanking.ClassicN0Overflow (0 ms)
+[ RUN      ] BoundedTrainingFiniteRanking.ClassicN1Overflow
+[       OK ] BoundedTrainingFiniteRanking.ClassicN1Overflow (0 ms)
+[ RUN      ] BoundedTrainingFiniteRanking.BranchN0Overflow
+[       OK ] BoundedTrainingFiniteRanking.BranchN0Overflow (0 ms)
+[ RUN      ] BoundedTrainingFiniteRanking.BranchN1Overflow
+[       OK ] BoundedTrainingFiniteRanking.BranchN1Overflow (0 ms)
+[----------] 8 tests from BoundedTrainingFiniteRanking (7 ms total)
+
+[----------] 2 tests from UnassignedBurstCandidate
+[ RUN      ] UnassignedBurstCandidate.OnlyClosedMissingOrExtraBurstWavesCanAuthorizeAdvancing
+[       OK ] UnassignedBurstCandidate.OnlyClosedMissingOrExtraBurstWavesCanAuthorizeAdvancing (0 ms)
+[ RUN      ] UnassignedBurstCandidate.CorruptionAndOtherFailureCausesCannotAuthorizeAdvancing
+[       OK ] UnassignedBurstCandidate.CorruptionAndOtherFailureCausesCannotAuthorizeAdvancing (0 ms)
+[----------] 2 tests from UnassignedBurstCandidate (1 ms total)
+
+[----------] 7 tests from BoundedCandidateRecovery
+[ RUN      ] BoundedCandidateRecovery.OptInAdvancesWhileDefaultRetriesTheSameCandidate
+[       OK ] BoundedCandidateRecovery.OptInAdvancesWhileDefaultRetriesTheSameCandidate (8 ms)
+[ RUN      ] BoundedCandidateRecovery.AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility
+[       OK ] BoundedCandidateRecovery.AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility (2 ms)
+[ RUN      ] BoundedCandidateRecovery.FinalVerificationNeverSkipsAnUnassignedInput
+[       OK ] BoundedCandidateRecovery.FinalVerificationNeverSkipsAnUnassignedInput (0 ms)
+[ RUN      ] BoundedCandidateRecovery.OtherObservationFailuresCannotAdvanceTheCandidateCursor
+[       OK ] BoundedCandidateRecovery.OtherObservationFailuresCannotAdvanceTheCandidateCursor (1 ms)
+[ RUN      ] BoundedCandidateRecovery.ZeroAllowanceAndUnknownPoliciesAreRejected
+[       OK ] BoundedCandidateRecovery.ZeroAllowanceAndUnknownPoliciesAreRejected (0 ms)
+[ RUN      ] BoundedCandidateRecovery.RetiringPartialN0RepeatsRequiresFreshMeasurementsOfTheNextPoint
+[       OK ] BoundedCandidateRecovery.RetiringPartialN0RepeatsRequiresFreshMeasurementsOfTheNextPoint (0 ms)
+[ RUN      ] BoundedCandidateRecovery.UnassignedRestoredBestCannotReuseItsOldMeasuredCertificate
+[       OK ] BoundedCandidateRecovery.UnassignedRestoredBestCannotReuseItsOldMeasuredCertificate (0 ms)
+[----------] 7 tests from BoundedCandidateRecovery (14 ms total)
+
+[----------] 4 tests from BoundedTrainingN0Repeats
+[ RUN      ] BoundedTrainingN0Repeats.SecondObservationCanRejectAnApparentlyExactCandidate
+[       OK ] BoundedTrainingN0Repeats.SecondObservationCanRejectAnApparentlyExactCandidate (0 ms)
+[ RUN      ] BoundedTrainingN0Repeats.BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence
+[       OK ] BoundedTrainingN0Repeats.BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence (0 ms)
+[ RUN      ] BoundedTrainingN0Repeats.Cap128CanPassWithTwoActualMeasurements
+[       OK ] BoundedTrainingN0Repeats.Cap128CanPassWithTwoActualMeasurements (0 ms)
+[ RUN      ] BoundedTrainingN0Repeats.NoOpN1AndInvalidRepeatCountsAreRejected
+[       OK ] BoundedTrainingN0Repeats.NoOpN1AndInvalidRepeatCountsAreRejected (0 ms)
+[----------] 4 tests from BoundedTrainingN0Repeats (1 ms total)
+
+[----------] 14 tests from BoundedTraining
+[ RUN      ] BoundedTraining.MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate
+[       OK ] BoundedTraining.MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate (0 ms)
+[ RUN      ] BoundedTraining.IndependentResistanceBoundsAndNoCommonIntersection
+[       OK ] BoundedTraining.IndependentResistanceBoundsAndNoCommonIntersection (0 ms)
+[ RUN      ] BoundedTraining.IndependentEffectiveDomainsDoNotRequireACommonInterval
+[       OK ] BoundedTraining.IndependentEffectiveDomainsDoNotRequireACommonInterval (0 ms)
+[ RUN      ] BoundedTraining.EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit
+[       OK ] BoundedTraining.EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit (0 ms)
+[ RUN      ] BoundedTraining.EmptyEffectiveDomainsReachSweepBudgetWithFreshFinalMeasurements
+[       OK ] BoundedTraining.EmptyEffectiveDomainsReachSweepBudgetWithFreshFinalMeasurements (0 ms)
+[ RUN      ] BoundedTraining.Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact
+[       OK ] BoundedTraining.Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact (0 ms)
+[ RUN      ] BoundedTraining.LaterSharedPhysicsDamageCannotInheritLocalSuccess
+[       OK ] BoundedTraining.LaterSharedPhysicsDamageCannotInheritLocalSuccess (0 ms)
+[ RUN      ] BoundedTraining.SearchBudgetAndExternalStopNeverCreateCertificate
+[       OK ] BoundedTraining.SearchBudgetAndExternalStopNeverCreateCertificate (0 ms)
+[ RUN      ] BoundedTraining.CoincidentBranchInputsCannotHideChangesToTheFixedAnchor
+[       OK ] BoundedTraining.CoincidentBranchInputsCannotHideChangesToTheFixedAnchor (0 ms)
+[ RUN      ] BoundedTraining.AppliedReadbackAndProbeRevisionAreMandatory
+[       OK ] BoundedTraining.AppliedReadbackAndProbeRevisionAreMandatory (8 ms)
+[ RUN      ] BoundedTraining.SingleInputStillRequiresRealFinalProbe
+[       OK ] BoundedTraining.SingleInputStillRequiresRealFinalProbe (0 ms)
+[ RUN      ] BoundedTraining.RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged
+[       OK ] BoundedTraining.RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged (0 ms)
+[ RUN      ] BoundedTraining.MissingAmbiguousOrIncompletePeaksCannotDriveEdits
+[       OK ] BoundedTraining.MissingAmbiguousOrIncompletePeaksCannotDriveEdits (0 ms)
+[ RUN      ] BoundedTraining.ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments
+[       OK ] BoundedTraining.ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments (0 ms)
+[----------] 14 tests from BoundedTraining (14 ms total)
+
+[----------] 2 tests from BoundedTrainingN1Refinement
+[ RUN      ] BoundedTrainingN1Refinement.AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification
+[       OK ] BoundedTrainingN1Refinement.AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification (2 ms)
+[ RUN      ] BoundedTrainingN1Refinement.AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket
+[       OK ] BoundedTrainingN1Refinement.AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket (1 ms)
+[----------] 2 tests from BoundedTrainingN1Refinement (3 ms total)
+
+[----------] 5 tests from BoundedTrainingN0Candidates
+[ RUN      ] BoundedTrainingN0Candidates.ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths
+[       OK ] BoundedTrainingN0Candidates.ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths (0 ms)
+[ RUN      ] BoundedTrainingN0Candidates.BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths
+[       OK ] BoundedTrainingN0Candidates.BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths (0 ms)
+[ RUN      ] BoundedTrainingN0Candidates.LengthOnlySearchKeepsItsOriginalBudget
+[       OK ] BoundedTrainingN0Candidates.LengthOnlySearchKeepsItsOriginalBudget (0 ms)
+[ RUN      ] BoundedTrainingN0Candidates.WorseNeighborReturnsToLengthsAndIsNotIssuedTwice
+[       OK ] BoundedTrainingN0Candidates.WorseNeighborReturnsToLengthsAndIsNotIssuedTwice (1 ms)
+[ RUN      ] BoundedTrainingN0Candidates.PriorityWaitsForAllRequiredObservations
+[       OK ] BoundedTrainingN0Candidates.PriorityWaitsForAllRequiredObservations (0 ms)
+[----------] 5 tests from BoundedTrainingN0Candidates (3 ms total)
+
+[----------] 8 tests from BoundedTrainingLengthCandidates
+[ RUN      ] BoundedTrainingLengthCandidates.ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget
+[       OK ] BoundedTrainingLengthCandidates.ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget (0 ms)
+[ RUN      ] BoundedTrainingLengthCandidates.BranchN0UsesMeasuredDelayTrendWithinOriginalBudget
+[       OK ] BoundedTrainingLengthCandidates.BranchN0UsesMeasuredDelayTrendWithinOriginalBudget (0 ms)
+[ RUN      ] BoundedTrainingLengthCandidates.ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget
+[       OK ] BoundedTrainingLengthCandidates.ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget (0 ms)
+[ RUN      ] BoundedTrainingLengthCandidates.BranchN1UsesMeasuredDelayTrendWithinOriginalBudget
+[       OK ] BoundedTrainingLengthCandidates.BranchN1UsesMeasuredDelayTrendWithinOriginalBudget (0 ms)
+[ RUN      ] BoundedTrainingLengthCandidates.PredictedPointIsMeasuredAndCannotBypassTheFinalGate
+[       OK ] BoundedTrainingLengthCandidates.PredictedPointIsMeasuredAndCannotBypassTheFinalGate (1 ms)
+[ RUN      ] BoundedTrainingLengthCandidates.N0ProposalWaitsForRequiredCandidateRepetitions
+[       OK ] BoundedTrainingLengthCandidates.N0ProposalWaitsForRequiredCandidateRepetitions (0 ms)
+[ RUN      ] BoundedTrainingLengthCandidates.N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain
+[       OK ] BoundedTrainingLengthCandidates.N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain (0 ms)
+[ RUN      ] BoundedTrainingLengthCandidates.NonmonotoneMeasurementsRetainTheBoundedLengthScan
+[       OK ] BoundedTrainingLengthCandidates.NonmonotoneMeasurementsRetainTheBoundedLengthScan (0 ms)
+[----------] 8 tests from BoundedTrainingLengthCandidates (5 ms total)
+
+[----------] 9 tests from TrainingTermination
+[ RUN      ] TrainingTermination.MaximumSweepsClassicN0
+[       OK ] TrainingTermination.MaximumSweepsClassicN0 (0 ms)
+[ RUN      ] TrainingTermination.MaximumSweepsClassicN1
+[       OK ] TrainingTermination.MaximumSweepsClassicN1 (0 ms)
+[ RUN      ] TrainingTermination.MaximumSweepsBranchN0
+[       OK ] TrainingTermination.MaximumSweepsBranchN0 (0 ms)
+[ RUN      ] TrainingTermination.MaximumSweepsBranchN1
+[       OK ] TrainingTermination.MaximumSweepsBranchN1 (0 ms)
+[ RUN      ] TrainingTermination.ExactAtLastAllowedSweepTakesPrecedence
+[       OK ] TrainingTermination.ExactAtLastAllowedSweepTakesPrecedence (0 ms)
+[ RUN      ] TrainingTermination.InvalidMeasurementsRemainInvalidObservation
+[       OK ] TrainingTermination.InvalidMeasurementsRemainInvalidObservation (0 ms)
+[ RUN      ] TrainingTermination.NoAdjustableInputsRemainSearchUnresolved
+[       OK ] TrainingTermination.NoAdjustableInputsRemainSearchUnresolved (0 ms)
+[ RUN      ] TrainingTermination.ProbeAndAdapterBudgetReasonsAreDistinct
+[       OK ] TrainingTermination.ProbeAndAdapterBudgetReasonsAreDistinct (0 ms)
+[ RUN      ] TrainingTermination.FinalRejectionDoesNotBorrowEarlierSearchDiagnostic
+[       OK ] TrainingTermination.FinalRejectionDoesNotBorrowEarlierSearchDiagnostic (0 ms)
+[----------] 9 tests from TrainingTermination (3 ms total)
+
+[----------] 4 tests from TrainingInvalidBudget
+[ RUN      ] TrainingInvalidBudget.ClassicN0
+[       OK ] TrainingInvalidBudget.ClassicN0 (1 ms)
+[ RUN      ] TrainingInvalidBudget.ClassicN1
+[       OK ] TrainingInvalidBudget.ClassicN1 (1 ms)
+[ RUN      ] TrainingInvalidBudget.BranchN0
+[       OK ] TrainingInvalidBudget.BranchN0 (1 ms)
+[ RUN      ] TrainingInvalidBudget.BranchN1
+[       OK ] TrainingInvalidBudget.BranchN1 (1 ms)
+[----------] 4 tests from TrainingInvalidBudget (6 ms total)
+
+[----------] 5 tests from BoundedTrainingCapacitance
+[ RUN      ] BoundedTrainingCapacitance.CompleteMapFollowsProbesCandidatesAndRepeats
+[       OK ] BoundedTrainingCapacitance.CompleteMapFollowsProbesCandidatesAndRepeats (0 ms)
+[ RUN      ] BoundedTrainingCapacitance.UnitScaleExtensionIsRetainedAfterEdit
+[       OK ] BoundedTrainingCapacitance.UnitScaleExtensionIsRetainedAfterEdit (0 ms)
+[ RUN      ] BoundedTrainingCapacitance.LostDormantScaleRejectsOtherwiseMatchingInputReadback
+[       OK ] BoundedTrainingCapacitance.LostDormantScaleRejectsOtherwiseMatchingInputReadback (0 ms)
+[ RUN      ] BoundedTrainingCapacitance.UndeclaredTrimOfNewChannelIsNotAUnitGrowthExtension
+[       OK ] BoundedTrainingCapacitance.UndeclaredTrimOfNewChannelIsNotAUnitGrowthExtension (0 ms)
+[ RUN      ] BoundedTrainingCapacitance.DomainCannotDiscardFullCapacitanceContext
+[       OK ] BoundedTrainingCapacitance.DomainCannotDiscardFullCapacitanceContext (0 ms)
+[----------] 5 tests from BoundedTrainingCapacitance (1 ms total)
+
+[----------] 4 tests from BoundedTrainingFairDomains
+[ RUN      ] BoundedTrainingFairDomains.ValidMeasurementsVisitGeometriesIndependentlyOfRecovery
+/home/user/timelearner-refactor/source-n1-geometry-decision-before-a4/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp:1319: Failure
+Expected: (firstLength3) < (firstOtherResistance), actual: 7 vs 2
+[  FAILED  ] BoundedTrainingFairDomains.ValidMeasurementsVisitGeometriesIndependentlyOfRecovery (3 ms)
+[ RUN      ] BoundedTrainingFairDomains.SmallInvalidBudgetCoversSeveralGeometriesWithoutAcceptingMissingWaves
+[       OK ] BoundedTrainingFairDomains.SmallInvalidBudgetCoversSeveralGeometriesWithoutAcceptingMissingWaves (0 ms)
+[ RUN      ] BoundedTrainingFairDomains.EveryGeometryReturnReassessesChangedBoundsBeforeAnEdit
+[       OK ] BoundedTrainingFairDomains.EveryGeometryReturnReassessesChangedBoundsBeforeAnEdit (1 ms)
+[ RUN      ] BoundedTrainingFairDomains.BranchVariantsRetainPhysicalBankLegalityAndTheFixedReference
+[       OK ] BoundedTrainingFairDomains.BranchVariantsRetainPhysicalBankLegalityAndTheFixedReference (4 ms)
+[----------] 4 tests from BoundedTrainingFairDomains (9 ms total)
+
+[----------] 2 tests from CandidateRecoveryEvidenceCodec
+[ RUN      ] CandidateRecoveryEvidenceCodec.FullOwnedCapacitanceSurvivesJson
+[       OK ] CandidateRecoveryEvidenceCodec.FullOwnedCapacitanceSurvivesJson (0 ms)
+[ RUN      ] CandidateRecoveryEvidenceCodec.RejectsUnknownEnumsAndNonfiniteOrInexactNumbers
+[       OK ] CandidateRecoveryEvidenceCodec.RejectsUnknownEnumsAndNonfiniteOrInexactNumbers (0 ms)
+[----------] 2 tests from CandidateRecoveryEvidenceCodec (0 ms total)
+
+[----------] 5 tests from MeasuredResistanceSearch
+[ RUN      ] MeasuredResistanceSearch.ThreeMeasuredMonotonePointsProposeAnUnmeasuredInteriorResistance
+[       OK ] MeasuredResistanceSearch.ThreeMeasuredMonotonePointsProposeAnUnmeasuredInteriorResistance (0 ms)
+[ RUN      ] MeasuredResistanceSearch.NonmonotoneTimingInvalidAndInconsistentRepeatDataKeepMeshFallback
+[       OK ] MeasuredResistanceSearch.NonmonotoneTimingInvalidAndInconsistentRepeatDataKeepMeshFallback (0 ms)
+[ RUN      ] MeasuredResistanceSearch.AMeasuredPointWithinToleranceNeedsNoInventedRefinement
+[       OK ] MeasuredResistanceSearch.AMeasuredPointWithinToleranceNeedsNoInventedRefinement (0 ms)
+[ RUN      ] MeasuredResistanceSearch.EffectiveBoundsExcludeOldPointsAndInvalidNumbersCannotProposeAnEdit
+[       OK ] MeasuredResistanceSearch.EffectiveBoundsExcludeOldPointsAndInvalidNumbersCannotProposeAnEdit (0 ms)
+[ RUN      ] MeasuredResistanceSearch.WideFiniteDomainsDoNotOverflowTheGeometricMidpoint
+[       OK ] MeasuredResistanceSearch.WideFiniteDomainsDoNotOverflowTheGeometricMidpoint (0 ms)
+[----------] 5 tests from MeasuredResistanceSearch (0 ms total)
+
+[----------] 6 tests from MeasuredLengthSearch
+[ RUN      ] MeasuredLengthSearch.ThreeMeasuredPointsCanProposeBeyondTheNearestMesh
+[       OK ] MeasuredLengthSearch.ThreeMeasuredPointsCanProposeBeyondTheNearestMesh (0 ms)
+[ RUN      ] MeasuredLengthSearch.BracketUsesOnlyAnUnmeasuredBoundedInteger
+[       OK ] MeasuredLengthSearch.BracketUsesOnlyAnUnmeasuredBoundedInteger (0 ms)
+[ RUN      ] MeasuredLengthSearch.NonmonotoneFlatAndAmbiguousIntervalsKeepEnumeration
+[       OK ] MeasuredLengthSearch.NonmonotoneFlatAndAmbiguousIntervalsKeepEnumeration (0 ms)
+[ RUN      ] MeasuredLengthSearch.RepeatedIntervalsCannotBeAveragedIntoASlope
+[       OK ] MeasuredLengthSearch.RepeatedIntervalsCannotBeAveragedIntoASlope (0 ms)
+[ RUN      ] MeasuredLengthSearch.InvalidNumbersAndDomainsNeverProposeAnEdit
+[       OK ] MeasuredLengthSearch.InvalidNumbersAndDomainsNeverProposeAnEdit (0 ms)
+[ RUN      ] MeasuredLengthSearch.WideIntegerBoundsDoNotOverflowTheMidpoint
+[       OK ] MeasuredLengthSearch.WideIntegerBoundsDoNotOverflowTheMidpoint (0 ms)
+[----------] 6 tests from MeasuredLengthSearch (0 ms total)
+
+[----------] 12 tests from MeasuredCapacitanceSearch
+[ RUN      ] MeasuredCapacitanceSearch.SeedMeshIsFinitePositiveAbsoluteAndBounded
+[       OK ] MeasuredCapacitanceSearch.SeedMeshIsFinitePositiveAbsoluteAndBounded (0 ms)
+[ RUN      ] MeasuredCapacitanceSearch.FixedDomainAndSmallBudgetDoNotManufactureCandidates
+[       OK ] MeasuredCapacitanceSearch.FixedDomainAndSmallBudgetDoNotManufactureCandidates (4 ms)
+[ RUN      ] MeasuredCapacitanceSearch.SeedValidationRejectsUnsafeDeclarations
+[       OK ] MeasuredCapacitanceSearch.SeedValidationRejectsUnsafeDeclarations (0 ms)
+[ RUN      ] MeasuredCapacitanceSearch.ThreeMeasuredScalesBracketWithoutAssumingDirection
+[       OK ] MeasuredCapacitanceSearch.ThreeMeasuredScalesBracketWithoutAssumingDirection (0 ms)
+[ RUN      ] MeasuredCapacitanceSearch.MixedEffectivePhysicsNeverCreatesARefinement
+[       OK ] MeasuredCapacitanceSearch.MixedEffectivePhysicsNeverCreatesARefinement (0 ms)
+[ RUN      ] MeasuredCapacitanceSearch.InconsistentRepeatsCannotBeAveragedIntoSuccess
+[       OK ] MeasuredCapacitanceSearch.InconsistentRepeatsCannotBeAveragedIntoSuccess (0 ms)
+[ RUN      ] MeasuredCapacitanceSearch.NonmonotoneAndFlatResponsesKeepFiniteMeshFallback
+[       OK ] MeasuredCapacitanceSearch.NonmonotoneAndFlatResponsesKeepFiniteMeshFallback (0 ms)
+[ RUN      ] MeasuredCapacitanceSearch.BroadPeakIntervalsDoNotBecomeAnInventedZero
+[       OK ] MeasuredCapacitanceSearch.BroadPeakIntervalsDoNotBecomeAnInventedZero (0 ms)
+[ RUN      ] MeasuredCapacitanceSearch.OneSidedTrendProposesBoundedDampedScaleOnly
+[       OK ] MeasuredCapacitanceSearch.OneSidedTrendProposesBoundedDampedScaleOnly (0 ms)
+[ RUN      ] MeasuredCapacitanceSearch.ChangedBoundsCannotReuseAnOldThreePointTrend
+[       OK ] MeasuredCapacitanceSearch.ChangedBoundsCannotReuseAnOldThreePointTrend (0 ms)
+[ RUN      ] MeasuredCapacitanceSearch.NonfiniteAndReversedIntervalsNeverPropose
+[       OK ] MeasuredCapacitanceSearch.NonfiniteAndReversedIntervalsNeverPropose (0 ms)
+[ RUN      ] MeasuredCapacitanceSearch.WideFiniteScaleAndResidualRangesDoNotOverflowMidpoint
+[       OK ] MeasuredCapacitanceSearch.WideFiniteScaleAndResidualRangesDoNotOverflowMidpoint (0 ms)
+[----------] 12 tests from MeasuredCapacitanceSearch (4 ms total)
+
+[----------] Global test environment tear-down
+[==========] 98 tests from 17 test suites ran. (78 ms total)
+[  PASSED  ] 96 tests.
+[  FAILED  ] 2 tests, listed below:
+[  FAILED  ] BoundedTrainingN1GeometryFairness.ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode
+[  FAILED  ] BoundedTrainingFairDomains.ValidMeasurementsVisitGeometriesIndependentlyOfRecovery
+
+ 2 FAILED TESTS

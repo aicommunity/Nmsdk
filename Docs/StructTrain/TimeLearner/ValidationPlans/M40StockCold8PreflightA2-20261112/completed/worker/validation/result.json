@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "strict-stock-N4-cold8-declaration4-and-native-preflight2-a2",
+  "package_fingerprint": "a8881bfba7fbaa62b3d09998839c02452035c7e5767a120c23229f8d95f2e33a",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_recovery_declaration.StockCandidateRecoveryDeclarationTest.test_only_recovery_envelope_and_attempt_identity_change",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_recovery_declaration.StockCandidateRecoveryDeclarationTest.test_corrupt_job_digest_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_recovery_declaration.StockCandidateRecoveryDeclarationTest.test_technical_N2_or_relaxed_tolerance_cannot_be_called_strict_N4",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_recovery_declaration.StockCandidateRecoveryDeclarationTest.test_repeated_upgrade_is_not_silently_reinterpreted",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_recovery_preflight.StockCandidateRecoveryPreflightTest.test_actual_cold8_initial_graphs_match_original_stock_without_training"
+  ],
+  "executed_tests": 5,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD8_CONTROLS": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold8-preflight-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold8PreflightA2-20261112/fixture",
+      "files": 2,
+      "fingerprint": "8e95cb8fb83490907b814352336143cadfe4d346ce4fb79da361cb41f4e4175c"
+    },
+    "TIMELEARNER_STOCK_COLD8_SOURCE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-cold7-classic-train-m40-a2/worker/native-stock-cold7/prepared",
+      "files": 9,
+      "fingerprint": "da70be4f1158986c9945837469cfc9661afb7b90f10fa3ecf0982f656c4a1f27"
+    },
+    "TIMELEARNER_STOCK_COLD8_RUNTIME": {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1",
+      "files": 2,
+      "fingerprint": "ec9b6cfa640025f0d4994bfc48488f0c151c5f3dfdf774d4ae3a5c92b63a9edc"
+    }
+  },
+  "scientific_verdict": null
+}

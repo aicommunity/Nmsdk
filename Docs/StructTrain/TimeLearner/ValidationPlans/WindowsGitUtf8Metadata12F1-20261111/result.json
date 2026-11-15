@@ -1,0 +1,57 @@
+{
+    "kind":  "windows_git_preparation_tests",
+    "executed":  12,
+    "cases":  [
+                  {
+                      "name":  "ZeroNativeExitAccepted",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "ActualNegativeCmdExitRejected",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "PositiveAndUnsignedExitRejected",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "MissingGitRepositoryRejected",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "PersonalProjectRefusedBeforeGitWrite",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "FreshCloneWith322SparsePatterns",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "CompletedCloneRefusedWithoutResettingIt",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "Utf8GitJsonSurvivesOemConsoleAndRestoresCallerEncoding",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "FixtureExactNamespaceAccepted",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "ExtraIgnoredFileCannotPassTrackedCleanCheck",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "WrongDeclaredSizeRejectedBeforeHashing",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "ActualDeclaredSdkAndEightRepositories",
+                      "passed":  true
+                  }
+              ],
+    "status":  "passed",
+    "native_models_or_cpp_tests":  false,
+    "scientific_verdict":  null
+}

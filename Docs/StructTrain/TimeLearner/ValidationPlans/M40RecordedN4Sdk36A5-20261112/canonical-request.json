@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-recorded-n4-sdk36-canonical-m40-a5",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "448b153f2fea3486ff40f3a626b8f1110b9e3ee2",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "native-canonical-preparation",
+    "plan": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-n4-sdk36-a5/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedN4Sdk36A5-20261112/canonical-plan.json",
+      "sha256": "d7c685e3a211c596529e57fcae74fcec5c57aed3a3313beeb1123d3d3ae02a8c"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+Note: Google Test filter = NativeRecoveryPackage7.ClassicN0StoppedRoundtripKeepsResponse
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from NativeRecoveryPackage7
+[ RUN      ] NativeRecoveryPackage7.ClassicN0StoppedRoundtripKeepsResponse
+/media/user/Data/TimeLearnerRefactor/source-recovery-package7-native14-f3/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp:4594: Failure
+Expected equality of these values:
+  service.State()
+    Which is: 4-byte object <00-00 00-00>
+  NativeTrainingState::Finished
+    Which is: 4-byte object <03-00 00-00>
+
+[  FAILED  ] NativeRecoveryPackage7.ClassicN0StoppedRoundtripKeepsResponse (82970 ms)
+[----------] 1 test from NativeRecoveryPackage7 (82970 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (82971 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] NativeRecoveryPackage7.ClassicN0StoppedRoundtripKeepsResponse
+
+ 1 FAILED TEST

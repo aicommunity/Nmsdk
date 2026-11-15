@@ -1,0 +1,183 @@
+{
+  "kind": "historical_phasea_completed_evidence_revalidation",
+  "schema_version": 1,
+  "review_date": "2026-11-07",
+  "source_root": "d220b7743fc9d933138cc48cf4a1b0cca07b0c12",
+  "scope": "Existing Git archive identities and all member hashes; existing native receipts retained, no numerical simulation or new scoring performed locally",
+  "rows": [
+    {
+      "prefix": "Reports/StructTrain/TimeLearner/s11-august-phasea-replay-elder-a1",
+      "original_evidence_commit": "c7876951dfeda579a516c21f2d3593131c52154f",
+      "unchanged_from_original_evidence_commit": true,
+      "archive": {
+        "path": "primary.tar.xz",
+        "bytes": 1050008,
+        "sha256": "fb524f4c2811160d79f4f5af16626b9b66199242ece5ed2c810fd86c175aa60d"
+      },
+      "manifest_sha256": "6ad8e7bc5d6cbeaf12e8e7b88b33f926c87ce49d27d5d17cf68735e2c65b4bb9",
+      "all_member_hashes_verified": 104,
+      "reported_validation": {
+        "kind": "phasea_historical_saved_state_replay",
+        "rows": [
+          {
+            "name": "baseline",
+            "archived_correct": 4,
+            "replay_correct": 4,
+            "counts": {
+              "TP": 1,
+              "FP": 4,
+              "FN": 0,
+              "TN": 3
+            },
+            "same_reported_counts": true,
+            "graph_paths_classes_equal": true,
+            "selected_parameter_differences": 1
+          },
+          {
+            "name": "threshold0130",
+            "archived_correct": 5,
+            "replay_correct": 5,
+            "counts": {
+              "TP": 1,
+              "FP": 3,
+              "FN": 0,
+              "TN": 4
+            },
+            "same_reported_counts": true,
+            "graph_paths_classes_equal": true,
+            "selected_parameter_differences": 3
+          },
+          {
+            "name": "threshold0135",
+            "archived_correct": 6,
+            "replay_correct": 6,
+            "counts": {
+              "TP": 1,
+              "FP": 2,
+              "FN": 0,
+              "TN": 5
+            },
+            "same_reported_counts": true,
+            "graph_paths_classes_equal": true,
+            "selected_parameter_differences": 3
+          }
+        ],
+        "operations": 3,
+        "historical_root": "de02a3809395dd0bbd11e2ba792bfc04a51c89f3",
+        "original_input_order_and_isis": true,
+        "cold_retrain_performed": false,
+        "robustness_controls_performed": false,
+        "temporal_report_complete": false,
+        "strict_evaluation_verdict": null,
+        "source_unchanged": true,
+        "limitations": "Legacy CSV has no complete-window/late-spike evidence; full soma/input traces still required. Selected XML readback is not a complete physics fingerprint."
+      }
+    },
+    {
+      "prefix": "Reports/StructTrain/TimeLearner/s11-august-coldtrain-elder-a2",
+      "original_evidence_commit": "8ee71bcb67c9f5325e95517eee8dd26250e61045",
+      "unchanged_from_original_evidence_commit": true,
+      "archive": {
+        "path": "primary.tar.xz",
+        "bytes": 5374628,
+        "sha256": "015ac45cb9c2074a84f9a21e8995adc2a9034d9b5367bd4050bbac9e7067f8c0"
+      },
+      "manifest_sha256": "4625dbc5845863a53eaefadd9d7b4f01586bb60983e42b49747a45def4ec3f7f",
+      "all_member_hashes_verified": 83,
+      "reported_validation": {
+        "kind": "historical_phasea_native_cold_train_outcome",
+        "execution": "completed",
+        "model_budget": 160,
+        "native_cold_start_verified": true,
+        "legacy_is_need_to_train": 0.0,
+        "legacy_phase": "2",
+        "legacy_iteration": null,
+        "training_outcome": "legacy_done_uncertified",
+        "dendrite_lengths": [
+          49.0,
+          41.0,
+          25.0,
+          1.0
+        ],
+        "references": [
+          0.015781441626429582,
+          0.015828572406203167,
+          0.01578146659932167,
+          0.015781441636542715
+        ],
+        "effective_dendrite_segments": 116,
+        "calibration_or_test_performed": false,
+        "source_unchanged": true,
+        "training_certificate": null,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "prefix": "Reports/StructTrain/TimeLearner/s11-august-coldtest-elder-a2",
+      "original_evidence_commit": "0662a3aa8233a7eb2eb07df9af9540e6af69a181",
+      "unchanged_from_original_evidence_commit": true,
+      "archive": {
+        "path": "primary.tar.xz",
+        "bytes": 7609888,
+        "sha256": "e4587d9d04aa1251db2169f9fd6c3b75c0ba4135ad12df45accd176c7c450172"
+      },
+      "manifest_sha256": "be35f6101a46ab72487c981b8edcb6134b4d486c9cfee6a0a06e6ffa03c9fa49",
+      "all_member_hashes_verified": 236,
+      "reported_validation": {
+        "kind": "historical_cold_model_full_import_frozen_test",
+        "rows": [
+          {
+            "name": "baseline",
+            "correct": 4,
+            "counts": {
+              "TP": 1,
+              "FP": 4,
+              "FN": 0,
+              "TN": 3
+            },
+            "csv_byte_equal_to_untouched_replay": true,
+            "frozen_neuron_sha256": "ed11c257e5b0e01c5ed3ccfc5bd397f93984cf6e544ab4ab87681627d445c474"
+          },
+          {
+            "name": "threshold0130",
+            "correct": 5,
+            "counts": {
+              "TP": 1,
+              "FP": 3,
+              "FN": 0,
+              "TN": 4
+            },
+            "csv_byte_equal_to_untouched_replay": true,
+            "frozen_neuron_sha256": "04e44ef50fbb544ff2b0b6f954d584738641e72b2ebdcd3408a974eb4ed4e83a"
+          },
+          {
+            "name": "threshold0135",
+            "correct": 6,
+            "counts": {
+              "TP": 1,
+              "FP": 2,
+              "FN": 0,
+              "TN": 5
+            },
+            "csv_byte_equal_to_untouched_replay": true,
+            "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3"
+          }
+        ],
+        "operations": 3,
+        "full_cold_graph_imported": true,
+        "train_export_unchanged": true,
+        "source_unchanged": true,
+        "all_neuron_serialized_state_frozen_at_declared_threshold": true,
+        "independent_evaluation": false,
+        "temporal_report_complete": false,
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "saved_state_replay_exists": true,
+  "actual_cold_train_and_frozen_test_exist": true,
+  "legacy_V2_AB_complete": false,
+  "order_ITI_robustness_complete": false,
+  "whole_stage11_complete": false,
+  "scientific_verdict": null
+}

@@ -1,0 +1,27 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-closed-native-package7-audit9-elder-f1",
+  "package_fingerprint": "ad4a2ae5c4dd097ded03bd8d2384fddf239ccfd60dae6caf162f5f1734184168",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest.test_actual_stopped_package_and_summary8_bind_the_same_model",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest.test_actual_summary_cannot_claim_checkpoint_or_drop_ledger",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest.test_coherently_dropped_events_still_cannot_prove_history_completeness",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest.test_data_acceptance_does_not_promote_original_failed_execution",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest.test_entire_original_bundle_is_restored_and_hash_checked",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest.test_modified_external_primary_cannot_fall_back_to_embedded_bytes",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest.test_nonempty_actual_recovery_deliveries_replay_their_original_runtime3",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest.test_original_archive_and_model_files_remain_unchanged",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest.test_rehashed_duplicate_delivery_is_rejected"
+  ],
+  "fixtures": {
+    "TIMELEARNER_CLOSED_PACKAGE7_SOURCE": {
+      "pattern": "**/*",
+      "files": 3,
+      "fingerprint": "38b09722d9112183b9afa514f9a6d61cd43bff0e9308d72cd397acf44bdf9db5"
+    }
+  }
+}

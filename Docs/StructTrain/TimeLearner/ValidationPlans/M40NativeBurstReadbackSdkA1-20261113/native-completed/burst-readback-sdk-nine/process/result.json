@@ -1,0 +1,53 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 2,
+  "execution": "completed",
+  "reason": "exit_zero_and_whole_group_closed",
+  "returncode": 0,
+  "wall_seconds": 410.8876303178258,
+  "model_time": null,
+  "runtime_provenance": "loaded_files_captured",
+  "mapping_error": null,
+  "runtime_fingerprint": "21b89a46a38db1e7b80ba2402b803a07d6d1ead0e9c9fd6cd546a9ca1987b556",
+  "ownership_scope": "bound_cgroup",
+  "all_processes_closed": true,
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "needs_review",
+    "error_records": 0,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 2,
+    "reasons": [],
+    "examples": [
+      {
+        "stream": "stderr.log",
+        "chunk": 1,
+        "severity": "unclassified",
+        "excerpt": "PulseLibTestRuntime executable=/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1/Test_PulseLib_StorageComponents ini=/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1/NeuroModelerConsole.ini"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 2,
+        "severity": "unclassified",
+        "excerpt": "PulseLibTestRuntime work_directory=/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-burst-readback-sdk-m40-a1/burst-readback-sdk-nine/native.test-events-log"
+      }
+    ],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 2706,
+        "sha256": "87804eb300bbc28e3aa7f5c25083ec937f51b50014782b458304d10fefb05837"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 405,
+        "sha256": "3c741a0a06f5bb4d169c8bc182e61f040a7b23fe2599e5376d0ae9c6d0a38a55"
+      }
+    ],
+    "contained_streams_match": true,
+    "scientific_verdict": null
+  }
+}

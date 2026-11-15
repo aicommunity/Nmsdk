@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s10-native-leaf-terminal13-m40-a1",
+  "package_fingerprint": "680e91b9869df45170b7e6d17c8a50a9af5ebab7a5e5ab90e45027ad60225361",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_partial_failed_and_skipped_junit_never_fills_expected_cases",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_duplicate_junit_case_is_not_two_observations",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_runtime_drift_and_unreadable_protected_path_do_not_suppress_other_captures",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_identical_materialized_bytes_do_not_hide_changed_source_or_resource_commit"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_timeout_without_xml_preserves_original_reason_and_no_invented_cases",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_process_error_without_xml_is_not_reported_as_timeout_or_file_failure",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_timeout_with_partial_xml_keeps_only_completed_case",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_timeout_with_truncated_xml_keeps_parse_error_separate",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_claimed_success_without_xml_cannot_pass",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_claimed_success_with_corrupt_xml_cannot_pass",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_completed_gate_requires_actual_matching_case_ids",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_failed_case_is_recorded_even_if_gate_claims_success",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_duplicate_case_does_not_raise_passed_count",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_partial_failed_and_skipped_junit_never_fills_expected_cases",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_duplicate_junit_case_is_not_two_observations",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_runtime_drift_and_unreadable_protected_path_do_not_suppress_other_captures",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_identical_materialized_bytes_do_not_hide_changed_source_or_resource_commit"
+  ],
+  "fixtures": {}
+}

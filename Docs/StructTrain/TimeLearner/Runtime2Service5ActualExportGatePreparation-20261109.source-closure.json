@@ -1,0 +1,180 @@
+{
+  "kind": "runtime2_service5_native_export_source_closure",
+  "schema_version": 1,
+  "status": "source_only_no_projection_build_tests",
+  "private_root_source": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
+  "merge_parents": [
+    "9dd748fc80cb3f55bd2b5ada9e8e9018f50543d2",
+    "95e8130d9b21fee85aa89beef8d072badc5b621b"
+  ],
+  "input_root": "7fd28cf7b31aaf4e2fd09fd700745efb8bddf71c",
+  "worker_fix_ordinary_merge": "a208663decacaecbbe079499e442b6b9dbf1fb32",
+  "gitlinks": {
+    "Bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+    "Libraries/Nmsdk-MotionControlLib": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+    "Libraries/Nmsdk-PulseLib": "a43dbc727d32d626cd082cda8ab27bbe320d9f37",
+    "Libraries/Rdk-BasicLib": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+    "Libraries/Rdk-CvBasicLib": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+    "Libraries/Rdk-HardwareLib": "de40b008e990105856726e01230dde19f42a90a9",
+    "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a"
+  },
+  "root_subtrees_unchanged_vs_input": {
+    "App": true,
+    "Tests": false,
+    "CMakeLists.txt": true,
+    "cmake": true,
+    "Libraries": false,
+    "Rdk": true,
+    "Bin": true
+  },
+  "source_files": {
+    "Tests/Integration/Libraries/Test_PulseLib_CandidateWindowDeclarations.cpp": {
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CandidateWindowDeclarations.cpp",
+      "bytes": 29360,
+      "sha256": "50f282ec076ff06a6068cdf38be15158379a96788797eaca3005b64be6b40b63",
+      "git_blob": "97d6e3e2e24f92d40d349e3112ef40608bf90616"
+    },
+    "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp": {
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 301690,
+      "sha256": "2d7d97df5b03b6bf21e6d9962718617c177215cc63872809e47d117dff417bc9",
+      "git_blob": "961ed9be06d460a566ae020b4ffb009f641828cf"
+    },
+    "Tests/Integration/Libraries/CMakeLists.txt": {
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
+      "path": "Tests/Integration/Libraries/CMakeLists.txt",
+      "bytes": 14762,
+      "sha256": "912d79712ed5774d8e156fc213bef64e5ded7278ba51253082dfc1914c228a0d",
+      "git_blob": "44e715f3ef780bd76037a7a3e07baeb2fe8aafed"
+    },
+    "Scripts/StructTrain/TimeLearner/native_gate.py": {
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
+      "path": "Scripts/StructTrain/TimeLearner/native_gate.py",
+      "bytes": 10087,
+      "sha256": "f522f0e3d4150c3fa11323588e7bf82c9aab11671658a2fecd67fa80224f3e5d",
+      "git_blob": "c8e4bcbdd8a3461ec9b561d77a2ee3a01fafb16e"
+    },
+    "Scripts/StructTrain/TimeLearner/native_acceptance_worker.py": {
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
+      "path": "Scripts/StructTrain/TimeLearner/native_acceptance_worker.py",
+      "bytes": 34616,
+      "sha256": "72d9fe6dbbcc7f333db17517002ad6b775cdd15e878e9d537bd37c69d910e0af",
+      "git_blob": "be2a737431d97687282c2ed19a02a2aee3e580c3"
+    },
+    "Scripts/StructTrain/TimeLearner/contained_runner.py": {
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
+      "path": "Scripts/StructTrain/TimeLearner/contained_runner.py",
+      "bytes": 9778,
+      "sha256": "e271f4c64457f8613b71a9438af30efa3bcc73aa470c846b66a7a8a005f4fe3a",
+      "git_blob": "fe075d8bcd75bfab7f18304da5f091420b7ce2ff"
+    },
+    "Scripts/StructTrain/TimeLearner/tests/test_native_acceptance_worker.py": {
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
+      "path": "Scripts/StructTrain/TimeLearner/tests/test_native_acceptance_worker.py",
+      "bytes": 23536,
+      "sha256": "78ed39fcbce830e2a8a2cc6cde4507646d267f14dc504c8a64ef41580ba1abc9",
+      "git_blob": "46664420a296ce408e41bbd3c93400e30534cd79"
+    }
+  },
+  "worker_file_identical_to_a208": true,
+  "source_materialized_SDK": false,
+  "build_started": false,
+  "tests_executed": false,
+  "original_runtime2_root": "9d798eb7715c4bcb052d7ba338ef026deb1d9d3b",
+  "historical_worker_merge": "354182191bffa26c003a7583a65491e37ce5da8b",
+  "known_type_guard_prerequisite": {
+    "fix": "de26c3b475a406e02fc9a908953879984681590b",
+    "Pulse_ordinary_merge": "eff3a20ab7264811c3217eee24fc140bb46e8b07",
+    "scope": "QJsonValue(Encode...) == candidate.value(...) type-preserving source guard; prior actual SDK compile0failure preserved separately, these future source pins remain uncompiled"
+  },
+  "Root_cpp_sources_unchanged_vs_input": false,
+  "pulse_source_files": {
+    "Core/TimeLearner/CandidateWindowRuntimePlan.cpp": {
+      "commit": "a43dbc727d32d626cd082cda8ab27bbe320d9f37",
+      "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+      "bytes": 11573,
+      "sha256": "194f2ba0a32d9b3f4bf582ba2836e4e7def68f49d781e2c5d3e938703c73118d",
+      "git_blob": "1989e836e8af3c23bbc305c8bce8ee21c41f493c"
+    },
+    "Core/TimeLearner/CompositeTrainingDeclarations.h": {
+      "commit": "a43dbc727d32d626cd082cda8ab27bbe320d9f37",
+      "path": "Core/TimeLearner/CompositeTrainingDeclarations.h",
+      "bytes": 1173,
+      "sha256": "fe0daf24085ba62bb86826dffd7d368f7a09cdd3f6ab4ec6c643308fd3ceb605",
+      "git_blob": "dee40c2738d5a8964c5ffc5dfcacd665ed88a20b"
+    },
+    "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp": {
+      "commit": "a43dbc727d32d626cd082cda8ab27bbe320d9f37",
+      "path": "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
+      "bytes": 60889,
+      "sha256": "3a1132d6207c4482b283a760baadd0a8b4b8eaec29476d483c9b642f3a01e46e",
+      "git_blob": "fae9f8acde530f05ddcf2e63e205947a153552d5"
+    },
+    "Core/TimeLearner/CandidateWindowPortableReferences.cpp": {
+      "commit": "a43dbc727d32d626cd082cda8ab27bbe320d9f37",
+      "path": "Core/TimeLearner/CandidateWindowPortableReferences.cpp",
+      "bytes": 5858,
+      "sha256": "eea701372c33cf5b57467eabe5d83b2c713ba54bf37bd66a60d76566f1b978be",
+      "git_blob": "b51eca42388c867ec5a138b06639832b5d36da5f"
+    },
+    "Core/TimeLearner/CandidateWindowProposalReplay.cpp": {
+      "commit": "a43dbc727d32d626cd082cda8ab27bbe320d9f37",
+      "path": "Core/TimeLearner/CandidateWindowProposalReplay.cpp",
+      "bytes": 30229,
+      "sha256": "cadab30a11807826ada55777dc9f5d21f18bac81ce8152b1a7177bf64f96a9e0",
+      "git_blob": "0ccdef37a80a480249f13dec3404d717da0d5dda"
+    }
+  },
+  "historical_root_code": "6d3582540dd78cc4d81b4942e95e2c31319bc930",
+  "historical_document_tip": "99699404aeeb679a82006ad6e68635c0a81b877a",
+  "materialized_delta_vs_input": [
+    "Docs/StructTrain/TimeLearner/NativeAcceptanceWorker.ru.md",
+    "Docs/StructTrain/TimeLearner/NativeBankFixturePublicGraphReadback-20261109.inventory.json",
+    "Docs/StructTrain/TimeLearner/NativeBankFixturePublicGraphReadback-20261109.ru.md",
+    "Docs/StructTrain/TimeLearner/PortableJsonValueOwnership-20261109.ru.md",
+    "Docs/StructTrain/TimeLearner/Runtime2Service5ActualExportGatePreparation-20261109.ru.md",
+    "Docs/StructTrain/TimeLearner/Runtime2Service5ActualExportGatePreparation-20261109.selection.json",
+    "Docs/StructTrain/TimeLearner/Runtime2Service5ActualExportGatePreparation-20261109.source-closure.json",
+    "Libraries/Nmsdk-PulseLib",
+    "Scripts/StructTrain/TimeLearner/native_acceptance_worker.py",
+    "Scripts/StructTrain/TimeLearner/tests/test_native_acceptance_worker.py",
+    "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp"
+  ],
+  "materialized_current_merge_delta": [
+    "Docs/StructTrain/TimeLearner/NativeBankFixturePublicGraphReadback-20261109.inventory.json",
+    "Docs/StructTrain/TimeLearner/NativeBankFixturePublicGraphReadback-20261109.ru.md",
+    "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp"
+  ],
+  "known_portable_ownership_fix": {
+    "source_fix": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+    "Pulse_ordinary_merge": "a43dbc727d32d626cd082cda8ab27bbe320d9f37",
+    "Root_input": "f015db2d4f6ac8c239e07c050ff596524604060c",
+    "Root_ordinary_merge": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+    "only_conflict": "Pulse gitlink resolved to merged Pulse retaining eff3a20 plus f7a0e3",
+    "runtime_accepted": false
+  },
+  "previous_ownership_code_root": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+  "previous_preparation_tip": "9dd748fc80cb3f55bd2b5ada9e8e9018f50543d2",
+  "common_fixture_fix": {
+    "code": "029c720a8cff5c9c082d1cb318b60632c5546748",
+    "documentation": "95e8130d9b21fee85aa89beef8d072badc5b621b",
+    "ordinary_merge": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
+    "Cpp_files": 1,
+    "Cpp_insertions": 39,
+    "Cpp_deletions": 4,
+    "existing_directly_affected_ids": 11,
+    "new_TEST_ids": 0,
+    "production_trees_unchanged": {
+      "App": true,
+      "Scripts": true,
+      "CMakeLists.txt": true,
+      "cmake": true,
+      "Libraries": true,
+      "Rdk": true,
+      "Bin": true
+    },
+    "runtime_accepted": false
+  }
+}

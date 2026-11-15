@@ -1,0 +1,39 @@
+test_actual_stopped_package_and_summary8_bind_the_same_model (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest) ... ok
+test_actual_summary_cannot_claim_checkpoint_or_drop_ledger (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest) ... ok
+test_coherently_dropped_events_still_cannot_prove_history_completeness (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest) ... ERROR
+test_data_acceptance_does_not_promote_original_failed_execution (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest) ... ok
+test_entire_original_bundle_is_restored_and_hash_checked (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest) ... ok
+test_modified_external_primary_cannot_fall_back_to_embedded_bytes (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest) ... ok
+test_nonempty_actual_recovery_deliveries_replay_their_original_runtime3 (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest) ... ok
+test_original_archive_and_model_files_remain_unchanged (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest) ... ok
+test_rehashed_duplicate_delivery_is_rejected (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest) ... ok
+
+======================================================================
+ERROR: test_coherently_dropped_events_still_cannot_prove_history_completeness (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package7_closed_native.ClosedNativePackage7SourceTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-closed-native-package7-audit9-f1/Scripts/StructTrain/TimeLearner/composite_primary.py", line 93, in capture_primary_blobs
+    try: mirrored = external_resolver(name) if callable(external_resolver) else external_resolver[name]
+TypeError: filesystem_primary_resolver.<locals>.resolve() takes 1 positional argument but 2 were given
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-closed-native-package7-audit9-f1/Scripts/StructTrain/TimeLearner/tests/test_candidate_window_package7_closed_native.py", line 111, in test_coherently_dropped_events_still_cannot_prove_history_completeness
+    result=audit_candidate_window_recovery_package(changed,summary,external_resolver=self.resolver)
+  File "/home/user/timelearner-refactor/source-closed-native-package7-audit9-f1/Scripts/StructTrain/TimeLearner/candidate_window_package_evidence.py", line 76, in audit_candidate_window_recovery_package
+    return _audit_candidate_window_package(document,summary,external_resolver=external_resolver,recovery=True)
+  File "/home/user/timelearner-refactor/source-closed-native-package7-audit9-f1/Scripts/StructTrain/TimeLearner/candidate_window_package_evidence.py", line 97, in _audit_candidate_window_package
+    group_audit=archive_reader(document['measurement_archive'],package['configuration'],
+  File "/home/user/timelearner-refactor/source-closed-native-package7-audit9-f1/Scripts/StructTrain/TimeLearner/candidate_window_archive_evidence.py", line 262, in audit_candidate_window_recovery_archive
+    return _audit_candidate_window_archive(document,configuration,runtime_plan=runtime_plan,
+  File "/home/user/timelearner-refactor/source-closed-native-package7-audit9-f1/Scripts/StructTrain/TimeLearner/candidate_window_archive_evidence.py", line 283, in _audit_candidate_window_archive
+    primary=capture_primary_blobs(archive['primary_blobs'],refs,archive['maximum_total_primary_bytes'],external_resolver=external_resolver)
+  File "/home/user/timelearner-refactor/source-closed-native-package7-audit9-f1/Scripts/StructTrain/TimeLearner/composite_primary.py", line 96, in capture_primary_blobs
+    raise EvidenceError('composite_external_primary_missing') from error
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: composite_external_primary_missing
+
+----------------------------------------------------------------------
+Ran 9 tests in 10.942s
+
+FAILED (errors=1)

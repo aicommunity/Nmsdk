@@ -1,0 +1,53 @@
+{
+  "kind": "stock_recovery_frozen_job_observation",
+  "schema_version": 1,
+  "observed_utc": "2026-11-06T19:32:33.911064+00:00",
+  "host": "10.245.1.17",
+  "job_id": "s07-stock-recovery-frozen-normal-a1",
+  "state": "native_evaluation_completed_render_retry_running",
+  "queue_owner": {
+    "pid": 1178598,
+    "start_ticks": "306363827"
+  },
+  "dependency": {
+    "job_id": "s07-stock-recovery-normal-a1",
+    "kernel_main_pid": 1168109,
+    "kernel_start_ticks": "306264528",
+    "all_processes_closed": false,
+    "required_state": "closed_and_released_with_valid_complete_matrix"
+  },
+  "tool_root": "5d0ac867ac9786b5b6b846eec1cd5b2aae8a62c1",
+  "planned_trials": 64,
+  "planned_trial_soma_pairs": 160,
+  "models_to_evaluate": 8,
+  "runtime_mutated": false,
+  "classification_result_available": true,
+  "scientific_verdict": null,
+  "launcher_label_limitation": "queue owner role string inherited transport25 build wording; actual worker has no build and executes stock_recovery_evaluation.run/report only",
+  "primary_git_publication_pending": false,
+  "native_evaluation_trials_completed": 64,
+  "completed_training_models": 0,
+  "native_evaluation_owner": {
+    "pid": 1201508,
+    "start_ticks": "306622075",
+    "closed_released": true
+  },
+  "render_retry": {
+    "job_id": "s07-stock-recovery-render-normal-a2",
+    "owner": {
+      "pid": 1217145,
+      "start_ticks": "306822050"
+    },
+    "renderer": {
+      "pid": 1218755,
+      "start_ticks": "306841255"
+    },
+    "python": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python",
+    "cache": "/media/user/Data/TimeLearnerRefactor/ReportsCache/stock-recovery-render-normal-a2",
+    "native_calculation_repeated": false,
+    "visual_acceptance_complete": false
+  },
+  "original_render_failure": "plotting_runtime_unavailable: No module named matplotlib",
+  "evidence_commit": "8ca095726d811a6797bbd82671987635f9b7da53",
+  "classification_result_role": "diagnostic_only_stopped_models"
+}

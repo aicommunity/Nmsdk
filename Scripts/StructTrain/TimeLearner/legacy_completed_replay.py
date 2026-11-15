@@ -38,8 +38,8 @@ def _archived(repo, revision, entry):
             and not PurePosixPath(name).is_absolute() and ".." not in PurePosixPath(name).parts,
             "invalid_legacy_replay_archive_path")
     try:
-        raw = subprocess.check_output(["git", "-C", str(repo), "show", revision+":"+name],
-                                      timeout=60, stderr=subprocess.PIPE)
+        from .history import read_bytes
+        raw = read_bytes(repo, revision, name, maximum_bytes=128*1024**2)
     except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as error:
         raise EvidenceError("legacy_replay_git_read_failed:"+name) from error
     require(_digest(raw) == entry["stored_sha256"], "legacy_replay_stored_hash_mismatch:"+name)

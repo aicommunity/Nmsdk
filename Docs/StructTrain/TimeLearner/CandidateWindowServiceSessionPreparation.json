@@ -1,0 +1,90 @@
+{
+  "kind": "candidate_window_service_session_mapping_source_preparation",
+  "schema_version": 1,
+  "status": "design_and_source_mapping_only",
+  "root_base": "6579c58386a0b77dd79926c5ff3b1bb93b84a884",
+  "pulse_base": "376bee62adadb3306afec72634665aab0a612b01",
+  "production_sources": [
+    {
+      "path": "Core/TimeLearner/NativeTrainingService.h",
+      "git_blob_sha256": "b6ef73e59c8a0f1e8e796a7282fb5abd858460438a9780b0cc2669ad33b987a3",
+      "bytes": 13874
+    },
+    {
+      "path": "Core/TimeLearner/NativeTrainingService.cpp",
+      "git_blob_sha256": "ac69b2c2735a55e5095d13381c2c2c6c70384eb9da9c69f9fab145b5ffec99cc",
+      "bytes": 32443
+    },
+    {
+      "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+      "git_blob_sha256": "80f082700702e2d80bf53bea4b0c31a368bd8ab9059f505c5d2151ce165593a8",
+      "bytes": 35151
+    },
+    {
+      "path": "Core/TimeLearner/NativeTrainingBindings.h",
+      "git_blob_sha256": "516454a7ec9a2842c50b167978dfd67b632791031ef211386d587f6892eb0939",
+      "bytes": 3488
+    },
+    {
+      "path": "Core/TimeLearner/NativeLearnerLifecycle.h",
+      "git_blob_sha256": "ee34d560389dec47bef070406438d00af6b614117a42445c48972a5101b3a363",
+      "bytes": 7435
+    },
+    {
+      "path": "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
+      "git_blob_sha256": "c695eb5c7078ab14731a4a6ec79fbc2794fe47bf22b69b6b3cb1050f419f15e1",
+      "bytes": 57943
+    },
+    {
+      "path": "Core/TimeLearner/NativeCompositeTrainingEvidence.cpp",
+      "git_blob_sha256": "63b6f4b9e7ec1022e4e1f4abbed7f0d57d4431d626e0049259cadd5a6b8cc190",
+      "bytes": 70837
+    },
+    {
+      "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+      "git_blob_sha256": "4ed28b074b9046c18a131639cfd5470b940733e7b38e9e5ab78de84799765882",
+      "bytes": 29651
+    },
+    {
+      "path": "Core/TimeLearner/CompositePortableTrainingProof.cpp",
+      "git_blob_sha256": "28df1a956c80089aad3d1e6266425e1136448681a1212f252826be96e0c4de9b",
+      "bytes": 5839
+    },
+    {
+      "path": "Core/NNeuronTimeLearner.cpp",
+      "git_blob_sha256": "25d991998c93b98a1a62085e6f5b091949f19314ce98148ec51c7cfcc63f1e82",
+      "bytes": 287835
+    },
+    {
+      "path": "Core/NNeuronTimeLearnerBranch.cpp",
+      "git_blob_sha256": "c15e807599f41695a44e42a6be139a26c0143ee617f8d4c0073f793be347dc1c",
+      "bytes": 333023
+    }
+  ],
+  "implementation_changed": false,
+  "new_compiled_tests": 0,
+  "planned_controls_are_not_literal_inventory": true,
+  "full_callback_248_ids_subset_of_declared_core_408": true,
+  "referenced_inventories": [
+    "CandidateWindowTrainA0GateInventory.json",
+    "CompositeCancellationDeliveryGateInventory.json",
+    "CandidateWindowStep2DeclarationFrameGateInventory.json",
+    "CandidateWindowTrainCoreGateInventory.json"
+  ],
+  "deferred_runtime_gates": [
+    "mechanical97 A-B",
+    "STEP2 d688 mechanical A-B",
+    "callback248 full and separate timing fault gate",
+    "STEP2 native/factory/archive102 and384 union",
+    "typed core24 and408 union",
+    "new service5 actual composition",
+    "cold7/package6/summary7/runtime2/execution4 actual Train/import/Test and independent primary audit"
+  ],
+  "new_public_api_or_versions_frozen_by_this_doc": false,
+  "cli_or_defaults_enabled": false,
+  "source_cache_updates": false,
+  "local_compile": false,
+  "numerical_tests": false,
+  "server_dispatch": false,
+  "runtime_acceptance": false
+}

@@ -1,0 +1,16 @@
+{
+  "returncode": 0,
+  "arguments": [
+    "/usr/bin/python3.12",
+    "-B",
+    "-m",
+    "Scripts.StructTrain.TimeLearner.validation",
+    "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-primary-independent-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainPrimaryIndependentA1-20261112/suite.json",
+    "--output",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-primary-independent-m40-a1/worker/validation",
+    "--fixture",
+    "TIMELEARNER_OBSERVATION_DOMAIN_COMBINED_PRIMARY=/media/user/Data/TimeLearnerRefactor/source-observation-domain-primary-independent-a1/Reports/StructTrain/TimeLearner/ObservationDomainCombinedPrimary-M40-20261112",
+    "--fixture",
+    "TIMELEARNER_OBSERVATION_DOMAIN_BRANCH_PRIMARY=/media/user/Data/TimeLearnerRefactor/source-observation-domain-primary-independent-a1/Reports/StructTrain/TimeLearner/ObservationDomainBranchPrimary-M40-20261112"
+  ]
+}

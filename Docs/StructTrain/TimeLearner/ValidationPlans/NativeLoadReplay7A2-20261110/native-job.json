@@ -1,0 +1,96 @@
+{
+  "kind": "timelearner_native_acceptance_job",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "preparation": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-load-replay7-m40-a2-controller/inputs/preparation.json",
+  "paths": {
+    "source": "/media/user/Data/TimeLearnerRefactor/source-native-load-history-replay-m40-a2",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-native-load-replay7-m40-a2",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-native-load-replay7-m40-a2",
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-load-replay7-m40-a2",
+    "resources": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+    "framework": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+  },
+  "build": {
+    "type": "RelWithDebInfo",
+    "parallel": 2,
+    "wall_seconds": 10800,
+    "required_cache_tokens": [
+      "CMAKE_BUILD_TYPE:STRING=RelWithDebInfo",
+      "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O1 -g1 -fsanitize=address -fno-omit-frame-pointer",
+      "CMAKE_C_FLAGS:STRING=",
+      "CMAKE_CXX_FLAGS:STRING=",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=-fsanitize=address",
+      "CMAKE_SHARED_LINKER_FLAGS:STRING=-fsanitize=address",
+      "CMAKE_MODULE_LINKER_FLAGS:STRING=",
+      "CMAKE_STATIC_LINKER_FLAGS:STRING=",
+      "FETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_SOURCE_DIR_GOOGLETEST:PATH=/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "RDK_USE_LLM:BOOL=ON",
+      "RDK_LLM_BUILD_EMBEDDED:BOOL=ON",
+      "RDK_LLM_LLAMA_CPP_DIR:PATH=/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "NMSDK_BUILD_PARALLEL_JOBS:UNINITIALIZED=2"
+    ]
+  },
+  "limits": {
+    "whole_wall_seconds": 43200,
+    "leaf_memory_bytes": 4294967296,
+    "leaf_tasks": 128,
+    "physical_free_floor_bytes": 536870912,
+    "reservation_memory_bytes": 8589934592,
+    "reservation_disk_bytes": 17179869184
+  },
+  "asan_options": "detect_leaks=0",
+  "protected_runtimes": [
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3-container",
+    "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1-container",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a2",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a2-container",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s10-cold-envelope-canonical-m40-a2",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a3",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a3-container",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s10-cold-envelope-canonical-m40-a3",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native119-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native119-m40-a1-controller",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native119-m40-a2",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native119-m40-a2-controller",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-fixed4-package6-31-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-fixed4-package6-31-m40-a1-controller",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-roundtrip-diagnostic-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-roundtrip-diagnostic-m40-a1-controller",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native-rest-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native-rest-m40-a1-controller",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-rest-observed18-m40-a2",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-rest-observed18-m40-a2-controller",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-image-rest20-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-image-rest20-m40-a1-controller",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-load-history6-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-load-history6-m40-a1-controller"
+  ],
+  "artifacts": [
+    {
+      "glob": "actual-class-image-replay/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "actual-class-image-replay/actual-class-image-cycle-*.json",
+      "minimum": 3,
+      "maximum": 3
+    },
+    {
+      "glob": "native-load-history-6/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-load-history-6/native-load-history-*.json",
+      "minimum": 6,
+      "maximum": 6
+    }
+  ]
+}

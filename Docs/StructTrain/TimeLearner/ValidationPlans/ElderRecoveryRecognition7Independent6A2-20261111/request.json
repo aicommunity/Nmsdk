@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-recovery-recognition7-independent6-elder-a2",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 1073741824,
+    "maximum_output_bytes": 1073741824
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-recovery-recognition7-native10-a1",
+      "commit": "ca8be945377d9833a789a847ee5b7cae9241050f"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/recovery-recognition7-independent6-a2/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRecoveryRecognition7Independent6A2-20261111/suite.json",
+      "sha256": "b33cc191a75da222bc3aa49e1ae600df06cc118a31e49bff14b6d01647d0d2d1"
+    },
+    "fixtures": {
+      "TIMELEARNER_RECOVERY_RECOGNITION7_NATIVE_BUNDLE": "/home/user/timelearner-refactor/publications/recovery-recognition7-native10-a2/Reports/StructTrain/TimeLearner/RecoveryRecognition7Native10ClosedCorpus-20261111"
+    }
+  }
+}

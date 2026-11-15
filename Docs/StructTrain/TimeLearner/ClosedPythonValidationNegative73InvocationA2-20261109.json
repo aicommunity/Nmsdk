@@ -1,0 +1,179 @@
+{
+  "kind": "closed_python_negative73_existing_collector_invocation",
+  "schema_version": 1,
+  "status": "data_only_reference_A2_prepared_not_dispatched",
+  "reference_accepted_actual40_publication_plan_commit": "57685acac54363148d4688b986bdc5c0cd9da51f",
+  "reference_actual40_success_commit": "ef2586fa043507a6a6c9e5f6d218568665edd6f9",
+  "collector_source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+    "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+    "new_source_changes": false
+  },
+  "immutable_manifest": {
+    "commit": "b1b063d3ce103e43220c39c73c89b1a65c4f3ff8",
+    "path": "/media/user/Data/TimeLearnerRefactor/plan-negative73-maintained-reference-a2/Docs/StructTrain/TimeLearner/ClosedPythonValidationNegative73CollectionA2-20261109.manifest.json",
+    "bytes": 29909,
+    "sha256": "48b376260d67d7210dc6580c5a4687bd6648971192e646775dc05eca9774e5c1"
+  },
+  "original_negative_required": {
+    "job_id": "s10-candidate-window-runtime2-reader73-m40-a1",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "d73748197713229e6ccc0cc1e77747e1126125f62e2ebd926183876fff3b7e75",
+      "unit": "timelearner-6349ad73-edf3-4d22-b67b-da27c661f8f7.service",
+      "invocation_id": "e919af853d9b412fbf1f1383756a01a1",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6349ad73-edf3-4d22-b67b-da27c661f8f7.service",
+      "initial_main_pid": 1165304,
+      "initial_start_ticks": "328727693",
+      "sha256": "123613e03fc2ee29f5de469d6c3a7980cf1c773616ae85f46beda054b3ee7aeb"
+    },
+    "released_original_lease": "0c46a41e-5f7c-4528-b116-000ed45e8421",
+    "tests": 73,
+    "passed": 72,
+    "failures": [
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_C_region_and_context_count_limits_are_checked"
+    ],
+    "diagnostic_fragments": {
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_C_region_and_context_count_limits_are_checked": [
+        "AssertionError: EvidenceError not raised"
+      ]
+    },
+    "errors": [],
+    "skipped": [],
+    "original_controller_execution": "process_error",
+    "original_controller_returncode": 1,
+    "original_worker_operation_passed": false
+  },
+  "full_readonly_prepare_before_new_evidence_Git_writes": {
+    "working_directory": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+    "arguments": [
+      "/usr/bin/python3.12",
+      "-B",
+      "-c",
+      "import json;from pathlib import Path;from Scripts.StructTrain.TimeLearner.closed_python_validation import prepare_closed_collection;p=prepare_closed_collection(Path('/media/user/Data/TimeLearnerRefactor/plan-negative73-maintained-reference-a2/Docs/StructTrain/TimeLearner/ClosedPythonValidationNegative73CollectionA2-20261109.manifest.json'),'48b376260d67d7210dc6580c5a4687bd6648971192e646775dc05eca9774e5c1');print(json.dumps({'prepared_readonly':True,'manifest_sha256':p.manifest_sha256,'original_gate':p.outcome,'original_binding':p.observation['closure']['binding'],'collection_writes':False,'scientific_verdict':None},allow_nan=False))"
+    ],
+    "failure": "preserve error; no Gitinit/collect/stage; no retry/relaxation"
+  },
+  "fresh_evidence_parent_after_prepare": {
+    "existing_helper": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner_deliver_empty_private_source_v2.py",
+    "helper_sha256": "87ee30282b008f7e2d8870565f6b2532bcf3a907833c81add36e216474b58bc4",
+    "parameters_no_credentials": {
+      "host": "10.245.1.17",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "destination": "/media/user/Data/TimeLearnerRefactor/evidence-candidate-window-runtime2-reader73-negative-maintained-a1",
+      "pack": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\closed_python_actual40_parent9ed_evidence_a1.pack",
+      "patterns": [
+        "/.gitattributes",
+        "/.gitignore",
+        "/.gitmodules",
+        "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+        "/LLM/.gitignore"
+      ]
+    },
+    "parent_tree": "f4190f214d6adb82c0929b1952dd0fd332485717",
+    "parent_pack": {
+      "local_path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\closed_python_actual40_parent9ed_evidence_a1.pack",
+      "bytes": 2105835,
+      "sha256": "3800d808662845ef6f6fdce427fbd35380b2968896e1ee0d9f4b30e05ad72cf0",
+      "objects": 3850,
+      "omitted_blob_bodies": "all parent blobs except five controls; no fetching/alternates/old source/Reports/SDK body hydration"
+    },
+    "required_canonical_absence": "/media/user/Data/TimeLearnerRefactor/evidence-candidate-window-runtime2-reader73-negative-maintained-a1",
+    "Reports_parent_mkdir_arguments": [
+      "/usr/bin/python3.12",
+      "-B",
+      "-c",
+      "from pathlib import Path;Path('/media/user/Data/TimeLearnerRefactor/evidence-candidate-window-runtime2-reader73-negative-maintained-a1/Reports/StructTrain/TimeLearner').mkdir(parents=True,exist_ok=False)"
+    ]
+  },
+  "existing_contained_runner_execute": {
+    "API": "Scripts.StructTrain.TimeLearner.contained_runner.execute",
+    "manifest": "actual schema2 Python metadata runtime exactly as accepted40; app_ini is unchanged NEW manifest A2 sha48b376...; tool_root9ed; actual interpreter/libraries/launch-context bytes; SDK_source_verifiedfalse",
+    "arguments": [
+      "/usr/bin/python3.12",
+      "-B",
+      "-m",
+      "Scripts.StructTrain.TimeLearner.closed_python_validation",
+      "collect",
+      "/media/user/Data/TimeLearnerRefactor/plan-negative73-maintained-reference-a2/Docs/StructTrain/TimeLearner/ClosedPythonValidationNegative73CollectionA2-20261109.manifest.json",
+      "--manifest-sha256",
+      "48b376260d67d7210dc6580c5a4687bd6648971192e646775dc05eca9774e5c1",
+      "--output",
+      "/media/user/Data/TimeLearnerRefactor/evidence-candidate-window-runtime2-reader73-negative-maintained-a1/Reports/StructTrain/TimeLearner/s10-candidate-window-runtime2-reader73-negative-maintained-a1"
+    ],
+    "working_directory": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collect-candidate-window-runtime2-reader73-m40-a1/process",
+    "maximum_wall_seconds": 240,
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "cooperative_capture": false,
+    "managed_reservation": null,
+    "on_started": "same minimal Root exact STARTED+runtime callback as actual40; no new supervisor loop",
+    "monitor": null,
+    "sole_publication_lease_owner": "direct maintained CLI initialMainPID; match new receipt collection_id s10-collect-candidate-window-runtime2-reader73-m40-a1"
+  },
+  "outputs": {
+    "evidence_repository": "/media/user/Data/TimeLearnerRefactor/evidence-candidate-window-runtime2-reader73-negative-maintained-a1",
+    "Reports_prefix": "Reports/StructTrain/TimeLearner/s10-candidate-window-runtime2-reader73-negative-maintained-a1",
+    "output": "/media/user/Data/TimeLearnerRefactor/evidence-candidate-window-runtime2-reader73-negative-maintained-a1/Reports/StructTrain/TimeLearner/s10-candidate-window-runtime2-reader73-negative-maintained-a1",
+    "outer_control": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collect-candidate-window-runtime2-reader73-m40-a1",
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "success_requires": [
+    "new controller completed0, fresh exact outerclosure and clear operational diagnostics",
+    "maintained collection_status completed while original_gate_outcome remains failed73/72+1",
+    "exact new ownlease released; only its token/binding may be recovered via existing API if necessary",
+    "original73/source1292/ToolCEC/fixture157 immutable beforeafter; no new old73 execution",
+    "final4 artifacts+inventory; stage owner verifies exact5 addition set, parent9ed and no original/source changes"
+  ],
+  "stage_arguments": [
+    "/usr/bin/python3.12",
+    "-B",
+    "-m",
+    "Scripts.StructTrain.TimeLearner.closed_python_validation",
+    "stage",
+    "/media/user/Data/TimeLearnerRefactor/evidence-candidate-window-runtime2-reader73-negative-maintained-a1/Reports/StructTrain/TimeLearner/s10-candidate-window-runtime2-reader73-negative-maintained-a1",
+    "--repository",
+    "/media/user/Data/TimeLearnerRefactor/evidence-candidate-window-runtime2-reader73-negative-maintained-a1"
+  ],
+  "expected_index_additions": [
+    "Reports/StructTrain/TimeLearner/s10-candidate-window-runtime2-reader73-negative-maintained-a1/artifact-inventory.json",
+    "Reports/StructTrain/TimeLearner/s10-candidate-window-runtime2-reader73-negative-maintained-a1/capture-proof.json",
+    "Reports/StructTrain/TimeLearner/s10-candidate-window-runtime2-reader73-negative-maintained-a1/packed/bundle.json",
+    "Reports/StructTrain/TimeLearner/s10-candidate-window-runtime2-reader73-negative-maintained-a1/packed/primary.tar.xz",
+    "Reports/StructTrain/TimeLearner/s10-candidate-window-runtime2-reader73-negative-maintained-a1/verification.json"
+  ],
+  "commit_and_readback": "same standard Git write-tree --missing-ok /commit-tree -p9ed/exact5-diff/object-only transfer/independent verify/push discipline as accepted40; new branch refs/heads/codex/timelearner-candidate-window-runtime2-reader73-negative-maintained-a1-evidence",
+  "primary_fixture": "actual157 unchanged75MB; all4 unchanged commit/path/blob/SHA roles now use fresh exactHEADb4 reference projection; old9d407 and original evidenceODB never hydrated/modified; no payload in new bundle",
+  "no_new_operation_or_orchestrator": true,
+  "Root_dispatch_only": true,
+  "scientific_verdict": null,
+  "prior_readonly_stop": {
+    "reason": "collector_git_role_object_unavailable",
+    "old_manifest_preserved": "9c9cc17a732fe31d17429401e5af3a6545f11f53",
+    "no_evidenceRepo_or_owned_collection_or_lease_created": true
+  },
+  "reference_projection_before_fullprepare": {
+    "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "path": "/media/user/Data/TimeLearnerRefactor/reference-composite-native-a4-b4feb-negative73-a1",
+    "patterns": [
+      "/.gitattributes",
+      "/.gitignore",
+      "/.gitmodules",
+      "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+      "/LLM/.gitignore"
+    ],
+    "requires_ODB": "alltrees+4 EXACT existing primary role blobs+5controls; no Reports bytes materialized",
+    "existing_owner_checked": "evidence-native-acceptance-full250-m40-a4 has evidence refb4 and6668 blob but unbornHEAD; oldODB unchanged",
+    "Git_delivery_descriptor": "TEMP/negative73_reference_b4_manifest_b1_a2.json",
+    "no_full157_75MB_copy": true
+  },
+  "new_control_projection": {
+    "commit": "b1b063d3ce103e43220c39c73c89b1a65c4f3ff8",
+    "path": "/media/user/Data/TimeLearnerRefactor/plan-negative73-maintained-reference-a2",
+    "manifest_relative_path": "Docs/StructTrain/TimeLearner/ClosedPythonValidationNegative73CollectionA2-20261109.manifest.json",
+    "Git_delivery_descriptor": "TEMP/negative73_reference_b4_manifest_b1_a2.json"
+  }
+}

@@ -1,89 +1,88 @@
-# Состояние реализации TimeLearner — 06.11.2026
+> 15.11.2026: [Branch N0 measured-length search](N0BranchLengthScientificReport-20261115.ru.md) принят адресно (kernel6/6 на M40/Elder, native SDK105/105). Первый timing-ready кандидат25→7, но лучший amplitude residual прежний4.53× tolerance; Train не сошёлся. Все32 frozen native probes двух остановленных моделей выполнены: при100 молчание, при0.0117 TP1/FP7/FN0/TN0 и ранние target spikes у обеих; исправлена ошибка вложенного source_solo в Python-оболочке, read-only перепроверка завершена1/1, построен [полный отчёт32 проб](N0BranchLengthFrozenReport-20261115.json) с1995 оригинальными PNG и native zoom. [Читаемые positive/LT масштабы](N0BranchLengthPositiveReport-20261115.json) для всех16 низкопороговых проб также завершены1/1; просмотрены8 выбранных дополнительных изображений. Исходные ошибочные wrapper receipts сохранены. [Exploratory local-budget12](N0LocalBudget12ScientificReport-20261115.ru.md) завершён1/1/DATA/physical: после свежего inexact best действительно запрошен input1, но L28..32 ambiguous; certificate=null. Его12 графиков построены,3 overview просмотрены. Все primary и полные галереи вне Git на M40; [проверяемые refs](N0BranchLengthFrozenPrimary-20261115.json). Это уточнение этапов7/11, а не полная приёмка этапов1–12.
 
-**Полностью принят только исходный этап0. Этапы1–12 выполнены частично.**
-Эта сводка описывает текущее состояние; исторические подэтапы и их численные
-итоги следует читать по неизменяемым receipts. Наличие кода, отдельный PASS,
-merge и научная разделимость — разные утверждения. Требования целиком сохранены
-в [плане](RefactoringPlan.ru.md); результат8/8 не является условием его завершения.
+> 15.11.2026: origin очищен атомарно: 1 204 затронутые ветки и согласованный тег; 46 остальных публичных ссылок сохранены. Полная проекция проверена: 14 106 commits / 31 448 refs. Локальные копии и обе Windows-машины прошли переключение и очистку; M40 и Elder также приняты: все 1 362 явно учтённых root stores и 1 621 индекс проверены. Последний ненужный временный каталог удалён пользователем, отсутствие подтверждено; техническая миграция завершена; [область и квитанции](RootHistoryCleanup-2026-11-15.ru.md). Это техническая миграция без нового Train/Test и без изменения научных verdict.
 
-## Принятый код и проверяемый срез
+> Действующая политика с 14.11.2026: тяжёлые результаты и полные галереи хранятся в [архиве M40](ExternalExperimentArchive.ru.md), в Git — код, настройки, компактные метаданные и проверяемые `*.archive.json`. Указания ниже о сохранении primary/изображений непосредственно в Git описывают прежний снимок и больше не применяются к новым публикациям. Исходные научные наблюдения и контрольные суммы пакетов сохраняются.
 
-| Источник | Состояние |
+# Состояние реализации TimeLearner — 15.11.2026
+
+[Весь новый Classic cold4 primary независимо восстановлен и проанализирован на Elder](ValidationPlans/ElderClassicCold4PrimaryReplayA2-20261114/RESULT.ru.md):1/1 PASS,910 logical members, corrupted-extracted-CSV refusal.14 measured candidates/0 jointly-ready и invalid_observation сохранены; нового нейронного исполнения нет.
+
+[Отдельный N0-контроль](StockNormalizationControl.ru.md):11/11 declaration regressions приняты на M40 и Elder; оба native cold preflight Classic/Branch приняты1/1 на прежнем SDK. [Classic N0 завершён, полный DATA/physical1/1 принят](ValidationPlans/M40StockN0ClassicTrainA1-20261114/RESULT.ru.md):13 measured candidates/0 timing-ready, invalid_observation/ambiguous; Ns>1 не применён, certificate=null. [Branch N0 завершён, полный аудит1/1 принят](ValidationPlans/M40StockN0BranchTrainA1-20261114/RESULT.ru.md):budget_exhausted,42 candidates/9 timing-ready/0 jointly-ready, Ns1..5 измерены. Оба полных primary собраны (28.456/38.090MB), собственные графики ожидаются. [Classic fixed100 frozen8 завершён](ValidationPlans/M40StockN0ClassicFrozenA1-20261114/RESULT.ru.md): TP0/FP0/FN1/TN7, все8 complete/valid, модель неизменна; [собственный32-pair report готов](ClassicN0FrozenScientificReport-20261114.ru.md),11 выбранных оригинальных PNG просмотрены. Полный compact frozen primary сохранён во внешнем архиве M40; [Branch frozen8 завершён](ValidationPlans/M40StockN0BranchFrozenA1-20261114/RESULT.ru.md): TP0/FP0/FN1/TN7, модель/source graph неизменны; [собственный отчёт готов](BranchN0FrozenScientificReport-20261114.ru.md), все8 overview просмотрены; [ограничение N0 search gate подтверждено](N0GeometryNormalizationReview-20261114.ru.md), кандидат C++ исправления реализован (Pulse58c6e6d51c749a13a79498a681e14ea2fe353ed7), [Elder same-corpus kernel A4 принят](ValidationPlans/ElderN0GeometryABA4-20261114/RESULT.ru.md): baseline5 ожидаемых failures/candidate6/6 PASS, [независимый M40 kernel принят](ValidationPlans/M40N0GeometryABA1-20261114/RESULT.ru.md) с тем же исходом; [native SDK99/99 принят](ValidationPlans/M40N0GeometrySdkA1-20261114/RESULT.ru.md); [Matched-current-OS physical A/B A2 завершён](N0GeometryPhysicalScientificReport-20261114.ru.md): оба production1/1 приняты, оба native Train budget_exhausted,0 jointly-ready. Первые31 измеренных кандидата совпали; after исследует новые Ns и уменьшает лучший timing-ready amplitude residual примерно6.80×, но он всё ещё4.53× выше допуска. [Реальный Classic N0 fixed-threshold опыт завершён](ClassicN0ThresholdScientificReport-20261114.ru.md):TP1/FP4/FN0/TN3, target0.503с после последнего входа0.49с; stopped-model Same-Matrix, не завершённое обучение. [Его отчёт с графиками всех8 паттернов готов](ClassicN0ThresholdScientificReport-20261114.ru.md):27 исходных PNG,11 Soma positive-Y details и8 исправленных LT companions A2 просмотрены; [A2 принят1/1](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/RESULT.ru.md). [Собственные A/B Train waveforms также готовы](ValidationPlans/M40N0GeometryTrainingReportA1-20261114/RESULT.ru.md). Вся матрица не принята.
+
+Полностью принят исходный этап0. Этапы1–12 частичны: адресные проверки и реальные эксперименты существуют, но полная обязательная матрица и завершение миграции не приняты. Научный результат8/8 не является условием завершения; количество инженерных PASS не доказывает работу классификатора. Источники требований: [утверждённый план](RefactoringPlan.ru.md), [исходный аудит](PlanCompletionAudit-2026-10-25.ru.md).
+
+## Последний завершённый Train и текущее задание
+
+[Холодный Classic N4/N1 recovery4 завершён](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md): production1/1/DATA/physical audit приняты, native/outer закрыты.14 measured candidates,0 jointly-ready, затем5 ambiguous input0 на L54/52/50/48/45; certificate=null, классификация не оценивалась. Это не same-budget сравнение с прежним Classic recovery16. [Весь compact primary29.285MB сохранён во внешнем архиве M40](ValidationPlans/M40N1CoupledClassicPrimaryA1-20261114/RESULT.ru.md), [научный отчёт готов:12 просмотренных overview всех4 soma выбранных групп](ClassicCoupledCold4ScientificReport-20261114.ru.md); нового Train/Test/threshold tuning нет.
+
+[Cold Branch N4/N1 coupled-search](ValidationPlans/M40N1CoupledBranchTrainA1-20261113/RESULT.ru.md) завершён: production1/1 PASS, native/outer closed. Один реально измеренный кандидат input2 одновременно удовлетворяет timing/amplitude допускам; следующий input1 дал5 ambiguous rejections. Итог invalid_observation, certificate=null, all-input verification отсутствует. Это локальный прогресс относительно прежних0 jointly-ready, не работа всей модели/классификатора.
+
+Source SDK root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8, runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Actual job/initial bytes равны baseline; scientific limits не изменены. SDK A4[93/93](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md) принята адресно; A1/A2/A3 failures сохранены. Этапы1–12 остаются частичными.
+
+[Научный отчёт](N1CoupledScientificReport-20261113.ru.md) готов: read-only report1/1 PASS, все4 original PNG с actual input overlays просмотрены. Full primary24.11MB сохранён во внешнем архиве M40. Frozen diagnostic8pattern evaluation фактического terminal state принят1/1: полные8observations, модель неизменна, TP0/FP0/FN1/TN7 при100. [Реальный fixed Same-Matrix threshold опыт завершён](BranchCoupledThresholdScientificReport-20261114.ru.md): TP1/FP5/FN0/TN2, target0.262s раньше последнего входа0.49s. Все16 observations complete/valid, models frozen;32 selected temporal originals просмотрены. Это плохая разделимость остановленного состояния, не завершённое обучение. Полный primary69.875324MB сохранён; независимый restore нового архива открыт.
+
+## Последние научные результаты
+
+| Результат | Что подтверждено | Ограничение |
+|---|---|---|
+|[Same-budget Branch N1 local turn](N1LocalTurnScientificReport-20261113.ru.md)|Train completed/valid, unit1/1;52 consumed candidates/55 domains/105 search probes. На[26,26,25,1] Rs86M и2.880071555M дают противоположные amplitude residuals при обоих timing-valid. Job/initial bytes совпадают с baseline; первые600 CSV равны. Четыре temporal originals с omission controls просмотрены.|BudgetExhausted, certificate=null;5 timing-ready,0 jointly-ready, поиск только input2. Классификация не измерялась. Последний unconsumed graph не становится лучшим кандидатом.|
+|[Actual Classic fixed threshold](ActualThresholdScientificReport-20261113.ru.md)|Два completed/valid native runs,16 полных observations, модель неизменна. При фиксированном0.013048873000159292:TP1/FP2/FN0/TN5. Все8 LT overview, target zoom, target Soma1 и два выбранных details просмотрены.|Target0.2645s раньше последнего входа0.49s;3 из4 событий относятся к foils. Это Same-Matrix partial6/8 остановленной модели, не completed-pattern detection/завершённое обучение. Общий acquisition test FAILED при cleanup; исправление не делает исходный тест PASS.|
+|[Branch shared-bank Rs](BranchSharedBankScientificReport-20261113.ru.md)|Matched replay86M и coherent bank21.5M при[27,27,27,1], общий Soma1 max0.005456576369859967→0.02235560254260882. Все3 выбранных waveform originals просмотрены.|Глобальный максимум не assigned-input certificate. Нет доказательства обучения либо классификации.|
+|[L14→L15 и потеря assignment](L14L15AssignmentTransitionScientificReport-20261113.ru.md)|Реальные full/omission controls показывают4→3 вершины; [L22 Rs study](L22BurstResistanceScientificReport-20261113.ru.md) усиливает сигнал, но не восстанавливает отдельную вершину на четырёх Rs.|Не менять смысл закреплённого импульса ради положительного verdict.|
+|[Исторический август](HistoricalAugustColdStart.ru.md), [order/ITI](HistoricalFrozenProtocolMatrixScientificReport-2026-11-07.ru.md)|Сохранены рабочие4/8–6/8 исходного протокола, cold/replay и отдельная frozen protocol matrix.|Современные отрицательные результаты не отменяют исходные визуальные наблюдения. Проверки одной frozen модели не доказывают универсальную устойчивость обучения.|
+
+## Первичные данные и воспроизводимость
+
+- [Branch local-turn whole primary44.21MB](ValidationPlans/M40N1LocalTurnPrimaryA1-20261113/RESULT.ru.md):2175 regular files+2 aliases, включая модели/summary/652 CSV и terminal partial material. Независимый restore этого нового пакета ещё не принят.
+- [Прежний Branch full-domain44.06MB](ValidationPlans/M40BranchFullDomainPrimaryA1-20261113/RESULT.ru.md):[независимый Elder restore/audit1/1](ValidationPlans/ElderBranchFullDomainPrimaryReplayA2-20261113/RESULT.ru.md), corrupt extracted CSV отвергнут.
+- [Branch Rs whole primary27.42MB](ValidationPlans/M40BranchSharedBankPrimaryA2-20261113/RESULT.ru.md):[restore2087regular files и3 DATA audits1/1](ValidationPlans/M40BranchSharedBankPrimaryReplayA1-20261113/RESULT.ru.md).
+- [Threshold whole primary56.37MB](ValidationPlans/M40ThresholdPrimaryRecompressionA2-20261113/RESULT.ru.md):точное сохранение uncompressed tar,881-file production restore1/1,1931.572s; первичные size failures сохранены.
+
+Размещение данных пересмотрено пользователем 14.11: primary/binary models и полные отчёты сохраняются во внешнем [архиве M40](ExternalExperimentArchive.ru.md), доступном по Samba. Git содержит код, настройки, небольшие метрики/manifests и references. Коррекция затронутой истории корня завершена; [проверки и границы](RootHistoryCleanup-2026-11-15.ru.md). Истории сабмодулей не переписывались. Raw receipts сохраняются побайтово; ns timestamps не проходят через binary64 JSON rewrite. Научные статусы и границы приёмки ниже не меняются от переноса данных.
+
+## Проверенное состояние
+
+| Область | Фактический результат и граница вывода |
 |---|---|
-|Root develop, проверенная отправная точка этой сводки|837b0c7aad7c6d1973325319a750ce8da8f0f070|
-|PulseLib в develop|0ec9193e6620ae2439329eece5ecd6d6f167c70a|
-|Bin в develop|37ff211fa6ba4999fc51802182915022b239a1eb|
-|Rdk в develop|10e9d05aa658dd2203c89bc84ba9166595b50014|
-|Проверяемый compiled SDK|Root2e0618110a9abb48b94f6edc6b63c51f829ec810 / Pulse12d8c8a41c998ae1516496f716a0ae0f3d312b3e; ещё не общий принятый C++ срез|
+| Предшествующий SDK полного Classic Train | Root92ad93cdf453967ac29108a9bbef5fd3905da59d / Pulsedfb9a98244f91b4f4029d8470465fd40116436ca. Свежие сборки и publication7: [M407/7](ValidationPlans/M40PublicationReceiptSdkA1-20261113/RESULT.ru.md), [Elder7/7](ValidationPlans/ElderPublicationReceiptSdkA1-20261113/RESULT.ru.md), процессы закрыты, reservations освобождены. Устранена повторная полная обработка пакета при публикации; [Большой native N4 export завершён в прежнем лимите](ValidationPlans/M40PublicationReceiptBudget16TrainA1-20261113/NATIVE_COMPLETED.ru.md); [Полный внешний DATA audit1/1 принят](ValidationPlans/M40PublicationReceiptBudget16TrainA1-20261113/RESULT.ru.md), whole group closed/lease released. |
+| Finalization/DATA перед этим изменением | На Root929/Pulsedfb проверены52 исходных IDs: M40 explicit composition с сохранённым исходным отрицательным контролем; Elder52/52. Это scoped N2 lifecycle/export/frozen-path, не научная N4 сходимость. [M40](ValidationPlans/M40FinalizationRemaining23A1-20261112/RESULT.ru.md), [Elder](ValidationPlans/ElderFinalizationData52A1-20261112/RESULT.ru.md). |
+| Stock N4 baseline | [8 actual cold probes](ValidationPlans/M40DataSdkCold8A1-20261112/RESULT.ru.md) complete/valid, физика и граф проверены, LTMembrane отсутствует. Это начальная характеристика, не результат обучения. |
+| Предыдущий Classic N4 Train | [Native timeout2100.32s](ValidationPlans/M40DataSdkBudget16TrainA1-20261113/RESULT.ru.md), исходные state/summary сохранены; training=budget_exhausted,62 поисковые пробы/31 изменение, certificate=null. Полный compact primary51.30MB опубликован. Отсутствующий execution не достраивается по сохранённому состоянию. |
+| Диагностика этого состояния | [8 полных frozen observations](ValidationPlans/M40Budget16FrozenDiagnostic8A1-20261113/RESULT.ru.md), completed/valid, unchanged model, TP0/FP0/FN1/TN7 при исходном threshold100. Target пропущен. Accuracy7/8 здесь означает только7 правильных молчаний foil. Калибровка не проводилась; работающая классификация не подтверждена. |
+| Новый читаемый отчёт | [Восемь паттернов последнего сохранённого budget16 состояния](Budget16DiagnosticScientificReport-20261113.ru.md):32 pair, report2/2,14 просмотренных PNG; полная галерея1803 PNG/SVG/PDF остаётся M40 cache. |
+| Более ранний читаемый N4 отчёт | [Classic и Branch:16 диагностических проб,19 просмотренных PNG](RecordedN4DiagnosticScientificReport-20261112.ru.md). Обе остановленные модели при threshold100 молчат. Compact primary28.1MB независимо повторно проанализирован на Elder; это другой снимок моделей. |
+| Историческая научная опора | [Августовский cold Train→Test4/8–6/8](HistoricalAugustColdStart.ru.md), [saved-state order/ITI matrix](HistoricalFrozenProtocolMatrixScientificReport-2026-11-07.ru.md). Исходные визуальные наблюдения сохраняют силу для своего протокола; современные отрицательные результаты их не отменяют. |
+| Компактное хранение | [Schema2:34/34 проверок M40](ValidationPlans/M40ContentReferencePrimaryA1-20261113/RESULT.ru.md),76.25→38.16MB для двух копий actual qz, byte-exact независимое восстановление. [Explicit384MiB original-model export/restore/rescore10/10 принят](ValidationPlans/M40DeclaredDiagnosticPrimaryA1-20261113/RESULT.ru.md):28 members/320.08MB в19.58MB XZ. [Независимый Elder replay1/1 принят](ValidationPlans/ElderBudget16CompactReplayA1-20261113/RESULT.ru.md), original M40 directories отсутствовали. |
 
-[Матрица возможностей](ControllerCapabilities.ru.md) отделяет принятые API от
-кандидата: N0 repeats и native learned-state import уже реализованы и адресно
-приняты; автоматический bounded C-search и часть общих lifecycle hooks находятся
-в кандидате. Legacy SyncCapacitanceTrim>0 отклоняется обоими native путями;
-новый C-search задаётся отдельной декларацией. Версии Controller, ModelSpec,
-cold configuration, learned package, observation и scorer не взаимозаменяемы.
-
-На кандидате normal304 и адресные ASan8 прошли. Полный ASan lifecycle A3
-выполнил133 cases:132 passed,1 assertion failure при записи файла в отсутствующий
-output/native. [Исправленный production gate](NativeGateOutputDirectory.ru.md)
-проверен тем же оригинальным тестом на прежних normal/ASan binaries и принят.
-A4 остановилась до C++ из-за неполного tool snapshot; свежая A5 использует
-согласованный tool bb288399bdb66aaadb3db7ec5f01c76cd9bd57ae и выполняется отдельно.
-До полного verdict, первичных данных и closure это не ASan133 PASS кандидата.
 
 ## Приёмка по исходным этапам
 
-| Этап | Подтверждено в ограниченной области | Что мешает закрыть этап целиком |
+| Этап | Подтверждено в ограниченной области | Что ещё требуется для полного этапа |
 |---|---|---|
-|0. Начальное объединение|Принято; последующие изменения объединяются children-first через merge commits|Новые features проходят свою приёмку отдельно|
-|1. Доказательства и параметры|Есть реестры, исторические anchors и source/property review|Завершить semantic review всех публичных параметров, режимов и прежних аудитов; устранить remaining unknowns|
-|2. Сборки/runtime|Изолированные сборки, manifests, process ownership; приняты scoped gate/output и archive restoration fixes|Полная build/resource/fault matrix, общий срез и воспроизведение closure; не считать учёт ресурсов OS quota|
-|3. Наблюдения/scorer|Строгие native observations, completeness/ID/finite checks и versioned metrics; legacy numeric reader не достраивает доказательства|Все legacy adapters, режимы/физические профили и единый итоговый verdict для всей области|
-|4. Lifecycle/storage|Есть реальные native fixtures, graph/response readback и проверки boundaries|Полная fresh/reuse/Copy/Load/Build/growth/heterogeneous physics матрица и все compatibility paths|
-|5. Export/import|Есть completed/stopped state transport, native storage/graph archive, boundary continuation и fresh destination controls|Все варианты моделей/физики/связей; полный mid-probe checkpoint не обещается|
-|6. Общий контроллер|Общий native service, configured controller и topology adapters существуют|Принять оставшийся общий срез, завершить legacy/V2 A/B, дублирующиеся hooks и multirate verification|
-|7. Алгоритмы|Measured bounded L/Ns/Rs search, N0 repeats, финальная проверка; C0 API принят, bounded C-search — кандидат|Полная bounds/quantization/nonmonotonicity/invalid-probe/physics/reset матрица, приёмка кандидата и stock measurement recovery|
-|8. Recognition/PostTune/calibration|Versioned solo/recognition states, transactions, measured threshold confirmation и frozen controls работают в проверенных случаях|Все PostTune/inhibition/reset modes, commit/rollback/interruption и независимая оценка|
-|9. Скрипты|Корневой пакет и CLI работают; migration222:220 retired+2 moved; семь исторических XML patchers приняты без wrappers|Остаются22 AsymRm Python и прочие инструменты; limited Bin inventory126 не равен полному глобальному inventory|
-|10. Запуск/provenance/publish|Есть owned processes, leases/budgets, fail-closed publisher и реальные coordinator controls|Полная effective-factor attestation, scheduler/cancel/recovery/publication fault matrix; declarative ConditionSpec binding её не заменяет|
-|11. Научные проверки|Сохранены августовские4/8–6/8; есть N2 engineering controls и читаемые временные отчёты|Stock cold retrain и legacy/V2, target в каждой позиции, order/ITI/reset и independent frozen matrix|
-|12. Документация|Поддерживаемые сводки согласуются с receipts; исходные отчёты сохранены|Сквозная актуализация root/PulseLib/Bin/config/ClDesc/defaults и завершение миграции ссылок|
+|0. Начальное объединение|Исходные merge commits/develop/gitlinks согласованы.|Новые этапы объединяются children-first через --no-ff после своей полной приёмки; текущая feature не объявлена завершённым develop-релизом.|
+|1. Доказательства и параметры|Исторические anchors,217 property declarations и source review, реестры дефектов и режимов.|Обновить семантику изменившихся consumers/helpers и inherited Rdk properties; закрыть audit unknowns и runtime/effective-factor matrix.|
+|2. Сборки/runtime|Изолированные source/build/runtime, manifests, owned processes, сохранение и восстановление primary.|Полная build/resource/fault matrix и доступная Git closure всех принятых результатов. [Полный Elder publication7 corpus сохранён](ValidationPlans/ElderPublicationReceipt7PrimaryA1-20261113/RESULT.ru.md):498 members/1.83MB XZ. [Независимый M40 semantic replay принят1/1](ValidationPlans/M40Publication7SemanticReplayA3-20261114/RESULT.ru.md): все498 archived members, четыре package exports/оба wire bases/pre-source scopes, foreign-ledger и corrupted external CSV refusal; нового Console execution нет.|
+|3. Наблюдения/scorer|Strict ID/completeness/finite checks, arbitrary dimensions, реальные frozen observations и versioned metrics.|Все применимые исторические adapters/режимы/профили, единый verdict по полной области; распространить единый verdict на оставшиеся режимы; large-model primary прошёл independent Elder replay1/1.|
+|4. Lifecycle/storage|Реальные native fixtures, readback графа/порядка/динамики и boundary checks.|Полная fresh/reuse/Copy/Load/Build/growth/heterogeneous physics и compatibility matrix. Не считать Alloc/Copy checkpoint динамики.|
+|5. Export/import|Completed/stopped state, storage/graph archive, boundary continuation, fresh destination controls.|Остальные варианты физики/связей, сохранность индивидуальных Rs/C и independent corpus replay. Mid-probe resume не обещается.|
+|6. Общий контроллер|Общий native service, configured controller, Classic/Branch adapters.|Оставшийся общий срез, legacy/V2 A/B, дублирующиеся hooks и отдельная multirate verification.|
+|7. Алгоритмы|Measured bounded L/Ns/Rs search, N0 repeats, final verification, explicit invalid/budget outcomes.|Полная bounds/quantization/nonmonotonicity/invalid-probe/physics/reset matrix, приёмка bounded C-search, полный разбор stock measurement/search. C-trim по умолчанию Off.|
+|8. Recognition/PostTune/calibration|Versioned solo/recognition, transactions, measured threshold confirmation и scoped frozen controls.|Все реализованные PostTune/inhibition/reset modes, commit/rollback/interruption, independent frozen evaluation. Старый Exact не переносится после преобразования.|
+|9. Скрипты|Корневой пакет и CLI; manifest357=353 retired+4 moved, complete=false. [Production357 и restored-last-path negative приняты на M40 и Elder](Migration357CliVerification.ru.md); positive receipts побайтово равны.|Оставшиеся Bin analysis/matrix/shared tools и callers; общий scope review и фактическая полнота миграции. Не оставлять wrappers/копии на старых местах.|
+|10. Запуск/provenance/publish|Owned groups, leases/budgets, fail-closed publisher, coordinator/ConditionSpec controls.|Полная effective-factor attestation и scheduler/cancel/recovery/publication fault matrix; declared binding не равен effective execution.|
+|11. Научные проверки|Исторические replay/cold results; реальные современные отрицательные Train и diagnostic; читаемые временные отчёты прежних снимков.|Продолжить разбор измеренного stock поиска после принятого полного N4 опыта; legacy/V2 A/B, target в каждой позиции, order/ITI/reset, физические профили и independent frozen matrix.8/8 не обязательно.|
+|12. Документация|Текущие сводки отделены от истории, исходные наблюдения сохраняются.|Сквозная сверка root/PulseLib/Bin/config/ClDesc/defaults и ссылок после завершения миграции.|
 
-Подробности принятых изменений: [native model](NativeModelBuilder.ru.md),
-[learned-state API](NativeLearnedState.ru.md),
-[семантика параметров](ParameterControlContracts.ru.md),
-[поиск](ParameterSearchContracts.ru.md),
-[пять retired overlay tools](AsymRmOverlayRetirement.ru.md),
-[два scale/UWatch patchers и222 records](AsymRmDisplayScaleRetirement.ru.md),
-[двухсерверное восстановление primary](PortablePrimaryRestoration.ru.md).
 
-## Последние результаты и их пределы
+## Следующий научный шаг и ограничения
 
-В проверяемой ветке завершён coordinator schema1/schema2:16/16 production cases,
-40 различных actual native phases;1456 CSV сверены попарно. Это эквивалентность
-orchestration на объявленных случаях, не независимые научные повторы и не вся
-матрица learner. [Исходная приёмка и scope](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/PipelineConditionFullMatrixAcceptance.ru.md).
+Same-budget cold Branch N4/N1 завершён: один measured jointly-ready input2, затем ambiguous input1; общая сходимость не принята. Frozen8 baseline подтвердил импорт полного terminal state и неизменность модели. Один заранее определённый Same-Matrix порог0.03578062022182049 проверен: TP1/FP5/FN0/TN2,32 выбранных графика просмотрены и опубликованы. Холодный Classic recovery4 на том же SDK завершён:14 measured candidates/0 jointly-ready, invalid_observation;12 обзорных графиков просмотрены. Повышения budget/tolerances нет. Exact требует свежей проверки всех входов. Sign bracket, local timing readiness, Done и завершённый процесс не заменяют это требование. BudgetExhausted/SearchUnresolved не доказывают PhysicalInfeasible.
 
-Ранее более широкая восьмипаттерновая N2 LT проверка дала target-detecting5/8:
-TP1/FP3/FN0/TN4, со статусом NonSeparable на проверенной сетке порогов.
-[Этот результат и его первичные данные сохраняются](ScientificResults-2026-11-03.ru.md).
+Дальше остаются legacy/V2 A/B и полная физическая/режимная матрица, frozen order/ITI/reset и согласованные stage merges children-first через--no-ff. Полные открытые требования перечислены выше; этот научный шаг не подменяет их.
 
-Два последних N2 LT engineering случая дали каждый TP2/FP0/FN0/TN2 после same-matrix
-калибровки на более узком наборе: повторяются один target и один foil.
-Этим не устранены прежние FP на близких отвлекающих паттернах. Их четыре предъявления содержат повторные target/foil; они не
-являются stock4-input/8-pattern или independent evaluation. Сохранены primary,
-модели,46 выбранных PNG и полный воспроизводимый cache214 trial/soma /2620 views.
-[Отчёт и пределы visual QA](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/PipelineConditionPilotVisualReport.ru.md).
+При Train используется максимум закреплённого импульса: настоящая слившаяся вершина неоднозначна; раздельная ранняя вершина с хвостовым влиянием допустима. При Test рассматривается полный отклик, причём ранний event до последнего входа выделяется отдельно. Порог подтверждается реальным прогоном.
 
-Штатный stock Train пока останавливался на невалидных измерениях: закрытое окно
-не гарантирует однозначного burst/peak assignment. Повтор того же кандидата
-при большем invalid budget не устраняет детерминированное слияние волн.
-Такой результат не доказывает PhysicalInfeasible или общую невозможность
-классификации. Следующий научный приоритет — корректное измерение/ограниченное
-восстановление поиска в исходной физике, затем cold/frozen сравнение протоколов.
+Build/Calculate/Reset возвращают true; ошибки имеют специализированное состояние. Общая физика задаётся storage-образами и native lifecycle. C-trim Off по умолчанию. SeriesD не возобновляется автоматически. [Готовность и читаемые научные отчёты](ExperimentReadiness.ru.md).
 
-[Готовность экспериментов](ExperimentReadiness.ru.md) задаёт порядок допуска.
-Предыдущая накопительная версия этой сводки сохранена в
-[Git snapshot](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md).
-Её старые слова «ещё не реализовано» относятся к состоянию своего подэтапа.
-Исторические измерения и критерии не переписываются под новые результаты.
+Предыдущая сводка сохранена в Git commit87283983db82aa4df63306af5212a347076cc4f1 по тому же пути. Более ранние записи: [история до publication Train](ImplementationStatus-History-through-20261113-before-publication-train.ru.md). Старые слова «сейчас» относятся к своим снимкам, измерения и исходные outcomes не переписаны.

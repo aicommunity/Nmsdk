@@ -1,0 +1,67 @@
+{
+  "kind": "windows_full_sdk_native_capture_acceptance",
+  "tool_root": "289c3bc44159f08b12e3972e7adae9d934c8fa22",
+  "compiled_root": "8314e98f7dbd93441d81de32e7c7174f0fafac24",
+  "rows": [
+    {
+      "group": "unit23",
+      "inventory": {
+        "expected": 23,
+        "observed": 23,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "42334f21473da1d683a8babad4290e1ac53b8e834f46766b31a05b852245d54e"
+      },
+      "runtime_fingerprint": "b7c1d69356603632e725eecb59accbc98de089e5964256ee20f2ece407f26cb0",
+      "loaded_files": 36,
+      "module_observation_errors": [
+        {
+          "phase": "poll",
+          "detail": {
+            "operation": "EnumProcessModulesEx",
+            "winerror": 299,
+            "module_base": null,
+            "partial_paths": [],
+            "returned_characters": null
+          },
+          "reason": "[Errno 299] windows_module_inventory_failed:EnumProcessModulesEx",
+          "exception": "ModuleInventoryError"
+        }
+      ]
+    },
+    {
+      "group": "physical21",
+      "inventory": {
+        "expected": 21,
+        "observed": 21,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "460f4be4b812950cf82b20edd0ac58acee30990f847e965d1f2001836cf4e862"
+      },
+      "runtime_fingerprint": "0f1667d7cd2cb0551f60257b574accc6cf561ea80047078409e25446cac08162",
+      "loaded_files": 47,
+      "module_observation_errors": [
+        {
+          "phase": "poll",
+          "detail": {
+            "operation": "EnumProcessModulesEx",
+            "winerror": 299,
+            "module_base": null,
+            "partial_paths": [],
+            "returned_characters": null
+          },
+          "reason": "[Errno 299] windows_module_inventory_failed:EnumProcessModulesEx",
+          "exception": "ModuleInventoryError"
+        }
+      ]
+    }
+  ],
+  "owned_jobs_closed": 2,
+  "compiled_runtime_native_controls_accepted": true,
+  "build_execution_accepted": false,
+  "runtime_binaries_and_configuration_unchanged": true,
+  "EventLogs_preserved": true,
+  "scientific_worker_admitted": false,
+  "classification_evaluated": false,
+  "whole_plan_complete": false
+}

@@ -19,7 +19,7 @@ file.open(QIODevice::WriteOnly|QIODevice::NewOnly)==false. На сервере �
 численные допуски, expected IDs и проверка JUnit/loaded files не меняются.
 Существующий output по-прежнему запрещён; source/runtime overlap guard сохранён.
 Проверка нужна на прежних normal/ASan binaries с этим точным isolated test,
-затем свежий полный ASan133. До этого общий SDK gate остаётся непринятым.
+затем свежий полный ASan133. Его результат A5 приведён ниже.
 Проверки с извлечённой копией тела функции или mock моделью не предусматриваются.
 
 Адресная приёмка06.11: прежние SDK2e normal и ASan binaries прошли тот же
@@ -32,3 +32,11 @@ released lease. [Receipt](NativeGateOutputDirectoryVerification.json).
 runner642a9c875; исходный A3 остаётся132 passed/1 failed. Ни адресный PASS,
 ни запуск A4 не подменяют полный свежий итог. Область приёмки этого исправления —
 подготовка output в Python gate, не весь SDK и не алгоритм Branch.
+
+
+Полный повтор A5 завершён133/133 passed на исходном SDK2e/Pulse12d и tool
+bb288399bdb66aaadb3db7ec5f01c76cd9bd57ae. A4 остановился до C++ из-за
+неполного snapshot tools; этот отказ и исходный A3 сохранены. Сверены все4888
+primary members и979 записей source hashes; процесс/группа закрыты, lease
+released. [Артефакты и пределы](IntegratedSharedAsan133Verification.json).
+Это не проверка последующего recovery SDK и не подтверждение отсутствия утечек.

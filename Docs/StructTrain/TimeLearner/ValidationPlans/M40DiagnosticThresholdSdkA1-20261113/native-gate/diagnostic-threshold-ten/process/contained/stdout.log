@@ -1,0 +1,91 @@
+Note: Google Test filter = NativeDiagnosticThreshold.ClassicN1:NativeDiagnosticThreshold.BranchN1:NativeThresholdCandidate.ClassicN0_2000:NativeThresholdCandidate.ClassicN1_2000:NativeThresholdCandidate.BranchN0_2000:NativeThresholdCandidate.BranchN1_2000:NativeThresholdCandidate.ClassicN0_20000:NativeThresholdCandidate.ClassicN1_20000:NativeThresholdCandidate.BranchN0_20000:NativeThresholdCandidate.BranchN1_20000
+[==========] Running 10 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 8 tests from NativeThresholdCandidate
+[ RUN      ] NativeThresholdCandidate.ClassicN0_2000
+/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3672: Failure
+Value of: service.Certificate()
+  Actual: false
+Expected: true
+maximum_sweeps_exhausted
+
+[  FAILED  ] NativeThresholdCandidate.ClassicN0_2000 (12504 ms)
+[ RUN      ] NativeThresholdCandidate.ClassicN1_2000
+/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3672: Failure
+Value of: service.Certificate()
+  Actual: false
+Expected: true
+maximum_sweeps_exhausted
+
+[  FAILED  ] NativeThresholdCandidate.ClassicN1_2000 (12437 ms)
+[ RUN      ] NativeThresholdCandidate.BranchN0_2000
+/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3672: Failure
+Value of: service.Certificate()
+  Actual: false
+Expected: true
+maximum_sweeps_exhausted
+
+[  FAILED  ] NativeThresholdCandidate.BranchN0_2000 (8844 ms)
+[ RUN      ] NativeThresholdCandidate.BranchN1_2000
+/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3672: Failure
+Value of: service.Certificate()
+  Actual: false
+Expected: true
+maximum_sweeps_exhausted
+
+[  FAILED  ] NativeThresholdCandidate.BranchN1_2000 (9009 ms)
+[ RUN      ] NativeThresholdCandidate.ClassicN0_20000
+/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3672: Failure
+Value of: service.Certificate()
+  Actual: false
+Expected: true
+maximum_sweeps_exhausted
+
+[  FAILED  ] NativeThresholdCandidate.ClassicN0_20000 (103718 ms)
+[ RUN      ] NativeThresholdCandidate.ClassicN1_20000
+/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3672: Failure
+Value of: service.Certificate()
+  Actual: false
+Expected: true
+maximum_sweeps_exhausted
+
+[  FAILED  ] NativeThresholdCandidate.ClassicN1_20000 (111654 ms)
+[ RUN      ] NativeThresholdCandidate.BranchN0_20000
+/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3672: Failure
+Value of: service.Certificate()
+  Actual: false
+Expected: true
+maximum_sweeps_exhausted
+
+[  FAILED  ] NativeThresholdCandidate.BranchN0_20000 (84904 ms)
+[ RUN      ] NativeThresholdCandidate.BranchN1_20000
+/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3672: Failure
+Value of: service.Certificate()
+  Actual: false
+Expected: true
+maximum_sweeps_exhausted
+
+[  FAILED  ] NativeThresholdCandidate.BranchN1_20000 (80154 ms)
+[----------] 8 tests from NativeThresholdCandidate (423228 ms total)
+
+[----------] 2 tests from NativeDiagnosticThreshold
+[ RUN      ] NativeDiagnosticThreshold.ClassicN1
+[       OK ] NativeDiagnosticThreshold.ClassicN1 (18353 ms)
+[ RUN      ] NativeDiagnosticThreshold.BranchN1
+[       OK ] NativeDiagnosticThreshold.BranchN1 (17614 ms)
+[----------] 2 tests from NativeDiagnosticThreshold (35967 ms total)
+
+[----------] Global test environment tear-down
+[==========] 10 tests from 2 test suites ran. (459196 ms total)
+[  PASSED  ] 2 tests.
+[  FAILED  ] 8 tests, listed below:
+[  FAILED  ] NativeThresholdCandidate.ClassicN0_2000
+[  FAILED  ] NativeThresholdCandidate.ClassicN1_2000
+[  FAILED  ] NativeThresholdCandidate.BranchN0_2000
+[  FAILED  ] NativeThresholdCandidate.BranchN1_2000
+[  FAILED  ] NativeThresholdCandidate.ClassicN0_20000
+[  FAILED  ] NativeThresholdCandidate.ClassicN1_20000
+[  FAILED  ] NativeThresholdCandidate.BranchN0_20000
+[  FAILED  ] NativeThresholdCandidate.BranchN1_20000
+
+ 8 FAILED TESTS

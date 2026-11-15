@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "elder-recorded-matrix-portable1-a1",
+  "package_fingerprint": "d6dca1056e38298704e59f897f5bc0e6f0e1bdd322bee64cbac8d18839efbc77",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryPortableTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryPortableTest.test_published_models_and_sixteen_trials_need_no_original_runtime_directory"
+  ],
+  "fixtures": {
+    "TIMELEARNER_RECORDED_MATRIX_BUNDLE": {
+      "pattern": "*",
+      "files": 6,
+      "fingerprint": "730cabfee0a332c2fd58dd6077d9f4281c9cf3100e7524d2c3c00aa30dfd0fac"
+    }
+  }
+}

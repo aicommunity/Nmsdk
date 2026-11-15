@@ -1,0 +1,1969 @@
+{
+  "kind": "readonly_server_group_projection",
+  "schema_version": 1,
+  "groups": [
+    {
+      "group": 1,
+      "logical_input": 0,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 0.0105,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "absent_within_fixed_basin",
+                "preserved",
+                "preserved",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 0,
+                "last_sample": 19,
+                "record_edge": true
+              },
+              "maximum": {
+                "amplitude": 0.015781441626431136,
+                "first_sample": 49,
+                "last_sample": 49,
+                "plateau_end": 0.025,
+                "raw_potential": 0.015781441626431136,
+                "time": 0.025
+              },
+              "necessary_inputs": [
+                0
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 179,
+                "last_sample": 179,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.015781441626431136,
+            "first_sample": 49,
+            "last_sample": 49,
+            "plateau_end": 0.025,
+            "raw_potential": 0.015781441626431136,
+            "time": 0.025
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 0.0105,
+        "actual_peak": {
+          "amplitude": 0.015781441626431136,
+          "first_sample": 49,
+          "last_sample": 49,
+          "plateau_end": 0.025,
+          "raw_potential": 0.015781441626431136,
+          "time": 0.025
+        },
+        "arrival": 0.0145,
+        "plateau_end": 0.0145,
+        "raw_potential": 0.015781441626431136,
+        "semantic_proof_id": "f5d27e238ba56a01171befbc7bea842cd4500ec27a5c048fa7dcee3fe24a2538"
+      },
+      "method": {
+        "assigned_input": 0,
+        "candidate_frame": null,
+        "channel": 0,
+        "coordinate_mode": "reference_time",
+        "group_id": "Classic-stock-cold7-N1/session/1/capture/1/1/composite/1",
+        "input_id": "input0",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": {
+          "begin_offset": 0.009,
+          "end_offset": 0.05
+        },
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 2,
+      "logical_input": 1,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 10.894,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "preserved",
+                "absent_within_fixed_basin",
+                "preserved",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 179,
+                "last_sample": 179,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.015828572406203167,
+                "first_sample": 209,
+                "last_sample": 209,
+                "plateau_end": 10.9085,
+                "raw_potential": 0.015828572406203167,
+                "time": 10.9085
+              },
+              "necessary_inputs": [
+                1
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 499,
+                "last_sample": 499,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.015828572406203167,
+            "first_sample": 209,
+            "last_sample": 209,
+            "plateau_end": 10.9085,
+            "raw_potential": 0.015828572406203167,
+            "time": 10.9085
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 10.814,
+        "actual_peak": {
+          "amplitude": 0.015828572406203167,
+          "first_sample": 209,
+          "last_sample": 209,
+          "plateau_end": 10.9085,
+          "raw_potential": 0.015828572406203167,
+          "time": 10.9085
+        },
+        "arrival": 0.09450000000000003,
+        "plateau_end": 0.09450000000000003,
+        "raw_potential": 0.015828572406203167,
+        "semantic_proof_id": "de09ebd4f99448f9321aa2fdc733f845d1399c6ed402a6e35d50bd040c0dd6ea"
+      },
+      "method": {
+        "assigned_input": 1,
+        "candidate_frame": null,
+        "channel": 1,
+        "coordinate_mode": "reference_time",
+        "group_id": "Classic-stock-cold7-N1/session/1/capture/1/2/composite/2",
+        "input_id": "input1",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": {
+          "begin_offset": 0.089,
+          "end_offset": 0.13
+        },
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 3,
+      "logical_input": 2,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 21.8575,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 499,
+                "last_sample": 499,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.01578146659932167,
+                "first_sample": 529,
+                "last_sample": 529,
+                "plateau_end": 21.872,
+                "raw_potential": 0.01578146659932167,
+                "time": 21.872
+              },
+              "necessary_inputs": [
+                2
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 979,
+                "last_sample": 979,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.01578146659932167,
+            "first_sample": 529,
+            "last_sample": 529,
+            "plateau_end": 21.872,
+            "raw_potential": 0.01578146659932167,
+            "time": 21.872
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 21.6175,
+        "actual_peak": {
+          "amplitude": 0.01578146659932167,
+          "first_sample": 529,
+          "last_sample": 529,
+          "plateau_end": 21.872,
+          "raw_potential": 0.01578146659932167,
+          "time": 21.872
+        },
+        "arrival": 0.25450000000000017,
+        "plateau_end": 0.25450000000000017,
+        "raw_potential": 0.01578146659932167,
+        "semantic_proof_id": "d378651fec6025264d6d7adac009e60ee542060068dfd4a5830018b468fe473e"
+      },
+      "method": {
+        "assigned_input": 2,
+        "candidate_frame": null,
+        "channel": 2,
+        "coordinate_mode": "reference_time",
+        "group_id": "Classic-stock-cold7-N1/session/1/capture/1/3/composite/3",
+        "input_id": "input2",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": {
+          "begin_offset": 0.249,
+          "end_offset": 0.29
+        },
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 4,
+      "logical_input": 3,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 32.901,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin"
+              ],
+              "left": {
+                "first_sample": 979,
+                "last_sample": 979,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.015781441636542715,
+                "first_sample": 1009,
+                "last_sample": 1009,
+                "plateau_end": 32.9155,
+                "raw_potential": 0.015781441636542715,
+                "time": 32.9155
+              },
+              "necessary_inputs": [
+                3
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 1668,
+                "last_sample": 3600,
+                "record_edge": true
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.015781441636542715,
+            "first_sample": 1009,
+            "last_sample": 1009,
+            "plateau_end": 32.9155,
+            "raw_potential": 0.015781441636542715,
+            "time": 32.9155
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 32.421,
+        "actual_peak": {
+          "amplitude": 0.015781441636542715,
+          "first_sample": 1009,
+          "last_sample": 1009,
+          "plateau_end": 32.9155,
+          "raw_potential": 0.015781441636542715,
+          "time": 32.9155
+        },
+        "arrival": 0.49450000000000216,
+        "plateau_end": 0.49450000000000216,
+        "raw_potential": 0.015781441636542715,
+        "semantic_proof_id": "1486bc9406b01882abac8e4cd41b6ac2dad8dd92f8b276ef0c67f19d4b30b349"
+      },
+      "method": {
+        "assigned_input": 3,
+        "candidate_frame": null,
+        "channel": 3,
+        "coordinate_mode": "reference_time",
+        "group_id": "Classic-stock-cold7-N1/session/1/capture/1/4/composite/4",
+        "input_id": "input3",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": {
+          "begin_offset": 0.489,
+          "end_offset": 0.53
+        },
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 5,
+      "logical_input": 3,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 43.7045,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin"
+              ],
+              "left": {
+                "first_sample": 979,
+                "last_sample": 979,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.015781441636542715,
+                "first_sample": 1009,
+                "last_sample": 1009,
+                "plateau_end": 43.719,
+                "raw_potential": 0.015781441636542715,
+                "time": 43.719
+              },
+              "necessary_inputs": [
+                3
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 1668,
+                "last_sample": 3600,
+                "record_edge": true
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.015781441636542715,
+            "first_sample": 1009,
+            "last_sample": 1009,
+            "plateau_end": 43.719,
+            "raw_potential": 0.015781441636542715,
+            "time": 43.719
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 43.2245,
+        "actual_peak": {
+          "amplitude": 0.015781441636542715,
+          "first_sample": 1009,
+          "last_sample": 1009,
+          "plateau_end": 43.719,
+          "raw_potential": 0.015781441636542715,
+          "time": 43.719
+        },
+        "arrival": 0.49450000000000216,
+        "plateau_end": 0.49450000000000216,
+        "raw_potential": 0.015781441636542715,
+        "semantic_proof_id": "ef81cefb55009d5a229ce31df426d2b0e92354b4e76494df9f91f0c7e5ba3f32"
+      },
+      "method": {
+        "assigned_input": 3,
+        "candidate_frame": {
+          "first_frame": 969,
+          "last_frame": 1049
+        },
+        "channel": 3,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/1/composite/5",
+        "input_id": "input3",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 6,
+      "logical_input": 0,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 54.028,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "absent_within_fixed_basin",
+                "preserved",
+                "preserved",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 0,
+                "last_sample": 19,
+                "record_edge": true
+              },
+              "maximum": {
+                "amplitude": 0.015781441626431136,
+                "first_sample": 49,
+                "last_sample": 49,
+                "plateau_end": 54.0425,
+                "raw_potential": 0.015781441626431136,
+                "time": 54.0425
+              },
+              "necessary_inputs": [
+                0
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 179,
+                "last_sample": 179,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.015781441626431136,
+            "first_sample": 49,
+            "last_sample": 49,
+            "plateau_end": 54.0425,
+            "raw_potential": 0.015781441626431136,
+            "time": 54.0425
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 54.028,
+        "actual_peak": {
+          "amplitude": 0.015781441626431136,
+          "first_sample": 49,
+          "last_sample": 49,
+          "plateau_end": 54.0425,
+          "raw_potential": 0.015781441626431136,
+          "time": 54.0425
+        },
+        "arrival": 0.014499999999998181,
+        "plateau_end": 0.014499999999998181,
+        "raw_potential": 0.015781441626431136,
+        "semantic_proof_id": "9331dbb2b1e91a7a18edc2917d59417ce1f109aeec66e332742b53ad198cc89a"
+      },
+      "method": {
+        "assigned_input": 0,
+        "candidate_frame": {
+          "first_frame": 9,
+          "last_frame": 89
+        },
+        "channel": 0,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/2/composite/6",
+        "input_id": "input0",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 7,
+      "logical_input": 3,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 65.3125,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin"
+              ],
+              "left": {
+                "first_sample": 979,
+                "last_sample": 979,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.015781441636542715,
+                "first_sample": 1009,
+                "last_sample": 1009,
+                "plateau_end": 65.327,
+                "raw_potential": 0.015781441636542715,
+                "time": 65.327
+              },
+              "necessary_inputs": [
+                3
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 1668,
+                "last_sample": 3600,
+                "record_edge": true
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.015781441636542715,
+            "first_sample": 1009,
+            "last_sample": 1009,
+            "plateau_end": 65.327,
+            "raw_potential": 0.015781441636542715,
+            "time": 65.327
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 64.8325,
+        "actual_peak": {
+          "amplitude": 0.015781441636542715,
+          "first_sample": 1009,
+          "last_sample": 1009,
+          "plateau_end": 65.327,
+          "raw_potential": 0.015781441636542715,
+          "time": 65.327
+        },
+        "arrival": 0.49450000000000216,
+        "plateau_end": 0.49450000000000216,
+        "raw_potential": 0.015781441636542715,
+        "semantic_proof_id": "f8535b667c4c127bff02d5674a583983f02105a78fd6cbff452f1f0f33633831"
+      },
+      "method": {
+        "assigned_input": 3,
+        "candidate_frame": {
+          "first_frame": 964,
+          "last_frame": 1054
+        },
+        "channel": 3,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/5/composite/7",
+        "input_id": "input3",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 8,
+      "logical_input": 0,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 75.636,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "absent_within_fixed_basin",
+                "preserved",
+                "preserved",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 0,
+                "last_sample": 19,
+                "record_edge": true
+              },
+              "maximum": {
+                "amplitude": 0.34666428541009353,
+                "first_sample": 44,
+                "last_sample": 44,
+                "plateau_end": 75.648,
+                "raw_potential": 0.34666428541009353,
+                "time": 75.648
+              },
+              "necessary_inputs": [
+                0
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 179,
+                "last_sample": 179,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.34666428541009353,
+            "first_sample": 44,
+            "last_sample": 44,
+            "plateau_end": 75.648,
+            "raw_potential": 0.34666428541009353,
+            "time": 75.648
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 75.636,
+        "actual_peak": {
+          "amplitude": 0.34666428541009353,
+          "first_sample": 44,
+          "last_sample": 44,
+          "plateau_end": 75.648,
+          "raw_potential": 0.34666428541009353,
+          "time": 75.648
+        },
+        "arrival": 0.012000000000000455,
+        "plateau_end": 0.012000000000000455,
+        "raw_potential": 0.34666428541009353,
+        "semantic_proof_id": "975eb7ae514ee0b69fc2110b9851714318f56391eb953fa24da94e641d74ee58"
+      },
+      "method": {
+        "assigned_input": 0,
+        "candidate_frame": {
+          "first_frame": 7,
+          "last_frame": 91
+        },
+        "channel": 0,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/6/composite/8",
+        "input_id": "input0",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 9,
+      "logical_input": 3,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 86.9205,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin"
+              ],
+              "left": {
+                "first_sample": 979,
+                "last_sample": 979,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.015781441636542715,
+                "first_sample": 1009,
+                "last_sample": 1009,
+                "plateau_end": 86.935,
+                "raw_potential": 0.015781441636542715,
+                "time": 86.935
+              },
+              "necessary_inputs": [
+                3
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 1668,
+                "last_sample": 3600,
+                "record_edge": true
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.015781441636542715,
+            "first_sample": 1009,
+            "last_sample": 1009,
+            "plateau_end": 86.935,
+            "raw_potential": 0.015781441636542715,
+            "time": 86.935
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 86.4405,
+        "actual_peak": {
+          "amplitude": 0.015781441636542715,
+          "first_sample": 1009,
+          "last_sample": 1009,
+          "plateau_end": 86.935,
+          "raw_potential": 0.015781441636542715,
+          "time": 86.935
+        },
+        "arrival": 0.49450000000000216,
+        "plateau_end": 0.49450000000000216,
+        "raw_potential": 0.015781441636542715,
+        "semantic_proof_id": "7003720bb7ee594c0b3f4d45c19962d37e11e71f0c4ea960e00ba19230d11054"
+      },
+      "method": {
+        "assigned_input": 3,
+        "candidate_frame": {
+          "first_frame": 969,
+          "last_frame": 1049
+        },
+        "channel": 3,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/9/composite/9",
+        "input_id": "input3",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 10,
+      "logical_input": 0,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 97.244,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "absent_within_fixed_basin",
+                "preserved",
+                "preserved",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 0,
+                "last_sample": 19,
+                "record_edge": true
+              },
+              "maximum": {
+                "amplitude": 0.012318883952818882,
+                "first_sample": 68,
+                "last_sample": 68,
+                "plateau_end": 97.268,
+                "raw_potential": 0.012318883952818882,
+                "time": 97.268
+              },
+              "necessary_inputs": [
+                0
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 180,
+                "last_sample": 180,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.012318883952818882,
+            "first_sample": 68,
+            "last_sample": 68,
+            "plateau_end": 97.268,
+            "raw_potential": 0.012318883952818882,
+            "time": 97.268
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 97.244,
+        "actual_peak": {
+          "amplitude": 0.012318883952818882,
+          "first_sample": 68,
+          "last_sample": 68,
+          "plateau_end": 97.268,
+          "raw_potential": 0.012318883952818882,
+          "time": 97.268
+        },
+        "arrival": 0.02400000000000091,
+        "plateau_end": 0.02400000000000091,
+        "raw_potential": 0.012318883952818882,
+        "semantic_proof_id": "44e106aed72b77f11a72cee78b71afd2b4f62dfd3072d9c8f6c5b35dcb04e12e"
+      },
+      "method": {
+        "assigned_input": 0,
+        "candidate_frame": {
+          "first_frame": 38,
+          "last_frame": 118
+        },
+        "channel": 0,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/10/composite/10",
+        "input_id": "input0",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 11,
+      "logical_input": 3,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 108.5285,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin"
+              ],
+              "left": {
+                "first_sample": 979,
+                "last_sample": 979,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.015781441636542715,
+                "first_sample": 1009,
+                "last_sample": 1009,
+                "plateau_end": 108.543,
+                "raw_potential": 0.015781441636542715,
+                "time": 108.543
+              },
+              "necessary_inputs": [
+                3
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 1668,
+                "last_sample": 3600,
+                "record_edge": true
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.015781441636542715,
+            "first_sample": 1009,
+            "last_sample": 1009,
+            "plateau_end": 108.543,
+            "raw_potential": 0.015781441636542715,
+            "time": 108.543
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 108.0485,
+        "actual_peak": {
+          "amplitude": 0.015781441636542715,
+          "first_sample": 1009,
+          "last_sample": 1009,
+          "plateau_end": 108.543,
+          "raw_potential": 0.015781441636542715,
+          "time": 108.543
+        },
+        "arrival": 0.49450000000000216,
+        "plateau_end": 0.49450000000000216,
+        "raw_potential": 0.015781441636542715,
+        "semantic_proof_id": "1fa2732362c0a9d1943eede5c027e42a93bf4c938330edb1a1c3c3000fa6a408"
+      },
+      "method": {
+        "assigned_input": 3,
+        "candidate_frame": {
+          "first_frame": 969,
+          "last_frame": 1049
+        },
+        "channel": 3,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/13/composite/11",
+        "input_id": "input3",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 12,
+      "logical_input": 0,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 118.852,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "absent_within_fixed_basin",
+                "preserved",
+                "preserved",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 0,
+                "last_sample": 19,
+                "record_edge": true
+              },
+              "maximum": {
+                "amplitude": 0.010412743593308127,
+                "first_sample": 86,
+                "last_sample": 86,
+                "plateau_end": 118.885,
+                "raw_potential": 0.010412743593308127,
+                "time": 118.885
+              },
+              "necessary_inputs": [
+                0
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 187,
+                "last_sample": 187,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.010412743593308127,
+            "first_sample": 86,
+            "last_sample": 86,
+            "plateau_end": 118.885,
+            "raw_potential": 0.010412743593308127,
+            "time": 118.885
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 118.852,
+        "actual_peak": {
+          "amplitude": 0.010412743593308127,
+          "first_sample": 86,
+          "last_sample": 86,
+          "plateau_end": 118.885,
+          "raw_potential": 0.010412743593308127,
+          "time": 118.885
+        },
+        "arrival": 0.03300000000000125,
+        "plateau_end": 0.03300000000000125,
+        "raw_potential": 0.010412743593308127,
+        "semantic_proof_id": "7849aae5d5fc21f08b9ae389e17a521601573030bef2bd8b897705e2f78172b2"
+      },
+      "method": {
+        "assigned_input": 0,
+        "candidate_frame": {
+          "first_frame": 67,
+          "last_frame": 147
+        },
+        "channel": 0,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/14/composite/12",
+        "input_id": "input0",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 13,
+      "logical_input": 3,
+      "consumed": true,
+      "rejection": "",
+      "selection": {
+        "actual_assigned_onset": 130.1365,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin"
+              ],
+              "left": {
+                "first_sample": 979,
+                "last_sample": 979,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.015781441636542715,
+                "first_sample": 1009,
+                "last_sample": 1009,
+                "plateau_end": 130.151,
+                "raw_potential": 0.015781441636542715,
+                "time": 130.151
+              },
+              "necessary_inputs": [
+                3
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 1668,
+                "last_sample": 3600,
+                "record_edge": true
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.015781441636542715,
+            "first_sample": 1009,
+            "last_sample": 1009,
+            "plateau_end": 130.151,
+            "raw_potential": 0.015781441636542715,
+            "time": 130.151
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": {
+        "actual_origin_time": 129.6565,
+        "actual_peak": {
+          "amplitude": 0.015781441636542715,
+          "first_sample": 1009,
+          "last_sample": 1009,
+          "plateau_end": 130.151,
+          "raw_potential": 0.015781441636542715,
+          "time": 130.151
+        },
+        "arrival": 0.49450000000001637,
+        "plateau_end": 0.49450000000001637,
+        "raw_potential": 0.015781441636542715,
+        "semantic_proof_id": "002b12c9c20815e6a84fb0373f9d7cc989bd89cd4e7da6521543ff0209180969"
+      },
+      "method": {
+        "assigned_input": 3,
+        "candidate_frame": {
+          "first_frame": 969,
+          "last_frame": 1049
+        },
+        "channel": 3,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/17/composite/13",
+        "input_id": "input3",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 14,
+      "logical_input": 0,
+      "consumed": false,
+      "rejection": "composite_train_assignment_missing;omission_group_closed",
+      "selection": {
+        "actual_assigned_onset": 140.46,
+        "geometry": {
+          "candidates": [],
+          "measured_maximum": null,
+          "reasons": [
+            "no_unique_assigned_basin_peak_in_declared_window"
+          ],
+          "selected_candidate": null,
+          "validity": "missing"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": null,
+      "method": {
+        "assigned_input": 0,
+        "candidate_frame": {
+          "first_frame": 1546,
+          "last_frame": 1626
+        },
+        "channel": 0,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/18/composite/14",
+        "input_id": "input0",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 15,
+      "logical_input": 0,
+      "consumed": false,
+      "rejection": "composite_train_assignment_missing;omission_group_closed",
+      "selection": {
+        "actual_assigned_onset": 151.2635,
+        "geometry": {
+          "candidates": [],
+          "measured_maximum": null,
+          "reasons": [
+            "no_unique_assigned_basin_peak_in_declared_window"
+          ],
+          "selected_candidate": null,
+          "validity": "missing"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": null,
+      "method": {
+        "assigned_input": 0,
+        "candidate_frame": {
+          "first_frame": 1546,
+          "last_frame": 1626
+        },
+        "channel": 0,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/19/composite/15",
+        "input_id": "input0",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 16,
+      "logical_input": 0,
+      "consumed": false,
+      "rejection": "composite_train_assignment_missing;omission_group_closed",
+      "selection": {
+        "actual_assigned_onset": 162.067,
+        "geometry": {
+          "candidates": [],
+          "measured_maximum": null,
+          "reasons": [
+            "no_unique_assigned_basin_peak_in_declared_window"
+          ],
+          "selected_candidate": null,
+          "validity": "missing"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": null,
+      "method": {
+        "assigned_input": 0,
+        "candidate_frame": {
+          "first_frame": 1546,
+          "last_frame": 1626
+        },
+        "channel": 0,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/20/composite/16",
+        "input_id": "input0",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 17,
+      "logical_input": 0,
+      "consumed": false,
+      "rejection": "composite_train_assignment_missing;omission_group_closed",
+      "selection": {
+        "actual_assigned_onset": 172.8705,
+        "geometry": {
+          "candidates": [],
+          "measured_maximum": null,
+          "reasons": [
+            "no_unique_assigned_basin_peak_in_declared_window"
+          ],
+          "selected_candidate": null,
+          "validity": "missing"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": null,
+      "method": {
+        "assigned_input": 0,
+        "candidate_frame": {
+          "first_frame": 1546,
+          "last_frame": 1626
+        },
+        "channel": 0,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/21/composite/17",
+        "input_id": "input0",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": null,
+      "window_proposal": null
+    },
+    {
+      "group": 18,
+      "logical_input": 0,
+      "consumed": false,
+      "rejection": "composite_train_assignment_missing;omission_group_closed",
+      "selection": {
+        "actual_assigned_onset": 183.674,
+        "geometry": {
+          "candidates": [],
+          "measured_maximum": null,
+          "reasons": [
+            "no_unique_assigned_basin_peak_in_declared_window"
+          ],
+          "selected_candidate": null,
+          "validity": "missing"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "measurement": null,
+      "method": {
+        "assigned_input": 0,
+        "candidate_frame": {
+          "first_frame": 1546,
+          "last_frame": 1626
+        },
+        "channel": 0,
+        "coordinate_mode": "candidate_frame",
+        "group_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18",
+        "input_id": "input0",
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_time": null,
+        "schema_version": 2
+      },
+      "raw_trials": [
+        {
+          "actual_specification": {
+            "baseline": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "begin": 183.664,
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "end": 185.464,
+            "expected_stimulus_ids": [
+              "pulse0",
+              "pulse1",
+              "pulse2",
+              "pulse3"
+            ],
+            "maximum_sample_gap": 0.0005,
+            "maximum_samples": 3605,
+            "minimum_amplitude": 0.000001,
+            "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "peak_selection": "isolated_window",
+            "record_spikes": false,
+            "run_id": "Classic-stock-cold7-N1/session/1",
+            "sample_id": "phasea-target",
+            "schema_version": 6,
+            "stimulus_profile": {
+              "amplitude": 1,
+              "frequency_deviation": 0,
+              "frequency_hz": 2000,
+              "generator_class": "NPulseGeneratorTransit",
+              "pulse_length": 0.001,
+              "use_pattern_output": false,
+              "use_transit_signal": false
+            },
+            "stimulus_subset": {
+              "physical_input_count": 4,
+              "purpose": "stimulus_subset_characterization",
+              "source_ordinals": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "source_training_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451"
+            },
+            "time_frame": "absolute_model_time",
+            "trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/0",
+            "wave_assignment": "window_only",
+            "windows": []
+          },
+          "actual_stimuli": [
+            {
+              "frame_index": 20,
+              "id": "pulse0",
+              "time": 183.674
+            },
+            {
+              "frame_index": 180,
+              "id": "pulse1",
+              "time": 183.754
+            },
+            {
+              "frame_index": 500,
+              "id": "pulse2",
+              "time": 183.914
+            },
+            {
+              "frame_index": 980,
+              "id": "pulse3",
+              "time": 184.154
+            }
+          ],
+          "native_trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/0",
+          "prepared_context": {
+            "base_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "input_id": "input0",
+            "model_epoch": 4,
+            "protocol_revision": "stock-measured-reference-cold7-pilot-v1",
+            "routing": "classic_burst",
+            "selected_input_index": null
+          },
+          "primary_ref": {
+            "bytes": 382001,
+            "relative_path": "composite-measurements/group-000018/full-before.csv",
+            "sha256": "f548308bdc1f073a332eb5cae17f5ca5b68a5dae63f23a6609fefa5edd544c9a"
+          }
+        },
+        {
+          "actual_specification": {
+            "baseline": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "begin": 185.4645,
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "end": 187.2645,
+            "expected_stimulus_ids": [
+              "pulse1",
+              "pulse2",
+              "pulse3"
+            ],
+            "maximum_sample_gap": 0.0005,
+            "maximum_samples": 3605,
+            "minimum_amplitude": 0.000001,
+            "pattern_hash": "3de2c7bcc77e54fbc46926e21d0bb642606ed6b9379aeba29f2af12d2998b007",
+            "peak_selection": "isolated_window",
+            "record_spikes": false,
+            "run_id": "Classic-stock-cold7-N1/session/1",
+            "sample_id": "phasea-target",
+            "schema_version": 6,
+            "stimulus_profile": {
+              "amplitude": 1,
+              "frequency_deviation": 0,
+              "frequency_hz": 2000,
+              "generator_class": "NPulseGeneratorTransit",
+              "pulse_length": 0.001,
+              "use_pattern_output": false,
+              "use_transit_signal": false
+            },
+            "stimulus_subset": {
+              "physical_input_count": 4,
+              "purpose": "stimulus_subset_characterization",
+              "source_ordinals": [
+                1,
+                2,
+                3
+              ],
+              "source_training_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451"
+            },
+            "time_frame": "absolute_model_time",
+            "trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/1",
+            "wave_assignment": "window_only",
+            "windows": []
+          },
+          "actual_stimuli": [
+            {
+              "frame_index": 180,
+              "id": "pulse1",
+              "time": 185.5545
+            },
+            {
+              "frame_index": 500,
+              "id": "pulse2",
+              "time": 185.7145
+            },
+            {
+              "frame_index": 980,
+              "id": "pulse3",
+              "time": 185.9545
+            }
+          ],
+          "native_trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/1",
+          "prepared_context": {
+            "base_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "input_id": "input0",
+            "model_epoch": 4,
+            "protocol_revision": "stock-measured-reference-cold7-pilot-v1",
+            "routing": "classic_burst",
+            "selected_input_index": null
+          },
+          "primary_ref": {
+            "bytes": 369310,
+            "relative_path": "composite-measurements/group-000018/omit-0.csv",
+            "sha256": "aea83694ce57f7c2021b63ae47b813b1c0092d0aadf828a6f2b8001eec2583f0"
+          }
+        },
+        {
+          "actual_specification": {
+            "baseline": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "begin": 187.265,
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "end": 189.065,
+            "expected_stimulus_ids": [
+              "pulse0",
+              "pulse2",
+              "pulse3"
+            ],
+            "maximum_sample_gap": 0.0005,
+            "maximum_samples": 3605,
+            "minimum_amplitude": 0.000001,
+            "pattern_hash": "99f4453ef1c1f261c78da556ffd6c36cb9ef78cb2d00d4c66ad1df0abc526e33",
+            "peak_selection": "isolated_window",
+            "record_spikes": false,
+            "run_id": "Classic-stock-cold7-N1/session/1",
+            "sample_id": "phasea-target",
+            "schema_version": 6,
+            "stimulus_profile": {
+              "amplitude": 1,
+              "frequency_deviation": 0,
+              "frequency_hz": 2000,
+              "generator_class": "NPulseGeneratorTransit",
+              "pulse_length": 0.001,
+              "use_pattern_output": false,
+              "use_transit_signal": false
+            },
+            "stimulus_subset": {
+              "physical_input_count": 4,
+              "purpose": "stimulus_subset_characterization",
+              "source_ordinals": [
+                0,
+                2,
+                3
+              ],
+              "source_training_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451"
+            },
+            "time_frame": "absolute_model_time",
+            "trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/2",
+            "wave_assignment": "window_only",
+            "windows": []
+          },
+          "actual_stimuli": [
+            {
+              "frame_index": 20,
+              "id": "pulse0",
+              "time": 187.275
+            },
+            {
+              "frame_index": 500,
+              "id": "pulse2",
+              "time": 187.515
+            },
+            {
+              "frame_index": 980,
+              "id": "pulse3",
+              "time": 187.755
+            }
+          ],
+          "native_trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/2",
+          "prepared_context": {
+            "base_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "input_id": "input0",
+            "model_epoch": 4,
+            "protocol_revision": "stock-measured-reference-cold7-pilot-v1",
+            "routing": "classic_burst",
+            "selected_input_index": null
+          },
+          "primary_ref": {
+            "bytes": 382453,
+            "relative_path": "composite-measurements/group-000018/omit-1.csv",
+            "sha256": "8b257bf7c677784fdc32308dca57f2bbd6dadd7fcb1e616db709e2826bf57ddd"
+          }
+        },
+        {
+          "actual_specification": {
+            "baseline": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "begin": 189.0655,
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "end": 190.8655,
+            "expected_stimulus_ids": [
+              "pulse0",
+              "pulse1",
+              "pulse3"
+            ],
+            "maximum_sample_gap": 0.0005,
+            "maximum_samples": 3605,
+            "minimum_amplitude": 0.000001,
+            "pattern_hash": "971f6861c9ecc74c9f0f4b30a6c0c48955f748d9c88f4b5322165bb0714400eb",
+            "peak_selection": "isolated_window",
+            "record_spikes": false,
+            "run_id": "Classic-stock-cold7-N1/session/1",
+            "sample_id": "phasea-target",
+            "schema_version": 6,
+            "stimulus_profile": {
+              "amplitude": 1,
+              "frequency_deviation": 0,
+              "frequency_hz": 2000,
+              "generator_class": "NPulseGeneratorTransit",
+              "pulse_length": 0.001,
+              "use_pattern_output": false,
+              "use_transit_signal": false
+            },
+            "stimulus_subset": {
+              "physical_input_count": 4,
+              "purpose": "stimulus_subset_characterization",
+              "source_ordinals": [
+                0,
+                1,
+                3
+              ],
+              "source_training_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451"
+            },
+            "time_frame": "absolute_model_time",
+            "trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/3",
+            "wave_assignment": "window_only",
+            "windows": []
+          },
+          "actual_stimuli": [
+            {
+              "frame_index": 20,
+              "id": "pulse0",
+              "time": 189.0755
+            },
+            {
+              "frame_index": 180,
+              "id": "pulse1",
+              "time": 189.1555
+            },
+            {
+              "frame_index": 980,
+              "id": "pulse3",
+              "time": 189.5555
+            }
+          ],
+          "native_trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/3",
+          "prepared_context": {
+            "base_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "input_id": "input0",
+            "model_epoch": 4,
+            "protocol_revision": "stock-measured-reference-cold7-pilot-v1",
+            "routing": "classic_burst",
+            "selected_input_index": null
+          },
+          "primary_ref": {
+            "bytes": 382923,
+            "relative_path": "composite-measurements/group-000018/omit-2.csv",
+            "sha256": "151cedcfc95e2a85dfcb380828d5389442f4d9c8618bab719b38dcd9136c18b9"
+          }
+        },
+        {
+          "actual_specification": {
+            "baseline": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "begin": 190.866,
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "end": 192.66600000000003,
+            "expected_stimulus_ids": [
+              "pulse0",
+              "pulse1",
+              "pulse2"
+            ],
+            "maximum_sample_gap": 0.0005,
+            "maximum_samples": 3605,
+            "minimum_amplitude": 0.000001,
+            "pattern_hash": "33fa19968966369ad058cac59c1077ad8236a008d43136bf4c2b87eefeb8e5e1",
+            "peak_selection": "isolated_window",
+            "record_spikes": false,
+            "run_id": "Classic-stock-cold7-N1/session/1",
+            "sample_id": "phasea-target",
+            "schema_version": 6,
+            "stimulus_profile": {
+              "amplitude": 1,
+              "frequency_deviation": 0,
+              "frequency_hz": 2000,
+              "generator_class": "NPulseGeneratorTransit",
+              "pulse_length": 0.001,
+              "use_pattern_output": false,
+              "use_transit_signal": false
+            },
+            "stimulus_subset": {
+              "physical_input_count": 4,
+              "purpose": "stimulus_subset_characterization",
+              "source_ordinals": [
+                0,
+                1,
+                2
+              ],
+              "source_training_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451"
+            },
+            "time_frame": "absolute_model_time",
+            "trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/4",
+            "wave_assignment": "window_only",
+            "windows": []
+          },
+          "actual_stimuli": [
+            {
+              "frame_index": 20,
+              "id": "pulse0",
+              "time": 190.876
+            },
+            {
+              "frame_index": 180,
+              "id": "pulse1",
+              "time": 190.956
+            },
+            {
+              "frame_index": 500,
+              "id": "pulse2",
+              "time": 191.116
+            }
+          ],
+          "native_trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/4",
+          "prepared_context": {
+            "base_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "input_id": "input0",
+            "model_epoch": 4,
+            "protocol_revision": "stock-measured-reference-cold7-pilot-v1",
+            "routing": "classic_burst",
+            "selected_input_index": null
+          },
+          "primary_ref": {
+            "bytes": 382705,
+            "relative_path": "composite-measurements/group-000018/omit-3.csv",
+            "sha256": "3ddb74ff927d9e5d751cd537e2fad842f5b88c70c6c90a638f5c15fb0bdb9c87"
+          }
+        },
+        {
+          "actual_specification": {
+            "baseline": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "begin": 192.6665,
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "end": 194.46650000000002,
+            "expected_stimulus_ids": [
+              "pulse0",
+              "pulse1",
+              "pulse2",
+              "pulse3"
+            ],
+            "maximum_sample_gap": 0.0005,
+            "maximum_samples": 3605,
+            "minimum_amplitude": 0.000001,
+            "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "peak_selection": "isolated_window",
+            "record_spikes": false,
+            "run_id": "Classic-stock-cold7-N1/session/1",
+            "sample_id": "phasea-target",
+            "schema_version": 6,
+            "stimulus_profile": {
+              "amplitude": 1,
+              "frequency_deviation": 0,
+              "frequency_hz": 2000,
+              "generator_class": "NPulseGeneratorTransit",
+              "pulse_length": 0.001,
+              "use_pattern_output": false,
+              "use_transit_signal": false
+            },
+            "stimulus_subset": {
+              "physical_input_count": 4,
+              "purpose": "stimulus_subset_characterization",
+              "source_ordinals": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "source_training_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451"
+            },
+            "time_frame": "absolute_model_time",
+            "trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/5",
+            "wave_assignment": "window_only",
+            "windows": []
+          },
+          "actual_stimuli": [
+            {
+              "frame_index": 20,
+              "id": "pulse0",
+              "time": 192.6765
+            },
+            {
+              "frame_index": 180,
+              "id": "pulse1",
+              "time": 192.7565
+            },
+            {
+              "frame_index": 500,
+              "id": "pulse2",
+              "time": 192.9165
+            },
+            {
+              "frame_index": 980,
+              "id": "pulse3",
+              "time": 193.1565
+            }
+          ],
+          "native_trial_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18/native/5",
+          "prepared_context": {
+            "base_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "input_id": "input0",
+            "model_epoch": 4,
+            "protocol_revision": "stock-measured-reference-cold7-pilot-v1",
+            "routing": "classic_burst",
+            "selected_input_index": null
+          },
+          "primary_ref": {
+            "bytes": 382001,
+            "relative_path": "composite-measurements/group-000018/full-after.csv",
+            "sha256": "8083aa8870f9074ddc0189403bce05c8a9ef6c338a006ce157cf457082d346e5"
+          }
+        }
+      ],
+      "window_proposal": {
+        "attempt_id": "Classic-stock-cold7-N1/session/1",
+        "candidate": {
+          "capacitance": null,
+          "declared_maximum_samples": 3605,
+          "grid": {
+            "frame_origin_policy": "native-full-before-frame-zero-v1",
+            "frequency_hz": 2000,
+            "reset_binding": "native-neuron-dataset-reset-before-children-v1",
+            "source_origin": "da6243cb53ef3a6b707a4bf7fb5ebe5a1f905b7d50a72e92df5273602ab30750",
+            "source_pattern_binding": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "source_phase_policy": "same-declared-source-native-events-measured-v1",
+            "source_profile_binding": "49f27d488555f173278ba1c9e380f0ae729600d88978058c55f366e1b34e527f"
+          },
+          "parameters": [
+            {
+              "length": 54,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            }
+          ]
+        },
+        "candidate_binding": "d6047ac6e3e9af6a26500840db6fc61dd94d519d67ce7b3fb74bca774e9ad91e",
+        "candidate_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+        "channel": 0,
+        "computation": {
+          "capacitance_changes": 0,
+          "feature_terms": 12,
+          "first_frame": 1546,
+          "last_frame": 1626,
+          "length_change": 53,
+          "resistance_changes": 0,
+          "shift_frames": 1537,
+          "status": "computed",
+          "synapse_count_change": 0,
+          "uncertainty_frames": 0
+        },
+        "group_id": "Classic-stock-cold7-N1/session/1/search/22/composite/18",
+        "input_id": "input0",
+        "input_index": 0,
+        "kind": "composite_candidate_window_proposal_v1",
+        "measurement_instance_id": "5ee54939b3807ab8cfe3e0d12839d07376b246a571efcb975ff081323fa8795d",
+        "model_epoch": 4,
+        "owner_family_binding": "154052a81196097c75e7f41c2fff8aa834568dd62328bc56a8d9e9ffa5e5a849",
+        "policy_binding": "6923b0f4b11a82f9df712c4c5ec945cacdb93552618aea6ed72f15b01bf0cc75",
+        "policy_id": "reference-anchored-candidate-window-v1",
+        "protocol_binding": "040cfb6ec88eda25844534f0e800c796bd1bcf0edbf6ecdfe6e4fbbaa4da49fc",
+        "purpose": "search",
+        "reference": {
+          "first_frame": 49,
+          "frame_count": 3601,
+          "grid": {
+            "frame_origin_policy": "native-full-before-frame-zero-v1",
+            "frequency_hz": 2000,
+            "reset_binding": "native-neuron-dataset-reset-before-children-v1",
+            "source_origin": "da6243cb53ef3a6b707a4bf7fb5ebe5a1f905b7d50a72e92df5273602ab30750",
+            "source_pattern_binding": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "source_phase_policy": "same-declared-source-native-events-measured-v1",
+            "source_profile_binding": "49f27d488555f173278ba1c9e380f0ae729600d88978058c55f366e1b34e527f"
+          },
+          "initial_capacitance": null,
+          "initial_parameters": [
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            }
+          ],
+          "input_index": 0,
+          "last_frame": 49
+        },
+        "reference_group_id": "Classic-stock-cold7-N1/session/1/capture/1/1/composite/1",
+        "reference_proof_id": "f5d27e238ba56a01171befbc7bea842cd4500ec27a5c048fa7dcee3fe24a2538",
+        "run_id": "Classic-stock-cold7-N1/session/1",
+        "schema_version": 1,
+        "source_origin": "da6243cb53ef3a6b707a4bf7fb5ebe5a1f905b7d50a72e92df5273602ab30750",
+        "trial_id": "Classic-stock-cold7-N1/session/1/search/22",
+        "window_recipe_id": "f867c88a6b70e54bc72744850d1d7b6eadef8d8c2b9729f2b1db59709b23ab02"
+      }
+    }
+  ],
+  "scientific_verdict": null
+}

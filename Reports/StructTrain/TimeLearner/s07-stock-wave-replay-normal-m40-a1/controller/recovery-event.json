@@ -1,0 +1,103 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "084cd92e-ffd8-4276-aa07-21ee29d8141f",
+  "job_id": "s07-stock-wave-replay-normal-a1",
+  "recorded_unix": 1794010813.3743682,
+  "administrator": {
+    "pid": 1373007,
+    "start_ticks": "308599573",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1373017,
+    "start_ticks": "308599590",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-wave-replay-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "716b7a17e2c0859b27c1498b6931dc97cb6a69cde5968e0a75f95273811224c2",
+      "unit": "timelearner-3724bca0-c584-44c9-b953-1147d15de615.service",
+      "invocation_id": "27899d0225884577a7c60015a5a73d51",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3724bca0-c584-44c9-b953-1147d15de615.service",
+      "initial_main_pid": 1373017,
+      "initial_start_ticks": "308599590",
+      "sha256": "58b77cd9af479330ff549430743eddb106eb1f44337a734be593a284e49c545f"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-3724bca0-c584-44c9-b953-1147d15de615.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Exact archived-state replay worker and native descendants freshly closed; no training or classification claim.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/data-phasea-eight-pattern-matrix-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/data-phasea-eight-pattern-matrix-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-wave-replay-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-wave-replay-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-fair-contexts-normal-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-fair-contexts-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fair-contexts-normal-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fair-contexts-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-stock-wave-replay-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-stock-wave-replay-normal-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

@@ -1,9 +1,9 @@
-"""Durable worker-local read/write reservations for source/build/runtime trees.
+"""Durable worker-local source/runtime and resource reservations.
 
-Expiry and a missing supervisor never release resources automatically. This is
-the reservation layer, not a dispatcher, child-process recovery or a scientific
-result. Clients must hold it for the entire operation and validate path aliases
-before using them. Unregistered filesystem writers are outside its authority.
+Schemas1/2 retain path and quantity contracts. Explicit schema3 additionally
+registers managed-unit launch intents before submission and checks their graph
+before release/recovery. Expiry never releases resources automatically. This
+is resource ownership evidence, not training or scientific acceptance.
 """
 from contextlib import contextmanager
 import json
@@ -34,8 +34,9 @@ def _ttl(value):
     return value
 
 
-def _quantities(value, *, capacity=False):
-    _require(type(value) is dict and set(value) == {'slots', 'memory_bytes', 'disk_bytes'} and
+def _quantities(value, *, capacity=False, managed_units=False):
+    fields = {'slots', 'memory_bytes', 'disk_bytes'} | ({'tasks'} if managed_units else set())
+    _require(type(value) is dict and set(value) == fields and
              all(type(v) is int and 0 <= v <= 2**63-1 for v in value.values()) and
              value['slots'] > 0 and (not capacity or all(v > 0 for v in value.values())),
              'invalid_reservation_capacity' if capacity else 'invalid_reservation_demands')
@@ -96,39 +97,136 @@ def _disk_device(path):
     return path.stat().st_dev
 
 
+def _ledger_tables(*, quantities, managed_units):
+    return {
+        'metadata': 'CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL)',
+        'leases': ('CREATE TABLE IF NOT EXISTS leases ('
+                   'token TEXT PRIMARY KEY, job_id TEXT UNIQUE NOT NULL, owner TEXT NOT NULL, '
+                   'resources TEXT NOT NULL, state TEXT NOT NULL CHECK(state IN (\'held\',\'released\')), '
+                   'created REAL NOT NULL, deadline REAL NOT NULL, updated REAL NOT NULL, release_note TEXT' +
+                   (', demands TEXT NOT NULL' if quantities else '') +
+                   (', controller TEXT NOT NULL' if managed_units else '') + ')'),
+        **({'managed_unit_intents': ('CREATE TABLE IF NOT EXISTS managed_unit_intents ('
+                                    'attempt_id TEXT PRIMARY KEY, token TEXT NOT NULL, '
+                                    'directory TEXT UNIQUE NOT NULL, state TEXT NOT NULL, intent TEXT NOT NULL)')}
+           if managed_units else {})}
+
+
+def _normalized_sql(value):
+    return ''.join(value.lower().replace('IF NOT EXISTS'.lower(), '').split())
+
+
 class Reservations:
     """One SQLite WAL ledger on a local filesystem per worker; never on NFS."""
+    @classmethod
+    @contextmanager
+    def _existing_reader(cls, database, *, managed_units=False):
+        """Read persisted policy and records in one SQL read transaction."""
+        _identity()
+        _require(type(managed_units) is bool, 'invalid_managed_unit_policy')
+        requested = Path(database).absolute()
+        _require(not requested.is_symlink(), 'reservation_database_symlink')
+        _require(requested.is_file(), 'reservation_existing_database_required')
+        path = requested.resolve(strict=True)
+        connection = None
+        try:
+            connection = sqlite3.connect(path.as_uri() + '?mode=ro', uri=True, timeout=10, isolation_level=None)
+            connection.row_factory = sqlite3.Row
+            connection.execute('BEGIN')  # deferred SELECT snapshot; no PRAGMA or writer reservation
+            metadata = dict(connection.execute('SELECT key,value FROM metadata'))
+            tables = dict(connection.execute("SELECT name,sql FROM sqlite_master WHERE type='table'"))
+            schema = metadata.get('schema_version')
+            _require(schema in ('1', '2', '3') and metadata.get('worker_host') == socket.gethostname(),
+                     'reservation_ledger_schema_or_worker_changed')
+            _require(managed_units == (schema == '3'), 'reservation_existing_managed_policy_mismatch')
+            capacity = None
+            expected = {'schema_version', 'worker_host'}
+            if schema != '1':
+                expected |= {'capacity', 'disk_device'}
+                try:
+                    capacity = _quantities(json.loads(metadata.get('capacity', 'null')), capacity=True, managed_units=managed_units)
+                except (ValueError, TypeError) as error:
+                    raise ReservationError('reservation_invalid_persisted_capacity') from error
+                _require(metadata.get('disk_device') == str(path.parent.stat().st_dev), 'reservation_database_filesystem_changed')
+            _require(set(metadata) == expected, 'reservation_existing_metadata_keys_changed')
+            for name, sql in _ledger_tables(quantities=capacity is not None, managed_units=managed_units).items():
+                _require(name in tables and _normalized_sql(tables[name]) == _normalized_sql(sql), 'reservation_existing_table_schema_changed')
+            registry = cls.__new__(cls)
+            registry._set_policy(requested, capacity=capacity, managed_units=managed_units)
+            registry._existing_only = True;registry._initialized = True
+            yield registry, connection
+        except sqlite3.Error as error:
+            raise ReservationError('reservation_existing_metadata_unreadable') from error
+        finally:
+            if connection is not None:connection.close()
+
+    @classmethod
+    def open_existing(cls, database, *, managed_units=False):
+        """Reopen the existing writer API; never creates/migrates a ledger."""
+        with cls._existing_reader(database, managed_units=managed_units) as (registry, _):
+            pass
+        with registry._transaction():
+            pass
+        return registry
+
+    @classmethod
+    def read_snapshot(cls, database, *, managed_units=False):
+        """Consistent SQL-readonly observation, without constructor/writer APIs.
+
+        SQLite may acquire reader locks/use existing WAL sidecars. This is no
+        promise of filesystem byte immutability during concurrent writers.
+        """
+        requested = Path(database).absolute()
+        _require(not any(p.is_symlink() for p in (requested, *requested.parents)), 'reservation_readonly_path_alias')
+        _require(requested.is_file() and requested.resolve(strict=True) == requested, 'reservation_existing_database_required')
+        before = requested.stat()
+        with cls._existing_reader(requested, managed_units=managed_units) as (registry, connection):
+            values, graphs = registry._inspection_rows(connection)
+            result = registry._inspection_view(values, graphs)
+            after = requested.stat()
+            _require((before.st_dev, before.st_ino) == (after.st_dev, after.st_ino) and registry.path == requested,
+                     'reservation_readonly_database_identity_changed')
+            result['SQL_access'] = 'mode=ro; BEGIN deferred; SELECT only'
+            result['database_identity'] = {'path':str(requested), 'device':after.st_dev, 'inode':after.st_ino}
+            return result
+
     @property
     def capacity(self):
         return dict(self._capacity) if self._capacity is not None else None
 
-    def __init__(self, database, *, capacity=None):
+    def __init__(self, database, *, capacity=None, managed_units=False):
         _identity()  # Reject unsupported workers before creating any ledger files.
-        self.requested_path = Path(database).absolute()
-        _require(not self.requested_path.is_symlink(), 'reservation_database_symlink')
-        self.path = self.requested_path.resolve(strict=False)
+        self._set_policy(database, capacity=capacity, managed_units=managed_units)
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.host = socket.gethostname()
-        self._capacity = _quantities(capacity, capacity=True) if capacity is not None else None
-        self.disk_device = self.path.parent.stat().st_dev if capacity is not None else None
-        self.schema = '2' if self.capacity is not None else '1'
-        self.metadata = {'schema_version': self.schema, 'worker_host': self.host}
-        if self.capacity is not None:
-            self.metadata['capacity'] = _json(self.capacity)
-            self.metadata['disk_device'] = str(self.disk_device)
+        self._existing_only = False
         self._initialized = False
         with self._transaction() as connection:
-            connection.execute('CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL)')
-            connection.execute('CREATE TABLE IF NOT EXISTS leases ('
-                               'token TEXT PRIMARY KEY, job_id TEXT UNIQUE NOT NULL, owner TEXT NOT NULL, '
-                               'resources TEXT NOT NULL, state TEXT NOT NULL CHECK(state IN (\'held\',\'released\')), '
-                               'created REAL NOT NULL, deadline REAL NOT NULL, updated REAL NOT NULL, release_note TEXT'+
-                               (', demands TEXT NOT NULL' if self.capacity is not None else '')+')')
+            tables = _ledger_tables(quantities=self.capacity is not None, managed_units=managed_units)
+            for name in ('metadata', 'leases'):
+                connection.execute(tables[name])
             for key, value in self.metadata.items():
                 connection.execute('INSERT OR IGNORE INTO metadata VALUES (?,?)', (key, value))
                 _require(connection.execute('SELECT value FROM metadata WHERE key=?', (key,)).fetchone()[0] == value,
                          'reservation_ledger_schema_or_worker_changed')
+            if managed_units:
+                connection.execute(tables['managed_unit_intents'])
         self._initialized = True
+
+    def _set_policy(self, database, *, capacity, managed_units):
+        _require(type(managed_units) is bool and (not managed_units or capacity is not None),
+                 'managed_unit_budget_policy_required')
+        self.managed_units = managed_units
+        self.requested_path = Path(database).absolute()
+        _require(not self.requested_path.is_symlink(), 'reservation_database_symlink')
+        self.path = self.requested_path.resolve(strict=False)
+        self.host = socket.gethostname()
+        self._capacity = _quantities(capacity, capacity=True, managed_units=managed_units) if capacity is not None else None
+        self.disk_device = _disk_device(self.path.parent) if capacity is not None else None
+        self.schema = '3' if managed_units else '2' if self.capacity is not None else '1'
+        self.metadata = {'schema_version': self.schema, 'worker_host': self.host}
+        if self.capacity is not None:
+            self.metadata['capacity'] = _json(self.capacity)
+            self.metadata['disk_device'] = str(self.disk_device)
 
     @contextmanager
     def _transaction(self):
@@ -136,7 +234,8 @@ class Reservations:
         _require(self.requested_path.resolve(strict=False) == self.path, 'reservation_database_alias_changed')
         if self.capacity is not None:
             _require(self.path.parent.stat().st_dev == self.disk_device, 'reservation_database_filesystem_changed')
-        connection = sqlite3.connect(self.path, timeout=10, isolation_level=None)
+        connection = (sqlite3.connect(self.path.as_uri() + '?mode=rw', uri=True, timeout=10, isolation_level=None)
+                      if self._existing_only else sqlite3.connect(self.path, timeout=10, isolation_level=None))
         connection.row_factory = sqlite3.Row
         try:
             _require(connection.execute('PRAGMA journal_mode=WAL').fetchone()[0] == 'wal', 'reservation_wal_unavailable')
@@ -155,8 +254,7 @@ class Reservations:
         finally:
             connection.close()
 
-    @staticmethod
-    def _decode(row):
+    def _decode(self, row):
         value = dict(row)
         try:
             value['owner'], value['resources'] = json.loads(value['owner']), json.loads(value['resources'])
@@ -172,21 +270,31 @@ class Reservations:
                          '..' not in Path(r['canonical_path']).parts and r['access'] in ('read', 'write') for r in value['resources']),
                      'corrupt_reservation_resources')
             if 'demands' in value:
-                value['demands'] = _quantities(json.loads(value['demands']))
+                value['demands'] = _quantities(json.loads(value['demands']), managed_units=self.managed_units)
+            if self.managed_units:
+                value['controller'] = json.loads(value['controller'])
+                from .managed_reservation_graph import validate_controller
+                validate_controller(value['controller'], value['owner'], value['demands'])
         except (ValueError, TypeError, KeyError) as error:
             raise ReservationError('corrupt_reservation_record') from error
         return value
 
-    def reserve(self, job_id, resources, *, ttl_seconds=30, demands=None):
+    def reserve(self, job_id, resources, *, ttl_seconds=30, demands=None, controller_directory=None):
         _require(type(job_id) is str and 1 <= len(job_id) <= 128 and
                  not any(ord(c) < 32 for c in job_id), 'invalid_reservation_job_id')
         resources = _resources(resources);ttl_seconds = _ttl(ttl_seconds)
         if self.capacity is None:
             _require(demands is None, 'reservation_budget_policy_required')
         else:
-            demands = _quantities(demands)
+            demands = _quantities(demands, managed_units=self.managed_units)
             self._validate_disk_resources(resources)
         owner, now, token = _identity(), time.time(), str(uuid.uuid4())
+        controller = None
+        if self.managed_units:
+            from .managed_reservation_graph import capture_controller
+            controller = capture_controller(controller_directory, owner, demands)
+        else:
+            _require(controller_directory is None, 'managed_unit_budget_policy_required')
         with self._transaction() as connection:
             _require(connection.execute('SELECT 1 FROM leases WHERE job_id=?', (job_id,)).fetchone() is None,
                      'reservation_job_already_recorded')
@@ -203,10 +311,12 @@ class Reservations:
                          'reservation_capacity_exhausted')
             values = (token, job_id, _json(owner), _json(resources), 'held', now, now+ttl_seconds, now)
             connection.execute('INSERT INTO leases VALUES (?,?,?,?,?,?,?,?,NULL'+
-                               (',?' if self.capacity is not None else '')+')',
-                               values+((_json(demands),) if self.capacity is not None else ()))
+                               (',?' if self.capacity is not None else '')+(',?' if self.managed_units else '')+')',
+                               values+((_json(demands),) if self.capacity is not None else ())+
+                               ((_json(controller),) if self.managed_units else ()))
         return {'token': token, 'job_id': job_id, 'owner': owner, 'resources': resources, 'state': 'held',
-                **({'demands': demands} if self.capacity is not None else {}), 'scientific_verdict': None}
+                **({'demands': demands} if self.capacity is not None else {}),
+                **({'controller': controller} if self.managed_units else {}), 'scientific_verdict': None}
 
     def _owned(self, connection, token):
         _require(type(token) is str, 'invalid_reservation_token')
@@ -227,11 +337,14 @@ class Reservations:
     def validate_paths(self, token):
         with self._transaction() as connection:
             value = self._owned(connection, token)
-            _require(all(str(Path(r['requested_path']).resolve(strict=False)) == r['canonical_path']
-                         for r in value['resources']), 'reservation_path_alias_changed')
-            if self.capacity is not None:
-                self._validate_disk_resources(value['resources'])
+            self._validate_lease_paths(value)
         return True
+
+    def _validate_lease_paths(self, lease):
+        _require(all(str(Path(r['requested_path']).resolve(strict=False)) == r['canonical_path']
+                     for r in lease['resources']), 'reservation_path_alias_changed')
+        if self.capacity is not None:
+            self._validate_disk_resources(lease['resources'])
 
     def _validate_disk_resources(self, resources):
         # One disk budget covers one actual filesystem, not the sum of free
@@ -243,7 +356,10 @@ class Reservations:
     def release(self, token, *, note):
         _require(type(note) is str and bool(note.strip()) and len(note) <= 1024, 'reservation_release_reason_required')
         with self._transaction() as connection:
-            self._owned(connection, token)
+            value = self._owned(connection, token)
+            if self.managed_units:
+                from .managed_reservation_graph import require_closed_graph
+                require_closed_graph(connection, value, owner_closed=False)
             connection.execute('UPDATE leases SET state=\'released\',updated=?,release_note=? WHERE token=?',
                                (time.time(), note, token))
 
@@ -279,6 +395,12 @@ class Reservations:
                      binding['initial_start_ticks'] == owner['start_ticks'],
                      'reservation_recovery_unit_does_not_own_worker')
             _require(closure['all_processes_closed'] is True, 'reservation_recovery_descendants_not_closed')
+            graph = None
+            if self.managed_units:
+                from .managed_reservation_graph import require_closed_graph
+                _require(str(directory) == lease['controller']['directory'] and
+                         binding == lease['controller']['binding'], 'managed_controller_binding_changed')
+                graph = require_closed_graph(connection, lease, owner_closed=True)
             # Recheck after the external readback, retaining the SQLite write lock.
             _require(_owner_status(owner) in ('missing', 'exited', 'pid_reused'),
                      'reservation_recovery_owner_not_closed')
@@ -289,12 +411,40 @@ class Reservations:
                      'contained_directory': str(directory), 'closure': closure, 'note': note,
                      'resources': lease['resources'], 'scientific_verdict': None,
                      'successful_execution_attested': False}
+            if graph is not None:
+                event['managed_unit_graph'] = graph
             connection.execute('CREATE TABLE IF NOT EXISTS closed_worker_recoveries ('
                                'token TEXT PRIMARY KEY, recorded REAL NOT NULL, event TEXT NOT NULL)')
             connection.execute('INSERT INTO closed_worker_recoveries VALUES (?,?,?)', (token, now, _json(event)))
             connection.execute('UPDATE leases SET state=\'released\',updated=?,release_note=? WHERE token=?',
                                (now, note, token))
         return event
+
+    def register_managed_intent(self, token, directory, attempt_id, *, memory_bytes, tasks, maximum_wall_seconds):
+        _require(self.managed_units, 'managed_unit_ledger_v3_required')
+        from .managed_reservation_graph import register_intent
+        with self._transaction() as connection:
+            lease = self._owned(connection, token)
+            self._validate_lease_paths(lease)
+            return register_intent(connection, lease, directory, attempt_id,
+                                   memory_bytes=memory_bytes, tasks=tasks, maximum_wall_seconds=maximum_wall_seconds)
+
+    def mark_managed_submitted(self, token, attempt_id):
+        return self._managed_transition(token, attempt_id, 'submitted')
+
+    def mark_managed_bound(self, token, attempt_id):
+        return self._managed_transition(token, attempt_id, 'bound')
+
+    def abort_managed_unsubmitted(self, token, attempt_id):
+        return self._managed_transition(token, attempt_id, 'aborted')
+
+    def _managed_transition(self, token, attempt_id, state):
+        _require(self.managed_units, 'managed_unit_ledger_v3_required')
+        from .managed_reservation_graph import transition
+        with self._transaction() as connection:
+            lease = self._owned(connection, token)
+            self._validate_lease_paths(lease)
+            return transition(connection, lease, attempt_id, state)
 
     def recovery_history(self):
         """Read the immutable recovery events; old ledger schemas remain usable."""
@@ -306,7 +456,16 @@ class Reservations:
 
     def inspect(self):
         with self._transaction() as connection:
-            values = [self._decode(row) for row in connection.execute('SELECT * FROM leases ORDER BY created,token')]
+            values, graphs = self._inspection_rows(connection)
+        return self._inspection_view(values, graphs)
+
+    def _inspection_rows(self, connection):
+        values = [self._decode(row) for row in connection.execute('SELECT * FROM leases ORDER BY created,token')]
+        graphs = ([{'token':row['token'], 'state':row['state'], 'intent':json.loads(row['intent'])}
+            for row in connection.execute('SELECT * FROM managed_unit_intents ORDER BY attempt_id')] if self.managed_units else None)
+        return values, graphs
+
+    def _inspection_view(self, values, graphs):
         now = time.time()
         for value in values:
             value['heartbeat_expired'] = value['deadline'] < now
@@ -315,6 +474,9 @@ class Reservations:
             value['scientific_verdict'] = None
         result = {'kind': 'timelearner_worker_resource_reservations', 'schema_version': int(self.schema), 'worker_host': self.host,
                 'leases': values, 'automatic_release_on_expiry': False, 'execution_attested': False, 'scientific_verdict': None}
+        if graphs is not None:
+            result['managed_unit_intents'] = graphs
+            result['managed_unit_states_are_declarations'] = True
         if self.capacity is not None:
             used = {key: sum(v['demands'][key] for v in values if v['state'] == 'held') for key in self.capacity}
             _require(all(used[key] <= self.capacity[key] for key in used), 'reservation_capacity_exhausted')

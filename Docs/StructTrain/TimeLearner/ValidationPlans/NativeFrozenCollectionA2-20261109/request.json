@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-native-frozen-namespace13-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-native-frozen-collection-m40-a2",
+      "commit": "aadbbdafe8055ef779975440ff3634cab7efd2c7"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/native-frozen-collection-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeFrozenCollectionA2-20261109/suite.json",
+      "sha256": "a03808999f06617764375b2d822c13eafbbc878b75fb1a6f9331924f010c1fb0"
+    },
+    "fixtures": {}
+  }
+}

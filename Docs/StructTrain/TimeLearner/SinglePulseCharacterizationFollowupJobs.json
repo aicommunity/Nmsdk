@@ -1,0 +1,43 @@
+{
+  "kind": "single_pulse_followup_jobs",
+  "schema_version": 1,
+  "observed_utc": "2026-11-07T02:26:34.359946+00:00",
+  "jobs": [
+    {
+      "job_id": "s07-single-pulse-asan-a1",
+      "host": "10.245.1.17",
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-pulse-asan-a1",
+      "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-pulse-asan-a1-container",
+      "status_at_kernel_observation": "running",
+      "initial_main_pid": 1430707,
+      "initial_start_ticks": "309326383",
+      "unit": "timelearner-c12a7466-20e1-4a92-884d-8dcf9dbcd5f1.service",
+      "invocation_id": "760aa547e2994785b86a086ec53af849",
+      "source_root": "5d0b80afeefbc5daa57d3ca5f550a5e654f07969",
+      "PulseLib": "302124bb3e8aaa412bc7ddacad8560cf427ac94b",
+      "worker_source_sha256": "a75340af9c8ffb8b572265d19133123bccd5b703947b9845ae731ae25919a25c",
+      "result_accepted": false,
+      "scientific_verdict": null
+    },
+    {
+      "job_id": "s03-single-pulse-joint-visual-normal-a1",
+      "host": "10.245.1.17",
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-single-pulse-joint-visual-normal-a1",
+      "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-single-pulse-joint-visual-normal-a1-container",
+      "status_at_kernel_observation": "running",
+      "initial_main_pid": 1432742,
+      "initial_start_ticks": "309347251",
+      "unit": "timelearner-8f100ad4-97ea-466e-b8d1-27fc27383145.service",
+      "invocation_id": "d148eca53b444ec485ace47951631132",
+      "source_root": "5d0b80afeefbc5daa57d3ca5f550a5e654f07969",
+      "PulseLib": "302124bb3e8aaa412bc7ddacad8560cf427ac94b",
+      "worker_source_sha256": "ded4519d8b53c8c9cd3342e0292d639fe2a791025bc6440246a4c3d4ce08654d",
+      "result_accepted": false,
+      "scientific_verdict": null
+    }
+  ],
+  "restart_policy": "Poll these exact kernel/contained handles. Observation timeout is not a terminal state; require complete closure and released lease before reuse.",
+  "normal_Console_primary": "bc1aa051ae46717e9a1e098e7872083aae28e290",
+  "normal_native37_reader13_primary": "d1b4ab27b9533040acb54a7421ab0eed21c496d7",
+  "whole_plan_complete": false
+}

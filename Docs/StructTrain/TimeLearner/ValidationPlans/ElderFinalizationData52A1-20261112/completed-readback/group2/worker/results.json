@@ -1,0 +1,2683 @@
+{
+  "cases": [
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "9a9de8be923840fff39e590c4aee3bdd744818560985c589a31d704c9a0c6414"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "44f2b29dcf90494f828ba5d30ca43af116e325114a254ecec90d0830ab8efaed"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "3f9b50005abcfc7ebad680eceead00036fd847d7f5ca5ea08b09cf064f08b26c"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "7488e628fb2d2aa7ba4b30748489ae5f33b7a015d0310a4d105d1bf088ee7a6e"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "47886803043ca3d39719d6de8d16a73eb88bbd5afbf0d46feca9a8d909339100"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "1b5d71b16ed9b13bef569e790d0773c713c12116c3a671b130f9717cdaeed02b"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "743e2cd73b0ee59405cab373441e680ca3d30c68d0ec5aace0a06bd61d4a94e2"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "3069ab100bb86352aca11d993a0529d581d03539307ea78d0872cf3d27d93ba5"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "bf9230219e1c59d4e6b94eca963cea6a10b0a7b46f0afc536341906ed170f06e"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "24980596d028df243ae18edd7e78aacc73140520011947406c36c174f1e0fce9"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "a0f865661ebea7ee7c0c6eab3eea07aed88777984294f3b21996e2d31664186a"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "154f94909fc226913c3026b4982a44a09e3b447d2e7eb2548d9441fd00c509d3"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "bc97add821f206b287e9cfe4b9bc4f2b7bdec480243637e9eacb4a68506920ca"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "8ad10ca932d0f725a5beeacb1a8190418f6a4e685522d393d6660e9454dd3a5d"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "c2f7c15e8d9a29d14378d44b8bf5f20691b5575489eaf81de01189b70f0c51b0"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "f504ed87fd913ff98f54959f1e0cadb60870e8fbab5f02e78e34666dbfcdfe5c"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "c17b9a2359c7ae91e7f81ea1de6fb32be883a4ebfbb13f92701a8836ae410113"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "23dd6810a1db9a2b73094f23fcb57cb15b935945c8556eeafa45643ffe0d7946"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "e6e8651704927dfe1ff1146819eaecaa24b83f93a0871f7071fa00de277fd02c"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "d1a4eeb08b86ede2c725b82bbe0b267767eab7cdb3aea4e54969f86e6b820067"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "0d660f712f5e278be639c8c3503ebae4e905e0a91948d529b123449b96eab17e"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "c2cf6e037bfb734d47b6eedd0e0eb542fcd06123d0148046a209a0c308609f50"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "84751931d1cf57e9039ad2f1b23afef7ba7a5f7b083af5755953eff2e3bad704"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "a2a49b6cf9f2292505d7b65fb1a93add95d98b4c26bbc89539a66413af1086b0"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "9242c67d31ce25b503fbbfe945398cb466a269a37b03322a4a1b85e3ac83b6c3"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "576e570b21752dfdbc29162ac2d3710701dee0c3538d4254702794df848fc341"
+      },
+      "scientific_verdict": null,
+      "data_inputs": {
+        "descriptor": {
+          "kind": "timelearner_collector_required_files",
+          "schema_version": 1,
+          "roles": {
+            "input0": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+              "staged_name": "branch-finalization-calibration-job.json",
+              "bytes": 1771601,
+              "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077",
+              "maximum_bytes": 67108864
+            },
+            "input1": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+              "staged_name": "branch-finalization-cold-job.json",
+              "bytes": 841629,
+              "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f",
+              "maximum_bytes": 67108864
+            },
+            "input2": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+              "staged_name": "branch-finalization-evaluation-job.json",
+              "bytes": 1771350,
+              "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a",
+              "maximum_bytes": 67108864
+            },
+            "input3": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "branch-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+              "staged_name": "branch-finalization-fixed-job.json",
+              "bytes": 1772056,
+              "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+              "maximum_bytes": 67108864
+            },
+            "input4": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-calibration-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+              "staged_name": "classic-finalization-calibration-job.json",
+              "bytes": 1917019,
+              "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49",
+              "maximum_bytes": 67108864
+            },
+            "input5": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-cold-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+              "staged_name": "classic-finalization-cold-job.json",
+              "bytes": 913190,
+              "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31",
+              "maximum_bytes": 67108864
+            },
+            "input6": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-evaluation-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+              "staged_name": "classic-finalization-evaluation-job.json",
+              "bytes": 1916765,
+              "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778",
+              "maximum_bytes": 67108864
+            },
+            "input7": {
+              "root": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+              "relative_path": "classic-finalization-fixed-job.json",
+              "source_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+              "staged_name": "classic-finalization-fixed-job.json",
+              "bytes": 1917293,
+              "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+              "maximum_bytes": 67108864
+            }
+          },
+          "kernel_closure_attested": false,
+          "test_success_attested": false,
+          "scientific_verdict": null
+        },
+        "source_bytes_unchanged": true,
+        "staged_bytes_unchanged": true,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "scientific_verdict": null
+}

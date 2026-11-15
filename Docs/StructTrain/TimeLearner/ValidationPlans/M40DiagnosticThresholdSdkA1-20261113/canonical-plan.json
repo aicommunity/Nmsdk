@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-sdk-a3",
+    "commit": "64e18d24f8a6c8d3982c04b7aa9ddb7dfc66871c",
+    "namespace": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdSdkA1-20261113/namespace.json",
+      "sha256": "d1621cf58acb565e65025d2cc8c66fccbff5b85fd393b4ade9e89bf6acb19fc6"
+    }
+  },
+  "cohort": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdSdkA1-20261113/cohort.json",
+    "sha256": "fe0f49919e9ee41e6bdd8411314e1f4499461342666ca3eb2d6a77c1150ae82d"
+  },
+  "native_job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdSdkA1-20261113/native-job.json",
+    "sha256": "6b4143a662625ade8b67e5ccceb913beeb5ff438cb9c3a6a7103ac60aafffc3f"
+  },
+  "prior_bindings": [],
+  "external_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-diagnostic-threshold-sdk-prepared-m40-a1",
+  "native_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+    "commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf"
+  },
+  "require_fresh_build": true
+}

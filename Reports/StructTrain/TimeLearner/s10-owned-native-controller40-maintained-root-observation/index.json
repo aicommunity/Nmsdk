@@ -1,0 +1,56 @@
+{
+  "kind": "timelearner_owned_native40_collection_root_observation",
+  "schema_version": 1,
+  "collection_execution": "completed",
+  "collection_returncode": 0,
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "f9e54a955ba1fbf754f80ab5211783e45ee6d7bfff328d793183e10265e6d8ff",
+      "unit": "timelearner-8e7b634b-f680-4188-adcc-fb8e6bb94fa3.service",
+      "invocation_id": "1352cd28c6334cd9901dfe2aa4d98a93",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8e7b634b-f680-4188-adcc-fb8e6bb94fa3.service",
+      "initial_main_pid": 1436440,
+      "initial_start_ticks": "329978905",
+      "sha256": "c049ca8ec5d43e8abe93561fc26f5ac96d7393d39da60cb23449a2430ce3b658"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-8e7b634b-f680-4188-adcc-fb8e6bb94fa3.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "source_commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+  "evidence_commit": "ef2586fa043507a6a6c9e5f6d218568665edd6f9",
+  "ownlease_state": "released",
+  "ownlease_token": "f5f1c2e0-5af2-47cb-9858-b5aece25e963",
+  "original_tests": 40,
+  "scientific_verdict": null,
+  "nested_kernel_closure_attested": false,
+  "artifacts": {
+    "ClosedPython40MaintainedStageReceipt.json": "97c95204a5c46ae6b75efc1fef812d4d7c11496db66c1eaa17c2e4b29c0911ce",
+    "OwnedNativeController40MaintainedEvidenceReceipt.json": "7548dda7c1ff76039559271dead50e5adf4ac24efcb7a4af5fc200eb1e570ef9",
+    "terminal-observation.json.gz": "b03a69369c0c756d20f0c0432794072f0aa2fa4a0d0901f6e6bbbcc97201a6c2",
+    "OwnedNativeController40MaintainedIndependentVerification.json": "ea9b23b8623b491094b6f73bc92a276f86990ab115b7e9a2b38c59a201d0fee4"
+  },
+  "remote_ref_verified": "refs/heads/codex/timelearner-owned-native-controller40-maintained-a1-evidence",
+  "independent_verification": "passed_all325_members"
+}

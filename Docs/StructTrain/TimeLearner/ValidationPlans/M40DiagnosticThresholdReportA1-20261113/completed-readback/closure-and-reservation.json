@@ -1,0 +1,86 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "e3c833ce85ac904d407a18365aaf7e74c1e716a915caecc8d00b647f534a2c91",
+      "unit": "timelearner-d7b791ab-1893-4d9f-a065-6a28b5789eed.service",
+      "invocation_id": "93275dbb7a30428cacfaad617842734d",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d7b791ab-1893-4d9f-a065-6a28b5789eed.service",
+      "initial_main_pid": 1143249,
+      "initial_start_ticks": "365377033",
+      "sha256": "4849a882414076ccd75de4e0820ac5f3b0f30d7b9f1e192d0eac9a79f6a433ba"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-d7b791ab-1893-4d9f-a065-6a28b5789eed.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "c5f646de-f322-4274-b04d-62b4883ded12",
+      "job_id": "s11-diagnostic-threshold-report-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python",
+        "pid": 1143249,
+        "start_ticks": "365377033",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-diagnostic-threshold-report-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-diagnostic-threshold-report-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-diagnostic-threshold-science-m40-a2/worker/tmp/same-matrix-stopped-threshold-study",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-diagnostic-threshold-science-m40-a2/worker/tmp/same-matrix-stopped-threshold-study"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdReportA1-20261113",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdReportA1-20261113"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-bounded-science-taskfix-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-bounded-science-taskfix-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-threshold-scientific-report-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-threshold-scientific-report-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1794578572.8768833,
+      "deadline": 1794579689.3543577,
+      "updated": 1794579575.9332812,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

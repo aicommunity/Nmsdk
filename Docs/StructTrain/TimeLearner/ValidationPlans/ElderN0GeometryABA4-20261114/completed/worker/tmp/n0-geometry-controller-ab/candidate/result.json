@@ -1,0 +1,57 @@
+{
+  "root": "37db99e11a6e9a721cd4b610134fc9172c6e4f01",
+  "pulselib": "58c6e6d51c749a13a79498a681e14ea2fe353ed7",
+  "compile": {
+    "execution": "completed",
+    "returncode": 0,
+    "wall_seconds": 32.78425713721663
+  },
+  "execution": "completed",
+  "validity": "valid",
+  "assertion_status": "passed",
+  "executable": {
+    "path": "/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/candidate/controller-tests",
+    "sha256": "84ef8f718e1a2a38eb744867fa3a9016bb33697711193ed0113c516d06ccf765",
+    "size": 1015184
+  },
+  "resolved_libraries": [
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+      "size": 2220400
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+      "size": 125488
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+      "size": 940560
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+      "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+      "size": 2260296
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+      "size": 240936
+    }
+  ],
+  "actual_loaded_files_captured": false,
+  "test": {
+    "execution": "completed",
+    "returncode": 0,
+    "wall_seconds": 0.01601160317659378
+  },
+  "inventory": {
+    "expected": 6,
+    "observed": 6,
+    "failed_test_ids": [],
+    "assertion_status": "passed",
+    "sha256": "ed8957fc4287ca65fa4049de05599161037947f7d302e28e1456afeca61b0f09"
+  }
+}

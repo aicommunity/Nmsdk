@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="1" failures="1" disabled="0" errors="0" time="82.971" timestamp="2026-11-11T19:07:01.274" name="AllTests">
+  <testsuite name="NativeRecoveryPackage7" tests="1" failures="1" disabled="0" skipped="0" errors="0" time="82.97" timestamp="2026-11-11T19:07:01.274">
+    <testcase name="ClassicN0StoppedRoundtripKeepsResponse" file="/media/user/Data/TimeLearnerRefactor/source-recovery-package7-native14-f3/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp" line="4670" status="run" result="completed" time="82.97" timestamp="2026-11-11T19:07:01.274" classname="NativeRecoveryPackage7">
+      <failure message="/media/user/Data/TimeLearnerRefactor/source-recovery-package7-native14-f3/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp:4594&#x0A;Expected equality of these values:&#x0A;  service.State()&#x0A;    Which is: 4-byte object &lt;00-00 00-00&gt;&#x0A;  NativeTrainingState::Finished&#x0A;    Which is: 4-byte object &lt;03-00 00-00&gt;&#x0A;" type=""><![CDATA[/media/user/Data/TimeLearnerRefactor/source-recovery-package7-native14-f3/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp:4594
+Expected equality of these values:
+  service.State()
+    Which is: 4-byte object <00-00 00-00>
+  NativeTrainingState::Finished
+    Which is: 4-byte object <03-00 00-00>
+]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

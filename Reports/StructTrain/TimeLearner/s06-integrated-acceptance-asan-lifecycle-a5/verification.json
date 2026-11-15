@@ -1,0 +1,1926 @@
+{
+  "kind": "timelearner_shared_asan133_verification",
+  "fresh_closed_released": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s06-integrated-acceptance-asan-lifecycle-a5",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s06-integrated-acceptance-asan-lifecycle-a5-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "1f193f4de69fd36ab4440bcfbc003cd13d4f8e788bc5da1140a1598c214daa93",
+        "unit": "timelearner-b860ba68-fcfe-4aac-9251-d26e6fcbb099.service",
+        "invocation_id": "7d6bfd6d69da4e07ac71f1ebf0379c88",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b860ba68-fcfe-4aac-9251-d26e6fcbb099.service",
+        "initial_main_pid": 865697,
+        "initial_start_ticks": "303145461",
+        "sha256": "3f49550f924481d20fcb4b766665f0355425919e21b081bc8bf301825f7fc619"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-b860ba68-fcfe-4aac-9251-d26e6fcbb099.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "4b8e8891-025d-4703-ad15-df68f79f3b0a",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "archive_members_checked": 4888,
+  "cases": [
+    {
+      "test_id": "TimeLearnerResistanceTest/ClassicChecksAllMembranesAndSkipsCalculationAfterPreflightFailure",
+      "owner": {
+        "pid": 865886,
+        "start_ticks": "303145764",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerResistanceTest/BranchChecksAllMembranesAndSkipsCalculationAfterPreflightFailure",
+      "owner": {
+        "pid": 866377,
+        "start_ticks": "303146528",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/ClassicWeightReset",
+      "owner": {
+        "pid": 866868,
+        "start_ticks": "303147291",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/ClassicWeightDefault",
+      "owner": {
+        "pid": 867481,
+        "start_ticks": "303148951",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/ClassicWeightDestroy",
+      "owner": {
+        "pid": 868041,
+        "start_ticks": "303150635",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/ClassicThresholdReset",
+      "owner": {
+        "pid": 868705,
+        "start_ticks": "303152326",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/ClassicThresholdDefault",
+      "owner": {
+        "pid": 869326,
+        "start_ticks": "303154199",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/ClassicThresholdDestroy",
+      "owner": {
+        "pid": 869843,
+        "start_ticks": "303156052",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/ClassicNestedDefault",
+      "owner": {
+        "pid": 870463,
+        "start_ticks": "303157887",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/ClassicNestedDestroy",
+      "owner": {
+        "pid": 871335,
+        "start_ticks": "303163453",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/BranchWeightReset",
+      "owner": {
+        "pid": 872039,
+        "start_ticks": "303169032",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/BranchWeightDefault",
+      "owner": {
+        "pid": 872653,
+        "start_ticks": "303170602",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/BranchWeightDestroy",
+      "owner": {
+        "pid": 873164,
+        "start_ticks": "303172180",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/BranchThresholdReset",
+      "owner": {
+        "pid": 873776,
+        "start_ticks": "303173781",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/BranchThresholdDefault",
+      "owner": {
+        "pid": 874392,
+        "start_ticks": "303175523",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/BranchThresholdDestroy",
+      "owner": {
+        "pid": 874903,
+        "start_ticks": "303177252",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/BranchNestedDefault",
+      "owner": {
+        "pid": 875575,
+        "start_ticks": "303179001",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativePhaseLifecycle/BranchNestedDestroy",
+      "owner": {
+        "pid": 876936,
+        "start_ticks": "303188952",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationBoundary/ClassicSnapshot",
+      "owner": {
+        "pid": 877948,
+        "start_ticks": "303198822",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationBoundary/BranchSnapshot",
+      "owner": {
+        "pid": 878718,
+        "start_ticks": "303202640",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationBoundary/ClassicConnectedRequest",
+      "owner": {
+        "pid": 879368,
+        "start_ticks": "303205772",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationBoundary/BranchConnectedRequest",
+      "owner": {
+        "pid": 880035,
+        "start_ticks": "303209815",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationBoundary/ClassicPendingProbeRejects",
+      "owner": {
+        "pid": 880689,
+        "start_ticks": "303213189",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationBoundary/BranchPendingProbeRejects",
+      "owner": {
+        "pid": 881180,
+        "start_ticks": "303214078",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationBoundary/ClassicStoppedIsDiagnostic",
+      "owner": {
+        "pid": 881776,
+        "start_ticks": "303214967",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationBoundary/BranchStoppedIsDiagnostic",
+      "owner": {
+        "pid": 882272,
+        "start_ticks": "303216016",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationBoundary/PublicEnumsUseExplicitMapping",
+      "owner": {
+        "pid": 882768,
+        "start_ticks": "303217035",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationOwnership/ClassicAutomatic",
+      "owner": {
+        "pid": 882979,
+        "start_ticks": "303217335",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationOwnership/ClassicExternal",
+      "owner": {
+        "pid": 884067,
+        "start_ticks": "303226499",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationOwnership/BranchAutomatic",
+      "owner": {
+        "pid": 885117,
+        "start_ticks": "303235530",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationOwnership/BranchExternal",
+      "owner": {
+        "pid": 885967,
+        "start_ticks": "303242940",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeOwnedPostTune/ClassicAutomaticConnected",
+      "owner": {
+        "pid": 886924,
+        "start_ticks": "303250529",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeOwnedPostTune/ClassicAutomaticLocal",
+      "owner": {
+        "pid": 887808,
+        "start_ticks": "303259399",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeOwnedPostTune/ClassicExternalConnected",
+      "owner": {
+        "pid": 888846,
+        "start_ticks": "303267980",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeOwnedPostTune/ClassicExternalLocal",
+      "owner": {
+        "pid": 889834,
+        "start_ticks": "303276819",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeOwnedPostTune/ClassicResetInterrupt",
+      "owner": {
+        "pid": 890879,
+        "start_ticks": "303285489",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeOwnedPostTune/BranchAutomaticConnected",
+      "owner": {
+        "pid": 891519,
+        "start_ticks": "303288293",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeOwnedPostTune/BranchAutomaticLocal",
+      "owner": {
+        "pid": 892368,
+        "start_ticks": "303295531",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeOwnedPostTune/BranchExternalConnected",
+      "owner": {
+        "pid": 895260,
+        "start_ticks": "303302778",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeOwnedPostTune/BranchExternalLocal",
+      "owner": {
+        "pid": 896111,
+        "start_ticks": "303310231",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeOwnedPostTune/BranchResetInterrupt",
+      "owner": {
+        "pid": 897115,
+        "start_ticks": "303317369",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationClockHandoff/ClassicAutomatic",
+      "owner": {
+        "pid": 897836,
+        "start_ticks": "303319966",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationClockHandoff/ClassicExternal",
+      "owner": {
+        "pid": 898351,
+        "start_ticks": "303321666",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationClockHandoff/BranchAutomatic",
+      "owner": {
+        "pid": 898966,
+        "start_ticks": "303323398",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeFinalizationClockHandoff/BranchExternal",
+      "owner": {
+        "pid": 899473,
+        "start_ticks": "303325023",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicAutomaticFixed",
+      "owner": {
+        "pid": 900086,
+        "start_ticks": "303326624",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchAutomaticFixed",
+      "owner": {
+        "pid": 906369,
+        "start_ticks": "303427128",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicConnectedCalibrate",
+      "owner": {
+        "pid": 910306,
+        "start_ticks": "303487213",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchConnectedCalibrate",
+      "owner": {
+        "pid": 922119,
+        "start_ticks": "303678159",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicStopped",
+      "owner": {
+        "pid": 937215,
+        "start_ticks": "303823050",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchStopped",
+      "owner": {
+        "pid": 937752,
+        "start_ticks": "303824145",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicQueuedControlDrift",
+      "owner": {
+        "pid": 938332,
+        "start_ticks": "303825196",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchQueuedControlDrift",
+      "owner": {
+        "pid": 944287,
+        "start_ticks": "303878411",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicQueuedReset",
+      "owner": {
+        "pid": 946383,
+        "start_ticks": "303897826",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchQueuedReset",
+      "owner": {
+        "pid": 951725,
+        "start_ticks": "303951453",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicQueuedStop",
+      "owner": {
+        "pid": 957088,
+        "start_ticks": "303971190",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchQueuedStop",
+      "owner": {
+        "pid": 965564,
+        "start_ticks": "304024254",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicInvalidDesign",
+      "owner": {
+        "pid": 967315,
+        "start_ticks": "304042980",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchInvalidDesign",
+      "owner": {
+        "pid": 967809,
+        "start_ticks": "304043914",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicMultirate",
+      "owner": {
+        "pid": 968440,
+        "start_ticks": "304044840",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchMultirate",
+      "owner": {
+        "pid": 969019,
+        "start_ticks": "304045740",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicCancelArmed",
+      "owner": {
+        "pid": 969552,
+        "start_ticks": "304046671",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchCancelArmed",
+      "owner": {
+        "pid": 970047,
+        "start_ticks": "304047606",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicCancelTraining",
+      "owner": {
+        "pid": 970642,
+        "start_ticks": "304048525",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchCancelTraining",
+      "owner": {
+        "pid": 971205,
+        "start_ticks": "304049616",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicCancelQueued",
+      "owner": {
+        "pid": 971701,
+        "start_ticks": "304050645",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchCancelQueued",
+      "owner": {
+        "pid": 976422,
+        "start_ticks": "304102550",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/ClassicCancelPostTune",
+      "owner": {
+        "pid": 979114,
+        "start_ticks": "304122163",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalization/BranchCancelPostTune",
+      "owner": {
+        "pid": 984360,
+        "start_ticks": "304178628",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLiveFinalizationPlanCodec/ActualDesignRoundtripAndMalformedDeclarations",
+      "owner": {
+        "pid": 986248,
+        "start_ticks": "304199844",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/Classic2000",
+      "owner": {
+        "pid": 986461,
+        "start_ticks": "304200215",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/Branch2000",
+      "owner": {
+        "pid": 987776,
+        "start_ticks": "304210042",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/Classic20000",
+      "owner": {
+        "pid": 989456,
+        "start_ticks": "304218872",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/Branch20000",
+      "owner": {
+        "pid": 1003619,
+        "start_ticks": "304318841",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/MergedClassicWindowOnly2000",
+      "owner": {
+        "pid": 1009164,
+        "start_ticks": "304405303",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/MergedClassicWholeBurst2000",
+      "owner": {
+        "pid": 1009791,
+        "start_ticks": "304407569",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/MergedBranchWindowOnly2000",
+      "owner": {
+        "pid": 1010418,
+        "start_ticks": "304409877",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/MergedBranchWholeBurst2000",
+      "owner": {
+        "pid": 1010917,
+        "start_ticks": "304411622",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/ClassicSingle2000",
+      "owner": {
+        "pid": 1011533,
+        "start_ticks": "304413367",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/BranchSingle2000",
+      "owner": {
+        "pid": 1012160,
+        "start_ticks": "304415654",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/ClassicFour2000",
+      "owner": {
+        "pid": 1012779,
+        "start_ticks": "304417882",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/BranchFour2000",
+      "owner": {
+        "pid": 1014896,
+        "start_ticks": "304444772",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/ClassicSix2000",
+      "owner": {
+        "pid": 1016718,
+        "start_ticks": "304455484",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/BranchSix2000",
+      "owner": {
+        "pid": 1028225,
+        "start_ticks": "304577128",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/ClassicWrongPhysicalChannel",
+      "owner": {
+        "pid": 1031399,
+        "start_ticks": "304610313",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBurstAssignment/BranchWrongPhysicalSelector",
+      "owner": {
+        "pid": 1032014,
+        "start_ticks": "304611124",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBoundedTraining/Classic2000",
+      "owner": {
+        "pid": 1032524,
+        "start_ticks": "304611923",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBoundedTraining/Branch2000",
+      "owner": {
+        "pid": 1036624,
+        "start_ticks": "304648882",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBoundedTraining/Classic20000",
+      "owner": {
+        "pid": 1043196,
+        "start_ticks": "304674927",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBoundedTraining/Branch20000",
+      "owner": {
+        "pid": 1076628,
+        "start_ticks": "305062564",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeBranchAliasing/CoincidentLabelsExposeOneEffectivePhysicalBank",
+      "owner": {
+        "pid": 1092838,
+        "start_ticks": "305334634",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/ClassicPhysicalResetWithUnchangedModelHash",
+      "owner": {
+        "pid": 1093329,
+        "start_ticks": "305335438",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/BranchPhysicalResetWithUnchangedModelHash",
+      "owner": {
+        "pid": 1093936,
+        "start_ticks": "305336892",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/ClassicSourceAmplitudeChange",
+      "owner": {
+        "pid": 1094436,
+        "start_ticks": "305338120",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/BranchSourceAmplitudeChange",
+      "owner": {
+        "pid": 1095045,
+        "start_ticks": "305339584",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/ClassicSourceFrequencyChange",
+      "owner": {
+        "pid": 1095550,
+        "start_ticks": "305340809",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/BranchPatternChange",
+      "owner": {
+        "pid": 1096057,
+        "start_ticks": "305342234",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/ClassicDeletedSynapse",
+      "owner": {
+        "pid": 1096658,
+        "start_ticks": "305343458",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/BranchDeletedSynapse",
+      "owner": {
+        "pid": 1097163,
+        "start_ticks": "305344893",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/ClassicExternalStopPreservesTargetAndThreshold",
+      "owner": {
+        "pid": 1097766,
+        "start_ticks": "305346120",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/BranchExternalStopPreservesTargetAndThreshold",
+      "owner": {
+        "pid": 1098273,
+        "start_ticks": "305347554",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/ClassicImplicitResetDuringBuildKeepsControl",
+      "owner": {
+        "pid": 1098877,
+        "start_ticks": "305348769",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/BranchImplicitResetDuringBuildKeepsControl",
+      "owner": {
+        "pid": 1099382,
+        "start_ticks": "305350215",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/ClassicNoopBuildDoesNotInvalidateProbe",
+      "owner": {
+        "pid": 1099883,
+        "start_ticks": "305351461",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/BranchNoopBuildDoesNotInvalidateProbe",
+      "owner": {
+        "pid": 1100647,
+        "start_ticks": "305355099",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerDimensions/ClassicSingleInput2000",
+      "owner": {
+        "pid": 1101280,
+        "start_ticks": "305357745",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerDimensions/BranchSingleInput2000",
+      "owner": {
+        "pid": 1101805,
+        "start_ticks": "305359980",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerDimensions/ClassicSingleInput20000",
+      "owner": {
+        "pid": 1102438,
+        "start_ticks": "305362346",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerDimensions/BranchSingleInput20000",
+      "owner": {
+        "pid": 1103908,
+        "start_ticks": "305378655",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerDimensions/ClassicFourInputs2000",
+      "owner": {
+        "pid": 1105291,
+        "start_ticks": "305395312",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerDimensions/BranchFourInputs2000",
+      "owner": {
+        "pid": 1107320,
+        "start_ticks": "305422205",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerDimensions/ClassicFourInputs20000",
+      "owner": {
+        "pid": 1108459,
+        "start_ticks": "305433078",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerDimensions/BranchFourInputs20000",
+      "owner": {
+        "pid": 1125646,
+        "start_ticks": "305723772",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerDimensions/ClassicSixInputs2000",
+      "owner": {
+        "pid": 1133087,
+        "start_ticks": "305833274",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerDimensions/BranchSixInputs2000",
+      "owner": {
+        "pid": 1140720,
+        "start_ticks": "305952843",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/ClassicPreparationCallbackFailure",
+      "owner": {
+        "pid": 1143078,
+        "start_ticks": "305984821",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/BranchSampleSinkFailure",
+      "owner": {
+        "pid": 1143570,
+        "start_ticks": "305985638",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/ClassicRevisionProviderFailure",
+      "owner": {
+        "pid": 1144062,
+        "start_ticks": "305986490",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/ClassicOwnerUnInitCancelsProbe",
+      "owner": {
+        "pid": 1144669,
+        "start_ticks": "305987905",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/BranchOwnerUnInitCancelsProbe",
+      "owner": {
+        "pid": 1145178,
+        "start_ticks": "305989369",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "NativeLearnerProbeInvalidation/BranchTinySourceChangeCannotHideInFormattedSnapshot",
+      "owner": {
+        "pid": 1145783,
+        "start_ticks": "305990593",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "RdkLifecycleBoolean/UninitializedContainerSkipsWithoutBooleanError",
+      "owner": {
+        "pid": 1146281,
+        "start_ticks": "305991810",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerNativeLifecycle/ConstantSourceResetPublishesRestValueBeforeFirstTick",
+      "owner": {
+        "pid": 1146771,
+        "start_ticks": "305992564",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerNativeLifecycle/SynapseResetClearsConductanceBeforeFirstTick",
+      "owner": {
+        "pid": 1147364,
+        "start_ticks": "305993309",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerNativeLifecycle/SpikeHistoryIsEmptyBeforeFirstTick",
+      "owner": {
+        "pid": 1147855,
+        "start_ticks": "305994068",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerNativeLifecycle/SpikeHistoryResetRemovesEventsWithoutDiscardingZeroTimeSpike",
+      "owner": {
+        "pid": 1148345,
+        "start_ticks": "305994819",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerNativeLifecycle/ResetRefreshesSynapseStepCoefficients",
+      "owner": {
+        "pid": 1148835,
+        "start_ticks": "305995573",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerNativeLifecycle/BuildResetAndCalculateHaveObservableNativeOrder",
+      "owner": {
+        "pid": 1149428,
+        "start_ticks": "305996325",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerNativeLifecycle/StorageImageSurvivesFreshTakeAndReuse",
+      "owner": {
+        "pid": 1149916,
+        "start_ticks": "305997081",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerNativeLifecycle/PooledRebuildRequiresEnvironmentThroughChannelShutdown",
+      "owner": {
+        "pid": 1150404,
+        "start_ticks": "305997836",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerNativeLifecycle/ClassicAuditFlagDefaultAndReuse",
+      "owner": {
+        "pid": 1150895,
+        "start_ticks": "305998590",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerNativeLifecycle/BranchAuditFlagDefaultAndReuse",
+      "owner": {
+        "pid": 1151488,
+        "start_ticks": "305999374",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    },
+    {
+      "test_id": "TimeLearnerNativeLifecycle/FreshJobsResetEnvironmentClockAtEmptyBoundary",
+      "owner": {
+        "pid": 1151979,
+        "start_ticks": "306000148",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+        "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+        "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+      },
+      "assertion_status": "passed",
+      "returncode": 0,
+      "libasan_mapping_present": true
+    }
+  ],
+  "passed_tests": 133,
+  "failed_tests": 0,
+  "original_verdict_preserved": true,
+  "observed_missing_output_directory": false,
+  "asan_finding_causal_claim": false,
+  "full_asan133_pass_attested": true,
+  "leak_absence_attested": false,
+  "subsequent_recovery_sdk_verified": false,
+  "whole_plan_complete": false
+}

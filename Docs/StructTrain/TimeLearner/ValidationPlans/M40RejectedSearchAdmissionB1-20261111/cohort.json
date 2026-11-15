@@ -1,0 +1,299 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeCandidateWindowRejection",
+        "NativeCandidateWindowFactory",
+        "NativeCandidateWindowPackage"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeLoadHistory.cpp",
+      "suites": [
+        "NativeArchiveOwnership"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeCandidateWindowRejection/ClassicCompleteMissingSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/BranchCompleteMissingSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/Classic20000MissingSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/Branch20000MissingSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/ClassicCompleteAmbiguousSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/BranchCompleteAmbiguousSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/ClassicDefaultDoesNotCreateCapability",
+    "NativeCandidateWindowRejection/BranchDefaultDoesNotCreateCapability",
+    "NativeCandidateWindowRejection/ClassicPartialSearchCannotPromote",
+    "NativeCandidateWindowRejection/BranchPartialSearchCannotPromote",
+    "NativeCandidateWindowRejection/ClassicRejectedReferenceCannotPromote",
+    "NativeCandidateWindowRejection/BranchRejectedReferenceCannotPromote",
+    "NativeCandidateWindowRejection/ClassicRejectedFinalCannotPromote",
+    "NativeCandidateWindowRejection/BranchRejectedFinalCannotPromote",
+    "NativeCandidateWindowRejection/ClassicExpiredGroupBudgetCannotPromote",
+    "NativeCandidateWindowRejection/BranchExpiredGroupBudgetCannotPromote",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterCancel",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterLearnerReset",
+    "NativeCandidateWindowRejection/CapabilityExpiresWhenNextGroupCloses",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterAttemptDestruction",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterSameSemanticGraphRebuild",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterExternalStop",
+    "NativeCandidateWindowFactory/ClassicCompleteReferencesAndActualReplayedCandidate",
+    "NativeCandidateWindowFactory/BranchCompleteReferencesAndActualReplayedCandidate",
+    "NativeCandidateWindowFactory/Classic20000ActualReplayedCandidate",
+    "NativeCandidateWindowFactory/Branch20000ActualReplayedCandidate",
+    "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+    "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+  ],
+  "runplan": [
+    {
+      "name": "case-001",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/ClassicCompleteMissingSearchHasClosedCapability"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-002",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/BranchCompleteMissingSearchHasClosedCapability"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-003",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/Classic20000MissingSearchHasClosedCapability"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "case-004",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/Branch20000MissingSearchHasClosedCapability"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "case-005",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/ClassicCompleteAmbiguousSearchHasClosedCapability"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "case-006",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/BranchCompleteAmbiguousSearchHasClosedCapability"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "case-007",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/ClassicDefaultDoesNotCreateCapability"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-008",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/BranchDefaultDoesNotCreateCapability"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-009",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/ClassicPartialSearchCannotPromote"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-010",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/BranchPartialSearchCannotPromote"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-011",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/ClassicRejectedReferenceCannotPromote"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-012",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/BranchRejectedReferenceCannotPromote"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-013",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/ClassicRejectedFinalCannotPromote"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-014",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/BranchRejectedFinalCannotPromote"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-015",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/ClassicExpiredGroupBudgetCannotPromote"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-016",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/BranchExpiredGroupBudgetCannotPromote"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-017",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterCancel"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-018",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterLearnerReset"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-019",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/CapabilityExpiresWhenNextGroupCloses"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-020",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterAttemptDestruction"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-021",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterSameSemanticGraphRebuild"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-022",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterExternalStop"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-023",
+      "expected_ids": [
+        "NativeCandidateWindowFactory/ClassicCompleteReferencesAndActualReplayedCandidate"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-024",
+      "expected_ids": [
+        "NativeCandidateWindowFactory/BranchCompleteReferencesAndActualReplayedCandidate"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-025",
+      "expected_ids": [
+        "NativeCandidateWindowFactory/Classic20000ActualReplayedCandidate"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "case-026",
+      "expected_ids": [
+        "NativeCandidateWindowFactory/Branch20000ActualReplayedCandidate"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "case-027",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-028",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip"
+      ],
+      "wall_seconds": 300
+    },
+    {
+      "name": "case-029",
+      "expected_ids": [
+        "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+      ],
+      "wall_seconds": 300
+    }
+  ],
+  "partitions": [
+    {
+      "name": "rejected-search-capability",
+      "ids": [
+        "NativeCandidateWindowRejection/ClassicCompleteMissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/BranchCompleteMissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/Classic20000MissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/Branch20000MissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/ClassicCompleteAmbiguousSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/BranchCompleteAmbiguousSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/ClassicDefaultDoesNotCreateCapability",
+        "NativeCandidateWindowRejection/BranchDefaultDoesNotCreateCapability",
+        "NativeCandidateWindowRejection/ClassicPartialSearchCannotPromote",
+        "NativeCandidateWindowRejection/BranchPartialSearchCannotPromote",
+        "NativeCandidateWindowRejection/ClassicRejectedReferenceCannotPromote",
+        "NativeCandidateWindowRejection/BranchRejectedReferenceCannotPromote",
+        "NativeCandidateWindowRejection/ClassicRejectedFinalCannotPromote",
+        "NativeCandidateWindowRejection/BranchRejectedFinalCannotPromote",
+        "NativeCandidateWindowRejection/ClassicExpiredGroupBudgetCannotPromote",
+        "NativeCandidateWindowRejection/BranchExpiredGroupBudgetCannotPromote",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterCancel",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterLearnerReset",
+        "NativeCandidateWindowRejection/CapabilityExpiresWhenNextGroupCloses",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterAttemptDestruction",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterSameSemanticGraphRebuild",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterExternalStop"
+      ],
+      "count": 22
+    },
+    {
+      "name": "existing-valid-and-stored-package",
+      "ids": [
+        "NativeCandidateWindowFactory/ClassicCompleteReferencesAndActualReplayedCandidate",
+        "NativeCandidateWindowFactory/BranchCompleteReferencesAndActualReplayedCandidate",
+        "NativeCandidateWindowFactory/Classic20000ActualReplayedCandidate",
+        "NativeCandidateWindowFactory/Branch20000ActualReplayedCandidate",
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+        "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+      ],
+      "count": 7
+    }
+  ]
+}

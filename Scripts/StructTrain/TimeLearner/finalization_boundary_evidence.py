@@ -34,8 +34,9 @@ def audit_boundary(boundary):
     if boundary["schema_version"] == 2:
         request = boundary["training_request"]
         audit_training_intent(request)
+        current_run = solo['runtime_plan']['run_id'] if solo.get('schema_version') in (5,6) else solo['configuration']['run_id']
         require(request["session_attempt"] == solo["session_attempt"]
-                and request["run_id"] == solo["configuration"]["run_id"]
+                and request["run_id"] == current_run
                 and request["protocol_revision"] == solo["protocol"]["revision"]
                 and request["pattern_hash"] == solo["protocol"]["pattern_hash"], "boundary_training_request_binding_mismatch")
         original, current = dict(request["controls"]["parameters"]), dict(p)

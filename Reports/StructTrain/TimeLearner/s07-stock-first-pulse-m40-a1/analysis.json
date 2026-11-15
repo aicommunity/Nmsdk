@@ -1,0 +1,91 @@
+{
+  "kind": "stock_first_stimulus_prefix_study",
+  "source_training_evidence": "a1ea63709dbd9a40a54a0e0a0b38fee2b02f9af8",
+  "exact_replay_evidence": "1abdfa87c257fa7aa732353ae05d7c89c7fd0fa9",
+  "rows": [
+    {
+      "name": "Classic-threshold-low-retry32",
+      "prefix": {
+        "kind": "stock_first_stimulus_prefix_audit",
+        "schema_version": 1,
+        "trial_id": "Classic-threshold-low-retry32/session/1/search/6",
+        "model_revision": "aeeb20de9f62d39563de925366990cd1547ba560e7fe3101baac820c9335524c",
+        "input_id": "input0",
+        "channel": 0,
+        "first_actual_stimulus": 12.6145,
+        "second_actual_stimulus": 12.6945,
+        "prefix_end_exclusive": 12.6945,
+        "prefix_samples": 180,
+        "minimum_amplitude": 1e-06,
+        "interior_positive_maxima": [
+          {
+            "time": 12.616,
+            "plateau_end": 12.616,
+            "delay_from_first_stimulus": 0.0015000000000000568,
+            "amplitude_above_native_baseline": 0.09811046173472382,
+            "raw_potential": 0.09811046173472382
+          },
+          {
+            "time": 12.6315,
+            "plateau_end": 12.6315,
+            "delay_from_first_stimulus": 0.017000000000001236,
+            "amplitude_above_native_baseline": 0.23209749260986,
+            "raw_potential": 0.23209749260986
+          },
+          {
+            "time": 12.653,
+            "plateau_end": 12.653,
+            "delay_from_first_stimulus": 0.03850000000000087,
+            "amplitude_above_native_baseline": 0.03053042118556093,
+            "raw_potential": 0.03053042118556093
+          }
+        ],
+        "interior_positive_maxima_count": 3,
+        "selected_channel_only": true,
+        "original_burst_validity": "ambiguous",
+        "whole_trace_and_stimuli_audited": true,
+        "boundary_extrema_not_inferred": true,
+        "new_single_pulse_trial_executed": false,
+        "later_waves_decomposed": false,
+        "valid_training_measurement": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "name": "Branch-threshold-low-retry32",
+      "prefix": {
+        "kind": "stock_first_stimulus_prefix_audit",
+        "schema_version": 1,
+        "trial_id": "Branch-threshold-low-retry32/session/1/search/7",
+        "model_revision": "57d366c6b4fb725d71e7f034aa0db18e35d5180ba94e437dcb4768238b16b8f4",
+        "input_id": "input2",
+        "channel": 0,
+        "first_actual_stimulus": 12.615,
+        "second_actual_stimulus": 12.695,
+        "prefix_end_exclusive": 12.695,
+        "prefix_samples": 180,
+        "minimum_amplitude": 1e-06,
+        "interior_positive_maxima": [
+          {
+            "time": 12.635,
+            "plateau_end": 12.635,
+            "delay_from_first_stimulus": 0.019999999999999574,
+            "amplitude_above_native_baseline": 0.011859327741041703,
+            "raw_potential": 0.011859327741041703
+          }
+        ],
+        "interior_positive_maxima_count": 1,
+        "selected_channel_only": true,
+        "original_burst_validity": "ambiguous",
+        "whole_trace_and_stimuli_audited": true,
+        "boundary_extrema_not_inferred": true,
+        "new_single_pulse_trial_executed": false,
+        "later_waves_decomposed": false,
+        "valid_training_measurement": false,
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "new_native_models_executed": false,
+  "scientific_verdict": null
+}

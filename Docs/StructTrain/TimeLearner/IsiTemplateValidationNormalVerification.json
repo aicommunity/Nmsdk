@@ -1,0 +1,60 @@
+{
+  "kind": "isi_template_validity_scoped_normal_verification",
+  "schema_version": 1,
+  "host": "10.245.1.17",
+  "baseline_evidence_commit": "1ae54182d85e399bf49e9d2440c477ddfd14408f",
+  "fixed_evidence_commit": "8631f99ac1366cf84a347976b0f72633adb2b4da",
+  "baseline_root": "920d42a700d9d3f3477bd94c4aac9d145ea73cac",
+  "baseline_PulseLib": "2f6b57253bd7ae380a19320ef3835a2701cb4d30",
+  "fixed_root": "87e406bd0829af2f8db3482d1fd8b157501f9f51",
+  "fixed_PulseLib": "fe382a0aa729a0692ec3790b0226649b4348410a",
+  "baseline_attempts": [
+    {
+      "attempt": "a1",
+      "members": 35,
+      "archive_bytes": 69432,
+      "source_hashes_verified": 766,
+      "root_reference": "56ac50c9f0217f82f284ea9e277bfb4137c7ccc2",
+      "archive_sha256": "365822937ea3a87d3840f78c2175f8b67c66de2d0ea10cd8c869e8c8aa9d761b"
+    },
+    {
+      "attempt": "a2",
+      "members": 9,
+      "archive_bytes": 58116,
+      "source_hashes_verified": 766,
+      "root_reference": "56ac50c9f0217f82f284ea9e277bfb4137c7ccc2",
+      "archive_sha256": "b865ade8194ad8948f94eaa1ce9d4ef3b585217c6fb047b00b06eebe2a1084df"
+    },
+    {
+      "attempt": "a3",
+      "members": 40,
+      "archive_bytes": 68472,
+      "source_hashes_verified": 766,
+      "root_reference": "920d42a700d9d3f3477bd94c4aac9d145ea73cac",
+      "archive_sha256": "f9f72e07fc6618268783e723390fee8ce0d5f70661195bd1eb489ec37b3c7b55"
+    }
+  ],
+  "accepted_baseline_attempt": "a3",
+  "baseline_observed_test_functions": 9,
+  "baseline_failed_regression_functions": 4,
+  "baseline_passed_observation_controls": 5,
+  "fixed_observed_test_functions": 12,
+  "fixed_passed_functions": 12,
+  "fixed_failed_or_skipped_functions": 0,
+  "fixed_primary_members_verified": 41,
+  "fixed_archive_bytes": 67760,
+  "fixed_archive_sha256": "7c8b2e4bc1259ad48ae534b61ccc8b00a6f64da41405ef21e17e8efea62fa54b",
+  "fixed_source_hashes_verified_against_Git": 766,
+  "old_runtime_files_unchanged_verified_on_server": 13,
+  "actual_loaded_files_verified_on_server": 28,
+  "whole_groups_closed": true,
+  "reservations_released": true,
+  "same_original_four_regression_bodies": true,
+  "additional_fixed_only_controls": 3,
+  "ASan_verified": false,
+  "second_host_verified": false,
+  "full_analyzer_matrix_verified": false,
+  "full_stage3_complete": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

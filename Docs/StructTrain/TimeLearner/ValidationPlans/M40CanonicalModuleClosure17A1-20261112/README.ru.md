@@ -1,0 +1,3 @@
+# Canonical SDK module closure:17 metadata controls
+
+Производственный clean bootstrap и реальные Git fixture repositories; C++/модели не запускаются. Новые cases: дополнительный Git-bound import принят и инвентаризован, foreign Tool path и name/path alias отвергнуты. Сохранены14 прежних namespace/hash/schema/ownership/resource guards. Каждый импортированный module path/hash/Git blob сверяется с декларацией, обязательные API roots должны присутствовать, поздние imports учитываются после подготовки. Фиксированное число29 не является контрактом. Source e26c0d74d846b5ac94742c8d16af22e87a5451c1, package 32cc728e7cb5003eeab740fe141da03e9323136c375659d63eb1a98b535bd7cf. Результат пока не принят.

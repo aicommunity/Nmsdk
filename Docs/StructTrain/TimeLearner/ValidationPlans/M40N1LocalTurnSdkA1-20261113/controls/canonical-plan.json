@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n1-local-turn-sdk-a1",
+    "commit": "4acc1f0ec10708bc4632a793f34630c259e807c3",
+    "namespace": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnSdkA1-20261113/namespace.json",
+      "sha256": "5e99f8c18961b51bdd43ac8de061ca254c78401beaa62ad03f73e7501357b81d"
+    }
+  },
+  "cohort": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnSdkA1-20261113/cohort.json",
+    "sha256": "9667bfdb0d790739ad8f87d1d95fd625752a46be4c4a3b352c959445e2c021e4"
+  },
+  "native_job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnSdkA1-20261113/native-job.json",
+    "sha256": "7a192119d2a87f9888a49b48d0a3c610ea8d5569fe4e76e79bed07f6277fc95a"
+  },
+  "prior_bindings": [],
+  "external_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-local-turn-sdk-prepared-m40-a1",
+  "native_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+    "commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf"
+  },
+  "require_fresh_build": true
+}

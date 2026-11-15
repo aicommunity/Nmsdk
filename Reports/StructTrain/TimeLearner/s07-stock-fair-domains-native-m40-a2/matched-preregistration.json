@@ -1,0 +1,87 @@
+{
+  "baseline_native_evidence": "da57d3cb10826843790b193e93cdcb380fa7f0fc",
+  "pairs": [
+    {
+      "topology": "Branch",
+      "initial_threshold": 0.0117,
+      "policy": "advance_unassigned_burst",
+      "baseline_name": "Branch-threshold-low-advance32",
+      "candidate_name": "Branch-threshold-low-advance32",
+      "baseline_condition_fingerprint": "eed4df4f5e0f9faba38c659561bd58edf8c546650b598459a68a164c7433006b",
+      "candidate_condition_fingerprint": "b91575a6946c9e0217b3f5626cbe51678a718d8ef8fdaccb7544e346c77a9752",
+      "expected_initial_revision": "216b1522f248df9830e4f6167e692ee627ee389f56bca3e076c92a871f82d81b"
+    },
+    {
+      "topology": "Branch",
+      "initial_threshold": 0.0117,
+      "policy": "retry_same_candidate",
+      "baseline_name": "Branch-threshold-low-retry32",
+      "candidate_name": "Branch-threshold-low-retry32",
+      "baseline_condition_fingerprint": "8a978aac9a7e82d3db351806dc64eed41cf35a4528bc0412991ff837a4817d04",
+      "candidate_condition_fingerprint": "4f6a261c3b3be1645b4e3a3a7ea2b3ba546dd3afc56c75c56d3cc224214febcc",
+      "expected_initial_revision": "216b1522f248df9830e4f6167e692ee627ee389f56bca3e076c92a871f82d81b"
+    },
+    {
+      "topology": "Branch",
+      "initial_threshold": 100.0,
+      "policy": "advance_unassigned_burst",
+      "baseline_name": "Branch-threshold-training100-advance32",
+      "candidate_name": "Branch-threshold-training100-advance32",
+      "baseline_condition_fingerprint": "fd49b10ecd459debac5fa37880fa89ea566de08eedc4f9739002f6a4ad09637b",
+      "candidate_condition_fingerprint": "c0c1affd738af4383e4662d5362d0eb60342da4e4b7918f63200ba7fa71ddbb3",
+      "expected_initial_revision": "5a916bc7c77f2176c065d57e3d68dd0783902b40418eec42cf089eb10b36abf5"
+    },
+    {
+      "topology": "Branch",
+      "initial_threshold": 100.0,
+      "policy": "retry_same_candidate",
+      "baseline_name": "Branch-threshold-training100-retry32",
+      "candidate_name": "Branch-threshold-training100-retry32",
+      "baseline_condition_fingerprint": "081ed4d244bc0c49d26e9bba7831017ce453bd45820ddd9114afe1a2e12a78fe",
+      "candidate_condition_fingerprint": "324180cdead37d31803bd4145dee76f24d25144adb88e03914716eb047b78f81",
+      "expected_initial_revision": "5a916bc7c77f2176c065d57e3d68dd0783902b40418eec42cf089eb10b36abf5"
+    },
+    {
+      "topology": "Classic",
+      "initial_threshold": 0.0117,
+      "policy": "advance_unassigned_burst",
+      "baseline_name": "Classic-threshold-low-advance32",
+      "candidate_name": "Classic-threshold-low-advance32",
+      "baseline_condition_fingerprint": "9a2b2bd73b6fc3fc62e30865939f89a7a16288a20212e13428ebe4cef6da3e17",
+      "candidate_condition_fingerprint": "635edfa0dc9aea1be8ed98820898132fde4a39e6c13688d7b9bcc210bc889aa9",
+      "expected_initial_revision": "d74d60a450f51b48591f46f97485bb1dff5171d2cdf70b2e31033d5d4b1cc09f"
+    },
+    {
+      "topology": "Classic",
+      "initial_threshold": 0.0117,
+      "policy": "retry_same_candidate",
+      "baseline_name": "Classic-threshold-low-retry32",
+      "candidate_name": "Classic-threshold-low-retry32",
+      "baseline_condition_fingerprint": "2f657355c7f026e585e0714d2234149284e920609da93e21ec3bdd316a498780",
+      "candidate_condition_fingerprint": "1303700995b450785c98de2c9fdb159bf5c468ae63545f8106055bea73a31af4",
+      "expected_initial_revision": "d74d60a450f51b48591f46f97485bb1dff5171d2cdf70b2e31033d5d4b1cc09f"
+    },
+    {
+      "topology": "Classic",
+      "initial_threshold": 100.0,
+      "policy": "advance_unassigned_burst",
+      "baseline_name": "Classic-threshold-training100-advance32",
+      "candidate_name": "Classic-threshold-training100-advance32",
+      "baseline_condition_fingerprint": "420e60789a9d333bd28cd373edfeff75eb8b6a45a920e71595885b85f8818ddd",
+      "candidate_condition_fingerprint": "84b67a975ccab7128495acab96f33b77b24e268b12103dd270ef95b804d28ac8",
+      "expected_initial_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a"
+    },
+    {
+      "topology": "Classic",
+      "initial_threshold": 100.0,
+      "policy": "retry_same_candidate",
+      "baseline_name": "Classic-threshold-training100-retry32",
+      "candidate_name": "Classic-threshold-training100-retry32",
+      "baseline_condition_fingerprint": "32b6095952450fff0db3b7b4629429688267be1d01b20c0a309f583d59fc4ba9",
+      "candidate_condition_fingerprint": "fa033979b007ff14c80486ba3862d0b298d577f2f317cc35edb3b0fd0872355a",
+      "expected_initial_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a"
+    }
+  ],
+  "before_any_native_operation": true,
+  "scientific_verdict": null
+}

@@ -1,0 +1,409 @@
+{
+  "kind": "timelearner_native_acceptance_job",
+  "schema_version": 1,
+  "workspace": "/home/user/timelearner-refactor",
+  "preparation": "/home/user/timelearner-refactor/readbacks/s07-window-recovery-wire146-elder-c2-controller/inputs/preparation.json",
+  "paths": {
+    "source": "/home/user/timelearner-refactor/source-candidate-window-recovery-wire-c2",
+    "build": "/home/user/timelearner-refactor/build-candidate-window-recovery-wire-c2",
+    "runtime": "/home/user/timelearner-refactor/runtime-candidate-window-recovery-wire-c2",
+    "output": "/home/user/timelearner-refactor/readbacks/s07-window-recovery-wire146-elder-c2",
+    "resources": "/home/user/timelearner-refactor/resources-bin8cb-native-archive-move-normal-a1",
+    "framework": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+  },
+  "build": {
+    "type": "Release",
+    "parallel": 2,
+    "wall_seconds": 10800,
+    "required_cache_tokens": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS:STRING=",
+      "CMAKE_CXX_FLAGS:STRING=",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=",
+      "CMAKE_SHARED_LINKER_FLAGS:STRING=",
+      "CMAKE_MODULE_LINKER_FLAGS:STRING=",
+      "CMAKE_STATIC_LINKER_FLAGS:STRING=",
+      "FETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_SOURCE_DIR_GOOGLETEST:PATH=/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+      "RDK_USE_LLM:BOOL=OFF",
+      "RDK_LLM_BUILD_EMBEDDED:BOOL=OFF",
+      "NMSDK_BUILD_PARALLEL_JOBS:UNINITIALIZED=2"
+    ]
+  },
+  "limits": {
+    "whole_wall_seconds": 14400,
+    "leaf_memory_bytes": 8589934592,
+    "leaf_tasks": 128,
+    "physical_free_floor_bytes": 2147483648,
+    "reservation_memory_bytes": 8589934592,
+    "reservation_disk_bytes": 4294967296
+  },
+  "asan_options": null,
+  "protected_runtimes": [
+    "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+    "/home/user/timelearner-refactor/runtime-native-archive-move18-normal-a2",
+    "/home/user/timelearner-refactor/runtime-native119-normal-a1",
+    "/home/user/timelearner-refactor/runtime-native119-open-arm-normal-a1",
+    "/home/user/timelearner-refactor/runtime-native119-foreign-reference-normal-a1",
+    "/home/user/timelearner-refactor/runtime-n1-geometry-full-after-a1",
+    "/home/user/timelearner-refactor/runtime-n1-geometry-full-before-a1",
+    "/home/user/timelearner-refactor/runtime-rejected-search-admission-a1",
+    "/home/user/timelearner-refactor/runtime-rejected-search-admission-b1",
+    "/home/user/timelearner-refactor/runtime-candidate-window-recovery-core-c1"
+  ],
+  "artifacts": [
+    {
+      "glob": "native-027/native-composite/package6-classic/source-0/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-027/native-composite/package6-classic/source-0/train_learned_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-027/native-composite/package6-classic/source-0/train_learned_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-027/native-composite/package6-classic/source-0/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-027/native-composite/package6-classic/source-0/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-027/native-composite/package6-classic/source-0/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-027/native-composite/package6-classic/source-0/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-027/native-composite/package6-classic/source-0/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-027/native-composite/package6-classic/source-0/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-028/native-composite/package6-branch/source-0/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-028/native-composite/package6-branch/source-0/train_learned_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-028/native-composite/package6-branch/source-0/train_learned_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-028/native-composite/package6-branch/source-0/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-028/native-composite/package6-branch/source-0/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-028/native-composite/package6-branch/source-0/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-028/native-composite/package6-branch/source-0/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-028/native-composite/package6-branch/source-0/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-028/native-composite/package6-branch/source-0/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/classic-native-window5/rejected-ClassicCompleteMissingSearchHasClosedCapability/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/classic-native-window5/rejected-ClassicCompleteAmbiguousSearchHasClosedCapability/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/classic-native-window5/rejected-ClassicDefaultDoesNotCreateCapability/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/classic-native-window5/rejected-Classic20000MissingSearchHasClosedCapability/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/branch-native-window5/rejected-BranchCompleteMissingSearchHasClosedCapability/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/branch-native-window5/rejected-BranchCompleteAmbiguousSearchHasClosedCapability/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/branch-native-window5/rejected-BranchDefaultDoesNotCreateCapability/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/branch-native-window5/rejected-Branch20000MissingSearchHasClosedCapability/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-030/native-composite/classic-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-030/native-composite/classic-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-031/native-composite/branch-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-031/native-composite/branch-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-032/native-composite/classic-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-032/native-composite/classic-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-033/native-composite/branch-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-033/native-composite/branch-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-034/native-composite/classic-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-034/native-composite/classic-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-035/native-composite/branch-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-035/native-composite/branch-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-036/native-composite/classic-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-036/native-composite/classic-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-037/native-composite/branch-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-037/native-composite/branch-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-038/native-composite/classic-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-038/native-composite/classic-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-039/native-composite/branch-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-039/native-composite/branch-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-040/native-composite/classic-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-040/native-composite/classic-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 2
+    },
+    {
+      "glob": "native-041/native-composite/classic-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-041/native-composite/classic-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-042/native-composite/branch-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-042/native-composite/branch-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-043/native-composite/classic-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-043/native-composite/classic-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-044/native-composite/branch-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-044/native-composite/branch-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-045/native-composite/classic-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-045/native-composite/classic-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-046/native-composite/branch-native-window5/reference-*/window5-boundary.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "native-046/native-composite/branch-native-window5/core-rejected-*/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-047/native-composite/recovery-wire/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-047/native-composite/recovery-wire/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-047/native-composite/recovery-wire/protocol.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-047/native-composite/recovery-wire/legacy-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-047/native-composite/recovery-wire/legacy-runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-048/native-composite/recovery-wire/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-048/native-composite/recovery-wire/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-048/native-composite/recovery-wire/protocol.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-048/native-composite/recovery-wire/legacy-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-048/native-composite/recovery-wire/legacy-runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    }
+  ]
+}

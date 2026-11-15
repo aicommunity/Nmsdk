@@ -1,0 +1,19 @@
+# Classic burst: читаемый LT-потенциал на прежних первичных данных
+
+У показанного ранее Classic-графика LT-потенциал **ненулевой**. Старый overview включал threshold100 в пределы оси и визуально сплющивал сигнал. Renderer3 задаёт ось по recorded values, а находящийся за её пределами порог подписывает точным значением и направлением. Положение порога не подменяется линией на границе рисунка.
+
+Это повторное отображение **того же** диагностического burst, не новое обучение и не новая физика. Первичные данные: commit `cd8d32168c3580948d0684f6ccad9f64f8527d94`, archive `s07-high-threshold-classic-normal-m40-a1/primary.tar.xz`, member `runs/Classic-threshold-training100-retry32-burst/native`. Base/observed model revision `913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04` совпадают. Отдельная LTMembrane в этом графе отсутствует; новый renderer её не добавляет.
+
+![Classic: потенциал сомы, реальные входы и LT-потенциал в читаемом масштабе](../../../Reports/StructTrain/TimeLearner/s07-channel-lt-overview-render-m40-a1/selected/Classic-burst-Soma1-overview.png)
+
+На верхней панели — Soma1 SumPotential и фактические входные импульсы. На нижней — общий LT decision potential, который агрегирует каналы нескольких сом и не обязан совпадать по форме с одним Soma1. Нулевая Feedback/LT Output при этом высоком пороге отличается от ненулевого подпорогового LT Potential. Это наблюдение изображения, не новое вычисление модели.
+
+Waveform сохранена полностью; **packet observation valid=False остаётся прежним**. Исправление масштаба не переназначает максимум закреплённого импульса, не устраняет неоднозначность пиков и не превращает старое измерение в Exact. При Train по-прежнему нужен максимум закреплённого импульса; при Test — оценка полной реакции на паттерн.
+
+Tool source `cec33f2fcceb8c8f815e3494173bf48dcd39ed6c`. На M40 прошли13metadata и14renderer tests без ошибок/пропусков, с точными ID и неизменными source/environment/fixtures. Evidence `671bac262926681ffe7f6f9958350393fb721528`; Root независимо повторил reader389, [квитанция27](../../../Reports/StructTrain/TimeLearner/s07-channel-lt-overview13-14-root-verification/independent-verification.json) SHA256 `5f7b9d0db2a98506afd57ca81e5601e3db946999f3c57b54cf02632ee192b1ff`.
+
+Отдельный production CLI render выполнен один раз и закрыт. Evidence `ae8626784d85be59a1f3c249edf73ed9bc7ed153`; Root независимо проверил55archive members,632Script files/441Python files,12original primary files,4934environment records, exact process/outside-controller lease/runtime linkage и выбранный PNG. [Квитанция render](../../../Reports/StructTrain/TimeLearner/s07-channel-lt-overview13-14-root-verification/render-independent-verification.json) SHA256 `6ce8f077fa80e3344d36404fe119bf8c6d146ced14006e42a3e7a1cf2509fa08`.
+
+Root просмотрел именно опубликованный PNG1920×1920,295230bytes, SHA256 `2612389f37b46267ea35b971e887bdf99b484697efcf20fe2d469a9fc7fd0651`: заголовки/легенда/оси читаемы, input overlay виден, threshold annotation не перекрывает данные. [Visual QA](../../../Reports/StructTrain/TimeLearner/s07-channel-lt-overview13-14-root-verification/selected-visual-QA.json) относится **только к одному overview**. Полная галерея163views/4somas не объявляется просмотренной. В ней есть native-tick zoom и локальные peak-detail виды для подробного анализа; full cache остаётся на M40 Data `ReportsCache/channel-lt-overview-readable-m40-a1`, полный manifest/checksums сохранены в compressed evidence. В Git опубликован один выбранный PNG; первичные данные повторно не вычислялись.
+
+Тем самым вопрос о flat LT panel для этого конкретного изображения снят без гипотез о неинициализированной LTZone или добавленной мембране. [Фазовая диагностика LT](LTDecisionPathNextGate-20261109.ru.md) остаётся условным инструментом для другого подтверждённого несоответствия, а не обязательным повтором этого случая. Это техническая приёмка визуализации и source provenance, scientific verdict `null`.

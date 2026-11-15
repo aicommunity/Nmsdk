@@ -1,0 +1,15 @@
+{
+  "root": "3bdef559db5af1f68d69a82a079175f620a4f5c9",
+  "terminal": {
+    "build_passed": false,
+    "native_gates_executed": false,
+    "native_channel_diagnostics_acceptance_passed": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "error": {
+    "reason": "('build.log', 2)",
+    "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-native-channel-diagnostics-normal-a1-worker.py\", line 173, in <module>\n    run(['cmake', '--build', build, '--target', 'Test_PulseLib_StorageComponents', 'NeuroModelerConsole', '--parallel', '1'], 'build.log')\n  File \"/tmp/timelearner-native-channel-diagnostics-normal-a1-worker.py\", line 42, in run\n    assert status == 0, (name, status)\n           ^^^^^^^^^^^\nAssertionError: ('build.log', 2)\n"
+  },
+  "native_models_started": false
+}

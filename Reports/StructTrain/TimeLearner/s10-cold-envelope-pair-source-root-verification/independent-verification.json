@@ -1,0 +1,44 @@
+{
+  "kind": "independent_paired_lifetime_source_materialization_metadata_verification",
+  "evidence": "4c7c610c9cd7ba801e96deef29d7e4a10f9abd46",
+  "archive_members": 12,
+  "archive_bytes": 632664,
+  "archive_sha256": "41a3a6cb2ee3fd6db37eca303442318d2eda88bb6f13541b51131f88da484269",
+  "sources": {
+    "corrected": {
+      "root": "7ad96da0e66fe1ef51fc76acb2114174ab6a4e68",
+      "physical_Git_files": 4020,
+      "repositories": 8,
+      "sameSDKimports": 29
+    },
+    "unfixed": {
+      "root": "0530b4e012e18dde3b1053ee3d2bb8692f2e5d91",
+      "physical_Git_files": 4020,
+      "repositories": 8,
+      "sameSDKimports": 29
+    }
+  },
+  "Scripts_same_as_accepted_metadata13": true,
+  "pair_changed_code_paths": [
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeTrainingService.cpp",
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeTrainingService.h",
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeTrainingServiceComposite.cpp"
+  ],
+  "whole_TU_literal": 342,
+  "four_TU_static_inventory": 443,
+  "selected_source_selector": 38,
+  "planned_corrected": 33,
+  "planned_leaves": 22,
+  "unfixed_cohorts": [
+    2,
+    1,
+    1
+  ],
+  "canonical_created": false,
+  "compiled_inventory": null,
+  "native_or_CMake_or_numerical_or_test_execution": false,
+  "old_A4_E11_BB1_closures_unchanged": true,
+  "A4_runtime_cache_generated_flags_unchanged": true,
+  "scientific_verdict": null
+}

@@ -1,0 +1,548 @@
+{
+  "kind": "timelearner_closed_primary_bundle",
+  "schema_version": 2,
+  "base": "/media/user/Data/TimeLearnerRefactor",
+  "roots": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recorded-n4-native-roundtrip-m40-a3",
+      "prefix": "native",
+      "files": {
+        "branch/data-inputs-after.json": {
+          "bytes": 1604,
+          "sha256": "42b487f4c83cd435de55925ddd936b32664900c2e47997cd86ded8583d100a30"
+        },
+        "branch/data-inputs-before.json": {
+          "bytes": 1604,
+          "sha256": "42b487f4c83cd435de55925ddd936b32664900c2e47997cd86ded8583d100a30"
+        },
+        "branch/native-composite/package7/NativeRecordedRecoveryArchive/BranchFullDomainN4Roundtrip/phase-times.json": {
+          "bytes": 898,
+          "sha256": "9fba7eb5e718852b6c0c61b1b5b17f5ab33c34d0067838a73b5d46978b10cc19"
+        },
+        "branch/native-composite/package7/NativeRecordedRecoveryArchive/BranchFullDomainN4Roundtrip/response-after.json": {
+          "bytes": 320470,
+          "sha256": "0c6a4057f18904638bec28b05a5e9710d27743e179359daf874dc0a8542637fe"
+        },
+        "branch/native-composite/package7/NativeRecordedRecoveryArchive/BranchFullDomainN4Roundtrip/response-before.json": {
+          "bytes": 320470,
+          "sha256": "0c6a4057f18904638bec28b05a5e9710d27743e179359daf874dc0a8542637fe"
+        },
+        "branch/native-composite/package7/NativeRecordedRecoveryArchive/BranchFullDomainN4Roundtrip/roundtrip-package.json.qz": {
+          "bytes": 24428195,
+          "sha256": "cb8f6390aba300eb5472ad4992b5bc42179e7e18fec85de53e4ee73d9bff1901"
+        },
+        "branch/native-composite/package7/NativeRecordedRecoveryArchive/BranchFullDomainN4Roundtrip/roundtrip-summary.json": {
+          "bytes": 12635,
+          "sha256": "18593dcfe03d0993d497caae99f7f5b4c69cc5599131a574010339adbe23ba5c"
+        },
+        "branch/native-inputs/branch-recorded-model.qz": {
+          "bytes": 25195012,
+          "sha256": "b3fadca58c562c45b88c5015f8ce7ab710351dd0e962cad6569765f6f2e3a4e1"
+        },
+        "branch/native-inputs/classic-recorded-model.qz": {
+          "bytes": 24518983,
+          "sha256": "54ecf4a1696ea369ed29fd56831f9bd4d5169a1b9b0867ec6281ffd0738896db"
+        },
+        "branch/native-inputs/descriptor.json": {
+          "bytes": 1396,
+          "sha256": "702b6280213f10ac7ab11ad6ceae863011b979c43baa86c92dd6fbfab3579c1b"
+        },
+        "branch/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261112-094630.4007989": {
+          "bytes": 291,
+          "sha256": "71a2645b3a327cf3eaf92b285f34117480ecef7a8c1cec54f0919f64393abba9"
+        },
+        "branch/native.xml": {
+          "bytes": 692,
+          "sha256": "e351c1b80a28522b67f712e34c9a80699effcd8d144d9a53effccca00b9e0806"
+        },
+        "branch/process/capture-ack.json": {
+          "bytes": 114,
+          "sha256": "a86c7304d2478e13a7e9af7053705b7a152ab9162c583066edc2cb31b6c9f517"
+        },
+        "branch/process/capture-ready.json": {
+          "bytes": 98,
+          "sha256": "3a1329175cbc3ee573c7aacc05d8e76034d410beb888baf893f40f1d0252d2f6"
+        },
+        "branch/process/contained/launch-result.json": {
+          "bytes": 54,
+          "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+        },
+        "branch/process/contained/launcher.py": {
+          "bytes": 601,
+          "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+        },
+        "branch/process/contained/limits-readback.json": {
+          "bytes": 1070,
+          "sha256": "e96c1ed869948006f918083b733ac72286e1ea86d49bbe0e53cc78a921638999"
+        },
+        "branch/process/contained/owned-unit.json": {
+          "bytes": 566,
+          "sha256": "20609ac2615df24ca7947fc3adf46100d461aa16f7899f6f4e50767abec7c74a"
+        },
+        "branch/process/contained/ready.json": {
+          "bytes": 44,
+          "sha256": "a358f24653cc4875c83471f2a45262010d9083e3b03c3a6cae7f792aa99d5b5b"
+        },
+        "branch/process/contained/request.json": {
+          "bytes": 1568,
+          "sha256": "65cc17978bd177811cc172fa7415b6a65ea96e12dc9de9b8317a1f9cf5f8b721"
+        },
+        "branch/process/contained/runtime.json": {
+          "bytes": 12667,
+          "sha256": "b06763299be0fe138c1c073654981cf846b7059548b91eafbfa10bf04139dfe4"
+        },
+        "branch/process/contained/start.ack": {
+          "bytes": 18,
+          "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+        },
+        "branch/process/contained/stderr.log": {
+          "bytes": 391,
+          "sha256": "2f740e753ca01a9aa0db32c5e1623fa96c16d757186118fbfb8dc9839a0c2d78"
+        },
+        "branch/process/contained/stdout.log": {
+          "bytes": 592,
+          "sha256": "d075bfd5f488a3dc688b38cad8e5d4ece96cd82beb559aa372ef24df51c3d01d"
+        },
+        "branch/process/loaded-files.json": {
+          "bytes": 4845,
+          "sha256": "6234f4fb3dab8e05dbe5eb9e99e537b949f8a168052127e184490358b55f06d2"
+        },
+        "branch/process/owned-process.json": {
+          "bytes": 673,
+          "sha256": "e2f2f3444614f3db36196034ec1fecebca5734fd495e29763996ecad15c24861"
+        },
+        "branch/process/request.json": {
+          "bytes": 583,
+          "sha256": "cfeee2cb24a645a2e8e0f16ae38c00bcb1eaa5b30221dd7b12e5271a0a63f123"
+        },
+        "branch/process/result.json": {
+          "bytes": 1835,
+          "sha256": "d22cd6d6a7b0ff028874d96f38cf57b360fb32d87dafc3ee443881dd0b25735f"
+        },
+        "branch/process/runtime.json": {
+          "bytes": 12667,
+          "sha256": "b06763299be0fe138c1c073654981cf846b7059548b91eafbfa10bf04139dfe4"
+        },
+        "branch/process/stderr.log": {
+          "bytes": 391,
+          "sha256": "2f740e753ca01a9aa0db32c5e1623fa96c16d757186118fbfb8dc9839a0c2d78"
+        },
+        "branch/process/stdout.log": {
+          "bytes": 592,
+          "sha256": "d075bfd5f488a3dc688b38cad8e5d4ece96cd82beb559aa372ef24df51c3d01d"
+        },
+        "branch/process/terminal-unit-state.json": {
+          "bytes": 1300,
+          "sha256": "63a7a61f76d7e8e09c2823e8a3c1e5881d951d24ceffa4ed5d2696cfec1a31f8"
+        },
+        "branch/process/whole-group-closure.json": {
+          "bytes": 1213,
+          "sha256": "395ffd947d3cefc485833eadb4fc9e91853d546848ddca1cedfd23aad454f640"
+        },
+        "branch/result.json": {
+          "bytes": 2124,
+          "sha256": "687b9a4c335bd191c59955401757bbea57767eab9975843de9ce50ab59a1cc64"
+        },
+        "branch/runtime.json": {
+          "bytes": 12667,
+          "sha256": "b06763299be0fe138c1c073654981cf846b7059548b91eafbfa10bf04139dfe4"
+        },
+        "branch/specification.json": {
+          "bytes": 1254,
+          "sha256": "345be30ae24e38c1f1c677c736783f1bbfd4f6b76941be8b05e75cd3e3c157ed"
+        },
+        "branch-result.json": {
+          "bytes": 2124,
+          "sha256": "687b9a4c335bd191c59955401757bbea57767eab9975843de9ce50ab59a1cc64"
+        },
+        "branch-spec.json": {
+          "bytes": 1254,
+          "sha256": "345be30ae24e38c1f1c677c736783f1bbfd4f6b76941be8b05e75cd3e3c157ed"
+        },
+        "classic/data-inputs-after.json": {
+          "bytes": 1604,
+          "sha256": "42b487f4c83cd435de55925ddd936b32664900c2e47997cd86ded8583d100a30"
+        },
+        "classic/data-inputs-before.json": {
+          "bytes": 1604,
+          "sha256": "42b487f4c83cd435de55925ddd936b32664900c2e47997cd86ded8583d100a30"
+        },
+        "classic/native-composite/package7/NativeRecordedRecoveryArchive/ClassicFullDomainN4Roundtrip/phase-times.json": {
+          "bytes": 902,
+          "sha256": "2b9a8a13ba2893a8a6e04b44de600edd083f71b9235b6ecc439735c6cb455715"
+        },
+        "classic/native-composite/package7/NativeRecordedRecoveryArchive/ClassicFullDomainN4Roundtrip/response-after.json": {
+          "bytes": 694351,
+          "sha256": "726808800871640d60e5b8709e9f0c7b551cad71c64493ac61de1ac0e0ffbdaf"
+        },
+        "classic/native-composite/package7/NativeRecordedRecoveryArchive/ClassicFullDomainN4Roundtrip/response-before.json": {
+          "bytes": 694351,
+          "sha256": "726808800871640d60e5b8709e9f0c7b551cad71c64493ac61de1ac0e0ffbdaf"
+        },
+        "classic/native-composite/package7/NativeRecordedRecoveryArchive/ClassicFullDomainN4Roundtrip/roundtrip-package.json.qz": {
+          "bytes": 24066944,
+          "sha256": "4ff06603e4512b1fc496e99125fb01845c5d84c3d6d06ed19935323c56dbbcda"
+        },
+        "classic/native-composite/package7/NativeRecordedRecoveryArchive/ClassicFullDomainN4Roundtrip/roundtrip-summary.json": {
+          "bytes": 69580,
+          "sha256": "d577d1c6d119554b6d843abd8c7c963fd3f150cf0ba312542528db70b34d4b35"
+        },
+        "classic/native-inputs/branch-recorded-model.qz": {
+          "bytes": 25195012,
+          "sha256": "b3fadca58c562c45b88c5015f8ce7ab710351dd0e962cad6569765f6f2e3a4e1"
+        },
+        "classic/native-inputs/classic-recorded-model.qz": {
+          "bytes": 24518983,
+          "sha256": "54ecf4a1696ea369ed29fd56831f9bd4d5169a1b9b0867ec6281ffd0738896db"
+        },
+        "classic/native-inputs/descriptor.json": {
+          "bytes": 1396,
+          "sha256": "702b6280213f10ac7ab11ad6ceae863011b979c43baa86c92dd6fbfab3579c1b"
+        },
+        "classic/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261112-092511.3929980": {
+          "bytes": 291,
+          "sha256": "d6e5deed8c24b6fb6908ca89a0a802005ec7c7e7e7db1b520bcf8d7cc399ddc3"
+        },
+        "classic/native.xml": {
+          "bytes": 693,
+          "sha256": "fd3f2e153a0dd3b0211b9a049aff583f1356bb5ef5fc14fe0f9ebac9a9e2afa9"
+        },
+        "classic/process/capture-ack.json": {
+          "bytes": 114,
+          "sha256": "4d34464972717fa3006b9541b456a213736e79b60376d39694f626a6c00dd1a3"
+        },
+        "classic/process/capture-ready.json": {
+          "bytes": 98,
+          "sha256": "099d1247a746657e38a08a41c3e9c8030e5bfdc0dd7082c28e36b43bfb6f3adc"
+        },
+        "classic/process/contained/launch-result.json": {
+          "bytes": 54,
+          "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+        },
+        "classic/process/contained/launcher.py": {
+          "bytes": 601,
+          "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+        },
+        "classic/process/contained/limits-readback.json": {
+          "bytes": 1070,
+          "sha256": "3153ce572a7cbdd50a15f3553e7b9c83920e444d9620ea884e72009019b8ddd0"
+        },
+        "classic/process/contained/owned-unit.json": {
+          "bytes": 566,
+          "sha256": "dd3d96eae036eaae3401af279c8afa75674d82c8de7e8a7d1e559a1626102109"
+        },
+        "classic/process/contained/ready.json": {
+          "bytes": 44,
+          "sha256": "c55d64139965d01e4266ec9e7767ce1fa593f2e853e1d93d5d132ef7b68ede6c"
+        },
+        "classic/process/contained/request.json": {
+          "bytes": 1573,
+          "sha256": "2b627ae26494dbd0c92b933d2b9722505233056dc20af60738daff62b64c956a"
+        },
+        "classic/process/contained/runtime.json": {
+          "bytes": 12667,
+          "sha256": "b06763299be0fe138c1c073654981cf846b7059548b91eafbfa10bf04139dfe4"
+        },
+        "classic/process/contained/start.ack": {
+          "bytes": 18,
+          "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+        },
+        "classic/process/contained/stderr.log": {
+          "bytes": 392,
+          "sha256": "cf159783772faac1d0cbf2da5cb04cfb87318893f627ebcd69575c097ed0e81c"
+        },
+        "classic/process/contained/stdout.log": {
+          "bytes": 595,
+          "sha256": "3ad53887933dd8aabbf99c86b5d685626477c3fe2ee350eefd311064d1db8c48"
+        },
+        "classic/process/loaded-files.json": {
+          "bytes": 4845,
+          "sha256": "6234f4fb3dab8e05dbe5eb9e99e537b949f8a168052127e184490358b55f06d2"
+        },
+        "classic/process/owned-process.json": {
+          "bytes": 673,
+          "sha256": "0b739b3d6191ee5d0ddbaa8dc8c9b2fd50a53cb40a9475a59e722cee290c87bd"
+        },
+        "classic/process/request.json": {
+          "bytes": 586,
+          "sha256": "eabb9686e591f70e254e81f4dbbec4cf70140a663f7f79197dbefe29a117052f"
+        },
+        "classic/process/result.json": {
+          "bytes": 1836,
+          "sha256": "f95d48277f424565d93439569e3c9f6e22a3f3cbedb7350eda040f9d7fd07763"
+        },
+        "classic/process/runtime.json": {
+          "bytes": 12667,
+          "sha256": "b06763299be0fe138c1c073654981cf846b7059548b91eafbfa10bf04139dfe4"
+        },
+        "classic/process/stderr.log": {
+          "bytes": 392,
+          "sha256": "cf159783772faac1d0cbf2da5cb04cfb87318893f627ebcd69575c097ed0e81c"
+        },
+        "classic/process/stdout.log": {
+          "bytes": 595,
+          "sha256": "3ad53887933dd8aabbf99c86b5d685626477c3fe2ee350eefd311064d1db8c48"
+        },
+        "classic/process/terminal-unit-state.json": {
+          "bytes": 1300,
+          "sha256": "34fc19246831b156440d9668a4ab634140249d670f6c82089ca055dc895c6e99"
+        },
+        "classic/process/whole-group-closure.json": {
+          "bytes": 1213,
+          "sha256": "1812e2ba409fa23c7b9511eff19e34fd2b30386729563409726049c427ce961e"
+        },
+        "classic/result.json": {
+          "bytes": 2124,
+          "sha256": "47a631d52ea60a5e27c943474ab212bf1cacdb24240f7d7bcfebcb279614f3b1"
+        },
+        "classic/runtime.json": {
+          "bytes": 12667,
+          "sha256": "b06763299be0fe138c1c073654981cf846b7059548b91eafbfa10bf04139dfe4"
+        },
+        "classic/specification.json": {
+          "bytes": 1255,
+          "sha256": "5a8c016b3012b70e063f181d162d8cf7fc0480bab8a2fff6da1d2c9a18902414"
+        },
+        "classic-result.json": {
+          "bytes": 2124,
+          "sha256": "47a631d52ea60a5e27c943474ab212bf1cacdb24240f7d7bcfebcb279614f3b1"
+        },
+        "classic-spec.json": {
+          "bytes": 1255,
+          "sha256": "5a8c016b3012b70e063f181d162d8cf7fc0480bab8a2fff6da1d2c9a18902414"
+        },
+        "reservation.json": {
+          "bytes": 2314,
+          "sha256": "7e3272fe2c8a61f6bc41878331ce60b81ef6a110f23a4b469677d25d70c542a1"
+        },
+        "results.json": {
+          "bytes": 4692,
+          "sha256": "f6a8b089fc3c295e79a22caef371b1ba3011ffe3a964aed99f0f58cb1dc6f51f"
+        },
+        "source-after.json": {
+          "bytes": 1304,
+          "sha256": "ad372073f0f3cb4aabb015d2f825efb54bdb7d345da918d8ca5f172921a9a979"
+        },
+        "source-before.json": {
+          "bytes": 1304,
+          "sha256": "ad372073f0f3cb4aabb015d2f825efb54bdb7d345da918d8ca5f172921a9a979"
+        },
+        "terminal.json": {
+          "bytes": 178,
+          "sha256": "9191a8831b0874b40605fb10d897376d5a3a44e39af7b3eef627e74def8f9454"
+        },
+        "tool-after.json": {
+          "bytes": 296846,
+          "sha256": "5d96c877cd6850d7e4060c7a8df8e41a1e3b363bae96ad4368e6d376ff272b9a"
+        },
+        "tool-before.json": {
+          "bytes": 296846,
+          "sha256": "5d96c877cd6850d7e4060c7a8df8e41a1e3b363bae96ad4368e6d376ff272b9a"
+        }
+      },
+      "links": {
+        "branch/native.test-events-log/EventsLog/NeuroModeler.INFO": {
+          "mode": 41471,
+          "identity": [
+            2048,
+            58098566,
+            54,
+            1794465990477379556,
+            1794465990477379556,
+            1
+          ],
+          "link_text": "NeuroModeler.M40.user.log.INFO.20261112-094630.4007989",
+          "link_not_followed": true
+        },
+        "classic/native.test-events-log/EventsLog/NeuroModeler.INFO": {
+          "mode": 41471,
+          "identity": [
+            2048,
+            58098395,
+            54,
+            1794464711226100778,
+            1794464711226100778,
+            1
+          ],
+          "link_text": "NeuroModeler.M40.user.log.INFO.20261112-092511.3929980",
+          "link_not_followed": true
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recorded-n4-native-roundtrip-m40-a3-controller",
+      "prefix": "controller",
+      "files": {
+        "child-binding-branch.json": {
+          "bytes": 733,
+          "sha256": "17921a543f4cfb54258fd44b53f31425fbfc351045ce1837739300ca99d38962"
+        },
+        "child-binding-classic.json": {
+          "bytes": 734,
+          "sha256": "6c271499a47b82426fc973b406258544447c4b388be9d44075d073ebedccd504"
+        },
+        "child-closures.json": {
+          "bytes": 4258,
+          "sha256": "72ad2273e77efe8baa4470867c25cd891528a8a57243e06b7a7251c2ea813352"
+        },
+        "child-intent-branch.json": {
+          "bytes": 133,
+          "sha256": "127cbebbd6b361619f327fe625e8b67d7a37aba84f9c2c8869b188b6f7bbc973"
+        },
+        "child-intent-classic.json": {
+          "bytes": 134,
+          "sha256": "489f6e8516d6ba464b8c94b23353982b9ba8f575a5e15be323df564d5fa2c8fd"
+        },
+        "declared-resources.json": {
+          "bytes": 980,
+          "sha256": "8257e7efb0331b5288f6313015179e6e9f4958307eeca008d7263d0148f97566"
+        },
+        "launch-intent.json": {
+          "bytes": 544,
+          "sha256": "aeed5b1de04e6c8e94702603222b046629e4b29c4231731266d300c3d43bbb59"
+        },
+        "lease-recovery.json": {
+          "bytes": 4261,
+          "sha256": "1332500f7abdf791d7c2f68afc9ee3a24381bea3a15091d40100ce75bf79160e"
+        },
+        "original-outcome.json": {
+          "bytes": 1659,
+          "sha256": "50bbcc82f452fab155776cf62c8146a30fca1700f3105799b40d6a5e41206eae"
+        },
+        "outer-closure.json": {
+          "bytes": 1213,
+          "sha256": "a61fcfe96399b862e0ddbe8fc155cf546ea112d1ae39d8edfbbff96effda3ef6"
+        },
+        "process/contained/launch-result.json": {
+          "bytes": 54,
+          "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+        },
+        "process/contained/launcher.py": {
+          "bytes": 601,
+          "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+        },
+        "process/contained/limits-readback.json": {
+          "bytes": 1066,
+          "sha256": "eedc837cec7f5c5c1d30c2b14cc5233c31990e6ebd469e6b39ff1c7b4b5239be"
+        },
+        "process/contained/owned-unit.json": {
+          "bytes": 566,
+          "sha256": "6ab516315b447315f74e41eb8b4ceb3d8c594701f6f5f602715280711186c00b"
+        },
+        "process/contained/ready.json": {
+          "bytes": 44,
+          "sha256": "162702072154a186003b782cb106d3a4dda5b0cfc0fae3e3385ae3bdab60dd9f"
+        },
+        "process/contained/request.json": {
+          "bytes": 970,
+          "sha256": "666c7300a4db755fa2233b5fa759be6192172841225dc49c3f729637b89b5ce8"
+        },
+        "process/contained/runtime.json": {
+          "bytes": 4364,
+          "sha256": "88379397422c51d81c010e5d92ce1ac5d09bdf92192808254553542518b644d7"
+        },
+        "process/contained/start.ack": {
+          "bytes": 18,
+          "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+        },
+        "process/contained/stderr.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "process/contained/stdout.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "recorded-child-bindings.json": {
+          "bytes": 1412,
+          "sha256": "e118f75d979b05f1fd01ee2f60b9ab24867e0149fef6cefe3ab86992dbdb25be"
+        },
+        "request.json": {
+          "bytes": 1935,
+          "sha256": "89f4aa10f18a2f1a8e7cf12325f938fb34bf0556bc8428b9dab93644ddf7110a"
+        },
+        "reservation-final.json": {
+          "bytes": 2790,
+          "sha256": "97b84774c7d3a99a08e2c0dc4bc3c919faf8b58d7e1fb62b4501e975ad1bca9b"
+        },
+        "runtime.json": {
+          "bytes": 4364,
+          "sha256": "88379397422c51d81c010e5d92ce1ac5d09bdf92192808254553542518b644d7"
+        },
+        "seen-child-intents.json": {
+          "bytes": 238,
+          "sha256": "edde838b2037ca4fe55698984fc223d4c4dff8c8f4d2bdd047277697cd6f556a"
+        },
+        "started-binding.json": {
+          "bytes": 566,
+          "sha256": "6ab516315b447315f74e41eb8b4ceb3d8c594701f6f5f602715280711186c00b"
+        },
+        "supervisor-result.json": {
+          "bytes": 6699,
+          "sha256": "ef6ef2937e7c31674d200f73cb7186c0be091cd2c9a83914fef87066bc11a654"
+        },
+        "tool-source.json": {
+          "bytes": 296846,
+          "sha256": "5d96c877cd6850d7e4060c7a8df8e41a1e3b363bae96ad4368e6d376ff272b9a"
+        }
+      },
+      "links": {}
+    }
+  ],
+  "closed_units": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recorded-n4-native-roundtrip-m40-a3/branch/process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "afab66eee4c57136a23e02df2b0f7b56f208ea8a2b2caeacee4b34988c832673",
+        "unit": "timelearner-2d7d3b03-595b-4124-8251-950f1e34d4ee.service",
+        "invocation_id": "7268fe2ff00641b2a5b45257e0f73f59",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2d7d3b03-595b-4124-8251-950f1e34d4ee.service",
+        "initial_main_pid": 4007989,
+        "initial_start_ticks": "354118603",
+        "sha256": "812b92f1a58b6cdc75cc58171b8619793fc3f1dbfc88dda6f9d47d93bf77f639"
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recorded-n4-native-roundtrip-m40-a3/classic/process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "7930b549c15fb274eb4ce3109fff780546e4ac992ff3077a8e343d0f08c133ef",
+        "unit": "timelearner-7fcc3ad0-125a-4f9e-a8d7-a3fc546826ff.service",
+        "invocation_id": "2b18dc5e32e24de8a1efefcfbdb214c0",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7fcc3ad0-125a-4f9e-a8d7-a3fc546826ff.service",
+        "initial_main_pid": 3929980,
+        "initial_start_ticks": "353990696",
+        "sha256": "6b1c175051bb7500074601708d92dad2c724690dee55c74fb4f655db779f1f53"
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recorded-n4-native-roundtrip-m40-a3-controller/process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "a14a867ccc0cffdec8d54ab24f1748ae7688cd57407a71dc3f5bc5d30c484f14",
+        "unit": "timelearner-aee04a97-c0de-4a02-a108-d5632aea8754.service",
+        "invocation_id": "c62b67c4b8394310937a4e906aee167e",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-aee04a97-c0de-4a02-a108-d5632aea8754.service",
+        "initial_main_pid": 3926499,
+        "initial_start_ticks": "353989693",
+        "sha256": "8661a50e3a01a473cc2151f1df15a2eef4bd0d274c19a740e27043ade468ee52"
+      }
+    }
+  ],
+  "bounds": {
+    "maximum_file_bytes": 268435456,
+    "maximum_total_bytes": 4294967296,
+    "maximum_archive_bytes": 268435456
+  },
+  "scientific_verdict": null,
+  "controller_join": {
+    "kind": "recorded-n4-roundtrip",
+    "native_prefix": "native",
+    "controller_prefix": "controller",
+    "original_job_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recorded-n4-native-roundtrip-m40-a3"
+  }
+}

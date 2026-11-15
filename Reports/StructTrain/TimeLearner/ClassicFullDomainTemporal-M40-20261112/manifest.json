@@ -1,0 +1,2221 @@
+{
+  "kind": "timelearner_composite_training_temporal_report",
+  "schema_version": 1,
+  "package_sha256": "6107b4b0762ae2d5247bc2356a8fb533d872af2f0aafeb972783aeb85555a078",
+  "summary_sha256": "3d2e927c3676a4ffb43156d38fb6f1b17b65a62eac45e8bf66b7bcdc19965cb7",
+  "package_audit": {
+    "auditor_version": 2,
+    "package_schema_version": 7,
+    "package_digest_verified": true,
+    "certificate_consistent": false,
+    "exact": null,
+    "mathematical_exact": null,
+    "stopped_math_is_not_completion": false,
+    "model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+    "training_outcome": "invalid_observation",
+    "logical_groups": 42,
+    "native_probes": 252,
+    "sampled_frames": 907452,
+    "primary_bytes": 98027287,
+    "source_origin": "da6243cb53ef3a6b707a4bf7fb5ebe5a1f905b7d50a72e92df5273602ab30750",
+    "owner_family_binding": "154052a81196097c75e7f41c2fff8aa834568dd62328bc56a8d9e9ffa5e5a849",
+    "composite_measurements": {
+      "reader_version": 2,
+      "method_id": "declared-window-basin-necessity-v1",
+      "source": {
+        "source_origin": "da6243cb53ef3a6b707a4bf7fb5ebe5a1f905b7d50a72e92df5273602ab30750",
+        "initial_model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+        "initial_epoch": 0,
+        "storage_images": 22,
+        "C0_present": false,
+        "native_import_verified": false
+      },
+      "groups": [
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/capture/1/1/composite/1",
+          "purpose": "reference",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2350203,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/capture/1/2/composite/2",
+          "purpose": "reference",
+          "input_index": 1,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2296577,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/capture/1/3/composite/3",
+          "purpose": "reference",
+          "input_index": 2,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2332608,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/capture/1/4/composite/4",
+          "purpose": "reference",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2367135,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/1/composite/5",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2367134,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/2/composite/6",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2368411,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/5/composite/7",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2378362,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/6/composite/8",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2378364,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/9/composite/9",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2382850,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/10/composite/10",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2278105,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/13/composite/11",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2241894,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/14/composite/12",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2254107,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/17/composite/13",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2281392,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "ambiguous",
+          "measured": false,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/18/composite/14",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": false,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2281400,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/21/composite/15",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2322426,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/22/composite/16",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2322408,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/25/composite/17",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2285121,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "ambiguous",
+          "measured": false,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/26/composite/18",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": false,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2285125,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/29/composite/19",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2322110,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/30/composite/20",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2322121,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/33/composite/21",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2321893,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/34/composite/22",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2321914,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/37/composite/23",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2321685,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/38/composite/24",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2333906,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/41/composite/25",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2361505,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/42/composite/26",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2361507,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/45/composite/27",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2361442,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/46/composite/28",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2361452,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/49/composite/29",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2361320,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/50/composite/30",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2361320,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/53/composite/31",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2360909,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/54/composite/32",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2360907,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/57/composite/33",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2327703,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "ambiguous",
+          "measured": false,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/58/composite/34",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": false,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2327715,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/61/composite/35",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2360778,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/62/composite/36",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2360782,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/65/composite/37",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2327621,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "ambiguous",
+          "measured": false,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/66/composite/38",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": false,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2327620,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/69/composite/39",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2360219,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/70/composite/40",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2360227,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "valid",
+          "measured": true,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/73/composite/41",
+          "purpose": "search",
+          "input_index": 3,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": true,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2333506,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        },
+        {
+          "native_closure_recomputed": true,
+          "geometry_recomputed": true,
+          "geometry_validity": "ambiguous",
+          "measured": false,
+          "selection_checked": true,
+          "primary_traces_checked": 6,
+          "rejection_reason_recomputed": true,
+          "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/74/composite/42",
+          "purpose": "search",
+          "input_index": 0,
+          "attempt_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+          "consumed": false,
+          "native_probes": 6,
+          "sampled_frames": 21606,
+          "retained_frames": 21606,
+          "primary_bytes": 2333503,
+          "capacitance": null,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null,
+          "proposal_recomputed": true
+        }
+      ],
+      "reference_set_recomputed": true,
+      "archive_counters_recomputed": true,
+      "attempt_membership_recomputed": true,
+      "retained_prefix_budgets_recomputed": true,
+      "current_runtime_budget_binding_checked": true,
+      "primary_files_checked": 252,
+      "current_runtime_plan": {
+        "runtime_plan_schema_version": 3,
+        "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+        "protocol_binding": "81a72a61933dbe1d171a64dc30edd3da69e82e4b0ecfdc5e9e539f43ababec31",
+        "normalization": "N1",
+        "n0_candidate_repeats": 1,
+        "runtime_plan_validated": true,
+        "current_search_derived_from_cold_configuration": false,
+        "live_authority_restored": false,
+        "native_execution_verified": false,
+        "training_certificate_verified": false,
+        "scientific_verdict": null
+      },
+      "primary_bytes": 98027287,
+      "artifact_document_sha256": "fee9896c81ca09f6e7714486b495a72ce1ab976dbf7cbfcd79c0169c32512636",
+      "native_execution_verified": false,
+      "live_authority_restored": false,
+      "training_certificate_verified": false,
+      "scientific_verdict": null
+    },
+    "runtime_plan": {
+      "runtime_plan_schema_version": 3,
+      "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+      "protocol_binding": "81a72a61933dbe1d171a64dc30edd3da69e82e4b0ecfdc5e9e539f43ababec31",
+      "normalization": "N1",
+      "n0_candidate_repeats": 1,
+      "runtime_plan_validated": true,
+      "current_search_derived_from_cold_configuration": false,
+      "live_authority_restored": false,
+      "native_execution_verified": false,
+      "training_certificate_verified": false,
+      "scientific_verdict": null
+    },
+    "capacitance_state": null,
+    "summary_checked": true,
+    "summary": {
+      "summary_consistent": true,
+      "search_history_retained": true,
+      "candidates_recomputed": 14,
+      "capacitance_candidates": 0,
+      "resistance_domains": [
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "057406ce975b5d47e13c266c3639ff474e3893c4464b341758442dea8009d899",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "30821510099ab090fabacf0dcbcd610b841a39f27b063d11ea0210b8fb27c523",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "698ca89faf5afa0fc7234f38d3dbb65ead5c95e030ab842921b4632e230bdebe",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "01bbf608abf0d7ff6854552b0ec3a4318ee70e4a7b93f534d7b82713e36ad9e4",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "6c6193bcaf1c2b489ae0c71a86bc880cbb4545924259aa85135170da571be928",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "456fbfd29db327568d0a995e184e6bc276c3f6a4ff1fd7275ae6130e090fcdac",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "76cf084e47734951408fcef297d577c51e0318d965169de3659d0e2ab3616c44",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "426acea82c800e4898b46f59ef44e39d1cb864a0e24a0f499df3f8597fc07c94",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "049f543af75d01ba6d128d5938879641527b2cf05c572047a22271866d52b40c",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "ef3254e88c30dd7b4e210c97558b18da0e74adebc763d8d200022f9f66f3987d",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "2f8ed79a3fb741223e1a7c11e2739d0d84b6ac62da32a12e07f1ae969625a1d0",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "c8fc6c1059a9e505826fd6f41a61f2d674d83dc0fce5f85156ff4bbcd910c0ea",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "d614b402576067da580ce5230b3f735a6697970580e17eb2d52b0db3e1ebe0a1",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "f077cf45b25eec18a8299174c7fc92d9c59666d97f40afdf88541bed48044405",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "dce0c3028b90ae2425a3a9495cb9db2fe3c3ee47767ddcf6b49fcafda0458b93",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        },
+        {
+          "auditor_version": 1,
+          "schema_version": 2,
+          "physics_verified": true,
+          "preview_model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+          "controlled_channels": 1,
+          "minimum_resistance": 2880071.5552629367,
+          "maximum_resistance": 10000000000.0,
+          "evaluation_verdict": null
+        }
+      ],
+      "native_execution_verified": false,
+      "search_decisions_replayed": false,
+      "parameter_change_cost_recomputed": false,
+      "rejection_reasons_recomputed": false,
+      "evaluation_verdict": null,
+      "summary_schema_version": 8,
+      "terminal_provenance_verified": false,
+      "controller_checkpoint_restored": false
+    },
+    "recovery_ledger": {
+      "schema_version": 1,
+      "ledger_digest_verified": true,
+      "deliveries_checked": 5,
+      "attempts_checked": 1,
+      "primary_files_checked": 252,
+      "attempts": {
+        "Classic-stock-cold8-N1/recorded-observation-domain/session/1": {
+          "events_checked": 5,
+          "primary_files_checked": 252,
+          "runtime_plan": {
+            "runtime_plan_schema_version": 3,
+            "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+            "protocol_binding": "81a72a61933dbe1d171a64dc30edd3da69e82e4b0ecfdc5e9e539f43ababec31",
+            "normalization": "N1",
+            "n0_candidate_repeats": 1,
+            "runtime_plan_validated": true,
+            "current_search_derived_from_cold_configuration": false,
+            "live_authority_restored": false,
+            "native_execution_verified": false,
+            "training_certificate_verified": false,
+            "scientific_verdict": null
+          },
+          "event_bindings_verified": true,
+          "service_ledger_completeness_verified": false,
+          "all_invalid_observations_independently_recounted": false,
+          "all_edits_independently_recounted": false,
+          "native_execution_verified": false,
+          "live_authority_restored": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null
+        }
+      },
+      "event_bindings_verified": true,
+      "service_ledger_completeness_verified": false,
+      "all_invalid_observations_independently_recounted": false,
+      "all_edits_independently_recounted": false,
+      "native_execution_verified": false,
+      "live_authority_restored": false,
+      "training_certificate_verified": false,
+      "scientific_verdict": null
+    },
+    "search_history_retained": true,
+    "terminal_provenance_verified": false,
+    "native_import_verified": false,
+    "native_execution_verified": false,
+    "live_authority_restored": false,
+    "completed_classification_requires_original_execution_binding": true,
+    "evaluation_verdict": null
+  },
+  "groups": [
+    {
+      "ordinal": 12,
+      "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/14/composite/12",
+      "selection": {
+        "actual_assigned_onset": 118.852,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "absent_within_fixed_basin",
+                "preserved",
+                "preserved",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 0,
+                "last_sample": 19,
+                "record_edge": true
+              },
+              "maximum": {
+                "amplitude": 0.010412743593308127,
+                "first_sample": 86,
+                "last_sample": 86,
+                "plateau_end": 118.885,
+                "raw_potential": 0.010412743593308127,
+                "time": 118.885
+              },
+              "necessary_inputs": [
+                0
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 187,
+                "last_sample": 187,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            },
+            {
+              "controls": [
+                "preserved",
+                "absent_within_fixed_basin",
+                "preserved",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 187,
+                "last_sample": 187,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.010576182657010658,
+                "first_sample": 246,
+                "last_sample": 246,
+                "plateau_end": 118.965,
+                "raw_potential": 0.010576182657010658,
+                "time": 118.965
+              },
+              "necessary_inputs": [
+                1
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 499,
+                "last_sample": 499,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            },
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 499,
+                "last_sample": 499,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.01041298465457352,
+                "first_sample": 566,
+                "last_sample": 566,
+                "plateau_end": 119.125,
+                "raw_potential": 0.01041298465457352,
+                "time": 119.125
+              },
+              "necessary_inputs": [
+                2
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 979,
+                "last_sample": 979,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            },
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin"
+              ],
+              "left": {
+                "first_sample": 979,
+                "last_sample": 979,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.010412743785796374,
+                "first_sample": 1046,
+                "last_sample": 1046,
+                "plateau_end": 119.365,
+                "raw_potential": 0.010412743785796374,
+                "time": 119.365
+              },
+              "necessary_inputs": [
+                3
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 1775,
+                "last_sample": 3600,
+                "record_edge": true
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": {
+            "amplitude": 0.010412743593308127,
+            "first_sample": 86,
+            "last_sample": 86,
+            "plateau_end": 118.885,
+            "raw_potential": 0.010412743593308127,
+            "time": 118.885
+          },
+          "reasons": [],
+          "selected_candidate": 0,
+          "validity": "valid"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "rejection_reason": "",
+      "window_relative_seconds": [
+        0.0,
+        1.8
+      ],
+      "model_revision": "30821510099ab090fabacf0dcbcd610b841a39f27b063d11ea0210b8fb27c523",
+      "primary_references": [
+        {
+          "bytes": 375377,
+          "relative_path": "composite-measurements/group-000012/full-before.csv",
+          "sha256": "2f6a23f5797aad20366279872e0e95484b4bfa0947499bd3a25390423418e5f2"
+        },
+        {
+          "bytes": 362699,
+          "relative_path": "composite-measurements/group-000012/omit-0.csv",
+          "sha256": "dd41cc4f8e003f84d1c5c4670a365316a83c178585a635f6c462e5ce00491254"
+        },
+        {
+          "bytes": 376041,
+          "relative_path": "composite-measurements/group-000012/omit-1.csv",
+          "sha256": "dc2707b91ac975002b1dbd69d1f80c548e8f888cbaff0f22b818f497918e0148"
+        },
+        {
+          "bytes": 376103,
+          "relative_path": "composite-measurements/group-000012/omit-2.csv",
+          "sha256": "b0bcc28aadaa8990f073bf057cecc9bd42602c390efcd40578d2a68f273b8998"
+        },
+        {
+          "bytes": 376291,
+          "relative_path": "composite-measurements/group-000012/omit-3.csv",
+          "sha256": "c2238fd87f3646a8086413aa6e3ae0956ae8e1596d55b5f9c2d5dcf9fd6dda49"
+        },
+        {
+          "bytes": 387596,
+          "relative_path": "composite-measurements/group-000012/full-after.csv",
+          "sha256": "b17643c868a473db84c5a43ee732ceb140737f5f5796de0a2cf04780417fb1de"
+        }
+      ]
+    },
+    {
+      "ordinal": 14,
+      "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/18/composite/14",
+      "selection": {
+        "actual_assigned_onset": 140.46,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "preserved",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 0,
+                "last_sample": 297,
+                "record_edge": true
+              },
+              "maximum": {
+                "amplitude": 0.004504819155902173,
+                "first_sample": 1146,
+                "last_sample": 1146,
+                "plateau_end": 141.023,
+                "raw_potential": 0.004504819155902173,
+                "time": 141.023
+              },
+              "necessary_inputs": [],
+              "reasons": [
+                "basin_has_no_unique_necessary_input"
+              ],
+              "right": {
+                "first_sample": 1410,
+                "last_sample": 1410,
+                "record_edge": false
+              },
+              "status": "no_necessary_input"
+            },
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 1410,
+                "last_sample": 1410,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.003117082976405783,
+                "first_sample": 1466,
+                "last_sample": 1466,
+                "plateau_end": 141.183,
+                "raw_potential": 0.003117082976405783,
+                "time": 141.183
+              },
+              "necessary_inputs": [
+                2
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 1774,
+                "last_sample": 1774,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            },
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin"
+              ],
+              "left": {
+                "first_sample": 1774,
+                "last_sample": 1774,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.0026546124107139635,
+                "first_sample": 2010,
+                "last_sample": 2010,
+                "plateau_end": 141.455,
+                "raw_potential": 0.0026546124107139635,
+                "time": 141.455
+              },
+              "necessary_inputs": [
+                3
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 3441,
+                "last_sample": 3600,
+                "record_edge": true
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": null,
+          "reasons": [
+            "highest_window_basin_peak_has_ambiguous_necessity"
+          ],
+          "selected_candidate": null,
+          "validity": "ambiguous"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "rejection_reason": "composite_train_assignment_ambiguous;omission_group_closed",
+      "window_relative_seconds": [
+        0.0,
+        1.8
+      ],
+      "model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+      "primary_references": [
+        {
+          "bytes": 382008,
+          "relative_path": "composite-measurements/group-000014/full-before.csv",
+          "sha256": "71a0c69107cec5aab8ddda2ea463158ebdfb0784f670fca2ef5b0eb06a162624"
+        },
+        {
+          "bytes": 369322,
+          "relative_path": "composite-measurements/group-000014/omit-0.csv",
+          "sha256": "7400dd435e1f86418fe3a4b10e44f6a1171ca22ef7063d051446528e16eaea8f"
+        },
+        {
+          "bytes": 382456,
+          "relative_path": "composite-measurements/group-000014/omit-1.csv",
+          "sha256": "301c13adc3587cd4c07ba27ecde6a1621a1a9e1cc1ded61137ac4d50b2c9d9da"
+        },
+        {
+          "bytes": 382908,
+          "relative_path": "composite-measurements/group-000014/omit-2.csv",
+          "sha256": "88f01ecb09a14fb3d77bc6d7a95034be6ae5a850dc190ba9631d712d027f5d95"
+        },
+        {
+          "bytes": 382708,
+          "relative_path": "composite-measurements/group-000014/omit-3.csv",
+          "sha256": "69df2234ec9da8622fbeb5b8b6cb43a871a819ffda0cec078a6b3d161614b4f8"
+        },
+        {
+          "bytes": 381998,
+          "relative_path": "composite-measurements/group-000014/full-after.csv",
+          "sha256": "f450a57c12c6bc7b3903962ef912d4e3b6d81005b6d6a35513317804c1b805e7"
+        }
+      ]
+    },
+    {
+      "ordinal": 42,
+      "group_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/74/composite/42",
+      "selection": {
+        "actual_assigned_onset": 442.972,
+        "geometry": {
+          "candidates": [
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "preserved",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 0,
+                "last_sample": 215,
+                "record_edge": true
+              },
+              "maximum": {
+                "amplitude": 0.004769066150259738,
+                "first_sample": 975,
+                "last_sample": 975,
+                "plateau_end": 443.4495,
+                "raw_potential": 0.004769066150259738,
+                "time": 443.4495
+              },
+              "necessary_inputs": [],
+              "reasons": [
+                "basin_has_no_unique_necessary_input"
+              ],
+              "right": {
+                "first_sample": 1214,
+                "last_sample": 1214,
+                "record_edge": false
+              },
+              "status": "no_necessary_input"
+            },
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin",
+                "preserved"
+              ],
+              "left": {
+                "first_sample": 1214,
+                "last_sample": 1214,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.0032071841869667495,
+                "first_sample": 1330,
+                "last_sample": 1330,
+                "plateau_end": 443.627,
+                "raw_potential": 0.0032071841869667495,
+                "time": 443.627
+              },
+              "necessary_inputs": [
+                2
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 1608,
+                "last_sample": 1608,
+                "record_edge": false
+              },
+              "status": "unique_necessary"
+            },
+            {
+              "controls": [
+                "preserved",
+                "preserved",
+                "preserved",
+                "absent_within_fixed_basin"
+              ],
+              "left": {
+                "first_sample": 1608,
+                "last_sample": 1608,
+                "record_edge": false
+              },
+              "maximum": {
+                "amplitude": 0.002886692450570605,
+                "first_sample": 1841,
+                "last_sample": 1841,
+                "plateau_end": 443.8825,
+                "raw_potential": 0.002886692450570605,
+                "time": 443.8825
+              },
+              "necessary_inputs": [
+                3
+              ],
+              "reasons": [],
+              "right": {
+                "first_sample": 3188,
+                "last_sample": 3600,
+                "record_edge": true
+              },
+              "status": "unique_necessary"
+            }
+          ],
+          "measured_maximum": null,
+          "reasons": [
+            "highest_window_basin_peak_has_ambiguous_necessity"
+          ],
+          "selected_candidate": null,
+          "validity": "ambiguous"
+        },
+        "reasons": [],
+        "status": "completed",
+        "status_enum": 1
+      },
+      "rejection_reason": "composite_train_assignment_ambiguous;omission_group_closed",
+      "window_relative_seconds": [
+        0.0,
+        1.8
+      ],
+      "model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+      "primary_references": [
+        {
+          "bytes": 390600,
+          "relative_path": "composite-measurements/group-000042/full-before.csv",
+          "sha256": "831f9716a71dbf52696e182955f6811aaf97a3eac183e0d5faf4857c5bae8397"
+        },
+        {
+          "bytes": 377911,
+          "relative_path": "composite-measurements/group-000042/omit-0.csv",
+          "sha256": "7a99969f357f9ba27ff70b0ed482c6f758b9c65faeb72ae1ccfc4fa2d1ca90f9"
+        },
+        {
+          "bytes": 391064,
+          "relative_path": "composite-measurements/group-000042/omit-1.csv",
+          "sha256": "ab745f60c157db3356d11bbd0ca31b2e2862cec71494920fd275c1bb919bfc64"
+        },
+        {
+          "bytes": 391516,
+          "relative_path": "composite-measurements/group-000042/omit-2.csv",
+          "sha256": "a088cbdf4a4361d2b18dc0ab27a09b1559d647d0795c647e11b5ab71652deb6c"
+        },
+        {
+          "bytes": 391811,
+          "relative_path": "composite-measurements/group-000042/omit-3.csv",
+          "sha256": "aed137a08849147de2e596d6854a9f38cb09c85eaf8061b657bfa8397f37dff9"
+        },
+        {
+          "bytes": 390601,
+          "relative_path": "composite-measurements/group-000042/full-after.csv",
+          "sha256": "88e23060e0d544d31e9f6ff18818c537a5f088f6bcec36cee400de061ec5167f"
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "group": 12,
+      "channel": 0,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.7999999999999972
+      ],
+      "y_bounds": [
+        -0.0008460946125608527,
+        0.01142227726957151
+      ],
+      "files": [
+        "group-000012-soma-000-overview.png",
+        "group-000012-soma-000-overview.svg",
+        "group-000012-soma-000-overview.pdf"
+      ]
+    },
+    {
+      "group": 12,
+      "channel": 0,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.7999999999999972
+      ],
+      "y_bounds": [
+        -0.0008460946125608527,
+        0.01142227726957151
+      ],
+      "files": [
+        "group-000012-soma-000-detail.png",
+        "group-000012-soma-000-detail.svg",
+        "group-000012-soma-000-detail.pdf"
+      ]
+    },
+    {
+      "group": 12,
+      "channel": 1,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.7999999999999972
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000012-soma-001-overview.png",
+        "group-000012-soma-001-overview.svg",
+        "group-000012-soma-001-overview.pdf"
+      ]
+    },
+    {
+      "group": 12,
+      "channel": 1,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.7999999999999972
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000012-soma-001-detail.png",
+        "group-000012-soma-001-detail.svg",
+        "group-000012-soma-001-detail.pdf"
+      ]
+    },
+    {
+      "group": 12,
+      "channel": 2,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.7999999999999972
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000012-soma-002-overview.png",
+        "group-000012-soma-002-overview.svg",
+        "group-000012-soma-002-overview.pdf"
+      ]
+    },
+    {
+      "group": 12,
+      "channel": 2,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.7999999999999972
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000012-soma-002-detail.png",
+        "group-000012-soma-002-detail.svg",
+        "group-000012-soma-002-detail.pdf"
+      ]
+    },
+    {
+      "group": 12,
+      "channel": 3,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.7999999999999972
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000012-soma-003-overview.png",
+        "group-000012-soma-003-overview.svg",
+        "group-000012-soma-003-overview.pdf"
+      ]
+    },
+    {
+      "group": 12,
+      "channel": 3,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.7999999999999972
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000012-soma-003-detail.png",
+        "group-000012-soma-003-detail.svg",
+        "group-000012-soma-003-detail.pdf"
+      ]
+    },
+    {
+      "group": 14,
+      "channel": 0,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0003603855324721739,
+        0.004865204688374347
+      ],
+      "files": [
+        "group-000014-soma-000-overview.png",
+        "group-000014-soma-000-overview.svg",
+        "group-000014-soma-000-overview.pdf"
+      ]
+    },
+    {
+      "group": 14,
+      "channel": 0,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0003603855324721739,
+        0.004865204688374347
+      ],
+      "files": [
+        "group-000014-soma-000-detail.png",
+        "group-000014-soma-000-detail.svg",
+        "group-000014-soma-000-detail.pdf"
+      ]
+    },
+    {
+      "group": 14,
+      "channel": 1,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000014-soma-001-overview.png",
+        "group-000014-soma-001-overview.svg",
+        "group-000014-soma-001-overview.pdf"
+      ]
+    },
+    {
+      "group": 14,
+      "channel": 1,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000014-soma-001-detail.png",
+        "group-000014-soma-001-detail.svg",
+        "group-000014-soma-001-detail.pdf"
+      ]
+    },
+    {
+      "group": 14,
+      "channel": 2,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000014-soma-002-overview.png",
+        "group-000014-soma-002-overview.svg",
+        "group-000014-soma-002-overview.pdf"
+      ]
+    },
+    {
+      "group": 14,
+      "channel": 2,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000014-soma-002-detail.png",
+        "group-000014-soma-002-detail.svg",
+        "group-000014-soma-002-detail.pdf"
+      ]
+    },
+    {
+      "group": 14,
+      "channel": 3,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000014-soma-003-overview.png",
+        "group-000014-soma-003-overview.svg",
+        "group-000014-soma-003-overview.pdf"
+      ]
+    },
+    {
+      "group": 14,
+      "channel": 3,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000014-soma-003-detail.png",
+        "group-000014-soma-003-detail.svg",
+        "group-000014-soma-003-detail.pdf"
+      ]
+    },
+    {
+      "group": 42,
+      "channel": 0,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.000381525292020779,
+        0.005150591442280516
+      ],
+      "files": [
+        "group-000042-soma-000-overview.png",
+        "group-000042-soma-000-overview.svg",
+        "group-000042-soma-000-overview.pdf"
+      ]
+    },
+    {
+      "group": 42,
+      "channel": 0,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.000381525292020779,
+        0.005150591442280516
+      ],
+      "files": [
+        "group-000042-soma-000-detail.png",
+        "group-000042-soma-000-detail.svg",
+        "group-000042-soma-000-detail.pdf"
+      ]
+    },
+    {
+      "group": 42,
+      "channel": 1,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000042-soma-001-overview.png",
+        "group-000042-soma-001-overview.svg",
+        "group-000042-soma-001-overview.pdf"
+      ]
+    },
+    {
+      "group": 42,
+      "channel": 1,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000042-soma-001-detail.png",
+        "group-000042-soma-001-detail.svg",
+        "group-000042-soma-001-detail.pdf"
+      ]
+    },
+    {
+      "group": 42,
+      "channel": 2,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000042-soma-002-overview.png",
+        "group-000042-soma-002-overview.svg",
+        "group-000042-soma-002-overview.pdf"
+      ]
+    },
+    {
+      "group": 42,
+      "channel": 2,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000042-soma-002-detail.png",
+        "group-000042-soma-002-detail.svg",
+        "group-000042-soma-002-detail.pdf"
+      ]
+    },
+    {
+      "group": 42,
+      "channel": 3,
+      "view": "overview",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000042-soma-003-overview.png",
+        "group-000042-soma-003-overview.svg",
+        "group-000042-soma-003-overview.pdf"
+      ]
+    },
+    {
+      "group": 42,
+      "channel": 3,
+      "view": "detail",
+      "x_bounds_seconds": [
+        0.0,
+        1.8000000000000114
+      ],
+      "y_bounds": [
+        -0.0012662857924962533,
+        0.017094858198699422
+      ],
+      "files": [
+        "group-000042-soma-003-detail.png",
+        "group-000042-soma-003-detail.svg",
+        "group-000042-soma-003-detail.pdf"
+      ]
+    }
+  ],
+  "runtime": {
+    "python": "3.12.3",
+    "python_executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python",
+    "matplotlib": "3.9.4",
+    "pillow": "13.0.0"
+  },
+  "downsampling": false,
+  "time_transform": "recorded CSV time minus that native probe specification.begin",
+  "input_transform": "unaltered recorded CSV aggregate stimulus for each control",
+  "training_certificate_eligible": false,
+  "scientific_verdict": null,
+  "visual_acceptance_complete": false
+}

@@ -1,0 +1,97 @@
+{
+  "bundles": [
+    {
+      "attempt": "s07-single-pulse-asan-a1",
+      "members": 618,
+      "archive_bytes": 3166552,
+      "archive_sha256": "ec8d329c77f15ac199cff4e54efaa4e01b0ee34645e136eabf704d1d54b19b47"
+    }
+  ],
+  "terminal": {
+    "build_passed": true,
+    "native37_record_present": true,
+    "native_probe_records": 4,
+    "single_pulse_ASan_acceptance_passed": true,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "native_verdict": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 37,
+      "observed": 37,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "fc3c5824aef49dd5f66f9b5af2f747ccd34f17fb82a84b2ac3a907dd3bf3ccb5"
+    },
+    "scientific_verdict": null
+  },
+  "reader_result": {
+    "tests_run": 42,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "protected_runtimes_unchanged": 2,
+  "libasan_loaded_processes": [
+    {
+      "process": "native12/process",
+      "libasan": {
+        "path": "/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0",
+        "sha256": "8d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558",
+        "size": 10924208
+      }
+    },
+    {
+      "process": "single-pulse-study/runs/Branch-threshold-low-retry32-burst/process",
+      "libasan": {
+        "path": "/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0",
+        "sha256": "8d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558",
+        "size": 10924208
+      }
+    },
+    {
+      "process": "single-pulse-study/runs/Branch-threshold-low-retry32-single/process",
+      "libasan": {
+        "path": "/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0",
+        "sha256": "8d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558",
+        "size": 10924208
+      }
+    },
+    {
+      "process": "single-pulse-study/runs/Classic-threshold-low-retry32-burst/process",
+      "libasan": {
+        "path": "/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0",
+        "sha256": "8d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558",
+        "size": 10924208
+      }
+    },
+    {
+      "process": "single-pulse-study/runs/Classic-threshold-low-retry32-single/process",
+      "libasan": {
+        "path": "/usr/lib/x86_64-linux-gnu/libasan.so.8.0.0",
+        "sha256": "8d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558",
+        "size": 10924208
+      }
+    }
+  ],
+  "leak_detection_enabled": false,
+  "manifest_audits": [
+    "single-pulse-study/runs/Branch-threshold-low-retry32-burst/run-manifest.json",
+    "single-pulse-study/runs/Branch-threshold-low-retry32-single/run-manifest.json",
+    "single-pulse-study/runs/Classic-threshold-low-retry32-burst/run-manifest.json",
+    "single-pulse-study/runs/Classic-threshold-low-retry32-single/run-manifest.json"
+  ],
+  "compiled_root": "5d0b80afeefbc5daa57d3ca5f550a5e654f07969",
+  "compiled_PulseLib": "302124bb3e8aaa412bc7ddacad8560cf427ac94b",
+  "new_profile_API_verified": false,
+  "second_host_verified": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

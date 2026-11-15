@@ -1,0 +1,7 @@
+# Полный primary нового frozen8 baseline сохранён
+
+Collector s07-n1-coupled-frozen-primary-m40-a1 completed/closed59.414980205s; operation_passed=true, heartbeat errors0. Источник — весь закрытый s07-n1-coupled-frozen-m40-a1:435regular files,1verified alias,2closed owned units. Original frozen8 test1/1 принят, модель неизменна, threshold100:TP0/FP0/FN1/TN7. Source training остаётся invalid_observation/ambiguous, certificate=null.
+
+[primary.tar.xz](../../../../../Reports/StructTrain/TimeLearner/N1CoupledBranch-20261113/frozen-primary/primary.tar.xz):42316856B, SHA2563ff19c642776737c6b11d31bc03ba37e1264406a1a078ac6a0a4eafe564c1325. Expanded783334963B, unique literal content552874722B. [bundle.json](../../../../../Reports/StructTrain/TimeLearner/N1CoupledBranch-20261113/frozen-primary/bundle.json):436logical members, container schema2, manifest schema1. Все исходные модели, наблюдения, jobs, actual runtime/execution и controller receipts доступны без серверного абсолютного пути. Native JSON не переписан; одинаковый literal content дедуплицирован. Новый архив ещё не проходил independent restore.
+
+Control5c6b4ce3e26dbb1b129c2d700707b66038794b6f. Producer30493dc883681a39510b500ec58d6c2806e0c50f, pack42426756B SHA256fcfe3a60aafebb4284c6591a2a8f605882d1161f997be816944e42851b6bb352. [Proof](completed/worker/primary-bundle-proof.json), [closure](completed/process/whole-group-closure.json), [scientific scope](../M40N1CoupledFrozenA1-20261113/RESULT.ru.md).

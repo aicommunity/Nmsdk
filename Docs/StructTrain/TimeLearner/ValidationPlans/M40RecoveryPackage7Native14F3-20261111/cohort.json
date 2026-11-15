@@ -1,0 +1,149 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeRecoveryPackage7"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse",
+    "NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse",
+    "NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse",
+    "NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse",
+    "NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery",
+    "NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery",
+    "NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse",
+    "NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse",
+    "NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery",
+    "NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery",
+    "NativeRecoveryPackage7/ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner",
+    "NativeRecoveryPackage7/BranchMissingForeignOrDuplicateLedgerCannotMutateOwner",
+    "NativeRecoveryPackage7/ClassicLegacy6CannotMasqueradeAsRecovery7",
+    "NativeRecoveryPackage7/BranchLegacy6CannotMasqueradeAsRecovery7"
+  ],
+  "runplan": [
+    {
+      "name": "native-001",
+      "expected_ids": [
+        "NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-002",
+      "expected_ids": [
+        "NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-003",
+      "expected_ids": [
+        "NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-004",
+      "expected_ids": [
+        "NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-005",
+      "expected_ids": [
+        "NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-006",
+      "expected_ids": [
+        "NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-007",
+      "expected_ids": [
+        "NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-008",
+      "expected_ids": [
+        "NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-009",
+      "expected_ids": [
+        "NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-010",
+      "expected_ids": [
+        "NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-011",
+      "expected_ids": [
+        "NativeRecoveryPackage7/ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-012",
+      "expected_ids": [
+        "NativeRecoveryPackage7/BranchMissingForeignOrDuplicateLedgerCannotMutateOwner"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-013",
+      "expected_ids": [
+        "NativeRecoveryPackage7/ClassicLegacy6CannotMasqueradeAsRecovery7"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-014",
+      "expected_ids": [
+        "NativeRecoveryPackage7/BranchLegacy6CannotMasqueradeAsRecovery7"
+      ],
+      "wall_seconds": 900
+    }
+  ],
+  "partitions": [
+    {
+      "name": "recovery-native-model-package7-initialized-and-case-isolated",
+      "ids": [
+        "NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse",
+        "NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse",
+        "NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse",
+        "NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse",
+        "NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery",
+        "NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery",
+        "NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse",
+        "NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse",
+        "NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery",
+        "NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery",
+        "NativeRecoveryPackage7/ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner",
+        "NativeRecoveryPackage7/BranchMissingForeignOrDuplicateLedgerCannotMutateOwner",
+        "NativeRecoveryPackage7/ClassicLegacy6CannotMasqueradeAsRecovery7",
+        "NativeRecoveryPackage7/BranchLegacy6CannotMasqueradeAsRecovery7"
+      ],
+      "count": 14
+    }
+  ]
+}

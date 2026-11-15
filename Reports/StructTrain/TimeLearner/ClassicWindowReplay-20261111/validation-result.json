@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "actual-stopped-Classic-N4-recorded-vs-full-window-replay-v1",
+  "package_fingerprint": "5307410f84d7878a04be18cbe3bcaea2f44ee2493b98d0ff32626be3052763eb",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_diagnostic_replay_native.CandidateWindowDiagnosticReplayNativeTest.test_recorded_and_full_windows_keep_failed_training_and_primary_unchanged"
+  ],
+  "executed_tests": 1,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_COMPOSITE_TRAIN_NATIVE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-after-stock-classic-train-m40-a1/worker/native-stock-cold7/Classic-stock-cold7-N1/runs/train/native",
+      "files": 132,
+      "fingerprint": "745ff3e04d6008e42d13a4405a4dcf0b018b3480dcf8b3ee2843c15d2ed9e21a"
+    },
+    "TIMELEARNER_COMPOSITE_TRAIN_NATIVE_CSV": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-after-stock-classic-train-m40-a1/worker/native-stock-cold7/Classic-stock-cold7-N1/runs/train/native",
+      "files": 216,
+      "fingerprint": "131897e246a69f78da051642c0d59ece78ae23e6708661f0d51a2fcf60671d66"
+    }
+  },
+  "scientific_verdict": null
+}

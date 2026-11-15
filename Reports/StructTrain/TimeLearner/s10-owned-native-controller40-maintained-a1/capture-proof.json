@@ -1,0 +1,1729 @@
+{
+  "kind": "closed_python_validation_capture",
+  "schema_version": 1,
+  "collection_status": "capture_prepared",
+  "original_gate": {
+    "gate_outcome": "passed",
+    "tests": 40,
+    "passed": 40,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "actual_log_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_boolean_budgets_and_escaping_artifact_paths_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_cache_profile_cannot_accept_prefixes_extra_flags_or_duplicate_key",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_canonical_selection_and_invocation_are_actual_data",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_configure_rejects_conflicting_canonical_paths_values_and_types",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_configure_rejects_duplicate_bare_flags_and_unsupported_types",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_duplicate_junit_case_is_not_two_observations",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_duplicate_missing_count_or_reused_leaf_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_embedded_llm_missing_declaration_rejected_before_output_creation",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_fresh_configure_materializes_profile_in_real_cmake_cache",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_identical_materialized_bytes_do_not_hide_changed_source_or_resource_commit",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_json_rejects_duplicate_nonfinite_and_aliased_job",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_llama_source_requires_canonical_existing_protected_directory",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_partial_failed_and_skipped_junit_never_fills_expected_cases",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_protected_output_is_rejected_before_creating_any_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_rehashed_inconsistent_preparation_fields_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_runtime_drift_and_unreadable_protected_path_do_not_suppress_other_captures",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_runtime_inventory_keeps_symlink_text_and_excludes_git_metadata",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_path_preflight_does_not_create_worker_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_preflight_keeps_namespace_guard_before_later_path_errors",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_stale_hash_and_preparation_pass_claim_cannot_be_used",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_unknown_profile_tokens_remain_postconditions_not_assignments",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_boolean_and_unknown_schema_are_not_v1",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_bound_input_real_bytes_and_symlink_alias",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_malformed_launch_does_not_create_controller_or_other_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_process_identity_cannot_turn_unknown_or_boolean_pid_into_closed",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_recover_cannot_treat_absent_supervisor_identity_as_dead",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_relative_or_extra_input_binding_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_replaced_identical_control_bytes_are_not_the_original_consumption_file",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_request_has_no_user_command_or_worker_module_extension",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_same_inode_rewrite_and_restore_is_still_a_consumption_change",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_short_commit_and_bad_bound_digest_fail_before_launch",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_cancel_request_closes_owned_unit_without_restart",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_exit_zero_closes_outer_before_exact_worker_lease_release",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_nested_child_closes_before_worker_lease_release",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_unbound_child_intent_adopted_only_after_dead_worker",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_whole_deadline_closes_owned_unit_without_success",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_observer_broken_pipe_cannot_abort_actual_unit_cleanup",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_partial_final_request_holds_lease_and_does_not_invent_child_closure",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_started_receipt_fault_still_closes_actual_outer_and_holds_lease"
+    ],
+    "kernel_closure_attested": false,
+    "scientific_verdict": null
+  },
+  "original_job_id": "s10-owned-native-controller40-m40-a1",
+  "original_inventory": {
+    "closure-and-reservation.json": {
+      "bytes": 4186,
+      "sha256": "3edef149b9205cb3bcca6bd31bc40b57a5e8264db27f7e6cdce82373f864c278"
+    },
+    "controller-result.json": {
+      "bytes": 1181,
+      "sha256": "8245f98f628532f34417885b34cb9888b660db60e8ca76e067c8f0d19b09757f"
+    },
+    "launch-context.json": {
+      "bytes": 258,
+      "sha256": "9cce3274eb9e1b6dc07c2edd013aa99b9a5bb321c8202b6d449e387fd44ff18c"
+    },
+    "lease-recovery.json": {
+      "bytes": 4236,
+      "sha256": "43d08d23b91f6ea25dffb4762c26c50d2a8041b29aa2c36605ef1fe38489b4b1"
+    },
+    "monitor-final.json": {
+      "bytes": 131,
+      "sha256": "ea9e7a3cd54691199358b59d21fff16b7f65eab944686f9e90e8145793a2265d"
+    },
+    "monitor.jsonl": {
+      "bytes": 3609,
+      "sha256": "27b65ead81514218cb6d990e7d614554fde91d3f80f80c49b3a0051b6e1a26ce"
+    },
+    "preflight.json": {
+      "bytes": 75,
+      "sha256": "598ffa6757f6a015de24192a1555cbb43c468f866c5ba48a1f72ae7c44e0a207"
+    },
+    "process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "e02133bbd3e4228ac614fe240cca6495184a123a8679d17591b1b26640993279"
+    },
+    "process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "aef0532f8225982509393615cfab747c6014dcb825451e74e6ff0a00dcad72fa"
+    },
+    "process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "5d90cc898bf486c94dc7aafe19a45e5c76f1fcebf0c1b563aff88f85b704a137"
+    },
+    "process/contained/request.json": {
+      "bytes": 963,
+      "sha256": "18bb81d0d218e7d5cf999c10d59da63dad856cecd6e88018e041c89ac523d4ce"
+    },
+    "process/contained/runtime.json": {
+      "bytes": 2962,
+      "sha256": "3e0949088f319add5f610731d1cc5ce77379a8cb41f4dc928180c6f95d0fbb26"
+    },
+    "process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "process/contained/stdout.log": {
+      "bytes": 11924,
+      "sha256": "b4f1b3abe7a5155383469f12051d7855a91157d4e343c9624c4b41a4e2454205"
+    },
+    "process/loaded-files.json": {
+      "bytes": 976,
+      "sha256": "5db1cd600717b928b17c897be8b83233874937be4f56f87d03f9db48a09c5d28"
+    },
+    "process/owned-process.json": {
+      "bytes": 587,
+      "sha256": "8a9788f7fb98f6e8b2e0761485563a69febcef01929521946c877f4c137a8663"
+    },
+    "process/request.json": {
+      "bytes": 555,
+      "sha256": "69f4ba3a620229775f1797311fd40e9ed7ca28b96ccfa1b88e275a5253dfcdd8"
+    },
+    "process/result.json": {
+      "bytes": 1181,
+      "sha256": "8245f98f628532f34417885b34cb9888b660db60e8ca76e067c8f0d19b09757f"
+    },
+    "process/runtime.json": {
+      "bytes": 2962,
+      "sha256": "3e0949088f319add5f610731d1cc5ce77379a8cb41f4dc928180c6f95d0fbb26"
+    },
+    "process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "process/stdout.log": {
+      "bytes": 11924,
+      "sha256": "b4f1b3abe7a5155383469f12051d7855a91157d4e343c9624c4b41a4e2454205"
+    },
+    "process/terminal-unit-state.json": {
+      "bytes": 1296,
+      "sha256": "85f697ef58fc257452911c5dd32e1f69d5798a747e01ebf4a9181f59e79809f7"
+    },
+    "process/whole-group-closure.json": {
+      "bytes": 1213,
+      "sha256": "a57ba3351a6363bfa714798c63cf05ae8159c3e2ee5a3a7e383a528ce3744469"
+    },
+    "request.json": {
+      "bytes": 1428,
+      "sha256": "6e6bd9b03b30ab7565cb6f060ddb305c40c70ab80f9de1d125f0437c02d2f93c"
+    },
+    "supervisor.log": {
+      "bytes": 554,
+      "sha256": "c805b28d2244b5c0e6e16e21080b56839c48ec173727c248e69855da2fbe52f5"
+    },
+    "worker/fixtures-after.json": {
+      "bytes": 1033,
+      "sha256": "1af315fcd66893f5b7c60cfc6e3f51d99d6e806a654f5802ab399367533add75"
+    },
+    "worker/fixtures-before.json": {
+      "bytes": 1033,
+      "sha256": "1af315fcd66893f5b7c60cfc6e3f51d99d6e806a654f5802ab399367533add75"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/cancel.request": {
+      "bytes": 6,
+      "sha256": "2374d91794b79f4fb4ec9587d2cf00aecc4f9953fab3ed1dd12ab147a0b721f9"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/child-closures.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/lease-recovery.json": {
+      "bytes": 2856,
+      "sha256": "29522383f3655604651204ba72d755eb44edbfdbefb18366cc95a95d0e4c3b0e"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/original-outcome.json": {
+      "bytes": 1596,
+      "sha256": "ba7d2ce9c56c6599d221d31f795d3976fd980f4cef6c109f9c2af547fd73080e"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/outer-closure.json": {
+      "bytes": 1213,
+      "sha256": "4456a18301afb141445832ea81d4611224517ac1d450982ad13c9e888fead77b"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "c9cbf04bee5d44f8b7436e45823e331aff4197926dfd1e5d6566c9bf9328af4a"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "961f57f43ba71dc3ce704ac4eda2b19574e6fad8195af553907a4edc96c68437"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "54f5018619036c9957c20d8f8a3ce20f126917a97c50fa913d52bf0b00e9a938"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/request.json": {
+      "bytes": 1055,
+      "sha256": "add5edd1914ff20c22c32abb898f43486c1be26c94fa544e513c5c335bde09d6"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/runtime.json": {
+      "bytes": 2616,
+      "sha256": "45d2f1a1018a17fb89520d81891de1f869620f33a6268c3a26ab430f4339b4f1"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/recorded-child-bindings.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/reservation-final.json": {
+      "bytes": 1246,
+      "sha256": "dd57359c91b0b2b52114afe8f5bd06333f5d493ed63ab8607372ca39bf269e4e"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/seen-child-intents.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/started-binding.json": {
+      "bytes": 566,
+      "sha256": "961f57f43ba71dc3ce704ac4eda2b19574e6fad8195af553907a4edc96c68437"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/supervisor-result.json": {
+      "bytes": 3022,
+      "sha256": "3584e26cc0fea0aed5dc7c2f7ecefe88de2926436c2d7770009cfaf8404d5057"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/fixture-input.json": {
+      "bytes": 32,
+      "sha256": "09ac89c3d6a580ccaa6f5080d1d0eff7d3d7ab070e1adfebb1cc59a5c17cef92"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/fixture-runtime.json": {
+      "bytes": 2319,
+      "sha256": "7fc77a8de7d41e3d44d2a1477a879df39848f1cd331cfa4a8e0854d85ee23b33"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/native-output/fixture-started.json": {
+      "bytes": 65,
+      "sha256": "8a07afec13fb877e72ab604a7264868611616a41934b7de25000cc0931579179"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/native-output/reservation.json": {
+      "bytes": 760,
+      "sha256": "cf72825ecc4ca61c1d13b95bc15297cb5c4b8679d65546481c6ce9f618351956"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/registry.sqlite3": {
+      "bytes": 32768,
+      "sha256": "c6490b4e111a966c95d618c6a3ee9372b53948a39fdffd72f5044983dc5a2d2c"
+    },
+    "worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/test-observation.json": {
+      "bytes": 4586,
+      "sha256": "38daf9082dab7ade90800f9f701eb7dc41f5be7f8ec123b1cf5ad212c2aba952"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/child-closures.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/lease-recovery.json": {
+      "bytes": 2888,
+      "sha256": "f886816ab1e19578d3f92932ea488d4b9aecb0d2f636c6456a81bb8446f2b81b"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/original-outcome.json": {
+      "bytes": 1604,
+      "sha256": "5f19294d5e6ed6a948e4374da84b3cff4e1b88e5ec75f78cfd26ae70b2e8a853"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/outer-closure.json": {
+      "bytes": 1213,
+      "sha256": "884134bd2c2a3cad43c808bb65100176c54021b8d3e5442094a34a31d8c1b2e0"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "c0706026565c6a594a0c36d446c66dd17fef4d5b75463f72da89786b634c30a9"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "2defcbbf5cff832a42b010ab38988294151b870ef37f9f2a322a5151de136d47"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "6798813a38477c7cf81f0696178f731a5e3a0b8453f1c2a7b01e92933bbfda6e"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/request.json": {
+      "bytes": 1064,
+      "sha256": "8daaa01b798a4f554be1f79447b06e031c2dd508680f2a55cf662cb00b881791"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/runtime.json": {
+      "bytes": 2624,
+      "sha256": "7abc331073cb4672f4d97ee6a581b4d08c0d78d713dd6e9baf787dea9993841e"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/recorded-child-bindings.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/reservation-final.json": {
+      "bytes": 1270,
+      "sha256": "bd6d3bcb97b73c6fca43f5c3d455c49c1413648feb57f60422ded9a4f0d06581"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/seen-child-intents.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/started-binding.json": {
+      "bytes": 566,
+      "sha256": "2defcbbf5cff832a42b010ab38988294151b870ef37f9f2a322a5151de136d47"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/supervisor-result.json": {
+      "bytes": 2242,
+      "sha256": "a47336b44bd64c860331a90265820bd815da0270741373e1ebba43356dca0f88"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/fixture-input.json": {
+      "bytes": 32,
+      "sha256": "09ac89c3d6a580ccaa6f5080d1d0eff7d3d7ab070e1adfebb1cc59a5c17cef92"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/fixture-runtime.json": {
+      "bytes": 2327,
+      "sha256": "8bb7f760cc971ef79d7bf342debbcad96138983ee388d371a90361b315c5e940"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/native-output/fixture-started.json": {
+      "bytes": 66,
+      "sha256": "f53a8ef100fc0de2396283db71442f08871544b1e6050d7f64473476d75e7c79"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/native-output/reservation.json": {
+      "bytes": 784,
+      "sha256": "be44f3d63612ead28b9345bd60120cfe87c38e0ba025d78cb70a69742353bedd"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/native-output/terminal.json": {
+      "bytes": 112,
+      "sha256": "f5216c93735b0494e49e744febe038f02f3cdae9918d065d1ca090930b379130"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/registry.sqlite3": {
+      "bytes": 32768,
+      "sha256": "0f7616db2c7978106d9443324580f4d052cf9aabdeddfc5922d4ed89bd98c784"
+    },
+    "worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/test-observation.json": {
+      "bytes": 3824,
+      "sha256": "83e47b7ef3ce620a6779cb99c14e9c1f8191883bc3ae1db8b6dba8095e67a8aa"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/child-binding-leaf.json": {
+      "bytes": 822,
+      "sha256": "9597b4cf9593d4a31d255debfadc79a1ef82de59e5d77304d15e6bf70076a418"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/child-closures.json": {
+      "bytes": 2219,
+      "sha256": "6ec5aaa63891804a019b79085a31f376a4cc6c62bec57a0f6757df7699db9e91"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/child-intent-leaf.json": {
+      "bytes": 222,
+      "sha256": "1a27a8bf31c18dcb3080181a3bd46aee2a1dceb59aafad89c758b51b8ac5b508"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/lease-recovery.json": {
+      "bytes": 2851,
+      "sha256": "88c9c6ee92245dc4ad139f25e7078eb6c552fb4c100e6c451c0fd1bd6e72c1a3"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/original-outcome.json": {
+      "bytes": 1605,
+      "sha256": "ee543eedd8f16500e62162159cb19909022b1f8357e271077b2e2caeb4c7a9f3"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/outer-closure.json": {
+      "bytes": 1213,
+      "sha256": "e7aeab1cab2bf8adff37dad5cb8a4b48309b6241c629b459459477bf504ed010"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "c40de9869db189813dbd620d88e6ed875fee3b3717ec939f51045d53ab7b9125"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "79ccb6f64b551d2903d647ecf47b8dcb25beaf5f42a0b8adec7548e5bbcf6790"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "a01c2b8907cf913022710a514beb826169756b44b2e30fd91c3992d6098c6ba1"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/request.json": {
+      "bytes": 1056,
+      "sha256": "6fcfb1b8fd8e241d2de1445173ec257d096f9cf6acb1dc42d71fcf3689ff3786"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/runtime.json": {
+      "bytes": 2615,
+      "sha256": "1e2e6823b407faa310a343e069c664514fa027d560ecf91a643f74e65bec129f"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/recorded-child-bindings.json": {
+      "bytes": 796,
+      "sha256": "8331de070f18c2f59ee7efa927a59936551e785617a1449ab6d595a74ed60c48"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/reservation-final.json": {
+      "bytes": 1244,
+      "sha256": "077bcc37aecb6f6afebfcf6f0575ea9748fc257ced8cd022633d2bd71aa8ef68"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/seen-child-intents.json": {
+      "bytes": 209,
+      "sha256": "3f5507660f8e686c22c9bba507270808dd7710b860da13ab9ad2e5ddb0622afb"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/started-binding.json": {
+      "bytes": 566,
+      "sha256": "79ccb6f64b551d2903d647ecf47b8dcb25beaf5f42a0b8adec7548e5bbcf6790"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/supervisor-result.json": {
+      "bytes": 4559,
+      "sha256": "b91801fee22b194072ef171187ad16d76305b166eaccb0ecc1039fae91e8ad16"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/fixture-input.json": {
+      "bytes": 32,
+      "sha256": "09ac89c3d6a580ccaa6f5080d1d0eff7d3d7ab070e1adfebb1cc59a5c17cef92"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/fixture-runtime.json": {
+      "bytes": 2318,
+      "sha256": "f4726da8e3bfcddf37231a63126be6b12ae5c5707f870245d8ecc31d65deafd0"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/fixture-started.json": {
+      "bytes": 67,
+      "sha256": "83cf1384b91a09b41aa88409b229dd083d6c3b945e65642af925e79dc9a2165b"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "d83714f6689ca7fbc6ed58fc2c70d0a0935496759d064cbad04e374db7a35d07"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "49577f72fbf761b416f14aa3cbee2d10e248c694cc35df82c918798cf2aba39e"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "9d5ef3dfb82ae137fd25a2651e67268ab6e926f71d66c0724a9dbb167335f702"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/request.json": {
+      "bytes": 1038,
+      "sha256": "0a165bfba1da8ae0aaff077f0ef25e51f1c363e8f8d9bfb172ba0bd00dfcc7e5"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/runtime.json": {
+      "bytes": 2615,
+      "sha256": "1e2e6823b407faa310a343e069c664514fa027d560ecf91a643f74e65bec129f"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/reservation.json": {
+      "bytes": 757,
+      "sha256": "7748195a1654e5755f1b7122f11d88ee6fd6a8bfe8db518b1535c128e2f75f28"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/terminal.json": {
+      "bytes": 113,
+      "sha256": "1f738f24f6916a71ca1655ee2580022b08ff35c54f504085159e912f1a86af9b"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/registry.sqlite3": {
+      "bytes": 32768,
+      "sha256": "b7c3ae46353810a3a8d1baf853876c10d2349b7f5270e77c76cd6816b4be4448"
+    },
+    "worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/test-observation.json": {
+      "bytes": 6215,
+      "sha256": "2bd30b796d43efde3b0a2bcf31d4a25c6fcabae478069ab64b87ace97d9e8355"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/child-closures.json": {
+      "bytes": 2223,
+      "sha256": "738cc0e39102a68cb884e2806037796b3d71a04861deb2dbd1fc14cfa69e0192"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/child-intent-leaf.json": {
+      "bytes": 226,
+      "sha256": "831d001cf9e8df1c2f6acb99c6b5003446453c457d2d25f2fbb87695eff7b580"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/lease-recovery.json": {
+      "bytes": 2868,
+      "sha256": "a9c7b0ab9a06d79ff0be5bbd9103877d6222bddd73896296a82473ed65d04e07"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/original-outcome.json": {
+      "bytes": 1606,
+      "sha256": "5e9900e00db41baab3075a6dba58cccea1af115751221d5bd698c4bf303a7de2"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/outer-closure.json": {
+      "bytes": 1213,
+      "sha256": "f3b8673ba5d6fa718e1aba321903bd6284d6e87b2f4cb95a0b2bfd415104e6b6"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "3e0e668c6c593dce5c0819e66901fdcaad805c4953205ac28b8fd3d39f917c49"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "4d0b5dbacb6a1f8d09f8fe63bc56c994f15f751841e53f19c60a439d3966fecd"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "4d34f2b9878513375a58a3926a79c2d5852bdcccb677d56daa9b56e95d6e64b3"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/request.json": {
+      "bytes": 1061,
+      "sha256": "998ce9ba25628ee8370e58fa1b6f6fc2e03ecbbfd742b0c2159bca793100efef"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/runtime.json": {
+      "bytes": 2619,
+      "sha256": "8f7cbd9bb817c981e189971e945bab951be580ca46b10204b9ced153ad1a1267"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/recorded-child-bindings.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/reservation-final.json": {
+      "bytes": 1255,
+      "sha256": "1989e65e3bd2d06f7254332d3df3bcc93c8e218fa6f695e0dedfaa8805234161"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/seen-child-intents.json": {
+      "bytes": 213,
+      "sha256": "bf1ecf98a84c7522edeb9cf8af4c87883c9f013dfc45d557a797c70ead43a117"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/started-binding.json": {
+      "bytes": 566,
+      "sha256": "4d0b5dbacb6a1f8d09f8fe63bc56c994f15f751841e53f19c60a439d3966fecd"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/supervisor-result.json": {
+      "bytes": 4563,
+      "sha256": "c10ebaf957c556c67e6d38eb84103d0192956a0e49188cca470aeb649013b8c8"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/fixture-input.json": {
+      "bytes": 32,
+      "sha256": "09ac89c3d6a580ccaa6f5080d1d0eff7d3d7ab070e1adfebb1cc59a5c17cef92"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/fixture-runtime.json": {
+      "bytes": 2322,
+      "sha256": "1ed576df17cf5f766a253a364783d7dc858013f3e81d81f2f5c11154c3423689"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/fixture-started.json": {
+      "bytes": 68,
+      "sha256": "f35afd74529bda251490c1b91f4a7e0db9be3ba3e8a4055ea4ccee1eabee1ed5"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/injected-unbound.json": {
+      "bytes": 112,
+      "sha256": "1d0a54737d1d8a46bf906b3721dc38d07fe4831e45222b63d4121962c21c3606"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "9df767592f979ea4880ec65438e734d5baa506f195e29bca728ab14287d15d18"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "43b4c309f9e944dd932990cc1f1d1ebb9b3d04fa4a0badad183f0d44a0041841"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/request.json": {
+      "bytes": 1042,
+      "sha256": "8c9d54637c87d96ebec119d02889e4bb09a34f2012fe1c4850b94f51749508ec"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/runtime.json": {
+      "bytes": 2619,
+      "sha256": "8f7cbd9bb817c981e189971e945bab951be580ca46b10204b9ced153ad1a1267"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/reservation.json": {
+      "bytes": 769,
+      "sha256": "025a6117fa18b5ab12ed9426507949ced5154ecaabf3867ec0cadfe16d8a2bb6"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/terminal.json": {
+      "bytes": 114,
+      "sha256": "7c53158306eec456c1abe46f67fb9d0cf08151445a417bc9da17495b7b738402"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/registry.sqlite3": {
+      "bytes": 32768,
+      "sha256": "4e34164344d7ebd54055ee0c067532f670352a1fe5bba5bb5a2e165f875bc02b"
+    },
+    "worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/test-observation.json": {
+      "bytes": 6230,
+      "sha256": "c62b9b177cc5e4f0607ae11009cd536dd6fb5ce91c36381c33876c3b3ce4df4a"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/child-closures.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/lease-recovery.json": {
+      "bytes": 2944,
+      "sha256": "f4b0d522ee12993a3d76dd22d129be256aa43691ca51a362beb1407ed9d046e9"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/original-outcome.json": {
+      "bytes": 1477,
+      "sha256": "2820bb3979686105bf3af622bd65bcb71372612cc651f219cb073fda20f88175"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/outer-closure.json": {
+      "bytes": 1297,
+      "sha256": "bc9539d2a19e411cddaee1f42f774aed3774ebd56fc7c29449fd7040b5d77c81"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "096af38cbf25fb7cbc80caaafa59c93da9d4f73fdf6535cc0e87ef9a80651234"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "d98a1e725992d205ab88e5fe122a4251dff8af43eaa488263546427b698bf77d"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "49bf614c7c33b50481a1919457f5fe7ec3a5d3c7a7f5eb8964c8dd6b28f7baa6"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/request.json": {
+      "bytes": 1054,
+      "sha256": "172d79a0cc5533be68b7b29bd607d7e4361002b6c77cd3fe78aa874d00d1675b"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/runtime.json": {
+      "bytes": 2616,
+      "sha256": "3ab3c171e080994203047e6cc3d4bc1762d99a3a92e21c14cfdbf1ee9c508269"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/recorded-child-bindings.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/reservation-final.json": {
+      "bytes": 1246,
+      "sha256": "4f60938a547ebc31ec8e3cb467a1ff916c259dac148804726dcfaf3f136da18e"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/seen-child-intents.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/started-binding.json": {
+      "bytes": 566,
+      "sha256": "d98a1e725992d205ab88e5fe122a4251dff8af43eaa488263546427b698bf77d"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/supervisor-result.json": {
+      "bytes": 2904,
+      "sha256": "e28d247175f6802bd399cdfec1fa87383e51342cbb4a63dc25b58a0caafd98bf"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/fixture-input.json": {
+      "bytes": 32,
+      "sha256": "09ac89c3d6a580ccaa6f5080d1d0eff7d3d7ab070e1adfebb1cc59a5c17cef92"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/fixture-runtime.json": {
+      "bytes": 2319,
+      "sha256": "05cbee726311f208a1b916b61a37f50a5a54db0fcb8c62cc0d137ebf5ba793e1"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/native-output/fixture-started.json": {
+      "bytes": 65,
+      "sha256": "4d81f5416c2da1b5da4709adf158796072f0663f23c59f334c2f8a54eb133e3b"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/native-output/reservation.json": {
+      "bytes": 760,
+      "sha256": "bac700773124ceca780c276c827359522b7308a003eef78f36ebe0e8bd90acce"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/registry.sqlite3": {
+      "bytes": 32768,
+      "sha256": "b57bd1ffe2b15b49aa5c88547ec9ff6e501cd08557791a0e89eeafa4a93a81d5"
+    },
+    "worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/test-observation.json": {
+      "bytes": 4468,
+      "sha256": "084d99d97d08433cdd9bca71919d1bcabf3d34e34ec11e240de46d93911c73cc"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/child-closures.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/lease-recovery.json": {
+      "bytes": 2973,
+      "sha256": "e20e5d2fc1cbdea68fa6e16e2eec1f08c1a5f31f0db25dca426eab0fc4583c05"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/original-outcome.json": {
+      "bytes": 1606,
+      "sha256": "7fbb5f19b6d6da70ba65673284dd4b798e82d5e8718c57888639d6cc9500cd51"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/outer-closure.json": {
+      "bytes": 1298,
+      "sha256": "2da449bc165d2250bd84d0d691048927bd23defd8a74a3cfd1e9c11d9d850cc9"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "ac9cc654cfb0a239030a30844f09b4be57d105badac5f0dd387124841dc9a5fc"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "acd759171fd0a023513076870384849ec9353406bab0d6dced929e25cb3fb245"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "3817ac7790010cfb1985a04e1b9c08c9f60b72c223c92b147bbb51753a9eea70"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/request.json": {
+      "bytes": 1063,
+      "sha256": "78db4d580494a4a39910b24efaa2e9d94b77c3bdea1971456ea659f977de4c82"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/runtime.json": {
+      "bytes": 2623,
+      "sha256": "0a1a0f37237c5c4e3a0c63c675d72174c98893cfabdda0bdb4ec4839ef9af0f5"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/recorded-child-bindings.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/reservation-final.json": {
+      "bytes": 1267,
+      "sha256": "b8b0e6e42459527e00a2a72e0707e2274d3fd022bf1d063406b8582e28f5d322"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/seen-child-intents.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/started-binding.json": {
+      "bytes": 566,
+      "sha256": "acd759171fd0a023513076870384849ec9353406bab0d6dced929e25cb3fb245"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/supervisor-result.json": {
+      "bytes": 2244,
+      "sha256": "f795bac70b4c4fa667aff3a011f9e9860754c5923bdda254f3f2f16a19d42fc5"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/fixture-input.json": {
+      "bytes": 32,
+      "sha256": "09ac89c3d6a580ccaa6f5080d1d0eff7d3d7ab070e1adfebb1cc59a5c17cef92"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/fixture-runtime.json": {
+      "bytes": 2326,
+      "sha256": "d8865b40b0bf824f367955d2ef94d0b29cffe990d70090046113757ed84592c2"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/native-output/fixture-started.json": {
+      "bytes": 66,
+      "sha256": "640da4f9115948579d5cc78ea7526be81e2bd23300006d123e00246a2d0f7d1e"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/native-output/reservation.json": {
+      "bytes": 781,
+      "sha256": "186b6413b7af93c169a7b852152dbcbb06cc9dd670a43a906ff9fb832e11cdb9"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/native-output/terminal.json": {
+      "bytes": 112,
+      "sha256": "d7f679a6c0c92c3d1185ae3459440a2073b0f83a712cbcbe6f62648730aca4d5"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/registry.sqlite3": {
+      "bytes": 32768,
+      "sha256": "2121d52f76f239523c8e23bfbdcfa7bfbf448ff802a81218910ba7bd962c3af6"
+    },
+    "worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/test-observation.json": {
+      "bytes": 3823,
+      "sha256": "73d72a3f4ce67ad484a93c95e5526dfa67b93e23b9eca42b19152a4d6aab3f53"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/child-closures.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/lease-recovery.json": {
+      "bytes": 2848,
+      "sha256": "be6f13f7305e30e90808148f73fd79e39bc8de73b0a82679dd90354ceff374be"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/original-outcome.json": {
+      "bytes": 1604,
+      "sha256": "ee51f759d399bc0a19317f7e304dfdfd2eeaf674c364a00d8f18a80d1e4ef173"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/outer-closure.json": {
+      "bytes": 1213,
+      "sha256": "081bced473d9432974469791fd4adade40b5cf9d12ae4bae793fcaedd47e7fe9"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "4735e698ff5f23ee4f6fa6daaefcea5fcf753a54df7d36cc49d8f65afe83b3f9"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "c38bb749fd8e08c57824c7f3b6a710a402995d20089db8e6e532ae6e4e548585"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "4a823c1eba5e25f37452544d894047f86568c8dfa6409c3278106566f8e44d36"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/request.json": {
+      "bytes": 1054,
+      "sha256": "b51e3377332ec754a680dbdefb5213b65b04689e59226322c7ea5b7566039afe"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/runtime.json": {
+      "bytes": 2614,
+      "sha256": "b372281c419a1e93ef45e9216db6a0bbb0a48dbb62ee02b3a2fffb7370119ce4"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/recorded-child-bindings.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/reservation-final.json": {
+      "bytes": 1242,
+      "sha256": "53647f7862a78572b4ca3ae8fc4d18e82377ca3796cb9419811e59ed09524aaf"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/seen-child-intents.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/started-binding.json": {
+      "bytes": 566,
+      "sha256": "c38bb749fd8e08c57824c7f3b6a710a402995d20089db8e6e532ae6e4e548585"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/supervisor-result.json": {
+      "bytes": 2242,
+      "sha256": "0155d665e07830e5b8c99c1967a7387a6b494d85904e4637387efe770d7559e0"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/fixture-input.json": {
+      "bytes": 32,
+      "sha256": "09ac89c3d6a580ccaa6f5080d1d0eff7d3d7ab070e1adfebb1cc59a5c17cef92"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/fixture-runtime.json": {
+      "bytes": 2317,
+      "sha256": "d1419862590490e22cd9463c1e1ce3de8b60b7db2d6c72f28104e12fa61831b2"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/native-output/fixture-started.json": {
+      "bytes": 66,
+      "sha256": "57e7198c63ac1f8d08c49c4132f6029cf9c548df6653514c68c494e02421406e"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/native-output/reservation.json": {
+      "bytes": 754,
+      "sha256": "3265d3d0e619efe6b27e654c0155530ec7bb3ab548a25c842d3e73701a98f2b0"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/native-output/terminal.json": {
+      "bytes": 112,
+      "sha256": "f5216c93735b0494e49e744febe038f02f3cdae9918d065d1ca090930b379130"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/registry.sqlite3": {
+      "bytes": 32768,
+      "sha256": "1bc9abb264b6d8d90d3c5aab6b36e45a9b9a96342af6411b56f1b3c77f54f471"
+    },
+    "worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/test-observation.json": {
+      "bytes": 3796,
+      "sha256": "cdf265b0cff6a355bf5bd9431f5c4f6e3847b958dc3e9cefeeaee4f71e689cf8"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/child-closures.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/child-intent-leaf.json": {
+      "bytes": 235,
+      "sha256": "ae40b019fc88f8aca5bccb75adccc4c60a4aa2b06389b3370e46b313c54ed33e"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/lease-held.json": {
+      "bytes": 127,
+      "sha256": "362c8e68938baa43481df07b52730ebd77df473dbb928b2c87f9132f6c267340"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/original-outcome.json": {
+      "bytes": 1606,
+      "sha256": "6fb5b8b4bb76bc538952bcad124a795969e8a5c1565a37255d459b3655ba967d"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/outer-closure.json": {
+      "bytes": 1213,
+      "sha256": "b93f755711a2538a99b0957bfeb5a2252acc69917ed3bacf506640def865b234"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "0ce8f5fdc408ee9ff03dd8cd0bc9030d8bd9e0c3e71243c916dd6c3a04545f80"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "c96fc24ea88334ce956c8a821aaae3d70a90e34daa50c905a9b737b7e7ba87dd"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "5ac71bc017655a88593617d7b48d143aeb7bedb14f3e198d226d11e9db75d4b0"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/request.json": {
+      "bytes": 1070,
+      "sha256": "fbf0c21e912d6ba407f875a29737605da9afbbdd562d400136b31ea04f59ef32"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/runtime.json": {
+      "bytes": 2628,
+      "sha256": "9ecb9469fe44648751252a801e0b195fcfa6e7e9472832807dde29b2971e7bf8"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/recorded-child-bindings.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/reservation-final.json": {
+      "bytes": 1139,
+      "sha256": "874af28d8248e4952ad5f1ff5af644fb95a11f31e3ddca8d4ccc87cdda6cdf99"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/seen-child-intents.json": {
+      "bytes": 222,
+      "sha256": "9cfd30ed56cdc96f938799ad2f52d3a89147ddf4963bb337a1a208af701a2693"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/started-binding.json": {
+      "bytes": 566,
+      "sha256": "c96fc24ea88334ce956c8a821aaae3d70a90e34daa50c905a9b737b7e7ba87dd"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/supervisor-result.json": {
+      "bytes": 2564,
+      "sha256": "017d5c31b913a8d1a98b060baeff75e5d75d86e11904dc29d76349fdeaa361d9"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/fixture-input.json": {
+      "bytes": 32,
+      "sha256": "09ac89c3d6a580ccaa6f5080d1d0eff7d3d7ab070e1adfebb1cc59a5c17cef92"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/fixture-runtime.json": {
+      "bytes": 2331,
+      "sha256": "e737a110e4fa86aefb0687adc874df1194d9a850df6895d46fc0fd239bbfb23b"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/native-output/fixture-started.json": {
+      "bytes": 68,
+      "sha256": "6a7313764f3930602768f841a2804150f685135646cd41b77f26e8fe74937468"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/native-output/leaf/process/contained/request.json": {
+      "bytes": 1,
+      "sha256": "021fb596db81e6d02bf3d2586ee3981fe519f275c0ac9ca76bbcf2ebb4097d96"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/native-output/reservation.json": {
+      "bytes": 796,
+      "sha256": "96f18e32663cc1ef58debd9739f6acf6dfe2365dad853392bb394e78b82d6a60"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/native-output/terminal.json": {
+      "bytes": 114,
+      "sha256": "5b87ff97ab338f1a6a59469c0a96a638aa6a10c6087d24790ba02c71c0f6e9fc"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/registry.sqlite3": {
+      "bytes": 24576,
+      "sha256": "37c74b6a6325eda59fb5b93ef7b688d322690c3dab24933701a414a092c4a1a9"
+    },
+    "worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/test-observation.json": {
+      "bytes": 4027,
+      "sha256": "f37032e9d46c02cb780b31afadb388a7fc6b3cea5ba79f13559bd3e8bf05875d"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/child-closures.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/lease-held.json": {
+      "bytes": 127,
+      "sha256": "80218d661a837f232b944aa46d9801cf735d4444e57c7a23988b2b22dd1f4795"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/original-outcome.json": {
+      "bytes": 1604,
+      "sha256": "872c8ecfb9260c7667339618279a00772f07830c6a94684b7c46007609697fd8"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/outer-closure.json": {
+      "bytes": 1213,
+      "sha256": "b8667e71eeb97dd71d5ea65ea694187defd799723e26cadb7bbc7f71bdb3b125"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "f2974cfaae6546065bfe7eefaa8e7fa0f82ed4205d1eec03d24c305ea3ceef83"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "8975e7e25b24992c4e2865577ab075d0f8bbe5604595b85db4000c9bc6eef265"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "de44711f465f24a7c114773431d8935cae04ad47585117432e2cdcea6df0bd9a"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/request.json": {
+      "bytes": 1064,
+      "sha256": "4f53b785c99c6e6da9fcd6d4cee35c50a4cc15887903923f729d447ad8234a0b"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/runtime.json": {
+      "bytes": 2624,
+      "sha256": "bf5a5ced9f2ae84d10b0e32e02b5de4c1fc04213e99cc318995702ad5e67fe7c"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/recorded-child-bindings.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/reservation-final.json": {
+      "bytes": 1127,
+      "sha256": "d5b22ec7d6b2616f5780a56a4b025ef4098414cbbcacb8b201cad53c40844640"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/seen-child-intents.json": {
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/supervisor-result.json": {
+      "bytes": 1638,
+      "sha256": "79ef7ebad4697a806d82a6e5ba7cb3987a4474cebf549a6d251fcdc70de66db7"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/fixture-input.json": {
+      "bytes": 32,
+      "sha256": "09ac89c3d6a580ccaa6f5080d1d0eff7d3d7ab070e1adfebb1cc59a5c17cef92"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/fixture-runtime.json": {
+      "bytes": 2327,
+      "sha256": "419e48bb3bcff1de01f3b130feff4bcae26b8c0e7825233ff42aaa79f7fad5ff"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/native-output/fixture-started.json": {
+      "bytes": 66,
+      "sha256": "0b301dfcaf610584bd298997599de36f567d77e35cc17d8dd53bd00234f23bb9"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/native-output/reservation.json": {
+      "bytes": 784,
+      "sha256": "f6bacea53f9e30d7b7ef35e72bb35ed853b8bcf4313dccd99d30f111b12f1e81"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/native-output/terminal.json": {
+      "bytes": 112,
+      "sha256": "f5216c93735b0494e49e744febe038f02f3cdae9918d065d1ca090930b379130"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/registry.sqlite3": {
+      "bytes": 24576,
+      "sha256": "10739fcc8102f4e6f24daf40f15a6ca4b0deb59789ae22a43558ca27b3a40286"
+    },
+    "worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/test-observation.json": {
+      "bytes": 3021,
+      "sha256": "1427fa41ed850ba1929f55453d992afdccc60149d9f83bb7ac1eb40da813a2ee"
+    },
+    "worker/reservation.json": {
+      "bytes": 2355,
+      "sha256": "1a7e21b52bf4c9bfb943d0a58ec056cd475450b5b48be49fa4d3af6876fe0e15"
+    },
+    "worker/temporary-environment.json": {
+      "bytes": 368,
+      "sha256": "d68d16b7e409a2c7447cce33cb2e111331c34873e99d99f08838063339c37e88"
+    },
+    "worker/terminal.json": {
+      "bytes": 248,
+      "sha256": "10f2cfd0cb7d2d454c48123ab38819a476cdf65da8b6408830021294b5b0d04d"
+    },
+    "worker/tool-source-after.json": {
+      "bytes": 258163,
+      "sha256": "921beef0680b6468d30026e8ea38f076a9c713ded317a10e8a9e79849348e476"
+    },
+    "worker/tool-source-before.json": {
+      "bytes": 258163,
+      "sha256": "921beef0680b6468d30026e8ea38f076a9c713ded317a10e8a9e79849348e476"
+    },
+    "worker/validation/result.json": {
+      "bytes": 7552,
+      "sha256": "f61e78782ceba28bd512c3b70dc5f06b6e1a3326ae0b0523153a8d5aad684e17"
+    },
+    "worker/validation/suite.json": {
+      "bytes": 7334,
+      "sha256": "d5807ccb4cc47f1f84d8d33e9a794d958c05cf35b80fc8747ddd93d834446611"
+    },
+    "worker/validation/unittest.log": {
+      "bytes": 9138,
+      "sha256": "dff2875850afb4b579d40364e059171b17ce48875f4303aae2a5de0bd893e2b8"
+    },
+    "worker/validation-process.json": {
+      "bytes": 892,
+      "sha256": "58a610d57377ea00450a9dec7219987126c5b786870158c8baa02e0889cb2a7b"
+    },
+    "worker/validation-source-after.json": {
+      "bytes": 261253,
+      "sha256": "c70a24a74179b2a6aff099f3518a8d582e53a22fbb7c3292848910f1a885546d"
+    },
+    "worker/validation-source-before.json": {
+      "bytes": 261253,
+      "sha256": "c70a24a74179b2a6aff099f3518a8d582e53a22fbb7c3292848910f1a885546d"
+    }
+  },
+  "original_observation": {
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "58ccbc83eb1d35256a2d58440a8692f273199683b2b8b2639c9b8bde22b462fb",
+        "unit": "timelearner-7df3b0d8-52bd-417e-b10b-5e5ed8795aac.service",
+        "invocation_id": "8858920168a444f7bcd9b07d816dbd8d",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7df3b0d8-52bd-417e-b10b-5e5ed8795aac.service",
+        "initial_main_pid": 1306191,
+        "initial_start_ticks": "329451371",
+        "sha256": "aa50e4f0d1d4e73e048b8681ec88065b624e21a0f6c3b85227c0d6944cc45f5b"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-7df3b0d8-52bd-417e-b10b-5e5ed8795aac.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "released_lease": {
+      "token": "bfba3fd7-19c7-4282-8518-10832cedd5bc",
+      "job_id": "s10-owned-native-controller40-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 1306191,
+        "start_ticks": "329451371",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-owned-native-controller40-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-owned-native-controller40-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/cmake",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/cmake"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/kernel-output",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/kernel-output"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-owned-native-controller40-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-owned-native-controller40-m40-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794219316.2283828,
+      "deadline": 1794219456.243776,
+      "updated": 1794219345.8402243,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    "runtime_fingerprint": "71895d5bca6be3731615a0bcd762e07670feb7589583d1ea1acd7fff061fbfd4",
+    "reservation_snapshot_SQL_access": "mode=ro; BEGIN deferred; SELECT only"
+  },
+  "archive_paths": {
+    "collection-manifest": "observer/collection-manifest.json",
+    "original.0000": "original-job/closure-and-reservation.json",
+    "original.0001": "original-job/controller-result.json",
+    "original.0002": "original-job/launch-context.json",
+    "original.0003": "original-job/lease-recovery.json",
+    "original.0004": "original-job/monitor-final.json",
+    "original.0005": "original-job/monitor.jsonl",
+    "original.0006": "original-job/preflight.json",
+    "original.0007": "original-job/process/contained/launch-result.json",
+    "original.0008": "original-job/process/contained/launcher.py",
+    "original.0009": "original-job/process/contained/limits-readback.json",
+    "original.0010": "original-job/process/contained/owned-unit.json",
+    "original.0011": "original-job/process/contained/ready.json",
+    "original.0012": "original-job/process/contained/request.json",
+    "original.0013": "original-job/process/contained/runtime.json",
+    "original.0014": "original-job/process/contained/start.ack",
+    "original.0015": "original-job/process/contained/stderr.log",
+    "original.0016": "original-job/process/contained/stdout.log",
+    "original.0017": "original-job/process/loaded-files.json",
+    "original.0018": "original-job/process/owned-process.json",
+    "original.0019": "original-job/process/request.json",
+    "original.0020": "original-job/process/result.json",
+    "original.0021": "original-job/process/runtime.json",
+    "original.0022": "original-job/process/stderr.log",
+    "original.0023": "original-job/process/stdout.log",
+    "original.0024": "original-job/process/terminal-unit-state.json",
+    "original.0025": "original-job/process/whole-group-closure.json",
+    "original.0026": "original-job/request.json",
+    "original.0027": "original-job/supervisor.log",
+    "original.0028": "original-job/worker/fixtures-after.json",
+    "original.0029": "original-job/worker/fixtures-before.json",
+    "original.0030": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/cancel.request",
+    "original.0031": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/child-closures.json",
+    "original.0032": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/lease-recovery.json",
+    "original.0033": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/original-outcome.json",
+    "original.0034": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/outer-closure.json",
+    "original.0035": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/launch-result.json",
+    "original.0036": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/launcher.py",
+    "original.0037": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/limits-readback.json",
+    "original.0038": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/owned-unit.json",
+    "original.0039": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/ready.json",
+    "original.0040": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/request.json",
+    "original.0041": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/runtime.json",
+    "original.0042": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/start.ack",
+    "original.0043": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/stderr.log",
+    "original.0044": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/process/contained/stdout.log",
+    "original.0045": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/recorded-child-bindings.json",
+    "original.0046": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/reservation-final.json",
+    "original.0047": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/seen-child-intents.json",
+    "original.0048": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/started-binding.json",
+    "original.0049": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/controller/supervisor-result.json",
+    "original.0050": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/fixture-input.json",
+    "original.0051": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/fixture-runtime.json",
+    "original.0052": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/native-output/fixture-started.json",
+    "original.0053": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/native-output/reservation.json",
+    "original.0054": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/registry.sqlite3",
+    "original.0055": "original-job/worker/kernel-cases/test_actual_cancel_request_closes_owned_unit_without_restart/test-observation.json",
+    "original.0056": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/child-closures.json",
+    "original.0057": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/lease-recovery.json",
+    "original.0058": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/original-outcome.json",
+    "original.0059": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/outer-closure.json",
+    "original.0060": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/launch-result.json",
+    "original.0061": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/launcher.py",
+    "original.0062": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/limits-readback.json",
+    "original.0063": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/owned-unit.json",
+    "original.0064": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/ready.json",
+    "original.0065": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/request.json",
+    "original.0066": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/runtime.json",
+    "original.0067": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/start.ack",
+    "original.0068": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/stderr.log",
+    "original.0069": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/process/contained/stdout.log",
+    "original.0070": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/recorded-child-bindings.json",
+    "original.0071": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/reservation-final.json",
+    "original.0072": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/seen-child-intents.json",
+    "original.0073": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/started-binding.json",
+    "original.0074": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/controller/supervisor-result.json",
+    "original.0075": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/fixture-input.json",
+    "original.0076": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/fixture-runtime.json",
+    "original.0077": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/native-output/fixture-started.json",
+    "original.0078": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/native-output/reservation.json",
+    "original.0079": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/native-output/terminal.json",
+    "original.0080": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/registry.sqlite3",
+    "original.0081": "original-job/worker/kernel-cases/test_actual_exit_zero_closes_outer_before_exact_worker_lease_release/test-observation.json",
+    "original.0082": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/child-binding-leaf.json",
+    "original.0083": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/child-closures.json",
+    "original.0084": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/child-intent-leaf.json",
+    "original.0085": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/lease-recovery.json",
+    "original.0086": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/original-outcome.json",
+    "original.0087": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/outer-closure.json",
+    "original.0088": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/launch-result.json",
+    "original.0089": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/launcher.py",
+    "original.0090": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/limits-readback.json",
+    "original.0091": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/owned-unit.json",
+    "original.0092": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/ready.json",
+    "original.0093": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/request.json",
+    "original.0094": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/runtime.json",
+    "original.0095": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/start.ack",
+    "original.0096": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/stderr.log",
+    "original.0097": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/process/contained/stdout.log",
+    "original.0098": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/recorded-child-bindings.json",
+    "original.0099": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/reservation-final.json",
+    "original.0100": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/seen-child-intents.json",
+    "original.0101": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/started-binding.json",
+    "original.0102": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/controller/supervisor-result.json",
+    "original.0103": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/fixture-input.json",
+    "original.0104": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/fixture-runtime.json",
+    "original.0105": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/fixture-started.json",
+    "original.0106": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/launch-result.json",
+    "original.0107": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/launcher.py",
+    "original.0108": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/limits-readback.json",
+    "original.0109": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/owned-unit.json",
+    "original.0110": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/ready.json",
+    "original.0111": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/request.json",
+    "original.0112": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/runtime.json",
+    "original.0113": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/start.ack",
+    "original.0114": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/stderr.log",
+    "original.0115": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/leaf/process/contained/stdout.log",
+    "original.0116": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/reservation.json",
+    "original.0117": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/native-output/terminal.json",
+    "original.0118": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/registry.sqlite3",
+    "original.0119": "original-job/worker/kernel-cases/test_actual_nested_child_closes_before_worker_lease_release/test-observation.json",
+    "original.0120": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/child-closures.json",
+    "original.0121": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/child-intent-leaf.json",
+    "original.0122": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/lease-recovery.json",
+    "original.0123": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/original-outcome.json",
+    "original.0124": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/outer-closure.json",
+    "original.0125": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/launch-result.json",
+    "original.0126": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/launcher.py",
+    "original.0127": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/limits-readback.json",
+    "original.0128": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/owned-unit.json",
+    "original.0129": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/ready.json",
+    "original.0130": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/request.json",
+    "original.0131": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/runtime.json",
+    "original.0132": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/start.ack",
+    "original.0133": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/stderr.log",
+    "original.0134": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/process/contained/stdout.log",
+    "original.0135": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/recorded-child-bindings.json",
+    "original.0136": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/reservation-final.json",
+    "original.0137": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/seen-child-intents.json",
+    "original.0138": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/started-binding.json",
+    "original.0139": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/controller/supervisor-result.json",
+    "original.0140": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/fixture-input.json",
+    "original.0141": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/fixture-runtime.json",
+    "original.0142": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/fixture-started.json",
+    "original.0143": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/injected-unbound.json",
+    "original.0144": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/launch-result.json",
+    "original.0145": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/launcher.py",
+    "original.0146": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/owned-unit.json",
+    "original.0147": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/ready.json",
+    "original.0148": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/request.json",
+    "original.0149": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/runtime.json",
+    "original.0150": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/stderr.log",
+    "original.0151": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/leaf/process/contained/stdout.log",
+    "original.0152": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/reservation.json",
+    "original.0153": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/native-output/terminal.json",
+    "original.0154": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/registry.sqlite3",
+    "original.0155": "original-job/worker/kernel-cases/test_actual_unbound_child_intent_adopted_only_after_dead_worker/test-observation.json",
+    "original.0156": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/child-closures.json",
+    "original.0157": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/lease-recovery.json",
+    "original.0158": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/original-outcome.json",
+    "original.0159": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/outer-closure.json",
+    "original.0160": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/launch-result.json",
+    "original.0161": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/launcher.py",
+    "original.0162": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/limits-readback.json",
+    "original.0163": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/owned-unit.json",
+    "original.0164": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/ready.json",
+    "original.0165": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/request.json",
+    "original.0166": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/runtime.json",
+    "original.0167": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/start.ack",
+    "original.0168": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/stderr.log",
+    "original.0169": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/process/contained/stdout.log",
+    "original.0170": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/recorded-child-bindings.json",
+    "original.0171": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/reservation-final.json",
+    "original.0172": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/seen-child-intents.json",
+    "original.0173": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/started-binding.json",
+    "original.0174": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/controller/supervisor-result.json",
+    "original.0175": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/fixture-input.json",
+    "original.0176": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/fixture-runtime.json",
+    "original.0177": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/native-output/fixture-started.json",
+    "original.0178": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/native-output/reservation.json",
+    "original.0179": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/registry.sqlite3",
+    "original.0180": "original-job/worker/kernel-cases/test_actual_whole_deadline_closes_owned_unit_without_success/test-observation.json",
+    "original.0181": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/child-closures.json",
+    "original.0182": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/lease-recovery.json",
+    "original.0183": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/original-outcome.json",
+    "original.0184": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/outer-closure.json",
+    "original.0185": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/launch-result.json",
+    "original.0186": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/launcher.py",
+    "original.0187": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/limits-readback.json",
+    "original.0188": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/owned-unit.json",
+    "original.0189": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/ready.json",
+    "original.0190": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/request.json",
+    "original.0191": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/runtime.json",
+    "original.0192": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/start.ack",
+    "original.0193": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/stderr.log",
+    "original.0194": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/process/contained/stdout.log",
+    "original.0195": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/recorded-child-bindings.json",
+    "original.0196": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/reservation-final.json",
+    "original.0197": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/seen-child-intents.json",
+    "original.0198": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/started-binding.json",
+    "original.0199": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/controller/supervisor-result.json",
+    "original.0200": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/fixture-input.json",
+    "original.0201": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/fixture-runtime.json",
+    "original.0202": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/native-output/fixture-started.json",
+    "original.0203": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/native-output/reservation.json",
+    "original.0204": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/native-output/terminal.json",
+    "original.0205": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/registry.sqlite3",
+    "original.0206": "original-job/worker/kernel-cases/test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup/test-observation.json",
+    "original.0207": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/child-closures.json",
+    "original.0208": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/lease-recovery.json",
+    "original.0209": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/original-outcome.json",
+    "original.0210": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/outer-closure.json",
+    "original.0211": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/launch-result.json",
+    "original.0212": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/launcher.py",
+    "original.0213": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/limits-readback.json",
+    "original.0214": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/owned-unit.json",
+    "original.0215": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/ready.json",
+    "original.0216": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/request.json",
+    "original.0217": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/runtime.json",
+    "original.0218": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/start.ack",
+    "original.0219": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/stderr.log",
+    "original.0220": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/process/contained/stdout.log",
+    "original.0221": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/recorded-child-bindings.json",
+    "original.0222": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/reservation-final.json",
+    "original.0223": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/seen-child-intents.json",
+    "original.0224": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/started-binding.json",
+    "original.0225": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/controller/supervisor-result.json",
+    "original.0226": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/fixture-input.json",
+    "original.0227": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/fixture-runtime.json",
+    "original.0228": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/native-output/fixture-started.json",
+    "original.0229": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/native-output/reservation.json",
+    "original.0230": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/native-output/terminal.json",
+    "original.0231": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/registry.sqlite3",
+    "original.0232": "original-job/worker/kernel-cases/test_observer_broken_pipe_cannot_abort_actual_unit_cleanup/test-observation.json",
+    "original.0233": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/child-closures.json",
+    "original.0234": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/child-intent-leaf.json",
+    "original.0235": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/lease-held.json",
+    "original.0236": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/original-outcome.json",
+    "original.0237": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/outer-closure.json",
+    "original.0238": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/launch-result.json",
+    "original.0239": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/launcher.py",
+    "original.0240": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/limits-readback.json",
+    "original.0241": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/owned-unit.json",
+    "original.0242": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/ready.json",
+    "original.0243": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/request.json",
+    "original.0244": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/runtime.json",
+    "original.0245": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/start.ack",
+    "original.0246": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/stderr.log",
+    "original.0247": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/process/contained/stdout.log",
+    "original.0248": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/recorded-child-bindings.json",
+    "original.0249": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/reservation-final.json",
+    "original.0250": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/seen-child-intents.json",
+    "original.0251": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/started-binding.json",
+    "original.0252": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/controller/supervisor-result.json",
+    "original.0253": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/fixture-input.json",
+    "original.0254": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/fixture-runtime.json",
+    "original.0255": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/native-output/fixture-started.json",
+    "original.0256": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/native-output/leaf/process/contained/request.json",
+    "original.0257": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/native-output/reservation.json",
+    "original.0258": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/native-output/terminal.json",
+    "original.0259": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/registry.sqlite3",
+    "original.0260": "original-job/worker/kernel-cases/test_partial_final_request_holds_lease_and_does_not_invent_child_closure/test-observation.json",
+    "original.0261": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/child-closures.json",
+    "original.0262": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/lease-held.json",
+    "original.0263": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/original-outcome.json",
+    "original.0264": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/outer-closure.json",
+    "original.0265": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/launch-result.json",
+    "original.0266": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/launcher.py",
+    "original.0267": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/limits-readback.json",
+    "original.0268": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/owned-unit.json",
+    "original.0269": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/ready.json",
+    "original.0270": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/request.json",
+    "original.0271": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/runtime.json",
+    "original.0272": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/start.ack",
+    "original.0273": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/stderr.log",
+    "original.0274": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/process/contained/stdout.log",
+    "original.0275": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/recorded-child-bindings.json",
+    "original.0276": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/reservation-final.json",
+    "original.0277": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/seen-child-intents.json",
+    "original.0278": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/controller/supervisor-result.json",
+    "original.0279": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/fixture-input.json",
+    "original.0280": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/fixture-runtime.json",
+    "original.0281": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/native-output/fixture-started.json",
+    "original.0282": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/native-output/reservation.json",
+    "original.0283": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/native-output/terminal.json",
+    "original.0284": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/registry.sqlite3",
+    "original.0285": "original-job/worker/kernel-cases/test_started_receipt_fault_still_closes_actual_outer_and_holds_lease/test-observation.json",
+    "original.0286": "original-job/worker/reservation.json",
+    "original.0287": "original-job/worker/temporary-environment.json",
+    "original.0288": "original-job/worker/terminal.json",
+    "original.0289": "original-job/worker/tool-source-after.json",
+    "original.0290": "original-job/worker/tool-source-before.json",
+    "original.0291": "original-job/worker/validation/result.json",
+    "original.0292": "original-job/worker/validation/suite.json",
+    "original.0293": "original-job/worker/validation/unittest.log",
+    "original.0294": "original-job/worker/validation-process.json",
+    "original.0295": "original-job/worker/validation-source-after.json",
+    "original.0296": "original-job/worker/validation-source-before.json",
+    "root-observer-0": "extras/root-observation/OwnedNative40KernelOutput.json.gz",
+    "root-observer-1": "extras/root-observation/OwnedNative40Request.json.gz",
+    "root-observer-2": "extras/root-observation/OwnedNative40RootControlsDelivery.json.gz",
+    "root-observer-3": "extras/root-observation/OwnedNative40RootFreshPreflight.json.gz",
+    "root-observer-4": "extras/root-observation/OwnedNative40RootPreparedMetadata.json.gz",
+    "root-observer-5": "extras/root-observation/OwnedNative40RootReadOnlyLeasePreflight.json.gz",
+    "root-observer-6": "extras/root-observation/OwnedNative40RootRunCommand.txt.gz",
+    "root-observer-7": "extras/root-observation/OwnedNative40RootRunTransport.stderr.gz",
+    "root-observer-8": "extras/root-observation/OwnedNative40RootRunTransport.stdout.gz",
+    "root-observer-9": "extras/root-observation/OwnedNative40RootSourceDelivery.json.gz",
+    "root-observer-10": "extras/root-observation/OwnedNative40RootTerminalReadback.json.gz",
+    "root-observer-11": "extras/root-observation/OwnedNative40Suite.json.gz",
+    "root-observer-12": "extras/root-observation/index.json",
+    "root-observer-13": "extras/root-observation/nested-kernel-observer-v2.py.gz",
+    "root-observer-14": "extras/root-observation/nested-kernel-readback.json.gz"
+  },
+  "collection_reservation": {
+    "token": "f5f1c2e0-5af2-47cb-9858-b5aece25e963",
+    "job_id": "s10-collect-owned-native-controller40-m40-a1",
+    "owner": {
+      "pid": 1436440,
+      "start_ticks": "329978905",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000,
+      "executable": "/usr/bin/python3.12"
+    },
+    "resources": [
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1",
+        "access": "write"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-actual40-negative73-collection-m40-a1/Docs/StructTrain/TimeLearner",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-actual40-negative73-collection-m40-a1/Docs/StructTrain/TimeLearner",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-owned-native-controller40-m40-a1",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-owned-native-controller40-m40-a1",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/cmake",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/cmake",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/kernel-output",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/kernel-output",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-owned-native-controller40-m40-a1",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-owned-native-controller40-m40-a1",
+        "access": "read"
+      }
+    ],
+    "state": "held",
+    "scientific_verdict": null
+  },
+  "extra_metadata_note": "Opaque retained metadata only. No arbitrary file or observer file mints nested-kernel, numerical, model, certificate or scientific authority. Original validation outcome remains separate from collection success.",
+  "extra_metadata_semantic_validation": false,
+  "nested_kernel_closure_attested": false,
+  "SDK_source_verified": false,
+  "scientific_verdict": null
+}

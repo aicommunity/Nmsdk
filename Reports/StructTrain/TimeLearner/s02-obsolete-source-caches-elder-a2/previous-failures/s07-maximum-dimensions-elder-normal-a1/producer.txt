@@ -1,0 +1,169 @@
+from pathlib import Path
+import os,sys,json,subprocess,hashlib,threading,time,traceback,sqlite3,io,tarfile,unittest,shutil
+base=Path('/home/user/timelearner-refactor')
+spec={'root': 'e91b64cb2340ef1df01897db8dad81fc29bd1cf1', 'PulseLib': '217dc53c4b1cc010ad6938852a91ee6d2df09e3c', 'all_ids': ['SingleImpulseMaximumNative/Classic2000', 'SingleImpulseMaximumNative/Branch2000', 'SingleImpulseMaximumNative/Classic20000', 'SingleImpulseMaximumNative/Branch20000', 'SingleImpulseMaximumNative/FaultsRestoreBothTopologies', 'SingleImpulseMaximumNative/ClassicPhysicalMatrix2000', 'SingleImpulseMaximumNative/BranchPhysicalMatrix2000', 'SingleImpulseMaximumNative/ClassicPhysicalMatrix20000', 'SingleImpulseMaximumNative/BranchPhysicalMatrix20000'], 'positive_physical_conditions': 16, 'new_positive_physical_conditions': 12, 'reader_tests_declared': 10, 'normalization': 'N1 fixture', 'engineering_threshold': 100.0}
+root=spec['root'];pulse_head=spec['PulseLib']
+source=base/'source-integrated-acceptance-normal-a1'
+build=base/'build-integrated-acceptance-normal-a1'
+runtime=base/'runtime-maximum-dimensions-elder-normal-a1'
+old_runtime=base/'runtime-single-maximum-console-build-elder-a1'
+incoming=base/'source-maximum-dimensions-a1-root-delivery'
+incoming_pulse=base/'source-single-maximum-console-pulse-a1'
+resources=base/'source-shared-recognition-normal-a1/Bin'
+framework=base/'framework-initial-threshold-normal-a4'
+vendor=base/'build-initial-threshold-normal-a4/_deps/llama_cpp-src'
+out=base/'readbacks/s07-maximum-dimensions-elder-normal-a1';out.mkdir(exist_ok=False)
+sys.dont_write_bytecode=True;sys.path.insert(0,str(incoming))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+database=base/'resource-reservations.sqlite3';connection=sqlite3.connect('file:'+str(database)+'?mode=ro',uri=True)
+metadata=dict(connection.execute('select key,value from metadata'));connection.close();assert metadata['schema_version']=='2'
+registry=Reservations(database,capacity=json.loads(metadata['capacity']))
+stop=threading.Event();thread=None;token=None;errors=[];passed=False;build_passed=False;native_passed=False
+def write(name,value):(out/name).write_text(json.dumps(value,indent=2,allow_nan=False)+'\n')
+def git(path,*args):return subprocess.check_output(['git','-C',str(path),*args],text=True).strip()
+def checksum(path):
+ h=hashlib.sha256()
+ with path.open('rb') as f:
+  for block in iter(lambda:f.read(1024*1024),b''):h.update(block)
+ return h.hexdigest()
+def frozen():
+ records={}
+ for p in (q for directory in [old_runtime,base/'runtime-single-impulse-maximum-elder-normal-a1',base/'runtime-single-impulse-maximum-elder-normal-a2',base/'runtime-feedback-storage-elder-normal-a1',base/'runtime-integrated-acceptance-normal-a1'] for q in directory.rglob('*')):
+  if p.is_symlink():
+   target=p.resolve(strict=True);assert not target.is_relative_to(source) and not target.is_relative_to(build)
+  if p.is_file():
+   assert p.is_symlink() or p.stat().st_nlink==1
+   records[p.relative_to(base).as_posix()]={'bytes':p.stat().st_size,'sha256':checksum(p),'symlink':os.readlink(p) if p.is_symlink() else None}
+ return records
+def run(arguments,name):
+ registry.validate_paths(token);assert not errors,errors
+ with (out/name).open('xb') as log:
+  p=subprocess.Popen(list(map(str,arguments)),stdout=log,stderr=subprocess.STDOUT)
+  write('owned-'+name+'.json',{'pid':p.pid,'start_ticks':Path('/proc',str(p.pid),'stat').read_text().rsplit(') ',1)[1].split()[19],'arguments':list(map(str,arguments))})
+  status=p.wait()
+ assert status==0,(name,status)
+def import_snapshot(destination,donor,wanted,old,packet_sha):
+ assert git(destination,'rev-parse','HEAD')==old and not git(destination,'status','--porcelain','--untracked-files=no')
+ assert git(donor,'rev-parse','HEAD')==wanted
+ packets=list((donor/'.git/objects/pack').glob('*.pack'));assert len(packets)==1
+ assert checksum(packets[0])==packet_sha
+ with packets[0].open('rb') as f:subprocess.run(['git','-C',str(destination),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+ shallow=destination/'.git/shallow';bounds=set(shallow.read_text().splitlines());bounds.add(wanted);shallow.write_text('\n'.join(sorted(bounds))+'\n')
+ registry.validate_paths(token)
+ subprocess.run(['git','-C',str(destination),'-c','submodule.recurse=false','checkout','--detach',wanted],check=True)
+ assert old in bounds and git(destination,'rev-parse','HEAD')==wanted
+ assert not (destination/'.git/objects/info/alternates').exists()
+ return {'old':old,'new':wanted,'packet_sha256':packet_sha,'old_shallow_boundaries_retained':True}
+write('owner.json',{'pid':os.getpid(),'start_ticks':Path('/proc/self/stat').read_text().rsplit(') ',1)[1].split()[19],'root':root,'PulseLib':pulse_head})
+write('job-specification.json',spec);write('ledger-metadata-before.json',metadata)
+(out/'producer.txt').write_bytes(Path(__file__).read_bytes())
+try:
+ assert source.is_dir() and build.is_dir() and old_runtime.is_dir() and not runtime.exists()
+ assert git(source,'rev-parse','HEAD')=='038a66413b7a41e75bf3826eda365db1c78c364b'
+ assert git(source/'Libraries/Nmsdk-PulseLib','rev-parse','HEAD')=='217dc53c4b1cc010ad6938852a91ee6d2df09e3c'
+ assert git(source/'Bin','rev-parse','HEAD')=='fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f'
+ assert '/.gitignore' in (source/'Bin/.git/info/sparse-checkout').read_text()
+ assert '!/Docs/' in (source/'.git/info/sparse-checkout').read_text() and '!/Reports/' in (source/'.git/info/sparse-checkout').read_text()
+ assert git(framework,'rev-parse','HEAD')=='58d77fa8070e8cec2dc1ed015d66b454c8d78850' and not git(framework,'status','--porcelain','--untracked-files=no')
+ assert git(vendor,'rev-parse','HEAD')=='1971adf55e3ebbfab83771d6174d37b77c352c71' and not git(vendor,'status','--porcelain','--untracked-files=no')
+ assert git(resources,'rev-parse','HEAD')=='99f58da9296a794374cef679bbb878cb62af979a'
+ assert not git(source,'status','--porcelain','--untracked-files=no')
+ closures=[]
+ for name in ['s07-single-maximum-console-build-elder-a1','s07-single-maximum-replay-elder-a2']:
+  state=inspect_worker_dependency(base/'readbacks'/(name+'-container'),registry,name)
+  assert state['state']=='ready' and state['reservation_state']=='released',state
+  closures.append(state)
+ write('previous-dependent-groups-closed.json',closures)
+ available_memory=int(next(l.split()[1] for l in Path('/proc/meminfo').read_text().splitlines() if l.startswith('MemAvailable:')))*1024
+ disk=os.statvfs(base);available_disk=disk.f_bavail*disk.f_frsize
+ assert available_memory>=8*1024**3 and available_disk>=3*1024**3
+ write('resource-preflight.json',{'available_memory_bytes':available_memory,'available_disk_bytes':available_disk,'minimum_memory_bytes':8*1024**3,'minimum_disk_bytes':3*1024**3,'memory_max_bytes':6*1024**3,'reserved_disk_bytes':2*1024**3,'tasks_max':128,'compiler_parallelism':1})
+ reservation=registry.reserve(out.name,[{'path':str(p),'access':'write'} for p in [out,source,build,runtime]]+
+                              [{'path':str(p),'access':'read'} for p in [old_runtime,base/'runtime-single-impulse-maximum-elder-normal-a1',base/'runtime-single-impulse-maximum-elder-normal-a2',base/'runtime-feedback-storage-elder-normal-a1',base/'runtime-integrated-acceptance-normal-a1',incoming,incoming_pulse,resources,framework,vendor]],
+                              ttl_seconds=120,demands={'slots':1,'memory_bytes':6*1024**3,'disk_bytes':2*1024**3})
+ token=reservation['token'];write('reservation.json',reservation)
+ def beat():
+  while not stop.wait(20):
+   try:registry.heartbeat(token,ttl_seconds=120);registry.validate_paths(token)
+   except BaseException as e:errors.append(str(e));return
+ thread=threading.Thread(target=beat,daemon=True);thread.start()
+ old=frozen();write('old-runtime-before.json',old)
+ (out/'previous-CMakeCache.txt').write_bytes((build/'CMakeCache.txt').read_bytes())
+ changes=[]
+ changes.append(import_snapshot(source,incoming,root,'038a66413b7a41e75bf3826eda365db1c78c364b','79d4cf800460c9310ddd93c32ee6313f8fdc029388e89502823e5b562cbb6b59'))
+ write('inactive-source-and-cache-update.json',{'snapshots':changes,'old_runtime_retained':str(old_runtime),'new_runtime':str(runtime),'whole_group_closures_required_before_update':True})
+ children={}
+ for line in git(source,'config','-f','.gitmodules','--get-regexp','^submodule.*.path$').splitlines():
+  _,path=line.split(None,1);wanted=git(source,'rev-parse','HEAD:'+path);p=source/path
+  assert git(p,'rev-parse','HEAD')==wanted and not git(p,'status','--porcelain','--untracked-files=no'),path
+  children[path]=wanted
+ assert len(children)==7 and not git(source,'status','--porcelain','--untracked-files=no')
+ def entries(p):return {entry.split(b'\t',1)[1].decode():entry.split(b'\t',1)[0].decode() for entry in subprocess.check_output(['git','-C',str(p),'ls-tree','-r','-z','HEAD']).split(b'\0') if entry}
+ a,b=entries(resources),entries(source/'Bin');differing=sorted(n for n in a.keys()|b.keys() if a.get(n)!=b.get(n))
+ assert all(Path(n).suffix.lower() in ('.py','.sh','.md') or n in ['ClDesc/PulseLibrary/ru-RU/NNeuronTimeLearner.xml','ClDesc/PulseLibrary/ru-RU/NNeuronTimeLearnerBranch.xml'] for n in differing),differing
+ write('resource-root-binding.json',{'resource_root':str(resources),'resource_Bin_commit':git(resources,'rev-parse','HEAD'),'source_Bin_gitlink':children['Bin'],'different_paths':differing,'config_physics_data_unchanged':True})
+ write('source-closure.json',{'root':root,'children':children,'tracked_clean':True,'reused_inactive_source':str(source),'native_source_fixed_for_entire_job':True})
+ args=['cmake','-S',source,'-B',build,'-DCMAKE_BUILD_TYPE=Release','-DNMSDK_BUILD_PARALLEL_JOBS=1','-DBUILD_TESTING=ON','-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON','-DRDK_BUILD_LEGACY_ENGINE_UNIT_TESTS=OFF','-DFETCHCONTENT_SOURCE_DIR_GOOGLETEST='+str(framework),'-DFETCHCONTENT_UPDATES_DISCONNECTED=ON','-DRDK_LLM_LLAMA_CPP_DIR='+str(vendor),'-DNMSDK_DEPLOY_ROOT='+str(runtime),'-DNMSDK_RESOURCE_ROOT='+str(resources)]
+ os.environ['CMAKE_BUILD_PARALLEL_LEVEL']='1';write('configure-arguments.json',{'arguments':list(map(str,args))})
+ run(args,'configure.log');print('CONFIGURED',flush=True)
+ run(['cmake','--build',build,'--target','Test_PulseLib_StorageComponents','NeuroModelerConsole','--parallel','1'],'build.log')
+ build_passed=True;print('BUILT',flush=True)
+ (out/'CMakeCache.txt').write_bytes((build/'CMakeCache.txt').read_bytes())
+ for relative in ['Libraries/Nmsdk-PulseLib/CMakeFiles/Nmsdk-PulseLib.core.dir','Tests/Integration/Libraries/CMakeFiles/Test_PulseLib_StorageComponents.dir','App/NeuroModelerConsole/CMakeFiles/NeuroModelerConsole.dir']:
+  for filename in ['flags.make','link.txt']:
+   original=build/relative/filename;assert original.is_file(),str(original)
+   target=out/'generated-build'/relative/filename;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(original.read_bytes())
+ assert frozen()==old,'previous_runtime_changed_after_build'
+ for name in list(sys.modules):
+  if name=='Scripts' or name.startswith('Scripts.'):del sys.modules[name]
+ sys.path.insert(0,str(source));os.chdir(source)
+ os.environ['QT_QPA_PLATFORM']='offscreen';os.environ['ASAN_OPTIONS']=''
+ for key in ['LD_LIBRARY_PATH','QT_PLUGIN_PATH']:os.environ.pop(key,None)
+ os.environ['TIMELEARNER_OBSERVATION_TEST_DIR']=str(out/'observation-fixture')
+ os.environ['TIMELEARNER_PROFILE_TEST_DIR']=str(out/'profile-fixture')
+ from Scripts.StructTrain.TimeLearner.runtime import snapshot
+ from Scripts.StructTrain.TimeLearner.native_gate import run_native_gate
+ write('native-runtime.json',snapshot(source,runtime/'Test_PulseLib_StorageComponents',runtime/'NeuroModelerConsole.ini',build/'CMakeCache.txt'))
+ write('native-gate-specification.json',{'kind':'timelearner_native_test_gate','schema_version':2,'runtime_manifest':str(out/'native-runtime.json'),'source_root':str(source),'expected_test_ids':spec['all_ids'],'maximum_wall_seconds':10800,'asan_options':'','cooperative_runtime_capture':True})
+ result=run_native_gate(out/'native-gate-specification.json',out/'native9')
+ write('native-verdict.json',result)
+ assert result['execution']=='completed' and result['validity']=='valid' and result['assertion_status']=='passed' and result['inventory']['observed']==9,result
+ native_passed=True;print('NATIVE9_PASSED',flush=True)
+ corpus=str(out/'native9/native')
+ os.environ.update(TIMELEARNER_SINGLE_PULSE_NATIVE_CORPUS=corpus,TIMELEARNER_INHERITED_FEEDBACK_CORPUS=corpus,TIMELEARNER_PROFILED_GRAPH_CORPUS=corpus,TIMELEARNER_PREPARED_MODEL_CORPUS=corpus,TIMELEARNER_SINGLE_IMPULSE_MAXIMUM_CORPUS=corpus)
+ reader_specs=[('Scripts.StructTrain.TimeLearner.tests.test_single_impulse_maximum.SingleImpulseMaximumNativeReaderTest',6),('Scripts.StructTrain.TimeLearner.tests.test_single_impulse_maximum.SingleImpulseMaximumDimensionReaderTest',4)]
+ readers=[]
+ for index,(name,count) in enumerate(reader_specs):
+  suite=unittest.defaultTestLoader.loadTestsFromName(name);assert suite.countTestCases()==count
+  with (out/('reader-'+str(index)+'.txt')).open('w') as log:r=unittest.TextTestRunner(stream=log,verbosity=2).run(suite)
+  row={'class':name,'tests_run':r.testsRun,'successful':r.wasSuccessful(),'failures':len(r.failures),'errors':len(r.errors),'skipped':len(r.skipped)};readers.append(row);write('reader-results.json',readers)
+  assert r.wasSuccessful() and r.testsRun==count and not r.skipped,row
+ assert frozen()==old and not errors
+ write('old-runtime-after.json',frozen());passed=True
+except BaseException as e:
+ write('exception.json',{'reason':str(e),'traceback':traceback.format_exc()});print('FAILED',str(e),flush=True)
+finally:
+ stop.set()
+ if thread:thread.join(timeout=30)
+ if token:
+  # Retain the lease while this worker or any descendant may still write.
+  # The outside supervisor recovers it only after fresh whole-cgroup closure.
+  write('lease-before-worker-exit.json',next(v for v in registry.inspect()['leases'] if v['token']==token))
+ connection=sqlite3.connect('file:'+str(database)+'?mode=ro',uri=True)
+ after_metadata=dict(connection.execute('select key,value from metadata'));connection.close()
+ write('ledger-metadata-after.json',after_metadata)
+ write('terminal.json',{'build_passed':build_passed,'native9_passed':native_passed,'reader10_passed':passed,'heartbeat_errors':errors,'ledger_metadata_unchanged':after_metadata==metadata,'lease_release_requires_fresh_whole_group_closure':True,'ASan_verified':False,'Console12_executed_on_Elder':False,'classification_evaluated':False,'scientific_verdict':None,'whole_plan_complete':False})
+ roots={'root':(source,['App','Tests','Scripts/StructTrain/TimeLearner']),'PulseLib':(source/'Libraries/Nmsdk-PulseLib',['Core'])}
+ hashes={}
+ for label,(tree,folders) in roots.items():
+  for folder in folders:
+   for p in (tree/folder).rglob('*'):
+    if p.is_file() and p.suffix in ('.cpp','.h','.py','.cmake'):hashes[label+'/'+p.relative_to(tree).as_posix()]=checksum(p)
+ write('source-hashes.json',hashes)
+ files={p.relative_to(out).as_posix():p.read_bytes() for p in out.rglob('*') if p.is_file()};buffer=io.BytesIO()
+ with tarfile.open(fileobj=buffer,mode='w:xz',preset=3) as archive:
+  for name,data in sorted(files.items()):
+   info=tarfile.TarInfo(name);info.size=len(data);archive.addfile(info,io.BytesIO(data))
+ raw=buffer.getvalue();(out/'primary.tar.xz').write_bytes(raw)
+ write('bundle.json',{'members':{n:{'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()} for n,v in files.items()},'archive_bytes':len(raw),'archive_sha256':hashlib.sha256(raw).hexdigest(),'root':root,'PulseLib':pulse_head,'scientific_verdict':None})

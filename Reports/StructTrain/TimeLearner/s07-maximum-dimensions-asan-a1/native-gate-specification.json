@@ -1,0 +1,20 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 2,
+  "runtime_manifest": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-maximum-dimensions-asan-a1/native-runtime.json",
+  "source_root": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1",
+  "expected_test_ids": [
+    "SingleImpulseMaximumNative/Classic2000",
+    "SingleImpulseMaximumNative/Branch2000",
+    "SingleImpulseMaximumNative/Classic20000",
+    "SingleImpulseMaximumNative/Branch20000",
+    "SingleImpulseMaximumNative/FaultsRestoreBothTopologies",
+    "SingleImpulseMaximumNative/ClassicPhysicalMatrix2000",
+    "SingleImpulseMaximumNative/BranchPhysicalMatrix2000",
+    "SingleImpulseMaximumNative/ClassicPhysicalMatrix20000",
+    "SingleImpulseMaximumNative/BranchPhysicalMatrix20000"
+  ],
+  "maximum_wall_seconds": 10800,
+  "asan_options": "detect_leaks=0",
+  "cooperative_runtime_capture": true
+}

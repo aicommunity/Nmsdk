@@ -1,0 +1,23 @@
+{
+  "kind": "timelearner_contained_request",
+  "schema_version": 1,
+  "attempt_id": "c12a7466-20e1-4a92-884d-8dcf9dbcd5f1",
+  "unit": "timelearner-c12a7466-20e1-4a92-884d-8dcf9dbcd5f1.service",
+  "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+  "uid": 1000,
+  "controller": {
+    "pid": 1430697,
+    "start_ticks": "309326369"
+  },
+  "executable": "/usr/bin/python3.12",
+  "arguments": [
+    "/tmp/timelearner-single-pulse-asan-a1-worker.py"
+  ],
+  "working_directory": "/tmp",
+  "runtime_fingerprint": "58c61df862c7ef2a287dff946e12728c030603edec37225c97276b770ec37ca8",
+  "memory_bytes": 4294967296,
+  "tasks": 128,
+  "maximum_wall_seconds": 21600,
+  "environment": {},
+  "sha256": "8c802cdad250d0001912f82165c898700e88b2ba3cd4fdfba663c934f0a19f2d"
+}

@@ -1,0 +1,58 @@
+{
+  "kind": "timelearner_property_ownership_source_reconciliation",
+  "schema_version": 1,
+  "scope": "immutable Git metadata only; no new runtime assertions",
+  "original_finding_source": "fcc3fed0dc63fc0d8ae8dcfdb0f85bd5d004baf8",
+  "fix_source": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+  "source_checks": [
+    {
+      "repository": "PulseLib",
+      "commit": "4a5c2ec9df9a9f704dcd8260714323494bfa4415",
+      "path": "Core/NNeuronTimeLearner.cpp",
+      "git_blob": "93969312375e329d91634159c0f46b88012fa210",
+      "file_sha256": "25d991998c93b98a1a62085e6f5b091949f19314ce98148ec51c7cfcc63f1e82",
+      "setter": "NNeuronTimeLearner::SetSynapseResistanceStep",
+      "line": 3062,
+      "setter_sha256": "f1be85f82ccb97165f80995f17bc1b978af55276db04f2c3c33b3f2ce39d29d1",
+      "setter_source": "bool NNeuronTimeLearner::SetSynapseResistanceStep(const double &value)\n{\n if(NativeTrainingOwned || NativeModelDeclaration || NativeRecognition)\n  return value==SynapseResistanceStep.GetData();\n if(IsParametricNormalization())\n  return true;\n if(NumSynapse.empty() || !Neuron)\n  return true;\n \n for(int numdend = 1; numdend <= NumInputDendrite; numdend++)\n {\n  for(int numsyn = 2; numsyn <= NumSynapse[numdend - 1]; numsyn++)\n  {\n   UEPtr<NPulseSynapse> synapse = Neuron->GetComponentL<NPulseSynapse>(\n    MakeLearnerExcSynapsePath(numdend, DendriteLength[numdend - 1], numsyn), true);\n   if(!synapse)\n    continue;\n   synapse->Resistance = value;\n  }\n }\n return true;\n}"
+    },
+    {
+      "repository": "PulseLib",
+      "commit": "4a5c2ec9df9a9f704dcd8260714323494bfa4415",
+      "path": "Core/NNeuronTimeLearnerBranch.cpp",
+      "git_blob": "1ec215f5d6bf77d923bf5db59f92195bb4e3cba5",
+      "file_sha256": "c15e807599f41695a44e42a6be139a26c0143ee617f8d4c0073f793be347dc1c",
+      "setter": "NNeuronTimeLearnerBranch::SetSynapseResistanceStep",
+      "line": 3812,
+      "setter_sha256": "71d072c5554eea1ec4f5ad80a4d0952b3a0c58c7e52c3c9f58b9946bef7efec0",
+      "setter_source": "bool NNeuronTimeLearnerBranch::SetSynapseResistanceStep(const double &value)\n{\n if(NativeTrainingOwned || NativeModelDeclaration || NativeRecognition)\n  return value==SynapseResistanceStep.GetData();\n if(IsParametricNormalization())\n  return true;\n if(NumSynapse.empty() || !Neuron)\n  return true;\n \n for(int numdend = 1; numdend <= NumInputDendrite; numdend++)\n {\n  for(int numsyn = 2; numsyn <= NumSynapse[numdend - 1]; numsyn++)\n  {\n   UEPtr<NPulseSynapse> synapse = Neuron->GetComponentL<NPulseSynapse>(\n    MakeBranchExcSynapsePath(PulseAttachPos(numdend - 1), numsyn), true);\n   if(!synapse)\n    continue;\n   synapse->Resistance = value;\n  }\n }\n return true;\n}"
+    },
+    {
+      "repository": "PulseLib",
+      "commit": "e685563db13be0204510f3da99c666b323513a30",
+      "path": "Core/NNeuronTimeLearner.cpp",
+      "git_blob": "0c48d1515ea06dc9f7972ca275a0dc179a89b38e",
+      "file_sha256": "796b408334df2005a06169e9f26cbe1a98e941b356eaf1a0a0b4cfff1ec6cad1",
+      "setter": "NNeuronTimeLearner::SetSynapseResistanceStep",
+      "line": 3062,
+      "setter_sha256": "f1be85f82ccb97165f80995f17bc1b978af55276db04f2c3c33b3f2ce39d29d1",
+      "setter_source": "bool NNeuronTimeLearner::SetSynapseResistanceStep(const double &value)\n{\n if(NativeTrainingOwned || NativeModelDeclaration || NativeRecognition)\n  return value==SynapseResistanceStep.GetData();\n if(IsParametricNormalization())\n  return true;\n if(NumSynapse.empty() || !Neuron)\n  return true;\n \n for(int numdend = 1; numdend <= NumInputDendrite; numdend++)\n {\n  for(int numsyn = 2; numsyn <= NumSynapse[numdend - 1]; numsyn++)\n  {\n   UEPtr<NPulseSynapse> synapse = Neuron->GetComponentL<NPulseSynapse>(\n    MakeLearnerExcSynapsePath(numdend, DendriteLength[numdend - 1], numsyn), true);\n   if(!synapse)\n    continue;\n   synapse->Resistance = value;\n  }\n }\n return true;\n}"
+    },
+    {
+      "repository": "PulseLib",
+      "commit": "e685563db13be0204510f3da99c666b323513a30",
+      "path": "Core/NNeuronTimeLearnerBranch.cpp",
+      "git_blob": "5397bac8fcb04bd186651899081d2b1f33ec6a8a",
+      "file_sha256": "fe81e0a7112b8e23611aafd973c577ddac3c868b344e94bf44ba4674047566b4",
+      "setter": "NNeuronTimeLearnerBranch::SetSynapseResistanceStep",
+      "line": 3812,
+      "setter_sha256": "71d072c5554eea1ec4f5ad80a4d0952b3a0c58c7e52c3c9f58b9946bef7efec0",
+      "setter_source": "bool NNeuronTimeLearnerBranch::SetSynapseResistanceStep(const double &value)\n{\n if(NativeTrainingOwned || NativeModelDeclaration || NativeRecognition)\n  return value==SynapseResistanceStep.GetData();\n if(IsParametricNormalization())\n  return true;\n if(NumSynapse.empty() || !Neuron)\n  return true;\n \n for(int numdend = 1; numdend <= NumInputDendrite; numdend++)\n {\n  for(int numsyn = 2; numsyn <= NumSynapse[numdend - 1]; numsyn++)\n  {\n   UEPtr<NPulseSynapse> synapse = Neuron->GetComponentL<NPulseSynapse>(\n    MakeBranchExcSynapsePath(PulseAttachPos(numdend - 1), numsyn), true);\n   if(!synapse)\n    continue;\n   synapse->Resistance = value;\n  }\n }\n return true;\n}"
+    }
+  ],
+  "source_fix_present": true,
+  "existing_scoped_runtime_receipt": "NativeResistanceStepAndCodecM40A1Verification.json",
+  "full_runtime_property_matrix_complete": false,
+  "observed_request_candidate": "e685563db13be0204510f3da99c666b323513a30",
+  "observed_request_runtime_acceptance": false
+}

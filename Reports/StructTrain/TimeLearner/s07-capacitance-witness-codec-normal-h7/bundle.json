@@ -1,0 +1,26 @@
+{
+  "kind": "timelearner_native_capacitance_integration_evidence",
+  "schema_version": 1,
+  "root": "fb772a354ff69568f97eada6303395cdb4247acd",
+  "pulselib": "e87139062cefb537e1ba73103ca68bcf5c2a00a0",
+  "rdk": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+  "statuses": {
+    "readers": {
+      "expected": 28,
+      "observed": null,
+      "assertion_status": "not_passed",
+      "structured_result": {}
+    }
+  },
+  "unexpected_libasan_mappings": false,
+  "acceptance_status": "not_accepted",
+  "archive_sha256": "4aad424a5039b9d536ebc91598289fc14a4a56ff1c14561ed80ab8acb6e38e51",
+  "archive_bytes": 501,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/exception.json": "e73c671e89a7afc1a8d8df0694b1317ae6be483867a943852f507dfb717a1f3c",
+    "gate/owned-supervisor.json": "19bd30bed126eefaeb550dcad60c499f4b65d835d9fb2acc15a15b510f91e6f8"
+  },
+  "scope": "Production revision-bound C witness encoder and actual native read-only provider: four Classic/Branch N0/N1 cases,20 encoded bound physical frames and28 structured bridge/domain/witness controls. No service dispatch, C-trim On or scientific classification.",
+  "scientific_verdict": null
+}

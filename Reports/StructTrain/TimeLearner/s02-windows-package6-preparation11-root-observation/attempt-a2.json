@@ -1,0 +1,30 @@
+{
+    "kind":  "windows_git_preparation_tests",
+    "executed":  5,
+    "cases":  [
+                  {
+                      "name":  "ZeroNativeExitAccepted",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "ActualNegativeCmdExitRejected",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "PositiveAndUnsignedExitRejected",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "MissingGitRepositoryRejected",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "PersonalProjectRefusedBeforeGitWrite",
+                      "passed":  true
+                  }
+              ],
+    "status":  "failed",
+    "reason":  "Не удается проверить аргумент для параметра \"SpecificationBlob\". Аргумент \"warning: in the working copy of \u0027C:\\Projects\\TimeLearnerWorker\\jobs\\windows-package6-git-preparation-a2\\clone-spec.json\u0027, LF will be replaced by CRLF the next time Git touches itb4ed0e5a2004c7e3dba15343c5de9d31f9f760d7\" не соответствует шаблону \"^[0-9a-f]{40}$\". Укажите аргумент, соответствующий шаблону \"^[0-9a-f]{40}$\", после чего повторите выполнение команды.",
+    "native_models_or_cpp_tests":  false,
+    "scientific_verdict":  null
+}

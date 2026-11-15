@@ -1,0 +1,103 @@
+{
+  "kind": "candidate_recovery_history_validator_verification",
+  "schema_version": 1,
+  "source_commit": "cabe942c3e3f9611ac1cc2f189daf69847cf07c7",
+  "servers": [
+    {
+      "host": "10.245.1.17",
+      "evidence_commit": "35ba64dbc9d84d0d1087ebd46985435bc8d2017d",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-17",
+      "tests_passed": 54,
+      "failed": 0,
+      "skipped": 0,
+      "source_files_verified": 16,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "input_manifest_byte_equal_to_previous_verified_gate": "af10708979f48cd2bc7e95654bc94e73fbba72a9",
+      "original_primary_verification": "CandidateRecoveryPrimaryVerification.json",
+      "artifacts": [
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-17/receipt.json",
+          "original_server_name": "receipt.json",
+          "bytes": 12648,
+          "sha256": "9acaecb05978cfecd0391d4c689669edeba50384e807e8821b662502bdd53ba9"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-17/tests.json",
+          "original_server_name": "tests.json",
+          "bytes": 8539,
+          "sha256": "ff93957fe9f6f454bf0ef927b33ca4651bc08879750c76f1c8be29e762c384e2"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-17/input-manifest.json",
+          "original_server_name": "input-manifest.json",
+          "bytes": 247447,
+          "sha256": "147cc11503e937c4c5c7f14e0d25c6d3bfb744c78ce1c36c8b164807010230e4"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-17/unittest.log",
+          "original_server_name": "unittest.log",
+          "bytes": 11809,
+          "sha256": "6f98a3974ef75563dfe497a191965d94c2a343508de564549ff3f82121f64d9f"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-17/runner.txt",
+          "original_server_name": "runner.py",
+          "bytes": 994,
+          "sha256": "879e1fb56a6951616832fa6309bf632ad76a463074b3410f0d84cac570c3df46"
+        }
+      ]
+    },
+    {
+      "host": "10.245.1.11",
+      "evidence_commit": "25c7c5b2110d4c9a23f3676ee207fdec45e04e8b",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-11",
+      "tests_passed": 54,
+      "failed": 0,
+      "skipped": 0,
+      "source_files_verified": 16,
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "input_manifest_byte_equal_to_previous_verified_gate": "3d5a5ef8b6f29c2e13edd2e8f514bafe9a3d79ab",
+      "original_primary_verification": "CandidateRecoveryPrimaryVerification.json",
+      "artifacts": [
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-11/receipt.json",
+          "original_server_name": "receipt.json",
+          "bytes": 12645,
+          "sha256": "8bde65de8ffebc71785094859da62083d8e637f1ab3c563c0c5e489100c02aa7"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-11/tests.json",
+          "original_server_name": "tests.json",
+          "bytes": 8539,
+          "sha256": "ff93957fe9f6f454bf0ef927b33ca4651bc08879750c76f1c8be29e762c384e2"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-11/input-manifest.json",
+          "original_server_name": "input-manifest.json",
+          "bytes": 126298,
+          "sha256": "4050415bd5f0763da89fd57265afa6e4252ffb3a2cc9ce23ac2bda89d30629e8"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-11/unittest.log",
+          "original_server_name": "unittest.log",
+          "bytes": 8571,
+          "sha256": "a7a2c4d199fc3a6a206e9d7c0a229c78081293334f24d2f298f73bcac5329d76"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-history-a1-11/runner.txt",
+          "original_server_name": "runner.py",
+          "bytes": 994,
+          "sha256": "879e1fb56a6951616832fa6309bf632ad76a463074b3410f0d84cac570c3df46"
+        }
+      ]
+    }
+  ],
+  "scope": "validator mutations with hypothetical decision metadata over actual historical JSON/CSV",
+  "cpp_typed_journal_runtime_verified": false,
+  "full_schema5_pipeline_supported": false,
+  "all_invalid_observations_independently_recounted": false,
+  "new_model_runs": false,
+  "local_numerical_tests_run": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

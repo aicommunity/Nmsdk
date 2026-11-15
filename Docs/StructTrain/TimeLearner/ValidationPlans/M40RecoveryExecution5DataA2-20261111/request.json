@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-recovery-execution5-data-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 1073741824,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-execution5-data-a2",
+      "commit": "8362d58f4d6576a0c8b0cc7633270976dff1df7b"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/recovery-execution5-data-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecoveryExecution5DataA2-20261111/suite.json",
+      "sha256": "e8b780a1e23d44cf534e8dce322e746552e7b26b9ddbd5422e7ca7e0ef35ca4d"
+    },
+    "fixtures": {
+      "TIMELEARNER_CLOSED_PACKAGE7_SOURCE": "/media/user/Data/TimeLearnerRefactor/publications/package7-first-closed-source-f1/Reports/StructTrain/TimeLearner/Package7ClassicN0ClosedSourceF1-20261111"
+    }
+  }
+}

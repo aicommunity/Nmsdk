@@ -1,0 +1,118 @@
+{
+  "kind": "schema2_native_condition_pilot_independent_verification",
+  "date": "2026-11-06",
+  "data_commit": "bd10072c73d7c8296f1a4d02c051459f29f8c039",
+  "tool_root": "d43780822a7b9e2b7c0229c323cda174abc7fce8",
+  "compiled_root": "2e0618110a9abb48b94f6edc6b63c51f829ec810",
+  "archive_members_checked": 990,
+  "archive_bytes": 4492472,
+  "archive_sha256": "574eecd5ae76a62b954422c9daeacadda2be9cda4f9184288e08240906774702",
+  "raw_member_bytes": 253385299,
+  "source_files_checked": 340,
+  "actual_native_phase_processes": 8,
+  "cases": [
+    {
+      "case": "Classic-v1",
+      "condition_fingerprint": "0af3970e04f31f889a37c44b707303af933368b80d03f0549c88018644f09de3",
+      "phase_units": {
+        "train": "timelearner-0cb01d94-8227-4ccf-955f-a08780f87ccf.service",
+        "evaluate": "timelearner-6047a17a-290b-4e3a-b998-931c627663e4.service",
+        "export": "timelearner-346dfd8d-1569-455b-b69c-f56b7094cfa9.service",
+        "calibrate": "timelearner-d420aa95-62f9-4d99-af95-62abebf06c02.service"
+      },
+      "same_matrix_engineering_counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "continued_model_and_binding_unchanged": true,
+      "completed_continue_no_new_units": true
+    },
+    {
+      "case": "Branch-v2",
+      "condition_fingerprint": "22309e69f3977220c34d419e072d5b0cf30d0bffc40f1c56404d138e65f67816",
+      "phase_units": {
+        "train": "timelearner-bffc010a-26b4-41eb-b52d-3cba36d97c31.service",
+        "evaluate": "timelearner-d4912ba3-f26a-48b6-8de8-8e09c64af447.service",
+        "export": "timelearner-a8e4afa3-705b-435d-ac56-cbb481fe909f.service",
+        "calibrate": "timelearner-435ba521-5285-40ad-9aec-9b9a17c63c3b.service"
+      },
+      "same_matrix_engineering_counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "continued_model_and_binding_unchanged": true,
+      "completed_continue_no_new_units": true
+    }
+  ],
+  "fresh_closed_released": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s10-pipeline-condition-native-a1",
+    "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-pipeline-condition-native-a1-container",
+    "registry": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "7eca13f679cfcb149bb4a09b67e7693a530ebcf1305bad9440ee13161596282c",
+        "unit": "timelearner-4cc6db38-5386-462b-bdeb-9e1df98553f5.service",
+        "invocation_id": "302742ab092945b7b92956b85d1e2e5b",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4cc6db38-5386-462b-bdeb-9e1df98553f5.service",
+        "initial_main_pid": 3801312,
+        "initial_start_ticks": "351045947",
+        "sha256": "fc27623fc36388fb0bfd664fc52f96c7f878506f46f93994333ce341beceee2e"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "38260",
+        "KillMode": "control-group",
+        "Description": "timelearner-4cc6db38-5386-462b-bdeb-9e1df98553f5.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "071ddf3f-44c5-4cb6-85af-de55ec9e911a",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "local_numerical_execution": false,
+  "full_eight_case_matrix_accepted": false,
+  "effective_condition_attestation": false,
+  "stock_scientific_result": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

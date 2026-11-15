@@ -1,0 +1,168 @@
+{
+  "kind": "future_common_codec_lifetime_control_pair",
+  "schema_version": 1,
+  "status": "SOURCE_ONLY_UNRUN_NO_NATIVE_ADMISSION",
+  "corrected": {
+    "root_code": "de8d97fa155eed23da0190f2d56d0a6ed3758e01",
+    "pulse": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+    "root_branch": "codex/timelearner-cold-envelope-paired-corrected",
+    "pulse_branch": "codex/timelearner-cold-envelope-paired-corrected"
+  },
+  "unfixed": {
+    "root_code": "3a250198556c549b7265792577b4bf1c9a57f8ca",
+    "pulse": "feb6b4bc02768727d1dbb74a397e95a3327ca7f1",
+    "root_branch": "codex/timelearner-cold-envelope-unfixed",
+    "pulse_branch": "codex/timelearner-cold-envelope-unfixed",
+    "original_root": "bb1d24ea950ff068c25f7db7186517b55eef3dbd",
+    "original_pulse": "800f92ae1f9e0133cefc0ccfe36abc3d8c99727f",
+    "pulse_merge_parents": [
+      "800f92ae1f9e0133cefc0ccfe36abc3d8c99727f",
+      "4b70b0bfb41510691971de86ce5c4993bb382b8b"
+    ],
+    "root_merge_parents": [
+      "bb1d24ea950ff068c25f7db7186517b55eef3dbd",
+      "de8d97fa155eed23da0190f2d56d0a6ed3758e01"
+    ]
+  },
+  "merge_resolution": "ordinary --no-ff merge of common codec source; explicitly retained the four lifetime code paths and absent lifetime doc from original800; root retained unfixed Pulse gitlink",
+  "pair_root_name_status": "M\tLibraries/Nmsdk-PulseLib",
+  "pair_pulse_paths": [
+    "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
+    "Core/TimeLearner/NativeTrainingService.cpp",
+    "Core/TimeLearner/NativeTrainingService.h",
+    "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+    "Docs/TimeLearner/ManualControlLifetime.ru.md"
+  ],
+  "pulse_actual_diff": {
+    "relative_path": "ColdEnvelopeLifetimePairActualPulseDiff-20261109.patch",
+    "bytes": 15172,
+    "sha256": "f38b571a3b527bb99f4b86fcb0860848ae28d3df69415cc954461097dcc8a56c",
+    "byte_identical_to_original_b287_to800_diff": true
+  },
+  "code_paths": [
+    {
+      "path": "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
+      "corrected": {
+        "bytes": 60871,
+        "sha256": "0beb1ee8ce8719ac5ed652cac6f89ff28801bea4dad36c34d18ad8da6afdc967"
+      },
+      "unfixed": {
+        "bytes": 59864,
+        "sha256": "f63cd74247fbb742d961aab38510b66aed9a84601c1a22172176af2ea594dd09"
+      },
+      "original800": {
+        "bytes": 59864,
+        "sha256": "f63cd74247fbb742d961aab38510b66aed9a84601c1a22172176af2ea594dd09"
+      },
+      "unfixed_equals_original800": true
+    },
+    {
+      "path": "Core/TimeLearner/NativeTrainingService.cpp",
+      "corrected": {
+        "bytes": 33113,
+        "sha256": "59080d856daa06fb93f64047da22e4585abccf42803df615167e32b4ba08166d"
+      },
+      "unfixed": {
+        "bytes": 33037,
+        "sha256": "9419a31f417f8ffc012b2a16b0d3c9a865ca2ba7eb27d9ba8d2000052a28e7cd"
+      },
+      "original800": {
+        "bytes": 33037,
+        "sha256": "9419a31f417f8ffc012b2a16b0d3c9a865ca2ba7eb27d9ba8d2000052a28e7cd"
+      },
+      "unfixed_equals_original800": true
+    },
+    {
+      "path": "Core/TimeLearner/NativeTrainingService.h",
+      "corrected": {
+        "bytes": 15077,
+        "sha256": "30e8fa746269ab4a3fe1b4a21ce05590d828bd9fabe337cb38e6f061e1425027"
+      },
+      "unfixed": {
+        "bytes": 14642,
+        "sha256": "ce4c19d502161041a05166c2f3494f63a78245fb800f67954cdd811c80c7b4ec"
+      },
+      "original800": {
+        "bytes": 14642,
+        "sha256": "ce4c19d502161041a05166c2f3494f63a78245fb800f67954cdd811c80c7b4ec"
+      },
+      "unfixed_equals_original800": true
+    },
+    {
+      "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+      "corrected": {
+        "bytes": 49381,
+        "sha256": "c118cabda271f3a718ae68ad9e428dd0a17eb87e9baec1e3159eaeb785b477af"
+      },
+      "unfixed": {
+        "bytes": 49229,
+        "sha256": "6ff701e5a0b5e2f3a2ba661d86ff14a77208efd165f161df2a0f80c48512106f"
+      },
+      "original800": {
+        "bytes": 49229,
+        "sha256": "6ff701e5a0b5e2f3a2ba661d86ff14a77208efd165f161df2a0f80c48512106f"
+      },
+      "unfixed_equals_original800": true
+    }
+  ],
+  "corrected_only_pulse_doc": {
+    "path": "Docs/TimeLearner/ManualControlLifetime.ru.md",
+    "bytes": 5133,
+    "sha256": "f9d80c0259fec3e7250eaaef93ed9d3e149545c2aace605e96809ef34a56db50",
+    "absent_in_unfixed_and_original800": true
+  },
+  "shared_sources": [
+    {
+      "repository": "Pulse",
+      "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+      "bytes": 36949,
+      "sha256": "5f3932c996893c4fa09129738d0105912a58f42460b917b663386ddafaed48bf",
+      "equal": true
+    },
+    {
+      "repository": "Root",
+      "path": "App/NeuroModelerConsole/TimeLearnerCompositeArtifacts.h",
+      "bytes": 3533,
+      "sha256": "2cfa56bd9f4b3bc08e1f4c0384efca6b3ab1558abd9b8ca698946fb7059e8b1c",
+      "equal": true
+    },
+    {
+      "repository": "Root",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 298404,
+      "sha256": "e6fe87eee761da802d63a7cddbeea61c9688e326a2115bf3b6cced3aca3ade31",
+      "literal_TEST_count": 342,
+      "equal": true
+    }
+  ],
+  "codec_ids": [
+    "NativeCompositeDeclarations/ClassicCold6AndProtocol4StrictRoundtrip",
+    "NativeCompositeDeclarations/BranchCold6AndProtocol4StrictRoundtrip",
+    "NativeCompositeDeclarations/ClassicCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCompositeDeclarations/BranchCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCompositeConsoleArtifacts/PreflightKnownZeroAccounting",
+    "NativeCompositeConsoleArtifacts/FailedStartNeverInventsArchiveAccounting",
+    "NativeCompositeConsoleArtifacts/BaseSchemasKeepOwningNumericTypeAndAllFieldsThroughBytes",
+    "NativeCandidateWindowCold7/ClassicAllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCandidateWindowCold7/BranchAllBaseSchemasKeepNumericTypeThroughSerializedBytes"
+  ],
+  "original_forensic_manual_ids": [
+    "NativeCandidateWindowManualAuthority/ClassicForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority/BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority/ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable",
+    "NativeCandidateWindowManualAuthority/BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable"
+  ],
+  "all20_lifetime_tests_present_in_both_TUs": true,
+  "full_R20_unfixed_must_not_be_dispatched_or_promised_pass": true,
+  "original_evidence_and_E11_BB1_unchanged": true,
+  "common_cold6_cold7_execution3_owning_value_and_codec_tests_equal": true,
+  "decoder_physics_model_math_tolerances_changed": false,
+  "local_build_unit_numeric_server_cache_changes": false,
+  "runtime_gates_not_accepted": true,
+  "strengthened_cold7_initial_ids": [
+    "NativeCandidateWindowCold7/ClassicInitialDeclarationUsesActualParametersRatherThanTemplate",
+    "NativeCandidateWindowCold7/BranchInitialDeclarationUsesActualParametersRatherThanTemplate"
+  ],
+  "source_inventory_is_not_compiled_inventory": true,
+  "root_common_review_layer": "doc-only normal commit on corrected, ordinary no-ff merge into unfixed; root source tree delta must remain only Pulse gitlink"
+}

@@ -35,7 +35,8 @@ def inventory(folder):
 def prepare(repository, output):
     """Restore the exact Git primaries and preregister all four cold jobs."""
     def blob(name):
-        return subprocess.check_output(['git', '-C', str(repository), 'show', BASELINE+':'+BASELINE_PATH+name])
+        from .history import read_bytes
+        return read_bytes(repository, BASELINE, BASELINE_PATH+name)
     sums = json.loads(blob('SHA256SUMS.json'))
     raw, manifest_raw = blob('primary.tar.xz'), blob('manifest.json')
     require(hashlib.sha256(raw).hexdigest() == sums['primary.tar.xz'] and

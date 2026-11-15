@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-recorded-n4-independent5-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 32,
+    "maximum_wall_seconds": 7200
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 2147483648
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-recorded-n4-reader5-a2",
+      "commit": "b9967e73d0faaf50d848018be926f1d67b75b7c0"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-n4-independent5-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedN4RoundtripIndependent5A2-20261112/suite.json",
+      "sha256": "6f1414995144d10dd6f14c31f2f53d1ee2b6206952504f265e1e7a2b19eb03ec"
+    },
+    "fixtures": {
+      "TIMELEARNER_RECORDED_N4_ROUNDTRIP_BUNDLE": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-roundtrip-m40-a1/Reports/StructTrain/TimeLearner/RecordedN4RoundtripPrimary-M40-20261112"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 268435456,
+      "maximum_total_bytes": 536870912
+    }
+  }
+}

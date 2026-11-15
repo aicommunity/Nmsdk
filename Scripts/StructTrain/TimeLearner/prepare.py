@@ -63,7 +63,9 @@ def _prepare_matrix(specification):
                 c["maximum_reference_probes"] = max(c["maximum_reference_probes"], 2*inputs)
                 c["run_id"] = specification["run_prefix"]+"/"+name
                 if normalization == "N0":
-                    c["schema_version"] = 2;c["search"]["n0_candidate_repeats"] = repeats
+                    if c["schema_version"] not in (3, 4):
+                        c["schema_version"] = 2
+                    c["search"]["n0_candidate_repeats"] = repeats
                 job = _signed({k: v for k, v in job.items() if k != "sha256"})
                 validate_job("train", job);jobs[name] = job
     return jobs

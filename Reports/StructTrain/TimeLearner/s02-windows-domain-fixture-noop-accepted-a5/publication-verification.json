@@ -1,0 +1,135 @@
+{
+  "kind": "windows_existing_build_accepted_warm_diagnostic",
+  "root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "terminal": {
+    "passed": true,
+    "attempt_kind": "bounded_existing_build_diagnostic",
+    "build_execution_accepted": true,
+    "execution": "completed",
+    "compile_or_link_observed": false,
+    "runtime_inventories_unchanged": {
+      "runtime-a6": true,
+      "runtime-windows-assigned-sdk-a1": true,
+      "runtime-fixture-identity-windows-a2": true
+    },
+    "no_op_established": true,
+    "native_tests_started": 0,
+    "scientific_worker_admitted": false,
+    "prior_failed_attempt_reclassified": false,
+    "whole_plan_complete": false,
+    "scientific_verdict": null
+  },
+  "process": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "not_requested",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 12,
+    "wall_seconds": 4.624626299366355,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-442368df-87ba-4529-983a-080853bab767"
+  },
+  "kernel_job_state": "absent",
+  "source_closure_unchanged": true,
+  "runtime_inventory_unchanged": true,
+  "remaining_descendant_identities": [],
+  "historical_a2_pid9556_identity": "unknown_not_retroactively_inferred",
+  "environment_profile": {
+    "kind": "windows_private_build_environment_profile",
+    "only_operational_change_from_a3": false,
+    "operational_changes_from_a3": [
+      "owned_cmd VSCMD_SKIP_SENDTELEMETRY=1",
+      "memory budget 4GiB to 256MiB for warm/no-op diagnostic only"
+    ],
+    "memory_budget_bytes": 268435456,
+    "a3_measured_peak_job_memory_bytes": 99479552,
+    "budget_rationale": "bounded warm/no-op diagnostic; not full build or native gates; backend reserve remains 256MiB",
+    "environment_delta": {
+      "VSCMD_SKIP_SENDTELEMETRY": {
+        "parent_value": null,
+        "owned_cmd_value": "1"
+      }
+    },
+    "scope": "SETLOCAL batch assignment before vcvars64; no registry or global settings",
+    "installed_vsdevcmd": {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\VsDevCmd.bat",
+      "sha256": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+      "size": 11526
+    },
+    "installed_guard_excerpt": [
+      {
+        "line": 248,
+        "text": ""
+      },
+      {
+        "line": 249,
+        "text": "@REM Send Telemetry if user's VS is opted-in"
+      },
+      {
+        "line": 250,
+        "text": "if \"%VSCMD_SKIP_SENDTELEMETRY%\"==\"\" ("
+      },
+      {
+        "line": 251,
+        "text": "    if \"%VSCMD_DEBUG%\" NEQ \"\" ("
+      },
+      {
+        "line": 252,
+        "text": "        @echo [DEBUG:%~nx0] Sending telemetry"
+      },
+      {
+        "line": 253,
+        "text": "        powershell.exe -NoProfile -Command \"& {Import-Module '%~dp0\\Microsoft.VisualStudio.DevShell.dll'; Send-VsDevShellTelemetry -NewInstanceType Cmd;}\""
+      },
+      {
+        "line": 254,
+        "text": "    ) else ("
+      },
+      {
+        "line": 255,
+        "text": "        START \"\" /B powershell.exe -NoProfile -Command \"& {if($PSVersionTable.PSVersion.Major -ge 3){Import-Module '%~dp0\\Microsoft.VisualStudio.DevShell.dll'; Send-VsDevShellTelemetry -NewInstanceType Cmd; }}\" > NUL"
+      },
+      {
+        "line": 256,
+        "text": "    )"
+      },
+      {
+        "line": 257,
+        "text": ")"
+      },
+      {
+        "line": 258,
+        "text": ""
+      },
+      {
+        "line": 259,
+        "text": "@REM Script clean-up of environment variables used to track"
+      }
+    ],
+    "vcvars64": {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat",
+      "sha256": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209",
+      "size": 39
+    },
+    "backend_unchanged": true,
+    "a3_descendant_causal_identity_established": false
+  },
+  "warm_noop_memory_bytes": 268435456,
+  "full_build_4GiB_execution_accepted": false,
+  "strict_single_factor_causality_claimed": false,
+  "native_tests_started": 0,
+  "numerical_tests_executed_locally": false,
+  "scientific_worker_admitted": false,
+  "prior_failed_attempts_reclassified": false,
+  "whole_plan_complete": false
+}

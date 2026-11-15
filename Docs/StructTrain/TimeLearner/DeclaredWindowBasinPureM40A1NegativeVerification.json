@@ -1,0 +1,44 @@
+{
+  "kind": "independent_declared_basin_negative_pure_gate_metadata_verification",
+  "schema_version": 1,
+  "evidence_commit": "284879d5a7887198eebb4a53a15fa9d48399642b",
+  "parent_root": "236f1acbe978e645774cd96b10503bbe0d56fbd9",
+  "pulse": "fce3cdf01db0c883b7f3b03045094f2580f9e981",
+  "archive_members_verified": 199,
+  "archive_bytes": 486028,
+  "archive_sha256": "f1e8827e0ac5ac55b70b48eecf3a9dfc9c67b975a2fd554182b4bf402f75bb8a",
+  "modes": {
+    "normal": {
+      "observed": 35,
+      "passed": 34,
+      "failed": 1,
+      "failing_test_id": "DeclaredWindowBasinAssignment/ControlPlateauCrossingMeasuredValleyBoundaryIsUnknown"
+    },
+    "asan": {
+      "observed": 35,
+      "passed": 34,
+      "failed": 1,
+      "failing_test_id": "DeclaredWindowBasinAssignment/ControlPlateauCrossingMeasuredValleyBoundaryIsUnknown"
+    }
+  },
+  "source_files_git_hash_verified": 9,
+  "tool_python_git_hashes_verified": 411,
+  "actual_loaded_file_inventory_entries": 23,
+  "original_failures_retained": true,
+  "new_cpp_or_numeric_execution_during_collection": false,
+  "postclosure_snapshots_separate_from_missing_original_after_snapshots": true,
+  "owned_process_groups_closed": 5,
+  "outer_units_absent_and_leases_released": 3,
+  "failed_leaf_units_retained_with_zero_pid_and_absent_kernel_groups": 2,
+  "fixture_source_review_not_runtime_reclassification": true,
+  "unused_gitlinks_metadata_only": 6,
+  "four_production_translation_units_verified_per_mode": true,
+  "production_root_cmake_integration_accepted": false,
+  "sdk_source_payload_or_build_validated": false,
+  "native_context_validated": false,
+  "training_certificate_eligible": false,
+  "local_numeric_tests_executed": false,
+  "pack_sha256": "71dc1066fc656ff61cf3f2600a2e0dd050ac80f79ec0bde1fbccd40c5d9a1f30",
+  "git_import": "unpack-objects_no_checkout_no_refs",
+  "whole_plan_complete": false
+}

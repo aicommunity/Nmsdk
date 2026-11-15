@@ -1,0 +1,148 @@
+{
+  "kind": "matched_codec_recovery_publication",
+  "schema_version": 1,
+  "facts": {
+    "kind": "closed_numeric_pass_orchestrator_assertion_failure",
+    "schema_version": 1,
+    "root": "82de17c7578f2b80765343980c0fc23d0d3fe490",
+    "pulse": "e2c6311c0cdd219e3a52c278ce637bd777584dc6",
+    "worker": "m40",
+    "capture_phase": "postclosure_recovery",
+    "original_terminal_matched_codec_gate_passed": false,
+    "original_orchestrator_success": false,
+    "original_failure_preserved": true,
+    "manifest_fingerprint_scope": "prelaunch_snapshot_with_null_loaded_process_files_actual_loaded_files_audited_separately",
+    "recovery_collector_attempt": "observer-a3",
+    "original_native_needs_review_statuses_preserved": 10,
+    "original_native_runtime_notice_stderr_lines": 20,
+    "original_assertion_variable_shadowing_proven_by_producer": true,
+    "new_build_or_model_run": false,
+    "native_gates_passed": 14,
+    "native_cpp_assertions_passed": 77,
+    "python_tests_passed_original_server": 40,
+    "independent_portable_readers_original_server": 6,
+    "independent_fixture_readers_original_server": 10,
+    "original_native_csv_byte_equal": 28,
+    "current_runtime_before_after_postclosure_equal": true,
+    "old_runtime_before_after_postclosure_equal": true,
+    "resource_before_after_postclosure_equal": true,
+    "unique_actual_loaded_files_hash_verified": 75,
+    "materialized_resource_files_hash_verified": 0,
+    "fixture_source_hashes_postclosure": 26,
+    "tool_python_source_hashes_postclosure": 411,
+    "cmakecache_capture_phase": "postclosure_only_not_original_snapshot",
+    "asan_options": "detect_leaks=0",
+    "leak_check_claimed": false,
+    "native_training_service_integration": false,
+    "training_certificate_eligible": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "created_utc": "2026-11-08T07:35:02.848412+00:00"
+  },
+  "original_output_unchanged_before_after_archive": true,
+  "original_controller_unchanged_before_after_archive": true,
+  "fresh_closure_after_archive": {
+    "job": "s07-matched-codec-m40-a1",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "1ccd0da9c2b19df9d40cb8f789972b5d815c61be3845a5c27d19619d8bcf95d5",
+        "unit": "timelearner-a382f102-54df-400c-a757-176718c0f646.service",
+        "invocation_id": "7bbcdea6ae624f1fb0bae0dd7d8b353d",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a382f102-54df-400c-a757-176718c0f646.service",
+        "initial_main_pid": 2484507,
+        "initial_start_ticks": "319529446",
+        "sha256": "bd9259f93777c0ac332f811bde2641720ee9f2e0057415a513e26b0f0d4e668a"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-a382f102-54df-400c-a757-176718c0f646.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "leases": [
+      {
+        "token": "94563f59-4d56-4b71-b8f1-c9cfd2639c24",
+        "job_id": "s07-matched-codec-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 2484507,
+          "start_ticks": "319529446",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-matched-codec-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-matched-codec-m40-a1"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-matched-codec-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-matched-codec-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-matched-omission-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-matched-omission-m40-a1"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-matched-codec-pulse-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-matched-codec-pulse-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-matched-codec-root-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-matched-codec-root-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-response-features-rdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-response-features-rdk-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1794120097.0108013,
+        "deadline": 1794120837.5751526,
+        "updated": 1794120725.3613787,
+        "release_note": "Analysis worker closed; scientific outcome remains separate.",
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      }
+    ]
+  },
+  "compression_dictionary_bytes": 33554432,
+  "archive_members": 525
+}

@@ -1,6 +1,7 @@
 # Published experiment evidence must retain its exact bytes across platforms.
 # SHA256SUMS describe the original files, including their line endings.
 /Reports/StructTrain/TimeLearner/** -text
+/Tests/Integration/Data/NativeWindowPackage6Classic/*.qz -text
 # Source-catalog digests and their analyzer use the same bytes on Windows/Linux.
 /Docs/StructTrain/TimeLearner/PropertySourceDrift*.json text eol=lf
 /Scripts/StructTrain/TimeLearner/property_drift.py text eol=lf

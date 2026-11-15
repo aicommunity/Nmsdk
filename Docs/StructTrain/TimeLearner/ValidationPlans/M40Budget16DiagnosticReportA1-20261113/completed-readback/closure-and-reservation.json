@@ -1,0 +1,101 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "a91ebed646b406128d641e99182db0d4bca5896081050876612b7d1ff1242154",
+      "unit": "timelearner-fbbab694-4826-477e-95be-252225aaf2b7.service",
+      "invocation_id": "ae5e38ca818c41f88c4bebd91a974670",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fbbab694-4826-477e-95be-252225aaf2b7.service",
+      "initial_main_pid": 2573247,
+      "initial_start_ticks": "361032466",
+      "sha256": "1e896cb0a69357bcd9b212430cfcc16d713fa9100e5b73674ec06609c3d97366"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-fbbab694-4826-477e-95be-252225aaf2b7.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "9c98db13-ea5d-4f08-b725-3cc8b62eabf5",
+      "job_id": "s11-budget16-diagnostic-report-m40-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python",
+        "pid": 2573247,
+        "start_ticks": "361032466",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/data-sdk-budget16-diagnostic-inputs-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/data-sdk-budget16-diagnostic-inputs-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-diagnostic-report-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-diagnostic-report-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-frozen-diagnostic8-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-frozen-diagnostic8-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-frozen-diagnostic8-m40-a1-controller",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-frozen-diagnostic8-m40-a1-controller"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/budget16-diagnostic-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Budget16DiagnosticReportA1-20261113",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/budget16-diagnostic-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Budget16DiagnosticReportA1-20261113"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/budget16-diagnostic-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Budget16DiagnosticReportA1-20261113/expectations",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/budget16-diagnostic-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Budget16DiagnosticReportA1-20261113/expectations"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-content-reference-primary-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-content-reference-primary-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-declared-diagnostic-report-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-declared-diagnostic-report-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794535127.1828277,
+      "deadline": 1794537888.5187957,
+      "updated": 1794537772.1585112,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

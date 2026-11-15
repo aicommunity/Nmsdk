@@ -1,0 +1,137 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 2,
+  "execution": "timeout",
+  "reason": "wall_budget_exhausted",
+  "returncode": null,
+  "wall_seconds": 2100.362201920245,
+  "model_time": null,
+  "runtime_provenance": "incomplete_loaded_files",
+  "mapping_error": "cooperative_capture_not_ready",
+  "runtime_fingerprint": "4eb31d7e0935829218532f9119596c95475cadadefd7393e27c0e06a3fd39f64",
+  "ownership_scope": "bound_cgroup",
+  "all_processes_closed": true,
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "needs_review",
+    "error_records": 0,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 19,
+    "reasons": [],
+    "examples": [
+      {
+        "stream": "stderr.log",
+        "chunk": 1,
+        "severity": "unclassified",
+        "excerpt": "*** Aborted at 1794496248 (unix time) try \"date -d @1794496248\" if you are using GNU date ***"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 2,
+        "severity": "unclassified",
+        "excerpt": "PC: @                0x0 (unknown)"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 3,
+        "severity": "unclassified",
+        "excerpt": "*** SIGTERM (@0x3e800000d3d) received by PID 1004994 (TID 0x731d26039fc0) from PID 3389; stack trace: ***"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 4,
+        "severity": "unclassified",
+        "excerpt": "    @     0x731d26b73206 (unknown)"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 5,
+        "severity": "unclassified",
+        "excerpt": "    @     0x731d25e45330 (unknown)"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 6,
+        "severity": "unclassified",
+        "excerpt": "    @     0x731d267ee084 (unknown)"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 7,
+        "severity": "unclassified",
+        "excerpt": "    @     0x731d267ee1c4 QtPrivate::isAscii()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 8,
+        "severity": "unclassified",
+        "excerpt": "    @     0x731d267a4474 QCborValue::QCborValue()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 9,
+        "severity": "unclassified",
+        "excerpt": "    @     0x63a877d9ec2f NMSDK::TimeLearner::EncodeAndValidateNativeCandidateWindowServiceArchive()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 10,
+        "severity": "unclassified",
+        "excerpt": "    @     0x63a8780acbc9 NMSDK::TimeLearner::(anonymous namespace)::CompositeSummary<>()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 11,
+        "severity": "unclassified",
+        "excerpt": "    @     0x63a8780add38 NMSDK::TimeLearner::EncodeNativeCandidateWindowRecoveryTrainingState()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 12,
+        "severity": "unclassified",
+        "excerpt": "    @     0x63a877e97a34 NMSDK::TimeLearner::EncodeNativeTrainingState()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 13,
+        "severity": "unclassified",
+        "excerpt": "    @     0x63a8774b1718 _ZZN12_GLOBAL__N_17ExecuteIN5NMSDK18NNeuronTimeLearnerEEEiRKNS_3JobERK7QStringbENKUlT_T0_T1_T2_E_clIN3RDK5UEPtrINSF_8UStorageEEENSG_INSF_12UEnvironmentEEENSG_INSF_10UContainerEEENSG_IS2_EEEEDaS9_SA_SB_SC_.isra.0"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 14,
+        "severity": "unclassified",
+        "excerpt": "    @     0x63a8774b2f4b (anonymous namespace)::Execute<>()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 15,
+        "severity": "unclassified",
+        "excerpt": "    @     0x63a8774b77f5 RunTimeLearnerTrainingJob()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 16,
+        "severity": "unclassified",
+        "excerpt": "    @     0x63a877479111 main"
+      }
+    ],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 1284,
+        "sha256": "514acda9cf35bdc2ae18387676179e63b4c82d4c120fb6a3595fc0f9e9bbc007"
+      }
+    ],
+    "contained_streams_match": true,
+    "scientific_verdict": null
+  }
+}

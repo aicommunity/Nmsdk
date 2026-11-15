@@ -1,0 +1,38 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s03-l22-recorded-reports-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 8589934592,
+    "maximum_output_bytes": 536870912
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-l22-report-plot-a1",
+      "commit": "5b55f3551bed38c916bfb1876e70f1fba2900751"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/l22-recorded-reports-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40L22RecordedReportsA1-20261113/suite.json",
+      "sha256": "c230d35098f2ef142640a6b2e41fdb127aa14ee4e014942313e35066cd41b7ff"
+    },
+    "fixtures": {
+      "TIMELEARNER_L22_TRAIN_NATIVE": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-publication-receipt-budget16-train-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native",
+      "TIMELEARNER_L22_TRAIN_CSV": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-publication-receipt-budget16-train-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native",
+      "TIMELEARNER_L22_COMPLETED_GRID": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-l22-burst-resistance-study-m40-a1/worker/tmp/l22-burst-resistance-study",
+      "TIMELEARNER_L22_COMPLETED_GRID_CSV": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-l22-burst-resistance-study-m40-a1/worker/tmp/l22-burst-resistance-study"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 12884901888
+    }
+  }
+}

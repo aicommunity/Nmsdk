@@ -1,97 +1,68 @@
-# Готовность к научным экспериментам — 06.11.2026
+> 15.11.2026: [Branch N0 measured-length search](N0BranchLengthScientificReport-20261115.ru.md) принят адресно (kernel6/6 на M40/Elder, native SDK105/105). Первый timing-ready кандидат25→7, но лучший amplitude residual прежний4.53× tolerance; Train не сошёлся. Все32 frozen native probes двух остановленных моделей выполнены: при100 молчание, при0.0117 TP1/FP7/FN0/TN0 и ранние target spikes у обеих; исправлена ошибка вложенного source_solo в Python-оболочке, read-only перепроверка завершена1/1, построен [полный отчёт32 проб](N0BranchLengthFrozenReport-20261115.json) с1995 оригинальными PNG и native zoom. [Читаемые positive/LT масштабы](N0BranchLengthPositiveReport-20261115.json) для всех16 низкопороговых проб также завершены1/1; просмотрены8 выбранных дополнительных изображений. Исходные ошибочные wrapper receipts сохранены. [Exploratory local-budget12](N0LocalBudget12ScientificReport-20261115.ru.md) завершён1/1/DATA/physical: после свежего inexact best действительно запрошен input1, но L28..32 ambiguous; certificate=null. Его12 графиков построены,3 overview просмотрены. Все primary и полные галереи вне Git на M40; [проверяемые refs](N0BranchLengthFrozenPrimary-20261115.json). Это уточнение этапов7/11, а не полная приёмка этапов1–12.
 
-Сквозной процесс cold Train → boundary continuation → полный model export →
-измеренная калибровка с confirmation → frozen evaluation уже выполняется на
-реальных компонентах Classic/Branch. **Итоговая научная матрица ещё не готова.**
-Проверенные N2 LT engineering cases не заменяют штатную четырёхвходовую модель,
-исторические8 паттернов или независимую оценку. Текущий статус всех этапов и
-разделение develop/кандидата находятся в [единой сводке](ImplementationStatus.ru.md).
+> Политика хранения пересмотрена 14.11.2026: primary bundles и полные галереи
+> сохраняются во внешнем общем архиве M40. В Git — metadata и проверенные
+> `*.archive.json` ссылки. [Доступ и восстановление](ExternalExperimentArchive.ru.md).
+> Origin и все явно учтённые копии очищены и проверены. Последний ненужный временный каталог удалён пользователем, отсутствие проверено; техническая миграция завершена; [отчёт](RootHistoryCleanup-2026-11-15.ru.md). Техническая миграция не означает научную приёмку.
 
-## Обязательные условия ограниченной серии
+# Научные результаты TimeLearner и готовность — 15.11.2026
 
-| Условие | Есть | Осталось для допуска целевого научного задания |
+[Весь новый Classic cold4 primary независимо восстановлен и проанализирован на Elder](ValidationPlans/ElderClassicCold4PrimaryReplayA2-20261114/RESULT.ru.md):1/1 PASS,910 logical members, corrupted-extracted-CSV refusal.14 measured candidates/0 jointly-ready и invalid_observation сохранены; нового нейронного исполнения нет.
+
+[Отдельный N0-контроль](StockNormalizationControl.ru.md):11/11 declaration regressions приняты на M40 и Elder; оба native cold preflight Classic/Branch приняты1/1 на прежнем SDK. [Classic N0 завершён, полный DATA/physical1/1 принят](ValidationPlans/M40StockN0ClassicTrainA1-20261114/RESULT.ru.md):13 measured candidates/0 timing-ready, invalid_observation/ambiguous; Ns>1 не применён, certificate=null. [Branch N0 завершён, полный аудит1/1 принят](ValidationPlans/M40StockN0BranchTrainA1-20261114/RESULT.ru.md):budget_exhausted,42 candidates/9 timing-ready/0 jointly-ready, Ns1..5 измерены. Оба полных primary собраны (28.456/38.090MB), собственные графики ожидаются. [Classic fixed100 frozen8 завершён](ValidationPlans/M40StockN0ClassicFrozenA1-20261114/RESULT.ru.md): TP0/FP0/FN1/TN7, все8 complete/valid, модель неизменна; [собственный32-pair report готов](ClassicN0FrozenScientificReport-20261114.ru.md),11 выбранных оригинальных PNG просмотрены. Полный compact frozen primary сохранён через ссылки на архив M40; [Branch frozen8 завершён](ValidationPlans/M40StockN0BranchFrozenA1-20261114/RESULT.ru.md): TP0/FP0/FN1/TN7, модель/source graph неизменны; [собственный отчёт готов](BranchN0FrozenScientificReport-20261114.ru.md), все8 overview просмотрены; [ограничение N0 search gate подтверждено](N0GeometryNormalizationReview-20261114.ru.md), кандидат C++ исправления реализован (Pulse58c6e6d51c749a13a79498a681e14ea2fe353ed7), [Elder same-corpus kernel A4 принят](ValidationPlans/ElderN0GeometryABA4-20261114/RESULT.ru.md): baseline5 ожидаемых failures/candidate6/6 PASS, [независимый M40 kernel принят](ValidationPlans/M40N0GeometryABA1-20261114/RESULT.ru.md) с тем же исходом; [native SDK99/99 принят](ValidationPlans/M40N0GeometrySdkA1-20261114/RESULT.ru.md); [Matched-current-OS physical A/B A2 завершён](N0GeometryPhysicalScientificReport-20261114.ru.md): оба production1/1 приняты, оба native Train budget_exhausted,0 jointly-ready. Первые31 измеренных кандидата совпали; after исследует новые Ns и уменьшает лучший timing-ready amplitude residual примерно6.80×, но он всё ещё4.53× выше допуска. [Реальный Classic N0 fixed-threshold опыт завершён](ClassicN0ThresholdScientificReport-20261114.ru.md):TP1/FP4/FN0/TN3, target0.503с после последнего входа0.49с; stopped-model Same-Matrix, не завершённое обучение. [Его отчёт с графиками всех8 паттернов готов](ClassicN0ThresholdScientificReport-20261114.ru.md):27 исходных PNG,11 Soma positive-Y details и8 исправленных LT companions A2 просмотрены; [A2 принят1/1](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/RESULT.ru.md). [Собственные A/B Train waveforms также готовы](ValidationPlans/M40N0GeometryTrainingReportA1-20261114/RESULT.ru.md). Вся матрица не принята.
+
+Современные реальные эксперименты уже выполнены и опубликованы с первичными данными. Успешное завершение обучения и надёжная классификация завершённого паттерна на современных моделях пока не подтверждены. Исторические визуальные4/8–6/8 сохраняют силу для своего исходного протокола. Полный план остаётся активным: полностью принят этап0, этапы1–12 частичны.
+
+## Что уже можно читать
+
+| Отчёт | Основной результат | Что нельзя из него заключать |
 |---|---|---|
-|Неизменяемый runtime|Раздельные сборки, manifests, actual loaded files/process identities и Git source closure|Принять используемый общий SDK срез; зафиксировать точные code/profile/binary/data hashes именно задания|
-|Эффективная физическая модель|Native storage construction, graph readback, полный state transport проверены адресно|Выбрать проверенный профиль, подтвердить дочернюю физику/частоту/связи; не считать parent defaults описанием всего дерева|
-|Обучение|Native measured search и completed/stopped outcomes существуют|Получить валидный результат целевого cold Train либо честный unresolved/budget outcome; исправить/исследовать stock burst ambiguity без вымышленных пиков|
-|Реальный перенос Train→Test|Экспорт, native import и frozen owner работают в проверенных путях|Сверить полный semantic model fingerprint; после неудачного Train/переноса не оценивать шаблонный Test как обученный|
-|Порог|Fixed и measured calibration/confirmation проверены|Явно выбрать Same-Matrix или независимый протокол; любой выбранный порог проверить реальным spiking run|
-|Полные наблюдения|Строгие trial/sample IDs, labels/pattern hashes, clocks, windows, spikes и arbitrary-N soma traces|Подтвердить expected set и полные окна каждой объявленной пробы выбранного протокола; отсутствие данных не означает молчания|
-|Оценка|Есть versioned scorer и реальные frozen controls|Зафиксировать модель/порог до независимого Test; отделить TP/FP/FN/timing/morphology/robustness от выполнения и сходимости|
-|Управление запуском|Public CLI/coordinator, owned cancellation, leases и Git publisher применяются в адресных gates|Preflight выбранных факторов и возможностей, ресурсный бюджет/диск, все primary/model/metric артефакты и проверенная публикация|
-|Визуальный отчёт|Production renderer строит все recorded patterns/somas с actual input overlays|Включить в отчёт каждого нового научного задания overview, читаемые zoom/local-Y и visual QA; графики не заменяют scorer|
+|[Classic N0:64 frozen order probes](ClassicN0OrderScientificReport-20261114.ru.md)|Восемь cyclic rotations,64 valid observations; по каждому pattern класс ответа одинаков на всех позициях. TP8/FP32/FN0/TN24, target13мс после последнего input. First8 и frozen model exact;1/1 PASS.|Stopped model, тот же Same-Matrix threshold,4/7FP в каждой матрице. Не новые независимые обучения/ITI/continuous/independent Test; Весь primary55.53MB опубликован; новый report готов,13 selected originals просмотрены.|
+|[Classic N0: actual fixed-threshold8](ClassicN0ThresholdScientificReport-20261114.ru.md)|TP1/FP4/FN0/TN3, target0.503с после последнего input0.49с. Baseline waveform точно равен; all16 observations valid.8 Soma/input figures и полные LT events доступны, whole primary83.918MB в архиве M40.|Stopped model,4/7FP, Same-Matrix; нет завершённого Train/independent evaluation. Дополнительные LT Y-detail исправлены в A2 и просмотрены; отрицательный reset доступен в полном диапазоне.|
+|[Branch N0: same-budget physical A/B](N0GeometryPhysicalScientificReport-20261114.ru.md)|31 общий measured candidate совпал. Исправление исследует новые Ns; лучший timing-ready amp residual уменьшается6.80×.6 waveform overviews с omission controls просмотрены, оба полных primary в архиве M40.|Оба Train budget_exhausted/0 jointly-ready, лучший остаток4.53× выше допуска. Классификация A/B не измерялась. [Оба назначенных пика увеличены до native samples](ValidationPlans/M40N0GeometryPeakFocusA1-20261114/RESULT.ru.md).|
+|[Classic coupled cold4: полный Train result](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md)|Completed/valid DATA,14 measured candidates,0 jointly-ready,5 ambiguous input0;42 полные группы/252 trials. Весь primary29.285MB в архиве M40; [отчёт с12 просмотренными overview готов](ClassicCoupledCold4ScientificReport-20261114.ru.md).|Training invalid_observation, certificate=null, классификация не оценивалась. Recovery4 не сравнивается как same-budget с прежним Classic recovery16.|
+|[Branch N1: локально выполнены оба допуска](N1CoupledScientificReport-20261113.ru.md)|Один реально измеренный input2 candidate timing+amplitude-ready; затем5 ambiguous rejections input1. Полный primary24.11MB и4 просмотренных temporal originals.|Общего сертификата/all-input verification нет; terminal vector отличается от локально успешного. Frozen8pattern diagnostic принят: TP0/FP0/FN1/TN7 при100, модель неизменна. [Fixed-threshold spiking опыт завершён](BranchCoupledThresholdScientificReport-20261114.ru.md): TP1/FP5/FN0/TN2; target до последнего входа. Все8 Soma overview и выбранные LT/zoom доступны,32 originals просмотрены.|
+|[Branch N1: измеренный интервал нормализации](N1LocalTurnScientificReport-20261113.ru.md)|Same-budget холодное обучение завершено completed/valid, но BudgetExhausted. На одной геометрии Rs86M/2.880071555M дают opposite amplitude residuals при timing-valid. Есть четыре просмотренных временных графика с полными пачками, actual inputs и omission controls.|Bracket не является сходимостью. Ни один consumed candidate не удовлетворяет обоим допускам; классификация не измерялась.|
+|[Classic: фактический fixed-threshold опыт на8 паттернах](ActualThresholdScientificReport-20261113.ru.md)|TP1/FP2/FN0/TN5 при заранее выбранном пороге0.013048873000159292. Реальные спайки и полные окна; report1/1, выбранные Soma/LT figures, полная32-soma/8-LT gallery.|Target event0.2645s раньше последнего входа0.49s. Partial6/8 Same-Matrix остановленной модели не является детекцией завершённого паттерна или независимым Test.|
+|[Branch: coherent shared-bank Rs intervention](BranchSharedBankScientificReport-20261113.ru.md)|Общий максимум Soma1 растёт примерно4.10× при86M→21.5M; replay/source/clocks/inputs проверены, три originals просмотрены.|Глобальный максимум не заменяет максимум закреплённого импульса. Assigned certificate/классификация не получены.|
+|[Classic budget16: все8 паттернов](Budget16DiagnosticScientificReport-20261113.ru.md)|32 pattern×soma пары,14 просмотренных originals. При фиксированном100 модель молчит.|Accuracy7/8 означает7 правильных молчаний foil при пропущенном target, а не рабочую детекцию.|
+|[Classic и Branch: современные диагностические ответы](RecordedN4DiagnosticScientificReport-20261112.ru.md)|16 completed/valid frozen observations,19 просмотренных PNG, независимый compact replay Elder.|Это остановленные модели другого снимка; нельзя смешивать их с последним Train или переносить успех выполнения на обучение.|
+|[L14→L15: переход assignment](L14L15AssignmentTransitionScientificReport-20261113.ru.md), [L22 Rs sweep](L22BurstResistanceScientificReport-20261113.ru.md)|Full/omission traces показывают4→3 вершины и потерю unique assignment. Изменение Rs усиливает сигнал без восстановления отдельной вершины на проверенных четырёх Rs.|Отсутствие уникального assignment не означает отсутствия влияния импульса. Переназначение глобального максимума не является исправлением.|
+|[Августовские cold Train→Test4/8–6/8](HistoricalAugustColdStart.ru.md)|Сохранены рабочие результаты исходного протокола с плохой разделимостью.|Порядок/ITI тогда не проверялись. Современные результаты их не отменяют.|
+|[Историческая frozen order/ITI matrix](HistoricalFrozenProtocolMatrixScientificReport-2026-11-07.ru.md)|Отдельно проверена зависимость одной сохранённой модели от протокола.|Это не универсальная устойчивость всех моделей и не новое независимое обучение.|
 
-Существуют команды корневого `python -m Scripts.StructTrain.TimeLearner`:
-inventory, preflight/prepare, train/export, calibrate/evaluate, analyze/report,
-pipeline, publish и history. Наличие команды не означает поддержки любого
-параметра или физического профиля. Для конкретного запуска использовать exact
-проверенный source snapshot и capability preflight. Native dataset/clock,
-whole graph/storage и параметрические ограничения проверяются до дорогого Train.
-Reserved/no-op поля нельзя использовать как действующие факторы эксперимента.
+Временные графики используют записанные мембранные потенциалы и фактические входные импульсы. Избранные originals сохраняются через ссылки на архив M40; полные воспроизводимые PNG/SVG/PDF galleries — кэш M40. Область ручного просмотра указана в каждом отчёте; наличие сгенерированной gallery не означает просмотра всех её картинок. Для нового Branch endpoint report обе полные группы содержат6 complete traces по3601 samples; его overview/detail имеют одинаковый диапазон0..1.8s и не выдаются за дополнительный zoom.
 
-Начальная научная серия должна явно ограничить поддерживаемую область:
-Classic/Branch, объявленные N0/N1/profiles и единая частота дерева. C-trim и
-PostTune можно оставить выключенными; базовый контур обязан честно завершаться
-без них. Включённую неподдерживаемую опцию нельзя молча игнорировать. Новая общая
-амплитудная цель, аксонные задержки и другая нелинейная физика не подменяют
-рефакторинг исходной задачи CapturedPerInput с опорным входомN−1.
+## Что выполняется сейчас
 
-## Что проверено и что это не доказывает
+[Контроль порядка64 с научным отчётом принят1/1](ClassicN0OrderScientificReport-20261114.ru.md):64 complete/valid, TP8/FP32/FN0/TN24. Каждый из8 паттернов сохранил класс ответа во всех8 позициях, target каждый раз ответил примерно через13мс после последнего input. Первые8 waveform точно воспроизведены, frozen model до/после побайтно равна исходной. Это та же stopped Classic N0 модель с прежним threshold,2с/reset-per-trial, без нового Train/порога; false responses по-прежнему4/7. Весь compact primary55.53MB опубликован; [новый temporal report принят1/1](ValidationPlans/M40ClassicN0OrderReportA2-20261114/RESULT.ru.md),13 выбранных originals просмотрены, target показан во всех8 позициях. ITI/continuous/independent Test не покрыты. A1/A2 неверный режим validation исправлен штатным controller-validation; оба отказы сохранены до native execution.
 
-Normal304 и адресные ASan8 SDK2e прошли. ASan133 A3 дал132 passed/1 output-directory
-assertion failure; runner исправлен и адресно проверен на прежних бинарниках.
-Полный свежий A5 выполняется отдельно: до его terminal/JUnit/closure нельзя
-объявлять общий SDK принятым. Старые положительные ASan304 относятся к другому
-SDK и не заменяют этот результат. Detect_leaks=0 не доказывает отсутствие утечек.
 
-Coordinator schema1/schema2 прошёл16/16 cases /40 native phases, попарные CSV
-совпали. ConditionSpec binding при этом декларативен; он не доказывает полную
-effective-factor attestation. Два engineering N2 LT случая TP2/FP0/FN0/TN2
-используют same-matrix calibration с одним повторяемым target и одним foil.
-Это более узкий набор, чем прежняя восьмипаттерновая N2 LT серия5/8 с FP3;
-её [измеренный результат](ScientificResults-2026-11-03.ru.md) сохраняется.
-Суффиксы ModelSpec1/2 не являются версиями
-контроллера или независимыми случайными репликами.
-[Исходники, результаты и графики](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/SharedControllerNovember6Status.ru.md).
+[Холодный Classic N4/N1 recovery4 завершён](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md): production1/1/DATA/physical audit приняты, native/outer закрыты.14 measured candidates,0 jointly-ready, затем5 ambiguous input0 на L54/52/50/48/45; certificate=null, классификация не оценивалась. Это не same-budget сравнение с прежним Classic recovery16. [Весь compact primary29.285MB сохранён в архиве M40](ValidationPlans/M40N1CoupledClassicPrimaryA1-20261114/RESULT.ru.md), [научный отчёт готов:12 просмотренных overview всех4 soma выбранных групп](ClassicCoupledCold4ScientificReport-20261114.ru.md); нового Train/Test/threshold tuning нет.
 
-На stock NSPNeuronGen без дополнительной LT membrane валидного завершённого
-обучения новой целевой серии пока нет. Missing/ambiguous peak, численная ошибка,
-неполное окно и отсутствие spike — разные причины. Предсказанное время прихода
-не может подтверждать отсутствующий измеренный пик. Не поднимать автоматически
-minimum amplitude/tolerances ради положительного verdict и не объявлять локальный
-stall доказательством физической невозможности.
+[Cold Branch N4/N1 coupled-search Train](N1CoupledScientificReport-20261113.ru.md) завершён: одна local-ready input2, затем invalid_observation/ambiguous input1. Production CLI/DATA1/1 и report1/1 приняты, общая сходимость не подтверждена. [Frozen8pattern diagnostic](ValidationPlans/M40N1CoupledFrozenA1-20261113/RESULT.ru.md) фактического terminal state принят1/1,8полных observations, модель неизменна. При100 все молчат. [Один Same-Matrix threshold проверен настоящими спайками](BranchCoupledThresholdScientificReport-20261114.ru.md): TP1/FP5/FN0/TN2, target на228ms раньше последнего input. Report1/1,32 selected originals просмотрены, primary69.875324MB сохранён.
 
-## Последовательность научных проверок
+[SDK A4 принята93/93](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md), native/outer groups закрыты. Source root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8; runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Положительный SDK verdict не является научной сходимостью и не закрывает полную physical matrix.
 
-1. Воспроизведение сохранённого августовского состояния в исходных порядке,
-   ITI, пороге, reset policy, timestep и физике. Неизвестную provenance помечать
-   явно; не достраивать certificate задним числом.
-2. Cold retrain в тех же условиях и legacy/V2 сравнение с исходной математической
-   целью. До интерпретации различий проверить effective graph/params и реальные
-   волны; совпадение L само по себе не доказывает эквивалентность алгоритмов.
-3. Frozen evaluation с target в каждой позиции, изменениями порядка и ITI.
-   Reset-per-trial и continuous stream проверять отдельно, с полными окнами,
-   неизменным learned-state hash и фиксированным порогом.
-4. Расширять профили, торможение, C-trim и все PostTune modes после адресной
-   приёмки соответствующих возможностей. Не смешивать новую физику с исправлением
-   реализации. Влияние LT устанавливать контролируемым A/B, а не сравнением
-   одновременно изменённых профилей.
+Новый опыт использует прежний native job SHA25693556039955e15a3de1ec88b55d546b2f54bb7e680deb3fc1e499799a524c55d, initial model и reference-origin bytes. Изменён порядок исследования L/Rs:bounded coupled-family length proposals, finite local normalization allowance и safeguarded measured log-secant. CapturedPerInput, fixed anchor и исходные tolerances/budgets сохранены. В совместном варианте measured joint-ready count вырос0→1; вклад отдельных изменений не изолирован.
 
-Августовские визуально подтверждённые4/8–6/8 сохраняются как рабочие результаты
-исходного протокола с плохой разделимостью. Перестановки и увеличенный ITI тогда
-не проверялись; результаты изменённого протокола не отменяют исходное наблюдение.
-Same-Matrix разрешён с явной маркировкой, но не выдаётся за независимый Test.
-Silent threshold не делает молчаливые target успешной детекцией. СерияD не
-возобновляется автоматически;8/8 не является условием завершения рефакторинга.
+Исходные SDK A1(91/93),A2(compile failure) иA3(canonical fresh-build refusal) сохранены отдельно. A4 использовала чистую сборку; guard не ослаблялся. Synthetic helper bound64 не меняет controller allowance<=12 или scientific budget. Отдельно объявленный threshold100 diagnostic нужен для измерения actual waveform/LT response нового изменённого terminal state, без completed-training или classifier PASS. Один заранее фиксированный Same-Matrix threshold уже проверен: TP1/FP5/FN0/TN2. Silent accuracy при100 не является успехом. Следующая задача — незавершённое обучение и fresh all-input verification, без повторного подбора порога по тем же результатам.
 
-Сборки, численные проверки и render выполняются на Elder/M40 через jump host.
-Синхронизация source/config/results — Git. В Git сохраняются сжатые primary,
-модели, метрики и выбранные PNG; полные воспроизводимые отчёты — кэш M40 Data.
-[Требования масштаба и visual QA](VisualTestReports.ru.md).
+## Что уже сохранено для повторного анализа
 
-Первая ограниченная серия не требует окончания всей исторической миграции
-скриптов и всех удобств очереди. Она требует доказанного сквозного процесса
-именно своего задания. Общая рекомендация ControllerVersion2 и завершение
-[исходного плана](RefactoringPlan.ru.md) требуют всей обязательной матрицы.
-Предыдущая накопительная постановка29.10 с поздними дополнениями сохранена в
-[Git](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/ExperimentReadiness.ru.md).
+[Новый coupled Branch Train24.11MB](ValidationPlans/M40N1CoupledPrimaryA1-20261113/RESULT.ru.md) сохраняет весь закрытый primary; [independent Elder restore/full-DATA replay1/1 принят](ValidationPlans/ElderCoupledTrainPrimaryReplayA1-20261114/RESULT.ru.md), исходные M40 paths отсутствуют, corrupt CSV отвергнут. [Предыдущий local-turn Branch Train44.21MB](ValidationPlans/M40N1LocalTurnPrimaryA1-20261113/RESULT.ru.md) содержит весь закрытый primary, включая незавершённую terminal group как незавершённую. Независимое восстановление именно этого нового пакета ещё ожидается. [Прежний Branch full-domain](ValidationPlans/M40BranchFullDomainPrimaryA1-20261113/RESULT.ru.md) имеет принятый независимый Elder restore/audit; [Branch Rs27.42MB](ValidationPlans/M40BranchSharedBankPrimaryReplayA1-20261113/RESULT.ru.md) — full restore/3 DATA audits; [threshold56.37MB](ValidationPlans/M40ThresholdPrimaryRecompressionA2-20261113/RESULT.ru.md) — byte-exact tar и full881-file production restore. [Индекс артефактов](../../../Reports/StructTrain/TimeLearner/README.md).
+
+Первичный acquisition threshold test остался FAILED на cleanup после валидных результатов; исправлениеa36d3db932f43394412df7581069a1d3c0a757bb и recovery lease не переименовывают исходный запуск в PASS. Scoped native diagnostic2/2 и DATA5/5 приняты, но общий10-case SDK cohort имеет8 upstream completed-training fixture failures; два воспроизведены на прежнем SDK Elder, остальные шесть baseline cases не перепроверены. Это отдельная область от77 старых bounded-controller checks и93 принятых A4 checks.
+
+## Что осталось до итогового научного сравнения
+
+- Frozen diagnostic и один объявленный spiking threshold завершены; результат отрицателен по разделимости. Исследовать неоднозначную раннюю вершину в обучении; получить fresh all-input verification до утверждения Exact. Не перебирать пороги заново по тому же Test.
+- Завершить legacy/V2 A/B и обязательную матрицу моделей, N0/N1, физики, частот, bounds/quantization, reset/inhibition/PostTune/calibration. Детальная карта каждого исходного этапа — [ImplementationStatus](ImplementationStatus.ru.md).
+- Зафиксировать модель и подтверждённый настоящим прогоном порог перед independent frozen Test. Same-Matrix оценивать отдельно; target в каждой позиции, order/ITI и reset-per-trial/continuous — отдельные протоколы. Partial observations не достраиваются до полной матрицы.
+- Закрыть оставшиеся требования этапов1–12 и children-first--no-ff merges в develop. Нет требования получить8/8 ради завершения рефакторинга; необходимы корректная реализация и проверка полного заявленного scope.
+
+При Train выбирается максимум закреплённого импульса: слившаяся неразличимая вершина неоднозначна; раздельная ранняя вершина с хвостовым влиянием допустима. При Test оценивается весь отклик, но event до последнего входа выделяется как ранний. Нельзя ослаблять критерий или повышать scientific budget ради PASS. SeriesD автоматически не возобновляется.
+
+При потере связи проверяется прежний kernel handle; timeout наблюдения не означает остановку и не разрешает перезапуск. Работающие source/runtime/output bindings не обновляются. Источники, конфиги и compact results передаются через Git.
+
+Предыдущая сводка доступна через ссылки на архив M40 commit87283983db82aa4df63306af5212a347076cc4f1 по тому же пути. [Более ранняя история](ExperimentReadiness-History-through-20261113-before-publication-train.ru.md) сохраняет прежние записи; их статусы относятся к своим снимкам, измерения не переписаны.

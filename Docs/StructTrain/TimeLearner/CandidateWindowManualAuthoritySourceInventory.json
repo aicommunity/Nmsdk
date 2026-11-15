@@ -1,0 +1,132 @@
+{
+  "kind": "candidate_window_manual_authority_source_controls",
+  "schema_version": 1,
+  "status": "source_only_unrun_hypothesis_expected_red_negative_controls",
+  "root_base": "311a714d38da1e37a457c8a88cd709ee01885a73",
+  "pulse": "800f92ae1f9e0133cefc0ccfe36abc3d8c99727f",
+  "rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+  "target": "Test_PulseLib_StorageComponents",
+  "new_expected_count": 4,
+  "new_expected_ids": [
+    "NativeCandidateWindowManualAuthority.ClassicForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority.BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority.ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable",
+    "NativeCandidateWindowManualAuthority.BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable"
+  ],
+  "negative_expected_count": 2,
+  "negative_expected_ids": [
+    "NativeCandidateWindowManualAuthority.ClassicForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority.BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume"
+  ],
+  "positive_expected_count": 2,
+  "positive_expected_ids": [
+    "NativeCandidateWindowManualAuthority.ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable",
+    "NativeCandidateWindowManualAuthority.BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable"
+  ],
+  "negative_expected_status": "InvalidObservation",
+  "negative_expected_accepted_inputs": 0,
+  "negative_source_forecast": "Pulse800 permits old closed Consume after foreign Finished if actual graph/source/lifecycle/Need and deadlines still match; NOT executed",
+  "unchanged_owned_edit_controls": [
+    "NativeCandidateWindowService.ClassicOwnedGrowthMeasuresPeakBeyondInitialReferenceWindow",
+    "NativeCandidateWindowService.BranchOwnedGrowthMeasuresPeakBeyondInitialReferenceWindow",
+    "NativeCandidateWindowService.ClassicWarmAfterOwnedGrowthKeepsOriginalTargetsAndHistory",
+    "NativeCandidateWindowService.BranchWarmAfterOwnedGrowthKeepsOriginalTargetsAndHistory",
+    "NativeCandidateWindowFactory.ClassicGrowthKeepsImmutableP0AndUsesMovedFrameWindow",
+    "NativeCandidateWindowFactory.BranchGrowthKeepsImmutableP0AndUsesMovedFrameWindow"
+  ],
+  "historical_source_inventory_count": 470,
+  "historical_inventory_accepted_by_this_chunk": false,
+  "combined_inventory_declared": false,
+  "test_source": {
+    "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+    "git_blob_sha256": "67150c1ca2e1ee4b8b9f69633db0668af06371b36d1d2da6be5ce9e2a4f6f599",
+    "bytes": 254097,
+    "literal_test_count": 319
+  },
+  "production_git_blob_sources": [
+    {
+      "path": "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
+      "git_blob_sha256": "f63cd74247fbb742d961aab38510b66aed9a84601c1a22172176af2ea594dd09",
+      "bytes": 59864
+    },
+    {
+      "path": "Core/TimeLearner/CompositeTrainingMeasurement.cpp",
+      "git_blob_sha256": "4c45791b52fe8c09b5e819c1d501bbc6ee4322d2ced81961e114bb302c8b51e8",
+      "bytes": 6130
+    },
+    {
+      "path": "Core/TimeLearner/NativeTrainingService.cpp",
+      "git_blob_sha256": "9419a31f417f8ffc012b2a16b0d3c9a865ca2ba7eb27d9ba8d2000052a28e7cd",
+      "bytes": 33037
+    },
+    {
+      "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+      "git_blob_sha256": "6ff701e5a0b5e2f3a2ba661d86ff14a77208efd165f161df2a0f80c48512106f",
+      "bytes": 49229
+    },
+    {
+      "path": "Core/TimeLearner/NativeProbe.cpp",
+      "git_blob_sha256": "1a1dfb9390857166ccd16b2b33e86688efc903a1e0d6da3f9bfd74bca3acd203",
+      "bytes": 30948
+    },
+    {
+      "path": "Core/TimeLearner/FinalVerification.cpp",
+      "git_blob_sha256": "4a84979ff99977d9f1a7943a2f500ec7acf3290ecace8bab0cca2abf1591f7ec",
+      "bytes": 39741
+    },
+    {
+      "path": "Core/NNeuronTimeLearner.cpp",
+      "git_blob_sha256": "796b408334df2005a06169e9f26cbe1a98e941b356eaf1a0a0b4cfff1ec6cad1",
+      "bytes": 288048
+    },
+    {
+      "path": "Core/NNeuronTimeLearnerBranch.cpp",
+      "git_blob_sha256": "fe81e0a7112b8e23611aafd973c577ddac3c868b344e94bf44ba4674047566b4",
+      "bytes": 333236
+    }
+  ],
+  "production_changed": false,
+  "local_compilation": false,
+  "local_numerical_execution": false,
+  "server_dispatch": false,
+  "active_cache_updates": false,
+  "actual_native_dimensions": [
+    2
+  ],
+  "actual_native_frequency_hz": 2000,
+  "normalization": "N0",
+  "calculate_mode": 1,
+  "capacitance": "Off/no synthetic C0",
+  "engineering_sync": 0.2,
+  "amplitude_absolute": 1e-05,
+  "minimum_amplitude": 1e-06,
+  "pending_group_limits": {
+    "model_seconds": 30.0,
+    "wall_seconds": 3600.0
+  },
+  "attempt_limits": {
+    "model_seconds": 120.0,
+    "wall_seconds": 7200.0
+  },
+  "clocks": "actual native environment and steady clock; no synthetic advancement after normal fixture initialization",
+  "evidence_environment": "TIMELEARNER_COMPOSITE_OUTPUT",
+  "primary_directories": [
+    "classic-window-live-authority/*",
+    "branch-window-live-authority/*",
+    "classic-native-window5/*",
+    "branch-native-window5/*",
+    "classic-native-window-service5/foreign-finished-while-manual-proof-pending",
+    "branch-native-window-service5/foreign-finished-while-manual-proof-pending"
+  ],
+  "historical_archive_replay": "same saved production archive2 decoded after intervening native work; DATA validity is separate from live Consume authority",
+  "executor_control_generation_publicly_observed": false,
+  "scope": "source-prepared actual-native takeover hypothesis; no production fix, runtime PASS, scientific convergence, learned6/package6/summary7/CLI claim",
+  "preconsume_actual_elapsed_guards": [
+    "old_group_model",
+    "old_group_wall",
+    "attempt_model_conservative_upper_bound",
+    "attempt_wall_conservative_upper_bound"
+  ],
+  "C0_absence_unchanged_asserted": true,
+  "frozen_candidate_proposal_replayed_unchanged": true
+}

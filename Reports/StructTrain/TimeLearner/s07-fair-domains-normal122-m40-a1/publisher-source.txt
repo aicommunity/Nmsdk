@@ -1,0 +1,51 @@
+from pathlib import Path
+import os,sys,json,hashlib,subprocess,tarfile
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-fair-domains-normal-a1';parent='567d6842dcae5f9f3d83e13546d8d93aa913d2dc'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+registry=Reservations(base/'resource-reservations.sqlite3')
+folder=base/'readbacks/s07-fair-domains-normal-a1'
+closed=inspect_worker_dependency(Path(str(folder)+'-container'),registry,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+bundle=json.loads((folder/'bundle.json').read_text());archive=folder/'primary.tar.xz'
+assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256']
+seen=set()
+with tarfile.open(archive,'r:xz') as tar:
+ for m in tar:
+  assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tar.extractfile(m).read()
+  assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+assert seen==set(bundle['members'])
+v=json.loads((folder/'transport-verdict.json').read_text())
+assert v['validity']=='valid' and v['assertion_status']=='failed'
+assert v['inventory']['observed']==122 and v['inventory']['failed_test_ids']==['BoundedTrainingFairDomains/BranchVariantsRetainPhysicalBankLegalityAndTheFixedReference']
+assert not json.loads((folder/'terminal.json').read_text())['fair_domains122_passed']
+payload={};prefix='Reports/StructTrain/TimeLearner/s07-fair-domains-normal122-m40-a1'
+for name in ('primary.tar.xz','bundle.json','terminal.json','exception.json','transport-verdict.json','source-hashes.json','source-closure.json','native122/native.xml'):
+ payload[prefix+'/'+name]=(folder/name).read_bytes()
+payload[prefix+'/fresh-operational-closure.json']=(json.dumps(closed,indent=2)+'\n').encode()
+for label in ['fair-contexts-normal-a1','fair-contexts-normal-a2']:
+ p=base/'readbacks'/('launch-'+label+'.log')
+ payload[prefix+'/prior-launches/'+label+'-launch.log']=p.read_bytes()
+ d=base/'readbacks'/('s07-'+label)
+ for name in ['terminal.json','exception.json','bundle.json','owned-supervisor.json']:
+  p=d/name
+  if p.exists():payload[prefix+'/prior-launches/'+label+'-'+name]=p.read_bytes()
+ if (Path(str(d)+'-container')/'owned-unit.json').exists():
+  state=inspect_worker_dependency(Path(str(d)+'-container'),registry,d.name)
+  assert state['state']=='ready' and state['reservation_state']=='released',state
+  payload[prefix+'/prior-launches/'+label+'-fresh-closure.json']=(json.dumps(state,indent=2)+'\n').encode()
+payload[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+collector=base/'evidence-fair-normal122-failed-a1';assert not collector.exists()
+subprocess.run(['git','init','--quiet',str(collector)],check=True)
+for pack in (source/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(collector),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(collector/'.git/shallow').write_text(parent+'\n')
+env=dict(os.environ,GIT_INDEX_FILE=str(collector/'publication-index'))
+def git(*a,data=None):return subprocess.check_output(['git','-C',str(collector),*a],input=data,env=env).decode().strip()
+git('read-tree',parent)
+for name,raw in payload.items():
+ oid=git('hash-object','-w','--stdin',data=raw);git('update-index','--add','--cacheinfo','100644',oid,name)
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner-evidence@localhost','commit-tree',git('write-tree','--missing-ok'),'-p',parent,data=b'Preserve failed122-case gate and two blocked/prebuild launch attempts without relabeling PASS\n')
+git('update-ref','refs/heads/evidence',c)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(collector),'members':len(seen),'tests':122,'passed':121,'failed':1,'archive_bytes':archive.stat().st_size,'archive_sha256':bundle['archive_sha256'],'whole_gate_passed':False}))

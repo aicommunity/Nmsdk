@@ -1,0 +1,137 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 2,
+  "execution": "timeout",
+  "reason": "wall_budget_exhausted",
+  "returncode": null,
+  "wall_seconds": 2100.4368730257265,
+  "model_time": null,
+  "runtime_provenance": "incomplete_loaded_files",
+  "mapping_error": "cooperative_capture_not_ready",
+  "runtime_fingerprint": "d06ebe44b7ad4268f60380743cf8120fac05a496f7debbb85d83e79be69046d4",
+  "ownership_scope": "bound_cgroup",
+  "all_processes_closed": true,
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "needs_review",
+    "error_records": 0,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 35,
+    "reasons": [],
+    "examples": [
+      {
+        "stream": "stderr.log",
+        "chunk": 1,
+        "severity": "unclassified",
+        "excerpt": "*** Aborted at 1794488507 (unix time) try \"date -d @1794488507\" if you are using GNU date ***"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 2,
+        "severity": "unclassified",
+        "excerpt": "PC: @                0x0 (unknown)"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 3,
+        "severity": "unclassified",
+        "excerpt": "*** SIGTERM (@0x3e800299e1f) received by PID 288958 (TID 0x7189e8a56f40) from PID 2727455; stack trace: ***"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 4,
+        "severity": "unclassified",
+        "excerpt": "    @     0x7189e9260046 (unknown)"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 5,
+        "severity": "unclassified",
+        "excerpt": "    @     0x7189e8442520 (unknown)"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 6,
+        "severity": "unclassified",
+        "excerpt": "    @     0x7189e8d2870d QByteArray::setNum()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 7,
+        "severity": "unclassified",
+        "excerpt": "    @     0x7189e8d28a28 QByteArray::number()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 8,
+        "severity": "unclassified",
+        "excerpt": "    @     0x64178e952b25 NmsdkTools::(anonymous namespace)::Frame()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 9,
+        "severity": "unclassified",
+        "excerpt": "    @     0x64178e952e91 NmsdkTools::(anonymous namespace)::Canonical()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 10,
+        "severity": "unclassified",
+        "excerpt": "    @     0x64178e952ee3 NmsdkTools::(anonymous namespace)::Canonical()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 11,
+        "severity": "unclassified",
+        "excerpt": "    @     0x64178e952ee3 NmsdkTools::(anonymous namespace)::Canonical()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 12,
+        "severity": "unclassified",
+        "excerpt": "    @     0x64178e952db5 NmsdkTools::(anonymous namespace)::Canonical()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 13,
+        "severity": "unclassified",
+        "excerpt": "    @     0x64178e952ee3 NmsdkTools::(anonymous namespace)::Canonical()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 14,
+        "severity": "unclassified",
+        "excerpt": "    @     0x64178e952ee3 NmsdkTools::(anonymous namespace)::Canonical()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 15,
+        "severity": "unclassified",
+        "excerpt": "    @     0x64178e952ee3 NmsdkTools::(anonymous namespace)::Canonical()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 16,
+        "severity": "unclassified",
+        "excerpt": "    @     0x64178e952ee3 NmsdkTools::(anonymous namespace)::Canonical()"
+      }
+    ],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 2628,
+        "sha256": "dae3577cdf5dd1e3c80dce40285c1ca40ae3dd41d9e230afb753b3b00a732b63"
+      }
+    ],
+    "contained_streams_match": true,
+    "scientific_verdict": null
+  }
+}

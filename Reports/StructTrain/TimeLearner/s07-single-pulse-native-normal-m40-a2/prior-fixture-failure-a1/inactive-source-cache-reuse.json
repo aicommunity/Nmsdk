@@ -1,0 +1,63 @@
+{
+  "previous_root": "18d4d77b90d01168a5cf9b8831ba0bea57967e91",
+  "new_root": "288b64386ba6b07028cd84500655dd15adaebb63",
+  "source": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+  "build_cache": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+  "prior_closed_released": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s07-native-channel-diagnostics-normal-a2",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a2-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "a8d5a88ac227749f93394b0622d346b537e1922da0c9d5544c2f83e3018eefed",
+        "unit": "timelearner-3972384b-5135-427e-b1b3-25ed20772c2a.service",
+        "invocation_id": "a6f09e1e19b3456894e9924757ce800b",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3972384b-5135-427e-b1b3-25ed20772c2a.service",
+        "initial_main_pid": 1386471,
+        "initial_start_ticks": "308788430",
+        "sha256": "fcbb29247e12b245ac79d97a200d0ded0044e1bd0956ed57be20f2edf66f5962"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-3972384b-5135-427e-b1b3-25ed20772c2a.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "3793eaab-a94d-4e7e-9c42-ef18335e3afa",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "changed_native_CPP_files": [
+    "Libraries/Nmsdk-PulseLib",
+    "Tests/Integration/Libraries/CMakeLists.txt",
+    "Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp"
+  ],
+  "old_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a2",
+  "new_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-native-normal-a1",
+  "old_runtime_bytes_protected": true
+}

@@ -1,0 +1,84 @@
+{
+  "kind": "timelearner_native_capacitance_integration_reader_evidence",
+  "schema_version": 1,
+  "root": "47e09bec527973500fb24cad0f0ca17c69095242",
+  "native_root": "ff2451a9936afaf712386edcd5013ad91784dd10",
+  "native_evidence_commit": "40bd553d86e02a682886ee69c30a854f73e5d9b9",
+  "acceptance_status": "passed",
+  "statuses": {
+    "native": {
+      "inventory": {
+        "expected": 197,
+        "observed": 197,
+        "failed_test_ids": [
+          "NativeTrainingCapacitanceBridge/ClassicN0",
+          "NativeTrainingCapacitanceBridge/ClassicN1",
+          "NativeTrainingCapacitanceBridge/BranchN0",
+          "NativeTrainingCapacitanceBridge/BranchN1"
+        ],
+        "assertion_status": "failed",
+        "sha256": "0fcf7264be0ba4a55098d618f24b5555cb23d87ca9933801a99a10c59a788855"
+      },
+      "execution": "process_error",
+      "validity": "valid",
+      "assertion_status": "failed",
+      "reason": "complete_declared_test_inventory"
+    },
+    "readers": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "native-capacitance-integration-h5b-readers17",
+      "package_fingerprint": "2b454b150e09c879df49321f9b5af3c0df4a4c092d538356e86877dd9a4e05fd",
+      "execution": "completed",
+      "assertion_status": "passed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_actual_native_traces",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_actual_diagnostic_training_has_no_certificate",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_default_gate_rejects_diagnostics_without_certificates",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_diagnostic_analysis_cannot_claim_exact",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_actual_completed_model_certificates_are_recomputed",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_unknown_schema",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_duplicate_stimulus_id",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_unknown_spikes_cannot_become_zero",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_incomplete_observation_is_not_valid",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_corrupted_peak_is_not_silently_accepted",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_isolated_window_cannot_select_one_of_multiple_waves",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_nonfinite_and_damaged_csv_tokens",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_duplicate_trace_timestamp",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_certificate_exact_is_recomputed_from_actual_trials",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_reference_label_is_not_row_position",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_missing_final_trial",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_evidence.NativeEvidenceTest.test_peak_selection_is_part_of_the_training_protocol"
+      ],
+      "executed_tests": 17,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {
+        "TIMELEARNER_NATIVE_EVIDENCE_DIR": {
+          "path": "/home/user/timelearner-refactor/readbacks/s03-native-evidence-contract-readers-h8d/primary/gate/native-result/native",
+          "files": 1172,
+          "fingerprint": "24520546290e6a0494115409dd776a0ee09d8d0ba9f39f4b043ca7fed8d255e4"
+        }
+      },
+      "scientific_verdict": null
+    }
+  },
+  "archive_sha256": "6f5be44ffd82f96193931d3d66e25659bea4302fc1a1a490f2c4ff737bb4e857",
+  "archive_bytes": 16738,
+  "members": {
+    "source-scope.json": "b5628adca453541bf6d6629d095ef5ede28d8f834ff0756f01a6bb246937c7cc",
+    "prerequisite-verification.json": "2534b2dbb420c729c8c0b0b50b3c6ffc7658830424e3ea8d03cdd8ce8197ddfa",
+    "owned-supervisor.json": "b5da4cd8005f66aa7aa30e999454c53a293e8651aafe6d058bfbbab61d8d3170",
+    "owned-readers.json": "8242a2092b7c56a79c4408cb061589c67d94afb108c8dbae4bfce290a15c0d43",
+    "source-hashes.json": "474bff965f1efea6610ddad75014db57040aacf476b5c57941c553e0adc70ef6",
+    "terminal.json": "76babd326ea0c378bb73c3f6456569533cbd41a4d9317e0157951a2efdfb5475",
+    "readers-cli.log": "c9f1c8c46167e4eba6820409f97de0a1d10853f2237c6c3477a97a37709a4c73",
+    "reader-suite.json": "dba4865ff702fb61565b6e3c4fad60bc926e5e73f0a7e5bb6b49dfed82142aea",
+    "structured-readers/unittest.log": "b3c06aff2386f8e30e163d52176ad95b694770daca40b5b67084c3e67bc2fa5b",
+    "structured-readers/suite.json": "dba4865ff702fb61565b6e3c4fad60bc926e5e73f0a7e5bb6b49dfed82142aea",
+    "structured-readers/result.json": "41275e94dfefe4dc00a75fad796eec07787b782c9a56284041bec0dcb9e6ea77"
+  },
+  "scope": "Independent17 NativeEvidenceTest controls against actual H8d diagnostics and actual completed packages/primary CSV. Strict default refuses missing certificate; diagnostic exact remains unknown; actual certificate corruption/order/missing-trial checks retained. AssignedNativeEvidenceTest4 is a separate pending corpus. Native H8d retains its four exception-type fixture failures and unchanged not_accepted verdict; no newer C++ acceptance.",
+  "scientific_verdict": null
+}

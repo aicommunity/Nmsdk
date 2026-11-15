@@ -1,0 +1,27 @@
+test_actual_l22_cutoff_is_labeled_and_missing_trials_are_not_filled (Scripts.StructTrain.TimeLearner.tests.test_terminal_censored_temporal_native.TerminalCensoredTemporalNativeTest.test_actual_l22_cutoff_is_labeled_and_missing_trials_are_not_filled) ... ERROR
+
+======================================================================
+ERROR: test_actual_l22_cutoff_is_labeled_and_missing_trials_are_not_filled (Scripts.StructTrain.TimeLearner.tests.test_terminal_censored_temporal_native.TerminalCensoredTemporalNativeTest.test_actual_l22_cutoff_is_labeled_and_missing_trials_are_not_filled)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-censored-temporal-a2/Scripts/StructTrain/TimeLearner/plotting.py", line 35, in plotting_runtime
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-censored-temporal-a2/Scripts/StructTrain/TimeLearner/tests/test_terminal_censored_temporal_native.py", line 24, in test_actual_l22_cutoff_is_labeled_and_missing_trials_are_not_filled
+    report = render(native, output, [62], allow_incomplete_groups=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-censored-temporal-a2/Scripts/StructTrain/TimeLearner/composite_training_temporal.py", line 70, in render
+    runtime = plotting_runtime()
+              ^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-censored-temporal-a2/Scripts/StructTrain/TimeLearner/plotting.py", line 40, in plotting_runtime
+    raise EvidenceError("plotting_runtime_unavailable:"+str(error)) from error
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: plotting_runtime_unavailable:No module named 'matplotlib'
+
+----------------------------------------------------------------------
+Ran 1 test in 397.253s
+
+FAILED (errors=1)

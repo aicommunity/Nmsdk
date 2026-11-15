@@ -1,0 +1,4 @@
+{
+  "reason": "changed_cached_build_profile:NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS",
+  "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-recorded-n4-roundtrip-sdk-a2/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 574, in run\n    validate_cache_profile(cache, self.job[\"build\"][\"required_cache_tokens\"])\n  File \"/media/user/Data/TimeLearnerRefactor/source-recorded-n4-roundtrip-sdk-a2/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 149, in validate_cache_profile\n    _require(name and entries.get(name) == [expected], \"changed_cached_build_profile:\"+name)\n  File \"/media/user/Data/TimeLearnerRefactor/source-recorded-n4-roundtrip-sdk-a2/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 26, in _require\n    raise ValueError(reason)\nValueError: changed_cached_build_profile:NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS\n"
+}

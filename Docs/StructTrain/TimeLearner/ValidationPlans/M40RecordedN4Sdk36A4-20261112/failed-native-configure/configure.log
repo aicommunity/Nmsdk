@@ -1,0 +1,49 @@
+-- NormalizeVcpkgPath: Skipping on non-Windows platform
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Parallel build: 2 jobs (Qt Creator: Build step Tool arguments '--parallel' and env CMAKE_BUILD_PARALLEL_LEVEL=2; or cmake --build -j 2)
+-- Unix Makefiles: /media/user/Data/TimeLearnerRefactor/build-recorded-n4-roundtrip-sdk-a2/cmake/nmsdk-make.sh -> /usr/bin/gmake -j2
+-- Performing Test HAVE_STDATOMIC
+-- Performing Test HAVE_STDATOMIC - Success
+-- Nmsdk: using Qt6
+-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so   
+-- Found WrapOpenGL: TRUE  
+-- Could NOT find XKB (missing: XKB_LIBRARY XKB_INCLUDE_DIR) (Required is at least version "0.5.0")
+-- Found WrapVulkanHeaders: /usr/include  
+-- NMSDK features: NO_MOTION_CONTROL=ON, RDK_UNICODE_RUN=OFF, RDK_USE_ODESOLVER=OFF, RDK_USE_PYTHON=OFF, RDK_USE_DARKNET=OFF, RDK_USE_TENSORFLOW=OFF, RDK_LLM_BUILD_EMBEDDED=OFF
+-- Boost found via find_package (system): 1.83.0
+-- Found Threads: TRUE  
+-- Nmsdk Boost 1.83.0
+-- Git version: 0.0.0.0 (HEAD:e26c0d7)
+-- UGenericMutex tests directory created
+-- Math tests directory created
+-- ComponentSystem integration tests directory created
+-- PropertyConnections integration tests directory created
+-- Serialization integration tests directory created
+-- Libraries integration tests directory created
+-- Migration integration tests directory created
+-- Interactive GUI integration tests are disabled (NMSDK_ENABLE_INTERACTIVE_GUI_TESTS=OFF)
+-- The C compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done (1.1s)
+-- Generating done (0.3s)
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_C_FLAGS_RELEASE
+    CMAKE_MODULE_LINKER_FLAGS
+    CMAKE_SHARED_LINKER_FLAGS
+    FETCHCONTENT_FULLY_DISCONNECTED
+    FETCHCONTENT_SOURCE_DIR_GOOGLETEST
+    FETCHCONTENT_UPDATES_DISCONNECTED
+
+
+-- Build files have been written to: /media/user/Data/TimeLearnerRefactor/build-recorded-n4-roundtrip-sdk-a2

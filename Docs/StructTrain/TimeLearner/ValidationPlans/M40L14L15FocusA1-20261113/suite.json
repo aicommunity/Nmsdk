@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s03-l14-l15-focus-report-m40-a1",
+  "package_fingerprint": "910c554209860605de7cb64c350ff4cd740291ed4c1ed323bf84639573ee2eeb",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_training_focus.RecordedTrainingFocusNativeTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_training_focus.RecordedTrainingFocusNativeTest.test_actual_L14_L15_native_grid_focus"
+  ],
+  "fixtures": {
+    "TIMELEARNER_L22_TRAIN_NATIVE": {
+      "pattern": "*.json",
+      "files": 374,
+      "fingerprint": "9b669560470a12ad1987d18a8c72c770fed6878fd5de4d17638ed1a4bd270e91"
+    },
+    "TIMELEARNER_L22_TRAIN_CSV": {
+      "pattern": "**/*.csv",
+      "files": 738,
+      "fingerprint": "4c09c220fab86293afcddeecca4ad82d66cad69b6be51cd67245957c0b3cc207"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "reason": "unexpected_pipeline_archive_member",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-pipeline-archive-inventory-m40-a1-worker.py\", line 101, in <module>\n    streamed=verify_pipeline_archive(train/'primary.tar.xz',bundle)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-pipeline-archive-inventory-a1/Scripts/StructTrain/TimeLearner/artifact_bundle.py\", line 138, in verify_pipeline_archive\n    require(member.isfile() and name not in records and name in declared and\n  File \"/media/user/Data/TimeLearnerRefactor/source-pipeline-archive-inventory-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: unexpected_pipeline_archive_member\n",
+  "scientific_verdict": null
+}

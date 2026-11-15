@@ -1,0 +1,3 @@
+# Независимая проверка publication receipt на Elder
+
+SourceRoot92ad93cdf453967ac29108a9bbef5fd3905da59d / Pulse dfb9a98244f91b4f4029d8470465fd40116436ca. Те же7 исходных C++ IDs и усиленные assertions, что на M40. Полный namespace4166, fresh Release/O3 build обоих targets в новых source/build/runtime. Старые SDK и runtime не меняются. Native Tool Root929, его проверенный production canonical/native ownership code; M40 Tool7bd содержит те же необходимые APIs. Эффективные GCC/Qt, flags и executable hashes сохраняет runtime manifest. Physical floor2GiB; актуально свободно3.74GB до materialization, удаление не выполнялось. Сборка/проверки допускаются только после полного preflight;7 PASS не закрывают весь план и большойN4 timeout.

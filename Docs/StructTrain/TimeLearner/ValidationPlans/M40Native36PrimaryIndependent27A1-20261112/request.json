@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-native36-primary-independent27-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 7200
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 2147483648
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-native36-primary-independent-a1",
+      "commit": "40eff7f9b517ceb4b0267834ca5d96139583ad23"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/native36-primary-independent27-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Native36PrimaryIndependent27A1-20261112/suite.json",
+      "sha256": "2087443a3b072b75ddf7aab82dbe5aedcd9ef9a312920cd48fd79220c8c551ef"
+    },
+    "fixtures": {
+      "TIMELEARNER_NATIVE32_ELDER_BUNDLE": "/media/user/Data/TimeLearnerRefactor/source-native32-independent-a1/Reports/StructTrain/TimeLearner/RecoveryConsole32NativeClosedCorpus-Elder-20261112",
+      "TIMELEARNER_NATIVE32_M40_BUNDLE": "/media/user/Data/TimeLearnerRefactor/source-native32-independent-a1/Reports/StructTrain/TimeLearner/RecoveryConsole32NativeClosedCorpus-M40-20261111",
+      "TIMELEARNER_NATIVE36_BUNDLE": "/media/user/Data/TimeLearnerRefactor/source-native36-primary-independent-a1/Reports/StructTrain/TimeLearner/RecordedSdk36Primary-M40-20261112"
+    }
+  }
+}

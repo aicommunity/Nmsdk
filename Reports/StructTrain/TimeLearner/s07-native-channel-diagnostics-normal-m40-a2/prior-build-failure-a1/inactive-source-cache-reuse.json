@@ -1,0 +1,62 @@
+{
+  "previous_root": "87e406bd0829af2f8db3482d1fd8b157501f9f51",
+  "new_root": "3bdef559db5af1f68d69a82a079175f620a4f5c9",
+  "source": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+  "build_cache": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+  "prior_closed_released": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s03-isi-template-fixed-normal-a1",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-isi-template-fixed-normal-a1-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "67b48719d455cac7b8daddb9e5ce78d2f1e46da436f8408a2b2249141954d938",
+        "unit": "timelearner-7a9a5972-2bee-4269-86b2-2e4bb21cfbd2.service",
+        "invocation_id": "7f44ce0e1cd8478fb552c529e1356b80",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7a9a5972-2bee-4269-86b2-2e4bb21cfbd2.service",
+        "initial_main_pid": 1353112,
+        "initial_start_ticks": "308334815",
+        "sha256": "c74b85c92b8e6f69293f28f2c4f5381f74b0a51f3abdf094426beb41ba26987a"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-7a9a5972-2bee-4269-86b2-2e4bb21cfbd2.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "3df8c633-bfdc-4d75-bd1a-d9ccbc2a2e66",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "changed_native_CPP_files": [
+    "App/NeuroModelerConsole/TimeLearnerProbeChannelDiagnostics.h",
+    "App/NeuroModelerConsole/TimeLearnerProbeJob.cpp"
+  ],
+  "old_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-fixed-normal-a1",
+  "new_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a1",
+  "old_runtime_bytes_protected": true
+}

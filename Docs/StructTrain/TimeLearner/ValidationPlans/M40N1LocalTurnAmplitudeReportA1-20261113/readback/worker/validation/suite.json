@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-n1-local-turn-amplitude-report-m40-a1",
+  "package_fingerprint": "f4b748eeea4d93adae15c5e15a4c3f4edcaf805d48753c7188226deb1bcaa365",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n1_local_turn_scientific_report"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n1_local_turn_scientific_report.N1LocalTurnScientificReportTest.test_actual_opposite_amplitude_errors_keep_fresh_assigned_impulse_evidence"
+  ],
+  "fixtures": {
+    "TIMELEARNER_N1_LOCAL_TURN_RUN": {
+      "pattern": "**/*.json",
+      "files": 787,
+      "fingerprint": "1411b3d7865e5213e52e4e99632ed76e4fc18c941c07d7f9d5256ef9a4a899e7"
+    }
+  }
+}

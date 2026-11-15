@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "native-failure-progress-20",
+  "package_fingerprint": "f8b24100fc4478fe54bc16e7914d11643da5cd290723945e67965f36cb37c77f",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_timeout_without_xml_preserves_original_reason_and_no_invented_cases",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_process_error_without_xml_is_not_reported_as_timeout_or_file_failure",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_timeout_with_partial_xml_keeps_only_completed_case",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_timeout_with_truncated_xml_keeps_parse_error_separate",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_claimed_success_without_xml_cannot_pass",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_claimed_success_with_corrupt_xml_cannot_pass",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_completed_gate_requires_actual_matching_case_ids",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_failed_case_is_recorded_even_if_gate_claims_success",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_duplicate_case_does_not_raise_passed_count",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_actual_failed_gate_updates_progress_before_rejecting",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_rejected_runtime_with_passing_xml_never_admits_gate",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_leaf_terminal.NativeLeafTerminalTest.test_failed_next_leaf_preserves_previous_counts_without_claiming_closure",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_actual_inventory_and_reversed_declaration_have_identical_results",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_actual_contract_and_explicit_capture_versions",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_missing_or_duplicate_identity_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_skipped_or_unfinished_case_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_corrupt_totals_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_complete_assertion_failure_is_observed_as_failed",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_truncated_xml_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateEnvironmentTest.test_present_and_absent_environment_are_restored_after_exception"
+  ],
+  "fixtures": {}
+}

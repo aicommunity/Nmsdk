@@ -1,0 +1,55 @@
+{
+  "kind": "timelearner_native_acceptance_job",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "preparation": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-m40-a3-controller/inputs/preparation.json",
+  "paths": {
+    "source": "/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a2",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-n1-coupled-sdk-a2",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a3",
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-m40-a3",
+    "resources": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+    "framework": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+  },
+  "build": {
+    "type": "Release",
+    "parallel": 2,
+    "wall_seconds": 10800,
+    "required_cache_tokens": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS:STRING=",
+      "CMAKE_CXX_FLAGS:STRING=",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=",
+      "CMAKE_SHARED_LINKER_FLAGS:STRING=",
+      "CMAKE_MODULE_LINKER_FLAGS:STRING=",
+      "CMAKE_STATIC_LINKER_FLAGS:STRING=",
+      "FETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_SOURCE_DIR_GOOGLETEST:PATH=/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "RDK_USE_LLM:BOOL=OFF",
+      "RDK_LLM_BUILD_EMBEDDED:BOOL=OFF",
+      "NMSDK_BUILD_PARALLEL_JOBS:UNINITIALIZED=2",
+      "NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS:BOOL=ON"
+    ]
+  },
+  "limits": {
+    "whole_wall_seconds": 14400,
+    "leaf_memory_bytes": 8589934592,
+    "leaf_tasks": 128,
+    "physical_free_floor_bytes": 8589934592,
+    "reservation_memory_bytes": 8589934592,
+    "reservation_disk_bytes": 4294967296
+  },
+  "asan_options": null,
+  "protected_runtimes": [
+    "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-n1-local-turn-sdk-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a2"
+  ],
+  "artifacts": []
+}

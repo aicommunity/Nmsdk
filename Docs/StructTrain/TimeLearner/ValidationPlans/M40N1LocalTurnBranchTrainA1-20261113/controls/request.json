@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-n1-local-turn-branch-train-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "181d4d1980423ad82edb9839a3d3fe77f118e6a0",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 128,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 8589934592,
+    "maximum_output_bytes": 2147483648
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-shared-bank-primary-replay-a1",
+      "commit": "181d4d1980423ad82edb9839a3d3fe77f118e6a0"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-branch-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnBranchTrainA1-20261113/suite.json",
+      "sha256": "bd7840225f7e66dcd6a21e1a019d15d2856e4fba1848b129e03a9fa7d70e1b51"
+    },
+    "fixtures": {
+      "TIMELEARNER_STOCK_COLD8_TRAIN_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-branch-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnBranchTrainA1-20261113/fixture",
+      "TIMELEARNER_STOCK_COLD8_TRAIN_SOURCE": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-branch-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnBranchTrainA1-20261113/prepared",
+      "TIMELEARNER_STOCK_COLD8_TRAIN_RUNTIME": "/media/user/Data/TimeLearnerRefactor/runtime-n1-local-turn-sdk-a1"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 134217728,
+      "maximum_total_bytes": 268435456
+    }
+  }
+}

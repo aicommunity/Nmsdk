@@ -1,0 +1,37 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_FinalizationBoundary.cpp",
+      "suites": [
+        "NativeFinalizationBoundary",
+        "NativeFinalizationClockHandoff",
+        "NativeFinalizationOwnership",
+        "NativeLiveFinalization",
+        "NativeLiveFinalizationPlanCodec",
+        "NativeOwnedPostTune"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeFinalizationBoundary/PublicEnumsUseExplicitMapping"
+  ],
+  "runplan": [
+    {
+      "name": "finalization-enum-smoke",
+      "expected_ids": [
+        "NativeFinalizationBoundary/PublicEnumsUseExplicitMapping"
+      ],
+      "wall_seconds": 900
+    }
+  ],
+  "partitions": [
+    {
+      "name": "test-loader-build-smoke",
+      "ids": [
+        "NativeFinalizationBoundary/PublicEnumsUseExplicitMapping"
+      ],
+      "count": 1
+    }
+  ]
+}

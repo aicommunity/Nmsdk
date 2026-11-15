@@ -1,0 +1,9 @@
+# Actual fixed-threshold temporal report: принят с указанной областью просмотра
+
+Production1/1 PASS,876.183с unit; outer completed/whole group closed.32 pattern×soma pairs и8 LT decision traces построены из настоящего candidate run. Production scorer точно воспроизвёл TP1/FP4/FN0/TN3; никаких новых native runs, выбора порога либо изменения первичных наблюдений нет.
+
+Full cache содержит2534 PNG и соответствующие SVG/PDF, обзоры и native tiles>=8px/tick без прореживания. В Git сохранены27 выбранных original PNG:8 Soma1 overview, target Soma2–4 overview,8 LT overview,2 LT native zoom и6 дополнительных overview-detail для молчащих foil1–3. Все27 просмотрены. Полные обзоры сохраняют отрицательный reset около−0.38; на них малые положительные вершины визуально сжаты. Для них нужен отдельно подписанный Y-detail, не изменение первичных данных.
+
+[Научный отчёт и изображения](../../ClassicN0ThresholdScientificReport-20261114.ru.md), [manifest](completed/worker/tmp/fixed-threshold-eight-pattern-gallery/manifest.json), [analysis](completed/worker/tmp/fixed-threshold-eight-pattern-gallery/analysis.json), [LT views](completed/worker/tmp/fixed-threshold-eight-pattern-gallery/lt-decision-views.json), [unit](completed/worker/validation/result.json), [integrity](integrity.json). Full gallery visual_acceptance_complete=false сохранён: все2534 изображения не выдаются за просмотренные. Кэш M40 readbacks/s11-stock-n0-classic-threshold-report-m40-a2/worker/tmp/fixed-threshold-eight-pattern-gallery.
+
+Последняя literal publicationce46a61897333920111436120e682ff8254ccb3d, pack SHA256b9ff472b320bb37ebd031684b20158e26505cd5789783fc896cf2bb28cae28fc. Старый producer24aab8a406b6335971bbc30f2d517b642538f684 содержит первые21 PNG; дополнительная публикация добавила существующие6 деталей без нового rendering/model execution. Неподходящие подписи осей в отдельном positive-response A1 не относятся к этим корректно подписанным исходным LT figures.

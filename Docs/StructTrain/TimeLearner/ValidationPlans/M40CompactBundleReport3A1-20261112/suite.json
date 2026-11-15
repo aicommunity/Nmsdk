@@ -1,0 +1,22 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "m40-compact-bundle-report3-a1",
+  "package_fingerprint": "a20a7c3e56c5c4ca83ff6af2a1f2639f2812c17216ab09e91bf2606edfc1b423",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportBoundsTest",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportActualTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportBoundsTest.test_report_cannot_replace_bundle_or_restore_tree",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportBoundsTest.test_backend_failure_precedes_archive_restore",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryReportActualTest.test_published_bundle_renders_all_forty_trial_soma_pairs"
+  ],
+  "fixtures": {
+    "TIMELEARNER_RECORDED_MATRIX_BUNDLE": {
+      "pattern": "*",
+      "files": 6,
+      "fingerprint": "730cabfee0a332c2fd58dd6077d9f4281c9cf3100e7524d2c3c00aa30dfd0fac"
+    }
+  }
+}

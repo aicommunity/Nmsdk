@@ -1,0 +1,83 @@
+# Независимый аудит переносимого recovery ledger
+
+**Оперативный статус 11.11.2026:** независимый replay фактических C++ package7/summary8 и непустого recovery ledger принят на Elder **9/9** ([результат](ValidationPlans/ElderClosedNativePackage7Audit9F2-20261111/RESULT.ru.md)). Это DATA acceptance, не успешный перенос модели и не научная классификация. M40 F1 завершён226 PASS/1 FAIL/13 not-run; Windows F1 —3 PASS/11 FAIL. M40 F3 успешно собран, но первый case обнаружил сброс Finished→Idle при native Build после import:0 PASS/1 FAIL/13 not-run. Все эти задания закрыты. Исправление Pulse1110808 подготовлено; набор14 roundtrip +4 active-Build проверок передаётся на M40, compiler/runtime приёмки ещё нет. Console и frozen recognition нового package7, затем контрольная научная серия остаются открытыми. Исходный план не завершён.
+
+Ниже сохранены предыдущие снимки: их running/запущен заменены оперативным статусом выше.
+
+Поддерживаемый читатель: `Scripts/StructTrain/TimeLearner/candidate_window_recovery_ledger.py`.
+Это проверка сохранённых DATA, а не выполнение модели или восстановление контроллера.
+
+Порядок проверки:
+
+```text
+validate exact ledger schema, finite values and content hash
+bind source, owner and full measurement archive document ID
+replay archive2 primary even when deliveries is empty
+require unique event/group IDs in actual archive order
+group deliveries by original attempt; require one immutable runtime per attempt
+for each attempt:
+    validate original runtime3 against initial configuration and protocol
+    bind each event to actual rejected group and effective physical parameters
+    check assignment, timing, counters, ordering and declared search budgets
+return checks performed, with coverage/authority/certificate claims false
+```
+
+Warm retry может оставить в archive предыдущую попытку с runtime3 и перейти
+на runtime2 в текущей попытке. Проверять старые события по новой policy нельзя.
+`audit_candidate_window_recovery_events` поэтому принимает явный `attempt_id`:
+он должен совпадать с run_id исходного runtime и присутствовать в архиве.
+Без этого аргумента сохраняется прежняя проверка только текущей попытки.
+Архив, его current_attempt_id и исходные bytes не переписываются.
+
+Первый адресный набор состоит из прежних восьми event tests и восьми новых
+ledger tests. На Elder он завершён **16/16 PASS**, без failures/errors/skips;
+owned cgroup закрыта. Условия и первичные результаты находятся в
+[ElderRecoveryLedger16G1](ValidationPlans/ElderRecoveryLedger16G1-20261111/).
+Они проверяют пустой ledger на реальном production reader с synthetic DATA,
+неизменность входов, повреждение первичных данных, ложные claims, чужие bindings,
+дубликаты и запрет выдавать valid peak за rejected recovery delivery.
+Положительные joins непустого ledger из нового C++ service и перенос между
+попытками с фактическим warm retry требуют отдельной проверки. Эти восемь
+новых тестов их не заменяют.
+
+Первое обращение к runner отклонено до создания job: в декларации было имя
+Elder вместо фактического Elder-1. Отказ сохранён; исправленная декларация
+передана отдельным Git control checkout, runtime/source не менялись.
+В process diagnostics остались два предупреждения Git о выключенной lazy
+fetch в partial clone. Они сохранены в stderr; утверждение о полностью чистом
+diagnostic status не делается. Проверка исходников и все тесты завершились.
+
+Reader подключён к отдельному DATA-пути package7/summary8: новая схема
+проверяется непосредственно, исходные документы не преобразуются в package6.
+Проверяются hash пакета и neuron archive, recovery hash в native metadata,
+равенство ledger в summary8, отсутствие controller checkpoint, эффективная
+физика, ссылки на измерения и текущий runtime2/3 с фактическими бюджетами.
+Старый package6/summary7 путь остаётся отдельным. Loaders learned/stopped
+распознают новую схему и не создают отсутствующую summary.
+
+На Elder завершён адресный набор **107/107 PASS** source d6ddd8779: прежние
+archive/runtime/package6 и event/ledger проверки плюс десять новых проверок
+version dispatch, warm runtime2, runtime3, начальной модели и group budgets.
+[Точные условия и readbacks](ValidationPlans/ElderRecoveryPackage7DataG2-20261111/).
+Это DATA-контроли на synthetic primary; положительные package7/summary8 joins
+по полному новому C++ corpus ещё не приняты. До их проверки этот путь не даёт
+допуска для нового дорогостоящего Train.
+
+Console и frozen recognition ещё требуют поддержки и проверки нового пути.
+
+Реальный C++ source package7 теперь сохранён losslessly:12 groups/48 primary
+files и2 recovery deliveries. Закрытые source case и controller упакованы
+штатным collector:19,157,820 expanded bytes →476,888 bytes XZ; через Git
+переданы на локальную машину и Elder. [Архив и исходный отрицательный контекст](../../../Reports/StructTrain/TimeLearner/Package7ClassicN0ClosedSourceF1-20261111/).
+
+Первый независимый Elder набор восстановил весь bundle и успешно проверил
+исходный package7/summary8 с непустым ledger. Полный набор ещё не принят:
+8/9 отмечены PASS и1 error, а часть negative cases могла проходить по
+неправильной причине. Test resolver, сохранённый как обычная class function,
+получал дополнительный self. Исправление использует staticmethod и проверяет
+конкретные причины отказа; runtime повтор ещё требуется. Исходный result и
+traceback сохранены в [audit9 F1](ValidationPlans/ElderClosedNativePackage7Audit9F1-20261111/).
+Исходный C++ roundtrip остаётся failed; DATA replay его не переименовывает.
+Ни принятие формата, ни связность всех переданных событий не доказывают
+полноту журнала действий, Exact или качество классификации. Отсутствующие
+события нельзя восстановить по одному списку supplied deliveries.

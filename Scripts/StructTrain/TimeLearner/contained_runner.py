@@ -3,7 +3,6 @@
 This explicit backend leaves legacy pidfd attempts unchanged. A successful main
 exit cannot complete an attempt while any descendant remains in its cgroup.
 """
-import math
 import os
 from pathlib import Path
 import shutil
@@ -12,7 +11,9 @@ import time
 from . import contained_process
 from .native_evidence import load, require
 from .process_runner import verify_runtime, _start_identity, _write
+from .process_limits import validate_limits
 from .runtime import loaded_process_files
+from .operational_diagnostics import inspect_streams
 
 
 def _returncode(state):
@@ -35,15 +36,15 @@ def inspect_attempt(output):
 
 
 def execute(manifest, arguments, working_directory, output, maximum_wall_seconds,
-            cancel_file=None, *, memory_bytes, tasks, cooperative_capture=False):
+            cancel_file=None, *, memory_bytes, tasks, cooperative_capture=False, managed_reservation=None,
+            on_started=None, monitor=None):
     require(type(arguments) is list and all(type(a) is str and '\0' not in a for a in arguments),
             'invalid_process_arguments')
     require(type(cooperative_capture) is bool and all(a.split('=', 1)[0] != '--timelearner-capture-directory'
             for a in arguments), 'capture_directory_is_supervisor_owned')
-    require(type(maximum_wall_seconds) in (int, float) and math.isfinite(maximum_wall_seconds) and
-            1 <= maximum_wall_seconds <= 86400, 'invalid_contained_wall_budget')
-    require(type(memory_bytes) is int and 0 < memory_bytes <= 2**63-1 and
-            type(tasks) is int and 0 < tasks <= 2**31-1, 'contained_limits_invalid')
+    validate_limits(memory_bytes, tasks, maximum_wall_seconds, wall_reason='invalid_contained_wall_budget')
+    require((on_started is None or callable(on_started)) and (monitor is None or callable(monitor)),
+            'contained_callback_not_callable')
     executable = verify_runtime(manifest)
     cwd = Path(working_directory).resolve(strict=True)
     require(cwd.is_dir(), 'invalid_process_working_directory')
@@ -61,22 +62,29 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
     args = list(arguments)
     if cooperative_capture:
         args.extend(['--timelearner-capture-directory', str(output)])
-    environment = {key: os.environ[key] for key in ('ASAN_OPTIONS', 'TIMELEARNER_EXECUTION_OUTPUT') if key in os.environ}
+    environment = {key: os.environ[key] for key in
+                   ('ASAN_OPTIONS', 'TIMELEARNER_EXECUTION_OUTPUT', 'TIMELEARNER_COMPOSITE_OUTPUT')
+                   if key in os.environ}
     begin = time.monotonic()
     outcome, reason, mappings, mapping_error = 'process_error', 'launch_not_completed', None, None
     provenance, closure, last, binding = 'invalid_or_incomplete_runtime', None, None, None
     try:
         binding = contained_process.start(manifest, args, cwd, output/'contained', memory_bytes=memory_bytes,
-                  tasks=tasks, maximum_wall_seconds=maximum_wall_seconds, environment=environment)
+                  tasks=tasks, maximum_wall_seconds=maximum_wall_seconds, environment=environment,
+                  managed_reservation=managed_reservation)
         _write(output/'owned-process.json', {'pid': binding['initial_main_pid'],
                'start_ticks': binding['initial_start_ticks'],
                'boot_id': Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
                'executable': str(executable), 'executable_sha256': manifest['executable']['sha256'],
                'runtime_fingerprint': manifest['runtime_fingerprint'], 'unit': binding['unit'],
                'invocation_id': binding['invocation_id'], 'control_group': binding['control_group']})
+        if on_started is not None:
+            on_started(binding)
         capture_attempted = False
         while True:
             last = contained_process.inspect(output/'contained')
+            if monitor is not None:
+                monitor(last)
             if last['all_processes_closed']:
                 state, returncode = last['state'], _returncode(last['state'])
                 if state.get('Result') == 'timeout':
@@ -157,5 +165,6 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
               'runtime_provenance': provenance, 'mapping_error': mapping_error,
               'runtime_fingerprint': manifest['runtime_fingerprint'], 'ownership_scope': 'bound_cgroup',
               'all_processes_closed': closed, 'scientific_verdict': None}
+    result['operational_diagnostics'] = inspect_streams(output)
     _write(output/'result.json', result)
     return result

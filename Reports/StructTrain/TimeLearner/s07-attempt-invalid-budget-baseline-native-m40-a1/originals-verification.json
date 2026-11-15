@@ -1,0 +1,82 @@
+{
+  "fresh_closed_released": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s07-attempt-invalid-budget-baseline-native-a1",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-baseline-native-a1-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "c6e6ebf359c8f82f51550960efd439f6139985f2db3e239740b78af38f1681c8",
+        "unit": "timelearner-30d4b64f-c31e-4085-b010-8ff3ef03d803.service",
+        "invocation_id": "76af1fd1fd604a38b68c8756c83f1177",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-30d4b64f-c31e-4085-b010-8ff3ef03d803.service",
+        "initial_main_pid": 959202,
+        "initial_start_ticks": "303996078",
+        "sha256": "8107caf5217029133ca672009eb2dace3d7e263b3cad4b6ed5b0711bb222ee12"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-30d4b64f-c31e-4085-b010-8ff3ef03d803.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "ad5edae6-a23d-44b0-8783-455f80470eb8",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "archive_members_checked": 696,
+  "compiled_source_root": "7cc21bdd9e0904f8f5052466651e0682f2f1f1a3",
+  "PulseLib": "12d8c8a41c998ae1516496f716a0ae0f3d312b3e",
+  "original_cpp_functions_observed": 23,
+  "passed": 21,
+  "failed": 2,
+  "original_failures": [
+    {
+      "test_id": "NativeLearnedState/ClassicConfiguredN1",
+      "failure_kind": "certificate_expected_after_actual_sweep_budget_exhaustion",
+      "original_failure": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-baseline-normal-a1/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3648\nValue of: service.Certificate()\n  Actual: false\nExpected: true\nmaximum_sweeps_exhausted"
+    },
+    {
+      "test_id": "NativeLearnedState/BranchConfiguredN0",
+      "failure_kind": "certificate_expected_after_actual_sweep_budget_exhaustion",
+      "original_failure": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-baseline-normal-a1/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3648\nValue of: service.Certificate()\n  Actual: false\nExpected: true\nmaximum_sweeps_exhausted"
+    }
+  ],
+  "actual_native_owner": {
+    "pid": 959308,
+    "start_ticks": "303996187",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/media/user/Data/TimeLearnerRefactor/runtime-attempt-invalid-budget-baseline-normal-a1/Test_PulseLib_StorageComponents",
+    "executable_sha256": "143d97c6d53f55ba59b68c8eb1f60a94019df287ce4420c003c6469ebeeffaa5",
+    "runtime_fingerprint": "f881c5761e45f836bc44bc79755b4ea1e619c2654e7b5847d21b84a020a63349"
+  },
+  "loaded_files": 28,
+  "same_case_fixed_comparison_available": true,
+  "ASan_executed": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

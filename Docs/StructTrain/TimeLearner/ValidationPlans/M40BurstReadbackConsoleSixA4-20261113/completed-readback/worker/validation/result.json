@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s07-burst-readback-console-six-m40-a4",
+  "package_fingerprint": "f5f3d4a33d2d6e3edd026b5e2c76e3bbf36b7514936181222f5d04e04b0c1248",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback_console.NativeBurstReadbackConsoleTest.test_real_classic_branch_replays_and_time_matched_rs_controls"
+  ],
+  "executed_tests": 1,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_BURST_READBACK_SOURCE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-idle-probe-readback-sdk-m40-a1/idle-probe-readback-sdk-two/native-composite/package7",
+      "files": 12,
+      "fingerprint": "d88a42d122b6491c2e1c6252b64df9eee402fefeac096e870d02f62177343ec1"
+    },
+    "TIMELEARNER_BURST_READBACK_CONTROLS": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/burst-readback-console-six-a4/Docs/StructTrain/TimeLearner/ValidationPlans/M40BurstReadbackConsoleSixA4-20261113/fixture",
+      "files": 2,
+      "fingerprint": "9bf95904bebfc2ea17e5ffa5dc9d0d0e71891b328071c4e6b6ea93a5176404f9"
+    },
+    "TIMELEARNER_BURST_READBACK_RUNTIME": {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-idle-probe-readback-sdk-a1",
+      "files": 1,
+      "fingerprint": "61e1b1eb833b14343680a2e5afb50acaef8794854324ede1337497ad5f57714c"
+    }
+  },
+  "scientific_verdict": null
+}

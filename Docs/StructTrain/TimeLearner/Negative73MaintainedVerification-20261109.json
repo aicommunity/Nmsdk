@@ -1,0 +1,82 @@
+{
+  "kind": "negative73_maintained_independent_metadata_verification",
+  "schema_version": 1,
+  "status": "passed_metadata",
+  "evidence_commit": "c470ad9efbdf21f33e0848c560f296e015fa5ff4",
+  "parent": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+  "artifact_inventory_sha256": "b659caad3404a2ca3f835c59a70a342425282231269f023612485355ad297fcc",
+  "committed_files": 5,
+  "archive": {
+    "bytes": 107548,
+    "sha256": "816d4724d810a8a622596722da65f4839a5788e567d5fef3a1584f4156293119",
+    "members": 55,
+    "expanded_bytes": 2279625,
+    "all_members_hash_verified": true
+  },
+  "original_files": 42,
+  "original_gate_outcome": "failed",
+  "original_test_counts": {
+    "executed": 73,
+    "passed": 72,
+    "failures": [
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_C_region_and_context_count_limits_are_checked"
+    ],
+    "errors": [],
+    "skipped": []
+  },
+  "failure_fragment": "AssertionError: EvidenceError not raised",
+  "source_snapshots": {
+    "collector": {
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "Scripts": 637
+    },
+    "original_tool": {
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "Scripts": 632
+    },
+    "source": {
+      "commit": "1292babb67ee653d04316f7f6927a3d23d5d682c",
+      "Scripts": 643
+    }
+  },
+  "Git_roles": 19,
+  "fixture157": {
+    "files": 157,
+    "bytes": 74969578,
+    "fingerprint": "78f286701300c7d365e16d25bb64fca430a06b23e08b638396249a87b89056db",
+    "pinned_bundle_refs_and_beforeafter_snapshot_joins": true,
+    "raw_CSV_values_recomputed": false,
+    "payload_duplicated": false
+  },
+  "old73_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "d73748197713229e6ccc0cc1e77747e1126125f62e2ebd926183876fff3b7e75",
+    "unit": "timelearner-6349ad73-edf3-4d22-b67b-da27c661f8f7.service",
+    "invocation_id": "e919af853d9b412fbf1f1383756a01a1",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6349ad73-edf3-4d22-b67b-da27c661f8f7.service",
+    "initial_main_pid": 1165304,
+    "initial_start_ticks": "328727693",
+    "sha256": "123613e03fc2ee29f5de469d6c3a7980cf1c773616ae85f46beda054b3ee7aeb"
+  },
+  "original_released_lease": "0c46a41e-5f7c-4528-b116-000ed45e8421",
+  "collection_binding_from_Root_terminal": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "56ac9eb3bace25a6f609f7252d13871a8d03b69eb3177e72a5f550e2ae03f14a",
+    "unit": "timelearner-825906ca-0221-4a62-ab6b-def2f3dda174.service",
+    "invocation_id": "dcfe0a1714cc4ae0be10b8afb025b9d5",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-825906ca-0221-4a62-ab6b-def2f3dda174.service",
+    "initial_main_pid": 1568827,
+    "initial_start_ticks": "330134260",
+    "sha256": "55f378de75dad17c8aeeb80bf4fdce6519b2438c450895fee1c574d7bb896a73"
+  },
+  "collection_own_released_lease": "c9b91305-ed2e-4aca-b4db-08f11fbfad47",
+  "Root_terminal_raw_sha256": "b11c8f77c72cf37894d8f1d65213f192d46332ad3a1775fc389be35cabb724b1",
+  "pack_sha256": "83cb9ba876fa31af50f0d1dcda8c13ee34ff5e6be61d8c6bc1409c379d466a1e",
+  "reader_sha256": "11d80f8a05b23306812bc8f21ac3463920aa8aa10e9e5a148213b645ee088c64",
+  "nested_kernel_closure_attested": false,
+  "SDK_source_verified": false,
+  "local_test_numeric_model_plot_execution": false,
+  "scientific_verdict": null
+}

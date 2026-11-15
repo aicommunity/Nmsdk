@@ -1,0 +1,105 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 3,
+  "worker_host": "M40",
+  "leases": [
+    {
+      "token": "fcbb0104-d798-48c5-bedf-5c15fb3aab08",
+      "job_id": "burst-console-six-native-probes",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3192138,
+        "start_ticks": "362008185",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a1/worker/tmp/native-burst-readback-small/runs",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a1/worker/tmp/native-burst-readback-small/runs"
+        }
+      ],
+      "state": "released",
+      "created": 1794544895.7937076,
+      "deadline": 1794548504.6533482,
+      "updated": 1794544923.7597682,
+      "release_note": "All managed Console probe groups closed; no training verdict.",
+      "demands": {
+        "disk_bytes": 1073741824,
+        "memory_bytes": 4294967296,
+        "slots": 1,
+        "tasks": 256
+      },
+      "controller": {
+        "binding": {
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-cda5b4f9-2827-4bcd-a1f2-86cc282d3dcc.service",
+          "initial_main_pid": 3192138,
+          "initial_start_ticks": "362008185",
+          "invocation_id": "efd6716500214885be7f11df6e13c1f2",
+          "kind": "timelearner_contained_binding",
+          "request_sha256": "51b5055d4965206053a2f2bef162cad01af92125d340cf9b0c2339ac3040adb2",
+          "schema_version": 1,
+          "sha256": "741894c1da8aeeebd1d1c3a8b73c8bba777b7414dd767b849f83a192d002d3d6",
+          "unit": "timelearner-cda5b4f9-2827-4bcd-a1f2-86cc282d3dcc.service"
+        },
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a1/process/contained",
+        "memory_bytes": 3221225472,
+        "tasks": 128
+      },
+      "heartbeat_expired": false,
+      "owner_status": "identity_live",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null,
+  "managed_unit_intents": [
+    {
+      "token": "fcbb0104-d798-48c5-bedf-5c15fb3aab08",
+      "state": "bound",
+      "intent": {
+        "attempt_id": "859c60f5-6ec0-4670-a788-5355a9ceaf12",
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a1/worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained",
+        "kind": "timelearner_managed_unit_intent",
+        "maximum_wall_seconds": 180.0,
+        "memory_bytes": 1073741824,
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 3192138,
+          "start_ticks": "362008185",
+          "uid": 1000
+        },
+        "schema_version": 1,
+        "sha256": "037470f7dde3268ffe69947b4b560008f34caa712f3c7ff0995d3fd58c5e0046",
+        "tasks": 64,
+        "token": "fcbb0104-d798-48c5-bedf-5c15fb3aab08",
+        "unit": "timelearner-859c60f5-6ec0-4670-a788-5355a9ceaf12.service"
+      }
+    }
+  ],
+  "managed_unit_states_are_declarations": true,
+  "capacity": {
+    "slots": 1,
+    "memory_bytes": 5368709120,
+    "disk_bytes": 2147483648,
+    "tasks": 512
+  },
+  "reserved": {
+    "slots": 0,
+    "memory_bytes": 0,
+    "disk_bytes": 0,
+    "tasks": 0
+  },
+  "available": {
+    "slots": 1,
+    "memory_bytes": 5368709120,
+    "disk_bytes": 2147483648,
+    "tasks": 512
+  },
+  "disk_device": 2048,
+  "os_resource_limits_enforced": false
+}

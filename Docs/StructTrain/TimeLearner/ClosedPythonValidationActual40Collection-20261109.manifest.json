@@ -1,0 +1,653 @@
+{
+  "kind": "timelearner_closed_python_validation_collection",
+  "schema_version": 1,
+  "collection_id": "s10-collect-owned-native-controller40-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "collector_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+    "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6"
+  },
+  "job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-owned-native-controller40-m40-a1",
+    "id": "s10-owned-native-controller40-m40-a1",
+    "original_tool": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c"
+    },
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-owned-native-controller40-m40-a1",
+      "commit": "35fba3d1544f98b60401fa738aaba4ea2c6d1bff"
+    },
+    "plan": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109",
+      "commit": "42d9dc5814cbdefd15457407577a03102df9ee21"
+    },
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "58ccbc83eb1d35256a2d58440a8692f273199683b2b8b2639c9b8bde22b462fb",
+      "unit": "timelearner-7df3b0d8-52bd-417e-b10b-5e5ed8795aac.service",
+      "invocation_id": "8858920168a444f7bcd9b07d816dbd8d",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7df3b0d8-52bd-417e-b10b-5e5ed8795aac.service",
+      "initial_main_pid": 1306191,
+      "initial_start_ticks": "329451371",
+      "sha256": "aa50e4f0d1d4e73e048b8681ec88065b624e21a0f6c3b85227c0d6944cc45f5b"
+    },
+    "lease_token": "bfba3fd7-19c7-4282-8518-10832cedd5bc",
+    "request_sha256": "6e6bd9b03b30ab7565cb6f060ddb305c40c70ab80f9de1d125f0437c02d2f93c",
+    "suite_sha256": "d5807ccb4cc47f1f84d8d33e9a794d958c05cf35b80fc8747ddd93d834446611"
+  },
+  "expected": {
+    "suite_id": "owned-native-controller40-m40-a1",
+    "package_fingerprint": "e2a17aa5e05638df1920e74ea26b497ef40bebc8f9cfef3feda385464d052dfd",
+    "test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_path_preflight_does_not_create_worker_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_preflight_keeps_namespace_guard_before_later_path_errors",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_fresh_configure_materializes_profile_in_real_cmake_cache",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_unknown_profile_tokens_remain_postconditions_not_assignments",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_configure_rejects_conflicting_canonical_paths_values_and_types",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_configure_rejects_duplicate_bare_flags_and_unsupported_types",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_llama_source_requires_canonical_existing_protected_directory",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_embedded_llm_missing_declaration_rejected_before_output_creation",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_cache_profile_cannot_accept_prefixes_extra_flags_or_duplicate_key",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_canonical_selection_and_invocation_are_actual_data",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_stale_hash_and_preparation_pass_claim_cannot_be_used",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_duplicate_missing_count_or_reused_leaf_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_boolean_budgets_and_escaping_artifact_paths_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_partial_failed_and_skipped_junit_never_fills_expected_cases",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_duplicate_junit_case_is_not_two_observations",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_json_rejects_duplicate_nonfinite_and_aliased_job",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_runtime_inventory_keeps_symlink_text_and_excludes_git_metadata",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_protected_output_is_rejected_before_creating_any_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_rehashed_inconsistent_preparation_fields_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_runtime_drift_and_unreadable_protected_path_do_not_suppress_other_captures",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_identical_materialized_bytes_do_not_hide_changed_source_or_resource_commit",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_request_has_no_user_command_or_worker_module_extension",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_boolean_and_unknown_schema_are_not_v1",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_short_commit_and_bad_bound_digest_fail_before_launch",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_relative_or_extra_input_binding_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_bound_input_real_bytes_and_symlink_alias",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_replaced_identical_control_bytes_are_not_the_original_consumption_file",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_same_inode_rewrite_and_restore_is_still_a_consumption_change",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_malformed_launch_does_not_create_controller_or_other_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_process_identity_cannot_turn_unknown_or_boolean_pid_into_closed",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_recover_cannot_treat_absent_supervisor_identity_as_dead",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_exit_zero_closes_outer_before_exact_worker_lease_release",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_whole_deadline_closes_owned_unit_without_success",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_cancel_request_closes_owned_unit_without_restart",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_nested_child_closes_before_worker_lease_release",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_unbound_child_intent_adopted_only_after_dead_worker",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_partial_final_request_holds_lease_and_does_not_invent_child_closure",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_started_receipt_fault_still_closes_actual_outer_and_holds_lease",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_observer_broken_pipe_cannot_abort_actual_unit_cleanup"
+    ],
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "diagnostic_fragments": {},
+    "gate_outcome": "passed",
+    "controller_execution": "completed",
+    "controller_returncode": 0,
+    "worker_operation_passed": true
+  },
+  "files": [
+    {
+      "role": "root-observer-0",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40KernelOutput.json.gz",
+      "expected_bytes": 179,
+      "expected_sha256": "64add84accb63a4bc32f27afa54960b8d33b390edb719533bb27434301c87779",
+      "maximum_bytes": 179,
+      "staged_name": "root-observer-00",
+      "archive_path": "extras/root-observation/OwnedNative40KernelOutput.json.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-1",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40Request.json.gz",
+      "expected_bytes": 588,
+      "expected_sha256": "6abe98553cfbfadb88c3441e3e98855fcfaee2bbf780fc1a4e060b1865de44bf",
+      "maximum_bytes": 588,
+      "staged_name": "root-observer-01",
+      "archive_path": "extras/root-observation/OwnedNative40Request.json.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-2",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootControlsDelivery.json.gz",
+      "expected_bytes": 538,
+      "expected_sha256": "ee94995e2a8feddaa2ff6cb34d63f155da7602198fed9b340466e2aa982efc03",
+      "maximum_bytes": 538,
+      "staged_name": "root-observer-02",
+      "archive_path": "extras/root-observation/OwnedNative40RootControlsDelivery.json.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-3",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootFreshPreflight.json.gz",
+      "expected_bytes": 389,
+      "expected_sha256": "145d8cbb7a50baace3fd659d2afe8c585c1159cc979625f326bc8c71173b55a3",
+      "maximum_bytes": 389,
+      "staged_name": "root-observer-03",
+      "archive_path": "extras/root-observation/OwnedNative40RootFreshPreflight.json.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-4",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootPreparedMetadata.json.gz",
+      "expected_bytes": 54821,
+      "expected_sha256": "38da65d70603ebf866240da0df25808fcc90aba0262c232ccbb95b422945c232",
+      "maximum_bytes": 54821,
+      "staged_name": "root-observer-04",
+      "archive_path": "extras/root-observation/OwnedNative40RootPreparedMetadata.json.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-5",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootReadOnlyLeasePreflight.json.gz",
+      "expected_bytes": 144,
+      "expected_sha256": "ad133fb7698af62263186d5081f742e088d763da1b99bfad02595eef8159c303",
+      "maximum_bytes": 144,
+      "staged_name": "root-observer-05",
+      "archive_path": "extras/root-observation/OwnedNative40RootReadOnlyLeasePreflight.json.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-6",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunCommand.txt.gz",
+      "expected_bytes": 220,
+      "expected_sha256": "5799a9e13476bb6864e1106a785bde61728e67c986a97191977af2b9a04872ef",
+      "maximum_bytes": 220,
+      "staged_name": "root-observer-06",
+      "archive_path": "extras/root-observation/OwnedNative40RootRunCommand.txt.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-7",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunTransport.stderr.gz",
+      "expected_bytes": 20,
+      "expected_sha256": "9e72928e7a01615b4cf090daa617b4ca9d68531748f887f323f695eb4ca3ef63",
+      "maximum_bytes": 20,
+      "staged_name": "root-observer-07",
+      "archive_path": "extras/root-observation/OwnedNative40RootRunTransport.stderr.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-8",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunTransport.stdout.gz",
+      "expected_bytes": 956,
+      "expected_sha256": "be1e169cb14dc245a7c39668eb86cc9b91a712d5e1dabdb9f7694632ba580dca",
+      "maximum_bytes": 956,
+      "staged_name": "root-observer-08",
+      "archive_path": "extras/root-observation/OwnedNative40RootRunTransport.stdout.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-9",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootSourceDelivery.json.gz",
+      "expected_bytes": 454,
+      "expected_sha256": "9ff66001930ff1261bddfdd481d52bd4cc5864791ce99ac7c7dbee1911993449",
+      "maximum_bytes": 454,
+      "staged_name": "root-observer-09",
+      "archive_path": "extras/root-observation/OwnedNative40RootSourceDelivery.json.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-10",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootTerminalReadback.json.gz",
+      "expected_bytes": 3209,
+      "expected_sha256": "945d335b6d5474e9c328102ec4025cfb1adf42757d900f7369908f23d3d10bfa",
+      "maximum_bytes": 3209,
+      "staged_name": "root-observer-10",
+      "archive_path": "extras/root-observation/OwnedNative40RootTerminalReadback.json.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-11",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40Suite.json.gz",
+      "expected_bytes": 1667,
+      "expected_sha256": "64c84e9d3bc9d7b3eee1af22bcc27b0d1d3e07853dcbfe2dfae1322db93d6a2d",
+      "maximum_bytes": 1667,
+      "staged_name": "root-observer-11",
+      "archive_path": "extras/root-observation/OwnedNative40Suite.json.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-12",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/index.json",
+      "expected_bytes": 5351,
+      "expected_sha256": "9061e3dc83b881814da58ecf954b3285ecea4e28cc445e8dd2bad2af0d905af3",
+      "maximum_bytes": 5351,
+      "staged_name": "root-observer-12",
+      "archive_path": "extras/root-observation/index.json",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-13",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/nested-kernel-observer-v2.py.gz",
+      "expected_bytes": 3291,
+      "expected_sha256": "3045409052cdafacd5899e21ef82c705c55b9465014ab21bc050e797de672326",
+      "maximum_bytes": 3291,
+      "staged_name": "root-observer-13",
+      "archive_path": "extras/root-observation/nested-kernel-observer-v2.py.gz",
+      "purpose": "opaque_extra"
+    },
+    {
+      "role": "root-observer-14",
+      "root": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "relative_path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/nested-kernel-readback.json.gz",
+      "expected_bytes": 28910,
+      "expected_sha256": "7be520d687351e855f82c9f684e12503b71a8836bd1cfe609bd05f18f200a7cb",
+      "maximum_bytes": 28910,
+      "staged_name": "root-observer-14",
+      "archive_path": "extras/root-observation/nested-kernel-readback.json.gz",
+      "purpose": "opaque_extra"
+    }
+  ],
+  "git": [
+    {
+      "role": "collector-code-0",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/closed_python_validation.py",
+      "git_blob": "365c23fcaddbb3562c50993f20cd0e7c9f1f1be6",
+      "expected_bytes": 43434,
+      "expected_sha256": "c991b51e4f3a15146d9060c377a4874b822f3c537c7dad18dd36bb4f2ebc837a",
+      "maximum_bytes": 43434
+    },
+    {
+      "role": "collector-code-1",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/collector_provenance.py",
+      "git_blob": "64ebcc9ffa5f8db437fedabb1097d8ba93b9e8fe",
+      "expected_bytes": 44094,
+      "expected_sha256": "0e094f97d0d332a12f51ab1df4e86aa5de04812745600c26446d64470bf4040e",
+      "maximum_bytes": 44094
+    },
+    {
+      "role": "collector-code-2",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/owned_python_job.py",
+      "git_blob": "eacf09ed9b1c177e80e6d71c33cd231e611b24f9",
+      "expected_bytes": 22237,
+      "expected_sha256": "0ba0b1cca145e5ed442a19ace9c706cd034acd717b65589e03cb64c311944ec5",
+      "maximum_bytes": 22237
+    },
+    {
+      "role": "collector-code-3",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/resource_reservations.py",
+      "git_blob": "9d7ce3eec4e5f967a9e7cb078a8909e07d2dd97c",
+      "expected_bytes": 28055,
+      "expected_sha256": "76b7bedf0ba68f1f3cb20d08e0eeb99fc07e4a76dff66d5b25dfda2d99df876b",
+      "maximum_bytes": 28055
+    },
+    {
+      "role": "collector-code-4",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/runtime.py",
+      "git_blob": "5076c55cc37003e4601108530e7a4ae8778eaea2",
+      "expected_bytes": 8971,
+      "expected_sha256": "590bcee9b8f4b6612ebe6ff3b95eb9d76a1475a9aaee15c95a2232db85e3bfc4",
+      "maximum_bytes": 8971
+    },
+    {
+      "role": "collector-code-5",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/portable_primary.py",
+      "git_blob": "a91d0a09fa6ee63369482d931496e0db4a9f50ba",
+      "expected_bytes": 11174,
+      "expected_sha256": "c3f970d9b45047af9f6c155c723d44d2a505a470cf4fe76a5fb75035adac3293",
+      "maximum_bytes": 11174
+    },
+    {
+      "role": "collector-code-6",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/publisher.py",
+      "git_blob": "7b2c9bdba425b11f533215d03fd9802c031b86f1",
+      "expected_bytes": 21396,
+      "expected_sha256": "067f56ff299c07fff202a2fcc56d3f68d8fc5263baaedf856fd6d06b896c4ffb",
+      "maximum_bytes": 21396
+    },
+    {
+      "role": "collector-code-7",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/contained_process.py",
+      "git_blob": "273b38b5239ece528fe2b6f12bc96bdd620f3df1",
+      "expected_bytes": 15185,
+      "expected_sha256": "187645c22246b0468950d6c09c3be4be940ec908b4f56156831713377150abef",
+      "maximum_bytes": 15185
+    },
+    {
+      "role": "original-plan-0",
+      "repository": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1",
+      "repository_head": "42d9dc5814cbdefd15457407577a03102df9ee21",
+      "commit": "42d9dc5814cbdefd15457407577a03102df9ee21",
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/request.json",
+      "git_blob": "2285ed34953320345afc9e09d34f3fec4150d708",
+      "expected_bytes": 1428,
+      "expected_sha256": "6e6bd9b03b30ab7565cb6f060ddb305c40c70ab80f9de1d125f0437c02d2f93c",
+      "maximum_bytes": 1428
+    },
+    {
+      "role": "original-plan-1",
+      "repository": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1",
+      "repository_head": "42d9dc5814cbdefd15457407577a03102df9ee21",
+      "commit": "42d9dc5814cbdefd15457407577a03102df9ee21",
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/suite.json",
+      "git_blob": "83ba66f825c01eba121dd06d8ea27a2ca4320ee6",
+      "expected_bytes": 7334,
+      "expected_sha256": "d5807ccb4cc47f1f84d8d33e9a794d958c05cf35b80fc8747ddd93d834446611",
+      "maximum_bytes": 7334
+    },
+    {
+      "role": "original-plan-2",
+      "repository": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1",
+      "repository_head": "42d9dc5814cbdefd15457407577a03102df9ee21",
+      "commit": "42d9dc5814cbdefd15457407577a03102df9ee21",
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/manifest.json",
+      "git_blob": "20f00c99d2a946234215920e74afd72f5e7089b7",
+      "expected_bytes": 4557,
+      "expected_sha256": "140fb9381712d0a88680d7fbbc17d90a668231ee2f26c86123233c15b3d6c2c2",
+      "maximum_bytes": 4557
+    },
+    {
+      "role": "original-plan-3",
+      "repository": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1",
+      "repository_head": "42d9dc5814cbdefd15457407577a03102df9ee21",
+      "commit": "42d9dc5814cbdefd15457407577a03102df9ee21",
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/cmake/cmake-dependency.json",
+      "git_blob": "b23a7714401f94c97dfe881c6e18250f0c5d79d2",
+      "expected_bytes": 186,
+      "expected_sha256": "71d8671414b9e5e4f3ff5caded33d8389c007724f8dd65b99a1e01417aeefe90",
+      "maximum_bytes": 186
+    },
+    {
+      "role": "original-plan-4",
+      "repository": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1",
+      "repository_head": "42d9dc5814cbdefd15457407577a03102df9ee21",
+      "commit": "42d9dc5814cbdefd15457407577a03102df9ee21",
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/kernel-output/kernel-output.json",
+      "git_blob": "a1b2cb65a681650b19dd83ba34501a8fa30dba3d",
+      "expected_bytes": 247,
+      "expected_sha256": "32b30f365e08d74bac10a2ce936ddb462fbb523c509de3c5ad31b793bda61e7b",
+      "maximum_bytes": 247
+    },
+    {
+      "role": "root-observer-0",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40KernelOutput.json.gz",
+      "git_blob": "6a01139e683519d3b35f5645aaaae28a31b3b999",
+      "expected_bytes": 179,
+      "expected_sha256": "64add84accb63a4bc32f27afa54960b8d33b390edb719533bb27434301c87779",
+      "maximum_bytes": 179
+    },
+    {
+      "role": "root-observer-1",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40Request.json.gz",
+      "git_blob": "3428bd79bf05d77b5fafd3ccc884a34a88cb29c5",
+      "expected_bytes": 588,
+      "expected_sha256": "6abe98553cfbfadb88c3441e3e98855fcfaee2bbf780fc1a4e060b1865de44bf",
+      "maximum_bytes": 588
+    },
+    {
+      "role": "root-observer-2",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootControlsDelivery.json.gz",
+      "git_blob": "96106102e86a10cc67ed3126cccf9055848ff1cb",
+      "expected_bytes": 538,
+      "expected_sha256": "ee94995e2a8feddaa2ff6cb34d63f155da7602198fed9b340466e2aa982efc03",
+      "maximum_bytes": 538
+    },
+    {
+      "role": "root-observer-3",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootFreshPreflight.json.gz",
+      "git_blob": "933af0da5ea21b412f91e4c28b0276e73eefb7a5",
+      "expected_bytes": 389,
+      "expected_sha256": "145d8cbb7a50baace3fd659d2afe8c585c1159cc979625f326bc8c71173b55a3",
+      "maximum_bytes": 389
+    },
+    {
+      "role": "root-observer-4",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootPreparedMetadata.json.gz",
+      "git_blob": "df33283e3461cc07cf2b7c4b7524776f428a152f",
+      "expected_bytes": 54821,
+      "expected_sha256": "38da65d70603ebf866240da0df25808fcc90aba0262c232ccbb95b422945c232",
+      "maximum_bytes": 54821
+    },
+    {
+      "role": "root-observer-5",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootReadOnlyLeasePreflight.json.gz",
+      "git_blob": "1bdc0fe2be094f6dbf01f660af416bfaacdf8ce8",
+      "expected_bytes": 144,
+      "expected_sha256": "ad133fb7698af62263186d5081f742e088d763da1b99bfad02595eef8159c303",
+      "maximum_bytes": 144
+    },
+    {
+      "role": "root-observer-6",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunCommand.txt.gz",
+      "git_blob": "34d2598fa5e98cc3310bb79f5b8947e2f7ad1d45",
+      "expected_bytes": 220,
+      "expected_sha256": "5799a9e13476bb6864e1106a785bde61728e67c986a97191977af2b9a04872ef",
+      "maximum_bytes": 220
+    },
+    {
+      "role": "root-observer-7",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunTransport.stderr.gz",
+      "git_blob": "eb3294b92bbbb8d6f74dcde4761b99de8226581e",
+      "expected_bytes": 20,
+      "expected_sha256": "9e72928e7a01615b4cf090daa617b4ca9d68531748f887f323f695eb4ca3ef63",
+      "maximum_bytes": 20
+    },
+    {
+      "role": "root-observer-8",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunTransport.stdout.gz",
+      "git_blob": "3244018fc6156945018960edad1d38b56f8bc476",
+      "expected_bytes": 956,
+      "expected_sha256": "be1e169cb14dc245a7c39668eb86cc9b91a712d5e1dabdb9f7694632ba580dca",
+      "maximum_bytes": 956
+    },
+    {
+      "role": "root-observer-9",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootSourceDelivery.json.gz",
+      "git_blob": "073864ff7e7d22a83b1cf583c83054e865c209b1",
+      "expected_bytes": 454,
+      "expected_sha256": "9ff66001930ff1261bddfdd481d52bd4cc5864791ce99ac7c7dbee1911993449",
+      "maximum_bytes": 454
+    },
+    {
+      "role": "root-observer-10",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootTerminalReadback.json.gz",
+      "git_blob": "d2a1acfad94edd1b076d38546edae758ae6960ea",
+      "expected_bytes": 3209,
+      "expected_sha256": "945d335b6d5474e9c328102ec4025cfb1adf42757d900f7369908f23d3d10bfa",
+      "maximum_bytes": 3209
+    },
+    {
+      "role": "root-observer-11",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40Suite.json.gz",
+      "git_blob": "0b53ca7d8481c6e2b1329c82fd267eed25711ae6",
+      "expected_bytes": 1667,
+      "expected_sha256": "64c84e9d3bc9d7b3eee1af22bcc27b0d1d3e07853dcbfe2dfae1322db93d6a2d",
+      "maximum_bytes": 1667
+    },
+    {
+      "role": "root-observer-12",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/index.json",
+      "git_blob": "76c4387cbdac5820f4a3f69197222361b02c25b8",
+      "expected_bytes": 5351,
+      "expected_sha256": "9061e3dc83b881814da58ecf954b3285ecea4e28cc445e8dd2bad2af0d905af3",
+      "maximum_bytes": 5351
+    },
+    {
+      "role": "root-observer-13",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/nested-kernel-observer-v2.py.gz",
+      "git_blob": "05d3aef56fd76ef38d18f4137cde3392e1b7aa78",
+      "expected_bytes": 3291,
+      "expected_sha256": "3045409052cdafacd5899e21ef82c705c55b9465014ab21bc050e797de672326",
+      "maximum_bytes": 3291
+    },
+    {
+      "role": "root-observer-14",
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "repository_head": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "path": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/nested-kernel-readback.json.gz",
+      "git_blob": "ecb24cf65105e012c3270f43db6d9c5126bacb96",
+      "expected_bytes": 28910,
+      "expected_sha256": "7be520d687351e855f82c9f684e12503b71a8836bd1cfe609bd05f18f200a7cb",
+      "maximum_bytes": 28910
+    }
+  ],
+  "projections": [
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "patterns": [
+        "/Scripts/",
+        "/.gitattributes",
+        "/.gitignore",
+        "/.gitmodules",
+        "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+        "/LLM/.gitignore"
+      ]
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-owned-native-controller40-m40-a1",
+      "commit": "35fba3d1544f98b60401fa738aaba4ea2c6d1bff",
+      "patterns": [
+        "!/*",
+        "/Scripts/",
+        "/.gitattributes",
+        "/.gitignore",
+        "/.gitmodules",
+        "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+        "/LLM/.gitignore"
+      ]
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1",
+      "commit": "42d9dc5814cbdefd15457407577a03102df9ee21",
+      "patterns": [
+        "!/*",
+        "/.gitattributes",
+        "/.gitignore",
+        "/.gitmodules",
+        "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+        "/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/cmake/cmake-dependency.json",
+        "/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/kernel-output/kernel-output.json",
+        "/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/manifest.json",
+        "/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/request.json",
+        "/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/suite.json",
+        "/LLM/.gitignore"
+      ]
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+      "commit": "e682f1e0e8b7091f129e1a892761d10816c9dfd1",
+      "patterns": [
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40KernelOutput.json.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40Request.json.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootControlsDelivery.json.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootFreshPreflight.json.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootPreparedMetadata.json.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootReadOnlyLeasePreflight.json.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunCommand.txt.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunTransport.stderr.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootRunTransport.stdout.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootSourceDelivery.json.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40RootTerminalReadback.json.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/OwnedNative40Suite.json.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/index.json",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/nested-kernel-observer-v2.py.gz",
+        "/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-root-observation/nested-kernel-readback.json.gz",
+        "/.gitattributes",
+        "/.gitignore",
+        "/.gitmodules",
+        "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+        "/LLM/.gitignore"
+      ]
+    }
+  ],
+  "fixture_reference_roles": [
+    "original-plan-3",
+    "original-plan-4"
+  ],
+  "extra_metadata_note": "Opaque retained metadata only. No arbitrary file or observer file mints nested-kernel, numerical, model, certificate or scientific authority. Original validation outcome remains separate from collection success.",
+  "limits": {
+    "maximum_capture_bytes": 67108864,
+    "maximum_git_bytes": 16777216,
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  }
+}

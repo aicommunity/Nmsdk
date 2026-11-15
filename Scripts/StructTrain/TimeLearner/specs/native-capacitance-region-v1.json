@@ -1,0 +1,26 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 2,
+  "cooperative_runtime_capture": true,
+  "runtime_manifest": "REPLACE_WITH_ACTUAL_RUNTIME_MANIFEST.json",
+  "source_root": "REPLACE_WITH_ACTUAL_SOURCE_ROOT",
+  "expected_test_ids": [
+    "TrainingCapacitanceRegion/ClassicSelectsItsOwnPathBeyondFourInputs",
+    "TrainingCapacitanceRegion/BranchUsesAdjacentIntervalsInsteadOfTheWholeCommonCable",
+    "TrainingCapacitanceRegion/CoincidentAttachmentsHaveNoCapacitanceControl",
+    "TrainingCapacitanceRegion/AbsoluteRequestsAreIdempotentAndRetainDormantCorrections",
+    "TrainingCapacitanceRegion/AnchorAndMalformedGeometryAreNotSearchVariables",
+    "TrainingCapacitanceRegion/BoundsAndBudgetAreCheckedBeforeExpandingPaths",
+    "TrainingCapacitanceRegion/ARequestDoesNotInventC0OrNativeReadbackProof",
+    "NativeCapacitanceRegion/Classic0At2000",
+    "NativeCapacitanceRegion/Classic1At2000",
+    "NativeCapacitanceRegion/Branch0At2000",
+    "NativeCapacitanceRegion/Branch1At2000",
+    "NativeCapacitanceRegion/Classic0At20000",
+    "NativeCapacitanceRegion/Classic1At20000",
+    "NativeCapacitanceRegion/Branch0At20000",
+    "NativeCapacitanceRegion/Branch1At20000"
+  ],
+  "maximum_wall_seconds": 7200,
+  "asan_options": "detect_leaks=0"
+}

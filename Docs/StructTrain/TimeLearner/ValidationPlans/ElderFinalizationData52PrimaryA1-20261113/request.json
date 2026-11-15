@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-finalization-data52-primary-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "929dbc176a0804910544539aaf79bdc4a02aa82a",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 268435456
+  },
+  "operation": {
+    "kind": "closed-primary-bundle",
+    "manifest": {
+      "path": "/home/user/timelearner-refactor/requests/finalization-data52-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderFinalizationData52PrimaryA1-20261113/manifest.json",
+      "sha256": "0d89229367ac603d75bdfa5a48a60fe0cde42f715660d02c413896b61daa636c"
+    }
+  }
+}

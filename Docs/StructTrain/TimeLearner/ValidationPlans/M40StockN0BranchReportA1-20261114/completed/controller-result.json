@@ -1,0 +1,40 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 2,
+  "execution": "process_error",
+  "reason": "runtime_content_changed:/usr/lib/x86_64-linux-gnu/libc.so.6",
+  "returncode": 0,
+  "wall_seconds": 342.7854298199527,
+  "model_time": null,
+  "runtime_provenance": "invalid_or_incomplete_runtime",
+  "mapping_error": null,
+  "runtime_fingerprint": "376a6719bae7c16b23ac36aeb24d2cc8c3c3478ece0c1f8441556fad5e88b97d",
+  "ownership_scope": "bound_cgroup",
+  "all_processes_closed": true,
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "clear",
+    "error_records": 0,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 0,
+    "reasons": [],
+    "examples": [],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 817,
+        "sha256": "43268d48af63b6caf1e02cd81fe73bbfd344b68f1ec4a48bd408bf77b6953bd2"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "contained_streams_match": true,
+    "scientific_verdict": null
+  }
+}

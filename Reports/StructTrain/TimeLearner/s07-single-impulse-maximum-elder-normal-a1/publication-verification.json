@@ -1,0 +1,53 @@
+{
+  "archive_members": 247,
+  "archive_bytes": 647372,
+  "archive_sha256": "580e093d0e10b6d31f571737f9f06bbac5a88a79395c092ac8ff7a7b125f8862",
+  "inventory": {
+    "expected": 38,
+    "observed": 38,
+    "failed_test_ids": [
+      "SingleImpulseMaximumNative/FaultsRestoreBothTopologies"
+    ],
+    "assertion_status": "failed",
+    "sha256": "78829466ac7a3b9eb56223c9764ff0bbd92235bace881a3a8155b84199cfa14a"
+  },
+  "reader_tests": 0,
+  "native_passed": 37,
+  "native_failed": 1,
+  "harness_file_identity_failures": 12,
+  "attempt_accepted": false,
+  "generated_build_command_files": {
+    "Libraries/Nmsdk-PulseLib/CMakeFiles/Nmsdk-PulseLib.core.dir/flags.make": {
+      "bytes": 1613,
+      "sha256": "22dcd09e43af92c61aa1d9eee9bd0a1ebb45162feb649758de953f2924f19d54"
+    },
+    "Libraries/Nmsdk-PulseLib/CMakeFiles/Nmsdk-PulseLib.core.dir/link.txt": {
+      "bytes": 7806,
+      "sha256": "a72c74ec0cb14e63a4a1dafd19c71e1094ffa2ca505aeb76f9c220a211f94953"
+    },
+    "Tests/Integration/Libraries/CMakeFiles/Test_PulseLib_StorageComponents.dir/flags.make": {
+      "bytes": 3162,
+      "sha256": "fa90e35cdb2d03e7426e5d8fd48b15e30587e8eec5ae023428c7630d6c22b321"
+    },
+    "Tests/Integration/Libraries/CMakeFiles/Test_PulseLib_StorageComponents.dir/link.txt": {
+      "bytes": 5728,
+      "sha256": "ce8f71faa3d7b46a5690c6908a67ef58631141515f96ee591164b840588e29f5"
+    },
+    "App/NeuroModelerConsole/CMakeFiles/NeuroModelerConsole.dir/flags.make": {
+      "bytes": 3527,
+      "sha256": "1e4e9a4edc6df50388e82ccc03d283a37e165f17f41dbc2d7a269e51998f68e7"
+    },
+    "App/NeuroModelerConsole/CMakeFiles/NeuroModelerConsole.dir/link.txt": {
+      "bytes": 3171,
+      "sha256": "8a98d9828f24cbf1a4cb746d3911cf262ef5b078d2dec71ee431fa7096139802"
+    }
+  },
+  "whole_group_closed": true,
+  "lease_released": true,
+  "old_runtime_file_hashes_unchanged": true,
+  "ledger_metadata_unchanged": true,
+  "ASan_verified": false,
+  "Console12_executed_on_Elder": false,
+  "classification_evaluated": false,
+  "scientific_verdict": null
+}

@@ -1,0 +1,92 @@
+{
+  "kind": "native_burst_resistance_study_result",
+  "schema_version": 1,
+  "source_revision": "fea609e0651ccf779b58a9321e8d4008e984db768ce1167cdcc1406d1a03280d",
+  "source_geometry": [
+    27,
+    27,
+    27,
+    1
+  ],
+  "input_index": 2,
+  "physical_bank_owners": [
+    0,
+    1,
+    2
+  ],
+  "rows": [
+    {
+      "name": "replay",
+      "resistance": 86000000,
+      "model_revision": "fea609e0651ccf779b58a9321e8d4008e984db768ce1167cdcc1406d1a03280d",
+      "observation_complete": true,
+      "sample_count": 3601,
+      "global_diagnostic_maxima": [
+        {
+          "channel": 0,
+          "potential": 0.005456576369859967
+        }
+      ],
+      "global_maxima_are_not_assigned_impulse_measurements": true
+    },
+    {
+      "name": "matched",
+      "resistance": 86000000,
+      "model_revision": "fea609e0651ccf779b58a9321e8d4008e984db768ce1167cdcc1406d1a03280d",
+      "observation_complete": true,
+      "sample_count": 3601,
+      "global_diagnostic_maxima": [
+        {
+          "channel": 0,
+          "potential": 0.005456576369859967
+        }
+      ],
+      "global_maxima_are_not_assigned_impulse_measurements": true
+    },
+    {
+      "name": "resistance-1",
+      "resistance": 21500000,
+      "model_revision": "34d7414fdaf701987c43643bf22b4fb484615e77efa83106939d786253cf6451",
+      "observation_complete": true,
+      "sample_count": 3601,
+      "global_diagnostic_maxima": [
+        {
+          "channel": 0,
+          "potential": 0.02235560254260882
+        }
+      ],
+      "global_maxima_are_not_assigned_impulse_measurements": true
+    }
+  ],
+  "comparisons": [
+    {
+      "name": "resistance-1",
+      "conditions": {
+        "absolute_sample_times_equal": true,
+        "windows_equal": true,
+        "actual_stimulus_rows_and_events_equal": true
+      },
+      "maximum_absolute_potential_difference": [
+        0.016899033776445083
+      ]
+    }
+  ],
+  "source_files": [
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train/native/train_stopped_state.json",
+      "sha256": "34592c7b65d11624a33628db91c1d6439d8c0852c0ed6c53f3836688c96247d8",
+      "size": 198897970
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train/native/train_stopped_summary.json",
+      "sha256": "818d76c40a383284e0d1d3da9966ded08d7d6b200f9ca543f84805fd7946b750",
+      "size": 19448874
+    }
+  ],
+  "runtime_fingerprint": "876084860467bd48df962a7eca848d7853f9ba9c39b9f6c8a49133a9309c95a5",
+  "declared_grid_completed": true,
+  "training_executed": false,
+  "assigned_peak_measured": false,
+  "single_training_pattern_only": true,
+  "classification_verdict": null
+}

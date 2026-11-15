@@ -1,3 +1,5 @@
+> Исторический журнал этапа. Статусы и слова «ещё не реализован» ниже относятся к указанным там снимкам. Текущее состояние кода и оставшаяся приёмка — [ImplementationStatus](ImplementationStatus.ru.md). Общий native controller и configured ControllerVersion=2 уже существуют; полный lifecycle/physics/compatibility scope остаётся частичным. Исходные результаты проверок сохранены без переименования.
+
 # Этап 4: подтверждённый подэтап и оставшиеся проверки
 
 Последующие TL-017/018: [ProbeMeasurement](ProbeMeasurement.ru.md) фиксирует

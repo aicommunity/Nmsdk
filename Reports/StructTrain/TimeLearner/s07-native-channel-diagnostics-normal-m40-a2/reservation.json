@@ -1,0 +1,93 @@
+{
+  "token": "3793eaab-a94d-4e7e-9c42-ef18335e3afa",
+  "job_id": "s07-native-channel-diagnostics-normal-a2",
+  "owner": {
+    "pid": 1386471,
+    "start_ticks": "308788430",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "resources": [
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a2",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-fixed-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-fixed-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a2",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-asan19-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-asan19-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-channel-diagnostics-normal-a2-delivery",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-channel-diagnostics-normal-a2-delivery",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "access": "read"
+    }
+  ],
+  "state": "held",
+  "scientific_verdict": null,
+  "ledger_schema": 1,
+  "live_K1_ledger_not_migrated": true,
+  "scope": "Read/write paths only; actual memory/task cap enforced by the enclosing cgroup. Native Console/Test build,12 existing controls,4 matched observer Off/On probes and18 actual-primary readers."
+}

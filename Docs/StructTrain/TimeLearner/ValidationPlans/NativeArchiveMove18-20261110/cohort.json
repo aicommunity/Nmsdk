@@ -1,0 +1,208 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeLoadHistory.cpp",
+      "suites": [
+        "NativeArchiveOwnership",
+        "NativeClassImageReplay",
+        "NativeLoadHistory"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_ModelArchive.cpp",
+      "suites": [
+        "NativeArchiveTelemetry",
+        "TimeLearnerModelArchive"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeCandidateWindowPackage"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent",
+    "TimeLearnerModelArchive/RejectsContradictoryNativeImageXmlWithExistingClass",
+    "TimeLearnerModelArchive/RejectsContradictoryDerivedImageXmlWithExistingClass",
+    "NativeLoadHistory/FreshAt2000",
+    "NativeLoadHistory/ConnectedChildAt2000",
+    "NativeLoadHistory/DetachedChildAt2000",
+    "NativeLoadHistory/FreshAt20000",
+    "NativeLoadHistory/ConnectedChildAt20000",
+    "NativeLoadHistory/DetachedChildAt20000",
+    "NativeClassImageReplay/ActualMembraneCopyAndLoadStages",
+    "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease",
+    "NativeArchiveTelemetry/At2000",
+    "NativeArchiveTelemetry/At20000",
+    "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip",
+    "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+    "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+  ],
+  "runplan": [
+    {
+      "name": "archive-ownership",
+      "expected_ids": [
+        "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "load-and-xml-controls-8",
+      "expected_ids": [
+        "TimeLearnerModelArchive/RejectsContradictoryNativeImageXmlWithExistingClass",
+        "TimeLearnerModelArchive/RejectsContradictoryDerivedImageXmlWithExistingClass",
+        "NativeLoadHistory/FreshAt2000",
+        "NativeLoadHistory/ConnectedChildAt2000",
+        "NativeLoadHistory/DetachedChildAt2000",
+        "NativeLoadHistory/FreshAt20000",
+        "NativeLoadHistory/ConnectedChildAt20000",
+        "NativeLoadHistory/DetachedChildAt20000"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "actual-membrane-stages",
+      "expected_ids": [
+        "NativeClassImageReplay/ActualMembraneCopyAndLoadStages"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "actual-class-image-replay",
+      "expected_ids": [
+        "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "archive-waveforms",
+      "expected_ids": [
+        "NativeArchiveTelemetry/At2000",
+        "NativeArchiveTelemetry/At20000"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "package-1",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+      ],
+      "wall_seconds": 3600
+    },
+    {
+      "name": "package-2",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip"
+      ],
+      "wall_seconds": 3600
+    },
+    {
+      "name": "package-3",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip"
+      ],
+      "wall_seconds": 3600
+    },
+    {
+      "name": "package-4",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ],
+      "wall_seconds": 3600
+    },
+    {
+      "name": "package-5",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ],
+      "wall_seconds": 3600
+    }
+  ],
+  "partitions": [
+    {
+      "name": "archive-ownership",
+      "count": 1,
+      "ids": [
+        "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+      ]
+    },
+    {
+      "name": "load-and-xml-controls-8",
+      "count": 8,
+      "ids": [
+        "TimeLearnerModelArchive/RejectsContradictoryNativeImageXmlWithExistingClass",
+        "TimeLearnerModelArchive/RejectsContradictoryDerivedImageXmlWithExistingClass",
+        "NativeLoadHistory/FreshAt2000",
+        "NativeLoadHistory/ConnectedChildAt2000",
+        "NativeLoadHistory/DetachedChildAt2000",
+        "NativeLoadHistory/FreshAt20000",
+        "NativeLoadHistory/ConnectedChildAt20000",
+        "NativeLoadHistory/DetachedChildAt20000"
+      ]
+    },
+    {
+      "name": "actual-membrane-stages",
+      "count": 1,
+      "ids": [
+        "NativeClassImageReplay/ActualMembraneCopyAndLoadStages"
+      ]
+    },
+    {
+      "name": "actual-class-image-replay",
+      "count": 1,
+      "ids": [
+        "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease"
+      ]
+    },
+    {
+      "name": "archive-waveforms",
+      "count": 2,
+      "ids": [
+        "NativeArchiveTelemetry/At2000",
+        "NativeArchiveTelemetry/At20000"
+      ]
+    },
+    {
+      "name": "package-1",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+      ]
+    },
+    {
+      "name": "package-2",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip"
+      ]
+    },
+    {
+      "name": "package-3",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip"
+      ]
+    },
+    {
+      "name": "package-4",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ]
+    },
+    {
+      "name": "package-5",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ]
+    }
+  ]
+}

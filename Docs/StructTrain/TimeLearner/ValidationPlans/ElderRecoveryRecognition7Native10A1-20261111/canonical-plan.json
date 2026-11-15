@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/home/user/timelearner-refactor",
+  "source": {
+    "path": "/home/user/timelearner-refactor/source-recovery-recognition7-native10-a1",
+    "commit": "ca8be945377d9833a789a847ee5b7cae9241050f",
+    "namespace": {
+      "path": "/home/user/timelearner-refactor/requests/recovery-recognition7-native10-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRecoveryRecognition7Native10A1-20261111/namespace.json",
+      "sha256": "54548aeb20e64064e41a40e924da9c8482dd99e59f6e86a9fd697b360304cbec"
+    }
+  },
+  "cohort": {
+    "path": "/home/user/timelearner-refactor/requests/recovery-recognition7-native10-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRecoveryRecognition7Native10A1-20261111/cohort.json",
+    "sha256": "8f598d73ac475919ff6425dbfa375829dc517e48290b45dcbb69bf2f4ddc600c"
+  },
+  "native_job": {
+    "path": "/home/user/timelearner-refactor/requests/recovery-recognition7-native10-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRecoveryRecognition7Native10A1-20261111/native-job.json",
+    "sha256": "b54e91a8b19a96995ac060a32411d80ffeef93a521d7ab3c0a1dc685336f2109"
+  },
+  "prior_bindings": [],
+  "external_output": "/home/user/timelearner-refactor/readbacks/s08-recovery-recognition7-native10-prepared-elder-a1",
+  "native_tool": {
+    "path": "/home/user/timelearner-refactor/source-n1-geometry-decision-after-a4",
+    "commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a"
+  },
+  "require_fresh_build": true
+}

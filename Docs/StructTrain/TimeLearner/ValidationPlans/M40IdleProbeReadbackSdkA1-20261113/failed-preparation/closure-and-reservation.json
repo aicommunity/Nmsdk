@@ -1,0 +1,108 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "2794f5353f8636487d58b4d60a028df48ad55997b87ac18016be5b6f090cdffe",
+      "unit": "timelearner-9787e5d8-5f5c-4e27-ae47-2aada01c69c8.service",
+      "invocation_id": "689a9cdf34ba47e985eaf6e2321de61a",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9787e5d8-5f5c-4e27-ae47-2aada01c69c8.service",
+      "initial_main_pid": 3290010,
+      "initial_start_ticks": "362639554",
+      "sha256": "bc84746f38d8ee5dd104e92ce81b3026227de064661aa87e7dde05e6be3b1b3b"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "536870912",
+      "TasksMax": "32",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 9787e5d8-5f5c-4e27-ae47-2aada01c69c8",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "689a9cdf34ba47e985eaf6e2321de61a"
+    },
+    "memory_max": 536870912,
+    "tasks_max": 32,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "5dcf687c-89d8-4a5d-b3f0-d304aacb9a12",
+      "job_id": "s07-idle-probe-readback-sdk-canonical-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3290010,
+        "start_ticks": "362639554",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-idle-probe-readback-sdk-canonical-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-idle-probe-readback-sdk-canonical-m40-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-idle-probe-readback-sdk-prepared-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-idle-probe-readback-sdk-prepared-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/idle-probe-readback-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40IdleProbeReadbackSdkA1-20261113",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/idle-probe-readback-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40IdleProbeReadbackSdkA1-20261113"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-idle-probe-readback-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-idle-probe-readback-sdk-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794551198.1284587,
+      "deadline": 1794551358.1567907,
+      "updated": 1794551248.5010066,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

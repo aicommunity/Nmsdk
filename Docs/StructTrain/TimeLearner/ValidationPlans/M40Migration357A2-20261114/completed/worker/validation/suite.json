@@ -1,0 +1,34 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s09-migration357-cli-m40-a2",
+  "package_fingerprint": "54123fc18b40b08bf7f53f41fa1e65b3ec4a10f8606c7e18ea3138fe3c2e9c89",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_current_script_migration_cli"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_current_script_migration_cli.CurrentScriptMigrationCliTest.test_all357_exact_history_records_and_restored_last_path_negative"
+  ],
+  "fixtures": {
+    "TIMELEARNER_MIGRATION357_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "262db4c3b65fff16a52ab619a74fca8c95821b726fc85cdfdde81faab2d69b6a"
+    },
+    "TIMELEARNER_MIGRATION357_ROOT": {
+      "pattern": "**/*.pack",
+      "files": 2,
+      "fingerprint": "6ca1fbd9144b03e0fb580e1816ae2c0d3a12713b22571bb9586638476e73f9f1"
+    },
+    "TIMELEARNER_MIGRATION357_BIN": {
+      "pattern": "**/*.pack",
+      "files": 1,
+      "fingerprint": "8bfe49ac00d93940ded36ec81e2e6362a2dbf5f068f7c20932624f3192c5781a"
+    },
+    "TIMELEARNER_MIGRATION357_PULSE": {
+      "pattern": "**/*.pack",
+      "files": 1,
+      "fingerprint": "007fd14c6c2b1c343d9ffb2583d4a4686330d81492e21aa75591273d47d31f82"
+    }
+  }
+}

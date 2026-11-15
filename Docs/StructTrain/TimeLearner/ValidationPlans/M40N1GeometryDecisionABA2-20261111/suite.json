@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "n1-geometry-production-native-domain-before-after-m40-a2",
+  "package_fingerprint": "330445b3c2d53dc78952ad5d695fc84d65a0bd5ca361e8637f343a5a636f18c4",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n1_geometry_cpp_ab"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n1_geometry_cpp_ab.N1GeometryCppABTest.test_before_exposes_starvation_and_after_passes_complete_decision_cohort"
+  ],
+  "fixtures": {
+    "TIMELEARNER_N1_GEOMETRY_CPP_CONTROLS": {
+      "pattern": "*.json",
+      "files": 1,
+      "fingerprint": "be7f7d7db6dcde740004051bbc57b4c8e7e700dd6244b5005559537b2b26622a"
+    }
+  }
+}

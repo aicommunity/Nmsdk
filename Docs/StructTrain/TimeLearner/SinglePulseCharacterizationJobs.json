@@ -1,0 +1,49 @@
+{
+  "kind": "single_pulse_native_acceptance_job",
+  "schema_version": 1,
+  "recorded_utc": "2026-11-07T01:51:37.012063+00:00",
+  "host": "10.245.1.17",
+  "root_commit": "288b64386ba6b07028cd84500655dd15adaebb63",
+  "PulseLib_commit": "302124bb3e8aaa412bc7ddacad8560cf427ac94b",
+  "job_id": "s07-single-pulse-native-normal-a1",
+  "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-pulse-native-normal-a1",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-pulse-native-normal-a1-container",
+  "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-native-normal-a1",
+  "status_at_last_kernel_observation": "closed",
+  "unit": "timelearner-12b9c172-cea6-49e9-b94f-d7e8a0c8ef35.service",
+  "invocation_id": "39947edb4fef45008e10f63aeccb3c36",
+  "initial_main_pid": 1410659,
+  "initial_start_ticks": "309097805",
+  "previous_closed_released_job": "s07-native-channel-diagnostics-normal-a2",
+  "new_tests_expected": 9,
+  "existing_controls_expected": 12,
+  "tests_passed": 16,
+  "expected_physical_sizes": [
+    1,
+    2,
+    4,
+    6
+  ],
+  "expected_frequencies_hz": [
+    2000,
+    20000
+  ],
+  "acceptance_complete": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "worker_source_sha256": "61a59a9695fa8abd6afac94c908b427511999827fde6c63a356c7583d4066a26",
+  "root_code_packet_sha256": "3a781cdd3a1a9cefdec104e8a87bfe9556b1d740b7714c420073870480f5b7a0",
+  "PulseLib_code_packet_sha256": "ab4b4d0a60e862fdfac6bf71fa5e1fd5a31e7d01bd365275339caefe1f96910a",
+  "restart_policy": "Inspect this exact contained handle and closure before any source/build/runtime reuse; missing observation is not a terminal result.",
+  "build_passed": true,
+  "observed_native_tests": 21,
+  "tests_failed": 5,
+  "failure_classification": "Fixture artifact filename collision; full assertion inventory must be checked before claiming this is the sole cause.",
+  "failed_test_ids": [
+    "SinglePulseCharacterization/ClassicRestoresBurstResponse",
+    "SinglePulseCharacterization/BranchRestoresBurstResponse",
+    "SinglePulseCharacterization/PreparedFaultRestoresBothTopologies",
+    "SinglePulseCharacterization/SampleFaultRestoresBothTopologies",
+    "SinglePulseCharacterization/FinalSampleFaultRestoresBothTopologies"
+  ]
+}

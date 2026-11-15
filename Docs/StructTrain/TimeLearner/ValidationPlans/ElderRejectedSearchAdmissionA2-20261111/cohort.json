@@ -1,0 +1,131 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeCandidateWindowRejection",
+        "NativeCandidateWindowFactory",
+        "NativeCandidateWindowPackage"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeLoadHistory.cpp",
+      "suites": [
+        "NativeArchiveOwnership"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeCandidateWindowRejection/ClassicCompleteMissingSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/BranchCompleteMissingSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/Classic20000MissingSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/Branch20000MissingSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/ClassicCompleteAmbiguousSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/BranchCompleteAmbiguousSearchHasClosedCapability",
+    "NativeCandidateWindowRejection/ClassicDefaultDoesNotCreateCapability",
+    "NativeCandidateWindowRejection/BranchDefaultDoesNotCreateCapability",
+    "NativeCandidateWindowRejection/ClassicPartialSearchCannotPromote",
+    "NativeCandidateWindowRejection/BranchPartialSearchCannotPromote",
+    "NativeCandidateWindowRejection/ClassicRejectedReferenceCannotPromote",
+    "NativeCandidateWindowRejection/BranchRejectedReferenceCannotPromote",
+    "NativeCandidateWindowRejection/ClassicRejectedFinalCannotPromote",
+    "NativeCandidateWindowRejection/BranchRejectedFinalCannotPromote",
+    "NativeCandidateWindowRejection/ClassicExpiredGroupBudgetCannotPromote",
+    "NativeCandidateWindowRejection/BranchExpiredGroupBudgetCannotPromote",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterCancel",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterLearnerReset",
+    "NativeCandidateWindowRejection/CapabilityExpiresWhenNextGroupCloses",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterAttemptDestruction",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterSameSemanticGraphRebuild",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterExternalStop",
+    "NativeCandidateWindowFactory/ClassicCompleteReferencesAndActualReplayedCandidate",
+    "NativeCandidateWindowFactory/BranchCompleteReferencesAndActualReplayedCandidate",
+    "NativeCandidateWindowFactory/Classic20000ActualReplayedCandidate",
+    "NativeCandidateWindowFactory/Branch20000ActualReplayedCandidate",
+    "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+    "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+  ],
+  "runplan": [
+    {
+      "name": "rejected-search-native29",
+      "expected_ids": [
+        "NativeCandidateWindowRejection/ClassicCompleteMissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/BranchCompleteMissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/Classic20000MissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/Branch20000MissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/ClassicCompleteAmbiguousSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/BranchCompleteAmbiguousSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/ClassicDefaultDoesNotCreateCapability",
+        "NativeCandidateWindowRejection/BranchDefaultDoesNotCreateCapability",
+        "NativeCandidateWindowRejection/ClassicPartialSearchCannotPromote",
+        "NativeCandidateWindowRejection/BranchPartialSearchCannotPromote",
+        "NativeCandidateWindowRejection/ClassicRejectedReferenceCannotPromote",
+        "NativeCandidateWindowRejection/BranchRejectedReferenceCannotPromote",
+        "NativeCandidateWindowRejection/ClassicRejectedFinalCannotPromote",
+        "NativeCandidateWindowRejection/BranchRejectedFinalCannotPromote",
+        "NativeCandidateWindowRejection/ClassicExpiredGroupBudgetCannotPromote",
+        "NativeCandidateWindowRejection/BranchExpiredGroupBudgetCannotPromote",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterCancel",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterLearnerReset",
+        "NativeCandidateWindowRejection/CapabilityExpiresWhenNextGroupCloses",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterAttemptDestruction",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterSameSemanticGraphRebuild",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterExternalStop",
+        "NativeCandidateWindowFactory/ClassicCompleteReferencesAndActualReplayedCandidate",
+        "NativeCandidateWindowFactory/BranchCompleteReferencesAndActualReplayedCandidate",
+        "NativeCandidateWindowFactory/Classic20000ActualReplayedCandidate",
+        "NativeCandidateWindowFactory/Branch20000ActualReplayedCandidate",
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+        "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+      ],
+      "wall_seconds": 1800
+    }
+  ],
+  "partitions": [
+    {
+      "name": "rejected-search-capability",
+      "ids": [
+        "NativeCandidateWindowRejection/ClassicCompleteMissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/BranchCompleteMissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/Classic20000MissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/Branch20000MissingSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/ClassicCompleteAmbiguousSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/BranchCompleteAmbiguousSearchHasClosedCapability",
+        "NativeCandidateWindowRejection/ClassicDefaultDoesNotCreateCapability",
+        "NativeCandidateWindowRejection/BranchDefaultDoesNotCreateCapability",
+        "NativeCandidateWindowRejection/ClassicPartialSearchCannotPromote",
+        "NativeCandidateWindowRejection/BranchPartialSearchCannotPromote",
+        "NativeCandidateWindowRejection/ClassicRejectedReferenceCannotPromote",
+        "NativeCandidateWindowRejection/BranchRejectedReferenceCannotPromote",
+        "NativeCandidateWindowRejection/ClassicRejectedFinalCannotPromote",
+        "NativeCandidateWindowRejection/BranchRejectedFinalCannotPromote",
+        "NativeCandidateWindowRejection/ClassicExpiredGroupBudgetCannotPromote",
+        "NativeCandidateWindowRejection/BranchExpiredGroupBudgetCannotPromote",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterCancel",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterLearnerReset",
+        "NativeCandidateWindowRejection/CapabilityExpiresWhenNextGroupCloses",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterAttemptDestruction",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterSameSemanticGraphRebuild",
+        "NativeCandidateWindowRejection/CapabilityExpiresAfterExternalStop"
+      ],
+      "count": 22
+    },
+    {
+      "name": "existing-valid-and-stored-package",
+      "ids": [
+        "NativeCandidateWindowFactory/ClassicCompleteReferencesAndActualReplayedCandidate",
+        "NativeCandidateWindowFactory/BranchCompleteReferencesAndActualReplayedCandidate",
+        "NativeCandidateWindowFactory/Classic20000ActualReplayedCandidate",
+        "NativeCandidateWindowFactory/Branch20000ActualReplayedCandidate",
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+        "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+      ],
+      "count": 7
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-package6-native-rest-canonical-operation-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "6bb8baeba6e01999860ad31813ab089b7a194e65",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "native-canonical-preparation",
+    "plan": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/package6-native-rest-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeRestArchive5-20261110/canonical-plan.json",
+      "sha256": "00dbf9dca43db26c072664e38541ebfb5445efdcc8081f11160ee66242b44d59"
+    }
+  }
+}

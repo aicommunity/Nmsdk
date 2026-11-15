@@ -1,0 +1,57 @@
+{
+  "observed_at_utc": "2026-11-10T10:57:44.127Z",
+  "source_root": "f39b9ebdcd0e7a64e388d778ca32374a65ae4e0c",
+  "declared_controls_root": "81eab18f26ac9b998cd7f243fd0a18316485d0dd",
+  "actual_status": {
+    "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller",
+    "supervisor_identity": {
+      "pid": 399987,
+      "start_ticks": "338340735",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "supervisor_identity_known": true,
+    "supervisor_live": true,
+    "outer": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "8f7f567ce933c5a574d2702b91bc14778d623ef9d73feb5e07e8ab8cf08082f2",
+        "unit": "timelearner-344781f4-7650-4663-8914-6d5a337ec695.service",
+        "invocation_id": "b018880b442b4aa4acc0abd0044bdd51",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-344781f4-7650-4663-8914-6d5a337ec695.service",
+        "initial_main_pid": 405767,
+        "initial_start_ticks": "338342163",
+        "sha256": "06cfaa39ea42ad6c6a1c30a67933e82674021664b9243895176da53d2b01387c"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "405767",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-344781f4-7650-4663-8914-6d5a337ec695.service",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 344781f4-7650-4663-8914-6d5a337ec695",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "b018880b442b4aa4acc0abd0044bdd51"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "unbound_outer_intent": false,
+    "result": null,
+    "scientific_verdict": null
+  },
+  "scientific_verdict": null
+}

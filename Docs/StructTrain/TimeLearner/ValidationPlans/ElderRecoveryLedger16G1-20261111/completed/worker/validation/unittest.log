@@ -1,0 +1,21 @@
+test_changed_external_primary_is_rejected_even_with_no_claimed_events (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_events.CandidateWindowRecoveryEventDataTest) ... ok
+test_empty_event_set_audits_primary_but_does_not_claim_ledger_completeness (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_events.CandidateWindowRecoveryEventDataTest) ... ok
+test_legacy_runtime_cannot_be_relabelled_as_recovery_execution (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_events.CandidateWindowRecoveryEventDataTest) ... ok
+test_missing_ids_and_boolean_or_nonfinite_numbers_fail (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_events.CandidateWindowRecoveryEventDataTest) ... ok
+test_real_valid_geometry_without_measurement_cannot_authorize_recovery (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_events.CandidateWindowRecoveryEventDataTest) ... ok
+test_rehashed_event_cannot_point_outside_closed_archive (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_events.CandidateWindowRecoveryEventDataTest) ... ok
+test_rehashed_unknown_fields_counter_and_outcome_changes_fail (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_events.CandidateWindowRecoveryEventDataTest) ... ok
+test_wire_shape_and_stable_hash_do_not_attest_a_measurement (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_events.CandidateWindowRecoveryEventDataTest) ... ok
+test_duplicate_delivery_rejected_before_a_fabricated_event_can_admit (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_ledger.CandidateWindowRecoveryLedgerDataTest) ... ok
+test_empty_ledger_replays_primary_without_claiming_training_or_coverage (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_ledger.CandidateWindowRecoveryLedgerDataTest) ... ok
+test_even_empty_ledger_rejects_changed_primary (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_ledger.CandidateWindowRecoveryLedgerDataTest) ... ok
+test_explicit_historical_attempt_must_exist_and_match_runtime (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_ledger.CandidateWindowRecoveryLedgerDataTest) ... ok
+test_foreign_archive_source_owner_and_unknown_field_fail (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_ledger.CandidateWindowRecoveryLedgerDataTest) ... ok
+test_rehashed_false_producer_and_coverage_claims_fail (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_ledger.CandidateWindowRecoveryLedgerDataTest) ... ok
+test_unhashed_changes_fail (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_ledger.CandidateWindowRecoveryLedgerDataTest) ... ok
+test_valid_peak_cannot_be_relabelled_as_a_recovery_delivery (Scripts.StructTrain.TimeLearner.tests.test_candidate_window_recovery_ledger.CandidateWindowRecoveryLedgerDataTest) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 2.238s
+
+OK

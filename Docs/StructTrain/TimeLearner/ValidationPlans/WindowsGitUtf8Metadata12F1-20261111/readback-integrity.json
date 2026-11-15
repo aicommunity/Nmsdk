@@ -1,0 +1,31 @@
+{
+  "kind": "windows_git_utf8_metadata_readback",
+  "schema_version": 1,
+  "worker": "10.245.1.14",
+  "tool_commit": "7de0cee469e1fdd7262a28fd85cc1899b3376861",
+  "tool_root": "C:/Projects/TimeLearnerWorker/tools-git-utf8-f1",
+  "output_directory": "C:/Projects/TimeLearnerWorker/jobs/git-utf8-metadata12-f1",
+  "files": {
+    "result.json": {
+      "bytes": 2043,
+      "sha256": "3d7403cf038e9dafd5b1271b3f9487772b68d5ed1854010e92da906206aad029"
+    },
+    "actual-sdk.json": {
+      "bytes": 2608,
+      "sha256": "c67581e0237687978a14652becebc28f08d4a70f85a51d0dd6a462218a2db5b4"
+    }
+  },
+  "tools": {
+    "GitPreparation.psm1": {
+      "git_blob_sha256": "1aacab040af42dc07353dbcfaab6bdc612d0562c00163dd171d5673fd4bb883a",
+      "materialized_sha256": "b8b8eeebb433c9f58a79c735a6cccd9855f80df568a0a7a6592267e9e2ae4629",
+      "checkout_line_endings": "CRLF"
+    },
+    "test-git-preparation.ps1": {
+      "git_blob_sha256": "27e935e9283b0003bb86975e974be2f0b441e5c2b71b9af10acc97c0e1eb2256",
+      "materialized_sha256": "de33f3db652a4f476407c844528b9c10453bf337ea06623e8fd8ce7cd42c5b69",
+      "checkout_line_endings": "CRLF"
+    }
+  },
+  "scope": "12 metadata preparation checks; no native C++ or scientific verdict"
+}

@@ -101,11 +101,14 @@ NaN, missing ticks и censored хвост видны как разрывы/от�
 - Этап 11: report generator принимает ожидаемое множество испытаний из job spec
   и versioned analysis. Создаёт переносимый HTML/Markdown index, крупные overview,
   zoom views, vector exports, previews и manifest рисунков. Ссылки относительные;
-  отчёт открывается из чистого checkout без CDN, сервера или внешних файлов.
-- Этап 10, уточнён пользователем 30.10.2026: компактный Git хранит lossless
-  compressed primary data, модели, конфиги, метрики, manifests и выбранные
-  контрольные figures в Reports/StructTrain/TimeLearner. Полный переносимый
-  report всех ожидаемых trial/soma пар — воспроизводимый cache на M40.
+  развёрнутый отчёт открывается локально без CDN после получения проверенных
+  данных из общего архива.
+- Этап 10, пересмотрен пользователем 14.11.2026: Git хранит код, настройки,
+  небольшие метрики/manifests и архивные references. Lossless compressed primary,
+  бинарные модели и полные отчёты хранятся в
+  `/media/user/Data/Nmsdk-StructTrainExpArchive`, доступном по Samba. См.
+  [контракт архива](ExternalExperimentArchive.ru.md). Полный переносимый
+  report всех ожидаемых trial/soma пар архивируется; его развёрнутая копия — кэш.
   Сохранять renderer/runtime recipe и hashes; проверить реальную распаковку и
   регенерацию. Отсутствие требуемого графика в полном cache делает именно этот
   report неполным; хранение выбранных рисунков в Git не выдаётся за просмотр
@@ -115,6 +118,14 @@ NaN, missing ticks и censored хвост видны как разрывы/от�
   связать рисунки с критериями оценки, не подменяя визуализацией numeric validation.
 
 ## Проверки и приёмка
+
+Адресная проверка 07.11: [область наблюдения и читаемость channel reports](ChannelObservationScope-2026-11-07.ru.md).
+На M40 перестроены 163 views четырёх Classic soma, прошли три tests и metadata
+A/B; три выбранных PNG просмотрены. Разделены waveform completeness, packet
+validity и принадлежность окна каналу; весь текст >=12 pt, layout имеет
+измеряемый зазор легенды. Ранний вариант с перекрытием отклонён и сохранён в
+истории попыток. Это не приёмка всей указанной ниже матрицы и не исправление
+training peak assignment.
 
 Использовать production renderer и реальные native observations на обоих workers.
 Проверить Classic/Branch, N0/N1, все используемые soma, N>4, порядок/ITI,

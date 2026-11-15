@@ -1,0 +1,94 @@
+{
+  "schema_version": 2,
+  "windows_source_root": "C:\\Projects\\TimeLearnerWorker\\source-recovery-boundary7-win-f1",
+  "source_closure": {
+    "root": {
+      "head": "3edb22a4cf80b76fbae4deb379ec510ebfac0fcf",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "63d7a623e8488617c3cfcda775b1baa68e5db29f",
+      "head": "63d7a623e8488617c3cfcda775b1baa68e5db29f",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "status": ""
+    }
+  },
+  "executable": {
+    "path": "C:\\Windows\\System32\\cmd.exe",
+    "sha256": "badf4752413cb0cbdc03fb95820ca167f0cdc63b597ccdb5ef43111180e088b0",
+    "size": 289792
+  },
+  "app_ini": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-recovery-boundary7-sdk-build-f1\\build.cmd",
+    "sha256": "da1c8fc7d851d94f0b2c7fa7c5309905219f3383b660099b3745f41e7414e42e",
+    "size": 2134
+  },
+  "compiler": {
+    "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\Hostx64\\x64\\cl.exe",
+    "sha256": "b0a1818ebae6da7f18230a84e76ce839212584ac4c2ab55b97a0d5268085da57",
+    "size": 893288
+  },
+  "resolved_libraries": [],
+  "loaded_process_files": null,
+  "windows_backend": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\source-recovery-boundary7-win-f1\\Scripts\\StructTrain\\TimeLearner\\windows_process.py",
+    "sha256": "aa4009e3c18f1ff3488ff0e46cb228fba55d4cb4c48d5efafe06a101591cd537",
+    "size": 21608
+  },
+  "build_flags": {
+    "role": "private_full_sdk_build",
+    "parallelism": 1,
+    "ASan": false,
+    "windows_backend_sha256": "aa4009e3c18f1ff3488ff0e46cb228fba55d4cb4c48d5efafe06a101591cd537"
+  },
+  "loader_environment": {
+    "PATH": "C:\\Program Files\\Eclipse Foundation\\jdk-8.0.302.8-hotspot\\bin;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Git\\cmd;C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\;c:\\Cursor\\resources\\app\\codeBin;C:\\Users\\User\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\User\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Cursor\\resources\\app\\bin;C:\\Users\\User\\AppData\\Local\\Python\\bin;C:\\Users\\User\\AppData\\Local\\Python\\pythoncore-3.14-64\\Scripts",
+    "QT_PLUGIN_PATH": null,
+    "QT_QPA_PLATFORM": null
+  },
+  "runtime_identity": {
+    "kind": "timelearner_runtime_content",
+    "schema_version": 2,
+    "executable": "badf4752413cb0cbdc03fb95820ca167f0cdc63b597ccdb5ef43111180e088b0",
+    "app_ini": "da1c8fc7d851d94f0b2c7fa7c5309905219f3383b660099b3745f41e7414e42e",
+    "resolved_libraries": [],
+    "build_flags": {
+      "role": "private_full_sdk_build",
+      "parallelism": 1,
+      "ASan": false,
+      "windows_backend_sha256": "aa4009e3c18f1ff3488ff0e46cb228fba55d4cb4c48d5efafe06a101591cd537"
+    },
+    "compiler": "b0a1818ebae6da7f18230a84e76ce839212584ac4c2ab55b97a0d5268085da57",
+    "loaded_process_files": null
+  },
+  "runtime_fingerprint": "4aa0846a227611d067756395cb1887b50c05effa0c9df018dc35f3ae4ecda9d4"
+}

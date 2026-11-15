@@ -120,3 +120,38 @@ Y-scale подписан, форму слабого хвоста можно ср
 Поэтому manifest имеет status=diagnostic, visual_acceptance_complete=false
 и evaluation_verdict=null. Исполнение renderer не доказывает новый научный
 результат и не пересматривает августовские 4/8–6/8.
+
+## Дополнение14.11: отдельная положительная Y-шкала
+
+В actual Classic N0 fixed-threshold опыте отрицательный reset около−0.38
+сжимает положительные ответы порядка0.003..0.02 на общем диапазоне.
+Дополнительный positive-response Y-detail использует те же полные samples,
+actual input и LT events; отрицательная часть ниже оси явно помечена clipped.
+Он обязан сопровождаться полным shared-range overview: скрывать reset либо
+выдавать Y-detail за полный диапазон запрещено. Общая positive Y-шкала одного
+канала одинакова для всех восьми паттернов. LTZone.Potential получает собственное
+название оси и порог; отдельные Soma.SumPotential порога LT не наследуют.
+
+Новый необязательный аргумент render_soma(include_native_tiles=False) позволяет
+не повторять тысячи уже существующих native tiles при выпуске дополнительной
+Y-шкалы. Default True сохраняет прежний полный набор временных увеличений.
+Переключатель принимает только bool, не меняет observations/scorer и сам по себе
+не свидетельствует о визуальной приёмке или сходимости.
+
+[Actual report](ClassicN0ThresholdScientificReport-20261114.ru.md) содержит все8
+Soma1/input curves и3 остальных сомы target. [A1 companion](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/RESULT.ru.md)
+прошёл unit1/1;11 выбранных Soma PNG просмотрены. Его8 LT companions не приняты
+из-за ошибочного текста оси. Исправление root6410bfb76cb6cf189c41863fc2511c125045b250
+[проверено адресным A2 server rerender1/1](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/RESULT.ru.md);8 исправленных LT originals просмотрены,11 Soma PNG byte-identical принятой A1.
+
+[Branch N0 A/B report](N0GeometryPhysicalScientificReport-20261114.ru.md) имеет6
+просмотренных waveform overview. Native boundary views у0с показывают clock/input,
+а не назначенный пик; приёмку peak-centered zoom ими подменять нельзя.
+
+[Два реальных назначенных N0 пика](ValidationPlans/M40N0GeometryPeakFocusA1-20261114/RESULT.ru.md) отдельно приняты1/1 и просмотрены: frames920..1040,121 native sample,0.46..0.52с. Full-before в заголовке означает пробу до omission; это применимо к обеим версиям алгоритма. Y local каждого view, числовые оси не тождественны между моделями.
+
+## Actual64 order report
+
+[Собственный A2 report принят1/1](ValidationPlans/M40ClassicN0OrderReportA2-20261114/RESULT.ru.md):15 trials (первые8 patterns и target в каждой позиции),4 сомы+LT,full/positive scales,150 channel-scale groups,267 PNG. ВGit13 выбранных original PNG, все13 просмотрены; остальная gallery — M40 cache. Для всех8 baseline patterns исходные уже просмотренные figures явно повторно используются только после точного сравнения первых8 новых waveform samples. Нельзя выдавать15 plotted trials за64 plotted trials или13 ручных просмотров за267.
+
+Новый worker вызывает plotting_runtime до большого source audit и записывает environment в manifest. A1 неверный системный Python отказал без matplotlib; A2 использует ранее проверенное plot-python-owned-copy-a1/bin/python. Нейронная модель/порог/scorer не менялись. Native maximum views — максимум полного Test-отклика, не assigned Train peak. Все21 samples видны; для большого absolute time Matplotlib печатает X offset, который пояснён в scientific report.

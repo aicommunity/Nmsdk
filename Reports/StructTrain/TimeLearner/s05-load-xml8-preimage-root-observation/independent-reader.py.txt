@@ -1,0 +1,27 @@
+import subprocess,json,hashlib,io,tarfile,xml.etree.ElementTree as E
+repo=r'E:/Science-Repo/nmsdk-matched-witness-codec'
+commit='015bbf13b7fce872560173b14f0dce5bfd9d6cf4'
+prefix='Reports/StructTrain/TimeLearner/s05-load-xml8-preimage-m40-a1/'
+def git(*a):return subprocess.check_output(['git','-C',repo,*a])
+m=json.loads(git('show',commit+':'+prefix+'capture.json'))
+a=git('show',commit+':'+prefix+'primary.tar.gz')
+assert len(a)==m['archive']['bytes'] and hashlib.sha256(a).hexdigest()==m['archive']['sha256']
+with tarfile.open(fileobj=io.BytesIO(a),mode='r:gz') as tar:
+ members=tar.getmembers();assert all(x.isfile() for x in members)
+ assert len(members)==len(m['files'])==41
+ assert set(x.name for x in members)==set(x['path'] for x in m['files'])
+ data={x.name:tar.extractfile(x).read() for x in members}
+for x in m['files']:
+ b=data[x['path']];assert len(b)==x['bytes'] and hashlib.sha256(b).hexdigest()==x['sha256']
+assert data['source-before.json']==data['source-after.json']
+assert json.loads(data['kernel-closure.json'])['all_processes_closed'] is True
+assert all(x['state']=='released' for x in json.loads(data['reservation-after.json']))
+root=E.fromstring(data['gate/native.xml']);tests=list(root.iter('testcase'))
+assert len(tests)==8
+ids=[x.get('classname')+'/'+x.get('name') for x in tests];assert len(set(ids))==8
+failed=sorted(x.get('classname')+'/'+x.get('name') for x in tests if x.find('failure') is not None or x.find('error') is not None)
+expected=sorted(['TimeLearnerModelArchive/RejectsContradictoryNativeImageXmlWithExistingClass','TimeLearnerModelArchive/RejectsContradictoryDerivedImageXmlWithExistingClass','NativeLoadHistory/ConnectedChildAt2000','NativeLoadHistory/ConnectedChildAt20000'])
+assert failed==expected
+changes=git('diff-tree','--no-commit-id','--name-status','-r',commit).decode().splitlines()
+assert set(changes)==set('A\t'+prefix+x for x in ['README.md','capture.json','primary.tar.gz'])
+print(json.dumps(dict(kind='independent_native_preimage_capture_check',schema_version=1,commit=commit,archive_bytes=len(a),members=41,tests=8,passed=4,failed=failed,closure_checked=True,released_lease_checked=True,source_before_after_equal=True,exact_three_added_paths=True,numerical_runtime_executed_locally=False,scientific_verdict=None),indent=2))

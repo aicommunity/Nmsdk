@@ -1,0 +1,93 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "94c95c2341b168991a7d8f70f1a6d05c31079a1d9473815410f8176e208158da",
+      "unit": "timelearner-2fbf9653-0ac6-4820-97aa-70f92893f766.service",
+      "invocation_id": "e26077e363634316879e6bf0293f65bf",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2fbf9653-0ac6-4820-97aa-70f92893f766.service",
+      "initial_main_pid": 998052,
+      "initial_start_ticks": "356932823",
+      "sha256": "0731276c283cbc1207b74c0334a1ddd1a81d877933e9ece7d821505af4499513"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "2147483648",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 2fbf9653-0ac6-4820-97aa-70f92893f766",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "e26077e363634316879e6bf0293f65bf"
+    },
+    "memory_max": 2147483648,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "365d1213-3d05-48af-a2ef-fd0d8d3be1c1",
+      "job_id": "s07-full-domain-budget16-train-m40-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 998052,
+        "start_ticks": "356932823",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-domain-budget16-train-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-domain-budget16-train-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/full-domain-budget16-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FullDomainBudget16TrainA2-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/full-domain-budget16-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FullDomainBudget16TrainA2-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/full-domain-budget16-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FullDomainBudget16TrainA2-20261112/fixture",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/full-domain-budget16-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FullDomainBudget16TrainA2-20261112/fixture"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/full-domain-budget16-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FullDomainBudget16TrainA2-20261112/prepared",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/full-domain-budget16-train-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40FullDomainBudget16TrainA2-20261112/prepared"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794494130.7533422,
+      "deadline": 1794496371.9927728,
+      "updated": 1794496260.9847667,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

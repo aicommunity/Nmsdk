@@ -1,0 +1,24 @@
+{
+  "kind": "assigned_vertex_asan_split_jobs",
+  "job": "s07-assigned-vertex-asan-split-m40-a1",
+  "host": "10.245.1.17",
+  "root": "0f03bdca386a59583a3404b8045ce026a147cf07",
+  "PulseLib": "9e0640964945ad5903a4fff1c5091ebf71a69810",
+  "worker_sha256": "f2a7a785f61d42f81193b4d377af20f66cb8ca6bd8c46dafd8bbf180770adaed",
+  "unit": "timelearner-4915c5db-60c4-4e96-a25e-19df74ff9e57.service",
+  "invocation_id": "33d31995e0fc45108346d5977b9bc1a6",
+  "initial_main_pid": 1889561,
+  "initial_start_ticks": "316293306",
+  "request_sha256": "b0597b0620c0d5fb7d52b1ffd4dd23dabe809d2e6725dc56ae66edf63cd2be88",
+  "cases": {
+    "NativeBurstAssignment/SharedClassicVertexCannotCertify2000": 1200,
+    "NativeBoundedTraining/Branch20000": 5400
+  },
+  "prior_timeout_evidence": "ec2451b2d24bc15c9ad711c059516fa4782affe0",
+  "status": "completed; native 2/2 passed; overall freeze gate rejected because runtime EventsLog changed",
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "evidence_commit": "9a7ecff59c1bdcc6f0b36205c1c73d8381b89aa3",
+  "independent_verification": "AssignedVertexASanSplitVerification.json",
+  "closed_and_released": true
+}

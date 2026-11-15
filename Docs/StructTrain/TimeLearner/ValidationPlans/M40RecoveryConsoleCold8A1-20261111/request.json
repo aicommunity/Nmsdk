@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-recovery-console-cold8-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "3a64bbf09fb906844d9943ee3c4b0589300bcfda",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 128,
+    "maximum_wall_seconds": 21600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 6442450944
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-recovery-console-cold8-a1",
+      "commit": "3a64bbf09fb906844d9943ee3c4b0589300bcfda"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/recovery-console-cold8-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecoveryConsoleCold8A1-20261111/suite.json",
+      "sha256": "a9acc5224384779bb7de9dd07fbb0a823ee2e407a785997113d8ffb8ee08310e"
+    },
+    "fixtures": {
+      "TIMELEARNER_RECOVERY_CONSOLE": "/media/user/Data/TimeLearnerRefactor/requests/recovery-console-cold8-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecoveryConsoleCold8A1-20261111/fixture",
+      "TIMELEARNER_RECOVERY_CONSOLE_PACKAGE7_BUNDLE": "/media/user/Data/TimeLearnerRefactor/publications/recovery-recognition7-native10-elder-a2/Reports/StructTrain/TimeLearner/RecoveryRecognition7Native10ClosedCorpus-20261111",
+      "TIMELEARNER_CONSOLE_RUNTIME_FILES": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 268435456,
+      "maximum_total_bytes": 536870912
+    }
+  }
+}

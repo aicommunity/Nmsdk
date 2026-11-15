@@ -1,0 +1,57 @@
+{
+  "closure": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s07-isi-template-baseline-normal-a2",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-isi-template-baseline-normal-a2-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "917b1b3143509e536741153985ebf60a0cd0030654c7c1dea7afe511b31b9fc0",
+        "unit": "timelearner-072f55b1-cc89-4d82-a4b7-6cc967b3a649.service",
+        "invocation_id": "5a846847eb824b8cae14731f4ffb022a",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-072f55b1-cc89-4d82-a4b7-6cc967b3a649.service",
+        "initial_main_pid": 1340142,
+        "initial_start_ticks": "308141887",
+        "sha256": "795570fb51f5cb0da54d9cbe9c4bf2867acd748f0203348c5173ba2c4bdf993a"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-072f55b1-cc89-4d82-a4b7-6cc967b3a649.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "d8831423-5168-4a0e-9aff-86b28ee25827",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "exception": {
+    "reason": "Command '['git', '-C', '/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1', 'fetch', '--no-recurse-submodules', '--update-shallow', '/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-a2-delivery', '920d42a700d9d3f3477bd94c4aac9d145ea73cac']' returned non-zero exit status 128.",
+    "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-isi-template-baseline-normal-a2-worker.py\", line 98, in <module>\n    subprocess.run(['git','-C',str(source),'fetch','--no-recurse-submodules','--update-shallow',str(incoming),root],check=True)\n  File \"/usr/lib/python3.12/subprocess.py\", line 571, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['git', '-C', '/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1', 'fetch', '--no-recurse-submodules', '--update-shallow', '/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-a2-delivery', '920d42a700d9d3f3477bd94c4aac9d145ea73cac']' returned non-zero exit status 128.\n"
+  },
+  "source_HEAD_unchanged": "56ac50c9f0217f82f284ea9e277bfb4137c7ccc2",
+  "reason": "ordinary fetch attempted missing promisor Reports payload; no model/runtime or source checkout changed"
+}

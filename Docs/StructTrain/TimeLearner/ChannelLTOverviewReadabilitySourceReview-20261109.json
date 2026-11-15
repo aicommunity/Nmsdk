@@ -1,0 +1,275 @@
+{
+  "kind": "channel_LT_overview_readability_source_review",
+  "schema_version": 1,
+  "prepared_date": "2026-11-09",
+  "base_root": "85b1d24ab7e216285e90f5c65117b44cc35fb2c7",
+  "status": "source_only_unrun",
+  "existing_image_QA": {
+    "images": [
+      {
+        "path": "Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Classic-threshold-training100-retry32-single-soma1-overview.png",
+        "git_blob": "8469084f1356c84d18f96af745a0e7b4cac6ae78",
+        "bytes": 211870,
+        "sha256": "a0824f6970e735053ca135800d71c675541f2b36882040aa2f9575daac221d47",
+        "commit": "8bc32a401e5b330597ee4f0328b6683f69ad6a7a",
+        "unchanged_at_base": "85b1d24ab7e216285e90f5c65117b44cc35fb2c7",
+        "review_method": "local view_image of exact Git bytes, no image editing/rendering or CSV analysis"
+      },
+      {
+        "path": "Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Classic-threshold-training100-retry32-single-soma1-measured-peak-01055-detail.png",
+        "git_blob": "e419ef8c6ade47bd0e1a9d98dcc3cb1e1133d46b",
+        "bytes": 258367,
+        "sha256": "dddd6cf29d7db15a2cbbf9b54862ec52f392e69b53f251aa9c81110a3d9d91a3",
+        "commit": "8bc32a401e5b330597ee4f0328b6683f69ad6a7a",
+        "unchanged_at_base": "85b1d24ab7e216285e90f5c65117b44cc35fb2c7",
+        "review_method": "local view_image of exact Git bytes, no image editing/rendering or CSV analysis"
+      }
+    ],
+    "observations": [
+      "Classic single overview LT curve is visually compressed by threshold100 in the same Y axis",
+      "The already published selected single/detail visibly shows a nonzero curved LT Potential trace with native sample markers and threshold outside local Y annotation",
+      "The selected image pair does not support a raw-zero LT claim",
+      "No burst sample values or response mechanism inferred from this single/detail inspection"
+    ],
+    "scope": "two published selected Classic single images only; no new visual acceptance of candidate renderer",
+    "physical_cause": null,
+    "missing_Ready_Init_execution_trace_remains_unresolved": true,
+    "missing_runtime_flags_needed_to_identify_this_visual_scale_artifact": false
+  },
+  "base_source_issue": {
+    "path": "Scripts/StructTrain/TimeLearner/channel_diagnostic_reports.py",
+    "base_binding": {
+      "path": "Scripts/StructTrain/TimeLearner/channel_diagnostic_reports.py",
+      "git_blob": "cba54cabf2b89577d9ee8fe96b97edf4d69ed348",
+      "bytes": 18926,
+      "sha256": "59fde74fd454ec541a998768cf38e1a894d9fe6d3c45e49237d8cc84a56c6917"
+    },
+    "lines": "54-57",
+    "operation": "chart appends the LT threshold to recorded values before padded_limits; overview/zoom LT axis is then forced to include100"
+  },
+  "candidate_source_blobs": [
+    {
+      "path": "Scripts/StructTrain/TimeLearner/channel_diagnostic_reports.py",
+      "git_blob": "121d46d22ed870fc960483599310d4ca9bc1c74f",
+      "bytes": 20512,
+      "sha256": "5b74c62fd36dc351ea1e3f7336295d34596b8074555de5e644d2c5f62096f32c"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/tests/test_channel_observation_scope.py",
+      "git_blob": "e1483a761b094ee7e38d12a2c96a483d8377b479",
+      "bytes": 3477,
+      "sha256": "f327cc417c51b3d62b681e80a2929fcf0afafdefe7e2776c1431888347068645"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/tests/test_channel_lt_threshold_display.py",
+      "git_blob": "b1e7c7502376cb2a3212df1baaedc444a73412bd",
+      "bytes": 1996,
+      "sha256": "8aa6a5b3c01aa75cd35391cc800893ec53eb8fc27d0ae5e696e2f8daa4c0899c"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/tests/test_channel_positive_lobe.py",
+      "git_blob": "c1ea7e0120ac32cfce2ef132cf6d2cdb881e2529",
+      "bytes": 3016,
+      "sha256": "a81c6d1a55e75a54f25e8a91cf4bd97959ae1eee532ce7a48884d25976b7e892"
+    }
+  ],
+  "candidate_behavior": {
+    "renderer_version": 3,
+    "manifest_schema_version": 3,
+    "LT_overview_and_shared_zoom_Y": "padded min/max of all actual recorded LT values only; no threshold in limits",
+    "LT_measured_peak_details_Y": "existing local recorded-value limits retained",
+    "threshold_inside_axis": "actual reference line plus exact round-tripping binary64 label",
+    "threshold_outside_axis": "no out-of-range line; explicit exact value and above/below displayed-Y annotation",
+    "ordinate_transform": "none; actual units/signal/source/stimulus/spikes unchanged",
+    "full_time_domain": "unchanged; no silent cropping or inferred pulse/peak",
+    "positive_lobe_soma_view": "existing separately labelled behavior unchanged",
+    "legacy_metadata": "threshold_outside_local_Y retained with its original local-only meaning",
+    "new_view_metadata": [
+      "renderer_version",
+      "threshold_outside_displayed_Y",
+      "lt_threshold_display.source/value/value_text/position/line_drawn/annotation/axis_range_policy"
+    ],
+    "new_manifest_metadata": [
+      "renderer_version",
+      "lt_axis_range_policy"
+    ],
+    "old_images_and_primaries_overwritten": false
+  },
+  "test_source_inventory": {
+    "test_channel_diagnostic_reports": {
+      "source": {
+        "path": "Scripts/StructTrain/TimeLearner/tests/test_channel_diagnostic_reports.py",
+        "git_blob": "67919f808c00eacce14162f06047d8ea0bc3b452",
+        "bytes": 2644,
+        "sha256": "c66209d7dc1b771ad16a370cf6d85f3af804493156b169be3c51b29f6221303d"
+      },
+      "tests": [
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_actual_channel_rest_is_not_assumed_zero",
+          "AST_line": 25
+        },
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_actual_lt_events_are_preserved_and_all_classic_somas_exist",
+          "AST_line": 32
+        },
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_existing_report_is_preserved",
+          "AST_line": 39
+        },
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_wrong_git_native_prefix_is_rejected_before_creating_report",
+          "AST_line": 46
+        }
+      ]
+    },
+    "test_channel_observation_scope": {
+      "source": {
+        "path": "Scripts/StructTrain/TimeLearner/tests/test_channel_observation_scope.py",
+        "git_blob": "e1483a761b094ee7e38d12a2c96a483d8377b479",
+        "bytes": 3477,
+        "sha256": "f327cc417c51b3d62b681e80a2929fcf0afafdefe7e2776c1431888347068645"
+      },
+      "tests": [
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationCaptionTest.test_missing_scope_cannot_silently_reuse_ambiguous_legacy_caption",
+          "AST_line": 12
+        },
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationCaptionTest.test_complete_waveform_and_packet_refusal_are_separate_claims",
+          "AST_line": 16
+        },
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationScopeNativeTest.test_actual_high_threshold_is_excluded_from_the_full_time_LT_signal_axis",
+          "AST_line": 28
+        },
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationScopeNativeTest.test_actual_additional_classic_soma_is_not_the_selected_peak_window",
+          "AST_line": 47
+        }
+      ]
+    },
+    "test_channel_positive_lobe": {
+      "source": {
+        "path": "Scripts/StructTrain/TimeLearner/tests/test_channel_positive_lobe.py",
+        "git_blob": "c1ea7e0120ac32cfce2ef132cf6d2cdb881e2529",
+        "bytes": 3016,
+        "sha256": "a81c6d1a55e75a54f25e8a91cf4bd97959ae1eee532ce7a48884d25976b7e892"
+      },
+      "tests": [
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_positive_lobe.PositiveLobeNativeReportTest.test_classic_positive_crest_remains_visible_without_hiding_clipped_samples",
+          "AST_line": 48
+        },
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_positive_lobe.PositiveLobeNativeReportTest.test_branch_positive_crest_remains_visible_without_hiding_clipped_samples",
+          "AST_line": 51
+        },
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_positive_lobe.PositiveLobeNativeReportTest.test_paired_full_range_preserves_actual_negative_feedback_excursion",
+          "AST_line": 54
+        }
+      ]
+    },
+    "test_channel_lt_threshold_display": {
+      "source": {
+        "path": "Scripts/StructTrain/TimeLearner/tests/test_channel_lt_threshold_display.py",
+        "git_blob": "b1e7c7502376cb2a3212df1baaedc444a73412bd",
+        "bytes": 1996,
+        "sha256": "8aa6a5b3c01aa75cd35391cc800893ec53eb8fc27d0ae5e696e2f8daa4c0899c"
+      },
+      "tests": [
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_remote_thresholds_keep_exact_value_and_direction_without_an_axis_line",
+          "AST_line": 9
+        },
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_visible_threshold_and_axis_boundaries_keep_the_actual_reference_line",
+          "AST_line": 21
+        },
+        {
+          "test_id": "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_nonfinite_threshold_or_invalid_axis_cannot_be_reported_as_a_valid_reference",
+          "AST_line": 30
+        }
+      ]
+    }
+  },
+  "expected_tests": 14,
+  "new_tests": 4,
+  "tests_executed": false,
+  "new_tests_scope": [
+    "above/below reference exact value and no off-axis line",
+    "inside/boundary reference line",
+    "nonfinite/invalid range refusal",
+    "actual high-threshold full-time chart+render SVG annotation and data containment; no nonzero assertion about burst samples"
+  ],
+  "future_server_gate_requirements": {
+    "state": "not_dispatched_requires_review",
+    "runtime": "existing owned_python_job python-validation pipeline with approved plot-venv/owned TMPDIR; no runner API change, generated worker or orchestrator",
+    "input_roles": [
+      "TIMELEARNER_CHANNEL_DIAGNOSTIC_CORPUS: existing actual low Classic/Branch corpus, pinned Git manifest",
+      "TIMELEARNER_CHANNEL_DIAGNOSTIC_REPOSITORY: corresponding read-only evidence ODB",
+      "TIMELEARNER_HIGH_CLASSIC_NATIVE: Git-restored actual cd8d Classic burst native prefix",
+      "TIMELEARNER_MAXIMUM_REPLAY_NATIVE: actual accepted low-threshold Classic/Branch primary with exact Git binding"
+    ],
+    "output_role": "Both render test helpers default TemporaryDirectory(dir=None) when legacy TIMELEARNER_REPORT_TEST_DIR is absent; existing owned_python_job supplies writable worker/tmp through inherited TMPDIR. Do not declare TIMELEARNER_REPORT_TEST_DIR as validation fixture. Explicit legacy output env still works in its reviewed legacy caller.",
+    "required": "exact14 inventory/zero skips/errors/failures, physical source before/after, original primary SHA before/after, actual backend/dependencies, bounded owned closure/released lease",
+    "render_followup": "fresh separate cache via existing production channel_diagnostic_reports CLI; selected full-time LT overview and existing detail compared visually; old8bc cache/PNG/primary immutable",
+    "concrete_source_and_fixture_fingerprints": "derive from pinned candidate Git commit and actual restored files before dispatch; none fabricated here"
+  },
+  "scope_guards": {
+    "no_Cpp_physics_algorithm_or_native_lifecycle_changes": true,
+    "no_M40_Elder_Windows_runtime_cache_access": true,
+    "no_CSV_numeric_or_model_calls_locally": true,
+    "no_local_plot_or_unit_test_execution": true,
+    "local_allowed_checks": "Git/hash, AST inventory/diff and published-image viewing only",
+    "scientific_verdict": null,
+    "raw_zero_or_graph_defect_verified": false
+  },
+  "test_count_reconciliation": {
+    "method": "Git blob AST literal methods only; no module imports/loader/tests",
+    "base_tests": 10,
+    "candidate_tests": 14,
+    "unchanged_tests": 10,
+    "new_tests": 4,
+    "removed_tests": 0,
+    "base_module_counts": {
+      "test_channel_diagnostic_reports": 4,
+      "test_channel_observation_scope": 3,
+      "test_channel_positive_lobe": 3,
+      "test_channel_lt_threshold_display": 0
+    },
+    "new_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_nonfinite_threshold_or_invalid_axis_cannot_be_reported_as_a_valid_reference",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_remote_thresholds_keep_exact_value_and_direction_without_an_axis_line",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_visible_threshold_and_axis_boundaries_keep_the_actual_reference_line",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationScopeNativeTest.test_actual_high_threshold_is_excluded_from_the_full_time_LT_signal_axis"
+    ],
+    "removed_test_ids": [],
+    "full_candidate_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_actual_channel_rest_is_not_assumed_zero",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_actual_lt_events_are_preserved_and_all_classic_somas_exist",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_existing_report_is_preserved",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_wrong_git_native_prefix_is_rejected_before_creating_report",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_nonfinite_threshold_or_invalid_axis_cannot_be_reported_as_a_valid_reference",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_remote_thresholds_keep_exact_value_and_direction_without_an_axis_line",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_visible_threshold_and_axis_boundaries_keep_the_actual_reference_line",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationCaptionTest.test_complete_waveform_and_packet_refusal_are_separate_claims",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationCaptionTest.test_missing_scope_cannot_silently_reuse_ambiguous_legacy_caption",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationScopeNativeTest.test_actual_additional_classic_soma_is_not_the_selected_peak_window",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationScopeNativeTest.test_actual_high_threshold_is_excluded_from_the_full_time_LT_signal_axis",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_positive_lobe.PositiveLobeNativeReportTest.test_branch_positive_crest_remains_visible_without_hiding_clipped_samples",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_positive_lobe.PositiveLobeNativeReportTest.test_classic_positive_crest_remains_visible_without_hiding_clipped_samples",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_positive_lobe.PositiveLobeNativeReportTest.test_paired_full_range_preserves_actual_negative_feedback_excursion"
+    ]
+  },
+  "test_helper_only_delta": {
+    "paths": [
+      "Scripts/StructTrain/TimeLearner/tests/test_channel_observation_scope.py",
+      "Scripts/StructTrain/TimeLearner/tests/test_channel_positive_lobe.py"
+    ],
+    "change": "TemporaryDirectory(dir=os.environ.get('TIMELEARNER_REPORT_TEST_DIR'))",
+    "reason": "absent legacy env yields None and uses existing owned TMPDIR; never bind a writable output as immutable validation fixture",
+    "existing_numerical_assertions_changed": false,
+    "test_IDs_added_by_helper_delta": 0
+  }
+}

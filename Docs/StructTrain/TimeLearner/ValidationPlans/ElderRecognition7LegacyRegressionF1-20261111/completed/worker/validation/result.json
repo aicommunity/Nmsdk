@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s08-recognition7-legacy-regression-elder-f1",
+  "package_fingerprint": "dd3150d2bfd905018f95c9e9395d4be60743b95ed99f1fbe1d4e9a01671a726d",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_actual_cli",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_actual_conversion_and_complete_frozen_data",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_changed_child_capacity_with_updated_identity",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_changed_factor",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_changed_inherited_threshold",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_changed_storage_definition",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_constant_nonzero_rest_is_not_a_response",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_frozen_model_change",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_incomplete_observation",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_missing_middle_frame_with_corrected_count",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_pair_mismatch",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_solo_certificate_is_not_a_recognition_certificate",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_truncated_window_with_corrected_count",
+    "Scripts.StructTrain.TimeLearner.tests.test_recognition_evidence.RecognitionEvidenceTest.test_unknown_probe_schema"
+  ],
+  "executed_tests": 14,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_RECOGNITION_EVIDENCE_DIR": {
+      "path": "/home/user/timelearner-refactor/readbacks/s08-recognition-normal-a4/native",
+      "files": 322,
+      "fingerprint": "fb0b7b3811d03873e60a644d47540442513872d1ce4f0de91d387862ad18ef5b"
+    }
+  },
+  "scientific_verdict": null
+}
