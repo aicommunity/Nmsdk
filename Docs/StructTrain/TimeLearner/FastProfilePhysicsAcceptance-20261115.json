@@ -23,10 +23,40 @@
     "canonical_job": "s04-fast-profile-sdk-canonical-m40-a1",
     "job": "s04-fast-profile-sdk-m40-a1",
     "expected_cpp": 8,
-    "status": "preparation_running",
-    "fixtures": "RegisterStorageProfile and versioned model_spec archive export; four profiles at two rates"
+    "status": "passed8_closed_exported8",
+    "fixtures": "RegisterStorageProfile and versioned model_spec archive export; four profiles at two rates",
+    "actual_cpp_passed": 8,
+    "all_processes_closed": true,
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/75/75888c9f40b27fdcca1605997ab0358025ff293fc13b1ffe5cb10ba9e429095a",
+      "sha256": "75888c9f40b27fdcca1605997ab0358025ff293fc13b1ffe5cb10ba9e429095a",
+      "bytes": 2176845
+    }
   },
   "training_started": false,
   "scientific_verdict": null,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "readback": {
+    "job": "s04-fast-profile-readback-m40-a2",
+    "source": "0989dba52960be3946c6a37645fb927794a72962",
+    "passed": 2,
+    "closed": true,
+    "preflight_operations": 5,
+    "burst_operations": 4,
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/c0/c0c03ffe1d4821808f0ff0c939a130fcadad5507e1e048f369e26e2453839330",
+      "sha256": "c0c03ffe1d4821808f0ff0c939a130fcadad5507e1e048f369e26e2453839330",
+      "bytes": 1433343
+    },
+    "baseline_csv": {
+      "cold": "45bc179c233e46e110e7d01ec90478905752ca0f23db09489482836b4856b87b",
+      "grown": "51be6e1e79a5b72198a871de59c7e4caba2d3fd0a197799f6dafaa95d28b6902"
+    }
+  }
 }

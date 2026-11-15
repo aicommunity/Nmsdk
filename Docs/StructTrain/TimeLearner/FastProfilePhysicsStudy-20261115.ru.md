@@ -38,3 +38,9 @@ SDK source cfcfd327b0b809ebeee1e5abf049c1661d17a860 / Pulse5052cfe1683ca38920b51
 Цель по-прежнему CapturedPerInput, anchorN−1, amp_abs1e−5/rel0/minamp1e−6/SyncTolerance0.02. Увеличение интервалов самого паттерна, общий максимум вместо закреплённого, C-trim, PostTune, новый порог либо серияD не вводятся. Поиск оценивается по фактическим valid peaks и свежей all-input проверке, не по аналитически ожидаемому L.
 
 Каждый исход сохраняется честно, включая invalid/unresolved. Нужны читаемые временные графики Soma с actual input overlay и omission/repeat controls. Получение Exact не означает готовой классификации; frozen8-pattern evaluation и реальная проверка выбранного порога остаются отдельными этапами. Полные payload — только во внешнем архиве M40, в Git — код, постановка, компактные metadata и проверяемые refs. Полные этапы1–12 остаются открытыми.
+
+## Фактическая приёмка подготовленных моделей
+
+SDK завершён8/8 actual C++ cases; экспортированы8 archives, supervisor/child groups закрыты, heartbeat/capture/record errors отсутствуют. Console readback и baseline waveform gate завершены2/2 и закрыты:5 реальных cold preflight и4 полные burst-пробы. Все C/TC применены, LTMembrane отсутствует. Stock/derived-stock CSV побайтно равны на cold и grown геометриях; это допускает физический контраст, но не означает нового Train.
+
+Перед Train обнаружено ещё одно необходимое ограничение анализа: stock_threshold_study.audit_final_stock жёстко проверяет NSPNeuronGen/NPMembraneBio/TC0.005 и потому не подходит новым явным профилям. Новый отдельный auditor uniform_profile_physics сравнивает реальные effective initial/final trees, разрешая морфологию, число синапсов и положительные individual Rs; C/TC/Rm/classes/threshold/feedback должны сохраняться. Старый stock-контракт не ослаблен. Новая проверка ещё требует серверной регрессии на реальных cold/grown readbacks и повреждённых данных перед подключением к Train.
