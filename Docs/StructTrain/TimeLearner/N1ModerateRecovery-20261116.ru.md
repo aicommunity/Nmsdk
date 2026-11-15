@@ -13,3 +13,7 @@
 ## Первая принятая адресная проверка
 
 Elder s07-n1-moderate-kernel-elder-a1 завершён: обе версии116/116 PASS, Python1/1 PASS, все процессы закрыты. Полный349-file primary2,211,814байт, SHA2567c5dda01c5652eeebbbd9a73f8b119a9ab5a1fd0848ef19ba8ebadc7a15d9236, сохранён через Samba в external M40 archive. [Компактный статус](N1ModerateRecoveryStatus-20261116.json). Это проверка production decision units; native Rdk integration и actual library-load capture не заявляются. На M40 начаты две новые изолированные SDK-сборки: baseline на два контрпримера и candidate154 cases; результатов ещё нет. Следующий cold Train подготовлен с обязательным guard154/154 и whole closure, пока не запущен.
+
+## Полнота следующего временного сравнения
+
+Предыдущая галерея recovery показывала первый rejected group50 и terminal53, но пропускала промежуточную low-Rs группу52; её численный разбор был доступен только в primary. Для нового сравнения генератор получает явно объявленный include_all_rejected_groups=true: помимо reference/best/terminal он показывает каждую записанную отвергнутую search-группу, в том числе промежуточные Rs/L proposals. Peak assignment и математический verdict не пересчитываются. Старые декларации сохраняют прежний выбор первой rejection; новый режим маркируется comparison schema3. Следующий read-only отчёт должен проверить этот путь на реальных before/after primary, включая CENSORED.

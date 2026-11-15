@@ -32,12 +32,16 @@ class UniformProfileTrainingReportTest(unittest.TestCase):
         controls=Path(os.environ['TIMELEARNER_PROFILE_PAIR_REPORT_CONTROLS']).resolve(strict=True)
         declaration=load(controls/'declaration.json')
         legacy=set(declaration)=={'stock','fast'}
+        include_all_rejected=False
         if legacy:
             cases=declaration
             factor='C and DissociationTC together; no separate C causal claim'
             walls=None
         else:
-            self.assertEqual(set(declaration),{'cases','comparison_factor','wall_seconds'})
+            required={'cases','comparison_factor','wall_seconds'}
+            self.assertIn(set(declaration),(required,required|{'include_all_rejected_groups'}))
+            include_all_rejected=declaration.get('include_all_rejected_groups',False)
+            self.assertIs(type(include_all_rejected),bool)
             cases=declaration['cases'];factor=declaration['comparison_factor'];walls=declaration['wall_seconds']
             self.assertIsInstance(factor,str);self.assertTrue(factor.strip())
             self.assertIsInstance(cases,dict);self.assertIsInstance(walls,dict)
@@ -76,7 +80,8 @@ class UniformProfileTrainingReportTest(unittest.TestCase):
                 c=min((c for c in candidates if c['input_index']==i),key=rank)
                 best[str(i)]=c;selected.append(ordinals[c['measurement_group_id']])
             rejected=[r for r in records if r['purpose']!='reference' and r['measurement'] is None]
-            if rejected:selected.append(ordinals[rejected[0]['group_id']])
+            if rejected:
+                selected.extend(ordinals[r['group_id']] for r in (rejected if include_all_rejected else rejected[:1]))
             if records:selected.append(len(records))
             selected=list(dict.fromkeys(selected));self.assertTrue(selected)
             frames=[r['method_specification']['candidate_frame'] for r in records
@@ -88,6 +93,7 @@ class UniformProfileTrainingReportTest(unittest.TestCase):
                 search_probes=summary['search_probes'],applied_edits=summary['applied_edits'],
                 composite_counters=summary['composite_counters'],selected_measured_by_input=best,
                 report_selection_rank='outside timing, outside amplitude, normalized sum, first observed tie; controller edit cost not replayed',
+                rejected_group_selection='all_recorded' if include_all_rejected else 'first_recorded',
                 all_scalar_candidates=candidates,rejections=summary['rejections'],
                 resistance_domains=summary['resistance_domains'],selected_groups=selected,
                 terminal_has_consumed_scalar=any(c['full_parameters']==summary['actual_parameters'] for c in candidates),
@@ -106,8 +112,9 @@ class UniformProfileTrainingReportTest(unittest.TestCase):
         common=next(iter(configurations.values()))
         self.assertTrue(all(value==common for value in configurations.values()))
         _write(output/'comparison.json',dict(kind='timelearner_uniform_profile_cold_N1_comparison',
-            schema_version=1 if legacy else 2,common_configuration=common,rows=rows,
-            profile_factor=factor,**({} if legacy else dict(declared_wall_seconds=walls)),
+            schema_version=1 if legacy else 3 if include_all_rejected else 2,common_configuration=common,rows=rows,
+            profile_factor=factor,**({} if legacy else dict(declared_wall_seconds=walls,
+                **({'include_all_rejected_groups':True} if include_all_rejected else {}))),
             full_observation_domain=[0,3600],classification_assessed=False,scientific_verdict=None))
         links=''.join('<li><a href="'+html.escape(role,quote=True)+'/index.html">'+html.escape(role)+'</a></li>' for role in cases)
         (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><h1>Cold Branch N1: actual immutable profiles</h1><p>'+html.escape(factor)+'</p><p>Full histories in comparison.json. Training diagnostics, no classifier verdict.</p><ul>'+links+'</ul>')
