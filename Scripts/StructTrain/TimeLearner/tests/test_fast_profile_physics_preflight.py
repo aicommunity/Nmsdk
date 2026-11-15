@@ -13,15 +13,9 @@ from unittest.mock import patch
 from ..domain_evidence import _property
 from ..model_identity import canonical_model_sha256
 from ..native_calibration_worker import _write
-from ..native_evidence import EvidenceError, load, require
+from ..native_evidence import load, require
 from ..native_pipeline_worker import run_job, audit_run_manifest
 from ..n1_protocol_robustness import _signed
-
-PROFILES = [('NSPNeuronGen', 1e-9, .005),
-            ('NSPNeuronGenD005C5e10', 5e-10, .005),
-            ('NSPNeuronGenD005C25e11', 2.5e-10, .005),
-            ('NSPNeuronGenD002C25e11', 2.5e-10, .002)]
-
 
 def inspect_profile(identity, name, capacity, dissociation):
     require(identity['valid'] and identity['diagnostics'] == [] and

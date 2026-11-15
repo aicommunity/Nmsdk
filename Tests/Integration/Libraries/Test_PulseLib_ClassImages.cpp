@@ -258,20 +258,28 @@ void NativeFastProfile(unsigned variant,unsigned frequency)
   auto neuron=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject(profile.neuronClass));ASSERT_TRUE(neuron);
   neuron->SetEnvironment(core.environment);neuron->SetGlobalTimeStep(frequency);neuron->Init();
   EXPECT_FALSE(neuron->UseElementDefaults.GetData());EXPECT_DOUBLE_EQ(neuron->MembraneCapacity.GetData(),0.);
+  const auto check=[&]() {
+   std::vector<NameT> parts;neuron->GetComponentsList(parts);unsigned membranes=0;
+   for(const auto& path:parts)
+   {
+    EXPECT_NE(path,"LTMembrane");
+    auto part=dynamic_pointer_cast<NPulseMembrane>(neuron->GetComponent(path,true));if(!part)continue;
+    ++membranes;
+    for(const auto& role:{std::string("Exc"),std::string("Inh")})
+    {
+     auto ch=part->GetComponentL<NPulseChannel>(role+"Channel",true);ASSERT_TRUE(ch);
+     auto sy=part->GetComponentL<NPulseSynapse>(role+"Synapse1",true);ASSERT_TRUE(sy);
+     EXPECT_DOUBLE_EQ(ch->Capacity.GetData(),cap);EXPECT_EQ(ch->GetTimeStep(),frequency);
+     EXPECT_DOUBLE_EQ(sy->DissociationTC.GetData(),tc);EXPECT_EQ(sy->GetTimeStep(),frequency);
+    }
+   }
+   EXPECT_GE(membranes,1u);
+  };
+  check(); // Fresh/reused image before a growth Build can mask its physics.
   neuron->StructureBuildMode=2;neuron->NumSomaMembraneParts=1;
   neuron->NumDendriteMembranePartsVec=std::vector<int>{2};neuron->Build();neuron->Init();
-  for(const auto& path:{"Soma1","Dendrite1_1","Dendrite1_2"})
-  {
-   auto part=neuron->GetComponentL<NPulseMembrane>(path,true);ASSERT_TRUE(part);
-   for(const auto& role:{std::string("Exc"),std::string("Inh")})
-   {
-    auto ch=part->GetComponentL<NPulseChannel>(role+"Channel",true);ASSERT_TRUE(ch);
-    auto sy=part->GetComponentL<NPulseSynapse>(role+"Synapse1",true);ASSERT_TRUE(sy);
-    EXPECT_DOUBLE_EQ(ch->Capacity.GetData(),cap);EXPECT_EQ(ch->GetTimeStep(),frequency);
-    EXPECT_DOUBLE_EQ(sy->DissociationTC.GetData(),tc);EXPECT_EQ(sy->GetTimeStep(),frequency);
-   }
-  }
-  neuron->Reset();const auto identity=NmsdkTools::InspectModel(neuron);
+  ASSERT_TRUE(neuron->GetComponent("Dendrite1_2",true));check();
+  neuron->Reset();check();const auto identity=NmsdkTools::InspectModel(neuron);
   ASSERT_TRUE(identity["valid"].toBool())<<QJsonDocument(identity["diagnostics"].toArray()).toJson().constData();
   if(reuse==0)
   {
