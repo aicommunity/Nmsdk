@@ -40,7 +40,7 @@ class RejectedLengthNativeCohortTest(unittest.TestCase):
         self.assertTrue(all(any(reason in f.attrib.get('message', f.text or '') for reason in
             ('window5_output_new_only', 'package_fixture_new_only', 'composite_archive_output_new_only'))
             for f in failures))
-        cohort = load(declaration['cohort'])
+        cohort = load(Path(declaration['cohort']))
         expected = cohort['selected_ids']
         leaves = cohort['runplan']
         self.assertEqual(len(expected), 142)
@@ -50,7 +50,7 @@ class RejectedLengthNativeCohortTest(unittest.TestCase):
         self.assertCountEqual(expected, load(original/'compiled-inventory-crosscheck.json')['expected'])
         self.assertCountEqual(expected, [case for leaf in leaves for case in leaf['expected_ids']])
         self.assertEqual(len(set(leaf['name'] for leaf in leaves)), len(leaves))
-        runtime = load(declaration['runtime'])
+        runtime = load(Path(declaration['runtime']))
         self.assertEqual(runtime['source_closure'], source_closure(source))
         verify_runtime(runtime)
         output = Path(os.environ['TMPDIR'])/'rejected-length-native-cohort'
