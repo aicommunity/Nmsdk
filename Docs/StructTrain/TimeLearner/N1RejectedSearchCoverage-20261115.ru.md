@@ -1,6 +1,6 @@
 # N1: покрытие поиска после неоднозначного отклика — 15.11.2026
 
-Статус: подтверждённое ограничение порядка поиска, исправление ещё не реализовано. Источник: s11-uniform-profile0-N1-train-m40-a1, source043c36cf4253956c9806d715dd0852e8a3508688, Pulse5052cfe1683ca38920b514aedfc3c37f4bd41aef. Полный primary — external archive3eb998b76c8263940988ea7d219be44189b695a66af90bf68b91221c774017ec; см. FastProfilePhysicsAcceptance-20261115.json и научный отчёт текущей пары.
+Историческая постановка15.11. Исправление охвата после этой записи реализовано и адресно проверено147/147, но same-condition Stock Train не улучшил общую сходимость; [результат16.11](N1RecoveryScientificReport-20261116.ru.md). Ниже сохранены исходное наблюдение и постановка. Источник: s11-uniform-profile0-N1-train-m40-a1, source043c36cf4253956c9806d715dd0852e8a3508688, Pulse5052cfe1683ca38920b514aedfc3c37f4bd41aef. Полный primary — external archive3eb998b76c8263940988ea7d219be44189b695a66af90bf68b91221c774017ec; см. FastProfilePhysicsAcceptance-20261115.json и научный отчёт текущей пары.
 
 После locally jointly-ready input2 (L27/Rs21.232304307596028МОм) input1 реально проверен на следующих полных структурах:
 
