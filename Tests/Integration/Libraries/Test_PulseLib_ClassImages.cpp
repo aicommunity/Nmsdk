@@ -2,6 +2,9 @@
 #include "../../../Rdk/Core/Engine/UClassImageRegistry.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseSynapse.h"
+#include <tuple>
 #include "TimeLearner/ModelInspection.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
@@ -210,4 +213,64 @@ TEST(TimeLearnerClassImages, DeleteReturnedImageRefusesOutstandingLease)
  EXPECT_FALSE(core.storage->CheckClass(name));
  core.storage->ReturnObject(source);
 }
+
+struct FastImageExpectation { const char* name; double capacity,dissociation; };
+const FastImageExpectation FastImages[] = {
+ {"NSPNeuronGenD005C5e10",5e-10,.005}, {"NSPNeuronGenD005C25e11",2.5e-10,.005},
+ {"NSPNeuronGenD002C1e9",1e-9,.002}, {"NSPNeuronGenD002C5e10",5e-10,.002},
+ {"NSPNeuronGenD002C25e11",2.5e-10,.002}, {"NSPNeuronGenD001C1e9",1e-9,.001},
+ {"NSPNeuronGenD001C5e10",5e-10,.001}, {"NSPNeuronGenD001C25e11",2.5e-10,.001}
+};
+void CheckFastImage(UEPtr<NPulseNeuron> neuron,const FastImageExpectation& expected,unsigned frequency)
+{
+ EXPECT_TRUE(neuron->UseElementDefaults.GetData());
+ EXPECT_DOUBLE_EQ(neuron->MembraneCapacity.GetData(),expected.capacity);
+ EXPECT_DOUBLE_EQ(neuron->SynapseDissociationTC.GetData(),expected.dissociation);
+ std::vector<NameT> names;neuron->GetComponentsList(names);unsigned checked=0;
+ for(const auto& name:names)
+ {
+  EXPECT_NE(name,"LTMembrane");
+  auto membrane=dynamic_pointer_cast<NPulseMembrane>(neuron->GetComponent(name,true));
+  if(!membrane)continue;
+  for(const auto& role:{"Exc","Inh"})
+  {
+   auto channel=membrane->GetComponentL<NPulseChannel>(std::string(role)+"Channel",true);
+   ASSERT_TRUE(channel);EXPECT_DOUBLE_EQ(channel->Capacity.GetData(),expected.capacity);
+   EXPECT_EQ(channel->GetTimeStep(),frequency);++checked;
+  }
+  std::vector<NameT> children;membrane->GetComponentsList(children);
+  for(const auto& child:children)
+  {
+   auto synapse=dynamic_pointer_cast<NPulseSynapse>(membrane->GetComponent(child,true));
+   if(!synapse)continue;
+   EXPECT_DOUBLE_EQ(synapse->DissociationTC.GetData(),expected.dissociation);
+   EXPECT_DOUBLE_EQ(synapse->Resistance.GetData(),86e6);
+   EXPECT_EQ(synapse->GetTimeStep(),frequency);
+  }
+ }
+ EXPECT_GE(checked,2u);
+ const auto report=NmsdkTools::InspectModel(neuron);
+ EXPECT_TRUE(report["valid"].toBool())<<QJsonDocument(report["diagnostics"].toArray()).toJson().constData();
+}
+class FastStorageImageFamily : public ::testing::TestWithParam<std::tuple<unsigned,unsigned>> {};
+TEST_P(FastStorageImageFamily, FreshReuseResetAndGrowthKeepDeclaredPhysics)
+{
+ const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+ const auto expected=FastImages[std::get<0>(GetParam())];
+ const unsigned frequency=std::get<1>(GetParam());
+ for(int reuse=0;reuse<2;++reuse)
+ {
+  auto neuron=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject(expected.name));ASSERT_TRUE(neuron);
+  neuron->SetEnvironment(core.environment);neuron->SetGlobalTimeStep(frequency);neuron->Init();
+  CheckFastImage(neuron,expected,frequency);
+  neuron->StructureBuildMode=2;neuron->NumSomaMembraneParts=1;
+  neuron->NumDendriteMembranePartsVec=std::vector<int>{2};neuron->Build();neuron->Init();
+  ASSERT_TRUE(neuron->GetComponent("Dendrite1_2",true));CheckFastImage(neuron,expected,frequency);
+  neuron->Reset();CheckFastImage(neuron,expected,frequency);
+  core.storage->ReturnObject(neuron);
+ }
+}
+INSTANTIATE_TEST_SUITE_P(AllFastProfiles,FastStorageImageFamily,
+ ::testing::Combine(::testing::Range(0u,8u),::testing::Values(2000u,20000u)));
+
 }
