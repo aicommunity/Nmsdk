@@ -34,6 +34,7 @@ class N0LengthFrozenReportTest(unittest.TestCase):
                         'n0_length_report_requires_completed_diagnostic')
                 self.assertTrue(inspect(source/'process/contained')['all_processes_closed'])
                 actual = run['analysis']['metrics']
+                self.assertEqual(actual['validity'], 'valid')
                 thresholds.append(actual['effective_threshold'])
                 self.assertEqual(len(actual['trials']), 8)
                 self.assertTrue(actual['diagnostic_only'])
@@ -82,8 +83,28 @@ class N0LengthFrozenReportTest(unittest.TestCase):
                             self.assertEqual(image.size, (1920, 960))
                         self.assertTrue((folder/view['files'][1]).is_file())
                         self.assertTrue((folder/view['files'][2]).read_bytes().startswith(b'%PDF-'))
+                extrema = []
+                if actual['effective_threshold'] == 100.:
+                    for observation in observations:
+                        self.assertTrue(observation['complete'])
+                        self.assertEqual(observation['spike_count'], 0)
+                        last = max(observation['stimulus_times'])
+                        for soma in range(len(observation['samples'][0]['soma'])):
+                            selections = dict(global_peak=observation['samples'],
+                                before_last=[s for s in observation['samples'] if s['time'] < last],
+                                after_last=[s for s in observation['samples'] if s['time'] >= last])
+                            peaks = {}
+                            for name, samples in selections.items():
+                                self.assertTrue(samples)
+                                peak = max(samples, key=lambda s: s['soma'][soma])
+                                peaks[name] = dict(value=peak['soma'][soma],
+                                    time_from_trial_begin=peak['time']-observation['begin'])
+                            extrema.append(dict(sample_id=observation['sample_id'], label=observation['label'],
+                                soma_index=soma, peaks=peaks,
+                                scope='high-threshold waveform only; no spike-threshold certificate'))
                 rows.append(dict(role=role, run=source.name, threshold=actual['effective_threshold'],
                     counts=actual['pooled_counts'], trials=8, trial_soma_pairs=pairs,
+                    waveform_extrema=extrema,
                     source_stopped_sha256=package['sha256'], scientific_verdict=None))
                 _write(output/'progress.json', dict(rows=rows, scientific_verdict=None))
             self.assertEqual(thresholds, [100., .0117])
