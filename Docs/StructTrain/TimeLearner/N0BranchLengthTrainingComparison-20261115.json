@@ -1,0 +1,203 @@
+{
+  "comparison": {
+    "baseline": {
+      "outcome": "budget_exhausted",
+      "reason": "native_training_time_budget_exhausted",
+      "count": 37,
+      "probes": 75,
+      "timing_ready": 13,
+      "joint_ready": 0,
+      "best": {
+        "2": {
+          "amplitude_residual": 0.0000452931682249913,
+          "anchor_group_id": "Branch-stock-cold8-N0/session/1/search/103/composite/73",
+          "anchor_semantic_proof_id": "14dab7ecba7c9e03c88ab8fa76064b6fd297484e6a6e0ca5e7db2c49b4072586",
+          "anchor_trial_id": "Branch-stock-cold8-N0/session/1/search/103",
+          "full_parameters": [
+            {
+              "length": 27,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 27,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 26,
+              "resistance": 86000000,
+              "synapses": 4
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            }
+          ],
+          "input_index": 2,
+          "measurement_group_id": "Branch-stock-cold8-N0/session/1/search/104/composite/74",
+          "model_epoch": 34,
+          "model_revision": "902b44e149f958e228d0df212cc563569c386b156d769be288e184e51a48cb11",
+          "parameter_change_cost": 80,
+          "parameters": {
+            "length": 26,
+            "resistance": 86000000,
+            "synapses": 4
+          },
+          "semantic_proof_id": "00ca8cf0d62be956301ad933b4ff98ac6ddbdb7ac6759512751fe08a0ed1794b",
+          "timing_high": -0.006499999999959982,
+          "timing_low": -0.006499999999959982,
+          "trial_id": "Branch-stock-cold8-N0/session/1/search/104",
+          "within_amplitude": false,
+          "within_timing": true
+        }
+      },
+      "terminal": [
+        {
+          "length": 28,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 28,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "first_lengths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ]
+    },
+    "candidate": {
+      "outcome": "budget_exhausted",
+      "reason": "native_training_time_budget_exhausted",
+      "count": 43,
+      "probes": 87,
+      "timing_ready": 19,
+      "joint_ready": 0,
+      "best": {
+        "2": {
+          "amplitude_residual": 0.0000452931682249913,
+          "anchor_group_id": "Branch-stock-cold8-N0/session/1/search/121/composite/85",
+          "anchor_semantic_proof_id": "46d0b251416c563193ed4a2f3303c55be899a3f91569d98c7cee31e64f1252f2",
+          "anchor_trial_id": "Branch-stock-cold8-N0/session/1/search/121",
+          "full_parameters": [
+            {
+              "length": 27,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 27,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 26,
+              "resistance": 86000000,
+              "synapses": 4
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            }
+          ],
+          "input_index": 2,
+          "measurement_group_id": "Branch-stock-cold8-N0/session/1/search/122/composite/86",
+          "model_epoch": 40,
+          "model_revision": "050565d253b0d9a0d5046e3287bf32b33b9475d93c10a3b0abdce3c4deaf5d16",
+          "parameter_change_cost": 80,
+          "parameters": {
+            "length": 26,
+            "resistance": 86000000,
+            "synapses": 4
+          },
+          "semantic_proof_id": "8732a8b1071133810ec5c665d3d3c0c6378e5ceb66e001af05cc0755e1504028",
+          "timing_high": -0.006499999999959982,
+          "timing_low": -0.006499999999959982,
+          "trial_id": "Branch-stock-cold8-N0/session/1/search/122",
+          "within_amplitude": false,
+          "within_timing": true
+        }
+      },
+      "terminal": [
+        {
+          "length": 29,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 29,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 28,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "first_lengths": [
+        1,
+        2,
+        3,
+        6,
+        12,
+        24,
+        27,
+        27,
+        27,
+        27,
+        27,
+        27,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10
+      ]
+    }
+  },
+  "exact_common_prefix": 3,
+  "shared_initial_fields": {
+    "capture_revision": true,
+    "source_origin": true,
+    "owner_family_binding": true,
+    "tolerances": true
+  }
+}
