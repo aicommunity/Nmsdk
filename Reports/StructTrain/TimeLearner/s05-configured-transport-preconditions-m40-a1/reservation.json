@@ -1,0 +1,68 @@
+{
+  "token": "ef77c0d1-da93-4bc6-9bfd-00a34f0e7ff0",
+  "job_id": "s07-configured-transport-preconditions-normal-a1",
+  "owner": {
+    "pid": 974394,
+    "start_ticks": "304089059",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "resources": [
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-transport-preconditions-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-transport-preconditions-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-configured-transport-preconditions-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-configured-transport-preconditions-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-configured-transport-preconditions-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-configured-transport-preconditions-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-fixed-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-fixed-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-configured-transport-preconditions-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-configured-transport-preconditions-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "access": "read"
+    }
+  ],
+  "state": "held",
+  "scientific_verdict": null,
+  "ledger_schema": 1,
+  "live_K1_ledger_not_migrated": true,
+  "scope": "Read/write paths only; actual memory/task cap enforced by the enclosing cgroup. Build and explicitly declared original native transport gate."
+}

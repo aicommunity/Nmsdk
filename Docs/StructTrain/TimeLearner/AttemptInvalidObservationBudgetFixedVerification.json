@@ -1,0 +1,43 @@
+{
+  "kind": "timelearner_budget_fixed_and_native_negative_primary_verification",
+  "schema_version": 1,
+  "source_root": "a2df1eac50bfb53e5ce6c9220eed8b7da7b5ba0b",
+  "PulseLib": "2c7e0144a902795cb6287ee677cff5aa08998847",
+  "fixed_new_regression_functions_passed": 4,
+  "fixed_adjacent_functions_passed": 74,
+  "native_functions_observed": 23,
+  "native_functions_passed": 21,
+  "native_failed_ids": [
+    "NativeLearnedState/ClassicConfiguredN1",
+    "NativeLearnedState/BranchConfiguredN0"
+  ],
+  "original_controller_native_AB_pending": false,
+  "ASan_executed": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null,
+  "local_numerical_tests_executed": false,
+  "records": [
+    {
+      "evidence_commit": "98e6fbc979ec3cd8ab75f0bff28b0cbbcde34fcc",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-fixed-m40-a1/",
+      "archive_members_checked": 49,
+      "archive_bytes": 70356,
+      "archive_sha256": "de766e843f18a76ad83cdb80b7c9a788f739d1608ebdf368509e77665eb4fcbd",
+      "source_hash_records_matched_to_exact_Git_blobs": {
+        "source-hashes.json": 746
+      }
+    },
+    {
+      "evidence_commit": "8447d4f937623c56ed7292fd4c6c18aeb9fbbadb",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-fixed-native-m40-a1/",
+      "archive_members_checked": 696,
+      "archive_bytes": 788880,
+      "archive_sha256": "d51f284db33f3672cb956687308f3179c0da1f40e00ac1f58b522601c21b987f",
+      "source_hash_records_matched_to_exact_Git_blobs": {
+        "tool-source-hashes.json": 335,
+        "native-source-hashes.json": 306
+      }
+    }
+  ],
+  "subsequent_AB_verification": "AttemptInvalidObservationBudgetNativeABVerification.json"
+}

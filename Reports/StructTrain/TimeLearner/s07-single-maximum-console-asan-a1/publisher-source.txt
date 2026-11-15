@@ -1,0 +1,87 @@
+from pathlib import Path
+import sys,json,sqlite3,hashlib,tarfile,subprocess,io,os
+base=Path('/media/user/Data/TimeLearnerRefactor');incoming=base/'source-maximum-dimensions-a1-root-delivery'
+parent='e91b64cb2340ef1df01897db8dad81fc29bd1cf1'
+folder=base/'readbacks/s07-single-maximum-console-asan-a1';container=Path(str(folder)+'-container')
+repo=base/'evidence-single-maximum-console-asan-a1';prefix='Reports/StructTrain/TimeLearner/s07-single-maximum-console-asan-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(incoming))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_pipeline_worker import audit_run_manifest
+c=sqlite3.connect('file:'+str(base/'resource-reservations.sqlite3')+'?mode=ro',uri=True);m=dict(c.execute('select key,value from metadata'));c.close()
+r=Reservations(base/'resource-reservations.sqlite3');closed=inspect_worker_dependency(container,r,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released'
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['replay_acceptance_passed'] and not terminal['heartbeat_errors']
+tests=json.loads((folder/'design-tests.json').read_text());assert tests['tests_run']==5 and tests['successful'] and not tests['skipped']
+analysis=json.loads((folder/'analysis.json').read_text());assert len(analysis['rows'])==2
+for row in analysis['rows']:
+ assert row['comparison']['exact_waveform_reproduced'] and row['original_baseline']['exact_waveform_reproduced']
+ assert row['old_peak']['candidate_count']>1 and row['new_peak']['validity']=='valid'
+for case in ['Classic','Branch']:
+ for policy in ['isolated_window','single_impulse_maximum']:
+  assert audit_run_manifest(folder/'replay/runs'/case/policy/'run-manifest.json')['run_evidence_consistent']
+  process_root=folder/'replay/runs'/case/policy/'process'
+  loaded=json.loads((process_root/'loaded-files.json').read_text());manifest=json.loads((process_root/'runtime.json').read_text())
+  assert any('libasan.so' in v['path'] for v in loaded) and manifest['executable'] in loaded
+  assert '-fsanitize=address' in manifest['build_flags']['CMAKE_CXX_FLAGS_RELWITHDEBINFO']
+  assert json.loads((process_root/'result.json').read_text())['runtime_provenance']=='loaded_files_captured'
+bundle=json.loads((folder/'bundle.json').read_text());raw=(folder/'primary.tar.xz').read_bytes()
+assert len(raw)==bundle['archive_bytes'] and hashlib.sha256(raw).hexdigest()==bundle['archive_sha256']
+full={}
+with tarfile.open(fileobj=io.BytesIO(raw),mode='r:xz') as tf:
+ for member in tf:
+  assert member.isfile() and member.name not in full
+  data=tf.extractfile(member).read();assert bundle['members'][member.name]=={'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}
+  full[member.name]=data
+assert set(full)==set(bundle['members'])
+design=json.loads(full['design.json']);original_bundle=json.loads(subprocess.check_output(['git','-C',design['source']['repository'],'show',design['source']['commit']+':'+design['source']['bundle_path']]))
+omitted={};files={}
+for name,data in full.items():
+ if name.startswith('replay/source/'):
+  relative=name[len('replay/source/'):];case_id,leaf=relative.split('/',1)
+  case=next(x for x in design['cases'] if x['id']==case_id);original_member=case['member_prefix']+'/'+leaf
+  assert original_bundle['members'][original_member]==bundle['members'][name]
+  omitted[name]={'source_member':original_member,**bundle['members'][name]}
+ else:files[name]=data
+buffer=io.BytesIO()
+with tarfile.open(fileobj=buffer,mode='w:xz',preset=3) as tf:
+ for name,data in sorted(files.items()):
+  info=tarfile.TarInfo(name);info.size=len(data);tf.addfile(info,io.BytesIO(data))
+compact=buffer.getvalue();published={'members':{n:{'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()} for n,v in files.items()},'archive_bytes':len(compact),'archive_sha256':hashlib.sha256(compact).hexdigest(),'original_worker_archive_sha256':bundle['archive_sha256'],'external_source_cache':{'commit':design['source']['commit'],'archive_path':design['source']['archive_path'],'archive_sha256':original_bundle['archive_sha256'],'files':omitted},'attempt_accepted':True}
+runtime=base/'runtime-maximum-dimensions-asan-a1';actual={}
+for f in runtime.rglob('*'):
+ if f.is_file():actual[f.relative_to(runtime).as_posix()]={'bytes':f.stat().st_size,'sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'symlink':os.readlink(f) if f.is_symlink() else None}
+assert actual==json.loads(full['runtime-before.json'])
+seen=set(files)
+payloads={prefix+'/primary.tar.xz':compact,prefix+'/bundle.json':(json.dumps(published,indent=2)+'\n').encode()}
+for f in container.iterdir():
+ if f.is_file() and f.suffix=='.json':payloads[prefix+'/controller/'+f.name]=f.read_bytes()
+for name in ['terminal.json','analysis.json','design.json','design-tests.json','console-runtime.json','tool-source-hashes.json']:
+ payloads[prefix+'/'+name]=full[name]
+payloads[prefix+'/fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+payloads[prefix+'/post-closure-runtime-bindings.json']=(json.dumps(actual,indent=2)+'\n').encode()
+payloads[prefix+'/publication-verification.json']=(json.dumps({'original_members_verified':len(full),'published_members':len(files),'omitted_cache_members':len(omitted),'omitted_cache_bytes':sum(v['bytes'] for v in omitted.values()),'all_omitted_cache_is_exact_duplicate_of_existing_Git_primary':True,'actual_loaded_ASan_verified':True,'ASan_options_requested':'detect_leaks=0','live_ASan_options_readback_available':False,'leak_detection_verified':False,'completed_native_probes':4,'failed_native_processes':0,'design_tests_passed':5,'attempt_accepted':True,'scientific_verdict':None},indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args,data=None):return subprocess.check_output(['git','-C',str(repo),*args],input=data).decode().strip()
+def tree(base_tree,changes):
+ entries={}
+ if base_tree:
+  for item in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',base_tree]).split(b'\0'):
+   if item:
+    header,name=item.split(b'\t',1);mode,kind,sha=header.decode().split();entries[name.decode()]=(mode,kind,sha)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=('100644','blob',git('hash-object','-w','--stdin',data=value))
+ for name,sub in groups.items():
+  previous=entries.get(name);entries[name]=('040000','tree',tree(previous[2] if previous else None,sub))
+ raw=b''.join((mode+' '+kind+' '+sha+'\t'+name).encode()+b'\0' for name,(mode,kind,sha) in sorted(entries.items()))
+ return git('mktree','-z','--missing',data=raw)
+commit=git('-c','user.name=Codex','-c','user.email=codex@openai.com','commit-tree',tree(git('rev-parse',parent+'^{tree}'),payloads),'-p',parent,data=b'Preserve four real ASan Console probes and exact archived multi-peak replay\n')
+git('update-ref','refs/heads/evidence',commit)
+print(json.dumps({'evidence_commit':commit,'parent':parent,'repository':str(repo),'published_members':len(files),'archive_bytes':len(compact),'archive_sha256':published['archive_sha256'],'omitted_cache_members':len(omitted),'attempt_accepted':True,'whole_group_closed':True,'lease_released':True}))

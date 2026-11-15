@@ -1,0 +1,98 @@
+{
+  "pilot_passed": true,
+  "preparation_and_reader_tests_declared": 17,
+  "completed_cases": 4,
+  "rows": [
+    {
+      "case": "original-order-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "all_recorded_windows_complete": true
+    },
+    {
+      "case": "original-order-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "all_recorded_windows_complete": true
+    },
+    {
+      "case": "rotated-order-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "all_recorded_windows_complete": true
+    },
+    {
+      "case": "rotated-order-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "all_recorded_windows_complete": true
+    }
+  ],
+  "heartbeat_errors": [],
+  "ledger_metadata_unchanged": true,
+  "training_started": false,
+  "whole16_condition_matrix_complete": false,
+  "temporal_report_complete": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

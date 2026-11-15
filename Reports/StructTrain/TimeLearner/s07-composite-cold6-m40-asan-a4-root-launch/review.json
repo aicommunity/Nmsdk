@@ -1,0 +1,60 @@
+{
+  "kind": "timelearner_root_launch_review",
+  "schema_version": 1,
+  "review_scope": "Git/JSON/process metadata only; no local C++ or numerical execution",
+  "source": {
+    "root": "478cc35c0f1a314c34ad93aa0095b61836c658ec",
+    "pulse": "4a5c2ec9df9a9f704dcd8260714323494bfa4415"
+  },
+  "canonical": {
+    "file_sha256": "1fcab30bbc59dad00f6dac1c35bdeef44bed67ae8b9c8c356d7285b6e637d135",
+    "semantic_sha256": "10267db2adccc71feeabdb459d3d37f2d2637fbe441c2971f5311afc6904122c",
+    "semantic_hash_independently_recomputed": true
+  },
+  "job": {
+    "file_sha256": "f3655c8b5768bdbc8fb5ac4a19ef5cddcf91c3ee8799f80067f9c7d4cc2c61e1",
+    "selected_unique_ids": 250,
+    "leaf_groups": 137,
+    "all_selected_ids_present_in_source_inventory": true,
+    "artifact_rules": 72,
+    "sourceguard_rules_are_generic_gtest_JUnit": true
+  },
+  "first_leaf": {
+    "expected_ids": [
+      "NativeCompositeDeclarations/ClassicCold6AndProtocol4StrictRoundtrip",
+      "NativeCompositeDeclarations/BranchCold6AndProtocol4StrictRoundtrip",
+      "NativeCompositeDeclarations/ClassicCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+      "NativeCompositeDeclarations/BranchCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes"
+    ],
+    "name": "cold6-codec-first",
+    "wall_seconds": 2400
+  },
+  "supervisor_sha256": "013acaffaf21c77dab5001f5488928d192ecc7ad845abc3a344ae8999d622b9d",
+  "launcher_sha256": "25c47d34c83a230dcfeb4d322efdf85ec80e436eb9d692f0b82726723c96b06a",
+  "server_readonly_resource_observation": {
+    "root_free_human": "84G",
+    "data_free_human": "315G",
+    "available_memory_bytes": 46118240256
+  },
+  "dispatch": {
+    "authorised": true,
+    "root_changes_source_or_runtime": false,
+    "reported_supervisor_pid": 18316,
+    "reported_supervisor_start_ticks": "325076869",
+    "reported_outer_unit": "timelearner-69d33d86-2d26-4e49-aa61-e99d53d363d8.service",
+    "reported_invocation_id": "6ed02749e035459ca3eee0a65c8b650d",
+    "reported_main_pid": 18434,
+    "reported_main_start_ticks": "325076930",
+    "reported_request_sha256": "d3dd281ce9a1657ecfacb6d33d61b048aaef985ba342d86f7cbd331b4d46f98e",
+    "reported_binding_sha256": "19900e040d6e018e249f870fbc120b216fbd22633090b2088e95c52a01282d42",
+    "state": "running_build_at_last_observation",
+    "root_independently_observed_running": true,
+    "root_observed_memory_max_bytes": 8589934592,
+    "root_observed_tasks_max": 128
+  },
+  "acceptance": {
+    "compiled_inventory_verified": false,
+    "full_cohort_passed": false,
+    "scientific_verdict": null
+  }
+}

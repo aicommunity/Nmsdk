@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s10-l22-primary-restore-m40-a1",
+  "package_fingerprint": "e82af4f2036890b82a662534b0092292db8ca9f6e98aab512d0d96ab0c311e79",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_l22_source_envelope_restore.L22SourceEnvelopeRestoreTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_l22_source_envelope_restore.L22SourceEnvelopeRestoreTest.test_actual_large_package_before_original_source_and_five_probe_audits"
+  ],
+  "fixtures": {
+    "TIMELEARNER_L22_ENVELOPE_PACKAGE": {
+      "pattern": "**/*.json",
+      "files": 17,
+      "fingerprint": "e03428c276c816e48f9b7b773ab3665e976592f4ac017b9360a2d2352175d671"
+    },
+    "TIMELEARNER_L22_ENVELOPE_XZ": {
+      "pattern": "**/*.xz",
+      "files": 1,
+      "fingerprint": "e060da83fed294e3ed2091d860688e1c9667c2018a7bb846fd95fd9e194dab17"
+    }
+  }
+}

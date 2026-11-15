@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s10-source-envelope-git-replay-elder-a2",
+  "package_fingerprint": "3e1d823e58ea9a5e10b837dc6e5f4a7eeaece7770ea5bef6ea372ab9ffbd7ef8",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_source_envelope_bundle.SourceEnvelopeProducedTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_source_envelope_bundle.SourceEnvelopeProducedTest.test_actual_manifest3_collector_package_restores_before_primary_audits"
+  ],
+  "fixtures": {
+    "TIMELEARNER_SOURCE_ENVELOPE_PRODUCED": {
+      "pattern": "**/*.json",
+      "files": 20,
+      "fingerprint": "9a2d1545e2ad84a6d8c30a99851ed388abae1c0f6c33438cb9769b0752313eff"
+    },
+    "TIMELEARNER_SOURCE_ENVELOPE_PRODUCED_XZ": {
+      "pattern": "**/*.xz",
+      "files": 1,
+      "fingerprint": "3235cabc1aab26aecb27d9b7ba63c3086d2f09d29119f8951f81d8e0c949d73c"
+    },
+    "TIMELEARNER_SOURCE_ENVELOPE_LEGACY_PACKAGE": {
+      "pattern": "*",
+      "files": 2,
+      "fingerprint": "81eff7b75cd3cb08168ad2c5847d705a9335d9a24bf11327e7d64b9b5f0b6ac5"
+    }
+  }
+}

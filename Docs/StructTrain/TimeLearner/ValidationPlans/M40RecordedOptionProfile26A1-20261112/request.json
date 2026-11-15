@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-recorded-option-profile26-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 1073741824,
+    "tasks": 64,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 536870912
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-recorded-option-profile-a1",
+      "commit": "448b153f2fea3486ff40f3a626b8f1110b9e3ee2"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-option-profile26-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedOptionProfile26A1-20261112/suite.json",
+      "sha256": "411fff7a2854ab0c6fdbc178fbaedc381134a9a56de3dfccfedbb59759bd6a7a"
+    },
+    "fixtures": {
+      "TIMELEARNER_NATIVE_PROFILE_CMAKE": "/media/user/Data/TimeLearnerRefactor/requests/recorded-option-profile26-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedOptionProfile26A1-20261112/cmake"
+    }
+  }
+}

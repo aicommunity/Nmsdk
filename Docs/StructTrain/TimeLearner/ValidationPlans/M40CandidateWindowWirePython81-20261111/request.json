@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-candidate-window-wire-python81-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-wire-python-a1",
+      "commit": "e273a7e715c839e83023aeb246dd2725e45d1001"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/candidate-window-wire-python81-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40CandidateWindowWirePython81-20261111/suite.json",
+      "sha256": "251c77283bcbc317b2247481f84276bafa763410c5ff8668149d2c460a2e5bb8"
+    },
+    "fixtures": {}
+  }
+}

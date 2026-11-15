@@ -1,0 +1,84 @@
+{
+  "kind": "independent_M40_ASan248_failed_attempt_metadata_verification",
+  "evidence_commit": "eaa4350defa80c932ececaafa58b5373112fc75d",
+  "archive_members": 502,
+  "archive_bytes": 1050972,
+  "archive_sha256": "45268442df0544bb8f2ab39cba5124c44d73b76500e6fdda3b203afb55dc1a1b",
+  "source_files_Git_verified": 3687,
+  "source_repositories": [
+    {
+      "scope": "root",
+      "repository": "E:\\Science-Repo\\nmsdk-composite-cancel-delivery",
+      "commit": "cc23d9fff8baba3c5dca89f5e2a0131d7ad1c237",
+      "files": 968
+    },
+    {
+      "scope": "Bin",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Bin",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    },
+    {
+      "scope": "Libraries/Rdk-HardwareLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "files": 356
+    },
+    {
+      "scope": "Rdk",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    },
+    {
+      "scope": "Libraries/Nmsdk-MotionControlLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "files": 93
+    },
+    {
+      "scope": "Libraries/Rdk-BasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "files": 43
+    },
+    {
+      "scope": "Libraries/Rdk-CvBasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "files": 132
+    },
+    {
+      "scope": "Libraries/Nmsdk-PulseLib",
+      "repository": "E:\\Science-Repo\\pulselib-composite-cancel-delivery",
+      "commit": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+      "files": 313
+    }
+  ],
+  "CPP_declared": 248,
+  "JUnit_executed": 13,
+  "assertion_passed": 12,
+  "assertion_failed": 1,
+  "not_run": 235,
+  "failure": {
+    "id": "NativeCompositeService/BranchLastCompositeSinkCannotCrossRealGroupDeadline",
+    "gate": "callback-native-10",
+    "failure_text": [
+      "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp:651\nValue of: slept\n  Actual: false\nExpected: true",
+      "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp:651\nExpected: (elapsed) >= (15.), actual: 0 vs 15"
+    ],
+    "declaration_line": 792
+  },
+  "loaded_file_records": 74,
+  "closed_leaf_groups": 13,
+  "closed_outer_group": true,
+  "reservation_released": true,
+  "protected_runtimes": 3,
+  "actual_Git_inventory_derived": true,
+  "original_inventory_root_metadata_inconsistent": true,
+  "full248_accepted": false,
+  "preparation_manifest_accepted": false,
+  "local_numerical_or_CPP_or_unit_execution": false,
+  "independent_physics_replay": false,
+  "scientific_verdict": null
+}

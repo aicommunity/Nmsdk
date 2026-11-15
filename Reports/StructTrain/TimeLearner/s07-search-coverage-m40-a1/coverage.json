@@ -1,0 +1,3539 @@
+{
+  "kind": "stock_recovery_search_coverage",
+  "schema_version": 1,
+  "rows": [
+    {
+      "name": "Classic-threshold-low-retry32",
+      "topology": "Classic",
+      "initial_threshold": 0.0117,
+      "package_sha256": "c48d376eead72421911adb8fd66cc96b0c5967430a5ab877f3f62d12f5fe10c8",
+      "summary_sha256": "7a5ee64c834c80721c54f9518a08b7d7f361ecedfe9994b82af1964c745ada98",
+      "model_revision": "aeeb20de9f62d39563de925366990cd1547ba560e7fe3101baac820c9335524c",
+      "policy": "retry_same_candidate",
+      "outcome": "invalid_observation",
+      "reason": "observation_not_valid_complete",
+      "recorded_geometry_groups": [
+        {
+          "candidate_input_index": 0,
+          "full_lengths": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            0
+          ],
+          "trial_ids": [
+            "Classic-threshold-low-retry32/session/1/search/2"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        }
+      ],
+      "measured_candidate_records": 1,
+      "typed_unassigned_observations": 0,
+      "typed_assignment_failures": {},
+      "recorded_rejection_entries": 33,
+      "rejection_entries_without_full_parameter_witness": 33,
+      "producer_invalid_observations": null,
+      "invalid_counter_unknown_for_legacy_summary": true,
+      "all_invalid_observations_independently_recounted": false,
+      "search_probes": 36,
+      "reference_probes": 4,
+      "applied_edits": 1,
+      "full_search_box_exhaustion_attested": false,
+      "physical_infeasibility_attested": false,
+      "primary_validation_performed_by_this_projection": false,
+      "scientific_verdict": null
+    },
+    {
+      "name": "Classic-threshold-low-advance32",
+      "topology": "Classic",
+      "initial_threshold": 0.0117,
+      "package_sha256": "eb335146e9d46300240afdd511480cd92748e504bb958025365cf670abf60d7a",
+      "summary_sha256": "62c2ffae0ec80326084516f6d8f4d59c2e52f20ebc4fe16e8633bd7c8cab2641",
+      "model_revision": "da8ab2daf5adb049c39ac13811b175bc2bddf64d1df20597f7f6196ef253a350",
+      "policy": "advance_unassigned_burst",
+      "outcome": "invalid_observation",
+      "reason": "unassigned_burst_candidate:ambiguous",
+      "recorded_geometry_groups": [
+        {
+          "candidate_input_index": 0,
+          "full_lengths": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 16,
+          "observed_input_indices": [
+            0,
+            3
+          ],
+          "trial_ids": [
+            "Classic-threshold-low-advance32/session/1/search/12",
+            "Classic-threshold-low-advance32/session/1/search/15",
+            "Classic-threshold-low-advance32/session/1/search/19",
+            "Classic-threshold-low-advance32/session/1/search/2",
+            "Classic-threshold-low-advance32/session/1/search/22",
+            "Classic-threshold-low-advance32/session/1/search/25",
+            "Classic-threshold-low-advance32/session/1/search/29",
+            "Classic-threshold-low-advance32/session/1/search/33",
+            "Classic-threshold-low-advance32/session/1/search/37",
+            "Classic-threshold-low-advance32/session/1/search/40",
+            "Classic-threshold-low-advance32/session/1/search/43",
+            "Classic-threshold-low-advance32/session/1/search/46",
+            "Classic-threshold-low-advance32/session/1/search/49",
+            "Classic-threshold-low-advance32/session/1/search/53",
+            "Classic-threshold-low-advance32/session/1/search/57",
+            "Classic-threshold-low-advance32/session/1/search/6",
+            "Classic-threshold-low-advance32/session/1/search/9"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 0,
+          "full_lengths": [
+            2,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 0,
+          "typed_unassigned_observations": 17,
+          "observed_input_indices": [
+            0,
+            3
+          ],
+          "trial_ids": [
+            "Classic-threshold-low-advance32/session/1/search/101",
+            "Classic-threshold-low-advance32/session/1/search/104",
+            "Classic-threshold-low-advance32/session/1/search/108",
+            "Classic-threshold-low-advance32/session/1/search/112",
+            "Classic-threshold-low-advance32/session/1/search/116",
+            "Classic-threshold-low-advance32/session/1/search/120",
+            "Classic-threshold-low-advance32/session/1/search/124",
+            "Classic-threshold-low-advance32/session/1/search/62",
+            "Classic-threshold-low-advance32/session/1/search/66",
+            "Classic-threshold-low-advance32/session/1/search/70",
+            "Classic-threshold-low-advance32/session/1/search/74",
+            "Classic-threshold-low-advance32/session/1/search/78",
+            "Classic-threshold-low-advance32/session/1/search/82",
+            "Classic-threshold-low-advance32/session/1/search/85",
+            "Classic-threshold-low-advance32/session/1/search/89",
+            "Classic-threshold-low-advance32/session/1/search/93",
+            "Classic-threshold-low-advance32/session/1/search/97"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        }
+      ],
+      "measured_candidate_records": 1,
+      "typed_unassigned_observations": 33,
+      "typed_assignment_failures": {
+        "ambiguous": 33
+      },
+      "recorded_rejection_entries": 33,
+      "rejection_entries_without_full_parameter_witness": 0,
+      "producer_invalid_observations": 33,
+      "invalid_counter_unknown_for_legacy_summary": false,
+      "all_invalid_observations_independently_recounted": false,
+      "search_probes": 57,
+      "reference_probes": 4,
+      "applied_edits": 33,
+      "full_search_box_exhaustion_attested": false,
+      "physical_infeasibility_attested": false,
+      "primary_validation_performed_by_this_projection": false,
+      "scientific_verdict": null
+    },
+    {
+      "name": "Classic-threshold-training100-retry32",
+      "topology": "Classic",
+      "initial_threshold": 100.0,
+      "package_sha256": "f8739f0cc9e68f917d3f42b859357878d718354fc951071d9b22de738b00be33",
+      "summary_sha256": "9fc220ba536af11815d7608365892af825fb714d231deff91d6cf5d077004c68",
+      "model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+      "policy": "retry_same_candidate",
+      "outcome": "invalid_observation",
+      "reason": "observation_not_valid_complete",
+      "recorded_geometry_groups": [
+        {
+          "candidate_input_index": 0,
+          "full_lengths": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            0
+          ],
+          "trial_ids": [
+            "Classic-threshold-training100-retry32/session/1/search/10",
+            "Classic-threshold-training100-retry32/session/1/search/14",
+            "Classic-threshold-training100-retry32/session/1/search/18",
+            "Classic-threshold-training100-retry32/session/1/search/2",
+            "Classic-threshold-training100-retry32/session/1/search/22",
+            "Classic-threshold-training100-retry32/session/1/search/26",
+            "Classic-threshold-training100-retry32/session/1/search/30",
+            "Classic-threshold-training100-retry32/session/1/search/34",
+            "Classic-threshold-training100-retry32/session/1/search/38",
+            "Classic-threshold-training100-retry32/session/1/search/42",
+            "Classic-threshold-training100-retry32/session/1/search/46",
+            "Classic-threshold-training100-retry32/session/1/search/50",
+            "Classic-threshold-training100-retry32/session/1/search/54",
+            "Classic-threshold-training100-retry32/session/1/search/58",
+            "Classic-threshold-training100-retry32/session/1/search/6",
+            "Classic-threshold-training100-retry32/session/1/search/62",
+            "Classic-threshold-training100-retry32/session/1/search/66"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 0,
+          "full_lengths": [
+            2,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            0
+          ],
+          "trial_ids": [
+            "Classic-threshold-training100-retry32/session/1/search/103",
+            "Classic-threshold-training100-retry32/session/1/search/107",
+            "Classic-threshold-training100-retry32/session/1/search/111",
+            "Classic-threshold-training100-retry32/session/1/search/115",
+            "Classic-threshold-training100-retry32/session/1/search/119",
+            "Classic-threshold-training100-retry32/session/1/search/123",
+            "Classic-threshold-training100-retry32/session/1/search/127",
+            "Classic-threshold-training100-retry32/session/1/search/131",
+            "Classic-threshold-training100-retry32/session/1/search/135",
+            "Classic-threshold-training100-retry32/session/1/search/71",
+            "Classic-threshold-training100-retry32/session/1/search/75",
+            "Classic-threshold-training100-retry32/session/1/search/79",
+            "Classic-threshold-training100-retry32/session/1/search/83",
+            "Classic-threshold-training100-retry32/session/1/search/87",
+            "Classic-threshold-training100-retry32/session/1/search/91",
+            "Classic-threshold-training100-retry32/session/1/search/95",
+            "Classic-threshold-training100-retry32/session/1/search/99"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 0,
+          "full_lengths": [
+            3,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            0
+          ],
+          "trial_ids": [
+            "Classic-threshold-training100-retry32/session/1/search/140",
+            "Classic-threshold-training100-retry32/session/1/search/144",
+            "Classic-threshold-training100-retry32/session/1/search/148",
+            "Classic-threshold-training100-retry32/session/1/search/152",
+            "Classic-threshold-training100-retry32/session/1/search/156",
+            "Classic-threshold-training100-retry32/session/1/search/160",
+            "Classic-threshold-training100-retry32/session/1/search/164",
+            "Classic-threshold-training100-retry32/session/1/search/168",
+            "Classic-threshold-training100-retry32/session/1/search/172",
+            "Classic-threshold-training100-retry32/session/1/search/176",
+            "Classic-threshold-training100-retry32/session/1/search/180",
+            "Classic-threshold-training100-retry32/session/1/search/184",
+            "Classic-threshold-training100-retry32/session/1/search/188",
+            "Classic-threshold-training100-retry32/session/1/search/192",
+            "Classic-threshold-training100-retry32/session/1/search/196",
+            "Classic-threshold-training100-retry32/session/1/search/200",
+            "Classic-threshold-training100-retry32/session/1/search/204"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        }
+      ],
+      "measured_candidate_records": 51,
+      "typed_unassigned_observations": 0,
+      "typed_assignment_failures": {},
+      "recorded_rejection_entries": 33,
+      "rejection_entries_without_full_parameter_witness": 33,
+      "producer_invalid_observations": null,
+      "invalid_counter_unknown_for_legacy_summary": true,
+      "all_invalid_observations_independently_recounted": false,
+      "search_probes": 136,
+      "reference_probes": 4,
+      "applied_edits": 51,
+      "full_search_box_exhaustion_attested": false,
+      "physical_infeasibility_attested": false,
+      "primary_validation_performed_by_this_projection": false,
+      "scientific_verdict": null
+    },
+    {
+      "name": "Classic-threshold-training100-advance32",
+      "topology": "Classic",
+      "initial_threshold": 100.0,
+      "package_sha256": "839259cc15fbede2558ac4568ec3f956f1fbe3665efd8f7a407071a3431aba23",
+      "summary_sha256": "f78210b164a1dea58dc6df8a321a533d42e56cea57578103548e8dc07009e952",
+      "model_revision": "3941183928f345e604832cccdc0c8b071e7471cea6d0a5bda97e28193588dcc9",
+      "policy": "advance_unassigned_burst",
+      "outcome": "invalid_observation",
+      "reason": "unassigned_burst_candidate:missing",
+      "recorded_geometry_groups": [
+        {
+          "candidate_input_index": 0,
+          "full_lengths": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            0
+          ],
+          "trial_ids": [
+            "Classic-threshold-training100-advance32/session/1/search/10",
+            "Classic-threshold-training100-advance32/session/1/search/14",
+            "Classic-threshold-training100-advance32/session/1/search/18",
+            "Classic-threshold-training100-advance32/session/1/search/2",
+            "Classic-threshold-training100-advance32/session/1/search/22",
+            "Classic-threshold-training100-advance32/session/1/search/26",
+            "Classic-threshold-training100-advance32/session/1/search/30",
+            "Classic-threshold-training100-advance32/session/1/search/34",
+            "Classic-threshold-training100-advance32/session/1/search/38",
+            "Classic-threshold-training100-advance32/session/1/search/42",
+            "Classic-threshold-training100-advance32/session/1/search/46",
+            "Classic-threshold-training100-advance32/session/1/search/50",
+            "Classic-threshold-training100-advance32/session/1/search/54",
+            "Classic-threshold-training100-advance32/session/1/search/58",
+            "Classic-threshold-training100-advance32/session/1/search/6",
+            "Classic-threshold-training100-advance32/session/1/search/62",
+            "Classic-threshold-training100-advance32/session/1/search/66"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 0,
+          "full_lengths": [
+            2,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            0
+          ],
+          "trial_ids": [
+            "Classic-threshold-training100-advance32/session/1/search/103",
+            "Classic-threshold-training100-advance32/session/1/search/107",
+            "Classic-threshold-training100-advance32/session/1/search/111",
+            "Classic-threshold-training100-advance32/session/1/search/115",
+            "Classic-threshold-training100-advance32/session/1/search/119",
+            "Classic-threshold-training100-advance32/session/1/search/123",
+            "Classic-threshold-training100-advance32/session/1/search/127",
+            "Classic-threshold-training100-advance32/session/1/search/131",
+            "Classic-threshold-training100-advance32/session/1/search/135",
+            "Classic-threshold-training100-advance32/session/1/search/71",
+            "Classic-threshold-training100-advance32/session/1/search/75",
+            "Classic-threshold-training100-advance32/session/1/search/79",
+            "Classic-threshold-training100-advance32/session/1/search/83",
+            "Classic-threshold-training100-advance32/session/1/search/87",
+            "Classic-threshold-training100-advance32/session/1/search/91",
+            "Classic-threshold-training100-advance32/session/1/search/95",
+            "Classic-threshold-training100-advance32/session/1/search/99"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 0,
+          "full_lengths": [
+            3,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            0
+          ],
+          "trial_ids": [
+            "Classic-threshold-training100-advance32/session/1/search/140",
+            "Classic-threshold-training100-advance32/session/1/search/144",
+            "Classic-threshold-training100-advance32/session/1/search/148",
+            "Classic-threshold-training100-advance32/session/1/search/152",
+            "Classic-threshold-training100-advance32/session/1/search/156",
+            "Classic-threshold-training100-advance32/session/1/search/160",
+            "Classic-threshold-training100-advance32/session/1/search/164",
+            "Classic-threshold-training100-advance32/session/1/search/168",
+            "Classic-threshold-training100-advance32/session/1/search/172",
+            "Classic-threshold-training100-advance32/session/1/search/176",
+            "Classic-threshold-training100-advance32/session/1/search/180",
+            "Classic-threshold-training100-advance32/session/1/search/184",
+            "Classic-threshold-training100-advance32/session/1/search/188",
+            "Classic-threshold-training100-advance32/session/1/search/192",
+            "Classic-threshold-training100-advance32/session/1/search/196",
+            "Classic-threshold-training100-advance32/session/1/search/200",
+            "Classic-threshold-training100-advance32/session/1/search/204"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 0,
+          "full_lengths": [
+            52,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 0,
+          "typed_unassigned_observations": 16,
+          "observed_input_indices": [
+            0
+          ],
+          "trial_ids": [
+            "Classic-threshold-training100-advance32/session/1/search/278",
+            "Classic-threshold-training100-advance32/session/1/search/282",
+            "Classic-threshold-training100-advance32/session/1/search/286",
+            "Classic-threshold-training100-advance32/session/1/search/290",
+            "Classic-threshold-training100-advance32/session/1/search/294",
+            "Classic-threshold-training100-advance32/session/1/search/298",
+            "Classic-threshold-training100-advance32/session/1/search/302",
+            "Classic-threshold-training100-advance32/session/1/search/306",
+            "Classic-threshold-training100-advance32/session/1/search/310",
+            "Classic-threshold-training100-advance32/session/1/search/314",
+            "Classic-threshold-training100-advance32/session/1/search/318",
+            "Classic-threshold-training100-advance32/session/1/search/322",
+            "Classic-threshold-training100-advance32/session/1/search/326",
+            "Classic-threshold-training100-advance32/session/1/search/330",
+            "Classic-threshold-training100-advance32/session/1/search/334",
+            "Classic-threshold-training100-advance32/session/1/search/338"
+          ],
+          "distinct_resistances": 16,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 0,
+          "full_lengths": [
+            54,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 0,
+          "typed_unassigned_observations": 17,
+          "observed_input_indices": [
+            0
+          ],
+          "trial_ids": [
+            "Classic-threshold-training100-advance32/session/1/search/209",
+            "Classic-threshold-training100-advance32/session/1/search/213",
+            "Classic-threshold-training100-advance32/session/1/search/217",
+            "Classic-threshold-training100-advance32/session/1/search/221",
+            "Classic-threshold-training100-advance32/session/1/search/225",
+            "Classic-threshold-training100-advance32/session/1/search/229",
+            "Classic-threshold-training100-advance32/session/1/search/233",
+            "Classic-threshold-training100-advance32/session/1/search/237",
+            "Classic-threshold-training100-advance32/session/1/search/241",
+            "Classic-threshold-training100-advance32/session/1/search/245",
+            "Classic-threshold-training100-advance32/session/1/search/249",
+            "Classic-threshold-training100-advance32/session/1/search/253",
+            "Classic-threshold-training100-advance32/session/1/search/257",
+            "Classic-threshold-training100-advance32/session/1/search/261",
+            "Classic-threshold-training100-advance32/session/1/search/265",
+            "Classic-threshold-training100-advance32/session/1/search/269",
+            "Classic-threshold-training100-advance32/session/1/search/273"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        }
+      ],
+      "measured_candidate_records": 51,
+      "typed_unassigned_observations": 33,
+      "typed_assignment_failures": {
+        "missing": 33
+      },
+      "recorded_rejection_entries": 33,
+      "rejection_entries_without_full_parameter_witness": 0,
+      "producer_invalid_observations": 33,
+      "invalid_counter_unknown_for_legacy_summary": false,
+      "all_invalid_observations_independently_recounted": false,
+      "search_probes": 168,
+      "reference_probes": 4,
+      "applied_edits": 83,
+      "full_search_box_exhaustion_attested": false,
+      "physical_infeasibility_attested": false,
+      "primary_validation_performed_by_this_projection": false,
+      "scientific_verdict": null
+    },
+    {
+      "name": "Branch-threshold-low-retry32",
+      "topology": "Branch",
+      "initial_threshold": 0.0117,
+      "package_sha256": "1496ddfe2c78b04f104e7a514b29d7fb5273c889d7c59efb34d6c7c02d422712",
+      "summary_sha256": "da09d369962c2016d1443917309ca8d60608b5e43c990e02240d38b0500cf886",
+      "model_revision": "57d366c6b4fb725d71e7f034aa0db18e35d5180ba94e437dcb4768238b16b8f4",
+      "policy": "retry_same_candidate",
+      "outcome": "invalid_observation",
+      "reason": "observation_not_valid_complete",
+      "recorded_geometry_groups": [
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-low-retry32/session/1/search/2"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        }
+      ],
+      "measured_candidate_records": 1,
+      "typed_unassigned_observations": 0,
+      "typed_assignment_failures": {},
+      "recorded_rejection_entries": 33,
+      "rejection_entries_without_full_parameter_witness": 33,
+      "producer_invalid_observations": null,
+      "invalid_counter_unknown_for_legacy_summary": true,
+      "all_invalid_observations_independently_recounted": false,
+      "search_probes": 36,
+      "reference_probes": 4,
+      "applied_edits": 1,
+      "full_search_box_exhaustion_attested": false,
+      "physical_infeasibility_attested": false,
+      "primary_validation_performed_by_this_projection": false,
+      "scientific_verdict": null
+    },
+    {
+      "name": "Branch-threshold-low-advance32",
+      "topology": "Branch",
+      "initial_threshold": 0.0117,
+      "package_sha256": "7c108d28e788878e7bd4aa509e34c9b7efb8a6c11e0d4ab64d8a1f043b2429b1",
+      "summary_sha256": "99db9f55269d4f4a53705fa8a2d7b1797adfd31ab6616f57ff585ec6465c060e",
+      "model_revision": "751f15fe94b1a79059952e3f3d1261b70220a7d0eedcde00fdf1981ea8a3b2e6",
+      "policy": "advance_unassigned_burst",
+      "outcome": "invalid_observation",
+      "reason": "unassigned_burst_candidate:ambiguous",
+      "recorded_geometry_groups": [
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-low-advance32/session/1/search/2"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            2,
+            2,
+            2,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 0,
+          "typed_unassigned_observations": 1,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-low-advance32/session/1/search/7"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            3,
+            3,
+            2,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 0,
+          "typed_unassigned_observations": 17,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-low-advance32/session/1/search/12",
+            "Branch-threshold-low-advance32/session/1/search/16",
+            "Branch-threshold-low-advance32/session/1/search/20",
+            "Branch-threshold-low-advance32/session/1/search/24",
+            "Branch-threshold-low-advance32/session/1/search/28",
+            "Branch-threshold-low-advance32/session/1/search/32",
+            "Branch-threshold-low-advance32/session/1/search/36",
+            "Branch-threshold-low-advance32/session/1/search/40",
+            "Branch-threshold-low-advance32/session/1/search/44",
+            "Branch-threshold-low-advance32/session/1/search/48",
+            "Branch-threshold-low-advance32/session/1/search/52",
+            "Branch-threshold-low-advance32/session/1/search/56",
+            "Branch-threshold-low-advance32/session/1/search/60",
+            "Branch-threshold-low-advance32/session/1/search/64",
+            "Branch-threshold-low-advance32/session/1/search/68",
+            "Branch-threshold-low-advance32/session/1/search/72",
+            "Branch-threshold-low-advance32/session/1/search/76"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            3,
+            3,
+            3,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-low-advance32/session/1/search/81"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            4,
+            4,
+            3,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 15,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-low-advance32/session/1/search/102",
+            "Branch-threshold-low-advance32/session/1/search/106",
+            "Branch-threshold-low-advance32/session/1/search/110",
+            "Branch-threshold-low-advance32/session/1/search/114",
+            "Branch-threshold-low-advance32/session/1/search/118",
+            "Branch-threshold-low-advance32/session/1/search/122",
+            "Branch-threshold-low-advance32/session/1/search/126",
+            "Branch-threshold-low-advance32/session/1/search/130",
+            "Branch-threshold-low-advance32/session/1/search/134",
+            "Branch-threshold-low-advance32/session/1/search/138",
+            "Branch-threshold-low-advance32/session/1/search/142",
+            "Branch-threshold-low-advance32/session/1/search/146",
+            "Branch-threshold-low-advance32/session/1/search/86",
+            "Branch-threshold-low-advance32/session/1/search/90",
+            "Branch-threshold-low-advance32/session/1/search/94",
+            "Branch-threshold-low-advance32/session/1/search/98"
+          ],
+          "distinct_resistances": 16,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            86000000
+          ]
+        }
+      ],
+      "measured_candidate_records": 3,
+      "typed_unassigned_observations": 33,
+      "typed_assignment_failures": {
+        "ambiguous": 33
+      },
+      "recorded_rejection_entries": 33,
+      "rejection_entries_without_full_parameter_witness": 0,
+      "producer_invalid_observations": 33,
+      "invalid_counter_unknown_for_legacy_summary": false,
+      "all_invalid_observations_independently_recounted": false,
+      "search_probes": 72,
+      "reference_probes": 4,
+      "applied_edits": 35,
+      "full_search_box_exhaustion_attested": false,
+      "physical_infeasibility_attested": false,
+      "primary_validation_performed_by_this_projection": false,
+      "scientific_verdict": null
+    },
+    {
+      "name": "Branch-threshold-training100-retry32",
+      "topology": "Branch",
+      "initial_threshold": 100.0,
+      "package_sha256": "c59f5820fe3fa41cba6a1b0ed15979e518cba2d05db1a2d7dd7ca9b40d5190de",
+      "summary_sha256": "244833631aa6dace6717a7197acdecb8b4a213fbff04d42de3ccbbc473a6fd47",
+      "model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67",
+      "policy": "retry_same_candidate",
+      "outcome": "invalid_observation",
+      "reason": "observation_not_valid_complete",
+      "recorded_geometry_groups": [
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/2"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            2,
+            2,
+            2,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/7"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            3,
+            3,
+            2,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/12",
+            "Branch-threshold-training100-retry32/session/1/search/16",
+            "Branch-threshold-training100-retry32/session/1/search/20",
+            "Branch-threshold-training100-retry32/session/1/search/24",
+            "Branch-threshold-training100-retry32/session/1/search/28",
+            "Branch-threshold-training100-retry32/session/1/search/32",
+            "Branch-threshold-training100-retry32/session/1/search/36",
+            "Branch-threshold-training100-retry32/session/1/search/40",
+            "Branch-threshold-training100-retry32/session/1/search/44",
+            "Branch-threshold-training100-retry32/session/1/search/48",
+            "Branch-threshold-training100-retry32/session/1/search/52",
+            "Branch-threshold-training100-retry32/session/1/search/56",
+            "Branch-threshold-training100-retry32/session/1/search/60",
+            "Branch-threshold-training100-retry32/session/1/search/64",
+            "Branch-threshold-training100-retry32/session/1/search/68",
+            "Branch-threshold-training100-retry32/session/1/search/72",
+            "Branch-threshold-training100-retry32/session/1/search/76"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            3,
+            3,
+            3,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/81"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            4,
+            4,
+            3,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/102",
+            "Branch-threshold-training100-retry32/session/1/search/106",
+            "Branch-threshold-training100-retry32/session/1/search/110",
+            "Branch-threshold-training100-retry32/session/1/search/114",
+            "Branch-threshold-training100-retry32/session/1/search/118",
+            "Branch-threshold-training100-retry32/session/1/search/122",
+            "Branch-threshold-training100-retry32/session/1/search/126",
+            "Branch-threshold-training100-retry32/session/1/search/130",
+            "Branch-threshold-training100-retry32/session/1/search/134",
+            "Branch-threshold-training100-retry32/session/1/search/138",
+            "Branch-threshold-training100-retry32/session/1/search/142",
+            "Branch-threshold-training100-retry32/session/1/search/146",
+            "Branch-threshold-training100-retry32/session/1/search/150",
+            "Branch-threshold-training100-retry32/session/1/search/86",
+            "Branch-threshold-training100-retry32/session/1/search/90",
+            "Branch-threshold-training100-retry32/session/1/search/94",
+            "Branch-threshold-training100-retry32/session/1/search/98"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            4,
+            4,
+            4,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/155"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            5,
+            5,
+            4,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/160",
+            "Branch-threshold-training100-retry32/session/1/search/164",
+            "Branch-threshold-training100-retry32/session/1/search/168",
+            "Branch-threshold-training100-retry32/session/1/search/172",
+            "Branch-threshold-training100-retry32/session/1/search/176",
+            "Branch-threshold-training100-retry32/session/1/search/180",
+            "Branch-threshold-training100-retry32/session/1/search/184",
+            "Branch-threshold-training100-retry32/session/1/search/188",
+            "Branch-threshold-training100-retry32/session/1/search/192",
+            "Branch-threshold-training100-retry32/session/1/search/196",
+            "Branch-threshold-training100-retry32/session/1/search/200",
+            "Branch-threshold-training100-retry32/session/1/search/204",
+            "Branch-threshold-training100-retry32/session/1/search/208",
+            "Branch-threshold-training100-retry32/session/1/search/212",
+            "Branch-threshold-training100-retry32/session/1/search/216",
+            "Branch-threshold-training100-retry32/session/1/search/220",
+            "Branch-threshold-training100-retry32/session/1/search/224"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            5,
+            5,
+            5,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/229"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            6,
+            6,
+            5,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/234",
+            "Branch-threshold-training100-retry32/session/1/search/238",
+            "Branch-threshold-training100-retry32/session/1/search/242",
+            "Branch-threshold-training100-retry32/session/1/search/246",
+            "Branch-threshold-training100-retry32/session/1/search/250",
+            "Branch-threshold-training100-retry32/session/1/search/254",
+            "Branch-threshold-training100-retry32/session/1/search/258",
+            "Branch-threshold-training100-retry32/session/1/search/262",
+            "Branch-threshold-training100-retry32/session/1/search/266",
+            "Branch-threshold-training100-retry32/session/1/search/270",
+            "Branch-threshold-training100-retry32/session/1/search/274",
+            "Branch-threshold-training100-retry32/session/1/search/278",
+            "Branch-threshold-training100-retry32/session/1/search/282",
+            "Branch-threshold-training100-retry32/session/1/search/286",
+            "Branch-threshold-training100-retry32/session/1/search/290",
+            "Branch-threshold-training100-retry32/session/1/search/294",
+            "Branch-threshold-training100-retry32/session/1/search/298"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            6,
+            6,
+            6,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/303"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            7,
+            7,
+            6,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/308",
+            "Branch-threshold-training100-retry32/session/1/search/312",
+            "Branch-threshold-training100-retry32/session/1/search/316",
+            "Branch-threshold-training100-retry32/session/1/search/320",
+            "Branch-threshold-training100-retry32/session/1/search/324",
+            "Branch-threshold-training100-retry32/session/1/search/328",
+            "Branch-threshold-training100-retry32/session/1/search/332",
+            "Branch-threshold-training100-retry32/session/1/search/336",
+            "Branch-threshold-training100-retry32/session/1/search/340",
+            "Branch-threshold-training100-retry32/session/1/search/344",
+            "Branch-threshold-training100-retry32/session/1/search/348",
+            "Branch-threshold-training100-retry32/session/1/search/352",
+            "Branch-threshold-training100-retry32/session/1/search/356",
+            "Branch-threshold-training100-retry32/session/1/search/360",
+            "Branch-threshold-training100-retry32/session/1/search/364",
+            "Branch-threshold-training100-retry32/session/1/search/368",
+            "Branch-threshold-training100-retry32/session/1/search/372"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            7,
+            7,
+            7,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/377"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            8,
+            8,
+            7,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/382",
+            "Branch-threshold-training100-retry32/session/1/search/386",
+            "Branch-threshold-training100-retry32/session/1/search/390",
+            "Branch-threshold-training100-retry32/session/1/search/394",
+            "Branch-threshold-training100-retry32/session/1/search/398",
+            "Branch-threshold-training100-retry32/session/1/search/402",
+            "Branch-threshold-training100-retry32/session/1/search/406",
+            "Branch-threshold-training100-retry32/session/1/search/410",
+            "Branch-threshold-training100-retry32/session/1/search/414",
+            "Branch-threshold-training100-retry32/session/1/search/418",
+            "Branch-threshold-training100-retry32/session/1/search/422",
+            "Branch-threshold-training100-retry32/session/1/search/426",
+            "Branch-threshold-training100-retry32/session/1/search/430",
+            "Branch-threshold-training100-retry32/session/1/search/434",
+            "Branch-threshold-training100-retry32/session/1/search/438",
+            "Branch-threshold-training100-retry32/session/1/search/442",
+            "Branch-threshold-training100-retry32/session/1/search/446"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            8,
+            8,
+            8,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/451"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            9,
+            9,
+            8,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/456",
+            "Branch-threshold-training100-retry32/session/1/search/460",
+            "Branch-threshold-training100-retry32/session/1/search/464",
+            "Branch-threshold-training100-retry32/session/1/search/468",
+            "Branch-threshold-training100-retry32/session/1/search/472",
+            "Branch-threshold-training100-retry32/session/1/search/476",
+            "Branch-threshold-training100-retry32/session/1/search/480",
+            "Branch-threshold-training100-retry32/session/1/search/484",
+            "Branch-threshold-training100-retry32/session/1/search/488",
+            "Branch-threshold-training100-retry32/session/1/search/492",
+            "Branch-threshold-training100-retry32/session/1/search/496",
+            "Branch-threshold-training100-retry32/session/1/search/500",
+            "Branch-threshold-training100-retry32/session/1/search/504",
+            "Branch-threshold-training100-retry32/session/1/search/508",
+            "Branch-threshold-training100-retry32/session/1/search/512",
+            "Branch-threshold-training100-retry32/session/1/search/516",
+            "Branch-threshold-training100-retry32/session/1/search/520"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            9,
+            9,
+            9,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/525"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            10,
+            10,
+            9,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/530",
+            "Branch-threshold-training100-retry32/session/1/search/534",
+            "Branch-threshold-training100-retry32/session/1/search/538",
+            "Branch-threshold-training100-retry32/session/1/search/542",
+            "Branch-threshold-training100-retry32/session/1/search/546",
+            "Branch-threshold-training100-retry32/session/1/search/550",
+            "Branch-threshold-training100-retry32/session/1/search/554",
+            "Branch-threshold-training100-retry32/session/1/search/558",
+            "Branch-threshold-training100-retry32/session/1/search/562",
+            "Branch-threshold-training100-retry32/session/1/search/566",
+            "Branch-threshold-training100-retry32/session/1/search/570",
+            "Branch-threshold-training100-retry32/session/1/search/574",
+            "Branch-threshold-training100-retry32/session/1/search/578",
+            "Branch-threshold-training100-retry32/session/1/search/582",
+            "Branch-threshold-training100-retry32/session/1/search/586",
+            "Branch-threshold-training100-retry32/session/1/search/590",
+            "Branch-threshold-training100-retry32/session/1/search/594"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            10,
+            10,
+            10,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/599"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            11,
+            11,
+            10,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/604",
+            "Branch-threshold-training100-retry32/session/1/search/608",
+            "Branch-threshold-training100-retry32/session/1/search/612",
+            "Branch-threshold-training100-retry32/session/1/search/616",
+            "Branch-threshold-training100-retry32/session/1/search/620",
+            "Branch-threshold-training100-retry32/session/1/search/624",
+            "Branch-threshold-training100-retry32/session/1/search/628",
+            "Branch-threshold-training100-retry32/session/1/search/632",
+            "Branch-threshold-training100-retry32/session/1/search/636",
+            "Branch-threshold-training100-retry32/session/1/search/640",
+            "Branch-threshold-training100-retry32/session/1/search/644",
+            "Branch-threshold-training100-retry32/session/1/search/648",
+            "Branch-threshold-training100-retry32/session/1/search/652",
+            "Branch-threshold-training100-retry32/session/1/search/656",
+            "Branch-threshold-training100-retry32/session/1/search/660",
+            "Branch-threshold-training100-retry32/session/1/search/664",
+            "Branch-threshold-training100-retry32/session/1/search/668"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            11,
+            11,
+            11,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/673"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            12,
+            12,
+            11,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/678",
+            "Branch-threshold-training100-retry32/session/1/search/682",
+            "Branch-threshold-training100-retry32/session/1/search/686",
+            "Branch-threshold-training100-retry32/session/1/search/690",
+            "Branch-threshold-training100-retry32/session/1/search/694",
+            "Branch-threshold-training100-retry32/session/1/search/698",
+            "Branch-threshold-training100-retry32/session/1/search/702",
+            "Branch-threshold-training100-retry32/session/1/search/706",
+            "Branch-threshold-training100-retry32/session/1/search/710",
+            "Branch-threshold-training100-retry32/session/1/search/714",
+            "Branch-threshold-training100-retry32/session/1/search/718",
+            "Branch-threshold-training100-retry32/session/1/search/722",
+            "Branch-threshold-training100-retry32/session/1/search/726",
+            "Branch-threshold-training100-retry32/session/1/search/730",
+            "Branch-threshold-training100-retry32/session/1/search/734",
+            "Branch-threshold-training100-retry32/session/1/search/738",
+            "Branch-threshold-training100-retry32/session/1/search/742"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            12,
+            12,
+            12,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/747"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            13,
+            13,
+            12,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/752",
+            "Branch-threshold-training100-retry32/session/1/search/756",
+            "Branch-threshold-training100-retry32/session/1/search/760",
+            "Branch-threshold-training100-retry32/session/1/search/764",
+            "Branch-threshold-training100-retry32/session/1/search/768",
+            "Branch-threshold-training100-retry32/session/1/search/772",
+            "Branch-threshold-training100-retry32/session/1/search/776",
+            "Branch-threshold-training100-retry32/session/1/search/780",
+            "Branch-threshold-training100-retry32/session/1/search/784",
+            "Branch-threshold-training100-retry32/session/1/search/788",
+            "Branch-threshold-training100-retry32/session/1/search/792",
+            "Branch-threshold-training100-retry32/session/1/search/796",
+            "Branch-threshold-training100-retry32/session/1/search/800",
+            "Branch-threshold-training100-retry32/session/1/search/804",
+            "Branch-threshold-training100-retry32/session/1/search/808",
+            "Branch-threshold-training100-retry32/session/1/search/812",
+            "Branch-threshold-training100-retry32/session/1/search/816"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            13,
+            13,
+            13,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/821"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            14,
+            14,
+            13,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/826",
+            "Branch-threshold-training100-retry32/session/1/search/830",
+            "Branch-threshold-training100-retry32/session/1/search/834",
+            "Branch-threshold-training100-retry32/session/1/search/838",
+            "Branch-threshold-training100-retry32/session/1/search/842",
+            "Branch-threshold-training100-retry32/session/1/search/846",
+            "Branch-threshold-training100-retry32/session/1/search/850",
+            "Branch-threshold-training100-retry32/session/1/search/854",
+            "Branch-threshold-training100-retry32/session/1/search/858",
+            "Branch-threshold-training100-retry32/session/1/search/862",
+            "Branch-threshold-training100-retry32/session/1/search/866",
+            "Branch-threshold-training100-retry32/session/1/search/870",
+            "Branch-threshold-training100-retry32/session/1/search/874",
+            "Branch-threshold-training100-retry32/session/1/search/878",
+            "Branch-threshold-training100-retry32/session/1/search/882",
+            "Branch-threshold-training100-retry32/session/1/search/886",
+            "Branch-threshold-training100-retry32/session/1/search/890"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            14,
+            14,
+            14,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/895"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            15,
+            15,
+            14,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-retry32/session/1/search/900",
+            "Branch-threshold-training100-retry32/session/1/search/904",
+            "Branch-threshold-training100-retry32/session/1/search/908",
+            "Branch-threshold-training100-retry32/session/1/search/912",
+            "Branch-threshold-training100-retry32/session/1/search/916",
+            "Branch-threshold-training100-retry32/session/1/search/920",
+            "Branch-threshold-training100-retry32/session/1/search/924",
+            "Branch-threshold-training100-retry32/session/1/search/928",
+            "Branch-threshold-training100-retry32/session/1/search/932",
+            "Branch-threshold-training100-retry32/session/1/search/936",
+            "Branch-threshold-training100-retry32/session/1/search/940",
+            "Branch-threshold-training100-retry32/session/1/search/944",
+            "Branch-threshold-training100-retry32/session/1/search/948",
+            "Branch-threshold-training100-retry32/session/1/search/952",
+            "Branch-threshold-training100-retry32/session/1/search/956",
+            "Branch-threshold-training100-retry32/session/1/search/960",
+            "Branch-threshold-training100-retry32/session/1/search/964"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        }
+      ],
+      "measured_candidate_records": 235,
+      "typed_unassigned_observations": 0,
+      "typed_assignment_failures": {},
+      "recorded_rejection_entries": 33,
+      "rejection_entries_without_full_parameter_witness": 33,
+      "producer_invalid_observations": null,
+      "invalid_counter_unknown_for_legacy_summary": true,
+      "all_invalid_observations_independently_recounted": false,
+      "search_probes": 504,
+      "reference_probes": 4,
+      "applied_edits": 235,
+      "full_search_box_exhaustion_attested": false,
+      "physical_infeasibility_attested": false,
+      "primary_validation_performed_by_this_projection": false,
+      "scientific_verdict": null
+    },
+    {
+      "name": "Branch-threshold-training100-advance32",
+      "topology": "Branch",
+      "initial_threshold": 100.0,
+      "package_sha256": "88ec21ebce35afcb94a189550826e3aa44d16fc872668223a1ffd9da7e19b4f9",
+      "summary_sha256": "4e053974e9ec9929bf5aac249685ed519ceb930068a0dd349e4a307722138b3d",
+      "model_revision": "0e6c038665ebe4350b18978b37c0b81b0d53de5eccb9648f14d49a4dfe2e5af5",
+      "policy": "advance_unassigned_burst",
+      "outcome": "invalid_observation",
+      "reason": "unassigned_burst_candidate:missing",
+      "recorded_geometry_groups": [
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/2"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            2,
+            2,
+            2,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/7"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            3,
+            3,
+            2,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/12",
+            "Branch-threshold-training100-advance32/session/1/search/16",
+            "Branch-threshold-training100-advance32/session/1/search/20",
+            "Branch-threshold-training100-advance32/session/1/search/24",
+            "Branch-threshold-training100-advance32/session/1/search/28",
+            "Branch-threshold-training100-advance32/session/1/search/32",
+            "Branch-threshold-training100-advance32/session/1/search/36",
+            "Branch-threshold-training100-advance32/session/1/search/40",
+            "Branch-threshold-training100-advance32/session/1/search/44",
+            "Branch-threshold-training100-advance32/session/1/search/48",
+            "Branch-threshold-training100-advance32/session/1/search/52",
+            "Branch-threshold-training100-advance32/session/1/search/56",
+            "Branch-threshold-training100-advance32/session/1/search/60",
+            "Branch-threshold-training100-advance32/session/1/search/64",
+            "Branch-threshold-training100-advance32/session/1/search/68",
+            "Branch-threshold-training100-advance32/session/1/search/72",
+            "Branch-threshold-training100-advance32/session/1/search/76"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            3,
+            3,
+            3,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/81"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            4,
+            4,
+            3,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/102",
+            "Branch-threshold-training100-advance32/session/1/search/106",
+            "Branch-threshold-training100-advance32/session/1/search/110",
+            "Branch-threshold-training100-advance32/session/1/search/114",
+            "Branch-threshold-training100-advance32/session/1/search/118",
+            "Branch-threshold-training100-advance32/session/1/search/122",
+            "Branch-threshold-training100-advance32/session/1/search/126",
+            "Branch-threshold-training100-advance32/session/1/search/130",
+            "Branch-threshold-training100-advance32/session/1/search/134",
+            "Branch-threshold-training100-advance32/session/1/search/138",
+            "Branch-threshold-training100-advance32/session/1/search/142",
+            "Branch-threshold-training100-advance32/session/1/search/146",
+            "Branch-threshold-training100-advance32/session/1/search/150",
+            "Branch-threshold-training100-advance32/session/1/search/86",
+            "Branch-threshold-training100-advance32/session/1/search/90",
+            "Branch-threshold-training100-advance32/session/1/search/94",
+            "Branch-threshold-training100-advance32/session/1/search/98"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            4,
+            4,
+            4,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/155"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            5,
+            5,
+            4,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/160",
+            "Branch-threshold-training100-advance32/session/1/search/164",
+            "Branch-threshold-training100-advance32/session/1/search/168",
+            "Branch-threshold-training100-advance32/session/1/search/172",
+            "Branch-threshold-training100-advance32/session/1/search/176",
+            "Branch-threshold-training100-advance32/session/1/search/180",
+            "Branch-threshold-training100-advance32/session/1/search/184",
+            "Branch-threshold-training100-advance32/session/1/search/188",
+            "Branch-threshold-training100-advance32/session/1/search/192",
+            "Branch-threshold-training100-advance32/session/1/search/196",
+            "Branch-threshold-training100-advance32/session/1/search/200",
+            "Branch-threshold-training100-advance32/session/1/search/204",
+            "Branch-threshold-training100-advance32/session/1/search/208",
+            "Branch-threshold-training100-advance32/session/1/search/212",
+            "Branch-threshold-training100-advance32/session/1/search/216",
+            "Branch-threshold-training100-advance32/session/1/search/220",
+            "Branch-threshold-training100-advance32/session/1/search/224"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            5,
+            5,
+            5,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/229"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            6,
+            6,
+            5,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/234",
+            "Branch-threshold-training100-advance32/session/1/search/238",
+            "Branch-threshold-training100-advance32/session/1/search/242",
+            "Branch-threshold-training100-advance32/session/1/search/246",
+            "Branch-threshold-training100-advance32/session/1/search/250",
+            "Branch-threshold-training100-advance32/session/1/search/254",
+            "Branch-threshold-training100-advance32/session/1/search/258",
+            "Branch-threshold-training100-advance32/session/1/search/262",
+            "Branch-threshold-training100-advance32/session/1/search/266",
+            "Branch-threshold-training100-advance32/session/1/search/270",
+            "Branch-threshold-training100-advance32/session/1/search/274",
+            "Branch-threshold-training100-advance32/session/1/search/278",
+            "Branch-threshold-training100-advance32/session/1/search/282",
+            "Branch-threshold-training100-advance32/session/1/search/286",
+            "Branch-threshold-training100-advance32/session/1/search/290",
+            "Branch-threshold-training100-advance32/session/1/search/294",
+            "Branch-threshold-training100-advance32/session/1/search/298"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            6,
+            6,
+            6,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/303"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            7,
+            7,
+            6,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/308",
+            "Branch-threshold-training100-advance32/session/1/search/312",
+            "Branch-threshold-training100-advance32/session/1/search/316",
+            "Branch-threshold-training100-advance32/session/1/search/320",
+            "Branch-threshold-training100-advance32/session/1/search/324",
+            "Branch-threshold-training100-advance32/session/1/search/328",
+            "Branch-threshold-training100-advance32/session/1/search/332",
+            "Branch-threshold-training100-advance32/session/1/search/336",
+            "Branch-threshold-training100-advance32/session/1/search/340",
+            "Branch-threshold-training100-advance32/session/1/search/344",
+            "Branch-threshold-training100-advance32/session/1/search/348",
+            "Branch-threshold-training100-advance32/session/1/search/352",
+            "Branch-threshold-training100-advance32/session/1/search/356",
+            "Branch-threshold-training100-advance32/session/1/search/360",
+            "Branch-threshold-training100-advance32/session/1/search/364",
+            "Branch-threshold-training100-advance32/session/1/search/368",
+            "Branch-threshold-training100-advance32/session/1/search/372"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            7,
+            7,
+            7,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/377"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            8,
+            8,
+            7,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/382",
+            "Branch-threshold-training100-advance32/session/1/search/386",
+            "Branch-threshold-training100-advance32/session/1/search/390",
+            "Branch-threshold-training100-advance32/session/1/search/394",
+            "Branch-threshold-training100-advance32/session/1/search/398",
+            "Branch-threshold-training100-advance32/session/1/search/402",
+            "Branch-threshold-training100-advance32/session/1/search/406",
+            "Branch-threshold-training100-advance32/session/1/search/410",
+            "Branch-threshold-training100-advance32/session/1/search/414",
+            "Branch-threshold-training100-advance32/session/1/search/418",
+            "Branch-threshold-training100-advance32/session/1/search/422",
+            "Branch-threshold-training100-advance32/session/1/search/426",
+            "Branch-threshold-training100-advance32/session/1/search/430",
+            "Branch-threshold-training100-advance32/session/1/search/434",
+            "Branch-threshold-training100-advance32/session/1/search/438",
+            "Branch-threshold-training100-advance32/session/1/search/442",
+            "Branch-threshold-training100-advance32/session/1/search/446"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            8,
+            8,
+            8,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/451"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            9,
+            9,
+            8,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/456",
+            "Branch-threshold-training100-advance32/session/1/search/460",
+            "Branch-threshold-training100-advance32/session/1/search/464",
+            "Branch-threshold-training100-advance32/session/1/search/468",
+            "Branch-threshold-training100-advance32/session/1/search/472",
+            "Branch-threshold-training100-advance32/session/1/search/476",
+            "Branch-threshold-training100-advance32/session/1/search/480",
+            "Branch-threshold-training100-advance32/session/1/search/484",
+            "Branch-threshold-training100-advance32/session/1/search/488",
+            "Branch-threshold-training100-advance32/session/1/search/492",
+            "Branch-threshold-training100-advance32/session/1/search/496",
+            "Branch-threshold-training100-advance32/session/1/search/500",
+            "Branch-threshold-training100-advance32/session/1/search/504",
+            "Branch-threshold-training100-advance32/session/1/search/508",
+            "Branch-threshold-training100-advance32/session/1/search/512",
+            "Branch-threshold-training100-advance32/session/1/search/516",
+            "Branch-threshold-training100-advance32/session/1/search/520"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            9,
+            9,
+            9,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/525"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            10,
+            10,
+            9,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/530",
+            "Branch-threshold-training100-advance32/session/1/search/534",
+            "Branch-threshold-training100-advance32/session/1/search/538",
+            "Branch-threshold-training100-advance32/session/1/search/542",
+            "Branch-threshold-training100-advance32/session/1/search/546",
+            "Branch-threshold-training100-advance32/session/1/search/550",
+            "Branch-threshold-training100-advance32/session/1/search/554",
+            "Branch-threshold-training100-advance32/session/1/search/558",
+            "Branch-threshold-training100-advance32/session/1/search/562",
+            "Branch-threshold-training100-advance32/session/1/search/566",
+            "Branch-threshold-training100-advance32/session/1/search/570",
+            "Branch-threshold-training100-advance32/session/1/search/574",
+            "Branch-threshold-training100-advance32/session/1/search/578",
+            "Branch-threshold-training100-advance32/session/1/search/582",
+            "Branch-threshold-training100-advance32/session/1/search/586",
+            "Branch-threshold-training100-advance32/session/1/search/590",
+            "Branch-threshold-training100-advance32/session/1/search/594"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            10,
+            10,
+            10,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/599"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            11,
+            11,
+            10,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/604",
+            "Branch-threshold-training100-advance32/session/1/search/608",
+            "Branch-threshold-training100-advance32/session/1/search/612",
+            "Branch-threshold-training100-advance32/session/1/search/616",
+            "Branch-threshold-training100-advance32/session/1/search/620",
+            "Branch-threshold-training100-advance32/session/1/search/624",
+            "Branch-threshold-training100-advance32/session/1/search/628",
+            "Branch-threshold-training100-advance32/session/1/search/632",
+            "Branch-threshold-training100-advance32/session/1/search/636",
+            "Branch-threshold-training100-advance32/session/1/search/640",
+            "Branch-threshold-training100-advance32/session/1/search/644",
+            "Branch-threshold-training100-advance32/session/1/search/648",
+            "Branch-threshold-training100-advance32/session/1/search/652",
+            "Branch-threshold-training100-advance32/session/1/search/656",
+            "Branch-threshold-training100-advance32/session/1/search/660",
+            "Branch-threshold-training100-advance32/session/1/search/664",
+            "Branch-threshold-training100-advance32/session/1/search/668"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            11,
+            11,
+            11,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/673"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            12,
+            12,
+            11,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/678",
+            "Branch-threshold-training100-advance32/session/1/search/682",
+            "Branch-threshold-training100-advance32/session/1/search/686",
+            "Branch-threshold-training100-advance32/session/1/search/690",
+            "Branch-threshold-training100-advance32/session/1/search/694",
+            "Branch-threshold-training100-advance32/session/1/search/698",
+            "Branch-threshold-training100-advance32/session/1/search/702",
+            "Branch-threshold-training100-advance32/session/1/search/706",
+            "Branch-threshold-training100-advance32/session/1/search/710",
+            "Branch-threshold-training100-advance32/session/1/search/714",
+            "Branch-threshold-training100-advance32/session/1/search/718",
+            "Branch-threshold-training100-advance32/session/1/search/722",
+            "Branch-threshold-training100-advance32/session/1/search/726",
+            "Branch-threshold-training100-advance32/session/1/search/730",
+            "Branch-threshold-training100-advance32/session/1/search/734",
+            "Branch-threshold-training100-advance32/session/1/search/738",
+            "Branch-threshold-training100-advance32/session/1/search/742"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            12,
+            12,
+            12,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/747"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            13,
+            13,
+            12,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/752",
+            "Branch-threshold-training100-advance32/session/1/search/756",
+            "Branch-threshold-training100-advance32/session/1/search/760",
+            "Branch-threshold-training100-advance32/session/1/search/764",
+            "Branch-threshold-training100-advance32/session/1/search/768",
+            "Branch-threshold-training100-advance32/session/1/search/772",
+            "Branch-threshold-training100-advance32/session/1/search/776",
+            "Branch-threshold-training100-advance32/session/1/search/780",
+            "Branch-threshold-training100-advance32/session/1/search/784",
+            "Branch-threshold-training100-advance32/session/1/search/788",
+            "Branch-threshold-training100-advance32/session/1/search/792",
+            "Branch-threshold-training100-advance32/session/1/search/796",
+            "Branch-threshold-training100-advance32/session/1/search/800",
+            "Branch-threshold-training100-advance32/session/1/search/804",
+            "Branch-threshold-training100-advance32/session/1/search/808",
+            "Branch-threshold-training100-advance32/session/1/search/812",
+            "Branch-threshold-training100-advance32/session/1/search/816"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            13,
+            13,
+            13,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/821"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            14,
+            14,
+            13,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/826",
+            "Branch-threshold-training100-advance32/session/1/search/830",
+            "Branch-threshold-training100-advance32/session/1/search/834",
+            "Branch-threshold-training100-advance32/session/1/search/838",
+            "Branch-threshold-training100-advance32/session/1/search/842",
+            "Branch-threshold-training100-advance32/session/1/search/846",
+            "Branch-threshold-training100-advance32/session/1/search/850",
+            "Branch-threshold-training100-advance32/session/1/search/854",
+            "Branch-threshold-training100-advance32/session/1/search/858",
+            "Branch-threshold-training100-advance32/session/1/search/862",
+            "Branch-threshold-training100-advance32/session/1/search/866",
+            "Branch-threshold-training100-advance32/session/1/search/870",
+            "Branch-threshold-training100-advance32/session/1/search/874",
+            "Branch-threshold-training100-advance32/session/1/search/878",
+            "Branch-threshold-training100-advance32/session/1/search/882",
+            "Branch-threshold-training100-advance32/session/1/search/886",
+            "Branch-threshold-training100-advance32/session/1/search/890"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            14,
+            14,
+            14,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 1,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/895"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            15,
+            15,
+            14,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 17,
+          "typed_unassigned_observations": 0,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/900",
+            "Branch-threshold-training100-advance32/session/1/search/904",
+            "Branch-threshold-training100-advance32/session/1/search/908",
+            "Branch-threshold-training100-advance32/session/1/search/912",
+            "Branch-threshold-training100-advance32/session/1/search/916",
+            "Branch-threshold-training100-advance32/session/1/search/920",
+            "Branch-threshold-training100-advance32/session/1/search/924",
+            "Branch-threshold-training100-advance32/session/1/search/928",
+            "Branch-threshold-training100-advance32/session/1/search/932",
+            "Branch-threshold-training100-advance32/session/1/search/936",
+            "Branch-threshold-training100-advance32/session/1/search/940",
+            "Branch-threshold-training100-advance32/session/1/search/944",
+            "Branch-threshold-training100-advance32/session/1/search/948",
+            "Branch-threshold-training100-advance32/session/1/search/952",
+            "Branch-threshold-training100-advance32/session/1/search/956",
+            "Branch-threshold-training100-advance32/session/1/search/960",
+            "Branch-threshold-training100-advance32/session/1/search/964"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            15,
+            15,
+            15,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 0,
+          "typed_unassigned_observations": 1,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/969"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            16,
+            16,
+            15,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 0,
+          "typed_unassigned_observations": 17,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/1002",
+            "Branch-threshold-training100-advance32/session/1/search/1006",
+            "Branch-threshold-training100-advance32/session/1/search/1010",
+            "Branch-threshold-training100-advance32/session/1/search/1014",
+            "Branch-threshold-training100-advance32/session/1/search/1018",
+            "Branch-threshold-training100-advance32/session/1/search/1022",
+            "Branch-threshold-training100-advance32/session/1/search/1026",
+            "Branch-threshold-training100-advance32/session/1/search/1030",
+            "Branch-threshold-training100-advance32/session/1/search/1034",
+            "Branch-threshold-training100-advance32/session/1/search/1038",
+            "Branch-threshold-training100-advance32/session/1/search/974",
+            "Branch-threshold-training100-advance32/session/1/search/978",
+            "Branch-threshold-training100-advance32/session/1/search/982",
+            "Branch-threshold-training100-advance32/session/1/search/986",
+            "Branch-threshold-training100-advance32/session/1/search/990",
+            "Branch-threshold-training100-advance32/session/1/search/994",
+            "Branch-threshold-training100-advance32/session/1/search/998"
+          ],
+          "distinct_resistances": 17,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            29753030.645553734,
+            36789565.436423,
+            45490227.235157855,
+            56248578.89344754,
+            69551260.1240013,
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            16,
+            16,
+            16,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 0,
+          "typed_unassigned_observations": 1,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/1043"
+          ],
+          "distinct_resistances": 1,
+          "resistance_values": [
+            86000000
+          ]
+        },
+        {
+          "candidate_input_index": 2,
+          "full_lengths": [
+            17,
+            17,
+            16,
+            1
+          ],
+          "full_synapses": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "measured_candidates": 0,
+          "typed_unassigned_observations": 14,
+          "observed_input_indices": [
+            2
+          ],
+          "trial_ids": [
+            "Branch-threshold-training100-advance32/session/1/search/1048",
+            "Branch-threshold-training100-advance32/session/1/search/1052",
+            "Branch-threshold-training100-advance32/session/1/search/1056",
+            "Branch-threshold-training100-advance32/session/1/search/1060",
+            "Branch-threshold-training100-advance32/session/1/search/1064",
+            "Branch-threshold-training100-advance32/session/1/search/1068",
+            "Branch-threshold-training100-advance32/session/1/search/1072",
+            "Branch-threshold-training100-advance32/session/1/search/1076",
+            "Branch-threshold-training100-advance32/session/1/search/1080",
+            "Branch-threshold-training100-advance32/session/1/search/1084",
+            "Branch-threshold-training100-advance32/session/1/search/1088",
+            "Branch-threshold-training100-advance32/session/1/search/1092",
+            "Branch-threshold-training100-advance32/session/1/search/1096",
+            "Branch-threshold-training100-advance32/session/1/search/1100"
+          ],
+          "distinct_resistances": 14,
+          "resistance_values": [
+            2880071.5552629367,
+            3561202.9647057266,
+            4403420.648578666,
+            5444821.202413885,
+            6732510.993657835,
+            8324736.955481413,
+            10293521.309247196,
+            12727919.393796522,
+            15738047.965126203,
+            19460066.181227792,
+            24062334.580305677,
+            36789565.436423,
+            56248578.89344754,
+            86000000
+          ]
+        }
+      ],
+      "measured_candidate_records": 235,
+      "typed_unassigned_observations": 33,
+      "typed_assignment_failures": {
+        "missing": 33
+      },
+      "recorded_rejection_entries": 33,
+      "rejection_entries_without_full_parameter_witness": 0,
+      "producer_invalid_observations": 33,
+      "invalid_counter_unknown_for_legacy_summary": false,
+      "all_invalid_observations_independently_recounted": false,
+      "search_probes": 536,
+      "reference_probes": 4,
+      "applied_edits": 267,
+      "full_search_box_exhaustion_attested": false,
+      "physical_infeasibility_attested": false,
+      "primary_validation_performed_by_this_projection": false,
+      "scientific_verdict": null
+    }
+  ],
+  "source_study_audited": true,
+  "primary_validation_scope": "existing full native study audit",
+  "classification_assessed": false,
+  "scientific_verdict": null
+}

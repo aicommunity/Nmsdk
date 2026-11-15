@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s03-l22-recorded-reports-m40-a1",
+  "package_fingerprint": "03ea58d10614bd62e927b0342f3d4c0e045349851078baa632d1723509ea882b",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_terminal_censored_temporal_native.TerminalCensoredTemporalNativeTest",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_resistance_recorded_report.NativeBurstResistanceRecordedReportTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_terminal_censored_temporal_native.TerminalCensoredTemporalNativeTest.test_actual_l22_cutoff_is_labeled_and_missing_trials_are_not_filled",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_resistance_recorded_report.NativeBurstResistanceRecordedReportTest.test_actual_completed_grid_report"
+  ],
+  "fixtures": {
+    "TIMELEARNER_L22_TRAIN_NATIVE": {
+      "pattern": "*.json",
+      "files": 374,
+      "fingerprint": "9b669560470a12ad1987d18a8c72c770fed6878fd5de4d17638ed1a4bd270e91"
+    },
+    "TIMELEARNER_L22_TRAIN_CSV": {
+      "pattern": "**/*.csv",
+      "files": 738,
+      "fingerprint": "4c09c220fab86293afcddeecca4ad82d66cad69b6be51cd67245957c0b3cc207"
+    },
+    "TIMELEARNER_L22_COMPLETED_GRID": {
+      "pattern": "**/*.json",
+      "files": 194,
+      "fingerprint": "a38424d5d7ad182f83444fd6a78630ae35abd85e6952243d6dc6ee9d758c6b4a"
+    },
+    "TIMELEARNER_L22_COMPLETED_GRID_CSV": {
+      "pattern": "**/*.csv",
+      "files": 1854,
+      "fingerprint": "a6bce6274d81cbf7158f8973244eb2eff4cbf8735f26c41a44259be2f582efc3"
+    }
+  }
+}

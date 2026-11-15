@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-burst-readback-console-six-m40-a2",
+  "package_fingerprint": "877563b6521726b75c4f9449e7ee9ae31bd995032c6eb5c4191d01f611b14ffd",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback_console.NativeBurstReadbackConsoleTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback_console.NativeBurstReadbackConsoleTest.test_real_classic_branch_replays_and_time_matched_rs_controls"
+  ],
+  "fixtures": {
+    "TIMELEARNER_BURST_READBACK_SOURCE": {
+      "pattern": "NativeRecoveryPackage7/*/*.json",
+      "files": 12,
+      "fingerprint": "d88a42d122b6491c2e1c6252b64df9eee402fefeac096e870d02f62177343ec1"
+    },
+    "TIMELEARNER_BURST_READBACK_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "c2db452ea96f41fcfa7bccac162bbcfb85f2f7e5345d4c7079be38d58ffbb4e5"
+    },
+    "TIMELEARNER_BURST_READBACK_RUNTIME": {
+      "pattern": "NeuroModelerConsole",
+      "files": 1,
+      "fingerprint": "61e1b1eb833b14343680a2e5afb50acaef8794854324ede1337497ad5f57714c"
+    }
+  }
+}

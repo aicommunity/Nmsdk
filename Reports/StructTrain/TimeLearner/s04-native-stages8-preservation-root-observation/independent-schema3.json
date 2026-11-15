@@ -1,0 +1,31 @@
+{
+  "kind": "independent_native_timeout_preservation_verification",
+  "schema_version": 1,
+  "status": "passed_metadata",
+  "commit": "a7c8a595fe779a6bf132547c5675e961640626f7",
+  "original_outcome": {
+    "planned": 8,
+    "executed": 7,
+    "passed": 3,
+    "failed_ids": [
+      "NativeLoadHistory/ConnectedChildAt2000",
+      "NativeLoadHistory/DetachedChildAt2000",
+      "NativeLoadHistory/ConnectedChildAt20000",
+      "NativeLoadHistory/DetachedChildAt20000"
+    ],
+    "not_completed_ids": [
+      "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease"
+    ]
+  },
+  "original_files": 129,
+  "archive_members": 132,
+  "archive_bytes": 1472420,
+  "expanded_bytes": 22682165,
+  "original_source_git_files": 4073,
+  "collector_source_git_files": 651,
+  "collection_lease": "f7970832-d070-4b3c-ba6a-cbf489031f84",
+  "collector_external_cgroup_attested": false,
+  "local_numeric_or_test_execution": false,
+  "scientific_verdict": null,
+  "reader_sha256": "6fa3d4264dc65ac535095dd2ce0446b2917d94a6008efb4dee4e6d6afb27bd59"
+}

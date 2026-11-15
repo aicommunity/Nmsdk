@@ -1,0 +1,15 @@
+{
+  "reason": "short root ref rejected by remote fetch; corrected to full SHA before rendering",
+  "owned-supervisor": {
+    "pid": 2625260,
+    "start_ticks": "275022925",
+    "requested_renderer_root": "2736598f1",
+    "native_evidence": "d7cace1f5f9f62385b97281d0d1f48770e7153fd",
+    "cache": "/media/user/Data/TimeLearnerRefactor/report-cache/s07-capacitance-owner-asan-c3"
+  },
+  "exception": {
+    "reason": "Command '['git', '-C', '/media/user/Data/TimeLearnerRefactor/source-capacitance-temporal-report-a1', 'fetch', '--no-recurse-submodules', 'https://github.com/aicommunity/Nmsdk.git', '2736598f1']' returned non-zero exit status 128.",
+    "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-capacitance-owner-temporal-asan-c3.py\", line 11, in <module>\n    subprocess.run(['git','-C',str(repo),'fetch','--no-recurse-submodules','https://github.com/aicommunity/Nmsdk.git',commit],check=True,capture_output=True,timeout=300)\n  File \"/usr/lib/python3.12/subprocess.py\", line 571, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['git', '-C', '/media/user/Data/TimeLearnerRefactor/source-capacitance-temporal-report-a1', 'fetch', '--no-recurse-submodules', 'https://github.com/aicommunity/Nmsdk.git', '2736598f1']' returned non-zero exit status 128.\n"
+  },
+  "previous_cache_created": false
+}

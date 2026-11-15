@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/native_canonical_preparation.py", line 306, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/native_canonical_preparation.py", line 302, in main
+    args=parser.parse_args(argv);result=_child(args.plan,args.source,args.commit,args.digest)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/native_canonical_preparation.py", line 224, in _child
+    ids=modules['native_acceptance_worker'].validate_job(state['job'],spec,args)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-readback-sdk-a1/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py", line 181, in validate_job
+    _require(job["build"]["type"] in ("Release", "RelWithDebInfo") and
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-readback-sdk-a1/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py", line 26, in _require
+    raise ValueError(reason)
+ValueError: build_profile

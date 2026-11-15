@@ -1,0 +1,103 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "1336e872-0e91-4265-9a31-88c4c5858d15",
+  "job_id": "s07-stock-first-pulse-normal-a1",
+  "recorded_unix": 1794011427.4407156,
+  "administrator": {
+    "pid": 1377782,
+    "start_ticks": "308661984",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1377792,
+    "start_ticks": "308661998",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-first-pulse-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "24877e4b7f563763fc664f4174f6dda0886a51af190ccf9a29ecd2ed77f3f90d",
+      "unit": "timelearner-1be756fc-f211-46ba-9add-3609d278c10f.service",
+      "invocation_id": "be27ac4926a9451d9b532624ae32637b",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1be756fc-f211-46ba-9add-3609d278c10f.service",
+      "initial_main_pid": 1377792,
+      "initial_start_ticks": "308661998",
+      "sha256": "407b53914391f5506dfc7eb6f32bda47c357790e599ff61df0eaa4b52c86d55a"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-1be756fc-f211-46ba-9add-3609d278c10f.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Exact archived-state replay worker and native descendants freshly closed; no training or classification claim.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/data-phasea-eight-pattern-matrix-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/data-phasea-eight-pattern-matrix-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-first-pulse-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-first-pulse-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-fair-contexts-normal-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-fair-contexts-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fair-contexts-normal-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fair-contexts-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-stock-first-pulse-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-stock-first-pulse-normal-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

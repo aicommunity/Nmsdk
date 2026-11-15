@@ -1,0 +1,71 @@
+{
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "b2cb195ba2df4fdb6f6e72194cf4bffbeeddcdc6d57c5fc3c2b889fc0a35a296",
+    "archive_members_verified": 498,
+    "retained_regular_files": 498,
+    "compatibility": "dereferenced-glog-aliases-v1",
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "original_junit": {
+    "expected": 7,
+    "observed": 7,
+    "failed_test_ids": [],
+    "assertion_status": "passed",
+    "sha256": "1d8a34a47b6a6cd19f79e3232534d855795cc464cb0f7822d06ef97dea4d6ec7"
+  },
+  "positive_cases": [
+    {
+      "case": "ClassicStoppedPublicationAndExecution5",
+      "package_sha256": "beb0d1e493fe4dbcc49067731b819dd394ad40853d1f5afffcf59c9fb45f7d68",
+      "groups": 12,
+      "deliveries": 2,
+      "checked_bases": [
+        1,
+        2
+      ]
+    },
+    {
+      "case": "BranchStoppedPublicationAndExecution5",
+      "package_sha256": "b46af349f63b40779a88faf5379026226653c0523a801fbc4cd588b80d2cb1a7",
+      "groups": 12,
+      "deliveries": 2,
+      "checked_bases": [
+        1,
+        2
+      ]
+    },
+    {
+      "case": "ClassicCompletedPublicationAndExecution5",
+      "package_sha256": "f706531bdf59eec725445d46cc8962f7f0078959a0246b6cbeee89d80c44c3d6",
+      "groups": 6,
+      "deliveries": 0,
+      "checked_bases": [
+        1,
+        2
+      ]
+    },
+    {
+      "case": "BranchCompletedPublicationAndExecution5",
+      "package_sha256": "ec26ebbc3953d925c0735f5bb4fac57fb56c2f474d4ec6145bf6f5f377f15286",
+      "groups": 6,
+      "deliveries": 0,
+      "checked_bases": [
+        1,
+        2
+      ]
+    }
+  ],
+  "before_source_bases_checked": 4,
+  "foreign_ledger_rejected": true,
+  "corrupted_external_primary_rejected": true,
+  "original_archive_changed": false,
+  "original_elder_output_available": false,
+  "new_model_execution": false,
+  "actual_console_process_executed": false,
+  "scientific_verdict": null
+}

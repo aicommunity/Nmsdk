@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-shared-export-full-domain-cold8-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 128,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 1073741824
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+      "commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/shared-export-cold8-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40SharedExportCold8A1-20261112/suite.json",
+      "sha256": "1f08ac94e4d269ab73c4b628bbc4db058ea553d06c634ec9e07677d73aa7b38e"
+    },
+    "fixtures": {
+      "TIMELEARNER_STOCK_COLD_PROBE_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/shared-export-cold8-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40SharedExportCold8A1-20261112/fixture",
+      "TIMELEARNER_STOCK_COLD_NATIVE_RUNTIME": "/media/user/Data/TimeLearnerRefactor/runtime-shared-export-boundary-sdk-a1",
+      "TIMELEARNER_STOCK_COLD_NATIVE_INI": "/media/user/Data/TimeLearnerRefactor/runtime-shared-export-boundary-sdk-a1"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 134217728,
+      "maximum_total_bytes": 268435456
+    }
+  }
+}

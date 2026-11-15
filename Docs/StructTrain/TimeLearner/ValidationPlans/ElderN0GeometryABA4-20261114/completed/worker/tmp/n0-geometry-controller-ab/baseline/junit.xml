@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="6" failures="5" disabled="0" errors="0" time="0.005" timestamp="2026-11-14T06:01:58.737" name="AllTests">
+  <testsuite name="BoundedTrainingN0Geometry" tests="6" failures="5" disabled="0" skipped="0" errors="0" time="0.005" timestamp="2026-11-14T06:01:58.737">
+    <testcase name="ClassicLaterGeometryNormalizesDespiteWorseStartingAmplitude" file="/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp" line="51" status="run" result="completed" time="0" timestamp="2026-11-14T06:01:58.737" classname="BoundedTrainingN0Geometry">
+      <failure message="/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29&#x0A;Expected equality of these values:&#x0A;  session.Status()&#x0A;    Which is: 4-byte object &lt;04-00 00-00&gt;&#x0A;  TrainingStatus::Exact&#x0A;    Which is: 4-byte object &lt;02-00 00-00&gt;" type=""><![CDATA[/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29
+Expected equality of these values:
+  session.Status()
+    Which is: 4-byte object <04-00 00-00>
+  TrainingStatus::Exact
+    Which is: 4-byte object <02-00 00-00>]]></failure>
+    </testcase>
+    <testcase name="BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude" file="/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp" line="53" status="run" result="completed" time="0" timestamp="2026-11-14T06:01:58.738" classname="BoundedTrainingN0Geometry">
+      <failure message="/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29&#x0A;Expected equality of these values:&#x0A;  session.Status()&#x0A;    Which is: 4-byte object &lt;04-00 00-00&gt;&#x0A;  TrainingStatus::Exact&#x0A;    Which is: 4-byte object &lt;02-00 00-00&gt;" type=""><![CDATA[/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29
+Expected equality of these values:
+  session.Status()
+    Which is: 4-byte object <04-00 00-00>
+  TrainingStatus::Exact
+    Which is: 4-byte object <02-00 00-00>]]></failure>
+    </testcase>
+    <testcase name="BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement" file="/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp" line="55" status="run" result="completed" time="0" timestamp="2026-11-14T06:01:58.738" classname="BoundedTrainingN0Geometry">
+      <failure message="/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29&#x0A;Expected equality of these values:&#x0A;  session.Status()&#x0A;    Which is: 4-byte object &lt;04-00 00-00&gt;&#x0A;  TrainingStatus::Exact&#x0A;    Which is: 4-byte object &lt;02-00 00-00&gt;" type=""><![CDATA[/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29
+Expected equality of these values:
+  session.Status()
+    Which is: 4-byte object <04-00 00-00>
+  TrainingStatus::Exact
+    Which is: 4-byte object <02-00 00-00>]]></failure>
+    </testcase>
+    <testcase name="LocalHistoryWaitsForCompleteRepeatedCandidates" file="/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp" line="57" status="run" result="completed" time="0" timestamp="2026-11-14T06:01:58.739" classname="BoundedTrainingN0Geometry">
+      <failure message="/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29&#x0A;Expected equality of these values:&#x0A;  session.Status()&#x0A;    Which is: 4-byte object &lt;04-00 00-00&gt;&#x0A;  TrainingStatus::Exact&#x0A;    Which is: 4-byte object &lt;02-00 00-00&gt;" type=""><![CDATA[/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:29
+Expected equality of these values:
+  session.Status()
+    Which is: 4-byte object <04-00 00-00>
+  TrainingStatus::Exact
+    Which is: 4-byte object <02-00 00-00>]]></failure>
+    </testcase>
+    <testcase name="ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength" file="/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp" line="59" status="run" result="completed" time="0.002" timestamp="2026-11-14T06:01:58.740" classname="BoundedTrainingN0Geometry">
+      <failure message="/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:72&#x0A;Expected: (other) != (points.end()), actual: 8-byte object &lt;58-A2 1D-30 9C-5E 00-00&gt; vs 8-byte object &lt;58-A2 1D-30 9C-5E 00-00&gt;" type=""><![CDATA[/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp:72
+Expected: (other) != (points.end()), actual: 8-byte object <58-A2 1D-30 9C-5E 00-00> vs 8-byte object <58-A2 1D-30 9C-5E 00-00>]]></failure>
+    </testcase>
+    <testcase name="WorseNeighborDoesNotRemoveANonmonotoneFallbackSolution" file="/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/Tests/Integration/Libraries/Test_PulseLib_N0Geometry.cpp" line="86" status="run" result="completed" time="0" timestamp="2026-11-14T06:01:58.742" classname="BoundedTrainingN0Geometry" />
+  </testsuite>
+</testsuites>

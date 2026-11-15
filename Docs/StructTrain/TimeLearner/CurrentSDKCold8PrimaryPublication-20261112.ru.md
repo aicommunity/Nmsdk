@@ -1,0 +1,7 @@
+# Первичные данные cold8 актуального SDK
+
+Полный закрытый job s11-current-full-domain-cold8-m40-a2 сохранён в Reports/StructTrain/TimeLearner/CurrentSDKCold8Primary-M40-20261112:342 members,6723035 expanded bytes, XZ138952 bytes, SHA dfdf65bf8731596097c3b0788071f7a6b04a8a34455e5e1cb8134dd5187f1f61. Архив включает8 actual probe packets/CSV, исходные графы, runtime/process/controller evidence и исходные snapshots с точными файловыми timestamp integers.
+
+Closed-primary collector сверил полный namespace и все исходные SHA до и после упаковки; все найденные owned units закрыты. Glog aliases проверены как ссылки на инвентаризированные targets и сохранены обычными копиями байтов; восстановление требует штатного dereferenced-glog-aliases-v1 adapter. collection-proof.json сохраняется исходными байтами, без JS-пересериализации.
+
+Producer Git commit85b7bbbf12afd792e51b32bc87c153cc1ea34ef9; transfer pack158412 bytes/SHA57949852f2938af913c0250668450ed4061c66194d00a6f9ea0c4fb8e7999842. Источники и результаты переданы через Git; импортированные6 файлов проверены по ARTIFACTS. Это публикация исходных данных, без нового native выполнения. Независимый replay именно этого архива ещё не заявляется. [Приёмка восьми холодных проб](ValidationPlans/M40CurrentFullDomainCold8A2-20261112/RESULT.ru.md) и [конечный Train budget16](ValidationPlans/M40FullDomainBudget16TrainA2-20261112/PLAN.ru.md) остаются разными действиями.

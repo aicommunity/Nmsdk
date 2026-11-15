@@ -1,0 +1,44 @@
+from pathlib import Path
+import json,sys,sqlite3,hashlib,tarfile,subprocess,io
+base=Path('/home/user/timelearner-refactor');incoming=base/'source-august-protocol-controls-a1';parent='b3305f2a3826acb5e72b4974e1485a1d3a4a6bcd'
+folder=base/'readbacks/s11-august-protocol-pilot-elder-a1';container=Path(str(folder)+'-container');repo=base/'evidence-august-protocol-pilot-failed-elder-a1';prefix='Reports/StructTrain/TimeLearner/s11-august-protocol-pilot-failed-elder-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(incoming))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+c=sqlite3.connect('file:'+str(base/'resource-reservations.sqlite3')+'?mode=ro',uri=True);m=dict(c.execute('select key,value from metadata'));c.close();r=Reservations(base/'resource-reservations.sqlite3',capacity=json.loads(m['capacity']))
+closed=inspect_worker_dependency(container,r,folder.name);assert closed['state']=='ready' and closed['reservation_state']=='released'
+t=json.loads((folder/'terminal.json').read_text());assert not t['pilot_passed'] and t['completed_cases']==0
+assert json.loads((folder/'exception.json').read_text())['reason']=="name 'json' is not defined"
+assert not list(folder.glob('*/process/result.json')) and not list(folder.glob('*/preflight/process/result.json'))
+b=json.loads((folder/'bundle.json').read_text());raw=(folder/'primary.tar.xz').read_bytes();assert len(raw)==b['archive_bytes'] and hashlib.sha256(raw).hexdigest()==b['archive_sha256'];seen=set()
+with tarfile.open(fileobj=io.BytesIO(raw),mode='r:xz') as tf:
+ for e in tf:
+  assert e.isfile() and e.name not in seen;seen.add(e.name);v=tf.extractfile(e).read();assert b['members'][e.name]=={'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()}
+assert seen==set(b['members'])
+payloads={prefix+'/'+n:(folder/n).read_bytes() for n in ['primary.tar.xz','bundle.json','terminal.json','exception.json','preparation-tests.json','tool-source-hashes.json']}
+for f in container.iterdir():
+ if f.is_file() and f.suffix=='.json':payloads[prefix+'/controller/'+f.name]=f.read_bytes()
+payloads[prefix+'/fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode();payloads[prefix+'/publication-verification.json']=(json.dumps({'archive_members':len(seen),'native_processes_started':0,'original_preparation_tests_passed':11,'scientific_verdict':None,'attempt_accepted':False},indent=2)+'\n').encode();payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args,data=None):return subprocess.check_output(['git','-C',str(repo),*args],input=data).decode().strip()
+def tree(base_tree,changes):
+ entries={}
+ if base_tree:
+  for item in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',base_tree]).split(b'\0'):
+   if item:
+    header,name=item.split(b'\t',1);mode,kind,sha=header.decode().split();entries[name.decode()]=(mode,kind,sha)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=('100644','blob',git('hash-object','-w','--stdin',data=value))
+ for name,sub in groups.items():
+  previous=entries.get(name);entries[name]=('040000','tree',tree(previous[2] if previous else None,sub))
+ raw=b''.join((mode+' '+kind+' '+sha+'\t'+name).encode()+b'\0' for name,(mode,kind,sha) in sorted(entries.items()))
+ return git('mktree','-z','--missing',data=raw)
+commit=git('-c','user.name=Codex','-c','user.email=codex@openai.com','commit-tree',tree(git('rev-parse',parent+'^{tree}'),payloads),'-p',parent,data=b'Preserve failed historical protocol preparation before native execution\n')
+git('update-ref','refs/heads/evidence',commit)
+print(json.dumps({'evidence_commit':commit,'parent':parent,'repository':str(repo),'archive_members':len(seen),'archive_bytes':len(raw),'archive_sha256':b['archive_sha256'],'attempt_accepted':False,'native_processes_started':0}))

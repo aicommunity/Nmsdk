@@ -1,0 +1,113 @@
+{
+  "kind": "fair_domain_traversal_job_observation",
+  "schema_version": 1,
+  "observed_utc": "2026-11-06T20:32:48Z",
+  "host": "10.245.1.17",
+  "job_id": "s07-fair-domains-normal-a1",
+  "state": "completed_failed_verified",
+  "owner": {
+    "pid": 1234210,
+    "start_ticks": "307068474"
+  },
+  "owner_kernel_identity_checked": true,
+  "source_root": "567d6842dcae5f9f3d83e13546d8d93aa913d2dc",
+  "PulseLib": "8f057e69f489ab3eddd5e7f889404b779a85e93e",
+  "Bin": "37ff211fa6ba4999fc51802182915022b239a1eb",
+  "Rdk": "10e9d05aa658dd2203c89bc84ba9166595b50014",
+  "source": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-normal-a1",
+  "build": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-normal-a1",
+  "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-fair-domains-normal-a1",
+  "readbacks": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-fair-domains-normal-a1",
+  "expected_native_tests": 122,
+  "new_fair_domain_tests": 4,
+  "previous_controls": 118,
+  "latest_build_progress_percent": 100,
+  "terminal_result_observed": true,
+  "tests_passed_attested": false,
+  "scientific_verdict": null,
+  "following_context_test_in_this_source": false,
+  "remaining_acceptance": [
+    "normal137 and default CSV/JSON comparison accepted; preserve original failed normal122 separately",
+    "server-run suspended capacitance context controls in a new immutable source",
+    "adjacent/default output comparison and scoped ASan",
+    "matched stock training and frozen/diagnostic evaluation"
+  ],
+  "whole_plan_complete": false,
+  "following_context_gate": {
+    "job_id": "s07-fair-contexts-normal-a1",
+    "state": "not_launched_failed_predecessor",
+    "queue_owner": {
+      "pid": 1243222,
+      "start_ticks": "307154370"
+    },
+    "queue_kernel_identity_checked": true,
+    "source_root": "50ffa3ff0dac58eeb39e4baee9281eb73e9869fe",
+    "PulseLib": "8f057e69f489ab3eddd5e7f889404b779a85e93e",
+    "expected_tests": 137,
+    "previous_tests": 122,
+    "capacitance_context_tests": 15,
+    "source_delivery": "separate immutable Git source; Pulse standalone; Bin sparse /.gitignore; remaining children from closed predecessor",
+    "delivery_attempts": [
+      "initial Pulse filename typo: empty Git metadata retained in readbacks/s07-fair-contexts-source-delivery-empty-git-a1; no build started",
+      "initial Bin full sparse checkout could not load omitted blobs; corrected to the packet-declared /.gitignore sparse payload; clean exact HEAD verified"
+    ],
+    "native_tests_executed_yet": false,
+    "scientific_verdict": null,
+    "queue_owner_confirmed_absent": true
+  },
+  "result": {
+    "expected": 122,
+    "observed": 122,
+    "passed": 121,
+    "failed": 1,
+    "failed_test_ids": [
+      "BoundedTrainingFairDomains/BranchVariantsRetainPhysicalBankLegalityAndTheFixedReference"
+    ],
+    "failure_reason": "test incorrectly applied input1-only expectation after valid reverse-order progression to input0",
+    "whole_gate_passed": false,
+    "fresh_group_closed": true,
+    "lease_released": true,
+    "evidence_commit": "c22eedccd8a217832bc4c88444aa18547ea73687",
+    "evidence_prefix": "Reports/StructTrain/TimeLearner/s07-fair-domains-normal122-m40-a1",
+    "primary_members_verified": 834,
+    "archive_bytes": 1174656,
+    "archive_sha256": "ef79de673dd98704e8a7d4886abc97f56ac72f933620910fe7edd57e4f5e24ba",
+    "source_hashes_verified": 761,
+    "root_source_hashes": 496,
+    "PulseLib_source_hashes": 265
+  },
+  "following_context_gate_a2": {
+    "job_id": "s07-fair-contexts-normal-a2",
+    "state": "prebuild_setup_failed",
+    "reason": "worker inherited wrong predecessor terminal field candidate_recovery_asan19_passed; wrapper and donor checks now separated",
+    "build_started": false,
+    "native_tests_executed": false,
+    "fresh_group_closed": true,
+    "lease_released": true,
+    "evidence_in_original_failure_publication": true
+  },
+  "following_context_gate_a3": {
+    "job_id": "s07-fair-contexts-normal-a3",
+    "state": "completed_verified",
+    "owner": {
+      "pid": 1254928,
+      "start_ticks": "307229839"
+    },
+    "owner_kernel_identity_checked": true,
+    "source_root": "36f598524b08ef9a5b72e26e50ef1f34501331e2",
+    "PulseLib": "8f057e69f489ab3eddd5e7f889404b779a85e93e",
+    "expected_tests": 137,
+    "source": "/media/user/Data/TimeLearnerRefactor/source-fair-contexts-normal-a3",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-fair-contexts-normal-a3",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-fair-contexts-normal-a3",
+    "latest_build_progress_percent": 100,
+    "changes_since_normal122": "corrected test input-progression assertion and added suspended-C-context test; Pulse algorithm unchanged",
+    "new_stock_train_started": false,
+    "scientific_verdict": null,
+    "tests_passed": 137,
+    "evidence_commit": "5a05573d9ba94e56d6021bbe23a5cfc36affeb6c",
+    "verification": "FairDomainTraversalNormal137Verification.json",
+    "fresh_worker_group_closed": true,
+    "lease_released": true
+  }
+}

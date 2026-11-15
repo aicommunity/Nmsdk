@@ -1,0 +1,89 @@
+{
+  "exception": {
+    "reason": "native_collection_link_namespace_changed",
+    "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-candidate-window-replay-a1/Scripts/StructTrain/TimeLearner/owned_python_job.py\", line 300, in _worker\n    collect(manifest, output/'packed-primary', bundle_guard, emit)\n  File \"/media/user/Data/TimeLearnerRefactor/source-candidate-window-replay-a1/Scripts/StructTrain/TimeLearner/closed_primary_bundle.py\", line 108, in collect\n    before = verify_sources(manifest);guard()\n             ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-candidate-window-replay-a1/Scripts/StructTrain/TimeLearner/closed_primary_bundle.py\", line 92, in verify_sources\n    verify_closed_namespace(root['directory'], declarations, root['links'])\n  File \"/media/user/Data/TimeLearnerRefactor/source-candidate-window-replay-a1/Scripts/StructTrain/TimeLearner/closed_native_collection.py\", line 77, in verify_closed_namespace\n    require(observed['links'][directory.name] == expected_links,\n  File \"/media/user/Data/TimeLearnerRefactor/source-candidate-window-replay-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: native_collection_link_namespace_changed\n"
+  },
+  "closure": {
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "5b88fbe73b56f8faeefd8f44a1682f2a4b63031d0d9e45f61b2e0fdf13905ef8",
+        "unit": "timelearner-5e917ca1-4f9a-4203-9b61-0f83453f766c.service",
+        "invocation_id": "6e84ce3dd6554c25a12e8b1af13dccbc",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5e917ca1-4f9a-4203-9b61-0f83453f766c.service",
+        "initial_main_pid": 3479645,
+        "initial_start_ticks": "344642265",
+        "sha256": "f8b5d1d08ac62ada7d9f128bee39a56816c72063c8acb7ec8301fdc41ca83c0a"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "2147483648",
+        "TasksMax": "32",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 5e917ca1-4f9a-4203-9b61-0f83453f766c",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "6e84ce3dd6554c25a12e8b1af13dccbc"
+      },
+      "memory_max": 2147483648,
+      "tasks_max": 32,
+      "scientific_verdict": null
+    },
+    "leases": [
+      {
+        "token": "0b38ab20-daba-410b-8c32-e15ffdc6cf80",
+        "job_id": "s11-n1-classic-primary-bundle-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 3479645,
+          "start_ticks": "344642265",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-after-stock-classic-train-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-after-stock-classic-train-m40-a1"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n1-classic-primary-bundle-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n1-classic-primary-bundle-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/n1-classic-primary-bundle-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1ClassicPrimaryBundleA1-20261111",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/n1-classic-primary-bundle-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1ClassicPrimaryBundleA1-20261111"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-replay-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-replay-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1794371225.2267244,
+        "deadline": 1794371345.2267244,
+        "updated": 1794371236.5893424,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "heartbeat_expired": false,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,127 @@
+# Проверка состава вмешательства в обратную связь
+
+Адресно проверенный аудитор этапов4/7/11. Production auditor feedback_intervention.audit_profile_delta
+сопоставляет два полных semantic model identity с проверкой собственных hash.
+Baseline reconstruction допускает только явно объявленное взаимно однозначное
+переименование storage-классов. Uniform-feedback режим дополнительно требует
+объявленного конечного неотрицательного gain во всех фактических мембранах,
+включая существующую LT membrane. Новая LT membrane не создаётся.
+
+Не исключаются из сравнения индивидуальные Rs/C, кинетика, averaging, threshold,
+граф связей и ports, caches, порядок расчёта и timestep. Изменение любого
+необъявленного поля запрещает положительный delta audit. Connected gain,
+дубли path, stale hash и неиспользованные rename entries запрещены.
+
+Аудитор не создаёт и не изменяет компонентов. Его вывод не доказывает native
+import, соответствие storage image closure, сохранность после growth или
+waveform equivalence. Эти флаги остаются false; training certificate и научный
+verdict отсутствуют. Нельзя выдавать успешную проверку JSON за causal result.
+
+Server tests используют обе реальные импортированные stock identities
+одноимпульсной серии. Мутации проверяют именно отказ/допуск аудитора, а не
+работу изменённой физической модели. [Адресная проверка аудитора](FeedbackInterventionAuditorVerification.json) на M40:
+10/10 tests без skips. Все11 primary members и368 source hashes сверены с Git;
+обе исходные identities совпадают с опубликованными primary Console-проб.
+Процессы закрыты, lease released. Primary commit
+1bd9be8f297458760ab2f32fab150744df06b25d. Native intervention и baseline
+waveform reconstruction этим не выполнялись.
+
+Последовательность научной приёмки: native storage image variant → native
+construction/import → полный effective graph audit → исходный paired baseline
+с точным совпадением soma/stimulus waveform → объявленное изменение gain →
+paired native probes с каналами и временными графиками. CapturedPerInput,
+порог0.0117, индивидуальные параметры, stimulus и reset policy сохраняются.
+
+
+## Inherited-image profile: адресная normal-проверка
+
+В PulseLib добавлен RegisterFeedbackStorageProfile: цепочка существующих
+membrane/neuron образов, с изменением только выбранного gain и class names.
+Полный физический рецепт RegisterStorageProfile не применяется: в stock
+effective graph, например, DissociationTC отличается от default такого рецепта.
+Нельзя приписывать его неявную замену эффекту обратной связи.
+
+Подготовлены четыре native функции: нестандартные C/кинетика, growth и
+коллизии; invalid/no-LT preflight; Classic/Branch stock-image single-pulse
+controls на2000/20000Гц с inherited/explicit2/explicit0. Дополнительно два
+reader tests используют actual_model_identity каждого native control и
+production audit_profile_delta для строгого сравнения всех остальных полей.
+Эти функции и actual graph readers прошли адресную проверку ниже. Они не являются переносом
+конкретных опубликованных stopped моделей с порогом0.0117: engineering
+порог1e-6 и отдельная fixture-морфология обозначены явно.
+
+
+Адресная проверка нового inherited-image пути [завершена на M40](InheritedFeedbackProfileJobs.json).
+[Сверенная приёмка](InheritedFeedbackProfileNormalVerification.json):22/22 native
+за110.494с и15/15 readers без skips,200 primary members/588892B и783 hashes
+исходников сверены с Git. Группа процессов закрыта, lease released, три прежних
+runtime сохранили byte hashes. Primary commit
+b157fd3f9b6dd6ec3f82e48f68c5ff0a57e41a4f.
+
+Native waveform и LT timestamps исходного stock image и explicit2 совпали;
+explicit0 даёт нулевой Feedback при фактических LT events и другой отклик.
+Два actual graph readers подтвердили строгую эквивалентность всех остальных
+полей12 inherited control identities с явными class renames. Это реальные
+native fixtures, а не прежние JSON mutations аудиторных unit tests.
+Нестандартные child C/кинетика сохраняются при growth; отсутствующая LT
+не добавляется. ASan/второй сервер, XML новых образов и применение к конкретным
+полным archived learned/stopped states ещё не проверены. Научный вывод о
+дополнительных пиках опубликованных stock-моделей этим не получен.
+
+
+## Полный physical-state import через профиль — scoped normal проверка
+
+PulseLib ImportFeedbackProfileGraphForEdit строит новый, не подключённый к
+owner граф из полного native snapshot. До преобразования source XML проходит
+native Load/Init и проверку собственной identity. После проверенных class
+substitutions coefficient берётся из derived membrane images; исходные XML
+overlays FeedbackGain удаляются штатным USerStorageXML. Никаких записей во
+все живые мембраны или Calculate не добавляется. Результат снова проходит
+полную native identity-проверку; исходный граф/контроллер не меняется.
+
+Две новые native функции используют Classic/Branch N4,2000/20000Гц, source
+порог0.0117 и явно заданные индивидуальные C1.3e-9/Rs93e6. Проверяются полный
+перенос, обычный native export/import roundtrip, отсутствие изменений source,
+отказ без derived membrane class, при неверном image gain и при повреждённом
+source XML даже с пересчитанной XML checksum. Два независимых Python readers
+сравнивают actual identities production-аудитором, включая individual C/Rs.
+Новые функции прошли адресную проверку ниже; отклик полученного candidate в этой
+проверке не рассчитывался и не объявляется научным результатом. Применение
+к полному archived stopped state и paired waveforms остаются следующим gate.
+
+
+Первая normal-проверка physical graph import [завершилась ошибкой сборки](ProfiledGraphImportJobs.json).
+[Проверка failed primary](ProfiledGraphImportFailureVerification.json):25 members,
+783 source hashes сверены с Git; все три compiler errors относятся к преобразованию
+временных UEPtr между типами. Native/reader tests не выполнялись. Группа
+полностью закрыта, lease released. Failed commit afb5c7d144ad92c701e294447180e802fe52741a.
+Rdk не менялся: новый import использует именованные UEPtr.
+
+Предварительно найдено ограничение CheckSnapshot: ordinary snapshot требует
+все параметры в XML. Внутренняя derived-image загрузка допускает пропуск
+FeedbackGain только на проверенных paths с проверенным image gain. Обычные
+source/rehearsal/archive загрузки остаются strict. Дополнительные fixtures
+проверяют отказ неполному source XML с корректной checksum. Эта правка найдена
+статически, она не является причиной трёх фактических compile errors.
+Исправленный SDK проверен отдельно, как указано ниже. Full-state intervention
+и waveform equivalence новым импортом ещё не подтверждены.
+
+
+Исправленная проверка [a2 завершена на M40](ProfiledGraphImportJobs-a2.json).
+[Приёмка](ProfiledGraphImportNormalVerification.json): root8978f104a/Pulse32ea8ae,
+24/24 native за129.462с и27/27 readers без skips. Все225 members primary849936B
+и783 hashes исходников сверены с Git. Восемь actual import records проверены
+production-аудитором: Classic/Branch N4,2000/20000Гц, baseline/zero, индивидуальные
+C/Rs и native roundtrip. Исторические две source identities дополнительных
+аудиторных controls сверены с опубликованными Console primary. Группа процессов
+закрыта, lease released; пять прежних runtime не изменились. Primary commit
+c4e37e764891429e186f84d33e6f60186879338a. Первая failed-a1 остаётся failed.
+
+Проверка не рассчитывала candidate waveform и не переносила controller checkpoint
+или certificate. Следующий протокол должен сначала проверить полное исходное
+stopped состояние, построить candidate через derived images/native import,
+подключить его к свежему диагностическому контроллеру без старых references,
+search history или сертификата и подтвердить baseline paired waveform.
+Только затем интерпретировать объявленное изменение gain. Source threshold,
+target, individual Rs/C, source profile и reset policy сохраняются. ASan
+данного API, второй сервер и полная матрица остаются открытыми.

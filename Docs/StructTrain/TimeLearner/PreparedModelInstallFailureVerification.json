@@ -1,0 +1,26 @@
+{
+  "commit": "a49ed0ed03286b1e7eb261e763a7915d43cedcbb",
+  "root": "122a3aea6d11960eec307aec9d74c243a30a3183",
+  "PulseLib": "2726bdff6d9ac3bff424429a809ce39d669da10d",
+  "members_verified": 27,
+  "archive_bytes": 66340,
+  "archive_sha256": "9e835c5dcf17e68bba7539f54634e725e34bb1cc300269b7641776e755746b0c",
+  "source_hashes_verified": 785,
+  "build_passed": false,
+  "native_tests_executed": false,
+  "compiler_errors": [
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1/Tests/Integration/Libraries/Test_PulseLib_PreparedModel.cpp:68:38: error: cannot bind non-const lvalue reference of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>&\u2019 to an rvalue of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>\u2019",
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1/Tests/Integration/Libraries/Test_PulseLib_PreparedModel.cpp:76:38: error: cannot bind non-const lvalue reference of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>&\u2019 to an rvalue of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>\u2019",
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1/Tests/Integration/Libraries/Test_PulseLib_PreparedModel.cpp:80:46: error: cannot bind non-const lvalue reference of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>&\u2019 to an rvalue of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>\u2019",
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1/Tests/Integration/Libraries/Test_PulseLib_PreparedModel.cpp:82:15: error: no matching function for call to \u2018QJsonObject::QJsonObject(<brace-enclosed initializer list>)\u2019",
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1/Tests/Integration/Libraries/Test_PulseLib_PreparedModel.cpp:68:38: error: cannot bind non-const lvalue reference of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>&\u2019 to an rvalue of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>\u2019",
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1/Tests/Integration/Libraries/Test_PulseLib_PreparedModel.cpp:76:38: error: cannot bind non-const lvalue reference of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>&\u2019 to an rvalue of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>\u2019",
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1/Tests/Integration/Libraries/Test_PulseLib_PreparedModel.cpp:80:46: error: cannot bind non-const lvalue reference of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>&\u2019 to an rvalue of type \u2018RDK::UEPtr<NMSDK::NPulseNeuron>\u2019",
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1/Tests/Integration/Libraries/Test_PulseLib_PreparedModel.cpp:82:15: error: no matching function for call to \u2018QJsonObject::QJsonObject(<brace-enclosed initializer list>)\u2019"
+  ],
+  "failure_classification": "Three temporary UEPtr conversions, instantiated for two learner classes, plus two cascading QJsonObject diagnostics in the new fixture",
+  "whole_group_closed": true,
+  "lease_released": true,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

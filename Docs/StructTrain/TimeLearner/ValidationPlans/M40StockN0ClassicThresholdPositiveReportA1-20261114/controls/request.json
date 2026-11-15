@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-stock-n0-classic-threshold-positive-report-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7135d59b62a4fc2688209bc88554f4d824447d90",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 7200
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 8589934592
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-threshold-positive-response-a1",
+      "commit": "7135d59b62a4fc2688209bc88554f4d824447d90"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/stock-n0-classic-threshold-positive-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockN0ClassicThresholdPositiveReportA1-20261114/suite.json",
+      "sha256": "d2c1887f1480fe8bae2c3716f9649c839918051d3c2f8219ff95f535903555d9"
+    },
+    "fixtures": {
+      "TIMELEARNER_THRESHOLD_COMPLETED_STUDY": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/worker/tmp/threshold-study"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 8589934592
+    }
+  }
+}

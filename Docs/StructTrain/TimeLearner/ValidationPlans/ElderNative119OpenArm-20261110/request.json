@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-native119-open-arm-canonical-operation-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "98ed6da0da8bc0cb46512ebe92150570c2909206",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "native-canonical-preparation",
+    "plan": {
+      "path": "/home/user/timelearner-refactor/requests/native119-open-arm-order-normal-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderNative119OpenArm-20261110/canonical-plan.json",
+      "sha256": "13ce95cab81337e15a107b57e024b59ab8d20ea24099e720219c2733dd69c4e5"
+    }
+  }
+}

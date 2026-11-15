@@ -1,0 +1,13 @@
+# N0 per-geometry SDK:99/99 принято
+
+Свежая изолированная Release сборка root0286ddb07064d3446dd37ce8536937d89576f345/Pulse58c6e6d51c749a13a79498a681e14ea2fe353ed7 завершена, Console собран. Все99 объявленных C++ cases выполнены и прошли, failed/disabled/errors0. job_validation_passed=true, cohort_assertions_passed=true, heartbeat/final-capture errors отсутствуют. [Terminal](native/terminal.json), [GoogleTest XML](native/bounded-scoped-n0-search/native.xml), [gate result](native/bounded-scoped-n0-search-result.json), [outer/child closure](controller/supervisor-result.json).
+
+Включены75 прежних BoundedTraining cases,6 новых N0Geometry, остальные MeasuredLength/MeasuredResistance regressions исходного93-case cohort. Компилируются полные production implementations в штатном SDK; исходники/namespace, compiler flags, build logs и source readbacks сохранены буквально. [Контрпример на старом коде и исправленный корпус](../ElderN0GeometryABA4-20261114/RESULT.ru.md) до этого проверены на Elder и независимо на M40.
+
+Этот gate проверяет объявленный controller/regression cohort и сборку SDK. Он не закрывает полную lifecycle/storage/physics/mode матрицу, не доказывает сходимость четырёх входов и не даёт scientific PASS. Source изменённого N0 механизма ограничен локальным scheduling normalizer turn; target CapturedPerInput, исходные tolerances, bounds/global budgets и fresh final gate прежние.
+
+После99/99 объявлено фактическое холодное Branch N0 A/B в одной текущей OS/dependency среде. Before использует неизменённый Console старого Pulse7c/root74 с отдельным post-update runtime377e0ebdee7bb1fa1cc11346438a1d2102b2124f08e3054b6347400c10a4f335. After — новый SDK runtime d1d584b53286ee8dd6254897dc3dcd8e7deb9bc90a9b4789166ffd7979acd56b. Native preflight обязан воспроизвести тот же cold graph до каждого Train.1800с/probes128/edits1280/candidates128/sweeps4/invalid4 и finalization300с сохранены; глобальные limits не повышаются ради положительного результата.
+
+Первый запуск A/B отказал до native execution: prepare-N0 правильно отверг план, привязанный к иному runtime. A2 сначала применяет штатный prepare_recovery(full_observation=True) к исходному cold7 для каждого runtime, проверяет точное равенство исходной configuration/initial identity и затем prepare-N0. Сам guard не ослаблен. Внешнее обновление libc явно разделяет прежний исторический baseline и новое matched comparison.
+
+Producerb0a3615891424b137da9985bdd33f236fdcbe367; pack1481879B SHA25621064a70c9990372fd37bd0d4e2f0da3fc4d45abbb831116b33d17d767b43206.98 исходных Git blobs импортированы без JSON rewrite. Весь план остаётся частичным: whole_plan_complete=false сохранён.

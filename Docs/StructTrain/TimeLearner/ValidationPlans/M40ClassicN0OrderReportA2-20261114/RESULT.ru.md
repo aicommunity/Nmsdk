@@ -1,0 +1,9 @@
+# Новые графики порядка A2 приняты
+
+M40: production1/1 PASS, outer completed957.3582069058903с, whole group закрыта; Ran 1 test in 925.632s.15 уникальных trials: исходные8 pattern IDs и target во всех8 позициях,4 сомы+LT decision, полный/positive диапазон.150 channel-scale groups,267 PNG и соответствующие SVG/PDF построены без нового Train/Test, изменения samples, порога или scorer. Общие шкалы рассчитаны по всем64 observations.
+
+В Git выбраны13 original PNG, **все13 просмотрены**:8 target Soma1 overview,2 LT positive overview,1 LT full-range,2 native peak details. Подписи/inputs/events читаемы, отрицательный reset явно clipped в positive views и показан целиком в companion. Native peak details имеют71.04px/tick; у последнего view ось X использует явно напечатанный offset+114.51с. Это максимум полного Test-отклика сомы, не assigned-impulse measurement Train. Вся267-PNG gallery вручную не проверена.
+
+[Научный отчёт](../../ClassicN0OrderScientificReport-20261114.ru.md), [manifest](completed/worker/tmp/fixed-order-temporal-gallery/manifest.json), [канонические metrics](completed/worker/tmp/fixed-order-temporal-gallery/analysis.json), [точный visual scope](visual-inspection.json), [unit](completed/worker/validation/result.json), [integrity](integrity.json). Environment: Python3.12.3,matplotlib3.9.4,Pillow13.0.0, ранее проверенный plot-python-owned-copy-a1. A1 dependency error сохранён; A2 проверяет plotting_runtime перед большим source audit.
+
+Literal producer c11266fa986333ba7fb226cae90e74b4282f97d3, pack1,995,960B SHA2562e30ef421418c9619268fb3cb27cbbc2ea509683fc2741bc82dd6a68a2f4854c. Полная gallery — /media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-n0-order-report-m40-a2/worker/tmp/fixed-order-temporal-gallery; воспроизводится из опубликованного whole primary и этого source/controls. Результат обучения и полный план этим report PASS не меняются.

@@ -1,0 +1,107 @@
+{
+  "kind": "boundary_fixture_option_merge_review",
+  "schema_version": 1,
+  "root_head": "cd09e64c431c565343b902383777c5ec082136bc",
+  "root_csearch_parent": "a58a4b13ac091309d397f2799d0f28edada63398",
+  "call_sites_reviewed": 11,
+  "head_modelspec2_seed_sites": 6,
+  "csearch_history_sites": 5,
+  "changes": [
+    {
+      "old_call": "LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,false,true)",
+      "source_stage": "HEAD",
+      "new_options": [
+        ".productionCalibrationSeed=true"
+      ],
+      "leading13_arguments_unchanged": true
+    },
+    {
+      "old_call": "LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,false,true)",
+      "source_stage": "HEAD",
+      "new_options": [
+        ".productionCalibrationSeed=true"
+      ],
+      "leading13_arguments_unchanged": true
+    },
+    {
+      "old_call": "LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,true,true)",
+      "source_stage": "HEAD",
+      "new_options": [
+        ".modelSpec2=true",
+        ".productionCalibrationSeed=true"
+      ],
+      "leading13_arguments_unchanged": true
+    },
+    {
+      "old_call": "LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,true,true)",
+      "source_stage": "HEAD",
+      "new_options": [
+        ".modelSpec2=true",
+        ".productionCalibrationSeed=true"
+      ],
+      "leading13_arguments_unchanged": true
+    },
+    {
+      "old_call": "LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget,false,false,true)",
+      "source_stage": "HEAD",
+      "new_options": [
+        ".modelSpec2=true"
+      ],
+      "leading13_arguments_unchanged": true
+    },
+    {
+      "old_call": "LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget,false,false,true)",
+      "source_stage": "HEAD",
+      "new_options": [
+        ".modelSpec2=true"
+      ],
+      "leading13_arguments_unchanged": true
+    },
+    {
+      "old_call": "LearnedBoundary<Learner>(normalization,.2,2000,2,configured,{},automatic,1.,repeats,3600.,\n        BoundaryExpectation::Completed,true,dormant,true)",
+      "source_stage": "C-search",
+      "new_options": [
+        ".trackedCapacitance=true"
+      ],
+      "leading13_arguments_unchanged": true
+    },
+    {
+      "old_call": "LearnedBoundary<NNeuronTimeLearner>(0,.2,2000,2,false,{},false,1.,1,1800.,BoundaryExpectation::Completed,true,false,true,CapacitanceSearchPolicy{.8,1.2,0,4,8,131072})",
+      "source_stage": "C-search",
+      "new_options": [
+        ".trackedCapacitance=true",
+        ".capacitanceSearch=CapacitanceSearchPolicy{.8,1.2,0,4,8,131072}"
+      ],
+      "leading13_arguments_unchanged": true
+    },
+    {
+      "old_call": "LearnedBoundary<NNeuronTimeLearner>(1,.2,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::Completed,true,false,true,CapacitanceSearchPolicy{.8,1.2,0,4,8,131072})",
+      "source_stage": "C-search",
+      "new_options": [
+        ".trackedCapacitance=true",
+        ".capacitanceSearch=CapacitanceSearchPolicy{.8,1.2,0,4,8,131072}"
+      ],
+      "leading13_arguments_unchanged": true
+    },
+    {
+      "old_call": "LearnedBoundary<NNeuronTimeLearnerBranch>(0,.2,2000,2,true,{},true,1.,2,1800.,BoundaryExpectation::Completed,true,false,true,CapacitanceSearchPolicy{.8,1.2,0,4,8,131072})",
+      "source_stage": "C-search",
+      "new_options": [
+        ".trackedCapacitance=true",
+        ".capacitanceSearch=CapacitanceSearchPolicy{.8,1.2,0,4,8,131072}"
+      ],
+      "leading13_arguments_unchanged": true
+    },
+    {
+      "old_call": "LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,false,{},false,1.,1,1800.,BoundaryExpectation::Completed,true,false,true,CapacitanceSearchPolicy{.8,1.2,0,4,8,131072})",
+      "source_stage": "C-search",
+      "new_options": [
+        ".trackedCapacitance=true",
+        ".capacitanceSearch=CapacitanceSearchPolicy{.8,1.2,0,4,8,131072}"
+      ],
+      "leading13_arguments_unchanged": true
+    }
+  ],
+  "native_tests_executed": false,
+  "scientific_verdict": null
+}

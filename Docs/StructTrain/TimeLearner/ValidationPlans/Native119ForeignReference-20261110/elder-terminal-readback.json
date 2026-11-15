@@ -1,0 +1,39 @@
+{
+  "terminal": {
+    "job_validation_passed": false,
+    "cohort_assertions_passed": false,
+    "built": true,
+    "expected_cpp_cases": 119,
+    "audited_completed_cpp_cases": 65,
+    "actual_audited_assertion_passed_cpp_cases": 64,
+    "actual_audited_failed_cpp_ids": [
+      "NativeCandidateWindowPortableMath/RehashedForeignReferenceProofCannotJoinActualFinal"
+    ],
+    "completed_leaf_gates": 38,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+  },
+  "progress": {
+    "kind": "timelearner_native_cohort_progress",
+    "schema_version": 2,
+    "passed_cases": 64,
+    "completed_cases": 65,
+    "failed_test_ids": [
+      "NativeCandidateWindowPortableMath/RehashedForeignReferenceProofCannotJoinActualFinal"
+    ],
+    "completed_leaf_gates": 38,
+    "current_gate": "portable-proof6-17",
+    "current_gate_status": "rejected",
+    "current_gate_execution": "process_error",
+    "current_gate_validity": "valid",
+    "current_gate_assertion_status": "failed",
+    "current_gate_reason": "complete_declared_test_inventory",
+    "observation_error": null,
+    "validation_reason": "native_gate_rejected:portable-proof6-17:process_error:valid:complete_declared_test_inventory",
+    "expected_cases": 119,
+    "scientific_verdict": null
+  }
+}

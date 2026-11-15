@@ -1,0 +1,92 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeCandidateWindowPackage"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip",
+    "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+    "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+  ],
+  "runplan": [
+    {
+      "name": "classic-rest",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "branch-rest",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "asymmetric-c0-rest",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip"
+      ],
+      "wall_seconds": 7200
+    },
+    {
+      "name": "classic-warm-rest",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ],
+      "wall_seconds": 3600
+    },
+    {
+      "name": "branch-c0-warm-rest",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ],
+      "wall_seconds": 7200
+    }
+  ],
+  "partitions": [
+    {
+      "name": "classic-rest",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+      ]
+    },
+    {
+      "name": "branch-rest",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip"
+      ]
+    },
+    {
+      "name": "asymmetric-c0-rest",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip"
+      ]
+    },
+    {
+      "name": "classic-warm-rest",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ]
+    },
+    {
+      "name": "branch-c0-warm-rest",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ]
+    }
+  ]
+}

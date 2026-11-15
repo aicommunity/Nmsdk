@@ -66,6 +66,58 @@ TEST(TimeLearnerClock,FinalMeasurementCoverageUsesAbsoluteEndpoints)
         ASSERT_TRUE(observation.valid);EXPECT_NO_THROW(ValidateProbeMeasurement(protocol,0,context,observation));
     }
 }
+TEST(FinalVerification, OneRecordedVertexCannotCertifyDifferentAssignedImpulses)
+{
+    // WindowOnly remains readable with its historical meaning. Two window
+    // labels do not turn a single measured channel/vertex into two responses.
+    for(unsigned schema:{1u,2u})
+    {
+        auto p=Protocol(2);p.schemaVersion=schema;
+        if(schema==2)p.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+        PreparedVerificationProbe context{p.routing,"i0",p.revision,"initial","effective",0};
+        auto s=Observation(p,context,"shared","shared_vertex",{.01,.01}).specification;
+        s.baseline.resize(1);s.windows[1].channel=0;
+        ProbeRecorder recorder(s);
+        for(int tick=0;tick<=20;++tick)
+            recorder.Observe(double(tick)/20.,{.01*std::max(0.,1.-std::abs(tick-12)/2.)},context.effectiveModelRevision);
+        recorder.RecordStimulus("p0",.05);recorder.RecordStimulus("p1",.1);
+        const auto measured=recorder.Close(1.,context.effectiveModelRevision,"window_closed");
+        ASSERT_TRUE(measured.valid); // Historical diagnostic measurement is retained.
+        EXPECT_THROW(ValidateProbeMeasurement(p,0,context,measured),std::invalid_argument);
+        EXPECT_THROW(ValidateProbeMeasurement(p,1,
+            (PreparedVerificationProbe{p.routing,"i1",p.revision,"initial","effective",0}),measured),std::invalid_argument);
+    }
+}
+TEST(FinalVerification, SharedPlateauCannotBeRelabelledBySplittingItsEndpoints)
+{
+    const auto p=Protocol(2);
+    PreparedVerificationProbe context{p.routing,"i0",p.revision,"initial","effective",0};
+    auto o=Observation(p,context,"shared","shared_plateau",{.01,.01},{},0.,true);
+    ASSERT_TRUE(o.valid);o.specification.windows[1].channel=0;
+    // Untrusted serialized evidence can give two portions of the same plateau
+    // different start times. Every individual peak remains self-consistent.
+    o.peaks[1].time=o.peaks[0].plateauEnd;
+    o.peaks[1].plateauEnd=*o.peaks[1].time+.05;
+    o.peaks[1].delayFromStimulus=*o.peaks[1].time-o.stimuli[1].time;
+    for(bool reverse:{false,true})
+    {
+        if(reverse){std::reverse(o.specification.windows.begin(),o.specification.windows.end());std::reverse(o.peaks.begin(),o.peaks.end());}
+        EXPECT_THROW(ValidateProbeMeasurement(p,0,context,o),std::invalid_argument);
+    }
+}
+TEST(FinalVerification, EqualTimesOnDifferentChannelsAreIndependentMeasurements)
+{
+    for(unsigned schema:{1u,2u})
+    {
+        auto p=Protocol(2);p.schemaVersion=schema;
+        if(schema==2)p.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+        PreparedVerificationProbe context{p.routing,"i0",p.revision,"initial","effective",0};
+        const auto o=Observation(p,context,"independent","same_time",{.01,.01},{},0.,true);
+        ASSERT_TRUE(o.valid);EXPECT_NO_THROW(ValidateProbeMeasurement(p,0,context,o));
+        EXPECT_EQ(o.peaks[0].time,o.peaks[1].time);
+        EXPECT_NE(o.specification.windows[0].channel,o.specification.windows[1].channel);
+    }
+}
 CapturedReferences References(const VerificationProtocol& p,std::vector<double> raw={},double baseline=0.)
 {
     std::vector<ReferenceEvidence> evidence;
@@ -108,6 +160,35 @@ void Complete(FinalVerificationSession& session,const VerificationProtocol& p,st
     }
 }
 
+TEST(FinalVerification, SharedVertexCannotEnterReferencesOrFinalCertificate)
+{
+    for(unsigned schema:{1u,2u})
+    {
+        auto p=Protocol(2);p.schemaVersion=schema;
+        if(schema==2)p.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+        const auto shared=[&](const PreparedVerificationProbe& context,const std::string& run,const std::string& trial){
+            auto o=Observation(p,context,run,trial,{.01,.01});
+            o.specification.baseline.resize(1);o.specification.windows[1].channel=0;return o;
+        };
+        std::vector<ReferenceEvidence> bad;
+        for(std::size_t i=0;i<2;++i)
+        {
+            PreparedVerificationProbe context{p.routing,p.inputs[i].id,p.revision,"initial","effective",0};
+            bad.push_back({context,shared(context,"capture","shared_"+std::to_string(i))});
+        }
+        EXPECT_THROW(CapturedReferences::Capture(p,bad),std::invalid_argument);
+        const auto good=References(p,{.01,.01});FinalVerificationSession session(good,Configuration());
+        while(auto request=session.NextRequest())
+        {
+            const auto context=Prepared(*request);session.Arm(context);
+            session.Consume(shared(context,request->runId,request->trialId),request->baseModelRevision);
+        }
+        EXPECT_EQ(session.Status(),VerificationStatus::InvalidObservation);
+        EXPECT_FALSE(session.Certificate());EXPECT_EQ(session.AcceptedInputs(),0u);
+        ASSERT_FALSE(session.Rejected().empty());
+        EXPECT_EQ(session.Rejected().front().reason,"shared_measured_peak_between_stimuli");
+    }
+}
 TEST(FinalVerification, RequiresEveryInputAndMeasuredReferenceForDimensionsOneThroughSix)
 {
     for(auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})

@@ -1,0 +1,118 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "6a524a29-a097-4de4-b241-87154ef7b3ac",
+  "job_id": "s07-single-impulse-maximum-elder-normal-a1",
+  "recorded_unix": 1794042646.1877182,
+  "administrator": {
+    "pid": 765283,
+    "start_ticks": "361151915",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 765295,
+    "start_ticks": "361151929",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s07-single-impulse-maximum-elder-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "71e26018fcfff160589ace75974da473da0acffa72e76591f4eddd2dc0ec5e42",
+      "unit": "timelearner-6e46df32-a2fb-40e8-9ac9-d7a3d0cb967f.service",
+      "invocation_id": "e18503508b4445c3ae1e354bbb71acb6",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6e46df32-a2fb-40e8-9ac9-d7a3d0cb967f.service",
+      "initial_main_pid": 765295,
+      "initial_start_ticks": "361151929",
+      "sha256": "a85cf3e5eebd63fda9b4734ccc62b7ea9b22a8d401056ec2b716873c1f7d9cc2"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-6e46df32-a2fb-40e8-9ac9-d7a3d0cb967f.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Complete SDK worker cgroup closed. Release resources; test/build acceptance is recorded separately.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+      "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+      "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-single-impulse-maximum-elder-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s07-single-impulse-maximum-elder-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-feedback-storage-elder-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-feedback-storage-elder-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-single-impulse-maximum-elder-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-single-impulse-maximum-elder-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1/Bin",
+      "requested_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-single-impulse-maximum-a1-pulse-delivery",
+      "requested_path": "/home/user/timelearner-refactor/source-single-impulse-maximum-a1-pulse-delivery"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-single-impulse-maximum-a1-root-delivery",
+      "requested_path": "/home/user/timelearner-refactor/source-single-impulse-maximum-a1-root-delivery"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

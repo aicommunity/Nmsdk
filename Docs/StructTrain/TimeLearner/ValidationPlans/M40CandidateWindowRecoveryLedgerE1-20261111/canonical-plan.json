@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-recovery-ledger-e2",
+    "commit": "1b01765a627dd55e05ac5208c343ac80ba7238d4",
+    "namespace": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/window-recovery-ledger-e1/Docs/StructTrain/TimeLearner/ValidationPlans/M40CandidateWindowRecoveryLedgerE1-20261111/namespace.json",
+      "sha256": "776c2787f492d053dca530206a6cb5862b06e6f88d326022b18e373e8cc976b2"
+    }
+  },
+  "cohort": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/window-recovery-ledger-e1/Docs/StructTrain/TimeLearner/ValidationPlans/M40CandidateWindowRecoveryLedgerE1-20261111/cohort.json",
+    "sha256": "7231f563eecbef99d5fcd4915ce6700256bd702706e524ca4b62171278417853"
+  },
+  "native_job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/window-recovery-ledger-e1/Docs/StructTrain/TimeLearner/ValidationPlans/M40CandidateWindowRecoveryLedgerE1-20261111/native-job.json",
+    "sha256": "0d20342f7cee09264cb1a6a4bb3bd8fb9642ea35adbaf540db449629786ffbad"
+  },
+  "prior_bindings": [],
+  "external_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-window-recovery-ledger-prepared-m40-e1",
+  "native_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4",
+    "commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a"
+  },
+  "require_fresh_build": true
+}

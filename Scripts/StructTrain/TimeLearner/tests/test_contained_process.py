@@ -109,6 +109,7 @@ class ContainedProcessTest(unittest.TestCase):
                 'start(json.loads(Path(sys.argv[1]).read_text()),["20"],sys.argv[2],sys.argv[3],'
                 'memory_bytes=134217728,tasks=32,maximum_wall_seconds=30);os._exit(17)')
         result = subprocess.run([sys.executable, '-c', code, str(runtime), str(self.root), str(output)],
+                                cwd=Path(__file__).resolve().parents[4],
                                 capture_output=True, text=True, timeout=20)
         self.assertEqual(result.returncode, 17, result.stderr)
         self.outputs.append(output)
@@ -122,6 +123,7 @@ class ContainedProcessTest(unittest.TestCase):
                 'c.adopt=lambda p:os._exit(19);c.start(json.loads(Path(sys.argv[1]).read_text()),["20"],sys.argv[2],sys.argv[3],'
                 'memory_bytes=134217728,tasks=32,maximum_wall_seconds=30)')
         result = subprocess.run([sys.executable, '-c', code, str(runtime), str(self.root), str(output)],
+                                cwd=Path(__file__).resolve().parents[4],
                                 capture_output=True, text=True, timeout=20)
         self.assertEqual(result.returncode, 19, result.stderr)
         self.assertFalse((output/'owned-unit.json').exists());self.assertFalse((output/'start.ack').exists())

@@ -1,0 +1,39 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "n1-classic-before-native-train-elder-a1",
+  "package_fingerprint": "0d003260b0b0625e5e18c85e2864293872ed27617c345f0752d692638ba6db13",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_window_study"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_window_study.StockCandidateWindowStudyTest.test_declared_public_operation_uses_fresh_stock_model_and_original_tolerances"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD7_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "cf4680ea177ea85ad33972b0302356113d0494d3c61f3c6cd34df1ff4161e731"
+    },
+    "TIMELEARNER_STOCK_COLD7_CHARACTERIZATION": {
+      "pattern": "**/*.json",
+      "files": 218,
+      "fingerprint": "1ec225a8eccd74c6c523706f36b0c7bb0999f4b4a55c6e22c9bad85df5921f29"
+    },
+    "TIMELEARNER_STOCK_COLD7_CHARACTERIZATION_CSV": {
+      "pattern": "**/*.csv",
+      "files": 8,
+      "fingerprint": "8532de1257615853aef5563113c3cda46fc3481fcd86a49dec6efc44de0ee395"
+    },
+    "TIMELEARNER_STOCK_COLD7_RUNTIME": {
+      "pattern": "NeuroModelerConsole",
+      "files": 1,
+      "fingerprint": "944ffed7e0c03c6277892fe0dd38f5fd8b0b55cf6ccfffbe08aad20c4c95a553"
+    },
+    "TIMELEARNER_STOCK_COLD7_RUNTIME_INI": {
+      "pattern": "*.ini",
+      "files": 1,
+      "fingerprint": "a86c2c581c866400a91684a21d6594f73eabad764bdefa5407ed91aa53e5278e"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "kind": "independent_LT_validation_reader_review_corrections",
+  "schema_version": 1,
+  "prepared_date": "2026-11-09",
+  "tested_production_source": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "server_publication_commit": "671bac262926681ffe7f6f9958350393fb721528",
+  "status": "reader_source_prepared_unrun_pending_Git_pack_transport",
+  "source_history": {
+    "previous_reader_sha256": "3a60f2bdaf1ba068e5d6a19bdd29dc0dacbd9e506b2e4d79ab1318bef06046e7",
+    "previous_reader_preserved": true,
+    "previous_reader_executed": false,
+    "current_reader_sha256": "389a495d2050e8e7851ab046beec92205980a7cba8fd238cfc8acc432d259768",
+    "current_reader_executed": false,
+    "reader_source_storage": "Both temporary source versions remain separately preserved locally; include raw sources and hashes with final independent verification evidence. These are artifact readers, not active production CLI entrypoints."
+  },
+  "independent_checks_added": [
+    "Final closure binding must equal the original signed owned-unit binding, including request SHA, unit, invocation, PID and start ticks.",
+    "Require all_processes_closed=true, MainPID=0, empty ControlGroup and matching nonempty invocation if still recorded.",
+    "Released lease token/job_id/owner/resources must match captured worker reservation; lease job must match immutable job request.",
+    "Owner PID/start ticks must equal bound main; owner boot_id/uid must equal signed contained request, and executable must equal actual runtime Python.",
+    "Recovery event token/job_id/owner/resources must match the original reservation; its closure binding/empty group must match the same attempt; no execution success inferred from recovery.",
+    "Runtime identity is reconstructed using the pinned maintained runtime.py version2 semantics, then compared with both saved identity and contained-request runtime fingerprint."
+  ],
+  "actual_schema_sources": [
+    {
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "path": "Scripts/StructTrain/TimeLearner/contained_process.py",
+      "lines": "228-254"
+    },
+    {
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "path": "Scripts/StructTrain/TimeLearner/resource_reservations.py",
+      "lines": "46-51,237-300,346-402"
+    },
+    {
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "path": "Scripts/StructTrain/TimeLearner/runtime.py",
+      "lines": "131-146"
+    }
+  ],
+  "unchanged_scope": {
+    "server_tests_observed": {
+      "metadata": 13,
+      "renderer": 14
+    },
+    "original_server_artifacts_modified": false,
+    "production_API_or_renderer_changed": false,
+    "local_tests_numerics_plots_or_models_executed": false,
+    "current_server_kernel_verified_by_local_reader": false,
+    "scientific_verdict": null
+  },
+  "network_gap": {
+    "Git_pack_downloaded": false,
+    "fresh_connections_or_job_restarts": false,
+    "render_received_controller_terminal": "completed_true; external fresh readback and selected-PNG Git publication pending restoration"
+  },
+  "runtime_identity_reconstruction": "Exact source-prepared runtime.py v2 semantics only; execute against actual persisted runtime after671 pack download. No actual671 field values fabricated or locally accepted.",
+  "preserved_reader_archive": "Reports/StructTrain/TimeLearner/s07-channel-lt-overview-reader-preparation/reader-sources.json.gz",
+  "root_source_review": {
+    "runtime_identity_projection_matches_pinned_maintained_source": true,
+    "closure_and_lease_linkage_source_reviewed": true,
+    "execution_pending_immutable_evidence": true,
+    "source_document_commit": "f64d8cf666446a30d03b10b261b1e4e6f2a1d609"
+  }
+}

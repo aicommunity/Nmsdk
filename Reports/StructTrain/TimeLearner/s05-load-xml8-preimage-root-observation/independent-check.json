@@ -1,0 +1,22 @@
+{
+  "kind": "independent_native_preimage_capture_check",
+  "schema_version": 1,
+  "commit": "015bbf13b7fce872560173b14f0dce5bfd9d6cf4",
+  "archive_bytes": 110121,
+  "members": 41,
+  "tests": 8,
+  "passed": 4,
+  "failed": [
+    "NativeLoadHistory/ConnectedChildAt2000",
+    "NativeLoadHistory/ConnectedChildAt20000",
+    "TimeLearnerModelArchive/RejectsContradictoryDerivedImageXmlWithExistingClass",
+    "TimeLearnerModelArchive/RejectsContradictoryNativeImageXmlWithExistingClass"
+  ],
+  "closure_checked": true,
+  "released_lease_checked": true,
+  "source_before_after_equal": true,
+  "exact_three_added_paths": true,
+  "numerical_runtime_executed_locally": false,
+  "scientific_verdict": null,
+  "reader_sha256": "46ca54691e99fea789b2b2e4d46295bb09dfaec4589e14b7f9d43dd044160cc2"
+}

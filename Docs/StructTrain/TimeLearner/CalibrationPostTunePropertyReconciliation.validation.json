@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "kind": "local_metadata_only_calibration_posttune_reconciliation_check",
+  "baseline_root_commit": "9a782e211a7321b2253dacb018d2235a67b8a445",
+  "pulse_source_commit": "fcc3fed0dc63fc0d8ae8dcfdb0f85bd5d004baf8",
+  "registry_before_sha256": "fde42f50986078033d4775a808e8211bf747163a848b6a04c802ba86817eef2e",
+  "registry_after_sha256": "f4c12c309d397d38413058a0fdd8c167a0a36869c3474c251ecefc19aabf9799",
+  "records_before": 211,
+  "records_after": 211,
+  "selected_records_before": 44,
+  "changed_records": 44,
+  "unselected_records_unchanged": 167,
+  "record_keys_added_or_removed": 0,
+  "active_stale_runtime_statuses_after": 0,
+  "historical_runtime_statuses_preserved": 44,
+  "historical_source_commits_preserved": 44,
+  "source_references_verified_against_immutable_git": 157,
+  "all_source_reference_commits": [
+    "fcc3fed0dc63fc0d8ae8dcfdb0f85bd5d004baf8"
+  ],
+  "runtime_acceptance_promoted": false,
+  "new_numeric_runs": 0,
+  "scientific_worker_admission": false,
+  "checks": [
+    "exact 44-record selection",
+    "before/after keyed mapping",
+    "167 unselected records unchanged",
+    "restoring historical fields reproduces every baseline selected record",
+    "current source excerpt/blob identity",
+    "all evidence links exist"
+  ],
+  "whole_plan_complete": false
+}

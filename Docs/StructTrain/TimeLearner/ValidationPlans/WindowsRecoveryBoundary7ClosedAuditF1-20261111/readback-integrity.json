@@ -1,0 +1,39 @@
+{
+  "kind": "windows_closed_build_audit_readback",
+  "schema_version": 1,
+  "files": {
+    "audit.json": {
+      "bytes": 1908,
+      "sha256": "7c640ecdadf4370f9c6063d564180f5d6c91886c9f40b1dffd0efa2dd8b6cbe6"
+    },
+    "dependencies-after.json.gz": {
+      "bytes": 820985,
+      "sha256": "50ff4c5d44baef7ab81c751ba329d87aca47d072b3999bc1cd5be8fe7efdeab8"
+    },
+    "kernel-after.json": {
+      "bytes": 82,
+      "sha256": "be3ef7348005d93932836a92b14fed385769308e398ddcc6a632264062bdde7e"
+    },
+    "kernel-before.json": {
+      "bytes": 82,
+      "sha256": "be3ef7348005d93932836a92b14fed385769308e398ddcc6a632264062bdde7e"
+    },
+    "runtime-files.json.gz": {
+      "bytes": 3401,
+      "sha256": "b7152e7dc5f9db57471c36c83142ec8b2080d3a2f9e44079a4e6d7fdeaf463ba"
+    },
+    "specification.json": {
+      "bytes": 1874,
+      "sha256": "ad7b8d0bf766d4039be44304810243f446234f6cbc3f7cd855ecf3f8e696a408"
+    },
+    "terminal.json": {
+      "bytes": 189,
+      "sha256": "dad15ea43303f8c374c05236d82d76e211e16c700f0cfb91678fd2022ec9c515"
+    }
+  },
+  "producer_reference": {
+    "source_commit": "3edb22a4cf80b76fbae4deb379ec510ebfac0fcf",
+    "path": "Scripts/StructTrain/TimeLearner/workers/windows-vs2026/audit-closed-build.py",
+    "sha256": "aab7797e4dc3d30649ad0231653a8bae6e52ced1d76a057c26afa51258d44c43"
+  }
+}

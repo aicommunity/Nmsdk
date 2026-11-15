@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "n1-geometry-production-decision-before-after-elder-a1",
+  "package_fingerprint": "9ddbccc0858284ac385b395c4fabc74a1f0c7310b910c112d1a2f6c00ab37223",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n1_geometry_cpp_ab"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n1_geometry_cpp_ab.N1GeometryCppABTest.test_before_exposes_starvation_and_after_passes_complete_decision_cohort"
+  ],
+  "fixtures": {
+    "TIMELEARNER_N1_GEOMETRY_CPP_CONTROLS": {
+      "pattern": "*.json",
+      "files": 1,
+      "fingerprint": "c2abb7f08809f34ae5b0e3906ba672781e7cafc080ac08e6dd616f42e9d3136d"
+    }
+  }
+}

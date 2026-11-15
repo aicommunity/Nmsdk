@@ -1,0 +1,1603 @@
+{
+  "kind": "timelearner_native_acceptance_job",
+  "schema_version": 1,
+  "workspace": "/home/user/timelearner-refactor",
+  "preparation": "/home/user/timelearner-refactor/readbacks/s07-native119-foreign-reference-normal-a1-controller/inputs/preparation.json",
+  "paths": {
+    "source": "/home/user/timelearner-refactor/source-portable-reference-fixture-elder-a1",
+    "build": "/home/user/timelearner-refactor/build-native119-foreign-reference-normal-a1",
+    "runtime": "/home/user/timelearner-refactor/runtime-native119-foreign-reference-normal-a1",
+    "output": "/home/user/timelearner-refactor/readbacks/s07-native119-foreign-reference-normal-a1",
+    "resources": "/home/user/timelearner-refactor/resources-bin8cb-native-archive-move-normal-a1",
+    "framework": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+  },
+  "build": {
+    "type": "Release",
+    "parallel": 2,
+    "wall_seconds": 10800,
+    "required_cache_tokens": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS:STRING=",
+      "CMAKE_CXX_FLAGS:STRING=",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=",
+      "CMAKE_SHARED_LINKER_FLAGS:STRING=",
+      "CMAKE_MODULE_LINKER_FLAGS:STRING=",
+      "CMAKE_STATIC_LINKER_FLAGS:STRING=",
+      "FETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_SOURCE_DIR_GOOGLETEST:PATH=/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+      "RDK_USE_LLM:BOOL=OFF",
+      "RDK_LLM_BUILD_EMBEDDED:BOOL=OFF",
+      "NMSDK_BUILD_PARALLEL_JOBS:UNINITIALIZED=2"
+    ]
+  },
+  "limits": {
+    "whole_wall_seconds": 43200,
+    "leaf_memory_bytes": 4294967296,
+    "leaf_tasks": 128,
+    "physical_free_floor_bytes": 536870912,
+    "reservation_memory_bytes": 8589934592,
+    "reservation_disk_bytes": 12884901888
+  },
+  "asan_options": null,
+  "protected_runtimes": [
+    "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+    "/home/user/timelearner-refactor/runtime-native-archive-move18-normal-a2",
+    "/home/user/timelearner-refactor/runtime-native119-normal-a1",
+    "/home/user/timelearner-refactor/runtime-native119-open-arm-normal-a1"
+  ],
+  "artifacts": [
+    {
+      "glob": "common-codec-11/native-composite/classic-cold6-envelope/original-roundtrip/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold6-envelope/base-1/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold6-envelope/base-2/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold6-envelope/base-3/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold6-envelope/base-4/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold7-envelope/base-1/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold7-envelope/base-2/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold7-envelope/base-3/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold7-envelope/base-4/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/classic/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/classic/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/classic/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/classic/declaration-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold6-envelope/original-roundtrip/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold6-envelope/base-1/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold6-envelope/base-2/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold6-envelope/base-3/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold6-envelope/base-4/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold7-envelope/base-1/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold7-envelope/base-2/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold7-envelope/base-3/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold7-envelope/base-4/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/branch/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/branch/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/branch/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/branch/declaration-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/console-envelope-owned/base-1/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/console-envelope-owned/base-2/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-common-policy/original-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-common-policy/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-common-policy/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-reference-window/original-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-reference-window/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-reference-window/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-01/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-01/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-01/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-01/native-composite/classic-window-live-authority/foreign-finished/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-01/native-composite/classic-window-live-authority/foreign-finished/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-02/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-02/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-02/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-02/native-composite/branch-window-live-authority/foreign-finished/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-02/native-composite/branch-window-live-authority/foreign-finished/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-03/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-03/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-03/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-03/native-composite/classic-window-live-authority/own-next-group/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-03/native-composite/classic-window-live-authority/own-next-group/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-03/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-04/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-04/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-04/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-04/native-composite/branch-window-live-authority/own-next-group/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-04/native-composite/branch-window-live-authority/own-next-group/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-04/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-05/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-05/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-05/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-05/native-composite/classic-window-control-lifetime/failed-begin/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-06/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-06/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-06/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-06/native-composite/branch-window-control-lifetime/failed-begin/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-07/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-07/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-07/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-07/native-composite/classic-window-control-lifetime/scalar3-takeover/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-08/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-08/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-08/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-08/native-composite/branch-window-control-lifetime/scalar3-takeover/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-09/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-09/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-09/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-09/native-composite/classic-window-control-lifetime/fixed4-takeover/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-10/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-10/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-10/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-10/native-composite/branch-window-control-lifetime/fixed4-takeover/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-11/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-11/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-11/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-11/native-composite/classic-window-live-authority/foreign-finished/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-11/native-composite/classic-window-live-authority/foreign-finished/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-11/native-composite/classic-window-live-authority/foreign-finished/after-new-token-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-11/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-12/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-12/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-12/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-12/native-composite/branch-window-live-authority/foreign-finished/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-12/native-composite/branch-window-live-authority/foreign-finished/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-12/native-composite/branch-window-live-authority/foreign-finished/after-new-token-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-12/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-13/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-13/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-13/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-13/native-composite/classic-window-control-lifetime/own-edit/actual-owned-edit.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-13/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-14/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-14/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-14/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-14/native-composite/branch-window-control-lifetime/own-edit/actual-owned-edit.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-14/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-15/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-15/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-15/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-15/native-composite/classic-window-control-lifetime/open-arm/actual-open-arm.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-16/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-16/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-16/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-16/native-composite/branch-window-control-lifetime/open-arm/actual-open-arm.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-17/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-17/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-17/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-17/native-composite/classic-window-control-lifetime/before-queue/actual-before-queue.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-18/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-18/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-18/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-18/native-composite/branch-window-control-lifetime/before-queue/actual-before-queue.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-19/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-19/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-19/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-19/native-composite/classic-window-control-lifetime/no-actor-interrupt/actual-public-interrupt.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-20/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-20/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-20/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-20/native-composite/branch-window-control-lifetime/no-actor-interrupt/actual-public-interrupt.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-classic/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-classic/native-composite/classic-window-archive2/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-classic/native-composite/classic-window-archive2/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-classic/native-composite/classic-window-archive2/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-classic/native-composite/classic-window-archive2/composite-measurements/group-*.json",
+      "minimum": 3,
+      "maximum": 3
+    },
+    {
+      "glob": "portable-owning-classic/native-composite/classic-window-archive2/**/*.csv",
+      "minimum": 12,
+      "maximum": 12
+    },
+    {
+      "glob": "portable-owning-branch/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-branch/native-composite/branch-window-archive2/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-branch/native-composite/branch-window-archive2/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-branch/native-composite/branch-window-archive2/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-branch/native-composite/branch-window-archive2/composite-measurements/group-*.json",
+      "minimum": 3,
+      "maximum": 3
+    },
+    {
+      "glob": "portable-owning-branch/native-composite/branch-window-archive2/**/*.csv",
+      "minimum": 12,
+      "maximum": 12
+    },
+    {
+      "glob": "portable-owning-C0/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-C0/native-composite/classic-window-archive2-C0/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-C0/native-composite/classic-window-archive2-C0/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-C0/native-composite/classic-window-archive2-C0/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-owning-C0/native-composite/classic-window-archive2-C0/composite-measurements/group-*.json",
+      "minimum": 3,
+      "maximum": 3
+    },
+    {
+      "glob": "portable-owning-C0/native-composite/classic-window-archive2-C0/**/*.csv",
+      "minimum": 12,
+      "maximum": 12
+    },
+    {
+      "glob": "retained-order-replay/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "retained-order-replay/native-composite/classic-window-budget-refs-A-empty-B/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "retained-order-replay/native-composite/classic-window-budget-refs-A-empty-B/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "retained-order-replay/native-composite/classic-window-budget-refs-A-empty-B/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "retained-order-replay/native-composite/classic-window-budget-refs-A-empty-B/composite-measurements/group-*.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "retained-order-replay/native-composite/classic-window-budget-refs-A-empty-B/**/*.csv",
+      "minimum": 8,
+      "maximum": 8
+    },
+    {
+      "glob": "public-bank-fixture-01/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "public-bank-fixture-02/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "public-bank-fixture-03/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "public-bank-fixture-04/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "public-bank-fixture-05/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "public-bank-fixture-05/native-composite/classic-distinct-routing-N4/input-*/routing.json",
+      "minimum": 4,
+      "maximum": 4
+    },
+    {
+      "glob": "public-bank-fixture-05/native-composite/classic-distinct-routing-N4/input-*/matched-witness.json",
+      "minimum": 4,
+      "maximum": 4
+    },
+    {
+      "glob": "public-bank-fixture-05/native-composite/classic-distinct-routing-N4/input-*/*.csv",
+      "minimum": 24,
+      "maximum": 24
+    },
+    {
+      "glob": "public-bank-fixture-05/native-composite/classic-distinct-routing-N4/input-*/after-model.json",
+      "minimum": 4,
+      "maximum": 4
+    },
+    {
+      "glob": "public-bank-fixture-05/native-composite/classic-distinct-routing-N4/input-*/boundary-math.json",
+      "minimum": 4,
+      "maximum": 4
+    },
+    {
+      "glob": "public-bank-fixture-06/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "public-bank-fixture-06/native-composite/branch-distinct-routing-N4/input-*/routing.json",
+      "minimum": 4,
+      "maximum": 4
+    },
+    {
+      "glob": "public-bank-fixture-06/native-composite/branch-distinct-routing-N4/input-*/matched-witness.json",
+      "minimum": 4,
+      "maximum": 4
+    },
+    {
+      "glob": "public-bank-fixture-06/native-composite/branch-distinct-routing-N4/input-*/*.csv",
+      "minimum": 24,
+      "maximum": 24
+    },
+    {
+      "glob": "public-bank-fixture-06/native-composite/branch-distinct-routing-N4/input-*/after-model.json",
+      "minimum": 4,
+      "maximum": 4
+    },
+    {
+      "glob": "public-bank-fixture-06/native-composite/branch-distinct-routing-N4/input-*/boundary-math.json",
+      "minimum": 4,
+      "maximum": 4
+    },
+    {
+      "glob": "public-bank-fixture-07/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "public-bank-fixture-07/native-composite/classic-distinct-routing-N6/input-*/routing.json",
+      "minimum": 6,
+      "maximum": 6
+    },
+    {
+      "glob": "public-bank-fixture-07/native-composite/classic-distinct-routing-N6/input-*/matched-witness.json",
+      "minimum": 6,
+      "maximum": 6
+    },
+    {
+      "glob": "public-bank-fixture-07/native-composite/classic-distinct-routing-N6/input-*/*.csv",
+      "minimum": 48,
+      "maximum": 48
+    },
+    {
+      "glob": "public-bank-fixture-07/native-composite/classic-distinct-routing-N6/input-*/after-model.json",
+      "minimum": 6,
+      "maximum": 6
+    },
+    {
+      "glob": "public-bank-fixture-07/native-composite/classic-distinct-routing-N6/input-*/boundary-math.json",
+      "minimum": 6,
+      "maximum": 6
+    },
+    {
+      "glob": "public-bank-fixture-08/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "public-bank-fixture-08/native-composite/branch-distinct-routing-N6/input-*/routing.json",
+      "minimum": 6,
+      "maximum": 6
+    },
+    {
+      "glob": "public-bank-fixture-08/native-composite/branch-distinct-routing-N6/input-*/matched-witness.json",
+      "minimum": 6,
+      "maximum": 6
+    },
+    {
+      "glob": "public-bank-fixture-08/native-composite/branch-distinct-routing-N6/input-*/*.csv",
+      "minimum": 48,
+      "maximum": 48
+    },
+    {
+      "glob": "public-bank-fixture-08/native-composite/branch-distinct-routing-N6/input-*/after-model.json",
+      "minimum": 6,
+      "maximum": 6
+    },
+    {
+      "glob": "public-bank-fixture-08/native-composite/branch-distinct-routing-N6/input-*/boundary-math.json",
+      "minimum": 6,
+      "maximum": 6
+    },
+    {
+      "glob": "public-bank-fixture-09/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "public-bank-fixture-10/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "public-bank-fixture-11/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-native-window5/cold7-pre-edit-characterization/raw-0.csv",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-native-window5/cold7-pre-edit-characterization/raw-1.csv",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-native-window5/cold7-pre-edit-characterization/raw-2.csv",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-native-window5/cold7-pre-edit-characterization/raw-3.csv",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-native-window5/cold7-pre-edit-characterization/matched-witness.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-native-window5/cold7-pre-edit-characterization/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-native-window5/cold7-pre-edit-characterization/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-native-window5/cold7-pre-edit-characterization/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-native-window5/cold7-pre-edit-characterization/raw-0.csv",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-native-window5/cold7-pre-edit-characterization/raw-1.csv",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-native-window5/cold7-pre-edit-characterization/raw-2.csv",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-native-window5/cold7-pre-edit-characterization/raw-3.csv",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-native-window5/cold7-pre-edit-characterization/matched-witness.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-native-window5/cold7-pre-edit-characterization/window5-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-native-window5/cold7-pre-edit-characterization/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-native-window5/cold7-pre-edit-characterization/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-0/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-0/train_learned_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-0/train_learned_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-0/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-0/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-0/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-0/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-0/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-0/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-2/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-2/train_stopped_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-2/train_stopped_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-2/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-2/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-2/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-2/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-2/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-2/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-3/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-3/train_stopped_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-3/train_stopped_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-3/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-3/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-3/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-3/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-3/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-3/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-4/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-4/train_stopped_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-4/train_stopped_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-4/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-4/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-4/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-4/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-4/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-4/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-5/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-5/train_stopped_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-5/train_stopped_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-5/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-5/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-5/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-5/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-5/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-5/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-6/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-6/train_stopped_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-6/train_stopped_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-6/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-6/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-6/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-6/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-6/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-classic/source-6/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-0/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-0/train_learned_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-0/train_learned_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-0/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-0/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-0/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-0/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-0/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-0/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-1/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-1/train_learned_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-1/train_learned_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-1/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-1/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-1/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-1/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-1/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-1/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-2/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-2/train_stopped_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-2/train_stopped_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-2/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-2/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-2/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-2/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-2/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-2/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-3/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-3/train_stopped_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-3/train_stopped_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-3/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-3/runtime-plan.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-3/source-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-3/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-3/actual-dataset.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-package6-29/native-composite/package6-branch/source-3/package-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/classic/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/classic/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/classic/whole-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/classic/scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/classic/source-primary-artifacts.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/branch/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/branch/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/branch/whole-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/branch/scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/branch/source-primary-artifacts.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/classic-diagnostic/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/classic-diagnostic/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/classic-diagnostic/whole-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/classic-diagnostic/scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "recognition-source6-3/native-composite/package6-recognition/classic-diagnostic/source-primary-artifacts.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-proof6-16/native-composite/classic-native-window-service5/portable-proof6-0/portable-proof.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "portable-proof6-16/native-composite/branch-native-window-service5/portable-proof6-0/portable-proof.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "foreign-reference-1/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "foreign-reference-1/native-composite/classic-native-window-service5/portable-proof6-0/portable-proof.json",
+      "minimum": 1,
+      "maximum": 1
+    }
+  ]
+}

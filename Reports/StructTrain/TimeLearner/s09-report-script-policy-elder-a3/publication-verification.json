@@ -1,0 +1,32 @@
+{
+  "kind": "loose_report_script_policy_two_axis_acceptance",
+  "root": "91323406ce458186baa1fa19e19f7b2249b617e6",
+  "worker": "elder",
+  "successful_job": "s09-report-script-policy-elder-a3",
+  "test_methods_verified": 32,
+  "new_policy_methods": 12,
+  "publisher_regression_methods": 20,
+  "registered_managed_graph_attested": false,
+  "successful_lease_owner_matches_outer_binding": true,
+  "original_a1_assertions": {
+    "passed": 31,
+    "failed": 1,
+    "total": 32
+  },
+  "original_a1_cleanup_failure": "release(token) omitted required note; original missing terminal and failed execution preserved",
+  "original_a2_precompute_bootstrap_failure": "bytes /proc stat was split with string delimiter; no worker/job/lease started then; written supervisor was hash-verified and adopted before first compute",
+  "elder_a2_capacity_refusal_preserved": true,
+  "administrative_reconciliation_scope": "exact two known-source legacy controller tokens; immutable raw preimages; no general API weakening; schema/capacity/other rows unchanged",
+  "actual_operational_diagnostics_status": "needs_review",
+  "operational_status_reclassified": false,
+  "previous_readonly_collector_failures_preserved_in_operator_log": [
+    "assumed undocumented binding.json instead of inspect API",
+    "immutable prior staging directory existed; left untouched; used fresh p2 staging"
+  ],
+  "native_test_reruns_for_publication": 0,
+  "source_tracked_hashes_unchanged": true,
+  "model_calculations": 0,
+  "cpp_builds": 0,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

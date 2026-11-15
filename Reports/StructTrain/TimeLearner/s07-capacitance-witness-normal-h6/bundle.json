@@ -1,0 +1,26 @@
+{
+  "kind": "timelearner_native_capacitance_integration_evidence",
+  "schema_version": 1,
+  "root": "36af2933e738b83fce25070c083f41cc810a8b11",
+  "pulselib": "9490b7a73ad3b1bbb05c4c025af866fce667a0ea",
+  "rdk": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+  "statuses": {
+    "readers": {
+      "expected": 18,
+      "observed": null,
+      "assertion_status": "not_passed",
+      "structured_result": {}
+    }
+  },
+  "unexpected_libasan_mappings": false,
+  "acceptance_status": "not_accepted",
+  "archive_sha256": "19b28b80d6132d7630ae6fd2aa16467817342d4ad60fb95f887f3e8619404da3",
+  "archive_bytes": 511,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/exception.json": "590967f5fd18511e7878dc3ba8071940c17836302b833b61378b3af8ee42bde1",
+    "gate/owned-supervisor.json": "609aa7c623f74b4f5fa47c5d64bd619bc1ad199b64621da5edff732354eb1e47"
+  },
+  "scope": "Read-only per-revision capacitance witness: four Classic/Branch N0/N1 bridge cases with independent actual graph/state/registry/lifecycle checks and18 structured bridge/domain readers. No service dispatch, C-trim On or scientific classification.",
+  "scientific_verdict": null
+}

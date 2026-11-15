@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-threshold-primary-recompression-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "29ed8764aa6fa98cf7d05e8334377348d4ca7b9a",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 8589934592
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-primary-recompression-a1",
+      "commit": "9cbe95ecc18ef361cbbe907c615749a2957f208a"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-primary-recompression-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40ThresholdPrimaryRecompressionA2-20261113/suite.json",
+      "sha256": "7f4ad5f07d421149ffd2baf7721b063e2abbf22df6ea59f3d446b6e8cfb25d83"
+    },
+    "fixtures": {
+      "TIMELEARNER_ENVELOPED_PRIMARY_TO_RECOMPRESS": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-diagnostic-threshold-primary-m40-a2/worker/packed-primary"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 8589934592
+    }
+  }
+}

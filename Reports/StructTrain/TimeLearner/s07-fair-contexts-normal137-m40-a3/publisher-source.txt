@@ -1,0 +1,80 @@
+from pathlib import Path
+import os,sys,json,hashlib,subprocess,tarfile
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-fair-contexts-normal-a3';parent='36f598524b08ef9a5b72e26e50ef1f34501331e2'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+registry=Reservations(base/'resource-reservations.sqlite3')
+folder=base/'readbacks/s07-fair-contexts-normal-a3'
+closed=inspect_worker_dependency(Path(str(folder)+'-container'),registry,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+bundle=json.loads((folder/'bundle.json').read_text());archive=folder/'primary.tar.xz'
+assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256']
+seen=set()
+with tarfile.open(archive,'r:xz') as tar:
+ for m in tar:
+  assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tar.extractfile(m).read()
+  assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+assert seen==set(bundle['members'])
+v=json.loads((folder/'transport-verdict.json').read_text())
+assert v['validity']=='valid' and v['assertion_status']=='passed'
+assert v['inventory']['observed']==137 and v['inventory']['failed_test_ids']==[]
+assert json.loads((folder/'terminal.json').read_text())['fair_domains137_passed']
+payload={};prefix='Reports/StructTrain/TimeLearner/s07-fair-contexts-normal137-m40-a3'
+for name in ('primary.tar.xz','bundle.json','terminal.json','scope.json','transport-verdict.json','source-hashes.json','source-closure.json','native137/native.xml'):
+ payload[prefix+'/'+name]=(folder/name).read_bytes()
+payload[prefix+'/fresh-operational-closure.json']=(json.dumps(closed,indent=2)+'\n').encode()
+baseline=base/'readbacks/s07-candidate-recovery-journal-normal-a1'
+baseline_closed=inspect_worker_dependency(Path(str(baseline)+'-container'),registry,baseline.name)
+assert baseline_closed['state']=='ready' and baseline_closed['reservation_state']=='released'
+old_native=baseline/'native118/native';new_native=folder/'native137/native'
+def inventory(d):return {p.relative_to(d).as_posix():p for p in d.rglob('*') if p.is_file() and p.suffix in ('.csv','.json')}
+a,b=inventory(old_native),inventory(new_native);assert a.keys()==b.keys()
+same_csv=[];same_json=[];different=[]
+def changes(x,y,path,rows):
+ assert type(x)==type(y),(path,'type mismatch')
+ if isinstance(x,dict):
+  assert x.keys()==y.keys(),(path,'keys mismatch')
+  for key in sorted(x):changes(x[key],y[key],path+'/'+key,rows)
+ elif isinstance(x,list):
+  assert len(x)==len(y),(path,'size mismatch')
+  for i,(v,w) in enumerate(zip(x,y)):changes(v,w,path+'/'+str(i),rows)
+ elif x!=y:
+  parts=path.split('/')
+  assert len(parts)==6 and parts[1]=='nodes' and parts[2].isdigit() and parts[3:]==['properties','StepDuration','rdk_value'],path
+  assert isinstance(x,str) and x.isdigit() and y.isdigit()
+  rows.append({'path':path,'old':x,'new':y})
+for name in sorted(a):
+ x=a[name].read_bytes();y=b[name].read_bytes()
+ if name.endswith('.csv'):
+  assert x==y,('default CSV changed',name);same_csv.append(name)
+ elif x==y:same_json.append(name)
+ else:
+  assert name.endswith('_startup_after.json'),('unexpected JSON difference',name)
+  rows=[];changes(json.loads(x),json.loads(y),'',rows);assert rows
+  different.append({'path':name,'old_sha256':hashlib.sha256(x).hexdigest(),'new_sha256':hashlib.sha256(y).hexdigest(),'changes':rows})
+old_bundle=json.loads((baseline/'bundle.json').read_text())
+for native,prefix_path,metadata in [(a,'native118/native/',old_bundle),(b,'native137/native/',bundle)]:
+ expected={n.removeprefix(prefix_path) for n in metadata['members'] if n.startswith(prefix_path) and n.endswith(('.csv','.json'))}
+ assert set(native)==expected
+ for name,path in native.items():
+  assert metadata['members'][prefix_path+name]=={'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
+assert len(same_csv)==284 and len(same_json)+len(different)==499
+payload[prefix+'/publisher-preflight-count-correction.json']=(json.dumps({'original_attempt_before_any_publication':'incorrectly reused469 JSON count from older25-case subset','actual_both_published_native_inventories':{'csv':284,'json':499},'all783 source entries bound to both bundle member hashes':True,'native_tests_repeated':False,'code_or_primary_modified':False},indent=2)+'\n').encode()
+proof={'kind':'fair_domain_default_physical_comparison','schema_version':1,'baseline_source_root':'84d6d97501a62b0a689b1170ec4f0fb53e558a48','candidate_source_root':parent,'baseline_evidence_commit':'e4bfac737b35d884bc0aed7c5e66f48f35abbd2b','baseline_archive_sha256':json.loads((baseline/'bundle.json').read_text())['archive_sha256'],'candidate_archive_sha256':bundle['archive_sha256'],'identical_csv':len(same_csv),'identical_json':len(same_json),'startup_json_differences':different,'only_StepDuration_rdk_value_differs':True,'all_compared_files':{n:{'old_sha256':hashlib.sha256(a[n].read_bytes()).hexdigest(),'new_sha256':hashlib.sha256(b[n].read_bytes()).hexdigest()} for n in sorted(a)},'scientific_verdict':None,'scope':'all original native118 fixture CSV/JSON outputs, including configuration controls; not full legacy/V2 or stock training matrix'}
+payload[prefix+'/default-physical-comparison.json']=(json.dumps(proof,indent=2)+'\n').encode()
+payload[prefix+'/baseline-fresh-closure.json']=(json.dumps(baseline_closed,indent=2)+'\n').encode()
+payload[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+collector=base/'evidence-fair-normal137-m40-a3';assert not collector.exists()
+subprocess.run(['git','init','--quiet',str(collector)],check=True)
+for pack in (source/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(collector),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(collector/'.git/shallow').write_text(parent+'\n')
+env=dict(os.environ,GIT_INDEX_FILE=str(collector/'publication-index'))
+def git(*a,data=None):return subprocess.check_output(['git','-C',str(collector),*a],input=data,env=env).decode().strip()
+git('read-tree',parent)
+for name,raw in payload.items():
+ oid=git('hash-object','-w','--stdin',data=raw);git('update-index','--add','--cacheinfo','100644',oid,name)
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner-evidence@localhost','commit-tree',git('write-tree','--missing-ok'),'-p',parent,data=b'Preserve passed137-case fair-domain and C-context gate with default native physical comparison\n')
+git('update-ref','refs/heads/evidence',c)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(collector),'members':len(seen),'tests':137,'passed':137,'failed':0,'archive_bytes':archive.stat().st_size,'archive_sha256':bundle['archive_sha256'],'whole_gate_passed':True,'default_identical_csv':len(same_csv),'default_identical_json':len(same_json),'default_startup_different':len(different)}))

@@ -1,0 +1,42 @@
+{
+  "kind": "timelearner_windows_native_validation",
+  "schema_version": 1,
+  "worker_sha256": "cf6ca9fbbccda7e688ed94291b509656fe53339351ed7c92521eb426228d336c",
+  "source_root": "C:/Projects/TimeLearnerWorker/source-recovery-boundary7-win-f1",
+  "source_commit": "3edb22a4cf80b76fbae4deb379ec510ebfac0fcf",
+  "runtime_root": "C:/Projects/TimeLearnerWorker/runtime-recovery-boundary7-win-f1",
+  "closed_build_audit": "C:/Projects/TimeLearnerWorker/jobs/windows-recovery-boundary7-closed-build-audit-f1",
+  "output_root": "C:/Projects/TimeLearnerWorker/jobs/windows-recovery-boundary7-native14-f1",
+  "cmake_cache": "C:/Projects/TimeLearnerWorker/build-recovery-boundary7-win-f1/CMakeCache.txt",
+  "audit_records": {
+    "audit.json": "7c640ecdadf4370f9c6063d564180f5d6c91886c9f40b1dffd0efa2dd8b6cbe6",
+    "dependencies-after.json.gz": "50ff4c5d44baef7ab81c751ba329d87aca47d072b3999bc1cd5be8fe7efdeab8",
+    "kernel-after.json": "be3ef7348005d93932836a92b14fed385769308e398ddcc6a632264062bdde7e",
+    "kernel-before.json": "be3ef7348005d93932836a92b14fed385769308e398ddcc6a632264062bdde7e",
+    "producer.py": "aab7797e4dc3d30649ad0231653a8bae6e52ced1d76a057c26afa51258d44c43",
+    "runtime-files.json.gz": "b7152e7dc5f9db57471c36c83142ec8b2080d3a2f9e44079a4e6d7fdeaf463ba",
+    "specification.json": "ad7b8d0bf766d4039be44304810243f446234f6cbc3f7cd855ecf3f8e696a408",
+    "terminal.json": "dad15ea43303f8c374c05236d82d76e211e16c700f0cfb91678fd2022ec9c515"
+  },
+  "expected_test_ids": [
+    "NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse",
+    "NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse",
+    "NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse",
+    "NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse",
+    "NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery",
+    "NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery",
+    "NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse",
+    "NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse",
+    "NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery",
+    "NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery",
+    "NativeRecoveryPackage7/ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner",
+    "NativeRecoveryPackage7/BranchMissingForeignOrDuplicateLedgerCannotMutateOwner",
+    "NativeRecoveryPackage7/ClassicLegacy6CannotMasqueradeAsRecovery7",
+    "NativeRecoveryPackage7/BranchLegacy6CannotMasqueradeAsRecovery7"
+  ],
+  "maximum_wall_seconds": 1800,
+  "process_limits": {
+    "memory_bytes": 4294967296,
+    "maximum_processes": 32
+  }
+}

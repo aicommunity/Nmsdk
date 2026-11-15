@@ -276,3 +276,23 @@ Baseline root d8e2ad16 / PulseLib ded4b558: по шесть воспроизве
 Success и mid=0.25. PulseLib 39810a7 сбрасывает attempt-scoped evidence/status;
 runtime-приёмка исправления пока не завершена. См. LegacyPostTuneObservation.ru.md.
 Историческая причинность для августа и остальных кампаний не установлена.
+
+TL-038: PrepareModelArchive пропускал native XML/readback уже существующей
+image definition, если factory/base/declared identity совпадали с storage.
+SDKff42/Pulse608 на M40 принял изменённую XML Capacity NPChannel и
+NPExcChannelBio при неизменённом declared identity и корректных checksum.
+Два настоящих отрицательных native контроля воспроизвели ошибочный приём.
+Pulse991d933 теперь реконструирует каждую definition через LoadSnapshot;
+существующий prototype не изменяет. Runtime-приёмка исправления ещё не завершена.
+Полные оба противоречивых архива и JUnit опубликованы в evidence015bbf13.
+
+TL-039: UNet::LoadComponent присваивал local input properties до отключения
+прежнего графа. SDKff42/Rdkd6 на M40: ConnectedChild2000/20000 сохранили старый
+input0.75 вместо XML0.25, после Init/Reset и восьми root scheduler ticks
+Feedback1.5 вместо0.5. Fresh и DetachedChild прошли на обеих частотах.
+Это исправленная допустимая channel fixture; прежние generator-child failures
+до Load доказательством дефекта не являются. Candidate Rdkde413423 использует
+штатный DisconnectPropertyDataSources перед записью свойств full Load;
+LoadComponentProperties остаётся overlay. Runtime-приёмка ещё не завершена.
+См. [полный preimage, ссылки и область](NativeLoadXmlPreimage-20261110.ru.md).
+Историческая причинность для августа и других научных кампаний не установлена.

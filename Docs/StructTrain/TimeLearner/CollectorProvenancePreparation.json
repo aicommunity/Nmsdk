@@ -1,0 +1,369 @@
+{
+  "kind": "collector_provenance_source_and_scoped_metadata_acceptance",
+  "schema_version": 1,
+  "parent_root": "c4c5d8fd3400f8746a7e8c77cc3b832ca103ce31",
+  "branch": "codex/timelearner-collector-provenance",
+  "scope": "Maintained metadata helper, explicit launch/progress roles, frozen owned staging, Git blob-derived case inventory and separate planned/observed/compiled source. No SDK, backend or learner edits.",
+  "API": [
+    "capture_owned_supervisor(container, supervisor_log=..., worker_stdout=..., maximum_input_bytes=...)",
+    "capture_git_case_inventory(source_root, selections=..., inventory_documents=...)",
+    "describe_collection(inputs, collector_tool_root=..., compilation_state=..., actual_sdk_source=..., compiled_runtime=..., planned_source=..., declared_inventory=...)",
+    "CapturedCollectorInputs.materialize(owned_root, staging)"
+  ],
+  "source": {
+    "Scripts/StructTrain/TimeLearner/collector_provenance.py": {
+      "bytes": 23404,
+      "sha256": "2b8e2e08078ead5a27646d11bd2041c175fb0e628a5836132215a488ef2d1ff6",
+      "Git_blob": "8e4cc5ee61f43cc6dc5506312a7e899427a977db"
+    },
+    "Scripts/StructTrain/TimeLearner/tests/test_collector_provenance.py": {
+      "bytes": 24222,
+      "sha256": "3bb17896bc540e067faf06f4139006e9e9e1aa136fb64ee9f36ff3c4fc3f6ab1",
+      "Git_blob": "03ddfbc8b3d6ee78a8ab377545a2485205d36a57"
+    }
+  },
+  "metadata_test_inventory": {
+    "module": "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance",
+    "class": "CollectorProvenanceTest",
+    "count": 39,
+    "ids": [
+      "CollectorProvenanceTest.test_actual_A3_binding_and_explicit_arbitrary_log_path",
+      "CollectorProvenanceTest.test_actual_90af_wrong_A2_log_is_rejected_for_A3",
+      "CollectorProvenanceTest.test_actual_A3_log_is_rejected_for_A2_binding",
+      "CollectorProvenanceTest.test_actual_A3_log_is_not_worker_progress",
+      "CollectorProvenanceTest.test_missing_STARTED_refuses_publication_inputs",
+      "CollectorProvenanceTest.test_progress_stream_must_belong_to_the_bound_container",
+      "CollectorProvenanceTest.test_duplicate_identical_STARTED_refuses_ambiguity",
+      "CollectorProvenanceTest.test_mixed_foreign_and_matching_STARTED_refuses_ambiguity",
+      "CollectorProvenanceTest.test_malformed_STARTED_JSON_is_rejected",
+      "CollectorProvenanceTest.test_invalid_UTF8_supervisor_has_structured_refusal",
+      "CollectorProvenanceTest.test_duplicate_JSON_keys_are_rejected",
+      "CollectorProvenanceTest.test_tampered_request_content_digest_is_rejected",
+      "CollectorProvenanceTest.test_tampered_binding_content_digest_is_rejected",
+      "CollectorProvenanceTest.test_rehashed_foreign_binding_identity_still_fails",
+      "CollectorProvenanceTest.test_missing_request_is_not_inferred_from_log",
+      "CollectorProvenanceTest.test_size_budget_rejects_input_before_parsing",
+      "CollectorProvenanceTest.test_symlink_log_is_not_an_original_capture",
+      "CollectorProvenanceTest.test_append_during_frozen_read_is_rejected",
+      "CollectorProvenanceTest.test_replacement_during_frozen_read_is_rejected",
+      "CollectorProvenanceTest.test_materialize_uses_captured_bytes_not_reopened_inputs",
+      "CollectorProvenanceTest.test_materialize_rejects_outside_owned_root",
+      "CollectorProvenanceTest.test_manually_constructed_escape_name_refuses_before_filesystem_write",
+      "CollectorProvenanceTest.test_manually_constructed_duplicate_role_refuses_before_filesystem_write",
+      "CollectorProvenanceTest.test_manually_constructed_bytes_must_match_descriptor_before_write",
+      "CollectorProvenanceTest.test_existing_packager_uses_frozen_staged_log_and_descriptor",
+      "CollectorProvenanceTest.test_actual_Git_source_derives_full206_with_explicit_subset",
+      "CollectorProvenanceTest.test_actual_parameterized_suite_selected_is_rejected",
+      "CollectorProvenanceTest.test_actual153_stale_nested_fc9_is_rejected_against_Git05f",
+      "CollectorProvenanceTest.test_actual_invalid_budget_macro_cannot_add_a_second_TEST",
+      "CollectorProvenanceTest.test_changed_document_claim_cannot_replace_Git_cases",
+      "CollectorProvenanceTest.test_changed_source_worktree_cannot_keep_Git_inventory",
+      "CollectorProvenanceTest.test_dirty_source_closure_is_rejected",
+      "CollectorProvenanceTest.test_source_epoch_change_during_inventory_is_rejected",
+      "CollectorProvenanceTest.test_unsupported_dialect_cannot_claim_universal_gtest_coverage",
+      "CollectorProvenanceTest.test_missing_git_blob_fails_without_lazy_fetch",
+      "CollectorProvenanceTest.test_actual_c19_preflight_keeps_planned540_actual_d920_and_compiled_null",
+      "CollectorProvenanceTest.test_actual_compiled_manifest_is_distinct_from_plan_and_not_success",
+      "CollectorProvenanceTest.test_compiled_manifest_digest_tamper_is_rejected",
+      "CollectorProvenanceTest.test_not_started_phase_refuses_any_compiled_runtime"
+    ],
+    "execution": "server_passed_39_0errors_0skips",
+    "required_location": "Scoped owned Linux server metadata job after source review; no local unit or numeric execution",
+    "tested_source_root": "dfd534da637e411bcce5eff8acc37f821069d9bf",
+    "evidence_commit": "54574d03581e04d233b832b331979f27c871bfa1"
+  },
+  "fixtures": {
+    "metadata_members": 19,
+    "evidence_commits": [
+      "153751c4b3a3b2c0a25f10540265b41233197f7c",
+      "90af73022c3c0955eaafa368ef5a7e00702147b1",
+      "c19d2eb325541667ef770eacee8e8f132ad99ba3",
+      "ec2935e8511f89da6457e896dba21099037b796c"
+    ],
+    "metadata_gzip_bytes": 25553,
+    "metadata_gzip_sha256": "39d377049147e2304693f81ce59bd1aba797ed7193a394f824b9176b84c4d15d",
+    "source_Git_pack": {
+      "all_trees_included": true,
+      "blobs": [
+        {
+          "bytes": 616,
+          "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+          "git_blob": "5bba2f9531c39afb69d1fd482a68f401d02f6fec",
+          "path": ".gitattributes",
+          "sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef"
+        },
+        {
+          "bytes": 2042,
+          "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+          "git_blob": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+          "path": ".gitignore",
+          "sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6"
+        },
+        {
+          "bytes": 967,
+          "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+          "git_blob": "878b41e2626ac2cc6a132f498949e89306ed122b",
+          "path": ".gitmodules",
+          "sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809"
+        },
+        {
+          "bytes": 3192,
+          "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+          "git_blob": "662b672d49d18d849437d0953c721692e29d2f77",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingArchiveGateInventory.json",
+          "sha256": "2d5c8f7d1adab735a9f5035479d84b4e912a1210f254862d173afa0410fccefb"
+        },
+        {
+          "bytes": 840,
+          "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+          "git_blob": "b179003c4110e905050ddfe29247beb98af6f9b1",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingDeclarationsGateInventory.json",
+          "sha256": "1854ee0bed620b0cfab096c2228d7baed74379446bd8fccfb180cf17f94dfe17"
+        },
+        {
+          "bytes": 2067,
+          "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+          "git_blob": "9cb02b6156ae50572740afc1691620118f88c032",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingServiceGateInventory.json",
+          "sha256": "e82c4655b76bd4253996e961c41eea80b7fb5c1ae6b2b7faa794bf55cef6c723"
+        },
+        {
+          "bytes": 85071,
+          "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+          "git_blob": "c40ead669c3b6591ae13c243481249acedf20799",
+          "path": "Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp",
+          "sha256": "e65774d0938d2359dc752dab7083e9a8a0668e5e54789776bdd71ab7b428f24d"
+        },
+        {
+          "bytes": 77806,
+          "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+          "git_blob": "14da79b65bb145e8169d13d751fec94554e808f2",
+          "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+          "sha256": "05f5cf15b64d6f16950db33ce6724dffd4c3435a5cac7514701dbfefb10ea49a"
+        },
+        {
+          "bytes": 29262,
+          "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+          "git_blob": "40583384f75ba02838dee31c8888e4bf72a21573",
+          "path": "Tests/Integration/Libraries/Test_PulseLib_FinalVerification.cpp",
+          "sha256": "239d9d99adc7415112bd8d4bc3f31686aea041124721043e7999e081ec29b8d0"
+        },
+        {
+          "bytes": 113966,
+          "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+          "git_blob": "5bca0f3a56a2fd0865c72ddb994df667305b8ef1",
+          "path": "Tests/Integration/Libraries/Test_PulseLib_NativeExecution.cpp",
+          "sha256": "90fa68fcd7c531cb3ebd8bb1c731a25fcd09ecbbd22c37098e2e082ab96f81c9"
+        },
+        {
+          "bytes": 616,
+          "commit": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+          "git_blob": "5bba2f9531c39afb69d1fd482a68f401d02f6fec",
+          "path": ".gitattributes",
+          "sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef"
+        },
+        {
+          "bytes": 2042,
+          "commit": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+          "git_blob": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+          "path": ".gitignore",
+          "sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6"
+        },
+        {
+          "bytes": 967,
+          "commit": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+          "git_blob": "878b41e2626ac2cc6a132f498949e89306ed122b",
+          "path": ".gitmodules",
+          "sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809"
+        },
+        {
+          "bytes": 3736,
+          "commit": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+          "git_blob": "f549573e250ef51364be1d719e205da1825992ef",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingArchiveGateInventory.json",
+          "sha256": "42757b25745dd55a8f578d140daf28aab0d3470b0291810cc6be73bb8424ac89"
+        },
+        {
+          "bytes": 1384,
+          "commit": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+          "git_blob": "457a846c283184f98615a3bab65e2d8c4ad934af",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingDeclarationsGateInventory.json",
+          "sha256": "58dde8e547edc4e205f39d0bc8646036f0885bf164326073bbeb1d300a402ba4"
+        },
+        {
+          "bytes": 2611,
+          "commit": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+          "git_blob": "bc12bb9211d2197b8d1c34bbafdc6aa2d4c2b69d",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingServiceGateInventory.json",
+          "sha256": "31212871f601c585e9a8e30432c217d391d11a53069f4d81fbf626d3f657128e"
+        },
+        {
+          "bytes": 85071,
+          "commit": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+          "git_blob": "c40ead669c3b6591ae13c243481249acedf20799",
+          "path": "Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp",
+          "sha256": "e65774d0938d2359dc752dab7083e9a8a0668e5e54789776bdd71ab7b428f24d"
+        },
+        {
+          "bytes": 78050,
+          "commit": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+          "git_blob": "0c4d8c218c9323de09653fba5b57482bea17312a",
+          "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+          "sha256": "44acf89749caa4ff7644ffbba6726a60a8f6b8de91398679e52a61ecd39f1cca"
+        },
+        {
+          "bytes": 29262,
+          "commit": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+          "git_blob": "40583384f75ba02838dee31c8888e4bf72a21573",
+          "path": "Tests/Integration/Libraries/Test_PulseLib_FinalVerification.cpp",
+          "sha256": "239d9d99adc7415112bd8d4bc3f31686aea041124721043e7999e081ec29b8d0"
+        },
+        {
+          "bytes": 113966,
+          "commit": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+          "git_blob": "5bca0f3a56a2fd0865c72ddb994df667305b8ef1",
+          "path": "Tests/Integration/Libraries/Test_PulseLib_NativeExecution.cpp",
+          "sha256": "90fa68fcd7c531cb3ebd8bb1c731a25fcd09ecbbd22c37098e2e082ab96f81c9"
+        }
+      ],
+      "bytes": 2155232,
+      "path": "source-git-objects.pack",
+      "roots": [
+        "540179d70ddf3764334eb6bb59b7fef691054eee",
+        "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e"
+      ],
+      "sha256": "2f986654c3b880b3aaf4235f559dc2326401ee4106ab8e16368dc16e946b3bb5",
+      "unneeded_blobs_omitted": true
+    },
+    "neural_waveforms_or_ELF_included": false
+  },
+  "verification_before_commit": {
+    "Python_AST_parse": true,
+    "git_diff_check": true,
+    "local_unit_tests_run": false,
+    "local_CPP_or_models_run": false,
+    "server_tests_run": false
+  },
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "superseded_source_inventory": {
+    "source_root": "2919e14ba0064551a85112560dd34071bd4d88a3",
+    "count": 38,
+    "ids": [
+      "CollectorProvenanceTest.test_actual_A3_binding_and_explicit_arbitrary_log_path",
+      "CollectorProvenanceTest.test_actual_90af_wrong_A2_log_is_rejected_for_A3",
+      "CollectorProvenanceTest.test_actual_A3_log_is_rejected_for_A2_binding",
+      "CollectorProvenanceTest.test_actual_A3_log_is_not_worker_progress",
+      "CollectorProvenanceTest.test_missing_STARTED_refuses_publication_inputs",
+      "CollectorProvenanceTest.test_progress_stream_must_belong_to_the_bound_container",
+      "CollectorProvenanceTest.test_duplicate_identical_STARTED_refuses_ambiguity",
+      "CollectorProvenanceTest.test_mixed_foreign_and_matching_STARTED_refuses_ambiguity",
+      "CollectorProvenanceTest.test_malformed_STARTED_JSON_is_rejected",
+      "CollectorProvenanceTest.test_invalid_UTF8_supervisor_has_structured_refusal",
+      "CollectorProvenanceTest.test_duplicate_JSON_keys_are_rejected",
+      "CollectorProvenanceTest.test_tampered_request_content_digest_is_rejected",
+      "CollectorProvenanceTest.test_tampered_binding_content_digest_is_rejected",
+      "CollectorProvenanceTest.test_rehashed_foreign_binding_identity_still_fails",
+      "CollectorProvenanceTest.test_missing_request_is_not_inferred_from_log",
+      "CollectorProvenanceTest.test_size_budget_rejects_input_before_parsing",
+      "CollectorProvenanceTest.test_symlink_log_is_not_an_original_capture",
+      "CollectorProvenanceTest.test_append_during_frozen_read_is_rejected",
+      "CollectorProvenanceTest.test_replacement_during_frozen_read_is_rejected",
+      "CollectorProvenanceTest.test_materialize_uses_captured_bytes_not_reopened_inputs",
+      "CollectorProvenanceTest.test_materialize_rejects_outside_owned_root",
+      "CollectorProvenanceTest.test_manually_constructed_escape_name_refuses_before_filesystem_write",
+      "CollectorProvenanceTest.test_manually_constructed_duplicate_role_refuses_before_filesystem_write",
+      "CollectorProvenanceTest.test_manually_constructed_bytes_must_match_descriptor_before_write",
+      "CollectorProvenanceTest.test_existing_packager_uses_frozen_staged_log_and_descriptor",
+      "CollectorProvenanceTest.test_actual_Git_source_derives_full206_with_explicit_subset",
+      "CollectorProvenanceTest.test_actual153_stale_nested_fc9_is_rejected_against_Git05f",
+      "CollectorProvenanceTest.test_actual_invalid_budget_macro_cannot_add_a_second_TEST",
+      "CollectorProvenanceTest.test_changed_document_claim_cannot_replace_Git_cases",
+      "CollectorProvenanceTest.test_changed_source_worktree_cannot_keep_Git_inventory",
+      "CollectorProvenanceTest.test_dirty_source_closure_is_rejected",
+      "CollectorProvenanceTest.test_source_epoch_change_during_inventory_is_rejected",
+      "CollectorProvenanceTest.test_unsupported_dialect_cannot_claim_universal_gtest_coverage",
+      "CollectorProvenanceTest.test_missing_git_blob_fails_without_lazy_fetch",
+      "CollectorProvenanceTest.test_actual_c19_preflight_keeps_planned540_actual_d920_and_compiled_null",
+      "CollectorProvenanceTest.test_actual_compiled_manifest_is_distinct_from_plan_and_not_success",
+      "CollectorProvenanceTest.test_compiled_manifest_digest_tamper_is_rejected",
+      "CollectorProvenanceTest.test_not_started_phase_refuses_any_compiled_runtime"
+    ],
+    "execution": "server_negative_37pass_1error_0skip",
+    "evidence_commit": "0c2f50da9641f6dc9d31867a617eb5766ff5996d",
+    "reason": "Unsupported TEST_P in an explicitly unselected suite rejected whole source file; original negative preserved."
+  },
+  "reviewed_boundary_corrections": [
+    "Public value object validates exact four role basenames/bytes/descriptor before any filesystem operation.",
+    "Supported invalid-budget macro definition has exactly one TEST expansion in TrainingInvalidBudget/name family.",
+    "Invalid UTF-8 supervisor log is a structured EvidenceError.",
+    "Unsupported-family refusal respects explicit selected suites; others reported outside_declared_scope without coverage claim; suites=null still rejects whole unsupported file."
+  ],
+  "source_inventory_history": [
+    {
+      "source_root": "be71018c9cb7b121f7471d4f2bc2642e56fabaa2",
+      "count": 33,
+      "ids": [
+        "CollectorProvenanceTest.test_actual_A3_binding_and_explicit_arbitrary_log_path",
+        "CollectorProvenanceTest.test_actual_90af_wrong_A2_log_is_rejected_for_A3",
+        "CollectorProvenanceTest.test_actual_A3_log_is_rejected_for_A2_binding",
+        "CollectorProvenanceTest.test_actual_A3_log_is_not_worker_progress",
+        "CollectorProvenanceTest.test_missing_STARTED_refuses_publication_inputs",
+        "CollectorProvenanceTest.test_progress_stream_must_belong_to_the_bound_container",
+        "CollectorProvenanceTest.test_duplicate_identical_STARTED_refuses_ambiguity",
+        "CollectorProvenanceTest.test_mixed_foreign_and_matching_STARTED_refuses_ambiguity",
+        "CollectorProvenanceTest.test_malformed_STARTED_JSON_is_rejected",
+        "CollectorProvenanceTest.test_duplicate_JSON_keys_are_rejected",
+        "CollectorProvenanceTest.test_tampered_request_content_digest_is_rejected",
+        "CollectorProvenanceTest.test_tampered_binding_content_digest_is_rejected",
+        "CollectorProvenanceTest.test_rehashed_foreign_binding_identity_still_fails",
+        "CollectorProvenanceTest.test_missing_request_is_not_inferred_from_log",
+        "CollectorProvenanceTest.test_size_budget_rejects_input_before_parsing",
+        "CollectorProvenanceTest.test_symlink_log_is_not_an_original_capture",
+        "CollectorProvenanceTest.test_append_during_frozen_read_is_rejected",
+        "CollectorProvenanceTest.test_replacement_during_frozen_read_is_rejected",
+        "CollectorProvenanceTest.test_materialize_uses_captured_bytes_not_reopened_inputs",
+        "CollectorProvenanceTest.test_materialize_rejects_outside_owned_root",
+        "CollectorProvenanceTest.test_existing_packager_uses_frozen_staged_log_and_descriptor",
+        "CollectorProvenanceTest.test_actual_Git_source_derives_full206_with_explicit_subset",
+        "CollectorProvenanceTest.test_actual153_stale_nested_fc9_is_rejected_against_Git05f",
+        "CollectorProvenanceTest.test_changed_document_claim_cannot_replace_Git_cases",
+        "CollectorProvenanceTest.test_changed_source_worktree_cannot_keep_Git_inventory",
+        "CollectorProvenanceTest.test_dirty_source_closure_is_rejected",
+        "CollectorProvenanceTest.test_source_epoch_change_during_inventory_is_rejected",
+        "CollectorProvenanceTest.test_unsupported_dialect_cannot_claim_universal_gtest_coverage",
+        "CollectorProvenanceTest.test_missing_git_blob_fails_without_lazy_fetch",
+        "CollectorProvenanceTest.test_actual_c19_preflight_keeps_planned540_actual_d920_and_compiled_null",
+        "CollectorProvenanceTest.test_actual_compiled_manifest_is_distinct_from_plan_and_not_success",
+        "CollectorProvenanceTest.test_compiled_manifest_digest_tamper_is_rejected",
+        "CollectorProvenanceTest.test_not_started_phase_refuses_any_compiled_runtime"
+      ],
+      "execution": "not_run",
+      "reason": "Five reviewed boundaries added; no prior runtime acceptance is changed."
+    }
+  ],
+  "runtime_verification_after_source_commit": {
+    "host": "10.245.1.17",
+    "via": "10.145.1.12",
+    "job": "s10-collector-provenance-m40-a2",
+    "unit": "timelearner-e7919177-94ca-40e9-82e0-64ecf04cec5b.service",
+    "invocation_id": "42f8256e75db44a4bf4b4f9e71e01b06",
+    "request_sha256": "8dcb866d0123663d87e0b9513f47a935504bfde9d3ec22b49e10cf049a6431f2",
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "wall_seconds": 240,
+    "passed_tests": 39,
+    "errors": 0,
+    "skipped": 0,
+    "whole_kernel_group_closed_and_lease_released": true,
+    "materialized_Scripts_files_Git_verified_before_after": 609,
+    "maintained_helper_used_after_actual_test_pass": true,
+    "frozen_staged_inputs_and_descriptor_independently_verified": true,
+    "independent_receipt_file_name": "CollectorProvenanceM40A2Verification.json",
+    "independent_receipt_sha256": "4ebd7bfafa85df85104f25a4f78c59eebb08cc10bb765bbe0b2b13a69eeb4a5e",
+    "SDK_source_build_cache_runtime_read_or_written": false,
+    "CPP_compilations_or_model_runs": 0,
+    "local_unit_or_numeric_runs": false,
+    "scientific_verdict": null
+  }
+}

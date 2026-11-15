@@ -1,0 +1,44 @@
+{
+  "kind": "independent_native_timeout_preservation_verification",
+  "schema_version": 1,
+  "status": "passed_metadata",
+  "commit": "978ca1af3e8fbc44e65e035d614a023301e468d2",
+  "original_outcome": {
+    "planned": 20,
+    "executed": 3,
+    "passed": 2,
+    "failed_ids": [
+      "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+    ],
+    "not_completed_ids": [
+      "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+      "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip",
+      "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+      "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+      "NativeObservedRequest/ClosedSessionRequiresObservedLowAndAvailableBoundary",
+      "NativeObservedRequest/ClassicConnectedMode0WarmKeepsOriginalFamily",
+      "NativeObservedRequest/ClassicConnectedMode1WarmKeepsOriginalFamily",
+      "NativeObservedRequest/BranchConnectedMode0WarmKeepsOriginalFamily",
+      "NativeObservedRequest/BranchConnectedMode1WarmKeepsOriginalFamily",
+      "NativeObservedRequest/ClassicDirectMode0WarmKeepsOriginalFamily",
+      "NativeObservedRequest/ClassicDirectMode1WarmKeepsOriginalFamily",
+      "NativeObservedRequest/BranchDirectMode0WarmKeepsOriginalFamily",
+      "NativeObservedRequest/BranchDirectMode1WarmKeepsOriginalFamily",
+      "NativeObservedRequest/ClassicConnectedPartialStopKeepsCancelledRaw",
+      "NativeObservedRequest/BranchConnectedPartialStopKeepsCancelledRaw",
+      "NativeObservedRequest/ClassicDirectPartialStopKeepsCancelledRaw",
+      "NativeObservedRequest/BranchDirectPartialStopKeepsCancelledRaw"
+    ]
+  },
+  "original_files": 198,
+  "archive_members": 201,
+  "archive_bytes": 1658968,
+  "expanded_bytes": 33366508,
+  "original_source_git_files": 4069,
+  "collector_source_git_files": 651,
+  "collection_lease": "f700b6f8-6a3e-40c0-9d81-030ef9c7efd0",
+  "collector_external_cgroup_attested": false,
+  "local_numeric_or_test_execution": false,
+  "scientific_verdict": null,
+  "reader_sha256": "6fa3d4264dc65ac535095dd2ce0446b2917d94a6008efb4dee4e6d6afb27bd59"
+}

@@ -1,0 +1,68 @@
+{
+  "kind": "timelearner_owned_python_jobs_source_preparation",
+  "schema_version": 1,
+  "base_root": "85d6ee7d577cae2efbcbd2c6c590953a879832df",
+  "source_files": {
+    "Scripts/StructTrain/TimeLearner/contained_runner.py": {
+      "sha256": "753a332bcb444c641b368be57c2a7db021a108cc85c9cc601b90001d1cc9ae07",
+      "bytes": 10032,
+      "git_blob": "f30cbca108eb00df2948404bfd1d687883bd937d"
+    },
+    "Scripts/StructTrain/TimeLearner/archive_retirement.py": {
+      "sha256": "e68fb553ebc3be22e4c4b89a2e2484d8a54cf553aa7bd6c33385718417b2d269",
+      "bytes": 11502,
+      "git_blob": "eb1b2a94e3a6d3e7b24d2027a20f148bb0f06272"
+    },
+    "Scripts/StructTrain/TimeLearner/owned_python_job.py": {
+      "sha256": "ad4b0aeba99b726d1b292c05970c4d0129324d1a9cd62ce7ac39f597eeb95b90",
+      "bytes": 21921,
+      "git_blob": "aa3961b9a85594ce3050a67409d1b2af75e6ced2"
+    },
+    "Scripts/StructTrain/TimeLearner/tests/test_owned_python_job.py": {
+      "sha256": "fd5e166f94773a80a4b97908150373bfdabacb01ac26cad964f3b01343acc8d4",
+      "bytes": 11125,
+      "git_blob": "f1787fa32aa2bee3907d4a49e48d0d8650958eb6"
+    }
+  },
+  "production_apply_plan_sha256": "3186e66808ff58f25b801db8e9cc785545eb38e0344d7b43080739031fc963a2",
+  "prepared_metadata_inventory": [
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_only_confirmed_retired_duplicate_removed_with_journal_and_retained_copy",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_changed_target_or_keeper_refused_before_any_deletion",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_missing_or_read_only_lease_cannot_delete",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_symlink_hardlink_and_thin_archive_are_not_eligible",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_plan_cannot_delete_keeper_or_escape_root",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_if_all_copies_retired_one_is_still_retained",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_reviewed_typed_request_is_preserved_without_implicit_fields",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_unknown_fields_native_actions_and_path_job_ids_refuse",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_invalid_limits_and_boolean_schema_never_clip_to_defaults",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_and_input_bindings_require_full_digest_and_absolute_path",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_validation_leases_suite_parent_as_real_directory_tree",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_callbacks_are_checked_before_any_runtime_or_output_side_effect",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_closed_observer_pipe_does_not_raise_into_execution_control",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_callable_hook_failure_stops_only_the_bound_group_and_cannot_pass",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_readbacks_parent_alias_cannot_redirect_owned_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_retained_glog_alias_is_lstat_readlink_only_even_when_dangling",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_projection_is_verified_against_exact_git_blob_bytes",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_changed_source_or_wrong_epoch_cannot_keep_projection_identity"
+  ],
+  "prepared_metadata_count": 18,
+  "metadata_runtime_acceptance": false,
+  "script143_port_source": "76ffc4c566a7c6113eb5131de398467103e320fa",
+  "script143_runtime_acceptance": false,
+  "extra13_plan_sha256": "27372841fcf86b372f9012946ae02b8a413289ede6c547bef81913b50962dfab",
+  "extra13_review_sha256": "717c5a904420632439374bbf8d77276fbab9b80044a48b10f97f1120af86ef1c",
+  "extra13_deletions_performed": false,
+  "SDK_or_scientific_attestation": false,
+  "local_checks": "AST, Git blob hashes, exact literal test inventory and diff only; no tests executed",
+  "superseded_preparation_inventory": [
+    16,
+    17
+  ],
+  "prior_attempt": {
+    "tool_root": "204ec3c00d980bedf72c704d75d541a0342fac68",
+    "job": "s10-owned-python-jobs-metadata17-m40-a1",
+    "outcome": "closed_failure_before_tests",
+    "executed_tests": 0,
+    "reason": "reservation_requires_directory_tree; suite file resource violated existing registry contract"
+  }
+}

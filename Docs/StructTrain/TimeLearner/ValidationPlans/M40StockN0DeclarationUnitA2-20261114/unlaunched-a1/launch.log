@@ -1,0 +1,25 @@
+warning: lazy fetching disabled; some objects may not be available
+fatal: could not fetch ffaf86e6d33ce18a901d396fb436d0077406467e from promisor remote
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/media/user/Data/TimeLearnerRefactor/source-stock-n0-control-a3/Scripts/StructTrain/TimeLearner/owned_python_job.py", line 427, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-stock-n0-control-a3/Scripts/StructTrain/TimeLearner/owned_python_job.py", line 420, in main
+    return (run if args.action == 'run' else _worker)(args.request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-stock-n0-control-a3/Scripts/StructTrain/TimeLearner/owned_python_job.py", line 350, in run
+    _source_snapshot(SOURCE, request['tool_commit'])
+  File "/media/user/Data/TimeLearnerRefactor/source-stock-n0-control-a3/Scripts/StructTrain/TimeLearner/owned_python_job.py", line 142, in _source_snapshot
+    not git('status', '--porcelain', '--untracked-files=all', '--ignore-submodules=all').strip(),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-stock-n0-control-a3/Scripts/StructTrain/TimeLearner/owned_python_job.py", line 139, in git
+    return subprocess.check_output(['git', '-C', str(root), *args],
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-C', '/media/user/Data/TimeLearnerRefactor/source-stock-n0-control-a3', 'status', '--porcelain', '--untracked-files=all', '--ignore-submodules=all']' returned non-zero exit status 128.

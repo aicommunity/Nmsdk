@@ -1,0 +1,64 @@
+import subprocess,json,hashlib,tarfile,io,xml.etree.ElementTree as E,struct
+repo=r'E:/Science-Repo/nmsdk-matched-witness-codec';commit='219ceb0c439ef91ce410cf564f9a1dc9f2f63364';prefix='Reports/StructTrain/TimeLearner/s05-repair17-oom-and-report11-m40-a1/'
+def git(*a,root=repo):return subprocess.check_output(['git','-C',root,*a])
+def blob(name):return git('show',commit+':'+prefix+name)
+m=json.loads(blob('capture.json'));archive=blob('primary.tar.xz')
+assert len(archive)==m['archive']['bytes'] and hashlib.sha256(archive).hexdigest()==m['archive']['sha256']
+with tarfile.open(fileobj=io.BytesIO(archive),mode='r:xz') as tar:
+ members=tar.getmembers();assert all(x.isfile() and not x.name.startswith('/') and '..' not in x.name.split('/') for x in members)
+ data={x.name:tar.extractfile(x).read() for x in members}
+assert len(data)==len(members)==len(m['original_files'])==414
+assert set(data)=={x['archive_path'] for x in m['original_files']}
+for r in m['original_files']:
+ b=data[r['archive_path']];assert len(b)==r['bytes'] and hashlib.sha256(b).hexdigest()==r['sha256']
+read=lambda k:json.loads(data[k])
+terminal=read('native-output/terminal.json');assert terminal['audited_completed_cpp_cases']==terminal['actual_audited_assertion_passed_cpp_cases']==12 and terminal['expected_cpp_cases']==17 and not terminal['cohort_assertions_passed']
+runplan=read('native-output/canonical-preparation.json')['current']['runplan'];observed=[]
+for leaf in runplan:
+ if leaf['name']=='packages-5':continue
+ xml=data['native-output/'+leaf['name']+'/native.xml'];tests=list(E.fromstring(xml).iter('testcase'))
+ ids=[t.get('classname')+'/'+t.get('name') for t in tests];assert set(ids)==set(leaf['expected_ids']) and len(set(ids))==len(ids)
+ assert all(t.get('status')=='run' and t.get('result')=='completed' and not list(t.findall('failure'))+list(t.findall('error'))+list(t.findall('skipped')) for t in tests)
+ observed+=ids
+assert set(observed)==set(m['completed_ids']) and len(set(observed))==12
+assert 'native-output/packages-5/native.xml' not in data
+p=read('native-output/packages-5/process/result.json');assert p['returncode']==-9 and p['execution']=='process_error' and p['all_processes_closed'] is True
+assert m['package_kernel']['state']['Result']=='oom-kill' and m['package_kernel']['state']['ExecMainStatus']=='9' and 'MemoryPeak=4294967296' in m['kernel_memory_readback']
+assert m['outer_capture_cgroup_attested'] is False and all(x['state']=='released' for x in m['original_leases_released'])
+for role,passed,failed in [('report-a1',10,1),('report-a2',11,0)]:
+ result=read(role+'/worker/validation/result.json');assert result['executed_tests']==11 and len(result['failures'])==failed and not result['errors'] and not result['skipped']
+ assert len(set(result['expected_test_ids']))==11
+ for category in ('tool-source','validation-source','fixtures'):assert read(role+'/worker/'+category+'-before.json')==read(role+'/worker/'+category+'-after.json')
+root_commit=m['compiled_root'];root_tree=git('ls-tree',root_commit).decode();assert m['rdk']=='de4134235c0dcb8b91fd9a43b267348ad1a163ca'
+commits={'root':root_commit,'Rdk':m['rdk'],'Libraries/Nmsdk-PulseLib':m['pulse'],'Bin':'8cb6dba07b30432272984c8ce3136b48ad06f064','Libraries/Nmsdk-MotionControlLib':'85e4494e8596b0998feebff7da2f8d421a6df66f','Libraries/Rdk-HardwareLib':'de40b008e990105856726e01230dde19f42a90a9','Libraries/Rdk-CvBasicLib':'c471297811367abd348c6258bdaeaf8e1a40c7bd','Libraries/Rdk-BasicLib':'2927cad5a7456b301217b7abb228f12c9a359ea9'}
+roots={r:('E:/Science-Repo/nmsdk-git/'+r if r!='root' else repo) for r in commits};roots.update({'Rdk':'E:/Science-Repo/rdk-bounded-description-load','Libraries/Nmsdk-PulseLib':'E:/Science-Repo/pulselib-native-image-rest'})
+def check_files(root,sha,files):
+ tree={}
+ for raw in git('ls-tree','-r','-z',sha,root=root).split(b'\0'):
+  if not raw:continue
+  header,name=raw.split(b'\t',1);mode,kind,oid=header.decode().split();tree[name.decode()]={'oid':oid,'mode':mode,'kind':kind}
+ records=[]
+ for name,r in files.items():
+  row=tree[name];assert row['kind']=='blob' and row['oid']==r['git_blob']
+  if 'git_mode' in r:assert row['mode']==r['git_mode']
+  records.append(r)
+ raw=subprocess.check_output(['git','-C',root,'cat-file','--batch'],input=('\n'.join(x['git_blob'] for x in records)+'\n').encode());offset=0
+ for r in records:
+  end=raw.index(b'\n',offset);oid,kind,size=raw[offset:end].decode().split();n=int(size);b=raw[end+1:end+1+n]
+  assert oid==r['git_blob'] and kind=='blob' and n==r['bytes'] and hashlib.sha256(b).hexdigest()==r['sha256'];offset=end+2+n
+ assert offset==len(raw)
+ return len(records)
+namespace=read('native-controls/namespace.json');groups={r:{} for r in commits}
+for name,r in namespace.items():
+ role=next((x for x in sorted(commits,key=len,reverse=True) if x!='root' and name.startswith(x+'/')),'root');groups[role][name if role=='root' else name[len(role)+1:]]=r
+assert sum(check_files(roots[r],commits[r],files) for r,files in groups.items())==4074
+source_checks={}
+for label,key in [('reader','report-a2/worker/validation-source-before.json'),('runner','report-a2/worker/tool-source-before.json')]:
+ snapshot=read(key);source_checks[label]=check_files(repo,snapshot['root_commit'],snapshot['files'])
+figures=[]
+for f in m['selected_pngs']:
+ b=blob(f['path']);assert len(b)==f['bytes'] and hashlib.sha256(b).hexdigest()==f['sha256'];assert b[:8]==b'\x89PNG\r\n\x1a\n';size=struct.unpack('>II',b[16:24]);assert size==(1920,960);figures.append(dict(path=f['path'],size=size))
+assert len(figures)==2 and len(m['full_png_cache_retained'])==44
+expected={'primary.tar.xz','capture.json','capture-producer.py.txt',*[x['path'] for x in m['selected_pngs']]}
+changes=git('diff-tree','--no-commit-id','--name-status','-r',commit).decode().splitlines();assert set(changes)=={'A\t'+prefix+x for x in expected}
+print(json.dumps(dict(kind='independent_repair17_oom_and_report11_check',schema_version=1,commit=commit,members=414,archive_bytes=len(archive),native_completed=12,native_planned=17,package_outcome='OOM; missing final JUnit; no package PASS',reader_a1='10 PASS /1 missing-matplotlib failure',reader_a2='11 PASS',compiled_source_files=4074,script_sources=source_checks,selected_figures=figures,full_png_cache_only=44,outer_capture_cgroup_attested=False,numerical_runtime_executed_locally=False,scientific_verdict=None),indent=2))

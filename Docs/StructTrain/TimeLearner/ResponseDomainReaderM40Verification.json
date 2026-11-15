@@ -1,0 +1,29 @@
+{
+  "kind": "independent_response_domain_reader_unit_verification",
+  "evidence_commit": "b07c853b84873791d05a3cb87f149492a4839ecd",
+  "tool_root": "b22e3e443753bca3aa856b19a0e6948d28823b50",
+  "archive_members_verified": 23,
+  "archive_bytes": 29892,
+  "archive_sha256": "d875d9c930779fa90c5403d85eee55c9a97c7d6c1557aa03fcf3ef2d6811f562",
+  "checks_passed": 12,
+  "test_method_ids_verified_against_source": [
+    "test_complete_schema2_and3_are_diagnostic_only",
+    "test_local_maximum_is_not_replaced_by_higher_full_maximum",
+    "test_reproduced_legacy_invalid_window_does_not_erase_complete_waveform",
+    "test_foreign_or_changed_csv_is_not_accepted_by_recorded_clear_analysis",
+    "test_changed_measured_maximum_plateau_or_association_is_rejected",
+    "test_channel_mapping_and_missing_competitor_are_rejected",
+    "test_event_and_revision_changes_are_rejected",
+    "test_nonfinite_and_false_certificate_claim_are_rejected",
+    "test_unknown_integrity_reason_and_stale_native_peak_are_rejected",
+    "test_unknown_source_and_schema_fail_closed",
+    "test_complete_graph_detects_shared_maximum",
+    "test_file_entrypoint_binds_safe_relative_primary"
+  ],
+  "source_files_matched_git": 467,
+  "all_groups_closed_and_lease_released": true,
+  "cross_language_primary_packets_checked": false,
+  "training_certificate_eligible": false,
+  "numerical_tests_executed_locally": false,
+  "whole_plan_complete": false
+}

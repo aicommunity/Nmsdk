@@ -1,0 +1,113 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "1f3e9824-932d-43c9-8d63-4fe4a1f5fed3",
+  "job_id": "s07-channel-observation-scope-normal-a3",
+  "recorded_unix": 1794037909.4710822,
+  "administrator": {
+    "pid": 1577938,
+    "start_ticks": "311310387",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1577955,
+    "start_ticks": "311310399",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-observation-scope-normal-a3-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "efdbfcb16e45870c3139821038968012b6e324f2fd2799962a0e64d9e452387b",
+      "unit": "timelearner-f59e3120-3067-44a8-8af9-3c8a3b12971e.service",
+      "invocation_id": "36546f138677435fabe8f0bb53a5e492",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f59e3120-3067-44a8-8af9-3c8a3b12971e.service",
+      "initial_main_pid": 1577955,
+      "initial_start_ticks": "311310399",
+      "sha256": "1c973bedb9ed6706a07fbff53992554da574bc7aa3809d9d734d3ba5ecfca76a"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-f59e3120-3067-44a8-8af9-3c8a3b12971e.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Analysis worker closed; scientific outcome remains separate.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/channel-observation-scope-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/channel-observation-scope-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/high-threshold-joint-normal-a1/Classic-threshold-training100-retry32-burst",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/high-threshold-joint-normal-a1/Classic-threshold-training100-retry32-burst"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-high-threshold-classic-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-high-threshold-classic-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-observation-scope-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-observation-scope-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-observation-scope-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-observation-scope-normal-a2"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-observation-scope-normal-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-observation-scope-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-joint-visual-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-joint-visual-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-observation-scope-a1-delivery",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-observation-scope-a1-delivery"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

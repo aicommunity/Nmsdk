@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s10-cold7-production-job22-m40-a1",
+  "package_fingerprint": "2036d524f76c11b3826be9648093638568b0b287686e4fc877fd4dfbe1a75705",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_training_job.CandidateWindowTrainingJobTest",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_training_job.CandidateWindowTrainingJobTest.test_production_train_and_preflight_validation_accept_explicit_cold7",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_training_job.CandidateWindowTrainingJobTest.test_base_versions_keep_repeats_C_history_and_search_without_changing_the_original",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_training_job.CandidateWindowTrainingJobTest.test_metadata_preflight_never_creates_training_or_live_admission_proof",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_training_job.CandidateWindowTrainingJobTest.test_missing_candidate_policy_fails_in_cold7_contract",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_training_job.CandidateWindowTrainingJobTest.test_policy_and_window_corruption_cannot_fall_back_to_legacy_validation",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_training_job.CandidateWindowTrainingJobTest.test_cold6_still_uses_its_own_contract",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_training_job.CandidateWindowTrainingJobTest.test_cold6_cannot_silently_adopt_candidate_policy2",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_training_job.CandidateWindowTrainingJobTest.test_legacy_envelopes_do_not_silently_accept_composite_measurement",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_training_job.CandidateWindowTrainingJobTest.test_unchanged_legacy_recovery_rejection_does_not_block_the_new_entry",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_each_base_is_a_private_lossless_view_and_original_identity_is_retained",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_job_preflight_keeps_original_opt_in_and_never_claims_effective_execution",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_legacy_one_through_five_cannot_silently_ignore_new_selector",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_no_schema5_recovery_or_nested_envelope_is_accepted",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_integer_valued_json_numbers_are_semantic_counts_not_boolean_flags",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_unknown_and_missing_fields_never_default_to_a_new_policy",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_native_grid_and_half_timestep_tolerance_are_not_automatically_relaxed",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_dimension_windows_and_recorder_are_explicit",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_insufficient_group_capacity_is_rejected_but_small_attempt_budget_stays_explicit",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_protocol_four_binds_topology_source_and_declared_windows",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_protocol_cannot_move_window_after_observation_or_change_method",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_named_logical_inputs_preserve_physical_ordinal_and_actual_origin",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_unsupported_stock_source_factors_are_rejected_before_train"
+  ],
+  "fixtures": {}
+}

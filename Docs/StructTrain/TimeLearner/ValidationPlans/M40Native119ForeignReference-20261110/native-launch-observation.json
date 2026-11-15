@@ -1,0 +1,75 @@
+{
+  "launch": {
+    "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-foreign-reference-normal-a1-controller",
+    "supervisor": {
+      "pid": 1500456,
+      "start_ticks": "340994811",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "scientific_verdict": null
+  },
+  "live": {
+    "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-foreign-reference-normal-a1-controller",
+    "supervisor_identity": {
+      "pid": 1500456,
+      "start_ticks": "340994811",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "supervisor_identity_known": true,
+    "supervisor_live": true,
+    "outer": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "5fa74729a0914e1a51ffc035f93e8781107848cc85aa08ffdea56b8e2d237b2d",
+        "unit": "timelearner-69057a64-b800-4149-9a85-0791a2472b46.service",
+        "invocation_id": "cf8e73ea88c64fb584b6a3f3d168915c",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-69057a64-b800-4149-9a85-0791a2472b46.service",
+        "initial_main_pid": 1506245,
+        "initial_start_ticks": "340996113",
+        "sha256": "a649615fd7f4ee69d015ceb4ddb0e6f7648ece7790d4754fcf76b1280e125ad3"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "1506245",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-69057a64-b800-4149-9a85-0791a2472b46.service",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 69057a64-b800-4149-9a85-0791a2472b46",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "cf8e73ea88c64fb584b6a3f3d168915c"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "unbound_outer_intent": false,
+    "result": null,
+    "scientific_verdict": null
+  },
+  "canonical_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-foreign-reference-canonical-normal-a1",
+  "canonical_file_hashes": {
+    "files": [
+      "native48-job.json",
+      "same-SDK-validation.json",
+      "canonical-preparation.json",
+      "owned-native-request.json"
+    ],
+    "preparation_sha256": "ccde904077f602a3edbff4335ba2c56867995bf657a1c81ab6bd3bbcfd73a7e5",
+    "job_sha256": "b42718175ac866383a568ab972dc87e81c3e86db7cca39a77c4b02e2f782b899"
+  },
+  "scientific_verdict": null
+}

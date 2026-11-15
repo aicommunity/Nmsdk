@@ -1,0 +1,81 @@
+{
+  "record": {
+    "path": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1/fixture-preparation.json",
+    "bytes": 3196,
+    "sha256": "47861beea29a81ce844094a95ce49729a15a2967fbbdc98ae4a1009dbfbf973d"
+  },
+  "state": {
+    "kind": "actual_A4_semantic7_fixture_preparation",
+    "schema_version": 1,
+    "status": "prepared_bytes_verified_tests_not_dispatched",
+    "plan_commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+    "evidence_commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "tool_source": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+    "fixture_root": "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1",
+    "plan_root": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1",
+    "tests_dispatched": false,
+    "scientific_verdict": null,
+    "registry_capacity": null,
+    "own_lease_token": "6c6b650c-a1ef-45c2-8f2d-067c9dd5c26c",
+    "allowed_write_roots": [
+      "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1",
+      "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1"
+    ],
+    "CEC_source_read_only": true,
+    "A4_original_source_runtime_untouched_by_command": true,
+    "flat_git_blob_records": {
+      "suite.json": {
+        "bytes": 1788,
+        "sha256": "11a65d8d7fdebb622f7349cbe85b88a74b8badd704e524e5fd32f6a4ba637aae"
+      },
+      "request.json": {
+        "bytes": 1055,
+        "sha256": "5b34f275517fd42f62407559da1db8f369de8087a68b9addbeddff9903d90c66"
+      },
+      "fixture-manifest.json": {
+        "bytes": 62330,
+        "sha256": "4c6fdf511166693ba427a670648fe27cf2faeda22688ca191715f8fe16530286"
+      },
+      "members.txt": {
+        "bytes": 23035,
+        "sha256": "dba4206bdd5cd4ab46903861400e525eec6c23d83e1f24f22954d82d60ece6ca"
+      },
+      "SHA256SUMS": {
+        "bytes": 19267,
+        "sha256": "d887e6604a2ae7640bf8275632ea67b2658ed96ee04f0f934d529c0d3a653fc3"
+      }
+    },
+    "archive_sha256": "15b990e1825f7aaac51dfd7a252215253a429df871c02c418ccb25cc8dc25008",
+    "fixture_fingerprint": "78f286701300c7d365e16d25bb64fca430a06b23e08b638396249a87b89056db",
+    "fixture_files": 157,
+    "fixture_bytes": 74969578,
+    "projection_allocated_bytes_including_plan": 100155392,
+    "actual_elapsed_seconds": 8.17357537895441,
+    "source_files": 632,
+    "package_fingerprint": "629bd6fe86318b5e38251ab4f822a07d01debf4c8a9ab3d88a8896c0636de20d",
+    "source_snapshot": {
+      "path": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1/fixture-prep-CEC-source-snapshot.json",
+      "bytes": 258163,
+      "sha256": "921beef0680b6468d30026e8ea38f076a9c713ded317a10e8a9e79849348e476"
+    },
+    "fixture_snapshot": {
+      "path": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1/fixture-prep-frozen-fixture-snapshot.json",
+      "bytes": 54731,
+      "sha256": "b254182e2bbc622fbb005c41020cde43b84337ae4f36519c3d8c1148ee8f67e1"
+    },
+    "tar_argv": [
+      "tar",
+      "--extract",
+      "--xz",
+      "--file=/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1/primary.tar.xz",
+      "--directory=/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1",
+      "--strip-components=4",
+      "--no-recursion",
+      "--no-same-owner",
+      "--no-same-permissions",
+      "--verbatim-files-from",
+      "--files-from=/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1/members.txt"
+    ],
+    "own_prep_lease_released": true
+  }
+}

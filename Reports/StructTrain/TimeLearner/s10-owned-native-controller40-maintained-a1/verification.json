@@ -1,0 +1,145 @@
+{
+  "kind": "closed_python_validation_collection_receipt",
+  "schema_version": 1,
+  "collection_status": "completed",
+  "collection_id": "s10-collect-owned-native-controller40-m40-a1",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "original_job_id": "s10-owned-native-controller40-m40-a1",
+  "original_gate": {
+    "gate_outcome": "passed",
+    "tests": 40,
+    "passed": 40,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "actual_log_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_boolean_budgets_and_escaping_artifact_paths_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_cache_profile_cannot_accept_prefixes_extra_flags_or_duplicate_key",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_canonical_selection_and_invocation_are_actual_data",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_configure_rejects_conflicting_canonical_paths_values_and_types",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_configure_rejects_duplicate_bare_flags_and_unsupported_types",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_duplicate_junit_case_is_not_two_observations",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_duplicate_missing_count_or_reused_leaf_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_embedded_llm_missing_declaration_rejected_before_output_creation",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_fresh_configure_materializes_profile_in_real_cmake_cache",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_identical_materialized_bytes_do_not_hide_changed_source_or_resource_commit",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_json_rejects_duplicate_nonfinite_and_aliased_job",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_llama_source_requires_canonical_existing_protected_directory",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_partial_failed_and_skipped_junit_never_fills_expected_cases",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_protected_output_is_rejected_before_creating_any_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_rehashed_inconsistent_preparation_fields_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_runtime_drift_and_unreadable_protected_path_do_not_suppress_other_captures",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_runtime_inventory_keeps_symlink_text_and_excludes_git_metadata",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_path_preflight_does_not_create_worker_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_preflight_keeps_namespace_guard_before_later_path_errors",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_stale_hash_and_preparation_pass_claim_cannot_be_used",
+      "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_unknown_profile_tokens_remain_postconditions_not_assignments",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_boolean_and_unknown_schema_are_not_v1",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_bound_input_real_bytes_and_symlink_alias",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_malformed_launch_does_not_create_controller_or_other_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_process_identity_cannot_turn_unknown_or_boolean_pid_into_closed",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_recover_cannot_treat_absent_supervisor_identity_as_dead",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_relative_or_extra_input_binding_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_replaced_identical_control_bytes_are_not_the_original_consumption_file",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_request_has_no_user_command_or_worker_module_extension",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_same_inode_rewrite_and_restore_is_still_a_consumption_change",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_short_commit_and_bad_bound_digest_fail_before_launch",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_cancel_request_closes_owned_unit_without_restart",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_exit_zero_closes_outer_before_exact_worker_lease_release",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_nested_child_closes_before_worker_lease_release",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_unbound_child_intent_adopted_only_after_dead_worker",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_whole_deadline_closes_owned_unit_without_success",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_observer_broken_pipe_cannot_abort_actual_unit_cleanup",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_partial_final_request_holds_lease_and_does_not_invent_child_closure",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_started_receipt_fault_still_closes_actual_outer_and_holds_lease"
+    ],
+    "kernel_closure_attested": false,
+    "scientific_verdict": null
+  },
+  "manifest_sha256": "19a5e38c6019e68c7337dc11ac073464572219d21387098d9495275aa88011cb",
+  "artifact_hashes": {
+    "packed/primary.tar.xz": "e50f1b2098bcff36477faf1781c2c6c89816e0e67bec32db193bb38ada8f4d40",
+    "packed/bundle.json": "89bf210feae0db50578096ea2a885c6f11e9cd0cd57826624068b6f3f14d19a3",
+    "capture-proof.json": "532b9f1244c4bbb13ac8a43116ee998ad50d47473adc981474cb07665af075c1"
+  },
+  "collection_released_lease": {
+    "token": "f5f1c2e0-5af2-47cb-9858-b5aece25e963",
+    "job_id": "s10-collect-owned-native-controller40-m40-a1",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 1436440,
+      "start_ticks": "329978905",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/observation-owned-native-controller40-git-e682-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-actual40-negative73-collection-m40-a1/Docs/StructTrain/TimeLearner",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-actual40-negative73-collection-m40-a1/Docs/StructTrain/TimeLearner"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-owned-native-controller40-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-owned-native-controller40-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/cmake",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/cmake"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/kernel-output",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/kernel-output"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-owned-native-controller40-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-owned-native-controller40-m40-a1"
+      }
+    ],
+    "state": "released",
+    "created": 1794224621.2021759,
+    "deadline": 1794224751.2276132,
+    "updated": 1794224637.17339,
+    "release_note": "Closed Python validation metadata collected or failed; original job never launched/stopped/recovered by collector.",
+    "heartbeat_expired": false,
+    "owner_status": "identity_live",
+    "inspection_required": false,
+    "scientific_verdict": null
+  },
+  "nested_kernel_closure_attested": false,
+  "scientific_verdict": null
+}

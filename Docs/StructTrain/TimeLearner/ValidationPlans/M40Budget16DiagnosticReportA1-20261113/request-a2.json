@@ -1,0 +1,34 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-budget16-diagnostic-report-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "c97ff92cc0b7cb11e714133e6342d16a35aaf01c",
+  "limits": {
+    "memory_bytes": 6442450944,
+    "tasks": 64,
+    "maximum_wall_seconds": 21600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 8589934592
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-declared-diagnostic-report-a1",
+      "commit": "ba18ca2276008f3b5f35e5bcc6e76ea0cf42cd54"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/budget16-diagnostic-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Budget16DiagnosticReportA1-20261113/suite.json",
+      "sha256": "5a020d5b5072bee735bec82d778ea8ae0fcc45e75a750ebcf572b1250b7b0650"
+    },
+    "fixtures": {
+      "TIMELEARNER_RECORDED_MATRIX_PRIMARY": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-frozen-diagnostic8-m40-a1",
+      "TIMELEARNER_RECORDED_MATRIX_CONTROLLER": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-frozen-diagnostic8-m40-a1-controller",
+      "TIMELEARNER_RECORDED_MATRIX_RUNTIME": "/media/user/Data/TimeLearnerRefactor/publications/data-sdk-budget16-diagnostic-inputs-a1",
+      "TIMELEARNER_RECORDED_MATRIX_EXPECTATIONS": "/media/user/Data/TimeLearnerRefactor/requests/budget16-diagnostic-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Budget16DiagnosticReportA1-20261113/expectations"
+    }
+  }
+}

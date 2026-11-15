@@ -1,0 +1,2373 @@
+{
+  "kind": "candidate_recovery_api_corpus",
+  "schema_version": 1,
+  "cases": [
+    {
+      "name": "base1-completed-Classic-N0",
+      "package": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_learned_state.json",
+      "configuration_schema": 1,
+      "kind": "timelearner_completed_state",
+      "branch": false,
+      "normalization": "N0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb"
+    },
+    {
+      "name": "base1-completed-Classic-N1",
+      "package": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_learned_state.json",
+      "configuration_schema": 1,
+      "kind": "timelearner_completed_state",
+      "branch": false,
+      "normalization": "N1",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b"
+    },
+    {
+      "name": "base1-completed-Branch-N0",
+      "package": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_learned_state.json",
+      "configuration_schema": 1,
+      "kind": "timelearner_completed_state",
+      "branch": true,
+      "normalization": "N0",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b"
+    },
+    {
+      "name": "base1-completed-Branch-N1",
+      "package": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_learned_state.json",
+      "configuration_schema": 1,
+      "kind": "timelearner_completed_state",
+      "branch": true,
+      "normalization": "N1",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb"
+    },
+    {
+      "name": "base1-stopped-Classic-N0",
+      "package": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_state.json",
+      "configuration_schema": 1,
+      "kind": "timelearner_stopped_state",
+      "branch": false,
+      "normalization": "N0",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b"
+    },
+    {
+      "name": "base1-stopped-Classic-N1",
+      "package": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_learned_state.json",
+      "configuration_schema": 1,
+      "kind": "timelearner_stopped_state",
+      "branch": false,
+      "normalization": "N1",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b"
+    },
+    {
+      "name": "base1-stopped-Branch-N0",
+      "package": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_state.json",
+      "configuration_schema": 1,
+      "kind": "timelearner_stopped_state",
+      "branch": true,
+      "normalization": "N0",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b"
+    },
+    {
+      "name": "base1-stopped-Branch-N1",
+      "package": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_learned_state.json",
+      "configuration_schema": 1,
+      "kind": "timelearner_stopped_state",
+      "branch": true,
+      "normalization": "N1",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b"
+    },
+    {
+      "name": "base2-stopped-Classic-N0",
+      "package": "cases/base2-stopped-Classic-N0/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_state.json",
+      "configuration_schema": 2,
+      "kind": "timelearner_stopped_state",
+      "branch": false,
+      "normalization": "N0",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b"
+    },
+    {
+      "name": "base2-stopped-Branch-N0",
+      "package": "cases/base2-stopped-Branch-N0/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_state.json",
+      "configuration_schema": 2,
+      "kind": "timelearner_stopped_state",
+      "branch": true,
+      "normalization": "N0",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b"
+    },
+    {
+      "name": "base3-completed-Classic-N0",
+      "package": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "configuration_schema": 3,
+      "kind": "timelearner_completed_state",
+      "branch": false,
+      "normalization": "N0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb"
+    },
+    {
+      "name": "base3-completed-Classic-N1",
+      "package": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "configuration_schema": 3,
+      "kind": "timelearner_completed_state",
+      "branch": false,
+      "normalization": "N1",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb"
+    },
+    {
+      "name": "base3-completed-Branch-N0",
+      "package": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "configuration_schema": 3,
+      "kind": "timelearner_completed_state",
+      "branch": true,
+      "normalization": "N0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb"
+    },
+    {
+      "name": "base3-completed-Branch-N1",
+      "package": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "configuration_schema": 3,
+      "kind": "timelearner_completed_state",
+      "branch": true,
+      "normalization": "N1",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb"
+    },
+    {
+      "name": "base4-completed-Classic-N0",
+      "package": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "configuration_schema": 4,
+      "kind": "timelearner_completed_state",
+      "branch": false,
+      "normalization": "N0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb"
+    },
+    {
+      "name": "base4-completed-Classic-N1",
+      "package": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "configuration_schema": 4,
+      "kind": "timelearner_completed_state",
+      "branch": false,
+      "normalization": "N1",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb"
+    },
+    {
+      "name": "base4-completed-Branch-N0",
+      "package": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "configuration_schema": 4,
+      "kind": "timelearner_completed_state",
+      "branch": true,
+      "normalization": "N0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb"
+    },
+    {
+      "name": "base4-completed-Branch-N1",
+      "package": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "configuration_schema": 4,
+      "kind": "timelearner_completed_state",
+      "branch": true,
+      "normalization": "N1",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb"
+    }
+  ],
+  "files": [
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_learned_state.json",
+      "bytes": 1261226,
+      "sha256": "afabfc59a519ccce56e977d2b5e6e46fca0659450846fe5fc94535e968c013ae",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_learned_state.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_learned_summary.json",
+      "bytes": 6459,
+      "sha256": "1b10bc0ebc2e4af1435e27ba86fffa004062eca8ca644c6f7c336e011ed16181",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_learned_summary.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_1.csv",
+      "bytes": 22716,
+      "sha256": "42a701c37fb392526166d35fd3931d29c56a65c714b2fe38117778da4e51b48b",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_1.json",
+      "bytes": 6050,
+      "sha256": "acfbc28037a8bf2d53e982b545798753a44247d2c7388ba44aaaa14f4d5df1df",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_1.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_2.csv",
+      "bytes": 22705,
+      "sha256": "e8aa89815ce09b4544a16d057535dd42ddf17a46ad79b895a0f53ff3bdf365e0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_2.json",
+      "bytes": 6071,
+      "sha256": "d4ba1202f14144e7d3c4e67899a8f0656efeb11c28e9e98ba8ca332aaf88dc39",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_2.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_3.csv",
+      "bytes": 22694,
+      "sha256": "4ed10ab71a13232e99c2a272e0d9a06fb4657efdf51efbe27a226ba2ee2244d1",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_3.json",
+      "bytes": 6026,
+      "sha256": "cb629edbb08b82b33df46e50867f417d06ff08c59d24f0b742f3c8fedeee1e3b",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_3.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_4.csv",
+      "bytes": 22694,
+      "sha256": "05f0b4220b70914b79bfa9b00fed6e1a66aa007edd5a1448f1812317811e8457",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_4.json",
+      "bytes": 6024,
+      "sha256": "7ea21d1e5d1b59a8da9d9385b02990ab5cc28d08722fbafe3142d4a6f5076fbd",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_4.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_5.csv",
+      "bytes": 22694,
+      "sha256": "a37572b9befc9bc45903ee2cbf860575b3b73b5738ac3825307507f7b6accea2",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_5.json",
+      "bytes": 6083,
+      "sha256": "5149587d229cdc795967c4bf7d1b4d9a29147e053d1bc9d68dc3dbdd1ff84122",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_5.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_6.csv",
+      "bytes": 22694,
+      "sha256": "b941363160fa7a0d43454f4bd0c502be01f351936a393c5ccdfec883d334bc5d",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_6.json",
+      "bytes": 6062,
+      "sha256": "edd969401bd9ad9601e690321c24b4c179614d6630536907c10f76c428550ca5",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_state_trial_6.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_learned_state.json",
+      "bytes": 1255176,
+      "sha256": "7f1d12440013f44cde73924a09159e7609399d7611ebecfd60308dc94d325fb0",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_learned_state.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_learned_summary.json",
+      "bytes": 6276,
+      "sha256": "5da10e0f19c663ab91e80f43b25aa021f5cbcb1ec4aa7e02045afd5de91c8989",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_learned_summary.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_1.csv",
+      "bytes": 21800,
+      "sha256": "cdb50980a9b76722670c5f1fd7ab7791920302e3f04715428077e9857e12dfed",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_1.json",
+      "bytes": 5969,
+      "sha256": "97223be061a884bf40b2553fe05dc6bec4a3c5ed712b9eb8f97ac11319763aa3",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_1.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_2.csv",
+      "bytes": 21791,
+      "sha256": "c0c0d82c99e52da58ac19d07b1319b56c834dc2c148fcdd7ad55b625d12d8429",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_2.json",
+      "bytes": 5960,
+      "sha256": "86bdcc11ff3cde8478eda3b2b8a69a794e3296c35fa1108bbebc674e79eb378c",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_2.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_3.csv",
+      "bytes": 21769,
+      "sha256": "ccf7dc5cf90ee83b18761ca9ad00f19af891683f801d81690696ff1d6a2ba4eb",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_3.json",
+      "bytes": 5965,
+      "sha256": "e4138ec73a9ffac27aae82d23c1e1334fcf8834b8a40f99d2ad193f3cea90f06",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_3.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_4.csv",
+      "bytes": 21790,
+      "sha256": "2b418ecca2be78814f63a0a164c37ee997d36a72fce458ddffe18c952544d933",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_4.json",
+      "bytes": 5930,
+      "sha256": "2f742ea27875ab043e629a54fc0b2b62fd58a423a0ad6612c6d52af1b7c351f3",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_4.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_5.csv",
+      "bytes": 21802,
+      "sha256": "ae086c031139ab76284523dc2c352cd461a1736d6f401981a9a249628a80a574",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_5.json",
+      "bytes": 5976,
+      "sha256": "90899be29732cb249fc791b955c20a9bceaea406aef32b1f3dd7fa83bcf6c6f7",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_5.json"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_6.csv",
+      "bytes": 21847,
+      "sha256": "6706e1b573a74daa825f9ac0db70f4ec87530034dac89e684f77c382f92246ce",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base1-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_6.json",
+      "bytes": 5964,
+      "sha256": "8569d25fddb4dc0ddfa7f50ea0665dc57ae338e489bd5387d5424eb30b0087d3",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_state_trial_6.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_learned_state.json",
+      "bytes": 1163995,
+      "sha256": "7ed7d61f817e11544e797038e0ce0439afd2c156d64cff2e1068d2a1a0f37942",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_learned_state.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_learned_summary.json",
+      "bytes": 6255,
+      "sha256": "249053734b0a69f1263afbde89aa6beffca03674cfe9f1d17158ac10f2dd3a67",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_learned_summary.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_1.csv",
+      "bytes": 14705,
+      "sha256": "7f45f4a7f894427cc8a746337cb62d9a6898da124c3d8f89364c46646e78f761",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_1.json",
+      "bytes": 5938,
+      "sha256": "80b8ad3968518939a804f27bdd9ecffc734d2013bc6a1ebd988be49f5ecf2b71",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_1.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_2.csv",
+      "bytes": 14682,
+      "sha256": "0e8d86f6464761423e6b466247e0aa0411ab82e61e286e4d31495ae53f8f87b7",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_2.json",
+      "bytes": 5932,
+      "sha256": "c5181765f110205ac8dbae2f5e204595ec8a8990acf49a0e0801de94f4167d01",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_2.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_3.csv",
+      "bytes": 14683,
+      "sha256": "0d23232a309bc5740b5d26cde8866a45b69f98e3527d29e0afb716988974e415",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_3.json",
+      "bytes": 5920,
+      "sha256": "ab2b1f6b4e6fe7fa43e6bec4534b8639cf0779b0c0bd07cbb824de3a478d4084",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_3.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_4.csv",
+      "bytes": 14660,
+      "sha256": "bca30f158dd48df8b3fae3b65651609d15fde19cfaca430e3cb3ca78f865555a",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_4.json",
+      "bytes": 5903,
+      "sha256": "7c5c2a7638782cbe54e5188cd1791612a5ecee9631c9e74e9d902f5461e2d206",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_4.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_5.csv",
+      "bytes": 14682,
+      "sha256": "ffe027442f9c021c7d1b46de8651f9476895b9fd4af565fc5cfaa2eef5ea3eed",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_5.json",
+      "bytes": 5955,
+      "sha256": "1b0d033083f26057b84020d4a8461340724b6d3d01dc26575779ad53299e6ffc",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_5.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_6.csv",
+      "bytes": 14658,
+      "sha256": "ca77e36d129b4ef61d341166fac29915b5e9a2720413cbd17ddc8c6cf241daf3",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_6.json",
+      "bytes": 5941,
+      "sha256": "00f956cc112c096a3ad7f7ee25ec9ecb8992f95a4c5a0fb825f62f2e9207433a",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_state_trial_6.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_learned_state.json",
+      "bytes": 1172394,
+      "sha256": "19d6e51570f656481bba9844cef821647f49358c8ed53b1ba9bbe1152353804e",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_learned_state.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_learned_summary.json",
+      "bytes": 1520908,
+      "sha256": "a1158f8a6b82b7f98324fe4a7c4185e71720f41a62bdd62b42009eef83c52516",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_learned_summary.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_1.csv",
+      "bytes": 21515,
+      "sha256": "d7654da60996438ef84fd6076bb37f38791619db618d98a9924fbfba623473c0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_1.json",
+      "bytes": 6083,
+      "sha256": "4aa3ac8e112433143042a9a5c7abac2d5c089f7dd128e39bf05f67dcb0ccc647",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_1.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_10.csv",
+      "bytes": 21560,
+      "sha256": "3b79493caa813eecadb4ca7f567619f8c846c677deb911d6ff529a2ac8f77178",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_10.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_10.json",
+      "bytes": 6057,
+      "sha256": "be0ffff94ff13ace9b929745124d118112a1ac88e9628634c3cacd95c034658a",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_10.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_11.csv",
+      "bytes": 21537,
+      "sha256": "269b4d48576c8301f1aef6e837af5d40d0d13aaf5efb4e8eff49b1cbfe92d3c7",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_11.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_11.json",
+      "bytes": 6060,
+      "sha256": "9c24f6734c282bb78f6fc5dbd4f952fead04069d83dadbf0c91448f86e91e2da",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_11.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_12.csv",
+      "bytes": 21476,
+      "sha256": "2d6958329ba339b86aabb2f45314cd490f6c0409da17c631e097ec654006c47e",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_12.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_12.json",
+      "bytes": 6061,
+      "sha256": "b56f2df69d137db09ac7f925b07b3734cbae6032789d3b0d75b869eb770835b7",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_12.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_13.csv",
+      "bytes": 21548,
+      "sha256": "d02db99750f31c357d765dce4bf650b4791ad51ff63992a4aa0352e9ef8f9c71",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_13.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_13.json",
+      "bytes": 6087,
+      "sha256": "7083b65a0be2f7064388b1770da0945633b51563cfc6754ebc9cf84079629551",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_13.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_14.csv",
+      "bytes": 21542,
+      "sha256": "d0838184948c63f03c07a685b7cc5b2afa83539c208837b7eb25834d67e975a1",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_14.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_14.json",
+      "bytes": 6080,
+      "sha256": "3a110b82717bb1c87bafbac972ab8ffe97ee4deaab75fdf677d92c4e27a065b3",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_14.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_15.csv",
+      "bytes": 21592,
+      "sha256": "2c0120a1d806f9f3b791cb2b5b97c1311d32a5e737c07f3efc79b42dcbe7ff55",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_15.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_15.json",
+      "bytes": 6059,
+      "sha256": "7771f1801bf1724b6a5f19c6da271ea99a33c747db62865e657bf251ffbf6b41",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_15.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_16.csv",
+      "bytes": 21542,
+      "sha256": "727a3f0aa6bd7b077c7b669f1754d65605ec358e9c563006ec2f282983c7fe2d",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_16.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_16.json",
+      "bytes": 6085,
+      "sha256": "9e7741e2e736f7b7ca72378fe213a0d1e7757c5b661e6729031ed137fee27945",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_16.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_17.csv",
+      "bytes": 21515,
+      "sha256": "2ff3b2b3e0f0044e0c9984b09cabd831f11beac12f4d7da84b0a035c53c63755",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_17.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_17.json",
+      "bytes": 6059,
+      "sha256": "dc88bcc0d71367655c27bf43f30b14324606c98ddb2db20a1883a328a4372ac6",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_17.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_18.csv",
+      "bytes": 21478,
+      "sha256": "71b82ffd7cf2a96e4e8ee33d92453c0481ab6efaac4f24149dbf536d0ee36457",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_18.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_18.json",
+      "bytes": 6061,
+      "sha256": "20ab6c441286630fb6f14034620f26d69e00c93dd41d32659fad42807d87c310",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_18.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_19.csv",
+      "bytes": 21570,
+      "sha256": "0d08883b71ebefc5926d604eb2db272712d3db14cfc048cb294d7332ba09f166",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_19.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_19.json",
+      "bytes": 6060,
+      "sha256": "9112bff89a898393d768506bdafc2c5698974047b4d2e11e51823b6b2a3c04b1",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_19.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_2.csv",
+      "bytes": 21581,
+      "sha256": "5b3e8029ee639f9640fca0a650c8911e2403151bfcdcae209f93ec80ca45e86e",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_2.json",
+      "bytes": 6083,
+      "sha256": "03a63fa6a636f9a1c4b400259e283d825a8f9d11d5d0ba11dfb5cf9e305c96ce",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_2.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_20.csv",
+      "bytes": 21563,
+      "sha256": "88ecfce981cf67481662062f0fa527ab5f2545e29450d7f17fe75145152d4937",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_20.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_20.json",
+      "bytes": 6065,
+      "sha256": "ed2ba0be8f253965451763ee7fca521400cd52c78eac8c94243790c25eed8683",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_20.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_21.csv",
+      "bytes": 21592,
+      "sha256": "8cec382fa2d58b28f44ccd134e2ed7a5e323a89b1b25b1f664b88ea058adfd89",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_21.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_21.json",
+      "bytes": 6064,
+      "sha256": "17fb7312ab4af87b86f59b2ff6e099283833e66511a0fe5a5a60bd01a68f9aae",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_21.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_22.csv",
+      "bytes": 21540,
+      "sha256": "1043e3c8ddc7fb916a829e056ae1276a8532c3fc2250386ef99c6d70b689a6bc",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_22.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_22.json",
+      "bytes": 6061,
+      "sha256": "05bd651a6bc8aa6019226cdd285fe8f1a1c45e37fed0c4dab337c0551d0adb21",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_22.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_23.csv",
+      "bytes": 21515,
+      "sha256": "6790d399dfacf562b538fa73495af10a9b8939df6e1cce96b7c4f548449b0bec",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_23.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_23.json",
+      "bytes": 6088,
+      "sha256": "9bb5f70f4b56f3d2e4792929e7cf07b206df931a38f92fb36168812725ab2c4a",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_23.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_24.csv",
+      "bytes": 21488,
+      "sha256": "5745af5f7cdfcc5193560458304f816d0177a5d7030d52bc0ffee92c7c4dc0d8",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_24.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_24.json",
+      "bytes": 6085,
+      "sha256": "1518070a80224fa6e05bdc67b77143d4d4ff7495e67aff0a856db27ab7248acc",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_24.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_25.csv",
+      "bytes": 21592,
+      "sha256": "b76a09a2c556d3c742024958e842fa4f4360c69a7343c84fe255e29ab8fea59c",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_25.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_25.json",
+      "bytes": 6124,
+      "sha256": "3ee58cc833f61c1bc93deeca0d71706035eda8c2ed4f9a3b7ee8d64eedd0eac0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_25.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_26.csv",
+      "bytes": 21565,
+      "sha256": "0ff54c82562b5f9c37529efafec4a82f8f888c30410a9081edde5e69da9b8bbf",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_26.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_26.json",
+      "bytes": 6097,
+      "sha256": "0feb5817cee466fc5e0c692fe56381b800b902cd8f8a7442a4b03e629eafe04c",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_26.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_3.csv",
+      "bytes": 21592,
+      "sha256": "eaa082dfd150adef4aa9fb8b2a1568e0268f27978ae1d5305f9a0b0fc63b05a9",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_3.json",
+      "bytes": 6057,
+      "sha256": "5a8d871d0b5f0a547ce5cde3486d98021a8fffee83c40ce443e7f4f4572891b2",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_3.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_4.csv",
+      "bytes": 21592,
+      "sha256": "0edf9a39cb016777f342a7f5046bc6ee0b7d4f3da25ee0d08267162f847b8fcd",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_4.json",
+      "bytes": 6084,
+      "sha256": "a8201a51cc642c6168abe412f1e9283cbbe7f5912f752787ea3c7599fb82f030",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_4.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_5.csv",
+      "bytes": 21559,
+      "sha256": "018389c27ba205a5fa6e3cf2c47cf32693aa7e4c94d851bfb2ae36228ac14137",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_5.json",
+      "bytes": 6085,
+      "sha256": "ecb4b7abda3f3250c1613669c8f10e39bf76fe6652522fcf48eb91b5c80130c3",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_5.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_6.csv",
+      "bytes": 21498,
+      "sha256": "d9d9ccfdb8267df9b3c019445fca0807c6382a94cd239b61ced3025aa045af59",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_6.json",
+      "bytes": 6087,
+      "sha256": "8e33e5b24fb672f6e6507a641ef9bd5e116ddc3fa6080a0a11455f16932aafba",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_6.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_7.csv",
+      "bytes": 21526,
+      "sha256": "cb69e91186e8ca4d4d7931bc77314bfeddb81068be0c985569db4ffb5c97a42d",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_7.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_7.json",
+      "bytes": 6059,
+      "sha256": "d7a184d81b175429f175ab62c31905c47f88f7414cbb2d2915df305deae37b1b",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_7.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_8.csv",
+      "bytes": 21547,
+      "sha256": "f60ccf6ea4e955609587ccff638f7557dcb7b65fd0ff780bc08b5b0ab56199b3",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_8.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_8.json",
+      "bytes": 6061,
+      "sha256": "c4243e323835a95eb42af2c2289c8da0adcf2cbc6f68dec1d132f901c13b1bf2",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_8.json"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_9.csv",
+      "bytes": 21592,
+      "sha256": "ed578c4684012dd31789177a547a89423e35d7739a192ee31bea0a09927a2ab2",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_9.csv"
+    },
+    {
+      "path": "cases/base1-completed-Branch-N1/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_9.json",
+      "bytes": 6059,
+      "sha256": "1c564d85cb762881a8ffd1ba11bfdf7a1d002c09b619daca3264488f20b691b3",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_state_trial_9.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_state.json",
+      "bytes": 1303652,
+      "sha256": "7a67dc5da896f80329764b8f21a870a092b1e9f21c6f21e5db25e787c0a932ea",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_state.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_summary.json",
+      "bytes": 4301,
+      "sha256": "65728ee4ea786d9154c572268e2ddd1b2a2c45adfad75a0e83ff37d876899b73",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_summary.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_1.csv",
+      "bytes": 22394,
+      "sha256": "0f42e97dd632a87866d8fc6e88b363b905b32c6de1e4907c588a1874a385a546",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_1.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_1.json",
+      "bytes": 5895,
+      "sha256": "7b54a7bdf29b0d8736136d2801acd1a2d41040858a28c504920708cb2fe076cc",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_1.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_2.csv",
+      "bytes": 22396,
+      "sha256": "609010ff320b215f2758c53c1d7d18425eaff0986a9fffb543bbb412bc1aed21",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_2.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_2.json",
+      "bytes": 5858,
+      "sha256": "3d84f37390a36a0590f4dfec6a2b1965811283b5549a89df4a10d2e32ac1f9ca",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_2.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_3.csv",
+      "bytes": 22395,
+      "sha256": "7ddf0e5a8509c54dc317f3e3e1dd78f240bb159a7b77ae901abc519adae074a5",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_3.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_3.json",
+      "bytes": 5851,
+      "sha256": "74a97fe45700969207eae0286966c8217561f7eb33038c7bd2409ef0933b9c6b",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_3.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_4.csv",
+      "bytes": 22439,
+      "sha256": "900d5d5204afc0c83090e8bcb63f2e4e4dbeec92655b9d357f91b7fd0ea78f13",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_4.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_4.json",
+      "bytes": 5850,
+      "sha256": "cd2a3ab70ded33a6b90580362365a26c7f998005b0a9b693b25fb4a40a7a9c18",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_4.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_5.csv",
+      "bytes": 22410,
+      "sha256": "8bc2c2d771b68052edd31f49c26a539fcb84cd89aa0c589d29f9675865a32a9f",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_5.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N0/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_5.json",
+      "bytes": 5829,
+      "sha256": "0015a2ddc5455f376ab25ca5f78580ab7c6e44f82d686335690845053f8c0671",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0BudgetSearch_stopped_trial_5.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_learned_state.json",
+      "bytes": 1349283,
+      "sha256": "2301317305b0ec4729fd01c2df94feeaab286b862cf56630e73fcb5aa57ac562",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_learned_state.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_learned_summary.json",
+      "bytes": 819269,
+      "sha256": "b1fb3617fd47dace241331899399fc8e405d105b2e8807d47dbe6587986272f3",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_learned_summary.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_1.csv",
+      "bytes": 21803,
+      "sha256": "a8a6cb6a3652a7ec41134eca4572f8a121302b96a205aab6d9ee8d585ee83614",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_1.json",
+      "bytes": 5885,
+      "sha256": "48b0026edba1741d15e14b151724b267b2e068f111cd874f9345f0701f9d9dcc",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_1.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_10.csv",
+      "bytes": 21901,
+      "sha256": "d5b3911a791cecd0c217ab722a91b2aa8f7aae9a2fb0c41c26f633c7d8b1f3ca",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_10.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_10.json",
+      "bytes": 5867,
+      "sha256": "208cf4770b97c964020332cd36e88202f06f5cd3cd7d28649bab15ba2c7d996f",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_10.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_11.csv",
+      "bytes": 21802,
+      "sha256": "500416f23a54bac459aa1705cd9c9e991dd710f81e83057a09608bb1722e06f2",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_11.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_11.json",
+      "bytes": 5865,
+      "sha256": "f81554802aef9d9b7a83a8f3532d4c1be501b5e6f7d17a99619e12d32443d18b",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_11.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_12.csv",
+      "bytes": 21803,
+      "sha256": "2015ee4977a8c7edbc54d6c93527356911945027f9c07bfbe94e37ddc87b6aa5",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_12.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_12.json",
+      "bytes": 5852,
+      "sha256": "2016a42f450f4baa8f65fa7f63de2a77c34e51a986131dafd171dcd5c6e8bc75",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_12.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_13.csv",
+      "bytes": 21792,
+      "sha256": "e3bf204a3ad44e0034fd15addc430886705cee9bb02cdef56fa21a44d434ccb9",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_13.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_13.json",
+      "bytes": 5896,
+      "sha256": "fbf12a2dbb4bc005ed5fee58fc80da1236748eb261cff4f3502f28b63618f3a7",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_13.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_14.csv",
+      "bytes": 21765,
+      "sha256": "01e9219d8d797f3419f4bd53942519a74f4ca112b2da349c390abb3549f69ab1",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_14.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_14.json",
+      "bytes": 5909,
+      "sha256": "16c9348da30180b727586fa4e8007069451876eee77fb2a4593d34f20b27ef2b",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_14.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_2.csv",
+      "bytes": 21791,
+      "sha256": "94c945059a073c661ad4985a964e60b8d67a10ff86c6c8e7f21c3686dc966cd7",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_2.json",
+      "bytes": 5876,
+      "sha256": "36ee4189a6a0d6eaca0dece151e988e79ad597b82d6ac4cd8a022a7046532a6c",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_2.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_3.csv",
+      "bytes": 21800,
+      "sha256": "3ceb24d2782248eb2f22db8412f325032dec202fcd637aae87fb9caf84a2d221",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_3.json",
+      "bytes": 5863,
+      "sha256": "7187d239529f6420c564d8b1bce39965d60770fb673df64db2fa041d25338c14",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_3.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_4.csv",
+      "bytes": 21769,
+      "sha256": "6372b22c0f16411ce3d385b11a5aa7284f79fe0feaaf5f842e08f17eaf1cc762",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_4.json",
+      "bytes": 5850,
+      "sha256": "8d25181f2aafd7daeb5f7a6c83b7e235cd4f108e62811f2bffa6a96c1255fde5",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_4.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_5.csv",
+      "bytes": 21863,
+      "sha256": "2813ecfa58d147292938b2a5c398a4022f435b08400ae49bd648bff4cfa1743e",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_5.json",
+      "bytes": 5861,
+      "sha256": "a4d886c987b7f72f4c09365baa7c687aa252e4ddcba366a86e5d2374a6417b10",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_5.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_6.csv",
+      "bytes": 21884,
+      "sha256": "43f23ccf823525b901084cf49e7d042004454df7fe7ed6949c2131809ca4d504",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_6.json",
+      "bytes": 5857,
+      "sha256": "632082f1f9ea602a7c4733f1e24964babb6b8dad9b845d82609bc56fd38b8cdb",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_6.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_7.csv",
+      "bytes": 21788,
+      "sha256": "a17f3ec4c47e670b6e97782758f972f2cbf840f613545b1e6f63df2a3633e2d8",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_7.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_7.json",
+      "bytes": 5850,
+      "sha256": "d392fe419c7186ce0509fa596ffa28bb4a8984ffaabf42fe70f2206f78236a49",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_7.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_8.csv",
+      "bytes": 21778,
+      "sha256": "3a6fa465ec33e7f38de07a323ba37a444e0020381ebcc439d18fd55ea6840b50",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_8.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_8.json",
+      "bytes": 5863,
+      "sha256": "dc3fdde7c1559156f42339e553d17ea7db3dd03c6eb761a162eb05d738024ebd",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_8.json"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_9.csv",
+      "bytes": 21874,
+      "sha256": "96cc71379e7e10bc05bcc5675f88ef9508e2e403d50103f8f1fdbf004340b1ab",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_9.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Classic-N1/Classic_2000_N1_learned_boundary_configured_state_trial_9.json",
+      "bytes": 5852,
+      "sha256": "09f534983e7c4641524cef4871ca7fba7c8d256d1b19cbf9080923d82603f37a",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N1_learned_boundary_configured_state_trial_9.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_state.json",
+      "bytes": 1213080,
+      "sha256": "3fa319f5d8efe24b5d3afec1da6205187ee1fcf9d21f5dd18eace0727fd31708",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_state.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_summary.json",
+      "bytes": 4294,
+      "sha256": "01b94324515dbd2b19107fc738b1f99fa27d1660c3aa2eb0ee8ce7f0a6f066fe",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_summary.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_1.csv",
+      "bytes": 14744,
+      "sha256": "5a3c6d67c15ff1e7baa7393a8bf13376c9658ec33f1d798946c21874d6f8c492",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_1.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_1.json",
+      "bytes": 5858,
+      "sha256": "4d3cce5dd63112a264bbbe1f6d0aa447ed2bb99eeb9e9c478ff6b4c82571334c",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_1.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_2.csv",
+      "bytes": 14714,
+      "sha256": "34362e0ba66bb89ffdd0e547cae9ed03f9075961b28cd1508fa2c94bc444bc31",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_2.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_2.json",
+      "bytes": 5850,
+      "sha256": "1ab952d513d3a2d40f48ae2f024bb30bb2e15ba5bdb2db2eebdab482bf85ff43",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_2.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_3.csv",
+      "bytes": 14715,
+      "sha256": "9e1d369b2a45d3fe9b671310aac74c71fca7a4ccdee977131a8b21746af8c579",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_3.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_3.json",
+      "bytes": 5806,
+      "sha256": "63bf568fb4d5420225451f0d084285e2aaab4fb2da5f3ec52741e7c9e2d91e92",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_3.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_4.csv",
+      "bytes": 14684,
+      "sha256": "ccfeb502497c9feb79b0a92b2154bb65757767a89f4c7bbe617458441b9f860a",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_4.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_4.json",
+      "bytes": 5828,
+      "sha256": "7aaa1589717ae56b00795b84e3840bb89164420469f162b81b87b1fadeeb6564",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_4.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_5.csv",
+      "bytes": 14714,
+      "sha256": "78ab7b97c26b4dbc8bb6e54cbf4926a23293377725fd3a93a6d2e22ea50acb1a",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_5.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N0/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_5.json",
+      "bytes": 5819,
+      "sha256": "32cefa4b01205e970f759d31b62c36c1a83cf405739df67c27b871ea8c5e6567",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0BudgetSearch_stopped_trial_5.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_learned_state.json",
+      "bytes": 1255289,
+      "sha256": "232e87005c5a3b8c2355835efc55eeb44113ef29006a127a367cbe458c9faf95",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_learned_state.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_learned_summary.json",
+      "bytes": 595530,
+      "sha256": "4ce8868ff202bfe2927bea2af74035568a5f031c5eefd26d1b483409f220fdb8",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_learned_summary.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_1.csv",
+      "bytes": 14084,
+      "sha256": "751c10e12116f4e929180b36c3ad06046c2ba3e039513a6a3bbc9b8c87a29d0e",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_1.json",
+      "bytes": 5810,
+      "sha256": "68f178462f202be38521af7aa60debd3732346b95d6832d67d4416d59e4ec6c4",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_1.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_10.csv",
+      "bytes": 14203,
+      "sha256": "c407e042c69486be5cc61d0ad47fead0b3f24f39ddb9bbc73f7403c31bb57829",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_10.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_10.json",
+      "bytes": 5796,
+      "sha256": "5f7d36bdd0d833089e41a93b7dbe4b524b9b157a73d5b931cf696c4de36fe24a",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_10.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_11.csv",
+      "bytes": 14081,
+      "sha256": "5a8c209222be7558eb2682c1b6b74cd3214dc60e3e0b92aa5139d6b65e604806",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_11.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_11.json",
+      "bytes": 5814,
+      "sha256": "a6289747822ecb254d1f9562cea81886a957a350c73a73da6ac534f45d295460",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_11.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_12.csv",
+      "bytes": 14085,
+      "sha256": "dff6ef48e8f296d9c5c095a1b5a51892d592920ca02310bce3bf83b8731a98d5",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_12.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_12.json",
+      "bytes": 5795,
+      "sha256": "480dba2ab27904a913b3fc02ed5194f385786094defc4346153adcdbf9ed3853",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_12.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_13.csv",
+      "bytes": 14113,
+      "sha256": "e55025fa5421761e946b18b1364fcd5c6f3718b8c7372e6ed8230a58f5dc20c4",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_13.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_13.json",
+      "bytes": 5824,
+      "sha256": "a969493d1e6655b6db1ec4f63768983896908493f4bc85ca8ff4839bbfea586e",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_13.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_14.csv",
+      "bytes": 14094,
+      "sha256": "7f89936a1a936fa02e29169e709a655181bcba35530a40313ad714c4629ccac1",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_14.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_14.json",
+      "bytes": 5829,
+      "sha256": "19b033920677d2431438da285c6b239b1c725596441e9108e77d3c33f87649bf",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_14.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_2.csv",
+      "bytes": 14078,
+      "sha256": "50c8657bd792c651b3dfd743adde6c0b9ce2548dff2b45a02c6bf751e0817cab",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_2.json",
+      "bytes": 5827,
+      "sha256": "bed964aad488e0a8771a5bc11e147105b71035a182689309913a28ed1b22bbca",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_2.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_3.csv",
+      "bytes": 14115,
+      "sha256": "3c369cfbf58476b8b7a22eebdffec89060b32b20acb336add275313a0f44e676",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_3.json",
+      "bytes": 5787,
+      "sha256": "1f0f01e3e4237037cc1276e04bb789bcd085d428571c364233a831f9153d3e7a",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_3.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_4.csv",
+      "bytes": 14083,
+      "sha256": "b84a148fbc83a5165d8cc34b83e170b558e7209bcee974e9365ccd820b88f1f3",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_4.json",
+      "bytes": 5794,
+      "sha256": "76f69630b4578b31f5764ef1e68b70cfc5a2dab8a31aee4cee65df3c09478812",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_4.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_5.csv",
+      "bytes": 14105,
+      "sha256": "a28d4c1ad0ed1a7722bb3477257dc61529d27551583ae54276e6eae5d8e1d17e",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_5.json",
+      "bytes": 5788,
+      "sha256": "5af5e379df7ca2b56288c46e817059a364d817a1edaf9514256fe71e2b816cbd",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_5.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_6.csv",
+      "bytes": 14155,
+      "sha256": "ea16516d65893b33c0e8bd04bf1d978ed4c2235dcc7d18b144f8d52c10ac40a3",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_6.json",
+      "bytes": 5822,
+      "sha256": "51eac9c105916d56c85affcc68e013d0f58f49ae7209d5957ac81cb7da262e6b",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_6.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_7.csv",
+      "bytes": 14078,
+      "sha256": "03349ec30a7261b7b8c51939108e4fc9c8dac14e5f5e93c2a12e3f10ce6f211d",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_7.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_7.json",
+      "bytes": 5802,
+      "sha256": "fde470b3cba4f82545e96e6e64796086b37d63ba4481fb4bf60b5973a6fccf33",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_7.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_8.csv",
+      "bytes": 14080,
+      "sha256": "a89de3b47dfedfb675f05a87d480fb525e9ae4bff202612717b9d0fc913c283c",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_8.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_8.json",
+      "bytes": 5792,
+      "sha256": "896fb075ff8d8e1da2d5efc7ff4770c4260a0be8ec0982d4fa0d3a59cf1cf7c4",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_8.json"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_9.csv",
+      "bytes": 14116,
+      "sha256": "72b08842b8a3b32b36167ab1bfcf9a7526bc8d8c19e8a214d6723097fe94320d",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_9.csv"
+    },
+    {
+      "path": "cases/base1-stopped-Branch-N1/Branch_2000_N1_learned_boundary_state_trial_9.json",
+      "bytes": 5803,
+      "sha256": "595278549e4c8a4789e74e2bfebb8dc1c2904da83aa35eec343f62a1e086b246",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N1_learned_boundary_state_trial_9.json"
+    },
+    {
+      "path": "cases/base2-stopped-Classic-N0/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_state.json",
+      "bytes": 1264082,
+      "sha256": "f51f0c69067d3acfa89f9ef8b58866178899c360bbd93ed4e294aae040b023b2",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_state.json"
+    },
+    {
+      "path": "cases/base2-stopped-Classic-N0/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_summary.json",
+      "bytes": 5605,
+      "sha256": "f15302abe208e1538e06a161c79cbe38b34104126f5aa2302ca22795abe58a15",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_summary.json"
+    },
+    {
+      "path": "cases/base2-stopped-Classic-N0/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_1.csv",
+      "bytes": 22419,
+      "sha256": "453eac68134b34915a8b9a19ae1af68db96a476ae1cebf737e21cd4adfb5c285",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_1.csv"
+    },
+    {
+      "path": "cases/base2-stopped-Classic-N0/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_1.json",
+      "bytes": 5909,
+      "sha256": "878f20c45646ca332235009fd9c6ea8aed9f69175a5ed13daaf5f19217fa94cf",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_1.json"
+    },
+    {
+      "path": "cases/base2-stopped-Classic-N0/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_2.csv",
+      "bytes": 22453,
+      "sha256": "34b24be520a47dcf2ede746556d6c9dea9c4558d5ac7926ad029967b79b2a025",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_2.csv"
+    },
+    {
+      "path": "cases/base2-stopped-Classic-N0/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_2.json",
+      "bytes": 5896,
+      "sha256": "f23ea4238ff1948ffaf9d10b9bdfce4079405cdeeebd29012558594ffa557453",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_2.json"
+    },
+    {
+      "path": "cases/base2-stopped-Classic-N0/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_3.csv",
+      "bytes": 22450,
+      "sha256": "88343f4dbe77b66497f40f71b5c21602934f270c1d16c1fda344779ab778db13",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_3.csv"
+    },
+    {
+      "path": "cases/base2-stopped-Classic-N0/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_3.json",
+      "bytes": 5882,
+      "sha256": "a808a3f9a86d0b7feba23b74d97f3e74a4ecf730a699e5e017aad1ab1545d385",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_3.json"
+    },
+    {
+      "path": "cases/base2-stopped-Classic-N0/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_4.csv",
+      "bytes": 22441,
+      "sha256": "0aaf262c18cfd291a14e45596d95fc762b3906fa6bae537890207f5c2a0433fa",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_4.csv"
+    },
+    {
+      "path": "cases/base2-stopped-Classic-N0/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_4.json",
+      "bytes": 5879,
+      "sha256": "98073e25003dc1f8fcd380bf3c6a261be6daf1e1c440037935540750fa67cba8",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Classic_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_4.json"
+    },
+    {
+      "path": "cases/base2-stopped-Branch-N0/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_state.json",
+      "bytes": 1173360,
+      "sha256": "e1d0a812fbcaa168327d272ef4355f3950c62e6e958438b752b3df91367e8ffa",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_state.json"
+    },
+    {
+      "path": "cases/base2-stopped-Branch-N0/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_summary.json",
+      "bytes": 5596,
+      "sha256": "2a75c132f0ef7afa269ee690d3b850d987a6c645d96d8bbfdff219ff10f79acd",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_summary.json"
+    },
+    {
+      "path": "cases/base2-stopped-Branch-N0/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_1.csv",
+      "bytes": 14686,
+      "sha256": "5cd0bb9d245a087cca9e30fc6d90fbdb41649a4e19303736678234b57711c8f0",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_1.csv"
+    },
+    {
+      "path": "cases/base2-stopped-Branch-N0/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_1.json",
+      "bytes": 5888,
+      "sha256": "5f394cf849d03f3b6dface449412ef28c42455223b3a6613c81c05d511263d71",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_1.json"
+    },
+    {
+      "path": "cases/base2-stopped-Branch-N0/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_2.csv",
+      "bytes": 14714,
+      "sha256": "619cfad729ca045dcd603d4daf8c7bdeab367d119bb01c71fe4d495b913443e5",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_2.csv"
+    },
+    {
+      "path": "cases/base2-stopped-Branch-N0/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_2.json",
+      "bytes": 5856,
+      "sha256": "9b5a8b79f852b284bbf1b76a39b177a9fe15040068fcdff4e5d8d29e4d1b2158",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_2.json"
+    },
+    {
+      "path": "cases/base2-stopped-Branch-N0/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_3.csv",
+      "bytes": 14715,
+      "sha256": "5f570b1752dd4bb171952512bb87c50dd22851b5f8bdccd261b0dfdb1e2ea9dd",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_3.csv"
+    },
+    {
+      "path": "cases/base2-stopped-Branch-N0/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_3.json",
+      "bytes": 5857,
+      "sha256": "89fd42a4c1e24ef3b75d6d8506464c8a60a3453205bcb493e56006c9b5d73c81",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_3.json"
+    },
+    {
+      "path": "cases/base2-stopped-Branch-N0/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_4.csv",
+      "bytes": 14684,
+      "sha256": "69b1eb824bb676b055675a132a6253137775c7be966dab235d21c5ca306fe2b0",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_4.csv"
+    },
+    {
+      "path": "cases/base2-stopped-Branch-N0/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_4.json",
+      "bytes": 5857,
+      "sha256": "b503ab52f9398562f62b685262e730f30da4efe72a822c9ece6b3c3f05216ef1",
+      "source_evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "archive_member": "native118/native/Branch_2000_N0_stopped_N0RepeatedHalfCandidate_stopped_trial_4.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "bytes": 5000979,
+      "sha256": "95a94d5bbf92d3eb3245c7d94d2624253f0ca7dc942988f671d94d6b59afeb4c",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_summary.json",
+      "bytes": 2582733,
+      "sha256": "6cab65e39a887950e83ca425a27199b7466355105859ffd5bd45b389ca983b14",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_summary.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.csv",
+      "bytes": 22726,
+      "sha256": "dc72dae41c5a14e2fd4007d673918e02cebf3f49536aaf9742a55df6c78be2a0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.json",
+      "bytes": 6204,
+      "sha256": "2e124621db024067320756215dd485d8feded0863f6d3f3249d679d2fb1a9025",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.csv",
+      "bytes": 22726,
+      "sha256": "b701c49eebe89b8cf028534d2531a74530b23ec795133a71fc4122b94c5380a9",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.json",
+      "bytes": 6205,
+      "sha256": "40d61406230411b020383ec5762e241990276b9ebba965e155379b6377bbdc3e",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.csv",
+      "bytes": 22726,
+      "sha256": "c504c1682d5227e18f3ad3742a1661de6dea05979a7228b79880fe146ffab653",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.json",
+      "bytes": 6197,
+      "sha256": "5023a73a2b8234c85b393a612791b0e9d2ac328dba61c67c1120cd21f61b90a1",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.csv",
+      "bytes": 22704,
+      "sha256": "9cb1003a98533f0b89dfb8639fe7f8b19d847f8bc04eab02d7be8ca4dfa50308",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.json",
+      "bytes": 6178,
+      "sha256": "3ff305455c76b7d0d50cfb9092d3c888a7b76328e086022d9efe552d8d538b29",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.csv",
+      "bytes": 22704,
+      "sha256": "d2e1fa747a461e9fa7190a725ea7570141882f44747f99be544c3e45938b26ba",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.json",
+      "bytes": 6212,
+      "sha256": "f2dba50dcf4e60feefd82037cce7253fa452761547710df5ca5bc280ecd7c105",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.csv",
+      "bytes": 22704,
+      "sha256": "a27d4dcdd280abe64d5b49a9ade6b4a745fcabb12db12d2262516ef8f613d43a",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.json",
+      "bytes": 6234,
+      "sha256": "49b47f9a7e79be4b3d1a25e44c1c4a03ada7cdbc4ee543fba075774621ed3a11",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "bytes": 5001001,
+      "sha256": "77b37a7fda56f7d0b4e6b8d0d8a68f55450a6a270b0f0944cf0674a3d61e1643",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_summary.json",
+      "bytes": 2582735,
+      "sha256": "14c421d68f3d9bb0d64f0ca70506d7b970a02d2466fe2697c13b881ec7ced508",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_summary.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.csv",
+      "bytes": 22726,
+      "sha256": "a71547a61c0fcfe4a9db8ad2ffa441b27f6ce9cbb3d109399834ad6c169177e4",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.json",
+      "bytes": 6202,
+      "sha256": "cfe44a378d16991952df4782c3f670f7fe603573ace26eb9d3e7afd3d0ad4fcc",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.csv",
+      "bytes": 22737,
+      "sha256": "195cad1fb49795afe97531f01e30a1181bb51dcfd186b3fd92dd120b7fc253d0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.json",
+      "bytes": 6224,
+      "sha256": "32b5d290f9e8a1d9bfa4c5c123a17a745623554a03005ca3e331e20275b1a221",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.csv",
+      "bytes": 22726,
+      "sha256": "a9ae4b50e31d18cb5c6f5d07f09ab7d59213b52c860523dfac9b046dad8f8c05",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.json",
+      "bytes": 6178,
+      "sha256": "900e985f11cee065e3b4b8ba4ed8d66c5538e68fbbd399f32eebfa70aae0e8ff",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.csv",
+      "bytes": 22704,
+      "sha256": "a2e047c2d8b867b2db7a9555efd2537c54e0751d9a98be93f169df183c899249",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.json",
+      "bytes": 6198,
+      "sha256": "699c719fc0719ff8f149b826f8a770bcd4b016c22bb3861a126a6d4052820635",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.csv",
+      "bytes": 22704,
+      "sha256": "c7ad40d09f385b0e3afe2627bdd463f7b6dec7191a92ba079eabff9ec79b4bd8",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.json",
+      "bytes": 6235,
+      "sha256": "04dbce1145dfe4ae7737bbc1ef4bdd8263721505cabd62895e30bab48442529e",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.json"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.csv",
+      "bytes": 22704,
+      "sha256": "a0cf90659888722a48d297e5d5411025d3c51e847c110780dc39586b85b3e2ae",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base3-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.json",
+      "bytes": 6215,
+      "sha256": "7d5f9677a6c0b977891868f9b6f495dfb5b73ace62a73fb5d044d425fa6f0cd8",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "bytes": 4700716,
+      "sha256": "5e31837ca2b76f329c93eb62e8967926f76c810519c85f2d956fe6d69dcad76b",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_summary.json",
+      "bytes": 2437670,
+      "sha256": "50a47d8a7a4a2bee66cdc498002a12c8291fe15caf6f688a9696b91eafa8d564",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_summary.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.csv",
+      "bytes": 15018,
+      "sha256": "1d8926618a7dfd85ded3188c64513e6adab380a3f5c57c72ae9d1a58280b3a56",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.json",
+      "bytes": 6202,
+      "sha256": "f3ddea0a1fdc6bb4395da3b501c1f3ecd5b2d398473936c1a9eba008b452a9ab",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.csv",
+      "bytes": 15029,
+      "sha256": "1b523e81dcea4bed0223b23a35401c5377669342f7843ba3e389bfe788029e30",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.json",
+      "bytes": 6186,
+      "sha256": "3fa287cec7c831be7aff7dda332ef95b3d856e31cacba1db5a54838226ac4af4",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.csv",
+      "bytes": 15040,
+      "sha256": "514600dc84f37d9269c0399773ec6189e090234de193cdbec3f08109451824f3",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.json",
+      "bytes": 6179,
+      "sha256": "5ab20e617982526ee00a278355a04af61bee0a65bf112c004b7727a7ce240643",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.csv",
+      "bytes": 14996,
+      "sha256": "1b8fcf67253a60f9c3320e75107796f799226737a205b1fb79a9914939a1da37",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.json",
+      "bytes": 6156,
+      "sha256": "f1bb907df91ee6f93bbc0e29f5af47f49c60564d0a1de4ad6a8d6784969f78cf",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.csv",
+      "bytes": 15007,
+      "sha256": "fbb881ab40669755f0a6918f8a2bb03cbb6988a73d700efdfb5dcb5ad4b321a2",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.json",
+      "bytes": 6196,
+      "sha256": "da55530a051335c229c81b84a13ff302d1c9e396f74a1b808dfc278a2876eff4",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.csv",
+      "bytes": 14996,
+      "sha256": "cad1ddca586c00eb8c19d4e7f11986d77e3a048120942a820c04f6ebb80264c9",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.json",
+      "bytes": 6212,
+      "sha256": "4326d397bbd521de6e8c7a1a34a485f95d7e6cb460e9b3c2c0a4e9535e2f22e4",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "bytes": 4700715,
+      "sha256": "a9b1a2916f846e59e04ddab196a82c3c8b681c888f586144753ee352b473bd5e",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_summary.json",
+      "bytes": 2437672,
+      "sha256": "1fa484b9765caeb67a0d2a281bf5cd5253a6e73931dfb46fbc6808e915a8f6ef",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_summary.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.csv",
+      "bytes": 15018,
+      "sha256": "84582f635b464833e3d2934afc9d0e0c972c823e30158c176ba1140ab26bd1ba",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.json",
+      "bytes": 6180,
+      "sha256": "d7aa90a142362547e30f82ec0c066fd5c5f594838d667d5aa38b352325507f7a",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_1.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.csv",
+      "bytes": 15040,
+      "sha256": "3cbc57938ca04506e243da3b809c0931bca2a70bb87cbd1b1c891fb04d5b21c5",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.json",
+      "bytes": 6206,
+      "sha256": "2ff2ce4627e565baafe882be3c3faf68a3036b51690c7d7452c2bfc00bb143a3",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_2.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.csv",
+      "bytes": 15029,
+      "sha256": "5f803b009117bbd6e778918258e06707f8650c196ffbeb5d31c8ba65295d0272",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.json",
+      "bytes": 6160,
+      "sha256": "e98eeeefccbcbcf0575ee4dd1e8666be1fa36b22c07f26320c890f5b4d59668f",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_3.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.csv",
+      "bytes": 15007,
+      "sha256": "ab7f9e032e3b84105f8e2248f59338483482ad718a382c72ef441a9d195c5e83",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.json",
+      "bytes": 6176,
+      "sha256": "bd981c279d61fb74cd622ec1f4e26ad87f7a6610dc2770a1263c712e73cf62e6",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_4.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.csv",
+      "bytes": 15007,
+      "sha256": "b1e7f1d77338ff87766a075aa59f4a718a9b42a283e1407065d3059e1f50cce0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.json",
+      "bytes": 6216,
+      "sha256": "71238ead740f84091af1bbe8e73e681226e91e2dcd2a21a3952a0735ea8079ca",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_5.json"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.csv",
+      "bytes": 14996,
+      "sha256": "b6bc7f4d29a12cd167aabae2363937fcf32813cd03d5694f386290073df093a2",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base3-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.json",
+      "bytes": 6192,
+      "sha256": "fd6cac42458797a4f439b3fd05a4ccf1735ba4dd04421d0986a83df864c4a1dc",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_state_trial_6.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "bytes": 5008448,
+      "sha256": "062f0729d8ca475846370531c99e1b8ebe5e6b03c8b0a26a9a6a310321cd3b7e",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_summary.json",
+      "bytes": 2586190,
+      "sha256": "f7d792c9057a49d11323a73cc000908ab3c7b298d7195ed558e8965fe66a0490",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_summary.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.csv",
+      "bytes": 22726,
+      "sha256": "3ca70c694b43afda22ca54289db354d6c6cf0d15a256b569808a8a9497d45792",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.json",
+      "bytes": 6256,
+      "sha256": "486ab08f64ac3c81f4d24fd461183d41e365f35fe4b1328d25f5a0459d53dd4e",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.csv",
+      "bytes": 22726,
+      "sha256": "fcbcc41283d04daca8f6708abacc1a663a9862cceefd517f6a8aeea55c7b60be",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.json",
+      "bytes": 6237,
+      "sha256": "cf6efb55df274471c203e75606b1844794354f7368b670bcac7926eeb840fc80",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.csv",
+      "bytes": 22737,
+      "sha256": "385186c77eb6f3f6438c506e903970451ac1883537661c49eaf55b0cf88503c8",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.json",
+      "bytes": 6229,
+      "sha256": "b7b863254a1778e3b46788045621115adfa13dff4ee69ec0b4f94c2eea27fcd7",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.csv",
+      "bytes": 22715,
+      "sha256": "3ad2064c97105027471750b4a52defa8bdf3ae50c5081ba73105942738a1f10e",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.json",
+      "bytes": 6210,
+      "sha256": "aa501b78f4d338e60e01660562184a129bf8d45a7266f1f935e55a6db67730a3",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.csv",
+      "bytes": 22704,
+      "sha256": "86089e3977a0d91787645042204a592e8f575ac1a30aae0590e802da984834f2",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.json",
+      "bytes": 6244,
+      "sha256": "b685c95d6d943efa1b0bd9489a956056d5b908dc9f5c0b31a7fb417df396604e",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.csv",
+      "bytes": 22704,
+      "sha256": "250fbbd4d2a9d886636a0d9be0c29a226bad8cd5fae7e1e7f35122f865490bdc",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N0/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.json",
+      "bytes": 6265,
+      "sha256": "14ba9f739c071f6619fe216101589924c6d6c91fc751521ed1744c4ddbb6ab22",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "bytes": 5008451,
+      "sha256": "4d29ef0e873eb0aa6f0b8f1ba2326cd6a0d70e7cab125c9b1f3d754f15fbb707",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_summary.json",
+      "bytes": 2586192,
+      "sha256": "e139adce3379efee16deaafca1b53e8ef2fa819c91322123961cb73eb6edaf94",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_summary.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.csv",
+      "bytes": 22715,
+      "sha256": "04367599e5a1286c46c7792f5ab19528ebe5cf6dd616e7b71897c8ad0677a6e2",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.json",
+      "bytes": 6234,
+      "sha256": "f6cac28ff4569fd6a2fe6207b138dfe25d1b74e23002e06dc6febad6bbfc9b90",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.csv",
+      "bytes": 22737,
+      "sha256": "61e3a32c5f3331b358c80f7a664d54f23a969ef0b12176897f697c46ccf1abc8",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.json",
+      "bytes": 6256,
+      "sha256": "6d4ab72ad68bd10c1db28704d490e52a011914a1baaa889e1877c9ca2b1bab6d",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.csv",
+      "bytes": 22726,
+      "sha256": "31b7bf1d4fcd74bdefde92e785d502283084a7c286ad57d6ee833f35c923a0e4",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.json",
+      "bytes": 6210,
+      "sha256": "2f626494af4311226b0351a0273e1b481a15ee16fa60b3b8c0c2d1d54b34fb2a",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.csv",
+      "bytes": 22726,
+      "sha256": "284f5bd3ea50b8f8b6f4d9aaea2192f6dbe6ae64da93f689b52369654a83e116",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.json",
+      "bytes": 6230,
+      "sha256": "3629de93e3a049f28bc155bfe81be39cfcdbe710cc68ec4811d798099b45d1d4",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.csv",
+      "bytes": 22704,
+      "sha256": "cd1ec3e0b50f49d9ef1a5041dcc7f4889d340cec692786baa237190f83b1bd5d",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.json",
+      "bytes": 6267,
+      "sha256": "8398d5f0b737f7088ba41b797e10dc0cf7c61ce2ad531b6642b778c77a6d3a2d",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.json"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.csv",
+      "bytes": 22704,
+      "sha256": "d1996ee62a66a85155bca541c9b3d505da8cbf42a25413f609e28b270a52628e",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base4-completed-Classic-N1/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.json",
+      "bytes": 6247,
+      "sha256": "a89e5099f62089020ac472a6e4768259ba86a314ca9d8cbbfe50b7d9099e929c",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "bytes": 4707383,
+      "sha256": "23d2cbaa3226e5c8b2228501b8b10664a32ce206141958f4a3a945cd30bae0ee",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_summary.json",
+      "bytes": 2440807,
+      "sha256": "d3682c2c60f37ec13d26615418579b57f408f3e362caead3fdfefc05db0cfebe",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_summary.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.csv",
+      "bytes": 15007,
+      "sha256": "47cb9d7bf865d19385ce2ac6b02a4c2b71d8ea91e9ad7be45f2bdc1dab17faed",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.json",
+      "bytes": 6235,
+      "sha256": "782519e822d06b3d800025db92aa70da63c659cc57548d9085457d8e0f138752",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.csv",
+      "bytes": 15029,
+      "sha256": "c258ec16c77eafacea2a7864d6865812b42876845e9fe6c88ea140d455d6d482",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.json",
+      "bytes": 6218,
+      "sha256": "26a82f471b3400e4d5284e765ca27ff9437bd30b015eec43254e1874f87f3b32",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.csv",
+      "bytes": 15040,
+      "sha256": "55f3571797c75fe65aeca2dcc288e1e54fe73c3cb670da1779c2e6fad865b8cc",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.json",
+      "bytes": 6211,
+      "sha256": "3c97d34907278d3e63879b12f5e056980e3cdb5694e070918a3c0799b7e60929",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.csv",
+      "bytes": 15018,
+      "sha256": "0976747271a31ff85299bd168ee6d12734633e7d0ee47b318b7389254415ccce",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.json",
+      "bytes": 6188,
+      "sha256": "1fbf0fefc371a4795c125d440f25d8c4c288337ac253189ba575c98e5c516135",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.csv",
+      "bytes": 15007,
+      "sha256": "4b0e2b5c80352ad668101f3e1252f02c3d82f071f7310fa1033b647f4cb89e6c",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.json",
+      "bytes": 6228,
+      "sha256": "17f6661af7e7b33da7d51025fb88a88b1e8f650b62eb981579afa441effd5e01",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.csv",
+      "bytes": 14996,
+      "sha256": "61520188c65e811285ae28727b72005551642f3bd88550612b5bcc242ef59b14",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N0/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.json",
+      "bytes": 6244,
+      "sha256": "f43fd92d0b186042f3ad5a60b9155bf715a2380c812e022d637bd7dd8b14ad9b",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "bytes": 4707381,
+      "sha256": "ef3d53d448e60e1036bfd547d3671024f03e56c11ce12cb89d4f11b0b95a77c0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_summary.json",
+      "bytes": 2440809,
+      "sha256": "5f9ed88f8097aad9698fa836a30551172a2568cccb9c099d2806cc74be5b4e49",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_summary.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.csv",
+      "bytes": 14996,
+      "sha256": "28838ec940197a50d5fd86b254ae76a54db8f37b2ea6dc0f5735389b44f624cf",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.json",
+      "bytes": 6212,
+      "sha256": "ba2c9dc25e11172cffa7921668346bec81ae8263e929bcfbd971d61363e4597f",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_1.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.csv",
+      "bytes": 15040,
+      "sha256": "a2fcbe03d1708d99ad41eb5ea01b1f8f6a9411834721d6a350931a5effe445d0",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.json",
+      "bytes": 6238,
+      "sha256": "09daced3f1102d7434826455ba57afbc75b8743b203471802449266de6198d95",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_2.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.csv",
+      "bytes": 15029,
+      "sha256": "4736205b698b2243f6fb967f7e8f46c3cb2c7c6971ff0a43e42ab03cfbac6cb3",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.json",
+      "bytes": 6192,
+      "sha256": "3edb1765ca3e591b05bf037fda84f52f585b661325274b27aa3cc60ba824812b",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_3.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.csv",
+      "bytes": 15018,
+      "sha256": "ebe8f9339bf3624804a213a2dd6ab874daa24e50c1651025781797cca9b3b82d",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.json",
+      "bytes": 6208,
+      "sha256": "26126eae7ed22339b96e96693487166e5cf50c8f332eced4eb21e6d1f2de21ee",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_4.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.csv",
+      "bytes": 15018,
+      "sha256": "a8c63cb996fbf208a630dbc1abacb4f8745255fa1986137ec4aadc0fad21174d",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.json",
+      "bytes": 6248,
+      "sha256": "1a3822215a7b999336799ec14690b603f8589a4f656767a1be6854fed9055c79",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_5.json"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.csv",
+      "bytes": 14996,
+      "sha256": "dce33ccbd544d28cd61f546408d5f254286815e4ec680d86fe4efd2e4a94b6d1",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.csv"
+    },
+    {
+      "path": "cases/base4-completed-Branch-N1/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.json",
+      "bytes": 6224,
+      "sha256": "90fa955dca531648b76aa6d67ffd3cd47efc23e8336596a3e8177c3ce2005ec3",
+      "source_evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "archive_member": "native-result/native/Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_state_trial_6.json"
+    }
+  ],
+  "original_archives": [
+    {
+      "evidence_commit": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+      "report_path": "s07-candidate-recovery-journal-m40-a1",
+      "archive_bytes": 1173568,
+      "archive_sha256": "7f1121c24ef4ca8e12bc1a0d3eda37505f15d6a342c31a0b23c8ee5fe44dde1e",
+      "members_verified": 834
+    },
+    {
+      "evidence_commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+      "report_path": "s07-joint-asan44-a3",
+      "archive_bytes": 4329632,
+      "archive_sha256": "af260d751cb8bc2e16388bd36bc6d6c3b7f98d7ce837efe7ec677b9b4e6bd8d1",
+      "members_verified": 1266
+    }
+  ],
+  "selection": "exact declared18-cell data-format controls; no-trigger completed cases and two measured negative final controls",
+  "models_recalculated": false,
+  "scientific_verdict": null
+}

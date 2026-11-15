@@ -1,0 +1,87 @@
+{
+  "kind": "independent_native_last_final_reachability2_verification",
+  "evidence_commit": "b4a1bc31bdb2c2a662051329cb8d3018881819c6",
+  "source_files_Git_verified": 3687,
+  "source_repositories": [
+    {
+      "scope": "root",
+      "repository": "E:\\Science-Repo\\nmsdk-composite-cancel-delivery",
+      "commit": "f8f58334a8b203d017ada5e3d3300e6287286751",
+      "files": 968
+    },
+    {
+      "scope": "Libraries/Nmsdk-MotionControlLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "files": 93
+    },
+    {
+      "scope": "Libraries/Rdk-HardwareLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "files": 356
+    },
+    {
+      "scope": "Libraries/Rdk-CvBasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "files": 132
+    },
+    {
+      "scope": "Bin",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Bin",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    },
+    {
+      "scope": "Rdk",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    },
+    {
+      "scope": "Libraries/Nmsdk-PulseLib",
+      "repository": "E:\\Science-Repo\\pulselib-composite-cancel-delivery",
+      "commit": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+      "files": 313
+    },
+    {
+      "scope": "Libraries/Rdk-BasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "files": 43
+    }
+  ],
+  "archive_members": 158,
+  "archive_bytes": 1011128,
+  "archive_sha256": "3230f8de86a4c97e2ffe300ef3710fd586d103736b3c047a758d4d0cf0a7594a",
+  "CPP_cases_passed": 2,
+  "kernel_groups_closed": 3,
+  "reservation_released": true,
+  "protected_runtimes": 4,
+  "source_inventory_derived_from_Git": true,
+  "actual_phases": [
+    {
+      "topology": "classic",
+      "primary_sha256": "ec0cbdaafc41644d9739201354383f5f592c36dd1317253b4f42a28bf51bc9a4",
+      "record_wall_max": 20.67143876105547,
+      "callback_wall_max": 21.107970003969967,
+      "groups": 6,
+      "last_final_entered": true
+    },
+    {
+      "topology": "branch",
+      "primary_sha256": "5f65757efb8782adf882a2c72c5511923e05f6336b1cf938cd5cd7cd26f8cc0d",
+      "record_wall_max": 15.673858559690416,
+      "callback_wall_max": 16.10850944602862,
+      "groups": 6,
+      "last_final_entered": true
+    }
+  ],
+  "real_clock": true,
+  "sleep": false,
+  "post_callback_deadline_tested": false,
+  "full248_accepted": false,
+  "scientific_verdict": null,
+  "local_numerical_CPP_or_unittest_execution": false
+}

@@ -1,0 +1,9 @@
+# Подготовка больших native roundtrip: ещё не выполнены
+
+После независимого DATA replay2/2 на M40 подготовлены два qCompress-совместимых cache model файла: исходные175521654/192607805 bytes превращены в24518983/25195012 bytes. Их raw SHA256 точно совпал с train_stopped_state.json из опубликованных Git primary; JSON не пересериализован. [Точные исходники/хеши/cache paths](cache-derivation.json). Это подготовка DATA, не новый native запуск.
+
+Derived .qz остаются кэшем M40 и не добавляются дубликатами в корневой Git. Уникальные primary уже доступны в ObservationDomainCombinedPrimary-M40-20261112 и ObservationDomainBranchPrimary-M40-20261112. Потребуется поддерживаемый способ воспроизвести кэш из этих Git bundles.
+
+Следующий обязательный native gate: оба настоящих N4 stopped пакета импортировать через ImportNativeLearnedState; завершить штатные Build/Init; экспортировать полную модель и summary; сравнить semantic package/physical graph/references/ledger; повторно импортировать и сравнить свежий импульсный отклик всех сом. Зафиксировать раздельные wall durations import/export/summary/publication. Сохранять InvalidObservation/BudgetExhausted и null certificate; не восстанавливать live authority/checkpoint и не начинать новое обучение. Отдельный actual before/after SDK контроль необходим до заявления об ускорении.
+
+В прежнем native_gate schema1–4 не было явного model fixture input; schema4 принадлежит Windows worker lock. Подготовлена [schema5 с явным hash-bound DATA input](../../NativeGateDataInputs.ru.md), IO/schema/legacy reader16/16 прошли на M40. В C++ подготовлены два NativeRecordedRecoveryArchive roundtrip, включаемые явным NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS=ON. Стандартный CTest не требует внешних моделей; bound cases запускаются отдельно. Затем нужна свежая SDK с адресными real-component roundtrip и сохранением36 прежних controls. Компиляция и runtime двух новых cases не выполнены. Это открытый подэтап5/8/10, не приёмка.

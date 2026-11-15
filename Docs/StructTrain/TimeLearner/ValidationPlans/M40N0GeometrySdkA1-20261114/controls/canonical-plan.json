@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1",
+    "commit": "0286ddb07064d3446dd37ce8536937d89576f345",
+    "namespace": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometrySdkA1-20261114/namespace.json",
+      "sha256": "6b10945cfc43d3aa006c84c8e3e3084eb47ea78f7ccb009bafc4b8b5a09b9553"
+    }
+  },
+  "cohort": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometrySdkA1-20261114/cohort.json",
+    "sha256": "82ab2c9e47ff09e8f81714fc9e5683b939e237805c88664be582506372e5d5d3"
+  },
+  "native_job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometrySdkA1-20261114/native-job.json",
+    "sha256": "1bbddea4f1eff0cf93387f74d71e3ce0812ebc8e54308389f473cd3766e723c7"
+  },
+  "prior_bindings": [],
+  "external_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-geometry-sdk-prepared-m40-a1",
+  "native_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+    "commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf"
+  },
+  "require_fresh_build": true
+}

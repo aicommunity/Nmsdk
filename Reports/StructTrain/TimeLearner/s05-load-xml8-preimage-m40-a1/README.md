@@ -1,0 +1,3 @@
+# Existing SDK Load/XML8: negative preimage, 2026-11-10
+
+All eight native checks executed on immutable SDK ff42/Pulse608/Rdkd6. Four passed; contradictory native/derived image XML and connected-child load at 2000/20000 Hz failed. Fresh and detached-child loads passed at both frequencies. All 41 producer files are preserved byte-for-byte, including complete contradictory archives, six load observations, native JUnit, runtime/source records, process binding, closure and released lease. No new build, training or scientific classification. The original contract17 failure remains unchanged. The native process group is closed; an outer producer cgroup is not attested.

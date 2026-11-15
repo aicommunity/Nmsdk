@@ -1,0 +1,83 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "949f2f9a9149e28ba45af95040f8f3554f4074c738f274d20af54da2f39d2803",
+      "unit": "timelearner-56451b15-0cad-402d-a109-52a6f2e148a1.service",
+      "invocation_id": "49f40c9801624acdb153a782af041fbc",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-56451b15-0cad-402d-a109-52a6f2e148a1.service",
+      "initial_main_pid": 3888972,
+      "initial_start_ticks": "353938992",
+      "sha256": "0af3b60dd617f4730032f9de965283b57c8761e45e904b0107fbdea2db6dcbd8"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "1073741824",
+      "TasksMax": "64",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 56451b15-0cad-402d-a109-52a6f2e148a1",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "49f40c9801624acdb153a782af041fbc"
+    },
+    "memory_max": 1073741824,
+    "tasks_max": 64,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "a9449098-4260-41b3-be2d-815a714098cb",
+      "job_id": "s10-native-data-controller18-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3888972,
+        "start_ticks": "353938992",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-data-controller18-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-data-controller18-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/native-data-controller18-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40NativeDataController18A1-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/native-data-controller18-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40NativeDataController18A1-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-data-checks-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-data-checks-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1794464192.4395835,
+      "deadline": 1794464322.4483821,
+      "updated": 1794464213.414267,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

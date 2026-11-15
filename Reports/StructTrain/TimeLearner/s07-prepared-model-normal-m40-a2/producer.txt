@@ -1,0 +1,283 @@
+from pathlib import Path
+import os, sys, json, subprocess, hashlib, threading, time, traceback, shutil, tarfile, io
+base = Path('/media/user/Data/TimeLearnerRefactor')
+root = 'c5a32b9a33ce5d5c76d2299ed44ffd4bd3edcba0'
+label = 'prepared-model-normal-a2'
+out = base / ('readbacks/s07-' + label)
+out.mkdir(exist_ok=False)
+source = base / 'source-isi-template-baseline-normal-a1'
+build = base / 'build-isi-template-baseline-normal-a1'
+runtime = base / 'runtime-prepared-model-normal-a2'
+bootstrap = base / 'source-closed-worker-recovery-a3'
+donor = base / 'source-candidate-recovery-asan19-a1'
+framework = base / 'framework-configured-probe-ownership-asan-h14'
+vendor = base / 'build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src'
+stop = threading.Event()
+thread = None
+registry = None
+token = None
+errors = []
+passed = False
+buildPassed = False
+
+def write(name, value):
+    p = out / name
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(value, indent=2, allow_nan=False) + '\n')
+
+def ticks(pid):
+    return Path('/proc', str(pid), 'stat').read_text().rsplit(') ', 1)[1].split()[19]
+
+def git(repo, *args):
+    return subprocess.check_output(['git', '-C', str(repo), *args], text=True).strip()
+
+def run(args, name):
+    if token:
+        registry.validate_paths(token)
+    assert not errors, errors
+    with (out / name).open('xb') as log:
+        p = subprocess.Popen(list(map(str, args)), stdout=log, stderr=subprocess.STDOUT)
+        write('owned-' + name + '.json', {'pid': p.pid, 'start_ticks': ticks(p.pid), 'arguments': list(map(str, args))})
+        status = p.wait()
+    assert status == 0, (name, status)
+write('owned-supervisor.json', {'pid': os.getpid(), 'start_ticks': ticks(os.getpid()), 'root': root, 'source': str(source), 'build': str(build), 'runtime': str(runtime), 'contained_supervisor': str(base / ('readbacks/s07-' + label + '-container'))})
+(out / 'producer.py').write_bytes(Path(__file__).read_bytes())
+try:
+    assert source.is_dir() and build.is_dir() and (build/'CMakeCache.txt').is_file() and not runtime.exists()
+    memory = int(next((l.split()[1] for l in Path('/proc/meminfo').read_text().splitlines() if l.startswith('MemAvailable:')))) * 1024
+    disk = shutil.disk_usage(base)
+    assert disk.free >= 24 * 1024 ** 3 and memory >= 36 * 1024 ** 3
+    write('resource-preflight.json', {'memory_available_bytes': memory, 'disk_free_bytes': disk.free, 'compiler_parallelism': 1, 'worker_memory_max_bytes': 4 * 1024 ** 3, 'worker_tasks_max': 128, 'maximum_wall_seconds': 21600, 'native_gates_disabled': False, 'minimum_available_memory_before_start': 36 * 1024 ** 3})
+    sys.path.insert(0, str(base / 'source-worker-dependency-normal-a2'))
+    from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+    registry = Reservations(base / 'resource-reservations.sqlite3')
+    reservation = registry.reserve('s07-' + label, [{'path': str(p), 'access': 'write'} for p in [out, source, build, runtime]] + [{'path': str(p), 'access': 'read'} for p in [bootstrap, donor, framework, vendor, base / 'source-worker-dependency-normal-a2', base / 'source-csearch-threshold-joint-asan-build-a1/Bin',base/'source-prepared-model-normal-a2-delivery',base/'runtime-single-pulse-native-normal-a2',base/'runtime-single-pulse-console-normal-a1',base/'readbacks/s07-prepared-model-normal-a1',base/'runtime-prepared-model-normal-a1',base/'runtime-profile-graph-import-normal-a2',base/'runtime-profile-graph-import-normal-a1',base/'runtime-inherited-feedback-normal-a1',base/'readbacks/s07-single-pulse-console-normal-a1',base/'runtime-storage-feedback-normal-a1',base/'readbacks/s07-stock-fair-domains-normal-a2',base/'source-prepared-model-PulseLib-a1-delivery']], ttl_seconds=120)
+    token = reservation['token']
+    write('reservation.json', dict(reservation, ledger_schema=1, live_K1_ledger_not_migrated=True, scope='Read/write paths only; actual memory/task cap enforced by the enclosing cgroup. Native Test/Console build; 2 fresh prepared owner functions,24 existing controls; readers13+2+2+10+2. No scientific verdict.'))
+
+    def heartbeat():
+        while not stop.wait(20):
+            try:
+                registry.heartbeat(token, ttl_seconds=120)
+                registry.validate_paths(token)
+            except BaseException as error:
+                errors.append(str(error))
+                return
+    thread = threading.Thread(target=heartbeat, daemon=True)
+    thread.start()
+    from Scripts.StructTrain.TimeLearner.contained_process import inspect as inspect_contained
+    from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+    prior=base/'readbacks/s07-prepared-model-normal-a1'
+    prior_state=inspect_worker_dependency(Path(str(prior)+'-container'),registry,prior.name)
+    assert prior_state['state']=='ready' and prior_state['reservation_state']=='released',prior_state
+    assert json.loads((prior/'terminal.json').read_text())=={'build_passed': False, 'native_gates_executed': False, 'prepared_owner_scoped_acceptance_passed': False, 'scientific_verdict': None, 'whole_plan_complete': False}
+    old='122a3aea6d11960eec307aec9d74c243a30a3183'
+    assert git(source,'rev-parse','HEAD')==old and not git(source,'status','--porcelain','--untracked-files=no')
+    incoming=base/'source-prepared-model-normal-a2-delivery'
+    assert git(incoming,'rev-parse','HEAD')==root
+    old_runtime=base/'runtime-single-pulse-console-normal-a1'
+    def runtime_records(directory=old_runtime):
+        records={}
+        for p in directory.rglob('*'):
+            if p.is_symlink():
+                target=p.resolve(strict=True)
+                assert not target.is_relative_to(build.resolve()) and not target.is_relative_to(source.resolve()),('mutable_runtime_symlink',str(p))
+            if p.is_file():
+                assert p.is_symlink() or p.stat().st_nlink==1,('shared_runtime_inode',str(p))
+                records[p.relative_to(directory).as_posix()]={'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'symlink':os.readlink(p) if p.is_symlink() else None}
+        return records
+    old_runtime_records=runtime_records()
+    assert (old_runtime/'NeuroModelerConsole').is_file() and old_runtime_records
+    write('previous-runtime-frozen-files.json',old_runtime_records)
+    accepted_runtime=base/'runtime-single-pulse-native-normal-a2';accepted_runtime_records=runtime_records(accepted_runtime)
+    write('accepted-runtime-frozen-files.json',accepted_runtime_records)
+    profile_previous_runtime=base/'runtime-storage-feedback-normal-a1';profile_previous_records=runtime_records(profile_previous_runtime)
+    write('profile-previous-runtime-frozen-files.json',profile_previous_records)
+    previous_import_runtime=base/'runtime-inherited-feedback-normal-a1';previous_import_records=runtime_records(previous_import_runtime)
+    write('inherited-previous-runtime-frozen-files.json',previous_import_records)
+    failed_previous_runtime=base/'runtime-profile-graph-import-normal-a1';failed_previous_records=runtime_records(failed_previous_runtime)
+    write('failed-previous-runtime-frozen-files.json',failed_previous_records)
+    installed_previous_runtime=base/'runtime-profile-graph-import-normal-a2';installed_previous_records=runtime_records(installed_previous_runtime)
+    write('profile-import-previous-runtime-frozen-files.json',installed_previous_records)
+    prepared_previous_runtime=base/'runtime-prepared-model-normal-a1';prepared_previous_records=runtime_records(prepared_previous_runtime)
+    write('prepared-failed-runtime-frozen-files.json',prepared_previous_records)
+    (out/'previous-CMakeCache.txt').write_bytes((build/'CMakeCache.txt').read_bytes())
+    assert 'CMAKE_HOME_DIRECTORY:INTERNAL='+str(source) in (build/'CMakeCache.txt').read_text()
+    packs=list((incoming/'.git/objects/pack').glob('*.pack'))
+    assert len(packs)==1
+    packet=packs[0]
+    assert hashlib.sha256(packet.read_bytes()).hexdigest()=='07d1aa5a71390e8d9ca1341a669b02e681292de4e0d7592db948f7bdb7280762'
+    with packet.open('rb') as stream:
+        subprocess.run(['git','-C',str(source),'index-pack','--stdin','--promisor'],stdin=stream,stdout=subprocess.PIPE,check=True)
+    shallow=source/'.git/shallow'
+    boundaries=set(shallow.read_text().splitlines());boundaries.add(root)
+    shallow.write_text('\n'.join(sorted(boundaries))+'\n')
+    assert git(source,'rev-parse',root+'^{commit}')==root
+    write('snapshot-packet-import.json',{'source':str(incoming),'packet_sha256':hashlib.sha256(packet.read_bytes()).hexdigest(),'root':root,'all_provided_code_objects_indexed_with_native_Git':True,'previous_shallow_boundaries_retained':old in boundaries,'missing_report_blobs_intentionally_not_requested':True})
+    changed=git(source,'diff','--name-only',old,root,'--','App','Libraries','Rdk','Tests','CMakeLists.txt','.gitmodules').splitlines()
+    assert set(changed)=={'Tests/Integration/Libraries/Test_PulseLib_PreparedModel.cpp'},changed
+    registry.validate_paths(token)
+    subprocess.run(['git','-C',str(source),'-c','submodule.recurse=false','checkout','--detach',root],check=True)
+    pulse=source/'Libraries/Nmsdk-PulseLib';new_pulse='2726bdff6d9ac3bff424429a809ce39d669da10d'
+    assert git(pulse,'rev-parse','HEAD')==new_pulse and not git(pulse,'status','--porcelain','--untracked-files=no')
+    write('unchanged-PulseLib-source.json',{'HEAD':new_pulse,'Core_tree':git(pulse,'rev-parse','HEAD:Core'),'runtime_acceptance_claimed':False,'native_source_not_mutated':True})
+    write('storage-feedback-source-binding.json',{'baseline_root':old,'new_root':root,'PulseLib':new_pulse,'changed_native_CPP_files':changed,'native_snapshot_import':True,'separate_runtime':True,'scientific_stock_models_modified':False})
+    write('inactive-source-cache-reuse.json',{'previous_root':old,'new_root':root,'source':str(source),'build_cache':str(build),'prior_closed_released':prior_state,'changed_native_CPP_files':changed,'old_runtime':str(old_runtime),'new_runtime':str(runtime),'old_runtime_bytes_protected':True})
+    write('matched-original-native-closure.json', prior_state)
+    assert git(donor, 'rev-parse', 'HEAD') == 'd8d738751fa12358a4c9a5a89306480261e76247'
+    assert git(source, 'rev-parse', 'HEAD') == root
+    children = {}
+    for line in git(source, 'config', '-f', '.gitmodules', '--get-regexp', '^submodule.*.path$').splitlines():
+        key, path = line.split(None, 1)
+        wanted = git(source, 'rev-parse', 'HEAD:' + path)
+        destination = source / path
+        assert destination.resolve().is_relative_to(source.resolve()) and (not destination.is_symlink())
+        if not (destination / '.git').exists():
+            origin = donor / path
+            assert git(origin, 'rev-parse', 'HEAD') == wanted and (not git(origin, 'status', '--porcelain', '--untracked-files=no'))
+            assert not destination.exists() or not any(destination.iterdir()), str(destination)
+            destination.mkdir(parents=True, exist_ok=True)
+            subprocess.run(['git', 'init', '--quiet', str(destination)], check=True)
+            objects = {wanted, git(origin, 'rev-parse', wanted + '^{tree}')}
+            for entry in subprocess.check_output(['git', '-C', str(origin), 'ls-tree', '-r', '-t', '-z', wanted]).split(b'\x00'):
+                if not entry:
+                    continue
+                meta, name = entry.split(b'\t', 1)
+                mode, kind, oid = meta.split()
+                if kind == b'tree' or (kind == b'blob' and (name == b'.gitignore' if path == 'Bin' else name.split(b'/', 1)[0] not in [b'Docs', b'Reports'])):
+                    objects.add(oid.decode())
+            packet = subprocess.check_output(['git', '-C', str(origin), 'pack-objects', '--stdout'], input=('\n'.join(sorted(objects)) + '\n').encode())
+            subprocess.run(['git', '-C', str(destination), 'index-pack', '--stdin', '--promisor'], input=packet, stdout=subprocess.DEVNULL, check=True)
+            (destination / '.git/shallow').write_text(wanted + '\n')
+            for setting, value in [('core.repositoryformatversion', '1'), ('extensions.partialClone', 'origin'), ('remote.origin.promisor', 'true')]:
+                subprocess.run(['git', '-C', str(destination), 'config', setting, value], check=True)
+            subprocess.run(['git', '-C', str(destination), 'sparse-checkout', 'init', '--no-cone'], check=True)
+            subprocess.run(['git', '-C', str(destination), 'sparse-checkout', 'set', '--no-cone', *(['/.gitignore'] if path == 'Bin' else ['/*', '!/Docs/', '!/Reports/'])], check=True)
+            subprocess.run(['git', '-C', str(destination), '-c', 'submodule.recurse=false', 'checkout', '--detach', wanted], stdout=subprocess.DEVNULL, check=True)
+        assert git(destination, 'rev-parse', 'HEAD') == wanted and (not git(destination, 'status', '--porcelain', '--untracked-files=no')) and (not (destination / '.git/objects/info/alternates').exists())
+        children[path] = wanted
+    subprocess.run(['git', '-C', str(source), 'submodule', 'init'], check=True)
+    assert len(children) == 7 and (not git(source, 'status', '--porcelain', '--untracked-files=no'))
+    assert children['Libraries/Nmsdk-PulseLib'] == new_pulse
+    write('fixed-Core-tree.json',{'tree':git(pulse,'rev-parse','HEAD:Core')})
+    resources = base / 'source-csearch-threshold-joint-asan-build-a1/Bin'
+    assert git(resources, 'rev-parse', 'HEAD') == '99f58da9296a794374cef679bbb878cb62af979a'
+
+    def bin_entries(repo):
+        return {entry.split(b'\t', 1)[1].decode(): entry.split(b'\t', 1)[0].decode() for entry in subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-r', '-z', 'HEAD']).split(b'\x00') if entry}
+    old_bin = bin_entries(resources)
+    new_bin = bin_entries(source / 'Bin')
+    changed = sorted((n for n in old_bin.keys() | new_bin.keys() if old_bin.get(n) != new_bin.get(n)))
+    assert changed and all((Path(n).suffix.lower() in ['.py', '.sh', '.md'] or n in ['ClDesc/PulseLibrary/ru-RU/NNeuronTimeLearner.xml','ClDesc/PulseLibrary/ru-RU/NNeuronTimeLearnerBranch.xml'] for n in changed)), changed
+    write('shared-resource-binding.json', {'resource_root': str(resources), 'actual_resource_Bin_commit': git(resources, 'rev-parse', 'HEAD'), 'recorded_Bin_gitlink': children['Bin'], 'differing_paths': changed, 'resource_config_physics_data_unchanged': True, 'active_sdk_or_runtime_changed': False})
+    write('source-closure.json', {'root': root, 'children': children, 'clean': True, 'all_repositories_without_alternates': True, 'source_delivery': 'Native Git code packet after full closure/exclusive lease; Pulse2726bdf unchanged; corrected root fixture only; Binfc unchanged; separate runtime and prior runtime byte hashes checked'})
+    assert git(framework, 'rev-parse', 'HEAD') == '58d77fa8070e8cec2dc1ed015d66b454c8d78850' and (not git(framework, 'status', '--porcelain', '--untracked-files=no'))
+    assert git(vendor, 'rev-parse', 'HEAD') == '1971adf55e3ebbfab83771d6174d37b77c352c71' and (not git(vendor, 'status', '--porcelain', '--untracked-files=no'))
+    write('offline-vendor.json', {'path': str(vendor), 'commit': git(vendor, 'rev-parse', 'HEAD'), 'tracked_clean': True})
+    args = ['cmake', '-S', source, '-B', build, '-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DNMSDK_BUILD_PARALLEL_JOBS=1', '-DCMAKE_CXX_FLAGS_RELWITHDEBINFO=-O1 -g1', '-DBUILD_TESTING=ON', '-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON', '-DRDK_BUILD_LEGACY_ENGINE_UNIT_TESTS=OFF', '-DFETCHCONTENT_SOURCE_DIR_GOOGLETEST=' + str(framework), '-DFETCHCONTENT_UPDATES_DISCONNECTED=ON', '-DRDK_LLM_LLAMA_CPP_DIR=' + str(vendor), '-DNMSDK_DEPLOY_ROOT=' + str(runtime), '-DNMSDK_RESOURCE_ROOT=' + str(resources)]
+    os.environ['CMAKE_BUILD_PARALLEL_LEVEL'] = '1'
+    write('configure-arguments.json', {'arguments': list(map(str, args))})
+    run(args, 'configure.log')
+    run(['cmake', '--build', build, '--target', 'Test_PulseLib_StorageComponents', 'NeuroModelerConsole', '--parallel', '1'], 'build.log')
+    (out / 'CMakeCache.txt').write_bytes((build / 'CMakeCache.txt').read_bytes())
+    assert runtime_records(prepared_previous_runtime)==prepared_previous_records,'failed_prepared_runtime_changed'
+    assert runtime_records(installed_previous_runtime)==installed_previous_records,'accepted_profile_import_runtime_changed'
+    assert runtime_records(failed_previous_runtime)==failed_previous_records,'failed_previous_runtime_changed'
+    assert runtime_records(previous_import_runtime)==previous_import_records,'inherited_previous_runtime_changed'
+    assert runtime_records(profile_previous_runtime)==profile_previous_records,'profile_previous_runtime_changed'
+    assert runtime_records()==old_runtime_records, 'previous_runtime_changed'
+    assert runtime_records(accepted_runtime)==accepted_runtime_records, 'accepted_runtime_changed'
+    buildPassed = True
+    write('build-terminal.json', {'execution': 'completed', 'root': root, 'native_gates_executed': False})
+    for name in list(sys.modules):
+        if name == 'Scripts' or name.startswith('Scripts.'):
+            del sys.modules[name]
+    sys.path.insert(0, str(source))
+    os.chdir(source)
+    from Scripts.StructTrain.TimeLearner.runtime import snapshot
+    os.environ['QT_QPA_PLATFORM'] = 'offscreen'
+    os.environ['ASAN_OPTIONS'] = ''
+    os.environ['TIMELEARNER_OBSERVATION_TEST_DIR']=str(out/'observation-fixture')
+    os.environ['TIMELEARNER_PROFILE_TEST_DIR']=str(out/'profile-fixture')
+    for key in ['LD_LIBRARY_PATH', 'QT_PLUGIN_PATH']:
+        os.environ.pop(key, None)
+    write('native-runtime.json', snapshot(source, runtime / 'Test_PulseLib_StorageComponents', runtime / 'NeuroModelerConsole.ini', build / 'CMakeCache.txt'))
+    from Scripts.StructTrain.TimeLearner.native_gate import run_native_gate
+    expected = ['StorageFeedbackProfiles/AbsentGainPreservesCustomBaseAndLiveInstances', 'StorageFeedbackProfiles/UniformGainAndSeparateLtSurviveGrowthResetAndXml', 'StorageFeedbackProfiles/InvalidGainsFailBeforePublishingAnyDependency', 'StorageFeedbackProfiles/GainCollisionPreservesRegisteredAndBasePhysics', 'StorageFeedbackProfiles/ClassicNativeFeedbackDynamics', 'StorageFeedbackProfiles/BranchNativeFeedbackDynamics', 'SinglePulseCharacterization/ClassicPhysicalSizesAt2000Hz', 'SinglePulseCharacterization/BranchPhysicalSizesAt2000Hz', 'SinglePulseCharacterization/ClassicPhysicalSizesAt20000Hz', 'SinglePulseCharacterization/BranchPhysicalSizesAt20000Hz', 'SinglePulseCharacterization/ClassicRestoresBurstResponse', 'SinglePulseCharacterization/BranchRestoresBurstResponse', 'SinglePulseCharacterization/PreparedFaultRestoresBothTopologies', 'SinglePulseCharacterization/SampleFaultRestoresBothTopologies', 'SinglePulseCharacterization/FinalSampleFaultRestoresBothTopologies', 'TimeLearnerStorageProfiles/EmptyRoleOverridesPreserveLegacyClassSelection', 'TimeLearnerStorageProfiles/RoleReplacementInitializesNewChildrenAndPreservesOtherRole', 'TimeLearnerStorageProfiles/InvalidRecipesAndCollisionsDoNotChangeExistingPhysics', 'FeedbackProfileImages/PreservesCustomChildrenAndRejectsCollisions', 'FeedbackProfileImages/InvalidRequestsPublishNoImagesOrExtraLtMembrane', 'FeedbackProfileImages/ClassicNativeInheritedPhysics', 'FeedbackProfileImages/BranchNativeInheritedPhysics', 'FeedbackProfileImport/ClassicFullIndividualStateAndRoundtrip', 'FeedbackProfileImport/BranchFullIndividualStateAndRoundtrip', 'PreparedNativeModel/ClassicFreshOwnerAndRepeatedRefusal', 'PreparedNativeModel/BranchFreshOwnerAndRepeatedRefusal']
+    write('transport-gate-specification.json', {'kind': 'timelearner_native_test_gate', 'schema_version': 2, 'runtime_manifest': str(out / 'native-runtime.json'), 'source_root': str(source), 'expected_test_ids': expected, 'maximum_wall_seconds': 10800, 'asan_options': '', 'cooperative_runtime_capture': True})
+    result = run_native_gate(out / 'transport-gate-specification.json', out / 'native12')
+    write('transport-verdict.json', result)
+    assert result['execution']=='completed' and result['validity']=='valid' and result['assertion_status']=='passed' and result['inventory']['observed']==26,result
+    write('scope.json',{'native_functions':len(expected),'new_prepared_owner_functions':2,'existing_controls':24,'both_topologies':True,'physical_sizes':[1,2,4,6],'frequencies_hz':[2000,20000],'prepared_owner_normal_candidate':True,'ASan_verified':False,'second_host_verified':False,'Console_job4_runtime_retested':False,'engineering_feedback_threshold':1e-6,'scientific_verdict':None})
+    assert runtime_records(prepared_previous_runtime)==prepared_previous_records,'failed_prepared_runtime_changed'
+    assert runtime_records(installed_previous_runtime)==installed_previous_records,'accepted_profile_import_runtime_changed'
+    assert runtime_records(failed_previous_runtime)==failed_previous_records,'failed_previous_runtime_changed'
+    assert runtime_records(previous_import_runtime)==previous_import_records,'inherited_previous_runtime_changed'
+    assert runtime_records(profile_previous_runtime)==profile_previous_records,'profile_previous_runtime_changed'
+    assert runtime_records()==old_runtime_records,'previous_runtime_changed_after_tests'
+    assert runtime_records(accepted_runtime)==accepted_runtime_records,'accepted_runtime_changed_after_tests'
+    os.environ['TIMELEARNER_SINGLE_PULSE_NATIVE_CORPUS']=str(out/'native12/native')
+    import unittest
+    suite=unittest.defaultTestLoader.loadTestsFromName('Scripts.StructTrain.TimeLearner.tests.test_single_pulse_evidence.SinglePulseEvidenceTest')
+    assert suite.countTestCases()==13
+    with (out/'single-pulse-reader-tests.log').open('w') as log:readers=unittest.TextTestRunner(stream=log,verbosity=2).run(suite)
+    write('single-pulse-reader-tests.json',{'tests_run':readers.testsRun,'successful':readers.wasSuccessful(),'failures':len(readers.failures),'errors':len(readers.errors),'skipped':len(readers.skipped)})
+    assert readers.wasSuccessful() and readers.testsRun==13 and not readers.skipped
+    os.environ['TIMELEARNER_INHERITED_FEEDBACK_CORPUS']=str(out/'native12/native')
+    suite=unittest.defaultTestLoader.loadTestsFromName('Scripts.StructTrain.TimeLearner.tests.test_feedback_intervention.InheritedFeedbackNativeTest')
+    assert suite.countTestCases()==2
+    with (out/'inherited-feedback-graph-tests.log').open('w') as log:graphs=unittest.TextTestRunner(stream=log,verbosity=2).run(suite)
+    write('inherited-feedback-graph-tests.json',{'tests_run':graphs.testsRun,'successful':graphs.wasSuccessful(),'failures':len(graphs.failures),'errors':len(graphs.errors),'skipped':len(graphs.skipped)})
+    assert graphs.wasSuccessful() and graphs.testsRun==2 and not graphs.skipped
+    os.environ['TIMELEARNER_PROFILED_GRAPH_CORPUS']=str(out/'native12/native')
+    suite=unittest.defaultTestLoader.loadTestsFromName('Scripts.StructTrain.TimeLearner.tests.test_feedback_intervention.ProfiledGraphImportNativeTest')
+    assert suite.countTestCases()==2
+    with (out/'profiled-graph-import-tests.log').open('w') as log:imports=unittest.TextTestRunner(stream=log,verbosity=2).run(suite)
+    write('profiled-graph-import-tests.json',{'tests_run':imports.testsRun,'successful':imports.wasSuccessful(),'failures':len(imports.failures),'errors':len(imports.errors),'skipped':len(imports.skipped)})
+    assert imports.wasSuccessful() and imports.testsRun==2 and not imports.skipped
+    original_case=base/'readbacks/s07-single-pulse-console-normal-a1';original_bundle=json.loads((original_case/'bundle.json').read_text())
+    assert hashlib.sha256((original_case/'primary.tar.xz').read_bytes()).hexdigest()==original_bundle['archive_sha256']=='082c01e8534e464e6b4ee3558e056d0254be8a46e6a49056102108b7b8e703e8'
+    original_runs=original_case/'single-pulse-study/runs';bindings={}
+    for f in sorted(original_runs.glob('*-single/native/initial-state.json')):
+        raw=f.read_bytes();record={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+        assert original_bundle['members'][f.relative_to(original_case).as_posix()]==record
+        destination=out/'original-auditor-corpus'/f.relative_to(original_runs);destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(raw)
+        bindings[f.relative_to(original_case).as_posix()]=record
+    assert len(bindings)==2
+    write('auditor-original-source-binding.json',{'archive_sha256':original_bundle['archive_sha256'],'bindings':bindings,'native_source_root':'5d0b80afeefbc5daa57d3ca5f550a5e654f07969'})
+    os.environ['TIMELEARNER_FEEDBACK_SOURCE_RUNS']=str(out/'original-auditor-corpus')
+    suite=unittest.defaultTestLoader.loadTestsFromName('Scripts.StructTrain.TimeLearner.tests.test_feedback_intervention.FeedbackProfileDeltaTest')
+    assert suite.countTestCases()==10
+    with (out/'feedback-auditor-regression-tests.log').open('w') as log:auditor=unittest.TextTestRunner(stream=log,verbosity=2).run(suite)
+    write('feedback-auditor-regression-tests.json',{'tests_run':auditor.testsRun,'successful':auditor.wasSuccessful(),'failures':len(auditor.failures),'errors':len(auditor.errors),'skipped':len(auditor.skipped)})
+    assert auditor.wasSuccessful() and auditor.testsRun==10 and not auditor.skipped
+    os.environ['TIMELEARNER_PREPARED_MODEL_CORPUS']=str(out/'native12/native')
+    suite=unittest.defaultTestLoader.loadTestsFromName('Scripts.StructTrain.TimeLearner.tests.test_prepared_model_evidence.PreparedModelEvidenceTest')
+    assert suite.countTestCases()==2
+    with (out/'prepared-model-evidence-tests.log').open('w') as log:prepared=unittest.TextTestRunner(stream=log,verbosity=2).run(suite)
+    write('prepared-model-evidence-tests.json',{'tests_run':prepared.testsRun,'successful':prepared.wasSuccessful(),'failures':len(prepared.failures),'errors':len(prepared.errors),'skipped':len(prepared.skipped)})
+    assert prepared.wasSuccessful() and prepared.testsRun==2 and not prepared.skipped
+    passed = True
+except BaseException as error:
+    write('exception.json', {'reason': str(error), 'traceback': traceback.format_exc()})
+finally:
+    stop.set()
+    if thread:
+        thread.join(timeout=30)
+    write('terminal.json', {'build_passed': buildPassed, 'native_gates_executed': (out / 'native12/native.xml').exists(), 'prepared_owner_scoped_acceptance_passed': passed, 'scientific_verdict': None, 'whole_plan_complete': False})
+    hashes = {}
+    if source.exists():
+        for prefix in ['App/NeuroModelerConsole', 'Tests/Integration/Libraries', 'Scripts/StructTrain/TimeLearner', 'Libraries/Nmsdk-PulseLib/Core']:
+            for p in (source / prefix).rglob('*'):
+                if p.is_file() and '__pycache__' not in p.parts:
+                    hashes[p.relative_to(source).as_posix()] = hashlib.sha256(p.read_bytes()).hexdigest()
+    write('source-hashes.json', hashes)
+    files = {p.relative_to(out).as_posix(): p.read_bytes() for p in out.rglob('*') if p.is_file()}
+    with tarfile.open(out / 'primary.tar.xz', 'w:xz', preset=3) as archive:
+        for name, raw in files.items():
+            info = tarfile.TarInfo(name)
+            info.size = len(raw)
+            archive.addfile(info, io.BytesIO(raw))
+    raw = (out / 'primary.tar.xz').read_bytes()
+    write('bundle.json', {'kind': 'prepared_owner_native26_reader29', 'root': root, 'build_passed': buildPassed, 'native_gates_executed': (out / 'native12/native.xml').exists(), 'members': {n: {'bytes': len(v), 'sha256': hashlib.sha256(v).hexdigest()} for n, v in files.items()}, 'archive_bytes': len(raw), 'archive_sha256': hashlib.sha256(raw).hexdigest(), 'scientific_verdict': None})
+    print('CLOSED', passed, flush=True)

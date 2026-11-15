@@ -1,0 +1,9 @@
+# Bounded N1 local normalization:77/77 native checks
+
+Новая изолированная Release сборка M40 s07-n1-local-turn-sdk-m40-a1 принята:77 expected/77 observed/77 assertion passed,0failed IDs; built=true, cohort/job validation passed; heartbeat/final capture errors отсутствуют. Внешняя группа и единственная leaf bounded-training-n1-priority закрыты. Source root4acc1f0ec10708bc4632a793f34630c259e807c3, Pulse9656b420685cbbd7eaac582ee0f21a5c3afe61f4. Canonical preparation:77selected,4198source files,30actual SDK imports;64.4295s.
+
+Проверен весь Test_PulseLib_BoundedTraining.cpp, включая прежние N0/N1/ranking/final verification/C-context/recovery controls и два новых local-turn tests. Новые controls охватывают Classic/Branch, timing loss, changed lower bound, fresh anchor/revision, singleton и global probe cap. Моделируемый provider служит проверке production controller; он не доказывает сходимость реального нейрона. Все остальные native suites не объявлены пройденными.
+
+Raw producer023b103bcc4332aeeb510cc26a723861b29a0992, pack SHA2563a9d798b6e893743c4597ead5489bcc8b47145616dcc62df54b89485e3b62f00. Native runtime manifest, compiler/flags, exact source closure, compiled inventory и JUnit audit сохранены без пересериализации.
+
+Первая попытка реального Train s07-n1-local-turn-branch-train-m40-a1 остановилась до native execution:stock_cold7_runtime_changed. Ошибка в подготовке A1 — старый prepared/runtime.json при новом внешнем manifest. Guard не ослаблялся; A2 пересоздал runtime metadata, но дополнительное сравнение всего набора обнаружило отличие неиспользуемого Classic job и остановилось до запуска. Для A3 штатный prepare_recovery сохраняет байты выбранного Branch job, initial identities и reference-origin; неиспользуемый Classic не выполняется. A3 уже прошёл cold native preflight и записывает реальные trial CSV. Научный Train/outcome ещё не принят.

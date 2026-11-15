@@ -1,0 +1,126 @@
+{
+  "kind": "stock_native_channel_diagnostic_analysis",
+  "schema_version": 1,
+  "rows": [
+    {
+      "name": "Branch-threshold-low-retry32",
+      "observer_off_on": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "original_reasons": [
+          "burst_ambiguous:0",
+          "peak_ambiguous:input2"
+        ],
+        "replay_reasons": [
+          "burst_ambiguous:0",
+          "peak_ambiguous:input2"
+        ],
+        "exact_waveform_reproduced": true,
+        "scientific_verdict": null
+      },
+      "observer_off_matches_original": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "original_reasons": [
+          "burst_ambiguous:0",
+          "peak_ambiguous:input2"
+        ],
+        "replay_reasons": [
+          "burst_ambiguous:0",
+          "peak_ambiguous:input2"
+        ],
+        "exact_waveform_reproduced": true,
+        "scientific_verdict": null
+      },
+      "off_on_primary_csv_bytes_equal": true,
+      "diagnostics": {
+        "enabled": true,
+        "probes": [
+          {
+            "file": "probe_diagnostics_1.json",
+            "trial_id": "Branch-threshold-low-retry32/exact-invalid-wave-replay",
+            "samples": 3601,
+            "complete": true,
+            "signals": 8,
+            "recorded_lt_spike_times": [
+              0.0295,
+              0.1095,
+              0.2695,
+              0.5095
+            ],
+            "soma_values_match_primary": true,
+            "channel_physics_reconstructed_independently": false
+          }
+        ],
+        "scientific_verdict": null
+      }
+    },
+    {
+      "name": "Classic-threshold-low-retry32",
+      "observer_off_on": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "original_reasons": [
+          "burst_ambiguous:0",
+          "peak_ambiguous:input0"
+        ],
+        "replay_reasons": [
+          "burst_ambiguous:0",
+          "peak_ambiguous:input0"
+        ],
+        "exact_waveform_reproduced": true,
+        "scientific_verdict": null
+      },
+      "observer_off_matches_original": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "original_reasons": [
+          "burst_ambiguous:0",
+          "peak_ambiguous:input0"
+        ],
+        "replay_reasons": [
+          "burst_ambiguous:0",
+          "peak_ambiguous:input0"
+        ],
+        "exact_waveform_reproduced": true,
+        "scientific_verdict": null
+      },
+      "off_on_primary_csv_bytes_equal": true,
+      "diagnostics": {
+        "enabled": true,
+        "probes": [
+          {
+            "file": "probe_diagnostics_1.json",
+            "trial_id": "Classic-threshold-low-retry32/exact-invalid-wave-replay",
+            "samples": 3601,
+            "complete": true,
+            "signals": 26,
+            "recorded_lt_spike_times": [
+              0.011,
+              0.0285,
+              0.091,
+              0.1085,
+              0.251,
+              0.2685,
+              0.491,
+              0.5085
+            ],
+            "soma_values_match_primary": true,
+            "channel_physics_reconstructed_independently": false
+          }
+        ],
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "training_started": false,
+  "scientific_verdict": null
+}

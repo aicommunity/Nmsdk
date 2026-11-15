@@ -1,0 +1,89 @@
+{
+  "kind": "closed_native_acceptance_preservation_receipt",
+  "schema_version": 3,
+  "collection_status": "completed",
+  "original_outcome": {
+    "planned": 8,
+    "executed": 7,
+    "passed": 3,
+    "failed_ids": [
+      "NativeLoadHistory/ConnectedChildAt2000",
+      "NativeLoadHistory/DetachedChildAt2000",
+      "NativeLoadHistory/ConnectedChildAt20000",
+      "NativeLoadHistory/DetachedChildAt20000"
+    ],
+    "not_completed_ids": [
+      "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease"
+    ]
+  },
+  "manifest_sha256": "fd16ee965dc6a9cacc8adecea1e1592268fcdd8810ddba22099b7630258fa0fd",
+  "artifact_hashes": {
+    "packed/primary.tar.xz": "c0e777b5d460db306c0502bb13c11f756be84ad2964fee937dd7dab9c9ddb010",
+    "packed/bundle.json": "5b0b5bda9b4f81197422378f6865e09bc855c89bb1f0d46226d1777ed07d1bab",
+    "capture-proof.json": "d472da1b5923c337c008160bb5e831458a1c5f8d99880688740cb2bdc190cfd6"
+  },
+  "released_collection_lease": {
+    "token": "f7970832-d070-4b3c-ba6a-cbf489031f84",
+    "job_id": "s04-native-stages8-preservation-m40-a1",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 281774,
+      "start_ticks": "338133114",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-native-image-stages8-m40-a6",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/build-native-image-stages8-m40-a6"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-stages8-m40-a1/Reports/StructTrain/TimeLearner/s04-native-stages8-preservation-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-stages8-m40-a1/Reports/StructTrain/TimeLearner/s04-native-stages8-preservation-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/native-stages8-collection-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeStages8Collection-20261110",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/native-stages8-collection-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeStages8Collection-20261110"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-image-stages8-m40-a6",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-image-stages8-m40-a6"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-image-stages-m40-a6",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-image-stages-m40-a6"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native119-a2-preservation-m40-a3",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native119-a2-preservation-m40-a3"
+      }
+    ],
+    "state": "released",
+    "created": 1794306143.4168863,
+    "deadline": 1794306273.4675958,
+    "updated": 1794306154.6639824,
+    "release_note": "Closed native metadata preserved or collection failed; original outcome unchanged.",
+    "heartbeat_expired": false,
+    "owner_status": "identity_live",
+    "inspection_required": false,
+    "scientific_verdict": null
+  },
+  "collector_external_cgroup_attested": false,
+  "scientific_verdict": null
+}

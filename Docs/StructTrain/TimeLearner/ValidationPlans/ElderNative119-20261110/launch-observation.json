@@ -1,0 +1,117 @@
+{
+  "kind": "native119_live_kernel_observation",
+  "worker": "Elder",
+  "canonical": {
+    "controller": {
+      "kind": "timelearner_process_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 66.6571710226126,
+      "model_time": null,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "runtime_fingerprint": "16afc452a1a533bf27fee04dcaf456725d83657e443110776e62cc7e5387f983",
+      "ownership_scope": "bound_cgroup",
+      "all_processes_closed": true,
+      "scientific_verdict": null,
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "clear",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 0,
+        "reasons": [],
+        "examples": [],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    },
+    "worker_terminal": {
+      "operation_passed": true,
+      "operation": "native-canonical-preparation",
+      "heartbeat_errors": [],
+      "lease_release": "controller only after whole cgroup closure",
+      "selected_validation_scope_requires_source_review": true,
+      "scientific_verdict": null
+    },
+    "scientific_verdict": null
+  },
+  "launch": {
+    "controller": "/home/user/timelearner-refactor/readbacks/s07-native119-normal-a1-controller",
+    "supervisor": {
+      "pid": 180136,
+      "start_ticks": "389341665",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "scientific_verdict": null
+  },
+  "status": {
+    "controller": "/home/user/timelearner-refactor/readbacks/s07-native119-normal-a1-controller",
+    "supervisor_identity": {
+      "pid": 180136,
+      "start_ticks": "389341665",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "supervisor_identity_known": true,
+    "supervisor_live": true,
+    "outer": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "7bfab1db68779f913f31a829d724a303858f182f851e950669c37787a9472e39",
+        "unit": "timelearner-72c69e9d-df5f-4c0d-bcde-ca0a47e3c276.service",
+        "invocation_id": "9bd762321df14291883288b060afb601",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-72c69e9d-df5f-4c0d-bcde-ca0a47e3c276.service",
+        "initial_main_pid": 185780,
+        "initial_start_ticks": "389342622",
+        "sha256": "aa931d0f35597a8ef613584cd7a602c795727629eb1df2174d3e97070c644570"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "185780",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-72c69e9d-df5f-4c0d-bcde-ca0a47e3c276.service",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 72c69e9d-df5f-4c0d-bcde-ca0a47e3c276",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "9bd762321df14291883288b060afb601"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "unbound_outer_intent": false,
+    "result": null,
+    "scientific_verdict": null
+  },
+  "scientific_verdict": null
+}

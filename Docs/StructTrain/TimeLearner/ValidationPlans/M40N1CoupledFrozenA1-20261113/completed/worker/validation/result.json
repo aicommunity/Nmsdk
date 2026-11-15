@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s07-n1-coupled-frozen-m40-a1",
+  "package_fingerprint": "9dd96354af72fd93f376317a3dd740d06b9b0c800d231d1d51418a848a31f588",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_coupled_stopped_matrix_native.CoupledStoppedMatrixNativeTest.test_actual_stopped_branch_complete_eight_pattern_frozen_diagnostic"
+  ],
+  "executed_tests": 1,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_COUPLED_TRAIN_RUN": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-branch-train-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train",
+      "files": 432,
+      "fingerprint": "83f9c33cb935596b99e36411ad2a1bd8e180802536fabab61311f2732abaa981"
+    },
+    "TIMELEARNER_COUPLED_FROZEN_CONTROLS": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-coupled-frozen-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledFrozenA1-20261113/fixture",
+      "files": 4,
+      "fingerprint": "8266cbf2f0e72da28a303041f2e2e566c8597e15d1a321360c9e8e11f2a3925e"
+    }
+  },
+  "scientific_verdict": null
+}

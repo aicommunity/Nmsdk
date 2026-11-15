@@ -1,0 +1,121 @@
+{
+  "kind": "closed_python_validation66_dependencies",
+  "schema_version": 1,
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+    "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+    "Scripts": 637,
+    "Python": 446,
+    "package_fingerprint": "17bf9cecf967dfdcafb67a3296572a57ecebb39981c4f02737bc7bf4e4c888aa"
+  },
+  "tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+    "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+    "Scripts": 632,
+    "Python": 441,
+    "package_fingerprint": "629bd6fe86318b5e38251ab4f822a07d01debf4c8a9ab3d88a8896c0636de20d"
+  },
+  "plan": {
+    "path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a2",
+    "commit": "separate_docs_only_plan_commit",
+    "tracked_suite_path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a2/Docs/StructTrain/TimeLearner/ClosedPythonValidation66A2Preparation-20261109.suite.json",
+    "tracked_request_path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a2/Docs/StructTrain/TimeLearner/ClosedPythonValidation66A2Preparation-20261109.request.json",
+    "run_command": [
+      "/usr/bin/python3.12",
+      "-B",
+      "-m",
+      "Scripts.StructTrain.TimeLearner.owned_python_job",
+      "run",
+      "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a2/Docs/StructTrain/TimeLearner/ClosedPythonValidation66A2Preparation-20261109.request.json"
+    ],
+    "flattened_copies_required": false
+  },
+  "projections": {
+    "source_patterns": [
+      "/Scripts/",
+      "/.gitattributes",
+      "/.gitignore",
+      "/.gitmodules",
+      "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+      "/LLM/.gitignore"
+    ],
+    "plan_patterns": [
+      "/Docs/StructTrain/TimeLearner/ClosedPythonValidation66A2Preparation-20261109.json",
+      "/Docs/StructTrain/TimeLearner/ClosedPythonValidation66A2Preparation-20261109.suite.json",
+      "/Docs/StructTrain/TimeLearner/ClosedPythonValidation66A2Preparation-20261109.request.json",
+      "/Docs/StructTrain/TimeLearner/ClosedPythonValidation66A2Preparation-20261109.source-manifest.json",
+      "/Docs/StructTrain/TimeLearner/ClosedPythonValidation66A2Preparation-20261109.dependencies.json",
+      "/Docs/StructTrain/TimeLearner/ClosedPythonValidation66A2Preparation-20261109.ru.md",
+      "/.gitattributes",
+      "/.gitignore",
+      "/.gitmodules",
+      "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+      "/LLM/.gitignore"
+    ],
+    "order_contract": "explicit ordered arrays, never mapkey enumeration"
+  },
+  "all5Git_controls": {
+    ".gitattributes": {
+      "mode": "100644",
+      "git_blob": "5bba2f9531c39afb69d1fd482a68f401d02f6fec",
+      "bytes": 616,
+      "sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef"
+    },
+    ".gitignore": {
+      "mode": "100644",
+      "git_blob": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+      "bytes": 2042,
+      "sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6"
+    },
+    ".gitmodules": {
+      "mode": "100644",
+      "git_blob": "878b41e2626ac2cc6a132f498949e89306ed122b",
+      "bytes": 967,
+      "sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809"
+    },
+    "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore": {
+      "mode": "100644",
+      "git_blob": "3da99d1f874b9ee9a9b4546ccd57395b36272998",
+      "bytes": 65,
+      "sha256": "7a60afdfab0e76d41339f0bed73c194faceb7f774ec5c7c60812071729b1232c"
+    },
+    "LLM/.gitignore": {
+      "mode": "100644",
+      "git_blob": "7effe3bf3f003b4abcb0ad9f240a0a28cc069505",
+      "bytes": 265,
+      "sha256": "1fa6b740ecd7393a2caac759c549d093dd51d86a29d18ffa3b99ca8792644573"
+    }
+  },
+  "external_fixtures": {},
+  "preparation": {
+    "minimum_free_bytes": 805306368,
+    "minimum_MemAvailable_bytes": 805306368,
+    "maximum_incremental_allocated_bytes": 134217728,
+    "mode": "read-only metadata verification only; no flat copies/excludes or prep writer reservation"
+  },
+  "validation": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 240,
+    "output_cap_bytes": 134217728
+  },
+  "owned_read_roots": [
+    "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+    "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a2/Docs/StructTrain/TimeLearner",
+    "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2"
+  ],
+  "owned_write_root": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-closed-python-validation66-m40-a2",
+  "tests_dispatched": false,
+  "no_SDK_or_model_or_cpp_access": true,
+  "previous_undelivered_control_plan": "8fdf5a57019b8415cd0d5c14f94b388a10d86796",
+  "previous_negative_attempt": {
+    "plan": "5d64cf11535ff28443f335c10194c2713c49897c",
+    "source": "382180add59275c9c8bcc449a973cc0577015918",
+    "executed": 66,
+    "passed": 65,
+    "errors": 1,
+    "failures": 0,
+    "skipped": 0
+  },
+  "source_only_intermediate_not_delivered_or_run": "6fbf31b0e744ba16991b3fea3e231e6ff252744b"
+}

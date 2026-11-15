@@ -1,0 +1,528 @@
+{
+  "kind": "completed_historical_protocol_8x2_primary",
+  "conditions": 16,
+  "new_native_processes_completed": 24,
+  "reused_native_processes": 8,
+  "new_loaded_file_bindings": 624,
+  "reused_file_bindings": 323,
+  "all_target_positions_per_delay_verified": true,
+  "all_frozen_models_equal": true,
+  "rows": [
+    {
+      "case": "rotation0-gap1.5",
+      "rotation": 0,
+      "declared_iti": 1.5,
+      "native_reused": true,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        0
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ]
+    },
+    {
+      "case": "rotation0-gap3",
+      "rotation": 0,
+      "declared_iti": 3.0,
+      "native_reused": true,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        0
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ]
+    },
+    {
+      "case": "rotation1-gap1.5",
+      "rotation": 1,
+      "declared_iti": 1.5,
+      "native_reused": true,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        7
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ]
+    },
+    {
+      "case": "rotation1-gap3",
+      "rotation": 1,
+      "declared_iti": 3.0,
+      "native_reused": true,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        7
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ]
+    },
+    {
+      "case": "rotation2-gap1.5",
+      "rotation": 2,
+      "declared_iti": 1.5,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        6
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ]
+    },
+    {
+      "case": "rotation2-gap3",
+      "rotation": 2,
+      "declared_iti": 3.0,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        6
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ]
+    },
+    {
+      "case": "rotation3-gap1.5",
+      "rotation": 3,
+      "declared_iti": 1.5,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        5
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ]
+    },
+    {
+      "case": "rotation3-gap3",
+      "rotation": 3,
+      "declared_iti": 3.0,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        5
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ]
+    },
+    {
+      "case": "rotation4-gap1.5",
+      "rotation": 4,
+      "declared_iti": 1.5,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        4
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ]
+    },
+    {
+      "case": "rotation4-gap3",
+      "rotation": 4,
+      "declared_iti": 3.0,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        4
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ]
+    },
+    {
+      "case": "rotation5-gap1.5",
+      "rotation": 5,
+      "declared_iti": 1.5,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        3
+      ],
+      "FP_sample_ids": [
+        "phasea-6",
+        "phasea-4"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ]
+    },
+    {
+      "case": "rotation5-gap3",
+      "rotation": 5,
+      "declared_iti": 3.0,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        3
+      ],
+      "FP_sample_ids": [
+        "phasea-6",
+        "phasea-4"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ]
+    },
+    {
+      "case": "rotation6-gap1.5",
+      "rotation": 6,
+      "declared_iti": 1.5,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        2
+      ],
+      "FP_sample_ids": [
+        "phasea-6",
+        "phasea-4"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ]
+    },
+    {
+      "case": "rotation6-gap3",
+      "rotation": 6,
+      "declared_iti": 3.0,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        2
+      ],
+      "FP_sample_ids": [
+        "phasea-6",
+        "phasea-4"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ]
+    },
+    {
+      "case": "rotation7-gap1.5",
+      "rotation": 7,
+      "declared_iti": 1.5,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        1
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ]
+    },
+    {
+      "case": "rotation7-gap3",
+      "rotation": 7,
+      "declared_iti": 3.0,
+      "native_reused": false,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        1
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spike_count": 0,
+      "pre_stimulus_spikes": [],
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ]
+    }
+  ],
+  "new_training": false,
+  "temporal_report_complete": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

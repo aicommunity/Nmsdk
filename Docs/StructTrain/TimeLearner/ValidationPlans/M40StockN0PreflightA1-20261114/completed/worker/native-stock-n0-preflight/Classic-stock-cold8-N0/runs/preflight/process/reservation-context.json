@@ -1,0 +1,79 @@
+{
+  "kind": "timelearner_native_resource_context",
+  "schema_version": 1,
+  "registry": {
+    "database": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-preflight-m40-a1/worker/native-stock-n0-preflight/Classic-stock-cold8-N0/leases.sqlite3",
+    "capacity": {
+      "slots": 1,
+      "memory_bytes": 8589934592,
+      "disk_bytes": 4294967296,
+      "tasks": 512
+    },
+    "token": "57f004b7-0742-4973-a042-82d69957ee2e"
+  },
+  "lease": {
+    "token": "57f004b7-0742-4973-a042-82d69957ee2e",
+    "job_id": "stock-cold7-Classic-stock-cold8-N0",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 3048660,
+      "start_ticks": "368840527",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-preflight-m40-a1/worker/native-stock-n0-preflight/Classic-stock-cold8-N0/runs",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-preflight-m40-a1/worker/native-stock-n0-preflight/Classic-stock-cold8-N0/runs"
+      }
+    ],
+    "state": "held",
+    "demands": {
+      "disk_bytes": 2147483648,
+      "memory_bytes": 6442450944,
+      "slots": 1,
+      "tasks": 256
+    },
+    "controller": {
+      "binding": {
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-906af3db-0107-4395-84fa-cbc14a487507.service",
+        "initial_main_pid": 3048660,
+        "initial_start_ticks": "368840527",
+        "invocation_id": "accd7cb732144bf5ba4d771ddded6f1d",
+        "kind": "timelearner_contained_binding",
+        "request_sha256": "30ed4b7901db3ad92a9e35213a57bc079166d1bd3038f650660667fc32f60fc1",
+        "schema_version": 1,
+        "sha256": "7ca0e1e58af868699160e4d2d3e96d82980964478847a14227a036d4c188209d",
+        "unit": "timelearner-906af3db-0107-4395-84fa-cbc14a487507.service"
+      },
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-preflight-m40-a1/process/contained",
+      "memory_bytes": 2147483648,
+      "tasks": 128
+    }
+  },
+  "intent": {
+    "token": "57f004b7-0742-4973-a042-82d69957ee2e",
+    "state": "bound",
+    "intent": {
+      "attempt_id": "001dbc38-6821-4737-8795-487fa29af894",
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-preflight-m40-a1/worker/native-stock-n0-preflight/Classic-stock-cold8-N0/runs/preflight/process/contained",
+      "kind": "timelearner_managed_unit_intent",
+      "maximum_wall_seconds": 180.0,
+      "memory_bytes": 4294967296,
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3048660,
+        "start_ticks": "368840527",
+        "uid": 1000
+      },
+      "schema_version": 1,
+      "sha256": "66efa4113df931a97e65684509d0935bdb658393692895bc32fdbbcc0c14e408",
+      "tasks": 64,
+      "token": "57f004b7-0742-4973-a042-82d69957ee2e",
+      "unit": "timelearner-001dbc38-6821-4737-8795-487fa29af894.service"
+    }
+  },
+  "scientific_verdict": null
+}

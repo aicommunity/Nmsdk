@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/native_canonical_preparation.py", line 280, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/native_canonical_preparation.py", line 276, in main
+    args=parser.parse_args(argv);result=_child(args.plan,args.source,args.commit,args.digest)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/native_canonical_preparation.py", line 194, in _child
+    spec=modules['native_preparation'].prepare_native_module_checks(source,**state['cohort'],
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-candidate-window-recovery-service-d1/Scripts/StructTrain/TimeLearner/native_preparation.py", line 260, in prepare_native_module_checks
+    expected = _layout(inventory, selected_ids, runplan, partitions)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-candidate-window-recovery-service-d1/Scripts/StructTrain/TimeLearner/native_preparation.py", line 159, in _layout
+    require(flattened == selected_ids, "native_preparation_leaf_union_or_order")
+  File "/media/user/Data/TimeLearnerRefactor/source-candidate-window-recovery-service-d1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: native_preparation_leaf_union_or_order

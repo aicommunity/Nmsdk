@@ -1,0 +1,88 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "526a28c45ba320a76618fcbd6d87716f3fc104f20dff4781d29cd653a21fe2e1",
+      "unit": "timelearner-f8b009a1-2ef2-4fda-890f-83a27c3d347b.service",
+      "invocation_id": "5cc7487767cc48fba411cb2aabecb7d5",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f8b009a1-2ef2-4fda-890f-83a27c3d347b.service",
+      "initial_main_pid": 750427,
+      "initial_start_ticks": "356039422",
+      "sha256": "9c2b18ff83689fa79a70e03b523263524193caac3384d960b4bfcf2166e905dc"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "6442450944",
+      "TasksMax": "64",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt f8b009a1-2ef2-4fda-890f-83a27c3d347b",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "5cc7487767cc48fba411cb2aabecb7d5"
+    },
+    "memory_max": 6442450944,
+    "tasks_max": 64,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "b9eb15fd-f07c-4291-b59e-f0672fbac363",
+      "job_id": "s11-compact-bundle-report3-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python",
+        "pid": 750427,
+        "start_ticks": "356039422",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-primary-a1/Reports/StructTrain/TimeLearner/RecordedN4DiagnosticPrimary-M40-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-primary-a1/Reports/StructTrain/TimeLearner/RecordedN4DiagnosticPrimary-M40-20261112"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-compact-bundle-report3-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-compact-bundle-report3-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/compact-bundle-report3-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40CompactBundleReport3A1-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/compact-bundle-report3-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40CompactBundleReport3A1-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-compact-report-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-compact-report-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4"
+        }
+      ],
+      "state": "released",
+      "created": 1794485196.7441306,
+      "deadline": 1794485616.886878,
+      "updated": 1794485507.0018792,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

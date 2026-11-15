@@ -1,0 +1,8 @@
+{
+  "kind": "compiler_syntax_preflight_refused",
+  "reason": "reservation_budget_policy_required",
+  "compiler_started": false,
+  "exit_code": 1,
+  "stderr": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 15, in <module>\r\n  File \"/media/user/Data/TimeLearnerRefactor/source-native-image-rest-runner-m40-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 287, in reserve\r\n    _require(demands is None, 'reservation_budget_policy_required')\r\n  File \"/media/user/Data/TimeLearnerRefactor/source-native-image-rest-runner-m40-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 25, in _require\r\n    raise ReservationError(reason)\r\nScripts.StructTrain.TimeLearner.resource_reservations.ReservationError: reservation_budget_policy_required\r\n",
+  "scientific_verdict": null
+}

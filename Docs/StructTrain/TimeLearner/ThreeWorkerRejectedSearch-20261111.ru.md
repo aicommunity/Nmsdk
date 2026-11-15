@@ -1,0 +1,193 @@
+# Параллельная проверка rejected-search на трёх машинах
+
+## Ограничение workers после запроса пользователя
+
+Windows .14 после апгрейда снова разрешена пользователем и доступна по SSH.
+Готовится свежая изолированная SDK сборка source3edb22a4/Pulse63d7a62;
+scientific admission нового source ещё нет. Elder завершил146/146 C2,
+M40 собирает новый native240 после compiler preflight7/7 и flags4/4. Полные B1 compact primary уже
+опубликованы для обоих Linux workers; последующие строки о подготовке
+архивов описывают исторический снимок. Semantic restore этих архивов остаётся
+отдельной проверкой. Новая service delivery — root441754580/Pulsedbc8a40;
+подготовлена адресная проверка222 cases на M40, пока без runtime приёмки.
+
+## Обновление после C1 и C2 M40
+
+C1 source root8fac40bb/Pulse1c0fa37 принят145/145 на Elder и M40,
+outer+48child groups закрыты и leases released на каждом. Следующий C2
+root5643f8319/Pulse0fb035a принят146/146 на M40 с закрытыми49child groups;
+он проверяет cold8/runtime3 и прежнее ядро. После ограниченной очистки старых
+generated build objects C2 также завершён146/146 PASS на Elder: outer+49child
+groups закрыты, lease released. [Точные записи](ValidationPlans/ElderCandidateWindowRecoveryWireC2C-20261111/completed-terminal.json). Windows нового задания
+не получила. [Текущая сводка](ExperimentReadiness.ru.md),
+[C1](CandidateWindowRecoveryCore-20261111.ru.md),
+[C2](CandidateWindowRecoveryWire-20261111.ru.md).
+Ни один из этих наборов не является новым результатом классификации N4.
+
+## Снимок после B1 и первоначального запуска C1
+
+Исправленный B1 завершён на обоих Linux workers: **29/29 PASS**, по29
+отдельных leaf gates, job_validation_passed=true. Outer и все29 child groups
+закрыты, исходные reservations released, record_errors=[]. Точные результаты:
+[M40](ValidationPlans/M40RejectedSearchAdmissionB1-20261111/completed-tests.json),
+[Elder](ValidationPlans/ElderRejectedSearchAdmissionB1-20261111/completed-tests.json).
+Это приёмка фабрики закрытых rejected measurements, не всего алгоритма обучения.
+
+Read-only inventory полного B1 обнаружил на каждом сервере1267 файлов:
+85096988bytes на M40 и84852590bytes на Elder. Инвентаризация проверяет source,
+runtime, полное множество тестов и закрытие процессов. Compact primary ещё
+собирается; наличие инвентаризации не означает публикацию первичных данных.
+
+Следующий C1 использует root8fac40bb545b314d606e41bec8a5f5b86e2dea46 /
+Pulse1c0fa37d2141a9dfa1a988c2c7ef14fd33e6efd0:98 прежних decision cases,
+29 factory cases и18 новых native core recovery cases, всего145 /48leaf gates.
+Canonical preparation прошла на обоих workers. SDK сборки запущены отдельно:
+M40 PID3969723/start346223644, Elder PID2302635/start395680605.
+Результата145 пока нет. Service/wire/persistence recovery остаются открыты;
+новые дорогие Train с этой policy пока запрещены.
+
+Windows .14 доступна и свободна после завершённых19 диагностических cases
+предыдущей версии. Для текущего C1 её сборка не подготовлена. Завершённые
+Windows задачи нельзя учитывать как текущую вычислительную загрузку.
+
+## История первых завершённых Linux-проверок
+
+Исходные Elder A2 и M40 A3 завершены одинаково: SDK собран, реально выполнены
+29/29 случаев, 19 PASS / 10 FAIL. Gate execution=process_error, validity=valid;
+job_validation_passed=false. Обе попытки **не приняты**. Проверены закрытие
+outer и единственного child cgroup, released reservation; очистка не заменяет
+исходный отрицательный outcome. Полные terminal/test ID readbacks и сведения
+о закрытии сохранены рядом с декларациями исходных попыток.
+
+Десять отказов распределяются так:
+
+* Два прежних valid 20000 Hz cases: общий leaf повторно пишет уже существующие
+  reference paths; отказ window5_output_new_only. Следующая декларация
+  изолирует каждый из 29 случаев в отдельном leaf/output.
+* Четыре новых Missing cases: все предшествующие проверки closed capability
+  выполнены, но NaN mutation выявляет выход private MatchedOmission Failure
+  вместо стандартной ошибки. В Pulse af612baaa496c72d87c8a8bf911d749969b94d76
+  оба публичных content-ID API преобразуют эту внутреннюю ошибку в
+  std::invalid_argument с исходной причиной. Проверка не ослаблена; дополнительно
+  такая же NaN mutation проверяется для прежнего valid API.
+* Два Ambiguous fixtures: заявленные left/right guards по 2 с выводили
+  предлагаемое окно за разрешённый envelope. Left guard=0 / right guard=1 с
+  задаются до reference capture; clipping и подбор по candidate waveform
+  не добавлялись. Получение Ambiguous затем подтверждено в B1 на обоих workers.
+* Два budget fixtures: ошибочно требовался только флаг общего attempt budget.
+  Production NativeMatchedOmissionGroup отдельно выставляет BudgetExhausted
+  при своём deadline. Исправленный тест требует typed group/attempt exhaustion
+  или typed отказ Start, а также отсутствие measurement/rejection capability;
+  произвольный отказ не считается прохождением.
+
+Исправленный subject: root9d51f808047f08e0cbfa0e440061f9bf04e8ba88 / Pulseaf612ba.
+Декларации B1 содержат те же 29 test IDs, по одному на leaf. Canonical
+preparation принята на M40 за84.90с и Elder за67.71с; запущены новые отдельные
+SDK build/native29. Подтверждены live supervisors M40 PID3780876/start345701433
+и Elder PID2115216/start395158404 с работающими outer kernel groups. Их точные
+launch/status receipts сохранены в ValidationPlans/*RejectedSearchAdmissionB1.
+Этот снимок запуска предшествовал runtime-приёмке B1, указанной выше.
+
+Windows build A1 относится к прежнему root04f/Pulse558, а не к исправленному
+subject. Компиляция/линковка завершились сreturncode0 за2182.45с, но исходный
+backend outcome — descendants_remaining, build_accepted=false. Backend закрыл
+все процессы. Этот отказ сохранён: [оригинальные23records в Git-архиве](../../../Reports/StructTrain/TimeLearner/WindowsRejectedSearchBuild-20261111/archive.json).
+Независимый closed-build audit прошёл за65.46с: исходные hashes, kernel closure,
+source/dependencies/runtime проверены без изменения исходного результата.
+Полные audit records также сохранены компактным Git pack в том же разделе
+Reports. Суммарный размер двух архивов —1678129bytes; исполняемые файлы туда
+не копировались.
+
+После audit запущен отдельный Windows diagnostic19: те же19cases, которые
+прошли на обоих Linux workers в исходном subject. Полный список, десять
+исключённых известных отказов и ограничение области зафиксированы до запуска
+в native19-plan.json/native19-comparison-scope.json. Это проверка переносимости
+и lifecycle прежней версии; она не подменяет полный29 B1 и не исправляет его
+отказы. Подтверждены активный task instance и живой Test_PulseLib_StorageComponents
+PID9592. Затем diagnostic19 завершён: expected=observed=19, assertion_status=passed,
+execution=completed, validity=valid, все native процессы закрыты. GTest wall
+239.278с. Исходный build outcome не изменён; scientific worker admissionfalse.
+Это19/19 ровно объявленного portability subset, не полный29 и не исправленный B1.
+
+[Полный primary Windows19](../../../Reports/StructTrain/TimeLearner/WindowsRejectedSearchDiagnostic19-20261111/archive.json)
+сохранён:207 regular files,32991186 bytes исходных данных в1207885bytes Git pack,
+SHA256 e367bfdc43d82a38249adf3831d848eed8107ee55638452e80d147495a23c1af.
+После Git-переноса локально независимо сверены все207 payload hashes и точное
+множество файлов (191 unique blobs); это byte verification, не новый расчёт
+модели или независимый семантический replay. Последний ещё не выполнен.
+Native process result, terminal и gate result сохранены рядом с декларацией.
+
+Windows19 закончилась раньше полного Linux B1. Машину не считать занятой
+завершённым task; дальнейшие запуски требуют новой конкретной декларации.
+
+Нижеследующий раздел описывает снимок первоначального запуска, не текущую занятость.
+
+## Предмет проверки
+
+Одна версия SDK: root `04f830a3a0f6c36cb9eb22b48075aa545b8aeb6c`,
+PulseLib `558b9661c96efdd4dd1d44037a7c536ef29c8c72`; полный namespace —
+4103 файла / восемь репозиториев. Исходники доставлены через Git в новые
+изолированные каталоги. Пользовательская Windows-копия `C:/Projects/Nmsdk`
+не изменяется.
+
+Elder и M40 выполняют Release SDK build и одинаковый набор native29:
+22 новых production integration cases допуска завершённого rejected Search,
+четыре прежних valid factory cases, два реальных model/package roundtrip и
+чтение сохранённого старого package6. Последний случай необходим для проверки
+совместимости valid semantic proof ID, которую два новых writer/reader сами
+по себе не доказывают. Полная матрица исходного плана этим набором не закрыта.
+
+Windows .14 параллельно выполняет отдельную MSVC SDK-сборку той же версии.
+Её исходники проверены: 4103/4103 файла, восемь точных HEAD, clean, без alternates.
+После dispatch подтверждены один живой экземпляр scheduled task и настоящие
+процессы cmake/ninja/cl. Dispatch не является завершённой сборкой. Следующими
+нужны проверка исходного build outcome, закрытия процессов и runtime identity,
+а затем отдельный native gate. Допуска к полному научному pipeline ещё нет.
+
+## Принятые предварительные проверки
+
+* Elder: canonical preparation A2 — completed/0, 67.34 с, whole group closed.
+  Native supervisor PID 2001249, start_ticks 394916261; при status-проверке
+  supervisor live и outer kernel cgroup running.
+* M40: canonical preparation A3 — completed/0, 83.03 с, whole group closed.
+  Native supervisor PID 3666175, start_ticks 345474126; при status-проверке
+  supervisor live и outer kernel cgroup running.
+* Windows: attempt `windows-rejected-search-full-sdk-build-a1`,
+  specification blob `65514014eb83851fad7db229fede1349a20e71ae`.
+  Наблюдавшиеся compiler PIDs — снимок, не основание для последующего kill.
+
+Декларации, исходные отказы и launch identities находятся в
+`ValidationPlans/{ElderRejectedSearchAdmissionA2,M40RejectedSearchAdmissionA3,WindowsRejectedSearchAdmissionA1}-20261111`.
+Текущий terminal следует проверять у того же supervisor/task; не перезапускать
+задание при истечении времени наблюдения.
+
+## Сохранённые ошибки подготовки
+
+1. Linux canonical A1 остановлен до сборки: namespace SHA посчитан по CRLF,
+   тогда как Git blob содержит LF. В A2 все входные SHA дополнительно сверены
+   с настоящими Git blobs. Контракт проверяющего механизма не ослаблялся.
+2. M40 control checkout сначала отказал из-за отсутствующего `.gitattributes`
+   Git object. Импортирован отдельный Git pack с attributes, exact commit и
+   чистота checkout проверены. Данные/код не заменялись.
+3. M40 canonical A2 остановлен до сборки: в protected runtimes был объявлен
+   before-SDK runtime, существующий только на Elder. A3 убирает только этот
+   отсутствующий M40 путь; остальные защиты и source subject сохранены.
+4. Windows SSH transport из Node-контекста вернул пустой exit255 до подготовки.
+   Отдельный запуск того же помощника через рабочий shell доставил Git packs.
+5. Windows первоначальная full namespace verification выявила пропущенные
+   HardwareLib файлы с кириллицей: sparse JSON был декодирован с неверной
+   native encoding. В ещё не использовавшемся SDK перечитаны только sparse
+   patterns из того же Git blob с явным UTF-8. До/после hashes patterns:
+   `2a6c1f0903959e1e71b325069af6722a13b72ac232ba26752d00d88fed9cf7cd` →
+   `fa864f12a998579a29f805e2b715b3d9c2a2aeaaec86d4cbf0baa48a344ac3b6`.
+   Затем production `Test-PreparedSdk` подтвердил все 4103 файла; исходные HEAD
+   не менялись. Сборка начата только после успешной полной проверки.
+
+## Ограничение результата
+
+На этом снимке все три машины заняты вычислительной проверкой; итогов нового
+native29 и новой Windows-сборки ещё нет. Это не три параллельных научных кампании.
+Текущая реализация лишь создаёт закрытый допуск завершённого Missing/Ambiguous
+Search. Передвижение конечного search cursor, новая версионированная recovery
+policy, persisted events и независимый replay ещё требуют реализации и проверки.
+Runtime2 остаётся retry-only; новый stock N4 Train с recovery не разрешён.

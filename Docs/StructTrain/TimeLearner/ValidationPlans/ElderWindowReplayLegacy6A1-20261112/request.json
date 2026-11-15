@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-window-replay-legacy6-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 1073741824,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 536870912
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-recovery-window-replay-a2",
+      "commit": "46a2ba55223fdf1630d6f1a2f4592534c920e186"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/window-replay-legacy6-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderWindowReplayLegacy6A1-20261112/suite.json",
+      "sha256": "25f06ab331249b18d32be71a63bb8a14616ce673b013d8273feee76edd114688"
+    },
+    "fixtures": {
+      "TIMELEARNER_DIAGNOSTIC_LEGACY6_BUNDLE": "/home/user/timelearner-refactor/source-recovery-window-replay-a2/Reports/StructTrain/TimeLearner/N1ClassicTrainPrimary-20261111"
+    }
+  }
+}

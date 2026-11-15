@@ -1,0 +1,281 @@
+{
+  "kind": "scientific_results_metadata_reconciliation",
+  "schema_version": 1,
+  "date": "2026-11-09",
+  "root_before_report": "e682f1e0e",
+  "scope": "Read existing Git JSON and accepted receipts only; no new native execution, trace arithmetic, scoring or plotting",
+  "historical": {
+    "evidence": "657e48449626ac1caf6362ffe1d53685434f2f83",
+    "terminal_path": "Reports/StructTrain/TimeLearner/s11-august-protocol-completion-elder-a1/terminal.json",
+    "terminal_sha256": "efc7adae396490b64928c79b0489e9c6a6c7da8b91bf00f317a7b80088b38bbf",
+    "terminal": {
+      "primary_matrix_complete": true,
+      "complete_conditions": 16,
+      "new_full_tests_completed": 12,
+      "reused_full_tests": 4,
+      "new_native_processes_completed": 24,
+      "heartbeat_errors": [],
+      "ledger_metadata_unchanged": true,
+      "training_started": false,
+      "temporal_report_complete": false,
+      "scientific_verdict": null,
+      "whole_plan_complete": false
+    },
+    "accepted_receipt": "HistoricalProtocolCompletionVerification.json",
+    "per_condition_counts": {
+      "TP": 1,
+      "FP": 2,
+      "FN": 0,
+      "TN": 5
+    },
+    "complete_conditions": 16,
+    "FP_sample_ids": [
+      "phasea-4",
+      "phasea-6"
+    ],
+    "temporal_receipt": "HistoricalProtocolMatrixTemporalVerification.json"
+  },
+  "stock_stopped": {
+    "evidence": "77748412dcdfe2a838b10dcfaba69bdac3001abe",
+    "analysis_path": "Reports/StructTrain/TimeLearner/s07-stock-fair-evaluation-full-visual-m40-a1/analysis.json",
+    "analysis_sha256": "426986a7ab732b7405d8f68452fd9724867734a135f9f10dbc37cbb86557449a",
+    "rows": [
+      {
+        "name": "Classic-threshold-low-retry32",
+        "source_completed": false,
+        "diagnostic_only": true,
+        "training_completed": false,
+        "training_certificate_present": false,
+        "counts": {
+          "TP": 1,
+          "FP": 7,
+          "FN": 0,
+          "TN": 0,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.125,
+          "target_hit_rate": 1,
+          "foil_response_rate": 1
+        },
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      },
+      {
+        "name": "Classic-threshold-low-advance32",
+        "source_completed": false,
+        "diagnostic_only": true,
+        "training_completed": false,
+        "training_certificate_present": false,
+        "counts": {
+          "TP": 1,
+          "FP": 7,
+          "FN": 0,
+          "TN": 0,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.125,
+          "target_hit_rate": 1,
+          "foil_response_rate": 1
+        },
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      },
+      {
+        "name": "Classic-threshold-training100-retry32",
+        "source_completed": false,
+        "diagnostic_only": true,
+        "training_completed": false,
+        "training_certificate_present": false,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0,
+          "foil_response_rate": 0
+        },
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      },
+      {
+        "name": "Classic-threshold-training100-advance32",
+        "source_completed": false,
+        "diagnostic_only": true,
+        "training_completed": false,
+        "training_certificate_present": false,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0,
+          "foil_response_rate": 0
+        },
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      },
+      {
+        "name": "Branch-threshold-low-retry32",
+        "source_completed": false,
+        "diagnostic_only": true,
+        "training_completed": false,
+        "training_certificate_present": false,
+        "counts": {
+          "TP": 1,
+          "FP": 7,
+          "FN": 0,
+          "TN": 0,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.125,
+          "target_hit_rate": 1,
+          "foil_response_rate": 1
+        },
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      },
+      {
+        "name": "Branch-threshold-low-advance32",
+        "source_completed": false,
+        "diagnostic_only": true,
+        "training_completed": false,
+        "training_certificate_present": false,
+        "counts": {
+          "TP": 1,
+          "FP": 7,
+          "FN": 0,
+          "TN": 0,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.125,
+          "target_hit_rate": 1,
+          "foil_response_rate": 1
+        },
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      },
+      {
+        "name": "Branch-threshold-training100-retry32",
+        "source_completed": false,
+        "diagnostic_only": true,
+        "training_completed": false,
+        "training_certificate_present": false,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0,
+          "foil_response_rate": 0
+        },
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      },
+      {
+        "name": "Branch-threshold-training100-advance32",
+        "source_completed": false,
+        "diagnostic_only": true,
+        "training_completed": false,
+        "training_certificate_present": false,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0,
+          "foil_response_rate": 0
+        },
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      }
+    ]
+  },
+  "engineering_calibration": {
+    "accepted_receipt": "ManagedNativeCalibrationVerification.json",
+    "cases": {
+      "Classic-v1": {
+        "frozen_counts": {
+          "TP": 2,
+          "FP": 0,
+          "FN": 0,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1,
+          "target_hit_rate": 1,
+          "foil_response_rate": 0
+        },
+        "calibration_status": "calibrated"
+      },
+      "Classic-v2": {
+        "frozen_counts": {
+          "TP": 2,
+          "FP": 0,
+          "FN": 0,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1,
+          "target_hit_rate": 1,
+          "foil_response_rate": 0
+        },
+        "calibration_status": "calibrated"
+      },
+      "Branch-v1": {
+        "frozen_counts": {
+          "TP": 2,
+          "FP": 0,
+          "FN": 0,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1,
+          "target_hit_rate": 1,
+          "foil_response_rate": 0
+        },
+        "calibration_status": "calibrated"
+      },
+      "Branch-v2": {
+        "frozen_counts": {
+          "TP": 2,
+          "FP": 0,
+          "FN": 0,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1,
+          "target_hit_rate": 1,
+          "foil_response_rate": 0
+        },
+        "calibration_status": "calibrated"
+      }
+    },
+    "independent_partition_claimed": false
+  },
+  "new_assigned_window_controller_scientific_acceptance": false,
+  "whole_plan_complete": false
+}

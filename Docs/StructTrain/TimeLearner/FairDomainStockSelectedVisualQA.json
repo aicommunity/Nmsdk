@@ -1,0 +1,62 @@
+{
+  "kind": "fair_domain_stock_selected_visual_qa",
+  "schema_version": 1,
+  "reviewed_utc": "2026-11-07T00:06:52.201762+00:00",
+  "selection_commit": "bb1609fa8362cbf625fe4e08323146f0a4c43ebd",
+  "review_method": "Direct inspection of four native server-generated PNGs at 1920x960; exact Git bytes checked.",
+  "figures": [
+    {
+      "file": "Reports/StructTrain/TimeLearner/s07-stock-fair-selected-visual-m40-a1/Classic-threshold-low-advance32-target-soma1-overview.png",
+      "sha256": "85f3cf17f10b124200973612b1dbda052ca152f5fbb81b164e2a076a5490452e",
+      "manual_visual_review_complete": true,
+      "labels_readable": true,
+      "axes_unclipped": true,
+      "input_overlay_visible": true,
+      "y_scale": "shared",
+      "units": "model_units_SI_unverified"
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s07-stock-fair-selected-visual-m40-a1/Classic-threshold-low-advance32-foil-soma1-overview.png",
+      "sha256": "8734aeee9395658cfc4c246e60ee1cdc04a2c5519e7744d643d2c495d50a8d09",
+      "manual_visual_review_complete": true,
+      "labels_readable": true,
+      "axes_unclipped": true,
+      "input_overlay_visible": true,
+      "y_scale": "shared",
+      "units": "model_units_SI_unverified"
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s07-stock-fair-selected-visual-m40-a1/Classic-threshold-low-advance32-target-soma1-zoom-010-detail.png",
+      "sha256": "9b312747e363abf2e85318d5502d8eb38b644225bd883848f38e77e36aedf8cc",
+      "manual_visual_review_complete": true,
+      "labels_readable": true,
+      "axes_unclipped": true,
+      "input_overlay_visible": true,
+      "y_scale": "local_detail",
+      "units": "model_units_SI_unverified"
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s07-stock-fair-selected-visual-m40-a1/Branch-threshold-training100-advance32-target-soma1-zoom-004-detail.png",
+      "sha256": "4373b135bef9fda3487219bb174890a40026493c7b40d7503167c84630dba453",
+      "manual_visual_review_complete": true,
+      "labels_readable": true,
+      "axes_unclipped": true,
+      "input_overlay_visible": true,
+      "y_scale": "local_detail",
+      "units": "model_units_SI_unverified"
+    }
+  ],
+  "all160_pairs_manually_reviewed": false,
+  "all9190_views_manually_reviewed": false,
+  "observations": [
+    "Target and foil overviews show negative soma excursions coinciding with actual LT events; visual coincidence alone does not establish inhibition causality.",
+    "Classic local-Y detail resolves weak positive dynamics with an actual input pulse near 0.49 s.",
+    "Branch high-threshold local detail shows a varying soma potential despite silent output; no input pulse falls inside this particular 0.15-0.20 s window."
+  ],
+  "limitations": [
+    "SI units are not established; do not relabel values as volts or millivolts.",
+    "Shared-Y overviews and explicitly labelled local-Y details serve different comparisons.",
+    "Selected manual QA does not certify all views or training convergence."
+  ],
+  "scientific_verdict": null
+}

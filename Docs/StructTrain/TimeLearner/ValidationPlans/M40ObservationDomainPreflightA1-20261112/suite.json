@@ -1,0 +1,34 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "recorded-observation-domain-declaration4-and-actual-stock-native-preflight2-a1",
+  "package_fingerprint": "6736f8183b8208f8cfe9898d5a1ce84c504daf1252f3c5437d2e0241c494e7c9",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_declaration",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_preflight"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_declaration.StockObservationDomainDeclarationTest.test_preserves_physics_reference_windows_objective_and_search_budget",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_declaration.StockObservationDomainDeclarationTest.test_full_domain_does_not_move_with_length_Ns_Rs_or_C_changes",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_declaration.StockObservationDomainDeclarationTest.test_bad_reference_inventory_or_domain_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_declaration.StockObservationDomainDeclarationTest.test_tampered_source_digest_cannot_be_rebound",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_preflight.StockObservationDomainPreflightTest.test_actual_cold8_initial_graphs_match_original_stock_without_training"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD8_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "08dd64e81f557702794f630d38c831ae204e6e153f9c037546f19f42c2925707"
+    },
+    "TIMELEARNER_STOCK_COLD8_SOURCE": {
+      "pattern": "**/*.json",
+      "files": 9,
+      "fingerprint": "da70be4f1158986c9945837469cfc9661afb7b90f10fa3ecf0982f656c4a1f27"
+    },
+    "TIMELEARNER_STOCK_COLD8_RUNTIME": {
+      "pattern": "NeuroModelerConsole*",
+      "files": 2,
+      "fingerprint": "ec9b6cfa640025f0d4994bfc48488f0c151c5f3dfdf774d4ae3a5c92b63a9edc"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s08-recovery-execution5-data-m40-a2",
+  "package_fingerprint": "a4e2850e550cc2833dbcffd41bcb062b1ef50fcfee34e9c9f9f37b86e0e9fba3",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_git_source_projection.GitSourceProjectionTest.test_checkout_and_strict_status_work_without_promisor_remote",
+    "Scripts.StructTrain.TimeLearner.tests.test_git_source_projection.GitSourceProjectionTest.test_invalid_revision_and_unsafe_selection_fail_before_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_git_source_projection.GitSourceProjectionTest.test_pack_output_is_new_only",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_actual_source7_and_both_base_wrappers_bind_nonempty_ledger",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_digest_protects_ledger_fields",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_external_primary_corruption_is_not_hidden_by_embedded_bytes",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_missing_recovery_binding_cannot_be_legacy_execution4",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_package6_cannot_be_accepted_in_execution5",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_pre_source_payload_has_null_ledger_and_distinct_known_counters",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_rehashed_wrong_hash_and_count_are_rejected"
+  ],
+  "executed_tests": 10,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_CLOSED_PACKAGE7_SOURCE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/package7-first-closed-source-f1/Reports/StructTrain/TimeLearner/Package7ClassicN0ClosedSourceF1-20261111",
+      "files": 3,
+      "fingerprint": "38b09722d9112183b9afa514f9a6d61cd43bff0e9308d72cd397acf44bdf9db5"
+    }
+  },
+  "scientific_verdict": null
+}

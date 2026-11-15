@@ -1,0 +1,38 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-recorded-matrix-primary2-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 6442450944,
+    "tasks": 64,
+    "maximum_wall_seconds": 21600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 12884901888
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-recorded-matrix-plot44-a1",
+      "commit": "153949c67042b8dc99dbecc1a2f10d4996406b01"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-matrix-plot44-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedMatrixPrimary2A2-20261112/suite.json",
+      "sha256": "da8cd10662cbf922dc12bea5d2ce1a65f03da0753c9c37d1d51a3d932545330b"
+    },
+    "fixtures": {
+      "TIMELEARNER_RECORDED_MATRIX_PRIMARY": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-n4-diagnostic16-m40-a2",
+      "TIMELEARNER_RECORDED_MATRIX_INPUTS": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-n4-diagnostic16-m40-a2/native-inputs",
+      "TIMELEARNER_RECORDED_MATRIX_CONTROLLER": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-n4-diagnostic16-m40-a2-controller",
+      "TIMELEARNER_RECORDED_MATRIX_RUNTIME": "/media/user/Data/TimeLearnerRefactor/requests/recorded-n4-diagnostic-runtime-a1"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 1073741824,
+      "maximum_total_bytes": 8589934592
+    }
+  }
+}

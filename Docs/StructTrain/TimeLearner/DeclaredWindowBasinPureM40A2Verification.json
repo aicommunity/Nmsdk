@@ -1,0 +1,53 @@
+{
+  "kind": "independent_declared_basin_corrected_pure_gate_metadata_verification",
+  "schema_version": 1,
+  "evidence_commit": "993121d12cc05fdbafc1a1039b1560ad55870489",
+  "parent_root": "3c2ae1fd696462dad4677a795a05db80f5bac93d",
+  "pulse": "fce3cdf01db0c883b7f3b03045094f2580f9e981",
+  "archive_members_verified": 188,
+  "archive_bytes": 484584,
+  "archive_sha256": "85aef69d9d8a97082d647bec03068f4ea2507f1c9157518b6c803a725be963e7",
+  "modes": {
+    "normal": {
+      "observed": 36,
+      "passed": 36,
+      "failed": 0
+    },
+    "asan": {
+      "observed": 36,
+      "passed": 36,
+      "failed": 0
+    }
+  },
+  "source_files_git_hash_verified": 9,
+  "tool_python_git_hashes_verified": 411,
+  "actual_loaded_file_inventory_entries": 23,
+  "prior_negative_evidence_commit": "284879d5a7887198eebb4a53a15fa9d48399642b",
+  "fixture_only_root_change_verified": true,
+  "unchanged_pulse_production_algorithm": true,
+  "new_cpp_or_numeric_execution_during_collection": false,
+  "original_and_postclosure_after_snapshots_equal": true,
+  "prep_only_stale_controller_label_preserved": [
+    {
+      "job": "s07-declared-window-basin-source-prep-m40-a2",
+      "original_controller_declared_root": "236f1acbe978e645774cd96b10503bbe0d56fbd9",
+      "actual_git_source_root": "3c2ae1fd696462dad4677a795a05db80f5bac93d",
+      "numeric_execution": false,
+      "original_metadata_preserved": true
+    }
+  ],
+  "numeric_controller_and_native_runtime_root_pins_verified": true,
+  "owned_process_groups_closed": 5,
+  "outer_units_absent_and_leases_released": 3,
+  "native_leaf_units_absent": 2,
+  "unused_gitlinks_metadata_only": 6,
+  "four_production_translation_units_verified_per_mode": true,
+  "production_root_cmake_integration_accepted": false,
+  "sdk_source_payload_or_build_validated": false,
+  "native_context_validated": false,
+  "training_certificate_eligible": false,
+  "local_numeric_tests_executed": false,
+  "pack_sha256": "3265ac8b09f5e6b5ccf58d14f304c90ad848e4492c7a145984448ccd70693e36",
+  "git_import": "unpack-objects_no_checkout_no_refs",
+  "whole_plan_complete": false
+}

@@ -1,0 +1,35 @@
+{
+  "execution": "unknown",
+  "all_processes_closed": true,
+  "reason": "bound_unit_and_group_absent",
+  "scientific_verdict": null,
+  "binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "da237fd321517bf398a8188bc7ba9d0b69e72b1c4b66990681b2f6348d69ea8b",
+    "unit": "timelearner-5c67daa8-aa3c-48b0-a2e8-458234a419b6.service",
+    "invocation_id": "c8cdece4b3534cbfa22e248fa7e6ba1b",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5c67daa8-aa3c-48b0-a2e8-458234a419b6.service",
+    "initial_main_pid": 4103048,
+    "initial_start_ticks": "363772156",
+    "sha256": "4952b29eb509968272bf81a9d7d4a1833926c71f2ef5c7d9476fe239b8384204"
+  },
+  "state": {
+    "Type": "",
+    "Restart": "no",
+    "RemainAfterExit": "no",
+    "MainPID": "0",
+    "Result": "success",
+    "ExecMainCode": "0",
+    "ExecMainStatus": "0",
+    "ControlGroup": "",
+    "MemoryMax": "infinity",
+    "TasksMax": "52862",
+    "KillMode": "control-group",
+    "Description": "timelearner-5c67daa8-aa3c-48b0-a2e8-458234a419b6.service",
+    "LoadState": "not-found",
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "InvocationID": ""
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "kind": "timelearner_partitioned_native_gate_result",
+  "schema_version": 1,
+  "execution": "completed",
+  "validity": "valid",
+  "assertion_status": "failed",
+  "reason": "complete_independently_observed_inventory",
+  "inventory": {
+    "expected": 133,
+    "observed": 133,
+    "failed_test_ids": [
+      "NativeBranchAliasing/CoincidentLabelsExposeOneEffectivePhysicalBank"
+    ],
+    "assertion_status": "failed",
+    "sha256": "bd490d8bf5dfe1e5ce491ae4c67ea3f3fe6909213ffc8b562cf45a519e22eadc"
+  },
+  "scientific_verdict": null,
+  "executed_partitions": 133,
+  "wall_seconds": 28113.139298545197
+}

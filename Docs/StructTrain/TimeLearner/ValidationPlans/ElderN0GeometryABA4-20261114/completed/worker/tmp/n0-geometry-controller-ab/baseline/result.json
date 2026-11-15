@@ -1,0 +1,63 @@
+{
+  "root": "d69c463ab8b99c36e3424502fe24bc55f96162a6",
+  "pulselib": "04a10aa94da7adb887ccabd73a7b7ea2d8dd7600",
+  "compile": {
+    "execution": "completed",
+    "returncode": 0,
+    "wall_seconds": 32.332848749123514
+  },
+  "execution": "process_error",
+  "validity": "valid",
+  "assertion_status": "failed",
+  "executable": {
+    "path": "/home/user/timelearner-refactor/readbacks/s07-n0-geometry-ab-elder-a4/worker/tmp/n0-geometry-controller-ab/baseline/controller-tests",
+    "sha256": "333ff718c77ee81f8f2ddd2009a6987e34d683b4f7c4d25f2c4ee05fbcf2ba7f",
+    "size": 1010264
+  },
+  "resolved_libraries": [
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+      "size": 2220400
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+      "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+      "size": 125488
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+      "size": 940560
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+      "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+      "size": 2260296
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+      "size": 240936
+    }
+  ],
+  "actual_loaded_files_captured": false,
+  "test": {
+    "execution": "process_error",
+    "returncode": 1,
+    "wall_seconds": 0.007848115637898445
+  },
+  "inventory": {
+    "expected": 6,
+    "observed": 6,
+    "failed_test_ids": [
+      "BoundedTrainingN0Geometry/ClassicLaterGeometryNormalizesDespiteWorseStartingAmplitude",
+      "BoundedTrainingN0Geometry/BranchLaterGeometryNormalizesDespiteWorseStartingAmplitude",
+      "BoundedTrainingN0Geometry/BranchN4SeparatesTheUpstreamBankBeforeCountMeasurement",
+      "BoundedTrainingN0Geometry/LocalHistoryWaitsForCompleteRepeatedCandidates",
+      "BoundedTrainingN0Geometry/ImprovingCountsCannotConsumeTheWholeBudgetBeforeAnotherLength"
+    ],
+    "assertion_status": "failed",
+    "sha256": "7e87fbbff5fafe52f03f0e65dc25de56cb95e70fbadfcbb1d4ab0a8c75dac5b1"
+  }
+}

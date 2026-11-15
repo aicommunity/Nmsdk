@@ -1,0 +1,337 @@
+{
+  "kind": "native_candidate_window_summary7_console4_frozen_contract",
+  "schema_version": 1,
+  "status": "wire_frozen_implementation_pending",
+  "source_root": "121fcbbac7046871c02e0750ee42e87595f22c68",
+  "source_pulse": "0286336fbc5c05ce5b0d40cc1a886d2f2ebc0f63",
+  "package6": {
+    "fields": [
+      "calculate_mode",
+      "capacitance_state",
+      "capture_epoch",
+      "capture_revision",
+      "certificate",
+      "configuration",
+      "controller_version",
+      "dataset",
+      "dynamic_checkpoint",
+      "implementation_id",
+      "kind",
+      "measurement_archive",
+      "model_epoch",
+      "model_revision",
+      "neuron",
+      "protocol",
+      "reason",
+      "reference_complete",
+      "runtime_plan",
+      "schema_version",
+      "session_attempt",
+      "sha256",
+      "state_kind",
+      "structure_build_mode",
+      "trained_inputs",
+      "training_outcome"
+    ],
+    "version_tuple": {
+      "configuration": 7,
+      "protocol": 5,
+      "runtime_plan": 2,
+      "measurement_archive": 2,
+      "certificate": 3
+    },
+    "stopped_certificate": null,
+    "coherent_terminal_rewrite_attests_execution": false
+  },
+  "summary7": {
+    "kind": "native_training_state_summary",
+    "fields": [
+      "accepted_parameters",
+      "actual_model_revision",
+      "actual_parameters",
+      "applied_edits",
+      "candidates",
+      "capture_epoch",
+      "capture_revision",
+      "certificate",
+      "certificate_matches_actual_model",
+      "composite_counters",
+      "contains_evaluation_verdict",
+      "final_group_ids",
+      "final_semantic_proof_ids",
+      "kind",
+      "measurement_method",
+      "model_epoch",
+      "model_state_kind",
+      "outcome",
+      "owner_family_binding",
+      "reason",
+      "reference_complete",
+      "reference_group_ids",
+      "reference_semantic_proof_ids",
+      "references",
+      "rejections",
+      "resistance_domains",
+      "runtime_plan",
+      "schema_version",
+      "search_history_retained",
+      "search_probes",
+      "source_origin",
+      "state",
+      "tolerances"
+    ],
+    "reference_fields": [
+      "effective_model_revision",
+      "input_id",
+      "measurement_group_id",
+      "raw_potential",
+      "run_id",
+      "semantic_proof_id",
+      "trial_id"
+    ],
+    "candidate_fields": [
+      "amplitude_residual",
+      "anchor_group_id",
+      "anchor_semantic_proof_id",
+      "anchor_trial_id",
+      "full_parameters",
+      "input_index",
+      "measurement_group_id",
+      "model_epoch",
+      "model_revision",
+      "parameter_change_cost",
+      "parameters",
+      "semantic_proof_id",
+      "timing_high",
+      "timing_low",
+      "trial_id",
+      "within_amplitude",
+      "within_timing"
+    ],
+    "candidate_optional_fields": [
+      "capacitance"
+    ],
+    "parameters_fields": [
+      "length",
+      "resistance",
+      "synapses"
+    ],
+    "rejection_fields": [
+      "reason",
+      "trial_id"
+    ],
+    "allowed_state": "finished",
+    "runtime_plan_schema": 2,
+    "certificate_schema": 3,
+    "imported_search_history": {
+      "search_history_retained": false,
+      "candidates": [],
+      "rejections": [],
+      "resistance_domains": [],
+      "accepted_parameters": null,
+      "applied_edits": null,
+      "search_probes": null
+    },
+    "contains_evaluation_verdict": false,
+    "recipe_instance_linkage": "archive2 group semantic proof and cert3 fields, no duplicate overlay"
+  },
+  "execution4": {
+    "extra_fields": [
+      "base_schema_version",
+      "composite_counters",
+      "measurement_archive",
+      "measurement_method",
+      "model_semantic_hash",
+      "source_origin"
+    ],
+    "normal_train_base1_fields": [
+      "artifacts",
+      "attempt_id",
+      "base_schema_version",
+      "completed_boundary",
+      "composite_counters",
+      "evaluation_verdict",
+      "execution",
+      "frequency_hz",
+      "job_sha256",
+      "kind",
+      "measurement_archive",
+      "measurement_method",
+      "model_revision",
+      "model_semantic_hash",
+      "model_ticks",
+      "model_time_begin",
+      "model_time_end",
+      "package_path",
+      "package_sha256",
+      "schema_version",
+      "sha256",
+      "source_origin",
+      "training_outcome"
+    ],
+    "preflight_base1_fields": [
+      "artifacts",
+      "base_schema_version",
+      "composite_counters",
+      "controller_state",
+      "evaluation_verdict",
+      "execution",
+      "frequency_hz",
+      "integration",
+      "job_sha256",
+      "kind",
+      "measurement_archive",
+      "measurement_method",
+      "model_revision",
+      "model_semantic_hash",
+      "model_ticks",
+      "model_time_begin",
+      "model_time_end",
+      "observed_probes",
+      "reference_probes",
+      "schema_version",
+      "sha256",
+      "source_origin",
+      "training_started"
+    ],
+    "live_train_base2_fields": [
+      "artifacts",
+      "attempt_id",
+      "base_schema_version",
+      "completed_boundary",
+      "composite_counters",
+      "evaluation_verdict",
+      "execution",
+      "finalization_path",
+      "finalization_sha256",
+      "finalization_status",
+      "frequency_hz",
+      "job_sha256",
+      "kind",
+      "measurement_archive",
+      "measurement_method",
+      "model_revision",
+      "model_semantic_hash",
+      "model_ticks",
+      "model_time_begin",
+      "model_time_end",
+      "package_path",
+      "package_sha256",
+      "recognition_available",
+      "recognition_model_revision",
+      "recognition_package_path",
+      "recognition_package_sha256",
+      "schema_version",
+      "sha256",
+      "source_origin",
+      "training_outcome",
+      "training_started"
+    ],
+    "artifact_descriptor_fields": [
+      "bytes",
+      "path",
+      "sha256"
+    ],
+    "composite_counters": {
+      "attempt_fields": [
+        "logical_groups",
+        "native_probes",
+        "sampled_frames"
+      ],
+      "archive_fields": [
+        "groups",
+        "native_probes",
+        "primary_bytes",
+        "sampled_frames"
+      ],
+      "execution_fields": [
+        "native_trials",
+        "sampled_frames"
+      ]
+    },
+    "preflight": {
+      "measurement_archive": null,
+      "source_origin": null,
+      "attempt_counters": "known zeros",
+      "archive_counters": "known zeros",
+      "execution_counters": "known zeros",
+      "model_semantic_hash": "actual initial identity SHA"
+    },
+    "before_owned_start_failure": {
+      "measurement_archive": null,
+      "source_origin": null,
+      "attempt_counters": null,
+      "archive_counters": null,
+      "execution_counters": "actual callback counters",
+      "receipt": "training-start-failure.json",
+      "receipt_schema": 1,
+      "receipt_fields": [
+        "certificate",
+        "contains_evaluation_verdict",
+        "dynamic_checkpoint",
+        "kind",
+        "measurement_archive",
+        "model_revision",
+        "outcome",
+        "reason",
+        "schema_version",
+        "sha256",
+        "source_origin"
+      ]
+    },
+    "completed_or_stopped": {
+      "measurement_archive": "exact actual index artifact descriptor",
+      "source_origin": "archive2.source_origin",
+      "attempt_counters": "archive2.counters.attempt",
+      "archive_counters": "archive2.counters.archive",
+      "execution_counters": "actual current process callbacks, not retained history totals",
+      "model_semantic_hash": "package6.model_revision"
+    },
+    "evaluation_verdict": null,
+    "original_export_binding_required": "execution.package_sha256 + exact artifact file hashes + original source case"
+  },
+  "artifact_paths": {
+    "completed_package": "train_learned_state.json",
+    "stopped_package": "train_stopped_state.json",
+    "completed_summary": "train_learned_summary.json",
+    "stopped_summary": "train_stopped_summary.json",
+    "index": "composite-measurements/index.json",
+    "record_sidecars": "composite-measurements/group-{i+1:06d}.json",
+    "native_primary": "every raw.primary_ref.relative_path from ALL retained records; exact embedded bytes"
+  },
+  "transport": {
+    "training_job_schema_versions": [
+      1,
+      2
+    ],
+    "export_job_schema": 1,
+    "evaluate_job_schema": 1,
+    "recognition_state_schema": 1,
+    "conversion_spec_schemas": [
+      1,
+      2
+    ],
+    "recognition_trial_observation_schemas": [
+      1,
+      2
+    ],
+    "nested_source_solo_package": 6,
+    "recognition_verification": {
+      "status": "unverified",
+      "model_identity": "actual current recognition identity",
+      "certificate": null
+    },
+    "source_training_status_scope": "source_solo only",
+    "Test": "whole recorded pattern response and real output spikes; assigned Train windows not applied"
+  },
+  "compatibility": {
+    "old_package5": true,
+    "old_summary6": true,
+    "old_execution3": true,
+    "no_schema_ge_dispatch": true,
+    "native_defaults_unchanged": true,
+    "new_CLI_command_or_loop": false,
+    "runtime_accepted": false,
+    "Python_implementation_owned_separately": true
+  }
+}

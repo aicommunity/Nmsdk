@@ -63,6 +63,14 @@ class OwnedProcessTest(unittest.TestCase):
         finally:
             unrelated.terminate();unrelated.wait()
 
+    def test_exit_zero_preserves_execution_but_records_operational_error(self):
+        manifest=self.manifest(name='shell.rs2', binary='/bin/sh')
+        result=execute(manifest,['-c', "printf 'E20261108 02:41:59.575289 123 loader.cpp:2] caught error\\n' >&2; sleep .1"],
+                       self.root,self.root/'exit-zero-error',3)
+        self.assertEqual(result['execution'],'completed')
+        self.assertEqual(result['returncode'],0)
+        self.assertEqual(result['operational_diagnostics']['status'],'error')
+
     def test_cancellation_request_stops_only_owned_process(self):
         manifest=self.manifest();output=self.root/"cancelled"
         def cancel():

@@ -1,0 +1,11 @@
+# Независимый N4 readback A3: 5/5
+
+Job `s08-recorded-n4-independent5-m40-a3`, M40, source `dcbdf84d0b46dddc4282a08d77b7cf3057f0f6ed`, Tool40e28802. Все5 точных IDs прошли без failures/errors/skips. Execution completed за556.429 s, whole group closed, lease released, diagnostics clear. Source/tool/оба fixtures before/after побайтно равны; original files не изменялись. Raw13 proofs в `completed/`, отдельный integrity index.
+
+Полностью восстановлены189 members исходного архива. Его посторонний SDK36 controller отвергнут. Correct original native2 controller получен отдельным явно заданным Git fixture:7 файлов, fingerprint `b98d47c426ee4903748f65d35dafb55e4869880b239f0e440b1190dd0fa1ff5a`. Проверены job/case IDs, точные leaf bindings/closure/JUnit, source/data immutability и released lease. Принята именно эта явная композиция, а не исходный ошибочный архив сам по себе.
+
+Оба исходных qCompress пакета и оба повторно экспортированных model7 пакета проверены production recovery DATA-аудитором. Signed package hashes совпали; schema8 summary, recovery ledger и embedded primary проверены полностью. Исходные raw SHA175521654/192607805B и выходные142851310/143716360B проверены после ограниченной распаковки; truncated/trailing/wrong-size/wrong-hash qCompress отвергаются.
+
+Все3601 отсчётов каждого before/after response конечны, время строго возрастает, реальные stimulus samples совпадают, четыре фронта подтверждены. Сравнены все четыре recorded Soma channels Classic и один Branch с time tolerance5e-10/potential1e-12; excursion>1e-6. Нарисованы10 PNG1920×1200, full/response для каждого канала, без downsampling, с фактическими импульсами и разностью before/after. Семь выбранных PNG получены через Git и просмотрены; оси/легенды/заголовки читаемы, пики и входы видны. [Отчёт с рисунками](../../RecordedN4RoundtripVisualReport-20261112.ru.md).
+
+Classic сохраняет `invalid_observation`, Branch — `budget_exhausted`, certificate null. Controller checkpoint и cold Train не воспроизводились. Принят DATA replay переноса и динамического отклика; синхронизация, калибровка, классификация восьми паттернов и научный PASS из этого не следуют. Полная целевая матрица и production before/after performance остаются открыты.

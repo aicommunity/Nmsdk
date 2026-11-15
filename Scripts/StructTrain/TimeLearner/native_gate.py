@@ -10,6 +10,7 @@ from .native_calibration_worker import _write
 from .native_evidence import EvidenceError, load, number, require
 from .process_runner import execute, verify_runtime
 from .runtime import source_closure
+from . import native_gate_inputs
 
 
 FIELDS = {"kind", "schema_version", "runtime_manifest", "source_root", "expected_test_ids",
@@ -26,9 +27,21 @@ def supported_specification(spec):
         return False
     if spec["schema_version"] == 1:
         return set(spec) == FIELDS
-    if spec['schema_version'] == 3:
+    if spec['schema_version'] == 4:
         limits = spec.get('process_limits')
-        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits'} and
+        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits', 'worker_lock'} and
+                spec['cooperative_runtime_capture'] is True and type(limits) is dict and
+                set(limits) == {'memory_bytes', 'maximum_processes'} and
+                type(limits['memory_bytes']) is int and 32*1024**2 <= limits['memory_bytes'] <= 64*1024**3 and
+                type(limits['maximum_processes']) is int and 1 <= limits['maximum_processes'] <= 64 and
+                type(spec['worker_lock']) is str and bool(spec['worker_lock']))
+    if spec['schema_version'] in (3, 5):
+        limits = spec.get('process_limits')
+        additional = {'data_inputs'} if spec['schema_version'] == 5 else set()
+        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits'} | additional and
+                (spec['schema_version'] != 5 or
+                 (spec['cooperative_runtime_capture'] is True and
+                  native_gate_inputs.valid_declarations(spec['data_inputs']))) and
                 type(spec['cooperative_runtime_capture']) is bool and type(limits) is dict and
                 set(limits) == {'memory_bytes', 'tasks'} and
                 type(limits['memory_bytes']) is int and 0 < limits['memory_bytes'] <= 2**63-1 and
@@ -79,6 +92,8 @@ def run_native_gate(specification, output):
     specification = Path(specification).resolve(strict=True)
     spec = load(specification)
     require(supported_specification(spec), "unknown_native_gate_specification")
+    require(spec['schema_version'] != 4 or (os.name == 'nt' and spec['asan_options'] == ''),
+            'windows_native_gate_platform_or_asan_mismatch')
     expected = spec["expected_test_ids"]
     require(type(expected) is list and bool(expected)
             and all(type(x) is str and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*/[A-Za-z_][A-Za-z0-9_]*", x)
@@ -86,8 +101,9 @@ def run_native_gate(specification, output):
     require(type(spec["asan_options"]) is str and "\x00" not in spec["asan_options"], "invalid_native_gate_asan_options")
     wall = number(spec["maximum_wall_seconds"])
     require(wall > 0, "invalid_native_gate_wall_budget")
-    if spec['schema_version'] == 3:
+    if spec['schema_version'] in (3, 5):
         require(1 <= wall <= 86400, 'invalid_contained_wall_budget')
+    require(spec['schema_version'] != 5 or os.name == 'posix', 'native_gate_data_inputs_require_posix')
 
     def resolve(key):
         value = spec[key]
@@ -103,20 +119,38 @@ def run_native_gate(specification, output):
             and not output.is_relative_to(executable.parent) and not executable.parent.is_relative_to(output),
             "native_gate_output_overlaps_sources_or_runtime")
     require(source_closure(source) == runtime["source_closure"], "native_gate_source_context_changed")
+    captured_inputs = (native_gate_inputs.capture_inputs(spec['data_inputs'], output)
+                       if spec['schema_version'] == 5 else None)
     output.mkdir(parents=True, exist_ok=False)
     # The runner owns the supplied destination. An isolated fixture must not
     # depend on an earlier test having created its result directory.
     (output/"native").mkdir(exist_ok=False)
     _write(output/"specification.json", spec)
     _write(output/"runtime.json", runtime)
+    if captured_inputs is not None:
+        native_gate_inputs.stage_inputs(captured_inputs, output)
+        _write(output/"data-inputs-before.json", native_gate_inputs.verify_inputs(captured_inputs, output))
     environment = {key: runtime["loader_environment"].get(key)
-                   for key in ("LD_LIBRARY_PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM")}
-    environment.update(ASAN_OPTIONS=spec["asan_options"], TIMELEARNER_EXECUTION_OUTPUT=str(output/"native"))
+                   for key in (("PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM") if spec['schema_version'] == 4
+                               else ("LD_LIBRARY_PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM"))}
+    environment.update(ASAN_OPTIONS=spec["asan_options"],
+                       TIMELEARNER_EXECUTION_OUTPUT=str(output/"native"),
+                       TIMELEARNER_COMPOSITE_OUTPUT=str(output/"native-composite"))
     with _environment(environment):
         runner, limits = execute, {}
-        if spec['schema_version'] == 3:
+        if spec['schema_version'] in (3, 5):
             from .contained_runner import execute as contained_execute
             runner, limits = contained_execute, spec['process_limits']
+        if spec['schema_version'] == 4:
+            from .windows_process import execute as windows_execute
+            lock = Path(spec['worker_lock'])
+            lock = (lock if lock.is_absolute() else specification.parent/lock).resolve()
+            require(source == Path(runtime['windows_source_root']).resolve(strict=True),
+                    'windows_native_gate_source_binding_mismatch')
+            def runner(manifest, arguments, cwd, destination, wall, **options):
+                return windows_execute(manifest, arguments, cwd, destination, maximum_wall_seconds=wall,
+                                       lock_file=lock, **options)
+            limits = spec['process_limits']
         result = runner(runtime, ["--gtest_filter="+":".join(x.replace("/", ".") for x in expected),
                                   "--gtest_output=xml:"+str(output/"native.xml")],
                          executable.parent, output/"process", wall,
@@ -126,10 +160,16 @@ def run_native_gate(specification, output):
               "execution": result["execution"], "validity": "incomplete_test_observation",
               "assertion_status": "not_assessed", "reason": "native_result_not_available",
               "inventory": None, "scientific_verdict": None}
+    if captured_inputs is not None:
+        record.update(schema_version=2, data_inputs=None)
     try:
-        if spec['schema_version'] == 3:
+        if spec['schema_version'] in (3, 5):
             require(result.get('schema_version') == 2 and result.get('ownership_scope') == 'bound_cgroup' and
                     result.get('all_processes_closed') is True, 'native_gate_whole_group_closure_missing')
+        if spec['schema_version'] == 4:
+            require(result.get('kind') == 'timelearner_windows_process_result' and
+                    result.get('all_processes_closed') is True and result.get('validity') == 'valid' and
+                    result.get('cooperative_capture') == 'completed', 'windows_native_gate_closure_or_capture_missing')
         require(result["runtime_provenance"] == "loaded_files_captured", "native_gate_loaded_runtime_missing")
         inventory = audit_junit(output/"native.xml", expected)
         require((inventory["assertion_status"] == "passed" and result["execution"] == "completed"
@@ -137,6 +177,9 @@ def run_native_gate(specification, output):
                 (inventory["assertion_status"] == "failed" and result["execution"] == "process_error"
                  and result["returncode"] == 1), "native_gate_execution_junit_disagree")
         require(source_closure(source) == runtime["source_closure"], "native_gate_source_context_changed")
+        if captured_inputs is not None:
+            record['data_inputs'] = native_gate_inputs.verify_inputs(captured_inputs, output)
+            _write(output/"data-inputs-after.json", record['data_inputs'])
         record.update(validity="valid", assertion_status=inventory["assertion_status"],
                       reason="complete_declared_test_inventory", inventory=inventory)
     except (EvidenceError, OSError, ET.ParseError, ValueError, TypeError, KeyError) as error:

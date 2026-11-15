@@ -1,0 +1,75 @@
+from pathlib import Path
+from collections import Counter
+import subprocess,json,hashlib,sys,datetime
+base=Path('/media/user/Data/TimeLearnerRefactor')
+repo=base/'evidence-stock-fair-evaluation-full-visual-m40-a1'
+parent='bb1609fa8362cbf625fe4e08323146f0a4c43ebd'
+source=base/'source-worker-limit-preflight-a2'
+expected_source='eae3a302185406b841284abdaf407c56b77891b9'
+assert subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip()==expected_source
+assert subprocess.check_output(['git','-C',str(source),'status','--porcelain','--untracked-files=no'],text=True).strip()==''
+sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.native_evidence import load
+from Scripts.StructTrain.TimeLearner.candidate_recovery_evidence import audit_unassigned_burst
+from Scripts.StructTrain.TimeLearner.stock_recovery_study import audit_design
+study=base/'readbacks/s07-stock-fair-domains-normal-a2/study'
+design=audit_design(study);rows=[];bindings={}
+def checked(path,expected):
+ raw=path.read_bytes();sha=hashlib.sha256(raw).hexdigest()
+ assert len(raw)==expected['bytes'] and sha==expected['sha256'],str(path)
+ bindings[str(path.relative_to(study))]={'bytes':len(raw),'sha256':sha}
+ return raw
+for declared in sorted(design['rows'],key=lambda r:r['name']):
+ name=declared['name'];native=study/'runs'/name/'native';execution=load(native/'execution.json')
+ artifacts={a['path']:a for a in execution['artifacts']};assert len(artifacts)==len(execution['artifacts'])
+ package=load(native/execution['package_path']);protocol=package['protocol']
+ checked(native/execution['package_path'],artifacts[execution['package_path']])
+ packets=sorted(native.glob('train_stopped_trial_*.json'),key=lambda p:int(p.stem.rsplit('_',1)[1]));details=[];reasons=Counter();wavecounts=Counter();valid=0
+ for path in packets:
+  packet=load(path);obs=packet['observation']
+  if obs['valid']:
+   valid+=1;continue
+  checked(path,artifacts[path.name]);trace=path.with_suffix('.csv');checked(trace,artifacts[trace.name])
+  result=audit_unassigned_burst(packet,trace,protocol)
+  reasons[result['validity']]+=1;wavecounts[str(result['measured_wave_count'])]+=1
+  details.append({'json':str(path.relative_to(study)),'csv':str(trace.relative_to(study)),'audit':result,'reasons':obs['reasons'],'begin':obs['specification']['begin'],'end':obs['specification']['end'],'minimum_amplitude':obs['specification']['minimum_amplitude'],'stimuli':obs['stimuli'],'waves':obs['burst_assignments'][0]['waves']})
+ assert len(details)==33 and len(packets)==valid+len(details)
+ rows.append({'name':name,'total_recorded_trials':len(packets),'recorded_valid_trials':valid,'invalid_trials_independently_audited':len(details),'invalid_classes':dict(reasons),'wave_count_histogram':dict(wavecounts),'expected_stimuli':len(protocol['stimulus_ids']),'invalid_details':details})
+codefiles=['candidate_recovery_evidence.py','probe_diagnostics.py','native_evidence.py','stock_recovery_study.py']
+source_hashes={}
+for name in codefiles:
+ path=source/'Scripts/StructTrain/TimeLearner'/name;raw=path.read_bytes();relative=str(path.relative_to(source));assert raw==subprocess.check_output(['git','-C',str(source),'show',expected_source+':'+relative]);source_hashes[relative]=hashlib.sha256(raw).hexdigest()
+assert subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip()==expected_source
+result={'kind':'stock_fair_native_invalid_wave_audit','schema_version':1,'verified_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source_root':expected_source,'source_hashes':source_hashes,'training_evidence':'a1ea63709dbd9a40a54a0e0a0b38fee2b02f9af8','rows':rows,'invalid_trials_audited':sum(r['invalid_trials_independently_audited'] for r in rows),'primary_bindings':bindings,'thresholds_or_tolerances_changed':False,'observations_reclassified_as_valid':False,'new_native_training_executed':False,'causal_physics_explanation_attested':False,'scientific_verdict':None,'whole_plan_complete':False}
+prefix='Reports/StructTrain/TimeLearner/s07-stock-fair-peak-audit-m40-a1'
+payloads={prefix+'/analysis.json':(json.dumps(result,indent=2)+'\n').encode(),prefix+'/producer.txt':PUBLISHER_SOURCE.encode()};updates={}
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Audit264 actual invalid burst wave arrays against primary CSV without changing measurement criteria\n')
+git('update-ref','refs/heads/codex/stock-fair-peak-audit-evidence',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'invalid_trials_audited':result['invalid_trials_audited'],'rows':[{k:v for k,v in row.items() if k!='invalid_details'} for row in rows]}))

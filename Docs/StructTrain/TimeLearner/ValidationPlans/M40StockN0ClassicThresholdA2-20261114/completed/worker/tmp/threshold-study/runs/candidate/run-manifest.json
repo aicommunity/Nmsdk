@@ -1,0 +1,4730 @@
+{
+  "kind": "timelearner_native_pipeline_run_manifest",
+  "schema_version": 4,
+  "operation": "diagnostic-evaluate",
+  "process_policy": {
+    "kind": "timelearner_native_process_policy",
+    "schema_version": 2,
+    "backend": "bound_cgroup",
+    "memory_bytes": 8589934592,
+    "tasks": 128,
+    "cooperative_capture": true,
+    "reservation": {
+      "database": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/worker/tmp/threshold-study/leases.sqlite3",
+      "capacity": {
+        "slots": 1,
+        "memory_bytes": 25769803776,
+        "disk_bytes": 8589934592,
+        "tasks": 384
+      },
+      "token": "4f49d4f0-681c-4f31-ac7b-e18ff6734382"
+    }
+  },
+  "execution": "completed",
+  "validity": "valid",
+  "job_sha256": "8661bf9982009b81a186af7cd1556f8a9cb974284090bd041ab7e489bc640f28",
+  "source_package_path": "input/source/train_stopped_state.json",
+  "runtime_fingerprint": "377e0ebdee7bb1fa1cc11346438a1d2102b2124f08e3054b6347400c10a4f335",
+  "source_closure": {
+    "root": {
+      "head": "74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "7c6c94785af0c83104d348bb3b733ed1f149c8a8",
+      "head": "7c6c94785af0c83104d348bb3b733ed1f149c8a8",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "status": ""
+    }
+  },
+  "preflight": {
+    "job_sha256": "8661bf9982009b81a186af7cd1556f8a9cb974284090bd041ab7e489bc640f28",
+    "primary_source_checked": true,
+    "effective_model_checked": false,
+    "native_configuration_validation_required": true
+  },
+  "analysis": {
+    "frozen_model_verified": true,
+    "diagnostic_only": true,
+    "source_diagnostic_audit": {
+      "schema_version": 1,
+      "source_recognition_sha256": "3421a285df56c3910fade23846a2e6682bfe8ee64c0126763fdb3a5faa78d9e9",
+      "model_revision": "b6739683cbb5be38081afaadbe71645e2a448aec4ef355cd4782c71c70b056ca",
+      "threshold": 0.012765548843211696,
+      "threshold_derivation_verified": true,
+      "source_training_and_conversion_checked": true,
+      "source_audit": {
+        "auditor_version": 2,
+        "conversion_math_verified": true,
+        "source_audit": {
+          "auditor_version": 2,
+          "package_schema_version": 7,
+          "package_digest_verified": true,
+          "certificate_consistent": false,
+          "exact": null,
+          "mathematical_exact": null,
+          "stopped_math_is_not_completion": false,
+          "model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+          "training_outcome": "invalid_observation",
+          "logical_groups": 40,
+          "native_probes": 240,
+          "sampled_frames": 864240,
+          "primary_bytes": 93313988,
+          "source_origin": "f0ebf48c9c3462539319ae6d24aa540a11a08a59f794be835327f0946cf6ec31",
+          "owner_family_binding": "cbbd291514bbc93d88d7df6d91d3e5a15fbea8c32587574508179b267fa0cd56",
+          "composite_measurements": {
+            "reader_version": 2,
+            "method_id": "declared-window-basin-necessity-v1",
+            "source": {
+              "source_origin": "f0ebf48c9c3462539319ae6d24aa540a11a08a59f794be835327f0946cf6ec31",
+              "initial_model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+              "initial_epoch": 0,
+              "storage_images": 22,
+              "C0_present": false,
+              "native_import_verified": false
+            },
+            "groups": [
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/capture/1/1/composite/1",
+                "purpose": "reference",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2350203,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/capture/1/2/composite/2",
+                "purpose": "reference",
+                "input_index": 1,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2296577,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/capture/1/3/composite/3",
+                "purpose": "reference",
+                "input_index": 2,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2332608,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/capture/1/4/composite/4",
+                "purpose": "reference",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2367135,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/1/composite/5",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2367134,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/2/composite/6",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2368411,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/4/composite/7",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2382868,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/5/composite/8",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2382869,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/7/composite/9",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2382645,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/8/composite/10",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2277921,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/10/composite/11",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2201154,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "ambiguous",
+                "measured": false,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/11/composite/12",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": false,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2213356,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/13/composite/13",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2322406,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/14/composite/14",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2322415,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/16/composite/15",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2285134,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "ambiguous",
+                "measured": false,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/17/composite/16",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": false,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2285126,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/19/composite/17",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2322108,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/20/composite/18",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2322112,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/22/composite/19",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2321901,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/23/composite/20",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2321892,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/25/composite/21",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2321696,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/26/composite/22",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2321704,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/28/composite/23",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2321402,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/29/composite/24",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2333612,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/31/composite/25",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2361442,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/32/composite/26",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2361454,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/34/composite/27",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2361319,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/35/composite/28",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2361319,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/37/composite/29",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2360919,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/38/composite/30",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2360907,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/40/composite/31",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2328987,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "ambiguous",
+                "measured": false,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/41/composite/32",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": false,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2328985,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/43/composite/33",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2360779,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/44/composite/34",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2360780,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/46/composite/35",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2327620,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "ambiguous",
+                "measured": false,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/47/composite/36",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": false,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2327635,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/49/composite/37",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2360218,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/50/composite/38",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2360218,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "valid",
+                "measured": true,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/52/composite/39",
+                "purpose": "search",
+                "input_index": 3,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": true,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2333515,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              },
+              {
+                "native_closure_recomputed": true,
+                "geometry_recomputed": true,
+                "geometry_validity": "ambiguous",
+                "measured": false,
+                "selection_checked": true,
+                "primary_traces_checked": 6,
+                "rejection_reason_recomputed": true,
+                "group_id": "Classic-stock-cold8-N0/session/1/search/53/composite/40",
+                "purpose": "search",
+                "input_index": 0,
+                "attempt_id": "Classic-stock-cold8-N0/session/1",
+                "consumed": false,
+                "native_probes": 6,
+                "sampled_frames": 21606,
+                "retained_frames": 21606,
+                "primary_bytes": 2333502,
+                "capacitance": null,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null,
+                "proposal_recomputed": true
+              }
+            ],
+            "reference_set_recomputed": true,
+            "archive_counters_recomputed": true,
+            "attempt_membership_recomputed": true,
+            "retained_prefix_budgets_recomputed": true,
+            "current_runtime_budget_binding_checked": true,
+            "primary_files_checked": 240,
+            "current_runtime_plan": {
+              "runtime_plan_schema_version": 3,
+              "run_id": "Classic-stock-cold8-N0/session/1",
+              "protocol_binding": "1d7bc2a2d71de5fb6bc1ff9972dd39eb9013d5e66f3492fab7f0d2f8d8e9b2a8",
+              "normalization": "N0",
+              "n0_candidate_repeats": 1,
+              "runtime_plan_validated": true,
+              "current_search_derived_from_cold_configuration": false,
+              "live_authority_restored": false,
+              "native_execution_verified": false,
+              "training_certificate_verified": false,
+              "scientific_verdict": null
+            },
+            "primary_bytes": 93313988,
+            "artifact_document_sha256": "642c446174fd041a4692eb54780e04bfa9ec771b25de10f7a5330b0846693c07",
+            "native_execution_verified": false,
+            "live_authority_restored": false,
+            "training_certificate_verified": false,
+            "scientific_verdict": null
+          },
+          "runtime_plan": {
+            "runtime_plan_schema_version": 3,
+            "run_id": "Classic-stock-cold8-N0/session/1",
+            "protocol_binding": "1d7bc2a2d71de5fb6bc1ff9972dd39eb9013d5e66f3492fab7f0d2f8d8e9b2a8",
+            "normalization": "N0",
+            "n0_candidate_repeats": 1,
+            "runtime_plan_validated": true,
+            "current_search_derived_from_cold_configuration": false,
+            "live_authority_restored": false,
+            "native_execution_verified": false,
+            "training_certificate_verified": false,
+            "scientific_verdict": null
+          },
+          "capacitance_state": null,
+          "summary_checked": true,
+          "summary": {
+            "summary_consistent": true,
+            "search_history_retained": true,
+            "candidates_recomputed": 13,
+            "capacitance_candidates": 0,
+            "resistance_domains": [],
+            "native_execution_verified": false,
+            "search_decisions_replayed": false,
+            "parameter_change_cost_recomputed": false,
+            "rejection_reasons_recomputed": false,
+            "evaluation_verdict": null,
+            "summary_schema_version": 8,
+            "terminal_provenance_verified": false,
+            "controller_checkpoint_restored": false
+          },
+          "recovery_ledger": {
+            "schema_version": 1,
+            "ledger_digest_verified": true,
+            "deliveries_checked": 5,
+            "attempts_checked": 1,
+            "primary_files_checked": 240,
+            "attempts": {
+              "Classic-stock-cold8-N0/session/1": {
+                "events_checked": 5,
+                "primary_files_checked": 240,
+                "runtime_plan": {
+                  "runtime_plan_schema_version": 3,
+                  "run_id": "Classic-stock-cold8-N0/session/1",
+                  "protocol_binding": "1d7bc2a2d71de5fb6bc1ff9972dd39eb9013d5e66f3492fab7f0d2f8d8e9b2a8",
+                  "normalization": "N0",
+                  "n0_candidate_repeats": 1,
+                  "runtime_plan_validated": true,
+                  "current_search_derived_from_cold_configuration": false,
+                  "live_authority_restored": false,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null
+                },
+                "event_bindings_verified": true,
+                "service_ledger_completeness_verified": false,
+                "all_invalid_observations_independently_recounted": false,
+                "all_edits_independently_recounted": false,
+                "native_execution_verified": false,
+                "live_authority_restored": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null
+              }
+            },
+            "event_bindings_verified": true,
+            "service_ledger_completeness_verified": false,
+            "all_invalid_observations_independently_recounted": false,
+            "all_edits_independently_recounted": false,
+            "native_execution_verified": false,
+            "live_authority_restored": false,
+            "training_certificate_verified": false,
+            "scientific_verdict": null
+          },
+          "search_history_retained": true,
+          "terminal_provenance_verified": false,
+          "native_import_verified": false,
+          "native_execution_verified": false,
+          "live_authority_restored": false,
+          "completed_classification_requires_original_execution_binding": true,
+          "evaluation_verdict": null
+        },
+        "other_physics_preserved": true,
+        "native_import_verified": false,
+        "evaluation_verdict": null,
+        "diagnostic_only": true,
+        "certificate_present": false,
+        "training_outcome": "invalid_observation",
+        "training_reason": "rejected_candidate_window:ambiguous"
+      },
+      "native_import_verified": false,
+      "calibrated": false,
+      "evaluation_verdict": null,
+      "diagnostic_only": true,
+      "certificate_present": false,
+      "training_outcome": "invalid_observation",
+      "training_reason": "rejected_candidate_window:ambiguous"
+    },
+    "metrics": {
+      "schema_version": 1,
+      "criterion": {
+        "anchor": "onset",
+        "begin_offset": 0,
+        "end_offset": null,
+        "id": "post_anchor_target_whole_window_foil_v1",
+        "reject_target_outside_window": true
+      },
+      "evaluation_spec_digest": "c1a036d8d96071d8a38901c2db6b3c556f09f7d4c87821eea13ebcac6faf3a88",
+      "coverage_policy": "per_trial_windows",
+      "run_id": "same-matrix-stopped-threshold/candidate",
+      "model_revision": "b6739683cbb5be38081afaadbe71645e2a448aec4ef355cd4782c71c70b056ca",
+      "declared_training_outcome": "invalid_observation",
+      "source_training_evidence_checked": true,
+      "calibration": {
+        "candidate_record": {
+          "algorithm": "explicit-native-threshold-v2",
+          "calibrated": false,
+          "ltzone_path": "$.LTZone",
+          "model_revision": "b6739683cbb5be38081afaadbe71645e2a448aec4ef355cd4782c71c70b056ca",
+          "original_threshold": 100,
+          "schema_version": 1,
+          "source_model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+          "source_recognition_sha256": "3421a285df56c3910fade23846a2e6682bfe8ee64c0126763fdb3a5faa78d9e9",
+          "threshold": 0.012765548843211696
+        },
+        "ltzone_path": "$.LTZone",
+        "protocol": "threshold-candidate-not-calibrated",
+        "source_solo_sha256": "7220986840f4dcbe0f731e65b5c282eda663f078ef599271c037f07e84ea3fb6",
+        "status": "fixed",
+        "threshold": 0.012765548843211696
+      },
+      "effective_threshold": 0.012765548843211696,
+      "native_execution_verified": false,
+      "evaluation_verdict": null,
+      "invalid_trial_ids": [],
+      "diagnostic_only": true,
+      "training_completed": false,
+      "training_certificate_present": false,
+      "diagnostic_threshold_experiment": true,
+      "calibration_performed": false,
+      "validity": "valid",
+      "reason": "complete_declared_evaluation",
+      "pooled_counts": {
+        "TP": 1,
+        "FP": 4,
+        "FN": 0,
+        "TN": 3,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.5,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.5714285714285714
+      },
+      "by_reset_policy": {
+        "reset_per_trial": {
+          "TP": 1,
+          "FP": 4,
+          "FN": 0,
+          "TN": 3,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.5,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.5714285714285714,
+          "criterion_satisfied": false,
+          "criterion_assessed": true
+        }
+      },
+      "trials": [
+        {
+          "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "presentation_index": 0,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 0.01,
+          "response_end": 2.0,
+          "spike_count": 1,
+          "window_spikes": [
+            0.503
+          ],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TP"
+        },
+        {
+          "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "presentation_index": 1,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 2.0105,
+          "response_end": 4.000500000000001,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "presentation_index": 2,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 4.011,
+          "response_end": 6.001,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "presentation_index": 3,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 6.0115,
+          "response_end": 8.0015,
+          "spike_count": 0,
+          "window_spikes": [],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "TN"
+        },
+        {
+          "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "presentation_index": 4,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 8.012,
+          "response_end": 10.002,
+          "spike_count": 2,
+          "window_spikes": [
+            8.0355,
+            8.5055
+          ],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "FP"
+        },
+        {
+          "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "presentation_index": 5,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 10.0125,
+          "response_end": 12.0025,
+          "spike_count": 1,
+          "window_spikes": [
+            10.495
+          ],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "FP"
+        },
+        {
+          "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "presentation_index": 6,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 12.013,
+          "response_end": 14.003,
+          "spike_count": 2,
+          "window_spikes": [
+            12.065,
+            12.504
+          ],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "FP"
+        },
+        {
+          "trial_id": "Classic-stock-N0-terminal/stopped-phasea-diagnostic/rotation-0/7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "presentation_index": 7,
+          "reset_policy": "reset_per_trial",
+          "response_begin": 14.0135,
+          "response_end": 16.003500000000003,
+          "spike_count": 1,
+          "window_spikes": [
+            14.4635
+          ],
+          "early_spikes": [],
+          "late_spikes": [],
+          "classification": "FP"
+        }
+      ],
+      "source_diagnostic_audit": {
+        "schema_version": 1,
+        "source_recognition_sha256": "3421a285df56c3910fade23846a2e6682bfe8ee64c0126763fdb3a5faa78d9e9",
+        "model_revision": "b6739683cbb5be38081afaadbe71645e2a448aec4ef355cd4782c71c70b056ca",
+        "threshold": 0.012765548843211696,
+        "threshold_derivation_verified": true,
+        "source_training_and_conversion_checked": true,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 2,
+            "package_schema_version": 7,
+            "package_digest_verified": true,
+            "certificate_consistent": false,
+            "exact": null,
+            "mathematical_exact": null,
+            "stopped_math_is_not_completion": false,
+            "model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+            "training_outcome": "invalid_observation",
+            "logical_groups": 40,
+            "native_probes": 240,
+            "sampled_frames": 864240,
+            "primary_bytes": 93313988,
+            "source_origin": "f0ebf48c9c3462539319ae6d24aa540a11a08a59f794be835327f0946cf6ec31",
+            "owner_family_binding": "cbbd291514bbc93d88d7df6d91d3e5a15fbea8c32587574508179b267fa0cd56",
+            "composite_measurements": {
+              "reader_version": 2,
+              "method_id": "declared-window-basin-necessity-v1",
+              "source": {
+                "source_origin": "f0ebf48c9c3462539319ae6d24aa540a11a08a59f794be835327f0946cf6ec31",
+                "initial_model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+                "initial_epoch": 0,
+                "storage_images": 22,
+                "C0_present": false,
+                "native_import_verified": false
+              },
+              "groups": [
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/capture/1/1/composite/1",
+                  "purpose": "reference",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2350203,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/capture/1/2/composite/2",
+                  "purpose": "reference",
+                  "input_index": 1,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2296577,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/capture/1/3/composite/3",
+                  "purpose": "reference",
+                  "input_index": 2,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2332608,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/capture/1/4/composite/4",
+                  "purpose": "reference",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2367135,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/1/composite/5",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2367134,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/2/composite/6",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2368411,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/4/composite/7",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2382868,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/5/composite/8",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2382869,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/7/composite/9",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2382645,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/8/composite/10",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2277921,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/10/composite/11",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2201154,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "ambiguous",
+                  "measured": false,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/11/composite/12",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": false,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2213356,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/13/composite/13",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2322406,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/14/composite/14",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2322415,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/16/composite/15",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2285134,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "ambiguous",
+                  "measured": false,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/17/composite/16",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": false,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2285126,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/19/composite/17",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2322108,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/20/composite/18",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2322112,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/22/composite/19",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2321901,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/23/composite/20",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2321892,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/25/composite/21",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2321696,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/26/composite/22",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2321704,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/28/composite/23",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2321402,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/29/composite/24",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2333612,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/31/composite/25",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2361442,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/32/composite/26",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2361454,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/34/composite/27",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2361319,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/35/composite/28",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2361319,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/37/composite/29",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2360919,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/38/composite/30",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2360907,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/40/composite/31",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2328987,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "ambiguous",
+                  "measured": false,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/41/composite/32",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": false,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2328985,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/43/composite/33",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2360779,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/44/composite/34",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2360780,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/46/composite/35",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2327620,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "ambiguous",
+                  "measured": false,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/47/composite/36",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": false,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2327635,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/49/composite/37",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2360218,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/50/composite/38",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2360218,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "valid",
+                  "measured": true,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/52/composite/39",
+                  "purpose": "search",
+                  "input_index": 3,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": true,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2333515,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                },
+                {
+                  "native_closure_recomputed": true,
+                  "geometry_recomputed": true,
+                  "geometry_validity": "ambiguous",
+                  "measured": false,
+                  "selection_checked": true,
+                  "primary_traces_checked": 6,
+                  "rejection_reason_recomputed": true,
+                  "group_id": "Classic-stock-cold8-N0/session/1/search/53/composite/40",
+                  "purpose": "search",
+                  "input_index": 0,
+                  "attempt_id": "Classic-stock-cold8-N0/session/1",
+                  "consumed": false,
+                  "native_probes": 6,
+                  "sampled_frames": 21606,
+                  "retained_frames": 21606,
+                  "primary_bytes": 2333502,
+                  "capacitance": null,
+                  "native_execution_verified": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null,
+                  "proposal_recomputed": true
+                }
+              ],
+              "reference_set_recomputed": true,
+              "archive_counters_recomputed": true,
+              "attempt_membership_recomputed": true,
+              "retained_prefix_budgets_recomputed": true,
+              "current_runtime_budget_binding_checked": true,
+              "primary_files_checked": 240,
+              "current_runtime_plan": {
+                "runtime_plan_schema_version": 3,
+                "run_id": "Classic-stock-cold8-N0/session/1",
+                "protocol_binding": "1d7bc2a2d71de5fb6bc1ff9972dd39eb9013d5e66f3492fab7f0d2f8d8e9b2a8",
+                "normalization": "N0",
+                "n0_candidate_repeats": 1,
+                "runtime_plan_validated": true,
+                "current_search_derived_from_cold_configuration": false,
+                "live_authority_restored": false,
+                "native_execution_verified": false,
+                "training_certificate_verified": false,
+                "scientific_verdict": null
+              },
+              "primary_bytes": 93313988,
+              "artifact_document_sha256": "642c446174fd041a4692eb54780e04bfa9ec771b25de10f7a5330b0846693c07",
+              "native_execution_verified": false,
+              "live_authority_restored": false,
+              "training_certificate_verified": false,
+              "scientific_verdict": null
+            },
+            "runtime_plan": {
+              "runtime_plan_schema_version": 3,
+              "run_id": "Classic-stock-cold8-N0/session/1",
+              "protocol_binding": "1d7bc2a2d71de5fb6bc1ff9972dd39eb9013d5e66f3492fab7f0d2f8d8e9b2a8",
+              "normalization": "N0",
+              "n0_candidate_repeats": 1,
+              "runtime_plan_validated": true,
+              "current_search_derived_from_cold_configuration": false,
+              "live_authority_restored": false,
+              "native_execution_verified": false,
+              "training_certificate_verified": false,
+              "scientific_verdict": null
+            },
+            "capacitance_state": null,
+            "summary_checked": true,
+            "summary": {
+              "summary_consistent": true,
+              "search_history_retained": true,
+              "candidates_recomputed": 13,
+              "capacitance_candidates": 0,
+              "resistance_domains": [],
+              "native_execution_verified": false,
+              "search_decisions_replayed": false,
+              "parameter_change_cost_recomputed": false,
+              "rejection_reasons_recomputed": false,
+              "evaluation_verdict": null,
+              "summary_schema_version": 8,
+              "terminal_provenance_verified": false,
+              "controller_checkpoint_restored": false
+            },
+            "recovery_ledger": {
+              "schema_version": 1,
+              "ledger_digest_verified": true,
+              "deliveries_checked": 5,
+              "attempts_checked": 1,
+              "primary_files_checked": 240,
+              "attempts": {
+                "Classic-stock-cold8-N0/session/1": {
+                  "events_checked": 5,
+                  "primary_files_checked": 240,
+                  "runtime_plan": {
+                    "runtime_plan_schema_version": 3,
+                    "run_id": "Classic-stock-cold8-N0/session/1",
+                    "protocol_binding": "1d7bc2a2d71de5fb6bc1ff9972dd39eb9013d5e66f3492fab7f0d2f8d8e9b2a8",
+                    "normalization": "N0",
+                    "n0_candidate_repeats": 1,
+                    "runtime_plan_validated": true,
+                    "current_search_derived_from_cold_configuration": false,
+                    "live_authority_restored": false,
+                    "native_execution_verified": false,
+                    "training_certificate_verified": false,
+                    "scientific_verdict": null
+                  },
+                  "event_bindings_verified": true,
+                  "service_ledger_completeness_verified": false,
+                  "all_invalid_observations_independently_recounted": false,
+                  "all_edits_independently_recounted": false,
+                  "native_execution_verified": false,
+                  "live_authority_restored": false,
+                  "training_certificate_verified": false,
+                  "scientific_verdict": null
+                }
+              },
+              "event_bindings_verified": true,
+              "service_ledger_completeness_verified": false,
+              "all_invalid_observations_independently_recounted": false,
+              "all_edits_independently_recounted": false,
+              "native_execution_verified": false,
+              "live_authority_restored": false,
+              "training_certificate_verified": false,
+              "scientific_verdict": null
+            },
+            "search_history_retained": true,
+            "terminal_provenance_verified": false,
+            "native_import_verified": false,
+            "native_execution_verified": false,
+            "live_authority_restored": false,
+            "completed_classification_requires_original_execution_binding": true,
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "diagnostic_only": true,
+          "certificate_present": false,
+          "training_outcome": "invalid_observation",
+          "training_reason": "rejected_candidate_window:ambiguous"
+        },
+        "native_import_verified": false,
+        "calibrated": false,
+        "evaluation_verdict": null,
+        "diagnostic_only": true,
+        "certificate_present": false,
+        "training_outcome": "invalid_observation",
+        "training_reason": "rejected_candidate_window:ambiguous"
+      }
+    },
+    "native_execution_verified": false,
+    "evaluation_verdict": null
+  },
+  "analysis_code": [
+    {
+      "path": "__init__.py",
+      "sha256": "3ae9d4d5d19fd781ecba11907d899b2383714019aa048fb10c945ad1d7415221"
+    },
+    {
+      "path": "__main__.py",
+      "sha256": "a39a19ddb570934b8f164a68b53eb2823fffbc31486f3a0fc392f25d880254d9"
+    },
+    {
+      "path": "archive_retirement.py",
+      "sha256": "e68fb553ebc3be22e4c4b89a2e2484d8a54cf553aa7bd6c33385718417b2d269"
+    },
+    {
+      "path": "archive_transfer_reports.py",
+      "sha256": "0f8ae7fe85779bb9b39a6226e51b1cd0d3e56791aad4792f337d4bb6d95cf99d"
+    },
+    {
+      "path": "artifact_bundle.py",
+      "sha256": "63ee60dac6ef45cbb1619d5a4532a158ddb21e4a72d329900fe5550675b32a58"
+    },
+    {
+      "path": "assigned_vertex_evidence.py",
+      "sha256": "912bb04acd724841c01bb759d7a37de6a124de3bfa2a2758271df5edc1f9f287"
+    },
+    {
+      "path": "assigned_vertex_temporal.py",
+      "sha256": "d3a67d99894ed3f8ff1c55ea0b10f7d8291d897e5408c32b0f390f789fc18106"
+    },
+    {
+      "path": "calibrated_evidence.py",
+      "sha256": "32de82ab7623536fec22ba65fcad1629d0c81e03e811d3031683b03d6b92c523"
+    },
+    {
+      "path": "calibration.py",
+      "sha256": "b1d4fb871ab74d476d4923947df2db13bda0b21df1bdd32d37d08596d6a70de6"
+    },
+    {
+      "path": "calibration_io.py",
+      "sha256": "12fdf7c5912c7ca3154964be01754c39021d4494b134c050627bd1ec39ae897d"
+    },
+    {
+      "path": "calibration_transaction_evidence.py",
+      "sha256": "5d94132fdf43d98e23196ffa6ebe6d94ca76539845c8292e12acf8efe1535ece"
+    },
+    {
+      "path": "calibration_transaction_reports.py",
+      "sha256": "eca93f395095f865ad88cdf21f98c1813b753267b4a315aa6ef37d6218c0108d"
+    },
+    {
+      "path": "candidate_recovery.py",
+      "sha256": "53d03021f6edd1987549d070a7fd6a6f66ffd30d832cf9aeb3f0575db75ea6cc"
+    },
+    {
+      "path": "candidate_recovery_evidence.py",
+      "sha256": "c979ba2d9aa2a5a90c3e7ea62e13a089d5fd07bd88e8be87c5e984febb43cd2d"
+    },
+    {
+      "path": "candidate_recovery_history.py",
+      "sha256": "5ac7994bfb2d1bc45f34bdcc3c67fd1eba3ecaf7352384dd47da21cc28c18b2d"
+    },
+    {
+      "path": "candidate_window_archive_evidence.py",
+      "sha256": "d1b0b8e8111f1b41ebd86e4c3fa255ffeea58347c4fbdb88c390624791fcfa2e"
+    },
+    {
+      "path": "candidate_window_binding_evidence.py",
+      "sha256": "9a9aeec3c964db29ed1ec02f151d8fb5914f06410cd70e7edb7541575225ccb0"
+    },
+    {
+      "path": "candidate_window_certificate_evidence.py",
+      "sha256": "6cfdfdf9af894894e886edabe6d550bd09409fd6ca6fd0eb8ff4442dd3be5798"
+    },
+    {
+      "path": "candidate_window_contract.py",
+      "sha256": "5553b51d46164b546a37c74895e129f43da45b8440bb565bfee576ae2db3b6bb"
+    },
+    {
+      "path": "candidate_window_diagnostic_replay.py",
+      "sha256": "451931f28f4220905ab80b51f322ca3ab9cc5f791a3b8fcbd3aef43ea6d44f81"
+    },
+    {
+      "path": "candidate_window_execution_evidence.py",
+      "sha256": "3e86133495c9bf871cddc57b08f02320145b691e022661df7984907788ce80fb"
+    },
+    {
+      "path": "candidate_window_package_evidence.py",
+      "sha256": "ada5c7c2b0b89d3f52e1c794f015fc8529bc7bb4ec96a6a7ba5c3397466403c5"
+    },
+    {
+      "path": "candidate_window_recovery_events.py",
+      "sha256": "397ffd3a302eddfaf2273a24987b8f325c2fae585b38326491d83809ca83bbbd"
+    },
+    {
+      "path": "candidate_window_recovery_execution_evidence.py",
+      "sha256": "8c66c050f2764bc7dae17843dfc27e5b7d1ce569fed889d785ddae2239293c98"
+    },
+    {
+      "path": "candidate_window_recovery_ledger.py",
+      "sha256": "5255ee663f9a1daf686c7146e668b66658a6275f3c1ecca4910db0c5193b8dd8"
+    },
+    {
+      "path": "candidate_window_runtime_plan.py",
+      "sha256": "9775b8bce93f90c4779123752fa768c006aba66587de9028fe21d1cec1c8d806"
+    },
+    {
+      "path": "candidate_window_summary_evidence.py",
+      "sha256": "0a58558adfda49c997ae2fe46d56f12afdc7bfb7b8faab44e0802f0a77c33730"
+    },
+    {
+      "path": "capacitance_binding_evidence.py",
+      "sha256": "ec339efd2b46786ca64da4e5b40e3767161979e42974156a1bd1abe8d2161df8"
+    },
+    {
+      "path": "capacitance_boundary_evidence.py",
+      "sha256": "247f963242fd9e0635e64dff91a60626e2846391d10f3a8f74caee0b132cb0f4"
+    },
+    {
+      "path": "capacitance_evidence.py",
+      "sha256": "85a984c8441b56953e7af8407b0826d6ff72e711b8521998b4b75e01cba9eb2c"
+    },
+    {
+      "path": "capacitance_ownership_evidence.py",
+      "sha256": "38ac4d10d292570447fe045c79a2d443347c0c7cdd6c97fa55c48f00d1ac5b44"
+    },
+    {
+      "path": "capacitance_policy.py",
+      "sha256": "18ad6830faa83fdbe72ee5436526398104be34f02cbe0ac90e982a679bb7d6cc"
+    },
+    {
+      "path": "capacitance_region_evidence.py",
+      "sha256": "3cb677a6534451447b2972e60adc73b9600e232f71b12641041ec83e36ff0985"
+    },
+    {
+      "path": "capacitance_region_reports.py",
+      "sha256": "6f841c9e07e4ab060c799b94409a999266216ed07e0df2655db74ecfd0b5a7bc"
+    },
+    {
+      "path": "capacitance_search_reports.py",
+      "sha256": "0f934a88526eb20a54276f6202bcca8c09fa8ca2270858547e6414b12ab6db8a"
+    },
+    {
+      "path": "channel_diagnostic_reports.py",
+      "sha256": "5b74c62fd36dc351ea1e3f7336295d34596b8074555de5e644d2c5f62096f32c"
+    },
+    {
+      "path": "clock_alignment.py",
+      "sha256": "0113a3214c81d079865a038723d2e4bf546eca371ae4db310e499d6cdcf7027e"
+    },
+    {
+      "path": "closed_native_collection.py",
+      "sha256": "b16fd0bf756c8e317cdfa2093f13cf41700352848281aea828dcb6e9e9e2b6b8"
+    },
+    {
+      "path": "closed_native_inventory.py",
+      "sha256": "19ce41b4827cc9b47f2c1b5b8a3837b0bc830643f251b0e57c6908694545780f"
+    },
+    {
+      "path": "closed_primary_bundle.py",
+      "sha256": "c9c09739a2bfef402d2e984682a735e22badc6eee0188ce8c45a7212f9eeb639"
+    },
+    {
+      "path": "closed_python_validation.py",
+      "sha256": "c991b51e4f3a15146d9060c377a4874b822f3c537c7dad18dd36bb4f2ebc837a"
+    },
+    {
+      "path": "collector_provenance.py",
+      "sha256": "f218ee877d9018e5bb51327fc4deebe28820e992fb569f3d80f782f8d2c0ed44"
+    },
+    {
+      "path": "composite_archive_case.py",
+      "sha256": "3279e62018f5beaac6bb3e8b0cab0d61a629d7639328e97eacd0c04874324985"
+    },
+    {
+      "path": "composite_certificate_evidence.py",
+      "sha256": "454fc6f7ebc483ac5eb1af1391e7c058536c94d656b22ddb52d3911785e75253"
+    },
+    {
+      "path": "composite_configuration.py",
+      "sha256": "7ef2f24d38f7684c69d3830b5718adb8575d40c4dd1f9983e2323b6821fc457b"
+    },
+    {
+      "path": "composite_execution_evidence.py",
+      "sha256": "da074a22b207b92cac68e86f2c06ba878a52e47c5394475b931939c7e0c81769"
+    },
+    {
+      "path": "composite_measurement_contract.py",
+      "sha256": "04ef7287e347775dd93e280e593aa599b9aa51f06dbbcf46050a0a5e0719768e"
+    },
+    {
+      "path": "composite_measurement_evidence.py",
+      "sha256": "5b0711918074fb86d58857651d306d189a70d14c566072e8f8d0abaf427d792b"
+    },
+    {
+      "path": "composite_package_evidence.py",
+      "sha256": "aedf1b58397d9aa09affca031241edc16942d9e5c70083fe687a264ca7971bae"
+    },
+    {
+      "path": "composite_primary.py",
+      "sha256": "1a6066f57a7eb99edb97bd84e97948dd18ccd54250f82f1843a0117f9f015e6f"
+    },
+    {
+      "path": "composite_raw_evidence.py",
+      "sha256": "1a9501a4c280f6caa389ecd850b79b209c8c80b14f5ec0c8f60c3db7255a6817"
+    },
+    {
+      "path": "composite_runtime_plan.py",
+      "sha256": "384c1a1d1485a1c6355f780ec9a0dba1268d87c43749d9991197691008bda221"
+    },
+    {
+      "path": "composite_source_evidence.py",
+      "sha256": "04cb1e41c10e16d506b530957cf610d8be791920064fab5efd075573dd369fbc"
+    },
+    {
+      "path": "composite_summary_evidence.py",
+      "sha256": "25a08fb18b75a7d3575db967eeb853ca2e95430ed81715703f47a8f300dc518d"
+    },
+    {
+      "path": "composite_training_temporal.py",
+      "sha256": "f2c643b209bae7ec18c50a18150c430bc2e7a6a5a9d978160d487f8677786036"
+    },
+    {
+      "path": "condition.py",
+      "sha256": "9428f580ec416f186fe8972fa251dfffc4830876e9569ae613f902c19e51dc71"
+    },
+    {
+      "path": "config_document.py",
+      "sha256": "eb23466af82e016441f5bc34337a2e21f04e90d458717582c8913abddb6a5c0c"
+    },
+    {
+      "path": "connected_stop_evidence.py",
+      "sha256": "ef7d862c39d16c5430181e34762d378a5062adb71541988a3e115713ef065a51"
+    },
+    {
+      "path": "contained_process.py",
+      "sha256": "187645c22246b0468950d6c09c3be4be940ec908b4f56156831713377150abef"
+    },
+    {
+      "path": "contained_runner.py",
+      "sha256": "0603af649c05c533ca2cbbd2389aadab704e59c2a2011d25123e5731dad8a148"
+    },
+    {
+      "path": "controller_ab.py",
+      "sha256": "8c82da7cebddc1d295e082a8fd69e2990fb80886cf03a0b0e6f4038911bc1f18"
+    },
+    {
+      "path": "cpp_syntax_preflight.py",
+      "sha256": "b54a154c5b5b3f7060b83ff1ad1ea4472aa4b59d274b82fe662b9fa76fb28de9"
+    },
+    {
+      "path": "dataset_clock_reports.py",
+      "sha256": "360fcaacd23d929f7214faf8890b939312a4f5fa8d6683fd5e4f0429d1c53218"
+    },
+    {
+      "path": "declared_time_scales.py",
+      "sha256": "669cbd60ef9ebda4ea31ee0f887602c08463e7595114e3f40ff61761f86a0f50"
+    },
+    {
+      "path": "declared_window_basin_evidence.py",
+      "sha256": "d83b9b42d7dcb12bd428cd7036fe3be902308587c614552d4a4e100d465c8379"
+    },
+    {
+      "path": "declared_window_basin_report.py",
+      "sha256": "39890588dc148a1c9f535a0e12a83e07816466e1eec63dec27129cf17111b1b9"
+    },
+    {
+      "path": "diagnostic_log_cleanup.py",
+      "sha256": "312aac9f38ef793986d83b7f347338ddd8b3b3695edc2dc30baec8b6c9f089b5"
+    },
+    {
+      "path": "diagnostic_recognition_evidence.py",
+      "sha256": "897b84588a555f973e33227d896b5f7ee1680e04243ce5aa56b4812834f4f9ac"
+    },
+    {
+      "path": "diagnostic_regression.py",
+      "sha256": "564de4f1f6dcdd0f0caf75aeb022a97a2ada7d1ad796bcc10aaf8e033aeb787c"
+    },
+    {
+      "path": "diagnostic_threshold_study.py",
+      "sha256": "4ec93e5c1b0633393511b39a670d9aa11707638606d9c865263521ab34984208"
+    },
+    {
+      "path": "domain_evidence.py",
+      "sha256": "042d6df5a4f76148dca07264e5fc6f481fb4379c696984e2f40f71d89eb80f69"
+    },
+    {
+      "path": "feedback_intervention.py",
+      "sha256": "dc16d3b92983718e701cbe0b84b103fe7bb8dc6bcdae70635764bf9fdd149e61"
+    },
+    {
+      "path": "finalization_boundary_evidence.py",
+      "sha256": "d6ce776261aab7f7cf540859cef155ad98a78c0fa12a41475f73745c68437306"
+    },
+    {
+      "path": "finalization_boundary_reports.py",
+      "sha256": "95317711c5c3110dbf91287e5edb864a343edaed3f7f06fd6de59b3a04e295e4"
+    },
+    {
+      "path": "finalization_clock_evidence.py",
+      "sha256": "83353fb319fdc9f9bd208f713e1e4cf58a6ecadfca548e32d29c3d8ffe31e928"
+    },
+    {
+      "path": "finalization_ownership_evidence.py",
+      "sha256": "365ea5f9797cde82c1742a6d36b969fe0e91e789cf57651fd571dbf7a08a06ef"
+    },
+    {
+      "path": "finalization_ownership_reports.py",
+      "sha256": "3875b603409759f579e94e2b43556e34168848ada748d24d95d978671512bdd6"
+    },
+    {
+      "path": "finite_ranking_evidence.py",
+      "sha256": "ca17a1665b0680d3bdb52f18b9b2cfb36af55ea38b161dcef021beaa8ccbd6ea"
+    },
+    {
+      "path": "fixed_geometry_resistance.py",
+      "sha256": "b27049f2037cf3088998be4bf044681ca2c885b24f4aeb273f3b5d1a70d4b874"
+    },
+    {
+      "path": "fresh_recognition_owner_evidence.py",
+      "sha256": "f3565eda02641287a4deefbea455ce0978676b6a2ee493f0b37789833e532910"
+    },
+    {
+      "path": "git_source_projection.py",
+      "sha256": "29d92d92adf0d02f9ded4df52d2aa79c70212d4efb999a3a95484ec7e7cb8aeb"
+    },
+    {
+      "path": "historical_model.py",
+      "sha256": "f9fc9c4baa565e0884e847a2b22184bfb9d3ce9e4c3e228161213e683690c640"
+    },
+    {
+      "path": "historical_phasea_native.py",
+      "sha256": "4a5ec597e3c1005d5f6f8253ee2c12790eba33f66c37f9d29b4588d4b764a561"
+    },
+    {
+      "path": "historical_phasea_temporal.py",
+      "sha256": "0168019c8f5bc558c010d410f556a04479545530da881b471c0f0c375ddc42c8"
+    },
+    {
+      "path": "historical_protocol_robustness.py",
+      "sha256": "6d9c3e456aea6eb6538524effae6cace6450af275c4cad65a5d660b519c4cd75"
+    },
+    {
+      "path": "historical_protocol_temporal.py",
+      "sha256": "347047b5f7b6c553f5f42333f05f661936a995092544784874740066af9af159"
+    },
+    {
+      "path": "historical_report_index.py",
+      "sha256": "90fbc174de2e4b02688fe5b045a0b59900de8b68a11b86107732114435b6db39"
+    },
+    {
+      "path": "historical_selectivity.py",
+      "sha256": "9c27eed406a79e422a2ce267820d4154690d208668fa05d8056c8c897f809c8f"
+    },
+    {
+      "path": "history.py",
+      "sha256": "7fc8d51326cdf1d1fb164317178798bc4ba70a21d0825d7aad3af56999884642"
+    },
+    {
+      "path": "hot_readout_reports.py",
+      "sha256": "38893369624b8f42b92a3d414025d07ba24448b6c5d1e3e1a27209d1f3f5833c"
+    },
+    {
+      "path": "hot_xml_reports.py",
+      "sha256": "97a7208a5818031537fc7659b4c736f517ce046829d52295a35437eda90d06be"
+    },
+    {
+      "path": "inherited_properties.py",
+      "sha256": "ecf46b62e6286b125a58217d8ba4205c216b36cea36da2d84a337596003a9370"
+    },
+    {
+      "path": "inventory.py",
+      "sha256": "4e01771cf5c6f55dce484e41555dd8ec0319ba261095bab836c75358656ef4ab"
+    },
+    {
+      "path": "learned_evidence.py",
+      "sha256": "99c4e1ae1e03115c74aa7648d6de89383078f97cd5c0870bef64e08afeb4237f"
+    },
+    {
+      "path": "legacy_completed_replay.py",
+      "sha256": "562f868a2ff78d4972584a79bb34a97c07b18b374ef93e65e6cdef1fcfcfe6bb"
+    },
+    {
+      "path": "legacy_dynamics.py",
+      "sha256": "3eaa1bfc92688ed7c91e74685f0f6b0119a457d4f61435e13c8568ee214f0ec9"
+    },
+    {
+      "path": "legacy_posttune_evidence.py",
+      "sha256": "725fe2e106cf47365fc6baddeae3ab2bea9f8fc8dfd457e2e1dfb2852a140a84"
+    },
+    {
+      "path": "legacy_posttune_reports.py",
+      "sha256": "720e85cf010ff43e315ad2ed434d684a10fdfab2a20692900aefcea27d57476c"
+    },
+    {
+      "path": "length_proposal_experiment.py",
+      "sha256": "e62c77ea318e44a64d6cf11dd2d858b204247b11535378ba19c78dee89d83467"
+    },
+    {
+      "path": "live_finalization_evidence.py",
+      "sha256": "fa26ea1cd0fa979dd2968cbad5f8829e5e3332ff5af4a2b1163496518cab3ccf"
+    },
+    {
+      "path": "live_finalization_reports.py",
+      "sha256": "8b661fb987041990bf0d6aec3dc3435eb151c8c2c859b97b6fbcb6682287c6aa"
+    },
+    {
+      "path": "live_pipeline_reports.py",
+      "sha256": "204aa4a4d7721cdb528a86ca9e2d4baaf12fca275b05c8cc796df3ef4f919bac"
+    },
+    {
+      "path": "live_training_worker.py",
+      "sha256": "35630189f1fb149803e4d144d12a2063d134f6e23f858adcd2151fd77957b9b1"
+    },
+    {
+      "path": "loaded_readout_reports.py",
+      "sha256": "8ba4163a59d5327120c7b02ff916d7a50aabe9bae1afdf4f0afba7bcabd8709e"
+    },
+    {
+      "path": "managed_declaration.py",
+      "sha256": "9089eaee0cd75e70b10cfca97ecc0a1d1ae4141848c1640c8021348e8a48092a"
+    },
+    {
+      "path": "managed_pipeline.py",
+      "sha256": "6907a109f4514dba0947b61d28a3635ecd1236c7b81b2a7e1290d214487124e9"
+    },
+    {
+      "path": "managed_reservation_graph.py",
+      "sha256": "b28cfb370a1b67128f53f51b0c007fcd204d1bd04834fd4593c91a374c5b0bbf"
+    },
+    {
+      "path": "matched_omission_evidence.py",
+      "sha256": "5a83ba874baee93e4b40c66201a800cd88ac13836ba165aadcd4b25d34e3b067"
+    },
+    {
+      "path": "matched_omission_portable.py",
+      "sha256": "08538c6c510062749dbb9875f5d8692d46067cba136726f10209a9201067b1b3"
+    },
+    {
+      "path": "matched_resistance_analysis.py",
+      "sha256": "3dd2f1921b0d847ce508ece0ce54585e3b6f548e5566cee05fc6f738ee1e6941"
+    },
+    {
+      "path": "matched_resistance_reports.py",
+      "sha256": "25c0e6f216c83c99db624ca7cc77fdbe7da9e29d859be060a96cd7e6ccaafa46"
+    },
+    {
+      "path": "migration.py",
+      "sha256": "65f6f7359edf0c47e1cec165245110c8fef7a0fff98552fb2710154e59b49e9e"
+    },
+    {
+      "path": "model_identity.py",
+      "sha256": "d09cee240b12c3b0989ffc33b5a4443f1dfcb4d081f668c1a52c251675f8714d"
+    },
+    {
+      "path": "model_spec_transport.py",
+      "sha256": "3211ac69ca4d92a6928aa46590e34dab1073314fd2d48a65569f4aa4ebf81446"
+    },
+    {
+      "path": "n1_protocol_reports.py",
+      "sha256": "a0d418074adb08fcafb973dfcba6df05a569f1255da33c1bcc9c11e4778e52a2"
+    },
+    {
+      "path": "n1_protocol_robustness.py",
+      "sha256": "cad752eca2a597179e0c48058e35a77f215b05925e8dfd9e12484997c2742cd0"
+    },
+    {
+      "path": "native_acceptance_worker.py",
+      "sha256": "42e75192f9c0569f3b2c7aafcb1f36f2c1b57f3efade76b0ca4cedb9c7a05133"
+    },
+    {
+      "path": "native_burst_resistance_study.py",
+      "sha256": "bb77ddd66d803d29e1b295670bd720271139c72dad7d4fb35d2bb1e9e2cd6bf0"
+    },
+    {
+      "path": "native_calibration_evidence.py",
+      "sha256": "7c136ef8c41946c8673e8135046e1ce38a99e5a0cf790919f942f78f4c5579da"
+    },
+    {
+      "path": "native_calibration_worker.py",
+      "sha256": "7a0b78de30d375644ab559e7886c2fd61efd4dc887e285e1a3e3b7e9e5e2d8f6"
+    },
+    {
+      "path": "native_canonical_preparation.py",
+      "sha256": "0302e255381e1b6fff8fe2cbf1d1bf6e7ee89ea6f60f09f913516bd1933c8f04"
+    },
+    {
+      "path": "native_characterization.py",
+      "sha256": "5f708f6b785f8daa2c8752577fcf2b3fcd235d3541ac1a09b5a845a233d07023"
+    },
+    {
+      "path": "native_cli.py",
+      "sha256": "573c2bd73ceb50ea78a6533c472c4498beba8795735b6b2c20cb8dbb7084dc64"
+    },
+    {
+      "path": "native_data_checks.py",
+      "sha256": "58225f951837347c2eeb1f85baca8571cc22e684d5049d2252db41642c7af24c"
+    },
+    {
+      "path": "native_evidence.py",
+      "sha256": "246932557a8ca15b4e1d05c8c6066e1b6ffedbb06697af06f33309780e1af99c"
+    },
+    {
+      "path": "native_execution_gate.py",
+      "sha256": "d36d3bd8e64722c4d0f6447dc5b636bb569abc5736a6da75aa445d1a82d63f73"
+    },
+    {
+      "path": "native_gate.py",
+      "sha256": "636dd1a697f96cc617de34ce92ac92ae965262516a3331431430fb31aef1e79b"
+    },
+    {
+      "path": "native_gate_inputs.py",
+      "sha256": "4dc636aeb59edc3d001b61693d76f8436037f955e6ec7b95771d237b2f6508b6"
+    },
+    {
+      "path": "native_model_spec.py",
+      "sha256": "45653ff90f638025e1a362b04ae9870d61e4e3c34e17774db9b7009968abdf63"
+    },
+    {
+      "path": "native_partition.py",
+      "sha256": "d5e720c5883e52b8012570fe4efe0730a1b3794b3600f20c0c422eba40143b4b"
+    },
+    {
+      "path": "native_pipeline_worker.py",
+      "sha256": "8cc9be1cab85f7c636c4b683c152d4e228a709a19e2d408464512c8856b5b370"
+    },
+    {
+      "path": "native_preparation.py",
+      "sha256": "9e6d29d5d371393b4fdf0af001ab945ba1c1d1ca2387d581d70335535eb3db7f"
+    },
+    {
+      "path": "native_process_policy.py",
+      "sha256": "fedde9f2de4c3fbd0d30890c3ceed7821cfff738a52b36fc772185204de54d10"
+    },
+    {
+      "path": "native_test_reports.py",
+      "sha256": "6e3a800241eb61a6acba374de35baf04a01353a0019620749bdb40bdbd4db265"
+    },
+    {
+      "path": "operational_diagnostics.py",
+      "sha256": "d6528d5ce143388effc3d014f2fe7c75861e0152343d46a6cf162c28b9a9cbe4"
+    },
+    {
+      "path": "owned_native_job.py",
+      "sha256": "0a875aca17489ce03adcf5f3eda41bfe36422e7ac73ac860ed8f7a00c709b2fe"
+    },
+    {
+      "path": "owned_posttune_evidence.py",
+      "sha256": "5f95b5f38564540cfe1ea622703e06eebe8d9aeea8f0df84f996cefb4299b0b8"
+    },
+    {
+      "path": "owned_python_job.py",
+      "sha256": "dd51ebf5b19024b52f247b2b8faa1b6c928333f524fc924e3e0068b3c593f9b1"
+    },
+    {
+      "path": "owner_binding_evidence.py",
+      "sha256": "915d9abb5b8f3d5c59f0fe8b0157f82c5919f8cc93608a3a00edac72ff2e2e12"
+    },
+    {
+      "path": "phasea_matrix.py",
+      "sha256": "2e28059d418baeb55a8fecf2f1b2d8c8d75470da614931cf7e9b71315d014727"
+    },
+    {
+      "path": "pipeline_condition.py",
+      "sha256": "77448c023f896a8349a37ab76bf581c23d7adb339284bdb8c2c179e69a9680d2"
+    },
+    {
+      "path": "plotting.py",
+      "sha256": "d893bf32a820210c5f6a9a67e2bf7a8634e9de69a040daeb830c983d03bfbd5b"
+    },
+    {
+      "path": "portable_primary.py",
+      "sha256": "77389a4cfe4948bf5f223875fd4c61c3a1f2d51ee7cd3bd427415e96081a1df0"
+    },
+    {
+      "path": "posttune_evidence.py",
+      "sha256": "55281974d013d594630c34e3aa0f11eda22d57909765b9cd7911b917109eda81"
+    },
+    {
+      "path": "posttune_probe_threshold_controls.py",
+      "sha256": "0c2f70dac7118cbf7b1a1ca0e0975579e45e31f8ee0696987ee6b2cc7aaf3f59"
+    },
+    {
+      "path": "posttune_transaction_evidence.py",
+      "sha256": "b77e255cc06515d6121cbb9515b1d6f8e5592d2f7bf56c1fa67bebba124dd18e"
+    },
+    {
+      "path": "posttune_transaction_reports.py",
+      "sha256": "dcf3b0e772f9460dc3b46f8afd9b3b3f23a7ccf6fcef414c71ec6df0ca7929a7"
+    },
+    {
+      "path": "preflight_regression.py",
+      "sha256": "cddc099d5ed5097aa63ef6bde533e86adf5f5743ec0bc4ed74d848fa743c432e"
+    },
+    {
+      "path": "prepare.py",
+      "sha256": "634b7d948a82c6acb7b72aeb2f359a014016d37667b922a276f8810ca115fcc6"
+    },
+    {
+      "path": "primary_recompression.py",
+      "sha256": "69cdac65784ef9724d26a8d780f0419d2d6605a71130849613515eee338c365a"
+    },
+    {
+      "path": "primary_reuse.py",
+      "sha256": "bd96f09b484ca28fdc29376382a0c7042bcb498523d26766963f7522890e2a3a"
+    },
+    {
+      "path": "probe_channel_diagnostics.py",
+      "sha256": "43f84f2f594c7bfc60c2d0e00ff19b378ca3a177237db3f3cccc253c20d8f8a5"
+    },
+    {
+      "path": "probe_controller_readback.py",
+      "sha256": "2323c5f340ec8560b16a1bf7f5685fdc85eaccda87ca48cfa66af479503b4ad3"
+    },
+    {
+      "path": "probe_diagnostics.py",
+      "sha256": "890443bdcd8199c943a68aa5e1c49449410c6e2d7b273a8fa1c49837eb709259"
+    },
+    {
+      "path": "probe_reports.py",
+      "sha256": "e9780f92e63544dee64cbf386a3919de0355411002e83f66cd113bb9e7d0913d"
+    },
+    {
+      "path": "process_limits.py",
+      "sha256": "13bed5774330dd1969a6732cce6535a7514a4eb5fd9f6ac037c8897824815127"
+    },
+    {
+      "path": "process_runner.py",
+      "sha256": "417f553d0f3a10a4128aeb96c99692e4a44a89b48c7e3758b995089c1d9eea31"
+    },
+    {
+      "path": "property_drift.py",
+      "sha256": "e7444b3a4381cb8c8fc787fd6da5fd1529e08dc1138b5442be0e44fb85d6f4ea"
+    },
+    {
+      "path": "publication_lock.py",
+      "sha256": "03f0ad435464ac376bc4d9380c1f49189396922010ff8171bda100e812ae4e51"
+    },
+    {
+      "path": "publisher.py",
+      "sha256": "067f56ff299c07fff202a2fcc56d3f68d8fc5263baaedf856fd6d06b896c4ffb"
+    },
+    {
+      "path": "qt_json.py",
+      "sha256": "d95c4bfee1aa9f696087e1aa5180368b1460666765cd9a7244d77e9bd4830560"
+    },
+    {
+      "path": "recognition_evidence.py",
+      "sha256": "06c71c27e25338fb75433576e70b198708d3d9caeb9ca146388abffe14348b53"
+    },
+    {
+      "path": "recognition_metrics.py",
+      "sha256": "399e4186356c9cc10af396802745850f343219dd0acb2a5bb3e367f5d58fdc57"
+    },
+    {
+      "path": "recognition_owner_evidence.py",
+      "sha256": "3280f065bc7be61374190cd9a518022952a5b4fd6b7ac76ab2f97ce0e6311c03"
+    },
+    {
+      "path": "recognition_owner_replay.py",
+      "sha256": "1ef9408b03a3f72e5fd3594b29c65e3c23c36ba224af17c1259191b97517c1c8"
+    },
+    {
+      "path": "recognition_owner_replay_reports.py",
+      "sha256": "21d8bd81a6e31bd401504713542084518be09f0bc69ebc4e3743469dbb325545"
+    },
+    {
+      "path": "recognition_transport_reports.py",
+      "sha256": "da11c494f86c19a5434082c7590e0d254de9c9c1e8283de53d2d4cfbba8b69f4"
+    },
+    {
+      "path": "recognition_trial_evidence.py",
+      "sha256": "03d84ae3b9e2f8d0b97ba25ace6fbf405d6e96e3c5aa8e2e98cedc3220e41a38"
+    },
+    {
+      "path": "recorded_diagnostic_matrix.py",
+      "sha256": "eb5ed3f69dc2e48931fde13acf8ef97d3ab518aa5d719435134edae938ad39ba"
+    },
+    {
+      "path": "recorded_matrix_primary.py",
+      "sha256": "53672f046c21778a9d61ea2b179a1b7bae015fa67e48f66cefd12986a28bb0e1"
+    },
+    {
+      "path": "recorded_roundtrip_evidence.py",
+      "sha256": "1eb66b19c061e2fd16c5d8df983ab2c324c09e9bdfffc92d75541f597c755e8b"
+    },
+    {
+      "path": "recorded_training_focus.py",
+      "sha256": "8b18fbb3ad6fda2eece6da374eb52226dfe7283de6b46c2990347c949a0e0f6d"
+    },
+    {
+      "path": "reports.py",
+      "sha256": "595ad06166af97f32be8c1f5426536665742958bd8092257d86e44a6208a20de"
+    },
+    {
+      "path": "resource_reservations.py",
+      "sha256": "76b7bedf0ba68f1f3cb20d08e0eeb99fc07e4a76dff66d5b25dfda2d99df876b"
+    },
+    {
+      "path": "response_domain_evidence.py",
+      "sha256": "98ffcd251b0cb3c22bd7fcae3d0d8ca1c802944567082b8fa0233b70c9721266"
+    },
+    {
+      "path": "response_domain_temporal.py",
+      "sha256": "f60bc412baa54a14b8890c9b87ea17b69be7c0d7de7d1fc9b5640638b2655edf"
+    },
+    {
+      "path": "review_views.py",
+      "sha256": "af23ae4b4f028296dbc6c5b1bba6dfd7fd704b41753924403d8e704680263190"
+    },
+    {
+      "path": "runtime.py",
+      "sha256": "1c100eda62e1501c247d209e5b8e85ddb3f882ccddcc86753d6fafc19f6665f0"
+    },
+    {
+      "path": "search_coverage.py",
+      "sha256": "5b52b2bae55e989b2c38ce9e985d23c73d24ebf68b02ed8354c45c1c4ab416b3"
+    },
+    {
+      "path": "single_maximum_replay.py",
+      "sha256": "b50b37c7f59aab21875c44669f3b55dd34d3642fba3c5c8801eec61612b51292"
+    },
+    {
+      "path": "single_pulse_evidence.py",
+      "sha256": "463f18a2ce5b9c10506ff719fbb34dfdca2729c8f098806172a38cf5fbd1ac95"
+    },
+    {
+      "path": "solo_threshold_evidence.py",
+      "sha256": "602b93931206d847023fdfb29734c1727a9fe005d5c90ea9a610886dfeceec67"
+    },
+    {
+      "path": "solo_threshold_reports.py",
+      "sha256": "c49f14c99a8824943f29599753fea4cb544a0dd18ff0dede2a35aeee156c0487"
+    },
+    {
+      "path": "source_envelope_bundle.py",
+      "sha256": "d85001026f298b2c6f96ef572960c00a1187d9668e3d97381b1cae1622890116"
+    },
+    {
+      "path": "source_job_envelope.py",
+      "sha256": "f906c370e07bdde7efde86dcee1ab6c391885001bf5c5d437c8deb377231f458"
+    },
+    {
+      "path": "source_reference_audit.py",
+      "sha256": "291255cde33d7cfd6d826a907ce68127e3f0708873441cbc2e64ba442629148e"
+    },
+    {
+      "path": "static_archive_cleanup.py",
+      "sha256": "3186e66808ff58f25b801db8e9cc785545eb38e0344d7b43080739031fc963a2"
+    },
+    {
+      "path": "statistic_traces.py",
+      "sha256": "1eb50ae199fb52c9317f994d70dfb13df29c1006634f63662e4c0eebcb7b3acf"
+    },
+    {
+      "path": "stimulus_subset_evidence.py",
+      "sha256": "7547ae51c0b5bd0ea671474e9cf689d0562f2423943d0111fab24d5608f16eff"
+    },
+    {
+      "path": "stimulus_subset_temporal.py",
+      "sha256": "1faa1530754d1010171a3efa243c38c27b3b88fededcc20ba412734f5c0bd7cf"
+    },
+    {
+      "path": "stock_candidate_window_study.py",
+      "sha256": "33613f4d6f54d4e7dfa57ec28291d681e36f4a906f36709ba0bf306e7c908592"
+    },
+    {
+      "path": "stock_channel_diagnostics.py",
+      "sha256": "4b66c968db49745d8ffa017cb22381e51db8b1d96d3960b09138d2b129b6dd89"
+    },
+    {
+      "path": "stock_cold_characterization.py",
+      "sha256": "ee7e8911c03af641a03fbeb2279b2ff8f153296778bb415ca0195e78d6aee23b"
+    },
+    {
+      "path": "stock_cold_primary.py",
+      "sha256": "ffe3f3a006ac5ebb4abb5bea6c894cce74cb4a17e57f55ebed10a9465177f851"
+    },
+    {
+      "path": "stock_failure_reports.py",
+      "sha256": "a1c30a0ba1d4be2904b667e1d043ab9ebcc9cae6745418d81aa296decd5bdb7e"
+    },
+    {
+      "path": "stock_feedback_profile.py",
+      "sha256": "03e01ec292870e3cf42710de45ac4d9116b1ece7670c82cc2bd4dad2f46e0ee9"
+    },
+    {
+      "path": "stock_first_pulse.py",
+      "sha256": "4a82845199fe1ad6409430c463fba4ff2ec67436805c075205c1626a668fd622"
+    },
+    {
+      "path": "stock_phasea_preflight.py",
+      "sha256": "bf2f8766d477d7bb9961eddf654afbff586080c32a5fb0609762cac8ad78b98c"
+    },
+    {
+      "path": "stock_recovery_compare.py",
+      "sha256": "6a1515ff2f79b6b23e7183699cc48dba39392dc9d5cb30bac199e1cc788a142a"
+    },
+    {
+      "path": "stock_recovery_evaluation.py",
+      "sha256": "76d9744dfe682b04e3f659fec1acdadc6998e25b2ca59eccd24eac579430f0b5"
+    },
+    {
+      "path": "stock_recovery_study.py",
+      "sha256": "8fbdbef3f9da86ca118a56c1a145946eec5137ad4bf0311700bf32ff052cfd65"
+    },
+    {
+      "path": "stock_single_pulse.py",
+      "sha256": "f94f2f2edcefe96cab0f3b8c689768378044b5d72a432299649fc9bca657c2aa"
+    },
+    {
+      "path": "stock_stopped_evaluation.py",
+      "sha256": "95a82521b152a40d15f8f001153d915334a15ea932621e10ad09d1fd105cc8a1"
+    },
+    {
+      "path": "stock_threshold_study.py",
+      "sha256": "aecfae3ab6453a53562352a04a623d4aa189e3476aafb9679c5f17511b3ce728"
+    },
+    {
+      "path": "stock_wave_replay.py",
+      "sha256": "078409ea334ca218f786d97df8d265eee789e4dd5f7124236bce2d09003d419a"
+    },
+    {
+      "path": "stopped_evidence.py",
+      "sha256": "12d3030ef4dfbde35efb53dda3611ce8e6f5993e159c2df573ddf26e8ac7932a"
+    },
+    {
+      "path": "stopped_final_pass.py",
+      "sha256": "577309fea7742a96c268821dbe5ff924ae1f43ead27b1a52a499d4477e35920a"
+    },
+    {
+      "path": "superposition_diagnostic.py",
+      "sha256": "1d5b65239b464b52e7a7f31d916aa85c3fbb38499c834e461d0375986ead4429"
+    },
+    {
+      "path": "threshold_candidate_evidence.py",
+      "sha256": "c548ca519baa45a86e54d4f553b24485402a79366d2d07dbd346bb514494bb55"
+    },
+    {
+      "path": "threshold_proposal_evidence.py",
+      "sha256": "554d40dc8ab6451de1e318a5c4e959b28013d8fa3a5bfc2ec066fc2174f25504"
+    },
+    {
+      "path": "training_capacitance_bridge_evidence.py",
+      "sha256": "40000564d5049841c026e02deb683372c4bb4fb0236133ffafa50bb5b81d13c1"
+    },
+    {
+      "path": "training_capacitance_history.py",
+      "sha256": "14fe9c654ae96fa5eeace3b1697f87322a61e882efe0730bc64994d0fed28f77"
+    },
+    {
+      "path": "training_capacitance_witness.py",
+      "sha256": "a36300eefee510d62af9bd62afdec0c3ad2782f7f104bf1a258ff61aa8d1e7db"
+    },
+    {
+      "path": "training_intent_evidence.py",
+      "sha256": "0387d26531b088bc86fcc632300af90a14a18dad122dd4bd45ad1403cf1d69f9"
+    },
+    {
+      "path": "training_search_report.py",
+      "sha256": "d89e5d2f34276c18363e8d126ad2fdec8896f9de87605aa338fc101cd48cdf8c"
+    },
+    {
+      "path": "training_threshold_reference.py",
+      "sha256": "57b1a8ddb14146638a3e8f08149c9bd136d076f517578502d6b84ab5213f2a83"
+    },
+    {
+      "path": "transient_evidence.py",
+      "sha256": "baac90e36bea2a8dff1d1e5de8f9aedb6110fc3149603384413ae88ac73b305c"
+    },
+    {
+      "path": "validation.py",
+      "sha256": "d0d5b199fd329d51fdc51902e8beadf7a1bea30185aa343b74bae206dbab7087"
+    },
+    {
+      "path": "wall_schedule_reports.py",
+      "sha256": "6b606bf2af264c7e78a6f17f0c99fea7eec9fc1f7b844d269f999108b8dd3a1e"
+    },
+    {
+      "path": "windows_process.py",
+      "sha256": "aa4009e3c18f1ff3488ff0e46cb228fba55d4cb4c48d5efafe06a101591cd537"
+    },
+    {
+      "path": "worker_dependency.py",
+      "sha256": "886f4db655723d6dbb17c30cd2898f539ce632ea545f92f998b8071b975bcae8"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "input/job.json",
+      "bytes": 153853477,
+      "sha256": "13f853ffd5e7852904e3c075f70f34217c5cfd5e467b6f900d730c1aff274958"
+    },
+    {
+      "path": "input/process-policy.json",
+      "bytes": 530,
+      "sha256": "ca922ea3a6711b90600d94d3a39addfcec20cf823319f9f924e69406c0da4dc5"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000001/full-after.csv",
+      "bytes": 389997,
+      "sha256": "a946f68cf573b695e07de7d961c7810cdda1a6bcfacb7249fac6648aa7e5eb8d"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000001/full-before.csv",
+      "bytes": 390316,
+      "sha256": "1fdf97cd5ae82864f607aa31e9303204380fc8f43fac602e6e44f1a1521cb62d"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000001/omit-0.csv",
+      "bytes": 377681,
+      "sha256": "f3f51b996abda508dc73c429cfa88080559ee3a0aae9c096906b476032a49764"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000001/omit-1.csv",
+      "bytes": 396011,
+      "sha256": "2556ef0adeef375baa9916ab88adb14a9bcd89e9e09cc3317e613faeeb823c34"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000001/omit-2.csv",
+      "bytes": 397210,
+      "sha256": "03be17f22445ba0264543ca2602346a20248cdfa4a28893b0d635a55ceaae769"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000001/omit-3.csv",
+      "bytes": 398988,
+      "sha256": "8732dd132ee2e7d6f30b88342795ead7cc497c628dc265b87408bfedf5761790"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000002/full-after.csv",
+      "bytes": 390246,
+      "sha256": "89a6d9825ee91d0d289cc4908c22b34773abd94dbb1e9d0cf929b8df1929ce30"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000002/full-before.csv",
+      "bytes": 378275,
+      "sha256": "2a92a6f07b886c49941015d5132f52f6aaac531144ce3afbffbb8840cd882ba8"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000002/omit-0.csv",
+      "bytes": 365614,
+      "sha256": "317a5ddb768f0f2dbc984777ddbe2fd9e8d8863b6d157472f89be0b067b823ef"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000002/omit-1.csv",
+      "bytes": 380302,
+      "sha256": "b211b50f76160c948f15f07f14fbb09459bea9b07e3936a5a70d0dead15420f5"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000002/omit-2.csv",
+      "bytes": 390965,
+      "sha256": "1ae1a6c6d33705480e38d3760ab0480f1a3dbd84f6068fd5125d405d029917dd"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000002/omit-3.csv",
+      "bytes": 391175,
+      "sha256": "78c11866706ffc6b223a3270901e06d6dc3194cdd77209b143187ca88be552e3"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000003/full-after.csv",
+      "bytes": 391657,
+      "sha256": "e8ac88c864247597dd6c29fe4a38b305076be294a54f953e4af5a5bc96cf44d3"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000003/full-before.csv",
+      "bytes": 390294,
+      "sha256": "832e6eb9a9533a576cd12d77976e802936506ff7a5b991f3535388182c4c2e2e"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000003/omit-0.csv",
+      "bytes": 377624,
+      "sha256": "5a6e409b1eb016936ff723fc6a36f3ae8e0867b45743d031e2f9484495be72ac"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000003/omit-1.csv",
+      "bytes": 390881,
+      "sha256": "bb2722ff6605efe120bd10128bc66e71eaa4f1c67f20dc7df9dd9b9fdbe7ff34"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000003/omit-2.csv",
+      "bytes": 391003,
+      "sha256": "48ee8195d43ccba31d11ef3256ddcb63ddaa96051aeb57c686e0207b21e32ad2"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000003/omit-3.csv",
+      "bytes": 391149,
+      "sha256": "85f7cafea43cb9cc7710bda14f71b44d3617e60ef5b5e4ab24c678adda8094a3"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000004/full-after.csv",
+      "bytes": 396232,
+      "sha256": "0ce3a06011a21148000e66326ef6517a9d29d5f5deda23a287d0f5de6cb9d335"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000004/full-before.csv",
+      "bytes": 396232,
+      "sha256": "ad0177e5830a7a6304baff40f0829a879cf36edf3e13d138970cf896f88de578"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000004/omit-0.csv",
+      "bytes": 383575,
+      "sha256": "bf004d302a8c56c8b9b715f3e3d723a39e643bcb8f532c4675176bb5dc7e3b28"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000004/omit-1.csv",
+      "bytes": 396951,
+      "sha256": "d4b3fadccb58483ab6197f5b635dcb9a6bac18638fa056891cd3c00231a5954b"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000004/omit-2.csv",
+      "bytes": 397032,
+      "sha256": "3a8ba1486739c7c029888303106edc3eef9267bcc1c92b75248ca011eacc7a44"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000004/omit-3.csv",
+      "bytes": 397113,
+      "sha256": "3841e78e51a9a7bdf4a52ed8dc345687d7a853635cf07b618114f95ab0445ca2"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000005/full-after.csv",
+      "bytes": 396231,
+      "sha256": "8cca0afbe33b5ed28abbdd3746c4379b83f4ca4c15dc305ea2c2bb23db9cbeca"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000005/full-before.csv",
+      "bytes": 396231,
+      "sha256": "39042a501c79178696623d9621eb92471b1ce47771c17679e10dc6c626aa4d6e"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000005/omit-0.csv",
+      "bytes": 383648,
+      "sha256": "71170b4df83f9b94d20d5c24bf0a742492daa5a5f6bea839772998713320cca8"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000005/omit-1.csv",
+      "bytes": 396948,
+      "sha256": "9210916ef710b6a6ad75d2db6dcededf3f9228b6b11ba950bd4a8bc7a912d844"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000005/omit-2.csv",
+      "bytes": 396964,
+      "sha256": "ebb056a41310dbc6bfddcdce6bbd774fe1f2ff8a109935e15e5e8a2be07106b7"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000005/omit-3.csv",
+      "bytes": 397112,
+      "sha256": "bc6ef18ce239b42e9fee82c407a8df1e8fb47491ec45a90c0b57fe265b007240"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000006/full-after.csv",
+      "bytes": 397508,
+      "sha256": "aea81078b63d9e24440aaa8fddbb7c31e21fbc5b86c4c48d5dd2acde82787b40"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000006/full-before.csv",
+      "bytes": 396293,
+      "sha256": "f028b700a1df3bc7bb6bdadd023efb7e6016d94422f8b676d47e7618aba35b78"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000006/omit-0.csv",
+      "bytes": 383656,
+      "sha256": "d8f6e53adc2ecfb164740aee34de3648e1e1ee38b0ff7dde00b7bde6ded73d7c"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000006/omit-1.csv",
+      "bytes": 396903,
+      "sha256": "6210fcdc860fc3d22207654a1846a185c68f44fba16a658c21994e845d3c4ff6"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000006/omit-2.csv",
+      "bytes": 396940,
+      "sha256": "1edbc7177822ee3d26fa7bd8b2914a2aa7be32087a7b7ae97c08f5e6dc333e29"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000006/omit-3.csv",
+      "bytes": 397111,
+      "sha256": "2ab4d0766bf1d3b05a925986931b1840c3f4e937df691d7b65e4037956be13a3"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000007/full-after.csv",
+      "bytes": 398891,
+      "sha256": "f9bf2c9681690a8b81b538329f264cb9531eee064705788bdfb30fbba38a7820"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000007/full-before.csv",
+      "bytes": 398891,
+      "sha256": "f196265da8cbad00c1b7e8ecce6f936c14ef5054073a83d7cd84df1cb37065d3"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000007/omit-0.csv",
+      "bytes": 386247,
+      "sha256": "7527e177086849a02bffaa6d8445b9dba5ede626f5cd4d462307c1dcfbff6a21"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000007/omit-1.csv",
+      "bytes": 399499,
+      "sha256": "5391197879114355e8d4f63b6c4fb68113fdc7c248ef5b0572edf8549709237e"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000007/omit-2.csv",
+      "bytes": 399577,
+      "sha256": "4b92ea765d6d505522895a9f42c1b162f0dd33f486fb4c017dfa3cf0b55caf56"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000007/omit-3.csv",
+      "bytes": 399763,
+      "sha256": "15a968c305c9089ef8e482f456a4f7ee07310c1db0144cbd54f8fe1d09732267"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000008/full-after.csv",
+      "bytes": 398892,
+      "sha256": "8772614acd864dbe7efb587dde0495a426517bfd4d4a554151edf679ea738357"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000008/full-before.csv",
+      "bytes": 398892,
+      "sha256": "5ce2776329f2299349357c9b403e4a6284820747938e669d4a9ba6085ab647f0"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000008/omit-0.csv",
+      "bytes": 386218,
+      "sha256": "ed8d7fd099b926fe4cec897f84861fda8129049380887720110eab79fe65cca0"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000008/omit-1.csv",
+      "bytes": 399489,
+      "sha256": "9360511c6cedbf0c56d8fba40b5c05734fbae7a3e8c886f4c8379938caceab5b"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000008/omit-2.csv",
+      "bytes": 399590,
+      "sha256": "86b4da485cdad0cb463c9f0eb8d45fee8e53441bc6f5d8bfa55b4386d4cf7338"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000008/omit-3.csv",
+      "bytes": 399788,
+      "sha256": "bfa51c6519e9e0f4b2aacb1bf4084a7542ccb623b9225c03826c24d3b3e48983"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000009/full-after.csv",
+      "bytes": 398861,
+      "sha256": "4af9e305a16259d147a982076aa97a73b0f1e6e0bb35e51abb00bcb0ffa73f3d"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000009/full-before.csv",
+      "bytes": 398850,
+      "sha256": "2b1553bcf04cd535030aa65288adfce52e2fd300567196f437d6aa67eef26929"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000009/omit-0.csv",
+      "bytes": 386135,
+      "sha256": "8436cb56290467d3336aee08c0fc5ceb72ede7ad52c5955b7f3d29a6616b75cb"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000009/omit-1.csv",
+      "bytes": 399451,
+      "sha256": "841e368c0e4bec9a10c5f3bd479b764ec939b78940b4114b31dfaa65391be7e0"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000009/omit-2.csv",
+      "bytes": 399568,
+      "sha256": "afa6cbde313632200709f172a88eec596afad20d72998c0b205f889fe264713a"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000009/omit-3.csv",
+      "bytes": 399780,
+      "sha256": "7110edf6b4141e0bebaf742e3ec5c2b37bcd545f616c567ca77f0e1989ae0e3b"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000010/full-after.csv",
+      "bytes": 375378,
+      "sha256": "68d9d9d3a89d63b479214610b6e0f717ee8b8866d8b9f3b1d00c3927ab27ba61"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000010/full-before.csv",
+      "bytes": 398818,
+      "sha256": "e7aa0441e8e2a7b1d4d1070f931f60cfc5e973f8676dfd9c237b1aad5fb942a7"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000010/omit-0.csv",
+      "bytes": 375292,
+      "sha256": "d90bba3d07346cfc5dfaebd50c3943637e6860e5f05ec28dd315155d4d08f650"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000010/omit-1.csv",
+      "bytes": 375997,
+      "sha256": "c86c4216d8d775ea323a2518bc9d12d9b52fe3f8e4785ffa96d2274b74d4db91"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000010/omit-2.csv",
+      "bytes": 376137,
+      "sha256": "1101070a09b7c03f4921d7bf88750ce4be7269d09a1d2dbc4f7fe083948f3641"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000010/omit-3.csv",
+      "bytes": 376299,
+      "sha256": "300be530e7a5be96c8ea894005b02cd0f61ea615dad838c19df57e2208df82db"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000011/full-after.csv",
+      "bytes": 368625,
+      "sha256": "2adbab545a91235b23bd6410e160a3562f576373fd916b4fdbcb3f735ab9e28a"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000011/full-before.csv",
+      "bytes": 368624,
+      "sha256": "877d8a7677d342c042f444eb0d3f2a18cf169346bfde4dbbfbc4fbc595dbfbfa"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000011/omit-0.csv",
+      "bytes": 355931,
+      "sha256": "f5da76bc0a2ef7c68397187395480bdcc01491db4e5809df23e7f6dfa8b3165a"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000011/omit-1.csv",
+      "bytes": 369096,
+      "sha256": "1e8831462175e9e4c9c0916246567c025ac28d34933e220c005e64714ff8ffbe"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000011/omit-2.csv",
+      "bytes": 369552,
+      "sha256": "14b0ca3831b742e8fe66de4e08500c22cb031e435739cda590f771488d925292"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000011/omit-3.csv",
+      "bytes": 369326,
+      "sha256": "340a3b61975c9e2bd8ab93d9bb346e5009b6855bb66f19ceffa9d586d498d06d"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000012/full-after.csv",
+      "bytes": 380826,
+      "sha256": "2de5c99d0f0c4976b77936864e9baa0508e4393b3bee2ebe018698d7b4c1fe5f"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000012/full-before.csv",
+      "bytes": 368619,
+      "sha256": "6a5472ecedf3a33cffd60aaa5a44f1fc3ac9da4c6d4654d471b6c641c9cdd38f"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000012/omit-0.csv",
+      "bytes": 355944,
+      "sha256": "7d633a4ce1576ee1feb56e2f7c6320243dce5718b2b64388d3c5d4f0e9743468"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000012/omit-1.csv",
+      "bytes": 369107,
+      "sha256": "4a60ca826d81fe2d270fb1cd9c83fc2bd4c1610bfd2324f0452f3cb32cbe5cd9"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000012/omit-2.csv",
+      "bytes": 369528,
+      "sha256": "69f580387d7f97de99096356039aae4a934614c1823951ba08d69ca31be6ac80"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000012/omit-3.csv",
+      "bytes": 369332,
+      "sha256": "3ad01ba12ac8fa18c15b4ff20a5ae62cba1b2734e9e19fabf9724b7006ac4492"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000013/full-after.csv",
+      "bytes": 388800,
+      "sha256": "3a86a4e8f28f23f2c2c840d267e9dc6ad6c7fef1e4d7dcd4615a3c65abe11cfa"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000013/full-before.csv",
+      "bytes": 388802,
+      "sha256": "20e960cbfe86d9cfc956862fb3910cc006486c2ae5b95482c0dd6bb165491bf7"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000013/omit-0.csv",
+      "bytes": 376140,
+      "sha256": "d88144072bfda6ca907ed118ee3ad7c7326e888d18c13e5e63fbbf31b4ae4322"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000013/omit-1.csv",
+      "bytes": 389453,
+      "sha256": "a42db9e840c91e83b008aeb79008462f7f89444b30ec5ec3f4467e654f46e85c"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000013/omit-2.csv",
+      "bytes": 389531,
+      "sha256": "1dfbf184da2d298454004065579110a136db531ea10ca8c92a0f13b5fee520ff"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000013/omit-3.csv",
+      "bytes": 389680,
+      "sha256": "8de593e3473c11233cf9463205b58de5424b4e659d303eebb3669b78398f4796"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000014/full-after.csv",
+      "bytes": 388809,
+      "sha256": "3c34956d0cf526755d78557e6fb92c199bef7973fe4a1ba473568df5f369d732"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000014/full-before.csv",
+      "bytes": 388812,
+      "sha256": "05e7ca9b5197bae4254ea2182cdd931f2d4aa6fbf41681d256f5b51c250e8692"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000014/omit-0.csv",
+      "bytes": 376128,
+      "sha256": "a7a0475aee61115d689d616e17a4e86c955fe24f95df7ca6e2991c950ca9c5c1"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000014/omit-1.csv",
+      "bytes": 389457,
+      "sha256": "1cd507c6fddb597f89060103e16b087c611fa167e9c0c5385528fb8fa1c913e4"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000014/omit-2.csv",
+      "bytes": 389527,
+      "sha256": "9d86c6e69e2b65a0eb30a49bd4cb52ab4814ff76d5fee22c254db025ec25773c"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000014/omit-3.csv",
+      "bytes": 389682,
+      "sha256": "932e5a4732b8f01b4b0ee31ae5bf550fc15a354740685d60fc3c2185ce2c4a4a"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000015/full-after.csv",
+      "bytes": 382541,
+      "sha256": "ec744a906a58e62ecfc9efdb3eacdd11b2ee138f9725159c6feadc8b507c6bad"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000015/full-before.csv",
+      "bytes": 382543,
+      "sha256": "d5f5a6d860039e2ca7685ce84fc82f1a45ea1fbab5be14001ec3dfb1c1fd81e6"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000015/omit-0.csv",
+      "bytes": 369844,
+      "sha256": "2900459d379c9165fb612c30bf6f205632324c8969d8c00c51d996bbbf94c553"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000015/omit-1.csv",
+      "bytes": 382985,
+      "sha256": "ed0786e53d927ab56b051f1a762ff54ef07956d43f0a8b3dbf12b5a1c63e6f9d"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000015/omit-2.csv",
+      "bytes": 383462,
+      "sha256": "c6abf418b1b3009a5d3496a551c3bf1bce09b43e58d0900ccd18efa7c8774ba3"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000015/omit-3.csv",
+      "bytes": 383759,
+      "sha256": "a4515f34ff19d0b7b5935cb4aaf835d4d6c5a9d3be1c6ea1e7b24875c2757c4a"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000016/full-after.csv",
+      "bytes": 382533,
+      "sha256": "bbb0c6cc7e74f194636d7adc77fe720c63ad506bf91c6cef6814382634f0fe59"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000016/full-before.csv",
+      "bytes": 382535,
+      "sha256": "a5a9a1779f2ee4c54468dc99d72023afb5eff49de8e6dbe425b3519dd5ce79ba"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000016/omit-0.csv",
+      "bytes": 369840,
+      "sha256": "9ce3483729b68e0ff3c9299e261e65a0f613678c55e6e01fa94976ffaeff01b0"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000016/omit-1.csv",
+      "bytes": 382987,
+      "sha256": "30d6225c4257a9fe1b40329e9ed464bf47dd7087512bd08dfd9746b760c53620"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000016/omit-2.csv",
+      "bytes": 383460,
+      "sha256": "75f826e94a31d98aa04b8cb1caf41163f10e7c851ea2e0c88ecdf516ed7d1cbf"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000016/omit-3.csv",
+      "bytes": 383771,
+      "sha256": "6c4160d79e5fab3554171dfb5b5393259f7e5d4e146c48421fd14fdc27bbe546"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000017/full-after.csv",
+      "bytes": 388749,
+      "sha256": "7bbc94aa2ba49fc830626821bee355626c33e1e60af12c4409e32202e2ac984e"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000017/full-before.csv",
+      "bytes": 388752,
+      "sha256": "fd18d69f8fc4899e616d66d3b2c66ccdf306b9cddaaaa20aacacfa450c069fc8"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000017/omit-0.csv",
+      "bytes": 376067,
+      "sha256": "fbb5b57d13e729f49997c4635e3271fdb82285bf91652f1a115ab2ff4fe6948a"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000017/omit-1.csv",
+      "bytes": 389373,
+      "sha256": "615c4232dbfed616bbb9d7e1be0e5de5408faaa19e44a318e1a6f360572a1204"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000017/omit-2.csv",
+      "bytes": 389492,
+      "sha256": "b06b444887b1e5d66779ae51f83b3066e0e470a7c3d563aea4b8953a608e98ab"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000017/omit-3.csv",
+      "bytes": 389675,
+      "sha256": "f626c60a50d4c4f84f941a11c72bf8496e965fb3921b3e2602eedcaa204bf086"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000018/full-after.csv",
+      "bytes": 388753,
+      "sha256": "c07af49f5d1a6e5641bb21ddb3f5eff48db5560cb7ef66312b4900a9e0cfde11"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000018/full-before.csv",
+      "bytes": 388755,
+      "sha256": "e96011aa0d92fd359dc482ed43be8642fb5ab6cce3dbaf47afc652b097f43b6a"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000018/omit-0.csv",
+      "bytes": 376065,
+      "sha256": "e380eff40026947693a801ce7be6831c56bbaefbf516b4c84c710b93e9e07d95"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000018/omit-1.csv",
+      "bytes": 389374,
+      "sha256": "41c1aeac9d60c1f2ca9fbdaeef782a8e5be20d1f094942ca00cb1acacac961cb"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000018/omit-2.csv",
+      "bytes": 389496,
+      "sha256": "97dab5a0612e3a28b56bae02397e94afddd5026b41d758e0a8d71c4389d90383"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000018/omit-3.csv",
+      "bytes": 389669,
+      "sha256": "c24dbfd521d2123651a03b84d440247e7bb3f594bdad2531314d2b89e8c84b3f"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000019/full-after.csv",
+      "bytes": 388715,
+      "sha256": "18aa257582afb33ea9cfa094e74ca5359939866ab97d814ff2a9385539552b38"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000019/full-before.csv",
+      "bytes": 388716,
+      "sha256": "b593d16bddcf12fdd6e53a831e9769731bac7599d4338e5a36e82570bd711408"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000019/omit-0.csv",
+      "bytes": 376037,
+      "sha256": "b25492e4c5c32926494890b15b1b2b3f0b70301d270aae3d381b72ffa9fc3465"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000019/omit-1.csv",
+      "bytes": 389369,
+      "sha256": "01212717c8b4d4ac0c3fa47a0cf105b38d27d7f468a425fbf710c29d3e93c461"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000019/omit-2.csv",
+      "bytes": 389442,
+      "sha256": "4e3594ea98eeb6c602cb4549a7ae11b1aa6056d8110c5fd15960c8376fbf5c8b"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000019/omit-3.csv",
+      "bytes": 389622,
+      "sha256": "c078e2f34e63ca22f404dc4f9d66244c28062f21641f5d5071e11b92e79c6805"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000020/full-after.csv",
+      "bytes": 388716,
+      "sha256": "f593a431f64caefb889bdb9350e3299d620cb8df67db0de93b7dfa60b8aab71f"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000020/full-before.csv",
+      "bytes": 388718,
+      "sha256": "2200a29f875d0862bfad1c261b7c290f9b0739e9e8c1aeb67cd0fa72a962e7f5"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000020/omit-0.csv",
+      "bytes": 376049,
+      "sha256": "e6f55ab21e66f5d9cacc9989b62b1e844f505fe604aedbe67bc26bd185478e5c"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000020/omit-1.csv",
+      "bytes": 389344,
+      "sha256": "8705e5444d179d61bf51b0a3a54c63a94dbb4cfc7180442937f96cb7576adbc9"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000020/omit-2.csv",
+      "bytes": 389445,
+      "sha256": "5a13a3230af07b46ce226f6a765f959e9dfa59776caab5ac6d28820f3d501939"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000020/omit-3.csv",
+      "bytes": 389620,
+      "sha256": "78ee2539468ce710435d56f853c0bf0dac807fce22c3ee4c15a4b1a8f091661b"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000021/full-after.csv",
+      "bytes": 388679,
+      "sha256": "55de5fb3714b65a9c7f4eba1df9605d4f9d52a7438b729416a546dca4efee271"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000021/full-before.csv",
+      "bytes": 388691,
+      "sha256": "bfb367e2684949ae87f63df8bb0e6e5ec8aae034ea618fb9cfa5d0cfc72117e5"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000021/omit-0.csv",
+      "bytes": 375998,
+      "sha256": "f16687a3fbc9061d9e4c065e58233a3d8c452639ef87af91ba261caef4418b3a"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000021/omit-1.csv",
+      "bytes": 389311,
+      "sha256": "f710c769d0ac097b38688e34a8c93a1688c66d9e4ba6bf409aa7f1d525f05ec1"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000021/omit-2.csv",
+      "bytes": 389415,
+      "sha256": "2d1469dd60bb7b37e3eaab7be9f28ac46c07c7938ba1d1988165dd9e3864b312"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000021/omit-3.csv",
+      "bytes": 389602,
+      "sha256": "84af25d6be8c59506ad355ff79a4ffcae79999de9ef1956aae9b31aef4b97756"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000022/full-after.csv",
+      "bytes": 388699,
+      "sha256": "cd2a652bd98e235ab22c6d56ea2d2ab2accf03138125b0c49e2f18a11bd6bb52"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000022/full-before.csv",
+      "bytes": 388688,
+      "sha256": "89fc4997d3518a72f1b72e6c318592c70bb268350116aba9c12f31701e98b83f"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000022/omit-0.csv",
+      "bytes": 375990,
+      "sha256": "6ed8082c6287f2251b360a2fdce3fe680b5878559b96be7c48002d70c53e7155"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000022/omit-1.csv",
+      "bytes": 389309,
+      "sha256": "3d902a885b7f7635671899e68ee49dabc964249faf82dd2f03c283b1f395cf9f"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000022/omit-2.csv",
+      "bytes": 389416,
+      "sha256": "306918ab02c6e1c64a2f4bcdd211ac54b75e9a0fc0259da18e99d409efd459b5"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000022/omit-3.csv",
+      "bytes": 389602,
+      "sha256": "00b24a8b11599fff04ec9edb463bed5afdddac64d5146fe697eddfa3d24af703"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000023/full-after.csv",
+      "bytes": 388625,
+      "sha256": "5311a8fa8a1cc764d425723b2834297a870e54ca657cd01287bac7ade2578d3a"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000023/full-before.csv",
+      "bytes": 388625,
+      "sha256": "ec1a541ef7ea8ca0f806f221b765d89ffaaff3961bbea7667ba6680414d463e8"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000023/omit-0.csv",
+      "bytes": 375940,
+      "sha256": "05623867946cad5a5c29c434564e672255a5e8aa85f42acab989b970ca6f9cbb"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000023/omit-1.csv",
+      "bytes": 389268,
+      "sha256": "e609282d207a3659d8b652226c12d27550b4fdcad9e7e565d334427ccac827a9"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000023/omit-2.csv",
+      "bytes": 389372,
+      "sha256": "da92fac95da0a127c9192380cc68a37b308b98e87a369a7d855b33bdeca09c67"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000023/omit-3.csv",
+      "bytes": 389572,
+      "sha256": "15ee390b70c04594b8f5b15a84d0982976d71097778a257d0831902891645292"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000024/full-after.csv",
+      "bytes": 395309,
+      "sha256": "ff20254e866a337f24c43f04f56d10c1a8ac055352ebc1fd6313d74b0266cfb1"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000024/full-before.csv",
+      "bytes": 388623,
+      "sha256": "88ed5bad687775b2ea8afbb8c41f7f91c7622a3334d7bfbd0f968c0d42e9675d"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000024/omit-0.csv",
+      "bytes": 375942,
+      "sha256": "d9766a8a351517caf00bf07b16b94f19b2551470c120145357f2fa0a0a8f8723"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000024/omit-1.csv",
+      "bytes": 389268,
+      "sha256": "54ac90e4a8f5963534c2fa3bead153ac3ec3694a768664fd7d48680473e4af75"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000024/omit-2.csv",
+      "bytes": 389382,
+      "sha256": "275583a5f2b6b6f3567f619d8d86503717af244abd05e5536e9e3f68d310a6ed"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000024/omit-3.csv",
+      "bytes": 395088,
+      "sha256": "04a7fa8d36243dd6e02baeec25c80891736e439c695fdd271e617f9756b4c3ce"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000025/full-after.csv",
+      "bytes": 395291,
+      "sha256": "54a5901bd640965dcadb711a74b0657c02ff4188fb96de7bd92be49b8db5f85c"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000025/full-before.csv",
+      "bytes": 395290,
+      "sha256": "77da81d81050f30a4ae1ecab34b24880f242ef7a1a58041799e4afa90436072e"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000025/omit-0.csv",
+      "bytes": 382612,
+      "sha256": "4783f16652235b58f398ea31a778ed14ade153594f26a9ef8046082c0929baff"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000025/omit-1.csv",
+      "bytes": 395915,
+      "sha256": "e2338b4701bcf604a1a003e1009ec43a18f1e281722c7b0db98b445fe64099fd"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000025/omit-2.csv",
+      "bytes": 396088,
+      "sha256": "1c3837eea9a2dc2cc86fa793ce4c1560f3ed9801a701543bd49c1cd479f90e25"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000025/omit-3.csv",
+      "bytes": 396246,
+      "sha256": "1b8c009411438a4195c0b8e76c521af54bb569287024a2c81b620c3fff159df8"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000026/full-after.csv",
+      "bytes": 395292,
+      "sha256": "4be61a91f3cd46c8d3131caec4e2457d40003eca86bd2416e3b4a0dd21aa503b"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000026/full-before.csv",
+      "bytes": 395292,
+      "sha256": "c8f94a2275c6842baa1cd0222e36250e48077967391d72c3ee377cc041b939fd"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000026/omit-0.csv",
+      "bytes": 382610,
+      "sha256": "417510e0c9f33cfc42a56dbbc3f82c73f6162e45ee6d56d1a47a902f2bdf2bea"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000026/omit-1.csv",
+      "bytes": 395928,
+      "sha256": "8a9df6e3dbda912d4ab0aa14820e5e626ca9682cb714f913609e65631f5ce1b1"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000026/omit-2.csv",
+      "bytes": 396085,
+      "sha256": "c79bf9b2dabc134a4f2cd615c4e7756472d826650836f576c90ceb9f89e0c4c7"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000026/omit-3.csv",
+      "bytes": 396247,
+      "sha256": "f815096318bd13c7b9990e69df777a81d7f9dc418422324c77964495ce4367cf"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000027/full-after.csv",
+      "bytes": 395270,
+      "sha256": "863f99d4bfe286528dbb2e375d681fa1a2ef1d239abcb7dcc1a42f43800651ed"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000027/full-before.csv",
+      "bytes": 395269,
+      "sha256": "44e70260e18604959e2abe5e671592ccbffcd46ae02166a7ef9e461e80a676af"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000027/omit-0.csv",
+      "bytes": 382594,
+      "sha256": "8a711dacff52326227cccd65c1661389b91f8869af318fcf92868c41297bf4a3"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000027/omit-1.csv",
+      "bytes": 395906,
+      "sha256": "f30d3933d8d5dcba72997f94dc33844ff2e1c7a5cdd2343c42e0a9497923a6c4"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000027/omit-2.csv",
+      "bytes": 396047,
+      "sha256": "ce9131c6c35a848b052631da6d6c469c7e53375314c7bf898ad3613f57aee15e"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000027/omit-3.csv",
+      "bytes": 396233,
+      "sha256": "cb30faa1decf41bcb2e4df071b5f54a02e889e496d4650855cbf6b4448c75ddb"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000028/full-after.csv",
+      "bytes": 395270,
+      "sha256": "1581e31c1b85a43ac2f13c7bed226e9c4a04432f267ec02c354d8524f966b293"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000028/full-before.csv",
+      "bytes": 395269,
+      "sha256": "ec2bafd3b362dd6f1040a4dbb89e6a4c7d484d14c5618103de030615cccb6713"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000028/omit-0.csv",
+      "bytes": 382594,
+      "sha256": "3d1ee4a9aed12ded0a5a7e85dc56b80465c0260446f88f1224bf0a8c981392b0"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000028/omit-1.csv",
+      "bytes": 395906,
+      "sha256": "a28523c0576d4d74a5924aa98fc6d3942c7e4c5eba85da9545c5ef36a9e2b0e5"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000028/omit-2.csv",
+      "bytes": 396049,
+      "sha256": "1c12fc68282754d9fe182fcab14b2f76950b76aa9470a4e6b38941305a683af1"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000028/omit-3.csv",
+      "bytes": 396231,
+      "sha256": "4b2fc1f9a21f969b712cce1418f82ac635865dd3efbde1949c5b46f6afcfd97a"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000029/full-after.csv",
+      "bytes": 395217,
+      "sha256": "cb9b82078c4ef460b436f29529e99989666ae001ca37d68dc5cac55f14526950"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000029/full-before.csv",
+      "bytes": 395206,
+      "sha256": "4129d1ba9ceed681c087cf9a1a70fd56f33fb06de2353d7078b4cecb842644bf"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000029/omit-0.csv",
+      "bytes": 382499,
+      "sha256": "304d9c800501b260bc42b17f3df3f51508c221f3fd250f7347d63a05e130b732"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000029/omit-1.csv",
+      "bytes": 395839,
+      "sha256": "20cd5363adad60b77e15753799f135f4f2f39d2488f3f0ffa05c5438f5e6c61b"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000029/omit-2.csv",
+      "bytes": 395983,
+      "sha256": "bb552e81b6599a62cabf9d0941632c1efe89916f007df60b5f68461af636f78f"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000029/omit-3.csv",
+      "bytes": 396175,
+      "sha256": "64313fd85d4af607ac982f63e58a44d76d87aef40e72f4e757a4c32eedde7a75"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000030/full-after.csv",
+      "bytes": 395206,
+      "sha256": "47c9fa800c5d8dbd480c33a45ed92786de593a42dd29006523ba812b89084622"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000030/full-before.csv",
+      "bytes": 395204,
+      "sha256": "3f1ddd9cb02c2d34444e40d7d3712b2c848aa7924754a081349fb3334cc180fd"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000030/omit-0.csv",
+      "bytes": 382501,
+      "sha256": "b72b2dd9eaa51a1cd47d8eb298692ba7de03e1a24b89b4565caa1399db9b2731"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000030/omit-1.csv",
+      "bytes": 395837,
+      "sha256": "88e065407786eb1abd681f3d8bb7aed4fb346b5008eba34934804910ff53329d"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000030/omit-2.csv",
+      "bytes": 395983,
+      "sha256": "4cb7b360b942cafb83162287faf0a8ade37378816b994e854b0a4e2036ed94b7"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000030/omit-3.csv",
+      "bytes": 396176,
+      "sha256": "307a33dcd41afa1a039b9acc7487b92e730ab8c44c03ad63b3911d97de4feb53"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000031/full-after.csv",
+      "bytes": 389839,
+      "sha256": "02586d381eec58815bed5997a0cb2173963c3bf7703ab23e21e90a03da1fbdcc"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000031/full-before.csv",
+      "bytes": 389838,
+      "sha256": "4f931321680d601a37b0a8e241126d45696b02f3bf6378009a85d5f615034c4a"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000031/omit-0.csv",
+      "bytes": 377164,
+      "sha256": "b84cf68309c4880460a2e48fb88468cbf56b52368617b9a9fa18660000d429fc"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000031/omit-1.csv",
+      "bytes": 390328,
+      "sha256": "190cc5ab47b2f60452905f4f2a3f4eedb435d2888a50bf8be8795e338c33f0d2"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000031/omit-2.csv",
+      "bytes": 390759,
+      "sha256": "444f14148fa764b3ac9720b64372508efe7d3913aa0fe9c54765b0c4705c1178"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000031/omit-3.csv",
+      "bytes": 391059,
+      "sha256": "a6a2a5ea7ef7204e76d19912d21c2b8fc507c12a9b3732974af519dc4ddb759d"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000032/full-after.csv",
+      "bytes": 389837,
+      "sha256": "0e6404d4594a78065a8e4d40a654a0acf5ecb1aed62809e0487efa1b8b10a4b4"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000032/full-before.csv",
+      "bytes": 389836,
+      "sha256": "65af6bd9a369457cb3faa0fc7064b86e6f14396f605a9abd667c3e5184802ef9"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000032/omit-0.csv",
+      "bytes": 377164,
+      "sha256": "7a363fa3456905e39aedc489bc9cd01990e9ecc6d5b57d32d7de241a0066e449"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000032/omit-1.csv",
+      "bytes": 390329,
+      "sha256": "4951e5a50e4cb76d795e295e03251aafdb9301cc01126b9341a32a83b004a50f"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000032/omit-2.csv",
+      "bytes": 390759,
+      "sha256": "5d11f286b2adcb63cbb213d7f0b79960a4f5b230f5e6bc847977b1aa4b8bc948"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000032/omit-3.csv",
+      "bytes": 391060,
+      "sha256": "4f4dc98653d6ad7365a131a5ebdfe1a68a59a41373fbc891cc78b26094c6e8d9"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000033/full-after.csv",
+      "bytes": 395185,
+      "sha256": "4b264fadcba11fb6fc2bcbf6ac31e00a31e3330c893face5638c31132177164e"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000033/full-before.csv",
+      "bytes": 395184,
+      "sha256": "e578d070c2c105a2827b4b8d1c2a49c0c9f7837221fd13ff5b56705a28fdde25"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000033/omit-0.csv",
+      "bytes": 382506,
+      "sha256": "d0a8d838dac6d05e94ca43d1b11c25f67e1fb6f1fc148a3b6b5893ca3dc1ba5d"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000033/omit-1.csv",
+      "bytes": 395811,
+      "sha256": "0d7bc4f2636cbd3868f0397a82210e748d026e67a827b6458c4a35307d0f326b"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000033/omit-2.csv",
+      "bytes": 395962,
+      "sha256": "75c58e278db08fd822c0995807ed0201018ac5f445711791648c312ce3c903b9"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000033/omit-3.csv",
+      "bytes": 396131,
+      "sha256": "a7b4aa9ff0e0a4b7f56f5aa87c767aedef38c229f8174782f620189dea244929"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000034/full-after.csv",
+      "bytes": 395186,
+      "sha256": "1b75f665616fd6828a06869782309b29c31d7cb813b66b3ff7c1d53d5c94c7dc"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000034/full-before.csv",
+      "bytes": 395185,
+      "sha256": "56d8e83cf7fd8c40be5e5c46a84d1c5b32a4a1849cf4e14ea533662d80bc85d9"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000034/omit-0.csv",
+      "bytes": 382505,
+      "sha256": "bd85f699da88c035195d3953676a206eeee9f188fdb71e4cfa4aca15101414cd"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000034/omit-1.csv",
+      "bytes": 395814,
+      "sha256": "b376778821338500b6a47ce7d8cc7473146bedb152d60a191368820979b5b8f9"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000034/omit-2.csv",
+      "bytes": 395959,
+      "sha256": "a25408895df8b584cd1c026e29c6a881dbaee1ec4e873ac47cb2386fc52e84f8"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000034/omit-3.csv",
+      "bytes": 396131,
+      "sha256": "91f4db5be522afe334280769c8e51b497df96abd0086db224e60c5cf3372339e"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000035/full-after.csv",
+      "bytes": 389697,
+      "sha256": "bce9f1dfe09b71ff0449038fad67a0afd1700cc43274560a889f0dcb9c193ac8"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000035/full-before.csv",
+      "bytes": 389696,
+      "sha256": "4881b5b7f071ea29bbabf9eb01e323acf805098b866d6029515f657305549826"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000035/omit-0.csv",
+      "bytes": 377005,
+      "sha256": "d0bacc08746934c83afa536a15cec304b0fe177c854dea3e07daae0d1eb31dbd"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000035/omit-1.csv",
+      "bytes": 390178,
+      "sha256": "0b01a4d53abbf64116ecdbb26148ac454659a688d6ad92a6385bcfc52afb848c"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000035/omit-2.csv",
+      "bytes": 390628,
+      "sha256": "29bfb6be7dba2ac12e40532e08382215ec4c3f14c216de2f4359a19c2bdfb9cc"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000035/omit-3.csv",
+      "bytes": 390416,
+      "sha256": "b64a33b535c77f002788ba366e141ff955c47f47f93d4e0fc2b3f8e23a399ade"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000036/full-after.csv",
+      "bytes": 389701,
+      "sha256": "e7fc64e9ff42c94ff8cc8dd4b7fc9326982fd5a193862a9c68dd2617ea762ea5"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000036/full-before.csv",
+      "bytes": 389711,
+      "sha256": "fd7ddf51f32689b4f08e18400653437e286fcfd1a543039b9cb92ea52be352f4"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000036/omit-0.csv",
+      "bytes": 377002,
+      "sha256": "99cca842266c5533dabf4326d2dec64e974ff617b5916d48aeeb62113be21c4c"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000036/omit-1.csv",
+      "bytes": 390178,
+      "sha256": "3488e0670d74f65071fa81102728283eef7c8dc97128954000973b6e81657184"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000036/omit-2.csv",
+      "bytes": 390629,
+      "sha256": "0f75c000e8bacb0c203eefadc7fb026457aa083231199b47730498d8e35538d1"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000036/omit-3.csv",
+      "bytes": 390414,
+      "sha256": "09cde0feda45739091ef42b8ab036ad84ea1d44b3ff13b6db731b1f165fff00f"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000037/full-after.csv",
+      "bytes": 395072,
+      "sha256": "630ecb4f340e769c42e7115eb177512a41aa073059bc185b4d1a3db80484e90e"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000037/full-before.csv",
+      "bytes": 395071,
+      "sha256": "eed507312daaa3085e83157e7f97980b6168115500f0680a12ae216f2c179f7d"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000037/omit-0.csv",
+      "bytes": 382382,
+      "sha256": "e2d59898bf569a9ba42f0fcf5725d8a4af36b55885cded90b3fd64855721fe22"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000037/omit-1.csv",
+      "bytes": 395736,
+      "sha256": "52ca5f90cfa20bb9fd8a660ba4319999e728432a31689f772036034037e99111"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000037/omit-2.csv",
+      "bytes": 395895,
+      "sha256": "d6adea6c5dc79a3d8a1980d17d27a9164f11a8a64fd9cbeb58eaec2247a91a04"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000037/omit-3.csv",
+      "bytes": 396062,
+      "sha256": "b89b1f6f80f154d56a66e457f9d8f654a436d94e02dcaf8ad3d74b4dce39a9ff"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000038/full-after.csv",
+      "bytes": 395072,
+      "sha256": "47c1c53aa3adf0504cdd4d81d5de4af3c48fe4a1cb5054245013425287b27698"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000038/full-before.csv",
+      "bytes": 395071,
+      "sha256": "18d35f8ca70b3d02285853c368e56eeff5c08da999dc12b13b22442bac5e4112"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000038/omit-0.csv",
+      "bytes": 382383,
+      "sha256": "83905e519f18d1bbba40ae813effdf1cbbf7c7b66b72c530c69dd59448ca9ea0"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000038/omit-1.csv",
+      "bytes": 395734,
+      "sha256": "816e4f5cb404ee935bfd9cd1a1cce24baff3de217388bb1e2fe4ff753aed67ed"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000038/omit-2.csv",
+      "bytes": 395900,
+      "sha256": "56ac1f3fc4c7d49b37630ab3976df18c9ff05a1bd77fbc9eaf1979a6b6959c7b"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000038/omit-3.csv",
+      "bytes": 396058,
+      "sha256": "357509463974ab8603113c42e0c621b87088eaafe9b49bf7a13f9cbdbf1874f6"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000039/full-after.csv",
+      "bytes": 390602,
+      "sha256": "22aa5e7a4c30088e37f7d7079eab1b1819b8e4d8a0e6e46753f3dfbcc42b2ac0"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000039/full-before.csv",
+      "bytes": 390602,
+      "sha256": "9d2df17d1764c9801a18a13eba507d130f4c962bd41e7e99763a8012b93567df"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000039/omit-0.csv",
+      "bytes": 377909,
+      "sha256": "933bd8fb76fa159394dad0427a4d0209a92049f078050e3d46aef99e5d0be0ac"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000039/omit-1.csv",
+      "bytes": 391066,
+      "sha256": "7d1ee68cc8bbc64c49f4fc88316042f686f2d6e5ea1a058b9f571034e9a73a38"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000039/omit-2.csv",
+      "bytes": 391528,
+      "sha256": "719c9c35cd85115ec566e7e1f16d1f63247e80f4afaf2002d17b1259dd0704da"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000039/omit-3.csv",
+      "bytes": 391808,
+      "sha256": "3499140e61891ab70d687323957006bf981b356dccb3418a78813b1327eb22be"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000040/full-after.csv",
+      "bytes": 390600,
+      "sha256": "940755be4b60a82555ee69d8604166227ae701a88df22aaab9bf90d67cd2dd34"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000040/full-before.csv",
+      "bytes": 390599,
+      "sha256": "a06a27f7cefa503b8fed3e48f8870c758a2626561d4eccac39e60c6bc8dec253"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000040/omit-0.csv",
+      "bytes": 377914,
+      "sha256": "ad18699b80e346566494ff29f97456bf456ccee70ce716a583dc0732add4567e"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000040/omit-1.csv",
+      "bytes": 391063,
+      "sha256": "f6033b534aa3eef7bd7563e4ee2908d23f59c26e90754f9f1701cbbcf4c2be33"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000040/omit-2.csv",
+      "bytes": 391517,
+      "sha256": "f9785ff4aac1814fb9cd083b9281428fb14d8bcdb0f34351088bd929dfcae52b"
+    },
+    {
+      "path": "input/source/composite-measurements/group-000040/omit-3.csv",
+      "bytes": 391809,
+      "sha256": "b2ed553ba3de6fd3d00629e38a352146d33d94c626b3bebf228e0c15d10b1776"
+    },
+    {
+      "path": "input/source/train_stopped_state.json",
+      "bytes": 168103224,
+      "sha256": "d8d545f9d0e9a038e7dc232ad86de94213496ac94481a1c32a822b3b98c3f070"
+    },
+    {
+      "path": "input/source/train_stopped_summary.json",
+      "bytes": 92737,
+      "sha256": "d16df968b5b5eba67b11659ac2d87d148386d4dda7f23876c4ace44bfa9afe6b"
+    },
+    {
+      "path": "native/evaluation.json",
+      "bytes": 4148,
+      "sha256": "65e45dabf1fb6653febcc93c7eaf70ca2199dbbb6925d7da47dfacd1dc7730d9"
+    },
+    {
+      "path": "native/execution.json",
+      "bytes": 3096,
+      "sha256": "1ea592dcc8b00b7d2f19d2ae02ec2a78422913c6883ab85e84096c7db525e77b"
+    },
+    {
+      "path": "native/job.json",
+      "bytes": 171167257,
+      "sha256": "67e7f8a79f57b8b369923830784631b9bd96e3ec63e4f4b0da90efe2fe0d4249"
+    },
+    {
+      "path": "native/model-after.json",
+      "bytes": 179892364,
+      "sha256": "751ed4df219ac0d77336596ce0068eb6f9314e923d107526ea5d9dc4c74ba9ca"
+    },
+    {
+      "path": "native/model.json",
+      "bytes": 179892364,
+      "sha256": "751ed4df219ac0d77336596ce0068eb6f9314e923d107526ea5d9dc4c74ba9ca"
+    },
+    {
+      "path": "native/trial-0.json",
+      "bytes": 1833662,
+      "sha256": "51b9abbfa72c23f984e5969c3026cfc27620bd2bf97b28c7d69335c5cf50f71c"
+    },
+    {
+      "path": "native/trial-1.json",
+      "bytes": 1758090,
+      "sha256": "f498d58ae0d1b334669e73b393ae7e4db5999fd8347b71a609795a658fbf77ba"
+    },
+    {
+      "path": "native/trial-2.json",
+      "bytes": 1758023,
+      "sha256": "139af60a3afe3a19039635ca4d5644f7471d1979f7b6fdb7376afd6af5f512f7"
+    },
+    {
+      "path": "native/trial-3.json",
+      "bytes": 1758060,
+      "sha256": "7bde3a97112066fa5b69533200ee7fcd52bdf73874cad7926c04f63d352bfb0f"
+    },
+    {
+      "path": "native/trial-4.json",
+      "bytes": 1887567,
+      "sha256": "b6e94cca49bf6ca95926555ca809483189beee46c7db87b4dbfc25f8497a8a69"
+    },
+    {
+      "path": "native/trial-5.json",
+      "bytes": 1840872,
+      "sha256": "01f7d00a581c4c47a60ee8015060e8810163a6fe9bda125268978c8a5871f802"
+    },
+    {
+      "path": "native/trial-6.json",
+      "bytes": 1890589,
+      "sha256": "57eb162109b249b4fef735b9f4eb74c75f69e7daf62e514abd9345585a8ce3d9"
+    },
+    {
+      "path": "native/trial-7.json",
+      "bytes": 1845317,
+      "sha256": "77e71502be2dafc11a53d49ce73c3a8e69505de5c4e2a467f4f85c4710b8e197"
+    },
+    {
+      "path": "native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261114-071740.209000",
+      "bytes": 290,
+      "sha256": "f3eee31d8f7a735f4f490539adc725614d9502560d299cc270dc322899dd2a57"
+    },
+    {
+      "path": "process/capture-ack.json",
+      "bytes": 113,
+      "sha256": "e98052bb3634b69092918d6ee456dac07b0f1427b29a861f7c3c97da719acc04"
+    },
+    {
+      "path": "process/capture-ready.json",
+      "bytes": 97,
+      "sha256": "5f770d7919f1ff0c9caf49fc469148e1e3b5d5b5310730c5661445b0bec64f7f"
+    },
+    {
+      "path": "process/contained/launch-result.json",
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    {
+      "path": "process/contained/launcher.py",
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    {
+      "path": "process/contained/limits-readback.json",
+      "bytes": 1068,
+      "sha256": "593809df43f45227e2220cdcf7920f58b9f0e66d6ef26bb93eea9cb566ad9f46"
+    },
+    {
+      "path": "process/contained/owned-unit.json",
+      "bytes": 565,
+      "sha256": "3bc115d78580a0562307a03487fad8fc24de1dc56d65986d5920ca7f4fc23c89"
+    },
+    {
+      "path": "process/contained/ready.json",
+      "bytes": 43,
+      "sha256": "81bb0b10ab118514b44efa94de3eac9ab5d6c7e104acc7b8d4414db0ff22c640"
+    },
+    {
+      "path": "process/contained/request.json",
+      "bytes": 1510,
+      "sha256": "05e626e5a988e357e66aed0e8ecf5150b7ab95bfa9cab76dda71733004a428ff"
+    },
+    {
+      "path": "process/contained/runtime.json",
+      "bytes": 12622,
+      "sha256": "72d38d6fff440ee8c2cc23991ff67550f2daf8a0341e220efc5a4d23abb25458"
+    },
+    {
+      "path": "process/contained/start.ack",
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    {
+      "path": "process/contained/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "process/contained/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "process/loaded-files.json",
+      "bytes": 4822,
+      "sha256": "757c4ababb08c3b8273e17a980b0b228889d2720ed8b592203cfca7134a8f87d"
+    },
+    {
+      "path": "process/owned-process.json",
+      "bytes": 649,
+      "sha256": "7a61b7e7c6ef155299bd255bf8042ad8a19bb9d3983d9a4d9b8a1cbebed5a649"
+    },
+    {
+      "path": "process/request.json",
+      "bytes": 862,
+      "sha256": "c9ade19401bf669f48b32451371fdb09e03a96fee68485f1fde9ce63b9335dc8"
+    },
+    {
+      "path": "process/reservation-context.json",
+      "bytes": 3061,
+      "sha256": "5e7fb1ad8d66f255a236b7202e8249d69476090ee47c7259f133cddbf0fc09a3"
+    },
+    {
+      "path": "process/result.json",
+      "bytes": 1176,
+      "sha256": "96aa581aebb706d6c702ec2f93bab90861ba75c05c33191083e6b14657aea3ea"
+    },
+    {
+      "path": "process/runtime.json",
+      "bytes": 12622,
+      "sha256": "72d38d6fff440ee8c2cc23991ff67550f2daf8a0341e220efc5a4d23abb25458"
+    },
+    {
+      "path": "process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "process/terminal-unit-state.json",
+      "bytes": 1299,
+      "sha256": "a4f771f906b7968f5f1b095b99cadfb58b0b4c38565f0afe5f02e9a4d1b9aaad"
+    },
+    {
+      "path": "process/whole-group-closure.json",
+      "bytes": 1212,
+      "sha256": "6f202c2943fcb629d46b1990e3fba444bdb05c41a54d136012bb3d9307315ef8"
+    },
+    {
+      "path": "runtime-cli-interface.json",
+      "bytes": 5515,
+      "sha256": "f8542864c13d04eb7cb2b097641487e203818fb1321db8ce2b1b5b8f2af5c463"
+    }
+  ],
+  "independent_partition_verified": false,
+  "evaluation_verdict": null,
+  "sha256": "634e1f74d3d26ea349cc5b32d1a6bdc83ac6accfa5e9b0847bd7b9e02d4ea0ce"
+}

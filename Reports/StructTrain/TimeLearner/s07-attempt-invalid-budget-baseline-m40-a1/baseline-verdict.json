@@ -1,0 +1,21 @@
+{
+  "kind": "timelearner_native_test_gate_result",
+  "schema_version": 1,
+  "execution": "process_error",
+  "validity": "valid",
+  "assertion_status": "failed",
+  "reason": "complete_declared_test_inventory",
+  "inventory": {
+    "expected": 4,
+    "observed": 4,
+    "failed_test_ids": [
+      "TrainingInvalidBudget/ClassicN0",
+      "TrainingInvalidBudget/ClassicN1",
+      "TrainingInvalidBudget/BranchN0",
+      "TrainingInvalidBudget/BranchN1"
+    ],
+    "assertion_status": "failed",
+    "sha256": "708ed71ebfed72fd360780ebb9012f40a75798f2ac43e0d0486aec9682bf1e91"
+  },
+  "scientific_verdict": null
+}

@@ -1,0 +1,17 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 2,
+  "cooperative_runtime_capture": true,
+  "runtime_manifest": "REPLACE_WITH_ACTUAL_RUNTIME_MANIFEST.json",
+  "source_root": "REPLACE_WITH_ACTUAL_SOURCE_ROOT",
+  "expected_test_ids": [
+    "NativeConfiguredProbeOwnership/ClassicN0",
+    "NativeConfiguredProbeOwnership/ClassicN1",
+    "NativeConfiguredProbeOwnership/BranchN0",
+    "NativeConfiguredProbeOwnership/BranchN1",
+    "NativeCapacitanceHistoryBoundary/ClassicN1ConfiguredPointTwo",
+    "NativeCapacitanceHistoryBoundary/BranchN0ConfiguredRepeatedPointTwo"
+  ],
+  "maximum_wall_seconds": 7200,
+  "asan_options": "detect_leaks=0"
+}

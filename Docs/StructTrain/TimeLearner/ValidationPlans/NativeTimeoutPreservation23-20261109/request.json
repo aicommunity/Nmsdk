@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-native-timeout-preservation23-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-native-timeout-preservation-m40-a1",
+      "commit": "161dcb9bc03bc964c89537d5a6908820762e6e93"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/native-timeout-preservation23-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeTimeoutPreservation23-20261109/suite.json",
+      "sha256": "e5480da5dfd46b8852ce80c85d617412574d5ca5ed5cb6320b2fe5bde762b10e"
+    },
+    "fixtures": {}
+  }
+}

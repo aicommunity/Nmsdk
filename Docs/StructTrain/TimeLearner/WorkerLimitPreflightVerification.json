@@ -1,0 +1,53 @@
+{
+  "kind": "worker_limit_preflight_two_host_verification",
+  "schema_version": 1,
+  "tested_root": "eae3a302185406b841284abdaf407c56b77891b9",
+  "initial_root": "5627027d5721b5f26787e4b42ee242216735aa4f",
+  "branch": "codex/timelearner-worker-limit-preflight",
+  "develop_start": "9b380a3eba4f67c31b2fde80a0a0f5b9677c3110",
+  "prerequisite_no_ff_merge": "863612fe0c27fb62ba00164a3d29e65c2ea53a04",
+  "hosts": [
+    {
+      "host": "10.245.1.17",
+      "evidence_commit": "d33f3f81aeb61506c530bfef334865cfbd1e9769",
+      "prefix": "Reports/StructTrain/TimeLearner/s10-worker-limit-preflight-m40-a2",
+      "tests_passed": 26,
+      "test_seconds": 6.866,
+      "primary_members_verified": 301,
+      "primary_archive_sha256": "dbc29f3e55fdc9f52876a0d3d22a527f3b43797bc9e2789b26f4997091ec231c",
+      "actual_final_membership_records": 20,
+      "source_hashes_verified": 353,
+      "original_a1": {"members_verified": 281, "tests": 26, "passed": 24, "failed": 2, "cause": "two crash-controller fixture subprocesses depended on cwd"},
+      "fresh_worker_group_closed": true,
+      "lease_released": true
+    },
+    {
+      "host": "10.245.1.11",
+      "evidence_commit": "34262c792cbc3d5f1d55a91fcb520732dbb62b2c",
+      "prefix": "Reports/StructTrain/TimeLearner/s10-worker-limit-preflight-elder-a2",
+      "tests_passed": 26,
+      "test_seconds": 7.327,
+      "primary_members_verified": 302,
+      "primary_archive_sha256": "4263bebe9d0fc9b59ed3cac7da6ff3afab968a18a70061c85417b2daea6ed66f",
+      "actual_final_membership_records": 20,
+      "source_hashes_verified": 353,
+      "original_a1": {"members_verified": 5, "tests_executed": false, "cause": "capacity-schema2 ledger requires explicit reservation demands", "reservation_state": "not_created"},
+      "capacity_preserved": true,
+      "declared_demands": {"slots": 1, "memory_bytes": 2147483648, "disk_bytes": 134217728},
+      "fresh_worker_group_closed": true,
+      "lease_released": true
+    }
+  ],
+  "both_hosts_exact_test_id_sets_equal": true,
+  "both_hosts_all353_source_hashes_equal": true,
+  "test_groups": {"new_limit_preflight": 2, "existing_contained_process": 13, "existing_contained_runner": 11},
+  "current_failures_errors_or_skips": 0,
+  "initial_failures_preserved": true,
+  "neural_models_started_by_this_gate": false,
+  "active_scientific_runtime_modified": false,
+  "whole_scheduler_fault_matrix_complete": false,
+  "all_generated_launchers_migrated": false,
+  "develop_promotion_performed": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

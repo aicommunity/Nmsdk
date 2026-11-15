@@ -1,0 +1,64 @@
+{
+  "kernel_before_stop": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "0f6d897555efe58193670d53fa65f60c4ab6e5e20f1e3b343f4acdbbad2c76e5",
+      "unit": "timelearner-b3fbdd50-5c44-4408-8f0b-c5d5e1acb664.service",
+      "invocation_id": "437bfd99f7664ec8a863612a276d85ac",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b3fbdd50-5c44-4408-8f0b-c5d5e1acb664.service",
+      "initial_main_pid": 397743,
+      "initial_start_ticks": "364495620",
+      "sha256": "6c1d51182731559d0fba5821984a37b7be8445d8e6f0ba70bc90b3a0f5f76002"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "8589934592",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt b3fbdd50-5c44-4408-8f0b-c5d5e1acb664",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "437bfd99f7664ec8a863612a276d85ac"
+    },
+    "memory_max": 8589934592,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "worker_terminal": {
+    "job_validation_passed": false,
+    "cohort_assertions_passed": false,
+    "built": true,
+    "expected_cpp_cases": 10,
+    "audited_completed_cpp_cases": 10,
+    "actual_audited_assertion_passed_cpp_cases": 2,
+    "actual_audited_failed_cpp_ids": [
+      "NativeThresholdCandidate/ClassicN0_2000",
+      "NativeThresholdCandidate/ClassicN1_2000",
+      "NativeThresholdCandidate/BranchN0_2000",
+      "NativeThresholdCandidate/BranchN1_2000",
+      "NativeThresholdCandidate/ClassicN0_20000",
+      "NativeThresholdCandidate/ClassicN1_20000",
+      "NativeThresholdCandidate/BranchN0_20000",
+      "NativeThresholdCandidate/BranchN1_20000"
+    ],
+    "completed_leaf_gates": 1,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+  },
+  "cleanup_does_not_attest_execution_success": true
+}

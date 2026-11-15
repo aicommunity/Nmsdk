@@ -1,0 +1,47 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeLoadHistory.cpp",
+      "suites": [
+        "NativeLoadHistory"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeLoadHistory/FreshAt2000",
+    "NativeLoadHistory/ConnectedChildAt2000",
+    "NativeLoadHistory/DetachedChildAt2000",
+    "NativeLoadHistory/FreshAt20000",
+    "NativeLoadHistory/ConnectedChildAt20000",
+    "NativeLoadHistory/DetachedChildAt20000"
+  ],
+  "runplan": [
+    {
+      "name": "load-history-6",
+      "expected_ids": [
+        "NativeLoadHistory/FreshAt2000",
+        "NativeLoadHistory/ConnectedChildAt2000",
+        "NativeLoadHistory/DetachedChildAt2000",
+        "NativeLoadHistory/FreshAt20000",
+        "NativeLoadHistory/ConnectedChildAt20000",
+        "NativeLoadHistory/DetachedChildAt20000"
+      ],
+      "wall_seconds": 1200
+    }
+  ],
+  "partitions": [
+    {
+      "name": "load-history-6",
+      "count": 6,
+      "ids": [
+        "NativeLoadHistory/FreshAt2000",
+        "NativeLoadHistory/ConnectedChildAt2000",
+        "NativeLoadHistory/DetachedChildAt2000",
+        "NativeLoadHistory/FreshAt20000",
+        "NativeLoadHistory/ConnectedChildAt20000",
+        "NativeLoadHistory/DetachedChildAt20000"
+      ]
+    }
+  ]
+}

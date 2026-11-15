@@ -1,0 +1,93 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "ad5edae6-a23d-44b0-8783-455f80470eb8",
+  "job_id": "s07-attempt-invalid-budget-baseline-native-a1",
+  "recorded_unix": 1793965008.5323544,
+  "administrator": {
+    "pid": 959182,
+    "start_ticks": "303996063",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 959202,
+    "start_ticks": "303996078",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-baseline-native-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "c6e6ebf359c8f82f51550960efd439f6139985f2db3e239740b78af38f1681c8",
+      "unit": "timelearner-30d4b64f-c31e-4085-b010-8ff3ef03d803.service",
+      "invocation_id": "76af1fd1fd604a38b68c8756c83f1177",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-30d4b64f-c31e-4085-b010-8ff3ef03d803.service",
+      "initial_main_pid": 959202,
+      "initial_start_ticks": "303996078",
+      "sha256": "8107caf5217029133ca672009eb2dace3d7e263b3cad4b6ed5b0711bb222ee12"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-30d4b64f-c31e-4085-b010-8ff3ef03d803.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Fixed-controller native integration worker and all compiler/test/archive descendants freshly closed; result must be read from original native JUnit and baseline verdict.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-attempt-invalid-budget-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-attempt-invalid-budget-baseline-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-baseline-native-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-baseline-native-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-attempt-invalid-budget-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-attempt-invalid-budget-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

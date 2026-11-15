@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-n1-local-turn-amplitude-report-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "29ed8764aa6fa98cf7d05e8334377348d4ca7b9a",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 4294967296
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a1",
+      "commit": "084cee615b81fa591ea2951fefaf12006bddaea3"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-local-turn-amplitude-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1LocalTurnAmplitudeReportA1-20261113/suite.json",
+      "sha256": "29debd5ab5484573544678bae22b044b9a4b7c87157a460a38830376b2d37ac8"
+    },
+    "fixtures": {
+      "TIMELEARNER_N1_LOCAL_TURN_RUN": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-local-turn-branch-train-m40-a3/worker/native-full-domain/Branch-stock-cold8-N1/runs/train"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 2147483648
+    }
+  }
+}

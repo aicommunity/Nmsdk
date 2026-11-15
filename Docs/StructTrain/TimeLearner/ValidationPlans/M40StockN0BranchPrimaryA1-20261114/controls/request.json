@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-stock-n0-branch-primary-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "69e985df6654ac64cc34571e6862119cf26b90c5",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "closed-primary-bundle",
+    "manifest": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/stock-n0-branch-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockN0BranchPrimaryA1-20261114/collection-manifest.json",
+      "sha256": "47fbecedc5fd0a529073e1b986c4bd86e3fe7f34fa16da9b493fbd2f871d4f9a"
+    }
+  }
+}

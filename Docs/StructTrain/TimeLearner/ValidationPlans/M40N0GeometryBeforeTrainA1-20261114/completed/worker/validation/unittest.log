@@ -1,0 +1,14 @@
+test_declared_operation_preserves_cold_physics_and_honest_outcome (Scripts.StructTrain.TimeLearner.tests.test_stock_normalization_study.StockNormalizationStudyTest.test_declared_operation_preserves_cold_physics_and_honest_outcome) ... FAIL
+
+======================================================================
+FAIL: test_declared_operation_preserves_cold_physics_and_honest_outcome (Scripts.StructTrain.TimeLearner.tests.test_stock_normalization_study.StockNormalizationStudyTest.test_declared_operation_preserves_cold_physics_and_honest_outcome)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-sdk-a1/Scripts/StructTrain/TimeLearner/tests/test_stock_normalization_study.py", line 33, in test_declared_operation_preserves_cold_physics_and_honest_outcome
+    self.assertEqual(main(['stock-candidate-window-study', 'prepare-N0', str(source),
+AssertionError: 2 != 0
+
+----------------------------------------------------------------------
+Ran 1 test in 0.303s
+
+FAILED (failures=1)

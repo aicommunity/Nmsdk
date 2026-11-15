@@ -1,0 +1,83 @@
+{
+    "artifacts": [
+        {
+            "bytes": 124081604,
+            "path": "job.json",
+            "sha256": "bc8592c09bcd5b803c0086a0dbc72610619e4c36572126c2eb1b8a6f1a554c55"
+        },
+        {
+            "bytes": 125865328,
+            "path": "model.json",
+            "sha256": "0b1a5c92bb278c9ceed1290edfce632c9b4bdff65a2d87211ff79ae1bb0ed20f"
+        },
+        {
+            "bytes": 1291814,
+            "path": "trial-0.json",
+            "sha256": "ae7c36e9fcb17570355415707bb5092b7a73b439b3711896bbfe4e0a474fa42b"
+        },
+        {
+            "bytes": 1292200,
+            "path": "trial-1.json",
+            "sha256": "aad74df213df62b5116a8b710651af2b992bb17381642c9d265186e769787ddf"
+        },
+        {
+            "bytes": 1292176,
+            "path": "trial-2.json",
+            "sha256": "032f3797b208d227ae6050e076b454b2c04704ffeb5bcf24a73dd29c21705689"
+        },
+        {
+            "bytes": 1291948,
+            "path": "trial-3.json",
+            "sha256": "720146723824b3ecc5e8b324fd28aa7baf5521faffe134f071f27fcedc151d8a"
+        },
+        {
+            "bytes": 1292087,
+            "path": "trial-4.json",
+            "sha256": "6f4f2b00cde9f9f39a1b9a3559adbb6507a40cae21213ca81458abff64ed2a1b"
+        },
+        {
+            "bytes": 1296115,
+            "path": "trial-5.json",
+            "sha256": "baef519fe5d011df027386c0cb93a7974be4dd7fff537dc358d430ff37627915"
+        },
+        {
+            "bytes": 1296263,
+            "path": "trial-6.json",
+            "sha256": "8e44791d07b34cdf2b58b29f46f7b1251472722f69ab3e7ff417d3e6fc258502"
+        },
+        {
+            "bytes": 1296288,
+            "path": "trial-7.json",
+            "sha256": "e3e7e8c176c4436d2cb7ef73368c3c97779af30cd9de426fb28c9bec4babcb93"
+        },
+        {
+            "bytes": 4169,
+            "path": "evaluation.json",
+            "sha256": "b5bdd439fd5e0e63be910791498e2865a7f899bdba32f8d5b756dce9c5a83caa"
+        },
+        {
+            "bytes": 125865328,
+            "path": "model-after.json",
+            "sha256": "0b1a5c92bb278c9ceed1290edfce632c9b4bdff65a2d87211ff79ae1bb0ed20f"
+        }
+    ],
+    "diagnostic_only": true,
+    "evaluation_verdict": null,
+    "execution": "completed",
+    "expected_trials": 8,
+    "frequency_hz": 2000,
+    "job_sha256": "28cf9c1ed8089a1cdf1462f0fae91b9cc43676eea558e03ba7b1ebc42ac2fc7e",
+    "kind": "timelearner_native_diagnostic_evaluation_execution",
+    "model_revision": "0612d586ce9b1403e5a57ee86703f87db2ea6c1a51d9bc798e38e997fa9dea60",
+    "model_sha256": "e6573c8c7d548f3b7f2c2dfbd750475795385f91ba8f38dcebeee678c1ebf705",
+    "model_ticks": 32008,
+    "model_time_begin": 0,
+    "model_time_end": 16.004,
+    "observed_trials": 8,
+    "run_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic",
+    "schema_version": 1,
+    "sha256": "add1f294dd16cf25295ce875903ace5fc843a3f00dac29ea7ab9840e14682f90",
+    "source_stopped_sha256": "855ff4aee2896ac96caa36882f3fb69e77c84a61129b991800500cb7fb672a11",
+    "training_outcome": "invalid_observation",
+    "training_reason": "rejected_candidate_window:ambiguous"
+}

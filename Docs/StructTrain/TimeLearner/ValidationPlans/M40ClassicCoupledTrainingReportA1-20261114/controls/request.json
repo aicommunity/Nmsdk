@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-classic-coupled-training-report-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "469c3194a00fcb6b9a015298d2f87317e46926f0",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 2147483648
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-classic-coupled-training-report-a1",
+      "commit": "469c3194a00fcb6b9a015298d2f87317e46926f0"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-coupled-training-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ClassicCoupledTrainingReportA1-20261114/suite.json",
+      "sha256": "3922a7675782b69a6a288edc788f1526097d4664b94b5643abfa0fd8dca14cd0"
+    },
+    "fixtures": {
+      "TIMELEARNER_COUPLED_CLASSIC_TRAIN_RUN": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-classic-cold4-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 2147483648
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp",
+      "suites": [
+        "NativeDiagnosticThreshold",
+        "NativeThresholdCandidate"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeDiagnosticThreshold/ClassicN1",
+    "NativeDiagnosticThreshold/BranchN1",
+    "NativeThresholdCandidate/ClassicN0_2000",
+    "NativeThresholdCandidate/ClassicN1_2000",
+    "NativeThresholdCandidate/BranchN0_2000",
+    "NativeThresholdCandidate/BranchN1_2000",
+    "NativeThresholdCandidate/ClassicN0_20000",
+    "NativeThresholdCandidate/ClassicN1_20000",
+    "NativeThresholdCandidate/BranchN0_20000",
+    "NativeThresholdCandidate/BranchN1_20000"
+  ],
+  "runplan": [
+    {
+      "name": "diagnostic-threshold-ten",
+      "expected_ids": [
+        "NativeDiagnosticThreshold/ClassicN1",
+        "NativeDiagnosticThreshold/BranchN1",
+        "NativeThresholdCandidate/ClassicN0_2000",
+        "NativeThresholdCandidate/ClassicN1_2000",
+        "NativeThresholdCandidate/BranchN0_2000",
+        "NativeThresholdCandidate/BranchN1_2000",
+        "NativeThresholdCandidate/ClassicN0_20000",
+        "NativeThresholdCandidate/ClassicN1_20000",
+        "NativeThresholdCandidate/BranchN0_20000",
+        "NativeThresholdCandidate/BranchN1_20000"
+      ],
+      "wall_seconds": 1800
+    }
+  ],
+  "partitions": [
+    {
+      "name": "threshold-only-diagnostics-and-ordinary-regressions",
+      "ids": [
+        "NativeDiagnosticThreshold/ClassicN1",
+        "NativeDiagnosticThreshold/BranchN1",
+        "NativeThresholdCandidate/ClassicN0_2000",
+        "NativeThresholdCandidate/ClassicN1_2000",
+        "NativeThresholdCandidate/BranchN0_2000",
+        "NativeThresholdCandidate/BranchN1_2000",
+        "NativeThresholdCandidate/ClassicN0_20000",
+        "NativeThresholdCandidate/ClassicN1_20000",
+        "NativeThresholdCandidate/BranchN0_20000",
+        "NativeThresholdCandidate/BranchN1_20000"
+      ],
+      "count": 10
+    }
+  ]
+}

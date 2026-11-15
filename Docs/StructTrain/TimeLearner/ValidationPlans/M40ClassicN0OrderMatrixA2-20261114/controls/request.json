@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-classic-n0-order-matrix-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "8da43a817c479bf288cdd6eec6bb86c497092e82",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 128,
+    "maximum_wall_seconds": 10800
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 12884901888
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-order-matrix-a2",
+      "commit": "8da43a817c479bf288cdd6eec6bb86c497092e82"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-n0-order-matrix-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40ClassicN0OrderMatrixA2-20261114/suite.json",
+      "sha256": "14ed99a62115b542f926df57637868d3c45eaa4f5f9048b6c63761a6fb677397"
+    },
+    "fixtures": {
+      "TIMELEARNER_FIXED_ORDER_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/classic-n0-order-matrix-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40ClassicN0OrderMatrixA2-20261114/fixture",
+      "TIMELEARNER_FIXED_ORDER_SOURCE_RUN": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-classic-threshold-m40-a2/worker/tmp/threshold-study/runs/candidate"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 402653184,
+      "maximum_total_bytes": 2147483648
+    }
+  }
+}

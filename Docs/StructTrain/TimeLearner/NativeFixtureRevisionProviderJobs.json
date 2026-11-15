@@ -1,0 +1,27 @@
+{
+  "kind": "native_fixture_revision_provider_followup",
+  "compiled_root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "PulseLib": "3accbed3c5d6ac2eaff98970227485a9d899835c",
+  "host": "10.245.1.17",
+  "job": "s07-fixture-identity-m40-a1",
+  "unit": "timelearner-266d33d0-ee0c-495c-a972-7c0980169c8c.service",
+  "invocation_id": "8fa7469526e4479ca0e94d0a4a27cf1a",
+  "initial_main_pid": 2296394,
+  "initial_start_ticks": "318645843",
+  "request_sha256": "1fee8a2f17902a68128fa0796f56a2f7b849a24ebeb67daa7df81d5877c02cbe",
+  "worker_sha256": "c97d788f421814f021bfc8bcfdd6149c324af44ea1d260165610f4d21adc1755",
+  "checks_planned": 34,
+  "groups": {
+    "invalidation_including_noop_controls": 22,
+    "n2_full_typed": 8,
+    "n6_dimensions_schema2": 2,
+    "n6_burst_assignment_schema3": 2
+  },
+  "asan_options": "detect_leaks=0",
+  "per_native_case_wall_limit_seconds": 1200,
+  "last_observed": "worker_started_previous_dependency_closed_and_released",
+  "accepted": false,
+  "training_certificate_eligible": false,
+  "whole_plan_complete": false,
+  "comparison_scope": "first probe packet/CSV/model/features/counters plus auxiliary CSV and aggregate certificate; auxiliary counters and wall time unavailable"
+}

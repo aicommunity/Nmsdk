@@ -1,0 +1,23 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "recorded-n4-roundtrip-independent5-a2",
+  "package_fingerprint": "e5f5aed0e6df753b9da470bde259804935683c7bd28a60836eb817ce26120c4f",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_n4_roundtrip_primary"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_n4_roundtrip_primary.RecordedN4RoundtripPrimaryTest.test_original_two_junit_cases_and_three_closed_groups",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_n4_roundtrip_primary.RecordedN4RoundtripPrimaryTest.test_classic_full_model_archive_summary_and_response",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_n4_roundtrip_primary.RecordedN4RoundtripPrimaryTest.test_branch_full_model_archive_summary_and_response",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_n4_roundtrip_primary.RecordedQcompressFramingTest.test_corrupted_size_stream_hash_and_trailing_bytes_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_n4_roundtrip_primary.RecordedN4RoundtripVisualTest.test_actual_two_models_all_somas_with_input_and_difference"
+  ],
+  "fixtures": {
+    "TIMELEARNER_RECORDED_N4_ROUNDTRIP_BUNDLE": {
+      "pattern": "*",
+      "files": 5,
+      "fingerprint": "82c57a8d51870ab5b1a3ef5bd46599e0b47a8230521a6c450fe998516a4db85f"
+    }
+  }
+}

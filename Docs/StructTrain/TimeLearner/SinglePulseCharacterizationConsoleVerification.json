@@ -1,0 +1,141 @@
+{
+  "commit": "bc1aa051ae46717e9a1e098e7872083aae28e290",
+  "root": "5d0b80afeefbc5daa57d3ca5f550a5e654f07969",
+  "PulseLib": "302124bb3e8aaa412bc7ddacad8560cf427ac94b",
+  "members_verified": 472,
+  "archive_bytes": 2478244,
+  "archive_sha256": "082c01e8534e464e6b4ee3558e056d0254be8a46e6a49056102108b7b8e703e8",
+  "source_hashes_verified": 781,
+  "native_manifests_verified": 4,
+  "whole_group_closed": true,
+  "lease_released": true,
+  "summaries": [
+    {
+      "name": "Branch-threshold-low-retry32",
+      "first_prefix": {
+        "cutoff_second_actual_onset_relative": 0.09,
+        "samples": 180,
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_first_prefix_reproduced": true,
+        "scientific_verdict": null
+      },
+      "peaks": [
+        {
+          "soma": 0,
+          "positive_local_maxima": [
+            {
+              "relative_time": 0.03,
+              "raw_potential": 0.011859327741041703,
+              "amplitude": 0.011859327741041703,
+              "plateau_end_relative": 0.03
+            },
+            {
+              "relative_time": 0.1145,
+              "raw_potential": 1.8627355698463965e-05,
+              "amplitude": 1.8627355698463965e-05,
+              "plateau_end_relative": 0.1145
+            }
+          ]
+        }
+      ],
+      "lt_events": [
+        0.0295
+      ]
+    },
+    {
+      "name": "Classic-threshold-low-retry32",
+      "first_prefix": {
+        "cutoff_second_actual_onset_relative": 0.09,
+        "samples": 180,
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_first_prefix_reproduced": true,
+        "scientific_verdict": null
+      },
+      "peaks": [
+        {
+          "soma": 0,
+          "positive_local_maxima": [
+            {
+              "relative_time": 0.0115,
+              "raw_potential": 0.09811046173472382,
+              "amplitude": 0.09811046173472382,
+              "plateau_end_relative": 0.0115
+            },
+            {
+              "relative_time": 0.027,
+              "raw_potential": 0.23209749260986,
+              "amplitude": 0.23209749260986,
+              "plateau_end_relative": 0.027
+            },
+            {
+              "relative_time": 0.0485,
+              "raw_potential": 0.03053042118556093,
+              "amplitude": 0.03053042118556093,
+              "plateau_end_relative": 0.0485
+            }
+          ]
+        },
+        {
+          "soma": 1,
+          "positive_local_maxima": [
+            {
+              "relative_time": 0.0115,
+              "raw_potential": 0.0017465044222303439,
+              "amplitude": 0.0017465044222303439,
+              "plateau_end_relative": 0.0115
+            }
+          ]
+        },
+        {
+          "soma": 2,
+          "positive_local_maxima": [
+            {
+              "relative_time": 0.0115,
+              "raw_potential": 0.0017465044222303439,
+              "amplitude": 0.0017465044222303439,
+              "plateau_end_relative": 0.0115
+            }
+          ]
+        },
+        {
+          "soma": 3,
+          "positive_local_maxima": [
+            {
+              "relative_time": 0.0115,
+              "raw_potential": 0.0017465044222303439,
+              "amplitude": 0.0017465044222303439,
+              "plateau_end_relative": 0.0115
+            }
+          ]
+        }
+      ],
+      "lt_events": [
+        0.011,
+        0.0285
+      ]
+    }
+  ],
+  "kind": "single_pulse_Console_scoped_verification",
+  "schema_version": 1,
+  "verified_utc": "2026-11-07T02:22:32.064383+00:00",
+  "host": "10.245.1.17",
+  "native_probes": 4,
+  "Python_tests_passed": 42,
+  "skipped": 0,
+  "baseline_builder_failures_reproduced": 4,
+  "baseline_default_controls_passed": 2,
+  "threshold_changed": false,
+  "training_target_changed": false,
+  "ASan_verified": false,
+  "second_host_verified": false,
+  "classification_evaluated": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "new_selected_visuals_reviewed": false
+}

@@ -1,0 +1,1644 @@
+{
+  "kind": "timelearner_closed_primary_bundle",
+  "schema_version": 1,
+  "base": "/media/user/Data/TimeLearnerRefactor",
+  "roots": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-n0-order-matrix-m40-a3",
+      "prefix": "order",
+      "files": {
+        "closure-and-reservation.json": {
+          "bytes": 3782,
+          "sha256": "d02b0bb43d6cc814be38431bae2d2f7ed8f5c8d126e1339a29cbc8c050aed833"
+        },
+        "controller-result.json": {
+          "bytes": 1177,
+          "sha256": "82e26dae83b7737900d6c032a457be69c4ff7388bcc2aa915fef6dd8f8930820"
+        },
+        "launch-context.json": {
+          "bytes": 173,
+          "sha256": "c5190700c36203e2096ba556a4296b4251bb6d714fb81fe40a39d7060836a149"
+        },
+        "lease-recovery.json": {
+          "bytes": 3848,
+          "sha256": "94e701635c9a08a591e30cfd580a8a9327325c0d4f1c364c3e5e30f3ca079f1f"
+        },
+        "monitor-final.json": {
+          "bytes": 134,
+          "sha256": "eb38e462dd7930f8561ee1c71a8168115c226f5a853f32b1da898ab161df8071"
+        },
+        "monitor.jsonl": {
+          "bytes": 449458,
+          "sha256": "107e6a4137451421fc5b4e7fcadcfc31190a16501b338a834a1db415cee73546"
+        },
+        "preflight.json": {
+          "bytes": 75,
+          "sha256": "9b17852fc8d4d37c7160917f8046228b3ba4d40aab931919294f079a6b962a41"
+        },
+        "process/contained/launch-result.json": {
+          "bytes": 54,
+          "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+        },
+        "process/contained/launcher.py": {
+          "bytes": 601,
+          "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+        },
+        "process/contained/limits-readback.json": {
+          "bytes": 1068,
+          "sha256": "7e7b8117fc8a7f27d728069833463cae47da260d7974f8fa30cd571f20748f13"
+        },
+        "process/contained/owned-unit.json": {
+          "bytes": 565,
+          "sha256": "4b208782ecc93afa4ebb8fa10cf82b30970aa74f16daa30ac6a2b60dd0022547"
+        },
+        "process/contained/ready.json": {
+          "bytes": 43,
+          "sha256": "99d7435b0a4dd1111525a7e2a082e9cc05fd9da5d0b353353fe621e4a03754a8"
+        },
+        "process/contained/request.json": {
+          "bytes": 948,
+          "sha256": "94074dc906c7c5481774d7c4afad2c005e4d2dd4dd1351a77e20c40a4f1a30fb"
+        },
+        "process/contained/runtime.json": {
+          "bytes": 2960,
+          "sha256": "588a7f82da03b1b00551e3c90d1d92a810ea7889d789a7d40e0bdc9b932481d2"
+        },
+        "process/contained/start.ack": {
+          "bytes": 18,
+          "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+        },
+        "process/contained/stderr.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "process/contained/stdout.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "process/loaded-files.json": {
+          "bytes": 976,
+          "sha256": "226946488871a3a07dbcf60d6b3aead04439d4c6427eb0c7961d6be2f629aaac"
+        },
+        "process/owned-process.json": {
+          "bytes": 586,
+          "sha256": "a0525f719a95d5b0d70cf5672e2f4f849d75cce5f39533dcc5bbb0a4c3639121"
+        },
+        "process/request.json": {
+          "bytes": 539,
+          "sha256": "62f4afb0c68b01d35c1cdd44bec08fb708b4312ba7e6a049d45c5be99377630f"
+        },
+        "process/result.json": {
+          "bytes": 1177,
+          "sha256": "82e26dae83b7737900d6c032a457be69c4ff7388bcc2aa915fef6dd8f8930820"
+        },
+        "process/runtime.json": {
+          "bytes": 2960,
+          "sha256": "588a7f82da03b1b00551e3c90d1d92a810ea7889d789a7d40e0bdc9b932481d2"
+        },
+        "process/stderr.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "process/stdout.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "process/terminal-unit-state.json": {
+          "bytes": 1299,
+          "sha256": "e1a8d8b5f6852f8f5b8a2a32b25ba57dbfb6e9491c377afc00dba273ab193b84"
+        },
+        "process/whole-group-closure.json": {
+          "bytes": 1212,
+          "sha256": "16e1068cd16df32facccfb45a075cd6a658e93add4bee3fadd1c285bc0e6d72a"
+        },
+        "request.json": {
+          "bytes": 1491,
+          "sha256": "b6f38171d7a946bca390facac93447cd67ceb3f4f8884000cd58903dbc93ddd8"
+        },
+        "supervisor.log": {
+          "bytes": 553,
+          "sha256": "63dac78a575d8c7ff4be461bd5b47de64d4d19e85a3bad43dcd5bcbb5db57ee3"
+        },
+        "worker/fixtures-after.json": {
+          "bytes": 13356,
+          "sha256": "d54d09f9bcf70976fe68f473b5dd844f61a81c9689e73aaab91f63d5e823d464"
+        },
+        "worker/fixtures-before.json": {
+          "bytes": 13356,
+          "sha256": "d54d09f9bcf70976fe68f473b5dd844f61a81c9689e73aaab91f63d5e823d464"
+        },
+        "worker/reservation.json": {
+          "bytes": 1972,
+          "sha256": "88f2727c9260bd84afc0cd49e6189b2c7dd8692b51a18c241ed097e9d8483815"
+        },
+        "worker/temporary-environment.json": {
+          "bytes": 362,
+          "sha256": "23bbfe9cc42663fdce95cb9f99affffe765e3d6dc07e86ff702f89c68bb27d58"
+        },
+        "worker/terminal.json": {
+          "bytes": 259,
+          "sha256": "5f9ab9b5b527b3eacc9b6f4657c7fe14a36807d8403057e09042c95317d4d554"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/baseline/evaluation.json": {
+          "bytes": 4148,
+          "sha256": "65e45dabf1fb6653febcc93c7eaf70ca2199dbbb6925d7da47dfacd1dc7730d9"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/baseline/source-run-manifest.json": {
+          "bytes": 191313,
+          "sha256": "62fe37b0b0e3afff8ea696b8c6dd4ec4d06365d475e7a36e4b64d9a6d9aa7e49"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/baseline/trial-0.json": {
+          "bytes": 1833662,
+          "sha256": "51b9abbfa72c23f984e5969c3026cfc27620bd2bf97b28c7d69335c5cf50f71c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/baseline/trial-1.json": {
+          "bytes": 1758090,
+          "sha256": "f498d58ae0d1b334669e73b393ae7e4db5999fd8347b71a609795a658fbf77ba"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/baseline/trial-2.json": {
+          "bytes": 1758023,
+          "sha256": "139af60a3afe3a19039635ca4d5644f7471d1979f7b6fdb7376afd6af5f512f7"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/baseline/trial-3.json": {
+          "bytes": 1758060,
+          "sha256": "7bde3a97112066fa5b69533200ee7fcd52bdf73874cad7926c04f63d352bfb0f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/baseline/trial-4.json": {
+          "bytes": 1887567,
+          "sha256": "b6e94cca49bf6ca95926555ca809483189beee46c7db87b4dbfc25f8497a8a69"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/baseline/trial-5.json": {
+          "bytes": 1840872,
+          "sha256": "01f7d00a581c4c47a60ee8015060e8810163a6fe9bda125268978c8a5871f802"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/baseline/trial-6.json": {
+          "bytes": 1890589,
+          "sha256": "57eb162109b249b4fef735b9f4eb74c75f69e7daf62e514abd9345585a8ce3d9"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/baseline/trial-7.json": {
+          "bytes": 1845317,
+          "sha256": "77e71502be2dafc11a53d49ce73c3a8e69505de5c4e2a467f4f85c4710b8e197"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/job.json": {
+          "bytes": 153884269,
+          "sha256": "9649d733abcacff1a02f0cb68d04ded4ca940c5a99d25049a5d3215861100b49"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/leases.sqlite3": {
+          "bytes": 36864,
+          "sha256": "e9cca3e1e28030404d1ab1a61e727449efec27f2dae58b0dbf53ea263a1608bf"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/matrix.json": {
+          "bytes": 3350,
+          "sha256": "16948d448b8d83e32eff98b415663696cc966c294b81bc76d7e956ed46e07c63"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/process-policy.json": {
+          "bytes": 541,
+          "sha256": "08a278c4148c1e0578dbe307639362df867e0d150d278d9dd20be0b3721ce041"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/public-cli.log": {
+          "bytes": 168211,
+          "sha256": "f3a87008a994f70158e79a3e3fcb692106affd08a8979b46b397f9dea4069e61"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/result.json": {
+          "bytes": 116075,
+          "sha256": "54df00f4928fcd7c5fee908ac182fdfd6e140352400fa68d0854e19cdba7970a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/job.json": {
+          "bytes": 153884269,
+          "sha256": "9649d733abcacff1a02f0cb68d04ded4ca940c5a99d25049a5d3215861100b49"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/process-policy.json": {
+          "bytes": 541,
+          "sha256": "08a278c4148c1e0578dbe307639362df867e0d150d278d9dd20be0b3721ce041"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000001/full-after.csv": {
+          "bytes": 389997,
+          "sha256": "a946f68cf573b695e07de7d961c7810cdda1a6bcfacb7249fac6648aa7e5eb8d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000001/full-before.csv": {
+          "bytes": 390316,
+          "sha256": "1fdf97cd5ae82864f607aa31e9303204380fc8f43fac602e6e44f1a1521cb62d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000001/omit-0.csv": {
+          "bytes": 377681,
+          "sha256": "f3f51b996abda508dc73c429cfa88080559ee3a0aae9c096906b476032a49764"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000001/omit-1.csv": {
+          "bytes": 396011,
+          "sha256": "2556ef0adeef375baa9916ab88adb14a9bcd89e9e09cc3317e613faeeb823c34"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000001/omit-2.csv": {
+          "bytes": 397210,
+          "sha256": "03be17f22445ba0264543ca2602346a20248cdfa4a28893b0d635a55ceaae769"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000001/omit-3.csv": {
+          "bytes": 398988,
+          "sha256": "8732dd132ee2e7d6f30b88342795ead7cc497c628dc265b87408bfedf5761790"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000002/full-after.csv": {
+          "bytes": 390246,
+          "sha256": "89a6d9825ee91d0d289cc4908c22b34773abd94dbb1e9d0cf929b8df1929ce30"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000002/full-before.csv": {
+          "bytes": 378275,
+          "sha256": "2a92a6f07b886c49941015d5132f52f6aaac531144ce3afbffbb8840cd882ba8"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000002/omit-0.csv": {
+          "bytes": 365614,
+          "sha256": "317a5ddb768f0f2dbc984777ddbe2fd9e8d8863b6d157472f89be0b067b823ef"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000002/omit-1.csv": {
+          "bytes": 380302,
+          "sha256": "b211b50f76160c948f15f07f14fbb09459bea9b07e3936a5a70d0dead15420f5"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000002/omit-2.csv": {
+          "bytes": 390965,
+          "sha256": "1ae1a6c6d33705480e38d3760ab0480f1a3dbd84f6068fd5125d405d029917dd"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000002/omit-3.csv": {
+          "bytes": 391175,
+          "sha256": "78c11866706ffc6b223a3270901e06d6dc3194cdd77209b143187ca88be552e3"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000003/full-after.csv": {
+          "bytes": 391657,
+          "sha256": "e8ac88c864247597dd6c29fe4a38b305076be294a54f953e4af5a5bc96cf44d3"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000003/full-before.csv": {
+          "bytes": 390294,
+          "sha256": "832e6eb9a9533a576cd12d77976e802936506ff7a5b991f3535388182c4c2e2e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000003/omit-0.csv": {
+          "bytes": 377624,
+          "sha256": "5a6e409b1eb016936ff723fc6a36f3ae8e0867b45743d031e2f9484495be72ac"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000003/omit-1.csv": {
+          "bytes": 390881,
+          "sha256": "bb2722ff6605efe120bd10128bc66e71eaa4f1c67f20dc7df9dd9b9fdbe7ff34"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000003/omit-2.csv": {
+          "bytes": 391003,
+          "sha256": "48ee8195d43ccba31d11ef3256ddcb63ddaa96051aeb57c686e0207b21e32ad2"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000003/omit-3.csv": {
+          "bytes": 391149,
+          "sha256": "85f7cafea43cb9cc7710bda14f71b44d3617e60ef5b5e4ab24c678adda8094a3"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000004/full-after.csv": {
+          "bytes": 396232,
+          "sha256": "0ce3a06011a21148000e66326ef6517a9d29d5f5deda23a287d0f5de6cb9d335"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000004/full-before.csv": {
+          "bytes": 396232,
+          "sha256": "ad0177e5830a7a6304baff40f0829a879cf36edf3e13d138970cf896f88de578"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000004/omit-0.csv": {
+          "bytes": 383575,
+          "sha256": "bf004d302a8c56c8b9b715f3e3d723a39e643bcb8f532c4675176bb5dc7e3b28"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000004/omit-1.csv": {
+          "bytes": 396951,
+          "sha256": "d4b3fadccb58483ab6197f5b635dcb9a6bac18638fa056891cd3c00231a5954b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000004/omit-2.csv": {
+          "bytes": 397032,
+          "sha256": "3a8ba1486739c7c029888303106edc3eef9267bcc1c92b75248ca011eacc7a44"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000004/omit-3.csv": {
+          "bytes": 397113,
+          "sha256": "3841e78e51a9a7bdf4a52ed8dc345687d7a853635cf07b618114f95ab0445ca2"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000005/full-after.csv": {
+          "bytes": 396231,
+          "sha256": "8cca0afbe33b5ed28abbdd3746c4379b83f4ca4c15dc305ea2c2bb23db9cbeca"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000005/full-before.csv": {
+          "bytes": 396231,
+          "sha256": "39042a501c79178696623d9621eb92471b1ce47771c17679e10dc6c626aa4d6e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000005/omit-0.csv": {
+          "bytes": 383648,
+          "sha256": "71170b4df83f9b94d20d5c24bf0a742492daa5a5f6bea839772998713320cca8"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000005/omit-1.csv": {
+          "bytes": 396948,
+          "sha256": "9210916ef710b6a6ad75d2db6dcededf3f9228b6b11ba950bd4a8bc7a912d844"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000005/omit-2.csv": {
+          "bytes": 396964,
+          "sha256": "ebb056a41310dbc6bfddcdce6bbd774fe1f2ff8a109935e15e5e8a2be07106b7"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000005/omit-3.csv": {
+          "bytes": 397112,
+          "sha256": "bc6ef18ce239b42e9fee82c407a8df1e8fb47491ec45a90c0b57fe265b007240"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000006/full-after.csv": {
+          "bytes": 397508,
+          "sha256": "aea81078b63d9e24440aaa8fddbb7c31e21fbc5b86c4c48d5dd2acde82787b40"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000006/full-before.csv": {
+          "bytes": 396293,
+          "sha256": "f028b700a1df3bc7bb6bdadd023efb7e6016d94422f8b676d47e7618aba35b78"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000006/omit-0.csv": {
+          "bytes": 383656,
+          "sha256": "d8f6e53adc2ecfb164740aee34de3648e1e1ee38b0ff7dde00b7bde6ded73d7c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000006/omit-1.csv": {
+          "bytes": 396903,
+          "sha256": "6210fcdc860fc3d22207654a1846a185c68f44fba16a658c21994e845d3c4ff6"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000006/omit-2.csv": {
+          "bytes": 396940,
+          "sha256": "1edbc7177822ee3d26fa7bd8b2914a2aa7be32087a7b7ae97c08f5e6dc333e29"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000006/omit-3.csv": {
+          "bytes": 397111,
+          "sha256": "2ab4d0766bf1d3b05a925986931b1840c3f4e937df691d7b65e4037956be13a3"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000007/full-after.csv": {
+          "bytes": 398891,
+          "sha256": "f9bf2c9681690a8b81b538329f264cb9531eee064705788bdfb30fbba38a7820"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000007/full-before.csv": {
+          "bytes": 398891,
+          "sha256": "f196265da8cbad00c1b7e8ecce6f936c14ef5054073a83d7cd84df1cb37065d3"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000007/omit-0.csv": {
+          "bytes": 386247,
+          "sha256": "7527e177086849a02bffaa6d8445b9dba5ede626f5cd4d462307c1dcfbff6a21"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000007/omit-1.csv": {
+          "bytes": 399499,
+          "sha256": "5391197879114355e8d4f63b6c4fb68113fdc7c248ef5b0572edf8549709237e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000007/omit-2.csv": {
+          "bytes": 399577,
+          "sha256": "4b92ea765d6d505522895a9f42c1b162f0dd33f486fb4c017dfa3cf0b55caf56"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000007/omit-3.csv": {
+          "bytes": 399763,
+          "sha256": "15a968c305c9089ef8e482f456a4f7ee07310c1db0144cbd54f8fe1d09732267"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000008/full-after.csv": {
+          "bytes": 398892,
+          "sha256": "8772614acd864dbe7efb587dde0495a426517bfd4d4a554151edf679ea738357"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000008/full-before.csv": {
+          "bytes": 398892,
+          "sha256": "5ce2776329f2299349357c9b403e4a6284820747938e669d4a9ba6085ab647f0"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000008/omit-0.csv": {
+          "bytes": 386218,
+          "sha256": "ed8d7fd099b926fe4cec897f84861fda8129049380887720110eab79fe65cca0"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000008/omit-1.csv": {
+          "bytes": 399489,
+          "sha256": "9360511c6cedbf0c56d8fba40b5c05734fbae7a3e8c886f4c8379938caceab5b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000008/omit-2.csv": {
+          "bytes": 399590,
+          "sha256": "86b4da485cdad0cb463c9f0eb8d45fee8e53441bc6f5d8bfa55b4386d4cf7338"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000008/omit-3.csv": {
+          "bytes": 399788,
+          "sha256": "bfa51c6519e9e0f4b2aacb1bf4084a7542ccb623b9225c03826c24d3b3e48983"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000009/full-after.csv": {
+          "bytes": 398861,
+          "sha256": "4af9e305a16259d147a982076aa97a73b0f1e6e0bb35e51abb00bcb0ffa73f3d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000009/full-before.csv": {
+          "bytes": 398850,
+          "sha256": "2b1553bcf04cd535030aa65288adfce52e2fd300567196f437d6aa67eef26929"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000009/omit-0.csv": {
+          "bytes": 386135,
+          "sha256": "8436cb56290467d3336aee08c0fc5ceb72ede7ad52c5955b7f3d29a6616b75cb"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000009/omit-1.csv": {
+          "bytes": 399451,
+          "sha256": "841e368c0e4bec9a10c5f3bd479b764ec939b78940b4114b31dfaa65391be7e0"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000009/omit-2.csv": {
+          "bytes": 399568,
+          "sha256": "afa6cbde313632200709f172a88eec596afad20d72998c0b205f889fe264713a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000009/omit-3.csv": {
+          "bytes": 399780,
+          "sha256": "7110edf6b4141e0bebaf742e3ec5c2b37bcd545f616c567ca77f0e1989ae0e3b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000010/full-after.csv": {
+          "bytes": 375378,
+          "sha256": "68d9d9d3a89d63b479214610b6e0f717ee8b8866d8b9f3b1d00c3927ab27ba61"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000010/full-before.csv": {
+          "bytes": 398818,
+          "sha256": "e7aa0441e8e2a7b1d4d1070f931f60cfc5e973f8676dfd9c237b1aad5fb942a7"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000010/omit-0.csv": {
+          "bytes": 375292,
+          "sha256": "d90bba3d07346cfc5dfaebd50c3943637e6860e5f05ec28dd315155d4d08f650"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000010/omit-1.csv": {
+          "bytes": 375997,
+          "sha256": "c86c4216d8d775ea323a2518bc9d12d9b52fe3f8e4785ffa96d2274b74d4db91"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000010/omit-2.csv": {
+          "bytes": 376137,
+          "sha256": "1101070a09b7c03f4921d7bf88750ce4be7269d09a1d2dbc4f7fe083948f3641"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000010/omit-3.csv": {
+          "bytes": 376299,
+          "sha256": "300be530e7a5be96c8ea894005b02cd0f61ea615dad838c19df57e2208df82db"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000011/full-after.csv": {
+          "bytes": 368625,
+          "sha256": "2adbab545a91235b23bd6410e160a3562f576373fd916b4fdbcb3f735ab9e28a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000011/full-before.csv": {
+          "bytes": 368624,
+          "sha256": "877d8a7677d342c042f444eb0d3f2a18cf169346bfde4dbbfbc4fbc595dbfbfa"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000011/omit-0.csv": {
+          "bytes": 355931,
+          "sha256": "f5da76bc0a2ef7c68397187395480bdcc01491db4e5809df23e7f6dfa8b3165a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000011/omit-1.csv": {
+          "bytes": 369096,
+          "sha256": "1e8831462175e9e4c9c0916246567c025ac28d34933e220c005e64714ff8ffbe"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000011/omit-2.csv": {
+          "bytes": 369552,
+          "sha256": "14b0ca3831b742e8fe66de4e08500c22cb031e435739cda590f771488d925292"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000011/omit-3.csv": {
+          "bytes": 369326,
+          "sha256": "340a3b61975c9e2bd8ab93d9bb346e5009b6855bb66f19ceffa9d586d498d06d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000012/full-after.csv": {
+          "bytes": 380826,
+          "sha256": "2de5c99d0f0c4976b77936864e9baa0508e4393b3bee2ebe018698d7b4c1fe5f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000012/full-before.csv": {
+          "bytes": 368619,
+          "sha256": "6a5472ecedf3a33cffd60aaa5a44f1fc3ac9da4c6d4654d471b6c641c9cdd38f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000012/omit-0.csv": {
+          "bytes": 355944,
+          "sha256": "7d633a4ce1576ee1feb56e2f7c6320243dce5718b2b64388d3c5d4f0e9743468"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000012/omit-1.csv": {
+          "bytes": 369107,
+          "sha256": "4a60ca826d81fe2d270fb1cd9c83fc2bd4c1610bfd2324f0452f3cb32cbe5cd9"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000012/omit-2.csv": {
+          "bytes": 369528,
+          "sha256": "69f580387d7f97de99096356039aae4a934614c1823951ba08d69ca31be6ac80"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000012/omit-3.csv": {
+          "bytes": 369332,
+          "sha256": "3ad01ba12ac8fa18c15b4ff20a5ae62cba1b2734e9e19fabf9724b7006ac4492"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000013/full-after.csv": {
+          "bytes": 388800,
+          "sha256": "3a86a4e8f28f23f2c2c840d267e9dc6ad6c7fef1e4d7dcd4615a3c65abe11cfa"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000013/full-before.csv": {
+          "bytes": 388802,
+          "sha256": "20e960cbfe86d9cfc956862fb3910cc006486c2ae5b95482c0dd6bb165491bf7"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000013/omit-0.csv": {
+          "bytes": 376140,
+          "sha256": "d88144072bfda6ca907ed118ee3ad7c7326e888d18c13e5e63fbbf31b4ae4322"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000013/omit-1.csv": {
+          "bytes": 389453,
+          "sha256": "a42db9e840c91e83b008aeb79008462f7f89444b30ec5ec3f4467e654f46e85c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000013/omit-2.csv": {
+          "bytes": 389531,
+          "sha256": "1dfbf184da2d298454004065579110a136db531ea10ca8c92a0f13b5fee520ff"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000013/omit-3.csv": {
+          "bytes": 389680,
+          "sha256": "8de593e3473c11233cf9463205b58de5424b4e659d303eebb3669b78398f4796"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000014/full-after.csv": {
+          "bytes": 388809,
+          "sha256": "3c34956d0cf526755d78557e6fb92c199bef7973fe4a1ba473568df5f369d732"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000014/full-before.csv": {
+          "bytes": 388812,
+          "sha256": "05e7ca9b5197bae4254ea2182cdd931f2d4aa6fbf41681d256f5b51c250e8692"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000014/omit-0.csv": {
+          "bytes": 376128,
+          "sha256": "a7a0475aee61115d689d616e17a4e86c955fe24f95df7ca6e2991c950ca9c5c1"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000014/omit-1.csv": {
+          "bytes": 389457,
+          "sha256": "1cd507c6fddb597f89060103e16b087c611fa167e9c0c5385528fb8fa1c913e4"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000014/omit-2.csv": {
+          "bytes": 389527,
+          "sha256": "9d86c6e69e2b65a0eb30a49bd4cb52ab4814ff76d5fee22c254db025ec25773c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000014/omit-3.csv": {
+          "bytes": 389682,
+          "sha256": "932e5a4732b8f01b4b0ee31ae5bf550fc15a354740685d60fc3c2185ce2c4a4a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000015/full-after.csv": {
+          "bytes": 382541,
+          "sha256": "ec744a906a58e62ecfc9efdb3eacdd11b2ee138f9725159c6feadc8b507c6bad"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000015/full-before.csv": {
+          "bytes": 382543,
+          "sha256": "d5f5a6d860039e2ca7685ce84fc82f1a45ea1fbab5be14001ec3dfb1c1fd81e6"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000015/omit-0.csv": {
+          "bytes": 369844,
+          "sha256": "2900459d379c9165fb612c30bf6f205632324c8969d8c00c51d996bbbf94c553"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000015/omit-1.csv": {
+          "bytes": 382985,
+          "sha256": "ed0786e53d927ab56b051f1a762ff54ef07956d43f0a8b3dbf12b5a1c63e6f9d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000015/omit-2.csv": {
+          "bytes": 383462,
+          "sha256": "c6abf418b1b3009a5d3496a551c3bf1bce09b43e58d0900ccd18efa7c8774ba3"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000015/omit-3.csv": {
+          "bytes": 383759,
+          "sha256": "a4515f34ff19d0b7b5935cb4aaf835d4d6c5a9d3be1c6ea1e7b24875c2757c4a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000016/full-after.csv": {
+          "bytes": 382533,
+          "sha256": "bbb0c6cc7e74f194636d7adc77fe720c63ad506bf91c6cef6814382634f0fe59"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000016/full-before.csv": {
+          "bytes": 382535,
+          "sha256": "a5a9a1779f2ee4c54468dc99d72023afb5eff49de8e6dbe425b3519dd5ce79ba"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000016/omit-0.csv": {
+          "bytes": 369840,
+          "sha256": "9ce3483729b68e0ff3c9299e261e65a0f613678c55e6e01fa94976ffaeff01b0"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000016/omit-1.csv": {
+          "bytes": 382987,
+          "sha256": "30d6225c4257a9fe1b40329e9ed464bf47dd7087512bd08dfd9746b760c53620"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000016/omit-2.csv": {
+          "bytes": 383460,
+          "sha256": "75f826e94a31d98aa04b8cb1caf41163f10e7c851ea2e0c88ecdf516ed7d1cbf"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000016/omit-3.csv": {
+          "bytes": 383771,
+          "sha256": "6c4160d79e5fab3554171dfb5b5393259f7e5d4e146c48421fd14fdc27bbe546"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000017/full-after.csv": {
+          "bytes": 388749,
+          "sha256": "7bbc94aa2ba49fc830626821bee355626c33e1e60af12c4409e32202e2ac984e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000017/full-before.csv": {
+          "bytes": 388752,
+          "sha256": "fd18d69f8fc4899e616d66d3b2c66ccdf306b9cddaaaa20aacacfa450c069fc8"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000017/omit-0.csv": {
+          "bytes": 376067,
+          "sha256": "fbb5b57d13e729f49997c4635e3271fdb82285bf91652f1a115ab2ff4fe6948a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000017/omit-1.csv": {
+          "bytes": 389373,
+          "sha256": "615c4232dbfed616bbb9d7e1be0e5de5408faaa19e44a318e1a6f360572a1204"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000017/omit-2.csv": {
+          "bytes": 389492,
+          "sha256": "b06b444887b1e5d66779ae51f83b3066e0e470a7c3d563aea4b8953a608e98ab"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000017/omit-3.csv": {
+          "bytes": 389675,
+          "sha256": "f626c60a50d4c4f84f941a11c72bf8496e965fb3921b3e2602eedcaa204bf086"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000018/full-after.csv": {
+          "bytes": 388753,
+          "sha256": "c07af49f5d1a6e5641bb21ddb3f5eff48db5560cb7ef66312b4900a9e0cfde11"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000018/full-before.csv": {
+          "bytes": 388755,
+          "sha256": "e96011aa0d92fd359dc482ed43be8642fb5ab6cce3dbaf47afc652b097f43b6a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000018/omit-0.csv": {
+          "bytes": 376065,
+          "sha256": "e380eff40026947693a801ce7be6831c56bbaefbf516b4c84c710b93e9e07d95"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000018/omit-1.csv": {
+          "bytes": 389374,
+          "sha256": "41c1aeac9d60c1f2ca9fbdaeef782a8e5be20d1f094942ca00cb1acacac961cb"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000018/omit-2.csv": {
+          "bytes": 389496,
+          "sha256": "97dab5a0612e3a28b56bae02397e94afddd5026b41d758e0a8d71c4389d90383"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000018/omit-3.csv": {
+          "bytes": 389669,
+          "sha256": "c24dbfd521d2123651a03b84d440247e7bb3f594bdad2531314d2b89e8c84b3f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000019/full-after.csv": {
+          "bytes": 388715,
+          "sha256": "18aa257582afb33ea9cfa094e74ca5359939866ab97d814ff2a9385539552b38"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000019/full-before.csv": {
+          "bytes": 388716,
+          "sha256": "b593d16bddcf12fdd6e53a831e9769731bac7599d4338e5a36e82570bd711408"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000019/omit-0.csv": {
+          "bytes": 376037,
+          "sha256": "b25492e4c5c32926494890b15b1b2b3f0b70301d270aae3d381b72ffa9fc3465"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000019/omit-1.csv": {
+          "bytes": 389369,
+          "sha256": "01212717c8b4d4ac0c3fa47a0cf105b38d27d7f468a425fbf710c29d3e93c461"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000019/omit-2.csv": {
+          "bytes": 389442,
+          "sha256": "4e3594ea98eeb6c602cb4549a7ae11b1aa6056d8110c5fd15960c8376fbf5c8b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000019/omit-3.csv": {
+          "bytes": 389622,
+          "sha256": "c078e2f34e63ca22f404dc4f9d66244c28062f21641f5d5071e11b92e79c6805"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000020/full-after.csv": {
+          "bytes": 388716,
+          "sha256": "f593a431f64caefb889bdb9350e3299d620cb8df67db0de93b7dfa60b8aab71f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000020/full-before.csv": {
+          "bytes": 388718,
+          "sha256": "2200a29f875d0862bfad1c261b7c290f9b0739e9e8c1aeb67cd0fa72a962e7f5"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000020/omit-0.csv": {
+          "bytes": 376049,
+          "sha256": "e6f55ab21e66f5d9cacc9989b62b1e844f505fe604aedbe67bc26bd185478e5c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000020/omit-1.csv": {
+          "bytes": 389344,
+          "sha256": "8705e5444d179d61bf51b0a3a54c63a94dbb4cfc7180442937f96cb7576adbc9"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000020/omit-2.csv": {
+          "bytes": 389445,
+          "sha256": "5a13a3230af07b46ce226f6a765f959e9dfa59776caab5ac6d28820f3d501939"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000020/omit-3.csv": {
+          "bytes": 389620,
+          "sha256": "78ee2539468ce710435d56f853c0bf0dac807fce22c3ee4c15a4b1a8f091661b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000021/full-after.csv": {
+          "bytes": 388679,
+          "sha256": "55de5fb3714b65a9c7f4eba1df9605d4f9d52a7438b729416a546dca4efee271"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000021/full-before.csv": {
+          "bytes": 388691,
+          "sha256": "bfb367e2684949ae87f63df8bb0e6e5ec8aae034ea618fb9cfa5d0cfc72117e5"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000021/omit-0.csv": {
+          "bytes": 375998,
+          "sha256": "f16687a3fbc9061d9e4c065e58233a3d8c452639ef87af91ba261caef4418b3a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000021/omit-1.csv": {
+          "bytes": 389311,
+          "sha256": "f710c769d0ac097b38688e34a8c93a1688c66d9e4ba6bf409aa7f1d525f05ec1"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000021/omit-2.csv": {
+          "bytes": 389415,
+          "sha256": "2d1469dd60bb7b37e3eaab7be9f28ac46c07c7938ba1d1988165dd9e3864b312"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000021/omit-3.csv": {
+          "bytes": 389602,
+          "sha256": "84af25d6be8c59506ad355ff79a4ffcae79999de9ef1956aae9b31aef4b97756"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000022/full-after.csv": {
+          "bytes": 388699,
+          "sha256": "cd2a652bd98e235ab22c6d56ea2d2ab2accf03138125b0c49e2f18a11bd6bb52"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000022/full-before.csv": {
+          "bytes": 388688,
+          "sha256": "89fc4997d3518a72f1b72e6c318592c70bb268350116aba9c12f31701e98b83f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000022/omit-0.csv": {
+          "bytes": 375990,
+          "sha256": "6ed8082c6287f2251b360a2fdce3fe680b5878559b96be7c48002d70c53e7155"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000022/omit-1.csv": {
+          "bytes": 389309,
+          "sha256": "3d902a885b7f7635671899e68ee49dabc964249faf82dd2f03c283b1f395cf9f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000022/omit-2.csv": {
+          "bytes": 389416,
+          "sha256": "306918ab02c6e1c64a2f4bcdd211ac54b75e9a0fc0259da18e99d409efd459b5"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000022/omit-3.csv": {
+          "bytes": 389602,
+          "sha256": "00b24a8b11599fff04ec9edb463bed5afdddac64d5146fe697eddfa3d24af703"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000023/full-after.csv": {
+          "bytes": 388625,
+          "sha256": "5311a8fa8a1cc764d425723b2834297a870e54ca657cd01287bac7ade2578d3a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000023/full-before.csv": {
+          "bytes": 388625,
+          "sha256": "ec1a541ef7ea8ca0f806f221b765d89ffaaff3961bbea7667ba6680414d463e8"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000023/omit-0.csv": {
+          "bytes": 375940,
+          "sha256": "05623867946cad5a5c29c434564e672255a5e8aa85f42acab989b970ca6f9cbb"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000023/omit-1.csv": {
+          "bytes": 389268,
+          "sha256": "e609282d207a3659d8b652226c12d27550b4fdcad9e7e565d334427ccac827a9"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000023/omit-2.csv": {
+          "bytes": 389372,
+          "sha256": "da92fac95da0a127c9192380cc68a37b308b98e87a369a7d855b33bdeca09c67"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000023/omit-3.csv": {
+          "bytes": 389572,
+          "sha256": "15ee390b70c04594b8f5b15a84d0982976d71097778a257d0831902891645292"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000024/full-after.csv": {
+          "bytes": 395309,
+          "sha256": "ff20254e866a337f24c43f04f56d10c1a8ac055352ebc1fd6313d74b0266cfb1"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000024/full-before.csv": {
+          "bytes": 388623,
+          "sha256": "88ed5bad687775b2ea8afbb8c41f7f91c7622a3334d7bfbd0f968c0d42e9675d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000024/omit-0.csv": {
+          "bytes": 375942,
+          "sha256": "d9766a8a351517caf00bf07b16b94f19b2551470c120145357f2fa0a0a8f8723"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000024/omit-1.csv": {
+          "bytes": 389268,
+          "sha256": "54ac90e4a8f5963534c2fa3bead153ac3ec3694a768664fd7d48680473e4af75"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000024/omit-2.csv": {
+          "bytes": 389382,
+          "sha256": "275583a5f2b6b6f3567f619d8d86503717af244abd05e5536e9e3f68d310a6ed"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000024/omit-3.csv": {
+          "bytes": 395088,
+          "sha256": "04a7fa8d36243dd6e02baeec25c80891736e439c695fdd271e617f9756b4c3ce"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000025/full-after.csv": {
+          "bytes": 395291,
+          "sha256": "54a5901bd640965dcadb711a74b0657c02ff4188fb96de7bd92be49b8db5f85c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000025/full-before.csv": {
+          "bytes": 395290,
+          "sha256": "77da81d81050f30a4ae1ecab34b24880f242ef7a1a58041799e4afa90436072e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000025/omit-0.csv": {
+          "bytes": 382612,
+          "sha256": "4783f16652235b58f398ea31a778ed14ade153594f26a9ef8046082c0929baff"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000025/omit-1.csv": {
+          "bytes": 395915,
+          "sha256": "e2338b4701bcf604a1a003e1009ec43a18f1e281722c7b0db98b445fe64099fd"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000025/omit-2.csv": {
+          "bytes": 396088,
+          "sha256": "1c3837eea9a2dc2cc86fa793ce4c1560f3ed9801a701543bd49c1cd479f90e25"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000025/omit-3.csv": {
+          "bytes": 396246,
+          "sha256": "1b8c009411438a4195c0b8e76c521af54bb569287024a2c81b620c3fff159df8"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000026/full-after.csv": {
+          "bytes": 395292,
+          "sha256": "4be61a91f3cd46c8d3131caec4e2457d40003eca86bd2416e3b4a0dd21aa503b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000026/full-before.csv": {
+          "bytes": 395292,
+          "sha256": "c8f94a2275c6842baa1cd0222e36250e48077967391d72c3ee377cc041b939fd"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000026/omit-0.csv": {
+          "bytes": 382610,
+          "sha256": "417510e0c9f33cfc42a56dbbc3f82c73f6162e45ee6d56d1a47a902f2bdf2bea"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000026/omit-1.csv": {
+          "bytes": 395928,
+          "sha256": "8a9df6e3dbda912d4ab0aa14820e5e626ca9682cb714f913609e65631f5ce1b1"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000026/omit-2.csv": {
+          "bytes": 396085,
+          "sha256": "c79bf9b2dabc134a4f2cd615c4e7756472d826650836f576c90ceb9f89e0c4c7"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000026/omit-3.csv": {
+          "bytes": 396247,
+          "sha256": "f815096318bd13c7b9990e69df777a81d7f9dc418422324c77964495ce4367cf"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000027/full-after.csv": {
+          "bytes": 395270,
+          "sha256": "863f99d4bfe286528dbb2e375d681fa1a2ef1d239abcb7dcc1a42f43800651ed"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000027/full-before.csv": {
+          "bytes": 395269,
+          "sha256": "44e70260e18604959e2abe5e671592ccbffcd46ae02166a7ef9e461e80a676af"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000027/omit-0.csv": {
+          "bytes": 382594,
+          "sha256": "8a711dacff52326227cccd65c1661389b91f8869af318fcf92868c41297bf4a3"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000027/omit-1.csv": {
+          "bytes": 395906,
+          "sha256": "f30d3933d8d5dcba72997f94dc33844ff2e1c7a5cdd2343c42e0a9497923a6c4"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000027/omit-2.csv": {
+          "bytes": 396047,
+          "sha256": "ce9131c6c35a848b052631da6d6c469c7e53375314c7bf898ad3613f57aee15e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000027/omit-3.csv": {
+          "bytes": 396233,
+          "sha256": "cb30faa1decf41bcb2e4df071b5f54a02e889e496d4650855cbf6b4448c75ddb"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000028/full-after.csv": {
+          "bytes": 395270,
+          "sha256": "1581e31c1b85a43ac2f13c7bed226e9c4a04432f267ec02c354d8524f966b293"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000028/full-before.csv": {
+          "bytes": 395269,
+          "sha256": "ec2bafd3b362dd6f1040a4dbb89e6a4c7d484d14c5618103de030615cccb6713"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000028/omit-0.csv": {
+          "bytes": 382594,
+          "sha256": "3d1ee4a9aed12ded0a5a7e85dc56b80465c0260446f88f1224bf0a8c981392b0"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000028/omit-1.csv": {
+          "bytes": 395906,
+          "sha256": "a28523c0576d4d74a5924aa98fc6d3942c7e4c5eba85da9545c5ef36a9e2b0e5"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000028/omit-2.csv": {
+          "bytes": 396049,
+          "sha256": "1c12fc68282754d9fe182fcab14b2f76950b76aa9470a4e6b38941305a683af1"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000028/omit-3.csv": {
+          "bytes": 396231,
+          "sha256": "4b2fc1f9a21f969b712cce1418f82ac635865dd3efbde1949c5b46f6afcfd97a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000029/full-after.csv": {
+          "bytes": 395217,
+          "sha256": "cb9b82078c4ef460b436f29529e99989666ae001ca37d68dc5cac55f14526950"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000029/full-before.csv": {
+          "bytes": 395206,
+          "sha256": "4129d1ba9ceed681c087cf9a1a70fd56f33fb06de2353d7078b4cecb842644bf"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000029/omit-0.csv": {
+          "bytes": 382499,
+          "sha256": "304d9c800501b260bc42b17f3df3f51508c221f3fd250f7347d63a05e130b732"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000029/omit-1.csv": {
+          "bytes": 395839,
+          "sha256": "20cd5363adad60b77e15753799f135f4f2f39d2488f3f0ffa05c5438f5e6c61b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000029/omit-2.csv": {
+          "bytes": 395983,
+          "sha256": "bb552e81b6599a62cabf9d0941632c1efe89916f007df60b5f68461af636f78f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000029/omit-3.csv": {
+          "bytes": 396175,
+          "sha256": "64313fd85d4af607ac982f63e58a44d76d87aef40e72f4e757a4c32eedde7a75"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000030/full-after.csv": {
+          "bytes": 395206,
+          "sha256": "47c9fa800c5d8dbd480c33a45ed92786de593a42dd29006523ba812b89084622"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000030/full-before.csv": {
+          "bytes": 395204,
+          "sha256": "3f1ddd9cb02c2d34444e40d7d3712b2c848aa7924754a081349fb3334cc180fd"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000030/omit-0.csv": {
+          "bytes": 382501,
+          "sha256": "b72b2dd9eaa51a1cd47d8eb298692ba7de03e1a24b89b4565caa1399db9b2731"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000030/omit-1.csv": {
+          "bytes": 395837,
+          "sha256": "88e065407786eb1abd681f3d8bb7aed4fb346b5008eba34934804910ff53329d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000030/omit-2.csv": {
+          "bytes": 395983,
+          "sha256": "4cb7b360b942cafb83162287faf0a8ade37378816b994e854b0a4e2036ed94b7"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000030/omit-3.csv": {
+          "bytes": 396176,
+          "sha256": "307a33dcd41afa1a039b9acc7487b92e730ab8c44c03ad63b3911d97de4feb53"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000031/full-after.csv": {
+          "bytes": 389839,
+          "sha256": "02586d381eec58815bed5997a0cb2173963c3bf7703ab23e21e90a03da1fbdcc"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000031/full-before.csv": {
+          "bytes": 389838,
+          "sha256": "4f931321680d601a37b0a8e241126d45696b02f3bf6378009a85d5f615034c4a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000031/omit-0.csv": {
+          "bytes": 377164,
+          "sha256": "b84cf68309c4880460a2e48fb88468cbf56b52368617b9a9fa18660000d429fc"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000031/omit-1.csv": {
+          "bytes": 390328,
+          "sha256": "190cc5ab47b2f60452905f4f2a3f4eedb435d2888a50bf8be8795e338c33f0d2"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000031/omit-2.csv": {
+          "bytes": 390759,
+          "sha256": "444f14148fa764b3ac9720b64372508efe7d3913aa0fe9c54765b0c4705c1178"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000031/omit-3.csv": {
+          "bytes": 391059,
+          "sha256": "a6a2a5ea7ef7204e76d19912d21c2b8fc507c12a9b3732974af519dc4ddb759d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000032/full-after.csv": {
+          "bytes": 389837,
+          "sha256": "0e6404d4594a78065a8e4d40a654a0acf5ecb1aed62809e0487efa1b8b10a4b4"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000032/full-before.csv": {
+          "bytes": 389836,
+          "sha256": "65af6bd9a369457cb3faa0fc7064b86e6f14396f605a9abd667c3e5184802ef9"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000032/omit-0.csv": {
+          "bytes": 377164,
+          "sha256": "7a363fa3456905e39aedc489bc9cd01990e9ecc6d5b57d32d7de241a0066e449"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000032/omit-1.csv": {
+          "bytes": 390329,
+          "sha256": "4951e5a50e4cb76d795e295e03251aafdb9301cc01126b9341a32a83b004a50f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000032/omit-2.csv": {
+          "bytes": 390759,
+          "sha256": "5d11f286b2adcb63cbb213d7f0b79960a4f5b230f5e6bc847977b1aa4b8bc948"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000032/omit-3.csv": {
+          "bytes": 391060,
+          "sha256": "4f4dc98653d6ad7365a131a5ebdfe1a68a59a41373fbc891cc78b26094c6e8d9"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000033/full-after.csv": {
+          "bytes": 395185,
+          "sha256": "4b264fadcba11fb6fc2bcbf6ac31e00a31e3330c893face5638c31132177164e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000033/full-before.csv": {
+          "bytes": 395184,
+          "sha256": "e578d070c2c105a2827b4b8d1c2a49c0c9f7837221fd13ff5b56705a28fdde25"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000033/omit-0.csv": {
+          "bytes": 382506,
+          "sha256": "d0a8d838dac6d05e94ca43d1b11c25f67e1fb6f1fc148a3b6b5893ca3dc1ba5d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000033/omit-1.csv": {
+          "bytes": 395811,
+          "sha256": "0d7bc4f2636cbd3868f0397a82210e748d026e67a827b6458c4a35307d0f326b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000033/omit-2.csv": {
+          "bytes": 395962,
+          "sha256": "75c58e278db08fd822c0995807ed0201018ac5f445711791648c312ce3c903b9"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000033/omit-3.csv": {
+          "bytes": 396131,
+          "sha256": "a7b4aa9ff0e0a4b7f56f5aa87c767aedef38c229f8174782f620189dea244929"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000034/full-after.csv": {
+          "bytes": 395186,
+          "sha256": "1b75f665616fd6828a06869782309b29c31d7cb813b66b3ff7c1d53d5c94c7dc"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000034/full-before.csv": {
+          "bytes": 395185,
+          "sha256": "56d8e83cf7fd8c40be5e5c46a84d1c5b32a4a1849cf4e14ea533662d80bc85d9"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000034/omit-0.csv": {
+          "bytes": 382505,
+          "sha256": "bd85f699da88c035195d3953676a206eeee9f188fdb71e4cfa4aca15101414cd"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000034/omit-1.csv": {
+          "bytes": 395814,
+          "sha256": "b376778821338500b6a47ce7d8cc7473146bedb152d60a191368820979b5b8f9"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000034/omit-2.csv": {
+          "bytes": 395959,
+          "sha256": "a25408895df8b584cd1c026e29c6a881dbaee1ec4e873ac47cb2386fc52e84f8"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000034/omit-3.csv": {
+          "bytes": 396131,
+          "sha256": "91f4db5be522afe334280769c8e51b497df96abd0086db224e60c5cf3372339e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000035/full-after.csv": {
+          "bytes": 389697,
+          "sha256": "bce9f1dfe09b71ff0449038fad67a0afd1700cc43274560a889f0dcb9c193ac8"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000035/full-before.csv": {
+          "bytes": 389696,
+          "sha256": "4881b5b7f071ea29bbabf9eb01e323acf805098b866d6029515f657305549826"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000035/omit-0.csv": {
+          "bytes": 377005,
+          "sha256": "d0bacc08746934c83afa536a15cec304b0fe177c854dea3e07daae0d1eb31dbd"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000035/omit-1.csv": {
+          "bytes": 390178,
+          "sha256": "0b01a4d53abbf64116ecdbb26148ac454659a688d6ad92a6385bcfc52afb848c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000035/omit-2.csv": {
+          "bytes": 390628,
+          "sha256": "29bfb6be7dba2ac12e40532e08382215ec4c3f14c216de2f4359a19c2bdfb9cc"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000035/omit-3.csv": {
+          "bytes": 390416,
+          "sha256": "b64a33b535c77f002788ba366e141ff955c47f47f93d4e0fc2b3f8e23a399ade"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000036/full-after.csv": {
+          "bytes": 389701,
+          "sha256": "e7fc64e9ff42c94ff8cc8dd4b7fc9326982fd5a193862a9c68dd2617ea762ea5"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000036/full-before.csv": {
+          "bytes": 389711,
+          "sha256": "fd7ddf51f32689b4f08e18400653437e286fcfd1a543039b9cb92ea52be352f4"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000036/omit-0.csv": {
+          "bytes": 377002,
+          "sha256": "99cca842266c5533dabf4326d2dec64e974ff617b5916d48aeeb62113be21c4c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000036/omit-1.csv": {
+          "bytes": 390178,
+          "sha256": "3488e0670d74f65071fa81102728283eef7c8dc97128954000973b6e81657184"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000036/omit-2.csv": {
+          "bytes": 390629,
+          "sha256": "0f75c000e8bacb0c203eefadc7fb026457aa083231199b47730498d8e35538d1"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000036/omit-3.csv": {
+          "bytes": 390414,
+          "sha256": "09cde0feda45739091ef42b8ab036ad84ea1d44b3ff13b6db731b1f165fff00f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000037/full-after.csv": {
+          "bytes": 395072,
+          "sha256": "630ecb4f340e769c42e7115eb177512a41aa073059bc185b4d1a3db80484e90e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000037/full-before.csv": {
+          "bytes": 395071,
+          "sha256": "eed507312daaa3085e83157e7f97980b6168115500f0680a12ae216f2c179f7d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000037/omit-0.csv": {
+          "bytes": 382382,
+          "sha256": "e2d59898bf569a9ba42f0fcf5725d8a4af36b55885cded90b3fd64855721fe22"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000037/omit-1.csv": {
+          "bytes": 395736,
+          "sha256": "52ca5f90cfa20bb9fd8a660ba4319999e728432a31689f772036034037e99111"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000037/omit-2.csv": {
+          "bytes": 395895,
+          "sha256": "d6adea6c5dc79a3d8a1980d17d27a9164f11a8a64fd9cbeb58eaec2247a91a04"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000037/omit-3.csv": {
+          "bytes": 396062,
+          "sha256": "b89b1f6f80f154d56a66e457f9d8f654a436d94e02dcaf8ad3d74b4dce39a9ff"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000038/full-after.csv": {
+          "bytes": 395072,
+          "sha256": "47c1c53aa3adf0504cdd4d81d5de4af3c48fe4a1cb5054245013425287b27698"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000038/full-before.csv": {
+          "bytes": 395071,
+          "sha256": "18d35f8ca70b3d02285853c368e56eeff5c08da999dc12b13b22442bac5e4112"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000038/omit-0.csv": {
+          "bytes": 382383,
+          "sha256": "83905e519f18d1bbba40ae813effdf1cbbf7c7b66b72c530c69dd59448ca9ea0"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000038/omit-1.csv": {
+          "bytes": 395734,
+          "sha256": "816e4f5cb404ee935bfd9cd1a1cce24baff3de217388bb1e2fe4ff753aed67ed"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000038/omit-2.csv": {
+          "bytes": 395900,
+          "sha256": "56ac1f3fc4c7d49b37630ab3976df18c9ff05a1bd77fbc9eaf1979a6b6959c7b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000038/omit-3.csv": {
+          "bytes": 396058,
+          "sha256": "357509463974ab8603113c42e0c621b87088eaafe9b49bf7a13f9cbdbf1874f6"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000039/full-after.csv": {
+          "bytes": 390602,
+          "sha256": "22aa5e7a4c30088e37f7d7079eab1b1819b8e4d8a0e6e46753f3dfbcc42b2ac0"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000039/full-before.csv": {
+          "bytes": 390602,
+          "sha256": "9d2df17d1764c9801a18a13eba507d130f4c962bd41e7e99763a8012b93567df"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000039/omit-0.csv": {
+          "bytes": 377909,
+          "sha256": "933bd8fb76fa159394dad0427a4d0209a92049f078050e3d46aef99e5d0be0ac"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000039/omit-1.csv": {
+          "bytes": 391066,
+          "sha256": "7d1ee68cc8bbc64c49f4fc88316042f686f2d6e5ea1a058b9f571034e9a73a38"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000039/omit-2.csv": {
+          "bytes": 391528,
+          "sha256": "719c9c35cd85115ec566e7e1f16d1f63247e80f4afaf2002d17b1259dd0704da"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000039/omit-3.csv": {
+          "bytes": 391808,
+          "sha256": "3499140e61891ab70d687323957006bf981b356dccb3418a78813b1327eb22be"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000040/full-after.csv": {
+          "bytes": 390600,
+          "sha256": "940755be4b60a82555ee69d8604166227ae701a88df22aaab9bf90d67cd2dd34"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000040/full-before.csv": {
+          "bytes": 390599,
+          "sha256": "a06a27f7cefa503b8fed3e48f8870c758a2626561d4eccac39e60c6bc8dec253"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000040/omit-0.csv": {
+          "bytes": 377914,
+          "sha256": "ad18699b80e346566494ff29f97456bf456ccee70ce716a583dc0732add4567e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000040/omit-1.csv": {
+          "bytes": 391063,
+          "sha256": "f6033b534aa3eef7bd7563e4ee2908d23f59c26e90754f9f1701cbbcf4c2be33"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000040/omit-2.csv": {
+          "bytes": 391517,
+          "sha256": "f9785ff4aac1814fb9cd083b9281428fb14d8bcdb0f34351088bd929dfcae52b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/composite-measurements/group-000040/omit-3.csv": {
+          "bytes": 391809,
+          "sha256": "b2ed553ba3de6fd3d00629e38a352146d33d94c626b3bebf228e0c15d10b1776"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/train_stopped_state.json": {
+          "bytes": 168103224,
+          "sha256": "d8d545f9d0e9a038e7dc232ad86de94213496ac94481a1c32a822b3b98c3f070"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/input/source/train_stopped_summary.json": {
+          "bytes": 92737,
+          "sha256": "d16df968b5b5eba67b11659ac2d87d148386d4dda7f23876c4ace44bfa9afe6b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/evaluation.json": {
+          "bytes": 28669,
+          "sha256": "fbd01b6f417d3563fd7e03da28d86e05ff29c1b1ec5c43aa2bc92b3fa4e82907"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/execution.json": {
+          "bytes": 13026,
+          "sha256": "fbacb4667844ecb8db460272ba6113d0a8aff6eefe058a67797e5ce6b2eab24f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/job.json": {
+          "bytes": 171203873,
+          "sha256": "4711ec5c1205bd9e053b4b0e519b249ff9b949abbf076dcc80faad9c0630b259"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/model-after.json": {
+          "bytes": 179892364,
+          "sha256": "751ed4df219ac0d77336596ce0068eb6f9314e923d107526ea5d9dc4c74ba9ca"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/model.json": {
+          "bytes": 179892364,
+          "sha256": "751ed4df219ac0d77336596ce0068eb6f9314e923d107526ea5d9dc4c74ba9ca"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-0.json": {
+          "bytes": 1833680,
+          "sha256": "293c1131bbfbe646962df93c053f9a3fce10896551878d446f0cce62c68e40f6"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-1.json": {
+          "bytes": 1758108,
+          "sha256": "8b22fd9c22d7271c6a41fd44f40ffa94d4ffb9408ac1e324b67dbeabd4eae63e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-10.json": {
+          "bytes": 1762078,
+          "sha256": "e7f4fc536eae1040362764a5636d83389811e902ebd8b4955c514b5a5635260f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-11.json": {
+          "bytes": 1891613,
+          "sha256": "f7c072c8a8c88567d155bdfe94abe6fd039d63c7086ea3cb35b77cd05c6c50fc"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-12.json": {
+          "bytes": 1843888,
+          "sha256": "f0c6382088114d58f033c47856c2a8c684f391280cb2dfaba093a19679df14fb"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-13.json": {
+          "bytes": 1895624,
+          "sha256": "c3adc48df9b62eb7f108d1943550e072acb3d573a3cf0a99b2956d7953c8a767"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-14.json": {
+          "bytes": 1842224,
+          "sha256": "3b232eb3eae7308365e2531c4042b9b251913a11f9ff800c9e2cefb091b7354f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-15.json": {
+          "bytes": 1843791,
+          "sha256": "430f4b88ebe75b4e60da413d4587e5253d26ac23a1ea3d90acd19348fec69adc"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-16.json": {
+          "bytes": 1762055,
+          "sha256": "654cce0bdb5d08dd6aa388251ee30f6d0902d912e6a093a15fa88956acff7196"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-17.json": {
+          "bytes": 1762094,
+          "sha256": "6e855a8eddb2cf70351dc7fa75b1473c926fd614e625206df99f5029345d68d1"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-18.json": {
+          "bytes": 1896591,
+          "sha256": "9bd6a61dfd33784e886c5794d0ca8a373c3710b6b10b664a598d72e74483dfcf"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-19.json": {
+          "bytes": 1840888,
+          "sha256": "1c1cb27a3e44d01664cb62d0c7b2a1bf247ec771510ff6c728f2efbeda5e5e59"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-2.json": {
+          "bytes": 1758041,
+          "sha256": "943fbb8d818217e93a9d412d432656c15bbac14a1343baf595aa14d3f4c606da"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-20.json": {
+          "bytes": 1890582,
+          "sha256": "1e0828e87fbfee9a3860c484f2b57969c46c096f51b688858adf7f7e24599bb6"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-21.json": {
+          "bytes": 1845323,
+          "sha256": "36b587cb4a2de5df1f595be98b655be9c5c853e23c58a260ebefe699ac05f470"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-22.json": {
+          "bytes": 1840777,
+          "sha256": "125333fc4ebce516d4dbdf03da08fccf8157a2cae47a0c3a870786018cc617c0"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-23.json": {
+          "bytes": 1762129,
+          "sha256": "28cd336eb64292d08e023314a48851e2ab95de3f85e4b0766481eae5dc83bb39"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-24.json": {
+          "bytes": 1762076,
+          "sha256": "1f8bb6684b30a2f9da15068f52799ddcbb19a0e4e968056434bb9016726973be"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-25.json": {
+          "bytes": 1891611,
+          "sha256": "392835a5b06d770f16353d73010e289f61dc0043f30fd210a96a00631c78edc6"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-26.json": {
+          "bytes": 1843890,
+          "sha256": "f3959ede22aab68eb5c9c9fe816921c1fb0bf3644d08bfcc55227bac37fd6561"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-27.json": {
+          "bytes": 1895623,
+          "sha256": "6c1366d397a66b2bdef787b5a5162701d70d136b3af26fcbac58f1d444e04ccb"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-28.json": {
+          "bytes": 1842224,
+          "sha256": "b17e7f280ad2fd15c0988ea5dbe9a5225e0cd9d022a74c1f9996da34bdb377be"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-29.json": {
+          "bytes": 1843791,
+          "sha256": "82722022f1c736054ab628f1451785741103c61b52cd1baa4001235d1b5e5c66"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-3.json": {
+          "bytes": 1758078,
+          "sha256": "195369e06c71b4cae08d641676ce2630ab953c9eaccf1e6181c830b2922358a7"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-30.json": {
+          "bytes": 1762109,
+          "sha256": "a7693faa4375b2bb00fc5811908abab828c67a8cea0a7dfeff44de28f776460a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-31.json": {
+          "bytes": 1762072,
+          "sha256": "e6a7d7bd90b20a1ebf4f8e14b8aa791022bee07c496e220dfdd6f6a364a8ac34"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-32.json": {
+          "bytes": 1896592,
+          "sha256": "25e393d67595b67f28bfdd609e0bad614c364874c7bd4da22edefe3112653463"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-33.json": {
+          "bytes": 1840889,
+          "sha256": "48c34882363c5e3063aafe054c5e0257ba9aa4da09a02697e13d9cbee3d9c200"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-34.json": {
+          "bytes": 1890604,
+          "sha256": "314b85495d1549be5a4e5fc44257d8a47f487ad838fc520e954641063b76115c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-35.json": {
+          "bytes": 1845324,
+          "sha256": "383129e6904f670f5ca6cc661c276bece5abca7aca959555a23790566b2ee591"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-36.json": {
+          "bytes": 1840779,
+          "sha256": "4407b21fa8a40eb7ce9de29834d7bc9d7da8ba2fcf846de52f56d9f802116054"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-37.json": {
+          "bytes": 1762127,
+          "sha256": "3073cf3c07c76dec2f19f6c17b5317c94aa69b4df940e194b71798905fd10d6b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-38.json": {
+          "bytes": 1762055,
+          "sha256": "7834b55e2a1c6279ae6ca021e9505c206a14a1da9174d75d977e80bb37a09aa1"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-39.json": {
+          "bytes": 1762093,
+          "sha256": "b4c984d826da74c6791c0a8d9e764380ab2390cb9a0e4a95b24d4dfe0f92f798"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-4.json": {
+          "bytes": 1887585,
+          "sha256": "ac34a4427230fbc3da93973cf60cbd936f0551af950322257c901a8c13252a94"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-40.json": {
+          "bytes": 1843872,
+          "sha256": "345c44768d369365b80b06488cf9538ed97a26964008183c508867bd78588eb6"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-41.json": {
+          "bytes": 1895625,
+          "sha256": "65af5eb7a982f14620b221be7435f735ca7b92a8ca63c345caeae5df29b58112"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-42.json": {
+          "bytes": 1842225,
+          "sha256": "8c74c6ce6d428cb80384d288b01c5cede38dd4a1b433f19e2b2323878e33f5f2"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-43.json": {
+          "bytes": 1843790,
+          "sha256": "17c687ce6ae44472845565d28f44fcf3dcd327d7dedde5573448befc235da642"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-44.json": {
+          "bytes": 1762110,
+          "sha256": "cc16f771a37ad7900c91cb5cf3ae3f389872f02ffe25b168b4000689aabf6387"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-45.json": {
+          "bytes": 1762073,
+          "sha256": "38591d299459f5d939dbd5857c2585d32581e8c2e7d188938fb16bf7b79d424b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-46.json": {
+          "bytes": 1762076,
+          "sha256": "52419600b8fa7721916618f1dd0034828ee94bdfbcaaf2c9819b736f6cd73282"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-47.json": {
+          "bytes": 1891614,
+          "sha256": "3da01c2a451a849073c7dc0b6d123b827b0222c3bb8aa93b9574b78e4cc4006b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-48.json": {
+          "bytes": 1890606,
+          "sha256": "75b1079e946c78c8746e0588e20c6a0baab316e788ffb229b975c2eb51b67330"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-49.json": {
+          "bytes": 1845375,
+          "sha256": "8454b0a1b65d494200c0b0b03b80881ee957ca58ef571207969e90fdce3ee9d0"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-5.json": {
+          "bytes": 1840890,
+          "sha256": "b5fff8acc5af38585013df56ec45a80d8ffb91293d04abb0eebf312717dcdde1"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-50.json": {
+          "bytes": 1847790,
+          "sha256": "bb852dba7e7d2c66ad8c0884cb4af208a45440e1edc7f275ae81a51c314abf8b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-51.json": {
+          "bytes": 1766145,
+          "sha256": "fea864b35c354e7ce13878ef3e715792e4d0f57abd352c6d968d9d8c1e1838a3"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-52.json": {
+          "bytes": 1766073,
+          "sha256": "c8f98fc76702d3c7fe9e2b42cb2b1fc4b38966b8ae8bba2094cf2a5721f9d98e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-53.json": {
+          "bytes": 1766112,
+          "sha256": "adec96d72a4f91011b8ed9a129fe2c958e201fc599111cbc5e74e9f21423c29e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-54.json": {
+          "bytes": 1905608,
+          "sha256": "46880737fd850502c5991e2ef5ad638d1d270f882d111d3ba457fb680a75763a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-55.json": {
+          "bytes": 1844905,
+          "sha256": "ab09e7a2808dd95b61dba694b3ffdc4c1070c54c1cd6d3f6157ce8d67de9f04f"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-56.json": {
+          "bytes": 1849322,
+          "sha256": "b2f2acb34fffb87ea1f9c903bf27ae0870cb5b014aed31206b1a593d2a140793"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-57.json": {
+          "bytes": 1850803,
+          "sha256": "71b3b9132c7fe88876f028989ad63e24d48f81b45bcfbc26962d1c1207fdaab3"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-58.json": {
+          "bytes": 1766128,
+          "sha256": "d6aa5c331193db408d018d5f14a51903ca09dffa2b52323fe0fd829363285343"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-59.json": {
+          "bytes": 1766092,
+          "sha256": "4af03dcd1f07ab0f3cc305e273a17cc92970e65db51301e8d829ebecd4d0a8ce"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-6.json": {
+          "bytes": 1890607,
+          "sha256": "e134ad3e6deeccbc1c17627cfeb3ad5802cd650bbd449462bf6021dce429e1ff"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-60.json": {
+          "bytes": 1766075,
+          "sha256": "76764e08e69c4256250a4085b017e1fd9b5a1d4047a478a056fc2931faa5767c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-61.json": {
+          "bytes": 1900626,
+          "sha256": "8968c529052c5d747d880e37f0f3425d9bd86fb1c36909a408865a0b07e45306"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-62.json": {
+          "bytes": 1850922,
+          "sha256": "d2249429a2c333535da2ee800868f29011b1d8f1ea9f2c5926bdc453e8b70ca2"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-63.json": {
+          "bytes": 1904643,
+          "sha256": "f91e8be88306ffc3c103f1bd4c8c3a6fa690bb4c61b1276bd675a4759f3bc4fc"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-7.json": {
+          "bytes": 1845335,
+          "sha256": "271ad56140e2fb5d7c52e121fbcdb660d1a3808a6fee21c23f00e5a4aeea8210"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-8.json": {
+          "bytes": 1762111,
+          "sha256": "b87881e91e7a90f2b0d321fbea58325e3e798297963cd92440ef3affa30b0fbf"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native/trial-9.json": {
+          "bytes": 1762074,
+          "sha256": "10a996bd67e08f95769d453931e5bab6ca3297c80b4641939d442654bf12dc27"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261114-110808.957928": {
+          "bytes": 290,
+          "sha256": "2a003c0037f6b528da98c6af611d12422fe3c4b500a3dc246a3533a7ec630904"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/capture-ack.json": {
+          "bytes": 113,
+          "sha256": "85fdbb7e8cdb74c74f67a38571ec376f6fe706319e17db666b4c635e45a538e2"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/capture-ready.json": {
+          "bytes": 97,
+          "sha256": "47a49b39d79b3fd16fc7eed931325382a9e9454e52482fefe518565b396d0e21"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/contained/launch-result.json": {
+          "bytes": 54,
+          "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/contained/launcher.py": {
+          "bytes": 601,
+          "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/contained/limits-readback.json": {
+          "bytes": 1068,
+          "sha256": "b200ad7a590ceb50dfde835055bae451806fe2c846f81d1c2ccd65761db95e8e"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/contained/owned-unit.json": {
+          "bytes": 565,
+          "sha256": "9c3f332caaeff096213316cb362d61628c0a1fd020d6ec5de906aa798ad88ec2"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/contained/ready.json": {
+          "bytes": 43,
+          "sha256": "d7f22ccc21c1201a665dcb31929dd99cae190401821e84af6f5f328879e18b16"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/contained/request.json": {
+          "bytes": 1508,
+          "sha256": "494b926051164f6e6330ff17295e78aba8b1c735c16ad6bdbb61ad7d6d571653"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/contained/runtime.json": {
+          "bytes": 12622,
+          "sha256": "72d38d6fff440ee8c2cc23991ff67550f2daf8a0341e220efc5a4d23abb25458"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/contained/start.ack": {
+          "bytes": 18,
+          "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/contained/stderr.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/contained/stdout.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/loaded-files.json": {
+          "bytes": 4822,
+          "sha256": "757c4ababb08c3b8273e17a980b0b228889d2720ed8b592203cfca7134a8f87d"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/owned-process.json": {
+          "bytes": 649,
+          "sha256": "985112f35f0bdb3995a9603c459a47f38367a1d6877ce04a479ebf17dbbeb685"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/request.json": {
+          "bytes": 861,
+          "sha256": "6ff78167c8ae5a60799be20323f83f2b5dc7ec106844fe8a37d6bc51f583afde"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/reservation-context.json": {
+          "bytes": 3095,
+          "sha256": "83b38cad7ec3eebc6453c3934359e194370a51beb884eefbc635e8c95391065a"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/result.json": {
+          "bytes": 1176,
+          "sha256": "1daf0963cb92ff3d7e45ad52c70b0bb19bc58f3a1971d9110f84d47641d6135b"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/runtime.json": {
+          "bytes": 12622,
+          "sha256": "72d38d6fff440ee8c2cc23991ff67550f2daf8a0341e220efc5a4d23abb25458"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/stderr.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/stdout.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/terminal-unit-state.json": {
+          "bytes": 1299,
+          "sha256": "091f414cf0e628a05a1aabd1b75d2fe47a20f15c7baf88dbc8860cff6d89b89c"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/process/whole-group-closure.json": {
+          "bytes": 1212,
+          "sha256": "1ac158bd4331356f6b5aabca387e2ad2a4664a6a654adad0f0c8aced19b13acc"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/run-manifest.json": {
+          "bytes": 228665,
+          "sha256": "1e8cba69e6f4ad4cea96d237a9aa8e347d85ea7c839c8c6bfcf2d94ac58eecbd"
+        },
+        "worker/tmp/fixed-threshold-order-matrix/run/runtime-cli-interface.json": {
+          "bytes": 5515,
+          "sha256": "1d0a81e1a4efe8f9fbbf3914fa112ca2c2d601f7750d59dd9d25a908c00bc4ce"
+        },
+        "worker/tool-source-after.json": {
+          "bytes": 317778,
+          "sha256": "306d8ded4d6a38b3c06df78af12a6a381def268eb8278f24c60973273f51db77"
+        },
+        "worker/tool-source-before.json": {
+          "bytes": 317778,
+          "sha256": "306d8ded4d6a38b3c06df78af12a6a381def268eb8278f24c60973273f51db77"
+        },
+        "worker/validation/result.json": {
+          "bytes": 1258,
+          "sha256": "502bd9bb160ac733e48f9db0cf2044d90bd189a8ab55af7d3fd6c22e486e58c7"
+        },
+        "worker/validation/suite.json": {
+          "bytes": 928,
+          "sha256": "eb5bd977f2d156c32a0f54e674261edf4eacf304e8ac07ffcd6e7189eb7d4e67"
+        },
+        "worker/validation/unittest.log": {
+          "bytes": 358,
+          "sha256": "bd665f51af7027966935751651a2e72d8488137f0c505722fce1b2f8a83a6a62"
+        },
+        "worker/validation-process.json": {
+          "bytes": 152,
+          "sha256": "71505f6ce41b75b6675717259bef9dc5274ffc9ce4c3d1382b4866df6b59f30f"
+        },
+        "worker/validation-source-after.json": {
+          "bytes": 317778,
+          "sha256": "306d8ded4d6a38b3c06df78af12a6a381def268eb8278f24c60973273f51db77"
+        },
+        "worker/validation-source-before.json": {
+          "bytes": 317778,
+          "sha256": "306d8ded4d6a38b3c06df78af12a6a381def268eb8278f24c60973273f51db77"
+        }
+      },
+      "links": {
+        "worker/tmp/fixed-threshold-order-matrix/run/native.events-log/EventsLog/NeuroModeler.INFO": {
+          "mode": 41471,
+          "identity": [
+            2048,
+            59003189,
+            53,
+            1794643688844417395,
+            1794643688844417395,
+            1
+          ],
+          "link_text": "NeuroModeler.M40.user.log.INFO.20261114-110808.957928",
+          "link_not_followed": true
+        }
+      }
+    }
+  ],
+  "closed_units": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-n0-order-matrix-m40-a3/worker/tmp/fixed-threshold-order-matrix/run/process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "34eaf76e4843ec92c2eb3ff0b5f1cc1d8bc4c04c187bca9786f82b306e55e804",
+        "unit": "timelearner-689ba0be-1827-4db9-8f77-f88a3fd2b4f2.service",
+        "invocation_id": "7a158c61508148ee9366ff7c2d4d9d25",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-689ba0be-1827-4db9-8f77-f88a3fd2b4f2.service",
+        "initial_main_pid": 957928,
+        "initial_start_ticks": "371888627",
+        "sha256": "53741aabaeeb8e5854e9665363e5603918a89ba3fc43e0208d8d27d2bca668d1"
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-n0-order-matrix-m40-a3/process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "bc4079d04d5766da3b18c09d0deefaa278172dab36df9db0c7e8e94b61212046",
+        "unit": "timelearner-e4125e55-caa9-4dae-8bc2-dbbd71bfedb1.service",
+        "invocation_id": "22fb532f2b7c48cf8dcbecc677944b77",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e4125e55-caa9-4dae-8bc2-dbbd71bfedb1.service",
+        "initial_main_pid": 902645,
+        "initial_start_ticks": "371793589",
+        "sha256": "6de707a931e5caf7bddff4ae257c3c49f9176f70a51a192841e90c7b78eb5f59"
+      }
+    }
+  ],
+  "bounds": {
+    "maximum_file_bytes": 536870912,
+    "maximum_total_bytes": 3221225472,
+    "maximum_archive_bytes": 167772160
+  },
+  "scientific_verdict": null
+}

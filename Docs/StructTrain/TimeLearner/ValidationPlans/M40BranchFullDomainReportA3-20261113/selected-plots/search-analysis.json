@@ -1,0 +1,3827 @@
+{
+  "kind": "timelearner_native_search_history_report",
+  "schema_version": 1,
+  "source_manifest": {
+    "source_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train/run-manifest.json",
+    "bytes": 532521,
+    "sha256": "e04e1e913e2c144c862119b61279139c52d81377c9fd4b352f179d2b55ca53ff"
+  },
+  "source_summary": {
+    "source_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train/native/train_stopped_summary.json",
+    "bytes": 19448874,
+    "sha256": "818d76c40a383284e0d1d3da9966ded08d7d6b200f9ca543f84805fd7946b750"
+  },
+  "source_run_execution": "completed",
+  "source_run_validity": "valid",
+  "runtime_fingerprint": "c805597d85a45185aa9d8607fbd82ddf8b2092253d521bfaabb494a033e27cda",
+  "data_audit": {
+    "run_evidence_consistent": true,
+    "operation": "train",
+    "native_execution_verified": false,
+    "independent_partition_verified": false,
+    "evaluation_verdict": null
+  },
+  "native_execution_attested": false,
+  "topology": "Branch",
+  "normalization": "N1",
+  "input_count": 4,
+  "anchor_index": 3,
+  "outcome": "budget_exhausted",
+  "reason": "native_training_time_budget_exhausted",
+  "actual_model_revision": "fea609e0651ccf779b58a9321e8d4008e984db768ce1167cdcc1406d1a03280d",
+  "actual_parameters": [
+    {
+      "length": 27,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 27,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 27,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "reference_complete": true,
+  "candidate_history_retained": true,
+  "actual_model_candidate_trial_ids": [],
+  "actual_model_matched_in_candidate_history": false,
+  "final_verification_group_ids": [],
+  "producer_reported_search_probes": 104,
+  "producer_reported_edits": 51,
+  "recorded_candidate_measurements": [
+    {
+      "amplitude_residual": 0,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/1/composite/5",
+      "anchor_semantic_proof_id": "039ec3f1d4d599e70050ff89e873ab150f2fffaaaff31f2f0a0426d3232dce5a",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/1",
+      "full_parameters": [
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/2/composite/6",
+      "model_epoch": 0,
+      "model_revision": "5a916bc7c77f2176c065d57e3d68dd0783902b40418eec42cf089eb10b36abf5",
+      "parameter_change_cost": 0,
+      "parameters": {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "8a6b302de1524fc78a53264adb230b6d7933f6959dbe932554323be302afa72e",
+      "timing_high": -0.240000000000002,
+      "timing_low": -0.240000000000002,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/2",
+      "within_amplitude": true,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.003462494307878927,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/6/composite/7",
+      "anchor_semantic_proof_id": "9eeea0d43374390001321e0fc644d6ce8a47308f0cf09c6c30d31b47d940d122",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/6",
+      "full_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/7/composite/8",
+      "model_epoch": 1,
+      "model_revision": "91857c96b6849af0b5af3508d11201d666866592e18285eb540803ebf58e5a21",
+      "parameter_change_cost": 3,
+      "parameters": {
+        "length": 2,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "c9485b173eeca478b028f4167fab9ca99ddc746b40fc35d877a7a5e61e143e8e",
+      "timing_high": -0.23050000000000637,
+      "timing_low": -0.23050000000000637,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/7",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.003462494307878927,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/10/composite/9",
+      "anchor_semantic_proof_id": "8fe9afa0af5ba16f73f30adc2810f95d68b10b41a0896cc6beedc8f2cb423718",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/10",
+      "full_parameters": [
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/11/composite/10",
+      "model_epoch": 2,
+      "model_revision": "f41da53d3a9e4b6e9113f5c5aa6b6dd0e6b4c3a3a34ab8d3bad844a6aa991be4",
+      "parameter_change_cost": 5,
+      "parameters": {
+        "length": 2,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "5e4f54a67f4051fcfca263f82b001ec180cc26dd3c2d8cbe23461531644e6a88",
+      "timing_high": -0.23050000000000637,
+      "timing_low": -0.23050000000000637,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/11",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.005368481944748149,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/14/composite/11",
+      "anchor_semantic_proof_id": "c73d312ae7606489c24f33f782b8dc40ffcb3d7cd7c94c64848945b1229f3466",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/14",
+      "full_parameters": [
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/15/composite/12",
+      "model_epoch": 3,
+      "model_revision": "a30406a476b2cb869779c0ab84ae1bf14cede81a0be683f5beb98908e36f97ce",
+      "parameter_change_cost": 6,
+      "parameters": {
+        "length": 3,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "fb2386ba3667751440dd35d02e09ec70f5e715fa59f7cf823386f43ffde10273",
+      "timing_high": -0.22149999999999181,
+      "timing_low": -0.22149999999999181,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/15",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.005368481944748149,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/18/composite/13",
+      "anchor_semantic_proof_id": "d772b7f26fbdcb6103609c9a6bdd48b8208f8fdf5507031cd941c4b6f6ba80cd",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/18",
+      "full_parameters": [
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/19/composite/14",
+      "model_epoch": 4,
+      "model_revision": "f777d6d95236ed34348b50e955769004f77b5f7ef1dd8d1424069a35b7e5e480",
+      "parameter_change_cost": 8,
+      "parameters": {
+        "length": 3,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "f11478a9a5f4a8c20a66069a6bd64564a95ea34389eef32ce7e4bf7d68e1f414",
+      "timing_high": -0.22149999999999181,
+      "timing_low": -0.22149999999999181,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/19",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.006605208297230991,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/22/composite/15",
+      "anchor_semantic_proof_id": "e41091c607533fae102458492032ccefdb1d7e4ec0974bee289eeb48b3e30dfa",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/22",
+      "full_parameters": [
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/23/composite/16",
+      "model_epoch": 5,
+      "model_revision": "6fbc589bb4fb299e0a7b120184ffdc4ca1869b4c0ffc3aa66b209b8321c0be9e",
+      "parameter_change_cost": 9,
+      "parameters": {
+        "length": 4,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "b9ecec870ac8ec1b6da0b5fa3bd2947a65780dd1815f23c707545abb27f76eaa",
+      "timing_high": -0.2120000000000175,
+      "timing_low": -0.2120000000000175,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/23",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.006605208297230991,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/26/composite/17",
+      "anchor_semantic_proof_id": "5c2c89f509de29e67c9f517f3ca9c4b52da918c1414896432b75c66ffe23d499",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/26",
+      "full_parameters": [
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/27/composite/18",
+      "model_epoch": 6,
+      "model_revision": "a720617f010511743753ab88ca0d9d96db5a1ed17749ff573886f368ca17f7f2",
+      "parameter_change_cost": 11,
+      "parameters": {
+        "length": 4,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "102643b6708706f5eee93a12eb95183c81de62908e9b462a03acf85eef0f6347",
+      "timing_high": -0.2120000000000175,
+      "timing_low": -0.2120000000000175,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/27",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.00748793704216133,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/30/composite/19",
+      "anchor_semantic_proof_id": "9bfcc6d603bb2046e121b6207983ba14c879e5264a2295b6327d0035def5a7a8",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/30",
+      "full_parameters": [
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/31/composite/20",
+      "model_epoch": 7,
+      "model_revision": "41f5cb4e6db92b0de0b7045bd9684cd0f190a72c78b0e5351f4264a397d064ee",
+      "parameter_change_cost": 12,
+      "parameters": {
+        "length": 5,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "d4651d71d3ed10ad5e318235390a98240577bcdbe6704dcf209023a9e4cd2ae9",
+      "timing_high": -0.20250000000001478,
+      "timing_low": -0.20250000000001478,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/31",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.00748793704216133,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/34/composite/21",
+      "anchor_semantic_proof_id": "e3a0e80ce0f56ed40d208a7396d169bc6cd84587f36302bf285f3d009dc31189",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/34",
+      "full_parameters": [
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/35/composite/22",
+      "model_epoch": 8,
+      "model_revision": "0450c7eed2e3371f98dc06cfcd8d79f5890ade8ab9f50b309ae81604a843b406",
+      "parameter_change_cost": 14,
+      "parameters": {
+        "length": 5,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "7b74d98751eb358fe9b415a7bc46f58e835a698588cb3c7e7a2bc4d226ff0eb0",
+      "timing_high": -0.20249999999998636,
+      "timing_low": -0.20249999999998636,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/35",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.008157521534652878,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/38/composite/23",
+      "anchor_semantic_proof_id": "bb4d335d9ba0903dc981c70dbc70f389b9891dd6887207b0d6897ad5f64d2a65",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/38",
+      "full_parameters": [
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/39/composite/24",
+      "model_epoch": 9,
+      "model_revision": "877f3137d055e99f8d316a278d34a51be379d74aaca1ee6d406118340ef32d88",
+      "parameter_change_cost": 15,
+      "parameters": {
+        "length": 6,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "c82c519977c87362b00f582056eee91569cb8a46a73094c0b98457fc82bce646",
+      "timing_high": -0.19299999999998363,
+      "timing_low": -0.19299999999998363,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/39",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.008157521534652878,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/42/composite/25",
+      "anchor_semantic_proof_id": "777774efc59cd18344347aa9020e5f3a91f0340c8984cf9526941df930fda169",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/42",
+      "full_parameters": [
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/43/composite/26",
+      "model_epoch": 10,
+      "model_revision": "2130b803cd9d13745dee8b006433e1f368b8e368119baa022baf90ee39eb97c4",
+      "parameter_change_cost": 17,
+      "parameters": {
+        "length": 6,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "c41c9220f8fb2f323a073959c81b079a6423e7ec6790c1b5646d98b4283d1976",
+      "timing_high": -0.19299999999998363,
+      "timing_low": -0.19299999999998363,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/43",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.008687338828015978,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/46/composite/27",
+      "anchor_semantic_proof_id": "9cd7c2356e77284e190709242dfd085f9715772848b517e37c34d19e2958a792",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/46",
+      "full_parameters": [
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/47/composite/28",
+      "model_epoch": 11,
+      "model_revision": "18547d6b3d9a3c484f0bad925114b6352690962979ad1548942f98df5cb131e2",
+      "parameter_change_cost": 18,
+      "parameters": {
+        "length": 7,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "4331eb658670584533b25bd69933dd76e834ee1ce1f079df7d30892e35a62418",
+      "timing_high": -0.18350000000003774,
+      "timing_low": -0.18350000000003774,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/47",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.008687338828015978,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/50/composite/29",
+      "anchor_semantic_proof_id": "13c71e861b1e8a44b3ae3d42a6093b4ce03947627bb36583a683338d9da6f214",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/50",
+      "full_parameters": [
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/51/composite/30",
+      "model_epoch": 12,
+      "model_revision": "03598b07a4120528e9d7fc73551eae17612a5c028e076689545d6559d1bcea0e",
+      "parameter_change_cost": 20,
+      "parameters": {
+        "length": 7,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "a6e73788e4e9d8fa6655392142d912d50436b03b6bf6b9edd608ace7d5b8d027",
+      "timing_high": -0.1834999999999809,
+      "timing_low": -0.1834999999999809,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/51",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.009119710124266267,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/54/composite/31",
+      "anchor_semantic_proof_id": "12e35c7cbc0a3c3b68355c04b50b85de8c4e6d374b8007a9a7a700750b934712",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/54",
+      "full_parameters": [
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/55/composite/32",
+      "model_epoch": 13,
+      "model_revision": "b16c3f0c95871d6ecf4712430480b29878455417a830d8b0b5ee575057841724",
+      "parameter_change_cost": 21,
+      "parameters": {
+        "length": 8,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "6e8777e2f6ad1ffe154c685c58f67180e7ccec8473c68abbe9a8cf9755d74b46",
+      "timing_high": -0.17399999999997817,
+      "timing_low": -0.17399999999997817,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/55",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.009119710124266267,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/58/composite/33",
+      "anchor_semantic_proof_id": "909d9fada6e979faeeac4cab3ce4375764458b9f465337dcbe044dac08129fae",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/58",
+      "full_parameters": [
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/59/composite/34",
+      "model_epoch": 14,
+      "model_revision": "dd55173f681ee06d639a49ea68aa0065d642b001698813c36fb9043f2c4c4e53",
+      "parameter_change_cost": 23,
+      "parameters": {
+        "length": 8,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "09fcfc74769187ea7728e3c26383ed34bff2c705ba1f100e43d17abb9e3551b4",
+      "timing_high": -0.17399999999997817,
+      "timing_low": -0.17399999999997817,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/59",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.009480934972713628,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/62/composite/35",
+      "anchor_semantic_proof_id": "61c9735026e2ff009fd099a7cdb22efe281d13736d24a99d7fc87a7625f75ee9",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/62",
+      "full_parameters": [
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/63/composite/36",
+      "model_epoch": 15,
+      "model_revision": "51e00732103374ff18b558cfc0d7ac7e171ba0a8af12d0592cb12316bdd67d90",
+      "parameter_change_cost": 24,
+      "parameters": {
+        "length": 9,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "3fcb89b0a8adf2e37dd82e3183cca5fb58cac13335200b86201f84490dbcdfe7",
+      "timing_high": -0.16449999999997544,
+      "timing_low": -0.16449999999997544,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/63",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.009480934972713628,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/66/composite/37",
+      "anchor_semantic_proof_id": "c338cd57c886fa931305a739c4b243e821efb75968b0f4d2113d995653d858e1",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/66",
+      "full_parameters": [
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/67/composite/38",
+      "model_epoch": 16,
+      "model_revision": "d60f6c76eabe5a4b613ae4422e9d112136acede0e78f81cbb0dcac5ab11ee4b3",
+      "parameter_change_cost": 26,
+      "parameters": {
+        "length": 9,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "449f7455a3eb9d30dbaf87c9f91bd05c362ccec57824fb4fb436f777e4a6efc1",
+      "timing_high": -0.1645000000000323,
+      "timing_low": -0.1645000000000323,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/67",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.009788314293793343,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/70/composite/39",
+      "anchor_semantic_proof_id": "fe74e695340aab6f3527605a2bcb1ca7db111387c0bea9acf9dc3129ee309775",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/70",
+      "full_parameters": [
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/71/composite/40",
+      "model_epoch": 17,
+      "model_revision": "06368cc3716d6df01f8449f6874d5002b7f36c95b20b50e0b7514dc6aede3d3f",
+      "parameter_change_cost": 27,
+      "parameters": {
+        "length": 10,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "302473254e41a76c7cedad55f1dd734ebbe11694afec874fa0afbd82a65becb5",
+      "timing_high": -0.15500000000002956,
+      "timing_low": -0.15500000000002956,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/71",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.009788314293793343,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/74/composite/41",
+      "anchor_semantic_proof_id": "8bc15b4375f5969b80c8139b8970d741d8e54a32afd0524e88208dde6184465e",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/74",
+      "full_parameters": [
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/75/composite/42",
+      "model_epoch": 18,
+      "model_revision": "f270ff0f7e3d7ba8c82e1bf82161552b414fa2ee084159fe23702c3c8c2d33c1",
+      "parameter_change_cost": 29,
+      "parameters": {
+        "length": 10,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "3d662c43eaead4bae9d3dd03ceeb016703c16fa301b3c512607583cd0ba56bdf",
+      "timing_high": -0.15500000000002956,
+      "timing_low": -0.15500000000002956,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/75",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010053752302212282,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/78/composite/43",
+      "anchor_semantic_proof_id": "e859feb0ab2c962f048bf24b5b1caa60a8c12cea5fe273f296aaee5451c58930",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/78",
+      "full_parameters": [
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/79/composite/44",
+      "model_epoch": 19,
+      "model_revision": "e7782973a8dabb9b5028ca0d64be855aa5c5c1c6c3da0041bc6b136bad513130",
+      "parameter_change_cost": 30,
+      "parameters": {
+        "length": 11,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "0758dea6a72d8f0434fa512e42b01f02a6221d205157cfb1e1c0237738e2cd3e",
+      "timing_high": -0.14549999999997,
+      "timing_low": -0.14549999999997,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/79",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010053752302212282,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/82/composite/45",
+      "anchor_semantic_proof_id": "0d3219062d38cfd5cceaadf2629512de930063d9575ed6757d7929e8897cb76c",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/82",
+      "full_parameters": [
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/83/composite/46",
+      "model_epoch": 20,
+      "model_revision": "64150317986cb6da3d9c9cac557b79715291eaa77332fe6152d33dc5c95e352d",
+      "parameter_change_cost": 32,
+      "parameters": {
+        "length": 11,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "b4f8d0d1b30ab7447179a877eef98ddec9cec2b89e26280fa6660bb526e52d22",
+      "timing_high": -0.14549999999997,
+      "timing_low": -0.14549999999997,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/83",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010285696865657057,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/86/composite/47",
+      "anchor_semantic_proof_id": "fc0efb2a6a5a725fb166b10b193aa7d0421a05d72fa63eefba453313ccef7cc4",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/86",
+      "full_parameters": [
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/87/composite/48",
+      "model_epoch": 21,
+      "model_revision": "b464b05a9ff9cac45c20517fbe7ccc7e531a0c784ff0be4e2bc063477efd3aed",
+      "parameter_change_cost": 33,
+      "parameters": {
+        "length": 12,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "ea007b4ffeb6f21aca59b513e9339a8c30af828cad5dc419a7a2d751d380b395",
+      "timing_high": -0.13650000000001228,
+      "timing_low": -0.13650000000001228,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/87",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010285696865657057,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/90/composite/49",
+      "anchor_semantic_proof_id": "a1ae41ebc948172742ac4830853a871d825f97361ce74f7b9dd9a81f81618cf0",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/90",
+      "full_parameters": [
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/91/composite/50",
+      "model_epoch": 22,
+      "model_revision": "fcd588288be95ca19e18e9939f8385721e81fcab9b00e7ceaa07104f3af3bcb8",
+      "parameter_change_cost": 35,
+      "parameters": {
+        "length": 12,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "0f646a95f17dc082aaf21ca0006869266c32f15f79da34984686216e6cf17ad4",
+      "timing_high": -0.13649999999995543,
+      "timing_low": -0.13649999999995543,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/91",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010490348197213062,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/94/composite/51",
+      "anchor_semantic_proof_id": "0e090976efcc6c83fbfa88c820c2af36ec41acacf411936e4de27de84c2e566c",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/94",
+      "full_parameters": [
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/95/composite/52",
+      "model_epoch": 23,
+      "model_revision": "5b8ac6ffd04c2458ec20797d69d82f5176c21a6c8cfcae294fdd877151a00e4e",
+      "parameter_change_cost": 36,
+      "parameters": {
+        "length": 13,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "2283be7c969fe3825ddf71f615828fdeaac20cd0f575e2842a8469d69727cbfe",
+      "timing_high": -0.1270000000000664,
+      "timing_low": -0.1270000000000664,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/95",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010490348197213062,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/98/composite/53",
+      "anchor_semantic_proof_id": "122414aa2626dda4ae2759305d7ae2c4159b18954f9e7678c33ac6685b1223c4",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/98",
+      "full_parameters": [
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/99/composite/54",
+      "model_epoch": 24,
+      "model_revision": "9bf35da8d2034529d8144d026024e39e27715692eeea3c08e8babfebcf3a9881",
+      "parameter_change_cost": 38,
+      "parameters": {
+        "length": 13,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "a1a246dc40752c872a80eedfccb2a25f61f348fa32503cec6fde2ccfad8a4bc9",
+      "timing_high": -0.1269999999999527,
+      "timing_low": -0.1269999999999527,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/99",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010672516233248719,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/102/composite/55",
+      "anchor_semantic_proof_id": "188223c866f02c4a05e1bb5257b26d2ccd2708285703c67aa7c55e28479c8c0a",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/102",
+      "full_parameters": [
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/103/composite/56",
+      "model_epoch": 25,
+      "model_revision": "bbf9755ffdeae7bacba215abddf35420ec561b4410ff1e1f961e72bdc31c68fe",
+      "parameter_change_cost": 39,
+      "parameters": {
+        "length": 14,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "ae6206582e587815b917698e69badf7bee57ec1c50563c1edc96bc203b9dd753",
+      "timing_high": -0.11750000000006366,
+      "timing_low": -0.11750000000006366,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/103",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010672516233248719,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/106/composite/57",
+      "anchor_semantic_proof_id": "13b705ba63a0af78920cd4b46f0eb9d6d160dfc42240c4d9d391edb92cbe83b9",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/106",
+      "full_parameters": [
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/107/composite/58",
+      "model_epoch": 26,
+      "model_revision": "a21eda14f9c880bedfd2be1c467f0a2e3f42823b95a4fad8bbfd6d0b877c496e",
+      "parameter_change_cost": 41,
+      "parameters": {
+        "length": 14,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "4cf042fe04100934c2eafa302f29dc9ed0969e1e58b8062b8a779d4026c6d5a2",
+      "timing_high": -0.11750000000006366,
+      "timing_low": -0.11750000000006366,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/107",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010835830692287218,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/110/composite/59",
+      "anchor_semantic_proof_id": "246af6ef5db76f2165d58dba89d9b277422f3a90676af1d61d1f20ee880f381f",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/110",
+      "full_parameters": [
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/111/composite/60",
+      "model_epoch": 27,
+      "model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67",
+      "parameter_change_cost": 42,
+      "parameters": {
+        "length": 15,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "9aa92bdfb67cab3d429087cdea25e4bc3c8312d758c177fd821e2d5b8b907394",
+      "timing_high": -0.10799999999994725,
+      "timing_low": -0.10799999999994725,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/111",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.010835830692287218,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/114/composite/61",
+      "anchor_semantic_proof_id": "1ead26fb4cd7b18e5ca59e8b4b2f6bd97a4ab95304338ad785a62392f1e8afed",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/114",
+      "full_parameters": [
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/115/composite/62",
+      "model_epoch": 28,
+      "model_revision": "fbb0af638ee6aee5571006799756ec187823c59cbf3d4ab72ee5c4f91b402dd6",
+      "parameter_change_cost": 44,
+      "parameters": {
+        "length": 15,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "3d7bdc6859f71582062c86a274a6f4d25da878135d5a4e48ec5319b27492c232",
+      "timing_high": -0.10800000000006094,
+      "timing_low": -0.10800000000006094,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/115",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.01098314300188541,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/118/composite/63",
+      "anchor_semantic_proof_id": "d01e9e88625f714fd2461328970b00d404a64908895475c77b9d0c0eb58b12f1",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/118",
+      "full_parameters": [
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/119/composite/64",
+      "model_epoch": 29,
+      "model_revision": "2ca3fcbbe2dcaeb5756fe6ce25df5c56765a458c8b443963e9b3d62c15281e77",
+      "parameter_change_cost": 45,
+      "parameters": {
+        "length": 16,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "fcbff47f69137da948af8379ecd46047a17045cbaff21d87505b7e9372cbf216",
+      "timing_high": -0.09849999999994452,
+      "timing_low": -0.09849999999994452,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/119",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.01098314300188541,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/122/composite/65",
+      "anchor_semantic_proof_id": "5d9d19000644e86016fc4a6356ef3080470209e74820689ee729271c09a89dc6",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/122",
+      "full_parameters": [
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/123/composite/66",
+      "model_epoch": 30,
+      "model_revision": "c7626c9ca1fc2a58a2b6e826e3c1624a2cdb1d2ff9ec6aa2f1ee50f8bac7fde6",
+      "parameter_change_cost": 47,
+      "parameters": {
+        "length": 16,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "e20246525d7eec02ed0a5649bd0fa0272d041d0ab81d7036819dad1a5bba03ad",
+      "timing_high": -0.09850000000005821,
+      "timing_low": -0.09850000000005821,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/123",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011116701248057415,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/126/composite/67",
+      "anchor_semantic_proof_id": "d499c7ce7d2357c880fcec38fc4582bb2caea84995b4befb59652937961ceded",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/126",
+      "full_parameters": [
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/127/composite/68",
+      "model_epoch": 31,
+      "model_revision": "0009736fa46095c7a531e6da5299b08ffb9fe16c03a8bb3b0af9d23be40959ee",
+      "parameter_change_cost": 48,
+      "parameters": {
+        "length": 17,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "c572153a8b88983007140b770b4998b0b321504d6b79ae367c49d559aae0e65d",
+      "timing_high": -0.08949999999992997,
+      "timing_low": -0.08949999999992997,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/127",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011116701248057415,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/130/composite/69",
+      "anchor_semantic_proof_id": "ccd29e0191f090cdf4941fd804a1ac2a863a7d03d657b25cbd7c540f3456fb65",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/130",
+      "full_parameters": [
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/131/composite/70",
+      "model_epoch": 32,
+      "model_revision": "f777380709eb87d97254d13f3bfc249e22cf8df9ea42e11fda9916967077b025",
+      "parameter_change_cost": 50,
+      "parameters": {
+        "length": 17,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "78cc193e7b82038c35a744d7366d95710d7efc0dd6d1f2cce2a76268fa857a8d",
+      "timing_high": -0.08950000000004366,
+      "timing_low": -0.08950000000004366,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/131",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011238216857488603,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/134/composite/71",
+      "anchor_semantic_proof_id": "8c5bec244750389be6646f29cd12e83b3a3bd855a679b3a72c3785362d87ca60",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/134",
+      "full_parameters": [
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/135/composite/72",
+      "model_epoch": 33,
+      "model_revision": "df4682b05058617e585fdbc0828130c8f062cccf4187c638d2eb182e4b8782c0",
+      "parameter_change_cost": 51,
+      "parameters": {
+        "length": 18,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "4bcb80f14a4267d6dae6b51790a722965650b1eb90d934bc1a7374ad9b1b89fb",
+      "timing_high": -0.08000000000004093,
+      "timing_low": -0.08000000000004093,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/135",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011238216857488603,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/138/composite/73",
+      "anchor_semantic_proof_id": "3e5ae43ed9ec6f9a5335fde338e78fcd3afa2e4c5bef120f2b71e59746b8ec90",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/138",
+      "full_parameters": [
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/139/composite/74",
+      "model_epoch": 34,
+      "model_revision": "556eceb9fa1415ca515a6735962a7d9bdb92ec5227cd9f21ffb9829f965ce147",
+      "parameter_change_cost": 53,
+      "parameters": {
+        "length": 18,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "b74d4edaf88528cf5c7354e2b2f0e19b933a0e417f0070f83dba401df87ae26a",
+      "timing_high": -0.07999999999992724,
+      "timing_low": -0.07999999999992724,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/139",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011349372881182651,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/142/composite/75",
+      "anchor_semantic_proof_id": "af4445ee38d92cdb26fe70e29bb91e1deea5fd9a0d0e957b1413246ede0b23ba",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/142",
+      "full_parameters": [
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/143/composite/76",
+      "model_epoch": 35,
+      "model_revision": "b41ecb4400aa31a6ce185dffbd30f074998794e15d9139085e3bfd1b691b9cf0",
+      "parameter_change_cost": 54,
+      "parameters": {
+        "length": 19,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "3a8a50fe8e63a23ed33a65d33025b86dedb96fadcf03c7875805c8d8c86c2670",
+      "timing_high": -0.0705000000000382,
+      "timing_low": -0.0705000000000382,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/143",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011349372881182651,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/146/composite/77",
+      "anchor_semantic_proof_id": "ca87244c747a25d6be8b0d30170aa6c36cf50e1567f0852cb79d195d040edfce",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/146",
+      "full_parameters": [
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/147/composite/78",
+      "model_epoch": 36,
+      "model_revision": "84184ca7bc0b47fbebdff1d2c353e09bcbbc881030dac0a83a64949233bbb016",
+      "parameter_change_cost": 56,
+      "parameters": {
+        "length": 19,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "a330c05d782fbd4eacdfd18c257c8634c4fedcef881682c5a8e88ae0bf821fcb",
+      "timing_high": -0.07049999999992451,
+      "timing_low": -0.07049999999992451,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/147",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011451376333412089,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/150/composite/79",
+      "anchor_semantic_proof_id": "a3c3537c4b5c4e183fe43341f748fd3ad42b689ef5bfa329795c02ead5b1fa3d",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/150",
+      "full_parameters": [
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/151/composite/80",
+      "model_epoch": 37,
+      "model_revision": "ccdcbda02a0d6ed45c9fec6b995c8816182fff98c7e2ae11dbdf38523fe32edc",
+      "parameter_change_cost": 57,
+      "parameters": {
+        "length": 20,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "a031227f1e9db3f2643ca1662168ee4d57b28b5edd471402eca040a8320d3f0b",
+      "timing_high": -0.06150000000002365,
+      "timing_low": -0.06150000000002365,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/151",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011451376333412089,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/154/composite/81",
+      "anchor_semantic_proof_id": "77b6f12fab753384e99d041375df37d43310028055cc3e49fc05bce1311dea7f",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/154",
+      "full_parameters": [
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/155/composite/82",
+      "model_epoch": 38,
+      "model_revision": "fdc1895813ae3f34622e8c9000891ae659d94ef26663bdcb7143bdebb62bc2b9",
+      "parameter_change_cost": 59,
+      "parameters": {
+        "length": 20,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "ca47f7fd2831f4bb9a9192f63ddf49f2faf7b1a0c550b802ffdde40898c6a7a9",
+      "timing_high": -0.06150000000002365,
+      "timing_low": -0.06150000000002365,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/155",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011545162498302952,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/158/composite/83",
+      "anchor_semantic_proof_id": "1c4f96b1beecfd9da2fa6cee4e8d90057cdecb6c616528ddb72fb2550c314d9f",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/158",
+      "full_parameters": [
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/159/composite/84",
+      "model_epoch": 39,
+      "model_revision": "df7b0ef51f914276ba1237f527eed06977cad9bebac925176ad6e0c44731c058",
+      "parameter_change_cost": 60,
+      "parameters": {
+        "length": 21,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "806d57683a319793a9a7e1bf4d341ccc7dda56d510cd72e327b84f2e14cbc84c",
+      "timing_high": -0.05200000000002092,
+      "timing_low": -0.05200000000002092,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/159",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011545162498302952,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/162/composite/85",
+      "anchor_semantic_proof_id": "1fd92fd50339aa2c1689ac3165667fe97f5f865a44a846d200040a03ee356fa8",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/162",
+      "full_parameters": [
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/163/composite/86",
+      "model_epoch": 40,
+      "model_revision": "1130dea0f9796d4bba13bd542f2024512a7d818fbe93341f33dfe37f4a6efb8d",
+      "parameter_change_cost": 62,
+      "parameters": {
+        "length": 21,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "30d835ff635f61b4530741e1bee105e973b04a9c9859993518a23291a979db81",
+      "timing_high": -0.05199999999990723,
+      "timing_low": -0.05199999999990723,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/163",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011631788337060911,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/166/composite/87",
+      "anchor_semantic_proof_id": "7f5551889811b0a38f70286e2722953a5a830c08322d676537550a21ce5e456d",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/166",
+      "full_parameters": [
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/167/composite/88",
+      "model_epoch": 41,
+      "model_revision": "f7d30f012b42e35c2c8a39287c808f84e90ff254ab3f707c9d01e3033baa58b6",
+      "parameter_change_cost": 63,
+      "parameters": {
+        "length": 22,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "c1e54fb6fa40695164ba337a3374c9ef0975360881961764bfeca438f8aac8a9",
+      "timing_high": -0.043000000000006366,
+      "timing_low": -0.043000000000006366,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/167",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011631788337060911,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/170/composite/89",
+      "anchor_semantic_proof_id": "a35c9f20ef0d48c24197503c5e9a7145f384fe6694567408d0b68261ca418bbe",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/170",
+      "full_parameters": [
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/171/composite/90",
+      "model_epoch": 42,
+      "model_revision": "6d6a02e94cebc9585b8180ccbedacfcf90cb086f9a0e799edc794722f2a23e62",
+      "parameter_change_cost": 65,
+      "parameters": {
+        "length": 22,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "1362188b770e5c70cddde9ca199d545f3533317ce51470d96bb38e780ad00f4d",
+      "timing_high": -0.043000000000006366,
+      "timing_low": -0.043000000000006366,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/171",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011711800292276031,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/174/composite/91",
+      "anchor_semantic_proof_id": "e014c52439cd59bfa72f39c39a075d5242a43c913ee2c427398c31839bbdb5dd",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/174",
+      "full_parameters": [
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/175/composite/92",
+      "model_epoch": 43,
+      "model_revision": "ed1685b31bfddf229016dcb554e32e2bf2d58916891cc6af31e8b49be62d699e",
+      "parameter_change_cost": 66,
+      "parameters": {
+        "length": 23,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "6955c9bf148b4ac78080acd5b923db4ef0125c0850aedadf0e26641b7225cda9",
+      "timing_high": -0.03350000000000364,
+      "timing_low": -0.03350000000000364,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/175",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011711800292276031,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/178/composite/93",
+      "anchor_semantic_proof_id": "f7a34193c982c69b008b72c488ad8380ac20ef69a1eec9d2147fdce59755a2bc",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/178",
+      "full_parameters": [
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/179/composite/94",
+      "model_epoch": 44,
+      "model_revision": "41751f670927ff2165a09bb338314604301e8b668de68ae369d24e59bd0fe83d",
+      "parameter_change_cost": 68,
+      "parameters": {
+        "length": 23,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "3e0a56e66ee8095a9838ea553089369c424e32a34d0258c415c5c5e23ad9b404",
+      "timing_high": -0.03350000000000364,
+      "timing_low": -0.03350000000000364,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/179",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011786022953135689,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/182/composite/95",
+      "anchor_semantic_proof_id": "bde0ea77cfb37e4c709f3e8ef51c598141b6261c7242406f51385e0f38ec775a",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/182",
+      "full_parameters": [
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/183/composite/96",
+      "model_epoch": 45,
+      "model_revision": "456bede8811815a11e1daedfd49eb49e0f03aba73e90e41e8f74e4037f79aabc",
+      "parameter_change_cost": 69,
+      "parameters": {
+        "length": 24,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "78a59e47bec00ff478263c57da308e1ba70b775da0f549678b5adf773f9f61e7",
+      "timing_high": -0.024499999999989086,
+      "timing_low": -0.024499999999989086,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/183",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.011786022953135689,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/186/composite/97",
+      "anchor_semantic_proof_id": "02ddf4871a97ae0f9275598b11548a6ed8de6f791ebb170e5c24bc7c61c4e63e",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/186",
+      "full_parameters": [
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/187/composite/98",
+      "model_epoch": 46,
+      "model_revision": "ca514b7ec7a03591d7d3234ff39156964d8f02a82cf66de96956c2ce12ee9ed0",
+      "parameter_change_cost": 71,
+      "parameters": {
+        "length": 24,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "d4d1f649fd00b648a77cf6ac94867a03a985c2b6310e9a726ba87f5a95665229",
+      "timing_high": -0.024499999999989086,
+      "timing_low": -0.024499999999989086,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/187",
+      "within_amplitude": false,
+      "within_timing": false
+    },
+    {
+      "amplitude_residual": -0.0118549032499361,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/190/composite/99",
+      "anchor_semantic_proof_id": "12b19ca90ffb8f5f9800f2f1557ec55c0189d3db475c1f65a569dec9b0ba66c3",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/190",
+      "full_parameters": [
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/191/composite/100",
+      "model_epoch": 47,
+      "model_revision": "b5fda57d8a35a8385927658ed73b04e186dd7e7412fe2e2dc7ef617a497b36aa",
+      "parameter_change_cost": 72,
+      "parameters": {
+        "length": 25,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "6cd353df80ec37da0b8f6251e7ce41180600427b4f06eb695b09c36cefb5c78d",
+      "timing_high": -0.01499999999987267,
+      "timing_low": -0.01499999999987267,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/191",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.0118549032499361,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/194/composite/101",
+      "anchor_semantic_proof_id": "b63b60dc7db59320166bdd10c6325518ddb98b561cba9cccdf97401386e2a9ae",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/194",
+      "full_parameters": [
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/195/composite/102",
+      "model_epoch": 48,
+      "model_revision": "c644953aac19f0f19056902e1e9e95874785755866e3c2f9341bfcb1fa0f18b4",
+      "parameter_change_cost": 74,
+      "parameters": {
+        "length": 25,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "867aa4090b157ec98adc4fe11b7cd331a1ec1d3b09577646b5a59b6265df0886",
+      "timing_high": -0.01499999999987267,
+      "timing_low": -0.01499999999987267,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/195",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.011918946239878103,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/198/composite/103",
+      "anchor_semantic_proof_id": "c1303d70821abe796ea736aec07e045cd78c3c3597c2e31fbf112f704449c525",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/198",
+      "full_parameters": [
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/199/composite/104",
+      "model_epoch": 49,
+      "model_revision": "10bb573c010049e9d3c74d11e9d38b356cae3d79a0db8dd8c82a1ba9537aae9d",
+      "parameter_change_cost": 75,
+      "parameters": {
+        "length": 26,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "009b0d29cccb091059a1338248256eef5e13fe9eef5ddebfe8e0d6149ae929e7",
+      "timing_high": -0.0060000000000854925,
+      "timing_low": -0.0060000000000854925,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/199",
+      "within_amplitude": false,
+      "within_timing": true
+    },
+    {
+      "amplitude_residual": -0.011918946239878103,
+      "anchor_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/202/composite/105",
+      "anchor_semantic_proof_id": "218ad9ee4bb7fc8a76bb42e248c19c3a214c022651a8a6fd93844752b3ac7f92",
+      "anchor_trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/202",
+      "full_parameters": [
+        {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "input_index": 2,
+      "measurement_group_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/203/composite/106",
+      "model_epoch": 50,
+      "model_revision": "efc6bacd25770cb3ccde41b952b2e09638296e401be88e2b6f5f7bd3548e9ecd",
+      "parameter_change_cost": 77,
+      "parameters": {
+        "length": 26,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "semantic_proof_id": "591c52298525ae73f9e8f4642ae11e12b2510b6dd801276a336a34825b3a42eb",
+      "timing_high": -0.0060000000000854925,
+      "timing_low": -0.0060000000000854925,
+      "trial_id": "Branch-stock-cold8-N1/recorded-observation-domain/session/1/search/203",
+      "within_amplitude": false,
+      "within_timing": true
+    }
+  ],
+  "recorded_rejections": [],
+  "assessed_resistance_domains": [
+    {
+      "input_index": 2,
+      "base_model_revision": "5a916bc7c77f2176c065d57e3d68dd0783902b40418eec42cf089eb10b36abf5",
+      "geometry": [
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "5a916bc7c77f2176c065d57e3d68dd0783902b40418eec42cf089eb10b36abf5",
+      "geometry": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "91857c96b6849af0b5af3508d11201d666866592e18285eb540803ebf58e5a21",
+      "geometry": [
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "f41da53d3a9e4b6e9113f5c5aa6b6dd0e6b4c3a3a34ab8d3bad844a6aa991be4",
+      "geometry": [
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "a30406a476b2cb869779c0ab84ae1bf14cede81a0be683f5beb98908e36f97ce",
+      "geometry": [
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "f777d6d95236ed34348b50e955769004f77b5f7ef1dd8d1424069a35b7e5e480",
+      "geometry": [
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "6fbc589bb4fb299e0a7b120184ffdc4ca1869b4c0ffc3aa66b209b8321c0be9e",
+      "geometry": [
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "a720617f010511743753ab88ca0d9d96db5a1ed17749ff573886f368ca17f7f2",
+      "geometry": [
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "41f5cb4e6db92b0de0b7045bd9684cd0f190a72c78b0e5351f4264a397d064ee",
+      "geometry": [
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "0450c7eed2e3371f98dc06cfcd8d79f5890ade8ab9f50b309ae81604a843b406",
+      "geometry": [
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "877f3137d055e99f8d316a278d34a51be379d74aaca1ee6d406118340ef32d88",
+      "geometry": [
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "2130b803cd9d13745dee8b006433e1f368b8e368119baa022baf90ee39eb97c4",
+      "geometry": [
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "18547d6b3d9a3c484f0bad925114b6352690962979ad1548942f98df5cb131e2",
+      "geometry": [
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "03598b07a4120528e9d7fc73551eae17612a5c028e076689545d6559d1bcea0e",
+      "geometry": [
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "b16c3f0c95871d6ecf4712430480b29878455417a830d8b0b5ee575057841724",
+      "geometry": [
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "dd55173f681ee06d639a49ea68aa0065d642b001698813c36fb9043f2c4c4e53",
+      "geometry": [
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "51e00732103374ff18b558cfc0d7ac7e171ba0a8af12d0592cb12316bdd67d90",
+      "geometry": [
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "d60f6c76eabe5a4b613ae4422e9d112136acede0e78f81cbb0dcac5ab11ee4b3",
+      "geometry": [
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "06368cc3716d6df01f8449f6874d5002b7f36c95b20b50e0b7514dc6aede3d3f",
+      "geometry": [
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "f270ff0f7e3d7ba8c82e1bf82161552b414fa2ee084159fe23702c3c8c2d33c1",
+      "geometry": [
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "e7782973a8dabb9b5028ca0d64be855aa5c5c1c6c3da0041bc6b136bad513130",
+      "geometry": [
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "64150317986cb6da3d9c9cac557b79715291eaa77332fe6152d33dc5c95e352d",
+      "geometry": [
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "b464b05a9ff9cac45c20517fbe7ccc7e531a0c784ff0be4e2bc063477efd3aed",
+      "geometry": [
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "fcd588288be95ca19e18e9939f8385721e81fcab9b00e7ceaa07104f3af3bcb8",
+      "geometry": [
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "5b8ac6ffd04c2458ec20797d69d82f5176c21a6c8cfcae294fdd877151a00e4e",
+      "geometry": [
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "9bf35da8d2034529d8144d026024e39e27715692eeea3c08e8babfebcf3a9881",
+      "geometry": [
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "bbf9755ffdeae7bacba215abddf35420ec561b4410ff1e1f961e72bdc31c68fe",
+      "geometry": [
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "a21eda14f9c880bedfd2be1c467f0a2e3f42823b95a4fad8bbfd6d0b877c496e",
+      "geometry": [
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67",
+      "geometry": [
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "fbb0af638ee6aee5571006799756ec187823c59cbf3d4ab72ee5c4f91b402dd6",
+      "geometry": [
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "2ca3fcbbe2dcaeb5756fe6ce25df5c56765a458c8b443963e9b3d62c15281e77",
+      "geometry": [
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "c7626c9ca1fc2a58a2b6e826e3c1624a2cdb1d2ff9ec6aa2f1ee50f8bac7fde6",
+      "geometry": [
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "0009736fa46095c7a531e6da5299b08ffb9fe16c03a8bb3b0af9d23be40959ee",
+      "geometry": [
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "f777380709eb87d97254d13f3bfc249e22cf8df9ea42e11fda9916967077b025",
+      "geometry": [
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "df4682b05058617e585fdbc0828130c8f062cccf4187c638d2eb182e4b8782c0",
+      "geometry": [
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 18,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "556eceb9fa1415ca515a6735962a7d9bdb92ec5227cd9f21ffb9829f965ce147",
+      "geometry": [
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "b41ecb4400aa31a6ce185dffbd30f074998794e15d9139085e3bfd1b691b9cf0",
+      "geometry": [
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 19,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "84184ca7bc0b47fbebdff1d2c353e09bcbbc881030dac0a83a64949233bbb016",
+      "geometry": [
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "ccdcbda02a0d6ed45c9fec6b995c8816182fff98c7e2ae11dbdf38523fe32edc",
+      "geometry": [
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 20,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "fdc1895813ae3f34622e8c9000891ae659d94ef26663bdcb7143bdebb62bc2b9",
+      "geometry": [
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "df7b0ef51f914276ba1237f527eed06977cad9bebac925176ad6e0c44731c058",
+      "geometry": [
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 21,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "1130dea0f9796d4bba13bd542f2024512a7d818fbe93341f33dfe37f4a6efb8d",
+      "geometry": [
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "f7d30f012b42e35c2c8a39287c808f84e90ff254ab3f707c9d01e3033baa58b6",
+      "geometry": [
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 22,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "6d6a02e94cebc9585b8180ccbedacfcf90cb086f9a0e799edc794722f2a23e62",
+      "geometry": [
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "ed1685b31bfddf229016dcb554e32e2bf2d58916891cc6af31e8b49be62d699e",
+      "geometry": [
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 23,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "41751f670927ff2165a09bb338314604301e8b668de68ae369d24e59bd0fe83d",
+      "geometry": [
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "456bede8811815a11e1daedfd49eb49e0f03aba73e90e41e8f74e4037f79aabc",
+      "geometry": [
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "ca514b7ec7a03591d7d3234ff39156964d8f02a82cf66de96956c2ce12ee9ed0",
+      "geometry": [
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "b5fda57d8a35a8385927658ed73b04e186dd7e7412fe2e2dc7ef617a497b36aa",
+      "geometry": [
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 25,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "c644953aac19f0f19056902e1e9e95874785755866e3c2f9341bfcb1fa0f18b4",
+      "geometry": [
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "10bb573c010049e9d3c74d11e9d38b356cae3d79a0db8dd8c82a1ba9537aae9d",
+      "geometry": [
+        {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 26,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 2880071.5552629367,
+      "maximum_resistance": 10000000000,
+      "locked_by_shared_bank": false
+    },
+    {
+      "input_index": 2,
+      "base_model_revision": "efc6bacd25770cb3ccde41b952b2e09638296e401be88e2b6f5f7bd3548e9ecd",
+      "geometry": [
+        {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "minimum_resistance": 86000000,
+      "maximum_resistance": 86000000,
+      "locked_by_shared_bank": true
+    }
+  ],
+  "tolerances": {
+    "amplitude_absolute": 1e-05,
+    "amplitude_relative": 0,
+    "sync": 0.02
+  },
+  "domain_assessments_are_not_presentations": true,
+  "attempt_total_independently_recounted": false,
+  "training_or_final_verification_verdict": null,
+  "scientific_verdict": null
+}

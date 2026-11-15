@@ -1,0 +1,15 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 2,
+  "runtime_manifest": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-fixed-normal-a1/native-runtime.json",
+  "source_root": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-fixed-normal-a1",
+  "expected_test_ids": [
+    "TrainingInvalidBudget/ClassicN0",
+    "TrainingInvalidBudget/ClassicN1",
+    "TrainingInvalidBudget/BranchN0",
+    "TrainingInvalidBudget/BranchN1"
+  ],
+  "maximum_wall_seconds": 600,
+  "asan_options": "",
+  "cooperative_runtime_capture": true
+}

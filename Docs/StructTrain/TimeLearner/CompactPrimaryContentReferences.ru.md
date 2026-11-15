@@ -1,0 +1,26 @@
+# Компактное хранение одинаковых больших primary files
+
+create_native_bundle получил явно выбираемый deduplicate_content=True. Default остаётся regular-file schema1; closed_primary_bundle нового Tool использует schema2. Ранее сортировка одинаковых файлов рядом помогала только пока файл помещался в LZMA dictionary. Текущий225MB model и39MB qz больше32MiB dictionary collector; повторные source snapshots записывались целиком.
+
+Schema2 сохраняет полный прежний logical members inventory с bytes/SHA256 для каждого пути. Один экземпляр content (SHA256,size) записан обычным tar member. Повтор — tar LNKTYPE сsize0 и ссылкой только на уже проверенный regular member того жеcontent. Codec/version/content reference method явно указаны. Reader запрещает missing/forward/chained/different-content references, symlinks, неизвестные версии, ложные logical totals и path/directory collisions. При restore ссылка копируется в новый обычный файл и повторно проверяется по bytes/SHA; filesystem hardlinks не создаются. Изменение одной копии не влияет на другую. Архив-источник не меняется.
+
+Прежние schema1 и точный исторический headerless inventory (members/archive_bytes/archive_sha256) читаются по прежним правилам без разрешения content references. Glog alias adapter по-прежнему только explicit; он проверяет действительный inventory/owner и может опустить только подтверждённую избыточную derived копию. Отдельно исправлена проверка kind/schema: раньше неизвестный заголовок не отвергался самим restore.
+
+Проверки импортируют production functions: прежние portable/collector regression cases, реальные удержанные native fixture bytes, invalid reference/version/totals и отсутствие aliasing после восстановления. Большой тест использует фактический classic.qz38794216B последнего N4 состояния, сравнивает schema1/schema2 размер при32MiB dictionary и byte-exact восстановление обеих logical копий. Это I/O/архивная проверка, не новый model run и не scientific PASS. Локально выполнен только AST parse; runtime проверки выполняются на серверах.
+
+Работающие M40 diagnostic Tool7bd и Elder SDK92ad не обновляются. Старые опубликованные bundles не перепаковываются. До серверной проверки новый collector не применяется к их результатам. Большие физически различные файлы schema2 не объединяет; полное разделение моделей/measurement evidence, проверка общего pipeline performance и все остальные пункты плана остаются отдельной работой.
+
+
+## Фактический model.json нового diagnostic run
+
+Console записал native/model.json282794133B. Прежний compact matrix exporter имел фиксированный per-member256MiB предел и не мог сохранить этот подлинный оригинал. Добавлен explicit maximum_member_bytes: default256MiB сохранён, допустим только integer1..512MiB. Для текущего случая выбирается384MiB. Общие archive128MiB/expanded768MiB/64members не изменяются. CLI create/audit/report записывает выбор через --maximum-member-bytes; --deduplicate-content отдельно выбирает schema2. Исходные model/summary/trial bytes не перекодируются. Проверки: прежний default отказ256MiB+1, invalid explicit budgets, actual selected primary export и полный rescore текущих8 проб по оригинальным model/trial SHA и original metrics. Runtime проверка нового лимита пока открыта.
+
+## Серверная проверка schema2
+
+M40: 34/34 passed, job `s02-content-reference-primary-m40-a1`, Tool `c97ff92cc0b7cb11e714133e6342d16a35aaf01c`; исходные данные неизменны, процессы закрыты, lease released. Фактические две копии classic.qz: schema1 76248036 B → schema2 38160432 B, byte-exact независимое восстановление. [Отчёт и raw receipts](ValidationPlans/M40ContentReferencePrimaryA1-20261113/RESULT.ru.md). Более поздний explicit 384MiB member budget пока не проверен этим запуском.
+
+## Проверка большого original model завершена
+
+[Actual export/restore/rescore10/10 на M40](ValidationPlans/M40DeclaredDiagnosticPrimaryA1-20261113/RESULT.ru.md) принят:28 logical members/320078865B →19575080B XZ, original model282794133B и все8 observations сохранены без перекодирования, исходные метрики совпали. Default256MiB не изменён; explicit384MiB ограничен отдельным вызовом. Whole group closed/lease released. Это последующее подтверждение, уточняющее раннее «runtime проверка открыта» выше; независимый перенос на Elder пока отдельный pending gate.
+
+Независимый перенос нового large-model primary также подтверждён: [Elder1/1,335.39s](ValidationPlans/ElderBudget16CompactReplayA1-20261113/RESULT.ru.md), original M40 directories отсутствуют, весь original readback равен. Source archive/fixtures неизменны, процессы закрыты и lease released. Это DATA replay, не новая научная классификация.

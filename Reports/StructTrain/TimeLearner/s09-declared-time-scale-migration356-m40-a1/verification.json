@@ -1,0 +1,112 @@
+{
+  "kind": "production_history_migration356_observation",
+  "schema_version": 1,
+  "mode": "preflight-negative",
+  "job_id": "s09-declared-time-scale-migration356-m40-a1",
+  "source_root": "4130926410ceaafe358d7f2e7eff5c4ce7267651",
+  "CLI_source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-declared-time-scales-m40-a2",
+    "commit": "4e9aff7b72d3cc2460c6d9c886e0f2d7e39d5277"
+  },
+  "runner_source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-owned-python-jobs-m40-a4",
+    "commit": "edaaa836e27b0ecef1c2f9203fb04ee82d62bd93"
+  },
+  "original_terminal": {
+    "production_migration356_passed": false,
+    "heartbeat_errors": [],
+    "expected_records": 356,
+    "whole_migration_complete": false,
+    "scope": "production CLI and its descendants owned; observer controller and its synchronous Git preparation separate",
+    "CPP_builds": 0,
+    "model_calculations": 0,
+    "archived_scripts_executed": 0,
+    "scientific_verdict": null
+  },
+  "lease": {
+    "token": "f71d6dce-a0f9-4085-bed2-873da69fe920",
+    "job_id": "s09-declared-time-scale-migration356-m40-a1",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 3451672,
+      "start_ticks": "323779146",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-declared-time-scale-migration356-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-declared-time-scale-migration356-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-declared-time-scales-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-declared-time-scales-m40-a2"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-owned-python-jobs-m40-a4",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-owned-python-jobs-m40-a4"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/.git/objects",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/.git/objects"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Bin",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Bin"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Bin/.git/objects",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Bin/.git/objects"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Libraries/Nmsdk-PulseLib",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Libraries/Nmsdk-PulseLib"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Libraries/Nmsdk-PulseLib/.git/objects",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Libraries/Nmsdk-PulseLib/.git/objects"
+      }
+    ],
+    "state": "released",
+    "created": 1794162593.9810495,
+    "deadline": 1794162713.9810495,
+    "updated": 1794162597.3473272,
+    "release_note": "Controller completed synchronous Git metadata preparation and observed production CLI whole cgroup closure; CLI scope only, no models/CPP/historical code execution.",
+    "heartbeat_expired": true,
+    "owner_status": "missing",
+    "inspection_required": false,
+    "scientific_verdict": null
+  },
+  "whole_migration_complete": false,
+  "scientific_verdict": null,
+  "CPP_builds": 0,
+  "model_calculations": 0,
+  "archived_scripts_executed": 0,
+  "controller_lease_is_separate_from_CLI_cgroup": true,
+  "actual_records_verified": 0,
+  "actual_CLI_started": false,
+  "kernel_unit_created": false,
+  "kernel_closure_attested": false,
+  "original_exception": {
+    "reason": "collector_git_blob_missing",
+    "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 32, in <module>\n  File \"/media/user/Data/TimeLearnerRefactor/source-owned-python-jobs-m40-a4/Scripts/StructTrain/TimeLearner/owned_python_job.py\", line 126, in _source_snapshot\n    git_raw, git_record = _git_blob(root, commit, relative, 64*1024**2)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-owned-python-jobs-m40-a4/Scripts/StructTrain/TimeLearner/collector_provenance.py\", line 241, in _git_blob\n    require(len(entry) == 2 and entry[1] == b\"\", \"collector_git_blob_missing\")\n  File \"/media/user/Data/TimeLearnerRefactor/source-owned-python-jobs-m40-a4/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: collector_git_blob_missing\n"
+  },
+  "lease_note_erratum": "Original generic release_note mentions CLI group closure, but no CLI/unit was launched. Only synchronous prelaunch/source-snapshot controller ran; release was prelaunch cleanup. Original note retained unchanged.",
+  "ignored_pyc_observation_sha256": "3d254c25f2a87db80fe38e2f153ffda7a83a51bbab8a78b7a8881b77c6e478ff",
+  "ignored_pyc_files_retained": 8,
+  "old_Git_object_import_stage_reached": false,
+  "original_source_snapshot_pass_attested": false
+}

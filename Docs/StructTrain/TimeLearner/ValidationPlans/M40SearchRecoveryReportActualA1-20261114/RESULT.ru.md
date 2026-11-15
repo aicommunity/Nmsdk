@@ -1,0 +1,7 @@
+# Полный production CLI recovery-history audit принят
+
+M401/1 PASS235.826s, outer completed/closed257.0875493469648s, heartbeat errors0. Source6734dec146063f5f2553fd44871e4256470f0a4b; обычный analyze --format native-search-history выполнил полный DATA audit исходного Branch coupled Train и сохранил5 recovery deliveries со всеми параметрами/runtime plans. Trials90/95/99/103/107 и geometry vectors проверены,22 measured candidates не смешаны с отказами. Нет final verification, attempt completeness/certificate/scientific verdict не добавлены.
+
+Тяжёлый аудит запущен только после authoritative completion и closure timed Classic native leaf; стеновой бюджет обучения не продлевался и не использовался этим reader. [Фактический CLI report schema2](completed/worker/tmp/coupled-recovery-search-history.json), [log](completed/worker/validation/unittest.log), [closure](completed/process/whole-group-closure.json), [literal integrity](integrity.json). Producerb09114e00fb1dda396a9ee3604b162ae577a5012, pack108244B SHA256c44ae50c8a5b7d6b1d9e5d2e69aeee50698a0d96d732a777ec076721de0549fd;18 исходных файлов сохранены без JSON rewrite.
+
+Уточнение исходного controls/PLAN: число «38 source bindings» было опиской и не является критерием приёмки. Source fixture содержит432 JSON-файла; реальная полнота и bindings проверяются production auditor по самому run manifest, а не фиксированным числом38. Код теста не содержит такого требования. [Независимый Elder replay того же пакета](../ElderCoupledTrainPrimaryReplayA1-20261114/RESULT.ru.md) принят отдельно.

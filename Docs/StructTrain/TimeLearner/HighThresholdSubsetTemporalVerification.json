@@ -1,0 +1,68 @@
+{
+  "kind": "independent_high_threshold_subset_temporal_metadata_verification",
+  "commit": "df1da70ce803e3e4d77cd936866bd5fe0dc382ec",
+  "native_primary_commit": "2194d833df5910207dfc8cf2895f8b11608db2f8",
+  "archive_members_verified": 27,
+  "archive_sha256": "b76fa022bc3ad155707d57f6b1f1c4cf1af5dfda81b1a8b4deb7d755589b30c3",
+  "primary_file_bindings_matched_git": 70,
+  "primary_members_restored_and_verified_on_server": 10967,
+  "cases": 14,
+  "figures": 28,
+  "trial_soma_pairs": 35,
+  "source_hashes_matched_git": 400,
+  "selected": {
+    "01-Classic-overview.png": {
+      "bytes": 422644,
+      "sha256": "dd804ff051a11872163785e589375e41aaa072446c175f58a98c4744f46e1245",
+      "dimensions": [
+        2240,
+        2520
+      ],
+      "case": "Classic-0/native",
+      "view": "overview"
+    },
+    "02-Branch-overview.png": {
+      "bytes": 180436,
+      "sha256": "1d6edadee95a438b9cabb443626029f424fe11cf37dfc575dca54954b689476d",
+      "dimensions": [
+        2240,
+        1008
+      ],
+      "case": "Branch-0/native",
+      "view": "overview"
+    },
+    "05-Classic-response.png": {
+      "bytes": 316102,
+      "sha256": "1c40bde0e751fd9ec7124a8d7134e4a297e1a3be34afaa15ace55f7e6e076ae3",
+      "dimensions": [
+        2240,
+        2520
+      ],
+      "case": "Classic-3/native",
+      "view": "response"
+    },
+    "13-Branch-response.png": {
+      "bytes": 155402,
+      "sha256": "c6a550fc77c9a62080cfa77eb826cd910cf86b8acbd6ecf8a19060a9cd60b419",
+      "dimensions": [
+        2240,
+        1008
+      ],
+      "case": "Branch-5/native",
+      "view": "response"
+    }
+  },
+  "runtime_error_case": "Classic-6/native",
+  "scientific_acceptance_all_cases": false,
+  "selected_visual_QA": {
+    "01-Classic-overview.png": "passed: readable soma/input panels, explicit threshold100, base/measured revisions and unclipped selected waveform",
+    "02-Branch-overview.png": "passed: readable soma/input panels, explicit threshold100, base/measured revisions and unclipped selected waveform",
+    "05-Classic-response.png": "passed: readable soma/input panels, explicit threshold100, base/measured revisions and unclipped selected waveform",
+    "13-Branch-response.png": "passed: readable soma/input panels, explicit threshold100, base/measured revisions and unclipped selected waveform"
+  },
+  "numerical_tests_executed_locally": false,
+  "new_native_simulations": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "full_cache_visual_QA": "not claimed"
+}

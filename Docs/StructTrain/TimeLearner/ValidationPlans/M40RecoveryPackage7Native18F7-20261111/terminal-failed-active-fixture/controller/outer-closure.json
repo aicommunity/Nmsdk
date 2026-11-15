@@ -1,0 +1,37 @@
+{
+  "execution": "unknown",
+  "all_processes_closed": true,
+  "reason": "kernel_cgroup_observed",
+  "binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "b455cc728c4c9344f013ab5db0d5e62a87372ac9a521fe2759bfa8f248712e97",
+    "unit": "timelearner-56f9128c-2982-4ef9-9ccb-51f569bb39a0.service",
+    "invocation_id": "335907d5f25c49de9652a967af46dce6",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-56f9128c-2982-4ef9-9ccb-51f569bb39a0.service",
+    "initial_main_pid": 1363178,
+    "initial_start_ticks": "349356997",
+    "sha256": "2b1b008714b2c99f1e336518a251cec5d83517ec14b8feca341e557fc97368e2"
+  },
+  "state": {
+    "Type": "exec",
+    "Restart": "no",
+    "RemainAfterExit": "yes",
+    "MainPID": "0",
+    "Result": "exit-code",
+    "ExecMainCode": "1",
+    "ExecMainStatus": "1",
+    "ControlGroup": "",
+    "MemoryMax": "8589934592",
+    "TasksMax": "128",
+    "KillMode": "control-group",
+    "Description": "TimeLearner contained attempt 56f9128c-2982-4ef9-9ccb-51f569bb39a0",
+    "LoadState": "loaded",
+    "ActiveState": "failed",
+    "SubState": "failed",
+    "InvocationID": "335907d5f25c49de9652a967af46dce6"
+  },
+  "memory_max": 8589934592,
+  "tasks_max": 128,
+  "scientific_verdict": null
+}

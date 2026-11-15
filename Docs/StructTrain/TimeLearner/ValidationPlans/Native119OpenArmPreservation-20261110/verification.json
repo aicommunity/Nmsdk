@@ -1,0 +1,39 @@
+{
+  "kind": "independent_native119_negative_verification",
+  "reports": [
+    {
+      "worker": "Elder",
+      "evidence_commit": "f73e8e004be38b18e7fc327fe728ed40a304715f",
+      "original_files": 2687,
+      "original_bytes": 432191105,
+      "archive_sha256": "dbd5c0eaee6d1b1b6d113459ccf1c5f9407ee8a6c58ca60beb326cbd232c769a",
+      "junit_cases": 44,
+      "passed": 43,
+      "failed": [
+        "NativeManualControlLifetime/BranchOpenArmCannotOutliveFailedBegin"
+      ],
+      "not_run": 75,
+      "closed_leaf_groups": 33,
+      "source_root": "355c60df066bdc8da09bd6d7872b47f6e71c0494",
+      "all_original_hashes_verified": true,
+      "scientific_verdict": null
+    },
+    {
+      "worker": "M40",
+      "evidence_commit": "f6b5e64b59b650aefad30a5811d1001c57d2e2c8",
+      "original_files": 2687,
+      "original_bytes": 432415347,
+      "archive_sha256": "7da640554b725dad80fa34363ad137ffa91402cca6c9f4ddb2e9face5a256a4b",
+      "junit_cases": 44,
+      "passed": 43,
+      "failed": [
+        "NativeManualControlLifetime/BranchOpenArmCannotOutliveFailedBegin"
+      ],
+      "not_run": 75,
+      "closed_leaf_groups": 33,
+      "source_root": "355c60df066bdc8da09bd6d7872b47f6e71c0494",
+      "all_original_hashes_verified": true,
+      "scientific_verdict": null
+    }
+  ]
+}

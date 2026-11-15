@@ -1,0 +1,7 @@
+# Actual full-domain N4 saved model roundtrip:2 native cases
+
+Tool 3314a3a782be960ec46b858ad04918301872f100; SDK448b153f2fea3486ff40f3a626b8f1110b9e3ee2/Pulse7b524b8. Этот fresh SDK36 принят; compiled inventory содержит2 exact IDs. Runtime 0d3a7ab04bd65dc01195930284fc2ed5679c9e9d68dc7e1888fbab5b5e5aa3f9, executable SHA ed7e6289f381d24370b4b63d9f35384b859200e8e2bafc9998ab52a3fe39e6f2. Cache Git031494339ea6b0a2fce93fee875b972267023a30 содержит только lossless derived qz; unique primary published root ae92bf4f8674d863d357a85f095660633f4e2120. Source JSON Classic175521654B/Branch192607805B и их raw SHA дополнительно проверяются C++.
+
+Production DATA controller17 metadata guards приняты; existing _run_owned/_finish закрывает outer+finite children и lease. Schema5 capture/staging/postcheck обоих inputs и exact JUnit; allocation outer512MiB + последовательный leaf8GiB, aggregate8704MiB, leaf3600s, whole7320s, output1GiB/floor2GiB. Оба imported models stopped (Classic invalid_observation, Branch budget_exhausted); certificate null обязателен.
+
+Проверка импортирует полную модель, native Build/Init, export, второй fresh import и сравнение effective graph/state/recovery ledger/всех waveform samples. Требуются4 реальных input edges и Soma excursion>1e-6; два silent graphs не PASS. Phase timings сохраняются; это не новый cold train, не classification и не code-before/code-after performance. До actual result/closure/runtime/input validation не принято. После запуска нужен compact primary corpus и independent readback.

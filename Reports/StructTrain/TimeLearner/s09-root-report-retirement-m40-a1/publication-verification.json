@@ -1,0 +1,88 @@
+{
+  "kind": "timelearner_root_report_snapshot_retirement_acceptance",
+  "root": "0153d505861403ec3dc2b721a6b0321b270e2e69",
+  "worker": "m40",
+  "records_verified": 354,
+  "retired_in_batch": 109,
+  "root_diff_entries": 113,
+  "retained_report_blobs_unchanged": 86126,
+  "negative_restored_path_rejected": true,
+  "negative_source_materialized_or_executed": false,
+  "source_files_verified": 412,
+  "source_hashes_unchanged": true,
+  "lease_owner_matches_outer_kernel_binding": true,
+  "registered_managed_child_graph": false,
+  "lease_released": true,
+  "outer_kernel_closed": true,
+  "kernel_closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "1881868440fec216a0a95772af61c24a40222fb950f901db7e751dc31fe9a976",
+      "unit": "timelearner-c69cd53f-fc92-44d9-abd6-ee12f7557182.service",
+      "invocation_id": "b907dad4b6de47d0b201a64981f90370",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c69cd53f-fc92-44d9-abd6-ee12f7557182.service",
+      "initial_main_pid": 2702232,
+      "initial_start_ticks": "320573532",
+      "sha256": "a5e3ad9ba6ba95a65959e7230657013eea6909107c2783496520adcc3f8d7d25"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-c69cd53f-fc92-44d9-abd6-ee12f7557182.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "selected_lease": {
+    "token": "3aea469c-a6e3-4f3d-8793-5a839972cd2f",
+    "job_id": "s09-root-report-retirement-m40-a1",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 2702232,
+      "start_ticks": "320573532",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-root-report-retirement-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-root-report-retirement-m40-a1"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1"
+      }
+    ],
+    "state": "released",
+    "created": 1794130537.877275,
+    "deadline": 1794130657.877275,
+    "updated": 1794130542.5657353,
+    "release_note": "Completed synchronous production history and Git metadata children; source scope checked; no model or archived script executed",
+    "heartbeat_expired": true,
+    "owner_status": "missing",
+    "inspection_required": false,
+    "scientific_verdict": null
+  },
+  "scientific_verdict": null,
+  "whole_migration_complete": false,
+  "cpp_builds": 0,
+  "model_calculations": 0
+}

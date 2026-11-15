@@ -146,3 +146,16 @@ Bin/**/settings.qt
 /Reports/StructTrain/TimeLearner/**/*.svg
 /Reports/StructTrain/TimeLearner/**/*.pdf
 !/Reports/StructTrain/TimeLearner/**/primary-bundle/selected/*.png
+
+# Experiment payloads live in Nmsdk-StructTrainExpArchive; references stay in Git.
+/Reports/StructTrain/TimeLearner/**/*.xz
+/Reports/StructTrain/TimeLearner/**/*.gz
+/Reports/StructTrain/TimeLearner/**/*.zip
+/Reports/StructTrain/TimeLearner/**/*.pack
+/Reports/StructTrain/TimeLearner/**/*.bin
+/Reports/StructTrain/TimeLearner/**/*.qz
+/.structtrain-cache/
+
+# Explicitly restored native regression fixtures are local archive caches.
+/Tests/Integration/Data/NativeWindowPackage6Classic/learned-state.json.qz
+/Tests/Integration/Data/NativeWindowPackage6BranchC0/learned-state.json.qz

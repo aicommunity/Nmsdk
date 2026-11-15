@@ -1,0 +1,50 @@
+from pathlib import Path
+import os,sys,json,hashlib,subprocess,threading,traceback,tarfile,io
+base=Path('/media/user/Data/TimeLearnerRefactor')
+source=base/'source-feedback-profile-visual-a1-delivery'
+prior=base/'readbacks/s07-feedback-console-normal-a2'
+repo=base/'evidence-feedback-console-normal-a2'
+out=base/'readbacks/s07-feedback-matched-tail-visual-a1';out.mkdir(exist_ok=False)
+cache=base/'ReportsCache/feedback-profile-matched-tail-normal-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+registry=Reservations(base/'resource-reservations.sqlite3')
+stop_event=threading.Event();thread=None;token=None;errors=[];passed=False
+
+def write(name,value):(out/name).write_text(json.dumps(value,indent=2,allow_nan=False)+'\n')
+write('owner.json',{'pid':os.getpid(),'start_ticks':Path('/proc/self/stat').read_text().rsplit(') ',1)[1].split()[19]})
+(out/'producer.txt').write_bytes(Path(__file__).read_bytes())
+try:
+ state=inspect_worker_dependency(Path(str(prior)+'-container'),registry,prior.name)
+ assert state['state']=='ready' and state['reservation_state']=='released',state
+ reservation=registry.reserve(out.name,[{'path':str(out),'access':'write'},{'path':str(cache),'access':'write'}]+[{'path':str(v),'access':'read'} for v in [source,prior,repo,base/'plot-venv-a1']],ttl_seconds=120)
+ token=reservation['token'];write('reservation.json',reservation)
+ def beat():
+  while not stop_event.wait(20):
+   try:registry.heartbeat(token,ttl_seconds=120);registry.validate_paths(token)
+   except BaseException as e:errors.append(str(e));return
+ thread=threading.Thread(target=beat,daemon=True);thread.start()
+ code="from pathlib import Path\nimport json,hashlib\nfrom Scripts.StructTrain.TimeLearner.channel_diagnostic_reports import chart,render_figure\nfrom Scripts.StructTrain.TimeLearner.plotting import plotting_runtime\nfrom Scripts.StructTrain.TimeLearner.primary_reuse import _git_archive,_stream\nbase=Path('/media/user/Data/TimeLearnerRefactor');prior=base/'readbacks/s07-feedback-console-normal-a2'\nrepo=base/'evidence-feedback-console-normal-a2';cache=base/'ReportsCache/feedback-profile-matched-tail-normal-a1'\nnames=['Branch-threshold-low-retry32-single-baseline','Branch-threshold-low-retry32-single-gain0']\nreference={'commit':'fea18ada6b6446ac422fb728d119ec06bc257ae5','archive_path':'Reports/StructTrain/TimeLearner/s07-feedback-console-normal-m40-a2/primary.tar.xz','native_member_prefix':'feedback-study/runs/'+names[0]+'/native'}\narchive=_git_archive(repo,reference);assert hashlib.sha256(archive).hexdigest()=='8f7a7f741763ae1547b7ed8a0817c4a0ea133afc45a7ae81d272de6218fa26b4'\nexpected={}\nfor name in names:\n folder=prior/'feedback-study/runs'/name/'native'\n for f in folder.rglob('*'):\n  if f.is_file():expected['feedback-study/runs/'+name+'/native/'+f.relative_to(folder).as_posix()]=hashlib.sha256(f.read_bytes()).hexdigest()\nseen=set()\nfor name,raw in _stream(archive):\n if name in expected:assert hashlib.sha256(raw).hexdigest()==expected[name];seen.add(name)\nassert seen==set(expected) and len(seen)==24\nruntime=plotting_runtime();data=[chart(prior/'feedback-study/runs'/name/'native',0) for name in names]\nassert data[0]['times']==data[1]['times'] and data[0]['stimulus']==data[1]['stimulus']\nassert len(data[0]['diagnostic_peak_indices'])==2 and len(data[1]['diagnostic_peak_indices'])==1\nindex=data[0]['diagnostic_peak_indices'][-1];left=data[0]['times'][index-10];right=data[0]['times'][index+10]\ncache.mkdir(exist_ok=False);rows=[]\nfor name,record in zip(names,data):\n folder=cache/name;folder.mkdir()\n view=render_figure(record,'matched-control-tail-detail',left,right,folder,local=True)\n rows.append({'case':name,'view':view,'model_revision':record['model_revision'],'control_peak_time':data[0]['times'][index],\n  'window_selected_from_baseline_peak':True,'independent_local_Y_per_model':True,\n  'files':{n:hashlib.sha256((folder/n).read_bytes()).hexdigest() for n in view['files']}})\nresult={'figures':rows,'native_files_verified_in_Git':len(seen),'source_evidence':reference,'source_archive_sha256':hashlib.sha256(archive).hexdigest(),'plotting_runtime':runtime,'manual_visual_QA_complete':False,'scientific_verdict':None}\n(cache/'analysis.json').write_text(json.dumps(result,indent=2)+'\\n')\n"
+ child_env=dict(os.environ,PYTHONDONTWRITEBYTECODE='1',QT_QPA_PLATFORM='offscreen')
+ with (out/'render.log').open('xb') as log:
+  child=subprocess.Popen([str(base/'plot-venv-a1/bin/python'),'-c',code],cwd=source,env=child_env,stdout=log,stderr=subprocess.STDOUT)
+  write('render-owner.json',{'pid':child.pid,'start_ticks':Path('/proc',str(child.pid),'stat').read_text().rsplit(') ',1)[1].split()[19]})
+  assert child.wait()==0
+ result=json.loads((cache/'analysis.json').read_text());assert len(result['figures'])==2 and result['native_files_verified_in_Git']==24
+ for row in result['figures']:
+  for name,sha in row['files'].items():assert hashlib.sha256((cache/row['case']/name).read_bytes()).hexdigest()==sha
+ write('analysis.json',result);assert not errors;passed=True
+except BaseException as e:write('exception.json',{'reason':str(e),'traceback':traceback.format_exc()})
+finally:
+ stop_event.set()
+ if thread:thread.join(timeout=30)
+ write('terminal.json',{'matched_control_tail_render_complete':passed,'new_native_models_executed':False,'manual_visual_QA_complete':False,'scientific_verdict':None})
+ write('tool-source-hashes.json',{f.relative_to(source).as_posix():hashlib.sha256(f.read_bytes()).hexdigest() for f in (source/'Scripts/StructTrain/TimeLearner').rglob('*.py')})
+ files={f.relative_to(out).as_posix():f.read_bytes() for f in out.rglob('*') if f.is_file()}
+ buffer=io.BytesIO()
+ with tarfile.open(fileobj=buffer,mode='w:xz') as archive:
+  for name,data in sorted(files.items()):
+   info=tarfile.TarInfo(name);info.size=len(data);archive.addfile(info,io.BytesIO(data))
+ raw=buffer.getvalue();(out/'primary.tar.xz').write_bytes(raw)
+ write('bundle.json',{'members':{n:{'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()} for n,v in files.items()},'archive_bytes':len(raw),'archive_sha256':hashlib.sha256(raw).hexdigest(),'tool_root':'33fef2caf317dfc99f7187a09805e17f480da9a6'})

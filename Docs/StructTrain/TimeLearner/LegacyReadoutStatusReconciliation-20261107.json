@@ -1,0 +1,33 @@
+{
+  "kind": "legacy_readout_documentation_source_reconciliation",
+  "current_PulseLib": "217dc53c4b1cc010ad6938852a91ee6d2df09e3c",
+  "accepted_hot_fix_source": "6cfcca0c7970a6f9a9381c9592cfbc8ffcbdea94",
+  "accepted_hot_merge_ancestor": "70f467d3b66ea4defdec2f58b84e76b692ab3602",
+  "LegacyReadout_helper_byte_equal_to_accepted_fix": true,
+  "source_bindings": {
+    "Core/TimeLearner/LegacyReadout.h": {
+      "bytes": 3324,
+      "sha256": "3ddaa57670d92ad7428f3340a97b412eb4f625282dbd14857d0e6be712e6bb45"
+    },
+    "Core/TimeLearner/NativeLearnerLifecycle.h": {
+      "bytes": 6647,
+      "sha256": "3d7f390b6d8c4c4202cced9d495fac688e484dc8c07ea6245ddc42ccdaee7d32"
+    },
+    "Core/NNeuronTimeLearner.cpp": {
+      "bytes": 287074,
+      "sha256": "f2da974cd3e4dab18001254ac5418f01e496d480f3e292197977a48ecf1628bd"
+    },
+    "Core/NNeuronTimeLearnerBranch.cpp": {
+      "bytes": 332262,
+      "sha256": "a6fdec1e76d29bb2ec8f0b4d6c5daa1cd42fd4350e9a4c5251af72ac4279dbd8"
+    }
+  },
+  "Build_initialization_and_post_child_Reset_publication_present_in_both_learners": true,
+  "common_before_calculate_shape_refusal_present": true,
+  "historical_de02_source_modified": false,
+  "new_runtime_tests_executed": false,
+  "current_full_runtime_matrix_claimed": false,
+  "accepted_loaded_gate_document": "LoadedLearnerReadout.ru.md",
+  "accepted_hot_gate_document": "HotLearnerReset.ru.md",
+  "scientific_verdict": null
+}

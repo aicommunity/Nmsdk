@@ -1,0 +1,33 @@
+{
+  "kind": "native_channel_diagnostics_address_sanitized_verification",
+  "schema_version": 1,
+  "verified_utc": "2026-11-07T01:29:13.733454+00:00",
+  "host": "10.245.1.17",
+  "evidence": {
+    "commit": "ccc8e4f5ac24c78d78c098b19603aade52807393",
+    "path": "Reports/StructTrain/TimeLearner/s07-native-channel-diagnostics-asan-m40-a1",
+    "root": "18d4d77b90d01168a5cf9b8831ba0bea57967e91",
+    "members_verified": 484,
+    "archive_bytes": 2413048,
+    "archive_sha256": "a3ad00d7edda496170ebf33bd7eedb34ace5cded160b78eac20e35bfd9cbfc3c",
+    "source_hashes_verified": 774,
+    "whole_group_closed": true,
+    "lease_released": true,
+    "libasan_processes_verified": 5
+  },
+  "compiled_PulseLib": "fe382a0aa729a0692ec3790b0226649b4348410a",
+  "native_controls_passed": 12,
+  "actual_native_probes": 4,
+  "Python_readers_passed": 18,
+  "skipped": 0,
+  "Off_On_CSV_bytes_equal": true,
+  "responses_match_original_Train": true,
+  "detect_leaks": 0,
+  "leak_absence_proven": false,
+  "previous_runtimes_unchanged_verified_on_server": true,
+  "second_host_verified": false,
+  "job3_false_directly_tested": false,
+  "interruption_matrix_complete": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

@@ -1,0 +1,624 @@
+{
+  "kind": "default_startup_timing_differences",
+  "schema_version": 1,
+  "fresh_closed_released": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s07-candidate-recovery-journal-normal-a1",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-candidate-recovery-journal-normal-a1-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "8bb4767489f1a0e35175316ef77eddf6cb6f59e61a54117de3d1aad0b00a6d31",
+        "unit": "timelearner-d96ac3ad-d0e4-4dbd-bf74-480869c24fa9.service",
+        "invocation_id": "fe3cbf5784fb43f087efb25b5f81622e",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d96ac3ad-d0e4-4dbd-bf74-480869c24fa9.service",
+        "initial_main_pid": 1055153,
+        "initial_start_ticks": "304859039",
+        "sha256": "b34207a3b45545cb9a1a2263d60c6a585e6fc4df181cdbc9451cfbc3d34e65ed"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-d96ac3ad-d0e4-4dbd-bf74-480869c24fa9.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "184b6dd2-f32c-45d5-9491-3ba216045b43",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "comparison_parent": "e4bfac737b35d884bc0aed7c5e66f48f35abbd2b",
+  "files": [
+    {
+      "path": "Branch_2000_N0_automatic_service_startup_after.json",
+      "old_sha256": "4cab8ba6e8f39c8a722de690384b2846ca7057a0a91b4979c93acc2882638af1",
+      "new_sha256": "06b6a9fd3aedd21af968b51ee2635808fc4c0701e83abab1d74b143bdb8ee0bf",
+      "changes": [
+        {
+          "path": "/nodes/4/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/9/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Branch_2000_N0_learned_boundary_configured_startup_after.json",
+      "old_sha256": "e2caf3bb407a90003ca8cd9fb5053e80b148b38fb11b2ea01ce3fc6d75d7a3e8",
+      "new_sha256": "71092faaf564c7edb2362453a8c9152352223d02b18a639cdfc29adeef8a0b7c",
+      "changes": [
+        {
+          "path": "/nodes/0/properties/StepDuration/rdk_value",
+          "old": "2",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/1/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/19/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/20/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    {
+      "path": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_startup_after.json",
+      "old_sha256": "a3ceb6fbb9ea9489e377659e08e0091a323fd54c4daadb6ff9a42d5bddef0076",
+      "new_sha256": "8cbab0797b8d7cf12b224e7df43b9a6d828e986c93a0afe7019f2c7628a8528c",
+      "changes": [
+        {
+          "path": "/nodes/0/properties/StepDuration/rdk_value",
+          "old": "2",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/1/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/2/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/14/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/16/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    {
+      "path": "Branch_2000_N0_service_external_stop_startup_after.json",
+      "old_sha256": "24b6490b7906cd6499c9730ca3550bc84605905b2af38a882b0932977b7bde18",
+      "new_sha256": "52b64e504ef3235bc89cfa612f77e9355f5ac2953c736004fa11ad632919e72b",
+      "changes": [
+        {
+          "path": "/nodes/14/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/18/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/19/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Branch_2000_N0_stopped_N0BudgetSearch_startup_after.json",
+      "old_sha256": "c67bcc78c2c21027b910a9cf416a8767b84137bfa1ffab4851e60a1814109f15",
+      "new_sha256": "1339df739dfb2a911fe90e76cfffaf6d9f23caf8af88260a432b1ed7964fba6b",
+      "changes": [
+        {
+          "path": "/nodes/0/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "2"
+        },
+        {
+          "path": "/nodes/4/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/5/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/14/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/16/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Branch_2000_N0_stopped_N0RepeatedHalfCandidate_startup_after.json",
+      "old_sha256": "a742a2483fa9a3a1bc0c8ada0490af2eed074e7bcdd89c71f993f741faf21f6f",
+      "new_sha256": "c82a7a37e2f08208e98bba75cc290b1900c8bc619c1d561ce44bed55d657572f",
+      "changes": [
+        {
+          "path": "/nodes/9/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/10/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/19/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/21/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Branch_2000_N1_automatic_service_startup_after.json",
+      "old_sha256": "9063076e54b6d7cf3e8788b0532f3625d220e58b7fc31e687e32724f4945be70",
+      "new_sha256": "c5bc8a4914a79b4d225400ac26a9f7b8af2cd1d29865a33f7fc7f4d4e69805c8",
+      "changes": [
+        {
+          "path": "/nodes/21/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/23/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    {
+      "path": "Branch_2000_N1_service_deadline_startup_after.json",
+      "old_sha256": "e7f8e14cdb7558db2c50de99f3277ed2bbfde6974435054ed07edd598bc9fe38",
+      "new_sha256": "d48ef2eec6eea023a0cfeab6a75355da9fd568b1232cbe1ac5333be634553732",
+      "changes": [
+        {
+          "path": "/nodes/9/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/11/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/14/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Branch_2000_N1_stopped_Final_startup_after.json",
+      "old_sha256": "7d916d794f0ef2d9564a6b12bf52e360e56ab126cbfa8516409d050b9465b8ee",
+      "new_sha256": "8b254fe52fa40a873c4c8bb2952ca080d1c6e5c0ea3fd02ead6772b3504bf27d",
+      "changes": [
+        {
+          "path": "/nodes/23/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Branch_2000_N1_stopped_InvalidProbe_startup_after.json",
+      "old_sha256": "1553e281d9aed7bf236914b1c2e7b6ee525226685602992d3749adb719a35814",
+      "new_sha256": "453d476cb0250450adbe3c958a9cb56c89c4e409ed61165538e551c8eec15623",
+      "changes": [
+        {
+          "path": "/nodes/14/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/16/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/19/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/23/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Classic_2000_N0_automatic_service_startup_after.json",
+      "old_sha256": "9a077639a55ef18b8ec90585584a698fe636481c7260b30c3f5dab3f7108a7d6",
+      "new_sha256": "deb893b486e1854838a19cd2894cec6539b825e49b9347c15e74c3fe1fc5869f",
+      "changes": [
+        {
+          "path": "/nodes/9/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/12/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/14/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/15/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/29/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/31/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/35/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    {
+      "path": "Classic_2000_N0_service_external_stop_startup_after.json",
+      "old_sha256": "d0be4030a528b62317cef45d3d9e4c9608684bf37eca6f080374b62b40ee42cc",
+      "new_sha256": "432ea0d801451b965c6c32f5f066a8c00c114001704b898401c7143f282bbddd",
+      "changes": [
+        {
+          "path": "/nodes/1/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/3/properties/StepDuration/rdk_value",
+          "old": "2",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/4/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/8/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/24/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/34/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Classic_2000_N0_stopped_N0BudgetSearch_startup_after.json",
+      "old_sha256": "480669e1d37cbb652fd9c2ce74af793a92e942ffcfabbc397e6344cd7dc8b9e2",
+      "new_sha256": "17a356a3607ec5bc8e735e9d74729690c4c7a34bd1fe5ce053e5e906f2b892f5",
+      "changes": [
+        {
+          "path": "/nodes/3/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "2"
+        },
+        {
+          "path": "/nodes/10/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/12/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/34/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    {
+      "path": "Classic_2000_N0_stopped_N0RepeatedHalfCandidate_startup_after.json",
+      "old_sha256": "f321c2ec72ad692ab6d50711e5c97305315d902cd57e43fdcf7d2d22568ff263",
+      "new_sha256": "de7e800b37e8d23e3332da4e4ec21ede16e9207af5c06db48707894491f1bfb8",
+      "changes": [
+        {
+          "path": "/nodes/3/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "2"
+        },
+        {
+          "path": "/nodes/9/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/13/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/14/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/15/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Classic_2000_N1_automatic_service_startup_after.json",
+      "old_sha256": "ae9340f37b216da77dd5d6bb3b3c20866e111178498e8fd97c1fead1465d4ebe",
+      "new_sha256": "77e795205836795205b4963c9870d02117f83da62f5afad23217038bec41f2e6",
+      "changes": [
+        {
+          "path": "/nodes/0/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "2"
+        },
+        {
+          "path": "/nodes/16/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/17/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_configured_startup_after.json",
+      "old_sha256": "53b6726db5a08bce4e23b97efa5ab7551b121f95caf7530a0f9ed8c13a476769",
+      "new_sha256": "3ae55c74742e90982d5344454d2e097855df6bf5906b6e7d1da389a6c13b3f2d",
+      "changes": [
+        {
+          "path": "/nodes/19/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/22/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/24/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/26/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    {
+      "path": "Classic_2000_N1_learned_boundary_explicit_tolerance_configured_startup_after.json",
+      "old_sha256": "f8c1ab4f955eb2427e077e2fc28915eb036e9b8c3cb208a3175b64ec82eec5d4",
+      "new_sha256": "b46aa20c7bb9cccb3733456738f49ba7d2d48fe5f3f3e1141f4e1d260b2a4033",
+      "changes": [
+        {
+          "path": "/nodes/1/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/14/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/15/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/24/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Classic_2000_N1_service_exact_warm_startup_after.json",
+      "old_sha256": "0ecc37bde335853921b88775e89caed236dcddc2e29274027d8410bdaebe6780",
+      "new_sha256": "f4af24932f8ceff9804382200e00d2d248b298b1d71300f9514597eebeb9ce68",
+      "changes": [
+        {
+          "path": "/nodes/4/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/8/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/9/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/12/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/34/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    },
+    {
+      "path": "Classic_2000_N1_stopped_Final_startup_after.json",
+      "old_sha256": "ada91398f30de20c17f11233970515d582f7f8760ccbd88aac05bf9ef03490ea",
+      "new_sha256": "f1bfc8cb00cc896c3530532ab8a53e0487e49af96ff8c794e214c8758f61dcf7",
+      "changes": [
+        {
+          "path": "/nodes/0/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "2"
+        },
+        {
+          "path": "/nodes/3/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "2"
+        },
+        {
+          "path": "/nodes/9/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/12/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/14/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/17/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        }
+      ]
+    },
+    {
+      "path": "Classic_2000_N1_stopped_InvalidProbe_startup_after.json",
+      "old_sha256": "4ef91d012d30994bc5c4518756ab664acacb999e70463fe4c6efd3176a9ee4af",
+      "new_sha256": "8b4248bb7af0dd337cf94e24fbbba8f1d33fe2d6144f0ac776bbccb2e617ed51",
+      "changes": [
+        {
+          "path": "/nodes/0/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "2"
+        },
+        {
+          "path": "/nodes/3/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "2"
+        },
+        {
+          "path": "/nodes/4/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/8/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        },
+        {
+          "path": "/nodes/19/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/22/properties/StepDuration/rdk_value",
+          "old": "1",
+          "new": "0"
+        },
+        {
+          "path": "/nodes/34/properties/StepDuration/rdk_value",
+          "old": "0",
+          "new": "1"
+        }
+      ]
+    }
+  ],
+  "differences": 84,
+  "only_StepDuration_rdk_value_differs": true,
+  "same_csv": 284,
+  "same_json": 449,
+  "Rdk_commit": "10e9d05aa658dd2203c89bc84ba9166595b50014",
+  "Rdk_source": "Core/Engine/UContainer.cpp:2684; StepDuration=CalcDiffTime(end_time,tempstepduration)",
+  "scope": "default physical controls; no real stock opt-in recovery Train",
+  "scientific_verdict": null
+}

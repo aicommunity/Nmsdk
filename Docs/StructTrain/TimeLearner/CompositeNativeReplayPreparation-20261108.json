@@ -1,0 +1,680 @@
+{
+  "kind": "timelearner_composite_native_replay_preparation",
+  "schema_version": 1,
+  "prepared_date": "2026-11-08",
+  "dispatch_state": "not_dispatched",
+  "readiness": "waiting_for_frozen_native6_and_root_review",
+  "requires_runtime_preflight": true,
+  "validation_suite_materialized": false,
+  "native_fixture_evidence_commit": null,
+  "native_fixture_manifest_sha256": null,
+  "scope": "source preparation for the existing seven real-native archive Python checks; not a runnable validation specification or native/package acceptance",
+  "reader_source": {
+    "root_commit": "cb7721c80125f1ca3df86cc69d651a0303346c31",
+    "package": "Scripts.StructTrain.TimeLearner",
+    "python_files": 440,
+    "package_fingerprint": "712184e21fc00c01932f6bec5e5646461b5260127d79bc198fff2d9818936b9d",
+    "algorithm": "validation.package_fingerprint: SHA256(canonical sorted map of package-relative *.py path to SHA256(Git blob bytes))",
+    "physical_source_must_equal_pinned_git_before_and_after": true,
+    "SDK_gitlinks_materialized_or_verified": false,
+    "selected_files": {
+      "Scripts/StructTrain/TimeLearner/validation.py": {
+        "git_blob": "b36e653e88fd2ab6a84edb3ba915350e5d4c81a8",
+        "bytes": 7360,
+        "sha256": "1d83eb8a66472d63bb8ccd373e4273d966c1820ce6b0732afe40ed5ea4ac1bd0",
+        "top_level_definitions": {
+          "_digest": 20,
+          "package_fingerprint": 25,
+          "fixture_fingerprint": 31,
+          "_tests": 40,
+          "preflight": 48,
+          "_environment": 91,
+          "run_suite": 108,
+          "main": 129
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/owned_python_job.py": {
+        "git_blob": "aa3961b9a85594ce3050a67409d1b2af75e6ced2",
+        "bytes": 21921,
+        "sha256": "ad4b0aeba99b726d1b292c05970c4d0129324d1a9cd62ce7ac39f597eeb95b90",
+        "top_level_definitions": {
+          "_write": 32,
+          "_pinned": 38,
+          "_commit": 45,
+          "_file_binding": 49,
+          "validate_request": 56,
+          "_paths": 90,
+          "_display": 104,
+          "_source_snapshot": 112,
+          "_ancestry": 134,
+          "_fixture_snapshot": 142,
+          "_validation_resources": 160,
+          "_worker": 170,
+          "run": 277,
+          "main": 346
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/composite_measurement_evidence.py": {
+        "git_blob": "c045e3405aa38a61e1be36ec79b5158adda19670",
+        "bytes": 21940,
+        "sha256": "e3652967079488eaea510d99b224deff042dea2f070f36a269e7bfad4c32b55d",
+        "top_level_definitions": {
+          "_positive": 26,
+          "_budgets": 30,
+          "_capacitance": 49,
+          "_complete": 70,
+          "_record": 137,
+          "audit_composite_measurement_archive": 201
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/composite_measurement_contract.py": {
+        "git_blob": "02cb82a3f8fe8ba83e6f336c72c37e13510c494f",
+        "bytes": 8461,
+        "sha256": "04ef7287e347775dd93e280e593aa599b9aa51f06dbbcf46050a0a5e0719768e",
+        "top_level_definitions": {
+          "validate_logical_namespace": 36,
+          "integral_number_view": 55,
+          "protocol_semantic_binding": 73,
+          "expected_semantic_measurement_id": 98,
+          "expected_artifact_document_id": 123
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/composite_raw_evidence.py": {
+        "git_blob": "1ca092caeb8c1ac40747b4d7bbe7f1d8df500e7d",
+        "bytes": 10121,
+        "sha256": "78d6dea089729539cdb34b04c60e6a39256c03c5254171a94155708db3016766",
+        "top_level_definitions": {
+          "_strings": 24,
+          "_specification": 28,
+          "audit_native_packets": 39,
+          "audit_raw_trials": 68
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/composite_source_evidence.py": {
+        "git_blob": "cf871dd286ac4243c9214e26a9b3edf20a8a9966",
+        "bytes": 10448,
+        "sha256": "04cb1e41c10e16d506b530957cf610d8be791920064fab5efd075573dd369fbc",
+        "top_level_definitions": {
+          "keys": 19,
+          "audit_identity": 23,
+          "_classes": 42,
+          "audit_snapshot": 53,
+          "audit_dataset_source": 66,
+          "audit_source_binding": 90,
+          "audit_candidate_binding": 141
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/composite_primary.py": {
+        "git_blob": "900ab65fd39ab46c49dc5330a183968c16ff8c02",
+        "bytes": 6610,
+        "sha256": "1a6066f57a7eb99edb97bd84e97948dd18ccd54250f82f1843a0117f9f015e6f",
+        "top_level_definitions": {
+          "primary_path": 16,
+          "_digest": 37,
+          "_paths": 43,
+          "capture_primary_blobs": 53,
+          "filesystem_primary_resolver": 102,
+          "write_primary_snapshot": 117
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/composite_certificate_evidence.py": {
+        "git_blob": "b41faadadcb3986873a55ae7a66e99af9c7341e6",
+        "bytes": 6460,
+        "sha256": "26f700f1a3652d91d007322cd6e021b37044d6959150f91ecd13a5776bc9607f",
+        "top_level_definitions": {
+          "accepted_measurement_records": 15,
+          "reference_amplitudes": 23,
+          "audit_composite_certificate": 29
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/composite_package_evidence.py": {
+        "git_blob": "715f719a843cf47223a66beef22f0fdd02ca7d0e",
+        "bytes": 9582,
+        "sha256": "e46c46bf4551e5d01285853738b4a0accab947cf247db4062c6072905326b66b",
+        "top_level_definitions": {
+          "_physical_archive": 27,
+          "audit_composite_package": 68
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/composite_execution_evidence.py": {
+        "git_blob": "951c0ecdd6273d56adfac298c7f03a160fe95d4e",
+        "bytes": 8545,
+        "sha256": "5f5608a1c0dfa9c92328451a2134f22ed1dd4f456c50393eece9c5c54337bea8",
+        "top_level_definitions": {
+          "audit_composite_start_failure": 15,
+          "audit_initial_planning_configuration": 54,
+          "audit_composite_execution": 72
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/native_pipeline_worker.py": {
+        "git_blob": "8cbea5fae27f4d690d117f5e127ee30ef30abfbe",
+        "bytes": 42044,
+        "sha256": "5890ba6bf6325a812b11cc985288fabdfa0bdce1f7b3a28a151bf3f215a1d1e9",
+        "top_level_definitions": {
+          "_load_source_case": 51,
+          "_audit_source": 58,
+          "validate_job": 76,
+          "_artifact_records": 150,
+          "audit_execution": 181,
+          "_structured_live_exit": 346,
+          "_structured_training_exit": 353,
+          "_snapshot_source": 365,
+          "run_job": 395,
+          "audit_run_manifest": 443
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/learned_evidence.py": {
+        "git_blob": "26513615c18c705cb84739f0fd2d8fba59669769",
+        "bytes": 7432,
+        "sha256": "a5602e9af852dd15cb48b23faaf3a3dac967de6b337e6c4cffe83841b1f21b17",
+        "top_level_definitions": {
+          "audit_learned_state": 21,
+          "load_case": 97,
+          "main": 116
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/stopped_evidence.py": {
+        "git_blob": "3a9c58d0657d4920fdd9182b319f540afae07931",
+        "bytes": 9355,
+        "sha256": "d2418d2a5d57cc0c8d665e921818510bc841853124593cafeb103279ae67f052",
+        "top_level_definitions": {
+          "audit_stopped_state": 17,
+          "load_case": 129,
+          "main": 144
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/native_gate.py": {
+        "git_blob": "15eef9217389a907be31ba48af2b8f1ae93de128",
+        "bytes": 9980,
+        "sha256": "a4d54fdd80e9085b0ed5d5328d0934a4a95504ab1379253aa29f112a3562fba2",
+        "top_level_definitions": {
+          "supported_specification": 19,
+          "_environment": 49,
+          "audit_junit": 66,
+          "run_native_gate": 86
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/native_execution_gate.py": {
+        "git_blob": "9bd3e99f8941944b3933fa709b769d0c92b044b8",
+        "bytes": 8061,
+        "sha256": "d36d3bd8e64722c4d0f6447dc5b636bb569abc5736a6da75aa445d1a82d63f73",
+        "top_level_definitions": {
+          "_read_native_gate": 16,
+          "_audit_native_gate": 30,
+          "_checked": 101,
+          "read_native_gate": 110,
+          "audit_native_gate": 114,
+          "main": 118
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/declared_window_basin_report.py": {
+        "git_blob": "d6dbe571c6b3d80a6a0397551f178f2eb4a9b13c",
+        "bytes": 21627,
+        "sha256": "39890588dc148a1c9f535a0e12a83e07816466e1eec63dec27129cf17111b1b9",
+        "top_level_definitions": {
+          "digest": 17,
+          "load": 18,
+          "reference": 19,
+          "read_group": 26,
+          "render": 52,
+          "main": 140
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/tests/test_composite_native_archive.py": {
+        "git_blob": "7e2d96de3bf322ac133346c04faf801e15080751",
+        "bytes": 6425,
+        "sha256": "7fe7c1ddb9a57409bcc55b35d9b42133a1227f1a79b41e77a9402fd9d82c7ba8",
+        "top_level_definitions": {
+          "CompositeNativeArchiveTest": 15
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/tests/test_composite_final_sweep_archive.py": {
+        "git_blob": "a84866bc48f52244a668efc6ab153d1cf8316ebd",
+        "bytes": 3399,
+        "sha256": "4d76304e88cb2a961f358460e7e1ebd24b84dcaf705cd59b54d5badf299e6648",
+        "top_level_definitions": {
+          "CompositeFinalSweepArchiveTest": 13
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines; raw bytes preserved even when CRCRLF is present"
+      },
+      "Scripts/StructTrain/TimeLearner/composite_runtime_plan.py": {
+        "git_blob": "24f3001cc9f86ba18a2eed0904550c5c54acb7d4",
+        "bytes": 5327,
+        "sha256": "384c1a1d1485a1c6355f780ec9a0dba1268d87c43749d9991197691008bda221",
+        "top_level_definitions": {
+          "audit_runtime_plan": 18,
+          "validate_completed_parameters": 58
+        },
+        "line_number_convention": "1-based LF-delimited Git blob lines"
+      }
+    }
+  },
+  "planned_native_producer": {
+    "root_commit": "b6d0f752ca1668b6a908a435438020db58d2018e",
+    "pulse_commit": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+    "bin_commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+    "rdk_commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+    "actual_accepted_fixture_producer": null,
+    "source_path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+    "git_blob": "af21670c9b1e15259e522f0b3d6e7b0ae6c2dfc1",
+    "bytes": 104195,
+    "sha256": "4dfb510ffde3c141cf3416c04be18f8f2f6ddf76295af5fcee730f23bcd189e3",
+    "source_anchors": {
+      "NativeCompositeFixture(unsigned": 61,
+      "ServicePlan(": 405,
+      "SaveCompositeArchive(": 939,
+      "SaveCompositeBoundary(": 949,
+      "ActualServiceArchive()": 977,
+      "void PartialArchive()": 1010,
+      "void ActualC0Archive()": 1102,
+      "void ActualWarmArchive()": 1111,
+      "void ActualAmbiguousArchive()": 1122
+    },
+    "scope": {
+      "dimension": 2,
+      "frequency_hz": 2000,
+      "normalization": "SynapseCount (N0)",
+      "calculate_mode": 1,
+      "structure_build_mode": 1,
+      "controller_version_fixture": 1,
+      "protocol_schema_version": 4,
+      "measurement_method": "declared-window-basin-necessity-v1",
+      "controller_version_fixture_note": "owner property is 1 in this explicit BeginNativeTraining fixture; this does not establish configured Console ControllerVersion=2 package/export coverage"
+    },
+    "producer_leaf": "archive-native23; one process exports all six; actual leaf path and JUnit remain pending collector",
+    "outputs_not_emitted": [
+      "learned/stopped package5",
+      "models/native.xml file",
+      "classic-two-final-sweeps seventh fixture"
+    ]
+  },
+  "cases": [
+    {
+      "case": "classic-service",
+      "producer_test_id": "NativeCompositeArchive/ClassicActualServiceStrictReplay",
+      "source_line": 1021,
+      "topology": "Classic",
+      "role": "complete_reference_and_final",
+      "producer_expected_outcome": "exact",
+      "existing_C0": false,
+      "warm_attempt_history": false,
+      "required_reader_files": [
+        "composite-measurements/index.json",
+        "initial-configuration.json",
+        "runtime-plan.json",
+        "composite-measurements/group-%06d.json",
+        "CSV files referenced by raw_trials[].primary_ref"
+      ],
+      "preserved_boundary_files_outside_seven_test_audit": [
+        "after-model.json",
+        "boundary-math.json"
+      ],
+      "observed_files": null,
+      "observed_groups": null,
+      "observed_primary_bytes": null
+    },
+    {
+      "case": "branch-service",
+      "producer_test_id": "NativeCompositeArchive/BranchActualServiceStrictReplay",
+      "source_line": 1022,
+      "topology": "Branch",
+      "role": "complete_reference_and_final",
+      "producer_expected_outcome": "exact",
+      "existing_C0": false,
+      "warm_attempt_history": false,
+      "required_reader_files": [
+        "composite-measurements/index.json",
+        "initial-configuration.json",
+        "runtime-plan.json",
+        "composite-measurements/group-%06d.json",
+        "CSV files referenced by raw_trials[].primary_ref"
+      ],
+      "preserved_boundary_files_outside_seven_test_audit": [
+        "after-model.json",
+        "boundary-math.json"
+      ],
+      "observed_files": null,
+      "observed_groups": null,
+      "observed_primary_bytes": null
+    },
+    {
+      "case": "classic-partial",
+      "producer_test_id": "NativeCompositeArchive/ActualPartialStopNeverPromotes",
+      "source_line": 1040,
+      "topology": "Classic",
+      "role": "stopped_mid_group",
+      "producer_expected_outcome": "external_stop",
+      "existing_C0": false,
+      "warm_attempt_history": false,
+      "required_reader_files": [
+        "composite-measurements/index.json",
+        "initial-configuration.json",
+        "runtime-plan.json",
+        "composite-measurements/group-%06d.json",
+        "CSV files referenced by raw_trials[].primary_ref"
+      ],
+      "preserved_boundary_files_outside_seven_test_audit": [
+        "after-model.json",
+        "boundary-math.json"
+      ],
+      "observed_files": null,
+      "observed_groups": null,
+      "observed_primary_bytes": null
+    },
+    {
+      "case": "branch-C0",
+      "producer_test_id": "NativeCompositeArchive/ActualBoundC0RawWitnessesBindUnmutedBase",
+      "source_line": 1131,
+      "topology": "Branch",
+      "role": "existing_C0_unmuted_base_bound",
+      "producer_expected_outcome": "exact",
+      "existing_C0": true,
+      "warm_attempt_history": false,
+      "required_reader_files": [
+        "composite-measurements/index.json",
+        "initial-configuration.json",
+        "runtime-plan.json",
+        "composite-measurements/group-%06d.json",
+        "CSV files referenced by raw_trials[].primary_ref"
+      ],
+      "preserved_boundary_files_outside_seven_test_audit": [
+        "after-model.json",
+        "boundary-math.json"
+      ],
+      "observed_files": null,
+      "observed_groups": null,
+      "observed_primary_bytes": null
+    },
+    {
+      "case": "classic-warm",
+      "producer_test_id": "NativeCompositeArchive/ActualWarmReferencesAreNotNewAttemptWork",
+      "source_line": 1132,
+      "topology": "Classic",
+      "role": "historical_references_retained_new_attempt",
+      "producer_expected_outcome": "exact",
+      "existing_C0": false,
+      "warm_attempt_history": true,
+      "required_reader_files": [
+        "composite-measurements/index.json",
+        "initial-configuration.json",
+        "runtime-plan.json",
+        "composite-measurements/group-%06d.json",
+        "CSV files referenced by raw_trials[].primary_ref"
+      ],
+      "preserved_boundary_files_outside_seven_test_audit": [
+        "after-model.json",
+        "boundary-math.json"
+      ],
+      "observed_files": null,
+      "observed_groups": null,
+      "observed_primary_bytes": null
+    },
+    {
+      "case": "branch-ambiguous",
+      "producer_test_id": "NativeCompositeArchive/ActualMergedAmbiguousGroupStaysDiagnostic",
+      "source_line": 1133,
+      "topology": "Branch",
+      "role": "merged_nonvalid_geometry",
+      "producer_expected_outcome": "not_exact",
+      "existing_C0": false,
+      "warm_attempt_history": false,
+      "required_reader_files": [
+        "composite-measurements/index.json",
+        "initial-configuration.json",
+        "runtime-plan.json",
+        "composite-measurements/group-%06d.json",
+        "CSV files referenced by raw_trials[].primary_ref"
+      ],
+      "preserved_boundary_files_outside_seven_test_audit": [
+        "after-model.json",
+        "boundary-math.json"
+      ],
+      "observed_files": null,
+      "observed_groups": null,
+      "observed_primary_bytes": null
+    }
+  ],
+  "seven_test_gate": {
+    "production_api": "Scripts.StructTrain.TimeLearner.validation.run_suite(specification, fixtures, output)",
+    "production_cli": [
+      "python3",
+      "-B",
+      "-m",
+      "Scripts.StructTrain.TimeLearner.validation",
+      "<frozen-suite.json>",
+      "--fixture",
+      "TIMELEARNER_COMPOSITE_NATIVE_ARCHIVES=<frozen-six-root>",
+      "--fixture",
+      "TL_COMPOSITE_NATIVE_CSV_ROOT=<same-frozen-six-root>",
+      "--output",
+      "<fresh-output>"
+    ],
+    "owned_adapter": "python3 -B -m Scripts.StructTrain.TimeLearner.owned_python_job run <frozen-request.json>",
+    "owned_operation": "python-validation; existing maintained adapter only, no new orchestrator or generated worker",
+    "modules": [
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive"
+    ],
+    "expected_test_count": 7,
+    "tests": [
+      {
+        "test_id": "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_six_service_exports_replay_all_retained_primary_and_counters",
+        "line": 31,
+        "inputs": "all six; every retained record and exact primary bytes",
+        "contract": "recomputed N+2 native context/CSV closure, geometry, measured status and archive/current-attempt counters"
+      },
+      {
+        "test_id": "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_partial_and_ambiguous_exports_do_not_promote_invalid_measurements",
+        "line": 43,
+        "inputs": "classic-partial and branch-ambiguous",
+        "contract": "partial remains unmeasured; nonvalid geometry remains unmeasured; no certificate/scientific promotion"
+      },
+      {
+        "test_id": "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_sidecars_match_each_retained_record_without_filename_identity_claim",
+        "line": 50,
+        "inputs": "all six group sidecars",
+        "contract": "decoded sidecar equals corresponding index record; ordinal path is not semantic measurement identity"
+      },
+      {
+        "test_id": "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_existing_C0_and_warm_accounting_are_retained",
+        "line": 56,
+        "inputs": "branch-C0 and classic-warm",
+        "contract": "actual C0 witnesses retained; warm archive includes historical attempt without charging it to current-attempt counters"
+      },
+      {
+        "test_id": "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_supplied_external_mirror_cannot_fall_back_to_good_embedded_primary",
+        "line": 64,
+        "inputs": "classic-service primary bytes plus in-memory missing/corrupt resolver negatives",
+        "contract": "external mirror must match mandatory embedded bytes; no fallback"
+      },
+      {
+        "test_id": "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_csv_relocation_preserves_actual_measurement_proofs_but_changes_document_identity",
+        "line": 73,
+        "inputs": "classic-service and branch-service; in-memory portable path rebinding",
+        "contract": "semantic measurement proofs unchanged for byte-identical primaries; full artifact document hash changes"
+      },
+      {
+        "test_id": "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_resigned_incomplete_native_group_or_counter_changes_fail",
+        "line": 89,
+        "inputs": "classic-service; in-memory raw-trial removal and sampled-frame counter mutation",
+        "contract": "re-signing document does not repair N+2 completeness or counter inconsistency"
+      }
+    ],
+    "fixtures_to_derive_from_actual_capture": {
+      "TIMELEARNER_COMPOSITE_NATIVE_ARCHIVES": {
+        "pattern": "**/*.json",
+        "files": null,
+        "fingerprint": null,
+        "same_root_as": "TL_COMPOSITE_NATIVE_CSV_ROOT"
+      },
+      "TL_COMPOSITE_NATIVE_CSV_ROOT": {
+        "pattern": "**/*.csv",
+        "files": null,
+        "fingerprint": null,
+        "same_root_as": "TIMELEARNER_COMPOSITE_NATIVE_ARCHIVES"
+      }
+    },
+    "secondary_fixture_role": "CSV fingerprint binding only; tests consume the first variable and resolve its actual index references",
+    "preflight_constraints": [
+      "all six exact role directories exist; compare complete captured fileset with JSON+CSV union; no seventh fixture required by this module",
+      "capture all bytes before analysis; reject symlink/nonregular/escaping/duplicate paths and mutation; do not reserialize CSV or JSON before fingerprints",
+      "all materialized Scripts files equal pinned Git bytes before and after; use Python -B for every repo import",
+      "derive observed test inventory using maintained validation loader on server and require exact seven IDs; missing fixture/skip/error/failure cannot pass",
+      "source and fixtures read-only reservations; fresh output and immutable request; bounded owned kernel group and exact closure/released lease"
+    ],
+    "proposed_limits_for_review": {
+      "memory_bytes": 1073741824,
+      "tasks": 64,
+      "maximum_wall_seconds": 1800,
+      "note": "proposal only, fresh source/fixture size and resident-memory preflight required; never shorten/restart a live attempt from transport timeout"
+    },
+    "validation_result_requires": {
+      "executed_tests": 7,
+      "assertion_status": "passed",
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "scientific_verdict": null
+    },
+    "auditor_authority_invariants": {
+      "native_execution_verified": false,
+      "training_certificate_verified": false,
+      "live_authority_restored": false,
+      "scientific_verdict": null,
+      "source.native_import_verified": false,
+      "note": "these are archive auditor fields, not invented fields in validation/result.json"
+    }
+  },
+  "archive_api": {
+    "module": "Scripts.StructTrain.TimeLearner.composite_measurement_evidence",
+    "call": "audit_composite_measurement_archive(document, configuration, *, runtime_plan=None, external_resolver=None)",
+    "case_binding": "configuration=actual initial-configuration.json; runtime_plan=actual runtime-plan.json; resolver=filesystem_primary_resolver(exact case root)",
+    "primary_rule": "mandatory embedded primary_blobs plus external exact mirror; no fallback or reconstructed DATA"
+  },
+  "separate_gates_not_closed_by_seven": [
+    {
+      "id": "native-execution",
+      "requires": "sole collector immutable source/runtime/JUnit/owned binding and all leaf/outer closures; archive export existence is not kernel/test acceptance",
+      "reusable_api": "native_gate.audit_junit(path, expected); maintained collector provenance binding",
+      "status": "waiting_actual_producer"
+    },
+    {
+      "id": "complete-runtime-plan-policy",
+      "requires": "actual runtime-plan/config/protocol plus actual C0 state if needed; archive budget matching is a narrower check",
+      "reusable_api": "composite_runtime_plan.audit_runtime_plan(plan, configuration, protocol, *, capacitance_state=None)",
+      "status": "separate_scoped_actual_input_gate_needed"
+    },
+    {
+      "id": "actual-boundary-and-certificate2",
+      "requires": "byte-preserve after-model.json and boundary-math.json, inspect actual identities/parameters/epoch/C0/certificate without fabricating package fields",
+      "reusable_api": "composite_source_evidence.audit_snapshot(snapshot, dataset=...); certificate replay currently only audit_composite_certificate(full_package, archive_audit)",
+      "status": "needs_scoped_boundary_API_review_or_actual_package5"
+    },
+    {
+      "id": "package5-and-native-model-import",
+      "requires": "actual ModelLearnedExport package5/class definitions/embedded native XML, optional actual summary6, real native import if claimed",
+      "reusable_api": "composite_package_evidence.audit_composite_package(document, summary=None, external_resolver=...); learned_evidence/stopped_evidence dispatch schema5",
+      "status": "producer_not_present_in_current_six"
+    },
+    {
+      "id": "execution3-pipeline",
+      "requires": "actual Console execution3 + signed job + produced summary6 + complete recursive artifact set; no reconstruction from gtest fixtures",
+      "reusable_api": "native_pipeline_worker.audit_execution / audit_run_manifest; composite_execution_evidence.audit_composite_execution",
+      "status": "producer_not_present_in_current_six"
+    },
+    {
+      "id": "real-final-sweep-generation",
+      "requires": "seventh real classic-two-final-sweeps archive with two consumed complete sweeps in one graph/epoch; do not add its three tests to the current seven without input",
+      "reusable_api": "tests.test_composite_final_sweep_archive (3 tests)",
+      "status": "fixture_not_present_in_current_six"
+    },
+    {
+      "id": "temporal-report",
+      "requires": "reviewed maintained composite archive reader-to-renderer adapter, followed by server render from accepted immutable raw bytes",
+      "reusable_api": "drawing ideas only from declared_window_basin_report version2; its old14-case wire input is incompatible",
+      "status": "source_contract_ready_implementation_not_dispatched"
+    }
+  ],
+  "temporal_report_contract": {
+    "data": "all retained groups in all six archives; full-before/omit-each/full-repeat and all somas, including partial diagnostics",
+    "soma_mapping": "Classic: all N soma channels, assigned=input_index; Branch: one soma, assigned=0 while logical input index retains its own identity",
+    "potential_overlay": "actual full-before CSV stimulus step on every soma overview and zoom using clearly labelled independent raw-input secondary axis; retain bottom panel with every control actual CSV stimulus",
+    "events": "actual recorded event IDs/frame indices/timestamps only; aggregate stimulus cannot be invented as separate per-input waveforms",
+    "coordinates": {
+      "probe_ms": "1000*(actual_absolute_csv_time-actual_specification.begin)",
+      "certificate_time": "measurement arrival and plateau_end relative to observed protocol origin_stimulus; preserve both absolute origins and transformation in manifest"
+    },
+    "geometry": "display actual selected peak/window/basin only after selection_checked from accepted replay; partial/rejected groups do not acquire a selected peak or certificate",
+    "display": "overview + zoom with per-panel local Y bounds, raw units/no smoothing/no resampling/no normalization; visible diagnostic status; preserve nonfinite samples as missing/diagnostic",
+    "output": "all groups in server cache; selected 4-8 PNG plus HTML/index and versioned manifest in compact Git evidence; no duplicate SVG/PDF of the same selected image without purpose",
+    "manifest": "reader source/fixture/evidence SHA, record/group/semantic proof IDs, primary SHA/bytes/role, coordinate origins/units, channel mapping, geometry status, chosen panels/limits, image hashes; scientific verdict null"
+  },
+  "acceptance_boundaries": {
+    "original_august_visual_results": "not reassessed or invalidated; this scope does not recreate old perturbation/separation experiments",
+    "Calculate_Reset_Build": "no changes; method return-value policy and shared Rdk lifecycle are outside this read-only replay plan",
+    "no_runtime_changes": true,
+    "no_model_rerun": true,
+    "no_archived_scripts_execution": true,
+    "no_Cpp_extraction": true,
+    "no_native_import_or_science_from_python": true
+  },
+  "source_preparation_checks": {
+    "method": "Git blob hashes + AST literal inventory only; no repository imports, tests, C++ compilation, numerical replay, remote access or render executed",
+    "package_python_files": 440,
+    "literal_test_ids": 7,
+    "producer_role_literals": 6
+  },
+  "boundary_adapter_proposal": {
+    "status": "not_implemented_requires_source_review",
+    "certificate_api_proposal": "audit_composite_certificate_context(certificate, *, archive, archive_audit, protocol, runtime_plan, model_revision, model_epoch, capture_revision, capture_epoch, training_outcome)",
+    "source_pointers": {
+      "certificate": "boundary-math.json#/certificate",
+      "training_outcome": "boundary-math.json#/outcome",
+      "model_revision": "after-model.json#/model_revision, verified against #/neuron/identity/sha256",
+      "model_epoch": "after-model.json#/model_epoch",
+      "protocol": "composite-measurements/index.json#/protocol",
+      "runtime_plan": "runtime-plan.json#",
+      "capture_revision": "composite-measurements/index.json#/source_binding/initial_model/sha256",
+      "capture_epoch": "composite-measurements/index.json#/source_binding/initial_epoch",
+      "archive": "composite-measurements/index.json#",
+      "archive_audit": "accepted archive auditor result over the exact same document/bytes"
+    },
+    "constraints": [
+      "strict actual boundary schema1 only; do not fabricate package5 or summary6",
+      "full plan/actual model/dataset/parameters/C0 and reference inventory checked before residual replay",
+      "complete/certificate-null/nonpromotion expectations are per actual role, never a universal Exact claim",
+      "native XML digest/semantic identity are not native import proof",
+      "Without actual native import plus a separate actual graph/response check, boundary digest/semantic consistency does not establish native_xml-to-semantic-graph equivalence, model restoration, response or Rdk lifecycle correctness"
+    ],
+    "required_future_tests": [
+      "actual complete Classic/Branch certificate residuals against all N inputs",
+      "actual C0/warm capture/current model/epoch and attempts remain distinct",
+      "actual partial/ambiguous null certificate nonpromotion",
+      "changed native XML bytes/model revision/epoch/actual inputs/dataset mask/C0/ref proof rejected even if document is rehashed",
+      "mutated raw amplitude/timing/certificate proof list rejected; no promotion by codec success"
+    ]
+  },
+  "fixture_publication_policy": {
+    "all_primary_json_csv_and_models_used_by_published_result": "must be byte-preserved in compressed Git evidence with complete bytes/SHA manifest and publication binding",
+    "same_host_cache": "analysis staging and full render cache only; verify against Git-backed bytes before use",
+    "hash_only_reference_to_cache_is_sufficient": false,
+    "missing_Git_primary": "reject; no cache fallback",
+    "data_reserialization_or_fake_package": false
+  }
+}

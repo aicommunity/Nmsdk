@@ -1,0 +1,46 @@
+{
+  "status": "source_preparation_only",
+  "numeric_tests_run_locally": false,
+  "count": 11,
+  "cases": [
+    "NativeCompositeConsoleArtifacts.ClassicAllPrimaryAndSidecarsMirrored",
+    "NativeCompositeConsoleArtifacts.BranchAllPrimaryAndSidecarsMirrored",
+    "NativeCompositeConsoleArtifacts.TamperedExternalMirrorRejected",
+    "NativeCompositeConsoleArtifacts.ExistingPrimaryNeverOverwritten",
+    "NativeCompositeConsoleArtifacts.ActualAllNPlus2StreamCounters",
+    "NativeCompositeConsoleArtifacts.PreflightKnownZeroAccounting",
+    "NativeCompositeConsoleArtifacts.FailedStartNeverInventsArchiveAccounting",
+    "NativeCompositeConsoleJobs.ClassicActualProfileCold6Job",
+    "NativeCompositeConsoleJobs.BranchActualProfileCold6Job",
+    "NativeCompositeConsoleJobs.ClassicDefaultSyncMustNotBecomeExact",
+    "NativeCompositeConsoleJobs.BranchDefaultSyncMustNotBecomeExact"
+  ],
+  "source_sha256": "dd54f041f66dbb4cfe76dcd3dd52d299c8b8d21e68573ee6084addb89e37eff4",
+  "prior_scope": 229,
+  "new_scope_total": 240,
+  "pulse_source": "bd9338cf4decbbe27efaeaedf5e23be0f114a511",
+  "evidence_environment": "TIMELEARNER_COMPOSITE_OUTPUT",
+  "console_targets": [
+    "NeuroModelerConsole",
+    "Test_PulseLib_StorageComponents"
+  ],
+  "actual_cli_jobs": [
+    "native-composite-cli-inputs/classic-job.json",
+    "native-composite-cli-inputs/classic-default-sync-job.json",
+    "native-composite-cli-inputs/branch-job.json",
+    "native-composite-cli-inputs/branch-default-sync-job.json"
+  ],
+  "does_not_claim": [
+    "executed_CLI",
+    "runtime_acceptance",
+    "scientific_convergence",
+    "wall_time_attestation",
+    "dynamic_window_search_completeness"
+  ],
+  "pending": [
+    "actual_CLI_Train_to_Test",
+    "independent_primary_replay",
+    "full_temporal_rendering",
+    "per_candidate_window_policy"
+  ]
+}

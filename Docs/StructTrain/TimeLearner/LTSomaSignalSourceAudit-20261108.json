@@ -1,0 +1,609 @@
+{
+  "kind": "timelearner_lt_soma_signal_source_audit",
+  "schema_version": 1,
+  "prepared_date": "2026-11-08",
+  "scope": "read-only code/recipe/consumer dataflow audit; no numerical or native runtime causality verification",
+  "source": {
+    "root": {
+      "repository": "aicommunity/Nmsdk",
+      "commit": "c31cda612e223c97e873d6e6aa0dd0b2d5927fdc"
+    },
+    "pulse": {
+      "repository": "aicommunity/Nmsdk-PulseLib",
+      "commit": "88ea9c7ab3583da601b1f01ec84bf6f122875a34"
+    },
+    "rdk": {
+      "repository": "aicommunity/Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a"
+    }
+  },
+  "source_files": {
+    "pulse": {
+      "Core/NPulseChannel.cpp": {
+        "git_blob": "646c389b4e2aca0a584cff8f06c6aae5fd1393e6",
+        "bytes": 7897,
+        "sha256": "dc678c6e2138d43c91de9b0ee583a4f60a1d9dbe85beeb54ae6edfb05a1f95a3",
+        "LF_lines": 287
+      },
+      "Core/NPulseChannel.h": {
+        "git_blob": "5b9a05f823946717301a06b08f10c72c822cc586",
+        "bytes": 5839,
+        "sha256": "42261b4c78bb91a40de0060bf1c10e501bbe29245200f18236807f32cfb99ba7",
+        "LF_lines": 157
+      },
+      "Core/NPulseChannelCommon.cpp": {
+        "git_blob": "069a2febb2e51f890021cf233fd821e06c5833e8",
+        "bytes": 5856,
+        "sha256": "4c65ab06880f1047e87865cd3797e78f966f4af02df13022c1f5410b76f950f0",
+        "LF_lines": 187
+      },
+      "Core/NPulseMembrane.cpp": {
+        "git_blob": "506c1752dd7e7c3ae753c7fbfd8a95688a401f5f",
+        "bytes": 19443,
+        "sha256": "ec59abee8706f156406a4ce7fe28402b57a08397ddf81730b7c68a6ae393643c",
+        "LF_lines": 569
+      },
+      "Core/NPulseMembraneCommon.cpp": {
+        "git_blob": "013282ced138ae736443890b52fc981b3646ab87",
+        "bytes": 6816,
+        "sha256": "0f0e8aecf7523040e8338f1afd06ae477fa4b81366541bd76abb9ba42ea9aa46",
+        "LF_lines": 221
+      },
+      "Core/NPulseNeuron.cpp": {
+        "git_blob": "485d3cfd62d89818ce234a3f0fd2bb0d110f83bc",
+        "bytes": 35009,
+        "sha256": "5a1af027d85c9c4e58b93870617f3654db8b761b61af269148ef512369046f1c",
+        "LF_lines": 1069
+      },
+      "Core/NPulseNeuronCommon.cpp": {
+        "git_blob": "9e2c40abe888fa72098e8510052b95d244303a7f",
+        "bytes": 12655,
+        "sha256": "086fc0bd58a86013b9ba56eac40dba5dead56f975c272336cf8d8252777809fc",
+        "LF_lines": 391
+      },
+      "Core/NPulseLTZone.h": {
+        "git_blob": "5d463922ab8994f630756d2505e10037d245cdcf",
+        "bytes": 13969,
+        "sha256": "65dbf990badb8cd8033871a70ef6c68f27904907f374e817ee1794d1277cc142",
+        "LF_lines": 363
+      },
+      "Core/NPulseLTZone.cpp": {
+        "git_blob": "39da6fa3c385511535d2973bbbb6b5d3e4d1c8b0",
+        "bytes": 18658,
+        "sha256": "58c0767c755eb86eedee8219c78c478a106ced9ea4d411f51872733e97b5706e",
+        "LF_lines": 614
+      },
+      "Core/NPulseLTZoneCommon.cpp": {
+        "git_blob": "12a9861d18896987d0255220e8ab8f5a40bc8d71",
+        "bytes": 8340,
+        "sha256": "34bef36f4022bc3858d310d3855c99ea081f9582557d8ffe7c69d5299ea7f1da",
+        "LF_lines": 283
+      },
+      "Core/NPulseLibrary.cpp": {
+        "git_blob": "12a8509e59080c92dafd1b21e0a92098c4d270bd",
+        "bytes": 100471,
+        "sha256": "c9710448cab10da4a63f323e2333c4b73d3e7bc97ce78cf10feddec55da3076c",
+        "LF_lines": 2846
+      },
+      "Core/NNeuronTimeLearnerScopedDefaults.h": {
+        "git_blob": "a125083dfd32209dc4e5c482185191017f67c447",
+        "bytes": 4818,
+        "sha256": "6da33f9b2f4ca6b20564295ada5ed668ba3c4b6fc03d5e2bd6e9756556ef2beb",
+        "LF_lines": 138
+      },
+      "Core/NNeuronTimeLearner.cpp": {
+        "git_blob": "93969312375e329d91634159c0f46b88012fa210",
+        "bytes": 287835,
+        "sha256": "25d991998c93b98a1a62085e6f5b091949f19314ce98148ec51c7cfcc63f1e82",
+        "LF_lines": 7758
+      },
+      "Core/NNeuronTimeLearnerBranch.cpp": {
+        "git_blob": "1ec215f5d6bf77d923bf5db59f92195bb4e3cba5",
+        "bytes": 333023,
+        "sha256": "c15e807599f41695a44e42a6be139a26c0143ee617f8d4c0073f793be347dc1c",
+        "LF_lines": 8868
+      },
+      "Core/TimeLearner/StorageProfiles.h": {
+        "git_blob": "326c73a9c9cb194ce5e371868e61e0849db4f5e4",
+        "bytes": 3037,
+        "sha256": "b07e979b811aff194dd9c050e7b2e7df3fe8a5623c85baf013fe13ae4350e1f2",
+        "LF_lines": 89
+      },
+      "Core/TimeLearner/StorageProfiles.cpp": {
+        "git_blob": "e45f2a240d015d701a0f0b636aa1d96f5e297d4e",
+        "bytes": 15184,
+        "sha256": "fe78363d4f3739cff6c6d00f0e90d274f0240f726d1f54e8975b3515ee8771f7",
+        "LF_lines": 288
+      },
+      "Core/TimeLearner/NativeModelBuilder.cpp": {
+        "git_blob": "4b0ae4f1de549feabdd9d72ca825a5ed5127ffee",
+        "bytes": 38094,
+        "sha256": "deedf76351288481c16d9cfc7562e468f202b84a6c2d3b03d481bdd8f43d1949",
+        "LF_lines": 564
+      },
+      "Core/TimeLearner/NativeModelOwner.h": {
+        "git_blob": "3038026b4f933ab85e9c661ca00e35bf19f535d6",
+        "bytes": 12149,
+        "sha256": "b0ee4bf38fb65f533b18361ab2d0d734a0f2baef4804179e5e30d24e98909ac9",
+        "LF_lines": 187
+      },
+      "Core/TimeLearner/NativeModelEditor.cpp": {
+        "git_blob": "94f5b5c92181c8466c112df4cac7381d4ab059c1",
+        "bytes": 79536,
+        "sha256": "2afad3a293a3309447a25b0cdad20e68619e6fae49970a0245931e03dd8786be",
+        "LF_lines": 1191
+      },
+      "Core/TimeLearner/NativeProbe.cpp": {
+        "git_blob": "166dbbaeabbc58d6ff149313ff0a194cfd3aeb5d",
+        "bytes": 30948,
+        "sha256": "1a1dfb9390857166ccd16b2b33e86688efc903a1e0d6da3f9bfd74bca3acd203",
+        "LF_lines": 524
+      },
+      "Core/TimeLearner/NativeSoloThresholdTrace.h": {
+        "git_blob": "5dc0688b0c092b50ed0401936e624c9165686ae0",
+        "bytes": 10391,
+        "sha256": "59fd9fa40e41096a62aaaee14b31bfe5a66d01e0cea72fa05e0df2a8d917d9f2",
+        "LF_lines": 154
+      },
+      "Core/TimeLearner/NativeRecognitionTrial.cpp": {
+        "git_blob": "c4d0e5e16ad5d71efbdb31b13c03d79b2c5951c3",
+        "bytes": 19875,
+        "sha256": "c309f2e0bd0066e7a9ba681f787833ab3353bd779393834b04909927001122b8",
+        "LF_lines": 324
+      },
+      "Core/TimeLearner/NativeCalibrationProposal.cpp": {
+        "git_blob": "f6d9db73d5c0c77146a0758efab614089c05da90",
+        "bytes": 9085,
+        "sha256": "7205afe1669a839cd6490142b367f682eff2feb64db230afd6622a45737aaff5",
+        "LF_lines": 127
+      },
+      "Core/TimeLearner/NativeThresholdSupport.h": {
+        "git_blob": "83ce5239acd6c6a023fc0a48a0c5bcf6b0680acc",
+        "bytes": 905,
+        "sha256": "159236d2e04314159b08807e6d04b320b36c9d068b124f5ffdf6a9472c466453",
+        "LF_lines": 21
+      },
+      "Core/TimeLearner/ProbeObservation.h": {
+        "git_blob": "b4cb613a8fa1d2882a23225e289c08c060cc53c1",
+        "bytes": 5545,
+        "sha256": "d3abba64568ca6cef5f01fb7ba717b57bcdd82eb153d7f759a58cc33dece9c7c",
+        "LF_lines": 119
+      },
+      "Core/TimeLearner/ProbeObservation.cpp": {
+        "git_blob": "c2fc80146fb4c755424810a2ad0f04eb7c0f8e42",
+        "bytes": 15674,
+        "sha256": "ad792802da0cc5239e44b0977b4939bc4bf7898cb3ebd828014b101b13b6253f",
+        "LF_lines": 281
+      },
+      "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp": {
+        "git_blob": "69953a8b5fc821898226d5738ffed84cf7e0d53e",
+        "bytes": 34773,
+        "sha256": "81a738eb1d1267e788a8508f0a4334357966a17eaadfad252937960ecfef3404",
+        "LF_lines": 438
+      },
+      "Core/TimeLearner/NativeMatchedOmissionGroup.cpp": {
+        "git_blob": "1fd6d5fea52fe721b4f8b059046f48fa8119ab12",
+        "bytes": 15231,
+        "sha256": "24d95c223e329bdd389da6389b42753a36e555626ca408d019a6354b55237bee",
+        "LF_lines": 221
+      },
+      "Core/NPulseSynapse.cpp": {
+        "git_blob": "028b8d4fbc92c3716a6393c631f789543b5e04d6",
+        "bytes": 8479,
+        "sha256": "04dadc6d56a5ad003475a3dd3d8cedc5a77ff4e41ae4d02e651d2496c8fcac30",
+        "LF_lines": 299
+      }
+    },
+    "rdk": {
+      "Core/Engine/UContainer.cpp": {
+        "git_blob": "e6fa34097a000820d624ea97cff7200ea43b81e7",
+        "bytes": 112801,
+        "sha256": "aed1b5e1781edfba942c16b846ae3c711b9bb116a7d3c15b48042dca8c1c8c8f",
+        "LF_lines": 3689
+      },
+      "Core/Engine/ULibrary.cpp": {
+        "git_blob": "984707356aae039368bec2dba2d25e3fdda5b585",
+        "bytes": 23960,
+        "sha256": "d767504eceb95a7f395ee633aed15647ebbb4d7c32b0da44028769e21af446ef",
+        "LF_lines": 802
+      },
+      "Core/Engine/UStorage.cpp": {
+        "git_blob": "eb2234cf6540ec91157841d251f11bd8753ee38d",
+        "bytes": 91900,
+        "sha256": "7e3dd934448549768ff1848149cc0c3d1ea5e8c7b0e6fd0205255d62a122d538",
+        "LF_lines": 2762
+      },
+      "Core/Engine/UComponentFactory.cpp": {
+        "git_blob": "dcaa4f59ca388daf0adb793ddbc543a323f10e2f",
+        "bytes": 5407,
+        "sha256": "e9e57fde6fad3b805fc2b75531e1f017bf729741d70e0ada584fbe6bd3a7073c",
+        "LF_lines": 193
+      },
+      "Core/Engine/UProperty.h": {
+        "git_blob": "3576a7a8bdd92503d46ef50a985b565a9cec172b",
+        "bytes": 38699,
+        "sha256": "9855ff9af7408ad50b062dd51075697c4de1ec0378c1467a364871fe316c80ce",
+        "LF_lines": 1505
+      }
+    },
+    "root": {
+      "Scripts/StructTrain/TimeLearner/plotting.py": {
+        "git_blob": "9f4e79dabf00c41ecfb32d763883ff39f5c03279",
+        "bytes": 16778,
+        "sha256": "fdbbe90beb30cd2aa3f373d1525bf43e872d5e8a837ef2d72a99dfd842e9cfc0",
+        "LF_lines": 293
+      },
+      "Scripts/StructTrain/TimeLearner/solo_threshold_reports.py": {
+        "git_blob": "5cb371c60b6170609b6d04c533b9dfb06a7a9720",
+        "bytes": 6543,
+        "sha256": "c49f14c99a8824943f29599753fea4cb544a0dd18ff0dede2a35aeee156c0487",
+        "LF_lines": 107
+      },
+      "Scripts/StructTrain/TimeLearner/recognition_trial_evidence.py": {
+        "git_blob": "d01ba22abb58fd2f0dbc6007020fcc0cc5ea91df",
+        "bytes": 12292,
+        "sha256": "a0d03455e55636329c7fca8e18eb3d4cba13376b1f4b61738d1691a7cfbeecfc",
+        "LF_lines": 182
+      },
+      "Scripts/StructTrain/TimeLearner/threshold_proposal_evidence.py": {
+        "git_blob": "6f8652ba1b9de91c18de0f062c79ca4a0e2c027e",
+        "bytes": 10231,
+        "sha256": "554d40dc8ab6451de1e318a5c4e959b28013d8fa3a5bfc2ec066fc2174f25504",
+        "LF_lines": 125
+      },
+      "Scripts/StructTrain/TimeLearner/posttune_transaction_evidence.py": {
+        "git_blob": "f67efdd09232aea8355fdb246318c97de3c549ae",
+        "bytes": 20370,
+        "sha256": "b77e255cc06515d6121cbb9515b1d6f8e5592d2f7bf56c1fa67bebba124dd18e",
+        "LF_lines": 258
+      },
+      "Scripts/StructTrain/TimeLearner/training_threshold_reference.py": {
+        "git_blob": "5e115d7925cad7b8e691bcb59d9cbe173a3bf0e2",
+        "bytes": 4631,
+        "sha256": "57b1a8ddb14146638a3e8f08149c9bd136d076f517578502d6b84ab5213f2a83",
+        "LF_lines": 69
+      },
+      "Scripts/StructTrain/TimeLearner/n1_protocol_reports.py": {
+        "git_blob": "4cfa72964af3840cce85e98e9d3fe315b4935a5d",
+        "bytes": 6287,
+        "sha256": "a0d418074adb08fcafb973dfcba6df05a569f1255da33c1bcc9c11e4778e52a2",
+        "LF_lines": 80
+      },
+      "Scripts/StructTrain/TimeLearner/declared_window_basin_report.py": {
+        "git_blob": "d6dbe571c6b3d80a6a0397551f178f2eb4a9b13c",
+        "bytes": 21627,
+        "sha256": "39890588dc148a1c9f535a0e12a83e07816466e1eec63dec27129cf17111b1b9",
+        "LF_lines": 144
+      },
+      "Docs/StructTrain/TimeLearner/HighThresholdSubsetScientificReport-2026-11-08.ru.md": {
+        "git_blob": "b51576e8ad99f22b7ac300a0b3ae9b77f88f792c",
+        "bytes": 12192,
+        "sha256": "4fed978ef0a60da23333558f6a008761bbb783081bf449e7978ba681d3585823",
+        "LF_lines": 158
+      },
+      "Docs/StructTrain/TimeLearner/HighThresholdSinglePulseScientificReport-2026-11-07.ru.md": {
+        "git_blob": "4c57bd7ecbc229f7145229c1df33e549ab4ab27f",
+        "bytes": 10294,
+        "sha256": "6f8a6d100b9f745615ff1e7b3c8bf7e5aba9ddf57cb7f202667ff0892cfa47e3",
+        "LF_lines": 114
+      },
+      "Docs/StructTrain/TimeLearner/IntegratedMetadataAndTemporalReports.ru.md": {
+        "git_blob": "812eb923d049d9a862901416f35b7de409c0158d",
+        "bytes": 6944,
+        "sha256": "2c2b58c1888cfb4ea9b5101900e44c33937e52abedaa57b090bd5c4252192a2c",
+        "LF_lines": 32
+      },
+      "Docs/StructTrain/TimeLearner/ChannelObservationScope-2026-11-07.ru.md": {
+        "git_blob": "24cd262f7e250ef25c6207deb460db1158e36921",
+        "bytes": 7653,
+        "sha256": "988e71b687e040523f2c256b18a24c8d33a8bbce28f29cc983a49b974c108604",
+        "LF_lines": 89
+      },
+      "Tests/Integration/Libraries/Test_PulseLib_SoloThresholdTrace.cpp": {
+        "git_blob": "9c448d513a96dc7112eafc701651807cfb296ac9",
+        "bytes": 13119,
+        "sha256": "2834792c4e4a77397aa25c7c1b3c3471f3df7cf92591569cf8d829d4bd36a2e8",
+        "LF_lines": 187
+      }
+    }
+  },
+  "line_numbers": "1-based LF-delimited Git blob lines",
+  "claims": [
+    {
+      "id": "signals-not-interchangeable",
+      "status": "source_contract",
+      "claim": "Train soma potentials, neuron aggregate, LT membrane sum, LT comparator Potential, spike Output and Feedback are distinct",
+      "proof": [
+        "pulse:Core/NPulseMembraneCommon.cpp:185",
+        "pulse:Core/NPulseNeuron.cpp:956",
+        "pulse:Core/NPulseLTZoneCommon.cpp:224",
+        "pulse:Core/NPulseLTZone.cpp:97"
+      ]
+    },
+    {
+      "id": "actual-native-train-source",
+      "status": "source_contract",
+      "claim": "Classic reads Soma1..N.SumPotential; Branch reads Soma1.SumPotential for all logical inputs; no LT membrane measurement in ordinary NativeProbe CSV",
+      "proof": [
+        "pulse:Core/NNeuronTimeLearner.cpp:4105",
+        "pulse:Core/NNeuronTimeLearnerBranch.cpp:4853",
+        "pulse:Core/TimeLearner/NativeProbe.cpp:354",
+        "pulse:Core/TimeLearner/NativeProbe.cpp:415"
+      ]
+    },
+    {
+      "id": "threshold-potential-is-comparator",
+      "status": "source_contract",
+      "claim": "Threshold inherits Common ACalculate which sums Inputs, averages and writes Potential before virtual ACalculate2; comparator explicitly reads Potential; Reset clears it",
+      "proof": [
+        "pulse:Core/NPulseLTZone.h:25",
+        "pulse:Core/NPulseLTZoneCommon.cpp:98",
+        "pulse:Core/NPulseLTZoneCommon.cpp:224",
+        "pulse:Core/NPulseLTZone.cpp:164"
+      ]
+    },
+    {
+      "id": "aux-producer-cast",
+      "status": "source_contract_scoped_to_examined_producers",
+      "claim": "NativeSoloThresholdTrace and NativeRecognitionTrial use NPulseLTZoneCommon; missing source refuses, not fallback0; no sibling NPulseLTZone cast in these paths",
+      "proof": [
+        "pulse:Core/TimeLearner/NativeSoloThresholdTrace.h:24",
+        "pulse:Core/TimeLearner/NativeSoloThresholdTrace.h:106",
+        "pulse:Core/TimeLearner/NativeSoloThresholdTrace.h:123",
+        "pulse:Core/TimeLearner/NativeRecognitionTrial.cpp:155",
+        "pulse:Core/TimeLearner/NativeRecognitionTrial.cpp:224",
+        "root:Tests/Integration/Libraries/Test_PulseLib_SoloThresholdTrace.cpp:36"
+      ]
+    },
+    {
+      "id": "record-spikes-is-not-mute",
+      "status": "source_contract_scoped_to_NativeProbe",
+      "claim": "recordSpikes=false means unknown unrecorded spike response, not zero; no LT Activity mute in NativeProbe; Reset occurs at Prepare, not between its sample and onSample",
+      "proof": [
+        "pulse:Core/TimeLearner/ProbeObservation.h:38",
+        "pulse:Core/TimeLearner/NativeProbe.cpp:247",
+        "pulse:Core/TimeLearner/NativeProbe.cpp:331",
+        "pulse:Core/TimeLearner/NativeProbe.cpp:419"
+      ]
+    },
+    {
+      "id": "stock-gen-without-LT-membrane",
+      "status": "recipe_definition_only_requires_effective_graph_readback",
+      "claim": "Gen/Preinh/Fast/AsymRm/TauH0/Sim source recipes set LTMembraneClassName empty and use NPulseLTZoneThreshold; this does not describe arbitrary saved/custom graph",
+      "proof": [
+        "pulse:Core/NPulseLibrary.cpp:1123",
+        "pulse:Core/NPulseLibrary.cpp:1167",
+        "pulse:Core/NPulseLibrary.cpp:1199",
+        "pulse:Core/NPulseLibrary.cpp:1230",
+        "pulse:Core/NPulseLibrary.cpp:1420",
+        "pulse:Core/NPulseLibrary.cpp:1453"
+      ]
+    },
+    {
+      "id": "LT-On-forward-path",
+      "status": "bounded_source_dependency_inference_not_runtime_causality",
+      "claim": "Structured LT-On routes soma channels to LT membrane to zone; shown feedback returns only to LT membrane. LT RC has no shown upstream dependency to measured soma with fixed body/stimulus/state and no other links",
+      "proof": [
+        "pulse:Core/NPulseNeuron.cpp:654",
+        "pulse:Core/NPulseNeuron.cpp:670",
+        "pulse:Core/NPulseNeuron.cpp:707",
+        "pulse:Core/NPulseNeuron.cpp:732"
+      ],
+      "limitations": [
+        "explicit/saved/recurrent/Hebb graphs require own closure",
+        "LT-Off changes feedback destination; not a pure time-constant contrast",
+        "first-spike reasoning requires actual zero history/Feedback; warm state cannot be assumed",
+        "Diagram describes conditionally created links; existing/cloned prototype links and replacements need actual complete graph readback, not proof from absence of a CreateLink branch"
+      ]
+    },
+    {
+      "id": "uniform-parent-body-defaults",
+      "status": "source_contract",
+      "claim": "Positive parent capacity/defaults apply to body Exc/Inh channels and synapses only when UseElementDefaults true; LTMembrane skipped. Can overwrite individually learned body fields; zero retains class values",
+      "proof": [
+        "pulse:Core/NPulseNeuron.cpp:783",
+        "pulse:Core/NPulseNeuron.cpp:806",
+        "pulse:Core/NNeuronTimeLearnerScopedDefaults.h:40"
+      ]
+    },
+    {
+      "id": "native-image-physics-and-heterogeneity",
+      "status": "source_contract",
+      "claim": "RegisterStorageProfile builds separate body/LT images, clears uniform parent override ownership; native model/learner rejects parent overrides/UseElementDefaults. C0 records per-channel baseline; edits scale selected Dendrite channels, preserving ratios, non-target soma/LT stay baseline",
+      "proof": [
+        "pulse:Core/TimeLearner/StorageProfiles.cpp:222",
+        "pulse:Core/TimeLearner/NativeModelOwner.h:17",
+        "pulse:Core/TimeLearner/NativeModelBuilder.cpp:449",
+        "pulse:Core/TimeLearner/NativeModelEditor.cpp:525",
+        "pulse:Core/TimeLearner/NativeModelEditor.cpp:953",
+        "pulse:Core/TimeLearner/NativeModelEditor.cpp:1094"
+      ]
+    },
+    {
+      "id": "fast-table-name-mismatch",
+      "status": "definition_level_issue_no_measured_effect_claim",
+      "claim": "NSPNeuronGenD005C25e11 capacity literal is 5e-10, equal to D005C5e10; do not infer capacitance from name",
+      "proof": [
+        "pulse:Core/NPulseLibrary.cpp:1155",
+        "pulse:Core/NPulseLibrary.cpp:1156"
+      ]
+    },
+    {
+      "id": "ready-prototype-boundary",
+      "status": "source_lifecycle_caveat_not_effective_instance_failure",
+      "claim": "Fast second Build can be Ready no-op after parent assignment; factory Copy invalidates Ready so later instance Build may apply parent defaults. Need prototype/TakeObject/Build/growth/import readback; no claim recipe broken solely from intermediate prototype",
+      "proof": [
+        "pulse:Core/NPulseLibrary.cpp:1173",
+        "pulse:Core/NPulseNeuron.cpp:176",
+        "rdk:Core/Engine/UContainer.cpp:2251",
+        "rdk:Core/Engine/UComponentFactory.cpp:33",
+        "rdk:Core/Engine/UContainer.cpp:1081"
+      ]
+    },
+    {
+      "id": "NPulseLTZone-flags",
+      "status": "source_only_review_questions",
+      "claim": "Integrator with UseSpikeStabilizer=false leaves local input=0; its setter writes TimeConstant=0.00144. Not used by Threshold-only stock Gen; runtime supported-mode regression required before changing physics",
+      "proof": [
+        "pulse:Core/NPulseLTZone.cpp:213",
+        "pulse:Core/NPulseLTZone.cpp:284"
+      ]
+    },
+    {
+      "id": "units-not-SI-attested",
+      "status": "declared_vs_unverified",
+      "claim": "Clock frequency Hz/time seconds in native declarations; potential source explicitly model_units_SI_unverified. Capacity/Resistance naming does not attest full SI chain; Q=CRf is conditional zero-G diagnostic only",
+      "proof": [
+        "pulse:Core/TimeLearner/NativeSoloThresholdTrace.h:120",
+        "pulse:Core/NPulseChannel.cpp:265",
+        "root:Docs/StructTrain/TimeLearner/HighThresholdSubsetScientificReport-2026-11-08.ru.md:32"
+      ]
+    },
+    {
+      "id": "flat-panel-cause-unknown",
+      "status": "unresolved_runtime_attribution",
+      "claim": "No exact flat plot raw/producer/runtime binding was revalidated by this source-only task. Missing read must be unknown/error; flat0 is not absence-of-signal nor proof of comparator misuse",
+      "proof": [
+        "rdk:Core/Engine/UContainer.cpp:2498",
+        "pulse:Core/TimeLearner/NativeSoloThresholdTrace.h:24",
+        "root:Scripts/StructTrain/TimeLearner/solo_threshold_reports.py:52"
+      ]
+    }
+  ],
+  "fast_table_literals": [
+    {
+      "name": "NSPNeuronGenD005C5e10",
+      "declared_dissociation_TC_literal": "0.005",
+      "declared_capacity_literal": "5e-10",
+      "source_line": 1155,
+      "effective_child_readback_performed": false
+    },
+    {
+      "name": "NSPNeuronGenD005C25e11",
+      "declared_dissociation_TC_literal": "0.005",
+      "declared_capacity_literal": "5e-10",
+      "source_line": 1156,
+      "effective_child_readback_performed": false
+    },
+    {
+      "name": "NSPNeuronGenD002C1e9",
+      "declared_dissociation_TC_literal": "0.002",
+      "declared_capacity_literal": "1e-9",
+      "source_line": 1157,
+      "effective_child_readback_performed": false
+    },
+    {
+      "name": "NSPNeuronGenD002C5e10",
+      "declared_dissociation_TC_literal": "0.002",
+      "declared_capacity_literal": "5e-10",
+      "source_line": 1158,
+      "effective_child_readback_performed": false
+    },
+    {
+      "name": "NSPNeuronGenD002C25e11",
+      "declared_dissociation_TC_literal": "0.002",
+      "declared_capacity_literal": "2.5e-10",
+      "source_line": 1159,
+      "effective_child_readback_performed": false
+    },
+    {
+      "name": "NSPNeuronGenD001C1e9",
+      "declared_dissociation_TC_literal": "0.001",
+      "declared_capacity_literal": "1e-9",
+      "source_line": 1160,
+      "effective_child_readback_performed": false
+    },
+    {
+      "name": "NSPNeuronGenD001C5e10",
+      "declared_dissociation_TC_literal": "0.001",
+      "declared_capacity_literal": "5e-10",
+      "source_line": 1161,
+      "effective_child_readback_performed": false
+    },
+    {
+      "name": "NSPNeuronGenD001C25e11",
+      "declared_dissociation_TC_literal": "0.001",
+      "declared_capacity_literal": "2.5e-10",
+      "source_line": 1162,
+      "effective_child_readback_performed": false
+    }
+  ],
+  "remaining_runtime_comparisons": [
+    {
+      "id": "signal-identity-and-aux-source",
+      "state": "not_dispatched",
+      "required": [
+        "exact plot-to-raw-producer-runtime binding",
+        "actual class/path/links/external sources and Activity/Init/Ready/order",
+        "same-tick soma and LT channel outputs/sums, Neural/Pre/Potential/OutputPotential/Output/Feedback and actual events",
+        "no missing source as zero; record phase and whole lifecycle/owned closure"
+      ],
+      "excludes": [
+        "no causal conclusion from graph names/flat panel",
+        "no change to measured blue soma source"
+      ]
+    },
+    {
+      "id": "LT-RC-only-within-On",
+      "state": "not_dispatched",
+      "required": [
+        "immutable storage image profiles with only LT-channel-C intervention plus necessary image/binding differences",
+        "identical body physics/topology/zone/threshold/source schedule/clock/reset/state",
+        "effective graph diff and per-channel readback before/after",
+        "pre-first-spike soma vs downstream LT channels measured from actual bytes"
+      ],
+      "excludes": [
+        "no live prototype hot-swap",
+        "no automatic claim identical soma or changed response from this source inference"
+      ]
+    },
+    {
+      "id": "topology-Off-On",
+      "state": "not_dispatched",
+      "required": [
+        "declare changed feedback destination explicitly as topology intervention",
+        "separate high-threshold100 vs original threshold conditions",
+        "actual no-spike history instead of inference from unrecorded spike list",
+        "warm/per-trial-reset/order/ITI held separately"
+      ],
+      "excludes": [
+        "not a pure LT inertia single-factor test"
+      ]
+    },
+    {
+      "id": "recipe-lifecycle-heterogeneity",
+      "state": "not_dispatched",
+      "required": [
+        "prototype to TakeObject/Build/Reset/growth/native export/import actual child readback",
+        "body/LT/Exc/Inh individual C/R/TC/learned values preserved by image ownership",
+        "legacy positive parent C skip-LT scope and native V2 parent-override refusal",
+        "fast table labels vs numeric definitions recorded without rewriting historical data"
+      ]
+    },
+    {
+      "id": "integrating-zone-flags",
+      "state": "not_dispatched",
+      "required": [
+        "separate source review of supported NPulseLTZone integration/stabilizer combinations and TimeConstant setter effect",
+        "native supported scalar source adapter; no transfer to Threshold-only image"
+      ],
+      "excludes": [
+        "not a reason to patch actual current physics before a gate"
+      ]
+    }
+  ],
+  "runtime_readback_performed": false,
+  "numerical_tests_executed_locally": false,
+  "server_access_performed": false,
+  "models_or_physics_changed": false,
+  "scientific_causality_verified": false,
+  "scientific_verdict": null,
+  "current_flat_panel_cause": null,
+  "historical_observations": {
+    "august_visual_4_of_8_to_6_of_8": "preserved for original protocol; permutations/increased ITI not retrospectively assigned",
+    "threshold100_reports": "preserved in their existing accepted observational scope; not recalculated here",
+    "data_or_figures_rewritten": false
+  },
+  "publication_contract_for_future_comparisons": "all primary JSON/CSV/models used by published results byte-preserved in compressed Git evidence; same-host cache only staging/full rendering, no hash-only primary authority",
+  "implementation": "no new recorder/adapter/worker/gate implemented or dispatched"
+}

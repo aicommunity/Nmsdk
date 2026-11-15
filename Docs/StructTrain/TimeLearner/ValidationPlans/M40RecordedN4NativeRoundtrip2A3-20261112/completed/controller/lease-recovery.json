@@ -1,0 +1,98 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "1a456b21-f58d-4713-9a0c-4ed72584374a",
+  "job_id": "s07-recorded-n4-native-roundtrip-m40-a3",
+  "recorded_unix": 1794467007.0355077,
+  "administrator": {
+    "pid": 3923332,
+    "start_ticks": "353988880",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 3926499,
+    "start_ticks": "353989693",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recorded-n4-native-roundtrip-m40-a3-controller/process/contained",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "a14a867ccc0cffdec8d54ab24f1748ae7688cd57407a71dc3f5bc5d30c484f14",
+      "unit": "timelearner-aee04a97-c0de-4a02-a108-d5632aea8754.service",
+      "invocation_id": "c62b67c4b8394310937a4e906aee167e",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-aee04a97-c0de-4a02-a108-d5632aea8754.service",
+      "initial_main_pid": 3926499,
+      "initial_start_ticks": "353989693",
+      "sha256": "8661a50e3a01a473cc2151f1df15a2eef4bd0d274c19a740e27043ade468ee52"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-aee04a97-c0de-4a02-a108-d5632aea8754.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-recovery-fixtures-a1/Tests/Integration/Data/RecordedN4Recovery",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-recovery-fixtures-a1/Tests/Integration/Data/RecordedN4Recovery"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recorded-n4-native-roundtrip-m40-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recorded-n4-native-roundtrip-m40-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-recorded-n4-sdk36-m40-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-recorded-n4-sdk36-m40-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/native-data-controller18-b1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedN4NativeRoundtrip2A3-20261112",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/native-data-controller18-b1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedN4NativeRoundtrip2A3-20261112"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-data-checks-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-data-checks-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-recorded-n4-roundtrip-sdk-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-recorded-n4-roundtrip-sdk-a3"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

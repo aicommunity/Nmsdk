@@ -1,0 +1,88 @@
+{
+  "kind": "timelearner_finalization_native_test_DATA_inputs",
+  "schema_version": 1,
+  "producer_root": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "archive": {
+    "name": "fixtures.tar.xz",
+    "bytes": 34008,
+    "sha256": "c5c3aa3ad243b34eca6e3b143aa2b9d26fdc7d8c1a2ca015f8e6d6c22d91b11f"
+  },
+  "members": {
+    "branch-finalization-calibration-job.json": {
+      "bytes": 1771601,
+      "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077"
+    },
+    "branch-finalization-cold-job.json": {
+      "bytes": 841617,
+      "sha256": "dd459efdfdb693a303a58bf4ee8f9516d11c0282a536b3aadbcc3bf418a2bd60"
+    },
+    "branch-finalization-evaluation-job.json": {
+      "bytes": 1771350,
+      "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a"
+    },
+    "branch-finalization-fixed-job.json": {
+      "bytes": 1772056,
+      "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946"
+    },
+    "classic-finalization-calibration-job.json": {
+      "bytes": 1917019,
+      "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49"
+    },
+    "classic-finalization-cold-job.json": {
+      "bytes": 913178,
+      "sha256": "bdb7d9a6b5cece9e169a88523d58ec2eebc77b9b8798cad9d13625ec63c1ed8f"
+    },
+    "classic-finalization-evaluation-job.json": {
+      "bytes": 1916765,
+      "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778"
+    },
+    "classic-finalization-fixed-job.json": {
+      "bytes": 1917293,
+      "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d"
+    }
+  },
+  "origins": [
+    {
+      "source_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-native-posttune-fixed-asan-a1/baseline-source/Classic-auto_metric/input/job.json",
+      "source_bytes": 1917293,
+      "source_sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d",
+      "fixed_bytes_preserved": true,
+      "cold_declaration_producer": "Scripts.StructTrain.TimeLearner.tests.live_pipeline_corpus.make_job(legacy=True)",
+      "initial_parameters": [
+        {
+          "attachment": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "attachment": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "derived_declarations_are_fresh_metadata_not_historical_runs": true
+    },
+    {
+      "source_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-native-posttune-fixed-asan-a1/baseline-source/Branch-synthetic/input/job.json",
+      "source_bytes": 1772056,
+      "source_sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946",
+      "fixed_bytes_preserved": true,
+      "cold_declaration_producer": "Scripts.StructTrain.TimeLearner.tests.live_pipeline_corpus.make_job(legacy=True)",
+      "initial_parameters": [
+        {
+          "attachment": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "attachment": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "derived_declarations_are_fresh_metadata_not_historical_runs": true
+    }
+  ],
+  "native_execution_performed": false,
+  "scientific_verdict": null
+}

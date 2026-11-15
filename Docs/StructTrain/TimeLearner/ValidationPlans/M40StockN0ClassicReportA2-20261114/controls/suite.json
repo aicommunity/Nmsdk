@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s11-stock-n0-classic-report-m40-a2",
+  "package_fingerprint": "6b350625b148c59e8a66860f232a449596ff3c3dfa0234e8a51411f63767d86f",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_n0_frozen_report.StockN0FrozenReportTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_n0_frozen_report.StockN0FrozenReportTest.test_original_matrix_all_somas_and_readable_native_zoom"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_N0_FROZEN_REPORT_RUN": {
+      "pattern": "**/*.json",
+      "files": 35,
+      "fingerprint": "cc392750c86cf9aad37c38320d5457518e337e57db5c54d7aaf33b02ff1086ce"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "kind": "reader53_independent_verifier_source_history",
+  "schema_version": 1,
+  "evidence_commit": "8d05058a244c88096f9b41dba3ff4dd2f4aa008c",
+  "sources": {
+    "v1": {
+      "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\timelearner_verify_candidate_window_reader53_v1.py",
+      "bytes": 20815,
+      "sha256": "19bbc3932829ef02d1bb0bb88dfc1dba9148d3b0c35356cb2a0c0b664e44e999"
+    },
+    "v2": {
+      "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\timelearner_verify_candidate_window_reader53.py",
+      "bytes": 21183,
+      "sha256": "60e27de24034393dc932947d1a97f40c763c733b80da5e93ac11b7c9ab424509"
+    }
+  },
+  "v1_observed_failure": {
+    "origin": "transcribed actual tools.exec_command result; original evidence and both lease rows retained unchanged",
+    "line": 118,
+    "exception": "AssertionError",
+    "assertion": "fresh released lease whole row == original closure lease row",
+    "exact_row_difference": {
+      "field": "heartbeat_expired",
+      "original_snapshot": false,
+      "fresh_inspection": true
+    },
+    "all_other_row_fields_equal": true,
+    "receipt_written": false
+  },
+  "v2_correction": "Require both observation flags bool; compare all remaining fields exactly, including immutable identity/resources/state/timestamps/release note; exact bound closure and owner guards retained",
+  "v2_receipt": {
+    "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\CandidateWindowReader53IndependentVerification.json",
+    "sha256": "a0fad029e2617c6bb5a0b4609d4156b1cb0cf9bc5aceccdb018db0fa002c8c83"
+  },
+  "original_evidence_bytes_rewritten": false,
+  "tests_reexecuted": false,
+  "followup_required": "Maintained shared collector tests must distinguish immutable lease identity from inspection-age status"
+}

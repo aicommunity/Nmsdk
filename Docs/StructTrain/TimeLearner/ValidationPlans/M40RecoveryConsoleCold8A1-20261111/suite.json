@@ -1,0 +1,30 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s08-recovery-console-cold8-m40-a1",
+  "package_fingerprint": "010eb71ea9c3e360a68d51ae082bb3b7a1d507d6fb7e15324a3deba192dff9db",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_console_pipeline.RecoveryConsolePipelineTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_console_pipeline.RecoveryConsolePipelineTest.test_branch_cold8_public_preflight_train_export_measured_calibration_frozen_test",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_console_pipeline.RecoveryConsolePipelineTest.test_classic_cold8_public_preflight_train_export_measured_calibration_frozen_test"
+  ],
+  "fixtures": {
+    "TIMELEARNER_RECOVERY_CONSOLE": {
+      "pattern": "*",
+      "files": 2,
+      "fingerprint": "929552f62a23e32bbf44251f092cfe7f5ca955896164f88a8bd570382e0482c3"
+    },
+    "TIMELEARNER_RECOVERY_CONSOLE_PACKAGE7_BUNDLE": {
+      "pattern": "*",
+      "files": 4,
+      "fingerprint": "588e016330cafa07549c3834d162ce92133693b9113b461bd48d67c09ce081dd"
+    },
+    "TIMELEARNER_CONSOLE_RUNTIME_FILES": {
+      "pattern": "NeuroModelerConsole*",
+      "files": 2,
+      "fingerprint": "ec9b6cfa640025f0d4994bfc48488f0c151c5f3dfdf774d4ae3a5c92b63a9edc"
+    }
+  }
+}

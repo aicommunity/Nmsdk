@@ -1,0 +1,29 @@
+# Сохранение закрытого native timeout без подмены результата
+
+Native119 A1 собрал targets и подтвердил 19 cases. Следующий Classic N6 routing остановлен внешним лимитом 2400 s; конечный JUnit и старый actual-tests record отсутствуют. Это не case FAIL по assertions и не успешный завершённый cohort. Его 100 оставшихся IDs включают начатую, но незавершённую проверку.
+
+Исходный collector schema1 намеренно требовал завершённый JUnit для каждого записанного child. Он пригоден для уже опубликованного native48 9PASS/2FAIL, но не принимает A1. В одном лишь основном output A1 измерено 484 regular files/130782334 bytes; предел64 MiB также недостаточен. Исключать сырые данные N6 или сохранять только summary нельзя.
+
+Schema2 `closed_native_collection` сохраняет прежний контракт schema1 и добавляет обязательную карту `incomplete_children`. Текущий явно поддерживаемый новый случай — закрытый `timeout` с отсутствующим XML, `validity=incomplete_test_observation`, `assertion_status=not_assessed`, `inventory=null`. Две исходные копии gate result должны совпадать и согласовываться с process result. При наличии исправленного actual-tests record он должен содержать ноль завершённых IDs и отдельно перечислять unobserved expected IDs. Runtime ownership, kernel closure, child maps, released original lease, exact namespace/link metadata и все frozen bytes проверяются независимо.
+
+Schema2 outcome использует `not_completed_ids`, не смешивая неначатые и начатые незавершённые проверки с завершёнными. Никакой ID не добавляется в executed/passed по exit code, cleanup либо плану. XML, появившийся после freeze, изменение process outcome или добавленный record отвергаются. Математическая оценка и научный verdict остаются отдельными и здесь отсутствуют.
+
+Для schema2 фиксированы пределы capture256 MiB/output512 MiB, минимальное свободное место512 MiB; каждый отдельный файл по-прежнему ограничен frozen-file API. В Git поступает сжатый primary bundle и контрольные JSON, исполняемые файлы не копируются в отчёт. Ограничитель не означает аттестованный внешний cgroup сборщика; его отсутствие по-прежнему указывается в receipt.
+
+На M40 **23/23 PASS**: девять новых адресных metadata tests используют production observation reader и реальные временные файлы, прежние14 проверяют namespace/role/size/gzip. Source `161dcb9bc03bc964c89537d5a6908820762e6e93`, package fingerprint `b9a49a21ef89b83c562a42adaed814fe61f23e1b3f29b04666c8839dc2c55af1`. Контроллер completed0/clear за13.432s; Root сверил23logIDs, source/Tool equality, group closure и released lease `8b965302-b292-4057-9ab9-6cac4e428a9b`. [Сжатые исходные протоколы](../../../Reports/StructTrain/TimeLearner/s10-native-timeout-preservation23-root-observation/index.json).
+
+Для actual A1 сформирован [frozen manifest](ValidationPlans/Native119A1TimeoutPreservation-20261109/manifest.json) на535regular roles/131482774bytes и точный raw inventory1086185bytes. Nanosecond link metadata сохранена исходными JSON bytes, без преобразования через JavaScript Number. Первый actual вызов остановился до lease/output из-за отсутствующего промежуточного `Reports/StructTrain/TimeLearner` в новом private evidence repository. Отсутствие output и собственных lease rows проверено; создан только этот родительский каталог, затем повторён тот же frozen запрос. Перед вызовом CLI родитель выходного каталога должен существовать; сам output остаётся новым. Пока actual collection не принят,23/23 не заменяют эту проверку.
+
+Поддержка произвольного повреждённого/частичного XML, compile-failure до native leaves и всех остальных отрицательных сценариев данным расширением не заявляется.
+
+## Actual preservation A1 принят
+
+Production collector schema2 завершён. Сохранены **535 originals/538 archive members**, expanded132726316bytes; компактный primary.tar.xz занимает **2732104bytes**, dictionary32MiB. Исходный результат остаётся19PASS/100not-completed, без assertion FAIL и без научного verdict. Незавершённый Classic N6 включён сырыми файлами, а не объявлен прошедшим.
+
+Отдельный stdlib/Git reader `Scripts/StructTrain/TimeLearner/audits/verify_native_timeout_preservation.py` независимо проверил все hashes/members/roles, исходные XML19cases, отсутствие XML timeout leaf, оба исходных gate copies и process result,4050 SDK Git blobs/режимы/child gitlinks и646 collector source files. Контрольный manifest совпал с exact Git bytes; raw link nanoseconds не проходили через binary64. Повторно наблюдены закрытый original supervisor/outer/9children и released collection lease `3d031b9a-c748-41fa-9d3e-a3a5f8350601`, owner missing. Локально выполнялся только metadata/hash/Git reader, без численного анализа CSV, моделей и тестов.
+
+Evidence commit **201971e0ee82da2687225635b61692ce48b8e891**, parent25956f16f9628f5d494e214b501934a220ad6d79, опубликован в `codex/timelearner-native119-a1-timeout-preservation-evidence` с точным remote readback. Прямой server push завершился кодом128 и не создал маркера публикации; архив передан Git-object pack4943383bytes/SHA3255c754314828d35d8dd9bfb666c7c2152a1b0b549d328583a531169522eba3, проверен независимо и опубликован через локальный настроенный origin. Gitlinks evidence parent не изменены.
+
+[Root observations и независимый receipt](../../../Reports/StructTrain/TimeLearner/s07-native119-a1-timeout-preservation-root-observation/independent-verification.json) сохраняют actual invocation, первый no-write preflight отказ, original/final lease/kernel observations, Git transport и подтверждение публикации. Сам primary находится в evidence commit по пути `Reports/StructTrain/TimeLearner/s07-native119-a1-timeout-preservation-m40-a1/packed/primary.tar.xz`.
+
+Это приёмка сохранения отрицательного A1, не приёмка A2, package6 Train→Test или исходных этапов1–12. Внешний cgroup сборщика не аттестован и явно указан false; проверка оригинальных native groups от этого не ослабляется.

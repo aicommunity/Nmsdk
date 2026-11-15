@@ -1,0 +1,90 @@
+from pathlib import Path
+import os,json,hashlib,subprocess,sqlite3,shutil,tarfile,io
+base=Path('/home/user/timelearner-refactor').resolve()
+inventory=Path('/tmp/timelearner-elder-report-cache-inventory-a1.json')
+assert hashlib.sha256(inventory.read_bytes()).hexdigest()=='d8dca7fdd28b8addd1435d62d62efde0e52a0577ec5a476cc513345f6baade72'
+data=json.loads(inventory.read_text());assert data['base']==str(base)
+assert {r['root'] for r in data['repositories']}=={str(base/n) for n in ['source-boundary-audit-a1','source-owner-audit-a1']}
+out=Path('/tmp/timelearner-elder-report-sparse-cleanup-a1');assert not out.exists();out.mkdir()
+(out/'producer.txt').write_text(PUBLISHER_SOURCE)
+def write(name,value):(out/name).write_text(json.dumps(value,indent=2)+'\n')
+def git(root,*a,data=None):return subprocess.check_output(['git','-C',str(root),*a],input=data)
+def idle():
+ c=sqlite3.connect('file:'+str(base/'resource-reservations.sqlite3')+'?mode=ro',uri=True)
+ held=list(c.execute("select job_id from leases where state='held'"));c.close();assert not held,held
+ ancestors=set();pid=os.getpid()
+ while pid>1:
+  ancestors.add(pid);fields=Path('/proc',str(pid),'stat').read_text().rsplit(')',1)[1].split();pid=int(fields[1])
+ conflicts=[]
+ roots=[Path(r['root']) for r in data['repositories']]
+ for proc in Path('/proc').iterdir():
+  if not proc.name.isdigit() or int(proc.name) in ancestors:continue
+  try:
+   if proc.stat().st_uid!=os.getuid():continue
+   exe=(proc/'exe').resolve(strict=True).name
+   args=(proc/'cmdline').read_bytes().split(b'\0')
+   if exe.startswith(('NeuroModeler','Test_PulseLib')) or exe in ('cmake','gmake','make','ninja','cc1plus'):
+    conflicts.append({'pid':int(proc.name),'executable':exe})
+   if exe.startswith('python') and any(b'/tmp/timelearner-' in arg for arg in args[1:]):
+    conflicts.append({'pid':int(proc.name),'python_worker':True})
+   cwd=(proc/'cwd').resolve(strict=True)
+   if any(cwd.is_relative_to(root) for root in roots):conflicts.append({'pid':int(proc.name),'cwd':str(cwd)})
+  except (FileNotFoundError,ProcessLookupError):continue
+ assert not conflicts,conflicts
+ return {'held_leases':0,'other_native_or_worker_processes':0,'target_worktree_cwds_in_use':0}
+write('initial-idle.json',idle())
+expected={}
+common=None
+for row in data['repositories']:
+ root=Path(row['root']);assert root.resolve().parent==base and not root.is_symlink()
+ assert git(root,'rev-parse','HEAD').decode().strip()==row['head']
+ assert git(root,'config','--get','extensions.worktreeConfig').decode().strip()=='true'
+ raw=git(root,'rev-parse','--git-common-dir').decode().strip();resolved=(root/raw).resolve() if not Path(raw).is_absolute() else Path(raw).resolve()
+ assert common is None or common==resolved;common=resolved
+ for f in row['files']:
+  value=(f['bytes'],f['sha256'])
+  assert f['blob'] not in expected or expected[f['blob']]==value
+  expected[f['blob']]=value
+# Enumerating only locally present objects cannot trigger a lazy remote fetch.
+present=set();proc=subprocess.Popen(['git','--git-dir='+str(common),'cat-file','--batch-all-objects','--batch-check=%(objectname) %(objecttype)'],stdout=subprocess.PIPE)
+for raw in proc.stdout:
+ oid,kind=raw.decode().split()
+ if oid in expected:assert kind=='blob';present.add(oid)
+assert proc.wait()==0 and present==set(expected),('missing_local_objects',len(expected)-len(present))
+proc=subprocess.Popen(['git','--git-dir='+str(common),'cat-file','--batch'],stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+for oid,(size,digest) in sorted(expected.items()):
+ proc.stdin.write((oid+'\n').encode());proc.stdin.flush();header=proc.stdout.readline().decode().split()
+ assert header==[oid,'blob',str(size)],header
+ raw=proc.stdout.read(size);assert proc.stdout.read(1)==b'\n'
+ assert hashlib.sha256(raw).hexdigest()==digest
+ assert hashlib.sha1(b'blob '+str(size).encode()+b'\0'+raw).hexdigest()==oid
+proc.stdin.close();assert proc.wait()==0
+write('local-git-recovery-proof.json',{'common_git_dir':str(common),'unique_blob_payloads_read_and_verified':len(expected),'all_objects_present_locally_before_changes':True,'network_fetch_required':False,'git_objects_deleted':False})
+results=[];free_before=shutil.disk_usage(base).free
+for row in data['repositories']:
+ root=Path(row['root']);idle()
+ assert git(root,'rev-parse','HEAD').decode().strip()==row['head']
+ before=git(root,'status','--porcelain','--untracked-files=all')
+ for f in row['files']:
+  path=root/f['path'];assert path.resolve().is_relative_to(root) and path.parts[len(root.parts)]=='Reports'
+  raw=os.readlink(path).encode() if path.is_symlink() else path.read_bytes()
+  assert len(raw)==f['bytes'] and hashlib.sha256(raw).hexdigest()==f['sha256']
+ patterns=row['sparse_patterns_before'].splitlines() if row['sparse_patterns_before'] is not None else ['/*']
+ patterns.append('!/Reports/')
+ # Git2.34 with worktreeConfig=true writes only this worktree's sparse settings.
+ git(root,'sparse-checkout','set','--no-cone','--stdin',data=('\n'.join(patterns)+'\n').encode())
+ assert git(root,'rev-parse','HEAD').decode().strip()==row['head']
+ assert git(root,'status','--porcelain','--untracked-files=all')==before
+ assert not any((root/f['path']).exists() or (root/f['path']).is_symlink() for f in row['files'])
+ example=row['files'][0];assert hashlib.sha256(git(root,'show',row['head']+':'+example['path'])).hexdigest()==example['sha256']
+ results.append({'root':str(root),'head':row['head'],'removed_tracked_materializations':len(row['files']),'payload_bytes':row['bytes'],'all_code_and_other_paths_unchanged':True,'status_unchanged':True,'sparse_patterns_after':patterns})
+ write('progress.json',results)
+write('terminal.json',{'kind':'elder_tracked_report_materializations_retired','repositories':results,'free_bytes_before':free_before,'free_bytes_after':shutil.disk_usage(base).free,'primary_git_objects_preserved_and_verified':True,'unknown_or_modified_files_deleted':False,'runtime_files_deleted':False,'unique_experiment_data_deleted':False,'scientific_verdict':None})
+(out/'inventory.json').write_bytes(inventory.read_bytes())
+files={p.name:p.read_bytes() for p in out.iterdir() if p.is_file()}
+with tarfile.open(out/'primary.tar.xz','w:xz',preset=3) as tar:
+ for name,raw in sorted(files.items()):
+  info=tarfile.TarInfo(name);info.size=len(raw);tar.addfile(info,io.BytesIO(raw))
+raw=(out/'primary.tar.xz').read_bytes()
+write('bundle.json',{'members':{n:{'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()} for n,v in files.items()},'archive_bytes':len(raw),'archive_sha256':hashlib.sha256(raw).hexdigest()})
+print(json.dumps({'evidence':str(out),'repositories':results,'free_bytes_before':free_before,'free_bytes_after':shutil.disk_usage(base).free,'unique_blob_payloads_verified':len(expected),'archive_bytes':len(raw),'archive_sha256':hashlib.sha256(raw).hexdigest()}))

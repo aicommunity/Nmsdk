@@ -1,0 +1,9 @@
+# Единственный конечный Classic N4/N1 budget16 Train
+
+Основание: свежие8 actual stock cold probes на SDK Root929dbc176a0804910544539aaf79bdc4a02aa82a/Pulse dfb9a98244f91b4f4029d8470465fd40116436ca завершились за51.18s, все valid/complete, model/source unchanged, LTMembrane отсутствует, outer/nested units closed, lease released. Оба Linux SDK прошли52 исходных finalization IDs; исходный narrow N2 negative сохранён отдельно.
+
+Production prepare из новых actual cold observations → cold7 → full-observation cold8. В Classic только recovery rejection budget4→16, как в предыдущем budget16. На сервере подтверждено полное равенство configuration и optional_modes с прежним budget16. Source/runtime fingerprints новые, фактические reference artifacts новые; опыт последовательный, а не идентичный binary A/B. Все15 controls/prepared files доставлены raw Git blobs с сохранением opaque identities. Learned state не импортируется; Train заново захватывает CapturedPerInput.
+
+Classic-stock-cold8-N1: N4,2000Hz,anchor3,N1,stock storage безLTMembrane; amplitude_absolute1e-5/relative0,minAmplitude1e-6,SyncTolerance0.02. C-trim/PostTune/calibration выключены. Full domain0..3600 frames, search128probes/1280edits/128candidates per input/4sweeps, model7200s, wall1800s+300s finalization. Whole worker2GiB/128tasks/3600s, output2GiB/floor2GiB. Branch job остаётся в штатном плане, но не запускается.
+
+Вопрос: записывает ли исправленный shared export полный terminal state/summary/package в прежние300s и каков честный learning outcome. Один запуск; не увеличивать бюджеты/допуски и не возобновлять SeriesD. Валидный negative/unresolved/budget-exhausted допустим, 8/8 не требуется. Ordinary Test запрещён без пригодной обученной модели; diagnostic frozen evaluation допустим только явно помеченным отдельным этапом. Итоговый читаемый отчёт должен включить измеренные residuals/историю решений и временные графики сомы с actual inputs в масштабе визуального анализа.

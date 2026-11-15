@@ -1,0 +1,83 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "a57e893c201642ab69b35fe3b91ce22f22be0784ca100d032c2cc1ded842e770",
+      "unit": "timelearner-090ee509-b2e9-48b8-a579-50727ba8473e.service",
+      "invocation_id": "27294d944b0c4ffb9ac8a05f3f375b58",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-090ee509-b2e9-48b8-a579-50727ba8473e.service",
+      "initial_main_pid": 1154435,
+      "initial_start_ticks": "372168558",
+      "sha256": "cd42548e399d2f964f91176f1ed541d39a7628649803e2dbb5a4a6b2debe6929"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "8589934592",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 090ee509-b2e9-48b8-a579-50727ba8473e",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "27294d944b0c4ffb9ac8a05f3f375b58"
+    },
+    "memory_max": 8589934592,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "35559cff-74e2-4649-a3d4-b8d58b76a089",
+      "job_id": "s11-classic-n0-order-report-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 1154435,
+        "start_ticks": "372168558",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-n0-order-matrix-m40-a3/worker/tmp/fixed-threshold-order-matrix",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-n0-order-matrix-m40-a3/worker/tmp/fixed-threshold-order-matrix"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-n0-order-report-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-n0-order-report-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/classic-n0-order-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ClassicN0OrderReportA1-20261114",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/classic-n0-order-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ClassicN0OrderReportA1-20261114"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-order-report-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-order-report-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794646488.1422832,
+      "deadline": 1794647458.595844,
+      "updated": 1794647348.6662536,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

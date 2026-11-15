@@ -1,0 +1,45 @@
+{
+  "kind": "assigned_vertex_production_unit_server_evidence",
+  "parent": "90a0a917b32eeb21925b414cc18450fbdbeaba03",
+  "PulseLib": "9e0640964945ad5903a4fff1c5091ebf71a69810",
+  "host_role": "elder",
+  "rows": [
+    {
+      "job": "s07-peak-ownership-fixed-elder-normal-a1",
+      "terminal": {
+        "fixed_unit_passed": true,
+        "heartbeat_errors": [],
+        "native_physical_models_executed": false,
+        "cmake_target_configured": false,
+        "classification_evaluated": false,
+        "whole_plan_complete": false
+      },
+      "all_processes_closed": true,
+      "reservation_state": "released",
+      "inventory": {
+        "expected": 23,
+        "observed": 23,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "73b8b57e9462d7eeca4cc50c686de0b830f721e365f0a5e7dbc89800ca896cec"
+      },
+      "ASan_instrumented_and_loaded": false,
+      "leak_check": false,
+      "loaded_files": 16,
+      "compiled_source": {
+        "scope": "production_verification_unit_only",
+        "root": "90a0a917b32eeb21925b414cc18450fbdbeaba03",
+        "PulseLib": "9e0640964945ad5903a4fff1c5091ebf71a69810",
+        "unused_submodules_not_materialized": true
+      },
+      "binary_sha256": "c0a8934ffb9d92e16f7dd83cd71c76b70ac4cb90a78eb5dd4b40f2898a2ae69d"
+    }
+  ],
+  "production_translation_units_compiled_without_copying_bodies": true,
+  "physical_model_or_scheduler_executed": false,
+  "full_sdk_cmake_configured": false,
+  "new_cmake_target_verified": false,
+  "burst_attribution_resolved": false,
+  "scientific_classification_evaluated": false,
+  "whole_plan_complete": false
+}

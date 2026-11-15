@@ -1,0 +1,68 @@
+from pathlib import Path
+import sys,os,json,hashlib,threading,traceback,tarfile,io,unittest,subprocess
+base=Path('/media/user/Data/TimeLearnerRefactor')
+label='single-pulse-reader-native37-a1'
+out=base/('readbacks/s07-'+label);out.mkdir(exist_ok=False)
+source=base/'source-single-pulse-native-normal-a2-delivery'
+prior=base/'readbacks/s07-single-pulse-native-normal-a2'
+root='b5cfae4b09558aae0a4eac82a3743430c3105539'
+stop=threading.Event();thread=None;registry=None;token=None;errors=[];passed=False
+def write(n,v):
+ p=out/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(v,indent=2,allow_nan=False)+'\n')
+def git(*args):return subprocess.check_output(['git','-C',str(source),*args],text=True).strip()
+write('owned-supervisor.json',{'pid':os.getpid(),'start_ticks':Path('/proc/self/stat').read_text().rsplit(') ',1)[1].split()[19],'native_models_started':False})
+(out/'producer.py').write_bytes(Path(__file__).read_bytes())
+try:
+ sys.dont_write_bytecode=True
+ sys.path.insert(0,str(base/'source-worker-limit-preflight-a2'))
+ from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+ from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+ registry=Reservations(base/'resource-reservations.sqlite3')
+ reservation=registry.reserve('s07-'+label,[{'path':str(out),'access':'write'},{'path':str(source),'access':'read'},{'path':str(prior),'access':'read'},{'path':str(base/'source-worker-limit-preflight-a2'),'access':'read'}],ttl_seconds=120)
+ token=reservation['token'];write('reservation.json',reservation)
+ def heartbeat():
+  while not stop.wait(20):
+   try:registry.heartbeat(token,ttl_seconds=120);registry.validate_paths(token)
+   except BaseException as e:errors.append(str(e));return
+ thread=threading.Thread(target=heartbeat,daemon=True);thread.start()
+ dependency=inspect_worker_dependency(Path(str(prior)+'-container'),registry,prior.name)
+ assert dependency['state']=='ready' and dependency['reservation_state']=='released',dependency
+ write('native37-closed-released.json',dependency)
+ assert git('rev-parse','HEAD')==root and not git('status','--porcelain','--untracked-files=no')
+ gate=json.loads((prior/'transport-verdict.json').read_text());assert gate['assertion_status']=='passed' and gate['inventory']['observed']==37,gate
+ failure=json.loads((prior/'single-pulse-reader-tests.json').read_text());assert failure=={'tests_run':0,'successful':False,'failures':0,'errors':1,'skipped':0},failure
+ bundle=json.loads((prior/'bundle.json').read_text());archive=prior/'primary.tar.xz'
+ assert hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256']
+ corpus=prior/'native12/native';bindings={}
+ for f in sorted(corpus.glob('single-pulse-*.json')):
+  raw=f.read_bytes();r={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+  assert bundle['members'][f.relative_to(prior).as_posix()]==r,f
+  bindings[f.name]=r
+ assert len(bindings)>=32 and len(bindings)%2==0,len(bindings)
+ write('actual-native37-corpus-binding.json',{'archive_sha256':bundle['archive_sha256'],'source_root':root,'corpus':str(corpus),'bindings':bindings,'native37_passed':True,'previous_reader_setup_failure_preserved':True,'native_tests_repeated':False})
+ for n in list(sys.modules):
+  if n=='Scripts' or n.startswith('Scripts.'):del sys.modules[n]
+ sys.path.insert(0,str(source));os.chdir(source)
+ os.environ['TIMELEARNER_SINGLE_PULSE_NATIVE_CORPUS']=str(corpus)
+ suite=unittest.defaultTestLoader.loadTestsFromName('Scripts.StructTrain.TimeLearner.tests.test_single_pulse_evidence.SinglePulseEvidenceTest')
+ assert suite.countTestCases()==13
+ with (out/'reader-tests.log').open('w') as log:r=unittest.TextTestRunner(stream=log,verbosity=2).run(suite)
+ write('reader-tests.json',{'tests_run':r.testsRun,'successful':r.wasSuccessful(),'failures':len(r.failures),'errors':len(r.errors),'skipped':len(r.skipped)})
+ assert r.wasSuccessful() and r.testsRun==13 and not r.skipped
+ assert not errors,errors;passed=True
+except BaseException as e:write('exception.json',{'reason':str(e),'traceback':traceback.format_exc()})
+finally:
+ stop.set()
+ if thread:thread.join(timeout=30)
+ write('terminal.json',{'reader13_passed':passed,'native_tests_repeated':False,'new_native_models_executed':False,'scientific_verdict':None,'whole_plan_complete':False})
+ hashes={}
+ for f in (source/'Scripts/StructTrain/TimeLearner').rglob('*.py'):
+  if '__pycache__' not in f.parts:hashes[f.relative_to(source).as_posix()]=hashlib.sha256(f.read_bytes()).hexdigest()
+ write('tool-source-hashes.json',hashes)
+ files={f.relative_to(out).as_posix():f.read_bytes() for f in out.rglob('*') if f.is_file()}
+ with tarfile.open(out/'primary.tar.xz','w:xz',preset=3) as tf:
+  for n,raw in files.items():
+   info=tarfile.TarInfo(n);info.size=len(raw);tf.addfile(info,io.BytesIO(raw))
+ raw=(out/'primary.tar.xz').read_bytes()
+ write('bundle.json',{'root':root,'members':{n:{'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()} for n,v in files.items()},'archive_bytes':len(raw),'archive_sha256':hashlib.sha256(raw).hexdigest()})
+ print('CLOSED',passed,flush=True)

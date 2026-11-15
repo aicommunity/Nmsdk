@@ -1,0 +1,67 @@
+{
+  "kind": "independent_composite_core_compile_failure_metadata_verification",
+  "schema_version": 1,
+  "evidence_commit": "74ee40501aba6d53da318027027aa59f613d5056",
+  "parent_root": "27ba5aa2906d5e5a1ecc081044fffb8dc82e6c38",
+  "pulse": "269164d2a2339908a8667e859a04a8e81da50c3c",
+  "archive_members_verified": 44,
+  "archive_bytes": 184640,
+  "archive_sha256": "5f7cd5e9d046017f25ac7897d6203b7a0d692c632962198a8ee977cca04dc964",
+  "snapshot_source_files_git_verified": 3056,
+  "source_git_repositories": [
+    {
+      "repository": "E:\\Science-Repo\\nmsdk-storage-recipes",
+      "commit": "27ba5aa2906d5e5a1ecc081044fffb8dc82e6c38",
+      "files": 968
+    },
+    {
+      "repository": "E:\\Science-Repo\\pulselib-matched-omission",
+      "commit": "269164d2a2339908a8667e859a04a8e81da50c3c",
+      "files": 306
+    },
+    {
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    },
+    {
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Bin",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    }
+  ],
+  "frozen_CMakeCache_sha256": "e0541f63103706e19c1e4ca0dc35324ef14a2ddeae7fac4d59f3f9477a286206",
+  "first_compile_error_log_line": 65,
+  "first_compile_error_Pulse_path": "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
+  "first_compile_error_source_line": 68,
+  "first_compile_error_column": 40,
+  "first_error": "UEPtr<NPulseNeuron> cannot convert to UEPtr<UContainer>",
+  "compiler_and_make_diagnostic_lines_preserved": 16,
+  "original_build_exit": 2,
+  "original_worker_exit": 1,
+  "original_expected_cpp_cases_declared": 143,
+  "actual_cpp_tests_executed": 0,
+  "actual_python_tests_executed": 0,
+  "native_models_executed": 0,
+  "native_runtime_accepted": false,
+  "original_protocol_exercised_flag_preserved": true,
+  "observed_protocol_exercised": false,
+  "flag_scope": "Original terminal preset true was not actual execution evidence because compilation failed",
+  "current_runtime_before_snapshot_absence_preserved": true,
+  "postclosure_capture_distinguished_from_original_producer_snapshot": true,
+  "protected_mechanical_A2_runtime_before_after_postclosure_equal": true,
+  "failed_unit_metadata_retained_with_zero_pid_empty_cgroup_and_original_invocation": true,
+  "kernel_cgroup_absent_verified_on_server": true,
+  "lease_released": true,
+  "no_test_or_model_result_reclassified": true,
+  "original_logs_source_snapshot_terminals_and_producers_preserved": true,
+  "live_server_source_cache_opened": false,
+  "live_server_build_cache_opened": false,
+  "local_CPP_or_numerical_execution": false,
+  "new_build_or_model_run": false,
+  "training_certificate_eligible": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "pack_sha256": "25ea66dd38afc98b6a519e3a8d34a99140922ef4076df299f5a00d989161df15",
+  "git_import": "unpack-objects_no_checkout_no_refs"
+}

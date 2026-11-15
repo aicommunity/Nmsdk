@@ -1,0 +1,33 @@
+{
+  "phases": [
+    {
+      "operation": "preflight",
+      "unit": "timelearner-64b6f7b1-33a7-44c0-9c41-d39bfbe543bb.service",
+      "job_sha256": "263dfda058b03882d778ee51c27f2a9f0341add8805b9c231e3326ef30094da0",
+      "manifest_sha256": "5b2b5573e3c4dbf23f417ec700f95bd416df5132a75115d64f7854d18aab99c8"
+    },
+    {
+      "operation": "train",
+      "unit": "timelearner-af812664-03e3-4a52-8965-1f4a39d4e7f8.service",
+      "job_sha256": "263dfda058b03882d778ee51c27f2a9f0341add8805b9c231e3326ef30094da0",
+      "manifest_sha256": "1f4de9881fabd5b6587e0df9ff6fbbb4aca4d420a4bfc1ec130269f5ac940b26"
+    },
+    {
+      "operation": "export",
+      "unit": "timelearner-d054ef8b-5e56-4d14-aba4-e0ef5f392856.service",
+      "job_sha256": "2aa3d83a6c80924a00af3a35db886f96bac8cd3bdf1b95b6a8bb8891cd7f41ef",
+      "manifest_sha256": "9a07956afa994da3c0e305d15092ce74b5f1224c2623b4e2e4c754f92ebc69d8"
+    },
+    {
+      "operation": "evaluate",
+      "unit": "timelearner-c854f581-f1ec-42ec-9b2a-062425932d8b.service",
+      "job_sha256": "506cb92c7eda803cbc7aa07a8ec917cd4ec52163bd3fa5435000920cd96fc617",
+      "manifest_sha256": "d29ebb8364aa5a509b4eef621ac009e87ba913cb8ec90c6a78ce397ce4227ed9"
+    }
+  ],
+  "training_outcome": "exact",
+  "solo_sha256": "5b3a818ea03c118a331fee64cb409c91562e7407b44a464bef32628b8b58e4d4",
+  "recognition_sha256": "68f2488fed1bc0d41bf0ff05236283f934a266bae2ea1919ae08cf4f15010730",
+  "scientific_verdict": null,
+  "independent_partition_verified": false
+}

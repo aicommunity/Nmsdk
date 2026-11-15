@@ -1,6 +1,13 @@
 # Структурное обучение TimeLearner
 
-**Текущий статус06.11:** [единая сводка реализации](ImplementationStatus.ru.md) и [условия допуска научных экспериментов](ExperimentReadiness.ru.md). Полностью принят только исходный этап0; этапы1–12 частичны. Датированные отчёты ниже сохраняют результаты и формулировки своего снимка, а не заменяют текущую сводку.
+[Действующая политика архива M40, доступ и восстановление](ExternalExperimentArchive.ru.md). Коррекция истории касается только корня; сабмодули сохраняют свои SHA. [Область, выполненные проверки и оставшиеся ограничения](RootHistoryCleanup-2026-11-15.ru.md).
+
+**Текущий статус14.11:** [единая сводка реализации](ImplementationStatus.ru.md) и [условия допуска научных экспериментов](ExperimentReadiness.ru.md). Полностью принят только исходный этап0; этапы1–12 частичны. Датированные отчёты ниже сохраняют результаты и формулировки своего снимка, а не заменяют текущую сводку.
+
+[Classic cold4: результат и12 проверенных временных графиков](ClassicCoupledCold4ScientificReport-20261114.ru.md),
+[Branch: локальная нормализация и последующая неоднозначность](N1CoupledScientificReport-20261113.ru.md),
+[Branch: фактические ложные срабатывания при фиксированном пороге](BranchCoupledThresholdScientificReport-20261114.ru.md).
+[Отдельный холодный N0-контроль: условия, принятые предварительные gates и статус Train](StockNormalizationControl.ru.md).
 
 [Полный isolated ASan304 и границы SDK802/shared SDK2e](Native304PartitionASanAcceptance.ru.md).
 
@@ -39,6 +46,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Состояние 30.10: принятые подэтапы, доказательства и полный остаток плана](CurrentStatus-2026-10-30.ru.md).
 - [Приёмка 28.10: full post-fix gate, native completed state и child merges](PooledFullAcceptance.ru.md).
 - [Исходная точка и ход реализации](ImplementationStatus.ru.md).
+- [Компактные Git artifact sets и запрет новых loose scripts в Reports](GitArtifactPublication.ru.md).
 - [Исторический срез всех этапов на 29.10: принятый develop, scoped проверки и оставшаяся работа](CurrentStatus-2026-10-29.ru.md).
 - [Историческая сводка 27.10 и последующие дополнения](CurrentStatus-2026-10-27.ru.md).
 - [Предшествующий аудит 27.10 и история дополнений](PlanCompletionAudit-2026-10-27.ru.md).
@@ -125,3 +133,12 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 - [M40: перенос завершённых runtime и подтверждённая очистка дублей](M40Storage-2026-10-29.ru.md).
 
 - [Проверка принадлежности исходников Git worktree и Elder Bin alias](SourceWorktreeIdentity.ru.md).
+
+
+[Диагностическое storage-вмешательство FeedbackGain](FeedbackProfileScientificReport-2026-11-07.ru.md):
+12 actual probes,4 exact baseline pairs; исходный measurement/physics вопрос сужен,
+новое обучение/классификация и visual QA ещё не завершены.
+
+[Исправление сравнения относительных часов на реальном replay](RelativeClockAlignment.ru.md).
+
+[Training100: exact replay иодиночный отклик при трёх максимумах пачки](HighThresholdSinglePulseScientificReport-2026-11-07.ru.md).

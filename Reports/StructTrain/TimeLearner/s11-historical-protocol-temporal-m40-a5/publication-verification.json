@@ -1,0 +1,168 @@
+{
+  "kind": "historical_protocol_pilot_temporal_server_verification",
+  "tool_root": "3466d963c7fe0a6800b740b35a02dc3b25ae5f41",
+  "primary_evidence_commits": [
+    "18ac0e263b9878b5c59cbaf652fcaec9d29322a5",
+    "72af32bdd057952d94ffe0241a3d6597f6a193f0"
+  ],
+  "complete_cases": 4,
+  "patterns_per_case": 8,
+  "views_per_pattern": 4,
+  "verified_figures": 128,
+  "minimum_font_size": 12,
+  "pixels_per_figure": [
+    1920,
+    1680
+  ],
+  "test_checks_passed": 3,
+  "observations_unchanged": true,
+  "all_processes_closed": true,
+  "lease_released": true,
+  "full_report_cache": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-pilot-temporal-a5/figures",
+  "selected": [
+    {
+      "path": "selected/original-order-gap1.5-phasea-0-positive_response.png",
+      "source_cache_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-pilot-temporal-a5/figures/original-order-gap1.5/phasea-0-positive_response.png",
+      "bytes": 315363,
+      "sha256": "bb4d30349e4393fc0926bcfb98b7622e9fb711c33952159a913379a18db877f2"
+    },
+    {
+      "path": "selected/original-order-gap1.5-phasea-4-positive_response.png",
+      "source_cache_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-pilot-temporal-a5/figures/original-order-gap1.5/phasea-4-positive_response.png",
+      "bytes": 310115,
+      "sha256": "bbce7235295c2d71867ba440c80778241d163f8e3b5f50617777ac3856a557da"
+    },
+    {
+      "path": "selected/original-order-gap1.5-phasea-4-full.png",
+      "source_cache_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-pilot-temporal-a5/figures/original-order-gap1.5/phasea-4-full.png",
+      "bytes": 187704,
+      "sha256": "94bf7a7e6f18e09b0d82e007afec0bbc305fefce34592e3782b0d2a4064f57dc"
+    },
+    {
+      "path": "selected/original-order-gap1.5-phasea-6-positive_response.png",
+      "source_cache_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-pilot-temporal-a5/figures/original-order-gap1.5/phasea-6-positive_response.png",
+      "bytes": 300421,
+      "sha256": "1e579a24b452b2059f1561549e214eb00ea3e24f75387081f6218113c29bead2"
+    },
+    {
+      "path": "selected/original-order-gap1.5-phasea-1-positive_response.png",
+      "source_cache_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-pilot-temporal-a5/figures/original-order-gap1.5/phasea-1-positive_response.png",
+      "bytes": 316246,
+      "sha256": "f62e93b52955985b1c9797598bc8b7e68d87b7130b94f989188abe1b62f94634"
+    },
+    {
+      "path": "selected/rotated-order-gap3-phasea-0-positive_response.png",
+      "source_cache_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-pilot-temporal-a5/figures/rotated-order-gap3/phasea-0-positive_response.png",
+      "bytes": 314716,
+      "sha256": "3251e7267b572175bc8f89c26332d3bcffc9331a884a32268c3d62d1da23e4d6"
+    }
+  ],
+  "rows": [
+    {
+      "case": "original-order-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        0
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "original-order-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        0
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotated-order-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        7
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotated-order-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        7
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    }
+  ],
+  "prior_preparation_failures_preserved": [
+    {
+      "attempt": "a1",
+      "closed": true,
+      "source": "316636e2f8e0f7c53990877d3373797509a4b052",
+      "native_simulation_executed": false
+    },
+    {
+      "attempt": "a2",
+      "closed": true,
+      "source": "316636e2f8e0f7c53990877d3373797509a4b052",
+      "native_simulation_executed": false
+    },
+    {
+      "attempt": "a3",
+      "closed": true,
+      "source": "316636e2f8e0f7c53990877d3373797509a4b052",
+      "native_simulation_executed": false
+    }
+  ],
+  "superseded_visual_report_evidence": "3fb67643307b76e38eedee9cb71133c334fd5ae8",
+  "visual_review_complete": false,
+  "new_native_simulation": false,
+  "whole16_condition_matrix_complete": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

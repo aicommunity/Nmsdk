@@ -1,0 +1,40 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 2,
+  "execution": "completed",
+  "reason": "exit_zero_and_whole_group_closed",
+  "returncode": 0,
+  "wall_seconds": 19.859200280159712,
+  "model_time": null,
+  "runtime_provenance": "loaded_files_captured",
+  "mapping_error": null,
+  "runtime_fingerprint": "db39fd5f27514d3f116e07bde9488360ad5fbc65d8f4f7f77f088e7b32de5a3f",
+  "ownership_scope": "bound_cgroup",
+  "all_processes_closed": true,
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "clear",
+    "error_records": 0,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 0,
+    "reasons": [],
+    "examples": [],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 1788,
+        "sha256": "13262411930acaf32d432ebdd801500c0253ead76820782bdb4d571abb16c8b5"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "contained_streams_match": true,
+    "scientific_verdict": null
+  }
+}

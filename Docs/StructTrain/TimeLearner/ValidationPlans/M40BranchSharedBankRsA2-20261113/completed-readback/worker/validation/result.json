@@ -1,0 +1,38 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s07-branch-shared-bank-rs-m40-a2",
+  "package_fingerprint": "c7ee17129823487a716ef3b7be05a56f23b5efb90e540c34c9e3e32182ef237d",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_resistance_study.NativeBurstResistanceStudyTest.test_declared_grid_on_actual_stopped_model"
+  ],
+  "executed_tests": 1,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_BURST_STUDY_SOURCE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train/native",
+      "files": 653,
+      "fingerprint": "170058243adbdf9fa7b311e43f8e8c2ad0895c99e4fa48d7ebf2aebd43413c4c"
+    },
+    "TIMELEARNER_BURST_STUDY_CONTROLS": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/branch-shared-bank-rs-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40BranchSharedBankRsA2-20261113/fixture",
+      "files": 2,
+      "fingerprint": "b1f202aaea3b13b553fa87f1f3fb8fad8d8338901418143b74c1ea03d246502a"
+    },
+    "TIMELEARNER_BURST_STUDY_CSV": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train/native",
+      "files": 648,
+      "fingerprint": "b680847228f73a81f3681859a81b154757b1c1dfaca259ef2f22b62aede977be"
+    },
+    "TIMELEARNER_BURST_STUDY_RUNTIME": {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1",
+      "files": 2,
+      "fingerprint": "fc00e41a8d8b4d6ecd185dbfee9d33532b49789517bd3a18df1335b68f64ee6e"
+    }
+  },
+  "scientific_verdict": null
+}

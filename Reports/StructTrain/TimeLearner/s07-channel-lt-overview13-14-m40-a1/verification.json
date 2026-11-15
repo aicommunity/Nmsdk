@@ -1,0 +1,343 @@
+{
+  "kind": "closed_worker13_renderer14_validation_passed",
+  "schema_version": 1,
+  "root_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "package_python_files": 441,
+  "package_fingerprint": "629bd6fe86318b5e38251ab4f822a07d01debf4c8a9ab3d88a8896c0636de20d",
+  "source_files": 632,
+  "scopes": [
+    {
+      "scope": "metadata13",
+      "job_id": "s10-owned-plot-cache-metadata13-m40-a1",
+      "tests": 13,
+      "passed": 13,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "actual_log_case_ids_verified": true,
+      "derived_JUnit_not_native_JUnit": true,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "e48069f1f4d858bb582264f07318a628ad9070c30740a029b8b0e296ada50fb9",
+        "unit": "timelearner-f1143d6d-bd10-423c-8865-6f4c59e9776c.service",
+        "invocation_id": "980b61fa28fc4037b1d0a035da61cf8e",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f1143d6d-bd10-423c-8865-6f4c59e9776c.service",
+        "initial_main_pid": 48173,
+        "initial_start_ticks": "325130437",
+        "sha256": "d89fd36fa8de7e5954d5edb7b6e42e80b2ed8d0e93ef4f6b375c4fa03ca5e7c0"
+      },
+      "fresh_kernel_closure": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "e48069f1f4d858bb582264f07318a628ad9070c30740a029b8b0e296ada50fb9",
+          "unit": "timelearner-f1143d6d-bd10-423c-8865-6f4c59e9776c.service",
+          "invocation_id": "980b61fa28fc4037b1d0a035da61cf8e",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f1143d6d-bd10-423c-8865-6f4c59e9776c.service",
+          "initial_main_pid": 48173,
+          "initial_start_ticks": "325130437",
+          "sha256": "d89fd36fa8de7e5954d5edb7b6e42e80b2ed8d0e93ef4f6b375c4fa03ca5e7c0"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-f1143d6d-bd10-423c-8865-6f4c59e9776c.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      },
+      "released_lease": {
+        "token": "ae2b16de-1f24-442d-b16a-359accf574bc",
+        "job_id": "s10-owned-plot-cache-metadata13-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1/bin/python",
+          "pid": 48173,
+          "start_ticks": "325130437",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/plan-channel-lt-overview-validation-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/plan-channel-lt-overview-validation-m40-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-owned-plot-cache-metadata13-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-owned-plot-cache-metadata13-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2"
+          }
+        ],
+        "state": "released",
+        "created": 1794176106.8970997,
+        "deadline": 1794176236.9388878,
+        "updated": 1794176118.6467159,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      "original_terminal": {
+        "operation_passed": true,
+        "operation": "python-validation",
+        "heartbeat_errors": [],
+        "lease_release": "controller only after whole cgroup closure",
+        "selected_validation_scope_requires_source_review": true,
+        "scientific_verdict": null
+      },
+      "controller": {
+        "kind": "timelearner_process_result",
+        "schema_version": 2,
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 11.933467018883675,
+        "model_time": null,
+        "runtime_provenance": "loaded_files_captured",
+        "mapping_error": null,
+        "runtime_fingerprint": "a944099ce46d90d52fbfc66ab1018b5797f0280fc4098b8ece2581b094f1ad9f",
+        "ownership_scope": "bound_cgroup",
+        "all_processes_closed": true,
+        "scientific_verdict": null,
+        "operational_diagnostics": {
+          "kind": "timelearner_operational_diagnostics",
+          "schema_version": 1,
+          "policy": "owned-streams-v1",
+          "status": "clear",
+          "error_records": 0,
+          "warning_records": 0,
+          "unclassified_stderr_chunks": 0,
+          "reasons": [],
+          "examples": [],
+          "streams": [
+            {
+              "path": "stdout.log",
+              "bytes": 2522,
+              "sha256": "cc2c5076d9a5e8ab48dbb4511ef8cd06c2dfedda6417c6dea36dfacf80ebec67"
+            },
+            {
+              "path": "stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "contained_streams_match": true,
+          "scientific_verdict": null
+        }
+      },
+      "fixture_files": 1,
+      "source_and_fixture_before_after_equal": true,
+      "supervisor_capture_is_separate_from_test_and_kernel_authority": true
+    },
+    {
+      "scope": "renderer14",
+      "job_id": "s07-channel-lt-overview-validation-m40-a1",
+      "tests": 14,
+      "passed": 14,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "actual_log_case_ids_verified": true,
+      "derived_JUnit_not_native_JUnit": true,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "84c14d4e3082e685606f1d0de73c27b3641164ff25d73ec556a4c03c5c69533a",
+        "unit": "timelearner-fb77929b-e1d5-48a7-96a4-2ce28ef4116a.service",
+        "invocation_id": "629c10d6f39c41b382c2a612fc6e60c3",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fb77929b-e1d5-48a7-96a4-2ce28ef4116a.service",
+        "initial_main_pid": 64359,
+        "initial_start_ticks": "325138958",
+        "sha256": "e2c4e39ffa1cf729903fa4e4acdb9b2bcee8ce16b42db037d54238307551c3af"
+      },
+      "fresh_kernel_closure": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "84c14d4e3082e685606f1d0de73c27b3641164ff25d73ec556a4c03c5c69533a",
+          "unit": "timelearner-fb77929b-e1d5-48a7-96a4-2ce28ef4116a.service",
+          "invocation_id": "629c10d6f39c41b382c2a612fc6e60c3",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fb77929b-e1d5-48a7-96a4-2ce28ef4116a.service",
+          "initial_main_pid": 64359,
+          "initial_start_ticks": "325138958",
+          "sha256": "e2c4e39ffa1cf729903fa4e4acdb9b2bcee8ce16b42db037d54238307551c3af"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-fb77929b-e1d5-48a7-96a4-2ce28ef4116a.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      },
+      "released_lease": {
+        "token": "ee765e5a-c839-4d6a-84a1-7775caa2c42f",
+        "job_id": "s07-channel-lt-overview-validation-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1/bin/python",
+          "pid": 64359,
+          "start_ticks": "325138958",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/data-channel-lt-overview-fixtures-m40-a1/high",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/data-channel-lt-overview-fixtures-m40-a1/high"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/data-channel-lt-overview-fixtures-m40-a1/low",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/data-channel-lt-overview-fixtures-m40-a1/low"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/data-channel-lt-overview-fixtures-m40-a1/maximum",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/data-channel-lt-overview-fixtures-m40-a1/maximum"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-channel-diagnostics-normal-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-channel-diagnostics-normal-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/plan-channel-lt-overview-validation-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/plan-channel-lt-overview-validation-m40-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-lt-overview-validation-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-lt-overview-validation-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2"
+          }
+        ],
+        "state": "released",
+        "created": 1794176192.109749,
+        "deadline": 1794176332.1287239,
+        "updated": 1794176215.3988132,
+        "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      },
+      "original_terminal": {
+        "operation_passed": true,
+        "operation": "python-validation",
+        "heartbeat_errors": [],
+        "lease_release": "controller only after whole cgroup closure",
+        "selected_validation_scope_requires_source_review": true,
+        "scientific_verdict": null
+      },
+      "controller": {
+        "kind": "timelearner_process_result",
+        "schema_version": 2,
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 23.47510414896533,
+        "model_time": null,
+        "runtime_provenance": "loaded_files_captured",
+        "mapping_error": null,
+        "runtime_fingerprint": "23cb7e1d93c31b516506de0038273e4cc1d5db6c7c1935f01e72ebbc7785669e",
+        "ownership_scope": "bound_cgroup",
+        "all_processes_closed": true,
+        "scientific_verdict": null,
+        "operational_diagnostics": {
+          "kind": "timelearner_operational_diagnostics",
+          "schema_version": 1,
+          "policy": "owned-streams-v1",
+          "status": "clear",
+          "error_records": 0,
+          "warning_records": 0,
+          "unclassified_stderr_chunks": 0,
+          "reasons": [],
+          "examples": [],
+          "streams": [
+            {
+              "path": "stdout.log",
+              "bytes": 3897,
+              "sha256": "d1fab831c7d7220897f7e308c7cff58aaa767be18c1966f823e06f1ebf7535dd"
+            },
+            {
+              "path": "stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "contained_streams_match": true,
+          "scientific_verdict": null
+        }
+      },
+      "fixture_files": 62,
+      "source_and_fixture_before_after_equal": true,
+      "supervisor_capture_is_separate_from_test_and_kernel_authority": true
+    }
+  ],
+  "total_tests": 27,
+  "full_environment_before_after_equal": true,
+  "curated_primary_files": 60,
+  "primary_source_commits": [
+    "e98df4eaaf0d9d4cb38511cab26b7ddaec355e4f",
+    "cd8d32168c3580948d0684f6ccad9f64f8527d94",
+    "e7b73e1fdc6c5d626604eb0e841adfb95d00ea70"
+  ],
+  "old_7930_preparation_records_included": true,
+  "Cpp_or_model_runs": 0,
+  "selected_report_visual_QA_complete": false,
+  "scientific_verdict": null,
+  "created_utc": "2026-11-08T22:30:44.029581+00:00"
+}

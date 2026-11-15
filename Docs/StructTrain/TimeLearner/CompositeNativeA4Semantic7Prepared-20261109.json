@@ -1,0 +1,302 @@
+{
+  "kind": "actual_A4_semantic7_preparation_readback_and_reproduction_notes",
+  "schema_version": 1,
+  "status": "FIXTURE_PREPARED_READER_RESULT_PENDING_ROOT_SOLE_MONITOR",
+  "original_plan_commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+  "actual_evidence": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+  "actual_prep_readback": {
+    "path": "CompositeNativeA4Semantic7Prepared-20261109.actual-readback.json",
+    "bytes": 3595,
+    "sha256": "9f01b4d399096fcf287e6f673de0e52770bfb9c4cc7dfdd2aff40f7b071e2cca",
+    "preserved_original_bytes": true
+  },
+  "actual_remote_preparation_record": {
+    "path": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1/fixture-preparation.json",
+    "bytes": 3196,
+    "sha256": "47861beea29a81ce844094a95ce49729a15a2967fbbdc98ae4a1009dbfbf973d"
+  },
+  "prepared": {
+    "kind": "actual_A4_semantic7_fixture_preparation",
+    "schema_version": 1,
+    "status": "prepared_bytes_verified_tests_not_dispatched",
+    "plan_commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+    "evidence_commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "tool_source": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+    "fixture_root": "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1",
+    "plan_root": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1",
+    "tests_dispatched": false,
+    "scientific_verdict": null,
+    "registry_capacity": null,
+    "own_lease_token": "6c6b650c-a1ef-45c2-8f2d-067c9dd5c26c",
+    "allowed_write_roots": [
+      "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1",
+      "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1"
+    ],
+    "CEC_source_read_only": true,
+    "A4_original_source_runtime_untouched_by_command": true,
+    "flat_git_blob_records": {
+      "suite.json": {
+        "bytes": 1788,
+        "sha256": "11a65d8d7fdebb622f7349cbe85b88a74b8badd704e524e5fd32f6a4ba637aae"
+      },
+      "request.json": {
+        "bytes": 1055,
+        "sha256": "5b34f275517fd42f62407559da1db8f369de8087a68b9addbeddff9903d90c66"
+      },
+      "fixture-manifest.json": {
+        "bytes": 62330,
+        "sha256": "4c6fdf511166693ba427a670648fe27cf2faeda22688ca191715f8fe16530286"
+      },
+      "members.txt": {
+        "bytes": 23035,
+        "sha256": "dba4206bdd5cd4ab46903861400e525eec6c23d83e1f24f22954d82d60ece6ca"
+      },
+      "SHA256SUMS": {
+        "bytes": 19267,
+        "sha256": "d887e6604a2ae7640bf8275632ea67b2658ed96ee04f0f934d529c0d3a653fc3"
+      }
+    },
+    "archive_sha256": "15b990e1825f7aaac51dfd7a252215253a429df871c02c418ccb25cc8dc25008",
+    "fixture_fingerprint": "78f286701300c7d365e16d25bb64fca430a06b23e08b638396249a87b89056db",
+    "fixture_files": 157,
+    "fixture_bytes": 74969578,
+    "projection_allocated_bytes_including_plan": 100155392,
+    "actual_elapsed_seconds": 8.17357537895441,
+    "source_files": 632,
+    "package_fingerprint": "629bd6fe86318b5e38251ab4f822a07d01debf4c8a9ab3d88a8896c0636de20d",
+    "source_snapshot": {
+      "path": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1/fixture-prep-CEC-source-snapshot.json",
+      "bytes": 258163,
+      "sha256": "921beef0680b6468d30026e8ea38f076a9c713ded317a10e8a9e79849348e476"
+    },
+    "fixture_snapshot": {
+      "path": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1/fixture-prep-frozen-fixture-snapshot.json",
+      "bytes": 54731,
+      "sha256": "b254182e2bbc622fbb005c41020cde43b84337ae4f36519c3d8c1148ee8f67e1"
+    },
+    "tar_argv": [
+      "tar",
+      "--extract",
+      "--xz",
+      "--file=/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1/primary.tar.xz",
+      "--directory=/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1",
+      "--strip-components=4",
+      "--no-recursion",
+      "--no-same-owner",
+      "--no-same-permissions",
+      "--verbatim-files-from",
+      "--files-from=/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1/members.txt"
+    ],
+    "own_prep_lease_released": true
+  },
+  "prehistory": {
+    "operator_receipts": [
+      {
+        "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\CompositeNativeA4Semantic7RootDiscovery.json",
+        "bytes": 4200,
+        "sha256": "b679d2973cc1e93e474f907c5398d044f4f0a7e28445f739069bd077b66a7e50",
+        "role": "original operator metadata receipt retained by Root; no semantic assertion inferred"
+      },
+      {
+        "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\CompositeNativeA4Semantic7RootPrepTransport.json",
+        "bytes": 897,
+        "sha256": "c321a37e9800a61d59ca033b8ea998113cda17a8fe89c2f8414f3861a1323076",
+        "role": "original operator metadata receipt retained by Root; no semantic assertion inferred"
+      },
+      {
+        "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\CompositeNativeA4Semantic7RootPrepTransportAfterControl.json",
+        "bytes": 4069,
+        "sha256": "2de041b0607ba2179d59059282c8eadc3654b3436334896c13d9137a104b22bd",
+        "role": "original operator metadata receipt retained by Root; no semantic assertion inferred"
+      }
+    ],
+    "v1_v2_v3_inputs_preserved": true,
+    "first_gnu_prep_refused_before_lease_flatfiles_fixture": true,
+    "missing_root_control_OID": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+    "Root_appended_original_gitignore_and_gitmodules_only": true,
+    "small_append_parent_reported": {
+      "bytes": 1247,
+      "sha256_prefix": "b96fa9db",
+      "full_hash_not_inferred": true
+    },
+    "same_GNUtar_command_used_after_append": true,
+    "local_JavaScript_postparse_error_did_not_rerun_remote_preparation": true,
+    "not_Cpp_source_math_or_codec_repair": true
+  },
+  "reproduction_pack_offline_only": {
+    "kind": "reviewed_metadata_plan_and_primary_Git_object_pack",
+    "plan_commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+    "evidence_commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "objects": 3853,
+    "tree_objects": 3839,
+    "selected_blobs": [
+      {
+        "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+        "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.ru.md",
+        "git_blob": "d2af00769c2e41fde6726e1823709ff77e21fe5d",
+        "bytes": 8180,
+        "sha256": "a9641d1ad530620dc81ec544f3cdb4236f54f4beb304e63665064b081bd97c7c",
+        "materialized_checkout": true
+      },
+      {
+        "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+        "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.json",
+        "git_blob": "f38ff9b1b617165acbd6496cf19049a945cb3c90",
+        "bytes": 57980,
+        "sha256": "8353b0ea1977e0e576a5fb5fc195a3748415a032cb98803405f9162adb63cc76",
+        "materialized_checkout": true
+      },
+      {
+        "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+        "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.fixture-manifest.json",
+        "git_blob": "6c6d722b72fb8aac065618fa3fdbdddbd7a8ea5a",
+        "bytes": 62330,
+        "sha256": "4c6fdf511166693ba427a670648fe27cf2faeda22688ca191715f8fe16530286",
+        "materialized_checkout": true
+      },
+      {
+        "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+        "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.suite.json",
+        "git_blob": "ba4689915afd3d14370c42607283f1ce30dd121a",
+        "bytes": 1788,
+        "sha256": "11a65d8d7fdebb622f7349cbe85b88a74b8badd704e524e5fd32f6a4ba637aae",
+        "materialized_checkout": true
+      },
+      {
+        "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+        "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.request.json",
+        "git_blob": "2e610436471f181bd0c51a7544b97c9db8cb2154",
+        "bytes": 1055,
+        "sha256": "5b34f275517fd42f62407559da1db8f369de8087a68b9addbeddff9903d90c66",
+        "materialized_checkout": true
+      },
+      {
+        "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+        "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.members.txt",
+        "git_blob": "b7f1a949d6e0b4e6d2ac15a884ff3dc666fe1b7e",
+        "bytes": 23035,
+        "sha256": "dba4206bdd5cd4ab46903861400e525eec6c23d83e1f24f22954d82d60ece6ca",
+        "materialized_checkout": true
+      },
+      {
+        "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+        "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.SHA256SUMS",
+        "git_blob": "6edb323a467bde9f4f9fc506036c5a548f160e2a",
+        "bytes": 19267,
+        "sha256": "d887e6604a2ae7640bf8275632ea67b2658ed96ee04f0f934d529c0d3a653fc3",
+        "materialized_checkout": true
+      },
+      {
+        "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+        "path": ".gitattributes",
+        "git_blob": "5bba2f9531c39afb69d1fd482a68f401d02f6fec",
+        "bytes": 616,
+        "sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef",
+        "materialized_checkout": false
+      },
+      {
+        "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+        "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/primary.tar.xz",
+        "git_blob": "0634e7f7f2d820c749571a9322e1ded4e8c140f9",
+        "bytes": 1836352,
+        "sha256": "15b990e1825f7aaac51dfd7a252215253a429df871c02c418ccb25cc8dc25008",
+        "materialized_checkout": false
+      },
+      {
+        "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+        "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/bundle.json",
+        "git_blob": "1818e031a257e0657653c8aa3b5950b031eead67",
+        "bytes": 1015442,
+        "sha256": "e67428fbcf469781b1e8bb8613b49b2b7a80a7faf4d00fc17a052eafca936fd4",
+        "materialized_checkout": false
+      },
+      {
+        "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+        "path": ".gitignore",
+        "git_blob": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+        "bytes": 2042,
+        "sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6",
+        "materialized_checkout": false
+      },
+      {
+        "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+        "path": ".gitmodules",
+        "git_blob": "878b41e2626ac2cc6a132f498949e89306ed122b",
+        "bytes": 967,
+        "sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809",
+        "materialized_checkout": false
+      }
+    ],
+    "code_source_blobs_included": false,
+    "CEC_source_repacked_or_changed": false,
+    "root_gitattributes_object_included_for_checkout_lookup": true,
+    "root_gitattributes_materialized": false,
+    "pack_bytes": 4123008,
+    "pack_sha256": "c79524436b40f0a09c01b0bbf58d6730bee31ab109e68a6586b77feffac461e1",
+    "intended_fresh_destination": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1",
+    "only_checkout_pattern": "/Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.*",
+    "root_gitignore_object_included_for_git_status": true,
+    "root_gitignore_materialized": false,
+    "prior_v2_transport_negative": "Root reported gitstatus untracked-all required root.gitignore; failed before any lease/flatfile/fixture creation; preserved RootPrepTransport JSON",
+    "not_code_or_semantic_failure": true,
+    "root_gitmodules_object_included_for_Git_metadata_lookup": true,
+    "root_gitmodules_materialized": false,
+    "status": "LOCAL_OFFLINE_REPRODUCTION_ONLY_ALREADY_SUCCESSFUL_SERVER_PREPARATION_MUST_NOT_BE_REPEATED",
+    "all_three_root_control_objects_ODB_only": [
+      ".gitattributes",
+      ".gitignore",
+      ".gitmodules"
+    ],
+    "Root_server_correction": "Root appended original .gitignore and .gitmodules Git objects only after pre-lease refusal, then original fixed command succeeded; no model/config/CSV edits"
+  },
+  "all_three_git_controls_ODB_only": [
+    {
+      "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+      "path": ".gitattributes",
+      "git_blob": "5bba2f9531c39afb69d1fd482a68f401d02f6fec",
+      "bytes": 616,
+      "sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef",
+      "materialized_checkout": false
+    },
+    {
+      "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+      "path": ".gitignore",
+      "git_blob": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+      "bytes": 2042,
+      "sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6",
+      "materialized_checkout": false
+    },
+    {
+      "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+      "path": ".gitmodules",
+      "git_blob": "878b41e2626ac2cc6a132f498949e89306ed122b",
+      "bytes": 967,
+      "sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809",
+      "materialized_checkout": false
+    }
+  ],
+  "operator_helper_v2": {
+    "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\timelearner_deliver_empty_private_source_v2.py",
+    "sha256": "87ee30282b008f7e2d8870565f6b2532bcf3a907833c81add36e216474b58bc4",
+    "mechanism": "same existing SSH/stdin delivery; actual physical omitted prefixes and actual sparse patterns only; old helper untouched"
+  },
+  "subsequent_dispatch": {
+    "authority": "Root alone",
+    "message_received_authorized_dispatched_once": true,
+    "Node_task_key": "semantic7-production-readers",
+    "local_transport_PID": 15480,
+    "local_PID_is_not_remote_worker_or_kernel_binding": true,
+    "second_launch_or_repeat_preparation_forbidden": true,
+    "reader_test_outcome_unassessed_here": true
+  },
+  "scope": {
+    "source_CEC_files_unchanged": 632,
+    "fixture_cases": 6,
+    "fixture_files": 157,
+    "no_seventh_fixture": true,
+    "no_tests_native_plot_executed_by_this_agent": true,
+    "no_scientific_verdict": true,
+    "no_full_stage3_5_acceptance": true,
+    "no_remote_update_from_V4_pack": true
+  }
+}

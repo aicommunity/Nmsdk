@@ -1,0 +1,46 @@
+{
+  "source_commit": "5d0ac867ac9786b5b6b846eec1cd5b2aae8a62c1",
+  "tests": {
+    "tests_run": 5,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "cli": [
+    {
+      "label": "help",
+      "returncode": 0,
+      "owner": {
+        "pid": 1177937,
+        "start_ticks": "306354624"
+      },
+      "closed": true,
+      "arguments": [
+        "stock-recovery-evaluation",
+        "--help"
+      ]
+    },
+    {
+      "label": "reject-incomplete",
+      "returncode": 2,
+      "owner": {
+        "pid": 1177938,
+        "start_ticks": "306354629"
+      },
+      "closed": true,
+      "arguments": [
+        "stock-recovery-evaluation",
+        "prepare",
+        "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-cli-a1/prepared",
+        "--bin-repository",
+        "/media/user/Data/TimeLearnerRefactor/data-phasea-eight-pattern-matrix-a1",
+        "--output",
+        "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-evaluation-gate-a1/must-not-exist"
+      ]
+    }
+  ],
+  "new_native_evaluation": false,
+  "completed_schema5_export_verified": false,
+  "scientific_verdict": null
+}

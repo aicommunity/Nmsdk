@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-reservation-duplicate-preflight5-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "6bb8baeba6e01999860ad31813ab089b7a194e65",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-preflight-reservation-duplicates-m40-a1",
+      "commit": "b950cc7b30a5017f55531a7bfa2ea56de49d01ea"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/preflight-reservation-duplicates-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ReservationDuplicatePreflight-20261110/suite.json",
+      "sha256": "406d66d2f11e2b0e415c3f980efd621a77806b8c07fd40010fed77619392cb8c"
+    },
+    "fixtures": {}
+  }
+}

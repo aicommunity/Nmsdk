@@ -1,0 +1,25 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "composite-native-actual-a4-six-archives-7-m40-a1",
+  "package_fingerprint": "629bd6fe86318b5e38251ab4f822a07d01debf4c8a9ab3d88a8896c0636de20d",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_existing_C0_and_warm_accounting_are_retained",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_partial_and_ambiguous_exports_do_not_promote_invalid_measurements",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_sidecars_match_each_retained_record_without_filename_identity_claim",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_six_service_exports_replay_all_retained_primary_and_counters",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_csv_relocation_preserves_actual_measurement_proofs_but_changes_document_identity",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_resigned_incomplete_native_group_or_counter_changes_fail",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_supplied_external_mirror_cannot_fall_back_to_good_embedded_primary"
+  ],
+  "fixtures": {
+    "TIMELEARNER_COMPOSITE_NATIVE_ARCHIVES": {
+      "pattern": "**/*.*",
+      "files": 157,
+      "fingerprint": "78f286701300c7d365e16d25bb64fca430a06b23e08b638396249a87b89056db"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s11-stock-n0-classic-threshold-positive-report-m40-a1",
+  "package_fingerprint": "2c960aa5224423c69f87e877c0e13b08ae7df47af2622bb32559b492326d221c",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_threshold_positive_response_report"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_threshold_positive_response_report.ThresholdPositiveResponseReportTest.test_all_patterns_and_channels_keep_native_samples_with_explicit_clipping"
+  ],
+  "fixtures": {
+    "TIMELEARNER_THRESHOLD_COMPLETED_STUDY": {
+      "pattern": "**/*.json",
+      "files": 74,
+      "fingerprint": "03249a47f193ca68880c2c704154ecf5f9c65605db52c238e6301692b690cb7b"
+    }
+  }
+}

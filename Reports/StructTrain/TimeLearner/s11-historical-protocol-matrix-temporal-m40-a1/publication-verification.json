@@ -1,0 +1,397 @@
+{
+  "kind": "historical_protocol_matrix_temporal_server_verification",
+  "tool_root": "7499058cc0bdcfa506bf020e8336e633050738b4",
+  "primary_evidence_commits": [
+    "657e48449626ac1caf6362ffe1d53685434f2f83",
+    "18ac0e263b9878b5c59cbaf652fcaec9d29322a5",
+    "72af32bdd057952d94ffe0241a3d6597f6a193f0"
+  ],
+  "complete_cases": 16,
+  "patterns_per_case": 8,
+  "views_per_pattern": 4,
+  "verified_figures": 512,
+  "minimum_font_size": 12,
+  "pixels_per_figure": [
+    1920,
+    1680
+  ],
+  "previous_index_tests_passed": 3,
+  "new_native_simulations": false,
+  "reused_images": 128,
+  "new_images": 384,
+  "observations_unchanged": true,
+  "all_processes_closed": true,
+  "lease_released": true,
+  "full_report_cache": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-matrix-temporal-a1/figures",
+  "selected": [
+    {
+      "path": "selected/rotation3-gap3-phasea-0-positive_response.png",
+      "source_cache_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-matrix-temporal-a1/figures/rotation3-gap3/phasea-0-positive_response.png",
+      "bytes": 314722,
+      "sha256": "f46f4d7c8a4ff0be179c54f0c7eb09f0eb523a02eb4d26c158bad87fa620ca83"
+    },
+    {
+      "path": "selected/rotation4-gap1.5-phasea-4-positive_response.png",
+      "source_cache_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-matrix-temporal-a1/figures/rotation4-gap1.5/phasea-4-positive_response.png",
+      "bytes": 308793,
+      "sha256": "3a3fa821de3ecdb347ee962e2c6d5ba13c83ad220d7fe6b670d774e7998205cd"
+    },
+    {
+      "path": "selected/rotation7-gap3-phasea-0-positive_response.png",
+      "source_cache_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-matrix-temporal-a1/figures/rotation7-gap3/phasea-0-positive_response.png",
+      "bytes": 314593,
+      "sha256": "2aee6aad13b35e50431c124e0affe114777ce02602c30744a4c74dcf747c97b9"
+    },
+    {
+      "path": "selected/rotation7-gap3-phasea-1-positive_response.png",
+      "source_cache_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-matrix-temporal-a1/figures/rotation7-gap3/phasea-1-positive_response.png",
+      "bytes": 316158,
+      "sha256": "189a5dbff13176831b96cc314d4790a48ccf20fe19c10c80fd7cb605d7224af9"
+    }
+  ],
+  "rows": [
+    {
+      "case": "original-order-gap1.5",
+      "condition": "rotation0-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        0
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "original-order-gap3",
+      "condition": "rotation0-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        0
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotated-order-gap1.5",
+      "condition": "rotation1-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        7
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotated-order-gap3",
+      "condition": "rotation1-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        7
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation2-gap1.5",
+      "condition": "rotation2-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        6
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation2-gap3",
+      "condition": "rotation2-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        6
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation3-gap1.5",
+      "condition": "rotation3-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        5
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation3-gap3",
+      "condition": "rotation3-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        5
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation4-gap1.5",
+      "condition": "rotation4-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        4
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation4-gap3",
+      "condition": "rotation4-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        4
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation5-gap1.5",
+      "condition": "rotation5-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        3
+      ],
+      "FP_sample_ids": [
+        "phasea-6",
+        "phasea-4"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation5-gap3",
+      "condition": "rotation5-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        3
+      ],
+      "FP_sample_ids": [
+        "phasea-6",
+        "phasea-4"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation6-gap1.5",
+      "condition": "rotation6-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        2
+      ],
+      "FP_sample_ids": [
+        "phasea-6",
+        "phasea-4"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation6-gap3",
+      "condition": "rotation6-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        2
+      ],
+      "FP_sample_ids": [
+        "phasea-6",
+        "phasea-4"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation7-gap1.5",
+      "condition": "rotation7-gap1.5",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        1
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    },
+    {
+      "case": "rotation7-gap3",
+      "condition": "rotation7-gap3",
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "native_correct": 6,
+      "target_positions": [
+        1
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "frozen_neuron_sha256": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "figures": 32
+    }
+  ],
+  "prior_preparation_failures_preserved": [],
+  "reused_temporal_evidence": "5a8048ad2eb0349c5b09ab21f1267c64d550f90d",
+  "visual_review_complete": false,
+  "new_native_simulation": false,
+  "whole16_condition_matrix_complete": true,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

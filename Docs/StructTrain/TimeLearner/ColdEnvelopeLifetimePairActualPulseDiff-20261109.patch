@@ -1,0 +1,169 @@
+diff --git a/Core/TimeLearner/NativeCompositeTrainingAttempt.cpp b/Core/TimeLearner/NativeCompositeTrainingAttempt.cpp
+index c084b01..3742dc1 100644
+--- a/Core/TimeLearner/NativeCompositeTrainingAttempt.cpp
++++ b/Core/TimeLearner/NativeCompositeTrainingAttempt.cpp
+@@ -46,22 +46,10 @@ template<class Owner> void NativeCompositeTrainingAttempt::Bind(Owner& owner) {
+         owner.NativeTrainingControl.State()!=NativeTrainingState::Searching,"composite_train_owner_service_already_active");
+     ownerLife=owner.ObserveLifecycle();
+     observeOwner=[&owner](){return owner.ObserveLifecycle();};
+-    auto& control=owner.NativeTrainingControl;
+-    if(!control.ownerControlLifetime)
+-        control.ownerControlLifetime=std::make_shared<const NativeTrainingService::OwnerControlLifetime>();
+-    requireOwnerControl=[this,&owner,observed=std::weak_ptr<const NativeTrainingService::OwnerControlLifetime>(control.ownerControlLifetime)](){
+-        Require(!cancelled && ownerLife.IsCurrent(),"expired_composite_training_attempt");
+-        if(!owner.IsNeedToTrain.GetData())throw CompositeTrainingStopped();
+-        const auto& current=owner.NativeTrainingControl;
+-        // An owned actor is constructed before service publication. A private
+-        // restart/refresh has already replaced its cancelled/lifecycle lease;
+-        // neither this exception nor Finished refreshes a manual observation.
+-        if(current.composite.get()==this)return;
+-        const auto state=current.State();
+-        Require(state!=NativeTrainingState::CapturingReferences && state!=NativeTrainingState::Searching,
+-            "another_native_training_service_owns_executor");
+-        const auto live=observed.lock();
+-        Require(bool(live) && live==current.ownerControlLifetime,"native_training_owner_control_replaced");
++    requireOwnerControl=[this,&owner](){
++        const auto state=owner.NativeTrainingControl.State();
++        if(state==NativeTrainingState::CapturingReferences || state==NativeTrainingState::Searching)
++            Require(owner.NativeTrainingControl.composite.get()==this,"another_native_training_service_owns_executor");
+     };
+     initialEpoch=owner.NativeTrainingControl.ModelEpoch();
+     bindings=[&owner](){return owner.NativeProbeModelBindings();};
+@@ -74,7 +62,6 @@ template<class Owner> void NativeCompositeTrainingAttempt::Bind(Owner& owner) {
+         Require(ownerLife.IsCurrent(),"composite_train_owner_lifecycle_changed");
+         if(beforeNativeQueue)beforeNativeQueue(request);
+         Require(!cancelled && ownerLife.IsCurrent(),"composite_train_queue_interrupted");
+-        requireOwnerControl();
+         ownedRawRun=request.specification.runId;ownedRawTrial=request.specification.trialId;
+         // Only the executor's copy retains the actor. Its reusable group
+         // prototype must not form actor -> group -> callback -> actor cycles.
+@@ -283,7 +270,6 @@ void NativeCompositeTrainingAttempt::InitializeShared(VerificationProtocol p,Com
+     lease=std::make_shared<CompositeTrainingDetail::LiveLease>();
+     lease->requireCurrent=[this](){
+         Require(!cancelled && ownerLife.IsCurrent(),"expired_composite_training_attempt");
+-        requireOwnerControl();
+         if(!adapter.requested())throw CompositeTrainingStopped();
+     };
+     CheckBoundary();
+@@ -641,7 +627,6 @@ void NativeCompositeTrainingAttempt::RestartOwned(CompositeAttemptLimits value,d
+     liveAttemptBinding=Hash(QJsonArray{Text(ownerScope),QString::number(qulonglong(generation))});
+     lease=std::make_shared<CompositeTrainingDetail::LiveLease>();
+     lease->requireCurrent=[this](){Require(!cancelled && ownerLife.IsCurrent(),"expired_composite_training_attempt");
+-        requireOwnerControl();
+         if(!adapter.requested())throw CompositeTrainingStopped();};
+     issuedGroups=completedNativeProbes=totalSamples=activeSamples=0;logicalTrials.clear();
+     group.reset();prepared.reset();measurement.reset();selection.reset();activeIdentity.reset();rawTrials.clear();
+@@ -728,7 +713,6 @@ void NativeCompositeTrainingAttempt::RefreshOwnedAfterEdit(const std::string& re
+     liveAttemptBinding=Hash(QJsonArray{Text(ownerScope),QString::number(qulonglong(generation))});
+     lease=std::make_shared<CompositeTrainingDetail::LiveLease>();
+     lease->requireCurrent=[this](){Require(!cancelled && ownerLife.IsCurrent(),"expired_composite_training_attempt");
+-        requireOwnerControl();
+         if(!adapter.requested())throw CompositeTrainingStopped();};
+     // Attempt clocks/counters and immutable source family are NOT restarted.
+ }
+diff --git a/Core/TimeLearner/NativeTrainingService.cpp b/Core/TimeLearner/NativeTrainingService.cpp
+index 81f0a48..c6e51fb 100644
+--- a/Core/TimeLearner/NativeTrainingService.cpp
++++ b/Core/TimeLearner/NativeTrainingService.cpp
+@@ -126,8 +126,7 @@ void NativeTrainingService::Start(NativeTrainingPlan value,const NativeTrainingA
+     referenceProbes=invalidReferences=0;if(!references){referenceEvidence.clear();referencePackets.clear();}
+     finalPackets.clear();observedPackets.clear();incompleteCaptureConstraint.reset();
+     certificate.reset();search.reset();activeAction.reset();
+-    waiting=false;reason.clear();outcome=TrainingStatus::Searching;
+-    InvalidateOwnerControlLifetime();++attempt;
++    waiting=false;reason.clear();outcome=TrainingStatus::Searching;++attempt;
+     plan.search.runId+="/session/"+std::to_string(attempt);
+     state=NativeTrainingState::CapturingReferences;
+     if(references)BeginSearch(a);
+@@ -378,7 +377,6 @@ void NativeTrainingService::FailConfiguration(const std::string& diagnostic)
+ {Finish(TrainingStatus::InvalidModel,diagnostic);}
+ void NativeTrainingService::ResetControl()
+ {
+-    InvalidateOwnerControlLifetime();
+     if(composite){composite->RevokeLive();++compositeGeneration;}
+     if(!references && attempt>0 && !plan.search.initialModelRevision.empty() && !incompleteCaptureConstraint)
+         incompleteCaptureConstraint.emplace(plan.search.initialModelRevision,plan.search.initialModelEpoch);
+diff --git a/Core/TimeLearner/NativeTrainingService.h b/Core/TimeLearner/NativeTrainingService.h
+index 9681513..d34eb4e 100644
+--- a/Core/TimeLearner/NativeTrainingService.h
++++ b/Core/TimeLearner/NativeTrainingService.h
+@@ -2,7 +2,6 @@
+ #include "NativeModelEditor.h"
+ #include "NativeCompositeTrainingAttempt.h"
+ #include <functional>
+-#include <memory>
+ #include <utility>
+ #include <set>
+ 
+@@ -139,12 +138,6 @@ public:
+ private:
+     friend class NativeCompositeTrainingAttempt;
+     friend class NativeCompositeStateFactory;
+-    // Process-local owner-control identity only. Portable accounting counters
+-    // and model/family proofs cannot recreate it. Bind allocates lazily;
+-    // control takeover/reset invalidates without allocation or callbacks.
+-    struct OwnerControlLifetime {};
+-    std::shared_ptr<const OwnerControlLifetime> ownerControlLifetime;
+-    void InvalidateOwnerControlLifetime() noexcept {ownerControlLifetime.reset();}
+     NativeTrainingState state=NativeTrainingState::Idle;
+     TrainingStatus outcome=TrainingStatus::Searching;
+     std::string reason,referenceBinding;
+diff --git a/Core/TimeLearner/NativeTrainingServiceComposite.cpp b/Core/TimeLearner/NativeTrainingServiceComposite.cpp
+index 4bfaa92..1a58f4c 100644
+--- a/Core/TimeLearner/NativeTrainingServiceComposite.cpp
++++ b/Core/TimeLearner/NativeTrainingServiceComposite.cpp
+@@ -144,7 +144,6 @@ void NativeTrainingService::StartComposite(NativeTrainingPlan value,const Native
+     compositeCancellationDiagnostics.clear();
+     if(!references){referencePackets.clear();referenceEvidence.clear();}
+     certificate.reset();search.reset();activeAction.reset();waiting=false;compositeHarvested=true;reason.clear();outcome=TrainingStatus::Searching;
+-    InvalidateOwnerControlLifetime();
+     ++attempt;++compositeGeneration;plan.search.runId+="/session/"+std::to_string(attempt);
+     state=NativeTrainingState::CapturingReferences;incompleteCaptureConstraint.reset();
+     if(references)CompositeBeginSearch(a);
+@@ -204,7 +203,6 @@ void NativeTrainingService::StartCandidateWindowComposite(NativeTrainingPlan val
+     auto binding=revision;actor->CheckBoundary();actor->CheckClock(m,NativeTrainingWallTime());
+     static_assert(std::is_nothrow_move_assignable_v<NativeTrainingPlan>);
+     static_assert(std::is_nothrow_move_assignable_v<std::optional<TrainingCapacitance>>);
+-    InvalidateOwnerControlLifetime();
+     plan=std::move(runtime);composite.swap(actor);compositeSourceBinding.swap(source);compositeInitialConfiguration.swap(initial);
+     compositeOwnerFamily.swap(family);compositeRecords.swap(records);compositePrimaryBytes=bytes;compositeCapacitance=std::move(capacitance);
+     compositeCandidateReferences.swap(closed);search.swap(preparedSearch);attempt=nextAttempt;++compositeGeneration;
+@@ -591,7 +589,6 @@ void NativeTrainingService::StopComposite(const NativeTrainingAdapter& a,Trainin
+     DeliverCompositeRaw(a,actor);
+ }
+ void NativeTrainingService::CaptureCompositeInterrupt(const NativeTrainingAdapter& a,const std::string& diagnostic) {
+-    InvalidateOwnerControlLifetime();
+     if(!composite)return;const auto actor=composite;
+     ++compositeGeneration;
+     actor->InterruptOwnedRaw(diagnostic,true);
+@@ -600,7 +597,6 @@ void NativeTrainingService::CaptureCompositeInterrupt(const NativeTrainingAdapte
+     waiting=false;compositeRequest.reset();
+ }
+ void NativeTrainingService::InterruptComposite(const NativeTrainingAdapter& a,const std::string& diagnostic) {
+-    InvalidateOwnerControlLifetime();
+     if(!composite)return;const auto actor=composite;
+     // Fresh authority for this actual owner hook, not a refreshed training
+     // lease. It expires if a callback starts another Reset/Default operation.
+diff --git a/Docs/TimeLearner/ManualControlLifetime.ru.md b/Docs/TimeLearner/ManualControlLifetime.ru.md
+deleted file mode 100644
+index 5eac989..0000000
+--- a/Docs/TimeLearner/ManualControlLifetime.ru.md
++++ /dev/null
+@@ -1,17 +0,0 @@
+-# Private native owner control lifetime
+-
+-Статус: source implementation для отдельного server gate, без runtime acceptance. Base Pulse `800f92ae1f9e0133cefc0ccfe36abc3d8c99727f`; unfixed actual-native source reproducer Root `f74b9fbf9ece38668396c21fa569d688f595bb05` остаётся неизменённым. Никаких local C++ builds/numerics или server/cache updates не выполнялось. Full248 и S3-B470 остаются самостоятельными gates; package6/CLI/defaults не включены.
+-
+-`NativeTrainingService` хранит один private shared empty identity token; actor Bind получает weak observation в fallible native construction. Никакой JSON/config/proof/counter не создаёт такой token. Reset/interrupt и успешный Start3/4/5 commit вызывают allocation-free `reset()`. Finished ничего не mint-ит/не восстанавливает. Saved Record/archive/DATA decoder не зависят от token и остаются читаемыми после отзыва.
+-
+-Общий actor guard сначала проверяет !cancelled и текущий Rdk owner lifecycle, затем actual Need. Exact `service.composite.get()==this` разрешён для prepublication/owned restart/edit; он не обходит эти проверки и не оживляет прежний revoked lease. Иначе service должен быть не Active, weak lock обязательно nonnull И равен CURRENT service token. Оба null запрещены. Новый manual actor после Finished получает current token; старый actor не обновляет свой observation.
+-
+-CheckClock/CheckBoundary, все три private live lease factories (initial/restart/edit) и adapter.queue после beforeNativeQueue callback используют один guard. Поэтому open Arm и closed Consume не обходят takeover. Executor generation checks take/cancel и все прежние `attempt/compositeGeneration` increments/order/math сохранены. Raw/notification/sink callback bodies остаются прежними; CaptureCompositeInterrupt имеет только новый начальный allocation-free invalidation. Никаких nested Calculate, component Reset/Build calls, parameter writes, per-tick physics repairs или изменений tolerance/target/assignment нет.
+-
+-ResetControl инвалидирует token даже при отсутствии stored composite. Поэтому конкретный Begin, реально сбросивший executor, отзывает old manual authority и при последующем InvalidModel до constructor/commit. Early Begin refusal ДО executor Reset не добавляет takeover. Portable imported prepared service не содержит live token; move replacement уничтожает старую control identity, не воссоздавая её из sessions. Per-probe child Reset, свои N+2 next groups и штатный owned edit не инвалидируют service token; initial family/P0/C0/raw targets остаются immutable.
+-
+-Новый reason `native_training_owner_control_replaced` означает stale live authority, а не ошибку physics/measurement/DATA. При actual Need=false сохраняется `CompositeTrainingStopped`/ExternalStop. Это не обещание наблюдать невидимый direct-value ABA или общая политика одновременных manual actors. Return values Build/Calculate/Reset не используются как ошибки.
+-
+-Для приёмки требуются отдельно: unfixed negative outcomes; repaired f74 4 controls; failed Begin без stored composite; actual scalar3/fixed4 takeover; NEW manual-after-Finished; own next-group/edit/warm/open Arm/callback reentry; old full248 and source470/lifecycle/math A-B. Сходимость, package6/summary7, independent primary replay и полный Train→Test этим source patch не объявлены завершёнными.
+-
+-Source follow-up после353: public `InterruptComposite` тоже инвалидирует token ДО своего `if(!composite)return`. Ранее353 invalidation стояло лишь в вызываемом CaptureCompositeInterrupt, до которого этот ранний выход не доходил. Capture сохраняет свой guard для прямого StopComposite; повторный reset пустого token allocation-free и не меняет поколения/callback order. NativeLearnerLifecycle routing только protocol4/5 не расширяется: обычные Reset/Default дополнительно защищены ResetControl/Rdk lifecycle, здесь исправляется низкоуровневый public interrupt contract. Runtime coverage этого follow-up требует отдельного реального no-stored-composite control, не выводится из source review.

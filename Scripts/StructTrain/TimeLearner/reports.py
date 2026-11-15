@@ -28,6 +28,16 @@ def render_diagnostic_evaluation(source: Path, model: Path, stopped: Path, outpu
     return _render_evaluation(source, model, output, source_case=load_case(stopped))
 
 
+def render_diagnostic_evaluation_case(source: Path, model: Path, source_case, output: Path):
+    """Render an audited embedded stopped case through the same diagnostic scorer.
+
+    Compact recordings embed the source in the recognition model rather than
+    retaining a second copy of the standalone stopped-state file.
+    """
+    require(source_case is not None, 'diagnostic_report_requires_source_case')
+    return _render_evaluation(source, model, output, source_case=source_case)
+
+
 def _render_evaluation(source, model, output, *, calibration_probe=False, source_case=None):
     runtime = plotting_runtime()
     diagnostic = source_case is not None
@@ -42,8 +52,11 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
     analysis = (score_partial_diagnostic_evaluation(spec, observations, package, source_case)
                 if diagnostic else scorer(spec, observations, package))
     calibrated = package.get("kind") == "timelearner_calibrated_recognition_state"
+    diagnostic_candidate = diagnostic and package.get('kind') == 'timelearner_diagnostic_threshold_candidate'
+    if diagnostic_candidate:
+        context_label += ' | fixed diagnostic threshold '+str(package['threshold'])+'; not calibrated'
     context = package["source_candidate"]["source_recognition"] if calibrated else (
-        package["source_recognition"] if calibration_probe else package)
+        package["source_recognition"] if calibration_probe or diagnostic_candidate else package)
     # Descriptors: native binding enumerates Soma1..N (Branch has one soma).
     count = 1 if context["source_solo"]["configuration"]["model"]["branch"] else len(context["recognition_inputs"])
     nodes = {node["path"]: node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]}
@@ -70,9 +83,19 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
     _write(primary/"model.json", package)
     if diagnostic:
         # Keep the audited stopped source and every original training trace.
-        evidence = primary/"stopped-source";evidence.mkdir()
+        evidence = primary/"stopped-source"
+        if source_case[0].get('schema_version') == 5:
+            from .composite_primary import capture_primary_blobs, write_primary_snapshot, _paths
+            archive = source_case[0]['measurement_archive']
+            refs = [trial['primary_ref'] for group in archive['records'] for trial in group['raw_trials']]
+            values = capture_primary_blobs(archive['primary_blobs'], refs, archive['maximum_total_primary_bytes'])
+            _paths(list(values) + ['train_stopped_state.json'] + (['train_stopped_summary.json'] if source_case[1] is not None else []))
+            write_primary_snapshot(values, evidence)
+        else:
+            evidence.mkdir()
         _write(evidence/"train_stopped_state.json", source_case[0])
-        _write(evidence/"train_stopped_summary.json", source_case[1])
+        if source_case[1] is not None:
+            _write(evidence/"train_stopped_summary.json", source_case[1])
         for trial_id, trace in source_case[3].items():
             (evidence/trace.name).write_bytes(trace.read_bytes())
             _write(evidence/trace.with_suffix(".json").name, source_case[2][trial_id])

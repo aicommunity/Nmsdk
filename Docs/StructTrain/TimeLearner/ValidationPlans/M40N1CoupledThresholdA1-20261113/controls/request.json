@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-n1-coupled-threshold-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "563b21fb501f341da5453349d9ce1b0d80c33423",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 256,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 8589934592
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-n1-coupled-threshold-a1",
+      "commit": "563b21fb501f341da5453349d9ce1b0d80c33423"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-coupled-threshold-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledThresholdA1-20261113/suite.json",
+      "sha256": "ffe5813a6c5cfe8288c74e2905b50bbf075bcb2a655edeed3114b04f67a4fd9b"
+    },
+    "fixtures": {
+      "TIMELEARNER_COUPLED_MATRIX_RUN": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-frozen-m40-a1/worker/tmp/coupled-stopped-matrix/run",
+      "TIMELEARNER_COUPLED_THRESHOLD_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/n1-coupled-threshold-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledThresholdA1-20261113/fixture"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 2147483648
+    }
+  }
+}

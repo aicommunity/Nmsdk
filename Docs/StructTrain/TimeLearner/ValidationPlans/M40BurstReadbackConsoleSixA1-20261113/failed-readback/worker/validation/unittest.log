@@ -1,0 +1,21 @@
+test_real_classic_branch_replays_and_time_matched_rs_controls (Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback_console.NativeBurstReadbackConsoleTest.test_real_classic_branch_replays_and_time_matched_rs_controls) ... FAIL
+
+======================================================================
+FAIL: test_real_classic_branch_replays_and_time_matched_rs_controls (Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback_console.NativeBurstReadbackConsoleTest.test_real_classic_branch_replays_and_time_matched_rs_controls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-burst-readback-native-validation-a1/Scripts/StructTrain/TimeLearner/tests/test_native_burst_readback_console.py", line 86, in test_real_classic_branch_replays_and_time_matched_rs_controls
+    self.assertEqual((result['execution'], result['validity']), ('completed', 'valid'))
+AssertionError: Tuples differ: ('process_error', 'unverified_execution') != ('completed', 'valid')
+
+First differing element 0:
+'process_error'
+'completed'
+
+- ('process_error', 'unverified_execution')
++ ('completed', 'valid')
+
+----------------------------------------------------------------------
+Ran 1 test in 28.147s
+
+FAILED (failures=1)

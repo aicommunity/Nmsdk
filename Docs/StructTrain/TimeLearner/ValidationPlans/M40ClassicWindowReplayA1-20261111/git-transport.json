@@ -1,0 +1,146 @@
+{
+  "repository": "/media/user/Data/TimeLearnerRefactor/metadata/candidate-window-replay-a1",
+  "commit": "5c14bb340327f750c6ff992764358e014cf12649",
+  "pack_path": "/media/user/Data/TimeLearnerRefactor/metadata/candidate-window-replay-a1.pack",
+  "bytes": 7543,
+  "sha256": "2421e8d8c28e1cd62e14d40853bae63ce1eced9984efa061da61bf1914e1cb9c",
+  "relative": "Reports/StructTrain/TimeLearner/ClassicWindowReplay-20261111",
+  "results": [
+    {
+      "group": 12,
+      "windows": [
+        {
+          "name": "recorded",
+          "validity": "valid",
+          "reasons": [],
+          "candidates": [
+            {
+              "status": "unique_necessary",
+              "necessary_inputs": [
+                0
+              ],
+              "first_sample": 86
+            }
+          ]
+        },
+        {
+          "name": "full_observation",
+          "validity": "valid",
+          "reasons": [],
+          "candidates": [
+            {
+              "status": "unique_necessary",
+              "necessary_inputs": [
+                0
+              ],
+              "first_sample": 86
+            },
+            {
+              "status": "unique_necessary",
+              "necessary_inputs": [
+                1
+              ],
+              "first_sample": 246
+            },
+            {
+              "status": "unique_necessary",
+              "necessary_inputs": [
+                2
+              ],
+              "first_sample": 566
+            },
+            {
+              "status": "unique_necessary",
+              "necessary_inputs": [
+                3
+              ],
+              "first_sample": 1046
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "group": 14,
+      "windows": [
+        {
+          "name": "recorded",
+          "validity": "missing",
+          "reasons": [
+            "no_unique_assigned_basin_peak_in_declared_window"
+          ],
+          "candidates": []
+        },
+        {
+          "name": "full_observation",
+          "validity": "ambiguous",
+          "reasons": [
+            "highest_window_basin_peak_has_ambiguous_necessity"
+          ],
+          "candidates": [
+            {
+              "status": "no_necessary_input",
+              "necessary_inputs": [],
+              "first_sample": 1146
+            },
+            {
+              "status": "unique_necessary",
+              "necessary_inputs": [
+                2
+              ],
+              "first_sample": 1466
+            },
+            {
+              "status": "unique_necessary",
+              "necessary_inputs": [
+                3
+              ],
+              "first_sample": 2010
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "group": 18,
+      "windows": [
+        {
+          "name": "recorded",
+          "validity": "missing",
+          "reasons": [
+            "no_unique_assigned_basin_peak_in_declared_window"
+          ],
+          "candidates": []
+        },
+        {
+          "name": "full_observation",
+          "validity": "ambiguous",
+          "reasons": [
+            "highest_window_basin_peak_has_ambiguous_necessity"
+          ],
+          "candidates": [
+            {
+              "status": "no_necessary_input",
+              "necessary_inputs": [],
+              "first_sample": 1146
+            },
+            {
+              "status": "unique_necessary",
+              "necessary_inputs": [
+                2
+              ],
+              "first_sample": 1466
+            },
+            {
+              "status": "unique_necessary",
+              "necessary_inputs": [
+                3
+              ],
+              "first_sample": 2010
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# Полный corpus строгого N4 cold8 Train —12.11.2026
+
+Production collector completed, whole group closed, lease released; original_files_rewritten=false/original_outcome_unchanged=true. [Terminal](completed/worker/terminal.json), [proof](completed/worker/primary-bundle-proof.json), [closure](completed/closure-and-reservation.json), [raw readback integrity](completed/readback-integrity.json). Проверены1167regular source files/473097215bytes и5закрытых units до/после сбора.
+
+[Git bundle](../../../../../Reports/StructTrain/TimeLearner/StockCold8N4StoppedPrimary-20261112/bundle.json), [primary.tar.xz](../../../../../Reports/StructTrain/TimeLearner/StockCold8N4StoppedPrimary-20261112/primary.tar.xz), [origin](../../../../../Reports/StructTrain/TimeLearner/StockCold8N4StoppedPrimary-20261112/ORIGIN.json). XZ24627936bytes вместо473098379expanded bytes. SHA256fbffa754e4f6ecf18941e5b0112dc67db025ff5dc818c636eacf561841328c7c. Весь Run, raw/omission данные, оба stopped состояния, graphs, decision/recovery ledgers и execution/kernel/runtime/source evidence сохранены; rendered cache отдельноM40. Исходный server readback не удалялся.
+
+[Git-only transport](git-transport.json):standalone commit7f5bf5826fb2d7e895234127dc0918d58437461c, pack24687448bytes/SHA256a810667549e2a967bbb2bbe0f70bd0fd945b0f2a4ad8d38da78dca2bcef89d5c. Локально index-pack/fsck и каждый извлечённый blob проверены по размеру/SHA256. Независимое восстановление этого полного нового архива остаётся отдельным требованием.
+
+[Исходный результат](../M40StockCold8TrainA1-20261112/RESULT.ru.md):2/2 engineering checks, обе training invalid_observation, certificate=null, classification/Test отсутствуют. Архивирование не превращает missing в успешное обучение; [позднейший Branch DATA replay](../M40RecoveryN4WindowAnalysisA1-20261112/RESULT.ru.md) показывает ошибку прогнозного окна на пяти сохранённых группах, без изменения исходного outcome.

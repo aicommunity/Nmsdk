@@ -1,0 +1,49 @@
+{
+  "original_design": {
+    "kind": "stock_single_pulse_diagnostic_design",
+    "schema_version": 1,
+    "rows": [
+      {
+        "name": "Branch-threshold-training100-retry32",
+        "source_state": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2/study/runs/Branch-threshold-training100-retry32/native/train_stopped_state.json",
+        "source_state_sha256": "c59f5820fe3fa41cba6a1b0ed15979e518cba2d05db1a2d7dd7ca9b40d5190de",
+        "source_model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67",
+        "original_trial_id": "Branch-threshold-training100-retry32/session/1/search/969",
+        "original_packet": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2/study/runs/Branch-threshold-training100-retry32/native/train_stopped_trial_476.json",
+        "original_packet_sha256": "2a012550369e45729ff059e69bc0a4f0e98d56eeeba2de04e95a97feae1036fc",
+        "original_trace": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2/study/runs/Branch-threshold-training100-retry32/native/train_stopped_trial_476.csv",
+        "original_trace_sha256": "8d106a2088fca6956204e3fd89ccc1552309fd466337bfcbd5060224b3a21edb",
+        "job_sha256": "2004cec1ad2ce78b48f6e1608cd35629405274beee08238ea5f06c7bd7752a56",
+        "burst_job": "Branch-threshold-training100-retry32-burst.json",
+        "single_job": "Branch-threshold-training100-retry32-single.json",
+        "burst_job_sha256": "905d1dce80c3023cc05a84781945e72648fa69fe05e3296839a9d3bb85653b68",
+        "single_job_sha256": "03cf269d152004cffc105ea8a686b05ba0f819e282824544c892ce561b21158e"
+      },
+      {
+        "name": "Classic-threshold-training100-retry32",
+        "source_state": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2/study/runs/Classic-threshold-training100-retry32/native/train_stopped_state.json",
+        "source_state_sha256": "f8739f0cc9e68f917d3f42b859357878d718354fc951071d9b22de738b00be33",
+        "source_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+        "original_trial_id": "Classic-threshold-training100-retry32/session/1/search/209",
+        "original_packet": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2/study/runs/Classic-threshold-training100-retry32/native/train_stopped_trial_108.json",
+        "original_packet_sha256": "e37990ca007463aa27fe5022486e69ac8f48818cb882b1800c2b55c0794e346a",
+        "original_trace": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2/study/runs/Classic-threshold-training100-retry32/native/train_stopped_trial_108.csv",
+        "original_trace_sha256": "0ead0fc277fe5e6755ac4500ff2b4067576ede3bb26e0cb5732e7b9cd16b36db",
+        "job_sha256": "8134a115208f2ad3b48e6383722d64879cac38d0f3c051ca79154e70a3e7a09b",
+        "burst_job": "Classic-threshold-training100-retry32-burst.json",
+        "single_job": "Classic-threshold-training100-retry32-single.json",
+        "burst_job_sha256": "0dbd07b04aea99bdbe55e546e9d66b2b68a12e03434aa5f851f8198c1bb856f5",
+        "single_job_sha256": "808b64f20f5b72c9d0e00df0ea71599b125972844d5fdcc7f2ce4336e6690ff3"
+      }
+    ],
+    "all_jobs_frozen_before_native_operations": true,
+    "training_started": false,
+    "scientific_verdict": null,
+    "sha256": "cf2552daaba346fb5a78384b24f3775b7d09440a31a9c0e50ba1b41639c506aa"
+  },
+  "original_native_primary_commit": "2ba950373a79e896d3f7817d3cbdbeb1bad192ee",
+  "original_archive_sha256": "fa35adc24b7841dc0faa857505830ea666b21128ea72f312e5b0c3045b29a8e1",
+  "all_four_jobs_frozen_before_original_native_operations": true,
+  "Branch_native_reused": true,
+  "new_Classic_native_expected": 2
+}

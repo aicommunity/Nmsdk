@@ -1,0 +1,427 @@
+{
+  "rows": [
+    {
+      "kind": "timelearner_shifted_single_template_diagnostic",
+      "schema_version": 1,
+      "frequency_hz": 2000.0,
+      "samples": 3601,
+      "native_tick_shifts": [
+        0,
+        160,
+        480,
+        960
+      ],
+      "clock_roundoff_allowance_seconds": 4.606874881574186e-11,
+      "input_reconstruction_exact": true,
+      "channels": [
+        {
+          "channel": 0,
+          "observed_global_maximum": {
+            "relative_time": 0.223,
+            "amplitude": 0.006103650024966156
+          },
+          "predicted_global_maximum": {
+            "relative_time": 0.223,
+            "amplitude": 0.0061038097223490295
+          },
+          "observed_local_maxima": [
+            {
+              "relative_time": 0.223,
+              "amplitude": 0.006103650024966156,
+              "plateau_end_relative": 0.223
+            },
+            {
+              "relative_time": 0.3965,
+              "amplitude": 0.004945635907034451,
+              "plateau_end_relative": 0.3965
+            },
+            {
+              "relative_time": 0.637,
+              "amplitude": 0.004920468058176142,
+              "plateau_end_relative": 0.637
+            }
+          ],
+          "predicted_local_maxima": [
+            {
+              "relative_time": 0.223,
+              "amplitude": 0.0061038097223490295,
+              "plateau_end_relative": 0.223
+            },
+            {
+              "relative_time": 0.3965,
+              "amplitude": 0.00494563673598003,
+              "plateau_end_relative": 0.3965
+            },
+            {
+              "relative_time": 0.637,
+              "amplitude": 0.004920468058210226,
+              "plateau_end_relative": 0.637
+            }
+          ],
+          "single_template_local_maxima": [
+            {
+              "relative_time": 0.157,
+              "amplitude": 0.004920245103354537,
+              "plateau_end_relative": 0.157
+            }
+          ],
+          "max_abs_residual": 1.6889238607653567e-07,
+          "rms_residual": 3.265990770095539e-08,
+          "max_abs_residual_div_observed_absolute_maximum": 2.7670719223039358e-05
+        }
+      ],
+      "assumption": "sum of time-shifted isolated responses relative to native baseline",
+      "negative_template_indices": "declared native baseline, no recorded prehistory",
+      "linear_superposition_proven": false,
+      "assigned_impulse_peaks_certified": false,
+      "classification_evaluated": false,
+      "scientific_verdict": null,
+      "primary_inputs": {
+        "burst/initial-state.json": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1/single-pulse-study/runs/Branch-threshold-training100-retry32-burst/native/initial-state.json",
+          "sha256": "3e05d2b8b6101a0299bceca2b0d996352d9f59fc5360c8d14e76542dba5e43e0"
+        },
+        "burst/probe_trial_1.json": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1/single-pulse-study/runs/Branch-threshold-training100-retry32-burst/native/probe_trial_1.json",
+          "sha256": "e479afa8380fca5c6d98c0e0e088dcb6bd7dc1e51369977a23372af3bb7b08f2"
+        },
+        "burst/probe_trial_1.csv": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1/single-pulse-study/runs/Branch-threshold-training100-retry32-burst/native/probe_trial_1.csv",
+          "sha256": "7101624b955fd00c86bc9bae867cf5082cc7ce1e522a1fa74393f91f7249c133"
+        },
+        "single/initial-state.json": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1/single-pulse-study/runs/Branch-threshold-training100-retry32-single/native/initial-state.json",
+          "sha256": "3e05d2b8b6101a0299bceca2b0d996352d9f59fc5360c8d14e76542dba5e43e0"
+        },
+        "single/probe_trial_1.json": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1/single-pulse-study/runs/Branch-threshold-training100-retry32-single/native/probe_trial_1.json",
+          "sha256": "0f020523779277dc8b6ab270f51825f628c814e22cc7684c180e72f469267995"
+        },
+        "single/probe_trial_1.csv": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1/single-pulse-study/runs/Branch-threshold-training100-retry32-single/native/probe_trial_1.csv",
+          "sha256": "99cab720b7f26fac6fb579a623bb7fd14771d0ab58ff09f9d0d69bb241766041"
+        }
+      },
+      "source_model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67",
+      "original_training_measurement_valid": false,
+      "original_training_measurement_reasons": [
+        "burst_missing:0",
+        "peak_missing:input2"
+      ],
+      "comparison_csv_sha256": "76d3ca4b78ed38457781abeec8f21deb468da586f7a5f1707782ab91657bfd3f",
+      "case": "Branch-threshold-training100-retry32",
+      "original_primary_commit": "2ba950373a79e896d3f7817d3cbdbeb1bad192ee"
+    },
+    {
+      "kind": "timelearner_shifted_single_template_diagnostic",
+      "schema_version": 1,
+      "frequency_hz": 2000.0,
+      "samples": 3601,
+      "native_tick_shifts": [
+        0,
+        160,
+        480,
+        960
+      ],
+      "clock_roundoff_allowance_seconds": 4.606874881574186e-11,
+      "input_reconstruction_exact": true,
+      "channels": [
+        {
+          "channel": 0,
+          "observed_global_maximum": {
+            "relative_time": 0.573,
+            "amplitude": 0.004504819155902173
+          },
+          "predicted_global_maximum": {
+            "relative_time": 0.573,
+            "amplitude": 0.004504899494772618
+          },
+          "observed_local_maxima": [
+            {
+              "relative_time": 0.573,
+              "amplitude": 0.004504819155902173,
+              "plateau_end_relative": 0.573
+            },
+            {
+              "relative_time": 0.733,
+              "amplitude": 0.003117082976405783,
+              "plateau_end_relative": 0.733
+            },
+            {
+              "relative_time": 1.005,
+              "amplitude": 0.0026546124107139635,
+              "plateau_end_relative": 1.005
+            }
+          ],
+          "predicted_local_maxima": [
+            {
+              "relative_time": 0.573,
+              "amplitude": 0.004504899494772618,
+              "plateau_end_relative": 0.573
+            },
+            {
+              "relative_time": 0.733,
+              "amplitude": 0.00311710599977022,
+              "plateau_end_relative": 0.733
+            },
+            {
+              "relative_time": 1.005,
+              "amplitude": 0.0026546124136226368,
+              "plateau_end_relative": 1.005
+            }
+          ],
+          "single_template_local_maxima": [
+            {
+              "relative_time": 0.5275,
+              "amplitude": 0.0026185129070909197,
+              "plateau_end_relative": 0.5275
+            }
+          ],
+          "max_abs_residual": 8.959954678200432e-08,
+          "rms_residual": 2.3813983001862803e-08,
+          "max_abs_residual_div_observed_absolute_maximum": 1.9889710037441083e-05
+        },
+        {
+          "channel": 1,
+          "observed_global_maximum": {
+            "relative_time": 0.1045,
+            "amplitude": 0.015828572406203167
+          },
+          "predicted_global_maximum": {
+            "relative_time": 0.1045,
+            "amplitude": 0.015829138799809628
+          },
+          "observed_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            },
+            {
+              "relative_time": 0.1045,
+              "amplitude": 0.015828572406203167,
+              "plateau_end_relative": 0.1045
+            },
+            {
+              "relative_time": 0.2645,
+              "amplitude": 0.01578146659932167,
+              "plateau_end_relative": 0.2645
+            },
+            {
+              "relative_time": 0.5045,
+              "amplitude": 0.015781441636542715,
+              "plateau_end_relative": 0.5045
+            }
+          ],
+          "predicted_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            },
+            {
+              "relative_time": 0.1045,
+              "amplitude": 0.015829138799809628,
+              "plateau_end_relative": 0.1045
+            },
+            {
+              "relative_time": 0.2645,
+              "amplitude": 0.015781466754410944,
+              "plateau_end_relative": 0.2645
+            },
+            {
+              "relative_time": 0.5045,
+              "amplitude": 0.015781441636589233,
+              "plateau_end_relative": 0.5045
+            }
+          ],
+          "single_template_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            }
+          ],
+          "max_abs_residual": 5.719986625463136e-07,
+          "rms_residual": 5.905459636447834e-08,
+          "max_abs_residual_div_observed_absolute_maximum": 3.613709738738973e-05
+        },
+        {
+          "channel": 2,
+          "observed_global_maximum": {
+            "relative_time": 0.1045,
+            "amplitude": 0.015828572406203167
+          },
+          "predicted_global_maximum": {
+            "relative_time": 0.1045,
+            "amplitude": 0.015829138799809628
+          },
+          "observed_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            },
+            {
+              "relative_time": 0.1045,
+              "amplitude": 0.015828572406203167,
+              "plateau_end_relative": 0.1045
+            },
+            {
+              "relative_time": 0.2645,
+              "amplitude": 0.01578146659932167,
+              "plateau_end_relative": 0.2645
+            },
+            {
+              "relative_time": 0.5045,
+              "amplitude": 0.015781441636542715,
+              "plateau_end_relative": 0.5045
+            }
+          ],
+          "predicted_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            },
+            {
+              "relative_time": 0.1045,
+              "amplitude": 0.015829138799809628,
+              "plateau_end_relative": 0.1045
+            },
+            {
+              "relative_time": 0.2645,
+              "amplitude": 0.015781466754410944,
+              "plateau_end_relative": 0.2645
+            },
+            {
+              "relative_time": 0.5045,
+              "amplitude": 0.015781441636589233,
+              "plateau_end_relative": 0.5045
+            }
+          ],
+          "single_template_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            }
+          ],
+          "max_abs_residual": 5.719986625463136e-07,
+          "rms_residual": 5.905459636447834e-08,
+          "max_abs_residual_div_observed_absolute_maximum": 3.613709738738973e-05
+        },
+        {
+          "channel": 3,
+          "observed_global_maximum": {
+            "relative_time": 0.1045,
+            "amplitude": 0.015828572406203167
+          },
+          "predicted_global_maximum": {
+            "relative_time": 0.1045,
+            "amplitude": 0.015829138799809628
+          },
+          "observed_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            },
+            {
+              "relative_time": 0.1045,
+              "amplitude": 0.015828572406203167,
+              "plateau_end_relative": 0.1045
+            },
+            {
+              "relative_time": 0.2645,
+              "amplitude": 0.01578146659932167,
+              "plateau_end_relative": 0.2645
+            },
+            {
+              "relative_time": 0.5045,
+              "amplitude": 0.015781441636542715,
+              "plateau_end_relative": 0.5045
+            }
+          ],
+          "predicted_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            },
+            {
+              "relative_time": 0.1045,
+              "amplitude": 0.015829138799809628,
+              "plateau_end_relative": 0.1045
+            },
+            {
+              "relative_time": 0.2645,
+              "amplitude": 0.015781466754410944,
+              "plateau_end_relative": 0.2645
+            },
+            {
+              "relative_time": 0.5045,
+              "amplitude": 0.015781441636589233,
+              "plateau_end_relative": 0.5045
+            }
+          ],
+          "single_template_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            }
+          ],
+          "max_abs_residual": 5.719986625463136e-07,
+          "rms_residual": 5.905459636447834e-08,
+          "max_abs_residual_div_observed_absolute_maximum": 3.613709738738973e-05
+        }
+      ],
+      "assumption": "sum of time-shifted isolated responses relative to native baseline",
+      "negative_template_indices": "declared native baseline, no recorded prehistory",
+      "linear_superposition_proven": false,
+      "assigned_impulse_peaks_certified": false,
+      "classification_evaluated": false,
+      "scientific_verdict": null,
+      "primary_inputs": {
+        "burst/initial-state.json": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1/runs/Classic-threshold-training100-retry32-burst/native/initial-state.json",
+          "sha256": "b3699b675f21159e98ed5be4edf92d80d40836da9364c58cd43e19d4850e97e0"
+        },
+        "burst/probe_trial_1.json": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1/runs/Classic-threshold-training100-retry32-burst/native/probe_trial_1.json",
+          "sha256": "41c5a45cd821e31f6251df49009d7ac1376c2e6d291dd4d5bb72c4ea8c4dd17f"
+        },
+        "burst/probe_trial_1.csv": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1/runs/Classic-threshold-training100-retry32-burst/native/probe_trial_1.csv",
+          "sha256": "1725bf7864caef1467611036271e2ad0a676a3081ef9a1fc04d8233044af1823"
+        },
+        "single/initial-state.json": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1/runs/Classic-threshold-training100-retry32-single/native/initial-state.json",
+          "sha256": "b3699b675f21159e98ed5be4edf92d80d40836da9364c58cd43e19d4850e97e0"
+        },
+        "single/probe_trial_1.json": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1/runs/Classic-threshold-training100-retry32-single/native/probe_trial_1.json",
+          "sha256": "c8b3abb569a34349b4c4f294ad8f591bc9e991ba299edc4f41ee91235631f339"
+        },
+        "single/probe_trial_1.csv": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1/runs/Classic-threshold-training100-retry32-single/native/probe_trial_1.csv",
+          "sha256": "ce1574c0db007c50775200c4477316aa62b9422cf0131b95f85e8d337df0c0fc"
+        }
+      },
+      "source_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+      "original_training_measurement_valid": false,
+      "original_training_measurement_reasons": [
+        "burst_missing:0",
+        "peak_missing:input0"
+      ],
+      "comparison_csv_sha256": "3e46e94bbb61f884b930a72cf558fb8e3a4ee1b8ec62c5ed6ccd9ea6e2df5717",
+      "case": "Classic-threshold-training100-retry32",
+      "original_primary_commit": "cd8d32168c3580948d0684f6ccad9f64f8527d94"
+    }
+  ],
+  "linear_superposition_proven": false,
+  "assigned_impulse_peaks_certified": false,
+  "classification_evaluated": false,
+  "scientific_verdict": null
+}

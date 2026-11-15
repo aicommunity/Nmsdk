@@ -1,0 +1,70 @@
+from pathlib import Path
+import os,sys,json,hashlib,tarfile,io,subprocess,time
+base=Path('/media/user/Data/TimeLearnerRefactor');repo=base/'evidence-native-stages8-m40-a1';stage=base/'repair17-oom-and-report11-evidence-a1';stage.mkdir()
+sys.path.insert(0,str(base/'source-native-load-xml-repair-m40-a1'))
+from Scripts.StructTrain.TimeLearner import owned_native_job,contained_process
+from Scripts.StructTrain.TimeLearner.runtime import source_closure
+from Scripts.StructTrain.TimeLearner.native_gate import audit_junit
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.closed_native_collection import _source_namespace
+out=base/'readbacks/s05-native-load-xml-repair17-m40-a1';controller=Path(str(out)+'-controller')
+a1=base/'readbacks/s03-native-archive-gate-pair-report11-m40-a1';a2=base/'readbacks/s03-native-archive-gate-pair-report11-m40-a2'
+state=owned_native_job.status(controller);assert not state['supervisor_live'] and state['outer']['all_processes_closed'] and not state['result']['record_errors']
+terminal=json.loads((out/'terminal.json').read_text());assert terminal['built'] is True and terminal['audited_completed_cpp_cases']==terminal['actual_audited_assertion_passed_cpp_cases']==12 and terminal['expected_cpp_cases']==17 and terminal['actual_audited_failed_cpp_ids']==[]
+plan=json.loads((out/'canonical-preparation.json').read_text())['current']['runplan'];observed=[]
+for leaf in plan:
+ if leaf['name']=='packages-5':continue
+ result=audit_junit(out/leaf['name']/'native.xml',leaf['expected_ids']);assert result['assertion_status']=='passed';observed+=leaf['expected_ids']
+assert len(set(observed))==12 and not (out/'packages-5/native.xml').exists()
+package=contained_process.inspect(out/'packages-5/process/contained');assert package['all_processes_closed'] and package['state']['Result']=='oom-kill' and package['state']['ExecMainStatus']=='9'
+oom=subprocess.check_output(['systemctl','--user','show',package['binding']['unit'],'--property=Result,ExecMainCode,ExecMainStatus,MemoryPeak,MemoryMax,InvocationID'],text=True);assert 'Result=oom-kill' in oom and 'MemoryPeak=4294967296' in oom and 'InvocationID='+package['binding']['invocation_id'] in oom
+read=lambda p:json.loads(p.read_text())
+assert read(a1/'worker/validation/result.json')['executed_tests']==11 and len(read(a1/'worker/validation/result.json')['failures'])==1
+report_result=read(a2/'worker/validation/result.json');assert report_result['executed_tests']==11 and report_result['assertion_status']=='passed' and not report_result['failures'] and not report_result['errors'] and not report_result['skipped']
+for job in (a1,a2):assert contained_process.inspect(job/'process/contained')['all_processes_closed']
+leases=Reservations.read_snapshot(base/'resource-reservations.sqlite3')['leases']
+for job in (out,a1,a2):
+ rows=[x for x in leases if x['job_id']==job.name];assert len(rows)==1 and rows[0]['state']=='released'
+assert read(out/'source-closure.json')==read(out/'source-closure-after.json')==source_closure(base/'source-native-load-xml-repair-m40-a1')
+namespace=read(base/'requests/native-load-xml-repair17-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeLoadXmlRepair17-20261110/namespace.json');assert len(namespace)==4074
+_source_namespace(base/'source-native-load-xml-repair-m40-a1',namespace)
+for job in (a1,a2):
+ for prefix in ('tool-source','validation-source','fixtures'):assert read(job/('worker/'+prefix+'-before.json'))==read(job/('worker/'+prefix+'-after.json'))
+roots={'native-output':out,'controller':controller,'report-a1':a1,'report-a2':a2,'native-controls':base/'requests/native-load-xml-repair17-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeLoadXmlRepair17-20261110','report-controls-a2':base/'requests/native-archive-gate-pair-report11-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeArchiveGatePairReport11-20261110'}
+records=[];links=[];png=[];total=0
+for role,root in roots.items():
+ for f in sorted(root.rglob('*')):
+  if f.is_symlink():
+   assert f.resolve().is_relative_to(root.resolve());links.append(dict(role=role,path=str(f.relative_to(root)),target=os.readlink(f)));continue
+  if not f.is_file():continue
+  size=f.stat().st_size;assert size<=64*1024**2
+  sha=hashlib.sha256(f.read_bytes()).hexdigest();row=dict(archive_path=role+'/'+str(f.relative_to(root)),original_path=str(f),bytes=size,sha256=sha)
+  if f.suffix.lower()=='.png':png.append(row);continue
+  records.append(row);total+=size
+assert total<256*1024**2 and len(records)<4096 and len(png)==44
+selected=[x for x in png if x['original_path'].endswith('/soma-2-overview-shared.png')];assert len(selected)==2
+primary=stage/'primary.tar.xz'
+with tarfile.open(primary,'w:xz',preset=6) as archive:
+ for row in records:
+  data=Path(row['original_path']).read_bytes();assert len(data)==row['bytes'] and hashlib.sha256(data).hexdigest()==row['sha256']
+  info=tarfile.TarInfo(row['archive_path']);info.size=len(data);info.mtime=0;info.mode=0o644;archive.addfile(info,io.BytesIO(data))
+for row in records:assert hashlib.sha256(Path(row['original_path']).read_bytes()).hexdigest()==row['sha256']
+figures={}
+for row in selected:
+ name='overview-'+('20000' if '-f20000/' in row['original_path'] else '2000')+'.png';data=Path(row['original_path']).read_bytes();assert hashlib.sha256(data).hexdigest()==row['sha256'];figures['selected/'+name]=data
+proof=dict(kind='timelearner_closed_oom_and_plot_capture',schema_version=1,compiled_root='f39b9ebdcd0e7a64e388d778ca32374a65ae4e0c',pulse='991d933a5a3f6fe1d17986118656be98cda31392',rdk='de4134235c0dcb8b91fd9a43b267348ad1a163ca',source_namespace_verified=4074,original_terminal=terminal,completed_ids=observed,package_kernel=package,kernel_memory_readback=oom,original_leases_released=[{k:x[k] for k in ('job_id','token','state')} for x in leases if x['job_id'] in (out.name,a1.name,a2.name)],report_a1_passed=10,report_a1_failed=1,report_a2_passed=11,original_files=records,retained_internal_symlinks=links,full_png_cache_retained=png,selected_pngs=[dict(path=name,bytes=len(data),sha256=hashlib.sha256(data).hexdigest()) for name,data in figures.items()],archive=dict(bytes=primary.stat().st_size,sha256=hashlib.sha256(primary.read_bytes()).hexdigest(),members=len(records),original_bytes=total),collector_mode='explicit closed OOM capture; native collector v1 cannot admit OOM missing-JUnit',outer_capture_cgroup_attested=False,scientific_verdict=None)
+(parent:=stage/'capture.json').write_text(json.dumps(proof,indent=2)+chr(10))
+(stage/'capture-producer.py.txt').write_bytes(producer_bytes)
+payload={'primary.tar.xz':primary.read_bytes(),'capture.json':parent.read_bytes(),'capture-producer.py.txt':producer_bytes,**figures}
+parent_commit='015bbf13b7fce872560173b14f0dce5bfd9d6cf4';branch='refs/heads/codex/timelearner-repair17-oom-and-report11-evidence'
+env={**os.environ,'GIT_INDEX_FILE':str(stage/'index'),'GIT_NO_LAZY_FETCH':'1','GIT_AUTHOR_NAME':'Codex','GIT_AUTHOR_EMAIL':'codex@local','GIT_COMMITTER_NAME':'Codex','GIT_COMMITTER_EMAIL':'codex@local'}
+def git(*args,input=None):return subprocess.check_output(['git','-C',str(repo),*args],input=input,env=env,stderr=subprocess.STDOUT).decode().strip()
+assert subprocess.run(['git','-C',str(repo),'show-ref','--verify','--quiet',branch]).returncode==1
+git('read-tree',parent_commit)
+prefix='Reports/StructTrain/TimeLearner/s05-repair17-oom-and-report11-m40-a1/'
+for name,data in payload.items():
+ oid=git('hash-object','-w','--stdin',input=data);git('update-index','--add','--cacheinfo','100644',oid,prefix+name)
+tree=git('write-tree','--missing-ok');head=git('commit-tree',tree,'-p',parent_commit,input=b'evidence: preserve repair17 OOM, 12 native passes and real report11 plots')
+git('update-ref',branch,head,'0'*40);pack=stage/'evidence.pack'
+with pack.open('xb') as stream:subprocess.run(['git','-C',str(repo),'pack-objects','--stdout','--revs'],input=(head+chr(10)+'^'+parent_commit+chr(10)).encode(),stdout=stream,env=env,check=True)
+print(json.dumps(dict(commit=head,parent=parent_commit,pack=str(pack),bytes=pack.stat().st_size,sha256=hashlib.sha256(pack.read_bytes()).hexdigest(),archive_bytes=proof['archive']['bytes'],members=len(records),selected_pngs=len(figures))))

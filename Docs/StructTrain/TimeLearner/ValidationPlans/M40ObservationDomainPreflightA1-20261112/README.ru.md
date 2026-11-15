@@ -1,0 +1,3 @@
+# Полный записанный домен:declaration и реальные preflight
+
+Source/actor309412edc57b60d18cc7b01ae205ec3f223a945c (одинаковые commits).4declaration regressions и2actual native stock preflight внутри одного integration test. Новая команда prepare-full-window →plan3/config8. Параметрымодели, reference capture windows, CapturedPerInput,0.02/1e-5,search/time budgets сохранены. Каждыйcandidate обязанполучать frame0..sample_count−1; проверяются length/R corners и отдельный Ns/C control. Actual preflight проверяетполноеравенство исходному stock graph Classic/Branch. Train не запускается. Результат до завершения не принят.

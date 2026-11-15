@@ -1,0 +1,93 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "1d7e4ee5dac13f71193be2b486d8c4a7ae6607f1ddf6980f1796919e6f0561ca",
+      "unit": "timelearner-86830e98-643a-49cb-b528-1dd9ad165cb3.service",
+      "invocation_id": "92bdd68e65244dfe8de4134c7801af45",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-86830e98-643a-49cb-b528-1dd9ad165cb3.service",
+      "initial_main_pid": 2300099,
+      "initial_start_ticks": "351694488",
+      "sha256": "5db286c09313ca32c68bc0cd04fb6db2943c34cdf5c1ec641a60173daed532b3"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "2147483648",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 86830e98-643a-49cb-b528-1dd9ad165cb3",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "92bdd68e65244dfe8de4134c7801af45"
+    },
+    "memory_max": 2147483648,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "719b11c5-f282-4609-835c-9ece655ad652",
+      "job_id": "s07-observation-domain-train-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 2300099,
+        "start_ticks": "351694488",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-preflight-m40-a1/worker/native-full-domain-preflight/prepared",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-preflight-m40-a1/worker/native-full-domain-preflight/prepared"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-train-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-train-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainTrainA1-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainTrainA1-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainTrainA1-20261112/fixture",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainTrainA1-20261112/fixture"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-full-observation-domain-train-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-full-observation-domain-train-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794441747.4232721,
+      "deadline": 1794446230.5006077,
+      "updated": 1794446117.9845183,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

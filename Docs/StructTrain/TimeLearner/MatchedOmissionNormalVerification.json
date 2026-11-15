@@ -1,0 +1,71 @@
+{
+  "kind": "independent_matched_omission_normal_metadata_verification",
+  "evidence_commit": "f2802e7f23043391100d0ec85b8ea1c063d47a12",
+  "compiled_root": "9e5249421e2ae8f06183b19fad278289cf98522a",
+  "PulseLib": "fcc3fed0dc63fc0d8ae8dcfdb0f85bd5d004baf8",
+  "archive_members_verified": 386,
+  "archive_bytes": 266248,
+  "archive_sha256": "f835e7f8b9fadc134b6cb345a45dabb47df6a5a77367f7fe5920d12909c68cea",
+  "junit_checks_passed": 55,
+  "source_fixture_hashes_verified": 23,
+  "all_junit_ids_matched_declared_source": true,
+  "native_cases": [
+    {
+      "test_id": "NativeMatchedOmissionExecution/Classic2000",
+      "assignment": "ambiguous",
+      "native_probes": 4,
+      "primary_csvs": 4
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/Branch2000",
+      "assignment": "ambiguous",
+      "native_probes": 4,
+      "primary_csvs": 4
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/Classic20000",
+      "assignment": "ambiguous",
+      "native_probes": 4,
+      "primary_csvs": 4
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/Branch20000",
+      "assignment": "ambiguous",
+      "native_probes": 4,
+      "primary_csvs": 4
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/ClassicExternalStopBetweenControls",
+      "assignment": "not_available",
+      "native_probes": 1,
+      "primary_csvs": 0
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/BranchExternalStopBetweenControls",
+      "assignment": "not_available",
+      "native_probes": 1,
+      "primary_csvs": 0
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/ClassicPhysicalEditBetweenControls",
+      "assignment": "not_available",
+      "native_probes": 1,
+      "primary_csvs": 0
+    },
+    {
+      "test_id": "NativeMatchedOmissionExecution/BranchPhysicalEditBetweenControls",
+      "assignment": "not_available",
+      "native_probes": 1,
+      "primary_csvs": 0
+    }
+  ],
+  "current_and_previous_runtimes_unchanged": true,
+  "owned_group_closed_and_released": true,
+  "asan_gate": false,
+  "independent_python_assignment_recomputation": false,
+  "negative_control_csv_limitation": "a2 exports complete CSVs for closed full groups; completed first trace of stopped/edit groups not exported; fixed in pending artifact follow-up",
+  "numerical_tests_executed_locally": false,
+  "native_training_service_integrated": false,
+  "training_certificate_eligible": false,
+  "whole_plan_complete": false
+}

@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-observation-domain-branch-finalize-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "f71bb4dd411922f28b3a5e419b6ffcc1184641a3",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 128,
+    "maximum_wall_seconds": 7200
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 4294967296
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-full-observation-domain-train-a1",
+      "commit": "f71bb4dd411922f28b3a5e419b6ffcc1184641a3"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-branch-finalize-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainBranchFinalizeA2-20261112/suite.json",
+      "sha256": "fe36e721f04fb26e09880b13a2618a8bff9b39aabf7be6278b12b9279a5180a7"
+    },
+    "fixtures": {
+      "TIMELEARNER_STOCK_COLD8_TRAIN_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-branch-finalize-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainBranchFinalizeA2-20261112/fixture",
+      "TIMELEARNER_STOCK_COLD8_TRAIN_SOURCE": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-preflight-m40-a1/worker/native-full-domain-preflight/prepared",
+      "TIMELEARNER_STOCK_COLD8_TRAIN_RUNTIME": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1"
+    }
+  }
+}

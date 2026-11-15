@@ -1,0 +1,5 @@
+# Проверка привязки диагностической матрицы
+
+Источник `cc754d59682a0ce88239695c437ff9b248ef859f`; отдельный M40 job `s10-recorded-matrix-join36-m40-a1`. Предыдущие 32 проверки повторяются с четырьмя отрицательными сценариями: failed operation после успешного cleanup, замена raw runtime manifest, отсутствие групп собственных cases, незакрытая reservation. Это проверки production-аудитора и метаданных, не новый расчёт моделей. Полный положительный путь auditor/renderer требует фактически завершённой diagnostic16 A2 и отдельной приёмки.
+
+CLI: `python3 -B -m Scripts.StructTrain.TimeLearner.recorded_diagnostic_matrix audit DIRECTORY CONTROLLER RUNTIME_MANIFEST`; для `report` дополнительно `--output NEW_DIRECTORY`. Runtime указывается явно и должен побайтно соответствовать исходному request; соседняя сборка не подбирается автоматически. Все восемь паттернов каждой модели должны иметь полные наблюдения. Порог унаследован; остановленное обучение и диагностические метрики не создают certificate или научный PASS.

@@ -1,0 +1,34 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-branch-shared-bank-rs-m40-a1",
+  "package_fingerprint": "7fd84965d4212620ccb237198b60580a1a0371ba41db4feb0cab2a4023f06c17",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_resistance_study"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_resistance_study.NativeBurstResistanceStudyTest.test_declared_grid_on_actual_stopped_model"
+  ],
+  "fixtures": {
+    "TIMELEARNER_BURST_STUDY_SOURCE": {
+      "pattern": "*.json",
+      "files": 653,
+      "fingerprint": "170058243adbdf9fa7b311e43f8e8c2ad0895c99e4fa48d7ebf2aebd43413c4c"
+    },
+    "TIMELEARNER_BURST_STUDY_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "fadcc9084f7934c5ce417db6f396b77a31178ba87e3fe109bb0b78c4667060f1"
+    },
+    "TIMELEARNER_BURST_STUDY_CSV": {
+      "pattern": "*.csv",
+      "files": 648,
+      "fingerprint": "b680847228f73a81f3681859a81b154757b1c1dfaca259ef2f22b62aede977be"
+    },
+    "TIMELEARNER_BURST_STUDY_RUNTIME": {
+      "pattern": "NeuroModelerConsole*",
+      "files": 2,
+      "fingerprint": "fc00e41a8d8b4d6ecd185dbfee9d33532b49789517bd3a18df1335b68f64ee6e"
+    }
+  }
+}

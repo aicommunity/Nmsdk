@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a1",
+    "commit": "084cee615b81fa591ea2951fefaf12006bddaea3",
+    "namespace": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-coupled-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledSdkA1-20261113/namespace.json",
+      "sha256": "b6de3154c094e660f4297dc0b714485fad73654ec3ecec0fc6225cbefc411c0d"
+    }
+  },
+  "cohort": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-coupled-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledSdkA1-20261113/cohort.json",
+    "sha256": "d7d07012ee4be5490791d45deffc428fa925194ff93cb834e534b3ad14e1a0c1"
+  },
+  "native_job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-coupled-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledSdkA1-20261113/native-job.json",
+    "sha256": "465c5c44ff0a2eed735c0124a2c729bfaf8aa3d2d137313d1ae11a52c1960f8d"
+  },
+  "prior_bindings": [],
+  "external_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-prepared-m40-a1",
+  "native_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+    "commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf"
+  },
+  "require_fresh_build": true
+}

@@ -1,0 +1,42 @@
+{
+  "kind": "stock_retry_native_csv_hash_comparison",
+  "schema_version": 1,
+  "baseline_bundle_sha256": "878beb0f48e067fe2abb8e00a436c49132e780320366e9abd34e39489cb8c2ea",
+  "candidate_bundle_sha256": "8e7f41683bab780f45c0f382ae1125d64e4a8c0302eaf6d4c32b005210cdb52a",
+  "baseline_evidence": "da57d3cb10826843790b193e93cdcb380fa7f0fc",
+  "candidate_evidence": "a1ea63709dbd9a40a54a0e0a0b38fee2b02f9af8",
+  "rows": [
+    {
+      "name": "Classic-threshold-low-retry32",
+      "matching_csv_files": 40,
+      "same_path_inventory": true,
+      "byte_differences": 0,
+      "matching_inventory_sha256": "dbf066531c470b268b8ee2d551caa25444c48fc32b2b5699a0fdf9ee07c68823"
+    },
+    {
+      "name": "Classic-threshold-training100-retry32",
+      "matching_csv_files": 140,
+      "same_path_inventory": true,
+      "byte_differences": 0,
+      "matching_inventory_sha256": "82e1dcfd3534f2bcdc7a1ab80e8f6153ee8a18416819317376a25b8fc981a8d3"
+    },
+    {
+      "name": "Branch-threshold-low-retry32",
+      "matching_csv_files": 40,
+      "same_path_inventory": true,
+      "byte_differences": 0,
+      "matching_inventory_sha256": "81343865318f8a55df15b5eba9db3bb03dd167a224c44459afcc3a65a69c38e2"
+    },
+    {
+      "name": "Branch-threshold-training100-retry32",
+      "matching_csv_files": 508,
+      "same_path_inventory": true,
+      "byte_differences": 0,
+      "matching_inventory_sha256": "db36d48f50788ffb8d8d1b8895470b16c7e636a8a8d6cbe966c458d1942b922f"
+    }
+  ],
+  "total_matching_csv_files": 728,
+  "comparison": "Exact file byte lengths and SHA256 from verified published primary inventories; no numerical scoring",
+  "scope": "Four RetrySameCandidate Train native CSV streams only; not Advance, evaluation, logs or complete model runtime",
+  "scientific_verdict": null
+}

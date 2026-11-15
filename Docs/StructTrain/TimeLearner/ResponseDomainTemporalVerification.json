@@ -1,0 +1,55 @@
+{
+  "kind": "independent_domain_temporal_report_verification",
+  "renderer_root": "2d5679f29a0ef0bacb2e763582da3db2c4b4ae07",
+  "workers": [
+    {
+      "worker": "m40",
+      "evidence_commit": "7db890b3d91e1b99b30aa66f2d74a1e2023a9b2f",
+      "archive_members_verified": 52,
+      "archive_bytes": 56476,
+      "archive_sha256": "582f3121bc9b88bc1a4087c695b9455d029f98a48afb07bd19689ca071db0324",
+      "checks_passed": 5,
+      "test_ids_matched_source": [
+        "test_actual_render_all_somas_two_frequencies_and_full_tick_views",
+        "test_all_packets_audited_before_any_output_or_backend",
+        "test_changed_csv_is_rejected_before_report_creation",
+        "test_duplicate_trial_is_not_silently_rendered_twice",
+        "test_empty_corpus_bad_revision_and_primary_overlap_are_rejected"
+      ],
+      "source_files_verified": 469,
+      "all_groups_closed_and_lease_released": true,
+      "cases": 4,
+      "trial_soma_pairs": 6,
+      "figures": 120,
+      "figure_files_server_hash_checked": 241,
+      "selected_pngs_hash_and_size_checked": 8,
+      "primary_files_bound_to_original_git_archive": 8,
+      "plotting_venv_used": true,
+      "first_system_matplotlib_failure_preserved": true,
+      "visual_review": "all_8_selected_pngs_reviewed; event-boundary limitation motivates centered views in renderer schema2",
+      "cache": "/media/user/Data/TimeLearnerRefactor/ReportsCache/domain-evidence-normal-a2/figures/index.html",
+      "all_cached_figures_manually_reviewed": false
+    },
+    {
+      "worker": "elder",
+      "evidence_commit": "57ed645a6ba1670a391462c7a85340f410622cc4",
+      "archive_members_verified": 25,
+      "archive_bytes": 36144,
+      "archive_sha256": "5e698f44e1235e0b937ca31f5936dd96f4f5dfebfc6fa09fab1ab8e23c623062",
+      "checks_passed": 5,
+      "test_ids_matched_source": [
+        "test_actual_render_all_somas_two_frequencies_and_full_tick_views",
+        "test_all_packets_audited_before_any_output_or_backend",
+        "test_changed_csv_is_rejected_before_report_creation",
+        "test_duplicate_trial_is_not_silently_rendered_twice",
+        "test_empty_corpus_bad_revision_and_primary_overlap_are_rejected"
+      ],
+      "source_files_verified": 469,
+      "all_groups_closed_and_lease_released": true
+    }
+  ],
+  "numerical_tests_and_rendering_executed_locally": false,
+  "training_certificate_eligible": false,
+  "whole_plan_complete": false,
+  "report_status": "preliminary_schema1; schema2_actual_event_centered_views_pending_server_verification"
+}

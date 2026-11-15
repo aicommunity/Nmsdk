@@ -1,0 +1,88 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "2c41b674-bcd3-45ec-b170-3509584866aa",
+  "job_id": "s07-single-maximum-visual-m40-a1",
+  "recorded_unix": 1794047071.5724022,
+  "administrator": {
+    "pid": 1635029,
+    "start_ticks": "312205855",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1635047,
+    "start_ticks": "312205868",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-maximum-visual-m40-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "ca2e131360d8be359ef347983eef8ba0590bd9b656bbcfe691d9294ea73e69fa",
+      "unit": "timelearner-b8e87f5a-2411-48db-9a5b-010c14482f86.service",
+      "invocation_id": "91edc762910440debe376927cd0514e6",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b8e87f5a-2411-48db-9a5b-010c14482f86.service",
+      "initial_main_pid": 1635047,
+      "initial_start_ticks": "312205868",
+      "sha256": "a81372be3152de3518773a842e87a3dea8090ca837130b9717a545ce0109433f"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-b8e87f5a-2411-48db-9a5b-010c14482f86.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Analysis worker closed; scientific outcome remains separate.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/single-maximum-visual-m40-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/single-maximum-visual-m40-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-maximum-visual-m40-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-maximum-visual-m40-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-probe-algorithms-asan-a1-root-delivery",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-probe-algorithms-asan-a1-root-delivery"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-single-maximum-replay-a2-complete-data",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-single-maximum-replay-a2-complete-data"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-candidate-window-diagnostic-replay-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "47b74d68d4701ff0de18522ba543db7b416274e2",
+  "limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-replay-a1",
+      "commit": "47b74d68d4701ff0de18522ba543db7b416274e2"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/candidate-window-replay-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ClassicWindowReplayA1-20261111/suite.json",
+      "sha256": "a73b49a6063d3475aafa06713ecb9dc80627be6fcad7e4ceaced35ee57aa6c41"
+    },
+    "fixtures": {
+      "TIMELEARNER_COMPOSITE_TRAIN_NATIVE": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-after-stock-classic-train-m40-a1/worker/native-stock-cold7/Classic-stock-cold7-N1/runs/train/native",
+      "TIMELEARNER_COMPOSITE_TRAIN_NATIVE_CSV": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-after-stock-classic-train-m40-a1/worker/native-stock-cold7/Classic-stock-cold7-N1/runs/train/native"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 268435456,
+      "maximum_total_bytes": 536870912
+    }
+  }
+}

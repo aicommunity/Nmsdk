@@ -1,0 +1,51 @@
+{
+  "bundles": [
+    {
+      "attempt": "s07-high-threshold-single-normal-a1",
+      "members": 2104,
+      "archive_bytes": 17205176,
+      "archive_sha256": "fa35adc24b7841dc0faa857505830ea666b21128ea72f312e5b0c3045b29a8e1"
+    }
+  ],
+  "terminal": {
+    "high_threshold_diagnostic_complete": false,
+    "source_threshold_selected": 100.0,
+    "native_rebuilt": false,
+    "threshold_changed": false,
+    "new_training_started": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "completed_native_probes": 2,
+  "unexecuted_native_probes": 2,
+  "original_comparison": {
+    "same_sample_count": true,
+    "relative_clock_equal_with_roundoff": false,
+    "stimulus_samples_exactly_equal": true,
+    "soma_samples_exactly_equal": true,
+    "original_reasons": [
+      "burst_missing:0",
+      "peak_missing:input2"
+    ],
+    "replay_reasons": [
+      "burst_missing:0",
+      "peak_missing:input2"
+    ],
+    "exact_waveform_reproduced": false,
+    "scientific_verdict": null
+  },
+  "prefix_comparison": {
+    "cutoff_second_actual_onset_relative": 0.09,
+    "samples": 180,
+    "same_sample_count": true,
+    "relative_clock_equal_with_roundoff": true,
+    "stimulus_samples_exactly_equal": true,
+    "soma_samples_exactly_equal": true,
+    "exact_first_prefix_reproduced": true,
+    "scientific_verdict": null
+  },
+  "effective_threshold": 100.0,
+  "runtime_unchanged": true,
+  "failure": "relative clock cancellation after nonzero absolute origin; input and soma samples exactly equal",
+  "scientific_verdict": null
+}

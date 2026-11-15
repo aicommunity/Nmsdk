@@ -1,0 +1,121 @@
+{
+  "kind": "timelearner_high_threshold_subset_study_design",
+  "schema_version": 1,
+  "status": "prepared; numerical study not started",
+  "purpose": "Measure full/omitted/single responses of the exact high-threshold states discussed with the user; do not assign training peaks or score classification",
+  "required_frequency_hz": 2000,
+  "required_effective_lt_class": "NPulseLTZoneThreshold",
+  "required_effective_threshold": 100,
+  "duration_seconds": 1.8,
+  "initial_isi": [
+    0.01,
+    0.08,
+    0.16,
+    0.24
+  ],
+  "record_spikes": false,
+  "channel_diagnostics": true,
+  "source_cases": [
+    {
+      "id": "Classic",
+      "primary_commit": "cd8d32168c3580948d0684f6ccad9f64f8527d94",
+      "primary_prefix": "Reports/StructTrain/TimeLearner/s07-high-threshold-classic-normal-m40-a1",
+      "member_prefix": "runs/Classic-threshold-training100-retry32-single/input/source",
+      "source_run_id": "Classic-threshold-training100-retry32/session/1",
+      "source_stopped_sha256": "fef63066fa23c048b4ce92989e02442ac861dbf0c78215c027777c4e39e9c5d3",
+      "base_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+      "effective_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+      "selected_input_index": 0,
+      "source_ordinals": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ]
+    },
+    {
+      "id": "Branch",
+      "primary_commit": "2ba950373a79e896d3f7817d3cbdbeb1bad192ee",
+      "primary_prefix": "Reports/StructTrain/TimeLearner/s07-high-threshold-single-normal-m40-a1",
+      "member_prefix": "single-pulse-study/runs/Branch-threshold-training100-retry32-single/input/source",
+      "source_run_id": "Branch-threshold-training100-retry32/session/1",
+      "source_stopped_sha256": "e9439e9350cbbc17fe405f068230b189041bdedeefaf33b2af943780cbd8a336",
+      "base_model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67",
+      "effective_model_revision": "7ae9b857dc2c68f0f6a4a0d84cfc7ab863e3d5775204533632b989830eebeb31",
+      "selected_input_index": 2,
+      "source_ordinals": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          3
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ]
+    }
+  ],
+  "required_checks": [
+    "Verify every selected source member against the original Git bundle before preparation",
+    "Reject mismatch of source-state digest, source run ID, base/effective graph revision, frequency or actual LT threshold",
+    "Keep the historical Branch selector 2; do not replace it with the reference selector 3",
+    "Freeze all jobs before starting native processes",
+    "Compare actual retained stimulus timestamps across presentations; planned ISI alone is insufficient",
+    "Validate full windows, finite raw soma/channel/LT diagnostics, imported parameters, original target restoration and idle controller",
+    "Compare full control with original archived burst before attributing changes to the omitted impulse",
+    "Keep all source conditions and numerical/build provenance explicit on reports",
+    "Treat global maximum as a full-pattern descriptor; do not use it as an assigned-impulse training certificate"
+  ],
+  "scope_limits": [
+    "Not cold retraining",
+    "Not recognition evaluation of all target/foil patterns",
+    "No claim of linearity or unique pulse attribution from subtraction alone",
+    "No automatic resumption of Series D"
+  ],
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

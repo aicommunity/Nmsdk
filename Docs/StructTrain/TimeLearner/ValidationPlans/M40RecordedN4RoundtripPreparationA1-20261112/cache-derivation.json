@@ -1,0 +1,48 @@
+{
+  "repository": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-recovery-fixtures-a1",
+  "commit": "031494339ea6b0a2fce93fee875b972267023a30",
+  "pack_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-recovery-fixtures-a1-transport.pack",
+  "bytes": 48492606,
+  "sha256": "b1a048b2cce1624c20a00d5296deef8c850181c258285e1454fe3f53dc95b575",
+  "relative": "Tests/Integration/Data/RecordedN4Recovery",
+  "files": {
+    "ORIGIN.json": {
+      "bytes": 1461,
+      "sha256": "dcdf585818ea6c1d47ccc1ee149d7bacd18afe034577e0e881478e948a25efe1"
+    },
+    "Classic-full-domain-stopped.json.qz": {
+      "bytes": 24518983,
+      "sha256": "54ecf4a1696ea369ed29fd56831f9bd4d5169a1b9b0867ec6281ffd0738896db"
+    },
+    ".gitattributes": {
+      "bytes": 11,
+      "sha256": "ad53729d7e73965d2025a6f981135854c952728a7b1e58af440af0bb2bd03134"
+    },
+    "Branch-full-domain-stopped.json.qz": {
+      "bytes": 25195012,
+      "sha256": "b3fadca58c562c45b88c5015f8ce7ab710351dd0e962cad6569765f6f2e3a4e1"
+    }
+  },
+  "models": [
+    {
+      "topology": "Classic",
+      "source_archive_sha256": "22d409fd09a33ca038f289d0236c5bbc893f98f54afe88db4869c5a1bf2a8385",
+      "source_member": "case/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native/train_stopped_state.json",
+      "uncompressed_bytes": 175521654,
+      "uncompressed_sha256": "6107b4b0762ae2d5247bc2356a8fb533d872af2f0aafeb972783aeb85555a078",
+      "fixture": "Classic-full-domain-stopped.json.qz",
+      "fixture_bytes": 24518983,
+      "fixture_sha256": "54ecf4a1696ea369ed29fd56831f9bd4d5169a1b9b0867ec6281ffd0738896db"
+    },
+    {
+      "topology": "Branch",
+      "source_archive_sha256": "d507026724bb0746bee41f2f75d5d042c289747377ca286217efcd267cde80d4",
+      "source_member": "case/worker/native-full-domain-branch/Branch-stock-cold8-N1/runs/train/native/train_stopped_state.json",
+      "uncompressed_bytes": 192607805,
+      "uncompressed_sha256": "d10368eb17016819387daf4ee614bddffda46dbe774c440109fa741e222308d9",
+      "fixture": "Branch-full-domain-stopped.json.qz",
+      "fixture_bytes": 25195012,
+      "fixture_sha256": "b3fadca58c562c45b88c5015f8ce7ab710351dd0e962cad6569765f6f2e3a4e1"
+    }
+  ]
+}

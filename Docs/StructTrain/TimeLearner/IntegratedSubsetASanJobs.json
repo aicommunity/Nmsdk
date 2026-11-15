@@ -1,0 +1,28 @@
+{
+  "kind": "integrated_stimulus_subset_asan_job",
+  "job": "s07-integrated-subset-log-asan-a1",
+  "host": "10.245.1.17",
+  "compiled_root": "b711e55358e12dac8104f19d01b8192002b1d614",
+  "PulseLib": "609a06d31ccad1c382d3df3b8150f7de87b6abfd",
+  "unit": "timelearner-bd956262-47b0-4703-835a-9c4d8307daa1.service",
+  "invocation_id": "97536d03814a40e388b7ab579ccf88de",
+  "initial_main_pid": 1924101,
+  "initial_start_ticks": "316787270",
+  "request_sha256": "43746f768145a380dc374aa9508826265e7d04f17138326fe8ac0b56dd0bd11a",
+  "worker_sha256": "f60cf391567fb8c626dfa670c74069f2ea6502dbeb1cb0b1a0b577785e2e4e38",
+  "status": "completed; all scoped checks passed; runtime frozen; closed and released",
+  "expected_physical_checks": 10,
+  "expected_reader_checks": 7,
+  "immutable_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-subset-log-asan-a1",
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "latest_readback": {
+    "terminal_passed": true,
+    "physical_completed": 10,
+    "reader_checks_passed": 7
+  },
+  "evidence_commit": "dae5697b579cacf3a6a1bb6c591d8e9cab0cd357",
+  "archive_members": 494,
+  "archive_bytes": 383616,
+  "independent_verification": "IntegratedSubsetASanVerification.json"
+}

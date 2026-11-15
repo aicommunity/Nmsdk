@@ -1,0 +1,38 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s09-migration357-cli-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "29ed8764aa6fa98cf7d05e8334377348d4ca7b9a",
+  "limits": {
+    "memory_bytes": 1073741824,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 8589934592,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-migration357-cli-a1",
+      "commit": "5761e16c92fc35580820dce49ad6eafa0c4ab1fc"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/migration357-cli-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Migration357A1-20261114/suite.json",
+      "sha256": "110c0df4dde7c9e4ec15866b153a0ff8df550e278ebbf14f4d62be84a7c2d337"
+    },
+    "fixtures": {
+      "TIMELEARNER_MIGRATION357_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/migration357-cli-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Migration357A1-20261114/fixture",
+      "TIMELEARNER_MIGRATION357_ROOT": "/media/user/Data/TimeLearnerRefactor/metadata-migration357-a1/root",
+      "TIMELEARNER_MIGRATION357_BIN": "/media/user/Data/TimeLearnerRefactor/metadata-migration357-a1/Bin",
+      "TIMELEARNER_MIGRATION357_PULSE": "/media/user/Data/TimeLearnerRefactor/metadata-migration357-a1/PulseLib"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 67108864,
+      "maximum_total_bytes": 134217728
+    }
+  }
+}

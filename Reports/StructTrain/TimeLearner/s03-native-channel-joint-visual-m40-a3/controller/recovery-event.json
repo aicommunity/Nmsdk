@@ -1,0 +1,113 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "0bc7867a-01fd-4dde-ab7d-64246dbc7fef",
+  "job_id": "s03-native-channel-joint-visual-normal-a3",
+  "recorded_unix": 1794014371.2486546,
+  "administrator": {
+    "pid": 1401196,
+    "start_ticks": "308941846",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1401206,
+    "start_ticks": "308941860",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-channel-joint-visual-normal-a3-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "6c05d1124f1bca768bc686b69cf8d6741ff8d8fb39c86f3c476fc23aaeadd6a5",
+      "unit": "timelearner-d8c8c9cc-8889-4e18-ad89-2e007878500e.service",
+      "invocation_id": "20bb7ea9f0374b23b68f4cda4c191609",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d8c8c9cc-8889-4e18-ad89-2e007878500e.service",
+      "initial_main_pid": 1401206,
+      "initial_start_ticks": "308941860",
+      "sha256": "efc650fa967bc812d6a4e2be546cf71cc98d0cde9434677847a1513e2c5c4c87"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-d8c8c9cc-8889-4e18-ad89-2e007878500e.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Exact archived-state replay worker and native descendants freshly closed; no training or classification claim.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/native-channel-joint-normal-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/native-channel-joint-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/data-phasea-eight-pattern-matrix-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/data-phasea-eight-pattern-matrix-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-channel-diagnostics-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-channel-diagnostics-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-channel-joint-visual-normal-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-channel-joint-visual-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-joint-report-normal-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-joint-report-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

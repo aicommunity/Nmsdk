@@ -6,6 +6,7 @@ alias bytes from a new derived tree; native artifact auditors stay unchanged.
 import argparse
 import hashlib
 import json
+import lzma
 from pathlib import Path, PurePosixPath
 import re
 import tarfile
@@ -15,6 +16,68 @@ from .native_evidence import EvidenceError, load, require
 
 ALIAS_ADAPTER = "dereferenced-glog-aliases-v1"
 ALIASES = {"NeuroModeler."+s for s in ("INFO", "WARNING", "ERROR", "FATAL")}
+CONTENT_REFERENCE = "earlier-regular-member-sha256-size-v1"
+
+
+def create_native_bundle(sources, output, *, dictionary_bytes=128*1024**2,
+                         deduplicate_content=False):
+    """Store every logical file, optionally encoding identical content once.
+
+    The default retains schema1. Schema2 uses tar content references only to an
+    earlier regular member with the same declared size and SHA256. Restoration
+    writes independent regular copies, never filesystem links. The inventory
+    still contains every logical file. Inventoried glog aliases retain bytes.
+    """
+    require(type(sources) is dict and bool(sources), 'bundle_empty_source_inventory')
+    require(type(deduplicate_content) is bool, 'bundle_invalid_deduplication_mode')
+    require(type(dictionary_bytes) is int and dictionary_bytes in
+            (8*1024**2, 32*1024**2, 64*1024**2, 128*1024**2), 'bundle_invalid_dictionary_size')
+    output = Path(output).absolute()
+    require(not output.exists() and not output.is_symlink(), 'bundle_output_already_exists')
+    output = output.parent.resolve(strict=True)/output.name
+    paths, members = {}, {}
+    for name, source in sources.items():
+        _name(name)
+        source = Path(source).resolve(strict=True)
+        require(source.is_file() and not source.is_relative_to(output), 'bundle_source_invalid_or_inside_output')
+        paths[name] = source
+        members[name] = {'bytes': source.stat().st_size, 'sha256': _sha(source)}
+    for name in paths:
+        require(not any(p.as_posix() in paths for p in PurePosixPath(name).parents
+                        if p.as_posix() != '.'), 'bundle_logical_file_directory_collision')
+    output.mkdir(exist_ok=False)
+    archive = output/'primary.tar.xz'
+    with lzma.LZMAFile(archive, mode='wb', filters=[{'id': lzma.FILTER_LZMA2,
+            'preset': 3, 'dict_size': dictionary_bytes}]) as compressed:
+        with tarfile.open(fileobj=compressed, mode='w|') as stream:
+            written = {}
+            for name in sorted(paths, key=lambda n: (members[n]['sha256'], n)):
+                path, record = paths[name], members[name]
+                info = tarfile.TarInfo(name); info.size = record['bytes']
+                identity = (record['sha256'], record['bytes'])
+                if deduplicate_content and identity in written:
+                    info.type = tarfile.LNKTYPE; info.size = 0
+                    info.linkname = written[identity]
+                    stream.addfile(info)
+                    continue
+                with path.open('rb') as source:
+                    stream.addfile(info, source)
+                written[identity] = name
+    # A completed archive is not published if any producer changed its inputs.
+    for name, path in paths.items():
+        require({'bytes': path.stat().st_size, 'sha256': _sha(path)} == members[name],
+                'bundle_source_changed_during_pack')
+    unique = {(v['sha256'], v['bytes']) for v in members.values()}
+    bundle = {'kind': 'compact_native_primary', 'schema_version': 2 if deduplicate_content else 1, 'members': members,
+              'archive_bytes': archive.stat().st_size, 'archive_sha256': _sha(archive),
+              'compression': {'codec': 'xz-lzma2', 'dictionary_bytes': dictionary_bytes,
+                              'member_order': 'content_sha256_then_logical_name'},
+              'expanded_bytes': sum(v['bytes'] for v in members.values()),
+              'unique_content_bytes': sum(size for _, size in unique)}
+    if deduplicate_content:
+        bundle['compression']['content_references'] = CONTENT_REFERENCE
+    (output/'bundle.json').write_text(json.dumps(bundle, indent=2)+'\n', encoding='utf-8')
+    return bundle
 
 
 def _sha(path):
@@ -43,6 +106,33 @@ def _record(record):
 def _alias(name):
     parts = PurePosixPath(name).parts
     return len(parts) >= 3 and parts[-3:-1] == ("native.events-log", "EventsLog") and parts[-1] in ALIASES
+
+
+def _bundle_version(bundle):
+    """Recognize the original minimal inventory and the two explicit wires."""
+    require(type(bundle) is dict, 'bundle_schema_invalid')
+    if 'kind' not in bundle and 'schema_version' not in bundle:
+        require(set(bundle) == {'members', 'archive_bytes', 'archive_sha256'},
+                'bundle_legacy_schema_invalid')
+        return 0
+    require(bundle.get('kind') == 'compact_native_primary' and
+            type(bundle.get('schema_version')) is int and bundle['schema_version'] in (1, 2),
+            'bundle_schema_invalid')
+    version = bundle['schema_version']
+    if version == 2:
+        require(set(bundle) == {'kind', 'schema_version', 'members', 'archive_bytes',
+                'archive_sha256', 'compression', 'expanded_bytes', 'unique_content_bytes'},
+                'bundle_schema_invalid')
+        compression = bundle['compression']
+        require(type(compression) is dict and set(compression) ==
+                {'codec', 'dictionary_bytes', 'member_order', 'content_references'} and
+                compression['codec'] == 'xz-lzma2' and
+                type(compression['dictionary_bytes']) is int and
+                compression['dictionary_bytes'] in (8*1024**2, 32*1024**2, 64*1024**2, 128*1024**2) and
+                compression['member_order'] == 'content_sha256_then_logical_name' and
+                compression['content_references'] == CONTENT_REFERENCE,
+                'bundle_content_reference_schema_invalid')
+    return version
 
 
 def _alias_plan(root, members):
@@ -89,15 +179,31 @@ def _alias_plan(root, members):
 
 def restore_native_bundle(bundle_path, output, *, compatibility=None):
     require(compatibility in (None, ALIAS_ADAPTER), "unknown_bundle_restoration_adapter")
-    bundle_path = Path(bundle_path).resolve(strict=True)
+    bundle_path = Path(bundle_path)
+    bundle_path = bundle_path.resolve(strict=True) if bundle_path.is_file() else bundle_path.absolute()
     bundle = load(bundle_path)
+    if bundle.get('kind') == 'timelearner_source_enveloped_primary':
+        from .source_envelope_bundle import restore
+        return restore(bundle_path, output, compatibility=compatibility)
+    version = _bundle_version(bundle)
     members = bundle.get("members")
     require(type(members) is dict and bool(members), "bundle_member_inventory_invalid")
     for name, record in members.items():
         _name(name); _record(record)
+    for name in members:
+        require(not any(p.as_posix() in members for p in PurePosixPath(name).parents
+                        if p.as_posix() != '.'), 'bundle_logical_file_directory_collision')
+    if version == 2:
+        unique = {(v['sha256'], v['bytes']) for v in members.values()}
+        require(type(bundle['expanded_bytes']) is int and
+                bundle['expanded_bytes'] == sum(v['bytes'] for v in members.values()) and
+                type(bundle['unique_content_bytes']) is int and
+                bundle['unique_content_bytes'] == sum(size for _, size in unique),
+                'bundle_content_reference_totals_invalid')
     require(compatibility == ALIAS_ADAPTER or not any(_alias(n) for n in members),
             "bundle_legacy_alias_requires_explicit_adapter")
-    archive = bundle_path.parent/"primary.tar.xz"
+    from .external_archive import locate
+    archive = locate(bundle_path.parent/"primary.tar.xz")
     before = archive.stat()
     require(type(bundle.get("archive_bytes")) is int and bundle["archive_bytes"] == before.st_size
             and type(bundle.get("archive_sha256")) is str and _sha(archive) == bundle["archive_sha256"],
@@ -106,22 +212,33 @@ def restore_native_bundle(bundle_path, output, *, compatibility=None):
     require(not output.exists() and not output.is_symlink(), "bundle_output_already_exists")
     output = output.parent.resolve(strict=True)/output.name
     output.mkdir(exist_ok=False)
-    seen = set()
+    seen, regular = set(), set()
     with tarfile.open(archive, "r:xz") as stream:
         for member in stream:
             name = _name(member.name)
-            require(member.isfile() and name not in seen and name in members,
+            reference = version == 2 and member.islnk()
+            require((member.isfile() or reference) and name not in seen and name in members,
                     "bundle_member_type_duplicate_or_unknown")
-            require(member.size == members[name]["bytes"], "bundle_member_size_mismatch")
-            seen.add(name)
+            if reference:
+                target = _name(member.linkname)
+                require(member.size == 0 and target in regular and
+                        members[target] == members[name], 'bundle_content_reference_invalid')
+                original = output/target
+                require(original.is_file() and not original.is_symlink() and
+                        original.resolve().is_relative_to(output), 'bundle_content_reference_invalid')
+            else:
+                require(member.size == members[name]["bytes"], "bundle_member_size_mismatch")
             path = output/name
             require(path.resolve().is_relative_to(output), "bundle_member_path_escape")
             path.parent.mkdir(parents=True, exist_ok=True)
             digest = hashlib.sha256(); size = 0
-            with stream.extractfile(member) as source, path.open("xb") as destination:
+            source = original.open('rb') if reference else stream.extractfile(member)
+            with source, path.open("xb") as destination:
                 for block in iter(lambda: source.read(1024**2), b""):
                     digest.update(block); size += len(block); destination.write(block)
             require({"bytes": size, "sha256": digest.hexdigest()} == members[name], "bundle_member_hash_mismatch")
+            seen.add(name)
+            if member.isfile():regular.add(name)
     require(seen == set(members), "bundle_member_missing")
     after = archive.stat()
     require((before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns) ==

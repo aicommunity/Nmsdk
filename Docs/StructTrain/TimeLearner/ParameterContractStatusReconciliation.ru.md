@@ -1,5 +1,10 @@
 # Сверка актуальных статусов параметров, 06.11.2026
 
+Дополнение09.11: [bounded control/peak reconciliation](ControlPeakPropertyReconciliation-20261109.ru.md)
+по Pulsef7/Rdkd6 уточняет семь свойств каждого learner и их владельцев.
+Все исходные runtime evidence statuses ниже сохранены. Это source review,
+не новый прогон; rising finding остаётся source-only/open.
+
 При повторной проверке найден устаревший раздел
 [ParameterSearchContracts](ParameterSearchContracts.ru.md): он всё ещё считал
 открытым дефект конечности timing setters и отсутствие measured length proposal.
@@ -19,3 +24,11 @@
 не новый серверный численный прогон. Прежний ASan timeout сохранён в источнике;
 последующая завершённая regression21 проверяется отдельно. Область полного
 плана не сужается: этапы1–12 остаются частичными.
+
+Дополнение 08.11: отдельно сверены 44 calibration/PostTune записи текущего
+каталога, где ещё оставалась историческая фраза об отсутствии native реализации.
+[Новая reconciliation](CalibrationPostTunePropertyReconciliation.ru.md) сохраняет
+исходные evidence statuses и различает public legacy knobs, существующие typed
+native phases и неполный support snapshot PulseLib fcc3fed0dc63fc0d8ae8dcfdb0f85bd5d004baf8.
+Это metadata/source review без новых numerical runs и без повышения всей
+property/mode/lifecycle matrix до accepted.

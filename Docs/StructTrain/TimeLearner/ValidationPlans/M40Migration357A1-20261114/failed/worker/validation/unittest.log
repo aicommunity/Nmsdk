@@ -1,0 +1,15 @@
+test_all357_exact_history_records_and_restored_last_path_negative (Scripts.StructTrain.TimeLearner.tests.test_current_script_migration_cli.CurrentScriptMigrationCliTest.test_all357_exact_history_records_and_restored_last_path_negative) ... FAIL
+
+======================================================================
+FAIL: test_all357_exact_history_records_and_restored_last_path_negative (Scripts.StructTrain.TimeLearner.tests.test_current_script_migration_cli.CurrentScriptMigrationCliTest.test_all357_exact_history_records_and_restored_last_path_negative)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-migration357-cli-a1/Scripts/StructTrain/TimeLearner/tests/test_current_script_migration_cli.py", line 44, in test_all357_exact_history_records_and_restored_last_path_negative
+    self.assertEqual(code,0,stderr)
+AssertionError: 2 != 0 : {"kind": "timelearner_script_migration_verification", "status": "invalid", "reason": "mapped_revision_not_available", "scientific_verdict": null}
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.306s
+
+FAILED (failures=1)

@@ -1,0 +1,21 @@
+{
+  "commit": "afb5c7d144ad92c701e294447180e802fe52741a",
+  "root": "8302e8f7622eae2c597c971dfbfa2b8a45108e55",
+  "PulseLib": "1d2a703deaf774de412874920917d481402d8b77",
+  "members_verified": 25,
+  "archive_bytes": 65096,
+  "archive_sha256": "663126b03f870ab7b51997d5c81f9a3e66e9c84f4212990f41ee136ad3513a7a",
+  "source_hashes_verified": 783,
+  "build_passed": false,
+  "native_tests_executed": false,
+  "compiler_errors": [
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1/Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelArchive.cpp:616:36: error: cannot bind non-const lvalue reference of type \u2018RDK::UEPtr<RDK::UNet>&\u2019 to an rvalue of type \u2018RDK::UEPtr<RDK::UNet>\u2019",
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1/Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelArchive.cpp:617:36: error: cannot bind non-const lvalue reference of type \u2018RDK::UEPtr<RDK::UNet>&\u2019 to an rvalue of type \u2018RDK::UEPtr<RDK::UNet>\u2019",
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1/Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelArchive.cpp:658:41: error: cannot bind non-const lvalue reference of type \u2018RDK::UEPtr<RDK::UNet>&\u2019 to an rvalue of type \u2018RDK::UEPtr<RDK::UNet>\u2019"
+  ],
+  "failure_classification": "Three UEPtr cross-type rvalue-to-lvalue binding errors in new import leases",
+  "whole_group_closed": true,
+  "lease_released": true,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

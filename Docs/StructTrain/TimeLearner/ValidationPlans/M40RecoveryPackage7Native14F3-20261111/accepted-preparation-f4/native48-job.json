@@ -1,0 +1,458 @@
+{
+  "kind": "timelearner_native_acceptance_job",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "preparation": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recovery-package7-native14-m40-f3-controller/inputs/preparation.json",
+  "paths": {
+    "source": "/media/user/Data/TimeLearnerRefactor/source-recovery-package7-native14-f3",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-recovery-package7-native14-f3",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-package7-native14-f3",
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recovery-package7-native14-m40-f3",
+    "resources": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+    "framework": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+  },
+  "build": {
+    "type": "Release",
+    "parallel": 2,
+    "wall_seconds": 10800,
+    "required_cache_tokens": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS:STRING=",
+      "CMAKE_CXX_FLAGS:STRING=",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=",
+      "CMAKE_SHARED_LINKER_FLAGS:STRING=",
+      "CMAKE_MODULE_LINKER_FLAGS:STRING=",
+      "CMAKE_STATIC_LINKER_FLAGS:STRING=",
+      "FETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_SOURCE_DIR_GOOGLETEST:PATH=/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "RDK_USE_LLM:BOOL=OFF",
+      "RDK_LLM_BUILD_EMBEDDED:BOOL=OFF",
+      "NMSDK_BUILD_PARALLEL_JOBS:UNINITIALIZED=2"
+    ]
+  },
+  "limits": {
+    "whole_wall_seconds": 14400,
+    "leaf_memory_bytes": 8589934592,
+    "leaf_tasks": 128,
+    "physical_free_floor_bytes": 2147483648,
+    "reservation_memory_bytes": 8589934592,
+    "reservation_disk_bytes": 12884901888
+  },
+  "asan_options": null,
+  "protected_runtimes": [
+    "/media/user/Data/TimeLearnerRefactor/runtime-native-archive-move18-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-native119-normal-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-native119-open-arm-normal-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-native119-foreign-reference-normal-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-n1-geometry-full-after-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-rejected-search-admission-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-rejected-search-admission-b1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-candidate-window-recovery-core-c1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-candidate-window-recovery-wire-c2"
+  ],
+  "artifacts": [
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse/imported-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse/imported-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse/imported-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse/imported-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse/imported-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse/imported-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse/imported-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse/imported-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse/imported-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse/imported-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse/imported-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse/imported-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery/imported-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery/imported-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery/imported-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery/imported-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery/imported-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery/imported-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse/imported-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse/imported-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse/imported-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse/imported-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse/imported-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse/imported-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery/imported-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery/imported-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery/imported-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery/warm-retry-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery/imported-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery/imported-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery/imported-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery/warm-retry-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-011/native-composite/package7/NativeRecoveryPackage7/ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-011/native-composite/package7/NativeRecoveryPackage7/ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-011/native-composite/package7/NativeRecoveryPackage7/ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-011/native-composite/package7/NativeRecoveryPackage7/ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-012/native-composite/package7/NativeRecoveryPackage7/BranchMissingForeignOrDuplicateLedgerCannotMutateOwner/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-012/native-composite/package7/NativeRecoveryPackage7/BranchMissingForeignOrDuplicateLedgerCannotMutateOwner/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-012/native-composite/package7/NativeRecoveryPackage7/BranchMissingForeignOrDuplicateLedgerCannotMutateOwner/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-012/native-composite/package7/NativeRecoveryPackage7/BranchMissingForeignOrDuplicateLedgerCannotMutateOwner/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    }
+  ]
+}

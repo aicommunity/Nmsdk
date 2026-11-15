@@ -1,0 +1,173 @@
+{
+  "kind": "timelearner_native_data_checks",
+  "schema_version": 1,
+  "job_id": "s08-finalization-remaining23-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-finalization-data-sdk-a1",
+    "commit": "929dbc176a0804910544539aaf79bdc4a02aa82a"
+  },
+  "runtime_manifest": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-finalization-data-sdk-m40-a1/finalization-enum-smoke-runtime.json",
+    "sha256": "7ab2d1f1bbe004316a7f2f88af3ab0ea7e149f7c9bb45259ffbbfcfc8f8b2422"
+  },
+  "inputs": [
+    {
+      "name": "branch-finalization-calibration-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+      "bytes": 1771601,
+      "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077"
+    },
+    {
+      "name": "branch-finalization-cold-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+      "bytes": 841629,
+      "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f"
+    },
+    {
+      "name": "branch-finalization-evaluation-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+      "bytes": 1771350,
+      "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a"
+    },
+    {
+      "name": "branch-finalization-fixed-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+      "bytes": 1772056,
+      "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946"
+    },
+    {
+      "name": "classic-finalization-calibration-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+      "bytes": 1917019,
+      "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49"
+    },
+    {
+      "name": "classic-finalization-cold-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+      "bytes": 913190,
+      "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31"
+    },
+    {
+      "name": "classic-finalization-evaluation-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+      "bytes": 1916765,
+      "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778"
+    },
+    {
+      "name": "classic-finalization-fixed-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+      "bytes": 1917293,
+      "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d"
+    }
+  ],
+  "cases": [
+    {
+      "name": "finalization-boundary-030",
+      "test_id": "NativeLiveFinalization/ClassicConnectedCalibrate"
+    },
+    {
+      "name": "finalization-boundary-031",
+      "test_id": "NativeLiveFinalization/BranchConnectedCalibrate"
+    },
+    {
+      "name": "finalization-boundary-032",
+      "test_id": "NativeLiveFinalization/ClassicStopped"
+    },
+    {
+      "name": "finalization-boundary-033",
+      "test_id": "NativeLiveFinalization/BranchStopped"
+    },
+    {
+      "name": "finalization-boundary-034",
+      "test_id": "NativeLiveFinalization/ClassicQueuedControlDrift"
+    },
+    {
+      "name": "finalization-boundary-035",
+      "test_id": "NativeLiveFinalization/BranchQueuedControlDrift"
+    },
+    {
+      "name": "finalization-boundary-036",
+      "test_id": "NativeLiveFinalization/ClassicQueuedReset"
+    },
+    {
+      "name": "finalization-boundary-037",
+      "test_id": "NativeLiveFinalization/BranchQueuedReset"
+    },
+    {
+      "name": "finalization-boundary-038",
+      "test_id": "NativeLiveFinalization/ClassicQueuedStop"
+    },
+    {
+      "name": "finalization-boundary-039",
+      "test_id": "NativeLiveFinalization/BranchQueuedStop"
+    },
+    {
+      "name": "finalization-boundary-040",
+      "test_id": "NativeLiveFinalization/ClassicInvalidDesign"
+    },
+    {
+      "name": "finalization-boundary-041",
+      "test_id": "NativeLiveFinalization/BranchInvalidDesign"
+    },
+    {
+      "name": "finalization-boundary-042",
+      "test_id": "NativeLiveFinalization/ClassicMultirate"
+    },
+    {
+      "name": "finalization-boundary-043",
+      "test_id": "NativeLiveFinalization/BranchMultirate"
+    },
+    {
+      "name": "finalization-boundary-044",
+      "test_id": "NativeLiveFinalization/ClassicCancelArmed"
+    },
+    {
+      "name": "finalization-boundary-045",
+      "test_id": "NativeLiveFinalization/BranchCancelArmed"
+    },
+    {
+      "name": "finalization-boundary-046",
+      "test_id": "NativeLiveFinalization/ClassicCancelTraining"
+    },
+    {
+      "name": "finalization-boundary-047",
+      "test_id": "NativeLiveFinalization/BranchCancelTraining"
+    },
+    {
+      "name": "finalization-boundary-048",
+      "test_id": "NativeLiveFinalization/ClassicCancelQueued"
+    },
+    {
+      "name": "finalization-boundary-049",
+      "test_id": "NativeLiveFinalization/BranchCancelQueued"
+    },
+    {
+      "name": "finalization-boundary-050",
+      "test_id": "NativeLiveFinalization/ClassicCancelPostTune"
+    },
+    {
+      "name": "finalization-boundary-051",
+      "test_id": "NativeLiveFinalization/BranchCancelPostTune"
+    },
+    {
+      "name": "finalization-boundary-052",
+      "test_id": "NativeLiveFinalizationPlanCodec/ActualDesignRoundtripAndMalformedDeclarations"
+    }
+  ],
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 64,
+    "maximum_wall_seconds": 21300,
+    "leaf_memory_bytes": 8589934592,
+    "leaf_tasks": 128,
+    "leaf_wall_seconds": 900,
+    "reservation_memory_bytes": 9126805504
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 2147483648
+  }
+}

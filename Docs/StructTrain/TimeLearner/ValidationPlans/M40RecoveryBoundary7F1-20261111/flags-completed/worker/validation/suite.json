@@ -1,0 +1,16 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-cpp-syntax-flags4-m40-f1",
+  "package_fingerprint": "4296644ef72ac31c1cd145462ea9c51474596ba2608200b152f501b7e3194a96",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_cpp_syntax_preflight.CppSyntaxPreflightFlagsTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_cpp_syntax_preflight.CppSyntaxPreflightFlagsTest.test_missing_duplicate_and_make_expansion_fail_before_any_compiler",
+    "Scripts.StructTrain.TimeLearner.tests.test_cpp_syntax_preflight.CppSyntaxPreflightFlagsTest.test_quoting_is_argument_parsing_and_not_shell_evaluation",
+    "Scripts.StructTrain.TimeLearner.tests.test_cpp_syntax_preflight.CppSyntaxPreflightFlagsTest.test_rebases_source_but_keeps_readonly_generated_and_system_headers",
+    "Scripts.StructTrain.TimeLearner.tests.test_cpp_syntax_preflight.CppSyntaxPreflightFlagsTest.test_write_link_dependency_and_response_options_are_rejected"
+  ],
+  "fixtures": {}
+}

@@ -1,0 +1,85 @@
+{
+  "kind": "materialized_source_pair_byte_differences",
+  "corrected_root": "e11bbd403a5f93790a7ad6c5a245c1964797d63d",
+  "unfixed_root": "bb1d24ea950ff068c25f7db7186517b55eef3dbd",
+  "materialized_paths_equal": true,
+  "materialized_files": 4020,
+  "changed_files": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "corrected": {
+        "mode": "100644",
+        "git_blob": "75bd97be6bd05cd9a8c3afbbe395676d9777435b",
+        "bytes": 289126,
+        "sha256": "e88c5956cda284057d2c458c47457a932864b5f94eff1607f4748de98dfa3941"
+      },
+      "unfixed": {
+        "mode": "100644",
+        "git_blob": "6f54395b559d50765d25ca37f11ac220a97e96a8",
+        "bytes": 258117,
+        "sha256": "0d821558aee13ca238d5a28025b8481c607dd85c9f7572f13f56a90399b39b10"
+      }
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
+      "corrected": {
+        "mode": "100644",
+        "git_blob": "c084b0185e9cfdeb2cda9de6af7c73d3f0b428d6",
+        "bytes": 60871,
+        "sha256": "0beb1ee8ce8719ac5ed652cac6f89ff28801bea4dad36c34d18ad8da6afdc967"
+      },
+      "unfixed": {
+        "mode": "100644",
+        "git_blob": "3742dc1819cdd26b1465b59ad7cac097619a2070",
+        "bytes": 59864,
+        "sha256": "f63cd74247fbb742d961aab38510b66aed9a84601c1a22172176af2ea594dd09"
+      }
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeTrainingService.cpp",
+      "corrected": {
+        "mode": "100644",
+        "git_blob": "81f0a480c628630e038e851d4a87c165db928731",
+        "bytes": 33113,
+        "sha256": "59080d856daa06fb93f64047da22e4585abccf42803df615167e32b4ba08166d"
+      },
+      "unfixed": {
+        "mode": "100644",
+        "git_blob": "c6e51fbe9a16d430dbf98c6d1d70b9f7f9076de6",
+        "bytes": 33037,
+        "sha256": "9419a31f417f8ffc012b2a16b0d3c9a865ca2ba7eb27d9ba8d2000052a28e7cd"
+      }
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeTrainingService.h",
+      "corrected": {
+        "mode": "100644",
+        "git_blob": "968151387a2f0f3274f98f613cd36d884c09bcb1",
+        "bytes": 15077,
+        "sha256": "30e8fa746269ab4a3fe1b4a21ce05590d828bd9fabe337cb38e6f061e1425027"
+      },
+      "unfixed": {
+        "mode": "100644",
+        "git_blob": "d34eb4e260b6ef2dd06428d5087de66470577290",
+        "bytes": 14642,
+        "sha256": "ce4c19d502161041a05166c2f3494f63a78245fb800f67954cdd811c80c7b4ec"
+      }
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+      "corrected": {
+        "mode": "100644",
+        "git_blob": "4bfaa92d84692cdb4f5d1fc81720d375834d8789",
+        "bytes": 49381,
+        "sha256": "c118cabda271f3a718ae68ad9e428dd0a17eb87e9baec1e3159eaeb785b477af"
+      },
+      "unfixed": {
+        "mode": "100644",
+        "git_blob": "1a58f4cde06ea7b8a418930407c3501533b6eb73",
+        "bytes": 49229,
+        "sha256": "6ff701e5a0b5e2f3a2ba661d86ff14a77208efd165f161df2a0f80c48512106f"
+      }
+    }
+  ],
+  "CPP_or_model_testing_performed": false
+}

@@ -10,7 +10,7 @@ namespace NmsdkWorker {
 // No trace is treated as complete merely because its file was closed.
 class EvidenceWriter {
     QString directory;
-    std::size_t channels,count=0;
+    std::size_t channels,count=0,sampledFrames=0;
     QFile csv;
     bool pending=false;
     std::vector<std::pair<QString,QString>> files;
@@ -30,8 +30,10 @@ public:
         Require(pending && sample.potentials.size()==channels,"training_trace_shape_or_order_changed");
         std::ostringstream row;row.imbue(std::locale::classic());row<<std::setprecision(17)<<sample.time<<','<<sample.stimulus;
         for(double value:sample.potentials)row<<','<<value;row<<'\n';const auto bytes=QByteArray::fromStdString(row.str());
-        Require(csv.write(bytes)==bytes.size(),"training_trace_write_failed");
+        Require(csv.write(bytes)==bytes.size(),"training_trace_write_failed");++sampledFrames;
     }
+    std::size_t NativeTrials() const {return count;}
+    std::size_t SampledFrames() const {return sampledFrames;}
     void Observation(const NMSDK::TimeLearner::NativeProbeResult& result)
     {
         if(!pending)Open(); // An unarmed cancellation still has a declared empty CSV.

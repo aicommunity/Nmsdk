@@ -1,0 +1,3 @@
+# Classic N4/N1 budget16: остановка при записи execution
+
+Lossless corpus:1362 regular files/933393849 bytes,3 closed units. Native timeout2100.3206305350177s; state276102071B и summary21412671B записаны, execution отсутствует. SIGTERM во время повторного DecodeNativeCompositeTrainingArchive в WrapNativeCandidateWindowFamilyExecution. Сохраняются все native CSV/JSON, package, summary и controller receipts. Training outcome требует отдельного чтения; classification не подтверждена. Collector byte/closure-only: не новый native и не scientific PASS. Независимый replay ещё не выполнен. Исходные файлы на сервере не изменены.

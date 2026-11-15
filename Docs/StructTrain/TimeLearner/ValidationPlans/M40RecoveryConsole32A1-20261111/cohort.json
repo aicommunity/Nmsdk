@@ -1,0 +1,332 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeCompositeBuildBoundary",
+        "NativeRecoveryConsoleArtifact",
+        "NativeCandidateWindowConsoleArtifact",
+        "NativeRecoveryRecognition7"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeCompositeBuildBoundary/ClassicActiveProtocol4BuildStillRevokesControl",
+    "NativeCompositeBuildBoundary/BranchActiveProtocol4BuildStillRevokesControl",
+    "NativeCompositeBuildBoundary/ClassicActiveProtocol5BuildStillRevokesControl",
+    "NativeCompositeBuildBoundary/BranchActiveProtocol5BuildStillRevokesControl",
+    "NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters",
+    "NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger",
+    "NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication",
+    "NativeCandidateWindowConsoleArtifact/ClassicSummary7MatchesActualSourceGroups",
+    "NativeCandidateWindowConsoleArtifact/BranchSummary7MatchesActualSourceGroups",
+    "NativeCandidateWindowConsoleArtifact/StoppedExactMathSummaryKeepsNullServiceCertificate",
+    "NativeCandidateWindowConsoleArtifact/PartialSummaryDoesNotInventReferenceSet",
+    "NativeCandidateWindowConsoleArtifact/Publisher6WritesExactNativePrimaryMirror",
+    "NativeCandidateWindowConsoleArtifact/Publisher6ChangedExternalPrimaryRejected",
+    "NativeCandidateWindowConsoleArtifact/Preflight4OwnsNumericBaseAndKnownZeros",
+    "NativeCandidateWindowConsoleArtifact/BeforeOwnedStartFailure4KeepsUnknownAttemptCounters",
+    "NativeCandidateWindowConsoleArtifact/Execution4KeepsRetainedAndProcessCountersSeparate",
+    "NativeCandidateWindowConsoleArtifact/PublisherRejectsMixedVersionBeforeWrites",
+    "NativeCandidateWindowConsoleArtifact/Cold6ConfiguredDispatchRetainsExactExecution3",
+    "NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil",
+    "NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil",
+    "NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil",
+    "NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil",
+    "NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil",
+    "NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil",
+    "NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil",
+    "NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil",
+    "NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil",
+    "NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil"
+  ],
+  "runplan": [
+    {
+      "name": "guard-001",
+      "expected_ids": [
+        "NativeCompositeBuildBoundary/ClassicActiveProtocol4BuildStillRevokesControl"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "guard-002",
+      "expected_ids": [
+        "NativeCompositeBuildBoundary/BranchActiveProtocol4BuildStillRevokesControl"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "guard-003",
+      "expected_ids": [
+        "NativeCompositeBuildBoundary/ClassicActiveProtocol5BuildStillRevokesControl"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "guard-004",
+      "expected_ids": [
+        "NativeCompositeBuildBoundary/BranchActiveProtocol5BuildStillRevokesControl"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "console-001",
+      "expected_ids": [
+        "NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "console-002",
+      "expected_ids": [
+        "NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "console-003",
+      "expected_ids": [
+        "NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "console-004",
+      "expected_ids": [
+        "NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "console-005",
+      "expected_ids": [
+        "NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "console-006",
+      "expected_ids": [
+        "NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "console-007",
+      "expected_ids": [
+        "NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "legacy-001",
+      "expected_ids": [
+        "NativeCandidateWindowConsoleArtifact/ClassicSummary7MatchesActualSourceGroups"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "legacy-002",
+      "expected_ids": [
+        "NativeCandidateWindowConsoleArtifact/BranchSummary7MatchesActualSourceGroups"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "legacy-003",
+      "expected_ids": [
+        "NativeCandidateWindowConsoleArtifact/StoppedExactMathSummaryKeepsNullServiceCertificate"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "legacy-004",
+      "expected_ids": [
+        "NativeCandidateWindowConsoleArtifact/PartialSummaryDoesNotInventReferenceSet"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "legacy-005",
+      "expected_ids": [
+        "NativeCandidateWindowConsoleArtifact/Publisher6WritesExactNativePrimaryMirror"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "legacy-006",
+      "expected_ids": [
+        "NativeCandidateWindowConsoleArtifact/Publisher6ChangedExternalPrimaryRejected"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "legacy-007",
+      "expected_ids": [
+        "NativeCandidateWindowConsoleArtifact/Preflight4OwnsNumericBaseAndKnownZeros"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "legacy-008",
+      "expected_ids": [
+        "NativeCandidateWindowConsoleArtifact/BeforeOwnedStartFailure4KeepsUnknownAttemptCounters"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "legacy-009",
+      "expected_ids": [
+        "NativeCandidateWindowConsoleArtifact/Execution4KeepsRetainedAndProcessCountersSeparate"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "legacy-010",
+      "expected_ids": [
+        "NativeCandidateWindowConsoleArtifact/PublisherRejectsMixedVersionBeforeWrites"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "legacy-011",
+      "expected_ids": [
+        "NativeCandidateWindowConsoleArtifact/Cold6ConfiguredDispatchRetainsExactExecution3"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-001",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-002",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-003",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-004",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-005",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-006",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-007",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-008",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-009",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    },
+    {
+      "name": "native-010",
+      "expected_ids": [
+        "NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil"
+      ],
+      "wall_seconds": 900
+    }
+  ],
+  "partitions": [
+    {
+      "name": "guard-NativeCompositeBuildBoundary",
+      "ids": [
+        "NativeCompositeBuildBoundary/ClassicActiveProtocol4BuildStillRevokesControl",
+        "NativeCompositeBuildBoundary/BranchActiveProtocol4BuildStillRevokesControl",
+        "NativeCompositeBuildBoundary/ClassicActiveProtocol5BuildStillRevokesControl",
+        "NativeCompositeBuildBoundary/BranchActiveProtocol5BuildStillRevokesControl"
+      ],
+      "count": 4
+    },
+    {
+      "name": "console-NativeRecoveryConsoleArtifact",
+      "ids": [
+        "NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters",
+        "NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger",
+        "NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication"
+      ],
+      "count": 7
+    },
+    {
+      "name": "legacy-NativeCandidateWindowConsoleArtifact",
+      "ids": [
+        "NativeCandidateWindowConsoleArtifact/ClassicSummary7MatchesActualSourceGroups",
+        "NativeCandidateWindowConsoleArtifact/BranchSummary7MatchesActualSourceGroups",
+        "NativeCandidateWindowConsoleArtifact/StoppedExactMathSummaryKeepsNullServiceCertificate",
+        "NativeCandidateWindowConsoleArtifact/PartialSummaryDoesNotInventReferenceSet",
+        "NativeCandidateWindowConsoleArtifact/Publisher6WritesExactNativePrimaryMirror",
+        "NativeCandidateWindowConsoleArtifact/Publisher6ChangedExternalPrimaryRejected",
+        "NativeCandidateWindowConsoleArtifact/Preflight4OwnsNumericBaseAndKnownZeros",
+        "NativeCandidateWindowConsoleArtifact/BeforeOwnedStartFailure4KeepsUnknownAttemptCounters",
+        "NativeCandidateWindowConsoleArtifact/Execution4KeepsRetainedAndProcessCountersSeparate",
+        "NativeCandidateWindowConsoleArtifact/PublisherRejectsMixedVersionBeforeWrites",
+        "NativeCandidateWindowConsoleArtifact/Cold6ConfiguredDispatchRetainsExactExecution3"
+      ],
+      "count": 11
+    },
+    {
+      "name": "native-NativeRecoveryRecognition7",
+      "ids": [
+        "NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil",
+        "NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil",
+        "NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil",
+        "NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil",
+        "NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil",
+        "NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil",
+        "NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil",
+        "NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil",
+        "NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil",
+        "NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil"
+      ],
+      "count": 10
+    }
+  ]
+}

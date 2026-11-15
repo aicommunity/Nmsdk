@@ -1,0 +1,68 @@
+{
+  "kind": "cold6_owning_schema_source_fix_inventory",
+  "schema_version": 1,
+  "status": "source_only_unrun",
+  "root_base": "b6d0f752ca1668b6a908a435438020db58d2018e",
+  "pulse_base": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+  "pulse_fix": "4a5c2ec9df9a9f704dcd8260714323494bfa4415",
+  "target": "Test_PulseLib_StorageComponents",
+  "focused_count": 4,
+  "focused_ids": [
+    "NativeCompositeDeclarations/ClassicCold6AndProtocol4StrictRoundtrip",
+    "NativeCompositeDeclarations/BranchCold6AndProtocol4StrictRoundtrip",
+    "NativeCompositeDeclarations/ClassicCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCompositeDeclarations/BranchCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes"
+  ],
+  "new_count": 2,
+  "new_ids": [
+    "NativeCompositeDeclarations/ClassicCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCompositeDeclarations/BranchCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes"
+  ],
+  "source": {
+    "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+    "bytes": 107854,
+    "git_blob_sha256": "c2c44963d2e60c111dd57a8b2f9ec7dcc62e111a9b43fbccde92e6e0a4664121",
+    "literal_TEST_count": 151
+  },
+  "base_versions": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "checks": [
+    "production owning numeric base schema",
+    "all flat fields preserved",
+    "structured encode-decode-encode",
+    "actual serialized Compact bytes through production strict parser",
+    "bool/string/null rejected no coercion"
+  ],
+  "artifact": "TIMELEARNER_COMPOSITE_OUTPUT/{classic,branch}-cold6-envelope/{original-roundtrip,base-1,base-2,base-3,base-4}/producer-wire.json",
+  "runtime_training_executed": false,
+  "live_C0_created": false,
+  "local_build_numeric_or_server_rerun": false,
+  "A3_negative_repaired_in_place": false,
+  "decoder_or_Number_changed": false,
+  "physics_math_tolerances_changed": false,
+  "A3_reported_scope": {
+    "pass": 230,
+    "fail": 1,
+    "not_run": 17,
+    "independent_negative_receipt_pending": true
+  },
+  "next_run_order": [
+    "two failing declarations plus two focused codecs",
+    "actual previous not-run/config/autostart tail with IDs from immutable raw JUnit/runplan",
+    "remaining regression including long20k/C0; no premature248 claim"
+  ],
+  "unselected_inherited_diagnostic_ids": [
+    "NativeCompositeDeadlineDiagnostic/ClassicUnchangedLastFinalReachability",
+    "NativeCompositeDeadlineDiagnostic/BranchUnchangedLastFinalReachability"
+  ],
+  "future_separate_sites": [
+    "Pulse cold7 same owning-value rule",
+    "Root WrapNativeCompositeExecution execution3 same-object proxy alias"
+  ],
+  "scientific_verdict": null,
+  "runtime_accepted": false
+}

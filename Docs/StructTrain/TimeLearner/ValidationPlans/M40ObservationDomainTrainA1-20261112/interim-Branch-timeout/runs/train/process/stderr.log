@@ -1,0 +1,28 @@
+*** Aborted at 1794443681 (unix time) try "date -d @1794443681" if you are using GNU date ***
+PC: @                0x0 (unknown)
+*** SIGTERM (@0x3e800000d3d) received by PID 2306881 (TID 0x7b83d129afc0) from PID 3389; stack trace: ***
+    @     0x7b83d1a66206 (unknown)
+    @     0x7b83d0c45330 (unknown)
+    @     0x7b83d0cade55 __libc_free
+    @     0x7b83d15a1668 QCborValue::dispose()
+    @     0x7b83d15b5044 QJsonValue::~QJsonValue()
+    @     0x5576ee793d6c NMSDK::TimeLearner::(anonymous namespace)::Prepared()
+    @     0x5576ee7965a9 NMSDK::TimeLearner::EncodeNativeProbeEvidence()
+    @     0x5576ee7904a0 NMSDK::TimeLearner::DecodeNativeProbeEvidence()
+    @     0x5576ee97ef81 NMSDK::TimeLearner::(anonymous namespace)::RequireClosedNative()
+    @     0x5576ee989ce7 NMSDK::TimeLearner::DecodeMatchedOmissionEvidence()
+    @     0x5576ee6a1203 NMSDK::TimeLearner::DecodeNativeCompositeTrainingArchive()
+    @     0x5576ee6a9dcc NMSDK::TimeLearner::EncodeNativeCandidateWindowServiceArchive()
+    @     0x5576ee9a836c NMSDK::TimeLearner::NativeCandidateWindowStateFactory::ExportImpl()
+    @     0x5576ee9aa4a5 NMSDK::TimeLearner::NativeCandidateWindowStateFactory::ExportRecovery()
+    @     0x5576ee6ba03b NMSDK::TimeLearner::ExportNativeLearnedStateImpl()
+    @     0x5576ee6bd021 NMSDK::TimeLearner::ExportNativeLearnedState()
+    @     0x5576ee42792d NMSDK::NNeuronTimeLearnerBranch::ExportNativeLearnedStateWithCapacitance()
+    @     0x5576ee427a94 NMSDK::NNeuronTimeLearnerBranch::ExportNativeLearnedState()
+    @     0x5576eddbf9c1 _ZZN12_GLOBAL__N_17ExecuteIN5NMSDK24NNeuronTimeLearnerBranchEEEiRKNS_3JobERK7QStringbENKUlT_T0_T1_T2_E_clIN3RDK5UEPtrINSF_8UStorageEEENSG_INSF_12UEnvironmentEEENSG_INSF_10UContainerEEENSG_IS2_EEEEDaS9_SA_SB_SC_.isra.0
+    @     0x5576eddc128b (anonymous namespace)::Execute<>()
+    @     0x5576eddc1446 RunTimeLearnerTrainingJob()
+    @     0x5576edd83011 main
+    @     0x7b83d0c2a1ca (unknown)
+    @     0x7b83d0c2a28b __libc_start_main
+    @     0x5576edd84fc5 _start

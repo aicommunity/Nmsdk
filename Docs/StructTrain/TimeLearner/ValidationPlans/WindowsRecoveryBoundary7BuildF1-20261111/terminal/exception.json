@@ -1,0 +1,4 @@
+{
+  "reason": "owned_build_not_accepted",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\source-recovery-boundary7-win-f1\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\sdk-build.py\", line 173, in main\n    require(result['execution'] == 'completed' and result['validity'] == 'valid' and\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            result.get('all_processes_closed') is True, 'owned_build_not_accepted')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-recovery-boundary7-win-f1\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\sdk-build.py\", line 22, in require\n    raise RuntimeError(reason)\nRuntimeError: owned_build_not_accepted\n"
+}

@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-native-search-history-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "limits": {
+    "memory_bytes": 6442450944,
+    "tasks": 64,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 268435456
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-native-search-history-a1",
+      "commit": "c899d8ff1b58a3cbe8a9f0453665f92d509eb3bc"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/native-search-history-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40NativeSearchHistoryA1-20261113/suite.json",
+      "sha256": "f0c7626cd6ecf752629a5a254275d72950668aae26519f9eee34c6f8bfa0066b"
+    },
+    "fixtures": {
+      "TIMELEARNER_SEARCH_REPORT_PRIMARY": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-publication-receipt-budget16-train-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train"
+    }
+  }
+}

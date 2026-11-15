@@ -1,0 +1,113 @@
+{
+    "composite_measurement": {
+        "attempt_limits": {
+            "maximum_groups": 64,
+            "maximum_native_probes": 256,
+            "maximum_total_samples": 138240
+        },
+        "candidate_window_policy": {
+            "coordinate_mode": "relative_native_frame_interval",
+            "inputs": [
+                {
+                    "base_left_guard_frames": 20,
+                    "base_right_guard_frames": 20,
+                    "capacitance_change_guard_frames": 0,
+                    "delay_frames_per_segment": 20,
+                    "hard_first_frame": 1,
+                    "hard_last_frame": 539,
+                    "length_guard_frames": 0,
+                    "maximum_window_frames": 100,
+                    "resistance_change_guard_frames": 0,
+                    "synapse_count_guard_frames": 0
+                },
+                {
+                    "base_left_guard_frames": 20,
+                    "base_right_guard_frames": 20,
+                    "capacitance_change_guard_frames": 0,
+                    "delay_frames_per_segment": 20,
+                    "hard_first_frame": 1,
+                    "hard_last_frame": 539,
+                    "length_guard_frames": 0,
+                    "maximum_window_frames": 100,
+                    "resistance_change_guard_frames": 0,
+                    "synapse_count_guard_frames": 0
+                }
+            ],
+            "maximum_feature_terms": 4096,
+            "policy_id": "reference-anchored-candidate-window-v1",
+            "proposals_per_logical_request": 1,
+            "schema_version": 1,
+            "seed_rule": "immutable_reference_full_before"
+        },
+        "context_policy": {
+            "baseline_absolute": 1e-12,
+            "comparison_radius_ticks": 1,
+            "influence_absolute": 1e-06,
+            "influence_relative": 0,
+            "maximum_native_probes": 4,
+            "maximum_samples": 540,
+            "maximum_total_samples": 2160,
+            "repeatability_absolute": 1e-10,
+            "repeatability_relative": 0,
+            "schema_version": 1,
+            "time_comparison_tolerance": 1e-10
+        },
+        "geometry_policy": {
+            "maximum_inputs": 2,
+            "maximum_samples": 540,
+            "maximum_total_samples": 2160,
+            "repeatability_absolute": 1e-10,
+            "schema_version": 1
+        },
+        "maximum_group_model_seconds": 2,
+        "maximum_group_wall_seconds": 300,
+        "maximum_total_primary_bytes": 67108864,
+        "method_id": "declared-window-basin-necessity-v1",
+        "schema_version": 2
+    },
+    "initial_model_epoch": 0,
+    "initial_model_revision": "af94a16495b9ce556f044e8e846c142b252d8fe6f5c5399d2420f1b0960cda80",
+    "maximum_invalid_reference_probes": 0,
+    "maximum_model_seconds": 120,
+    "maximum_reference_probes": 4,
+    "maximum_wall_seconds": 1800,
+    "protocol_binding": "1ffae8d8b492cd83855ac36f145f2f3aa1ceecd8d3abd2a2b937230b149e7a1a",
+    "record_capacitance_history": false,
+    "run_id": "cold6-native-service",
+    "schema_version": 2,
+    "search": {
+        "bounds": [
+            {
+                "maximum_length": 2,
+                "maximum_resistance": 86000000,
+                "maximum_synapses": 1,
+                "minimum_length": 2,
+                "minimum_resistance": 86000000,
+                "minimum_synapses": 1
+            },
+            {
+                "maximum_length": 1,
+                "maximum_resistance": 86000000,
+                "maximum_synapses": 1,
+                "minimum_length": 1,
+                "minimum_resistance": 86000000,
+                "minimum_synapses": 1
+            }
+        ],
+        "capacitance_search": null,
+        "invalid_measurement_recovery": "retry_same_candidate",
+        "maximum_candidates_per_input": 1,
+        "maximum_edits": 4,
+        "maximum_invalid_observations": 0,
+        "maximum_probes": 32,
+        "maximum_sweeps": 1,
+        "n0_candidate_repeats": 1,
+        "normalization": "N0",
+        "resistance_subdivision_depth": 4,
+        "tolerances": {
+            "amplitude_absolute": 1e-05,
+            "amplitude_relative": 0,
+            "sync": 0.2
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 2,
+  "execution": "process_error",
+  "reason": "nonzero_exit_or_missing_terminal_status",
+  "returncode": 2,
+  "wall_seconds": 6.064307908993214,
+  "model_time": null,
+  "runtime_provenance": "loaded_files_captured",
+  "mapping_error": null,
+  "runtime_fingerprint": "a55a723c4c966bdce927f38c65723bcad11f7b4c020e1adf00c8a75af6755ffa",
+  "ownership_scope": "bound_cgroup",
+  "all_processes_closed": true,
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "needs_review",
+    "error_records": 0,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 1,
+    "reasons": [],
+    "examples": [
+      {
+        "stream": "stderr.log",
+        "chunk": 1,
+        "severity": "unclassified",
+        "excerpt": "TimeLearner probe job: candidate_window_summary_requires_owned_finished_boundary"
+      }
+    ],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 81,
+        "sha256": "45d39165066d0e011bc8e5f2cff5e6c911644bc3309dbc604f3fab3c84ea41a2"
+      }
+    ],
+    "contained_streams_match": true,
+    "scientific_verdict": null
+  }
+}

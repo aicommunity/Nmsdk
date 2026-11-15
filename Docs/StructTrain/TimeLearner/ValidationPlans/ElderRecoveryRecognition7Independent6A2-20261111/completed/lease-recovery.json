@@ -1,0 +1,88 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "135f3a4d-becf-42c3-9fcd-1de7cb98acd8",
+  "job_id": "s08-recovery-recognition7-independent6-elder-a2",
+  "recorded_unix": 1794425839.2670584,
+  "administrator": {
+    "pid": 3482738,
+    "start_ticks": "399536461",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 3485562,
+    "start_ticks": "399536946",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s08-recovery-recognition7-independent6-elder-a2/process/contained",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "e84b553c721ef3733a9069425ff15a026f3c5ed5cd3bd2e38b4afe9dd9efe2ff",
+      "unit": "timelearner-fabd262f-8dd7-499d-b2e2-9210c569bf11.service",
+      "invocation_id": "88e223f4558042ab81dd5d25d272eeae",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fabd262f-8dd7-499d-b2e2-9210c569bf11.service",
+      "initial_main_pid": 3485562,
+      "initial_start_ticks": "399536946",
+      "sha256": "4984ba6d2996336fac9e3248f04c7f73a5a2bfe0fe7f52b1edda86210a198619"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-fabd262f-8dd7-499d-b2e2-9210c569bf11.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/publications/recovery-recognition7-native10-a2/Reports/StructTrain/TimeLearner/RecoveryRecognition7Native10ClosedCorpus-20261111",
+      "requested_path": "/home/user/timelearner-refactor/publications/recovery-recognition7-native10-a2/Reports/StructTrain/TimeLearner/RecoveryRecognition7Native10ClosedCorpus-20261111"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s08-recovery-recognition7-independent6-elder-a2",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s08-recovery-recognition7-independent6-elder-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/requests/recovery-recognition7-independent6-a2/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRecoveryRecognition7Independent6A2-20261111",
+      "requested_path": "/home/user/timelearner-refactor/requests/recovery-recognition7-independent6-a2/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRecoveryRecognition7Independent6A2-20261111"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-n1-geometry-decision-after-a4",
+      "requested_path": "/home/user/timelearner-refactor/source-n1-geometry-decision-after-a4"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-recovery-recognition7-native10-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-recovery-recognition7-native10-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

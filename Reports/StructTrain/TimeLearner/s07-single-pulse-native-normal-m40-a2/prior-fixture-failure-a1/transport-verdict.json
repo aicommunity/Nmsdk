@@ -1,0 +1,22 @@
+{
+  "kind": "timelearner_native_test_gate_result",
+  "schema_version": 1,
+  "execution": "process_error",
+  "validity": "valid",
+  "assertion_status": "failed",
+  "reason": "complete_declared_test_inventory",
+  "inventory": {
+    "expected": 21,
+    "observed": 21,
+    "failed_test_ids": [
+      "SinglePulseCharacterization/ClassicRestoresBurstResponse",
+      "SinglePulseCharacterization/BranchRestoresBurstResponse",
+      "SinglePulseCharacterization/PreparedFaultRestoresBothTopologies",
+      "SinglePulseCharacterization/SampleFaultRestoresBothTopologies",
+      "SinglePulseCharacterization/FinalSampleFaultRestoresBothTopologies"
+    ],
+    "assertion_status": "failed",
+    "sha256": "e3e76ac9e02b695389ec2419ed4cdc75ae76d718e82eedacadd7b46f4f0c1bb7"
+  },
+  "scientific_verdict": null
+}

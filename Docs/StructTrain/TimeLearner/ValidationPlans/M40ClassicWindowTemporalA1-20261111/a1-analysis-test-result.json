@@ -1,0 +1,42 @@
+{
+  "png_count": 0,
+  "worker_terminal": {
+    "operation_passed": false,
+    "operation": "python-validation",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "test_result": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "actual-Classic-N4-stopped-Train-window-temporal-a1",
+    "package_fingerprint": "1686ade8c8dba8585b503035a881c994df697491c409f8f9e2a077c7d7b557ad",
+    "execution": "completed",
+    "assertion_status": "failed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_training_temporal_native.CompositeTrainingTemporalNativeTest.test_actual_failed_window_and_all_somas_controls_are_preserved",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_training_temporal_native.CompositeTrainingTemporalNativeTest.test_missing_group_refuses_output_after_actual_package_replay"
+    ],
+    "executed_tests": 2,
+    "failures": [],
+    "errors": [
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_training_temporal_native.CompositeTrainingTemporalNativeTest.test_actual_failed_window_and_all_somas_controls_are_preserved"
+    ],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_COMPOSITE_TRAIN_NATIVE": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-after-stock-classic-train-m40-a1/worker/native-stock-cold7/Classic-stock-cold7-N1/runs/train/native",
+        "files": 132,
+        "fingerprint": "745ff3e04d6008e42d13a4405a4dcf0b018b3480dcf8b3ee2843c15d2ed9e21a"
+      },
+      "TIMELEARNER_COMPOSITE_TRAIN_NATIVE_CSV": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-after-stock-classic-train-m40-a1/worker/native-stock-cold7/Classic-stock-cold7-N1/runs/train/native",
+        "files": 216,
+        "fingerprint": "131897e246a69f78da051642c0d59ece78ae23e6708661f0d51a2fcf60671d66"
+      }
+    },
+    "scientific_verdict": null
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "kind": "windows_native_domain_fixture_gate_plan",
+  "schema_version": 1,
+  "prepared_only": false,
+  "worker": "user@10.245.1.14",
+  "source_root": "C:/Projects/TimeLearnerWorker/source-fixture-identity-windows-a2",
+  "runtime_root": "C:/Projects/TimeLearnerWorker/runtime-fixture-identity-windows-a2",
+  "root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "pulse": "3accbed3c5d6ac2eaff98970227485a9d899835c",
+  "backend_root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "fcc_reader_root_matched": false,
+  "accepted_warm_build_evidence": "c0f1297e2f66f0f2e5216a016d74d56dba238a2d",
+  "expected_runtime_executables": {
+    "NeuroModelerConsole.exe": {
+      "bytes": 10868736,
+      "sha256": "bb9489976b0b3d72c5e573c44ffdb4daa1408371b4ade1316bc8962c2a6a3b95"
+    },
+    "Test_PulseLib_StorageComponents.exe": {
+      "bytes": 19501056,
+      "sha256": "26a72e6541e20e759f095304ee7905cd78bb3ea1eb01868767eb465e86cf4a28"
+    }
+  },
+  "process_limits": {
+    "memory_bytes": 3221225472,
+    "maximum_processes": 1,
+    "backend_extra_available_physical_reserve_bytes": 268435456
+  },
+  "minimum_available_physical_bytes": 3489660928,
+  "worker_lock": "C:/Projects/TimeLearnerWorker/locks/worker.lock",
+  "cooperative_runtime_capture": true,
+  "native_spec_schema": 4,
+  "expected_cases": 18,
+  "groups": [
+    {
+      "label": "capture_codec10",
+      "expected_test_ids": [
+        "NativeResponseDomainCapture/ChangedEventOrCountCannotCloseCapture",
+        "NativeResponseDomainCapture/ChangedMeasuredPeakCannotHideBehindSameValidityAndReasons",
+        "NativeResponseDomainCapture/ChangedSelectorOrBaseCannotCloseCapture",
+        "NativeResponseDomainCapture/ClosedRecordBindsActualEventsAndDistinctBaseRevision",
+        "NativeResponseDomainCapture/FailedAppendCannotBeRepairedByAnotherFrame",
+        "NativeResponseDomainCapture/LostFrameAndCancelledClosureRemainIncomplete",
+        "NativeResponseDomainCapture/ReproducedLegacyAmbiguityDoesNotEraseCompleteWaveform",
+        "NativeResponseDomainCapture/UnknownClosureDiagnosticCannotHideBehindInvalidFlag",
+        "NativeResponseDomainCodec/RequiresClosedCaptureAndExactPrimaryBytes",
+        "NativeResponseDomainCodec/UsesItsOwnImmutableClosureAndKeepsDiagnosticStatus"
+      ],
+      "maximum_wall_seconds": 300
+    },
+    {
+      "label": "Classic2000",
+      "expected_test_ids": [
+        "NativeResponseDomainBridge/Classic2000"
+      ],
+      "maximum_wall_seconds": 1200
+    },
+    {
+      "label": "Classic20000",
+      "expected_test_ids": [
+        "NativeResponseDomainBridge/Classic20000"
+      ],
+      "maximum_wall_seconds": 1200
+    },
+    {
+      "label": "Branch2000",
+      "expected_test_ids": [
+        "NativeResponseDomainBridge/Branch2000"
+      ],
+      "maximum_wall_seconds": 1200
+    },
+    {
+      "label": "Branch20000",
+      "expected_test_ids": [
+        "NativeResponseDomainBridge/Branch20000"
+      ],
+      "maximum_wall_seconds": 1200
+    },
+    {
+      "label": "ClassicN6dimensions",
+      "expected_test_ids": [
+        "NativeLearnerDimensions/ClassicSixInputs2000"
+      ],
+      "maximum_wall_seconds": 1200
+    },
+    {
+      "label": "BranchN6dimensions",
+      "expected_test_ids": [
+        "NativeLearnerDimensions/BranchSixInputs2000"
+      ],
+      "maximum_wall_seconds": 1200
+    },
+    {
+      "label": "ClassicN6burst",
+      "expected_test_ids": [
+        "NativeBurstAssignment/ClassicSix2000"
+      ],
+      "maximum_wall_seconds": 1200
+    },
+    {
+      "label": "BranchN6burst",
+      "expected_test_ids": [
+        "NativeBurstAssignment/BranchSix2000"
+      ],
+      "maximum_wall_seconds": 1200
+    }
+  ],
+  "no_rebuild": true,
+  "source_configure_flags_unchanged": true,
+  "scientific_worker_admitted": false,
+  "whole_plan_complete": false,
+  "dispatch_state": "completed_accepted_scoped_diagnostic",
+  "requires_runtime_preflight": true,
+  "readiness": "native18_passed_with_actual_module_capture",
+  "user_worker_trial_authorization_already_present": true,
+  "attempt": {
+    "job": "windows-domain-fixture-native-a6",
+    "task": "TimeLearner-WindowsDomainFixtureNative-A6-20261108",
+    "instance": "{8F3C9248-A378-4B87-A182-518244323E35}",
+    "worker_sha256": "b3d28a1029cd8a8c6f6624916a7b35e168b918e7dc48c4b4f31ddab285259725",
+    "plan_sha256": "8710744f9452fd17a1bd5a2a4eda8841ba17d31b851d01bc37eb4acf0757f410",
+    "output": "C:/Projects/TimeLearnerWorker/jobs/windows-domain-fixture-native-a6",
+    "memory_preflight_available_bytes": 10915479552,
+    "prior_kernel_jobs_observed_absent": 57,
+    "capture_codec_tests_confirmed_passed": 10,
+    "terminal_verified": true,
+    "no_automatic_retry": true,
+    "rebuild": false,
+    "native_cases_passed": 18,
+    "native_groups_passed": 9,
+    "domain_reader_checks": 4,
+    "evidence_commit": "2a26896f45693f2d55b2f0f51cab18ed9eb90059",
+    "independent_receipt": "WindowsDomainNative18Verification.json",
+    "task_closed": true,
+    "kernel_jobs_closed": 9,
+    "runtime_inventories_unchanged": 3
+  }
+}

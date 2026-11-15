@@ -1,0 +1,7 @@
+# Полный Classic N0 primary сохранён
+
+M40 collector completed/closed41.40717724291608с, operation_passed=true, heartbeat errors0. Исходный Train и3 его owned groups закрыты до снимка; [closure](completed/process/whole-group-closure.json), [proof](completed/worker/primary-bundle-proof.json), [collection manifest](controls/collection-manifest.json). Source/collector69e985df6654ac64cc34571e6862119cf26b90c5. Коллекция не является новым Train или Test.
+
+[primary.tar.xz](../../../../../Reports/StructTrain/TimeLearner/StockN0Classic-20261114/primary/primary.tar.xz):28455532B, SHA256cbb4280208d704a910832d46c6630cff6a1ff778940a7bad7c861f45dcf99faf. [bundle.json](../../../../../Reports/StructTrain/TimeLearner/StockN0Classic-20261114/primary/bundle.json):882 logical members, expanded552658824B, unique content457993110B. Сохранены все исходные модели, full/omission trials, state/summary, конфиги и process/controller receipts;2 redundant glog aliases представлены явно. JSON/CSV не переписывались, container2 использует literal byte dedup. Полные производные галереи сюда не входят.
+
+[Научный итог](../M40StockN0ClassicTrainA1-20261114/RESULT.ru.md) сохраняет отрицательный статус без certificate/классификации. Независимый полный restore именно этого N0-пакета ещё не выполнен; наличие архива не подменяет такую проверку. Producer288246a4bc9e785b6bd9d9cb80b74205d100c8a3, pack28593723B SHA2565495a76e1a98ac41d103d05ead9c6e210b643952b7bb765fb1c32434257fb909;16 исходных Git blobs импортированы побайтово.

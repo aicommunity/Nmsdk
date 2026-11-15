@@ -1,0 +1,78 @@
+from pathlib import Path
+import sys,json,sqlite3,hashlib,tarfile,subprocess
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-fair-domains-asan38-a1'
+incoming=base/'source-probe-algorithms-asan-a1-root-delivery';parent='62997ad1e7cb7869012d11da82b5a48b529ac1e7'
+folder=base/'readbacks/s07-probe-algorithms-asan-a1';container=Path(str(folder)+'-container')
+repo=base/'evidence-probe-algorithms-asan-a1';prefix='Reports/StructTrain/TimeLearner/s07-probe-algorithms-asan-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(incoming))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_gate import audit_junit
+from Scripts.StructTrain.TimeLearner.process_runner import verify_runtime
+database=base/'resource-reservations.sqlite3';c=sqlite3.connect('file:'+str(database)+'?mode=ro',uri=True);metadata=dict(c.execute('select key,value from metadata'));c.close()
+registry=Reservations(database);closed=inspect_worker_dependency(container,registry,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['build_passed'] and terminal['unit34_passed'] and terminal['unit_worker_passed'] and terminal['ledger_metadata_unchanged'] and terminal['heartbeat_errors']==[]
+spec=json.loads((folder/'job-specification.json').read_text());assert len(spec['all_ids'])==34
+inventory=audit_junit(folder/'unit34/native.xml',spec['all_ids']);assert inventory['assertion_status']=='passed'
+assert terminal['physical_integration_executed'] is False and terminal['Console_built_or_probed'] is False
+assert (folder/'ledger-metadata-before.json').read_bytes()==(folder/'ledger-metadata-after.json').read_bytes()
+assert json.loads((folder/'old-runtime-before.json').read_text())==json.loads((folder/'old-runtime-after.json').read_text())
+assert subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip()==parent
+assert not subprocess.check_output(['git','-C',str(source),'status','--porcelain','--untracked-files=no'],text=True).strip()
+runtime=json.loads((folder/'native-runtime.json').read_text());verify_runtime(runtime)
+assert terminal['ASan_verified'] and terminal['ASan_options']=='detect_leaks=0'
+loaded=json.loads((folder/'unit34/process/loaded-files.json').read_text());assert runtime['executable'] in loaded and any('/libasan.so.' in r['path'] for r in loaded)
+assert runtime['build_flags']['CMAKE_BUILD_TYPE']=='RelWithDebInfo'
+assert '-fsanitize=address' in runtime['build_flags']['CMAKE_CXX_FLAGS_RELWITHDEBINFO']
+bundle=json.loads((folder/'bundle.json').read_text());archive=folder/'primary.tar.xz'
+assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256']
+seen=set()
+with tarfile.open(archive,'r:xz') as tf:
+ for m in tf:
+  assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tf.extractfile(m).read()
+  assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+assert seen==set(bundle['members'])
+payloads={prefix+'/'+f.name:f.read_bytes() for f in folder.iterdir() if f.is_file() and (f.suffix=='.json' or f.name in ('primary.tar.xz','CMakeCache.txt'))}
+payloads[prefix+'/unit34/native.xml']=(folder/'unit34/native.xml').read_bytes()
+for f in container.iterdir():
+ if f.is_file() and f.suffix=='.json':payloads[prefix+'/controller/'+f.name]=f.read_bytes()
+payloads[prefix+'/fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+# Read generated compiler/link commands after closure, without rebuilding.
+build=base/'build-fair-domains-asan38-a1';assert (build/'CMakeCache.txt').read_bytes()==(folder/'CMakeCache.txt').read_bytes()
+command_files={}
+sub='Tests/Integration/Libraries/CMakeFiles/Test_PulseLib_ProbeAlgorithms.dir'
+for name in ['flags.make','link.txt']:
+ f=build/sub/name;assert f.is_file();raw=f.read_bytes();relative=sub+'/'+name
+ assert b'-fsanitize=address' in raw
+ payloads[prefix+'/generated-build-commands/'+relative]=raw
+ command_files[relative]={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+commands=json.loads((folder/'actual-target-compile-commands.json').read_text())
+required={str(source/'Libraries/Nmsdk-PulseLib/Core/TimeLearner/ProbeObservation.cpp'),str(source/'Tests/Integration/Libraries/Test_PulseLib_ProbeObservation.cpp'),str(source/'Tests/Integration/Support/ProbeAlgorithmMain.cpp')}
+assert required.issubset({r['file'] for r in commands}) and all('-fsanitize=address' in r['command'] for r in commands)
+assert not any('Nmsdk-PulseLib.core' in token or 'rdk.static' in token for token in (build/sub/'link.txt').read_text().split())
+payloads[prefix+'/publication-verification.json']=(json.dumps({'archive_members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256'],'inventory':inventory,'reader_tests':0,'scope':'pure_observer_unit_only','physical_integration_executed':False,'generated_build_command_files':command_files,'whole_group_closed':True,'lease_released':True,'old_runtime_file_hashes_unchanged':True,'ledger_metadata_unchanged':True,'ASan_verified':True,'ASan_options':'detect_leaks=0','leak_check':False,'Console_built_or_probed':False,'classification_evaluated':False,'scientific_verdict':None},indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args,data=None):return subprocess.check_output(['git','-C',str(repo),*args],input=data).decode().strip()
+def tree(base_tree,changes):
+ entries={}
+ if base_tree:
+  for item in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',base_tree]).split(b'\0'):
+   if item:
+    header,name=item.split(b'\t',1);mode,kind,sha=header.decode().split();entries[name.decode()]=(mode,kind,sha)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=('100644','blob',git('hash-object','-w','--stdin',data=value))
+ for name,sub in groups.items():
+  previous=entries.get(name);entries[name]=('040000','tree',tree(previous[2] if previous else None,sub))
+ raw=b''.join((mode+' '+kind+' '+sha+'\t'+name).encode()+b'\0' for name,(mode,kind,sha) in sorted(entries.items()))
+ return git('mktree','-z','--missing',data=raw)
+commit=git('-c','user.name=Codex','-c','user.email=codex@openai.com','commit-tree',tree(git('rev-parse',parent+'^{tree}'),payloads),'-p',parent,data=b'Publish M40 ASan34 production observer unit gate without physical integration claim\n')
+git('update-ref','refs/heads/evidence',commit)
+print(json.dumps({'evidence_commit':commit,'parent':parent,'repository':str(repo),'archive_members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256'],'unit_tests_passed':34,'reader_tests_passed':0,'whole_group_closed':True,'lease_released':True}))

@@ -1,0 +1,7 @@
+# Native-a3: промежуточное состояние, не приёмка
+
+Наблюдение 2026-11-12T05:50:43.418459+00:00. Fresh C++ build завершён успешно, required option ON проверен actual CMake cache; compiled inventory содержит ClassicFullDomainN4Roundtrip и BranchFullDomainN4Roundtrip. Выбранный cohort36 не включает эти два DATA-dependent cases. В снимке progress completed=30, passed=30, failed=[], current=native-009 (running). Raw4 files в running-native-a3, hashes в readback-integrity.json. Это промежуточный снимок, не итог36/36 и не свидетельство закрытия всего native job.
+
+Job: /media/user/Data/TimeLearnerRefactor/readbacks/s08-recorded-n4-sdk36-m40-a3; controller sibling -controller, supervisor PID3674406/start_ticks353531491; запуск повторять нельзя, сначала проверить kernel identity/status. После итогового результата сохранить source/runtime/protected before/after, actual IDs/JUnit, closure/reservation и полный compact corpus. Только затем отдельный schema5 DATA gate с two qz inputs. Текущий native_acceptance_worker выдаёт schema3 без inputs; не включать большие cases в его run_plan без реализации и проверки DATA-aware owner.
+
+Следующий DATA runner должен использовать production schema5, declared READ reservation для cached qz и runtime/source; group closure/disk guard, compiled exact IDs и native model hash/readback. Legacy wrapper same-new-binary comparison не заменяет before/after binary performance. Нельзя использовать ни шаблон Test, ни discarded controller history как checkpoint; scientific verdict остаётся null.

@@ -1,0 +1,58 @@
+{
+  "attempt": "a2",
+  "archive_members_checked": 15,
+  "archive_bytes": 21732,
+  "archive_sha256": "0d829d8219fdccb1e1250eaeeb00affbded007539b93a98ef6096aee4080bf0f",
+  "accepted_python_suite": true,
+  "native_models_executed": 0,
+  "fresh_closed_released": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s10-pipeline-condition-readers-a2",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-pipeline-condition-readers-a2-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/statistic-trace-checks-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "2c5c5fb9155b4093e5ec55f1e954d69acd9a693cceb0358721dabff7e2936e01",
+        "unit": "timelearner-07205ca7-5cd4-4718-90ae-a758b40e7b28.service",
+        "invocation_id": "8d24b385c6f0451ab5f1daffce5e7bda",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-07205ca7-5cd4-4718-90ae-a758b40e7b28.service",
+        "initial_main_pid": 749610,
+        "initial_start_ticks": "301526254",
+        "sha256": "0708134bf1b4040b9d6c9073af9438abd70b54c18fad582e01f2354f494b4d0a"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-07205ca7-5cd4-4718-90ae-a758b40e7b28.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "9cf4b0b0-bd5f-4150-9513-fe285e4cd404",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "scientific_verdict": null
+}

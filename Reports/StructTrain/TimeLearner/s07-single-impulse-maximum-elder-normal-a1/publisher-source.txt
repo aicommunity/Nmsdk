@@ -1,0 +1,77 @@
+from pathlib import Path
+import sys,json,sqlite3,hashlib,tarfile,subprocess
+base=Path('/home/user/timelearner-refactor');source=base/'source-integrated-acceptance-normal-a1'
+incoming=base/'source-single-impulse-maximum-a1-root-delivery';parent='0e729b80a63ea0524b8561bb8d3e4756c5c807e5'
+folder=base/'readbacks/s07-single-impulse-maximum-elder-normal-a1';container=Path(str(folder)+'-container')
+repo=base/'evidence-single-impulse-maximum-elder-normal-a1';prefix='Reports/StructTrain/TimeLearner/s07-single-impulse-maximum-elder-normal-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(incoming))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_gate import audit_junit
+from Scripts.StructTrain.TimeLearner.process_runner import verify_runtime
+database=base/'resource-reservations.sqlite3';c=sqlite3.connect('file:'+str(database)+'?mode=ro',uri=True);metadata=dict(c.execute('select key,value from metadata'));c.close()
+registry=Reservations(database,capacity=json.loads(metadata['capacity']));closed=inspect_worker_dependency(container,registry,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['build_passed'] and not terminal['native38_passed'] and not terminal['reader24_passed'] and terminal['ledger_metadata_unchanged'] and terminal['heartbeat_errors']==[]
+spec=json.loads((folder/'job-specification.json').read_text());assert len(spec['all_ids'])==38
+inventory=audit_junit(folder/'native38/native.xml',spec['all_ids']);assert inventory['assertion_status']=='failed' and inventory['failed_test_ids']==['SingleImpulseMaximumNative/FaultsRestoreBothTopologies']
+from xml.etree import ElementTree as ET
+failures=[f for case in ET.parse(folder/'native38/native.xml').iter('testcase') for f in case.findall('failure')]
+assert len(failures)==12 and all('file.open(QIODevice::WriteOnly|QIODevice::NewOnly)' in f.get('message','') for f in failures)
+assert not (folder/'reader-results.json').exists()
+assert (folder/'ledger-metadata-before.json').read_bytes()==(folder/'ledger-metadata-after.json').read_bytes()
+actual={}
+for directory in [base/'runtime-feedback-storage-elder-normal-a1',base/'runtime-integrated-acceptance-normal-a1']:
+ for f in directory.rglob('*'):
+  if f.is_file():actual[f.relative_to(base).as_posix()]={'bytes':f.stat().st_size,'sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'symlink':__import__('os').readlink(f) if f.is_symlink() else None}
+assert actual==json.loads((folder/'old-runtime-before.json').read_text())
+assert subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip()==parent
+assert not subprocess.check_output(['git','-C',str(source),'status','--porcelain','--untracked-files=no'],text=True).strip()
+runtime=json.loads((folder/'native-runtime.json').read_text());verify_runtime(runtime)
+bundle=json.loads((folder/'bundle.json').read_text());archive=folder/'primary.tar.xz'
+assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256']
+seen=set()
+with tarfile.open(archive,'r:xz') as tf:
+ for m in tf:
+  assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tf.extractfile(m).read()
+  assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+assert seen==set(bundle['members'])
+payloads={prefix+'/'+f.name:f.read_bytes() for f in folder.iterdir() if f.is_file() and (f.suffix=='.json' or f.name in ('primary.tar.xz','CMakeCache.txt'))}
+payloads[prefix+'/native38/native.xml']=(folder/'native38/native.xml').read_bytes()
+for f in container.iterdir():
+ if f.is_file() and f.suffix=='.json':payloads[prefix+'/controller/'+f.name]=f.read_bytes()
+payloads[prefix+'/post-closure-runtime-bindings.json']=(json.dumps(actual,indent=2)+'\n').encode()
+payloads[prefix+'/fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+# Read generated compiler/link commands after closure, without rebuilding.
+build=base/'build-integrated-acceptance-normal-a1';assert (build/'CMakeCache.txt').read_bytes()==(folder/'CMakeCache.txt').read_bytes()
+command_files={}
+for sub in ['Libraries/Nmsdk-PulseLib/CMakeFiles/Nmsdk-PulseLib.core.dir','Tests/Integration/Libraries/CMakeFiles/Test_PulseLib_StorageComponents.dir','App/NeuroModelerConsole/CMakeFiles/NeuroModelerConsole.dir']:
+ for name in ['flags.make','link.txt']:
+  f=build/sub/name;assert f.is_file();raw=f.read_bytes();relative=sub+'/'+name
+  payloads[prefix+'/generated-build-commands/'+relative]=raw
+  command_files[relative]={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+payloads[prefix+'/publication-verification.json']=(json.dumps({'archive_members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256'],'inventory':inventory,'reader_tests':0,'native_passed':37,'native_failed':1,'harness_file_identity_failures':12,'attempt_accepted':False,'generated_build_command_files':command_files,'whole_group_closed':True,'lease_released':True,'old_runtime_file_hashes_unchanged':True,'ledger_metadata_unchanged':True,'ASan_verified':False,'Console12_executed_on_Elder':False,'classification_evaluated':False,'scientific_verdict':None},indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args,data=None):return subprocess.check_output(['git','-C',str(repo),*args],input=data).decode().strip()
+def tree(base_tree,changes):
+ entries={}
+ if base_tree:
+  for item in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',base_tree]).split(b'\0'):
+   if item:
+    header,name=item.split(b'\t',1);mode,kind,sha=header.decode().split();entries[name.decode()]=(mode,kind,sha)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=('100644','blob',git('hash-object','-w','--stdin',data=value))
+ for name,sub in groups.items():
+  previous=entries.get(name);entries[name]=('040000','tree',tree(previous[2] if previous else None,sub))
+ raw=b''.join((mode+' '+kind+' '+sha+'\t'+name).encode()+b'\0' for name,(mode,kind,sha) in sorted(entries.items()))
+ return git('mktree','-z','--missing',data=raw)
+commit=git('-c','user.name=Codex','-c','user.email=codex@openai.com','commit-tree',tree(git('rev-parse',parent+'^{tree}'),payloads),'-p',parent,data=b'Preserve Elder maximum A1 negative gate with twelve test-artifact name collisions\n')
+git('update-ref','refs/heads/evidence',commit)
+print(json.dumps({'evidence_commit':commit,'parent':parent,'repository':str(repo),'archive_members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256'],'native_tests_passed':37,'native_tests_failed':1,'reader_tests_passed':0,'whole_group_closed':True,'lease_released':True}))

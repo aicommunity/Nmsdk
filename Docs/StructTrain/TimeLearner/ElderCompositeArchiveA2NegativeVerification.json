@@ -1,0 +1,130 @@
+{
+  "original_nested_contract_source_hash_mismatch_preserved_and_reconciled": {
+    "original_nested_archive_contract_source_sha256": "fc9dfb4869cd0a6f9f6c6548b9ce642049f016320909688ef76bf86a32150601",
+    "actual_pinned_Git_TU_sha256": "05f5cf15b64d6f16950db33ce6724dffd4c3435a5cac7514701dbfefb10ea49a",
+    "source_hash_mismatch": true,
+    "original_input_inventory_preserved": true,
+    "all206_IDs_and_file_TU_hash_were_correct": true,
+    "scope": "Copied nested preparation metadata only, not a change to compiled code, physics or test criteria."
+  },
+  "kind": "independent_current_composite_archive206_failed_attempt_metadata_verification",
+  "schema_version": 1,
+  "evidence_commit": "153751c4b3a3b2c0a25f10540265b41233197f7c",
+  "parent_root": "540179d70ddf3764334eb6bb59b7fef691054eee",
+  "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+  "Bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+  "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+  "archive_members_verified": 1801,
+  "archive_bytes": 1387844,
+  "archive_sha256": "5afad94306fa6631bd95564cb77b4a07f2c5ebe843d7c698a475964fd1837c19",
+  "pack_bytes": 1484613,
+  "pack_sha256": "3d962c2d302b39239755e5acc5a40f04b943745bc25aaf75c70f4d7d9fd40e25",
+  "original_terminal_passed": false,
+  "actual_build_link_passed": true,
+  "compiled_inventory_declared_cases": 206,
+  "actual_JUnit_completed": 144,
+  "actual_JUnit_assertion_passed": 143,
+  "actual_JUnit_failed": 1,
+  "not_run": 62,
+  "failure": {
+    "id": "NativeCompositeService/ClassicCalculateMode0Exact",
+    "gate": "composite-native-46",
+    "failure_text": [
+      "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp:428\nExpected equality of these values:\n  f.owner->NativeTrainingController().State()\n    Which is: 4-byte object <03-00 00-00>\n  NativeTrainingState::CapturingReferences\n    Which is: 4-byte object <01-00 00-00>\nnative_composite_plan_protocol_mismatch",
+      "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp:435\nExpected equality of these values:\n  service.Outcome()\n    Which is: 4-byte object <05-00 00-00>\n  TrainingStatus::Exact\n    Which is: 4-byte object <02-00 00-00>\nnative_composite_plan_protocol_mismatch"
+    ],
+    "declaration_line": 530
+  },
+  "failure_source_lines": [
+    428,
+    435
+  ],
+  "failure_meaning": "Native service reported native_composite_plan_protocol_mismatch instead of CapturingReferences and Exact; two assertions in one native service test. No cause or correction is inferred by this metadata verifier.",
+  "original_failed_outer_unit_metadata_preserved": true,
+  "original_failed_leaf_unit_metadata_preserved": true,
+  "kernel_outer_and56leaf_groups_closed_on_server": true,
+  "whole_worker_reservation_released": true,
+  "source_files_independently_Git_verified": 3687,
+  "source_repositories": [
+    {
+      "scope": "root",
+      "repository": "E:\\Science-Repo\\nmsdk-storage-recipes",
+      "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+      "files": 968
+    },
+    {
+      "scope": "Bin",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Bin",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    },
+    {
+      "scope": "Rdk",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    },
+    {
+      "scope": "Libraries/Rdk-CvBasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "files": 132
+    },
+    {
+      "scope": "Libraries/Nmsdk-PulseLib",
+      "repository": "E:\\Science-Repo\\pulselib-matched-omission",
+      "commit": "f925e37247bb987980fce80da47831a1c31d04c9",
+      "files": 313
+    },
+    {
+      "scope": "Libraries/Rdk-HardwareLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "files": 356
+    },
+    {
+      "scope": "Libraries/Nmsdk-MotionControlLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "files": 93
+    },
+    {
+      "scope": "Libraries/Rdk-BasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "files": 43
+    }
+  ],
+  "actual_postclosure_worktree_byte_verification_recorded": true,
+  "source_capture_ready_before_next_mutation": true,
+  "all7gitlinks_clean_and_matching": true,
+  "actual_loaded_files_metadata_verified": 27,
+  "actual_materialized_resources_Git_verified": 327,
+  "three_previous_A1_postretirement_codec_and_omission_runtimes_before_after_postclosure_equal": true,
+  "current_runtime_before_postclosure_equal": true,
+  "original_current_runtime_after_snapshot_absence_preserved": true,
+  "original_fixture_source_hashes_after_pass_absence_preserved": true,
+  "actual_primary_archives_captured": 0,
+  "six_archive_export_requirement_completed": false,
+  "new_archive_growth_source_guard_cases_executed": 0,
+  "direct_production_COMPOSITE_OUTPUT_request_route_verified_all56leaves": true,
+  "adapter_or_monkeypatch_used": false,
+  "RDK_USE_LLM": false,
+  "RDK_LLM_BUILD_EMBEDDED": false,
+  "FETCHCONTENT_FULLY_DISCONNECTED": true,
+  "retention_keeper_used": false,
+  "full_Configs_materialized": false,
+  "disk_guard_not_triggered": true,
+  "recorded_owned_persistent_scope_peak_increment_bytes": 210640896,
+  "recorded_physical_minimum_free_bytes": 1463623680,
+  "disk_accounting_scope": "Exact persistent paths listed by original watchdog; transient compiler files outside those paths are not claimed individually quota-accounted. Global physical-free floor was continuously monitored.",
+  "original_operational_diagnostics_preserved": true,
+  "new_build_or_model_or_numerical_execution_by_verifier": false,
+  "local_CPP_or_scientific_numerical_execution": false,
+  "ASan_acceptance": false,
+  "independent_archive_geometry_scalar_replay": false,
+  "package5_accepted": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "git_import": "unpack-objects_no_checkout_no_refs"
+}

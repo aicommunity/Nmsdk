@@ -1,0 +1,17 @@
+{
+  "kind": "closed_windows_native_diagnostic_git_archive",
+  "schema_version": 1,
+  "source_commit": "04f830a3a0f6c36cb9eb22b48075aa545b8aeb6c",
+  "pulselib_commit": "558b9661c96efdd4dd1d44037a7c536ef29c8c72",
+  "archive_commit": "232e6548dcdd9a666c9ff01e64e88ebcfb4a53e8",
+  "archive_bytes": 1207885,
+  "archive_sha256": "e367bfdc43d82a38249adf3831d848eed8107ee55638452e80d147495a23c1af",
+  "primary_files": 207,
+  "expanded_primary_bytes": 32991186,
+  "expected_cpp_cases": 19,
+  "observed_cpp_cases": 19,
+  "assertion_status": "passed",
+  "full_native29_accepted": false,
+  "scientific_worker_admitted": false,
+  "restore": "git init <fresh-directory>; git -C <fresh-directory> index-pack --stdin < primary.pack; git -C <fresh-directory> checkout 232e6548dcdd9a666c9ff01e64e88ebcfb4a53e8"
+}

@@ -4,32 +4,39 @@
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeCalibratedState.h"
 #include "TimeLearner/NativeRecognitionObservationValidation.h"
+#include "TimeLearner/NativeThresholdCandidate.h"
 #include <iostream>
 #include <algorithm>
 #include <limits>
 #include <numeric>
+#include <optional>
 
 namespace {
 using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
 using namespace NmsdkWorker;
-void Header(const QJsonObject& d,const char* kind)
-{Require(d["kind"]==QJsonValue(kind) && Number(d["schema_version"])==1.,"unsupported_transport_job");Require(Signed(d)==d,"job_digest_mismatch");}
+void Header(const QJsonObject& d,const char* kind,int version=1)
+{Require(d["kind"]==QJsonValue(kind) && Number(d["schema_version"])==double(version),"unsupported_transport_job");Require(Signed(d)==d,"job_digest_mismatch");}
 struct EvaluationJob {
     QJsonObject document,source,criterion;
     std::string implementation,ownerClass,runId,coverage;
     std::vector<NativeRecognitionTrialRequest> trials;
     unsigned frequency=0;std::size_t maximumTicks=0;bool diagnostic=false;NativeRecognitionSpec conversion;
+    std::optional<double> diagnosticThreshold;
 };
 EvaluationJob ReadEvaluation(const QString& path,bool diagnostic=false)
 {
     EvaluationJob j;j.diagnostic=diagnostic;j.document=ReadDocument(path);const auto& d=j.document;
-    if(diagnostic)Keys(d,{"kind","schema_version","owner_class","implementation_id","source_stopped","conversion_spec","maximum_model_ticks",
+    const bool thresholdCandidate=diagnostic && d["schema_version"]==QJsonValue(2);
+    if(thresholdCandidate)Keys(d,{"kind","schema_version","owner_class","implementation_id","source_stopped","conversion_spec","maximum_model_ticks",
+        "run_id","coverage_policy","criterion","trials","sha256","diagnostic_threshold"});
+    else if(diagnostic)Keys(d,{"kind","schema_version","owner_class","implementation_id","source_stopped","conversion_spec","maximum_model_ticks",
         "run_id","coverage_policy","criterion","trials","sha256"});
     else Keys(d,{"kind","schema_version","owner_class","implementation_id","source_recognition","maximum_model_ticks",
         "run_id","coverage_policy","criterion","trials","sha256"});
-    Header(d,diagnostic?"timelearner_native_diagnostic_evaluation_job":"timelearner_native_evaluation_job");
+    Header(d,diagnostic?"timelearner_native_diagnostic_evaluation_job":"timelearner_native_evaluation_job",thresholdCandidate?2:1);
+    if(thresholdCandidate)j.diagnosticThreshold=Number(d["diagnostic_threshold"]);
     if(diagnostic)j.conversion=DecodeNativeRecognitionSpec(Object(d["conversion_spec"]));
     j.source=Object(d[diagnostic?"source_stopped":"source_recognition"]);j.implementation=Text(d["implementation_id"]);j.ownerClass=Text(d["owner_class"]);
     j.runId=Text(d["run_id"]);j.coverage=Text(d["coverage_policy"]);
@@ -72,7 +79,9 @@ EvaluationJob ReadEvaluation(const QString& path,bool diagnostic=false)
 template<class Owner> int Evaluate(const EvaluationJob& job,const QString& output)
 {
     return WithFreshOwner<Owner>(job.ownerClass,job.frequency,"EvaluationOwner",[&](auto,auto environment,auto model,auto owner) {
-        const auto frozen=job.diagnostic?ConvertNativeStoppedToDiagnosticRecognition(job.source,job.conversion,owner->GetStorage(),environment,job.implementation):job.source;
+        const auto base=job.diagnostic?ConvertNativeStoppedToDiagnosticRecognition(job.source,job.conversion,owner->GetStorage(),environment,job.implementation):job.source;
+        const auto frozen=job.diagnosticThreshold?CreateNativeDiagnosticThresholdCandidate(base,*job.diagnosticThreshold,
+            owner->GetStorage(),environment,job.implementation):base;
         const auto imported=job.diagnostic?owner->ImportNativeDiagnosticRecognitionState(frozen,job.implementation):
                                            owner->ImportNativeRecognitionState(frozen,job.implementation);
         if(imported.status!=NativeModelBuildStatus::Adopted)throw std::invalid_argument(imported.reason);

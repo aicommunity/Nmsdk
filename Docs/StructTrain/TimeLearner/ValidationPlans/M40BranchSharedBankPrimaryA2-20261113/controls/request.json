@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-branch-shared-bank-primary-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "29ed8764aa6fa98cf7d05e8334377348d4ca7b9a",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "closed-primary-bundle",
+    "manifest": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/branch-shared-bank-primary-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40BranchSharedBankPrimaryA2-20261113/collection-manifest.json",
+      "sha256": "618fe1fd9d4436146156381215b0f45a2005547294e817767e5e8a4d18ace6d2"
+    }
+  }
+}

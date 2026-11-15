@@ -1,0 +1,86 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "41e7d5ee743101b4228261a35a8a91f786b7351b0e3df0ab98ec80b29f81c4c6",
+      "unit": "timelearner-a09be035-1bae-405c-9d36-0273c386f1c9.service",
+      "invocation_id": "da486278cb124751b6fe1bafe37ccf73",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a09be035-1bae-405c-9d36-0273c386f1c9.service",
+      "initial_main_pid": 605576,
+      "initial_start_ticks": "370827747",
+      "sha256": "b941fc12085d0b2fd6257cd767a96e660190a4ea05f8489fa28124a2ee913521"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-a09be035-1bae-405c-9d36-0273c386f1c9.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "b87306cd-1b19-4ec1-af0c-80c8194161e6",
+      "job_id": "s11-n0-geometry-training-report-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python",
+        "pid": 605576,
+        "start_ticks": "370827747",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-after-train-m40-a2/worker/native-n0-geometry-after-train/Branch-stock-cold8-N0/runs/train/native",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-after-train-m40-a2/worker/native-n0-geometry-after-train/Branch-stock-cold8-N0/runs/train/native"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-before-train-m40-a2/worker/native-n0-geometry-before-train/Branch-stock-cold8-N0/runs/train/native",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-before-train-m40-a2/worker/native-n0-geometry-before-train/Branch-stock-cold8-N0/runs/train/native"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-training-report-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-n0-geometry-training-report-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-training-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryTrainingReportA1-20261114",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/n0-geometry-training-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40N0GeometryTrainingReportA1-20261114"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-training-report-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n0-geometry-training-report-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794633080.0187242,
+      "deadline": 1794633470.6651456,
+      "updated": 1794633354.578463,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

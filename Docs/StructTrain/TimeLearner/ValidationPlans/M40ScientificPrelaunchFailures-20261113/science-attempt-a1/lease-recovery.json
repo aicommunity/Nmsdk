@@ -1,0 +1,93 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "d2a63d54-66b1-4dbb-817b-d21c99e820df",
+  "job_id": "s11-diagnostic-threshold-science-m40-a1",
+  "recorded_unix": 1794573791.6105666,
+  "administrator": {
+    "pid": 598047,
+    "start_ticks": "364822323",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 601284,
+    "start_ticks": "364823295",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-diagnostic-threshold-science-m40-a1/process/contained",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "30fa6afb8c7f029d2c65b1bf9eee05aa9507d8838bca1d36187a143414aef880",
+      "unit": "timelearner-1d53dd1d-eb16-4c28-abd3-8b5fa0fb9302.service",
+      "invocation_id": "14ad8ecd0ede4911b8839d23feaf41e2",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1d53dd1d-eb16-4c28-abd3-8b5fa0fb9302.service",
+      "initial_main_pid": 601284,
+      "initial_start_ticks": "364823295",
+      "sha256": "ad7a130fc24c4c5197a274b719f758b485138ad3b2999e2ef472c100c628f544"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-1d53dd1d-eb16-4c28-abd3-8b5fa0fb9302.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-frozen-diagnostic8-m40-a1/classic",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-frozen-diagnostic8-m40-a1/classic"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-diagnostic-threshold-science-m40-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-diagnostic-threshold-science-m40-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-science-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdScienceA1-20261113",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-science-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdScienceA1-20261113"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-science-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdScienceA1-20261113/fixture",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-science-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdScienceA1-20261113/fixture"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-science-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-diagnostic-threshold-science-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

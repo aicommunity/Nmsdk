@@ -1,0 +1,39 @@
+{
+  "kind": "composite_archive206_m40_immutable_donor_delivery",
+  "schema_version": 1,
+  "deliveries": [
+    {
+      "kind": "standalone_shallow_code_git_delivery",
+      "host": "10.245.1.17",
+      "destination": "/media/user/Data/TimeLearnerRefactor/source-composite-archive-root-m40-a1",
+      "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+      "pack_bytes": 4353500,
+      "pack_sha256": "5c1ce7f5112203bdd5b097ffb80b8302ab801d3188b8603b8a1f4ea756d41a88",
+      "omitted_paths": [
+        "Docs",
+        "Reports"
+      ],
+      "child_gitlinks_not_materialized": true,
+      "checkout_clean": true,
+      "alternates": false
+    },
+    {
+      "kind": "standalone_shallow_code_git_delivery",
+      "host": "10.245.1.17",
+      "destination": "/media/user/Data/TimeLearnerRefactor/source-composite-archive-pulse-m40-a1",
+      "commit": "f925e37247bb987980fce80da47831a1c31d04c9",
+      "pack_bytes": 759399,
+      "pack_sha256": "718099f6566836314e54f83fa969b4b8535c14cb6710cb42479038befc8b470c",
+      "omitted_paths": [
+        "Docs",
+        "Reports"
+      ],
+      "child_gitlinks_not_materialized": true,
+      "checkout_clean": true,
+      "alternates": false
+    }
+  ],
+  "live_source_cache_changed": false,
+  "build_started": false,
+  "whole_plan_complete": false
+}

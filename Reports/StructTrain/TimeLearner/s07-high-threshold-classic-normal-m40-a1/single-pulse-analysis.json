@@ -1,0 +1,182 @@
+{
+  "kind": "stock_single_pulse_characterization",
+  "schema_version": 1,
+  "rows": [
+    {
+      "name": "Branch-threshold-training100-retry32",
+      "burst_matches_original_Train": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "original_reasons": [
+          "burst_missing:0",
+          "peak_missing:input2"
+        ],
+        "replay_reasons": [
+          "burst_missing:0",
+          "peak_missing:input2"
+        ],
+        "exact_waveform_reproduced": true,
+        "scientific_verdict": null
+      },
+      "first_prefix": {
+        "cutoff_second_actual_onset_relative": 0.09,
+        "samples": 180,
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_first_prefix_reproduced": true,
+        "scientific_verdict": null
+      },
+      "single_pulse_waveform_quality": {
+        "recorded_window_complete": true,
+        "context_observed": true,
+        "measured_peak_validity": "valid",
+        "sample_count": 3601,
+        "diagnostic_only": true,
+        "training_eligible": false,
+        "source_pattern_independently_verified": false,
+        "evaluation_verdict": null
+      },
+      "single_pulse_peaks": [
+        {
+          "soma": 0,
+          "positive_local_maxima": [
+            {
+              "relative_time": 0.157,
+              "raw_potential": 0.004920245103354537,
+              "amplitude": 0.004920245103354537,
+              "plateau_end_relative": 0.157
+            }
+          ]
+        }
+      ],
+      "single_pulse_channels": {
+        "enabled": true,
+        "probes": [
+          {
+            "file": "probe_diagnostics_1.json",
+            "trial_id": "Branch-threshold-training100-retry32/single-pulse-characterization",
+            "samples": 3601,
+            "complete": true,
+            "signals": 8,
+            "recorded_lt_spike_times": [],
+            "soma_values_match_primary": true,
+            "channel_physics_reconstructed_independently": false
+          }
+        ],
+        "scientific_verdict": null
+      },
+      "classification_evaluated": false,
+      "scientific_verdict": null
+    },
+    {
+      "name": "Classic-threshold-training100-retry32",
+      "burst_matches_original_Train": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "original_reasons": [
+          "burst_missing:0",
+          "peak_missing:input0"
+        ],
+        "replay_reasons": [
+          "burst_missing:0",
+          "peak_missing:input0"
+        ],
+        "exact_waveform_reproduced": true,
+        "scientific_verdict": null
+      },
+      "first_prefix": {
+        "cutoff_second_actual_onset_relative": 0.09,
+        "samples": 180,
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_first_prefix_reproduced": true,
+        "scientific_verdict": null
+      },
+      "single_pulse_waveform_quality": {
+        "recorded_window_complete": true,
+        "context_observed": true,
+        "measured_peak_validity": "valid",
+        "sample_count": 3601,
+        "diagnostic_only": true,
+        "training_eligible": false,
+        "source_pattern_independently_verified": false,
+        "evaluation_verdict": null
+      },
+      "single_pulse_peaks": [
+        {
+          "soma": 0,
+          "positive_local_maxima": [
+            {
+              "relative_time": 0.5275,
+              "raw_potential": 0.0026185129070909197,
+              "amplitude": 0.0026185129070909197,
+              "plateau_end_relative": 0.5275
+            }
+          ]
+        },
+        {
+          "soma": 1,
+          "positive_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "raw_potential": 0.015781441626431136,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            }
+          ]
+        },
+        {
+          "soma": 2,
+          "positive_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "raw_potential": 0.015781441626431136,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            }
+          ]
+        },
+        {
+          "soma": 3,
+          "positive_local_maxima": [
+            {
+              "relative_time": 0.0245,
+              "raw_potential": 0.015781441626431136,
+              "amplitude": 0.015781441626431136,
+              "plateau_end_relative": 0.0245
+            }
+          ]
+        }
+      ],
+      "single_pulse_channels": {
+        "enabled": true,
+        "probes": [
+          {
+            "file": "probe_diagnostics_1.json",
+            "trial_id": "Classic-threshold-training100-retry32/single-pulse-characterization",
+            "samples": 3601,
+            "complete": true,
+            "signals": 26,
+            "recorded_lt_spike_times": [],
+            "soma_values_match_primary": true,
+            "channel_physics_reconstructed_independently": false
+          }
+        ],
+        "scientific_verdict": null
+      },
+      "classification_evaluated": false,
+      "scientific_verdict": null
+    }
+  ],
+  "training_started": false,
+  "classification_evaluated": false,
+  "scientific_verdict": null
+}

@@ -41,22 +41,26 @@ def _graph(archive, revision):
     return graph
 
 
-def audit_threshold_candidate(package, source_case=None):
+def _audit_threshold_candidate(package, source_case=None, *, diagnostic=False):
     try:
         require(type(package) is dict and set(package) == FIELDS and
-                package["kind"] == "timelearner_recognition_threshold_candidate" and
+                package["kind"] == ("timelearner_diagnostic_threshold_candidate" if diagnostic else "timelearner_recognition_threshold_candidate") and
                 type(package["schema_version"]) is int and package["schema_version"] == 1 and
-                package["state_kind"] == "recognition" and package["dynamic_checkpoint"] is False and
+                package["state_kind"] == ("diagnostic_recognition" if diagnostic else "recognition") and package["dynamic_checkpoint"] is False and
                 package["recognition_certificate"] is None, "unsupported_threshold_candidate_claim")
         _digest(package)
         source = package["source_recognition"]
         require(type(source) is dict and set(source) == BASE_FIELDS and
-                source["kind"] == "timelearner_recognition_state" and type(source["schema_version"]) is int and
-                source["schema_version"] == 1 and source["state_kind"] == "recognition" and
+                source["kind"] == ("timelearner_diagnostic_recognition_state" if diagnostic else "timelearner_recognition_state") and type(source["schema_version"]) is int and
+                source["schema_version"] == 1 and source["state_kind"] == ("diagnostic_recognition" if diagnostic else "recognition") and
                 source["dynamic_checkpoint"] is False and source["recognition_certificate"] is None,
                 "threshold_candidate_requires_base_recognition")
         _digest(source)
-        source_audit = None if source_case is None else audit_recognition_derivation(source, source_case)
+        if diagnostic:
+            from .diagnostic_recognition_evidence import audit_diagnostic_recognition
+            source_audit = None if source_case is None else audit_diagnostic_recognition(source, source_case)
+        else:
+            source_audit = None if source_case is None else audit_recognition_derivation(source, source_case)
         require(type(package["implementation_id"]) is str and bool(package["implementation_id"])
                 and package["implementation_id"] == source["implementation_id"] and
                 package["dataset"] == source["dataset"], "threshold_candidate_context_changed")
@@ -118,3 +122,12 @@ def audit_threshold_candidate(package, source_case=None):
         raise
     except (KeyError, TypeError, ValueError, IndexError, OverflowError, struct.error, ConfigDocumentError) as error:
         raise EvidenceError("malformed_threshold_candidate:" + str(error)) from error
+
+
+def audit_threshold_candidate(package, source_case=None):
+    return _audit_threshold_candidate(package, source_case)
+
+
+def audit_diagnostic_threshold_candidate(package, source_case=None):
+    """Sole threshold edit of stopped-model diagnostics; never calibration."""
+    return _audit_threshold_candidate(package, source_case, diagnostic=True)

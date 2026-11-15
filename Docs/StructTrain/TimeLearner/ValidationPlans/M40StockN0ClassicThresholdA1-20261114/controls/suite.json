@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s11-stock-n0-classic-threshold-m40-a1",
+  "package_fingerprint": "207f43b744bf56c1230e72458af184b86eb08a93d14631a5d0185fd61c007c8c",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_coupled_stopped_threshold_native.CoupledStoppedThresholdNativeTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_coupled_stopped_threshold_native.CoupledStoppedThresholdNativeTest.test_actual_fixed_threshold_keeps_stopped_training_role"
+  ],
+  "fixtures": {
+    "TIMELEARNER_COUPLED_MATRIX_RUN": {
+      "pattern": "**/*.json",
+      "files": 35,
+      "fingerprint": "cc392750c86cf9aad37c38320d5457518e337e57db5c54d7aaf33b02ff1086ce"
+    },
+    "TIMELEARNER_COUPLED_THRESHOLD_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "d91cf245ce36d1c4e7ea9c17c8967b982ddc924a6f5e622b05af587f8e99b0d5"
+    }
+  }
+}

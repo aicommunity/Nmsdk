@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_native_test_gate_result",
+  "schema_version": 1,
+  "execution": "process_error",
+  "validity": "valid",
+  "assertion_status": "failed",
+  "reason": "complete_declared_test_inventory",
+  "inventory": {
+    "expected": 93,
+    "observed": 93,
+    "failed_test_ids": [
+      "BoundedTrainingLengthCandidates/N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain",
+      "MeasuredResistanceSearch/MeasuredLogTrendProposesItsRootAndNonlinearResponseIsMeasuredAgain"
+    ],
+    "assertion_status": "failed",
+    "sha256": "a0888a94e24887e073a8dd86cac7f7c65454a3165e893973846dc42548beea70"
+  },
+  "scientific_verdict": null
+}

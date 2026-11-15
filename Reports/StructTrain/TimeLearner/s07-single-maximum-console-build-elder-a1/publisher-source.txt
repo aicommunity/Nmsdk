@@ -1,0 +1,52 @@
+from pathlib import Path
+import sys,json,sqlite3,hashlib,tarfile,subprocess,io
+base=Path('/home/user/timelearner-refactor');incoming=base/'source-single-maximum-console-root-a1'
+parent='038a66413b7a41e75bf3826eda365db1c78c364b'
+folder=base/'readbacks/s07-single-maximum-console-build-elder-a1';container=Path(str(folder)+'-container')
+repo=base/'evidence-single-maximum-console-build-elder-a1';prefix='Reports/StructTrain/TimeLearner/s07-single-maximum-console-build-elder-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(incoming))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+c=sqlite3.connect('file:'+str(base/'resource-reservations.sqlite3')+'?mode=ro',uri=True);metadata=dict(c.execute('select key,value from metadata'));c.close()
+r=Reservations(base/'resource-reservations.sqlite3',capacity=json.loads(metadata['capacity']))
+closed=inspect_worker_dependency(container,r,folder.name);assert closed['state']=='ready' and closed['reservation_state']=='released'
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['Console_build_and_CLI_passed'] and not terminal['heartbeat_errors']
+assert (folder/'old-runtime-before.json').read_bytes()==(folder/'old-runtime-after.json').read_bytes()
+bundle=json.loads((folder/'bundle.json').read_text());raw=(folder/'primary.tar.xz').read_bytes();assert len(raw)==bundle['archive_bytes'] and hashlib.sha256(raw).hexdigest()==bundle['archive_sha256']
+files={}
+with tarfile.open(fileobj=io.BytesIO(raw),mode='r:xz') as tf:
+ for m in tf:
+  assert m.isfile() and m.name not in files
+  v=tf.extractfile(m).read();assert bundle['members'][m.name]=={'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()};files[m.name]=v
+assert set(files)==set(bundle['members'])
+assert bundle['root']==parent and bundle['PulseLib']=='217dc53c4b1cc010ad6938852a91ee6d2df09e3c'
+payloads={prefix+'/primary.tar.xz':raw,prefix+'/bundle.json':(folder/'bundle.json').read_bytes()}
+for f in container.iterdir():
+ if f.is_file() and f.suffix=='.json':payloads[prefix+'/controller/'+f.name]=f.read_bytes()
+for name in ['terminal.json','console-runtime.json','source-closure.json','source-hashes.json','CLI-interface.json']:
+ payloads[prefix+'/'+name]=files[name]
+payloads[prefix+'/fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args,data=None):return subprocess.check_output(['git','-C',str(repo),*args],input=data).decode().strip()
+def tree(base_tree,changes):
+ entries={}
+ if base_tree:
+  for item in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',base_tree]).split(b'\0'):
+   if item:
+    header,name=item.split(b'\t',1);mode,kind,sha=header.decode().split();entries[name.decode()]=(mode,kind,sha)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=('100644','blob',git('hash-object','-w','--stdin',data=value))
+ for name,sub in groups.items():
+  previous=entries.get(name);entries[name]=('040000','tree',tree(previous[2] if previous else None,sub))
+ raw=b''.join((mode+' '+kind+' '+sha+'\t'+name).encode()+b'\0' for name,(mode,kind,sha) in sorted(entries.items()))
+ return git('mktree','-z','--missing',data=raw)
+commit=git('-c','user.name=Codex','-c','user.email=codex@openai.com','commit-tree',tree(git('rev-parse',parent+'^{tree}'),payloads),'-p',parent,data=b'Preserve isolated Console build and corrected diagnostic admission runtime\n')
+git('update-ref','refs/heads/evidence',commit)
+print(json.dumps({'evidence_commit':commit,'parent':parent,'repository':str(repo),'members':len(files),'archive_bytes':len(raw),'archive_sha256':bundle['archive_sha256'],'whole_group_closed':True,'lease_released':True}))

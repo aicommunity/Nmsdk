@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "n1-geometry-production-decision-full98-elder-a4",
+  "package_fingerprint": "7ac9f1b43d861d89563e9396feae2e9c14cfb7af3241aa929b46a21efcedf926",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n1_geometry_cpp_ab"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n1_geometry_cpp_ab.N1GeometryCppABTest.test_before_exposes_starvation_and_after_passes_complete_decision_cohort"
+  ],
+  "fixtures": {
+    "TIMELEARNER_N1_GEOMETRY_CPP_CONTROLS": {
+      "pattern": "*.json",
+      "files": 1,
+      "fingerprint": "8d8f951b56835a75b40d554b85791a5633ca806abeb9e9b2111c603c2293acbe"
+    }
+  }
+}

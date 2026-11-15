@@ -1,0 +1,4 @@
+{
+  "reason": "canonical_child_failed_or_oversize",
+  "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/owned_python_job.py\", line 308, in _worker\n    produce(plan,operation['plan']['path'],operation['plan']['sha256'],output,registry,token,canonical_guard,emit)\n  File \"/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/native_canonical_preparation.py\", line 238, in produce\n    require(child.returncode==0 and len(child.stdout)<=16*1024**2,'canonical_child_failed_or_oversize')\n  File \"/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: canonical_child_failed_or_oversize\n"
+}

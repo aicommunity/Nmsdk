@@ -1,0 +1,62 @@
+from pathlib import Path
+import os,sys,json,subprocess,hashlib,tarfile,sqlite3
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-worker-limit-preflight-a2';parent='eae3a302185406b841284abdaf407c56b77891b9'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+c=sqlite3.connect('file:'+str(base/'resource-reservations.sqlite3')+'?mode=ro',uri=True);metadata=dict(c.execute('select key,value from metadata'));c.close();registry=Reservations(base/'resource-reservations.sqlite3',**({'capacity':json.loads(metadata['capacity'])} if 'capacity' in metadata else {}))
+payload={};prefix='Reports/StructTrain/TimeLearner/s10-worker-limit-preflight-m40-a2';summaries=[]
+for attempt in ['a1','a2']:
+ folder=base/('readbacks/s10-worker-limit-preflight-'+attempt)
+ closed=inspect_worker_dependency(Path(str(folder)+'-container'),registry,folder.name,reservation_optional=attempt=='a1')
+ assert closed['state']=='ready' and (closed['reservation_state'] in ['released','not_created'] if attempt=='a1' else closed['reservation_state']=='released'),closed
+ b=json.loads((folder/'bundle.json').read_text());archive=folder/'primary.tar.xz'
+ assert archive.stat().st_size==b['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==b['archive_sha256']
+ seen=set()
+ with tarfile.open(archive,'r:xz') as tar:
+  for m in tar:
+   assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tar.extractfile(m).read();assert b['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+ assert seen==set(b['members'])
+ terminal=json.loads((folder/'terminal.json').read_text());assert terminal['checks_passed'] is (attempt=='a2') and not terminal['reservation_errors']
+ tests=json.loads((folder/'tests.json').read_text()) if (folder/'tests.json').exists() else None
+ if attempt=='a2':
+  assert tests=={'tests_run':26,'successful':True,'failures':0,'errors':0,'skipped':0},tests
+  ids=json.loads((folder/'expected-tests.json').read_text());assert len(ids)==len(set(ids))==26
+  finals=[p for p in folder.rglob('test-final-membership.json')]
+  assert finals and all(json.loads(p.read_text())['all_processes_closed'] for p in finals)
+  assert (folder/'actual-process-evidence').is_dir() and (folder/'actual-runner-evidence').is_dir()
+ else:
+  if tests is not None:assert tests['tests_run']==26 and tests['failures']==2 and tests['errors']==0 and tests['skipped']==0
+  else:assert json.loads((folder/'exception.json').read_text())['reason']=='invalid_reservation_demands'
+ sub=prefix+('/prior-failed-a1' if attempt=='a1' else '')
+ for name in ['primary.tar.xz','bundle.json','terminal.json','source-hashes.json','tests.json','expected-tests.json','exception.json','reservation.json']:
+  p=folder/name
+  if p.exists():payload[sub+'/'+name]=p.read_bytes()
+ payload[sub+'/fresh-operational-closure.json']=(json.dumps(closed,indent=2)+'\n').encode()
+ summaries.append({'attempt':attempt,'archive_members':len(seen),'archive_bytes':b['archive_bytes'],'archive_sha256':b['archive_sha256'],'tests':tests,'reservation_state':closed['reservation_state'],'fresh_whole_group_closed':True})
+payload[prefix+'/verification.json']=(json.dumps({'kind':'worker_limit_preflight_actual_process_verification','source_root':parent,'attempts':summaries,'neural_models_started':False,'scientific_verdict':None},indent=2)+'\n').encode()
+payload[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+repo=base/'evidence-worker-limit-preflight-a2';assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for packet in (source/'.git/objects/pack').glob('*.pack'):
+ with packet.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*a,data=None):return subprocess.check_output(['git','-C',str(repo),*a],input=data).decode().strip()
+def tree(original,changes):
+ entries={}
+ if original:
+  for row in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',original]).split(b'\0'):
+   if row:
+    meta,name=row.split(b'\t',1);mode,kind,oid=meta.decode().split();entries[name.decode()]=(mode,kind,oid)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=value
+ for name,sub in groups.items():
+  previous=entries.get(name);assert previous is None or previous[1]=='tree';entries[name]=('040000','tree',tree(previous[2] if previous else None,sub))
+ content=b''.join((entries[n][0].lstrip('0')+' '+n).encode()+b'\0'+bytes.fromhex(entries[n][2]) for n in sorted(entries,key=lambda n:n+('/' if entries[n][1]=='tree' else '')))
+ return git('hash-object','-w','-t','tree','--stdin',data=content)
+updates={name:('100644','blob',git('hash-object','-w','--stdin',data=raw)) for name,raw in payload.items()}
+commit=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner-evidence@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve worker-limit preflight26 real process controls and original failed A1\n')
+git('update-ref','refs/heads/evidence',commit)
+print(json.dumps({'commit':commit,'parent':parent,'repository':str(repo),'attempts':summaries,'new_neural_models':False}))

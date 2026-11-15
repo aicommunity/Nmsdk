@@ -1,0 +1,91 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "6092ace3e4c792f4fffb55df5f58bcee10aff953e2a44a653209a4281f8750f3",
+      "unit": "timelearner-38d299d9-b9f7-4cba-b6ef-c34f0152f8db.service",
+      "invocation_id": "1d21d1fe1bae4f73986d6c0410f63e37",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-38d299d9-b9f7-4cba-b6ef-c34f0152f8db.service",
+      "initial_main_pid": 2016601,
+      "initial_start_ticks": "351069672",
+      "sha256": "69617d8dc26ef333e90377fbea7eecd631360e0e357e35808f9c6bae658298be"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-38d299d9-b9f7-4cba-b6ef-c34f0152f8db.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "16d4ae50-2dda-4553-a677-d19b901b6e00",
+      "job_id": "s07-stock-cold8-preflight-m40-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 2016601,
+        "start_ticks": "351069672",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-cold7-classic-train-m40-a2/worker/native-stock-cold7/prepared",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-cold7-classic-train-m40-a2/worker/native-stock-cold7/prepared"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-cold8-preflight-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-cold8-preflight-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold8-preflight-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold8PreflightA2-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold8-preflight-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold8PreflightA2-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold8-preflight-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold8PreflightA2-20261112/fixture",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold8-preflight-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold8PreflightA2-20261112/fixture"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-stock-cold8-preflight-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-stock-cold8-preflight-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794435499.2422428,
+      "deadline": 1794435639.2578053,
+      "updated": 1794435529.2377472,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

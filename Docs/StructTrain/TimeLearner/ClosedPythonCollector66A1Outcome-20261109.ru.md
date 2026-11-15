@@ -1,0 +1,9 @@
+# Actual metadata66 A1: отрицательный результат
+
+Единственный M40 запуск s10-closed-python-validation66-m40-a1 завершён:66executed =65PASS +1ERROR,0failures/skips. Source382180/plan5d64, ToolCEC. Ошибка в ReadonlyReservationsSnapshotTest.test_real_valid_ledger_read_uses_ro_deferred_select_without_writer: test spy def connect(uri,...) принимает positional database и настоящий SQLite uri=True, получая TypeError multiple values for argument uri до открытия SQL-read transaction. Остальные38 прежних owner regressions,24collector metadata controls и3остальных readonly tests прошли. Общий66 gate не принят; production read_snapshot/CLI этим исходом целиком не допускаются.
+
+Binding6a2d4e60, unit timelearner-b249392e-bb73-4e43-9540-e2259faa3d26.service, invocationb028d558eacf4c7d9f4d56864e1d676a, main1358765/start329753937. Whole group closed, exact lease72c60723-e936-48a6-af2c-cf893979e439 released; source иTool snapshots before/after равны.17.598s walltime. Все первичные метаданные сохраняют scientific_verdict=null.
+
+[Полные Root observations, исходный unittest.log и SHA index](../../../Reports/StructTrain/TimeLearner/s10-closed-python-validation66-a1-root-observation/index.json) доступны в Git; журнал16910B/SHA00138620c3683b8a05ef6353310516daae4d5b2e37ca3af36e67fc664395bc70. Source/projected roots иplan не переписываются иA1 не перезапускается. Исправление ограничено именем первого аргумента test spy; production methods должны остаться byte-equal. Следующая попытка66 требует нового source/plan/job при тех же66IDs илимитах. Real collection40/73 ещё не выполнялась.
+
+Подготовка использовала напрямую Git-tracked nested request/suite. Старый недоставленный plan8fdf с flat-suite declaration сохранён исторически; дополнительных flat copies/excludes/preparation writer lease не создавалось.

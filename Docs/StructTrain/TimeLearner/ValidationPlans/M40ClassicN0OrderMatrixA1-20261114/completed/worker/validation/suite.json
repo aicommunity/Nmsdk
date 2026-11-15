@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s11-classic-n0-order-matrix-m40-a1",
+  "package_fingerprint": "bd241303fd52414efc15561dc4b74ec45b0d5fccd9f7e50dd0c9e5eb7e725318",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_fixed_threshold_order_matrix_native"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_fixed_threshold_order_matrix_native.FixedThresholdOrderMatrixNativeTest.test_same_frozen_model_and_threshold_with_target_in_every_position"
+  ],
+  "fixtures": {
+    "TIMELEARNER_FIXED_ORDER_CONTROLS": {
+      "pattern": "*",
+      "files": 4,
+      "fingerprint": "f05b9852a0332c0ece797e80bda4ce6e04f01acc43bfebcf141fc435d6387139"
+    },
+    "TIMELEARNER_FIXED_ORDER_SOURCE_RUN": {
+      "pattern": "**/*.json",
+      "files": 35,
+      "fingerprint": "f2eb67fccfc17476a4ceffb5c1999e4cbcee4a0089dc25be5247b774110d3ccc"
+    }
+  }
+}

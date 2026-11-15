@@ -1,0 +1,27 @@
+{
+  "source_root": "b5cfae4b09558aae0a4eac82a3743430c3105539",
+  "default_controls_passed": 2,
+  "actual_failures": [
+    {
+      "case": "Classic-threshold-low-retry32",
+      "channel_diagnostics": false,
+      "reason": "worker_digest_mismatch"
+    },
+    {
+      "case": "Classic-threshold-low-retry32",
+      "channel_diagnostics": true,
+      "reason": "worker_digest_mismatch"
+    },
+    {
+      "case": "Branch-threshold-low-retry32",
+      "channel_diagnostics": false,
+      "reason": "worker_digest_mismatch"
+    },
+    {
+      "case": "Branch-threshold-low-retry32",
+      "channel_diagnostics": true,
+      "reason": "worker_digest_mismatch"
+    }
+  ],
+  "native_operations_executed": false
+}

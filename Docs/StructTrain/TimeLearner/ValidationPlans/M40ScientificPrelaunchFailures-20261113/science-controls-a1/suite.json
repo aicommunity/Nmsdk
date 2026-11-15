@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s11-diagnostic-threshold-science-m40-a1",
+  "package_fingerprint": "7fd84965d4212620ccb237198b60580a1a0371ba41db4feb0cab2a4023f06c17",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_diagnostic_threshold_study"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_diagnostic_threshold_study.DiagnosticThresholdStudyNativeTest.test_actual_baseline_replay_then_fixed_same_matrix_candidate"
+  ],
+  "fixtures": {
+    "TIMELEARNER_THRESHOLD_SOURCE_RUN": {
+      "pattern": "**/*.json",
+      "files": 34,
+      "fingerprint": "e108331d6214210bbb5770cabada042d86435410f9c9d0316b62257ff597edee"
+    },
+    "TIMELEARNER_THRESHOLD_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "8391aa0cfafbe656ad953ae42a339c1063e169e978cda3c3b7daf2aa98ec17b7"
+    },
+    "TIMELEARNER_THRESHOLD_RUNTIME": {
+      "pattern": "NeuroModelerConsole*",
+      "files": 2,
+      "fingerprint": "fc00e41a8d8b4d6ecd185dbfee9d33532b49789517bd3a18df1335b68f64ee6e"
+    }
+  }
+}

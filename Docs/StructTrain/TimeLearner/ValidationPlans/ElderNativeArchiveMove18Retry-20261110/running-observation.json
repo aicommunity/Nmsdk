@@ -1,0 +1,16 @@
+{
+  "observed_at_utc": "2026-11-10T13:31:03.497Z",
+  "readback": {
+    "status": 0,
+    "signal": null,
+    "output": [
+      null,
+      "    PID     ELAPSED   RSS COMMAND\r\n   1687       00:25 30440 /usr/bin/python3 -B -m Scripts.StructTrain.TimeLearner.owned_native_job _supervise /home/user/timelearner-refactor/readbacks/s05-native-archive-move18-normal-a2-controller/request.json\r\nconsumed-control-identities.json\r\nexternal-control-identities.json\r\ninputs\r\nlaunched.json\r\nlaunch-intent.json\r\nmodule-source.json\r\npreflight.json\r\nprocess\r\nrequest.json\r\nruntime.json\r\nstarted-binding.json\r\nsupervisor-identity.json\r\nsupervisor.log\r\ntool-source.json\r\n{\r\n  \"kind\": \"timelearner_contained_binding\",\r\n  \"schema_version\": 1,\r\n  \"request_sha256\": \"cd4fed639fd409a5b480c633af938ca03161e7723673cea5f60112f7d6e11a99\",\r\n  \"unit\": \"timelearner-f33b896c-71f9-47e1-b01d-24a0d9a9ff70.service\",\r\n  \"invocation_id\": \"563babb6408f448e8a4098df2ba11692\",\r\n  \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f33b896c-71f9-47e1-b01d-24a0d9a9ff70.service\",\r\n  \"initial_main_pid\": 7419,\r\n  \"initial_start_ticks\": \"388721787\",\r\n  \"sha256\": \"7658ae0a6c52dbb6dc9cc1b009fc5e64983c1be5a23baf06a2299301ca88a6a0\"\r\n}\r\n[  1%] Linking CXX static library /home/user/timelearner-refactor/runtime-native-archive-move18-normal-a2/Lib.CMake/libgtest.a\r\n[  1%] Built target gtest\r\n[  1%] Building CXX object Rdk/CMakeFiles/rdk.static.qt.dir/Core/Application/UAppCore.cpp.o\r\n",
+      ""
+    ],
+    "pid": 40680,
+    "stdout": "    PID     ELAPSED   RSS COMMAND\r\n   1687       00:25 30440 /usr/bin/python3 -B -m Scripts.StructTrain.TimeLearner.owned_native_job _supervise /home/user/timelearner-refactor/readbacks/s05-native-archive-move18-normal-a2-controller/request.json\r\nconsumed-control-identities.json\r\nexternal-control-identities.json\r\ninputs\r\nlaunched.json\r\nlaunch-intent.json\r\nmodule-source.json\r\npreflight.json\r\nprocess\r\nrequest.json\r\nruntime.json\r\nstarted-binding.json\r\nsupervisor-identity.json\r\nsupervisor.log\r\ntool-source.json\r\n{\r\n  \"kind\": \"timelearner_contained_binding\",\r\n  \"schema_version\": 1,\r\n  \"request_sha256\": \"cd4fed639fd409a5b480c633af938ca03161e7723673cea5f60112f7d6e11a99\",\r\n  \"unit\": \"timelearner-f33b896c-71f9-47e1-b01d-24a0d9a9ff70.service\",\r\n  \"invocation_id\": \"563babb6408f448e8a4098df2ba11692\",\r\n  \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f33b896c-71f9-47e1-b01d-24a0d9a9ff70.service\",\r\n  \"initial_main_pid\": 7419,\r\n  \"initial_start_ticks\": \"388721787\",\r\n  \"sha256\": \"7658ae0a6c52dbb6dc9cc1b009fc5e64983c1be5a23baf06a2299301ca88a6a0\"\r\n}\r\n[  1%] Linking CXX static library /home/user/timelearner-refactor/runtime-native-archive-move18-normal-a2/Lib.CMake/libgtest.a\r\n[  1%] Built target gtest\r\n[  1%] Building CXX object Rdk/CMakeFiles/rdk.static.qt.dir/Core/Application/UAppCore.cpp.o\r\n",
+    "stderr": ""
+  },
+  "scientific_verdict": null
+}

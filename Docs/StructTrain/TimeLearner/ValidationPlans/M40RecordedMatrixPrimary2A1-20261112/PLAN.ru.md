@@ -1,0 +1,7 @@
+# Полные N4 данные и временные отчёты: 16 проб / 40 выходов
+
+Источник проверки `557decacf` (полный SHA фиксируется в request). Production `recorded_diagnostic_matrix.report_matrix` должен сначала принять закрытое actual Console задание A2, явно закреплённый runtime, обе исходные модели, все 16 полных наблюдений, исходную матрицу Phase A и собственные child groups. Затем используются штатные readback/scorer/renderer, без изменения модели или порога.
+
+Два opt-in integration tests проверяют исходные negative training outcomes, отсутствие certificates/scientific verdict, полную матрицу и 40 пар pattern×soma: Classic 8×4, Branch 8×1. Для каждой пары проверяются полный manifest, отсутствие пропусков и downsampling, PNG 1920×960 и временной zoom не менее 8 пикселей на native timestep. Фактические input overlays строит production renderer из первичных samples/timestamps; окончательная визуальная приёмка выполняется отдельно глазами.
+
+Полная галерея и воспроизводимый отчёт остаются кэшем M40. Для Git после приёмки выбираются необходимые первичные данные, метрики, модели и рисунки по compact policy. Декларация и запуск разрешены только после original terminal success, закрытия outer/children и освобождения исходной lease. Fixture bindings включают все первичные JSON, все staged входы, controller JSON и raw runtime; полный artifact closure каждого case повторно проверяет production run auditor.

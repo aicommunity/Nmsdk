@@ -1,0 +1,75 @@
+{
+  "schema_version": 2,
+  "source_closure": {
+    "kind": "owned_python_metadata_projection",
+    "tool_root": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+    "launch_context_sha256": "8da29a43e5f35c6399f250dde0eb577f9318e7accdfcb1002462572096503e86",
+    "SDK_source_verified": false
+  },
+  "executable": {
+    "path": "/usr/bin/python3.10",
+    "sha256": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae",
+    "size": 5941864
+  },
+  "app_ini": {
+    "path": "/home/user/timelearner-refactor/readbacks/s07-n1-geometry-decision-ab-elder-a4/request.json",
+    "sha256": "5ea932d6a6064b54a4d3f3913e9e379a5755c825fbf1d0b600e02e3abaf9a8e4",
+    "size": 1194
+  },
+  "compiler": {
+    "path": "/usr/bin/python3.10",
+    "sha256": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae",
+    "size": 5941864
+  },
+  "resolved_libraries": [
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+      "size": 2220400
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libexpat.so.1.8.7",
+      "sha256": "683e2e41db14581194bf1f6616e95a8f02cd4ab599f0fba807e46325ec01d21f",
+      "size": 198968
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+      "size": 940560
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libz.so.1.2.11",
+      "sha256": "64c206f0146cc58bbddc4f22054436f4ff278f5a554aa3ce6921ddf7e9133370",
+      "size": 108936
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+      "size": 240936
+    }
+  ],
+  "loaded_process_files": null,
+  "loader_environment": {},
+  "build_flags": {
+    "role": "Python validation or duplicate-AR maintenance only; legacy compiler field is Python interpreter"
+  },
+  "runtime_identity": {
+    "kind": "timelearner_runtime_content",
+    "schema_version": 2,
+    "executable": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae",
+    "app_ini": "5ea932d6a6064b54a4d3f3913e9e379a5755c825fbf1d0b600e02e3abaf9a8e4",
+    "resolved_libraries": [
+      "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+      "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+      "64c206f0146cc58bbddc4f22054436f4ff278f5a554aa3ce6921ddf7e9133370",
+      "683e2e41db14581194bf1f6616e95a8f02cd4ab599f0fba807e46325ec01d21f",
+      "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793"
+    ],
+    "build_flags": {
+      "role": "Python validation or duplicate-AR maintenance only; legacy compiler field is Python interpreter"
+    },
+    "compiler": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae",
+    "loaded_process_files": null
+  },
+  "runtime_fingerprint": "e109410c52169cc567b1e0e1930c7a4a6925b5ab212cbae10b3992b2f1ce44dc"
+}

@@ -1,5 +1,9 @@
 # Семантика исходных свойств: цель, структура и время
 
+Уточнение09.11 для timing/peak policy по Pulsef7/Rdkd6:
+[ControlPeakPropertyReconciliation](ControlPeakPropertyReconciliation-20261109.ru.md).
+Это source-сверка выбранных полей; прежние runtime evidence не повышены.
+
 Code review PulseLib `025d809f7b86cc79e18ddd711c6adc40e2396bf8`:
 13 общих свойств × два learner, Classic EstDelayPerSeg и Branch
 InitEstDelayPerSeg/RminNoImproveMinProgress — **29 исходных записей**.
@@ -47,7 +51,7 @@ setter-исключения само по себе не подтверждает
 | IterationGap | double, секунды, 0.5 | Setter отвергает неконечные значения и value<0. Legacy EffectiveIterationGap при AutoScale=true возвращает span+settle+slack, иначе max(configured positive либо 0.5, physical). Reset использует поле также для unmeasured sentinel | NaN/Inf отклоняются локальным setter; connected properties/SetDataDirect требуют отдельного контроля. Отрицательное значение запрещено; 0 означает fallback, не нулевой интервал. Нужны effective onset spacing/complete windows; изменённый ITI — отдельный протокол от исторического |
 | AutoScaleIterationGap | bool, true, setter отсутствует | Legacy управляет использованием floors IterationGap/Delay; settle зависит от текущей длины и оценки delay/segment. Само присваивание не гарантирует немедленный Dataset readback | Не обещает точный user ITI и не отменяет 1.55 floor. В V2 расписание проб определяется protocol/executor. Нужны true/false при изменении lengths, корректное окно late response и frozen evaluation timestamps |
 | SyncTolerance | double, секунды, 0.02 | Legacy setter отвергает неконечные значения и value<0; используется signed/absolute timing decisions и gate готовности. В V2 действует search.tolerances.sync явного JSON, а не автоматическое чтение этого legacy поля | 0 разрешён; NaN/Inf локальный setter отклоняет. Не заменять допуск на dt/1%. Проверять signed residuals, overshoot, independent all-input sweep; old best-effort latches не являются Exact |
-| PeakMeasureMargin | double, секунды, 0.06 | Legacy setter отвергает неконечные значения и value<0; задаёт margin прогнозного peak search. Native V2 использует explicit input windows и назначение burst waves | 0 разрешён; NaN/Inf локальный setter отклоняет. Прогноз не подтверждает отсутствующий пик. Нужны missing/ambiguous/clipped/incomplete peaks и finite checks, а не только факт выставления свойства |
+| PeakMeasureMargin | double, секунды, 0.06 | Legacy setter отвергает неконечные значения и value<0; задаёт margin прогнозного peak search. Typed native использует explicit protocol policy: composite cold6/protocol4 WindowOnly с declared windows; cold7/protocol5 reference windows и candidate-window recipe | 0 разрешён; NaN/Inf локальный setter отклоняет. Прогноз не подтверждает отсутствующий пик. Нужны missing/ambiguous/clipped/incomplete peaks и finite checks, а не только факт выставления свойства. Source schema не означает runtime admission |
 | DelayAgreeMarginMin | double, секунды, 0.03 | Legacy setter отвергает неконечные значения и value<0; участвует в измерительном согласовании DelayUseOf вместе с SyncTolerance. Не равен допускаемому финальному timing residual | 0 разрешён; NaN/Inf локальный setter отклоняет. Нужны реальные peak-vs-prediction/roundoff controls; V2 windows/tolerances задаются отдельно и должны проверяться по effective protocol |
 
 ## Различия топологий и дополнительные свойства
