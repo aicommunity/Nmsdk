@@ -35,40 +35,70 @@
   },
   "native": {
     "worker": "M40",
-    "execution": "running_at_last_observation",
-    "baseline_expected_assertion_failures": 2,
+    "execution": "completed",
+    "candidate_passed": 154,
     "candidate_expected_cases": 154,
-    "accepted": false,
+    "accepted": true,
+    "all_processes_closed": true,
+    "job_validation_passed": true,
+    "cohort_assertions_passed": true,
+    "baseline_expected_assertion_failures": 2,
+    "baseline_counterexamples_reproduced": 2,
+    "baseline_sdk_passed": false,
+    "baseline_verifier_job": "s07-n1-moderate-baseline-counterexamples-m40-a1",
+    "baseline_verifier_control": "e3b75319388110eb0f1ced72ee8fe7517306d2b2",
     "jobs": [
       {
-        "host": "10.245.1.17",
-        "jump": "10.245.1.12",
         "id": "s07-n1-moderate-baseline-sdk-m40-a1",
-        "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-moderate-baseline-sdk-m40-a1-controller",
-        "expected_native_counterexamples": 2,
-        "canonical_control": "4a55298e78dbdfdeea5bd37aba594ccc3a97df92",
-        "last_confirmed": "running_build_43percent",
-        "never_restart_on_observation_timeout": true
+        "all_processes_closed": true,
+        "job_validation_passed": false,
+        "completed_cases": 1,
+        "passed_cases": 0
       },
       {
-        "host": "10.245.1.17",
-        "jump": "10.245.1.12",
         "id": "s07-n1-moderate-candidate-sdk-m40-a1",
-        "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-moderate-candidate-sdk-m40-a1-controller",
-        "expected_cases": 154,
-        "canonical_control": "1d9a857f0a4f2da78231ec5522cf64bd2b1fd154",
-        "last_confirmed": "running_build_43percent",
-        "never_restart_on_observation_timeout": true
+        "all_processes_closed": true,
+        "job_validation_passed": true,
+        "completed_cases": 154,
+        "passed_cases": 154
       }
-    ]
+    ],
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7a/7aa7f6f4f217fb92e6046c13426db6d24ea85bc8068965ba69960455f8cc453f",
+      "sha256": "7aa7f6f4f217fb92e6046c13426db6d24ea85bc8068965ba69960455f8cc453f",
+      "bytes": 25156588
+    },
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-16/n1-moderate-recovery/validation-m40.json"
   },
   "cold_train": {
-    "execution": "not_started",
-    "requires_native_candidate_154_and_whole_closure": true,
+    "execution": "running_at_last_observation",
+    "job": "s11-uniform-profile0-N1-moderate-train-m40-a1",
+    "worker": "M40",
+    "host": "10.245.1.17",
+    "jump": "10.245.1.12",
+    "control_commit": "8cb59fa30209ed8012eb4decfe1a3b6aecbd7779",
+    "tools_root": "bfbd0952478b3397a221ae1258a447a22842b0f9",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-n1-moderate-candidate-sdk-a1",
     "same_job_except_run_id": true,
-    "all_scientific_budgets_and_tolerances_unchanged": true
+    "all_scientific_budgets_and_tolerances_unchanged": true,
+    "requires_native_candidate_154_and_whole_closure": true,
+    "prelaunch_guard_passed": true,
+    "last_observed": {
+      "variant": 0,
+      "attempt": 1,
+      "outer_execution": "running",
+      "outer_closed": false,
+      "child_execution": "running",
+      "child_closed": false,
+      "native_cpu_seconds": 759.31,
+      "native_wall_seconds": 733.1400000001304
+    }
   },
   "scientific_verdict": null,
   "whole_plan_complete": false,
-  "stage7_complete": false
+  "stage7_complete": false,
+  "observed_at_utc": "2026-11-15T23:49:37.046Z"
 }
