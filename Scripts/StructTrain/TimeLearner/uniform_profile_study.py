@@ -6,6 +6,7 @@ common to both cases. Valid negative outcomes are retained, never classified.
 """
 from copy import deepcopy
 import os
+import re
 from pathlib import Path
 from .candidate_window_package_evidence import audit_candidate_window_recovery_package
 from .collector_provenance import frozen_digest
@@ -24,7 +25,7 @@ from .stock_candidate_window_study import training_execution_limits
 from .uniform_profile_physics import audit_uniform_profile
 
 
-def declare_case(original, archive, variant, reference_frames=None):
+def declare_case(original, archive, variant, reference_frames=None, *, run_label=None):
     require(variant in (0,3), 'uniform_study_unknown_profile')
     c=original['configuration']
     require(c['schema_version']==8 and c['model']['branch'] is True and
@@ -59,6 +60,10 @@ def declare_case(original, archive, variant, reference_frames=None):
             p['base_left_guard_frames']=frames['first_frame']
             p['base_right_guard_frames']=3600-frames['last_frame']
         q['run_id']+='/measured-window-rebased'
+    if run_label is not None:
+        require(type(run_label) is str and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,63}',run_label),
+                'uniform_study_invalid_run_label')
+        q['run_id']+='/'+run_label
     result['profile_archives']=[deepcopy(archive)]
     result=_signed({k:v for k,v in result.items() if k!='sha256'})
     validate_job('preflight',result);validate_job('train',result)
