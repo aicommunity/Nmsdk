@@ -145,7 +145,19 @@
     "source_root": "c787bd2e2116c0190ad46725ac5c2a586080af67",
     "pulse": "a82a7cd08a4334c5924839b7136ae9df5884da53"
   },
-  "external_sdk_evidence": "failed_attempts_archived; successful_SDK_evidence_pending",
+  "external_sdk_evidence": {
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/09/09b518f7d941fea9ed2e9551ca9a03680b3d20dd9c5198921130521876d7a63d",
+      "sha256": "09b518f7d941fea9ed2e9551ca9a03680b3d20dd9c5198921130521876d7a63d",
+      "bytes": 30764561
+    },
+    "files": 3850,
+    "manifest": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/recovery-coverage/sdk-a3-a5-evidence.json",
+    "scope": "All regular raw outputs and controls of SDK A3 timeout and A5 passed, plus byte-equality comparison; member digests verified."
+  },
   "scientific_verdict": null,
   "whole_plan_complete": false,
   "revalidation": {
