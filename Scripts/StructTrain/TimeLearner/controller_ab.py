@@ -9,6 +9,7 @@ import hashlib
 import os
 from pathlib import Path, PurePosixPath
 import re
+import shlex
 import signal
 import subprocess
 import time
@@ -66,15 +67,29 @@ def _run(arguments, directory, output, wall_seconds, environment):
     return result
 
 
+def _qt_core(package):
+    require(package in ('Qt5Core', 'Qt6Core'), 'unsupported_controller_ab_qt_package')
+    pkg_config = Path('/usr/bin/pkg-config').resolve(strict=True)
+    def query(option):
+        return subprocess.check_output([str(pkg_config), option, package],
+            env={'PATH': '/usr/bin:/bin', 'LANG': 'C', 'LC_ALL': 'C'}, text=True, timeout=30).strip()
+    cflags, libraries = shlex.split(query('--cflags')), shlex.split(query('--libs'))
+    require(cflags and libraries, 'controller_ab_qt_flags_missing')
+    return dict(package=package, pkg_config=file_record(pkg_config),
+                version=query('--modversion'), compile_flags=['-fPIC', *cflags], link_flags=libraries)
+
+
 def run_controller_ab(specification, root_repository, pulse_repository, compiler, gtest_source, output, *, single=False):
     require(os.name == 'posix' and Path('/proc/self/stat').exists(), 'controller_ab_requires_linux_worker')
     spec = load(Path(specification).resolve(strict=True))
     revisions = ('root',) if single else ('baseline_root', 'candidate_root')
     keys = {'kind', 'schema_version', 'production_paths', 'test_paths', 'expected_test_ids',
             'compile_wall_seconds', 'test_wall_seconds'} | set(revisions)
+    if type(spec) is dict and spec.get('schema_version') == 2:
+        keys.add('qt_core_package')
     require(type(spec) is dict and set(spec) == keys and
             spec['kind'] == ('timelearner_controller_kernel' if single else 'timelearner_controller_ab') and
-            type(spec['schema_version']) is int and spec['schema_version'] == 1,
+            type(spec['schema_version']) is int and spec['schema_version'] in (1, 2),
             'unsupported_controller_ab_specification')
     for field in revisions:
         require(type(spec[field]) is str and re.fullmatch('[0-9a-f]{40}', spec[field]), 'controller_ab_requires_full_sha')
@@ -97,6 +112,9 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
     environment = {'PATH': '/usr/bin:/bin', 'LANG': 'C', 'LC_ALL': 'C'}
     toolchain = {'compiler': file_record(compiler), 'environment': environment,
                  'version': subprocess.check_output([str(compiler), '--version'], env=environment, text=True, timeout=30)}
+    qt = _qt_core(spec['qt_core_package']) if spec['schema_version'] == 2 else None
+    if qt is not None:
+        toolchain['qt_core'] = qt
     # Nmsdk normally uses FetchContent googletest, not a system installation.
     # Copy complete original test-framework source files into this job and
     # compile the same copy for both sides; no active build library is reused.
@@ -154,11 +172,12 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
         _write(directory/'sources.json', sources)
         source_maps[label] = sources
         binary = directory/'controller-tests'
-        args = [str(compiler), '-std=c++20', '-O2', '-g0', '-I'+str(directory/'Libraries/Nmsdk-PulseLib/Core'),
+        args = [str(compiler), '-std=c++20', '-O2', '-g0',
+                *(qt['compile_flags'] if qt is not None else []), '-I'+str(directory/'Libraries/Nmsdk-PulseLib/Core'),
                 '-I'+str(gtest_copy/'include'), '-I'+str(gtest_copy),
                 *[str(directory/v['materialized_path']) for n, v in sources.items() if n.endswith('.cpp')],
                 str(gtest_copy/'src/gtest-all.cc'), str(gtest_copy/'src/gtest_main.cc'),
-                '-pthread', '-o', str(binary)]
+                '-pthread', *(qt['link_flags'] if qt is not None else []), '-o', str(binary)]
         compile_result = _run(args, directory, directory/'compile', spec['compile_wall_seconds'], environment)
         record = {'root': revision, 'pulselib': pulse, 'compile': compile_result,
                   'execution': 'not_started', 'validity': 'not_assessed', 'assertion_status': 'not_assessed'}
@@ -188,6 +207,8 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
     require(single or all(source_maps['baseline'][p]['sha256'] == source_maps['candidate'][p]['sha256']
                 for p in spec['test_paths']), 'controller_ab_test_sources_changed')
     require(toolchain['compiler'] == file_record(compiler), 'controller_ab_toolchain_changed')
+    if qt is not None:
+        require(_qt_core(spec['qt_core_package']) == qt, 'controller_ab_qt_configuration_changed')
     for record in records:
         require({k: v for k, v in record.items() if k != 'relative_path'} == file_record(Path(record['path'])) and
                 hashlib.sha256((gtest_copy/record['relative_path']).read_bytes()).hexdigest() == record['sha256'],

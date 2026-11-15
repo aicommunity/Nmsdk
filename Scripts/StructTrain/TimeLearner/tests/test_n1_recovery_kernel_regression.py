@@ -20,6 +20,8 @@ class N1RecoveryKernelRegressionTest(unittest.TestCase):
         specification = load(controls/'specification.json')
         self.assertEqual(specification['baseline_root'], '47d67e8fa0d8ea9e2cf61e49ad7e7019dd91c50f')
         self.assertEqual(specification['candidate_root'], '860ee87057196f0afb5b3a98cbd0bdacf378543a')
+        self.assertEqual(specification['schema_version'], 2)
+        self.assertEqual(specification['qt_core_package'], 'Qt5Core')
         self.assertEqual(len(specification['expected_test_ids']), 106)
         result = run_controller_ab(controls/'specification.json',
             declaration['root_repository'], declaration['pulse_repository'],
