@@ -24,7 +24,9 @@ void BranchN0LengthFamily(std::size_t n,ProbeRouting routing=ProbeRouting::Branc
     std::vector<int> measured;
     for(const auto& e:session.Evidence())if(e.inputIndex==input)measured.push_back(e.parameters.length);
     ASSERT_GE(measured.size(),routing==ProbeRouting::BranchSoloBurst && !fixedBank?5u:4u);
-    if(fixedBank || routing==ProbeRouting::ClassicBurst)EXPECT_EQ(measured[3],16);
+    // The 5 ms fixture rounds the first measured trend to a direct L=19 proposal.
+    // Both baseline and candidate must preserve that measured scheduling choice.
+    if(fixedBank || routing==ProbeRouting::ClassicBurst)EXPECT_EQ(measured[3],19);
     EXPECT_EQ((std::vector<int>(measured.begin(),measured.begin()+3)),(std::vector<int>{2,3,4}));
     EXPECT_TRUE(std::any_of(measured.begin(),measured.end(),[](int l){return l>9;}));
     EXPECT_LE(measured.size(),cfg.maximumCandidatesPerInput);
