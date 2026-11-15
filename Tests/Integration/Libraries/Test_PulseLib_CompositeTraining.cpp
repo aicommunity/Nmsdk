@@ -164,10 +164,24 @@ public:
     void Run(const VerificationRequest& request,CompositeMeasurementPurpose purpose,
         std::function<void(const PreparedCompositeMeasurement&)> prepared={},std::function<void()> tick={},double groupLimit=2.,double groupWall=0.) {
         attempt->StartMeasurement(request,purpose,prototype,groupLimit,groupWall>0.?groupWall:(frequency==20000?1200.:300.),Time(),Wall(),std::move(prepared));
-        std::size_t ticks=0;while(attempt->Running() && ticks++<std::size_t(groupLimit*frequency)) {
-            attempt->BeforeTick(Time(),Wall());if(!attempt->Running())break;
-            model->Calculate();attempt->AfterTick(Time(),Wall());environment->IncreaseModelTimeByStep();if(tick)tick();
+        const auto logger=environment->GetLogger();
+        const auto previousMask=logger?logger->GetDebugSysEventsMask():0u;
+        {
+            // ConsoleLikeInit enables every debug event. Formatting every
+            // component property on every tick dominates long-cable probes
+            // even when the debug sink discards the messages. Retain errors,
+            // all other diagnostic bits and the actual observation callbacks.
+            struct RestoreMask {
+                decltype(logger) instance;unsigned int mask;
+                ~RestoreMask(){if(instance)instance->SetDebugSysEventsMask(mask);}
+            } restore{logger,previousMask};
+            if(logger)logger->SetDebugSysEventsMask(previousMask & ~unsigned(RDK_SYS_DEBUG_PROPERTIES));
+            std::size_t ticks=0;while(attempt->Running() && ticks++<std::size_t(groupLimit*frequency)) {
+                attempt->BeforeTick(Time(),Wall());if(!attempt->Running())break;
+                model->Calculate();attempt->AfterTick(Time(),Wall());environment->IncreaseModelTimeByStep();if(tick)tick();
+            }
         }
+        if(logger)EXPECT_EQ(logger->GetDebugSysEventsMask(),previousMask);
         Require(!attempt->Running(),"composite_fixture_tick_budget");
         if(attempt->Measurement()) {
             const auto& full=attempt->Group()->witness.fullBefore.observation;
