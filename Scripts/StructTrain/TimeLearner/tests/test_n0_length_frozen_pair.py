@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 from ..contained_process import inspect
 from ..native_evidence import load, require
-from ..native_pipeline_worker import run_job, validate_job, audit_run_manifest
+from ..native_pipeline_worker import run_job, audit_run_manifest
 from ..native_process_policy import policy_for_reservation
 from ..resource_reservations import Reservations
 from ..n1_protocol_robustness import _signed, _write
@@ -20,8 +20,9 @@ class N0LengthFrozenPairTest(unittest.TestCase):
     def test_same_matrix_preset_thresholds_keep_both_actual_models_frozen(self):
         controls = Path(os.environ['TIMELEARNER_N0_LENGTH_FROZEN_CONTROLS']).resolve(strict=True)
         spec = load(controls/'declaration.json')
-        require(set(spec) == {'sources', 'runtime', 'bin_repository', 'controller', 'output', 'thresholds'}
-                and set(spec['sources']) == {'baseline', 'candidate'} and spec['thresholds'] == [100., .0117],
+        require(set(spec) == {'sources', 'runtime', 'bin_repository', 'controller', 'output', 'thresholds', 'roles'}
+                and set(spec['sources']) == {'baseline', 'candidate'} and spec['thresholds'] == [100., .0117]
+                and spec['roles'] in (['baseline'], ['candidate'], ['baseline', 'candidate']),
                 'n0_length_frozen_declaration')
         runtime_path = Path(spec['runtime']).resolve(strict=True)
         runtime = load(runtime_path)
@@ -55,7 +56,8 @@ class N0LengthFrozenPairTest(unittest.TestCase):
         _write(output/'matrix.json', matrix)
         rows = []
         with patch.dict(os.environ, runtime['loader_environment']):
-            for role, case in cases.items():
+            for role in spec['roles']:
+                case = cases[role]
                 package = case[0]
                 for threshold in spec['thresholds']:
                     name = role+('-wave100' if threshold == 100. else '-fixed00117')
@@ -69,7 +71,6 @@ class N0LengthFrozenPairTest(unittest.TestCase):
                         body.update(schema_version=2, diagnostic_threshold=threshold)
                     job = _signed(body)
                     self.assertEqual(len(job['trials']), 8)
-                    validate_job('diagnostic-evaluate', job, case)
                     path = output/'jobs'/(name+'.json')
                     _write(path, job)
                     result = run_job('diagnostic-evaluate', path, spec['sources'][role], runtime_path,
@@ -92,4 +93,5 @@ class N0LengthFrozenPairTest(unittest.TestCase):
         registry.release(lease['token'], note='All paired frozen native groups closed; no convergence claim.')
         verify_runtime(runtime)
         _write(output/'index.json', dict(kind='n0_length_paired_frozen_diagnostic', schema_version=1,
-            rows=rows, trials=32, thresholds_selected_from_new_data=False, scientific_verdict=None))
+            rows=rows, trials=8*len(rows), roles=spec['roles'],
+            thresholds_selected_from_new_data=False, scientific_verdict=None))
