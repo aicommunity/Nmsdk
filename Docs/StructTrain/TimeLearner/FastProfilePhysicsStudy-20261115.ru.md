@@ -1,3 +1,5 @@
+> Итог двух actual cold Train: [научный отчёт](FastProfilePhysicsScientificReport-20261115.ru.md). Исходный — invalid_observation после локально готового input2; быстрый — BudgetExhausted после timing-ready L121 без нормализации амплитуды. Обе producer-проверки прошли1/1 и процессы закрыты. Временной отчёт A2 принят1/1:28 PNG,7 overview просмотрены; полная галерея во внешнем архиве M40. Ниже сохранены постановка и ход адресных исправлений; инженерный PASS не означает сходимость или работу классификатора.
+
 # Storage-физика и разделение закреплённых откликов — 15.11.2026
 
 После [широкого поиска Branch N0](N0RecoveryCoverageScientificReport-20261115.ru.md) input1 остался ambiguous при L28,100,64,46,82. Следующий контраст проверяет реальную физику и форму отклика; исходные assignment, CapturedPerInput и tolerances сохраняются.

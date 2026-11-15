@@ -119,7 +119,7 @@
   "training": {
     "stock": "s11-uniform-profile0-N1-train-m40-a1",
     "fast_corrected": "s11-uniform-profile3-N1-train-m40-a2",
-    "status": "native_running; no training or classification success claimed",
+    "status": "both_actual_production1_passed_closed; no all-input convergence or classifier result",
     "first_fast": {
       "job": "s11-uniform-profile3-N1-train-m40-a1",
       "outcome": "invalid_model",
@@ -135,6 +135,244 @@
         "sha256": "7a5d80842a7479d3132d3aaf5da0a818fcbd50a94337a1ae60aec9328e0f3ea7",
         "bytes": 2624617
       }
+    },
+    "stock_result": {
+      "outcome": "invalid_observation",
+      "reason": "rejected_candidate_window:ambiguous",
+      "certificate": null,
+      "search_probes": 54,
+      "applied_edits": 25,
+      "actual_parameters": [
+        {
+          "length": 28,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 21232304.307596028,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 21232304.307596028,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "accepted_parameters": [
+        {
+          "length": 28,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 21232304.307596028,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 21232304.307596028,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "composite_counters": {
+        "archive": {
+          "groups": 58,
+          "native_probes": 348,
+          "primary_bytes": 51433980,
+          "sampled_frames": 1253148
+        },
+        "attempt": {
+          "logical_groups": 58,
+          "native_probes": 348,
+          "sampled_frames": 1253148
+        }
+      },
+      "scalar_candidates": 22,
+      "within_timing": 11,
+      "within_amplitude": 2,
+      "jointly_ready": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "producer_passed": true,
+      "all_processes_closed": true,
+      "archive": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/3e/3eb998b76c8263940988ea7d219be44189b695a66af90bf68b91221c774017ec",
+        "sha256": "3eb998b76c8263940988ea7d219be44189b695a66af90bf68b91221c774017ec",
+        "bytes": 52310427
+      }
+    },
+    "fast_result": {
+      "outcome": "budget_exhausted",
+      "reason": "native_training_time_budget_exhausted",
+      "certificate": null,
+      "search_probes": 33,
+      "applied_edits": 16,
+      "actual_parameters": [
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "accepted_parameters": [
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "composite_counters": {
+        "archive": {
+          "groups": 37,
+          "native_probes": 222,
+          "primary_bytes": 32423006,
+          "sampled_frames": 796322
+        },
+        "attempt": {
+          "logical_groups": 37,
+          "native_probes": 222,
+          "sampled_frames": 796322
+        }
+      },
+      "scalar_candidates": 16,
+      "within_timing": 1,
+      "within_amplitude": 1,
+      "jointly_ready": 0,
+      "execution": "completed",
+      "validity": "valid",
+      "producer_passed": true,
+      "all_processes_closed": true,
+      "archive": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/11/11b773c7296cd2e7a684e0a04a4b41e873ee5523e937514f9b15872789325855",
+        "sha256": "11b773c7296cd2e7a684e0a04a4b41e873ee5523e937514f9b15872789325855",
+        "bytes": 21236029
+      }
+    }
+  },
+  "uniform_profile_root_physics": {
+    "job": "s04-uniform-profile-root-audit-m40-a3",
+    "source": "ec1aaefd4db66f0b1e2f951943c38209e9624b78",
+    "passed_tests": 2,
+    "closed": true,
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/37/3792fefdafadd209119258bc72983eb044fc141bf976bc40b50c9cc7f4deef48",
+      "sha256": "3792fefdafadd209119258bc72983eb044fc141bf976bc40b50c9cc7f4deef48",
+      "bytes": 277097
+    },
+    "rdk_TimeStep": "unsigned integer frequency_hz; not dt",
+    "native_model_execution": false
+  },
+  "training_temporal": {
+    "failed_attempt": {
+      "job": "s11-uniform-profile-N1-report-m40-a1",
+      "reason": "reference_time group has candidate_frame=null; renderer assumed frame",
+      "archive": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/fb/fba50afb3d870d988d33046118fc9cd4685463508c3bec15fcd83c07e200264a",
+        "sha256": "fba50afb3d870d988d33046118fc9cd4685463508c3bec15fcd83c07e200264a",
+        "bytes": 459002
+      }
+    },
+    "current_attempt": {
+      "job": "s11-uniform-profile-N1-report-m40-a2",
+      "source": "539b73fd304fe4c4818837b3cc80f7fbbd4a1db6",
+      "status": "passed1_closed",
+      "control": "1464beb83fe36cc1bca91e4608e81a9d5f161cfa",
+      "archive": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/d6/d67ab99edac162484700ff34544976c992aa5b8f43ea7c22f07401e63d08bb40",
+        "sha256": "d67ab99edac162484700ff34544976c992aa5b8f43ea7c22f07401e63d08bb40",
+        "bytes": 18265975
+      },
+      "files": 135,
+      "png_figures": 28,
+      "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-15/uniform-profile-N1-training/index.html",
+      "selected_groups": {
+        "stock": [
+          4,
+          48,
+          50,
+          58
+        ],
+        "fast": [
+          4,
+          36,
+          37
+        ]
+      },
+      "minimum_native_tick_pixels": 22.46399999999998,
+      "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/fast-profile-physics/uniform-profile-N1-temporal-report-a2.json",
+      "selected_overviews_manually_reviewed": {
+        "stock": [
+          4,
+          48,
+          50,
+          58
+        ],
+        "fast": [
+          4,
+          36,
+          37
+        ]
+      },
+      "all_figures_manually_reviewed": false,
+      "source_data_changed": false,
+      "native_calculation_repeated": false
     }
   }
 }

@@ -1,3 +1,5 @@
+> 15.11: [новая пара cold Branch N1 на исходном и C/4+fast storage-профилях завершена](FastProfilePhysicsScientificReport-20261115.ru.md). Оба production CLI/DATA/physical1/1 приняты, процессы закрыты. Исходный:22 scalar candidates,1 locally jointly-ready input2, затем ambiguous input1. Быстрый:16 candidates, timing-ready L121, амплитуда вне допуска, BudgetExhausted. Сертификатов нет; классификация этой пары не проверялась. [Отчёт28 временных видов готов](FastProfilePhysicsAcceptance-20261115.json),7 overview просмотрены, primary и галерея только в external M40 CAS. Исправлены профильная привязка окон и renderer reference_time; [следующий адресный алгоритмический вопрос — N1 rejected-search coverage](N1RejectedSearchCoverage-20261115.ru.md). Это частичная приёмка этапов4/7/11, не завершение исходного плана.
+
 # Структурное обучение TimeLearner
 
 [Действующая политика архива M40, доступ и восстановление](ExternalExperimentArchive.ru.md). Коррекция истории касается только корня; сабмодули сохраняют свои SHA. [Область, выполненные проверки и оставшиеся ограничения](RootHistoryCleanup-2026-11-15.ru.md).
