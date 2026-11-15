@@ -138,12 +138,26 @@
   },
   "model_train": {
     "job": "s11-n0-recovery-coverage-train-m40-a1",
-    "status": "started_result_pending",
+    "status": "completed_and_closed",
     "control_commit": "a8687c0315945fba9a4e8d0544601afe5e3f0dfb",
     "runtime_fingerprint": "7ab8c6f4f11d81f77d99d947d88021ab1dc249bbf189d78df12be6a087207132",
     "same_complete_scientific_configuration": true,
     "source_root": "c787bd2e2116c0190ad46725ac5c2a586080af67",
-    "pulse": "a82a7cd08a4334c5924839b7136ae9df5884da53"
+    "pulse": "a82a7cd08a4334c5924839b7136ae9df5884da53",
+    "outcome": "invalid_observation",
+    "reason": "rejected_candidate_window:ambiguous",
+    "certificate": null,
+    "actual_rejected_lengths": [
+      28,
+      100,
+      64,
+      46,
+      82
+    ],
+    "unchanged_scalar_prefix": 13,
+    "production_operation_passed": true,
+    "primary": "N0RecoveryCoveragePrimary-20261115.json",
+    "report": "N0RecoveryCoverageScientificReport-20261115.ru.md"
   },
   "external_sdk_evidence": {
     "archive": {
@@ -232,5 +246,20 @@
     "compared_files": 8,
     "all_bytes_equal": true,
     "scope": "Cold references only; not a general physics or performance proof."
+  },
+  "temporal_report": {
+    "job": "s11-n0-recovery-coverage-report-m40-a1",
+    "passed": true,
+    "closed": true,
+    "figures": 16,
+    "reviewed": 4,
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/66/6622e7a1cc76996f0a78558579be1a7082e066cf2567c32a08415a69857f84bc",
+      "sha256": "6622e7a1cc76996f0a78558579be1a7082e066cf2567c32a08415a69857f84bc",
+      "bytes": 11130177
+    }
   }
 }

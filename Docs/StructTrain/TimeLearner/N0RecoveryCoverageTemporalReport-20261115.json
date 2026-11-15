@@ -1,0 +1,316 @@
+{
+  "kind": "timelearner_n0_recovery_coverage_temporal_reference",
+  "schema_version": 1,
+  "archive": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/66/6622e7a1cc76996f0a78558579be1a7082e066cf2567c32a08415a69857f84bc",
+    "sha256": "6622e7a1cc76996f0a78558579be1a7082e066cf2567c32a08415a69857f84bc",
+    "bytes": 11130177
+  },
+  "files": 131,
+  "manifest": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/recovery-coverage/temporal-report-a1.json",
+  "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-15/n0-recovery-coverage-training/index.html",
+  "figures": 16,
+  "reviewed": 4,
+  "groups": [
+    30,
+    32,
+    34,
+    40
+  ],
+  "controller_wall_seconds": 221.7624527621083,
+  "read_only_report_passed": true,
+  "all_processes_closed": true,
+  "source_root": "38c015466b8298d34a92f1b446912b89a4eb4e3c",
+  "selected_visual_review": [
+    {
+      "file": "group-000030-soma-000-overview.png",
+      "group": 30,
+      "view": "overview",
+      "bytes": 526325,
+      "sha256": "8cc00d7024b776e8e1ae3c84b97d03c868ffa1847f70cd0db7bceb737c1e61eb"
+    },
+    {
+      "file": "group-000032-soma-000-overview.png",
+      "group": 32,
+      "view": "overview",
+      "bytes": 534130,
+      "sha256": "5b280a88e79efa16a859056ad041ead20f9f743ee1a8dc1c39e9feca7c7c0ef2"
+    },
+    {
+      "file": "group-000034-soma-000-overview.png",
+      "group": 34,
+      "view": "overview",
+      "bytes": 551431,
+      "sha256": "c6e712f13372e281e21438b03d17a60fe48a3432fdf146a02508a711d2f3c880"
+    },
+    {
+      "file": "group-000040-soma-000-overview.png",
+      "group": 40,
+      "view": "overview",
+      "bytes": 539837,
+      "sha256": "4059294c48818a7f838b045a7070add1bc5583757b634d694e433ab82bca0ee9"
+    }
+  ],
+  "all_figures_reviewed": false,
+  "minimum_native_tick_pixels": 44.92799999997981,
+  "downsampling": false,
+  "classification_assessed": false,
+  "scientific_verdict": null,
+  "geometry_summary": [
+    {
+      "ordinal": 30,
+      "group_id": "Branch-stock-cold8-N0/session/1/search/38/composite/30",
+      "complete": true,
+      "validity": "valid",
+      "reasons": [],
+      "candidates": [
+        {
+          "maximum": {
+            "amplitude": 0.02235560254260882,
+            "first_sample": 643,
+            "last_sample": 643,
+            "plateau_end": 313.6295,
+            "raw_potential": 0.02235560254260882,
+            "time": 313.6295
+          },
+          "necessity_status": "no_necessary_input",
+          "necessary_inputs": [],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "preserved"
+          ],
+          "reasons": [
+            "basin_has_no_unique_necessary_input"
+          ]
+        },
+        {
+          "maximum": {
+            "amplitude": 0.015582088936423433,
+            "first_sample": 1015,
+            "last_sample": 1015,
+            "plateau_end": 313.8155,
+            "raw_potential": 0.015582088936423433,
+            "time": 313.8155
+          },
+          "necessity_status": "unique_necessary",
+          "necessary_inputs": [
+            2
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin",
+            "preserved"
+          ],
+          "reasons": []
+        },
+        {
+          "maximum": {
+            "amplitude": 0.015130130170234679,
+            "first_sample": 1501,
+            "last_sample": 1501,
+            "plateau_end": 314.0585,
+            "raw_potential": 0.015130130170234679,
+            "time": 314.0585
+          },
+          "necessity_status": "unique_necessary",
+          "necessary_inputs": [
+            3
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin"
+          ],
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "ordinal": 32,
+      "group_id": "Branch-stock-cold8-N0/session/1/search/40/composite/32",
+      "complete": true,
+      "validity": "ambiguous",
+      "reasons": [
+        "highest_window_basin_peak_has_ambiguous_necessity"
+      ],
+      "candidates": [
+        {
+          "maximum": {
+            "amplitude": 0.005413386882249571,
+            "first_sample": 661,
+            "last_sample": 661,
+            "plateau_end": 335.2455,
+            "raw_potential": 0.005413386882249571,
+            "time": 335.2455
+          },
+          "necessity_status": "no_necessary_input",
+          "necessary_inputs": [],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "preserved"
+          ],
+          "reasons": [
+            "basin_has_no_unique_necessary_input"
+          ]
+        },
+        {
+          "maximum": {
+            "amplitude": 0.0037472336580449683,
+            "first_sample": 1033,
+            "last_sample": 1033,
+            "plateau_end": 335.4315,
+            "raw_potential": 0.0037472336580449683,
+            "time": 335.4315
+          },
+          "necessity_status": "unique_necessary",
+          "necessary_inputs": [
+            2
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin",
+            "preserved"
+          ],
+          "reasons": []
+        },
+        {
+          "maximum": {
+            "amplitude": 0.0036274028714771145,
+            "first_sample": 1520,
+            "last_sample": 1520,
+            "plateau_end": 335.675,
+            "raw_potential": 0.0036274028714771145,
+            "time": 335.675
+          },
+          "necessity_status": "unique_necessary",
+          "necessary_inputs": [
+            3
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin"
+          ],
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "ordinal": 34,
+      "group_id": "Branch-stock-cold8-N0/session/1/search/43/composite/34",
+      "complete": true,
+      "validity": "ambiguous",
+      "reasons": [
+        "highest_window_basin_peak_has_ambiguous_necessity"
+      ],
+      "candidates": [
+        {
+          "maximum": {
+            "amplitude": 0.003772287479632652,
+            "first_sample": 2059,
+            "last_sample": 2059,
+            "plateau_end": 357.552,
+            "raw_potential": 0.003772287479632652,
+            "time": 357.552
+          },
+          "necessity_status": "unknown",
+          "necessary_inputs": [],
+          "controls": [
+            "preserved",
+            "unknown",
+            "preserved",
+            "preserved"
+          ],
+          "reasons": [
+            "basin_control_geometry_unknown"
+          ]
+        },
+        {
+          "maximum": {
+            "amplitude": 0.002102252533015103,
+            "first_sample": 2848,
+            "last_sample": 2848,
+            "plateau_end": 357.9465,
+            "raw_potential": 0.002102252533015103,
+            "time": 357.9465
+          },
+          "necessity_status": "unique_necessary",
+          "necessary_inputs": [
+            3
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin"
+          ],
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "ordinal": 40,
+      "group_id": "Branch-stock-cold8-N0/session/1/search/52/composite/40",
+      "complete": true,
+      "validity": "ambiguous",
+      "reasons": [
+        "highest_window_basin_peak_has_ambiguous_necessity"
+      ],
+      "candidates": [
+        {
+          "maximum": {
+            "amplitude": 0.003968588545900875,
+            "first_sample": 1696,
+            "last_sample": 1696,
+            "plateau_end": 422.193,
+            "raw_potential": 0.003968588545900875,
+            "time": 422.193
+          },
+          "necessity_status": "unknown",
+          "necessary_inputs": [],
+          "controls": [
+            "preserved",
+            "unknown",
+            "preserved",
+            "preserved"
+          ],
+          "reasons": [
+            "basin_control_geometry_unknown"
+          ]
+        },
+        {
+          "maximum": {
+            "amplitude": 0.0022381586797346475,
+            "first_sample": 2526,
+            "last_sample": 2526,
+            "plateau_end": 422.608,
+            "raw_potential": 0.0022381586797346475,
+            "time": 422.608
+          },
+          "necessity_status": "unique_necessary",
+          "necessary_inputs": [
+            3
+          ],
+          "controls": [
+            "preserved",
+            "preserved",
+            "preserved",
+            "absent_within_fixed_basin"
+          ],
+          "reasons": []
+        }
+      ]
+    }
+  ]
+}
