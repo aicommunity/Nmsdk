@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import re
 import unittest
+from unittest.mock import patch
 
 from ..domain_evidence import _property
 from ..model_identity import canonical_model_sha256
@@ -71,9 +72,10 @@ class FastProfilePhysicsPreflightTest(unittest.TestCase):
         rows=[]
         for path,name,capacity,dissociation in jobs:
             run=output/name
-            result=run_job('preflight',path,None,Path(declaration['runtime']),run,180.)
-            self.assertEqual(result['execution'],'completed');self.assertEqual(result['validity'],'valid')
-            audit=audit_run_manifest(run/'run-manifest.json')
+            with patch.dict(os.environ, load(Path(declaration['runtime']))['loader_environment']):
+                result=run_job('preflight',path,None,Path(declaration['runtime']),run,180.)
+                self.assertEqual(result['execution'],'completed');self.assertEqual(result['validity'],'valid')
+                audit=audit_run_manifest(run/'run-manifest.json')
             row=inspect_profile(load(run/'native/initial-state.json')['identity'],name,capacity,dissociation)
             self.assertEqual(row['capacity_applied'], not(declaration['mode']=='baseline' and
                              name=='NSPNeuronGenD005C25e11'))
