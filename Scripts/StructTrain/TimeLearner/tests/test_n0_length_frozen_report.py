@@ -14,7 +14,8 @@ class N0LengthFrozenReportTest(unittest.TestCase):
     def test_actual_preset_conditions_all_eight_patterns_and_native_zooms(self):
         from PIL import Image
 
-        declaration = load(Path(os.environ['TIMELEARNER_N0_LENGTH_FROZEN_REPORT_DECLARATION']))
+        controls = Path(os.environ['TIMELEARNER_N0_LENGTH_FROZEN_REPORT_CONTROLS']).resolve(strict=True)
+        declaration = load(controls/'declaration.json')
         require(set(declaration) == {'runs'} and set(declaration['runs']) == {'baseline', 'candidate'},
                 'n0_length_report_declaration')
         output = Path(os.environ['TMPDIR']).resolve(strict=True)/'n0-length-frozen-gallery'
