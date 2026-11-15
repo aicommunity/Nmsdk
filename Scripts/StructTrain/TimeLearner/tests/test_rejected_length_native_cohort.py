@@ -66,7 +66,8 @@ class RejectedLengthNativeCohortTest(unittest.TestCase):
             _write(path, spec)
             result = run_native_gate(path, output/leaf['name'])
             rows.append(dict(name=leaf['name'], expected_ids=leaf['expected_ids'], result=result))
-            _write(output/'progress.json', dict(rows=rows, scientific_verdict=None))
+            _write(output/('progress-'+str(len(rows)).zfill(2)+'.json'),
+                   dict(rows=rows, scientific_verdict=None))
             self.assertTrue(inspect(output/leaf['name']/'process/contained')['all_processes_closed'])
             self.assertEqual((result['execution'], result['validity'], result['assertion_status']),
                              ('completed', 'valid', 'passed'))
