@@ -82,3 +82,6 @@ s11-uniform-profile3-N1-train-m40-a1 сохранил валидные четы�
 
 
 Усиление контроля фиксированного ModelSpec: после роста разрешены только три структурных root-поля NumDendriteMembranePartsVec/TrainingDendIndexes/TrainingSynapsisNum. Остальные root-parameters, включая TimeStep и имена образов для будущего роста, должны совпасть с исходными. Это закрывает возможность незаметно изменить профиль следующего Build при пока ещё одинаковых текущих дочерних C/TC. Проверка проводится на реальных cold/grown readback; дополнительный hash-consistent control меняет только root TimeStep при прежней частоте дерева. Для уже работающих Train код не обновляется; их пакеты при чтении дополнительно проверяются новым data-only auditor.
+
+
+В Rdk свойство TimeStep хранит частоту, а не dt: реальный root readback имеет unsigned_integer="2000". Контроль изменяет его на "1000" при сохранённых frequency_hz="2000" у узлов и пересчитанном hash; никакое floating-point значение dt в это свойство не записывается. В native модели частота задаётся штатным SetGlobalTimeStep до инициализации.

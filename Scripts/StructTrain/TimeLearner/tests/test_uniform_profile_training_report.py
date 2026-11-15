@@ -12,6 +12,7 @@ import unittest
 from ..composite_training_temporal import render
 from ..native_calibration_worker import _write
 from ..native_evidence import load,require
+from ..uniform_profile_physics import audit_uniform_profile
 
 
 def comparable_configuration(configuration):
@@ -69,6 +70,8 @@ class UniformProfileTrainingReportTest(unittest.TestCase):
                 classification_assessed=False,scientific_verdict=None)
             bindings=dict(package_sha256=hashlib.sha256(state_path.read_bytes()).hexdigest(),
                           summary_sha256=hashlib.sha256(summary_path.read_bytes()).hexdigest())
+            initial=package['measurement_archive']['source_binding']['initial_model']
+            facts['fixed_physics_recheck']=audit_uniform_profile(initial,package['neuron']['graph']['identity'])
             del package,records
             report=render(native,output/role,selected,native_window_zooms=True,allow_incomplete_groups=True)
             self.assertFalse(report['downsampling']);self.assertFalse(report['visual_acceptance_complete'])
