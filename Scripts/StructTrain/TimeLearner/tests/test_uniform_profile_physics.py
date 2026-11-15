@@ -29,8 +29,7 @@ class UniformProfilePhysicsTest(unittest.TestCase):
         changes=[('$.Dendrite1_27.ExcChannel','Capacity',2e-9),
                  ('$.Dendrite1_27.ExcSynapse1','DissociationTC',.003),
                  ('$.LTZone','Threshold',.02),
-                 ('$.Soma1','FeedbackGain',.125),
-                 ('
+                 ('$.Soma1','FeedbackGain',.125)]
         for path,field,value in changes:
             with self.subTest(path=path,field=field):
                 corrupt=deepcopy(grown)
@@ -40,40 +39,11 @@ class UniformProfilePhysicsTest(unittest.TestCase):
                 corrupt['sha256']=canonical_model_sha256(corrupt['model'])
                 with self.assertRaises(EvidenceError):audit_uniform_profile(source,corrupt)
         corrupt=deepcopy(grown)
-        root=next(n for n in corrupt['model']['nodes'] if n['path']==' in corrupt['model']['nodes'] if n['path']!='$.Dendrite1_27.ExcChannel']
-        corrupt['sha256']=canonical_model_sha256(corrupt['model'])
-        with self.assertRaises(EvidenceError):audit_uniform_profile(source,corrupt)
-,'TimeStep',.00075)]
-        for path,field,value in changes:
-            with self.subTest(path=path,field=field):
-                corrupt=deepcopy(grown)
-                node=next(n for n in corrupt['model']['nodes'] if n['path']==path)
-                self.assertEqual(node['parameters'][field]['data']['type'],'binary64')
-                node['parameters'][field]['data']['value']=struct.pack('>d',value).hex()
-                corrupt['sha256']=canonical_model_sha256(corrupt['model'])
-                with self.assertRaises(EvidenceError):audit_uniform_profile(source,corrupt)
-        corrupt=deepcopy(grown)
-        corrupt['model']['nodes']=[n for n in corrupt['model']['nodes'] if n['path']!='$.Dendrite1_27.ExcChannel']
-        corrupt['sha256']=canonical_model_sha256(corrupt['model'])
-        with self.assertRaises(EvidenceError):audit_uniform_profile(source,corrupt)
-)
+        root=next(n for n in corrupt['model']['nodes'] if n['path']=='$')
         self.assertEqual(root['parameters']['TimeStep']['data']['type'],'unsigned_integer')
         root['parameters']['TimeStep']['data']['value']='1000'
         corrupt['sha256']=canonical_model_sha256(corrupt['model'])
         with self.assertRaises(EvidenceError):audit_uniform_profile(source,corrupt)
-        corrupt=deepcopy(grown)
-        corrupt['model']['nodes']=[n for n in corrupt['model']['nodes'] if n['path']!='$.Dendrite1_27.ExcChannel']
-        corrupt['sha256']=canonical_model_sha256(corrupt['model'])
-        with self.assertRaises(EvidenceError):audit_uniform_profile(source,corrupt)
-,'TimeStep',.00075)]
-        for path,field,value in changes:
-            with self.subTest(path=path,field=field):
-                corrupt=deepcopy(grown)
-                node=next(n for n in corrupt['model']['nodes'] if n['path']==path)
-                self.assertEqual(node['parameters'][field]['data']['type'],'binary64')
-                node['parameters'][field]['data']['value']=struct.pack('>d',value).hex()
-                corrupt['sha256']=canonical_model_sha256(corrupt['model'])
-                with self.assertRaises(EvidenceError):audit_uniform_profile(source,corrupt)
         corrupt=deepcopy(grown)
         corrupt['model']['nodes']=[n for n in corrupt['model']['nodes'] if n['path']!='$.Dendrite1_27.ExcChannel']
         corrupt['sha256']=canonical_model_sha256(corrupt['model'])
