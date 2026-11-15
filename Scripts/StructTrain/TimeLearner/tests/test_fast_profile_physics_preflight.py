@@ -83,3 +83,47 @@ class FastProfilePhysicsPreflightTest(unittest.TestCase):
             rows=rows,all_factors_applied=all(r['physics']['capacity_applied'] for r in rows),
             training_authorized=all(r['physics']['capacity_applied'] for r in rows),
             new_model_calculation=False,scientific_verdict=None))
+
+
+    def test_storage_baseline_reproduces_actual_stock_bursts_before_intervention(self):
+        from ..stock_cold_characterization import jobs as cold_jobs
+        from ..stock_feedback_profile import compare_presentations
+        import hashlib
+
+        controls = Path(os.environ['TIMELEARNER_FAST_PROFILE_CONTROLS']).resolve(strict=True)
+        declaration = load(controls/'declaration.json')
+        archive = load(controls/declaration['profiles'][0])
+        output = Path(os.environ['TMPDIR'])/'fast-profile-baseline-waveforms';output.mkdir(exist_ok=False)
+        template = cold_jobs('Branch')['Branch-cold-stock-input1']
+        all_jobs=[]
+        for graph in ('cold','grown'):
+            for profile in ('original','storage-baseline'):
+                name=graph+'-'+profile;job=deepcopy(template)
+                job['probe'].update(run_id=name,trial_id=name+'/burst',peak_selection='isolated_window')
+                if graph=='grown':
+                    job['model']['normalization']='N0'
+                    job['model']['inputs']=[dict(attachment=l,synapses=n,resistance=86e6)
+                                           for l,n in zip([28,28,27,1],[1,1,4,1])]
+                    job['model']['allocated_cable_lengths']=[28]
+                if profile=='storage-baseline':
+                    job['model']['neuron_class']='TLNativeFast0F2000_Neuron'
+                    job['profile_archives']=[archive]
+                job=_signed({k:v for k,v in job.items() if k!='sha256'})
+                path=output/(name+'.json');_write(path,job);all_jobs.append((name,path))
+        # Every candidate is declared before any native calculation.
+        for name,path in all_jobs:
+            with patch.dict(os.environ,load(Path(declaration['runtime']))['loader_environment']):
+                result=run_job('probe',path,None,Path(declaration['runtime']),output/name,180.)
+                self.assertEqual(result['execution'],'completed');self.assertEqual(result['validity'],'valid')
+                audit_run_manifest(output/name/'run-manifest.json')
+        comparisons=[]
+        for graph in ('cold','grown'):
+            left,right=[output/(graph+'-'+p)/'native' for p in ('original','storage-baseline')]
+            compared=compare_presentations(left,right,False)
+            self.assertTrue(compared['exact_waveform_reproduced'])
+            raw=[(p/'probe_trial_1.csv').read_bytes() for p in (left,right)]
+            self.assertEqual(raw[0],raw[1])
+            comparisons.append(dict(graph=graph,**compared,csv_sha256=hashlib.sha256(raw[0]).hexdigest()))
+        _write(output/'comparison.json',dict(kind='timelearner_stock_storage_baseline_waveforms',
+            schema_version=1,rows=comparisons,profile_intervention_admitted=True,
+            peak_assignment_used_for_training=False,classification_assessed=False,scientific_verdict=None))
