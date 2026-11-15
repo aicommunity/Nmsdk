@@ -9,6 +9,7 @@ add_executable(Test_PulseLib_TrainingAlgorithms
     "${_tl_tests}/Libraries/Test_PulseLib_N0LengthFamily.cpp"
     "${_tl_tests}/Libraries/Test_PulseLib_MeasuredResistanceSearch.cpp"
     "${_tl_tests}/Libraries/Test_PulseLib_MeasuredLengthSearch.cpp"
+    "${_tl_tests}/Libraries/Test_PulseLib_ModerateLengthSearch.cpp"
     "${_tl_tests}/Libraries/Test_PulseLib_MeasuredCapacitanceSearch.cpp"
     "${_tl_tests}/Support/ProbeAlgorithmMain.cpp"
     "${_tl_core}/BoundedTraining.cpp"

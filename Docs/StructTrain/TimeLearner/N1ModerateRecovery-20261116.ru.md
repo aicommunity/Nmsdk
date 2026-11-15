@@ -1,0 +1,9 @@
+# N1: проверка умеренного порядка recovery — 16.11.2026
+
+Отправная точка принята и опубликована: root developb2e29825c31c987abb9c2f1cd9011a5d494aa8d5/Pulse developc7e29cc91af111c8033e63299563dd56f8cd41c5. [Последний реальный Stock A/B](N1RecoveryScientificReport-20261116.ru.md) выявил300-секундную остановку на anchor большого графа, без нового scalar. Ветки нового подэтапа — codex/timelearner-n1-moderate-recovery.
+
+Цель — сначала проверять умеренные новые длины, не менять математическую цель или глобальные bounds. Helper и его тесты вводятся отдельно от подключения к контроллеру. Для sealed rejected N1 сохраняются same-L/fresh-domain первый ход и последующая полная проверка. При дальнейшем выборе центр L0 фиксируется первым recovery данного входа/C-контекста; выбирается новый L в legal пересечении [ceil(L0/2),2L0], затем используется полный declared domain после исчерпания этого конечного диапазона. При L0=28 и legal28..255 предложения56,42,35 заменяют немедленный255; это гипотеза порядка проб, а не обещание разделимых пиков.
+
+Семь helper tests проверяют стоимость первой геометрии, выход за ближайшие четыре L, достижимость всего domain после локальной области, дубли/границы/singleton, legal clipping центра и INT_MAX без domain enumeration. Они компилируют production helper. Два real-native fixed-Rs tests теперь требуют L6 за пределами начальной сетки2..5 вместо L64. Исходный порядок должен дать два ожидаемых assertion FAIL; revised order обязан пройти те же assertions с actual storage/domain/apply/fresh anchor. Остальные пять-file109 kernel cases не меняются.
+
+Все scientific tolerances/probe/edit/invalid budgets, N0 proposals и обычный valid N1 schedule прежние. Аутентифицированный отказ не становится измеренным остатком. No bracket/budget/stall не доказывают PhysicalInfeasible. Полная проверка нового порядка и same-condition cold Train ещё не выполнены; этот файл не является квитанцией приёмки.
