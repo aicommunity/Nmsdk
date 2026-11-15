@@ -1,7 +1,7 @@
 {
   "kind": "timelearner_rejected_length_coverage_acceptance",
   "schema_version": 1,
-  "source_root": "cb12975c1af9b986b064097c14ba44bba578c491",
+  "source_root": "1a10165507c0aa2c4c63b010f1a199b6b35c6779",
   "pulse": "a82a7cd08a4334c5924839b7136ae9df5884da53",
   "stage_scope": "Branch N0 typed rejected-window length proposal only",
   "cpp_inventory": 142,
@@ -137,7 +137,7 @@
     "build_reused": false
   },
   "model_train": "not_started",
-  "external_sdk_evidence": "pending",
+  "external_sdk_evidence": "failed_attempts_archived; successful_SDK_evidence_pending",
   "scientific_verdict": null,
   "whole_plan_complete": false,
   "revalidation": {
@@ -151,5 +151,37 @@
     "cpp_test_source_changed": true,
     "source_algorithm_unchanged": true,
     "scientific_verdict": null
+  },
+  "initial_cpp_source_root": "cb12975c1af9b986b064097c14ba44bba578c491",
+  "external_failed_attempts": {
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/78/780e7ee6845766abb8f8e90a82c2f6baf058da9c470ecbcab50f08fbfdf73691",
+      "sha256": "780e7ee6845766abb8f8e90a82c2f6baf058da9c470ecbcab50f08fbfdf73691",
+      "bytes": 7382028
+    },
+    "files": 744,
+    "manifest": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-15/recovery-coverage/failed-attempts-a1.json"
+  },
+  "fresh_sdk_retry": {
+    "source_root": "1a10165507c0aa2c4c63b010f1a199b6b35c6779",
+    "pulse": "a82a7cd08a4334c5924839b7136ae9df5884da53",
+    "source": "/media/user/Data/TimeLearnerRefactor/source-recovery-coverage-sdk-a3",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-recovery-coverage-sdk-a3",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-coverage-sdk-a3",
+    "native_job": "s07-recovery-coverage-sdk-m40-a3",
+    "canonical_job": "s07-recovery-coverage-sdk-canonical-m40-a4",
+    "canonical_control_commit": "4e906351f12d7fbc326ee2e531e84e3db404e961",
+    "status": "canonical_preparation",
+    "source_test_fix": "wide fixture native maximumCableLength64 to match existing search max64",
+    "production_core_unchanged": true,
+    "expected_cpp": 142
+  },
+  "canonical_A3": {
+    "status": "refused_before_build",
+    "reason": "native_preparation_leaf_union_or_order",
+    "fix": "A4 selected IDs explicitly follow flattened runplan; same142-case set"
   }
 }
