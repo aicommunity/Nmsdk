@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_fast_profile_physics_acceptance",
+  "schema_version": 1,
+  "source": "cfcfd327b0b809ebeee1e5abf049c1661d17a860",
+  "pulse": "5052cfe1683ca38920b514aedfc3c37f4bd41aef",
+  "production_algorithm_unchanged": true,
+  "legacy_attempt": {
+    "job": "s04-fast-profile-readback-m40-a1",
+    "status": "failed_closed",
+    "stock_preflight": "completed_valid",
+    "legacy_fast_reason": "native_model_requires_storage_owned_physics",
+    "guard_preserved": true,
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/51/51b23f58fa41413c88ca98a3ee362239f6d935b13ca477160c5b079075d7a21a",
+      "sha256": "51b23f58fa41413c88ca98a3ee362239f6d935b13ca477160c5b079075d7a21a",
+      "bytes": 313125
+    }
+  },
+  "native": {
+    "canonical_job": "s04-fast-profile-sdk-canonical-m40-a1",
+    "job": "s04-fast-profile-sdk-m40-a1",
+    "expected_cpp": 8,
+    "status": "preparation_running",
+    "fixtures": "RegisterStorageProfile and versioned model_spec archive export; four profiles at two rates"
+  },
+  "training_started": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

@@ -1,15 +1,40 @@
-# Физический профиль и разделение закреплённых откликов — 15.11.2026
+# Storage-физика и разделение закреплённых откликов — 15.11.2026
 
-После принятого широкого поиска Branch N0 неоднозначность input1 сохраняется при28,100,64,46,82. Следующий контраст должен проверять реальную физику и форму отклика, а не ослаблять assignment или tolerances.
+После [широкого поиска Branch N0](N0RecoveryCoverageScientificReport-20261115.ru.md) input1 остался ambiguous при L28,100,64,46,82. Следующий контраст проверяет реальную физику и форму отклика; исходные assignment, CapturedPerInput и tolerances сохраняются.
 
-Перед новыми Train проверяются реальные зарегистрированные NSPNeuronGen, D005C5e10, D005C25e11 и D002C25e11 через production native preflight: полный холодный граф, частота2000Гц, все дочерние C/Rm, synapse TC/Resistance, отсутствие LTMembrane, прежний threshold100. Только поле model.neuron_class меняется; тип контроллера, входной паттерн и исходные L/Ns/Rs остаются прежними.
+## Что установлено фактически
 
-Подтверждённая пока по исходникам гипотеза: D005C25e11 ошибочно задаёт C5e-10 вместо2.5e-10. Baseline preflight должен сохранить фактический отрицательный readback и запретить дорогой Train с ложным названием фактора. Затем исправление имени/значения проверяется тем же readback. Возможный риск второго Build требует отдельной effective-проверки; менять общие lifecycle setter или вставлять Calculate/Build на тиках нельзя.
+Первая попытка s04-fast-profile-readback-m40-a1 закончилась failed/closed. Stock NSPNeuronGen прошёл native preflight. Первый legacy fast C5e10 отказал native_model_requires_storage_owned_physics: у этих образов UseElementDefaults=true. Это штатная защита V2 от parent-owned uniform physics. Она сохранена. До C25 native readback эта попытка не дошла; C25 не объявляется экспериментально проверенным.
 
-Следующий научный контраст после этих gates: заранее объявленная пара cold Branch N1 stock/fast profile при общей области длин до256, исходных CapturedPerInput и tolerances. Совместное изменение C и kinetics объявляется целым storage-профилем, его нельзя интерпретировать как изолированный эффект только C. Область256 одинакова для обоих участников и не является автоматическим увеличением поисковых/time budgets. До фактической декларации job и runtime запуск не выполняется. Оба результата, включая unresolved/invalid, публикуются с readable Soma/input graphs; классификация требует отдельного frozen протокола после реального обучения. СерияD не возобновляется.
+По исходникам legacy D005C25e11 задаёт5e-10, как C5e10. Старые классы сохраняются как compatibility-образы; их названия нельзя использовать как доказательство применённого V2 фактора. Исходный отказ и82 файла controls/receipts сохранены во внешнем архиве313125B, SHA25651b23f58fa41413c88ca98a3ee362239f6d935b13ca477160c5b079075d7a21a.
 
-## Уточнение по реальному A1
+## Применяемый путь
 
-Stock preflight принят, а первый legacy fast C5e10 штатно отклонён native_model_requires_storage_owned_physics. Generic ModelBuilder запрещает UseElementDefaults=true, как и требует новый контракт. A1 завершён failed/closed; он не подтверждает effective C25 и не переименовывается в PASS. Смена старого legacy alias или снятие guard не нужны.
+Используется существующий RegisterStorageProfile после создания Environment. Четыре явных рецепта наследуют параметры фактических stock-дочерних компонентов, не parent defaults и не Asym defaults структуры рецепта. В частности, Inh Rm/RestingResistance остаются stock1e7. Изменяются только C обоих каналов и указанный DissociationTC обоих типов синапсов.
 
-Для научного опыта используется существующий RegisterStorageProfile после создания Environment. Четыре новых явных рецепта наследуют фактическую физику stock-дочерних образов; меняются только C и объявленный DissociationTC. В частности, Inh Rm берётся из реального stock1e7, а не из Asym defaults рецепта. Профили UseElementDefaults=false экспортируются штатным ModelArchive со state_kind=model_spec/not_trained; действующих shared prototypes и методов lifecycle они не меняют. Новый native fixture проверяет Take/reuse/Reset/growth при2000/20000Гц и сохраняет определения images. Потом Console заново регистрирует эти archives, проверяет реальные холодные деревья. Классы старой fast grid остаются compatibility-образами с прежними параметрами; их названия не используются как доказательство V2 фактора.
+| Variant | C | DissociationTC | Роль |
+|---|---:|---:|---|
+|0|1e-9|0.005|Реконструкция исходной stock-физики|
+|1|5e-10|0.005|Изолированный half-C профиль|
+|2|2.5e-10|0.005|Изолированный quarter-C профиль|
+|3|2.5e-10|0.002|Объявленное сочетание C и kinetics|
+
+Имена профилей TLNativeFast{variant}F{frequency}_Neuron, частоты2000/20000Гц. UseElementDefaults=false; новые сегменты получают физику дочерних storage-образов. Общий prototype не меняется, исправляющих присваиваний на тиках нет, общий lifecycle Rdk не изменён. Legacy aliases также не меняются.
+
+Root fixture NativeFastStorageProfiles проверяет реальные Take/reuse/Reset/growth при обеих частотах, включая effective child readback до роста, чтобы Build не маскировал ошибочный fresh image. Через штатный ModelArchive экспортируются полные определения images со state_kind=model_spec и training.status=not_trained. Это не обученная модель и не controller checkpoint.
+
+## Gates перед дорогим Train
+
+1. Свежая изолированная сборка s04-fast-profile-sdk-m40-a1: все8 actual C++ cases должны пройти, экспортировать8 полных архивов; затем supervisor и дочерние процессы должны закрыться. Production Pulse Core/Console не меняются относительно принятого исходного кода; этот gate проверяет новые recipes/fixtures, а не заново всю прежнюю матрицу142.
+2. Console загружает4 архива2000Гц через штатный PrepareModelArchive, строит реальные cold Branch-модели. Проверяются все дочерние C/Rm/TC/Rs, частота, исходный threshold100, отсутствие LTMembrane и полный граф. Parent overlay и обход guard запрещены.
+3. Для variant0 требуется полное native waveform comparison с исходным stock при неизменной частоте, стимуле и графе: cold и выросшая геометрия. Сравниваются реальные полные пачки, не только параметры или аналитическая задержка. При несовпадении physics intervention не допускается до выяснения причины.
+
+SDK source cfcfd327b0b809ebeee1e5abf049c1661d17a860 / Pulse5052cfe1683ca38920b514aedfc3c37f4bd41aef. Каноническая подготовка принята и закрыта, control commit8fa446747ad8a1cc9c883d7f53a26116c390aaec; фактическая native-сборка запущена на M40 в отдельных source/build/runtime. Исходный runtime A5 защищён от записи. PASS8 и экспорт архивов пока не подтверждены.
+
+## Объявляемый следующий научный контраст
+
+После gates — заранее фиксированная пара cold Branch N1 variant0/variant3 при общей области L1..256 и2000Гц. C и kinetics варианта3 являются одним явно составным storage-фактором; нельзя приписывать результат только C. Область256 одинакова для обоих участников и объявляется до запуска; она не является автоматическим увеличением candidate/probe/time budgets после stall. Точные budgets и исходный cold target сохраняются из соответствующей принятой N1 конфигурации и проверяются полным JSON diff перед первым Train.
+
+Цель по-прежнему CapturedPerInput, anchorN−1, amp_abs1e−5/rel0/minamp1e−6/SyncTolerance0.02. Увеличение интервалов самого паттерна, общий максимум вместо закреплённого, C-trim, PostTune, новый порог либо серияD не вводятся. Поиск оценивается по фактическим valid peaks и свежей all-input проверке, не по аналитически ожидаемому L.
+
+Каждый исход сохраняется честно, включая invalid/unresolved. Нужны читаемые временные графики Soma с actual input overlay и omission/repeat controls. Получение Exact не означает готовой классификации; frozen8-pattern evaluation и реальная проверка выбранного порога остаются отдельными этапами. Полные payload — только во внешнем архиве M40, в Git — код, постановка, компактные metadata и проверяемые refs. Полные этапы1–12 остаются открытыми.
