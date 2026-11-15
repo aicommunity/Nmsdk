@@ -4076,7 +4076,7 @@ TEST(NativeCandidateWindowRejection,CapabilityExpiresAfterExternalStop){Rejected
 namespace {
 enum class WindowRecoveryCase { Advance, RepeatedN0, DefaultRetry, StringOnly, InvalidBudget, ProbeBudget, EditBudget, ExternalStop, WrongRevision };
 
-template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=false,bool ambiguous=false) {
+template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=false,bool ambiguous=false,bool wide=false) {
     NativeCompositeFixture<Owner> f(2000,false,64,false,!n1,false,2,1800.,false,ambiguous?1.8:0.,ambiguous?64:8);
     EnableCandidateWindow(f,"candidate-attempt",128u*1024u*1024u,[&](auto& contract) {
         if(ambiguous) {
@@ -4108,7 +4108,7 @@ template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=fa
     cfg.invalidMeasurementRecovery=mode==WindowRecoveryCase::DefaultRetry?
         InvalidMeasurementRecovery::RetrySameCandidate:InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;
     for(const auto& p:initial)cfg.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
-    cfg.bounds[0].maximumLength=ambiguous?55:4;
+    cfg.bounds[0].maximumLength=wide?64:ambiguous?55:4;
     BoundedTrainingSession search(references,*f.attempt->CandidateWindowReferences(),cfg,initial,n1,
         f.owner->ReadNativeTrainingCapacitance());
     std::size_t logical=0,domains=0;bool recovered=false,editedAfterRecovery=false;
@@ -4123,6 +4123,7 @@ template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=fa
         if(action->kind==TrainingActionKind::Edit) {
             if(recovered) {
                 EXPECT_NE(action->parameters.at(0).length,rejectedPoint.at(0).length);
+                if(wide)EXPECT_EQ(action->parameters.at(0).length,64); // outside the four-length nearest mesh
                 EXPECT_EQ(f.owner->ReadNativeParameters(),rejectedPoint); // queued edits have no physical side effects
                 editedAfterRecovery=true;
             }
@@ -4295,6 +4296,8 @@ TEST(NativeCandidateWindowRecovery,ExternalStopRevokesPendingRecovery){WindowRec
 TEST(NativeCandidateWindowRecovery,WrongRevisionCannotAdvance){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::WrongRevision);}
 TEST(NativeCandidateWindowRecovery,ClassicAmbiguousSearchQueuesFreshCandidate){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::Advance,false,true);}
 TEST(NativeCandidateWindowRecovery,BranchAmbiguousSearchQueuesFreshCandidate){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance,false,true);}
+TEST(NativeCandidateWindowRecovery,BranchN0MissingWindowExploresBeyondNearestMesh){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance,false,false,true);}
+TEST(NativeCandidateWindowRecovery,BranchN0AmbiguousWindowExploresBeyondNearestMesh){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance,false,true,true);}
 TEST(NativeCandidateWindowRecovery,ClassicVersionedWireRoundtripStartsNativeService){WindowRecoveryWireBoundaries<NNeuronTimeLearner>();}
 TEST(NativeCandidateWindowRecovery,BranchVersionedWireRoundtripStartsNativeService){WindowRecoveryWireBoundaries<NNeuronTimeLearnerBranch>();}
 
