@@ -74,10 +74,22 @@ def render(native, output, group_numbers, *, native_window_zooms=False, allow_in
     with plt.rc_context({'font.size': 12, 'path.simplify': False, 'svg.fonttype': 'none'}):
         for ordinal, record, series in prepared:
             count = len(series[0]['specification']['baseline'])
-            frame = record['method_specification']['candidate_frame']
+            method = record['method_specification']
             frequency = number(series[0]['specification']['stimulus_profile']['frequency_hz'])
-            window = [frame[k]/frequency for k in ('first_frame', 'last_frame')]
+            if method['coordinate_mode'] == 'reference_time':
+                reference = method['reference_time']
+                require(method['candidate_frame'] is None and type(reference) is dict,
+                        'training_report_reference_window_invalid')
+                window = [number(reference[k]) for k in ('begin_offset', 'end_offset')]
+            else:
+                frame = method['candidate_frame']
+                require(method['coordinate_mode'] == 'candidate_frame' and
+                        method['reference_time'] is None and type(frame) is dict,
+                        'training_report_candidate_window_invalid')
+                window = [number(frame[k])/frequency for k in ('first_frame', 'last_frame')]
             duration = number(series[0]['specification']['end'])-number(series[0]['specification']['begin'])
+            require(0. <= window[0] < window[1] <= duration,
+                    'training_report_window_outside_recorded_protocol')
             # Detail includes actual response context and the proposed window;
             # it does not assume the response occurs inside that window.
             event_times = [e['frame_index']/frequency for e in series[0]['actual_stimuli']]
