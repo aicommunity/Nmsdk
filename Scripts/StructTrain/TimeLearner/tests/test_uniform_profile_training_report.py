@@ -6,6 +6,9 @@ Complete histories and negative/setup outcomes remain in comparison metadata.
 """
 from copy import deepcopy
 import hashlib
+import html
+import math
+import re
 import os
 from pathlib import Path
 import unittest
@@ -28,17 +31,38 @@ class UniformProfileTrainingReportTest(unittest.TestCase):
     def test_actual_pair_keeps_full_history_and_readable_assigned_peak_traces(self):
         controls=Path(os.environ['TIMELEARNER_PROFILE_PAIR_REPORT_CONTROLS']).resolve(strict=True)
         declaration=load(controls/'declaration.json')
-        self.assertEqual(set(declaration),{'stock','fast'})
+        legacy=set(declaration)=={'stock','fast'}
+        if legacy:
+            cases=declaration
+            factor='C and DissociationTC together; no separate C causal claim'
+            walls=None
+        else:
+            self.assertEqual(set(declaration),{'cases','comparison_factor','wall_seconds'})
+            cases=declaration['cases'];factor=declaration['comparison_factor'];walls=declaration['wall_seconds']
+            self.assertIsInstance(factor,str);self.assertTrue(factor.strip())
+            self.assertIsInstance(cases,dict);self.assertIsInstance(walls,dict)
+            self.assertTrue(all(type(w) in (int,float) and math.isfinite(w) and w>0 for w in walls.values()))
+            self.assertGreaterEqual(len(cases),2);self.assertLessEqual(len(cases),8)
+            self.assertEqual(set(walls),set(cases))
+            self.assertTrue(all(re.fullmatch(r'[A-Za-z0-9_-]+',role) for role in cases))
         output=Path(os.environ['TMPDIR'])/'uniform-profile-N1-training-gallery'
         output.mkdir(exist_ok=False)
         rows={};configurations={}
-        for role,path in declaration.items():
+        for role,path in cases.items():
             native=Path(path).resolve(strict=True)
             paths=[native/n for n in ('train_learned_state.json','train_stopped_state.json') if (native/n).is_file()]
             self.assertEqual(len(paths),1)
             state_path=paths[0];summary_path=state_path.with_name(state_path.name.replace('_state.','_summary.'))
             summary=load(summary_path);package=load(state_path)
-            configurations[role]=comparable_configuration(package['configuration'])
+            checked=comparable_configuration(package['configuration'])
+            if legacy:
+                configurations[role]=checked
+            else:
+                # New comparisons keep class and guard coordinates exact.
+                # The only removed factor is explicitly declared for every case.
+                checked=deepcopy(package['configuration']);checked.pop('run_id')
+                self.assertEqual(checked.pop('maximum_wall_seconds'),walls[role])
+                configurations[role]=checked
             records=package['measurement_archive']['records']
             ordinals={r['group_id']:i for i,r in enumerate(records,1)}
             selected=[ordinals[g] for g in summary['reference_group_ids'][-1:]]
@@ -79,9 +103,11 @@ class UniformProfileTrainingReportTest(unittest.TestCase):
                 if figure['view'].endswith('-native'):
                     self.assertGreaterEqual(figure['minimum_native_tick_pixels'],8.)
             rows[role]=dict(facts=facts,bindings=bindings,report=report)
-        self.assertEqual(configurations['stock'],configurations['fast'])
+        common=next(iter(configurations.values()))
+        self.assertTrue(all(value==common for value in configurations.values()))
         _write(output/'comparison.json',dict(kind='timelearner_uniform_profile_cold_N1_comparison',
-            schema_version=1,common_configuration=configurations['stock'],rows=rows,
-            profile_factor='C and DissociationTC together; no separate C causal claim',
+            schema_version=1 if legacy else 2,common_configuration=common,rows=rows,
+            profile_factor=factor,**({} if legacy else dict(declared_wall_seconds=walls)),
             full_observation_domain=[0,3600],classification_assessed=False,scientific_verdict=None))
-        (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><h1>Cold Branch N1: actual immutable profiles</h1><p>Full histories in comparison.json. Training diagnostics, no classifier verdict.</p><ul><li><a href="stock/index.html">Stock-derived profile</a></li><li><a href="fast/index.html">Quarter-C + fast kinetics</a></li></ul>')
+        links=''.join('<li><a href="'+html.escape(role,quote=True)+'/index.html">'+html.escape(role)+'</a></li>' for role in cases)
+        (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><h1>Cold Branch N1: actual immutable profiles</h1><p>'+html.escape(factor)+'</p><p>Full histories in comparison.json. Training diagnostics, no classifier verdict.</p><ul>'+links+'</ul>')
