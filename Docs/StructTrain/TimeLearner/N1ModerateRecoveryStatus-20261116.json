@@ -1,0 +1,74 @@
+{
+  "kind": "timelearner_n1_moderate_recovery_scoped_status",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "baseline": {
+    "root": "9add1df816ddb695556d77f21915728f13ebada7",
+    "pulse": "f4e8bc29ca3529e683c53f842edc29bf86171acb",
+    "helper_present_controller_unchanged": true
+  },
+  "candidate": {
+    "root": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+    "pulse": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7"
+  },
+  "kernel": {
+    "worker": "Elder-1",
+    "job": "s07-n1-moderate-kernel-elder-a1",
+    "control_commit": "805585da5088a8afc5904870f965a1100faad437",
+    "tools_root": "bfbd0952478b3397a221ae1258a447a22842b0f9",
+    "before_passed": 116,
+    "after_passed": 116,
+    "original_unchanged_cases": 109,
+    "new_helper_cases": 7,
+    "same_test_sources": true,
+    "all_processes_closed": true,
+    "native_rdk_integration_verified": false,
+    "actual_loaded_library_capture": false,
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7c/7c5dda01c5652eeebbbd9a73f8b119a9ab5a1fd0848ef19ba8ebadc7a15d9236",
+      "sha256": "7c5dda01c5652eeebbbd9a73f8b119a9ab5a1fd0848ef19ba8ebadc7a15d9236",
+      "bytes": 2211814
+    }
+  },
+  "native": {
+    "worker": "M40",
+    "execution": "running_at_last_observation",
+    "baseline_expected_assertion_failures": 2,
+    "candidate_expected_cases": 154,
+    "accepted": false,
+    "jobs": [
+      {
+        "host": "10.245.1.17",
+        "jump": "10.245.1.12",
+        "id": "s07-n1-moderate-baseline-sdk-m40-a1",
+        "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-moderate-baseline-sdk-m40-a1-controller",
+        "expected_native_counterexamples": 2,
+        "canonical_control": "4a55298e78dbdfdeea5bd37aba594ccc3a97df92",
+        "last_confirmed": "running_build_43percent",
+        "never_restart_on_observation_timeout": true
+      },
+      {
+        "host": "10.245.1.17",
+        "jump": "10.245.1.12",
+        "id": "s07-n1-moderate-candidate-sdk-m40-a1",
+        "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-moderate-candidate-sdk-m40-a1-controller",
+        "expected_cases": 154,
+        "canonical_control": "1d9a857f0a4f2da78231ec5522cf64bd2b1fd154",
+        "last_confirmed": "running_build_43percent",
+        "never_restart_on_observation_timeout": true
+      }
+    ]
+  },
+  "cold_train": {
+    "execution": "not_started",
+    "requires_native_candidate_154_and_whole_closure": true,
+    "same_job_except_run_id": true,
+    "all_scientific_budgets_and_tolerances_unchanged": true
+  },
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "stage7_complete": false
+}
