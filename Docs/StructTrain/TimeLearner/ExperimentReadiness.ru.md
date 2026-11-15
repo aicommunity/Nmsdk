@@ -1,9 +1,11 @@
+> 15.11.2026: [Branch N0 measured-length search](N0BranchLengthScientificReport-20261115.ru.md) принят адресно (kernel6/6 на M40/Elder, native SDK105/105). Первый timing-ready кандидат25→7, но лучший amplitude residual прежний4.53× tolerance; Train не сошёлся. Все32 frozen native probes двух остановленных моделей выполнены: при100 молчание, при0.0117 TP1/FP7/FN0/TN0 и ранние target spikes у обеих; исправлена ошибка вложенного source_solo в Python-оболочке, read-only перепроверка/полный32-pattern report ещё выполняются. [Exploratory local-budget12](N0LocalBudget12ScientificReport-20261115.ru.md) завершён1/1/DATA/physical: после свежего inexact best действительно запрошен input1, но L28..32 ambiguous; certificate=null. Его12 графиков построены,3 overview просмотрены. Все primary и полные галереи вне Git на M40; [проверяемые refs](N0BranchLengthFrozenPrimary-20261115.json). Это уточнение этапов7/11, а не полная приёмка этапов1–12.
+
 > Политика хранения пересмотрена 14.11.2026: primary bundles и полные галереи
 > сохраняются во внешнем общем архиве M40. В Git — metadata и проверенные
 > `*.archive.json` ссылки. [Доступ и восстановление](ExternalExperimentArchive.ru.md).
 > Origin и все явно учтённые копии очищены и проверены. Последний ненужный временный каталог удалён пользователем, отсутствие проверено; техническая миграция завершена; [отчёт](RootHistoryCleanup-2026-11-15.ru.md). Техническая миграция не означает научную приёмку.
 
-# Научные результаты TimeLearner и готовность — 14.11.2026
+# Научные результаты TimeLearner и готовность — 15.11.2026
 
 [Весь новый Classic cold4 primary независимо восстановлен и проанализирован на Elder](ValidationPlans/ElderClassicCold4PrimaryReplayA2-20261114/RESULT.ru.md):1/1 PASS,910 logical members, corrupted-extracted-CSV refusal.14 measured candidates/0 jointly-ready и invalid_observation сохранены; нового нейронного исполнения нет.
 
