@@ -17,6 +17,7 @@ import time
 from .native_calibration_worker import _write
 from .native_evidence import load, require
 from .native_gate import audit_junit
+from .collector_provenance import _literal_cases
 from .runtime import file_record, parse_ldd
 
 
@@ -165,8 +166,9 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
                              'materialized_path': relative}
         declared = []
         for name in spec['test_paths']:
-            declared.extend(a+'/'+b for a, b in re.findall(r'^TEST\(\s*(\w+)\s*,\s*(\w+)\s*\)',
-                            (directory/name).read_text(), re.M))
+            if name.endswith('.cpp'):
+                cases, _ = _literal_cases((directory/name).read_bytes())
+                declared.extend(cases)
         require(len(declared) == len(set(declared)) and set(declared) == set(spec['expected_test_ids']),
                 'controller_ab_test_declaration_mismatch')
         _write(directory/'sources.json', sources)

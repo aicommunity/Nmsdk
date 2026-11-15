@@ -12,7 +12,7 @@ from ..native_evidence import load, require
 
 
 class N1RecoveryKernelRegressionTest(unittest.TestCase):
-    def test_same106_bounded_normalization_and_search_cases(self):
+    def test_same109_bounded_normalization_and_search_cases(self):
         controls = Path(os.environ['TIMELEARNER_N1_KERNEL_CONTROLS']).resolve(strict=True)
         declaration = load(controls/'declaration.json')
         require(set(declaration) == {'root_repository', 'pulse_repository', 'compiler', 'gtest_source'},
@@ -22,7 +22,7 @@ class N1RecoveryKernelRegressionTest(unittest.TestCase):
         self.assertEqual(specification['candidate_root'], '860ee87057196f0afb5b3a98cbd0bdacf378543a')
         self.assertEqual(specification['schema_version'], 2)
         self.assertEqual(specification['qt_core_package'], 'Qt5Core')
-        self.assertEqual(len(specification['expected_test_ids']), 106)
+        self.assertEqual(len(specification['expected_test_ids']), 109)
         result = run_controller_ab(controls/'specification.json',
             declaration['root_repository'], declaration['pulse_repository'],
             declaration['compiler'], declaration['gtest_source'],
@@ -33,7 +33,7 @@ class N1RecoveryKernelRegressionTest(unittest.TestCase):
             self.assertEqual((case['execution'], case['validity'], case['assertion_status']),
                              ('completed', 'valid', 'passed'))
             self.assertEqual(case['inventory']['failed_test_ids'], [])
-            self.assertEqual(case['inventory']['observed'], 106)
+            self.assertEqual(case['inventory']['observed'], 109)
         self.assertTrue(result['same_test_sources'])
         self.assertEqual(result['assertion_status'], 'passed')
         self.assertFalse(result['native_rdk_integration_verified'])
