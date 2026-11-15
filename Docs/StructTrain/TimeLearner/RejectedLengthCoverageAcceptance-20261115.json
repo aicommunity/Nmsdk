@@ -125,17 +125,29 @@
   },
   "A2": {
     "job": "s07-recovery-coverage-sdk-m40-a2",
-    "status": "canonical_preparation_running",
+    "status": "refused_before_build",
     "same_source_and_test_ids": true,
     "common_cases": 113,
     "separate_native_cases": 29,
     "leaf_gates": 30,
     "build": "reuse_idle_closed_A1_build_directory",
     "runtime": "new_runtime_recovery_coverage_sdk_a2",
-    "old_runtime_protected": true
+    "old_runtime_protected": true,
+    "reason": "canonical_source_or_fresh_build",
+    "build_reused": false
   },
   "model_train": "not_started",
   "external_sdk_evidence": "pending",
   "scientific_verdict": null,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "revalidation": {
+    "status": "preparing",
+    "job": "s07-recovery-coverage-native-revalidation-m40-a1",
+    "method": "maintained native_gate already-built execution contract, per-case outputs",
+    "runtime_unchanged": "runtime-recovery-coverage-sdk-a1",
+    "source_and_binary_unchanged": true,
+    "cpp_cases": 142,
+    "leaves": 30,
+    "fresh_sdk_build": false
+  }
 }
