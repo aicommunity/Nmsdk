@@ -176,7 +176,8 @@
     "native_conditions": 4,
     "native_trials": 32,
     "metrics_catalog": "N0BranchLengthFrozen-20261115.json",
-    "read_only_revalidation_job": "s11-n0-length-frozen-report-m40-a1"
+    "read_only_revalidation_job": "s11-n0-length-frozen-report-m40-a1",
+    "primary_catalog": "N0BranchLengthFrozenPrimary-20261115.json"
   },
   "sdk_source_root_a1": "22e0f4cb171a9d7affe94164e517df6d054742c6",
   "training_temporal_report": {
@@ -191,10 +192,29 @@
   },
   "follow_up": {
     "job": "s11-n0-local-budget12-train-m40-a1",
-    "status": "running",
+    "status": "completed_valid_invalid_observation_no_certificate",
     "changed_factor": "maximum_candidates_per_input128_to12",
     "exploratory_after_previous_data": true,
     "original_tolerances_preserved": true,
-    "global_budgets_preserved": true
+    "global_budgets_preserved": true,
+    "report": "N0LocalBudget12ScientificReport-20261115.ru.md",
+    "tests_passed": 1,
+    "all_processes_closed": true,
+    "attempted_input_indices": [
+      2,
+      1
+    ],
+    "valid_scalar_input_indices": [
+      2
+    ],
+    "input1_rejected_lengths": [
+      28,
+      29,
+      30,
+      31,
+      32
+    ],
+    "primary": "N0LocalBudget12Primary-20261115.json",
+    "temporal_report": "running"
   }
 }
