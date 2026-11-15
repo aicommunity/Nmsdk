@@ -88,7 +88,9 @@ def render(native, output, group_numbers, *, native_window_zooms=False, allow_in
                         'training_report_candidate_window_invalid')
                 window = [number(frame[k])/frequency for k in ('first_frame', 'last_frame')]
             duration = number(series[0]['specification']['end'])-number(series[0]['specification']['begin'])
-            require(0. <= window[0] < window[1] <= duration,
+            # Axis recipes use declared offsets; subtracting absolute floating
+            # timestamps may round the same duration down by one ulp.
+            require(0. <= window[0] < window[1] <= number(package['configuration']['duration']),
                     'training_report_window_outside_recorded_protocol')
             # Detail includes actual response context and the proposed window;
             # it does not assume the response occurs inside that window.
