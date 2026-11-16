@@ -5,8 +5,10 @@ candidate per measured input, first rejected search group, last recorded group.
 Complete histories and negative/setup outcomes remain in comparison metadata.
 """
 from copy import deepcopy
+import csv
 import hashlib
 import html
+import io
 import math
 import re
 import os
@@ -102,9 +104,39 @@ class UniformProfileTrainingReportTest(unittest.TestCase):
                           summary_sha256=hashlib.sha256(summary_path.read_bytes()).hexdigest())
             initial=package['measurement_archive']['source_binding']['initial_model']
             facts['fixed_physics_recheck']=audit_uniform_profile(initial,package['neuron']['graph']['identity'])
+            expected_full={}
+            for ordinal in selected:
+                full=next(t for t in records[ordinal-1]['raw_trials'] if
+                    t['actual_specification']['stimulus_subset']['source_ordinals']==list(range(
+                        t['actual_specification']['stimulus_subset']['physical_input_count'])))
+                spec=full['actual_specification']
+                expected_full[ordinal]=(full['primary_ref'],spec['begin'],spec['end'],
+                    spec['stimulus_profile']['frequency_hz'],len(spec['baseline']))
             del package,records
-            report=render(native,output/role,selected,native_window_zooms=True,allow_incomplete_groups=True)
+            report=render(native,output/role,selected,native_window_zooms=True,
+                native_response_zooms=True,allow_incomplete_groups=True)
             self.assertFalse(report['downsampling']);self.assertFalse(report['visual_acceptance_complete'])
+            self.assertTrue(report['native_response_zoom_policy']['diagnostic_axis_only'])
+            self.assertFalse(report['native_response_zoom_policy']['peak_assignment_changed'])
+            response_views=[f for f in report['figures'] if f['view']=='response-maximum-native']
+            self.assertCountEqual([(f['group'],f['channel']) for f in response_views],
+                [(g,c) for g,(_,_,_,_,count) in expected_full.items() for c in range(count)])
+            for figure in response_views:
+                ref,begin,end,frequency,_=expected_full[figure['group']]
+                raw=(native/ref['relative_path']).read_bytes()
+                self.assertEqual(len(raw),ref['bytes'])
+                self.assertEqual(hashlib.sha256(raw).hexdigest(),ref['sha256'])
+                reader=csv.reader(io.StringIO(raw.decode('utf-8'),newline=''),strict=True)
+                next(reader)
+                samples=[[float(v) for v in row] for row in reader]
+                peak=max(samples,key=lambda row:row[figure['channel']+2])
+                center=peak[0]-begin
+                self.assertEqual(figure['response_zoom_source'],dict(primary_reference=ref,
+                    absolute_time=peak[0],relative_time=center,
+                    potential=peak[figure['channel']+2],diagnostic_axis_only=True))
+                self.assertEqual(figure['x_bounds_seconds'],
+                    [max(0.,center-50/frequency),min(end-begin,center+50/frequency)])
+                self.assertTrue(all((output/role/name).is_file() for name in figure['files']))
             for figure in report['figures']:
                 if figure['view'].endswith('-native'):
                     self.assertGreaterEqual(figure['minimum_native_tick_pixels'],8.)
