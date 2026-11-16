@@ -1,0 +1,135 @@
+{
+  "kind": "timelearner_corrected_psi_native_cold_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "job": "s11-psi-k2p5-psi-cold-train-m40-a2",
+  "producer_root": "1f551388cf62f2c3d427796c7d5ced635ecd7530",
+  "controls": "3693a99d6c32607a9b6542dd358fd451e80b458e",
+  "runtime_root": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+  "pulse": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7",
+  "initial_model_revision": "1c2511badd52a622e02814e31f74fd89ab0fa99b3b44b4a0e402bb8daea0f356",
+  "neuron_class": "NSPNeuronGenPreinh2_5",
+  "execution": "completed",
+  "validity": "valid",
+  "all_processes_closed": true,
+  "python_passed": 1,
+  "training_outcome": "invalid_observation",
+  "reason": "rejected_candidate_window:ambiguous",
+  "certificate": null,
+  "reference_complete": true,
+  "complete_groups": 56,
+  "native_probes": 336,
+  "sampled_frames": 1209936,
+  "scalar_candidates": 21,
+  "jointly_ready_candidates": 1,
+  "candidates_by_input": {
+    "0": 0,
+    "1": 0,
+    "2": 21,
+    "3": 0
+  },
+  "local_jointly_ready_measurement": {
+    "amplitude_residual": -5.406867076285238e-8,
+    "anchor_group_id": "Branch-PSI-storage/psi-k2p5-window-a2/psi/session/1/search/83/composite/45",
+    "anchor_semantic_proof_id": "b59cc9ea07957766ac8afe2a9ce81d34be9e10219fa511133c553d6cb8ac4501",
+    "anchor_trial_id": "Branch-PSI-storage/psi-k2p5-window-a2/psi/session/1/search/83",
+    "full_parameters": [
+      {
+        "length": 28,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "length": 28,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "length": 27,
+        "resistance": 20421499.653382123,
+        "synapses": 1
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "input_index": 2,
+    "measurement_group_id": "Branch-PSI-storage/psi-k2p5-window-a2/psi/session/1/search/84/composite/46",
+    "model_epoch": 20,
+    "model_revision": "ebb1a212e2158d8a0f5b4d73492a7fdae37b99451d3b2384a7a102c8a344ae1f",
+    "parameter_change_cost": 81.43775904579333,
+    "parameters": {
+      "length": 27,
+      "resistance": 20421499.653382123,
+      "synapses": 1
+    },
+    "semantic_proof_id": "9e2889df3dc8905964e890e28646278c3a57a4fd06271ab4286ba1144da7ac41",
+    "timing_high": 0.0019999999999527063,
+    "timing_low": 0.0019999999999527063,
+    "trial_id": "Branch-PSI-storage/psi-k2p5-window-a2/psi/session/1/search/84",
+    "within_amplitude": true,
+    "within_timing": true
+  },
+  "actual_parameters": [
+    {
+      "length": 36,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 35,
+      "resistance": 2880071.5552629367,
+      "synapses": 1
+    },
+    {
+      "length": 27,
+      "resistance": 20421499.653382123,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "search_probes": 52,
+  "applied_edits": 24,
+  "physical_audit": {
+    "kind": "timelearner_uniform_profile_physics_audit",
+    "schema_version": 1,
+    "membranes_checked": {
+      "initial": 2,
+      "final": 37
+    },
+    "frequency_hz": "2000",
+    "uniform_physics_preserved": true,
+    "positive_individual_resistances_allowed": true,
+    "threshold_and_feedback_preserved": true,
+    "native_execution_verified": false,
+    "training_certificate_verified": false,
+    "scientific_verdict": null
+  },
+  "condition_fingerprint": "daa9596aba0b453d237632f677839cd9c95f21ab1a64e3f9cc88404d7e1f20f6",
+  "effective_reference_window_frames": [
+    0,
+    3600
+  ],
+  "reference_coordinates_only_from_previous_characterization": true,
+  "previous_amplitude_references_imported": false,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/67/670d004a8124f26c490a11bd2d15dffa00882750efb3039e4431d1e814142602",
+    "sha256": "670d004a8124f26c490a11bd2d15dffa00882750efb3039e4431d1e814142602",
+    "bytes": 51078527
+  },
+  "archived_regular_files": 1184,
+  "catalog_relative": "experiments/2026-11-16/psi-storage-control/psi-cold-a2.json",
+  "baseline_stock_acceptance": "PresynapticStockColdAcceptance-20261116.json",
+  "classification_assessed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

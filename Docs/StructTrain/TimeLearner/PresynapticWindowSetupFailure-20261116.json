@@ -1,0 +1,50 @@
+{
+  "kind": "timelearner_psi_initial_window_setup_failure",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "job": "s11-psi-k2p5-psi-cold-train-m40-a1",
+  "producer_root": "64327e103d7085972f6512db77a2195f27c5b2fc",
+  "controls": "9303d484ea011bead0f2b18ab07c149a9496ad6a",
+  "execution": "completed",
+  "all_processes_closed": true,
+  "training_outcome": "invalid_model",
+  "reason": "candidate_window_proposal_arithmetic_rejected",
+  "classification": "experiment_setup_error",
+  "references_complete": 4,
+  "search_probes": 0,
+  "applied_edits": 0,
+  "reference_frames": [
+    61,
+    221,
+    541,
+    1021
+  ],
+  "copied_stock_reference_frames": [
+    49,
+    209,
+    529,
+    1009
+  ],
+  "proposed_frame_domain": [
+    12,
+    3612
+  ],
+  "hard_domain": [
+    0,
+    3600
+  ],
+  "native_refusal_correct": true,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/12/123ede88c7357b2da30c4a78905f2ff60b4e5d661ac523a6e12776924e948c3a",
+    "sha256": "123ede88c7357b2da30c4a78905f2ff60b4e5d661ac523a6e12776924e948c3a",
+    "bytes": 3610735
+  },
+  "archived_regular_files": 204,
+  "catalog_relative": "experiments/2026-11-16/psi-storage-control/psi-cold-a1-initial-window-refusal.json",
+  "scientific_verdict": null,
+  "algorithm_failure_proven": false,
+  "fix_remote_accepted": false
+}

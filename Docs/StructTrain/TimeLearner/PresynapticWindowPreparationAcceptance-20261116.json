@@ -1,0 +1,46 @@
+{
+  "kind": "timelearner_psi_window_preparation_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "source_root": "1f551388cf62f2c3d427796c7d5ced635ecd7530",
+  "controls": "a0b8222b839dd628fcdf9dc1590d99bcab08169a",
+  "job": "s03-psi-window-characterization-m40-a1",
+  "execution": "completed",
+  "all_processes_closed": true,
+  "python_passed": 1,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/be/be3a9b761f0bd6a85193a5b8d18a7239606be0071b28ad4566eb4abb4e6419a3",
+    "sha256": "be3a9b761f0bd6a85193a5b8d18a7239606be0071b28ad4566eb4abb4e6419a3",
+    "bytes": 337980
+  },
+  "archived_files": 51,
+  "catalog_relative": "experiments/2026-11-16/psi-storage-control/window-preparation-a1.json",
+  "production_prepare_exercised": true,
+  "old_domain_frames": [
+    12,
+    3612
+  ],
+  "rebased_domain_frames": [
+    0,
+    3600
+  ],
+  "negative_controls": [
+    "foreign_neuron_class",
+    "changed_target"
+  ],
+  "references_imported": false,
+  "scientific_verdict": null,
+  "cold_train_followup": {
+    "job": "s11-psi-k2p5-psi-cold-train-m40-a2",
+    "source_root": "1f551388cf62f2c3d427796c7d5ced635ecd7530",
+    "controls": "3693a99d6c32607a9b6542dd358fd451e80b458e",
+    "job_sha256": "d8776564a14a576ef57ad0a2f29de138cc18b9d694c0cb56384e6278d00752d9",
+    "execution": "running_last_live_readback",
+    "native_pid": 3408629,
+    "scientific_verdict": null
+  },
+  "whole_plan_complete": false
+}
