@@ -227,8 +227,12 @@ def render_soma(observation, channel, label, limits, output: Path, *,
             ax.plot(times, soma, color="#154c9a", linewidth=1.4, label=label)
             if reference_level is not None:
                 require(math.isfinite(reference_level), "nonfinite_plot_reference_level")
+                reference_visible = y_limits[0] <= reference_level <= y_limits[1]
+                reference_label = f"Actual scalar spike threshold {reference_level:.12g}"
+                if not reference_visible:
+                    reference_label += " (outside shown Y)"
                 ax.axhline(reference_level, color="#477a32", linestyle="--", linewidth=1.,
-                           label="Actual scalar spike threshold")
+                           label=reference_label)
             overlay.step(times, stimulus, where="post", color="#d46200", alpha=.65,
                          linewidth=1.2, label="Actual shared input (native samples)")
             visible_sample_markers = sample_markers or name in peak_details
@@ -290,8 +294,41 @@ def render_soma(observation, channel, label, limits, output: Path, *,
                 rows[-1]["minimum_native_tick_pixels_on_zoom"] = 1420.8/(frequency*(right-left))
             if reference_level is not None:
                 rows[-1]["reference_level"] = reference_level
+                rows[-1]["reference_level_visible"] = reference_visible
     return rows
 
+
+
+def render_positive_lobe_views(observation, channel, label, output: Path, *,
+                               reference_level=None, context_label=None,
+                               potential_axis_label="Soma SumPotential [model units; SI unverified]"):
+    """Companion display range; original recovery samples and views are retained."""
+    values = [s["soma"][channel] for s in observation["samples"]]
+    require(values and all(math.isfinite(v) for v in values), "invalid_positive_lobe_samples")
+    positive = [v for v in values if v > 0.]
+    if min(values) >= 0. or not positive or (reference_level is not None and reference_level < 0.):
+        return []
+    levels = [0., *positive]
+    if reference_level is not None:
+        levels.append(reference_level)
+    folder = output/"positive-lobe-detail"
+    folder.mkdir()
+    context = ((context_label+" | ") if context_label else "")+(
+        "Positive lobe display; negative recovery outside Y; full recovery retained in ordinary views")
+    views = render_soma(observation, channel, label, padded_limits(levels), folder,
+        potential_axis_label=potential_axis_label, reference_level=reference_level,
+        context_label=context)
+    for view in views:
+        view["files"] = [folder.name+"/"+name for name in view["files"]]
+        view["view"] = "positive-lobe-detail-"+view["view"]
+        view["y_scale"] = "positive_lobe_detail"
+        view["display_range_only"] = True
+        view["ordinary_full_recovery_views_retained"] = True
+        lo, hi = view["y_limits"]
+        view["samples_outside_display_y"] = sum(
+            not lo <= s["soma"][channel] <= hi for s in observation["samples"]
+            if view["begin"] <= s["time"] <= view["end"])
+    return views
 
 def render_series(observations, channel, label, limits, output: Path, *, context_label=None):
     """Unsqueezed native clock; grey gaps are unknown, not silent ITI evidence."""

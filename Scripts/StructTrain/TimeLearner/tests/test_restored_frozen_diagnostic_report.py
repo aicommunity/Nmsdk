@@ -42,3 +42,23 @@ class RestoredFrozenDiagnosticReportTest(unittest.TestCase):
                 self.assertFalse(view["downsampling"])
                 with Image.open(output/view["files"][0]) as image:
                     self.assertEqual(image.size, (1920, 960))
+        decisions = load(output/'lt-decision-views.json')
+        self.assertTrue(decisions['all_declared_trials_rendered'])
+        self.assertTrue(decisions['all_observations_complete'])
+        self.assertEqual(decisions['threshold'], declaration['threshold'])
+        self.assertEqual(len(decisions['trials']), 8)
+        self.assertTrue(decisions['projection_for_plotting_only'])
+        for figure in gallery['figures']:
+            self.assertTrue(all('reference_level' not in view for view in figure['views']))
+        for item in decisions['trials']:
+            self.assertEqual(item['source_descriptor']['path'], '$.LTZone.Potential')
+            self.assertTrue(any(v['time_view'] == 'overview' for v in item['views']))
+            self.assertTrue(any(v['time_view'] != 'overview' and
+                v['minimum_native_tick_pixels_on_zoom'] >= 8 for v in item['views']))
+            for view in item['views']:
+                self.assertFalse(view['downsampling'])
+                self.assertEqual(view['reference_level'], declaration['threshold'])
+                self.assertEqual(view['reference_level_visible'],
+                    view['y_limits'][0] <= declaration['threshold'] <= view['y_limits'][1])
+                with Image.open(output/item['folder']/view['files'][0]) as image:
+                    self.assertEqual(image.size, (1920, 960))
