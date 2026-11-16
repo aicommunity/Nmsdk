@@ -1,0 +1,132 @@
+{
+  "kind": "timelearner_fixed_physics_mode_preflight_acceptance",
+  "schema_version": 1,
+  "tested_source_root": "c8480262231bfaace0c009edc806176a0e263a32",
+  "source_before": "6e72f24b408d8a45dc31798769c123bbdf071b7d",
+  "before_source_blobs_match_previous_develop": "c3e9e25fc4336d96d41df65d933f6648842da65e",
+  "reproduced_before": {
+    "uniform_generated_jobs_with_active_C_search": 1,
+    "psi_generated_jobs_with_active_C_search": 2,
+    "legacy_sync_capacitance_trim": 0,
+    "native_training_executed": false
+  },
+  "change": {
+    "scope": "Fixed-physics uniform Fast and Stock/PSI experiment preparation/run only",
+    "reject_key": "capacitance_search",
+    "C0_history_without_search_preserved": true,
+    "general_native_pipeline_C_search_declarations_preserved": true,
+    "ordinary_job_declarations_equal_before": true,
+    "CPP_and_Rdk_lifecycle_unchanged": true
+  },
+  "M40": {
+    "worker": "M40",
+    "job": "s09-fixed-physics-mode-preflight-m40-a1",
+    "source_root": "c8480262231bfaace0c009edc806176a0e263a32",
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7e/7eb02d510fc8c5c428688e4129453e575e624a5dec94c69f1ecec7b178c2b075",
+      "sha256": "7eb02d510fc8c5c428688e4129453e575e624a5dec94c69f1ecec7b178c2b075",
+      "bytes": 403090
+    },
+    "tests_executed": 6,
+    "passed": true,
+    "refusal_reason": null,
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-16/fixed-physics-mode-preflight/m40-a1.json",
+    "files": 54,
+    "all_processes_closed": true,
+    "controls": "ae28eca764c54ca173264ced9e69e7fe5de955cb",
+    "owned_pid": 91339,
+    "fixture_fingerprint": "f10f715cab7847d8bee823c5b1131946c2bb32a26ec3921c8ee7288250a979b7",
+    "package_fingerprint": "f1e91f7fa904624dbd5ca70bc3f5612d2c032d5d294804d248798c00cf815132",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_fixed_physics_mode_preflight.FixedPhysicsModePreflightTest.test_C0_history_without_search_remains_an_admissible_fixed_physics_mode",
+      "Scripts.StructTrain.TimeLearner.tests.test_fixed_physics_mode_preflight.FixedPhysicsModePreflightTest.test_general_pipeline_still_accepts_the_explicit_C_search_declaration",
+      "Scripts.StructTrain.TimeLearner.tests.test_fixed_physics_mode_preflight.FixedPhysicsModePreflightTest.test_prepare_and_run_refuse_before_reference_runtime_or_controller_work",
+      "Scripts.StructTrain.TimeLearner.tests.test_fixed_physics_mode_preflight.FixedPhysicsModePreflightTest.test_stock_PSI_generator_refuses_explicit_C_search_with_legacy_flag_zero",
+      "Scripts.StructTrain.TimeLearner.tests.test_fixed_physics_mode_preflight.FixedPhysicsModePreflightTest.test_unchanged_fixed_physics_declarations_equal_production_baseline",
+      "Scripts.StructTrain.TimeLearner.tests.test_fixed_physics_mode_preflight.FixedPhysicsModePreflightTest.test_uniform_generator_refuses_explicit_C_search_with_legacy_flag_zero"
+    ]
+  },
+  "Elder": {
+    "worker": "Elder-1",
+    "job": "s09-fixed-physics-mode-preflight-elder-a1",
+    "source_root": "c8480262231bfaace0c009edc806176a0e263a32",
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/9c/9cf87bc1902f6f9e573c85fb9b28fc11bf30aaa1a55d39909ea5545f14103561",
+      "sha256": "9cf87bc1902f6f9e573c85fb9b28fc11bf30aaa1a55d39909ea5545f14103561",
+      "bytes": 107006
+    },
+    "tests_executed": 0,
+    "passed": false,
+    "refusal_reason": "reservation_capacity_exhausted",
+    "catalog": "/mnt/nmsdk-structtrain-archive/experiments/2026-11-16/fixed-physics-mode-preflight/elder-a1-refused.json",
+    "files": 40,
+    "all_processes_closed": true,
+    "controls": "f94e2d550965cddbf15c94ce8606d4d0428c0c65",
+    "owned_pid": 3060293,
+    "capacity_slots": 1,
+    "available_slots_at_refusal": 0,
+    "slot_held_by": "s11-frozen-order-native-elder-a2",
+    "deferred_second_worker_acceptance": true,
+    "source_cache_retirement": {
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/0b/0b8f0a75610498a9ad4a7daf19f856c2f2ec6bbae99b53cc94e3ae1d95a35949",
+        "sha256": "0b8f0a75610498a9ad4a7daf19f856c2f2ec6bbae99b53cc94e3ae1d95a35949",
+        "bytes": 1363
+      },
+      "files": 98037,
+      "logical_bytes": 989867302,
+      "free_before": 9649610752,
+      "free_after": 11012513792,
+      "source_cache_retired": true,
+      "control_and_fixture_repositories_retained": true
+    }
+  },
+  "code_bundle": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/d9/d9014ba1d8d06b118e8d5f6fc0c2a2fd62ecd67b2359122ae1cbd6dc96937818",
+    "sha256": "d9014ba1d8d06b118e8d5f6fc0c2a2fd62ecd67b2359122ae1cbd6dc96937818",
+    "bytes": 436627
+  },
+  "fixture_bundle": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/24/24fd8e60fac42a9c4cc4d21b410e350d912b9f336ab454607643756741adbd71",
+    "sha256": "24fd8e60fac42a9c4cc4d21b410e350d912b9f336ab454607643756741adbd71",
+    "bytes": 55649
+  },
+  "fixture_commit": "0a943079519d7d0d392fcfdf8eac5ec48bce6b52",
+  "archive_member_verification": {
+    "reader_worker": "Elder-1",
+    "proofs": [
+      {
+        "name": "m40-a1",
+        "sha256": "7eb02d510fc8c5c428688e4129453e575e624a5dec94c69f1ecec7b178c2b075",
+        "members": 54,
+        "tests": 6,
+        "passed": true
+      },
+      {
+        "name": "elder-a1-refused",
+        "sha256": "9cf87bc1902f6f9e573c85fb9b28fc11bf30aaa1a55d39909ea5545f14103561",
+        "members": 40,
+        "tests": 0,
+        "passed": false
+      }
+    ],
+    "scientific_verdict": null
+  },
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

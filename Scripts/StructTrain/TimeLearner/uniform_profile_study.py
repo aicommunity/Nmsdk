@@ -24,7 +24,7 @@ from .native_process_policy import policy_for_reservation
 from .process_runner import verify_runtime
 from .resource_reservations import Reservations
 from .stock_candidate_window_study import training_execution_limits
-from .uniform_profile_physics import audit_uniform_profile
+from .uniform_profile_physics import audit_uniform_profile, require_fixed_capacitance_policy
 
 
 def rebase_full_observation_window(configuration, reference_frames):
@@ -57,6 +57,7 @@ def rebase_full_observation_window(configuration, reference_frames):
 def declare_case(original, archive, variant, reference_frames=None, *, run_label=None):
     require(variant in (0,3), 'uniform_study_unknown_profile')
     c=original['configuration']
+    require_fixed_capacitance_policy(c)
     require(c['schema_version']==8 and c['model']['branch'] is True and
             c['model']['normalization']=='N1' and len(c['model']['inputs'])==4 and
             c['model']['neuron_class']=='NSPNeuronGen' and c['model']['maximum_cable_length']==100,
@@ -120,7 +121,9 @@ def run(job_path,runtime_path,controller,expected_initial_path,output,*,finaliza
     inputs=(job_path,runtime_path,expected_initial_path)
     require(not any(p.is_relative_to(output) for p in inputs),'uniform_study_output_overlaps_inputs')
     before={str(p):frozen_digest(p,256*1024**2) for p in inputs}
-    job=load(job_path);validate_job('train',job);runtime=load(runtime_path);verify_runtime(runtime)
+    job=load(job_path);validate_job('train',job)
+    require_fixed_capacitance_policy(job['configuration'])
+    runtime=load(runtime_path);verify_runtime(runtime)
     c=job['configuration'];require(c['model']['normalization']=='N1' and c['model']['branch'] is True,
                                  'uniform_study_not_branch_N1')
     limits=training_execution_limits(c,finalization_seconds)
@@ -220,6 +223,7 @@ def prepare_cold(original_path, profile_path, reference_native, output, *, varia
     before = {str(p): frozen_digest(p, 256*1024**2) for p in inputs}
     original, archive = load(original_path), load(profile_path)
     validate_job('train', original)
+    require_fixed_capacitance_policy(original['configuration'])
     if maximum_group_wall_seconds is not None:
         require(maximum_group_wall_seconds <= (maximum_wall_seconds if
                 maximum_wall_seconds is not None else original['configuration']['maximum_wall_seconds']),

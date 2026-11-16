@@ -20,6 +20,7 @@
 
 ## Что принято в последнем подэтапе
 
+- [Fixed-physics mode preflight](FixedPhysicsModePreflight-20261116.ru.md):6/6 M40, все процессы закрыты;3 ранее допускавшихся C-search jobs воспроизведены production-генераторами и теперь отклоняются до дорогого Train. Структура и SHA обычных деклараций сохранены; C0 history и общий C-search API разрешены. Elder A1 получил capacity refusal до тестов, повтор отложен до закрытия order64. Native математика и текущие опыты не менялись.
 - [Fast threshold independent replay](FastN1ThresholdIndependentReplayAcceptance-20261116.json): Elder1/1, все1333 members восстановлены; все8 исходных и повторных baseline waveforms сравнены напрямую. Это независимая проверка тех же данных.
 - [Fast Soma/LT temporal scope](FastN1CommonTemporalAcceptance-20261116.json): baseline936PNG, actual candidate1403PNG. Сохранены побайтно432 прежних baseline Soma и983 обычных candidate PNG. Дополнительно просмотрены46 выбранных оригиналов. Полный ручной просмотр галерей не заявляется.
 - [Cold21600 primary и32-view comparison](FastN1FullTrainingComparisonAcceptance-20261116.json) опубликованы. Четыре новых Train overview просмотрены. [Новый40-view выпуск принят1/1](FastN1TrainingResponseZoomAcceptance-20261116.json): восемь native response-max zoom добавлены и просмотрены,32 прежних PNG побайтно сохранены. Это масштаб рисунка, не изменение assigned-impulse measurement.

@@ -1,3 +1,5 @@
+> Сверка16.11: в текущем контроллере C-search задаётся отдельной versioned capacitance_search policy; legacy SyncCapacitanceTrim=0 не означает её отсутствие. [Ранняя проверка fixed-physics Fast/PSI](FixedPhysicsModePreflight-20261116.ru.md) принята6/6 на M40: active C-search запрещён только для этих протоколов, history-only и общий declaration API сохранены. Elder A1 отказал до тестов из-за занятого единственного слота; повтор отложен. Таблица07.11 ниже — исторический срез, её прежние accepted/candidate SHA не описывают сегодняшний develop. Полная native C-search matrix остаётся отдельной областью.
+
 # Возможности TimeLearner: принятый код и проверяемый кандидат
 
 Сверка07.11.2026. Этот документ отделяет реализованный и объединённый код от
