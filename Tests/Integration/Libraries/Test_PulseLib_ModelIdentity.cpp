@@ -47,7 +47,7 @@ TEST(CanonicalModelHash, PreservesPortableGoldenDigests)
     }
 }
 
-TEST(CanonicalModelHash, PreservesActualLargeTrainingPackageDigest)
+TEST(CanonicalModelHashRecorded, PreservesActualLargeTrainingPackageDigest)
 {
     const auto path=std::getenv("TIMELEARNER_CANONICAL_PACKAGE");
     if(!path)GTEST_SKIP()<<"Explicit immutable native package fixture required";
