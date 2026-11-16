@@ -1,0 +1,258 @@
+{
+  "kind": "timelearner_psi_frozen8_independent_temporal_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "job": "s11-restored-psi-frozen8-report-elder-a1",
+  "source_root": "808096f8dba7eecc0bbfa098131315f6d5fe9eec",
+  "controls": "651da5279423628a0a2aa467add9ac80d502a951",
+  "execution": "completed",
+  "all_processes_closed": true,
+  "python_passed": 1,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/97/971c5c21a986c8731f28914fba086e0586f92ed01c422838dfc89437afccc763",
+    "sha256": "971c5c21a986c8731f28914fba086e0586f92ed01c422838dfc89437afccc763",
+    "bytes": 105227288
+  },
+  "archive_files": 1785,
+  "cache_relative": "report-cache/2026-11-16/psi-frozen8-elder",
+  "png_count": 569,
+  "trial_soma_pairs": 8,
+  "counts": {
+    "TP": 0,
+    "FP": 0,
+    "FN": 1,
+    "TN": 7,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 0,
+    "foil_response_rate": 0
+  },
+  "independent_primary_restore": true,
+  "original_frozen_primary": "67924bf6f3faf3c84970d37da435d3c9d967163d2fc018fe6707b46f15b07a37",
+  "model_revision": "21f992b5244b7ee673303d7d3b5fc98f2c4bb8bafea5081eaec3272998de8d37",
+  "new_native_calculation": false,
+  "visual_review": {
+    "kind": "timelearner_psi_frozen8_manual_visual_review",
+    "schema_version": 1,
+    "date": "2026-11-16T05:49:08.420Z",
+    "source_archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/97/971c5c21a986c8731f28914fba086e0586f92ed01c422838dfc89437afccc763",
+      "sha256": "971c5c21a986c8731f28914fba086e0586f92ed01c422838dfc89437afccc763",
+      "bytes": 105227288
+    },
+    "cache_relative": "report-cache/2026-11-16/psi-frozen8-elder",
+    "scoped_visual_review_complete": true,
+    "all_generated_figures_reviewed": false,
+    "generated_png_count": 569,
+    "reviewed_figures": [
+      {
+        "path": "trial-0000-soma-001/overview.png",
+        "sha256": "4587f50b71a3fb7be0522eefbb480dcff2733324b298ac18686e80f78d42593d",
+        "bytes": 147318,
+        "sample_id": "phasea-row-0",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0000-soma-001/zoom-008.png",
+        "sha256": "f19c15ac7bcbba1b76fcbe06417aa8044ab9777f483baafdb827bbbee42c5fe3",
+        "bytes": 128184,
+        "sample_id": "phasea-row-0",
+        "view": "peak_zoom"
+      },
+      {
+        "path": "trial-0001-soma-001/overview.png",
+        "sha256": "8900879362edc3e5e303b019bf437e69b52cc9f0549a28b81fd04a8b2a728e8a",
+        "bytes": 144288,
+        "sample_id": "phasea-row-1",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0001-soma-001/zoom-016.png",
+        "sha256": "537e50c4c32f25140c9f12dfaea880afc0eb5934e81843f43ceb3bca9d546e37",
+        "bytes": 125705,
+        "sample_id": "phasea-row-1",
+        "view": "peak_zoom"
+      },
+      {
+        "path": "trial-0002-soma-001/overview.png",
+        "sha256": "be4d4636925e800724134c4298e54b120f32e945388cd0517d2db5b5f9b8c0f5",
+        "bytes": 146643,
+        "sample_id": "phasea-row-2",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0002-soma-001/zoom-011.png",
+        "sha256": "14a8e43a8f512fee9ac5da9c93537ef1a323a7c44807d9333ff247f7a82ab582",
+        "bytes": 126045,
+        "sample_id": "phasea-row-2",
+        "view": "peak_zoom"
+      },
+      {
+        "path": "trial-0003-soma-001/overview.png",
+        "sha256": "2244d44ac8035730f2dcc07401b97c8a5bcebb28b7c54749b31825a8df2903be",
+        "bytes": 143741,
+        "sample_id": "phasea-row-3",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0003-soma-001/zoom-011.png",
+        "sha256": "cbd92dbbe88ffb297792edaa52ba59bcdfb54f32650cff5f9f666f7b22719484",
+        "bytes": 128356,
+        "sample_id": "phasea-row-3",
+        "view": "peak_zoom"
+      },
+      {
+        "path": "trial-0004-soma-001/overview.png",
+        "sha256": "d00abaefffe8c6df42c0a3ccd9ae666f661bfebd50dda1e1b49e5b6c03549965",
+        "bytes": 148940,
+        "sample_id": "phasea-row-4",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0004-soma-001/zoom-007.png",
+        "sha256": "6726a01933f1272f2a4889c90067ac9a29e4f1751a0ae3c74aaf6f13015e3607",
+        "bytes": 126054,
+        "sample_id": "phasea-row-4",
+        "view": "peak_zoom"
+      },
+      {
+        "path": "trial-0005-soma-001/overview.png",
+        "sha256": "8cdb9a11636dea2d88da1cc1cb693e18196a56bbd625d231a9a2c247d72eb1dd",
+        "bytes": 146939,
+        "sample_id": "phasea-row-5",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0005-soma-001/zoom-017.png",
+        "sha256": "3f65c0545512dc1b65b5520971bce1e89174254f09397b71b83189e01e4da10e",
+        "bytes": 127649,
+        "sample_id": "phasea-row-5",
+        "view": "peak_zoom"
+      },
+      {
+        "path": "trial-0006-soma-001/overview.png",
+        "sha256": "689075c082c7c58452cc7d10cd47bbcecbce7720d38a221c6e67331d28ac4625",
+        "bytes": 151233,
+        "sample_id": "phasea-row-6",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0006-soma-001/zoom-008.png",
+        "sha256": "79879fa2866c1d407fb94803a69aaa4647516539ef7e1a8c8b79217febfe6891",
+        "bytes": 128752,
+        "sample_id": "phasea-row-6",
+        "view": "peak_zoom"
+      },
+      {
+        "path": "trial-0007-soma-001/overview.png",
+        "sha256": "9c4b122fb588a94c256a3136446e61b6990cdaeee2d8c2906c263496bc8ce12f",
+        "bytes": 151519,
+        "sample_id": "phasea-row-7",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0007-soma-001/zoom-016.png",
+        "sha256": "78a872e61254e2973ebaf3e4d9436705f9485b2a721076b02bc3174fec559fd3",
+        "bytes": 127602,
+        "sample_id": "phasea-row-7",
+        "view": "peak_zoom"
+      }
+    ],
+    "selection": [
+      {
+        "sample_id": "phasea-row-0",
+        "label": "target",
+        "peak_time": 0.3845,
+        "peak_value": 0.206546611039785,
+        "overview": "trial-0000-soma-001/overview.png",
+        "peak_zoom": "trial-0000-soma-001/zoom-008.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-1",
+        "label": "foil",
+        "peak_time": 2.7815,
+        "peak_value": 0.20828157399977087,
+        "overview": "trial-0001-soma-001/overview.png",
+        "peak_zoom": "trial-0001-soma-001/zoom-016.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-2",
+        "label": "foil",
+        "peak_time": 4.515,
+        "peak_value": 0.22837522730840254,
+        "overview": "trial-0002-soma-001/overview.png",
+        "peak_zoom": "trial-0002-soma-001/zoom-011.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-3",
+        "label": "foil",
+        "peak_time": 6.5115,
+        "peak_value": 0.171568300819687,
+        "overview": "trial-0003-soma-001/overview.png",
+        "peak_zoom": "trial-0003-soma-001/zoom-011.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-4",
+        "label": "foil",
+        "peak_time": 8.3505,
+        "peak_value": 0.2240067528842299,
+        "overview": "trial-0004-soma-001/overview.png",
+        "peak_zoom": "trial-0004-soma-001/zoom-007.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-5",
+        "label": "foil",
+        "peak_time": 10.8105,
+        "peak_value": 0.22463960252596493,
+        "overview": "trial-0005-soma-001/overview.png",
+        "peak_zoom": "trial-0005-soma-001/zoom-017.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-6",
+        "label": "foil",
+        "peak_time": 12.3845,
+        "peak_value": 0.3243998764519581,
+        "overview": "trial-0006-soma-001/overview.png",
+        "peak_zoom": "trial-0006-soma-001/zoom-008.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-7",
+        "label": "foil",
+        "peak_time": 14.785,
+        "peak_value": 0.32439989808365666,
+        "overview": "trial-0007-soma-001/overview.png",
+        "peak_zoom": "trial-0007-soma-001/zoom-016.png",
+        "minimum_tick_pixels": 14.208
+      }
+    ],
+    "observations": [
+      "All eight overviews show complete two-second windows, actual four input pulses and membrane decay, shared vertical scale.",
+      "Eight native zooms around observed full-response maxima were inspected; minimum 14.208 pixels per native tick, no downsampling.",
+      "Target maximum precedes the last target input; six foils have higher full-response maxima than target in this silent frozen snapshot.",
+      "These are high-threshold nonspiking responses; amplitude comparison does not substitute actual threshold Test."
+    ],
+    "new_native_calculation": false,
+    "scientific_verdict": null
+  },
+  "visual_review_catalog_relative": "experiments/2026-11-16/psi-storage-control/frozen8-elder-visual-review-a1.json",
+  "visual_review_catalog_sha256": "3be4fb8a38eff03ccf4044e2cf85d3e84cec60c89542153a14c60e49af147ea5",
+  "catalog_relative": "experiments/2026-11-16/psi-storage-control/frozen8-elder-report-a1.json",
+  "training_completed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
