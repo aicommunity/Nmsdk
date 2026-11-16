@@ -1,0 +1,59 @@
+{
+  "kind": "timelearner_full_training_frozen8_temporal_acceptance",
+  "schema_version": 1,
+  "job": "s11-restored-full-training-frozen8-report-elder-a1",
+  "worker": "Elder-1",
+  "source_root": "c60560a38eeda634947ae5cd3ef3872ee4258b6f",
+  "controls": "679e41adea204bc4ee515c7fad89a4672909d0d7",
+  "python_passed": 1,
+  "all_processes_closed": true,
+  "restored_logical_members": 489,
+  "retained_regular_files": 488,
+  "omitted_proven_duplicate_aliases": 1,
+  "independent_data_restore": true,
+  "new_native_execution": false,
+  "model_revision": "07101c0b0b29e746ad601050613786b1450f5a733464b501c5738ab92d3d7b22",
+  "threshold": 100,
+  "counts": {
+    "TP": 0,
+    "FP": 0,
+    "FN": 1,
+    "TN": 7,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 0,
+    "foil_response_rate": 0
+  },
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/23/23ad31857c43969f5618d19b19f2d6391ccce3d9aed7813e7703693dfbd27e7d",
+    "sha256": "23ad31857c43969f5618d19b19f2d6391ccce3d9aed7813e7703693dfbd27e7d",
+    "bytes": 162201060
+  },
+  "cache_relative": "report-cache/2026-11-16/fast-full-training-frozen8-elder",
+  "external_catalog": "experiments/2026-11-16/fast-profile-wall-budget/full-training-frozen8-elder-report-a1.json",
+  "png_count": 1009,
+  "source_files_archived": 3106,
+  "observed_trial_soma_pairs": 8,
+  "recorded_lt_trials": 8,
+  "visual_scope": {
+    "selected_originals_reviewed": 16,
+    "all8_soma_overviews": true,
+    "all8_lt_native_maximum_details": true,
+    "all_gallery_images_reviewed": false,
+    "manual_review": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/8c/8c25eb5cc355529f365b03a4d0b230e5c5c59634c59d1fc4d710112dc52e2184",
+      "sha256": "8c25eb5cc355529f365b03a4d0b230e5c5c59634c59d1fc4d710112dc52e2184",
+      "bytes": 23556
+    }
+  },
+  "scientific_verdict": null,
+  "scope": "Independent restore/audit/scorer and read-only Soma/LT rendering of actual terminal21600 baseline100; no new scientific partition, native execution, successful classifier or training certificate."
+}

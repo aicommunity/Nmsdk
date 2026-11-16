@@ -1,8 +1,8 @@
 # Статус полного плана TimeLearner — 16 ноября 2026
 
-Проверка 14:29 МСК (11:29 UTC). Полностью принят исходный этап 0; этапы 1–12 частичны. Это не оценка «1/13 работы»: во всех остальных этапах есть реализация и адресные приёмки, но остаются требования исходного плана. Цель целиком активна. Научные 8/8 не являются условием завершения рефакторинга.
+Проверка 14:44 МСК (11:44 UTC). Полностью принят исходный этап 0; этапы 1–12 частичны. Это не оценка «1/13 работы»: во всех остальных этапах есть реализация и адресные приёмки, но остаются требования исходного плана. Цель целиком активна. Научные 8/8 не являются условием завершения рефакторинга.
 
-Принятый root develop: 3d54ad01d52c4e882992f771d12a246474aa3bb2. PulseLib 23d039e44f927eb8040473845d3c391270d9d15e, Bin 8cb6dba07b30432272984c8ce3136b48ad06f064, Rdk de4134235c0dcb8b91fd9a43b267348ad1a163ca. Новые подэтапы — отдельные ветки и --no-ff merge; пользовательский E:/Science-Repo/nmsdk-git не изменяется.
+Принятый root develop: c4da8159226d8457c504ff8f6c2545ae8b3492f4. PulseLib 23d039e44f927eb8040473845d3c391270d9d15e, Bin 8cb6dba07b30432272984c8ce3136b48ad06f064, Rdk de4134235c0dcb8b91fd9a43b267348ad1a163ca. Новые подэтапы — отдельные ветки и --no-ff merge; пользовательский E:/Science-Repo/nmsdk-git не изменяется.
 
 ## Последние научные результаты
 
@@ -23,7 +23,7 @@
 - [Fast threshold independent replay](FastN1ThresholdIndependentReplayAcceptance-20261116.json): Elder1/1, все1333 members восстановлены; все8 исходных и повторных baseline waveforms сравнены напрямую. Это независимая проверка тех же данных.
 - [Fast Soma/LT temporal scope](FastN1CommonTemporalAcceptance-20261116.json): baseline936PNG, actual candidate1403PNG. Сохранены побайтно432 прежних baseline Soma и983 обычных candidate PNG. Дополнительно просмотрены46 выбранных оригиналов. Полный ручной просмотр галерей не заявляется.
 - [Cold21600 primary и32-view comparison](FastN1FullTrainingComparisonAcceptance-20261116.json) опубликованы. Четыре новых Train overview просмотрены. [Новый40-view выпуск принят1/1](FastN1TrainingResponseZoomAcceptance-20261116.json): восемь native response-max zoom добавлены и просмотрены,32 прежних PNG побайтно сохранены. Это масштаб рисунка, не изменение assigned-impulse measurement.
-- [Новый frozen8 primary](FastN1FullTrainingFrozenAcceptance-20261116.json) опубликован: полная модель, входы, CSV, manifests, события и controls. Независимое восстановление на Elder уже проверило489 logical members/488 regular после одного подтверждённого glog alias; полный DATA/scorer/render job ещё выполняется.
+- [Новый frozen8 primary](FastN1FullTrainingFrozenAcceptance-20261116.json) опубликован: полная модель, входы, CSV, manifests, события и controls. [Независимый Elder DATA/scorer/report принят1/1](FastN1FullTrainingFrozenTemporalAcceptance-20261116.json):489 logical members/488 regular после одного подтверждённого glog alias,1009PNG,16 выбранных оригиналов всех8 паттернов просмотрены. Процессы закрыты.
 
 ## Сверка исходных этапов
 
@@ -45,17 +45,16 @@
 
 ## Подтверждённые текущие задания
 
-| Worker | Job / owned PID | Состояние на11:29 UTC |
+| Worker | Job / owned PID | Состояние на11:44 UTC |
 |---|---|---|
 |M40|s11-fast-full-training-threshold-m40-a1 /2389747|Жив. Реальный baseline repeat100 и один заранее объявленный threshold для новой terminal21600; итог неизвестен.|
-|Elder|s11-restored-full-training-frozen8-report-elder-a1 /1858341|Жив. Независимые DATA/scorer и полный Soma/LT report новой frozen8 после byte-exact restore; source c60560a38eeda634947ae5cd3ef3872ee4258b6f.|
 
 [Production подготовка group wall600 принята5/5](GroupWallPreparationAcceptance-20261116.json), процессы закрыты. [Новый cold job](FastN1GroupWall600Preparation-20261116.json) подготовлен и preflight декларации пройден; execution_performed=false. От terminal21600 job отличаются только run_id и group wall300→600; общий21600с, вся математика и native runtime прежние. Запуск разрешён после закрытия/приёмки текущего threshold Test.
 
 ## Следующая научная работа
 
 1. Завершить уже работающий actual threshold Test terminal21600 по [объявленному протоколу](FastN1FullTrainingRecognitionProtocol-20261116.ru.md). Опубликовать результат независимо от качества, без второго порога ради улучшения счёта.
-2. Принять независимый frozen8 replay и новые графики; просмотреть выбранные оригиналы. Это анализ уже полученных данных, не новый Train.
+2. Независимый frozen8 replay и Soma/LT report уже приняты;16 выбранных оригиналов всех8 паттернов просмотрены. Следующий temporal scope — actual candidate после завершения текущего Test; его графики пока не готовы.
 3. Разобрать ограничение300с измерительной группы на длинной структуре и объявить следующий конечный бюджет до запуска. Не считать это физическим пределом и не ослаблять математические допуски. После изменения общей модели нужен свежий контроль затронутых входов и финальная проверка всех входов.
 4. Завершать исходную режимную/физическую/order/ITI/reset матрицу, миграцию и документацию. Число инженерных PASS не измеряет готовность классификатора. Надёжного срока получения успешного распознавания пока нет.
 
