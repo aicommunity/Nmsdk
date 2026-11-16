@@ -9,7 +9,7 @@ from pathlib import Path
 
 from .model_identity import canonical_model_sha256
 from .native_evidence import EvidenceError, after, count, equal, load, number, require
-from .recognition_trial_evidence import audit_recognition_trial
+from .recognition_trial_evidence import _recognition_trial_batch
 from .recognition_evidence import _physical
 
 SPEC_FIELDS = {"kind", "schema_version", "run_id", "model_revision", "coverage_policy", "criterion", "trials"}
@@ -94,32 +94,26 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
         require(positions == set(range(len(expected))) and {t["label"] for t in expected.values()} == {"target", "foil"},
                 "incomplete_evaluation_positions_or_labels")
         actual, audits = {}, {}
-        for observation in observations:
-            # The calibrated proof was checked once above. Its physical graph
-            # equals this candidate exactly; avoid rescoring the entire proof
-            # once per evaluation trial. Direct trial auditing still checks it.
-            if diagnostic:
-                from .recognition_trial_evidence import _audit_recognition_trial
-                audit = _audit_recognition_trial(observation, physical_package, diagnostic=True)
-            else:
-                audit = audit_recognition_trial(observation, physical_package)
-            trial_id = audit["trial_id"]
-            require(audit["run_id"] == spec["run_id"] and trial_id in expected and trial_id not in actual,
-                    "unexpected_or_duplicate_evaluation_trial")
-            wanted = expected[trial_id]
-            require(all(observation[key] == wanted[key] for key in ("sample_id", "label", "pattern_hash", "reset_policy")),
-                    "evaluation_trial_metadata_mismatch")
-            if observation["armed"]:
-                require(equal(observation["end"], number(observation["begin"])+number(wanted["duration"])),
-                        "evaluation_trial_duration_mismatch")
-            actual[trial_id], audits[trial_id] = observation, audit
+        # Audit the fixed package once. Each observation still receives all
+        # native grid/event/frozen/shape checks; the scope also rejects mutation
+        # of the original package before any result can leave this loop.
+        with _recognition_trial_batch(physical_package, diagnostic=diagnostic) as audit_trial:
+            for observation in observations:
+                audit = audit_trial(observation)
+                trial_id = audit["trial_id"]
+                require(audit["run_id"] == spec["run_id"] and trial_id in expected and trial_id not in actual,
+                        "unexpected_or_duplicate_evaluation_trial")
+                wanted = expected[trial_id]
+                require(all(observation[key] == wanted[key] for key in ("sample_id", "label", "pattern_hash", "reset_policy")),
+                        "evaluation_trial_metadata_mismatch")
+                if observation["armed"]:
+                    require(equal(observation["end"], number(observation["begin"])+number(wanted["duration"])),
+                            "evaluation_trial_duration_mismatch")
+                actual[trial_id], audits[trial_id] = observation, audit
         require((diagnostic and partial_diagnostic) or set(actual) == set(expected), "missing_evaluation_trial")
         invalid = sorted((set(expected)-set(actual)) | {key for key, audit in audits.items() if not audit["valid_observation"]})
         calibration = package["neuron"]["metadata"]["calibration"]
-        if candidate or diagnostic_candidate:
-            from .threshold_candidate_evidence import audit_threshold_candidate, audit_diagnostic_threshold_candidate
-            (audit_diagnostic_threshold_candidate if diagnostic_candidate else audit_threshold_candidate)(package)
-        elif not calibrated:
+        if not candidate and not diagnostic_candidate and not calibrated:
             require(calibration["status"] == "fixed" and calibration["protocol"] == "fixed-inherited-from-solo"
                     and calibration["source_solo_sha256"] == source["sha256"], "unsupported_evaluation_calibration_claim")
         zones = [node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]
