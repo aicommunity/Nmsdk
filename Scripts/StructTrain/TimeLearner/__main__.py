@@ -208,6 +208,9 @@ def main(argv: list[str] | None = None) -> int:
         native.add_argument("--wall-seconds", type=float, required=True)
         native.add_argument("--process-policy", type=Path, help="explicit whole-cgroup limits; omitted retains legacy process scope")
         native.add_argument("--output", type=Path, required=True, help="new immutable result directory")
+    order = commands.add_parser("frozen-diagnostic-order", help="measure fixed stopped-model order probes after a same-order native control")
+    order.add_argument("source_manifest", type=Path)
+    order.add_argument("controls", type=Path, help="immutable declaration and runtime manifest; requires an owned controller")
     transfer = commands.add_parser("model-spec-transport", help="replay pinned positive engineering N1 jobs, then measure calibration and fresh import")
     transfer.add_argument("action", choices=("prepare", "run"))
     transfer.add_argument("source", type=Path, help="Git repository for prepare; prepared declarations for run")
@@ -545,6 +548,17 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
             print(json.dumps({"kind": "timelearner_preflight_regression_error", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    if args.command == "frozen-diagnostic-order":
+        from .frozen_diagnostic_order import run
+        from .native_evidence import EvidenceError
+        try:
+            result = run(args.source_manifest, args.controls)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"kind": "timelearner_frozen_diagnostic_order_error",
+                              "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
             return 2
     if args.command in ("train", "preflight", "export", "evaluate", "diagnostic-evaluate", "probe"):
         from .native_evidence import EvidenceError, require

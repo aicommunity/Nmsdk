@@ -1,6 +1,6 @@
 # Научные результаты TimeLearner и готовность — 16 ноября 2026
 
-Подтверждён реальный Same-Matrix результат **7/8 с обнаружением target: TP=1, FP=1, FN=0, TN=6**. Он получен на M40 и точно воспроизведён на Elder с теми же сохранённой моделью и порогом. Исходный Train не завершился с общим сертификатом сходимости. Устойчивость этой модели к порядку, ITI и continuous stream пока не принята.
+Подтверждён реальный Same-Matrix результат **7/8 с обнаружением target: TP=1, FP=1, FN=0, TN=6**. Он получен на M40 и точно воспроизведён на Elder с теми же сохранённой моделью и порогом. Исходный Train не завершился с общим сертификатом сходимости. [Все8 положений target проверены](FastN1FrozenOrderScientificReport-20261116.ru.md): каждый порядок дал TP1/FP1/FN0/TN6 в reset-per-trial. ITI и continuous stream пока не приняты.
 
 Полный исходный план активен: полностью принят этап0, этапы1–12 частичны. Численные исходы, качество распознавания и приёмка реализации учитываются отдельно. [Сверка полного плана](CurrentStatus-20261116.ru.md), [подробная карта реализации](ImplementationStatus.ru.md), [исходный план](RefactoringPlan.ru.md).
 
@@ -9,7 +9,7 @@
 | Модель и опыт | Фактический исход | Область вывода |
 |---|---|---|
 |[Fast N1 terminal21600, actual threshold](FastN1FullTrainingRecognitionScientificReport-20261116.ru.md)|TP1/FP1/FN0/TN6, threshold0.054353792695896797. Target event0.493с, последний вход0.490с. Единственный FP уrow4 до последнего входа.|Одна остановленная модель, исходные8 паттернов, reset_per_trial, полные2с окна, Same-Matrix. Общего TrainingCertificate нет.|
-|[Реальный повтор этой модели на Elder](FastN1FullTrainingElderNativeRepeat-20261116.ru.md)|Те же TP1/FP1/FN0/TN6. Все4001 отсчётов каждого из8 откликов равны M40, max absolute difference0.0; native baseline phase закрыта.|Новое исполнение сохранённой модели на втором сервере. Повторного обучения и независимой scientific partition нет. Все64 native observations записаны; parent проверяет итоговый пакет.|
+|[Реальный повтор этой модели на Elder](FastN1FullTrainingElderNativeRepeat-20261116.ru.md)|Те же TP1/FP1/FN0/TN6. Все4001 отсчётов каждого из8 откликов равны M40, max absolute difference0.0; native baseline phase закрыта.|Новое исполнение сохранённой модели на втором сервере. Повторного обучения и независимой scientific partition нет. Вся серия64 принята1/1, native/controller/collector закрыты; в каждом порядке TP1/FP1/FN0/TN6.|
 |[Fast N1 terminal21600, исходный threshold100](FastN1FullTrainingRecognitionScientificReport-20261116.ru.md)|TP0/FP0/FN1/TN7, полное молчание.|Accuracy7/8 здесь означает пропуск target и не подтверждает успешную детекцию.|
 |[Fast N1 terminal7200](FastN1RecognitionScientificReport-20261116.ru.md)|Actual threshold0.0560090535350351: TP1/FP3/FN0/TN4, target event0.2535с раньше последнего входа0.490с.|Другая terminal-модель и отдельно выбранный один порог. Сравнение с terminal21600 не является причинным A/B при фиксированном пороге.|
 |[Умеренный Stock Branch N1](N1ModerateRecognitionScientificReport-20261116.ru.md)|Actual Same-Matrix TP1/FP6/FN0/TN1; target до последнего входа.|Успешный классификатор полного паттерна не подтверждён.|
@@ -26,9 +26,9 @@
 | Worker | Исходный job и owned/native PID | Подтверждённое состояние |
 |---|---|---|
 |M40|s11-fast-bracket-groupwall600-m40-a1;2814832/2822759 закрыты|[OOM при native лимите4 GiB](FastN1GroupWall600OOM-20261116.ru.md), process_error. 759 raw пар сохранены; финальная модель и scalar summary отсутствуют. Новый Train/Test не запущен.|
-|Elder|s11-frozen-order-native-elder-a2;2352165|Baseline8 и study56 native processes закрыты, все64 наблюдения записаны. Baseline точно воспроизведён; parent ещё проверяет полные данные. Полная приёмка и rotation counts ожидаются.|
+|Elder|s11-frozen-order-native-elder-a2;2352165 закрыт|[Вся серия64 завершена и опубликована](FastN1FrozenOrderScientificReport-20261116.ru.md). Все8 положений target: TP1/FP1/FN0/TN6, один и тот же phasea-row-4. Графики всех64 ещё готовятся.|
 
-[Декларация нового Train](FastN1GroupWall600Preparation-20261116.json), [протокол order A2](FrozenDiagnosticOrderLaunch-20261116.ru.md). Работающие source/runtime/output bindings не обновляются. На Elder оба native этапа закрыты; родительский процесс ещё выполняет проверку. На M40 аварийный Train и его коллектор закрыты; валидация коллектора не меняет исход Train.
+[Декларация нового Train](FastN1GroupWall600Preparation-20261116.json), [протокол order A2](FrozenDiagnosticOrderLaunch-20261116.ru.md). Работающие source/runtime/output bindings не обновляются. На Elder закрыты оба native этапа, родительский controller и коллектор; полная приёмка64 и primary опубликованы. На M40 аварийный Train и его коллектор закрыты; валидация коллектора не меняет исход Train.
 
 ## Что можно читать и смотреть
 
@@ -42,7 +42,7 @@
 ## Следующие научные проверки и ограничения
 
 1. Проверить и исправить сохранение большой модели после подтверждённого OOM groupwall600 при native лимите4 GiB. Декларировать отдельно память native и controller, проверить пик памяти экспорта и checkpoint завершённых границ. До приёмки не повторять шестичасовой Train. Финальной модели аварийного запуска нет, Test по шаблону запрещён.
-2. Завершить уже работающий order A2. Представить actual TP/FP/FN/TN и timing для каждой rotation; target должен быть проверен во всех8 позициях. Fixed threshold/model не подбираются заново по этим ответам. После закрытия всей серии опубликовать полный новый native primary и provenance.
+2. Завершить новую читаемую галерею всех64 уже принятых order A2 наблюдений. Классификации по каждому положению и полный primary опубликованы; дополнительно проверить timing на новых кривых. Fixed threshold/model по этим результатам не подбирать заново.
 3. Отдельными заранее объявленными протоколами проверить ITI и reset_per_trial/continuous stream, затем независимый frozen Test. Одна Same-Matrix матрица не создаёт независимой оценки обобщения. Детерминированные повторы одной модели не считаются независимыми обучениями.
 4. Завершать legacy/V2 A/B и обязательную матрицу исходного плана: N0/N1, физика/storage, размеры, частоты, bounds/quantization, inhibition/reset, C-trim/PostTune/calibration и infrastructure fault cases. Текущие engineering SDK PASS не закрывают эту область.
 
