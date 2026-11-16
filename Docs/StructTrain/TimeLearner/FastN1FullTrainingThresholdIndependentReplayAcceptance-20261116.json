@@ -1,0 +1,92 @@
+{
+  "kind": "timelearner_full_training_threshold_independent_replay_acceptance",
+  "schema_version": 1,
+  "accepted_utc": "2026-11-16T14:22:05.226Z",
+  "job": "s11-fast-full-threshold-primary-replay-elder-a2",
+  "worker": "Elder-1",
+  "source_root": "ce6fc73a6bec591b3b3203904322d9315702bfc0",
+  "controls": "00804fbb46ba9d9a8530817120614e84c2c70993",
+  "execution": "completed",
+  "python_passed": 1,
+  "all_processes_closed": true,
+  "restored_logical_members": 1423,
+  "retained_regular_files": 1420,
+  "omitted_proven_duplicate_glog_aliases": 3,
+  "original_symlink_targets_attested": false,
+  "original_baseline_waveforms_checked": true,
+  "actual_series": [
+    {
+      "name": "baseline100",
+      "model_revision": "07101c0b0b29e746ad601050613786b1450f5a733464b501c5738ab92d3d7b22",
+      "threshold": 100,
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0,
+        "foil_response_rate": 0
+      }
+    },
+    {
+      "name": "candidate",
+      "model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+      "threshold": 0.054353792695896797,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0.14285714285714285
+      }
+    }
+  ],
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/ea/eaa45e4ac85c88bb0184d35f8fcd2f44ba790aeaa4eac1a0a29135716c5542d1",
+    "sha256": "eaa45e4ac85c88bb0184d35f8fcd2f44ba790aeaa4eac1a0a29135716c5542d1",
+    "bytes": 362966
+  },
+  "source_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/64/64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768",
+    "sha256": "64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768",
+    "bytes": 58742968
+  },
+  "source_bundle_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/29/29addb1cd55adb027346847278826ff095db132706089d30e74a7d6498c8acb2",
+    "sha256": "29addb1cd55adb027346847278826ff095db132706089d30e74a7d6498c8acb2",
+    "bytes": 321619
+  },
+  "source_files_archived": 49,
+  "external_catalog": "experiments/2026-11-16/fast-profile-wall-budget/full-training-threshold-independent-replay-elder-a2.json",
+  "new_native_execution": false,
+  "independent_evaluation": false,
+  "training_completed": false,
+  "scientific_verdict": null,
+  "cache_selection": {
+    "selected_source": "/home/user/timelearner-refactor/requests/frozen-order-native-a1/source-candidate",
+    "selected_files": 443,
+    "selected_bytes": 1539995801,
+    "removed_verified_reconstructible_cache_files": 977,
+    "removed_verified_reconstructible_cache_bytes": 3609782276,
+    "free_disk_bytes": 14229520384
+  },
+  "scope": "Independent byte-exact restore, production audits/scorer and exact original/repeated nonspiking waveform comparison for actual terminal21600 threshold study; no new scientific partition or model simulation. All complete primary remains in external CAS after removal of verified reconstructible cache."
+}
