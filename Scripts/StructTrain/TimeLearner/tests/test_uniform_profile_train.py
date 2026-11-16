@@ -20,17 +20,20 @@ class UniformProfileTrainTest(unittest.TestCase):
         original=load(controls/'original.json')
         if spec.get('budget_change') is not None:
             change=spec['budget_change']
-            self.assertEqual(set(change), {'maximum_wall_seconds'})
-            self.assertEqual(set(change['maximum_wall_seconds']), {'before', 'after'})
+            owners={'maximum_wall_seconds':None,'maximum_group_wall_seconds':'composite_measurement'}
+            self.assertTrue(change);self.assertTrue(set(change)<=set(owners))
             before=load(controls/'original-before-budget.json')
             expected_sha=spec.get('before_job_sha256',
                 '9c7b2c662d04a8fb32db0e80fc50d0e4b534ab21e8d01c717c0a46ea042ea056')
             self.assertEqual(before['sha256'],expected_sha)
-            self.assertEqual(change['maximum_wall_seconds'],dict(
-                before=before['configuration']['maximum_wall_seconds'],
-                after=original['configuration']['maximum_wall_seconds']))
             changed=deepcopy(before)
-            changed['configuration']['maximum_wall_seconds']=change['maximum_wall_seconds']['after']
+            for key,delta in change.items():
+                self.assertEqual(set(delta),{'before','after'})
+                old=before['configuration'];new=original['configuration'];target=changed['configuration']
+                if owners[key] is not None:
+                    old=old[owners[key]];new=new[owners[key]];target=target[owners[key]]
+                self.assertEqual(delta,dict(before=old[key],after=new[key]))
+                target[key]=delta['after']
             self.assertEqual(original,_signed({k:v for k,v in changed.items() if k!='sha256'}))
         expected=declare_case(original,load(controls/'profile.json'),spec['variant'],frames,
                               run_label=spec.get('run_label'))

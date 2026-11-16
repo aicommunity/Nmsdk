@@ -6,7 +6,7 @@ import unittest
 from ..native_calibration_worker import _write
 from ..native_evidence import load
 from ..n1_protocol_robustness import _signed
-from ..uniform_profile_study import main, prepare_cold
+from ..uniform_profile_study import declare_case, main, prepare_cold
 
 
 class UniformProfilePreparationTest(unittest.TestCase):
@@ -69,3 +69,43 @@ class UniformProfilePreparationTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'uniform_study_preparation_overlaps_inputs'):
             prepare_cold(controls/'original-before-budget.json', controls/'profile.json',
                          reference, reference/'must-not-write-preparation', variant=3)
+
+    def test_explicit_group_wall_budget_changes_no_other_cold_job_factor(self):
+        controls=self.controls(7200)
+        reference=Path(os.environ['TIMELEARNER_UNIFORM_PREP_REFERENCE'])
+        output=Path(os.environ['TMPDIR'])/'production-group-wall-preparation'
+        self.assertEqual(main(['prepare-cold',str(controls/'original-before-budget.json'),
+            str(controls/'profile.json'),str(reference),str(output),'--variant','3',
+            '--maximum-wall-seconds','21600','--maximum-group-wall-seconds','600',
+            '--run-label','group-wall600']),0)
+        declaration=load(output/'declaration.json');original=load(controls/'original-before-budget.json')
+        before=original['configuration'];expected=declare_case(original,load(controls/'profile.json'),
+            3,declaration['reference_frames'],run_label='group-wall600')
+        expected['configuration']['maximum_wall_seconds']=21600.
+        expected['configuration']['composite_measurement']['maximum_group_wall_seconds']=600.
+        self.assertEqual(load(output/'job.json'),_signed({k:v for k,v in expected.items() if k!='sha256'}))
+        self.assertEqual(declaration['budget_change'],dict(
+            maximum_wall_seconds=dict(before=before['maximum_wall_seconds'],after=21600.),
+            maximum_group_wall_seconds=dict(
+                before=before['composite_measurement']['maximum_group_wall_seconds'],after=600.)))
+        receipt=load(output/'preparation.json')
+        self.assertEqual(receipt['budget_change'],declaration['budget_change'])
+        self.assertFalse(receipt['execution_performed'])
+        self.assertFalse(receipt['amplitude_references_imported'])
+        self.assertFalse(receipt['learned_parameters_imported'])
+
+    def test_invalid_group_wall_budget_refuses_output(self):
+        controls=self.controls(3600)
+        reference=Path(os.environ['TIMELEARNER_UNIFORM_PREP_REFERENCE'])
+        output=Path(os.environ['TMPDIR'])/'invalid-group-wall-preparation'
+        for wall in (float('nan'),float('inf'),0,-1,True):
+            with self.subTest(wall=wall):
+                with self.assertRaisesRegex(ValueError,'uniform_study_invalid_group_wall_budget'):
+                    prepare_cold(controls/'original-before-budget.json',controls/'profile.json',
+                        reference,output,variant=3,maximum_group_wall_seconds=wall)
+                self.assertFalse(output.exists())
+        with self.assertRaisesRegex(ValueError,'uniform_study_group_wall_exceeds_attempt'):
+            prepare_cold(controls/'original-before-budget.json',controls/'profile.json',
+                reference,output,variant=3,maximum_wall_seconds=21600,
+                maximum_group_wall_seconds=21601)
+        self.assertFalse(output.exists())
