@@ -1,3 +1,13 @@
+# Карта реализации TimeLearner
+
+Актуальная сводка: [17 ноября 2026](CurrentStatus-20261117.ru.md).
+Галерея всех 64 frozen-order проб опубликована; [квитанция](FrozenOrderTemporalGalleryPublication-20261117.archive.json).
+Первая редакция [описаний Classic и Branch в DOCX](AlgorithmDescriptions/README.ru.md) готова.
+Полностью принят этап 0; этапы 1–12 остаются частичными.
+Далее сохранены датированные записи развития реализации. Их состояния
+«выполняется» и «ожидается» относятся к указанному времени; текущий статус
+определяется связанной выше сводкой и фактическими квитанциями заданий.
+
 >16.11: [исправлена предварительная проверка C-режима fixed-physics опытов](FixedPhysicsModePreflight-20261116.ru.md), M40 6/6 и независимая проверка всех архивных members на Elder. Общий C-search declaration API и C0-history сохранены. Elder A1 отказал до тестов из-за занятого единственного слота; второй запуск отложен. Это исправление script preflight, без новой научной классификации и без закрытия исходных этапов1–12.
 
 > 16.11,18:56UTC: [полный native Test по порядкам принят](FastN1FrozenOrderScientificReport-20261116.ru.md):64/64 observations, target во всех8 положениях, каждый порядок TP1/FP1/FN0/TN6; всегда отвечает phasea-row-4. Baseline waveform max difference0.0 к M40. Все native/controller/collector закрыты, primary41.66MB и provenance опубликованы. Это одна stopped-модель в reset-per-trial, не независимые Train или continuous robustness. Галерея64 ещё не принята. На M40 отдельно выполняется проверка batch model audit; новое обучение после OOM не запускалось.

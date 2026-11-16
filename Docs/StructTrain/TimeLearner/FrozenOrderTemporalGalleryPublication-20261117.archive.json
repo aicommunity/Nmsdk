@@ -1,0 +1,72 @@
+{
+  "kind": "timelearner_complete_frozen_order_temporal_gallery",
+  "schema_version": 1,
+  "renderer_job": "s11-frozen-order-report-batch-elder-a1",
+  "collector_job": "s11-frozen-order-gallery-primary-elder-a1",
+  "source_root": "48ad95433b3cea424863a7af34806f0ccb865416",
+  "renderer_controls": "7dbad823391f7f557936ff3394f98ef169fc8251",
+  "collector_controls": "5409925f37ec205ad0369a3cdfa7ef492ebdf47c",
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/02/02e964efb23914e518aa35e93fc4f427d3fe1b7d2600ab5b3a4d1f9a86a10b60",
+    "sha256": "02e964efb23914e518aa35e93fc4f427d3fe1b7d2600ab5b3a4d1f9a86a10b60",
+    "bytes": 847744948
+  },
+  "bundle_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/d6/d68919573b8ba74b614347360f5a0c6c1f27635599dc57fd88dc7ab9853951bf",
+    "sha256": "d68919573b8ba74b614347360f5a0c6c1f27635599dc57fd88dc7ab9853951bf",
+    "bytes": 7012327
+  },
+  "provenance_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/01/011167c0f96a0305b4911b24924f94ec0da2106cd27561404d13b45c303626d6",
+    "sha256": "011167c0f96a0305b4911b24924f94ec0da2106cd27561404d13b45c303626d6",
+    "bytes": 4540469
+  },
+  "representative_visual_review": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/21/219f1b3825b8b9f05bc23f31da0f9b755bf9670c0d8dda1028045c1648df01e3",
+    "sha256": "219f1b3825b8b9f05bc23f31da0f9b755bf9670c0d8dda1028045c1648df01e3",
+    "bytes": 7815
+  },
+  "bundle_members": 30973,
+  "expanded_bytes": 2904293590,
+  "gallery_files": 30920,
+  "gallery_bytes": 2902077425,
+  "cache_relative": "report-cache/2026-11-17/frozen-order-64-elder-a1",
+  "cache_entrypoint": "index.html",
+  "expected_trials": 64,
+  "baseline_trials": 8,
+  "study_trials": 56,
+  "model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+  "threshold": 0.054353792695896797,
+  "per_rotation_counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6
+  },
+  "target_positions": 8,
+  "reset_policy": "reset_per_trial",
+  "execution": "completed",
+  "validity": "valid",
+  "python_passed": 1,
+  "all_processes_closed": true,
+  "representative_review_count": 18,
+  "all_figures_manually_reviewed": false,
+  "training_completed": false,
+  "independent_evaluation": false,
+  "scientific_verdict": null,
+  "native_primary_dependency": "012b8191633c37b4062ec1a1a54aeb9af5f840dd66faabc1dba0256c38022d60",
+  "original_source_primary_dependency": "64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768",
+  "catalog_relative": "experiments/2026-11-17/fast-profile-wall-budget/frozen-order-gallery-64-elder-a1.json"
+}
