@@ -1,0 +1,118 @@
+{
+  "kind": "timelearner_common_lt_decision_report_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16T10:17:26.841Z",
+  "source_root": "9bb0b6907b17ba870c710e1bfe41cafc2b371db3",
+  "elder": {
+    "job": "s11-common-lt-reports-elder-a1",
+    "controls": "8a60e5d00cef362a4d32ab1c7ab193d997afb3df",
+    "python_passed": 11,
+    "all_processes_closed": true,
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/40/40f1f90f45c125f7e8a226ec6b1b869982738ba619ddbbda0e0522a8b1924a8a",
+      "sha256": "40f1f90f45c125f7e8a226ec6b1b869982738ba619ddbbda0e0522a8b1924a8a",
+      "bytes": 342820765
+    },
+    "cases": {
+      "fast_baseline": {
+        "cache_relative": "report-cache/2026-11-16/fast-frozen8-common-lt-elder",
+        "png_count": 936,
+        "trial_soma_pairs": 8,
+        "trial_lt_pairs": 8,
+        "threshold": 100,
+        "model_revision": "f122a9ba82c154cf28e4081fcee0ab1d3b977eaaa19ad659211a4323e6af95f6",
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0,
+          "foil_response_rate": 0
+        }
+      },
+      "psi_candidate": {
+        "cache_relative": "report-cache/2026-11-16/psi-threshold-common-lt-elder",
+        "png_count": 1122,
+        "trial_soma_pairs": 8,
+        "trial_lt_pairs": 8,
+        "threshold": 0.189057455929736,
+        "model_revision": "801fb52a215e76151be469804f0612e18e4cdfa6e6d8163c03c669233bee7ef4",
+        "counts": {
+          "TP": 1,
+          "FP": 6,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.25,
+          "target_hit_rate": 1,
+          "foil_response_rate": 0.8571428571428571
+        }
+      }
+    }
+  },
+  "m40": {
+    "job": "s11-fast-bracket-threshold-common-report-m40-a1",
+    "controls": "78db055b2b053e1d8b3fce7469a0eef82e940d7f",
+    "python_passed": 1,
+    "all_processes_closed": true,
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b2/b2d4626203d9b803a67f45202636f01f5ac1fd5c87244f89073dcb23031642ba",
+      "sha256": "b2d4626203d9b803a67f45202636f01f5ac1fd5c87244f89073dcb23031642ba",
+      "bytes": 164815385
+    },
+    "cases": {
+      "fast_candidate": {
+        "cache_relative": "report-cache/2026-11-16/fast-threshold-common-m40",
+        "png_count": 983,
+        "trial_soma_pairs": 8,
+        "trial_lt_pairs": 8,
+        "threshold": 0.0560090535350351,
+        "model_revision": "d0977f960a87ae75f0f8df77f197392783cec68c7ab56ce696c4b3adf4ba07aa",
+        "counts": {
+          "TP": 1,
+          "FP": 3,
+          "FN": 0,
+          "TN": 4,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.625,
+          "target_hit_rate": 1,
+          "foil_response_rate": 0.42857142857142855
+        }
+      }
+    }
+  },
+  "manual_review": {
+    "catalog": "experiments/2026-11-16/fast-profile-wall-budget/common-lt-manual-review-a1.json",
+    "sha256": "2f331f5fff8a51b44a108ade1ea3b5e95e2ece6868d3acd3dcba5ea4c88b097c",
+    "bytes": 49136,
+    "reviewed_original_png_count": 38,
+    "fast_baseline_lt": 16,
+    "fast_candidate_soma_lt": 18,
+    "psi_candidate_lt": 4,
+    "full_gallery_manually_reviewed": false,
+    "previous_baseline_soma_png_byte_identical": 432
+  },
+  "production_channel_coverage_accepted": true,
+  "positive_fast_crest_readability_accepted": false,
+  "pending_source": "b9dcab0c98aac443ed1e0b2dcde3f31a22ebade9",
+  "pending_job": "s11-fast-threshold-positive-report-m40-a1",
+  "pending_controls": "d0e8c57d59f9413a4bc82e10f466ab89570826aa",
+  "full_temporal_protocol_accepted": false,
+  "native_model_changed": false,
+  "scientific_metrics_changed": false,
+  "whole_plan_complete": false
+}
