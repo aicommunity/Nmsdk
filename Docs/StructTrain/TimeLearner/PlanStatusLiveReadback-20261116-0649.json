@@ -1,0 +1,94 @@
+{
+  "kind": "timelearner_live_plan_status_readback",
+  "schema_version": 1,
+  "observed_utc": "2026-11-16T06:49:40Z",
+  "accepted_develop": "9caf262c7461af76e5d29325401bc35fa4eec1c4",
+  "goal": "active",
+  "completed_original_stages": [
+    0
+  ],
+  "partial_original_stages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "source": "read-only owned-unit inspection on M40 through jump .12",
+  "jobs": [
+    {
+      "job": "s11-fast-bracket-frozen-m40-a2",
+      "units": [
+        {
+          "directory": "worker/tmp/coupled-stopped-matrix/run/process/contained",
+          "execution": "running",
+          "closed": false,
+          "pid": 912133,
+          "proc_present": true
+        },
+        {
+          "directory": "process/contained",
+          "execution": "running",
+          "closed": false,
+          "pid": 866525,
+          "proc_present": true
+        }
+      ],
+      "png_count": 0,
+      "packed_primary": false
+    },
+    {
+      "job": "s11-fast-bracket-current-report-m40-a1",
+      "units": [
+        {
+          "directory": "process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 830972,
+          "proc_present": false
+        }
+      ],
+      "worker/terminal.json": {
+        "operation_passed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      },
+      "png_count": 28,
+      "packed_primary": false
+    },
+    {
+      "job": "s11-fast-bracket-primary-m40-a1",
+      "units": [
+        {
+          "directory": "process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 847937,
+          "proc_present": false
+        }
+      ],
+      "worker/terminal.json": {
+        "operation_passed": true
+      },
+      "png_count": 0,
+      "packed_primary": true
+    }
+  ],
+  "fast_primary_sha256": "2f2594cf1180250508dc02c8f9474333f4fad14ca1a52a324f49fac2c9a110b5",
+  "fast_report_sha256": "85b31fa49497c438b9828688d282a63bde78b73fa01712655ac02b0ce93873c5",
+  "fast_review_catalog_sha256": "3671c55416ed62e8fcbdb1d34f6d860defec5fabd30bb607a36ffefc17116d63",
+  "classification_of_fast_pair_assessed": false,
+  "whole_plan_complete": false
+}
