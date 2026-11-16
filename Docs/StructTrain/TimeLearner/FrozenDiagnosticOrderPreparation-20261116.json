@@ -1,0 +1,56 @@
+{
+  "kind": "timelearner_frozen_diagnostic_order_preparation",
+  "schema_version": 1,
+  "source_root": "ce6fc73a6bec591b3b3203904322d9315702bfc0",
+  "branch": "codex/timelearner-frozen-diagnostic-order",
+  "contract_job": "s11-frozen-order-contract-elder-a1",
+  "contract_controls": "967f865e5d2e957f58b070428a38fc439c2d17eb",
+  "contract_passed": 5,
+  "contract_all_processes_closed": true,
+  "contract_proof": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/79/79ffdeb5995646152a7b174b84716108a7de59950c8dcb619757cf85e67bb80b",
+    "sha256": "79ffdeb5995646152a7b174b84716108a7de59950c8dcb619757cf85e67bb80b",
+    "bytes": 268732
+  },
+  "expected_model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+  "fixed_threshold": 0.054353792695896797,
+  "expected_trials": 64,
+  "rotations": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "reset_policy": "reset_per_trial",
+  "baseline_sample_absolute_tolerance": 1e-10,
+  "source_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/64/64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768",
+    "sha256": "64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768",
+    "bytes": 58742968
+  },
+  "runtime_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/7e/7ecf6ff9058fc7afcde2b23b7761f224e69196c7ecc82f8f3130a3f0b6f6cb60",
+    "sha256": "7ecf6ff9058fc7afcde2b23b7761f224e69196c7ecc82f8f3130a3f0b6f6cb60",
+    "bytes": 12121
+  },
+  "runtime_fingerprint": "f9f50022feeddca391b4bbb9d1ea0e7dfb4dd4dc69fb86b4052eec2ab1705b57",
+  "native_execution_performed": false,
+  "native64_acceptance_complete": false,
+  "independent_trainings": 0,
+  "independent_evaluation": false,
+  "scientific_verdict": null,
+  "scope": "Preparation/contract acceptance only; new native module remains feature branch pending actual same-order control and order study. Source was delivered by Git bundle; current running independent DATA replay is not new model execution."
+}
