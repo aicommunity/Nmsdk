@@ -24,7 +24,7 @@ Branch N4/N1, штатный TLNativeFast3F2000_Neuron: C2.5e-10F, DissociationT
 
 Для состояний с полным валидным экспортом выполнить frozen8 и реальную проверку объявленного порога по отдельному протоколу; незавершённый Train маркировать diagnostic. Временные отчёты должны показывать потенциал сомы, фактические входные импульсы, omission controls для Train и все предъявленные паттерны Test, с читаемым native zoom. Полные данные/галереи сохраняются в /media/user/Data/Nmsdk-StructTrainExpArchive; Git содержит компактные refs.
 
-Начальный статус: протокол подготовлен; новые расчёты ещё не выполнены. Полный план остаётся активным.
+Начальный статус при объявлении: протокол подготовлен; новые расчёты ещё не выполнены. Обновление16.11: current-wall3600 завершён completed/valid, validation1/1, budget_exhausted без общего сертификата; current-wall7200 подтверждён работающим. Итоговое сравнение пары и публикация её primary ещё открыты. Полный план остаётся активным.
 
 ## Production подготовка следующего запуска
 
@@ -35,3 +35,5 @@ python -m Scripts.StructTrain.TimeLearner.uniform_profile_study prepare-cold ORI
 ```
 
 Команда проверяет подпись исходного job, класс и протокол reference-пакета, полный DATA audit координат, допустимость явного wall budget и неизменность входов. Она создаёт original-before-budget.json, original.json, profile.json, job.json, declaration.json, reference-characterization.json и preparation.json. Runtime, ожидаемый cold graph, controller и output выполнения привязываются отдельно штатным runner. Команда не рассчитывает модель, не импортирует амплитуды или обученные параметры и не выдаёт сертификат. Совпадение с обоими уже объявленными actual cold jobs проверяется на сервере через production CLI; чужой профиль/target, NaN budget, повторная запись и запись внутрь reference tree должны отказываться до изменения входных данных.
+
+Production проверка завершена на M40:3/3, все процессы закрыты, source f536c275e331af132384f364e4a3cb2edd6c0357. Обе sealed декларации3600/7200 воспроизведены точно по всем полям job/profile/original и декларации за исключением отдельно привязываемых controller/output. Проверены реальные reference JSON/CSV и отказы для foreign Stock profile, changed target, NaN/zero/bool wall budget, существующего output и output внутри reference tree. [Квитанция](ColdPreparationCliAcceptance-20261116.json):60 evidence files/417736B compressed во внешнем архиве. Это приёмка подготовки Fast3 N4/N1, без нового native Train, изменения математического алгоритма или завершения всего этапа9.
