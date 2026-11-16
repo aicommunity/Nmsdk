@@ -1,0 +1,179 @@
+{
+  "kind": "timelearner_fast_full_training_elder_native_repeat_readback",
+  "schema_version": 1,
+  "observed_utc": "2026-11-16T15:54:33Z",
+  "job": "s11-frozen-order-native-elder-a2",
+  "source_root": "ce6fc73a6bec591b3b3203904322d9315702bfc0",
+  "controls": "6430e0b7434d0b83f3698d1c53b233793a6a55e6",
+  "runtime_fingerprint": "f9f50022feeddca391b4bbb9d1ea0e7dfb4dd4dc69fb86b4052eec2ab1705b57",
+  "phase": "baseline",
+  "phase_execution": "completed",
+  "phase_validity": "valid",
+  "phase_processes_closed": true,
+  "phase_trials": 8,
+  "source_model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+  "effective_threshold": 0.054353792695896797,
+  "counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 1,
+    "foil_response_rate": 0.14285714285714285
+  },
+  "baseline_sample_absolute_tolerance": 1e-10,
+  "baseline_maximum_sample_absolute_difference": 0,
+  "comparison_scope": "Every recorded field at all 4001 samples of each of the eight complete native observations; no decimation.",
+  "rows": [
+    {
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "samples": 4001,
+      "maximum_sample_absolute_difference": 0,
+      "complete": true,
+      "valid": true,
+      "spike_times": [
+        0.493
+      ],
+      "stimulus_times": [
+        0.01,
+        0.09,
+        0.25,
+        0.49
+      ]
+    },
+    {
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "samples": 4001,
+      "maximum_sample_absolute_difference": 0,
+      "complete": true,
+      "valid": true,
+      "spike_times": [],
+      "stimulus_times": [
+        2.0105,
+        2.2505,
+        2.4105,
+        2.4905
+      ]
+    },
+    {
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "samples": 4001,
+      "maximum_sample_absolute_difference": 0,
+      "complete": true,
+      "valid": true,
+      "spike_times": [],
+      "stimulus_times": [
+        4.011,
+        4.171,
+        4.251,
+        4.491
+      ]
+    },
+    {
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "samples": 4001,
+      "maximum_sample_absolute_difference": 0,
+      "complete": true,
+      "valid": true,
+      "spike_times": [],
+      "stimulus_times": [
+        6.0115,
+        6.1715,
+        6.3315,
+        6.4915
+      ]
+    },
+    {
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "samples": 4001,
+      "maximum_sample_absolute_difference": 0,
+      "complete": true,
+      "valid": true,
+      "spike_times": [
+        8.253
+      ],
+      "stimulus_times": [
+        8.012,
+        8.032,
+        8.252,
+        8.492
+      ]
+    },
+    {
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "samples": 4001,
+      "maximum_sample_absolute_difference": 0,
+      "complete": true,
+      "valid": true,
+      "spike_times": [],
+      "stimulus_times": [
+        10.0125,
+        10.2525,
+        10.4725,
+        10.4925
+      ]
+    },
+    {
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "samples": 4001,
+      "maximum_sample_absolute_difference": 0,
+      "complete": true,
+      "valid": true,
+      "spike_times": [],
+      "stimulus_times": [
+        12.013,
+        12.053,
+        12.093,
+        12.493
+      ]
+    },
+    {
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "samples": 4001,
+      "maximum_sample_absolute_difference": 0,
+      "complete": true,
+      "valid": true,
+      "spike_times": [],
+      "stimulus_times": [
+        14.0135,
+        14.4135,
+        14.4535,
+        14.4935
+      ]
+    }
+  ],
+  "proof": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/66/66da4d9dae94076fc185ac3f45edd451378c9e0294ea7c504b9918f45a835843",
+    "sha256": "66da4d9dae94076fc185ac3f45edd451378c9e0294ea7c504b9918f45a835843",
+    "bytes": 12395
+  },
+  "proof_catalog": "experiments/2026-11-16/fast-profile-wall-budget/frozen-order-native-elder-a2-baseline8-readback.json",
+  "proof_verified_from_m40_archive": true,
+  "source_primary_sha256": "64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768",
+  "parent_job_execution_at_readback": "running",
+  "parent_job_all_processes_closed": false,
+  "full64_control_accepted": false,
+  "study_expected_trials": 56,
+  "full_cohort_expected_trials": 64,
+  "complete_native_primary_publication_pending": true,
+  "independent_trainings": 0,
+  "training_completed": false,
+  "independent_evaluation": false,
+  "calibration_performed": false,
+  "scientific_verdict": null
+}
