@@ -1,0 +1,141 @@
+{
+  "kind": "timelearner_fast_groupwall600_oom_primary",
+  "schema_version": 1,
+  "job": "s11-fast-bracket-groupwall600-m40-a1",
+  "source_root": "6e72f24b408d8a45dc31798769c123bbdf071b7d",
+  "train_controls": "d54c51feec61d27b6b693ea1d8764e3df240ee0a",
+  "collector_controls": "f5db4203541daa60fddf3ca3f58bc36924b64d6f",
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/3c/3c7347518df5fb13f1c90ed1e063531d0a5561e195f0bdb7a3d49db2eca499a7",
+    "sha256": "3c7347518df5fb13f1c90ed1e063531d0a5561e195f0bdb7a3d49db2eca499a7",
+    "bytes": 8223128
+  },
+  "bundle_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/1f/1f093aff4360f1061268b7e998d5b6b8504de4fdd70cde21fa66b79fc896b253",
+    "sha256": "1f093aff4360f1061268b7e998d5b6b8504de4fdd70cde21fa66b79fc896b253",
+    "bytes": 337390
+  },
+  "provenance_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/89/898005339255185bb70748c6f380eb2066e4cd0609529934717376a9b52626ed",
+    "sha256": "898005339255185bb70748c6f380eb2066e4cd0609529934717376a9b52626ed",
+    "bytes": 444118
+  },
+  "bundle_members": 1623,
+  "expanded_bytes": 122695437,
+  "unique_content_bytes": 120007152,
+  "all_processes_closed": true,
+  "execution": "process_error",
+  "validity": "unverified_execution",
+  "native_returncode": -9,
+  "wall_seconds": 21793.547348385677,
+  "kernel_result": "oom-kill",
+  "native_limits": {
+    "unit": "timelearner-c411fab5-3ed3-4505-9c3b-d474a15cca6e.service",
+    "invocation_id": "3e5d5191f5ed432899f8e825792e2ac2",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c411fab5-3ed3-4505-9c3b-d474a15cca6e.service",
+    "memory.max": "4294967296",
+    "memory.swap.max": "0",
+    "pids.max": "64",
+    "cgroup.events": "populated 1\nfrozen 0\n",
+    "initial_members": [
+      2822759
+    ],
+    "systemd": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "2822759",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c411fab5-3ed3-4505-9c3b-d474a15cca6e.service",
+      "MemoryMax": "4294967296",
+      "TasksMax": "64",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt c411fab5-3ed3-4505-9c3b-d474a15cca6e",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "3e5d5191f5ed432899f8e825792e2ac2"
+    }
+  },
+  "raw_trial_count": 759,
+  "raw_observation_counts": {
+    "complete": 758,
+    "valid": 758,
+    "incomplete": 1,
+    "invalid": 1
+  },
+  "raw_inputs": {
+    "input0": 6,
+    "input1": 228,
+    "input3": 375,
+    "input2": 150
+  },
+  "last_raw_trials": [
+    {
+      "file": "train_stopped_trial_754.json",
+      "input_id": "input1",
+      "model_epoch": 59,
+      "base_model_revision": "0d43a3717901b6d06dd9f1a6347ec1c7aa3515978c3ce4bf9f3b3e95ca11886f",
+      "complete": true,
+      "valid": true
+    },
+    {
+      "file": "train_stopped_trial_755.json",
+      "input_id": "input1",
+      "model_epoch": 59,
+      "base_model_revision": "0d43a3717901b6d06dd9f1a6347ec1c7aa3515978c3ce4bf9f3b3e95ca11886f",
+      "complete": true,
+      "valid": true
+    },
+    {
+      "file": "train_stopped_trial_756.json",
+      "input_id": "input1",
+      "model_epoch": 59,
+      "base_model_revision": "0d43a3717901b6d06dd9f1a6347ec1c7aa3515978c3ce4bf9f3b3e95ca11886f",
+      "complete": true,
+      "valid": true
+    },
+    {
+      "file": "train_stopped_trial_757.json",
+      "input_id": "input3",
+      "model_epoch": 60,
+      "base_model_revision": "8a3e94fcb422ad4fb364af2b28c5f14e1c8dfd65df6d49844cfdb7070917ee2a",
+      "complete": true,
+      "valid": true
+    },
+    {
+      "file": "train_stopped_trial_758.json",
+      "input_id": "input3",
+      "model_epoch": 60,
+      "base_model_revision": "8a3e94fcb422ad4fb364af2b28c5f14e1c8dfd65df6d49844cfdb7070917ee2a",
+      "complete": true,
+      "valid": true
+    },
+    {
+      "file": "train_stopped_trial_759.json",
+      "input_id": "input3",
+      "model_epoch": 60,
+      "base_model_revision": "8a3e94fcb422ad4fb364af2b28c5f14e1c8dfd65df6d49844cfdb7070917ee2a",
+      "complete": false,
+      "valid": false
+    }
+  ],
+  "final_model_saved": false,
+  "scalar_trace_saved": false,
+  "training_outcome": null,
+  "training_completed": false,
+  "classification_assessed": false,
+  "scientific_verdict": null,
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-16/fast-profile-wall-budget/groupwall600-oom-primary-a1.json"
+}
