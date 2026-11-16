@@ -74,7 +74,7 @@
     "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-16/n1-moderate-recovery/validation-m40.json"
   },
   "cold_train": {
-    "execution": "running_at_last_observation",
+    "execution": "completed",
     "job": "s11-uniform-profile0-N1-moderate-train-m40-a1",
     "worker": "M40",
     "host": "10.245.1.17",
@@ -87,18 +87,59 @@
     "requires_native_candidate_154_and_whole_closure": true,
     "prelaunch_guard_passed": true,
     "last_observed": {
-      "variant": 0,
-      "attempt": 1,
-      "outer_execution": "running",
-      "outer_closed": false,
-      "child_execution": "running",
-      "child_closed": false,
-      "native_cpu_seconds": 759.31,
-      "native_wall_seconds": 733.1400000001304
-    }
+      "outer_closed": true,
+      "child_closed": true,
+      "outcome": "invalid_observation",
+      "reason": "rejected_candidate_window:ambiguous"
+    },
+    "data_validity": "valid",
+    "operation_passed": true,
+    "all_processes_closed": true,
+    "physical_audit": {
+      "kind": "timelearner_uniform_profile_physics_audit",
+      "schema_version": 1,
+      "membranes_checked": {
+        "initial": 2,
+        "final": 37
+      },
+      "frequency_hz": "2000",
+      "uniform_physics_preserved": true,
+      "positive_individual_resistances_allowed": true,
+      "threshold_and_feedback_preserved": true,
+      "native_execution_verified": false,
+      "training_certificate_verified": false,
+      "scientific_verdict": null
+    },
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/6f/6fa09bc272a4c95a53745c49c37964985d7c00a01109d6f980e822539290c268",
+      "sha256": "6fa09bc272a4c95a53745c49c37964985d7c00a01109d6f980e822539290c268",
+      "bytes": 52691387
+    },
+    "certificate": null,
+    "scalar_candidates": 22,
+    "scalar_prefix_exact": 22,
+    "new_valid_input1_scalars": 0,
+    "all_native_groups_complete": true
   },
   "scientific_verdict": null,
   "whole_plan_complete": false,
   "stage7_complete": false,
-  "observed_at_utc": "2026-11-15T23:49:37.046Z"
+  "observed_at_utc": "2026-11-16T00:17:11.328Z",
+  "followup_jobs": [
+    {
+      "job": "s11-stock-N1-moderate-report-m40-a1",
+      "role": "read_only_all_rejected_groups_temporal_report",
+      "control_commit": "74233b860980f88e5985bc1ad5c7a7140b2583ef",
+      "execution": "running_at_last_observation"
+    },
+    {
+      "job": "s11-n1-moderate-frozen-m40-a1",
+      "role": "stopped_state_eight_pattern_diagnostic_threshold100",
+      "control_commit": "db54230ffd62e869fe3a6ac388fea9532a983a28",
+      "execution": "running_at_last_observation"
+    }
+  ]
 }

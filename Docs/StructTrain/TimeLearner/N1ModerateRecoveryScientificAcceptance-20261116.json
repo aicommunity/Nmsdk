@@ -1,0 +1,282 @@
+{
+  "kind": "timelearner_n1_moderate_recovery_scientific_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "baseline": {
+    "job": "s11-uniform-profile0-N1-recovery-train-m40-a1",
+    "root": "860ee87057196f0afb5b3a98cbd0bdacf378543a",
+    "pulse": "42e35b63b6c25f59629f0436b9476a35d20cb2c4",
+    "outcome": "budget_exhausted",
+    "reason": "native_composite_group_time_budget_exhausted"
+  },
+  "candidate": {
+    "job": "s11-uniform-profile0-N1-moderate-train-m40-a1",
+    "runtime_root": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+    "pulse": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7",
+    "producer_root": "bfbd0952478b3397a221ae1258a447a22842b0f9",
+    "controls": "8cb59fa30209ed8012eb4decfe1a3b6aecbd7779",
+    "condition_fingerprint": "1baf836d088cf7e5f52b55a96cb8867c38f7b39713a9c5b802f4ce1502ffc857",
+    "execution": "completed",
+    "data_validity": "valid",
+    "physical_audit": {
+      "kind": "timelearner_uniform_profile_physics_audit",
+      "schema_version": 1,
+      "membranes_checked": {
+        "initial": 2,
+        "final": 37
+      },
+      "frequency_hz": "2000",
+      "uniform_physics_preserved": true,
+      "positive_individual_resistances_allowed": true,
+      "threshold_and_feedback_preserved": true,
+      "native_execution_verified": false,
+      "training_certificate_verified": false,
+      "scientific_verdict": null
+    },
+    "all_processes_closed": true,
+    "summary": {
+      "outcome": "invalid_observation",
+      "reason": "rejected_candidate_window:ambiguous",
+      "certificate": null,
+      "search_probes": 54,
+      "applied_edits": 25,
+      "actual_parameters": [
+        {
+          "length": 36,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 35,
+          "resistance": 2880071.5552629367,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 21232304.307596028,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "accepted_parameters": [
+        {
+          "length": 36,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 35,
+          "resistance": 2880071.5552629367,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 21232304.307596028,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "composite_counters": {
+        "archive": {
+          "groups": 58,
+          "native_probes": 348,
+          "primary_bytes": 51355521,
+          "sampled_frames": 1253148
+        },
+        "attempt": {
+          "logical_groups": 58,
+          "native_probes": 348,
+          "sampled_frames": 1253148
+        }
+      }
+    },
+    "terminal_model_revision": "6e683576e788844dff0f9c8f0b1e6e8b4cfc358a37deeebebc1e0d7770e2c04e",
+    "terminal_allocated_cable_length": 36,
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/6f/6fa09bc272a4c95a53745c49c37964985d7c00a01109d6f980e822539290c268",
+      "sha256": "6fa09bc272a4c95a53745c49c37964985d7c00a01109d6f980e822539290c268",
+      "bytes": 52691387
+    },
+    "catalog_relative": "experiments/2026-11-16/n1-moderate-recovery/stock-N1-moderate-train-a1.json",
+    "archived_regular_files": 1221
+  },
+  "same_complete_job_except_run_id": true,
+  "tolerances_and_budgets_unchanged": true,
+  "scalar_prefix_compared_fields": [
+    "input_index",
+    "full_parameters",
+    "parameters",
+    "amplitude_residual",
+    "timing_low",
+    "timing_high",
+    "within_amplitude",
+    "within_timing"
+  ],
+  "scalar_prefix_exact": 22,
+  "new_valid_input1_scalars": 0,
+  "recovery_groups": [
+    {
+      "ordinal": 50,
+      "parameters": [
+        {
+          "length": 28,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 28,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 21232304.307596028,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "complete_group": true,
+      "measurement_validity": "ambiguous",
+      "diagnostic_full_burst_maximum": 0.005413386882249571,
+      "necessary_inputs_for_first_maximum": []
+    },
+    {
+      "ordinal": 52,
+      "parameters": [
+        {
+          "length": 29,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 28,
+          "resistance": 2880071.5552629367,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 21232304.307596028,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "complete_group": true,
+      "measurement_validity": "ambiguous",
+      "diagnostic_full_burst_maximum": 0.11763959387685874,
+      "necessary_inputs_for_first_maximum": []
+    },
+    {
+      "ordinal": 54,
+      "parameters": [
+        {
+          "length": 57,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 56,
+          "resistance": 2880071.5552629367,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 21232304.307596028,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "complete_group": true,
+      "measurement_validity": "ambiguous",
+      "diagnostic_full_burst_maximum": 0.09676991431500637,
+      "necessary_inputs_for_first_maximum": []
+    },
+    {
+      "ordinal": 56,
+      "parameters": [
+        {
+          "length": 43,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 42,
+          "resistance": 2880071.5552629367,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 21232304.307596028,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "complete_group": true,
+      "measurement_validity": "ambiguous",
+      "diagnostic_full_burst_maximum": 0.10581200071436248,
+      "necessary_inputs_for_first_maximum": []
+    },
+    {
+      "ordinal": 58,
+      "parameters": [
+        {
+          "length": 36,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 35,
+          "resistance": 2880071.5552629367,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 21232304.307596028,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "complete_group": true,
+      "measurement_validity": "ambiguous",
+      "diagnostic_full_burst_maximum": 0.11139957327247918,
+      "necessary_inputs_for_first_maximum": []
+    }
+  ],
+  "all_candidate_native_groups_complete": true,
+  "training_certificate": null,
+  "classification_assessed": false,
+  "scientific_verdict": null,
+  "stage7_complete": false,
+  "whole_plan_complete": false,
+  "next_policy": "No further unmeasured length-order heuristic for this unchanged protocol. Evaluate the actual stopped state diagnostically, then preflight an explicit inhibition/physics intervention with fresh references and unchanged tolerances."
+}
