@@ -381,5 +381,26 @@
     "Only rotation0 and reset-per-trial tested; order/ITI/continuous not established.",
     "One of seven foils spikes before its last input; two total positive responses include one false positive.",
     "Comparison with terminal7200 uses separately declared thresholds and is not a fixed-threshold causal A/B."
-  ]
+  ],
+  "independent_primary_replay": {
+    "job": "s11-fast-full-threshold-primary-replay-elder-a2",
+    "source_root": "ce6fc73a6bec591b3b3203904322d9315702bfc0",
+    "controls": "00804fbb46ba9d9a8530817120614e84c2c70993",
+    "python_passed": 1,
+    "all_processes_closed": true,
+    "restored_logical_members": 1423,
+    "retained_regular_files": 1420,
+    "omitted_proven_duplicate_aliases": 3,
+    "original_baseline_waveforms_checked": true,
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ea/eaa45e4ac85c88bb0184d35f8fcd2f44ba790aeaa4eac1a0a29135716c5542d1",
+      "sha256": "eaa45e4ac85c88bb0184d35f8fcd2f44ba790aeaa4eac1a0a29135716c5542d1",
+      "bytes": 362966
+    },
+    "new_native_execution": false,
+    "independent_evaluation": false
+  }
 }

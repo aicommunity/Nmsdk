@@ -21,7 +21,7 @@
 
 Потенциалы — native model units, SI не подтверждена. Target maximum0.4935с идёт на3.5мс после последнего фактического входа0.49с. У прежнего terminal7200 наибольшая target вершина была до последнего входа. В этой новой nonspiking матрице один foil(row4) выше target, peak margin−0.016231714784472495. Это характеристика записанного потенциала, не подмена настоящего spiking Test. [Числа, actual timestamps, SHA исходных наблюдений и внешняя квитанция](FastN1FullTrainingNonspikingDiagnostics-20261116.json).
 
-Нет также early/late событий. Accuracy7/8 отражает только преобладание отрицательных примеров; target hit rate0. Все фактические входы и полные waveforms сохранены. Прежние Fast TP1/FP3 относятся к другой terminal7200 модели и не переносятся на эту структуру.
+В baseline100 спайковых событий нет. Accuracy7/8 отражает только преобладание отрицательных примеров; target hit rate0. Все фактические входы и полные waveforms сохранены. Прежние Fast TP1/FP3 относятся к другой terminal7200 модели и не переносятся на эту структуру.
 
 ## Один объявленный порог и визуальная проверка
 
@@ -73,3 +73,9 @@ Elder независимо восстановил все489 logical members:488 
 |phasea-row-7|нет|TN|[полный](//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/fast-full-training-threshold-m40/trial-0007-soma-001/overview.png)|[деталь](//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/fast-full-training-threshold-m40/trial-0007-lt-decision/measured-peak-01394-detail.png)|
 
 [Полная actual candidate галерея](//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/fast-full-training-threshold-m40/index.html). Первичные данные двух native серий и исходного frozen run:58,742,968байт XZ/1423 logical members, SHA25664c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768. Полный report archive216,794,682байт/3925files, SHA256d80b314db15863c383c27e120c85851d176849fdaae027f2f881149a99448b9b. Все тяжёлые объекты вне Git; exact refs и provenance приведены в квитанции.
+
+## Независимая проверка primary и следующий опыт
+
+Elder A2 независимо восстановил все1423 logical members complete threshold primary; retained1420 regular files после исключения трёх доказанных content-duplicate glog aliases. Production audit/scorer завершён1/1, процессы закрыты. Метрики baseline100 и candidate совпали полностью; все исходные и повторные baseline native waveforms сравнены напрямую и равны. [Квитанция и exact external refs](FastN1FullTrainingThresholdIndependentReplayAcceptance-20261116.json). Это проверка тех же данных, а не новая scientific partition или новое исполнение модели.
+
+[Новый протокол64 на Elder запущен как A2](FrozenDiagnosticOrderLaunch-20261116.ru.md): сначала реальный same-order control8 с теми же model/threshold, затем56 cyclic-order probes. Его actual результаты ещё неизвестны. A1 отказал до первого native процесса из-за ошибочного orchestration kind; исходный отказ сохранён, A2 использует штатный in-process controller mode.

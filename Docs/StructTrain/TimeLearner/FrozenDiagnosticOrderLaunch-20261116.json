@@ -1,0 +1,107 @@
+{
+  "kind": "timelearner_frozen_diagnostic_order_native_launch",
+  "schema_version": 1,
+  "observed_utc": "2026-11-16T14:18:01Z",
+  "job": "s11-frozen-order-native-elder-a2",
+  "worker": "Elder-1",
+  "source_root": "ce6fc73a6bec591b3b3203904322d9315702bfc0",
+  "controls": "6430e0b7434d0b83f3698d1c53b233793a6a55e6",
+  "operation_kind": "python-controller-validation",
+  "owned_pid": 2352165,
+  "execution": "running",
+  "all_processes_closed": false,
+  "expected_trials": 64,
+  "baseline_trials": 8,
+  "study_trials": 56,
+  "rotations": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "source_model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+  "threshold": 0.054353792695896797,
+  "baseline_sample_absolute_tolerance": 1e-10,
+  "reset_policy": "reset_per_trial",
+  "duration_per_trial_seconds": 2,
+  "runtime_fingerprint": "f9f50022feeddca391b4bbb9d1ea0e7dfb4dd4dc69fb86b4052eec2ab1705b57",
+  "runtime_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/7e/7ecf6ff9058fc7afcde2b23b7761f224e69196c7ecc82f8f3130a3f0b6f6cb60",
+    "sha256": "7ecf6ff9058fc7afcde2b23b7761f224e69196c7ecc82f8f3130a3f0b6f6cb60",
+    "bytes": 12121
+  },
+  "declaration_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/95/95ec720ba2820535331efa6b29653ad3c4f3b70e448bd4904ba84c18ef84034f",
+    "sha256": "95ec720ba2820535331efa6b29653ad3c4f3b70e448bd4904ba84c18ef84034f",
+    "bytes": 49188
+  },
+  "declaration_catalog": "experiments/2026-11-16/fast-profile-wall-budget/frozen-order-native-elder-a2-declaration.json",
+  "maximum_wall_seconds": 32400,
+  "baseline_native_wall_seconds": 3600,
+  "study_native_wall_seconds": 21600,
+  "memory_bytes": 8589934592,
+  "maximum_output_bytes": 4831838208,
+  "minimum_free_bytes": 8589934592,
+  "fixtures": {
+    "TIMELEARNER_FROZEN_ORDER_SOURCE": {
+      "pattern": "**/*.json",
+      "files": 35,
+      "fingerprint": "4e38635cde8f7d77c66b854ce512cf0ef7b551900756cad92c4a51045b62e5e0"
+    },
+    "TIMELEARNER_FROZEN_ORDER_CONTROLS": {
+      "pattern": "**/*.json",
+      "files": 3,
+      "fingerprint": "9fba246468e58a045c483778b954006edf9f05f36005d918e9830336a8057374"
+    }
+  },
+  "source_data_replay": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/ea/eaa45e4ac85c88bb0184d35f8fcd2f44ba790aeaa4eac1a0a29135716c5542d1",
+    "sha256": "eaa45e4ac85c88bb0184d35f8fcd2f44ba790aeaa4eac1a0a29135716c5542d1",
+    "bytes": 362966
+  },
+  "source_selection": {
+    "selected_source": "/home/user/timelearner-refactor/requests/frozen-order-native-a1/source-candidate",
+    "selected_files": 443,
+    "selected_bytes": 1539995801,
+    "removed_verified_reconstructible_cache_files": 977,
+    "removed_verified_reconstructible_cache_bytes": 3609782276,
+    "free_disk_bytes": 14229520384
+  },
+  "prior_attempt": {
+    "job": "s11-frozen-order-native-elder-a1",
+    "controls": "c7d3827f2828821431475e35234e021525efd8cd",
+    "all_processes_closed": true,
+    "operation_passed": false,
+    "reason": "frozen_order_owned_controller_required",
+    "wrong_kind": "python-validation",
+    "required_kind": "python-controller-validation",
+    "native_processes_started": 0,
+    "classification_assessed": false,
+    "proof": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/6a/6a81de08ea40d3c27809e51e5e010cde7aa04cc04f07663f4b9f0a001d308438",
+      "sha256": "6a81de08ea40d3c27809e51e5e010cde7aa04cc04f07663f4b9f0a001d308438",
+      "bytes": 297549
+    },
+    "external_catalog": "experiments/2026-11-16/fast-profile-wall-budget/frozen-order-native-elder-a1-failed-declaration.json"
+  },
+  "native64_acceptance_complete": false,
+  "training_completed": false,
+  "independent_evaluation": false,
+  "scientific_verdict": null
+}
