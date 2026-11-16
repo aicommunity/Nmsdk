@@ -1,0 +1,102 @@
+{
+  "kind": "timelearner_independent_PSI_actual_threshold_primary_replay_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "job": "s11-psi-threshold-primary-replay-elder-a1",
+  "source_root": "808096f8dba7eecc0bbfa098131315f6d5fe9eec",
+  "controls": "1808b438cb4a064526e6f8ad024d689d07b5389e",
+  "execution": "completed",
+  "all_processes_closed": true,
+  "python_passed": 1,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/b7/b7c64c903e7b22d43398539f9b9aeaf20d523b0b6b307e38b59c6796382e342b",
+    "sha256": "b7c64c903e7b22d43398539f9b9aeaf20d523b0b6b307e38b59c6796382e342b",
+    "bytes": 319025
+  },
+  "evidence_files": 49,
+  "source_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/81/81d606dd30443d398633c34947d8fc59dce3a4abd4c8ac566d46ffd9201281ed",
+    "sha256": "81d606dd30443d398633c34947d8fc59dce3a4abd4c8ac566d46ffd9201281ed",
+    "bytes": 69650908
+  },
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "81d606dd30443d398633c34947d8fc59dce3a4abd4c8ac566d46ffd9201281ed",
+    "archive_members_verified": 804,
+    "retained_regular_files": 802,
+    "compatibility": "dereferenced-glog-aliases-v1",
+    "omitted_redundant_aliases": [
+      {
+        "omitted_alias": "threshold/worker/tmp/threshold-study/runs/baseline100/native.events-log/EventsLog/NeuroModeler.INFO",
+        "retained_target": "threshold/worker/tmp/threshold-study/runs/baseline100/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261116-072433.4086384",
+        "bytes": 291,
+        "sha256": "0337403e7a82eceeb50544a72f9bda2a89aeaecad59002566791f82321131f63",
+        "owner_pid": 4086384,
+        "original_symlink_target_attested": false
+      },
+      {
+        "omitted_alias": "threshold/worker/tmp/threshold-study/runs/candidate/native.events-log/EventsLog/NeuroModeler.INFO",
+        "retained_target": "threshold/worker/tmp/threshold-study/runs/candidate/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261116-074333.108030",
+        "bytes": 290,
+        "sha256": "94ee486d4420914bbb717c32e8335c07aa9a421c7624b748fbf013a38a6be572",
+        "owner_pid": 108030,
+        "original_symlink_target_attested": false
+      }
+    ],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "actual_series": [
+    {
+      "name": "baseline100",
+      "model_revision": "21f992b5244b7ee673303d7d3b5fc98f2c4bb8bafea5081eaec3272998de8d37",
+      "threshold": 100,
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0,
+        "foil_response_rate": 0
+      }
+    },
+    {
+      "name": "candidate",
+      "model_revision": "801fb52a215e76151be469804f0612e18e4cdfa6e6d8163c03c669233bee7ef4",
+      "threshold": 0.189057455929736,
+      "counts": {
+        "TP": 1,
+        "FP": 6,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.25,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0.8571428571428571
+      }
+    }
+  ],
+  "original_M40_directories_absent": true,
+  "source_archive_modified": false,
+  "new_native_calculation": false,
+  "independent_evaluation": false,
+  "training_completed": false,
+  "restored_expansion_not_duplicated_in_evidence_archive": true,
+  "catalog_relative": "experiments/2026-11-16/psi-storage-control/threshold-elder-replay-a1.json",
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
