@@ -1,0 +1,224 @@
+{
+  "kind": "timelearner_full_training_nonspiking_diagnostics_reference",
+  "schema_version": 1,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/45/458e84adcfd85b61f6288a11b1192f239c185bdc69af1484ac2dabcaff845571",
+    "sha256": "458e84adcfd85b61f6288a11b1192f239c185bdc69af1484ac2dabcaff845571",
+    "bytes": 7594
+  },
+  "external_catalog": "experiments/2026-11-16/fast-profile-wall-budget/full-training-frozen-nonspiking-diagnostics-a1.json",
+  "proposal": {
+    "bytes": 5813,
+    "sha256": "df108918e731e9936a1ffd1569ee9ad6d9bc69d8a8d3f7ab01d3f7fbe808d802",
+    "threshold": 0.054353792695896797,
+    "full_matrix_peak_margin": -0.016231714784472495
+  },
+  "rows": [
+    {
+      "sample_id": "phasea-row-0",
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/0",
+      "label": "target",
+      "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+      "stimulus_times": [
+        0.01,
+        0.09,
+        0.25,
+        0.49
+      ],
+      "stimulus_onset": 0.01,
+      "nonspiking_lt_maximum": 0.05536591851064254,
+      "maximum_time": 0.4935,
+      "maximum_seconds_since_onset": 0.4835,
+      "maximum_seconds_after_last_input": 0.003500000000000003,
+      "actual_spike_count": 0,
+      "complete": true,
+      "valid": true,
+      "observation": {
+        "relative_path": "native/trial-0.json",
+        "bytes": 1296326,
+        "sha256": "b1a6aa87e9ce6c99519a143e136b2ac60ab7caac93eaf6d03ab7ab018556fb3e"
+      }
+    },
+    {
+      "sample_id": "phasea-row-1",
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/1",
+      "label": "foil",
+      "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+      "stimulus_times": [
+        2.0105,
+        2.2505,
+        2.4105,
+        2.4905
+      ],
+      "stimulus_onset": 2.0105,
+      "nonspiking_lt_maximum": 0.05297352154218116,
+      "maximum_time": 2.494,
+      "maximum_seconds_since_onset": 0.48350000000000026,
+      "maximum_seconds_after_last_input": 0.0035000000000002807,
+      "actual_spike_count": 0,
+      "complete": true,
+      "valid": true,
+      "observation": {
+        "relative_path": "native/trial-1.json",
+        "bytes": 1296464,
+        "sha256": "0b9928cf15fdfdce5b39f6f240c33be47a8e20fe97856fcf6467ded6732aaf1b"
+      }
+    },
+    {
+      "sample_id": "phasea-row-2",
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/2",
+      "label": "foil",
+      "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+      "stimulus_times": [
+        4.011,
+        4.171,
+        4.251,
+        4.491
+      ],
+      "stimulus_onset": 4.011,
+      "nonspiking_lt_maximum": 0.05334166688115105,
+      "maximum_time": 4.4945,
+      "maximum_seconds_since_onset": 0.48350000000000026,
+      "maximum_seconds_after_last_input": 0.0035000000000007248,
+      "actual_spike_count": 0,
+      "complete": true,
+      "valid": true,
+      "observation": {
+        "relative_path": "native/trial-2.json",
+        "bytes": 1296320,
+        "sha256": "3245b41f5135eb5721f0dc70b6a6e77d32a2d831f67e22b70963d15b8d714dcf"
+      }
+    },
+    {
+      "sample_id": "phasea-row-3",
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/3",
+      "label": "foil",
+      "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+      "stimulus_times": [
+        6.0115,
+        6.1715,
+        6.3315,
+        6.4915
+      ],
+      "stimulus_onset": 6.0115,
+      "nonspiking_lt_maximum": 0.029234191069386628,
+      "maximum_time": 6.5745,
+      "maximum_seconds_since_onset": 0.5629999999999997,
+      "maximum_seconds_after_last_input": 0.0829999999999993,
+      "actual_spike_count": 0,
+      "complete": true,
+      "valid": true,
+      "observation": {
+        "relative_path": "native/trial-3.json",
+        "bytes": 1296220,
+        "sha256": "fc7974895b9782a1b3a4e4390d13840b33717da737b128f0130dd2cd1726df2c"
+      }
+    },
+    {
+      "sample_id": "phasea-row-4",
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/4",
+      "label": "foil",
+      "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+      "stimulus_times": [
+        8.012,
+        8.032,
+        8.252,
+        8.492
+      ],
+      "stimulus_onset": 8.012,
+      "nonspiking_lt_maximum": 0.07159763329511504,
+      "maximum_time": 8.256,
+      "maximum_seconds_since_onset": 0.24399999999999977,
+      "maximum_seconds_after_last_input": -0.23600000000000065,
+      "actual_spike_count": 0,
+      "complete": true,
+      "valid": true,
+      "observation": {
+        "relative_path": "native/trial-4.json",
+        "bytes": 1296479,
+        "sha256": "ba5cdc1083e738cde2a097dd1a6a8dee8739603e37348dad7790de31b03b7f86"
+      }
+    },
+    {
+      "sample_id": "phasea-row-5",
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/5",
+      "label": "foil",
+      "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+      "stimulus_times": [
+        10.0125,
+        10.2525,
+        10.4725,
+        10.4925
+      ],
+      "stimulus_onset": 10.0125,
+      "nonspiking_lt_maximum": 0.05303609958580935,
+      "maximum_time": 10.496,
+      "maximum_seconds_since_onset": 0.48350000000000115,
+      "maximum_seconds_after_last_input": 0.0035000000000007248,
+      "actual_spike_count": 0,
+      "complete": true,
+      "valid": true,
+      "observation": {
+        "relative_path": "native/trial-5.json",
+        "bytes": 1300583,
+        "sha256": "b6614f5db47b51e08095cf141453d688ff003017941790156ec41a85c3848442"
+      }
+    },
+    {
+      "sample_id": "phasea-row-6",
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/6",
+      "label": "foil",
+      "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+      "stimulus_times": [
+        12.013,
+        12.053,
+        12.093,
+        12.493
+      ],
+      "stimulus_onset": 12.013,
+      "nonspiking_lt_maximum": 0.04109021371843047,
+      "maximum_time": 12.3,
+      "maximum_seconds_since_onset": 0.2870000000000008,
+      "maximum_seconds_after_last_input": -0.19299999999999962,
+      "actual_spike_count": 0,
+      "complete": true,
+      "valid": true,
+      "observation": {
+        "relative_path": "native/trial-6.json",
+        "bytes": 1300647,
+        "sha256": "4bb7a914680b9588b8c75bba9dae5c2b7af323802d64ef54cb5bf320ea8da7a9"
+      }
+    },
+    {
+      "sample_id": "phasea-row-7",
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/7",
+      "label": "foil",
+      "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+      "stimulus_times": [
+        14.0135,
+        14.4135,
+        14.4535,
+        14.4935
+      ],
+      "stimulus_onset": 14.0135,
+      "nonspiking_lt_maximum": 0.04109021371844723,
+      "maximum_time": 14.7005,
+      "maximum_seconds_since_onset": 0.6869999999999994,
+      "maximum_seconds_after_last_input": 0.20700000000000074,
+      "actual_spike_count": 0,
+      "complete": true,
+      "valid": true,
+      "observation": {
+        "relative_path": "native/trial-7.json",
+        "bytes": 1300586,
+        "sha256": "d56274953f16769b323b4075aff036fd5bc0715abd7a06c957df1673b66386f4"
+      }
+    }
+  ],
+  "actual_low_threshold_counts_inferred": false,
+  "new_native_execution": false,
+  "scientific_verdict": null
+}
