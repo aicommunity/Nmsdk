@@ -34,7 +34,7 @@
 |2. Изолированные сборки/runtime|Частично|Runtime/manifests/учёт процессов работают; полная resource/build/fault matrix открыта.|
 |3. Наблюдения/scorer|Частично|Strict IDs, finite/completeness и реальный аудит проверены; все применимые legacy adapters/режимы ещё не приняты.|
 |4. Lifecycle/storage|Частично|Реальные native fixtures/effective graph/physics checks; вся fresh/reuse/Copy/Load/Build/growth/heterogeneous матрица открыта.|
-|5. Export/import|Частично|Полное состояние, Train→Test, boundary continuation работают; вся физика/связи и independent corpus replay не приняты.|
+|5. Export/import|Частично|Полное состояние, Train→Test, boundary continuation работают; вся физика/связи и independent corpus replay не приняты. [В новом persisted candidate89.5% compact JSON занимает архив обучения](FrozenModelStateSizeReview-20261116.ru.md); разделение payload и history открыто.|
 |6. Общий контроллер|Частично|Общий native service, configured controller, Classic/Branch adapters работают; legacy/V2 A/B, остаточное дублирование и multirate открыты.|
 |7. Алгоритмы|Частично|Measured bounded L/Ns/Rs search, revision-bound observations и fresh final gate реализованы. Полная matrix/C-search и проблема merged responses открыты; общего сертификата в текущих cold опытах нет.|
 |8. Conversion/PostTune/calibration|Частично|Versioned solo/recognition, транзакции, actual threshold/frozen проверки; все режимы/rollback/interruption/independent evaluation не приняты.|
