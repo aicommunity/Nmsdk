@@ -20,4 +20,12 @@
 
 Подготовлены6 server checks: exact equality обычных деклараций с исходным production output; отказ uniform и PSI на явном C-search при legacy0; разрешённая C0-history без поиска; сохранение общего C-search API; отказ prepare/run до reference/runtime/controller work и без output artifacts.
 
-Серверная приёмка ещё не получена. Работающие cold600 и frozen-order64 используют прежние immutable source/runtime; их исходы проверяются отдельно. Полный исходный план и обязательная matrix остаются открытыми.
+[Адресная приёмка M40 получена:6/6](FixedPhysicsModePreflightAcceptance-20261116.json), без failures/errors/skips. Tested source c8480262231bfaace0c009edc806176a0e263a32, controls ae28eca764c54ca173264ced9e69e7fe5de955cb; owned PID91339 закрыт. Fingerprint шести input fixtures f10f715cab7847d8bee823c5b1131946c2bb32a26ec3921c8ee7288250a979b7. Обычные generated jobs точно совпали с production baseline; включённый C-search отклонён до дорогой подготовки/Train, history-only и общий C-search declaration API сохранены.
+
+Elder A1 отказал до тестов: reservation_capacity_exhausted,0 executed. В его ledger slots=1 и этот слот занимает s11-frozen-order-native-elder-a2. Отказ и исходная декларация сохранены, это не отрицательный исход тестов и не новый научный результат. Повтор на втором worker отложен до закрытия работающей серии; ограничение ресурсов не менялось.
+
+M40 proof7eb02d510fc8c5c428688e4129453e575e624a5dec94c69f1ecec7b178c2b075/403090bytes/54members и Elder refusal9cf87bc1902f6f9e573c85fb9b28fc11bf30aaa1a55d39909ea5545f14103561/107006bytes/40members хранятся во внешнем M40 архиве. На Elder независимо проверены каждый member, исходные counts/IDs и source root. Code Git bundle d9014ba1d8d06b118e8d5f6fc0c2a2fd62ecd67b2359122ae1cbd6dc96937818 и fixture Git bundle24fd8e60fac42a9c4cc4d21b410e350d912b9f336ab454607643756741adbd71 сохранены там же.
+
+После закрытия и архивации отказа удалён только новый чистый standalone source cache Elder:989867302 logical bytes. Полный Git commit опубликован и воспроизводится; controls, fixtures, модели и observations сохранены, live leases не пересекались с каталогом. Квитанция0b8f0a75610498a9ad4a7daf19f856c2f2ec6bbae99b53cc94e3ae1d95a35949. Source cache потребуется восстановить в отдельном каталоге для отложенного A2.
+
+Работающие cold600 и frozen-order64 используют прежние immutable source/runtime; их исходы проверяются отдельно. Приёмка6/6 относится к подготовке деклараций, не к native C-search physics или всей матрице. Полный исходный план остаётся активным.
