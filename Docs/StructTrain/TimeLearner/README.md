@@ -1,3 +1,5 @@
+Актуально16.11: [полный статус плана](CurrentStatus-20261116.ru.md), [новый terminal21600 recognition](FastN1FullTrainingRecognitionScientificReport-20261116.ru.md). Baseline100 принят: полное молчание, target пропущен; actual single-threshold итог открыт. Более ранние записи ниже описывают свои снимки.
+
 16.11: [PSI2.5 actual eight-pattern recognition report](PresynapticRecognitionScientificReport-20261116.ru.md): high-threshold silence, actual fixed-threshold TP1/FP6/FN0/TN1, early target events relative to the final input. Both full temporal galleries are external and32+16 selected original PNG have been reviewed. [Current full-plan status](CurrentStatus-20261116.ru.md); older dated notes below retain their historical scope.
 
 
