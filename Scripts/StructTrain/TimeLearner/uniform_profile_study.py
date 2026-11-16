@@ -196,13 +196,17 @@ def reference_window_frames(native):
 
 
 def prepare_cold(original_path, profile_path, reference_native, output, *, variant,
-                 maximum_wall_seconds=None, run_label=None):
+                 maximum_wall_seconds=None, maximum_group_wall_seconds=None, run_label=None):
     """Prepare a cold job using audited coordinates, without importing amplitudes."""
     require(type(variant) is int and variant in (0, 3), 'uniform_study_unknown_profile')
     if maximum_wall_seconds is not None:
         require(type(maximum_wall_seconds) in (int, float) and
                 math.isfinite(maximum_wall_seconds) and maximum_wall_seconds > 0,
                 'uniform_study_invalid_wall_budget')
+    if maximum_group_wall_seconds is not None:
+        require(type(maximum_group_wall_seconds) in (int, float) and
+                math.isfinite(maximum_group_wall_seconds) and maximum_group_wall_seconds > 0,
+                'uniform_study_invalid_group_wall_budget')
     original_path = Path(original_path).resolve(strict=True)
     profile_path = Path(profile_path).resolve(strict=True)
     reference_native = Path(reference_native).resolve(strict=True)
@@ -216,6 +220,10 @@ def prepare_cold(original_path, profile_path, reference_native, output, *, varia
     before = {str(p): frozen_digest(p, 256*1024**2) for p in inputs}
     original, archive = load(original_path), load(profile_path)
     validate_job('train', original)
+    if maximum_group_wall_seconds is not None:
+        require(maximum_group_wall_seconds <= (maximum_wall_seconds if
+                maximum_wall_seconds is not None else original['configuration']['maximum_wall_seconds']),
+                'uniform_study_group_wall_exceeds_attempt')
     packages = [reference_native/name for name in
                 ('train_stopped_state.json', 'train_learned_state.json')
                 if (reference_native/name).is_file()]
@@ -236,13 +244,21 @@ def prepare_cold(original_path, profile_path, reference_native, output, *, varia
     require(characterization['source_package_sha256'] == package_before,
             'uniform_study_reference_changed')
     changed = deepcopy(original)
-    change = None
+    change = {}
     if maximum_wall_seconds is not None:
         old_wall = changed['configuration']['maximum_wall_seconds']
         changed['configuration']['maximum_wall_seconds'] = float(maximum_wall_seconds)
+        change['maximum_wall_seconds'] = dict(before=old_wall, after=float(maximum_wall_seconds))
+    if maximum_group_wall_seconds is not None:
+        composite = changed['configuration']['composite_measurement']
+        old_wall = composite['maximum_group_wall_seconds']
+        composite['maximum_group_wall_seconds'] = float(maximum_group_wall_seconds)
+        change['maximum_group_wall_seconds'] = dict(before=old_wall,
+                                                    after=float(maximum_group_wall_seconds))
+    if change:
         changed = _signed({k: v for k, v in changed.items() if k != 'sha256'})
-        change = dict(maximum_wall_seconds=dict(before=old_wall,
-                                               after=float(maximum_wall_seconds)))
+    else:
+        change = None
     job = declare_case(changed, archive, variant, characterization['frames'],
                        run_label=run_label)
     require(before == {str(p): frozen_digest(p, 256*1024**2) for p in inputs} and
@@ -279,10 +295,13 @@ def main(argv=None):
     prepare.add_argument('output', type=Path)
     prepare.add_argument('--variant', type=int, choices=(0, 3), required=True)
     prepare.add_argument('--maximum-wall-seconds', type=float)
+    prepare.add_argument('--maximum-group-wall-seconds', type=float,
+        help='explicit per-composite-group wall limit; must fit within the attempt wall limit')
     prepare.add_argument('--run-label')
     args = parser.parse_args(argv)
     prepare_cold(args.original, args.profile, args.reference_native, args.output,
                  variant=args.variant, maximum_wall_seconds=args.maximum_wall_seconds,
+                 maximum_group_wall_seconds=args.maximum_group_wall_seconds,
                  run_label=args.run_label)
     return 0
 
