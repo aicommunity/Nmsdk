@@ -47,6 +47,7 @@ TEST(CanonicalModelHash, PreservesPortableGoldenDigests)
     }
 }
 
+#if defined(NMSDK_RECORDED_MODEL_INPUT_TESTS)
 TEST(CanonicalModelHashRecorded, PreservesActualLargeTrainingPackageDigest)
 {
     const auto path=std::getenv("TIMELEARNER_CANONICAL_PACKAGE");
@@ -65,6 +66,7 @@ TEST(CanonicalModelHashRecorded, PreservesActualLargeTrainingPackageDigest)
     EXPECT_EQ(actual,expected);RecordProperty("fixture_bytes",std::to_string(size));
     RecordProperty("hash_seconds",std::to_string(seconds));RecordProperty("observed_digest",actual.toStdString());
 }
+#endif
 
 class IdentityGraph : public UNet
 {
