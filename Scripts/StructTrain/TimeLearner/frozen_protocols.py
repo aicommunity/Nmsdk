@@ -171,7 +171,7 @@ def run(source_manifest, controls):
                                  for a, b in zip(observations, observations[1:])],
                 last_input_to_next_onset=[b['stimulus_onset']-a['stimulus_times'][-1]
                                  for a, b in zip(observations, observations[1:])]))
-            _write(output/'progress.json', dict(completed_conditions=len(results),
+            _write(output/f'progress-{len(results)}.json', dict(completed_conditions=len(results),
                 completed_trials=sum(len(r['metrics']['trials']) for r in results)))
     finally:
         registry.release(lease['token'], note='Fixed model/threshold; no scientific PASS asserted.')
