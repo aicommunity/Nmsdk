@@ -6,6 +6,7 @@ import unittest
 from ..native_evidence import load
 from ..native_pipeline_worker import audit_run_manifest
 from ..recognition_metrics import load_diagnostic_evaluation
+from ..runtime import file_record
 from ..portable_primary import ALIAS_ADAPTER, restore_native_bundle
 
 
@@ -53,6 +54,9 @@ class RestoredThresholdPrimaryTest(unittest.TestCase):
             self.assertFalse(relative.is_absolute())
             self.assertNotIn('..', relative.parts)
             original_run = output.joinpath(*relative.parts)
+            source_manifest = file_record(original_run/'run-manifest.json')
+            for field in ('size', 'sha256'):
+                self.assertEqual(source_manifest[field], original['proposal']['source_manifest'][field])
             self.assertTrue(audit_run_manifest(original_run/'run-manifest.json')['run_evidence_consistent'])
             _, old = load_diagnostic_evaluation(original_run/'native/evaluation.json')
             _, replay = load_diagnostic_evaluation(study/'runs/baseline100/native/evaluation.json')
