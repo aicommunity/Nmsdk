@@ -1,0 +1,312 @@
+{
+  "kind": "timelearner_plan_status_readback",
+  "schema_version": 1,
+  "verified_at_utc": "2026-11-16T03:44:15.568Z",
+  "whole_plan_complete": false,
+  "fully_accepted_original_stages": [
+    0
+  ],
+  "partial_original_stages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "origin_develop": "e8f7a53c6bca3a1d095ab2955f2a65c8f4a81e20",
+  "origin_feature": "1d95dbd475eaa6f0f808484b54e09a579d9f88d9",
+  "feature": "codex/timelearner-psi-storage-factor",
+  "pulse_gitlink": "23d039e44f927eb8040473845d3c391270d9d15e",
+  "bin_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+  "rdk_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+  "m40": [
+    {
+      "job": "s11-psi-k2p5-stock-cold-train-m40-a1",
+      "units": [
+        {
+          "directory": "process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3094446,
+          "proc_present": false
+        },
+        {
+          "directory": "worker/native-uniform-profile-Train/runs/preflight/process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3107874,
+          "proc_present": false
+        },
+        {
+          "directory": "worker/native-uniform-profile-Train/runs/train/process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3108281,
+          "proc_present": false
+        }
+      ],
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/terminal.json": {
+        "operation_passed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      }
+    },
+    {
+      "job": "s11-psi-k2p5-psi-cold-train-m40-a2",
+      "units": [
+        {
+          "directory": "process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3400862,
+          "proc_present": false
+        },
+        {
+          "directory": "worker/native-uniform-profile-Train/runs/preflight/process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3408349,
+          "proc_present": false
+        },
+        {
+          "directory": "worker/native-uniform-profile-Train/runs/train/process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3408629,
+          "proc_present": false
+        }
+      ],
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/terminal.json": {
+        "operation_passed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      }
+    },
+    {
+      "job": "s11-psi-k2p5-frozen-m40-a2",
+      "units": [
+        {
+          "directory": "process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3604061,
+          "proc_present": false
+        },
+        {
+          "directory": "worker/tmp/coupled-stopped-matrix/run/process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3652727,
+          "proc_present": false
+        }
+      ],
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/terminal.json": {
+        "operation_passed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      }
+    },
+    {
+      "job": "s11-psi-cold-training-report-m40-a3",
+      "units": [
+        {
+          "directory": "process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3691306,
+          "proc_present": false
+        }
+      ],
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/terminal.json": {
+        "operation_passed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      }
+    },
+    {
+      "job": "s11-psi-k2p5-frozen-primary-m40-a2",
+      "units": [
+        {
+          "directory": "process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3793605,
+          "proc_present": false
+        }
+      ],
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/terminal.json": {
+        "operation_passed": true
+      }
+    },
+    {
+      "job": "s04-uniform-window-compat-m40-a1",
+      "units": [
+        {
+          "directory": "process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3809627,
+          "proc_present": false
+        }
+      ],
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/terminal.json": {
+        "operation_passed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      }
+    }
+  ],
+  "elder": [
+    {
+      "job": "s11-moderate-threshold-primary-replay-elder-a1",
+      "execution": "unknown",
+      "closed": true,
+      "pid": 1059660,
+      "proc_present": false,
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/terminal.json": {
+        "operation_passed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      },
+      "restored": {
+        "archive_members_verified": 828,
+        "retained_regular_files": 826,
+        "native_execution_attested": false
+      },
+      "actual_series": [
+        {
+          "name": "baseline100",
+          "model_revision": "6e683576e788844dff0f9c8f0b1e6e8b4cfc358a37deeebebc1e0d7770e2c04e",
+          "threshold": 100,
+          "counts": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 1,
+            "TN": 7,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 0,
+            "foil_response_rate": 0
+          }
+        },
+        {
+          "name": "candidate",
+          "model_revision": "cc9caa6fc60ee453f621cba9cd1e65995368f70faaf682bbd63a5ff8195c1b1f",
+          "threshold": 0.11468361216368189,
+          "counts": {
+            "TP": 1,
+            "FP": 6,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.25,
+            "target_hit_rate": 1,
+            "foil_response_rate": 0.8571428571428571
+          }
+        }
+      ]
+    }
+  ],
+  "scientific_interpretation": {
+    "whole_model_training_certificate": false,
+    "robust_classifier_confirmed": false,
+    "psi_cold": "one locally jointly-ready input2 followed by ambiguous input1",
+    "moderate_actual_threshold": {
+      "target_detected": true,
+      "foil_responses": 6,
+      "foils": 7,
+      "target_events_before_last_stimulus": true
+    },
+    "psi_frozen_threshold100": "silent target and all seven foils"
+  },
+  "pending_work": [
+    "Fresh all-input training verification",
+    "PSI frozen primary external publication and eight-pattern temporal report",
+    "Complete comparative visual review; generated 70 PNG is not a claim all are reviewed",
+    "Remaining legacy/V2 and mode/physics/order/ITI/reset matrix",
+    "Remaining migration, documentation and scoped merge acceptance"
+  ]
+}

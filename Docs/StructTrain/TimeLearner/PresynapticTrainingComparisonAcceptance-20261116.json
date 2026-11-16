@@ -1,0 +1,51 @@
+{
+  "kind": "timelearner_presynaptic_training_report_acceptance",
+  "schema_version": 1,
+  "verified_at_utc": "2026-11-16T03:44:15.568Z",
+  "job": "s11-psi-cold-training-report-m40-a3",
+  "producer_root": "1d95dbd475eaa6f0f808484b54e09a579d9f88d9",
+  "controls": "c6cd3c80ce797861ac9a5380f4a1df5bdafd04b4",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "executed_tests": 1,
+  "all_processes_closed": true,
+  "production_comparator": true,
+  "stock_acceptance": "PresynapticStockColdAcceptance-20261116.json",
+  "psi_acceptance": "PresynapticColdScientificAcceptance-20261116.json",
+  "selected_groups": {
+    "stock": [
+      4,
+      48,
+      50,
+      52,
+      54,
+      56,
+      58
+    ],
+    "psi": [
+      4,
+      46,
+      48,
+      50,
+      52,
+      54,
+      56
+    ]
+  },
+  "png_count": 70,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/f1/f12ed2491372fd151f465035804cc163d68d2d78f9bee6e420d7929f59f70b78",
+    "sha256": "f12ed2491372fd151f465035804cc163d68d2d78f9bee6e420d7929f59f70b78",
+    "bytes": 43119167
+  },
+  "archived_regular_files": 264,
+  "catalog_relative": "experiments/2026-11-16/psi-storage-control/cold-training-report-a3.json",
+  "cache_relative": "report-cache/2026-11-16/stock-psi-cold",
+  "visual_review_complete": false,
+  "all_generated_figures_reviewed": false,
+  "interpretation": "Full effective graph/runtime/window comparison passed; both cold runs have a local input2 solution and then ambiguous input1. No all-input certificate or classification claim.",
+  "whole_plan_complete": false
+}
