@@ -4164,7 +4164,7 @@ template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=fa
                     }
                 } else {
                     EXPECT_NE(action->parameters.at(active).length,rejectedPoint.at(active).length);
-                    if(wide)EXPECT_EQ(action->parameters.at(active).length,64); // outside nearest mesh
+                    if(wide)EXPECT_EQ(action->parameters.at(active).length,n1?6:64); // outside nearest four-length mesh
                 }
                 EXPECT_EQ(f.owner->ReadNativeParameters(),rejectedPoint); // queued edits have no physical side effects
                 editedAfterRecovery=true;

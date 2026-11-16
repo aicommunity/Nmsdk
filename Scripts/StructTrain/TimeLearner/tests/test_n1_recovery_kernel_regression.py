@@ -12,17 +12,26 @@ from ..native_evidence import load, require
 
 
 class N1RecoveryKernelRegressionTest(unittest.TestCase):
-    def test_same109_bounded_normalization_and_search_cases(self):
+    def test_same_declared_bounded_normalization_and_search_cases(self):
         controls = Path(os.environ['TIMELEARNER_N1_KERNEL_CONTROLS']).resolve(strict=True)
         declaration = load(controls/'declaration.json')
         require(set(declaration) == {'root_repository', 'pulse_repository', 'compiler', 'gtest_source'},
                 'n1_kernel_controls_schema')
         specification = load(controls/'specification.json')
-        self.assertEqual(specification['baseline_root'], '47d67e8fa0d8ea9e2cf61e49ad7e7019dd91c50f')
-        self.assertEqual(specification['candidate_root'], '860ee87057196f0afb5b3a98cbd0bdacf378543a')
+        # Exact subjects live in immutable job controls; keep the full original
+        # corpus fixed instead of copying this wrapper for every commit pair.
+        prefix = 'Tests/Integration/Libraries/'
+        original = {prefix+n for n in (
+            'Test_PulseLib_BoundedFixture.h', 'Test_PulseLib_BoundedTraining.cpp',
+            'Test_PulseLib_N0Geometry.cpp', 'Test_PulseLib_N0LengthFamily.cpp',
+            'Test_PulseLib_MeasuredLengthSearch.cpp', 'Test_PulseLib_MeasuredResistanceSearch.cpp')}
+        moderate = prefix+'Test_PulseLib_ModerateLengthSearch.cpp'
+        paths = set(specification['test_paths'])
+        self.assertIn(paths, (original, original | {moderate}))
+        expected_count = 116 if moderate in paths else 109
         self.assertEqual(specification['schema_version'], 2)
         self.assertEqual(specification['qt_core_package'], 'Qt5Core')
-        self.assertEqual(len(specification['expected_test_ids']), 109)
+        self.assertEqual(len(specification['expected_test_ids']), expected_count)
         result = run_controller_ab(controls/'specification.json',
             declaration['root_repository'], declaration['pulse_repository'],
             declaration['compiler'], declaration['gtest_source'],
@@ -33,7 +42,7 @@ class N1RecoveryKernelRegressionTest(unittest.TestCase):
             self.assertEqual((case['execution'], case['validity'], case['assertion_status']),
                              ('completed', 'valid', 'passed'))
             self.assertEqual(case['inventory']['failed_test_ids'], [])
-            self.assertEqual(case['inventory']['observed'], 109)
+            self.assertEqual(case['inventory']['observed'], expected_count)
         self.assertTrue(result['same_test_sources'])
         self.assertEqual(result['assertion_status'], 'passed')
         self.assertFalse(result['native_rdk_integration_verified'])

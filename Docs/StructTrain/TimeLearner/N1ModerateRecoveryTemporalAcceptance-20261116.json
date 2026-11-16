@@ -1,0 +1,68 @@
+{
+  "kind": "timelearner_n1_moderate_recovery_temporal_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "job": "s11-stock-N1-moderate-report-m40-a1",
+  "source_root": "e3b74d00e0a1813a8f610e62352e01a2756a2a7d",
+  "controls": "74233b860980f88e5985bc1ad5c7a7140b2583ef",
+  "python_passed": 1,
+  "all_processes_closed": true,
+  "comparison_schema_version": 3,
+  "include_all_rejected_groups": true,
+  "archive": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/c4/c4bb157f8ca541a02df9745dd87ef0abe370d16b2a07c2e745b70b274c540b1d",
+    "sha256": "c4bb157f8ca541a02df9745dd87ef0abe370d16b2a07c2e745b70b274c540b1d",
+    "bytes": 31721813
+  },
+  "archived_regular_files": 195,
+  "cache_relative": "report-cache/2026-11-16/stock-N1-moderate/index.html",
+  "png_figures": 48,
+  "selected_groups": {
+    "before": [
+      4,
+      48,
+      50,
+      52,
+      53
+    ],
+    "after": [
+      4,
+      48,
+      50,
+      52,
+      54,
+      56,
+      58
+    ]
+  },
+  "native_window_boundary_minimum_tick_pixels": 22.46399999999998,
+  "native_zoom_is_peak_centered": false,
+  "manual_visual_reviews": [
+    {
+      "relative_path": "after/group-000054-soma-000-overview.png",
+      "bytes": 547898,
+      "sha256": "49c14e8666cf3b3a6f7967a25a48168d77e28a0ce44511113e359992f0096cf1",
+      "note": "Broad early merged crest; input2 contributes a shallow shoulder. Full/omission/repeat and actual stimuli visible."
+    },
+    {
+      "relative_path": "after/group-000056-soma-000-overview.png",
+      "bytes": 550604,
+      "sha256": "2b39033861b631175e2b4f9a957a66b259ccf4e7e4cd36f3d90afc2d0693ad4f",
+      "note": "Complete full/omission/repeat responses and actual inputs; early full crest remains merged, omission0/1 responses displaced."
+    },
+    {
+      "relative_path": "after/group-000058-soma-000-overview.png",
+      "bytes": 521648,
+      "sha256": "db60fe27f15522507a283f7bdf0589af2d997156562ed17826d7c93d83c28ec5",
+      "note": "Complete full/omission/repeat responses and actual inputs; early full crest remains merged, omission0/1 responses displaced."
+    }
+  ],
+  "all_figures_reviewed": false,
+  "visual_acceptance_complete": false,
+  "classification_assessed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

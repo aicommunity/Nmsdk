@@ -1,0 +1,157 @@
+{
+  "kind": "timelearner_n1_moderate_recovery_scoped_status",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "baseline": {
+    "root": "9add1df816ddb695556d77f21915728f13ebada7",
+    "pulse": "f4e8bc29ca3529e683c53f842edc29bf86171acb",
+    "helper_present_controller_unchanged": true
+  },
+  "candidate": {
+    "root": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+    "pulse": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7"
+  },
+  "kernel": {
+    "worker": "Elder-1",
+    "job": "s07-n1-moderate-kernel-elder-a1",
+    "control_commit": "805585da5088a8afc5904870f965a1100faad437",
+    "tools_root": "bfbd0952478b3397a221ae1258a447a22842b0f9",
+    "before_passed": 116,
+    "after_passed": 116,
+    "original_unchanged_cases": 109,
+    "new_helper_cases": 7,
+    "same_test_sources": true,
+    "all_processes_closed": true,
+    "native_rdk_integration_verified": false,
+    "actual_loaded_library_capture": false,
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7c/7c5dda01c5652eeebbbd9a73f8b119a9ab5a1fd0848ef19ba8ebadc7a15d9236",
+      "sha256": "7c5dda01c5652eeebbbd9a73f8b119a9ab5a1fd0848ef19ba8ebadc7a15d9236",
+      "bytes": 2211814
+    }
+  },
+  "native": {
+    "worker": "M40",
+    "execution": "completed",
+    "candidate_passed": 154,
+    "candidate_expected_cases": 154,
+    "accepted": true,
+    "all_processes_closed": true,
+    "job_validation_passed": true,
+    "cohort_assertions_passed": true,
+    "baseline_expected_assertion_failures": 2,
+    "baseline_counterexamples_reproduced": 2,
+    "baseline_sdk_passed": false,
+    "baseline_verifier_job": "s07-n1-moderate-baseline-counterexamples-m40-a1",
+    "baseline_verifier_control": "e3b75319388110eb0f1ced72ee8fe7517306d2b2",
+    "jobs": [
+      {
+        "id": "s07-n1-moderate-baseline-sdk-m40-a1",
+        "all_processes_closed": true,
+        "job_validation_passed": false,
+        "completed_cases": 1,
+        "passed_cases": 0
+      },
+      {
+        "id": "s07-n1-moderate-candidate-sdk-m40-a1",
+        "all_processes_closed": true,
+        "job_validation_passed": true,
+        "completed_cases": 154,
+        "passed_cases": 154
+      }
+    ],
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7a/7aa7f6f4f217fb92e6046c13426db6d24ea85bc8068965ba69960455f8cc453f",
+      "sha256": "7aa7f6f4f217fb92e6046c13426db6d24ea85bc8068965ba69960455f8cc453f",
+      "bytes": 25156588
+    },
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-16/n1-moderate-recovery/validation-m40.json"
+  },
+  "cold_train": {
+    "execution": "completed",
+    "job": "s11-uniform-profile0-N1-moderate-train-m40-a1",
+    "worker": "M40",
+    "host": "10.245.1.17",
+    "jump": "10.245.1.12",
+    "control_commit": "8cb59fa30209ed8012eb4decfe1a3b6aecbd7779",
+    "tools_root": "bfbd0952478b3397a221ae1258a447a22842b0f9",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-n1-moderate-candidate-sdk-a1",
+    "same_job_except_run_id": true,
+    "all_scientific_budgets_and_tolerances_unchanged": true,
+    "requires_native_candidate_154_and_whole_closure": true,
+    "prelaunch_guard_passed": true,
+    "last_observed": {
+      "outer_closed": true,
+      "child_closed": true,
+      "outcome": "invalid_observation",
+      "reason": "rejected_candidate_window:ambiguous"
+    },
+    "data_validity": "valid",
+    "operation_passed": true,
+    "all_processes_closed": true,
+    "physical_audit": {
+      "kind": "timelearner_uniform_profile_physics_audit",
+      "schema_version": 1,
+      "membranes_checked": {
+        "initial": 2,
+        "final": 37
+      },
+      "frequency_hz": "2000",
+      "uniform_physics_preserved": true,
+      "positive_individual_resistances_allowed": true,
+      "threshold_and_feedback_preserved": true,
+      "native_execution_verified": false,
+      "training_certificate_verified": false,
+      "scientific_verdict": null
+    },
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/6f/6fa09bc272a4c95a53745c49c37964985d7c00a01109d6f980e822539290c268",
+      "sha256": "6fa09bc272a4c95a53745c49c37964985d7c00a01109d6f980e822539290c268",
+      "bytes": 52691387
+    },
+    "certificate": null,
+    "scalar_candidates": 22,
+    "scalar_prefix_exact": 22,
+    "new_valid_input1_scalars": 0,
+    "all_native_groups_complete": true
+  },
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "stage7_complete": false,
+  "observed_at_utc": "2026-11-16T00:17:11.328Z",
+  "followup_jobs": [
+    {
+      "job": "s11-stock-N1-moderate-report-m40-a1",
+      "role": "read_only_all_rejected_groups_temporal_report",
+      "control_commit": "74233b860980f88e5985bc1ad5c7a7140b2583ef",
+      "execution": "completed",
+      "operation_passed": true,
+      "all_processes_closed": true,
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c4/c4bb157f8ca541a02df9745dd87ef0abe370d16b2a07c2e745b70b274c540b1d",
+        "sha256": "c4bb157f8ca541a02df9745dd87ef0abe370d16b2a07c2e745b70b274c540b1d",
+        "bytes": 31721813
+      },
+      "reviewed_overviews": 3,
+      "png_figures": 48
+    },
+    {
+      "job": "s11-n1-moderate-frozen-m40-a1",
+      "role": "stopped_state_eight_pattern_diagnostic_threshold100",
+      "control_commit": "db54230ffd62e869fe3a6ac388fea9532a983a28",
+      "execution": "running_at_last_observation"
+    }
+  ]
+}
