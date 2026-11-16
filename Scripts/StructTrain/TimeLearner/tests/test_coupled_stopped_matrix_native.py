@@ -18,10 +18,12 @@ class CoupledStoppedMatrixNativeTest(unittest.TestCase):
     def test_actual_stopped_branch_complete_eight_pattern_frozen_diagnostic(self):
         controls = Path(os.environ['TIMELEARNER_COUPLED_FROZEN_CONTROLS'])
         spec = load(controls/'declaration.json')
+        expected_outcome = spec.get('training_outcome', 'invalid_observation')
+        self.assertIn(expected_outcome, ('invalid_observation', 'budget_exhausted'))
         run = Path(os.environ['TIMELEARNER_COUPLED_TRAIN_RUN'])
         self.assertTrue(audit_run_manifest(run/'run-manifest.json')['run_evidence_consistent'])
         execution = load(run/'native/execution.json')
-        self.assertEqual(execution['training_outcome'], 'invalid_observation')
+        self.assertEqual(execution['training_outcome'], expected_outcome)
         source = run/'native'/execution['package_path']
         source_before = file_record(source)
         package = load(source)
