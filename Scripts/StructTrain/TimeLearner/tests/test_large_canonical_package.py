@@ -48,6 +48,8 @@ class LargeCanonicalPackageTest(unittest.TestCase):
                     managed_reservation=(registry,lease['token']))
             self.assertEqual(result['execution'],'completed')
             self.assertTrue(inspect(output/'process/contained')['all_processes_closed'])
+            self.assertEqual(load(output/'process/contained/request.json')[
+                'environment']['TIMELEARNER_CANONICAL_PACKAGE'],str(source))
             inventory=audit_junit(output/'native.xml',[
                 'CanonicalModelHashRecorded/PreservesActualLargeTrainingPackageDigest'])
             self.assertEqual(inventory['assertion_status'],'passed')
