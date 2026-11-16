@@ -21,7 +21,7 @@ Job s11-fast-bracket-wall21600-m40-a1, producer5ca731a696713a7787700e1fc553485ec
 |121|9.7318403429|−0.161|+0.0003373052370|Общая точка с input2; это другое физическое состояние|
 |124|86|−0.155|−0.0234670270437|Повторная оценка при L0=125 сохраняет те же остатки|
 
-После них предложена структура L=[201,201,121,1], Rs=[86M,86M,9.73184034290068M,86M]Ω, Ns=[1,1,1,1]. На ней последняя группа не завершена. Остатки предыдущего L124 не переносятся на L201; прогноз задержки не заменяет измерение.
+После них предложена структура L=[201,201,121,1], Rs=[86M,86M,9.73184034290068M,86M]Ω, Ns=[1,1,1,1]. На ней последняя группа не завершена: это повторное измерение опорного input3, а не input1. До измерения input1 на L201 алгоритм ещё не дошёл. Остатки предыдущего L124 не переносятся на L201; прогноз задержки не заменяет измерение.
 
 Две предыдущие полные группы заняли195.689 и204.183с при модельной длительности10.803с. Последняя группа:300.616с wall,8.9555с model; записаны пять из шести проб, последний отклик частичен. Model budget20с не исчерпан. Причина native_composite_group_time_budget_exhausted согласована с сырыми clocks и omission_group_time_budget_exhausted. Дополнительного автоматического увеличения лимитов не выполнялось.
 
@@ -31,4 +31,15 @@ Terminal model revision07101c0b0b29e746ad601050613786b1450f5a733464b501c5738ab92
 
 Полный primary:1381 logical members,862678486байт expanded,16125384байт XZ. SHA2564f11c876c309e8b511b3787d02606c5ba6ad888fce6cd010d36615c3e6277f63. Отдельные bundle manifest и provenance содержат точные исходные модели, summary, CSV, события, неполную terminal group, controls и квитанции закрытия. Все оригинальные байты сохранены; тяжёлые данные находятся только в /media/user/Data/Nmsdk-StructTrainExpArchive.
 
-Запущен предусмотренный frozen Test всех8 исходных паттернов новой terminal-модели при исходном threshold100, reset-per-trial и полном2с окне: s11-fast-full-training-frozen-m40-a1. Его итог ещё не принят; прежний Fast TP1/FP3 относится к другой модели terminal7200. Новый Train и изменение математических допусков ради улучшения счёта не выполнялись. Временной отчёт этого Train ещё предстоит построить.
+Запущен предусмотренный frozen Test всех8 исходных паттернов новой terminal-модели при исходном threshold100, reset-per-trial и полном2с окне: s11-fast-full-training-frozen-m40-a1. Его итог ещё не принят; прежний Fast TP1/FP3 относится к другой модели terminal7200. Новый Train и изменение математических допусков ради улучшения счёта не выполнялись. [Сравнительный временной отчёт7200/21600](//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/fast-full-training-comparison/index.html) готов1/1:32PNG, SVG/PDF; четыре overview нового Train просмотрены. Обычные views сохраняют все полные/omission кривые и явный CENSORED. Native edge zooms этого выпуска показывают границы полного окна; приёмка native zoom около самой вершины ещё открыта.
+
+## Выбранные временные графики обучения
+
+| Группа terminal21600 | Назначение | График |
+|---|---|---|
+|4|Исходный anchor input3|[overview](//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/fast-full-training-comparison/wall21600/group-000004-soma-000-overview.png)|
+|52|Локально готовый input2|[overview](//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/fast-full-training-comparison/wall21600/group-000052-soma-000-overview.png)|
+|62|Завершённое измерение input1 при L121|[overview](//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/fast-full-training-comparison/wall21600/group-000062-soma-000-overview.png)|
+|67|Повторный anchor input3 на новой L201 структуре; неполная группа|[overview](//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/fast-full-training-comparison/wall21600/group-000067-soma-000-overview.png)|
+
+Отсутствующий full repeat последней группы не достраивается. Её full-before на картинке относится к anchor input3; его быстрые пики не описывают ещё не измеренный input1 на L201. Все кривые показаны с фактически записанными входами, без сглаживания.

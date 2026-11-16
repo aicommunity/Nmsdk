@@ -1,0 +1,102 @@
+{
+  "kind": "timelearner_fast_common_temporal_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16T10:39:16.554Z",
+  "scope": "terminal7200 Fast3 baseline100 and the single declared actual fixed-threshold candidate; full-plan mode coverage remains partial",
+  "baseline": {
+    "source_root": "9bb0b6907b17ba870c710e1bfe41cafc2b371db3",
+    "job": "s11-common-lt-reports-elder-a1",
+    "controls": "8a60e5d00cef362a4d32ab1c7ab193d997afb3df",
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/40/40f1f90f45c125f7e8a226ec6b1b869982738ba619ddbbda0e0522a8b1924a8a",
+      "sha256": "40f1f90f45c125f7e8a226ec6b1b869982738ba619ddbbda0e0522a8b1924a8a",
+      "bytes": 342820765
+    },
+    "case": {
+      "cache_relative": "report-cache/2026-11-16/fast-frozen8-common-lt-elder",
+      "png_count": 936,
+      "trial_soma_pairs": 8,
+      "trial_lt_pairs": 8,
+      "threshold": 100,
+      "model_revision": "f122a9ba82c154cf28e4081fcee0ab1d3b977eaaa19ad659211a4323e6af95f6",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0,
+        "foil_response_rate": 0
+      }
+    },
+    "previous_soma_png_byte_identical": 432,
+    "lt_originals_reviewed": 16
+  },
+  "candidate": {
+    "source_root": "b9dcab0c98aac443ed1e0b2dcde3f31a22ebade9",
+    "job": "s11-fast-threshold-positive-report-m40-a1",
+    "controls": "d0e8c57d59f9413a4bc82e10f466ab89570826aa",
+    "python_passed": 1,
+    "all_processes_closed": true,
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/4c/4c7a8cfb71b4bf376e9dcab26c08e6f3b6f4e13eda1d904fe1ad21e7f39619eb",
+      "sha256": "4c7a8cfb71b4bf376e9dcab26c08e6f3b6f4e13eda1d904fe1ad21e7f39619eb",
+      "bytes": 228895906
+    },
+    "case": {
+      "cache_relative": "report-cache/2026-11-16/fast-threshold-positive-m40",
+      "png_count": 1403,
+      "trial_soma_pairs": 8,
+      "trial_lt_pairs": 8,
+      "threshold": 0.0560090535350351,
+      "model_revision": "d0977f960a87ae75f0f8df77f197392783cec68c7ab56ce696c4b3adf4ba07aa",
+      "counts": {
+        "TP": 1,
+        "FP": 3,
+        "FN": 0,
+        "TN": 4,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.625,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0.42857142857142855
+      }
+    },
+    "ordinary_png_byte_identical": 983,
+    "ordinary_originals_reviewed": 18,
+    "positive_lobe_originals_reviewed": 8
+  },
+  "visual_reviews": [
+    {
+      "catalog": "experiments/2026-11-16/fast-profile-wall-budget/common-lt-manual-review-a1.json",
+      "sha256": "2f331f5fff8a51b44a108ade1ea3b5e95e2ece6868d3acd3dcba5ea4c88b097c",
+      "bytes": 49136,
+      "reviewed": 38
+    },
+    {
+      "catalog": "experiments/2026-11-16/fast-profile-wall-budget/positive-lobe-manual-review-a1.json",
+      "sha256": "c9b7c667d497fe741884efb7a5a5381b4fc1860760df21b6ebde464dd9208502",
+      "bytes": 11576,
+      "reviewed": 8
+    }
+  ],
+  "all_eight_patterns_have_soma_and_lt": true,
+  "actual_stimulus_and_event_overlays": true,
+  "full_and_positive_display_ranges_retained": true,
+  "native_time_zoom_no_downsampling": true,
+  "full_gallery_manually_reviewed": false,
+  "temporal_protocol_accepted_for_declared_scope": true,
+  "new_native_execution": false,
+  "scientific_metrics_changed": false,
+  "whole_plan_complete": false
+}
