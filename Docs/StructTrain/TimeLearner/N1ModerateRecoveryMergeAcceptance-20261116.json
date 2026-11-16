@@ -1,0 +1,47 @@
+{
+  "kind": "timelearner_n1_moderate_recovery_scoped_merge_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "scope": "Measured moderate N1 rejection recovery implementation; same-condition negative cold Train and complete rejected-group temporal comparison. Frozen8 and any threshold experiment are separate followups.",
+  "baseline_root_develop": "b2e29825c31c987abb9c2f1cd9011a5d494aa8d5",
+  "baseline_pulse_develop": "c7e29cc91af111c8033e63299563dd56f8cd41c5",
+  "tested_runtime_root": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+  "tested_pulse": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7",
+  "tested_core": "caec9409942292c34d86fc29c81b861eba7ce68f",
+  "pulse_develop_merge": "23d039e44f927eb8040473845d3c391270d9d15e",
+  "native_cpp_cases_passed": 154,
+  "independent_kernel_cases_each_version_passed": 116,
+  "baseline_native_counterexamples": 2,
+  "cold_train_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/6f/6fa09bc272a4c95a53745c49c37964985d7c00a01109d6f980e822539290c268",
+    "sha256": "6fa09bc272a4c95a53745c49c37964985d7c00a01109d6f980e822539290c268",
+    "bytes": 52691387
+  },
+  "temporal_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/c4/c4bb157f8ca541a02df9745dd87ef0abe370d16b2a07c2e745b70b274c540b1d",
+    "sha256": "c4bb157f8ca541a02df9745dd87ef0abe370d16b2a07c2e745b70b274c540b1d",
+    "bytes": 31721813
+  },
+  "independent_old_comparison_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/74/74cc14a50a2f883b927348aff4df2620001f93283166e202c568a62b19082066",
+    "sha256": "74cc14a50a2f883b927348aff4df2620001f93283166e202c568a62b19082066",
+    "bytes": 31640714
+  },
+  "complete_cold_groups": 58,
+  "new_valid_input1_scalar_measurements": 0,
+  "certificate": null,
+  "mathematical_tolerances_changed": false,
+  "search_budgets_changed": false,
+  "merge_strategy": "--no-ff",
+  "original_stages1_through12_complete": false,
+  "whole_plan_complete": false
+}
