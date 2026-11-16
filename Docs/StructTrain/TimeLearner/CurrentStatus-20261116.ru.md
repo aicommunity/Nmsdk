@@ -4,6 +4,8 @@
 
 ## Последние проверенные результаты
 
+- Frozen diagnostic terminal moderate model принят по8 полным наблюдениям: при threshold100 TP0/FP0/FN1/TN7, модель неизменна; молчание не означает рабочую классификацию. [Primary и приёмка](N1ModerateFrozenDiagnosticAcceptance-20261116.json). Один Same-Matrix threshold сейчас проверяется реальными спайками. [Строгий native PSI preflight](PresynapticStoragePreflightAcceptance-20261116.json) принят, начата новая matched cold пара Stock/PSI без изменения допусков и бюджетов.
+
 - [Новый moderate N1 cold Train завершён](N1ModerateRecoveryScientificReport-20261116.ru.md): native154/154 и kernel116/116 до/после приняты;58 полных групп,22 scalar candidates совпадают с baseline, L56/42/35 не устранили ambiguous input1. CLI/DATA/physical приняты, certificate=null. Primary52.69MB во внешнем архиве M40. Frozen diagnostic8 выполняется; новая48-видовая галерея принята1/1, просмотрены3 новых overview, полного просмотра48 не заявляется.
 
 - N1 rejected-window recovery: пять native контрпримеров воспроизведены на исходной реализации; те же пять и полный SDK147/147 прошли на исправленной. Elder исполнил одинаковые109 kernel cases на каждой версии:109/109 до и после. Kernel не заменяет native Rdk integration. [Квитанции и внешние primary](N1RecoveryValidationAcceptance-20261116.json).
@@ -40,3 +42,5 @@
 Техническая очистка истории завершена. Тяжёлые первичные пакеты и галереи находятся в /media/user/Data/Nmsdk-StructTrainExpArchive на M40; [доступ по Samba](//10.245.1.12/Nmsdk-StructTrainExpArchive). В Git остаются код, настройки и компактные проверяемые refs. [Подробная карта реализации](ImplementationStatus.ru.md), [текущий алгоритмический подэтап](N1RecoveryAndFastAmplitude-20261115.ru.md).
 
 Текущий алгоритмический результат9e7653a400761d6c2f3ea68fddcd40a4307d85e7/runtime root7b495ebf753259ae8b78c6d0eadd561fb3d2c835 проверен отдельно и пока находится в feature codex/timelearner-n1-moderate-recovery. Принятый ранее developb2e29825c31c987abb9c2f1cd9011a5d494aa8d5/Pulsec7e29cc91af111c8033e63299563dd56f8cd41c5 сохраняет прежний завершённый подэтап.
+
+Умеренный N1 recovery опубликован через child-first --no-ff: root develope8f7a53c6bca3a1d095ab2955f2a65c8f4a81e20/Pulse23d039e44f927eb8040473845d3c391270d9d15e. [Новый контроль PSI](PresynapticStorageControl-20261116.ru.md) находится в отдельной codex/timelearner-psi-storage-factor; runtime существующих заданий не обновлялся.

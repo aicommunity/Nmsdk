@@ -64,3 +64,9 @@ runtime. После каждого изменения структуры про�
 постановку и компактные refs. Перед завершением этого подэтапа нужны адресная
 native приёмка, реальные результаты и merge --no-ff в develop. Этот протокол
 не закрывает полную матрицу режимов исходного плана.
+
+## Фактическая входная приёмка
+
+[M40 native preflight A2 принят1/1](PresynapticStoragePreflightAcceptance-20261116.json), все процессы закрыты. Два реальных image readbacks и три rehashed semantic negative controls подтверждены. Stock model5a916bc7c77f2176c065d57e3d68dd0783902b40418eec42cf089eb10b36abf5; PSI1c2511badd52a622e02814e31f74fd89ab0fa99b3b44b4a0e402bb8daea0f356. Native Calculate ещё не проверялся этим preflight. Исторический A1 сохранён; A2 уточняет название флага сохранённой физики, сами модели не изменились. Общий внешний archive226файлов/736454байта, SHA256fbef418ddccfc5c733d2ed6158aba7a6b58f71e3dbab83037f175c6adcaa2e4b.
+
+После приёмки и архивирования запущены Stock и PSI cold A1, controls9303d484ea011bead0f2b18ab07c149a9496ad6a, producer root64327e103d7085972f6512db77a2195f27c5b2fc. Runtime остаётся7b495ebf753259ae8b78c6d0eadd561fb3d2c835/Pulse9e7653a400761d6c2f3ea68fddcd40a4307d85e7. Ресурсная проверка перед запуском:12 CPU в affinity,44.62GB доступной RAM,444.77GB свободного Data. Научных результатов новой пары ещё нет.
