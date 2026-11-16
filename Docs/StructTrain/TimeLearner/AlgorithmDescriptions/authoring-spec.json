@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_living_algorithm_docx",
+  "schema_version": 1,
+  "requested_at": "2026-11-16",
+  "criterion": {
+    "TP_minimum": 1,
+    "TN_minimum": 2,
+    "training_certificate_required": false,
+    "distinct_foil_count_must_be_reported": true
+  },
+  "deliverables": [
+    "TimeLearnerClassicAlgorithms.ru.docx",
+    "TimeLearnerBranchAlgorithms.ru.docx"
+  ],
+  "priorities": {
+    "experiments_first": true,
+    "defer_if_competing_with_experiments": true
+  },
+  "requirements": [
+    "families with shared core and explicit variant differences and result effects",
+    "mathematical formulae",
+    "flowcharts",
+    "UML class and sequence diagrams",
+    "explanations and real examples",
+    "multiple levels of detail",
+    "maintain alongside code and accepted experiments"
+  ],
+  "publication": {
+    "generated_binary_in_root_git": false,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "cache": "explicit output directory argument"
+  },
+  "status": "first maintained V2 N1 edition authored; final render acceptance recorded separately",
+  "skill": "documents",
+  "render_gate": "render_docx.py plus visual review of every page"
+}
