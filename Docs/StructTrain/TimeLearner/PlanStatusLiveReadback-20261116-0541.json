@@ -1,0 +1,471 @@
+{
+  "kind": "timelearner_plan_live_status_readback",
+  "schema_version": 1,
+  "checked_at": "2026-11-16T05:41:15.511549+00:00",
+  "whole_plan_complete": false,
+  "fully_accepted_stages": [
+    0
+  ],
+  "partially_accepted_stages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "accepted_develop": {
+    "root": "6477b7c7602ede18ea948fb9f46dd12229af0c3d",
+    "PulseLib": "23d039e44f927eb8040473845d3c391270d9d15e",
+    "Bin": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+    "Rdk": "de4134235c0dcb8b91fd9a43b267348ad1a163ca"
+  },
+  "remote_observation": "Read-only SSH via 10.245.1.12; process identities inspected, not inferred from lock files.",
+  "m40_jobs": [
+    {
+      "job": "s11-fast-bracket-wall3600-m40-a1",
+      "units": [
+        {
+          "directory": "process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3853742,
+          "proc_present": false
+        },
+        {
+          "directory": "worker/native-uniform-profile-Train/runs/preflight/process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3867048,
+          "proc_present": false
+        },
+        {
+          "directory": "worker/native-uniform-profile-Train/runs/train/process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3867408,
+          "proc_present": false
+        }
+      ],
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/terminal.json": {
+        "operation_passed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      },
+      "completed_group_csvs": 43,
+      "native_files": [
+        {
+          "name": "train_stopped_trial_37.csv",
+          "bytes": 154802
+        },
+        {
+          "name": "train_stopped_trial_108.json",
+          "bytes": 5388
+        },
+        {
+          "name": "train_stopped_trial_167.json",
+          "bytes": 5138
+        },
+        {
+          "name": "train_stopped_trial_131.csv",
+          "bytes": 141781
+        },
+        {
+          "name": "train_stopped_trial_106.csv",
+          "bytes": 144683
+        },
+        {
+          "name": "train_stopped_trial_195.csv",
+          "bytes": 151445
+        },
+        {
+          "name": "train_stopped_trial_100.json",
+          "bytes": 5151
+        },
+        {
+          "name": "train_stopped_trial_250.csv",
+          "bytes": 145446
+        },
+        {
+          "name": "train_stopped_trial_75.json",
+          "bytes": 5130
+        },
+        {
+          "name": "train_stopped_trial_107.csv",
+          "bytes": 144655
+        },
+        {
+          "name": "train_stopped_trial_13.csv",
+          "bytes": 146137
+        },
+        {
+          "name": "train_stopped_trial_171.json",
+          "bytes": 5143
+        }
+      ]
+    },
+    {
+      "job": "s11-fast-bracket-wall7200-m40-a1",
+      "units": [
+        {
+          "directory": "process/contained",
+          "execution": "running",
+          "closed": false,
+          "pid": 3853743,
+          "proc_present": true,
+          "cpu_jiffies": 32148
+        },
+        {
+          "directory": "worker/native-uniform-profile-Train/runs/preflight/process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3867059,
+          "proc_present": false
+        },
+        {
+          "directory": "worker/native-uniform-profile-Train/runs/train/process/contained",
+          "execution": "running",
+          "closed": false,
+          "pid": 3867431,
+          "proc_present": true,
+          "cpu_jiffies": 588192
+        }
+      ],
+      "completed_group_csvs": 0,
+      "native_files": [
+        {
+          "name": "raw-trial-322.json",
+          "bytes": 5161
+        },
+        {
+          "name": "raw-trial-267.json",
+          "bytes": 5137
+        },
+        {
+          "name": "raw-trial-107.json",
+          "bytes": 5147
+        },
+        {
+          "name": "raw-trial-259.json",
+          "bytes": 5390
+        },
+        {
+          "name": "raw-trial-187.json",
+          "bytes": 5385
+        },
+        {
+          "name": "raw-trial-55.json",
+          "bytes": 5377
+        },
+        {
+          "name": "raw-trial-20.json",
+          "bytes": 5149
+        },
+        {
+          "name": "raw-trial-321.csv",
+          "bytes": 150279
+        },
+        {
+          "name": "raw-trial-43.csv",
+          "bytes": 154775
+        },
+        {
+          "name": "raw-trial-185.csv",
+          "bytes": 151445
+        },
+        {
+          "name": "raw-trial-16.json",
+          "bytes": 5161
+        },
+        {
+          "name": "raw-trial-129.json",
+          "bytes": 5136
+        }
+      ]
+    },
+    {
+      "job": "s11-psi-k2p5-threshold-m40-a2",
+      "units": [
+        {
+          "directory": "process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 3895568,
+          "proc_present": false
+        },
+        {
+          "directory": "worker/tmp/threshold-study/runs/baseline100/process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 4086384,
+          "proc_present": false
+        },
+        {
+          "directory": "worker/tmp/threshold-study/runs/candidate/process/contained",
+          "execution": "unknown",
+          "closed": true,
+          "pid": 108030,
+          "proc_present": false
+        }
+      ],
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/terminal.json": {
+        "operation_passed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      },
+      "completed_group_csvs": 0,
+      "native_files": []
+    }
+  ],
+  "elder_report": {
+    "job": "s11-restored-psi-frozen8-report-elder-a1",
+    "execution": "unknown",
+    "closed": true,
+    "pid": 1183854,
+    "proc_present": false,
+    "process/result.json": {
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "all_processes_closed": true
+    },
+    "worker/terminal.json": {
+      "operation_passed": true
+    },
+    "worker/validation/result.json": {
+      "execution": "completed",
+      "assertion_status": "passed",
+      "executed_tests": 1,
+      "failures": [],
+      "errors": []
+    },
+    "png_count": 569
+  },
+  "psi_threshold_actual": {
+    "checked_at": "2026-11-16T05:41:15.511549+00:00",
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-psi-k2p5-threshold-m40-a2/worker/tmp/threshold-study/result.json",
+    "sha256": "f5fac4275551576490edb9f688c50c9d0bbf655381322ebb5ded6957793d4911",
+    "baseline_waveforms_equal": true,
+    "training_completed": false,
+    "independent_evaluation": false,
+    "results": [
+      {
+        "name": "baseline100",
+        "threshold": 100,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0,
+          "foil_response_rate": 0
+        },
+        "validity": "valid",
+        "trials": [
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/0",
+            "label": "target",
+            "spike_count": 0
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/1",
+            "label": "foil",
+            "spike_count": 0
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/2",
+            "label": "foil",
+            "spike_count": 0
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/3",
+            "label": "foil",
+            "spike_count": 0
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/4",
+            "label": "foil",
+            "spike_count": 0
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/5",
+            "label": "foil",
+            "spike_count": 0
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/6",
+            "label": "foil",
+            "spike_count": 0
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/7",
+            "label": "foil",
+            "spike_count": 0
+          }
+        ]
+      },
+      {
+        "name": "candidate",
+        "threshold": 0.189057455929736,
+        "counts": {
+          "TP": 1,
+          "FP": 6,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.25,
+          "target_hit_rate": 1,
+          "foil_response_rate": 0.8571428571428571
+        },
+        "validity": "valid",
+        "trials": [
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/0",
+            "label": "target",
+            "spike_count": 2
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/1",
+            "label": "foil",
+            "spike_count": 2
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/2",
+            "label": "foil",
+            "spike_count": 3
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/3",
+            "label": "foil",
+            "spike_count": 0
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/4",
+            "label": "foil",
+            "spike_count": 3
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/5",
+            "label": "foil",
+            "spike_count": 3
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/6",
+            "label": "foil",
+            "spike_count": 7
+          },
+          {
+            "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/7",
+            "label": "foil",
+            "spike_count": 7
+          }
+        ]
+      }
+    ]
+  },
+  "fast_3600": {
+    "execution": "completed",
+    "validity": "valid",
+    "training_outcome": "budget_exhausted",
+    "reason": "native_training_time_budget_exhausted",
+    "certificate": null,
+    "scalar_candidates": 19,
+    "jointly_ready_candidates": 0,
+    "actual_parameters": [
+      {
+        "length": 122,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "length": 122,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "length": 121,
+        "resistance": 10871143.923391603,
+        "synapses": 1
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "model_revision": "90c632e06f04f8364a11fe1980abd8b59f10b5f3689cbcf1de914553763cbeb3",
+    "composite_counters": {
+      "archive": {
+        "groups": 43,
+        "native_probes": 257,
+        "primary_bytes": 37707676,
+        "sampled_frames": 925124
+      },
+      "attempt": {
+        "logical_groups": 43,
+        "native_probes": 257,
+        "sampled_frames": 925124
+      }
+    },
+    "physical_audit": {
+      "kind": "timelearner_uniform_profile_physics_audit",
+      "schema_version": 1,
+      "membranes_checked": {
+        "initial": 2,
+        "final": 123
+      },
+      "frequency_hz": "2000",
+      "uniform_physics_preserved": true,
+      "positive_individual_resistances_allowed": true,
+      "threshold_and_feedback_preserved": true,
+      "native_execution_verified": false,
+      "training_certificate_verified": false,
+      "scientific_verdict": null
+    }
+  },
+  "publication_limitations": [
+    "New Fast3600 and PSI threshold native results are read back, not yet externally archived and scientifically accepted as complete publications.",
+    "Elder PSI gallery built successfully (569 PNG); external cache publication and manual visual review are pending.",
+    "Fast7200 native process 3867431 was confirmed live at this readback; do not restart."
+  ],
+  "unvalidated_source": {
+    "branch": "codex/timelearner-fast-n1-bracket",
+    "commit": "f536c275e331af132384f364e4a3cb2edd6c0357",
+    "description": "Production cold-profile preparation CLI and three regression tests committed; server validation pending."
+  },
+  "scientific_classifier_confirmed": false
+}
