@@ -81,7 +81,8 @@ class BatchNativeControlsTest(unittest.TestCase):
             for p in packages:
                 prefix=p.name.removesuffix(suffix)
                 add(p,[p.with_name(prefix+trial_suffix+str(i)+'.json') for i in range(4)],False)
-        diagnostics=Path(declaration['diagnostic_native'])
+        diagnostics=Path(os.environ['TIMELEARNER_BATCH_DIAGNOSTIC_NATIVE'])
+        self.assertEqual(str(diagnostics),declaration['diagnostic_native'])
         packages=sorted(diagnostics.glob('*_diagnostic_threshold.json'));self.assertEqual(len(packages),2)
         for p in packages:
             prefix=p.name.removesuffix('_diagnostic_threshold.json')
