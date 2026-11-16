@@ -1,9 +1,9 @@
 # Явные DATA inputs native gate
 
-Кандидат: native gate schema5 сохраняет contained Linux execution schema3 и
+Native gate schema5 сохраняет contained Linux execution schema3 и
 добавляет обязательный непустой `data_inputs`. Schema4 остаётся контрактом
-Windows, схемы1–4 и их result schema1 не изменяются. Runtime-приёмка кандидата
-ещё не выполнена. [IO/schema/legacy reader проверка16/16 на M40 принята](ValidationPlans/M40NativeDataInputs16A1-20261112/RESULT.ru.md);
+Windows, схемы1–4 и их result schema1 не изменяются.
+[IO/schema/legacy reader проверка16/16 на M40 принята](ValidationPlans/M40NativeDataInputs16A1-20261112/RESULT.ru.md);
 она не запускает actual native model consumer.
 
 Каждый вход задаёт `name`, абсолютный `path`, точные `bytes` и `sha256`.
@@ -29,7 +29,10 @@ actual mappings/JUnit и source/runtime guards остаются обязател
 Приёмка:8 адресных IO/schema/mutation controls, прежние8 native-gate reader
 controls на реальном11-case JUnit; далее actual native consumer двух больших
 N4 моделей. Сжатые derived модели остаются кэшем M40, исходные self-contained
-primary уже сохранены в Git. Этот документ не закрывает весь этап10.
+primary хранятся во внешнем архиве `/media/user/Data/Nmsdk-StructTrainExpArchive`.
+В корневом Git сохраняются компактные ссылки, код и декларации. Старое указание
+на обязательное хранение primary в Git отменено политикой внешнего архива.
+Этот документ не закрывает весь этап10.
 
 Два native-потребителя подготовлены в `Test_PulseLib_CompositeTraining.cpp`.
 Явный CMake opt-in `NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS=ON` регистрирует
@@ -37,4 +40,6 @@ primary уже сохранены в Git. Этот документ не зак�
 По умолчанию opt-in выключен; стандартный CTest сохраняет обычный набор,
 а bound-data cases запускаются отдельными owned gates. Файлы должны называться
 `classic-recorded-model.qz` и `branch-recorded-model.qz`; их raw size/SHA
-зафиксированы в consumer. Компиляция и runtime-приёмка этих двух cases открыты.
+зафиксированы в consumer. [Исходная actual-приёмка и ограничения измерений времени](LargeModelRoundtripTimingReview-20261112.ru.md).
+Новая сборка с потоковым hash проверяется отдельно; её результат не переносится
+автоматически с прежнего SDK. Текущее состояние — [в сводке 17 ноября](CurrentStatus-20261117.ru.md).
