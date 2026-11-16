@@ -1,0 +1,92 @@
+{
+  "kind": "timelearner_current_fast_n1_elder_sdk_acceptance",
+  "schema_version": 1,
+  "accepted_utc": "2026-11-16T13:15:43.155Z",
+  "worker": "Elder-1",
+  "job": "s07-fast-n1-current-sdk-elder-a1",
+  "controller": "/home/user/timelearner-refactor/readbacks/s07-fast-n1-current-sdk-elder-a1-controller",
+  "source_root": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+  "pulse": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7",
+  "tool_root": "c60560a38eeda634947ae5cd3ef3872ee4258b6f",
+  "canonical_control_commit": "ccaaae62dfb88b3ec431ae5fcd19d1fb5e789123",
+  "source_closure": {
+    "root": {
+      "head": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7",
+      "head": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "status": ""
+    }
+  },
+  "expected_cpp_cases": 154,
+  "audited_passed_cpp_cases": 154,
+  "failed_cases": [],
+  "completed_leaf_gates": 35,
+  "outer_closed": true,
+  "all_leaf_groups_closed": true,
+  "supervisor_reason": null,
+  "record_errors": [],
+  "build_type": "Release",
+  "build_parallelism": 2,
+  "source": "/home/user/timelearner-refactor/source-fast-n1-current-sdk-a1",
+  "build": "/home/user/timelearner-refactor/build-fast-n1-current-sdk-a1",
+  "runtime": "/home/user/timelearner-refactor/runtime-fast-n1-current-sdk-a1",
+  "executable": {
+    "path": "/home/user/timelearner-refactor/runtime-fast-n1-current-sdk-a1/NeuroModelerConsole",
+    "sha256": "db0821b2f136f095792fd1cc90b717361c4e60740f4e0ab48528a04ebdd5640f",
+    "size": 26819400
+  },
+  "runtime_fingerprint": "f9f50022feeddca391b4bbb9d1ea0e7dfb4dd4dc69fb86b4052eec2ab1705b57",
+  "runtime_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/7e/7ecf6ff9058fc7afcde2b23b7761f224e69196c7ecc82f8f3130a3f0b6f6cb60",
+    "sha256": "7ecf6ff9058fc7afcde2b23b7761f224e69196c7ecc82f8f3130a3f0b6f6cb60",
+    "bytes": 12121
+  },
+  "runtime_manifest_path": "/home/user/timelearner-refactor/runtime-manifests/fast-n1-current-sdk-elder-a1.json",
+  "proof": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/b7/b7c13d40954dd0e7e8cea98ed32539365d03a10d7df7bddaf0aa537299831713",
+    "sha256": "b7c13d40954dd0e7e8cea98ed32539365d03a10d7df7bddaf0aa537299831713",
+    "bytes": 62929642
+  },
+  "proof_files": 2855,
+  "external_catalog": "experiments/2026-11-16/fast-profile-wall-budget/elder-current-sdk-a1.json",
+  "scope": "Fresh same-native-source SDK on Elder; full declared154-case bounded/measurement/search/recovery codec and service matrix. Enables subsequent actual frozen-order science; does not establish trained-model convergence or scientific classification."
+}
