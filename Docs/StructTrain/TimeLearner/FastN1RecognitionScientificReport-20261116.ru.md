@@ -1,4 +1,6 @@
-# Fast Branch N1: восемь реальных frozen-паттернов — 16 ноября2026
+# Fast Branch N1: реальные baseline и фиксированный порог — 16 ноября2026
+
+Реальный Same-Matrix threshold Test завершён1/1: при0.0560090535350351 получены TP1/FP3/FN0/TN4. Target spike0.2535с предшествует последнему входу0.49с. Три из семи foils отвечают, а три из четырёх положительных ответов ложны. Устойчивый классификатор и завершённое обучение не подтверждены. [Полная квитанция и первичные данные](FastN1ThresholdScientificAcceptance-20261116.json).
 
 При исходном threshold100 модель не отвечает ни на один паттерн: TP0/FP0/FN1/TN7. Target пропущен. Все восемь наблюдений полны и valid, модель и исходный обученный пакет неизменны. Это диагностика остановленного Train, общего TrainingCertificate нет. Семь правильных молчаний foil не означают работающую детекцию.
 
@@ -10,7 +12,28 @@
 
 Model revision f122a9ba82c154cf28e4081fcee0ab1d3b977eaaa19ad659211a4323e6af95f6. Native before/after и source_solo проверены production integration1/1. Source package SHA256 9ee28ee89f7120772efc0278c0990eb58e6199a823f22d04c3b4ce9b8ac290cb. Нативный runtime root7b495ebf753259ae8b78c6d0eadd561fb3d2c835/Pulse9e7653a400761d6c2f3ea68fddcd40a4307d85e7 не пересобирался и не изменялся во время задания.
 
-## Все паттерны и читаемый масштаб
+## Реальный фиксированный порог
+
+Production diagnostic_threshold_study выбрал один кандидат0.0560090535350351 по заранее объявленному правилу midpoint(target maximum, highest strictly lower foil maximum). Сначала повторены все8 baseline100; полные waveform samples и model identities точно совпали с исходным frozen8. Затем выполнены все8 проб с этим единственным threshold. Новый Train, калибровочный сертификат или независимая научная выборка не создавались.
+
+| Паттерн | Метка | Класс по onset-критерию | Реальные window spikes, абсолютные с | Последний фактический вход, с | События до последнего входа, с |
+|---|---|---|---|---|---|
+| phasea-row-0 | target | TP | 0.2535 | 0.49 | 0.2535 |
+| phasea-row-1 | foil | TN |  | 2.4905 |  |
+| phasea-row-2 | foil | FP | 4.4945 | 4.491 |  |
+| phasea-row-3 | foil | TN |  | 6.4915 |  |
+| phasea-row-4 | foil | FP | 8.2525 | 8.492 | 8.2525 |
+| phasea-row-5 | foil | FP | 10.496 | 10.4925 |  |
+| phasea-row-6 | foil | TN |  | 12.493 |  |
+| phasea-row-7 | foil | TN |  | 14.4935 |  |
+
+Обе реальные серии completed/valid, все16 окон полны; модели заморожены внутри каждого прогона и исходный Train package не меняется. Candidate model revision d0977f960a87ae75f0f8df77f197392783cec68c7ab56ce696c4b3adf4ba07aa отличается от baseline только объявленным threshold.
+
+В метриках early_spikes=[] означает отсутствие событий до начала response window/onset. Это не означает отсутствие реакции до последнего входного импульса: target срабатывает за0.2365с до него. Foil-response rate3/7≈42.86%; доля ложных среди положительных ответов3/4=75%. Научный результат остаётся частичной Same-Matrix детекцией остановленной модели, не completed-pattern detection и не Exact.
+
+Ниже приведены Soma-графики именно baseline100. Графики candidate строятся отдельным новым job через общий production Soma/LT renderer; baseline изображения не выдаются за реакцию при новом пороге.
+
+## Все паттерны baseline100 и читаемый масштаб
 
 Исходная PhaseA матрица revision1c1464e248f8744e858bd66df0be99e39969fd65, порядок rotation0. Reset-per-trial, полное окно2с; таблица использует фактически записанные времена. Время максимума отсчитано от первого фактического входа данного паттерна. Значения — native model units, SI для потенциала не подтверждена. В этой nonspiking baseline максимумы LT potential и Soma1 совпадают численно; метрики определяются реальными spike events.
 
@@ -45,4 +68,4 @@ Elder восстановил все459 logical members primary побайтно,
 
 ## Следующие уже объявленные опыты
 
-[Один Same-Matrix threshold diagnostic](FastN1ThresholdDiagnosticProtocol-20261116.ru.md) повторяет исходный baseline на том же SDK и затем измеряет реальные spikes всех восьми паттернов при одном фиксированном пороге. Его результаты пока не приняты. [Один cold21600с](FastN1FullTrainingProtocol-20261116.ru.md) даёт текущему алгоритму конечное дополнительное время для оставшихся входов, сохраняя физику, исходные допуски и логические бюджеты. Ни один из этих будущих результатов не предполагается положительным заранее.
+[Один Same-Matrix threshold diagnostic](FastN1ThresholdDiagnosticProtocol-20261116.ru.md) завершён1/1; новый full primary содержит1333 logical members, включая исходный frozen8,53.51MB compressed. Независимый Elder replay обеих серий и original-baseline waveform comparison запущен; итог ещё не принят. Новый candidate temporal report также выполняется. [Один cold21600с](FastN1FullTrainingProtocol-20261116.ru.md) продолжает обучение при прежних native коде, физике, допусках и логических бюджетах.
