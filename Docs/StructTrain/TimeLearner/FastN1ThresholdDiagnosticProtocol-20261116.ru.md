@@ -1,0 +1,11 @@
+# Fast: один реальный Same-Matrix threshold diagnostic — 16 ноября2026
+
+Основа — точный frozen8 terminal7200 из [Fast cold пары](FastN1BracketScientificReport-20261116.ru.md), job s11-fast-bracket-frozen-m40-a2, source5248368b75194c657163f51f747f4512605e0e1b. Все8 исходных PhaseA паттернов, полный2с отклик/reset-per-trial, identity recognition conversion. Train budget_exhausted, certificate отсутствует; completed-training/independent evaluation не заявляются.
+
+Production diagnostic_threshold_study сначала проверяет полные исходные nonspiking observations и unchanged full model. Единственное правило предложения порога: midpoint между target LT maximum и наибольшим строго меньшим foil LT maximum. Если такого интервала нет, опыт останавливается с явной причиной; другой порог ради счёта не подбирается. Глобальные nonspiking maxima служат только предложением, фактический verdict ими не определяется.
+
+Тот же неизменяемый native runtime сначала повторяет все8 паттернов при100; model revision и полные baseline waveforms должны точно совпасть с исходным frozen8. Затем все8 предъявляются с единственным рассчитанным фиксированным threshold. Считаются реальные native spikes; каждый run имеет полный model-before/model-after, source/runtime hash и закрытую owned process group. TP/FP/FN/TN, target events до последнего входа и события вне окна публикуются отдельно. Target hit, separability и число FP не задаются как условие инженерного PASS.
+
+Source actor source-fast-frozen-diagnostic-a1/5248368b75194c657163f51f747f4512605e0e1b, production tests.test_coupled_stopped_threshold_native. Отдельный job s11-fast-bracket-threshold-m40-a1; source controls не менять. Native leaf1800с/8GiB; общий controller10800с/8GiB/256 tasks учитывает независимые полные DATA audits больших моделей, не меняя длительности пробы или алгоритма. Полные graphs имеют около254MB каждый; большие fixture limits объявляются явно до запуска.
+
+После verified closure сохранить полные первичные данные только в M40 external CAS. Временные отчёты всех8 паттернов включают Soma, фактические входные импульсы, LT decision/spike events, обзор и читаемые native zoom. Число автоматически построенных изображений отделять от фактически просмотренных. Результат остаётся diagnostic historical_same_matrix; оценка на независимой выборке — другой протокол.
