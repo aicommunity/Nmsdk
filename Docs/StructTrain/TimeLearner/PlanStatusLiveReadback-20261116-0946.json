@@ -1,0 +1,265 @@
+{
+  "kind": "timelearner_plan_status_readback",
+  "schema_version": 1,
+  "created_at_utc": "2026-11-16T09:47:35.363Z",
+  "accepted_root_develop": "9fe2eebc6940c1245f2a086f53d1e796c4c90124",
+  "data_feature_parent": "c9541833365ee3cedfdc383a2f474702af623221",
+  "whole_plan_complete": false,
+  "stage_status": [
+    {
+      "stage": 0,
+      "status": "accepted"
+    },
+    {
+      "stage": 1,
+      "status": "partial"
+    },
+    {
+      "stage": 2,
+      "status": "partial"
+    },
+    {
+      "stage": 3,
+      "status": "partial"
+    },
+    {
+      "stage": 4,
+      "status": "partial"
+    },
+    {
+      "stage": 5,
+      "status": "partial"
+    },
+    {
+      "stage": 6,
+      "status": "partial"
+    },
+    {
+      "stage": 7,
+      "status": "partial"
+    },
+    {
+      "stage": 8,
+      "status": "partial"
+    },
+    {
+      "stage": 9,
+      "status": "partial"
+    },
+    {
+      "stage": 10,
+      "status": "partial"
+    },
+    {
+      "stage": 11,
+      "status": "partial"
+    },
+    {
+      "stage": 12,
+      "status": "partial"
+    }
+  ],
+  "remote_process_readbacks": {
+    "m40": [
+      {
+        "job": "s11-fast-bracket-threshold-common-report-m40-a1",
+        "utc": "2026-11-16T09:43:48Z",
+        "execution": "unknown",
+        "closed": true,
+        "pid": 1918544,
+        "proc_present": false,
+        "worker/terminal.json": {
+          "operation_passed": true
+        },
+        "worker/validation/result.json": {
+          "execution": "completed",
+          "assertion_status": "passed",
+          "executed_tests": 1,
+          "failures": [],
+          "errors": []
+        },
+        "png_count": 983
+      },
+      {
+        "job": "s11-fast-bracket-wall21600-m40-a1",
+        "utc": "2026-11-16T09:43:48Z",
+        "execution": "unknown",
+        "closed": true,
+        "pid": 1031859,
+        "proc_present": false,
+        "worker/terminal.json": {
+          "operation_passed": true
+        },
+        "worker/validation/result.json": {
+          "execution": "completed",
+          "assertion_status": "passed",
+          "executed_tests": 1,
+          "failures": [],
+          "errors": []
+        },
+        "png_count": 0
+      }
+    ],
+    "elder": {
+      "job": "s11-fast-threshold-primary-replay-elder-a2",
+      "utc": "2026-11-16T09:43:48Z",
+      "execution": "running",
+      "closed": false,
+      "pid": 1689368,
+      "proc_present": true
+    }
+  },
+  "new_cold_train": {
+    "job": "s11-fast-bracket-wall21600-m40-a1",
+    "source": "5ca731a696713a7787700e1fc553485ec5264a18",
+    "controls": "1ea945c3520bbd80121c0a0a74f9f0002ff65e3a",
+    "native_summary_sha256": "275ad7f6a1720cb0e483ac64c30553b990e7c35599f4196b0c65d71cf1f973bb",
+    "native_summary_bytes": 72709345,
+    "outcome": "budget_exhausted",
+    "reason": "native_composite_group_time_budget_exhausted",
+    "certificate": null,
+    "search_probes": 63,
+    "candidates": 31,
+    "applied_edits": 30,
+    "composite_counters": {
+      "archive": {
+        "groups": 67,
+        "native_probes": 401,
+        "primary_bytes": 59409661,
+        "sampled_frames": 1443907
+      },
+      "attempt": {
+        "logical_groups": 67,
+        "native_probes": 401,
+        "sampled_frames": 1443907
+      }
+    },
+    "wall_seconds": 8075.120638078079,
+    "maximum_wall_seconds": 21600,
+    "model_revision": "07101c0b0b29e746ad601050613786b1450f5a733464b501c5738ab92d3d7b22",
+    "package_sha256": "cd709693ea4537989b8416b059d735b8f596217407481913b3d14aa494893087",
+    "actual_parameters": [
+      {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "length": 121,
+        "resistance": 9731840.34290068,
+        "synapses": 1
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "classification_assessed": false,
+    "primary_publication_accepted": false,
+    "fresh_final_verification_accepted": false
+  },
+  "latest_fast_recognition": {
+    "source_training_job": "s11-fast-bracket-wall7200-m40-a1",
+    "diagnostic_only": true,
+    "independent_scientific_evaluation": false,
+    "threshold": 0.0560090535350351,
+    "TP": 1,
+    "FP": 3,
+    "FN": 0,
+    "TN": 4,
+    "target_spike_absolute_seconds": 0.2535,
+    "last_target_stimulus_absolute_seconds": 0.49,
+    "scientific_classifier_success": false,
+    "receipt": "FastN1ThresholdScientificAcceptance-20261116.json"
+  },
+  "common_lt_reports": {
+    "source": "9bb0b6907b17ba870c710e1bfe41cafc2b371db3",
+    "elder_suite_passed": 11,
+    "m40_suite_passed": 1,
+    "elder_archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/40/40f1f90f45c125f7e8a226ec6b1b869982738ba619ddbbda0e0522a8b1924a8a",
+      "sha256": "40f1f90f45c125f7e8a226ec6b1b869982738ba619ddbbda0e0522a8b1924a8a",
+      "bytes": 342820765
+    },
+    "elder_cases": {
+      "fast_baseline": {
+        "cache_relative": "report-cache/2026-11-16/fast-frozen8-common-lt-elder",
+        "png_count": 936,
+        "trial_soma_pairs": 8,
+        "trial_lt_pairs": 8,
+        "threshold": 100,
+        "model_revision": "f122a9ba82c154cf28e4081fcee0ab1d3b977eaaa19ad659211a4323e6af95f6",
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0,
+          "foil_response_rate": 0
+        }
+      },
+      "psi_candidate": {
+        "cache_relative": "report-cache/2026-11-16/psi-threshold-common-lt-elder",
+        "png_count": 1122,
+        "trial_soma_pairs": 8,
+        "trial_lt_pairs": 8,
+        "threshold": 0.189057455929736,
+        "model_revision": "801fb52a215e76151be469804f0612e18e4cdfa6e6d8163c03c669233bee7ef4",
+        "counts": {
+          "TP": 1,
+          "FP": 6,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.25,
+          "target_hit_rate": 1,
+          "foil_response_rate": 0.8571428571428571
+        }
+      }
+    },
+    "production_rendering_completed": true,
+    "new_manual_visual_acceptance": false,
+    "merged_into_develop": false
+  },
+  "independent_primary_replay": {
+    "job": "s11-fast-threshold-primary-replay-elder-a2",
+    "source": "0cfcd8fc91523881ad72fa58f473aa821db9e522",
+    "controls": "afdd546fd2d9cb14943f3b173d5debb2981e6ae0",
+    "accepted": false,
+    "last_readback": {
+      "job": "s11-fast-threshold-primary-replay-elder-a2",
+      "utc": "2026-11-16T09:43:48Z",
+      "execution": "running",
+      "closed": false,
+      "pid": 1689368,
+      "proc_present": true
+    },
+    "previous_attempt": {
+      "job": "s11-fast-threshold-primary-replay-elder-a1",
+      "reason": "reservation_capacity_exhausted",
+      "executed_tests": 0,
+      "scientific_result": null
+    }
+  },
+  "next_actions": [
+    "Investigate the measured per-composite-group time limit using completed Train evidence; do not automatically raise total budget.",
+    "Publish the new cold Train primary and analyze measured candidates before scientific acceptance.",
+    "Finish independent primary restoration and manually review selected original Soma/LT figures before accepting report code.",
+    "Complete remaining original stages and full algorithm/mode/physics/protocol matrix."
+  ]
+}
