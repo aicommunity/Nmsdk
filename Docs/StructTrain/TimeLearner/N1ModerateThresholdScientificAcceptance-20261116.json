@@ -1,0 +1,279 @@
+{
+  "kind": "timelearner_n1_moderate_actual_threshold_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "job": "s11-n1-moderate-threshold-m40-a1",
+  "producer_root": "e3b74d00e0a1813a8f610e62352e01a2756a2a7d",
+  "runtime_root": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+  "pulse": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7",
+  "controls": "e732b31fe88b66f5c9332b75573ad9a4e5b8be81",
+  "collector_controls": "ca7c435f2275e51b8141e0c6aa1f3fae96f38dc3",
+  "execution": "completed",
+  "validity": "valid",
+  "all_processes_closed": true,
+  "python_passed": 1,
+  "native_series": 2,
+  "complete_observations_each": 8,
+  "baseline_waveforms_equal": true,
+  "source_training": "invalid_observation",
+  "training_certificate": null,
+  "training_completed": false,
+  "independent_evaluation": false,
+  "calibrated": false,
+  "threshold": 0.11468361216368189,
+  "threshold_rule": "midpoint_of_target_maximum_and_highest_strictly_lower_foil_maximum",
+  "full_matrix_nonspiking_peak_margin": -0.07585821342385102,
+  "counts": {
+    "baseline100": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 0,
+      "foil_response_rate": 0
+    },
+    "candidate": {
+      "TP": 1,
+      "FP": 6,
+      "FN": 0,
+      "TN": 1,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.25,
+      "target_hit_rate": 1,
+      "foil_response_rate": 0.8571428571428571
+    }
+  },
+  "candidate_actual_timing": [
+    {
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "complete": true,
+      "valid": true,
+      "stimulus_times": [
+        0.01,
+        0.09,
+        0.25,
+        0.49
+      ],
+      "spike_times": [
+        0.343,
+        0.3775
+      ],
+      "onset": 0.01,
+      "last_stimulus": 0.49,
+      "first_spike_relative_onset": 0.333,
+      "first_spike_relative_last": -0.14699999999999996,
+      "spikes_before_last": [
+        0.343,
+        0.3775
+      ]
+    },
+    {
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "complete": true,
+      "valid": true,
+      "stimulus_times": [
+        2.0105,
+        2.2505,
+        2.4105,
+        2.4905
+      ],
+      "spike_times": [
+        2.736,
+        2.7705
+      ],
+      "onset": 2.0105,
+      "last_stimulus": 2.4905,
+      "first_spike_relative_onset": 0.7255000000000003,
+      "first_spike_relative_last": 0.24550000000000027,
+      "spikes_before_last": []
+    },
+    {
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "complete": true,
+      "valid": true,
+      "stimulus_times": [
+        4.011,
+        4.171,
+        4.251,
+        4.491
+      ],
+      "spike_times": [
+        4.493,
+        4.524,
+        4.56
+      ],
+      "onset": 4.011,
+      "last_stimulus": 4.491,
+      "first_spike_relative_onset": 0.4820000000000002,
+      "first_spike_relative_last": 0.002000000000000668,
+      "spikes_before_last": []
+    },
+    {
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "complete": true,
+      "valid": true,
+      "stimulus_times": [
+        6.0115,
+        6.1715,
+        6.3315,
+        6.4915
+      ],
+      "spike_times": [],
+      "onset": 6.0115,
+      "last_stimulus": 6.4915,
+      "first_spike_relative_onset": null,
+      "first_spike_relative_last": null,
+      "spikes_before_last": []
+    },
+    {
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "complete": true,
+      "valid": true,
+      "stimulus_times": [
+        8.012,
+        8.032,
+        8.252,
+        8.492
+      ],
+      "spike_times": [
+        8.306,
+        8.334,
+        8.3625
+      ],
+      "onset": 8.012,
+      "last_stimulus": 8.492,
+      "first_spike_relative_onset": 0.2939999999999987,
+      "first_spike_relative_last": -0.18600000000000172,
+      "spikes_before_last": [
+        8.306,
+        8.334,
+        8.3625
+      ]
+    },
+    {
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "complete": true,
+      "valid": true,
+      "stimulus_times": [
+        10.0125,
+        10.2525,
+        10.4725,
+        10.4925
+      ],
+      "spike_times": [
+        10.766,
+        10.794,
+        10.822
+      ],
+      "onset": 10.0125,
+      "last_stimulus": 10.4925,
+      "first_spike_relative_onset": 0.7535000000000007,
+      "first_spike_relative_last": 0.2735000000000003,
+      "spikes_before_last": []
+    },
+    {
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "complete": true,
+      "valid": true,
+      "stimulus_times": [
+        12.013,
+        12.053,
+        12.093,
+        12.493
+      ],
+      "spike_times": [
+        12.306,
+        12.3295,
+        12.349,
+        12.367,
+        12.3845,
+        12.403,
+        12.4245
+      ],
+      "onset": 12.013,
+      "last_stimulus": 12.493,
+      "first_spike_relative_onset": 0.29299999999999926,
+      "first_spike_relative_last": -0.18700000000000117,
+      "spikes_before_last": [
+        12.306,
+        12.3295,
+        12.349,
+        12.367,
+        12.3845,
+        12.403,
+        12.4245
+      ]
+    },
+    {
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "complete": true,
+      "valid": true,
+      "stimulus_times": [
+        14.0135,
+        14.4135,
+        14.4535,
+        14.4935
+      ],
+      "spike_times": [
+        14.7065,
+        14.73,
+        14.7495,
+        14.7675,
+        14.785,
+        14.8035,
+        14.825
+      ],
+      "onset": 14.0135,
+      "last_stimulus": 14.4935,
+      "first_spike_relative_onset": 0.6929999999999996,
+      "first_spike_relative_last": 0.21300000000000097,
+      "spikes_before_last": []
+    }
+  ],
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/23/232f33a95729d6bce13e7ec71e21bf6c3ec64c84e3921d73b1795664cf3bdd98",
+    "sha256": "232f33a95729d6bce13e7ec71e21bf6c3ec64c84e3921d73b1795664cf3bdd98",
+    "bytes": 71314996
+  },
+  "bundle_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/ab/abf3bf292e24abf1490c08f172228f45df4a1955ab2ae22cb7939bc25b7bbfbb",
+    "sha256": "abf3bf292e24abf1490c08f172228f45df4a1955ab2ae22cb7939bc25b7bbfbb",
+    "bytes": 189648
+  },
+  "provenance_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/c7/c7850e222007d5ddfe845d4ee74ae87a220d7126b50aecd003e3dfc6719fb3fe",
+    "sha256": "c7850e222007d5ddfe845d4ee74ae87a220d7126b50aecd003e3dfc6719fb3fe",
+    "bytes": 264589
+  },
+  "bundle_members": 828,
+  "expanded_bytes": 1629611793,
+  "catalog_relative": "experiments/2026-11-16/n1-moderate-recovery/threshold-actual-primary-a1.json",
+  "temporal_report_complete": true,
+  "independent_primary_restore_accepted": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "temporal_acceptance": "N1ModerateThresholdTemporalAcceptance-20261116.json"
+}

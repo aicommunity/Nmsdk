@@ -55,9 +55,19 @@
       "s11-psi-k2p5-stock-cold-train-m40-a1",
       "s11-psi-k2p5-psi-cold-train-m40-a1"
     ],
-    "execution": "launched_pending_live_readback",
+    "execution": "stock_completed_psi_A1_setup_failure",
     "tolerances_and_budgets_unchanged": true,
-    "fresh_references_each_condition": true
+    "fresh_references_each_condition": true,
+    "corrected_followup": {
+      "job": "s11-psi-k2p5-psi-cold-train-m40-a2",
+      "controls": "3693a99d6c32607a9b6542dd358fd451e80b458e",
+      "producer_root": "1f551388cf62f2c3d427796c7d5ced635ecd7530",
+      "preparation_acceptance": "PresynapticWindowPreparationAcceptance-20261116.json",
+      "execution": "running_last_native_readback",
+      "scientific_verdict": null
+    },
+    "stock_acceptance": "PresynapticStockColdAcceptance-20261116.json",
+    "psi_A1_scope": "Setup error, not a scientific negative about PSI learning"
   },
   "scientific_verdict": null,
   "whole_plan_complete": false
