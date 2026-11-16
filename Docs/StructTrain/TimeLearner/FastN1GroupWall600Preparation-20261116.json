@@ -1,0 +1,81 @@
+{
+  "job": "s11-fast-bracket-groupwall600-m40-a1",
+  "request": "/media/user/Data/TimeLearnerRefactor/requests/fast-n1-groupwall600-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FastN1GroupWall600A1-20261116/request.json",
+  "controls_commit": "d54c51feec61d27b6b693ea1d8764e3df240ee0a",
+  "source_root": "6e72f24b408d8a45dc31798769c123bbdf071b7d",
+  "job_sha256": "b5d8dc72587f8b08f3e5b5620024cfaa7a94e948125ea017190e70f58d37c85c",
+  "preparation": {
+    "kind": "timelearner_uniform_cold_preparation",
+    "schema_version": 1,
+    "original_job_sha256": "9c7b2c662d04a8fb32db0e80fc50d0e4b534ab21e8d01c717c0a46ea042ea056",
+    "job_sha256": "b5d8dc72587f8b08f3e5b5620024cfaa7a94e948125ea017190e70f58d37c85c",
+    "inputs": {
+      "/media/user/Data/TimeLearnerRefactor/requests/fast-n1-full-training-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FastN1FullTrainingA1-20261116/fixture/original-before-budget.json": {
+        "source_path": "/media/user/Data/TimeLearnerRefactor/requests/fast-n1-full-training-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FastN1FullTrainingA1-20261116/fixture/original-before-budget.json",
+        "bytes": 7505,
+        "sha256": "d340f19a13b97697a52350334818a3866edb545b81062fef375fab9b285d0981"
+      },
+      "/media/user/Data/TimeLearnerRefactor/requests/fast-n1-full-training-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FastN1FullTrainingA1-20261116/fixture/profile.json": {
+        "source_path": "/media/user/Data/TimeLearnerRefactor/requests/fast-n1-full-training-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FastN1FullTrainingA1-20261116/fixture/profile.json",
+        "bytes": 835717,
+        "sha256": "a225af7b89a4f2cc789b4fdf48fa70ee8cf469ae01709971bedd493cc7104b6d"
+      }
+    },
+    "reference_package": {
+      "source_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-uniform-profile3-N1-train-m40-a1/worker/native-uniform-profile-Train/runs/train/native/train_stopped_state.json",
+      "bytes": 7699593,
+      "sha256": "7e3f0286c0f5aa8cbe7c807c6d7932e1c5fb8e760117fe71de0342b702e1c6b9"
+    },
+    "characterization": {
+      "frames": [
+        {
+          "first_frame": 27,
+          "last_frame": 27,
+          "frame_count": 3601
+        },
+        {
+          "first_frame": 187,
+          "last_frame": 187,
+          "frame_count": 3601
+        },
+        {
+          "first_frame": 507,
+          "last_frame": 507,
+          "frame_count": 3601
+        },
+        {
+          "first_frame": 987,
+          "last_frame": 987,
+          "frame_count": 3601
+        }
+      ],
+      "source_package_sha256": {
+        "source_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-uniform-profile3-N1-train-m40-a1/worker/native-uniform-profile-Train/runs/train/native/train_stopped_state.json",
+        "bytes": 7699593,
+        "sha256": "7e3f0286c0f5aa8cbe7c807c6d7932e1c5fb8e760117fe71de0342b702e1c6b9"
+      },
+      "source_origin": "3968029f88d697e663b8f2f01ee5070e6ee4f09f46f99074d903ae11a4576be8",
+      "source_data_audited": true,
+      "references_imported_into_train": false,
+      "training_certificate_verified": false,
+      "scientific_verdict": null
+    },
+    "budget_change": {
+      "maximum_wall_seconds": {
+        "before": 1800,
+        "after": 21600
+      },
+      "maximum_group_wall_seconds": {
+        "before": 300,
+        "after": 600
+      }
+    },
+    "execution_performed": false,
+    "amplitude_references_imported": false,
+    "learned_parameters_imported": false,
+    "classification_assessed": false,
+    "scientific_verdict": null
+  },
+  "execution_performed": false,
+  "threshold_must_close_first": true
+}
