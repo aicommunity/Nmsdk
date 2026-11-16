@@ -1,4 +1,4 @@
-"""Portable primary-data reports for native recognition evaluation schema 1.
+"""Portable primary-data reports for native recognition evaluation.
 
 This adapter labels SumPotential in model units: schema 1 has no SI descriptor.
 The report records that limitation instead of inventing mV or calibration.
@@ -12,6 +12,7 @@ import json
 from .native_evidence import load, require
 from .recognition_metrics import load_evaluation, score_recognition_evaluation, score_threshold_candidate
 from .plotting import render_soma, render_series, plotting_runtime
+from .lt_decision_reports import render_lt_decisions
 
 
 def _write(path, value):
@@ -147,6 +148,21 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
             view["files"] = [f"{folder.name}/{p}" for p in view["files"]]
         series.append({"descriptor": descriptor, **rendered})
     _write(output/"series.json", series)
+    decisions = render_lt_decisions(spec, observations, analysis.get('effective_threshold'), output,
+                                   context_label=context_label)
+    _write(output/'lt-decision-views.json', decisions)
+    links.append('<h2>LT decision potential and actual spike events</h2>'
+                 '<p>Threshold belongs to the LT decision channel. Local Y views explicitly mark an off-scale threshold. '
+                 'After-children samples can already reflect reset; use recorded spike markers.</p>')
+    for item in decisions['trials']:
+        links.append('<h3>'+html.escape(item['sample_id'])+' / '+html.escape(item['source_descriptor']['path'])+'</h3>')
+        for view in item['views']:
+            png, svg, pdf = [item['folder']+'/'+p for p in view['files']]
+            links.append(f'<p>{view["view"]}: <a href="{svg}">SVG</a> · <a href="{pdf}">PDF</a> · '
+                         f'<a href="{png}">full PNG</a></p><img src="{png}" alt="LT {view["view"]}">')
+    for item in decisions['unavailable_trials']:
+        links.append('<p>'+html.escape(item['trial_id'])+': '+html.escape(item['reason'])+'</p>')
+
     manifest = {"kind": "timelearner_visual_report", "schema_version": 1,
                 "purpose": "threshold_candidate_diagnostic" if calibration_probe else "recognition_evaluation_diagnostic",
                 "calibration_claim": False,
@@ -155,6 +171,10 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
                 "status": "diagnostic", "observation_validity": analysis["validity"],
                 "expected_trial_soma_pairs": len(spec["trials"])*count, "figures": figures,
                 "series": series,
+                "lt_decision_views": dict(path="lt-decision-views.json",
+                    declared_trials=decisions["declared_trial_count"], observed_trials=len(decisions["trials"]),
+                    all_declared_trials_rendered=decisions["all_declared_trials_rendered"],
+                    unavailable_trials=decisions["unavailable_trials"]),
                 "runtime": runtime,
                 "limitations": ["Soma SI units not recorded in native observations",
 
@@ -189,7 +209,8 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
             for p in sorted(output.rglob("*")) if p.is_file()}
     _write(output/"SHA256SUMS.json", sums)
     return {"kind": manifest["kind"], "status": manifest["status"],
-            "trial_soma_pairs": len(figures), "files": len(sums), "evaluation_verdict": None,
+            "trial_soma_pairs": len(figures), "lt_decision_trial_pairs": len(decisions["trials"]),
+            "files": len(sums), "evaluation_verdict": None,
             **({"diagnostic_only": manifest["diagnostic_only"],
                 "training_completed": manifest["training_completed"],
                 "source_training_outcome": manifest["source_training_outcome"]} if diagnostic else {})}

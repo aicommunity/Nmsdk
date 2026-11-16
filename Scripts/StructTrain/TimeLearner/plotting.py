@@ -227,8 +227,12 @@ def render_soma(observation, channel, label, limits, output: Path, *,
             ax.plot(times, soma, color="#154c9a", linewidth=1.4, label=label)
             if reference_level is not None:
                 require(math.isfinite(reference_level), "nonfinite_plot_reference_level")
+                reference_visible = y_limits[0] <= reference_level <= y_limits[1]
+                reference_label = f"Actual scalar spike threshold {reference_level:.12g}"
+                if not reference_visible:
+                    reference_label += " (outside shown Y)"
                 ax.axhline(reference_level, color="#477a32", linestyle="--", linewidth=1.,
-                           label="Actual scalar spike threshold")
+                           label=reference_label)
             overlay.step(times, stimulus, where="post", color="#d46200", alpha=.65,
                          linewidth=1.2, label="Actual shared input (native samples)")
             visible_sample_markers = sample_markers or name in peak_details
@@ -290,6 +294,7 @@ def render_soma(observation, channel, label, limits, output: Path, *,
                 rows[-1]["minimum_native_tick_pixels_on_zoom"] = 1420.8/(frequency*(right-left))
             if reference_level is not None:
                 rows[-1]["reference_level"] = reference_level
+                rows[-1]["reference_level_visible"] = reference_visible
     return rows
 
 
