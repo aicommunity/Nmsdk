@@ -1,8 +1,8 @@
 # Статус полного плана TimeLearner — 16 ноября 2026
 
-Проверка 2026-11-16T14:22:05.230Z; состояния живых заданий указаны по последнему серверному наблюдению. Полностью принят исходный этап 0; этапы 1–12 частичны. Это не оценка «1/13 работы»: во всех остальных этапах есть реализация и адресные приёмки, но остаются требования исходного плана. Цель целиком активна. Научные 8/8 не являются условием завершения рефакторинга.
+Проверка 2026-11-16T15:57:39Z; состояния живых заданий указаны по последнему серверному наблюдению. Полностью принят исходный этап 0; этапы 1–12 частичны. Это не оценка «1/13 работы»: во всех остальных этапах есть реализация и адресные приёмки, но остаются требования исходного плана. Цель целиком активна. Научные 8/8 не являются условием завершения рефакторинга.
 
-Принятый до этого evidence-подэтапа root develop: 1e139842633dbad687fafc8c9c4086ae2762b165. PulseLib 23d039e44f927eb8040473845d3c391270d9d15e, Bin 8cb6dba07b30432272984c8ce3136b48ad06f064, Rdk de4134235c0dcb8b91fd9a43b267348ad1a163ca. Новые подэтапы — отдельные ветки и --no-ff merge; пользовательский E:/Science-Repo/nmsdk-git не изменяется.
+Принятый до этого evidence-подэтапа root develop: 79722b18c40063f9dda3e3107ecbd5a43b60e17b. PulseLib 23d039e44f927eb8040473845d3c391270d9d15e, Bin 8cb6dba07b30432272984c8ce3136b48ad06f064, Rdk de4134235c0dcb8b91fd9a43b267348ad1a163ca. Новые подэтапы — отдельные ветки и --no-ff merge; пользовательский E:/Science-Repo/nmsdk-git не изменяется.
 
 ## Последние научные результаты
 
@@ -45,14 +45,14 @@
 
 [Elder current SDK принят154/154](ElderCurrentFastN1SdkAcceptance-20261116.json), все35 native groups закрыты. [Новый протокол fixed-model order: contract5/5](FrozenDiagnosticOrderPreparation-20261116.json); native64 приёмка ещё не получена. Приёмка алгоритмов по всем исходным режимам остаётся открытой.
 
-[Независимый replay нового threshold primary принят1/1](FastN1FullTrainingThresholdIndependentReplayAcceptance-20261116.json):1423/1420,3 proven content aliases, исходные/повторные baseline waveforms равны; no new native execution. [Native order A2 запущен](FrozenDiagnosticOrderLaunch-20261116.ru.md), результаты пока неизвестны.
+[Независимый replay нового threshold primary принят1/1](FastN1FullTrainingThresholdIndependentReplayAcceptance-20261116.json):1423/1420,3 proven content aliases, исходные/повторные baseline waveforms равны; no new native execution. [Native baseline8 на Elder завершён](FastN1FullTrainingElderNativeRepeat-20261116.ru.md): TP1/FP1/FN0/TN6, все восемь полных waveform точно равны M40 (max absolute difference0.0). Native baseline process закрыт; parent controller и study56 ещё выполняются. Это новое исполнение сохранённой модели, не повторное обучение. Приёмка всей серии64 и полный новый native primary пока не получены.
 
 ## Подтверждённые текущие задания
 
 | Worker | Job / owned PID | Последнее подтверждённое состояние |
 |---|---|---|
-|M40|s11-fast-bracket-groupwall600-m40-a1 /2814832|Новый cold Train выполняется. Общее wall21600с, group wall600с, прежние математика/физика/окна.|
-|Elder|s11-frozen-order-native-elder-a2 /2352165|Протокол64 запущен; пока source audit, затем baseline8 и rotations56. Native итог неизвестен. A1 отказал до проб из-за неверного orchestration kind; исправление A2 использует штатный controller mode.|
+|M40|s11-fast-bracket-groupwall600-m40-a1 /2814832|Native PID2822759 жив. Старый stop на group67 пройден: все6 anchor-проб group67 и все6 input1-проб group68 приL201 complete/valid. Идут следующие группы. Это raw полнота; scalar residuals и сертификат до конца Train не приняты.|
+|Elder|s11-frozen-order-native-elder-a2 /2352165|Baseline8 completed/valid, native PID2441413 закрыт, TP1/FP1/FN0/TN6 и все waveform равны M40. Study PID2648998 жив, rotations1..7 выполняются. Полная приёмка64 ещё не получена.|
 
 Threshold Test завершён и принят1/1; [самодостаточный primary и научные метрики](FastN1FullTrainingThresholdScientificAcceptance-20261116.json) опубликованы. Коллектор и actual Soma/LT report закрыты, report1/1;18 выбранных оригиналов просмотрены.
 
@@ -61,7 +61,7 @@ Threshold Test завершён и принят1/1; [самодостаточн�
 ## Следующая научная работа
 
 1. Довести уже работающий cold groupwall600 Train до честного исхода; сравнить измеренные кандидаты с прежними31 и проверить, дошёл ли он до свежего input1 наL201. После изменений общей модели нужна свежая финальная проверка всех входов.
-2. Довести уже работающий [Elder order A2](FrozenDiagnosticOrderLaunch-20261116.ru.md) до actual same-order control и объявленных rotations. Модель и threshold0.054353792695896797 фиксированы до новых проб; никаких новых порогов по результатам перестановок.
+2. Довести уже работающий [Elder order A2](FrozenDiagnosticOrderLaunch-20261116.ru.md) до завершения rotations и публикации полного нового primary; actual same-order control8 уже пройден. Модель и threshold0.054353792695896797 фиксированы до новых проб; никаких новых порогов по результатам перестановок.
 3. Проверить порядок, ITI, reset и оставшуюся режимную/физическую матрицу по отдельным протоколам. Same-Matrix7/8 относится только к исходным восьми паттернам и reset-per-trial.
 4. Завершать исходные этапы1–12, включая legacy/V2 A/B, миграцию и документацию. Число инженерных PASS не измеряет готовность классификатора. Надёжного срока получения устойчивой классификации пока нет.
 

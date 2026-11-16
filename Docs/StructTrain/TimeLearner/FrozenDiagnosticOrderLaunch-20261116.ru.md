@@ -8,6 +8,10 @@
 
 На14:18UTC жив owned PID2352165; выполняется проверка источника внутри controller. Native baseline/study outputs ещё не появились. Итог неизвестен; launch не является пройденной native64 приёмкой. Бюджеты: baseline3600с, study21600с, outer32400с; memory8GiB, tasks32/leaf128, output4.5GiB и minimum free8GiB. В source-selection оставлены443 проверенных файла1,539,995,801байт. Удалены только977 заново восстановленных и повторно проверенных byte-exact cache files3,609,782,276байт; complete primary64c9d5.../58.74MB сохранён в M40 CAS. Source используется совместно без новой тяжёлой копии.
 
+## Завершённый same-order control
+
+[Фактический повтор всех8 на Elder](FastN1FullTrainingElderNativeRepeat-20261116.ru.md) завершён: TP1/FP1/FN0/TN6, все 4001 отсчётов каждого отклика равны M40 с max absolute difference0.0. Native phase закрыта, frozen model revision и threshold сохранены. Свидетельство фазового readback опубликовано во внешнем архиве и независимо прочитано с M40. На15:57UTC study56 и parent controller ещё выполняются; полный новый native primary и native64 приёмка остаются ожидаемыми.
+
 ## Ошибка декларации первой попытки
 
 A1 был запущен как python-validation: этот штатный режим создаёт отдельный интерпретатор тестов. Runner использует lease identity основного contained controller, поэтому проверка frozen_order_owned_controller_required правильно отказала до первого native процесса. Unittest0.007с, native processes0; это ошибка постановки запуска, не отрицательный научный результат. Request/исходный отказ сохранены отдельно, failure proof6a81de08ea40d3c27809e51e5e010cde7aa04cc04f07663f4b9f0a001d308438.
