@@ -1,5 +1,7 @@
 # Fixed terminal21600: запуск order-протокола на Elder —16 ноября2026
 
+> Итог16.11: весь A2 native cohort64 принят1/1, все процессы закрыты, полный primary опубликован. Во всех8 положениях target TP1/FP1/FN0/TN6. [Научный отчёт и границы вывода](FastN1FrozenOrderScientificReport-20261116.ru.md). Нижележащие записи о запуске/ожидании описывают состояние на момент декларации.
+
 После [независимой проверки всех primary](FastN1FullTrainingThresholdIndependentReplayAcceptance-20261116.json) запущен s11-frozen-order-native-elder-a2. [Точная декларация и внешние refs](FrozenDiagnosticOrderLaunch-20261116.json). Source ce6fc73a6bec591b3b3203904322d9315702bfc0, controls6430e0b7434d0b83f3698d1c53b233793a6a55e6, runtimef9f50022feeddca391b4bbb9d1ea0e7dfb4dd4dc69fb86b4052eec2ab1705b57. Fresh SDK принят154/154; всё ещё используется та же нативная реализация, что в M40 опыте.
 
 Первый этап —actual native repeat исходных8 паттернов с фиксированными candidate2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764 и threshold0.054353792695896797. Полные native samples сравниваются с источником при явно объявленном platform absolute tolerance1e-10; это не изменение амплитудного1e-5 или временного0.02 допуска обучения. Проверяется equality actual counts и physical model identity. До прохождения этого контроля rotations не начинаются.
