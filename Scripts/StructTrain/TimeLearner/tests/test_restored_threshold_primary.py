@@ -1,10 +1,11 @@
 """Replay a declared real threshold experiment away from its original worker."""
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import unittest
 
 from ..native_evidence import load
 from ..native_pipeline_worker import audit_run_manifest
+from ..recognition_metrics import load_diagnostic_evaluation
 from ..portable_primary import ALIAS_ADAPTER, restore_native_bundle
 
 
@@ -46,8 +47,30 @@ class RestoredThresholdPrimaryTest(unittest.TestCase):
         self.assertEqual([r["name"] for r in rows], ["baseline100", "candidate"])
         self.assertEqual(rows[0]["threshold"], 100.)
         self.assertEqual(rows[1]["threshold"], expected["threshold"])
+        original_baseline_checked = False
+        if expected.get('original_baseline_prefix') is not None:
+            relative = PurePosixPath(expected['original_baseline_prefix'])
+            self.assertFalse(relative.is_absolute())
+            self.assertNotIn('..', relative.parts)
+            original_run = output.joinpath(*relative.parts)
+            self.assertTrue(audit_run_manifest(original_run/'run-manifest.json')['run_evidence_consistent'])
+            _, old = load_diagnostic_evaluation(original_run/'native/evaluation.json')
+            _, replay = load_diagnostic_evaluation(study/'runs/baseline100/native/evaluation.json')
+            by_id = {o['trial_id']: o for o in old}
+            self.assertEqual(len(old), len(by_id))
+            self.assertEqual(len(replay), len(by_id))
+            self.assertEqual({o['trial_id'] for o in replay}, set(by_id))
+            for observation in replay:
+                previous = by_id[observation['trial_id']]
+                for field in ('samples', 'model_before', 'model_after', 'pattern_hash', 'label',
+                              'reset_policy', 'stimulus_times', 'relative_stimulus_times',
+                              'frequency_hz', 'complete', 'valid', 'censored'):
+                    self.assertEqual(observation[field], previous[field],
+                                     (observation['trial_id'], field))
+            original_baseline_checked = True
         from ..native_calibration_worker import _write
         _write(Path(os.environ["TMPDIR"])/"restored-threshold-readback.json",
                dict(restoration=restored, actual_series=rows,
                     independent_data_restore=True, new_native_execution=False,
+                    original_baseline_waveforms_checked=original_baseline_checked,
                     training_completed=False, scientific_verdict=None))
