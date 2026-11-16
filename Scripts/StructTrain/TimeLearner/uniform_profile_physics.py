@@ -16,6 +16,13 @@ MEMBRANE_FIELDS=('FeedbackGain','UseAveragePotential')
 BODY=re.compile(r'\$\.(?:Soma\d+|Dendrite\d+_\d+)')
 
 
+def require_fixed_capacitance_policy(configuration):
+    """C0 history records physics; an explicit search policy can change it."""
+    require(type(configuration) is dict, 'fixed_physics_experiment_missing_configuration')
+    require('capacitance_search' not in configuration,
+            'fixed_physics_experiment_disallows_capacitance_search')
+
+
 def _value(node, name):
     prop=node['parameters'][name];require(prop['binding'] is False,'uniform_profile_bound_parameter')
     data=prop['data']

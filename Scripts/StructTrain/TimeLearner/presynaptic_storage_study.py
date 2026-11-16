@@ -20,6 +20,7 @@ from .process_runner import verify_runtime
 from .runtime import file_record
 from .stock_phasea_preflight import audit_stock_profile
 from .uniform_profile_study import rebase_full_observation_window, reference_window_frames
+from .uniform_profile_physics import require_fixed_capacitance_policy
 
 
 CLASSES = {"stock": "NSPNeuronGen", "psi": "NSPNeuronGenPreinh2_5"}
@@ -40,6 +41,7 @@ def make_cases(original, run_label):
             "psi_study_run_label")
     validate_job("train", original)
     c = original["configuration"]
+    require_fixed_capacitance_policy(c)
     m = c["model"]
     require(c["schema_version"] == 8 and m["branch"] is True and
             m["normalization"] == "N1" and m["frequency_hz"] == 2000 and
