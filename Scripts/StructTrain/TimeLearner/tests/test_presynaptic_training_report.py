@@ -14,7 +14,10 @@ class PresynapticTrainingReportTest(unittest.TestCase):
         controls = Path(os.environ["TIMELEARNER_PSI_PAIR_REPORT_CONTROLS"])
         declaration = load(controls/"declaration.json")
         output = Path(os.environ["TMPDIR"])/"presynaptic-cold-training-gallery"
-        result = compare(declaration["stock"], declaration["psi"], output)
+        # Read the owned worker's frozen run roots, including the bound native
+        # manifests. Declaration paths describe origin, not runtime inputs.
+        result = compare(Path(os.environ["TIMELEARNER_PSI_PAIR_STOCK_RUN"])/"native",
+                         Path(os.environ["TIMELEARNER_PSI_PAIR_PSI_RUN"])/"native", output)
         self.assertEqual(result["effective_full_window_frames"], [0, 3600])
         self.assertTrue(result["derived_guards_profile_specific"])
         self.assertFalse(result["new_model_execution"])
