@@ -5,6 +5,8 @@ its class. Search tolerances/budgets are inherited; larger cable domain is
 common to both cases. Valid negative outcomes are retained, never classified.
 """
 from copy import deepcopy
+import argparse
+import math
 import os
 import re
 from pathlib import Path
@@ -173,3 +175,99 @@ def reference_window_frames(native):
     return dict(frames=frames,source_package_sha256=frozen_digest(paths[0],256*1024**2),
                 source_origin=p['measurement_archive']['source_origin'],source_data_audited=True,
                 references_imported_into_train=False,training_certificate_verified=False,scientific_verdict=None)
+
+
+def prepare_cold(original_path, profile_path, reference_native, output, *, variant,
+                 maximum_wall_seconds=None, run_label=None):
+    """Prepare a cold job using audited coordinates, without importing amplitudes."""
+    require(type(variant) is int and variant in (0, 3), 'uniform_study_unknown_profile')
+    if maximum_wall_seconds is not None:
+        require(type(maximum_wall_seconds) in (int, float) and
+                math.isfinite(maximum_wall_seconds) and maximum_wall_seconds > 0,
+                'uniform_study_invalid_wall_budget')
+    original_path = Path(original_path).resolve(strict=True)
+    profile_path = Path(profile_path).resolve(strict=True)
+    reference_native = Path(reference_native).resolve(strict=True)
+    output = Path(output).resolve()
+    require(not output.exists(), 'uniform_study_preparation_exists')
+    require(not output.is_relative_to(reference_native) and
+            not reference_native.is_relative_to(output) and
+            not any(p.is_relative_to(output) for p in (original_path, profile_path)),
+            'uniform_study_preparation_overlaps_inputs')
+    inputs = (original_path, profile_path)
+    before = {str(p): frozen_digest(p, 256*1024**2) for p in inputs}
+    original, archive = load(original_path), load(profile_path)
+    validate_job('train', original)
+    packages = [reference_native/name for name in
+                ('train_stopped_state.json', 'train_learned_state.json')
+                if (reference_native/name).is_file()]
+    require(len(packages) == 1, 'uniform_study_reference_package_missing')
+    package_before = frozen_digest(packages[0], 256*1024**2)
+    source = load(packages[0])
+    configuration = source.get('configuration', {})
+    require(type(configuration) is dict and type(configuration.get('model')) is dict and
+            configuration['model'].get('neuron_class') ==
+            'TLNativeFast'+str(variant)+'F2000_Neuron',
+            'uniform_study_reference_class_mismatch')
+    require(configuration['model'].get('initial_isi') ==
+            original['configuration']['model']['initial_isi'] and
+            all(configuration.get(k) == original['configuration'][k] for k in
+                ('duration', 'stimulus_profile', 'windows', 'peak_selection')),
+            'uniform_study_reference_protocol_mismatch')
+    characterization = reference_window_frames(reference_native)
+    require(characterization['source_package_sha256'] == package_before,
+            'uniform_study_reference_changed')
+    changed = deepcopy(original)
+    change = None
+    if maximum_wall_seconds is not None:
+        old_wall = changed['configuration']['maximum_wall_seconds']
+        changed['configuration']['maximum_wall_seconds'] = float(maximum_wall_seconds)
+        changed = _signed({k: v for k, v in changed.items() if k != 'sha256'})
+        change = dict(maximum_wall_seconds=dict(before=old_wall,
+                                               after=float(maximum_wall_seconds)))
+    job = declare_case(changed, archive, variant, characterization['frames'],
+                       run_label=run_label)
+    require(before == {str(p): frozen_digest(p, 256*1024**2) for p in inputs} and
+            package_before == frozen_digest(packages[0], 256*1024**2),
+            'uniform_study_preparation_input_changed')
+    declaration = dict(variant=variant, run_label=run_label,
+                       before_job_sha256=original['sha256'], budget_change=change,
+                       reference_frames=characterization['frames'])
+    receipt = dict(kind='timelearner_uniform_cold_preparation', schema_version=1,
+                   original_job_sha256=original['sha256'], job_sha256=job['sha256'],
+                   inputs=before, reference_package=package_before,
+                   characterization=characterization, budget_change=change,
+                   execution_performed=False, amplitude_references_imported=False,
+                   learned_parameters_imported=False, classification_assessed=False,
+                   scientific_verdict=None)
+    output.mkdir(parents=True)
+    (output/'original-before-budget.json').write_bytes(original_path.read_bytes())
+    (output/'profile.json').write_bytes(profile_path.read_bytes())
+    for name, value in (('original.json', changed), ('job.json', job),
+                        ('declaration.json', declaration),
+                        ('reference-characterization.json', characterization),
+                        ('preparation.json', receipt)):
+        _write(output/name, value)
+    return receipt
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest='command', required=True)
+    prepare = commands.add_parser('prepare-cold', help='prepare an audited cold profile job')
+    prepare.add_argument('original', type=Path)
+    prepare.add_argument('profile', type=Path)
+    prepare.add_argument('reference_native', type=Path)
+    prepare.add_argument('output', type=Path)
+    prepare.add_argument('--variant', type=int, choices=(0, 3), required=True)
+    prepare.add_argument('--maximum-wall-seconds', type=float)
+    prepare.add_argument('--run-label')
+    args = parser.parse_args(argv)
+    prepare_cold(args.original, args.profile, args.reference_native, args.output,
+                 variant=args.variant, maximum_wall_seconds=args.maximum_wall_seconds,
+                 run_label=args.run_label)
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

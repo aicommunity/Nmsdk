@@ -25,3 +25,13 @@ Branch N4/N1, штатный TLNativeFast3F2000_Neuron: C2.5e-10F, DissociationT
 Для состояний с полным валидным экспортом выполнить frozen8 и реальную проверку объявленного порога по отдельному протоколу; незавершённый Train маркировать diagnostic. Временные отчёты должны показывать потенциал сомы, фактические входные импульсы, omission controls для Train и все предъявленные паттерны Test, с читаемым native zoom. Полные данные/галереи сохраняются в /media/user/Data/Nmsdk-StructTrainExpArchive; Git содержит компактные refs.
 
 Начальный статус: протокол подготовлен; новые расчёты ещё не выполнены. Полный план остаётся активным.
+
+## Production подготовка следующего запуска
+
+Подготовка переносится из временного launcher в команду пакета:
+
+```text
+python -m Scripts.StructTrain.TimeLearner.uniform_profile_study prepare-cold ORIGINAL PROFILE REFERENCE_NATIVE OUTPUT --variant 3 --maximum-wall-seconds 7200 --run-label current-wall7200
+```
+
+Команда проверяет подпись исходного job, класс и протокол reference-пакета, полный DATA audit координат, допустимость явного wall budget и неизменность входов. Она создаёт original-before-budget.json, original.json, profile.json, job.json, declaration.json, reference-characterization.json и preparation.json. Runtime, ожидаемый cold graph, controller и output выполнения привязываются отдельно штатным runner. Команда не рассчитывает модель, не импортирует амплитуды или обученные параметры и не выдаёт сертификат. Совпадение с обоими уже объявленными actual cold jobs проверяется на сервере через production CLI; чужой профиль/target, NaN budget, повторная запись и запись внутрь reference tree должны отказываться до изменения входных данных.
