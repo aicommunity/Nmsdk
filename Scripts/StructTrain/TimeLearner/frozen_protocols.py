@@ -63,7 +63,7 @@ def condition_for(package, job, runtime, wall, memory):
         'evaluation_spec': {'criterion': job['criterion'], 'independent_patterns': False,
             'quiet_tail_and_observation_window_change_together': True},
         'execution_policy': {'maximum_model_ticks': job['maximum_model_ticks'],
-            'maximum_wall_seconds': wall, 'native_memory_bytes': memory, 'native_tasks': 64},
+            'maximum_wall_seconds': wall, 'native_memory_bytes': memory, 'native_tasks': 128},
         'randomness_spec': {'deterministic_saved_model': True, 'independent_trainings': 0},
     }
     artifacts = {role: artifact(role, payloads[role]) for role in CONDITION_ROLES}
@@ -127,14 +127,14 @@ def run(source_manifest, controls):
     source = root/'input/source/train_stopped_state.json';package_before = file_record(source)
     output.mkdir();(output/'jobs').mkdir()
     demands = dict(slots=1, memory_bytes=live['memory_max']+memory,
-                   tasks=live['tasks_max']+64, disk_bytes=4*1024**3)
+                   tasks=live['tasks_max']+128, disk_bytes=8*1024**3)
     registry = Reservations(output/'leases.sqlite3', managed_units=True, capacity=demands)
     lease = registry.reserve('frozen-window-reset-study',
         [dict(path=str(output/'runs'), access='write')], ttl_seconds=4*wall+600,
         demands=demands, controller_directory=declaration['controller'])
     results = [];baseline_difference = 0.
     try:
-        policy = policy_for_reservation(registry, lease['token'], memory_bytes=memory, tasks=64)
+        policy = policy_for_reservation(registry, lease['token'], memory_bytes=memory, tasks=128)
         for name, trials in planned:
             job = {k: v for k, v in original.items() if k != 'sha256'}
             job.update(run_id='frozen-protocol/'+name, trials=trials,
