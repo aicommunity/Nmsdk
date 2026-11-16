@@ -19,6 +19,7 @@ from .n1_protocol_robustness import _signed
 from .process_runner import verify_runtime
 from .runtime import file_record
 from .stock_phasea_preflight import audit_stock_profile
+from .uniform_profile_study import rebase_full_observation_window, reference_window_frames
 
 
 CLASSES = {"stock": "NSPNeuronGen", "psi": "NSPNeuronGenPreinh2_5"}
@@ -33,6 +34,7 @@ def _declaration(original, run_label):
 
 
 def make_cases(original, run_label):
+    """Prepare physical-image preflight templates, not characterized Train jobs."""
     require(type(run_label) is str and
             re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}", run_label),
             "psi_study_run_label")
@@ -63,6 +65,55 @@ def make_cases(original, run_label):
     return result
 
 
+def make_rebased_case(original, role, run_label, reference_frames):
+    require(role in CLASSES, "psi_study_unknown_role")
+    job = make_cases(original, run_label)[role]
+    rebase_full_observation_window(job["configuration"], reference_frames)
+    job = _signed({k: v for k, v in job.items() if k != "sha256"})
+    validate_job("preflight", job)
+    validate_job("train", job)
+    return job
+
+
+def characterize_window(native, expected_job):
+    """Replay actual same-physics/protocol reference data; import no references."""
+    native = Path(native).resolve(strict=True)
+    proof = reference_window_frames(native)
+    paths = [native/name for name in ("train_stopped_state.json", "train_learned_state.json")
+             if (native/name).is_file()]
+    require(len(paths) == 1, "psi_study_window_source_package")
+    package = load(paths[0])
+    configurations = [deepcopy(package["configuration"]), deepcopy(expected_job["configuration"])]
+    for c in configurations:
+        c.pop("run_id")
+        for p in c["composite_measurement"]["candidate_window_policy"]["inputs"]:
+            p.pop("base_left_guard_frames")
+            p.pop("base_right_guard_frames")
+    require(configurations[0] == configurations[1], "psi_study_window_source_factors_changed")
+    proof["initial_model_revision"] = package["measurement_archive"]["source_binding"]["initial_model"]["sha256"]
+    proof["reference_source_neuron_class"] = package["configuration"]["model"]["neuron_class"]
+    return proof
+
+
+def prepare_train(original_path, native_reference_source, role, output, *, run_label):
+    require(role in CLASSES, "psi_study_unknown_role")
+    original_path, output = Path(original_path).resolve(strict=True), Path(output).resolve()
+    native_reference_source = Path(native_reference_source).resolve(strict=True)
+    require(not output.exists() and not output.is_relative_to(native_reference_source) and
+            not native_reference_source.is_relative_to(output) and not original_path.is_relative_to(output),
+            "psi_study_train_output_exists_or_overlap")
+    original = load(original_path)
+    template = make_cases(original, run_label)[role]
+    proof = characterize_window(native_reference_source, template)
+    job = make_rebased_case(original, role, run_label, proof["frames"])
+    output.mkdir(parents=True)
+    (output/"original.json").write_bytes(original_path.read_bytes())
+    _write(output/"window-characterization.json", proof)
+    _write(output/"job.json", job)
+    return dict(job_sha256=job["sha256"], window_characterization=proof,
+                references_imported_into_train=False, scientific_verdict=None)
+
+
 def prepare(original_path, output, *, run_label):
     original_path, output = Path(original_path).resolve(strict=True), Path(output).resolve()
     require(not output.exists() and not original_path.is_relative_to(output),
@@ -74,6 +125,8 @@ def prepare(original_path, output, *, run_label):
     for role, job in cases.items():
         _write(output/(role+".json"), job)
     record = _declaration(original, run_label)
+    # A physical preflight does not observe the profile's reference peak frame.
+    # Expensive Train is prepared separately from actual characterization data.
     _write(output/"declaration.json", record)
     return record
 
@@ -192,12 +245,21 @@ def main(argv=None):
     p.add_argument("runtime", type=Path)
     p.add_argument("output", type=Path)
     p.add_argument("--process-policy", type=Path, required=True)
+    p = commands.add_parser("prepare-train")
+    p.add_argument("original", type=Path)
+    p.add_argument("native_reference_source", type=Path)
+    p.add_argument("role", choices=tuple(CLASSES))
+    p.add_argument("output", type=Path)
+    p.add_argument("--run-label", required=True)
     args = parser.parse_args(argv)
     if args.action == "prepare":
         prepare(args.original, args.output, run_label=args.run_label)
-    else:
+    elif args.action == "preflight":
         preflight(args.prepared, args.runtime, args.output,
                   process_policy=load(args.process_policy))
+    else:
+        prepare_train(args.original, args.native_reference_source, args.role, args.output,
+                      run_label=args.run_label)
 
 
 if __name__ == "__main__":
