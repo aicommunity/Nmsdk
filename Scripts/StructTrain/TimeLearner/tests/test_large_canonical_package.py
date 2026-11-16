@@ -31,7 +31,9 @@ class LargeCanonicalPackageTest(unittest.TestCase):
             capacity=dict(slots=1,memory_bytes=live['memory_max']+memory,
                           tasks=live['tasks_max']+tasks,disk_bytes=128*1024**2))
         lease=registry.reserve('actual-large-canonical-package',
-            [dict(path=str(source),access='read'),dict(path=str(output),access='write'),
+            # The production registry reserves directory trees; the exact
+            # input file remains independently bound by bytes/SHA before/after.
+            [dict(path=str(source.parent),access='read'),dict(path=str(output),access='write'),
              dict(path=str(Path(runtime['executable']['path']).parent),access='read')],
             demands=dict(slots=1,memory_bytes=live['memory_max']+memory,
                          tasks=live['tasks_max']+tasks,disk_bytes=128*1024**2),
