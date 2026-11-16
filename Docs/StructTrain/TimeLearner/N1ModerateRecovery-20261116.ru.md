@@ -17,3 +17,5 @@ Elder s07-n1-moderate-kernel-elder-a1 завершён: обе версии116/1
 ## Полнота следующего временного сравнения
 
 Предыдущая галерея recovery показывала первый rejected group50 и terminal53, но пропускала промежуточную low-Rs группу52; её численный разбор был доступен только в primary. Для нового сравнения генератор получает явно объявленный include_all_rejected_groups=true: помимо reference/best/terminal он показывает каждую записанную отвергнутую search-группу, в том числе промежуточные Rs/L proposals. Peak assignment и математический verdict не пересчитываются. Старые декларации сохраняют прежний выбор первой rejection; новый режим маркируется comparison schema3. Следующий read-only отчёт должен проверить этот путь на реальных before/after primary, включая CENSORED.
+
+Новый путь полного выбора rejected groups проверен независимо на Elder из архивных before/after primary: [Python1/1,48 PNG, partial visual review4 overview](N1FullRejectionReplayAcceptance-20261116.json). Это принятый read-only DATA/report replay старого sealed-recovery сравнения, не научная приёмка нового moderate Train.

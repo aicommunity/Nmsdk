@@ -1,0 +1,85 @@
+{
+  "kind": "timelearner_independent_full_rejection_report_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "worker": "Elder-1",
+  "job": "s11-stock-N1-full-rejection-report-elder-a1",
+  "source_root": "e3b74d00e0a1813a8f610e62352e01a2756a2a7d",
+  "control_commit": "a28645f1b67b9f218be3d02f1dd404c9f51b14e7",
+  "python_passed": 1,
+  "all_processes_closed": true,
+  "comparison_schema_version": 3,
+  "include_all_rejected_groups": true,
+  "source_original_m40_directories_present": false,
+  "new_native_execution": false,
+  "restoration": {
+    "before": {
+      "archive_sha256": "3eb998b76c8263940988ea7d219be44189b695a66af90bf68b91221c774017ec",
+      "archive_members_verified": 1230,
+      "native_members_retained": 1108
+    },
+    "after": {
+      "archive_sha256": "45aa3d1db8fdc2600ac438f304d5ad0ab199b136fea6cb71553f7413a0c3782c",
+      "archive_members_verified": 1123,
+      "native_members_retained": 1010
+    }
+  },
+  "report_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/74/74cc14a50a2f883b927348aff4df2620001f93283166e202c568a62b19082066",
+    "sha256": "74cc14a50a2f883b927348aff4df2620001f93283166e202c568a62b19082066",
+    "bytes": 31640714
+  },
+  "catalog_relative": "experiments/2026-11-16/n1-recovery-coverage/stock-N1-full-rejection-elder-report-a1.json",
+  "cache_relative": "report-cache/2026-11-16/stock-N1-full-rejections-elder",
+  "png_figures": 48,
+  "selected_groups": {
+    "before": [
+      4,
+      48,
+      50,
+      52,
+      54,
+      56,
+      58
+    ],
+    "after": [
+      4,
+      48,
+      50,
+      52,
+      53
+    ]
+  },
+  "manual_visual_reviews": [
+    {
+      "relative_path": "before/group-000052-soma-000-overview.png",
+      "sha256": "1e28d6201da75b7ea921c3b09ecc1a6fc48176c055be51f02dd5c851b67c0243",
+      "bytes": 534379,
+      "note": "Three broad maxima; omission0 or omission1 preserves a displaced early maximum; full-before/full-after retained."
+    },
+    {
+      "relative_path": "before/group-000058-soma-000-overview.png",
+      "sha256": "657aa3113b5f739e3626258ae3263fde0a1d764c791f71629d6e8633d1ee89d5",
+      "bytes": 526493,
+      "note": "Terminal rejected group remains three maxima; complete omission controls and recorded inputs visible."
+    },
+    {
+      "relative_path": "after/group-000052-soma-000-overview.png",
+      "sha256": "f71df609e0b19993aa611543bdda7f01a460dede444a5d47645ca00239f2a17f",
+      "bytes": 525789,
+      "note": "Low-Rs group missing from old selected gallery now visible; increased full-burst amplitude does not identify input1 uniquely."
+    },
+    {
+      "relative_path": "after/group-000053-soma-000-overview.png",
+      "sha256": "a2ee800485258e63212aa00d1482d84f69b6474a1653cd430b3df910e8452dc9",
+      "bytes": 459974,
+      "note": "Incomplete anchor group has explicit CENSORED omit3 and a shaded unrecorded tail; no invented full-after trace."
+    }
+  ],
+  "all_figures_reviewed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
