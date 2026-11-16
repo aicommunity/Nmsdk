@@ -130,7 +130,7 @@ def compare_stock_and_psi(stock, psi):
         stock_model_revision=stock["sha256"], psi_model_revision=psi["sha256"],
         all_other_effective_model_fields_equal=True,
         changed_physics=["UsePresynapticInhibition=false->true", "InhibitionCoeff=0->2.5"],
-        synapse_paths=synapses, body_and_LT_physics_preserved=True, lt_membrane=False,
+        synapse_paths=synapses, channel_feedback_LT_physics_preserved=True, lt_membrane=False,
         native_model_calculation=False, training_started=False, scientific_verdict=None)
 
 

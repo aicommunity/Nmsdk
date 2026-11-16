@@ -41,6 +41,7 @@ class PresynapticStoragePreflightTest(unittest.TestCase):
         finally:
             registry.release(lease["token"], note="Both exact native preflight groups closed; no Train claim.")
         self.assertTrue(result["factor"]["all_other_effective_model_fields_equal"])
+        self.assertTrue(result["factor"]["channel_feedback_LT_physics_preserved"])
         self.assertEqual(len(result["factor"]["synapse_paths"]), 4)
         self.assertFalse(result["factor"]["native_model_calculation"])
         stock = load(output/"stock/native/initial-state.json")["identity"]
