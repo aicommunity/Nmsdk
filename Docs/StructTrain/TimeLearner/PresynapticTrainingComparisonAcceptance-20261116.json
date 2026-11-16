@@ -44,8 +44,57 @@
   "archived_regular_files": 264,
   "catalog_relative": "experiments/2026-11-16/psi-storage-control/cold-training-report-a3.json",
   "cache_relative": "report-cache/2026-11-16/stock-psi-cold",
-  "visual_review_complete": false,
+  "visual_review_complete": true,
   "all_generated_figures_reviewed": false,
   "interpretation": "Full effective graph/runtime/window comparison passed; both cold runs have a local input2 solution and then ambiguous input1. No all-input certificate or classification claim.",
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "visual_review_scope": "Six reference/local-ready/terminal overviews and two terminal native zooms. Full gallery contains 70 PNG; full 70-view review is not claimed.",
+  "reviewed_originals": [
+    {
+      "file": "stock/group-000004-soma-000-overview.png",
+      "bytes": 530998,
+      "sha256": "1274a7b247a342d34d26696f3db4699ecc0be0d8a384e03adb3860f1e8465956"
+    },
+    {
+      "file": "stock/group-000048-soma-000-overview.png",
+      "bytes": 526317,
+      "sha256": "4ca3768dbbdf2b740e76cac7b60301fd868caaa59794ba0fa57bfe006a81baf6"
+    },
+    {
+      "file": "stock/group-000058-soma-000-overview.png",
+      "bytes": 521648,
+      "sha256": "db60fe27f15522507a283f7bdf0589af2d997156562ed17826d7c93d83c28ec5"
+    },
+    {
+      "file": "stock/group-000058-soma-000-response-maximum-native.png",
+      "bytes": 421926,
+      "sha256": "d137911830abae65afd00bcb6313513601d6a1acca81b07bf57e257a2f03c30a"
+    },
+    {
+      "file": "psi/group-000004-soma-000-overview.png",
+      "bytes": 529850,
+      "sha256": "5ac87d165e87440e81bb86c7f596c073d8a6550c27a37237e9b75a8a52144a60"
+    },
+    {
+      "file": "psi/group-000046-soma-000-overview.png",
+      "bytes": 524614,
+      "sha256": "bf0a4e7c110b8dc4c27c01c0895a0fa4468f375725e67d384a156ea4d226f55c"
+    },
+    {
+      "file": "psi/group-000056-soma-000-overview.png",
+      "bytes": 530889,
+      "sha256": "5d48d52b4a8696c99a9d6482701408ca6b7a6f2592aea7a8f5befb66b3a63ed6"
+    },
+    {
+      "file": "psi/group-000056-soma-000-response-maximum-native.png",
+      "bytes": 429762,
+      "sha256": "5ff92482d0e5e6b9f6fd3dcf0c217659ac2d0f7089e450fc5a71472c6ea1af9f"
+    }
+  ],
+  "visual_findings": [
+    "Four distinct reference peaks for both profiles.",
+    "Input2 selected crest remains distinct and disappears under omit2; highest full-burst crest is not substituted.",
+    "Terminal input1 first crest contains contributions of early impulses; omission controls expose merged responses for both profiles.",
+    "Native zooms show actual samples at shared control axes; no downsampling."
+  ]
 }
