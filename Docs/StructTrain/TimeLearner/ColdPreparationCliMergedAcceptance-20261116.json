@@ -1,0 +1,51 @@
+{
+  "kind": "timelearner_production_cold_preparation_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/28/2825890f7863912b24b7d94db7e5e6a6246531fe8de4305a3812761da4c87fd5",
+    "sha256": "2825890f7863912b24b7d94db7e5e6a6246531fe8de4305a3812761da4c87fd5",
+    "bytes": 420415
+  },
+  "source_root": "939e429375f46d84f2c723ffe1779c3caccaf704",
+  "controls": "0905be5d76637e0e84dd2e3ae16fcafb8f8833a1",
+  "python_passed": 3,
+  "files": 60,
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-16/fast-profile-wall-budget/cold-preparation-a2.json",
+  "catalog_relative": "experiments/2026-11-16/fast-profile-wall-budget/cold-preparation-a2.json",
+  "job": "s09-fast-n1-preparation-m40-a2",
+  "execution": "completed",
+  "all_processes_closed": true,
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_uniform_profile_preparation.UniformProfilePreparationTest.test_cli_reproduces_both_actual_current_kernel_job_declarations",
+    "Scripts.StructTrain.TimeLearner.tests.test_uniform_profile_preparation.UniformProfilePreparationTest.test_foreign_profile_and_changed_target_are_rejected_before_writing",
+    "Scripts.StructTrain.TimeLearner.tests.test_uniform_profile_preparation.UniformProfilePreparationTest.test_invalid_budget_and_reference_tree_output_are_rejected"
+  ],
+  "actual_wall_declarations_reproduced": [
+    3600,
+    7200
+  ],
+  "production_cli_exercised": true,
+  "actual_reference_json_csv_audited": true,
+  "amplitude_references_imported": false,
+  "learned_parameters_imported": false,
+  "new_native_train_performed": false,
+  "mathematical_algorithm_changed": false,
+  "negative_controls": [
+    "foreign_profile",
+    "changed_target",
+    "nan_wall_budget",
+    "zero_wall_budget",
+    "bool_wall_budget",
+    "existing_output",
+    "output_overlaps_reference_tree"
+  ],
+  "scope": "Fast3 N4/N1 current wall pair; remaining physical profiles, classes and original full migration are not accepted by these three tests.",
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "baseline_acceptance": "ColdPreparationCliAcceptance-20261116.json",
+  "reason_for_repeat": "Source merge changed declare_case to the accepted common window-preparation helper; repeat the same three production checks on the merged implementation."
+}
