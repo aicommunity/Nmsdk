@@ -1,0 +1,101 @@
+{
+  "kind": "timelearner_living_algorithm_docx_publication",
+  "schema_version": 1,
+  "edition": "2026-11-16-v1",
+  "working_criterion": {
+    "TP_minimum": 1,
+    "TN_minimum": 2
+  },
+  "scope": "first maintained ControllerVersion2 N1 edition; all historical and mode coverage remains open",
+  "documents": [
+    {
+      "topology": "classic",
+      "file": "TimeLearnerClassicAlgorithms.ru.docx",
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f2/f29075bcfa27c78b6a1eed2ba11bed6c67f962baf22c76fc6757d8395e8f153e",
+        "sha256": "f29075bcfa27c78b6a1eed2ba11bed6c67f962baf22c76fc6757d8395e8f153e",
+        "bytes": 232649
+      },
+      "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/algorithm-descriptions-v1/TimeLearnerClassicAlgorithms.ru.docx",
+      "smb": "//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/algorithm-descriptions-v1/TimeLearnerClassicAlgorithms.ru.docx",
+      "pages": 8
+    },
+    {
+      "topology": "branch",
+      "file": "TimeLearnerBranchAlgorithms.ru.docx",
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/81/81c93367aef39ebeae23ff41537654a7250bca91a441647aceb4b3cea92bcc28",
+        "sha256": "81c93367aef39ebeae23ff41537654a7250bca91a441647aceb4b3cea92bcc28",
+        "bytes": 234681
+      },
+      "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/algorithm-descriptions-v1/TimeLearnerBranchAlgorithms.ru.docx",
+      "smb": "//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-16/algorithm-descriptions-v1/TimeLearnerBranchAlgorithms.ru.docx",
+      "pages": 9
+    }
+  ],
+  "source_inputs": {
+    "authoring-spec.json": "ae0adba2426d6087875bf673f63c55ee6270cc30ce889ccf3acef9740da99dc0",
+    "content.json": "e13cb02afed2d8551b0716cd3b9da0ffe7a202bd900ba2c2aaaa205b8b9d268e",
+    "evidence-register.json": "e27ecc9a85b889daf90dc17bcb0d89ebe9f7e4bb8580c368d585fd475ba15fdf"
+  },
+  "builder_sha256": "5da01024f3357996d25f3198758ef8544ea9cd69e0608e902ac5b8b9a7bf6836",
+  "complete_package": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/93/93282b8efe85e7018745edebb400940df43e35984a627ba127a47495fcf9c0a6",
+    "sha256": "93282b8efe85e7018745edebb400940df43e35984a627ba127a47495fcf9c0a6",
+    "bytes": 482018
+  },
+  "visual_acceptance": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/b4/b4b0881256b4046b164f820f322e781d614408c3c9224fc0fdc5ccb664dc7ca3",
+    "sha256": "b4b0881256b4046b164f820f322e781d614408c3c9224fc0fdc5ccb664dc7ca3",
+    "bytes": 4533
+  },
+  "all_pages_visually_reviewed": true,
+  "generated_binary_in_root_git": false,
+  "native_n2_primary": {
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/85/858354233267b5ef6b5b6079249ea4f4ca0327ef4d4349ecf371afa81300ac04",
+      "sha256": "858354233267b5ef6b5b6079249ea4f4ca0327ef4d4349ecf371afa81300ac04",
+      "bytes": 2968992
+    },
+    "bundle_manifest": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/92/92bab30e1492a6c9cf199eb7f0f939bd30452bef83e2a450ef519cd55d619fdb",
+      "sha256": "92bab30e1492a6c9cf199eb7f0f939bd30452bef83e2a450ef519cd55d619fdb",
+      "bytes": 196410
+    },
+    "provenance_primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/10/100e4ec52718a68a4d001d8467daafc6523461f148b0731a4895e31a2a83337d",
+      "sha256": "100e4ec52718a68a4d001d8467daafc6523461f148b0731a4895e31a2a83337d",
+      "bytes": 259445
+    },
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-16/scoring-batch/primary-a1.json",
+    "closed_source_jobs": [
+      "s03-scoring-batch-native-controls-m40-a1",
+      "s03-scoring-batch-large-m40-a1",
+      "s03-scoring-batch-small-m40-a2"
+    ],
+    "full_mode_matrix_accepted": false
+  },
+  "experiments_priority": true,
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-16/algorithm-descriptions/v1.json"
+}
