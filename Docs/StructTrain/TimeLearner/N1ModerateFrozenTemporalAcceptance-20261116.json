@@ -1,0 +1,141 @@
+{
+  "kind": "timelearner_independent_moderate_frozen8_temporal_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "worker": "Elder",
+  "job": "s11-restored-moderate-frozen8-report-elder-a1",
+  "source_root": "f4f108a47f13f7da137580e4b0c22c65cf1075ea",
+  "controls": "e7a232d2083ea8cd73318bb7092409a97e928fb0",
+  "execution": "completed",
+  "all_processes_closed": true,
+  "python_passed": 1,
+  "trial_soma_pairs": 8,
+  "png_count": 561,
+  "archived_files": 1761,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/2f/2f7e92bad77bc195770c3656ddf31ca79ae678f76faf787a0cc7ff9c16dd32d7",
+    "sha256": "2f7e92bad77bc195770c3656ddf31ca79ae678f76faf787a0cc7ff9c16dd32d7",
+    "bytes": 104292084
+  },
+  "cache_relative": "report-cache/2026-11-16/moderate-frozen8-elder",
+  "catalog_relative": "experiments/2026-11-16/n1-moderate-recovery/frozen8-elder-report-a1.json",
+  "metrics_reproduced": true,
+  "counts": {
+    "TP": 0,
+    "FP": 0,
+    "FN": 1,
+    "TN": 7,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 0,
+    "foil_response_rate": 0
+  },
+  "restoration_members_verified": 436,
+  "retained_files": 435,
+  "verified_alias_omitted": 1,
+  "new_native_calculation": false,
+  "selected_originals_reviewed": 16,
+  "reviewed_views": [
+    {
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "peak_time": 0.383,
+      "peak_value": 0.12850579479559465,
+      "overview": "trial-0000-soma-001/overview.png",
+      "peak_zoom": "trial-0000-soma-001/zoom-008.png",
+      "minimum_tick_pixels": 14.208,
+      "overview_sha256": "abf32b68279309a4773ae00b4488662367bf3d37f638c9e7ba6db47472ea7804",
+      "peak_zoom_sha256": "99c2be9cbb0c90bcd2167afa9ca35e86dbfc35769ea8816ecf944fc5c1e4ec2f"
+    },
+    {
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "peak_time": 2.7805,
+      "peak_value": 0.12945236258864967,
+      "overview": "trial-0001-soma-001/overview.png",
+      "peak_zoom": "trial-0001-soma-001/zoom-016.png",
+      "minimum_tick_pixels": 14.208,
+      "overview_sha256": "c05d2f223efad9cfd2bee83b0bba125146ddac4207e34a2b8d750ba577cffadc",
+      "peak_zoom_sha256": "dd74ce7c0dfdb6f461d607630b86cccf8fc8581e858f461ff7f77a806b958510"
+    },
+    {
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "peak_time": 4.512,
+      "peak_value": 0.13512909685584962,
+      "overview": "trial-0002-soma-001/overview.png",
+      "peak_zoom": "trial-0002-soma-001/zoom-011.png",
+      "minimum_tick_pixels": 14.208,
+      "overview_sha256": "57aa9be65a6c37cb54470c8e110d3b49fd8f48440c2da7d1f98e55218817ea3a",
+      "peak_zoom_sha256": "46b40482c8dae60fe4f5ceea138056ae43f21543400c091bcfb59f9a56eee9d6"
+    },
+    {
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "peak_time": 6.5055,
+      "peak_value": 0.10086142953176913,
+      "overview": "trial-0003-soma-001/overview.png",
+      "peak_zoom": "trial-0003-soma-001/zoom-011.png",
+      "minimum_tick_pixels": 14.208,
+      "overview_sha256": "1904dc7303d75cf4b0feb025d19a1e837a36319fabe0b8860184851d2183ea7e",
+      "peak_zoom_sha256": "d6c864abac994d4314d571852c9d5967cb58fa04f63fc94170a0887bfa8d6d6a"
+    },
+    {
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "peak_time": 8.3495,
+      "peak_value": 0.14460602295459957,
+      "overview": "trial-0004-soma-001/overview.png",
+      "peak_zoom": "trial-0004-soma-001/zoom-007.png",
+      "minimum_tick_pixels": 14.208,
+      "overview_sha256": "90b5121a233f91a9aa768f913e1da52482f7e5a3d8abf613f48e6d20b7ca5fb4",
+      "peak_zoom_sha256": "0f0657a77327c55be28cdf883c9d78e8e2c4257ee5aca4c7a35df01622a858f3"
+    },
+    {
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "peak_time": 10.8095,
+      "peak_value": 0.14497783234890493,
+      "overview": "trial-0005-soma-001/overview.png",
+      "peak_zoom": "trial-0005-soma-001/zoom-017.png",
+      "minimum_tick_pixels": 14.208,
+      "overview_sha256": "07ee7c2c1b11ad3f1e68c142f4697a628e0fda53e7b4aaf99cec80ef52a39f61",
+      "peak_zoom_sha256": "57b1f240762bb56b52ac974a093de0dcb0c68c774716f61c486b601e569e68b8"
+    },
+    {
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "peak_time": 12.383,
+      "peak_value": 0.20436399762083524,
+      "overview": "trial-0006-soma-001/overview.png",
+      "peak_zoom": "trial-0006-soma-001/zoom-008.png",
+      "minimum_tick_pixels": 14.208,
+      "overview_sha256": "9750427d8e3475413db91c1983780566e1abafc0853db2048b7ee74b6ba3a1af",
+      "peak_zoom_sha256": "84c571304c038e88a1b040e3c77a5211e328a05e4e0c68d783ff80194c0620f4"
+    },
+    {
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "peak_time": 14.7835,
+      "peak_value": 0.20436400821944567,
+      "overview": "trial-0007-soma-001/overview.png",
+      "peak_zoom": "trial-0007-soma-001/zoom-016.png",
+      "minimum_tick_pixels": 14.208,
+      "overview_sha256": "a6b4e944f86121110a39a28e1a99adbe3b7072797b188fb813ac51d00cf52eb0",
+      "peak_zoom_sha256": "59b2bb4090f1a4bdb91e60d5edc6984a32a11d36858be5a6369248d7932f71c8"
+    }
+  ],
+  "all_gallery_images_reviewed": false,
+  "visual_findings": [
+    "All8 full2s overviews have readable Soma.SumPotential and actual input overlays, sharedY axes and distinct target/foil labels.",
+    "Each reviewed native peak zoom contains the actual recorded maximum and has14.208pixels per native tick.",
+    "Several foil maxima exceed target; threshold100 model remains silent. Baseline soma maxima alone do not establish counts for another threshold."
+  ],
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

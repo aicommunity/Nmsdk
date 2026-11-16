@@ -1,0 +1,74 @@
+{
+  "kind": "timelearner_psi_storage_factor_preflight_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "worker": "M40",
+  "job": "s04-native-psi-storage-preflight-m40-a2",
+  "source_root": "64327e103d7085972f6512db77a2195f27c5b2fc",
+  "controls": "00a43e139077c5625737b5fde24c86638bbb6375",
+  "runtime_root": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+  "python_passed": 1,
+  "all_processes_closed": true,
+  "factor": {
+    "kind": "timelearner_native_presynaptic_storage_factor",
+    "schema_version": 1,
+    "stock_model_revision": "5a916bc7c77f2176c065d57e3d68dd0783902b40418eec42cf089eb10b36abf5",
+    "psi_model_revision": "1c2511badd52a622e02814e31f74fd89ab0fa99b3b44b4a0e402bb8daea0f356",
+    "all_other_effective_model_fields_equal": true,
+    "changed_physics": [
+      "UsePresynapticInhibition=false->true",
+      "InhibitionCoeff=0->2.5"
+    ],
+    "synapse_paths": [
+      "$.Dendrite1_1.ExcSynapse1",
+      "$.Dendrite1_1.InhSynapse1",
+      "$.Soma1.ExcSynapse1",
+      "$.Soma1.InhSynapse1"
+    ],
+    "channel_feedback_LT_physics_preserved": true,
+    "lt_membrane": false,
+    "native_model_calculation": false,
+    "training_started": false,
+    "scientific_verdict": null
+  },
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/fb/fbef418ddccfc5c733d2ed6158aba7a6b58f71e3dbab83037f175c6adcaa2e4b",
+    "sha256": "fbef418ddccfc5c733d2ed6158aba7a6b58f71e3dbab83037f175c6adcaa2e4b",
+    "bytes": 736454
+  },
+  "archived_regular_files": 226,
+  "catalog_relative": "experiments/2026-11-16/psi-storage-control/preflight-a1-a2.json",
+  "semantic_negative_controls": [
+    "changed_capacity",
+    "wrong_PSI_coefficient",
+    "missing_binding"
+  ],
+  "semantic_controls_rehash_identity": true,
+  "waveform_effect_verified": false,
+  "source_metadata_note": "A1 had an imprecise preserved-physics label. A2 specifies unchanged channel/feedback/LT physics and the intentional PSI synaptic changes; actual model identities are identical on both attempts.",
+  "cold_pair": {
+    "control_commit": "9303d484ea011bead0f2b18ab07c149a9496ad6a",
+    "jobs": [
+      "s11-psi-k2p5-stock-cold-train-m40-a1",
+      "s11-psi-k2p5-psi-cold-train-m40-a1"
+    ],
+    "execution": "stock_completed_psi_A1_setup_failure",
+    "tolerances_and_budgets_unchanged": true,
+    "fresh_references_each_condition": true,
+    "corrected_followup": {
+      "job": "s11-psi-k2p5-psi-cold-train-m40-a2",
+      "controls": "3693a99d6c32607a9b6542dd358fd451e80b458e",
+      "producer_root": "1f551388cf62f2c3d427796c7d5ced635ecd7530",
+      "preparation_acceptance": "PresynapticWindowPreparationAcceptance-20261116.json",
+      "execution": "running_last_native_readback",
+      "scientific_verdict": null
+    },
+    "stock_acceptance": "PresynapticStockColdAcceptance-20261116.json",
+    "psi_A1_scope": "Setup error, not a scientific negative about PSI learning"
+  },
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

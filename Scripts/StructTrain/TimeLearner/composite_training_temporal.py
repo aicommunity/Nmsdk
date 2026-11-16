@@ -6,6 +6,7 @@ This renderer preserves failed selections and never creates a certificate.
 import csv
 import argparse
 import hashlib
+import html
 import io
 import json
 from pathlib import Path
@@ -16,7 +17,8 @@ from .native_evidence import load, number, require
 from .plotting import figure_title, padded_limits, plotting_runtime
 
 
-def render(native, output, group_numbers, *, native_window_zooms=False, allow_incomplete_groups=False):
+def render(native, output, group_numbers, *, native_window_zooms=False,
+           native_response_zooms=False, allow_incomplete_groups=False):
     native = Path(native).resolve(strict=True)
     output = Path(output).resolve()
     require(not output.exists() and not output.is_relative_to(native) and
@@ -25,6 +27,7 @@ def render(native, output, group_numbers, *, native_window_zooms=False, allow_in
             all(type(i) is int and i > 0 for i in group_numbers) and
             len(set(group_numbers)) == len(group_numbers), 'training_report_group_inventory')
     require(type(native_window_zooms) is bool, 'training_report_native_zoom_flag')
+    require(type(native_response_zooms) is bool, 'training_report_response_zoom_flag')
     require(type(allow_incomplete_groups) is bool, 'training_report_incomplete_flag')
     runtime = plotting_runtime()
     packages = [native/n for n in ('train_stopped_state.json', 'train_learned_state.json')
@@ -114,6 +117,21 @@ def render(native, output, group_numbers, *, native_window_zooms=False, allow_in
                     views += [(label, [max(0., boundary-50/frequency),
                                        min(duration, boundary+50/frequency)])
                               for label,boundary in zip(('window-left-native', 'window-right-native'), window)]
+                if native_response_zooms:
+                    # This is a diagnostic axis around the recorded full-trial
+                    # maximum, never an assigned-impulse measurement. Keep the
+                    # same coordinates for full and omission controls.
+                    full = next((s for s in series if
+                        s['specification']['stimulus_subset']['source_ordinals'] ==
+                        list(range(s['specification']['stimulus_subset']['physical_input_count']))), None)
+                    require(full is not None, 'training_report_response_zoom_full_trial_missing')
+                    peak = max(full['values'], key=lambda v: v[channel+2])
+                    center = peak[0]-number(full['specification']['begin'])
+                    response_zoom_source = dict(primary_reference=full['reference'],
+                        absolute_time=peak[0], relative_time=center,
+                        potential=peak[channel+2], diagnostic_axis_only=True)
+                    views.append(('response-maximum-native',
+                        [max(0., center-50/frequency), min(duration, center+50/frequency)]))
                 for view, bounds in views:
                     native_zoom = view.endswith('-native')
                     fig, axes = plt.subplots(len(series), 1, figsize=(18, 3*len(series)), sharex=True)
@@ -161,6 +179,8 @@ def render(native, output, group_numbers, *, native_window_zooms=False, allow_in
                     plt.close(fig)
                     figure = dict(group=ordinal, channel=channel, view=view,
                         x_bounds_seconds=bounds, y_bounds=limits, files=filenames)
+                    if view == 'response-maximum-native':
+                        figure['response_zoom_source'] = response_zoom_source
                     if native_zoom:
                         figure['minimum_native_tick_pixels'] = tick_pixels
                     figures.append(figure)
@@ -180,7 +200,26 @@ def render(native, output, group_numbers, *, native_window_zooms=False, allow_in
     if allow_incomplete_groups:
         manifest.update(schema_version=3, incomplete_group_diagnostics=True,
                         missing_trials_not_synthesized=True)
+    if native_response_zooms:
+        manifest.update(schema_version=4, native_response_zoom_policy={
+            'axis_selection': 'fifty_native_frames_each_side_of_first_recorded_full_trial_global_maximum',
+            'minimum_tick_pixels': 8, 'sample_markers': True,
+            'diagnostic_axis_only': True, 'peak_assignment_changed': False})
     (output/'manifest.json').write_text(json.dumps(manifest, indent=2, allow_nan=False)+'\n', encoding='utf-8')
+    sections = []
+    for group in groups:
+        pictures = [f for f in figures if f['group'] == group['ordinal']]
+        links = ' | '.join('<a href="'+html.escape(f['files'][0], quote=True)+'">soma'+
+            str(f['channel'])+' '+html.escape(f['view'])+'</a>' for f in pictures)
+        overview = ''.join('<a href="'+html.escape(f['files'][0], quote=True)+'"><img loading="lazy" src="'+
+            html.escape(f['files'][0], quote=True)+'" alt="Recorded full and omission responses"></a>'
+            for f in pictures if f['view'] == 'overview')
+        sections.append('<section><h2>Group '+str(group['ordinal'])+'</h2><p>'+links+'</p>'+overview+'</section>')
+    (output/'index.html').write_text('<!doctype html><meta charset="utf-8">'
+        '<style>body{font:16px sans-serif;margin:2em}img{max-width:100%;height:auto}section{margin-bottom:3em}</style>'
+        '<h1>Recorded training responses</h1><p>Actual inputs, full and omission controls. '
+        'Windows and response-maximum zooms are diagnostic views; no new peak assignment or classifier verdict. '
+        'Open an original image for its full scale.</p>'+''.join(sections), encoding='utf-8')
     return manifest
 
 
@@ -191,10 +230,13 @@ def main(argv=None):
     parser.add_argument('--groups', nargs='+', type=int, required=True)
     parser.add_argument('--native-window-zooms', action='store_true',
         help='also show both proposed window edges with at least eight pixels per native tick')
+    parser.add_argument('--native-response-zooms', action='store_true',
+        help='diagnostic zoom around the recorded full-trial maximum; does not change peak assignment')
     parser.add_argument('--allow-incomplete-groups', action='store_true',
         help='diagnostic only: label censored traces and retain missing trials without filling them')
     args = parser.parse_args(argv)
     result = render(args.native, args.output, args.groups, native_window_zooms=args.native_window_zooms,
+                    native_response_zooms=args.native_response_zooms,
                     allow_incomplete_groups=args.allow_incomplete_groups)
     print(json.dumps(dict(groups=len(result['groups']), figures=len(result['figures']),
                           scientific_verdict=None)))

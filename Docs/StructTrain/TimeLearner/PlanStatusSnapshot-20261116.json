@@ -1,0 +1,582 @@
+{
+  "kind": "timelearner_plan_status_snapshot",
+  "schema_version": 1,
+  "checked_at": "2026-11-16T01:58:29.135Z",
+  "whole_plan_complete": false,
+  "fully_accepted_stages": [
+    0
+  ],
+  "partially_accepted_stages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "accepted_develop": {
+    "root": "e8f7a53c6bca3a1d095ab2955f2a65c8f4a81e20",
+    "PulseLib": "23d039e44f927eb8040473845d3c391270d9d15e",
+    "Bin": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+    "Rdk": "de4134235c0dcb8b91fd9a43b267348ad1a163ca"
+  },
+  "working_branch": "codex/timelearner-psi-storage-factor",
+  "working_head_before_snapshot": "f4f108a47f13f7da137580e4b0c22c65cf1075ea",
+  "modern_reliable_classifier_confirmed": false,
+  "stock_and_psi": [
+    {
+      "role": "stock",
+      "job": "s11-psi-k2p5-stock-cold-train-m40-a1",
+      "outer_execution": "unknown",
+      "outer_closed": true,
+      "worker/terminal.json": {
+        "operation_passed": true,
+        "operation": "python-controller-validation",
+        "heartbeat_errors": [],
+        "lease_release": "controller only after whole cgroup closure",
+        "selected_validation_scope_requires_source_review": true,
+        "scientific_verdict": null
+      },
+      "preflight": {
+        "execution": "unknown",
+        "closed": true
+      },
+      "train": {
+        "execution": "unknown",
+        "closed": true
+      },
+      "result": {
+        "execution": "completed",
+        "validity": "valid",
+        "physical_audit": {
+          "kind": "timelearner_uniform_profile_physics_audit",
+          "schema_version": 1,
+          "membranes_checked": {
+            "initial": 2,
+            "final": 37
+          },
+          "frequency_hz": "2000",
+          "uniform_physics_preserved": true,
+          "positive_individual_resistances_allowed": true,
+          "threshold_and_feedback_preserved": true,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null
+        }
+      },
+      "outcome": "invalid_observation",
+      "summary": {
+        "outcome": "invalid_observation",
+        "reason": "rejected_candidate_window:ambiguous",
+        "certificate": null,
+        "search_probes": 54,
+        "applied_edits": 25,
+        "actual_parameters": [
+          {
+            "length": 36,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 35,
+            "resistance": 2880071.5552629367,
+            "synapses": 1
+          },
+          {
+            "length": 27,
+            "resistance": 21232304.307596028,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "reference_complete": true,
+        "composite_counters": {
+          "archive": {
+            "groups": 58,
+            "native_probes": 348,
+            "primary_bytes": 51355521,
+            "sampled_frames": 1253148
+          },
+          "attempt": {
+            "logical_groups": 58,
+            "native_probes": 348,
+            "sampled_frames": 1253148
+          }
+        }
+      },
+      "scalar_candidates": 22,
+      "jointly_ready_candidates": 1
+    },
+    {
+      "role": "psi",
+      "job": "s11-psi-k2p5-psi-cold-train-m40-a1",
+      "outer_execution": "unknown",
+      "outer_closed": true,
+      "worker/terminal.json": {
+        "operation_passed": true,
+        "operation": "python-controller-validation",
+        "heartbeat_errors": [],
+        "lease_release": "controller only after whole cgroup closure",
+        "selected_validation_scope_requires_source_review": true,
+        "scientific_verdict": null
+      },
+      "preflight": {
+        "execution": "unknown",
+        "closed": true
+      },
+      "train": {
+        "execution": "unknown",
+        "closed": true
+      },
+      "result": {
+        "execution": "completed",
+        "validity": "valid",
+        "physical_audit": {
+          "kind": "timelearner_uniform_profile_physics_audit",
+          "schema_version": 1,
+          "membranes_checked": {
+            "initial": 2,
+            "final": 2
+          },
+          "frequency_hz": "2000",
+          "uniform_physics_preserved": true,
+          "positive_individual_resistances_allowed": true,
+          "threshold_and_feedback_preserved": true,
+          "native_execution_verified": false,
+          "training_certificate_verified": false,
+          "scientific_verdict": null
+        }
+      },
+      "outcome": "invalid_model",
+      "summary": {
+        "outcome": "invalid_model",
+        "reason": "candidate_window_proposal_arithmetic_rejected",
+        "certificate": null,
+        "search_probes": 0,
+        "applied_edits": 0,
+        "actual_parameters": [
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          {
+            "length": 1,
+            "resistance": 86000000,
+            "synapses": 1
+          }
+        ],
+        "reference_complete": true,
+        "composite_counters": {
+          "archive": {
+            "groups": 4,
+            "native_probes": 24,
+            "primary_bytes": 3499275,
+            "sampled_frames": 86424
+          },
+          "attempt": {
+            "logical_groups": 4,
+            "native_probes": 24,
+            "sampled_frames": 86424
+          }
+        }
+      },
+      "scalar_candidates": 0,
+      "jointly_ready_candidates": 0
+    }
+  ],
+  "moderate_threshold_and_primary": [
+    {
+      "job": "s11-n1-moderate-threshold-m40-a1",
+      "execution": "unknown",
+      "closed": true,
+      "worker/terminal.json": {
+        "operation_passed": true,
+        "operation": "python-controller-validation",
+        "heartbeat_errors": [],
+        "lease_release": "controller only after whole cgroup closure",
+        "selected_validation_scope_requires_source_review": true,
+        "scientific_verdict": null
+      },
+      "native_manifests": 2,
+      "proposal": {
+        "threshold": 0.11468361216368189,
+        "full_matrix_peak_margin": -0.07585821342385102,
+        "nonspiking_proxy": {
+          "TP": 1,
+          "FN": 0,
+          "FP": 6,
+          "TN": 1
+        },
+        "source_model_revision": "6e683576e788844dff0f9c8f0b1e6e8b4cfc358a37deeebebc1e0d7770e2c04e"
+      },
+      "result": {
+        "baseline_waveforms_equal": true,
+        "training_completed": false,
+        "independent_evaluation": false
+      },
+      "counts": {
+        "baseline100": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0,
+          "foil_response_rate": 0
+        },
+        "candidate": {
+          "TP": 1,
+          "FP": 6,
+          "FN": 0,
+          "TN": 1,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.25,
+          "target_hit_rate": 1,
+          "foil_response_rate": 0.8571428571428571
+        }
+      }
+    },
+    {
+      "job": "s11-n1-moderate-frozen-primary-m40-a1",
+      "execution": "unknown",
+      "closed": true,
+      "worker/terminal.json": {
+        "operation_passed": true,
+        "operation": "closed-primary-bundle",
+        "heartbeat_errors": [],
+        "lease_release": "controller only after whole cgroup closure",
+        "selected_validation_scope_requires_source_review": true,
+        "scientific_verdict": null
+      },
+      "bundle_files": [
+        "primary.tar.xz",
+        "bundle.json"
+      ],
+      "bundle": {
+        "kind": "compact_native_primary",
+        "schema_version": 2,
+        "archive_bytes": 43217284,
+        "archive_sha256": "576fb50b5392a240fd1cea3b825e904b358a0324ceaac86efc8810656b68fe6c",
+        "compression": {
+          "codec": "xz-lzma2",
+          "dictionary_bytes": 33554432,
+          "member_order": "content_sha256_then_logical_name",
+          "content_references": "earlier-regular-member-sha256-size-v1"
+        },
+        "expanded_bytes": 808688978,
+        "unique_content_bytes": 570253348
+      },
+      "bundle_members": 436
+    },
+    {
+      "job": "s04-native-psi-storage-preflight-m40-a2",
+      "execution": "unknown",
+      "closed": true,
+      "worker/terminal.json": {
+        "operation_passed": true,
+        "operation": "python-controller-validation",
+        "heartbeat_errors": [],
+        "lease_release": "controller only after whole cgroup closure",
+        "selected_validation_scope_requires_source_review": true,
+        "scientific_verdict": null
+      },
+      "factor": {
+        "kind": "timelearner_native_presynaptic_storage_factor",
+        "schema_version": 1,
+        "stock_model_revision": "5a916bc7c77f2176c065d57e3d68dd0783902b40418eec42cf089eb10b36abf5",
+        "psi_model_revision": "1c2511badd52a622e02814e31f74fd89ab0fa99b3b44b4a0e402bb8daea0f356",
+        "all_other_effective_model_fields_equal": true,
+        "changed_physics": [
+          "UsePresynapticInhibition=false->true",
+          "InhibitionCoeff=0->2.5"
+        ],
+        "synapse_paths": [
+          "$.Dendrite1_1.ExcSynapse1",
+          "$.Dendrite1_1.InhSynapse1",
+          "$.Soma1.ExcSynapse1",
+          "$.Soma1.InhSynapse1"
+        ],
+        "channel_feedback_LT_physics_preserved": true,
+        "lt_membrane": false,
+        "native_model_calculation": false,
+        "training_started": false,
+        "scientific_verdict": null
+      },
+      "validation": {
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      }
+    }
+  ],
+  "closed_process_receipts": [
+    {
+      "job": "s11-n1-moderate-threshold-m40-a1",
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      }
+    },
+    {
+      "job": "s11-psi-k2p5-stock-cold-train-m40-a1",
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      }
+    },
+    {
+      "job": "s11-psi-k2p5-psi-cold-train-m40-a1",
+      "process/result.json": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true
+      },
+      "worker/validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 1,
+        "failures": [],
+        "errors": []
+      }
+    },
+    {
+      "threshold_case": "baseline100",
+      "validity": "valid",
+      "model_revision": "6e683576e788844dff0f9c8f0b1e6e8b4cfc358a37deeebebc1e0d7770e2c04e",
+      "trial_count": 8,
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0,
+        "foil_response_rate": 0
+      },
+      "timing": [
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/0",
+          "phasea-row-0",
+          "target",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/1",
+          "phasea-row-1",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/2",
+          "phasea-row-2",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/3",
+          "phasea-row-3",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/4",
+          "phasea-row-4",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/5",
+          "phasea-row-5",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/6",
+          "phasea-row-6",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/7",
+          "phasea-row-7",
+          "foil",
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "threshold_case": "candidate",
+      "validity": "valid",
+      "model_revision": "cc9caa6fc60ee453f621cba9cd1e65995368f70faaf682bbd63a5ff8195c1b1f",
+      "trial_count": 8,
+      "counts": {
+        "TP": 1,
+        "FP": 6,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.25,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0.8571428571428571
+      },
+      "timing": [
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/0",
+          "phasea-row-0",
+          "target",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/1",
+          "phasea-row-1",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/2",
+          "phasea-row-2",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/3",
+          "phasea-row-3",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/4",
+          "phasea-row-4",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/5",
+          "phasea-row-5",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/6",
+          "phasea-row-6",
+          "foil",
+          null,
+          null
+        ],
+        [
+          "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/7",
+          "phasea-row-7",
+          "foil",
+          null,
+          null
+        ]
+      ]
+    }
+  ],
+  "elder_restored_frozen8": {
+    "job": "s11-restored-moderate-frozen8-report-elder-a1",
+    "source_root": "f4f108a47f13f7da137580e4b0c22c65cf1075ea",
+    "execution": "completed",
+    "all_processes_closed": true,
+    "assertion_status": "passed",
+    "executed_tests": 1,
+    "trial_soma_pairs": 8,
+    "png_count": 561,
+    "archive_members_verified": 436,
+    "manual_visual_acceptance_complete": false,
+    "report_archival_complete": false
+  },
+  "psi_window_fix": {
+    "status": "local_implementation_not_remotely_accepted",
+    "failed_attempt_classification": "setup_error_not_scientific_negative",
+    "observed_reference_frames": [
+      61,
+      221,
+      541,
+      1021
+    ],
+    "copied_stock_reference_frames": [
+      49,
+      209,
+      529,
+      1009
+    ],
+    "old_proposed_frame_domain": [
+      12,
+      3612
+    ],
+    "hard_domain": [
+      0,
+      3600
+    ],
+    "planned_fix": "rebase derived guards from measured same-profile reference timing; preserve full effective window and fresh cold references",
+    "new_cold_attempt_launched": false
+  },
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "heavy_artifacts_in_root_git": false
+}

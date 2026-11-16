@@ -1,0 +1,92 @@
+{
+  "kind": "timelearner_independent_threshold_primary_replay_acceptance",
+  "schema_version": 1,
+  "verified_at_utc": "2026-11-16T03:44:15.568Z",
+  "job": "s11-moderate-threshold-primary-replay-elder-a1",
+  "host": "Elder",
+  "producer_root": "808096f8dba7eecc0bbfa098131315f6d5fe9eec",
+  "controls": "b1be384d11dd8914bb9765783914e6570a6e5103",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "executed_tests": 1,
+  "all_processes_closed": true,
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "232f33a95729d6bce13e7ec71e21bf6c3ec64c84e3921d73b1795664cf3bdd98",
+    "archive_members_verified": 828,
+    "retained_regular_files": 826,
+    "compatibility": "dereferenced-glog-aliases-v1",
+    "omitted_redundant_aliases": [
+      {
+        "omitted_alias": "threshold/worker/tmp/threshold-study/runs/baseline100/native.events-log/EventsLog/NeuroModeler.INFO",
+        "retained_target": "threshold/worker/tmp/threshold-study/runs/baseline100/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261116-040330.3039029",
+        "bytes": 291,
+        "sha256": "b691a66df33e0761845f4c75ee69ff91526aaaa2b293d5bd03f7a62d793e5be8",
+        "owner_pid": 3039029,
+        "original_symlink_target_attested": false
+      },
+      {
+        "omitted_alias": "threshold/worker/tmp/threshold-study/runs/candidate/native.events-log/EventsLog/NeuroModeler.INFO",
+        "retained_target": "threshold/worker/tmp/threshold-study/runs/candidate/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261116-041938.3172812",
+        "bytes": 291,
+        "sha256": "1eae7c39a1cb0a86a9d0b4fb2442bd1206938f32c0181785e3b2d4e1e8cdd942",
+        "owner_pid": 3172812,
+        "original_symlink_target_attested": false
+      }
+    ],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "actual_series": [
+    {
+      "name": "baseline100",
+      "model_revision": "6e683576e788844dff0f9c8f0b1e6e8b4cfc358a37deeebebc1e0d7770e2c04e",
+      "threshold": 100,
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0,
+        "foil_response_rate": 0
+      }
+    },
+    {
+      "name": "candidate",
+      "model_revision": "cc9caa6fc60ee453f621cba9cd1e65995368f70faaf682bbd63a5ff8195c1b1f",
+      "threshold": 0.11468361216368189,
+      "counts": {
+        "TP": 1,
+        "FP": 6,
+        "FN": 0,
+        "TN": 1,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.25,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0.8571428571428571
+      }
+    }
+  ],
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/01/01f01e709103cc6646cc40863d28d98864278c400da70cc9275ef7c0444320e6",
+    "sha256": "01f01e709103cc6646cc40863d28d98864278c400da70cc9275ef7c0444320e6",
+    "bytes": 320107
+  },
+  "archived_regular_files": 49,
+  "catalog_relative": "experiments/2026-11-16/n1-moderate-recovery/threshold-elder-replay-a1.json",
+  "new_native_execution": false,
+  "independent_scientific_evaluation": false,
+  "interpretation": "Independent restoration and production rescore of the same two measured Same-Matrix series, not new statistical evidence or a trained classifier.",
+  "whole_plan_complete": false
+}

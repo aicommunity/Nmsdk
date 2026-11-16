@@ -27,6 +27,33 @@ from .stock_candidate_window_study import training_execution_limits
 from .uniform_profile_physics import audit_uniform_profile
 
 
+def rebase_full_observation_window(configuration, reference_frames):
+    """Encode the same full recorded domain around this profile's own seed.
+
+    Coordinates are data, not an imported amplitude reference or a certificate.
+    Native Train must capture and validate its references again.
+    """
+    policy = configuration['composite_measurement']['candidate_window_policy']
+    n = len(configuration['model']['inputs'])
+    require(type(reference_frames) is list and n > 0 and
+            len(reference_frames) == len(policy['inputs']) == n,
+            'uniform_study_reference_window_dimensions')
+    for p, frames in zip(policy['inputs'], reference_frames):
+        require(type(frames) is dict and
+                set(frames) == {'first_frame', 'last_frame', 'frame_count'} and
+                all(type(v) is int for v in frames.values()) and
+                0 < frames['first_frame'] <= frames['last_frame'] < frames['frame_count']-1 and
+                p['hard_first_frame'] == 0 and
+                p['hard_last_frame'] == frames['frame_count']-1 and
+                p['maximum_window_frames'] == frames['frame_count'] and
+                all(p[k] == 0 for k in ('delay_frames_per_segment', 'length_guard_frames',
+                    'synapse_count_guard_frames', 'resistance_change_guard_frames',
+                    'capacitance_change_guard_frames')),
+                'uniform_study_not_full_observation_recipe')
+        p['base_left_guard_frames'] = frames['first_frame']
+        p['base_right_guard_frames'] = p['hard_last_frame']-frames['last_frame']
+
+
 def declare_case(original, archive, variant, reference_frames=None, *, run_label=None):
     require(variant in (0,3), 'uniform_study_unknown_profile')
     c=original['configuration']
@@ -47,20 +74,11 @@ def declare_case(original, archive, variant, reference_frames=None, *, run_label
     require(q['search']['bounds'][-1]==c['search']['bounds'][-1] and
             q['search']['bounds'][-1]['maximum_length']==1, 'uniform_study_anchor_changed')
     if reference_frames is not None:
-        require(type(reference_frames) is list and len(reference_frames)==4,
+        require(type(reference_frames) is list and len(reference_frames) == 4,
                 'uniform_study_reference_window_dimensions')
-        policy=q['composite_measurement']['candidate_window_policy']
-        for p,frames in zip(policy['inputs'],reference_frames):
-            require(set(frames)=={'first_frame','last_frame','frame_count'} and
-                    all(type(v) is int for v in frames.values()) and
-                    0<frames['first_frame']<=frames['last_frame']<frames['frame_count']-1 and
-                    frames['frame_count']==3601 and p['hard_first_frame']==0 and
-                    p['hard_last_frame']==3600 and p['maximum_window_frames']==3601 and
-                    all(p[k]==0 for k in ('delay_frames_per_segment','length_guard_frames',
-                        'synapse_count_guard_frames','resistance_change_guard_frames','capacitance_change_guard_frames')),
-                    'uniform_study_not_full_observation_recipe')
-            p['base_left_guard_frames']=frames['first_frame']
-            p['base_right_guard_frames']=3600-frames['last_frame']
+        require(all(type(f) is dict and f.get('frame_count') == 3601 for f in reference_frames),
+                'uniform_study_not_full_observation_recipe')
+        rebase_full_observation_window(q, reference_frames)
         q['run_id']+='/measured-window-rebased'
     if run_label is not None:
         require(type(run_label) is str and re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_-]{0,63}',run_label),
