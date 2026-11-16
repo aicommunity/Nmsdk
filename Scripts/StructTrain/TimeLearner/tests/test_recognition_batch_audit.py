@@ -17,7 +17,16 @@ from .. import threshold_candidate_evidence as candidate_audit
 class RecognitionBatchAuditTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        root = Path(os.environ['TIMELEARNER_BATCH_NATIVE_CASES'])
+        if 'TIMELEARNER_BATCH_NATIVE_CASES' in os.environ:
+            root = Path(os.environ['TIMELEARNER_BATCH_NATIVE_CASES'])
+        else:
+            from .batch_native_cases import prepare
+            controls=Path(os.environ['TIMELEARNER_BATCH_REUSE_CONTROLS'])
+            root=Path(os.environ['TMPDIR'])/'prepared-native-batch-cases'
+            declaration=load(controls/'declaration.json')
+            prepare(Path(os.environ['TIMELEARNER_BATCH_GENERATED_NATIVE']),controls/'native.xml',
+                    Path(os.environ['TIMELEARNER_BATCH_DIAGNOSTIC_NATIVE']),root,
+                    excluded_tests=declaration['excluded_native_tests'])
         declaration = load(root/'cases.json')
         cls.cases = []
         for row in declaration['cases']:
