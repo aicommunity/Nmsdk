@@ -434,14 +434,14 @@
   "collector_source_root": "e3b74d00e0a1813a8f610e62352e01a2756a2a7d",
   "collector_controls": "f1ad205bd291024df69da93e43e982ffe1f9d16e",
   "catalog_relative": "experiments/2026-11-16/fast-profile-wall-budget/threshold-actual-primary-a1.json",
-  "independent_data_replay_accepted": false,
+  "independent_data_replay_accepted": true,
   "independent_data_replay_job": "s11-fast-threshold-primary-replay-elder-a2",
   "independent_data_replay_source": "0cfcd8fc91523881ad72fa58f473aa821db9e522",
   "independent_data_replay_controls": "afdd546fd2d9cb14943f3b173d5debb2981e6ae0",
-  "candidate_temporal_report_accepted": false,
-  "candidate_temporal_report_job": "s11-fast-bracket-threshold-common-report-m40-a1",
-  "candidate_temporal_report_source": "9bb0b6907b17ba870c710e1bfe41cafc2b371db3",
-  "candidate_temporal_report_controls": "78db055b2b053e1d8b3fce7469a0eef82e940d7f",
+  "candidate_temporal_report_accepted": true,
+  "candidate_temporal_report_job": "s11-fast-threshold-positive-report-m40-a1",
+  "candidate_temporal_report_source": "b9dcab0c98aac443ed1e0b2dcde3f31a22ebade9",
+  "candidate_temporal_report_controls": "d0e8c57d59f9413a4bc82e10f466ab89570826aa",
   "scientific_verdict": null,
   "whole_plan_complete": false,
   "independent_data_replay_prior_attempt": {
@@ -453,5 +453,7 @@
   },
   "candidate_temporal_rendering_completed": true,
   "candidate_temporal_rendering_passed": 1,
-  "candidate_temporal_rendering_png": 983
+  "candidate_temporal_rendering_png": 1403,
+  "independent_data_replay_receipt": "FastN1ThresholdIndependentReplayAcceptance-20261116.json",
+  "candidate_temporal_receipt": "FastN1CommonTemporalAcceptance-20261116.json"
 }

@@ -107,12 +107,33 @@
     "previous_baseline_soma_png_byte_identical": 432
   },
   "production_channel_coverage_accepted": true,
-  "positive_fast_crest_readability_accepted": false,
-  "pending_source": "b9dcab0c98aac443ed1e0b2dcde3f31a22ebade9",
-  "pending_job": "s11-fast-threshold-positive-report-m40-a1",
-  "pending_controls": "d0e8c57d59f9413a4bc82e10f466ab89570826aa",
-  "full_temporal_protocol_accepted": false,
+  "positive_fast_crest_readability_accepted": true,
+  "full_temporal_protocol_accepted": true,
   "native_model_changed": false,
   "scientific_metrics_changed": false,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "positive_followup": {
+    "source_root": "b9dcab0c98aac443ed1e0b2dcde3f31a22ebade9",
+    "job": "s11-fast-threshold-positive-report-m40-a1",
+    "controls": "d0e8c57d59f9413a4bc82e10f466ab89570826aa",
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/4c/4c7a8cfb71b4bf376e9dcab26c08e6f3b6f4e13eda1d904fe1ad21e7f39619eb",
+      "sha256": "4c7a8cfb71b4bf376e9dcab26c08e6f3b6f4e13eda1d904fe1ad21e7f39619eb",
+      "bytes": 228895906
+    },
+    "python_passed": 1,
+    "all_processes_closed": true,
+    "png_count": 1403,
+    "ordinary_png_byte_identical": 983,
+    "manual_review": {
+      "catalog": "experiments/2026-11-16/fast-profile-wall-budget/positive-lobe-manual-review-a1.json",
+      "sha256": "c9b7c667d497fe741884efb7a5a5381b4fc1860760df21b6ebde464dd9208502",
+      "bytes": 11576,
+      "reviewed": 8
+    }
+  },
+  "accepted_temporal_scope": "Recorded Fast baseline100/candidate series only; all modes and physical profiles are not claimed."
 }

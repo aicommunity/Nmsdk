@@ -1263,5 +1263,39 @@
     "accepted": false
   },
   "temporal_report_accepted": false,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "terminal_incomplete_group": {
+    "group_ordinal": 67,
+    "input_index": 3,
+    "input_id": "input3",
+    "role": "fresh anchor remeasurement after changing the full model",
+    "active_input1_at_L201_measured": false,
+    "complete_raw_trials": 4,
+    "censored_raw_trials": 1,
+    "missing_full_repeat": true
+  },
+  "temporal_overview_report": {
+    "job": "s11-fast-full-training-report-m40-a1",
+    "source_root": "939e429375f46d84f2c723ffe1779c3caccaf704",
+    "controls": "025d63fbdd4c7b1bdac68d8189a76fd425ecc825",
+    "python_passed": 1,
+    "all_processes_closed": true,
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/af/af6c32f17a229fa9984ae4ca169f7e63870d98a0d8ec1fd4670ddb5de10c185c",
+      "sha256": "af6c32f17a229fa9984ae4ca169f7e63870d98a0d8ec1fd4670ddb5de10c185c",
+      "bytes": 20499619
+    },
+    "png_count": 32,
+    "reviewed_original_overviews": 4,
+    "cache_relative": "report-cache/2026-11-16/fast-full-training-comparison",
+    "native_response_peak_zoom_reviewed": false,
+    "manual_review": {
+      "catalog": "experiments/2026-11-16/fast-profile-wall-budget/full-training-comparison-manual-review-a1.json",
+      "sha256": "e2ce046614ce3ec1fa89f7b54a602d1315150933fa36fd5efe4d8c8dac2a263d",
+      "bytes": 2020
+    }
+  }
 }

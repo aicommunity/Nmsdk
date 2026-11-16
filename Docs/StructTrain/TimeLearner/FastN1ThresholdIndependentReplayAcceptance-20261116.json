@@ -1,0 +1,65 @@
+{
+  "kind": "timelearner_fast_threshold_independent_replay_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16T10:39:16.553Z",
+  "source_root": "0cfcd8fc91523881ad72fa58f473aa821db9e522",
+  "controls": "afdd546fd2d9cb14943f3b173d5debb2981e6ae0",
+  "job": "s11-fast-threshold-primary-replay-elder-a2",
+  "python_passed": 1,
+  "all_processes_closed": true,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/44/44560dfe7aa6be5f6cc1fdcfa80447f02fe9a63ec94fc004b784aaa7d6f2f672",
+    "sha256": "44560dfe7aa6be5f6cc1fdcfa80447f02fe9a63ec94fc004b784aaa7d6f2f672",
+    "bytes": 354831
+  },
+  "readback_sha256": "9643c80fa089e9f7de31ab813894e0823bd68c582941bd29f681a678f760a178",
+  "source_primary_sha256": "79c4e07750874b6cf26310c0e034b404748cf987c61fb6781d8597150a0ed28d",
+  "archive_members_verified": 1333,
+  "retained_regular_files": 1330,
+  "omitted_proven_glog_aliases": 3,
+  "original_baseline_waveforms_checked": true,
+  "actual_series": [
+    {
+      "name": "baseline100",
+      "model_revision": "f122a9ba82c154cf28e4081fcee0ab1d3b977eaaa19ad659211a4323e6af95f6",
+      "threshold": 100,
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0,
+        "foil_response_rate": 0
+      }
+    },
+    {
+      "name": "candidate",
+      "model_revision": "d0977f960a87ae75f0f8df77f197392783cec68c7ab56ce696c4b3adf4ba07aa",
+      "threshold": 0.0560090535350351,
+      "counts": {
+        "TP": 1,
+        "FP": 3,
+        "FN": 0,
+        "TN": 4,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.625,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0.42857142857142855
+      }
+    }
+  ],
+  "new_native_execution": false,
+  "independent_scientific_evaluation": false,
+  "training_completed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
