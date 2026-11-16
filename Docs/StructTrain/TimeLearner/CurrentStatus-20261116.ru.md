@@ -1,6 +1,6 @@
 # Статус полного плана TimeLearner — 16 ноября 2026
 
-Проверка 2026-11-16T18:42:22Z; состояния живых заданий указаны по последнему серверному наблюдению. Полностью принят исходный этап 0; этапы 1–12 частичны. Это не оценка «1/13 работы»: во всех остальных этапах есть реализация и адресные приёмки, но остаются требования исходного плана. Цель целиком активна. Научные 8/8 не являются условием завершения рефакторинга.
+Проверка 2026-11-16T18:56:56Z; новые M40 engineering jobs проверены19:23UTC; состояния живых заданий указаны по последнему серверному наблюдению. Полностью принят исходный этап 0; этапы 1–12 частичны. Это не оценка «1/13 работы»: во всех остальных этапах есть реализация и адресные приёмки, но остаются требования исходного плана. Цель целиком активна. Научные 8/8 не являются условием завершения рефакторинга.
 
 Принятый до этого evidence-подэтапа root develop: 79722b18c40063f9dda3e3107ecbd5a43b60e17b. PulseLib 23d039e44f927eb8040473845d3c391270d9d15e, Bin 8cb6dba07b30432272984c8ce3136b48ad06f064, Rdk de4134235c0dcb8b91fd9a43b267348ad1a163ca. Новые подэтапы — отдельные ветки и --no-ff merge; пользовательский E:/Science-Repo/nmsdk-git не изменяется.
 
@@ -17,6 +17,8 @@
 |[Новый terminal21600 recognition](FastN1FullTrainingRecognitionScientificReport-20261116.ru.md)|Baseline100: TP0/FP0/FN1/TN7. Actual единственный threshold0.054353792695896797: **TP1/FP1/FN0/TN6**. Target через3мс после последнего входа; FP уrow4 до последнего входа. Все16 полны/valid/frozen, процессы закрыты. Primary58.74MB/1423members и1287PNG report опубликованы;18 выбранных оригиналов всех8 паттернов просмотрены.|Общую сходимость Train, independent evaluation или устойчивость к порядку/ITI.|
 
 |[Fast groupwall600, новый cold](FastN1GroupWall600OOM-20261116.ru.md)|Native process_error, kernel oom-kill при4 GiB после21793.547с. Сохранены759 пар raw JSON/CSV; конечной модели и scalar summary нет. Полный аварийный primary опубликован.|Сходимость, валидный BudgetExhausted или качество новой конечной модели.|
+
+|[Fast frozen order,64 actual пробы](FastN1FrozenOrderScientificReport-20261116.ru.md)|Все8 положений target дают TP1/FP1/FN0/TN6. Всегда отвечает phasea-row-4. Baseline waveforms совпали с M40 точно; весь опыт закрыт и опубликован.|ITI/continuous stream, совпадение всех waveform между rotation, independent training или завершённое обучение.|
 
 Августовские визуально подтверждённые4/8–6/8 сохраняют силу в исходном протоколе. Изменённые порядок/ITI и современные отрицательные проверки не отменяют этих наблюдений. При Train нужен максимум закреплённого импульса; раздельная ранняя вершина допустима, слияние остаётся ambiguous. Test рассматривает весь отклик и фактические native spikes.
 
@@ -48,14 +50,14 @@
 
 [Elder current SDK принят154/154](ElderCurrentFastN1SdkAcceptance-20261116.json), все35 native groups закрыты. [Новый протокол fixed-model order: contract5/5](FrozenDiagnosticOrderPreparation-20261116.json); native64 приёмка ещё не получена. Приёмка алгоритмов по всем исходным режимам остаётся открытой.
 
-[Независимый replay нового threshold primary принят1/1](FastN1FullTrainingThresholdIndependentReplayAcceptance-20261116.json):1423/1420,3 proven content aliases, исходные/повторные baseline waveforms равны; no new native execution. [Native baseline8 на Elder завершён](FastN1FullTrainingElderNativeRepeat-20261116.ru.md): TP1/FP1/FN0/TN6, все восемь полных waveform точно равны M40 (max absolute difference0.0). Оба native process baseline8/study56 закрыты; parent controller ещё выполняет итоговую проверку. Это новое исполнение сохранённой модели, не повторное обучение. Приёмка всей серии64 и полный новый native primary пока не получены.
+[Независимый replay нового threshold primary принят1/1](FastN1FullTrainingThresholdIndependentReplayAcceptance-20261116.json):1423/1420,3 proven content aliases, исходные/повторные baseline waveforms равны; no new native execution. [Native baseline8 на Elder завершён](FastN1FullTrainingElderNativeRepeat-20261116.ru.md): TP1/FP1/FN0/TN6, все восемь полных waveform точно равны M40 (max absolute difference0.0). Полный native cohort64 и parent controller закрыты, приёмка1/1 и полный primary опубликованы. Это новое исполнение сохранённой модели, не повторное обучение. [Вся серия64 принята](FastN1FrozenOrderScientificReport-20261116.ru.md): одинаковые TP1/FP1/FN0/TN6 во всех8 положениях target; полные первичные данные и provenance опубликованы.
 
-## Подтверждённые текущие задания
+## Состояние последних научных заданий
 
 | Worker | Job / owned PID | Последнее подтверждённое состояние |
 |---|---|---|
 |M40|s11-fast-bracket-groupwall600-m40-a1 /2814832|Все процессы закрыты. Native process_error/SIGKILL, kernel oom-kill при4 GiB; итоговая модель/summary не сохранены. Сохранены759 пар проб,758 complete/valid и1 incomplete/invalid по raw flags. Полный неуспех опубликован: [OOM report](FastN1GroupWall600OOM-20261116.ru.md). Новый Train/Test не запущен.|
-|Elder|s11-frozen-order-native-elder-a2 /2352165|Все8 baseline и56 study записаны; оба native-процесса закрыты. Parent Python-controller ещё проверяет полные модели и наблюдения. Baseline8 точен: TP1/FP1/FN0/TN6. Итоговые rotation counts и полная приёмка64 пока не опубликованы.|
+|Elder|s11-frozen-order-native-elder-a2 /2352165 закрыт|Полные64 actual native observations, весь controller и коллектор закрыты; acceptance1/1. Все8 положений target: TP1/FP1/FN0/TN6, один и тот же foil phasea-row-4. [Новый научный отчёт и primary](FastN1FrozenOrderScientificReport-20261116.ru.md). Новая галерея64 ещё не принята.|
 
 Threshold Test завершён и принят1/1; [самодостаточный primary и научные метрики](FastN1FullTrainingThresholdScientificAcceptance-20261116.json) опубликованы. Коллектор и actual Soma/LT report закрыты, report1/1;18 выбранных оригиналов просмотрены.
 
@@ -64,8 +66,12 @@ Threshold Test завершён и принят1/1; [самодостаточн�
 ## Следующая научная работа
 
 1. Устранить подтверждённый OOM сохранения groupwall600: native leaf имел4 GiB, а не8 GiB внешнего controller. Сначала проверить память и сохранение большой модели/контрольной границы; затем повторять объявленный cold-протокол. Текущий аварийный запуск не имеет финальной модели, поэтому его нельзя переносить в Test или оценивать как завершённое обучение.
-2. Довести уже работающий [Elder order A2](FrozenDiagnosticOrderLaunch-20261116.ru.md) до завершения rotations и публикации полного нового primary; actual same-order control8 уже пройден. Модель и threshold0.054353792695896797 фиксированы до новых проб; никаких новых порогов по результатам перестановок.
+2. Построить и проверить новую галерею всех64 принятых frozen-order проб и их timing. Полный actual опыт закрыт: TP1/FP1/FN0/TN6 при каждом положении target; все source/model/threshold bindings проверены. Порог по этим результатам не изменять.
 3. Проверить порядок, ITI, reset и оставшуюся режимную/физическую матрицу по отдельным протоколам. Same-Matrix7/8 относится только к исходным восьми паттернам и reset-per-trial.
 4. Завершать исходные этапы1–12, включая legacy/V2 A/B, миграцию и документацию. Число инженерных PASS не измеряет готовность классификатора. Надёжного срока получения устойчивой классификации пока нет.
 
 Техническая очистка истории завершена. Тяжёлые primary, модели и полные галереи — /media/user/Data/Nmsdk-StructTrainExpArchive на M40; [Samba](//10.245.1.12/Nmsdk-StructTrainExpArchive). В Git только код, настройки, документы и компактные refs. [Подробная карта реализации](ImplementationStatus.ru.md), [исходный план](RefactoringPlan.ru.md), [исходный аудит](PlanCompletionAudit-2026-10-25.ru.md).
+
+## Текущая инженерная проверка scorer
+
+На M40 запущены два отдельных owned jobs: s03-scoring-batch-native-controls-m40-a1 (14 существующих C++ SDK controls для малых native моделей) и s03-scoring-batch-large-m40-a1 (сравнение полного нового scorer-result с прежним большим eight-pattern Test). Это проверка устранения повторного model audit для каждой строки; новой научной модели или Train нет. Код97201bf7a7ea160c48d6c7d1a1dbca9f419e34cd находится в отдельной ветке, приёмка и merge ещё ожидаются.
