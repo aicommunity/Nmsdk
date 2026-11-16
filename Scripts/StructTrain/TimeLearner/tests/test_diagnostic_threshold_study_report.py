@@ -1,5 +1,7 @@
 """Plot the actual fixed-threshold eight-pattern experiment, without reruns."""
 import os
+import gzip
+import json
 from pathlib import Path
 import unittest
 
@@ -61,8 +63,16 @@ class DiagnosticThresholdStudyReportTest(unittest.TestCase):
         self.assertEqual(len(decisions['trials']), 8)
         for figure in manifest['figures']:
             self.assertTrue(all('reference_level' not in v for v in figure['views']))
+            with gzip.open(output/'primary'/f"trial-{figure['presentation_index']:04d}.json.gz", 'rt') as stream:
+                observed = json.load(stream)
+            values = [s['soma'][figure['descriptor']['index']] for s in observed['samples']]
+            self.check_positive_lobe_views(figure['views'], values)
         for item in decisions['trials']:
             self.assertEqual(item['source_descriptor']['path'], '$.LTZone.Potential')
+            figure = next(f for f in manifest['figures'] if f['trial_id'] == item['trial_id'])
+            with gzip.open(output/'primary'/f"trial-{figure['presentation_index']:04d}.json.gz", 'rt') as stream:
+                observed = json.load(stream)
+            self.check_positive_lobe_views(item['views'], [s['lt_potential'] for s in observed['samples']])
             self.assertTrue(any(v['time_view'] == 'overview' for v in item['views']))
             self.assertTrue(any(v['time_view'] != 'overview' and
                 v['minimum_native_tick_pixels_on_zoom'] >= 8 for v in item['views']))
@@ -73,3 +83,21 @@ class DiagnosticThresholdStudyReportTest(unittest.TestCase):
                     view['y_limits'][0] <= view['reference_level'] <= view['y_limits'][1])
                 with Image.open(output/item['folder']/view['files'][0]) as image:
                     self.assertEqual(image.size, (1920, 960))
+
+    def check_positive_lobe_views(self, views, values):
+        ordinary = [v for v in views if v['y_scale'] != 'positive_lobe_detail']
+        overview = next(v for v in ordinary if v['time_view'] == 'overview')
+        self.assertLessEqual(overview['y_limits'][0], min(values))
+        self.assertGreaterEqual(overview['y_limits'][1], max(values))
+        companions = [v for v in views if v['y_scale'] == 'positive_lobe_detail']
+        if min(values) < 0. < max(values):
+            self.assertTrue(companions)
+            full = next(v for v in companions if v['time_view'] == 'overview')
+            self.assertGreater(full['samples_outside_display_y'], 0)
+            self.assertGreaterEqual(full['y_limits'][1], max(values))
+            self.assertTrue(any(v['time_view'] != 'overview' and
+                                v['minimum_native_tick_pixels_on_zoom'] >= 8 for v in companions))
+            self.assertTrue(all(v['display_range_only'] and v['ordinary_full_recovery_views_retained']
+                                for v in companions))
+        else:
+            self.assertEqual(companions, [])

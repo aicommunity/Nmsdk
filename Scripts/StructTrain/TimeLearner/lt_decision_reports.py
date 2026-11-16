@@ -6,7 +6,7 @@ of the original soma observations or be used to infer missing spike events.
 from pathlib import Path
 
 from .native_evidence import number, require
-from .plotting import padded_limits, render_soma
+from .plotting import padded_limits, render_soma, render_positive_lobe_views
 
 
 def render_lt_decisions(spec, observations, threshold, output: Path, *, context_label=None):
@@ -50,6 +50,9 @@ def render_lt_decisions(spec, observations, threshold, output: Path, *, context_
         views = render_soma(projected, 0, descriptor['path'], limits, folder,
             potential_axis_label='LT decision potential [model units; SI unverified]',
             reference_level=threshold, context_label=context)
+        views.extend(render_positive_lobe_views(projected, 0, descriptor["path"], folder,
+            potential_axis_label="LT decision potential [model units; SI unverified]",
+            reference_level=threshold, context_label=context))
         decisions.append(dict(sample_id=observation['sample_id'], trial_id=observation['trial_id'],
             folder=folder.name, source_descriptor=descriptor,
             observation_complete=observation['complete'], observation_valid=observation['valid'],

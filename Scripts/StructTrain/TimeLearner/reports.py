@@ -11,7 +11,7 @@ import json
 
 from .native_evidence import load, require
 from .recognition_metrics import load_evaluation, score_recognition_evaluation, score_threshold_candidate
-from .plotting import render_soma, render_series, plotting_runtime
+from .plotting import render_soma, render_series, plotting_runtime, render_positive_lobe_views
 from .lt_decision_reports import render_lt_decisions
 
 
@@ -122,6 +122,8 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
             folder.mkdir()
             views = render_soma(o, descriptor["index"], descriptor["path"], limits[descriptor["index"]], folder,
                                 context_label=context_label)
+            views.extend(render_positive_lobe_views(o, descriptor["index"], descriptor["path"], folder,
+                context_label=context_label))
             for view in views:
                 view["files"] = [f"{folder.name}/{p}" for p in view["files"]]
             figures.append({"trial_id": o["trial_id"], "sample_id": o["sample_id"], "label": o["label"],
