@@ -1,0 +1,493 @@
+{
+  "kind": "timelearner_actual_psi_threshold_temporal_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "job": "s11-psi-k2p5-threshold-report-m40-a2",
+  "source_root": "e3b74d00e0a1813a8f610e62352e01a2756a2a7d",
+  "controls": "046a70ad9673435a755521873b39e17f77f43120",
+  "execution": "completed",
+  "all_processes_closed": true,
+  "python_passed": 1,
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/18/1860717c5fde6f0a427e476d8b34007d02e44f9ca76e2a08de26ab63c212b734",
+    "sha256": "1860717c5fde6f0a427e476d8b34007d02e44f9ca76e2a08de26ab63c212b734",
+    "bytes": 186950305
+  },
+  "archive_files": 3427,
+  "cache_relative": "report-cache/2026-11-16/psi-threshold-m40",
+  "png_count": 1121,
+  "trial_soma_pairs": 8,
+  "counts": {
+    "TP": 1,
+    "FP": 6,
+    "FN": 0,
+    "TN": 1,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.25,
+    "target_hit_rate": 1,
+    "foil_response_rate": 0.8571428571428571
+  },
+  "model_revision": "801fb52a215e76151be469804f0612e18e4cdfa6e6d8163c03c669233bee7ef4",
+  "source_actual_primary": "81d606dd30443d398633c34947d8fc59dce3a4abd4c8ac566d46ffd9201281ed",
+  "plotting_projection_only_for_lt_decision": true,
+  "native_observations_changed": false,
+  "new_native_calculation": false,
+  "visual_review": {
+    "kind": "timelearner_psi_threshold_manual_visual_review",
+    "schema_version": 1,
+    "date": "2026-11-16T06:00:23.280Z",
+    "source_archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/18/1860717c5fde6f0a427e476d8b34007d02e44f9ca76e2a08de26ab63c212b734",
+      "sha256": "1860717c5fde6f0a427e476d8b34007d02e44f9ca76e2a08de26ab63c212b734",
+      "bytes": 186950305
+    },
+    "cache_relative": "report-cache/2026-11-16/psi-threshold-m40",
+    "scoped_visual_review_complete": true,
+    "all_generated_figures_reviewed": false,
+    "generated_png_count": 1121,
+    "reviewed_figures": [
+      {
+        "path": "trial-0000-soma-001/overview.png",
+        "sha256": "5838f2d195bcf2e2f18781edfaabad111ad40d467fc21245b34697d8e35a6f7b",
+        "bytes": 162519,
+        "sample_id": "phasea-row-0",
+        "channel": "soma",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0000-soma-001/zoom-007.png",
+        "sha256": "1e784391aa80bcc1777d5820a35ba38cd16850110b29e80bcb5165b8b532209d",
+        "bytes": 144013,
+        "sample_id": "phasea-row-0",
+        "channel": "soma",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0000-lt-decision/overview.png",
+        "sha256": "4864ea436361fbddf275f81a80f0b5fbe61f9a0de82d6a00e22514cf460cf2ef",
+        "bytes": 158339,
+        "sample_id": "phasea-row-0",
+        "channel": "lt_decision",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0000-lt-decision/zoom-007.png",
+        "sha256": "e3304792b413b9aca0dc03768d87d2c5510bf989967ae54edef90a7303a6ec36",
+        "bytes": 141213,
+        "sample_id": "phasea-row-0",
+        "channel": "lt_decision",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0001-soma-001/overview.png",
+        "sha256": "1e9879de75b277d29069a1ef2a64f9a53e1b21075573d5f60cad901447af88ab",
+        "bytes": 159545,
+        "sample_id": "phasea-row-1",
+        "channel": "soma",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0001-soma-001/zoom-015.png",
+        "sha256": "25acf5f26452b6e02a6973345bd7d6dc2e2aa43ceb9a8d8a4b1da2fa6ac7e1dc",
+        "bytes": 145354,
+        "sample_id": "phasea-row-1",
+        "channel": "soma",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0001-lt-decision/overview.png",
+        "sha256": "81482ec4fab35d5dadfc7c5fcab338ec7d84bbafced579aa396f20bb43359011",
+        "bytes": 155853,
+        "sample_id": "phasea-row-1",
+        "channel": "lt_decision",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0001-lt-decision/zoom-015.png",
+        "sha256": "bbdd9c2e0429ca119a4ffc30717d4988afc94ae4189038dd08cc517ace3af091",
+        "bytes": 143242,
+        "sample_id": "phasea-row-1",
+        "channel": "lt_decision",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0002-soma-001/overview.png",
+        "sha256": "8a5e686b3edd743b46fd2437effe3c292755ce39e5edc7221005e068c7a31d2e",
+        "bytes": 165452,
+        "sample_id": "phasea-row-2",
+        "channel": "soma",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0002-soma-001/zoom-010.png",
+        "sha256": "61681b8d1b046d49785b52189a34d56e8e52cb012ac55ca1206102ae16a3476c",
+        "bytes": 144653,
+        "sample_id": "phasea-row-2",
+        "channel": "soma",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0002-lt-decision/overview.png",
+        "sha256": "c0ad0a074e0cf645d7280c36c5529be969a34b56c1ec6fc1ff1d4443203b8857",
+        "bytes": 161450,
+        "sample_id": "phasea-row-2",
+        "channel": "lt_decision",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0002-lt-decision/zoom-010.png",
+        "sha256": "892b597c6d0fefd7ab180160cc69d1b208ae40c63c93962bf08c870c987d3bfe",
+        "bytes": 142240,
+        "sample_id": "phasea-row-2",
+        "channel": "lt_decision",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0003-soma-001/overview.png",
+        "sha256": "8e1c9ab89be3b9dac54b9b10949e556e8502599953ed822447d04e5135ced8aa",
+        "bytes": 145441,
+        "sample_id": "phasea-row-3",
+        "channel": "soma",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0003-soma-001/zoom-011.png",
+        "sha256": "d63c145ec34d612dc9c5306092ce8a482220c347166a5c59ebfe3d331ad54fde",
+        "bytes": 132983,
+        "sample_id": "phasea-row-3",
+        "channel": "soma",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0003-lt-decision/overview.png",
+        "sha256": "be268d51632a5442079d5328329055b06ef0a144e049b8202a105473c1129fd5",
+        "bytes": 142579,
+        "sample_id": "phasea-row-3",
+        "channel": "lt_decision",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0003-lt-decision/zoom-011.png",
+        "sha256": "72b5d3adad78a07a5ae2bf43d9f4901c5170c6abe9482c2d487f3fad52710fac",
+        "bytes": 130335,
+        "sample_id": "phasea-row-3",
+        "channel": "lt_decision",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0004-soma-001/overview.png",
+        "sha256": "0fb6d546a295d8ea7c7961fcaf582d8615846a9b22dfaa5a71e6bf754a5436aa",
+        "bytes": 166057,
+        "sample_id": "phasea-row-4",
+        "channel": "soma",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0004-soma-001/zoom-007.png",
+        "sha256": "279700661b8a4b834e65021d2a482370991e2bcddf3da493bf135f0f1ddf7367",
+        "bytes": 158606,
+        "sample_id": "phasea-row-4",
+        "channel": "soma",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0004-lt-decision/overview.png",
+        "sha256": "71fb245dfc627ae4c2f76b4b550e9096c2d4626f2cfa1b41d1a7662d87dae767",
+        "bytes": 162071,
+        "sample_id": "phasea-row-4",
+        "channel": "lt_decision",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0004-lt-decision/zoom-007.png",
+        "sha256": "b0adb02228344c585c0ea8656da58868853dc85634a5a37be6aab157273b7c65",
+        "bytes": 155753,
+        "sample_id": "phasea-row-4",
+        "channel": "lt_decision",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0005-soma-001/overview.png",
+        "sha256": "1bb43c2284b15144af79bf36c3d949f96cee0d9a9dab1596a605425af86016f3",
+        "bytes": 163238,
+        "sample_id": "phasea-row-5",
+        "channel": "soma",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0005-soma-001/zoom-016.png",
+        "sha256": "7f61d291a77c98deb70d781970db2584a721bab4781996ceac65c045a40bb123",
+        "bytes": 157980,
+        "sample_id": "phasea-row-5",
+        "channel": "soma",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0005-lt-decision/overview.png",
+        "sha256": "de3bc86456d14a05f79e915a09b75f1f239ca4dc16a3b88cbf6af29c64fe2c8a",
+        "bytes": 159487,
+        "sample_id": "phasea-row-5",
+        "channel": "lt_decision",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0005-lt-decision/zoom-016.png",
+        "sha256": "c104a5b8313e9e430bcdd542e888ad5567d25c56cad526a797b4795bdaee2eea",
+        "bytes": 154677,
+        "sample_id": "phasea-row-5",
+        "channel": "lt_decision",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0006-soma-001/overview.png",
+        "sha256": "cc5d9466db93ddb507f37810bd6963132591ad5fd45b14731310b1663918518d",
+        "bytes": 182215,
+        "sample_id": "phasea-row-6",
+        "channel": "soma",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0006-soma-001/zoom-007.png",
+        "sha256": "69cf3b4fa7aed3515800d33073cae9b71c5c6e446b224ff831f58f1b991a4cea",
+        "bytes": 169907,
+        "sample_id": "phasea-row-6",
+        "channel": "soma",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0006-lt-decision/overview.png",
+        "sha256": "e1e82775eb5991f92e53ffb754a523c53dd87775cac16a3d0f71be0109860773",
+        "bytes": 176779,
+        "sample_id": "phasea-row-6",
+        "channel": "lt_decision",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0006-lt-decision/zoom-007.png",
+        "sha256": "dc456228f4822332befe1a093727f3ca59ef9856948b8ab66503bacc106bacc5",
+        "bytes": 165708,
+        "sample_id": "phasea-row-6",
+        "channel": "lt_decision",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0007-soma-001/overview.png",
+        "sha256": "70c1245a02f8ece25b7f7780d74a3f2e6028290441a21813cb83f7b0b8dcc4f9",
+        "bytes": 182700,
+        "sample_id": "phasea-row-7",
+        "channel": "soma",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0007-soma-001/zoom-015.png",
+        "sha256": "078a38dc929080ec9042e2a8d0fbfd347b6f175e029a322654bef782556f59b7",
+        "bytes": 169623,
+        "sample_id": "phasea-row-7",
+        "channel": "soma",
+        "view": "focus_zoom"
+      },
+      {
+        "path": "trial-0007-lt-decision/overview.png",
+        "sha256": "eb408359b4ffd812d457d4f42148abce31849bfc3850364f0662dea0c45ef24c",
+        "bytes": 177945,
+        "sample_id": "phasea-row-7",
+        "channel": "lt_decision",
+        "view": "overview"
+      },
+      {
+        "path": "trial-0007-lt-decision/zoom-015.png",
+        "sha256": "297302e3c25e2329743abcda1e2c07ab07ca9795ecbf5ae7f7a74355d57cf5ca",
+        "bytes": 165695,
+        "sample_id": "phasea-row-7",
+        "channel": "lt_decision",
+        "view": "focus_zoom"
+      }
+    ],
+    "selection": [
+      {
+        "sample_id": "phasea-row-0",
+        "label": "target",
+        "channel": "soma",
+        "focus": "first_actual_spike",
+        "focus_time": 0.348,
+        "overview": "trial-0000-soma-001/overview.png",
+        "focus_zoom": "trial-0000-soma-001/zoom-007.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-0",
+        "label": "target",
+        "channel": "lt_decision",
+        "focus": "first_actual_spike",
+        "focus_time": 0.348,
+        "overview": "trial-0000-lt-decision/overview.png",
+        "focus_zoom": "trial-0000-lt-decision/zoom-007.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-1",
+        "label": "foil",
+        "channel": "soma",
+        "focus": "first_actual_spike",
+        "focus_time": 2.7405,
+        "overview": "trial-0001-soma-001/overview.png",
+        "focus_zoom": "trial-0001-soma-001/zoom-015.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-1",
+        "label": "foil",
+        "channel": "lt_decision",
+        "focus": "first_actual_spike",
+        "focus_time": 2.7405,
+        "overview": "trial-0001-lt-decision/overview.png",
+        "focus_zoom": "trial-0001-lt-decision/zoom-015.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-2",
+        "label": "foil",
+        "channel": "soma",
+        "focus": "first_actual_spike",
+        "focus_time": 4.4975,
+        "overview": "trial-0002-soma-001/overview.png",
+        "focus_zoom": "trial-0002-soma-001/zoom-010.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-2",
+        "label": "foil",
+        "channel": "lt_decision",
+        "focus": "first_actual_spike",
+        "focus_time": 4.4975,
+        "overview": "trial-0002-lt-decision/overview.png",
+        "focus_zoom": "trial-0002-lt-decision/zoom-010.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-3",
+        "label": "foil",
+        "channel": "soma",
+        "focus": "silent_soma_maximum",
+        "focus_time": 6.5115,
+        "overview": "trial-0003-soma-001/overview.png",
+        "focus_zoom": "trial-0003-soma-001/zoom-011.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-3",
+        "label": "foil",
+        "channel": "lt_decision",
+        "focus": "silent_soma_maximum",
+        "focus_time": 6.5115,
+        "overview": "trial-0003-lt-decision/overview.png",
+        "focus_zoom": "trial-0003-lt-decision/zoom-011.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-4",
+        "label": "foil",
+        "channel": "soma",
+        "focus": "first_actual_spike",
+        "focus_time": 8.3105,
+        "overview": "trial-0004-soma-001/overview.png",
+        "focus_zoom": "trial-0004-soma-001/zoom-007.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-4",
+        "label": "foil",
+        "channel": "lt_decision",
+        "focus": "first_actual_spike",
+        "focus_time": 8.3105,
+        "overview": "trial-0004-lt-decision/overview.png",
+        "focus_zoom": "trial-0004-lt-decision/zoom-007.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-5",
+        "label": "foil",
+        "channel": "soma",
+        "focus": "first_actual_spike",
+        "focus_time": 10.771,
+        "overview": "trial-0005-soma-001/overview.png",
+        "focus_zoom": "trial-0005-soma-001/zoom-016.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-5",
+        "label": "foil",
+        "channel": "lt_decision",
+        "focus": "first_actual_spike",
+        "focus_time": 10.771,
+        "overview": "trial-0005-lt-decision/overview.png",
+        "focus_zoom": "trial-0005-lt-decision/zoom-016.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-6",
+        "label": "foil",
+        "channel": "soma",
+        "focus": "first_actual_spike",
+        "focus_time": 12.307,
+        "overview": "trial-0006-soma-001/overview.png",
+        "focus_zoom": "trial-0006-soma-001/zoom-007.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-6",
+        "label": "foil",
+        "channel": "lt_decision",
+        "focus": "first_actual_spike",
+        "focus_time": 12.307,
+        "overview": "trial-0006-lt-decision/overview.png",
+        "focus_zoom": "trial-0006-lt-decision/zoom-007.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-7",
+        "label": "foil",
+        "channel": "soma",
+        "focus": "first_actual_spike",
+        "focus_time": 14.7075,
+        "overview": "trial-0007-soma-001/overview.png",
+        "focus_zoom": "trial-0007-soma-001/zoom-015.png",
+        "minimum_tick_pixels": 14.208
+      },
+      {
+        "sample_id": "phasea-row-7",
+        "label": "foil",
+        "channel": "lt_decision",
+        "focus": "first_actual_spike",
+        "focus_time": 14.7075,
+        "overview": "trial-0007-lt-decision/overview.png",
+        "focus_zoom": "trial-0007-lt-decision/zoom-015.png",
+        "minimum_tick_pixels": 14.208
+      }
+    ],
+    "observations": [
+      "All eight patterns: actual soma and separate LT decision overviews plus native focus zooms inspected (32 original PNG).",
+      "Actual LT events agree with two target events, six responding foils and silent row3; target events precede its last input.",
+      "Threshold line appears on LT decision axes; soma axes show actual membrane potential without an inferred threshold.",
+      "Native tick scale14.208px, full2s overviews and common vertical scales; recorded reset/feedback waveform is retained rather than replaced with nonspiking proxy."
+    ],
+    "training_completed": false,
+    "independent_evaluation": false,
+    "scientific_verdict": null
+  },
+  "visual_review_catalog_relative": "experiments/2026-11-16/psi-storage-control/threshold-actual-visual-review-a2.json",
+  "visual_review_catalog_sha256": "fc653b0ec24be18c5bc7f4d99e36f7550d4e14df75cfdc2cae4974226c28fbd3",
+  "catalog_relative": "experiments/2026-11-16/psi-storage-control/threshold-actual-report-a2.json",
+  "training_completed": false,
+  "independent_evaluation": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

@@ -1,0 +1,237 @@
+{
+  "kind": "timelearner_actual_psi_threshold_scientific_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "job": "s11-psi-k2p5-threshold-m40-a2",
+  "source_root": "1f551388cf62f2c3d427796c7d5ced635ecd7530",
+  "runtime_root": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+  "pulse": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7",
+  "controls": "bbefbc6c6770c1873ca5b40b38e1d20a7a14e073",
+  "execution": "completed",
+  "validity": "valid",
+  "python_passed": 1,
+  "all_processes_closed": true,
+  "collector": "s11-psi-k2p5-threshold-primary-m40-a2",
+  "collector_controls": "9cb909613a0e6d38c2be92255c804d6c86905e52",
+  "collector_source": "e3b74d00e0a1813a8f610e62352e01a2756a2a7d",
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/81/81d606dd30443d398633c34947d8fc59dce3a4abd4c8ac566d46ffd9201281ed",
+    "sha256": "81d606dd30443d398633c34947d8fc59dce3a4abd4c8ac566d46ffd9201281ed",
+    "bytes": 69650908
+  },
+  "bundle_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/f0/f0412ef31d6215f20aee83fcf25760d8b7a1334257e30cb3f0830a4bc403ccdc",
+    "sha256": "f0412ef31d6215f20aee83fcf25760d8b7a1334257e30cb3f0830a4bc403ccdc",
+    "bytes": 183971
+  },
+  "provenance_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/03/03b9c75125cc88e03f2fcc7e00c721b2515c5bc9486ffc2569e602038d3d4928",
+    "sha256": "03b9c75125cc88e03f2fcc7e00c721b2515c5bc9486ffc2569e602038d3d4928",
+    "bytes": 261331
+  },
+  "bundle_members": 804,
+  "expanded_bytes": 1559562623,
+  "unique_content_bytes": 914090329,
+  "catalog_relative": "experiments/2026-11-16/psi-storage-control/threshold-actual-primary-a2.json",
+  "source_recognition_revision": "21f992b5244b7ee673303d7d3b5fc98f2c4bb8bafea5081eaec3272998de8d37",
+  "candidate_recognition_revision": "801fb52a215e76151be469804f0612e18e4cdfa6e6d8163c03c669233bee7ef4",
+  "baseline_waveforms_equal": true,
+  "threshold": 0.189057455929736,
+  "threshold_rule": "midpoint_of_target_maximum_and_highest_strictly_lower_foil_maximum",
+  "counts": {
+    "baseline100": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 0,
+      "foil_response_rate": 0
+    },
+    "candidate": {
+      "TP": 1,
+      "FP": 6,
+      "FN": 0,
+      "TN": 1,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.25,
+      "target_hit_rate": 1,
+      "foil_response_rate": 0.8571428571428571
+    }
+  },
+  "candidate_trials": [
+    {
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/0",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "presentation_index": 0,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 0.01,
+      "response_end": 2,
+      "spike_count": 2,
+      "window_spikes": [
+        0.348,
+        0.38
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TP"
+    },
+    {
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/1",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "presentation_index": 1,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 2.0105,
+      "response_end": 4.000500000000001,
+      "spike_count": 2,
+      "window_spikes": [
+        2.7405,
+        2.772
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FP"
+    },
+    {
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/2",
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "presentation_index": 2,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 4.011,
+      "response_end": 6.001,
+      "spike_count": 3,
+      "window_spikes": [
+        4.4975,
+        4.5225,
+        4.554
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FP"
+    },
+    {
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/3",
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "presentation_index": 3,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 6.0115,
+      "response_end": 8.0015,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    },
+    {
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/4",
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "presentation_index": 4,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 8.012,
+      "response_end": 10.002,
+      "spike_count": 3,
+      "window_spikes": [
+        8.3105,
+        8.337,
+        8.3645
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FP"
+    },
+    {
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/5",
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "presentation_index": 5,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 10.0125,
+      "response_end": 12.0025,
+      "spike_count": 3,
+      "window_spikes": [
+        10.771,
+        10.7975,
+        10.8245
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FP"
+    },
+    {
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/6",
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "presentation_index": 6,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 12.013,
+      "response_end": 14.003,
+      "spike_count": 7,
+      "window_spikes": [
+        12.307,
+        12.328,
+        12.345,
+        12.3635,
+        12.3815,
+        12.4,
+        12.421
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FP"
+    },
+    {
+      "trial_id": "Branch-coupled-terminal-N1/stopped-phasea-diagnostic/rotation-0/7",
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "presentation_index": 7,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 14.0135,
+      "response_end": 16.003500000000003,
+      "spike_count": 7,
+      "window_spikes": [
+        14.7075,
+        14.7285,
+        14.7455,
+        14.764,
+        14.782,
+        14.8005,
+        14.8215
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FP"
+    }
+  ],
+  "training_completed": false,
+  "training_certificate_present": false,
+  "calibration_performed": false,
+  "protocol": "historical_same_matrix_stopped_diagnostic",
+  "independent_evaluation": false,
+  "target_event_before_last_input_check": "Actual events0.348/0.380s precede last target input near0.490s; onset-based early_spikes field is a different criterion.",
+  "temporal_report_job": "s11-psi-k2p5-threshold-report-m40-a2",
+  "temporal_report_accepted": true,
+  "independent_data_replay_job": "s11-psi-threshold-primary-replay-elder-a1",
+  "independent_data_replay_accepted": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "temporal_report_acceptance": "PresynapticThresholdTemporalAcceptance-20261116.json"
+}
