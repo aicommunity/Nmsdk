@@ -1,0 +1,359 @@
+{
+  "kind": "timelearner_current_fast_N1_bracket_scientific_acceptance",
+  "schema_version": 1,
+  "date": "2026-11-16",
+  "producer_source": "5ca731a696713a7787700e1fc553485ec5264a18",
+  "cold_controls": "67a3a73367c70b6840ec0b9f81704bcfef9b79bd",
+  "runtime_root": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+  "pulse": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7",
+  "execution": "completed",
+  "validity": "valid",
+  "all_processes_closed": true,
+  "python_passed_per_case": 1,
+  "cases": {
+    "wall3600": {
+      "job": "s11-fast-bracket-wall3600-m40-a1",
+      "execution": "completed",
+      "validity": "valid",
+      "condition_fingerprint": "76fa190169ed5c9e52fd29968cb3fbd4f497a64aca9a47ea924a2413ef747601",
+      "physical_audit": {
+        "kind": "timelearner_uniform_profile_physics_audit",
+        "schema_version": 1,
+        "membranes_checked": {
+          "initial": 2,
+          "final": 123
+        },
+        "frequency_hz": "2000",
+        "uniform_physics_preserved": true,
+        "positive_individual_resistances_allowed": true,
+        "threshold_and_feedback_preserved": true,
+        "native_execution_verified": false,
+        "training_certificate_verified": false,
+        "scientific_verdict": null
+      },
+      "outcome": "budget_exhausted",
+      "reason": "native_training_time_budget_exhausted",
+      "actual_parameters": [
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 10871143.923391603,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "model_revision": "90c632e06f04f8364a11fe1980abd8b59f10b5f3689cbcf1de914553763cbeb3",
+      "scalar_candidates": 19,
+      "jointly_ready_candidates": [],
+      "composite_counters": {
+        "archive": {
+          "groups": 43,
+          "native_probes": 257,
+          "primary_bytes": 37707676,
+          "sampled_frames": 925124
+        },
+        "attempt": {
+          "logical_groups": 43,
+          "native_probes": 257,
+          "sampled_frames": 925124
+        }
+      },
+      "certificate": null,
+      "classification_assessed": false
+    },
+    "wall7200": {
+      "job": "s11-fast-bracket-wall7200-m40-a1",
+      "execution": "completed",
+      "validity": "valid",
+      "condition_fingerprint": "a05ae703f708c3b7278e2721aec0aaf651235c599050fa00b4a50e13703a7bfd",
+      "physical_audit": {
+        "kind": "timelearner_uniform_profile_physics_audit",
+        "schema_version": 1,
+        "membranes_checked": {
+          "initial": 2,
+          "final": 123
+        },
+        "frequency_hz": "2000",
+        "uniform_physics_preserved": true,
+        "positive_individual_resistances_allowed": true,
+        "threshold_and_feedback_preserved": true,
+        "native_execution_verified": false,
+        "training_certificate_verified": false,
+        "scientific_verdict": null
+      },
+      "outcome": "budget_exhausted",
+      "reason": "native_training_time_budget_exhausted",
+      "actual_parameters": [
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 9731840.34290068,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 9731840.34290068,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "model_revision": "f122a9ba82c154cf28e4081fcee0ab1d3b977eaaa19ad659211a4323e6af95f6",
+      "scalar_candidates": 28,
+      "jointly_ready_candidates": [
+        {
+          "amplitude_residual": -1.515471309554428e-7,
+          "anchor_group_id": "Branch-uniform-profile3-cold-N1-L256/measured-window-rebased/current-wall7200/session/1/search/95/composite/51",
+          "anchor_semantic_proof_id": "5fdac28a0c56e6c585bd5e6130f325cd7850ff0f170810ef9ec9e7fe6cea3c48",
+          "anchor_trial_id": "Branch-uniform-profile3-cold-N1-L256/measured-window-rebased/current-wall7200/session/1/search/95",
+          "full_parameters": [
+            {
+              "length": 122,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 122,
+              "resistance": 86000000,
+              "synapses": 1
+            },
+            {
+              "length": 121,
+              "resistance": 9731840.34290068,
+              "synapses": 1
+            },
+            {
+              "length": 1,
+              "resistance": 86000000,
+              "synapses": 1
+            }
+          ],
+          "input_index": 2,
+          "measurement_group_id": "Branch-uniform-profile3-cold-N1-L256/measured-window-rebased/current-wall7200/session/1/search/96/composite/52",
+          "model_epoch": 23,
+          "model_revision": "f122a9ba82c154cf28e4081fcee0ab1d3b977eaaa19ad659211a4323e6af95f6",
+          "parameter_change_cost": 364.17894427684075,
+          "parameters": {
+            "length": 121,
+            "resistance": 9731840.34290068,
+            "synapses": 1
+          },
+          "semantic_proof_id": "ff858eafc91d4d5c786e99f186057e8228c21f1a6d3fecad70f205a9bb1157b2",
+          "timing_high": -0.0004999999999881766,
+          "timing_low": -0.0004999999999881766,
+          "trial_id": "Branch-uniform-profile3-cold-N1-L256/measured-window-rebased/current-wall7200/session/1/search/96",
+          "within_amplitude": true,
+          "within_timing": true
+        }
+      ],
+      "composite_counters": {
+        "archive": {
+          "groups": 62,
+          "native_probes": 371,
+          "primary_bytes": 54751390,
+          "sampled_frames": 1333530
+        },
+        "attempt": {
+          "logical_groups": 62,
+          "native_probes": 371,
+          "sampled_frames": 1333530
+        }
+      },
+      "certificate": null,
+      "classification_assessed": false
+    }
+  },
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/2f/2f2594cf1180250508dc02c8f9474333f4fad14ca1a52a324f49fac2c9a110b5",
+    "sha256": "2f2594cf1180250508dc02c8f9474333f4fad14ca1a52a324f49fac2c9a110b5",
+    "bytes": 21898004
+  },
+  "bundle_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/11/11d84d95b6881c510a6985a03ce4f2854d792f05b367ce631d100758ef4ba929",
+    "sha256": "11d84d95b6881c510a6985a03ce4f2854d792f05b367ce631d100758ef4ba929",
+    "bytes": 478817
+  },
+  "provenance_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/5d/5d7e6a3c07e1448057ed6eb1710fba6e527d2803ffabb7eeade9f3922b9b2dca",
+    "sha256": "5d7e6a3c07e1448057ed6eb1710fba6e527d2803ffabb7eeade9f3922b9b2dca",
+    "bytes": 605843
+  },
+  "bundle_members": 2211,
+  "expanded_bytes": 1178848472,
+  "unique_content_bytes": 1043176198,
+  "catalog_relative": "experiments/2026-11-16/fast-profile-wall-budget/current-pair-primary-a1.json",
+  "collector_job": "s11-fast-bracket-primary-m40-a1",
+  "collector_controls": "78d9b335749f3ce08712e8269c873cd040067e3b",
+  "comparison_job": "s11-fast-bracket-current-report-m40-a1",
+  "comparison_controls": "aa3874f0e16a389663b0e33c4c4c4938c8c88348",
+  "comparison_source": "939e429375f46d84f2c723ffe1779c3caccaf704",
+  "comparison_passed": 1,
+  "comparison_archive": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/85/85b31fa49497c438b9828688d282a63bde78b73fa01712655ac02b0ce93873c5",
+    "sha256": "85b31fa49497c438b9828688d282a63bde78b73fa01712655ac02b0ce93873c5",
+    "bytes": 17572836
+  },
+  "comparison_archive_files": 137,
+  "comparison_cache_relative": "report-cache/2026-11-16/fast-n1-current-wall-pair",
+  "comparison_catalog_relative": "experiments/2026-11-16/fast-profile-wall-budget/fast-current-wall-report-a1.json",
+  "exact_measured_scalar_prefix": 19,
+  "scalar_counts": {
+    "wall3600": 19,
+    "wall7200": 28
+  },
+  "compared_fields": [
+    "input_index",
+    "full_parameters",
+    "parameters",
+    "timing_low",
+    "timing_high",
+    "amplitude_residual",
+    "within_amplitude",
+    "within_timing"
+  ],
+  "only_declared_configuration_differences": [
+    "run_id",
+    "maximum_wall_seconds"
+  ],
+  "mathematical_tolerances_unchanged": true,
+  "logical_search_budgets_unchanged": true,
+  "visual_review": {
+    "kind": "timelearner_current_fast_wall_pair_visual_review",
+    "schema_version": 1,
+    "date": "2026-11-16T06:45:40.575Z",
+    "source_archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/85/85b31fa49497c438b9828688d282a63bde78b73fa01712655ac02b0ce93873c5",
+      "sha256": "85b31fa49497c438b9828688d282a63bde78b73fa01712655ac02b0ce93873c5",
+      "bytes": 17572836
+    },
+    "cache_relative": "report-cache/2026-11-16/fast-n1-current-wall-pair",
+    "scoped_visual_review_complete": true,
+    "all_generated_figures_reviewed": false,
+    "reviewed_figures": [
+      {
+        "role": "wall3600",
+        "group": 4,
+        "channel": 0,
+        "path": "wall3600/group-000004-soma-000-overview.png",
+        "sha256": "9de0a5f842e31131d25c85b05c57e0827ced174f058f5fcfc0a3e6fdb6f53fc1",
+        "bytes": 447022
+      },
+      {
+        "role": "wall3600",
+        "group": 40,
+        "channel": 0,
+        "path": "wall3600/group-000040-soma-000-overview.png",
+        "sha256": "7b70330e5cc8b27748351acd8808900b6817359f7341d18058781d76a95c792f",
+        "bytes": 549761
+      },
+      {
+        "role": "wall3600",
+        "group": 43,
+        "channel": 0,
+        "path": "wall3600/group-000043-soma-000-overview.png",
+        "sha256": "b91ab01eb0a6deed0812e811792ad11baf93f094c804924561902718cd650510",
+        "bytes": 393555
+      },
+      {
+        "role": "wall7200",
+        "group": 4,
+        "channel": 0,
+        "path": "wall7200/group-000004-soma-000-overview.png",
+        "sha256": "9de0a5f842e31131d25c85b05c57e0827ced174f058f5fcfc0a3e6fdb6f53fc1",
+        "bytes": 447022
+      },
+      {
+        "role": "wall7200",
+        "group": 54,
+        "channel": 0,
+        "path": "wall7200/group-000054-soma-000-overview.png",
+        "sha256": "0dbd3b7ece9d67df9559ff7f0b471745a1b80563c960bc1388f425f84b3334d3",
+        "bytes": 561083
+      },
+      {
+        "role": "wall7200",
+        "group": 52,
+        "channel": 0,
+        "path": "wall7200/group-000052-soma-000-overview.png",
+        "sha256": "95163f84b977a45bcdf0c8b53243abfa47cc3f195f90776062edd85560a40d04",
+        "bytes": 536544
+      },
+      {
+        "role": "wall7200",
+        "group": 62,
+        "channel": 0,
+        "path": "wall7200/group-000062-soma-000-overview.png",
+        "sha256": "dbed08c4d46b79bafb3047ebd9351502d827f82e8eb053dd3ec9fe2a3dbfc2d7",
+        "bytes": 468858
+      }
+    ],
+    "generated_png_figures": 28,
+    "observations": [
+      "Both cold anchor references show four distinct peaks; actual inputs and omission controls are visible.",
+      "Group52 shows the separable assigned input2 response, removed by omit2; measured residuals are audited independently.",
+      "Group54 input1 peak is visible but much smaller and earlier than its target; local convergence is not claimed.",
+      "Last groups43 and62 are explicitly incomplete/censored; missing full-after/omission data are not synthesized.",
+      "Only seven overviews have been manually inspected. Native boundary zoom scale is audited automatically; per-peak manual zoom acceptance is not claimed."
+    ],
+    "scientific_verdict": null
+  },
+  "frozen_diagnostic_job": "s11-fast-bracket-frozen-m40-a2",
+  "frozen_diagnostic_source": "5248368b75194c657163f51f747f4512605e0e1b",
+  "frozen_diagnostic_controls": "cd0f95d24da03f1023eef6958b611f44c1e88d7a",
+  "frozen_diagnostic_accepted": false,
+  "classification_assessed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "independent_random_repeats": false,
+  "visual_review_catalog_relative": "experiments/2026-11-16/fast-profile-wall-budget/current-pair-visual-review-a1.json",
+  "visual_review_catalog_sha256": "3671c55416ed62e8fcbdb1d34f6d860defec5fabd30bb607a36ffefc17116d63",
+  "completed_and_partial_groups": {
+    "wall3600": {
+      "complete": 42,
+      "partial": 1
+    },
+    "wall7200": {
+      "complete": 61,
+      "partial": 1
+    }
+  },
+  "terminal_has_consumed_scalar": {
+    "wall3600": false,
+    "wall7200": false
+  }
+}
