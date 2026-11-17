@@ -1,5 +1,23 @@
 # Windows: параллельная сборка N1 timing-neighbourhood
 
+## Новый SDK a2 — выполняется
+
+На22:04UTC fresh SDK build a2 подтверждён через Windows kernel Job:
+7 active processes, log7/534. Root `93894ddfac0b0cf25fb5e87c4e2de3813d17587a`,
+Pulse `52cb953c3dd153b8b3e5459ea9b54825e05a89a8`; все4635 файлов/8 repos
+сверены. Controls `3be359ac942f90a65ac0447bf30137fd45fe50fa`, namespace
+blob `5a988c330f53c84f88c0c77a962fa5505da7f63b`, spec
+blob `73dbd635278f31ddf3096a13a92dc61f67da102e`.
+Используются новые source/build/runtime с суффиксом `timing-neighbourhood-win-a2`.
+Исходные a1 и все отрицательные попытки сохранены. Политика и квоты сборки
+не изменены. Заявлены218 cases; исходник и guard единственного Linux-only
+исключения проверены при подготовке, его SHA включён в controls/cohort.json.
+
+[Подготовка](../../../Reports/StructTrain/TimeLearner/WindowsTimingNeighbourhood-20261117/preparation-a2.json),
+[dispatch](../../../Reports/StructTrain/TimeLearner/WindowsTimingNeighbourhood-20261117/dispatch-a2.json),
+[фактический Job/log](../../../Reports/StructTrain/TimeLearner/WindowsTimingNeighbourhood-20261117/build-a2-observation.json).
+Это выполняемая сборка, не C++ PASS или scientific-worker admission.
+
 ## Закрытые результаты и найденные дефекты
 
 Сборка завершена: compiler/linker returncode 0, wall 2477.58с. Исходный

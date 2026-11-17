@@ -74,3 +74,9 @@ Legacy TEST_F fixtures не входят в этот узкий cohort и ост
 Полное terminal best-state восстановление, разделение модели/истории,
 all-input сходимость и actual frozen8 Test этим изменением не закрываются.
 Merge в develop допускается только после соответствующих проверок.
+
+Код сохранён как Pulse `52cb953c3dd153b8b3e5459ea9b54825e05a89a8`,
+root с регрессиями `93894ddfac0b0cf25fb5e87c4e2de3813d17587a`.
+Новый Windows SDK a2 собирается; Linux SDK a3/219 подготовлен, ожидает slot.
+[Linux preparation](../../../Reports/StructTrain/TimeLearner/SingleSweepCold-20261117/next-sdk-a3-prepared.json).
+Пока ни один из них не служит приёмкой нового кода.
