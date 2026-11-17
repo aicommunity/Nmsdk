@@ -17,6 +17,66 @@ namespace {
 using namespace NMSDK::TimeLearner;
 using namespace NmsdkBoundedTrainingTest;
 
+TEST(BoundedTrainingN1TimingNeighbourhood, TimingReadyAmplitudeMissProposesFreshNearbyGeometryInBothTopologies)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        SCOPED_TRACE(int(routing));
+        const auto protocol=Protocol(2,routing);auto cfg=Configuration(2,Normalization::TipResistance);
+        cfg.tolerances.sync=.011;cfg.maximumCandidatesPerInput=12;
+        cfg.bounds={{1,64,1,1,10.,10.},{1,1,1,1,10.,10.}};
+        BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}},true);
+        const int goal=routing==ProbeRouting::ClassicBurst?24:23;
+        std::set<int> assessed;
+        DriveTraining(session,protocol,[&](const TrainingAction& action,auto& delay,auto& raw) {
+            const int length=action.parameters[0].length;
+            delay[0]=.005+.005*length;
+            if(length!=goal)raw[0]+=.002;
+        },[&](const TrainingAction& action) {
+            assessed.insert(action.parameters[0].length);
+            ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
+            d.baseModelRevision=action.baseModelRevision;d.geometry=action.parameters;
+            d.inputIndex=action.inputIndex;d.sourceAmplitude=1.;
+            d.previewModelRevision="geometry-"+std::to_string(action.parameters[0].length);
+            d.minimumResistance=d.maximumResistance=10.;return d;
+        });
+        const auto& evidence=session.Evidence();
+        const auto ready=std::find_if(evidence.begin(),evidence.end(),[](const auto& e){return e.withinTiming && !e.withinAmplitude;});
+        ASSERT_NE(ready,evidence.end());ASSERT_NE(std::next(ready),evidence.end());
+        EXPECT_EQ(ready->parameters.length,goal+1);
+        const auto& nearby=*std::next(ready);
+        EXPECT_EQ(nearby.parameters.length,goal);
+        EXPECT_TRUE(nearby.withinTiming);EXPECT_TRUE(nearby.withinAmplitude);
+        EXPECT_TRUE(assessed.contains(goal));
+        EXPECT_NE(ready->modelRevision,nearby.modelRevision);
+        EXPECT_NE(ready->anchorTrialId,nearby.anchorTrialId);
+        EXPECT_NE(ready->trialId,nearby.trialId);
+        EXPECT_EQ(session.Parameters()[0].length,goal);
+        EXPECT_EQ(session.Status(),TrainingStatus::Exact);
+        ASSERT_TRUE(session.Certificate());EXPECT_TRUE(session.Certificate()->Exact());
+    }
+}
+
+TEST(BoundedTrainingN1TimingNeighbourhood, N0KeepsItsExistingLengthAndNormalizerPolicy)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        const auto protocol=Protocol(2,routing);auto cfg=Configuration(2,Normalization::SynapseCount);
+        cfg.tolerances.sync=.006;cfg.maximumCandidatesPerInput=8;
+        cfg.bounds={{1,64,1,1,10.,10.},{1,1,1,1,10.,10.}};
+        BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}});
+        DriveTraining(session,protocol,[&](const TrainingAction& action,auto& delay,auto& raw) {
+            delay[0]=.005+.005*action.parameters[0].length;raw[0]+=.002;
+        });
+        const auto& evidence=session.Evidence();
+        const auto ready=std::find_if(evidence.begin(),evidence.end(),[](const auto& e){return e.withinTiming && !e.withinAmplitude;});
+        ASSERT_NE(ready,evidence.end());ASSERT_NE(std::next(ready),evidence.end());
+        EXPECT_EQ(ready->parameters.length,25);
+        EXPECT_EQ(std::next(ready)->parameters.length,4);
+        EXPECT_NE(session.Status(),TrainingStatus::Exact);
+    }
+}
+
 TEST(BoundedTrainingBudgetBoundary, ExhaustedProbesCannotStageAnotherUnmeasurableCandidate)
 {
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
