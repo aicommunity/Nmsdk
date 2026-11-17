@@ -84,6 +84,9 @@ def read_summary(staged, row):
 
 
 def run_case(request, row, runtime_path, output):
+    # DATA JSON declares a string path; the public file reader takes Path.
+    # Normalize before the early capability gate as well as the runner call.
+    runtime_path = Path(runtime_path)
     from .candidate_window_package_evidence import audit_candidate_window_recovery_package
     from .composite_primary import capture_primary_blobs, write_primary_snapshot, filesystem_primary_resolver
     from .native_pipeline_worker import run_job

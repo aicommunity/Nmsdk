@@ -20,6 +20,7 @@ class NativeFileSourceCliTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         spec=load(Path(os.environ['TIMELEARNER_JOB_SOURCE_CLI_FIXTURES'])/'runtimes.json')
+        cls.legacy_path=Path(spec['legacy_runtime'])
         cls.current=load(Path(spec['current_runtime']))
         cls.legacy=load(Path(spec['legacy_runtime']))
         verify_runtime(cls.current);verify_runtime(cls.legacy)
@@ -39,6 +40,17 @@ class NativeFileSourceCliTest(unittest.TestCase):
     def test_unknown_transport_selector_is_rejected_before_runtime_access(self):
         with self.assertRaisesRegex(EvidenceError,'native_cli_unknown_source_transport'):
             inspect_native_cli({},['diagnostic-evaluate'],require_file_source='auto')
+
+    def test_recorded_case_accepts_json_string_runtime_path_and_rejects_legacy_before_source_access(self):
+        from ..recorded_diagnostic_matrix import run_case
+        with tempfile.TemporaryDirectory(prefix='tl-source-path-') as temporary:
+            output=Path(temporary)/'not-created'
+            # Actual legacy Console reaches the production capability refusal.
+            # The absent case/source declarations must never be read first.
+            with self.assertRaisesRegex(EvidenceError,'native_cli_missing_file_source_transport'):
+                run_case({}, {'job_source_transport':'checked-file-source-v1'},
+                         str(self.legacy_path), output)
+            self.assertFalse(output.exists())
 
 
 class NativeCliInterfaceTest(unittest.TestCase):
