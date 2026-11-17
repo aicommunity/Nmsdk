@@ -10,8 +10,15 @@ from ..native_evidence import load
 
 class CommonWindowNativeTest(unittest.TestCase):
     def test_real_four_condition_study_keeps_complete_original_verdicts(self):
-        manifest_list=load(Path(os.environ['TIMELEARNER_COMMON_WINDOW_MANIFESTS']))
+        manifest_list=load(Path(os.environ['TIMELEARNER_COMMON_WINDOW_MANIFESTS'])/'manifests.json')
         self.assertEqual(set(manifest_list),{'baseline2','reset4','continuous2','continuous4'})
+        baseline=Path(os.environ['TIMELEARNER_COMMON_WINDOW_BASELINE'])
+        study=Path(os.environ['TIMELEARNER_COMMON_WINDOW_STUDY'])
+        expected={'baseline2':baseline/'run-manifest.json',
+                  'reset4':study/'long-reset/run-manifest.json',
+                  'continuous2':study/'continuous/run-manifest.json',
+                  'continuous4':study/'long-continuous/run-manifest.json'}
+        self.assertEqual(manifest_list,{name:str(path) for name,path in expected.items()})
         result=compare_diagnostic_runs(manifest_list,2.)
         self.assertEqual(len(result['comparisons']),3)
         self.assertIsNone(result['scientific_verdict'])
