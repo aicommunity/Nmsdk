@@ -40,8 +40,11 @@ class UniformProfileTrainTest(unittest.TestCase):
         self.assertEqual(job,expected)
         runtime=load(controls/'runtime.json')
         with patch.dict(os.environ,runtime['loader_environment']):
+            resources=spec.get('native_process_resources',dict(memory_bytes=4*1024**3,tasks=64))
+            self.assertEqual(set(resources),{'memory_bytes','tasks'})
             result=run(controls/'job.json',controls/'runtime.json',spec['controller'],
-                       controls/'initial-state.json',spec['output'],finalization_seconds=300.)
+                       controls/'initial-state.json',spec['output'],finalization_seconds=300.,
+                       native_memory_bytes=resources['memory_bytes'],native_tasks=resources['tasks'])
         self.assertEqual(result['execution'],'completed')
         self.assertEqual(result['validity'],'valid')
         self.assertIsNotNone(result['package_audit']);self.assertIsNotNone(result['physical_audit'])

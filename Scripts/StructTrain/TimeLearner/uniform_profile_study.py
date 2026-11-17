@@ -91,7 +91,7 @@ def declare_case(original, archive, variant, reference_frames=None, *, run_label
     return result
 
 
-def _condition(job,initial,runtime):
+def _condition(job,initial,runtime,*,native_memory_bytes=4*1024**3,native_tasks=64):
     c=deepcopy(job['configuration']);c.pop('run_id')
     code={k:v['head'] for k,v in runtime['source_closure'].items()}
     payloads=dict(
@@ -105,7 +105,8 @@ def _condition(job,initial,runtime):
         calibration_spec=dict(performed=False),
         evaluation_spec=dict(performed=False,classification_assessed=False),
         execution_policy=dict(maximum_model_ticks=job['maximum_model_ticks'],
-                              maximum_wall_seconds=c['maximum_wall_seconds']),
+                              maximum_wall_seconds=c['maximum_wall_seconds'],
+                              native_memory_bytes=native_memory_bytes,native_tasks=native_tasks),
         randomness_spec=dict(declared_random_factors=[],cold_runs_per_condition=1))
     artifacts={role:artifact(role,payloads[role]) for role in CONDITION_ROLES}
     condition=ConditionSpec(controller_version=2,amplitude_goal='captured_per_input',
@@ -114,7 +115,27 @@ def _condition(job,initial,runtime):
     return dict(condition=condition.to_object(),artifacts=artifacts)
 
 
-def run(job_path,runtime_path,controller,expected_initial_path,output,*,finalization_seconds=300.):
+def native_resource_demands(controller, memory_bytes, tasks):
+    """Charge the live controller and its sibling native unit explicitly.
+
+    This is the local managed-family budget, not evidence of free host RAM or
+    a replacement for admission by the outer worker's global scheduler.
+    """
+    require(type(memory_bytes) is int and 0 < memory_bytes < 2**63 and
+            type(tasks) is int and 0 < tasks < 2**63,
+            'uniform_study_invalid_native_resources')
+    require(type(controller.get('memory_max')) is int and controller['memory_max'] > 0 and
+            type(controller.get('tasks_max')) is int and controller['tasks_max'] > 0,
+            'uniform_study_unbounded_controller_resources')
+    result=dict(slots=1,memory_bytes=controller['memory_max']+memory_bytes,
+                disk_bytes=4*1024**3,tasks=controller['tasks_max']+tasks)
+    require(all(0 < value < 2**63 for value in result.values()),
+            'uniform_study_combined_resource_overflow')
+    return result
+
+
+def run(job_path,runtime_path,controller,expected_initial_path,output,*,finalization_seconds=300.,
+        native_memory_bytes=4*1024**3,native_tasks=64):
     job_path=Path(job_path).resolve(strict=True);runtime_path=Path(runtime_path).resolve(strict=True)
     expected_initial_path=Path(expected_initial_path).resolve(strict=True);output=Path(output).resolve()
     require(not output.exists(),'uniform_study_result_exists')
@@ -130,14 +151,16 @@ def run(job_path,runtime_path,controller,expected_initial_path,output,*,finaliza
     state=inspect(controller)
     require(state['execution']=='running' and not state['all_processes_closed'] and
             state['binding']['initial_main_pid']==os.getpid(),'uniform_study_controller_not_owner')
+    demands=native_resource_demands(state,native_memory_bytes,native_tasks)
     output.mkdir(parents=True);_write(output/'controller-limits-readback.json',state)
-    _write(output/'execution-limits.json',limits)
+    _write(output/'execution-limits.json',dict(limits,native_memory_bytes=native_memory_bytes,
+        native_tasks=native_tasks,managed_family_demands=demands))
     registry=Reservations(output/'leases.sqlite3',managed_units=True,
-        capacity=dict(slots=1,memory_bytes=state['memory_max']+6*1024**3,disk_bytes=8*1024**3,tasks=512))
+        capacity=demands)
     lease=registry.reserve('uniform-profile-Branch-N1',[dict(path=str(output/'runs'),access='write')],
-        demands=dict(slots=1,memory_bytes=state['memory_max']+4*1024**3,disk_bytes=4*1024**3,tasks=256),
+        demands=demands,
         controller_directory=str(controller),ttl_seconds=7200)
-    policy=policy_for_reservation(registry,lease['token'],memory_bytes=4*1024**3,tasks=64)
+    policy=policy_for_reservation(registry,lease['token'],memory_bytes=native_memory_bytes,tasks=native_tasks)
     preflight=run_job('preflight',job_path,None,runtime_path,output/'runs/preflight',180.,process_policy=policy)
     require(preflight['execution']=='completed' and preflight['validity']=='valid',
             'uniform_study_preflight_invalid')
@@ -148,7 +171,8 @@ def run(job_path,runtime_path,controller,expected_initial_path,output,*,finaliza
     initial_physics=audit_uniform_profile(expected,initial)
     require(initial_physics['membranes_checked']['initial']==initial_physics['membranes_checked']['final']==2,
             'uniform_study_not_cold_graph')
-    condition=_condition(job,initial,runtime);_write(output/'condition.json',condition)
+    condition=_condition(job,initial,runtime,native_memory_bytes=native_memory_bytes,
+                         native_tasks=native_tasks);_write(output/'condition.json',condition)
     result=run_job('train',job_path,None,runtime_path,output/'runs/train',
                    limits['process_maximum_wall_seconds'],process_policy=policy)
     require(inspect(output/'runs/train/process/contained')['all_processes_closed'],
@@ -168,6 +192,7 @@ def run(job_path,runtime_path,controller,expected_initial_path,output,*,finaliza
     require(before=={str(p):frozen_digest(p,256*1024**2) for p in inputs},'uniform_study_input_changed')
     record=dict(kind='timelearner_uniform_profile_training_result',schema_version=1,
         execution=result['execution'],validity=result['validity'],initial_physics=initial_physics,
+        native_process_resources=dict(memory_bytes=native_memory_bytes,tasks=native_tasks),
         package_audit=package_audit,physical_audit=physical_audit,
         package_path=None if package_path is None else package_path.relative_to(output).as_posix(),
         condition_fingerprint=digest(condition['condition']),classification_assessed=False,scientific_verdict=None)
