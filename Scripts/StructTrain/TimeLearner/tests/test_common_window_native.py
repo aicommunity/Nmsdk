@@ -6,10 +6,12 @@ import unittest
 
 from ..common_window_analysis import compare_diagnostic_runs
 from ..native_evidence import load
+from .closed_protocol_fixture import verify_closed_protocol_fixture
 
 
 class CommonWindowNativeTest(unittest.TestCase):
     def test_real_four_condition_study_keeps_complete_original_verdicts(self):
+        verify_closed_protocol_fixture()
         manifest_list=load(Path(os.environ['TIMELEARNER_COMMON_WINDOW_MANIFESTS'])/'manifests.json')
         self.assertEqual(set(manifest_list),{'baseline2','reset4','continuous2','continuous4'})
         baseline=Path(os.environ['TIMELEARNER_COMMON_WINDOW_BASELINE'])
@@ -34,3 +36,4 @@ class CommonWindowNativeTest(unittest.TestCase):
         output=Path(os.environ['TMPDIR'])/'common-window-comparison.json'
         with output.open('x',encoding='utf-8',newline='\n') as stream:
             json.dump(result,stream,ensure_ascii=False,indent=2);stream.write('\n')
+        verify_closed_protocol_fixture()

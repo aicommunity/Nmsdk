@@ -5,11 +5,13 @@ import unittest
 
 from ..native_evidence import load
 from ..recorded_diagnostic_matrix import report_matrix
+from .closed_protocol_fixture import verify_closed_protocol_fixture
 
 
 class FrozenProtocolReportTest(unittest.TestCase):
     def test_all_three_complete_conditions_have_native_scale_temporal_views(self):
         from PIL import Image
+        verify_closed_protocol_fixture()
         primary=Path(os.environ['TIMELEARNER_FROZEN_PROTOCOL_PRIMARY'])
         controller=Path(os.environ['TIMELEARNER_FROZEN_PROTOCOL_CONTROLLER'])
         runtime=Path(os.environ['TIMELEARNER_FROZEN_PROTOCOL_RUNTIME'])/'runtime.json'
@@ -44,3 +46,4 @@ class FrozenProtocolReportTest(unittest.TestCase):
                         self.assertEqual(image.size,(1920,960))
             total+=len(manifest['figures'])
         self.assertEqual(total,24)
+        verify_closed_protocol_fixture()
