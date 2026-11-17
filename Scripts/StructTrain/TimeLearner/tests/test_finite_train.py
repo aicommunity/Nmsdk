@@ -21,6 +21,18 @@ def request():
 
 
 class FiniteTrainTest(unittest.TestCase):
+    def test_condition_retains_native_limit_without_attempt_identity(self):
+        from ..uniform_profile_study import _condition
+        payload=job(cold7());initial=dict(model=dict(nodes=[]),sha256='a'*64)
+        runtime=dict(source_closure=dict(root=dict(head='b'*40)),executable=dict(sha256='c'*64))
+        original=_condition(payload,initial,runtime,process_wall_seconds=300)
+        changed=deepcopy(payload);changed['configuration']['run_id']='another-attempt'
+        self.assertEqual(_condition(changed,initial,runtime,process_wall_seconds=300),original)
+        self.assertNotEqual(_condition(payload,initial,runtime,process_wall_seconds=301)['condition'],original['condition'])
+        for invalid in (True,0,float('inf')):
+            with self.subTest(invalid=invalid),self.assertRaises(EvidenceError):
+                _condition(payload,initial,runtime,process_wall_seconds=invalid)
+
     def test_only_explicit_train_and_exact_input_roles_are_admitted(self):
         value = request();self.assertEqual(validate_request(value), value)
         for operation in ('evaluate', 'diagnostic-evaluate', 'calibrate', 'export', 'command', None):

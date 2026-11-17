@@ -8,7 +8,7 @@ import hashlib
 from pathlib import Path
 
 from .collector_provenance import _frozen, _json
-from .native_evidence import require
+from .native_evidence import load, require
 from .native_pipeline_worker import run_job, validate_job
 
 
@@ -54,4 +54,13 @@ def run_case(request, row, runtime_path, output):
     # timeout, OOM, missing model or incomplete observation cannot become valid.
     require(result['validity'] == 'valid' and result['analysis'] is not None and
             result['execution'] in ('completed', 'process_error'), 'finite_train_execution_unverified')
+    from .uniform_profile_study import _condition
+    from .native_calibration_worker import _write
+    job, _ = _bound_job(record, job_path)
+    initial = load(output/row['name']/'native/initial-state.json')['identity']
+    condition = _condition(job, initial, load(Path(runtime_path)),
+        native_memory_bytes=request['limits']['leaf_memory_bytes'],
+        native_tasks=request['limits']['leaf_tasks'],
+        process_wall_seconds=request['limits']['leaf_wall_seconds'])
+    _write(output/(row['name']+'-condition.json'), condition)
     return result

@@ -13,6 +13,11 @@ Train jobs. Схемы1 (GTest DATA) и2 (recorded diagnostic matrix) сохра
 после staging. Шаблон, ошибочный фактор и другой тип операции не допускаются.
 Произвольные shell-команды, Python-модули и env не добавляются.
 
+После валидного native readback тот же production ConditionSpec-сериализатор,
+что в uniform study, связывает конкретную initial identity с условиями Train.
+Отдельно сохраняются native memory/tasks и process wall limit. Имена попыток
+и пути не подменяют научную идентичность; declaration не выдаётся за результат.
+
 Общий host registry резервирует `reservation_memory_bytes`, причём
 `reservation_memory_bytes ≥ memory_bytes + leaf_memory_bytes`.
 Параллельно с Python owner работает максимум один объявленный native leaf;
