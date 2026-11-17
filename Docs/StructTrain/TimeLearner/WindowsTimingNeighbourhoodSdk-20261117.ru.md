@@ -1,6 +1,35 @@
 # Windows: параллельная сборка N1 timing-neighbourhood
 
-## Новый SDK a2 — выполняется
+## Закрытый SDK a2: 218/218 C++ cases
+
+Компиляция и линковка завершились с0 за2223.17с. Исходный build outcome
+сохранён отрицательным (`descendants_remaining`, дочерний PID9480);
+backend закрыл всю группу. Kernel Job отсутствует. Отдельный closed-build
+audit прошёл:4635 исходников,8 repositories,17287 dependency files,62 runtime
+files; original main/Job отсутствуют до и после.
+
+Затем `windows-timing-neighbourhood-native218-a1` выполнил **218/218**
+заявленных случаев, без failures/skips/missing. Process exit0, wall2.4704с,
+cooperative capture завершён, проверены47 загруженных файлов, descendants
+нет и native Job отсутствует. Прошли обе новые C/N1 регрессии, исходный
+no-op C-context case и timing-neighbourhood / candidate-pair budget cases.
+Controls native `b73a3892021615e0ef7a55825c77e1850d4f5d69`, audit
+`81714503311989d99b78495308363a0d314b853e`.
+
+Получены все71 primary files:218 JUnit IDs и bytes/SHA каждого файла
+проверены локально как метаданные. Архив2127425 байт, SHA256
+`889f2fd56f51b2e35de3c50168e4a78bbb2217c1483d600deb7c39ff4a222da9`.
+Публикация этого пакета в M40 archive **пока не подтверждена**: VPN отключился,
+вход сохранённым Automats2 отклонён с691. Не подменять локальную копию
+проверенным внешним object reference.
+[Компактный readback](../../../Reports/StructTrain/TimeLearner/WindowsTimingNeighbourhood-20261117/native218-readback.json).
+
+Это адресная приёмка Windows cohort на Root93894dd / Pulse52cb953.
+Linux219 ещё не выполнен, actual cold A/B и8-pattern Test нового алгоритма
+не выполнены. Полный допуск Windows scientific worker не объявлен.
+Новый byte-source parser находится в другой ветке и этим SDK не проверен.
+
+## Историческое наблюдение нового SDK a2
 
 На22:04UTC fresh SDK build a2 подтверждён через Windows kernel Job:
 7 active processes, log7/534. Root `93894ddfac0b0cf25fb5e87c4e2de3813d17587a`,

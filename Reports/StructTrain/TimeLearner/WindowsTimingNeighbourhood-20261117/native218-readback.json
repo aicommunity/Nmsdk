@@ -1,0 +1,170 @@
+{
+  "kind": "timelearner_windows_native218_closed_gate_readback",
+  "schema_version": 1,
+  "observed_at": "2026-11-17T22:51:53.799749+00:00",
+  "root": "93894ddfac0b0cf25fb5e87c4e2de3813d17587a",
+  "pulse": "52cb953c3dd153b8b3e5459ea9b54825e05a89a8",
+  "regular_primary_files_verified": 71,
+  "junit": {
+    "expected": 218,
+    "observed": 218,
+    "failed": [],
+    "skipped": [],
+    "sha256": "1673736b50b11b2b683823dc441c9cf6093176c1f218dd3b35f81fdec60fa2f3",
+    "selected_verified_passes": [
+      "BoundedTrainingN1TimingNeighbourhood/TimingReadyAmplitudeMissProposesFreshNearbyGeometryInBothTopologies",
+      "BoundedTrainingN1TimingNeighbourhood/N0KeepsItsExistingLengthAndNormalizerPolicy",
+      "BoundedTrainingBudgetBoundary/ExhaustedProbesCannotStageAnotherUnmeasurableCandidate",
+      "BoundedTrainingBudgetBoundary/OddProbeRemainderCannotFundANewCandidatePairOrItsEdit",
+      "NearestUnvisitedLengthSearch/ExploresBothSidesWithSmallerLengthTieAndNoDomainEnumeration",
+      "CapacitanceContexts/EmptyBranchIntervalsDoNotCreateRedundantDomainContexts",
+      "CapacitanceContexts/DuplicateCProposalsDoNotStartAnotherResistancePass",
+      "CapacitanceContexts/EqualScalarsCannotSuppressADifferentNativePreviewModel"
+    ]
+  },
+  "control_heads": {
+    "build-controls": "3be359ac942f90a65ac0447bf30137fd45fe50fa",
+    "audit-controls": "81714503311989d99b78495308363a0d314b853e",
+    "native-controls": "b73a3892021615e0ef7a55825c77e1850d4f5d69"
+  },
+  "original_build": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "descendants_remaining",
+    "validity": "valid",
+    "reason": "descendants_remaining",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [
+      9480
+    ],
+    "all_processes_closed": true,
+    "cooperative_capture": "not_requested",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 12,
+    "wall_seconds": 2223.1696472999174,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-25ed4930-52b5-411d-aa5f-9f4fb22643ac"
+  },
+  "audit": {
+    "compiled_tests_executed": false,
+    "dependency_files": 17287,
+    "original_build_accepted": false,
+    "original_execution": "descendants_remaining",
+    "runtime_files": 62,
+    "scientific_verdict": null,
+    "scientific_worker_admitted": false,
+    "source_closure": {
+      "Bin": {
+        "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "status": ""
+      },
+      "Libraries/Nmsdk-MotionControlLib": {
+        "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "status": ""
+      },
+      "Libraries/Nmsdk-PulseLib": {
+        "head": "52cb953c3dd153b8b3e5459ea9b54825e05a89a8",
+        "recorded_gitlink": "52cb953c3dd153b8b3e5459ea9b54825e05a89a8",
+        "status": ""
+      },
+      "Libraries/Rdk-BasicLib": {
+        "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "status": ""
+      },
+      "Libraries/Rdk-CvBasicLib": {
+        "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "status": ""
+      },
+      "Libraries/Rdk-HardwareLib": {
+        "head": "de40b008e990105856726e01230dde19f42a90a9",
+        "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+        "status": ""
+      },
+      "Rdk": {
+        "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+        "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+        "status": ""
+      },
+      "root": {
+        "head": "93894ddfac0b0cf25fb5e87c4e2de3813d17587a",
+        "status": ""
+      }
+    },
+    "source_commit": "93894ddfac0b0cf25fb5e87c4e2de3813d17587a",
+    "targets": {
+      "NeuroModelerConsole.exe": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\runtime-timing-neighbourhood-win-a2\\NeuroModelerConsole.exe",
+        "sha256": "f011b47505fc441eab83f9b019f80a06b5f38a855c063fbfda1b69a9a2353bcb",
+        "size": 12195840
+      },
+      "Test_PulseLib_StorageComponents.exe": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\runtime-timing-neighbourhood-win-a2\\Test_PulseLib_StorageComponents.exe",
+        "sha256": "0876d1182f0ec8ce9f77f5c0a2f3f13f17024ad004b5edb7f54f991454a46bbc",
+        "size": 25806336
+      }
+    },
+    "verified_source_files": 4635
+  },
+  "audit_terminal": {
+    "audit_passed": true,
+    "compiled_tests_executed": false,
+    "original_build_outcome_unchanged": true,
+    "scientific_verdict": null,
+    "scientific_worker_admitted": false,
+    "wall_seconds": 13.822172499960288
+  },
+  "native_gate": {
+    "assertion_status": "passed",
+    "execution": "completed",
+    "inventory": {
+      "assertion_status": "passed",
+      "expected": 218,
+      "failed_test_ids": [],
+      "observed": 218,
+      "sha256": "1673736b50b11b2b683823dc441c9cf6093176c1f218dd3b35f81fdec60fa2f3"
+    },
+    "kind": "timelearner_native_test_gate_result",
+    "reason": "complete_declared_test_inventory",
+    "schema_version": 1,
+    "scientific_verdict": null,
+    "validity": "valid"
+  },
+  "process": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "completed",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 47,
+    "wall_seconds": 2.470386100001633,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-fa67edcd-bf43-4b4d-8a11-29dbaf841a18"
+  },
+  "native_kernel_absent": true,
+  "primary": {
+    "bytes": 2127425,
+    "sha256": "889f2fd56f51b2e35de3c50168e4a78bbb2217c1483d600deb7c39ff4a222da9",
+    "regular_members": 71,
+    "publication": "pending_m40_archive_after_vpn_restoration",
+    "archive_catalog": null
+  },
+  "scientific_worker_admitted": false,
+  "scientific_verdict": null
+}

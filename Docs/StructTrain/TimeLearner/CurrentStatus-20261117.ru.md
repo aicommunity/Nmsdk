@@ -5,6 +5,25 @@
 не заменяя исходный план более узким набором проверок. Научные 8/8 не являются
 условием завершения рефакторинга.
 
+## Закрытый результат Windows на текущем проходе
+
+Новый SDK Root93894dd / Pulse52cb953 скомпилирован. Исходный build outcome
+остался отрицательным из-за descendant; независимый closed-build audit прошёл.
+После него выполнены218/218 C++ cases без skips/failures, включая две новые
+регрессии C/N1, no-op fixture и четыре timing/pair-budget cases.
+Подтверждены actual loaded modules и полное закрытие native Job.
+[Readback и область приёмки](WindowsTimingNeighbourhoodSdk-20261117.ru.md).
+
+Все71 primary files получены и проверены по byte hashes/JUnit IDs.
+Публикация в M40 archive пока не подтверждена: Automats2 отключился,
+подключение сохранённым профилем дало691. Два Linux Train последнее
+подтверждение running на22:26UTC; после восстановления нужны те же handles,
+без повторного запуска. Новых итогов классификации нет.
+
+Подготовка следующего Windows native burst8 не подтверждена из-за timeout;
+запуск этого задания не выполнялся. Linux SDK219 и parser kernel4 остаются
+prepared/unstarted. Полный Windows scientific-worker admission не объявлен.
+
 ## Отдельная незавершённая работа после запуска SDK N1
 
 В ветке `codex/timelearner-json-byte-source` подготовлен

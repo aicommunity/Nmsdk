@@ -1,6 +1,7 @@
 # N1: допуск кандидата в совместном поиске геометрии, Rs и C
 
-Статус: реализовано, новые регрессии ещё не выполнены. Это продолжение
+Статус: реализовано; обе новые регрессии прошли в Windows cohort218/218.
+Linux-проверка и actual cold A/B ещё не выполнены. Это продолжение
 [исследования соседних длин](N1TimingNeighbourhoodReview-20261117.ru.md),
 а не новая математическая цель обучения. CapturedPerInput, опорный вход,
 физика, исходные допуски и отдельная финальная проверка сохраняются.
@@ -77,6 +78,11 @@ Merge в develop допускается только после соответс
 
 Код сохранён как Pulse `52cb953c3dd153b8b3e5459ea9b54825e05a89a8`,
 root с регрессиями `93894ddfac0b0cf25fb5e87c4e2de3813d17587a`.
-Новый Windows SDK a2 собирается; Linux SDK a3/219 подготовлен, ожидает slot.
+Новый Windows SDK a2 завершён: compiler/linker0, отрицательный исходный
+process outcome сохранён; independent closed-build audit и cohort218 прошли.
+Linux SDK a3/219 подготовлен, ожидает slot.
 [Linux preparation](../../../Reports/StructTrain/TimeLearner/SingleSweepCold-20261117/next-sdk-a3-prepared.json).
-Пока ни один из них не служит приёмкой нового кода.
+Windows gate подтверждает только объявленные C++ случаи; он не заменяет
+Linux/physical matrix или научную сходимость. Первичные71 files получены,
+их публикация на M40 ждёт восстановления VPN.
+[Windows readback](../../../Reports/StructTrain/TimeLearner/WindowsTimingNeighbourhood-20261117/native218-readback.json).

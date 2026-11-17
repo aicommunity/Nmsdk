@@ -1,7 +1,8 @@
 # Исследование N1 около измеренной timing-ready длины
 
-Реализован кандидат изменения порядка поиска. Серверные C++/native проверки
-этого кандидата ещё не проведены, merge в develop не выполнен.
+Реализован кандидат изменения порядка поиска. Windows cohort218/218 прошёл,
+включая три новых timing-neighbourhood cases и candidate-pair budget case.
+Linux gate и actual cold A/B ещё не проведены; merge в develop не выполнен.
 Текущие M40 cap16 и Elder single-sweep cold опыты используют прежние runtimes.
 
 Основание — [полная траектория cold Classic](LongColdSearchInspection-20261117.ru.md):
@@ -38,7 +39,10 @@ timing-ready amplitude miss только соседняя геометрия у�
 single-sweep control с прежними physics, допусками и budgets. Оценить полноту
 all-input gate, measured timing/amplitude residuals и реальный frozen8 Test
 с временными графиками Soma и входов. Не выдавать успех controlled fixture
-за сходимость нейронной модели. До этого статус «реализовано, не проверено».
+за сходимость нейронной модели. Текущий статус: Windows C++ gate пройден,
+Linux и научная проверка ожидаются. [Закрытый readback](WindowsTimingNeighbourhoodSdk-20261117.ru.md).
+
+## История подготовок до закрытого Windows gate
 
 На M40 уже доставлены через Git exact Root3743979b00a53c10a8dc39e7a72bc16bcc729fa7
 и Pulse025576540b18455489ef7a1c8292fc146b39aea4, отдельный каталог
