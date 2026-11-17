@@ -142,6 +142,42 @@ class RecordedDiagnosticMatrixPrimaryTest(unittest.TestCase):
 
 
 class RecordedDiagnosticMatrixDeclarationTest(unittest.TestCase):
+    def repeated_model(self):
+        value=diagnostic_request();base=value['cases'][0]
+        value['inputs']=[r for r in value['inputs'] if not r['name'].startswith('branch')]
+        value['cases']=[dict(base,name=name,duration=duration,reset_policy=policy,
+                             diagnostic_threshold=.054353792695896797)
+            for name,duration,policy in [('long-reset',4.,'reset_per_trial'),
+                ('continuous',2.,'preserve_neuron_dynamics'),
+                ('long-continuous',4.,'preserve_neuron_dynamics')]]
+        value['limits']['maximum_wall_seconds']=1000
+        return value
+
+    def test_one_immutable_source_can_feed_independent_declared_conditions(self):
+        value=self.repeated_model();self.assertEqual(validate_request(value),value)
+        self.assertEqual(len(value['inputs']),4)
+        for change in (dict(source_raw_sha256='e'*64),dict(source_raw_bytes=999),
+                       dict(summary_name='phasea.csv')):
+            changed=deepcopy(value);changed['cases'][1].update(change)
+            with self.subTest(change=change),self.assertRaises(EvidenceError):validate_request(changed)
+
+    def test_long_windows_and_continuous_policy_do_not_default_invalid_factors(self):
+        for change in (dict(duration=True),dict(duration=1.),dict(duration=float('nan')),
+                       dict(duration=31),dict(reset_policy=None),dict(reset_policy='unknown')):
+            value=self.repeated_model();value['cases'][0].update(change)
+            with self.subTest(change=change),self.assertRaises(EvidenceError):validate_request(value)
+
+    def test_large_source_requires_its_explicit_bounded_profile(self):
+        value=self.repeated_model()
+        for row in value['cases']:
+            row.update(source_raw_bytes=271032927,maximum_source_raw_bytes=512*1024**2)
+        self.assertEqual(validate_request(value),value)
+        for maximum in (None,True,0,256*1024**2,513*1024**2):
+            changed=deepcopy(value)
+            if maximum is None:changed['cases'][0].pop('maximum_source_raw_bytes')
+            else:changed['cases'][0]['maximum_source_raw_bytes']=maximum
+            with self.subTest(maximum=maximum),self.assertRaises(EvidenceError):validate_request(changed)
+
     def test_diagnostic_threshold_is_an_explicit_finite_case_factor(self):
         for threshold in (0., .054353792695896797, -1.):
             value=diagnostic_request();value['cases'][0]['diagnostic_threshold']=threshold

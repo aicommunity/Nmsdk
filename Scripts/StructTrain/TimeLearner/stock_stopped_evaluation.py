@@ -18,7 +18,8 @@ from .stock_threshold_study import audit as audit_source, audit_final_stock
 from .stopped_evidence import load_case
 
 
-def job_for(row, package, matrix, *, diagnostic_threshold=None):
+def job_for(row, package, matrix, *, diagnostic_threshold=None, duration=2.,
+            reset_policy='reset_per_trial'):
     """Use the complete stopped package, not an overlay on an initial template."""
     require(package['kind'] == 'timelearner_stopped_state' and
             package['state_kind'] == 'diagnostic' and package['certificate'] is None and
@@ -29,7 +30,8 @@ def job_for(row, package, matrix, *, diagnostic_threshold=None):
     require(model['frequency_hz'] == 2000 and model['initial_threshold'] == row['initial_threshold'],
             'stock_diagnostic_source_factor_changed')
     run_id = row['name']+'/stopped-phasea-diagnostic'
-    trials = trial_design(matrix, model['initial_isi'], run_id, duration=2., rotations=1)
+    trials = trial_design(matrix, model['initial_isi'], run_id, duration=duration,
+                          reset_policy=reset_policy, rotations=1)
     body = {'kind': 'timelearner_native_diagnostic_evaluation_job', 'schema_version': 1,
         'owner_class': 'NNeuronTimeLearner'+('Branch' if model['branch'] else ''),
         'implementation_id': package['implementation_id'], 'source_stopped': deepcopy(package),

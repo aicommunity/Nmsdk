@@ -15,6 +15,7 @@ from .native_evidence import load, load_json, number, parse_json_bytes, require
 SHA = re.compile('[0-9a-f]{64}')
 COMMIT = re.compile('[0-9a-f]{40}')
 CASE_FIELDS = {'name', 'source_name', 'summary_name', 'source_raw_bytes', 'source_raw_sha256'}
+CASE_OPTIONS = {'diagnostic_threshold', 'duration', 'reset_policy', 'maximum_source_raw_bytes'}
 
 
 def validate_declaration(request):
@@ -27,17 +28,32 @@ def validate_declaration(request):
     used = [matrix['parameters_name'], matrix['observations_name']]
     require(all(type(n) is str and n in names for n in used), 'native_data_diagnostic_matrix_input')
     cases = request['cases']
-    require(type(cases) is list and 1 <= len(cases) <= 2 and all(type(r) is dict and
-            set(r) in (CASE_FIELDS, CASE_FIELDS | {'diagnostic_threshold'}) for r in cases), 'native_data_diagnostic_cases')
+    require(type(cases) is list and 1 <= len(cases) <= 4 and all(type(r) is dict and
+            CASE_FIELDS <= set(r) <= CASE_FIELDS | CASE_OPTIONS and type(r['name']) is str
+            for r in cases) and len({r['name'] for r in cases}) == len(cases), 'native_data_diagnostic_cases')
+    bindings = {};summary_sources = {}
     for row in cases:
         if 'diagnostic_threshold' in row:
             number(row['diagnostic_threshold'])
-        require(type(row['source_raw_bytes']) is int and 0 < row['source_raw_bytes'] <= 256*1024**2
+        maximum = row.get('maximum_source_raw_bytes', 256*1024**2)
+        require(type(maximum) is int and 0 < maximum <= 512*1024**2 and
+                type(row['source_raw_bytes']) is int and 0 < row['source_raw_bytes'] <= maximum
                 and type(row['source_raw_sha256']) is str and SHA.fullmatch(row['source_raw_sha256']),
                 'native_data_diagnostic_raw_binding')
-        used += [row['source_name'], row['summary_name']]
-    require(all(type(n) is str and n in names for n in used) and len(used) == len(set(used))
-            and set(used) == names, 'native_data_diagnostic_input_roles')
+        require(2 <= number(row.get('duration', 2.)) <= 30 and
+                row.get('reset_policy', 'reset_per_trial') in
+                ('reset_per_trial', 'preserve_neuron_dynamics'), 'native_data_diagnostic_presentation')
+        source, summary = row['source_name'], row['summary_name']
+        require(type(source) is str and source in names and type(summary) is str and summary in names,
+                'native_data_diagnostic_input_roles')
+        binding = (summary, row['source_raw_bytes'], row['source_raw_sha256'])
+        require((source not in bindings or bindings[source] == binding) and
+                (summary not in summary_sources or summary_sources[summary] == source),
+                'native_data_diagnostic_input_roles')
+        bindings[source] = binding;summary_sources[summary] = source
+    roles = [*used, *bindings, *summary_sources]
+    require(len(roles) == len(set(roles)) and set(roles) == names,
+            'native_data_diagnostic_input_roles')
 
 
 def run_case(request, row, runtime_path, output):
@@ -53,7 +69,8 @@ def run_case(request, row, runtime_path, output):
     matrix = extract((staged/matrix_spec['parameters_name']).read_bytes(),
                      (staged/matrix_spec['observations_name']).read_bytes(), matrix_spec['revision'])
     raw = read_qcompress_bytes(staged/row['source_name'], expected_bytes=row['source_raw_bytes'],
-                              expected_sha256=row['source_raw_sha256'])
+                              expected_sha256=row['source_raw_sha256'],
+                              maximum_bytes=row.get('maximum_source_raw_bytes', 256*1024**2))
     package = parse_json_bytes(raw);summary_raw = (staged/row['summary_name']).read_bytes()
     summary = parse_json_bytes(summary_raw)
     require(type(package) is dict and package.get('schema_version') == 7 and
@@ -79,8 +96,10 @@ def run_case(request, row, runtime_path, output):
     model = package['configuration']['model']
     descriptor = dict(name=row['name'], model_revision=package['model_revision'],
         topology='Branch' if model['branch'] else 'Classic', initial_threshold=model['initial_threshold'])
-    job = job_for(descriptor, package, matrix, diagnostic_threshold=row.get('diagnostic_threshold'))
-    require(len(job['trials']) == 8 and all(t['reset_policy'] == 'reset_per_trial' for t in job['trials']),
+    job = job_for(descriptor, package, matrix, diagnostic_threshold=row.get('diagnostic_threshold'),
+                  duration=row.get('duration', 2.), reset_policy=row.get('reset_policy', 'reset_per_trial'))
+    require(len(job['trials']) == 8 and all(t['reset_policy'] == row.get('reset_policy', 'reset_per_trial')
+                                          for t in job['trials']),
             'recorded_diagnostic_complete_matrix_required')
     job_path = output/(row['name']+'-diagnostic-job.json');_write(job_path, job)
     _write(output/(row['name']+'-matrix.json'), matrix)
@@ -171,12 +190,13 @@ def audit_matrix(directory, controller, runtime_manifest):
                 manifest['source_closure'] == runtime['source_closure'],
                 'recorded_matrix_case_runtime_substitution')
         source = root/'input/source/train_stopped_state.json'
-        actual = frozen_digest(source, 256*1024**2)
+        actual = frozen_digest(source, row.get('maximum_source_raw_bytes', 256*1024**2))
         require(actual['bytes'] == row['source_raw_bytes'] and actual['sha256'] == row['source_raw_sha256'],
                 'recorded_matrix_source_substitution')
         job = load(root/'input/job.json');package = job['source_stopped'];model = package['configuration']['model']
         run_id = row['name']+'/stopped-phasea-diagnostic'
-        require(job['trials'] == trial_design(matrix, model['initial_isi'], run_id, duration=2., rotations=1),
+        require(job['trials'] == trial_design(matrix, model['initial_isi'], run_id,
+                duration=row.get('duration', 2.), reset_policy=row.get('reset_policy', 'reset_per_trial'), rotations=1),
                 'recorded_matrix_wrong_pattern_design')
         spec, observations = load_diagnostic_evaluation(root/'native/evaluation.json')
         require(len(observations) == len(spec['trials']) == 8 and
@@ -198,8 +218,11 @@ def audit_matrix(directory, controller, runtime_manifest):
         if specified:
             rows[-1].update(diagnostic_threshold=row['diagnostic_threshold'],
                             threshold_protocol='predeclared_same_matrix_diagnostic')
+        if 'duration' in row or 'reset_policy' in row:
+            rows[-1]['presentation_protocol'] = dict(duration=row.get('duration', 2.),
+                reset_policy=row.get('reset_policy', 'reset_per_trial'))
     return dict(kind='timelearner_recorded_n4_matrix_analysis',
-        schema_version=2 if any('diagnostic_threshold' in r for r in request['cases']) else 1,
+        schema_version=2 if len(request['cases'])>2 or any(CASE_OPTIONS & set(r) for r in request['cases']) else 1,
         original_job_id=request['job_id'], models=rows, trials=8*len(rows), diagnostic_only=True,
         training_completed=False, native_execution_attested=False, scientific_verdict=None)
 
@@ -224,7 +247,7 @@ def report_matrix(directory, controller, runtime_manifest, output):
     (output/'manifest.json').write_text(json.dumps(manifest, indent=2, allow_nan=False)+'\n', encoding='utf-8')
     links = ''.join('<li><a href="'+html.escape(r['name'])+'/index.html">'+html.escape(r['name'])+'</a></li>'
                     for r in reports)
-    protocol = ('predeclared same-matrix diagnostic thresholds' if analysis['schema_version'] == 2
+    protocol = ('predeclared diagnostic thresholds and presentation windows/reset policies' if analysis['schema_version'] == 2
                 else 'inherited fixed thresholds')
     (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><h1>Recorded N4 diagnostic responses</h1>'
         '<p>Stopped models; '+protocol+'. All eight patterns per model, actual input overlays. '

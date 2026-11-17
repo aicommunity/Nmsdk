@@ -44,6 +44,24 @@ Producer использует существующий diagnostic-evaluate job s
 training threshold остаётся100, новая физика и обучение не подставляются.
 Это не независимый Test или сертификат сходимости.
 
+Тот же finite runner может задать duration2/4с и reset policy на case,
+до четырёх условий, с повторным чтением одного неизменяемого source/summary.
+Каждый case импортирует отдельный native граф. Повторная ссылка разрешена
+только при одинаковых raw bytes/SHA и том же summary; источники разных ролей
+смешивать нельзя. Для известного271032927-байтного источника требуется явный
+maximum_source_raw_bytes512MiB. Default qCompress reader остаётся256MiB;
+прежние checks framing, packed64MiB, exact raw bytes/SHA и trailing bytes
+сохранены. Это не исправление отдельных C++ string-parser путей.
+
+Исходная32-пробная попытка Elder завершилась неуспешно: baseline8 валиден,
+long-reset4с превысил native wall2400с, остальные условия не выполнялись.
+Этот timeout не является выводом о качестве модели при4с. Stack trace попал
+в per-tick Check/GetComponentL; вклад обхода требует отдельного измерения.
+Повтор long-reset и оставшихся условий должен получить новый request,
+достаточный wall budget и полный aggregate memory admission. Успешный
+baseline не нужно заново считать незавершённым Train или терять вместе
+с неуспешным последующим условием.
+
 Для отчёта нужны все actual Soma/LT traces с входами, полное восстановление,
 отдельные подписанные увеличения и native zoom без прореживания. Не меньше
 8px на timestep в увеличениях. Новые TP/FP/FN/TN публикуются даже при худшем
