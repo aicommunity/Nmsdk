@@ -71,4 +71,9 @@ native импортом на законной границе, проверять
 limits, неподменяемость модели/допусков, подпись и реальный CLI с замороженным
 источником и запретом перезаписи. Они прошли локально на Windows после общего
 [исправления file identity](FrozenFileIdentity-20261117.ru.md). Серверный
-declaration gate и фактический следующий Train ещё не выполнены.
+declaration gate и фактический следующий Train ещё не выполнены на момент этой записи.
+
+Обновление17:51UTC: Linux declaration/contracts пройдены в gate17/17;
+actual cold Branch single-sweep admitted/running на Elder.
+[Декларация, измеренная причина group deadline и ограничения](SingleSweepColdControl-20261117.ru.md).
+Итог этого Train ещё неизвестен; подготовка не объявляет модель точной.

@@ -26,3 +26,8 @@ actual run audit и закрытие kernel groups проверены отдел
 неодинаковые bytes и посторонний artifact. Повтор настоящего Linux archive
 gate необходим до публикации окончательной квитанции; прежняя неуспешная
 попытка сохраняется. Это не основание повторять32 native наблюдения.
+
+Повтор на Elder завершён:17/17 без skips/failures. Проверены813 logical
+members,1098311229 bytes, четыре pipeline snapshots/430 artifact entries.
+Архив14172684 байта SHA29fb0c81577c367307d4822ac96191c6d9ba8354d3b34d1dff5536c5afdd229b
+и отдельная metadata175 файлов опубликованы. [Квитанция](../../../Reports/StructTrain/TimeLearner/NativeSourceTransport-20261117/native-ab-publication.json).
