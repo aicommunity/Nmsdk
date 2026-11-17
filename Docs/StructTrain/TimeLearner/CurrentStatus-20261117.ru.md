@@ -16,7 +16,7 @@
 [Галерея всех 64 native-проб](FrozenOrderTemporalReport.ru.md) построена:
 production-проверка 1/1 пройдена, source/model/threshold и метрики сохранены.
 Архив 847744948 байт и полный читаемый cache опубликованы на M40;
-[квитанция](FrozenOrderTemporalGalleryPublication-20261117.archive.json).
+[квитанция](FrozenOrderTemporalGalleryPublication-20261117.json).
 В Git только компактные refs и квитанции. Отдельно просмотрены
 18 рисунков; читаемый масштаб подтверждён, включая ранний FP у phasea-row-4.
 Каждая проба содержит полный диапазон восстановления и отдельные подписанные
@@ -28,7 +28,10 @@ production-проверка 1/1 пройдена, source/model/threshold и ме
 Все 17 страниц отрисованы и просмотрены. Критерий включения — TP≥1 и TN≥2;
 разнообразие foil, сходимость и независимость оценки указаны отдельно.
 N2-примеры содержат один уникальный foil при двух reset policies.
-Для N0 отдельный проверенный рабочий пример пока не заявляется.
+Первая Word-редакция покрывает N1. [Сверка источников следующего выпуска](AlgorithmDescriptionEvidenceReview-20261117.json)
+уже включает Classic N0 TP1/FP4/TN3, stock Branch N1 TP1/FP5/TN2 и historical
+Classic6/8. Это семь примеров, не семь независимых алгоритмов; ограничения
+версий и незавершённого Train сохраняются. Новый Word-выпуск ещё не принят.
 Исторические августовские 4/8–6/8 сохраняют исходный смысл.
 
 ## Сохранение модели перед следующим длительным Train
@@ -49,7 +52,7 @@ bytes/SHA. Полные retained-model roundtrips Classic(raw175521654 байт)
 Branch(raw192607805 байт) прошли при native8ГиБ: import, Build/Init, export,
 свежий import, параметры, ledger и все stimulus/Soma samples.
 [Приёмка и ограничения](NativeExportMemory-20261117.ru.md),
-[внешние primary/provenance](NativeExportMemoryAcceptance-20261117.archive.json).
+[внешние primary/provenance](NativeExportMemoryAcceptance-20261117.json).
 Импортированная история не закрывает OOM свежего Train.
 
 Исправлен анализатор доказательств: порядок Branch→Classic больше не отвергает
@@ -64,12 +67,33 @@ E:/Science-Repo/nmsdk-git не изменяется. Незавершённые 
 научным результатом; следующий дорогой Train должен сначала получить
 подтверждённое сохранение модели и достаточный совокупный ресурс.
 
-На Elder выполняется отдельная серия32 frozen diagnostic проб: та же модель
-и порог, окна2/4с, reset-per-trial и preserve-neuron-dynamics. Контракт
-производителя проверен1/1; первая native baseline-проба завершилась, её
-post-processing ещё работает. Source0f4db5d66e58d64f18d7389ef287c368dc2b8dcf,
-controls ec98a93ed0ba03b06209c6042574df6c5993f06b. Увеличение окна меняет
-quiet-tail и наблюдаемый интервал; чистым ITI-вмешательством это не считается.
+Первая серия32 frozen diagnostic проб Elder закрыта неполной. Baseline8
+валиден, TP1/FP1/FN0/TN6; фактический native wall1696.099854с. Long-reset4с
+превысил2400с, записаны6 из8 полных отдельных наблюдений. Общего verdict
+4с нет; continuous условия не выполнялись. Source
+0f4db5d66e58d64f18d7389ef287c368dc2b8dcf, controls
+ec98a93ed0ba03b06209c6042574df6c5993f06b. Все928 logical members
+сохранены во внешнем lossless archive: catalog
+`experiments/2026-11-17/frozen-window-reset/incomplete-a1.json`.
+Проверены SHA всех данных, aliases и закрытие трёх kernel bindings;
+удалён только подтверждённый дубликат локального working cache этого job.
+Принятый baseline source и уникальные первичные данные сохранены.
+
+На Elder запущены оставшиеся24 пробы новой попытки
+`s11-frozen-protocol-finite-elder-a4`, controls
+58bd0d697974d5d4210483bbda25f2453db01af0, actor
+82281d3cd01cf62cc650f0d78441b5c727e73bff. Те же модель и порог,
+long-reset4с, continuous2с, long-continuous4с; успешный baseline
+не повторяется, неполные пробы не возобновляются как готовые. Native wall
+4800с выбран с учётом измеренного1696с baseline и прежнего timeout.
+Owner8ГиБ/native8ГиБ и host reservation16ГиБ, общий registry
+Elder schema2/24ГиБ/slots1. Runtime7b495e/Pulse9e7653 не менялся.
+Увеличение окна меняет quiet-tail и наблюдаемый интервал; чистым
+ITI-вмешательством это не считается. На03:55UTC завершён первый long-reset4с:
+все8 наблюдений валидны, TP1/FP1/FN0/TN6; начался continuous2с.
+Это тот же counts результат, что у baseline2с, при тех же модели и пороге.
+Завершение и результат всей серии24 пока не заявлены; финальная публикация
+сырого набора последует после закрытия study.
 
 При review producer обнаружено повторное создание exclusive progress.json
 после второй границы. Исправление f4be24e6f72810a4d37ff25a7ed7c80048eae006
@@ -86,8 +110,57 @@ cache и нужный baseline сохранены. Освобождено5426049
 
 Устранение повторного model audit в scorer отдельно принято на реальном
 большом eight-pattern результате и 6/6 малых проверках с десятью native
-моделями. [Квитанция и ограничения матрицы](BatchRecognitionModelAuditAcceptance-20261117.archive.json).
+моделями. [Квитанция и ограничения матрицы](BatchRecognitionModelAuditAcceptance-20261117.json).
 Исторический неуспешный генератор 14 случаев сохранён и не выдан за PASS.
+
+## Новые холодные модели и проверка readout
+
+После указанных исправлений сохранения выполнены два новых коротких native
+Train, Classic и Branch N4/N1,120с model time каждый. Обе stopped модели
+реально экспортированы и полностью импортированы Test. Reference complete
+не означает общую сходимость: outcome external_stop, completed_boundary=false,
+общего TrainingCertificate нет. L Classic3,1,1,1; Branch3,3,3,1;
+Rs86000000Ом на каждом входе. Полная759-probe OOM-проверка ещё открыта.
+
+Полные16 baseline проб при пороге100 дают каждой модели TP0/FP0/FN1/TN7.
+Отдельные реальные16 candidate проб при заранее предложенных порогах дают
+каждой TP1/FP6/FN0/TN1. Target-spike возникает до последнего входа.
+[Фактические времена по всем паттернам и ограничения](FreshColdN4ScientificReport-20261117.ru.md).
+Это отрицательные результаты, не новые рабочие примеры Word и не замена
+предыдущего Branch7/8. Общий production renderer для всех32 наблюдений
+и80 trial/soma pairs завершён, автоматическая проверка1/1 принята.
+Просмотрены33 выбранных графика, включая все8 candidate-паттернов обеих
+топологий и native zoom TP/FP. Полные lossless primary, provenance и читаемый
+cache опубликованы во внешнем архиве; [hashes и область приёмки](FreshColdN4Acceptance-20261117.json).
+Это не ручная проверка всех7630 PNG и не положительный научный результат.
+
+Finite Train owner проверен56/56 DATA/resource контрактами и двумя
+фактическими Train. Readout transport проверен35/35 контрактами и применён
+к полному summary72709345байт Elder без сокращения исходных данных.
+После объединения feature-веток на bc81b4c4bd953e310d13aad3626414d495bf8f9b
+прошли70/70 совместных контрактов. [Приёмка ограниченного изменения](FiniteScienceAcceptance-20261117.json)
+связывает этот код, реальные Train/Test и внешние primary.
+Базовый root develop перед его merge —
+b10cb2f7f3104f229ac06847b488890681f59389, Pulse gitlink891259e;
+полные этапы1–12 и рекомендуемость V2 по всей матрице этим не приняты.
+
+После публикации короткой серии на M40 запущен новый matched cold Train
+Classic→Branch, `s10-finite-long-cold-train-integrated-m40-a3`, controls
+690630e10263c63d4bccccabebc85fa542d13c7e, actorbc81b4c.
+Каждой модели выделены7200с model time,14400000ticks и21600с control wall;
+native16ГиБ, совокупный host admission24ГиБ. На03:56UTC Classic native
+работает. Это новый cold state, не продолжение остановленной модели;
+результат длинного Train ещё не заявлен. Математическая цель, физика и
+границы L1..256/Rs1..86МОм не изменены.
+
+[Исправлены имена пяти составных publication receipts](PublicationReceiptNaming-20261117.ru.md):
+они используют `.json`; `.archive.json` оставлен только строгим ссылкам
+на один внешний object. Содержимое прежних квитанций, архивы, DOCX и
+результаты не менялись; production validator не ослаблялся.
+Полный production `verify_experiment_tree` принят на97342b5ff1c9136253c1c1b1e3af82cbff35930b:
+71995 markers разрешены через внешний архив,411с wall. Последующее
+дополнение N0 меняет только Markdown. Для вновь добавленной gate-квитанции
+достаточна адресная проверка её object, без повторного хеширования всего архива.
 
 ## Дальнейшее движение
 

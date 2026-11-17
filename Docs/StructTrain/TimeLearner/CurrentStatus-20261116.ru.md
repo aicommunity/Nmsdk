@@ -7,7 +7,7 @@
 алгоритмов в DOCX — [Classic и Branch](AlgorithmDescriptions/README.ru.md).
 8 и 9 страниц соответственно; редактируемые формулы, блок-схема, UML классов
 и native tick, псевдокод, actual N2-примеры и Branch N4 сравнение. Все страницы
-отрисованы и просмотрены; [точные refs выпуска](AlgorithmDescriptions/publication.archive.json)
+отрисованы и просмотрены; [точные refs выпуска](AlgorithmDescriptions/publication.json)
 связывают документы, исходники, первичные данные и визуальную приёмку.
 Критерий включения пользователя TP ≥ 1 и TN ≥ 2 отделён от сходимости,
 числа уникальных foil и независимой оценки. Это первая V2 N1 редакция;

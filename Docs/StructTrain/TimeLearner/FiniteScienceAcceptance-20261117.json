@@ -1,0 +1,82 @@
+{
+  "kind": "timelearner_finite_science_feature_acceptance",
+  "schema_version": 1,
+  "accepted_base_root": "b10cb2f7f3104f229ac06847b488890681f59389",
+  "combined_code_source": "bc81b4c4bd953e310d13aad3626414d495bf8f9b",
+  "reviewed_feature_before_this_receipt": "e3e144aa58d9f44f8c5e9015b9b39924d48377b8",
+  "combined_server_contracts": {
+    "passed": 70,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "job": "s10-finite-science-integration-contract-m40-a1",
+    "controls": "17cb8565ecaeacf498f91abe5378b45d23d58caa",
+    "package_fingerprint": "5f2cabfa093d0a0a69cbc27c2ed54c3b17250281ef1bfe162942c35f508b2c3b"
+  },
+  "actual_fresh_native": {
+    "train_cases": 2,
+    "training_outcome": "external_stop",
+    "training_certificate_present": false,
+    "export_and_import": true,
+    "evaluation_observations": 32,
+    "native_root": "9b7fb0eac7107093d2fd87748b85c532c4f2ad9e",
+    "native_pulse": "9883f9493d0672e603dfb4a03dc572955469ccdf",
+    "candidate_counts_each": {
+      "TP": 1,
+      "FP": 6,
+      "FN": 0,
+      "TN": 1
+    },
+    "working_example_criterion_met": false,
+    "details": "FreshColdN4Acceptance-20261117.json"
+  },
+  "report": {
+    "automated_passed": 1,
+    "observations": 32,
+    "trial_soma_pairs": 80,
+    "manually_reviewed_representatives": 33,
+    "all_figures_manually_reviewed": false
+  },
+  "publication_tree_gate": {
+    "kind": "timelearner_production_publication_tree_gate",
+    "schema_version": 1,
+    "commit": "97342b5ff1c9136253c1c1b1e3af82cbff35930b",
+    "validator_source": "bc81b4c4bd953e310d13aad3626414d495bf8f9b",
+    "validator": "publisher.verify_experiment_tree",
+    "source_kind": "immutable Git tree",
+    "active_native_source_modified": false,
+    "scientific_verdict": null,
+    "observed_at": "2026-11-17T04:02:57.946618+00:00",
+    "accepted": true,
+    "wall_seconds": 411.09712686622515,
+    "external_receipt": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e4/e40bcba90bded2f40097ba9cde54c6a8489d2288e9f42da61e669181970ac1f4",
+      "sha256": "e40bcba90bded2f40097ba9cde54c6a8489d2288e9f42da61e669181970ac1f4",
+      "bytes": 479
+    }
+  },
+  "subsequent_checked_delta": {
+    "paths": [
+      "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/NextEditionAdditions.ru.md",
+      "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/README.ru.md"
+    ],
+    "only_documentation": true
+  },
+  "gitlinks": {
+    "PulseLib": "891259ea08d6f88ae1631737935a140e2380a625",
+    "Bin": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+    "Rdk": "de4134235c0dcb8b91fd9a43b267348ad1a163ca"
+  },
+  "merge_policy": "--no-ff root merge after source and publication gate; no child history changes",
+  "stage_scope": "Accepted bounded finite Train/readout/resource/transport/report feature; original stages1-12 remain partial",
+  "long_cold_training_in_progress": true,
+  "full_759_probe_fresh_export_resolved": false,
+  "independent_scientific_evaluation": false,
+  "whole_plan_complete": false,
+  "recommended_v2_for_full_matrix": false,
+  "generated_binary_in_root_git": false,
+  "user_main_checkout_untouched": true
+}

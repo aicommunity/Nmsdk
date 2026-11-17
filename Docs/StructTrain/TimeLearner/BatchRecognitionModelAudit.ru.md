@@ -13,7 +13,7 @@ small guards 6/6 прошли. Контролируемое ускорение �
 остаётся в формате модели; это изменение не завершает предусмотренное исходным
 планом разделение физической модели, controller checkpoint и архива измерений.
 Математика обучения и C++ lifecycle не изменяются. [Полные внешние primary refs
-и границы приёмки](BatchRecognitionModelAuditAcceptance-20261117.archive.json).
+и границы приёмки](BatchRecognitionModelAuditAcceptance-20261117.json).
 
 16 ноября большой actual eight-pattern result проверен на M40: полный словарь метрик равен исходному, derivation проверен дважды на пакет, время193.269с без заявления контролируемого ускорения. При подготовке малых данных первоначально ошибочно были выбраны восемь legacy `NativeThresholdCandidate` fixtures: они не достигают собственного training-precondition (`maximum_sweeps_exhausted`) до создания кандидата, как уже предусмотрено историческим контролем `test_threshold_fixture_old_runtime.py`. Неуспешный запуск14 сохранён целиком:4 ordinary и2 calibrated случая прошли,8 legacy candidate случаев не прошли. Эти восемь нельзя засчитывать как тест нового scorer.
 

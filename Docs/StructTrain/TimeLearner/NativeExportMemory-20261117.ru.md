@@ -64,7 +64,7 @@ c62fe6e8e066b5d1be4a95bb15a61e02270ae2a2 проверяет точные пар�
 
 ## Материалы и ограничения
 
-[Компактная квитанция](NativeExportMemoryAcceptance-20261117.archive.json)
+[Компактная квитанция](NativeExportMemoryAcceptance-20261117.json)
 содержит commit closure, результаты, времена фаз и внешние refs.
 Каталог M40: `experiments/2026-11-17/native-export-memory/acceptance-a1.json`.
 Primary93746136 байт:403 файла,221032776 байт после распаковки,
