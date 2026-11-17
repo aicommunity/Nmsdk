@@ -12,9 +12,17 @@ def audit_roundtrip_controller(native, controller, *, original_job_path):
     require(request.get('kind') == 'timelearner_native_data_checks' and
             request.get('schema_version') == 1 and request.get('job_id') == original.name,
             'roundtrip_foreign_controller_request')
-    require(request['cases'] == [
-        {'name': 'classic', 'test_id': 'NativeRecordedRecoveryArchive/ClassicFullDomainN4Roundtrip'},
-        {'name': 'branch', 'test_id': 'NativeRecordedRecoveryArchive/BranchFullDomainN4Roundtrip'}],
+    expected_cases = {
+        'classic': 'NativeRecordedRecoveryArchive/ClassicFullDomainN4Roundtrip',
+        'branch': 'NativeRecordedRecoveryArchive/BranchFullDomainN4Roundtrip'}
+    cases = request.get('cases')
+    # A scheduler may run either topology first. Bind each proof to its named
+    # test, while rejecting duplicate names before constructing any lookup.
+    require(isinstance(cases, list) and len(cases) == len(expected_cases) and
+            all(isinstance(case, dict) and set(case) == {'name', 'test_id'} and
+                isinstance(case['name'], str) and case['name'] in expected_cases and
+                case['test_id'] == expected_cases[case['name']] for case in cases) and
+            len({case['name'] for case in cases}) == len(expected_cases),
         'roundtrip_controller_cases')
     result = load(controller/'supervisor-result.json')
     require(result['outer_closed'] and result['reason'] is None and result['record_errors'] == [] and
