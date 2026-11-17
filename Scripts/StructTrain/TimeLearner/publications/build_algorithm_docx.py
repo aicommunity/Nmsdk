@@ -91,7 +91,7 @@ def build(source, output, review=None):
         d.polygon([(700,1135),(890,1215),(700,1295),(510,1215)],fill='#e8eef4',outline='#555555',width=3)
         label(d,(700,1215),'Завершено',28,True)
         arrow(d,(890,1215),(1310,1215));arrow(d,(1310,1215),(1310,520));arrow(d,(1310,520),(1190,520))
-        label(d,(1110,1185),'нет',27);label(d,(1280,770),'ещё\nдействия',26)
+        label(d,(1110,1185),'нет',27);label(d,(1245,770),'ещё\nдействия',22)
         arrow(d,(700,1295),(700,1350));label(d,(750,1320),'да',27)
         box(d,(150,1350,1250,1475),'Finished и отдельный результат\nExact   SearchUnresolved   BudgetExhausted   Invalid',strong=True)
         label(d,(700,1520),'Edit и оценка домена выполняются до очередной пробы',27)
@@ -362,7 +362,7 @@ def build(source, output, review=None):
 
         page(doc,'Границы вывода и обновление')
         para(doc,supplement['limits'] if supplement else common['limits']);para(doc,common['history']);para(doc,common['update'])
-        heading(doc,'Источники этой редакции')
+        page(doc,'Источники этой редакции')
         for text in [
             'PulseLib '+evidence['algorithm_code']['PulseLib'],
             'Rdk '+evidence['algorithm_code']['Rdk'],
@@ -385,7 +385,9 @@ def build(source, output, review=None):
                 text=supplement['case_labels'][c['id']]+': '+c['source']['path']+'; root '+c['source']['commit']
                 p=para(doc,text)
                 for r in p.runs:r.font.size=Pt(9)
-            for text in supplement.get('additional_sources',[]):para(doc,text)
+            for text in supplement.get('additional_sources',[]):
+                p=para(doc,text)
+                for r in p.runs:r.font.size=Pt(9.5)
         path=output/filename;doc.save(path)
         manifests.append(dict(topology=topology,file=filename,bytes=path.stat().st_size,
             sha256=hashlib.sha256(path.read_bytes()).hexdigest(),equation_format='native_OMML',
