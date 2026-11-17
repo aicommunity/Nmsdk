@@ -120,6 +120,42 @@ TEST(BoundedTrainingBudgetBoundary, ExhaustedProbesCannotStageAnotherUnmeasurabl
     }
 }
 
+TEST(BoundedTrainingBudgetBoundary, OddProbeRemainderCannotFundANewCandidatePairOrItsEdit)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
+    for(const std::size_t allowance:{std::size_t(1),std::size_t(3)})
+    {
+        SCOPED_TRACE(::testing::Message()<<int(routing)<<'/'<<int(normalization)<<'/'<<allowance);
+        const auto protocol=Protocol(2,routing);
+        auto cfg=Configuration(2,normalization);cfg.maximumProbes=allowance;
+        cfg.bounds={{1,3,1,1,10.,10.},{1,1,1,1,10.,10.}};
+        const std::vector<InputParameters> initial{{1,1,10.},{1,1,10.}};
+        const bool domains=normalization==Normalization::TipResistance;
+        BoundedTrainingSession session(References(protocol),cfg,initial,domains);
+        std::size_t assessments=0;
+        DriveTraining(session,protocol,{},[&](const TrainingAction& action) {
+            ++assessments;
+            ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
+            d.baseModelRevision=action.baseModelRevision;d.geometry=action.parameters;
+            d.inputIndex=action.inputIndex;d.sourceAmplitude=1.;
+            d.previewModelRevision=action.baseModelRevision;
+            d.minimumResistance=d.maximumResistance=10.;return d;
+        });
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+        EXPECT_EQ(session.Reason(),"candidate_probe_pair_budget_exhausted");
+        EXPECT_EQ(session.IssuedProbes(),allowance-1);
+        EXPECT_EQ(session.Evidence().size(),(allowance-1)/2);
+        // The original supplied graph needs no preview. The remaining odd
+        // allowance must not reach the next geometry's domain assessment.
+        EXPECT_EQ(assessments,0u);
+        EXPECT_TRUE(session.Domains().empty());
+        EXPECT_EQ(session.AppliedEdits(),0u);
+        EXPECT_EQ(session.Parameters(),initial);
+        EXPECT_FALSE(session.Certificate());EXPECT_FALSE(session.NextAction());
+    }
+}
+
 TEST(BoundedTrainingN1GeometryFairness, ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode)
 {
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
@@ -1118,7 +1154,7 @@ TEST(TrainingTermination,ProbeAndAdapterBudgetReasonsAreDistinct)
     const auto protocol=Protocol();auto config=Configuration();config.maximumProbes=1;
     BoundedTrainingSession probes(References(protocol),config,{{1,1,10.},{1,1,10.}});
     DriveTraining(probes,protocol);EXPECT_EQ(probes.Status(),TrainingStatus::BudgetExhausted);
-    EXPECT_EQ(probes.Reason(),"maximum_probes_exhausted");
+    EXPECT_EQ(probes.Reason(),"candidate_probe_pair_budget_exhausted");
     config.maximumProbes=100;
     BoundedTrainingSession adapter(References(protocol),config,{{1,1,10.},{1,1,10.}});
     ASSERT_TRUE(adapter.NextAction());adapter.ExhaustBudget();
