@@ -15,6 +15,32 @@ from ..process_runner import verify_runtime
 from ..runtime import file_record, resolved_libraries, runtime_content_identity, digest_json
 
 
+class NativeFileSourceCliTest(unittest.TestCase):
+    """Explicit new/old real runtimes; a help check never claims model execution."""
+    @classmethod
+    def setUpClass(cls):
+        spec=load(Path(os.environ['TIMELEARNER_JOB_SOURCE_CLI_FIXTURES'])/'runtimes.json')
+        cls.current=load(Path(spec['current_runtime']))
+        cls.legacy=load(Path(spec['legacy_runtime']))
+        verify_runtime(cls.current);verify_runtime(cls.legacy)
+
+    def test_current_console_advertises_checked_source_file_transport(self):
+        result=inspect_native_cli(self.current,['export','evaluate','diagnostic-evaluate'],require_file_source=True)
+        self.assertIn('checked-file-source-v1',result['help_text'])
+        self.assertFalse(result['native_job_executed'])
+
+    def test_legacy_console_is_rejected_before_any_file_source_job(self):
+        # Its ordinary diagnostic interface is valid; the missing transport
+        # capability, rather than the executable type, is the rejecting factor.
+        inspect_native_cli(self.legacy,['diagnostic-evaluate'])
+        with self.assertRaisesRegex(EvidenceError,'native_cli_missing_file_source_transport'):
+            inspect_native_cli(self.legacy,['diagnostic-evaluate'],require_file_source=True)
+
+    def test_unknown_transport_selector_is_rejected_before_runtime_access(self):
+        with self.assertRaisesRegex(EvidenceError,'native_cli_unknown_source_transport'):
+            inspect_native_cli({},['diagnostic-evaluate'],require_file_source='auto')
+
+
 class NativeCliInterfaceTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

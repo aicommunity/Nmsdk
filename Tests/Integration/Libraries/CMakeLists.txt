@@ -189,6 +189,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_ProbeObservation.cpp
     Test_PulseLib_NativeProbe.cpp
     Test_PulseLib_NativeExecution.cpp
+    Test_PulseLib_NativeJobSource.cpp
     Test_PulseLib_SinglePulseCharacterization.cpp
     Test_PulseLib_PreparedModel.cpp
     Test_PulseLib_FinalVerification.cpp

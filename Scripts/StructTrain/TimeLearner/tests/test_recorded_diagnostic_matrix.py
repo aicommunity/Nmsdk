@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 from ..native_data_checks import validate_request
 from .test_native_data_checks import declaration
-from ..recorded_diagnostic_matrix import audit_matrix, report_matrix, read_summary
+from ..recorded_diagnostic_matrix import audit_matrix, report_matrix, read_summary, validate_declaration
 from ..native_evidence import EvidenceError, load
 
 
@@ -142,6 +142,27 @@ class RecordedDiagnosticMatrixPrimaryTest(unittest.TestCase):
 
 
 class RecordedDiagnosticMatrixDeclarationTest(unittest.TestCase):
+    def test_large_model_requires_explicit_file_transport_and_separate_native_and_owner_budgets(self):
+        value=diagnostic_request()
+        for row in value['cases']:
+            row.update(source_raw_bytes=761851830,maximum_source_raw_bytes=1024*1024**2,
+                       job_source_transport='checked-file-source-v1')
+        value['limits'].update(memory_bytes=16*1024**3,leaf_memory_bytes=16*1024**3,
+                               reservation_memory_bytes=32*1024**3)
+        self.assertIsNone(validate_declaration(value))
+        for changed in ('transport','owner','native','ceiling'):
+            invalid=deepcopy(value)
+            if changed=='transport':invalid['cases'][0].pop('job_source_transport')
+            elif changed=='owner':invalid['limits']['memory_bytes']=8*1024**3
+            elif changed=='native':invalid['limits']['leaf_memory_bytes']=8*1024**3
+            else:invalid['cases'][0]['maximum_source_raw_bytes']=1024*1024**2+1
+            with self.subTest(changed=changed),self.assertRaises(EvidenceError):validate_declaration(invalid)
+
+    def test_unknown_or_noop_transport_factor_is_rejected(self):
+        for mode in (None,True,'auto','checked-file-source-v2'):
+            value=diagnostic_request();value['cases'][0]['job_source_transport']=mode
+            with self.subTest(mode=mode),self.assertRaises(EvidenceError):validate_declaration(value)
+
     def test_compressed_summary_requires_complete_consistent_bounded_raw_identity(self):
         value=self.repeated_model()
         for row in value['cases']:

@@ -422,7 +422,8 @@ def _snapshot_source(source, destination, *, diagnostic=False):
 
 
 @_evidence_boundary
-def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seconds, *, process_policy=None):
+def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seconds, *, process_policy=None,
+            job_source_transport=None):
     job = load(Path(job_path).resolve(strict=True))
     source_case = _load_source_case(mode, Path(source_path).resolve(strict=True)) if source_path is not None else None
     preflight = validate_job(mode, job, source_case)
@@ -430,7 +431,13 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     runtime = load(Path(runtime_path).resolve(strict=True));executable = verify_runtime(runtime)
     require(number(maximum_wall_seconds) > 0, "invalid_pipeline_wall_budget")
     from .native_cli import inspect_native_cli
-    cli = inspect_native_cli(runtime, [mode])
+    from .job_source_transport import TRANSPORT,make_envelope
+    file_source=job_source_transport is not None
+    require(job_source_transport is None or job_source_transport==TRANSPORT,
+            'pipeline_unknown_job_source_transport')
+    require(not file_source or (mode in ('export','evaluate','diagnostic-evaluate') and
+            source_path is not None and policy is not None), 'pipeline_file_source_requires_contained_source_job')
+    cli = inspect_native_cli(runtime,[mode],require_file_source=True) if file_source else inspect_native_cli(runtime,[mode])
     output = Path(output).resolve();output.mkdir(parents=True, exist_ok=False)
     _write(output/"runtime-cli-interface.json", cli)
     inputs = output/"input";inputs.mkdir();source_relative = None
@@ -439,6 +446,13 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
         source_case = _load_source_case(mode, snapshot);source_relative = snapshot.relative_to(output).as_posix()
         require(validate_job(mode, job, source_case) == preflight, "pipeline_source_changed_during_snapshot")
     _write(inputs/"job.json", job)
+    native_job_path=inputs/"job.json"
+    transport_record={}
+    if file_source:
+        native_job_path=inputs/"native-job-source.json"
+        envelope=make_envelope(job,snapshot,inputs)
+        _write(native_job_path,envelope)
+        transport_record={'transport':TRANSPORT,'path':'input/native-job-source.json'}
     if policy is not None:
         _write(inputs/"process-policy.json", policy)
     executor = execute if policy is None else execute_native
@@ -447,7 +461,7 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     # guard; restore the Python caller's environment even if execution fails.
     with applied_loader_environment(runtime):
         process = executor(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
-            "--timelearner-"+mode, str(inputs/"job.json"), "--timelearner-output", str(output/"native")],
+            "--timelearner-"+mode, str(native_job_path), "--timelearner-output", str(output/"native")],
             executable.parent, output/"process", maximum_wall_seconds, **options)
     verify_runtime(runtime)
     audit = None
@@ -458,8 +472,9 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
         audit = audit_execution(mode, output/"native", job, source_case)
         if process["execution"] != "completed":
             require(load(output/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
-    result = {"kind": "timelearner_native_pipeline_run_manifest", "schema_version": 4 if policy is not None else 3 if mode == "diagnostic-evaluate" else 2, "operation": mode,
+    result = {"kind": "timelearner_native_pipeline_run_manifest", "schema_version": 5 if file_source else 4 if policy is not None else 3 if mode == "diagnostic-evaluate" else 2, "operation": mode,
         **({"process_policy": policy} if policy is not None else {}),
+        **({'job_source_transport':transport_record} if file_source else {}),
         "execution": process["execution"], "validity": "valid" if audit else "unverified_execution",
         "job_sha256": job["sha256"], "source_package_path": source_relative,
         "runtime_fingerprint": runtime["runtime_fingerprint"], "source_closure": runtime["source_closure"],
@@ -479,12 +494,13 @@ def audit_run_manifest(path, *, historical_analysis=None):
                                    'training-v3-no-capacitance-history'), 'unknown_pipeline_historical_adapter')
     path = Path(path).resolve(strict=True);root = path.parent
     manifest = load(path);_digest(manifest)
-    contained = type(manifest.get("schema_version")) is int and manifest["schema_version"] == 4
+    contained = type(manifest.get("schema_version")) is int and manifest["schema_version"] in (4,5)
+    file_source = type(manifest.get('schema_version')) is int and manifest['schema_version']==5
     require(set(manifest) == {"kind", "schema_version", "operation", "execution", "validity", "job_sha256",
             "source_package_path", "runtime_fingerprint", "source_closure", "preflight", "analysis", "analysis_code",
-            "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} | ({"process_policy"} if contained else set()) and
+            "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} | ({"process_policy"} if contained else set()) | ({'job_source_transport'} if file_source else set()) and
             manifest["kind"] == "timelearner_native_pipeline_run_manifest" and
-            type(manifest["schema_version"]) is int and manifest["schema_version"] in (1, 2, 3, 4) and
+            type(manifest["schema_version"]) is int and manifest["schema_version"] in (1, 2, 3, 4, 5) and
             (contained or (manifest["schema_version"] == 3) == (manifest["operation"] == "diagnostic-evaluate")) and
             manifest["operation"] in FIELDS and manifest["independent_partition_verified"] is False and
             manifest["evaluation_verdict"] is None, "unknown_native_pipeline_run_manifest")
@@ -501,13 +517,23 @@ def audit_run_manifest(path, *, historical_analysis=None):
         require(actual.resolve(strict=True).is_relative_to(root) and _record(actual, root) == r, "pipeline_run_artifact_changed")
     mode = manifest["operation"];source = manifest["source_package_path"];source_case = None
     job = load(root/"input/job.json")
+    native_job_relative='input/job.json'
+    if file_source:
+        from .job_source_transport import TRANSPORT,verify_envelope
+        require(manifest['job_source_transport']=={'transport':TRANSPORT,'path':'input/native-job-source.json'} and
+                type(source) is str and source in names and mode in ('export','evaluate','diagnostic-evaluate'),
+                'pipeline_job_source_transport_schema')
+        native_job_relative='input/native-job-source.json'
+        require(native_job_relative in names, 'pipeline_job_source_transport_missing')
+        verify_envelope(load(root/native_job_relative),job,root/source,root/'input')
+        cli=load(root/'runtime-cli-interface.json')
+        require('checked-file-source-v1' in cli['help_text'], 'pipeline_file_source_capability_missing')
     if mode in ("train", "preflight") or (mode == "probe" and job['schema_version'] == 1):
         require(source is None, "pipeline_cold_training_has_source")
     else:
         require(type(source) is str and source in names and PurePosixPath(source).parent == PurePosixPath("input/source"),
                 "pipeline_source_path_changed")
         source_case = _load_source_case(mode, root/source)
-    job = load(root/"input/job.json")
     require(manifest["job_sha256"] == job["sha256"] and validate_job(mode, job, source_case) == manifest["preflight"],
             "pipeline_run_preflight_changed")
     process, runtime = load(root/"process/result.json"), load(root/"process/runtime.json")
@@ -530,7 +556,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
             arguments[1] == runtime["app_ini"]["path"], "pipeline_process_arguments_changed")
     output = PurePosixPath(arguments[5])
     require(output.is_absolute() and output.name == "native" and
-            PurePosixPath(arguments[3]) == output.parent/"input/job.json" and
+            PurePosixPath(arguments[3]) == output.parent/native_job_relative and
             request["working_directory"] == str(PurePosixPath(runtime["executable"]["path"]).parent) and
             number(request["maximum_wall_seconds"]) > 0 and request["model_time"] is None, "pipeline_process_scope_changed")
     structured_exit = _structured_live_exit if manifest["schema_version"] == 1 else _structured_training_exit

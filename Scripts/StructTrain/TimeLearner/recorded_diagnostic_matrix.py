@@ -16,7 +16,7 @@ SHA = re.compile('[0-9a-f]{64}')
 COMMIT = re.compile('[0-9a-f]{40}')
 CASE_FIELDS = {'name', 'source_name', 'summary_name', 'source_raw_bytes', 'source_raw_sha256'}
 CASE_OPTIONS = {'diagnostic_threshold', 'duration', 'reset_policy', 'maximum_source_raw_bytes',
-                'summary_raw_bytes', 'summary_raw_sha256'}
+                'summary_raw_bytes', 'summary_raw_sha256', 'job_source_transport'}
 SUMMARY_COMPRESSION_FIELDS = {'summary_raw_bytes', 'summary_raw_sha256'}
 
 
@@ -42,11 +42,19 @@ def validate_declaration(request):
                 'native_data_diagnostic_summary_binding')
         if 'diagnostic_threshold' in row:
             number(row['diagnostic_threshold'])
+        from .job_source_transport import TRANSPORT,MAXIMUM_SOURCE_BYTES
+        file_source='job_source_transport' in row
+        require(not file_source or row['job_source_transport']==TRANSPORT,
+                'native_data_diagnostic_source_transport')
         maximum = row.get('maximum_source_raw_bytes', 256*1024**2)
-        require(type(maximum) is int and 0 < maximum <= 512*1024**2 and
+        require(type(maximum) is int and 0 < maximum <= (MAXIMUM_SOURCE_BYTES if file_source else 512*1024**2) and
                 type(row['source_raw_bytes']) is int and 0 < row['source_raw_bytes'] <= maximum
                 and type(row['source_raw_sha256']) is str and SHA.fullmatch(row['source_raw_sha256']),
                 'native_data_diagnostic_raw_binding')
+        if maximum>512*1024**2:
+            require(request['limits']['memory_bytes']>=16*1024**3 and
+                    request['limits']['leaf_memory_bytes']>=16*1024**3,
+                    'native_data_diagnostic_large_source_resource_declaration')
         require(2 <= number(row.get('duration', 2.)) <= 30 and
                 row.get('reset_policy', 'reset_per_trial') in
                 ('reset_per_trial', 'preserve_neuron_dynamics'), 'native_data_diagnostic_presentation')
@@ -84,6 +92,9 @@ def run_case(request, row, runtime_path, output):
     from .stock_stopped_evaluation import job_for
     from .n1_protocol_robustness import _write
 
+    if row.get('job_source_transport') is not None:
+        from .native_cli import inspect_native_cli
+        inspect_native_cli(load(runtime_path),['diagnostic-evaluate'],require_file_source=True)
     output = Path(output);staged = output/'native-inputs';matrix_spec = request['matrix']
     matrix = extract((staged/matrix_spec['parameters_name']).read_bytes(),
                      (staged/matrix_spec['observations_name']).read_bytes(), matrix_spec['revision'])
@@ -126,8 +137,10 @@ def run_case(request, row, runtime_path, output):
     policy = dict(kind='timelearner_native_process_policy', schema_version=1, backend='bound_cgroup',
         memory_bytes=request['limits']['leaf_memory_bytes'], tasks=request['limits']['leaf_tasks'],
         cooperative_capture=True)
+    options={'process_policy':policy}
+    if 'job_source_transport' in row:options['job_source_transport']=row['job_source_transport']
     result = run_job('diagnostic-evaluate', job_path, state_path, runtime_path, output/row['name'],
-                     request['limits']['leaf_wall_seconds'], process_policy=policy)
+                     request['limits']['leaf_wall_seconds'], **options)
     require(result['execution'] == 'completed' and result['validity'] == 'valid',
             'recorded_diagnostic_execution_incomplete')
     metrics = result['analysis']['metrics']

@@ -96,9 +96,9 @@ const QCommandLineOption runtimeCaptureOption(QStringList() << "timelearner-capt
 const QCommandLineOption timeLearnerPreflightOption(QStringList() << "timelearner-preflight", "Build and validate a cold native training job without calculating or starting Train.", "json-path");
 const QCommandLineOption timeLearnerProbeOption(QStringList() << "timelearner-probe", "Measure one native input on an explicit cold model without training or certification.", "json-path");
 const QCommandLineOption timeLearnerTrainOption(QStringList() << "timelearner-train", "Execute a declared cold native training job.", "json-path");
-const QCommandLineOption timeLearnerExportOption(QStringList() << "timelearner-export", "Export a completed solo model to recognition state.", "json-path");
-const QCommandLineOption timeLearnerEvaluateOption(QStringList() << "timelearner-evaluate", "Execute a declared frozen evaluation job.", "json-path");
-const QCommandLineOption timeLearnerDiagnosticEvaluateOption(QStringList() << "timelearner-diagnostic-evaluate", "Measure an explicitly diagnostic frozen model from stopped Train; never a completed-training result.", "json-path");
+const QCommandLineOption timeLearnerExportOption(QStringList() << "timelearner-export", "Export a completed solo model to recognition state. Accepts checked-file-source-v1 envelopes.", "json-path");
+const QCommandLineOption timeLearnerEvaluateOption(QStringList() << "timelearner-evaluate", "Execute a declared frozen evaluation job. Accepts checked-file-source-v1 envelopes.", "json-path");
+const QCommandLineOption timeLearnerDiagnosticEvaluateOption(QStringList() << "timelearner-diagnostic-evaluate", "Measure an explicitly diagnostic frozen model from stopped Train; never a completed-training result. Accepts checked-file-source-v1 envelopes.", "json-path");
 parser.addOption(configOption);
 parser.addOption(startCalcOption);
 parser.addOption(calcTimeOption);

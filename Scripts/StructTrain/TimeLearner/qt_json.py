@@ -11,7 +11,7 @@ def read_qcompress_bytes(path, *, expected_bytes, expected_sha256, maximum_bytes
     path = Path(path)
     require(not path.is_symlink() and 4 < path.stat().st_size <= 64*1024**2,
             'recorded_qz_packed_size')
-    require(type(maximum_bytes) is int and 0 < maximum_bytes <= 512*1024**2,
+    require(type(maximum_bytes) is int and 0 < maximum_bytes <= 1024*1024**2,
             'recorded_qz_explicit_bound')
     require(type(expected_bytes) is int and 0 < expected_bytes <= maximum_bytes,
             'recorded_qz_declared_size')
