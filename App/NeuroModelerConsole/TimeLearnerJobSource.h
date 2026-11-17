@@ -27,7 +27,7 @@ inline QJsonObject ReadNativeJobDocument(const QString& path)
 {
     QFile file(path);JobSourceRequire(file.open(QIODevice::ReadOnly),"job_input_unreadable");
     JobSourceRequire(file.size()>0 && file.size()<=NativeJobMaximumBytes,"job_input_size_out_of_range");
-    auto document=NMSDK::TimeLearner::ParseStrictNativeJsonObject(file.readAll().toStdString(),NativeJobMaximumBytes);
+    auto document=NMSDK::TimeLearner::ParseStrictNativeJsonBytes(file.readAll(),NativeJobMaximumBytes);
     if(document["kind"]!=QJsonValue("timelearner_checked_file_source_job"))return document;
     JobSourceKeys(document,{"kind","schema_version","job","source","sha256"});
     JobSourceRequire(document["schema_version"]==QJsonValue(1) && document["job"].isObject() &&
@@ -64,7 +64,7 @@ inline QJsonObject ReadNativeJobDocument(const QString& path)
     JobSourceRequire(raw.size()==qint64(declared) && input.atEnd(),"job_source_size_changed");
     const auto digest=QString::fromLatin1(QCryptographicHash::hash(raw,QCryptographicHash::Sha256).toHex());
     JobSourceRequire(source["sha256"]==QJsonValue(digest),"job_source_bytes_changed");
-    const auto package=NMSDK::TimeLearner::ParseStrictNativeJsonObject(raw.toStdString(),std::size_t(declared));
+    const auto package=NMSDK::TimeLearner::ParseStrictNativeJsonBytes(raw,std::size_t(declared));
     JobSourceRequire(package["sha256"]==source["package_sha256"],"job_source_package_changed");
     job[field]=package;
     const auto jobSignature=job["sha256"];auto jobBody=job;jobBody.remove("sha256");
