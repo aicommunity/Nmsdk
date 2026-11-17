@@ -1,0 +1,121 @@
+{
+  "count": 47,
+  "last_fields": [
+    "attempt_id",
+    "budgets",
+    "candidate_binding",
+    "candidate_witness_id",
+    "capacitance_witnesses",
+    "clock_observation",
+    "complete_group",
+    "consumed",
+    "counters",
+    "geometry_policy",
+    "group_id",
+    "group_state",
+    "kind",
+    "live_attempt_binding",
+    "logical_request",
+    "measurement",
+    "method_specification",
+    "native_group",
+    "native_packets",
+    "native_trial_witness_ids",
+    "owner_family_binding",
+    "purpose",
+    "raw_trials",
+    "rejection_reason",
+    "schema_version",
+    "selection",
+    "source_origin",
+    "training_requested_at_consume",
+    "window_proposal"
+  ],
+  "last": {
+    "complete_group": false,
+    "group_id": "finite-fair-input-cold/classic/session/1/search/82/composite/47",
+    "group_state": "budget_exhausted",
+    "native_group": null,
+    "purpose": "search",
+    "rejection_reason": "composite_train_group_not_completed;omission_group_time_budget_exhausted"
+  },
+  "clock_observation": {
+    "end_model_time": 505.797,
+    "end_wall_time": 4007706.562129082,
+    "start_model_time": 496.9805,
+    "start_wall_time": 4007105.401586825,
+    "wall_enforcement": "not_completed"
+  },
+  "budgets": {
+    "attempt_limits": {
+      "maximum_groups": 512,
+      "maximum_model_seconds": 7200,
+      "maximum_native_probes": 3072,
+      "maximum_total_samples": 11074560,
+      "maximum_wall_seconds": 21600
+    },
+    "maximum_group_model_seconds": 20,
+    "maximum_group_wall_seconds": 600,
+    "maximum_total_primary_bytes": 536870912
+  },
+  "counters": {
+    "native_probes": 5,
+    "primary_bytes": 1846656,
+    "retained_frames": 17633,
+    "sampled_frames": 17633
+  },
+  "recent_clocks": [
+    {
+      "end_model_time": 453.763,
+      "end_wall_time": 4005558.157747434,
+      "start_model_time": 442.96,
+      "start_wall_time": 4005186.770622558,
+      "wall_enforcement": "live_checked_before_mint"
+    },
+    {
+      "end_model_time": 464.5675,
+      "end_wall_time": 4005945.658535751,
+      "start_model_time": 453.7645,
+      "start_wall_time": 4005570.523835245,
+      "wall_enforcement": "live_checked_before_mint"
+    },
+    {
+      "end_model_time": 475.371,
+      "end_wall_time": 4006322.07874914,
+      "start_model_time": 464.568,
+      "start_wall_time": 4005949.565483137,
+      "wall_enforcement": "live_checked_before_mint"
+    },
+    {
+      "end_model_time": 486.1755,
+      "end_wall_time": 4006711.064997258,
+      "start_model_time": 475.3725,
+      "start_wall_time": 4006334.824786018,
+      "wall_enforcement": "live_checked_before_mint"
+    },
+    {
+      "end_model_time": 496.979,
+      "end_wall_time": 4007090.092473647,
+      "start_model_time": 486.176,
+      "start_wall_time": 4006715.19762289,
+      "wall_enforcement": "live_checked_before_mint"
+    },
+    {
+      "end_model_time": 505.797,
+      "end_wall_time": 4007706.562129082,
+      "start_model_time": 496.9805,
+      "start_wall_time": 4007105.401586825,
+      "wall_enforcement": "not_completed"
+    }
+  ],
+  "kind": "timelearner_actual_group_deadline_readback",
+  "schema_version": 1,
+  "job": "s10-finite-fair-input-cold-m40-a4",
+  "case": "classic",
+  "source_state": "native/train_stopped_state.json",
+  "actual_clock": "wall",
+  "model_elapsed": 8.816500000000019,
+  "wall_elapsed": 601.1605422571301,
+  "convergence_verified": false,
+  "scientific_verdict": null
+}
