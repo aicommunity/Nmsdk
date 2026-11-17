@@ -5,7 +5,7 @@
 не заменяя исходный план более узким набором проверок. Научные 8/8 не являются
 условием завершения рефакторинга.
 
-## Последнее подтверждение на 15:03 UTC
+## Последнее подтверждение на 15:11 UTC
 
 Ни один новый этап полного плана не объявлен завершённым. Accepted root
 develop остаётся `87e7da0205b6bb0d582f7b4f2551c935fd7f2350`.
@@ -44,13 +44,20 @@ run_case; расширенный40-test набор Roote31ff3043 прошёл н
 включая регрессию со строковым путём и настоящим legacy Console.
 
 Идёт новая попытка `s05-file-source-ab-native-elder-a2`, controls
-`aec1f01ec31d43027cc00a0a4565f2cacb33a62d`: оставшиеся24 наблюдения Classic-file,
+`54b66a14089982903b2df78811ac98d13dea195f`: оставшиеся24 наблюдения Classic-file,
 Branch-inline/file; валидный baseline8 не повторяется. Исходные bytes и вся
 история сверены с primary6a86940f…; native SDK0ef/Pulse5d и fingerprintd480a889…
 для обеих попыток одинаковы. Source моделей и заранее фиксированные прежние
 diagnostic пороги сохранены. A/B ещё не принят. Test новых больших моделей
 761851830/678423634 байт тоже впереди. Успех codec не означает model roundtrip,
 сходимость или научный PASS.
+
+A2 допущен и его outer group наблюдается running. Прежняя подготовка controls
+aec1f01e не прошла capacity preflight до создания kernel group/lease: свободного
+диска не хватало под сумму2ГиБ floor+2ГиБ output. После измерения завершённого
+baseline264347648 байт для трёх оставшихся cases объявлен output ceiling1ГиБ;
+floor2ГиБ и native memory сохранены. При превышении лимита опыт должен честно
+остановиться. Исходники, runtime, модели и scientific factors не менялись.
 
 Полный renderer четырёх условий Elder остановлен по timeout10800с:
 2087 PNG long-reset,1287 continuous, long-continuous0. Галерея целиком

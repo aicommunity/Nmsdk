@@ -117,6 +117,10 @@ run_case со строкой и реальным legacy Console: он долже
 Прежний39-test PASS не покрывал эту границу. Новый40-test набор Roote31ff3043
 прошёл на Elder без skips/failures. Оставшиеся24 A/B наблюдения запущены отдельно
 как s05-file-source-ab-native-elder-a2, controls
-aec1f01ec31d43027cc00a0a4565f2cacb33a62d. Валидный Classic-inline8 сохраняется.
+54b66a14089982903b2df78811ac98d13dea195f. Валидный Classic-inline8 сохраняется.
 Новый запуск использует исправленный tool, прежний immutable native SDK0ef и
 тот же runtime fingerprintd480a889…; результаты всех условий ещё не сравнены.
+Первый launcher этой подготовки не прошёл capacity preflight до создания
+процессной группы. Допущенный controls54b ограничивает оставшийся output1ГиБ
+по измеренному baseline264347648 байт, сохраняя floor2ГиБ. Это изменение
+ресурсного допуска; при переполнении лимита результат не может стать PASS.
