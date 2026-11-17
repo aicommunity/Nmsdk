@@ -143,22 +143,50 @@ def verify_pipeline_archive(archive, bundle, maximum_bytes=8*1024**3):
                 "invalid_pipeline_archive_record")
         total += record["bytes"]
     require(total <= maximum_bytes, "pipeline_archive_exceeds_budget")
+    # The production compact producer uses explicit schema2 content references
+    # to earlier regular members. They represent retained bytes, not filesystem
+    # links to follow. Legacy inventories do not gain permission to use links.
+    references = False
+    if bundle.get('kind') == 'compact_native_primary':
+        from .portable_primary import _bundle_version
+        references = _bundle_version(bundle) == 2
+        if references:
+            unique = {(r['sha256'], r['bytes']) for r in declared.values()}
+            require(type(bundle['expanded_bytes']) is int and bundle['expanded_bytes'] == total and
+                    type(bundle['unique_content_bytes']) is int and
+                    bundle['unique_content_bytes'] == sum(size for _, size in unique),
+                    'pipeline_content_reference_totals_invalid')
+    manifest_identities = {(r['sha256'], r['bytes']) for n, r in declared.items()
+                           if Path(n).name == 'run-manifest.json'}
+    regular = set();manifest_content = {}
     with tarfile.open(archive, "r:*") as tar:
         for member in tar:
             name = _name(member.name)
-            require(member.isfile() and name not in records and name in declared and
-                    member.size == declared[name]["bytes"], "unexpected_pipeline_archive_member")
+            require(name not in records and name in declared, "unexpected_pipeline_archive_member")
             is_manifest = Path(name).name == "run-manifest.json"
-            require(not is_manifest or member.size <= 16*1024**2, "packaged_run_manifest_too_large")
+            identity = (declared[name]['sha256'], declared[name]['bytes'])
+            retain = identity in manifest_identities
+            require(not retain or declared[name]['bytes'] <= 16*1024**2, "packaged_run_manifest_too_large")
+            if member.islnk():
+                target = _name(member.linkname)
+                require(references and member.size == 0 and target in regular and
+                        records[target] == declared[name], "unexpected_pipeline_archive_member")
+                records[name] = dict(records[target])
+                if is_manifest:manifests[name] = manifest_content[identity]
+                continue
+            require(member.isfile() and member.size == declared[name]["bytes"],
+                    "unexpected_pipeline_archive_member")
             digest = hashlib.sha256();size = 0;raw = bytearray()
             with tar.extractfile(member) as stream:
                 for chunk in iter(lambda: stream.read(1024**2), b""):
                     digest.update(chunk);size += len(chunk)
-                    if is_manifest:raw.extend(chunk)
+                    if retain:raw.extend(chunk)
             actual = {"bytes": size, "sha256": digest.hexdigest()}
             require(actual == declared[name], "pipeline_archive_member_bytes_changed:"+name)
             records[name] = actual
-            if is_manifest:manifests[name] = bytes(raw)
+            regular.add(name)
+            if retain:manifest_content[identity] = bytes(raw)
+            if is_manifest:manifests[name] = manifest_content[identity]
     require(set(records) == set(declared), "pipeline_archive_member_set_changed")
     proof = verify_packaged_run_inventory(records, manifests)
     return {**proof, "archive_members_verified": len(records), "primary_bytes_verified": total,
