@@ -5,7 +5,7 @@
 не заменяя исходный план более узким набором проверок. Научные 8/8 не являются
 условием завершения рефакторинга.
 
-## Последнее подтверждение на 14:54 UTC
+## Последнее подтверждение на 15:03 UTC
 
 Ни один новый этап полного плана не объявлен завершённым. Accepted root
 develop остаётся `87e7da0205b6bb0d582f7b4f2551c935fd7f2350`.
@@ -36,12 +36,19 @@ DATA contracts и включённость manifest5 в архив. Провер
 архиве862160 байт; восстановлены и проверены все133 regular files.
 [Квитанции и точная область проверки](../../../Reports/StructTrain/TimeLearner/NativeSourceTransport-20261117/acceptance.json).
 
-На Elder начат `s05-file-source-ab-native-elder-a1`, controls
-`f008f3d4ce4be01b027ce4cb249a42d3d4cb60ea`: по8 реальных паттернов для inline/file
-обоих полных short cold N4 terminal-моделей, всего32 наблюдения. Исходные bytes
-и вся история сверены с primary6a86940f…; SDK0ef/Pulse5d, source моделей не
-изменён. Пороги заранее взяты из прежнего положительного readout-контроля,
-а не подбираются по новому Test. A/B ещё не принят. Test новых больших моделей
+Попытка Elder `s05-file-source-ab-native-elder-a1`, controls
+`f008f3d4ce4be01b027ce4cb249a42d3d4cb60ea`, закрыта с ошибкой после валидных8
+Classic-inline проб:TP1/FP6/FN0/TN1. File-case остановился до расчёта из-за
+string/Path на границе DATA→capability gate. Путь нормализован в production
+run_case; расширенный40-test набор Roote31ff3043 прошёл на Elder без skips,
+включая регрессию со строковым путём и настоящим legacy Console.
+
+Идёт новая попытка `s05-file-source-ab-native-elder-a2`, controls
+`aec1f01ec31d43027cc00a0a4565f2cacb33a62d`: оставшиеся24 наблюдения Classic-file,
+Branch-inline/file; валидный baseline8 не повторяется. Исходные bytes и вся
+история сверены с primary6a86940f…; native SDK0ef/Pulse5d и fingerprintd480a889…
+для обеих попыток одинаковы. Source моделей и заранее фиксированные прежние
+diagnostic пороги сохранены. A/B ещё не принят. Test новых больших моделей
 761851830/678423634 байт тоже впереди. Успех codec не означает model roundtrip,
 сходимость или научный PASS.
 

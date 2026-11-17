@@ -114,5 +114,9 @@ runtime path строкой из JSON, а ранний load ожидал Path. �
 нормализация Path до capability gate. Новая регрессия вызывает production
 run_case со строкой и реальным legacy Console: он должен получить штатный
 отказ отсутствующей возможности до чтения source, без создания output.
-Прежний39-test PASS не покрывал эту границу; новый40-test набор и оставшиеся
-24 A/B наблюдения должны пройти отдельно. Валидный Classic-inline8 сохраняется.
+Прежний39-test PASS не покрывал эту границу. Новый40-test набор Roote31ff3043
+прошёл на Elder без skips/failures. Оставшиеся24 A/B наблюдения запущены отдельно
+как s05-file-source-ab-native-elder-a2, controls
+aec1f01ec31d43027cc00a0a4565f2cacb33a62d. Валидный Classic-inline8 сохраняется.
+Новый запуск использует исправленный tool, прежний immutable native SDK0ef и
+тот же runtime fingerprintd480a889…; результаты всех условий ещё не сравнены.
