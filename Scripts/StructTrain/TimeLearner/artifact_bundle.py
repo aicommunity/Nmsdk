@@ -1,4 +1,4 @@
-"""Lossless primary artifacts in Git; reproducible full figures in worker cache."""
+"""Lossless primary bundles for the external store; figures in worker cache."""
 import gzip
 import hashlib
 import json
@@ -72,7 +72,7 @@ def verify_packaged_run_inventory(records, manifests):
         require(type(run) is dict and type(run.get("kind")) is str and run.get("kind") in {"timelearner_post_tune_run_manifest", "timelearner_calibration_run_manifest",
                 "timelearner_native_pipeline_run_manifest"}
                 and type(run.get("schema_version")) is int and
-                run["schema_version"] in ((1, 2, 3, 4) if run["kind"] == "timelearner_native_pipeline_run_manifest" else (1,)),
+                run["schema_version"] in ((1, 2, 3, 4, 5) if run["kind"] == "timelearner_native_pipeline_run_manifest" else (1,)),
                 "unknown_packaged_run_manifest")
         require(run.get("sha256") == canonical_model_sha256({k: v for k, v in run.items() if k != "sha256"}),
                 "packaged_run_manifest_digest_changed")
@@ -96,9 +96,19 @@ def verify_packaged_run_inventory(records, manifests):
             from .native_pipeline_worker import FIELDS
             require(type(run.get("operation")) is str and run["operation"] in FIELDS,
                     "unknown_packaged_pipeline_operation")
-            require(run["schema_version"] == 4 or
+            require(run["schema_version"] in (4, 5) or
                     (run["schema_version"] == 3) == (run["operation"] == "diagnostic-evaluate"),
                     "packaged_pipeline_schema_operation_mismatch")
+            if run['schema_version'] == 5:
+                from .job_source_transport import TRANSPORT
+                require(run['operation'] in ('export', 'evaluate', 'diagnostic-evaluate') and
+                        run.get('job_source_transport') ==
+                            {'transport': TRANSPORT, 'path': 'input/native-job-source.json'} and
+                        'process_policy' in run,
+                        'packaged_pipeline_file_source_schema')
+                require(prefix+'input/native-job-source.json' in expected and
+                        prefix+'input/job.json' in expected,
+                        'packaged_pipeline_file_source_missing')
         native_cold = (run["kind"] == "timelearner_native_pipeline_run_manifest" and
                        (run["operation"] in {"train", "preflight"} or
                         run["operation"] == "probe" and run.get("source_package_path") is None))
