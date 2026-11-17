@@ -20,6 +20,10 @@ Train jobs. Схемы1 (GTest DATA) и2 (recorded diagnostic matrix) сохра
 MemAvailable проверяется по общей сумме до запуска. Эта сумма не меняет
 собственные kernel caps: они задаются отдельно для owner и native.
 Integer overflow и bool вместо лимита запрещены до дорогого выполнения.
+Реестр без quantity capacity (schema1) для нового Train запрещён, иначе
+числа reservation остались бы декларацией без фактического host admission.
+Переход рабочего сервера на quantity registry выполняется явно после проверки
+закрытия старых владельцев и резервного копирования прежнего ledger.
 
 Конечные пути `case/process/contained` известны внешнему владельцу заранее.
 Существующий `_run_owned` записывает intents/bindings, наблюдает kernel units,

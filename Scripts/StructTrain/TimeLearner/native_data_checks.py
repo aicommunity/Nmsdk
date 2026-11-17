@@ -156,6 +156,8 @@ def run(request_path):
         preflight_jobs(request)  # Validate actual signed Train JSON before creating any attempt.
     registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
     require(not registry.managed_units, 'native_data_uses_finite_native_controller')
+    require(request['schema_version'] != 3 or registry.capacity is not None,
+            'finite_train_requires_quantity_host_registry')
     leases = registry.inspect()['leases']
     require(not any(r['job_id'] == request['job_id'] for r in leases), 'native_data_attempt_already_used')
     for old in [s for r in leases if r['state'] == 'held' for s in r['resources']]:
@@ -221,6 +223,8 @@ def worker(request_path):
         'native_data_worker_not_bound_main')
     require(not output.exists(), 'native_data_output_already_exists');output.mkdir()
     registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
+    require(request['schema_version'] != 3 or registry.capacity is not None,
+            'finite_train_requires_quantity_host_registry')
     token = None;stop = threading.Event();errors = [];thread = None;passed = False
     try:
         runtime = _bound_runtime(request)

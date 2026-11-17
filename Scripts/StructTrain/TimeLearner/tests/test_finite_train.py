@@ -59,8 +59,16 @@ class FiniteTrainTest(unittest.TestCase):
         from ..model_identity import canonical_model_sha256
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary)/'train.json';value=request();payload=job(cold7())
-            payload['configuration']['search']['tolerances']['amplitude_absolute'] = -1.
-            payload.pop('sha256');payload['sha256'] = canonical_model_sha256(payload)
-            raw=json.dumps(payload).encode();path.write_bytes(raw)
-            value['inputs']=[dict(name='train.json', path=str(path), bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest())]
-            with self.assertRaises(EvidenceError):preflight_jobs(value)
+            for field in ('amplitude_absolute', 'amplitude_relative', 'sync'):
+                for invalid in (-1., True, float('nan')):
+                    payload=job(cold7())
+                    payload['configuration']['search']['tolerances'][field] = invalid
+                    payload.pop('sha256')
+                    # Nonfinite JSON is invalid before it can receive an identity.
+                    if invalid != invalid:
+                        with self.assertRaises(EvidenceError):canonical_model_sha256(payload)
+                        continue
+                    payload['sha256'] = canonical_model_sha256(payload)
+                    raw=json.dumps(payload).encode();path.write_bytes(raw)
+                    value['inputs']=[dict(name='train.json', path=str(path), bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest())]
+                    with self.subTest(field=field, invalid=invalid), self.assertRaises(EvidenceError):preflight_jobs(value)
