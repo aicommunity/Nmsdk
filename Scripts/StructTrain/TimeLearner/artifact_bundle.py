@@ -121,13 +121,15 @@ def verify_packaged_run_inventory(records, manifests):
     return {"run_snapshots_verified": len(manifests), "artifact_entries_verified": artifacts, "scientific_verdict": None}
 
 
-def verify_pipeline_archive(archive, bundle, maximum_bytes=8*1024**3):
+def verify_pipeline_archive(archive, bundle, maximum_bytes=8*1024**3, *, compatibility=None):
     """Stream an existing worker archive and bind all actual run inventories.
 
     No extraction, rewriting, process attestation or scientific verdict occurs.
     Model/run audits and fresh worker closure remain separate mandatory gates.
     """
     from .external_archive import locate
+    from .portable_primary import ALIAS_ADAPTER, _alias, alias_inventory_plan
+    require(compatibility in (None, ALIAS_ADAPTER), 'unknown_bundle_restoration_adapter')
     archive = locate(archive).resolve(strict=True)
     require(type(maximum_bytes) is int and maximum_bytes > 0 and type(bundle) is dict and
             type(bundle.get("members")) is dict and bundle["members"], "invalid_pipeline_archive_inventory")
@@ -156,14 +158,20 @@ def verify_pipeline_archive(archive, bundle, maximum_bytes=8*1024**3):
                     type(bundle['unique_content_bytes']) is int and
                     bundle['unique_content_bytes'] == sum(size for _, size in unique),
                     'pipeline_content_reference_totals_invalid')
-    manifest_identities = {(r['sha256'], r['bytes']) for n, r in declared.items()
-                           if Path(n).name == 'run-manifest.json'}
+    document_names = {n for n in declared if Path(n).name == 'run-manifest.json'}
+    if compatibility == ALIAS_ADAPTER:
+        from pathlib import PurePosixPath
+        for name in declared:
+            if _alias(name):
+                document_names.add((PurePosixPath(name).parents[2]/'process/owned-process.json').as_posix())
+    require(document_names <= set(declared), 'bundle_alias_owner_missing')
+    manifest_identities = {(declared[n]['sha256'], declared[n]['bytes']) for n in document_names}
     regular = set();manifest_content = {}
     with tarfile.open(archive, "r:*") as tar:
         for member in tar:
             name = _name(member.name)
             require(name not in records and name in declared, "unexpected_pipeline_archive_member")
-            is_manifest = Path(name).name == "run-manifest.json"
+            is_manifest = name in document_names
             identity = (declared[name]['sha256'], declared[name]['bytes'])
             retain = identity in manifest_identities
             require(not retain or declared[name]['bytes'] <= 16*1024**2, "packaged_run_manifest_too_large")
@@ -188,9 +196,13 @@ def verify_pipeline_archive(archive, bundle, maximum_bytes=8*1024**3):
             if retain:manifest_content[identity] = bytes(raw)
             if is_manifest:manifests[name] = manifest_content[identity]
     require(set(records) == set(declared), "pipeline_archive_member_set_changed")
-    proof = verify_packaged_run_inventory(records, manifests)
+    aliases = alias_inventory_plan(records, manifests) if compatibility == ALIAS_ADAPTER else []
+    omitted = {row['omitted_alias'] for row in aliases}
+    proof = verify_packaged_run_inventory({n:r for n,r in records.items() if n not in omitted},
+        {n:raw for n,raw in manifests.items() if Path(n).name == 'run-manifest.json'})
     return {**proof, "archive_members_verified": len(records), "primary_bytes_verified": total,
-            "archive_sha256": bundle["archive_sha256"], "scientific_verdict": None}
+            "archive_sha256": bundle["archive_sha256"], 'compatibility':compatibility,
+            'verified_redundant_aliases':aliases, "scientific_verdict": None}
 
 
 def canonicalize_pipeline_archive(source, archive, bundle, output, maximum_bytes=8*1024**3):

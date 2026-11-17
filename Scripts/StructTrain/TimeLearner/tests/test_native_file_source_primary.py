@@ -8,6 +8,7 @@ from ..artifact_bundle import verify_pipeline_archive
 from ..collector_provenance import frozen_digest
 from ..contained_process import inspect
 from ..native_evidence import load
+from ..portable_primary import ALIAS_ADAPTER
 
 
 class NativeFileSourcePrimaryTest(unittest.TestCase):
@@ -27,10 +28,12 @@ class NativeFileSourcePrimaryTest(unittest.TestCase):
                 target=(PurePosixPath(name).parent/link['link_text']).as_posix()
                 expected[(PurePosixPath(source['prefix'])/name).as_posix()]=source['files'][target]
         self.assertEqual(bundle['members'],expected)
-        result=verify_pipeline_archive(packed/'primary.tar.xz',bundle,maximum_bytes=2*1024**3)
+        result=verify_pipeline_archive(packed/'primary.tar.xz',bundle,maximum_bytes=2*1024**3,
+                                      compatibility=ALIAS_ADAPTER)
         self.assertEqual(result['run_snapshots_verified'],4)
         self.assertEqual(result['archive_members_verified'],len(expected))
         self.assertGreaterEqual(len(expected),809)
+        self.assertEqual(len(result['verified_redundant_aliases']),4)
         self.assertIsNone(result['scientific_verdict'])
         self.assertEqual(before,frozen_digest(packed/'primary.tar.xz',512*1024**2))
         target=Path(os.environ['TMPDIR'])/'actual-native-ab-archive-verification.json'

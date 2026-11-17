@@ -136,15 +136,41 @@ def _bundle_version(bundle):
 
 
 def _alias_plan(root, members):
+    documents = {}
+    for name in members:
+        if _alias(name):
+            run = PurePosixPath(name).parents[2]
+            for relative in ('run-manifest.json', 'process/owned-process.json'):
+                key = (run/relative).as_posix()
+                require(key in members, 'bundle_alias_owner_missing')
+                raw = (root/key).read_bytes()
+                require({'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()} == members[key],
+                        'bundle_alias_owner_inventory_mismatch')
+                documents[key] = raw
+    return alias_inventory_plan(members, documents)
+
+
+def alias_inventory_plan(members, documents):
+    """The same explicit alias adapter over actual independently read bytes.
+
+    It authorizes only a redundant glog severity name and one same-owner log
+    already recorded by its signed run inventory. It attests no process.
+    """
+    from .native_evidence import parse_json_bytes
     plan = []
     for name in sorted(n for n in members if _alias(n)):
-        path = root/name
+        path = PurePosixPath(name)
         run = path.parents[2]
         manifest_path = run/"run-manifest.json"
         owner_path = run/"process/owned-process.json"
-        require(manifest_path.relative_to(root).as_posix() in members
-                and owner_path.relative_to(root).as_posix() in members, "bundle_alias_owner_missing")
-        manifest, owner = load(manifest_path), load(owner_path)
+        keys = [p.as_posix() for p in (manifest_path,owner_path)]
+        require(all(k in members and k in documents for k in keys), 'bundle_alias_owner_missing')
+        for key in keys:
+            raw = documents[key]
+            require(type(raw) is bytes and members[key] ==
+                    {'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()},
+                    'bundle_alias_owner_inventory_mismatch')
+        manifest, owner = [parse_json_bytes(documents[k]) for k in keys]
         require(manifest.get("sha256") == canonical_model_sha256(
                     {k: v for k, v in manifest.items() if k != "sha256"}), "bundle_alias_manifest_digest_mismatch")
         require(type(owner.get("pid")) is int and owner["pid"] > 0, "bundle_alias_owner_invalid")
@@ -158,21 +184,21 @@ def _alias_plan(root, members):
         require(len(indexed) == len(records) and path.relative_to(run).as_posix() not in indexed,
                 "bundle_alias_not_redundant")
         owner_record = indexed.get("process/owned-process.json")
-        require(owner_record == {"path": "process/owned-process.json", "bytes": owner_path.stat().st_size,
-                                  "sha256": _sha(owner_path)}, "bundle_alias_owner_inventory_mismatch")
+        require(owner_record == {"path": "process/owned-process.json", **members[owner_path.as_posix()]},
+                "bundle_alias_owner_inventory_mismatch")
         severity = path.name.split(".")[-1]
         pattern = re.compile(r"NeuroModeler\.[^/]+\.log\."+severity+r"\.\d{8}-\d{6}\."+str(owner["pid"]))
         candidates = []
-        for candidate in path.parent.iterdir():
+        for candidate in (PurePosixPath(n) for n in members if PurePosixPath(n).parent == path.parent):
             if pattern.fullmatch(candidate.name) is None:
                 continue
-            relative = candidate.relative_to(root).as_posix()
+            relative = candidate.as_posix()
             source_record = indexed.get(candidate.relative_to(run).as_posix())
             if (relative in members and members[relative] == members[name]
                     and source_record == {"path": candidate.relative_to(run).as_posix(), **members[relative]}):
                 candidates.append(candidate)
         require(len(candidates) == 1, "bundle_alias_target_missing_or_ambiguous")
-        plan.append({"omitted_alias": name, "retained_target": candidates[0].relative_to(root).as_posix(),
+        plan.append({"omitted_alias": name, "retained_target": candidates[0].as_posix(),
                      **members[name], "owner_pid": owner["pid"], "original_symlink_target_attested": False})
     return plan
 

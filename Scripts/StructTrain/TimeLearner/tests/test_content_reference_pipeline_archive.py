@@ -1,6 +1,7 @@
 """Compact archive integrity DATA; no claimed native model or process evidence."""
 import copy
 import hashlib
+import json
 from pathlib import Path
 import tarfile
 import tempfile
@@ -9,6 +10,8 @@ import unittest
 from ..artifact_bundle import verify_pipeline_archive
 from ..native_evidence import EvidenceError
 from ..portable_primary import create_native_bundle
+from ..portable_primary import ALIAS_ADAPTER, restore_native_bundle
+from ..model_identity import canonical_model_sha256
 from . import test_file_source_archive_inventory as inclusion
 
 
@@ -74,3 +77,40 @@ class ContentReferencePipelineArchiveTest(unittest.TestCase):
                 verify_pipeline_archive(self.archive,changed)
         changed=copy.deepcopy(self.bundle);changed['compression']['content_references']='unrestricted-links'
         with self.assertRaises(EvidenceError):verify_pipeline_archive(self.archive,changed)
+
+    def test_explicit_alias_adapter_checks_owner_inventory_and_identical_target_bytes(self):
+        files={n:p.read_bytes() for n,p in self.sources.items()}
+        owner='run/process/owned-process.json'
+        target='run/native.events-log/EventsLog/NeuroModeler.host.user.log.INFO.20261117-000000.123'
+        alias='run/native.events-log/EventsLog/NeuroModeler.INFO'
+        files[owner]=json.dumps({'pid':123}).encode();files[target]=b'retained actual log'
+        run=json.loads(files['run/run-manifest.json'])
+        run['artifacts'] += [dict(path=n.removeprefix('run/'),bytes=len(files[n]),
+                                 sha256=hashlib.sha256(files[n]).hexdigest()) for n in (owner,target)]
+        run.pop('sha256');run['sha256']=canonical_model_sha256(run)
+        files['run/run-manifest.json']=json.dumps(run).encode();files[alias]=files[target]
+        for mutation in ('valid','wrong_owner','different_bytes','unrecorded_extra'):
+            changed=copy.deepcopy(files)
+            if mutation=='wrong_owner':
+                changed[target.replace('.123','.456')]=changed.pop(target)
+            elif mutation=='different_bytes':changed[alias]+=b'damaged'
+            elif mutation=='unrecorded_extra':changed['run/unrecorded']=b'extra'
+            sources={}
+            for i,(name,raw) in enumerate(changed.items()):
+                p=self.root/(mutation+'-source-'+str(i));p.write_bytes(raw);sources[name]=p
+            out=self.root/mutation
+            bundle=create_native_bundle(sources,out,dictionary_bytes=8*1024**2,deduplicate_content=True)
+            if mutation=='valid':
+                with self.assertRaisesRegex(EvidenceError,'unrecorded_artifacts'):
+                    verify_pipeline_archive(out/'primary.tar.xz',bundle)
+                result=verify_pipeline_archive(out/'primary.tar.xz',bundle,compatibility=ALIAS_ADAPTER)
+                self.assertEqual(len(result['verified_redundant_aliases']),1)
+                self.assertEqual(result['verified_redundant_aliases'][0]['retained_target'],target)
+                self.assertEqual(result['archive_members_verified'],len(files))
+                restored=restore_native_bundle(out/'bundle.json',self.root/'restored',compatibility=ALIAS_ADAPTER)
+                self.assertEqual(restored['omitted_redundant_aliases'],result['verified_redundant_aliases'])
+                self.assertFalse((self.root/'restored'/alias).exists())
+                self.assertEqual((self.root/'restored'/target).read_bytes(),files[target])
+            else:
+                with self.subTest(mutation=mutation),self.assertRaises(EvidenceError):
+                    verify_pipeline_archive(out/'primary.tar.xz',bundle,compatibility=ALIAS_ADAPTER)
