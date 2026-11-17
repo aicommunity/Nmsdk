@@ -46,7 +46,12 @@ TEST(BoundedTrainingBudgetBoundary, ExhaustedProbesCannotStageAnotherUnmeasurabl
         EXPECT_FALSE(session.Evidence().front().withinTiming);
         EXPECT_EQ(session.Parameters(),initial);
         EXPECT_EQ(session.Parameters(),session.Evidence().front().fullParameters);
-        EXPECT_EQ(assessments,domains?1u:0u);
+        // The explicitly supplied initial graph is measured without a preview
+        // domain. No next domain may be requested after its last probe either.
+        EXPECT_EQ(assessments,0u);
+        EXPECT_TRUE(session.Domains().empty());
+        EXPECT_EQ(session.IssuedProbes(),2u);
+        EXPECT_EQ(session.AppliedEdits(),0u);
         EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
         EXPECT_EQ(session.Reason(),"maximum_probes_exhausted");
         EXPECT_FALSE(session.Certificate());
