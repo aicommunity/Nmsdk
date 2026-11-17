@@ -1,0 +1,30 @@
+{
+  "output_exists": true,
+  "records": {
+    "build-process/owned-process.json": {
+      "executable": "C:\\Windows\\System32\\cmd.exe",
+      "creation_filetime": "134394202673333519",
+      "pid": 11544,
+      "job_name": "Local\\TimeLearner-54e18cee-4633-4fa6-b25a-f3266deacedf",
+      "runtime_fingerprint": "3ee528e67b9429cf883878faa3133a6dd9da5b017ed102868a2e63005dffd078",
+      "suspended_until_limits_applied": true
+    }
+  },
+  "kernel_job": {
+    "name": "Local\\TimeLearner-54e18cee-4633-4fa6-b25a-f3266deacedf",
+    "active_processes": 7,
+    "total_processes": 221
+  },
+  "logs": [
+    {
+      "name": "build-process/stdout.log",
+      "bytes": 10899,
+      "tail": "\r\n[58/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Engine\\UModule.cpp.obj\r\n[59/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Engine\\UNet.cpp.obj\r\n[60/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Engine\\UPointer.cpp.obj\r\n[61/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Engine\\UProperty.cpp.obj\r\n[62/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Engine\\UReadOnlyLogTail.cpp.obj\r\n[63/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Engine\\UStorage.cpp.obj\r\n[64/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Engine\\UTime.cpp.obj\r\n[65/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Engine\\UXMLEnvSerialize.cpp.obj\r\n[66/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Graphics\\Graphics.cpp.obj\r\n[67/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Graphics\\Gui.cpp.obj\r\n[68/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Graphics\\Kernel.cpp.obj\r\n[69/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Graphics\\UAGraphics.cpp.obj\r\n[70/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Graphics\\UBitmap.cpp.obj\r\n[71/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Graphics\\UBitmapVector.cpp.obj\r\n[72/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Graphics\\UDrawEngine.cpp.obj\r\n[73/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Graphics\\UFont.cpp.obj\r\n[74/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Graphics\\UGraphics.cpp.obj\r\n[75/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Graphics\\UGraphicsBinarySerialize.cpp.obj\r\n[76/534] Building CXX object Rdk\\CMakeFiles\\rdk.static.qt.dir\\Core\\Graphics\\UGraphicsIO.cpp.obj\r\n"
+    },
+    {
+      "name": "build-process/stderr.log",
+      "bytes": 2403,
+      "tail": "v) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  Libraries/Rdk-CvBasicLib/CMakeLists.txt:47 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  App/NeuroModeler/CMakeLists.txt:271 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  App/NeuroModelerConsole/CMakeLists.txt:61 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning:\n  Manually-specified variables were not used by the project:\n\n    VCPKG_OVERLAY_TRIPLETS\n\n\n"
+    }
+  ]
+}
