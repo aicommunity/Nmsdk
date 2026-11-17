@@ -21,6 +21,9 @@ cohort216 только объявлен, не выполнен. Текущие �
 × allowance1/3; runtime ещё не проверен. Ранее подготовленный SDK216 этого
 дополнения не содержит и не может служить его приёмкой. Полный terminal
 best-state restore и wall/model deadline этим исправлением не закрываются.
+Для обоих изменений подготовлен новый immutable SDK a2 с217 TEST cases,
+controls1364b7a8cd5fcf4ef2d936bf04d17210f54ae4b6. Он заменяет только ещё
+не запущенную подготовку216; текущие Train/runtime не меняются.
 
 Дополнение после выпуска Word: [редакция17 ноября](AlgorithmDescriptions/README.ru.md)
 опубликована во внешнем M40 archive. Classic14 страниц, Branch13; все27

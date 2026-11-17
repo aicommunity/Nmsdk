@@ -59,3 +59,12 @@ final verification сохраняют свой учёт. Проверка не �
 и не предсказывает затраты wall time. Подготовленный выше immutable SDK216
 этого дополнения не содержит: его нельзя выдавать за проверку нового кода.
 До серверного исполнения оба изменения остаются непроверенными.
+
+Обновлённая подготовка a2 включает оба изменения: Root
+ddb2dcadd33ddd683cf73662f306c2bc6383e325, Pulse
+eb5c07b0bd56897e4b67d2e644d066ee6340fe11, controls
+1364b7a8cd5fcf4ef2d936bf04d17210f54ae4b6. Заявлены217 literal TEST cases;
+старый a1/216 не запускался и сохранён как superseded preparation.
+Новые immutable source/build/runtime paths имеют суффикс a2.
+[Компактная квитанция](../../../Reports/StructTrain/TimeLearner/SingleSweepCold-20261117/next-sdk-a2-prepared.json).
+Запуск a2 также ожидает освобождения M40 slot текущим cold Branch.
