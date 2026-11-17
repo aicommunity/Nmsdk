@@ -9,7 +9,7 @@ import json
 from pathlib import Path, PurePosixPath
 import re
 
-from .native_evidence import load, load_json, parse_json_bytes, require
+from .native_evidence import load, load_json, number, parse_json_bytes, require
 
 
 SHA = re.compile('[0-9a-f]{64}')
@@ -28,8 +28,10 @@ def validate_declaration(request):
     require(all(type(n) is str and n in names for n in used), 'native_data_diagnostic_matrix_input')
     cases = request['cases']
     require(type(cases) is list and 1 <= len(cases) <= 2 and all(type(r) is dict and
-            set(r) == CASE_FIELDS for r in cases), 'native_data_diagnostic_cases')
+            set(r) in (CASE_FIELDS, CASE_FIELDS | {'diagnostic_threshold'}) for r in cases), 'native_data_diagnostic_cases')
     for row in cases:
+        if 'diagnostic_threshold' in row:
+            number(row['diagnostic_threshold'])
         require(type(row['source_raw_bytes']) is int and 0 < row['source_raw_bytes'] <= 256*1024**2
                 and type(row['source_raw_sha256']) is str and SHA.fullmatch(row['source_raw_sha256']),
                 'native_data_diagnostic_raw_binding')
@@ -77,7 +79,7 @@ def run_case(request, row, runtime_path, output):
     model = package['configuration']['model']
     descriptor = dict(name=row['name'], model_revision=package['model_revision'],
         topology='Branch' if model['branch'] else 'Classic', initial_threshold=model['initial_threshold'])
-    job = job_for(descriptor, package, matrix)
+    job = job_for(descriptor, package, matrix, diagnostic_threshold=row.get('diagnostic_threshold'))
     require(len(job['trials']) == 8 and all(t['reset_policy'] == 'reset_per_trial' for t in job['trials']),
             'recorded_diagnostic_complete_matrix_required')
     job_path = output/(row['name']+'-diagnostic-job.json');_write(job_path, job)
@@ -180,6 +182,12 @@ def audit_matrix(directory, controller, runtime_manifest):
         require(len(observations) == len(spec['trials']) == 8 and
                 all(o['complete'] for o in observations), 'recorded_matrix_incomplete_observations')
         metrics = manifest['analysis']['metrics']
+        specified = 'diagnostic_threshold' in row
+        require(job['schema_version'] == (2 if specified else 1) and
+                metrics['effective_threshold'] == (row['diagnostic_threshold'] if specified else model['initial_threshold']) and
+                (not specified or (job['diagnostic_threshold'] == row['diagnostic_threshold'] and
+                                   metrics['diagnostic_threshold_experiment'] is True)),
+                'recorded_matrix_effective_threshold_changed')
         require(metrics['diagnostic_only'] is True and metrics['training_completed'] is False and
                 metrics['training_certificate_present'] is False and metrics['evaluation_verdict'] is None,
                 'recorded_matrix_false_training_or_scientific_verdict')
@@ -187,7 +195,11 @@ def audit_matrix(directory, controller, runtime_manifest):
             training_outcome=package['training_outcome'], topology='Branch' if model['branch'] else 'Classic',
             source_threshold=package['neuron']['metadata']['calibration']['threshold'],
             trial_count=len(observations), metrics=metrics, run_audit=audit))
-    return dict(kind='timelearner_recorded_n4_matrix_analysis', schema_version=1,
+        if specified:
+            rows[-1].update(diagnostic_threshold=row['diagnostic_threshold'],
+                            threshold_protocol='predeclared_same_matrix_diagnostic')
+    return dict(kind='timelearner_recorded_n4_matrix_analysis',
+        schema_version=2 if any('diagnostic_threshold' in r for r in request['cases']) else 1,
         original_job_id=request['job_id'], models=rows, trials=8*len(rows), diagnostic_only=True,
         training_completed=False, native_execution_attested=False, scientific_verdict=None)
 
@@ -212,8 +224,10 @@ def report_matrix(directory, controller, runtime_manifest, output):
     (output/'manifest.json').write_text(json.dumps(manifest, indent=2, allow_nan=False)+'\n', encoding='utf-8')
     links = ''.join('<li><a href="'+html.escape(r['name'])+'/index.html">'+html.escape(r['name'])+'</a></li>'
                     for r in reports)
+    protocol = ('predeclared same-matrix diagnostic thresholds' if analysis['schema_version'] == 2
+                else 'inherited fixed thresholds')
     (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><h1>Recorded N4 diagnostic responses</h1>'
-        '<p>Stopped models; inherited fixed thresholds. All eight patterns per model, actual input overlays. '
+        '<p>Stopped models; '+protocol+'. All eight patterns per model, actual input overlays. '
         'No training convergence, threshold selection or independent scientific verdict.</p><ul>'+links+'</ul>', encoding='utf-8')
     return manifest
 

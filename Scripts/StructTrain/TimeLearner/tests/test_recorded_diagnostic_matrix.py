@@ -142,6 +142,14 @@ class RecordedDiagnosticMatrixPrimaryTest(unittest.TestCase):
 
 
 class RecordedDiagnosticMatrixDeclarationTest(unittest.TestCase):
+    def test_diagnostic_threshold_is_an_explicit_finite_case_factor(self):
+        for threshold in (0., .054353792695896797, -1.):
+            value=diagnostic_request();value['cases'][0]['diagnostic_threshold']=threshold
+            with self.subTest(threshold=threshold):self.assertEqual(validate_request(value),value)
+        for invalid in (True,None,float('nan'),float('inf'),'0.1'):
+            value=diagnostic_request();value['cases'][0]['diagnostic_threshold']=invalid
+            with self.subTest(invalid=invalid),self.assertRaises(EvidenceError):validate_request(value)
+
     def test_explicit_diagnostic_request_keeps_two_finite_children(self):
         value = diagnostic_request();self.assertEqual(validate_request(value), value)
         self.assertEqual([r['name'] for r in value['cases']], ['classic', 'branch'])

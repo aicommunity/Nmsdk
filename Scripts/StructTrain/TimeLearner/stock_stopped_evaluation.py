@@ -10,7 +10,7 @@ from pathlib import Path
 import shutil
 
 from .n1_protocol_robustness import _inventory, _signed, _write
-from .native_evidence import load, require
+from .native_evidence import load, number, require
 from .native_pipeline_worker import audit_run_manifest, run_job, validate_job
 from .phasea_matrix import from_git, trial_design
 from .process_runner import verify_runtime
@@ -18,7 +18,7 @@ from .stock_threshold_study import audit as audit_source, audit_final_stock
 from .stopped_evidence import load_case
 
 
-def job_for(row, package, matrix):
+def job_for(row, package, matrix, *, diagnostic_threshold=None):
     """Use the complete stopped package, not an overlay on an initial template."""
     require(package['kind'] == 'timelearner_stopped_state' and
             package['state_kind'] == 'diagnostic' and package['certificate'] is None and
@@ -30,7 +30,7 @@ def job_for(row, package, matrix):
             'stock_diagnostic_source_factor_changed')
     run_id = row['name']+'/stopped-phasea-diagnostic'
     trials = trial_design(matrix, model['initial_isi'], run_id, duration=2., rotations=1)
-    job = _signed({'kind': 'timelearner_native_diagnostic_evaluation_job', 'schema_version': 1,
+    body = {'kind': 'timelearner_native_diagnostic_evaluation_job', 'schema_version': 1,
         'owner_class': 'NNeuronTimeLearner'+('Branch' if model['branch'] else ''),
         'implementation_id': package['implementation_id'], 'source_stopped': deepcopy(package),
         'conversion_spec': {'schema_version': 1, 'mode': 'identity', 'resistance_bounds': []},
@@ -38,8 +38,10 @@ def job_for(row, package, matrix):
         'run_id': run_id, 'coverage_policy': 'per_trial_windows',
         'criterion': {'id': 'post_anchor_target_whole_window_foil_v1', 'anchor': 'onset',
                       'begin_offset': 0., 'end_offset': None, 'reject_target_outside_window': True},
-        'trials': trials})
-    return job
+        'trials': trials}
+    if diagnostic_threshold is not None:
+        body.update(schema_version=2, diagnostic_threshold=number(diagnostic_threshold))
+    return _signed(body)
 
 
 def prepare(source, bin_repository, output):
