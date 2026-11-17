@@ -16,6 +16,45 @@
 namespace {
 using namespace NMSDK::TimeLearner;
 using namespace NmsdkBoundedTrainingTest;
+
+TEST(BoundedTrainingBudgetBoundary, ExhaustedProbesCannotStageAnotherUnmeasurableCandidate)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
+    {
+        SCOPED_TRACE(::testing::Message()<<int(routing)<<'/'<<int(normalization));
+        const auto protocol=Protocol(2,routing);
+        auto cfg=Configuration(2,normalization);cfg.maximumProbes=2;
+        cfg.bounds={{1,3,1,1,10.,10.},{1,1,1,1,10.,10.}};
+        const std::vector<InputParameters> initial{{1,1,10.},{1,1,10.}};
+        const bool domains=normalization==Normalization::TipResistance;
+        BoundedTrainingSession session(References(protocol),cfg,initial,domains);
+        std::size_t assessments=0;
+        DriveTraining(session,protocol,{},[&](const TrainingAction& action) {
+            ++assessments;
+            ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
+            d.baseModelRevision=action.baseModelRevision;d.geometry=action.parameters;
+            d.inputIndex=action.inputIndex;d.sourceAmplitude=1.;
+            d.previewModelRevision=action.baseModelRevision;
+            d.minimumResistance=d.maximumResistance=10.;return d;
+        });
+        // The real recorder supplied the anchor and input of the initial
+        // candidate. Its amplitude is ready, timing is outside tolerance.
+        // A fresh length is legal, but no probe remains to evaluate it.
+        ASSERT_EQ(session.Evidence().size(),1u);
+        EXPECT_TRUE(session.Evidence().front().withinAmplitude);
+        EXPECT_FALSE(session.Evidence().front().withinTiming);
+        EXPECT_EQ(session.Parameters(),initial);
+        EXPECT_EQ(session.Parameters(),session.Evidence().front().fullParameters);
+        EXPECT_EQ(assessments,domains?1u:0u);
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+        EXPECT_EQ(session.Reason(),"maximum_probes_exhausted");
+        EXPECT_FALSE(session.Certificate());
+        EXPECT_FALSE(session.NextAction());
+        EXPECT_EQ(session.Parameters(),initial);
+    }
+}
+
 TEST(BoundedTrainingN1GeometryFairness, ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode)
 {
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
