@@ -84,3 +84,14 @@ foil и условия остаются явными. Старый7/8 резул
 Полные primary/models/figures находятся во внешнем M40 archive. В Git только
 код, протокол и refs. До полной публикации, проверки и merge эта ветка
 не является приёмкой всего этапа11.
+
+Подготовка оставшихся условий Elder обнаружила отдельное ограничение
+транспорта: raw summary имеет72709345байт и превышает64MiB finite input.
+Native не запускался. Для этой роли добавлен явный qCompress transport с
+парой summary_raw_bytes/summary_raw_sha256 и raw bound128MiB. Исходное
+содержимое summary не сокращается. Общие ограничения packed input64MiB и
+суммы128MiB сохранены; framing, trailing bytes, raw size и SHA проверяются.
+Все повторные ссылки обязаны иметь одну и ту же пару source/summary и
+одинаковые raw identities. Portable audit также сверяет материализованную
+native input summary с исходным transport. Поддержка этого размера не
+является исправлением C++ model parser или доказательством сходимости.

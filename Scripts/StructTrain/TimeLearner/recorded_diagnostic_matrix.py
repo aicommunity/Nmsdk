@@ -15,7 +15,9 @@ from .native_evidence import load, load_json, number, parse_json_bytes, require
 SHA = re.compile('[0-9a-f]{64}')
 COMMIT = re.compile('[0-9a-f]{40}')
 CASE_FIELDS = {'name', 'source_name', 'summary_name', 'source_raw_bytes', 'source_raw_sha256'}
-CASE_OPTIONS = {'diagnostic_threshold', 'duration', 'reset_policy', 'maximum_source_raw_bytes'}
+CASE_OPTIONS = {'diagnostic_threshold', 'duration', 'reset_policy', 'maximum_source_raw_bytes',
+                'summary_raw_bytes', 'summary_raw_sha256'}
+SUMMARY_COMPRESSION_FIELDS = {'summary_raw_bytes', 'summary_raw_sha256'}
 
 
 def validate_declaration(request):
@@ -33,6 +35,11 @@ def validate_declaration(request):
             for r in cases) and len({r['name'] for r in cases}) == len(cases), 'native_data_diagnostic_cases')
     bindings = {};summary_sources = {}
     for row in cases:
+        compression = SUMMARY_COMPRESSION_FIELDS & set(row)
+        require(not compression or (compression == SUMMARY_COMPRESSION_FIELDS and
+                type(row['summary_raw_bytes']) is int and 0 < row['summary_raw_bytes'] <= 128*1024**2 and
+                type(row['summary_raw_sha256']) is str and SHA.fullmatch(row['summary_raw_sha256'])),
+                'native_data_diagnostic_summary_binding')
         if 'diagnostic_threshold' in row:
             number(row['diagnostic_threshold'])
         maximum = row.get('maximum_source_raw_bytes', 256*1024**2)
@@ -46,7 +53,8 @@ def validate_declaration(request):
         source, summary = row['source_name'], row['summary_name']
         require(type(source) is str and source in names and type(summary) is str and summary in names,
                 'native_data_diagnostic_input_roles')
-        binding = (summary, row['source_raw_bytes'], row['source_raw_sha256'])
+        binding = (summary, row['source_raw_bytes'], row['source_raw_sha256'],
+                   row.get('summary_raw_bytes'), row.get('summary_raw_sha256'))
         require((source not in bindings or bindings[source] == binding) and
                 (summary not in summary_sources or summary_sources[summary] == source),
                 'native_data_diagnostic_input_roles')
@@ -54,6 +62,17 @@ def validate_declaration(request):
     roles = [*used, *bindings, *summary_sources]
     require(len(roles) == len(set(roles)) and set(roles) == names,
             'native_data_diagnostic_input_roles')
+
+
+def read_summary(staged, row):
+    """Explicitly framed summary transport; finite native input caps stay intact."""
+    path = Path(staged)/row['summary_name']
+    if SUMMARY_COMPRESSION_FIELDS <= set(row):
+        from .qt_json import read_qcompress_bytes
+        return read_qcompress_bytes(path, expected_bytes=row['summary_raw_bytes'],
+            expected_sha256=row['summary_raw_sha256'], maximum_bytes=128*1024**2)
+    from .collector_provenance import _frozen
+    return _frozen(path, 64*1024**2)[0]
 
 
 def run_case(request, row, runtime_path, output):
@@ -71,7 +90,7 @@ def run_case(request, row, runtime_path, output):
     raw = read_qcompress_bytes(staged/row['source_name'], expected_bytes=row['source_raw_bytes'],
                               expected_sha256=row['source_raw_sha256'],
                               maximum_bytes=row.get('maximum_source_raw_bytes', 256*1024**2))
-    package = parse_json_bytes(raw);summary_raw = (staged/row['summary_name']).read_bytes()
+    package = parse_json_bytes(raw);summary_raw = read_summary(staged, row)
     summary = parse_json_bytes(summary_raw)
     require(type(package) is dict and package.get('schema_version') == 7 and
             package.get('kind') == 'timelearner_stopped_state' and package.get('certificate') is None,
@@ -193,6 +212,8 @@ def audit_matrix(directory, controller, runtime_manifest):
         actual = frozen_digest(source, row.get('maximum_source_raw_bytes', 256*1024**2))
         require(actual['bytes'] == row['source_raw_bytes'] and actual['sha256'] == row['source_raw_sha256'],
                 'recorded_matrix_source_substitution')
+        require((root/'input/source/train_stopped_summary.json').read_bytes() == read_summary(staged, row),
+                'recorded_matrix_summary_substitution')
         job = load(root/'input/job.json');package = job['source_stopped'];model = package['configuration']['model']
         run_id = row['name']+'/stopped-phasea-diagnostic'
         require(job['trials'] == trial_design(matrix, model['initial_isi'], run_id,

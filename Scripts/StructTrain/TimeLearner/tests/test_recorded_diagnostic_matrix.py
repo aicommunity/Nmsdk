@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 from ..native_data_checks import validate_request
 from .test_native_data_checks import declaration
-from ..recorded_diagnostic_matrix import audit_matrix, report_matrix
+from ..recorded_diagnostic_matrix import audit_matrix, report_matrix, read_summary
 from ..native_evidence import EvidenceError, load
 
 
@@ -142,6 +142,37 @@ class RecordedDiagnosticMatrixPrimaryTest(unittest.TestCase):
 
 
 class RecordedDiagnosticMatrixDeclarationTest(unittest.TestCase):
+    def test_compressed_summary_requires_complete_consistent_bounded_raw_identity(self):
+        value=self.repeated_model()
+        for row in value['cases']:
+            row.update(summary_raw_bytes=72709345,summary_raw_sha256='e'*64)
+        self.assertEqual(validate_request(value),value)
+        for change in ({'summary_raw_bytes':True},{'summary_raw_bytes':0},
+                       {'summary_raw_bytes':128*1024**2+1},{'summary_raw_sha256':'bad'},
+                       {'summary_raw_bytes':12}):
+            changed=deepcopy(value);changed['cases'][1].update(change)
+            with self.subTest(change=change),self.assertRaises(EvidenceError):validate_request(changed)
+        for field in ('summary_raw_bytes','summary_raw_sha256'):
+            changed=deepcopy(value);changed['cases'][0].pop(field)
+            with self.subTest(missing=field),self.assertRaises(EvidenceError):validate_request(changed)
+
+    def test_summary_transport_keeps_exact_bytes_and_rejects_corruption(self):
+        import zlib
+        raw=b'{"retained_history":"unchanged"}\n'
+        row=dict(summary_name='summary.qz',summary_raw_bytes=len(raw),
+                 summary_raw_sha256=hashlib.sha256(raw).hexdigest())
+        with tempfile.TemporaryDirectory() as temporary:
+            folder=Path(temporary);path=folder/row['summary_name']
+            packed=len(raw).to_bytes(4,'big')+zlib.compress(raw);path.write_bytes(packed)
+            self.assertEqual(read_summary(folder,row),raw)
+            for invalid in (packed[:-1],packed+b'garbage',(len(raw)+1).to_bytes(4,'big')+packed[4:]):
+                path.write_bytes(invalid)
+                with self.subTest(packed_bytes=len(invalid)),self.assertRaises(EvidenceError):read_summary(folder,row)
+            path.write_bytes(packed)
+            with self.assertRaises(EvidenceError):read_summary(folder,{**row,'summary_raw_sha256':'0'*64})
+            legacy=dict(summary_name='summary.json');(folder/'summary.json').write_bytes(raw)
+            self.assertEqual(read_summary(folder,legacy),raw)
+
     def repeated_model(self):
         value=diagnostic_request();base=value['cases'][0]
         value['inputs']=[r for r in value['inputs'] if not r['name'].startswith('branch')]
