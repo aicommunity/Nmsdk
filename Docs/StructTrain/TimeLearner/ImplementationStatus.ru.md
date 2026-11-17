@@ -1,7 +1,7 @@
 # Карта реализации TimeLearner
 
 Актуальная сводка: [17 ноября 2026](CurrentStatus-20261117.ru.md).
-Галерея всех 64 frozen-order проб опубликована; [квитанция](FrozenOrderTemporalGalleryPublication-20261117.archive.json).
+Галерея всех 64 frozen-order проб опубликована; [квитанция](FrozenOrderTemporalGalleryPublication-20261117.json).
 Первая редакция [описаний Classic и Branch в DOCX](AlgorithmDescriptions/README.ru.md) готова.
 Полностью принят этап 0; этапы 1–12 остаются частичными.
 Далее сохранены датированные записи развития реализации. Их состояния

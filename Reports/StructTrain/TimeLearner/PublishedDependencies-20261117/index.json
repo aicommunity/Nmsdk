@@ -1,0 +1,343 @@
+{
+  "kind": "timelearner_aggregate_receipt_dependency_index",
+  "schema_version": 1,
+  "source_commit_before_fix": "bc81b4c4bd953e310d13aad3626414d495bf8f9b",
+  "naming_contract": "Only one exact external object uses .archive.json; aggregate receipts use .json and retain their original bytes. Every nested object has a standalone strict marker below.",
+  "renamed_receipts": [
+    {
+      "old": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/publication.archive.json",
+      "new": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/publication.json",
+      "bytes": 4895,
+      "sha256": "f599f1eff0363ee2a0e28554d243df0357f2c1b18242ea5a256da60150d4f18e",
+      "receipt_bytes_unchanged": true
+    },
+    {
+      "old": "Docs/StructTrain/TimeLearner/BatchRecognitionModelAuditAcceptance-20261117.archive.json",
+      "new": "Docs/StructTrain/TimeLearner/BatchRecognitionModelAuditAcceptance-20261117.json",
+      "bytes": 3787,
+      "sha256": "d90c70607f0e2c923fc4f0173fdf858195e3e29f57b8a3d79cab9882bf41b27a",
+      "receipt_bytes_unchanged": true
+    },
+    {
+      "old": "Docs/StructTrain/TimeLearner/FrozenOrderTemporalGalleryPublication-20261117.archive.json",
+      "new": "Docs/StructTrain/TimeLearner/FrozenOrderTemporalGalleryPublication-20261117.json",
+      "bytes": 3144,
+      "sha256": "80e41b09ac9707b733443a6a90add12221572a17edf42adeeea42373ec141ede",
+      "receipt_bytes_unchanged": true
+    },
+    {
+      "old": "Docs/StructTrain/TimeLearner/FrozenOrderTemporalRenderAcceptance-20261117.archive.json",
+      "new": "Docs/StructTrain/TimeLearner/FrozenOrderTemporalRenderAcceptance-20261117.json",
+      "bytes": 3199,
+      "sha256": "468e08c52fecd8df6393afff61b3a107572928b26c1f5048e6de82e231ec83a0",
+      "receipt_bytes_unchanged": true
+    },
+    {
+      "old": "Docs/StructTrain/TimeLearner/NativeExportMemoryAcceptance-20261117.archive.json",
+      "new": "Docs/StructTrain/TimeLearner/NativeExportMemoryAcceptance-20261117.json",
+      "bytes": 14085,
+      "sha256": "533057c43ebbcd382e18a9e7f6ccd07a7ec3dd47b5ce97b57c2226e0138c9099",
+      "receipt_bytes_unchanged": true
+    }
+  ],
+  "external_dependencies": [
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/011167c0f96a0305b4911b24924f94ec0da2106cd27561404d13b45c303626d6.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/01/011167c0f96a0305b4911b24924f94ec0da2106cd27561404d13b45c303626d6",
+        "sha256": "011167c0f96a0305b4911b24924f94ec0da2106cd27561404d13b45c303626d6",
+        "bytes": 4540469
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/FrozenOrderTemporalGalleryPublication-20261117.json",
+          "json_pointer": "/provenance_primary"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/02e964efb23914e518aa35e93fc4f427d3fe1b7d2600ab5b3a4d1f9a86a10b60.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/02/02e964efb23914e518aa35e93fc4f427d3fe1b7d2600ab5b3a4d1f9a86a10b60",
+        "sha256": "02e964efb23914e518aa35e93fc4f427d3fe1b7d2600ab5b3a4d1f9a86a10b60",
+        "bytes": 847744948
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/FrozenOrderTemporalGalleryPublication-20261117.json",
+          "json_pointer": "/primary"
+        },
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/FrozenOrderTemporalRenderAcceptance-20261117.json",
+          "json_pointer": "/primary"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/100e4ec52718a68a4d001d8467daafc6523461f148b0731a4895e31a2a83337d.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/10/100e4ec52718a68a4d001d8467daafc6523461f148b0731a4895e31a2a83337d",
+        "sha256": "100e4ec52718a68a4d001d8467daafc6523461f148b0731a4895e31a2a83337d",
+        "bytes": 259445
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/publication.json",
+          "json_pointer": "/native_n2_primary/provenance_primary"
+        },
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/BatchRecognitionModelAuditAcceptance-20261117.json",
+          "json_pointer": "/provenance_primary"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/195c81cacbdda3c9170f2e1c2f080eb4fd698e482c372c0f5e746076dc143be5.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/19/195c81cacbdda3c9170f2e1c2f080eb4fd698e482c372c0f5e746076dc143be5",
+        "sha256": "195c81cacbdda3c9170f2e1c2f080eb4fd698e482c372c0f5e746076dc143be5",
+        "bytes": 93746136
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/NativeExportMemoryAcceptance-20261117.json",
+          "json_pointer": "/primary"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/219f1b3825b8b9f05bc23f31da0f9b755bf9670c0d8dda1028045c1648df01e3.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/21/219f1b3825b8b9f05bc23f31da0f9b755bf9670c0d8dda1028045c1648df01e3",
+        "sha256": "219f1b3825b8b9f05bc23f31da0f9b755bf9670c0d8dda1028045c1648df01e3",
+        "bytes": 7815
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/FrozenOrderTemporalGalleryPublication-20261117.json",
+          "json_pointer": "/representative_visual_review"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/29addb1cd55adb027346847278826ff095db132706089d30e74a7d6498c8acb2.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/29/29addb1cd55adb027346847278826ff095db132706089d30e74a7d6498c8acb2",
+        "sha256": "29addb1cd55adb027346847278826ff095db132706089d30e74a7d6498c8acb2",
+        "bytes": 321619
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/NativeExportMemoryAcceptance-20261117.json",
+          "json_pointer": "/actual_317MB_primary_dependency/bundle_manifest"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/64/64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768",
+        "sha256": "64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768",
+        "bytes": 58742968
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/BatchRecognitionModelAuditAcceptance-20261117.json",
+          "json_pointer": "/large_original_primary_dependency/primary"
+        },
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/NativeExportMemoryAcceptance-20261117.json",
+          "json_pointer": "/actual_317MB_primary_dependency/primary"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/81c93367aef39ebeae23ff41537654a7250bca91a441647aceb4b3cea92bcc28.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/81/81c93367aef39ebeae23ff41537654a7250bca91a441647aceb4b3cea92bcc28",
+        "sha256": "81c93367aef39ebeae23ff41537654a7250bca91a441647aceb4b3cea92bcc28",
+        "bytes": 234681
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/publication.json",
+          "json_pointer": "/documents/1/primary"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/858354233267b5ef6b5b6079249ea4f4ca0327ef4d4349ecf371afa81300ac04.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/85/858354233267b5ef6b5b6079249ea4f4ca0327ef4d4349ecf371afa81300ac04",
+        "sha256": "858354233267b5ef6b5b6079249ea4f4ca0327ef4d4349ecf371afa81300ac04",
+        "bytes": 2968992
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/publication.json",
+          "json_pointer": "/native_n2_primary/primary"
+        },
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/BatchRecognitionModelAuditAcceptance-20261117.json",
+          "json_pointer": "/primary"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/92bab30e1492a6c9cf199eb7f0f939bd30452bef83e2a450ef519cd55d619fdb.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/92/92bab30e1492a6c9cf199eb7f0f939bd30452bef83e2a450ef519cd55d619fdb",
+        "sha256": "92bab30e1492a6c9cf199eb7f0f939bd30452bef83e2a450ef519cd55d619fdb",
+        "bytes": 196410
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/publication.json",
+          "json_pointer": "/native_n2_primary/bundle_manifest"
+        },
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/BatchRecognitionModelAuditAcceptance-20261117.json",
+          "json_pointer": "/bundle_manifest"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/93282b8efe85e7018745edebb400940df43e35984a627ba127a47495fcf9c0a6.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/93/93282b8efe85e7018745edebb400940df43e35984a627ba127a47495fcf9c0a6",
+        "sha256": "93282b8efe85e7018745edebb400940df43e35984a627ba127a47495fcf9c0a6",
+        "bytes": 482018
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/publication.json",
+          "json_pointer": "/complete_package"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/b4b0881256b4046b164f820f322e781d614408c3c9224fc0fdc5ccb664dc7ca3.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b4/b4b0881256b4046b164f820f322e781d614408c3c9224fc0fdc5ccb664dc7ca3",
+        "sha256": "b4b0881256b4046b164f820f322e781d614408c3c9224fc0fdc5ccb664dc7ca3",
+        "bytes": 4533
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/publication.json",
+          "json_pointer": "/visual_acceptance"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/baa771269004eac631b69658155dc5764cdefc152387e59f6f30d48b741ff420.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ba/baa771269004eac631b69658155dc5764cdefc152387e59f6f30d48b741ff420",
+        "sha256": "baa771269004eac631b69658155dc5764cdefc152387e59f6f30d48b741ff420",
+        "bytes": 5612188
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/NativeExportMemoryAcceptance-20261117.json",
+          "json_pointer": "/provenance_primary"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/c4911d10b92a8c465176692ffb2df6e7a714110b74b4d5bfde8cf3f845957d6c.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c4/c4911d10b92a8c465176692ffb2df6e7a714110b74b4d5bfde8cf3f845957d6c",
+        "sha256": "c4911d10b92a8c465176692ffb2df6e7a714110b74b4d5bfde8cf3f845957d6c",
+        "bytes": 95850
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/NativeExportMemoryAcceptance-20261117.json",
+          "json_pointer": "/bundle_manifest"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/d68919573b8ba74b614347360f5a0c6c1f27635599dc57fd88dc7ab9853951bf.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/d6/d68919573b8ba74b614347360f5a0c6c1f27635599dc57fd88dc7ab9853951bf",
+        "sha256": "d68919573b8ba74b614347360f5a0c6c1f27635599dc57fd88dc7ab9853951bf",
+        "bytes": 7012327
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/FrozenOrderTemporalGalleryPublication-20261117.json",
+          "json_pointer": "/bundle_manifest"
+        },
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/FrozenOrderTemporalRenderAcceptance-20261117.json",
+          "json_pointer": "/bundle_manifest"
+        }
+      ]
+    },
+    {
+      "marker": "Reports/StructTrain/TimeLearner/PublishedDependencies-20261117/f29075bcfa27c78b6a1eed2ba11bed6c67f962baf22c76fc6757d8395e8f153e.archive.json",
+      "reference": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f2/f29075bcfa27c78b6a1eed2ba11bed6c67f962baf22c76fc6757d8395e8f153e",
+        "sha256": "f29075bcfa27c78b6a1eed2ba11bed6c67f962baf22c76fc6757d8395e8f153e",
+        "bytes": 232649
+      },
+      "occurrences": [
+        {
+          "receipt": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/publication.json",
+          "json_pointer": "/documents/0/primary"
+        }
+      ]
+    }
+  ],
+  "scientific_measurements_changed": false,
+  "cpp_or_python_algorithm_changed": false
+}
