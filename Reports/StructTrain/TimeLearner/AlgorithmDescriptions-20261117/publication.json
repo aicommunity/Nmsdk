@@ -1,0 +1,85 @@
+{
+  "kind": "timelearner_living_algorithm_docx_publication",
+  "schema_version": 1,
+  "edition": "2026-11-17-v2",
+  "working_criterion": {
+    "TP_minimum": 1,
+    "TN_minimum": 2
+  },
+  "scope": "Maintained N0/N1 descriptions and seven separately scoped examples. Historical legacy normalizer remains unresolved. New unvalidated timing-neighbourhood candidate excluded.",
+  "documents": [
+    {
+      "topology": "classic",
+      "file": "TimeLearnerClassicAlgorithms.ru.docx",
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/16/164f1aa57e907f53c856513d9568acd20b427253663f9ce972fc3845120601d8",
+        "sha256": "164f1aa57e907f53c856513d9568acd20b427253663f9ce972fc3845120601d8",
+        "bytes": 314656
+      },
+      "pages": 14,
+      "equation_format": "native_OMML",
+      "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-17/algorithm-descriptions-v2/TimeLearnerClassicAlgorithms.ru.docx",
+      "smb": "//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-17/algorithm-descriptions-v2/TimeLearnerClassicAlgorithms.ru.docx"
+    },
+    {
+      "topology": "branch",
+      "file": "TimeLearnerBranchAlgorithms.ru.docx",
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/24/244445e9d8461aa792622c8e8051ab76f0a3f3a828ceb4a571cbc7be4a920858",
+        "sha256": "244445e9d8461aa792622c8e8051ab76f0a3f3a828ceb4a571cbc7be4a920858",
+        "bytes": 238188
+      },
+      "pages": 13,
+      "equation_format": "native_OMML",
+      "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-17/algorithm-descriptions-v2/TimeLearnerBranchAlgorithms.ru.docx",
+      "smb": "//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-17/algorithm-descriptions-v2/TimeLearnerBranchAlgorithms.ru.docx"
+    }
+  ],
+  "source_inputs": {
+    "authoring-spec.json": "c1fcb3fa7efd2e8de779d1e8e0d5aa9e6e43219431d154959ffc7245dfeaf60a",
+    "content.json": "e13cb02afed2d8551b0716cd3b9da0ffe7a202bd900ba2c2aaaa205b8b9d268e",
+    "evidence-register.json": "e27ecc9a85b889daf90dc17bcb0d89ebe9f7e4bb8580c368d585fd475ba15fdf",
+    "next-edition.json": "c033fe62e4148d786c36b2ec87e23c1f759a6ef4ceefa2b17d522335b1dfda07",
+    "publication.json": "f599f1eff0363ee2a0e28554d243df0357f2c1b18242ea5a256da60150d4f18e"
+  },
+  "source_root_commit": "3b94c5f62f21d5496dd5a4ea0e9e196e5952ba87",
+  "builder_sha256": "bad5bc3530d5724257c754ccbe7c6b692a81d55754d1dfb6df1dcc79f535797f",
+  "complete_package": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/24/24be6a10b889ac06b8c638a6ef87fe5c19703ee559465bbd21bc356160cedc97",
+    "sha256": "24be6a10b889ac06b8c638a6ef87fe5c19703ee559465bbd21bc356160cedc97",
+    "bytes": 8194891
+  },
+  "visual_acceptance": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/db/dbe822aa1a5169953d053cdd2327b3f489d39201c42ce11a329cf9ea5f734fa9",
+    "sha256": "dbe822aa1a5169953d053cdd2327b3f489d39201c42ce11a329cf9ea5f734fa9",
+    "bytes": 7952
+  },
+  "qualifying_example_ids": [
+    "branch-n1-native-n2",
+    "classic-n1-native-n2",
+    "classic-n0-stock-20261114",
+    "branch-n1-coupled-stock-20261114",
+    "branch-n1-fast-terminal7200",
+    "branch-n1-fast-terminal21600",
+    "classic-phasea-saved6of8"
+  ],
+  "all_pages_visually_reviewed": true,
+  "total_pages": 27,
+  "generated_binary_in_root_git": false,
+  "independent_scientific_reanalysis_performed": false,
+  "whole_plan_complete": false,
+  "experiments_priority": true,
+  "catalog_relative": "experiments/2026-11-17/algorithm-descriptions/v2.json"
+}
