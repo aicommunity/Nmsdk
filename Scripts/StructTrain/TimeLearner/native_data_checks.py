@@ -1,6 +1,7 @@
-"""Finite DATA-dependent checks of an immutable, already-built native runtime.
+"""Finite DATA-bound jobs using an immutable, already-built native runtime.
 
 Use the existing native ownership loop, child-intent recovery and schema5 gate.
+Schema3 runs declared production cold Train jobs through the same finite owner.
 This command never builds, changes sources or grants a scientific verdict.
 """
 import argparse
@@ -49,7 +50,8 @@ def validate_request(value):
         'inputs', 'cases', 'limits', 'disk'}
     require(type(value) is dict and
         ((value.get('schema_version') == 1 and set(value) == fields) or
-         (value.get('schema_version') == 2 and set(value) == fields | {'operation', 'matrix'})) and
+         (value.get('schema_version') == 2 and set(value) == fields | {'operation', 'matrix'}) or
+         (value.get('schema_version') == 3 and set(value) == fields | {'operation'})) and
         value['kind'] == 'timelearner_native_data_checks' and type(value['schema_version']) is int,
         'native_data_request_schema')
     require(type(value['job_id']) is str and NAME.fullmatch(value['job_id']) and
@@ -67,6 +69,9 @@ def validate_request(value):
     if value['schema_version'] == 2:
         from .recorded_diagnostic_matrix import validate_declaration
         validate_declaration(value)
+    elif value['schema_version'] == 3:
+        from .finite_train import validate_declaration
+        validate_declaration(value)
     else:
         require(type(cases) is list and 1 <= len(cases) <= 32 and all(type(r) is dict and
         set(r) == {'name', 'test_id'} and type(r['name']) is str and NAME.fullmatch(r['name']) and
@@ -80,6 +85,7 @@ def validate_request(value):
         all(type(n) is int and n > 0 for n in limits.values()), 'native_data_limits')
     validate_limits(limits['memory_bytes'], limits['tasks'], limits['maximum_wall_seconds'])
     validate_limits(limits['leaf_memory_bytes'], limits['leaf_tasks'], limits['leaf_wall_seconds'])
+    validate_limits(limits['reservation_memory_bytes'], limits['tasks'], limits['maximum_wall_seconds'])
     require(limits['maximum_wall_seconds'] >= len(cases)*limits['leaf_wall_seconds']+60 and
         limits['reservation_memory_bytes'] >= limits['memory_bytes']+limits['leaf_memory_bytes'],
         'native_data_aggregate_budget')
@@ -145,8 +151,13 @@ def run(request_path):
     runtime = _bound_runtime(request)
     declared = resources(request, runtime, request_path)
     capture_inputs(request['inputs'], output)  # Validate all bounded bytes before any launch.
+    if request['schema_version'] == 3:
+        from .finite_train import preflight_jobs
+        preflight_jobs(request)  # Validate actual signed Train JSON before creating any attempt.
     registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
     require(not registry.managed_units, 'native_data_uses_finite_native_controller')
+    require(request['schema_version'] != 3 or registry.capacity is not None,
+            'finite_train_requires_quantity_host_registry')
     leases = registry.inspect()['leases']
     require(not any(r['job_id'] == request['job_id'] for r in leases), 'native_data_attempt_already_used')
     for old in [s for r in leases if r['state'] == 'held' for s in r['resources']]:
@@ -169,8 +180,9 @@ def run(request_path):
         'compiler': file_record(Path('/usr/bin/c++')), 'resolved_libraries': resolved_libraries(Path(sys.executable)),
         'loaded_process_files': None, 'loader_environment': {k: os.environ[k] for k in
             ('LD_LIBRARY_PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM') if k in os.environ},
-        'build_flags': {'role': 'Python DATA check controller; no build or scientific claim',
-                        'tool_commit': request['tool_commit'], 'request_sha256': _hash(raw)}}
+        'build_flags': {'role': 'Python finite native controller; no build or scientific claim',
+                        'tool_commit': request['tool_commit'], 'request_sha256': _hash(raw),
+                        'operation': request.get('operation', 'native-test-gate')}}
     outer['runtime_identity'] = runtime_content_identity(outer)
     outer['runtime_fingerprint'] = digest_json(outer['runtime_identity'])
     _write(controller/'runtime.json', outer)
@@ -211,6 +223,8 @@ def worker(request_path):
         'native_data_worker_not_bound_main')
     require(not output.exists(), 'native_data_output_already_exists');output.mkdir()
     registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
+    require(request['schema_version'] != 3 or registry.capacity is not None,
+            'finite_train_requires_quantity_host_registry')
     token = None;stop = threading.Event();errors = [];thread = None;passed = False
     try:
         runtime = _bound_runtime(request)
@@ -231,7 +245,7 @@ def worker(request_path):
         before = _source_snapshot(ROOT, request['tool_commit']);_write(output/'tool-before.json', before)
         source_before = source_closure(Path(request['source']['path']));_write(output/'source-before.json', source_before)
         captured = None
-        if request['schema_version'] == 2:
+        if request['schema_version'] in (2, 3):
             from .native_gate_inputs import stage_inputs
             captured = capture_inputs(request['inputs'], output)
             stage_inputs(captured, output)
@@ -241,6 +255,11 @@ def worker(request_path):
             _bound_runtime(request)
             if request['schema_version'] == 2:
                 from .recorded_diagnostic_matrix import run_case
+                result = run_case(request, row, request['runtime_manifest']['path'], output)
+                results.append(result);_write(output/(row['name']+'-result.json'), result)
+                continue
+            if request['schema_version'] == 3:
+                from .finite_train import run_case
                 result = run_case(request, row, request['runtime_manifest']['path'], output)
                 results.append(result);_write(output/(row['name']+'-result.json'), result)
                 continue

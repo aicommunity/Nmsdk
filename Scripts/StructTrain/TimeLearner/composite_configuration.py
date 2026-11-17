@@ -119,6 +119,11 @@ def project_composite_configuration(configuration):
                 'invalid_composite_declared_window')
     require(number(configuration['maximum_model_seconds']) > 0 and number(configuration['maximum_wall_seconds']) > 0,
             'invalid_composite_attempt_time_budget')
+    tolerances = configuration['search']['tolerances']
+    _keys(tolerances, {'amplitude_absolute', 'amplitude_relative', 'sync'},
+          'unknown_composite_search_tolerance_fields')
+    require(all(number(value) >= 0 for value in tolerances.values()),
+            'negative_composite_search_tolerance')
     validate_composite_measurement(configuration['composite_measurement'], inputs=len(inputs), frequency=frequency,
                                    maximum_samples=_count(configuration['maximum_samples']))
     projected = deepcopy(configuration)

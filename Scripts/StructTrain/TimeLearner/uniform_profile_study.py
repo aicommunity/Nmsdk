@@ -91,7 +91,8 @@ def declare_case(original, archive, variant, reference_frames=None, *, run_label
     return result
 
 
-def _condition(job,initial,runtime,*,native_memory_bytes=4*1024**3,native_tasks=64):
+def _condition(job,initial,runtime,*,native_memory_bytes=4*1024**3,native_tasks=64,
+               process_wall_seconds=None):
     c=deepcopy(job['configuration']);c.pop('run_id')
     code={k:v['head'] for k,v in runtime['source_closure'].items()}
     payloads=dict(
@@ -108,6 +109,11 @@ def _condition(job,initial,runtime,*,native_memory_bytes=4*1024**3,native_tasks=
                               maximum_wall_seconds=c['maximum_wall_seconds'],
                               native_memory_bytes=native_memory_bytes,native_tasks=native_tasks),
         randomness_spec=dict(declared_random_factors=[],cold_runs_per_condition=1))
+    if process_wall_seconds is not None:
+        require(type(process_wall_seconds) in (int,float) and
+                math.isfinite(process_wall_seconds) and process_wall_seconds>0,
+                'uniform_study_invalid_native_wall')
+        payloads['execution_policy']['native_maximum_wall_seconds']=process_wall_seconds
     artifacts={role:artifact(role,payloads[role]) for role in CONDITION_ROLES}
     condition=ConditionSpec(controller_version=2,amplitude_goal='captured_per_input',
                            **{role:a['sha256'] for role,a in artifacts.items()})
