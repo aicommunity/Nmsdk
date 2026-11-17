@@ -58,3 +58,14 @@ model export должен отделять физический graph/storage/da
 и проверяемую ссылку на доказательства в M40 archive. Удаление полей из
 старого пакета или ручной overlay не заменяют этот экспорт. Этот пункт
 исходного плана остаётся открытым.
+
+## Зафиксированная серверная подготовка
+
+Root `db483e081732e04620807d870d126b0b98b49a48`, Pulse
+`3b51b81495197a3871504867474514657871cc38` доставлены через Git в отдельный
+M40 `source-native-json-byte-a1`. Для малого production kernel4 созданы
+controls `3cb65bd702c0005e49a5a84f50d4a603603ae914`, job
+`s05-native-json-byte-kernel-m40-a1`. Source, suite, compiler и Git gtest
+объявлены отдельно; preflight не выполнял тесты.
+[Квитанция подготовки](../../../Reports/StructTrain/TimeLearner/NativeJsonByteSource-20261117/kernel-preparation.json).
+Запуск ждёт закрытия cold job и свободного slot, не изменяет его runtime.
