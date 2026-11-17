@@ -81,6 +81,13 @@ Canonical digest обнаруживает изменение сохранённ�
 Новый transport case проверяет только lossless загрузку полного source_state;
 он сам не доказывает корректность физической модели.
 
+[Инвентарь следующего native gate](ValidationPlans/PhysicalModelData-20261118/INVENTORY.json)
+сохраняет прежние218 Windows cases и добавляет4 parser +4 model DATA +1 source
+role: всего227, для Linux228 с исходным symlink case. ID сверены с12 файлами
+Root `d55a32cc7b47fb848a9d09ee443baa1a04db8711`, Pulse
+`c54d9c0a65ac6eadeccfe1793672b7a9472ea559`; hashes относятся к Git blob bytes.
+Это статический inventory, не выполненный gate и не готовое задание worker.
+
 ## Что требуется до приёмки
 
 - Сборка реального Console/PulseLib и native cases на разрешённом worker;
