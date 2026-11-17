@@ -9,8 +9,8 @@
 namespace {
 QJsonObject SignJobSource(QJsonObject value)
 {value.remove("sha256");value["sha256"]=NmsdkTools::CanonicalModelDataSha256(value);return value;}
-class NativeJobSourceTransport:public ::testing::Test {
-protected:
+class NativeJobSourceFixture {
+public:
     QTemporaryDir directory;
     QJsonObject package,job,envelope;
     QString path;
@@ -19,7 +19,7 @@ protected:
         QFile file(directory.filePath(name));ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::Truncate));
         ASSERT_EQ(file.write(bytes),bytes.size());ASSERT_TRUE(file.flush());
     }
-    void SetUp() override
+    void SetUp()
     {
         ASSERT_TRUE(directory.isValid());ASSERT_TRUE(QDir(directory.path()).mkdir("source"));
         package=SignJobSource({{"kind","transport_only_test"},
@@ -41,31 +41,35 @@ protected:
     }
 };
 
-TEST_F(NativeJobSourceTransport,LegacyJobAndCompleteFileSourceResolveToTheSameJob)
+TEST(NativeJobSourceTransport,LegacyJobAndCompleteFileSourceResolveToTheSameJob)
 {
-    EXPECT_EQ(Read(job),job);EXPECT_EQ(Read(envelope),job);
-    EXPECT_EQ(Read(envelope)["source_stopped"].toObject()["history"],package["history"]);
+    NativeJobSourceFixture f;f.SetUp();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    EXPECT_EQ(f.Read(f.job),f.job);EXPECT_EQ(f.Read(f.envelope),f.job);
+    EXPECT_EQ(f.Read(f.envelope)["source_stopped"].toObject()["history"],f.package["history"]);
 }
-TEST_F(NativeJobSourceTransport,AllThreeSourceRolesKeepTheOriginalResolvedDigest)
+TEST(NativeJobSourceTransport,AllThreeSourceRolesKeepTheOriginalResolvedDigest)
 {
+    NativeJobSourceFixture f;f.SetUp();ASSERT_FALSE(::testing::Test::HasFatalFailure());
     for(const auto& role:std::vector<std::pair<QString,QString>>{
         {"timelearner_native_diagnostic_evaluation_job","source_stopped"},
         {"timelearner_native_recognition_export_job","source_solo"},
         {"timelearner_native_evaluation_job","source_recognition"}})
     {
-        auto full=job;full.remove("source_stopped");full["kind"]=role.first;full[role.second]=package;full=SignJobSource(full);
-        auto projected=full;projected.remove(role.second);auto changed=envelope;changed["job"]=projected;
+        auto full=f.job;full.remove("source_stopped");full["kind"]=role.first;full[role.second]=f.package;full=SignJobSource(full);
+        auto projected=full;projected.remove(role.second);auto changed=f.envelope;changed["job"]=projected;
         auto source=changed["source"].toObject();source["field"]=role.second;changed["source"]=source;
-        EXPECT_EQ(Read(changed),full);
+        EXPECT_EQ(f.Read(changed),full);
     }
 }
-TEST_F(NativeJobSourceTransport,ChangedSourceBytesCannotBeHiddenByEquivalentJsonOrNewEnvelopeSignature)
+TEST(NativeJobSourceTransport,ChangedSourceBytesCannotBeHiddenByEquivalentJsonOrNewEnvelopeSignature)
 {
-    Write("source/state.json",QJsonDocument(package).toJson(QJsonDocument::Compact));
-    EXPECT_THROW(Read(envelope),std::invalid_argument);
+    NativeJobSourceFixture f;f.SetUp();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    f.Write("source/state.json",QJsonDocument(f.package).toJson(QJsonDocument::Compact));
+    EXPECT_THROW(f.Read(f.envelope),std::invalid_argument);
 }
-TEST_F(NativeJobSourceTransport,ScopeRoleSizeAndPackageDigestFailuresAreRejected)
+TEST(NativeJobSourceTransport,ScopeRoleSizeAndPackageDigestFailuresAreRejected)
 {
+    NativeJobSourceFixture f;f.SetUp();ASSERT_FALSE(::testing::Test::HasFatalFailure());
     const std::vector<std::pair<QString,QJsonValue>> changes{
         {"path","../state.json"},{"path","/absolute/state.json"},{"path","source/../source/state.json"},
         {"field","source_solo"},{"bytes",0},{"bytes",true},
@@ -73,27 +77,30 @@ TEST_F(NativeJobSourceTransport,ScopeRoleSizeAndPackageDigestFailuresAreRejected
         {"sha256",QString(64,'0')},{"package_sha256",QString(64,'0')}};
     for(const auto& change:changes)
     {
-        auto changed=envelope;auto source=changed["source"].toObject();source[change.first]=change.second;changed["source"]=source;
-        EXPECT_THROW(Read(changed),std::invalid_argument)<<change.first.toStdString();
+        auto changed=f.envelope;auto source=changed["source"].toObject();source[change.first]=change.second;changed["source"]=source;
+        EXPECT_THROW(f.Read(changed),std::invalid_argument)<<change.first.toStdString();
     }
 }
-TEST_F(NativeJobSourceTransport,ChangedProjectionCannotMintTheOriginalJob)
+TEST(NativeJobSourceTransport,ChangedProjectionCannotMintTheOriginalJob)
 {
-    auto changed=envelope;auto projected=changed["job"].toObject();projected["implementation_id"]="changed";changed["job"]=projected;
-    EXPECT_THROW(Read(changed),std::invalid_argument);
+    NativeJobSourceFixture f;f.SetUp();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    auto changed=f.envelope;auto projected=changed["job"].toObject();projected["implementation_id"]="changed";changed["job"]=projected;
+    EXPECT_THROW(f.Read(changed),std::invalid_argument);
 }
-TEST_F(NativeJobSourceTransport,UnknownEnvelopeFieldsAndColdImportAreRejected)
+TEST(NativeJobSourceTransport,UnknownEnvelopeFieldsAndColdImportAreRejected)
 {
-    auto changed=envelope;changed["extra"]=1;EXPECT_THROW(Read(changed),std::invalid_argument);
-    changed=envelope;auto projected=changed["job"].toObject();projected["kind"]="timelearner_native_training_job";changed["job"]=projected;
-    EXPECT_THROW(Read(changed),std::invalid_argument);
+    NativeJobSourceFixture f;f.SetUp();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    auto changed=f.envelope;changed["extra"]=1;EXPECT_THROW(f.Read(changed),std::invalid_argument);
+    changed=f.envelope;auto projected=changed["job"].toObject();projected["kind"]="timelearner_native_training_job";changed["job"]=projected;
+    EXPECT_THROW(f.Read(changed),std::invalid_argument);
 }
 #ifndef Q_OS_WIN
-TEST_F(NativeJobSourceTransport,SymlinkSourceCannotReplaceTheOwnedSnapshot)
+TEST(NativeJobSourceTransport,SymlinkSourceCannotReplaceTheOwnedSnapshot)
 {
-    ASSERT_TRUE(QFile::link(directory.filePath("source/state.json"),directory.filePath("source/alias.json")));
-    auto changed=envelope;auto source=changed["source"].toObject();source["path"]="source/alias.json";changed["source"]=source;
-    EXPECT_THROW(Read(changed),std::invalid_argument);
+    NativeJobSourceFixture f;f.SetUp();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    ASSERT_TRUE(QFile::link(f.directory.filePath("source/state.json"),f.directory.filePath("source/alias.json")));
+    auto changed=f.envelope;auto source=changed["source"].toObject();source["path"]="source/alias.json";changed["source"]=source;
+    EXPECT_THROW(f.Read(changed),std::invalid_argument);
 }
 #endif
 }
