@@ -194,6 +194,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_NativeJson.cpp
     Test_PulseLib_SinglePulseCharacterization.cpp
     Test_PulseLib_PreparedModel.cpp
+    Test_PulseLib_PhysicalModelData.cpp
     Test_PulseLib_FinalVerification.cpp
     Test_PulseLib_BoundedTraining.cpp
     Test_PulseLib_N0Geometry.cpp

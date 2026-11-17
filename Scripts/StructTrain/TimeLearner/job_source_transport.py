@@ -15,7 +15,8 @@ KIND = 'timelearner_checked_file_source_job'
 MAXIMUM_SOURCE_BYTES = 1024*1024**2
 SOURCE_FIELDS = {'timelearner_native_diagnostic_evaluation_job':'source_stopped',
                  'timelearner_native_recognition_export_job':'source_solo',
-                 'timelearner_native_evaluation_job':'source_recognition'}
+                 'timelearner_native_evaluation_job':'source_recognition',
+                 'timelearner_native_physical_model_export_job':'source_state'}
 
 
 def _record(path):

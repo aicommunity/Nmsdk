@@ -61,6 +61,15 @@ TEST(NativeJobSourceTransport,AllThreeSourceRolesKeepTheOriginalResolvedDigest)
         EXPECT_EQ(f.Read(changed),full);
     }
 }
+TEST(NativeJobSourceTransport,PhysicalModelExportRetainsTheCompleteSourceState)
+{
+    NativeJobSourceFixture f;f.SetUp();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    auto full=f.job;full.remove("source_stopped");full["kind"]="timelearner_native_physical_model_export_job";
+    full["source_state"]=f.package;full=SignJobSource(full);
+    auto projected=full;projected.remove("source_state");auto envelope=f.envelope;envelope["job"]=projected;
+    auto source=envelope["source"].toObject();source["field"]="source_state";envelope["source"]=source;
+    EXPECT_EQ(f.Read(envelope),full);
+}
 TEST(NativeJobSourceTransport,ChangedSourceBytesCannotBeHiddenByEquivalentJsonOrNewEnvelopeSignature)
 {
     NativeJobSourceFixture f;f.SetUp();ASSERT_FALSE(::testing::Test::HasFatalFailure());

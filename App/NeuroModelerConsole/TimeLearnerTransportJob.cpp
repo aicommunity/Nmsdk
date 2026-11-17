@@ -5,6 +5,7 @@
 #include "TimeLearner/NativeCalibratedState.h"
 #include "TimeLearner/NativeRecognitionObservationValidation.h"
 #include "TimeLearner/NativeThresholdCandidate.h"
+#include "TimeLearner/NativePhysicalModelData.h"
 #include <iostream>
 #include <algorithm>
 #include <limits>
@@ -149,6 +150,39 @@ int RunTimeLearnerDiagnosticEvaluationJob(const QString& input,const QString& ou
     try{const auto job=ReadEvaluation(input,true);Require(!output.isEmpty(),"job_output_required");
         return job.ownerClass=="NNeuronTimeLearner"?Evaluate<NNeuronTimeLearner>(job,output):Evaluate<NNeuronTimeLearnerBranch>(job,output);}
     catch(const std::exception& error){std::cerr<<"TimeLearner diagnostic evaluation job: "<<error.what()<<'\n';return 2;}
+}
+int RunTimeLearnerPhysicalModelExportJob(const QString& input,const QString& output)
+{
+    try
+    {
+        const auto document=ReadDocument(input);
+        Keys(document,{"kind","schema_version","implementation_id","source_state","sha256"});
+        Header(document,"timelearner_native_physical_model_export_job");
+        const auto source=Object(document["source_state"]);const auto implementation=Text(document["implementation_id"]);
+        const auto frequency=NativePhysicalModelSourceFrequency(source);
+        return WithFreshModel(frequency,[&](auto storage,auto environment,auto) {
+            const auto model=ExportNativePhysicalModelData(source,storage,environment,implementation);
+            const auto imported=PrepareNativePhysicalModelData(model,storage,environment,implementation);
+            Require(imported->modelRevision==Text(source["model_revision"]),"physical_model_export_roundtrip_changed_model");
+            Require(QDir().mkdir(output),"job_output_exists_or_parent_missing");QJsonArray artifacts;
+            artifacts.append(Write(output,"model.json",model));
+            // The owned runner retains the input/envelope and source file.
+            // Do not duplicate their entire training history inside job.json.
+            const QJsonObject projection{{"kind","timelearner_physical_model_export_input_projection"},{"schema_version",1},
+                {"job_sha256",document["sha256"]},{"source_boundary",model["source_boundary"]},
+                {"implementation_id",document["implementation_id"]}};
+            artifacts.append(Write(output,"input-projection.json",Signed(projection)));
+            Write(output,"execution.json",Signed({{"kind","timelearner_native_physical_model_export_execution"},
+                {"schema_version",1},{"execution","completed"},{"job_sha256",document["sha256"]},
+                {"source_boundary",model["source_boundary"]},{"model_sha256",model["sha256"]},
+                {"model_revision",model["model_revision"]},{"source_solo_revision",model["source_solo_revision"]},
+                {"physical_roundtrip_verified",true},{"source_evidence_included",false},
+                {"training_certificate_transferred",false},{"controller_checkpoint_created",false},
+                {"scientific_verdict",QJsonValue(QJsonValue::Null)},{"artifacts",artifacts}}));
+            return 0;
+        });
+    }
+    catch(const std::exception& error){std::cerr<<"TimeLearner physical model export: "<<error.what()<<'\n';return 2;}
 }
 int RunTimeLearnerExportJob(const QString& input,const QString& output)
 {

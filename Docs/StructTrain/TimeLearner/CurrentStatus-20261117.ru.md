@@ -5,6 +5,20 @@
 не заменяя исходный план более узким набором проверок. Научные 8/8 не являются
 условием завершения рефакторинга.
 
+## Продолжение 18 ноября: перенос физической модели
+
+Подготовлен [отдельный полный model DATA export](PhysicalModelData-20261118.ru.md)
+в ветках `codex/timelearner-physical-model-data`. Он сохраняет весь native graph,
+storage images и Dataset, отделяя их от истории поиска. Четыре native cases
+проверят Classic/Branch roundtrip, waveform и запрет неподтверждённой authority.
+Код ещё не собран и не проверен на worker; frozen evaluation и проверка реальных
+обученных/C-trim/heterogeneous моделей впереди. Этап5 не объявлен завершённым.
+
+На23:34UTC 17 ноября Automats2 снова Disconnected, оба SSH polling завершились
+timeout на jump host. Последние подтверждённые Linux состояния относятся
+к22:26UTC; задания не перезапущены. Windows218 primary получены локально,
+их M40 publication всё ещё не подтверждена. Нового научного verdict нет.
+
 ## Закрытый результат Windows на текущем проходе
 
 Новый SDK Root93894dd / Pulse52cb953 скомпилирован. Исходный build outcome

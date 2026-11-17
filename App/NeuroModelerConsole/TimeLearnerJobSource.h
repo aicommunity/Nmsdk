@@ -40,6 +40,7 @@ inline QJsonObject ReadNativeJobDocument(const QString& path)
     if(kind=="timelearner_native_diagnostic_evaluation_job")field="source_stopped";
     else if(kind=="timelearner_native_recognition_export_job")field="source_solo";
     else if(kind=="timelearner_native_evaluation_job")field="source_recognition";
+    else if(kind=="timelearner_native_physical_model_export_job")field="source_state";
     else throw std::invalid_argument("job_source_unsupported_operation");
     JobSourceRequire(source["field"]==QJsonValue(field) && !job.contains(field),"job_source_projection_changed");
     const auto relative=source["path"].toString();const auto parts=relative.split('/');
