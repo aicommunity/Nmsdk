@@ -1,0 +1,769 @@
+{
+  "kind": "timelearner_frozen_window_reset_complete_primary",
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "source_actor": "82281d3cd01cf62cc650f0d78441b5c727e73bff",
+  "controls": "58bd0d697974d5d4210483bbda25f2453db01af0",
+  "collector": "s11-frozen-protocol-complete-primary-elder-a1",
+  "collector_actor": "4e06c53331abe152ac20a05b9c9565c53d62890f",
+  "collection_controls": "213038b628e5f5cae506ab11f94ecb6b53b070f0",
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/67/67499f58763f2d0188c4d09d4258a63802a84989ca68eee79ed5ba852c0c5b2d",
+    "sha256": "67499f58763f2d0188c4d09d4258a63802a84989ca68eee79ed5ba852c0c5b2d",
+    "bytes": 76979076
+  },
+  "bundle_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/d7/d7aa40d3ab6b90c4714451a374c903fb0dee6bf69128fe4229a21f79ecac2c33",
+    "sha256": "d7aa40d3ab6b90c4714451a374c903fb0dee6bf69128fe4229a21f79ecac2c33",
+    "bytes": 606346
+  },
+  "provenance_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/51/515ae681a867af8c3aa9881b59a021b3438ad98241db1d0e8456653735bf5b04",
+    "sha256": "515ae681a867af8c3aa9881b59a021b3438ad98241db1d0e8456653735bf5b04",
+    "bytes": 605227
+  },
+  "provenance_files": 46,
+  "members": 3078,
+  "expanded_bytes": 8032913615,
+  "unique_content_bytes": 2769966616,
+  "closed_units": 6,
+  "all_source_groups_closed": true,
+  "conditions": {
+    "baseline2": {
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+      "threshold": 0.054353792695896797,
+      "duration": 2,
+      "reset_policy": "reset_per_trial",
+      "rows": [
+        {
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "trial_id": "frozen-order/baseline/rotation-0/position-0",
+          "begin": 0,
+          "end": 2,
+          "stimulus_times": [
+            0.01,
+            0.09,
+            0.25,
+            0.49
+          ],
+          "spike_times": [
+            0.493
+          ],
+          "spike_times_relative_to_onset": [
+            0.483
+          ],
+          "spike_count": 1,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "trial_id": "frozen-order/baseline/rotation-0/position-1",
+          "begin": 2.0005,
+          "end": 4.000500000000001,
+          "stimulus_times": [
+            2.0105,
+            2.2505,
+            2.4105,
+            2.4905
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "trial_id": "frozen-order/baseline/rotation-0/position-2",
+          "begin": 4.001,
+          "end": 6.001,
+          "stimulus_times": [
+            4.011,
+            4.171,
+            4.251,
+            4.491
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "trial_id": "frozen-order/baseline/rotation-0/position-3",
+          "begin": 6.0015,
+          "end": 8.0015,
+          "stimulus_times": [
+            6.0115,
+            6.1715,
+            6.3315,
+            6.4915
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "trial_id": "frozen-order/baseline/rotation-0/position-4",
+          "begin": 8.002,
+          "end": 10.002,
+          "stimulus_times": [
+            8.012,
+            8.032,
+            8.252,
+            8.492
+          ],
+          "spike_times": [
+            8.253
+          ],
+          "spike_times_relative_to_onset": [
+            0.24099999999999966
+          ],
+          "spike_count": 1,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "trial_id": "frozen-order/baseline/rotation-0/position-5",
+          "begin": 10.0025,
+          "end": 12.0025,
+          "stimulus_times": [
+            10.0125,
+            10.2525,
+            10.4725,
+            10.4925
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "trial_id": "frozen-order/baseline/rotation-0/position-6",
+          "begin": 12.003,
+          "end": 14.003,
+          "stimulus_times": [
+            12.013,
+            12.053,
+            12.093,
+            12.493
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "trial_id": "frozen-order/baseline/rotation-0/position-7",
+          "begin": 14.0035,
+          "end": 16.003500000000003,
+          "stimulus_times": [
+            14.0135,
+            14.4135,
+            14.4535,
+            14.4935
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        }
+      ],
+      "source_run_manifest": {
+        "source_path": "/home/user/timelearner-refactor/readbacks/s11-frozen-order-native-elder-a2/worker/tmp/frozen-order/runs/baseline/run-manifest.json",
+        "bytes": 321933,
+        "sha256": "18591eef2982fb64e898db3d5d4260ff85b050a2273f4ab45b182c16f1134d6b"
+      }
+    },
+    "reset4": {
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+      "threshold": 0.054353792695896797,
+      "duration": 4,
+      "reset_policy": "reset_per_trial",
+      "rows": [
+        {
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "trial_id": "long-reset/stopped-phasea-diagnostic/rotation-0/0",
+          "begin": 0,
+          "end": 4,
+          "stimulus_times": [
+            0.01,
+            0.09,
+            0.25,
+            0.49
+          ],
+          "spike_times": [
+            0.493
+          ],
+          "spike_times_relative_to_onset": [
+            0.483
+          ],
+          "spike_count": 1,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "trial_id": "long-reset/stopped-phasea-diagnostic/rotation-0/1",
+          "begin": 4.0005,
+          "end": 8.000499999999999,
+          "stimulus_times": [
+            4.0105,
+            4.2505,
+            4.4105,
+            4.4905
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "trial_id": "long-reset/stopped-phasea-diagnostic/rotation-0/2",
+          "begin": 8.001,
+          "end": 12.001,
+          "stimulus_times": [
+            8.011,
+            8.171,
+            8.251,
+            8.491
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "trial_id": "long-reset/stopped-phasea-diagnostic/rotation-0/3",
+          "begin": 12.0015,
+          "end": 16.0015,
+          "stimulus_times": [
+            12.0115,
+            12.1715,
+            12.3315,
+            12.4915
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "trial_id": "long-reset/stopped-phasea-diagnostic/rotation-0/4",
+          "begin": 16.002,
+          "end": 20.002,
+          "stimulus_times": [
+            16.012,
+            16.032,
+            16.252,
+            16.492
+          ],
+          "spike_times": [
+            16.253
+          ],
+          "spike_times_relative_to_onset": [
+            0.24099999999999966
+          ],
+          "spike_count": 1,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "trial_id": "long-reset/stopped-phasea-diagnostic/rotation-0/5",
+          "begin": 20.0025,
+          "end": 24.0025,
+          "stimulus_times": [
+            20.0125,
+            20.2525,
+            20.4725,
+            20.4925
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "trial_id": "long-reset/stopped-phasea-diagnostic/rotation-0/6",
+          "begin": 24.003,
+          "end": 28.003,
+          "stimulus_times": [
+            24.013,
+            24.053,
+            24.093,
+            24.493
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "trial_id": "long-reset/stopped-phasea-diagnostic/rotation-0/7",
+          "begin": 28.0035,
+          "end": 32.0035,
+          "stimulus_times": [
+            28.0135,
+            28.4135,
+            28.4535,
+            28.4935
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        }
+      ],
+      "source_run_manifest": {
+        "source_path": "/home/user/timelearner-refactor/readbacks/s11-frozen-protocol-finite-elder-a4/long-reset/run-manifest.json",
+        "bytes": 321601,
+        "sha256": "bf8cd268a6a78c07e98ac7755bec235c97419d1bef063ff0f717f9fe429bda50"
+      }
+    },
+    "continuous2": {
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+      "threshold": 0.054353792695896797,
+      "duration": 2,
+      "reset_policy": "preserve_neuron_dynamics",
+      "rows": [
+        {
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "trial_id": "continuous/stopped-phasea-diagnostic/rotation-0/0",
+          "begin": 0,
+          "end": 2,
+          "stimulus_times": [
+            0.01,
+            0.09,
+            0.25,
+            0.49
+          ],
+          "spike_times": [
+            0.493
+          ],
+          "spike_times_relative_to_onset": [
+            0.483
+          ],
+          "spike_count": 1,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "trial_id": "continuous/stopped-phasea-diagnostic/rotation-0/1",
+          "begin": 2.0005,
+          "end": 4.000500000000001,
+          "stimulus_times": [
+            2.0105,
+            2.2505,
+            2.4105,
+            2.4905
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "trial_id": "continuous/stopped-phasea-diagnostic/rotation-0/2",
+          "begin": 4.001,
+          "end": 6.001,
+          "stimulus_times": [
+            4.011,
+            4.171,
+            4.251,
+            4.491
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "trial_id": "continuous/stopped-phasea-diagnostic/rotation-0/3",
+          "begin": 6.0015,
+          "end": 8.0015,
+          "stimulus_times": [
+            6.0115,
+            6.1715,
+            6.3315,
+            6.4915
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "trial_id": "continuous/stopped-phasea-diagnostic/rotation-0/4",
+          "begin": 8.002,
+          "end": 10.002,
+          "stimulus_times": [
+            8.012,
+            8.032,
+            8.252,
+            8.492
+          ],
+          "spike_times": [
+            8.253
+          ],
+          "spike_times_relative_to_onset": [
+            0.24099999999999966
+          ],
+          "spike_count": 1,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "trial_id": "continuous/stopped-phasea-diagnostic/rotation-0/5",
+          "begin": 10.0025,
+          "end": 12.0025,
+          "stimulus_times": [
+            10.0125,
+            10.2525,
+            10.4725,
+            10.4925
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "trial_id": "continuous/stopped-phasea-diagnostic/rotation-0/6",
+          "begin": 12.003,
+          "end": 14.003,
+          "stimulus_times": [
+            12.013,
+            12.053,
+            12.093,
+            12.493
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "trial_id": "continuous/stopped-phasea-diagnostic/rotation-0/7",
+          "begin": 14.0035,
+          "end": 16.003500000000003,
+          "stimulus_times": [
+            14.0135,
+            14.4135,
+            14.4535,
+            14.4935
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        }
+      ],
+      "source_run_manifest": {
+        "source_path": "/home/user/timelearner-refactor/readbacks/s11-frozen-protocol-finite-elder-a4/continuous/run-manifest.json",
+        "bytes": 321688,
+        "sha256": "d9026bba8f6f16139184ff37ba1d1867d2926c882753ecf4a413773e5debb126"
+      }
+    },
+    "continuous4": {
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+      "threshold": 0.054353792695896797,
+      "duration": 4,
+      "reset_policy": "preserve_neuron_dynamics",
+      "rows": [
+        {
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "trial_id": "long-continuous/stopped-phasea-diagnostic/rotation-0/0",
+          "begin": 0,
+          "end": 4,
+          "stimulus_times": [
+            0.01,
+            0.09,
+            0.25,
+            0.49
+          ],
+          "spike_times": [
+            0.493
+          ],
+          "spike_times_relative_to_onset": [
+            0.483
+          ],
+          "spike_count": 1,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "trial_id": "long-continuous/stopped-phasea-diagnostic/rotation-0/1",
+          "begin": 4.0005,
+          "end": 8.000499999999999,
+          "stimulus_times": [
+            4.0105,
+            4.2505,
+            4.4105,
+            4.4905
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "trial_id": "long-continuous/stopped-phasea-diagnostic/rotation-0/2",
+          "begin": 8.001,
+          "end": 12.001,
+          "stimulus_times": [
+            8.011,
+            8.171,
+            8.251,
+            8.491
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "trial_id": "long-continuous/stopped-phasea-diagnostic/rotation-0/3",
+          "begin": 12.0015,
+          "end": 16.0015,
+          "stimulus_times": [
+            12.0115,
+            12.1715,
+            12.3315,
+            12.4915
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "trial_id": "long-continuous/stopped-phasea-diagnostic/rotation-0/4",
+          "begin": 16.002,
+          "end": 20.002,
+          "stimulus_times": [
+            16.012,
+            16.032,
+            16.252,
+            16.492
+          ],
+          "spike_times": [
+            16.253
+          ],
+          "spike_times_relative_to_onset": [
+            0.24099999999999966
+          ],
+          "spike_count": 1,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "trial_id": "long-continuous/stopped-phasea-diagnostic/rotation-0/5",
+          "begin": 20.0025,
+          "end": 24.0025,
+          "stimulus_times": [
+            20.0125,
+            20.2525,
+            20.4725,
+            20.4925
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "trial_id": "long-continuous/stopped-phasea-diagnostic/rotation-0/6",
+          "begin": 24.003,
+          "end": 28.003,
+          "stimulus_times": [
+            24.013,
+            24.053,
+            24.093,
+            24.493
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        },
+        {
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "trial_id": "long-continuous/stopped-phasea-diagnostic/rotation-0/7",
+          "begin": 28.0035,
+          "end": 32.0035,
+          "stimulus_times": [
+            28.0135,
+            28.4135,
+            28.4535,
+            28.4935
+          ],
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "spike_count": 0,
+          "complete": true,
+          "valid": true
+        }
+      ],
+      "source_run_manifest": {
+        "source_path": "/home/user/timelearner-refactor/readbacks/s11-frozen-protocol-finite-elder-a4/long-continuous/run-manifest.json",
+        "bytes": 321727,
+        "sha256": "a843d19f43c7f61afef4c8a1f81c952d68f5c63f996793bb1b33db7a5631c9df"
+      }
+    }
+  },
+  "native_observations": 32,
+  "new_native_observations": 24,
+  "prior_baseline_observations": 8,
+  "number_of_trained_models": 1,
+  "training_completed": false,
+  "training_certificate_present": false,
+  "independent_evaluation": false,
+  "protocol": "historical_same_matrix_frozen_diagnostic",
+  "isolated_iti_intervention": false,
+  "full_order_by_window_by_reset_factorial": false,
+  "common_window_reader_accepted": false,
+  "temporal_gallery_complete": false,
+  "science_source": "completed producer-audited run manifests and unchanged full observations; this extraction is not an independent full reanalysis",
+  "runtime_root": "7b495ebf753259ae8b78c6d0eadd561fb3d2c835",
+  "native_pulse": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7",
+  "runtime_fingerprint": "f9f50022feeddca391b4bbb9d1ea0e7dfb4dd4dc69fb86b4052eec2ab1705b57",
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "generated_binary_in_root_git": false
+}
