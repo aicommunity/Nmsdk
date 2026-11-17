@@ -39,3 +39,13 @@ single-sweep control с прежними physics, допусками и budgets.
 all-input gate, measured timing/amplitude residuals и реальный frozen8 Test
 с временными графиками Soma и входов. Не выдавать успех controlled fixture
 за сходимость нейронной модели. До этого статус «реализовано, не проверено».
+
+На M40 уже доставлены через Git exact Root3743979b00a53c10a8dc39e7a72bc16bcc729fa7
+и Pulse025576540b18455489ef7a1c8292fc146b39aea4, отдельный каталог
+source-timing-neighbourhood-sdk-a1. Подготовлен cohort216 literal production
+TEST случаев: controller/length/Rs/C/recovery/source reader. Controls commit
+9f638781715cf99b0dcb6a25cbf3d8c0ed22657f. Legacy TEST_F physical fixtures явно
+вне этого dialect/cohort, не подсчитываются как пройденные и остаются частью
+отдельной физической матрицы. Сборка/выполнение216 не запускались: единственный
+M40 slot принадлежит текущему cold Branch. Подготовка исходников и декларации
+не подменяет проверку и не изменяет работающий runtime.

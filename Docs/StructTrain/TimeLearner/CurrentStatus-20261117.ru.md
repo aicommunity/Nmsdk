@@ -7,6 +7,13 @@
 
 ## Последнее подтверждение на 17:51 UTC
 
+Дополнение18:33UTC: оба Branch job повторно наблюдаются running. В отдельной
+ветке подготовлен [N1 timing-neighbourhood candidate](N1TimingNeighbourhoodReview-20261117.ru.md):
+при timing-ready amplitude miss следующий длиновой кандидат берётся около
+реально измеренной точки и проходит обычные domain/edit/fresh probes.
+Новые controlled-response tests и отдельный SDK source доставлены на M40;
+cohort216 только объявлен, не выполнен. Текущие два Train используют старый код.
+
 Полная цель активна; принят только этап0. Accepted Root develop остаётся
 87e7da0205b6bb0d582f7b4f2551c935fd7f2350. Ниже подтверждённый прогресс,
 без закрытия целиком этапов5/7/11.
