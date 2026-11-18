@@ -161,3 +161,24 @@ supervisor1516047/start461313628, unit timelearner-4cafdba4-833f-4255-bc82-b7494
 Отдельно [исправляется читаемость положительных откликов](SharedRecoveryReadability-20261119.ru.md)
 молчащих проб при общем recovery-масштабе. Это правка renderer с ещё ожидаемой
 серверной и визуальной проверкой, без нового Train/Test или научного verdict.
+
+## Принятая адресная проверка terminal selection
+
+Оба задания закрыты: M40 **44/44 PASS**, Elder **14/14 PASS** на прежних
+Root3c5/Pulse1d8. Подтверждены worker validation, полные фактические JUnit
+inventories и whole-group closure. Native M40 suite603.953с, Elder193.913с.
+Все6 snapshot cases проходят, включая четыре прежних empty-C отказа.
+Полные primary обоих серверов опубликованы в external M40 archive.
+[Область, артефакты и ограничения](NativeTerminalSelectionAcceptance-20261119.ru.md).
+
+В рабочей ветке после принятой комбинации добавлены retention исходного графа
+перед transaction и read-only historical export context для protocol3/4/5.
+Эти новые изменения и расширенные14 source assertions ещё не проверены gate.
+Полный portable terminal factory/export/import/replay и cold/runtime/analysis
+integration остаются открытыми. Нового научного Train/Test не было.
+
+На .14 создан отдельный report-renderer venv, headless matplotlib/Pillow
+проверены. Общий Python и пользовательский C:/Projects/Nmsdk не изменялись.
+Первый embedded Python не имел venv; отказ сохранён, успешный отдельный venv
+создан через обнаруженный установленный полный Python. Генерация новых
+научных графиков в нём ещё не запущена.

@@ -6350,6 +6350,8 @@ template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int 
     const auto selected=service.SelectedNativeBoundary();ASSERT_TRUE(selected);
     auto source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
     const auto before=NmsdkTools::IdentifyModel(rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true).Get(),{{&source->Output,"burst"}});
+    const auto beforeDataset=NmsdkTools::IdentifyModel(rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get());
+    const auto beforeCapacitance=rig.learner->OwnedNativeCapacitanceState();
     const auto previousEpoch=service.ModelEpoch();const auto transcriptEpoch=service.TranscriptModelEpoch();
     if(kind==TerminalFixtureKind::ExternalStop)rig.learner->IsNeedToTrain=false;
     if(kind==TerminalFixtureKind::OwnerReset)rig.learner->Reset();
@@ -6370,12 +6372,14 @@ template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int 
     if(kind==TerminalFixtureKind::OwnerReset)
     {
         EXPECT_EQ(service.State(),NativeTrainingState::Idle);EXPECT_FALSE(service.SelectedNativeBoundary());
+        EXPECT_FALSE(service.TerminalSourceBoundary());
         EXPECT_TRUE(service.TerminalSelectionEvent().isEmpty());EXPECT_EQ(after,before);return;
     }
     ASSERT_EQ(service.State(),NativeTrainingState::Finished)<<service.Reason();
     if(kind==TerminalFixtureKind::ExternalStop)
     {
         EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);EXPECT_EQ(after,before);
+        EXPECT_FALSE(service.TerminalSourceBoundary());
         EXPECT_EQ(service.ModelEpoch(),previousEpoch);EXPECT_EQ(service.TerminalSelectionTransactions(),0u);return;
     }
     Artifact(rig.name+"_terminal_selection.json",QJsonDocument(service.TerminalSelectionEvent()).toJson());
@@ -6383,6 +6387,20 @@ template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int 
     EXPECT_EQ(service.TranscriptModelEpoch(),transcriptEpoch);EXPECT_TRUE(service.RequiresTerminalSelectionArchive());
     EXPECT_EQ(service.TerminalSelectionEvent()["portable_export_supported"],QJsonValue(false));
     EXPECT_EQ(service.TerminalSelectionEvent()["fresh_all_input_verification"],QJsonValue(false));
+    const auto sourceBoundary=service.TerminalSourceBoundary();ASSERT_TRUE(sourceBoundary);
+    EXPECT_EQ(sourceBoundary->NeuronIdentity(),before);
+    EXPECT_EQ(sourceBoundary->DatasetIdentity(),beforeDataset);
+    EXPECT_EQ(sourceBoundary->CapacitanceState(),beforeCapacitance);
+    EXPECT_EQ(sourceBoundary->NeuronSnapshot().value("identity"),QJsonValue(before));
+    EXPECT_EQ(sourceBoundary->DatasetSnapshot().value("identity"),QJsonValue(beforeDataset));
+    EXPECT_EQ(service.TerminalSelectionEvent().value("source_neuron_identity"),QJsonValue(before));
+    EXPECT_EQ(service.TerminalSelectionEvent().value("source_dataset_identity"),QJsonValue(beforeDataset));
+    EXPECT_EQ(service.TerminalSelectionEvent().value("source_capacitance_state"),QJsonValue(beforeCapacitance));
+    Artifact(rig.name+"_terminal_source_graph.json",QJsonDocument(QJsonObject{
+        {"kind","native_terminal_source_graph_readback"},{"schema_version",1},
+        {"neuron",sourceBoundary->NeuronSnapshot()},{"dataset",sourceBoundary->DatasetSnapshot()},
+        {"capacitance_state",sourceBoundary->CapacitanceState()},
+        {"historical_epoch",double(transcriptEpoch)}}).toJson());
     if(kind==TerminalFixtureKind::NoEditAllowance)
     {
         EXPECT_EQ(after,before);EXPECT_EQ(service.TerminalSelectionEvent()["status"],QJsonValue("budget_exhausted"));
