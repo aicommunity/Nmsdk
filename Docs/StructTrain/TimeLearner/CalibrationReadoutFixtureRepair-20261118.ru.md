@@ -37,7 +37,7 @@ Environment/storage/Calculate, native proof и отсутствие пропус
 завершена за158.54с, kernel group отсутствует/закрыта; native build21
 подтверждён живым в отдельной группе. Gate21 включает шесть readout/persistence,
 шесть старых negative preconditions, два timing-neighbourhood controls и семь
-physical DATA tests. Это адресный набор, не полный Linux250/Windows249.
+physical DATA tests. Это адресный набор, не полный прежний frozen DATA cohort Linux248/Windows247.
 
 Общий N1 helper также обслуживает четыре NativeThresholdCandidate cases.
 Они требуют отдельной последующей проверки на этом же immutable runtime;
@@ -45,3 +45,14 @@ physical DATA tests. Это адресный набор, не полный Linux
 сохраняют прежний источник. Не считать Gate21 проверкой этих восьми.
 Восемь CalibrationOwnership cases требуют ещё и опубликованных grid source
 fixtures; их отсутствие не устраняется этим изменением readout source.
+
+
+Повторная literal inventory проверка выявила, что исходный frozen DATA cohort
+248/247 вообще не выбирал NativeCalibrationPrecondition и NativeThresholdCandidate.
+Поэтому добавление двух TEST не меняет тот прежний cohort автоматически.
+Новый явный [расширенный cohort](ValidationPlans/CalibrationReadoutCompletion-20261118/INVENTORY.json)
+содержит262 Linux/261 Windows: прежние248/247 плюс все6 negative preconditions
+и все8 threshold candidate cases. Он только объявлен, не выполнен. Прежний
+INVENTORY и отрицательный Windows247 сохранены. Обновлённый Windows cohort
+потребует сборки исправленного Root643, текущий scientific runtime Root28
+не выдаётся за неё. Gate21 M40 остаётся своим неизменным адресным заданием.
