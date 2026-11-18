@@ -1,6 +1,6 @@
 # Статус TimeLearner — 18 ноября 2026
 
-Актуализация 12:19UTC. Полная цель этапов0–12 активна. Принят только этап0;
+Актуализация 13:42UTC. Полная цель этапов0–12 активна. Принят только этап0;
 этапы1–12 остаются частичными. Научные8/8 не являются условием завершения.
 Accepted root develop `87e7da0205b6bb0d582f7b4f2551c935fd7f2350` не менялся;
 новый непроверенный код не объединялся в develop. Пользовательские деревья
@@ -53,7 +53,12 @@ pairs, actual input overlays, полные масштабы и zoom>=8pixels/nat
 без downsampling. Подтверждены live kernel unit/lease, PID2469972,
 start_ticks407772835, unit `timelearner-12031cef-c7a5-4f26-9c1d-16ae3b1005f2`.
 [Handle выполнения](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/temporal-report-running.json).
-Графики и их визуальная приёмка пока не завершены.
+Задание завершилось:2/2 declared-report tests PASS, без failures/errors/skips;
+все40 trial-soma pairs покрыты (Classic32/Branch8), построено4591 PNG и
+соответствующие SVG/PDF. Kernel group отсутствует/закрыта, lease освобождён.
+[Квитанция закрытия и coverage](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/temporal-report-closed.json).
+Первые Classic target/TN/FP графики просмотрены. Полная визуальная приёмка,
+внешняя публикация галереи и включение новых примеров в DOCX ещё впереди.
 Большие архивы и рисунки остаются во внешнем M40 хранилище, в Git — ссылки.
 
 ## Elder: модель сохранена и DATA проверены без повторного Train
@@ -115,13 +120,12 @@ Linux248 и полная матрица режимов остаются откр
 
 ## Следующие действия по основной цели
 
-1. Закончить primary publication и40-pair gallery, визуально проверить все
-   паттерны и обновить DOCX примерами двух новых6/8.
+1. Опубликовать завершённую40-pair gallery, визуально проверить все
+   паттерны и обновить DOCX примерами двух новых6/8. Primary уже опубликован.
 2. Проверить native import и actual frozen Test сохранённой Elder модели;
    source уже целостен, повторять Train ради утраченного summary не требуется.
-3. Повторить Python8 с исправленной CLI fixture на сохранённых native outputs;
-   сохранить отрицательный исход до исправления. Подтвердить Linux/native
-   coverage и поддерживаемые режимы по исходному плану.
+3. Python8-a3 завершён8/8; сохранить полный corpus во внешнем архиве.
+   Подтвердить Linux/native coverage и поддерживаемые режимы по исходному плану.
 4. Продолжить алгоритмы: global terminal best-state restoration остаётся
    не реализованным; нельзя заменять её scalar overlay или переносить Exact
    после изменения модели. [Контракт](TerminalBestStateBoundary-20261118.ru.md).
