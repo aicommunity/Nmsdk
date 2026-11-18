@@ -83,5 +83,36 @@
       "bytes": 0,
       "tail": ""
     }
-  ]
+  ],
+  "primary_publication": {
+    "catalog": "experiments/2026-11-18/windows-native-burst/a1.json",
+    "record": {
+      "kind": "timelearner_windows_native_burst8_primary_acceptance",
+      "schema_version": 1,
+      "root": "93894ddfac0b0cf25fb5e87c4e2de3813d17587a",
+      "pulse": "52cb953c3dd153b8b3e5459ea9b54825e05a89a8",
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/fb/fb9f40baf154f0b88eacf8a9ed7d135e0ee9af349981f8c1c4bd6f1a3aa0656f",
+        "sha256": "fb9f40baf154f0b88eacf8a9ed7d135e0ee9af349981f8c1c4bd6f1a3aa0656f",
+        "bytes": 777433
+      },
+      "regular_members_verified": 67,
+      "junit_cases_verified": 8,
+      "failures": 0,
+      "skips": 0,
+      "original_build_accepted": false,
+      "closed_build_audit_passed": true,
+      "native_gate_passed": true,
+      "prior_sdk_primary_sha256": "889f2fd56f51b2e35de3c50168e4a78bbb2217c1483d600deb7c39ff4a222da9",
+      "control_heads": {
+        "native-controls": "d20b691701a53d129f1ef54679bc6d3af6b77880"
+      },
+      "scientific_worker_admitted": false,
+      "scientific_verdict": null
+    },
+    "primary_all_bytes_verified": true
+  }
 }

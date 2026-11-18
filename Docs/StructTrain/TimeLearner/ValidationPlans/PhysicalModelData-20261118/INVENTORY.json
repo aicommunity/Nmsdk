@@ -3,7 +3,7 @@
   "schema_version": 1,
   "prepared_only": true,
   "executed": false,
-  "root": "d55a32cc7b47fb848a9d09ee443baa1a04db8711",
+  "root": "be5f6cf3d58b46405465b060d12fd362b025f986",
   "pulse": "c54d9c0a65ac6eadeccfe1793672b7a9472ea559",
   "windows_cpp_test_ids": [
     "BoundedCandidateRecovery/AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility",
@@ -514,7 +514,7 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_PhysicalModelData.cpp",
-      "sha256": "20f19fc764b0920f01710880696c837c858c3924bc335f4b25e382f7d05e4703"
+      "sha256": "bab1288a4808eca234f0e2e3adcbee0c93ed08357f0c036354b4b97edbde3be0"
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_TimeLearnerResistance.cpp",
@@ -526,5 +526,8 @@
     }
   ],
   "scientific_verdict": null,
-  "source_hash_domain": "exact Git blob bytes at root, independent of local checkout line endings"
+  "source_hash_domain": "exact Git blob bytes at root, independent of local checkout line endings",
+  "superseded_inventory_code_root": "d55a32cc7b47fb848a9d09ee443baa1a04db8711",
+  "attempt1_root": "a9006c710806f03ae8d0d97d010291657bb7e836",
+  "attempt1_status": "compile_failed_const_UEPtr_upcast;0/228 tests executed"
 }

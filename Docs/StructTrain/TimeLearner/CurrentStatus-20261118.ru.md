@@ -40,7 +40,9 @@ DATA-reader не объявляет native proof replay или общую схо
 2000/20000Hz и N4/N6 на2000Hz, штатный scheduler. Exit0, потомки закрыты,
 47 actual loaded modules, kernel Job отсутствует.
 [Readback](../../../Reports/StructTrain/TimeLearner/WindowsTimingNeighbourhood-20261118/native-burst8-readback.json).
-Full primary и читаемые графики этого нового gate ещё не опубликованы.
+Full primary опубликован и byte-exact проверен на M40:67 файлов,18 actual CSV,
+777433 bytes, SHA `fb9f40baf154f0b88eacf8a9ed7d135e0ee9af349981f8c1c4bd6f1a3aa0656f`,
+catalog `experiments/2026-11-18/windows-native-burst/a1.json`. Графики ещё впереди.
 Это не классификация или полный допуск Windows scientific worker.
 
 Предыдущий Windows218 primary теперь опубликован и перепроверен на M40:
@@ -60,8 +62,13 @@ catalog `experiments/2026-11-17/windows-timing-neighbourhood/a2-native218.json`.
 Новый isolated SDK Root `a9006c710806f03ae8d0d97d010291657bb7e836`, Pulse
 `c54d9c0a65ac6eadeccfe1793672b7a9472ea559`, controls
 `4862918b7f8c13296b9b37ae34b9d857d5027e4d`: canonical preparation прошла,
-её process/lease закрыты. **Сборка228-case gate выполняется**, отдельные
-build/runtime,2 compiler jobs/8GiB, штатный CMake Qt6. Старый prepared219
+её process/lease закрыты. Сборка228-case gate остановилась на новом fixture:
+const UEPtr не поддерживает неявный upcast к UContainer;0/228 cases выполнено.
+[Failure и scope исправления](../../../Reports/StructTrain/TimeLearner/PhysicalModelDataSdk-20261118/build-a1-failure.json).
+Root be5f6cf3d58b46405465b060d12fd362b025f986 добавляет явный upcast через
+Get(), без изменения проверок или production алгоритма. Исправление ещё
+не проверено. Следующая сборка получит новые source/build/runtime/controls.
+Используются2 compiler jobs/8GiB, штатный CMake Qt6. Старый prepared219
 superseded без запуска;228 содержит все его случаи и9 новых. Native228 PASS
 и измеренное снижение RSS ещё не получены.
 
