@@ -75,3 +75,10 @@ storage contract с проверками hashes/closure и отдельным na
 прежних8 наблюдений сейчас выполняется в отдельном bounded Python Job;
 native Test и Train не повторяются. Итоговая классификация Elder пока не принята.
 [Причина, исправление, проверки и handle](CrossPlatformStorageImageAudit-20261118.ru.md).
+
+
+Позднейшая проверка: audit3 всех8 исходных baseline observations успешно
+завершён; модель frozen, source hashes сохранены. При100 все паттерны
+молчат (TP0/FP0/FN1/TN7). Запущен заранее объявленный fixed-threshold8
+Test0.09874840158355691, без повторного Train.
+[Факты, ограничения и актуальный результат](ElderRecoveredBranchBaseline-20261118.ru.md).

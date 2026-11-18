@@ -29,3 +29,19 @@ Classic/Branch negative при20000Hz; прежние2000Hz и ModelSpec2 negati
 Environment/storage/Calculate, native proof и отсутствие пропусков.
 После этого продолжить блокированные calibration ownership fixtures и
 полную Linux/Windows матрицу. Успех этого подэтапа не закрывает весь этап8.
+
+
+Изолированная Linux-проверка запущена: source Root
+`6433f59f9e112d3806df7485cbfe5f305c149fc9`, Pulse5f8b281,
+`s08-calibration-readout-sdk-m40-a1`. Каноническая подготовка успешно
+завершена за158.54с, kernel group отсутствует/закрыта; native build21
+подтверждён живым в отдельной группе. Gate21 включает шесть readout/persistence,
+шесть старых negative preconditions, два timing-neighbourhood controls и семь
+physical DATA tests. Это адресный набор, не полный Linux250/Windows249.
+
+Общий N1 helper также обслуживает четыре NativeThresholdCandidate cases.
+Они требуют отдельной последующей проверки на этом же immutable runtime;
+планируется восемь candidate cases вместе с четырьмя N0 controls, которые
+сохраняют прежний источник. Не считать Gate21 проверкой этих восьми.
+Восемь CalibrationOwnership cases требуют ещё и опубликованных grid source
+fixtures; их отсутствие не устраняется этим изменением readout source.

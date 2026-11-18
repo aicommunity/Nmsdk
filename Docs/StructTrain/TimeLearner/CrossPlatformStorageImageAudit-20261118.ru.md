@@ -3,7 +3,7 @@
 18 ноября: причина исходного `recognition_images_changed` установлена по
 сохранённым файлам Elder/Linux и Windows, без повторного Train или Test.
 Исправление DATA-аудитора проверено:11/11 серверных regression tests PASS,
-без failures/errors/skips. Полный повторный аудит исходного Test выполняется.
+без failures/errors/skips. Полный повторный аудит исходного Test завершился успешно; исходные файлы не изменены.
 
 Исходный stopped source958170225 bytes имеет SHA
 `57a8934db33b34ec819440f677a4cd1af6109df2813068356cec3ea55357cccd`;
@@ -75,3 +75,11 @@ Job `Local\TimeLearner-ce42dd6b-a70b-4b8b-9eb8-69858eb5024a`, PID13468,
 creation_filetime134394930757956066, Python3.14.2, лимит20GiB/32 processes/3600s.
 Это повторный DATA-аудит, не повторный native Test и не новое обучение.
 [Наблюдение процесса](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/baseline8-audit-recovery-running.json).
+
+
+Полный re-audit завершён:1325.00с, exit0/valid,33 loaded-file records, все
+процессы закрыты, Job/PID отсутствуют. Все8 complete/valid наблюдений и
+frozen model подтверждены. При исходном100 модель полностью молчит:
+TP0/FP0/FN1/TN7. Это отрицательная классификация, не успешный детектор.
+[Полный компактный результат и следующие действия](ElderRecoveredBranchBaseline-20261118.ru.md).
+Нового Train или native baseline Test для устранения XML отказа не было.

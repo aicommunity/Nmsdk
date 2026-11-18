@@ -1,0 +1,58 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "99d8ac1760b87f0d91cc17c4342a954c959976a4b45518dc4ecc27eefb5a34e7",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "controls.json": {
+      "commit": "793af9201fdffc32f9bef9a2bc74479b9bf8fd62",
+      "directory": "C:\\Projects\\TimeLearnerWorker\\controls\\elder-fixed-threshold8-a1"
+    },
+    "declaration.json": {
+      "ready_for_launch_after_baseline_audit": true,
+      "native_started": false,
+      "threshold": 0.09874840158355691,
+      "scientific_verdict": null
+    },
+    "launch-intent.json": {
+      "controls": "793af9201fdffc32f9bef9a2bc74479b9bf8fd62",
+      "threshold": 0.09874840158355691,
+      "scientific_verdict": null
+    },
+    "prepare": {
+      "binding": {
+        "pid": 16144,
+        "creation_filetime": "134394969802379457",
+        "job_name": "Local\\TimeLearner-9c162121-1375-472d-8e03-a4896a4775c0"
+      },
+      "stdout.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "stderr.log": {
+        "bytes": 0,
+        "tail": ""
+      },
+      "kernel_job": {
+        "limits": {
+          "flags": 8712,
+          "memory_bytes": 21474836480,
+          "maximum_processes": 32,
+          "peak_job_memory_bytes": 3404574720
+        },
+        "pids": [
+          16144,
+          17112
+        ]
+      },
+      "kernel_process": {
+        "identity": {
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134394969802379457"
+        },
+        "running": true
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # Статус TimeLearner — 18 ноября 2026
 
-Актуализация 14:48UTC. Полная цель этапов0–12 активна. Принят только этап0;
+Актуализация 17:58UTC. Полная цель этапов0–12 активна. Принят только этап0;
 этапы1–12 остаются частичными. Научные8/8 не являются условием завершения.
 Accepted root develop `87e7da0205b6bb0d582f7b4f2551c935fd7f2350` не менялся;
 новый непроверенный код не объединялся в develop. Пользовательские деревья
@@ -86,7 +86,8 @@ Ns=1 для всех. Revision
 [Проверка и ограничения восстановления](RetainedStoppedExportRecovery-20261118.ru.md).
 [Полный audit/provenance во внешнем CAS](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/retained-model-data-audit.archive.json).
 Native import/readback уже подтверждены отдельным фактическим процессом
-(квитанция ниже); Test завершён, последующий recognition-аудит отказал. DATA аудит сам не заменяет native
+(квитанция ниже); baseline Test и исправленный re-audit завершены. При100
+модель молчит, проверка выбранного порога выполняется. DATA аудит сам не заменяет native
 проверку и не меняет исходный execution failure.
 
 ## Frozen DATA: проверенная часть и оставшиеся отказы
@@ -124,10 +125,12 @@ Linux248 и полная матрица режимов остаются откр
 
 ## Следующие действия по основной цели
 
-1. Установить причину `recognition_images_changed` после actual native Test
-   сохранённой Elder модели. Не ослаблять проверку физики; новый Train не нужен.
-2. Галерея40 пар и DOCXv3 опубликованы. Продолжить независимую frozen оценку
-   с заранее зафиксированными моделью, порогом и новыми условиями.
+1. Завершить actual native fixed-threshold8 Test сохранённой Elder модели:
+   заранее выбран0.09874840158355691; исходный baseline100 уже полностью
+   проверен и молчит. Proxy TP1/FP1/FN0/TN6 не заменяет реальные спайки.
+2. Принять затронутые readout/physical проверки M40 после свежей сборки,
+   затем candidate/ownership coverage. Галерея40 пар и DOCXv3 опубликованы;
+   независимая frozen оценка остаётся отдельным следующим шагом.
 3. Python8-a3 завершён8/8; сохранить полный corpus во внешнем архиве.
    Подтвердить Linux/native coverage и поддерживаемые режимы по исходному плану.
 4. Продолжить алгоритмы: global terminal best-state restoration остаётся
@@ -175,3 +178,18 @@ storage contract с проверками hashes/closure и отдельным na
 прежних8 наблюдений сейчас выполняется в отдельном bounded Python Job;
 native Test и Train не повторяются. Итоговая классификация Elder пока не принята.
 [Причина, исправление, проверки и handle](CrossPlatformStorageImageAudit-20261118.ru.md).
+
+
+Последнее подтверждённое состояние: полный baseline audit3 Elder завершён,
+TP0/FP0/FN1/TN7 при100; исходный export failure и certificate=None сохранены.
+[Новый поддерживаемый отчёт](ElderRecoveredBranchBaseline-20261118.ru.md).
+Порог0.09874840158355691 зафиксирован controls793af920 до нового Test.
+Подготовка выполнена за453.08с, начался Console native phase:
+PID12440/creation_filetime134394974366004162, Job
+`Local\TimeLearner-1c08540e-f900-40e1-b0fe-a70df9158f3a`,16GiB.
+Итог новой классификации не принят. Одновременно на M40 строится новый
+runtime и21-case native gate, sourceRoot6433f59/Pulse5f8; отдельный kernel
+unit `timelearner-a0a35042-5a34-4ff7-a7a4-2b324ce07cd3.service`,
+PID3087990/start_ticks409920358. [Исправление fixtures и его область](CalibrationReadoutFixtureRepair-20261118.ru.md).
+Глобальный возврат terminal best-state остаётся не реализованным; эти
+эксперименты и исправления документации не закрывают полный этап7.
