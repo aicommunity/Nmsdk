@@ -1,0 +1,115 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "6b1152e4a777252397a4e504ecab52e9b8829d54bbeeb122c8d17d8ca715d600",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "scope": "raw actual native observations; full common source/model/scorer audit is separate and still pending",
+    "model_revision": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+    "threshold": 0.09874840158355691,
+    "counts": {
+      "TP": 1,
+      "FP": 0,
+      "FN": 0,
+      "TN": 3
+    },
+    "rows": [
+      {
+        "sample_id": "seen-target-control",
+        "label": "target",
+        "classification_from_actual_spikes": "TP",
+        "spike_times": [
+          0.4925
+        ],
+        "stimulus_times": [
+          0.01,
+          0.09,
+          0.25,
+          0.49
+        ],
+        "delays_after_last_input": [
+          0.0025000000000000022
+        ],
+        "complete": true,
+        "valid": true,
+        "samples": 4001
+      },
+      {
+        "sample_id": "heldout-permutation-1",
+        "label": "foil",
+        "classification_from_actual_spikes": "TN",
+        "spike_times": [],
+        "stimulus_times": [
+          2.0105,
+          2.0905,
+          2.3305,
+          2.4905
+        ],
+        "delays_after_last_input": [],
+        "complete": true,
+        "valid": true,
+        "samples": 4001
+      },
+      {
+        "sample_id": "heldout-permutation-2",
+        "label": "foil",
+        "classification_from_actual_spikes": "TN",
+        "spike_times": [],
+        "stimulus_times": [
+          4.011,
+          4.171,
+          4.411,
+          4.491
+        ],
+        "delays_after_last_input": [],
+        "complete": true,
+        "valid": true,
+        "samples": 4001
+      },
+      {
+        "sample_id": "heldout-permutation-3",
+        "label": "foil",
+        "classification_from_actual_spikes": "TN",
+        "spike_times": [],
+        "stimulus_times": [
+          6.0115,
+          6.2515,
+          6.3315,
+          6.4915
+        ],
+        "delays_after_last_input": [],
+        "complete": true,
+        "valid": true,
+        "samples": 4001
+      }
+    ],
+    "files": [
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-frozen-heldout4-a1\\native\\trial-0.json",
+        "sha256": "f9a1695d7a91c254209d43b193d665e92e3a7f1c905cb6dfb310b2e64056dcb5",
+        "size": 1360003
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-frozen-heldout4-a1\\native\\trial-1.json",
+        "sha256": "0e5d73bbb164bfc7684ef611ccdff0a54a48b9e61e3a671f459642961d62b46c",
+        "size": 1293472
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-frozen-heldout4-a1\\native\\trial-2.json",
+        "sha256": "3c7a0934066f01e3561a80dd1426acad50f70bc509c8de9f4a6d8e43ccc6c7b9",
+        "size": 1293515
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-frozen-heldout4-a1\\native\\trial-3.json",
+        "sha256": "f3a0a159599e4e1ecb0e16c1104ae1fe2c8e71d9d5c84a14f0f3a31c069043f0",
+        "size": 1293657
+      }
+    ],
+    "seen_target_control": true,
+    "unseen_foils": 3,
+    "training_completed": false,
+    "full_common_audit_accepted": false,
+    "scientific_verdict": null
+  }
+}

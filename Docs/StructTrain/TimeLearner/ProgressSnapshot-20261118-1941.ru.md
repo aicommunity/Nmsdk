@@ -61,3 +61,43 @@ CandidateEvidence. Три новые kernel regressions ещё не выполн
 graph capture/terminal restoration по полной спецификации. Ownership fixture
 binding, расширенная матрица, migration/defaults/docs и остальные пункты
 исходных этапов остаются обязательными.8/8 не является условием завершения.
+
+
+## Последующее состояние: три работающих задания
+
+Actual heldout4 native phase завершена за1420.02с, exit0/valid,47 captured loaded
+files, все процессы закрыты, исходный Job отсутствует. Записано TP1/FP0/FN0/TN3:
+seen target control в0.4925с (2.5мс после последнего входа), три новых foil
+без спайков, все4 complete/valid по4001 samples. Полный common audit **ещё идёт**:
+PID5572/creation134395047527903832,
+Job`Local\TimeLearner-3db3f428-c6ff-4a94-aec7-a3b5c0b94585`.
+Это предварительные реальные ответы, а не принятый independent scientific
+verdict. [Raw и hashes](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/frozen-heldout4-actual-responses-pending-audit.json),
+[закрытие native и живой audit](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/frozen-heldout4-native-closed-audit-running.json).
+
+M40 native29 завершён:25 PASS/4 FAIL, без скрытия отрицательного общего итога.
+Обе persistence-проверки теперь прошли в одном процессе с readout; коллизия
+имён устранена. Четыре N0 ThresholdCandidate (обе топологии,2k/20k) остановились
+на исходном certificate precondition, maximum_sweeps_exhausted; им нужен
+явно объявленный валидный source для transport gate, без подстановки certificate
+или скрытого расширения допуска. Все группы и supervisor закрыты.
+[Отрицательная общая квитанция](../../../Reports/StructTrain/TimeLearner/CalibrationReadoutCompletion-20261118/linux29-closed-rejected.json).
+
+Освободившийся слот M40 занят подготовленным temporal report16 baseline/threshold
+проб. Он реально работает в unit`timelearner-8fb630c3-4574-46e4-be82-9754e5f7cce2.service`,
+PID3402348/start410770896,24GiB. [Handle](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-temporal-report-running.json).
+
+На Elder начата отдельная свежая сборка Root862837e8e45084449f8ad5ca787b201151af6251/
+Pulse5f6792fcd346326cab7ed5cd43eebc68e603b38c для14 cases: три новых measured
+selection, четыре прежних timing/probe-budget regressions, семь настоящих
+physical DATA/storage/frozen cases. Canonical preparation прошла; native
+supervisor1322921/start460190828 и unit`timelearner-de46affd-0bf2-4975-a8f3-1e5eea2d50eb.service`
+подтверждены живыми. Старые sources/runtimes/builds сохранены; source projection
+использует точные Git objects и отдельные hardlinks намеренно частичных old
+repositories, не выдуманную доступность их отсутствующей истории. Полнота
+4300 materialized code files сверена с Git namespace.512MiB disk reservation,
+256MiB free floor заданы явно после проверки реального места.
+[Источник, controls и handle](../../../Reports/StructTrain/TimeLearner/MeasuredBoundarySelection-20261118/elder14-running.json).
+Новый getter не является native graph restoration; этот пункт этапа7 остаётся
+открытым. Только этап0 полностью принят; весь план и independent evaluation
+не объявляются завершёнными по raw counts или отдельным SDK cases.

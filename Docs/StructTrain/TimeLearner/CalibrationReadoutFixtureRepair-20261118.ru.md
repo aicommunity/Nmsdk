@@ -76,3 +76,9 @@ NewOnly остаётся обязательным; ошибки теперь с�
 и подтверждать наличие обоих наборов, а не запускать их изолированно для
 сокрытия коллизии. Ни один файл исходного rejected Gate21 не перезаписывается.
 [Полный разбор всех JUnit failures](../../../Reports/StructTrain/TimeLearner/CalibrationReadoutCompletion-20261118/linux21-artifact-collision-diagnosis.json).
+
+
+Последующий Gate29 Rootb14/Pulse5f8:25 PASS/4 N0 source-precondition failures.
+Persistence Classic/Branch прошли в одном процессе с readout; namespace fix
+подтверждён. Общий gate остаётся отрицательным, расширенная матрица не принята.
+[Фактическая закрытая квитанция](../../../Reports/StructTrain/TimeLearner/CalibrationReadoutCompletion-20261118/linux29-closed-rejected.json).
