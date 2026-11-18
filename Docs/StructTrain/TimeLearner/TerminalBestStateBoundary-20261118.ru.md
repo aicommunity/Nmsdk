@@ -91,3 +91,29 @@ AdvanceInput и Stop. Выбор остаётся в production Rank; незав
 transaction после отзыва composite authority, owner mirrors/C readback,
 accounting/export/replay и настоящие lifecycle/physics regressions выше.
 Действующие научные модели и runtime не изменены.
+
+## Захват native graph: подготовленный код и проверки
+
+NativeMeasuredTrainingBoundary сохраняет полный neuron/Dataset graph,
+storage image closure, owned C-state и owner mirrors на новом serial выбранной
+контроллером точки. Захват выполняется после фактического Consume на закрытой
+probe boundary, до следующего edit; Build/Reset/Calculate он не вызывает.
+Process-local снимок ограничен64MiB сериализованных данных; превышение даёт
+BudgetExhausted с отдельной диагностикой, без подмены ранее принятого измерения.
+Reset/новая сессия/импорт очищают снимок. Снимок не является сертификатом или
+portable checkpoint и пока не используется для автоматического восстановления.
+
+Подготовлены6 native cases: Classic/Branch N1 completed, N0 snapshot при
+последующих edits, heterogeneous/dormant C-state. Сравниваются независимо
+прочитанные graph identities на фактической пробе, Dataset, C-state и неизменность
+ранее сохранённого снимка. Эти новые cases ещё не собраны/не приняты.
+
+Отрицательный Elder14 сохранён:13 PASS/1 FAIL. Ошибка нового kernel сценария
+находится на ASSERT_NE первого Edit: resistance-domain path может сначала
+штатно применить текущую геометрию. Сценарий исправлен: служебное применение и
+его реальные recorder observations завершаются, затем требуется действительно
+другой unmeasured candidate. Проверка сохранности прежнего selection остаётся.
+Production search/rank/tolerances этим изменением не меняются. Новый серверный
+прогон требуется; прежний13/14 не объявляется успешным задним числом.
+
+Остальные семь требований terminal restoration выше остаются открытыми.

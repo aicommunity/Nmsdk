@@ -58,6 +58,7 @@ TEST(BoundedTrainingMeasuredBoundary,UnmeasuredEditAndBudgetStopCannotReplaceThe
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
     for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
     {
+        SCOPED_TRACE(int(routing));SCOPED_TRACE(int(normalization));
         const auto protocol=Protocol(2,routing);auto cfg=Configuration(2,normalization);
         cfg.bounds={{1,3,1,1,10.,10.},{1,1,1,1,10.,10.}};
         BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}},
@@ -65,7 +66,7 @@ TEST(BoundedTrainingMeasuredBoundary,UnmeasuredEditAndBudgetStopCannotReplaceThe
         ConsumeInitialMeasuredPair(session,protocol);
         ASSERT_TRUE(session.SelectedMeasuredBoundary());const auto selected=*session.SelectedMeasuredBoundary();
         bool edited=false;
-        for(unsigned turn=0;turn<8 && !edited;++turn)
+        for(unsigned turn=0;turn<32 && !edited;++turn)
         {
             const auto action=session.NextAction();ASSERT_TRUE(action);
             if(action->kind==TrainingActionKind::ResistanceDomain)
@@ -75,12 +76,25 @@ TEST(BoundedTrainingMeasuredBoundary,UnmeasuredEditAndBudgetStopCannotReplaceThe
                 d.sourceAmplitude=1.;d.previewModelRevision="unmeasured-preview";
                 d.minimumResistance=d.maximumResistance=10.;session.AssessedDomain(action->serial,d,action->baseModelRevision);
             }
+            else if(action->kind==TrainingActionKind::Edit)
+            {
+                // A resistance-domain preview can first request the current
+                // geometry. Apply and measure that legal action; it does not
+                // yet establish the different, unmeasured terminal candidate.
+                const bool changed=action->parameters!=selected.candidate.fullParameters;
+                session.Applied(action->serial,action->parameters,"edit-"+std::to_string(action->serial),action->capacitance);
+                edited=changed;
+            }
             else
             {
-                ASSERT_EQ(action->kind,TrainingActionKind::Edit);
-                ASSERT_NE(action->parameters,selected.candidate.fullParameters);
-                session.Applied(action->serial,action->parameters,"unmeasured-edit",action->capacitance);edited=true;
+                ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+                const auto prepared=Prepare(protocol,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+                session.Arm(action->serial,prepared);
+                session.Consume(Observe(protocol,prepared,action->inputIndex,action->runId,action->trialId,
+                    std::vector<double>(protocol.inputs.size(),.03),Raw(protocol.inputs.size())),action->baseModelRevision);
             }
+            ASSERT_TRUE(session.SelectedMeasuredBoundary());
+            EXPECT_EQ(session.SelectedMeasuredBoundary()->serial,selected.serial);
         }
         ASSERT_TRUE(edited);EXPECT_NE(session.ModelRevision(),selected.candidate.modelRevision);
         session.ExhaustBudget();ASSERT_TRUE(session.SelectedMeasuredBoundary());

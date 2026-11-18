@@ -24,6 +24,7 @@
 #include "TimeLearner/NativeTrainingBindings.h"
 #include "TimeLearner/NativePostTuneBoundary.h"
 #include "TimeLearner/NativeFinalizationBoundary.h"
+#include "TimeLearner/NativeMeasuredTrainingBoundary.h"
 #include "TimeLearner/NumericChecks.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
@@ -3397,6 +3398,7 @@ struct BoundaryExtras {
     std::optional<bool> expectedFrozenSpikes;
     bool ownerRecognitionSource=false;
     bool persistenceReadout=false;
+    bool inspectMeasuredNativeBoundary=false;
 };
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
     std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.,unsigned n0Repeats=1,
@@ -3427,6 +3429,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     // Persistence and readout intentionally exercise the same native path.
     // Keep both proofs when their cases share one execution output directory.
     if(extras.persistenceReadout)suffix+="_persistence";
+    if(extras.inspectMeasuredNativeBoundary)suffix+="_measured_native_boundary";
     ASSERT_FALSE(trackedCapacitance && !withCapacitance);
     if(extras.ownerRecognitionSource)
     {
@@ -3644,6 +3647,10 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         plan.maximumWallSeconds=1800.;
     }
     std::ostringstream trace;std::size_t observations=0;
+    std::map<std::string,QJsonObject> witnessedModels,witnessedDatasets,witnessedCapacitances;
+    std::shared_ptr<const NativeMeasuredTrainingBoundary> firstRetainedBoundary;
+    QJsonObject firstRetainedIdentity;bool changedAfterFirstBoundary=false;
+    std::size_t lastBoundaryEpoch=std::numeric_limits<std::size_t>::max();
     plan.probe.onPrepared=[&](const auto&,const auto&) {
         trace.str({});trace.clear();trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
         for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)trace<<",soma"<<i;trace<<'\n';
@@ -3655,13 +3662,65 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         const auto base=rig.name+"_state_trial_"+std::to_string(++observations);
         Artifact(base+".json",QJsonDocument(EncodeNativeProbeEvidence(result)).toJson());
         Artifact(base+".csv",QByteArray::fromStdString(trace.str()));
+        if(extras.inspectMeasuredNativeBoundary && result.requestedSpecification && result.observation && result.observation->valid)
+        {
+            const auto neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+            const auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+            const auto generator=dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);
+            const auto id=result.requestedSpecification->trialId;
+            witnessedModels[id]=NmsdkTools::IdentifyModel(neuron,{{&generator->Output,"burst"}});
+            witnessedDatasets[id]=NmsdkTools::IdentifyModel(dataset);
+            witnessedCapacitances[id]=rig.learner->OwnedNativeCapacitanceState();
+        }
     };
     if(configured)rig.learner->SetConfiguredNativeEvidenceSinks({plan.probe.onPrepared,plan.probe.onSample,plan.observationSink});
     else rig.learner->BeginNativeTraining(plan);
     for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
-    {ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    {
+        ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+        if(extras.inspectMeasuredNativeBoundary)
+        {
+            const auto& retained=rig.learner->NativeTrainingController().SelectedNativeBoundary();
+            if(retained && !firstRetainedBoundary){firstRetainedBoundary=retained;firstRetainedIdentity=retained->NeuronIdentity();}
+            const auto epoch=rig.learner->NativeTrainingController().ModelEpoch();
+            if(firstRetainedBoundary && epoch!=lastBoundaryEpoch)
+            {
+                lastBoundaryEpoch=epoch;
+                EXPECT_EQ(firstRetainedBoundary->NeuronIdentity(),firstRetainedIdentity);
+                const auto neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+                const auto generator=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+                changedAfterFirstBoundary=changedAfterFirstBoundary ||
+                    NmsdkTools::IdentifyModel(neuron,{{&generator->Output,"burst"}})!=firstRetainedIdentity;
+            }
+        }
+    }
     const auto& service=rig.learner->NativeTrainingController();
     const bool diagnostic=expectation==BoundaryExpectation::DiagnosticSweepBudget;
+    if(extras.inspectMeasuredNativeBoundary)
+    {
+        const auto& retained=service.SelectedNativeBoundary();ASSERT_TRUE(retained)<<service.Reason();
+        ASSERT_TRUE(service.Search());ASSERT_TRUE(service.Search()->SelectedMeasuredBoundary());
+        const auto& chosen=service.Search()->SelectedMeasuredBoundary()->candidate;
+        EXPECT_EQ(retained->Selection().serial,service.Search()->SelectedMeasuredBoundary()->serial);
+        EXPECT_EQ(retained->Selection().candidate.fullParameters,chosen.fullParameters);
+        EXPECT_EQ(retained->Selection().candidate.capacitance,chosen.capacitance);
+        ASSERT_TRUE(witnessedModels.contains(chosen.trialId));
+        EXPECT_EQ(retained->NeuronIdentity(),witnessedModels.at(chosen.trialId));
+        EXPECT_EQ(retained->DatasetIdentity(),witnessedDatasets.at(chosen.trialId));
+        EXPECT_EQ(retained->CapacitanceState(),witnessedCapacitances.at(chosen.trialId));
+        EXPECT_EQ(retained->NeuronIdentity()["sha256"].toString().toStdString(),chosen.modelRevision);
+        EXPECT_GT(retained->RetainedBytes(),0u);EXPECT_LE(retained->RetainedBytes(),NativeMeasuredTrainingBoundary::MaximumRetainedBytes);
+        EXPECT_EQ(retained->StorageFingerprint().size(),64u);
+        ASSERT_TRUE(firstRetainedBoundary);
+        EXPECT_EQ(firstRetainedBoundary->NeuronIdentity(),firstRetainedIdentity);
+        if(diagnostic)EXPECT_TRUE(changedAfterFirstBoundary);
+        Artifact(rig.name+"_retained_native_boundary.json",QJsonDocument(QJsonObject{
+            {"kind","native_measured_training_boundary_readback"},{"schema_version",1},
+            {"selection_serial",double(retained->Selection().serial)},{"trial_id",QString::fromStdString(chosen.trialId)},
+            {"neuron_identity",retained->NeuronIdentity()},{"dataset_identity",retained->DatasetIdentity()},
+            {"capacitance_state",retained->CapacitanceState()},{"storage_fingerprint",QString::fromStdString(retained->StorageFingerprint())},
+            {"first_snapshot_survived_later_edits",changedAfterFirstBoundary},{"terminal_graph_restoration_implemented",false}}).toJson());
+    }
     // Preserve the real failure boundary before a downstream transport
     // precondition assertion. Missing convergence must never erase the search
     // summary or be mistaken for an import/calibration failure.
@@ -4107,6 +4166,18 @@ TEST(NativeThresholdPotential,ClassicN1_20000){CalibrationBoundaryFixture<NNeuro
 TEST(NativeThresholdPotential,BranchN1_20000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,20000,true);}
 TEST(NativeCalibrationPersistence,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000,true,true);}
 TEST(NativeCalibrationPersistence,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000,true,true);}
+TEST(NativeMeasuredBoundary,ClassicN1CompletedPhysicalSnapshot)
+{LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::ThresholdPotential,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.productionCalibrationSeed=true,.inspectMeasuredNativeBoundary=true});}
+TEST(NativeMeasuredBoundary,BranchN1CompletedPhysicalSnapshot)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdPotential,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.productionCalibrationSeed=true,.inspectMeasuredNativeBoundary=true});}
+TEST(NativeMeasuredBoundary,ClassicN0SnapshotIsNotOverwrittenBySubsequentEdits)
+{LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::DiagnosticSweepBudget,false,false,{.inspectMeasuredNativeBoundary=true});}
+TEST(NativeMeasuredBoundary,BranchN0SnapshotIsNotOverwrittenBySubsequentEdits)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::DiagnosticSweepBudget,false,false,{.inspectMeasuredNativeBoundary=true});}
+TEST(NativeMeasuredBoundary,ClassicOwnedHeterogeneousAndDormantCapacitanceSnapshot)
+{LearnedBoundary<NNeuronTimeLearner>(0,.2,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::Completed,true,true,{.inspectMeasuredNativeBoundary=true});}
+TEST(NativeMeasuredBoundary,BranchOwnedHeterogeneousAndDormantCapacitanceSnapshot)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(0,.2,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::Completed,true,true,{.inspectMeasuredNativeBoundary=true});}
 TEST(NativeCalibrationTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
 TEST(NativeCalibrationTransaction,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
 TEST(NativePostTuneTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
