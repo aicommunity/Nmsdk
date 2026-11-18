@@ -281,7 +281,13 @@ template<class Owner> void FrozenDataMatchesOriginalRecognition()
     ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;
     result=restored->ImportNativePhysicalModelData(data,Implementation);
     ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;
+    // The fixture's parent model is already initialized. UModule::Init is
+    // idempotent and does not initialize newly attached owners on a second
+    // call. Initialize the two fresh components through their native lifecycle
+    // before asking the existing scheduler to calculate them.
+    original->Init();restored->Init();
     auto model=fixture.environment->GetModel();model->Init();model->Reset();
+    ASSERT_TRUE(original->IsInit());ASSERT_TRUE(restored->IsInit());
     ASSERT_TRUE(original->NativeModelEditFailure().empty())<<original->NativeModelEditFailure();
     ASSERT_TRUE(restored->NativeModelEditFailure().empty())<<restored->NativeModelEditFailure();
     EXPECT_FALSE(original->HasNativePhysicalModelData());EXPECT_TRUE(restored->HasNativePhysicalModelData());
@@ -382,7 +388,18 @@ TEST(NativePhysicalModelData,FrozenDataRejectsSoloAndResignedThresholdMetadata)
     calibration["threshold"]=calibration["threshold"].toDouble()+1.;metadata["calibration"]=calibration;neuron["metadata"]=metadata;
     // Keep both digests valid: a checksum is not proof that metadata matches physics.
     neuron=Signed(neuron);data["neuron"]=neuron;data=Signed(data);
-    EXPECT_THROW(PrepareNativeFrozenPhysicalModelData(data,fixture.storage,fixture.environment,Implementation),std::invalid_argument);
+    try
+    {
+        PrepareNativeFrozenPhysicalModelData(data,fixture.storage,fixture.environment,Implementation);
+        FAIL()<<"Contradictory threshold metadata was accepted";
+    }
+    catch(const NmsdkTools::ModelArchiveError& error)
+    {
+        // The shared archive validator rejects the contradiction before the
+        // frozen DATA adapter. Preserve its typed diagnostic contract.
+        EXPECT_EQ(error.code,"calibration_model_mismatch");
+        EXPECT_NE(std::string(error.what()).find("$.LTZone"),std::string::npos);
+    }
     EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
 }
 }
