@@ -1,0 +1,1079 @@
+{
+  "kind": "timelearner_actual_cold_threshold_confirmation_readback",
+  "schema_version": 1,
+  "job": "s11-fair-input-threshold-m40-a1",
+  "controls": "9b47fd86155f56bb695faffa0ce3e2b0eb324bfd",
+  "status": {
+    "status": {
+      "supervisor_live": false,
+      "outer": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "6de6be9e4bb46539caab3de555cf5de9cc63090f5dc42257611196359b445c25",
+          "unit": "timelearner-ac132d40-d220-4496-946d-102ebd985cea.service",
+          "invocation_id": "90adf3dfe28c49848c73f80bdce992bf",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ac132d40-d220-4496-946d-102ebd985cea.service",
+          "initial_main_pid": 2077947,
+          "initial_start_ticks": "406490231",
+          "sha256": "b034b16c4ab0af838c0963022ecf066fc8c29fb96a2deb76ccbd6f6613a39869"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-ac132d40-d220-4496-946d-102ebd985cea.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      },
+      "result": {
+        "reason": null,
+        "record_errors": [],
+        "last_before_cleanup": {
+          "execution": "unknown",
+          "all_processes_closed": true,
+          "reason": "kernel_cgroup_observed",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "6de6be9e4bb46539caab3de555cf5de9cc63090f5dc42257611196359b445c25",
+            "unit": "timelearner-ac132d40-d220-4496-946d-102ebd985cea.service",
+            "invocation_id": "90adf3dfe28c49848c73f80bdce992bf",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ac132d40-d220-4496-946d-102ebd985cea.service",
+            "initial_main_pid": 2077947,
+            "initial_start_ticks": "406490231",
+            "sha256": "b034b16c4ab0af838c0963022ecf066fc8c29fb96a2deb76ccbd6f6613a39869"
+          },
+          "state": {
+            "Type": "exec",
+            "Restart": "no",
+            "RemainAfterExit": "yes",
+            "MainPID": "0",
+            "Result": "success",
+            "ExecMainCode": "1",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "MemoryMax": "17179869184",
+            "TasksMax": "64",
+            "KillMode": "control-group",
+            "Description": "TimeLearner contained attempt ac132d40-d220-4496-946d-102ebd985cea",
+            "LoadState": "loaded",
+            "ActiveState": "active",
+            "SubState": "exited",
+            "InvocationID": "90adf3dfe28c49848c73f80bdce992bf"
+          },
+          "memory_max": 17179869184,
+          "tasks_max": 64,
+          "scientific_verdict": null
+        },
+        "outer_binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "6de6be9e4bb46539caab3de555cf5de9cc63090f5dc42257611196359b445c25",
+          "unit": "timelearner-ac132d40-d220-4496-946d-102ebd985cea.service",
+          "invocation_id": "90adf3dfe28c49848c73f80bdce992bf",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ac132d40-d220-4496-946d-102ebd985cea.service",
+          "initial_main_pid": 2077947,
+          "initial_start_ticks": "406490231",
+          "sha256": "b034b16c4ab0af838c0963022ecf066fc8c29fb96a2deb76ccbd6f6613a39869"
+        },
+        "outer_closed": true,
+        "children_closed": [
+          {
+            "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1/classic/process/contained",
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "8ae795c3d9dc76b16c5c8552fbc8485f1d8728e9c9548189d570aefbd34567c4",
+              "unit": "timelearner-f10a758c-235a-4629-8281-240ac59fb0db.service",
+              "invocation_id": "10076f34ec214f1c853745c7a412891d",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f10a758c-235a-4629-8281-240ac59fb0db.service",
+              "initial_main_pid": 2097133,
+              "initial_start_ticks": "406566874",
+              "sha256": "b453576f9fba895a47de4d10317dbcdc3e9e0258e6e0095ce6e9e213a4234ef4"
+            },
+            "closure": {
+              "execution": "unknown",
+              "all_processes_closed": true,
+              "reason": "bound_unit_and_group_absent",
+              "scientific_verdict": null,
+              "binding": {
+                "kind": "timelearner_contained_binding",
+                "schema_version": 1,
+                "request_sha256": "8ae795c3d9dc76b16c5c8552fbc8485f1d8728e9c9548189d570aefbd34567c4",
+                "unit": "timelearner-f10a758c-235a-4629-8281-240ac59fb0db.service",
+                "invocation_id": "10076f34ec214f1c853745c7a412891d",
+                "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f10a758c-235a-4629-8281-240ac59fb0db.service",
+                "initial_main_pid": 2097133,
+                "initial_start_ticks": "406566874",
+                "sha256": "b453576f9fba895a47de4d10317dbcdc3e9e0258e6e0095ce6e9e213a4234ef4"
+              },
+              "state": {
+                "Type": "",
+                "Restart": "no",
+                "RemainAfterExit": "no",
+                "MainPID": "0",
+                "Result": "success",
+                "ExecMainCode": "0",
+                "ExecMainStatus": "0",
+                "ControlGroup": "",
+                "MemoryMax": "infinity",
+                "TasksMax": "52862",
+                "KillMode": "control-group",
+                "Description": "timelearner-f10a758c-235a-4629-8281-240ac59fb0db.service",
+                "LoadState": "not-found",
+                "ActiveState": "inactive",
+                "SubState": "dead",
+                "InvocationID": ""
+              }
+            }
+          },
+          {
+            "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1/branch/process/contained",
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "3c875662cda9c86da88d588341b008d973a9624bd85825ad1bc9b3dc3d81d39f",
+              "unit": "timelearner-0695ee87-f900-40c3-8f1d-a7d14079464a.service",
+              "invocation_id": "12e0556c6ac84117ac820c650ee73c15",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0695ee87-f900-40c3-8f1d-a7d14079464a.service",
+              "initial_main_pid": 2259131,
+              "initial_start_ticks": "407025100",
+              "sha256": "f0d61ff29b4b1302881978cf3edad330126f3b59b98e848c0718f112c44921be"
+            },
+            "closure": {
+              "execution": "unknown",
+              "all_processes_closed": true,
+              "reason": "bound_unit_and_group_absent",
+              "scientific_verdict": null,
+              "binding": {
+                "kind": "timelearner_contained_binding",
+                "schema_version": 1,
+                "request_sha256": "3c875662cda9c86da88d588341b008d973a9624bd85825ad1bc9b3dc3d81d39f",
+                "unit": "timelearner-0695ee87-f900-40c3-8f1d-a7d14079464a.service",
+                "invocation_id": "12e0556c6ac84117ac820c650ee73c15",
+                "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0695ee87-f900-40c3-8f1d-a7d14079464a.service",
+                "initial_main_pid": 2259131,
+                "initial_start_ticks": "407025100",
+                "sha256": "f0d61ff29b4b1302881978cf3edad330126f3b59b98e848c0718f112c44921be"
+              },
+              "state": {
+                "Type": "",
+                "Restart": "no",
+                "RemainAfterExit": "no",
+                "MainPID": "0",
+                "Result": "success",
+                "ExecMainCode": "0",
+                "ExecMainStatus": "0",
+                "ControlGroup": "",
+                "MemoryMax": "infinity",
+                "TasksMax": "52862",
+                "KillMode": "control-group",
+                "Description": "timelearner-0695ee87-f900-40c3-8f1d-a7d14079464a.service",
+                "LoadState": "not-found",
+                "ActiveState": "inactive",
+                "SubState": "dead",
+                "InvocationID": ""
+              }
+            }
+          }
+        ],
+        "disk_peak_increment": 7676813312,
+        "minimum_free": 376425758720,
+        "execution_success_not_inferred_from_cleanup": true,
+        "scientific_verdict": null
+      },
+      "scientific_verdict": null
+    },
+    "cases": {
+      "classic": {
+        "native": {
+          "execution": "unknown",
+          "all_processes_closed": true,
+          "reason": "bound_unit_and_group_absent",
+          "scientific_verdict": null,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "8ae795c3d9dc76b16c5c8552fbc8485f1d8728e9c9548189d570aefbd34567c4",
+            "unit": "timelearner-f10a758c-235a-4629-8281-240ac59fb0db.service",
+            "invocation_id": "10076f34ec214f1c853745c7a412891d",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f10a758c-235a-4629-8281-240ac59fb0db.service",
+            "initial_main_pid": 2097133,
+            "initial_start_ticks": "406566874",
+            "sha256": "b453576f9fba895a47de4d10317dbcdc3e9e0258e6e0095ce6e9e213a4234ef4"
+          },
+          "state": {
+            "Type": "",
+            "Restart": "no",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "MemoryMax": "infinity",
+            "TasksMax": "52862",
+            "KillMode": "control-group",
+            "Description": "timelearner-f10a758c-235a-4629-8281-240ac59fb0db.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "InvocationID": ""
+          }
+        },
+        "run": {
+          "operation": "diagnostic-evaluate",
+          "execution": "completed",
+          "validity": "valid"
+        },
+        "metrics": {
+          "model_revision": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+          "effective_threshold": 0.019405139380343855,
+          "pooled_counts": {
+            "TP": 1,
+            "FP": 2,
+            "FN": 0,
+            "TN": 5,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.75,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.2857142857142857
+          },
+          "diagnostic_only": true
+        }
+      },
+      "branch": {
+        "native": {
+          "execution": "unknown",
+          "all_processes_closed": true,
+          "reason": "bound_unit_and_group_absent",
+          "scientific_verdict": null,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "3c875662cda9c86da88d588341b008d973a9624bd85825ad1bc9b3dc3d81d39f",
+            "unit": "timelearner-0695ee87-f900-40c3-8f1d-a7d14079464a.service",
+            "invocation_id": "12e0556c6ac84117ac820c650ee73c15",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0695ee87-f900-40c3-8f1d-a7d14079464a.service",
+            "initial_main_pid": 2259131,
+            "initial_start_ticks": "407025100",
+            "sha256": "f0d61ff29b4b1302881978cf3edad330126f3b59b98e848c0718f112c44921be"
+          },
+          "state": {
+            "Type": "",
+            "Restart": "no",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "MemoryMax": "infinity",
+            "TasksMax": "52862",
+            "KillMode": "control-group",
+            "Description": "timelearner-0695ee87-f900-40c3-8f1d-a7d14079464a.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "InvocationID": ""
+          }
+        },
+        "run": {
+          "operation": "diagnostic-evaluate",
+          "execution": "completed",
+          "validity": "valid"
+        },
+        "metrics": {
+          "model_revision": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+          "effective_threshold": 0.07383352212183064,
+          "pooled_counts": {
+            "TP": 1,
+            "FP": 2,
+            "FN": 0,
+            "TN": 5,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.75,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.2857142857142857
+          },
+          "diagnostic_only": true
+        }
+      }
+    },
+    "terminal.json": {
+      "operation_passed": true,
+      "heartbeat_errors": [],
+      "lease_release": "external controller only after exact outer and finite children close",
+      "scientific_verdict": null
+    },
+    "live_resources": {},
+    "work_progress": {
+      "classic": {
+        "files": [
+          "run-manifest.json",
+          "runtime-cli-interface.json"
+        ],
+        "native_trial_json": 8,
+        "has_native_execution": true
+      },
+      "branch": {
+        "files": [
+          "run-manifest.json",
+          "runtime-cli-interface.json"
+        ],
+        "native_trial_json": 8,
+        "has_native_execution": true
+      }
+    },
+    "native_resources": {},
+    "reserved": {
+      "disk_bytes": 0,
+      "memory_bytes": 0,
+      "slots": 0
+    }
+  },
+  "trials": {
+    "cases": {
+      "classic": {
+        "process/result.json": {
+          "kind": "timelearner_process_result",
+          "schema_version": 2,
+          "execution": "completed",
+          "reason": "exit_zero_and_whole_group_closed",
+          "returncode": 0,
+          "all_processes_closed": true,
+          "runtime_provenance": "loaded_files_captured"
+        },
+        "native/execution.json": {
+          "kind": "timelearner_native_diagnostic_evaluation_execution",
+          "schema_version": 1,
+          "execution": "completed",
+          "observed_trials": 8,
+          "expected_trials": 8,
+          "model_ticks": 32008,
+          "frequency_hz": 2000,
+          "model_time_begin": 0,
+          "model_time_end": 16.004,
+          "model_revision": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+          "artifacts": [
+            {
+              "bytes": 354353248,
+              "path": "job.json",
+              "sha256": "703f0edb85e2a63ddd8a6c4a4205bfd0fc8cc342a02122664cbba2c3f8cf4412"
+            },
+            {
+              "bytes": 409864032,
+              "path": "model.json",
+              "sha256": "8d5233a01b4a2817c635a0880fc138de24a201f58282e4439cee93f2b0f1c48a"
+            },
+            {
+              "bytes": 1815262,
+              "path": "trial-0.json",
+              "sha256": "2bb13f18d8421492bfaf716007731dc95d2c28733fa176c81614ebe70c752d4d"
+            },
+            {
+              "bytes": 1750481,
+              "path": "trial-1.json",
+              "sha256": "d33ac5f66ab12752b2ac84b6d59b6ba84ef4225ec64c3acd308ba03fd7f34b9a"
+            },
+            {
+              "bytes": 1750418,
+              "path": "trial-2.json",
+              "sha256": "36b523edb2557213538da5ee9f9ccd88cd6b9e85c460744d80e7636d3ef31952"
+            },
+            {
+              "bytes": 1750227,
+              "path": "trial-3.json",
+              "sha256": "f757578d96c4a968522bbb45bce785ba90801296257c583c56a4b7a7c3d399fb"
+            },
+            {
+              "bytes": 1815467,
+              "path": "trial-4.json",
+              "sha256": "3bbd19ec529f27092a8c2fd286fea5e58b0ca662408717374d6fd036259f2eb6"
+            },
+            {
+              "bytes": 1754566,
+              "path": "trial-5.json",
+              "sha256": "650c586a7d2c7fd0d9582bcccf89ebc0b88a7ad0e645268617f3dee5ff0de829"
+            },
+            {
+              "bytes": 1823023,
+              "path": "trial-6.json",
+              "sha256": "cd4021ba732a4d7a5895d1a1c7e3481f466fd1274503162e5569fd8d9cb31478"
+            },
+            {
+              "bytes": 1755071,
+              "path": "trial-7.json",
+              "sha256": "6a0cf64d9c0720479b767ed3976533ae9dd4c2d0b0b748691fa3288202d2d617"
+            },
+            {
+              "bytes": 3995,
+              "path": "evaluation.json",
+              "sha256": "c03129fc0cea58888dd7bb718802faaa7cb914b47447750696b58c6147cc2d8b"
+            },
+            {
+              "bytes": 409864032,
+              "path": "model-after.json",
+              "sha256": "8d5233a01b4a2817c635a0880fc138de24a201f58282e4439cee93f2b0f1c48a"
+            }
+          ],
+          "run_id": "classic/stopped-phasea-diagnostic"
+        },
+        "native/evaluation.json": {
+          "kind": "timelearner_diagnostic_recognition_evaluation_spec",
+          "schema_version": 1,
+          "model_revision": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+          "run_id": "classic/stopped-phasea-diagnostic",
+          "criterion": {
+            "anchor": "onset",
+            "begin_offset": 0,
+            "end_offset": null,
+            "id": "post_anchor_target_whole_window_foil_v1",
+            "reject_target_outside_window": true
+          },
+          "coverage_policy": "per_trial_windows"
+        },
+        "trials": [
+          {
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/0",
+            "sample_id": "phasea-row-0",
+            "label": "target",
+            "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 1,
+            "spike_times": [
+              0.493
+            ],
+            "stimulus_times": [
+              0.01,
+              0.09,
+              0.25,
+              0.49
+            ],
+            "begin": 0,
+            "end": 2,
+            "closed_at": 2,
+            "samples": 4001,
+            "soma_max": [
+              0.024469780037899125,
+              0.002742755563599264,
+              0.02677621381340556,
+              0.02677621381340556
+            ],
+            "lt_potential_max": 0.019859704144444407,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/1",
+            "sample_id": "phasea-row-1",
+            "label": "foil",
+            "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+            "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 0,
+            "spike_times": [],
+            "stimulus_times": [
+              2.0105,
+              2.2505,
+              2.4105,
+              2.4905
+            ],
+            "begin": 2.0005,
+            "end": 4.000500000000001,
+            "closed_at": 4.0005,
+            "samples": 4001,
+            "soma_max": [
+              0.024469775289521323,
+              0.002742755536329078,
+              0.02677621381340556,
+              0.02677621381340556
+            ],
+            "lt_potential_max": 0.018918651319342422,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/2",
+            "sample_id": "phasea-row-2",
+            "label": "foil",
+            "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+            "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 0,
+            "spike_times": [],
+            "stimulus_times": [
+              4.011,
+              4.171,
+              4.251,
+              4.491
+            ],
+            "begin": 4.001,
+            "end": 6.001,
+            "closed_at": 6.001,
+            "samples": 4001,
+            "soma_max": [
+              0.024469775289521323,
+              0.002742755536329078,
+              0.02677621381340556,
+              0.02677621381340556
+            ],
+            "lt_potential_max": 0.0189361405334309,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/3",
+            "sample_id": "phasea-row-3",
+            "label": "foil",
+            "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+            "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 0,
+            "spike_times": [],
+            "stimulus_times": [
+              6.0115,
+              6.1715,
+              6.3315,
+              6.4915
+            ],
+            "begin": 6.0015,
+            "end": 8.0015,
+            "closed_at": 8.0015,
+            "samples": 4001,
+            "soma_max": [
+              0.02197832610873629,
+              0.002566761426104791,
+              0.026776213813405003,
+              0.026776213813405003
+            ],
+            "lt_potential_max": 0.018936140502434168,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/4",
+            "sample_id": "phasea-row-4",
+            "label": "foil",
+            "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+            "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 1,
+            "spike_times": [
+              8.494
+            ],
+            "stimulus_times": [
+              8.012,
+              8.032,
+              8.252,
+              8.492
+            ],
+            "begin": 8.002,
+            "end": 10.002,
+            "closed_at": 10.002,
+            "samples": 4001,
+            "soma_max": [
+              0.04062875499197871,
+              0.004884815239468154,
+              0.026840060407207322,
+              0.026840060407207322
+            ],
+            "lt_potential_max": 0.022653903856040408,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/5",
+            "sample_id": "phasea-row-5",
+            "label": "foil",
+            "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+            "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 0,
+            "spike_times": [],
+            "stimulus_times": [
+              10.0125,
+              10.2525,
+              10.4725,
+              10.4925
+            ],
+            "begin": 10.0025,
+            "end": 12.0025,
+            "closed_at": 12.0025,
+            "samples": 4001,
+            "soma_max": [
+              0.04215919195544082,
+              0.004884815246327223,
+              0.026840060407207322,
+              0.026840060407207322
+            ],
+            "lt_potential_max": 0.018950574616243304,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/6",
+            "sample_id": "phasea-row-6",
+            "label": "foil",
+            "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+            "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 1,
+            "spike_times": [
+              12.495
+            ],
+            "stimulus_times": [
+              12.013,
+              12.053,
+              12.093,
+              12.493
+            ],
+            "begin": 12.003,
+            "end": 14.003,
+            "closed_at": 14.003,
+            "samples": 4001,
+            "soma_max": [
+              0.04465225085416935,
+              0.004889553293319748,
+              0.02677623266862439,
+              0.02677623266862439
+            ],
+            "lt_potential_max": 0.021848235912736713,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/7",
+            "sample_id": "phasea-row-7",
+            "label": "foil",
+            "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+            "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 0,
+            "spike_times": [],
+            "stimulus_times": [
+              14.0135,
+              14.4135,
+              14.4535,
+              14.4935
+            ],
+            "begin": 14.0035,
+            "end": 16.003500000000003,
+            "closed_at": 16.0035,
+            "samples": 4001,
+            "soma_max": [
+              0.04465226127545785,
+              0.004889553293319859,
+              0.02677623266862439,
+              0.02677623266862439
+            ],
+            "lt_potential_max": 0.018918660715955105,
+            "lt_potential_recorded": true
+          }
+        ],
+        "direct_files": [
+          "run-manifest.json",
+          "runtime-cli-interface.json"
+        ]
+      },
+      "branch": {
+        "process/result.json": {
+          "kind": "timelearner_process_result",
+          "schema_version": 2,
+          "execution": "completed",
+          "reason": "exit_zero_and_whole_group_closed",
+          "returncode": 0,
+          "all_processes_closed": true,
+          "runtime_provenance": "loaded_files_captured"
+        },
+        "native/execution.json": {
+          "kind": "timelearner_native_diagnostic_evaluation_execution",
+          "schema_version": 1,
+          "execution": "completed",
+          "observed_trials": 8,
+          "expected_trials": 8,
+          "model_ticks": 32008,
+          "frequency_hz": 2000,
+          "model_time_begin": 0,
+          "model_time_end": 16.004,
+          "model_revision": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+          "artifacts": [
+            {
+              "bytes": 672150057,
+              "path": "job.json",
+              "sha256": "c9c55f1b8d150344f46625ec49f62bace71e2dfe258ac5b0b64e58e307b627db"
+            },
+            {
+              "bytes": 731029657,
+              "path": "model.json",
+              "sha256": "d507712d48b9ee1b4163e3b79ccd642ae3bf6cab94f79b086fadb7d2d1e268e2"
+            },
+            {
+              "bytes": 1360694,
+              "path": "trial-0.json",
+              "sha256": "28adc8b62ada1ad805acb9e4cec3c3ecea54234ba4ec7a2070a60f339c94deca"
+            },
+            {
+              "bytes": 1294508,
+              "path": "trial-1.json",
+              "sha256": "37dff52858c432a97f3514f421f577a63be2a3e1cc961de5b22d970d5c0475aa"
+            },
+            {
+              "bytes": 1294376,
+              "path": "trial-2.json",
+              "sha256": "ef5c6a0c072cc086c1ac0f3b472f380cf5845e34b029757b6df0074fd7f187de"
+            },
+            {
+              "bytes": 1294348,
+              "path": "trial-3.json",
+              "sha256": "ce95eba1f6d500d5a7dc9cf89162ce018774020c41b87ba43fafabf15db6152a"
+            },
+            {
+              "bytes": 1360772,
+              "path": "trial-4.json",
+              "sha256": "d03c32a9496560703511737f0c02a440ff8c49267f09d5e201be7129e91ca8ff"
+            },
+            {
+              "bytes": 1298495,
+              "path": "trial-5.json",
+              "sha256": "446213c5d0b37272d4a6bec8a557c4598595257cc32ba99c0f6fe44f936d3a6b"
+            },
+            {
+              "bytes": 1365302,
+              "path": "trial-6.json",
+              "sha256": "b631475d78842bf1668d9a4f090598ad4715b8981c7263cf1776502ccc8c9009"
+            },
+            {
+              "bytes": 1298668,
+              "path": "trial-7.json",
+              "sha256": "1476fa457a8023746fd5d48d923f5588541e09959434d947a9189688235ac41c"
+            },
+            {
+              "bytes": 3986,
+              "path": "evaluation.json",
+              "sha256": "2bb59a1965e71eea324364b7f1881ba2e214292792f5df80a0b7e56e9187c2ea"
+            },
+            {
+              "bytes": 731029657,
+              "path": "model-after.json",
+              "sha256": "d507712d48b9ee1b4163e3b79ccd642ae3bf6cab94f79b086fadb7d2d1e268e2"
+            }
+          ],
+          "run_id": "branch/stopped-phasea-diagnostic"
+        },
+        "native/evaluation.json": {
+          "kind": "timelearner_diagnostic_recognition_evaluation_spec",
+          "schema_version": 1,
+          "model_revision": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+          "run_id": "branch/stopped-phasea-diagnostic",
+          "criterion": {
+            "anchor": "onset",
+            "begin_offset": 0,
+            "end_offset": null,
+            "id": "post_anchor_target_whole_window_foil_v1",
+            "reject_target_outside_window": true
+          },
+          "coverage_policy": "per_trial_windows"
+        },
+        "trials": [
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/0",
+            "sample_id": "phasea-row-0",
+            "label": "target",
+            "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "model_before": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "model_after": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 1,
+            "spike_times": [
+              0.4925
+            ],
+            "stimulus_times": [
+              0.01,
+              0.09,
+              0.25,
+              0.49
+            ],
+            "begin": 0,
+            "end": 2,
+            "closed_at": 2,
+            "samples": 4001,
+            "soma_max": [
+              0.07564214332684538
+            ],
+            "lt_potential_max": 0.07564214332684538,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/1",
+            "sample_id": "phasea-row-1",
+            "label": "foil",
+            "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+            "model_before": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "model_after": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 0,
+            "spike_times": [],
+            "stimulus_times": [
+              2.0105,
+              2.2505,
+              2.4105,
+              2.4905
+            ],
+            "begin": 2.0005,
+            "end": 4.000500000000001,
+            "closed_at": 4.0005,
+            "samples": 4001,
+            "soma_max": [
+              0.05249954525587164
+            ],
+            "lt_potential_max": 0.05249954525587164,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/2",
+            "sample_id": "phasea-row-2",
+            "label": "foil",
+            "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+            "model_before": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "model_after": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 0,
+            "spike_times": [],
+            "stimulus_times": [
+              4.011,
+              4.171,
+              4.251,
+              4.491
+            ],
+            "begin": 4.001,
+            "end": 6.001,
+            "closed_at": 6.001,
+            "samples": 4001,
+            "soma_max": [
+              0.05320307119260992
+            ],
+            "lt_potential_max": 0.05320307119260992,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/3",
+            "sample_id": "phasea-row-3",
+            "label": "foil",
+            "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+            "model_before": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "model_after": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 0,
+            "spike_times": [],
+            "stimulus_times": [
+              6.0115,
+              6.1715,
+              6.3315,
+              6.4915
+            ],
+            "begin": 6.0015,
+            "end": 8.0015,
+            "closed_at": 8.0015,
+            "samples": 4001,
+            "soma_max": [
+              0.05009325943570064
+            ],
+            "lt_potential_max": 0.05009325943570064,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/4",
+            "sample_id": "phasea-row-4",
+            "label": "foil",
+            "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+            "model_before": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "model_after": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 1,
+            "spike_times": [
+              8.4945
+            ],
+            "stimulus_times": [
+              8.012,
+              8.032,
+              8.252,
+              8.492
+            ],
+            "begin": 8.002,
+            "end": 10.002,
+            "closed_at": 10.002,
+            "samples": 4001,
+            "soma_max": [
+              0.07582649814665254
+            ],
+            "lt_potential_max": 0.07582649814665254,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/5",
+            "sample_id": "phasea-row-5",
+            "label": "foil",
+            "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+            "model_before": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "model_after": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 0,
+            "spike_times": [],
+            "stimulus_times": [
+              10.0125,
+              10.2525,
+              10.4725,
+              10.4925
+            ],
+            "begin": 10.0025,
+            "end": 12.0025,
+            "closed_at": 12.0025,
+            "samples": 4001,
+            "soma_max": [
+              0.05280308354274721
+            ],
+            "lt_potential_max": 0.05280308354274721,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/6",
+            "sample_id": "phasea-row-6",
+            "label": "foil",
+            "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+            "model_before": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "model_after": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 1,
+            "spike_times": [
+              12.493
+            ],
+            "stimulus_times": [
+              12.013,
+              12.053,
+              12.093,
+              12.493
+            ],
+            "begin": 12.003,
+            "end": 14.003,
+            "closed_at": 14.003,
+            "samples": 4001,
+            "soma_max": [
+              0.07868023959451109
+            ],
+            "lt_potential_max": 0.07868023959451109,
+            "lt_potential_recorded": true
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/7",
+            "sample_id": "phasea-row-7",
+            "label": "foil",
+            "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+            "model_before": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "model_after": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+            "complete": true,
+            "censored": false,
+            "valid": true,
+            "reason": "window_closed",
+            "spike_count": 0,
+            "spike_times": [],
+            "stimulus_times": [
+              14.0135,
+              14.4135,
+              14.4535,
+              14.4935
+            ],
+            "begin": 14.0035,
+            "end": 16.003500000000003,
+            "closed_at": 16.0035,
+            "samples": 4001,
+            "soma_max": [
+              0.07158936690583229
+            ],
+            "lt_potential_max": 0.07158936690583229,
+            "lt_potential_recorded": true
+          }
+        ],
+        "direct_files": [
+          "run-manifest.json",
+          "runtime-cli-interface.json"
+        ]
+      }
+    },
+    "free": 376422723584
+  },
+  "source_training_outcome": "budget_exhausted",
+  "source_certificate": null,
+  "protocol": "historical_same_matrix",
+  "independent_evaluation": false,
+  "full_primary_publication_pending": true,
+  "temporal_report_pending": true,
+  "scientific_verdict": null
+}

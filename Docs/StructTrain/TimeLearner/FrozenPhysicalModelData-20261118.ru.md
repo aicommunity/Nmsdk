@@ -143,3 +143,12 @@ proof role, source snapshot и публичный analyze CLI. Добавлен�
 До применения к научному корпусу нужны новая сборка Console/интеграционных
 тестов, compiled inventory, actual fixtures/Python gate и запуск операции в
 новом процессе. Ускорение, меньший RSS и полная приёмка этапа5 не заявляются.
+
+## Последующая фактическая проверка — 18 ноября
+
+Первоначальный статус подготовки выше относится к своему снимку. На Root28f748a/
+Pulse5f8b281 последующий Windows NativePhysicalModelData7 прошёл7/7. Два реальных
+Console процесса проверили4 complete target/foil observations на N2 fixture
+DATA. Это не научная матрицаN4 и не полный допуск платформы. Python8:7 PASS/1 FAIL,
+неверное ожидание CLI envelope исправлено, повтор ещё не выполнен. Linux248 и
+full247 остаются открытыми. [Актуальное состояние и точные evidence refs](CurrentStatus-20261118.ru.md).

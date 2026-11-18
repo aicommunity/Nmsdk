@@ -25,3 +25,15 @@ summary не подставляется и не фабрикуется. Пара
 объявленными memory/wall/disk limits и before/after fingerprint всех fixtures.
 Новый Train не требуется. Полные результаты остаются во внешнем архиве;
 в Git публикуются источник проверки, её декларация и компактная квитанция.
+
+## Выполненная DATA проверка
+
+`s05-retained-stopped-export-audit-elder-a2`, controls
+`135b3170d0714cd6232ec9bace914df1a3e2ca92`, Root926dc94:1/1 PASS.
+Все before/after source и fixture snapshots совпали. Проверены schema7 digest,
+158 групп/948 проб/3413748 sampled frames. Summary отсутствует и не подставлен.
+Модельd26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa,
+L239/201/121/1, Rs8090169.943749473 на первых трёх и86000000 на anchor,Ns1.
+Пакет сообщает budget_exhausted/maximum_sweeps_exhausted, certificate=None.
+[Полный144319-byte audit и полный provenance](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/retained-model-data-audit.archive.json).
+Native import, исходный successful execution и классификация этим не доказаны.

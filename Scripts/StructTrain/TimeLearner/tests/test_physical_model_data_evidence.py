@@ -138,5 +138,12 @@ class PhysicalModelDataEvidenceTest(unittest.TestCase):
                     str(root/'evaluation.json'), '--format', 'physical-model-evaluation', '--model', str(root/'model.json')],
                     capture_output=True, text=True, timeout=60)
                 self.assertEqual(result.returncode, 0, result.stderr)
-                metrics = json.loads(result.stdout)
-                self.assertEqual(metrics, score_physical_model_data_evaluation(spec, observations, model))
+                response = json.loads(result.stdout)
+                self.assertEqual(response['kind'], 'timelearner_analysis')
+                self.assertEqual(response['schema_version'], 1)
+                self.assertEqual(response['execution'], 'completed')
+                self.assertEqual(response['validity'], 'valid')
+                self.assertEqual(response['format'], 'physical-model-evaluation')
+                self.assertIsNone(response['evaluation_verdict'])
+                self.assertEqual(response['analysis'],
+                                 score_physical_model_data_evaluation(spec, observations, model))

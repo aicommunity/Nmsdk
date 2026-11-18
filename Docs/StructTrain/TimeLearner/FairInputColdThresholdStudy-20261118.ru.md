@@ -1,8 +1,8 @@
 # Cold cap16: полная характеристика и проверка порогов
 
 Статус: получена исходная подпороговая характеристика обеих фактически
-сохранённых моделей. Classic завершил фактическую проверку выбранного порога: TP1/FP2/FN0/TN5.
-Branch продолжает проверку; его результат ещё не получен. Это Same-Matrix diagnostic stopped-моделей.
+сохранённых моделей. Обе модели завершили фактическую проверку выбранных порогов:
+Classic и Branch — TP1/FP2/FN0/TN5. Общий owner completed, группы закрыты. Это Same-Matrix diagnostic stopped-моделей.
 Обе исходные Train-сессии завершились BudgetExhausted без сертификата.
 
 ## Полученные наблюдения
@@ -117,6 +117,9 @@ Accuracy6/8; foil response rate2/7. Начальные Train/timing/amplitude re
 model, не независимое подтверждение обобщения и не all-input certificate.
 [Наблюдения и manifest readback](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/threshold-confirmation-progress.json).
 
-Branch ещё рассчитывается; общий controller, full archive и temporal report
-пока не приняты. Скрипт отчёта будет запущен после закрытия той же операции;
-не требуется повторять ни Classic, ни исходный Train.
+Branch также завершён: TP1/FP2/FN0/TN5, те же false-positive rows4/6.
+Revision74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a.
+Оба run manifests completed/valid; общий controller operation_passed=True,
+reason=None, все groups closed и lease released. Full primary collection и
+temporal report выполняются отдельно; повторение Train/Test не требуется.
+[Закрытые16 наблюдений и штатные metrics](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/threshold-confirmation-closed.json).

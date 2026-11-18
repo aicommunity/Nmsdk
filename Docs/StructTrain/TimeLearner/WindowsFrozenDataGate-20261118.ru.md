@@ -42,12 +42,19 @@ full-source owner, ещё до сравнения DATA. Родительский
 `calibration_model_mismatch`, путь `$.LTZone`. Fixture ошибочно ожидал
 `std::invalid_argument`; теперь проверяет фактический typed error и его code.
 
-Этот commit пока **не подтверждён runtime**. На .14 запущена отдельная сборка
+Этот commit подтверждён последующим **7/7 NativePhysicalModelData PASS**. На .14 выполнена отдельная сборка
 a2 с тем же Pulse5f8, controls
 `71be4205ae2042e7cb1cc26e6f720a67db411b25`. Source/build/runtime a1 сохранены.
 [Exact Git projection и dispatch](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/frozen-fixture-a2-preparation.json).
-Нужны matching native fixtures, Python8 на их настоящих outputs и отдельный
-Console DATA process. Сборка сама по себе не является их приёмкой.
+Matching native fixtures7 прошли без skips/errors/failures. Затем два Console
+процесса дали4 complete observations с native audit/scorer и frozen readback;
+завершённый Classic использован повторно после ошибки metadata wrapper,
+новым процессом рассчитан Branch. Исходный отрицательный wrapper outcome не
+переписан. [Native7](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/frozen-native7-observed.json),
+[Console recovery](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/frozen-console-recovery-observed.json).
+Python8 дал7 PASS/1 FAIL из-за неверной проверки стандартного CLI envelope;
+fixture исправлена на response.analysis с проверкой envelope, rerun ещё нужен.
+Полный247 и Linux248 не приняты этим узким набором.
 
 ## Шесть старых precondition failures
 
@@ -106,3 +113,13 @@ TrainingCertificate не заменяют входные данные.
 Это кандидаты входных fixtures, не выполненные current8 tests: совместимость
 старого schema1 с текущим Import ещё не проверена; две исторические версии
 нельзя одновременно класть под glob, ожидающий один файл на topology.
+
+## Ограничение мониторинга Windows
+
+Два собственных зависших PowerShell-процесса чтения JSON заняли14.3/12.6GB
+working memory; available physical упала до640888832 bytes. Они остановлены
+после проверки PID, creation_filetime и точной команды собственного observer.
+Native расчёты не останавливались, результаты сохранены. Для текущих readbacks
+используется bounded SFTP/direct Python. Точная причина разрастания сериализации
+ещё не доказана; это отдельный открытый дефект инфраструктуры наблюдения,
+а не основание менять пороги/алгоритмы. [Квитанция](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/owned-observer-memory-recovery.json).

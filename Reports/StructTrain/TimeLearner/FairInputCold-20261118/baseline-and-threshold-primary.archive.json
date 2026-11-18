@@ -1,0 +1,91 @@
+{
+  "catalog": "experiments/2026-11-18/fair-input-cold/baseline-and-threshold-primary-a1.json",
+  "record": {
+    "kind": "timelearner_cold_baseline_and_threshold_matrices_primary",
+    "schema_version": 1,
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/17/17457e13cecdefa838614d97c1f73e6d772bc1fc8a94976bf001bcfbefd51868",
+      "sha256": "17457e13cecdefa838614d97c1f73e6d772bc1fc8a94976bf001bcfbefd51868",
+      "bytes": 171725152
+    },
+    "bundle_manifest": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/dc/dc03ac6457bc60bc539d28c1048c061c5718cdfb900f60d58a3a97c48a6c94de",
+      "sha256": "dc03ac6457bc60bc539d28c1048c061c5718cdfb900f60d58a3a97c48a6c94de",
+      "bytes": 869851
+    },
+    "provenance": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e3/e39f7791c16733002c61a52f1fb9b10663f250ee4c4d6592a614bc0be03c4b58",
+      "sha256": "e39f7791c16733002c61a52f1fb9b10663f250ee4c4d6592a614bc0be03c4b58",
+      "bytes": 981477
+    },
+    "provenance_files": 64,
+    "controls": {
+      "fair-input-cold-matrix-a1": "918481bdeb23c0b0779a13d3bda08b1591860a70",
+      "fair-input-threshold-a1": "9b47fd86155f56bb695faffa0ce3e2b0eb324bfd",
+      "fair-cold-threshold-primary-a1": "90f20e278702e754a5f15378fc9dc3c16bb4f3e1",
+      "fair-input-threshold-report-a1": "a7974c08821902a00b114b142aac3d8ef9f5d1b7"
+    },
+    "control_git_bundles": 4,
+    "members": 3979,
+    "expanded_bytes": 15176675667,
+    "unique_content_bytes": 7234770935,
+    "baseline_job": "s11-fair-input-cold-matrix-m40-a1",
+    "baseline_original_owner_failed": true,
+    "baseline_original_branch_manifest_missing": true,
+    "baseline_negative_outcome_unchanged": true,
+    "threshold_job": "s11-fair-input-threshold-m40-a1",
+    "threshold_operation_completed": true,
+    "models": [
+      {
+        "name": "classic",
+        "model_revision": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+        "threshold": 0.019405139380343855,
+        "counts": {
+          "TP": 1,
+          "FP": 2,
+          "FN": 0,
+          "TN": 5,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.75,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.2857142857142857
+        },
+        "diagnostic_only": true
+      },
+      {
+        "name": "branch",
+        "model_revision": "74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a",
+        "threshold": 0.07383352212183064,
+        "counts": {
+          "TP": 1,
+          "FP": 2,
+          "FN": 0,
+          "TN": 5,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.75,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.2857142857142857
+        },
+        "diagnostic_only": true
+      }
+    ],
+    "training_completed": false,
+    "training_certificate_present": false,
+    "protocol": "historical_same_matrix",
+    "independent_evaluation": false,
+    "scientific_verdict": null
+  }
+}
