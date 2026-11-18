@@ -3668,8 +3668,8 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
             const auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
             const auto generator=dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);
             const auto id=result.requestedSpecification->trialId;
-            witnessedModels[id]=NmsdkTools::IdentifyModel(neuron,{{&generator->Output,"burst"}});
-            witnessedDatasets[id]=NmsdkTools::IdentifyModel(dataset);
+            witnessedModels[id]=NmsdkTools::IdentifyModel(neuron.Get(),{{&generator->Output,"burst"}});
+            witnessedDatasets[id]=NmsdkTools::IdentifyModel(dataset.Get());
             witnessedCapacitances[id]=rig.learner->OwnedNativeCapacitanceState();
         }
     };
@@ -3690,7 +3690,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
                 const auto neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
                 const auto generator=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
                 changedAfterFirstBoundary=changedAfterFirstBoundary ||
-                    NmsdkTools::IdentifyModel(neuron,{{&generator->Output,"burst"}})!=firstRetainedIdentity;
+                    NmsdkTools::IdentifyModel(neuron.Get(),{{&generator->Output,"burst"}})!=firstRetainedIdentity;
             }
         }
     }
