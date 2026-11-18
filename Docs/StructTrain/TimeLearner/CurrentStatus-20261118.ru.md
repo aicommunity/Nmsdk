@@ -193,3 +193,19 @@ unit `timelearner-a0a35042-5a34-4ff7-a7a4-2b324ce07cd3.service`,
 PID3087990/start_ticks409920358. [Исправление fixtures и его область](CalibrationReadoutFixtureRepair-20261118.ru.md).
 Глобальный возврат terminal best-state остаётся не реализованным; эти
 эксперименты и исправления документации не закрывают полный этап7.
+
+
+Позднейшее native-наблюдение: Console завершился exit0/valid за1866.83с,
+cooperative capture47 файлов, все процессы закрыты, исходные Job/PID отсутствуют.
+В8 complete/valid native trials фактически записано TP1/FP1/FN0/TN6:
+один спайк target в0.4925с, то есть2.5мс после последнего входа0.49с;
+один спайк foil phasea-row-4, также через2.5мс после последнего входа.
+Остальные6 foils молчат. Recognition revision
+`3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985`.
+Это чтение фактических спайков; полный common source/model audit **ещё работает**,
+поэтому новый итог не объявлен принятым научным результатом и не внесён в DOCX.
+Порог после просмотра новых ответов не менялся.
+[Native observations с hashes](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/fixed-threshold8-native-observations-pending-audit.json),
+[закрытие Console и живой audit Job](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/fixed-threshold8-native-closed-audit-running.json).
+Текущий audit PID14404/creation_filetime134394993034044420,
+Job`Local\TimeLearner-6b944518-9edf-4637-9ce3-6de6e5a64d62`,20GiB.

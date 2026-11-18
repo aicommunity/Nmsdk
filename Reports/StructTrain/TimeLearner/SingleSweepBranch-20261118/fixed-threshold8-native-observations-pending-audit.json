@@ -1,0 +1,217 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "3d56afda670d932311bfa8a7bdb77a4034aa3481ff53105c09e43c31a9d681c6",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "scope": "raw actual native responses; common full-source audit is still separate",
+    "model_revision": "3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985",
+    "rows": [
+      {
+        "sample_id": "phasea-row-0",
+        "label": "target",
+        "spike_count": 1,
+        "spike_times": [
+          0.4925
+        ],
+        "stimulus_times": [
+          0.01,
+          0.09,
+          0.25,
+          0.49
+        ],
+        "last_input": 0.49,
+        "spike_after_last_input": [
+          0.0025000000000000022
+        ],
+        "begin": 0,
+        "end": 2,
+        "complete": true,
+        "valid": true
+      },
+      {
+        "sample_id": "phasea-row-1",
+        "label": "foil",
+        "spike_count": 0,
+        "spike_times": [],
+        "stimulus_times": [
+          2.0105,
+          2.2505,
+          2.4105,
+          2.4905
+        ],
+        "last_input": 2.4905,
+        "spike_after_last_input": [],
+        "begin": 2.0005,
+        "end": 4.000500000000001,
+        "complete": true,
+        "valid": true
+      },
+      {
+        "sample_id": "phasea-row-2",
+        "label": "foil",
+        "spike_count": 0,
+        "spike_times": [],
+        "stimulus_times": [
+          4.011,
+          4.171,
+          4.251,
+          4.491
+        ],
+        "last_input": 4.491,
+        "spike_after_last_input": [],
+        "begin": 4.001,
+        "end": 6.001,
+        "complete": true,
+        "valid": true
+      },
+      {
+        "sample_id": "phasea-row-3",
+        "label": "foil",
+        "spike_count": 0,
+        "spike_times": [],
+        "stimulus_times": [
+          6.0115,
+          6.1715,
+          6.3315,
+          6.4915
+        ],
+        "last_input": 6.4915,
+        "spike_after_last_input": [],
+        "begin": 6.0015,
+        "end": 8.0015,
+        "complete": true,
+        "valid": true
+      },
+      {
+        "sample_id": "phasea-row-4",
+        "label": "foil",
+        "spike_count": 1,
+        "spike_times": [
+          8.4945
+        ],
+        "stimulus_times": [
+          8.012,
+          8.032,
+          8.252,
+          8.492
+        ],
+        "last_input": 8.492,
+        "spike_after_last_input": [
+          0.0024999999999995026
+        ],
+        "begin": 8.002,
+        "end": 10.002,
+        "complete": true,
+        "valid": true
+      },
+      {
+        "sample_id": "phasea-row-5",
+        "label": "foil",
+        "spike_count": 0,
+        "spike_times": [],
+        "stimulus_times": [
+          10.0125,
+          10.2525,
+          10.4725,
+          10.4925
+        ],
+        "last_input": 10.4925,
+        "spike_after_last_input": [],
+        "begin": 10.0025,
+        "end": 12.0025,
+        "complete": true,
+        "valid": true
+      },
+      {
+        "sample_id": "phasea-row-6",
+        "label": "foil",
+        "spike_count": 0,
+        "spike_times": [],
+        "stimulus_times": [
+          12.013,
+          12.053,
+          12.093,
+          12.493
+        ],
+        "last_input": 12.493,
+        "spike_after_last_input": [],
+        "begin": 12.003,
+        "end": 14.003,
+        "complete": true,
+        "valid": true
+      },
+      {
+        "sample_id": "phasea-row-7",
+        "label": "foil",
+        "spike_count": 0,
+        "spike_times": [],
+        "stimulus_times": [
+          14.0135,
+          14.4135,
+          14.4535,
+          14.4935
+        ],
+        "last_input": 14.4935,
+        "spike_after_last_input": [],
+        "begin": 14.0035,
+        "end": 16.003500000000003,
+        "complete": true,
+        "valid": true
+      }
+    ],
+    "raw_any_spike_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6
+    },
+    "files": [
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\native\\trial-0.json",
+        "bytes": 1360031,
+        "sha256": "a7445549e368d60063402ae0f8dab95daa37a08e4fcb57e6f1da53b9043697ec"
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\native\\trial-1.json",
+        "bytes": 1293682,
+        "sha256": "746bd25d7bad25e477caf880d46c74bc8d010b70fb4679a6c079a813ffcb543c"
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\native\\trial-2.json",
+        "bytes": 1293582,
+        "sha256": "c9898f23d2eb63c3594572b7db9b1c5814888a6b766be5b8b13f1b5724e2403f"
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\native\\trial-3.json",
+        "bytes": 1293558,
+        "sha256": "f68e75c6145fbd5fcfa9ba466b20eeb23f2faef71acd6d5e26941eb31a39f0b0"
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\native\\trial-4.json",
+        "bytes": 1360116,
+        "sha256": "0b593d5fa13816e099bf4c68fc3c515a12c6913ff00ba2ee8fe6aa7ad5dac344"
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\native\\trial-5.json",
+        "bytes": 1297703,
+        "sha256": "d1a79c9675c1955be446d4b5222447eaf937440487b6cbb9a9d024d67e56fb3f"
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\native\\trial-6.json",
+        "bytes": 1297595,
+        "sha256": "24e9f910ecf96d6f9d0643adeb9ddb9964f0d0c11eb7c6b5909f783b32459866"
+      },
+      {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-elder-fixed-threshold8-a1\\native\\trial-7.json",
+        "bytes": 1297732,
+        "sha256": "b11c5cac7d4c8adc6f7859e810e90771821aee8b0fceef3bf454de73b7a35f29"
+      }
+    ],
+    "threshold": 0.09874840158355691,
+    "source_and_model_audit_accepted": false,
+    "threshold_reselected": false,
+    "scientific_verdict": null
+  }
+}
