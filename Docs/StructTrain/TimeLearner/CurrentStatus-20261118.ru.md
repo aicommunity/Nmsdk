@@ -138,3 +138,24 @@ owner16GiB + native16GiB. [Controls и CAS](../../../Reports/StructTrain/TimeLea
 Подбор порога — отдельный Same-Matrix experiment
 с реальным повторным прогоном кандидата. Оценка не подменяет BudgetExhausted
 на завершённый Train и не переносит scalar best в сохранённую модель.
+
+По readback04:41UTC Classic уже выполняется в отдельном native Console
+cgroup; окончательные8 наблюдений ещё не получены. Python controller прошёл
+первоначальную проверку полного источника, peak memory около4.06GB, OOM нет.
+
+## Параллельная проверка на Windows .14
+
+Новый Root `03d05059f45bcc149c98aa51ec6937ace3b0ac73` / Pulse c54 доставлен
+через Git object projections:8 репозиториев,4644 файла,23.46MB pack. Все
+файлы и gitlinks сверены. Controls `a3be8be9c9ca5bfb2f98bb5596fa1821f75ba6c3`.
+В отдельном `C:/Projects/TimeLearnerWorker/source-physical-model-data-win-a1`
+запущен `windows-physical-model-data-sdk-build-a1`; kernel Job подтверждён
+active04:42UTC, compiler MSVC19.51.36260.0. Подготовлен227-case Windows
+inventory; Linux-only symlink case явно исключён по исходному `#ifndef`.
+Пока это сборка,0/227 новых tests выполнено. После закрытия нужны build audit
+и actual native gate. Новый формат, полный Linux228 и scientific admission
+Windows остаются непринятыми.
+[Квитанция подготовки и dispatch](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/preparation.json).
+
+M40 Linux SDK a4 подготовлен только как immutable source/controls, без запуска;
+он не отнимает slot у фактического Test. Elder продолжает прежний Train.
