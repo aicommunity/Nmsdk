@@ -73,7 +73,13 @@ Get(), без изменения проверок или production алгори
 не проверено. Следующая попытка a2 подготовлена на Root
 `944f7dd34bbe538346e20a183fb56d2cb5153bd0` / прежнем Pulse c54,
 controls `908b24852d9c57d081238d40f68a27b7c7f97d5f`. Её canonical preparation
-запущена в новых source/build/runtime; native228 gate ещё не запущен.
+прошла; Console и StorageComponents собраны. Выполнены228 случаев:226 PASS,
+2 новых roundtrip cases отказали до пробы с native model-repair guard.
+[Закрытый readback](../../../Reports/StructTrain/TimeLearner/PhysicalModelDataSdk-20261118/native-a2-readback.json).
+Новый fixture не задавал target-owner ControllerConfiguration, обязательную
+для штатного Version2 Build. Root f1b8ae9aea9c2ebdc95ca6d1b9e4e243fddcbc19
+передаёт сохранённую декларацию до Init и отдельно проверяет обе причины
+ошибок owner. Исправление ещё не проверено; полный gate не принят.
 Используются2 compiler jobs/8GiB, штатный CMake Qt6. Старый prepared219
 superseded без запуска;228 содержит все его случаи и9 новых. Native228 PASS
 и измеренное снижение RSS ещё не получены.
@@ -91,5 +97,8 @@ summary167249672 bytes больше прежнего compressed-summary ceiling1
 отдельно объявленная owner memory не менее16GiB. Для этого корпуса достаточно
 256MiB. Legacy uncompressed64MiB путь сохранён. Это лимит чтения данных,
 а не изменение научного условия или сокращение истории. Новая declaration
-регрессия и exact-boundary чтение подготовлены, ещё не выполнены; далее нужен
+регрессия, exact-boundary чтение и closure joins прошли в25/25 Python cases;
+там же actual production parser4 прошёл на объявленном Qt6Core6.4.2.
+[Readback](../../../Reports/StructTrain/TimeLearner/LargeSummaryTransport-20261118/closed-readback.json).
+Это DATA/codec проверка; далее нужен
 реальный импорт167MB summary и обеих полных моделей.
