@@ -54,9 +54,12 @@ revision `d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa`.
 фактическим terminal graph ещё проверяются. Execution/run manifest отсутствуют.
 [Исходная отрицательная closure и retained packets](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/closed-export-readback.json).
 
-Готовится lossless primary collection всех2885 regular files/1676661611 bytes
-и двух закрытых units, включая частичные файлы и исходную ошибку. Train не
-перезапускается; следующий шаг — внешний архив, затем проверка возможности
+Lossless primary collection всех2885 regular files/1676661611 bytes
+и двух закрытых units завершена; частичные файлы и исходная ошибка сохранены.
+Primary28666564 bytes, SHA `ccfc316d1da3d9ee84f66092e02c674153891c0aaef7a6ff44d9ca9cc711ec85`,
+опубликован через общий M40 mount; provenance и manifest также проверены.
+[Полный корпус и CAS refs](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/primary-publication.archive.json).
+Train не перезапускается; следующий шаг — проверка возможности
 native model recovery/Test без повторного обучения. Приёмка модели и
 классификация этого нового Elder результата ещё не выполнены.
 
