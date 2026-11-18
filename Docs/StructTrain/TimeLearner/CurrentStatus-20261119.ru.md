@@ -140,3 +140,10 @@ versioned portable export/import/replay перехода ещё требуетс
 terminal search state. Следующий научный A/B требует закрыть эту границу,
 затем выполнить cold Train и frozen8 при одинаковых бюджетах. Только этап0
 полностью принят; полная цель0–12 сохраняется.
+
+A3 завершена после предыдущей проверки: выполнено30 случаев,26 PASS/4 FAIL.
+Все группы и supervisor закрыты. Четыре отказа — независимое сравнение пустого
+owned C-state с захваченным: non-const JSON lookup добавлял baseline:null.
+Исправлено чтением value() без вставки поля; исходный отказ сохранён в
+[квитанции](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-a3-failures.json).
+Нужен новый native прогон исправления и terminal transaction;26/30 не приёмка.
