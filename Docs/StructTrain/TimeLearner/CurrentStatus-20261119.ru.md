@@ -98,3 +98,13 @@ overview всех паттернов и2 positive-lobe overview target/FP. По�
 молчащих проб. Для подробного сравнения этих проб ещё нужны положительные
 companion views. Полная visual acceptance и публикация галереи не объявлены.
 [Границы визуальной проверки](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-temporal-report-selected-visual-review.json).
+
+Уточнение исхода native30 A1: сборка production PulseLib завершилась, но сборка
+теста остановилась: два SCOPED_TRACE на одной строке объявили одну переменную
+gtest_trace_61 дважды. Выполнено0 из30 C++ cases; gate отклонён, все группы и
+supervisor закрыты. [Исходный отказ](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-a1-build-failure.json),
+[закрытие](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-a1-closed-build-rejected.json).
+Rootd790786db21ae6d56cbb0e1fbbb70f9ef1b2d310 разносит trace declarations по
+строкам. Для A2 подготовлены новые source/build/runtime, прежние A1 сохранены;
+те же30 cases, тот же Pulse57f603b. Controls22cd7149c3e6ab83b1537fd7c8eb538594946e3a.
+Canonical preparation A2 начата; результат C++ проверок ещё не получен.
