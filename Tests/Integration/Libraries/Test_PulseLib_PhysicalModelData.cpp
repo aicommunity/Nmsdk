@@ -84,7 +84,7 @@ struct Fixture {
     QJsonObject CurrentIdentity() const
     {
         auto generator=sourceDataset->GetComponentL<NPulseGeneratorTransit>("Generator1",true);
-        return NmsdkTools::IdentifyModel(sourceNeuron,{{&generator->Output,"burst"}});
+        return NmsdkTools::IdentifyModel(UEPtr<UContainer>(sourceNeuron.Get()),{{&generator->Output,"burst"}});
     }
 };
 
@@ -130,7 +130,7 @@ template<class Owner> void Roundtrip()
         auto neuron=owner->template GetComponentL<NPulseNeuron>("Neuron",true);
         auto source=owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
         probe.readModelRevision=[neuron,source] {
-            return NmsdkTools::IdentifyModel(neuron,{{&source->Output,"burst"}})["sha256"].toString().toStdString();
+            return NmsdkTools::IdentifyModel(UEPtr<UContainer>(neuron.Get()),{{&source->Output,"burst"}})["sha256"].toString().toStdString();
         };
         probe.onSample=[&trace](const NativeProbeSample& sample){trace.push_back(sample);};
         auto& spec=probe.specification;spec.runId=run;spec.trialId=run+"/trial0";spec.sampleId="target";
