@@ -117,3 +117,8 @@ Root `3dce4532db40a5b14623a403e08437d8e1ca7bbc`, Pulse
 не являются проверкой этого нового формата. Научные эксперименты имеют приоритет
 при восстановлении доступа: сначала наблюдение прежних handles и сохранение
 их данных, затем новые проверки при свободных ресурсах.
+
+Следующее неподтверждённое расширение — [frozen DATA owner API](FrozenPhysicalModelData-20261118.ru.md)
+на Pulse5f8b281/Root543c77e. Оно использует прежний native trial executor,
+добавляет3 случая и16 регрессий общего recognition helper. Console/runner
+и source-boundary resolver ещё требуют интеграции; новых runtime PASS нет.
