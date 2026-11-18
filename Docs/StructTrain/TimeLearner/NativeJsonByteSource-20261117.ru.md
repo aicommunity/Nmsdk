@@ -88,3 +88,31 @@ controls `3cb65bd702c0005e49a5a84f50d4a603603ae914`, job
 закрытый gate Qt6 имеет controls `bb00c0a2e4cb68fdf6b9472731ac999ded666914`,
 Root `ea0b039f3bd4f7784ff76e32d90fb99a50032ac2`.
 [Квитанция25/25 и4/4](../../../Reports/StructTrain/TimeLearner/LargeSummaryTransport-20261118/closed-readback.json).
+
+## Фактический большой импорт — 18 ноября
+
+`s11-fair-input-cold-matrix-m40-a1` сохранил обе полные8-pattern native
+execution записи и exit0/loaded-files capture. Через checked-file-source-v1
+прочитаны source340881455 bytes Classic и636297940 bytes Branch; Python
+прошёл исходные summary57044127/167249672 bytes. Оба native Test сформировали
+по8 полных окон4001 отсчёт/2000Hz, frozen model revision сохранена.
+
+Это подтверждение конкретной большой интеграции существующего полного
+формата. Общий controller остановился по wall budget во время завершающего
+анализа; Classic run manifest готов, Branch run manifest отсутствует. Этот
+отрицательный исход не изменён; технический импорт не объявляется полным
+PASS всего pipeline или научной классификацией. Threshold100 дал молчание;
+отдельный опыт выбранных порогов выполняется.
+[Постановка и точные наблюдения](FairInputColdThresholdStudy-20261118.ru.md).
+[Compact readback](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/nonspiking-matrix-observed.json).
+
+Windows Root03d/Pulsec54 дополнительно прошёл отдельный native227 cohort,
+включая production parser и исправленный physical DATA roundtrip fixture.
+[Полный проверенный corpus227 во внешнем archive](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/native227-primary.archive.json).
+Новый frozen DATA API Pulse5f8 и Console/runner Rootb28 проверяются отдельно
+в source Rootc736; их сборка не является runtime приёмкой248/247 случаев.
+
+Новый Windows frozen DATA247 завершился230 PASS/9 failures/8 skips и не принят.
+Root28f исправляет3 fixture cases; их isolated build a2 идёт отдельно.
+[Точные причины и полный отрицательный corpus](WindowsFrozenDataGate-20261118.ru.md).
+Большой импорт прежнего full-source формата подтверждён отдельно от этого API.

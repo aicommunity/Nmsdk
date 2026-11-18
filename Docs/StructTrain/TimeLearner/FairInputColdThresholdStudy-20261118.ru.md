@@ -1,8 +1,8 @@
 # Cold cap16: полная характеристика и проверка порогов
 
 Статус: получена исходная подпороговая характеристика обеих фактически
-сохранённых моделей. Проверка выбранных порогов запущена; её классификационные
-результаты ещё не получены. Это Same-Matrix diagnostic stopped-моделей.
+сохранённых моделей. Classic завершил фактическую проверку выбранного порога: TP1/FP2/FN0/TN5.
+Branch продолжает проверку; его результат ещё не получен. Это Same-Matrix diagnostic stopped-моделей.
 Обе исходные Train-сессии завершились BudgetExhausted без сертификата.
 
 ## Полученные наблюдения
@@ -91,3 +91,32 @@ prefix не получает оценку полного набора. Зате�
 После фактического TP≥1/TN≥2 соответствующие примеры включаются в актуальные
 DOCX Classic/Branch как варианты общего семейства. До этого DOCXv2 остаётся
 последней проверенной редакцией.
+
+## Classic: реальное подтверждение выбранного порога
+
+Все8 declared observations завершены, valid/complete, по4001 samples/2с.
+Production manifest completed/valid, whole-window counts **TP1/FP2/FN0/TN5**.
+Это результат реальных спайков с установленным порогом, а не offline sweep.
+
+| PhaseA row | Метка | Спайки | Время относительно начала окна, с |
+|---|---|---:|---|
+|0|target|1|0.493|
+|1|foil|0|—|
+|2|foil|0|—|
+|3|foil|0|—|
+|4|foil|1|0.492|
+|5|foil|0|—|
+|6|foil|1|0.492|
+|7|foil|0|—|
+
+Revision до/после каждой пробы:
+`27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943`.
+Цель отвечает через3мс после последнего входа, ложные ответы rows4/6 через2мс.
+Accuracy6/8; foil response rate2/7. Начальные Train/timing/amplitude residuals
+не становятся успешными от подбора порога. Это Same-Matrix diagnostic stopped
+model, не независимое подтверждение обобщения и не all-input certificate.
+[Наблюдения и manifest readback](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/threshold-confirmation-progress.json).
+
+Branch ещё рассчитывается; общий controller, full archive и temporal report
+пока не приняты. Скрипт отчёта будет запущен после закрытия той же операции;
+не требуется повторять ни Classic, ни исходный Train.

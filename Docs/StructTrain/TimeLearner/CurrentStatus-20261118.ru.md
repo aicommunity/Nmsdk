@@ -1,10 +1,11 @@
 # Статус TimeLearner — 18 ноября 2026
 
-Актуализация08:34UTC: связь восстановлена, новые SSH-подтверждения получены
-с M40, Elder и Windows .14 через .12. Исходный M40 diagnostic закрыт:
-сохранены все16 native наблюдений. Запущен отдельный Same-Matrix опыт выбранных
-порогов. Elder продолжает прежний Train. На Windows завершён старый native227;
-отдельно идёт сборка нового frozen DATA API. Текущие jobs не перезапускались.
+Актуализация09:56UTC: связь с M40, Elder и Windows .14 через .12 работает.
+Classic завершил все8 actual Test при диагностическом пороге: **TP1/FP2/FN0/TN5**,
+run manifest completed/valid. Branch продолжает тот же threshold Test; его
+полный результат пока отсутствует. Elder остановлен при экспорте по объявленному disk budget. На .14
+завершён новый gate247 с230 PASS/9 failures/8 skips; он **не принят**.
+Сборка исправленного fixture Root28f запущена отдельно, без смены runtime опытов.
 
 Полная цель0–12 возобновлена. Принят этап0, этапы1–12 остаются частичными;
 научные8/8 не являются условием завершения. Доступ к трём workers сейчас
@@ -25,7 +26,7 @@ manifests execution=completed/validity=valid. Обе модели BudgetExhauste
 Classic native process7298.40с, Branch22024.05с. Wall time не равно model time.
 Сохранены фактические состояния и полная история; лучший scalar из истории
 не подменяет terminal model. Исходная характеристика при пороге100 полностью записана; реальные
-классификационные результаты выбранных порогов ещё не получены.
+классификационные результаты Classic уже получены; Branch пока выполняется.
 DATA-reader не объявляет native proof replay или общую сходимость по exit0.
 [Readback](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/closed-readback.json).
 
@@ -37,13 +38,27 @@ catalog `experiments/2026-11-18/fair-input-cold/primary-a1.json`.
 [Проверенные ссылки на полный корпус и provenance](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/primary-publication.archive.json).
 Далее требуются actual frozen8 Test и читаемые Soma/input временные графики.
 
-## Elder продолжает прежний single-sweep
+## Elder: закрытый single-sweep, прерванный экспорт
 
-`s10-single-complete-sweep-branch-elder-a3` подтверждён running. Последний
-raw readback:904 packets,151-я группа, epoch71, model time1627.8с.
-Это промежуточный prefix. Последняя disk-проверка:2.846GB свободно.
-Runtime и budgets не менялись; завершение серии или сертификат не предполагаются
-из одного счётчика. После закрытия нужны полный экспорт и actual Test.
+`s10-single-complete-sweep-branch-elder-a3` закрыт: supervisor остановил native
+и owner по `owned_native_disk_budget`. Объявленный максимум1.5GiB превышен;
+peak increment1677475840 bytes, минимум свободного1309941760 bytes.
+Это превышение лимита результата, а не заполнение всего диска. Все units
+закрыты, lease освобождён. Итог не повышается до completed по факту cleanup.
+
+Сохранились948 native trial JSON и948 CSV. Последние6 complete/valid относятся
+к final verification input0, группе158, epoch72, model time1696.2235–1707.026с,
+revision `d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa`.
+Это подтверждённые наблюдения, но они ещё не доказывают общий certificate.
+`train_stopped_state.json`958170225 bytes сохранён; полнота/схема/связь с
+фактическим terminal graph ещё проверяются. Execution/run manifest отсутствуют.
+[Исходная отрицательная closure и retained packets](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/closed-export-readback.json).
+
+Готовится lossless primary collection всех2885 regular files/1676661611 bytes
+и двух закрытых units, включая частичные файлы и исходную ошибку. Train не
+перезапускается; следующий шаг — внешний архив, затем проверка возможности
+native model recovery/Test без повторного обучения. Приёмка модели и
+классификация этого нового Elder результата ещё не выполнены.
 
 ## Windows: реальные физические проверки
 
@@ -119,8 +134,10 @@ summary167249672 bytes больше прежнего compressed-summary ceiling1
 регрессия, exact-boundary чтение и closure joins прошли в25/25 Python cases;
 там же actual production parser4 прошёл на объявленном Qt6Core6.4.2.
 [Readback](../../../Reports/StructTrain/TimeLearner/LargeSummaryTransport-20261118/closed-readback.json).
-Это DATA/codec проверка; далее нужен
-реальный импорт167MB summary и обеих полных моделей.
+После DATA/codec проверки исходный diagnostic фактически прочитал оба
+полных source и summary (в том числе167MB Branch) и завершил оба native8 Test.
+Общий controller не успел закончить весь анализ до wall deadline; это не PASS
+всего pipeline. Точные пределы вывода приведены ниже.
 
 ## Следующий фактический Test
 
@@ -167,79 +184,64 @@ inventory; Linux-only symlink case явно исключён по исходно
 исход не переписан. Независимый closed-build audit прошёл:4644 source files,
 62 runtime files. Затем actual227/227 PASS без ошибок/пропусков, exact compiled
 JUnit IDs сверены. Полный Linux228, новый frozen DATA API и scientific admission
-Windows этим не подтверждаются. Full primary публикация227 ещё необходима.
+Windows этим не подтверждаются. Full primary227 опубликован:81 regular member,2.56MB compressed,
+включая все результаты, collector source/kernel closure и3 Git bundles controls.
+[Полный corpus и CAS](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/native227-primary.archive.json).
 [Readback](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/native227-observed.json).
 [Квитанция подготовки и dispatch](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/preparation.json).
 
 M40 Linux SDK a4 подготовлен только как immutable source/controls, без запуска;
 он не отнимает slot у фактического Test. Elder продолжает прежний Train.
 
-## Следующая локальная реализация
+## Frozen DATA: текущая реализация и фактическая проверка
 
 Pulse `5f8b281fc1d679ae7927f7ad7410d3ff675a522a`, Root code
-`543c77e2027e19d425045be8039a8b07baa81bd2`: добавлен frozen DATA import
-через общий native recognition commit boundary. Прежний full-source путь
-сохранён; DATA не восстанавливает сертификат или калибровку и не входит
-в owned finalization. Реальный порог/связи проверяются, solo не преобразуется
-неявно. Добавлены3 native случая full-source/DATA target+foil и отрицательных
-границ. С16 прежними регрессиями объявлен247 Linux/246 Windows inventory.
-Пока выполнена только статическая сверка IDs и Git blob hashes. Новая сборка
-не запущена; прежняя Windows227 проверяет другой Root/Pulse и не является
-приёмкой этого расширения.
-[Контракт и оставшаяся интеграция](FrozenPhysicalModelData-20261118.ru.md).
+`b28a5c21b3c1baa87c9a96856558a70db7f38017` содержат frozen DATA API,
+Console physical-model-evaluate и соответствующие runner/audit/scorer роли.
+DATA переносит физическую модель без полномочий Train/certificate/calibration.
+[Контракт](FrozenPhysicalModelData-20261118.ru.md).
+[Подготовленный inventory248 Linux/247 Windows](ValidationPlans/FrozenPhysicalModelEvaluation-20261118/INVENTORY.json).
 
-## Frozen physical DATA: подготовленная Console/runner интеграция
+Windows Rootc736/Pulse5f8: исходный build descendants_remaining при returncode0
+сохранён как отрицательный; отдельный closed-build audit прошёл4646 source/62
+runtime files. Затем полный247-case gate дал230 PASS,9 failures,8 skips.
+Это отказ приёмки, новый DATA API ещё не принят. Полный отрицательный corpus
+с двумя A/B singletons, kernel closure и5 controls Git bundles сохранён внешне:
+[392 файла,5.68MB compressed](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/frozen247-rejected-primary.archive.json).
+[Причины и конкретное исправление](WindowsFrozenDataGate-20261118.ru.md).
 
-Root code `b28a5c21b` / Pulse `5f8b281fc1d679ae7927f7ad7410d3ff675a522a`:
-добавлена отдельная Console операция physical-model-evaluate, соответствующий
-source role, contained runner, portable DATA audit и общий scorer без повторной
-загрузки истории. Train/certificate/calibration authority не переносится;
-training_completed остаётся unknown. Старые source/proof операции сохраняют
-свои проверки. Новые 8 Python cases требуют фактические native artifacts;
-новая native selection248 Linux/247 Windows. Проверены только Python AST и
-Git whitespace. Ни новая сборка, ни эти runtime-проверки не выполнены.
+Root `28f748a17c9ff870790c263d563ad268c77219f1` исправляет подготовку трёх
+новых fixture cases: явный Init свежих owners и проверку реального typed
+ModelArchiveError. Изолированная .14 сборка a2 запущена на тех же Pulse5f8,
+4646 exactGit files, controls `71be4205ae2042e7cb1cc26e6f720a67db411b25`.
+[Git projection и dispatch](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/frozen-fixture-a2-preparation.json).
+Сборка и3 исправленных случая ещё не приняты; Python8 и Console DATA process
+на actual artifacts также остаются необходимыми. Остальные6 failures/8 skips
+не скрываются и не объявляются исправленными этим commit.
 
-[Конкретный состав и Git blob hashes](ValidationPlans/FrozenPhysicalModelEvaluation-20261118/INVENTORY.json).
-Это замена подготовленного будущего247/246 cohort более полным248/247,
-без изменения выполняющихся заданий. Научная диагностика cold pair16,
-Elder Train и старый Windows SDK job сохраняют свои исходные runtime/handles.
-Первые действия после фактического восстановления сети — чтение этих же
-handles, сбор закрытых результатов, затем реальные Test/threshold confirmation.
-Цель0–12 не сужается; этап5 и остальные1–12 остаются частичными.
+## Same-Matrix threshold Test: фактическое продвижение
 
-## Фактический Same-Matrix threshold Test
-
-[Постановка и пределы вывода](FairInputColdThresholdStudy-20261118.ru.md).
-При пороге100 обе terminal-модели молчат. По фактическому LT potential выбраны
-Classic0.019405139380343855 и Branch0.07383352212183064. Для обоих proxy из
-нестреляющей записи —TP1/FP2/FN0/TN5; это **ещё не классификация**.
-
+[Постановка, результаты и пределы вывода](FairInputColdThresholdStudy-20261118.ru.md).
 Job `s11-fair-input-threshold-m40-a1`, controls
-`9b47fd86155f56bb695faffa0ce3e2b0eb324bfd`,16 actual pattern trials.
-Сохраняются исходные2с/reset-per-trial, все8 PhaseA паттернов, whole-window
-criterion и прежний native runtime. Threshold — явное вмешательство; нет
-повторного Train или автоматического повышения остановленного результата
-до Exact. Последняя проверка: controller жив, peak4.145GB/no OOM;
-выполнялась полная проверка источника Classic до native Test.
-[Наблюдения, hypotheses и hashes](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/nonspiking-matrix-observed.json).
+`9b47fd86155f56bb695faffa0ce3e2b0eb324bfd`, все8 PhaseA паттернов на модель,
+2с/reset-per-trial, whole-window criterion. Нового Train не было.
 
-## Новый DATA SDK на свободной Windows .14
+Classic при0.019405139380343855: **TP1/FP2/FN0/TN5**. Цель отвечает одним
+спайком в0.493с, ложные ответы на rows4/6; остальные5 foils молчат.
+Все8 окон complete/valid, по4001 samples; модель frozen до/после каждой пробы,
+revision `27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943`.
+[Компактные первичные факты и manifest metrics](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/threshold-confirmation-progress.json).
+Это реальная классификация на исходной матрице остановленной модели,
+**не Exact и не independent Test**. Критерий документации TP>=1/TN>=2 выполнен;
+новый пример DOCX будет добавлен после публикации данных и визуальной проверки.
 
-Отдельный source `C:/Projects/TimeLearnerWorker/source-frozen-physical-model-evaluation-win-a1`:
-Root `c736f6bbbd18821279813e2d87a57f4310d396dd` / Pulse
-`5f8b281fc1d679ae7927f7ad7410d3ff675a522a`. Code scope соответствует
-Rootb28a5c21b; последующий c736 содержит документацию/точный inventory.
-Git-проекция8 repositories/4646 files сверена, controls
-`dd38b1b0e74a8a1dda38d8959d55c307763ffbc3`.
+Branch при0.07383352212183064 продолжает тот же native процесс. Его исходный
+nonspiking proxy TP1/FP2/FN0/TN5 остаётся гипотезой. Общая операция ещё не
+завершена; full primary/report publication впереди. Подготовлен запуск штатного
+report_matrix после закрытия:16 окон/40 trial-soma pairs, все фактические
+входы, общий масштаб и zoom>=8pixels/native tick, без downsampling.
 
-Запущен `windows-frozen-physical-model-evaluation-sdk-build-a1`, kernel Job
-подтверждён active. Изолированы source/build/runtime; старые runtime сохранены.
-Планируется247 Windows cases (Linux248), включая3 новых frozen DATA native
-случая, source role и16 прежних общих API regressions. Пока0/247 выполнено.
-Нужны также Python8 на actual outputs и новый процесс Console DATA evaluation;
-Windows build сам по себе их не подтверждает.
-
-На M40 registry capacity32GiB/1slot полностью занята научным threshold Test.
-Дополнительная Linux-сборка не запущена. Для следующей подготовки доступны
-проверенные Git packs нового снимка, исходные source-a4 HEAD не изменены.
-Объединения в develop до matching runtime acceptance не выполнялись.
+На M40 registry32GiB/1slot занят этим опытом; дополнительная сборка не запущена.
+Elder закрыт с output-budget error, его первичные данные сохраняются. Stage1–12 частичны; merge в develop новых
+непроверенных алгоритмов/форматов не выполнялся. Следующий приоритет — полный
+результат Branch, публикация scientific primary и читаемые графики.
