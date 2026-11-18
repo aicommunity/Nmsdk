@@ -147,3 +147,17 @@ owned C-state с захваченным: non-const JSON lookup добавлял 
 Исправлено чтением value() без вставки поля; исходный отказ сохранён в
 [квитанции](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-a3-failures.json).
 Нужен новый native прогон исправления и terminal transaction;26/30 не приёмка.
+
+После closure A3 запущены два независимых fresh SDK задания с
+Root3c5bfe01609a6e6bd290aa9697938e885d5904b6 / Pulse1d8fc24cdb19b4b0e399483d198314b84548f9ea:
+M40 terminal-selection-a1 —44 случая; Elder terminal-selection-a1 —14 новых
+terminal cases. Обе canonical preparations пройдены, новые supervisors и
+kernel units подтверждены живыми. M40 supervisor3925312/start411857291,
+unit timelearner-512750df-162b-4924-b49b-c4eee1f2ad00.service; Elder
+supervisor1516047/start461313628, unit timelearner-4cafdba4-833f-4255-bc82-b749478f45f3.service.
+Итоги тестов ещё не получены. На Elder удалена только проверенная закрытая
+старая build-measured-boundary-sdk-a1; source/runtime/primary сохранены.
+
+Отдельно [исправляется читаемость положительных откликов](SharedRecoveryReadability-20261119.ru.md)
+молчащих проб при общем recovery-масштабе. Это правка renderer с ещё ожидаемой
+серверной и визуальной проверкой, без нового Train/Test или научного verdict.

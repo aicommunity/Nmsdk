@@ -1,5 +1,7 @@
 """Real archived native jobs: common diagnostic renderer, without a made-up run manifest."""
 import os
+import gzip
+import json
 from pathlib import Path
 import unittest
 
@@ -77,8 +79,26 @@ class ArchivedNativeDiagnosticReportTest(unittest.TestCase):
             self.assertEqual(len(manifest['figures']), pairs)
             self.assertEqual(manifest['missing_observation_ids'], [])
             self.assertFalse(manifest['visual_acceptance_complete'])
+            recorded = {}
+            for figure in manifest['figures']:
+                with gzip.open(root/'primary'/f"trial-{figure['presentation_index']:04d}.json.gz", 'rt') as stream:
+                    recorded[figure['trial_id']] = json.load(stream)
             for figure in manifest['figures']:
                 views = figure['views']
+                channel = figure['descriptor']['index']
+                values = [s['soma'][channel] for s in recorded[figure['trial_id']]['samples']]
+                shared_minimum = min(s['soma'][channel] for o in recorded.values() for s in o['samples'])
+                companions = [v for v in views if v['y_scale'] == 'positive_lobe_detail']
+                if shared_minimum < 0. < max(values):
+                    # Nonspiking trials also need readable detail when another
+                    # trial's recovery dominates the ordinary shared range.
+                    self.assertTrue(companions, figure['trial_id'])
+                    detail = next(v for v in companions if v['time_view'] == 'overview')
+                    self.assertEqual(detail['shared_recorded_minimum'], shared_minimum)
+                    self.assertGreaterEqual(detail['y_limits'][1], max(values))
+                    self.assertLess(detail['y_limits'][1]-detail['y_limits'][0],
+                                    1.25*max(values))
+                    self.assertTrue(detail['display_range_only'])
                 self.assertTrue(any(v['time_view'] == 'overview' for v in views))
                 self.assertTrue(any(v['time_view'] != 'overview' and
                                     v['minimum_native_tick_pixels_on_zoom'] >= 8 for v in views))
