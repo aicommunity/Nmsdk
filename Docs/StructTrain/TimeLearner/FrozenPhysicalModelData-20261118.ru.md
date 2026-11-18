@@ -95,7 +95,51 @@ Root `543c77e2027e19d425045be8039a8b07baa81bd2`, Pulse
 
 Нужны сборка и actual native gate, реальная обученная/converted/calibrated
 модель из опытов, неоднородная физика/C-trim, новый процесс и все8 паттернов.
-Затем — Console DATA-evaluation entry point, корневой runner и source-boundary
-resolver опубликованного исходного корпуса. Публикация сохраняет оригинальные
+Console DATA-evaluation entry point и корневой runner добавлены в следующей
+подготовленной реализации ниже. Source-boundary resolver опубликованного
+исходного корпуса ещё необходим. Публикация сохраняет оригинальные
 данные и экспорт отдельно во внешнем M40 archive с компактными Git refs.
 Считать выполненным полный Train→Test до этого нельзя.
+
+## Console, runner и анализ DATA: подготовлено, не проверено
+
+Новая операция Console — `--timelearner-physical-model-evaluate`. Её schema1
+job имеет kind `timelearner_native_physical_model_evaluation_job` и отдельное
+поле `source_model_data`. Checked-file-source-v1 поддерживает этот же явный
+role; подстановка DATA в прежний `source_recognition` запрещена. В Console
+сохранены общие цикл native scheduler, полный declared design при прерывании,
+проверки hash до/после проб, записи фактических input/Soma/LT/spikes.
+
+Корневой пакет предоставляет `physical-model-evaluate JOB --source-model-data
+MODEL --runtime-manifest RUNTIME --wall-seconds SECONDS --process-policy POLICY
+--output NEW_DIRECTORY`. Требуется существующий contained process policy.
+Используются прежние runner, runtime capture, artifact closure и повторный аудит
+run manifest. Snapshot содержит полный MODEL; история обучения не копируется
+повторно. Это не удаление исходной истории: она хранится отдельно в архиве.
+
+Команды `analyze ... --format physical-model-data` и `analyze EVALUATION
+--format physical-model-evaluation --model MODEL` используют новый явный
+DATA-аудит. Он сверяет JSON/XML/identity digests, storage closure, реальный
+Dataset/target, частоту, индивидуальные input banks и effective Threshold.
+Нативная реконструкция XML по-прежнему проверяется только native importer.
+
+Проверки сетки времени, событий, count/timestamps, полноты, меток/ID, порядка,
+окон и FP/FN общие с прежним scorer. Полная наблюдённая реакция Test не требует
+однозначного назначения каждого пика входному импульсу; это отдельное условие
+Train. Неполный declared set не получает pooled counts. DATA-результат сохраняет
+`training_completed=null`, `declared_training_outcome=null`,
+`source_training_evidence_checked=false`, `calibration_confirmed=false`,
+`evaluation_verdict=null`. Метаданные исходной модели не превращаются в proof.
+
+Native fixtures теперь дополнительно сохраняют standalone MODEL и оригинальный
+recognition source. Подготовлены8 Python проверок на этих реальных native
+артефактах: обе топологии, счётчики, перестановка/перенос строк, пропуски/дубли,
+NaN, frozen hash, censoring, заново подписанные противоречия, разделение старого
+proof role, source snapshot и публичный analyze CLI. Добавлена транспортная
+регрессия native source role; будущая native selection —248 Linux/247 Windows.
+Это список будущих проверок, не PASS. Старые247/246 и текущая Windows227
+относятся к другим снимкам кода.
+
+До применения к научному корпусу нужны новая сборка Console/интеграционных
+тестов, compiled inventory, actual fixtures/Python gate и запуск операции в
+новом процессе. Ускорение, меньший RSS и полная приёмка этапа5 не заявляются.
