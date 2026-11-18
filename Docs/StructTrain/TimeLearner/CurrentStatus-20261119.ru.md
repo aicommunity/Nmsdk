@@ -107,4 +107,7 @@ supervisor закрыты. [Исходный отказ](../../../Reports/Struct
 Rootd790786db21ae6d56cbb0e1fbbb70f9ef1b2d310 разносит trace declarations по
 строкам. Для A2 подготовлены новые source/build/runtime, прежние A1 сохранены;
 те же30 cases, тот же Pulse57f603b. Controls22cd7149c3e6ab83b1537fd7c8eb538594946e3a.
-Canonical preparation A2 начата; результат C++ проверок ещё не получен.
+Canonical preparation A2 пройдена; native supervisor3701540/start411377128
+и unit timelearner-c2590dc5-40e8-4c30-90f5-cc8b6b085bf8.service,
+PID3709096/start411380156 подтверждены живыми. [Handle A2](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-a2-running.json).
+Результат30 C++ проверок ещё не получен; A1 и A2 являются разными попытками.
