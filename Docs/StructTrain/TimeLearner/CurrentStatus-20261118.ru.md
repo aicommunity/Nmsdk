@@ -209,3 +209,25 @@ cooperative capture47 файлов, все процессы закрыты, ис
 [закрытие Console и живой audit Job](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/fixed-threshold8-native-closed-audit-running.json).
 Текущий audit PID14404/creation_filetime134394993034044420,
 Job`Local\TimeLearner-6b944518-9edf-4637-9ce3-6de6e5a64d62`,20GiB.
+
+
+Последняя проверка18.11,18:46UTC: actual fixed-threshold8 и полный common
+source/model/scorer audit **завершены успешно**. TP1/FP1/FN0/TN6 при
+0.09874840158355691; все8 окон полны, valid, frozen. Native1866.83с и
+audit1436.79с завершились exit0/valid, все процессы закрыты, Job/PID отсутствуют.
+Это Same-Matrix Test остановленной BudgetExhausted модели, без TrainingCertificate
+и без независимой оценки обобщения. Порог после новых ответов не менялся.
+Публикация нового полного primary и его временные графики ещё не завершены;
+этот пример пока не добавлен в DOCX.
+[Квитанция закрытия и фактические метрики](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/fixed-threshold8-common-audit-closed.json).
+
+Свежая сборка M40 Root6433f59/Pulse5f8 завершена. Все21 заявленных C++ case
+выполнены:19 PASS,2 FAIL — NativeCalibrationPersistence/ClassicN1_2000 и
+NativeCalibrationPersistence/BranchN1_2000. Gate отклонён; причина двух
+отказов ещё не диагностирована, они не объявляются только проблемой fixtures.
+Outer supervisor и все зарегистрированные дочерние группы закрыты.
+[Отрицательная квитанция](../../../Reports/StructTrain/TimeLearner/CalibrationReadoutCompletion-20261118/linux21-closed-rejected.json).
+Расширенная матрица262Linux/261Windows ещё не выполнена. Оба последних
+проверенных задания завершены; эта запись заменяет их прежние live-статусы выше.
+Этап0 полностью принят,1–12 частичны; глобальный возврат лучшей модели при
+остановке, полная режимная приёмка и independent frozen evaluation открыты.
