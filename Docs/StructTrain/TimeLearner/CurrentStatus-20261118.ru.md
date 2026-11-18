@@ -22,9 +22,12 @@ Classic native process7298.40с, Branch22024.05с. Wall time не равно mod
 DATA-reader не объявляет native proof replay или общую сходимость по exit0.
 [Readback](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/closed-readback.json).
 
-Подготовлена lossless collection:3040 regular files/3049955793 bytes,
-2 исходных дерева/3 закрытых units, controls
-`19a270cb64fb59aff7c743f1ce734f8f770a39dc`. Collection и публикация ещё впереди.
+Lossless collection завершена за107.54с и опубликована:3040 regular files
+и2 log aliases,3049956373 expanded bytes,2 дерева/3 закрытых units, controls
+`19a270cb64fb59aff7c743f1ce734f8f770a39dc`. Primary48281492 bytes, SHA
+`64c3db050e205f4e78e89c9be4a12c8e016c1da05f53e88afd4c4a158f7613a8`,
+catalog `experiments/2026-11-18/fair-input-cold/primary-a1.json`.
+[Проверенные ссылки на полный корпус и provenance](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/primary-publication.archive.json).
 Далее требуются actual frozen8 Test и читаемые Soma/input временные графики.
 
 ## Elder продолжает прежний single-sweep
@@ -67,7 +70,10 @@ const UEPtr не поддерживает неявный upcast к UContainer;0/
 [Failure и scope исправления](../../../Reports/StructTrain/TimeLearner/PhysicalModelDataSdk-20261118/build-a1-failure.json).
 Root be5f6cf3d58b46405465b060d12fd362b025f986 добавляет явный upcast через
 Get(), без изменения проверок или production алгоритма. Исправление ещё
-не проверено. Следующая сборка получит новые source/build/runtime/controls.
+не проверено. Следующая попытка a2 подготовлена на Root
+`944f7dd34bbe538346e20a183fb56d2cb5153bd0` / прежнем Pulse c54,
+controls `908b24852d9c57d081238d40f68a27b7c7f97d5f`. Её canonical preparation
+запущена в новых source/build/runtime; native228 gate ещё не запущен.
 Используются2 compiler jobs/8GiB, штатный CMake Qt6. Старый prepared219
 superseded без запуска;228 содержит все его случаи и9 новых. Native228 PASS
 и измеренное снижение RSS ещё не получены.
