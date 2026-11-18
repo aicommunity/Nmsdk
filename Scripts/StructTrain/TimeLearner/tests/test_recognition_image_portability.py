@@ -6,7 +6,7 @@ import struct
 import unittest
 
 from ..model_identity import canonical_model_sha256
-from ..native_evidence import EvidenceError, load
+from ..native_evidence import EvidenceError, load_json
 from ..recognition_evidence import audit_recognition_images
 
 
@@ -17,8 +17,8 @@ class RecognitionImagePortabilityTest(unittest.TestCase):
         if not value:
             raise unittest.SkipTest('requires actual retained Elder Linux and Windows image exports')
         root = Path(value)
-        cls.source = load(root / 'source-class-definitions.json')
-        cls.converted = load(root / 'recognition-class-definitions.json')
+        cls.source = load_json(root / 'source-class-definitions.json')
+        cls.converted = load_json(root / 'recognition-class-definitions.json')
         if len(cls.source) != 31 or len(cls.converted) != 31 or cls.source == cls.converted:
             raise RuntimeError('requires the genuine 31-image cross-platform pair')
 
@@ -64,6 +64,8 @@ class RecognitionImagePortabilityTest(unittest.TestCase):
                 data = node['parameters'].get('Capacity', {}).get('data', {})
                 if data.get('type') == 'binary64':
                     value = struct.unpack('>d', bytes.fromhex(data['value']))[0]
+                    if value <= 0:
+                        continue
                     data['value'] = struct.pack('>d', value * 2).hex()
                     return True
         self.reject(lambda images: self.mutate_identity(images, change))
