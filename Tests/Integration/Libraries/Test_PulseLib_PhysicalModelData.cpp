@@ -160,7 +160,20 @@ template<class Owner> void Roundtrip()
     ASSERT_TRUE(sourceResult);ASSERT_TRUE(targetResult);ASSERT_TRUE(sourceResult->observation);ASSERT_TRUE(targetResult->observation);
     EXPECT_EQ(sourceResult->status,NativeProbeStatus::Completed);EXPECT_EQ(targetResult->status,NativeProbeStatus::Completed);
     EXPECT_TRUE(sourceResult->observation->complete);EXPECT_TRUE(targetResult->observation->complete);
-    EXPECT_TRUE(sourceResult->observation->valid);EXPECT_TRUE(targetResult->observation->valid);
+    // Transfer must preserve the actual response and its measurement status.
+    // This native stock profile can have two peaks in the declared window;
+    // ambiguity is an honest measurement result, not a failed model transfer.
+    // Do not change its physics/window or silently turn ambiguity into valid.
+    for(const auto* result:{&*sourceResult,&*targetResult})
+        EXPECT_TRUE(result->observation->valid || result->observation->reasons==
+            (std::vector<std::string>{"peak_ambiguous:input0"}));
+    const auto comparableObservation=[](const NativeProbeResult& result) {
+        auto observation=EncodeNativeProbeEvidence(result)["observation"].toObject();
+        auto specification=observation["specification"].toObject();
+        specification.remove("run_id");specification.remove("trial_id");
+        observation["specification"]=specification;return observation;
+    };
+    EXPECT_EQ(comparableObservation(*sourceResult),comparableObservation(*targetResult));
     ASSERT_EQ(sourceTrace.size(),targetTrace.size());ASSERT_GT(sourceTrace.size(),500u);
     EXPECT_EQ(sourceTrace.size(),sourceResult->observation->sampleCount);
     double largestResponse=0.;
