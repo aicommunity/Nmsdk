@@ -1,7 +1,8 @@
 # Источник для проверок LT readout и сохранения калибровки
 
-Статус: изменение fixture подготовлено; новый native серверный прогон ещё
-не выполнен. Не изменение алгоритма/допусков и не новый научный результат.
+Статус: новый Linux native прогон выполнен:19/21 PASS; два отказа — коллизия
+имён артефактов между readout и persistence cases. Исправление имён подготовлено,
+повторная native проверка не завершена. Алгоритм и допуски не изменены.
 
 Полный Windows247 остановился в шести NativeThresholdPotential и
 NativeCalibrationPersistence cases до целевого readout: общий источник Train
@@ -56,3 +57,22 @@ fixtures; их отсутствие не устраняется этим изм�
 INVENTORY и отрицательный Windows247 сохранены. Обновлённый Windows cohort
 потребует сборки исправленного Root643, текущий scientific runtime Root28
 не выдаётся за неё. Gate21 M40 остаётся своим неизменным адресным заданием.
+
+## Установленная причина двух отказов
+
+В фактическом полном JUnit Gate21 все assertions двух failed cases относятся
+только к Artifact(file.open(WriteOnly|NewOnly)), строка211. ThresholdPotential
+и CalibrationPersistence вызывали один и тот же helper с одинаковыми аргументами,
+поэтому второй case повторно использовал имена всех файлов первого. Четыре
+ThresholdPotential (обе топологии,2k/20k), шесть сохранённых negative preconditions,
+семь PhysicalModelData и два timing-neighbourhood контроля прошли. Это не
+доказательство дефекта сохранения калибровки; отдельный persistence outcome
+всё равно не принят из-за отсутствующих независимых артефактов.
+
+Для persistence добавлен явный suffix `_persistence` в имя rig и всей его
+цепочки proof/trial/export файлов. Прежние имена остальных cases сохранены.
+NewOnly остаётся обязательным; ошибки теперь сообщают путь и file.errorString.
+Проверка должна запускать обе пары readout/persistence **в одном процессе**
+и подтверждать наличие обоих наборов, а не запускать их изолированно для
+сокрытия коллизии. Ни один файл исходного rejected Gate21 не перезаписывается.
+[Полный разбор всех JUnit failures](../../../Reports/StructTrain/TimeLearner/CalibrationReadoutCompletion-20261118/linux21-artifact-collision-diagnosis.json).

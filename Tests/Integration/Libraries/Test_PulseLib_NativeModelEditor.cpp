@@ -208,7 +208,9 @@ void Artifact(const std::string& name,const QByteArray& data)
     {
         EXPECT_TRUE(QDir().mkpath(QString::fromLocal8Bit(directory)));
         QFile file(QString::fromLocal8Bit(directory)+"/"+QString::fromStdString(name));
-        ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));ASSERT_EQ(file.write(data),data.size());
+        ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly))
+            <<file.fileName().toStdString()<<": "<<file.errorString().toStdString();
+        ASSERT_EQ(file.write(data),data.size());
     }
 }
 QProcessEnvironment LearnedStateChildEnvironment(const std::string& name,const QString& temporaryRoot)
@@ -3394,6 +3396,7 @@ struct BoundaryExtras {
     std::optional<CapacitanceSearchPolicy> capacitanceSearch;
     std::optional<bool> expectedFrozenSpikes;
     bool ownerRecognitionSource=false;
+    bool persistenceReadout=false;
 };
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
     std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.,unsigned n0Repeats=1,
@@ -3421,6 +3424,9 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(productionCalibrationSeed)suffix+="_production_calibration_seed";
     if(trackedCapacitance)suffix+="_history";
     if(capacitanceSearch)suffix+="_csearch";
+    // Persistence and readout intentionally exercise the same native path.
+    // Keep both proofs when their cases share one execution output directory.
+    if(extras.persistenceReadout)suffix+="_persistence";
     ASSERT_FALSE(trackedCapacitance && !withCapacitance);
     if(extras.ownerRecognitionSource)
     {
@@ -4078,7 +4084,8 @@ TEST(NativeThresholdContract,SignedIaFImageProducesMeasuredSpike)
     dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
 }
 
-template<class Learner> void CalibrationBoundaryFixture(int normalization,unsigned frequency,bool potential=false)
+template<class Learner> void CalibrationBoundaryFixture(int normalization,unsigned frequency,bool potential=false,
+    bool persistence=false)
 {
     // Explicit transport-fixture allowance, recorded in configuration/state.
     // ASan at 20 kHz exhausted 600 s while building the source model. Production
@@ -4090,15 +4097,16 @@ template<class Learner> void CalibrationBoundaryFixture(int normalization,unsign
     // NativeCalibrationPrecondition negative at both frequencies below.
     LearnedBoundary<Learner>(normalization,.02,frequency,2,true,
         potential?RecognitionCase::ThresholdPotential:RecognitionCase::ThresholdCandidates,false,1.,1,1800.,
-        BoundaryExpectation::Completed,false,false,{.productionCalibrationSeed=normalization==1});
+        BoundaryExpectation::Completed,false,false,
+        {.productionCalibrationSeed=normalization==1,.persistenceReadout=persistence});
 }
 TEST(NativeThresholdCandidate,ClassicN0_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(0,2000);}
 TEST(NativeThresholdPotential,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000,true);}
 TEST(NativeThresholdPotential,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000,true);}
 TEST(NativeThresholdPotential,ClassicN1_20000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,20000,true);}
 TEST(NativeThresholdPotential,BranchN1_20000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,20000,true);}
-TEST(NativeCalibrationPersistence,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000,true);}
-TEST(NativeCalibrationPersistence,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000,true);}
+TEST(NativeCalibrationPersistence,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000,true,true);}
+TEST(NativeCalibrationPersistence,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000,true,true);}
 TEST(NativeCalibrationTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
 TEST(NativeCalibrationTransaction,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
 TEST(NativePostTuneTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
