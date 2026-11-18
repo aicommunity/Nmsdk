@@ -16,8 +16,18 @@ SHA = re.compile('[0-9a-f]{64}')
 COMMIT = re.compile('[0-9a-f]{40}')
 CASE_FIELDS = {'name', 'source_name', 'summary_name', 'source_raw_bytes', 'source_raw_sha256'}
 CASE_OPTIONS = {'diagnostic_threshold', 'duration', 'reset_policy', 'maximum_source_raw_bytes',
-                'summary_raw_bytes', 'summary_raw_sha256', 'job_source_transport'}
+                'summary_raw_bytes', 'summary_raw_sha256', 'maximum_summary_raw_bytes', 'job_source_transport'}
 SUMMARY_COMPRESSION_FIELDS = {'summary_raw_bytes', 'summary_raw_sha256'}
+DEFAULT_SUMMARY_RAW_BYTES = 128*1024**2
+MAXIMUM_SUMMARY_RAW_BYTES = 1024*1024**2
+
+
+def _summary_limit(row):
+    maximum = row.get('maximum_summary_raw_bytes', DEFAULT_SUMMARY_RAW_BYTES)
+    require(type(maximum) is int and 0 < maximum <= MAXIMUM_SUMMARY_RAW_BYTES and
+            ('maximum_summary_raw_bytes' not in row or SUMMARY_COMPRESSION_FIELDS <= set(row)),
+            'native_data_diagnostic_summary_limit')
+    return maximum
 
 
 def validate_declaration(request):
@@ -36,10 +46,14 @@ def validate_declaration(request):
     bindings = {};summary_sources = {}
     for row in cases:
         compression = SUMMARY_COMPRESSION_FIELDS & set(row)
+        summary_maximum = _summary_limit(row)
         require(not compression or (compression == SUMMARY_COMPRESSION_FIELDS and
-                type(row['summary_raw_bytes']) is int and 0 < row['summary_raw_bytes'] <= 128*1024**2 and
+                type(row['summary_raw_bytes']) is int and 0 < row['summary_raw_bytes'] <= summary_maximum and
                 type(row['summary_raw_sha256']) is str and SHA.fullmatch(row['summary_raw_sha256'])),
                 'native_data_diagnostic_summary_binding')
+        if summary_maximum > DEFAULT_SUMMARY_RAW_BYTES:
+            require(request['limits']['memory_bytes'] >= 16*1024**3,
+                    'native_data_diagnostic_large_summary_resource_declaration')
         if 'diagnostic_threshold' in row:
             number(row['diagnostic_threshold'])
         from .job_source_transport import TRANSPORT,MAXIMUM_SOURCE_BYTES
@@ -75,10 +89,11 @@ def validate_declaration(request):
 def read_summary(staged, row):
     """Explicitly framed summary transport; finite native input caps stay intact."""
     path = Path(staged)/row['summary_name']
+    maximum = _summary_limit(row)
     if SUMMARY_COMPRESSION_FIELDS <= set(row):
         from .qt_json import read_qcompress_bytes
         return read_qcompress_bytes(path, expected_bytes=row['summary_raw_bytes'],
-            expected_sha256=row['summary_raw_sha256'], maximum_bytes=128*1024**2)
+            expected_sha256=row['summary_raw_sha256'], maximum_bytes=maximum)
     from .collector_provenance import _frozen
     return _frozen(path, 64*1024**2)[0]
 

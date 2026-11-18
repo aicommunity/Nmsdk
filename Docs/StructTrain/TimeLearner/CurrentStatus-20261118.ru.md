@@ -82,3 +82,14 @@ superseded без запуска;228 содержит все его случаи
 [Model DATA](PhysicalModelData-20261118.ru.md) и
 [terminal best-state](TerminalBestStateBoundary-20261118.ru.md) остаются
 открытыми пунктами5/7. Feature changes пока не объединены в develop.
+
+До actual Branch Test обнаружен ещё один transport blocker: сохранённый
+summary167249672 bytes больше прежнего compressed-summary ceiling128MiB.
+В recorded_diagnostic_matrix подготовлен case option
+`maximum_summary_raw_bytes`: прежний default128MiB, явный потолок не более1GiB,
+полные raw bytes/SHA и compressed frame обязательны; свыше128MiB требуется
+отдельно объявленная owner memory не менее16GiB. Для этого корпуса достаточно
+256MiB. Legacy uncompressed64MiB путь сохранён. Это лимит чтения данных,
+а не изменение научного условия или сокращение истории. Новая declaration
+регрессия и exact-boundary чтение подготовлены, ещё не выполнены; далее нужен
+реальный импорт167MB summary и обеих полных моделей.
