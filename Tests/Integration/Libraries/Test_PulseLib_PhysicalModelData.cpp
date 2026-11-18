@@ -3,6 +3,7 @@
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativePhysicalModelData.h"
 #include "TimeLearner/NativeRecognitionState.h"
+#include "TimeLearner/NativeRecognitionTrial.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -255,6 +256,121 @@ TEST(NativePhysicalModelData,DataCannotAcquireCertificateCheckpointOrDifferentTr
     }
     auto changed=model;auto protocol=changed["protocol"].toObject();protocol["pattern_hash"]=QString(64,'0');changed["protocol"]=protocol;
     EXPECT_THROW(PrepareNativePhysicalModelData(Signed(changed),fixture.storage,fixture.environment,Implementation),std::invalid_argument);
+    EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
+}
+
+template<class Owner> void FrozenDataMatchesOriginalRecognition()
+{
+    Fixture fixture;fixture.Create<Owner>();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    const auto recognition=ConvertNativeStoppedToDiagnosticRecognition(fixture.source,NativeRecognitionSpec{},
+        fixture.storage,fixture.environment,Implementation);
+    const auto data=ExportNativePhysicalModelData(recognition,fixture.storage,fixture.environment,Implementation);
+    const auto create=[&](const char* name) {
+        auto owner=dynamic_pointer_cast<Owner>(fixture.storage->TakeObject(
+            std::is_same_v<Owner,NNeuronTimeLearnerBranch>?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
+        if(!owner)throw std::runtime_error("missing_frozen_fixture_owner");
+        owner->Name=name;owner->SetEnvironment(fixture.environment);owner->SetGlobalTimeStep(2000);
+        UEPtr<UContainer> component=owner;
+        if(fixture.environment->GetModel()->AddComponent(component)==ForbiddenId)
+            throw std::runtime_error("cannot_attach_frozen_fixture_owner");
+        return owner;
+    };
+    auto original=create("FullSource"),restored=create("PhysicalData");
+    auto result=original->ImportNativeDiagnosticRecognitionState(recognition,Implementation);
+    ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;
+    result=restored->ImportNativePhysicalModelData(data,Implementation);
+    ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;
+    auto model=fixture.environment->GetModel();model->Init();model->Reset();
+    ASSERT_TRUE(original->NativeModelEditFailure().empty())<<original->NativeModelEditFailure();
+    ASSERT_TRUE(restored->NativeModelEditFailure().empty())<<restored->NativeModelEditFailure();
+    EXPECT_FALSE(original->HasNativePhysicalModelData());EXPECT_TRUE(restored->HasNativePhysicalModelData());
+    EXPECT_EQ(restored->NativeTrainingController().State(),NativeTrainingState::Idle);
+    EXPECT_FALSE(restored->NativeTrainingController().Certificate());EXPECT_FALSE(restored->IsNeedToTrain.GetData());
+    EXPECT_EQ(restored->ExportNativePhysicalModelData(Implementation),data);
+    EXPECT_THROW(restored->ExportNativeRecognitionState(Implementation),std::logic_error);
+    EXPECT_THROW(restored->BeginNativeTraining(NativeTrainingPlan{}),std::logic_error);
+    for(int pattern=0;pattern<2;++pattern)
+    {
+        NativeRecognitionTrialRequest request;request.runId="full-source";
+        request.trialId="pattern"+std::to_string(pattern);request.sampleId=request.trialId;
+        request.label=pattern?"foil":"target";request.pattern=original->InputPattern.GetData();
+        if(pattern)request.pattern(1,0)*=2.;
+        QJsonArray isi;for(int i=0;i<2;++i)isi.append(request.pattern(i,0));
+        request.patternHash=NmsdkTools::CanonicalModelDataSha256(isi).toStdString();
+        request.duration=.4;request.maximumSamples=1002;request.recordThresholdPotential=true;
+        original->QueueNativeRecognitionTrial(request);request.runId="physical-data";
+        restored->QueueNativeRecognitionTrial(request);
+        // A queued trial must survive a refused replacement unchanged.
+        const auto busy=restored->ImportNativePhysicalModelData(data,Implementation);
+        EXPECT_EQ(busy.status,NativeModelBuildStatus::Rejected);EXPECT_FALSE(busy.modelMayHaveChanged);
+        std::optional<NativeRecognitionTrialObservation> before,after;
+        for(int tick=0;tick<1002 && (!before || !after);++tick)
+        {
+            model->Calculate();fixture.environment->IncreaseModelTimeByStep();
+            if(!before)before=original->TakeNativeRecognitionTrialResult();
+            if(!after)after=restored->TakeNativeRecognitionTrialResult();
+        }
+        ASSERT_TRUE(before);ASSERT_TRUE(after);
+        ASSERT_TRUE(before->complete)<<before->reason;ASSERT_TRUE(after->complete)<<after->reason;
+        ASSERT_TRUE(before->valid)<<before->reason;ASSERT_TRUE(after->valid)<<after->reason;
+        EXPECT_EQ(before->stimulusTimes.size(),2u);EXPECT_EQ(before->samples.size(),801u);
+        EXPECT_EQ(before->modelBefore,before->modelAfter);EXPECT_EQ(before->modelBefore,after->modelBefore);
+        EXPECT_EQ(after->modelBefore,after->modelAfter);
+        const auto comparable=[](const NativeRecognitionTrialObservation& observation) {
+            auto value=NativeRecognitionTrialJson(observation);value.remove("run_id");return value;
+        };
+        EXPECT_EQ(comparable(*before),comparable(*after));
+        EXPECT_EQ(restored->ExportNativePhysicalModelData(Implementation),data);
+        EXPECT_EQ(original->ExportNativeRecognitionState(Implementation),recognition);
+        if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+        {
+            const QString stem=QString("physical-data-frozen-")+
+                (std::is_same_v<Owner,NNeuronTimeLearnerBranch>?"Branch":"Classic")+(pattern?"-foil":"-target");
+            QFile json(QDir(QString::fromLocal8Bit(output)).filePath(stem+".json"));
+            ASSERT_TRUE(json.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+            const auto bytes=QJsonDocument(QJsonObject{{"kind","timelearner_frozen_physical_data_fixture"},
+                {"schema_version",1},{"source_boundary",data["source_boundary"]},{"model_data_sha256",data["sha256"]},
+                {"full_source",NativeRecognitionTrialJson(*before)},{"physical_data",NativeRecognitionTrialJson(*after)},
+                {"training_certificate_transferred",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson();
+            ASSERT_EQ(json.write(bytes),bytes.size());
+            std::ostringstream trace;trace<<std::setprecision(17)<<"time,actual_input,full_lt,restored_lt,full_lt_potential,restored_lt_potential";
+            for(std::size_t channel=0;channel<before->samples.front().somaPotentials.size();++channel)
+                trace<<",full_soma"<<channel+1<<",restored_soma"<<channel+1;
+            trace<<'\n';ASSERT_EQ(before->samples.size(),after->samples.size());
+            for(std::size_t i=0;i<before->samples.size();++i)
+            {
+                const auto& a=before->samples[i];const auto& b=after->samples[i];
+                trace<<a.time<<','<<a.stimulus<<','<<a.ltOutput<<','<<b.ltOutput<<','<<a.thresholdPotential<<','<<b.thresholdPotential;
+                ASSERT_EQ(a.somaPotentials.size(),b.somaPotentials.size());
+                for(std::size_t channel=0;channel<a.somaPotentials.size();++channel)
+                    trace<<','<<a.somaPotentials[channel]<<','<<b.somaPotentials[channel];
+                trace<<'\n';
+            }
+            QFile csv(QDir(QString::fromLocal8Bit(output)).filePath(stem+".csv"));
+            ASSERT_TRUE(csv.open(QIODevice::WriteOnly|QIODevice::NewOnly));const auto raw=trace.str();
+            ASSERT_EQ(csv.write(raw.data(),qint64(raw.size())),qint64(raw.size()));
+        }
+    }
+}
+
+TEST(NativePhysicalModelData,ClassicFrozenDataMatchesFullSourceTargetAndFoilWithoutProofAuthority)
+{FrozenDataMatchesOriginalRecognition<NNeuronTimeLearner>();}
+TEST(NativePhysicalModelData,BranchFrozenDataMatchesFullSourceTargetAndFoilWithoutProofAuthority)
+{FrozenDataMatchesOriginalRecognition<NNeuronTimeLearnerBranch>();}
+
+TEST(NativePhysicalModelData,FrozenDataRejectsSoloAndResignedThresholdMetadata)
+{
+    Fixture fixture;fixture.Create<NNeuronTimeLearner>();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    const auto solo=ExportNativePhysicalModelData(fixture.source,fixture.storage,fixture.environment,Implementation);
+    EXPECT_THROW(PrepareNativeFrozenPhysicalModelData(solo,fixture.storage,fixture.environment,Implementation),std::invalid_argument);
+    const auto recognition=ConvertNativeStoppedToDiagnosticRecognition(fixture.source,NativeRecognitionSpec{},
+        fixture.storage,fixture.environment,Implementation);
+    auto data=ExportNativePhysicalModelData(recognition,fixture.storage,fixture.environment,Implementation);
+    auto neuron=data["neuron"].toObject(),metadata=neuron["metadata"].toObject(),calibration=metadata["calibration"].toObject();
+    calibration["threshold"]=calibration["threshold"].toDouble()+1.;metadata["calibration"]=calibration;neuron["metadata"]=metadata;
+    // Keep both digests valid: a checksum is not proof that metadata matches physics.
+    neuron=Signed(neuron);data["neuron"]=neuron;data=Signed(data);
+    EXPECT_THROW(PrepareNativeFrozenPhysicalModelData(data,fixture.storage,fixture.environment,Implementation),std::invalid_argument);
     EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
 }
 }
