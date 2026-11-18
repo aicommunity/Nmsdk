@@ -115,12 +115,21 @@ template<class Owner> void Roundtrip()
     ASSERT_TRUE(targetOwner);targetOwner->Name="Target";targetOwner->SetEnvironment(fixture.environment);
     targetOwner->SetGlobalTimeStep(2000);targetOwner->ControllerVersion=2;targetOwner->CalculateMode=1;
     targetOwner->StructureBuildMode=1;targetOwner->EnablePostTrainTuning=false;targetOwner->AutoCalibrateFixedLTZThreshold=false;
+    // Version 2 Build validates its declared configuration even for an already
+    // installed graph. Supply the captured declaration before native Init;
+    // an empty configuration is not a valid frozen model initialization path.
+    targetOwner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(restored->configuration))
+        .toJson(QJsonDocument::Compact).toStdString();
     UEPtr<UContainer> targetComponent=targetOwner;
     ASSERT_NE(fixture.environment->GetModel()->AddComponent(targetComponent),ForbiddenId);
     const auto installed=targetOwner->InstallNativePreparedModel(restored->configuration.model,
         restored->neuron,restored->dataset,restored->parameters);
     ASSERT_EQ(installed.status,NativeModelBuildStatus::Adopted)<<installed.reason;
     targetOwner->Init();fixture.environment->GetModel()->Init();fixture.environment->GetModel()->Reset();
+    ASSERT_TRUE(sourceOwner->NativeModelEditFailure().empty())<<sourceOwner->NativeModelEditFailure();
+    ASSERT_TRUE(targetOwner->NativeModelEditFailure().empty())<<targetOwner->NativeModelEditFailure();
+    EXPECT_EQ(targetOwner->NativeTrainingController().State(),NativeTrainingState::Idle);
+    EXPECT_FALSE(targetOwner->NativeTrainingController().Certificate());
     std::vector<NativeProbeSample> sourceTrace,targetTrace;
     const auto request=[&](auto owner,const std::string& run,std::vector<NativeProbeSample>& trace) {
         NativeProbeRequest probe;probe.routing=std::is_same_v<Owner,NNeuronTimeLearnerBranch>?
