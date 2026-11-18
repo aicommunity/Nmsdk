@@ -3446,7 +3446,8 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         if(productionCalibrationSeed)
         {
             ASSERT_EQ(normalization,1);ASSERT_EQ(inputs,2u);ASSERT_DOUBLE_EQ(sync,.02);
-            ASSERT_EQ(recognition,RecognitionCase::CalibratedThreshold);
+            ASSERT_TRUE(recognition && (*recognition==RecognitionCase::CalibratedThreshold ||
+                *recognition==RecognitionCase::ThresholdPotential || *recognition==RecognitionCase::ThresholdCandidates));
             ASSERT_FALSE(withCapacitance);ASSERT_FALSE(withDormantCapacitance);
             // The downstream calibration contract needs a measured Exact
             // source. Reuse the declared, successful production cold-Train
@@ -3456,7 +3457,8 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
             auto& c=*configuredPlan;c.model.initialIsi=rig.isi;
             c.model.allocatedCableLengths.assign(rig.branch?1u:inputs,1);
             for(auto& input:c.model.inputs){input.attachment=1;input.synapses=1;input.resistance=86.e6;}
-            c.duration=rig.duration;c.windows.assign(inputs,{0.,rig.duration});c.maximumSamples=540;
+            c.duration=rig.duration;c.windows.assign(inputs,{0.,rig.duration});
+            c.maximumSamples=std::size_t(std::ceil(rig.duration*frequency))+20;
             c.maximumReferenceProbes=2;c.maximumModelSeconds=180.;
             c.search.maximumProbes=256;c.search.maximumEdits=128;c.search.maximumCandidatesPerInput=80;
             c.search.maximumSweeps=1;c.search.resistanceSubdivisionDepth=4;
@@ -4081,8 +4083,14 @@ template<class Learner> void CalibrationBoundaryFixture(int normalization,unsign
     // Explicit transport-fixture allowance, recorded in configuration/state.
     // ASan at 20 kHz exhausted 600 s while building the source model. Production
     // defaults, model-time budget, tolerances and search bounds are unchanged.
+    // These tests exercise downstream readout/candidate persistence after an
+    // actual Exact source. N1 uses the already declared production seed domain,
+    // with the original .02 tolerance and measured per-input amplitude goal.
+    // The old .08/narrow-domain heterogeneous source remains an explicit
+    // NativeCalibrationPrecondition negative at both frequencies below.
     LearnedBoundary<Learner>(normalization,.02,frequency,2,true,
-        potential?RecognitionCase::ThresholdPotential:RecognitionCase::ThresholdCandidates,false,1.,1,1800.);
+        potential?RecognitionCase::ThresholdPotential:RecognitionCase::ThresholdCandidates,false,1.,1,1800.,
+        BoundaryExpectation::Completed,false,false,{.productionCalibrationSeed=normalization==1});
 }
 TEST(NativeThresholdCandidate,ClassicN0_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(0,2000);}
 TEST(NativeThresholdPotential,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000,true);}
@@ -4108,6 +4116,8 @@ TEST(NativeCalibratedModelSpec2,BranchN1_2000){LearnedBoundary<NNeuronTimeLearne
 // when Train exhausted its sweep budget before producing a certificate.
 TEST(NativeCalibrationPrecondition,LegacyClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
 TEST(NativeCalibrationPrecondition,LegacyBranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
+TEST(NativeCalibrationPrecondition,LegacyClassicN1_20000){LearnedBoundary<NNeuronTimeLearner>(1,.02,20000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
+TEST(NativeCalibrationPrecondition,LegacyBranchN1_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,20000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
 TEST(NativeCalibrationPrecondition,LegacyClassicModelSpec2N1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget,false,false,{.modelSpec2=true});}
 TEST(NativeCalibrationPrecondition,LegacyBranchModelSpec2N1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget,false,false,{.modelSpec2=true});}
 TEST(NativeThresholdCandidate,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000);}
