@@ -17,6 +17,96 @@ namespace {
 using namespace NMSDK::TimeLearner;
 using namespace NmsdkBoundedTrainingTest;
 
+void ConsumeInitialMeasuredPair(BoundedTrainingSession& session,const VerificationProtocol& protocol)
+{
+    // Use the real recorder and controller. The fixture supplies a controlled
+    // physical response; it does not imitate native graph checkpointing.
+    for(unsigned probe=0;probe<2;++probe)
+    {
+        const auto action=session.NextAction();ASSERT_TRUE(action);
+        ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+        const auto prepared=Prepare(protocol,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+        session.Arm(action->serial,prepared);
+        session.Consume(Observe(protocol,prepared,action->inputIndex,action->runId,action->trialId,
+            std::vector<double>(protocol.inputs.size(),.03),Raw(protocol.inputs.size())),action->baseModelRevision);
+    }
+}
+
+TEST(BoundedTrainingMeasuredBoundary,CompletedSelectionSurvivesAdvanceToFreshFinalVerification)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
+    {
+        const auto protocol=Protocol(2,routing);auto cfg=Configuration(2,normalization);
+        cfg.tolerances.sync=1.;
+        BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}});
+        ASSERT_FALSE(session.SelectedMeasuredBoundary());ConsumeInitialMeasuredPair(session,protocol);
+        ASSERT_TRUE(session.SelectedMeasuredBoundary());const auto selected=*session.SelectedMeasuredBoundary();
+        EXPECT_EQ(selected.serial,1u);EXPECT_EQ(selected.sweep,0u);EXPECT_EQ(selected.inputPosition,0u);
+        ASSERT_EQ(session.Evidence().size(),1u);
+        EXPECT_EQ(selected.candidate.trialId,session.Evidence().front().trialId);
+        EXPECT_EQ(selected.candidate.anchorTrialId,session.Evidence().front().anchorTrialId);
+        EXPECT_EQ(selected.candidate.fullParameters,session.Parameters());
+        EXPECT_EQ(selected.candidate.modelRevision,session.ModelRevision());
+        EXPECT_TRUE(selected.candidate.withinTiming);EXPECT_TRUE(selected.candidate.withinAmplitude);
+        EXPECT_EQ(session.Status(),TrainingStatus::Verifying);EXPECT_FALSE(session.Certificate());
+    }
+}
+
+TEST(BoundedTrainingMeasuredBoundary,UnmeasuredEditAndBudgetStopCannotReplaceTheMeasuredSelection)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
+    {
+        const auto protocol=Protocol(2,routing);auto cfg=Configuration(2,normalization);
+        cfg.bounds={{1,3,1,1,10.,10.},{1,1,1,1,10.,10.}};
+        BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}},
+            normalization==Normalization::TipResistance);
+        ConsumeInitialMeasuredPair(session,protocol);
+        ASSERT_TRUE(session.SelectedMeasuredBoundary());const auto selected=*session.SelectedMeasuredBoundary();
+        bool edited=false;
+        for(unsigned turn=0;turn<8 && !edited;++turn)
+        {
+            const auto action=session.NextAction();ASSERT_TRUE(action);
+            if(action->kind==TrainingActionKind::ResistanceDomain)
+            {
+                ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
+                d.baseModelRevision=action->baseModelRevision;d.geometry=action->parameters;d.inputIndex=action->inputIndex;
+                d.sourceAmplitude=1.;d.previewModelRevision="unmeasured-preview";
+                d.minimumResistance=d.maximumResistance=10.;session.AssessedDomain(action->serial,d,action->baseModelRevision);
+            }
+            else
+            {
+                ASSERT_EQ(action->kind,TrainingActionKind::Edit);
+                ASSERT_NE(action->parameters,selected.candidate.fullParameters);
+                session.Applied(action->serial,action->parameters,"unmeasured-edit",action->capacitance);edited=true;
+            }
+        }
+        ASSERT_TRUE(edited);EXPECT_NE(session.ModelRevision(),selected.candidate.modelRevision);
+        session.ExhaustBudget();ASSERT_TRUE(session.SelectedMeasuredBoundary());
+        EXPECT_EQ(session.SelectedMeasuredBoundary()->serial,selected.serial);
+        EXPECT_EQ(session.SelectedMeasuredBoundary()->candidate.trialId,selected.candidate.trialId);
+        EXPECT_EQ(session.SelectedMeasuredBoundary()->candidate.modelRevision,selected.candidate.modelRevision);
+        EXPECT_EQ(session.SelectedMeasuredBoundary()->candidate.fullParameters,selected.candidate.fullParameters);
+        EXPECT_EQ(session.SelectedMeasuredBoundary()->candidate.capacitance,selected.candidate.capacitance);
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);EXPECT_FALSE(session.Certificate());
+    }
+}
+
+TEST(BoundedTrainingMeasuredBoundary,IncompleteN0RepeatsDoNotPublishARestoreSelection)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        const auto protocol=Protocol(2,routing);auto cfg=Configuration();cfg.n0CandidateRepeats=2;
+        BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}});
+        ConsumeInitialMeasuredPair(session,protocol);
+        ASSERT_EQ(session.Evidence().size(),1u);EXPECT_FALSE(session.SelectedMeasuredBoundary());
+        session.ExhaustBudget();EXPECT_FALSE(session.SelectedMeasuredBoundary());
+        ASSERT_EQ(session.CandidateRepeats().size(),1u);EXPECT_FALSE(session.CandidateRepeats().front().complete);
+        EXPECT_FALSE(session.Certificate());
+    }
+}
+
 TEST(BoundedTrainingN1TimingNeighbourhood, TimingReadyAmplitudeMissProposesFreshNearbyGeometryInBothTopologies)
 {
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})

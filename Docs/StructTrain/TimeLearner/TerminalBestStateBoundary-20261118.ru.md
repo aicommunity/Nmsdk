@@ -77,3 +77,17 @@ Pulse c54d9c0a65ac6eadeccfe1793672b7a9472ea559. Развивает пункт 1
 Пока эти условия не выполнены, существующие terminal-модели оцениваются как
 фактически сохранённые stopped graph. Лучший scalar из истории не подменяет
 их модель или Test. Уже запущенные опыты продолжают исходный протокол.
+
+## Подготовленная часть: наблюдаемое решение controller
+
+В PulseLib добавлен SelectedMeasuredBoundary: контроллер сохраняет полный
+CandidateEvidence выбранной точки, serial решения и input/sweep context после
+AdvanceInput и Stop. Выбор остаётся в production Rank; незавершённые N0 repeats
+не создают selection. Подготовлены три штатных kernel cases, серверный прогон
+пока не выполнен. Текущий M40 Gate29 использует прежний Pulse5f8 и их не содержит.
+
+Это ещё не checkpoint и не возврат физической модели. Следующий обязательный
+шаг — захват соответствующего native graph на новом serial, отдельная terminal
+transaction после отзыва composite authority, owner mirrors/C readback,
+accounting/export/replay и настоящие lifecycle/physics regressions выше.
+Действующие научные модели и runtime не изменены.
