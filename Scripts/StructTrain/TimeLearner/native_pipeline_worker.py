@@ -31,8 +31,10 @@ FIELDS = {
 FIELDS["probe"] = {"owner_class", "implementation_id", "model", "profile_archives", "stimulus_profile", "probe",
                    "maximum_model_ticks", "maximum_wall_seconds"}
 FIELDS["diagnostic-evaluate"] = (FIELDS["evaluate"] - {"source_recognition"}) | {"source_stopped", "conversion_spec"}
+FIELDS["physical-model-evaluate"] = (FIELDS["evaluate"] - {"source_recognition"}) | {"source_model_data"}
 KINDS = {"preflight": "training", "train": "training", "export": "recognition_export", "evaluate": "evaluation", "diagnostic-evaluate": "diagnostic_evaluation"}
 EXECUTION_KINDS = {"preflight": "preflight", "train": "training", "export": "conversion", "evaluate": "evaluation", "diagnostic-evaluate": "diagnostic_evaluation"}
+KINDS["physical-model-evaluate"] = EXECUTION_KINDS["physical-model-evaluate"] = "physical_model_evaluation"
 COMMON_EXECUTION = {"kind", "schema_version", "execution", "job_sha256", "model_revision", "model_ticks",
                     "artifacts", "evaluation_verdict", "sha256"}
 EXECUTION_FIELDS = {
@@ -47,9 +49,13 @@ EXECUTION_FIELDS = {
 
 EXECUTION_FIELDS["diagnostic-evaluate"] = EXECUTION_FIELDS["evaluate"] | {
     "diagnostic_only", "source_stopped_sha256", "training_outcome", "training_reason"}
+EXECUTION_FIELDS["physical-model-evaluate"] = EXECUTION_FIELDS["evaluate"] | {
+    "data_only", "source_boundary", "training_certificate_transferred", "calibration_confirmed", "controller_checkpoint_restored"}
 
 
 def _load_source_case(mode, path):
+    if mode == "physical-model-evaluate":
+        return (load(path),)
     if mode in ("diagnostic-evaluate", "probe"):
         from .stopped_evidence import load_case as load_stopped
         return load_stopped(path)
@@ -57,7 +63,11 @@ def _load_source_case(mode, path):
 
 
 def _audit_source(job, source_case, mode):
-    if mode == "export":
+    if mode == "physical-model-evaluate":
+        from .physical_model_data_evidence import audit_physical_model_data
+        require(job["source_model_data"] == source_case[0], "pipeline_physical_data_source_changed")
+        audit_physical_model_data(source_case[0], frozen=True)
+    elif mode == "export":
         require(job["source_solo"] == source_case[0], "pipeline_source_solo_changed")
         audit_learned_state(*source_case)
     elif mode == "diagnostic-evaluate":
@@ -121,12 +131,12 @@ def validate_job(mode, job, source_case=None):
         require(source_case is not None, "pipeline_original_primary_source_required")
         _audit_source(job, source_case, mode)
         config = source_case[0]["configuration"]
-        source = job["source_solo"] if mode == "export" else job["source_stopped"] if mode == "diagnostic-evaluate" else job["source_recognition"]
+        source = job["source_model_data"] if mode == "physical-model-evaluate" else job["source_solo"] if mode == "export" else job["source_stopped"] if mode == "diagnostic-evaluate" else job["source_recognition"]
         require(job["implementation_id"] == source["implementation_id"], "pipeline_implementation_changed")
     if mode != "export":
         require(job["owner_class"] == "NNeuronTimeLearner"+("Branch" if config["model"]["branch"] else "") and
                 1 <= count(job["maximum_model_ticks"]) <= 1000000000, "pipeline_owner_or_tick_budget_invalid")
-    if mode in ("evaluate", "diagnostic-evaluate"):
+    if mode in ("evaluate", "diagnostic-evaluate", "physical-model-evaluate"):
         # Version 1 deliberately supports only the verified reset-per-trial path.
         # The native continuous option remains outside this production wrapper.
         require(job["coverage_policy"] == "per_trial_windows", "pipeline_continuous_stream_not_yet_verified")
@@ -137,11 +147,13 @@ def validate_job(mode, job, source_case=None):
         require(all(type(t) is dict and set(t) == REQUEST_FIELDS and t["run_id"] == job["run_id"] for t in trials),
                 "invalid_evaluation_trial_scope")
         require(len({t["trial_id"] for t in trials}) == len(trials), "duplicate_evaluation_trial")
-        if mode == "diagnostic-evaluate":
+        if mode in ("diagnostic-evaluate", "physical-model-evaluate"):
             require(len(trials) >= 2 and {t["label"] for t in trials} == {"target", "foil"},
                     "incomplete_diagnostic_evaluation_labels")
     result = {"job_sha256": job["sha256"], "primary_source_checked": mode not in ("train", "preflight"),
               "effective_model_checked": False, "native_configuration_validation_required": True}
+    if mode == "physical-model-evaluate":
+        result.update(data_only=True, source_training_evidence_checked=False, training_certificate_transferred=False)
     if mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 6:
         from .composite_configuration import composite_declaration_scope
         result['composite_measurement_declaration'] = composite_declaration_scope(job['configuration'])
@@ -328,8 +340,15 @@ def audit_execution(mode, directory, job, source_case=None):
         return {"recognition_source_audit": audit_recognition_source(model, source_case),
                 "native_execution_verified": False, "evaluation_verdict": None}
     diagnostic = mode == "diagnostic-evaluate"
+    physical_data = mode == "physical-model-evaluate"
     diagnostic_audit = None
-    if diagnostic:
+    if physical_data:
+        require(model == job["source_model_data"] and execution["data_only"] is True
+                and execution["source_boundary"] == model["source_boundary"]
+                and all(execution[k] is False for k in ("training_certificate_transferred", "calibration_confirmed",
+                                                        "controller_checkpoint_restored")),
+                "pipeline_physical_data_or_authority_changed")
+    elif diagnostic:
         from .diagnostic_recognition_evidence import audit_diagnostic_recognition
         threshold_candidate = job['schema_version'] == 2
         require(model['kind'] == ('timelearner_diagnostic_threshold_candidate' if threshold_candidate else 'timelearner_diagnostic_recognition_state'),
@@ -353,22 +372,29 @@ def audit_execution(mode, directory, job, source_case=None):
         design.append({**{k: v for k, v in q.items() if k not in
             ("run_id", "pattern_isi", "maximum_samples", "record_threshold_potential")},
             "presentation_index": index, "observation": f"trial-{index}.json"})
-    expected_spec = {"kind": "timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec",
+    expected_spec = {"kind": "timelearner_physical_model_data_evaluation_spec" if physical_data else "timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec",
                      "schema_version": 1, "run_id": job["run_id"], "model_revision": model["model_revision"],
                      "coverage_policy": job["coverage_policy"], "criterion": job["criterion"], "trials": design}
     if diagnostic:
         expected_spec.update(diagnostic_only=True, source_stopped_sha256=job["source_stopped"]["sha256"], training_outcome=job["source_stopped"]["training_outcome"])
+    if physical_data:
+        expected_spec.update(data_only=True, source_boundary=model["source_boundary"])
     require(spec == expected_spec, "pipeline_evaluation_design_changed")
     metrics = None
     if execution["execution"] == "completed":
         require(execution["observed_trials"] == len(design), "pipeline_evaluation_incomplete")
-        if diagnostic:
+        if physical_data:
+            from .recognition_metrics import load_physical_model_data_evaluation, score_physical_model_data_evaluation
+            metrics = score_physical_model_data_evaluation(*load_physical_model_data_evaluation(directory/"evaluation.json"), model)
+        elif diagnostic:
             from .recognition_metrics import load_diagnostic_evaluation, score_diagnostic_recognition_evaluation
             metrics = score_diagnostic_recognition_evaluation(*load_diagnostic_evaluation(directory/"evaluation.json"), model, source_case)
         else:
             metrics = score_recognition_evaluation(*load_evaluation(directory/"evaluation.json"), model)
         require(metrics["validity"] == "valid", "pipeline_evaluation_invalid")
-    return {"frozen_model_verified": True, **({"diagnostic_only": True, "source_diagnostic_audit": diagnostic_audit} if diagnostic else {}), "metrics": metrics, "native_execution_verified": False, "evaluation_verdict": None}
+    return {"frozen_model_verified": True, **({"diagnostic_only": True, "source_diagnostic_audit": diagnostic_audit} if diagnostic else {}),
+            **({"data_only": True, "source_training_evidence_checked": False} if physical_data else {}),
+            "metrics": metrics, "native_execution_verified": False, "evaluation_verdict": None}
 
 
 def _structured_live_exit(mode, job, process, directory):
@@ -390,8 +416,15 @@ def _structured_training_exit(mode, job, process, directory):
             and process["returncode"] == 2 and (Path(directory)/"execution.json").is_file())
 
 
-def _snapshot_source(source, destination, *, diagnostic=False):
+def _snapshot_source(source, destination, *, diagnostic=False, physical_data=False):
     source = Path(source).resolve(strict=True)
+    if physical_data:
+        from .physical_model_data_evidence import audit_physical_model_data
+        audit_physical_model_data(load(source), frozen=True)
+        require(source.is_file() and not source.is_symlink(), "pipeline_source_missing_or_symlink")
+        destination.mkdir()
+        (destination/source.name).write_bytes(source.read_bytes())
+        return destination/source.name
     stem = source.name.removesuffix("_stopped_state.json" if diagnostic else "_learned_state.json")
     package = load(source)
     if package.get('schema_version') in (5,6,7):
@@ -428,6 +461,7 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     source_case = _load_source_case(mode, Path(source_path).resolve(strict=True)) if source_path is not None else None
     preflight = validate_job(mode, job, source_case)
     policy = validate_policy(process_policy, maximum_wall_seconds)
+    require(mode != "physical-model-evaluate" or policy is not None, "physical_data_evaluation_requires_contained_process")
     runtime = load(Path(runtime_path).resolve(strict=True));executable = verify_runtime(runtime)
     require(number(maximum_wall_seconds) > 0, "invalid_pipeline_wall_budget")
     from .native_cli import inspect_native_cli
@@ -435,14 +469,15 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     file_source=job_source_transport is not None
     require(job_source_transport is None or job_source_transport==TRANSPORT,
             'pipeline_unknown_job_source_transport')
-    require(not file_source or (mode in ('export','evaluate','diagnostic-evaluate') and
+    require(not file_source or (mode in ('export','evaluate','diagnostic-evaluate','physical-model-evaluate') and
             source_path is not None and policy is not None), 'pipeline_file_source_requires_contained_source_job')
     cli = inspect_native_cli(runtime,[mode],require_file_source=True) if file_source else inspect_native_cli(runtime,[mode])
     output = Path(output).resolve();output.mkdir(parents=True, exist_ok=False)
     _write(output/"runtime-cli-interface.json", cli)
     inputs = output/"input";inputs.mkdir();source_relative = None
     if source_path is not None:
-        snapshot = _snapshot_source(source_path, inputs/"source", diagnostic=mode == "diagnostic-evaluate" or mode == "probe")
+        snapshot = _snapshot_source(source_path, inputs/"source", diagnostic=mode == "diagnostic-evaluate" or mode == "probe",
+                                    physical_data=mode == "physical-model-evaluate")
         source_case = _load_source_case(mode, snapshot);source_relative = snapshot.relative_to(output).as_posix()
         require(validate_job(mode, job, source_case) == preflight, "pipeline_source_changed_during_snapshot")
     _write(inputs/"job.json", job)
@@ -521,7 +556,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
     if file_source:
         from .job_source_transport import TRANSPORT,verify_envelope
         require(manifest['job_source_transport']=={'transport':TRANSPORT,'path':'input/native-job-source.json'} and
-                type(source) is str and source in names and mode in ('export','evaluate','diagnostic-evaluate'),
+                type(source) is str and source in names and mode in ('export','evaluate','diagnostic-evaluate','physical-model-evaluate'),
                 'pipeline_job_source_transport_schema')
         native_job_relative='input/native-job-source.json'
         require(native_job_relative in names, 'pipeline_job_source_transport_missing')

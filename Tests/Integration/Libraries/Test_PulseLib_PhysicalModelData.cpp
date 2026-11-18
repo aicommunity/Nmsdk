@@ -15,6 +15,7 @@
 #include <iomanip>
 #include <sstream>
 #include <type_traits>
+#include <utility>
 
 namespace {
 using namespace RDK;
@@ -333,6 +334,17 @@ template<class Owner> void FrozenDataMatchesOriginalRecognition()
                 {"full_source",NativeRecognitionTrialJson(*before)},{"physical_data",NativeRecognitionTrialJson(*after)},
                 {"training_certificate_transferred",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson();
             ASSERT_EQ(json.write(bytes),bytes.size());
+            if(pattern==0)
+            {
+                const auto prefix=QString("physical-data-frozen-")+
+                    (std::is_same_v<Owner,NNeuronTimeLearnerBranch>?"Branch":"Classic");
+                for(const auto& item:{std::make_pair("-model-data.json",data),std::make_pair("-source.json",recognition)})
+                {
+                    QFile artifact(QDir(QString::fromLocal8Bit(output)).filePath(prefix+item.first));
+                    ASSERT_TRUE(artifact.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+                    const auto raw=QJsonDocument(item.second).toJson();ASSERT_EQ(artifact.write(raw),raw.size());
+                }
+            }
             std::ostringstream trace;trace<<std::setprecision(17)<<"time,actual_input,full_lt,restored_lt,full_lt_potential,restored_lt_potential";
             for(std::size_t channel=0;channel<before->samples.front().somaPotentials.size();++channel)
                 trace<<",full_soma"<<channel+1<<",restored_soma"<<channel+1;

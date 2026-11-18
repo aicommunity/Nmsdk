@@ -70,6 +70,18 @@ TEST(NativeJobSourceTransport,PhysicalModelExportRetainsTheCompleteSourceState)
     auto source=envelope["source"].toObject();source["field"]="source_state";envelope["source"]=source;
     EXPECT_EQ(f.Read(envelope),full);
 }
+TEST(NativeJobSourceTransport,PhysicalModelEvaluationRetainsTheCompleteDataSource)
+{
+    // Transport only: the physical DATA decoder validates the model separately.
+    NativeJobSourceFixture f;f.SetUp();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    auto full=f.job;full.remove("source_stopped");full["kind"]="timelearner_native_physical_model_evaluation_job";
+    full["source_model_data"]=f.package;full=SignJobSource(full);
+    auto projected=full;projected.remove("source_model_data");auto envelope=f.envelope;envelope["job"]=projected;
+    auto source=envelope["source"].toObject();source["field"]="source_model_data";envelope["source"]=source;
+    EXPECT_EQ(f.Read(envelope),full);
+    source["field"]="source_recognition";envelope["source"]=source;
+    EXPECT_THROW(f.Read(envelope),std::invalid_argument);
+}
 TEST(NativeJobSourceTransport,ChangedSourceBytesCannotBeHiddenByEquivalentJsonOrNewEnvelopeSignature)
 {
     NativeJobSourceFixture f;f.SetUp();ASSERT_FALSE(::testing::Test::HasFatalFailure());

@@ -39,6 +39,19 @@ class JobSourceTransportTest(unittest.TestCase):
         with self.assertRaisesRegex(EvidenceError,'job_source_transport_changed'):
             verify_envelope(envelope,job,self.path,self.root)
 
+    def test_physical_model_evaluation_has_a_distinct_lossless_data_role(self):
+        body={'kind':'timelearner_native_physical_model_evaluation_job','schema_version':1,
+              'implementation_id':'transport-test','source_model_data':self.package}
+        job={**body,'sha256':sha(body)}
+        envelope=make_envelope(job,self.path,self.root)
+        self.assertEqual(envelope['source']['field'],'source_model_data')
+        self.assertNotIn('source_model_data',envelope['job'])
+        restored={**envelope['job'],'source_model_data':json.loads(self.path.read_bytes())}
+        self.assertEqual(restored,job)
+        self.assertEqual(verify_envelope(envelope,job,self.path,self.root)['resolved_job_sha256'],job['sha256'])
+        changed=json.loads(json.dumps(envelope));changed['source']['field']='source_recognition'
+        with self.assertRaises(EvidenceError):verify_envelope(changed,job,self.path,self.root)
+
     def test_projection_role_metadata_and_history_changes_are_rejected(self):
         job=self.job(next(iter(SOURCE_FIELDS)));envelope=make_envelope(job,self.path,self.root)
         for section,key,value in [('job','implementation_id','changed'),('source','field','source_recognition'),

@@ -17,7 +17,8 @@ from .native_evidence import require
 from .process_runner import verify_runtime
 
 OPERATIONS = frozenset(('train', 'export', 'evaluate', 'diagnostic-evaluate',
-                        'preflight', 'probe', 'calibrate', 'posttune'))
+                        'preflight', 'probe', 'calibrate', 'posttune',
+                        'physical-model-export', 'physical-model-evaluate'))
 MAX_HELP_BYTES = 128 * 1024
 MAX_HELP_SECONDS = 5.
 

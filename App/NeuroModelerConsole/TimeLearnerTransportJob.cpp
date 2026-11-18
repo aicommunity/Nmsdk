@@ -23,32 +23,36 @@ struct EvaluationJob {
     QJsonObject document,source,criterion;
     std::string implementation,ownerClass,runId,coverage;
     std::vector<NativeRecognitionTrialRequest> trials;
-    unsigned frequency=0;std::size_t maximumTicks=0;bool diagnostic=false;NativeRecognitionSpec conversion;
+    unsigned frequency=0;std::size_t maximumTicks=0;bool diagnostic=false,physicalData=false;NativeRecognitionSpec conversion;
     std::optional<double> diagnosticThreshold;
 };
-EvaluationJob ReadEvaluation(const QString& path,bool diagnostic=false)
+EvaluationJob ReadEvaluation(const QString& path,bool diagnostic=false,bool physicalData=false)
 {
-    EvaluationJob j;j.diagnostic=diagnostic;j.document=ReadDocument(path);const auto& d=j.document;
+    EvaluationJob j;j.diagnostic=diagnostic;j.physicalData=physicalData;j.document=ReadDocument(path);const auto& d=j.document;
     const bool thresholdCandidate=diagnostic && d["schema_version"]==QJsonValue(2);
-    if(thresholdCandidate)Keys(d,{"kind","schema_version","owner_class","implementation_id","source_stopped","conversion_spec","maximum_model_ticks",
+    if(physicalData)Keys(d,{"kind","schema_version","owner_class","implementation_id","source_model_data","maximum_model_ticks",
+        "run_id","coverage_policy","criterion","trials","sha256"});
+    else if(thresholdCandidate)Keys(d,{"kind","schema_version","owner_class","implementation_id","source_stopped","conversion_spec","maximum_model_ticks",
         "run_id","coverage_policy","criterion","trials","sha256","diagnostic_threshold"});
     else if(diagnostic)Keys(d,{"kind","schema_version","owner_class","implementation_id","source_stopped","conversion_spec","maximum_model_ticks",
         "run_id","coverage_policy","criterion","trials","sha256"});
     else Keys(d,{"kind","schema_version","owner_class","implementation_id","source_recognition","maximum_model_ticks",
         "run_id","coverage_policy","criterion","trials","sha256"});
-    Header(d,diagnostic?"timelearner_native_diagnostic_evaluation_job":"timelearner_native_evaluation_job",thresholdCandidate?2:1);
+    Header(d,physicalData?"timelearner_native_physical_model_evaluation_job":diagnostic?"timelearner_native_diagnostic_evaluation_job":"timelearner_native_evaluation_job",thresholdCandidate?2:1);
     if(thresholdCandidate)j.diagnosticThreshold=Number(d["diagnostic_threshold"]);
     if(diagnostic)j.conversion=DecodeNativeRecognitionSpec(Object(d["conversion_spec"]));
-    j.source=Object(d[diagnostic?"source_stopped":"source_recognition"]);j.implementation=Text(d["implementation_id"]);j.ownerClass=Text(d["owner_class"]);
+    j.source=Object(d[physicalData?"source_model_data":diagnostic?"source_stopped":"source_recognition"]);j.implementation=Text(d["implementation_id"]);j.ownerClass=Text(d["owner_class"]);
     j.runId=Text(d["run_id"]);j.coverage=Text(d["coverage_policy"]);
     Require(j.coverage=="per_trial_windows" || j.coverage=="continuous_native_stream","unknown_evaluation_coverage");
     const auto kind=j.source["kind"];
-    if(diagnostic)Require(kind==QJsonValue("timelearner_stopped_state") && j.source["state_kind"]==QJsonValue("diagnostic") &&
+    if(physicalData)Require(kind==QJsonValue("timelearner_physical_model_data") && j.source["data_only"]==QJsonValue(true) &&
+        j.source["certificate"].isNull() && j.source["dynamic_checkpoint"]==QJsonValue(false),"physical_evaluation_requires_data_model");
+    else if(diagnostic)Require(kind==QJsonValue("timelearner_stopped_state") && j.source["state_kind"]==QJsonValue("diagnostic") &&
         j.source["certificate"].isNull(),"diagnostic_evaluation_requires_stopped_model");
     else Require(kind==QJsonValue("timelearner_recognition_state") || kind==QJsonValue("timelearner_calibrated_recognition_state"),"evaluation_requires_frozen_model_not_candidate");
-    const auto context=diagnostic?QJsonObject{}:(kind==QJsonValue("timelearner_recognition_state")?j.source:Object(Object(j.source["source_candidate"])["source_recognition"]));
-    const auto solo=diagnostic?j.source:Object(context["source_solo"]),configuration=Object(solo["configuration"]),model=Object(configuration["model"]);
-    const auto inputCount=Array(diagnostic?solo["trained_inputs"]:context["recognition_inputs"]).size();
+    const auto context=(diagnostic || physicalData)?QJsonObject{}:(kind==QJsonValue("timelearner_recognition_state")?j.source:Object(Object(j.source["source_candidate"])["source_recognition"]));
+    const auto solo=physicalData?j.source:diagnostic?j.source:Object(context["source_solo"]),configuration=Object(solo["configuration"]),model=Object(configuration["model"]);
+    const auto inputCount=Array(physicalData?j.source["parameters"]:diagnostic?solo["trained_inputs"]:context["recognition_inputs"]).size();
     Require(model["branch"].isBool(),"invalid_evaluation_topology");
     Require(j.ownerClass==(model["branch"].toBool()?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"),"evaluation_owner_mismatch");
     j.frequency=unsigned(Count(model["frequency_hz"],1,1000000000));j.maximumTicks=Count(d["maximum_model_ticks"],1,1000000000);
@@ -83,17 +87,20 @@ template<class Owner> int Evaluate(const EvaluationJob& job,const QString& outpu
         const auto base=job.diagnostic?ConvertNativeStoppedToDiagnosticRecognition(job.source,job.conversion,owner->GetStorage(),environment,job.implementation):job.source;
         const auto frozen=job.diagnosticThreshold?CreateNativeDiagnosticThresholdCandidate(base,*job.diagnosticThreshold,
             owner->GetStorage(),environment,job.implementation):base;
-        const auto imported=job.diagnostic?owner->ImportNativeDiagnosticRecognitionState(frozen,job.implementation):
+        const auto imported=job.physicalData?owner->ImportNativePhysicalModelData(frozen,job.implementation):
+                            job.diagnostic?owner->ImportNativeDiagnosticRecognitionState(frozen,job.implementation):
                                            owner->ImportNativeRecognitionState(frozen,job.implementation);
         if(imported.status!=NativeModelBuildStatus::Adopted)throw std::invalid_argument(imported.reason);
         owner->Build();owner->Init();model->Init();model->Reset();
-        Require(owner->ExportNativeRecognitionState(job.implementation)==frozen,"evaluation_initial_model_changed");
+        const auto currentModel=[&] {return job.physicalData?owner->ExportNativePhysicalModelData(job.implementation):
+            owner->ExportNativeRecognitionState(job.implementation);};
+        Require(currentModel()==frozen,"evaluation_initial_model_changed");
         Require(QDir().mkdir(output),"job_output_exists_or_parent_missing");QJsonArray artifacts,design;
         artifacts.append(Write(output,"job.json",job.document));artifacts.append(Write(output,"model.json",frozen));
         const double begin=environment->GetTime().GetDoubleTime();std::size_t ticks=0,index=0;std::string execution="completed";
         for(const auto& request:job.trials)
         {
-            Require(owner->ExportNativeRecognitionState(job.implementation)==frozen,"evaluation_frozen_model_changed");
+            Require(currentModel()==frozen,"evaluation_frozen_model_changed");
             owner->QueueNativeRecognitionTrial(request);std::optional<NativeRecognitionTrialObservation> result;
             while(!result)
             {
@@ -110,7 +117,7 @@ template<class Owner> int Evaluate(const EvaluationJob& job,const QString& outpu
             auto trial=EncodeNativeCalibrationRequest(request);
             for(const auto& key:{"run_id","pattern_isi","maximum_samples","record_threshold_potential"})trial.remove(key);
             trial["presentation_index"]=double(index++);trial["observation"]=filename;design.append(trial);
-            Require(owner->ExportNativeRecognitionState(job.implementation)==frozen,"evaluation_frozen_model_changed");
+            Require(currentModel()==frozen,"evaluation_frozen_model_changed");
             if(execution!="completed")break;
             ValidateNativeRecognitionObservation(request,*result);
         }
@@ -121,19 +128,23 @@ template<class Owner> int Evaluate(const EvaluationJob& job,const QString& outpu
             for(const auto& key:{"run_id","pattern_isi","maximum_samples","record_threshold_potential"})trial.remove(key);
             trial["presentation_index"]=double(i);trial["observation"]="trial-"+QString::number(qulonglong(i))+".json";design.append(trial);
         }
-        QJsonObject evaluation{{"kind",job.diagnostic?"timelearner_diagnostic_recognition_evaluation_spec":"timelearner_recognition_evaluation_spec"},{"schema_version",1},
+        QJsonObject evaluation{{"kind",job.physicalData?"timelearner_physical_model_data_evaluation_spec":job.diagnostic?"timelearner_diagnostic_recognition_evaluation_spec":"timelearner_recognition_evaluation_spec"},{"schema_version",1},
             {"run_id",QString::fromStdString(job.runId)},{"model_revision",frozen["model_revision"]},
             {"coverage_policy",QString::fromStdString(job.coverage)},{"criterion",job.criterion},{"trials",design}};
         if(job.diagnostic){evaluation["diagnostic_only"]=true;evaluation["source_stopped_sha256"]=job.source["sha256"];evaluation["training_outcome"]=job.source["training_outcome"];}
+        if(job.physicalData){evaluation["data_only"]=true;evaluation["source_boundary"]=job.source["source_boundary"];}
         artifacts.append(Write(output,"evaluation.json",evaluation));
-        artifacts.append(Write(output,"model-after.json",owner->ExportNativeRecognitionState(job.implementation)));
-        QJsonObject executionRecord{{"kind",job.diagnostic?"timelearner_native_diagnostic_evaluation_execution":"timelearner_native_evaluation_execution"},{"schema_version",1},
+        artifacts.append(Write(output,"model-after.json",currentModel()));
+        QJsonObject executionRecord{{"kind",job.physicalData?"timelearner_native_physical_model_evaluation_execution":job.diagnostic?"timelearner_native_diagnostic_evaluation_execution":"timelearner_native_evaluation_execution"},{"schema_version",1},
             {"execution",QString::fromStdString(execution)},{"job_sha256",job.document["sha256"]},{"run_id",QString::fromStdString(job.runId)},
             {"model_sha256",frozen["sha256"]},{"model_revision",frozen["model_revision"]},
             {"observed_trials",double(index)},{"expected_trials",double(job.trials.size())},{"frequency_hz",double(job.frequency)},
             {"model_ticks",double(ticks)},{"model_time_begin",begin},{"model_time_end",environment->GetTime().GetDoubleTime()},
             {"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}};
         if(job.diagnostic){executionRecord["diagnostic_only"]=true;executionRecord["source_stopped_sha256"]=job.source["sha256"];executionRecord["training_outcome"]=job.source["training_outcome"];executionRecord["training_reason"]=job.source["reason"];}
+        if(job.physicalData){executionRecord["data_only"]=true;executionRecord["source_boundary"]=job.source["source_boundary"];
+            executionRecord["training_certificate_transferred"]=false;executionRecord["calibration_confirmed"]=false;
+            executionRecord["controller_checkpoint_restored"]=false;}
         Write(output,"execution.json",Signed(executionRecord));
         return execution=="completed"?0:2;
     });
@@ -150,6 +161,12 @@ int RunTimeLearnerDiagnosticEvaluationJob(const QString& input,const QString& ou
     try{const auto job=ReadEvaluation(input,true);Require(!output.isEmpty(),"job_output_required");
         return job.ownerClass=="NNeuronTimeLearner"?Evaluate<NNeuronTimeLearner>(job,output):Evaluate<NNeuronTimeLearnerBranch>(job,output);}
     catch(const std::exception& error){std::cerr<<"TimeLearner diagnostic evaluation job: "<<error.what()<<'\n';return 2;}
+}
+int RunTimeLearnerPhysicalModelEvaluationJob(const QString& input,const QString& output)
+{
+    try{const auto job=ReadEvaluation(input,false,true);Require(!output.isEmpty(),"job_output_required");
+        return job.ownerClass=="NNeuronTimeLearner"?Evaluate<NNeuronTimeLearner>(job,output):Evaluate<NNeuronTimeLearnerBranch>(job,output);}
+    catch(const std::exception& error){std::cerr<<"TimeLearner physical model DATA evaluation: "<<error.what()<<'\n';return 2;}
 }
 int RunTimeLearnerPhysicalModelExportJob(const QString& input,const QString& output)
 {

@@ -5,3 +5,5 @@ int RunTimeLearnerPhysicalModelExportJob(const QString& input,const QString& out
 int RunTimeLearnerEvaluationJob(const QString& input,const QString& output);
 
 int RunTimeLearnerDiagnosticEvaluationJob(const QString& input,const QString& output);
+
+int RunTimeLearnerPhysicalModelEvaluationJob(const QString& input,const QString& output);
