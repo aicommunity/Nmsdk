@@ -365,9 +365,9 @@ def build(source, output, review=None):
         para(doc,supplement['limits'] if supplement else common['limits']);para(doc,common['history']);para(doc,common['update'])
         page(doc,'Источники этой редакции')
         for text in [
-            'PulseLib '+evidence['algorithm_code']['PulseLib'],
+            'Опорная версия описания PulseLib '+evidence['algorithm_code']['PulseLib'],
             'Rdk '+evidence['algorithm_code']['Rdk'],
-            'Runtime научных данных использует PulseLib '+evidence['algorithm_code']['science_runtime_PulseLib'],
+            'Runtime исходного N2 контроля использует PulseLib '+evidence['algorithm_code']['science_runtime_PulseLib'],
             'Эквивалентность Core runtime и принятого PulseLib проверена для исходного N2 контроля; исторические варианты имеют собственные версии.' if catalog else 'Core runtime и принятого PulseLib равны по проверенной source closure.',
             'Формулы: Core/TimeLearner/BoundedTraining.cpp и FinalVerification.cpp.',
             'Управление: NativeTrainingService и NativeLearnerLifecycle; наблюдения: NativeProbeExecutor.',
