@@ -165,3 +165,13 @@ Train/Test не запускался. Требуется сравнить реа
 причину, затем повторить аудит сохранённых наблюдений, если они применимы.
 [Закрытие процессов и отказ](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/baseline8-audit-rejected-observed.json).
 [Точный traceback и inventory](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/baseline8-audit-rejection-diagnosis.json).
+
+
+Дополнение: причина `recognition_images_changed` установлена — разные native
+XML encodings Linux/Windows и диагностический DebugSysEventsMask. Физические
+identity всех31 образов совпали. Аудиторversion3 использует общий semantic
+storage contract с проверками hashes/closure и отдельным native import gate.
+Адресные проверки11/11 прошли на .14, без skips/errors/failures. Полный аудит
+прежних8 наблюдений сейчас выполняется в отдельном bounded Python Job;
+native Test и Train не повторяются. Итоговая классификация Elder пока не принята.
+[Причина, исправление, проверки и handle](CrossPlatformStorageImageAudit-20261118.ru.md).

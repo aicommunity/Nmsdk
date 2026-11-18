@@ -2,8 +2,8 @@
 
 18 ноября: причина исходного `recognition_images_changed` установлена по
 сохранённым файлам Elder/Linux и Windows, без повторного Train или Test.
-Исправление DATA-аудитора подготовлено; серверные regression tests и повторный
-полный аудит исходного Test ещё не приняты.
+Исправление DATA-аудитора проверено:11/11 серверных regression tests PASS,
+без failures/errors/skips. Полный повторный аудит исходного Test выполняется.
 
 Исходный stopped source958170225 bytes имеет SHA
 `57a8934db33b34ec819440f677a4cd1af6109df2813068356cec3ea55357cccd`;
@@ -54,3 +54,24 @@ class, неверный XML SHA, неизвестное snapshot поле. Ни�
 Новый Train не нужен; успешная классификация заранее не предполагается.
 Изменение не закрывает этапы3/5/8 или весь план и не исправляет отдельный
 terminal best-state restoration этапа7.
+
+## Серверный результат
+
+Windows `windows-recognition-image-portability11-a2`, controls
+`9a07113b8c7336433757ad8c0edea129328eb7cb`, Python source Root
+`72071842c9abcb65d9e177d92c675106ef4e41dd`:11/11 PASS,0 failures/errors/skips.
+Все source/recognition fixture fingerprints до/после совпали. Owned Job
+завершён exit0/valid, все процессы закрыты;32 загруженных файла зафиксированы.
+[Квитанция](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/storage-image-portability11-observed.json).
+Исходный A1 завершился до тестов: строгий object-reader был ошибочно применён
+к JSON массиву. Fixture переведена на штатный строгий JSON value-reader;
+production алгоритм между A1/A2 не менялся.
+[Сохранённый A1](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/storage-image-portability11-a1-rejected.json).
+
+Полный read-only audit всех исходных8 наблюдений выполняется в отдельном
+`windows-elder-baseline8-audit-recovery-a1`, controls
+`baaddde3fe0fe38d4cdeb40ca9f2f57d08627826`. Подтверждён live native Windows
+Job `Local\TimeLearner-ce42dd6b-a70b-4b8b-9eb8-69858eb5024a`, PID13468,
+creation_filetime134394930757956066, Python3.14.2, лимит20GiB/32 processes/3600s.
+Это повторный DATA-аудит, не повторный native Test и не новое обучение.
+[Наблюдение процесса](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/baseline8-audit-recovery-running.json).
