@@ -1,0 +1,168 @@
+{
+  "kind": "timelearner_physical_model_data_sdk_closed_readback",
+  "schema_version": 1,
+  "root": "445c834fe00b81f07857f5622809349e01bd1841",
+  "pulse": "c54d9c0a65ac6eadeccfe1793672b7a9472ea559",
+  "controls": "dee8fb52dcc2f76738283391c738ea29334b7a63",
+  "job": "s05-physical-model-data-sdk-m40-a3",
+  "processes_closed": true,
+  "terminal": {
+    "job_validation_passed": false,
+    "cohort_assertions_passed": false,
+    "built": true,
+    "expected_cpp_cases": 228,
+    "audited_completed_cpp_cases": 228,
+    "actual_audited_assertion_passed_cpp_cases": 226,
+    "actual_audited_failed_cpp_ids": [
+      "NativePhysicalModelData/ClassicCompleteGraphAndAsymmetricInputsRoundtripWithoutProofAuthority",
+      "NativePhysicalModelData/BranchCompleteGraphAndAsymmetricInputsRoundtripWithoutProofAuthority"
+    ],
+    "completed_leaf_gates": 1,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+  },
+  "junit": [
+    {
+      "path": "native-bounded-neighbourhood-and-regressions/native.xml",
+      "cases": 228,
+      "failures": [
+        {
+          "id": "NativePhysicalModelData/ClassicCompleteGraphAndAsymmetricInputsRoundtripWithoutProofAuthority",
+          "messages": [
+            "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_PhysicalModelData.cpp:163\nValue of: sourceResult->observation->valid\n  Actual: false\nExpected: true\n",
+            "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_PhysicalModelData.cpp:163\nValue of: targetResult->observation->valid\n  Actual: false\nExpected: true\n"
+          ]
+        },
+        {
+          "id": "NativePhysicalModelData/BranchCompleteGraphAndAsymmetricInputsRoundtripWithoutProofAuthority",
+          "messages": [
+            "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_PhysicalModelData.cpp:163\nValue of: sourceResult->observation->valid\n  Actual: false\nExpected: true\n",
+            "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_PhysicalModelData.cpp:163\nValue of: targetResult->observation->valid\n  Actual: false\nExpected: true\n"
+          ]
+        }
+      ]
+    }
+  ],
+  "probe_diagnostics": [
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a3/native-bounded-neighbourhood-and-regressions/native/physical-model-roundtrip-Branch.json",
+      "trace_frames": 601,
+      "source_soma_maxima": {
+        "source_soma1": {
+          "time": 0.1005,
+          "value": 0.013308478313239558
+        }
+      },
+      "source_observation": {
+        "complete": true,
+        "valid": false,
+        "reasons": [
+          "peak_ambiguous:input0"
+        ],
+        "sample_count": 601,
+        "peaks": [
+          {
+            "amplitude": null,
+            "candidate_count": 2,
+            "delay_from_stimulus": null,
+            "input_id": "input0",
+            "plateau_end": null,
+            "raw_potential": null,
+            "relative_to_trial_start": null,
+            "stimulus_id": "pulse0",
+            "time": null,
+            "validity": "ambiguous"
+          }
+        ]
+      },
+      "restored_observation": {
+        "complete": true,
+        "valid": false,
+        "reasons": [
+          "peak_ambiguous:input0"
+        ],
+        "sample_count": 601,
+        "peaks": [
+          {
+            "amplitude": null,
+            "candidate_count": 2,
+            "delay_from_stimulus": null,
+            "input_id": "input0",
+            "plateau_end": null,
+            "raw_potential": null,
+            "relative_to_trial_start": null,
+            "stimulus_id": "pulse0",
+            "time": null,
+            "validity": "ambiguous"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-physical-model-data-sdk-m40-a3/native-bounded-neighbourhood-and-regressions/native/physical-model-roundtrip-Classic.json",
+      "trace_frames": 601,
+      "source_soma_maxima": {
+        "source_soma1": {
+          "time": 0.1,
+          "value": 0.012453070454388038
+        },
+        "source_soma2": {
+          "time": 0.02,
+          "value": 0.01332496344555767
+        }
+      },
+      "source_observation": {
+        "complete": true,
+        "valid": false,
+        "reasons": [
+          "peak_ambiguous:input0"
+        ],
+        "sample_count": 601,
+        "peaks": [
+          {
+            "amplitude": null,
+            "candidate_count": 2,
+            "delay_from_stimulus": null,
+            "input_id": "input0",
+            "plateau_end": null,
+            "raw_potential": null,
+            "relative_to_trial_start": null,
+            "stimulus_id": "pulse0",
+            "time": null,
+            "validity": "ambiguous"
+          }
+        ]
+      },
+      "restored_observation": {
+        "complete": true,
+        "valid": false,
+        "reasons": [
+          "peak_ambiguous:input0"
+        ],
+        "sample_count": 601,
+        "peaks": [
+          {
+            "amplitude": null,
+            "candidate_count": 2,
+            "delay_from_stimulus": null,
+            "input_id": "input0",
+            "plateau_end": null,
+            "raw_potential": null,
+            "relative_to_trial_start": null,
+            "stimulus_id": "pulse0",
+            "time": null,
+            "validity": "ambiguous"
+          }
+        ]
+      }
+    }
+  ],
+  "configuration_guard_fix_runtime_verified": true,
+  "fix_root": "3dce4532db40a5b14623a403e08437d8e1ca7bbc",
+  "fix_runtime_verified": false,
+  "full_sdk_accepted": false,
+  "scientific_verdict": null
+}

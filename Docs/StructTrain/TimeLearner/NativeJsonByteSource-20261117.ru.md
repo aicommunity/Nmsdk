@@ -1,14 +1,18 @@
 # Загрузка полных моделей: байтовый вход и строгий JSON
 
-Актуализация18.11: малая server-попытка завершилась до компиляции из-за
-неверного Qt5Core на M40 с Qt6Core6.4.2.4 C++ cases не выполнены. Wrapper
-исправлен для явно объявленного Qt5/Qt6 и сверки actual toolchain, пока
-не проверен. Full SDK228 с production parser собирается отдельно через
-штатный CMake Qt6. [Текущее состояние](CurrentStatus-20261118.ru.md).
+Актуализация18.11: первая малая server-попытка завершилась до компиляции
+из-за неверного Qt5Core на M40 с Qt6Core6.4.2; в ней0/4 cases выполнено.
+Исправленный wrapper с явно объявленным Qt6 и сверкой actual toolchain
+прошёл отдельный gate `s05-large-summary-transport-m40-a1`:25/25 Python
+и вложенные4/4 actual production parser C++ cases. Те же четыре случая
+прошли в SDK a2, но полный SDK gate отклонён:226/228, два новых native
+model roundtrip отказали до пробы. [Текущее состояние](CurrentStatus-20261118.ru.md).
 
-Статус: код и четыре регрессии подготовлены в отдельной ветке
-`codex/timelearner-json-byte-source`; runtime-проверка ещё не выполнена.
-Текущий SDK N1 Root93894dd / Pulse52cb953 и два cold Train не менялись.
+Статус: четыре регрессии parser выполнены на M40; полный импорт крупных
+моделей и снижение RSS ещё не проверены. Код первоначально подготовлен
+в `codex/timelearner-json-byte-source`, затем включён в отдельную ветку
+`codex/timelearner-physical-model-data`. Исходный SDK N1 Root93894dd /
+Pulse52cb953 и runtime уже запущенных cold Train не менялись.
 
 ## Основание и изменение
 
@@ -49,8 +53,8 @@ Production parser компилируется напрямую в `Test_PulseLib_
 не копируется в тестовый код. Малый target не подтверждает полный импорт
 обученной модели или физическую эквивалентность Train → Test.
 
-После server slot: малый parser gate; затем полный Console/file-source
-cohort и actual большие stopped-model Test с прежними лимитами и исходными
+Следующая приёмка: полный Console/file-source cohort и actual большие
+stopped-model Test с явно объявленными лимитами и исходными полными
 моделями. Оценить execution, RSS, model identity, полноту8 наблюдений и
 неизменность frozen model. Не выдавать статическое устранение копий за
 измеренное уменьшение RSS или научный результат.
@@ -67,8 +71,9 @@ model export должен отделять физический graph/storage/da
 
 18 ноября подготовлена отдельная реализация
 [полного physical model DATA](PhysicalModelData-20261118.ru.md).
-Она ещё не проверена на worker и не включена в frozen evaluation; четыре
-parser cases не будут выдаваться за её приёмку.
+Её первый собранный worker gate выявил две ошибки fixture до физических
+проб; исправленный fixture проверяется отдельно. Frozen evaluation пока
+не интегрирован; четыре parser cases не являются приёмкой model DATA.
 
 ## Зафиксированная серверная подготовка
 
@@ -79,4 +84,7 @@ controls `3cb65bd702c0005e49a5a84f50d4a603603ae914`, job
 `s05-native-json-byte-kernel-m40-a1`. Source, suite, compiler и Git gtest
 объявлены отдельно; preflight не выполнял тесты.
 [Квитанция подготовки](../../../Reports/StructTrain/TimeLearner/NativeJsonByteSource-20261117/kernel-preparation.json).
-Запуск ждёт закрытия cold job и свободного slot, не изменяет его runtime.
+Эта первая попытка закончилась указанной выше ошибкой Qt5Core. Последующий
+закрытый gate Qt6 имеет controls `bb00c0a2e4cb68fdf6b9472731ac999ded666914`,
+Root `ea0b039f3bd4f7784ff76e32d90fb99a50032ac2`.
+[Квитанция25/25 и4/4](../../../Reports/StructTrain/TimeLearner/LargeSummaryTransport-20261118/closed-readback.json).

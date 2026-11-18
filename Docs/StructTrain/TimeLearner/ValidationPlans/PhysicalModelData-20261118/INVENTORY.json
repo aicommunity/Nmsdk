@@ -3,7 +3,7 @@
   "schema_version": 1,
   "prepared_only": true,
   "executed": false,
-  "root": "f1b8ae9aea9c2ebdc95ca6d1b9e4e243fddcbc19",
+  "root": "3dce4532db40a5b14623a403e08437d8e1ca7bbc",
   "pulse": "c54d9c0a65ac6eadeccfe1793672b7a9472ea559",
   "windows_cpp_test_ids": [
     "BoundedCandidateRecovery/AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility",
@@ -514,7 +514,7 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_PhysicalModelData.cpp",
-      "sha256": "693920c615850892653d5091d5bdf48c92acb4c44f41037939aee88e2d02c3d6"
+      "sha256": "13c6643b0ef5c711aa317fff6deb16c7ec45ea7fed9ff543a96ed474a10b6793"
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_TimeLearnerResistance.cpp",
@@ -531,5 +531,7 @@
   "attempt1_root": "a9006c710806f03ae8d0d97d010291657bb7e836",
   "attempt1_status": "compile_failed_const_UEPtr_upcast;0/228 tests executed",
   "attempt2_root": "944f7dd34bbe538346e20a183fb56d2cb5153bd0",
-  "attempt2_status": "built;228 executed,226 passed;2 roundtrip cases rejected by native model guard before probes; missing v2 configuration in new target fixture corrected, runtime verification pending"
+  "attempt2_status": "built;228 executed,226 passed;2 roundtrip cases rejected by native model guard before probes; missing v2 configuration in new target fixture corrected, runtime verification pending",
+  "attempt3_root": "445c834fe00b81f07857f5622809349e01bd1841",
+  "attempt3_status": "built;228 executed,226 passed; both full graph/waveform comparisons reached physical probes; only source/target valid=true assertions failed because actual isolated-window peaks are ambiguous; configuration guard fix verified; transfer fixture now preserves complete observations and matching honest ambiguity, not yet rerun"
 }

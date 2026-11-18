@@ -1,0 +1,88 @@
+{
+  "kind": "timelearner_full_terminal_matrix_preparation",
+  "schema_version": 1,
+  "request": {
+    "job": "s11-fair-input-cold-matrix-m40-a1",
+    "request": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-cold-matrix-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputColdMatrixA1-20261118/request.json",
+    "controls": "918481bdeb23c0b0779a13d3bda08b1591860a70",
+    "tool_root": "ea0b039f3bd4f7784ff76e32d90fb99a50032ac2",
+    "native_root": "445c834fe00b81f07857f5622809349e01bd1841",
+    "native_pulse": "c54d9c0a65ac6eadeccfe1793672b7a9472ea559",
+    "runtime_fingerprint": "c9e6acf35f2b59fe9ee6f4b0033d11d285a242672e557e6c8452cf6490b673b3",
+    "native_pattern_trials": 16,
+    "threshold": 100.0,
+    "calibration_performed": false,
+    "full_sdk_accepted": false,
+    "physical_model_data_used": false,
+    "started": false
+  },
+  "assets": {
+    "prepared": true,
+    "started": false,
+    "assets": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-cold-matrix-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputColdMatrixA1-20261118/assets.json",
+    "cases": [
+      {
+        "name": "classic",
+        "source_raw_bytes": 340881455,
+        "summary_raw_bytes": 57044127
+      },
+      {
+        "name": "branch",
+        "source_raw_bytes": 636297940,
+        "summary_raw_bytes": 167249672
+      }
+    ],
+    "compressed_input_bytes": 48814736,
+    "objects": {
+      "classic": {
+        "state": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/ad/ad33a86e4fa500bf1b5f895fa0e1f3f5388bcdc6c7557ae91db215b28ea462a4",
+          "sha256": "ad33a86e4fa500bf1b5f895fa0e1f3f5388bcdc6c7557ae91db215b28ea462a4",
+          "bytes": 17714985
+        },
+        "summary": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/fc/fc74ebefc721291e1ef39c636d00e174252325cef107328d51893055807fd11f",
+          "sha256": "fc74ebefc721291e1ef39c636d00e174252325cef107328d51893055807fd11f",
+          "bytes": 886781
+        }
+      },
+      "branch": {
+        "state": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/ba/ba81f87e57a2dffd0bc90676119e3653182f2a2fbf8446a8827c4c2ffd2a7ad3",
+          "sha256": "ba81f87e57a2dffd0bc90676119e3653182f2a2fbf8446a8827c4c2ffd2a7ad3",
+          "bytes": 26811061
+        },
+        "summary": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/a6/a6a28f863ca37607dc44593548b252da0f24ab23a1b75b3bb3947b5d1323b6d7",
+          "sha256": "a6a28f863ca37607dc44593548b252da0f24ab23a1b75b3bb3947b5d1323b6d7",
+          "bytes": 2584705
+        }
+      }
+    },
+    "controls": "9b39e59367719c11d80c5809cd876afe0e851e62"
+  },
+  "launcher": {
+    "job": "s11-fair-input-cold-matrix-m40-a1",
+    "launcher_pid": 1727911,
+    "source": "ea0b039f3bd4f7784ff76e32d90fb99a50032ac2",
+    "native_trials": 16,
+    "threshold": 100.0,
+    "calibration_performed": false
+  },
+  "full_source_history_retained": true,
+  "full_sdk_accepted": false,
+  "new_physical_model_data_used": false,
+  "scientific_verdict": null
+}
