@@ -58,7 +58,8 @@ TEST(BoundedTrainingMeasuredBoundary,UnmeasuredEditAndBudgetStopCannotReplaceThe
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
     for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
     {
-        SCOPED_TRACE(int(routing));SCOPED_TRACE(int(normalization));
+        SCOPED_TRACE(int(routing));
+        SCOPED_TRACE(int(normalization));
         const auto protocol=Protocol(2,routing);auto cfg=Configuration(2,normalization);
         cfg.bounds={{1,3,1,1,10.,10.},{1,1,1,1,10.,10.}};
         BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}},
