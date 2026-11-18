@@ -1,0 +1,125 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "d646a797bb965c0a800ec5bd64dfa2f918308c15f787567b4625faf41c3bd11e",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "controls.json": {
+      "commit": "9f988b67aa3f94549f2497450743b65e7a6ccfe1",
+      "directory": "C:\\Projects\\TimeLearnerWorker\\controls\\elder-single-sweep-baseline8-a1"
+    },
+    "native-process/result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "completed",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 47,
+      "wall_seconds": 1682.2608897000318,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-d5794517-50ae-475e-ad91-c44603fb5cff"
+    },
+    "native-process-result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "completed",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 47,
+      "wall_seconds": 1682.2608897000318,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-d5794517-50ae-475e-ad91-c44603fb5cff"
+    },
+    "terminal.json": {
+      "native_baseline8_passed": false,
+      "training_completed": false,
+      "original_train_outcome_unchanged": true,
+      "scientific_worker_admitted": false,
+      "scientific_verdict": null
+    },
+    "exception.json": {
+      "reason": "AssertionError: {'kind': 'timelearner_windows_process_result', 'schema_version': 1, 'execution': 'process_error', 'validity': 'valid', 'reason': 'nonzero_exit', 'returncode': 1, 'scientific_verdict': None, 'thread_limit_enforced': False, 'memory_limit_semantics': 'job_committed_virtual_memory', 'wall_budget_scope': 'whole_attempt_including_preparation', 'descendants_at_main_exit': [], 'all_processes_closed': True, 'cooperative_capture': 'not_requested', 'runtime_provenance': 'loaded_files_captured', 'observed_module_files': 35, 'wall_seconds': 860.7180764999939, 'child_resumed': True, 'job_name': 'Local\\\\TimeLearner-3bdc86ea-94f9-40b0-807d-c713bf4ebd67'}",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\git-transfers\\timing-neighbourhood-win-a1\\timelearner-windows-elder-baseline8-20261118-a1.py\", line 44, in <module>\n    audited=execute(python_manifest,['-B','-X','utf8',str(controls/'producer.py'),'audit'],tools,out/'audit-process',memory_bytes=24*1024**3,maximum_processes=32,maximum_wall_seconds=3600,lock_file=b/'locks/worker.lock',cooperative_capture=False);write(out/'audit-process-result.json',audited);assert audited['execution']=='completed' and audited['all_processes_closed'] and audited['validity']=='valid' and audited['runtime_provenance']=='loaded_files_captured',audited\n                                                                                                                                                                                                                                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'kind': 'timelearner_windows_process_result', 'schema_version': 1, 'execution': 'process_error', 'validity': 'valid', 'reason': 'nonzero_exit', 'returncode': 1, 'scientific_verdict': None, 'thread_limit_enforced': False, 'memory_limit_semantics': 'job_committed_virtual_memory', 'wall_budget_scope': 'whole_attempt_including_preparation', 'descendants_at_main_exit': [], 'all_processes_closed': True, 'cooperative_capture': 'not_requested', 'runtime_provenance': 'loaded_files_captured', 'observed_module_files': 35, 'wall_seconds': 860.7180764999939, 'child_resumed': True, 'job_name': 'Local\\\\TimeLearner-3bdc86ea-94f9-40b0-807d-c713bf4ebd67'}\n"
+    },
+    "prepare-process-result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "not_requested",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 35,
+      "wall_seconds": 478.73685220000334,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-d1901107-c42f-4557-bdc8-315de1958303"
+    },
+    "audit-process-result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "process_error",
+      "validity": "valid",
+      "reason": "nonzero_exit",
+      "returncode": 1,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "not_requested",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 35,
+      "wall_seconds": 860.7180764999939,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-3bdc86ea-94f9-40b0-807d-c713bf4ebd67"
+    },
+    "native-process/stdout.log": {
+      "bytes": 0,
+      "tail": ""
+    },
+    "native-process/stderr.log": {
+      "bytes": 0,
+      "tail": ""
+    },
+    "job_binding": {
+      "pid": 15516,
+      "creation_filetime": "134394840822181093",
+      "job_name": "Local\\TimeLearner-d5794517-50ae-475e-ad91-c44603fb5cff"
+    },
+    "kernel_job": {
+      "absent": true,
+      "error": 2
+    },
+    "kernel_process": {
+      "absent": true,
+      "error": 87
+    }
+  }
+}

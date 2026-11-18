@@ -1,21 +1,27 @@
 # Поддерживаемые описания алгоритмов в Word
 
-Два отдельных документа описывают обычный `NNeuronTimeLearner` и
-`NNeuronTimeLearnerBranch`. Текущая редакция от17.11.2026: Classic —14 страниц,
-Branch —13 страниц. В ней общая часть N0/N1, составное назначение пика,
-формулы OMML, общая и вложенная блок-схемы, UML классов и native tick,
-семь подходящих примеров с отдельными версиями и ограничениями.
-Все27 страниц отрисованы и просмотрены. [Квитанция и внешние refs](../../../../Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261117/publication.json).
-Это не закрытие этапа12 или полного исторического реестра алгоритмов.
+Третья редакция от18.11.2026 опубликована: Classic —15 страниц,
+Branch —14 страниц; девять подходящих примеров с отдельными версиями,
+условиями и ограничениями. Включены два новых cold N4 результата6/8.
+Общая часть N0/N1, назначение пика закреплённому импульсу, формулы OMML,
+блок-схемы и UML представлены на нескольких уровнях детализации.
+Все29 страниц отрисованы и визуально проверены.
+[Квитанция публикации и внешние refs](../../../../Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261118/publication.json).
+Это не закрытие этапа12 или полной научной матрицы.
 
 Локальные документы для чтения:
-[Classic](E:/Science-Repo/TimeLearner-Documents/2026-11-17-revision2-final/TimeLearnerClassicAlgorithms.ru.docx),
-[Branch](E:/Science-Repo/TimeLearner-Documents/2026-11-17-revision2-final/TimeLearnerBranchAlgorithms.ru.docx).
-NAS cache: `/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-17/algorithm-descriptions-v2`.
-Первая неизменяемая редакция16 ноября (8/9 страниц, N1) сохраняется отдельно.
+[Classic](E:/Science-Repo/TimeLearner-Documents/2026-11-18-revision3-a4/TimeLearnerClassicAlgorithms.ru.docx),
+[Branch](E:/Science-Repo/TimeLearner-Documents/2026-11-18-revision3-a4/TimeLearnerBranchAlgorithms.ru.docx).
+NAS cache: `/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-18/algorithm-descriptions-v3`.
+Каталог: `experiments/2026-11-18/algorithm-descriptions/v3.json`.
+Тяжёлые документы, полный пакет исходников, PDF и29 preview PNG находятся
+во внешнем архиве M40; в корневом Git только исходники и компактные refs.
 
-Ниже история подготовки второго выпуска; прежние указания «для следующего
-выпуска» описывают состояние до публикации17 ноября. Новый непроверенный
+Редакции16 ноября (8/9 страниц, N1) и17 ноября (14/13 страниц, семь примеров)
+сохраняются неизменяемыми датированными публикациями.
+[Квитанция второй редакции](../../../../Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261117/publication.json).
+Ниже сохранена история подготовки выпусков; прежние слова «следующий» и
+«первая редакция» относятся к описанному времени. Новый непроверенный
 timing-neighbourhood candidate не включён как работающий алгоритм.
 
 Критерий пользователя для включения работающего варианта: TP ≥ 1 и TN ≥ 2.

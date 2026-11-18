@@ -51,9 +51,17 @@ DATA audit остаётся отдельно byte-only и сам не утвер
 сохраняются; успешная recovery использует уже проверенный источник и явно
 связанный backend, без повторного восстановления архива.
 
-Запущен `windows-elder-single-sweep-baseline8-a1`, controls
+`windows-elder-single-sweep-baseline8-a1`, controls
 `9f988b67aa3f94549f2497450743b65e7a6ccfe1`: исходный порог100, identity recognition
-conversion, все8 PhaseA паттернов/2с/reset-per-trial. Preparation уже завершена;
-native PID15516/creation_filetime134394840822181093 подтверждён живым в Job
-`Local\TimeLearner-d5794517-50ae-475e-ad91-c44603fb5cff`, лимит16GiB.
-Конечная классификация и полный audit ещё не приняты.
+conversion, все8 PhaseA паттернов/2с/reset-per-trial.
+Проверка18 ноября14:48UTC: native Test завершился exit0/valid за1682.26с,
+все процессы закрыты, исходные kernel Job/PID отсутствуют. Созданы8 trial files,
+но последующий production audit завершился exit1 с `recognition_images_changed`:
+`class_definitions` recognition archive не совпали с исходным stopped neuron.
+Это обнаруженное несовпадение ещё не классифицировано как сериализация или
+изменение физики; проверка не ослаблена. Metrics и положительный scientific
+verdict не опубликованы. Новый результат классификации не принят; повторный
+Train/Test не запускался. Требуется сравнить реальные образы и устранить
+причину, затем повторить аудит сохранённых наблюдений, если они применимы.
+[Закрытие процессов и отказ](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/baseline8-audit-rejected-observed.json).
+[Точный traceback и inventory](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/baseline8-audit-rejection-diagnosis.json).

@@ -70,4 +70,12 @@ Report generation has started, but its full result/visual QA is not yet accepted
 Его исходное выполнение закрыто по disk budget и не содержит run-manifest;
 архив целиком проверен, но применение режима исключения дублей отклонено с
 `bundle_alias_owner_missing`. Отказ сохранён, native импорт в этой попытке
-не запускался. Новый режим сначала требует отдельной серверной проверки.
+не запускался. Отдельная серверная проверка нового режима18 ноября прошла2/2
+(обычный и content-reference wire, отказ повреждённого member). Реальный
+архив восстановлен целиком: все2886 regular members сохранены, aliases не
+исключались. Затем отдельный native import/export/import прошёл с сохранением
+model revision. Это не отменяет исходный disk-budget отказ и не доказывает
+корректность последующего recognition-преобразования: его аудит отдельно
+отклонил `recognition_images_changed`.
+[Native квитанция](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-import-roundtrip-observed.json).
+[Отказ recognition-аудита](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/baseline8-audit-rejection-diagnosis.json).

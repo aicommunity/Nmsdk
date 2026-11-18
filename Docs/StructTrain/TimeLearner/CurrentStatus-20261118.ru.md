@@ -1,6 +1,6 @@
 # Статус TimeLearner — 18 ноября 2026
 
-Актуализация 13:42UTC. Полная цель этапов0–12 активна. Принят только этап0;
+Актуализация 14:48UTC. Полная цель этапов0–12 активна. Принят только этап0;
 этапы1–12 остаются частичными. Научные8/8 не являются условием завершения.
 Accepted root develop `87e7da0205b6bb0d582f7b4f2551c935fd7f2350` не менялся;
 новый непроверенный код не объединялся в develop. Пользовательские деревья
@@ -23,8 +23,8 @@ cases completed/valid; общий controller завершился без оши�
 Обе исходные Train-сессии BudgetExhausted, без certificate. Порог выбран на
 той же матрице: Same-Matrix diagnostic stopped models. **Сходимость и
 независимое обобщение не подтверждены**. Требуемый для включения в DOCX
-критерий TP>=1/TN>=2 выполнен; обновление примеров следует после публикации
-primary и визуальной проверки графиков.
+критерий TP>=1/TN>=2 выполнен; оба примера включены в опубликованную
+третью редакцию DOCX после публикации primary и визуальной проверки графиков.
 
 [Постановка и ответы каждого паттерна](FairInputColdThresholdStudy-20261118.ru.md).
 [Полный компактный readback](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/threshold-confirmation-closed.json).
@@ -46,12 +46,12 @@ Original Train primary уже опубликован:48281492 bytes, catalog
 Полный primary171725152 bytes,15176675667 expanded bytes,3979 members;
 catalog `experiments/2026-11-18/fair-input-cold/baseline-and-threshold-primary-a1.json`.
 [CAS refs и4 controls Git bundles](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/baseline-and-threshold-primary.archive.json).
-Выполняется `s11-fair-input-threshold-report-m40-a1`, controls
+Завершён `s11-fair-input-threshold-report-m40-a1`, controls
 `a7974c08821902a00b114b142aac3d8ef9f5d1b7`. Он
 использует штатный report_matrix и2 declared-report tests:16 проб/40 trial-soma
 pairs, actual input overlays, полные масштабы и zoom>=8pixels/native tick,
-без downsampling. Подтверждены live kernel unit/lease, PID2469972,
-start_ticks407772835, unit `timelearner-12031cef-c7a5-4f26-9c1d-16ae3b1005f2`.
+без downsampling. Исходный handle unit `timelearner-12031cef-c7a5-4f26-9c1d-16ae3b1005f2`
+сохранён; последующее фактическое закрытие подтверждено ниже.
 [Handle выполнения](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/temporal-report-running.json).
 Задание завершилось:2/2 declared-report tests PASS, без failures/errors/skips;
 все40 trial-soma pairs покрыты (Classic32/Branch8), построено4591 PNG и
@@ -59,8 +59,9 @@ start_ticks407772835, unit `timelearner-12031cef-c7a5-4f26-9c1d-16ae3b1005f2`.
 [Квитанция закрытия и coverage](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/temporal-report-closed.json).
 Первые Classic target/TN/FP графики просмотрены. Галерея опубликована во внешнем CAS и report cache; обзорные графики всех40
 пар просмотрены. [Квитанция](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/temporal-gallery.archive.json).
-Каждый из4591 рисунков вручную не просмотрен. Новые примеры включены в
-исходники третьей редакции DOCX; отрисовка и приёмка новой редакции впереди.
+Каждый из4591 рисунков вручную не просмотрен. Третья редакция DOCX опубликована:
+Classic15/Branch14 страниц,9 подходящих примеров; все29 страниц отрисованы
+и визуально проверены. [Документы и квитанция](AlgorithmDescriptions/README.ru.md).
 Большие архивы и рисунки остаются во внешнем M40 хранилище, в Git — ссылки.
 
 ## Elder: модель сохранена и DATA проверены без повторного Train
@@ -85,7 +86,7 @@ Ns=1 для всех. Revision
 [Проверка и ограничения восстановления](RetainedStoppedExportRecovery-20261118.ru.md).
 [Полный audit/provenance во внешнем CAS](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/retained-model-data-audit.archive.json).
 Native import/readback уже подтверждены отдельным фактическим процессом
-(квитанция ниже); Test выполняется. DATA аудит сам не заменяет native
+(квитанция ниже); Test завершён, последующий recognition-аудит отказал. DATA аудит сам не заменяет native
 проверку и не меняет исходный execution failure.
 
 ## Frozen DATA: проверенная часть и оставшиеся отказы
@@ -123,17 +124,17 @@ Linux248 и полная матрица режимов остаются откр
 
 ## Следующие действия по основной цели
 
-1. Опубликовать завершённую40-pair gallery, визуально проверить все
-   паттерны и обновить DOCX примерами двух новых6/8. Primary уже опубликован.
-2. Проверить native import и actual frozen Test сохранённой Elder модели;
-   source уже целостен, повторять Train ради утраченного summary не требуется.
+1. Установить причину `recognition_images_changed` после actual native Test
+   сохранённой Elder модели. Не ослаблять проверку физики; новый Train не нужен.
+2. Галерея40 пар и DOCXv3 опубликованы. Продолжить независимую frozen оценку
+   с заранее зафиксированными моделью, порогом и новыми условиями.
 3. Python8-a3 завершён8/8; сохранить полный corpus во внешнем архиве.
    Подтвердить Linux/native coverage и поддерживаемые режимы по исходному плану.
 4. Продолжить алгоритмы: global terminal best-state restoration остаётся
    не реализованным; нельзя заменять её scalar overlay или переносить Exact
    после изменения модели. [Контракт](TerminalBestStateBoundary-20261118.ru.md).
 
-Предыдущий лучший Branch TP1/FP1/FN0/TN6, его order/window проверки и DOCXv2
+Предыдущий лучший Branch TP1/FP1/FN0/TN6, его order/window проверки и датированные DOCX
 сохраняются отдельными результатами. Новые6/8 не являются независимым
 повторением прежнего алгоритма и не отменяют августовские4/8–6/8.
 
@@ -150,9 +151,17 @@ DATA audit остаётся отдельно byte-only и сам не утвер
 сохраняются; успешная recovery использует уже проверенный источник и явно
 связанный backend, без повторного восстановления архива.
 
-Запущен `windows-elder-single-sweep-baseline8-a1`, controls
+`windows-elder-single-sweep-baseline8-a1`, controls
 `9f988b67aa3f94549f2497450743b65e7a6ccfe1`: исходный порог100, identity recognition
-conversion, все8 PhaseA паттернов/2с/reset-per-trial. Preparation уже завершена;
-native PID15516/creation_filetime134394840822181093 подтверждён живым в Job
-`Local\TimeLearner-d5794517-50ae-475e-ad91-c44603fb5cff`, лимит16GiB.
-Конечная классификация и полный audit ещё не приняты.
+conversion, все8 PhaseA паттернов/2с/reset-per-trial.
+Проверка18 ноября14:48UTC: native Test завершился exit0/valid за1682.26с,
+все процессы закрыты, исходные kernel Job/PID отсутствуют. Созданы8 trial files,
+но последующий production audit завершился exit1 с `recognition_images_changed`:
+`class_definitions` recognition archive не совпали с исходным stopped neuron.
+Это обнаруженное несовпадение ещё не классифицировано как сериализация или
+изменение физики; проверка не ослаблена. Metrics и положительный scientific
+verdict не опубликованы. Новый результат классификации не принят; повторный
+Train/Test не запускался. Требуется сравнить реальные образы и устранить
+причину, затем повторить аудит сохранённых наблюдений, если они применимы.
+[Закрытие процессов и отказ](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/baseline8-audit-rejected-observed.json).
+[Точный traceback и inventory](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/baseline8-audit-rejection-diagnosis.json).
