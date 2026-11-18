@@ -111,3 +111,32 @@ Canonical preparation A2 пройдена; native supervisor3701540/start4113771
 и unit timelearner-c2590dc5-40e8-4c30-90f5-cc8b6b085bf8.service,
 PID3709096/start411380156 подтверждены живыми. [Handle A2](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-a2-running.json).
 Результат30 C++ проверок ещё не получен; A1 и A2 являются разными попытками.
+
+## Актуализация19 ноября: A3 и подготовленная terminal transaction
+
+A2 завершилась до выполнения тестов: compiler отклонил три неявных преобразования
+const UEPtr в native witness calls. Выполнено0/30; исходный отказ и закрытие
+сохранены в m40-native30-a2-build-failure.json и m40-native30-a2-closed-build-rejected.json.
+Root554b70a719ad712f402be608ca4d45826424fc82 использует явный Get().
+
+Повторная проверка19.11,01:48МСК: A3 с этим Root и прежним Pulse57f603b
+активна на M40, supervisor3804988/start411618921 и unit
+timelearner-f8ffe62c-0dd3-4b34-9682-1121fd84deda.service подтверждены живыми.
+Свежая сборка завершилась, compiled inventory записан; итог30 cases ещё
+не принят. Это отдельные source/build/runtime, прежние попытки не изменены.
+
+Pulseb5128706c91df017be58d81b029ee53139057b84 добавляет явную native terminal
+transaction: после BudgetExhausted контроллер отзывает прежние полномочия,
+на следующей before-children границе восстанавливает полный выбранный граф,
+Dataset, owner mirrors и C-state с readback и резервом rollback из исходного
+edit budget. История поиска и фактическая physical epoch разделены; сертификат
+не создаётся. Подготовлены14 native случаев для обеих топологий/N0/N1,
+Reset/external stop, C-state, нехватки edit allowance и отказа attachment.
+Они ещё не собраны и не приняты; A3 их не содержит.
+
+Это промежуточная native API-возможность. Обычные cold JSON её не включают;
+versioned portable export/import/replay перехода ещё требуется. Старые exporters
+отклоняют такой scope, чтобы не описать восстановленный граф как прежний
+terminal search state. Следующий научный A/B требует закрыть эту границу,
+затем выполнить cold Train и frozen8 при одинаковых бюджетах. Только этап0
+полностью принят; полная цель0–12 сохраняется.

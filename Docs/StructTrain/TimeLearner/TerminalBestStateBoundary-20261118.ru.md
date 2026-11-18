@@ -135,3 +135,27 @@ terminal revision/epoch, отдельно проверять связь selected
 является способом разрешить это расхождение: сериализация остаётся отдельной
 операцией над сохранёнными данными. Это уточнение следующей реализации,
 не утверждение о наличии нового package/terminal transaction в текущем коде.
+
+## Native transaction19 ноября: реализована, проверка ещё впереди
+
+Pulseb5128706c91df017be58d81b029ee53139057b84 реализует явную
+NativeTrainingPlan::terminalSelection и состояние Finalizing. Старый actor
+отзывается; отдельное краткоживущее полномочие действует только на следующей
+штатной before-children границе. Резервируются commit и возможный rollback из
+остатка исходного maximumEdits. Нет пополнения проб, итераций или measurement
+deadline. Native import восстанавливает полный граф/Dataset/order, owner mirrors
+и owned C-state с полным readback. Explicit Reset и external stop отменяют
+ожидающее восстановление. BudgetExhausted и отсутствие certificate сохраняются.
+
+Подготовлены14 реальных интеграционных случаев: Classic/Branch N0/N1 deadline
+после настоящего unmeasured edit, waveform replay выбранной точки, owned C-state,
+Reset/external stop, недостаточный edit reservation и отказ attachment/rollback.
+Исходные samples, precondition, readback и событие сохраняются. Это серверно
+не проверенная реализация, не закрытая приёмка требований выше.
+
+Следующая обязательная часть — portable transition format. Текущие exporters
+отклоняют новый scope; обычные cold JSON не включают capability. Нельзя убрать
+защиту, скрыв различие historical search epoch/revision и actual restored graph,
+выдать старые final groups за свежую верификацию или восстановить live authority
+из DATA. После native gate требуются export/import/replay и same-budget cold A/B
+с actual frozen8. Ранее полученные научные результаты относятся к своим графам.
