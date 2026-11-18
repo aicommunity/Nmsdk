@@ -1,0 +1,45 @@
+{
+  "kind": "timelearner_fair_input_cold_closed_readback",
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "job": "s10-finite-fair-input-cold-m40-a4",
+  "outer_and_children_closed": true,
+  "cases": {
+    "classic": {
+      "execution": "completed",
+      "validity": "valid",
+      "training_outcome": "budget_exhausted",
+      "model_revision": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+      "logical_groups": 47,
+      "native_probes": 281,
+      "measured_candidates": 21,
+      "native_process_wall_seconds": 7298.397304180078,
+      "training_reason": "native_composite_group_time_budget_exhausted",
+      "model_bytes": 340881455,
+      "summary_bytes": 57044127,
+      "certificate": null,
+      "evaluation_verdict": null,
+      "original_run_manifest_digest": "f0537d0b034b790b6b27bf62a522a4f3c6ffc81a1b02ae684a9feae039aac80b",
+      "native_execution_proof_replay_verified": false
+    },
+    "branch": {
+      "execution": "completed",
+      "validity": "valid",
+      "training_outcome": "budget_exhausted",
+      "model_revision": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+      "logical_groups": 108,
+      "native_probes": 645,
+      "measured_candidates": 51,
+      "native_process_wall_seconds": 22024.05344628496,
+      "training_reason": "native_training_time_budget_exhausted",
+      "model_bytes": 636297940,
+      "summary_bytes": 167249672,
+      "certificate": null,
+      "evaluation_verdict": null,
+      "original_run_manifest_digest": "0c1493cbdc20219914d91c76f13b3ff24a5c021cd24def915692c5335f6f397d",
+      "native_execution_proof_replay_verified": false
+    }
+  },
+  "primary_publication": "pending",
+  "scientific_verdict": null
+}

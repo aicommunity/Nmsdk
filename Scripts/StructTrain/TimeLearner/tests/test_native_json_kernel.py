@@ -19,16 +19,19 @@ class NativeJsonKernelTest(unittest.TestCase):
         self.assertEqual(specification['test_paths'], [
             'Tests/Integration/Libraries/Test_PulseLib_NativeJson.cpp'])
         self.assertEqual(specification['schema_version'], 2)
-        self.assertEqual(specification['qt_core_package'], 'Qt5Core')
+        self.assertIn(specification['qt_core_package'], ('Qt5Core', 'Qt6Core'))
         self.assertCountEqual(specification['expected_test_ids'], [
             'NativeJsonByteInput/OwnedResultAndStringCompatibility',
             'NativeJsonByteInput/DuplicateKeysRemainRejectedInNestedAndEscapedForms',
             'NativeJsonByteInput/Utf8BomDoesNotBypassDuplicateChecks',
             'NativeJsonByteInput/ByteLimitsAndInvalidFramingAreRejected'])
+        output = Path(os.environ['TMPDIR']).resolve(strict=True)/'native-json-kernel'
         result = run_controller_kernel(controls/'specification.json',
             declaration['root_repository'], declaration['pulse_repository'],
             declaration['compiler'], declaration['gtest_source'],
-            Path(os.environ['TMPDIR']).resolve(strict=True)/'native-json-kernel')
+            output)
+        self.assertEqual(load(output/'toolchain.json')['qt_core']['package'],
+                         specification['qt_core_package'])
         case = result['cases']['candidate']
         self.assertEqual(case['compile']['execution'], 'completed')
         self.assertEqual((case['execution'], case['validity'], case['assertion_status']),

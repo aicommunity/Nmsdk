@@ -1,5 +1,10 @@
 # Windows: параллельная сборка N1 timing-neighbourhood
 
+Актуализация18.11: Windows218 primary опубликован и bytes/JUnit проверены на M40.
+Дополнительно прошли8/8 реальных native burst cases Classic/Branch,
+2000/20000Hz,N4/N6; все процессы закрыты.
+[Текущие результаты и границы](CurrentStatus-20261118.ru.md).
+
 ## Закрытый SDK a2: 218/218 C++ cases
 
 Компиляция и линковка завершились с0 за2223.17с. Исходный build outcome
@@ -19,9 +24,10 @@ Controls native `b73a3892021615e0ef7a55825c77e1850d4f5d69`, audit
 Получены все71 primary files:218 JUnit IDs и bytes/SHA каждого файла
 проверены локально как метаданные. Архив2127425 байт, SHA256
 `889f2fd56f51b2e35de3c50168e4a78bbb2217c1483d600deb7c39ff4a222da9`.
-Публикация этого пакета в M40 archive **пока не подтверждена**: VPN отключился,
-вход сохранённым Automats2 отклонён с691. Не подменять локальную копию
-проверенным внешним object reference.
+18.11 пакет опубликован в M40 archive: CAS bytes совпадают, все71 файла и218
+JUnit cases перепроверены. Catalog:
+`experiments/2026-11-17/windows-timing-neighbourhood/a2-native218.json`.
+Прежний перерыв публикации из-за VPN сохранён в истории Git.
 [Компактный readback](../../../Reports/StructTrain/TimeLearner/WindowsTimingNeighbourhood-20261117/native218-readback.json).
 
 Это адресная приёмка Windows cohort на Root93894dd / Pulse52cb953.
