@@ -1,10 +1,16 @@
 # TimeLearner: проверенный статус на 19 ноября 2026
 
-Проверка серверов: 18.11,21:03UTC / 19.11,00:03МСК. Полная цель этапов0–12
+Актуализация после завершения native terminal-selection gates19 ноября.
+Полная цель этапов0–12
 активна. Полностью принят этап0; этапы1–12 частичны. Процент общей готовности
 не назначается: оставшиеся алгоритмические и режимные проверки имеют разный
 объём. Accepted root develop остаётся87e7da0205b6bb0d582f7b4f2551c935fd7f2350.
-Рабочая ветка до этой сводки:2fd4de3d93dfa6b687428ed3d283591d50c9ff2d.
+Рабочая комбинация: Rootdbca86dda582925bcfe058ba0ebbf264afc7d55f /
+Pulsec95390d9ab220c1d794787dd7462a36ff565778d. Новейшие source-retention и
+historical-export изменения ещё не проверены. Адресно принятые gates относятся
+к Root3c5bfe01609a6e6bd290aa9697938e885d5904b6 / Pulse1d8fc24cdb19b4b0e399483d198314b84548f9ea.
+Верхние разделы определяют текущий статус; записи ниже раздела истории
+сохраняют состояния своих датированных попыток.
 
 ## Научные результаты
 
@@ -35,14 +41,18 @@ expanded bytes проверены по hash/size; исходная Train primary
 | Задание | Фактический исход |
 |---|---|
 |M40: временной отчёт Elder baseline/threshold,16 проб|2/2 declared tests PASS; галерея baseline/threshold создана. Kernel group закрыта. Визуальная приёмка и публикация этой новой галереи ещё впереди.|
-|Elder: fresh SDK,14 targeted cases|13 PASS/1 FAIL; выполнены все14. Отказ BoundedTrainingMeasuredBoundary/UnmeasuredEditAndBudgetStopCannotReplaceTheMeasuredSelection. Gate не принят, причина требует разбора. Supervisor и дочерние группы закрыты.|
+|M40: terminal-selection fresh SDK|44/44 PASS, включая14 terminal cases,6 snapshots и прежние регрессии; supervisor/все группы закрыты, primary опубликован.|
+|Elder: независимый terminal-selection fresh SDK|14/14 PASS, supervisor/все группы закрыты, primary опубликован.|
+|Предыдущий Elder: fresh SDK,14 targeted cases|13 PASS/1 FAIL. Постановка kernel case исправлена; его corrected version прошла на M40. Старый отказ сохранён, старый gate не переименован в успешный.|
 |Предыдущий M40 gate29|25 PASS/4 FAIL. Четыре N0 ThresholdCandidate не получили исходного certificate, maximum_sweeps_exhausted; downstream проверки ещё не подтверждены. Persistence2 прошли.|
 |Windows .14: heldout4|Native и полный audit завершены; TP1/FP0/FN0/TN3.|
 
 [M40 report receipt](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-temporal-report-closed.json),
 [Elder14 receipt](../../../Reports/StructTrain/TimeLearner/MeasuredBoundarySelection-20261118/elder14-closed-rejected.json).
 Перечисленные ранее живые задания завершены; повторный запуск не выполнялся.
+На момент этой сводки перечисленные native jobs закрыты; новых Train нет.
 Эти адресные проверки не заменяют полную объявленную матрицу262Linux/261Windows.
+[Native terminal acceptance](NativeTerminalSelectionAcceptance-20261119.ru.md).
 
 ## Готовность этапов
 
@@ -55,7 +65,7 @@ expanded bytes проверены по hash/size; исходная Train primary
 |4|Настоящие lifecycle/storage/physical DATA fixtures.|Полная fresh/reuse/Copy/Load/Build/growth/heterogeneous и режимная матрица.|
 |5|Export/import, stopped/completed state, native Train→Test roundtrip.|Остальные физические/связевые варианты и согласование будущего terminal restoration с archive/replay.|
 |6|Общий native service/controller и Classic/Branch adapters.|Legacy/V2 A/B, оставшееся дублирование, отдельная multirate verification.|
-|7|Measured bounded L/Ns/Rs search, N0 repeats, причины остановки и final verification.|Возврат к выбранному измеренному полному графу при глобальной остановке, его проверки; полная bounds/physics/reset/C-search матрица.|
+|7|Measured bounded L/Ns/Rs search, N0 repeats, причины остановки, final verification; explicit terminal restore проверен44/44 M40 и14/14 Elder.|Новый source-retention/historical-export код, полный portable переход и cold/runtime/analysis integration; полная bounds/physics/reset/C-search матрица.|
 |8|Solo/recognition state, transactions, реальное подтверждение порога, первые unseen foil.|Все PostTune/inhibition/reset modes и расширенная независимая frozen evaluation.|
 |9|Корневой пакет/CLI, manifest357 и адресные migration gates.|Оставшиеся Bin analysis/matrix/shared tools и callers; complete=false.|
 |10|Owned groups, leases/budgets, provenance и fail-closed publisher.|Полная effective-factor, cancel/recovery/publication fault matrix.|
@@ -64,20 +74,22 @@ expanded bytes проверены по hash/size; исходная Train primary
 
 ## Ближайшее критическое исправление
 
-Global budget/deadline после edit может оставить неизмеренный последний
-кандидат. Controller selection уже выделен; новый native graph capture
-готовится в рабочем дереве и ещё не собран/не принят. Автоматический terminal
-restore полного графа, owner mirrors/C-state, новая revision/epoch и согласованный
-export/replay пока не реализованы. Один новый kernel regression сейчас отказал.
+Global budget/deadline после edit мог оставить неизмеренный последний кандидат.
+Controller selection, полный native capture и explicit terminal restore с
+owner mirrors/C-state, readback и physical epoch адресно проверены на обоих
+серверах. Для обычных cold JSON возможность пока не включена. Новейший код
+сохранения исходного графа перед transaction и historical export context ещё
+нужно проверить; полный versioned export/import/replay и pipeline integration
+остаются обязательной открытой частью.
 [Полный контракт](TerminalBestStateBoundary-20261118.ru.md).
 
-Дальше: разобрать этот отказ, проверить capture и реализовать законное terminal
-восстановление; затем same-budget cold A/B и actual frozen8 с читаемыми графиками.
+Дальше: завершить и проверить portable переход, затем same-budget cold A/B
+и actual frozen8 с читаемыми графиками.
 Параллельно завершить публикацию уже полученных heldout данных и графиков.
 Остальные требования этапов сохраняются.8/8 не является условием окончания
 рефакторинга; Exact требует свежей all-input проверки одной конечной модели.
 
-## Последующее продвижение: захват native graph и новая сборка
+## История попыток19 ноября: захват native graph и новые сборки
 
 Root47f532a7aef1253e03bac7073f192ea555e118e5 / Pulse57f603b1048d6547bda6e2e97f7decc0305715f0:
 реализован process-local захват полного graph/Dataset/storage/C-state выбранной
