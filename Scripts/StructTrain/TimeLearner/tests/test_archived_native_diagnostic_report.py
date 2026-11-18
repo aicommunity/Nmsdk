@@ -51,7 +51,7 @@ class ArchivedNativeDiagnosticReportTest(unittest.TestCase):
             '<!doctype html><meta charset="utf-8"><title>Archived native diagnostic responses</title>'
             '<h1>Actual native baseline and fixed-threshold responses</h1>'
             '<p>Stopped training, no convergence certificate. Native input overlays and readable zoom views. '
-            'Same-Matrix diagnostic; visual review is separate.</p><ul>'+links+'</ul>\n', encoding='utf-8')
+            'Declared diagnostic protocol; visual review is separate.</p><ul>'+links+'</ul>\n', encoding='utf-8')
 
     def test_common_scorer_preserves_declared_counts_and_diagnostic_role(self):
         for row in self.expected:

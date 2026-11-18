@@ -1,8 +1,9 @@
 # Frozen-проверка трёх новых отвлекающих паттернов
 
-Статус: протокол объявлен до исполнения; bounded Windows prepare подтверждён
-живым. Результата новой классификации пока нет. Это часть этапа11, не закрытие
-полной научной матрицы или всего плана.
+Статус19.11: actual native Test и полный common source/model/scorer audit
+завершены успешно; все4 полных окна valid/frozen. TP1/FP0/FN0/TN3. Модель и
+порог после новых ответов не менялись. Это часть этапа11, не закрытие полной
+научной матрицы или всего плана. Временные графики этих4 проб ещё не приняты.
 
 Зафиксированы recognition revision
 `3e7234958d0539f9ee022580ab6149ea4255cb5536a6c9123e75f226ba9d7985`
@@ -39,8 +40,14 @@ Job`windows-elder-frozen-heldout4-a1`, native Root28f748a/Pulse5f8,
 Python actor7207184. Prepare20GiB, native16GiB, audit20GiB; каждая фаза
 bounded3600с. Предыдущие runtime и Test не меняются.
 
-До приёмки нужны native execution, полный common source/model/scorer audit,
-неизменность исходного источника и распознающей модели, закрытие процессов,
-внешний primary и временные графики всех четырёх проб. Любое нарушение полноты
-либо frozen revision запрещает положительный итог. Обнаруженные FP сохраняются;
-новый порог по этим ответам не выбирается.
+Объявленные проверки native execution, common audit, неизменности источника и
+модели и закрытия процессов пройдены. Native1420.02с, audit1437.16с, exit0,
+соответствующие kernel Job/PID отсутствуют. Все окна имеют4001 sample.
+Seen target дал один спайк0.4925с, через2.5мс после последнего входа; все3
+новых foil дали0 спайков. [Полная квитанция](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/frozen-heldout4-common-audit-closed.json).
+
+Полный primary опубликован в M40 CAS:126928729 bytes,70 проверенных members,
+3200472564 expanded bytes. Проверены ссылки на исходный Train и предыдущую
+калибровочную публикацию. [Каталог и SHA256](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/frozen-heldout4-primary.archive.json).
+Остаются визуальная отчётность и включение в следующий выпуск DOCX.
+Исходный FP на phasea-row-4 сохраняется; новый порог по этим ответам не выбирался.

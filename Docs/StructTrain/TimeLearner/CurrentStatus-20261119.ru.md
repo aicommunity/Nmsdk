@@ -26,7 +26,9 @@ Native1420.02с и audit1437.16с завершились exit0, все связ�
 Полный primary исходного baseline/threshold Test Elder опубликован на M40.
 Новый heldout primary собран на .14:126928729 bytes,
 SHA256309c9d895b913e149836b7185daf13d035764c021a180d89f5a1369dbe330f7a.
-Перенос нового пакета в центральный архив M40 ещё не подтверждён.
+Пакет опубликован в центральном архиве M40: все70 members,3200472564
+expanded bytes проверены по hash/size; исходная Train primary и прежняя
+калибровочная primary разрешены по каталогам. [Квитанция и CAS-ссылка](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/frozen-heldout4-primary.archive.json).
 
 ## Последние задания и проверки
 
@@ -74,3 +76,25 @@ export/replay пока не реализованы. Один новый kernel r
 Параллельно завершить публикацию уже полученных heldout данных и графиков.
 Остальные требования этапов сохраняются.8/8 не является условием окончания
 рефакторинга; Exact требует свежей all-input проверки одной конечной модели.
+
+## Последующее продвижение: захват native graph и новая сборка
+
+Root47f532a7aef1253e03bac7073f192ea555e118e5 / Pulse57f603b1048d6547bda6e2e97f7decc0305715f0:
+реализован process-local захват полного graph/Dataset/storage/C-state выбранной
+контроллером измеренной точки. Добавлены6 native cases, исправлена постановка
+одного отказавшего kernel regression. Автоматический terminal restore ещё
+не реализован; [границы и следующий контракт](TerminalBestStateBoundary-20261118.ru.md).
+
+На M40 canonical preparation пройдена. Свежая сборка и30 заявленных C++ cases
+выполняются отдельно в s08-measured-native-boundary-sdk-m40-a1,
+controls978af14a078abe3b90a6ca12a2cfe5c2333ec7b5. Supervisor3611226,
+unit timelearner-d4980d0d-93d1-4d64-ac49-0ee632466cb6.service подтверждены живыми.
+[Handle](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-running.json).
+Работающий runtime не обновляется, новый код в develop не принят.
+
+В готовой Elder baseline/threshold галерее2391 PNG. Просмотрены16 исходных
+overview всех паттернов и2 positive-lobe overview target/FP. Подписи и реальные
+входы читаемы; общий full-recovery Y масштаб сжимает положительные отклики
+молчащих проб. Для подробного сравнения этих проб ещё нужны положительные
+companion views. Полная visual acceptance и публикация галереи не объявлены.
+[Границы визуальной проверки](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-temporal-report-selected-visual-review.json).
