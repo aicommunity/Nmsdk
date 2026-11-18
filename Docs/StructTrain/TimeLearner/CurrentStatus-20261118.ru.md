@@ -57,8 +57,10 @@ start_ticks407772835, unit `timelearner-12031cef-c7a5-4f26-9c1d-16ae3b1005f2`.
 все40 trial-soma pairs покрыты (Classic32/Branch8), построено4591 PNG и
 соответствующие SVG/PDF. Kernel group отсутствует/закрыта, lease освобождён.
 [Квитанция закрытия и coverage](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/temporal-report-closed.json).
-Первые Classic target/TN/FP графики просмотрены. Полная визуальная приёмка,
-внешняя публикация галереи и включение новых примеров в DOCX ещё впереди.
+Первые Classic target/TN/FP графики просмотрены. Галерея опубликована во внешнем CAS и report cache; обзорные графики всех40
+пар просмотрены. [Квитанция](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/temporal-gallery.archive.json).
+Каждый из4591 рисунков вручную не просмотрен. Новые примеры включены в
+исходники третьей редакции DOCX; отрисовка и приёмка новой редакции впереди.
 Большие архивы и рисунки остаются во внешнем M40 хранилище, в Git — ссылки.
 
 ## Elder: модель сохранена и DATA проверены без повторного Train
@@ -82,8 +84,9 @@ Ns=1 для всех. Revision
 `d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa`.
 [Проверка и ограничения восстановления](RetainedStoppedExportRecovery-20261118.ru.md).
 [Полный audit/provenance во внешнем CAS](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/retained-model-data-audit.archive.json).
-Native import/readback и Test этой модели ещё не выполнены. Результат DATA
-аудита не заменяет эти проверки и не меняет исходный execution failure.
+Native import/readback уже подтверждены отдельным фактическим процессом
+(квитанция ниже); Test выполняется. DATA аудит сам не заменяет native
+проверку и не меняет исходный execution failure.
 
 ## Frozen DATA: проверенная часть и оставшиеся отказы
 
@@ -133,3 +136,23 @@ Linux248 и полная матрица режимов остаются откр
 Предыдущий лучший Branch TP1/FP1/FN0/TN6, его order/window проверки и DOCXv2
 сохраняются отдельными результатами. Новые6/8 не являются независимым
 повторением прежнего алгоритма и не отменяют августовские4/8–6/8.
+
+
+Актуализация после native roundtrip: отдельный Windows job
+`windows-elder-retained-physical-export-a2-recovery-a1`, controls
+`78a737b330f359c1ab64cd7ee46e81077a073212`, завершён exit0/valid за341.15с.
+Cooperative loaded-files capture выполнен, все процессы закрыты; kernel Job
+и исходный PID отсутствуют. Native импорт и полный физический export/import
+сохранили revision d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa.
+DATA audit остаётся отдельно byte-only и сам не утверждает native execution.
+[Фактическая native квитанция](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-import-roundtrip-observed.json).
+Новый Train не выполнялся. Исходные отрицательные a1/a2 metadata outcomes
+сохраняются; успешная recovery использует уже проверенный источник и явно
+связанный backend, без повторного восстановления архива.
+
+Запущен `windows-elder-single-sweep-baseline8-a1`, controls
+`9f988b67aa3f94549f2497450743b65e7a6ccfe1`: исходный порог100, identity recognition
+conversion, все8 PhaseA паттернов/2с/reset-per-trial. Preparation уже завершена;
+native PID15516/creation_filetime134394840822181093 подтверждён живым в Job
+`Local\TimeLearner-d5794517-50ae-475e-ad91-c44603fb5cff`, лимит16GiB.
+Конечная классификация и полный audit ещё не приняты.

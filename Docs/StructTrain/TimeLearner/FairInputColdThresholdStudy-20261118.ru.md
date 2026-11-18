@@ -123,3 +123,21 @@ Revision74786bc43e78e8f5c98993f8a1d826b08133f02356a2c7e4488f1d27ef9a6f8a.
 reason=None, все groups closed и lease released. Full primary collection и
 temporal report выполняются отдельно; повторение Train/Test не требуется.
 [Закрытые16 наблюдений и штатные metrics](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/threshold-confirmation-closed.json).
+
+
+## Опубликованные временные графики
+
+Галерея завершена и опубликована:16 проб,40 пар проба–сома,4591 PNG с SVG/PDF,
+полными окнами и native zoom без downsampling. Две declared-report проверки
+прошли без skips/errors/failures. Обзорные виды всех40 пар просмотрены;
+просмотр каждого из4591 рисунков не заявляется. Общая шкала сохраняет полную
+отрицательную фазу после спайка, дополнительные local Y виды позволяют
+рассматривать подпороговые ответы. Positive-lobe виды явно маркируют обрезку
+отрицательной фазы и сохраняют обычный полный вид.
+
+[Квитанция, CAS и provenance](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/temporal-gallery.archive.json).
+Каталог на M40: `/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-18/fair-input-threshold-a1/index.html`.
+[Открыть галерею по Samba](//10.245.1.12/Nmsdk-StructTrainExpArchive/report-cache/2026-11-18/fair-input-threshold-a1/index.html).
+Большие файлы в корневой Git не добавлены. Наблюдаемые ложные ответы rows4/6
+сохраняются на actual LT events; максимумы отдельных сом Classic не заменяют
+потенциал принятия решения LT.

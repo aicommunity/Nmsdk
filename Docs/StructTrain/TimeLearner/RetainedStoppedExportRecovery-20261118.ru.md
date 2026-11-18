@@ -37,3 +37,23 @@ L239/201/121/1, Rs8090169.943749473 на первых трёх и86000000 на a
 Пакет сообщает budget_exhausted/maximum_sweeps_exhausted, certificate=None.
 [Полный144319-byte audit и полный provenance](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/retained-model-data-audit.archive.json).
 Native import, исходный successful execution и классификация этим не доказаны.
+
+
+Актуализация после native roundtrip: отдельный Windows job
+`windows-elder-retained-physical-export-a2-recovery-a1`, controls
+`78a737b330f359c1ab64cd7ee46e81077a073212`, завершён exit0/valid за341.15с.
+Cooperative loaded-files capture выполнен, все процессы закрыты; kernel Job
+и исходный PID отсутствуют. Native импорт и полный физический export/import
+сохранили revision d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa.
+DATA audit остаётся отдельно byte-only и сам не утверждает native execution.
+[Фактическая native квитанция](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-import-roundtrip-observed.json).
+Новый Train не выполнялся. Исходные отрицательные a1/a2 metadata outcomes
+сохраняются; успешная recovery использует уже проверенный источник и явно
+связанный backend, без повторного восстановления архива.
+
+Запущен `windows-elder-single-sweep-baseline8-a1`, controls
+`9f988b67aa3f94549f2497450743b65e7a6ccfe1`: исходный порог100, identity recognition
+conversion, все8 PhaseA паттернов/2с/reset-per-trial. Preparation уже завершена;
+native PID15516/creation_filetime134394840822181093 подтверждён живым в Job
+`Local\TimeLearner-d5794517-50ae-475e-ad91-c44603fb5cff`, лимит16GiB.
+Конечная классификация и полный audit ещё не приняты.
