@@ -197,7 +197,8 @@ def build(source, output, review=None):
 
     def para(doc,text,style=None):return doc.add_paragraph(text,style=style)
     def heading(doc,text):doc.add_heading(text,level=1)
-    def page(doc,title):doc.add_page_break();heading(doc,title)
+    def page(doc,title):
+        doc.add_heading(title,level=1).paragraph_format.page_break_before=True
     def figure(doc,path,caption,width=6.35):
         p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER
         p.add_run().add_picture(str(path),width=Inches(width))
