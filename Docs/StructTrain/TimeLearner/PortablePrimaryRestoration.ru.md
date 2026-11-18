@@ -53,3 +53,21 @@ not increased. Elder acceptance remains pending. Full actual990-member pilot
 restoration on M40 now passed:8 redundant aliases omitted with explicit receipt,
 982 original regular members retained; original signed manifests unchanged.
 Report generation has started, but its full result/visual QA is not yet accepted.
+
+
+## Полное восстановление прерванного запуска
+
+Для byte-only архива с glog severity aliases и отсутствующим run-manifest
+предусмотрен явный `--compatibility retain-regular-glog-aliases-v1`. Он
+проверяет весь archive/member inventory и сохраняет **все** regular members,
+включая дубли, обычными файлами. Он не восстанавливает symlinks, не удаляет
+файлы и не подтверждает PID, execution, Train или scientific verdict.
+Режим без явного выбора по-прежнему отказывает при наличии aliases.
+Прежний `dereferenced-glog-aliases-v1` сохраняет строгую owner-bound проверку
+перед исключением дублей; отсутствие owner manifest остаётся его ошибкой.
+
+Реальный повод: восстановление958170225-byte Elder stopped source18 ноября.
+Его исходное выполнение закрыто по disk budget и не содержит run-manifest;
+архив целиком проверен, но применение режима исключения дублей отклонено с
+`bundle_alias_owner_missing`. Отказ сохранён, native импорт в этой попытке
+не запускался. Новый режим сначала требует отдельной серверной проверки.

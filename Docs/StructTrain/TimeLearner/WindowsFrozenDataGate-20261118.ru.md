@@ -53,7 +53,15 @@ Matching native fixtures7 прошли без skips/errors/failures. Затем 
 переписан. [Native7](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/frozen-native7-observed.json),
 [Console recovery](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/frozen-console-recovery-observed.json).
 Python8 дал7 PASS/1 FAIL из-за неверной проверки стандартного CLI envelope;
-fixture исправлена на response.analysis с проверкой envelope, rerun ещё нужен.
+fixture исправлена на response.analysis с проверкой envelope. Последующий
+`windows-frozen-physical-data-python8-a3`, controls
+`698b4896888f142ebbce0e6f062323f513605c68`, прошёл **8/8**, без failures/errors/skips.
+Python использовал точную Scripts-only Git projection Rooted2cf4d; реальные
+native fixtures остались от Root28f748a/Pulse5f8b281. Это разные явно записанные
+роли исходников, без новой сборки и без изменения данных/математических допусков.
+Before/after fingerprints10 fixture files совпали, Job закрыт, loaded files
+captured. [Квитанция повторной проверки](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/frozen-python8-a3-observed.json).
+Исходный7/8 отказ a2 сохраняется.
 Полный247 и Linux248 не приняты этим узким набором.
 
 ## Шесть старых precondition failures

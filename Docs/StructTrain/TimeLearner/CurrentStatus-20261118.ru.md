@@ -100,7 +100,9 @@ Python8 на actual native artifacts:7 PASS/1 FAIL, без errors/skips. Отк�
 в CLI fixture: она сравнивала весь стандартный envelope с внутренними
 метриками. CLI вернул execution completed/valid и штатный analysis envelope;
 fixture исправлена на проверку envelope и точное сравнение его analysis.
-Повторная серверная проверка этого изменения ещё не выполнена.
+Повторная серверная проверка `python8-a3` прошла8/8 без failures/errors/skips;
+controls698b489, PythonRooted2 и неизменные native fixtures Root28/Pulse5f8.
+[Новая квитанция](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/frozen-python8-a3-observed.json).
 [Исходный log/result](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/frozen-python8-rejected.json).
 
 Полный прошлый247-case gate остаётся отрицательным:230 PASS/9 failures/8 skips.

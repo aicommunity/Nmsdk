@@ -1,7 +1,9 @@
-"""Lossless native bundle restoration with an explicit legacy glog-alias adapter.
+"""Lossless native bundle restoration with explicit regular glog-alias policies.
 
 The source archive is never changed. The adapter omits only verified redundant
 alias bytes from a new derived tree; native artifact auditors stay unchanged.
+Interrupted runs without an owner manifest can retain every archived regular
+member. This proves bytes only and never restores an original symlink or owner.
 """
 import argparse
 import hashlib
@@ -15,6 +17,7 @@ from .model_identity import canonical_model_sha256
 from .native_evidence import EvidenceError, load, require
 
 ALIAS_ADAPTER = "dereferenced-glog-aliases-v1"
+RETAIN_ALIASES = "retain-regular-glog-aliases-v1"
 ALIASES = {"NeuroModeler."+s for s in ("INFO", "WARNING", "ERROR", "FATAL")}
 CONTENT_REFERENCE = "earlier-regular-member-sha256-size-v1"
 
@@ -204,7 +207,7 @@ def alias_inventory_plan(members, documents):
 
 
 def restore_native_bundle(bundle_path, output, *, compatibility=None):
-    require(compatibility in (None, ALIAS_ADAPTER), "unknown_bundle_restoration_adapter")
+    require(compatibility in (None, ALIAS_ADAPTER, RETAIN_ALIASES), "unknown_bundle_restoration_adapter")
     bundle_path = Path(bundle_path)
     bundle_path = bundle_path.resolve(strict=True) if bundle_path.is_file() else bundle_path.absolute()
     bundle = load(bundle_path)
@@ -226,7 +229,7 @@ def restore_native_bundle(bundle_path, output, *, compatibility=None):
                 type(bundle['unique_content_bytes']) is int and
                 bundle['unique_content_bytes'] == sum(size for _, size in unique),
                 'bundle_content_reference_totals_invalid')
-    require(compatibility == ALIAS_ADAPTER or not any(_alias(n) for n in members),
+    require(compatibility in (ALIAS_ADAPTER, RETAIN_ALIASES) or not any(_alias(n) for n in members),
             "bundle_legacy_alias_requires_explicit_adapter")
     from .external_archive import locate
     archive = locate(bundle_path.parent/"primary.tar.xz")
@@ -287,7 +290,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("bundle", type=Path)
     parser.add_argument("output", type=Path)
-    parser.add_argument("--compatibility", choices=[ALIAS_ADAPTER])
+    parser.add_argument("--compatibility", choices=[ALIAS_ADAPTER, RETAIN_ALIASES])
     args = parser.parse_args(argv)
     try:
         result = restore_native_bundle(args.bundle, args.output, compatibility=args.compatibility)
