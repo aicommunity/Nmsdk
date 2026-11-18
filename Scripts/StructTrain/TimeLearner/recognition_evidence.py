@@ -17,7 +17,36 @@ from .learned_evidence import audit_learned_state, load_case as load_solo
 from .model_identity import canonical_model_sha256
 from .native_evidence import EvidenceError, after, count, equal, load, number, require
 
-AUDITOR_VERSION = 2
+AUDITOR_VERSION = 3
+
+
+def audit_recognition_images(definitions: list, source_definitions: list) -> dict:
+    """Compare storage physics across native XML encodings, without importing it.
+
+    Match ModelArchive::ModelImageDefinitionsFingerprint. Compiler RTTI names
+    and diagnostic defaults in XML are not physical identities. Both sets still
+    need valid XML/content hashes, semantic identities and dependency closure.
+    Native PrepareModelArchive separately loads every supplied definition and
+    checks its effective identity; this DATA comparison never substitutes for it.
+    """
+    from .capacitance_evidence import _images
+
+    actual, source = _images(definitions), _images(source_definitions)
+    require(actual == source, "recognition_images_changed")
+    originals = {item["name"]: item for item in source_definitions}
+    for item in definitions:
+        original = originals[item["name"]]
+        # Preserve the complete declared snapshot boundary, not only the model
+        # subset used by the common storage fingerprint. Dependency arrays may
+        # have a different order; _images has checked their exact derived set.
+        snapshot = {k: v for k, v in item["snapshot"].items() if k not in {"native_xml", "native_xml_sha256"}}
+        expected = {k: v for k, v in original["snapshot"].items() if k not in {"native_xml", "native_xml_sha256"}}
+        require(snapshot == expected, "recognition_image_snapshot_changed")
+    return {"comparison": "validated-semantic-storage-images-v1", "definitions": len(actual),
+            "storage_images_sha256": canonical_model_sha256(actual),
+            "xml_documents_byte_equal": all(item["snapshot"]["native_xml"] == originals[item["name"]]["snapshot"]["native_xml"]
+                                            for item in definitions),
+            "native_xml_reconstruction_verified": False}
 
 
 def _digest(envelope: dict) -> None:
@@ -120,7 +149,7 @@ def _audit_derivation(package: dict, source_case: tuple, *, diagnostic=False) ->
     graph = archive["graph"]
     require(hashlib.sha256(graph["native_xml"].encode("utf-8")).hexdigest() == graph["native_xml_sha256"],
             "recognition_xml_digest_mismatch")
-    require(archive["class_definitions"] == source["neuron"]["class_definitions"], "recognition_images_changed")
+    image_audit = audit_recognition_images(archive["class_definitions"], source["neuron"]["class_definitions"])
     conversion = package["conversion_spec"]
     require(type(conversion.get("schema_version")) is int and conversion["schema_version"] in {1, 2}, "unknown_conversion_spec")
     post = conversion["schema_version"] == 2
@@ -239,7 +268,7 @@ def _audit_derivation(package: dict, source_case: tuple, *, diagnostic=False) ->
             all(number(value) > 0 for value in archive["metadata"]["conversion"]["factors"]), "invalid_recognition_metadata_types")
     require(metadata == archive["metadata"], "recognition_certificate_or_calibration_scope_mismatch")
     return {"auditor_version": AUDITOR_VERSION, "conversion_math_verified": True, "source_audit": source_audit,
-            "other_physics_preserved": True, "native_import_verified": False,
+            "other_physics_preserved": True, "storage_images": image_audit, "native_import_verified": False,
             "evaluation_verdict": None}
 
 
