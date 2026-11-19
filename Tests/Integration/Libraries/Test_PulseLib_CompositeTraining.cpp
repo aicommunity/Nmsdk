@@ -5135,7 +5135,21 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
         f.owner->IsNeedToTrain=true;f.owner->BeginNativeTraining(warm);
         ASSERT_TRUE(f.owner->NativeTrainingController().State()==NativeTrainingState::CapturingReferences ||
             f.owner->NativeTrainingController().State()==NativeTrainingState::Searching)<<f.owner->NativeTrainingController().Reason();
-        f.owner->IsNeedToTrain=false;ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+        // Continue through a real, consumed current-attempt measurement before
+        // stopping. An immediate Start/Stop cannot establish that the old
+        // journal primary survives alongside newly collected native data.
+        const auto warmAttempt=f.owner->NativeTrainingController().Configuration().runId;
+        bool consumedWarmMeasurement=false;
+        ServiceTicks(f,[&]{
+            if(consumedWarmMeasurement)return;
+            const auto& records=f.owner->NativeTrainingController().CompositeMeasurements();
+            consumedWarmMeasurement=std::any_of(records.begin(),records.end(),[&](const auto& r){
+                return r.attemptId==warmAttempt && r.consumed;
+            });
+            if(consumedWarmMeasurement)f.owner->IsNeedToTrain=false;
+        });
+        ASSERT_TRUE(consumedWarmMeasurement);
+        ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
         const auto next=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
         EXPECT_EQ(next.learnedState.value("terminal_journal"),package.value("terminal_journal"));
         EXPECT_EQ(next.learnedState.value("model_revision"),package.value("model_revision"));

@@ -1,5 +1,14 @@
 # Следующая реализация: portable terminal boundary
 
+Уточнение A3: четыре protocol4 stopped warm cases отклонены при повторном
+экспорте с terminal_selected_composite_measurement_missing. Warm Start оставлял
+только captured reference groups и удалял candidate/anchor primary старого
+terminal journal. Рабочее исправление сохраняет требуемое объединение и проверяет
+его byte budget до изменения активной попытки. Journal validation не ослабляется.
+Все восемь composite warm controls усилены: перед stop должен быть принят хотя
+бы один настоящий logical measurement новой попытки. Исправление ещё не принято
+на сервере; A3 продолжает остальные declared tests, её runtime не изменён.
+
 Это рабочее уточнение открытой части этапов5/7/10, не приёмка готового формата.
 Адресная native transaction принята на Root3c5/Pulse1d8. Factory schema8,
 event2 и summary9 реализованы; первая сборка A1 остановилась до тестов на
