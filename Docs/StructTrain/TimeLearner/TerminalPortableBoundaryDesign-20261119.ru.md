@@ -91,16 +91,24 @@ Python DATA/scorer/primary transport и reporting. До этого ordinary cold
 service ради override epoch. Контроль памяти, nested package/content-reference
 transport и bounded decoder проверить на настоящем большом N=4 primary.
 
-Summary9 сейчас описывает actual revision/physical epoch и terminal journal.
-Это ещё не замена прежним source summaries со ссылками на reference/candidate
-trials, C0 witnesses и search counters. Для production analysis нужно сохранить
-явно historical summary на transcript epoch либо реализовать отдельный полный
-DATA audit вложенного historical_state. Нельзя подставлять в прежний scorer
+Summary9 описывает actual revision/physical epoch и terminal journal. В рабочей
+ветке добавлен historical_summary: прежняя source summary на transcript epoch,
+со ссылками на reference/candidate trials, C0 witnesses и search counters.
+DATA reader terminal_package_evidence отдельно проверяет actual graph и
+вложенный historical_state, используя исходные validators и реальные CSV.
+Эти изменения ещё требуют серверной проверки. Нельзя подставлять в прежний scorer
 actual summary с новой epoch или достраивать отсутствующие measurement proofs.
 Конкретные места: ProbeEvidenceJson/NativeCompositeLearnedState в PulseLib;
 learned_evidence, stopped_evidence, composite_package_evidence, native_evidence,
 native_pipeline_worker и recognition_evidence в корневом пакете. Unknown schema
 должна оставаться отказом до согласованного обновления этих путей.
+
+Native CheckStoppedPackets явно разрешает warm references из прежней попытки.
+Python stopped_evidence теперь различает observed текущей попытки и retained
+reference packets, требуя реальные CSV для точного объединения обоих наборов.
+Версии аудита6/7 отмечают такой retained-reference случай; исходные4/5 и их
+результаты не переименовываются. Никаких отсутствующих observations или
+сертификатов не достраивается. Полная pipeline/primary интеграция всё ещё открыта.
 
 ## Проверки и следующий научный опыт
 

@@ -15,6 +15,10 @@ OUTCOMES = {"external_stop", "budget_exhausted", "invalid_model", "invalid_obser
 
 
 def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dict) -> dict:
+    if package.get('schema_version') == 8:
+        from .terminal_package_evidence import audit_terminal_package
+        require(package.get('kind')=='timelearner_stopped_state','unknown_stopped_state_schema')
+        return audit_terminal_package(package,summary,packets,traces)
     if package.get('schema_version') in (5,6,7):
         from .composite_package_evidence import audit_composite_package
         require(package.get('kind') == 'timelearner_stopped_state', 'unknown_stopped_state_schema')
@@ -52,18 +56,29 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
         require(package['reference_packets'] == [] and package['final_packets'] == [] and
                 package['reference_complete'] is False, 'empty_stopped_attempt_contains_measurements')
     observed = package["observed_packets"]
-    require(isinstance(observed, list) and len(observed) == len(packets), "missing_observed_attempt")
+    require(isinstance(observed, list), "missing_observed_attempt")
     seen = set()
-    audits = {}
+    expected = {}
     for packet in observed:
         requested = packet["requested_specification"]
         require(isinstance(requested, dict) and bool(requested["trial_id"]), "missing_trial_identity")
         trial = requested["trial_id"]
         require(trial not in seen and packets.get(trial) == packet, "duplicate_or_changed_primary_packet")
         seen.add(trial)
-        require(traces[trial].is_file(), "missing_primary_trace")
-        audits[trial] = audit_probe(packet, traces[trial])
-    require(seen == set(packets), "primary_packet_set_mismatch")
+        expected[trial] = packet
+    observed_ids = set(seen)
+    # Match native CheckStoppedPackets: warm control retains independently
+    # captured references, while ObservedPackets describes the current attempt.
+    # Actual packets and CSV remain mandatory; no reference is reconstructed.
+    for packet in package['reference_packets']:
+        trial=packet['requested_specification']['trial_id']
+        require(trial not in expected or expected[trial]==packet,'retained_reference_primary_changed')
+        expected[trial]=packet
+    require(set(expected) == set(packets), "primary_packet_set_mismatch")
+    audits = {}
+    for trial,packet in expected.items():
+        require(packets[trial]==packet and traces[trial].is_file(),'missing_or_changed_primary_trace')
+        audits[trial]=audit_probe(packet,traces[trial])
     protocol = package["protocol"]
     require(protocol["schema_version"] == 3, "unknown_protocol_schema")
     recovery = None
@@ -95,7 +110,7 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
     final_ids = set()
     for packet in package["final_packets"]:
         trial = packet["requested_specification"]["trial_id"]
-        require(trial not in final_ids and trial not in reference_ids and packets.get(trial) == packet,
+        require(trial not in final_ids and trial not in reference_ids and trial in observed_ids and packets.get(trial) == packet,
                 "duplicate_or_unavailable_final_packet")
         final_ids.add(trial)
     archive = package["neuron"]
@@ -116,12 +131,15 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
             "archive_target_or_reference_mismatch")
     capacitance = audit_package_capacitance(package)
     capacitance_history = audit_package_capacitance_history(package, summary)
-    return {"auditor_version": 5 if recovery is not None else 4, "state_kind": "diagnostic", "training_outcome": package["training_outcome"],
+    retained_references=reference_ids-observed_ids
+    return {"auditor_version": (7 if recovery is not None else 6) if retained_references else (5 if recovery is not None else 4),
+            "state_kind": "diagnostic", "training_outcome": package["training_outcome"],
             "n0_candidate_repeats": repeats, "search_history_retained": retained,
             "primary_trials": len(packets), "reference_trials": len(references), "final_trials": len(final_ids),
             "invalid_or_censored_trials": sum(not a["valid_observation"] for a in audits.values()),
             "certificate_present": False, "native_import_verified": False,
             "capacitance_state": capacitance, **({"capacitance_history": capacitance_history} if capacitance_history is not None else {}),
+            **({"retained_reference_trials":len(retained_references),"observed_attempt_trials":len(observed_ids)} if retained_references else {}),
             **({"candidate_recovery": recovery} if recovery is not None else {}),
             "evaluation_verdict": None}
 
@@ -130,7 +148,8 @@ def load_case(path: Path) -> tuple[dict, dict, dict, dict]:
     require(path.name.endswith("_stopped_state.json"), "unexpected_stopped_filename")
     stem = path.name.removesuffix("_stopped_state.json")
     package = load(path)
-    if package.get('schema_version') in (5,6,7):
+    if package.get('schema_version') in (5,6,7) or (package.get('schema_version')==8 and
+            package.get('historical_state',{}).get('schema_version') in (5,6,7)):
         summary_path = path.with_name(stem + '_stopped_summary.json')
         return package, load(summary_path) if summary_path.exists() else None, {}, {}
     packets, traces = {}, {}

@@ -43,7 +43,7 @@ expanded bytes проверены по hash/size; исходная Train primary
 |---|---|
 |M40: временной отчёт Elder baseline/threshold,16 проб|2/2 declared tests PASS; галерея baseline/threshold создана. Kernel group закрыта. Визуальная приёмка и публикация этой новой галереи ещё впереди.|
 |M40: terminal-selection fresh SDK|44/44 PASS, включая14 terminal cases,6 snapshots и прежние регрессии; supervisor/все группы закрыты, primary опубликован.|
-|M40: terminal portable fresh SDK A2|Canonical preparation PASS; исправленная сборка на56 cases выполняется. Native результат ещё не получен. A1 остановилась до тестов на Qt JSON сравнении, отказ сохранён.|
+|M40: terminal portable fresh SDK A2|Собрано, выполнено56:44 PASS/12 FAIL. Все12 composite cases прошли; plain fresh-process warm cases запускались до native Init. Gate отклонён, все группы закрыты, primary опубликован.|
 |Elder: независимый terminal-selection fresh SDK|14/14 PASS, supervisor/все группы закрыты, primary опубликован.|
 |Предыдущий Elder: fresh SDK,14 targeted cases|13 PASS/1 FAIL. Постановка kernel case исправлена; его corrected version прошла на M40. Старый отказ сохранён, старый gate не переименован в успешный.|
 |Предыдущий M40 gate29|25 PASS/4 FAIL. Четыре N0 ThresholdCandidate не получили исходного certificate, maximum_sweeps_exhausted; downstream проверки ещё не подтверждены. Persistence2 прошли.|
@@ -52,7 +52,7 @@ expanded bytes проверены по hash/size; исходная Train primary
 [M40 report receipt](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-temporal-report-closed.json),
 [Elder14 receipt](../../../Reports/StructTrain/TimeLearner/MeasuredBoundarySelection-20261118/elder14-closed-rejected.json).
 Перечисленные ранее живые задания завершены; повторный запуск не выполнялся.
-Прежние native jobs закрыты; новая portable A2 строится отдельно. Новых Train нет.
+Прежние native jobs и portable A2 закрыты. Новых Train нет.
 Эти адресные проверки не заменяют полную объявленную матрицу262Linux/261Windows.
 [Native terminal acceptance](NativeTerminalSelectionAcceptance-20261119.ru.md).
 
@@ -84,8 +84,9 @@ owner mirrors/C-state, readback и physical epoch адресно провере�
 factory schema8/summary9 ещё нужно проверить. Factory разделяет historical
 proof и actual native model; import создаёт Finished DATA, без контроллерного
 checkpoint и живых полномочий. Подготовлены fresh-process, warm-control и
-tamper проверки, а также12 новых protocol4/5 cases для обеих топологий,
-N0/N1 и completed/stopped boundaries. Они ещё не выполнялись.
+tamper проверки. Все12 protocol4/5 cases A2 прошли;12 plain child checks
+отказали из-за warm Start до native Build/Init. Исправленная постановка,
+historical_summary на source epoch и4 новых plain completed cases ещё не проверены.
 Полная native приёмка, cold/runtime declarations и Python analysis integration
 остаются обязательной открытой частью.
 [Полный контракт](TerminalBestStateBoundary-20261118.ru.md).
@@ -125,6 +126,18 @@ Canonical preparation PASS, свежая native сборка56 cases запущ�
 Supervisor2937/start412659767 и unit timelearner-106cf42b-4d8e-4fc5-94aa-aed858452471.service,
 main10784/start412662722 подтверждены живыми. Старые A1 source/build/runtime
 не изменены. [A2 handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native56-a2-running.json).
+
+A2 завершена:56 выполнено,44 PASS/12 FAIL, gate отклонён. Во всех12
+plain child failures warm Start предшествовал штатным Build/Init и получил
+native_training_requires_initialized_ready_learner. Тест исправлен переносом
+warm контроля после существующей инициализации, без дополнительных Build
+в learner. Все группы/supervisor закрыты. [Полный primary](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a2-rejected.archive.json):
+1013 проверенных members,17 log aliases,16116665 compressed bytes.
+Новая рабочая версия добавляет source historical_summary, DATA audit schema8,
+проверки28 native boundaries,12 plain и8 composite warm exports, а также4 plain completed controls.
+Это код, ожидающий native и Python приёмки; ordinary cold JSON ещё не включает
+terminal policy. Следующая серия содержит60 C++ cases; новые научные Train/Test
+пока не выполнялись.
 
 Root47f532a7aef1253e03bac7073f192ea555e118e5 / Pulse57f603b1048d6547bda6e2e97f7decc0305715f0:
 реализован process-local захват полного graph/Dataset/storage/C-state выбранной

@@ -5099,11 +5099,21 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
     EXPECT_EQ(bool(service.Certificate()),completed);
     const auto exported=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);const auto& package=exported.learnedState;
     ASSERT_EQ(package.value("schema_version"),QJsonValue(8));EXPECT_EQ(exported.summary.value("schema_version"),QJsonValue(9));
+    const auto historicalSummary=exported.summary.value("historical_summary").toObject();ASSERT_FALSE(historicalSummary.isEmpty());
+    const auto historicalState=package.value("historical_state").toObject();
+    EXPECT_EQ(historicalSummary.value("model_epoch"),historicalState.value("model_epoch"));
+    EXPECT_EQ(historicalSummary.value("actual_model_revision"),historicalState.value("model_revision"));
+    EXPECT_EQ(historicalSummary.value("actual_parameters"),historicalState.value("trained_inputs"));
     EXPECT_EQ(package.value("historical_state").toObject().value("schema_version"),QJsonValue(window?6:5));
     EXPECT_EQ(package.value("certificate").isNull(),!completed);
     const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-"+(window?"window5":"fixed4")+
         (n0?"-N0":"-N1")+(completed?"-completed":"-stopped");
     SavePortableObject(name.c_str(),"terminal-state8.json",package);SavePortableObject(name.c_str(),"terminal-summary9.json",exported.summary);
+    const auto test=::testing::UnitTest::GetInstance()->current_test_info();ASSERT_TRUE(test);
+    SavePortableObject(name.c_str(),"terminal-case.json",{{"kind","native_terminal_portable_case"},{"schema_version",1},
+        {"test_id",QString::fromStdString(std::string(test->test_suite_name())+"/"+test->name())},
+        {"package","terminal-state8.json"},{"summary","terminal-summary9.json"},
+        {"primary_prefix",QJsonValue(QJsonValue::Null)},{"warm_folder",QJsonValue(QJsonValue::Null)}});
     const auto epoch=service.ModelEpoch(),transcriptEpoch=service.TranscriptModelEpoch();const auto revision=f.Revision();
     const auto referenceIds=service.CompositeReferenceGroupIds();const auto clock=f.Time();
     auto prepared=PrepareNativeLearnedState(package,f.storage,f.environment,CompositePackageImplementation);
@@ -5118,6 +5128,24 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
     EXPECT_EQ(again.learnedState.value("terminal_journal"),package.value("terminal_journal"));
     EXPECT_EQ(again.learnedState.value("model_revision"),package.value("model_revision"));EXPECT_EQ(again.learnedState.value("model_epoch"),package.value("model_epoch"));
     EXPECT_EQ(again.learnedState.value("certificate"),package.value("certificate"));
+    if(!completed) {
+        auto warm=plan;warm.search.runId=name+"/warm";
+        f.owner->Build();f.model->Init();f.model->Reset();
+        ASSERT_TRUE(f.owner->IsReady() && f.owner->IsInit());EXPECT_EQ(f.Revision(),revision);
+        f.owner->IsNeedToTrain=true;f.owner->BeginNativeTraining(warm);
+        ASSERT_TRUE(f.owner->NativeTrainingController().State()==NativeTrainingState::CapturingReferences ||
+            f.owner->NativeTrainingController().State()==NativeTrainingState::Searching)<<f.owner->NativeTrainingController().Reason();
+        f.owner->IsNeedToTrain=false;ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+        const auto next=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+        EXPECT_EQ(next.learnedState.value("terminal_journal"),package.value("terminal_journal"));
+        EXPECT_EQ(next.learnedState.value("model_revision"),package.value("model_revision"));
+        EXPECT_EQ(next.learnedState.value("model_epoch"),package.value("model_epoch"));
+        EXPECT_EQ(next.learnedState.value("session_attempt").toDouble(),package.value("session_attempt").toDouble()+1.);
+        auto replay=PrepareNativeLearnedState(next.learnedState,f.storage,f.environment,CompositePackageImplementation);
+        EXPECT_EQ(replay->service.State(),NativeTrainingState::Finished);EXPECT_FALSE(replay->service.Search());
+        SavePortableObject(name.c_str(),"terminal-warm-state8.json",next.learnedState);
+        SavePortableObject(name.c_str(),"terminal-warm-summary9.json",next.summary);
+    }
 }
 }
 TEST(NativeTerminalCompositePackage,ClassicFixedN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,true,false);}
