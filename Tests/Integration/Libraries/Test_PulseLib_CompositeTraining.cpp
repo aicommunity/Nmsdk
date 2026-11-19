@@ -5079,3 +5079,56 @@ template<class Owner> void RecordedRecoveryRoundtrip() {
 TEST(NativeRecordedRecoveryArchive,ClassicFullDomainN4Roundtrip){RecordedRecoveryRoundtrip<NNeuronTimeLearner>();}
 TEST(NativeRecordedRecoveryArchive,BranchFullDomainN4Roundtrip){RecordedRecoveryRoundtrip<NNeuronTimeLearnerBranch>();}
 #endif
+
+namespace {
+template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bool completed)
+{
+    NativeCompositeFixture<Owner> f(2000,false,64,false,n0);f.owner->ControllerVersion.SetDataDirect(2);
+    // Existing fixed-geometry transport control. The broad .2 case exercises
+    // an unchanged completed certificate; .02 is the original scientific sync
+    // default and must remain an honestly stopped/no-certificate boundary.
+    auto plan=window?ActualWindowServicePlan(f,completed?.2:.02,false):ServicePlan(f,completed?.2:.02);
+    plan.search.normalization=f.modelSpec.normalization;plan.search.bounds.clear();
+    for(const auto& p:f.owner->ReadNativeParameters())plan.search.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
+    plan.search.maximumCandidatesPerInput=1;plan.search.maximumSweeps=1;plan.search.n0CandidateRepeats=1;
+    plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
+    ServiceStart(f,plan);ServiceTicks(f);
+    const auto& service=f.owner->NativeTrainingController();
+    ASSERT_EQ(service.State(),NativeTrainingState::Finished)<<service.Reason();
+    ASSERT_EQ(service.Outcome(),completed?TrainingStatus::Exact:TrainingStatus::BudgetExhausted)<<service.Reason();
+    EXPECT_EQ(bool(service.Certificate()),completed);
+    const auto exported=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);const auto& package=exported.learnedState;
+    ASSERT_EQ(package.value("schema_version"),QJsonValue(8));EXPECT_EQ(exported.summary.value("schema_version"),QJsonValue(9));
+    EXPECT_EQ(package.value("historical_state").toObject().value("schema_version"),QJsonValue(window?6:5));
+    EXPECT_EQ(package.value("certificate").isNull(),!completed);
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-"+(window?"window5":"fixed4")+
+        (n0?"-N0":"-N1")+(completed?"-completed":"-stopped");
+    SavePortableObject(name.c_str(),"terminal-state8.json",package);SavePortableObject(name.c_str(),"terminal-summary9.json",exported.summary);
+    const auto epoch=service.ModelEpoch(),transcriptEpoch=service.TranscriptModelEpoch();const auto revision=f.Revision();
+    const auto referenceIds=service.CompositeReferenceGroupIds();const auto clock=f.Time();
+    auto prepared=PrepareNativeLearnedState(package,f.storage,f.environment,CompositePackageImplementation);
+    EXPECT_EQ(f.Time(),clock);EXPECT_FALSE(prepared->service.Search());EXPECT_EQ(bool(prepared->service.Certificate()),completed);
+    EXPECT_EQ(prepared->modelRevision,revision);EXPECT_EQ(prepared->service.ModelEpoch(),epoch);EXPECT_EQ(prepared->service.TranscriptModelEpoch(),transcriptEpoch);
+    EXPECT_EQ(prepared->service.CompositeReferenceGroupIds(),referenceIds);
+    const auto imported=f.owner->ImportNativeLearnedState(package,CompositePackageImplementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    EXPECT_EQ(f.Revision(),revision);EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());EXPECT_FALSE(f.owner->NativeTrainingController().Search());
+    const auto again=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+    EXPECT_EQ(again.learnedState.value("schema_version"),QJsonValue(8));EXPECT_EQ(again.learnedState.value("terminal_event"),package.value("terminal_event"));
+    EXPECT_EQ(again.learnedState.value("terminal_journal"),package.value("terminal_journal"));
+    EXPECT_EQ(again.learnedState.value("model_revision"),package.value("model_revision"));EXPECT_EQ(again.learnedState.value("model_epoch"),package.value("model_epoch"));
+    EXPECT_EQ(again.learnedState.value("certificate"),package.value("certificate"));
+}
+}
+TEST(NativeTerminalCompositePackage,ClassicFixedN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,true,false);}
+TEST(NativeTerminalCompositePackage,BranchFixedN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,true,false);}
+TEST(NativeTerminalCompositePackage,ClassicFixedN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,false,false);}
+TEST(NativeTerminalCompositePackage,BranchFixedN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,false,false);}
+TEST(NativeTerminalCompositePackage,ClassicWindowN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,false);}
+TEST(NativeTerminalCompositePackage,BranchWindowN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,false);}
+TEST(NativeTerminalCompositePackage,ClassicWindowN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,false,false);}
+TEST(NativeTerminalCompositePackage,BranchWindowN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,false,false);}
+TEST(NativeTerminalCompositePackage,ClassicFixedCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,true,true);}
+TEST(NativeTerminalCompositePackage,BranchFixedCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,true,true);}
+TEST(NativeTerminalCompositePackage,ClassicWindowCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,true);}
+TEST(NativeTerminalCompositePackage,BranchWindowCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,true);}

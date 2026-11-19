@@ -5,9 +5,10 @@
 активна. Полностью принят этап0; этапы1–12 частичны. Процент общей готовности
 не назначается: оставшиеся алгоритмические и режимные проверки имеют разный
 объём. Accepted root develop остаётся87e7da0205b6bb0d582f7b4f2551c935fd7f2350.
-Рабочая комбинация: Rootdbca86dda582925bcfe058ba0ebbf264afc7d55f /
-Pulsec95390d9ab220c1d794787dd7462a36ff565778d. Новейшие source-retention и
-historical-export изменения ещё не проверены. Адресно принятые gates относятся
+Рабочие ветки codex/timelearner-physical-model-data уже содержат source-retention,
+historical export и новый native portable boundary schema8/summary9. Этот код
+и расширенные интеграционные проверки ещё не приняты серверным gate.
+Адресно принятые gates относятся
 к Root3c5bfe01609a6e6bd290aa9697938e885d5904b6 / Pulse1d8fc24cdb19b4b0e399483d198314b84548f9ea.
 Верхние разделы определяют текущий статус; записи ниже раздела истории
 сохраняют состояния своих датированных попыток.
@@ -78,8 +79,13 @@ Global budget/deadline после edit мог оставить неизмере�
 Controller selection, полный native capture и explicit terminal restore с
 owner mirrors/C-state, readback и physical epoch адресно проверены на обоих
 серверах. Для обычных cold JSON возможность пока не включена. Новейший код
-сохранения исходного графа перед transaction и historical export context ещё
-нужно проверить; полный versioned export/import/replay и pipeline integration
+сохранения исходного графа перед transaction, historical export context и
+factory schema8/summary9 ещё нужно проверить. Factory разделяет historical
+proof и actual native model; import создаёт Finished DATA, без контроллерного
+checkpoint и живых полномочий. Подготовлены fresh-process, warm-control и
+tamper проверки, а также12 новых protocol4/5 cases для обеих топологий,
+N0/N1 и completed/stopped boundaries. Они ещё не выполнялись.
+Полная native приёмка, cold/runtime declarations и Python analysis integration
 остаются обязательной открытой частью.
 [Полный контракт](TerminalBestStateBoundary-20261118.ru.md).
 

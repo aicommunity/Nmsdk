@@ -2167,9 +2167,31 @@ TEST(NativeLearnedState,FreshProcessImport)
         ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;
         // A boundary export is taken before Reset clears temporary controller
         // state. Frozen evaluation must not depend on a surviving stop status.
-        const auto importedBoundary=(package["schema_version"]==QJsonValue(3) || package["schema_version"]==QJsonValue(4))?
+        const auto importedBoundary=(package["schema_version"]==QJsonValue(3) || package["schema_version"]==QJsonValue(4) || package["schema_version"]==QJsonValue(8))?
             target->ExportNativeLearnedState(stopped?"native-stopped-boundary-fixture-v1":"native-learned-boundary-fixture-v1"):QJsonObject{};
         const auto importedHistory=target->NativeTrainingController().CapacitanceHistory();
+        if(package["schema_version"]==QJsonValue(8)) {
+            EXPECT_EQ(importedBoundary.value("schema_version"),QJsonValue(8));
+            EXPECT_EQ(importedBoundary.value("terminal_journal"),package.value("terminal_journal"));
+            EXPECT_EQ(importedBoundary.value("terminal_event"),package.value("terminal_event"));
+            EXPECT_FALSE(target->NativeTrainingController().Search());
+            if(stopped) {
+                auto warm=target->NativeTrainingController().Plan();warm.search.runId="fresh-terminal-warm-control";
+                target->Reset();target->IsNeedToTrain=true;target->BeginNativeTraining(warm);
+                ASSERT_TRUE(target->NativeTrainingController().State()==NativeTrainingState::CapturingReferences ||
+                    target->NativeTrainingController().State()==NativeTrainingState::Searching)<<target->NativeTrainingController().Reason();
+                target->IsNeedToTrain=false;
+                ASSERT_EQ(target->NativeTrainingController().State(),NativeTrainingState::Finished);
+                ASSERT_EQ(target->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+                EXPECT_EQ(target->NativeTrainingController().SessionAttempt(),std::size_t(package.value("session_attempt").toDouble())+1);
+                const auto warmPackage=target->ExportNativeLearnedState("native-stopped-boundary-fixture-v1");
+                EXPECT_EQ(warmPackage.value("schema_version"),QJsonValue(8));
+                EXPECT_EQ(warmPackage.value("terminal_journal"),package.value("terminal_journal"));
+                EXPECT_EQ(warmPackage.value("model_revision"),package.value("model_revision"));
+                EXPECT_EQ(warmPackage.value("model_epoch"),package.value("model_epoch"));
+                Artifact("terminal_imported_warm_control.json",QJsonDocument(warmPackage).toJson());
+            }
+        }
         target->Build();target->Init();model->Init();model->Reset();
         ASSERT_TRUE(target->NativeModelEditFailure().empty())<<target->NativeModelEditFailure();
         auto neuron=target->template GetComponentL<NPulseNeuron>("Neuron",true);
@@ -2199,6 +2221,11 @@ TEST(NativeLearnedState,FreshProcessImport)
         EXPECT_EQ(NmsdkTools::IdentifyModel(neuron,{{&source->Output,"burst"}})["sha256"],package["model_revision"]);
         QJsonObject record{{"model",identity},{"certificate",stopped?QJsonValue(QJsonValue::Null):QJsonValue(EncodeTrainingCertificate(*target->NativeTrainingController().Certificate()))},
             {"probe",EncodeNativeProbeEvidence(*probe)},{"need",target->IsNeedToTrain.GetData()}};
+        if(package["schema_version"]==QJsonValue(8)) {
+            QJsonArray journal;for(const auto& e:target->NativeTrainingController().TerminalJournal())journal.append(e);
+            EXPECT_EQ(journal,package.value("terminal_journal"));record["terminal_journal"]=journal;
+            EXPECT_EQ(target->ImportedNativeCapacitanceState(),package.value("capacitance_state").toObject());
+        }
         if(package["schema_version"]==QJsonValue(2) || (package["schema_version"]==QJsonValue(3) || package["schema_version"]==QJsonValue(4)))
         {
             EXPECT_EQ(target->ImportedNativeCapacitanceState(),package["capacitance_state"].toObject());
@@ -6290,6 +6317,53 @@ TEST(NativeTrainingTermination,BranchN1SweepBudgetBoundary){NativeSweepBudgetBou
 
 namespace {
 enum class TerminalFixtureKind { Restore,ExternalStop,OwnerReset,NoEditAllowance,AttachRollback };
+template<class Owner> void NativeTerminalPortableBoundary(EditingRig<Owner>& rig,const QJsonObject& expectedModel)
+{
+    const auto clock=rig.environment->GetTime().GetTime();std::vector<NativeProbeSample> before;
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+        [&](const auto& sample){before.push_back(sample);}).status,NativeProbeStatus::Completed);
+    const auto exported=rig.learner->ExportNativeLearnedBoundary("native-stopped-boundary-fixture-v1");const auto& package=exported.learnedState;
+    Artifact(rig.name+"_terminal_package.json",QJsonDocument(package).toJson());
+    Artifact(rig.name+"_terminal_summary.json",QJsonDocument(exported.summary).toJson());
+    ASSERT_EQ(package.value("schema_version"),QJsonValue(8));EXPECT_TRUE(package.value("certificate").isNull());
+    EXPECT_EQ(exported.summary.value("schema_version"),QJsonValue(9));
+    EXPECT_EQ(exported.summary.value("actual_model_revision"),expectedModel.value("sha256"));
+    EXPECT_EQ(package.value("model_revision"),expectedModel.value("sha256"));
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const auto oldTime=rig.environment->GetTime().GetTime();
+    auto restored=PrepareNativeLearnedState(package,core.storage,core.environment,"native-stopped-boundary-fixture-v1");
+    EXPECT_EQ(rig.environment->GetTime().GetTime(),oldTime);EXPECT_EQ(rig.Revision(),expectedModel.value("sha256").toString().toStdString());
+    EXPECT_EQ(restored->service.State(),NativeTrainingState::Finished);EXPECT_FALSE(restored->service.Search());EXPECT_FALSE(restored->service.Certificate());
+    EXPECT_EQ(restored->service.ModelEpoch(),rig.learner->NativeTrainingController().ModelEpoch());
+    EXPECT_EQ(restored->service.TranscriptModelEpoch(),rig.learner->NativeTrainingController().TranscriptModelEpoch());
+    EXPECT_EQ(restored->parameters,rig.learner->ReadNativeParameters());EXPECT_EQ(restored->capacitanceState,rig.learner->OwnedNativeCapacitanceState());
+    // Rehashing the container cannot turn a substituted actual epoch or graph
+    // parameter into a valid learned model. Exercise the production importer.
+    for(int mutation=0;mutation<3;++mutation) {
+        auto damaged=package;
+        if(mutation==0)damaged["model_epoch"]=damaged.value("model_epoch").toDouble()+1.;
+        if(mutation==1){auto values=damaged.value("trained_inputs").toArray();auto p=values.at(0).toObject();p["resistance"]=p.value("resistance").toDouble()*1.01;values[0]=p;damaged["trained_inputs"]=values;}
+        if(mutation==2){auto physical=damaged.value("neuron").toObject();auto images=physical.value("class_definitions").toArray();ASSERT_FALSE(images.isEmpty());images.removeLast();physical["class_definitions"]=images;damaged["neuron"]=physical;}
+        damaged.remove("sha256");damaged["sha256"]=NmsdkTools::CanonicalModelDataSha256(damaged);
+        EXPECT_THROW(PrepareNativeLearnedState(damaged,core.storage,core.environment,"native-stopped-boundary-fixture-v1"),std::invalid_argument);
+    }
+    QTemporaryDir directory;ASSERT_TRUE(directory.isValid());const auto path=directory.path()+"/terminal.json",output=directory.path()+"/readback.json";
+    QFile serialized(path);ASSERT_TRUE(serialized.open(QIODevice::WriteOnly|QIODevice::NewOnly));ASSERT_GT(serialized.write(QJsonDocument(package).toJson()),0);serialized.close();
+    QProcess child;auto environment=LearnedStateChildEnvironment(rig.name+"_terminal",directory.path());
+    environment.insert("TIMELEARNER_LEARNED_IMPORT",path);environment.insert("TIMELEARNER_LEARNED_OUTPUT",output);
+    environment.insert("TIMELEARNER_LEARNED_START_US",QString::number(clock));child.setProcessEnvironment(environment);
+    child.setProgram(QString::fromStdString(NmsdkTests::PulseLibTestExecutable()));child.setArguments({"--gtest_filter=NativeLearnedState.FreshProcessImport"});
+    child.start();ASSERT_TRUE(child.waitForStarted(30000));ASSERT_TRUE(child.waitForFinished(120000));
+    Artifact(rig.name+"_terminal_fresh_process.log",child.readAllStandardOutput()+child.readAllStandardError());ASSERT_EQ(child.exitCode(),0);
+    QFile result(output);ASSERT_TRUE(result.open(QIODevice::ReadOnly));const auto record=QJsonDocument::fromJson(result.readAll()).object();
+    EXPECT_EQ(record.value("model").toObject(),expectedModel);EXPECT_TRUE(record.value("certificate").isNull());EXPECT_EQ(record.value("need"),QJsonValue(false));
+    EXPECT_EQ(record.value("terminal_journal"),package.value("terminal_journal"));
+    Artifact(rig.name+"_terminal_fresh_process.json",QJsonDocument(record).toJson());
+    std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
+    for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)trace<<",soma"<<i;trace<<'\n';
+    for(const auto& sample:before){trace<<sample.time<<','<<sample.stimulus;for(double v:sample.potentials)trace<<','<<v;trace<<'\n';}
+    QFile csv(output+".csv");ASSERT_TRUE(csv.open(QIODevice::ReadOnly));const auto raw=csv.readAll();
+    EXPECT_EQ(raw,QByteArray::fromStdString(trace.str()));Artifact(rig.name+"_terminal_fresh_process.csv",raw);
+}
 template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int normalization,bool withCapacitance=false)
 {
     using Owner=ImportRollbackLearner<Learner>;
@@ -6302,6 +6376,7 @@ template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int 
     if(withCapacitance) {NativeCapacitanceCorrection correction;ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,correction));}
     auto plan=TrainingPlan(rig);plan.maximumWallSeconds=10.;plan.maximumModelSeconds=20.;
     plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
+    plan.recordCapacitanceHistory=withCapacitance;
     plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
     for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
     if(kind==TerminalFixtureKind::NoEditAllowance)plan.search.maximumEdits=2;
@@ -6380,12 +6455,13 @@ template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int 
     {
         EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);EXPECT_EQ(after,before);
         EXPECT_FALSE(service.TerminalSourceBoundary());
-        EXPECT_EQ(service.ModelEpoch(),previousEpoch);EXPECT_EQ(service.TerminalSelectionTransactions(),0u);return;
+        EXPECT_EQ(service.ModelEpoch(),previousEpoch);EXPECT_EQ(service.TerminalSelectionTransactions(),0u);
+        ASSERT_NO_FATAL_FAILURE(NativeTerminalPortableBoundary(rig,after));return;
     }
     Artifact(rig.name+"_terminal_selection.json",QJsonDocument(service.TerminalSelectionEvent()).toJson());
     ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();
     EXPECT_EQ(service.TranscriptModelEpoch(),transcriptEpoch);EXPECT_TRUE(service.RequiresTerminalSelectionArchive());
-    EXPECT_EQ(service.TerminalSelectionEvent()["portable_export_supported"],QJsonValue(false));
+    EXPECT_EQ(service.TerminalSelectionEvent()["portable_export_supported"],QJsonValue(true));
     EXPECT_EQ(service.TerminalSelectionEvent()["fresh_all_input_verification"],QJsonValue(false));
     const auto sourceBoundary=service.TerminalSourceBoundary();ASSERT_TRUE(sourceBoundary);
     EXPECT_EQ(sourceBoundary->NeuronIdentity(),before);
@@ -6404,12 +6480,14 @@ template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int 
     if(kind==TerminalFixtureKind::NoEditAllowance)
     {
         EXPECT_EQ(after,before);EXPECT_EQ(service.TerminalSelectionEvent()["status"],QJsonValue("budget_exhausted"));
-        EXPECT_EQ(service.TerminalSelectionTransactions(),0u);EXPECT_EQ(service.ModelEpoch(),previousEpoch);return;
+        EXPECT_EQ(service.TerminalSelectionTransactions(),0u);EXPECT_EQ(service.ModelEpoch(),previousEpoch);
+        ASSERT_NO_FATAL_FAILURE(NativeTerminalPortableBoundary(rig,after));return;
     }
     if(kind==TerminalFixtureKind::AttachRollback)
     {
         EXPECT_EQ(after,before);EXPECT_EQ(service.TerminalSelectionEvent()["status"],QJsonValue("rejected"));
-        EXPECT_EQ(service.TerminalSelectionTransactions(),1u);EXPECT_EQ(service.ModelEpoch(),previousEpoch+1);return;
+        EXPECT_EQ(service.TerminalSelectionTransactions(),1u);EXPECT_EQ(service.ModelEpoch(),previousEpoch+1);
+        ASSERT_NO_FATAL_FAILURE(NativeTerminalPortableBoundary(rig,after));return;
     }
     EXPECT_EQ(service.TerminalSelectionEvent()["status"],QJsonValue("restored"));
     EXPECT_EQ(after,selected->NeuronIdentity());EXPECT_EQ(service.ModelEpoch(),previousEpoch+1);
@@ -6422,10 +6500,7 @@ template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int 
         PeakSelectionPolicy::AssignedBurstWave,true,false,[&](const auto& sample){replay.push_back(sample);});
     ASSERT_EQ(observed.status,NativeProbeStatus::Completed);
     SameNativeWave(measuredWaves.at(selected->Selection().candidate.trialId),replay);
-    std::string exportReason;
-    try{rig.learner->ExportNativeLearnedState("native-terminal-restore-fixture-v1");}
-    catch(const std::invalid_argument& error){exportReason=error.what();}
-    EXPECT_EQ(exportReason,"terminal_selection_requires_versioned_export");
+    ASSERT_NO_FATAL_FAILURE(NativeTerminalPortableBoundary(rig,after));
 }
 }
 TEST(NativeTerminalSelection,ClassicN0DeadlineRestoresFullMeasuredModel){NativeTerminalRestore<NNeuronTimeLearner>(TerminalFixtureKind::Restore,0);}
