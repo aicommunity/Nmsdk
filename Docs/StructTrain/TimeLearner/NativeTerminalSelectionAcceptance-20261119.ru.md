@@ -99,3 +99,13 @@ Native A8 завершён78/78; его полный primary опубликов�
 Частичное отключение, дубли, чужой stimulus и неверный slot остаются ошибками.
 Это повторяет штатный контракт NativeModelBuilder/CandidateWindowProposalReplay;
 модель и научные допуски не меняются. Исправление требует повторного DATA gate.
+
+Парный Console control завершён4/4 cases: два completed и два настоящих restored
+Train,14 native операций,16 frozen наблюдений, обе test methods PASS. Полный
+primary опубликован вместе с исходным отклонённым DATA36 и N4 A/B декларацией;
+ошибки DATA36 не переписаны как успешные. После этого контроля production run_job
+допускает explicit terminal Train только с contained process policy. Общая
+рекомендация V2 и приёмка всей режимной матрицы остаются открытыми. Интеграционный
+тест переведён на сам run_job Train и будет проверен этим же производственным
+путём. Исправлен оставшийся доступ к C0 legacy schema1 в terminal journal;
+отсутствие исторического поля по-прежнему не создаёт физический witness.

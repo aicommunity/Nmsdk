@@ -223,7 +223,7 @@ def _actual(package):
             _same(event[field],history[target] if field.startswith('search_') else package[target])
         if 'source_neuron_identity' in event:_same(event['source_neuron_identity'],source)
         if 'source_dataset_identity' in event:_same(event['source_dataset_identity'],history['dataset']['identity'])
-        if 'source_capacitance_state' in event:_same(event['source_capacitance_state'],history['capacitance_state'] or {})
+        if 'source_capacitance_state' in event:_same(event['source_capacitance_state'],_historical_capacitance(history) or {})
         if event['status'] in ('restored','already_current'):
             selected=event['selected'];_same(actual,selected['neuron_identity'])
             _same(package['dataset']['identity'],selected['dataset_identity'])

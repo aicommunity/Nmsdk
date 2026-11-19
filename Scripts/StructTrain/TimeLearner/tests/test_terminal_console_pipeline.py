@@ -2,8 +2,8 @@
 
 Sixteen N2 engineering cases cover unchanged completed boundaries and genuine
 changed-graph terminal restoration. They do not establish N4 selectivity.
-Train calls the public Console primitive while run_job's cold9 launch gate is
-still closed; all results pass the production execution/package readers.
+Train uses run_job's contained production path; the original paired control
+also checked the public Console primitive before this launch path was enabled.
 """
 from copy import deepcopy
 import json
@@ -16,7 +16,7 @@ from ..contained_process import inspect
 from ..model_identity import canonical_model_sha256 as digest
 from ..native_evidence import load, require
 from ..native_pipeline_worker import audit_execution, audit_run_manifest, run_job, validate_job
-from ..native_process_policy import execute_native, policy_for_reservation
+from ..native_process_policy import policy_for_reservation
 from ..process_runner import verify_runtime
 from ..resource_reservations import Reservations
 from ..runtime import applied_loader_environment
@@ -93,24 +93,10 @@ class TerminalConsolePipelineTest(unittest.TestCase):
             document = signed(document); path = root/(mode+'-job.json')
             path.write_text(json.dumps(document, indent=2, allow_nan=False)+'\n', encoding='utf-8')
             destination = root/'runs'/mode; destination.parent.mkdir(exist_ok=True)
-            if mode == 'train':
-                destination.mkdir()
-                with applied_loader_environment(self.runtime):
-                    process = execute_native(self.runtime, ['--app-ini', self.runtime['app_ini']['path'],
-                        '--timelearner-train', str(path), '--timelearner-output', str(destination/'native')],
-                        self.executable.parent, destination/'process', 600, policy)
-                self.assertEqual(process['execution'], 'completed', process)
-                self.assertEqual(process['runtime_provenance'], 'loaded_files_captured')
-                result = audit_execution('train', destination/'native', document)
-                self.assertIsNone(result['evaluation_verdict'])
-                (destination/'integration-audit.json').write_text(json.dumps(dict(
-                    source_job_sha256=document['sha256'], runtime_fingerprint=self.runtime['runtime_fingerprint'],
-                    analysis=result, native_process=process, scope='Actual public Console primitive, cold9 production launch gate retained',
-                    scientific_verdict=None), indent=2, allow_nan=False)+'\n', encoding='utf-8')
-            else:
+            with applied_loader_environment(self.runtime):
                 result = run_job(mode, path, source_path, self.runtime_path, destination, 600, process_policy=policy)
-                self.assertEqual((result['execution'], result['validity']), ('completed', 'valid'))
-                self.assertTrue(audit_run_manifest(destination/'run-manifest.json')['run_evidence_consistent'])
+            self.assertEqual((result['execution'], result['validity']), ('completed', 'valid'))
+            self.assertTrue(audit_run_manifest(destination/'run-manifest.json')['run_evidence_consistent'])
             self.assertTrue(inspect(destination/'process/contained')['all_processes_closed'])
             records.append(dict(operation=mode, output=str(destination), job_sha256=document['sha256']))
             return destination/'native'

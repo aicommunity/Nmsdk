@@ -488,12 +488,12 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     job = load(Path(job_path).resolve(strict=True))
     source_case = _load_source_case(mode, Path(source_path).resolve(strict=True)) if source_path is not None else None
     preflight = validate_job(mode, job, source_case)
-    # DATA and preflight can validate the new wire while its real Console
-    # integration is being accepted. Keep expensive cold9 Train closed until
-    # matching native execution/publication6 and reader gates have passed.
-    require(not (mode == 'train' and job['configuration'].get('schema_version') == 9),
-            'terminal_configuration_requires_runtime_pipeline_integration')
     policy = validate_policy(process_policy, maximum_wall_seconds)
+    # Native78 and paired Classic/Branch Console completed/restored controls
+    # admit the versioned wire. New terminal Train requires whole-group ownership;
+    # this does not recommend every controller/physics mode or certify convergence.
+    require(not (mode == 'train' and job['configuration'].get('schema_version') == 9) or policy is not None,
+            'terminal_training_requires_contained_process')
     require(mode != "physical-model-evaluate" or policy is not None, "physical_data_evaluation_requires_contained_process")
     runtime = load(Path(runtime_path).resolve(strict=True));executable = verify_runtime(runtime)
     require(number(maximum_wall_seconds) > 0, "invalid_pipeline_wall_budget")
