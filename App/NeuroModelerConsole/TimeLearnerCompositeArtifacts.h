@@ -30,6 +30,28 @@ private:
 };
 inline NativeCompositePublication PublishCheckedNativeCompositeArchive(const QString& output,const QJsonObject& package,QJsonArray& artifacts) {
     const auto schema=package.value("schema_version");
+    if(schema==QJsonValue(8)) {
+        // The actual restored model and its measured source are distinct.
+        // Publish the unchanged historical archive, but bind the receipt to
+        // the whole outer package, including its actual terminal model.
+        auto body=package;body.remove("sha256");
+        Require(package.value("sha256")==QJsonValue(NmsdkTools::CanonicalModelDataSha256(body)),
+            "terminal_publication_package_digest");
+        const auto history=Object(package.value("historical_state"));
+        auto historicalBody=history;historicalBody.remove("sha256");
+        Require(history.value("sha256")==QJsonValue(NmsdkTools::CanonicalModelDataSha256(historicalBody)),
+            "terminal_publication_historical_digest");
+        const auto historicalSchema=history.value("schema_version");
+        Require(historicalSchema.isDouble() && historicalSchema.toDouble()>=1. && historicalSchema.toDouble()<=7. &&
+            std::floor(historicalSchema.toDouble())==historicalSchema.toDouble(),"terminal_publication_recursive_history");
+        for(const auto* key:{"kind","state_kind","implementation_id","controller_version","calculate_mode",
+            "structure_build_mode","configuration","protocol","session_attempt","training_outcome","certificate"})
+            Require(package.value(key)==history.value(key),"terminal_publication_historical_metadata");
+        const auto published=PublishCheckedNativeCompositeArchive(output,history,artifacts);
+        const auto descriptor=published.Descriptor();
+        const auto deliveries=published.RecoveryDeliveries(history,descriptor);
+        return NativeCompositePublication(package,descriptor,deliveries);
+    }
     if(schema!=QJsonValue(5) && schema!=QJsonValue(6) && schema!=QJsonValue(7)) {
         Require(schema==QJsonValue(1) || schema==QJsonValue(2) || schema==QJsonValue(3) || schema==QJsonValue(4),
             "unsupported_composite_publication_package_schema");return NativeCompositePublication(package,QJsonValue(QJsonValue::Null),0);

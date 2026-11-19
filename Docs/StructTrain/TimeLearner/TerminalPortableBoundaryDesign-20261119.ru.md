@@ -168,6 +168,16 @@ reference packets, требуя реальные CSV для точного об�
 
 ## Проверки и следующий научный опыт
 
+После исходного Root d9b9df7 для A6 отдельно добавлена Console publication8:
+publisher публикует неизменённый historical measurement archive, но receipt
+удерживает весь actual outer package8. Проверяются оба digest и общие
+source metadata; history1–7, рекурсивный8 запрещён. Старые publication1–7
+сохраняют wire. Native assertions проверяют точное совпадение опубликованного
+index с embedded source и запрет подстановки history/изменённого actual package
+в receipt. Эта правка не входит в уже работающий A6 и ещё не собрана.
+Execution6, Python execution audit и фактический cold Console Train/Test
+остаются необходимыми; cold9 pipeline guard пока сохраняется.
+
 Actual8 на неизменном A5 runtime отделены от original60: исходный worker
 остановился после59/60, поэтому новый owned gate выполняет все8 самостоятельно.
 Runtime/native source не обновляются. Первые два Fixed N0 случая подтвердили

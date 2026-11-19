@@ -5121,6 +5121,18 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
     EXPECT_EQ(package.value("certificate").isNull(),!completed);
     const auto name=std::string(configured?"configured9-":"")+(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-"+(window?"window5":"fixed4")+
         (n0?"-N0":"-N1")+(completed?"-completed":"-stopped");
+    QTemporaryDir publicationDirectory;ASSERT_TRUE(publicationDirectory.isValid());QJsonArray publishedArtifacts;
+    const auto publication=NmsdkWorker::PublishCheckedNativeCompositeArchive(publicationDirectory.path(),package,publishedArtifacts);
+    ASSERT_TRUE(publication.Descriptor().isObject());
+    EXPECT_EQ(publication.RecoveryDeliveries(package,publication.Descriptor()),0u);
+    const auto descriptor=publication.Descriptor().toObject();
+    QFile publishedIndex(QDir(publicationDirectory.path()).filePath(descriptor.value("path").toString()));
+    ASSERT_TRUE(publishedIndex.open(QIODevice::ReadOnly));
+    EXPECT_EQ(QJsonDocument::fromJson(publishedIndex.readAll()).object(),historicalState.value("measurement_archive").toObject());
+    auto substituted=package;substituted["model_revision"]="other-actual-model";substituted.remove("sha256");
+    substituted["sha256"]=NmsdkTools::CanonicalModelDataSha256(substituted);
+    EXPECT_THROW(publication.RecoveryDeliveries(substituted,publication.Descriptor()),std::invalid_argument);
+    EXPECT_THROW(publication.RecoveryDeliveries(historicalState,publication.Descriptor()),std::invalid_argument);
     SavePortableObject(name.c_str(),"terminal-state8.json",package);SavePortableObject(name.c_str(),"terminal-summary9.json",exported.summary);
     const auto test=::testing::UnitTest::GetInstance()->current_test_info();ASSERT_TRUE(test);
     SavePortableObject(name.c_str(),configured?"configuration9-case.json":"terminal-case.json",{{"kind",configured?"native_configured_terminal_case":"native_terminal_portable_case"},{"schema_version",1},
