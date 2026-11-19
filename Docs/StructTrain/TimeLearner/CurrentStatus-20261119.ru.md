@@ -85,6 +85,9 @@ owner mirrors/C-state, readback и physical epoch адресно провере�
 
 Дальше: завершить и проверить portable переход, затем same-budget cold A/B
 и actual frozen8 с читаемыми графиками.
+Открытая реализация детализирована в
+[portable boundary design](TerminalPortableBoundaryDesign-20261119.ru.md):
+включая no-transition/Exact, ранние stops, warm journal и все protocol families.
 Параллельно завершить публикацию уже полученных heldout данных и графиков.
 Остальные требования этапов сохраняются.8/8 не является условием окончания
 рефакторинга; Exact требует свежей all-input проверки одной конечной модели.
