@@ -55,6 +55,10 @@ class NativeTerminalPhysicalDataTest(unittest.TestCase):
                     self.assertFalse(report[key])
                 self.assertIsNone(data['certificate']);self.assertIsNone(report['evaluation_verdict'])
                 self.assertEqual(fixture['destination_controller_epoch'], 0)
+                self.assertEqual(fixture['destination_controller_state'], 'idle')
+                self.assertEqual(fixture['frozen_destination_controller_state'], 'idle')
+                self.assertTrue(fixture['frozen_destination_has_data'])
+                self.assertFalse(fixture['frozen_destination_certificate_present'])
                 self.assertFalse(fixture['training_certificate_transferred'])
                 for key in ('historical_state', 'measurement_archive', 'terminal_journal', 'search_history', 'source_solo'):
                     self.assertNotIn(key, data)

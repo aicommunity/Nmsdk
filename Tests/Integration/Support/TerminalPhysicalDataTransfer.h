@@ -147,7 +147,13 @@ void CheckTerminalPhysicalDataTransfer(Fixture& f,const Plan& plan,const QJsonOb
         {"data_probe",EncodeNativeProbeEvidence(*dataResult)},{"maximum_sample_difference",largestDifference},
         {"response_columns",QJsonArray{"native_absolute_time","actual_input","source_potentials","data_potentials"}},
         {"response_rows",rows},{"recognition_source",recognition},{"recognition_model_data",frozenData},
-        {"source_response_excursion",excursion},{"destination_controller_epoch",0},
-        {"training_certificate_transferred",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+        {"source_response_excursion",excursion},
+        {"destination_controller_epoch",double(destination->NativeTrainingController().ModelEpoch())},
+        {"destination_controller_state",NativeTrainingStateName(destination->NativeTrainingController().State())},
+        {"frozen_destination_controller_state",NativeTrainingStateName(frozenDestination->NativeTrainingController().State())},
+        {"frozen_destination_has_data",frozenDestination->HasNativePhysicalModelData()},
+        {"frozen_destination_certificate_present",bool(frozenDestination->NativeTrainingController().Certificate())},
+        {"training_certificate_transferred",bool(destination->NativeTrainingController().Certificate())},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}});
 }
 }

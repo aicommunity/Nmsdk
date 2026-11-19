@@ -10,14 +10,17 @@
 
 На двух workers одновременно выполняются первоначальные cold N4 Train:
 
-- M40: Branch/On,425 записанных native probe packets в последнем срезе.
+- M40: Branch/On,547 записанных native probe packets в последнем срезе.
   [Точный handle и наблюдение](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/branch-on-observation.json).
-- Elder: Classic/On,7 записанных native probe packets в последнем срезе.
+- Elder: Classic/On,143 записанных native probe packets в последнем срезе.
   [Точный handle](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/classic-on-running.json).
 
 В обоих случаях supervisor и native kernel groups живы, последняя проба
 complete/valid, terminal результата ещё нет. Количество native packets не
-является процентом выполнения или сертификатом. Действует исходный
+является процентом выполнения или сертификатом. Срез проверен19.11 около16:58МСК;
+[readback обоих workers](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/status-readback-1658-msk.json).
+Серийный номер search в trial_id учитывает также изменения модели и не является
+счётчиком использованных logical probes. Действует исходный
 [A/B протокол](TerminalPolicyScienceAB-20261119.ru.md): CapturedPerInput,
 N1, sync0.02, amplitude1e−5/rel0, один sweep,24 candidates/input,
 160 logical probes,10000 model seconds; C-trim/PostTune/autoThreshold Off.
@@ -72,6 +75,11 @@ Heldout4 не отменяет FP исходной матрицы и не явл
 обучением. [Архив и audit](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/frozen-heldout4-primary.archive.json).
 Новых N4 результатов классификации текущих двух Train пока нет.
 Августовские визуальные4/8–6/8 сохраняются для своего исходного протокола.
+
+Работающие примеры уже пригодны для промежуточного научного отчёта и DOCX.
+Завершение N4 обучения с общим сертификатом исходных timing/amplitude допусков
+в текущей серии ещё не подтверждено. Систематическое сравнение контроллеров,
+режимов и физических профилей остаётся основной научной частью до итогового отчёта.
 
 ## Готовность этапов
 
