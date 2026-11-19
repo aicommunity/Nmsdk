@@ -98,11 +98,35 @@ def read_summary(staged, row):
     return _frozen(path, 64*1024**2)[0]
 
 
+def recorded_source_archive(package):
+    """Find raw composite data without replacing the actual terminal model."""
+    require(type(package) is dict and package.get('kind')=='timelearner_stopped_state' and
+            package.get('certificate') is None, 'recorded_diagnostic_requires_actual_stopped_composite')
+    version=package.get('schema_version')
+    if version==7:
+        return package['measurement_archive']
+    require(version==8 and type(version) is int, 'recorded_diagnostic_requires_actual_stopped_composite')
+    historical=package.get('historical_state')
+    require(type(historical) is dict and historical.get('schema_version') in (5,6,7) and
+            historical.get('kind')=='timelearner_stopped_state' and historical.get('certificate') is None,
+            'recorded_diagnostic_terminal_requires_composite_history')
+    return historical['measurement_archive']
+
+
+def audit_recorded_source(package, summary, *, external_resolver=None):
+    """Audit the complete outer state; historical data never acquires its epoch."""
+    recorded_source_archive(package)
+    if package['schema_version']==8:
+        from .terminal_package_evidence import audit_terminal_package
+        return audit_terminal_package(package,summary,{}, {},external_resolver=external_resolver)
+    from .candidate_window_package_evidence import audit_candidate_window_recovery_package
+    return audit_candidate_window_recovery_package(package,summary,external_resolver=external_resolver)
+
+
 def run_case(request, row, runtime_path, output):
     # DATA JSON declares a string path; the public file reader takes Path.
     # Normalize before the early capability gate as well as the runner call.
     runtime_path = Path(runtime_path)
-    from .candidate_window_package_evidence import audit_candidate_window_recovery_package
     from .composite_primary import capture_primary_blobs, write_primary_snapshot, filesystem_primary_resolver
     from .native_pipeline_worker import run_job
     from .phasea_matrix import extract
@@ -121,14 +145,11 @@ def run_case(request, row, runtime_path, output):
                               maximum_bytes=row.get('maximum_source_raw_bytes', 256*1024**2))
     package = parse_json_bytes(raw);summary_raw = read_summary(staged, row)
     summary = parse_json_bytes(summary_raw)
-    require(type(package) is dict and package.get('schema_version') == 7 and
-            package.get('kind') == 'timelearner_stopped_state' and package.get('certificate') is None,
-            'recorded_diagnostic_requires_actual_stopped7')
-    source_audit = audit_candidate_window_recovery_package(package, summary)
+    source_audit = audit_recorded_source(package, summary)
     require(len(package['configuration']['model']['inputs']) == 4,
             'recorded_diagnostic_requires_n4')
     source = output/(row['name']+'-source')
-    archive = package['measurement_archive']
+    archive = recorded_source_archive(package)
     references = [trial['primary_ref'] for group in archive['records'] for trial in group['raw_trials']]
     primary = capture_primary_blobs(archive['primary_blobs'], references, archive['maximum_total_primary_bytes'])
     write_primary_snapshot(primary, source)
@@ -139,7 +160,7 @@ def run_case(request, row, runtime_path, output):
     del raw, summary_raw
     # Embedded bytes have now become declared external source files. Future
     # audits must check those files, never silently replace a damaged mirror.
-    audit_candidate_window_recovery_package(package, summary,
+    audit_recorded_source(package, summary,
         external_resolver=filesystem_primary_resolver(source))
     model = package['configuration']['model']
     descriptor = dict(name=row['name'], model_revision=package['model_revision'],
