@@ -7,10 +7,34 @@ mandatory publication checks, not inferred from successful file creation.
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 
 
-def build(source, output):
+def _reviewed_catalog(path):
+    """Read the dated evidence review without promoting its provenance role."""
+    path=Path(path).resolve(strict=True)
+    raw=path.read_bytes();review=json.loads(raw)
+    if review.get('kind')!='timelearner_algorithm_document_evidence_review' or review.get('schema_version')!=1:
+        raise ValueError('known algorithm evidence review required')
+    cases=review['qualifying_examples'];seen=set()
+    for case in cases:
+        counts=case['counts']
+        if (case['id'] in seen or case['topology'] not in ('Classic','Branch') or
+            any(type(counts[k]) is not int or counts[k]<0 for k in ('TP','FP','FN','TN')) or
+            counts['TP']<1 or counts['TN']<2 or case.get('qualifies_user_tp_tn') is not True):
+            raise ValueError('qualified distinct algorithm examples required')
+        seen.add(case['id'])
+        threshold=case.get('threshold')
+        if threshold is not None and (type(threshold) not in (int,float) or not math.isfinite(threshold)):
+            raise ValueError('finite actual threshold required')
+        source=case['source']
+        if any(len(source[k])!=size for k,size in (('commit',40),('blob',40),('sha256',64))):
+            raise ValueError('versioned source evidence required')
+    return review,dict(path=str(path),sha256=hashlib.sha256(raw).hexdigest(),bytes=len(raw))
+
+
+def build(source, output, review=None):
     from docx import Document
     from docx.enum.table import WD_TABLE_ALIGNMENT, WD_CELL_VERTICAL_ALIGNMENT
     from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -23,6 +47,9 @@ def build(source, output):
     if output.exists():raise ValueError('new output directory required')
     content=json.loads((source/'content.json').read_text(encoding='utf-8'))
     evidence=json.loads((source/'evidence-register.json').read_text(encoding='utf-8'))
+    catalog,catalog_ref=_reviewed_catalog(review) if review is not None else (None,None)
+    supplement=json.loads((source/'next-edition.json').read_text(encoding='utf-8')) if catalog else None
+    edition=supplement['edition'] if supplement else content['edition']
     output.mkdir(parents=True);figures=output/'figures';figures.mkdir()
     common=content['common']
     font_root=Path('C:/Windows/Fonts')
@@ -64,11 +91,30 @@ def build(source, output):
         d.polygon([(700,1135),(890,1215),(700,1295),(510,1215)],fill='#e8eef4',outline='#555555',width=3)
         label(d,(700,1215),'Завершено',28,True)
         arrow(d,(890,1215),(1310,1215));arrow(d,(1310,1215),(1310,520));arrow(d,(1310,520),(1190,520))
-        label(d,(1110,1185),'нет',27);label(d,(1280,770),'ещё\nдействия',26)
+        label(d,(1110,1185),'нет',27);label(d,(1245,770),'ещё\nдействия',22)
         arrow(d,(700,1295),(700,1350));label(d,(750,1320),'да',27)
         box(d,(150,1350,1250,1475),'Finished и отдельный результат\nExact   SearchUnresolved   BudgetExhausted   Invalid',strong=True)
         label(d,(700,1520),'Edit и оценка домена выполняются до очередной пробы',27)
         path=figures/'training-flow.png';im.save(path);return path
+
+    def n0_flow():
+        im,d=canvas(1400,1400)
+        for text,y in [('Допустимый полный кандидат L и Ns',60),
+                       ('Native edit и effective readback',240),
+                       ('Измерить anchor и активный вход\nСобрать объявленную группу повторов',420),
+                       ('Проверить validity и revision\nСохранить измеренные остатки',600)]:
+            box(d,(150,y,1120,y+120),text)
+        for y in (180,360,540):arrow(d,(635,y),(635,y+60))
+        arrow(d,(635,720),(635,760))
+        d.polygon([(635,760),(920,850),(635,940),(350,850)],fill='#e8eef4',outline='#555555',width=3)
+        label(d,(635,850),'Допуски выполнены',28,True)
+        box(d,(800,1100,1350,1240),'Следующий вход\nЗатем финальная\nпроверка всех входов')
+        arrow(d,(920,850),(1260,850));arrow(d,(1260,850),(1260,1100));label(d,(1100,815),'да',27)
+        box(d,(100,1020,700,1180),'Ограниченная очередь\nсоседей Ns и геометрий')
+        arrow(d,(635,940),(635,1020));label(d,(700,975),'нет',27)
+        arrow(d,(100,1100),(50,1100));arrow(d,(50,1100),(50,120));arrow(d,(50,120),(150,120))
+        label(d,(700,1330),'Invalid → объявленное recovery или terminal outcome\nИсчерпан бюджет → BudgetExhausted',28)
+        path=figures/'n0-candidate-flow.png';im.save(path);return path
 
     def classes(component):
         im,d=canvas(1400,1130)
@@ -151,7 +197,8 @@ def build(source, output):
 
     def para(doc,text,style=None):return doc.add_paragraph(text,style=style)
     def heading(doc,text):doc.add_heading(text,level=1)
-    def page(doc,title):doc.add_page_break();heading(doc,title)
+    def page(doc,title):
+        doc.add_heading(title,level=1).paragraph_format.page_break_before=True
     def figure(doc,path,caption,width=6.35):
         p=doc.add_paragraph();p.alignment=WD_ALIGN_PARAGRAPH.CENTER
         p.add_run().add_picture(str(path),width=Inches(width))
@@ -209,18 +256,24 @@ def build(source, output):
         normal.paragraph_format.line_spacing=1.12
         doc.styles['Title'].font.size=Pt(22);doc.styles['Heading 1'].font.size=Pt(16)
         doc.styles['Caption'].font.size=Pt(9.5)
-        hp=sec.header.paragraphs[0];hp.text=component+'   '+content['edition']
+        hp=sec.header.paragraphs[0];hp.text=component+'   '+edition
         for r in hp.runs:r.font.size=Pt(9)
         fp=sec.footer.paragraphs[0];fp.alignment=WD_ALIGN_PARAGRAPH.CENTER;fp.add_run('Страница ')
         field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),'PAGE');fp._p.append(field)
         doc.add_paragraph(specific['title'],style='Title')
-        para(doc,content['edition'],style='Subtitle');para(doc,specific['lead']);para(doc,common['intro'])
+        para(doc,edition,style='Subtitle');para(doc,supplement[topology]['lead'] if supplement else specific['lead']);para(doc,common['intro'])
         heading(doc,'Критерий включения и семейство')
         para(doc,common['qualification']);equation(doc,'Рабочий вариант  ⇔  TP ≥ 1  ∧  TN ≥ 2')
-        rows=[('N1 калиброванный N2',2,0,0,2,'1 foil в 2 режимах')]
-        if topology=='branch':rows += [('N1 Fast terminal7200',1,3,0,4,'Исходные 8 паттернов'),('N1 Fast terminal21600',1,1,0,6,'8 положений target')]
+        if catalog:
+            labels=supplement['case_labels']
+            rows=[(labels[c['id']],*[c['counts'][k] for k in ('TP','FP','FN','TN')],
+                   '1 foil в 2 режимах' if c['unique_foil_patterns']==1 else '7 разных foil')
+                  for c in catalog['qualifying_examples'] if c['topology'].lower()==topology]
+        else:
+            rows=[('N1 калиброванный N2',2,0,0,2,'1 foil в 2 режимах')]
+            if topology=='branch':rows += [('N1 Fast terminal7200',1,3,0,4,'Исходные 8 паттернов'),('N1 Fast terminal21600',1,1,0,6,'8 положений target')]
         table(doc,['Вариант','TP','FP','FN','TN','Область'],rows,[2.05,.45,.45,.45,.45,2.65])
-        para(doc,common['family']);para(doc,specific['topology'])
+        para(doc,supplement['family'] if supplement else common['family']);para(doc,specific['topology'])
 
         page(doc,'Математическая постановка')
         para(doc,common['math_intro'])
@@ -236,6 +289,15 @@ def build(source, output):
         equation(doc,sub('N','min,i'),' ≤ ',sub('N','s,i'),' ≤ ',sub('N','max,i'),';   ',sub('N','s,i'),' ∈ ℕ')
         para(doc,specific['differences'])
 
+        if supplement:
+            page(doc,'Назначение пика обучающему импульсу')
+            for text in supplement['measurement_detail']:para(doc,text)
+            equation(doc,'N = 4  ⇒  N + 2 = 6 native проб')
+            equation(doc,sub('S','b'),' = множество необходимых импульсов вершины b')
+            equation(doc,'b ∈ ',sub('K','i'),'  ⇒  ',sub('S','b'),' = {i}')
+            equation(doc,'Выбранная амплитуда = max',parentheses('A(b), b ∈ ',sub('K','i')))
+            para(doc,'Последняя запись действует только после проверок неоднозначности, clipping и повторяемости. Она не разрешает выбирать общий максимум без установленной принадлежности.')
+
         page(doc,'Общий ход обучения')
         figure(doc,shared_flow,'Блок схема общего контура. Повтор распределён по native ticks; полный расчёт не вызывается из контроллера.',6.15)
         para(doc,'Остановка по бюджету или invalid observation сохраняет собственную причину. Свежая финальная проверка не обходится флагом готовности активного входа.')
@@ -244,7 +306,19 @@ def build(source, output):
         for line in common['pseudocode']:
             p=para(doc,line);p.paragraph_format.space_after=Pt(3)
             for run in p.runs:run.font.name='Courier New';run.font.size=Pt(9.5)
-        para(doc,common['n1']);para(doc,common['n0']);para(doc,common['statuses'])
+        para(doc,common['n1']);para(doc,supplement['n0_intro'] if supplement else common['n0']);para(doc,common['statuses'])
+
+        if supplement and topology=='classic':
+            page(doc,'Целочисленная нормализация N0')
+            for text in supplement['n0_detail']:para(doc,text)
+            equation(doc,sub('A','i'),' = A',parentheses(sub('L','i'),', ',sub('N','s,i'),'; эффективная модель'))
+            equation(doc,sub('N','s,i'),' ∈ ℕ;   ',sub('N','min,i'),' ≤ ',sub('N','s,i'),' ≤ ',sub('N','max,i'))
+            equation(doc,'max',parentheses(sub('A','i,1'),', …, ',sub('A','i,k')),' − min',parentheses(sub('A','i,1'),', …, ',sub('A','i,k')),
+                     ' = разброс повторов')
+            para(doc,'Разброс — дополнительная характеристика. Допуски должны выполняться для каждого объявленного повтора; усреднение не заменяет валидность отдельных измерений.')
+            page(doc,'Поиск кандидата N0')
+            figure(doc,n0_flow(),'Вложенная блок схема раскрывает узел поиска общего контура. Переход к следующему кандидату не подтверждает сходимость.',6.15)
+            para(doc,'UML общей службы ниже применима к N0 и N1: меняются нормализуемая переменная и политика кандидатов, а владение физикой и порядок scheduler остаются общими.')
 
         page(doc,'Структура компонентов')
         figure(doc,classes(component),'UML классов. Чёрный ромб обозначает композицию; белый ромб соответствует shared ownership поиска. Пунктир показывает зависимость адаптера.',6.35)
@@ -277,16 +351,24 @@ def build(source, output):
             ],[2.05,1.05,.5,.5,.5,1.4])
             para(doc,'Последний вход целевого паттерна приходится на 0.4900 с. В terminal7200 спайк раньше последнего входа: этот результат включён по историческому окну ответа, но показывает чувствительность к префиксу. В terminal21600 целевой спайк появляется после последнего входа. Молчание foil проверяется на полном окне, а не только вблизи предполагаемой вершины.')
             para(doc,'Во frozen-проверке 64 предъявлений модель и порог terminal21600 сохранены. В каждой из восьми перестановок получены TP=1 FP=1 FN=0 TN=6; ложный ответ сохраняется на phasea-row-4. Это восемь порядков одной модели, а не восемь независимых обучений. Базовые восемь записанных волн Elder совпали с M40 с максимальной абсолютной разностью 0.0; равенство всех последующих волн этим не утверждается.')
-        para(doc,specific['conclusion'])
+        para(doc,supplement[topology]['conclusion'] if supplement else specific['conclusion'])
+
+        if supplement:
+            for section in supplement[topology]['sections']:
+                page(doc,section['title'])
+                for text in section['paragraphs']:para(doc,text)
+                if 'table' in section:
+                    spec=section['table'];table(doc,spec['headers'],spec['rows'],spec['widths'])
+                for text in section.get('after_table',[]):para(doc,text)
 
         page(doc,'Границы вывода и обновление')
-        para(doc,common['limits']);para(doc,common['history']);para(doc,common['update'])
-        heading(doc,'Источники этой редакции')
+        para(doc,supplement['limits'] if supplement else common['limits']);para(doc,common['history']);para(doc,common['update'])
+        page(doc,'Источники этой редакции')
         for text in [
-            'PulseLib '+evidence['algorithm_code']['PulseLib'],
+            'Опорная версия описания PulseLib '+evidence['algorithm_code']['PulseLib'],
             'Rdk '+evidence['algorithm_code']['Rdk'],
-            'Runtime научных данных использует PulseLib '+evidence['algorithm_code']['science_runtime_PulseLib'],
-            'Core runtime и принятого PulseLib равны по проверенной source closure.',
+            'Runtime исходного N2 контроля использует PulseLib '+evidence['algorithm_code']['science_runtime_PulseLib'],
+            'Эквивалентность Core runtime и принятого PulseLib проверена для исходного N2 контроля; исторические варианты имеют собственные версии.' if catalog else 'Core runtime и принятого PulseLib равны по проверенной source closure.',
             'Формулы: Core/TimeLearner/BoundedTraining.cpp и FinalVerification.cpp.',
             'Управление: NativeTrainingService и NativeLearnerLifecycle; наблюдения: NativeProbeExecutor.',
             'Рабочий N2 model revision '+case['model_revision'],
@@ -297,13 +379,24 @@ def build(source, output):
         ]:
             p=para(doc,text)
             for r in p.runs:r.font.size=Pt(9.5)
+        if catalog:
+            para(doc,'Дополнения основаны на датированной сверке опубликованных отчётов и receipts. Она не заменяет независимый повторный анализ всех исторических первичных данных.')
+            for c in catalog['qualifying_examples']:
+                if c['topology'].lower()!=topology:continue
+                text=supplement['case_labels'][c['id']]+': '+c['source']['path']+'; root '+c['source']['commit']
+                p=para(doc,text)
+                for r in p.runs:r.font.size=Pt(9)
+            for text in supplement.get('additional_sources',[]):
+                p=para(doc,text)
+                for r in p.runs:r.font.size=Pt(9.5)
         path=output/filename;doc.save(path)
         manifests.append(dict(topology=topology,file=filename,bytes=path.stat().st_size,
             sha256=hashlib.sha256(path.read_bytes()).hexdigest(),equation_format='native_OMML',
-            render_and_visual_review_complete=False,scope='first maintained V2 N1 edition'))
+            render_and_visual_review_complete=False,scope='reviewed N0/N1 family and distinct legacy evidence' if catalog else 'first maintained V2 N1 edition'))
     metadata=dict(kind='timelearner_algorithm_docx_build',schema_version=1,documents=manifests,
         inputs={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in source.glob('*.json')},
         generated_binary_in_root_git=False,visual_acceptance_complete=False)
+    if catalog_ref:metadata['dated_evidence_review']=catalog_ref
     (output/'build.json').write_text(json.dumps(metadata,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     return metadata
 
@@ -311,4 +404,5 @@ def build(source, output):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source',type=Path,required=True);parser.add_argument('--output',type=Path,required=True)
-    args=parser.parse_args();print(json.dumps(build(args.source,args.output),ensure_ascii=False))
+    parser.add_argument('--review',type=Path,help='Dated reviewed example catalog for the next edition')
+    args=parser.parse_args();print(json.dumps(build(args.source,args.output,args.review),ensure_ascii=False))

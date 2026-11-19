@@ -1,0 +1,201 @@
+{
+  "observed_at_utc": "2026-11-18T20:11:53.239373+00:00",
+  "controls": {
+    "job": "s07-measured-boundary-sdk-elder-a1",
+    "controls": "b56917f547ec0d3bad287b09b2c8a9d0a9fe0c02",
+    "source": "/home/user/timelearner-refactor/source-measured-boundary-sdk-a1",
+    "root": "862837e8e45084449f8ad5ca787b201151af6251",
+    "namespace_files": 4300,
+    "cases": 14,
+    "canonical_launcher_pid": 1263270,
+    "native_build_started": false,
+    "scientific_verdict": null
+  },
+  "source": {
+    "source": "/home/user/timelearner-refactor/source-measured-boundary-sdk-a1",
+    "root": "862837e8e45084449f8ad5ca787b201151af6251",
+    "pulse": "5f6792fcd346326cab7ed5cd43eebc68e603b38c",
+    "source_closure": {
+      "root": {
+        "head": "862837e8e45084449f8ad5ca787b201151af6251",
+        "status": ""
+      },
+      "Bin": {
+        "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "status": ""
+      },
+      "Libraries/Nmsdk-MotionControlLib": {
+        "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "status": ""
+      },
+      "Libraries/Nmsdk-PulseLib": {
+        "recorded_gitlink": "5f6792fcd346326cab7ed5cd43eebc68e603b38c",
+        "head": "5f6792fcd346326cab7ed5cd43eebc68e603b38c",
+        "status": ""
+      },
+      "Libraries/Rdk-BasicLib": {
+        "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "status": ""
+      },
+      "Libraries/Rdk-CvBasicLib": {
+        "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "status": ""
+      },
+      "Libraries/Rdk-HardwareLib": {
+        "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+        "head": "de40b008e990105856726e01230dde19f42a90a9",
+        "status": ""
+      },
+      "Rdk": {
+        "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+        "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+        "status": ""
+      }
+    },
+    "child_commits": [
+      {
+        "path": "Rdk",
+        "commit": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+        "transport": "verified local Git object projection with independent hardlinks and exact shallow boundary"
+      },
+      {
+        "path": "Bin",
+        "commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "transport": "verified local Git object projection with independent hardlinks and exact shallow boundary"
+      },
+      {
+        "path": "Libraries/Rdk-BasicLib",
+        "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "transport": "verified local Git object projection with independent hardlinks and exact shallow boundary"
+      },
+      {
+        "path": "Libraries/Rdk-CvBasicLib",
+        "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "transport": "verified local Git object projection with independent hardlinks and exact shallow boundary"
+      },
+      {
+        "path": "Libraries/Rdk-HardwareLib",
+        "commit": "de40b008e990105856726e01230dde19f42a90a9",
+        "transport": "verified local Git object projection with independent hardlinks and exact shallow boundary"
+      },
+      {
+        "path": "Libraries/Nmsdk-MotionControlLib",
+        "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "transport": "verified local Git object projection with independent hardlinks and exact shallow boundary"
+      },
+      {
+        "path": "Libraries/Nmsdk-PulseLib",
+        "commit": "5f6792fcd346326cab7ed5cd43eebc68e603b38c",
+        "transport": "Git shallow fetch"
+      }
+    ],
+    "original_projection_clone_failure_preserved": true
+  },
+  "observation": {
+    "canonical": {
+      "worker/terminal.json": {
+        "operation_passed": true,
+        "operation": "native-canonical-preparation",
+        "heartbeat_errors": [],
+        "lease_release": "controller only after whole cgroup closure",
+        "selected_validation_scope_requires_source_review": true,
+        "scientific_verdict": null
+      },
+      "kernel_group": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "fd09d7f385402342b87644a1ca2f4f17d751ef85805b457f437842d9fcb93c1a",
+          "unit": "timelearner-ae2b2cd2-45e9-4dd6-b9ca-58cd6c5a39d2.service",
+          "invocation_id": "e9d610923c984547a19938e9561c157f",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ae2b2cd2-45e9-4dd6-b9ca-58cd6c5a39d2.service",
+          "initial_main_pid": 1266843,
+          "initial_start_ticks": "460158136",
+          "sha256": "3543ec4e004c4dccef93b281f26df5c507be31ca44e6d828e9d505cdc4f21a7b"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "38260",
+          "KillMode": "control-group",
+          "Description": "timelearner-ae2b2cd2-45e9-4dd6-b9ca-58cd6c5a39d2.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      },
+      "launch_log_tail": "STARTED {\"kind\": \"timelearner_contained_binding\", \"schema_version\": 1, \"request_sha256\": \"fd09d7f385402342b87644a1ca2f4f17d751ef85805b457f437842d9fcb93c1a\", \"unit\": \"timelearner-ae2b2cd2-45e9-4dd6-b9ca-58cd6c5a39d2.service\", \"invocation_id\": \"e9d610923c984547a19938e9561c157f\", \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ae2b2cd2-45e9-4dd6-b9ca-58cd6c5a39d2.service\", \"initial_main_pid\": 1266843, \"initial_start_ticks\": \"460158136\", \"sha256\": \"3543ec4e004c4dccef93b281f26df5c507be31ca44e6d828e9d505cdc4f21a7b\"}\n{\"controller\": {\"kind\": \"timelearner_process_result\", \"schema_version\": 2, \"execution\": \"completed\", \"reason\": \"exit_zero_and_whole_group_closed\", \"returncode\": 0, \"wall_seconds\": 79.40044989064336, \"model_time\": null, \"runtime_provenance\": \"loaded_files_captured\", \"mapping_error\": null, \"runtime_fingerprint\": \"c8ae4cd4b719121851ead1e2abb555df5e10be8493501bd0a3d5de59df872994\", \"ownership_scope\": \"bound_cgroup\", \"all_processes_closed\": true, \"scientific_verdict\": null, \"operational_diagnostics\": {\"kind\": \"timelearner_operational_diagnostics\", \"schema_version\": 1, \"policy\": \"owned-streams-v1\", \"status\": \"clear\", \"error_records\": 0, \"warning_records\": 0, \"unclassified_stderr_chunks\": 0, \"reasons\": [], \"examples\": [], \"streams\": [{\"path\": \"stdout.log\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, {\"path\": \"stderr.log\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}], \"contained_streams_match\": true, \"scientific_verdict\": null}}, \"worker_terminal\": {\"operation_passed\": true, \"operation\": \"native-canonical-preparation\", \"heartbeat_errors\": [], \"lease_release\": \"controller only after whole cgroup closure\", \"selected_validation_scope_requires_source_review\": true, \"scientific_verdict\": null}, \"scientific_verdict\": null}\n"
+    },
+    "native": {
+      "owned_native": {
+        "controller": "/home/user/timelearner-refactor/readbacks/s07-measured-boundary-sdk-elder-a1-controller",
+        "supervisor_identity": {
+          "pid": 1322921,
+          "start_ticks": "460190828",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "supervisor_identity_known": true,
+        "supervisor_live": true,
+        "outer": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "reason": "kernel_cgroup_observed",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "332136c807726db474b79440113ed123b674de177651a669a4bf8c55d11500d9",
+            "unit": "timelearner-de46affd-0bf2-4975-a8f3-1e5eea2d50eb.service",
+            "invocation_id": "834ba14a679e4d91a8ce481adf8bd534",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-de46affd-0bf2-4975-a8f3-1e5eea2d50eb.service",
+            "initial_main_pid": 1330166,
+            "initial_start_ticks": "460192191",
+            "sha256": "8355c5199e3a025db0492011937debd847e9bf3afcf459119ccfb157985d7b30"
+          },
+          "state": {
+            "Type": "exec",
+            "Restart": "no",
+            "RemainAfterExit": "yes",
+            "MainPID": "1330166",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-de46affd-0bf2-4975-a8f3-1e5eea2d50eb.service",
+            "MemoryMax": "8589934592",
+            "TasksMax": "128",
+            "KillMode": "control-group",
+            "Description": "TimeLearner contained attempt de46affd-0bf2-4975-a8f3-1e5eea2d50eb",
+            "LoadState": "loaded",
+            "ActiveState": "active",
+            "SubState": "running",
+            "InvocationID": "834ba14a679e4d91a8ce481adf8bd534"
+          },
+          "memory_max": 8589934592,
+          "tasks_max": 128,
+          "scientific_verdict": null
+        },
+        "unbound_outer_intent": false,
+        "result": null,
+        "scientific_verdict": null
+      },
+      "launch_log_tail": "{\"controller\": \"/home/user/timelearner-refactor/readbacks/s07-measured-boundary-sdk-elder-a1-controller\", \"supervisor\": {\"pid\": 1322921, \"start_ticks\": \"460190828\", \"boot_id\": \"648c6850-88c5-4e0d-8cd4-2129df4100e5\", \"uid\": 1000}, \"scientific_verdict\": null}\n"
+    },
+    "prepared_request_exists": true
+  }
+}

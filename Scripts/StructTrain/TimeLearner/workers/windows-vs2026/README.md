@@ -35,6 +35,15 @@ model export/import, owned process containment/cancellation and the production
 reader/publisher. Windows/Linux numerical comparisons need explicit tolerances;
 do not replace a failed exact-waveform comparison with a silent tolerance.
 
+Declare the compiled-platform test cohort before execution. The literal TEST
+inventory intentionally does not interpret C++ preprocessor conditions. In
+particular, `NativeJobSourceTransport/SymlinkSourceCannotReplaceTheOwnedSnapshot`
+is guarded by `#ifndef Q_OS_WIN`: retain it on Linux and record its exact source
+hash and guard as an explicit Windows exclusion. Keep this exclusion separate
+from failed, skipped or missing tests; none is a PASS. A JUnit expected-set
+mismatch rejects the gate and must not be repaired retrospectively. Preserve
+the failed attempt, prepare a new declaration and run all declared cases.
+
 
 ## Private .14 preparation (2026-11-08)
 

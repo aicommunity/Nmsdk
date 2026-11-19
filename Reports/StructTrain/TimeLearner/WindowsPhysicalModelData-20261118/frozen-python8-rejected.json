@@ -1,0 +1,45 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "files": {
+    "validation/unittest.log": "test_censoring_forbids_pooled_counts (Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_censoring_forbids_pooled_counts) ... ok\r\ntest_missing_duplicate_nonfinite_and_wrong_label_cannot_score (Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_missing_duplicate_nonfinite_and_wrong_label_cannot_score) ... ok\r\ntest_old_proof_scoring_role_does_not_accept_physical_data (Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_old_proof_scoring_role_does_not_accept_physical_data) ... ok\r\ntest_pipeline_uses_the_complete_data_source_without_history_siblings (Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_pipeline_uses_the_complete_data_source_without_history_siblings) ... ok\r\ntest_public_analyze_cli_preserves_data_only_status (Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_public_analyze_cli_preserves_data_only_status) ... FAIL\r\ntest_real_native_data_and_full_observations_without_training_authority (Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_real_native_data_and_full_observations_without_training_authority) ... ok\r\ntest_resigned_physics_and_false_proof_claims_are_rejected (Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_resigned_physics_and_false_proof_claims_are_rejected) ... ok\r\ntest_row_order_and_relocation_do_not_change_counts_or_identity (Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_row_order_and_relocation_do_not_change_counts_or_identity) ... ok\r\n\r\n======================================================================\r\nFAIL: test_public_analyze_cli_preserves_data_only_status (Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_public_analyze_cli_preserves_data_only_status)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\Projects\\TimeLearnerWorker\\source-frozen-physical-model-evaluation-win-a2\\Scripts\\StructTrain\\TimeLearner\\tests\\test_physical_model_data_evidence.py\", line 142, in test_public_analyze_cli_preserves_data_only_status\r\n    self.assertEqual(metrics, score_physical_model_data_evaluation(spec, observations, model))\r\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nAssertionError: {'kind': 'timelearner_analysis', 'schema_ve[2546 chars]None} != {'schema_version': 1, 'criterion': {'id': '[2365 chars]P'}]}\r\nDiff is 9064 characters long. Set self.maxDiff to None to see it.\r\n\r\n----------------------------------------------------------------------\r\nRan 8 tests in 2.098s\r\n\r\nFAILED (failures=1)\r\n",
+    "validation/result.json": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "windows-frozen-physical-data-python8-a2",
+      "package_fingerprint": "c85a3086904293adf959d8db7968947a2788db62c57a84d8e8b839d5eadece11",
+      "execution": "completed",
+      "assertion_status": "failed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_censoring_forbids_pooled_counts",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_missing_duplicate_nonfinite_and_wrong_label_cannot_score",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_old_proof_scoring_role_does_not_accept_physical_data",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_pipeline_uses_the_complete_data_source_without_history_siblings",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_public_analyze_cli_preserves_data_only_status",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_real_native_data_and_full_observations_without_training_authority",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_resigned_physics_and_false_proof_claims_are_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_row_order_and_relocation_do_not_change_counts_or_identity"
+      ],
+      "executed_tests": 8,
+      "failures": [
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_public_analyze_cli_preserves_data_only_status"
+      ],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {
+        "TIMELEARNER_PHYSICAL_DATA_DIR": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-frozen-physical-model-evaluation-data7-a2\\native-gate\\native",
+          "files": 10,
+          "fingerprint": "f9478de92acc729c70c8d391e6ae5d11e87c1c7edeb566e1447bb2b39fbabea3"
+        }
+      },
+      "scientific_verdict": null
+    },
+    "terminal.json": {
+      "python_checks_passed": false,
+      "expected_tests": 8,
+      "scientific_worker_admitted": false,
+      "scientific_verdict": null
+    }
+  }
+}

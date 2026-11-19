@@ -1,0 +1,100 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "be2873fc9656f0e4d05c3d9f7b8fe19f8dc4ab8a5a4f07542ede830e6eed6900",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "controls.json": {
+      "commit": "78a737b330f359c1ab64cd7ee46e81077a073212",
+      "directory": "C:\\Projects\\TimeLearnerWorker\\controls\\elder-retained-physical-export-a2-recovery-a1"
+    },
+    "native-process/result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "completed",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 47,
+      "wall_seconds": 341.1461442,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-275df860-62cf-4a4a-820a-c9803afdfaae"
+    },
+    "native-process-result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "completed",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 47,
+      "wall_seconds": 341.1461442,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-275df860-62cf-4a4a-820a-c9803afdfaae"
+    },
+    "terminal.json": {
+      "native_import_and_DATA_roundtrip_passed": true,
+      "recognition_test_done": false,
+      "scientific_worker_admitted": false,
+      "original_train_outcome_unchanged": true,
+      "scientific_verdict": null
+    },
+    "data-audit.json": {
+      "kind": "physical_model_data_audit",
+      "schema_version": 1,
+      "data_only": true,
+      "model_revision": "d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa",
+      "pattern_size": 4,
+      "branch": true,
+      "frequency_hz": 2000.0,
+      "threshold_path": "$.LTZone",
+      "threshold_classes": [
+        "TLNativeFast3F2000_LTZone"
+      ],
+      "effective_threshold": 100.0,
+      "source_training_evidence_checked": false,
+      "native_import_verified": false,
+      "training_certificate_transferred": false,
+      "calibration_confirmed": false,
+      "evaluation_verdict": null
+    },
+    "native-process/stdout.log": {
+      "bytes": 0,
+      "tail": ""
+    },
+    "native-process/stderr.log": {
+      "bytes": 0,
+      "tail": ""
+    },
+    "job_binding": {
+      "pid": 17108,
+      "creation_filetime": "134394826993999954",
+      "job_name": "Local\\TimeLearner-275df860-62cf-4a4a-820a-c9803afdfaae"
+    },
+    "kernel_job": {
+      "absent": true,
+      "error": 2
+    },
+    "kernel_process": {
+      "absent": true,
+      "error": 87
+    }
+  }
+}

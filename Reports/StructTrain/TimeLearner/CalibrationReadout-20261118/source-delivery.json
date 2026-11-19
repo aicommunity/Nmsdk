@@ -1,0 +1,84 @@
+{
+  "kind": "same_worker_immutable_git_code_projection",
+  "schema_version": 1,
+  "source": "/media/user/Data/TimeLearnerRefactor/source-calibration-readout-sdk-a1",
+  "records": [
+    {
+      "path": "Rdk",
+      "commit": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "donor": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a4/Rdk"
+    },
+    {
+      "path": "Bin",
+      "commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "donor": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a4/Bin"
+    },
+    {
+      "path": "Libraries/Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "donor": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a4/Libraries/Rdk-BasicLib"
+    },
+    {
+      "path": "Libraries/Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "donor": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a4/Libraries/Rdk-CvBasicLib"
+    },
+    {
+      "path": "Libraries/Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "donor": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a4/Libraries/Rdk-HardwareLib"
+    },
+    {
+      "path": "Libraries/Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "donor": "/media/user/Data/TimeLearnerRefactor/source-physical-model-data-sdk-a4/Libraries/Nmsdk-MotionControlLib"
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib",
+      "commit": "5f8b281fc1d679ae7927f7ad7410d3ff675a522a",
+      "donor": "/media/user/Data/TimeLearnerRefactor/requests/n0-branch-length-ab-a1-20261115/pulse.git"
+    }
+  ],
+  "source_closure": {
+    "root": {
+      "head": "6433f59f9e112d3806df7485cbfe5f305c149fc9",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "5f8b281fc1d679ae7927f7ad7410d3ff675a522a",
+      "head": "5f8b281fc1d679ae7927f7ad7410d3ff675a522a",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "status": ""
+    }
+  },
+  "scientific_verdict": null
+}

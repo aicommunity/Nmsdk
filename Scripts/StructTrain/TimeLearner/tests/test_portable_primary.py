@@ -13,7 +13,46 @@ import unittest
 
 from ..model_identity import canonical_model_sha256 as signed_digest
 from ..native_evidence import EvidenceError
-from ..portable_primary import ALIAS_ADAPTER, main, restore_native_bundle, create_native_bundle
+from ..portable_primary import ALIAS_ADAPTER, RETAIN_ALIASES, main, restore_native_bundle, create_native_bundle
+
+
+class RetainRegularAliasesTest(unittest.TestCase):
+    """A negative owner's byte archive must also be recoverable without pruning."""
+    def test_interrupted_owner_keeps_every_regular_member_in_both_archive_wires(self):
+        for deduplicated in (False, True):
+            with self.subTest(content_references=deduplicated), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary); source = root/'source'; source.write_bytes(b'closed interrupted log\n')
+                names = ['interrupted/native.events-log/EventsLog/NeuroModeler.INFO',
+                         'interrupted/native.events-log/EventsLog/retained-owner-log']
+                bundle = create_native_bundle({n: source for n in names}, root/'bundle',
+                    dictionary_bytes=8*1024**2, deduplicate_content=deduplicated)
+                archive = root/'bundle/primary.tar.xz'; before = archive.read_bytes()
+                with self.assertRaisesRegex(EvidenceError, 'explicit_adapter'):
+                    restore_native_bundle(root/'bundle/bundle.json', root/'default')
+                with self.assertRaisesRegex(EvidenceError, 'alias_owner_missing'):
+                    restore_native_bundle(root/'bundle/bundle.json', root/'pruned', compatibility=ALIAS_ADAPTER)
+                result = restore_native_bundle(root/'bundle/bundle.json', root/'retained',
+                    compatibility=RETAIN_ALIASES)
+                self.assertEqual(result['archive_members_verified'], len(bundle['members']))
+                self.assertEqual(result['retained_regular_files'], len(names))
+                self.assertEqual(result['omitted_redundant_aliases'], [])
+                self.assertFalse(result['native_execution_attested'])
+                self.assertIsNone(result['scientific_verdict'])
+                for name in names:
+                    path = root/'retained'/name
+                    self.assertTrue(path.is_file()); self.assertFalse(path.is_symlink())
+                    self.assertEqual(path.read_bytes(), source.read_bytes())
+                self.assertEqual(archive.read_bytes(), before)
+
+    def test_retention_still_rejects_corrupt_member_with_valid_archive_digest(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); source = root/'source'; source.write_bytes(b'retained bytes')
+            name = 'interrupted/native.events-log/EventsLog/NeuroModeler.INFO'
+            bundle = create_native_bundle({name: source}, root/'bundle', dictionary_bytes=8*1024**2)
+            bundle['members'][name]['sha256'] = '0'*64
+            (root/'bundle/bundle.json').write_text(json.dumps(bundle))
+            with self.assertRaisesRegex(EvidenceError, 'member_hash_mismatch'):
+                restore_native_bundle(root/'bundle/bundle.json', root/'out', compatibility=RETAIN_ALIASES)
 
 
 class PortablePrimaryTest(unittest.TestCase):

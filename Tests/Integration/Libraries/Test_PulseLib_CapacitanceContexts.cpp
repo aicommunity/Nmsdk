@@ -333,11 +333,54 @@ TEST(CapacitanceContexts, EmptyBranchIntervalsDoNotCreateRedundantDomainContexts
     std::size_t domains=0;
     DriveTraining(session,protocol,{},[&](const auto& action) {
         ++domains;ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
-        d.baseModelRevision=action.baseModelRevision;d.previewModelRevision="empty-interval";
+        // This fixture declares a true no-op preview. A different identity
+        // would describe different physical bindings, not an empty C edit.
+        d.baseModelRevision=action.baseModelRevision;d.previewModelRevision=action.baseModelRevision;
         d.geometry=action.parameters;d.inputIndex=action.inputIndex;d.minimumResistance=d.maximumResistance=10.;
         d.sourceAmplitude=1.;d.capacitance=action.capacitance;return d;
     });
     EXPECT_EQ(domains,1u);EXPECT_NE(session.Status(),TrainingStatus::Exact);
+}
+
+TEST(CapacitanceContexts, DuplicateCProposalsDoNotStartAnotherResistancePass)
+{
+    const auto protocol=Protocol(2,ProbeRouting::BranchSoloBurst);auto cfg=ContextConfig(Normalization::TipResistance);
+    cfg.bounds[0].minimumLength=1;cfg.bounds[0].maximumLength=2;
+    cfg.capacitanceSearch->maximumCursorElements=128;
+    BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}},true,ContextC0());
+    std::map<int,std::size_t> domains;
+    DriveTraining(session,protocol,{},[&](const auto& action) {
+        ++domains[action.parameters[0].length];
+        ResistanceDomainAssessment d;d.baseModelRevision=action.baseModelRevision;
+        d.previewModelRevision=action.baseModelRevision;d.geometry=action.parameters;d.inputIndex=action.inputIndex;
+        d.minimumResistance=d.maximumResistance=10.;d.sourceAmplitude=1.;d.capacitance=action.capacitance;
+        d.status=action.parameters[0].length==1?ResistanceDomainStatus::Available:ResistanceDomainStatus::Unavailable;
+        d.reason="controlled_domain_geometry";return d;
+    });
+    // Baseline and two non-unit C cursors have the same empty interval at L1.
+    // L2 is explicitly unavailable. No cursor issued a new measured point,
+    // hence none may buy an extra Rs pass solely from a duplicate proposal.
+    EXPECT_EQ(domains[1],3u);EXPECT_EQ(domains[2],3u);
+    EXPECT_EQ(session.AppliedEdits(),0u);EXPECT_NE(session.Status(),TrainingStatus::Exact);
+}
+
+TEST(CapacitanceContexts, EqualScalarsCannotSuppressADifferentNativePreviewModel)
+{
+    const auto protocol=Protocol(2,ProbeRouting::BranchSoloBurst);auto cfg=ContextConfig(Normalization::TipResistance);
+    cfg.bounds[0].minimumLength=cfg.bounds[0].maximumLength=1;
+    BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}},true,ContextC0());
+    std::size_t domains=0;
+    DriveTraining(session,protocol,{},[&](const auto& action) {
+        ++domains;ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
+        d.baseModelRevision=action.baseModelRevision;d.previewModelRevision="normalized-physical-bindings";
+        d.geometry=action.parameters;d.inputIndex=action.inputIndex;d.minimumResistance=d.maximumResistance=10.;
+        d.sourceAmplitude=1.;d.capacitance=action.capacitance;return d;
+    });
+    EXPECT_EQ(session.AppliedEdits(),1u);EXPECT_EQ(domains,2u);
+    EXPECT_TRUE(std::any_of(session.Evidence().begin(),session.Evidence().end(),[](const auto& e) {
+        return e.modelRevision!="initial";
+    }));
+    EXPECT_NE(session.Status(),TrainingStatus::Exact);
 }
 
 }

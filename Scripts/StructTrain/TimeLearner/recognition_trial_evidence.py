@@ -36,9 +36,15 @@ class _TrialModel:
     calibrated_sha256: str | None = None
 
 
-def _prepare_trial_model(package, *, diagnostic=False):
+def _prepare_trial_model(package, *, diagnostic=False, physical_data=False):
     try:
         require(type(package) is dict, "unsupported_trial_model_package")
+        if physical_data:
+            require(not diagnostic, "physical_data_is_a_distinct_evaluation_role")
+            from .physical_model_data_evidence import audit_physical_model_data
+            model = audit_physical_model_data(package, frozen=True)
+            return _TrialModel(model["model_revision"], model["pattern_size"], model["branch"],
+                model["frequency_hz"], model["threshold_path"], model["threshold_classes"])
         diagnostic_candidate = diagnostic and package.get("kind") == "timelearner_diagnostic_threshold_candidate"
         if diagnostic:
             source = package.get("source_recognition", {}) if diagnostic_candidate else package
@@ -197,7 +203,7 @@ def _audit_recognition_trial(observation, package, *, diagnostic=False):
 
 
 @contextmanager
-def _recognition_trial_batch(package, *, diagnostic=False):
+def _recognition_trial_batch(package, *, diagnostic=False, physical_data=False):
     """One call, one audited model; standalone auditing never trusts this scope.
 
     Physical scalars are copied into an immutable projection, so a caller cannot
@@ -205,7 +211,7 @@ def _recognition_trial_batch(package, *, diagnostic=False):
     digest guard refuses publication if the bound package has changed. There is
     no cross-call cache, user-controlled bypass flag or retained proof token.
     """
-    model = _prepare_trial_model(package, diagnostic=diagnostic)
+    model = _prepare_trial_model(package, diagnostic=diagnostic, physical_data=physical_data)
     expected = package["sha256"]
     yield lambda observation: _audit_recognition_observation(observation, model)
     require(package.get("sha256") == expected and expected == canonical_model_sha256(

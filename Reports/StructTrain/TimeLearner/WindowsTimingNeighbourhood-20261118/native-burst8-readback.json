@@ -1,0 +1,118 @@
+{
+  "output_exists": true,
+  "records": {
+    "terminal.json": {
+      "native_checks_passed": true,
+      "original_build_outcome_unchanged": true,
+      "scientific_verdict": null,
+      "scientific_worker_admitted": false
+    },
+    "gate-result.json": {
+      "assertion_status": "passed",
+      "execution": "completed",
+      "inventory": {
+        "assertion_status": "passed",
+        "expected": 8,
+        "failed_test_ids": [],
+        "observed": 8,
+        "sha256": "86615594beb502d6c04a6f23a09088c5dd7732ae4cb570b4bc25b79df16c5ea4"
+      },
+      "kind": "timelearner_native_test_gate_result",
+      "reason": "complete_declared_test_inventory",
+      "schema_version": 1,
+      "scientific_verdict": null,
+      "validity": "valid"
+    },
+    "native-gate/result.json": {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 8,
+        "observed": 8,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "86615594beb502d6c04a6f23a09088c5dd7732ae4cb570b4bc25b79df16c5ea4"
+      },
+      "scientific_verdict": null
+    },
+    "native-gate/process/owned-process.json": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-timing-neighbourhood-win-a2\\Test_PulseLib_StorageComponents.exe",
+      "creation_filetime": "134394421005962594",
+      "pid": 12840,
+      "job_name": "Local\\TimeLearner-dba6be40-cf90-4304-aa8d-66939811fc26",
+      "runtime_fingerprint": "f5286cad89b0ee5186b55485c201e45f0c5d3a62695de8fbc1d632978cde9d9d",
+      "suspended_until_limits_applied": true
+    },
+    "native-gate/process/result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "completed",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 47,
+      "wall_seconds": 73.47873029997572,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-dba6be40-cf90-4304-aa8d-66939811fc26"
+    }
+  },
+  "kernel_job": {
+    "name": "Local\\TimeLearner-dba6be40-cf90-4304-aa8d-66939811fc26",
+    "open_error": 2
+  },
+  "logs": [
+    {
+      "name": "native-gate/process/stdout.log",
+      "bytes": 1532,
+      "tail": "Note: Google Test filter = NativeBurstAssignment.Classic2000:NativeBurstAssignment.Branch2000:NativeBurstAssignment.Classic20000:NativeBurstAssignment.Branch20000:NativeBurstAssignment.ClassicFour2000:NativeBurstAssignment.BranchFour2000:NativeBurstAssignment.ClassicSix2000:NativeBurstAssignment.BranchSix2000\r\n[==========] Running 8 tests from 1 test suite.\r\n[----------] Global test environment set-up.\r\n[----------] 8 tests from NativeBurstAssignment\r\n[ RUN      ] NativeBurstAssignment.Classic2000\r\n[       OK ] NativeBurstAssignment.Classic2000 (2643 ms)\r\n[ RUN      ] NativeBurstAssignment.Branch2000\r\n[       OK ] NativeBurstAssignment.Branch2000 (1878 ms)\r\n[ RUN      ] NativeBurstAssignment.Classic20000\r\n[       OK ] NativeBurstAssignment.Classic20000 (18133 ms)\r\n[ RUN      ] NativeBurstAssignment.Branch20000\r\n[       OK ] NativeBurstAssignment.Branch20000 (17296 ms)\r\n[ RUN      ] NativeBurstAssignment.ClassicFour2000\r\n[       OK ] NativeBurstAssignment.ClassicFour2000 (4699 ms)\r\n[ RUN      ] NativeBurstAssignment.BranchFour2000\r\n[       OK ] NativeBurstAssignment.BranchFour2000 (2157 ms)\r\n[ RUN      ] NativeBurstAssignment.ClassicSix2000\r\n[       OK ] NativeBurstAssignment.ClassicSix2000 (18500 ms)\r\n[ RUN      ] NativeBurstAssignment.BranchSix2000\r\n[       OK ] NativeBurstAssignment.BranchSix2000 (5970 ms)\r\n[----------] 8 tests from NativeBurstAssignment (71287 ms total)\r\n\r\n[----------] Global test environment tear-down\r\n[==========] 8 tests from 1 test suite ran. (71287 ms total)\r\n[  PASSED  ] 8 tests.\r\n"
+    },
+    {
+      "name": "native-gate/process/stderr.log",
+      "bytes": 0,
+      "tail": ""
+    }
+  ],
+  "primary_publication": {
+    "catalog": "experiments/2026-11-18/windows-native-burst/a1.json",
+    "record": {
+      "kind": "timelearner_windows_native_burst8_primary_acceptance",
+      "schema_version": 1,
+      "root": "93894ddfac0b0cf25fb5e87c4e2de3813d17587a",
+      "pulse": "52cb953c3dd153b8b3e5459ea9b54825e05a89a8",
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/fb/fb9f40baf154f0b88eacf8a9ed7d135e0ee9af349981f8c1c4bd6f1a3aa0656f",
+        "sha256": "fb9f40baf154f0b88eacf8a9ed7d135e0ee9af349981f8c1c4bd6f1a3aa0656f",
+        "bytes": 777433
+      },
+      "regular_members_verified": 67,
+      "junit_cases_verified": 8,
+      "failures": 0,
+      "skips": 0,
+      "original_build_accepted": false,
+      "closed_build_audit_passed": true,
+      "native_gate_passed": true,
+      "prior_sdk_primary_sha256": "889f2fd56f51b2e35de3c50168e4a78bbb2217c1483d600deb7c39ff4a222da9",
+      "control_heads": {
+        "native-controls": "d20b691701a53d129f1ef54679bc6d3af6b77880"
+      },
+      "scientific_worker_admitted": false,
+      "scientific_verdict": null
+    },
+    "primary_all_bytes_verified": true
+  }
+}

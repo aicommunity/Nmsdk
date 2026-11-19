@@ -1,0 +1,46 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "af9db7cddd6d179de6d99804a0597f1f3297653b340752d9b7284f35475c0675",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "job": "windows-frozen-physical-data-python8-a3",
+    "python_checks_passed": true,
+    "controls": "698b4896888f142ebbce0e6f062323f513605c68",
+    "validation": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "windows-frozen-physical-data-python8-a3",
+      "package_fingerprint": "04fa950ce5f30396fe5c1e79f4edfbff4f7de4a1b94305a8e14d37f90eceff4d",
+      "execution": "completed",
+      "assertion_status": "passed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_censoring_forbids_pooled_counts",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_missing_duplicate_nonfinite_and_wrong_label_cannot_score",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_old_proof_scoring_role_does_not_accept_physical_data",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_pipeline_uses_the_complete_data_source_without_history_siblings",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_public_analyze_cli_preserves_data_only_status",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_real_native_data_and_full_observations_without_training_authority",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_resigned_physics_and_false_proof_claims_are_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_physical_model_data_evidence.PhysicalModelDataEvidenceTest.test_row_order_and_relocation_do_not_change_counts_or_identity"
+      ],
+      "executed_tests": 8,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {
+        "TIMELEARNER_PHYSICAL_DATA_DIR": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-frozen-physical-model-evaluation-data7-a2\\native-gate\\native",
+          "files": 10,
+          "fingerprint": "f9478de92acc729c70c8d391e6ae5d11e87c1c7edeb566e1447bb2b39fbabea3"
+        }
+      },
+      "scientific_verdict": null
+    },
+    "process_execution": "completed",
+    "all_processes_closed": true,
+    "runtime_provenance": "loaded_files_captured",
+    "scientific_verdict": null
+  }
+}

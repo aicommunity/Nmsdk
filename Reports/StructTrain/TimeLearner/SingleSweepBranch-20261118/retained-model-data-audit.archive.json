@@ -1,0 +1,68 @@
+{
+  "catalog": "experiments/2026-11-18/single-complete-sweep-branch/retained-model-data-audit-a2.json",
+  "record": {
+    "kind": "timelearner_retained_stopped_model_DATA_audit_publication",
+    "schema_version": 1,
+    "original_job": "s10-single-complete-sweep-branch-elder-a3",
+    "original_failure": "owned_native_disk_budget",
+    "original_outcome_unchanged": true,
+    "audit_job": "s05-retained-stopped-export-audit-elder-a2",
+    "reader_root": "926dc94f4154be30546181ed55ede16f40349103",
+    "controls": "135b3170d0714cd6232ec9bace914df1a3e2ca92",
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/1a/1a6f182d7dd1dafd42b7e26bda333998db6f4f9e826cc5322532c030b31dc302",
+      "sha256": "1a6f182d7dd1dafd42b7e26bda333998db6f4f9e826cc5322532c030b31dc302",
+      "bytes": 482941
+    },
+    "full_DATA_audit": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/51/5133d2ed09979fbbc2fccee5bc1685b608b8e52df76eb756fcd4bfaa45234bc6",
+      "sha256": "5133d2ed09979fbbc2fccee5bc1685b608b8e52df76eb756fcd4bfaa45234bc6",
+      "bytes": 144319
+    },
+    "files": 51,
+    "data_audit_passed": true,
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "summary_checked": false,
+    "model_revision": "d26d9620dd453539c2446b41fcc2f07d971115bd045206b8dda7497f525d5caa",
+    "parameters": [
+      {
+        "length": 239,
+        "resistance": 8090169.943749473,
+        "synapses": 1
+      },
+      {
+        "length": 201,
+        "resistance": 8090169.943749473,
+        "synapses": 1
+      },
+      {
+        "length": 121,
+        "resistance": 8090169.943749473,
+        "synapses": 1
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "training_outcome": "budget_exhausted",
+    "training_reason": "maximum_sweeps_exhausted",
+    "logical_groups": 158,
+    "native_probes": 948,
+    "sampled_frames": 3413748,
+    "certificate": null,
+    "native_import_verified": false,
+    "classification_assessed": false,
+    "scientific_verdict": null
+  }
+}

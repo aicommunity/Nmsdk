@@ -1,0 +1,105 @@
+{
+  "job": "s11-fair-input-threshold-report-m40-a1",
+  "held_lease": {
+    "token": "3eb06b2a-cadd-4330-90ff-3b2b2cfcf442",
+    "job_id": "s11-fair-input-threshold-report-m40-a1",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python",
+      "pid": 2469972,
+      "start_ticks": "407772835",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1-controller",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-m40-a1-controller"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-report-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-threshold-report-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputThresholdReportA1-20261118",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FairInputThresholdReportA1-20261118"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/fixtures/expectations",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/fixtures/expectations"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/fixtures/runtime",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-report-a1/fixtures/runtime"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-large-summary-transport-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-large-summary-transport-a1"
+      }
+    ],
+    "state": "held",
+    "created": 1795002530.8718033,
+    "deadline": 1795005005.47045,
+    "updated": 1795004885.47045,
+    "release_note": null,
+    "demands": {
+      "disk_bytes": 8589934592,
+      "memory_bytes": 17179869184,
+      "slots": 1
+    },
+    "heartbeat_expired": false,
+    "owner_status": "identity_live",
+    "inspection_required": false,
+    "scientific_verdict": null
+  },
+  "kernel": {
+    "execution": "running",
+    "all_processes_closed": false,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "0f39da4da51517664f354b1a980c968bebe98e04a7e6a31c2708ca67e6623a72",
+      "unit": "timelearner-12031cef-c7a5-4f26-9c1d-16ae3b1005f2.service",
+      "invocation_id": "83fd38f99ade44e584bacdc389fc0cbd",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-12031cef-c7a5-4f26-9c1d-16ae3b1005f2.service",
+      "initial_main_pid": 2469972,
+      "initial_start_ticks": "407772835",
+      "sha256": "b6a0e83937894f0300949f1926de53c9d7bf71f5f2f7ed818181a51a41e733bd"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "2469972",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-12031cef-c7a5-4f26-9c1d-16ae3b1005f2.service",
+      "MemoryMax": "17179869184",
+      "TasksMax": "32",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 12031cef-c7a5-4f26-9c1d-16ae3b1005f2",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "83fd38f99ade44e584bacdc389fc0cbd"
+    },
+    "memory_max": 17179869184,
+    "tasks_max": 32,
+    "scientific_verdict": null
+  },
+  "report_completed": false,
+  "visual_acceptance_completed": false,
+  "scientific_verdict": null
+}

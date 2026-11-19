@@ -1,7 +1,9 @@
-"""Lossless native bundle restoration with an explicit legacy glog-alias adapter.
+"""Lossless native bundle restoration with explicit regular glog-alias policies.
 
 The source archive is never changed. The adapter omits only verified redundant
 alias bytes from a new derived tree; native artifact auditors stay unchanged.
+Interrupted runs without an owner manifest can retain every archived regular
+member. This proves bytes only and never restores an original symlink or owner.
 """
 import argparse
 import hashlib
@@ -15,6 +17,7 @@ from .model_identity import canonical_model_sha256
 from .native_evidence import EvidenceError, load, require
 
 ALIAS_ADAPTER = "dereferenced-glog-aliases-v1"
+RETAIN_ALIASES = "retain-regular-glog-aliases-v1"
 ALIASES = {"NeuroModeler."+s for s in ("INFO", "WARNING", "ERROR", "FATAL")}
 CONTENT_REFERENCE = "earlier-regular-member-sha256-size-v1"
 
@@ -136,15 +139,41 @@ def _bundle_version(bundle):
 
 
 def _alias_plan(root, members):
+    documents = {}
+    for name in members:
+        if _alias(name):
+            run = PurePosixPath(name).parents[2]
+            for relative in ('run-manifest.json', 'process/owned-process.json'):
+                key = (run/relative).as_posix()
+                require(key in members, 'bundle_alias_owner_missing')
+                raw = (root/key).read_bytes()
+                require({'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()} == members[key],
+                        'bundle_alias_owner_inventory_mismatch')
+                documents[key] = raw
+    return alias_inventory_plan(members, documents)
+
+
+def alias_inventory_plan(members, documents):
+    """The same explicit alias adapter over actual independently read bytes.
+
+    It authorizes only a redundant glog severity name and one same-owner log
+    already recorded by its signed run inventory. It attests no process.
+    """
+    from .native_evidence import parse_json_bytes
     plan = []
     for name in sorted(n for n in members if _alias(n)):
-        path = root/name
+        path = PurePosixPath(name)
         run = path.parents[2]
         manifest_path = run/"run-manifest.json"
         owner_path = run/"process/owned-process.json"
-        require(manifest_path.relative_to(root).as_posix() in members
-                and owner_path.relative_to(root).as_posix() in members, "bundle_alias_owner_missing")
-        manifest, owner = load(manifest_path), load(owner_path)
+        keys = [p.as_posix() for p in (manifest_path,owner_path)]
+        require(all(k in members and k in documents for k in keys), 'bundle_alias_owner_missing')
+        for key in keys:
+            raw = documents[key]
+            require(type(raw) is bytes and members[key] ==
+                    {'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()},
+                    'bundle_alias_owner_inventory_mismatch')
+        manifest, owner = [parse_json_bytes(documents[k]) for k in keys]
         require(manifest.get("sha256") == canonical_model_sha256(
                     {k: v for k, v in manifest.items() if k != "sha256"}), "bundle_alias_manifest_digest_mismatch")
         require(type(owner.get("pid")) is int and owner["pid"] > 0, "bundle_alias_owner_invalid")
@@ -158,27 +187,27 @@ def _alias_plan(root, members):
         require(len(indexed) == len(records) and path.relative_to(run).as_posix() not in indexed,
                 "bundle_alias_not_redundant")
         owner_record = indexed.get("process/owned-process.json")
-        require(owner_record == {"path": "process/owned-process.json", "bytes": owner_path.stat().st_size,
-                                  "sha256": _sha(owner_path)}, "bundle_alias_owner_inventory_mismatch")
+        require(owner_record == {"path": "process/owned-process.json", **members[owner_path.as_posix()]},
+                "bundle_alias_owner_inventory_mismatch")
         severity = path.name.split(".")[-1]
         pattern = re.compile(r"NeuroModeler\.[^/]+\.log\."+severity+r"\.\d{8}-\d{6}\."+str(owner["pid"]))
         candidates = []
-        for candidate in path.parent.iterdir():
+        for candidate in (PurePosixPath(n) for n in members if PurePosixPath(n).parent == path.parent):
             if pattern.fullmatch(candidate.name) is None:
                 continue
-            relative = candidate.relative_to(root).as_posix()
+            relative = candidate.as_posix()
             source_record = indexed.get(candidate.relative_to(run).as_posix())
             if (relative in members and members[relative] == members[name]
                     and source_record == {"path": candidate.relative_to(run).as_posix(), **members[relative]}):
                 candidates.append(candidate)
         require(len(candidates) == 1, "bundle_alias_target_missing_or_ambiguous")
-        plan.append({"omitted_alias": name, "retained_target": candidates[0].relative_to(root).as_posix(),
+        plan.append({"omitted_alias": name, "retained_target": candidates[0].as_posix(),
                      **members[name], "owner_pid": owner["pid"], "original_symlink_target_attested": False})
     return plan
 
 
 def restore_native_bundle(bundle_path, output, *, compatibility=None):
-    require(compatibility in (None, ALIAS_ADAPTER), "unknown_bundle_restoration_adapter")
+    require(compatibility in (None, ALIAS_ADAPTER, RETAIN_ALIASES), "unknown_bundle_restoration_adapter")
     bundle_path = Path(bundle_path)
     bundle_path = bundle_path.resolve(strict=True) if bundle_path.is_file() else bundle_path.absolute()
     bundle = load(bundle_path)
@@ -200,7 +229,7 @@ def restore_native_bundle(bundle_path, output, *, compatibility=None):
                 type(bundle['unique_content_bytes']) is int and
                 bundle['unique_content_bytes'] == sum(size for _, size in unique),
                 'bundle_content_reference_totals_invalid')
-    require(compatibility == ALIAS_ADAPTER or not any(_alias(n) for n in members),
+    require(compatibility in (ALIAS_ADAPTER, RETAIN_ALIASES) or not any(_alias(n) for n in members),
             "bundle_legacy_alias_requires_explicit_adapter")
     from .external_archive import locate
     archive = locate(bundle_path.parent/"primary.tar.xz")
@@ -261,7 +290,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("bundle", type=Path)
     parser.add_argument("output", type=Path)
-    parser.add_argument("--compatibility", choices=[ALIAS_ADAPTER])
+    parser.add_argument("--compatibility", choices=[ALIAS_ADAPTER, RETAIN_ALIASES])
     args = parser.parse_args(argv)
     try:
         result = restore_native_bundle(args.bundle, args.output, compatibility=args.compatibility)

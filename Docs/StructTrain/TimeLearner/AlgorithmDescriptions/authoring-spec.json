@@ -32,5 +32,20 @@
   },
   "status": "first maintained V2 N1 edition authored; final render acceptance recorded separately",
   "skill": "documents",
-  "render_gate": "render_docx.py plus visual review of every page"
+  "render_gate": "render_docx.py plus visual review of every page",
+  "next_edition": {
+    "source": "next-edition.json",
+    "review": "../AlgorithmDescriptionEvidenceReview-20261117.json",
+    "qualifying_examples": 7,
+    "classic_examples": 3,
+    "branch_examples": 4,
+    "new_measurement_detail": true,
+    "new_n0_flow": true,
+    "new_native_protocol_trials": 24,
+    "prior_baseline_trials": 8,
+    "generated": false,
+    "render_accepted": false,
+    "experiments_first": true,
+    "status": "sources and builder prepared; unchanged first DOCX edition remains the accepted publication"
+  }
 }

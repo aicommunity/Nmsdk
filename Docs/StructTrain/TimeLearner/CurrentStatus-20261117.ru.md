@@ -5,6 +5,293 @@
 не заменяя исходный план более узким набором проверок. Научные 8/8 не являются
 условием завершения рефакторинга.
 
+## Продолжение 18 ноября: перенос физической модели
+
+Подготовлен [отдельный полный model DATA export](PhysicalModelData-20261118.ru.md)
+в ветках `codex/timelearner-physical-model-data`. Он сохраняет весь native graph,
+storage images и Dataset, отделяя их от истории поиска. Четыре native cases
+проверят Classic/Branch roundtrip, waveform и запрет неподтверждённой authority.
+Код ещё не собран и не проверен на worker; frozen evaluation и проверка реальных
+обученных/C-trim/heterogeneous моделей впереди. Этап5 не объявлен завершённым.
+
+На23:34UTC 17 ноября Automats2 снова Disconnected, оба SSH polling завершились
+timeout на jump host. Последние подтверждённые Linux состояния относятся
+к22:26UTC; задания не перезапущены. Windows218 primary получены локально,
+их M40 publication всё ещё не подтверждена. Нового научного verdict нет.
+
+## Закрытый результат Windows на текущем проходе
+
+Новый SDK Root93894dd / Pulse52cb953 скомпилирован. Исходный build outcome
+остался отрицательным из-за descendant; независимый closed-build audit прошёл.
+После него выполнены218/218 C++ cases без skips/failures, включая две новые
+регрессии C/N1, no-op fixture и четыре timing/pair-budget cases.
+Подтверждены actual loaded modules и полное закрытие native Job.
+[Readback и область приёмки](WindowsTimingNeighbourhoodSdk-20261117.ru.md).
+
+Все71 primary files получены и проверены по byte hashes/JUnit IDs.
+Публикация в M40 archive пока не подтверждена: Automats2 отключился,
+подключение сохранённым профилем дало691. Два Linux Train последнее
+подтверждение running на22:26UTC; после восстановления нужны те же handles,
+без повторного запуска. Новых итогов классификации нет.
+
+Подготовка следующего Windows native burst8 не подтверждена из-за timeout;
+запуск этого задания не выполнялся. Linux SDK219 и parser kernel4 остаются
+prepared/unstarted. Полный Windows scientific-worker admission не объявлен.
+
+## Отдельная незавершённая работа после запуска SDK N1
+
+В ветке `codex/timelearner-json-byte-source` подготовлен
+[байтовый native JSON parser](NativeJsonByteSource-20261117.ru.md): убраны
+две явные полные копии файлового source, добавлены проверки BOM/duplicate keys
+и хвостовых данных. Четыре регрессии используют отдельный малый Qt-only target
+и включены также в полный StorageComponents. Они ещё не выполнены; улучшение
+peak RSS и импорт больших моделей этим изменением пока не подтверждены.
+Компактный model/history export остаётся отдельным открытым пунктом этапа5.
+Собираемый Windows SDK N1 и подготовленный Linux SDK219 этого нового кода
+не содержат; их проверка не будет выдаваться за проверку parser изменения.
+
+## Последнее подтверждение на 22:04 UTC
+
+Следующая проверка запущена параллельно на Windows из нового immutable SDK:
+Root `93894ddfac0b0cf25fb5e87c4e2de3813d17587a`, Pulse
+`52cb953c3dd153b8b3e5459ea9b54825e05a89a8`. Физически сверены4635 файлов
+и8 репозиториев. SDK build a2 действительно выполняется: kernel Job имеет7
+active processes, native log достиг7/534. Объявлены218 Windows cases с одним
+явным Linux-only исключением; это не пропуск упавшего C-context случая.
+Controls `3be359ac942f90a65ac0447bf30137fd45fe50fa`.
+
+Те же code/gitlinks доставлены на M40 как отдельный SDK a3/219 Linux cases,
+controls `cc55d1c13002a9c483848fb09e1b88e6a0cd38ec`. Он пока не запущен:
+действующий cold job сохраняет свой slot. Итого два прежних Train и одна
+сборка; ни одного нового scientific worker или принятого нового Exact.
+
+## Наблюдение Linux и предыдущего Windows SDK на 21:45 UTC
+
+Оба прежних cold Branch продолжаются. M40 записал 600 native JSON packets
+(100 полных composite групп), дошёл до входа0; Elder — 475 packets, вход1.
+Это промежуточное продвижение, без финального all-input gate или новой
+классификации. На Elder свободно около 2.99GB, на Data M40 — 395.6GB.
+Исходники, runtime и бюджеты этих заданий не менялись.
+
+На Windows SDK скомпилирован, но исходный build outcome отвергнут из-за
+оставшегося descendant; backend закрыл его. Независимый closed-build audit
+прошёл. В отдельном native a2 выполнено 216 cases: 215 прошли, один C-context
+case упал. Все четыре новых timing-neighbourhood / pair-budget cases прошли
+индивидуально. Общий gate не принят ещё и из-за ошибочно заявленного Linux-only
+случая. [Результаты и raw archive reference](WindowsTimingNeighbourhoodSdk-20261117.ru.md).
+
+Подготовлены [исправления допуска C/N1 кандидатов](N1CapacitanceCandidateAdmission-20261117.ru.md)
+и две отдельные регрессии. Они ещё не выполнены. Требуется новый SDK;
+старые immutable подготовки a1/216 и a2/217 этого кода не содержат.
+Ожидаемый новый cohort: Linux219 / Windows218 с одним явным platform exclusion.
+Ни один этап полного плана не объявлен завершённым, merge в develop не сделан.
+
+## Историческое подтверждение на 20:25 UTC
+
+К двум прежним Linux cold Branch добавлена параллельная сборка на Windows
+10.245.1.14: exact Rootddb2dcadd/Pulseeb5c07b,4635 файлов/8 repositories,
+cohort217 объявлен. Именованный Job реально открыт,7 active processes;
+компиляция дошла до76/534. Это **два обучения и одна сборка**, не три научных
+worker. Сборка и C++ gate ещё не приняты; Linux runtime не менялись.
+[Условия, реальные наблюдения и ограничения](WindowsTimingNeighbourhoodSdk-20261117.ru.md).
+
+Оба Branch job повторно наблюдаются running. В отдельной
+ветке подготовлен [N1 timing-neighbourhood candidate](N1TimingNeighbourhoodReview-20261117.ru.md):
+при timing-ready amplitude miss следующий длиновой кандидат берётся около
+реально измеренной точки и проходит обычные domain/edit/fresh probes.
+Новые controlled-response tests и отдельный SDK source доставлены на M40;
+cohort216 только объявлен, не выполнен. Текущие два Train используют старый код.
+
+Следующее отдельное исправление запрещает candidate phase с единственной
+оставшейся логической пробой: этого недостаточно для свежей пары anchor/input.
+Проверка предшествует domain/edit и не даёт менять граф без финансирования
+измерения. Production TEST включает восемь сценариев Classic/Branch × N0/N1
+× allowance1/3; runtime ещё не проверен. Ранее подготовленный SDK216 этого
+дополнения не содержит и не может служить его приёмкой. Полный terminal
+best-state restore и wall/model deadline этим исправлением не закрываются.
+Для обоих изменений подготовлен новый immutable SDK a2 с217 TEST cases,
+controls1364b7a8cd5fcf4ef2d936bf04d17210f54ae4b6. Он заменяет только ещё
+не запущенную подготовку216; текущие Train/runtime не меняются.
+
+Дополнение после выпуска Word: [редакция17 ноября](AlgorithmDescriptions/README.ru.md)
+опубликована во внешнем M40 archive. Classic14 страниц, Branch13; все27
+отрисованы и просмотрены. Включены7 подходящих примеров, общая часть N0/N1,
+составной измеритель, формулы, блок-схемы и UML. Непроверенные N1 изменения
+и слабые TP1/TN1 модели в число работающих не добавлялись.
+Кандидат Root3743979b/Pulse0255765 и контролы216 сохранены независимо от
+Word-публикации. Это не изменяет два текущих cold Train и не доказывает
+успешность пока не выполненного набора проверок.
+
+Полная цель активна; принят только этап0. Accepted Root develop остаётся
+87e7da0205b6bb0d582f7b4f2551c935fd7f2350. Ниже подтверждённый прогресс,
+без закрытия целиком этапов5/7/11.
+
+Все32 native inline/file наблюдения завершены. Production full-window A/B
+проверка2/2 прошла: для Classic и Branch совпали4001 отсчёт каждой из8 проб,
+Soma/LT/stimulus, события спайков и эффективная модель. Максимальная численная
+разность0. Оба контрольных состояния имеют TP1/FP6/FN0/TN1 — это слабые
+модели, не новый рабочий алгоритм по критерию TP≥1/TN≥2.
+
+Архив813 logical files (809 regular sources и4 дублированных glog aliases),
+1098311229 восстановленных байт, упакован в14172684 байта и опубликован
+во внешнем M40 archive. Streaming verifier прочитал все bytes и проверил
+четыре run inventories. Отдельный Linux gate17/17 без skips; предыдущая
+попытка15/16 сохранена как ошибка совместимости alias adapter.
+Metadata175 файлов опубликована отдельно. [Квитанция и компактные refs](../../../Reports/StructTrain/TimeLearner/NativeSourceTransport-20261117/native-ab-publication.json).
+[Исправление проверки архива](NativeABArchiveVerification-20261117.ru.md).
+Actual Test длинных моделей761851830/678423634 байт ещё впереди; одинаковый
+небольшой A/B не подменяет такой результат.
+
+В matched cap16 pair на M40 Classic закрылся с budget_exhausted, без
+сертификата:47 групп,281 native проба,21 измеренный кандидат (17 входа0,
+включая восстановленный best, и4 входа1). Остановка вызвана group **wall**
+time:601.1605с при лимите600, тогда как model time8.8165с при лимите20.
+Экспортирован actual L=[241,201,1,1], последний measured input1 ещё L3;
+предложенная L201 не измерена. Это не all-input результат и не доказательство
+физической недостижимости. [Точная запись часов](../../../Reports/StructTrain/TimeLearner/SingleSweepCold-20261117/classic-fair-deadline.json).
+Branch того же задания продолжает работать; runtime не менялся.
+
+На Elder admitted и наблюдается running новый cold Branch
+`s10-single-complete-sweep-branch-elder-a3`, controls
+ccb172580062996b16521530207edd18a02d191c. Native SDK0ef/Pulse5d, scriptsfce044eab.
+Один sweep, cap24, global160; валидный полный путь требует154 search probes
+плюс4 references:158 групп/948 native предъявлений. Group wall1800с,
+whole wall84600с, model10000с; прежние physics, f2000, stimulus, windows,
+CapturedPerInput, допуски и C-trimOff сохранены. Это несколько явно объявленных
+изменений исполнения, а не однофакторное сравнение с cap16. Результат неизвестен.
+Две предыдущие подготовки не создали native процессов: первая превысила
+суточный предел owner wall, вторая ошибочно связала native runtime со sparse
+Scripts checkout. Окончательное задание отдельно связывает полный SDK source
+и Scripts actor; существующие источники/задания не изменялись.
+[Контроль и область проверки](SingleSweepColdControl-20261117.ru.md).
+
+Следующие приоритеты: закончить эти cold наблюдения, проверять фактические
+stopped модели на8 паттернах, доработать measured search/полный best-state
+stop по реальным траекториям. Совместимый file source не устраняет повторную
+загрузку всей истории: model/history separation этапа5 остаётся открытым.
+Состояние Word на момент17:51UTC было первым выпуском8/9 страниц;
+выпуск следующей редакции и точные refs приведены в дополнении выше.
+
+## Историческое подтверждение на 15:11 UTC
+
+Ни один новый этап полного плана не объявлен завершённым. Accepted root
+develop остаётся `87e7da0205b6bb0d582f7b4f2551c935fd7f2350`.
+
+Длинные fresh cold Classic/Branch M40 закрыты с валидными экспортами,
+оба `budget_exhausted`, без TrainingCertificate. Classic завершил64
+кандидата только входа0;13 достигли временного допуска, ни один — обоих.
+Branch завершил24 кандидата входа2 и39 входа1; одна точка входа2 имеет
+остатки −0.5мс и −1.515e-7. Свежей финальной all-input проверки нет.
+[Разбор полных траекторий и следующие исправления](LongColdSearchInspection-20261117.ru.md).
+Полная первичная публикация этой пары и её8-pattern Test ещё не приняты.
+
+На M40 идёт отдельный matched cold pair
+`s10-finite-fair-input-cold-m40-a4`, controls
+`8832b21f76a66c3e870feddce4255456653679af`: локальный cap16 при прежнем
+общем128. Native runtime прежний, physics и допуски сохранены. Это опыт
+по распределению бюджета; его результат ещё неизвестен.
+
+Для полной передачи моделей761851830/678423634 байт подготовлен явный
+checked-file-source-v1. На Elder получены26/26 файловых/declaration/
+реального Console capability проверок. Первая сборка SDK выполнила86
+C++ случаев:85 прошли, один новый boundary test неверно ожидал domain
+для исходного графа. Исправлено только ожидание теста; повторная независимая
+SDK сборка a2 прошла86/86. Объединённый Python набор Root685f2d2e прошёл39/39
+без skips: transport/declarations, реальный Console capability, common-window
+DATA contracts и включённость manifest5 в архив. Проверены закрытие групп и
+освобождение leases этих проверок.133 файла подтверждений сохранены во внешнем
+архиве862160 байт; восстановлены и проверены все133 regular files.
+[Квитанции и точная область проверки](../../../Reports/StructTrain/TimeLearner/NativeSourceTransport-20261117/acceptance.json).
+
+Попытка Elder `s05-file-source-ab-native-elder-a1`, controls
+`f008f3d4ce4be01b027ce4cb249a42d3d4cb60ea`, закрыта с ошибкой после валидных8
+Classic-inline проб:TP1/FP6/FN0/TN1. File-case остановился до расчёта из-за
+string/Path на границе DATA→capability gate. Путь нормализован в production
+run_case; расширенный40-test набор Roote31ff3043 прошёл на Elder без skips,
+включая регрессию со строковым путём и настоящим legacy Console.
+
+Идёт новая попытка `s05-file-source-ab-native-elder-a2`, controls
+`54b66a14089982903b2df78811ac98d13dea195f`: оставшиеся24 наблюдения Classic-file,
+Branch-inline/file; валидный baseline8 не повторяется. Исходные bytes и вся
+история сверены с primary6a86940f…; native SDK0ef/Pulse5d и fingerprintd480a889…
+для обеих попыток одинаковы. Source моделей и заранее фиксированные прежние
+diagnostic пороги сохранены. A/B ещё не принят. Test новых больших моделей
+761851830/678423634 байт тоже впереди. Успех codec не означает model roundtrip,
+сходимость или научный PASS.
+
+A2 допущен и его outer group наблюдается running. Прежняя подготовка controls
+aec1f01e не прошла capacity preflight до создания kernel group/lease: свободного
+диска не хватало под сумму2ГиБ floor+2ГиБ output. После измерения завершённого
+baseline264347648 байт для трёх оставшихся cases объявлен output ceiling1ГиБ;
+floor2ГиБ и native memory сохранены. При превышении лимита опыт должен честно
+остановиться. Исходники, runtime, модели и scientific factors не менялись.
+
+Полный renderer четырёх условий Elder остановлен по timeout10800с:
+2087 PNG long-reset,1287 continuous, long-continuous0. Галерея целиком
+не принята, уникальный cache сохранён. Все32 native наблюдения отдельно
+опубликованы во внешнем primary67499f58…; их counts остаются1/1/0/6.
+Common-prefix comparison записан: reset4 совпадает с baseline2 на общей
+сетке, continuous отличается максимум на4.464e-14. Общий2-test report
+job не прошёл, поэтому эту частичную обработку не объявляем его приёмкой.
+
+Следующая Word-редакция всё ещё не создана и не прошла постраничную QA.
+Семь подготовленных примеров не следует путать с действующими8/9-страничными
+DOCX первой редакции. Приоритет сохраняется за обучением и actual Test.
+
+## Предыдущая сверка на 08:52 UTC
+
+Серия Elder завершена: baseline8 и новые24 пробы одной сохранённой Branch
+N4/N1 Fast3 модели дают TP1/FP1/FN0/TN6 в каждом из четырёх сочетаний
+окна2/4с и reset/preserve dynamics. Target отвечает через3мс после последнего
+входа; FP остаётся у phasea-row-4. Все группы закрыты, данные опубликованы
+в M40 archive. Это Same-Matrix diagnostic stopped-модели, не четыре cold Train
+и не независимая оценка. [Научный отчёт и primary refs](FrozenWindowResetScientificReport-20261117.ru.md).
+
+Девять контрактов общего native-префикса прошли на Elder. Реальный повторный
+аудит четырёх условий и галерея24 новых наблюдений ещё выполняются:
+`s11-frozen-protocol-analysis-report-elder-a2`, source9639794c. Равенство
+counts не подменяет пока не принятую проверку равенства waveform.
+
+Длинный свежий Classic на M40 завершился корректно с outcome budget_exhausted,
+128 search probes,132 measurement groups,792 native probes. Модель сохранена
+(761851830байт), native execution и run manifest completed/valid; сертификата
+нет. Начался запланированный Branch того же задания. Recognition Test новой
+Classic-модели ещё не выполнялся. Старый OOM4ГиБ не повторился в этой попытке;
+полное завершение обоих Train и всего плана этим не заявляется.
+
+Текущий принятый Root develop87e7da0205b6bb0d582f7b4f2551c935fd7f2350.
+Новый анализ в отдельной ветке codex/timelearner-frozen-common-window,
+HEAD9639794c066cc75847af7d13a1d781e29322ce90, ещё не merged. Gitlinks
+Pulse891259ea, Bin8cb6dba0, Rdkde413423 не менялись. Пользовательская
+копия E:/Science-Repo/nmsdk-git остаётся вне работы.
+
+Первая Word-редакция16ноября остаётся принятой. Для следующей подготовлены
+семь подходящих примеров, N0 глава и новые условия того же Branch-варианта;
+новый DOCX пока не опубликован. Вёрстка не задерживает серверные опыты.
+
+На09:47UTC файл реального сравнения общего native-префикса уже записан.
+В reset4 все8 первых двухсекундных волн численно совпали с baseline2;
+в continuous2/4 у7 из8 наблюдений максимальная разность Soma/LT potential
+составила всего4.463096558993129e-14. Все stimulus/spike ticks совпали,
+поздних tail spikes нет. Это численное сравнение выровненных отсчётов,
+не побайтовое равенство файлов и не свидетельство заметного изменения формы.
+Общая приёмка двухтестовой серии и галерея24 ещё не завершены.
+
+Разбор длинного Classic уточнил ограничение: экспортирована L=[51,1,1,1],
+а последняя измеренная CandidateEvidence относится к L50. Проверка
+maximumProbes в NextAction стояла после выдачи нового edit/domain action.
+В отдельных ветках подготовлен перенос этой проверки до формирования
+кандидата: Pulse5dabcb1b0c627d1de52bf2dccec35f33cb755e92,
+Rootf47eabad91d1c4d28efac851b29b1b3425d799ce. Regression покрывает
+Classic/Branch × N0/N1; серверная проверка пока не выполнена, merge не сделан.
+Текущий Branch остаётся на прежнем runtime. Stopped-модель Classic сохраняет
+свой actual graph для будущего diagnostic Test; её не называют лучшей
+измеренной точкой или результатом завершённого обучения.
+
+Ниже сохранены ранее принятые результаты и последовательность сегодняшних
+проверок. Их промежуточные сообщения о живых заданиях на03–04UTC заменяются
+последним подтверждением выше.
+
 ## Научные результаты и материалы для чтения
 
 Последний проверенный Branch N4/N1 Fast3 даёт TP=1, FP=1, FN=0, TN=6

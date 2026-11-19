@@ -1,0 +1,68 @@
+{
+  "kind": "timelearner_windows_terminal_data8_native78_status",
+  "schema_version": 1,
+  "execution": "running",
+  "validity": null,
+  "assertion_status": null,
+  "expected_cases": 78,
+  "extended_data_fixtures": 16,
+  "declaration": {
+    "prepared": true,
+    "started": false,
+    "action": "native",
+    "attempt": "windows-terminal-physical-data8-native78-a1",
+    "source": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a1",
+    "source_commit": "7047c695dbf33c9a2901e4209f9425ca727085e8",
+    "specification_blob": "c0511320478105fa591a553a5c03d1f3b534f524",
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\terminal-physical-data8-native78-win-a1",
+    "controls_commit": "462902ddbfacd110323001dd54f01382989a4a10",
+    "worker_name": "validate-native.py",
+    "launch_script": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a1\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\launch-sdk-build.ps1",
+    "kernel": {
+      "original_named_job_absent": true,
+      "original_main_absent": true,
+      "pid_reused": false
+    },
+    "original_build_accepted": false,
+    "original_execution": "descendants_remaining",
+    "scientific_worker_admitted": false,
+    "expected_cpp_tests": 78
+  },
+  "launch": {
+    "dispatched": true,
+    "action": "native",
+    "receipt": {
+      "scientific_verdict": null,
+      "tool_commit": "7047c695dbf33c9a2901e4209f9425ca727085e8",
+      "task": "TimeLearner-windows-terminal-physical-data8-native78-a1",
+      "specification_git_blob": "c0511320478105fa591a553a5c03d1f3b534f524",
+      "instance": "{68A17848-D32C-4FE5-8E98-72A31FA960B1}",
+      "kind": "windows_native_validation_dispatch",
+      "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-terminal-physical-data8-native78-a1",
+      "worker_sha256": "cf6ca9fbbccda7e688ed94291b509656fe53339351ed7c92521eb426228d336c"
+    },
+    "kernel": {
+      "original_named_job_absent": true,
+      "original_main_absent": true,
+      "pid_reused": false
+    },
+    "controls_commit": "462902ddbfacd110323001dd54f01382989a4a10",
+    "original_build_outcome_unchanged": true,
+    "scientific_verdict": null
+  },
+  "owned_process": {
+    "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a1\\Test_PulseLib_StorageComponents.exe",
+    "creation_filetime": "134395749860158523",
+    "pid": 15940,
+    "job_name": "Local\\TimeLearner-0649f0ca-7377-47fa-acff-7444bbc5a68d",
+    "runtime_fingerprint": "8eca0fda0259185d36eebf8a364315f6dac214dd5706d7dfbf16fd31b94f4f88",
+    "suspended_until_limits_applied": true
+  },
+  "kernel_observation": {
+    "name": "Local\\TimeLearner-0649f0ca-7377-47fa-acff-7444bbc5a68d",
+    "active_processes": 2,
+    "total_processes": 2
+  },
+  "observed_at": "2026-11-19T15:27:15.717828+00:00",
+  "scientific_verdict": null
+}

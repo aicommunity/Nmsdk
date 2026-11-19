@@ -1,0 +1,58 @@
+{
+  "catalog": "experiments/2026-11-18/single-complete-sweep-branch/interrupted-export-primary-a2.json",
+  "record": {
+    "kind": "timelearner_interrupted_single_sweep_export_primary",
+    "schema_version": 1,
+    "date": "2026-11-18",
+    "train_job": "s10-single-complete-sweep-branch-elder-a3",
+    "collector": "s11-single-sweep-interrupted-primary-elder-a2",
+    "collector_controls": "f92c38904d4bf8368899256c2c34bf7993efa355",
+    "original_controls": "ccb172580062996b16521530207edd18a02d191c",
+    "actor_root": "fce044eab6df1f7bc25356cf47fef5ef65e704b7",
+    "native_root": "0efbf25b074ca4dcf8439dde8160fa9e70697376",
+    "native_pulse": "5dabcb1b0c627d1de52bf2dccec35f33cb755e92",
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/cc/ccfc316d1da3d9ee84f66092e02c674153891c0aaef7a6ff44d9ca9cc711ec85",
+      "sha256": "ccfc316d1da3d9ee84f66092e02c674153891c0aaef7a6ff44d9ca9cc711ec85",
+      "bytes": 28666564
+    },
+    "bundle_manifest": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e9/e9bba1e4e58efccdb11abf7140aa51e48b35fab6a9444db27c96a7157200206b",
+      "sha256": "e9bba1e4e58efccdb11abf7140aa51e48b35fab6a9444db27c96a7157200206b",
+      "bytes": 611699
+    },
+    "provenance": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/34/34114e4990de1c94ab664870ab6333eb4818037dd204d3a41dc4d86c20fb7333",
+      "sha256": "34114e4990de1c94ab664870ab6333eb4818037dd204d3a41dc4d86c20fb7333",
+      "bytes": 601070
+    },
+    "provenance_files": 44,
+    "members": 2886,
+    "expanded_bytes": 1676661862,
+    "original_closed_units": 2,
+    "original_reason": "owned_native_disk_budget",
+    "original_disk_peak_increment": 1677475840,
+    "original_minimum_free": 1309941760,
+    "original_outcome_unchanged": true,
+    "native_retained_trial_packets": 948,
+    "native_retained_trial_csv": 948,
+    "source_state_bytes": 958170225,
+    "source_state_schema_validated": false,
+    "native_execution_record_available": false,
+    "training_completed": null,
+    "training_outcome": null,
+    "recognition_evaluation_done": false,
+    "scientific_verdict": null,
+    "generated_binary_in_root_git": false,
+    "original_files_rewritten": false
+  }
+}

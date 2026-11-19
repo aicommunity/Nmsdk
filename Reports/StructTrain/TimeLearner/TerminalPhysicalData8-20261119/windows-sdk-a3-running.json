@@ -1,0 +1,127 @@
+{
+  "kind": "timelearner_windows_sdk_prepared_and_running",
+  "schema_version": 1,
+  "observed_at": "2026-11-19T19:08:07.091928+00:00",
+  "job": {
+    "kind": "windows_owned_sdk_build",
+    "worker": "Windows14",
+    "job": "windows-terminal-physical-data8-sdk-build-a3",
+    "execution": "running",
+    "observed_at": "2026-11-19T19:08:07.091928+00:00",
+    "source_root": "cbc1ac36f6be9b7abe4edb52f1c2c8f6dffbad60",
+    "source_pulse": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+    "source_rdk": "cb6fe50da94ca9cbc9d5e4c0811d42b37b44a14a",
+    "source_directory": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a3",
+    "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-terminal-physical-data8-sdk-build-a3",
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\terminal-physical-data8-win-a3",
+    "controls_commit": "8f40c1fe4109e7a5d9afc58277b9474a29f5eb09",
+    "specification": {
+      "kind": "timelearner_private_windows_build",
+      "schema_version": 1,
+      "source_root": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a3",
+      "source_commit": "cbc1ac36f6be9b7abe4edb52f1c2c8f6dffbad60",
+      "namespace_git_blob": "c0eb2f86f4365d583d72e2b399a2a2a051511777",
+      "expected_source_files": 5092,
+      "installed_dependencies": "C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed",
+      "build_root": "C:\\Projects\\TimeLearnerWorker\\build-terminal-physical-data8-win-a3",
+      "runtime_root": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a3",
+      "output_root": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-terminal-physical-data8-sdk-build-a3",
+      "worker_sha256": "c31340a8883110ffdf1ac1a57056ada4063ab28d4208cf35652ebd0a1cc381a1",
+      "profile_sha256": {
+        "vcpkg.json": "444c0eae22c7ab2e3355b40d9f53793d3defe2b3cc59488eac40c7be1a52c92e",
+        "triplets/x64-windows-tl.cmake": "26eaf5b6e9ee2ffeb9a380b0a2d7148cff6374c9870f381e69e8c78aec144718"
+      },
+      "installed_status_sha256": "7e02dc6d4b89d5711c3b62c60d607430189dcc3c599da8581449c300bf0b63ca",
+      "visual_studio_root": "C:/Program Files/Microsoft Visual Studio/18/Community",
+      "compiler": "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe",
+      "vsdevcmd_sha256": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+      "vcpkg_commit": "1577f17ee57f42a0ef6d75bbb82cb37d0b76d7e8"
+    },
+    "namespace_blob": "c0eb2f86f4365d583d72e2b399a2a2a051511777",
+    "dispatch": {
+      "scientific_verdict": null,
+      "tool_commit": "cbc1ac36f6be9b7abe4edb52f1c2c8f6dffbad60",
+      "task": "TimeLearner-windows-terminal-physical-data8-sdk-build-a3",
+      "specification_git_blob": "7c88f5db6f7130a9c58168dc5918c915e4b71bf4",
+      "instance": "{EDE141D9-B168-4C4B-8036-DCB88C7FE603}",
+      "kind": "windows_sdk_build_dispatch",
+      "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-terminal-physical-data8-sdk-build-a3",
+      "worker_sha256": "c31340a8883110ffdf1ac1a57056ada4063ab28d4208cf35652ebd0a1cc381a1"
+    },
+    "owned_process": {
+      "executable": "C:\\Windows\\System32\\cmd.exe",
+      "creation_filetime": "134395875586617531",
+      "pid": 4904,
+      "job_name": "Local\\TimeLearner-a9c9185e-55de-4a96-9846-fedf0d4060f9",
+      "runtime_fingerprint": "cb74f838d9ae6df03e1068655aa4b61a27e62454332434caa51095288d9bc6f6",
+      "suspended_until_limits_applied": true
+    },
+    "kernel_observation": {
+      "name": "Local\\TimeLearner-a9c9185e-55de-4a96-9846-fedf0d4060f9",
+      "active_processes": 5,
+      "total_processes": 466
+    },
+    "task_observation": {
+      "last_result": 267009,
+      "name": "TimeLearner-windows-terminal-physical-data8-sdk-build-a3",
+      "instances": [
+        {
+          "instance": "{EDE141D9-B168-4C4B-8036-DCB88C7FE603}",
+          "engine_pid": 13284,
+          "state": 4
+        }
+      ]
+    },
+    "expected_cpp_tests": 81,
+    "original_cpp_cases_preserved": 78,
+    "additional_integral_xml_regressions": 3,
+    "extended_DATA_cases": 16,
+    "scientific_worker_admitted": false,
+    "scientific_verdict": null
+  },
+  "source_closure": {
+    "root": {
+      "head": "cbc1ac36f6be9b7abe4edb52f1c2c8f6dffbad60",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+      "head": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "cb6fe50da94ca9cbc9d5e4c0811d42b37b44a14a",
+      "head": "cb6fe50da94ca9cbc9d5e4c0811d42b37b44a14a",
+      "status": ""
+    }
+  },
+  "original_A1_native_passed": 59,
+  "original_A1_native_failed": 19,
+  "new_runtime_accepted": false,
+  "full_plan_complete": false
+}

@@ -1,0 +1,159 @@
+{
+  "kind": "timelearner_windows_native_closed_negative_status",
+  "schema_version": 1,
+  "observed_at": "2026-11-19T16:29:23.417280+00:00",
+  "worker": "Windows14",
+  "via_jump": "10.245.1.12",
+  "job": "windows-terminal-physical-data8-native78-a1",
+  "source_root": "7047c695dbf33c9a2901e4209f9425ca727085e8",
+  "source_pulse": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+  "source_rdk": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+  "controls_commit": "462902ddbfacd110323001dd54f01382989a4a10",
+  "specification_git_blob": "c0511320478105fa591a553a5c03d1f3b534f524",
+  "gate": {
+    "assertion_status": "failed",
+    "execution": "process_error",
+    "inventory": {
+      "assertion_status": "failed",
+      "expected": 78,
+      "failed_test_ids": [
+        "NativeActualCompositeTerminalRestore/ClassicFixedN0",
+        "NativeActualCompositeTerminalRestore/BranchFixedN0",
+        "NativeActualCompositeTerminalRestore/ClassicFixedN1",
+        "NativeActualCompositeTerminalRestore/BranchFixedN1",
+        "NativeActualCompositeTerminalRestore/ClassicWindowN0",
+        "NativeActualCompositeTerminalRestore/BranchWindowN0",
+        "NativeActualCompositeTerminalRestore/ClassicWindowN1",
+        "NativeActualCompositeTerminalRestore/BranchWindowN1",
+        "NativeTerminalConfiguredEntry/ClassicFixedN0",
+        "NativeTerminalConfiguredEntry/BranchFixedN0",
+        "NativeTerminalConfiguredEntry/ClassicFixedN1",
+        "NativeTerminalConfiguredEntry/BranchFixedN1",
+        "NativeTerminalConfiguredEntry/ClassicWindowN0",
+        "NativeTerminalConfiguredEntry/BranchWindowN0",
+        "NativeTerminalConfiguredEntry/ClassicWindowN1",
+        "NativeTerminalConfiguredEntry/BranchWindowN1",
+        "NativeJointCapacitance/ClassicRollback",
+        "NativeJointCapacitance/BranchRollback",
+        "NativeTerminalSelection/ClassicFailedAttachmentRetainsOriginalModel"
+      ],
+      "observed": 78,
+      "sha256": "a7eca2157561ac19e7551f3c08f76bc5fd039061280f99840bbeea5d70b448e8"
+    },
+    "kind": "timelearner_native_test_gate_result",
+    "reason": "complete_declared_test_inventory",
+    "schema_version": 1,
+    "scientific_verdict": null,
+    "validity": "valid"
+  },
+  "passed": 59,
+  "failed": 19,
+  "skipped": 0,
+  "owned_process": {
+    "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a1\\Test_PulseLib_StorageComponents.exe",
+    "creation_filetime": "134395749860158523",
+    "pid": 15940,
+    "job_name": "Local\\TimeLearner-0649f0ca-7377-47fa-acff-7444bbc5a68d",
+    "runtime_fingerprint": "8eca0fda0259185d36eebf8a364315f6dac214dd5706d7dfbf16fd31b94f4f88",
+    "suspended_until_limits_applied": true
+  },
+  "process_result": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "process_error",
+    "validity": "valid",
+    "reason": "nonzero_exit",
+    "returncode": 1,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "completed",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 48,
+    "wall_seconds": 1998.5770992999896,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-0649f0ca-7377-47fa-acff-7444bbc5a68d"
+  },
+  "kernel_job": {
+    "name": "Local\\TimeLearner-0649f0ca-7377-47fa-acff-7444bbc5a68d",
+    "open_error": 2
+  },
+  "tasks": [
+    {
+      "registered": true,
+      "task": "TimeLearner-windows-terminal-physical-data8-closed-build-audit-a1",
+      "instances": []
+    },
+    {
+      "registered": true,
+      "task": "TimeLearner-windows-terminal-physical-data8-native78-a1",
+      "instances": []
+    },
+    {
+      "registered": false,
+      "task": "TimeLearner-windows-terminal-physical-data8-python3-a1",
+      "query_error": true
+    }
+  ],
+  "original_build_outcome": "descendants_remaining",
+  "original_build_accepted": false,
+  "independent_artifact_audit_passed": true,
+  "diagnosis": {
+    "decimal_conversion": [
+      {
+        "token": "4294967295",
+        "old_atoi": 2147483647,
+        "old_as_unsigned": 2147483647,
+        "full_unsigned": 4294967295
+      },
+      {
+        "token": "9223372036854775807",
+        "old_atoi": 2147483647,
+        "old_as_unsigned": 2147483647,
+        "full_unsigned": 9223372036854775807
+      },
+      {
+        "token": "18446744073709551615",
+        "old_atoi": 2147483647,
+        "old_as_unsigned": 2147483647,
+        "full_unsigned": 18446744073709551615
+      }
+    ],
+    "attach_rollback_preconditions": {
+      "native/Classic_2000_N0_terminal_restore_4_terminal_selection_precondition.json": {
+        "finalization_wall_budget": 30,
+        "fixture_scope": "native_restore_lifecycle_transport",
+        "kind": "native_terminal_selection_test_precondition",
+        "maximum_edits": 16,
+        "measured_candidates": 1,
+        "measurement_wall_budget": 10,
+        "native_plan_only": true,
+        "outcome": "budget_exhausted",
+        "owned_C0_primary": false,
+        "real_unmeasured_edit_observed": false,
+        "reason": "native_training_time_budget_exhausted",
+        "schema_version": 2,
+        "search_probes": 2,
+        "selected_boundary_available": true,
+        "state": "finalizing",
+        "valid_raw_trials": 4,
+        "wall_elapsed": 10.095592500059865
+      }
+    },
+    "junit_times": {
+      "NativeTerminalSelection.ClassicFailedAttachmentRetainsOriginalModel": "10.337"
+    }
+  },
+  "fixture_fix_root": "ee7df956207bd4f541c7ede8aadc2578ccc4e7bf",
+  "fixture_fix_runtime_accepted": false,
+  "general_integral_xml_fix_pending": true,
+  "test_wall_precondition_fix_pending": true,
+  "python3_executed": false,
+  "full_primary_centrally_published": false,
+  "originals_retained_on_worker": true,
+  "scientific_worker_admitted": false,
+  "scientific_verdict": null
+}

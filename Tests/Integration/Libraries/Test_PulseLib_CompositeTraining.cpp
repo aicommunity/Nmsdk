@@ -20,6 +20,7 @@
 #include "TimeLearner/NativeLearnedState.h"
 #include "TimeLearner/NativeCompositeLearnedState.h"
 #include "TimeLearner/NativeTrainingBindings.h"
+#include "TimeLearner/NativeMeasuredTrainingBoundary.h"
 #include "TimeLearner/CandidateWindowRecoveryLedger.h"
 #include "TimeLearner/NativeRecognitionState.h"
 #include "TimeLearner/NativeRecognitionObservationValidation.h"
@@ -30,6 +31,7 @@
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../Support/PhysicalArchiveComparison.h"
+#include "../Support/TerminalPhysicalDataTransfer.h"
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QDir>
@@ -5079,3 +5081,363 @@ template<class Owner> void RecordedRecoveryRoundtrip() {
 TEST(NativeRecordedRecoveryArchive,ClassicFullDomainN4Roundtrip){RecordedRecoveryRoundtrip<NNeuronTimeLearner>();}
 TEST(NativeRecordedRecoveryArchive,BranchFullDomainN4Roundtrip){RecordedRecoveryRoundtrip<NNeuronTimeLearnerBranch>();}
 #endif
+
+namespace {
+QJsonObject TerminalColdConsoleJob(ConfiguredNativeTraining configuration,const QJsonObject& profile) {
+    configuration.runId+="/fresh-public-cold9";
+    const auto encoded=EncodeConfiguredNativeTraining(configuration);
+    if(encoded.value("schema_version")!=QJsonValue(9))throw std::invalid_argument("terminal_console_fixture_requires_cold9");
+    return NmsdkWorker::Signed({{"kind","timelearner_native_training_job"},{"schema_version",1},
+        {"owner_class",configuration.model.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"},
+        {"implementation_id",CompositePackageImplementation},{"configuration",encoded},{"profile_archives",QJsonArray{profile}},
+        {"optional_modes",QJsonObject{{"sync_capacitance_trim",0},{"post_train_tuning",false},{"auto_calibrate_threshold",false}}},
+        {"calculate_mode",1},{"structure_build_mode",1},
+        {"maximum_model_ticks",std::ceil((configuration.maximumModelSeconds+configuration.duration+1.)*configuration.model.frequencyHz)}});
+}
+template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bool completed,bool configured=false)
+{
+    NativeCompositeFixture<Owner> f(2000,false,64,false,n0);f.owner->ControllerVersion.SetDataDirect(2);
+    // Existing fixed-geometry transport control. The broad .2 case exercises
+    // an unchanged completed certificate; .02 is the original scientific sync
+    // default and must remain an honestly stopped/no-certificate boundary.
+    auto plan=window?ActualWindowServicePlan(f,completed?.2:.02,false):ServicePlan(f,completed?.2:.02);
+    plan.search.normalization=f.modelSpec.normalization;plan.search.bounds.clear();
+    for(const auto& p:f.owner->ReadNativeParameters())plan.search.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
+    plan.search.maximumCandidatesPerInput=1;plan.search.maximumSweeps=1;plan.search.n0CandidateRepeats=1;
+    plan.terminalSelection=NativeTerminalSelectionPolicy{configured?7.25:30.};
+    const auto coldConfiguration=window?CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.):
+        CaptureCompositeInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.);
+    if(configured) {
+        const auto encoded=EncodeConfiguredNativeTraining(coldConfiguration);ASSERT_EQ(encoded.value("schema_version"),QJsonValue(9));
+        f.attempt.reset();f.owner->IsNeedToTrain=false;
+        f.owner->ControllerConfiguration=QJsonDocument(encoded).toJson(QJsonDocument::Compact).toStdString();
+        f.owner->Build();f.model->Init();f.model->Reset();ASSERT_TRUE(f.owner->ConfiguredModelInitialized.GetData());
+        ASSERT_TRUE(f.owner->IsReady() && f.owner->IsInit());f.owner->IsNeedToTrain=true;
+        // Start through the ordinary configured owner tick, not Begin(plan).
+    }else ServiceStart(f,plan);
+    ServiceTicks(f);
+    const auto& service=f.owner->NativeTrainingController();
+    ASSERT_EQ(service.State(),NativeTrainingState::Finished)<<service.Reason();
+    ASSERT_EQ(service.Outcome(),completed?TrainingStatus::Exact:TrainingStatus::BudgetExhausted)<<service.Reason();
+    ASSERT_TRUE(service.Plan().terminalSelection);
+    EXPECT_DOUBLE_EQ(service.Plan().terminalSelection->maximumWallSeconds,configured?7.25:30.);
+    EXPECT_EQ(bool(service.Certificate()),completed);
+    const auto exported=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);const auto& package=exported.learnedState;
+    ASSERT_EQ(package.value("schema_version"),QJsonValue(8));EXPECT_EQ(exported.summary.value("schema_version"),QJsonValue(9));
+    const auto historicalSummary=exported.summary.value("historical_summary").toObject();ASSERT_FALSE(historicalSummary.isEmpty());
+    const auto historicalState=package.value("historical_state").toObject();
+    if(historicalState.value("configuration").toObject().value("schema_version")==QJsonValue(9))
+        EXPECT_THROW(PrepareNativeLearnedState(historicalState,f.storage,f.environment,CompositePackageImplementation),std::invalid_argument);
+    EXPECT_EQ(historicalSummary.value("model_epoch"),historicalState.value("model_epoch"));
+    EXPECT_EQ(historicalSummary.value("actual_model_revision"),historicalState.value("model_revision"));
+    EXPECT_EQ(historicalSummary.value("actual_parameters"),historicalState.value("trained_inputs"));
+    EXPECT_EQ(package.value("historical_state").toObject().value("schema_version"),QJsonValue(window?6:5));
+    EXPECT_EQ(package.value("certificate").isNull(),!completed);
+    const auto name=std::string(configured?"configured9-":"")+(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-"+(window?"window5":"fixed4")+
+        (n0?"-N0":"-N1")+(completed?"-completed":"-stopped");
+    QTemporaryDir publicationDirectory;ASSERT_TRUE(publicationDirectory.isValid());QJsonArray publishedArtifacts;
+    const auto publication=NmsdkWorker::PublishCheckedNativeCompositeArchive(publicationDirectory.path(),package,publishedArtifacts);
+    ASSERT_TRUE(publication.Descriptor().isObject());
+    EXPECT_EQ(publication.RecoveryDeliveries(package,publication.Descriptor()),0u);
+    const auto descriptor=publication.Descriptor().toObject();
+    QFile publishedIndex(QDir(publicationDirectory.path()).filePath(descriptor.value("path").toString()));
+    ASSERT_TRUE(publishedIndex.open(QIODevice::ReadOnly));
+    EXPECT_EQ(QJsonDocument::fromJson(publishedIndex.readAll()).object(),historicalState.value("measurement_archive").toObject());
+    auto substituted=package;substituted["model_revision"]="other-actual-model";substituted.remove("sha256");
+    substituted["sha256"]=NmsdkTools::CanonicalModelDataSha256(substituted);
+    EXPECT_THROW(publication.RecoveryDeliveries(substituted,publication.Descriptor()),std::invalid_argument);
+    EXPECT_THROW(publication.RecoveryDeliveries(historicalState,publication.Descriptor()),std::invalid_argument);
+    if(configured) {
+        const QJsonObject base{{"kind","timelearner_native_training_execution"},{"schema_version",1},
+            {"execution","completed"},{"model_revision",package.value("model_revision")}};
+        const auto wire=NmsdkWorker::WrapConfiguredNativeExecution(coldConfiguration,base,package,publication.Descriptor(),
+            package.value("model_revision"),service.CompositeNativeProbes(),service.CompositeSampledFrames(),false,&publication);
+        EXPECT_EQ(wire.value("schema_version"),QJsonValue(6));EXPECT_EQ(wire.value("base_schema_version"),QJsonValue(1));
+        EXPECT_EQ(wire.value("terminal_selection"),package.value("terminal_policy"));
+        const auto boundary=wire.value("terminal_boundary").toObject();
+        EXPECT_EQ(boundary.value("actual_model_epoch"),package.value("model_epoch"));
+        EXPECT_EQ(boundary.value("historical_model_epoch"),historicalState.value("model_epoch"));
+        EXPECT_EQ(boundary.value("historical_package_sha256"),historicalState.value("sha256"));
+        EXPECT_EQ(wire.value("source_measurements").toObject().value("measurement_archive"),publication.Descriptor());
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(coldConfiguration,base,package,publication.Descriptor(),
+            "other-model",0,0,false,&publication),std::invalid_argument);
+        auto wrongPolicy=coldConfiguration;wrongPolicy.terminalSelection->maximumWallSeconds+=.125;
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(wrongPolicy,base,package,publication.Descriptor(),
+            package.value("model_revision"),0,0,false,&publication),std::invalid_argument);
+        SavePortableObject(name.c_str(),"terminal-execution6-writer.json",wire);
+        SavePortableObject(name.c_str(),"cold9-job.json",TerminalColdConsoleJob(coldConfiguration,historicalState.value("neuron").toObject()));
+    }
+    SavePortableObject(name.c_str(),"terminal-state8.json",package);SavePortableObject(name.c_str(),"terminal-summary9.json",exported.summary);
+    const auto test=::testing::UnitTest::GetInstance()->current_test_info();ASSERT_TRUE(test);
+    SavePortableObject(name.c_str(),configured?"configuration9-case.json":"terminal-case.json",{{"kind",configured?"native_configured_terminal_case":"native_terminal_portable_case"},{"schema_version",1},
+        {"test_id",QString::fromStdString(std::string(test->test_suite_name())+"/"+test->name())},
+        {"package","terminal-state8.json"},{"summary","terminal-summary9.json"},
+        {"primary_prefix",QJsonValue(QJsonValue::Null)},{"warm_folder",QJsonValue(QJsonValue::Null)}});
+    if(configured) {
+        NmsdkTests::CheckTerminalPhysicalDataTransfer<Owner>(f,plan,package,[&](const QJsonObject& evidence) {
+            SavePortableObject(name.c_str(),"terminal-physical-data.json",evidence);
+        });
+        ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    }
+    const auto epoch=service.ModelEpoch(),transcriptEpoch=service.TranscriptModelEpoch();const auto revision=f.Revision();
+    const auto referenceIds=service.CompositeReferenceGroupIds();const auto clock=f.Time();
+    auto prepared=PrepareNativeLearnedState(package,f.storage,f.environment,CompositePackageImplementation);
+    EXPECT_EQ(f.Time(),clock);EXPECT_FALSE(prepared->service.Search());EXPECT_EQ(bool(prepared->service.Certificate()),completed);
+    EXPECT_EQ(prepared->modelRevision,revision);EXPECT_EQ(prepared->service.ModelEpoch(),epoch);EXPECT_EQ(prepared->service.TranscriptModelEpoch(),transcriptEpoch);
+    EXPECT_EQ(prepared->service.CompositeReferenceGroupIds(),referenceIds);
+    const auto imported=f.owner->ImportNativeLearnedState(package,CompositePackageImplementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    EXPECT_EQ(f.Revision(),revision);EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());EXPECT_FALSE(f.owner->NativeTrainingController().Search());
+    const auto again=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+    EXPECT_EQ(again.learnedState.value("schema_version"),QJsonValue(8));EXPECT_EQ(again.learnedState.value("terminal_event"),package.value("terminal_event"));
+    EXPECT_EQ(again.learnedState.value("terminal_journal"),package.value("terminal_journal"));
+    EXPECT_EQ(again.learnedState.value("model_revision"),package.value("model_revision"));EXPECT_EQ(again.learnedState.value("model_epoch"),package.value("model_epoch"));
+    EXPECT_EQ(again.learnedState.value("certificate"),package.value("certificate"));
+    if(!completed) {
+        auto warm=plan;warm.search.runId=name+"/warm";
+        f.owner->Build();f.model->Init();f.model->Reset();
+        ASSERT_TRUE(f.owner->IsReady() && f.owner->IsInit());EXPECT_EQ(f.Revision(),revision);
+        f.owner->IsNeedToTrain=true;f.owner->BeginNativeTraining(warm);
+        ASSERT_TRUE(f.owner->NativeTrainingController().State()==NativeTrainingState::CapturingReferences ||
+            f.owner->NativeTrainingController().State()==NativeTrainingState::Searching)<<f.owner->NativeTrainingController().Reason();
+        // Continue through a real, consumed current-attempt measurement before
+        // stopping. An immediate Start/Stop cannot establish that the old
+        // journal primary survives alongside newly collected native data.
+        const auto warmAttempt=f.owner->NativeTrainingController().Configuration().runId;
+        bool consumedWarmMeasurement=false;
+        ServiceTicks(f,[&]{
+            if(consumedWarmMeasurement)return;
+            const auto& records=f.owner->NativeTrainingController().CompositeMeasurements();
+            consumedWarmMeasurement=std::any_of(records.begin(),records.end(),[&](const auto& r){
+                return r.attemptId==warmAttempt && r.consumed;
+            });
+            if(consumedWarmMeasurement)f.owner->IsNeedToTrain=false;
+        });
+        ASSERT_TRUE(consumedWarmMeasurement);
+        ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+        const auto next=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+        EXPECT_EQ(next.learnedState.value("terminal_journal"),package.value("terminal_journal"));
+        EXPECT_EQ(next.learnedState.value("model_revision"),package.value("model_revision"));
+        EXPECT_EQ(next.learnedState.value("model_epoch"),package.value("model_epoch"));
+        EXPECT_EQ(next.learnedState.value("session_attempt").toDouble(),package.value("session_attempt").toDouble()+1.);
+        auto replay=PrepareNativeLearnedState(next.learnedState,f.storage,f.environment,CompositePackageImplementation);
+        EXPECT_EQ(replay->service.State(),NativeTrainingState::Finished);EXPECT_FALSE(replay->service.Search());
+        SavePortableObject(name.c_str(),"terminal-warm-state8.json",next.learnedState);
+        SavePortableObject(name.c_str(),"terminal-warm-summary9.json",next.summary);
+    }
+}
+}
+TEST(NativeTerminalCompositePackage,ClassicFixedN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,true,false);}
+TEST(NativeTerminalCompositePackage,BranchFixedN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,true,false);}
+TEST(NativeTerminalCompositePackage,ClassicFixedN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,false,false);}
+TEST(NativeTerminalCompositePackage,BranchFixedN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,false,false);}
+TEST(NativeTerminalCompositePackage,ClassicWindowN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,false);}
+TEST(NativeTerminalCompositePackage,BranchWindowN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,false);}
+TEST(NativeTerminalCompositePackage,ClassicWindowN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,false,false);}
+TEST(NativeTerminalCompositePackage,BranchWindowN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,false,false);}
+TEST(NativeTerminalCompositePackage,ClassicFixedCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,true,true);}
+TEST(NativeTerminalCompositePackage,BranchFixedCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,true,true);}
+TEST(NativeTerminalCompositePackage,ClassicWindowCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,true);}
+TEST(NativeTerminalCompositePackage,BranchWindowCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,true);}
+
+namespace {
+template<class Owner> void ActualCompositeTerminalRestore(bool window,bool n0)
+{
+    NativeCompositeFixture<Owner> f(2000,false,64,false,n0);f.owner->ControllerVersion.SetDataDirect(2);
+    auto plan=window?ActualWindowServicePlan(f,.02,false):ServicePlan(f,.02);
+    plan.search.normalization=f.modelSpec.normalization;plan.search.maximumCandidatesPerInput=2;
+    plan.search.maximumSweeps=1;plan.search.n0CandidateRepeats=1;
+    plan.search.bounds[0].minimumLength=2;plan.search.bounds[0].maximumLength=3;
+    plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
+    // Two references plus a candidate/anchor pair, each with N+2 actual raw
+    // trials. Allow bounded scheduler gaps, then stop inside the NEXT group.
+    // This uses the real model clock, independent of machine/serialization
+    // speed. No synthetic observation, manual physical edit or forged clock.
+    const auto rawPerGroup=plan.protocol.inputs.size()+2;
+    plan.maximumModelSeconds=double(plan.protocol.inputs.size()+2)*double(rawPerGroup)*
+        (plan.probe.specification.end+8./f.frequency)+plan.probe.specification.end/2.;
+    ASSERT_GE(plan.maximumModelSeconds,plan.composite->maximumGroupModelSeconds);
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch":"classic")+
+        "-terminal-actual-"+(window?"window5":"fixed4")+(n0?"-N0":"-N1");
+    const auto coldConfiguration=window?CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.):
+        CaptureCompositeInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.);
+    std::shared_ptr<const NativeMeasuredTrainingBoundary> selected;
+    QJsonObject unmeasured,unmeasuredDataset;std::vector<InputParameters> unmeasuredParameters;
+    std::size_t unmeasuredEpoch=0;bool sawUnmeasuredEdit=false,sawFinalizing=false;
+    ServiceStart(f,plan);
+    ServiceTicks(f,[&]{
+        const auto& service=f.owner->NativeTrainingController();
+        if(service.SelectedNativeBoundary())selected=service.SelectedNativeBoundary();
+        if(!sawUnmeasuredEdit && selected && service.State()==NativeTrainingState::Searching &&
+            service.ModelEpoch()>selected->Selection().candidate.modelEpoch &&
+            f.Revision()!=selected->NeuronIdentity().value("sha256").toString().toStdString())sawUnmeasuredEdit=true;
+        if(service.State()==NativeTrainingState::Finalizing) {
+            sawFinalizing=true;unmeasuredEpoch=service.ModelEpoch();unmeasuredParameters=f.owner->ReadNativeParameters();
+            auto neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+            auto generator=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+            unmeasured=NmsdkTools::IdentifyModel(neuron.Get(),{{&generator->Output,"burst"}});
+            unmeasuredDataset=NmsdkTools::IdentifyModel(f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get());
+        }
+    });
+    const auto& service=f.owner->NativeTrainingController();
+    SavePortableObject(name.c_str(),"restore-precondition.json",{{"kind","native_actual_composite_restore_precondition"},{"schema_version",1},
+        {"observed_unmeasured_edit",sawUnmeasuredEdit},{"observed_finalizing",sawFinalizing},
+        {"model_time_budget",plan.maximumModelSeconds},{"wall_time_budget",plan.maximumWallSeconds},
+        {"state",NativeTrainingStateName(service.State())},{"outcome",TrainingStatusName(service.Outcome())},
+        {"reason",QString::fromStdString(service.Reason())},{"terminal_event",service.TerminalSelectionEvent()},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+    ASSERT_TRUE(sawUnmeasuredEdit);ASSERT_TRUE(sawFinalizing);ASSERT_TRUE(selected);
+    ASSERT_EQ(service.State(),NativeTrainingState::Finished)<<service.Reason();
+    ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();ASSERT_FALSE(service.Certificate());
+    ASSERT_EQ(service.TerminalSelectionEvent().value("status"),QJsonValue("restored"));
+    EXPECT_EQ(service.TerminalSelectionTransactions(),1u);EXPECT_EQ(service.ModelEpoch(),unmeasuredEpoch+1);
+    EXPECT_EQ(service.TranscriptModelEpoch(),unmeasuredEpoch);EXPECT_NE(f.Revision(),unmeasured.value("sha256").toString().toStdString());
+    EXPECT_EQ(f.Revision(),selected->NeuronIdentity().value("sha256").toString().toStdString());
+    EXPECT_EQ(f.owner->ReadNativeParameters(),selected->Selection().candidate.fullParameters);
+    EXPECT_NE(f.owner->ReadNativeParameters(),unmeasuredParameters);
+    const auto exported=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+    const auto history=exported.learnedState.value("historical_state").toObject();
+    EXPECT_EQ(history.value("model_revision"),unmeasured.value("sha256"));
+    EXPECT_EQ(history.value("model_epoch"),QJsonValue(double(unmeasuredEpoch)));
+    EXPECT_EQ(exported.summary.value("historical_summary").toObject().value("actual_model_revision"),unmeasured.value("sha256"));
+    EXPECT_EQ(history.value("schema_version"),QJsonValue(window?6:5));
+    EXPECT_EQ(selected->DatasetIdentity(),unmeasuredDataset);
+    SavePortableObject(name.c_str(),"terminal-state8.json",exported.learnedState);
+    SavePortableObject(name.c_str(),"terminal-summary9.json",exported.summary);
+    SavePortableObject(name.c_str(),"cold9-job.json",TerminalColdConsoleJob(coldConfiguration,history.value("neuron").toObject()));
+    SavePortableObject(name.c_str(),"source-selected-actual.json",{{"source",unmeasured},
+        {"selected",selected->NeuronIdentity()},{"actual",exported.learnedState.value("neuron").toObject().value("graph").toObject().value("identity")},
+        {"source_epoch",double(unmeasuredEpoch)},{"actual_epoch",double(service.ModelEpoch())}});
+    NmsdkTests::CheckTerminalPhysicalDataTransfer<Owner>(f,plan,exported.learnedState,[&](const QJsonObject& evidence) {
+        SavePortableObject(name.c_str(),"terminal-physical-data.json",evidence);
+    });
+    ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    const auto clock=f.Time();
+    auto prepared=PrepareNativeLearnedState(exported.learnedState,f.storage,f.environment,CompositePackageImplementation);
+    EXPECT_EQ(f.Time(),clock);EXPECT_FALSE(prepared->service.Search());EXPECT_FALSE(prepared->service.Certificate());
+    EXPECT_EQ(prepared->modelRevision,f.Revision());EXPECT_EQ(prepared->service.ModelEpoch(),service.ModelEpoch());
+    const auto before=RecoveryBoundaryResponse(f);
+    const auto imported=f.owner->ImportNativeLearnedState(exported.learnedState,CompositePackageImplementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    f.owner->Build();f.model->Init();ASSERT_TRUE(f.owner->IsReady() && f.owner->IsInit());
+    const auto after=RecoveryBoundaryResponse(f);ASSERT_FALSE(before.empty());ASSERT_EQ(before.size(),after.size());
+    double excursion=0.;std::size_t edges=0;bool previous=false;
+    for(std::size_t i=0;i<before.size();++i) {
+        EXPECT_NEAR(before[i].time-before.front().time,after[i].time-after.front().time,5e-10);
+        EXPECT_DOUBLE_EQ(before[i].stimulus,after[i].stimulus);
+        const bool active=before[i].stimulus>0.;if(active && !previous)++edges;previous=active;
+        ASSERT_EQ(before[i].potentials.size(),after[i].potentials.size());
+        ASSERT_EQ(before[i].potentials.size(),before.front().potentials.size());
+        for(std::size_t j=0;j<before[i].potentials.size();++j) {
+            ASSERT_TRUE(std::isfinite(before[i].potentials[j]));ASSERT_TRUE(std::isfinite(after[i].potentials[j]));
+            EXPECT_NEAR(before[i].potentials[j],after[i].potentials[j],1e-12);
+            excursion=std::max(excursion,std::abs(before[i].potentials[j]-before.front().potentials[j]));
+        }
+    }
+    EXPECT_EQ(edges,plan.protocol.inputs.size());EXPECT_GT(excursion,1e-6);
+    const auto response=[](const auto& samples){QJsonArray rows;for(const auto& p:samples){QJsonArray row{p.time-samples.front().time,p.stimulus};
+        for(double v:p.potentials)row.append(v);rows.append(row);}return QJsonObject{{"relative_time_stimulus_potentials",rows}};};
+    SavePortableObject(name.c_str(),"response-before.json",response(before));SavePortableObject(name.c_str(),"response-after.json",response(after));
+    const auto test=::testing::UnitTest::GetInstance()->current_test_info();ASSERT_TRUE(test);
+    SavePortableObject(name.c_str(),"actual-terminal-case.json",{{"kind","native_actual_terminal_portable_case"},{"schema_version",1},
+        {"test_id",QString::fromStdString(std::string(test->test_suite_name())+"/"+test->name())},
+        {"package","terminal-state8.json"},{"summary","terminal-summary9.json"}});
+    auto warm=plan;warm.search.runId=name+"/warm";f.owner->IsNeedToTrain=true;f.owner->BeginNativeTraining(warm);
+    SavePortableObject(name.c_str(),"warm-start.json",{{"state",NativeTrainingStateName(service.State())},
+        {"outcome",TrainingStatusName(service.Outcome())},{"reason",QString::fromStdString(service.Reason())},
+        {"actual_epoch",double(service.ModelEpoch())},{"transcript_epoch",double(service.TranscriptModelEpoch())}});
+    ASSERT_TRUE(service.State()==NativeTrainingState::Searching || service.State()==NativeTrainingState::CapturingReferences)<<service.Reason();
+    const auto warmAttempt=service.Configuration().runId;bool consumed=false;
+    ServiceTicks(f,[&]{if(consumed)return;const auto& records=service.CompositeMeasurements();
+        consumed=std::any_of(records.begin(),records.end(),[&](const auto& r){return r.attemptId==warmAttempt && r.consumed;});
+        if(consumed)f.owner->IsNeedToTrain=false;});
+    ASSERT_TRUE(consumed);ASSERT_EQ(service.Outcome(),TrainingStatus::ExternalStop);
+    const auto continued=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+    EXPECT_EQ(continued.learnedState.value("terminal_journal"),exported.learnedState.value("terminal_journal"));
+    auto replay=PrepareNativeLearnedState(continued.learnedState,f.storage,f.environment,CompositePackageImplementation);
+    EXPECT_FALSE(replay->service.Search());EXPECT_FALSE(replay->service.Certificate());
+    SavePortableObject(name.c_str(),"terminal-warm-state8.json",continued.learnedState);
+    SavePortableObject(name.c_str(),"terminal-warm-summary9.json",continued.summary);
+}
+}
+TEST(NativeActualCompositeTerminalRestore,ClassicFixedN0){ActualCompositeTerminalRestore<NNeuronTimeLearner>(false,true);}
+TEST(NativeActualCompositeTerminalRestore,BranchFixedN0){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(false,true);}
+TEST(NativeActualCompositeTerminalRestore,ClassicFixedN1){ActualCompositeTerminalRestore<NNeuronTimeLearner>(false,false);}
+TEST(NativeActualCompositeTerminalRestore,BranchFixedN1){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(false,false);}
+TEST(NativeActualCompositeTerminalRestore,ClassicWindowN0){ActualCompositeTerminalRestore<NNeuronTimeLearner>(true,true);}
+TEST(NativeActualCompositeTerminalRestore,BranchWindowN0){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(true,true);}
+TEST(NativeActualCompositeTerminalRestore,ClassicWindowN1){ActualCompositeTerminalRestore<NNeuronTimeLearner>(true,false);}
+TEST(NativeActualCompositeTerminalRestore,BranchWindowN1){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(true,false);}
+
+namespace {
+template<class Owner> void TerminalConfigurationAllBaseSchemas()
+{
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);
+    const auto composite=CompositeCold(f);const auto window=ActualCold7Declaration(f);
+    for(int version=1;version<=8;++version) {
+        SCOPED_TRACE(version);auto c=version>=7?window:composite;
+        if(version<=5)c.composite.reset();
+        if(version==2)c.search.n0CandidateRepeats=2;
+        if(version==3 || version==4){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+        if(version==4){c.search.capacitanceSearch=CapacitanceSearchPolicy{};c.search.maximumCandidatesPerInput=8;}
+        if(version==5){c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+            c.search.maximumInvalidObservations=2;c.peakSelection=PeakSelectionPolicy::AssignedBurstWave;}
+        if(version==8){c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;c.search.maximumInvalidObservations=2;}
+        const auto original=EncodeConfiguredNativeTraining(c);ASSERT_EQ(original.value("schema_version"),QJsonValue(version));
+        const auto legacy=DecodeConfiguredNativeTraining(original);EXPECT_FALSE(legacy.terminalSelection);
+        EXPECT_FALSE(MakeConfiguredNativeTrainingPlan(legacy).terminalSelection);EXPECT_EQ(EncodeConfiguredNativeTraining(legacy),original);
+        c.terminalSelection=NativeTerminalSelectionPolicy{3.5};const auto encoded=EncodeConfiguredNativeTraining(c);
+        EXPECT_EQ(encoded.value("schema_version"),QJsonValue(9));EXPECT_EQ(encoded.value("terminal_base_schema_version"),QJsonValue(version));
+        EXPECT_EQ(encoded.value("base_schema_version"),original.value("base_schema_version"));
+        auto base=encoded;base.remove("terminal_base_schema_version");base.remove("terminal_selection");base["schema_version"]=version;
+        EXPECT_EQ(base,original);
+        const auto parsed=ParseConfiguredNativeTraining(QJsonDocument(encoded).toJson(QJsonDocument::Compact).toStdString());
+        EXPECT_EQ(EncodeConfiguredNativeTraining(parsed),encoded);const auto plan=MakeConfiguredNativeTrainingPlan(parsed);
+        ASSERT_TRUE(plan.terminalSelection);EXPECT_DOUBLE_EQ(plan.terminalSelection->maximumWallSeconds,3.5);
+        EXPECT_DOUBLE_EQ(plan.search.tolerances.amplitudeAbsolute,c.search.tolerances.amplitudeAbsolute);
+        EXPECT_DOUBLE_EQ(plan.search.tolerances.sync,c.search.tolerances.sync);
+        const auto folder=std::string(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-configuration9/base-"+std::to_string(version);
+        SavePortableObject(folder.c_str(),"original.json",original);SavePortableObject(folder.c_str(),"configured9.json",encoded);
+        for(bool preflight:{false,true}) {
+            const QJsonObject baseExecution{{"schema_version",1},{"model_revision","actual-initial-model"},
+                {"execution",preflight?"completed":"training_start_failed"}};
+            const auto wire=NmsdkWorker::WrapConfiguredNativeExecution(parsed,baseExecution,{},QJsonValue(QJsonValue::Null),
+                "actual-initial-model",0,0,preflight);
+            EXPECT_EQ(wire.value("schema_version"),QJsonValue(6));EXPECT_EQ(wire.value("base_schema_version"),QJsonValue(1));
+            EXPECT_EQ(wire.value("terminal_selection"),encoded.value("terminal_selection"));
+            EXPECT_TRUE(wire.value("terminal_boundary").isNull());EXPECT_TRUE(wire.value("source_measurements").isNull());
+            EXPECT_EQ(QJsonDocument::fromJson(QJsonDocument(wire).toJson()).object(),wire);
+            SavePortableObject(folder.c_str(),preflight?"execution6-preflight-writer.json":"execution6-start-failure-writer.json",wire);
+        }
+        QJsonObject liveBase{{"schema_version",2},{"model_revision","actual-initial-model"}};
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(parsed,liveBase,{},QJsonValue(QJsonValue::Null),
+            "actual-initial-model",0,0),std::invalid_argument);
+        liveBase["schema_version"]=1;
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(parsed,liveBase,{},QJsonValue(QJsonValue::Null),
+            "actual-initial-model",1,1,true),std::invalid_argument);
+        for(const auto& invalid:{QJsonValue(true),QJsonValue("1"),QJsonValue(0),QJsonValue(9),QJsonValue(QJsonValue::Null)}) {
+            auto bad=encoded;bad["terminal_base_schema_version"]=invalid;
+            EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        }
+        for(const auto& invalid:{QJsonValue(true),QJsonValue("3.5"),QJsonValue(0),QJsonValue(-1),QJsonValue(QJsonValue::Null)}) {
+            auto bad=encoded;auto policy=bad.value("terminal_selection").toObject();policy["maximum_wall_seconds"]=invalid;bad["terminal_selection"]=policy;
+            EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        }
+        auto bad=encoded;auto policy=bad.value("terminal_selection").toObject();policy["unknown_control"]=true;bad["terminal_selection"]=policy;
+        EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        bad=encoded;bad["unknown_configuration"]=true;EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        bad=original;bad["terminal_selection"]=encoded.value("terminal_selection");EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+    }
+}
+}
+TEST(NativeTerminalConfiguration,ClassicAllBaseSchemasAreExplicitAndLossless){TerminalConfigurationAllBaseSchemas<NNeuronTimeLearner>();}
+TEST(NativeTerminalConfiguration,BranchAllBaseSchemasAreExplicitAndLossless){TerminalConfigurationAllBaseSchemas<NNeuronTimeLearnerBranch>();}
+
+TEST(NativeTerminalConfiguredEntry,ClassicFixedN0){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchFixedN0){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,ClassicFixedN1){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,false,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchFixedN1){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,false,true,true);}
+TEST(NativeTerminalConfiguredEntry,ClassicWindowN0){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchWindowN0){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,ClassicWindowN1){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,false,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchWindowN1){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,false,true,true);}

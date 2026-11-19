@@ -1,0 +1,81 @@
+{
+  "kind": "timelearner_native_measured_boundary_gate",
+  "schema_version": 1,
+  "source_root": "554b70a719ad712f402be608ca4d45826424fc82",
+  "source_pulse": "57f603b1048d6547bda6e2e97f7decc0305715f0",
+  "cases_executed": 30,
+  "passed": 26,
+  "failed": 4,
+  "accepted": false,
+  "scope": "snapshot only; terminal transaction not present",
+  "junit": [
+    {
+      "path": "measured-native-boundary-and-physical-regressions/native.xml",
+      "totals": {
+        "tests": "30",
+        "failures": "4",
+        "disabled": "0",
+        "errors": "0",
+        "time": "401.815",
+        "timestamp": "2026-11-19T01:47:03.543",
+        "name": "AllTests"
+      },
+      "failed": [
+        {
+          "name": "ClassicN1CompletedPhysicalSnapshot",
+          "file": "/media/user/Data/TimeLearnerRefactor/source-measured-native-boundary-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp",
+          "line": "4169",
+          "status": "run",
+          "result": "completed",
+          "time": "63.415",
+          "timestamp": "2026-11-19T01:49:24.544",
+          "classname": "NativeMeasuredBoundary",
+          "messages": [
+            "/media/user/Data/TimeLearnerRefactor/source-measured-native-boundary-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3710\nExpected equality of these values:\n  retained->CapacitanceState()\n    Which is: { 16-byte object <40-15 15-BE 32-57 00-00 01-00 00-00 00-00 00-00> }\n  witnessedCapacitances.at(chosen.trialId)\n    Which is: {}\n"
+          ]
+        },
+        {
+          "name": "BranchN1CompletedPhysicalSnapshot",
+          "file": "/media/user/Data/TimeLearnerRefactor/source-measured-native-boundary-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp",
+          "line": "4171",
+          "status": "run",
+          "result": "completed",
+          "time": "51.486",
+          "timestamp": "2026-11-19T01:50:27.960",
+          "classname": "NativeMeasuredBoundary",
+          "messages": [
+            "/media/user/Data/TimeLearnerRefactor/source-measured-native-boundary-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3710\nExpected equality of these values:\n  retained->CapacitanceState()\n    Which is: { 16-byte object <10-B7 C8-BD 32-57 00-00 01-00 00-00 00-00 00-00> }\n  witnessedCapacitances.at(chosen.trialId)\n    Which is: {}\n"
+          ]
+        },
+        {
+          "name": "ClassicN0SnapshotIsNotOverwrittenBySubsequentEdits",
+          "file": "/media/user/Data/TimeLearnerRefactor/source-measured-native-boundary-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp",
+          "line": "4173",
+          "status": "run",
+          "result": "completed",
+          "time": "31.548",
+          "timestamp": "2026-11-19T01:51:19.446",
+          "classname": "NativeMeasuredBoundary",
+          "messages": [
+            "/media/user/Data/TimeLearnerRefactor/source-measured-native-boundary-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3710\nExpected equality of these values:\n  retained->CapacitanceState()\n    Which is: { 16-byte object <70-E3 84-BF 32-57 00-00 01-00 00-00 00-00 00-00> }\n  witnessedCapacitances.at(chosen.trialId)\n    Which is: {}\n"
+          ]
+        },
+        {
+          "name": "BranchN0SnapshotIsNotOverwrittenBySubsequentEdits",
+          "file": "/media/user/Data/TimeLearnerRefactor/source-measured-native-boundary-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp",
+          "line": "4175",
+          "status": "run",
+          "result": "completed",
+          "time": "25.185",
+          "timestamp": "2026-11-19T01:51:50.995",
+          "classname": "NativeMeasuredBoundary",
+          "messages": [
+            "/media/user/Data/TimeLearnerRefactor/source-measured-native-boundary-sdk-a3/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:3710\nExpected equality of these values:\n  retained->CapacitanceState()\n    Which is: { 16-byte object <40-3F AF-BE 32-57 00-00 01-00 00-00 00-00 00-00> }\n  witnessedCapacitances.at(chosen.trialId)\n    Which is: {}\n"
+          ]
+        }
+      ]
+    }
+  ],
+  "diagnosis": "Non-const QJsonObject baseline lookup inserted null baseline into absent owned C-state; four independent empty-state equality checks failed. Other graph/Dataset and C-state cases do not waive failures.",
+  "scientific_verdict": null
+}

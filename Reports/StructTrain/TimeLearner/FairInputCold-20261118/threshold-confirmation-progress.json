@@ -1,0 +1,341 @@
+{
+  "kind": "timelearner_cold_threshold_progress_readback",
+  "schema_version": 1,
+  "observed_at": "2026-11-18T09:55:32.812657+00:00",
+  "job": "s11-fair-input-threshold-m40-a1",
+  "controls": "9b47fd86155f56bb695faffa0ce3e2b0eb324bfd",
+  "classic": {
+    "native": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "8ae795c3d9dc76b16c5c8552fbc8485f1d8728e9c9548189d570aefbd34567c4",
+        "unit": "timelearner-f10a758c-235a-4629-8281-240ac59fb0db.service",
+        "invocation_id": "10076f34ec214f1c853745c7a412891d",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f10a758c-235a-4629-8281-240ac59fb0db.service",
+        "initial_main_pid": 2097133,
+        "initial_start_ticks": "406566874",
+        "sha256": "b453576f9fba895a47de4d10317dbcdc3e9e0258e6e0095ce6e9e213a4234ef4"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-f10a758c-235a-4629-8281-240ac59fb0db.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "run": {
+      "operation": "diagnostic-evaluate",
+      "execution": "completed",
+      "validity": "valid"
+    },
+    "metrics": {
+      "model_revision": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "effective_threshold": 0.019405139380343855,
+      "pooled_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "diagnostic_only": true
+    }
+  },
+  "classic_trials": [
+    {
+      "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/0",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+      "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "complete": true,
+      "censored": false,
+      "valid": true,
+      "reason": "window_closed",
+      "spike_count": 1,
+      "spike_times": [
+        0.493
+      ],
+      "stimulus_times": [
+        0.01,
+        0.09,
+        0.25,
+        0.49
+      ],
+      "begin": 0,
+      "end": 2,
+      "closed_at": 2,
+      "samples": 4001,
+      "soma_max": [
+        0.024469780037899125,
+        0.002742755563599264,
+        0.02677621381340556,
+        0.02677621381340556
+      ],
+      "lt_potential_max": 0.019859704144444407,
+      "lt_potential_recorded": true
+    },
+    {
+      "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/1",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+      "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "complete": true,
+      "censored": false,
+      "valid": true,
+      "reason": "window_closed",
+      "spike_count": 0,
+      "spike_times": [],
+      "stimulus_times": [
+        2.0105,
+        2.2505,
+        2.4105,
+        2.4905
+      ],
+      "begin": 2.0005,
+      "end": 4.000500000000001,
+      "closed_at": 4.0005,
+      "samples": 4001,
+      "soma_max": [
+        0.024469775289521323,
+        0.002742755536329078,
+        0.02677621381340556,
+        0.02677621381340556
+      ],
+      "lt_potential_max": 0.018918651319342422,
+      "lt_potential_recorded": true
+    },
+    {
+      "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/2",
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+      "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "complete": true,
+      "censored": false,
+      "valid": true,
+      "reason": "window_closed",
+      "spike_count": 0,
+      "spike_times": [],
+      "stimulus_times": [
+        4.011,
+        4.171,
+        4.251,
+        4.491
+      ],
+      "begin": 4.001,
+      "end": 6.001,
+      "closed_at": 6.001,
+      "samples": 4001,
+      "soma_max": [
+        0.024469775289521323,
+        0.002742755536329078,
+        0.02677621381340556,
+        0.02677621381340556
+      ],
+      "lt_potential_max": 0.0189361405334309,
+      "lt_potential_recorded": true
+    },
+    {
+      "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/3",
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+      "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "complete": true,
+      "censored": false,
+      "valid": true,
+      "reason": "window_closed",
+      "spike_count": 0,
+      "spike_times": [],
+      "stimulus_times": [
+        6.0115,
+        6.1715,
+        6.3315,
+        6.4915
+      ],
+      "begin": 6.0015,
+      "end": 8.0015,
+      "closed_at": 8.0015,
+      "samples": 4001,
+      "soma_max": [
+        0.02197832610873629,
+        0.002566761426104791,
+        0.026776213813405003,
+        0.026776213813405003
+      ],
+      "lt_potential_max": 0.018936140502434168,
+      "lt_potential_recorded": true
+    },
+    {
+      "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/4",
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+      "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "complete": true,
+      "censored": false,
+      "valid": true,
+      "reason": "window_closed",
+      "spike_count": 1,
+      "spike_times": [
+        8.494
+      ],
+      "stimulus_times": [
+        8.012,
+        8.032,
+        8.252,
+        8.492
+      ],
+      "begin": 8.002,
+      "end": 10.002,
+      "closed_at": 10.002,
+      "samples": 4001,
+      "soma_max": [
+        0.04062875499197871,
+        0.004884815239468154,
+        0.026840060407207322,
+        0.026840060407207322
+      ],
+      "lt_potential_max": 0.022653903856040408,
+      "lt_potential_recorded": true
+    },
+    {
+      "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/5",
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+      "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "complete": true,
+      "censored": false,
+      "valid": true,
+      "reason": "window_closed",
+      "spike_count": 0,
+      "spike_times": [],
+      "stimulus_times": [
+        10.0125,
+        10.2525,
+        10.4725,
+        10.4925
+      ],
+      "begin": 10.0025,
+      "end": 12.0025,
+      "closed_at": 12.0025,
+      "samples": 4001,
+      "soma_max": [
+        0.04215919195544082,
+        0.004884815246327223,
+        0.026840060407207322,
+        0.026840060407207322
+      ],
+      "lt_potential_max": 0.018950574616243304,
+      "lt_potential_recorded": true
+    },
+    {
+      "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/6",
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+      "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "complete": true,
+      "censored": false,
+      "valid": true,
+      "reason": "window_closed",
+      "spike_count": 1,
+      "spike_times": [
+        12.495
+      ],
+      "stimulus_times": [
+        12.013,
+        12.053,
+        12.093,
+        12.493
+      ],
+      "begin": 12.003,
+      "end": 14.003,
+      "closed_at": 14.003,
+      "samples": 4001,
+      "soma_max": [
+        0.04465225085416935,
+        0.004889553293319748,
+        0.02677623266862439,
+        0.02677623266862439
+      ],
+      "lt_potential_max": 0.021848235912736713,
+      "lt_potential_recorded": true
+    },
+    {
+      "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/7",
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+      "model_before": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "model_after": "27112e8ad8ef2d0ec298978bae0640cfc82ba7ae33c35ce710331100868e3943",
+      "complete": true,
+      "censored": false,
+      "valid": true,
+      "reason": "window_closed",
+      "spike_count": 0,
+      "spike_times": [],
+      "stimulus_times": [
+        14.0135,
+        14.4135,
+        14.4535,
+        14.4935
+      ],
+      "begin": 14.0035,
+      "end": 16.003500000000003,
+      "closed_at": 16.0035,
+      "samples": 4001,
+      "soma_max": [
+        0.04465226127545785,
+        0.004889553293319859,
+        0.02677623266862439,
+        0.02677623266862439
+      ],
+      "lt_potential_max": 0.018918660715955105,
+      "lt_potential_recorded": true
+    }
+  ],
+  "branch": {
+    "execution": "running",
+    "observed_trials": 0,
+    "whole_set_assessed": false
+  },
+  "whole_operation_completed": false,
+  "full_primary_publication_pending": true,
+  "diagnostic_only": true,
+  "training_completed": false,
+  "independent_evaluation": false,
+  "scientific_verdict": null
+}

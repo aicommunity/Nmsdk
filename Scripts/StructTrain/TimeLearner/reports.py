@@ -69,13 +69,15 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
                             "units": "model_units_SI_unverified", "adapter": "native_recognition_soma"})
     require(all((diagnostic or o["samples"]) and all(len(s["soma"]) == count for s in o["samples"]) for o in observations),
             "missing_report_soma_samples")
-    limits = []
+    limits, shared_minima = [], []
     for i in range(count):
         values = [s["soma"][i] for o in observations for s in o["samples"]]
         if not values:
             limits.append(None)
+            shared_minima.append(None)
             continue
         lo, hi = min(values), max(values)
+        shared_minima.append(lo)
         padding = (hi-lo)*.08 if hi > lo else max(abs(lo)*.08, 1e-12)
         limits.append((lo-padding, hi+padding))
     # Never overwrite an existing report, source data or completed job directory.
@@ -123,7 +125,7 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
             views = render_soma(o, descriptor["index"], descriptor["path"], limits[descriptor["index"]], folder,
                                 context_label=context_label)
             views.extend(render_positive_lobe_views(o, descriptor["index"], descriptor["path"], folder,
-                context_label=context_label))
+                context_label=context_label, shared_minimum=shared_minima[descriptor["index"]]))
             for view in views:
                 view["files"] = [f"{folder.name}/{p}" for p in view["files"]]
             figures.append({"trial_id": o["trial_id"], "sample_id": o["sample_id"], "label": o["label"],

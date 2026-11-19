@@ -17,12 +17,14 @@ from .native_evidence import require
 from .process_runner import verify_runtime
 
 OPERATIONS = frozenset(('train', 'export', 'evaluate', 'diagnostic-evaluate',
-                        'preflight', 'probe', 'calibrate', 'posttune'))
+                        'preflight', 'probe', 'calibrate', 'posttune',
+                        'physical-model-export', 'physical-model-evaluate'))
 MAX_HELP_BYTES = 128 * 1024
 MAX_HELP_SECONDS = 5.
 
 
-def inspect_native_cli(runtime, operations):
+def inspect_native_cli(runtime, operations, *, require_file_source=False):
+    require(type(require_file_source) is bool, 'native_cli_unknown_source_transport')
     require(type(operations) in (list, tuple) and bool(operations) and
             all(type(x) is str and x in OPERATIONS for x in operations),
             'native_cli_unknown_operation')
@@ -71,6 +73,8 @@ def inspect_native_cli(runtime, operations):
     present = {flag: bool(re.search(r'(?m)^\s*'+re.escape(flag)+r'(?:\s|,|=|$)', text))
                for flag in required}
     require(all(present.values()), 'native_cli_missing_advertised_operation')
+    require(not require_file_source or 'checked-file-source-v1' in text,
+            'native_cli_missing_file_source_transport')
     return {'kind': 'timelearner_native_cli_interface', 'schema_version': 1,
             'runtime_fingerprint': runtime['runtime_fingerprint'],
             'executable_sha256': runtime['executable']['sha256'],
