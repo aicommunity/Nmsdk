@@ -32,7 +32,20 @@ class TerminalConsolePipelineTest(unittest.TestCase):
     def setUpClass(cls):
         controls = Path(os.environ['TIMELEARNER_TERMINAL_CONSOLE']).resolve(strict=True)
         cls.spec = load(controls/'declaration.json')
-        require(set(cls.spec) == {'runtime', 'corpus', 'controller', 'output'}, 'terminal_console_declaration')
+        fields = {'runtime', 'corpus', 'controller', 'output'}
+        require(set(cls.spec) in (fields, fields | {'selected_cases'}), 'terminal_console_declaration')
+        all_cases = {f'configured9-{topology}-terminal-{method}-{normalization}-completed'
+                     for topology in ('classic','branch') for method in ('fixed4','window5') for normalization in ('N0','N1')}
+        all_cases |= {f'{topology}-terminal-actual-{method}-{normalization}'
+                      for topology in ('classic','branch') for method in ('fixed4','window5') for normalization in ('N0','N1')}
+        selected = cls.spec.get('selected_cases', sorted(all_cases))
+        require(type(selected) is list and len(selected) == len(set(selected)) and set(selected) <= all_cases,
+                'terminal_console_selected_case_inventory')
+        cls.selected_cases = set(selected)
+        for completed in (False, True):
+            for topology in ('classic','branch'):
+                prefix = 'configured9-'+topology if completed else topology+'-terminal-actual-'
+                require(any(name.startswith(prefix) for name in selected), 'terminal_console_selected_pair_incomplete')
         cls.runtime_path = Path(cls.spec['runtime']).resolve(strict=True)
         require(cls.runtime_path.parent == controls, 'terminal_console_runtime_not_in_controls')
         cls.runtime = load(cls.runtime_path); verify_runtime(cls.runtime)
@@ -57,6 +70,8 @@ class TerminalConsolePipelineTest(unittest.TestCase):
                 for normalization in ('N0', 'N1'):
                     folder = (f'configured9-{topology}-terminal-{method}-{normalization}-completed' if completed else
                               f'{topology}-terminal-actual-{method}-{normalization}')
+                    if folder not in self.selected_cases:
+                        continue
                     with self.subTest(case=folder):
                         self.case(folder, completed=completed)
 

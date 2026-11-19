@@ -62,6 +62,31 @@ class ColdBudgetTest(unittest.TestCase):
         self.assertEqual(report['valid_search_probe_upper_bound_per_sweep'],304)
         self.assertEqual(prepared['configuration']['search']['n0_candidate_repeats'],2)
 
+    def test_terminal9_keeps_composite_cost_and_funds_completion_without_extra_search(self):
+        for branch in (False,True):
+          for normalization in ('N0','N1'):
+            original=template(branch,normalization=normalization);terminal=deepcopy(original)
+            c=terminal['configuration'];c.update(terminal_base_schema_version=c['schema_version'],schema_version=9,
+                terminal_selection=dict(schema_version=1,maximum_wall_seconds=30.))
+            terminal.pop('sha256');terminal['sha256']=sha(terminal);before=deepcopy(terminal)
+            kwargs=dict(run_id='same-search-budget',candidates_per_input=24,maximum_probes=160,maximum_model_seconds=1000.)
+            baseline,old=prepare_single_sweep(original,**kwargs)
+            prepared,new=prepare_single_sweep(terminal,**kwargs)
+            self.assertEqual(terminal,before)
+            for field in ('native_probes_per_valid_group','composite_capacity','declared_window_model_seconds',
+                          'valid_search_probe_upper_bound_per_sweep'):
+                self.assertEqual(new[field],old[field])
+            self.assertEqual(new['native_probes_per_valid_group'],6)
+            self.assertEqual(prepared['configuration']['search'],baseline['configuration']['search'])
+            self.assertEqual(prepared['configuration']['model'],baseline['configuration']['model'])
+            self.assertEqual(prepared['configuration']['maximum_model_seconds'],1000.)
+            self.assertEqual(prepared['maximum_model_ticks'],baseline['maximum_model_ticks']+2)
+            self.assertTrue(new['terminal_completion']['completion_ticks_funded'])
+            self.assertFalse(new['terminal_completion']['extra_search_time_allowed'])
+            underfunded=deepcopy(prepared);underfunded['maximum_model_ticks']-=2
+            underfunded.pop('sha256');underfunded['sha256']=sha(underfunded)
+            self.assertFalse(coverage(underfunded)['terminal_completion']['completion_ticks_funded'])
+
     def test_insufficient_logical_native_or_window_budgets_are_not_silently_enlarged(self):
         kwargs=dict(run_id='planned',candidates_per_input=24,maximum_probes=160,maximum_model_seconds=1000.)
         with self.assertRaisesRegex(EvidenceError,'search_budget_underfunded'):

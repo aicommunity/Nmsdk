@@ -10,11 +10,18 @@ from .composite_configuration import project_training_configuration
 from .model_identity import canonical_model_sha256
 from .native_evidence import number, require
 from .native_pipeline_worker import validate_job
+from .terminal_configuration import split_terminal_configuration
+
+# One native tick notices the search time limit, the next performs the queued
+# full-model finalization. This is execution completion capacity, never extra
+# search time/probes or a numerical tolerance. A/B jobs must share this reserve.
+TERMINAL_COMPLETION_TICKS = 2
 
 
 def coverage(job):
     validate_job('train', job)
-    raw=job['configuration'];view=project_training_configuration(raw)
+    raw=job['configuration'];base,terminal_policy=split_terminal_configuration(raw)
+    view=project_training_configuration(raw)
     search=view['search'];n=len(view['model']['inputs']);adjustable=max(0,n-1)
     repeats=search.get('n0_candidate_repeats',1)
     # A candidate uses a fresh anchor/input pair for every required repetition.
@@ -24,7 +31,7 @@ def coverage(job):
     # FinalVerificationSession collects every input once, including its anchor;
     # it does not request a separate anchor for each final input.
     final=n;per_sweep=candidates+restoration+final
-    composite=raw.get('schema_version') in (6,7,8)
+    composite=base.get('schema_version') in (6,7,8)
     waves=n+2 if composite else 1
     groups=n+per_sweep
     secondary={}
@@ -35,7 +42,7 @@ def coverage(job):
             groups_fit=limits['maximum_groups']>=groups,
             native_probes_fit=limits['maximum_native_probes']>=groups*waves,
             samples_fit=limits['maximum_total_samples']>=groups*waves*raw['maximum_samples'])
-    return dict(kind='timelearner_declared_sweep_budget_coverage',schema_version=1,
+    result=dict(kind='timelearner_declared_sweep_budget_coverage',schema_version=1,
         inputs=n,adjustable_inputs=adjustable,candidate_repetitions=repeats,
         candidate_pair_probes=candidates,best_restoration_probes=restoration,
         final_all_input_probes=final,valid_search_probe_upper_bound_per_sweep=per_sweep,
@@ -50,6 +57,14 @@ def coverage(job):
             'legal edits; no additional wall/model-time overhead inferred',
             'local candidate exhaustion may occur earlier than the configured cap'],
         execution_verified=False,convergence_verified=False,scientific_verdict=None)
+    if terminal_policy is not None:
+        search_ticks=math.ceil(number(raw['maximum_model_seconds'])*number(raw['model']['frequency_hz']))
+        result['terminal_completion']=dict(search_time_limit_ticks=search_ticks,
+            required_execution_completion_ticks=TERMINAL_COMPLETION_TICKS,
+            declared_maximum_model_ticks=job['maximum_model_ticks'],
+            completion_ticks_funded=job['maximum_model_ticks']>=search_ticks+TERMINAL_COMPLETION_TICKS,
+            extra_search_time_allowed=False)
+    return result
 
 
 def prepare_single_sweep(job, *, run_id, candidates_per_input, maximum_probes,
@@ -66,7 +81,8 @@ def prepare_single_sweep(job, *, run_id, candidates_per_input, maximum_probes,
             all(type(v) is int and v>0 for v in (candidates_per_input,maximum_probes)),
             'single_sweep_explicit_budget')
     seconds=number(maximum_model_seconds);require(seconds>0,'single_sweep_model_seconds')
-    require(job['configuration'].get('schema_version') in (6,7,8),
+    base,terminal_policy=split_terminal_configuration(job['configuration'])
+    require(base.get('schema_version') in (6,7,8),
             'single_sweep_requires_declared_composite_cold_job')
     require(job['optional_modes']==dict(sync_capacitance_trim=0,post_train_tuning=False,
                                        auto_calibrate_threshold=False),
@@ -76,8 +92,9 @@ def prepare_single_sweep(job, *, run_id, candidates_per_input, maximum_probes,
         maximum_probes=maximum_probes,maximum_sweeps=1)
     config['maximum_model_seconds']=seconds
     ticks=number(seconds*number(config['model']['frequency_hz']))
-    require(0<ticks<=2**53-1,'single_sweep_model_tick_bound')
-    changed['maximum_model_ticks']=math.ceil(ticks)
+    maximum_ticks=math.ceil(ticks)+(TERMINAL_COMPLETION_TICKS if terminal_policy is not None else 0)
+    require(0<ticks and maximum_ticks<=2**53-1,'single_sweep_model_tick_bound')
+    changed['maximum_model_ticks']=maximum_ticks
     changed.pop('sha256');changed['sha256']=canonical_model_sha256(changed)
     report=coverage(changed)
     require(report['first_sweep_fits'],'single_sweep_search_budget_underfunded')
