@@ -2223,7 +2223,7 @@ TEST(NativeLearnedState,FreshProcessImport)
             {"probe",EncodeNativeProbeEvidence(*probe)},{"need",target->IsNeedToTrain.GetData()}};
         if(package["schema_version"]==QJsonValue(8)) {
             QJsonArray journal;for(const auto& e:target->NativeTrainingController().TerminalJournal())journal.append(e);
-            EXPECT_EQ(journal,package.value("terminal_journal"));record["terminal_journal"]=journal;
+            EXPECT_EQ(QJsonValue(journal),package.value("terminal_journal"));record["terminal_journal"]=journal;
             EXPECT_EQ(target->ImportedNativeCapacitanceState(),package.value("capacitance_state").toObject());
         }
         if(package["schema_version"]==QJsonValue(2) || (package["schema_version"]==QJsonValue(3) || package["schema_version"]==QJsonValue(4)))

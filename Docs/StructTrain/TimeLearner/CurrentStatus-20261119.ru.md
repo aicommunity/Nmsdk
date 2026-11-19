@@ -111,6 +111,13 @@ main4111704/start412504166 подтверждены живыми. Это ещё 
 новых научных Train/Test нет. [Handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native56-running.json).
 Следующие записи этого раздела — история предыдущих попыток, не активные jobs.
 
+Уточнение A1: fresh build остановилась на двух сравнениях QJsonArray с
+QJsonValue в новом factory. Выполнено0 из56 cases; supervisor и все группы
+закрыты, reservations освобождены. Ошибка исправлена явным QJsonValue;
+аналогичное сравнение исправлено в fresh-process тесте. Прежний A1 сохранён:
+[primary и подтверждение отказа](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a1-build-failure.archive.json).
+Исправление ещё требует отдельной свежей сборки и выполнения56 cases.
+
 Root47f532a7aef1253e03bac7073f192ea555e118e5 / Pulse57f603b1048d6547bda6e2e97f7decc0305715f0:
 реализован process-local захват полного graph/Dataset/storage/C-state выбранной
 контроллером измеренной точки. Добавлены6 native cases, исправлена постановка
