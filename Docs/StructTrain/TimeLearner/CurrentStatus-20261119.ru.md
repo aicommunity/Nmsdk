@@ -104,8 +104,15 @@ Heldout4 не отменяет FP исходной матрицы и не явл
 
 В feature подготовлена поддержка прямого физического DATA export из solo
 terminal8 и дополнительные native/Python проверки. Серверная приёмка ещё
-не выполнена. На Windows .14 запущен отдельный fresh SDK build; kernel Job жив,
-в приватном source проверены5092 файла и восемь репозиториев.
+не выполнена. На Windows .14 завершена компиляция; исходный build outcome
+descendants_remaining сохранён, вся группа закрыта. Отдельный artifact audit
+прошёл:5092 source files,17287 dependency files,62 runtime files.
+Native78 с новыми DATA assertions выполняется; kernel Job подтверждён живым.
+В новых DATA cases уже зафиксированы отказы настройки fixture: у fresh owner
+оставался Default PostTune=true, который configured Build штатно отклоняет.
+Настройка fixture исправлена вместе с немедленной проверкой NativeModelEditFailure;
+исправленная версия требует отдельной сборки и полного native78. Первый исход
+сохраняется как отрицательный, его итоговые counts ещё ожидаются.
 Это третья вычислительная машина для инженерной проверки; научные Train
 продолжаются на M40/Elder, их runtime остаются прежними. Это работа этапа5,
 а не новый научный результат. [Контракт и оставшиеся проверки](TerminalPhysicalData8-20261119.ru.md).

@@ -1,8 +1,18 @@
 # Windows: серверная проверка физической DATA из terminal8
 
-Статус: fresh SDK build запущен, живой kernel Job подтверждён.
-Ни сборка, ни native/Python проверки пока не приняты. Это работа этапа5;
+Статус: компиляция/линковка закончились с returncode0; исходная сборка
+сохранена как `descendants_remaining`, build_accepted=false. Вся группа закрыта.
+Независимый closed-build audit прошёл:5092 source files,17287 dependency files,
+62 runtime files. Native78 запущен и подтверждён живым kernel Job;
+его полный итог и Python3 ещё не приняты. Это работа этапа5;
 научные N4 Train на M40 и Elder продолжают использовать прежние runtime.
+
+В первом native78 новые solo DATA fixtures оставляли включённый Default
+EnablePostTrainTuning=true и получали штатный отказ configured-owner Build.
+Причина относится к настройке нового тестового owner. Исправление выключает
+незаявленные optional phases до Install/Init и немедленно проверяет
+NativeModelEditFailure; guard и waveform tolerances сохраняются. Первый
+прогон завершается в исходном виде; исправление ожидает нового полного native78.
 
 ## Точная область
 
@@ -69,4 +79,6 @@ Git policy objects. Это подготовка нового приватног�
 не изменение исходов какого-либо научного опыта.
 
 [Точные dispatch и kernel handles](../../../../../Reports/StructTrain/TimeLearner/TerminalPhysicalData8-20261119/windows-sdk-running.json).
+[Закрытие сборки и отдельный artifact audit](../../../../../Reports/StructTrain/TimeLearner/TerminalPhysicalData8-20261119/windows-sdk-closed-audit.json).
+[Native78: объявление и живой процесс](../../../../../Reports/StructTrain/TimeLearner/TerminalPhysicalData8-20261119/windows-native78-running.json).
 Полная семантика и незакрытые проверки: [контракт terminal8 DATA](../../TerminalPhysicalData8-20261119.ru.md).

@@ -62,6 +62,11 @@ void CheckTerminalPhysicalDataTransfer(Fixture& f,const Plan& plan,const QJsonOb
     destination->SetEnvironment(f.environment);destination->SetGlobalTimeStep(f.frequency);
     destination->ControllerVersion=prepared->controllerVersion;destination->CalculateMode=prepared->calculateMode;
     destination->StructureBuildMode=prepared->structureBuildMode;destination->IsNeedToTrain=false;
+    // DATA installs physical children without starting an optional controller
+    // phase. Fresh legacy samples enable PostTune by default; an unplanned
+    // phase is deliberately rejected by the configured-owner Build guard.
+    destination->EnablePostTrainTuning=false;destination->AutoCalibrateFixedLTZThreshold=false;
+    destination->SyncCapacitanceTrim=0;
     destination->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(prepared->configuration)).toJson(QJsonDocument::Compact).toStdString();
     UEPtr<UContainer> component=destination;ASSERT_NE(f.model->AddComponent(component),ForbiddenId);
     // Solo DATA uses the ordinary prepared-graph installer. The public frozen
@@ -70,9 +75,10 @@ void CheckTerminalPhysicalDataTransfer(Fixture& f,const Plan& plan,const QJsonOb
         prepared->neuron,prepared->dataset,prepared->parameters);
     ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
     destination->Init();ASSERT_TRUE(destination->IsReady() && destination->IsInit());
+    ASSERT_TRUE(destination->NativeModelEditFailure().empty())<<destination->NativeModelEditFailure();
     EXPECT_DOUBLE_EQ(f.Time(),clock);
     EXPECT_FALSE(destination->HasNativePhysicalModelData());EXPECT_FALSE(destination->IsNeedToTrain.GetData());
-    EXPECT_EQ(destination->NativeTrainingController().State(),NativeTrainingState::Idle);
+    ASSERT_EQ(destination->NativeTrainingController().State(),NativeTrainingState::Idle);
     EXPECT_FALSE(destination->NativeTrainingController().Search());
     EXPECT_FALSE(destination->NativeTrainingController().Certificate());
     EXPECT_EQ(destination->NativeTrainingController().ModelEpoch(),0u);
@@ -84,6 +90,7 @@ void CheckTerminalPhysicalDataTransfer(Fixture& f,const Plan& plan,const QJsonOb
     const auto frozenImported=frozenDestination->ImportNativePhysicalModelData(frozenData,implementation);
     ASSERT_EQ(frozenImported.status,NativeModelBuildStatus::Adopted)<<frozenImported.reason;
     frozenDestination->Init();ASSERT_TRUE(frozenDestination->IsReady() && frozenDestination->IsInit());
+    ASSERT_TRUE(frozenDestination->NativeModelEditFailure().empty())<<frozenDestination->NativeModelEditFailure();
     EXPECT_TRUE(frozenDestination->HasNativePhysicalModelData());EXPECT_FALSE(frozenDestination->IsNeedToTrain.GetData());
     EXPECT_EQ(frozenDestination->NativeTrainingController().State(),NativeTrainingState::Idle);
     EXPECT_FALSE(frozenDestination->NativeTrainingController().Certificate());

@@ -1,7 +1,17 @@
 # Физическая DATA-модель из terminal8: изменение ожидает серверной проверки
 
 Статус: реализация и интеграционные проверки подготовлены в feature-ветке.
-На отдельной Windows-машине запущена новая сборка; runtime-проверка ещё не выполнена.
+На Windows завершены компиляция и линковка. Исходный `descendants_remaining`
+сохранён; отдельный closed-build audit готовых артефактов прошёл.
+Native78 выполняется, полный runtime-итог и Python3 ещё не приняты.
+В первом прогоне новые DATA cases обнаружили ошибку настройки fixture:
+fresh owner наследовал EnablePostTrainTuning=true из Default. Configured-owner
+Build штатно отклонял незаявленную optional phase; очередь пробы затем получала
+native_model_requires_repair_after_failed_edit. Исправлен именно fixture:
+optional controller phases выключаются до Install/Init, причина из
+NativeModelEditFailure проверяется немедленно. Защитный Build guard, семантика
+Idle, допуски waveform и все16 cases сохранены. Исходный отрицательный прогон
+должен завершиться и сохраниться; исправленная версия требует нового native78.
 [Точная декларация и порядок проверки](ValidationPlans/WindowsTerminalPhysicalData8A1-20261119/PLAN.ru.md).
 Текущие научные N4 Train
 используют неизменные Root893/Pulsec508; их runtime этим изменением не обновляется.
