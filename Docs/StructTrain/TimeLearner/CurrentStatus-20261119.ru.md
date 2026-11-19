@@ -44,7 +44,7 @@ expanded bytes проверены по hash/size; исходная Train primary
 |M40: временной отчёт Elder baseline/threshold,16 проб|2/2 declared tests PASS; галерея baseline/threshold создана. Kernel group закрыта. Визуальная приёмка и публикация этой новой галереи ещё впереди.|
 |M40: terminal-selection fresh SDK|44/44 PASS, включая14 terminal cases,6 snapshots и прежние регрессии; supervisor/все группы закрыты, primary опубликован.|
 |M40: terminal portable fresh SDK A2|Собрано, выполнено56:44 PASS/12 FAIL. Все12 composite cases прошли; plain fresh-process warm cases запускались до native Init. Gate отклонён, все группы закрыты, primary опубликован.|
-|M40: terminal portable fresh SDK A3|Сборка завершилась, выполняются60 C++ cases. Четыре protocol4 stopped warm cases отказали при повторном экспорте; причина — удаление candidate/anchor primary старого journal при warm Start. Исправление подготовлено отдельно; A3 runtime не изменяется.|
+|M40: terminal portable fresh SDK A3|Закрыта:60 выполнено,50 PASS/10 FAIL. Четыре protocol4 warm exports потеряли journal primary; два C0 cases не достигли unmeasured edit в10s; четыре completed plain cases отклонены из-за неактивного legacy C-trim sentinel. Gate отклонён, primary опубликован; исправления ожидают новой серии.|
 |Elder: независимый terminal-selection fresh SDK|14/14 PASS, supervisor/все группы закрыты, primary опубликован.|
 |Предыдущий Elder: fresh SDK,14 targeted cases|13 PASS/1 FAIL. Постановка kernel case исправлена; его corrected version прошла на M40. Старый отказ сохранён, старый gate не переименован в успешный.|
 |Предыдущий M40 gate29|25 PASS/4 FAIL. Четыре N0 ThresholdCandidate не получили исходного certificate, maximum_sweeps_exhausted; downstream проверки ещё не подтверждены. Persistence2 прошли.|
@@ -53,7 +53,7 @@ expanded bytes проверены по hash/size; исходная Train primary
 [M40 report receipt](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-temporal-report-closed.json),
 [Elder14 receipt](../../../Reports/StructTrain/TimeLearner/MeasuredBoundarySelection-20261118/elder14-closed-rejected.json).
 Перечисленные ранее живые задания завершены; повторный запуск не выполнялся.
-Прежние native jobs и portable A2 закрыты; A3 выполняет native cases отдельно. Новых научных Train нет.
+Все прежние native jobs, portable A2 и A3 закрыты. Новых научных Train нет.
 Эти адресные проверки не заменяют полную объявленную матрицу262Linux/261Windows.
 [Native terminal acceptance](NativeTerminalSelectionAcceptance-20261119.ru.md).
 
@@ -92,7 +92,12 @@ historical_summary на source epoch и4 новых plain completed cases про
 Start. Исправление сохраняет reference groups и все candidate/anchor trials,
 необходимые retained journal, с проверкой общего byte budget. Восемь composite
 warm controls усилены реальным новым consumed measurement перед stop/export.
-Эти изменения ожидают следующего отдельного server gate.
+Эти изменения ожидают следующего отдельного server gate. A3 полностью закрыта:
+50/60 PASS; [primary и исходные10 отказов](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a3-rejected.archive.json).
+Дополнительно snapshot guard согласован с фактическим условием pending C-trim
+обоих learner: неактивный CapApplyPending при trim=0 не является работающим
+контроллером. Два C0 transport fixtures явно получают30s вместо10s, чтобы дойти
+до candidate/anchor pair и настоящего unmeasured edit; научные budgets не изменены.
 Полная native приёмка, cold/runtime declarations и Python analysis integration
 остаются обязательной открытой частью.
 [Полный контракт](TerminalBestStateBoundary-20261118.ru.md).

@@ -7,7 +7,22 @@ terminal journal. Рабочее исправление сохраняет тр�
 его byte budget до изменения активной попытки. Journal validation не ослабляется.
 Все восемь composite warm controls усилены: перед stop должен быть принят хотя
 бы один настоящий logical measurement новой попытки. Исправление ещё не принято
-на сервере; A3 продолжает остальные declared tests, её runtime не изменён.
+на сервере. A3 закрыта:50 PASS/10 FAIL, все60 cases выполнены;1123 primary
+members и17 log aliases опубликованы во внешнем архиве M40. Исходный A3 runtime
+не изменён. Кроме4 protocol4 и2 C0 отказов,4 plain completed cases обнаружили
+ошибочный snapshot guard: CapApplyPending отвергался даже при trim=0.
+Guard согласован с NativeProbeModelBindings/scheduler без сброса флага или
+изменения параметров. Все исправления требуют нового native gate.
+
+Ещё два A3 C0 transport cases не достигли проверяемого unmeasured edit:
+10s wall budget истёк после capture и первого search input, до anchor.
+Следующая постановка объявляет30s только для двух C0 fixtures; остальные
+deadline fixtures сохраняют10s. Model-time20s, edit budget, физика, научные
+допуски и бюджеты реальных Train не меняются. Precondition schema2 сохраняет
+elapsed wall time, число валидных raw trials/измеренных кандидатов и наличие
+selected boundary. Сценарий всё ещё обязан наблюдать настоящий edit, дождаться
+реального deadline и проверить полный native restore. Более долгий fixture
+budget не является научным улучшением обучения.
 
 Это рабочее уточнение открытой части этапов5/7/10, не приёмка готового формата.
 Адресная native transaction принята на Root3c5/Pulse1d8. Factory schema8,

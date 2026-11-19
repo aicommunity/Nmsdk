@@ -6398,7 +6398,11 @@ template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int 
     EditingRig<Owner> rig(2000,normalization,"terminal_restore_"+std::to_string(int(kind))+(withCapacitance?"_C":""),
         false,2,true,2,1,false,className);
     if(withCapacitance) {NativeCapacitanceCorrection correction;ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,correction));}
-    auto plan=TrainingPlan(rig);plan.maximumWallSeconds=10.;plan.maximumModelSeconds=20.;
+    // C0 serializes a real native witness for every raw trial. A3 reached only
+    // capture/search-input in10s, before the required candidate/anchor pair.
+    // Declare30s for this transport fixture; keep model-time/edit budgets and
+    // scientific tolerances. Exercise the real deadline after an observed edit.
+    auto plan=TrainingPlan(rig);plan.maximumWallSeconds=withCapacitance?30.:10.;plan.maximumModelSeconds=20.;
     plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
     plan.recordCapacitanceHistory=withCapacitance;
     plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
@@ -6413,6 +6417,7 @@ template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int 
             measuredWaves[result.requestedSpecification->trialId]=samples;
     };
     RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount,"_terminal_source_");
+    const auto fixtureWallStart=NativeTrainingWallTime();
     rig.learner->BeginNativeTraining(plan);
     const double deadline=NativeTrainingWallTime()+plan.maximumWallSeconds+.01;
     bool sawUnmeasuredEdit=false;
@@ -6440,10 +6445,15 @@ template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int 
     }
     const auto& service=rig.learner->NativeTrainingController();
     Artifact(rig.name+"_terminal_selection_precondition.json",QJsonDocument(QJsonObject{
-        {"kind","native_terminal_selection_test_precondition"},{"schema_version",1},
+        {"kind","native_terminal_selection_test_precondition"},{"schema_version",2},
         {"state",NativeTrainingStateName(service.State())},{"outcome",TrainingStatusName(service.Outcome())},
         {"reason",QString::fromStdString(service.Reason())},{"real_unmeasured_edit_observed",sawUnmeasuredEdit},
         {"measurement_wall_budget",plan.maximumWallSeconds},{"finalization_wall_budget",plan.terminalSelection->maximumWallSeconds},
+        {"fixture_scope","native_restore_lifecycle_transport"},{"owned_C0_primary",withCapacitance},
+        {"wall_elapsed",NativeTrainingWallTime()-fixtureWallStart},
+        {"valid_raw_trials",double(measuredWaves.size())},{"selected_boundary_available",bool(service.SelectedNativeBoundary())},
+        {"search_probes",service.Search()?QJsonValue(double(service.Search()->IssuedProbes())):QJsonValue(QJsonValue::Null)},
+        {"measured_candidates",service.Search()?QJsonValue(double(service.Search()->Evidence().size())):QJsonValue(QJsonValue::Null)},
         {"maximum_edits",double(plan.search.maximumEdits)},{"native_plan_only",true}}).toJson());
     ASSERT_TRUE(sawUnmeasuredEdit)<<service.Reason();ASSERT_EQ(service.State(),NativeTrainingState::Finalizing)<<service.Reason();
     const auto selected=service.SelectedNativeBoundary();ASSERT_TRUE(selected);
@@ -7077,6 +7087,8 @@ template<class Learner> void NativeTerminalCompletedPlainPackage(int normalizati
     const std::string prefix=std::string("terminal_plain_completed_")+
         (std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value?"branch":"classic")+"_N"+std::to_string(normalization);
     EditingRig<Learner> rig(2000,normalization,prefix);rig.learner->ControllerVersion.SetDataDirect(2);
+    ASSERT_EQ(rig.learner->SyncCapacitanceTrim.GetData(),0);
+    ASSERT_FALSE(rig.learner->NativeProbeModelBindings().legacyPhysicsPending);
     // Engineering transport control with the pre-existing broad sync tolerance.
     // It must not be reported as scientific convergence at the .02 default.
     auto plan=TrainingPlan(rig,.2);plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
