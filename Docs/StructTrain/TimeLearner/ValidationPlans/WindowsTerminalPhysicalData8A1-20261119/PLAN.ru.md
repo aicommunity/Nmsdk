@@ -17,8 +17,9 @@ NativeModelEditFailure; guard и waveform tolerances сохраняются. П�
 Два дополнительных rollback failures показывают Copy mismatch DebugSysEventsMask:
 32-битный atoi в общем XML integral reader Rdk не сохраняет unsigned4294967295
 на Windows. Ещё один failed-attachment test исчерпал10s wall до нужного edit.
-Необходимы общее исправление сериализации с регрессиями и исправление
-предусловия инженерного теста; исходные78 cases сохраняются в новом inventory.
+Общее исправление Rdk cb6fe50da94ca9cbc9d5e4c0811d42b37b44a14a,
+три regression cases и бюджет30s инженерной fixture подготовлены;
+их серверная проверка ещё нужна. Новый inventory81 сохраняет все исходные78.
 Подготовленная A2 только с fixture fix не собрана и не является приёмкой.
 
 ## Точная область

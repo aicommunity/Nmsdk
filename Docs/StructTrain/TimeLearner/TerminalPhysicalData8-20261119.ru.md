@@ -18,8 +18,9 @@ Idle, допуски waveform и все16 cases сохранены. Исправ
 DebugSysEventsMask: общий XML integral reader использует32-битный atoi.
 На Windows преобразование4294967295→2147483647 подтверждено на worker.
 Ещё один failed-attachment case исчерпал10s wall до требуемого изменения
-модели. Общее исправление Rdk, регрессионные проверки и исправление бюджета
-инженерной fixture ещё нужны. Подготовленную A2 только с первым исправлением
+модели. Общее исправление Rdk cb6fe50da94ca9cbc9d5e4c0811d42b37b44a14a,
+три production API регрессии и бюджет30s инженерной fixture подготовлены;
+их серверная приёмка ещё нужна. Подготовленную A2 только с первым исправлением
 не запускали. Следующий прогон должен включить все исправления и явно
 расширенный regression inventory, сохранив все исходные78 cases.
 Исходный отрицательный прогон сохраняется; его полный primary ещё ожидает
@@ -112,8 +113,9 @@ changed-graph terminal restores; Classic/Branch × Fixed4/Window5 × N0/N1.
    Console evaluation новой комбинации остаётся отдельной runtime-проверкой.
 7. Отказ для неизвестных source versions и сохранность исходного graph/controller.
 
-Приёмка требует fresh SDK, полного прежнего native78 с дополнительными
-assertions, прежних физических DATA проверок и3 новых Python test methods
+Приёмка требует fresh SDK, всех прежних78 cases с дополнительными
+assertions и трёх RdkIntegralXml регрессий (native81), прежних физических DATA
+проверок и3 новых Python test methods
 по всем16 фактическим native fixtures. Прежний accepted78 относится к старому
 исходному срезу и не доказывает выполнение новых assertions.
 

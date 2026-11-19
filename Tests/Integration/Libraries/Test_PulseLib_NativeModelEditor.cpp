@@ -6420,11 +6420,12 @@ template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int 
     EditingRig<Owner> rig(2000,normalization,"terminal_restore_"+std::to_string(int(kind))+(withCapacitance?"_C":""),
         false,2,true,2,1,false,className);
     if(withCapacitance) {NativeCapacitanceCorrection correction;ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,correction));}
-    // C0 serializes a real native witness for every raw trial. A3 reached only
-    // capture/search-input in10s, before the required candidate/anchor pair.
-    // Declare30s for this transport fixture; keep model-time/edit budgets and
-    // scientific tolerances. Exercise the real deadline after an observed edit.
-    auto plan=TrainingPlan(rig);plan.maximumWallSeconds=withCapacitance?30.:10.;plan.maximumModelSeconds=20.;
+    // This fixture must observe an actual unmeasured edit before forcing the
+    // real deadline. Windows A1 exhausted10s before that precondition; C0 also
+    // serializes a native witness per trial. Use the existing30s C0 allowance
+    // for both engineering fixtures; preserve model-time/edit budgets and
+    // scientific tolerances.
+    auto plan=TrainingPlan(rig);plan.maximumWallSeconds=30.;plan.maximumModelSeconds=20.;
     plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
     plan.recordCapacitanceHistory=withCapacitance;
     plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;

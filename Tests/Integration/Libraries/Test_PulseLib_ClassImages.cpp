@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "../../../Rdk/Core/Engine/UClassImageRegistry.h"
+#include "../../../Rdk/Core/Serialize/UXMLStdSerialize.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseNeuron.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
@@ -18,6 +19,76 @@
 namespace {
 using namespace RDK;
 using namespace NMSDK;
+
+template<class T> void IntegralXmlRoundtrip(T expected)
+{
+ USerStorageXML saved;ASSERT_TRUE(saved.Create("IntegralProperty"));
+ saved<<expected;
+ std::string xml;ASSERT_TRUE(saved.Save(xml));
+ USerStorageXML loaded;ASSERT_TRUE(loaded.Load(xml,"IntegralProperty"));
+ T observed{};loaded>>observed;
+ EXPECT_EQ(observed,expected)<<xml;
+}
+
+template<class T> void IntegralXmlBoundaries()
+{
+ IntegralXmlRoundtrip<T>(T(0));IntegralXmlRoundtrip<T>(T(1));
+ IntegralXmlRoundtrip<T>(std::numeric_limits<T>::lowest());
+ IntegralXmlRoundtrip<T>(std::numeric_limits<T>::max());
+}
+
+TEST(RdkIntegralXml, FullWidthValuesSurviveSaveLoad)
+{
+ IntegralXmlBoundaries<bool>();IntegralXmlBoundaries<char>();
+ IntegralXmlBoundaries<unsigned char>();IntegralXmlBoundaries<short>();
+ IntegralXmlBoundaries<unsigned short>();IntegralXmlBoundaries<int>();
+ IntegralXmlBoundaries<unsigned int>();IntegralXmlBoundaries<long>();
+ IntegralXmlBoundaries<unsigned long>();IntegralXmlBoundaries<long long>();
+ IntegralXmlBoundaries<unsigned long long>();
+ // Also exercise interior values that can be lost by a32-bit intermediate.
+ IntegralXmlRoundtrip<long long>(4294967297LL);
+ IntegralXmlRoundtrip<long long>(-4294967297LL);
+ IntegralXmlRoundtrip<unsigned long long>(9223372036854775808ULL);
+}
+
+TEST(RdkIntegralXml, LegacyDecimalPrefixesRemainReadable)
+{
+ USerStorageXML xml;ASSERT_TRUE(xml.Create("IntegralProperty"));
+ int value=0;unsigned int mask=0;bool enabled=false;
+ xml.SetNodeText("  +17suffix");xml>>value;EXPECT_EQ(value,17);
+ xml.SetNodeText(" -23.5");xml>>value;EXPECT_EQ(value,-23);
+ xml.SetNodeText("-1");xml>>mask;EXPECT_EQ(mask,std::numeric_limits<unsigned int>::max());
+ xml.SetNodeText(" +1 tail");xml>>enabled;EXPECT_TRUE(enabled);
+ xml.SetNodeText("0x10");xml>>value;EXPECT_EQ(value,0); // Decimal, as before.
+}
+
+TEST(RdkIntegralXml, NativeNeuronCopyAndClassImagePreserveUnsignedMasks)
+{
+ const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+ auto source=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject("NSPNeuronGenAsymRmD001C1e9"));
+ auto copy=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject("NSPNeuronGenAsymRmD001C1e9"));
+ ASSERT_TRUE(source);ASSERT_TRUE(copy);
+ source->SetEnvironment(core.environment);source->SetGlobalTimeStep(2000);source->Init();
+ source->StructureBuildMode=0;source->UseElementDefaults=false;
+ const auto fullMask=std::numeric_limits<unsigned int>::max();
+ source->DebugSysEventsMask=fullMask;
+ auto soma=source->GetComponentL<UContainer>("Soma1",true);ASSERT_TRUE(soma);
+ soma->DebugSysEventsMask=0x80000001u;
+ copy->SetEnvironment(core.environment);source->Copy(copy);copy->Init();
+ EXPECT_EQ(copy->DebugSysEventsMask.GetData(),fullMask);
+ auto copiedSoma=copy->GetComponentL<UContainer>("Soma1",true);ASSERT_TRUE(copiedSoma);
+ EXPECT_EQ(copiedSoma->DebugSysEventsMask.GetData(),0x80000001u);
+ EXPECT_EQ(DescribeClassImage(copy),DescribeClassImage(source));
+ const std::string name="TimeLearnerUnit_FullUnsignedMask";
+ const auto image=RegisterClassImage(core.storage,name,source);
+ auto restored=dynamic_pointer_cast<NPulseNeuron>(core.storage->TakeObject(name));ASSERT_TRUE(restored);
+ restored->SetEnvironment(core.environment);restored->Init();
+ EXPECT_EQ(restored->DebugSysEventsMask.GetData(),fullMask);
+ auto restoredSoma=restored->GetComponentL<UContainer>("Soma1",true);ASSERT_TRUE(restoredSoma);
+ EXPECT_EQ(restoredSoma->DebugSysEventsMask.GetData(),0x80000001u);
+ EXPECT_EQ(DescribeClassImage(restored),image.descriptor);
+ core.storage->ReturnObject(restored);core.storage->ReturnObject(copy);core.storage->ReturnObject(source);
+}
 
 UEPtr<NPulseChannel> Channel(double capacity)
 {
