@@ -20,6 +20,7 @@
 #include "TimeLearner/NativeLearnedState.h"
 #include "TimeLearner/NativeCompositeLearnedState.h"
 #include "TimeLearner/NativeTrainingBindings.h"
+#include "TimeLearner/NativeMeasuredTrainingBoundary.h"
 #include "TimeLearner/CandidateWindowRecoveryLedger.h"
 #include "TimeLearner/NativeRecognitionState.h"
 #include "TimeLearner/NativeRecognitionObservationValidation.h"
@@ -5174,3 +5175,125 @@ TEST(NativeTerminalCompositePackage,ClassicFixedCompletedWithoutTransition){Nati
 TEST(NativeTerminalCompositePackage,BranchFixedCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,true,true);}
 TEST(NativeTerminalCompositePackage,ClassicWindowCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,true);}
 TEST(NativeTerminalCompositePackage,BranchWindowCompletedWithoutTransition){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,true);}
+
+namespace {
+template<class Owner> void ActualCompositeTerminalRestore(bool window,bool n0)
+{
+    NativeCompositeFixture<Owner> f(2000,false,64,false,n0);f.owner->ControllerVersion.SetDataDirect(2);
+    auto plan=window?ActualWindowServicePlan(f,.02,false):ServicePlan(f,.02);
+    plan.search.normalization=f.modelSpec.normalization;plan.search.maximumCandidatesPerInput=2;
+    plan.search.maximumSweeps=1;plan.search.n0CandidateRepeats=1;
+    plan.search.bounds[0].minimumLength=2;plan.search.bounds[0].maximumLength=3;
+    plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
+    // Two references plus a candidate/anchor pair, each with N+2 actual raw
+    // trials. Allow bounded scheduler gaps, then stop inside the NEXT group.
+    // This uses the real model clock, independent of machine/serialization
+    // speed. No synthetic observation, manual physical edit or forged clock.
+    const auto rawPerGroup=plan.protocol.inputs.size()+2;
+    plan.maximumModelSeconds=double(plan.protocol.inputs.size()+2)*double(rawPerGroup)*
+        (plan.probe.specification.end+8./f.frequency)+plan.probe.specification.end/2.;
+    ASSERT_GE(plan.maximumModelSeconds,plan.composite->maximumGroupModelSeconds);
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch":"classic")+
+        "-terminal-actual-"+(window?"window5":"fixed4")+(n0?"-N0":"-N1");
+    std::shared_ptr<const NativeMeasuredTrainingBoundary> selected;
+    QJsonObject unmeasured,unmeasuredDataset;std::vector<InputParameters> unmeasuredParameters;
+    std::size_t unmeasuredEpoch=0;bool sawUnmeasuredEdit=false,sawFinalizing=false;
+    ServiceStart(f,plan);
+    ServiceTicks(f,[&]{
+        const auto& service=f.owner->NativeTrainingController();
+        if(service.SelectedNativeBoundary())selected=service.SelectedNativeBoundary();
+        if(!sawUnmeasuredEdit && selected && service.State()==NativeTrainingState::Searching &&
+            service.ModelEpoch()>selected->Selection().candidate.modelEpoch &&
+            f.Revision()!=selected->NeuronIdentity().value("sha256").toString().toStdString())sawUnmeasuredEdit=true;
+        if(service.State()==NativeTrainingState::Finalizing) {
+            sawFinalizing=true;unmeasuredEpoch=service.ModelEpoch();unmeasuredParameters=f.owner->ReadNativeParameters();
+            auto neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+            auto generator=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+            unmeasured=NmsdkTools::IdentifyModel(neuron.Get(),{{&generator->Output,"burst"}});
+            unmeasuredDataset=NmsdkTools::IdentifyModel(f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get());
+        }
+    });
+    const auto& service=f.owner->NativeTrainingController();
+    SavePortableObject(name.c_str(),"restore-precondition.json",{{"kind","native_actual_composite_restore_precondition"},{"schema_version",1},
+        {"observed_unmeasured_edit",sawUnmeasuredEdit},{"observed_finalizing",sawFinalizing},
+        {"model_time_budget",plan.maximumModelSeconds},{"wall_time_budget",plan.maximumWallSeconds},
+        {"state",NativeTrainingStateName(service.State())},{"outcome",TrainingStatusName(service.Outcome())},
+        {"reason",QString::fromStdString(service.Reason())},{"terminal_event",service.TerminalSelectionEvent()},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+    ASSERT_TRUE(sawUnmeasuredEdit);ASSERT_TRUE(sawFinalizing);ASSERT_TRUE(selected);
+    ASSERT_EQ(service.State(),NativeTrainingState::Finished)<<service.Reason();
+    ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();ASSERT_FALSE(service.Certificate());
+    ASSERT_EQ(service.TerminalSelectionEvent().value("status"),QJsonValue("restored"));
+    EXPECT_EQ(service.TerminalSelectionTransactions(),1u);EXPECT_EQ(service.ModelEpoch(),unmeasuredEpoch+1);
+    EXPECT_EQ(service.TranscriptModelEpoch(),unmeasuredEpoch);EXPECT_NE(f.Revision(),unmeasured.value("sha256").toString().toStdString());
+    EXPECT_EQ(f.Revision(),selected->NeuronIdentity().value("sha256").toString().toStdString());
+    EXPECT_EQ(f.owner->ReadNativeParameters(),selected->Selection().candidate.fullParameters);
+    EXPECT_NE(f.owner->ReadNativeParameters(),unmeasuredParameters);
+    const auto exported=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+    const auto history=exported.learnedState.value("historical_state").toObject();
+    EXPECT_EQ(history.value("model_revision"),unmeasured.value("sha256"));
+    EXPECT_EQ(history.value("model_epoch"),QJsonValue(double(unmeasuredEpoch)));
+    EXPECT_EQ(exported.summary.value("historical_summary").toObject().value("actual_model_revision"),unmeasured.value("sha256"));
+    EXPECT_EQ(history.value("schema_version"),QJsonValue(window?6:5));
+    EXPECT_EQ(selected->DatasetIdentity(),unmeasuredDataset);
+    SavePortableObject(name.c_str(),"terminal-state8.json",exported.learnedState);
+    SavePortableObject(name.c_str(),"terminal-summary9.json",exported.summary);
+    SavePortableObject(name.c_str(),"source-selected-actual.json",{{"source",unmeasured},
+        {"selected",selected->NeuronIdentity()},{"actual",exported.learnedState.value("neuron").toObject().value("graph").toObject().value("identity")},
+        {"source_epoch",double(unmeasuredEpoch)},{"actual_epoch",double(service.ModelEpoch())}});
+    const auto clock=f.Time();
+    auto prepared=PrepareNativeLearnedState(exported.learnedState,f.storage,f.environment,CompositePackageImplementation);
+    EXPECT_EQ(f.Time(),clock);EXPECT_FALSE(prepared->service.Search());EXPECT_FALSE(prepared->service.Certificate());
+    EXPECT_EQ(prepared->modelRevision,f.Revision());EXPECT_EQ(prepared->service.ModelEpoch(),service.ModelEpoch());
+    const auto before=RecoveryBoundaryResponse(f);
+    const auto imported=f.owner->ImportNativeLearnedState(exported.learnedState,CompositePackageImplementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    f.owner->Build();f.model->Init();ASSERT_TRUE(f.owner->IsReady() && f.owner->IsInit());
+    const auto after=RecoveryBoundaryResponse(f);ASSERT_FALSE(before.empty());ASSERT_EQ(before.size(),after.size());
+    double excursion=0.;std::size_t edges=0;bool previous=false;
+    for(std::size_t i=0;i<before.size();++i) {
+        EXPECT_NEAR(before[i].time-before.front().time,after[i].time-after.front().time,5e-10);
+        EXPECT_DOUBLE_EQ(before[i].stimulus,after[i].stimulus);
+        const bool active=before[i].stimulus>0.;if(active && !previous)++edges;previous=active;
+        ASSERT_EQ(before[i].potentials.size(),after[i].potentials.size());
+        ASSERT_EQ(before[i].potentials.size(),before.front().potentials.size());
+        for(std::size_t j=0;j<before[i].potentials.size();++j) {
+            ASSERT_TRUE(std::isfinite(before[i].potentials[j]));ASSERT_TRUE(std::isfinite(after[i].potentials[j]));
+            EXPECT_NEAR(before[i].potentials[j],after[i].potentials[j],1e-12);
+            excursion=std::max(excursion,std::abs(before[i].potentials[j]-before.front().potentials[j]));
+        }
+    }
+    EXPECT_EQ(edges,plan.protocol.inputs.size());EXPECT_GT(excursion,1e-6);
+    const auto response=[](const auto& samples){QJsonArray rows;for(const auto& p:samples){QJsonArray row{p.time-samples.front().time,p.stimulus};
+        for(double v:p.potentials)row.append(v);rows.append(row);}return QJsonObject{{"relative_time_stimulus_potentials",rows}};};
+    SavePortableObject(name.c_str(),"response-before.json",response(before));SavePortableObject(name.c_str(),"response-after.json",response(after));
+    const auto test=::testing::UnitTest::GetInstance()->current_test_info();ASSERT_TRUE(test);
+    SavePortableObject(name.c_str(),"actual-terminal-case.json",{{"kind","native_actual_terminal_portable_case"},{"schema_version",1},
+        {"test_id",QString::fromStdString(std::string(test->test_suite_name())+"/"+test->name())},
+        {"package","terminal-state8.json"},{"summary","terminal-summary9.json"}});
+    auto warm=plan;warm.search.runId=name+"/warm";f.owner->IsNeedToTrain=true;f.owner->BeginNativeTraining(warm);
+    SavePortableObject(name.c_str(),"warm-start.json",{{"state",NativeTrainingStateName(service.State())},
+        {"outcome",TrainingStatusName(service.Outcome())},{"reason",QString::fromStdString(service.Reason())},
+        {"actual_epoch",double(service.ModelEpoch())},{"transcript_epoch",double(service.TranscriptModelEpoch())}});
+    ASSERT_TRUE(service.State()==NativeTrainingState::Searching || service.State()==NativeTrainingState::CapturingReferences)<<service.Reason();
+    const auto warmAttempt=service.Configuration().runId;bool consumed=false;
+    ServiceTicks(f,[&]{if(consumed)return;const auto& records=service.CompositeMeasurements();
+        consumed=std::any_of(records.begin(),records.end(),[&](const auto& r){return r.attemptId==warmAttempt && r.consumed;});
+        if(consumed)f.owner->IsNeedToTrain=false;});
+    ASSERT_TRUE(consumed);ASSERT_EQ(service.Outcome(),TrainingStatus::ExternalStop);
+    const auto continued=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+    EXPECT_EQ(continued.learnedState.value("terminal_journal"),exported.learnedState.value("terminal_journal"));
+    auto replay=PrepareNativeLearnedState(continued.learnedState,f.storage,f.environment,CompositePackageImplementation);
+    EXPECT_FALSE(replay->service.Search());EXPECT_FALSE(replay->service.Certificate());
+    SavePortableObject(name.c_str(),"terminal-warm-state8.json",continued.learnedState);
+    SavePortableObject(name.c_str(),"terminal-warm-summary9.json",continued.summary);
+}
+}
+TEST(NativeActualCompositeTerminalRestore,ClassicFixedN0){ActualCompositeTerminalRestore<NNeuronTimeLearner>(false,true);}
+TEST(NativeActualCompositeTerminalRestore,BranchFixedN0){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(false,true);}
+TEST(NativeActualCompositeTerminalRestore,ClassicFixedN1){ActualCompositeTerminalRestore<NNeuronTimeLearner>(false,false);}
+TEST(NativeActualCompositeTerminalRestore,BranchFixedN1){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(false,false);}
+TEST(NativeActualCompositeTerminalRestore,ClassicWindowN0){ActualCompositeTerminalRestore<NNeuronTimeLearner>(true,true);}
+TEST(NativeActualCompositeTerminalRestore,BranchWindowN0){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(true,true);}
+TEST(NativeActualCompositeTerminalRestore,ClassicWindowN1){ActualCompositeTerminalRestore<NNeuronTimeLearner>(true,false);}
+TEST(NativeActualCompositeTerminalRestore,BranchWindowN1){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(true,false);}

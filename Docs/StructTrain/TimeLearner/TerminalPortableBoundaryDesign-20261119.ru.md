@@ -1,5 +1,25 @@
 # Следующая реализация: portable terminal boundary
 
+A4 остановилась при сборке теста: публичный helper ошибочно вызвал protected
+NativeProbeModelBindings. Production PulseLib собрана, но выполнено0/60 native
+cases, все группы закрыты и failure primary опубликован. Ошибочное обращение
+удалено без расширения API; публичная trim=0 и end-to-end проверки сохранены.
+Новая проверка разделяет существующий corpus60 и дополнительный actual-restore8
+на два объявленных leaf gates. Полная приёмка требует оба; успех первого не
+закрывает второй и не является завершением исходного плана.
+
+Подготовлены ещё8 native scenarios NativeActualCompositeTerminalRestore:
+protocol4/5 × Classic/Branch × N0/N1. Они должны получить настоящую измеренную
+candidate/anchor pair, изменить L2→L3 и исчерпать заранее объявленный model-time
+budget внутри следующей группы. Budget вычислен из числа raw probes, штатной
+длительности окна и ограниченных scheduler gaps; wall budget не используется
+как подмена model clock. Требуются source/selected/actual graph и epoch,
+одна charged restore transaction, schema8/summary9 roundtrip, неизменный native
+burst response и новая consumed warm measurement после импорта. Отдельные
+precondition/warm-start artifacts сохраняются до утверждений, чтобы отличать
+недостигнутый сценарий от дефекта. Эти8 cases ещё не выполнялись и не входят
+в активную A4/60. Восстановление C0/heterogeneous growth имеет отдельный остаток.
+
 Уточнение A3: четыре protocol4 stopped warm cases отклонены при повторном
 экспорте с terminal_selected_composite_measurement_missing. Warm Start оставлял
 только captured reference groups и удалял candidate/anchor primary старого

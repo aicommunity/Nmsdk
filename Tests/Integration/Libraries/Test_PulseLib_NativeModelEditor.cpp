@@ -7088,7 +7088,6 @@ template<class Learner> void NativeTerminalCompletedPlainPackage(int normalizati
         (std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value?"branch":"classic")+"_N"+std::to_string(normalization);
     EditingRig<Learner> rig(2000,normalization,prefix);rig.learner->ControllerVersion.SetDataDirect(2);
     ASSERT_EQ(rig.learner->SyncCapacitanceTrim.GetData(),0);
-    ASSERT_FALSE(rig.learner->NativeProbeModelBindings().legacyPhysicsPending);
     // Engineering transport control with the pre-existing broad sync tolerance.
     // It must not be reported as scientific convergence at the .02 default.
     auto plan=TrainingPlan(rig,.2);plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
