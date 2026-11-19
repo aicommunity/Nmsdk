@@ -46,6 +46,7 @@ expanded bytes проверены по hash/size; исходная Train primary
 |M40: terminal portable fresh SDK A2|Собрано, выполнено56:44 PASS/12 FAIL. Все12 composite cases прошли; plain fresh-process warm cases запускались до native Init. Gate отклонён, все группы закрыты, primary опубликован.|
 |M40: terminal portable fresh SDK A3|Закрыта:60 выполнено,50 PASS/10 FAIL. Четыре protocol4 warm exports потеряли journal primary; два C0 cases не достигли unmeasured edit в10s; четыре completed plain cases отклонены из-за неактивного legacy C-trim sentinel. Gate отклонён, primary опубликован; исправления ожидают новой серии.|
 |M40: terminal portable fresh SDK A4|Закрыта с build failure, выполнено0/60. Production PulseLib собрана; добавленная тестовая проверка обращалась к protected NativeProbeModelBindings. Обращение удалено; публичная проверка trim=0 и реальные roundtrips сохранены. Primary опубликован.|
+|M40: terminal portable fresh SDK A5|Canonical preparation PASS; supervisor/native kernel group подтверждены живыми, отдельная fresh build68. Два обязательных leaf: прежние60 и8 actual composite restores. Результата native tests ещё нет.|
 |Elder: независимый terminal-selection fresh SDK|14/14 PASS, supervisor/все группы закрыты, primary опубликован.|
 |Предыдущий Elder: fresh SDK,14 targeted cases|13 PASS/1 FAIL. Постановка kernel case исправлена; его corrected version прошла на M40. Старый отказ сохранён, старый gate не переименован в успешный.|
 |Предыдущий M40 gate29|25 PASS/4 FAIL. Четыре N0 ThresholdCandidate не получили исходного certificate, maximum_sweeps_exhausted; downstream проверки ещё не подтверждены. Persistence2 прошли.|
@@ -62,7 +63,15 @@ controls ee48c22cdbdf3efcc9396611ee4632bc3b56d359.
 [primary и закрытие отказавшей сборки](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a4-build-failure.archive.json).
 Следующая постановка включает прежние60 и8 actual composite restores с реальным
 L2→L3, model-time stop, portable roundtrip, сравнением отклика и warm продолжением.
-Эти8 ещё не выполнялись; текущих живых экспериментов эта запись не объявляет.
+Эти8 ещё не выполнялись. Сейчас запущена A5 на
+Root54e61dd86c6c52fce9a30c4a161bf783299795d3 /
+Pulse13f8551a6ddfa9c0a4a7f2e63d41369ace5df74f,
+controls d46d644a5f0f2150072b20fb893e50846ad5059a.
+[A5 handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native68-a5-running.json).
+У этих8 меняется L, Ns/Rs фиксированы и C0 Off: они не заменяют полную
+normalization/C0/heterogeneous матрицу. Проверка Python6 original28 boundaries
+допускается после закрытия всех68 и успешного leaf60; она не принимает actual8
+или полную native68 серию при отказе дополнительного leaf.
 Эти адресные проверки не заменяют полную объявленную матрицу262Linux/261Windows.
 [Native terminal acceptance](NativeTerminalSelectionAcceptance-20261119.ru.md).
 
