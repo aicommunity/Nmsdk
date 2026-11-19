@@ -38,7 +38,10 @@ def _packets(folder, prefix):
     if prefix is not None:
         require(type(prefix) is str and prefix and not any(c in prefix for c in '/\\:*?[]'),
                 'terminal_fixture_primary_prefix')
-        for path in sorted(folder.glob(prefix+'*.json')):
+        # Native source_graph.json is a distinct graph snapshot sharing this
+        # prefix. Trial IDs are decimal suffixes; the summary still requires
+        # every declared trial and rejects missing or contradictory primary.
+        for path in sorted(folder.glob(prefix+'[0-9]*.json')):
             require(path.stem[len(prefix):].isdigit(),'terminal_fixture_unexpected_trial_name')
             packet=load(path);trial=packet['requested_specification']['trial_id']
             require(trial not in packets,'terminal_fixture_duplicate_primary')
@@ -79,6 +82,25 @@ class NativeTerminalPackage8Test(unittest.TestCase):
 
     def restored(self):
         return next(name for name in sorted(self.cases) if 'ClassicN0Deadline' in name)
+
+    def test_real_branch_muted_banks_require_explicit_scope_and_valid_native_links(self):
+        from ..training_capacitance_witness import validate_graph_input_parameters
+        p,_,_,_=self.case('NativeTerminalPlainPackage/BranchCompletedN0WithoutTransition')
+        declaration=p['configuration']['model'];identity=p['neuron']['graph']['identity']
+        self.assertTrue(declaration['allow_muted_input_baseline'])
+        validate_graph_input_parameters(declaration,identity,p['trained_inputs'])
+        strict=copy.deepcopy(declaration);strict['allow_muted_input_baseline']=False
+        with self.assertRaisesRegex(EvidenceError,'stimulus_bank_mismatch'):
+            validate_graph_input_parameters(strict,identity,p['trained_inputs'])
+        for mutation in ('foreign_source','duplicate_link','wrong_slot'):
+            changed=copy.deepcopy(identity)
+            link=next(x for x in changed['model']['bindings'] if x['kind']=='stimulus_port' and
+                      '.ExcSynapse' in x['target'] and x['target'].endswith(':Input'))
+            if mutation=='foreign_source':link['source']='unowned-stimulus'
+            elif mutation=='duplicate_link':changed['model']['bindings'].append(copy.deepcopy(link))
+            else:link['slot']='1'
+            with self.subTest(mutation=mutation),self.assertRaisesRegex(EvidenceError,'stimulus_bank_mismatch'):
+                validate_graph_input_parameters(declaration,changed,p['trained_inputs'])
 
     def test_declared_28_native_boundaries(self):
         for identity in sorted(self.cases):
