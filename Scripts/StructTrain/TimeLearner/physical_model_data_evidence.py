@@ -45,7 +45,8 @@ def audit_physical_model_data(package, *, frozen=False):
         keys(boundary, {'kind', 'schema_version', 'state_kind', 'sha256', 'model_revision'}, 'physical_data_source_fields')
         states = SOLO | RECOGNITION
         require(boundary['kind'] in states and boundary['state_kind'] == states[boundary['kind']]
-                and 1 <= count(boundary['schema_version']) <= 7, 'physical_data_source_kind')
+                and 1 <= count(boundary['schema_version']) <=
+                (8 if boundary['kind'] in SOLO else 7), 'physical_data_source_kind')
         for value in (boundary['sha256'], boundary['model_revision'], package['source_solo_revision']):
             _sha(value)
         require(boundary['model_revision'] == package['model_revision'], 'physical_data_source_revision')

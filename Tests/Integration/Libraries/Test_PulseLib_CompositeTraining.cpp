@@ -31,6 +31,7 @@
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../Support/PhysicalArchiveComparison.h"
+#include "../Support/TerminalPhysicalDataTransfer.h"
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QDir>
@@ -5172,6 +5173,12 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
         {"test_id",QString::fromStdString(std::string(test->test_suite_name())+"/"+test->name())},
         {"package","terminal-state8.json"},{"summary","terminal-summary9.json"},
         {"primary_prefix",QJsonValue(QJsonValue::Null)},{"warm_folder",QJsonValue(QJsonValue::Null)}});
+    if(configured) {
+        NmsdkTests::CheckTerminalPhysicalDataTransfer<Owner>(f,plan,package,[&](const QJsonObject& evidence) {
+            SavePortableObject(name.c_str(),"terminal-physical-data.json",evidence);
+        });
+        ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    }
     const auto epoch=service.ModelEpoch(),transcriptEpoch=service.TranscriptModelEpoch();const auto revision=f.Revision();
     const auto referenceIds=service.CompositeReferenceGroupIds();const auto clock=f.Time();
     auto prepared=PrepareNativeLearnedState(package,f.storage,f.environment,CompositePackageImplementation);
@@ -5301,6 +5308,10 @@ template<class Owner> void ActualCompositeTerminalRestore(bool window,bool n0)
     SavePortableObject(name.c_str(),"source-selected-actual.json",{{"source",unmeasured},
         {"selected",selected->NeuronIdentity()},{"actual",exported.learnedState.value("neuron").toObject().value("graph").toObject().value("identity")},
         {"source_epoch",double(unmeasuredEpoch)},{"actual_epoch",double(service.ModelEpoch())}});
+    NmsdkTests::CheckTerminalPhysicalDataTransfer<Owner>(f,plan,exported.learnedState,[&](const QJsonObject& evidence) {
+        SavePortableObject(name.c_str(),"terminal-physical-data.json",evidence);
+    });
+    ASSERT_FALSE(::testing::Test::HasFatalFailure());
     const auto clock=f.Time();
     auto prepared=PrepareNativeLearnedState(exported.learnedState,f.storage,f.environment,CompositePackageImplementation);
     EXPECT_EQ(f.Time(),clock);EXPECT_FALSE(prepared->service.Search());EXPECT_FALSE(prepared->service.Certificate());
