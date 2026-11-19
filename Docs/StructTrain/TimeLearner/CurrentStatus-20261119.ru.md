@@ -7,11 +7,13 @@
 25159043 bytes, catalog `experiments/2026-11-19/native-terminal-portable/m40-a5-rejected.json`.
 [Компактная квитанция](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a5-rejected.archive.json).
 
-Дополнительные actual8 исходный fail-fast worker не запускал. Они выполняются
-отдельным owned native-gate на неизменном A5 runtime, без повторной сборки.
-Первые Classic/Branch Fixed N0 случаи подтвердили `composite_imported_epoch_changed`
-при warm continuation после реального восстановления другого графа. Это
-отдельная проверка, не продолжение и не успешная приёмка исходных68.
+Дополнительные actual8 исходный fail-fast worker не запускал. Отдельный owned
+native-gate на неизменном A5 runtime завершён:8/8 выполнены,4 PASS protocol5
+(Classic/Branch × N0/N1),4 FAIL protocol4 с `composite_imported_epoch_changed`
+при warm continuation после реального восстановления другого графа. Все
+процессы закрыты, lease освобождён;160 members полного primary проверены и
+опубликованы,4463329 bytes. Это отдельная проверка, не успешная приёмка
+исходных68. [Квитанция](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-actual8-runtime-reuse-a3.archive.json).
 
 В feature Pulse добавлены два исправления: отдельный actual C0 witness для
 warm admission и protocol4 continuation через точную source/actual пару
