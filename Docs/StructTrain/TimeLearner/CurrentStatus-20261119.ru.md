@@ -100,6 +100,17 @@ N0/N1 и completed/stopped boundaries. Они ещё не выполнялись
 
 ## История попыток19 ноября: захват native graph и новые сборки
 
+Актуальная отдельная попытка: Rootfb30b8be92bcfc006b94f1476d615dc8ab2ac03a /
+Pulse19545036eecb884e2682c53b1a031a82abc82560. После успешной canonical
+preparation на M40 запущена fresh SDK сборка с56 заявленными cases: прежние44
+с расширенными source/portable/fresh-process/warm assertions и12 новых
+composite transport cases. Controlsaa236d76b0fb8877652fa1db37160ae2e3ae11b2,
+job s07-terminal-portable-sdk-m40-a1. Supervisor4104184/start412501038 и
+kernel unit timelearner-7c732e30-bc8c-4918-b8c9-33b9f937d27a.service,
+main4111704/start412504166 подтверждены живыми. Это ещё не native приёмка;
+новых научных Train/Test нет. [Handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native56-running.json).
+Следующие записи этого раздела — история предыдущих попыток, не активные jobs.
+
 Root47f532a7aef1253e03bac7073f192ea555e118e5 / Pulse57f603b1048d6547bda6e2e97f7decc0305715f0:
 реализован process-local захват полного graph/Dataset/storage/C-state выбранной
 контроллером измеренной точки. Добавлены6 native cases, исправлена постановка
