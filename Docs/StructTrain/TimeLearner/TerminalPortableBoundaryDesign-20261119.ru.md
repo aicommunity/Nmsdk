@@ -118,6 +118,14 @@ reference packets, требуя реальные CSV для точного об�
 primary, подмена actual graph, replay live authority, неуспешный rollback.
 Проверять native scheduler/lifecycle, а не возвращаемые bool.
 
+Текущая A3 серия60 и Python fixture-reader охватывают28 исходных boundaries,
+12 plain и8 composite warm Start/Stop exports. Это не доказательство полноценного
+продолжения поиска. Дополнительно нужны protocol4/5 × Classic/Branch × N0/N1
+с реально изменённым неизмеренным кандидатом при model/wall budget stop,
+native restore выбранного другого графа, переносом и frozen response. Проверять
+независимый source/selected/actual readback, charged epoch и сохранность primary;
+не считать fixed-geometry already_current эквивалентом такого transition.
+
 После приёмки — same-budget cold Classic/Branch A/B и actual frozen8 с полными
 окнами и читаемыми Soma/input графиками. Tolerances, CapturedPerInput, assigned
 pulse Train и whole-response Test сохраняются. Положительный результат8/8 не

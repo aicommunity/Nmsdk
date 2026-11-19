@@ -44,6 +44,7 @@ expanded bytes проверены по hash/size; исходная Train primary
 |M40: временной отчёт Elder baseline/threshold,16 проб|2/2 declared tests PASS; галерея baseline/threshold создана. Kernel group закрыта. Визуальная приёмка и публикация этой новой галереи ещё впереди.|
 |M40: terminal-selection fresh SDK|44/44 PASS, включая14 terminal cases,6 snapshots и прежние регрессии; supervisor/все группы закрыты, primary опубликован.|
 |M40: terminal portable fresh SDK A2|Собрано, выполнено56:44 PASS/12 FAIL. Все12 composite cases прошли; plain fresh-process warm cases запускались до native Init. Gate отклонён, все группы закрыты, primary опубликован.|
+|M40: terminal portable fresh SDK A3|Canonical preparation PASS; свежая сборка60 C++ cases выполняется. Включены исправленный lifecycle, historical summary,4 plain completed controls и warm controls всех protocol families.|
 |Elder: независимый terminal-selection fresh SDK|14/14 PASS, supervisor/все группы закрыты, primary опубликован.|
 |Предыдущий Elder: fresh SDK,14 targeted cases|13 PASS/1 FAIL. Постановка kernel case исправлена; его corrected version прошла на M40. Старый отказ сохранён, старый gate не переименован в успешный.|
 |Предыдущий M40 gate29|25 PASS/4 FAIL. Четыре N0 ThresholdCandidate не получили исходного certificate, maximum_sweeps_exhausted; downstream проверки ещё не подтверждены. Persistence2 прошли.|
@@ -52,7 +53,7 @@ expanded bytes проверены по hash/size; исходная Train primary
 [M40 report receipt](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-temporal-report-closed.json),
 [Elder14 receipt](../../../Reports/StructTrain/TimeLearner/MeasuredBoundarySelection-20261118/elder14-closed-rejected.json).
 Перечисленные ранее живые задания завершены; повторный запуск не выполнялся.
-Прежние native jobs и portable A2 закрыты. Новых Train нет.
+Прежние native jobs и portable A2 закрыты; A3 строится отдельно. Новых Train нет.
 Эти адресные проверки не заменяют полную объявленную матрицу262Linux/261Windows.
 [Native terminal acceptance](NativeTerminalSelectionAcceptance-20261119.ru.md).
 
@@ -138,6 +139,17 @@ warm контроля после существующей инициализац
 Это код, ожидающий native и Python приёмки; ordinary cold JSON ещё не включает
 terminal policy. Следующая серия содержит60 C++ cases; новые научные Train/Test
 пока не выполнялись.
+
+A3 запущена на Root64b6e6e9959cd5e2ea4428a327cb860c327b73d8 /
+Pulse311937260912381c85c0539f94253479e7b543de, controls533b1a5dbc3fe88927cda6a5ff9c8b5e3d832e87.
+Canonical preparation PASS; supervisor199960/start413286290 и
+unit timelearner-bd46b0a7-cda2-4d15-b4da-3848722d674e.service,
+main207497/start413289473 подтверждены живыми.
+[A3 handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native60-a3-running.json).
+После native результата остаётся отдельный Python gate из6 tests на28
+декларированных boundaries и20 warm exports, а также реальные composite
+restores с изменённой геометрией. Нынешние12 composite cases являются
+fixed-geometry transport controls и не заменяют такой проверки.
 
 Root47f532a7aef1253e03bac7073f192ea555e118e5 / Pulse57f603b1048d6547bda6e2e97f7decc0305715f0:
 реализован process-local захват полного graph/Dataset/storage/C-state выбранной
