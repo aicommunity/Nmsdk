@@ -5082,7 +5082,7 @@ TEST(NativeRecordedRecoveryArchive,BranchFullDomainN4Roundtrip){RecordedRecovery
 #endif
 
 namespace {
-template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bool completed)
+template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bool completed,bool configured=false)
 {
     NativeCompositeFixture<Owner> f(2000,false,64,false,n0);f.owner->ControllerVersion.SetDataDirect(2);
     // Existing fixed-geometry transport control. The broad .2 case exercises
@@ -5092,11 +5092,23 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
     plan.search.normalization=f.modelSpec.normalization;plan.search.bounds.clear();
     for(const auto& p:f.owner->ReadNativeParameters())plan.search.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
     plan.search.maximumCandidatesPerInput=1;plan.search.maximumSweeps=1;plan.search.n0CandidateRepeats=1;
-    plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
-    ServiceStart(f,plan);ServiceTicks(f);
+    plan.terminalSelection=NativeTerminalSelectionPolicy{configured?7.25:30.};
+    if(configured) {
+        const auto c=window?CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.):
+            CaptureCompositeInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.);
+        const auto encoded=EncodeConfiguredNativeTraining(c);ASSERT_EQ(encoded.value("schema_version"),QJsonValue(9));
+        f.attempt.reset();f.owner->IsNeedToTrain=false;
+        f.owner->ControllerConfiguration=QJsonDocument(encoded).toJson(QJsonDocument::Compact).toStdString();
+        f.owner->Build();f.model->Init();f.model->Reset();ASSERT_TRUE(f.owner->ConfiguredModelInitialized.GetData());
+        ASSERT_TRUE(f.owner->IsReady() && f.owner->IsInit());f.owner->IsNeedToTrain=true;
+        // Start through the ordinary configured owner tick, not Begin(plan).
+    }else ServiceStart(f,plan);
+    ServiceTicks(f);
     const auto& service=f.owner->NativeTrainingController();
     ASSERT_EQ(service.State(),NativeTrainingState::Finished)<<service.Reason();
     ASSERT_EQ(service.Outcome(),completed?TrainingStatus::Exact:TrainingStatus::BudgetExhausted)<<service.Reason();
+    ASSERT_TRUE(service.Plan().terminalSelection);
+    EXPECT_DOUBLE_EQ(service.Plan().terminalSelection->maximumWallSeconds,configured?7.25:30.);
     EXPECT_EQ(bool(service.Certificate()),completed);
     const auto exported=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);const auto& package=exported.learnedState;
     ASSERT_EQ(package.value("schema_version"),QJsonValue(8));EXPECT_EQ(exported.summary.value("schema_version"),QJsonValue(9));
@@ -5107,11 +5119,11 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
     EXPECT_EQ(historicalSummary.value("actual_parameters"),historicalState.value("trained_inputs"));
     EXPECT_EQ(package.value("historical_state").toObject().value("schema_version"),QJsonValue(window?6:5));
     EXPECT_EQ(package.value("certificate").isNull(),!completed);
-    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-"+(window?"window5":"fixed4")+
+    const auto name=std::string(configured?"configured9-":"")+(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-"+(window?"window5":"fixed4")+
         (n0?"-N0":"-N1")+(completed?"-completed":"-stopped");
     SavePortableObject(name.c_str(),"terminal-state8.json",package);SavePortableObject(name.c_str(),"terminal-summary9.json",exported.summary);
     const auto test=::testing::UnitTest::GetInstance()->current_test_info();ASSERT_TRUE(test);
-    SavePortableObject(name.c_str(),"terminal-case.json",{{"kind","native_terminal_portable_case"},{"schema_version",1},
+    SavePortableObject(name.c_str(),configured?"configuration9-case.json":"terminal-case.json",{{"kind",configured?"native_configured_terminal_case":"native_terminal_portable_case"},{"schema_version",1},
         {"test_id",QString::fromStdString(std::string(test->test_suite_name())+"/"+test->name())},
         {"package","terminal-state8.json"},{"summary","terminal-summary9.json"},
         {"primary_prefix",QJsonValue(QJsonValue::Null)},{"warm_folder",QJsonValue(QJsonValue::Null)}});
@@ -5297,3 +5309,59 @@ TEST(NativeActualCompositeTerminalRestore,ClassicWindowN0){ActualCompositeTermin
 TEST(NativeActualCompositeTerminalRestore,BranchWindowN0){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(true,true);}
 TEST(NativeActualCompositeTerminalRestore,ClassicWindowN1){ActualCompositeTerminalRestore<NNeuronTimeLearner>(true,false);}
 TEST(NativeActualCompositeTerminalRestore,BranchWindowN1){ActualCompositeTerminalRestore<NNeuronTimeLearnerBranch>(true,false);}
+
+namespace {
+template<class Owner> void TerminalConfigurationAllBaseSchemas()
+{
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);
+    const auto composite=CompositeCold(f);const auto window=ActualCold7Declaration(f);
+    for(int version=1;version<=8;++version) {
+        SCOPED_TRACE(version);auto c=version>=7?window:composite;
+        if(version<=5)c.composite.reset();
+        if(version==2)c.search.n0CandidateRepeats=2;
+        if(version==3 || version==4){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+        if(version==4){c.search.capacitanceSearch=CapacitanceSearchPolicy{};c.search.maximumCandidatesPerInput=8;}
+        if(version==5){c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+            c.search.maximumInvalidObservations=2;c.peakSelection=PeakSelectionPolicy::AssignedBurstWave;}
+        if(version==8){c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;c.search.maximumInvalidObservations=2;}
+        const auto original=EncodeConfiguredNativeTraining(c);ASSERT_EQ(original.value("schema_version"),QJsonValue(version));
+        const auto legacy=DecodeConfiguredNativeTraining(original);EXPECT_FALSE(legacy.terminalSelection);
+        EXPECT_FALSE(MakeConfiguredNativeTrainingPlan(legacy).terminalSelection);EXPECT_EQ(EncodeConfiguredNativeTraining(legacy),original);
+        c.terminalSelection=NativeTerminalSelectionPolicy{3.5};const auto encoded=EncodeConfiguredNativeTraining(c);
+        EXPECT_EQ(encoded.value("schema_version"),QJsonValue(9));EXPECT_EQ(encoded.value("terminal_base_schema_version"),QJsonValue(version));
+        EXPECT_EQ(encoded.value("base_schema_version"),original.value("base_schema_version"));
+        auto base=encoded;base.remove("terminal_base_schema_version");base.remove("terminal_selection");base["schema_version"]=version;
+        EXPECT_EQ(base,original);
+        const auto parsed=ParseConfiguredNativeTraining(QJsonDocument(encoded).toJson(QJsonDocument::Compact).toStdString());
+        EXPECT_EQ(EncodeConfiguredNativeTraining(parsed),encoded);const auto plan=MakeConfiguredNativeTrainingPlan(parsed);
+        ASSERT_TRUE(plan.terminalSelection);EXPECT_DOUBLE_EQ(plan.terminalSelection->maximumWallSeconds,3.5);
+        EXPECT_DOUBLE_EQ(plan.search.tolerances.amplitudeAbsolute,c.search.tolerances.amplitudeAbsolute);
+        EXPECT_DOUBLE_EQ(plan.search.tolerances.sync,c.search.tolerances.sync);
+        const auto folder=std::string(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-configuration9/base-"+std::to_string(version);
+        SavePortableObject(folder.c_str(),"original.json",original);SavePortableObject(folder.c_str(),"configured9.json",encoded);
+        for(const auto& invalid:{QJsonValue(true),QJsonValue("1"),QJsonValue(0),QJsonValue(9),QJsonValue(QJsonValue::Null)}) {
+            auto bad=encoded;bad["terminal_base_schema_version"]=invalid;
+            EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        }
+        for(const auto& invalid:{QJsonValue(true),QJsonValue("3.5"),QJsonValue(0),QJsonValue(-1),QJsonValue(QJsonValue::Null)}) {
+            auto bad=encoded;auto policy=bad.value("terminal_selection").toObject();policy["maximum_wall_seconds"]=invalid;bad["terminal_selection"]=policy;
+            EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        }
+        auto bad=encoded;auto policy=bad.value("terminal_selection").toObject();policy["unknown_control"]=true;bad["terminal_selection"]=policy;
+        EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        bad=encoded;bad["unknown_configuration"]=true;EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+        bad=original;bad["terminal_selection"]=encoded.value("terminal_selection");EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+    }
+}
+}
+TEST(NativeTerminalConfiguration,ClassicAllBaseSchemasAreExplicitAndLossless){TerminalConfigurationAllBaseSchemas<NNeuronTimeLearner>();}
+TEST(NativeTerminalConfiguration,BranchAllBaseSchemasAreExplicitAndLossless){TerminalConfigurationAllBaseSchemas<NNeuronTimeLearnerBranch>();}
+
+TEST(NativeTerminalConfiguredEntry,ClassicFixedN0){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchFixedN0){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,ClassicFixedN1){NativeTerminalCompositePackage<NNeuronTimeLearner>(false,false,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchFixedN1){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(false,false,true,true);}
+TEST(NativeTerminalConfiguredEntry,ClassicWindowN0){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchWindowN0){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,true,true);}
+TEST(NativeTerminalConfiguredEntry,ClassicWindowN1){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,false,true,true);}
+TEST(NativeTerminalConfiguredEntry,BranchWindowN1){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,false,true,true);}

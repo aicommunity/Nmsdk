@@ -110,11 +110,13 @@ def _audit_candidate_window_package(document, summary, *, external_resolver, rec
             from .candidate_window_recovery_ledger import audit_candidate_window_recovery_ledger
             recovery_audit=audit_candidate_window_recovery_ledger(document['recovery_ledger'],
                 document['measurement_archive'],document['configuration'],external_resolver=external_resolver)
-            require(count(package['configuration']['schema_version'])==8 or
+            from .terminal_configuration import underlying_configuration_schema
+            require(underlying_configuration_schema(package['configuration'])==8 or
                     count(package['runtime_plan']['schema_version'])==3 or bool(package['recovery_ledger']['deliveries']),
                     'candidate_window_package_requires_explicit_recovery_family')
         else:
-            require(count(package['configuration']['schema_version'])==7,
+            from .terminal_configuration import underlying_configuration_schema
+            require(underlying_configuration_schema(package['configuration'])==7,
                     'candidate_window_legacy_package_cannot_drop_recovery_family')
         capacitance=_physical_archive(package)
         _archive_metadata(package,references,recovery=recovery)

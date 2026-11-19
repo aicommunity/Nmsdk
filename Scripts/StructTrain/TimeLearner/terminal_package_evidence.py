@@ -35,9 +35,8 @@ def _digest(value):
 def _policy(value):
     if value is None:
         return
-    keys(value, {'schema_version','maximum_wall_seconds'}, 'terminal_policy_fields')
-    require(count(value['schema_version']) == 1 and number(value['maximum_wall_seconds']) > 0,
-            'terminal_policy_budget')
+    from .terminal_configuration import validate_terminal_policy
+    validate_terminal_policy(value)
 
 
 def _summary(summary, package):

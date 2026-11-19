@@ -1,5 +1,17 @@
 # Следующая реализация: portable terminal boundary
 
+Рабочее продолжение cold/runtime integration: Pulse codec cold9 явно хранит
+terminal_selection поверх полной schema1–8 и отдельный terminal_base_schema_version,
+сохраняя вложенный base_schema_version. Подготовлены2 native codec tests
+(16 исходных wires) и8 configured owner entry controls: старт через штатный
+Calculate/flag, readback бюджета7.25 и package8 roundtrip. Это engineering
+completed controls с sync.2, не научная сходимость при.02 и не проверка реально
+выполненного restore. Python4 читает эти реальные wires/DATA; он ещё не запускался.
+Текущая A5 использует прежний Pulse13f и не проверяет новый codec.
+Console execution/publication и native_pipeline_worker ещё не согласованы с
+cold9; runner явно отклоняет такой Train до дорогого запуска. Эта открытая
+часть должна быть завершена перед новым scientific cold A/B.
+
 A4 остановилась при сборке теста: публичный helper ошибочно вызвал protected
 NativeProbeModelBindings. Production PulseLib собрана, но выполнено0/60 native
 cases, все группы закрыты и failure primary опубликован. Ошибочное обращение
@@ -155,6 +167,21 @@ reference packets, требуя реальные CSV для точного об�
 сертификатов не достраивается. Полная pipeline/primary интеграция всё ещё открыта.
 
 ## Проверки и следующий научный опыт
+
+Actual8 на неизменном A5 runtime отделены от original60: исходный worker
+остановился после59/60, поэтому новый owned gate выполняет все8 самостоятельно.
+Runtime/native source не обновляются. Первые два Fixed N0 случая подтвердили
+отказ imported epoch после настоящего восстановления L3→L2. Исправление
+принимает только тот typed historical proof, который установлен actual owner,
+и проверяет source/actual revision+epoch последнего validated terminal event.
+Исторические measurements не перепривязываются; новый actor получает actual
+граф и обычную native owner lease. Новая серверная приёмка ещё требуется.
+
+Cold configuration9 и actual C0 warm-admission исправление включаются в
+следующий native SDK gate с78 cases: прежние60, actual8, codec2 и configured
+entry8. Все cases объявляются в одной leaf, чтобы assertion failure одного
+случая не скрывал остальные. Python readers проверяются на фактическом corpus
+отдельно; Console execution/publication integration остаётся открытой.
 
 Сначала новые14 source readback assertions плюс прежние44 regressions;
 затем actual export/import/re-export и fresh-process frozen response. Негативные

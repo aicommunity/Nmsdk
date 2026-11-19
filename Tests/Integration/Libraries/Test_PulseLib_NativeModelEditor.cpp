@@ -2184,10 +2184,27 @@ TEST(NativeLearnedState,FreshProcessImport)
         // Start only after the same native lifecycle used by the frozen probe.
         // Importing DATA intentionally does not initialize a fresh learner.
         if(terminalWarm) {
+            const auto actualCapacitance=target->ReadNativeTrainingCapacitanceWitness();
+            const auto historyBeforeWarm=target->NativeTrainingController().CapacitanceHistory();
+            if(historyBeforeWarm) {
+                ASSERT_TRUE(actualCapacitance);
+                // The original L3 transcript and restored L2 model may have
+                // different inventories. Import/Init/Reset must not rewrite
+                // either side merely to make warm admission pass.
+                ASSERT_TRUE(importedHistory);
+                EXPECT_EQ(EncodeNativeTrainingCapacitanceWitness(historyBeforeWarm->witnesses.at(
+                    historyBeforeWarm->currentWitnessId)),EncodeNativeTrainingCapacitanceWitness(
+                    importedHistory->witnesses.at(importedHistory->currentWitnessId)));
+            }
             RecordNativeTrainingProof(*terminalWarm,"terminal_imported_warm",c.model.branch?1u:c.model.inputs.size(),"_trial_");
             target->IsNeedToTrain=true;target->BeginNativeTraining(*terminalWarm);
             ASSERT_TRUE(target->NativeTrainingController().State()==NativeTrainingState::CapturingReferences ||
                 target->NativeTrainingController().State()==NativeTrainingState::Searching)<<target->NativeTrainingController().Reason();
+            if(historyBeforeWarm) {
+                const auto& admitted=target->NativeTrainingController().CapacitanceHistory();ASSERT_TRUE(admitted);
+                EXPECT_EQ(EncodeNativeTrainingCapacitanceWitness(admitted->witnesses.at(admitted->currentWitnessId)),
+                    EncodeNativeTrainingCapacitanceWitness(*actualCapacitance));
+            }
             target->IsNeedToTrain=false;
             ASSERT_EQ(target->NativeTrainingController().State(),NativeTrainingState::Finished);
             ASSERT_EQ(target->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);

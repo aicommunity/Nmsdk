@@ -109,6 +109,11 @@ def validate_job(mode, job, source_case=None):
     if mode in ("train", "preflight"):
         require(source_case is None, "cold_training_does_not_import_learned_state")
         config = job["configuration"]
+        # The codec/DATA envelope is implemented independently. Do not start
+        # an expensive Train until execution/publication6 can attest both the
+        # historical measurements and actual terminal model through Console.
+        require(type(config) is dict and config.get('schema_version')!=9,
+                'terminal_configuration_requires_runtime_pipeline_integration')
         from .composite_configuration import project_training_configuration
         # Validate the policy envelope, but execute/hash the original record.
         # Effective support still requires the native strict codec/readback.
