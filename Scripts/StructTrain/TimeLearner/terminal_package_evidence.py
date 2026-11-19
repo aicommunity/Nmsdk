@@ -95,6 +95,16 @@ def _plain_source_ids(historical, summary, packets):
     return ids
 
 
+def _historical_capacitance(historical):
+    # Original plain schema1 has no C0 field. This is a known wire contract,
+    # not a recovered physical baseline or permission to omit newer evidence.
+    if count(historical['schema_version']) == 1:
+        require('capacitance_state' not in historical, 'terminal_unversioned_legacy_C0')
+        return None
+    require('capacitance_state' in historical, 'terminal_historical_C0_field_missing')
+    return historical['capacitance_state']
+
+
 def _physical(package):
     historical=package['historical_state'];archive=package['neuron'];old=historical['neuron']
     require(archive.get('kind')=='timelearner_model_archive' and count(archive['schema_version'])==2,
@@ -116,7 +126,7 @@ def _physical(package):
     expected['terminal_event_sha256']=event['sha256'] if event is not None else None
     expected['terminal_journal_sha256']=digest({'entries':journal})
     _same(archive['metadata'],expected)
-    state=package['capacitance_state'];previous=historical['capacitance_state']
+    state=package['capacitance_state'];previous=_historical_capacitance(historical)
     require((state is None)==(previous is None), 'terminal_C0_lost_or_invented')
     if state is None:
         return None
@@ -204,7 +214,8 @@ def _actual(package):
     event=package['terminal_event'];history=package['historical_state']
     actual=package['neuron']['graph']['identity'];source=history['neuron']['graph']['identity']
     if event is None:
-        for field in ('model_revision','model_epoch','trained_inputs','capacitance_state'):_same(package[field],history[field])
+        for field in ('model_revision','model_epoch','trained_inputs'):_same(package[field],history[field])
+        _same(package['capacitance_state'],_historical_capacitance(history))
         _same(actual,source)
     else:
         for field,target in [('search_terminal_revision','model_revision'),('search_terminal_epoch','model_epoch'),
@@ -221,7 +232,7 @@ def _actual(package):
             _same(package['capacitance_state'] or {},selected['capacitance_state'])
         else:
             _same(actual,source);_same(package['trained_inputs'],history['trained_inputs'])
-            _same(package['capacitance_state'],history['capacitance_state'])
+            _same(package['capacitance_state'],_historical_capacitance(history))
     if package['certificate'] is not None:
         require(event is None,'terminal_transition_has_certificate')
         _same(package['model_revision'],history['model_revision']);_same(package['model_epoch'],history['model_epoch'])

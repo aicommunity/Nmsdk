@@ -5125,6 +5125,8 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
     ASSERT_EQ(package.value("schema_version"),QJsonValue(8));EXPECT_EQ(exported.summary.value("schema_version"),QJsonValue(9));
     const auto historicalSummary=exported.summary.value("historical_summary").toObject();ASSERT_FALSE(historicalSummary.isEmpty());
     const auto historicalState=package.value("historical_state").toObject();
+    if(historicalState.value("configuration").toObject().value("schema_version")==QJsonValue(9))
+        EXPECT_THROW(PrepareNativeLearnedState(historicalState,f.storage,f.environment,CompositePackageImplementation),std::invalid_argument);
     EXPECT_EQ(historicalSummary.value("model_epoch"),historicalState.value("model_epoch"));
     EXPECT_EQ(historicalSummary.value("actual_model_revision"),historicalState.value("model_revision"));
     EXPECT_EQ(historicalSummary.value("actual_parameters"),historicalState.value("trained_inputs"));

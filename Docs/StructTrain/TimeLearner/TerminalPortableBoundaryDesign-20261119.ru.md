@@ -196,6 +196,15 @@ re-signed epoch/policy и отсутствующего CSV. Native fixtures эк
 Этот новый код не входит в A6 и ещё не проходил серверную сборку/проверку.
 Live finalization/posttune с cold9 пока отклоняется явно, без имитации поддержки.
 
+На сохранённых A5 данных подтверждён ещё один reader defect: historical plain
+schema1 вообще не содержит capacitance_state. Новый reader трактует это только
+для известного schema1 как отсутствие owned C0; для остальных схем поле
+обязательно. Отсутствующая C0 не превращается в baseline и не добавляется в
+старый JSON. Native A6 также выявил отделяемый отказ plain historical import:
+configuration9 source передавал terminal policy в legacy RestoreBoundary.
+Его исправляет закрытый package8 historical-import контекст PulseLib; standalone
+извлечённый schema1–7/configuration9 не получает разрешения на импорт.
+
 Actual8 на неизменном A5 runtime отделены от original60: исходный worker
 остановился после59/60, поэтому новый owned gate выполняет все8 самостоятельно.
 Runtime/native source не обновляются. Первые два Fixed N0 случая подтвердили
