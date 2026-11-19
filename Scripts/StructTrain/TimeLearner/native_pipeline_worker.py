@@ -109,11 +109,9 @@ def validate_job(mode, job, source_case=None):
     if mode in ("train", "preflight"):
         require(source_case is None, "cold_training_does_not_import_learned_state")
         config = job["configuration"]
-        # The codec/DATA envelope is implemented independently. Do not start
-        # an expensive Train until execution/publication6 can attest both the
-        # historical measurements and actual terminal model through Console.
-        require(type(config) is dict and config.get('schema_version')!=9,
-                'terminal_configuration_requires_runtime_pipeline_integration')
+        from .terminal_configuration import split_terminal_configuration
+        _, terminal_policy = split_terminal_configuration(config)
+        require(terminal_policy is None or not live, 'terminal_live_finalization_not_yet_supported')
         from .composite_configuration import project_training_configuration
         # Validate the policy envelope, but execute/hash the original record.
         # Effective support still requires the native strict codec/readback.
@@ -159,10 +157,16 @@ def validate_job(mode, job, source_case=None):
               "effective_model_checked": False, "native_configuration_validation_required": True}
     if mode == "physical-model-evaluate":
         result.update(data_only=True, source_training_evidence_checked=False, training_certificate_transferred=False)
-    if mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 6:
+    from .terminal_configuration import underlying_configuration_schema
+    configuration_schema = underlying_configuration_schema(job['configuration']) if mode in ('train', 'preflight') else None
+    if mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 9:
+        result['terminal_selection_declaration'] = dict(configuration_schema=9, base_schema=configuration_schema,
+            policy=job['configuration']['terminal_selection'], native_effective_preflight_required=True,
+            training_certificate_verified=False)
+    if configuration_schema == 6:
         from .composite_configuration import composite_declaration_scope
         result['composite_measurement_declaration'] = composite_declaration_scope(job['configuration'])
-    elif mode in ('train', 'preflight') and job['configuration'].get('schema_version') in (7,8):
+    elif configuration_schema in (7,8):
         from .candidate_window_contract import configuration_view
         configuration_view(job['configuration'])
         result['composite_measurement_declaration'] = dict(configuration_schema=job['configuration']['schema_version'],protocol_schema=5,
@@ -180,7 +184,7 @@ def _artifact_records(directory, execution):
             type(r["path"]) is str for r in records), "pipeline_artifact_schema")
     names = {r["path"] for r in records}
     require(len(names) == len(records), "duplicate_pipeline_artifact")
-    composite = execution.get('schema_version') in (3,4,5)
+    composite = execution.get('schema_version') in (3,4,5,6)
     if composite:
         from .composite_primary import _paths, filesystem_primary_resolver
         _paths(list(names)); resolve = filesystem_primary_resolver(directory)
@@ -214,10 +218,13 @@ def audit_execution(mode, directory, job, source_case=None):
     directory = Path(directory)
     execution = load(directory/"execution.json");_digest(execution)
     live = mode == "train" and job["schema_version"] == 2
-    recovery = mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 8
-    adaptive = mode in ('train', 'preflight') and job['configuration'].get('schema_version') in (7,8)
-    composite = mode in ('train', 'preflight') and job['configuration'].get('schema_version') in (6,7,8)
-    if composite:
+    from .terminal_configuration import underlying_configuration_schema
+    configuration_schema = underlying_configuration_schema(job['configuration']) if mode in ('train', 'preflight') else None
+    terminal = mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 9
+    recovery = configuration_schema == 8
+    adaptive = configuration_schema in (7,8)
+    composite = configuration_schema in (6,7,8)
+    if composite or terminal:
         from .composite_measurement_contract import integral_number_view
         execution = integral_number_view(execution)
     from .composite_execution_evidence import EXTRA_FIELDS, audit_composite_execution
@@ -227,10 +234,12 @@ def audit_execution(mode, directory, job, source_case=None):
         from .candidate_window_recovery_execution_evidence import (EXTRA_FIELDS as RECOVERY_FIELDS,
             audit_candidate_window_recovery_execution as audit_composite_execution)
         EXTRA_FIELDS = EXTRA_FIELDS | RECOVERY_FIELDS
+    if terminal:
+        from .terminal_execution_evidence import EXTRA_FIELDS, audit_terminal_execution, audit_terminal_start_failure
     from .live_training_worker import EXECUTION_FIELDS as LIVE_EXECUTION_FIELDS
-    require(set(execution) == COMMON_EXECUTION | EXECUTION_FIELDS[mode] | (LIVE_EXECUTION_FIELDS if live else set()) | (EXTRA_FIELDS if composite else set()) and
+    require(set(execution) == COMMON_EXECUTION | EXECUTION_FIELDS[mode] | (LIVE_EXECUTION_FIELDS if live else set()) | (EXTRA_FIELDS if composite or terminal else set()) and
             execution["kind"] == "timelearner_native_"+EXECUTION_KINDS[mode]+"_execution" and
-            type(execution["schema_version"]) is int and execution["schema_version"] == (5 if recovery else 4 if adaptive else 3 if composite else 2 if live else 1) and
+            type(execution["schema_version"]) is int and execution["schema_version"] == (6 if terminal else 5 if recovery else 4 if adaptive else 3 if composite else 2 if live else 1) and
             execution["job_sha256"] == job["sha256"] and load(directory/"job.json") == job and
             execution["evaluation_verdict"] is None, "pipeline_execution_scope_changed")
     names = _artifact_records(directory, execution)
@@ -247,7 +256,9 @@ def audit_execution(mode, directory, job, source_case=None):
                 equal(number(execution["model_time_end"])-number(execution["model_time_begin"]), ticks/frequency),
                 "pipeline_clock_changed")
     if mode == "preflight":
-        if composite:
+        if terminal:
+            audit_terminal_execution(execution, directory, names, mode=mode, job=job)
+        elif composite:
             audit_composite_execution(execution, directory, names, mode=mode, base_version=1)
         require(execution["execution"] == "completed" and ticks == 0 and
                 execution["training_started"] is False and execution["controller_state"] == "idle" and
@@ -286,6 +297,8 @@ def audit_execution(mode, directory, job, source_case=None):
                 "input_count": len(parameters), "integration_channels": len(channels), "training_started": False,
                 "native_execution_verified": False, "evaluation_verdict": None}
     if composite and mode == 'train' and execution['execution'] == 'training_start_failed':
+        if terminal:
+            return audit_terminal_start_failure(execution, directory, names, job)
         from .composite_execution_evidence import audit_composite_start_failure
         if adaptive:
             from .candidate_window_execution_evidence import audit_candidate_window_start_failure as audit_composite_start_failure
@@ -329,7 +342,10 @@ def audit_execution(mode, directory, job, source_case=None):
             for p, declared in zip(initial["parameters"], inputs)), "pipeline_cold_parameters_changed")
         if composite:
             from .composite_execution_evidence import audit_initial_planning_configuration
-            audit_initial_planning_configuration(package, job, initial)
+            audit_initial_planning_configuration(package['historical_state'] if terminal else package, job, initial)
+        if terminal:
+            audit_terminal_execution(execution, directory, names, mode=mode, job=job, package=package)
+        elif composite:
             audit_composite_execution(execution, directory, names, mode=mode, base_version=1, package=package)
         require(execution["execution"] == "completed" or not completed, "interrupted_training_claims_completion")
         return {"training_audit": audit, "completed_boundary": completed, "training_outcome": package["training_outcome"],
@@ -432,15 +448,22 @@ def _snapshot_source(source, destination, *, diagnostic=False, physical_data=Fal
         return destination/source.name
     stem = source.name.removesuffix("_stopped_state.json" if diagnostic else "_learned_state.json")
     package = load(source)
-    if package.get('schema_version') in (5,6,7):
+    terminal_composite = (package.get('schema_version') == 8 and
+                          package.get('historical_state', {}).get('schema_version') in (5,6,7))
+    if package.get('schema_version') in (5,6,7) or terminal_composite:
         from .composite_package_evidence import audit_composite_package
         from .composite_primary import capture_primary_blobs, write_primary_snapshot, _paths, filesystem_primary_resolver
         summary_path = source.with_name(stem + ('_stopped_summary.json' if diagnostic else '_learned_summary.json'))
         summary = load(summary_path) if summary_path.exists() else None
         # The supplied files are the transfer source. Embedded trace bytes must
         # not hide a missing or modified external primary, including package7.
-        audit_composite_package(package, summary, external_resolver=filesystem_primary_resolver(source.parent))
-        archive = package['measurement_archive']
+        if terminal_composite:
+            from .terminal_package_evidence import audit_terminal_package
+            audit_terminal_package(package, summary, {}, {}, external_resolver=filesystem_primary_resolver(source.parent))
+            archive = package['historical_state']['measurement_archive']
+        else:
+            audit_composite_package(package, summary, external_resolver=filesystem_primary_resolver(source.parent))
+            archive = package['measurement_archive']
         references = [trial['primary_ref'] for group in archive['records'] for trial in group['raw_trials']]
         primary = capture_primary_blobs(archive['primary_blobs'], references, archive['maximum_total_primary_bytes'])
         _paths(list(primary) + [source.name] + ([summary_path.name] if summary is not None else []))
@@ -465,6 +488,11 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     job = load(Path(job_path).resolve(strict=True))
     source_case = _load_source_case(mode, Path(source_path).resolve(strict=True)) if source_path is not None else None
     preflight = validate_job(mode, job, source_case)
+    # DATA and preflight can validate the new wire while its real Console
+    # integration is being accepted. Keep expensive cold9 Train closed until
+    # matching native execution/publication6 and reader gates have passed.
+    require(not (mode == 'train' and job['configuration'].get('schema_version') == 9),
+            'terminal_configuration_requires_runtime_pipeline_integration')
     policy = validate_policy(process_policy, maximum_wall_seconds)
     require(mode != "physical-model-evaluate" or policy is not None, "physical_data_evaluation_requires_contained_process")
     runtime = load(Path(runtime_path).resolve(strict=True));executable = verify_runtime(runtime)

@@ -178,6 +178,24 @@ index с embedded source и запрет подстановки history/изме
 Execution6, Python execution audit и фактический cold Console Train/Test
 остаются необходимыми; cold9 pipeline guard пока сохраняется.
 
+Следующий source-only срез добавляет execution6 с отдельными terminal_boundary,
+source_measurements и native_execution_counts. Ни actual модель, ни её epoch не
+подставляются в старые execution3/4/5. Общий pipeline auditor использует прежние
+package/scorer readers, затем проверяет новые связи и внешние primary. Snapshot
+terminal8 composite теперь проверяет и переносит реальные source CSV; embedded
+blobs не скрывают отсутствующий внешний файл. Launch guard cold9 остаётся в
+run_job(train), а DATA audit/preflight способны проверять новый формат.
+
+Подготовлен worker-only Console integration test:16 N2 cases (completed8 и
+реальное восстановление8), настоящие public preflight/Train, полный source/actual
+аудит, export либо diagnostic transfer и frozen probes, отрицательные проверки
+re-signed epoch/policy и отсутствующего CSV. Native fixtures экспортируют
+декларации cold9-job.json с исходной геометрией и storage images; обученная
+модель не используется как начальное состояние. У completed cases sync=.2 —
+только engineering transport fixture; actual restore cases сохраняют .02.
+Этот новый код не входит в A6 и ещё не проходил серверную сборку/проверку.
+Live finalization/posttune с cold9 пока отклоняется явно, без имитации поддержки.
+
 Actual8 на неизменном A5 runtime отделены от original60: исходный worker
 остановился после59/60, поэтому новый owned gate выполняет все8 самостоятельно.
 Runtime/native source не обновляются. Первые два Fixed N0 случая подтвердили

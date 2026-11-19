@@ -5082,6 +5082,17 @@ TEST(NativeRecordedRecoveryArchive,BranchFullDomainN4Roundtrip){RecordedRecovery
 #endif
 
 namespace {
+QJsonObject TerminalColdConsoleJob(ConfiguredNativeTraining configuration,const QJsonObject& profile) {
+    configuration.runId+="/fresh-public-cold9";
+    const auto encoded=EncodeConfiguredNativeTraining(configuration);
+    if(encoded.value("schema_version")!=QJsonValue(9))throw std::invalid_argument("terminal_console_fixture_requires_cold9");
+    return NmsdkWorker::Signed({{"kind","timelearner_native_training_job"},{"schema_version",1},
+        {"owner_class",configuration.model.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"},
+        {"implementation_id",CompositePackageImplementation},{"configuration",encoded},{"profile_archives",QJsonArray{profile}},
+        {"optional_modes",QJsonObject{{"sync_capacitance_trim",0},{"post_train_tuning",false},{"auto_calibrate_threshold",false}}},
+        {"calculate_mode",1},{"structure_build_mode",1},
+        {"maximum_model_ticks",std::ceil((configuration.maximumModelSeconds+configuration.duration+1.)*configuration.model.frequencyHz)}});
+}
 template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bool completed,bool configured=false)
 {
     NativeCompositeFixture<Owner> f(2000,false,64,false,n0);f.owner->ControllerVersion.SetDataDirect(2);
@@ -5093,10 +5104,10 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
     for(const auto& p:f.owner->ReadNativeParameters())plan.search.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
     plan.search.maximumCandidatesPerInput=1;plan.search.maximumSweeps=1;plan.search.n0CandidateRepeats=1;
     plan.terminalSelection=NativeTerminalSelectionPolicy{configured?7.25:30.};
+    const auto coldConfiguration=window?CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.):
+        CaptureCompositeInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.);
     if(configured) {
-        const auto c=window?CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.):
-            CaptureCompositeInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.);
-        const auto encoded=EncodeConfiguredNativeTraining(c);ASSERT_EQ(encoded.value("schema_version"),QJsonValue(9));
+        const auto encoded=EncodeConfiguredNativeTraining(coldConfiguration);ASSERT_EQ(encoded.value("schema_version"),QJsonValue(9));
         f.attempt.reset();f.owner->IsNeedToTrain=false;
         f.owner->ControllerConfiguration=QJsonDocument(encoded).toJson(QJsonDocument::Compact).toStdString();
         f.owner->Build();f.model->Init();f.model->Reset();ASSERT_TRUE(f.owner->ConfiguredModelInitialized.GetData());
@@ -5133,6 +5144,26 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
     substituted["sha256"]=NmsdkTools::CanonicalModelDataSha256(substituted);
     EXPECT_THROW(publication.RecoveryDeliveries(substituted,publication.Descriptor()),std::invalid_argument);
     EXPECT_THROW(publication.RecoveryDeliveries(historicalState,publication.Descriptor()),std::invalid_argument);
+    if(configured) {
+        const QJsonObject base{{"kind","timelearner_native_training_execution"},{"schema_version",1},
+            {"execution","completed"},{"model_revision",package.value("model_revision")}};
+        const auto wire=NmsdkWorker::WrapConfiguredNativeExecution(coldConfiguration,base,package,publication.Descriptor(),
+            package.value("model_revision"),service.CompositeNativeProbes(),service.CompositeSampledFrames(),false,&publication);
+        EXPECT_EQ(wire.value("schema_version"),QJsonValue(6));EXPECT_EQ(wire.value("base_schema_version"),QJsonValue(1));
+        EXPECT_EQ(wire.value("terminal_selection"),package.value("terminal_policy"));
+        const auto boundary=wire.value("terminal_boundary").toObject();
+        EXPECT_EQ(boundary.value("actual_model_epoch"),package.value("model_epoch"));
+        EXPECT_EQ(boundary.value("historical_model_epoch"),historicalState.value("model_epoch"));
+        EXPECT_EQ(boundary.value("historical_package_sha256"),historicalState.value("sha256"));
+        EXPECT_EQ(wire.value("source_measurements").toObject().value("measurement_archive"),publication.Descriptor());
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(coldConfiguration,base,package,publication.Descriptor(),
+            "other-model",0,0,false,&publication),std::invalid_argument);
+        auto wrongPolicy=coldConfiguration;wrongPolicy.terminalSelection->maximumWallSeconds+=.125;
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(wrongPolicy,base,package,publication.Descriptor(),
+            package.value("model_revision"),0,0,false,&publication),std::invalid_argument);
+        SavePortableObject(name.c_str(),"terminal-execution6-writer.json",wire);
+        SavePortableObject(name.c_str(),"cold9-job.json",TerminalColdConsoleJob(coldConfiguration,historicalState.value("neuron").toObject()));
+    }
     SavePortableObject(name.c_str(),"terminal-state8.json",package);SavePortableObject(name.c_str(),"terminal-summary9.json",exported.summary);
     const auto test=::testing::UnitTest::GetInstance()->current_test_info();ASSERT_TRUE(test);
     SavePortableObject(name.c_str(),configured?"configuration9-case.json":"terminal-case.json",{{"kind",configured?"native_configured_terminal_case":"native_terminal_portable_case"},{"schema_version",1},
@@ -5219,6 +5250,8 @@ template<class Owner> void ActualCompositeTerminalRestore(bool window,bool n0)
     ASSERT_GE(plan.maximumModelSeconds,plan.composite->maximumGroupModelSeconds);
     const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch":"classic")+
         "-terminal-actual-"+(window?"window5":"fixed4")+(n0?"-N0":"-N1");
+    const auto coldConfiguration=window?CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.):
+        CaptureCompositeInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.);
     std::shared_ptr<const NativeMeasuredTrainingBoundary> selected;
     QJsonObject unmeasured,unmeasuredDataset;std::vector<InputParameters> unmeasuredParameters;
     std::size_t unmeasuredEpoch=0;bool sawUnmeasuredEdit=false,sawFinalizing=false;
@@ -5262,6 +5295,7 @@ template<class Owner> void ActualCompositeTerminalRestore(bool window,bool n0)
     EXPECT_EQ(selected->DatasetIdentity(),unmeasuredDataset);
     SavePortableObject(name.c_str(),"terminal-state8.json",exported.learnedState);
     SavePortableObject(name.c_str(),"terminal-summary9.json",exported.summary);
+    SavePortableObject(name.c_str(),"cold9-job.json",TerminalColdConsoleJob(coldConfiguration,history.value("neuron").toObject()));
     SavePortableObject(name.c_str(),"source-selected-actual.json",{{"source",unmeasured},
         {"selected",selected->NeuronIdentity()},{"actual",exported.learnedState.value("neuron").toObject().value("graph").toObject().value("identity")},
         {"source_epoch",double(unmeasuredEpoch)},{"actual_epoch",double(service.ModelEpoch())}});
@@ -5351,6 +5385,23 @@ template<class Owner> void TerminalConfigurationAllBaseSchemas()
         EXPECT_DOUBLE_EQ(plan.search.tolerances.sync,c.search.tolerances.sync);
         const auto folder=std::string(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-configuration9/base-"+std::to_string(version);
         SavePortableObject(folder.c_str(),"original.json",original);SavePortableObject(folder.c_str(),"configured9.json",encoded);
+        for(bool preflight:{false,true}) {
+            const QJsonObject baseExecution{{"schema_version",1},{"model_revision","actual-initial-model"},
+                {"execution",preflight?"completed":"training_start_failed"}};
+            const auto wire=NmsdkWorker::WrapConfiguredNativeExecution(parsed,baseExecution,{},QJsonValue(QJsonValue::Null),
+                "actual-initial-model",0,0,preflight);
+            EXPECT_EQ(wire.value("schema_version"),QJsonValue(6));EXPECT_EQ(wire.value("base_schema_version"),QJsonValue(1));
+            EXPECT_EQ(wire.value("terminal_selection"),encoded.value("terminal_selection"));
+            EXPECT_TRUE(wire.value("terminal_boundary").isNull());EXPECT_TRUE(wire.value("source_measurements").isNull());
+            EXPECT_EQ(QJsonDocument::fromJson(QJsonDocument(wire).toJson()).object(),wire);
+            SavePortableObject(folder.c_str(),preflight?"execution6-preflight-writer.json":"execution6-start-failure-writer.json",wire);
+        }
+        QJsonObject liveBase{{"schema_version",2},{"model_revision","actual-initial-model"}};
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(parsed,liveBase,{},QJsonValue(QJsonValue::Null),
+            "actual-initial-model",0,0),std::invalid_argument);
+        liveBase["schema_version"]=1;
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(parsed,liveBase,{},QJsonValue(QJsonValue::Null),
+            "actual-initial-model",1,1,true),std::invalid_argument);
         for(const auto& invalid:{QJsonValue(true),QJsonValue("1"),QJsonValue(0),QJsonValue(9),QJsonValue(QJsonValue::Null)}) {
             auto bad=encoded;bad["terminal_base_schema_version"]=invalid;
             EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
