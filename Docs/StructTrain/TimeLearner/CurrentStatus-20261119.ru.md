@@ -1,5 +1,42 @@
 # TimeLearner: проверенный статус на 19 ноября 2026
 
+## Текущий срез после native A6 и DATA4
+
+Полная цель0–12 активна; только этап0 полностью принят. Новый научный Train/Test
+в этом срезе не выполнялся. Результаты классификации в таблице ниже сохраняются.
+
+- Native A6 полностью завершён:78 выполнено,62 PASS/16 FAIL, все группы закрыты.
+  Все8 actual composite restoration/warm, codec2 и configured entry8 прошли.
+  Все16 отказов — plain historical import: новая cold9 policy передавалась в
+  legacy RestoreBoundary. [Полный primary и исходный отрицательный outcome](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a6-rejected.archive.json).
+- Исправление в Pulse `c508392a8c963ceb639050d737717bff0d853b3a` разрешает только
+  package8 factory готовить historical proof с этой декларацией; live terminal
+  policy устанавливается отдельно по actual boundary. Standalone извлечённый
+  configuration9/schema1–7 отклоняется. Допуски и математическая цель прежние.
+- Python DATA4 на прошедшем native subset10:4/4 PASS, без failures/errors/skips;
+ 16 исходных schema/configuration records и8 configured native entries проверены.
+  Это не приёмка всего A6 или Console execution6. [Квитанция, primary и188 ссылок
+  на исходные данные без повторного тяжёлого payload](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-configured-data4-a2.archive.json).
+- Native A8 запущен на Root `893b7344eb8794e5ef981eb133e669b6060e5aa3` / Pulse
+  `c508392a8c963ceb639050d737717bff0d853b3a`: те же78 cases, дополненные writer/
+  import assertions. Включены publication8/execution6 и16 деклараций для реальных
+  Console controls. [Точный handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native78-a8-running.json).
+  Приёмка новой сборки ещё не получена; в develop она не объединена.
+
+Reader также исправляет подтверждённое отсутствие capacitance_state в known
+historical plain schema1: это отсутствие owned C0, без подстановки baseline.
+Для новых схем поле обязательно. Snapshot переноса terminal8 composite проверяет
+и копирует внешние CSV; embedded blobs не скрывают их потерю. Source-only
+execution6 и общий auditor разделяют actual модель и historical measurements.
+
+Следующая последовательность: проверить A8 и соответствующий primary DATA;
+провести настоящий Console перенос Classic/Branch, затем приоритетно cold N4
+A/B при одинаковых бюджетах и frozen8 с реальным порогом и читаемыми Soma/input
+графиками. Полная N2/режимная матрица остаётся обязательной и продолжается вместе
+с научной работой. Production cold9 Train guard пока не снят.
+
+## История предыдущих срезов
+
 Последний проверенный срез: A5 завершён, сборка успешна; выполнено60/68,
 59 PASS/1 FAIL. Отказ Classic C0 fresh-process warm admission связан с
 сравнением исторического L3 baseline с восстановленным actual L2. Все процессы
