@@ -1,0 +1,45 @@
+{
+  "kind": "timelearner_scientific_cold_training_observation",
+  "schema_version": 1,
+  "observed_at": "2026-11-19T11:35:54.205318+00:00",
+  "job": "s11-terminal-n4-branch-on-m40-a1",
+  "worker": "M40",
+  "source_root": "893b7344eb8794e5ef981eb133e669b6060e5aa3",
+  "source_pulse": "c508392a8c963ceb639050d737717bff0d853b3a",
+  "actor_root": "e93edd316443ac8ff92de72e12b972ed63724aa8",
+  "execution": "running",
+  "written_probe_packets": 377,
+  "last_probe": {
+    "file": "raw-trial-377.json",
+    "trial_id": "terminal-science-ab/n4/branch/a1/on/session/1/search/118/composite/63/native/4",
+    "complete": true,
+    "valid": true,
+    "reason": null,
+    "begin_time": null,
+    "end_time": null
+  },
+  "kernel_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "86b7033b348bc270b154d979c52bae46436c425e08c490a6aeb585812cd17849",
+    "unit": "timelearner-afb35501-00f8-4793-b668-5784061bfd33.service",
+    "invocation_id": "8c8ab15ee4bc425085f0ce0168afc85c",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-afb35501-00f8-4793-b668-5784061bfd33.service",
+    "initial_main_pid": 1251374,
+    "initial_start_ticks": "415743703",
+    "sha256": "c7d5b850b6a89fdce4e5757d78cd9f460b4235630bfa8cbae8da0fb621d5a70a"
+  },
+  "native_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "0ff4f8465254e73f30ab936e710ae7a751a0a030a99972b35650bdb243d4b240",
+    "unit": "timelearner-ef70c911-ebd6-4470-b389-8bf1058e61b5.service",
+    "invocation_id": "c0420d722ba44ad188f046f1026c5581",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ef70c911-ebd6-4470-b389-8bf1058e61b5.service",
+    "initial_main_pid": 1255495,
+    "initial_start_ticks": "415745586",
+    "sha256": "6e5f09a3bd5a072bde64008b53d319620dface4f93cc92bef01536862765284f"
+  },
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

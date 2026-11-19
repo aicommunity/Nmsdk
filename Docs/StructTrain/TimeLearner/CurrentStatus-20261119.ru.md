@@ -1,5 +1,33 @@
 # TimeLearner: проверенный статус на 19 ноября 2026
 
+## Уточнение после готовности Elder и recorded-source DATA3
+
+- Elder завершил свежую сборку Console на том же native Root893/Pulsec508,
+  что используется текущим N4 опытом. Семь NativePhysicalModelData cases прошли,
+  все группы закрыты;161 member полного primary сохранён и проверен в M40.
+  [Квитанция](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/elder-recognition7-a1.archive.json).
+  Это проверка готовности runtime, не повтор native78 и не новая классификация.
+- Production reader stopped8 проверен на действительных Classic/Branch источниках:
+  DATA3 завершён3/3 без failures/errors/skips. Все49 members и124 ссылки на
+  исходный production corpus проверены. Actual terminal graph сохраняется;
+  historical epoch не получает его авторитет.
+  [Primary](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/elder-recorded-source3-a1.archive.json).
+- M40 Branch/On N4 продолжает первоначальный Train. Последний сохранённый
+  срез содержит377 native probe packets и complete/valid последнюю пробу;
+  это не процент выполнения и не сертификат сходимости.
+  [Точный срез и kernel bindings](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/branch-on-observation.json).
+- Отдельный Python actor1cac и исходная восьмипаттерновая матрица подготовлены
+  для actual-state Test. Новый Test пока не запущен: Train остаётся живым.
+  [Подготовка](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/evaluation-preparation.json).
+- На Elder дополнительно удалены только2835 побайтово проверенных архивных
+  дублей сырых файлов (1.67GB). Уникальный primary, inputs, source и runtime
+  сохранены. До новой сборки свободное место выросло1.98→3.66GB; минимум во
+  время сборки составил3.08GB. Для большого Train этого недостаточно.
+  [Архивный план и квитанция](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/elder-verified-raw-retirement.json).
+
+Научные результаты ниже не изменены. Цель0–12 активна; полностью принят
+только этап0, остальные этапы частичны. Accepted develop не изменён.
+
 ## Текущий срез: native78 и production13 приняты, начато научное N4 обучение
 
 Цель0–12 активна. Полностью принят только этап0; этапы1–12 остаются частичными.
