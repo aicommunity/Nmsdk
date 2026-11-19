@@ -1,6 +1,38 @@
 # TimeLearner: проверенный статус на 19 ноября 2026
 
-## Текущий срез после native A6 и DATA4
+## Текущий срез: native78 и production13 приняты, начато научное N4 обучение
+
+Цель0–12 активна. Полностью принят только этап0; этапы1–12 остаются частичными.
+Новые исправления находятся в feature-ветках, accepted develop не изменён.
+
+- Native A8 завершён78/78 PASS, все группы закрыты. Проверены настоящие
+  restoration/warm transitions, plain/composite imports, кодеки и configured
+  owner entries. [Полный primary](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a8-accepted.archive.json).
+- Production13 завершён13/13 PASS без failures/errors/skips. Включены28 native
+  boundaries,20 warm exports, explicit Branch mute checks и четыре actual
+  Console run_job cases: два completed и два restored stopped Train,16 frozen
+  Test-наблюдений. [Полный primary](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-production13-console4-a3.archive.json).
+- Предшествующие DATA36 и DATA11 отклонены и сохранены. Исправлены различение
+  graph snapshot/пробы, допустимые отключённые Branch banks, чтение legacy C0
+  event и полнота проекции warm primary. Положительный subset26 проверок
+  planning/ConditionSpec не переименовывает DATA36 в успешное задание.
+- На M40 запущен новый cold N4 Branch/On, actor e93edd316443ac8ff92de72e12b972ed63724aa8,
+  native893b7344eb8794e5ef981eb133e669b6060e5aa3/Pulsec508392a8c963ceb639050d737717bff0d853b3a.
+  Controller и native group подтверждены живыми. [Handle](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/branch-on-running.json).
+  Остальные три задания подготовлены. [Научный протокол](TerminalPolicyScienceAB-20261119.ru.md).
+- Два служебных тика завершения и composite N+2 стоимость теперь учтены отдельно;
+  search/probe budgets и допуски не повышаются. Новый terminal Train разрешён
+  только через contained process policy. Это не общая рекомендация всех режимов V2.
+- На Elder удалены восемь воспроизводимых старых build caches. Свободно около2ГБ;
+  исходники, runtime и научный primary сохранены. Этого пока недостаточно для
+  нового большого Train. [Квитанция](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/elder-build-cache-retirement.json).
+
+Нового N4 результата классификации пока нет. После текущего Train приоритет —
+actual-state Test всех восьми паттернов, реальная проверка выбранного порога и
+читаемые Soma/input графики. Полная режимная матрица и12 оставшихся Console
+вариантов продолжают оставаться обязательной работой.
+
+## Исторический срез после native A6 и DATA4
 
 Полная цель0–12 активна; только этап0 полностью принят. Новый научный Train/Test
 в этом срезе не выполнялся. Результаты классификации в таблице ниже сохраняются.
