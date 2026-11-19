@@ -119,6 +119,12 @@ assertions и трёх RdkIntegralXml регрессий (native81), прежн�
 по всем16 фактическим native fixtures. Прежний accepted78 относится к старому
 исходному срезу и не доказывает выполнение новых assertions.
 
+Новая Windows A3 SDK-сборка запущена из изолированного clean Git source
+Root cbc1ac36f6be9b7abe4edb52f1c2c8f6dffbad60 / Pulse0cf / Rdkcb6.
+Все5092 namespace files проверены. Именованный kernel Job и scheduled instance
+подтверждены живыми. [Точные handles и спецификация](../../../Reports/StructTrain/TimeLearner/TerminalPhysicalData8-20261119/windows-sdk-a3-running.json).
+Ни build dispatch, ни компиляция не принимаются за native81 PASS.
+
 До использования этого пути для научных выводов также нужны реальный N4
 full-source/DATA response comparison и actual eight-pattern frozen evaluation
 с неизменными моделью и порогом. Успешный DATA import сам по себе не означает

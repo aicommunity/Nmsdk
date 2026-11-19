@@ -10,15 +10,15 @@
 
 На двух workers одновременно выполняются первоначальные cold N4 Train:
 
-- M40: Branch/On,704 записанных native probe packets в последнем срезе.
+- M40: Branch/On,843 записанных native probe packets в последнем срезе.
   [Точный handle и наблюдение](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/branch-on-observation.json).
-- Elder: Classic/On,234 записанных native probe packets в последнем срезе.
+- Elder: Classic/On,325 записанных native probe packets в последнем срезе.
   [Точный handle](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/classic-on-running.json).
 
 В обоих случаях supervisor и native kernel groups живы, последняя проба
 complete/valid, terminal результата ещё нет. Количество native packets не
-является процентом выполнения или сертификатом. Срез проверен19.11 около19:26МСК;
-[readback обоих workers](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/status-readback-1926-msk.json).
+является процентом выполнения или сертификатом. Срез проверен19.11 после
+восстановления VPN; [readback обоих workers](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/status-readback-after-vpn-restored.json).
 Серийный номер search в trial_id учитывает также изменения модели и не является
 счётчиком использованных logical probes. Действует исходный
 [A/B протокол](TerminalPolicyScienceAB-20261119.ru.md): CapturedPerInput,
@@ -126,11 +126,20 @@ Native78 с новыми DATA assertions завершён:59 PASS,19 FAIL, пр�
   исправлен на30s до edit, сохранив научные бюджеты и допуски. Повтор ещё нужен.
 
 Python3 и новый physical DATA path не приняты. Подготовленная Windows A2
-содержит только первое исправление; её сборка не запущена. Следующий полный
-прогон включает все исходные78 cases и три RdkIntegralXml regression cases,
-всего81. [Исправление владельца и область приёмки](RdkIntegralXml-20261119.ru.md).
+содержит только первое исправление; её сборка не запускалась. В отдельной A3
+собираются Root cbc1ac36f6be9b7abe4edb52f1c2c8f6dffbad60 / Pulse0cf /
+Rdk cb6fe50da94ca9cbc9d5e4c0811d42b37b44a14a. Namespace5092 Git files
+проверен, старые source/runtime не обновлялись. Kernel Job и точный scheduled
+instance подтверждены живыми; последний срез компиляции247/541.
+[A3 dispatch, closure и handles](../../../Reports/StructTrain/TimeLearner/TerminalPhysicalData8-20261119/windows-sdk-a3-running.json).
+После сборки полный прогон включает все исходные78 cases и три RdkIntegralXml
+regression cases, всего81. [Исправление владельца и область приёмки](RdkIntegralXml-20261119.ru.md).
 Полный первичный архив этого отрицательного Windows прогона пока не опубликован;
 исходные файлы сохранены на worker, в Git записан компактный readback.
+Инвентаризация полного primary A1:1246 файлов,587744126 bytes без Git object
+directories. Прямое SMB-чтение из текущего Windows SSH-сеанса завершилось
+таймаутом, без записи или удаления архивных данных. Публикация полного primary
+остаётся обязательной; недоступность наблюдения не считается остановкой job.
 Windows используется для инженерной проверки; научные Train
 продолжаются на M40/Elder, их runtime остаются прежними. Это работа этапа5,
 а не новый научный результат. [Контракт и оставшиеся проверки](TerminalPhysicalData8-20261119.ru.md).

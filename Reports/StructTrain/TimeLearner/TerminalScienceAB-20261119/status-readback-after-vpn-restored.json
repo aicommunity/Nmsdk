@@ -1,0 +1,203 @@
+{
+  "kind": "timelearner_two_worker_science_status",
+  "schema_version": 1,
+  "observed_at": "2026-11-19T19:08:07.091928+00:00",
+  "observations": [
+    {
+      "worker": "M40",
+      "job": "s11-terminal-n4-branch-on-m40-a1",
+      "observed_at": "2026-11-19T19:08:07.091928+00:00",
+      "controller": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "86b7033b348bc270b154d979c52bae46436c425e08c490a6aeb585812cd17849",
+          "unit": "timelearner-afb35501-00f8-4793-b668-5784061bfd33.service",
+          "invocation_id": "8c8ab15ee4bc425085f0ce0168afc85c",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-afb35501-00f8-4793-b668-5784061bfd33.service",
+          "initial_main_pid": 1251374,
+          "initial_start_ticks": "415743703",
+          "sha256": "c7d5b850b6a89fdce4e5757d78cd9f460b4235630bfa8cbae8da0fb621d5a70a"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "1251374",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-afb35501-00f8-4793-b668-5784061bfd33.service",
+          "MemoryMax": "8589934592",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt afb35501-00f8-4793-b668-5784061bfd33",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "8c8ab15ee4bc425085f0ce0168afc85c"
+        },
+        "memory_max": 8589934592,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "native": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "0ff4f8465254e73f30ab936e710ae7a751a0a030a99972b35650bdb243d4b240",
+          "unit": "timelearner-ef70c911-ebd6-4470-b389-8bf1058e61b5.service",
+          "invocation_id": "c0420d722ba44ad188f046f1026c5581",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ef70c911-ebd6-4470-b389-8bf1058e61b5.service",
+          "initial_main_pid": 1255495,
+          "initial_start_ticks": "415745586",
+          "sha256": "6e5f09a3bd5a072bde64008b53d319620dface4f93cc92bef01536862765284f"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "1255495",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ef70c911-ebd6-4470-b389-8bf1058e61b5.service",
+          "MemoryMax": "8589934592",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt ef70c911-ebd6-4470-b389-8bf1058e61b5",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "c0420d722ba44ad188f046f1026c5581"
+        },
+        "memory_max": 8589934592,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "supervisor": {
+        "pid": 1247475,
+        "start_ticks": "415742037",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "uid": 1000
+      },
+      "written_probe_packets": 843,
+      "last_probe": {
+        "file": "raw-trial-843.json",
+        "trial_id": "terminal-science-ab/n4/branch/a1/on/session/1/search/275/composite/141/native/2",
+        "complete": true,
+        "valid": true,
+        "reason": null,
+        "begin_time": null,
+        "end_time": null
+      },
+      "scientific_verdict": null
+    },
+    {
+      "worker": "Elder",
+      "job": "s11-terminal-n4-classic-on-elder-a1",
+      "observed_at": "2026-11-19T19:08:07.091928+00:00",
+      "controller": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "5442f540930457089fe77981e9eb5ea1a41fceae10b52795ea226370c065b7b8",
+          "unit": "timelearner-6d9693cd-a7ae-4f26-b735-fb778cff5f74.service",
+          "invocation_id": "1cbf8078d78b458a9ffc6e14d0016522",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6d9693cd-a7ae-4f26-b735-fb778cff5f74.service",
+          "initial_main_pid": 2195119,
+          "initial_start_ticks": "465975392",
+          "sha256": "7211dec4be9f387941e7d89adb86735b26f90a1b434b2694669a8e436e1a25be"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "2195119",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6d9693cd-a7ae-4f26-b735-fb778cff5f74.service",
+          "MemoryMax": "8589934592",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt 6d9693cd-a7ae-4f26-b735-fb778cff5f74",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "1cbf8078d78b458a9ffc6e14d0016522"
+        },
+        "memory_max": 8589934592,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "native": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "2f6e8cbeb2461d4f2e150ae34871501ab2c0817b314bb9764a8661b14a102584",
+          "unit": "timelearner-dc28d969-885c-45b2-95df-5809cf8644bb.service",
+          "invocation_id": "387f4400037c49719861c97d929a9e43",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-dc28d969-885c-45b2-95df-5809cf8644bb.service",
+          "initial_main_pid": 2199106,
+          "initial_start_ticks": "465976309",
+          "sha256": "8b7e2d4054fb1c5cfb3dbcdf2761563888618039d5767ea482661ac713b93908"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "2199106",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-dc28d969-885c-45b2-95df-5809cf8644bb.service",
+          "MemoryMax": "8589934592",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt dc28d969-885c-45b2-95df-5809cf8644bb",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "387f4400037c49719861c97d929a9e43"
+        },
+        "memory_max": 8589934592,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "supervisor": {
+        "pid": 2191420,
+        "start_ticks": "465974630",
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "uid": 1000
+      },
+      "written_probe_packets": 325,
+      "last_probe": {
+        "file": "raw-trial-325.json",
+        "trial_id": "terminal-science-ab/n4/classic/a1/on/session/1/search/98/composite/55/native/0",
+        "complete": true,
+        "valid": true,
+        "reason": null,
+        "begin_time": null,
+        "end_time": null
+      },
+      "scientific_verdict": null
+    }
+  ],
+  "completion_fraction": null,
+  "new_classification_result_available": false,
+  "original_jobs_restarted": false,
+  "runtimes_updated": false
+}
