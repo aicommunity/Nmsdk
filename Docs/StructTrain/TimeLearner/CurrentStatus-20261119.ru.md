@@ -1,201 +1,77 @@
 # TimeLearner: проверенный статус на 19 ноября 2026
 
-## Уточнение после готовности Elder и recorded-source DATA3
+Цель этапов0–12 активна. Полностью принят только этап0; этапы1–12 частичны.
+Новые изменения находятся в feature-ветке; accepted root develop остаётся
+87e7da0205b6bb0d582f7b4f2551c935fd7f2350. Научные8/8 не являются условием
+успешного рефакторинга. Scope отдельных успешных проверок не расширяется до
+полной приёмки поддерживаемых режимов.
 
-- Elder завершил свежую сборку Console на том же native Root893/Pulsec508,
-  что используется текущим N4 опытом. Семь NativePhysicalModelData cases прошли,
-  все группы закрыты;161 member полного primary сохранён и проверен в M40.
-  [Квитанция](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/elder-recognition7-a1.archive.json).
-  Это проверка готовности runtime, не повтор native78 и не новая классификация.
-- Production reader stopped8 проверен на действительных Classic/Branch источниках:
-  DATA3 завершён3/3 без failures/errors/skips. Все49 members и124 ссылки на
-  исходный production corpus проверены. Actual terminal graph сохраняется;
-  historical epoch не получает его авторитет.
+## Текущие научные задания
+
+На двух workers одновременно выполняются первоначальные cold N4 Train:
+
+- M40: Branch/On,425 записанных native probe packets в последнем срезе.
+  [Точный handle и наблюдение](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/branch-on-observation.json).
+- Elder: Classic/On,7 записанных native probe packets в последнем срезе.
+  [Точный handle](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/classic-on-running.json).
+
+В обоих случаях supervisor и native kernel groups живы, последняя проба
+complete/valid, terminal результата ещё нет. Количество native packets не
+является процентом выполнения или сертификатом. Действует исходный
+[A/B протокол](TerminalPolicyScienceAB-20261119.ru.md): CapturedPerInput,
+N1, sync0.02, amplitude1e−5/rel0, один sweep,24 candidates/input,
+160 logical probes,10000 model seconds; C-trim/PostTune/autoThreshold Off.
+
+Classic/On переназначен с M40 на Elder: исходные bytes подписанного Train
+и initial inputs не изменены. Старый M40 Classic/On не запускался и не должен
+запускаться повторно. Native Root893/Pulsec508 одинаковы; runtime identities
+отдельных сборок сохранены. [Назначение и лимиты](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/classic-on-assignment.json).
+Classic/Off и Branch/Off подготовлены, ещё не запущены.
+
+После каждого Train приоритет — actual-state Test всех8 паттернов, реальное
+подтверждение выбранного порога и читаемые Soma/input графики. Для stopped8
+подготовлен проверенный diagnostic reader: Test использует actual graph,
+historical source не подставляется вместо него. Completed Train требует
+штатного recognition export/evaluation. Незавершённое обучение сохраняет свой
+исходный статус. [Подготовка](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/evaluation-preparation.json).
+
+## Что закрыто последними проверками
+
+- Native A8:78/78 PASS, все группы закрыты, полный primary опубликован.
+  [Архив](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a8-accepted.archive.json).
+- Production13:13/13 PASS, включая4 real Console cases и16 frozen observations.
+  [Архив](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-production13-console4-a3.archive.json).
+- Остальные12 Console cases на Elder:2/2 test methods PASS,42 native operations,
+ 6 completed и6 restored stopped Train,48 frozen observations. Все группы
+  закрыты;2727 members полного primary проверены и сохранены на M40.
+  [Архив](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/elder-console-remaining12-a1.archive.json).
+- Вместе закрыты16 объявленных N2 вариантов Classic/Branch × Fixed4/Window5 ×
+  N0/N1 × completed/restored. Это не полная физическая/режимная матрица и не
+  N4 научная сходимость. [Покрытие](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/Console16-coverage.json).
+- Elder SDK: свежая сборка Console и7/7 physical model cases.
+  [Primary](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/elder-recognition7-a1.archive.json).
+- Recorded-source DATA3:3/3 на реальных restored Classic/Branch источниках,
+  включая отказ при повреждении external CSV и разделение actual/historical epoch.
   [Primary](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/elder-recorded-source3-a1.archive.json).
-- M40 Branch/On N4 продолжает первоначальный Train. Последний сохранённый
-  срез содержит377 native probe packets и complete/valid последнюю пробу;
-  это не процент выполнения и не сертификат сходимости.
-  [Точный срез и kernel bindings](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/branch-on-observation.json).
-- Отдельный Python actor1cac и исходная восьмипаттерновая матрица подготовлены
-  для actual-state Test. Новый Test пока не запущен: Train остаётся живым.
-  [Подготовка](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/evaluation-preparation.json).
-- На Elder дополнительно удалены только2835 побайтово проверенных архивных
-  дублей сырых файлов (1.67GB). Уникальный primary, inputs, source и runtime
-  сохранены. До новой сборки свободное место выросло1.98→3.66GB; минимум во
-  время сборки составил3.08GB. Для большого Train этого недостаточно.
-  [Архивный план и квитанция](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/elder-verified-raw-retirement.json).
 
-Научные результаты ниже не изменены. Цель0–12 активна; полностью принят
-только этап0, остальные этапы частичны. Accepted develop не изменён.
+Все прежние отказы A2–A6/DATA36/DATA11 сохранены как отрицательные outcomes.
+Последующие исправления не переименовывают их в PASS.
 
-## Текущий срез: native78 и production13 приняты, начато научное N4 обучение
+## Подтверждённые научные результаты
 
-Цель0–12 активна. Полностью принят только этап0; этапы1–12 остаются частичными.
-Новые исправления находятся в feature-ветках, accepted develop не изменён.
-
-- Native A8 завершён78/78 PASS, все группы закрыты. Проверены настоящие
-  restoration/warm transitions, plain/composite imports, кодеки и configured
-  owner entries. [Полный primary](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a8-accepted.archive.json).
-- Production13 завершён13/13 PASS без failures/errors/skips. Включены28 native
-  boundaries,20 warm exports, explicit Branch mute checks и четыре actual
-  Console run_job cases: два completed и два restored stopped Train,16 frozen
-  Test-наблюдений. [Полный primary](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-production13-console4-a3.archive.json).
-- Предшествующие DATA36 и DATA11 отклонены и сохранены. Исправлены различение
-  graph snapshot/пробы, допустимые отключённые Branch banks, чтение legacy C0
-  event и полнота проекции warm primary. Положительный subset26 проверок
-  planning/ConditionSpec не переименовывает DATA36 в успешное задание.
-- На M40 запущен новый cold N4 Branch/On, actor e93edd316443ac8ff92de72e12b972ed63724aa8,
-  native893b7344eb8794e5ef981eb133e669b6060e5aa3/Pulsec508392a8c963ceb639050d737717bff0d853b3a.
-  Controller и native group подтверждены живыми. [Handle](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/branch-on-running.json).
-  Остальные три задания подготовлены. [Научный протокол](TerminalPolicyScienceAB-20261119.ru.md).
-- Два служебных тика завершения и composite N+2 стоимость теперь учтены отдельно;
-  search/probe budgets и допуски не повышаются. Новый terminal Train разрешён
-  только через contained process policy. Это не общая рекомендация всех режимов V2.
-- На Elder удалены восемь воспроизводимых старых build caches. Свободно около2ГБ;
-  исходники, runtime и научный primary сохранены. Этого пока недостаточно для
-  нового большого Train. [Квитанция](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/elder-build-cache-retirement.json).
-
-Нового N4 результата классификации пока нет. После текущего Train приоритет —
-actual-state Test всех восьми паттернов, реальная проверка выбранного порога и
-читаемые Soma/input графики. Полная режимная матрица и12 оставшихся Console
-вариантов продолжают оставаться обязательной работой.
-
-## Исторический срез после native A6 и DATA4
-
-Полная цель0–12 активна; только этап0 полностью принят. Новый научный Train/Test
-в этом срезе не выполнялся. Результаты классификации в таблице ниже сохраняются.
-
-- Native A6 полностью завершён:78 выполнено,62 PASS/16 FAIL, все группы закрыты.
-  Все8 actual composite restoration/warm, codec2 и configured entry8 прошли.
-  Все16 отказов — plain historical import: новая cold9 policy передавалась в
-  legacy RestoreBoundary. [Полный primary и исходный отрицательный outcome](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a6-rejected.archive.json).
-- Исправление в Pulse `c508392a8c963ceb639050d737717bff0d853b3a` разрешает только
-  package8 factory готовить historical proof с этой декларацией; live terminal
-  policy устанавливается отдельно по actual boundary. Standalone извлечённый
-  configuration9/schema1–7 отклоняется. Допуски и математическая цель прежние.
-- Python DATA4 на прошедшем native subset10:4/4 PASS, без failures/errors/skips;
- 16 исходных schema/configuration records и8 configured native entries проверены.
-  Это не приёмка всего A6 или Console execution6. [Квитанция, primary и188 ссылок
-  на исходные данные без повторного тяжёлого payload](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-configured-data4-a2.archive.json).
-- Native A8 запущен на Root `893b7344eb8794e5ef981eb133e669b6060e5aa3` / Pulse
-  `c508392a8c963ceb639050d737717bff0d853b3a`: те же78 cases, дополненные writer/
-  import assertions. Включены publication8/execution6 и16 деклараций для реальных
-  Console controls. [Точный handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native78-a8-running.json).
-  Приёмка новой сборки ещё не получена; в develop она не объединена.
-
-Reader также исправляет подтверждённое отсутствие capacitance_state в known
-historical plain schema1: это отсутствие owned C0, без подстановки baseline.
-Для новых схем поле обязательно. Snapshot переноса terminal8 composite проверяет
-и копирует внешние CSV; embedded blobs не скрывают их потерю. Source-only
-execution6 и общий auditor разделяют actual модель и historical measurements.
-
-Следующая последовательность: проверить A8 и соответствующий primary DATA;
-провести настоящий Console перенос Classic/Branch, затем приоритетно cold N4
-A/B при одинаковых бюджетах и frozen8 с реальным порогом и читаемыми Soma/input
-графиками. Полная N2/режимная матрица остаётся обязательной и продолжается вместе
-с научной работой. Production cold9 Train guard пока не снят.
-
-## История предыдущих срезов
-
-Последний проверенный срез: A5 завершён, сборка успешна; выполнено60/68,
-59 PASS/1 FAIL. Отказ Classic C0 fresh-process warm admission связан с
-сравнением исторического L3 baseline с восстановленным actual L2. Все процессы
-исходного A5 закрыты. Его полный primary опубликован:1222 проверенных members,
-25159043 bytes, catalog `experiments/2026-11-19/native-terminal-portable/m40-a5-rejected.json`.
-[Компактная квитанция](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a5-rejected.archive.json).
-
-Дополнительные actual8 исходный fail-fast worker не запускал. Отдельный owned
-native-gate на неизменном A5 runtime завершён:8/8 выполнены,4 PASS protocol5
-(Classic/Branch × N0/N1),4 FAIL protocol4 с `composite_imported_epoch_changed`
-при warm continuation после реального восстановления другого графа. Все
-процессы закрыты, lease освобождён;160 members полного primary проверены и
-опубликованы,4463329 bytes. Это отдельная проверка, не успешная приёмка
-исходных68. [Квитанция](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-actual8-runtime-reuse-a3.archive.json).
-
-В feature Pulse добавлены два исправления: отдельный actual C0 witness для
-warm admission и protocol4 continuation через точную source/actual пару
-проверенного terminal journal. Подготовлена явная cold configuration9 поверх
-старых1–8; текущий Console pipeline пока её отклоняет до полной интеграции.
-Новые исходники/усиленные native tests ожидают отдельной серверной проверки;
-в develop они не приняты. Новых научных Train/Test в этом срезе нет.
-
-Ниже сохранены датированные состояния предыдущих попыток; их live-статусы
-не заменяют этот срез. Полная цель этапов0–12 остаётся активной.
-
-Актуализация после завершения native terminal-selection gates19 ноября.
-Полная цель этапов0–12
-активна. Полностью принят этап0; этапы1–12 частичны. Процент общей готовности
-не назначается: оставшиеся алгоритмические и режимные проверки имеют разный
-объём. Accepted root develop остаётся87e7da0205b6bb0d582f7b4f2551c935fd7f2350.
-Рабочие ветки codex/timelearner-physical-model-data уже содержат source-retention,
-historical export и новый native portable boundary schema8/summary9. Этот код
-и расширенные интеграционные проверки ещё не приняты серверным gate.
-Адресно принятые gates относятся
-к Root3c5bfe01609a6e6bd290aa9697938e885d5904b6 / Pulse1d8fc24cdb19b4b0e399483d198314b84548f9ea.
-Верхние разделы определяют текущий статус; записи ниже раздела истории
-сохраняют состояния своих датированных попыток.
-
-## Научные результаты
-
-| Проверенная модель и протокол | TP | FP | FN | TN | Ограничения |
+| Модель и протокол | TP | FP | FN | TN | Ограничения |
 |---|---:|---:|---:|---:|---|
-| Новый cold Classic,8 исходных паттернов |1|2|0|5|Порог выбран на той же матрице; Train BudgetExhausted, сертификата нет.|
-| Новый cold Branch,8 исходных паттернов |1|2|0|5|То же ограничение Same-Matrix.|
-| Сохранённая Elder Branch,8 исходных паттернов |1|1|0|6|Порог0.09874840158355691 подтверждён actual native Test; остановленная модель.|
-| Та же Elder Branch, target control и3 новых foil |1|0|0|3|Порог и модель зафиксированы до новых ответов;3 новых foil, один знакомый target, одна обученная модель.|
+|Cold Classic,8 исходных паттернов|1|2|0|5|Same-Matrix threshold; Train BudgetExhausted, certificate отсутствует.|
+|Cold Branch,8 исходных паттернов|1|2|0|5|Те же ограничения.|
+|Сохранённая Elder Branch,8 исходных паттернов|1|1|0|6|Порог0.09874840158355691 подтверждён actual Test; stopped модель.|
+|Та же Elder Branch, цель и3 новых foil|1|0|0|3|Модель/порог frozen до новых ответов; одна модель, знакомый target.|
 
-Последний heldout4 прошёл полный common source/model/scorer audit:
-все4 окна complete/valid, модель frozen, порог повторно не выбирался.
-Target дал спайк0.4925с, через2.5мс после последнего входа; новые foil молчат.
-Native1420.02с и audit1437.16с завершились exit0, все связанные процессы закрыты.
-[Полная квитанция](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/frozen-heldout4-common-audit-closed.json).
-Успех этих3 новых foil не отменяет FP на исходном phasea-row-4, не доказывает
-сходимость Train и не является независимым повторным обучением.
-
-Полный primary исходного baseline/threshold Test Elder опубликован на M40.
-Новый heldout primary собран на .14:126928729 bytes,
-SHA256309c9d895b913e149836b7185daf13d035764c021a180d89f5a1369dbe330f7a.
-Пакет опубликован в центральном архиве M40: все70 members,3200472564
-expanded bytes проверены по hash/size; исходная Train primary и прежняя
-калибровочная primary разрешены по каталогам. [Квитанция и CAS-ссылка](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/frozen-heldout4-primary.archive.json).
-
-## Последние задания и проверки
-
-| Задание | Фактический исход |
-|---|---|
-|M40: временной отчёт Elder baseline/threshold,16 проб|2/2 declared tests PASS; галерея baseline/threshold создана. Kernel group закрыта. Визуальная приёмка и публикация этой новой галереи ещё впереди.|
-|M40: terminal-selection fresh SDK|44/44 PASS, включая14 terminal cases,6 snapshots и прежние регрессии; supervisor/все группы закрыты, primary опубликован.|
-|M40: terminal portable fresh SDK A2|Собрано, выполнено56:44 PASS/12 FAIL. Все12 composite cases прошли; plain fresh-process warm cases запускались до native Init. Gate отклонён, все группы закрыты, primary опубликован.|
-|M40: terminal portable fresh SDK A3|Закрыта:60 выполнено,50 PASS/10 FAIL. Четыре protocol4 warm exports потеряли journal primary; два C0 cases не достигли unmeasured edit в10s; четыре completed plain cases отклонены из-за неактивного legacy C-trim sentinel. Gate отклонён, primary опубликован; исправления ожидают новой серии.|
-|M40: terminal portable fresh SDK A4|Закрыта с build failure, выполнено0/60. Production PulseLib собрана; добавленная тестовая проверка обращалась к protected NativeProbeModelBindings. Обращение удалено; публичная проверка trim=0 и реальные roundtrips сохранены. Primary опубликован.|
-|M40: terminal portable fresh SDK A5|Canonical preparation PASS; supervisor/native kernel group подтверждены живыми, отдельная fresh build68. Два обязательных leaf: прежние60 и8 actual composite restores. Результата native tests ещё нет.|
-|Elder: независимый terminal-selection fresh SDK|14/14 PASS, supervisor/все группы закрыты, primary опубликован.|
-|Предыдущий Elder: fresh SDK,14 targeted cases|13 PASS/1 FAIL. Постановка kernel case исправлена; его corrected version прошла на M40. Старый отказ сохранён, старый gate не переименован в успешный.|
-|Предыдущий M40 gate29|25 PASS/4 FAIL. Четыре N0 ThresholdCandidate не получили исходного certificate, maximum_sweeps_exhausted; downstream проверки ещё не подтверждены. Persistence2 прошли.|
-|Windows .14: heldout4|Native и полный audit завершены; TP1/FP0/FN0/TN3.|
-
-[M40 report receipt](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-temporal-report-closed.json),
-[Elder14 receipt](../../../Reports/StructTrain/TimeLearner/MeasuredBoundarySelection-20261118/elder14-closed-rejected.json).
-Перечисленные ранее живые задания завершены; повторный запуск не выполнялся.
-Все прежние native jobs, portable A2 и A3 закрыты. Новых научных Train нет.
-A4 выполнялась отдельно на Rootb5d4da83d426e88147f71cff404dbf9e46b0264a /
-Pulse13f8551a6ddfa9c0a4a7f2e63d41369ace5df74f,
-controls ee48c22cdbdf3efcc9396611ee4632bc3b56d359.
-[Исходный handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native60-a4-running.json),
-[primary и закрытие отказавшей сборки](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a4-build-failure.archive.json).
-Следующая постановка включает прежние60 и8 actual composite restores с реальным
-L2→L3, model-time stop, portable roundtrip, сравнением отклика и warm продолжением.
-Эти8 ещё не выполнялись. Сейчас запущена A5 на
-Root54e61dd86c6c52fce9a30c4a161bf783299795d3 /
-Pulse13f8551a6ddfa9c0a4a7f2e63d41369ace5df74f,
-controls d46d644a5f0f2150072b20fb893e50846ad5059a.
-[A5 handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native68-a5-running.json).
-У этих8 меняется L, Ns/Rs фиксированы и C0 Off: они не заменяют полную
-normalization/C0/heterogeneous матрицу. Проверка Python6 original28 boundaries
-допускается после закрытия всех68 и успешного leaf60; она не принимает actual8
-или полную native68 серию при отказе дополнительного leaf.
-Эти адресные проверки не заменяют полную объявленную матрицу262Linux/261Windows.
-[Native terminal acceptance](NativeTerminalSelectionAcceptance-20261119.ru.md).
+Первые два результата подтверждены фактическими спайками с выбранными
+порогами, не только offline maxima. [Cold threshold отчёт](FairInputColdThresholdStudy-20261118.ru.md).
+Heldout4 не отменяет FP исходной матрицы и не является независимым повторным
+обучением. [Архив и audit](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/frozen-heldout4-primary.archive.json).
+Новых N4 результатов классификации текущих двух Train пока нет.
+Августовские визуальные4/8–6/8 сохраняются для своего исходного протокола.
 
 ## Готовность этапов
 
@@ -206,201 +82,32 @@ normalization/C0/heterogeneous матрицу. Проверка Python6 original
 |2|Изолированные сборки/runtime, manifests, внешний архив и восстановление primary.|Полная build/resource/fault matrix и closure всех принятых публикаций.|
 |3|Строгие ID/completeness/finite проверки, versioned scorer, реальные frozen observations.|Полнота исторических адаптеров и единый verdict во всей поддерживаемой области.|
 |4|Настоящие lifecycle/storage/physical DATA fixtures.|Полная fresh/reuse/Copy/Load/Build/growth/heterogeneous и режимная матрица.|
-|5|Export/import, stopped/completed state, native Train→Test roundtrip.|Остальные физические/связевые варианты и согласование будущего terminal restoration с archive/replay.|
+|5|Export/import, stopped/completed state, native Train→Test roundtrip.|Остальные физические/связевые варианты и независимое восстановление полного корпуса. Mid-probe resume не обещается.|
 |6|Общий native service/controller и Classic/Branch adapters.|Legacy/V2 A/B, оставшееся дублирование, отдельная multirate verification.|
-|7|Measured bounded L/Ns/Rs search, N0 repeats, причины остановки, final verification; explicit terminal restore проверен44/44 M40 и14/14 Elder.|Новый source-retention/historical-export код, полный portable переход и cold/runtime/analysis integration; полная bounds/physics/reset/C-search матрица.|
+|7|Measured bounded L/Ns/Rs search, N0 repeats, причины остановки, final verification; explicit terminal restore проверен44/44 M40 и14/14 Elder.|Полная bounds/physics/reset/C-search матрица и научные N4 A/B. Portable переход и16 объявленных N2 Console cases приняты адресно.|
 |8|Solo/recognition state, transactions, реальное подтверждение порога, первые unseen foil.|Все PostTune/inhibition/reset modes и расширенная независимая frozen evaluation.|
 |9|Корневой пакет/CLI, manifest357 и адресные migration gates.|Оставшиеся Bin analysis/matrix/shared tools и callers; complete=false.|
 |10|Owned groups, leases/budgets, provenance и fail-closed publisher.|Полная effective-factor, cancel/recovery/publication fault matrix.|
 |11|Реальные положительные и отрицательные результаты, order/window/reset проверки отдельных моделей, временные отчёты.|Систематическая legacy/V2 и физическая/режимная матрица, новые независимые условия и повторы.|
 |12|Поддерживаемые отчёты; DOCXv3 Classic15/Branch14 страниц,9 примеров,29 страниц проверены.|Сквозная сверка root/PulseLib/Bin/config/ClDesc, завершение миграции и очередная актуализация примеров.|
 
-## Ближайшее критическое исправление
 
-Global budget/deadline после edit мог оставить неизмеренный последний кандидат.
-Controller selection, полный native capture и explicit terminal restore с
-owner mirrors/C-state, readback и physical epoch адресно проверены на обоих
-серверах. Для обычных cold JSON возможность пока не включена. Новейший код
-сохранения исходного графа перед transaction, historical export context и
-factory schema8/summary9 ещё нужно проверить. Factory разделяет historical
-proof и actual native model; import создаёт Finished DATA, без контроллерного
-checkpoint и живых полномочий. Подготовлены fresh-process, warm-control и
-tamper проверки. Все12 protocol4/5 cases A2 прошли;12 plain child checks
-отказали из-за warm Start до native Build/Init. Исправленная постановка,
-historical_summary на source epoch и4 новых plain completed cases проверяются A3.
-Уже обнаружена отдельная потеря protocol4 journal primary при следующем warm
-Start. Исправление сохраняет reference groups и все candidate/anchor trials,
-необходимые retained journal, с проверкой общего byte budget. Восемь composite
-warm controls усилены реальным новым consumed measurement перед stop/export.
-Эти изменения ожидают следующего отдельного server gate. A3 полностью закрыта:
-50/60 PASS; [primary и исходные10 отказов](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a3-rejected.archive.json).
-Дополнительно snapshot guard согласован с фактическим условием pending C-trim
-обоих learner: неактивный CapApplyPending при trim=0 не является работающим
-контроллером. Два C0 transport fixtures явно получают30s вместо10s, чтобы дойти
-до candidate/anchor pair и настоящего unmeasured edit; научные budgets не изменены.
-Полная native приёмка, cold/runtime declarations и Python analysis integration
-остаются обязательной открытой частью.
-[Полный контракт](TerminalBestStateBoundary-20261118.ru.md).
+## Данные и документы
 
-Дальше: завершить и проверить portable переход, затем same-budget cold A/B
-и actual frozen8 с читаемыми графиками.
-Открытая реализация детализирована в
-[portable boundary design](TerminalPortableBoundaryDesign-20261119.ru.md):
-включая no-transition/Exact, ранние stops, warm journal и все protocol families.
-Параллельно завершить публикацию уже полученных heldout данных и графиков.
-Остальные требования этапов сохраняются.8/8 не является условием окончания
-рефакторинга; Exact требует свежей all-input проверки одной конечной модели.
+Тяжёлые primary, модели и полные галереи находятся только в
+`/media/user/Data/Nmsdk-StructTrainExpArchive`; Git содержит код, документы
+и компактные ссылки. [Политика и Samba](ExternalExperimentArchive.ru.md).
+Для возвращения Elder к науке удалены4064 точных архивных JSON/CSV дубля
+из трёх закрытых старых заданий,12.913GB. Проверены11 kernel units, hash/size
+каждого файла и наличие central primary. Не совпавшие файлы, source/runtime
+и уникальные данные сохранены. Дополнительно удалён только проверенный локальный
+дубль54MB уже опубликованного архива. [План и квитанции](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/elder-science-capacity-restored.json).
 
-## История попыток19 ноября: захват native graph и новые сборки
+DOCXv3 Classic/Branch:15+14 страниц,9 работающих примеров, все29 страниц
+проверены. Следующая актуализация примеров следует после новых фактических Test;
+эксперименты имеют приоритет. Полная матрица, завершение миграции и stage merges
+children-first через--no-ff остаются обязательными.
 
-Актуальная отдельная попытка: Rootfb30b8be92bcfc006b94f1476d615dc8ab2ac03a /
-Pulse19545036eecb884e2682c53b1a031a82abc82560. После успешной canonical
-preparation на M40 запущена fresh SDK сборка с56 заявленными cases: прежние44
-с расширенными source/portable/fresh-process/warm assertions и12 новых
-composite transport cases. Controlsaa236d76b0fb8877652fa1db37160ae2e3ae11b2,
-job s07-terminal-portable-sdk-m40-a1. Supervisor4104184/start412501038 и
-kernel unit timelearner-7c732e30-bc8c-4918-b8c9-33b9f937d27a.service,
-main4111704/start412504166 подтверждены живыми. Это ещё не native приёмка;
-новых научных Train/Test нет. [Handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native56-running.json).
-Следующие записи этого раздела — история предыдущих попыток, не активные jobs.
-
-Уточнение A1: fresh build остановилась на двух сравнениях QJsonArray с
-QJsonValue в новом factory. Выполнено0 из56 cases; supervisor и все группы
-закрыты, reservations освобождены. Ошибка исправлена явным QJsonValue;
-аналогичное сравнение исправлено в fresh-process тесте. Прежний A1 сохранён:
-[primary и подтверждение отказа](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a1-build-failure.archive.json).
-Исправление ещё требует отдельной свежей сборки и выполнения56 cases.
-
-A2: Root3916cf6da8157cfbe84ef0f54a1a446824d70e0a /
-Pulsec84a1c1e864786660d7626d2e577fb3b83eeb67b, controls8ee6c0d51980669ba605eddb0689768d417592a3.
-Canonical preparation PASS, свежая native сборка56 cases запущена.
-Supervisor2937/start412659767 и unit timelearner-106cf42b-4d8e-4fc5-94aa-aed858452471.service,
-main10784/start412662722 подтверждены живыми. Старые A1 source/build/runtime
-не изменены. [A2 handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native56-a2-running.json).
-
-A2 завершена:56 выполнено,44 PASS/12 FAIL, gate отклонён. Во всех12
-plain child failures warm Start предшествовал штатным Build/Init и получил
-native_training_requires_initialized_ready_learner. Тест исправлен переносом
-warm контроля после существующей инициализации, без дополнительных Build
-в learner. Все группы/supervisor закрыты. [Полный primary](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a2-rejected.archive.json):
-1013 проверенных members,17 log aliases,16116665 compressed bytes.
-Новая рабочая версия добавляет source historical_summary, DATA audit schema8,
-проверки28 native boundaries,12 plain и8 composite warm exports, а также4 plain completed controls.
-Это код, ожидающий native и Python приёмки; ordinary cold JSON ещё не включает
-terminal policy. Следующая серия содержит60 C++ cases; новые научные Train/Test
-пока не выполнялись.
-
-A3 запущена на Root64b6e6e9959cd5e2ea4428a327cb860c327b73d8 /
-Pulse311937260912381c85c0539f94253479e7b543de, controls533b1a5dbc3fe88927cda6a5ff9c8b5e3d832e87.
-Canonical preparation PASS; supervisor199960/start413286290 и
-unit timelearner-bd46b0a7-cda2-4d15-b4da-3848722d674e.service,
-main207497/start413289473 подтверждены живыми.
-[A3 handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native60-a3-running.json).
-После native результата остаётся отдельный Python gate из6 tests на28
-декларированных boundaries и20 warm exports, а также реальные composite
-restores с изменённой геометрией. Нынешние12 composite cases являются
-fixed-geometry transport controls и не заменяют такой проверки.
-
-Root47f532a7aef1253e03bac7073f192ea555e118e5 / Pulse57f603b1048d6547bda6e2e97f7decc0305715f0:
-реализован process-local захват полного graph/Dataset/storage/C-state выбранной
-контроллером измеренной точки. Добавлены6 native cases, исправлена постановка
-одного отказавшего kernel regression. Автоматический terminal restore ещё
-не реализован; [границы и следующий контракт](TerminalBestStateBoundary-20261118.ru.md).
-
-На M40 canonical preparation пройдена. Свежая сборка и30 заявленных C++ cases
-выполняются отдельно в s08-measured-native-boundary-sdk-m40-a1,
-controls978af14a078abe3b90a6ca12a2cfe5c2333ec7b5. Supervisor3611226,
-unit timelearner-d4980d0d-93d1-4d64-ac49-0ee632466cb6.service подтверждены живыми.
-[Handle](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-running.json).
-Работающий runtime не обновляется, новый код в develop не принят.
-
-В готовой Elder baseline/threshold галерее2391 PNG. Просмотрены16 исходных
-overview всех паттернов и2 positive-lobe overview target/FP. Подписи и реальные
-входы читаемы; общий full-recovery Y масштаб сжимает положительные отклики
-молчащих проб. Для подробного сравнения этих проб ещё нужны положительные
-companion views. Полная visual acceptance и публикация галереи не объявлены.
-[Границы визуальной проверки](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-temporal-report-selected-visual-review.json).
-
-Уточнение исхода native30 A1: сборка production PulseLib завершилась, но сборка
-теста остановилась: два SCOPED_TRACE на одной строке объявили одну переменную
-gtest_trace_61 дважды. Выполнено0 из30 C++ cases; gate отклонён, все группы и
-supervisor закрыты. [Исходный отказ](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-a1-build-failure.json),
-[закрытие](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-a1-closed-build-rejected.json).
-Rootd790786db21ae6d56cbb0e1fbbb70f9ef1b2d310 разносит trace declarations по
-строкам. Для A2 подготовлены новые source/build/runtime, прежние A1 сохранены;
-те же30 cases, тот же Pulse57f603b. Controls22cd7149c3e6ab83b1537fd7c8eb538594946e3a.
-Canonical preparation A2 пройдена; native supervisor3701540/start411377128
-и unit timelearner-c2590dc5-40e8-4c30-90f5-cc8b6b085bf8.service,
-PID3709096/start411380156 подтверждены живыми. [Handle A2](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-a2-running.json).
-Результат30 C++ проверок ещё не получен; A1 и A2 являются разными попытками.
-
-## Актуализация19 ноября: A3 и подготовленная terminal transaction
-
-A2 завершилась до выполнения тестов: compiler отклонил три неявных преобразования
-const UEPtr в native witness calls. Выполнено0/30; исходный отказ и закрытие
-сохранены в m40-native30-a2-build-failure.json и m40-native30-a2-closed-build-rejected.json.
-Root554b70a719ad712f402be608ca4d45826424fc82 использует явный Get().
-
-Повторная проверка19.11,01:48МСК: A3 с этим Root и прежним Pulse57f603b
-активна на M40, supervisor3804988/start411618921 и unit
-timelearner-f8ffe62c-0dd3-4b34-9682-1121fd84deda.service подтверждены живыми.
-Свежая сборка завершилась, compiled inventory записан; итог30 cases ещё
-не принят. Это отдельные source/build/runtime, прежние попытки не изменены.
-
-Pulseb5128706c91df017be58d81b029ee53139057b84 добавляет явную native terminal
-transaction: после BudgetExhausted контроллер отзывает прежние полномочия,
-на следующей before-children границе восстанавливает полный выбранный граф,
-Dataset, owner mirrors и C-state с readback и резервом rollback из исходного
-edit budget. История поиска и фактическая physical epoch разделены; сертификат
-не создаётся. Подготовлены14 native случаев для обеих топологий/N0/N1,
-Reset/external stop, C-state, нехватки edit allowance и отказа attachment.
-Они ещё не собраны и не приняты; A3 их не содержит.
-
-Это промежуточная native API-возможность. Обычные cold JSON её не включают;
-versioned portable export/import/replay перехода ещё требуется. Старые exporters
-отклоняют такой scope, чтобы не описать восстановленный граф как прежний
-terminal search state. Следующий научный A/B требует закрыть эту границу,
-затем выполнить cold Train и frozen8 при одинаковых бюджетах. Только этап0
-полностью принят; полная цель0–12 сохраняется.
-
-A3 завершена после предыдущей проверки: выполнено30 случаев,26 PASS/4 FAIL.
-Все группы и supervisor закрыты. Четыре отказа — независимое сравнение пустого
-owned C-state с захваченным: non-const JSON lookup добавлял baseline:null.
-Исправлено чтением value() без вставки поля; исходный отказ сохранён в
-[квитанции](../../../Reports/StructTrain/TimeLearner/MeasuredNativeBoundary-20261119/m40-native30-a3-failures.json).
-Нужен новый native прогон исправления и terminal transaction;26/30 не приёмка.
-
-После closure A3 запущены два независимых fresh SDK задания с
-Root3c5bfe01609a6e6bd290aa9697938e885d5904b6 / Pulse1d8fc24cdb19b4b0e399483d198314b84548f9ea:
-M40 terminal-selection-a1 —44 случая; Elder terminal-selection-a1 —14 новых
-terminal cases. Обе canonical preparations пройдены, новые supervisors и
-kernel units подтверждены живыми. M40 supervisor3925312/start411857291,
-unit timelearner-512750df-162b-4924-b49b-c4eee1f2ad00.service; Elder
-supervisor1516047/start461313628, unit timelearner-4cafdba4-833f-4255-bc82-b749478f45f3.service.
-Итоги тестов ещё не получены. На Elder удалена только проверенная закрытая
-старая build-measured-boundary-sdk-a1; source/runtime/primary сохранены.
-
-Отдельно [исправляется читаемость положительных откликов](SharedRecoveryReadability-20261119.ru.md)
-молчащих проб при общем recovery-масштабе. Это правка renderer с ещё ожидаемой
-серверной и визуальной проверкой, без нового Train/Test или научного verdict.
-
-## Принятая адресная проверка terminal selection
-
-Оба задания закрыты: M40 **44/44 PASS**, Elder **14/14 PASS** на прежних
-Root3c5/Pulse1d8. Подтверждены worker validation, полные фактические JUnit
-inventories и whole-group closure. Native M40 suite603.953с, Elder193.913с.
-Все6 snapshot cases проходят, включая четыре прежних empty-C отказа.
-Полные primary обоих серверов опубликованы в external M40 archive.
-[Область, артефакты и ограничения](NativeTerminalSelectionAcceptance-20261119.ru.md).
-
-В рабочей ветке после принятой комбинации добавлены retention исходного графа
-перед transaction и read-only historical export context для protocol3/4/5.
-Эти новые изменения и расширенные14 source assertions ещё не проверены gate.
-Полный portable terminal factory/export/import/replay и cold/runtime/analysis
-integration остаются открытыми. Нового научного Train/Test не было.
-
-На .14 создан отдельный report-renderer venv, headless matplotlib/Pillow
-проверены. Общий Python и пользовательский C:/Projects/Nmsdk не изменялись.
-Первый embedded Python не имел venv; отказ сохранён, успешный отдельный venv
-создан через обнаруженный установленный полный Python. Генерация новых
-научных графиков в нём ещё не запущена.
+Предыдущий полный срез этой сводки сохранён в Git commit
+170dae54951c2a1b8b4c629a4a48c44b8b413ecd по тому же пути. Датированные отчёты и первичные измерения сохранены;
+их старые live-статусы относятся к своим снимкам.

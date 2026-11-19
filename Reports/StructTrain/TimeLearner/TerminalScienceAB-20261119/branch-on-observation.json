@@ -1,22 +1,22 @@
 {
-  "kind": "timelearner_scientific_cold_training_observation",
+  "kind": "timelearner_scientific_cold_training_status",
   "schema_version": 1,
-  "observed_at": "2026-11-19T11:35:54.205318+00:00",
-  "job": "s11-terminal-n4-branch-on-m40-a1",
+  "observed_at": "2026-11-19T12:06:48.698066+00:00",
   "worker": "M40",
+  "job": "s11-terminal-n4-branch-on-m40-a1",
+  "execution": "running",
   "source_root": "893b7344eb8794e5ef981eb133e669b6060e5aa3",
   "source_pulse": "c508392a8c963ceb639050d737717bff0d853b3a",
   "actor_root": "e93edd316443ac8ff92de72e12b972ed63724aa8",
-  "execution": "running",
-  "written_probe_packets": 377,
-  "last_probe": {
-    "file": "raw-trial-377.json",
-    "trial_id": "terminal-science-ab/n4/branch/a1/on/session/1/search/118/composite/63/native/4",
-    "complete": true,
-    "valid": true,
-    "reason": null,
-    "begin_time": null,
-    "end_time": null
+  "request_sha256": "198d82325df390dd4f8473bd4bd07827944f6945a27edd7a491601fa7c522886",
+  "controls_commit": "823c178bd771cb0e661d15e1b342cb4c2fdd2f0c",
+  "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-terminal-n4-branch-on-m40-a1-controller",
+  "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-terminal-n4-branch-on-m40-a1",
+  "supervisor_identity": {
+    "pid": 1247475,
+    "start_ticks": "415742037",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
   },
   "kernel_binding": {
     "kind": "timelearner_contained_binding",
@@ -40,6 +40,26 @@
     "initial_start_ticks": "415745586",
     "sha256": "6e5f09a3bd5a072bde64008b53d319620dface4f93cc92bef01536862765284f"
   },
+  "topology": "Branch",
+  "inputs": 4,
+  "normalization": "N1",
+  "terminal_policy": "On",
+  "search_model_seconds": 10000,
+  "search_probes": 160,
+  "candidates_per_input": 24,
+  "sweeps": 1,
+  "maximum_model_ticks": 20000002,
+  "training_result": null,
+  "recognition_result": null,
   "scientific_verdict": null,
-  "whole_plan_complete": false
+  "written_probe_packets": 425,
+  "last_probe": {
+    "file": "raw-trial-425.json",
+    "trial_id": "terminal-science-ab/n4/branch/a1/on/session/1/search/135/composite/71/native/4",
+    "complete": true,
+    "valid": true,
+    "reason": null,
+    "begin_time": null,
+    "end_time": null
+  }
 }

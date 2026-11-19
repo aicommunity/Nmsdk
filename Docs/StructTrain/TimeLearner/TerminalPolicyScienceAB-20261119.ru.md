@@ -80,3 +80,17 @@ stopped source.
 
 Все первичные данные и полные отчёты хранятся во внешнем архиве M40.
 Корневой Git содержит код, этот протокол и компактные проверяемые ссылки.
+
+## Назначение второго worker
+
+Classic/On выполняется на Elder после fresh SDK7 и remaining Console12 PASS.
+Исходный M40 Classic/On не запускался; он исключён из дальнейшей очереди.
+Все bytes Train/initial inputs, поисковые бюджеты и допуски сохранены.
+Отличаются worker, runtime manifest отдельной сборки и внешняя disk policy
+(2GiB floor/12GiB output cap). Эти сведения сохраняются в RunManifest;
+бинарники разных сборок не объявляются побайтово одинаковыми.
+[Точное назначение](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/classic-on-assignment.json).
+
+Все16 объявленных N2 Console вариантов приняты адресно на двух workers;
+их coverage не заменяет научные N4 A/B или полную физическую/режимную матрицу.
+[Покрытие](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/Console16-coverage.json).
