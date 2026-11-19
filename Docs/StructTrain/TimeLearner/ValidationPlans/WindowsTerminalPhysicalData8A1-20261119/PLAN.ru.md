@@ -3,8 +3,9 @@
 Статус: компиляция/линковка закончились с returncode0; исходная сборка
 сохранена как `descendants_remaining`, build_accepted=false. Вся группа закрыта.
 Независимый closed-build audit прошёл:5092 source files,17287 dependency files,
-62 runtime files. Native78 запущен и подтверждён живым kernel Job;
-его полный итог и Python3 ещё не приняты. Это работа этапа5;
+62 runtime files. Native78 завершён:59 PASS,19 FAIL, без пропусков;
+все78 объявленных ID присутствуют, kernel Job отсутствует и task instances пусты.
+Новый SDK не принят, Python3 не запускался. Это работа этапа5;
 научные N4 Train на M40 и Elder продолжают использовать прежние runtime.
 
 В первом native78 новые solo DATA fixtures оставляли включённый Default
@@ -12,7 +13,13 @@ EnablePostTrainTuning=true и получали штатный отказ configu
 Причина относится к настройке нового тестового owner. Исправление выключает
 незаявленные optional phases до Install/Init и немедленно проверяет
 NativeModelEditFailure; guard и waveform tolerances сохраняются. Первый
-прогон завершается в исходном виде; исправление ожидает нового полного native78.
+прогон сохранён как отрицательный; исправление ожидает нового полного прогона.
+Два дополнительных rollback failures показывают Copy mismatch DebugSysEventsMask:
+32-битный atoi в общем XML integral reader Rdk не сохраняет unsigned4294967295
+на Windows. Ещё один failed-attachment test исчерпал10s wall до нужного edit.
+Необходимы общее исправление сериализации с регрессиями и исправление
+предусловия инженерного теста; исходные78 cases сохраняются в новом inventory.
+Подготовленная A2 только с fixture fix не собрана и не является приёмкой.
 
 ## Точная область
 
@@ -81,4 +88,5 @@ Git policy objects. Это подготовка нового приватног�
 [Точные dispatch и kernel handles](../../../../../Reports/StructTrain/TimeLearner/TerminalPhysicalData8-20261119/windows-sdk-running.json).
 [Закрытие сборки и отдельный artifact audit](../../../../../Reports/StructTrain/TimeLearner/TerminalPhysicalData8-20261119/windows-sdk-closed-audit.json).
 [Native78: объявление и живой процесс](../../../../../Reports/StructTrain/TimeLearner/TerminalPhysicalData8-20261119/windows-native78-running.json).
+[Native78: закрытый отрицательный исход](../../../../../Reports/StructTrain/TimeLearner/TerminalPhysicalData8-20261119/windows-native78-closed-negative.json).
 Полная семантика и незакрытые проверки: [контракт terminal8 DATA](../../TerminalPhysicalData8-20261119.ru.md).

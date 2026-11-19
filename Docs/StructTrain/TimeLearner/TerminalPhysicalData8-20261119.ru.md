@@ -3,15 +3,27 @@
 Статус: реализация и интеграционные проверки подготовлены в feature-ветке.
 На Windows завершены компиляция и линковка. Исходный `descendants_remaining`
 сохранён; отдельный closed-build audit готовых артефактов прошёл.
-Native78 выполняется, полный runtime-итог и Python3 ещё не приняты.
+Native78 завершён:59 PASS,19 FAIL, все78 ID присутствуют, пропусков нет.
+Вся kernel group и scheduled task закрыты. Python3 не запускался; новый путь
+не принят. [Закрытый исход](../../../Reports/StructTrain/TimeLearner/TerminalPhysicalData8-20261119/windows-native78-closed-negative.json).
 В первом прогоне новые DATA cases обнаружили ошибку настройки fixture:
 fresh owner наследовал EnablePostTrainTuning=true из Default. Configured-owner
 Build штатно отклонял незаявленную optional phase; очередь пробы затем получала
 native_model_requires_repair_after_failed_edit. Исправлен именно fixture:
 optional controller phases выключаются до Install/Init, причина из
 NativeModelEditFailure проверяется немедленно. Защитный Build guard, семантика
-Idle, допуски waveform и все16 cases сохранены. Исходный отрицательный прогон
-должен завершиться и сохраниться; исправленная версия требует нового native78.
+Idle, допуски waveform и все16 cases сохранены. Исправление зафиксировано
+в root ee7df956207bd4f541c7ede8aadc2578ccc4e7bf, но ещё не runtime-принято.
+Кроме16 fixture failures, два rollback cases выявили расхождение Copy по
+DebugSysEventsMask: общий XML integral reader использует32-битный atoi.
+На Windows преобразование4294967295→2147483647 подтверждено на worker.
+Ещё один failed-attachment case исчерпал10s wall до требуемого изменения
+модели. Общее исправление Rdk, регрессионные проверки и исправление бюджета
+инженерной fixture ещё нужны. Подготовленную A2 только с первым исправлением
+не запускали. Следующий прогон должен включить все исправления и явно
+расширенный regression inventory, сохранив все исходные78 cases.
+Исходный отрицательный прогон сохраняется; его полный primary ещё ожидает
+центральной публикации, оригинальные файлы остаются на Windows worker.
 [Точная декларация и порядок проверки](ValidationPlans/WindowsTerminalPhysicalData8A1-20261119/PLAN.ru.md).
 Текущие научные N4 Train
 используют неизменные Root893/Pulsec508; их runtime этим изменением не обновляется.

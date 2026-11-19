@@ -10,15 +10,15 @@
 
 На двух workers одновременно выполняются первоначальные cold N4 Train:
 
-- M40: Branch/On,547 записанных native probe packets в последнем срезе.
+- M40: Branch/On,704 записанных native probe packets в последнем срезе.
   [Точный handle и наблюдение](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/branch-on-observation.json).
-- Elder: Classic/On,143 записанных native probe packets в последнем срезе.
+- Elder: Classic/On,234 записанных native probe packets в последнем срезе.
   [Точный handle](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/classic-on-running.json).
 
 В обоих случаях supervisor и native kernel groups живы, последняя проба
 complete/valid, terminal результата ещё нет. Количество native packets не
-является процентом выполнения или сертификатом. Срез проверен19.11 около16:58МСК;
-[readback обоих workers](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/status-readback-1658-msk.json).
+является процентом выполнения или сертификатом. Срез проверен19.11 около19:26МСК;
+[readback обоих workers](../../../Reports/StructTrain/TimeLearner/TerminalScienceAB-20261119/status-readback-1926-msk.json).
 Серийный номер search в trial_id учитывает также изменения модели и не является
 счётчиком использованных logical probes. Действует исходный
 [A/B протокол](TerminalPolicyScienceAB-20261119.ru.md): CapturedPerInput,
@@ -107,13 +107,29 @@ terminal8 и дополнительные native/Python проверки. Сер
 не выполнена. На Windows .14 завершена компиляция; исходный build outcome
 descendants_remaining сохранён, вся группа закрыта. Отдельный artifact audit
 прошёл:5092 source files,17287 dependency files,62 runtime files.
-Native78 с новыми DATA assertions выполняется; kernel Job подтверждён живым.
-В новых DATA cases уже зафиксированы отказы настройки fixture: у fresh owner
-оставался Default PostTune=true, который configured Build штатно отклоняет.
-Настройка fixture исправлена вместе с немедленной проверкой NativeModelEditFailure;
-исправленная версия требует отдельной сборки и полного native78. Первый исход
-сохраняется как отрицательный, его итоговые counts ещё ожидаются.
-Это третья вычислительная машина для инженерной проверки; научные Train
+Native78 с новыми DATA assertions завершён:59 PASS,19 FAIL, пропусков нет,
+все78 объявленных ID присутствуют; kernel Job и scheduled task закрыты.
+[Закрытый отрицательный исход и причины](../../../Reports/StructTrain/TimeLearner/TerminalPhysicalData8-20261119/windows-native78-closed-negative.json).
+Причины19 отказов разделены:
+
+-16 DATA cases: fresh owner наследовал Default PostTune=true; configured Build
+  штатно отклонял незаявленную optional phase. Настройка fixture исправлена
+  в root ee7df956207bd4f541c7ede8aadc2578ccc4e7bf вместе с немедленной
+  проверкой NativeModelEditFailure. Исправление ещё не runtime-принято.
+-2 rollback cases: Copy расходится по DebugSysEventsMask. В общем XML reader
+  Rdk целые значения читаются через32-битный atoi; на Windows значение
+  unsigned4294967295 превращается в2147483647. Преобразование воспроизведено
+  на worker; общее исправление сериализации и регрессионные проверки ещё нужны.
+-1 failed-attachment case:10-секундный wall budget истёк до предусмотренного
+  тестом изменения модели. Предусловие не выполнено; нужно исправить бюджет
+  инженерной fixture и повторить сценарий, сохранив научные бюджеты и допуски.
+
+Python3 и новый physical DATA path не приняты. Подготовленная Windows A2
+содержит только первое исправление; её сборка не запущена. Следующий полный
+прогон должен включать исправления остальных причин и явные regression cases.
+Полный первичный архив этого отрицательного Windows прогона пока не опубликован;
+исходные файлы сохранены на worker, в Git записан компактный readback.
+Windows используется для инженерной проверки; научные Train
 продолжаются на M40/Elder, их runtime остаются прежними. Это работа этапа5,
 а не новый научный результат. [Контракт и оставшиеся проверки](TerminalPhysicalData8-20261119.ru.md).
 
