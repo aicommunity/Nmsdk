@@ -1,8 +1,10 @@
 # Следующая реализация: portable terminal boundary
 
-Это рабочее уточнение открытой части этапов5/7/10, не описание готового
-формата. Адресная native transaction принята на Root3c5/Pulse1d8; последующие
-source retention и historical-export context реализованы, но ещё не проверены.
+Это рабочее уточнение открытой части этапов5/7/10, не приёмка готового формата.
+Адресная native transaction принята на Root3c5/Pulse1d8. Factory schema8,
+event2 и summary9 реализованы; первая сборка A1 остановилась до тестов на
+сравнении Qt JSON типов. Исправленная комбинация Root3916cf6da8157cfbe84ef0f54a1a446824d70e0a /
+Pulsec84a1c1e864786660d7626d2e577fb3b83eeb67b проверяется отдельно в A2.
 Общая цель этапов0–12 не заменяется этим подэтапом.
 
 ## Уже подготовленные компоненты
@@ -11,10 +13,11 @@ source retention и historical-export context реализованы, но ещ�
   C-state перед transaction. Публичный доступ возвращает только DATA, без
   Restore/permit. Новый retained источник ограничен64MiB отдельно от selected
   snapshot. Исчерпание retention прекращает завершение без physical edit.
-- NativeHistoricalExportBoundary имеет закрытый constructor для будущего
+- NativeHistoricalExportBoundary имеет закрытый constructor для
   NativeTerminalStateFactory. Он проверяет тот же stopped service/session,
   неизменные outcome/reason, transcript epoch/parameters и полный private
-  source graph. Публичные старые exporters по-прежнему не принимают этот scope.
+  source graph. Terminal scope направляется в новый factory, а прежний формат
+  используется только как явно вложенная историческая граница.
 - Historical export paths подготовлены для plain protocol3, composite4 и
   candidate-window5, включая recovery family. Они сохраняют исходные проверки
   measurement proof, native graph, storage images и C0; epoch берётся из source
@@ -68,13 +71,15 @@ heterogeneous/dormant C-state, successful/rollback/no-edit transitions.
 нет transition; завершилось Exact без необходимости изменения графа; external
 stop; interrupted/invalid outcomes; недостаток reservation/retention.
 Сертификат прежнего unchanged Exact можно сохранить только после строгой
-проверки совпадения actual revision/epoch. Текущий historical context принимает
-только stopped/null-certificate — этот случай ещё нужно реализовать отдельно.
+проверки совпадения actual revision/epoch. Historical context теперь принимает
+unchanged certified scope; новые4 composite cases проверяют его отдельно с
+явно инженерным sync0.2. Они не доказывают научную сходимость при sync0.02.
 
 Warm continuation и Reset не должны стирать журнал прежних transitions и
 позволять экспорту потерять происхождение. Explicit cold retarget создаёт новую
-evidence scope. Нужны сохраняемый DATA journal и проверка связей между epochs;
-нынешний transient event/source сам по себе эту задачу не закрывает.
+evidence scope. Реализован DATA journal до4096 записей; его warm/re-export
+проверки ещё не приняты. Aggregate byte budget и сохранность всех dormant C0
+после роста и отката к более ранней геометрии остаются отдельными проверками.
 
 Добавить explicit cold/runtime declaration и включить фактор в production
 condition identity. Обновить native model/summary dispatcher, Console jobs,
@@ -85,6 +90,17 @@ Python DATA/scorer/primary transport и reporting. До этого ordinary cold
 выгружать/перепроигрывать1GB raw journal внутри последнего тика и не копировать
 service ради override epoch. Контроль памяти, nested package/content-reference
 transport и bounded decoder проверить на настоящем большом N=4 primary.
+
+Summary9 сейчас описывает actual revision/physical epoch и terminal journal.
+Это ещё не замена прежним source summaries со ссылками на reference/candidate
+trials, C0 witnesses и search counters. Для production analysis нужно сохранить
+явно historical summary на transcript epoch либо реализовать отдельный полный
+DATA audit вложенного historical_state. Нельзя подставлять в прежний scorer
+actual summary с новой epoch или достраивать отсутствующие measurement proofs.
+Конкретные места: ProbeEvidenceJson/NativeCompositeLearnedState в PulseLib;
+learned_evidence, stopped_evidence, composite_package_evidence, native_evidence,
+native_pipeline_worker и recognition_evidence в корневом пакете. Unknown schema
+должна оставаться отказом до согласованного обновления этих путей.
 
 ## Проверки и следующий научный опыт
 

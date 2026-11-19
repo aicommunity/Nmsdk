@@ -43,6 +43,7 @@ expanded bytes проверены по hash/size; исходная Train primary
 |---|---|
 |M40: временной отчёт Elder baseline/threshold,16 проб|2/2 declared tests PASS; галерея baseline/threshold создана. Kernel group закрыта. Визуальная приёмка и публикация этой новой галереи ещё впереди.|
 |M40: terminal-selection fresh SDK|44/44 PASS, включая14 terminal cases,6 snapshots и прежние регрессии; supervisor/все группы закрыты, primary опубликован.|
+|M40: terminal portable fresh SDK A2|Canonical preparation PASS; исправленная сборка на56 cases выполняется. Native результат ещё не получен. A1 остановилась до тестов на Qt JSON сравнении, отказ сохранён.|
 |Elder: независимый terminal-selection fresh SDK|14/14 PASS, supervisor/все группы закрыты, primary опубликован.|
 |Предыдущий Elder: fresh SDK,14 targeted cases|13 PASS/1 FAIL. Постановка kernel case исправлена; его corrected version прошла на M40. Старый отказ сохранён, старый gate не переименован в успешный.|
 |Предыдущий M40 gate29|25 PASS/4 FAIL. Четыре N0 ThresholdCandidate не получили исходного certificate, maximum_sweeps_exhausted; downstream проверки ещё не подтверждены. Persistence2 прошли.|
@@ -51,7 +52,7 @@ expanded bytes проверены по hash/size; исходная Train primary
 [M40 report receipt](../../../Reports/StructTrain/TimeLearner/SingleSweepBranch-20261118/native-temporal-report-closed.json),
 [Elder14 receipt](../../../Reports/StructTrain/TimeLearner/MeasuredBoundarySelection-20261118/elder14-closed-rejected.json).
 Перечисленные ранее живые задания завершены; повторный запуск не выполнялся.
-На момент этой сводки перечисленные native jobs закрыты; новых Train нет.
+Прежние native jobs закрыты; новая portable A2 строится отдельно. Новых Train нет.
 Эти адресные проверки не заменяют полную объявленную матрицу262Linux/261Windows.
 [Native terminal acceptance](NativeTerminalSelectionAcceptance-20261119.ru.md).
 
@@ -117,6 +118,13 @@ QJsonValue в новом factory. Выполнено0 из56 cases; supervisor �
 аналогичное сравнение исправлено в fresh-process тесте. Прежний A1 сохранён:
 [primary и подтверждение отказа](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-a1-build-failure.archive.json).
 Исправление ещё требует отдельной свежей сборки и выполнения56 cases.
+
+A2: Root3916cf6da8157cfbe84ef0f54a1a446824d70e0a /
+Pulsec84a1c1e864786660d7626d2e577fb3b83eeb67b, controls8ee6c0d51980669ba605eddb0689768d417592a3.
+Canonical preparation PASS, свежая native сборка56 cases запущена.
+Supervisor2937/start412659767 и unit timelearner-106cf42b-4d8e-4fc5-94aa-aed858452471.service,
+main10784/start412662722 подтверждены живыми. Старые A1 source/build/runtime
+не изменены. [A2 handle](../../../Reports/StructTrain/TimeLearner/TerminalPortable-20261119/m40-native56-a2-running.json).
 
 Root47f532a7aef1253e03bac7073f192ea555e118e5 / Pulse57f603b1048d6547bda6e2e97f7decc0305715f0:
 реализован process-local захват полного graph/Dataset/storage/C-state выбранной
