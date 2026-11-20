@@ -1,0 +1,23 @@
+digraph G {
+ graph [rankdir=TB, bgcolor=white, pad="0.12", nodesep="0.3", ranksep="0.35"];
+ node [shape=box, fontname=Arial, fontsize=18, margin="0.13,0.08"];
+ edge [fontname=Arial, fontsize=15, arrowsize=0.8];
+ start [shape=oval, label="Целевой паттерн и исходная структура"];
+ initial [label="Измерить собственные исходные Aᵢ⁽⁰⁾\nи отклик опорного пути r = N − 1"];
+ choose [label="Выбрать путь в циклическом порядке\nПредложить допустимую длину Lᵢ"];
+ normalize [label="N0: проверить целые Nₛ,ᵢ\nN1: проверить допустимые Rₛ,ᵢ"];
+ measure [label="Построить кандидат и завершить пробу\nИзмерить амплитуду и время\nзакреплённого импульса"];
+ local [shape=diamond, label="Допуски\nвыполнены?"];
+ remember [label="Сохранить локально измеренный результат\nПерейти к следующему пути"];
+ budget [shape=diamond, label="Есть кандидаты\nи бюджет?"];
+ final [label="Свежая проверка всех путей\nна одной конечной модели"];
+ end [shape=oval, label="Исход обучения и фактическая модель"];
+ start -> initial -> choose -> normalize -> measure -> local;
+ local -> remember [label="да"];
+ local -> budget [label="нет"];
+ budget -> choose [label="да", constraint=false];
+ budget -> end [label="нет"];
+ remember -> choose [label="следующий путь", constraint=false];
+ remember -> final [label="проверены все"];
+ final -> end;
+}

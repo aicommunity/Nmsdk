@@ -1,0 +1,29 @@
+digraph G {
+ graph [rankdir=TB, bgcolor=white, pad="0.15", nodesep="0.4", ranksep="0.5"];
+ node [shape=box, fontname=Arial, fontsize=16, margin="0.1,0.08"];
+ edge [fontname=Arial, fontsize=14, arrowsize=0.8];
+ a [label="Контроллер"];
+ b [label="Вычислитель"];
+ c [label="Модель"];
+ d [label="Измеритель"];
+ {rank=same; a;b;c;d;}
+ a->b->c->d [style=invis];
+ node [shape=point, width=0.01, label=""];
+ a1;b1;c1;d1;a2;b2;c2;d2;a3;b3;c3;d3;a4;b4;c4;d4;a5;b5;c5;d5;
+ {rank=same; a1;b1;c1;d1;}
+ {rank=same; a2;b2;c2;d2;}
+ {rank=same; a3;b3;c3;d3;}
+ {rank=same; a4;b4;c4;d4;}
+ {rank=same; a5;b5;c5;d5;}
+ edge [style=dashed, arrowhead=none, color=gray];
+ a->a1->a2->a3->a4->a5;
+ b->b1->b2->b3->b4->b5;
+ c->c1->c2->c3->c4->c5;
+ d->d1->d2->d3->d4->d5;
+ edge [style=solid, arrowhead=normal, color=black, constraint=false];
+ a1 -> c1 [label="Правка и сброс"];
+ a2 -> d2 [label="Открыть окно"];
+ b3 -> c3 [label="Расчёт такта"];
+ c4 -> d4 [label="Отсчёты"];
+ d5 -> a5 [label="Завершённое наблюдение"];
+}
