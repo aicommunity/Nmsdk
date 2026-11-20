@@ -310,7 +310,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "native-archive-transfer-pair", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization", "frozen-order"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "physical-model-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "native-archive-transfer-pair", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization", "frozen-order"), default="recognition-evaluation")
     report.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
@@ -792,6 +792,11 @@ def main(argv: list[str] | None = None) -> int:
                 require(args.trace is not None and args.model is None, "probe_report_requires_trace_not_model")
                 result = render_probe(args.source.resolve(strict=True), args.trace.resolve(strict=True), args.output.resolve(),
                                       allow_incomplete=args.format=="probe-diagnostic")
+            elif args.format == 'physical-model-evaluation':
+                from .reports import render_physical_data_evaluation
+                require(args.model is not None and args.trace is None and args.source_solo is None and args.artifacts is None,
+                        'physical_report_requires_own_model_and_evaluation')
+                result = render_physical_data_evaluation(args.source.resolve(strict=True), args.model.resolve(strict=True), args.output.resolve())
             else:
                 require(args.model is not None and args.trace is None, "recognition_report_requires_model_not_trace")
                 result = render_evaluation(args.source.resolve(strict=True), args.model.resolve(strict=True), args.output.resolve(),
