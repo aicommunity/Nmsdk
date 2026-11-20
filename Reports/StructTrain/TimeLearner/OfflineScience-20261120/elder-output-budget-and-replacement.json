@@ -1,0 +1,147 @@
+{
+  "kind": "timelearner_offline_sequence_replacement",
+  "schema_version": 1,
+  "previous_workflow": "offline-science-20261120-elder-a1",
+  "previous_observation": {
+    "workflow": "offline-science-20261120-elder-a1",
+    "exists": true,
+    "unit": "MainPID=0\nResult=success\nActiveState=inactive\nSubState=dead\nInvocationID=\n",
+    "console-started.json": {
+      "request": "/home/user/timelearner-refactor/requests/offline-science-20261120-elder-a1/Docs/StructTrain/TimeLearner/Experiments/OfflineScienceElderA1-20261120/console-request.json",
+      "source": "/home/user/timelearner-refactor/source-python-output-monitor-a1",
+      "output": "/home/user/timelearner-refactor/readbacks/s05-terminal-export-console16-elder-a2"
+    },
+    "exception.json": {
+      "reason": "[Errno 2] No such file or directory: '/home/user/timelearner-refactor/readbacks/s05-terminal-export-console16-elder-a2/worker/validation/result.json'",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/requests/offline-science-20261120-elder-a1/Docs/StructTrain/TimeLearner/Experiments/OfflineScienceElderA1-20261120/driver.py\", line 10, in main\n    root=Path(phase['output']);record=json.loads((root/'worker/validation/result.json').read_bytes());terminal=json.loads((root/'worker/terminal.json').read_bytes());process=json.loads((root/'controller-result.json').read_bytes());cases=list((root/'worker/tmp/console-native').glob('*/result.json'))\n  File \"/usr/lib/python3.10/pathlib.py\", line 1126, in read_bytes\n    with self.open(mode='rb') as f:\n  File \"/usr/lib/python3.10/pathlib.py\", line 1119, in open\n    return self._accessor.open(self, mode, buffering, encoding, errors,\nFileNotFoundError: [Errno 2] No such file or directory: '/home/user/timelearner-refactor/readbacks/s05-terminal-export-console16-elder-a2/worker/validation/result.json'\n",
+      "scientific_verdict": null
+    },
+    "Console_completed_cases": 14,
+    "Console_kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "617c184f46615346c0db8215d4cdbe4b190777593215e4a24d20ec1c4ec64c26",
+        "unit": "timelearner-9647e44c-99a9-4eed-a907-b4b56b83bc2a.service",
+        "invocation_id": "e08e44eecc5f4ecc87e415d43d2b23b4",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9647e44c-99a9-4eed-a907-b4b56b83bc2a.service",
+        "initial_main_pid": 2787284,
+        "initial_start_ticks": "475892549",
+        "sha256": "c875fd4044cf5cc64b4aeb3886410ebf50b9fe1197a240ab45c19bed0b116e1e"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "38260",
+        "KillMode": "control-group",
+        "Description": "timelearner-9647e44c-99a9-4eed-a907-b4b56b83bc2a.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "Console/controller-result.json": {
+      "kind": "timelearner_process_result",
+      "schema_version": 2,
+      "execution": "process_error",
+      "reason": "owned_job_output_budget",
+      "returncode": null,
+      "wall_seconds": 986.2739302571863,
+      "model_time": null,
+      "runtime_provenance": "invalid_or_incomplete_runtime",
+      "mapping_error": null,
+      "runtime_fingerprint": "4cf0d97ae8e84e3b580866b1d5f9141a80ad48c7900f65cf58be5a1598ac5db8",
+      "ownership_scope": "bound_cgroup",
+      "all_processes_closed": true,
+      "scientific_verdict": null,
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "clear",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 0,
+        "reasons": [],
+        "examples": [],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    }
+  },
+  "previous_whole_closure": {
+    "native_groups": 52,
+    "live_native": {},
+    "reserved": {
+      "disk_bytes": 0,
+      "memory_bytes": 0,
+      "slots": 0
+    },
+    "monitor_final": {
+      "guard_triggered": true,
+      "original_reason": {
+        "kind": "owned_job_output_budget",
+        "bytes": 1077202944
+      },
+      "peak_allocated_bytes": 1077202944,
+      "minimum_free_bytes": 11598798848
+    },
+    "whole_parent_closed": true
+  },
+  "new_dispatch": {
+    "prepared": true,
+    "dispatched": true,
+    "unit": "timelearner-offline-science-20261120-elder-a2",
+    "controls": "3ebb545bddfc480a9710fc73e73e8f56736a8628",
+    "sequence": {
+      "base": "/home/user/timelearner-refactor",
+      "output": "/home/user/timelearner-refactor/readbacks/offline-science-20261120-elder-a2",
+      "console": {
+        "request": "/home/user/timelearner-refactor/requests/offline-science-20261120-elder-a2/Docs/StructTrain/TimeLearner/Experiments/OfflineScienceElderA2-20261120/console-request.json",
+        "source": "/home/user/timelearner-refactor/source-python-output-monitor-a1",
+        "output": "/home/user/timelearner-refactor/readbacks/s05-terminal-export-console16-elder-a3"
+      },
+      "science": {
+        "request": "/home/user/timelearner-refactor/requests/offline-science-20261120-elder-a2/Docs/StructTrain/TimeLearner/Experiments/OfflineScienceElderA2-20261120/science-request.json",
+        "source": "/home/user/timelearner-refactor/source-terminal-export-linux-a1",
+        "job": "s11-offline-n4-classic-on-elder-a2"
+      }
+    },
+    "search_wall_seconds": 32400,
+    "native_wall_seconds": 39600,
+    "actual_Train_started": false,
+    "Train_requires_Console16_pass": true,
+    "scientific_verdict": null
+  },
+  "changed_control_resource": "Console output budget1GiB to4GiB in new attempt; CXX SDK, cases and native runtime unchanged",
+  "prior_attempts_retained": true,
+  "new_actual_Train_started_observed": false,
+  "new_attempt_terminal_state": "unknown",
+  "later_observation": "SSH failed to produce receipt; direct jump.12:22 TCP timeout4s on2026-11-20 about16:02UTC; never implies worker termination",
+  "planned_user_absence": "Local computer expected offline about12h from approx15:47UTC; do not request VPN during that planned window",
+  "scientific_verdict": null
+}

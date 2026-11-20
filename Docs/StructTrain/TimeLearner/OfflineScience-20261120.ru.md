@@ -8,7 +8,7 @@
 | Worker | Фактическое состояние при проверке | Следующее действие сервера |
 |---|---|---|
 | M40,10.245.1.17 | Прежний Branch A2 продолжает Train, последний отдельный контроль781 raw-проба | Завершение по его исходным ограничениям; runtime не меняется |
-| Elder,10.245.1.11 | Повтор Console16 A2 жив, завершены9 вариантов | Только после полного PASS и закрытия процессов — новый Classic N4/N1 |
+| Elder,10.245.1.11 | Console16 A2 закрыт по лимиту output после14 вариантов; A3 с4GiB отправлен | Только после полного PASS и закрытия процессов — новый Classic N4/N1 |
 | Windows,10.245.1.14 | Два настоящих Console Train контроля приняты; новый Branch N4/N1 уже начат, kernel Job содержит2 процесса | Завершение Train по объявленным ограничениям |
 
 Первоначальный Console16 A1 на Elder остановлен ошибкой контроля размера
@@ -17,6 +17,13 @@
 прошла19/19 проверок на Elder; C++ SDK не пересобирался.
 Первая Windows-декларация отказала до запуска native из-за128 процессов
 при поддерживаемом максимуме64. A2 — новая попытка с64, прежний отказ сохранён.
+
+Вторая попытка Console на Elder штатно превысила1GiB output: наблюдалось
+1077202944 байта после14 полных вариантов. Все52 native-группы закрыты,
+аренда освобождена. Новая последовательность отправлена с4GiB; код и
+математические условия прежние. [Отдельная квитанция перехода](../../../Reports/StructTrain/TimeLearner/OfflineScience-20261120/elder-output-budget-and-replacement.json).
+После отправки связь с jump host стала недоступна; дальнейший статус новой
+попытки пока неизвестен. Это не основание для повторного запуска.
 
 ## Неизменяемые условия и бюджеты
 
@@ -47,11 +54,11 @@ terminal selection сохранены прежние30с. Native memory cap —1
 
 ## Исполнение и расположение данных
 
-Elder: systemd unit `timelearner-offline-science-20261120-elder-a1`, controls
-d71ca5f6518cfcb7048da860237b7f332e06dfd3. Журнал последовательности находится
-в `/home/user/timelearner-refactor/readbacks/offline-science-20261120-elder-a1`,
-Console —в `readbacks/s05-terminal-export-console16-elder-a2`, научное задание
-—в `readbacks/s11-offline-n4-classic-on-elder-a1` относительно того же base.
+Elder: актуальная systemd unit `timelearner-offline-science-20261120-elder-a2`,
+controls3ebb545bddfc480a9710fc73e73e8f56736a8628. Журнал последовательности находится
+в `/home/user/timelearner-refactor/readbacks/offline-science-20261120-elder-a2`,
+Console —в `readbacks/s05-terminal-export-console16-elder-a3`, научное задание
+—в `readbacks/s11-offline-n4-classic-on-elder-a2` относительно того же base.
 Внешняя последовательность ограничена16 часами; каждый native-процесс
 имеет собственное более короткое ограничение и владельца.
 
