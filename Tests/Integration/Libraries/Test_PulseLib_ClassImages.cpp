@@ -90,6 +90,113 @@ TEST(RdkIntegralXml, NativeNeuronCopyAndClassImagePreserveUnsignedMasks)
  core.storage->ReturnObject(restored);core.storage->ReturnObject(copy);core.storage->ReturnObject(source);
 }
 
+TEST(RdkIntegralXml, NamedIndexedAndPositionalUnsignedReadsPreserveFullWidth)
+{
+ USerStorageXML xml;ASSERT_TRUE(xml.Create("Root"));
+ ASSERT_TRUE(xml.AddNode("Value"));xml.SetNodeText("4294967295");xml.SelectUp();
+ ASSERT_TRUE(xml.AddNode("Value"));xml.SetNodeText("2147483648");xml.SelectUp();
+ ASSERT_TRUE(xml.AddNode("Value"));xml.SetNodeText(" -1 suffix");xml.SelectUp();
+ EXPECT_EQ(xml.ReadUnsigned("Value",0u),std::numeric_limits<unsigned int>::max());
+ EXPECT_EQ(xml.ReadUnsigned("Value",1,0u),0x80000000u);
+ EXPECT_EQ(xml.ReadUnsigned(2,0u),std::numeric_limits<unsigned int>::max());
+ EXPECT_EQ(xml.ReadUnsigned("Missing",19u),19u);
+ EXPECT_EQ(xml.GetNodeName(),"Root");
+}
+
+TEST(RdkXmlStorage, DirectMutationsAreVisibleAfterCachedReads)
+{
+ USerStorageXML xml;ASSERT_TRUE(xml.Create("Root"));
+ xml.SetNodeText("first");EXPECT_EQ(xml.GetNodeText(),"first");
+ xml.SetNodeText("second");EXPECT_EQ(xml.GetNodeText(),"second");
+ EXPECT_EQ(xml.GetNodeName(),"Root");xml.RenameNode("Renamed");
+ EXPECT_EQ(xml.GetNodeName(),"Renamed");EXPECT_EQ(xml.GetNodeText(),"second");
+ xml.SetNodeAttribute("old","one");EXPECT_EQ(xml.GetNodeAttribute("old"),"one");
+ EXPECT_EQ(xml.GetNodeAttribute("new"),"");
+ xml.SetNodeAttribute("new","two");xml.SetNodeAttribute("old","updated");
+ EXPECT_EQ(xml.GetNodeAttribute("new"),"two");
+ EXPECT_EQ(xml.GetNodeAttribute("old"),"updated");
+ xml.DelNodeAttribute("old");EXPECT_EQ(xml.GetNodeAttribute("old"),"");
+ xml.SetNodeAttribute("old","recreated");
+ std::string text;ASSERT_TRUE(xml.Save(text));
+ USerStorageXML loaded;ASSERT_TRUE(loaded.Load(text,"Renamed"));
+ EXPECT_EQ(loaded.GetNodeAttribute("new"),"two");
+ EXPECT_EQ(loaded.GetNodeAttribute("old"),"recreated");
+ xml.DelNodeContent();
+ EXPECT_EQ(xml.GetNodeName(),"");EXPECT_EQ(xml.GetNodeText(),"");
+ EXPECT_EQ(xml.GetNodeAttribute("new"),"");EXPECT_EQ(xml.GetNumNodes(),0);
+}
+
+TEST(RdkXmlStorage, CreateLoadAndDestroyDiscardPreviousCursorValues)
+{
+ USerStorageXML xml;ASSERT_TRUE(xml.Create("Root"));
+ xml.SetNodeText("old");xml.SetNodeAttribute("mode","old");
+ EXPECT_EQ(xml.GetNodeName(),"Root");EXPECT_EQ(xml.GetNodeText(),"old");
+ EXPECT_EQ(xml.GetNodeAttribute("mode"),"old");
+ ASSERT_TRUE(xml.Create("Root"));
+ EXPECT_EQ(xml.GetNodeText(),"");EXPECT_EQ(xml.GetNodeAttribute("mode"),"");
+ ASSERT_TRUE(xml.Load("<Root mode=\"loaded\">new</Root>","Root"));
+ EXPECT_EQ(xml.GetNodeName(),"Root");EXPECT_EQ(xml.GetNodeText(),"new");
+ EXPECT_EQ(xml.GetNodeAttribute("mode"),"loaded");
+ ASSERT_TRUE(xml.Load("<Root mode=\"again\">replacement</Root>","Root"));
+ EXPECT_EQ(xml.GetNodeText(),"replacement");EXPECT_EQ(xml.GetNodeAttribute("mode"),"again");
+ ASSERT_TRUE(xml.Destroy());
+ EXPECT_EQ(xml.GetNodeName(),"");EXPECT_EQ(xml.GetNodeText(),"");
+ EXPECT_EQ(xml.GetNodeAttribute("mode"),"");
+ ASSERT_TRUE(xml.Create("Root"));
+ EXPECT_EQ(xml.GetNodeName(),"Root");EXPECT_EQ(xml.GetNodeAttribute("mode"),"");
+}
+
+TEST(RdkXmlStorage, SameNamedNodesKeepIndependentCursorValues)
+{
+ USerStorageXML xml;ASSERT_TRUE(xml.Create("Node"));
+ xml.SetNodeText("parent");xml.SetNodeAttribute("scope","parent");
+ EXPECT_EQ(xml.GetNodeText(),"parent");EXPECT_EQ(xml.GetNodeAttribute("scope"),"parent");
+ ASSERT_TRUE(xml.AddNode("Node"));
+ EXPECT_EQ(xml.GetNodeText(),"");EXPECT_EQ(xml.GetNodeAttribute("scope"),"");
+ xml.SetNodeText("first");xml.SetNodeAttribute("scope","first");
+ EXPECT_EQ(xml.GetNodeText(),"first");EXPECT_EQ(xml.GetNodeAttribute("scope"),"first");
+ xml.SelectUp();ASSERT_TRUE(xml.AddNode("Node"));
+ xml.SetNodeText("second");xml.SetNodeAttribute("scope","second");
+ EXPECT_EQ(xml.GetNodeText(),"second");EXPECT_EQ(xml.GetNodeAttribute("scope"),"second");
+ xml.SelectRoot();ASSERT_TRUE(xml.SelectNode("Node",0));
+ EXPECT_EQ(xml.GetNodeText(),"first");EXPECT_EQ(xml.GetNodeAttribute("scope"),"first");
+ xml.SelectUp();ASSERT_TRUE(xml.SelectNode(1));
+ EXPECT_EQ(xml.GetNodeText(),"second");EXPECT_EQ(xml.GetNodeAttribute("scope"),"second");
+ xml.DelNode();
+ EXPECT_EQ(xml.GetNodeText(),"parent");EXPECT_EQ(xml.GetNodeAttribute("scope"),"parent");
+ EXPECT_EQ(xml.GetNumNodes("Node"),1);
+}
+
+TEST(RdkXmlStorage, LoadingFieldsPreservesSourceCursorAndCopiesActualValues)
+{
+ USerStorageXML source;ASSERT_TRUE(source.Create("Document"));
+ ASSERT_TRUE(source.AddNode("Item"));source.SetNodeText("child");
+ source.SetNodeAttribute("owner","source");
+ EXPECT_EQ(source.GetNodeName(),"Item");EXPECT_EQ(source.GetNodeText(),"child");
+ EXPECT_EQ(source.GetNodeAttribute("owner"),"source");
+ USerStorageXML target;ASSERT_TRUE(target.Create("Document"));
+ target.SetNodeText("target");target.SetNodeAttribute("owner","target");
+ EXPECT_EQ(target.GetNodeText(),"target");EXPECT_EQ(target.GetNodeAttribute("owner"),"target");
+ ASSERT_TRUE(target.LoadFieldsToNode(source,false));
+ EXPECT_EQ(source.GetNodeName(),"Item");EXPECT_EQ(source.GetNodeText(),"child");
+ EXPECT_EQ(source.GetNodeAttribute("owner"),"source");
+ source.SetNodeText("source changed");
+ ASSERT_TRUE(target.SelectNode("Item"));
+ EXPECT_EQ(target.GetNodeText(),"child");EXPECT_EQ(target.GetNodeAttribute("owner"),"source");
+ target.SelectRoot();target.DelNodeInternalContent();
+ EXPECT_EQ(target.GetNodeName(),"Document");EXPECT_EQ(target.GetNodeText(),"target");
+ EXPECT_EQ(target.GetNodeAttribute("owner"),"target");EXPECT_EQ(target.GetNumNodes(),0);
+ ASSERT_TRUE(target.LoadToNode(source,false));
+ ASSERT_TRUE(target.SelectNode("Document"));ASSERT_TRUE(target.SelectNode("Item"));
+ EXPECT_EQ(target.GetNodeText(),"source changed");
+ target.SelectRoot();
+ ASSERT_TRUE(target.LoadToNode("<Imported flag=\"yes\">text</Imported>","Imported",true));
+ ASSERT_TRUE(target.SelectNode("Imported"));
+ EXPECT_EQ(target.GetNodeText(),"text");EXPECT_EQ(target.GetNodeAttribute("flag"),"yes");
+ target.SelectRoot();EXPECT_EQ(target.GetNumNodes(),1);
+ EXPECT_EQ(source.GetNodeName(),"Item");EXPECT_EQ(source.GetNodeText(),"source changed");
+}
+
 UEPtr<NPulseChannel> Channel(double capacity)
 {
  const auto& core = NmsdkTests::InitEngineForPulseLibTests();
