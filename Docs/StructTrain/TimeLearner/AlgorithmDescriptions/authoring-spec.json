@@ -30,10 +30,30 @@
     "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
     "cache": "explicit output directory argument"
   },
-  "status": "first maintained V2 N1 edition authored; final render acceptance recorded separately",
+  "status": "Fourth edition published2026-11-20; all61 pages rendered and visually reviewed",
   "skill": "documents",
   "render_gate": "render_docx.py plus visual review of every page",
-  "next_edition": {
+  "revision4": {
+    "source": "revision4-content.ru.json",
+    "review": "Review-20261119.json",
+    "workflow": "revision4-workflow.ru.md",
+    "comments": 8,
+    "qualifying_examples": 9,
+    "real_trial_figures": 64,
+    "measurement_figures": 7,
+    "source_diagrams": 8,
+    "generated": true,
+    "render_accepted": true,
+    "original_annotated_document_preserved": true,
+    "publications_role": "style and terminology, not borrowed algorithm explanations",
+    "external_binary_storage_required": true,
+    "edition": "2026-11-20-v4",
+    "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+    "classic_pages": 32,
+    "branch_pages": 29,
+    "all_comments_processed": true
+  },
+  "historical_revision2_preparation_record": {
     "source": "next-edition.json",
     "review": "../AlgorithmDescriptionEvidenceReview-20261117.json",
     "qualifying_examples": 7,
@@ -47,20 +67,5 @@
     "render_accepted": false,
     "experiments_first": true,
     "status": "sources and builder prepared; unchanged first DOCX edition remains the accepted publication"
-  },
-  "revision4": {
-    "source": "revision4-content.ru.json",
-    "review": "Review-20261119.json",
-    "workflow": "revision4-workflow.ru.md",
-    "comments": 8,
-    "qualifying_examples": 9,
-    "real_trial_figures": 64,
-    "measurement_figures": 7,
-    "source_diagrams": 8,
-    "generated": true,
-    "render_accepted": false,
-    "original_annotated_document_preserved": true,
-    "publications_role": "style and terminology, not borrowed algorithm explanations",
-    "external_binary_storage_required": true
   }
 }

@@ -17,9 +17,14 @@
         "Classic",
         "Branch"
       ],
-      "status": "accepted_pending_document_and_visual_verification",
+      "status": "implemented_and_visually_verified",
       "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
-      "document_verification": null
+      "document_verification": {
+        "action": "Русский основной текст, подписи, оси, схемы и пояснения; точные программные имена явно отделены в таблице реализации.",
+        "pages": "Classic1–32; Branch1–29",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
     },
     {
       "id": "1",
@@ -31,9 +36,14 @@
         "Classic",
         "Branch"
       ],
-      "status": "accepted_pending_document_and_visual_verification",
+      "status": "implemented_and_visually_verified",
       "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
-      "document_verification": null
+      "document_verification": {
+        "action": "Условные единицы потенциала модели без выдуманного пересчёта кривых; время в секундах, параметры физического профиля обозначены отдельно.",
+        "pages": "Classic2–3; Branch2–3; все временные рисунки",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
     },
     {
       "id": "2",
@@ -45,9 +55,14 @@
         "Classic",
         "Branch"
       ],
-      "status": "accepted_pending_document_and_visual_verification",
+      "status": "implemented_and_visually_verified",
       "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
-      "document_verification": null
+      "document_verification": {
+        "action": "Измеренные иллюстрации закреплённого и общего максимумов, раздельной ранней вершины, пика с плечом и отказа старого назначения; намеренно скрытая часть полной записи прямо названа методическим пояснением.",
+        "pages": "Classic3–7; Branch3–7",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
     },
     {
       "id": "3",
@@ -59,9 +74,14 @@
         "Classic",
         "Branch"
       ],
-      "status": "accepted_pending_document_and_visual_verification",
+      "status": "implemented_and_visually_verified",
       "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
-      "document_verification": null
+      "document_verification": {
+        "action": "Оба предоставленных источника изучены как образец стиля и терминологии. Описаны реальные правила действующего контроллера, включая логарифмическую сетку и измеренное уточнение; историческая блок-схема не выдана за текущую.",
+        "pages": "Classic1–16; Branch1–16",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
     },
     {
       "id": "4",
@@ -73,9 +93,14 @@
         "Classic",
         "Branch"
       ],
-      "status": "accepted_pending_document_and_visual_verification",
+      "status": "implemented_and_visually_verified",
       "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
-      "document_verification": null
+      "document_verification": {
+        "action": "Graphviz строит топологии, блок-схемы и UML; Matplotlib строит реальные волны и измеренные кандидаты. Сохранены DOT, SVG, первичные выборки, источники и контрольные суммы.",
+        "pages": "Все рисунки двух документов и пакет публикации",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
     },
     {
       "id": "5",
@@ -87,9 +112,14 @@
         "Classic",
         "Branch"
       ],
-      "status": "accepted_pending_document_and_visual_verification",
+      "status": "implemented_and_visually_verified",
       "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
-      "document_verification": null
+      "document_verification": {
+        "action": "Псевдокод в Consolas10.5 с явными четырьмя наборами шрифтов и проверенной кириллицей. Формулы —11 редактируемых OMML на документ; исправлен разбор математических литералов при отрисовке.",
+        "pages": "Classic9; Branch9; формулы Classic2–3,12 и Branch3,12",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
     },
     {
       "id": "6",
@@ -101,9 +131,14 @@
         "Classic",
         "Branch"
       ],
-      "status": "accepted_pending_document_and_visual_verification",
+      "status": "implemented_and_visually_verified",
       "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
-      "document_verification": null
+      "document_verification": {
+        "action": "Измеренные последовательности N0 и N1 показывают все изменяемые параметры, амплитудную и временную ошибки и увеличенный исходный допуск. Последовательность разных кандидатов не выдаётся за однофакторную зависимость.",
+        "pages": "Classic10–14; Branch10–14",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
     },
     {
       "id": "7",
@@ -115,9 +150,14 @@
         "Classic",
         "Branch"
       ],
-      "status": "accepted_pending_document_and_visual_verification",
+      "status": "implemented_and_visually_verified",
       "implemented_rules": "Docs/StructTrain/TimeLearner/ScientificReportRules.ru.md",
-      "document_verification": null
+      "document_verification": {
+        "action": "Включены реальные TP, TN и имеющиеся FP девяти примеров; остановки и неудачные измерения явно отделены от распознавания. В сопроводительной галерее64 предъявления всех паттернов;25 характерных графиков включены в Word.",
+        "pages": "Classic16–28; Branch16–26",
+        "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+        "both_documents": true
+      }
     }
   ],
   "followup_clarification": "Не брать объяснения алгоритмов из публикаций; объяснять текущие алгоритмы в том же стиле и терминологии, с более развитыми иллюстрациями.",
@@ -137,8 +177,11 @@
   ],
   "style_reference_only": true,
   "current_implementation_and_measurements_are_algorithm_sources": true,
-  "both_documents_reworked": false,
-  "all_pages_visually_reviewed": false,
-  "all_comments_closed": false,
-  "generated_binary_in_root_git": false
+  "both_documents_reworked": true,
+  "all_pages_visually_reviewed": true,
+  "all_comments_closed": true,
+  "generated_binary_in_root_git": false,
+  "review_completion_date": "2026-11-20",
+  "closure_role": "Agent implementation and page review; does not claim user editorial approval",
+  "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json"
 }

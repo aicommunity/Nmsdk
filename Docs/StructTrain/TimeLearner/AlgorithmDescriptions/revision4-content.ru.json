@@ -2,7 +2,7 @@
   "kind": "timelearner_scientific_algorithm_description",
   "schema_version": 1,
   "edition": "Четвёртая редакция по замечаниям пользователя от 19 ноября 2026 года",
-  "status": "draft_requires_real_figure_sources_and_full_visual_review",
+  "status": "published_2026-11-20_v4",
   "review": "Review-20261119.json",
   "style_reference_role": "Стиль и терминология публикаций авторов; объяснение алгоритма основано на реализации и измерениях",
   "common": {
@@ -82,7 +82,12 @@
     ],
     "diagram": "classic-topology",
     "learning_diagram": "classic-learning",
-    "example_order": ["classic-n1-native-n2", "classic-n0-stock-20261114", "classic-n1-fair-input-cold-cap16-20261118", "classic-phasea-saved6of8"]
+    "example_order": [
+      "classic-n1-native-n2",
+      "classic-n0-stock-20261114",
+      "classic-n1-fair-input-cold-cap16-20261118",
+      "classic-phasea-saved6of8"
+    ]
   },
   "branch": {
     "title": "Структурное обучение нейрона с общей дендритной ветвью",
@@ -93,6 +98,12 @@
     ],
     "diagram": "branch-topology",
     "learning_diagram": "branch-learning",
-    "example_order": ["branch-n1-native-n2", "branch-n1-coupled-stock-20261114", "branch-n1-fast-terminal7200", "branch-n1-fast-terminal21600", "branch-n1-fair-input-cold-cap16-20261118"]
+    "example_order": [
+      "branch-n1-native-n2",
+      "branch-n1-coupled-stock-20261114",
+      "branch-n1-fast-terminal7200",
+      "branch-n1-fast-terminal21600",
+      "branch-n1-fair-input-cold-cap16-20261118"
+    ]
   }
 }
