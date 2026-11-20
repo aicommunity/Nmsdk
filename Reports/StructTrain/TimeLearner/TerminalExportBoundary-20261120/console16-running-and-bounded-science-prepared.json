@@ -1,0 +1,63 @@
+{
+  "kind": "timelearner_terminal_export_Console16_and_science_preparation",
+  "schema_version": 1,
+  "Console16_preparation": {
+    "prepared": true,
+    "started": false,
+    "job": "s05-terminal-export-console16-elder-a1",
+    "request": "/home/user/timelearner-refactor/requests/terminal-export-console16-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderTerminalExportConsole16A1-20261120/request.json",
+    "source": "/home/user/timelearner-refactor/source-terminal-export-linux-a1",
+    "source_root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+    "controls": "dac939823fc2cc6da88691e1cb26cde354f27c71",
+    "selected_cases": [
+      "branch-terminal-actual-fixed4-N0",
+      "branch-terminal-actual-fixed4-N1",
+      "branch-terminal-actual-window5-N0",
+      "branch-terminal-actual-window5-N1",
+      "classic-terminal-actual-fixed4-N0",
+      "classic-terminal-actual-fixed4-N1",
+      "classic-terminal-actual-window5-N0",
+      "classic-terminal-actual-window5-N1",
+      "configured9-branch-terminal-fixed4-N0-completed",
+      "configured9-branch-terminal-fixed4-N1-completed",
+      "configured9-branch-terminal-window5-N0-completed",
+      "configured9-branch-terminal-window5-N1-completed",
+      "configured9-classic-terminal-fixed4-N0-completed",
+      "configured9-classic-terminal-fixed4-N1-completed",
+      "configured9-classic-terminal-window5-N0-completed",
+      "configured9-classic-terminal-window5-N1-completed"
+    ],
+    "runtime_fingerprint": "747839b156a004bc84e31ce23675ca1dc635037927da041429aeca5130c4ea9e",
+    "scientific_verdict": null
+  },
+  "Console16_launch": {
+    "started": true,
+    "job": "s05-terminal-export-console16-elder-a1",
+    "pid": 2695216,
+    "request_sha256": "ac8ed4f9a62c650fe1842166f04d44f58fcdc3660d16e9d120d499a1a133fff0",
+    "actual_Console_Train_variants": 16,
+    "scientific_verdict": null
+  },
+  "bounded_science_preparation": {
+    "prepared": true,
+    "started": false,
+    "job": "s11-bounded-n4-classic-on-elder-a1",
+    "request": "/home/user/timelearner-refactor/requests/bounded-terminal-science-classic-a1/Docs/StructTrain/TimeLearner/Experiments/BoundedTerminalScienceClassicA1-20261120/request.json",
+    "controls": "4b2c6f664c51a58392d350ff08f2f595947aceee",
+    "source_root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+    "runtime_fingerprint": "747839b156a004bc84e31ce23675ca1dc635037927da041429aeca5130c4ea9e",
+    "changed_job_fields": [
+      "run_id",
+      "protocol_revision",
+      "maximum_wall_seconds",
+      "sha256"
+    ],
+    "search_wall_seconds": 3600,
+    "process_wall_seconds": 7200,
+    "disk_free": 13244628992,
+    "required_free": 6442450944,
+    "scientific_verdict": null
+  },
+  "bounded_science_started": false,
+  "scientific_verdict": null
+}
