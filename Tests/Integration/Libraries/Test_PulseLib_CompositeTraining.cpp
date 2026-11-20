@@ -5098,7 +5098,7 @@ QJsonObject TerminalColdConsoleJob(ConfiguredNativeTraining configuration,const 
         {"calculate_mode",1},{"structure_build_mode",1},
         {"maximum_model_ticks",std::ceil((configuration.maximumModelSeconds+configuration.duration+1.)*configuration.model.frequencyHz)}});
 }
-template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bool completed,bool configured=false)
+template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bool completed,bool configured=false,bool recovery=false)
 {
     NativeCompositeFixture<Owner> f(2000,false,64,false,n0);f.owner->ControllerVersion.SetDataDirect(2);
     // Existing fixed-geometry transport control. The broad .2 case exercises
@@ -5108,6 +5108,11 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
     plan.search.normalization=f.modelSpec.normalization;plan.search.bounds.clear();
     for(const auto& p:f.owner->ReadNativeParameters())plan.search.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
     plan.search.maximumCandidatesPerInput=1;plan.search.maximumSweeps=1;plan.search.n0CandidateRepeats=1;
+    if(recovery) {
+        ASSERT_TRUE(window);
+        plan.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;
+        plan.search.maximumInvalidObservations=2;
+    }
     plan.terminalSelection=NativeTerminalSelectionPolicy{configured?7.25:30.};
     const auto coldConfiguration=window?CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.):
         CaptureCompositeInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.);
@@ -5156,9 +5161,13 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
     EXPECT_EQ(historicalSummary.value("model_epoch"),historicalState.value("model_epoch"));
     EXPECT_EQ(historicalSummary.value("actual_model_revision"),historicalState.value("model_revision"));
     EXPECT_EQ(historicalSummary.value("actual_parameters"),historicalState.value("trained_inputs"));
-    EXPECT_EQ(package.value("historical_state").toObject().value("schema_version"),QJsonValue(window?6:5));
+    EXPECT_EQ(package.value("historical_state").toObject().value("schema_version"),QJsonValue(window?(recovery?7:6):5));
+    if(recovery) {
+        EXPECT_EQ(historicalSummary.value("schema_version"),QJsonValue(8));
+        EXPECT_EQ(historicalSummary.value("recovery_ledger"),historicalState.value("recovery_ledger"));
+    }
     EXPECT_EQ(package.value("certificate").isNull(),!completed);
-    const auto name=std::string(configured?"configured9-":"")+(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-"+(window?"window5":"fixed4")+
+    const auto name=std::string(configured?"configured9-":"")+(NativeCompositeFixture<Owner>::branch?"branch":"classic")+"-terminal-"+(recovery?"recovery5":window?"window5":"fixed4")+
         (n0?"-N0":"-N1")+(completed?"-completed":"-stopped");
     QTemporaryDir publicationDirectory;ASSERT_TRUE(publicationDirectory.isValid());QJsonArray publishedArtifacts;
     const auto publication=NmsdkWorker::PublishCheckedNativeCompositeArchive(publicationDirectory.path(),package,publishedArtifacts);
@@ -5467,3 +5476,13 @@ TEST(NativeTerminalConfiguredEntry,ClassicWindowN0){NativeTerminalCompositePacka
 TEST(NativeTerminalConfiguredEntry,BranchWindowN0){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,true,true);}
 TEST(NativeTerminalConfiguredEntry,ClassicWindowN1){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,false,true,true);}
 TEST(NativeTerminalConfiguredEntry,BranchWindowN1){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,false,true,true);}
+// The long scientific runs use terminal8 over historical recovery7. A plain
+// terminal8/window6 fixture cannot exercise the shared checked recovery ledger.
+TEST(NativeTerminalRecoveryExport,ClassicN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,false,false,true);}
+TEST(NativeTerminalRecoveryExport,BranchN0Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,false,false,true);}
+TEST(NativeTerminalRecoveryExport,ClassicN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,false,false,false,true);}
+TEST(NativeTerminalRecoveryExport,BranchN1Stopped){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,false,false,false,true);}
+TEST(NativeTerminalRecoveryExport,ClassicN0Completed){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,true,true,false,true);}
+TEST(NativeTerminalRecoveryExport,BranchN0Completed){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,true,true,false,true);}
+TEST(NativeTerminalRecoveryExport,ClassicN1Completed){NativeTerminalCompositePackage<NNeuronTimeLearner>(true,false,true,false,true);}
+TEST(NativeTerminalRecoveryExport,BranchN1Completed){NativeTerminalCompositePackage<NNeuronTimeLearnerBranch>(true,false,true,false,true);}
