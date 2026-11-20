@@ -44,7 +44,9 @@ async function main() {
         typeof diagram.caption !== 'string' || !diagram.caption.trim())
       throw new Error('Unique bounded diagram source required');
     seen.add(diagram.id);
-    const svg = viz.renderString(dot, { format: 'svg', engine: 'dot' });
+    const engine = diagram.engine || 'dot';
+    if (!['dot', 'neato'].includes(engine)) throw new Error('Known diagram layout engine required');
+    const svg = viz.renderString(dot, { format: 'svg', engine });
     const raw = Buffer.from(svg, 'utf8');
     const png = await sharp(raw, { density: 180 }).png().toBuffer();
     fs.writeFileSync(path.join(output, diagram.id + '.dot'), dot, 'utf8');
@@ -54,7 +56,7 @@ async function main() {
     records.push({ id: diagram.id, caption: diagram.caption,
       dot_sha256: digest(Buffer.from(dot)), svg_sha256: digest(raw),
       png_sha256: digest(png), width: image.width, height: image.height,
-      scientific_measurement: false, renderer: 'Graphviz through @viz-js/viz' });
+      scientific_measurement: false, renderer: 'Graphviz through @viz-js/viz', engine });
   }
   const result = { kind: 'timelearner_scientific_diagram_render', schema_version: 1,
     source_sha256: digest(source), diagrams: records, visually_reviewed: false };

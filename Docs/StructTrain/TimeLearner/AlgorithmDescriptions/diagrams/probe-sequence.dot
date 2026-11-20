@@ -1,26 +1,23 @@
 digraph G {
- graph [rankdir=TB, bgcolor=white, pad="0.15", nodesep="0.4", ranksep="0.5"];
- node [shape=box, fontname=Arial, fontsize=16, margin="0.1,0.08"];
+ graph [bgcolor=white, pad="0.12", overlap=true, splines=line, outputorder=edgesfirst];
+ node [shape=box, fontname=Arial, fontsize=16, margin="0.1,0.08", pin=true];
  edge [fontname=Arial, fontsize=14, arrowsize=0.8];
- a [label="Контроллер"];
- b [label="Вычислитель"];
- c [label="Модель"];
- d [label="Измеритель"];
- {rank=same; a;b;c;d;}
- a->b->c->d [style=invis];
+ a [label="Контроллер",pos="0,5!"];
+ b [label="Вычислитель",pos="2.5,5!"];
+ c [label="Модель",pos="5,5!"];
+ d [label="Измеритель",pos="7.5,5!"];
  node [shape=point, width=0.01, label=""];
- a1;b1;c1;d1;a2;b2;c2;d2;a3;b3;c3;d3;a4;b4;c4;d4;a5;b5;c5;d5;
- {rank=same; a1;b1;c1;d1;}
- {rank=same; a2;b2;c2;d2;}
- {rank=same; a3;b3;c3;d3;}
- {rank=same; a4;b4;c4;d4;}
- {rank=same; a5;b5;c5;d5;}
+ a1 [pos="0,4!"];b1 [pos="2.5,4!"];c1 [pos="5,4!"];d1 [pos="7.5,4!"];
+ a2 [pos="0,3!"];b2 [pos="2.5,3!"];c2 [pos="5,3!"];d2 [pos="7.5,3!"];
+ a3 [pos="0,2!"];b3 [pos="2.5,2!"];c3 [pos="5,2!"];d3 [pos="7.5,2!"];
+ a4 [pos="0,1!"];b4 [pos="2.5,1!"];c4 [pos="5,1!"];d4 [pos="7.5,1!"];
+ a5 [pos="0,0!"];b5 [pos="2.5,0!"];c5 [pos="5,0!"];d5 [pos="7.5,0!"];
  edge [style=dashed, arrowhead=none, color=gray];
  a->a1->a2->a3->a4->a5;
  b->b1->b2->b3->b4->b5;
  c->c1->c2->c3->c4->c5;
  d->d1->d2->d3->d4->d5;
- edge [style=solid, arrowhead=normal, color=black, constraint=false];
+ edge [style=solid, arrowhead=normal, color=black];
  a1 -> c1 [label="Правка и сброс"];
  a2 -> d2 [label="Открыть окно"];
  b3 -> c3 [label="Расчёт такта"];
