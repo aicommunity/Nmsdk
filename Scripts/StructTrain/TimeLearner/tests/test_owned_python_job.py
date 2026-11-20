@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -27,6 +28,52 @@ def request():
 
 
 class OwnedPythonJobTest(unittest.TestCase):
+    def test_output_scan_survives_actual_directory_removal_during_descent(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory);temporary = root/'temporary';temporary.mkdir()
+            (temporary/'transient').write_bytes(b'x'*65536)
+            stable = root/'stable';stable.mkdir();(stable/'retained').write_bytes(b'kept')
+            directory_blocks = temporary.lstat().st_blocks*512
+            real_scandir = os.scandir;removed = []
+            def remove_before_descent(path):
+                if Path(path) == temporary:
+                    shutil.rmtree(temporary);removed.append(str(temporary))
+                return real_scandir(path)
+            with patch.object(subject.os, 'scandir', side_effect=remove_before_descent):
+                observed = subject._allocated_output_bytes(root)
+            self.assertEqual(removed, [str(temporary)])
+            self.assertEqual(observed, subject._allocated_output_bytes(root)+directory_blocks)
+            self.assertEqual((stable/'retained').read_bytes(), b'kept')
+
+    def test_output_scan_rejects_unexpected_traversal_errors(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory);child = root/'unreadable';child.mkdir()
+            real_scandir = os.scandir
+            for error in (PermissionError(13, 'permission denied', str(child)),
+                          OSError(5, 'I/O error', str(child))):
+                def fail(path):
+                    if Path(path) == child:
+                        raise error
+                    return real_scandir(path)
+                with self.subTest(error=type(error).__name__), \
+                     patch.object(subject.os, 'scandir', side_effect=fail), \
+                     self.assertRaises(type(error)):
+                    subject._allocated_output_bytes(root)
+
+    def test_output_scan_does_not_follow_external_directory_symlink(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory);root = base/'output';root.mkdir();outside = base/'outside';outside.mkdir()
+            (outside/'unowned').write_bytes(b'x'*65536)
+            alias = root/'alias';alias.symlink_to(outside, target_is_directory=True)
+            self.assertEqual(subject._allocated_output_bytes(root),
+                             (root.lstat().st_blocks+alias.lstat().st_blocks)*512)
+            self.assertEqual((outside/'unowned').stat().st_size, 65536)
+
+    def test_output_scan_requires_existing_job_root(self):
+        with tempfile.TemporaryDirectory() as directory:
+            with self.assertRaises(FileNotFoundError):
+                subject._allocated_output_bytes(Path(directory)/'missing-output')
+
     def test_controller_validation_requires_same_tool_and_validation_commit(self):
         value = request()
         value['operation']['kind'] = 'python-controller-validation'
