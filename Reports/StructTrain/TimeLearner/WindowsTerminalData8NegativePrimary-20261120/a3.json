@@ -1,0 +1,74 @@
+{
+  "published": true,
+  "catalog": "experiments/2026-11-20/windows-terminal-DATA8/negative-a3.json",
+  "record": {
+    "kind": "timelearner_closed_windows_negative_primary",
+    "schema_version": 1,
+    "source_attempt": "windows-terminal-physical-data8-a3",
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e3/e3da0bf07656f5e4cf372c6c60a0e4aca98eef3a07ac344db74d4cf90ab61b37",
+      "sha256": "e3da0bf07656f5e4cf372c6c60a0e4aca98eef3a07ac344db74d4cf90ab61b37",
+      "bytes": 7005244
+    },
+    "bundle_manifest": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/57/57b67f728efec7ee99827498f54b7ad8b9f849a38160237f34ba9b543b4b1347",
+      "sha256": "57b67f728efec7ee99827498f54b7ad8b9f849a38160237f34ba9b543b4b1347",
+      "bytes": 327195
+    },
+    "collection": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a8/a8e4910f618a6e049e27b540da750fe21bcfa1c9296b7c0f25f659dec3e3c9f9",
+      "sha256": "a8e4910f618a6e049e27b540da750fe21bcfa1c9296b7c0f25f659dec3e3c9f9",
+      "bytes": 1951
+    },
+    "collection_controls": "67dd413092328d7d7e816eeff01edc07e42a3d78",
+    "members": 1356,
+    "expanded_bytes": 805368623,
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "e3da0bf07656f5e4cf372c6c60a0e4aca98eef3a07ac344db74d4cf90ab61b37",
+      "archive_members_verified": 1356,
+      "retained_regular_files": 1356,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "original_native_tests": 81,
+    "original_native_passed": 80,
+    "original_native_failed": 1,
+    "original_sdk_accepted": true,
+    "original_native_gate": {
+      "assertion_status": "failed",
+      "execution": "process_error",
+      "inventory": {
+        "assertion_status": "failed",
+        "expected": 81,
+        "failed_test_ids": [
+          "RdkIntegralXml/LegacyDecimalPrefixesRemainReadable"
+        ],
+        "observed": 81,
+        "sha256": "fa9fe6b341f1544dbdff2f4341908368e608a7c7c9a64b8dfcdf4bb46fb7ad3b"
+      },
+      "kind": "timelearner_native_test_gate_result",
+      "reason": "complete_declared_test_inventory",
+      "schema_version": 1,
+      "scientific_verdict": null,
+      "validity": "valid"
+    },
+    "original_outcomes_unchanged": true,
+    "source_files_modified": false,
+    "portable_archive_verifies_bytes_not_original_execution": true,
+    "scientific_verdict": null
+  }
+}
