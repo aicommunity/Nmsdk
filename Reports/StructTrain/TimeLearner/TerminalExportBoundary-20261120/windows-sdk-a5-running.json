@@ -1,0 +1,194 @@
+{
+  "kind": "timelearner_terminal_export_windows_sdk_running",
+  "schema_version": 1,
+  "recorded_at": "2026-11-20T13:19:30.564462+00:00",
+  "source": {
+    "root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+    "pulse": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+    "rdk": "561986e9f336ee5914e2d119de90b005e06f3639"
+  },
+  "preparation": {
+    "prepared": true,
+    "started": false,
+    "source": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5",
+    "root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+    "pulse": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+    "rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+    "namespace_files": 5100,
+    "namespace_blob": "332b9e9c6966c98e76f36a3ebc06b25b45670f57",
+    "specification_blob": "ac9830aedcf959100773186a69609f7a2b1413f3",
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\terminal-physical-data8-win-a5",
+    "controls_commit": "e3b104c3642d2638f25baf5db6ddc95b9edb0865",
+    "launch_script": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\launch-sdk-build.ps1",
+    "attempt": "windows-terminal-physical-data8-sdk-build-a5",
+    "expected_cpp_tests": 108,
+    "extended_cases": 16,
+    "source_closure": {
+      "root": {
+        "head": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+        "status": ""
+      },
+      "Bin": {
+        "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "status": ""
+      },
+      "Libraries/Nmsdk-MotionControlLib": {
+        "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "status": ""
+      },
+      "Libraries/Nmsdk-PulseLib": {
+        "recorded_gitlink": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+        "head": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+        "status": ""
+      },
+      "Libraries/Rdk-BasicLib": {
+        "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "status": ""
+      },
+      "Libraries/Rdk-CvBasicLib": {
+        "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "status": ""
+      },
+      "Libraries/Rdk-HardwareLib": {
+        "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+        "head": "de40b008e990105856726e01230dde19f42a90a9",
+        "status": ""
+      },
+      "Rdk": {
+        "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "status": ""
+      }
+    },
+    "build_specification": {
+      "kind": "timelearner_private_windows_build",
+      "schema_version": 1,
+      "source_root": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5",
+      "source_commit": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+      "namespace_git_blob": "332b9e9c6966c98e76f36a3ebc06b25b45670f57",
+      "expected_source_files": 5100,
+      "installed_dependencies": "C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed",
+      "build_root": "C:\\Projects\\TimeLearnerWorker\\build-terminal-physical-data8-win-a5",
+      "runtime_root": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5",
+      "output_root": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-terminal-physical-data8-sdk-build-a5",
+      "worker_sha256": "c31340a8883110ffdf1ac1a57056ada4063ab28d4208cf35652ebd0a1cc381a1",
+      "profile_sha256": {
+        "vcpkg.json": "444c0eae22c7ab2e3355b40d9f53793d3defe2b3cc59488eac40c7be1a52c92e",
+        "triplets/x64-windows-tl.cmake": "26eaf5b6e9ee2ffeb9a380b0a2d7148cff6374c9870f381e69e8c78aec144718"
+      },
+      "installed_status_sha256": "7e02dc6d4b89d5711c3b62c60d607430189dcc3c599da8581449c300bf0b63ca",
+      "visual_studio_root": "C:/Program Files/Microsoft Visual Studio/18/Community",
+      "compiler": "C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/Hostx64/x64/cl.exe",
+      "vsdevcmd_sha256": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+      "vcpkg_commit": "1577f17ee57f42a0ef6d75bbb82cb37d0b76d7e8"
+    },
+    "scientific_worker_admitted": false
+  },
+  "dispatch": {
+    "dispatched": true,
+    "receipt": {
+      "scientific_verdict": null,
+      "tool_commit": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+      "task": "TimeLearner-windows-terminal-physical-data8-sdk-build-a5",
+      "specification_git_blob": "ac9830aedcf959100773186a69609f7a2b1413f3",
+      "instance": "{6C742DD6-89AA-4DA0-ADDD-47354A829748}",
+      "kind": "windows_sdk_build_dispatch",
+      "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-terminal-physical-data8-sdk-build-a5",
+      "worker_sha256": "c31340a8883110ffdf1ac1a57056ada4063ab28d4208cf35652ebd0a1cc381a1"
+    },
+    "source": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5",
+    "root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+    "pulse": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+    "controls_commit": "e3b104c3642d2638f25baf5db6ddc95b9edb0865",
+    "source_file_count": 5100,
+    "scientific_worker_admitted": false,
+    "scientific_verdict": null
+  },
+  "observation": {
+    "output_exists": true,
+    "records": {
+      "build-process/owned-process.json": {
+        "executable": "C:\\Windows\\System32\\cmd.exe",
+        "creation_filetime": "134396531651864121",
+        "pid": 19300,
+        "job_name": "Local\\TimeLearner-a00627cc-bd5b-4883-b5bd-158135cf1cf9",
+        "runtime_fingerprint": "2eb82103f9766b107cd4759b3b0124c6e85232c3bb36bf4b9ab47362278c33ed",
+        "suspended_until_limits_applied": true
+      }
+    },
+    "kernel_job": {
+      "name": "Local\\TimeLearner-a00627cc-bd5b-4883-b5bd-158135cf1cf9",
+      "active_processes": 5,
+      "total_processes": 521
+    },
+    "logs": [
+      {
+        "name": "build-process/stdout.log",
+        "bytes": 47056,
+        "tail": ".cpp.obj\r\n[282/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NCounterNeuron.cpp.obj\r\n[283/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NDCEngine.cpp.obj\r\n[284/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NEngineMotionControl.cpp.obj\r\n[285/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NEyeRetina.cpp.obj\r\n[286/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NFrequencyReceiver.cpp.obj\r\n[287/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NIntervalSeparator.cpp.obj\r\n[288/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NManipulator.cpp.obj\r\n[289/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NManipulatorAndGyro.cpp.obj\r\n[290/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NManipulatorInput.cpp.obj\r\n[291/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NManipulatorInputEmulator.cpp.obj\r\n[292/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NManipulatorSource.cpp.obj\r\n[293/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NManipulatorSourceEmulator.cpp.obj\r\n[294/541] Building CXX object Libraries\\Nmsdk-MotionControlLib\\CMakeFiles\\Nmsdk-MotionControlLib.core.dir\\Core\\NMazeMemory.cpp.obj\r\n"
+      },
+      {
+        "name": "build-process/stderr.log",
+        "bytes": 2403,
+        "tail": "v) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  Libraries/Rdk-CvBasicLib/CMakeLists.txt:47 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  App/NeuroModeler/CMakeLists.txt:271 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  App/NeuroModelerConsole/CMakeLists.txt:61 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning:\n  Manually-specified variables were not used by the project:\n\n    VCPKG_OVERLAY_TRIPLETS\n\n\n"
+      }
+    ],
+    "preparation_files": [
+      {
+        "name": "build-runtime.json",
+        "bytes": 4145
+      },
+      {
+        "name": "build.cmd",
+        "bytes": 2174
+      },
+      {
+        "name": "commands.json",
+        "bytes": 2128
+      },
+      {
+        "name": "dependencies-before.json.gz",
+        "bytes": 820985
+      },
+      {
+        "name": "producer.py",
+        "bytes": 11384
+      },
+      {
+        "name": "source-before.json",
+        "bytes": 1304
+      },
+      {
+        "name": "specification.json",
+        "bytes": 1453
+      },
+      {
+        "name": "tools-before.json",
+        "bytes": 1749
+      },
+      {
+        "name": "vcvars.log",
+        "bytes": 298
+      }
+    ],
+    "task": {
+      "last_result": 267009,
+      "name": "TimeLearner-windows-terminal-physical-data8-sdk-build-a5",
+      "instances": [
+        {
+          "instance": "{6C742DD6-89AA-4DA0-ADDD-47354A829748}",
+          "engine_pid": 7072,
+          "state": 4
+        }
+      ]
+    }
+  },
+  "expected_cpp_tests": 108,
+  "native_tests_started": false,
+  "scientific_worker_admitted": false,
+  "scientific_verdict": null
+}
