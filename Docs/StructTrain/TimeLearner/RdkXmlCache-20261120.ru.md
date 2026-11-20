@@ -1,14 +1,18 @@
 # Кэш XML при переносе обученной модели
 
-Статус: дефект воспроизведён штатным Windows native81, исправление подготовлено
-в Rdk feature. Новый native86 ещё не выполнен. Это адресная работа этапов4/5;
+Статус: дефект воспроизведён штатным Windows native81, исправление находится
+в Rdk feature. A4 SDK принят; новый native86 выполняется, первые8 Rdk cases
+прошли, включая прежний отказ LegacyDecimalPrefixes. Полного итога86 ещё нет.
+Это адресная работа этапов4/5;
 полностью принят только этап0 исходного плана.
 
-Изолированный Windows A4 SDK запущен, задача планировщика подтверждена
-работающей. Source Root de5287ca0ae54dc1de9334992bec27c527543d6e,
+Изолированный Windows A4 SDK завершён и принят: exit0,2622.06s,
+вся kernel group и задача планировщика закрыты. Source Root de5287ca0ae54dc1de9334992bec27c527543d6e,
 Rdk561986e9f336ee5914e2d119de90b005e06f3639, Pulse0cf335ae08347f2d042d7eb3f5d05ef70a55789c.
-Объявлен полный86-case cohort; native ещё не запущен. Dispatch не означает
-успешной сборки или PASS. [Квитанция](../../../Reports/StructTrain/TimeLearner/RdkXmlCache-20261120/windows-sdk-a4-running.json).
+Запущен полный86-case cohort. Первые8 Rdk cases прошли; все81 прежних
+case сохранены. [Принятый SDK](../../../Reports/StructTrain/TimeLearner/RdkXmlCache-20261120/windows-sdk-a4-accepted.json)
+и [живой native Job, controls и частичные проверки](../../../Reports/StructTrain/TimeLearner/RdkXmlCache-20261120/windows-native86-running.json).
+Частичный префикс stdout не заменяет финальный JUnit audit всего cohort.
 
 ## Наблюдение и исправление
 

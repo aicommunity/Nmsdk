@@ -51,11 +51,13 @@ cases, дополнительные full-width и реальный Copy прош
 
 Rdk561986e9f336ee5914e2d119de90b005e06f3639 содержит общий сброс кэша
 текущего XML-курсора при мутациях/навигации и полное unsigned-чтение.
-На Windows выполняется fresh A4 SDK Rootde5287ca0ae54dc1de9334992bec27c527543d6e,
-Pulse0cf335ae08347f2d042d7eb3f5d05ef70a55789c. Его kernel Job подтверждён
-живым; native86 ещё не запускался. Все прежние81 cases сохранены,
-добавлено пять production API регрессий. Ни сборка, ни будущий PASS этих
-cases сами по себе не подтверждают фактический N4 Train→Test.
+На Windows принят fresh A4 SDK Rootde5287ca0ae54dc1de9334992bec27c527543d6e,
+Pulse0cf335ae08347f2d042d7eb3f5d05ef70a55789c: exit0,2622.06s, все процессы
+закрыты. [Native86 запущен](../../../Reports/StructTrain/TimeLearner/RdkXmlCache-20261120/windows-native86-running.json),
+его kernel Job подтверждён живым. Первые8 Rdk cases прошли, включая прежний
+LegacyDecimalPrefixes. Все прежние81 cases сохранены, добавлено пять
+production API регрессий. Полного итога86 ещё нет. Ни сборка, ни будущий
+PASS этих cases сами по себе не подтверждают фактический N4 Train→Test.
 
 На Data M40 подготовлены отдельный Linux-source с той же Git closure и
 [controls86](../../../Reports/StructTrain/TimeLearner/RdkXmlCache-20261120/linux-native86-prepared.json),
