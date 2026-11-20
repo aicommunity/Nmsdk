@@ -4,6 +4,7 @@
 #include "../../../App/NeuroModelerConsole/TimeLearnerJobSupport.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <cmath>
+#include <typeinfo>
 #include <vector>
 
 namespace {
@@ -18,6 +19,8 @@ std::vector<double> SubthresholdResponse(bool integrate,bool stabilizer,unsigned
     std::vector<double> response;
     const int result=NmsdkWorker::WithFreshOwner<NPulseLTZone>("NPulseLTZone",frequency,
         "IntegratedZoneFixture",[&](auto,auto environment,auto model,auto zone) {
+        EXPECT_TRUE(typeid(*zone)==typeid(NPulseLTZone));
+        if(typeid(*zone)!=typeid(NPulseLTZone))return 2;
         // Configure one isolated physical leaf before its final initialization.
         // No shared prototype, neuron element defaults or running probe is edited.
         zone->UseLTZIntegtation=integrate;
@@ -84,6 +87,8 @@ TEST(LTZoneDynamics, CopyAndStorageImagePreserveTheEffectiveCustomTimeConstant)
     auto source=dynamic_pointer_cast<NPulseLTZone>(core.storage->TakeObject("NPulseLTZone"));
     auto copied=dynamic_pointer_cast<NPulseLTZone>(core.storage->TakeObject("NPulseLTZone"));
     ASSERT_TRUE(source);ASSERT_TRUE(copied);
+    ASSERT_TRUE(typeid(*source)==typeid(NPulseLTZone));
+    ASSERT_TRUE(typeid(*copied)==typeid(NPulseLTZone));
     source->SetEnvironment(core.environment);source->SetGlobalTimeStep(2000);
     source->UseLTZIntegtation=true;source->UseSpikeStabilizer=false;
     source->TimeConstant=Tau;source->Threshold=100.;source->Init();
