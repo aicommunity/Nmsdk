@@ -1,0 +1,33 @@
+digraph G {
+ graph [rankdir=TB, bgcolor=white, pad="0.15", nodesep="0.55", ranksep="0.7"];
+ node [shape=record, fontname=Arial, fontsize=16, margin="0.12,0.1"];
+ edge [fontname=Arial, fontsize=13, arrowsize=0.8];
+ learner [label="{Модуль обучения|Цель и режим|Принять отклик\lЗафиксировать исход\l}"];
+ search [label="{Поиск структуры|Кандидаты и история|Выбрать действие\lСравнить измерения\l}"];
+ norm [label="{Нормализация|Допуски и границы|Предложить кандидат\l}"];
+ n0 [label="{Режим N0|Целое число синапсов|Предложить Nₛ\l}"];
+ n1 [label="{Режим N1|Сопротивление|Предложить Rₛ\l}"];
+ probe [label="{Измеритель|Пачка и окна|Найти вершины\lПроверить принадлежность\l}"];
+ adapter [label="{Адаптер топологии|Пути или общая ветвь|Применить изменение\lПрочитать граф\l}"];
+ model [label="{Модель нейрона|Геометрия и физика|Построить\lСбросить динамику\lРассчитать такт\l}"];
+ check [label="{Общая проверка|Отклики всех входов|Проверить допуски\lСвязать исход с моделью\l}"];
+ {rank=same; learner; search;}
+ {rank=same; probe; check;}
+ {rank=same; adapter; model;}
+ {rank=same; norm;}
+ {rank=same; n0; n1;}
+ learner -> search [arrowtail=diamond, dir=both, arrowhead=none];
+ learner -> probe [arrowtail=diamond, dir=both, arrowhead=none];
+ learner -> check [arrowtail=diamond, dir=both, arrowhead=none];
+ probe -> adapter [style=invis];
+ check -> model [style=invis];
+ adapter -> norm [style=invis];
+ model -> norm [style=invis];
+ norm -> n0 [dir=back, arrowtail=empty];
+ norm -> n1 [dir=back, arrowtail=empty];
+ learner -> adapter [style=dashed, constraint=false];
+ search -> norm [style=dashed, constraint=false];
+ adapter -> model [label="правка", constraint=false];
+ model -> probe [style=dashed, constraint=false];
+ probe -> search [style=dashed, constraint=false];
+}
