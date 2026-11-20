@@ -36,7 +36,7 @@ class OwnedPythonJobTest(unittest.TestCase):
             directory_blocks = temporary.lstat().st_blocks*512
             real_scandir = os.scandir;removed = []
             def remove_before_descent(path):
-                if Path(path) == temporary:
+                if not isinstance(path, int) and Path(path) == temporary:
                     shutil.rmtree(temporary);removed.append(str(temporary))
                 return real_scandir(path)
             with patch.object(subject.os, 'scandir', side_effect=remove_before_descent):
