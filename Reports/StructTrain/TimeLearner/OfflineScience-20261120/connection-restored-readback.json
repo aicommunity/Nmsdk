@@ -1,0 +1,150 @@
+{
+  "kind": "timelearner_live_jobs_after_connection_restored",
+  "schema_version": 1,
+  "observation_UTC_approx": "2026-11-20 16:09",
+  "connection_restored": true,
+  "M40": {
+    "job": "s11-terminal-n4-branch-on-m40-a2",
+    "native": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "9e85cee71e9ce90e4280f3daa04aab2cd6bee5634770cd43af56401799d8d119",
+        "unit": "timelearner-b9db012f-d19c-4fe7-86ea-f5839eb8bca6.service",
+        "invocation_id": "6d15aa748fdd42ae85732d16f0515156",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b9db012f-d19c-4fe7-86ea-f5839eb8bca6.service",
+        "initial_main_pid": 3865301,
+        "initial_start_ticks": "423621978",
+        "sha256": "c369c58680ab20b58812a5e16227077edc2e1dc9aa27d06eecfb5c1a702c3d27"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "3865301",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b9db012f-d19c-4fe7-86ea-f5839eb8bca6.service",
+        "MemoryMax": "25769803776",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt b9db012f-d19c-4fe7-86ea-f5839eb8bca6",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "6d15aa748fdd42ae85732d16f0515156"
+      },
+      "memory_max": 25769803776,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "written_probe_packets": 803,
+    "last_probe": {
+      "file": "raw-trial-803.json",
+      "trial_id": "terminal-science-ab/n4/branch/a1/on/session/1/search/260/composite/134/native/4",
+      "complete": true,
+      "valid": true,
+      "reason": null,
+      "begin_time": null,
+      "end_time": null
+    }
+  },
+  "Elder": {
+    "workflow": "offline-science-20261120-elder-a2",
+    "exists": true,
+    "unit": "MainPID=2858682\nResult=success\nActiveState=active\nSubState=running\nInvocationID=dbe19f39047b4430a0c5755e5b34b4cb\n",
+    "console-started.json": {
+      "request": "/home/user/timelearner-refactor/requests/offline-science-20261120-elder-a2/Docs/StructTrain/TimeLearner/Experiments/OfflineScienceElderA2-20261120/console-request.json",
+      "source": "/home/user/timelearner-refactor/source-python-output-monitor-a1",
+      "output": "/home/user/timelearner-refactor/readbacks/s05-terminal-export-console16-elder-a3"
+    },
+    "Console_completed_cases": 10,
+    "Console_kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "6e1de5474e8c28287215560e6b710b3f94c0e81d7c66560937843e5f0edf5b93",
+        "unit": "timelearner-668580f6-474b-42f0-bc9b-1bd84c25baaf.service",
+        "invocation_id": "4e7654fbeb9c46f58137bb8bf8d8181c",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-668580f6-474b-42f0-bc9b-1bd84c25baaf.service",
+        "initial_main_pid": 2862447,
+        "initial_start_ticks": "476011110",
+        "sha256": "8536a097b699755162174a61aa604ae46b1a64c1ede2a64e61caf2748e2ee5a7"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "2862447",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-668580f6-474b-42f0-bc9b-1bd84c25baaf.service",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 668580f6-474b-42f0-bc9b-1bd84c25baaf",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "4e7654fbeb9c46f58137bb8bf8d8181c"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    }
+  },
+  "Windows": {
+    "output_exists": true,
+    "records": {
+      "Console-smokes-accepted.json": {
+        "actual_Console_Train_cases": 2,
+        "completed_and_stopped": true,
+        "scientific_verdict": null
+      },
+      "science-started.json": {
+        "job_sha256": "b74a742e9c2b67edb298dd18d23ba9879f14f1c05b2e345b821fc16e599e1eb3",
+        "search_wall_seconds": 32400,
+        "native_wall_seconds": 39600,
+        "scientific_verdict": null
+      },
+      "science-train/process/owned-process.json": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\NeuroModelerConsole.exe",
+        "creation_filetime": "134396630016329722",
+        "pid": 4176,
+        "job_name": "Local\\TimeLearner-faf8da40-508b-4cc4-bf5c-d8d6ef9b2805",
+        "runtime_fingerprint": "c254e031e158860f1625ac55536e4d357a50182b7f6b5de20cdaff6038cda7e5",
+        "suspended_until_limits_applied": true
+      }
+    },
+    "kernel_job": {
+      "name": "Local\\TimeLearner-faf8da40-508b-4cc4-bf5c-d8d6ef9b2805",
+      "active_processes": 2,
+      "total_processes": 2
+    },
+    "smoke_results": [
+      "branch-terminal-actual-window5-N1\\train\\audit.json",
+      "configured9-classic-terminal-fixed4-N1-completed\\train\\audit.json"
+    ],
+    "task": {
+      "last_result": 267009,
+      "instances": [
+        {
+          "instance": "{36AC38A6-9656-40FF-82CF-0FCEB4B0A10D}",
+          "engine_pid": 8608,
+          "state": 4
+        }
+      ]
+    }
+  },
+  "restarted_existing_jobs": false,
+  "models_or_scientific_results_accepted": false,
+  "scientific_verdict": null
+}
