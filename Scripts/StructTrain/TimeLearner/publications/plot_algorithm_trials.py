@@ -32,7 +32,7 @@ def render(specification, output, *, matplotlib_libs=None):
             0<len(spec['trials'])<=256,'known_finite_figure_manifest_required')
     require(not output.exists(),'fresh_scientific_figure_output_required')
     root=specification.parent
-    prepared=[];ids=set();limits={}
+    prepared=[];ids=set();limits={};response_limits={}
     for row in spec['trials']:
         identity=row['id'];require(type(identity) is str and identity and
             all(c in 'abcdefghijklmnopqrstuvwxyz0123456789-' for c in identity) and
@@ -87,6 +87,9 @@ def render(specification, output, *, matplotlib_libs=None):
             finite=[v for v in values if math.isfinite(v)];key=(group,channel)
             low,high=limits.get(key,(min(finite),max(finite)))
             limits[key]=(min(low,min(finite)),max(high,max(finite)))
+            baseline=values[0]
+            response_low,response_high=response_limits.get(key,(baseline,max(finite)))
+            response_limits[key]=(min(response_low,baseline),max(response_high,max(finite)))
         prepared.append((row,observation,times,potentials,stimuli,spikes,begin-onset,end-onset))
     output.mkdir(parents=True)
     records=[]
@@ -98,8 +101,13 @@ def render(specification, output, *, matplotlib_libs=None):
     with plt.rc_context(style):
         for row,observation,times,potentials,stimuli,spikes,left,right in prepared:
             count=len(potentials)
-            fig,axes=plt.subplots(count,2,figsize=(6.35,max(2.7,1.72*count)),
-                                 squeeze=False,layout='constrained')
+            height=max(3.,1.7*count+.6)
+            fig,axes=plt.subplots(count,2,figsize=(6.35,height),squeeze=False)
+            # Explicit margins are stable with twinned stimulus axes. Automatic
+            # title positioning may otherwise overlap another row's ticks or
+            # the two-line overall title after a short-window zoom.
+            fig.subplots_adjust(left=.13,right=.98,bottom=.40/height,
+                                top=1-.67/height,hspace=.72,wspace=.31)
             peak_times=[]
             for values in potentials:
                 maximum=max(v for v in values if math.isfinite(v))
@@ -116,17 +124,22 @@ def render(specification, output, *, matplotlib_libs=None):
                 for column,window in enumerate(((left,right),(zoom_left,zoom_right))):
                     axis=axes[channel,column]
                     axis.plot(times,values,color='#1756a9',linewidth=1.25,zorder=3)
-                    axis.set_xlim(*window);axis.set_ylim(low-padding,high+padding)
+                    axis.set_xlim(*window)
+                    if column==0:axis.set_ylim(low-padding,high+padding)
+                    else:
+                        response_low,response_high=response_limits[(row['case_id'],channel)]
+                        response_span=max(response_high-response_low,abs(response_low)*.01,1e-8)
+                        axis.set_ylim(response_low-.05*response_span,response_high+.08*response_span)
                     axis.grid(alpha=.22,linewidth=.5)
                     axis.ticklabel_format(axis='y',style='sci',scilimits=(-3,3),useMathText=True)
-                    axis.set_title('Полное окно' if column==0 else 'Увеличенный фрагмент')
+                    axis.set_title('Полное окно' if column==0 else 'Масштаб отклика',y=1.,pad=5)
                     if column==0:axis.set_ylabel('Сома '+str(channel+1)+'\nусл. ед.')
                     if channel+1==count:axis.set_xlabel('Время, с')
                     input_axis=axis.twinx();input_axis.set_ylim(0,1.25);input_axis.set_yticks([])
                     input_axis.vlines(stimuli,0,1,color='#df7b20',linewidth=.9,alpha=.8,zorder=2)
                     for time in spikes:
                         axis.axvline(time,color='#a51b23',linestyle='--',linewidth=1,zorder=4)
-            fig.suptitle(row['title']+'\n'+response_ru[row['response']],fontsize=11)
+            fig.suptitle(row['title']+'\n'+response_ru[row['response']],fontsize=11,y=1-.04/height)
             # Explicit prose caption in the DOCX explains the common colour key.
             paths=[]
             for suffix in ('png','svg'):
@@ -139,6 +152,7 @@ def render(specification, output, *, matplotlib_libs=None):
                 model_revision=row['model_revision'],onset=observation['stimulus_onset'],
                 relative_stimulus_times=stimuli,relative_spike_times=spikes,
                 soma_count=count,limits_scope='all declared illustrated trials of this case',
+                response_limits_scope='right panels: above recorded initial level; shared within case and channel; full recharge remains in left panels',
                 data_rescaled=False,files=[dict(name=p.name,bytes=p.stat().st_size,sha256=_digest(p)) for p in paths]))
     result=dict(kind='timelearner_scientific_trial_figures',schema_version=1,
         sources_sha256=_digest(specification),figures=records,renderer='Matplotlib',
