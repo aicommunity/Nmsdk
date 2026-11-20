@@ -1,0 +1,65 @@
+{
+  "kind": "timelearner_branch_memory_retry_partial_prefix_comparison",
+  "schema_version": 1,
+  "summary": {
+    "prefix_trials": 400,
+    "csv_byte_equal": 400,
+    "json_byte_equal": 400,
+    "same_trial_ids": 400,
+    "both_complete_valid": 400,
+    "inputs": {
+      "job.json": {
+        "a1": {
+          "bytes": 940863,
+          "sha256": "46c197729ed9df3d269d906962d424751584a54d330ff96b87e2faf45517ba66"
+        },
+        "a2": {
+          "bytes": 940863,
+          "sha256": "46c197729ed9df3d269d906962d424751584a54d330ff96b87e2faf45517ba66"
+        },
+        "equal": true
+      },
+      "initial-state.json": {
+        "a1": {
+          "bytes": 72894,
+          "sha256": "5196c8be6c4fee934c32ec71a2592abdec81a335615343791d1d9f1a5777baa4"
+        },
+        "a2": {
+          "bytes": 72894,
+          "sha256": "5196c8be6c4fee934c32ec71a2592abdec81a335615343791d1d9f1a5777baa4"
+        },
+        "equal": true
+      }
+    },
+    "first_differing_csv": null,
+    "first_differing_json": null
+  },
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/3f/3f44ec881d727185b15ac4a035b23527a0e662f024ca87fb80b169e73a8d1cda",
+    "sha256": "3f44ec881d727185b15ac4a035b23527a0e662f024ca87fb80b169e73a8d1cda",
+    "bytes": 345869
+  },
+  "source_a1": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-terminal-n4-branch-on-m40-a1/branch-on/native",
+  "source_a2": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-terminal-n4-branch-on-m40-a2/branch-on/native",
+  "a1_terminal": "oom-kill",
+  "a2_terminal": false,
+  "raw_sources_unchanged": true,
+  "full_training_reproducibility_claimed": false,
+  "classification_test_performed": false,
+  "scientific_verdict": null,
+  "live_binding_after_comparison": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "9e85cee71e9ce90e4280f3daa04aab2cd6bee5634770cd43af56401799d8d119",
+    "unit": "timelearner-b9db012f-d19c-4fe7-86ea-f5839eb8bca6.service",
+    "invocation_id": "6d15aa748fdd42ae85732d16f0515156",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b9db012f-d19c-4fe7-86ea-f5839eb8bca6.service",
+    "initial_main_pid": 3865301,
+    "initial_start_ticks": "423621978",
+    "sha256": "c369c58680ab20b58812a5e16227077edc2e1dc9aa27d06eecfb5c1a702c3d27"
+  },
+  "live_execution_after_comparison": "running"
+}

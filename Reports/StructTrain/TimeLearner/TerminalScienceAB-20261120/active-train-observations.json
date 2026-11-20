@@ -1,0 +1,115 @@
+{
+  "kind": "timelearner_two_active_scientific_trains",
+  "schema_version": 1,
+  "source_root": "893b7344eb8794e5ef981eb133e669b6060e5aa3",
+  "jobs": [
+    {
+      "job": "s11-terminal-n4-branch-on-m40-a2",
+      "native": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "9e85cee71e9ce90e4280f3daa04aab2cd6bee5634770cd43af56401799d8d119",
+          "unit": "timelearner-b9db012f-d19c-4fe7-86ea-f5839eb8bca6.service",
+          "invocation_id": "6d15aa748fdd42ae85732d16f0515156",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b9db012f-d19c-4fe7-86ea-f5839eb8bca6.service",
+          "initial_main_pid": 3865301,
+          "initial_start_ticks": "423621978",
+          "sha256": "c369c58680ab20b58812a5e16227077edc2e1dc9aa27d06eecfb5c1a702c3d27"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "3865301",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b9db012f-d19c-4fe7-86ea-f5839eb8bca6.service",
+          "MemoryMax": "25769803776",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt b9db012f-d19c-4fe7-86ea-f5839eb8bca6",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "6d15aa748fdd42ae85732d16f0515156"
+        },
+        "memory_max": 25769803776,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "supervisor_live": true,
+      "written_probe_packets": 434,
+      "last_probe": {
+        "file": "raw-trial-434.json",
+        "trial_id": "terminal-science-ab/n4/branch/a1/on/session/1/search/139/composite/73/native/1",
+        "complete": true,
+        "valid": true,
+        "reason": null,
+        "begin_time": null,
+        "end_time": null
+      }
+    },
+    {
+      "job": "s11-terminal-n4-classic-on-elder-a1",
+      "native": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "2f6e8cbeb2461d4f2e150ae34871501ab2c0817b314bb9764a8661b14a102584",
+          "unit": "timelearner-dc28d969-885c-45b2-95df-5809cf8644bb.service",
+          "invocation_id": "387f4400037c49719861c97d929a9e43",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-dc28d969-885c-45b2-95df-5809cf8644bb.service",
+          "initial_main_pid": 2199106,
+          "initial_start_ticks": "465976309",
+          "sha256": "8b7e2d4054fb1c5cfb3dbcdf2761563888618039d5767ea482661ac713b93908"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "2199106",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-dc28d969-885c-45b2-95df-5809cf8644bb.service",
+          "MemoryMax": "8589934592",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt dc28d969-885c-45b2-95df-5809cf8644bb",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "387f4400037c49719861c97d929a9e43"
+        },
+        "memory_max": 8589934592,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "supervisor_live": true,
+      "written_probe_packets": 631,
+      "last_probe": {
+        "file": "raw-trial-631.json",
+        "trial_id": "terminal-science-ab/n4/classic/a1/on/session/1/search/196/composite/106/native/0",
+        "complete": true,
+        "valid": true,
+        "reason": null,
+        "begin_time": null,
+        "end_time": null
+      }
+    }
+  ],
+  "training_outcomes_available": false,
+  "scientific_verdict": null,
+  "fully_accepted_stages": [
+    0
+  ],
+  "whole_plan_complete": false
+}
