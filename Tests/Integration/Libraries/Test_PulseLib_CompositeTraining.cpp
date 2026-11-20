@@ -4651,7 +4651,11 @@ template<class Owner> const RecoveryPackageFixtureData& ActualRecoveryPackage(bo
     auto response=RecoveryBoundaryResponse(f);const auto neuron=f.owner->template GetComponentL<UNet>("Neuron",true);
     const auto dataset=f.owner->template GetComponentL<UNet>("DatasetMatrix",true);
     const auto neuronBefore=LivePackageComponentXml(neuron),datasetBefore=LivePackageComponentXml(dataset);
-    const auto exportedBoundary=f.owner->ExportNativeLearnedBoundary(RecoveryPackageImplementation);
+    QJsonObject deliveredState;std::size_t deliveries=0;
+    const auto exportedBoundary=f.owner->ExportNativeLearnedBoundary(RecoveryPackageImplementation,[&](const QJsonObject& ready) {
+        ++deliveries;deliveredState=ready;
+    });
+    EXPECT_EQ(deliveries,1u);EXPECT_EQ(deliveredState,exportedBoundary.learnedState);
     const auto& package=exportedBoundary.learnedState;const auto& summary=exportedBoundary.summary;
     EXPECT_EQ(LivePackageComponentXml(neuron),neuronBefore);EXPECT_EQ(LivePackageComponentXml(dataset),datasetBefore);
     Require(package["schema_version"]==QJsonValue(7),"recovery_package_public_export_not_version7");
@@ -5122,7 +5126,28 @@ template<class Owner> void NativeTerminalCompositePackage(bool window,bool n0,bo
     ASSERT_TRUE(service.Plan().terminalSelection);
     EXPECT_DOUBLE_EQ(service.Plan().terminalSelection->maximumWallSeconds,configured?7.25:30.);
     EXPECT_EQ(bool(service.Certificate()),completed);
-    const auto exported=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);const auto& package=exported.learnedState;
+    QTemporaryDir savedModelDirectory;ASSERT_TRUE(savedModelDirectory.isValid());std::size_t deliveries=0;
+    const auto exported=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation,[&](const QJsonObject& ready) {
+        ++deliveries;NmsdkWorker::WriteStaged(savedModelDirectory.path(),"closed-model.json",ready);
+    });const auto& package=exported.learnedState;
+    EXPECT_EQ(deliveries,1u);
+    const auto savedModelPath=QDir(savedModelDirectory.path()).filePath("closed-model.json");
+    EXPECT_EQ(NmsdkWorker::ReadDocument(savedModelPath),package);
+    EXPECT_FALSE(QFile::exists(savedModelPath+".pending"));
+    // An interrupted downstream step leaves an importable closed model,
+    // but never an invented execution completion marker.
+    QTemporaryDir interruptedDirectory;ASSERT_TRUE(interruptedDirectory.isValid());
+    EXPECT_THROW(f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation,[&](const QJsonObject& ready) {
+        NmsdkWorker::WriteStaged(interruptedDirectory.path(),"closed-model.json",ready);
+        throw std::runtime_error("fixture_after_state_delivery");
+    }),std::runtime_error);
+    EXPECT_EQ(NmsdkWorker::ReadDocument(QDir(interruptedDirectory.path()).filePath("closed-model.json")),package);
+    EXPECT_FALSE(QFile::exists(QDir(interruptedDirectory.path()).filePath("execution.json")));
+    EXPECT_THROW(NmsdkWorker::WriteStaged(savedModelDirectory.path(),"closed-model.json",QJsonObject{}),std::invalid_argument);
+    EXPECT_EQ(NmsdkWorker::ReadDocument(savedModelPath),package);
+    // Compare the shared checked export against the independent public summary
+    // path. Reusing evidence must preserve every field, not merely its digest.
+    EXPECT_EQ(exported.summary,EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters()));
     ASSERT_EQ(package.value("schema_version"),QJsonValue(8));EXPECT_EQ(exported.summary.value("schema_version"),QJsonValue(9));
     const auto historicalSummary=exported.summary.value("historical_summary").toObject();ASSERT_FALSE(historicalSummary.isEmpty());
     const auto historicalState=package.value("historical_state").toObject();
@@ -5296,6 +5321,7 @@ template<class Owner> void ActualCompositeTerminalRestore(bool window,bool n0)
     EXPECT_EQ(f.owner->ReadNativeParameters(),selected->Selection().candidate.fullParameters);
     EXPECT_NE(f.owner->ReadNativeParameters(),unmeasuredParameters);
     const auto exported=f.owner->ExportNativeLearnedBoundary(CompositePackageImplementation);
+    EXPECT_EQ(exported.summary,EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters()));
     const auto history=exported.learnedState.value("historical_state").toObject();
     EXPECT_EQ(history.value("model_revision"),unmeasured.value("sha256"));
     EXPECT_EQ(history.value("model_epoch"),QJsonValue(double(unmeasuredEpoch)));

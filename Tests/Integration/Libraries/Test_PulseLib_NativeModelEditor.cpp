@@ -6350,6 +6350,7 @@ template<class Owner> void NativeTerminalPortableBoundary(EditingRig<Owner>& rig
     ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
         [&](const auto& sample){before.push_back(sample);}).status,NativeProbeStatus::Completed);
     const auto exported=rig.learner->ExportNativeLearnedBoundary(implementation);const auto& package=exported.learnedState;
+    EXPECT_EQ(exported.summary,EncodeNativeTrainingState(rig.learner->NativeTrainingController(),rig.Revision(),rig.learner->ReadNativeParameters()));
     if(package.value("historical_state").toObject().value("configuration").toObject().value("schema_version")==QJsonValue(9)) {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();
         EXPECT_THROW(PrepareNativeLearnedState(package.value("historical_state").toObject(),core.storage,core.environment,implementation),

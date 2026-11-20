@@ -40,6 +40,17 @@ inline QJsonObject WriteBytes(const QString& directory,const QString& name,const
 }
 inline QJsonObject Write(const QString& directory,const QString& name,const QJsonObject& value)
 {return WriteBytes(directory,name,QJsonDocument(value).toJson());}
+inline QJsonObject WriteStaged(const QString& directory,const QString& name,const QJsonObject& value)
+{
+    // Keep an interrupted write distinguishable from a complete artifact.
+    // Both creation and rename reject existing names; rename stays on the
+    // same filesystem. The final job marker is published separately.
+    const auto pending=name+".pending";
+    auto record=WriteBytes(directory,pending,QJsonDocument(value).toJson());
+    QFile file(QDir(directory).filePath(pending));
+    Require(file.rename(QDir(directory).filePath(name)),"job_staged_artifact_publish_failed");
+    record["path"]=name;return record;
+}
 inline QJsonObject ReadDocument(const QString& path)
 {return ReadNativeJobDocument(path);}
 inline void Keys(const QJsonObject& object,const std::set<QString>& keys)
