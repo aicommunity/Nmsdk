@@ -1,0 +1,47 @@
+{
+  "job": "s11-prepared-long-model-baseline-elder-a2",
+  "kernel": {
+    "execution": "running",
+    "all_processes_closed": false,
+    "reason": "kernel_cgroup_observed",
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "661328",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a0300d8a-c636-4b60-99c7-3104c7991af0.service",
+      "MemoryMax": "8589934592",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt a0300d8a-c636-4b60-99c7-3104c7991af0",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "5aacf5f6f1444fb0bfadfd4c2fbf5d7e"
+    }
+  },
+  "memory.current": "4018102272\n",
+  "memory.peak": "4843945984\n",
+  "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "cpu.stat": "usage_usec 771714095\nuser_usec 758274005\nsystem_usec 13440089\ncore_sched.force_idle_usec 0\n",
+  "wchan": "0",
+  "io": "rchar: 336302885\nwchar: 1642214056\nsyscr: 426\nsyscw: 15\nread_bytes: 0\nwrite_bytes: 1642225664\ncancelled_write_bytes: 0\n",
+  "status": "Name:\tNeuroModelerCon\nState:\tR (running)\nVmSize:\t 2425188 kB\nVmRSS:\t 2297040 kB\nThreads:\t7",
+  "native_files": [
+    {
+      "name": "trial-0.json",
+      "bytes": 1752831
+    },
+    {
+      "name": "model.json",
+      "bytes": 826005504
+    },
+    {
+      "name": "job.json",
+      "bytes": 814455405
+    }
+  ]
+}
