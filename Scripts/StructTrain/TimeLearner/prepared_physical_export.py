@@ -5,7 +5,6 @@ validates it before exporting DATA; no stopped/solo package is relabelled.
 The resulting DATA carries no training or calibration certificate.
 """
 import argparse
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -111,7 +110,8 @@ def run(controls):
         require(shutil.disk_usage(base).free >= sum(disk.values()), 'physical_export_disk_admission')
         registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
         lease = registry.reserve(spec['job_id'], [dict(path=str(p),access=a) for p,a in
-            ((inputs,'read'),(controls,'read'),(Path(spec['sdk_source']),'read'),(output,'write'))],
+            ((inputs,'read'),(controls,'read'),(Path(spec['sdk_source']),'read'),
+             (Path(runtime['executable']['path']).parent,'read'),(output,'write'))],
             ttl_seconds=4200, demands=dict(slots=1,memory_bytes=9*1024**3,disk_bytes=disk['maximum_output_bytes']))
         import time
         from Scripts.StructTrain.TimeLearner.owned_python_job import _allocated_output_bytes
