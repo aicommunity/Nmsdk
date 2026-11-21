@@ -1,0 +1,149 @@
+{
+  "kind": "timelearner_actual_windows_count_full_primary_archive_and_restoration",
+  "schema_version": 1,
+  "central_publication": {
+    "kind": "timelearner_external_closed_windows_count_full_primary",
+    "schema_version": 1,
+    "package": "/media/user/Data/Nmsdk-StructTrainExpArchive/incoming/20261122-windows-count-train-complete-primary-a1",
+    "objects": {
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ea/ead9ece2ef1b47f64ead31aace912e8e743ef3b0929dd00c602ca14564ae42ca",
+        "sha256": "ead9ece2ef1b47f64ead31aace912e8e743ef3b0929dd00c602ca14564ae42ca",
+        "bytes": 46751168
+      },
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/9d/9d3224624598e775b8864f4234d148f1d8b74c8be6606ead47a80ee4bbb4e244",
+        "sha256": "9d3224624598e775b8864f4234d148f1d8b74c8be6606ead47a80ee4bbb4e244",
+        "bytes": 581119
+      },
+      "collection-metadata.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6b/6b0fe2f66c57196acd5fe4a3572899643d862911461a946937515815cef1f2b0",
+        "sha256": "6b0fe2f66c57196acd5fe4a3572899643d862911461a946937515815cef1f2b0",
+        "bytes": 2734
+      }
+    },
+    "members": 3118,
+    "expanded_bytes": 2871896697,
+    "model_revision": "53a459de5082d318f1737d09b478cf574327cb4bc0a88dc51d438ee69cf2daa9",
+    "all_transferred_files_verified": true,
+    "large_incoming_duplicate_removed_after_verified_CAS_store": true,
+    "producer_primary_not_removed": true,
+    "full_member_restoration_on_Windows_pending": true,
+    "independent_host_restoration_pending": true,
+    "archive_or_model_added_to_Git": false,
+    "scientific_verdict": null
+  },
+  "windows_restoration": {
+    "job": "windows-count-closed-primary-restoration-a1",
+    "owner.json": {
+      "pid": 2792,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134397756169383045"
+    },
+    "terminal.json": {
+      "execution": "completed",
+      "validity": "valid",
+      "primary_restoration_complete": true,
+      "all_processes_closed": true,
+      "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-count-closed-primary-restoration-a1",
+      "native_execution_attested": false,
+      "source_files_not_removed": true,
+      "scientific_verdict": null
+    },
+    "process-result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "not_requested",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 31,
+      "wall_seconds": 22.56619669997599,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-f892fb9d-4bca-4aa0-9b9b-8dbd56b305ef"
+    },
+    "process/owned-process.json": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134397756182321425",
+      "pid": 11808,
+      "job_name": "Local\\TimeLearner-f892fb9d-4bca-4aa0-9b9b-8dbd56b305ef",
+      "runtime_fingerprint": "b66d798e5436ccab902e13c0a9208ac8de0a6626ae3e134fd3bb504777c4b49a",
+      "suspended_until_limits_applied": true
+    },
+    "process/result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "not_requested",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 31,
+      "wall_seconds": 22.56619669997599,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-f892fb9d-4bca-4aa0-9b9b-8dbd56b305ef"
+    },
+    "restoration": {
+      "kind": "timelearner_windows_count_complete_primary_restoration",
+      "schema_version": 1,
+      "archive": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-count-closed-primary-collection-a1\\primary-bundle\\primary.tar.xz",
+        "sha256": "ead9ece2ef1b47f64ead31aace912e8e743ef3b0929dd00c602ca14564ae42ca",
+        "size": 46751168
+      },
+      "bundle": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-count-closed-primary-collection-a1\\primary-bundle\\bundle.json",
+        "sha256": "9d3224624598e775b8864f4234d148f1d8b74c8be6606ead47a80ee4bbb4e244",
+        "size": 581119
+      },
+      "restoration": {
+        "kind": "timelearner_native_bundle_restoration",
+        "schema_version": 1,
+        "archive_sha256": "ead9ece2ef1b47f64ead31aace912e8e743ef3b0929dd00c602ca14564ae42ca",
+        "archive_members_verified": 3118,
+        "retained_regular_files": 3118,
+        "compatibility": "retain-regular-glog-aliases-v1",
+        "omitted_redundant_aliases": [],
+        "source_archive_modified": false,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      },
+      "all_original_member_bytes_verified": true,
+      "producer_original_files_unchanged": true,
+      "verification_on_separate_tree_on_Windows": true,
+      "independent_host_verification": false,
+      "disposable_verified_cache_removed": true,
+      "seconds": 20.161922400002368,
+      "scientific_verdict": null
+    }
+  },
+  "full_member_restoration_on_Windows_verified": true,
+  "independent_host_restoration_pending": true,
+  "original_worker_primary_not_removed": true,
+  "artifact_or_model_in_Git": false,
+  "scientific_verdict": null
+}
