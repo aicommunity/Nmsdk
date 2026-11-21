@@ -1,0 +1,108 @@
+{
+  "kind": "timelearner_three_worker_count_train_progress",
+  "schema_version": 1,
+  "rows": [
+    {
+      "worker": "Elder",
+      "host": "10.245.1.11",
+      "jump_host": "10.245.1.12",
+      "job": "s11-classic-count-training-elder-a1",
+      "topology": "Classic",
+      "pulse_count_M": 4,
+      "normalization": "synapse_count",
+      "tool_root": "401339a0efa7be313385e91446932e2e96998d96",
+      "native_SDK_root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+      "owner_observation": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "ea0282ed856e07dc6d0c5be485c3fe45bafbebcaa56039819f36ecf20dd92c2f",
+          "unit": "timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+          "invocation_id": "b4c947258b63437aa89702d34f6c1834",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+          "initial_main_pid": 2836090,
+          "initial_start_ticks": "486111793",
+          "sha256": "22eba6ed2a2fe6c9792c1ec9c53b946d4a2c89b6564d77139c563433b8ef7e89"
+        }
+      },
+      "observed_utc": "2026-11-21T20:10:44.021681+00:00",
+      "elapsed_wall_seconds": 496.9300000006333,
+      "raw_trial_files_present": 63,
+      "disk_free_bytes": 57705652224,
+      "internal_search_wall_budget_seconds": 32400,
+      "native_wall_budget_seconds": 39600,
+      "whole_job_wall_budget_seconds": 43200,
+      "training_outcome": null,
+      "scientific_verdict": null
+    },
+    {
+      "worker": "M40",
+      "host": "10.245.1.17",
+      "jump_host": "10.245.1.12",
+      "job": "s11-classic-count-training-m40-a1",
+      "topology": "Classic",
+      "pulse_count_M": 4,
+      "normalization": "synapse_count",
+      "tool_root": "401339a0efa7be313385e91446932e2e96998d96",
+      "native_SDK_root": "5b6cb11ee46ae196ecbf81003eec45654b4c3fad",
+      "owner_observation": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "ef7ad78868de3e9515ab94aecf175effaf94b7245a4e1496d59a3b1e7171a222",
+          "unit": "timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+          "invocation_id": "07a94cfc2631458f988f19e653f65489",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+          "initial_main_pid": 173265,
+          "initial_start_ticks": "436251545",
+          "sha256": "dc90ba704f52ae142c785daf02d83f337574c2aa32924bcbf41404056a5f3a81"
+        }
+      },
+      "observed_utc": "2026-11-21T20:10:44.076062+00:00",
+      "elapsed_wall_seconds": 4526.280000000261,
+      "raw_trial_files_present": 130,
+      "disk_free_bytes": 325825445888,
+      "internal_search_wall_budget_seconds": 32400,
+      "native_wall_budget_seconds": 39600,
+      "whole_job_wall_budget_seconds": 43200,
+      "training_outcome": null,
+      "scientific_verdict": null
+    },
+    {
+      "worker": "Windows",
+      "host": "10.245.1.14",
+      "jump_host": "10.245.1.12",
+      "job": "windows-branch-count-m4-a3",
+      "topology": "Branch",
+      "pulse_count_M": 4,
+      "normalization": "synapse_count",
+      "tool_root": "4ce92169a0eaeaa529d4b6978de4f6725fd6df22",
+      "native_SDK_root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+      "owner_observation": {
+        "pid": 19640,
+        "same_creation": true,
+        "same_executable": true,
+        "running": true
+      },
+      "observed_utc": "2026-11-21T20:07:21.769372+00:00",
+      "elapsed_wall_seconds": 25614.66631913185,
+      "raw_trial_files_present": 840,
+      "disk_free_bytes": 1459473948672,
+      "internal_search_wall_budget_seconds": 32400,
+      "native_wall_budget_seconds": 39600,
+      "whole_job_wall_budget_seconds": 43200,
+      "training_outcome": null,
+      "scientific_verdict": null
+    }
+  ],
+  "raw_files_are_not_independent_trainings_or_percent_completion": true,
+  "worker_wall_clocks_not_assumed_synchronized": true,
+  "completed_training_claimed": false,
+  "scientific_verdict": null
+}
