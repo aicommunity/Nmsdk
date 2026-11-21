@@ -7,6 +7,7 @@ import unittest
 
 from .. import learned_evidence, native_pipeline_worker, stopped_evidence
 from ..native_evidence import load, require
+from ..prepared_count_training import matched_count_job
 from ..runtime import file_record
 
 
@@ -21,6 +22,9 @@ class ClosedMatchedCountTrainingTest(unittest.TestCase):
                 terminal['full_primary_audit_complete'] is False,
                 'closed_count_requires_original_closed_pending_audit_attempt')
         job=load(native/'job.json');execution=load(native/'execution.json')
+        original_path=Path(os.environ['TIMELEARNER_MATCHED_COUNT_ORIGINAL'])/'job.json'
+        original=load(original_path)
+        self.assertEqual(job,matched_count_job(original,job['configuration']['run_id'],maximum_synapses=128))
         self.assertEqual(job['configuration']['model']['normalization'],'N0')
         self.assertEqual(len(job['configuration']['model']['inputs']),4)
         self.assertEqual(job['sha256'],terminal['job_sha256'])
@@ -48,6 +52,8 @@ class ClosedMatchedCountTrainingTest(unittest.TestCase):
         self.assertIsNone(audit['evaluation_verdict'])
         result=dict(kind='timelearner_closed_matched_count_training_audit',schema_version=1,
             native=str(native),consumed_job_sha256=job['sha256'],
+            original_resistance_normalization_job=file_record(original_path),
+            original_physics_target_tolerances_and_budgets_preserved=True,
             consumed_job_file=file_record(native/'job.json'),execution_file=file_record(native/'execution.json'),
             original_pending_terminal=file_record(outer/'terminal.json'),source_package=before,
             process_record=file_record(native.parent/'process/result.json'),
