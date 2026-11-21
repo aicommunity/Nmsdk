@@ -1,0 +1,58 @@
+{
+  "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-physical-export-runner-validation-a1",
+  "controller/terminal.json": {
+    "actual_windows_checks_passed": true,
+    "executed": 22,
+    "all_processes_closed": true
+  },
+  "controller/process-result.json": {
+    "kind": "timelearner_windows_process_result",
+    "execution": "completed",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "all_processes_closed": true,
+    "wall_seconds": 48.59658979997039
+  },
+  "tests/test-result.json": {
+    "kind": "timelearner_actual_windows_physical_export_runner_validation",
+    "executed": 22,
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_cancel_before_start_does_not_resume_a_child",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_cancel_running_job",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_changed_runtime_is_refused_before_execution",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_completed_argv_and_unicode_are_not_shell_commands",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_cooperative_boundary_binds_live_creation_identity",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_diagnostic_write_failure_still_releases_worker_lock",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_exit_259_is_a_terminal_nonzero_exit",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_fast_exit_without_requested_boundary_is_not_provenance",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_host_lock_refuses_another_worker",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_invalid_limits_do_not_start_a_child",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_memory_limit_rejects_allocation",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_monitor_error_closes_main_and_descendant_and_releases_lock",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_monitor_observes_the_actual_owned_process",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_remaining_owned_descendant_is_closed_and_not_success",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_same_allocation_succeeds_with_larger_limit",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_timeout_after_capture_preserves_runtime_evidence",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_timeout_closes_the_owned_job",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_windows_gate_specification_declares_process_limits",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_wrong_cooperative_identity_closes_the_owned_process",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_native_cli.WindowsNativeCliTest.test_console_advertises_export_and_evaluation_in_a_closed_owned_job",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_native_cli.WindowsNativeCliTest.test_non_console_executable_is_rejected_after_owned_help",
+      "Scripts.StructTrain.TimeLearner.tests.test_windows_native_cli.WindowsNativeCliTest.test_unknown_operation_is_rejected_before_runtime_or_output_access"
+    ],
+    "skipped": [],
+    "failures": [],
+    "errors": [],
+    "source_clean_after": true,
+    "assertions_passed": true
+  },
+  "owned_process": {
+    "pid": 16248,
+    "open_error": 87
+  },
+  "task": {
+    "last_result": 0,
+    "instances": [],
+    "state": 3
+  }
+}

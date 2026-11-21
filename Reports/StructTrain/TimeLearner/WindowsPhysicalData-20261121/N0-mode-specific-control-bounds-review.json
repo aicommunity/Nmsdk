@@ -1,0 +1,114 @@
+{
+  "source_worker": "windows",
+  "source_controls": "C:/Projects/TimeLearnerWorker/controls/windows-offline-n4-branch-on-a2",
+  "source_job_sha256": "b74a742e9c2b67edb298dd18d23ba9879f14f1c05b2e345b821fc16e599e1eb3",
+  "source_model": {
+    "schema_version": 2,
+    "branch": true,
+    "frequency_hz": 2000,
+    "neuron_class": "TLNativeFast3F2000_Neuron",
+    "dataset_class": "NDatasetMatrix",
+    "generator_class": "NPulseGeneratorTransit",
+    "neuron_structure_mode": 2,
+    "normalization": "N1",
+    "inputs": [
+      {
+        "attachment": 1,
+        "synapses": 1,
+        "resistance": 86000000.0
+      },
+      {
+        "attachment": 1,
+        "synapses": 1,
+        "resistance": 86000000.0
+      },
+      {
+        "attachment": 1,
+        "synapses": 1,
+        "resistance": 86000000.0
+      },
+      {
+        "attachment": 1,
+        "synapses": 1,
+        "resistance": 86000000.0
+      }
+    ],
+    "initial_isi": [
+      0.01,
+      0.08,
+      0.16,
+      0.24
+    ],
+    "allocated_cable_lengths": [
+      1
+    ],
+    "maximum_cable_length": 256,
+    "preserve_allocated_cable": false,
+    "maximum_resistance_ratio": 1000.0,
+    "configured_minimum_resistance": 0.0,
+    "inhibition": [],
+    "scale_inhibition_with_input": true,
+    "allow_muted_input_baseline": false,
+    "initial_threshold": 100.0
+  },
+  "source_search": {
+    "maximum_probes": 160,
+    "maximum_edits": 1280,
+    "maximum_candidates_per_input": 24,
+    "maximum_sweeps": 1,
+    "maximum_invalid_observations": 4,
+    "resistance_subdivision_depth": 8,
+    "bounds": [
+      {
+        "minimum_length": 1,
+        "maximum_length": 256,
+        "minimum_synapses": 1,
+        "maximum_synapses": 1,
+        "minimum_resistance": 1000000.0,
+        "maximum_resistance": 86000000.0
+      },
+      {
+        "minimum_length": 1,
+        "maximum_length": 256,
+        "minimum_synapses": 1,
+        "maximum_synapses": 1,
+        "minimum_resistance": 1000000.0,
+        "maximum_resistance": 86000000.0
+      },
+      {
+        "minimum_length": 1,
+        "maximum_length": 256,
+        "minimum_synapses": 1,
+        "maximum_synapses": 1,
+        "minimum_resistance": 1000000.0,
+        "maximum_resistance": 86000000.0
+      },
+      {
+        "minimum_length": 1,
+        "maximum_length": 1,
+        "minimum_synapses": 1,
+        "maximum_synapses": 1,
+        "minimum_resistance": 86000000.0,
+        "maximum_resistance": 86000000.0
+      }
+    ],
+    "tolerances": {
+      "amplitude_absolute": 1e-05,
+      "amplitude_relative": 0.0,
+      "sync": 0.02
+    }
+  },
+  "new_N0_train_started": false,
+  "source_N1_bounds_are_not_a_defect": true,
+  "required_N0_declaration": {
+    "learnable_synapses": "bounded integer search on non-anchor inputs; subject to native admissibility",
+    "fixed_resistance": 86000000.0,
+    "anchor": {
+      "synapses": 1,
+      "resistance": 86000000.0,
+      "length": 1
+    }
+  },
+  "scientific_verdict": null,
+  "simple_flag_switch_leaves_synapse_count_fixed": true
+}
