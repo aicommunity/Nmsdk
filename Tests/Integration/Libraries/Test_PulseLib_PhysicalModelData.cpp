@@ -4,6 +4,7 @@
 #include "TimeLearner/NativePhysicalModelData.h"
 #include "TimeLearner/NativeRecognitionState.h"
 #include "TimeLearner/NativeRecognitionTrial.h"
+#include "TimeLearner/NativeRecognitionObservationValidation.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -39,24 +40,25 @@ struct Fixture {
             sourceNeuron=0;sourceDataset=0;environment->DestroyModel();
         }
     }
-    template<class Owner> void Create()
+    template<class Owner> void Create(unsigned frequency=2000)
     {
         const bool branch=std::is_same_v<Owner,NNeuronTimeLearnerBranch>;
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();storage=core.storage;environment=core.environment;
         environment->DestroyModel();environment->SetUseIndTimeStepFlag(false);environment->GetTime().SetTime(0);
-        ASSERT_TRUE(environment->CreateModel("NModel"));auto model=environment->GetModel();model->SetGlobalTimeStep(2000);
+        ASSERT_TRUE(environment->CreateModel("NModel"));auto model=environment->GetModel();model->SetGlobalTimeStep(frequency);
         auto owner=dynamic_pointer_cast<Owner>(storage->TakeObject(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
         ASSERT_TRUE(owner);owner->Name="Source";UEPtr<UContainer> component=owner;
-        ASSERT_NE(model->AddComponent(component),ForbiddenId);owner->SetGlobalTimeStep(2000);
+        ASSERT_NE(model->AddComponent(component),ForbiddenId);owner->SetGlobalTimeStep(frequency);
         ConfiguredNativeTraining configuration;auto& declaration=configuration.model;
-        declaration.branch=branch;declaration.frequencyHz=2000;declaration.neuronClass="NSPNeuronGen";
+        declaration.branch=branch;declaration.frequencyHz=frequency;declaration.neuronClass="NSPNeuronGen";
         declaration.normalization=Normalization::SynapseCount;declaration.inputs={{2,2,86e6},{1,1,91e6}};
         declaration.initialIsi={.01,.08};declaration.editPolicy.normalization=Normalization::SynapseCount;
         declaration.editPolicy.maximumCableLength=8;
-        configuration.stimulusProfile={"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+        configuration.stimulusProfile={"NPulseGeneratorTransit",1.,.001,double(frequency),0.,false,false};
         configuration.runId=branch?"physical-data-branch":"physical-data-classic";
         configuration.protocolRevision="physical-data-reference-v1";configuration.duration=.3;
-        configuration.maximumSampleGap=.0005;configuration.maximumSamples=1001;
+        configuration.maximumSampleGap=1./frequency;
+        configuration.maximumSamples=std::max(std::size_t(1001),std::size_t(std::ceil(configuration.duration*frequency))+1);
         configuration.windows={{0.,.15},{.08,.25}};
         configuration.search.normalization=Normalization::SynapseCount;
         configuration.search.maximumProbes=32;configuration.search.maximumEdits=16;
@@ -375,6 +377,133 @@ TEST(NativePhysicalModelData,ClassicFrozenDataMatchesFullSourceTargetAndFoilWith
 {FrozenDataMatchesOriginalRecognition<NNeuronTimeLearner>();}
 TEST(NativePhysicalModelData,BranchFrozenDataMatchesFullSourceTargetAndFoilWithoutProofAuthority)
 {FrozenDataMatchesOriginalRecognition<NNeuronTimeLearnerBranch>();}
+
+template<class Owner> void FrozenPhysicalDynamicsContinuity(unsigned frequency)
+{
+    Fixture fixture;fixture.Create<Owner>(frequency);ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    constexpr bool branch=std::is_same_v<Owner,NNeuronTimeLearnerBranch>;
+    const auto recognition=ConvertNativeStoppedToDiagnosticRecognition(fixture.source,NativeRecognitionSpec{},
+        fixture.storage,fixture.environment,Implementation);
+    const auto data=ExportNativePhysicalModelData(recognition,fixture.storage,fixture.environment,Implementation);
+    auto model=fixture.environment->GetModel();
+    const auto create=[&](const char* name) {
+        auto owner=dynamic_pointer_cast<Owner>(fixture.storage->TakeObject(branch?
+            "NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
+        if(!owner)throw std::runtime_error("continuity_fixture_owner_missing");
+        owner->Name=name;owner->SetEnvironment(fixture.environment);owner->SetGlobalTimeStep(frequency);
+        UEPtr<UContainer> component=owner;
+        if(model->AddComponent(component)==ForbiddenId)throw std::runtime_error("continuity_fixture_attach_failed");
+        const auto installed=owner->ImportNativePhysicalModelData(data,Implementation);
+        if(installed.status!=NativeModelBuildStatus::Adopted)throw std::runtime_error(installed.reason);
+        owner->Init();return owner;
+    };
+    auto reset=create("ResetControl"),preserve=create("PreservedControl");
+    model->Init();model->Reset();
+    // End just after the second physical pulse. A long quiet tail would erase
+    // the positive control and could not distinguish a real preserve from reset.
+    const std::size_t trialTicks=std::size_t(frequency)*91/1000+4;
+    const double duration=double(trialTicks)/frequency;
+    const auto request=[&](const std::string& run,int index,RecognitionResetPolicy policy) {
+        NativeRecognitionTrialRequest q;q.runId=run;q.trialId=run+"/"+std::to_string(index);
+        q.sampleId="target";q.label="target";q.pattern.Assign(2,1,0.);
+        q.pattern(0,0)=.01;q.pattern(1,0)=.08;
+        q.patternHash=NmsdkTools::CanonicalModelDataSha256(QJsonArray{.01,.08}).toStdString();
+        q.duration=duration;q.maximumSamples=trialTicks+1;q.resetPolicy=policy;q.recordThresholdPotential=true;
+        return q;
+    };
+    const auto somas=[&](UEPtr<Owner> owner) {
+        auto neuron=owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+        if(!neuron)throw std::runtime_error("continuity_fixture_neuron_missing");
+        std::vector<double> values;
+        for(std::size_t i=0;i<(branch?1u:2u);++i)
+        {
+            auto soma=neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);
+            if(!soma || soma->SumPotential.GetRows()!=1 || soma->SumPotential.GetCols()!=1)
+                throw std::runtime_error("continuity_fixture_soma_missing");
+            values.push_back(soma->SumPotential(0,0));
+        }
+        return values;
+    };
+    QJsonArray observations;std::vector<double> baseline,priorEnd;
+    double preservedDifference=0.;
+    for(int iteration=0;iteration<2;++iteration)
+    {
+        const auto a=request("reset",iteration,RecognitionResetPolicy::PerTrial);
+        const auto b=request("preserve",iteration,iteration==0?RecognitionResetPolicy::PerTrial:
+                                                                     RecognitionResetPolicy::PreserveNeuronDynamics);
+        reset->QueueNativeRecognitionTrial(a);preserve->QueueNativeRecognitionTrial(b);
+        std::optional<NativeRecognitionTrialObservation> left,right;
+        std::vector<std::vector<double>> independentLeft,independentRight;
+        std::vector<double> independentTimes;
+        for(std::size_t tick=0;tick<trialTicks+2 && (!left || !right);++tick)
+        {
+            const double time=fixture.environment->GetTime().GetDoubleTime();
+            model->Calculate(); // One parent tick; neither owner is calculated separately.
+            independentTimes.push_back(time);independentLeft.push_back(somas(reset));independentRight.push_back(somas(preserve));
+            fixture.environment->IncreaseModelTimeByStep();
+            if(!left)left=reset->TakeNativeRecognitionTrialResult();
+            if(!right)right=preserve->TakeNativeRecognitionTrialResult();
+        }
+        ASSERT_TRUE(left);ASSERT_TRUE(right);ASSERT_TRUE(left->valid)<<left->reason;ASSERT_TRUE(right->valid)<<right->reason;
+        ValidateNativeRecognitionObservation(a,*left);ValidateNativeRecognitionObservation(b,*right);
+        ASSERT_EQ(left->samples.size(),trialTicks+1);ASSERT_EQ(right->samples.size(),left->samples.size());
+        ASSERT_EQ(independentTimes.size(),left->samples.size());
+        for(std::size_t i=0;i<left->samples.size();++i)
+        {
+            EXPECT_DOUBLE_EQ(left->samples[i].time,independentTimes[i]);
+            EXPECT_DOUBLE_EQ(right->samples[i].time,independentTimes[i]);
+            EXPECT_EQ(left->samples[i].somaPotentials,independentLeft[i]);
+            EXPECT_EQ(right->samples[i].somaPotentials,independentRight[i]);
+            if(iteration==0)EXPECT_EQ(left->samples[i].somaPotentials,right->samples[i].somaPotentials);
+        }
+        EXPECT_EQ(left->modelBefore,data["model_revision"].toString().toStdString());
+        EXPECT_EQ(left->modelAfter,left->modelBefore);EXPECT_EQ(right->modelBefore,left->modelBefore);
+        EXPECT_EQ(right->modelAfter,left->modelBefore);
+        if(iteration==0)
+        {
+            baseline=left->samples.front().somaPotentials;priorEnd=left->samples.back().somaPotentials;
+            double signal=0.;
+            for(std::size_t i=0;i<baseline.size();++i)signal=std::max(signal,std::abs(priorEnd[i]-baseline[i]));
+            ASSERT_GT(signal,1.e-6)<<"No residual physical response at the declared boundary";
+        }
+        else
+        {
+            EXPECT_EQ(left->samples.front().somaPotentials,baseline); // Model-native rest, not an assumed zero.
+            for(std::size_t i=0;i<baseline.size();++i)
+                preservedDifference=std::max(preservedDifference,std::abs(right->samples.front().somaPotentials[i]-baseline[i]));
+            EXPECT_GT(preservedDifference,1.e-6)<<"Preserve did not retain the measured physical dynamics";
+            const auto previous=observations.first().toObject()["reset"].toObject();
+            EXPECT_NEAR(left->begin,previous["end"].toDouble()+1./frequency,1.e-12);
+            EXPECT_NEAR(right->begin,left->begin,1.e-12);
+            EXPECT_EQ(left->samples.front().stimulus,0.);EXPECT_EQ(right->samples.front().stimulus,0.);
+        }
+        EXPECT_EQ(reset->ExportNativePhysicalModelData(Implementation),data);
+        EXPECT_EQ(preserve->ExportNativePhysicalModelData(Implementation),data);
+        EXPECT_EQ(reset->NativeTrainingController().State(),NativeTrainingState::Idle);
+        EXPECT_EQ(preserve->NativeTrainingController().State(),NativeTrainingState::Idle);
+        EXPECT_FALSE(reset->IsNeedToTrain.GetData());EXPECT_FALSE(preserve->IsNeedToTrain.GetData());
+        observations.append(QJsonObject{{"reset",NativeRecognitionTrialJson(*left)},
+                                       {"preserve",NativeRecognitionTrialJson(*right)}});
+    }
+    if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+    {
+        const auto stem=QString("physical-continuity-")+(branch?"Branch":"Classic")+"-"+QString::number(frequency);
+        QFile file(QDir(QString::fromLocal8Bit(output)).filePath(stem+".json"));
+        ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+        const auto bytes=QJsonDocument(QJsonObject{{"kind","timelearner_physical_dynamics_continuity_fixture"},
+            {"schema_version",1},{"frequency_hz",double(frequency)},{"model_data_sha256",data["sha256"]},
+            {"model_revision",data["model_revision"]},{"observations",observations},
+            {"preserved_first_sample_difference",preservedDifference},
+            {"new_training_performed",false},{"production_continuous_wrapper_verified",false},
+            {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson();
+        ASSERT_EQ(file.write(bytes),bytes.size());
+    }
+}
+
+TEST(NativePhysicalDynamicsContinuity,Classic2000){FrozenPhysicalDynamicsContinuity<NNeuronTimeLearner>(2000);}
+TEST(NativePhysicalDynamicsContinuity,Branch2000){FrozenPhysicalDynamicsContinuity<NNeuronTimeLearnerBranch>(2000);}
+TEST(NativePhysicalDynamicsContinuity,Classic20000){FrozenPhysicalDynamicsContinuity<NNeuronTimeLearner>(20000);}
+TEST(NativePhysicalDynamicsContinuity,Branch20000){FrozenPhysicalDynamicsContinuity<NNeuronTimeLearnerBranch>(20000);}
 
 TEST(NativePhysicalModelData,FrozenDataRejectsSoloAndResignedThresholdMetadata)
 {
