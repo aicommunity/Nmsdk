@@ -77,5 +77,9 @@ Gate имеет `completed/valid/passed`; ошибок захвата и над�
 
 [Квитанция выполнения](../../../Reports/StructTrain/TimeLearner/NativeDynamicsContinuity-20261121/native-completion.json)
 и [сводка четырёх наблюдений](../../../Reports/StructTrain/TimeLearner/NativeDynamicsContinuity-20261121/measured-continuity.json).
-Полные файлы пока находятся в отдельном readbacks-каталоге M40;
-центральный архив этих новых тестов ещё требуется. Исходные данные сохраняются.
+Полные данные, наблюдения, постановка, сведения о сборке и закрытии процессов
+упакованы в114 членов,37366223байта после восстановления. Контейнер1244508байт
+с SHA256 `ab7f007152e9ee041c28f1de7a7721e8945ffc2fd8abdcdeea3198bbabef585d`
+сохранён и сверён в центральном архиве M40. Независимая проверка восстановления
+этого нового контейнера ещё требуется; исходные readbacks сохраняются.
+[Ссылки CAS](../../../Reports/StructTrain/TimeLearner/NativeDynamicsContinuity-20261121/full-primary-archive.json).

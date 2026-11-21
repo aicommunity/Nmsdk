@@ -396,6 +396,12 @@ def _audit_execution(mode, directory, job, source_case=None, *, historical_evalu
                 and execution["diagnostic_only"] is True and execution["source_stopped_sha256"] == job["source_stopped"]["sha256"]
                 and execution["training_outcome"] == job["source_stopped"]["training_outcome"]
                 and execution["training_reason"] == job["source_stopped"]["reason"], "pipeline_diagnostic_model_changed")
+        if historical_evaluation_reset:
+            # Recognition auditor2 required exact image-definition bytes. Its
+            # archived result cannot inherit auditor3's XML portability scope.
+            require(context['neuron']['class_definitions'] ==
+                    context['source_solo']['neuron']['class_definitions'],
+                    'historical_reset_recognition_images_not_byte_equal')
         diagnostic_audit = audit_diagnostic_recognition(model, source_case)
     else:
         require(model == job["source_recognition"], "pipeline_frozen_source_changed")
@@ -580,6 +586,57 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     return result
 
 
+def _historical_reset_analysis(old, current, mode, job):
+    """Project only the audited recognition2 -> recognition3 metadata change.
+
+    Every numerical field, source audit and threshold proof remains identical.
+    The native audit above additionally enforces the original image byte scope.
+    """
+    if old == current and sha(old) == sha(current):
+        return current
+    require(mode == 'diagnostic-evaluate' and type(old) is dict and type(current) is dict,
+            'unsupported_historical_reset_analysis_transition')
+
+    def recognition(previous, measured):
+        require(type(previous) is dict and type(measured) is dict and
+                type(previous.get('auditor_version')) is int and previous['auditor_version'] == 2 and
+                type(measured.get('auditor_version')) is int and measured['auditor_version'] == 3 and
+                'storage_images' not in previous and
+                type(measured.get('storage_images')) is dict and
+                measured['storage_images'].get('xml_documents_byte_equal') is True,
+                'unsupported_historical_reset_recognition_version')
+        images = measured['storage_images']
+        require(set(images) == {'comparison','definitions','storage_images_sha256',
+                               'xml_documents_byte_equal','native_xml_reconstruction_verified'} and
+                images['comparison'] == 'validated-semantic-storage-images-v1' and
+                type(images['definitions']) is int and images['definitions'] >= 0 and
+                type(images['storage_images_sha256']) is str and
+                len(images['storage_images_sha256']) == 64 and
+                all(c in '0123456789abcdef' for c in images['storage_images_sha256']) and
+                images['native_xml_reconstruction_verified'] is False,
+                'unsupported_historical_reset_image_audit')
+        projected = {k:v for k,v in measured.items() if k != 'storage_images'}
+        projected['auditor_version'] = 2
+        require(previous == projected and sha(previous) == sha(projected),
+                'historical_reset_recognition_analysis_changed')
+        return projected
+
+    def diagnostic(previous, measured):
+        if job['schema_version'] == 1:
+            return recognition(previous, measured)
+        require(job['schema_version'] == 2 and type(previous) is dict and type(measured) is dict and
+                previous.get('schema_version') == measured.get('schema_version') == 1,
+                'unsupported_historical_reset_threshold_proof')
+        return {**measured, 'source_audit': recognition(previous['source_audit'], measured['source_audit'])}
+
+    projected = {**current,
+        'source_diagnostic_audit': diagnostic(old['source_diagnostic_audit'], current['source_diagnostic_audit']),
+        'metrics': {**current['metrics'], 'source_diagnostic_audit': diagnostic(
+            old['metrics']['source_diagnostic_audit'], current['metrics']['source_diagnostic_audit'])}}
+    require(old == projected and sha(old) == sha(projected), 'historical_reset_evaluation_analysis_changed')
+    return projected
+
+
 @_evidence_boundary
 def audit_run_manifest(path, *, historical_analysis=None):
     """Recompute portable source, native result and process/runtime bindings."""
@@ -736,8 +793,9 @@ def audit_run_manifest(path, *, historical_analysis=None):
             projected = {**current, 'auditor_version': 3}
         comparison = {**audit, 'training_audit': projected};adapter_used = True
     elif historical_reset:
-        # A read-only adapter for already recorded observations, never a route
-        # around new-job admission. No fields or numerical results are projected.
+        # This known audit-metadata transition never changes observations or
+        # numerical results and cannot authorize a new native operation.
+        comparison = _historical_reset_analysis(manifest['analysis'], audit, mode, job)
         adapter_used = True
     require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
             "pipeline_run_analysis_changed")

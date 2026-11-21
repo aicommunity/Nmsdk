@@ -1,4 +1,5 @@
 """Read real archived preserve-dynamics results without admitting new jobs."""
+from copy import deepcopy
 import json
 import os
 from pathlib import Path
@@ -8,7 +9,9 @@ import unittest
 from ..external_archive import locate, resolve
 from ..model_identity import canonical_model_sha256
 from ..native_evidence import EvidenceError, load
-from ..native_pipeline_worker import audit_run_manifest, validate_job, _load_source_case, _validate_job
+from ..native_pipeline_worker import (audit_run_manifest, validate_job, _load_source_case,
+                                      _validate_job, _historical_reset_analysis)
+from ..recognition_evidence import audit_recognition_images
 from ..portable_primary import ALIAS_ADAPTER, restore_native_bundle
 from ..runtime import file_record
 
@@ -54,9 +57,38 @@ class HistoricalEvaluationResetAnalysisTest(unittest.TestCase):
                 changed['sha256']=canonical_model_sha256(changed)
                 with self.assertRaisesRegex(EvidenceError,'unsupported_pipeline_historical_reset_scope'):
                     _validate_job('diagnostic-evaluate',changed,source,historical_evaluation_reset=True)
+                # Exercise the exact metadata transition using this real old
+                # analysis and its validated image definitions. No expensive
+                # native source audit is bypassed by the positive check above.
+                previous = load(manifest)['analysis'];current = deepcopy(previous)
+                definitions = source[0]['neuron']['class_definitions']
+                for proof in (current['source_diagnostic_audit'],current['metrics']['source_diagnostic_audit']):
+                    leaf = proof['source_audit'] if job['schema_version']==2 else proof
+                    self.assertEqual(leaf['auditor_version'],2)
+                    leaf['auditor_version']=3
+                    leaf['storage_images']=audit_recognition_images(definitions,definitions)
+                self.assertEqual(_historical_reset_analysis(previous,current,'diagnostic-evaluate',job),previous)
+                for mutation in ('count','bool_count','auditor','source','unknown','image_scope','image_field'):
+                    saved,measured=deepcopy(previous),deepcopy(current)
+                    if mutation in ('count','bool_count'):
+                        saved['metrics']['pooled_counts']['TP']=2 if mutation=='count' else True
+                    else:
+                        proof=saved['source_diagnostic_audit']
+                        leaf=proof['source_audit'] if job['schema_version']==2 else proof
+                        if mutation=='auditor':leaf['auditor_version']=99
+                        elif mutation=='source':leaf['source_audit']['model_revision']='0'*64
+                        elif mutation=='unknown':leaf['unknown_field']=None
+                        else:
+                            proof=measured['source_diagnostic_audit']
+                            leaf=proof['source_audit'] if job['schema_version']==2 else proof
+                            if mutation=='image_scope':leaf['storage_images']['xml_documents_byte_equal']=False
+                            else:leaf['storage_images']['unknown_field']=None
+                    with self.subTest(run=name,mutation=mutation),self.assertRaises(EvidenceError):
+                        _historical_reset_analysis(saved,measured,'diagnostic-evaluate',job)
                 self.assertEqual(file_record(manifest),recorded)
                 rows.append(dict(name=name,audit=audit,counts=metrics['pooled_counts'],source_manifest=recorded,
-                                 new_job_rejected=True,unknown_historical_reset_rejected=True))
+                                 new_job_rejected=True,unknown_historical_reset_rejected=True,
+                                 recognition_metadata_transition_negative_checks=7))
         self.assertEqual(file_record(archive),before)
         proof = dict(kind='timelearner_historical_evaluation_reset_readback',schema_version=1,
             archive_reference=reference,restoration=recovery,rows=rows,original_artifacts_changed=False,

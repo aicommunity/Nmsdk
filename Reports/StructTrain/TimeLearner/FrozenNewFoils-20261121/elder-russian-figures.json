@@ -1,0 +1,171 @@
+{
+  "kind": "timelearner_classic_new_foil_russian_figure_evidence",
+  "schema_version": 1,
+  "dispatch": {
+    "dispatched": true,
+    "name": "s11-new-foil-publication-figures-elder-a1",
+    "controls_commit": "4b3851a0a44417826dbcce323f398f8820981d6e",
+    "code_root": "979adfd538cfc5cecf85758d2d5fbaa159f30c25",
+    "supervisor_pid": 2627719,
+    "output": "/home/user/timelearner-refactor/report-cache/2026-11-21/frozen-new-foils-classic-russian-figures-a1",
+    "expected_trials": 27,
+    "new_model_execution": false,
+    "publication_ready": false
+  },
+  "completion": {
+    "name": "s11-new-foil-publication-figures-elder-a1",
+    "output": "/home/user/timelearner-refactor/report-cache/2026-11-21/frozen-new-foils-classic-russian-figures-a1",
+    "png_files_present": 27,
+    "process-result.json": {
+      "kind": "timelearner_process_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 30.144309991039336,
+      "model_time": null,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "runtime_fingerprint": "6a071c6aca943cece571e528d8449a7d33339a6399276bb3b20d3ea994d7d146",
+      "ownership_scope": "bound_cgroup",
+      "all_processes_closed": true,
+      "scientific_verdict": null,
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "clear",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 0,
+        "reasons": [],
+        "examples": [],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    },
+    "render-result.json": {
+      "kind": "timelearner_russian_new_foil_figure_completion",
+      "schema_version": 1,
+      "source_manifest_sha256": "5d5ff341ce962764c3fe39fa26a2bb5f91c5cc83a7c133da9f3ab0d3bfd1a139",
+      "source_archive": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/5c/5cfcd21f366ada7badd247a19a9d4b86e20b66c11f329018aa8f2634294239ca",
+        "sha256": "5cfcd21f366ada7badd247a19a9d4b86e20b66c11f329018aa8f2634294239ca",
+        "bytes": 2698140
+      },
+      "trial_count": 27,
+      "all_patterns_with_actual_input_overlay": true,
+      "source_files_unchanged": true,
+      "source_samples_per_trial": 4001,
+      "downsampling": false,
+      "classification_recomputed": false,
+      "visually_reviewed": false,
+      "publication_ready": false,
+      "figure_catalog": {
+        "path": "/home/user/timelearner-refactor/report-cache/2026-11-21/frozen-new-foils-classic-russian-figures-a1/figures/manifest.json",
+        "sha256": "ce8721a39d5bc119ca74f710902e4598a2aa22691df860f6abb3cf3447bedc58",
+        "size": 51179
+      },
+      "scientific_verdict": null
+    },
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "284b70d0282d206b469bd8eee988b3ae83b4148ca8a868e0fa424be6e893894c",
+        "unit": "timelearner-7470384b-4d75-4a14-aa46-b2ea5f44f80d.service",
+        "invocation_id": "6f7a7e9e3b5a498eb7339d129214e92b",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7470384b-4d75-4a14-aa46-b2ea5f44f80d.service",
+        "initial_main_pid": 2627736,
+        "initial_start_ticks": "485190090",
+        "sha256": "fc90c8cb2de77336a443655c60c9181d5c6089d15f0ada29ea901e4f69c60422"
+      }
+    },
+    "supervisor.log": "",
+    "stderr.log": ""
+  },
+  "central_storage": {
+    "kind": "timelearner_classic_russian_new_foil_figure_cache",
+    "schema_version": 1,
+    "source_cache": "/home/user/timelearner-refactor/report-cache/2026-11-21/frozen-new-foils-classic-russian-figures-a1/figures",
+    "central_cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-21/frozen-new-foils-classic-russian-figures-a1/figures",
+    "archive_bytes": 4577564,
+    "archive_sha256": "6bd6851f3d07746fa80e7b2775de01c5788696fbd6c764cb0f4fdee7bc89cc85",
+    "files": 55,
+    "patterns": 27,
+    "all_patterns_with_actual_input_overlay": true,
+    "source_samples_per_trial": 4001,
+    "downsampling": false,
+    "classification_recomputed": false,
+    "source_archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/5c/5cfcd21f366ada7badd247a19a9d4b86e20b66c11f329018aa8f2634294239ca",
+      "sha256": "5cfcd21f366ada7badd247a19a9d4b86e20b66c11f329018aa8f2634294239ca",
+      "bytes": 2698140
+    },
+    "figure_catalog_sha256": "ce8721a39d5bc119ca74f710902e4598a2aa22691df860f6abb3cf3447bedc58",
+    "visual_review_scope": "Local selected TN0 FP2 TP13 only; all 27 and Word scale still pending",
+    "publication_ready": false,
+    "source_originals_retained": true,
+    "scientific_verdict": null
+  },
+  "visual_review": {
+    "selected_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26
+    ],
+    "all27_reviewed": true,
+    "Word_scale_reviewed": false,
+    "all_four_false_positives_reviewed": true,
+    "remaining_indices": [],
+    "full_window_positive_detail_requires_additional_zooms": true
+  },
+  "publication_ready": false,
+  "DOCX_v4_unchanged": true,
+  "scientific_verdict": null
+}
