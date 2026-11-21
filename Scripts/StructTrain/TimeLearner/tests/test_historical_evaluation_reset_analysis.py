@@ -1,4 +1,4 @@
-"""Read real archived preserve-dynamics results without admitting new jobs."""
+"""Keep archived preflight distinct from the new declared presentation contract."""
 from copy import deepcopy
 import json
 import os
@@ -17,7 +17,7 @@ from ..runtime import file_record
 
 
 class HistoricalEvaluationResetAnalysisTest(unittest.TestCase):
-    def test_actual_preserve_results_are_readable_but_cannot_admit_a_new_execution(self):
+    def test_archived_preserve_results_keep_their_adapter_and_new_jobs_declare_presentation(self):
         package = Path(os.environ['TIMELEARNER_HISTORICAL_RESET_PACKAGE'])
         metadata = locate(package/'bundle.json');bundle = load(metadata)
         reference = load(package/'primary.tar.xz.archive.json');archive = resolve(reference)
@@ -39,7 +39,7 @@ class HistoricalEvaluationResetAnalysisTest(unittest.TestCase):
                 job = load(run/'input/job.json')
                 self.assertEqual(job['coverage_policy'],'per_trial_windows')
                 self.assertTrue(all(t['reset_policy']=='preserve_neuron_dynamics' for t in job['trials']))
-                with self.assertRaisesRegex(EvidenceError,'pipeline_reset_policy_not_yet_verified'):
+                with self.assertRaisesRegex(EvidenceError,'pipeline_run_preflight_changed'):
                     audit_run_manifest(manifest)
                 audit = audit_run_manifest(manifest,historical_analysis='evaluation-v1-native-reset-policy')
                 self.assertTrue(audit['run_evidence_consistent'])
@@ -50,8 +50,11 @@ class HistoricalEvaluationResetAnalysisTest(unittest.TestCase):
                 metrics = load(manifest)['analysis']['metrics']
                 self.assertEqual(tuple(metrics['pooled_counts'][k] for k in ('TP','FP','FN','TN')),(1,1,0,6))
                 source = _load_source_case('diagnostic-evaluate',run/load(manifest)['source_package_path'])
-                with self.assertRaisesRegex(EvidenceError,'pipeline_reset_policy_not_yet_verified'):
-                    validate_job('diagnostic-evaluate',job,source)
+                new_preflight=validate_job('diagnostic-evaluate',job,source)
+                self.assertEqual(new_preflight['evaluation_presentation']['reset_policies'],
+                                 ['preserve_neuron_dynamics'])
+                self.assertTrue(new_preflight['native_configuration_validation_required'])
+                self.assertFalse(new_preflight['effective_model_checked'])
                 changed = {**job,'trials':[dict(t) for t in job['trials']]}
                 changed['trials'][-1]['reset_policy']='unknown_reset_policy';changed.pop('sha256')
                 changed['sha256']=canonical_model_sha256(changed)
@@ -87,7 +90,7 @@ class HistoricalEvaluationResetAnalysisTest(unittest.TestCase):
                         _historical_reset_analysis(saved,measured,'diagnostic-evaluate',job)
                 self.assertEqual(file_record(manifest),recorded)
                 rows.append(dict(name=name,audit=audit,counts=metrics['pooled_counts'],source_manifest=recorded,
-                                 new_job_rejected=True,unknown_historical_reset_rejected=True,
+                                 new_execution_requires_new_presentation_contract=True,unknown_historical_reset_rejected=True,
                                  recognition_metadata_transition_negative_checks=7))
         self.assertEqual(file_record(archive),before)
         proof = dict(kind='timelearner_historical_evaluation_reset_readback',schema_version=1,

@@ -86,11 +86,17 @@ class FrozenDataPrimaryRestorationTest(unittest.TestCase):
                             changed['trials'][index]['reset_policy'] = policy
                             changed.pop('sha256')
                             changed['sha256'] = canonical_model_sha256(changed)
-                            with self.assertRaisesRegex(EvidenceError, 'pipeline_reset_policy_not_yet_verified'):
-                                validate_job('physical-model-evaluate', changed, source_case)
+                            if policy == 'preserve_neuron_dynamics':
+                                preflight = validate_job('physical-model-evaluate', changed, source_case)
+                                self.assertIn('evaluation_presentation', preflight)
+                                self.assertFalse(preflight['effective_model_checked'])
+                            else:
+                                with self.assertRaisesRegex(EvidenceError, 'pipeline_unknown_reset_policy'):
+                                    validate_job('physical-model-evaluate', changed, source_case)
                 rows.append(dict(relative=relative, trials=count, counts=metrics['pooled_counts'],
                                  production_manifest_audited=True, complete_observations_checked=True,
-                                 unsupported_reset_preflight_rejected=True))
+                                 preserve_requires_new_presentation_declaration=True,
+                                 unknown_reset_preflight_rejected=True))
         self.assertEqual(file_record(archive), before)
         proof = dict(kind='timelearner_frozen_data_primary_restoration_proof',schema_version=1,
             archive_reference=reference,source_archive=before,restoration=receipt,

@@ -143,9 +143,11 @@ def _validate_job(mode, job, source_case=None, *, historical_evaluation_reset=Fa
         require(job["owner_class"] == "NNeuronTimeLearner"+("Branch" if config["model"]["branch"] else "") and
                 1 <= count(job["maximum_model_ticks"]) <= 1000000000, "pipeline_owner_or_tick_budget_invalid")
     if mode in ("evaluate", "diagnostic-evaluate", "physical-model-evaluate"):
-        # Version 1 deliberately supports only the verified reset-per-trial path.
-        # The native continuous option remains outside this production wrapper.
-        require(job["coverage_policy"] == "per_trial_windows", "pipeline_continuous_stream_not_yet_verified")
+        # Coverage and physical reset are independent declarations. Continuous
+        # coverage is verified from every recorded boundary by the scorer;
+        # preservation never implies that an unobserved gap may be ignored.
+        require(job["coverage_policy"] in ("per_trial_windows", "continuous_native_stream"),
+                "unknown_evaluation_coverage")
         trials = job["trials"]
         require(type(trials) is list and 1 <= len(trials) <= 10000 and type(job["run_id"]) is str and job["run_id"],
                 "invalid_evaluation_trial_design")
@@ -153,18 +155,29 @@ def _validate_job(mode, job, source_case=None, *, historical_evaluation_reset=Fa
         require(all(type(t) is dict and set(t) == REQUEST_FIELDS and t["run_id"] == job["run_id"] for t in trials),
                 "invalid_evaluation_trial_scope")
         if historical_evaluation_reset:
-            require(all(t['reset_policy'] in ('reset_per_trial','preserve_neuron_dynamics') for t in trials) and
+            require(job['coverage_policy'] == 'per_trial_windows' and
+                    all(t['reset_policy'] in ('reset_per_trial','preserve_neuron_dynamics') for t in trials) and
                     any(t['reset_policy']=='preserve_neuron_dynamics' for t in trials),
                     'unsupported_pipeline_historical_reset_scope')
         else:
-            require(all(t["reset_policy"] == "reset_per_trial" for t in trials),
-                    "pipeline_reset_policy_not_yet_verified")
+            require(all(t['reset_policy'] in ('reset_per_trial','preserve_neuron_dynamics') for t in trials),
+                    'pipeline_unknown_reset_policy')
         require(len({t["trial_id"] for t in trials}) == len(trials), "duplicate_evaluation_trial")
         if mode in ("diagnostic-evaluate", "physical-model-evaluate"):
             require(len(trials) >= 2 and {t["label"] for t in trials} == {"target", "foil"},
                     "incomplete_diagnostic_evaluation_labels")
     result = {"job_sha256": job["sha256"], "primary_source_checked": mode not in ("train", "preflight"),
               "effective_model_checked": False, "native_configuration_validation_required": True}
+    if mode in ('evaluate','diagnostic-evaluate','physical-model-evaluate') and not historical_evaluation_reset and (
+            job['coverage_policy'] == 'continuous_native_stream' or
+            any(t['reset_policy'] == 'preserve_neuron_dynamics' for t in job['trials'])):
+        # A new execution records this contract. Old preserve manifests retain
+        # their old preflight through the explicit read-only historical adapter.
+        # This declaration is not native execution attestation or a PASS.
+        result['evaluation_presentation'] = dict(schema_version=1,
+            coverage_policy=job['coverage_policy'],
+            reset_policies=sorted({t['reset_policy'] for t in job['trials']}),
+            complete_primary_observations_required=True, frozen_model_required=True)
     if mode == "physical-model-evaluate":
         result.update(data_only=True, source_training_evidence_checked=False, training_certificate_transferred=False)
     from .terminal_configuration import underlying_configuration_schema
