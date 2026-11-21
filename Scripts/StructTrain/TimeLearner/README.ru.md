@@ -9,6 +9,16 @@
 
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
 
+Для большого уже проверенного JSON-пакета доступен отдельный транспорт
+`python -m Scripts.StructTrain.TimeLearner.json_transport SOURCE DESTINATION
+--expected-bytes BYTES --expected-sha256 RAW_SHA --manifest MANIFEST`.
+Размер и raw SHA берутся из исходной записи артефакта. Удаляются только
+пробелы JSON вне строк; содержимое строк, числовые токены, параметры и вся
+история сохраняются. Исходный файл не изменяется. Это не валидатор модели:
+перед Test обязательны штатное строгое чтение, проверка semantic package SHA
+и связи с исходным исполнением. Новый файл и `.pending` не перезаписываются;
+после ошибки неполный `.pending` не является опубликованным пакетом.
+
 Для записанного `physical-model-evaluate` предусмотрен тот же построитель
 графиков: `report EVALUATION.json --format physical-model-evaluation
 --model MODEL.json --output NEW_DIRECTORY`. Он использует строгий DATA-scorer,
