@@ -122,8 +122,7 @@ def render_fixture(path, output):
             for role, color, style in (('reset', colors[0], '-'), ('preserve', colors[1], '--')):
                 o = pairs[index][role]; times = [s['time']-o['begin'] for s in o['samples']]
                 for channel in range(channels):
-                    name = (('Экземпляр 1' if role == 'reset' else 'Экземпляр 2') if index == 0
-                            else ('Сброс' if role == 'reset' else 'Сохранение'))+'; сома '+str(channel+1)
+                    name = ('Экземпляр 1' if role == 'reset' else 'Экземпляр 2')+'; сома '+str(channel+1)
                     ax.plot(times, [s['soma'][channel] for s in o['samples']], color=color,
                             linestyle=style, linewidth=1.5, alpha=1-channel*.25, label=name)
                 for j,t in enumerate(o['spike_times']):
@@ -133,9 +132,11 @@ def render_fixture(path, output):
                 ax.axvline(t-pairs[index]['reset']['begin'], color='#df7900', linewidth=1.1,
                            label='Входной импульс' if t == pairs[index]['reset']['stimulus_times'][0] else None)
             ax.set_title('Первая проба: оба экземпляра сброшены' if index == 0 else
-                         'Вторая проба: различная политика сброса')
+                         'Вторая проба: 1 — сброс, 2 — сохранение')
             ax.set_ylim(*limits); ax.set_ylabel('Потенциал сомы,\nусловные единицы'); ax.grid(alpha=.25)
-            ax.legend(fontsize=9, loc='lower right', ncol=2)
+        handles, labels = axes[0].get_legend_handles_labels()
+        fig.legend(handles, labels, fontsize=11, loc='upper center',
+                   bbox_to_anchor=(.5, -.01), ncol=2)
         left, right = pairs[1]['reset'], pairs[1]['preserve']
         times = [s['time']-left['begin'] for s in left['samples']]
         for channel in range(channels):
@@ -149,7 +150,8 @@ def render_fixture(path, output):
         axes[2].legend(fontsize=10,loc='lower right');axes[2].grid(alpha=.25)
         for ax in axes:
             ax.set_xlim(0, left['end']-left['begin']);ax.set_xlabel('Время от начала пробы, с')
-        for suffix in ('png', 'svg'): fig.savefig(output/('continuity.'+suffix), dpi=180)
+        for suffix in ('png', 'svg'):
+            fig.savefig(output/('continuity.'+suffix), dpi=180, bbox_inches='tight', pad_inches=.12)
         plt.close(fig)
     from .native_calibration_worker import _write
     manifest = dict(result, plotting_runtime=runtime, full_samples_rendered=True,
