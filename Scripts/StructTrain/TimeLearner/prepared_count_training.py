@@ -52,7 +52,16 @@ def factor_control_job(job):
     """An explicitly separate graph-construction control, never a cold Train."""
     control = deepcopy(job)
     control['configuration']['run_id'] += '/positive-control-ns2'
-    control['configuration']['model']['inputs'][0]['synapses'] = 2
+    model = control['configuration']['model']
+    point = model['inputs'][0]['attachment']
+    # Coincident Branch inputs address one physical bank. A control with Ns2
+    # on only one alias and Ns1 on another is an invalid model declaration.
+    for index, item in enumerate(model['inputs']):
+        if index == 0 or model['branch'] and item['attachment'] == point:
+            item['synapses'] = 2
+            if index == len(model['inputs'])-1:
+                control['configuration']['search']['bounds'][index].update(
+                    minimum_synapses=2,maximum_synapses=2)
     control['sha256'] = sha({k:v for k,v in control.items() if k != 'sha256'})
     return control
 
@@ -156,6 +165,8 @@ def run(controls):
                             effective_initial_model_checked=True,factor_control_synapses=2,
                             initial_nodes=len(baseline_initial['identity']['model']['nodes']),
                             factor_control_nodes=len(initial['identity']['model']['nodes']),
+                            factor_control_input_indices=[i for i,item in enumerate(factor['configuration']['model']['inputs'])
+                                                          if item['synapses'] == 2],
                             factor_control_is_a_separate_initial_state=True,
                             full_training_audit_pending=True,scientific_verdict=None))
                 else:
