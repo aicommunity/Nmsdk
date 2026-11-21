@@ -1,0 +1,114 @@
+{
+  "name": "s11-new-foil-publication-figures-m40-a1",
+  "output": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-21/frozen-new-foils-branch-russian-figures-a1",
+  "png_files_present": 27,
+  "process-result.json": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 12.585413701832294,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "ed2b2f6c995241c0c2a8b40f964d207414990715f092acf487e3c32a5405ee8e",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "render-result.json": {
+    "kind": "timelearner_russian_new_foil_figure_completion",
+    "schema_version": 1,
+    "source_manifest_sha256": "b4b42e4c37372c747f0232e8cced9c576bd21b3536099b401c5c25b74f22da5e",
+    "source_archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/be/be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838",
+      "sha256": "be73dea9fd14ddc88caa2514f632e4c4f8d8d5c6149aec6254738e20aabb7838",
+      "bytes": 2383552
+    },
+    "trial_count": 27,
+    "all_patterns_with_actual_input_overlay": true,
+    "source_files_unchanged": true,
+    "source_samples_per_trial": 4001,
+    "downsampling": false,
+    "classification_recomputed": false,
+    "visually_reviewed": false,
+    "publication_ready": false,
+    "figure_catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-21/frozen-new-foils-branch-russian-figures-a1/figures/manifest.json",
+      "sha256": "9220ac4305066bc7eae5519f957387f90dd9b1170304a80c951fbcea47c993c5",
+      "size": 50915
+    },
+    "scientific_verdict": null
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "6ab088d1291b957fb730663cd37d3d2946877f1dca4fd7916e403aedab7bbfc2",
+      "unit": "timelearner-4089507d-1dc7-4ba7-acb6-e2f90b6593b3.service",
+      "invocation_id": "7fd9f2d65c7b4823a4c9228105b9a98f",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4089507d-1dc7-4ba7-acb6-e2f90b6593b3.service",
+      "initial_main_pid": 3973320,
+      "initial_start_ticks": "435295856",
+      "sha256": "42df7e5243774aabfa100c845dd2257130685213550bcbaf0502697956c86ecf"
+    }
+  },
+  "supervisor.log": "",
+  "stderr.log": "",
+  "local_preview_review": {
+    "reviewed_png_files": [
+      {
+        "path": "branch-new-foil-00.png",
+        "sha256": "00e1a05a948f40a391987dae7132d225519491c061b49e7fb5b195713e6d7df3"
+      },
+      {
+        "path": "branch-new-foil-04.png",
+        "sha256": "09a22d3a5154f0c8ed219b07990fbfb9262299f10e79860872d4c3a2c00c3fc2"
+      },
+      {
+        "path": "branch-new-foil-13.png",
+        "sha256": "5f0ece9788f1b9eecd24a8a062670cf17b72672c84869047923bd709342f7d6c"
+      }
+    ],
+    "all_27_reviewed": false,
+    "reviewed_at_final_DOCX_scale": false,
+    "publication_ready": false,
+    "findings": [
+      "Russian TP FP TN captions readable in source image",
+      "Full and positive-range panels have visibly different and labelled vertical scales",
+      "Actual input and event markers retained; caption must explain colour key"
+    ]
+  }
+}
