@@ -28,16 +28,16 @@
           "sha256": "22eba6ed2a2fe6c9792c1ec9c53b946d4a2c89b6564d77139c563433b8ef7e89"
         }
       },
-      "observed_utc": "2026-11-21T21:23:29.494324+00:00",
-      "elapsed_wall_seconds": 4862.4000000003725,
-      "raw_trial_files_present": 110,
-      "disk_free_bytes": 57689165824,
+      "observed_utc": "2026-11-21T21:55:55.156165+00:00",
+      "elapsed_wall_seconds": 6808.0600000005215,
+      "raw_trial_files_present": 131,
+      "disk_free_bytes": 57681174528,
       "internal_search_wall_budget_seconds": 32400,
       "native_wall_budget_seconds": 39600,
       "whole_job_wall_budget_seconds": 43200,
       "training_outcome": null,
       "scientific_verdict": null,
-      "public_observation_sha256": "f058dc08978b5a744e884d792ec4d5fea8011e1ce9156d6f18e2bb9f43923f0f"
+      "public_observation_sha256": "96136911d3e324509ebf5c5b578ccd71b2fd5f3fc6aea44305cb6f3cc312bc90"
     },
     {
       "worker": "M40",
@@ -65,16 +65,16 @@
           "sha256": "dc90ba704f52ae142c785daf02d83f337574c2aa32924bcbf41404056a5f3a81"
         }
       },
-      "observed_utc": "2026-11-21T21:23:29.224921+00:00",
-      "elapsed_wall_seconds": 8891.429999999702,
-      "raw_trial_files_present": 363,
-      "disk_free_bytes": 325726347264,
+      "observed_utc": "2026-11-21T21:55:54.893917+00:00",
+      "elapsed_wall_seconds": 10837.099999999627,
+      "raw_trial_files_present": 378,
+      "disk_free_bytes": 325720367104,
       "internal_search_wall_budget_seconds": 32400,
       "native_wall_budget_seconds": 39600,
       "whole_job_wall_budget_seconds": 43200,
       "training_outcome": null,
       "scientific_verdict": null,
-      "public_observation_sha256": "e4a2e66c158bb534ced7a1870bd45ce01d3f4364ffa4c00fe68d59202cca816e"
+      "public_observation_sha256": "39fa797c528cc603f164e9acdd9436b0b9f0d00623ca23c262356f6e32de9117"
     },
     {
       "worker": "Windows",
@@ -92,16 +92,30 @@
         "same_executable": true,
         "running": true
       },
-      "observed_utc": "2026-11-21T21:20:07.111024+00:00",
-      "elapsed_wall_seconds": 29980.007971048355,
-      "raw_trial_files_present": 924,
-      "disk_free_bytes": 1459205165056,
+      "observed_utc": "2026-11-21T21:55:36.007148+00:00",
+      "elapsed_wall_seconds": 32108.90409398079,
+      "raw_trial_files_present": 0,
+      "disk_free_bytes": 1458097541120,
       "internal_search_wall_budget_seconds": 32400,
       "native_wall_budget_seconds": 39600,
       "whole_job_wall_budget_seconds": 43200,
       "training_outcome": null,
       "scientific_verdict": null,
-      "public_observation_sha256": "c8ae8aa9e18c4c1b4726f5b89b9c0cfce275eb40b71039a04e0de73bf7a4f3c0"
+      "public_observation_sha256": "dadca7f8f40d7169479fedb56e3b74300249dec536e27fcf4eff1af744308ac1",
+      "primary_packet_prefix_counts": {
+        "raw-trial-": 0,
+        "train_stopped_trial_": 948,
+        "train_state_trial_": 0
+      },
+      "model_package_files": [
+        {
+          "name": "train_stopped_state.json",
+          "bytes": 1057238523
+        }
+      ],
+      "summary_files": [],
+      "terminal_record_present": false,
+      "file_presence_is_not_a_training_or_process_verdict": true
     }
   ],
   "raw_files_are_not_independent_trainings_or_percent_completion": true,
