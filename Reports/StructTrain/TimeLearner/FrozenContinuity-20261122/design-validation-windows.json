@@ -1,0 +1,89 @@
+{
+  "kind": "timelearner_frozen_cadence_design_validation",
+  "schema_version": 1,
+  "source_root": "62d3758cd5b65629810fbe5d7c0f1fe1cb0565a6",
+  "controls_commit": "7e19085df8096049c348047be3c5d009713e703c",
+  "controls": "TimeLearner-windows-frozen-iti-design-validation-a3",
+  "validation": {
+    "expected": [
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_all_target_positions_have_complete_patterns_and_explicit_first_reset",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_attempt_and_binary_path_do_not_change_condition_but_real_factors_do",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_coverage_and_reset_are_separate_axes_with_explicit_new_preflight",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_invalid_rotation_labels_and_tick_grid_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_real_matrix_float_sum_cannot_add_a_native_tick",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_reset_and_preserve_controls_share_the_same_timing_and_last_tail"
+    ],
+    "executed": 6,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "assertion_status": "passed"
+  },
+  "process": {
+    "execution": "completed",
+    "all_processes_closed": true,
+    "wall_seconds": 51.17062089999672
+  },
+  "task_closure": {
+    "observed_utc": "2026-11-21T21:25:30.355793+00:00",
+    "task": {
+      "last_result": 0,
+      "instances": [],
+      "state": 3
+    },
+    "validation_child_and_task_closed": true,
+    "source_root": "62d3758cd5b65629810fbe5d7c0f1fe1cb0565a6",
+    "native_model_executed": false
+  },
+  "memory_bytes": 2147483648,
+  "worker_priority": "below_normal",
+  "admission_available_physical_bytes": 20076830720,
+  "fixture_source": {
+    "kind": "actual_closed_Windows_DATA_fixture",
+    "source_terminal": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-recognition-physical-replay-a1\\terminal.json",
+    "source_terminal_sha256": "289a91468ef407955abc1a6c352ca2e73d0129efcbefa9539a15a09b79f97b3b",
+    "files": {
+      "job.json": {
+        "source_path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-recognition-physical-replay-a1-inputs\\job.json",
+        "bytes": 9055320,
+        "sha256": "3652bb304bc73c200ed193a82e59f6ae9b8e9f5d37abd1681ccafc03b02c3d55"
+      },
+      "runtime.json": {
+        "source_path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-recognition-physical-replay-a1\\runtime.json",
+        "bytes": 23095,
+        "sha256": "6bb97e49a377c389d8b3f1273e5e0dff698049bb5f007523e1b171bb003fc641"
+      }
+    },
+    "shared_archive_not_required_for_this_existing_local_fixture": true
+  },
+  "fixture_model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+  "primary_archive_reference": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/c9/c938c9a35ba454cfa19ce3c9d968f2a6da5e03349587dbf563a0de83ea5b35dc",
+    "sha256": "c938c9a35ba454cfa19ce3c9d968f2a6da5e03349587dbf563a0de83ea5b35dc",
+    "bytes": 49688
+  },
+  "primary_package": "/media/user/Data/Nmsdk-StructTrainExpArchive/incoming/20261122-frozen-iti-design-validation-win-a3",
+  "members": 27,
+  "expanded_bytes": 9124655,
+  "prior_five_test_gate": {
+    "source_root": "b917c514130981fac95b73562fbc427bd649cc79",
+    "tests": 5,
+    "passed": true,
+    "wall_seconds": 47.005804200074635,
+    "readback_sha256": "d72e1aed25aebf54f9d6e0f17cd1544ee55762606337b1fad1fa49d46cbd2342"
+  },
+  "new_native_model_execution": false,
+  "full_continuous_native_execution_verified": false,
+  "old_reader_regressions_revalidated_after_new_preflight": false,
+  "active_training_jobs_restarted": false,
+  "scientific_verdict": null,
+  "public_readbacks_sha256": {
+    "current": "dc9b5890621684d9caf648b0ad4e9de2341c3adafbabed46efcbc62db98a92f1",
+    "dispatch": "3167529b27dac304dd41e4c3a7ebb225eecdde4b502cd1562cda5dfc5253eb1b",
+    "closure": "1989493f2bf8629d1b20a4f7e1dbeba0db9f9d0d23b54d6a853547444f721122",
+    "archive_store": "f2e727d975a2e1f24f548c1d9d1e3d48c7c37959f95be781f605bdb8e98ff00b"
+  }
+}
