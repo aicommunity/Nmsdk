@@ -68,6 +68,10 @@ def prepare(declaration):
             model['source_boundary']['sha256']==execution['model_sha256'],
             'physical_replay_preparation_export_source_mismatch')
     source_request=Path(previous['inputs']).resolve(strict=True)/'native-job-source.json'
+    request_record=file_record(source_request)
+    require(previous['input_inventory']['native-job-source.json']==
+            dict(bytes=request_record['size'],sha256=request_record['sha256']),
+            'physical_replay_preparation_source_request_bytes_changed')
     envelope=json.loads(source_request.read_bytes())
     require(envelope['kind']=='timelearner_checked_file_source_job' and envelope['schema_version']==1 and
             envelope['sha256']==sha({k:v for k,v in envelope.items() if k!='sha256'}) and
