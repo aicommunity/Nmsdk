@@ -4,6 +4,7 @@ The archive is resolved through the external store. All native artifacts are
 read from the disposable restored tree, not from the original run directories.
 Byte recovery and portable evidence do not attest a new execution or learning.
 """
+import copy
 import json
 import os
 from pathlib import Path
@@ -11,9 +12,10 @@ import tempfile
 import unittest
 
 from ..external_archive import locate, resolve
-from ..native_evidence import load
-from ..native_pipeline_worker import audit_run_manifest
-from ..portable_primary import RETAIN_ALIASES, restore_native_bundle
+from ..model_identity import canonical_model_sha256
+from ..native_evidence import EvidenceError, load
+from ..native_pipeline_worker import audit_run_manifest, validate_job
+from ..portable_primary import ALIAS_ADAPTER, restore_native_bundle
 from ..recognition_metrics import load_physical_model_data_evaluation
 from ..runtime import file_record
 
@@ -44,10 +46,14 @@ class FrozenDataPrimaryRestorationTest(unittest.TestCase):
             (local/'bundle.json').write_bytes(metadata.read_bytes())
             (local/'primary.tar.xz.archive.json').write_text(json.dumps(reference), encoding='utf-8')
             restored = root/'restored'
-            receipt = restore_native_bundle(local/'bundle.json', restored, compatibility=RETAIN_ALIASES)
+            # Collection retains glog aliases as regular identical members.
+            # The explicit native analysis adapter verifies every member first,
+            # then omits only redundant aliases from this disposable view.
+            # Original archives and recorded process identities stay unchanged.
+            receipt = restore_native_bundle(local/'bundle.json', restored, compatibility=ALIAS_ADAPTER)
             self.assertEqual(receipt['archive_members_verified'], 199)
-            self.assertEqual(receipt['retained_regular_files'], 199)
-            self.assertEqual(receipt['omitted_redundant_aliases'], [])
+            self.assertEqual(receipt['retained_regular_files'], 196)
+            self.assertEqual(len(receipt['omitted_redundant_aliases']), 3)
             self.assertFalse(receipt['source_archive_modified'])
             self.assertFalse(receipt['native_execution_attested'])
             for relative, count, counts in expected:
@@ -65,8 +71,21 @@ class FrozenDataPrimaryRestorationTest(unittest.TestCase):
                 self.assertEqual(len(observations), count)
                 self.assertTrue(all(o['valid'] and o['complete'] and not o['censored'] for o in observations))
                 self.assertTrue(all(len(o['samples']) == 4001 for o in observations))
+                job = load(run/'input/job.json')
+                source_case = (job['source_model_data'],)
+                validate_job('physical-model-evaluate', job, source_case)
+                for index in (0, len(job['trials'])-1):
+                    for policy in ('preserve_neuron_dynamics', 'unknown_reset_policy'):
+                        with self.subTest(run=relative,index=index,policy=policy):
+                            changed = copy.deepcopy(job)
+                            changed['trials'][index]['reset_policy'] = policy
+                            changed.pop('sha256')
+                            changed['sha256'] = canonical_model_sha256(changed)
+                            with self.assertRaisesRegex(EvidenceError, 'pipeline_reset_policy_not_yet_verified'):
+                                validate_job('physical-model-evaluate', changed, source_case)
                 rows.append(dict(relative=relative, trials=count, counts=metrics['pooled_counts'],
-                                 production_manifest_audited=True, complete_observations_checked=True))
+                                 production_manifest_audited=True, complete_observations_checked=True,
+                                 unsupported_reset_preflight_rejected=True))
         self.assertEqual(file_record(archive), before)
         proof = dict(kind='timelearner_frozen_data_primary_restoration_proof',schema_version=1,
             archive_reference=reference,source_archive=before,restoration=receipt,

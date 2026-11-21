@@ -149,6 +149,8 @@ def validate_job(mode, job, source_case=None):
         from .calibrated_evidence import REQUEST_FIELDS
         require(all(type(t) is dict and set(t) == REQUEST_FIELDS and t["run_id"] == job["run_id"] for t in trials),
                 "invalid_evaluation_trial_scope")
+        require(all(t["reset_policy"] == "reset_per_trial" for t in trials),
+                "pipeline_reset_policy_not_yet_verified")
         require(len({t["trial_id"] for t in trials}) == len(trials), "duplicate_evaluation_trial")
         if mode in ("diagnostic-evaluate", "physical-model-evaluate"):
             require(len(trials) >= 2 and {t["label"] for t in trials} == {"target", "foil"},
