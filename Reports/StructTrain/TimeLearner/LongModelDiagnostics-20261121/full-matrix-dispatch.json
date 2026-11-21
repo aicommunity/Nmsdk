@@ -46,6 +46,30 @@
     },
     "windows": {
       "dispatched": true,
+      "job": "windows-long-model-baseline-a2",
+      "controls": "92f4a2ba0c05fc530c0dda3806b36d45e53858a2",
+      "task": {
+        "instance": "{1470E7D8-6DE6-4E8F-9577-558110F9A3D1}",
+        "execution_time_limit": "PT16H",
+        "task": "TimeLearner-windows-long-model-baseline-a2",
+        "engine_pid": 10908
+      },
+      "prior_failed_attempt_retained": true,
+      "native_trials": 8,
+      "source_model_revision": "01ff5ebf50a45cfd3a354de5902ae7702d9d7e5590945eca399f38674ed9c488",
+      "scientific_verdict": null
+    }
+  },
+  "threshold": 100,
+  "trials_per_model": 8,
+  "observation_seconds_per_trial": 2,
+  "reset_policy": "reset_per_trial",
+  "training_completed": false,
+  "expected_scientific_verdict": null,
+  "run_completion_not_granted_by_dispatch": true,
+  "prior_windows_attempt": {
+    "dispatch": {
+      "dispatched": true,
       "job": "windows-long-model-baseline-a1",
       "controls": "29289d2e856630f9cb7c8170e3d466df3277c049",
       "task": {
@@ -58,13 +82,15 @@
       "trials": 8,
       "training_completed": false,
       "scientific_verdict": null
-    }
-  },
-  "threshold": 100,
-  "trials_per_model": 8,
-  "observation_seconds_per_trial": 2,
-  "reset_policy": "reset_per_trial",
-  "training_completed": false,
-  "expected_scientific_verdict": null,
-  "run_completion_not_granted_by_dispatch": true
+    },
+    "execution": {
+      "reason": "nonzero_exit",
+      "execution": "process_error",
+      "all_processes_closed": true
+    },
+    "source_error": "composite_primary_missing_or_escape",
+    "native_trial_packets": 0,
+    "native_execution_exists": false,
+    "original_attempt_retained": true
+  }
 }
