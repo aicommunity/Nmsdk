@@ -114,7 +114,8 @@ def run(controls):
             'sdk_source','source_manifest','source_manifest_sha256','source_comparison','source_comparison_sha256',
             'model_revision','threshold','worker_root','worker_sha256','protocol_id','run_id','reset_policy',
             'native_memory_bytes','maximum_native_wall_seconds','maximum_outer_wall_seconds','outer_memory_bytes',
-            'minimum_free_bytes','maximum_output_bytes'}
+            'minimum_free_bytes','maximum_output_bytes','prepared_job_sha256','prepared_design_sha256',
+            'condition_fingerprint'}
     require(type(d) is dict and set(d)==fields and
             d['kind']=='timelearner_frozen_new_foil_declaration' and type(d['schema_version']) is int and d['schema_version']==1 and
             d['protocol_id']==PROTOCOL and d['reset_policy']=='reset_per_trial' and
@@ -131,12 +132,17 @@ def run(controls):
             not output.exists(),'foil_study_fresh_output_required');output.mkdir()
     with frozen_physical_source(d) as source:
         job,design=declare_job(source['job'],d['run_id'])
+        require(job['sha256']==d['prepared_job_sha256'] and sha(design)==d['prepared_design_sha256'],
+                'foil_study_predeclared_matrix_changed')
         _write(output/'job.json',job)
         _write(output/'design.json',dict(kind='timelearner_frozen_new_foil_design',schema_version=1,
             **design,source_files=source['records'],model_revision=d['model_revision'],threshold=d['threshold'],
             training_performed=False,threshold_selected=False,new_foils_excluded_from_previous_matrix=True,
             continuous_stream_verified=False,inter_pattern_interval_varied=False,scientific_verdict=None))
-        _write(output/'condition.json',condition(job,design,runtime,d))
+        binding=condition(job,design,runtime,d)
+        require(binding['condition_fingerprint']==d['condition_fingerprint'],
+                'foil_study_predeclared_condition_changed')
+        _write(output/'condition.json',binding)
         result=run_job('physical-model-evaluate',output/'job.json',source['model_path'],controls/'runtime.json',
             output/'run',d['maximum_native_wall_seconds'],process_policy=dict(
                 kind='timelearner_native_process_policy',schema_version=1,backend='bound_cgroup',
