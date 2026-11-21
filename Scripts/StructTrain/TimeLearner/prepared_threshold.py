@@ -114,8 +114,8 @@ def prepare(controls, destination, inputs, output, run_id):
     spec = {**previous, 'job_id':output.name, 'output':str(output), 'inputs':str(inputs),
             'input_inventory':worker.inventory(inputs, file_record), 'resolved_job_sha256':job['sha256'],
             'scope':'Same-matrix threshold confirmation on the actual stopped model; not independent Test or completed Train.'}
-    if 'lock_file' in spec:
-        spec['lock_file'] = str(output.with_name(output.name+'.lock'))
+    # Preserve the worker-wide lock declared by the audited baseline. A new
+    # output directory does not create an independent pool of worker resources.
     write(destination/'specification.json', spec)
     proposal = dict(kind='prepared_same_matrix_threshold_proposal', schema_version=1, baseline=str(baseline),
         baseline_execution_sha256=execution['sha256'], source_model_revision=previous['source_model_revision'],
