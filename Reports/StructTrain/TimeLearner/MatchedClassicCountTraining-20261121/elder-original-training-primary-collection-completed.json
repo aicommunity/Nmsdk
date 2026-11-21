@@ -1,0 +1,82 @@
+{
+  "job": "s11-original-classic-train-primary-elder-a1",
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 98.27783394884318,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "a900f5f13d87945c7eb25daa0e39198464fa1f475089db76d4025cf012f096ff",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "worker/terminal.json": {
+    "operation_passed": true,
+    "operation": "closed-primary-bundle",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "bundle": {
+    "kind": "compact_native_primary",
+    "schema_version": 2,
+    "archive_bytes": 34417412,
+    "archive_sha256": "1c4ed4697477547ab04487ca15d6348ba461e135e84ac01d11aad2ff8283c7c2",
+    "compression": {
+      "codec": "xz-lzma2",
+      "dictionary_bytes": 33554432,
+      "member_order": "content_sha256_then_logical_name",
+      "content_references": "earlier-regular-member-sha256-size-v1"
+    },
+    "expanded_bytes": 2307866088,
+    "unique_content_bytes": 2158614128,
+    "member_count": 1261
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "3ed31aca830bc0abbe6efae8a98cbe646968783fd0385c8e9aba44ac79c6c899",
+      "unit": "timelearner-87e76cd8-67da-4e32-987b-a18865a41f68.service",
+      "invocation_id": "2e80d006ee524e9382ac3a7a574384de",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-87e76cd8-67da-4e32-987b-a18865a41f68.service",
+      "initial_main_pid": 2717588,
+      "initial_start_ticks": "485808607",
+      "sha256": "e1cf8727027e4e1a5a11b92a69ac0020b56b9753f514f42d7a50681907a707a4"
+    }
+  }
+}
