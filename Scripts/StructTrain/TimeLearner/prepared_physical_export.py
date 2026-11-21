@@ -18,12 +18,13 @@ def _write(path, value):
         stream.write('\n')
 
 
-def prepare(controls, destination, inputs, output, run_id):
+def prepare(controls, destination, inputs, output, run_id, python_source=None):
     controls = Path(controls).resolve(strict=True)
     prior = json.loads((controls/'specification.json').read_bytes())
-    sys.path.insert(0, prior['python_source'])
+    python_source = str(Path(python_source or prior['python_source']).resolve(strict=True))
+    sys.path.insert(0, python_source)
     sys.dont_write_bytecode = True
-    from Scripts.StructTrain.TimeLearner.runtime import file_record
+    from Scripts.StructTrain.TimeLearner.runtime import file_record, runtime_content_identity, digest_json
     from Scripts.StructTrain.TimeLearner.native_evidence import require
     from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256 as sha
     from Scripts.StructTrain.TimeLearner.job_source_transport import make_envelope,MAXIMUM_SOURCE_BYTES
@@ -42,6 +43,11 @@ def prepare(controls, destination, inputs, output, run_id):
     inputs = Path(inputs).absolute()
     output = Path(output).absolute()
     destination = Path(destination).resolve(strict=True)
+    base = Path('C:/Projects/TimeLearnerWorker') if os.name == 'nt' else Path(prior['execution_root'])
+    area = base/('jobs' if os.name == 'nt' else 'readbacks')
+    require(base.resolve(strict=True) == base and inputs.is_relative_to(area) and
+            output.is_relative_to(area) and not inputs.is_symlink() and not output.is_symlink(),
+            'physical_export_preparation_paths')
     require(not inputs.exists() and not output.exists(), 'physical_export_fresh_paths_required')
     inputs.mkdir(parents=True)
     carrier = inputs/'recognition-source.json'
@@ -63,9 +69,19 @@ def prepare(controls, destination, inputs, output, run_id):
     envelope = make_envelope(job,carrier,inputs)
     _write(inputs/'native-job-source.json', envelope)
     (destination/'worker.py').write_bytes(Path(__file__).read_bytes())
-    (destination/'runtime.json').write_bytes((controls/'runtime.json').read_bytes())
+    runtime = json.loads((controls/'runtime.json').read_bytes())
+    prior_backend = runtime.get('windows_backend')
+    if os.name == 'nt':
+        # The native SDK remains immutable. Bind a fresh manifest to the exact
+        # runner module from this explicitly selected Python source checkout.
+        runtime['windows_backend'] = file_record(Path(python_source)/'Scripts/StructTrain/TimeLearner/windows_process.py')
+        runtime['build_flags'] = dict(runtime['build_flags'],
+            windows_backend_sha256=runtime['windows_backend']['sha256'])
+        runtime['runtime_identity'] = runtime_content_identity(runtime)
+        runtime['runtime_fingerprint'] = digest_json(runtime['runtime_identity'])
+    _write(destination/'runtime.json',runtime)
     spec = dict(kind='timelearner_prepared_physical_export', schema_version=1,
-        job_id=output.name, execution_root=prior['execution_root'], python_source=prior['python_source'],
+        job_id=output.name, execution_root=str(base), python_source=python_source,
         sdk_source=prior['sdk_source'], inputs=str(inputs), output=str(output),
         worker_sha256=file_record(destination/'worker.py')['sha256'],
         input_inventory={p.name:dict(bytes=p.stat().st_size,sha256=file_record(p)['sha256']) for p in inputs.iterdir()},
@@ -77,6 +93,7 @@ def prepare(controls, destination, inputs, output, run_id):
         source_execution_sha256=execution['sha256'], source_model_revision=source['model_revision'],
         source_package_sha256=source['sha256'], original_process_execution=process['execution'],
         original_runtime_provenance=process['runtime_provenance'], source_history_preserved=True,
+        previous_windows_backend=prior_backend, effective_windows_backend=runtime.get('windows_backend'),
         original_execution_reclassified=False, run_id=run_id, training_completed=False, scientific_verdict=None))
     require(file_record(source_path) == before, 'physical_export_source_changed_during_preparation')
 
@@ -89,23 +106,23 @@ def run(controls):
     from Scripts.StructTrain.TimeLearner.native_evidence import require
     from Scripts.StructTrain.TimeLearner.runtime import file_record, source_closure, applied_loader_environment
     from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256 as sha
-    from Scripts.StructTrain.TimeLearner.contained_runner import execute
-    from Scripts.StructTrain.TimeLearner.contained_process import inspect
-    from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
     from Scripts.StructTrain.TimeLearner.native_cli import inspect_native_cli
     from Scripts.StructTrain.TimeLearner.physical_model_data_evidence import audit_physical_model_data
     from Scripts.StructTrain.TimeLearner.native_pipeline_worker import _artifact_records
-    require(os.name == 'posix' and spec['kind'] == 'timelearner_prepared_physical_export' and
+    require(os.name in ('posix','nt') and spec['kind'] == 'timelearner_prepared_physical_export' and
             spec['schema_version'] == 1, 'physical_export_worker_scope')
     inputs = Path(spec['inputs']).resolve(strict=True)
     output = Path(spec['output']).absolute()
     base = Path(spec['execution_root']).resolve(strict=True)
-    require(base in (Path('/home/user/timelearner-refactor'),Path('/media/user/Data/TimeLearnerRefactor')) and
-            output.is_relative_to(base/'readbacks') and inputs.is_relative_to(base/'readbacks') and
+    allowed = (Path('C:/Projects/TimeLearnerWorker'),) if os.name=='nt' else (
+        Path('/home/user/timelearner-refactor'),Path('/media/user/Data/TimeLearnerRefactor'))
+    area = base/('jobs' if os.name=='nt' else 'readbacks')
+    require(base in allowed and output.is_relative_to(area) and inputs.is_relative_to(area) and
             not output.exists(), 'physical_export_paths')
     output.mkdir()
     def inventory():
-        require(all(p.is_file() and not p.is_symlink() for p in inputs.iterdir()), 'physical_export_input_alias')
+        require(all(p.is_file() and not p.is_symlink() and not getattr(p,'is_junction',lambda:False)()
+                    for p in inputs.iterdir()), 'physical_export_input_alias')
         return {p.name:dict(bytes=p.stat().st_size,sha256=file_record(p)['sha256']) for p in inputs.iterdir()}
     registry = lease = None
     try:
@@ -113,29 +130,56 @@ def run(controls):
                 file_record(Path(__file__))['sha256'] == spec['worker_sha256'], 'physical_export_input_changed')
         runtime = json.loads((controls/'runtime.json').read_bytes())
         require(source_closure(Path(spec['sdk_source'])) == runtime['source_closure'], 'physical_export_sdk_changed')
-        _write(output/'cli.json', inspect_native_cli(runtime,['physical-model-export'],require_file_source=True))
+        _write(output/'cli.json', inspect_native_cli(runtime,['physical-model-export'],
+            require_file_source=True,evidence_output=output))
         disk = spec['disk']
         require(shutil.disk_usage(base).free >= sum(disk.values()), 'physical_export_disk_admission')
-        registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
-        lease = registry.reserve(spec['job_id'], [dict(path=str(p),access=a) for p,a in
-            ((inputs,'read'),(controls,'read'),(Path(spec['sdk_source']),'read'),
-             (Path(runtime['executable']['path']).parent,'read'),(output,'write'))],
-            ttl_seconds=4200, demands=dict(slots=1,memory_bytes=9*1024**3,disk_bytes=disk['maximum_output_bytes']))
+        if os.name != 'nt':
+            from Scripts.StructTrain.TimeLearner.contained_runner import execute
+            from Scripts.StructTrain.TimeLearner.contained_process import inspect
+            from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+            registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
+            lease = registry.reserve(spec['job_id'], [dict(path=str(p),access=a) for p,a in
+                ((inputs,'read'),(controls,'read'),(Path(spec['sdk_source']),'read'),
+                 (Path(runtime['executable']['path']).parent,'read'),(output,'write'))],
+                ttl_seconds=4200, demands=dict(slots=1,memory_bytes=9*1024**3,disk_bytes=disk['maximum_output_bytes']))
         import time
-        from Scripts.StructTrain.TimeLearner.owned_python_job import _allocated_output_bytes
+        if os.name == 'nt':
+            def output_bytes():
+                total=0
+                for p in output.rglob('*'):
+                    try:
+                        require(not p.is_symlink() and not p.is_junction(),'physical_export_output_alias')
+                        if p.is_file():total+=p.stat().st_size
+                    except FileNotFoundError:
+                        pass  # The native writer atomically renames temporary files.
+                return total
+        else:
+            from Scripts.StructTrain.TimeLearner.owned_python_job import _allocated_output_bytes
+            def output_bytes():return _allocated_output_bytes(output)
         last=[0.]
         def monitor(state):
             if time.monotonic()-last[0] < 1:return
             last[0]=time.monotonic()
-            registry.heartbeat(lease['token'],ttl_seconds=4200)
+            if registry is not None:registry.heartbeat(lease['token'],ttl_seconds=4200)
             require(shutil.disk_usage(base).free >= disk['minimum_free_bytes'], 'physical_export_disk_floor')
-            require(_allocated_output_bytes(output) <= disk['maximum_output_bytes'], 'physical_export_output_budget')
+            require(output_bytes() <= disk['maximum_output_bytes'], 'physical_export_output_budget')
         arguments=['--app-ini',runtime['app_ini']['path'],'--timelearner-physical-model-export',
                    str(inputs/'native-job-source.json'),'--timelearner-output',str(output/'native')]
-        with applied_loader_environment(runtime):
-            result=execute(runtime,arguments,Path(runtime['executable']['path']).parent,output/'process',
-                spec['maximum_wall_seconds'],memory_bytes=spec['memory_bytes'],tasks=128,
-                cooperative_capture=True,monitor=monitor)
+        if os.name == 'nt':
+            from Scripts.StructTrain.TimeLearner.windows_process import execute
+            from Scripts.StructTrain.TimeLearner.native_gate import _environment
+            with _environment({k:runtime['loader_environment'].get(k)
+                               for k in ('PATH','QT_PLUGIN_PATH','QT_QPA_PLATFORM')}):
+                result=execute(runtime,arguments,Path(runtime['executable']['path']).parent,output/'process',
+                    memory_bytes=spec['memory_bytes'],maximum_processes=64,
+                    maximum_wall_seconds=spec['maximum_wall_seconds'],lock_file=controls/'native-export.lock',
+                    cooperative_capture=True,monitor=monitor)
+        else:
+            with applied_loader_environment(runtime):
+                result=execute(runtime,arguments,Path(runtime['executable']['path']).parent,output/'process',
+                    spec['maximum_wall_seconds'],memory_bytes=spec['memory_bytes'],tasks=128,
+                    cooperative_capture=True,monitor=monitor)
         _write(output/'process-result.json',result)
         require(result['execution']=='completed' and result['all_processes_closed'] and
                 result['runtime_provenance']=='loaded_files_captured', 'physical_export_native_incomplete')
@@ -177,11 +221,14 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--controls',required=True)
     for name in ('destination','inputs','output','run-id'):parser.add_argument('--'+name)
+    parser.add_argument('--python-source')
     args=parser.parse_args()
     if any((args.destination,args.inputs,args.output,args.run_id)):
         if not all((args.destination,args.inputs,args.output,args.run_id)):parser.error('all preparation paths required')
-        prepare(args.controls,args.destination,args.inputs,args.output,args.run_id)
-    else:run(args.controls)
+        prepare(args.controls,args.destination,args.inputs,args.output,args.run_id,args.python_source)
+    else:
+        if args.python_source:parser.error('--python-source applies only to preparation')
+        run(args.controls)
 
 
 if __name__=='__main__':main()

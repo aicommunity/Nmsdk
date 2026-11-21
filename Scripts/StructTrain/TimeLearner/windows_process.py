@@ -149,7 +149,7 @@ class _Windows:
 
 
 def execute(manifest, arguments, working_directory, output, *, memory_bytes, maximum_processes,
-            maximum_wall_seconds, lock_file, cancel_file=None, cooperative_capture=False):
+            maximum_wall_seconds, lock_file, cancel_file=None, cooperative_capture=False, monitor=None):
     """Run one immutable native runtime in an owned, memory-limited Windows job.
 
     A host lock serializes this backend's workers. It does not reserve resources
@@ -162,6 +162,7 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
     require(type(arguments) is list and all(type(s) is str and '\x00' not in s for s in arguments), 'invalid_windows_arguments')
     require(type(cooperative_capture) is bool and all(a.split('=', 1)[0] != '--timelearner-capture-directory'
             for a in arguments), 'capture_directory_is_supervisor_owned')
+    require(monitor is None or callable(monitor), 'invalid_windows_monitor')
     api = _Windows();exe = verify_runtime(manifest);cwd = Path(working_directory).resolve(strict=True)
     backend = file_record(Path(__file__))
     require(manifest.get('windows_backend') == backend and
@@ -236,6 +237,8 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
             stop_reason = None;code = api.W.DWORD()
             while True:
                 if not api.running(process.process):break
+                if monitor is not None:
+                    monitor({'pid':int(process.pid),'wall_seconds':time.monotonic()-start})
                 if cancel_file and Path(cancel_file).exists():stop_reason = 'cancelled'
                 elif time.monotonic()-start >= maximum_wall_seconds:stop_reason = 'timeout'
                 if stop_reason:

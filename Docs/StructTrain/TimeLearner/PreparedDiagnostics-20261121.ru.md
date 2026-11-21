@@ -143,3 +143,29 @@ hard links:391 запись, свободное место выросло с1133
 Компактные первичные readback и closure:
 `Reports/StructTrain/TimeLearner/PreparedDiagnostics-20261121/complete-eight-baseline-primary-readbacks.json`,
 `baseline-process-closures.json` и `threshold-preparation-and-linux-dispatches.json`.
+
+## Экспорт physical DATA на Windows
+
+`prepared_physical_export.py` использует тот же полный recognition-источник,
+checked-file-source и нативную проверку графа для Linux и Windows. Новая
+Python-копия выбирается явным `--python-source` при подготовке. Для Windows
+создаётся отдельный runtime manifest с SHA фактически применяемого backend;
+предыдущий manifest и native SDK не изменяются. Из JSON-источника свыше1ГиБ
+удаляются только пробелы вне строк, с проверкой исходных байтов и semantic SHA.
+
+Проверка возможностей Console находится в общем `native_cli.py`. На Windows
+нужно передать `evidence_output`: bounded Job сохраняет help, точную identity,
+лимиты и закрытие процесса. Запрошенная операция проверяется по её собственному
+флагу; наличие только diagnostic-evaluate не подтверждает physical-model-export.
+
+Windows backend принимает необязательный monitor. Ошибка проверки свободного
+места или объёма output останавливает всю принадлежащую заданию группу через
+существующий cleanup. Контроль не меняет модель и не заменяет проверку native
+runtime capture. Новые реальные process-тесты проверяют вызов monitor,
+закрытие main/descendant при ошибке и освобождение lock; CLI-тесты проверяют
+реальный Console и отказ для другого executable. Эти тесты и actual export
+выполняются на Windows-сервере, не локально.
+
+DATA остаётся физическим описанием без сертификата обучения и без checkpoint
+контроллера. Roundtrip графа и совпадение реакций — отдельные проверки; одна
+успешная команда export не доказывает завершение этапа5 во всей матрице.

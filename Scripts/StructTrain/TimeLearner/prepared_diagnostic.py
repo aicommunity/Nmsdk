@@ -5,12 +5,10 @@ worker does not reload their Python object trees. Native decoding/import still
 checks the complete resolved job. Preparation and execution outcomes are separate.
 """
 import argparse
-import hashlib
 import json
 import os
 from pathlib import Path
 import shutil
-import re
 import sys
 import time
 
@@ -30,35 +28,6 @@ def inventory(root, file_record):
     if not result:
         raise ValueError('prepared_input_empty')
     return result
-
-
-def windows_cli(runtime, output, require):
-    """Use owned Windows handles for help; pidfds are Linux-only.
-
-    Help describes the parser before engine execution. Its process closure and
-    advertised options are checked independently of scientific runtime capture.
-    """
-    from Scripts.StructTrain.TimeLearner.native_gate import _environment
-    from Scripts.StructTrain.TimeLearner.windows_process import execute
-    with _environment(dict(GTEST_FILTER='-*', GTEST_LIST_TESTS='1', GTEST_REPEAT='1', GTEST_SHUFFLE='0')):
-        process = execute(runtime, ['--help'], Path(runtime['executable']['path']).parent,
-            output/'cli-process', memory_bytes=1024**3, maximum_processes=16,
-            maximum_wall_seconds=30, lock_file=output/'cli-probe.lock', cooperative_capture=False)
-    require(process['execution'] == 'completed' and process['returncode'] == 0 and
-            process['all_processes_closed'], 'prepared_windows_cli_process_incomplete')
-    files = [output/'cli-process'/name for name in ('stdout.log','stderr.log')]
-    require(sum(p.stat().st_size for p in files) <= 128*1024, 'native_cli_help_output_limit')
-    raw = b''.join(p.read_bytes() for p in files)
-    text = raw.decode('utf-8', errors='strict')
-    flags = ('--app-ini','--timelearner-output','--timelearner-diagnostic-evaluate')
-    present = {flag:bool(re.search(r'(?m)^\s*'+re.escape(flag)+r'(?:\s|,|=|$)',text)) for flag in flags}
-    require(all(present.values()) and 'checked-file-source-v1' in text,
-            'prepared_windows_cli_capabilities_missing')
-    return dict(kind='timelearner_native_cli_interface',schema_version=1,
-        runtime_fingerprint=runtime['runtime_fingerprint'],executable_sha256=runtime['executable']['sha256'],
-        operations=['diagnostic-evaluate'],arguments=['--help'],advertised_options=present,help_text=text,
-        help_sha256=hashlib.sha256(raw).hexdigest(),returncode=0,wall_seconds=process['wall_seconds'],
-        native_job_executed=False,scientific_verdict=None)
 
 
 def main():
@@ -114,8 +83,8 @@ def main():
         audit = load(prior)
         require(audit['package_digest_verified'] is True and audit['model_revision'] == spec['source_model_revision'] and
                 audit['training_outcome'] == 'budget_exhausted', 'prepared_source_audit_scope')
-        write('cli.json', windows_cli(runtime, output, require) if os.name == 'nt' else
-              inspect_native_cli(runtime, ['diagnostic-evaluate'], require_file_source=True))
+        write('cli.json', inspect_native_cli(runtime, ['diagnostic-evaluate'],
+              require_file_source=True, evidence_output=output))
         arguments = ['--app-ini', runtime['app_ini']['path'], '--timelearner-diagnostic-evaluate',
             str(inputs/'native-job-source.json'), '--timelearner-output', str(output/'native')]
         if os.name == 'nt':
