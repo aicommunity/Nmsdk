@@ -98,9 +98,13 @@ source namespace; одинаковые неизменяемые файлы пе�
 
 На Elder и M40 запущены `s11-prepared-long-model-threshold-elder-a1` и
 `s11-prepared-long-model-threshold-m40-a1`:8GiB/2700с на native, по восемь проб.
-Для Windows подготовка выполняется через отдельный Scheduled Task с собственным
-ограниченным Job-процессом16GiB/1800с; native подтверждение запускается после
-её закрытия. Первоначальный detached SSH parent Windows не сохранился до
+Для Windows подготовка A2 завершилась за43.41с через отдельный Scheduled Task
+с собственным Job-процессом16GiB/1800с и подтверждённым закрытием. Запущен
+`windows-prepared-long-model-threshold-a2` с native8GiB/2700с. Controls commit
+`49fa8f11593ec6bb797a9ce745f9b0cc98e18621`. Подготовка A1 перед этим была
+отклонена до создания child, поскольку Python runtime не сохранил
+`build_flags.windows_backend_sha256`; A2 сохраняет исходные backend flags.
+Первоначальный detached SSH parent Windows не сохранился до
 создания runtime/owned child; это отрицательная попытка запуска подготовки,
 не результат модели. Повторная подготовка не меняет source или baseline.
 
