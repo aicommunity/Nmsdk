@@ -164,6 +164,9 @@ def _process_policy(args):
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
+    count_training = commands.add_parser('count-training', help='prepare or launch a matched count-normalization cold Train on a Linux worker')
+    count_training.add_argument('action', choices=('prepare','launch'))
+    count_training.add_argument('request', type=Path)
     controller_ab = commands.add_parser("controller-ab", help="compare pinned pure controller kernels on a Linux worker")
     controller_ab.add_argument("specification", type=Path)
     controller_ab.add_argument("--root-repository", type=Path, required=True)
@@ -382,6 +385,14 @@ def main(argv: list[str] | None = None) -> int:
     scales.add_argument("--frequency-hz", type=float)
     scales.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
+    if args.command == 'count-training':
+        from .linux_count_training import main as count_main
+        from .native_evidence import EvidenceError
+        try:
+            return count_main([args.action,str(args.request)])
+        except (EvidenceError,OSError,ValueError,KeyError,TypeError) as error:
+            print(json.dumps(dict(kind='timelearner_count_training_error',reason=str(error),scientific_verdict=None)),file=sys.stderr)
+            return 2
     if args.command == "audit-time-scales":
         from .declared_time_scales import audit_config_tree
         from .native_evidence import EvidenceError
