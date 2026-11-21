@@ -26,33 +26,41 @@ def prepare(controls, destination, inputs, output, run_id):
     from Scripts.StructTrain.TimeLearner.runtime import file_record
     from Scripts.StructTrain.TimeLearner.native_evidence import require
     from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256 as sha
-    from Scripts.StructTrain.TimeLearner.job_source_transport import make_envelope
+    from Scripts.StructTrain.TimeLearner.job_source_transport import make_envelope,MAXIMUM_SOURCE_BYTES
     native = Path(prior['output'])/'native'
     process = json.loads((Path(prior['output'])/'process-result.json').read_bytes())
     require(process['all_processes_closed'], 'physical_export_source_process_live')
     execution = json.loads((native/'execution.json').read_bytes())
-    require(execution['execution'] == 'completed' and execution['sha256'] ==
+    require(execution['kind'] == 'timelearner_native_diagnostic_evaluation_execution' and
+            execution['execution'] == 'completed' and execution['sha256'] ==
             sha({k:v for k,v in execution.items() if k != 'sha256'}), 'physical_export_source_execution')
     source_path = native/'model.json'
     before = file_record(source_path)
     records = {r['path']:r for r in execution['artifacts']}
     require(records['model.json'] == dict(path='model.json', bytes=before['size'], sha256=before['sha256']),
             'physical_export_source_bytes_changed')
-    source = json.loads(source_path.read_bytes())
-    require(source['kind'] == 'timelearner_diagnostic_threshold_candidate' and
-            source['model_revision'] == execution['model_revision'] and
-            source['sha256'] == sha({k:v for k,v in source.items() if k != 'sha256'}),
-            'physical_export_requires_explicit_diagnostic_recognition_candidate')
-    job = dict(kind='timelearner_native_physical_model_export_job', schema_version=1,
-               implementation_id=source['implementation_id'], source_state=source)
-    job['sha256'] = sha(job)
     inputs = Path(inputs).absolute()
     output = Path(output).absolute()
     destination = Path(destination).resolve(strict=True)
     require(not inputs.exists() and not output.exists(), 'physical_export_fresh_paths_required')
     inputs.mkdir(parents=True)
-    os.link(source_path, inputs/'recognition-source.json')
-    envelope = make_envelope(job, inputs/'recognition-source.json', inputs)
+    carrier = inputs/'recognition-source.json'
+    if before['size'] > MAXIMUM_SOURCE_BYTES:
+        from Scripts.StructTrain.TimeLearner.json_transport import compact_json_transport
+        transport = compact_json_transport(source_path,carrier,expected_bytes=before['size'],
+            expected_sha256=before['sha256'],maximum_output_bytes=MAXIMUM_SOURCE_BYTES)
+        _write(destination/'source-transport.json',transport)
+    else:
+        os.link(source_path,carrier)
+    source = json.loads(carrier.read_bytes())
+    require(source['kind'] == 'timelearner_diagnostic_threshold_candidate' and
+            source['model_revision'] == execution['model_revision'] and source['sha256'] == execution['model_sha256'] and
+            source['sha256'] == sha({k:v for k,v in source.items() if k != 'sha256'}),
+            'physical_export_requires_explicit_diagnostic_recognition_candidate')
+    job = dict(kind='timelearner_native_physical_model_export_job', schema_version=1,
+               implementation_id=source['implementation_id'], source_state=source)
+    job['sha256'] = sha(job)
+    envelope = make_envelope(job,carrier,inputs)
     _write(inputs/'native-job-source.json', envelope)
     (destination/'worker.py').write_bytes(Path(__file__).read_bytes())
     (destination/'runtime.json').write_bytes((controls/'runtime.json').read_bytes())
