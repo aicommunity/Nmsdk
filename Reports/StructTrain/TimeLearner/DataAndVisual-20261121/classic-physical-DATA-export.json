@@ -1,0 +1,59 @@
+{
+  "job": "s11-prepared-physical-classic-export-elder-a1",
+  "exists": true,
+  "terminal.json": {
+    "native_process_completed": true,
+    "physical_roundtrip_verified": true,
+    "model_revision": "ec82f91aaf806a562fcfcc29501eeabbfa0ccd0d2a93bccaf9a7190681c5cda3",
+    "model_sha256": "6e887ae2c4be6dbf6d4df0a8707766728bf8b669e5dc2406e57433ade147f450",
+    "source_package_sha256": "85b4b86d652ff4da110b3ea425497736ff15cc7cb6058d8a1770c9671d4bf0ec"
+  },
+  "process-result.json": {
+    "kind": "timelearner_process_result",
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 231.107404849492,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "all_processes_closed": true
+  },
+  "native/execution.json": {
+    "execution": "completed",
+    "kind": "timelearner_native_physical_model_export_execution",
+    "model_revision": "ec82f91aaf806a562fcfcc29501eeabbfa0ccd0d2a93bccaf9a7190681c5cda3",
+    "model_sha256": "6e887ae2c4be6dbf6d4df0a8707766728bf8b669e5dc2406e57433ade147f450",
+    "physical_roundtrip_verified": true,
+    "sha256": "abcb92ceda695425aac1c03f4b9e5ba870c156129bd7023d5cc5448aa1db491f"
+  },
+  "native_files": [
+    {
+      "name": "model.json",
+      "bytes": 11576730
+    },
+    {
+      "name": "input-projection.json",
+      "bytes": 686
+    },
+    {
+      "name": "execution.json",
+      "bytes": 1500
+    }
+  ],
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "d4845bbf5a2446114d1f8fd17bd93ad705b99f0f07d574c1b5df97a5ce3f4401",
+      "unit": "timelearner-2c121f59-a9a1-4dd4-ad41-2aa62abd172b.service",
+      "invocation_id": "6e6fd4c2cecf451ba192e353cb90ff5e",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2c121f59-a9a1-4dd4-ad41-2aa62abd172b.service",
+      "initial_main_pid": 932179,
+      "initial_start_ticks": "482195737",
+      "sha256": "0f5bea5526313d1227b938f7f08a7b82eaa54f92efee54cdd5e95454ddb15e3a"
+    }
+  }
+}

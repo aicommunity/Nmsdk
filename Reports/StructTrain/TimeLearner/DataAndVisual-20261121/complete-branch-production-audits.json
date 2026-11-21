@@ -1,0 +1,372 @@
+{
+  "kind": "complete_actual_branch_threshold_production_audits",
+  "schema_version": 1,
+  "workers": {
+    "m40": {
+      "terminal": {
+        "audit_completed": true,
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "report_family_response_requirement_met": true
+      },
+      "process": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 1913.3011494223028,
+        "all_processes_closed": true
+      },
+      "audit": {
+        "kind": "timelearner_prepared_diagnostic_independent_audit",
+        "reason": null,
+        "traceback": null,
+        "complete_source_history_audited": true,
+        "all_input_bytes_unchanged": true,
+        "report_family_response_requirement_met": true,
+        "protocol": "historical_same_matrix"
+      },
+      "metrics": {
+        "validity": "valid",
+        "reason": "complete_declared_evaluation",
+        "pooled_counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "effective_threshold": 0.0999470202411733,
+        "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+        "source_training_evidence_checked": true,
+        "invalid_trial_ids": [],
+        "trials": [
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/0",
+            "sample_id": "phasea-row-0",
+            "label": "target",
+            "presentation_index": 0,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.01,
+            "response_end": 2.0,
+            "spike_count": 1,
+            "window_spikes": [
+              0.493
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TP"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/1",
+            "sample_id": "phasea-row-1",
+            "label": "foil",
+            "presentation_index": 1,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 2.0105,
+            "response_end": 4.000500000000001,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/2",
+            "sample_id": "phasea-row-2",
+            "label": "foil",
+            "presentation_index": 2,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 4.011,
+            "response_end": 6.001,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/3",
+            "sample_id": "phasea-row-3",
+            "label": "foil",
+            "presentation_index": 3,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 6.0115,
+            "response_end": 8.0015,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/4",
+            "sample_id": "phasea-row-4",
+            "label": "foil",
+            "presentation_index": 4,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 8.012,
+            "response_end": 10.002,
+            "spike_count": 1,
+            "window_spikes": [
+              8.4945
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "FP"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/5",
+            "sample_id": "phasea-row-5",
+            "label": "foil",
+            "presentation_index": 5,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 10.0125,
+            "response_end": 12.0025,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/6",
+            "sample_id": "phasea-row-6",
+            "label": "foil",
+            "presentation_index": 6,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 12.013,
+            "response_end": 14.003,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/7",
+            "sample_id": "phasea-row-7",
+            "label": "foil",
+            "presentation_index": 7,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 14.0135,
+            "response_end": 16.003500000000003,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          }
+        ]
+      },
+      "kernel": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "b9aa72e56bb699e9e0b1d11059ecda29f0a9ee74c14f08edbfb50146bd4fc17f",
+          "unit": "timelearner-450115cd-74db-4aca-a4dd-4a5ccc482670.service",
+          "invocation_id": "bd09676d8b8248d68abd46ef6507b355",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-450115cd-74db-4aca-a4dd-4a5ccc482670.service",
+          "initial_main_pid": 2651574,
+          "initial_start_ticks": "432580949",
+          "sha256": "bd5b91edc454d40ec4ff71cf0d67e17955c54e9bfe7b5c8ec4e533114a4015d6"
+        }
+      },
+      "scientific_verdict": null
+    },
+    "windows": {
+      "terminal": {
+        "audit_completed": true,
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "report_family_response_requirement_met": true
+      },
+      "process": {
+        "kind": "timelearner_windows_process_result",
+        "execution": "completed",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "all_processes_closed": true,
+        "wall_seconds": 1639.5300739000086
+      },
+      "audit": {
+        "kind": "timelearner_prepared_diagnostic_independent_audit",
+        "reason": null,
+        "protocol": "historical_same_matrix",
+        "complete_source_history_audited": true,
+        "all_input_bytes_unchanged": true,
+        "report_family_response_requirement_met": true
+      },
+      "metrics": {
+        "validity": "valid",
+        "reason": "complete_declared_evaluation",
+        "pooled_counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "effective_threshold": 0.09907753464712266,
+        "model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+        "source_training_evidence_checked": true,
+        "invalid_trial_ids": [],
+        "trials": [
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/0",
+            "sample_id": "phasea-row-0",
+            "label": "target",
+            "presentation_index": 0,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.01,
+            "response_end": 2.0,
+            "spike_count": 1,
+            "window_spikes": [
+              0.4925
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TP"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/1",
+            "sample_id": "phasea-row-1",
+            "label": "foil",
+            "presentation_index": 1,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 2.0105,
+            "response_end": 4.000500000000001,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/2",
+            "sample_id": "phasea-row-2",
+            "label": "foil",
+            "presentation_index": 2,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 4.011,
+            "response_end": 6.001,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/3",
+            "sample_id": "phasea-row-3",
+            "label": "foil",
+            "presentation_index": 3,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 6.0115,
+            "response_end": 8.0015,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/4",
+            "sample_id": "phasea-row-4",
+            "label": "foil",
+            "presentation_index": 4,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 8.012,
+            "response_end": 10.002,
+            "spike_count": 1,
+            "window_spikes": [
+              8.4945
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "FP"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/5",
+            "sample_id": "phasea-row-5",
+            "label": "foil",
+            "presentation_index": 5,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 10.0125,
+            "response_end": 12.0025,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/6",
+            "sample_id": "phasea-row-6",
+            "label": "foil",
+            "presentation_index": 6,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 12.013,
+            "response_end": 14.003,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/7",
+            "sample_id": "phasea-row-7",
+            "label": "foil",
+            "presentation_index": 7,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 14.0135,
+            "response_end": 16.003500000000003,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          }
+        ]
+      },
+      "kernel": null,
+      "scientific_verdict": null
+    }
+  },
+  "protocol": "historical_same_matrix",
+  "training_completed": false,
+  "scientific_verdict": null
+}
