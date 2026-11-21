@@ -1,0 +1,168 @@
+{
+  "name": "s11-classic-closed-order-reanalysis-elder-a3",
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 49.07704342994839,
+    "runtime_provenance": "loaded_files_captured",
+    "all_processes_closed": true
+  },
+  "worker/terminal.json": {
+    "operation_passed": true
+  },
+  "worker/validation/result.json": {
+    "kind": "timelearner_python_validation_result",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "executed_tests": 1,
+    "failures": [],
+    "errors": [],
+    "skipped": []
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "b25ce2edec12fc77c74a10b455b71d75cf256190eae84d2fb89af2a236fca70c",
+      "unit": "timelearner-3ea2607b-e170-49ff-8cdf-8a42c2847bc3.service",
+      "invocation_id": "f81a5df1d4734b0591e2363a221d354c",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3ea2607b-e170-49ff-8cdf-8a42c2847bc3.service",
+      "initial_main_pid": 2145680,
+      "initial_start_ticks": "484306963",
+      "sha256": "d26d80750c0bbe5d09660d376e95509af342685ddc7d7cab981f048c4aba2130"
+    }
+  },
+  "actual_complete_study": {
+    "kind": "timelearner_closed_physical_order_reanalysis",
+    "schema_version": 1,
+    "comparator_version": 1,
+    "time_basis": "actual_stimulus_onset",
+    "absolute_tolerance": 1e-12,
+    "execution": "completed",
+    "validity": "valid",
+    "native_rerun_performed": false,
+    "source_control_trials": 8,
+    "new_study_trials": 56,
+    "source_control_counts": {
+      "TP": 1,
+      "FP": 2,
+      "FN": 0,
+      "TN": 5,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.75,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.2857142857142857
+    },
+    "new_study_counts": {
+      "TP": 7,
+      "FP": 14,
+      "FN": 0,
+      "TN": 35,
+      "targets": 7,
+      "foils": 49,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.75,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.2857142857142857
+    },
+    "by_rotation": [
+      {
+        "rotation": 1,
+        "counts": {
+          "TN": 5,
+          "FP": 2,
+          "TP": 1
+        }
+      },
+      {
+        "rotation": 2,
+        "counts": {
+          "TN": 5,
+          "FP": 2,
+          "TP": 1
+        }
+      },
+      {
+        "rotation": 3,
+        "counts": {
+          "TN": 5,
+          "FP": 2,
+          "TP": 1
+        }
+      },
+      {
+        "rotation": 4,
+        "counts": {
+          "FP": 2,
+          "TN": 5,
+          "TP": 1
+        }
+      },
+      {
+        "rotation": 5,
+        "counts": {
+          "TN": 5,
+          "FP": 2,
+          "TP": 1
+        }
+      },
+      {
+        "rotation": 6,
+        "counts": {
+          "FP": 2,
+          "TN": 5,
+          "TP": 1
+        }
+      },
+      {
+        "rotation": 7,
+        "counts": {
+          "TN": 5,
+          "TP": 1,
+          "FP": 2
+        }
+      }
+    ],
+    "model_revision": "ec82f91aaf806a562fcfcc29501eeabbfa0ccd0d2a93bccaf9a7190681c5cda3",
+    "source_model_data_sha256": "6e887ae2c4be6dbf6d4df0a8707766728bf8b669e5dc2406e57433ade147f450",
+    "threshold": 0.025742023300155625,
+    "all_eight_target_positions_observed": true,
+    "classifications_preserved": true,
+    "waveforms_and_events_preserved": true,
+    "original_terminal": {
+      "path": "/home/user/timelearner-refactor/readbacks/s11-classic-DATA-frozen-order-elder-a1/terminal.json",
+      "sha256": "cc42976c4512761c70aef677527a40445a2fcbc13f9209967f9c3023c8c6336e",
+      "size": 32023
+    },
+    "original_absolute_clock_comparison_result": false,
+    "all_input_bytes_unchanged": true,
+    "training_completed": false,
+    "independently_heldout_evaluation": false,
+    "continuous_stream_verified": false,
+    "inter_pattern_interval_varied": false,
+    "scientific_verdict": null,
+    "maxima": {
+      "maximum_absolute_signal_difference": 0.0,
+      "maximum_relative_sample_time_difference": 1.4210854715202004e-14,
+      "maximum_relative_history_difference": 1.2503886814840826e-14,
+      "maximum_relative_event_time_difference": 1.2503886814840826e-14,
+      "maximum_window_offset_difference": 9.325873406851315e-15
+    },
+    "response_rows_preserved": 56,
+    "total_rows": 56,
+    "file": {
+      "path": "/home/user/timelearner-refactor/readbacks/s11-classic-closed-order-reanalysis-elder-a3/worker/tmp/closed-order-stimulus-relative-reanalysis.json",
+      "bytes": 125643,
+      "sha256": "cd3c2f8b0f37287c1459b58b0337f71837601d86cbd7f17348d7dd80704007fc"
+    }
+  },
+  "code_root": "979adfd538cfc5cecf85758d2d5fbaa159f30c25",
+  "controls_commit": "d17afe69bc609976b2b30624b9a5792eaf2c9cf6"
+}
