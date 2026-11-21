@@ -87,6 +87,7 @@ def prepare(controls, destination, inputs, output, run_id, python_source=None):
         input_inventory={p.name:dict(bytes=p.stat().st_size,sha256=file_record(p)['sha256']) for p in inputs.iterdir()},
         source_package_sha256=source['sha256'], source_model_revision=source['model_revision'],
         resolved_job_sha256=job['sha256'], memory_bytes=8*1024**3, maximum_wall_seconds=3600,
+        lock_file=str(base/'locks/worker.lock'),
         disk=dict(minimum_free_bytes=512*1024**2, maximum_output_bytes=256*1024**2))
     _write(destination/'specification.json', spec)
     _write(destination/'proposal.json', dict(kind='complete_recognition_physical_export_preparation',
@@ -119,6 +120,9 @@ def run(controls):
     area = base/('jobs' if os.name=='nt' else 'readbacks')
     require(base in allowed and output.is_relative_to(area) and inputs.is_relative_to(area) and
             not output.exists(), 'physical_export_paths')
+    shared_lock=base/'locks/worker.lock'
+    require(Path(spec.get('lock_file',str(shared_lock)))==shared_lock,
+            'physical_export_shared_worker_lock_scope')
     output.mkdir()
     def inventory():
         require(all(p.is_file() and not p.is_symlink() and not getattr(p,'is_junction',lambda:False)()
@@ -173,7 +177,7 @@ def run(controls):
                                for k in ('PATH','QT_PLUGIN_PATH','QT_QPA_PLATFORM')}):
                 result=execute(runtime,arguments,Path(runtime['executable']['path']).parent,output/'process',
                     memory_bytes=spec['memory_bytes'],maximum_processes=64,
-                    maximum_wall_seconds=spec['maximum_wall_seconds'],lock_file=controls/'native-export.lock',
+                    maximum_wall_seconds=spec['maximum_wall_seconds'],lock_file=shared_lock,
                     cooperative_capture=True,monitor=monitor)
         else:
             with applied_loader_environment(runtime):
