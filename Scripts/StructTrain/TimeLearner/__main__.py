@@ -27,7 +27,10 @@ def analyze(args: argparse.Namespace) -> dict:
     require(args.format in ("threshold-candidate", "native-calibration-assessment", "calibrated-state", "calibration-transaction", "posttune-transaction") or args.source_solo is None, "source_solo_option_is_only_for_threshold_candidates")
     require(args.format == "native-calibration-assessment" or args.evaluation is None, "evaluation_option_is_only_for_native_calibration")
     source = args.source.resolve(strict=True)
-    if args.format == "native-composite-measurements":
+    if args.format == "native-continuity":
+        from .native_continuity_reports import read_fixture
+        _, result = read_fixture(source)
+    elif args.format == "native-composite-measurements":
         from .composite_archive_case import audit_composite_archive_case
         require(args.output is None or not args.output.resolve().is_relative_to(source),
                 'composite_analysis_output_overlaps_original_case')
@@ -296,7 +299,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument('--include-related', action='store_true', help='schema3 review catalog: also match TimeLearner tokens in committed script content; never execute tools')
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=('capacitance-region', 'capacitance-history', 'capacitance-witness', 'capacitance-binding', 'training-capacitance-bridge', 'domain', 'probe', 'learned-solo', 'stopped-solo', 'recognition', 'recognition-owner', 'recognition-trial', 'recognition-evaluation', 'physical-model-data', 'physical-model-evaluation', 'threshold-candidate', 'calibrated-state', 'calibration-transaction', 'posttune-transaction', 'calibration-run', 'posttune-run', 'pipeline-run', 'native-calibration-assessment', 'posttune-reconstruction', 'posttune-transient', 'legacy-posttune-freerun', 'native-live-finalization', 'branch-dynamics', 'historical-selectivity', 'stopped-final-pass', 'legacy-statistic-traces', 'native-composite-measurements', 'native-search-history'), required=True)
+    analysis.add_argument("--format", choices=('capacitance-region', 'capacitance-history', 'capacitance-witness', 'capacitance-binding', 'training-capacitance-bridge', 'domain', 'probe', 'learned-solo', 'stopped-solo', 'recognition', 'recognition-owner', 'recognition-trial', 'recognition-evaluation', 'physical-model-data', 'physical-model-evaluation', 'threshold-candidate', 'calibrated-state', 'calibration-transaction', 'posttune-transaction', 'calibration-run', 'posttune-run', 'pipeline-run', 'native-calibration-assessment', 'posttune-reconstruction', 'posttune-transient', 'legacy-posttune-freerun', 'native-live-finalization', 'branch-dynamics', 'historical-selectivity', 'stopped-final-pass', 'legacy-statistic-traces', 'native-composite-measurements', 'native-search-history', 'native-continuity'), required=True)
     analysis.add_argument("--expected-trial-ids", nargs="+", help="independently declared IDs required for historical-selectivity CSV")
     analysis.add_argument("--rest-bound", type=float, help="descriptive channel envelope for branch-dynamics; legacy default 1")
     analysis.add_argument("--soma-abs-limit", type=float, help="optional descriptive soma bound for branch-dynamics")
@@ -313,7 +316,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "physical-model-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "native-archive-transfer-pair", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization", "frozen-order"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "physical-model-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "native-archive-transfer-pair", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization", "frozen-order", "native-continuity"), default="recognition-evaluation")
     report.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
@@ -731,7 +734,12 @@ def main(argv: list[str] | None = None) -> int:
             require(args.format == "posttune-transaction" or args.source_solo is None, "report_source_solo_is_only_for_posttune")
             require(args.format == "native-live-finalization" or args.primary_inventory is None,
                     "primary_inventory_is_only_for_live_finalization")
-            if args.format == "frozen-order":
+            if args.format == "native-continuity":
+                from .native_continuity_reports import render_fixture
+                require(args.artifacts is None and args.trace is None and args.model is None,
+                        "continuity_report_uses_recorded_fixture_only")
+                result = render_fixture(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "frozen-order":
                 from .frozen_order_reports import render_frozen_order
                 require(args.trace is None and args.model is None,
                         "frozen_order_report_declares_its_models_and_observations")
