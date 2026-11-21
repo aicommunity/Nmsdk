@@ -25,12 +25,13 @@ def run(controls):
     declaration = json.loads((controls/'declaration.json').read_bytes())
     sys.path.insert(0, declaration['actor'])
     sys.dont_write_bytecode = True
-    from Scripts.StructTrain.TimeLearner.native_evidence import require, EvidenceError
+    from Scripts.StructTrain.TimeLearner.native_evidence import require
     from Scripts.StructTrain.TimeLearner.runtime import file_record
     from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256 as sha
     from Scripts.StructTrain.TimeLearner.native_pipeline_worker import audit_run_manifest, run_job, validate_job
     from Scripts.StructTrain.TimeLearner.recognition_metrics import load_physical_model_data_evaluation
-    from Scripts.StructTrain.TimeLearner.frozen_diagnostic_order import rotated_trials, compare_samples
+    from Scripts.StructTrain.TimeLearner.frozen_diagnostic_order import rotated_trials
+    from Scripts.StructTrain.TimeLearner.trial_response_comparison import trial_response_comparison
     from Scripts.StructTrain.TimeLearner.contained_process import inspect
 
     require(declaration['kind'] == 'timelearner_frozen_physical_order_declaration' and
@@ -125,28 +126,23 @@ def run(controls):
     require(len(observed_by_id) == 56, 'physical_order_observation_set_changed')
     rows=[]
     baseline_metrics = {t['sample_id']: t for t in metrics['trials']}
-    for measured in study['trials']:
-        observation = observed_by_id[measured['trial_id']]
-        expected = by_sample[observation['sample_id']]
-        difference = None
-        reason = None
-        try:
-            difference = compare_samples(expected['samples'], observation['samples'], 1e-12)
-        except EvidenceError as error:
-            # A valid, changed waveform is an order-sensitivity result. Keep
-            # the full production observations; do not hide it as a runner error.
-            reason = str(error)
-        events_same = all(expected[k] == observation[k] for k in ('stimulus_times','spike_times','spike_count'))
-        rows.append(dict(trial_id=measured['trial_id'],sample_id=measured['sample_id'],
-            rotation=declaration['rotations'][measured['presentation_index']//8],
-            target_position=next(i for i,t in enumerate(job['trials'][measured['presentation_index']//8*8:][:8])
-                                 if t['label']=='target'),
-            position=measured['presentation_index']%8,classification=measured['classification'],
-            source_classification=baseline_metrics[measured['sample_id']]['classification'],
-            classification_preserved=measured['classification']==baseline_metrics[measured['sample_id']]['classification'],
-            waveforms_equal_within_declared_tolerance=reason is None,
-            maximum_absolute_sample_difference=difference,waveform_difference_reason=reason,
-            stimulus_and_spike_events_equal=events_same))
+    with trial_response_comparison(model, physical_data=True) as compare:
+        for measured in study['trials']:
+            observation = observed_by_id[measured['trial_id']]
+            expected = by_sample[observation['sample_id']]
+            comparison = compare(expected, observation)
+            rows.append(dict(trial_id=measured['trial_id'],sample_id=measured['sample_id'],
+                rotation=declaration['rotations'][measured['presentation_index']//8],
+                target_position=next(i for i,t in enumerate(job['trials'][measured['presentation_index']//8*8:][:8])
+                                     if t['label']=='target'),
+                position=measured['presentation_index']%8,classification=measured['classification'],
+                source_classification=baseline_metrics[measured['sample_id']]['classification'],
+                classification_preserved=measured['classification']==baseline_metrics[measured['sample_id']]['classification'],
+                waveforms_equal_within_declared_tolerance=comparison['waveforms_equal_within_declared_tolerance'],
+                maximum_absolute_sample_difference=comparison['maximum_absolute_sample_difference'],
+                waveform_difference_reason=next(iter(comparison['difference_reasons']), None),
+                stimulus_and_spike_events_equal=comparison['stimulus_and_spike_events_equal'],
+                response_comparison=comparison))
     positions={next(i for i,t in enumerate(patterns) if t['label']=='target')}
     positions.update(row['target_position'] for row in rows if row['classification'] in ('TP','FN'))
     require(positions == set(range(8)), 'physical_order_target_positions_incomplete')

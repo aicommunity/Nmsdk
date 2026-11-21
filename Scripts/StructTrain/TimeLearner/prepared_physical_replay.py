@@ -23,11 +23,11 @@ def run(controls):
     controls=Path(controls).resolve(strict=True)
     spec=json.loads((controls/'specification.json').read_bytes())
     sys.path.insert(0,spec['python_source']);sys.dont_write_bytecode=True
-    from Scripts.StructTrain.TimeLearner.native_evidence import require, EvidenceError
+    from Scripts.StructTrain.TimeLearner.native_evidence import require
     from Scripts.StructTrain.TimeLearner.runtime import file_record,source_closure
     from Scripts.StructTrain.TimeLearner.native_cli import inspect_native_cli
     from Scripts.StructTrain.TimeLearner.native_pipeline_worker import validate_job,audit_execution
-    from Scripts.StructTrain.TimeLearner.frozen_diagnostic_order import compare_samples
+    from Scripts.StructTrain.TimeLearner.trial_response_comparison import trial_response_comparison
     from Scripts.StructTrain.TimeLearner.native_gate import _environment
     from Scripts.StructTrain.TimeLearner.windows_process import execute
     require(os.name=='nt' and spec['kind']=='timelearner_prepared_physical_replay' and
@@ -112,20 +112,18 @@ def run(controls):
                 len(metrics['trials'])==8 and metrics['effective_threshold']==prior_metrics['effective_threshold'],
                 'physical_replay_native_audit_invalid')
         rows=[]
-        for index,trial in enumerate(job['trials']):
-            observed=json.loads((output/'native'/f'trial-{index}.json').read_bytes())
-            expected=old[observed['sample_id']]
-            require(all(expected[k]==observed[k] for k in
-                ('sample_id','label','pattern_hash','pattern_isi','model_before','model_after')),
-                'physical_replay_sample_or_frozen_model_changed')
-            error=None;difference=None
-            try:difference=compare_samples(expected['samples'],observed['samples'],1e-12)
-            except EvidenceError as e:error=str(e)
-            events=all(expected[k]==observed[k] for k in ('stimulus_times','spike_times','spike_count'))
-            rows.append(dict(trial_id=observed['trial_id'],sample_id=observed['sample_id'],
-                samples=len(observed['samples']),spike_count=observed['spike_count'],
-                maximum_absolute_sample_difference=difference,waveform_difference_reason=error,
-                waveform_preserved=error is None,stimulus_and_spike_events_preserved=events))
+        with trial_response_comparison(model,physical_data=True) as compare:
+            for index,trial in enumerate(job['trials']):
+                observed=json.loads((output/'native'/f'trial-{index}.json').read_bytes())
+                expected=old[observed['sample_id']]
+                comparison=compare(expected,observed)
+                rows.append(dict(trial_id=observed['trial_id'],sample_id=observed['sample_id'],
+                    samples=len(observed['samples']),spike_count=observed['spike_count'],
+                    maximum_absolute_sample_difference=comparison['maximum_absolute_sample_difference'],
+                    waveform_difference_reason=next(iter(comparison['difference_reasons']),None),
+                    waveform_preserved=comparison['waveforms_equal_within_declared_tolerance'],
+                    stimulus_and_spike_events_preserved=comparison['stimulus_and_spike_events_equal'],
+                    response_comparison=comparison))
         require(inventory(inputs)==spec['input_inventory'] and source_closure(sdk)==runtime['source_closure'] and
                 {n:file_record(source/n) for n in source_records}==source_records and
                 file_record(audit_path)==spec['source_audit'] and
