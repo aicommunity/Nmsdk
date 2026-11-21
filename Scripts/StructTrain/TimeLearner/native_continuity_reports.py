@@ -77,6 +77,11 @@ def analyze_fixture(value, *, branch, frequency):
         first_responses_equal=True, baseline=baseline, reset_second_baseline=restored,
         preserved_second_baseline=retained, first_tail_difference=tail_delta,
         preserved_first_sample_difference=preserve_delta,
+        recorded_events=[dict(trial_id=o['trial_id'], reset_policy=o['reset_policy'],
+            stimulus_times=o['stimulus_times'], spike_times=o['spike_times'],
+            spike_count=o['spike_count'],
+            spikes_before_first_stimulus=sum(t < o['stimulus_times'][0] for t in o['spike_times']))
+            for pair in pairs for o in pair.values()],
         recorded_observation_protocol_verified=True, effective_model_audited=False,
         original_scheduler_execution_reverified=False, new_native_execution=False,
         production_continuous_wrapper_verified=False, scientific_verdict=None)
@@ -121,22 +126,27 @@ def render_fixture(path, output):
                             else ('Сброс' if role == 'reset' else 'Сохранение'))+'; сома '+str(channel+1)
                     ax.plot(times, [s['soma'][channel] for s in o['samples']], color=color,
                             linestyle=style, linewidth=1.5, alpha=1-channel*.25, label=name)
+                for j,t in enumerate(o['spike_times']):
+                    ax.axvline(t-o['begin'], color=color, linestyle=':', linewidth=1,
+                        alpha=.6, label=('Выходные события; '+('экз. 1' if role == 'reset' else 'экз. 2')) if j == 0 else None)
             for t in pairs[index]['reset']['stimulus_times']:
                 ax.axvline(t-pairs[index]['reset']['begin'], color='#df7900', linewidth=1.1,
                            label='Входной импульс' if t == pairs[index]['reset']['stimulus_times'][0] else None)
             ax.set_title('Первая проба: оба экземпляра сброшены' if index == 0 else
                          'Вторая проба: различная политика сброса')
             ax.set_ylim(*limits); ax.set_ylabel('Потенциал сомы,\nусловные единицы'); ax.grid(alpha=.25)
-            ax.legend(fontsize=9, loc='upper left')
+            ax.legend(fontsize=9, loc='lower right', ncol=2)
         left, right = pairs[1]['reset'], pairs[1]['preserve']
         times = [s['time']-left['begin'] for s in left['samples']]
         for channel in range(channels):
             axes[2].plot(times, [a['soma'][channel]-b['soma'][channel]
                 for a,b in zip(right['samples'], left['samples'])], linewidth=1.5,
-                label='Сома '+str(channel+1))
+                color=('#245dc1', '#008c80')[channel], label='Сома '+str(channel+1))
         for t in left['stimulus_times']: axes[2].axvline(t-left['begin'], color='#df7900', linewidth=1.1)
+        for o,color in ((left,colors[0]),(right,colors[1])):
+            for t in o['spike_times']: axes[2].axvline(t-o['begin'], color=color, linestyle=':', linewidth=1, alpha=.6)
         axes[2].set_title('Вторая проба: сохранение минус сброс');axes[2].set_ylabel('Разность потенциалов,\nусловные единицы')
-        axes[2].legend(fontsize=10);axes[2].grid(alpha=.25)
+        axes[2].legend(fontsize=10,loc='lower right');axes[2].grid(alpha=.25)
         for ax in axes:
             ax.set_xlim(0, left['end']-left['begin']);ax.set_xlabel('Время от начала пробы, с')
         for suffix in ('png', 'svg'): fig.savefig(output/('continuity.'+suffix), dpi=180)
@@ -145,6 +155,7 @@ def render_fixture(path, output):
     manifest = dict(result, plotting_runtime=runtime, full_samples_rendered=True,
         observation_scope='two_short_closed_trials_not_full_pattern_recognition',
         input_markers='actual stimulus times; vertical markers are not potential amplitudes',
+        output_markers='actual recorded LT event times; dotted blue and purple by physical owner',
         artifacts=[file_record(output/('continuity.'+s)) for s in ('png', 'svg')])
     _write(output/'manifest.json', manifest)
     return manifest

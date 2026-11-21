@@ -1,5 +1,7 @@
 """Read the actual closed four-cell native corpus after independent recovery."""
 from copy import deepcopy
+from contextlib import redirect_stdout
+import io
 import json
 import os
 from pathlib import Path
@@ -8,7 +10,7 @@ import unittest
 import xml.etree.ElementTree as ET
 
 from ..external_archive import locate, resolve
-from ..native_continuity_reports import analyze_fixture, read_fixture, render_fixture
+from ..native_continuity_reports import analyze_fixture, read_fixture
 from ..native_evidence import EvidenceError, load
 from ..portable_primary import RETAIN_ALIASES, restore_native_bundle
 from ..runtime import file_record
@@ -62,7 +64,12 @@ class NativeContinuityPrimaryRestorationTest(unittest.TestCase):
                             with self.assertRaises(EvidenceError):
                                 analyze_fixture(changed,branch=topology=='Branch',frequency=frequency)
                     output=Path(os.environ['TMPDIR'])/'continuity-figures'/path.stem
-                    manifest=render_fixture(path,output)
+                    from ..__main__ import main
+                    text=io.StringIO()
+                    with redirect_stdout(text):
+                        status=main(['report',str(path),'--format','native-continuity','--output',str(output)])
+                    self.assertEqual(status,0)
+                    manifest=load(output/'manifest.json')
                     self.assertTrue(manifest['full_samples_rendered'])
                     self.assertTrue((output/'continuity.png').is_file())
                     figures.append(dict(manifest=str(output/'manifest.json'),source_member=path.relative_to(restored).as_posix()))
