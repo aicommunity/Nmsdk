@@ -305,8 +305,8 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--trace", type=Path, help="original primary CSV, required for probe")
     analysis.add_argument("--allow-legacy", action="store_true", help="descriptive domain schema-1 adapter only")
     analysis.add_argument("--historical-analysis", choices=("learned-v2-no-capacitance",
-                         "training-v3-no-capacitance-history"),
-                         help="explicit archived training analysis adapter for pipeline-run only; defaults to strict equality")
+                         "training-v3-no-capacitance-history", "evaluation-v1-native-reset-policy"),
+                         help="explicit archived analysis adapter for pipeline-run only; never changes new-job admission")
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")

@@ -1,0 +1,44 @@
+{
+  "job": "s11-native-dynamics-continuity-m40-a1-canonical",
+  "output_exists": true,
+  "controller-result.json": {
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 155.82994122616947,
+    "all_processes_closed": true,
+    "scientific_verdict": null
+  },
+  "worker/terminal.json": {
+    "operation_passed": true,
+    "scientific_verdict": null
+  },
+  "worker/canonical-result.json": {
+    "external_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-native-dynamics-continuity-m40-a1-prepared",
+    "selected": 11,
+    "SDK_imported_modules": 30,
+    "source_files": 4699,
+    "canonical_sha256": "39c99c4258a5f5c148ec16d41c159a8d81ee713f9c685fd13909a742175ad2f3",
+    "job_sha256": "0bee3d1e0ded9a99090d93ab3ef189b4bb73dc6de0eb7059be20309ee474ebca",
+    "native_dispatch": false,
+    "scientific_verdict": null
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "34af8f4b50a30cf7d771768d4f4d6d5d4daf15856824c40b5c6c2752855b705d",
+      "unit": "timelearner-9ffe50a6-0e5a-4eed-9f08-4e59a7f7c514.service",
+      "invocation_id": "fcacf1e1dd8e4a6688e83d432577291c",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9ffe50a6-0e5a-4eed-9f08-4e59a7f7c514.service",
+      "initial_main_pid": 4007152,
+      "initial_start_ticks": "435515201",
+      "sha256": "6f37b860f0db429ab73cb7b8797dc5284701208ece7d55de6f33778f049738d7"
+    }
+  },
+  "worker/canonical-child.stderr": "",
+  "process/contained/stderr.log": ""
+}

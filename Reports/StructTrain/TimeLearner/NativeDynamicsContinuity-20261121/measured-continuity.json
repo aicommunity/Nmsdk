@@ -1,0 +1,112 @@
+{
+  "artifacts": [
+    {
+      "frequency_hz": 2000,
+      "kind": "timelearner_physical_dynamics_continuity_fixture",
+      "model_data_sha256": "065b2f67a4a0afeff9571e4957b4b20dc15d4e0e9ec576f431c01f314fa3dcff",
+      "model_revision": "7c0f564a15a7554d7af81c1c4925d6f26188b4b3b75261601b407d5627b4fcd0",
+      "new_training_performed": false,
+      "preserved_first_sample_difference": 0.007660547528460349,
+      "production_continuous_wrapper_verified": false,
+      "schema_version": 1,
+      "scientific_verdict": null,
+      "observations_count": 2,
+      "sample_counts": [
+        {
+          "reset": 187,
+          "preserve": 187
+        },
+        {
+          "reset": 187,
+          "preserve": 187
+        }
+      ],
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-native-dynamics-continuity-m40-a1/physical-model-and-measured-continuity/native/physical-continuity-Branch-2000.json"
+    },
+    {
+      "frequency_hz": 20000,
+      "kind": "timelearner_physical_dynamics_continuity_fixture",
+      "model_data_sha256": "56501083cc6d43dd25f2e41b43b9a1ead91db699239bcebb95ba6942d87b2a1f",
+      "model_revision": "2ee71e36ddcbf3cb1cd01b2f2cba10491d9eb4b1fb796317acfe012c70c8e9ed",
+      "new_training_performed": false,
+      "preserved_first_sample_difference": 0.0015597213932156961,
+      "production_continuous_wrapper_verified": false,
+      "schema_version": 1,
+      "scientific_verdict": null,
+      "observations_count": 2,
+      "sample_counts": [
+        {
+          "reset": 1825,
+          "preserve": 1825
+        },
+        {
+          "reset": 1825,
+          "preserve": 1825
+        }
+      ],
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-native-dynamics-continuity-m40-a1/physical-model-and-measured-continuity/native/physical-continuity-Branch-20000.json"
+    },
+    {
+      "frequency_hz": 2000,
+      "kind": "timelearner_physical_dynamics_continuity_fixture",
+      "model_data_sha256": "43be4ff249a630b9c3d777c97e70845e384bc93fe015f3784a0f62ddf6875383",
+      "model_revision": "14712d96fb4f51abc07e4b4d2c87c37560b9558c94798afcc0ec16f45b037151",
+      "new_training_performed": false,
+      "preserved_first_sample_difference": 0.004713359184256749,
+      "production_continuous_wrapper_verified": false,
+      "schema_version": 1,
+      "scientific_verdict": null,
+      "observations_count": 2,
+      "sample_counts": [
+        {
+          "reset": 187,
+          "preserve": 187
+        },
+        {
+          "reset": 187,
+          "preserve": 187
+        }
+      ],
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-native-dynamics-continuity-m40-a1/physical-model-and-measured-continuity/native/physical-continuity-Classic-2000.json"
+    },
+    {
+      "frequency_hz": 20000,
+      "kind": "timelearner_physical_dynamics_continuity_fixture",
+      "model_data_sha256": "d103c484e84c3f87432abb20dd04f001c8096a0ec53013769f47b7738b1b42ea",
+      "model_revision": "3abc9a0373cabcf8b85a827dddce52a4aff265b12464ca2ad20c3cb8f324d942",
+      "new_training_performed": false,
+      "preserved_first_sample_difference": 0.0012711869396507813,
+      "production_continuous_wrapper_verified": false,
+      "schema_version": 1,
+      "scientific_verdict": null,
+      "observations_count": 2,
+      "sample_counts": [
+        {
+          "reset": 1825,
+          "preserve": 1825
+        },
+        {
+          "reset": 1825,
+          "preserve": 1825
+        }
+      ],
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-native-dynamics-continuity-m40-a1/physical-model-and-measured-continuity/native/physical-continuity-Classic-20000.json"
+    }
+  ],
+  "gate": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 11,
+      "observed": 11,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "b78cf282d64ebae8c4e5e716d3b403046a26c35f96d1212502b1188e8f81f943"
+    },
+    "scientific_verdict": null
+  }
+}

@@ -84,7 +84,10 @@ def _audit_source(job, source_case, mode):
 
 
 @_evidence_boundary
-def validate_job(mode, job, source_case=None):
+def _validate_job(mode, job, source_case=None, *, historical_evaluation_reset=False):
+    require(type(historical_evaluation_reset) is bool and
+            (not historical_evaluation_reset or mode in ('evaluate','diagnostic-evaluate','physical-model-evaluate')),
+            'unsupported_pipeline_historical_reset_scope')
     require(mode in FIELDS and type(job) is dict, "unknown_native_pipeline_job")
     if mode == "probe":
         from .native_characterization import validate_job as validate_probe_job
@@ -149,8 +152,13 @@ def validate_job(mode, job, source_case=None):
         from .calibrated_evidence import REQUEST_FIELDS
         require(all(type(t) is dict and set(t) == REQUEST_FIELDS and t["run_id"] == job["run_id"] for t in trials),
                 "invalid_evaluation_trial_scope")
-        require(all(t["reset_policy"] == "reset_per_trial" for t in trials),
-                "pipeline_reset_policy_not_yet_verified")
+        if historical_evaluation_reset:
+            require(all(t['reset_policy'] in ('reset_per_trial','preserve_neuron_dynamics') for t in trials) and
+                    any(t['reset_policy']=='preserve_neuron_dynamics' for t in trials),
+                    'unsupported_pipeline_historical_reset_scope')
+        else:
+            require(all(t["reset_policy"] == "reset_per_trial" for t in trials),
+                    "pipeline_reset_policy_not_yet_verified")
         require(len({t["trial_id"] for t in trials}) == len(trials), "duplicate_evaluation_trial")
         if mode in ("diagnostic-evaluate", "physical-model-evaluate"):
             require(len(trials) >= 2 and {t["label"] for t in trials} == {"target", "foil"},
@@ -178,6 +186,11 @@ def validate_job(mode, job, source_case=None):
         from .live_training_worker import validate_live_plan
         result["finalization"] = validate_live_plan(job["finalization_plan"], config, job["implementation_id"])
     return result
+
+
+def validate_job(mode, job, source_case=None):
+    """Admission of a new operation always uses the verified reset scope."""
+    return _validate_job(mode,job,source_case)
 
 
 def _artifact_records(directory, execution):
@@ -211,8 +224,8 @@ def _artifact_records(directory, execution):
 
 
 @_evidence_boundary
-def audit_execution(mode, directory, job, source_case=None):
-    validate_job(mode, job, source_case)
+def _audit_execution(mode, directory, job, source_case=None, *, historical_evaluation_reset=False):
+    _validate_job(mode,job,source_case,historical_evaluation_reset=historical_evaluation_reset)
     if mode == "probe":
         from .native_characterization import audit_execution as audit_probe_execution
         require(load(Path(directory)/"job.json") == job, "pipeline_probe_job_changed")
@@ -420,6 +433,10 @@ def audit_execution(mode, directory, job, source_case=None):
             "metrics": metrics, "native_execution_verified": False, "evaluation_verdict": None}
 
 
+def audit_execution(mode, directory, job, source_case=None):
+    return _audit_execution(mode,directory,job,source_case)
+
+
 def _structured_live_exit(mode, job, process, directory):
     """Historical schema-1 run-manifest policy; preserve archived interpretation."""
     return (mode == "train" and job["schema_version"] == 2 and process["execution"] == "process_error" and
@@ -567,7 +584,9 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
 def audit_run_manifest(path, *, historical_analysis=None):
     """Recompute portable source, native result and process/runtime bindings."""
     require(historical_analysis in (None, 'learned-v2-no-capacitance',
-                                   'training-v3-no-capacitance-history'), 'unknown_pipeline_historical_adapter')
+                                   'training-v3-no-capacitance-history',
+                                   'evaluation-v1-native-reset-policy'), 'unknown_pipeline_historical_adapter')
+    historical_reset = historical_analysis == 'evaluation-v1-native-reset-policy'
     path = Path(path).resolve(strict=True);root = path.parent
     manifest = load(path);_digest(manifest)
     contained = type(manifest.get("schema_version")) is int and manifest["schema_version"] in (4,5)
@@ -592,6 +611,8 @@ def audit_run_manifest(path, *, historical_analysis=None):
         actual = root/r["path"]
         require(actual.resolve(strict=True).is_relative_to(root) and _record(actual, root) == r, "pipeline_run_artifact_changed")
     mode = manifest["operation"];source = manifest["source_package_path"];source_case = None
+    require(not historical_reset or mode in ('evaluate','diagnostic-evaluate','physical-model-evaluate'),
+            'unsupported_pipeline_historical_reset_scope')
     job = load(root/"input/job.json")
     native_job_relative='input/job.json'
     if file_source:
@@ -610,7 +631,8 @@ def audit_run_manifest(path, *, historical_analysis=None):
         require(type(source) is str and source in names and PurePosixPath(source).parent == PurePosixPath("input/source"),
                 "pipeline_source_path_changed")
         source_case = _load_source_case(mode, root/source)
-    require(manifest["job_sha256"] == job["sha256"] and validate_job(mode, job, source_case) == manifest["preflight"],
+    require(manifest["job_sha256"] == job["sha256"] and
+            _validate_job(mode,job,source_case,historical_evaluation_reset=historical_reset) == manifest["preflight"],
             "pipeline_run_preflight_changed")
     process, runtime = load(root/"process/result.json"), load(root/"process/runtime.json")
     from .runtime import digest_json, runtime_content_identity
@@ -654,7 +676,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
                 owned["runtime_fingerprint"] == runtime["runtime_fingerprint"] and count(owned["pid"]) > 0 and
                 process["returncode"] == (0 if process["execution"] == "completed" else 2) and process["ownership_scope"] == ("bound_cgroup" if contained else "launched_executable_only") and
                 process["runtime_provenance"] == "loaded_files_captured", "pipeline_owned_runtime_changed")
-    audit = audit_execution(mode, root/"native", job, source_case) if auditable else None
+    audit = _audit_execution(mode,root/"native",job,source_case,historical_evaluation_reset=historical_reset) if auditable else None
     if mode in ("preflight", "probe") and auditable:
         arguments = request["arguments"]
         if "--timelearner-capture-directory" in arguments:
@@ -685,7 +707,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
         require(load(root/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
     comparison = audit
     adapter_used = False
-    if historical_analysis is not None:
+    if historical_analysis is not None and not historical_reset:
         # Recompute with the current auditor first. Only an explicitly selected,
         # known schema transition may project its result into the archived shape.
         # The final equality still checks every other field and all native/runtime
@@ -713,9 +735,15 @@ def audit_run_manifest(path, *, historical_analysis=None):
                     'unsupported_pipeline_historical_analysis')
             projected = {**current, 'auditor_version': 3}
         comparison = {**audit, 'training_audit': projected};adapter_used = True
+    elif historical_reset:
+        # A read-only adapter for already recorded observations, never a route
+        # around new-job admission. No fields or numerical results are projected.
+        adapter_used = True
     require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
             "pipeline_run_analysis_changed")
     result = {"run_evidence_consistent": True, "operation": mode, "native_execution_verified": False,
             "independent_partition_verified": False, "evaluation_verdict": None}
     if adapter_used:result['historical_analysis_adapter'] = historical_analysis
+    if historical_reset:
+        result.update(new_execution_permitted=False,continuous_production_runner_verified=False)
     return result
