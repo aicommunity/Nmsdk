@@ -6,7 +6,6 @@ final two-second quiet tail, must remain observed. This module does not train,
 choose a threshold or interpret a zero process exit as scientific success.
 """
 from copy import deepcopy
-import math
 
 from .condition import ConditionSpec, artifact
 from .model_identity import canonical_model_sha256 as sha
@@ -40,26 +39,33 @@ def declare_job(original, run_id, *, rotation, cadence, reset_policy):
     frequency = number(model['configuration']['model']['frequency_hz'])
     require(frequency in (2000, 20000), 'iti_unverified_frequency')
     require(all(number(v) > 0 for t in trials for v in t['pattern_isi']), 'iti_nonpositive_interval')
-    latest_input = max(sum(t['pattern_isi']) for t in trials)
-    short_ticks = math.ceil((latest_input + .2)*frequency)
+    frequency = int(frequency)
+    require(all(equal(v*frequency, round(v*frequency)) for t in trials for v in t['pattern_isi']),
+            'iti_requires_native_tick_patterns_and_shorter_cadence')
+    # All declared intervals have been checked against the native lattice.
+    # Summing their binary floats and applying ceil can add a spurious tick
+    # (e.g. .01+.4+.04+.04+.2). Carry out boundary arithmetic as integer ticks.
+    last_input_ticks = {t['pattern_hash']:sum(round(v*frequency) for v in t['pattern_isi']) for t in trials}
+    short_ticks = max(last_input_ticks.values()) + round(.2*frequency)
     short_duration = short_ticks/frequency
-    require(0 < short_duration < 2 and all(equal(v*frequency, round(v*frequency))
-            for t in trials for v in t['pattern_isi']), 'iti_requires_native_tick_patterns_and_shorter_cadence')
-    duration = 2. if cadence == 'long' else short_duration
+    require(0 < short_duration < 2, 'iti_requires_native_tick_patterns_and_shorter_cadence')
+    duration_ticks = 2*frequency if cadence == 'long' else short_ticks
+    duration = duration_ticks/frequency
     ordered = trials[rotation:]+trials[:rotation]
     requests = []
     for position, trial in enumerate(ordered):
         # Closing the stream is not an unobserved wait. The final observation
         # includes at least two full seconds after its actual final input.
         # One extra native tick covers the observed generator onset offset.
-        end = duration if position != 7 else max(2., (math.ceil(sum(trial['pattern_isi'])*frequency)+1)/frequency+2.)
+        ticks = duration_ticks if position != 7 else max(2*frequency,
+            last_input_ticks[trial['pattern_hash']]+1+2*frequency)
         requests.append(dict(trial, run_id=run_id, trial_id=f'{run_id}/rotation-{rotation}/position-{position}',
-            duration=end, maximum_samples=math.ceil(end*frequency)+5,
+            duration=ticks/frequency, maximum_samples=ticks+5,
             reset_policy='reset_per_trial' if position == 0 else reset_policy))
     job = deepcopy(original)
     job.pop('sha256')
     job.update(run_id=run_id, coverage_policy='continuous_native_stream', trials=requests,
-               maximum_model_ticks=sum(math.ceil(t['duration']*frequency)+4 for t in requests))
+               maximum_model_ticks=sum(t['maximum_samples']-1 for t in requests))
     job['sha256'] = sha(job)
     validate_job('physical-model-evaluate', job, (model,))
     design = dict(protocol_id=PROTOCOL, rotation=rotation, cadence=cadence,

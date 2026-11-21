@@ -49,6 +49,18 @@ class FrozenPhysicalItiDesignTest(unittest.TestCase):
             self.assertEqual(rd['final_observation_duration'],pd['final_observation_duration'])
             if cadence=='long':self.assertTrue(all(t['duration']==2 for t in reset['trials'][:-1]))
 
+    def test_real_matrix_float_sum_cannot_add_a_native_tick(self):
+        frequency=int(self.original['source_model_data']['configuration']['model']['frequency_hz'])
+        self.assertIn([.01,.4,.04,.04],[t['pattern_isi'] for t in self.original['trials']])
+        expected_ticks=max(sum(round(v*frequency) for v in t['pattern_isi'])
+                           for t in self.original['trials'])+round(.2*frequency)
+        self.assertEqual(expected_ticks/frequency,.69)
+        for rotation in (0,7):
+            job,_=self.job(rotation=rotation)
+            self.assertEqual(job['trials'][0]['duration'],.69)
+            self.assertTrue(all(t['maximum_samples']==expected_ticks+5 for t in job['trials'][:-1]))
+            self.assertEqual(job['maximum_model_ticks'],sum(t['maximum_samples']-1 for t in job['trials']))
+
     def test_coverage_and_reset_are_separate_axes_with_explicit_new_preflight(self):
         ordinary=validate_job('physical-model-evaluate',self.original,(self.original['source_model_data'],))
         self.assertNotIn('evaluation_presentation',ordinary)
