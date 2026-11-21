@@ -343,12 +343,18 @@ def _audit_execution(mode, directory, job, source_case=None, *, historical_evalu
         require(type(completed) is bool, "invalid_training_boundary")
         filename = "train_learned_state.json" if completed else "train_stopped_state.json"
         require(execution["package_path"] == filename and filename in names, "pipeline_training_package_missing")
-        package = load(directory/filename)
         if completed:
-            audit = audit_learned_state(*load_case(directory/filename))
+            training_case = load_case(directory/filename)
+            audit = audit_learned_state(*training_case)
         else:
             from .stopped_evidence import audit_stopped_state, load_case as load_stopped
-            audit = audit_stopped_state(*load_stopped(directory/filename))
+            training_case = load_stopped(directory/filename)
+            audit = audit_stopped_state(*training_case)
+        # The tuple already owns the complete original package. Keeping an
+        # independently decoded copy here doubles large composite history trees
+        # while its primary evidence is audited. Reuse the very same object;
+        # none of the model, cold-start or execution checks below is skipped.
+        package = training_case[0]
         # A fresh service gives the first attempt its native session/1 identity.
         # The declared attempt id remains in execution.json; no physics changes.
         effective_config = {**job["configuration"], "run_id": job["configuration"]["run_id"]+"/session/1"}
