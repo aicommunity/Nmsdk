@@ -1,0 +1,22 @@
+{
+  "preflight_native_files": [
+    {
+      "path": "native\\execution.json",
+      "bytes": 2266
+    },
+    {
+      "path": "native\\initial-state.json",
+      "bytes": 72894
+    },
+    {
+      "path": "native\\job.json",
+      "bytes": 940882
+    }
+  ],
+  "preflight/process/stdout.log": "",
+  "preflight/process/stderr.log": "",
+  "preflight/native/execution.json": "{\n    \"artifacts\": [\n        {\n            \"bytes\": 940882,\n            \"path\": \"job.json\",\n            \"sha256\": \"5ed08049514685fe376f8b667bc69c6c62933a1de416caa9d25590833d414016\"\n        },\n        {\n            \"bytes\": 72894,\n            \"path\": \"initial-state.json\",\n            \"sha256\": \"8c52c04272b03d403535fb0e766048e79cc352cf71705553e96eb750cc5b4b01\"\n        }\n    ],\n    \"base_schema_version\": 1,\n    \"controller_state\": \"idle\",\n    \"evaluation_verdict\": null,\n    \"execution\": \"completed\",\n    \"frequency_hz\": 2000,\n    \"integration\": {\n        \"channels\": [\n            {\n                \"maximum_conductance\": 1.1627906976744186e-08,\n                \"maximum_step_gain\": 0.24921579232017307,\n                \"path\": \"Dendrite1_1.ExcChannel\"\n            },\n            {\n                \"maximum_conductance\": 1.1627906976744186e-08,\n                \"maximum_step_gain\": 0.24921579232017307,\n                \"path\": \"Dendrite1_1.InhChannel\"\n            },\n            {\n                \"maximum_conductance\": 1.1627906976744186e-08,\n                \"maximum_step_gain\": 0.24921579232017307,\n                \"path\": \"Soma1.ExcChannel\"\n            },\n            {\n                \"maximum_conductance\": 1.1627906976744186e-08,\n                \"maximum_step_gain\": 0.24921579232017307,\n                \"path\": \"Soma1.InhChannel\"\n            }\n        ],\n        \"reason\": \"\",\n        \"valid\": true\n    },\n    \"job_sha256\": \"48ff9b340f6011173477bc066468467155bf6b70dd8bd192d923b8da12f28512\",\n    \"kind\": \"timelearner_native_preflight_execution\",\n    \"model_revision\": \"ab751ba723852917588b694d156f1d8c9033b8b0a0ec7b8e93faacec0d747dc4\",\n    \"model_semantic_hash\": \"ab751ba723852917588b694d156f1d8c9033b8b0a0ec7b8e93faacec0d747dc4\",\n    \"model_ticks\": 0,\n    \"model_time_begin\": 0,\n    \"model_time_end\": 0,\n    \"native_execution_counts\": {\n        \"native_trials\": 0,\n        \"sampled_frames\": 0\n    },\n    \"observed_probes\": 0,\n    \"reference_probes\": 0,\n    \"schema_version\": 6,\n    \"sha256\": \"88e8b20b4ee440bc4e8d5f6f5275281016ddbd6bff09a2498dee7a0dc412b52a\",\n    \"source_measurements\": null,\n    \"terminal_boundary\": null,\n    \"terminal_selection\": {\n        \"maximum_wall_seconds\": 30,\n        \"schema_version\": 1\n    },\n    \"training_started\": false\n}\n",
+  "factor-preflight_native_files": [],
+  "factor-preflight/process/stdout.log": "",
+  "factor-preflight/process/stderr.log": "TimeLearner preflight job: incompatible_native_initial_shared_bank\r\n"
+}

@@ -1,0 +1,146 @@
+{
+  "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-branch-count-m4-a3",
+  "output_exists": true,
+  "preflight-accepted.json": {
+    "job_sha256": "dc22a25360fe7e27fecde104c61c5f727d59c4fcaf2db5a58dc130d8786cc55d",
+    "normalization": "N0",
+    "initial_model_revision": "ab751ba723852917588b694d156f1d8c9033b8b0a0ec7b8e93faacec0d747dc4",
+    "effective_initial_model_checked": true,
+    "factor_control_synapses": 2,
+    "initial_nodes": 14,
+    "factor_control_nodes": 15
+  },
+  "preflight/process-result.json": {
+    "kind": "timelearner_windows_process_result",
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "all_processes_closed": true,
+    "runtime_provenance": "loaded_files_captured",
+    "wall_seconds": 3.2703529000282288
+  },
+  "preflight/audit.json": {
+    "effective_initial_model_checked": true,
+    "model_revision": "ab751ba723852917588b694d156f1d8c9033b8b0a0ec7b8e93faacec0d747dc4",
+    "training_started": false
+  },
+  "factor-preflight/process-result.json": {
+    "kind": "timelearner_windows_process_result",
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "all_processes_closed": true,
+    "runtime_provenance": "loaded_files_captured",
+    "wall_seconds": 3.2633652000222355
+  },
+  "factor-preflight/audit.json": {
+    "effective_initial_model_checked": true,
+    "model_revision": "60f317d8c262560cf28441b1ef9b2e914ba84b5d1b91c2e7c97dc0e276b3374a",
+    "training_started": false
+  },
+  "preflight_owned_process": {
+    "pid": 18776,
+    "open_error": 87
+  },
+  "factor-preflight_owned_process": {
+    "pid": 10284,
+    "open_error": 87
+  },
+  "train_owned_process": {
+    "pid": 19640,
+    "same_creation": true,
+    "same_executable": true,
+    "running": true
+  },
+  "controller.stderr.log": "",
+  "controller.stdout.log": "",
+  "task": {
+    "last_result": 267009,
+    "instances": [],
+    "state": 4
+  },
+  "train_native_files": [
+    {
+      "name": "initial-state.json",
+      "bytes": 72894
+    },
+    {
+      "name": "job.json",
+      "bytes": 940882
+    },
+    {
+      "name": "raw-trial-1.csv",
+      "bytes": 146159
+    },
+    {
+      "name": "raw-trial-1.json",
+      "bytes": 5226
+    },
+    {
+      "name": "raw-trial-10.csv",
+      "bytes": 146168
+    },
+    {
+      "name": "raw-trial-10.json",
+      "bytes": 5046
+    },
+    {
+      "name": "raw-trial-11.csv",
+      "bytes": 146206
+    },
+    {
+      "name": "raw-trial-11.json",
+      "bytes": 5025
+    },
+    {
+      "name": "raw-trial-12.csv",
+      "bytes": 146089
+    },
+    {
+      "name": "raw-trial-12.json",
+      "bytes": 5277
+    },
+    {
+      "name": "raw-trial-13.csv",
+      "bytes": 146137
+    },
+    {
+      "name": "raw-trial-13.json",
+      "bytes": 5289
+    },
+    {
+      "name": "raw-trial-14.csv",
+      "bytes": 142842
+    },
+    {
+      "name": "raw-trial-14.json",
+      "bytes": 5037
+    },
+    {
+      "name": "raw-trial-15.csv",
+      "bytes": 146167
+    },
+    {
+      "name": "raw-trial-15.json",
+      "bytes": 5031
+    },
+    {
+      "name": "raw-trial-16.csv",
+      "bytes": 146206
+    },
+    {
+      "name": "raw-trial-16.json",
+      "bytes": 5040
+    },
+    {
+      "name": "raw-trial-17.csv",
+      "bytes": 146180
+    },
+    {
+      "name": "raw-trial-17.json",
+      "bytes": 5032
+    }
+  ]
+}
