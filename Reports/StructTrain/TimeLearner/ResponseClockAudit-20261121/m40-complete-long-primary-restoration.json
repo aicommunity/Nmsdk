@@ -1,0 +1,78 @@
+{
+  "name": "s11-complete-long-primary-restore-m40-a1",
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 126.60987239796668,
+    "runtime_provenance": "loaded_files_captured",
+    "all_processes_closed": true
+  },
+  "worker/terminal.json": {
+    "operation_passed": true
+  },
+  "worker/validation/result.json": {
+    "kind": "timelearner_python_validation_result",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "executed_tests": 1,
+    "failures": [],
+    "errors": [],
+    "skipped": []
+  },
+  "monitor-final.json": {
+    "guard_triggered": false,
+    "peak_allocated_bytes": 12565389312,
+    "minimum_free_bytes": 315789627392
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "6b4b1a95ac06d041ccca8721317c54167bb09c74e0ae0be979098dbe12aefd0f",
+      "unit": "timelearner-27b6f25e-49d0-4e0e-84df-5eaab3fde650.service",
+      "invocation_id": "f8bd49872a644921b29a966a523bdf23",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-27b6f25e-49d0-4e0e-84df-5eaab3fde650.service",
+      "initial_main_pid": 3482810,
+      "initial_start_ticks": "434142491",
+      "sha256": "3107b4eab8b11de803cf3d530f5b70640b531512865d532dbe3599e76383c510"
+    }
+  },
+  "restoration_proof": {
+    "kind": "timelearner_complete_long_primary_restoration_proof",
+    "schema_version": 1,
+    "archive_reference": {
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "bytes": 148792604,
+      "kind": "nmsdk_structtrain_external_object",
+      "object": "objects/sha256/09/0997ee3e6b71c5576c0d65a55c1fdd6f76513c3d7a83c6b42c1af97e07d0a92a",
+      "schema_version": 1,
+      "sha256": "0997ee3e6b71c5576c0d65a55c1fdd6f76513c3d7a83c6b42c1af97e07d0a92a"
+    },
+    "source_archive": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/objects/sha256/09/0997ee3e6b71c5576c0d65a55c1fdd6f76513c3d7a83c6b42c1af97e07d0a92a",
+      "sha256": "0997ee3e6b71c5576c0d65a55c1fdd6f76513c3d7a83c6b42c1af97e07d0a92a",
+      "size": 148792604
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "0997ee3e6b71c5576c0d65a55c1fdd6f76513c3d7a83c6b42c1af97e07d0a92a",
+      "archive_members_verified": 5045,
+      "retained_regular_files": 5045,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "expanded_bytes": 12647050963,
+    "all_original_member_bytes_verified": true,
+    "disposable_recovery_cache_removed": true,
+    "scientific_verdict": null
+  }
+}
