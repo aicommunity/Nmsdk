@@ -1,6 +1,6 @@
 # Карта реализации TimeLearner
 
-Актуальная сводка: [20 ноября 2026](CurrentStatus-20261120.ru.md).
+Актуальная сводка: [21 ноября 2026](CurrentStatus-20261121.ru.md).
 Галерея всех 64 frozen-order проб опубликована; [квитанция](FrozenOrderTemporalGalleryPublication-20261117.json).
 Четвёртая редакция [описаний Classic и Branch в DOCX](AlgorithmDescriptions/README.ru.md) опубликована20.11:
 32/29 страниц,9 подходящих примеров с раздельными версиями и ограничениями,
