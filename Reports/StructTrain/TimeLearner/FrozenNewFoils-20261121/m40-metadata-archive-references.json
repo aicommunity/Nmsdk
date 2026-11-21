@@ -1,0 +1,54 @@
+{
+  "kind": "timelearner_frozen_new_foil_metadata_storage",
+  "schema_version": 1,
+  "objects": {
+    "terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/13/133431013196c1eda12f90d310d758c86bf96b6aafaf58c2b7e5a3cef1634019",
+      "sha256": "133431013196c1eda12f90d310d758c86bf96b6aafaf58c2b7e5a3cef1634019",
+      "bytes": 13992
+    },
+    "design.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/95/9539830d68755fe4e72ea694f300f0b3a7ee86d244d131b47106a83a1396937b",
+      "sha256": "9539830d68755fe4e72ea694f300f0b3a7ee86d244d131b47106a83a1396937b",
+      "bytes": 6934
+    },
+    "condition.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/71/719f695a3b187ca5de007899d364545d874ef5d9d50f27d5c85775ea66780ae5",
+      "sha256": "719f695a3b187ca5de007899d364545d874ef5d9d50f27d5c85775ea66780ae5",
+      "bytes": 31547
+    },
+    "run/run-manifest.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b4/b4b42e4c37372c747f0232e8cced9c576bd21b3536099b401c5c25b74f22da5e",
+      "sha256": "b4b42e4c37372c747f0232e8cced9c576bd21b3536099b401c5c25b74f22da5e",
+      "bytes": 63038
+    }
+  },
+  "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+  "counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 25,
+    "targets": 1,
+    "foils": 26,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.9629629629629629,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.038461538461538464
+  },
+  "target_control_preserved": true,
+  "full_primary_bundle_and_restore_pending": true,
+  "scientific_verdict": null
+}
