@@ -509,6 +509,12 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     _write(output/"runtime-cli-interface.json", cli)
     inputs = output/"input";inputs.mkdir();source_relative = None
     if source_path is not None:
+        # Preflight is a small value record. Release its parsed source before
+        # the snapshot performs its own full audit and the captured bytes are
+        # reloaded below. Retaining the old tree until the assignment completes
+        # needlessly overlaps several full model/history copies. The snapshot,
+        # primary checks and preflight equality guard remain unchanged.
+        source_case = None
         snapshot = _snapshot_source(source_path, inputs/"source", diagnostic=mode == "diagnostic-evaluate" or mode == "probe",
                                     physical_data=mode == "physical-model-evaluate")
         source_case = _load_source_case(mode, snapshot);source_relative = snapshot.relative_to(output).as_posix()

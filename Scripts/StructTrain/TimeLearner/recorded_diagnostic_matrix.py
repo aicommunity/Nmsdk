@@ -178,6 +178,12 @@ def run_case(request, row, runtime_path, output):
         cooperative_capture=True)
     options={'process_policy':policy}
     if 'job_source_transport' in row:options['job_source_transport']=row['job_source_transport']
+    # The complete, audited payload is now on disk. The production pipeline
+    # independently reloads and audits both it and its snapshot. Keeping the
+    # preparation objects here would retain two more complete histories while
+    # those checked copies are loaded; large real N4 sources reach the parent
+    # memory limit before Console can run. No fields or checks are omitted.
+    del package, summary, archive, job
     result = run_job('diagnostic-evaluate', job_path, state_path, runtime_path, output/row['name'],
                      request['limits']['leaf_wall_seconds'], **options)
     require(result['execution'] == 'completed' and result['validity'] == 'valid',
