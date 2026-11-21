@@ -19,6 +19,102 @@ def _write(path,value):
         stream.write('\n')
 
 
+def prepare(declaration):
+    """Prepare DATA replay after closed, independently audited source trials.
+
+    This replaces the former case-specific preparer. It reuses the complete
+    physical export without decoding the large training history again.
+    """
+    fields={'kind','schema_version','source_controls','export_controls','source_audit',
+        'destination','inputs','output','run_id','python_source','python_root'}
+    if (type(declaration) is not dict or set(declaration)!=fields or
+            declaration['kind']!='timelearner_physical_replay_preparation' or
+            type(declaration['schema_version']) is not int or declaration['schema_version']!=1):
+        raise ValueError('physical_replay_preparation_schema')
+    actor=Path(declaration['python_source']).resolve(strict=True)
+    sys.path.insert(0,str(actor));sys.dont_write_bytecode=True
+    from Scripts.StructTrain.TimeLearner.native_evidence import require
+    from Scripts.StructTrain.TimeLearner.runtime import file_record,runtime_content_identity,digest_json
+    from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256 as sha
+    from Scripts.StructTrain.TimeLearner.native_pipeline_worker import validate_job,_artifact_records
+    controls=Path(declaration['source_controls']).resolve(strict=True)
+    exported=Path(declaration['export_controls']).resolve(strict=True)
+    previous=json.loads((controls/'specification.json').read_bytes())
+    export_spec=json.loads((exported/'specification.json').read_bytes())
+    source=Path(previous['output']).resolve(strict=True)/'native'
+    export_output=Path(export_spec['output']).resolve(strict=True)
+    audit_path=Path(declaration['source_audit']).resolve(strict=True)
+    audit=json.loads(audit_path.read_bytes());metrics=audit['native_evidence']['metrics']
+    require(audit['kind']=='timelearner_prepared_diagnostic_independent_audit' and
+            audit['complete_source_history_audited'] and audit['all_input_bytes_unchanged'] and
+            audit['native_evidence']['frozen_model_verified'] and metrics['validity']=='valid' and
+            len(metrics['trials'])==8 and Path(audit['output']).resolve(strict=True)==source.parent,
+            'physical_replay_preparation_requires_complete_source_audit')
+    require(Path(export_spec['sdk_source']).resolve(strict=True)==Path(previous['sdk_source']).resolve(strict=True),
+            'physical_replay_preparation_sdk_mismatch')
+    terminal=json.loads((export_output/'terminal.json').read_bytes())
+    process=json.loads((export_output/'process-result.json').read_bytes())
+    require(terminal['native_process_completed'] and terminal['physical_roundtrip_verified'] and
+            process['execution']=='completed' and process['all_processes_closed'] and
+            process['runtime_provenance']=='loaded_files_captured','physical_replay_export_not_closed')
+    model_path=export_output/'native/model.json';model_before=file_record(model_path)
+    model=json.loads(model_path.read_bytes())
+    execution=json.loads((source/'execution.json').read_bytes())
+    require(execution['sha256']==sha({k:v for k,v in execution.items() if k!='sha256'}),
+            'physical_replay_preparation_source_execution_digest')
+    _artifact_records(source,execution)
+    require(model['sha256']==terminal['model_sha256'] and
+            model['model_revision']==terminal['model_revision']==execution['model_revision']==metrics['model_revision'] and
+            model['source_boundary']['sha256']==execution['model_sha256'],
+            'physical_replay_preparation_export_source_mismatch')
+    source_request=Path(previous['inputs']).resolve(strict=True)/'native-job-source.json'
+    envelope=json.loads(source_request.read_bytes())
+    require(envelope['kind']=='timelearner_checked_file_source_job' and envelope['schema_version']==1 and
+            envelope['sha256']==sha({k:v for k,v in envelope.items() if k!='sha256'}) and
+            envelope['source']['field']=='source_stopped' and envelope['job']['sha256']==
+            execution['job_sha256']==audit['resolved_job_sha256'],
+            'physical_replay_preparation_source_request_mismatch')
+    original=envelope['job'];run_id=declaration['run_id']
+    require(type(run_id) is str and bool(run_id),'physical_replay_preparation_run_id')
+    job={k:v for k,v in original.items() if k not in
+         ('sha256','source_stopped','conversion_spec','diagnostic_threshold')}
+    job.update(kind='timelearner_native_physical_model_evaluation_job',schema_version=1,
+        source_model_data=model,run_id=run_id,trials=[dict(t,run_id=run_id,
+        trial_id=run_id+'/trial-'+str(i)) for i,t in enumerate(original['trials'])])
+    job['sha256']=sha(job);validate_job('physical-model-evaluate',job,(model,))
+    destination=Path(declaration['destination']).resolve(strict=True)
+    inputs=Path(declaration['inputs']).absolute();output=Path(declaration['output']).absolute()
+    base=Path('C:/Projects/TimeLearnerWorker').resolve(strict=True)
+    require(os.name=='nt' and destination.is_relative_to(base/'controls') and
+            inputs.is_relative_to(base/'jobs') and output.is_relative_to(base/'jobs') and
+            not inputs.exists() and not output.exists() and inputs!=output,
+            'physical_replay_preparation_fresh_worker_paths')
+    inputs.mkdir(parents=True);os.link(model_path,inputs/'model.json');_write(inputs/'job.json',job)
+    (destination/'worker.py').write_bytes((actor/'Scripts/StructTrain/TimeLearner/prepared_physical_replay.py').read_bytes())
+    runtime=json.loads((exported/'runtime.json').read_bytes())
+    backend=file_record(actor/'Scripts/StructTrain/TimeLearner/windows_process.py')
+    require(backend['sha256']==runtime['windows_backend']['sha256'],
+            'physical_replay_preparation_backend_implementation_changed')
+    runtime['windows_backend']=backend;runtime['runtime_identity']=runtime_content_identity(runtime)
+    runtime['runtime_fingerprint']=digest_json(runtime['runtime_identity']);_write(destination/'runtime.json',runtime)
+    spec=dict(kind='timelearner_prepared_physical_replay',schema_version=1,python_source=str(actor),
+        worker_root=declaration['python_root'],sdk_source=previous['sdk_source'],inputs=str(inputs),output=str(output),
+        worker_sha256=file_record(destination/'worker.py')['sha256'],source_native=str(source),
+        source_inventory={n:file_record(source/n) for n in ['execution.json',*[f'trial-{i}.json' for i in range(8)]]},
+        source_request=file_record(source_request),source_audit=file_record(audit_path),
+        source_model_revision=model['model_revision'],resolved_job_sha256=job['sha256'],
+        input_inventory={p.name:dict(bytes=p.stat().st_size,sha256=file_record(p)['sha256']) for p in inputs.iterdir()},
+        memory_bytes=2*1024**3,maximum_wall_seconds=3600,minimum_free_bytes=2*1024**3,
+        maximum_output_bytes=512*1024**2,training_completed=False,scientific_verdict=None)
+    _write(destination/'specification.json',spec)
+    require(file_record(model_path)==model_before,'physical_replay_preparation_export_changed')
+    result=dict(kind='timelearner_prepared_physical_replay_inputs',schema_version=1,
+        source_model_revision=model['model_revision'],source_model_data_sha256=model['sha256'],
+        source_audit=spec['source_audit'],source_request=spec['source_request'],native_trials=8,
+        source_model_not_changed=True,native_execution_started=False,scientific_verdict=None)
+    _write(destination/'proposal.json',result);return result
+
+
 def run(controls):
     controls=Path(controls).resolve(strict=True)
     spec=json.loads((controls/'specification.json').read_bytes())
@@ -100,7 +196,7 @@ def run(controls):
                            for k in ('PATH','QT_PLUGIN_PATH','QT_QPA_PLATFORM')}):
             process=execute(runtime,args,Path(runtime['executable']['path']).parent,output/'process',
                 memory_bytes=spec['memory_bytes'],maximum_processes=64,
-                maximum_wall_seconds=spec['maximum_wall_seconds'],lock_file=controls/'native-replay.lock',
+                maximum_wall_seconds=spec['maximum_wall_seconds'],lock_file=base/'locks/worker.lock',
                 cooperative_capture=True,monitor=monitor)
         _write(output/'process-result.json',process)
         require(process['execution']=='completed' and process['all_processes_closed'] and
@@ -141,8 +237,13 @@ def run(controls):
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--controls',required=True)
-    run(p.parse_args().controls)
+    p=argparse.ArgumentParser()
+    modes=p.add_mutually_exclusive_group(required=True)
+    modes.add_argument('--controls');modes.add_argument('--prepare-specification')
+    args=p.parse_args()
+    if args.prepare_specification:
+        print(json.dumps(prepare(json.loads(Path(args.prepare_specification).read_bytes())),allow_nan=False))
+    else:run(args.controls)
 
 
 if __name__=='__main__':main()
