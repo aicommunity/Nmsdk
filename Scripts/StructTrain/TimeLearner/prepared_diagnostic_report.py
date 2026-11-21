@@ -1,6 +1,7 @@
 """Full-resolution soma/input and LT-event views after the production audit.
 
-Produces an external report cache, never a Git payload or a new scorer verdict.
+Produces a technical diagnostic cache, never a Git payload or a new scorer
+verdict. Publication figures still require Russian captions and visual review.
 """
 import argparse
 import hashlib
@@ -16,7 +17,7 @@ def render(audit_path, output, python_source, matplotlib_libs=None):
     sys.dont_write_bytecode=True
     from Scripts.StructTrain.TimeLearner.native_evidence import require
     from Scripts.StructTrain.TimeLearner.recognition_metrics import load_diagnostic_evaluation
-    from Scripts.StructTrain.TimeLearner.plotting import padded_limits,plotting_runtime,render_soma
+    from Scripts.StructTrain.TimeLearner.plotting import padded_limits,plotting_runtime,render_soma,render_positive_lobe_views
     from Scripts.StructTrain.TimeLearner.lt_decision_reports import render_lt_decisions
     from Scripts.StructTrain.TimeLearner.runtime import file_record
     audit_path=Path(audit_path).resolve(strict=True)
@@ -55,8 +56,13 @@ def render(audit_path, output, python_source, matplotlib_libs=None):
         for channel in range(count):
             folder=output/f'trial-{index:02d}-soma-{channel+1}'
             folder.mkdir()
-            views=render_soma(observation,channel,f'Soma channel {channel+1}',shared,folder,
+            maximum=max(range(len(observation['samples'])),key=lambda i:observation['samples'][i]['soma'][channel])
+            display={**observation,'diagnostic_peak_indices':([maximum] if 0<maximum<len(observation['samples'])-1 else [])}
+            views=render_soma(display,channel,f'Soma channel {channel+1}',shared,folder,
                 context_label='Same-Matrix stopped-model Test; actual '+trial['classification'])
+            views.extend(render_positive_lobe_views(display,channel,f'Soma channel {channel+1}',folder,
+                shared_minimum=min(v for o in observations for s in o['samples'] for v in s['soma']),
+                context_label='Same-Matrix stopped-model Test; actual '+trial['classification']))
             plotted.append(dict(trial_id=trial['trial_id'],sample_id=trial['sample_id'],
                 classification=trial['classification'],soma_index=channel,folder=folder.name,views=views))
     lt=render_lt_decisions(spec,observations,metrics['effective_threshold'],output,
@@ -69,7 +75,7 @@ def render(audit_path, output, python_source, matplotlib_libs=None):
         threshold=metrics['effective_threshold'],soma_count=count,trial_count=8,soma_views=plotted,lt_views=lt,
         plotting_runtime=runtime,all_patterns_and_somas_rendered=True,native_input_overlay=True,
         full_observation_windows=True,downsampling=False,minimum_native_zoom_tick_pixels=14.208,
-        native_spike_events_authoritative=True,visual_acceptance_complete=False,
+        native_spike_events_authoritative=True,visual_acceptance_complete=False,publication_ready=False,
         training_completed=False,independently_heldout_evaluation=False,scientific_verdict=None)
     (output/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     def section(title,folder,views):
