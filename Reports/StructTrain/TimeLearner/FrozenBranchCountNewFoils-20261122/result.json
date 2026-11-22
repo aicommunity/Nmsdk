@@ -1,0 +1,869 @@
+{
+  "kind": "timelearner_actual_Branch_count_new_foil_result",
+  "schema_version": 1,
+  "protocol": "frozen_new_foil_isi_grid_half_steps_v1",
+  "pulse_count": 4,
+  "normalization": "synapse_count",
+  "actual_execution": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "completed",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 47,
+    "wall_seconds": 2919.7437451001024,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-3a58734f-07e1-4f9c-af46-2047f2d7cdab"
+  },
+  "actual_terminal": {
+    "kind": "timelearner_actual_windows_frozen_physical_study",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "study": {
+      "protocol": "new_foils"
+    },
+    "model_revision": "364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4",
+    "threshold": 0.06760345444849075,
+    "trials": 27,
+    "counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 25,
+      "targets": 1,
+      "foils": 26,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.9629629629629629,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.038461538461538464
+    },
+    "condition_fingerprint": "3b4a2738118a98d77c20a048f85b843455fc991f72821d536e0475392cd6f919",
+    "repeated_control_comparisons": [
+      {
+        "kind": "timelearner_trial_response_comparison",
+        "schema_version": 1,
+        "comparator_version": 1,
+        "time_basis": "actual_stimulus_onset",
+        "absolute_tolerance": 1e-12,
+        "observation_schema_version": 2,
+        "source_trial_id": "branch-count-M4/physical-DATA-replay/windows-a1/trial-0",
+        "observed_trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-2-2-2",
+        "sample_id": "phasea-row-0",
+        "model_revision": "364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4",
+        "source_begin": 0,
+        "observed_begin": 26.0065,
+        "source_stimulus_onset": 0.01,
+        "observed_stimulus_onset": 26.0165,
+        "absolute_clock_shift": 26.0065,
+        "source_samples": 4001,
+        "observed_samples": 4001,
+        "sample_counts_equal": true,
+        "window_offsets_equal": true,
+        "maximum_absolute_signal_difference": 0.0,
+        "maximum_relative_sample_time_difference": 2.4424906541753444e-15,
+        "maximum_relative_history_difference": 1.7069679003611782e-15,
+        "maximum_relative_event_time_difference": 1.7069679003611782e-15,
+        "maximum_window_offset_difference": 1.5629858518551032e-15,
+        "maximum_absolute_sample_difference": 2.4424906541753444e-15,
+        "waveforms_equal_within_declared_tolerance": true,
+        "stimulus_and_spike_events_equal": true,
+        "response_preserved": true,
+        "difference_reasons": [],
+        "pre_window_history_compared": false,
+        "scientific_verdict": null
+      }
+    ],
+    "frozen_model_verified": true,
+    "complete_native_observations": true,
+    "threshold_selected": false,
+    "training_performed": false,
+    "source_training_completed": false,
+    "new_foils_excluded_from_calibration": true,
+    "independently_heldout_positive_class": false,
+    "scientific_verdict": null
+  },
+  "python_actor_root": "30e07bb4a0e753e1b88fb72bd8009e270ffdf973",
+  "prepared_controls_commit": "74529191c946f8c8f633b20d796e17fdcbf638a6",
+  "source_closure": {
+    "Bin": {
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "head": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "recorded_gitlink": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    },
+    "root": {
+      "head": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+      "status": ""
+    }
+  },
+  "source_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/45/45582bf94b2d01b35e009bef0453d1943839848b24cea17c4851a3373f4ed7c5",
+    "sha256": "45582bf94b2d01b35e009bef0453d1943839848b24cea17c4851a3373f4ed7c5",
+    "bytes": 1076744
+  },
+  "source_audit_sha256": "f6b2bcd7b64ce26c96b701730caad9201c142d63f121663f8cfb9700b8abdbc9",
+  "actual_source_process_missing_after_closure": {
+    "pid": 6280,
+    "running": false,
+    "error": 87
+  },
+  "complete_trials": 27,
+  "source_samples_per_trial": 4001,
+  "counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 25,
+    "targets": 1,
+    "foils": 26,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.9629629629629629,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.038461538461538464
+  },
+  "rows": [
+    {
+      "presentation_index": 0,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-1-1-1",
+      "sample_id": "unseen-isi-grid-v1-1-1-1",
+      "label": "foil",
+      "pattern_hash": "0d4dc5c79f119c8eabb3d7d57cb97ecdc0af7b36ce7ca3bd8d3a14d149415f7c",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.08,
+        0.12
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 0.01,
+      "response_end": 2.0,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-0.json",
+        "bytes": 1295842,
+        "sha256": "90b58ba74286b68862e70a836a2e99d2be4a596916845215209c3ef9c863e7d5"
+      }
+    },
+    {
+      "presentation_index": 1,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-1-1-2",
+      "sample_id": "unseen-isi-grid-v1-1-1-2",
+      "label": "foil",
+      "pattern_hash": "76414cf0919216a739721487b05060f27aa3dcf0e546d9f093bc0ae14ddbe207",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.08,
+        0.24
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 2.0105,
+      "response_end": 4.000500000000001,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-1.json",
+        "bytes": 1295096,
+        "sha256": "0148dcee5ca03b728909da2c9e041cd6959f0ebdb486d82a0f40ac38618ad8e9"
+      }
+    },
+    {
+      "presentation_index": 2,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-1-1-3",
+      "sample_id": "unseen-isi-grid-v1-1-1-3",
+      "label": "foil",
+      "pattern_hash": "4ec3a461f142a196892a952ddf2d7145f812fc82ca8bfd04e8d9b639c91190f3",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.08,
+        0.36
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 4.011,
+      "response_end": 6.001,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-2.json",
+        "bytes": 1294271,
+        "sha256": "f004025850d33dadc215797935d5235e5ca92284ce43e454ce481c138b4da3da"
+      }
+    },
+    {
+      "presentation_index": 3,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-1-2-1",
+      "sample_id": "unseen-isi-grid-v1-1-2-1",
+      "label": "foil",
+      "pattern_hash": "4811b0b9423d72f162f0aaa92b6fc712a2e505a6f5c98ebb93d64650db446e14",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.16,
+        0.12
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 6.0115,
+      "response_end": 8.0015,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-3.json",
+        "bytes": 1295388,
+        "sha256": "55da01ce648b4d994d8fec882b3e86efd22778301e08503771a5098da0217579"
+      }
+    },
+    {
+      "presentation_index": 4,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-1-2-2",
+      "sample_id": "unseen-isi-grid-v1-1-2-2",
+      "label": "foil",
+      "pattern_hash": "acfb8d39e464920c40346f5254cdb830281da8619ba50e9985d6fdd3f12d6f2a",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.16,
+        0.24
+      ],
+      "classification": "FP",
+      "spike_count": 1,
+      "relative_spike_times": [
+        0.4429999999999996
+      ],
+      "response_begin": 8.012,
+      "response_end": 10.002,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-4.json",
+        "bytes": 1359819,
+        "sha256": "f6f9152c9cb49f7e549784b39437e41a388eea4b2cfcd1143b7da645b57bcc9f"
+      }
+    },
+    {
+      "presentation_index": 5,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-1-2-3",
+      "sample_id": "unseen-isi-grid-v1-1-2-3",
+      "label": "foil",
+      "pattern_hash": "ba3fc9d64f2d538a2776144b41ce689f933f881a706331c40e01e38fab13ffc9",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.16,
+        0.36
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 10.0125,
+      "response_end": 12.0025,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-5.json",
+        "bytes": 1297833,
+        "sha256": "1d8b918ecabe76f27d72093e122395ece894192e03c3af200f5f1658743ee5e6"
+      }
+    },
+    {
+      "presentation_index": 6,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-1-3-1",
+      "sample_id": "unseen-isi-grid-v1-1-3-1",
+      "label": "foil",
+      "pattern_hash": "e31faa93d73fda6547a1357ab171ccfce1d3a9fa063aafe94adcadea1297027b",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.24,
+        0.12
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 12.013,
+      "response_end": 14.003,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-6.json",
+        "bytes": 1298811,
+        "sha256": "32bf2bcde59843f2bd0a287d01a8098dd399af4973d23509cedf149815a45c7b"
+      }
+    },
+    {
+      "presentation_index": 7,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-1-3-2",
+      "sample_id": "unseen-isi-grid-v1-1-3-2",
+      "label": "foil",
+      "pattern_hash": "0204ea664cfd81d4b704507ed10d716d4beaeda45c1fde69d47cb6fc16aa78c8",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.24,
+        0.24
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 14.0135,
+      "response_end": 16.003500000000003,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-7.json",
+        "bytes": 1298203,
+        "sha256": "995919889ddd5839c799e53a7df0e764d88aa5d0edadb3d028934f2eefbe6c4b"
+      }
+    },
+    {
+      "presentation_index": 8,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-1-3-3",
+      "sample_id": "unseen-isi-grid-v1-1-3-3",
+      "label": "foil",
+      "pattern_hash": "a2554fb1c3181a878c725624967ebec0ba0b55461e94dc96c6b81da63a59b91e",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.24,
+        0.36
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 16.014,
+      "response_end": 18.004,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-8.json",
+        "bytes": 1297323,
+        "sha256": "819ddd120e2532eab634a8f71b11c9f9759a7c5c468c24028562c81947ecbccd"
+      }
+    },
+    {
+      "presentation_index": 9,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-2-1-1",
+      "sample_id": "unseen-isi-grid-v1-2-1-1",
+      "label": "foil",
+      "pattern_hash": "3f39c2e3dcedaf6aa0c1d8d9204b7e6db9dd6a12c85cf8e314fd4f323d724df7",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.08,
+        0.12
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 18.0145,
+      "response_end": 20.0045,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-9.json",
+        "bytes": 1299590,
+        "sha256": "391e41917c7f4c0f56d3f8465b9bcc0b52b85e97ba51400eeb2a8e5c88c02bd2"
+      }
+    },
+    {
+      "presentation_index": 10,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-2-1-2",
+      "sample_id": "unseen-isi-grid-v1-2-1-2",
+      "label": "foil",
+      "pattern_hash": "65137a4f01ca29e6d950b73405dadb0cbfe1e0f502f0b9e5a6f925bd1cc05308",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.08,
+        0.24
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 20.015,
+      "response_end": 22.005,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-10.json",
+        "bytes": 1298804,
+        "sha256": "98143330deb3a2ef40728f1874bc0d45e40595ba1484ba13ee950301a01b5f4e"
+      }
+    },
+    {
+      "presentation_index": 11,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-2-1-3",
+      "sample_id": "unseen-isi-grid-v1-2-1-3",
+      "label": "foil",
+      "pattern_hash": "3141dedb31d9116a5795d86827a641391cdf8d10a92d96b01a70578d81364ca1",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.08,
+        0.36
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 22.0155,
+      "response_end": 24.0055,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-11.json",
+        "bytes": 1298008,
+        "sha256": "ed0363d7f9149e91d084645cc4f4b6e6b19e798e10aae657729fdbe6da5543ec"
+      }
+    },
+    {
+      "presentation_index": 12,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-2-2-1",
+      "sample_id": "unseen-isi-grid-v1-2-2-1",
+      "label": "foil",
+      "pattern_hash": "ca1f860bcffe76800ab775898ec4f4c7360bca0d3ad9c39f07cf263414b22141",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.16,
+        0.12
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 24.016,
+      "response_end": 26.006,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-12.json",
+        "bytes": 1298976,
+        "sha256": "9082439c689f7e05f8a283f565585eefe01a2d7a193c139434f414b0cda88a07"
+      }
+    },
+    {
+      "presentation_index": 13,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-2-2-2",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.16,
+        0.24
+      ],
+      "classification": "TP",
+      "spike_count": 1,
+      "relative_spike_times": [
+        0.48300000000000054
+      ],
+      "response_begin": 26.0165,
+      "response_end": 28.0065,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-13.json",
+        "bytes": 1367833,
+        "sha256": "298be06b19c7e6a07cd734240e336b528245e7fa13a259175c9c8cf5f39feae9"
+      }
+    },
+    {
+      "presentation_index": 14,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-2-2-3",
+      "sample_id": "unseen-isi-grid-v1-2-2-3",
+      "label": "foil",
+      "pattern_hash": "62eeec5935be01ad24869c7d65d37a0c0532b556e1ab39f887d29ccfd0d54b89",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.16,
+        0.36
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 28.017,
+      "response_end": 30.007,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-14.json",
+        "bytes": 1297417,
+        "sha256": "544648ee8d323f9c7998ee9ab737b77162aa610203ed23b1e41d897ad84045e4"
+      }
+    },
+    {
+      "presentation_index": 15,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-2-3-1",
+      "sample_id": "unseen-isi-grid-v1-2-3-1",
+      "label": "foil",
+      "pattern_hash": "ecf332d3d5da0cf09a1a7a01f4d00ba5a8476481cc346bd7222e8084d67ebf8c",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.24,
+        0.12
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 30.0175,
+      "response_end": 32.0075,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-15.json",
+        "bytes": 1298413,
+        "sha256": "52097d72bf3866fbbf095ed81e9bce22a1748c9635494bb70b997881ec7b915e"
+      }
+    },
+    {
+      "presentation_index": 16,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-2-3-2",
+      "sample_id": "unseen-isi-grid-v1-2-3-2",
+      "label": "foil",
+      "pattern_hash": "deafc6fb239d73f36e3edf8a3baf1afdb1ade9efc7e660a0eb6a9854369a5cd3",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.24,
+        0.24
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 32.018,
+      "response_end": 34.008,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-16.json",
+        "bytes": 1297777,
+        "sha256": "3d1197b23c269fcb18f16bcced1b9c6070953aaf092d110c4b18e6e10acddb0f"
+      }
+    },
+    {
+      "presentation_index": 17,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-2-3-3",
+      "sample_id": "unseen-isi-grid-v1-2-3-3",
+      "label": "foil",
+      "pattern_hash": "8f1fbbb002017f6638135f01daa643dbb28c8c6739d74e923b8f907d85e8c947",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.24,
+        0.36
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 34.0185,
+      "response_end": 36.0085,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-17.json",
+        "bytes": 1296974,
+        "sha256": "1f85bfade16c4267f6364e56a6f431602817a2c73ce9aeae130d4782e6c2773b"
+      }
+    },
+    {
+      "presentation_index": 18,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-3-1-1",
+      "sample_id": "unseen-isi-grid-v1-3-1-1",
+      "label": "foil",
+      "pattern_hash": "e5a7a5e3e10a68ae9fbd96838293e612bda118365645f793ad8044aa118b9fb5",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.08,
+        0.12
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 36.019,
+      "response_end": 38.009,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-18.json",
+        "bytes": 1299403,
+        "sha256": "351dc2ec1e1f45a7a6711c3b80d1524a952d6bb4ed2e93152daa26cd23f832d4"
+      }
+    },
+    {
+      "presentation_index": 19,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-3-1-2",
+      "sample_id": "unseen-isi-grid-v1-3-1-2",
+      "label": "foil",
+      "pattern_hash": "2290c6361fd896c6c8a678cedd0a17fb2ea615ea4dbcc5bf5a03a7f69617fd8b",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.08,
+        0.24
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 38.0195,
+      "response_end": 40.0095,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-19.json",
+        "bytes": 1298618,
+        "sha256": "287874127e43e8e4c3bb3fefe099d4b4a3aa494c3bf8028f8d1abc68a1552613"
+      }
+    },
+    {
+      "presentation_index": 20,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-3-1-3",
+      "sample_id": "unseen-isi-grid-v1-3-1-3",
+      "label": "foil",
+      "pattern_hash": "0a199ee324968c048809f3c88415deb856ab9fe19f27970e173da7b4b7c2101d",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.08,
+        0.36
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 40.02,
+      "response_end": 42.01,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-20.json",
+        "bytes": 1297758,
+        "sha256": "1e4ab47da4fb3f95198b2efda88aee2dde43db5f15df4214d384529029dd9697"
+      }
+    },
+    {
+      "presentation_index": 21,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-3-2-1",
+      "sample_id": "unseen-isi-grid-v1-3-2-1",
+      "label": "foil",
+      "pattern_hash": "55aa551db11e8865220e7882fa53861694ad6a8174986697d9273f6fb0d66791",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.16,
+        0.12
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 42.0205,
+      "response_end": 44.0105,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-21.json",
+        "bytes": 1298772,
+        "sha256": "8b1f8e390a9da855048dac30c15894b4f8631cbb7be6f75a5da4611963f650bf"
+      }
+    },
+    {
+      "presentation_index": 22,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-3-2-2",
+      "sample_id": "unseen-isi-grid-v1-3-2-2",
+      "label": "foil",
+      "pattern_hash": "516451ffca4090f04eb4b1818132ec28c7c9f3b81b7ad016c5cedd0467ea4d7a",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.16,
+        0.24
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 44.021,
+      "response_end": 46.011,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-22.json",
+        "bytes": 1297974,
+        "sha256": "e03493f48edd645d92b6f3227fa9d03fcc44ea96b6dfc034a07f329d40f65c79"
+      }
+    },
+    {
+      "presentation_index": 23,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-3-2-3",
+      "sample_id": "unseen-isi-grid-v1-3-2-3",
+      "label": "foil",
+      "pattern_hash": "f19b971714d4e1d72119290f0e5f3c66d509d6965201397e31472c7f54155283",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.16,
+        0.36
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 46.0215,
+      "response_end": 48.0115,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-23.json",
+        "bytes": 1297200,
+        "sha256": "cda56fcf5f05ed4358de2350d54b96ed075f266119101ffd43c15e63ae20a229"
+      }
+    },
+    {
+      "presentation_index": 24,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-3-3-1",
+      "sample_id": "unseen-isi-grid-v1-3-3-1",
+      "label": "foil",
+      "pattern_hash": "ebb4608e7c950d5d92db2773abad2c67f9d2d949e3e18fadd97f8928865262db",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.24,
+        0.12
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 48.022,
+      "response_end": 50.012,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-24.json",
+        "bytes": 1298186,
+        "sha256": "3c9127ebff9b3c2d78e7b49bd8d29cebae8d1c81dc10ab333296d199922aedb8"
+      }
+    },
+    {
+      "presentation_index": 25,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-3-3-2",
+      "sample_id": "unseen-isi-grid-v1-3-3-2",
+      "label": "foil",
+      "pattern_hash": "f64c8c5a08317b49fa7d12505695ee4fdea68f05d484de9466da4cc6a00a7186",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.24,
+        0.24
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 50.0225,
+      "response_end": 52.0125,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-25.json",
+        "bytes": 1297532,
+        "sha256": "57b70857cae8ae559771316bf6099af878ce6e7ee03a7fb961685cbc64719a84"
+      }
+    },
+    {
+      "presentation_index": 26,
+      "trial_id": "branch-count-M4/frozen-new-foils/windows-a1/grid-3-3-3",
+      "sample_id": "unseen-isi-grid-v1-3-3-3",
+      "label": "foil",
+      "pattern_hash": "d456b15f332cebb84c398e1af0bb98fb7b49bbca91abb65abed335446fc6503f",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.24,
+        0.36
+      ],
+      "classification": "TN",
+      "spike_count": 0,
+      "relative_spike_times": [],
+      "response_begin": 52.023,
+      "response_end": 54.013,
+      "early_spikes": [],
+      "late_spikes": [],
+      "observation": {
+        "path": "primary/study-job/native/trial-26.json",
+        "bytes": 1296727,
+        "sha256": "10ebf25d84dc4b7a6269ccc187fb77b64d08936d9fa01412556037ca75b586ad"
+      }
+    }
+  ],
+  "all_new_foils_excluded_from_calibration": true,
+  "threshold_selected_on_this_matrix": false,
+  "repeated_positive_control_is_not_an_independent_positive_class": true,
+  "original_training_outcome": "budget_exhausted/maximum_sweeps_exhausted",
+  "training_Exact": false,
+  "different_model_from_old_M40_resistance_case": true,
+  "full_local_byte_restoration_completed": true,
+  "visually_reviewed_PNG": 54,
+  "local_viewer": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-branch-count-new-foils-a1\\figures-full-response-a1\\index.html",
+  "canonical_visual_cache_publication_pending": false,
+  "new_DOCX_released": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null,
+  "canonical_visual_cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-22/branch-count-new-foils-russian-a1/figures-full-response-a1/index.html",
+  "canonical_cache_archive": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/7c/7c255d409e4afe880b277494489a962eecd0f241b46a33465db98ca063b51b73",
+    "sha256": "7c255d409e4afe880b277494489a962eecd0f241b46a33465db98ca063b51b73",
+    "bytes": 4610992
+  }
+}

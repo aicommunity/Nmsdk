@@ -1,0 +1,61 @@
+{
+  "kind": "timelearner_document_runtime_readiness",
+  "schema_version": 1,
+  "observed_at": "2026-11-22T02:46:39.400658+00:00",
+  "purpose": "Prepare next substantive GOST edition without changing the published v4 documents",
+  "workspace_dependency_bundle": "26.1117.12345",
+  "python": {
+    "path": "C:\\Users\\Bakhshiev\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "bytes": 107312,
+    "sha256": "c7612d427853d8cf4b9c857243ab3eea706852f66d0a3e945820968800afae80"
+  },
+  "python_version": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "invocation_isolated": true,
+  "inherited_site_or_PYTHONHOME_not_used": true,
+  "python_docx_version": "1.2.0",
+  "Pillow_version": "13.0.0",
+  "renderer": {
+    "path": "C:\\Users\\Bakhshiev\\.codex\\plugins\\cache\\openai-primary-runtime\\documents\\26.1117.12345\\skills\\documents\\render_docx.py",
+    "bytes": 20248,
+    "sha256": "8b48b8f05f30cc6c7b5a7bd8e18e7ea93a61aec1ea601026a3358b2105f0903a"
+  },
+  "native_Windows_LibreOffice": {
+    "path": "C:\\Program Files\\LibreOffice\\program\\soffice.exe",
+    "bytes": 355256,
+    "sha256": "8f7e3b49eedc04b0ae3b537456dad9ea8b1cef66c9a26140260e3c021ebcb3b3"
+  },
+  "poppler": {
+    "path": "C:\\Users\\Bakhshiev\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\Library\\bin\\pdfinfo.exe",
+    "bytes": 81712,
+    "sha256": "f050eaab2c93e9380a9cfc6641b5449479b4895a4bde851b280a6707033ab604"
+  },
+  "original_v4_DOCX": {
+    "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-20-revision4\\TimeLearnerClassicAlgorithms.ru.docx",
+    "bytes": 5766500,
+    "sha256": "1bd62f4f4d26276fdf306acf3249ce18870e01befab53cad06e484bfc0cf6d72"
+  },
+  "rendered_PDF": {
+    "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-gost-preparation-a1\\renderer-v4-classic\\TimeLearnerClassicAlgorithms.ru.pdf",
+    "bytes": 4205339,
+    "sha256": "52bf8bd727b8a61360982364f040a8fcaad5ad57095b76fcde698acf9c51bbe8"
+  },
+  "rendered_pages": 32,
+  "PDF_byte_identical_to_published_v4": false,
+  "all_32_page_text_equal_to_published_v4": true,
+  "PDF_metadata_differing_keys": [
+    "/CreationDate"
+  ],
+  "original_document_unchanged": true,
+  "readiness_spot_checked_pages": [
+    1,
+    22
+  ],
+  "all_32_pages_manually_reviewed_in_this_readiness_check": false,
+  "bundled_Python_matplotlib_available": false,
+  "standalone_scientific_plots_use_existing_renderer_and_archived_data": true,
+  "new_GOST_builder_implemented": false,
+  "full_standard_corrections_review_completed": false,
+  "new_DOCX_generated": false,
+  "new_DOCX_released": false,
+  "scientific_verdict": null
+}
