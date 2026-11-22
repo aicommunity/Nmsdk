@@ -1,0 +1,82 @@
+{
+  "kind": "timelearner_external_windows_count_complete_DATA_primary",
+  "schema_version": 1,
+  "package": "/media/user/Data/Nmsdk-StructTrainExpArchive/incoming/20261122-windows-count-complete-DATA-primary-a1",
+  "objects": {
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/3e/3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c",
+      "sha256": "3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c",
+      "bytes": 396976
+    },
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/40/40a97a284b02c612e65fb3b8c17e91aae1a16ef95ca215027b9dd501d7fe38ae",
+      "sha256": "40a97a284b02c612e65fb3b8c17e91aae1a16ef95ca215027b9dd501d7fe38ae",
+      "bytes": 15856
+    },
+    "collection-metadata.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ef/ef3456e33a8acd4a731e144f6d4198176186fd9bb91f760bb061a03d624868f4",
+      "sha256": "ef3456e33a8acd4a731e144f6d4198176186fd9bb91f760bb061a03d624868f4",
+      "bytes": 4256
+    }
+  },
+  "members": 94,
+  "expanded_bytes": 66583213,
+  "training_state_revision": "53a459de5082d318f1737d09b478cf574327cb4bc0a88dc51d438ee69cf2daa9",
+  "recognition_model_revision": "364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4",
+  "actual_same_matrix_counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6
+  },
+  "all_eight_DATA_samples_and_events_preserved": true,
+  "all_transferred_files_verified": true,
+  "large_incoming_duplicate_removed_after_verified_CAS_store": true,
+  "producer_primary_not_removed": true,
+  "full_member_restoration_pending": false,
+  "independent_host_restoration_pending": true,
+  "archive_or_model_added_to_Git": false,
+  "scientific_verdict": null,
+  "Windows_separate_tree_restoration": {
+    "kind": "timelearner_windows_count_complete_primary_restoration",
+    "schema_version": 1,
+    "archive": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-count-DATA-primary-collection-a1\\primary-bundle\\primary.tar.xz",
+      "sha256": "3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c",
+      "size": 396976
+    },
+    "bundle": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-count-DATA-primary-collection-a1\\primary-bundle\\bundle.json",
+      "sha256": "40a97a284b02c612e65fb3b8c17e91aae1a16ef95ca215027b9dd501d7fe38ae",
+      "size": 15856
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c",
+      "archive_members_verified": 94,
+      "retained_regular_files": 94,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "all_original_member_bytes_verified": true,
+    "producer_original_files_unchanged": true,
+    "verification_on_separate_tree_on_Windows": true,
+    "independent_host_verification": false,
+    "disposable_verified_cache_removed": true,
+    "seconds": 0.32097360002808273,
+    "scientific_verdict": null
+  }
+}

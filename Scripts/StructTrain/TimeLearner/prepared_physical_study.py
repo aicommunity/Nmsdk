@@ -208,18 +208,36 @@ def run(controls):
         source_observations = {r['sample_id']: json.loads((source['output']/'native'/f'trial-{i}.json').read_bytes())
             for i, r in enumerate(source['job']['trials'])}
         comparisons = []
-        # The target is an unchanged positive control of a new-foil grid. In a
-        # cadence study only the first (explicitly reset) trial is a repeat
-        # control; subsequent retained dynamics are the factor being measured.
+        # Only a new-foil grid repeats the source observation protocol. Cadence
+        # changes the coverage/window length, even for its first reset trial;
+        # comparing it with the original full two-second source would conflate
+        # different conditions. Paired reset/preserve runs need their own
+        # SAME-cadence first-trial comparison at the matrix level.
         controls_to_compare = [i for i,t in enumerate(job['trials']) if
-            t['sample_id'] in source_trials and (spec['study']['protocol'] == 'new_foils' or i == 0)]
-        require(bool(controls_to_compare), 'physical_study_missing_repeated_control')
+            t['sample_id'] in source_trials and spec['study']['protocol'] == 'new_foils']
+        require(spec['study']['protocol'] != 'new_foils' or len(controls_to_compare) == 1,
+            'physical_study_missing_repeated_control')
         with trial_response_comparison(model, physical_data=True) as compare:
             for i in controls_to_compare:
                 observed = json.loads((output/'native'/f'trial-{i}.json').read_bytes())
                 comparison = compare(source_observations[observed['sample_id']], observed)
                 require(comparison['response_preserved'], 'physical_study_reset_control_changed')
                 comparisons.append(comparison)
+        cadence_evidence = None
+        if spec['study']['protocol'] == 'cadence':
+            from .native_evidence import number, equal, after
+            observed = [json.loads((output/'native'/f'trial-{i}.json').read_bytes()) for i in range(8)]
+            quiet = number(observed[-1]['end'])-number(observed[-1]['stimulus_times'][-1])
+            require(quiet > 2 or equal(quiet, 2), 'physical_study_final_quiet_tail_incomplete')
+            cadence_evidence = dict(final_quiet_tail_seconds=quiet,
+                complete_contiguous_observations_verified=True,
+                paired_same_cadence_first_trial_comparison_pending=True,
+                carryover_events_not_causally_assigned_to_a_single_pattern=True,
+                actual_timing_and_events=[dict(trial_id=o['trial_id'], sample_id=o['sample_id'],
+                    reset_policy=o['reset_policy'], stimulus_times=o['stimulus_times'], spike_times=o['spike_times'],
+                    events_before_current_first_input=[t for t in o['spike_times'] if after(o['stimulus_times'][0], t)],
+                    first_input_interval_from_previous=None if i == 0 else
+                        o['stimulus_times'][0]-observed[i-1]['stimulus_times'][0]) for i,o in enumerate(observed)])
         unchanged(); require(file_record(controls/'runtime.json') == runtime_before and
             source_closure(sdk) == runtime['source_closure'], 'physical_study_runtime_changed')
         _actor(Path(spec['python_source']).resolve(strict=True), spec['python_root'])
@@ -227,6 +245,8 @@ def run(controls):
             execution='completed', validity='valid', study=spec['study'], model_revision=spec['model_revision'],
             threshold=spec['threshold'], trials=spec['expected_trials'], counts=metrics['pooled_counts'],
             condition_fingerprint=spec['condition_fingerprint'], repeated_control_comparisons=comparisons,
+            source_protocol_repeated_control_checked=spec['study']['protocol'] == 'new_foils',
+            cadence_evidence=cadence_evidence,
             frozen_model_verified=True, complete_native_observations=True, threshold_selected=False,
             training_performed=False, source_training_completed=False,
             new_foils_excluded_from_calibration=spec['study']['protocol'] == 'new_foils',
