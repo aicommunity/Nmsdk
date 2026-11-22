@@ -141,11 +141,16 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
         common=content['common'];specific=content[topology];used=[]
         def visible_reference(text):
             if not next_edition:return text
-            return re.sub(r'(?<![0-9a-f])[0-9a-f]{40}(?:[0-9a-f]{24})?(?![0-9a-f])',
-                          lambda match:match.group(0)[:16]+'…',text)
+            text=re.sub(r'(?<![0-9a-f])[0-9a-f]{40}(?:[0-9a-f]{24})?(?![0-9a-f])',
+                        lambda match:match.group(0)[:16]+'…',text)
+            # Keep measured numbers with their units, without changing the
+            # underlying data or the preserved fourth-edition formatting.
+            return re.sub(r'(\d) (?=(?:мс|с|кГц|Гц|пФ|нФ|МОм|кОм|Ом)(?:\W|$))',
+                          lambda match:match.group(1)+'\u00a0',text)
         def para(text,style=None):
             paragraph=doc.add_paragraph(visible_reference(text),style=style)
-            if next_edition and style is None and text.startswith('Источник'):
+            if next_edition and style is None and text.startswith(
+                    ('Источник','Обучающая конфигурация','Проверочная конфигурация')):
                 # A long exact path must wrap without expanding the preceding
                 # Russian words to fill a justified line.
                 paragraph.alignment=WD_ALIGN_PARAGRAPH.LEFT
