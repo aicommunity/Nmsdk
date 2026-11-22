@@ -1,0 +1,177 @@
+{
+  "kind": "timelearner_compact_actual_stopped_count_threshold_confirmation",
+  "schema_version": 1,
+  "observed_utc": "2026-11-22T00:23:56.299729+00:00",
+  "host": "10.245.1.14",
+  "source_training_job": "windows-branch-count-m4-a3",
+  "source_training_outcome": "budget_exhausted",
+  "source_training_stop_reason": "maximum_sweeps_exhausted",
+  "baseline": {
+    "execution": "completed",
+    "validity": "valid",
+    "source_root": "fb2616a9193ca48c2be645b32496c77ed14b753c",
+    "source_model_revision": "53a459de5082d318f1737d09b478cf574327cb4bc0a88dc51d438ee69cf2daa9",
+    "baseline_counts": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0
+    },
+    "full_evaluation_audit_complete": true,
+    "training_completed": false,
+    "classification_after_threshold_not_yet_run": true,
+    "next_operation": "same_matrix_threshold_proposal_and_actual_confirmation",
+    "scientific_verdict": null
+  },
+  "actual_threshold_confirmation": {
+    "execution": "completed",
+    "validity": "valid",
+    "source_root": "55138b26b173ba5cfb907d02829505280752dd3d",
+    "source_model_revision": "53a459de5082d318f1737d09b478cf574327cb4bc0a88dc51d438ee69cf2daa9",
+    "selected_threshold": 0.06760345444849075,
+    "actual_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "report_family_response_requirement_met": true,
+    "full_actual_evaluation_audit_complete": true,
+    "protocol": "historical_same_matrix",
+    "training_completed": false,
+    "independently_heldout_evaluation": false,
+    "next_operation": "physical_DATA_export_replay_and_all_pattern_figures",
+    "scientific_verdict": null
+  },
+  "actual_native_process": {
+    "execution": "completed",
+    "returncode": 0,
+    "all_processes_closed": true,
+    "runtime_provenance": "loaded_files_captured",
+    "wall_seconds": 1916.4962366999825
+  },
+  "complete_independent_audit": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-count-stopped-threshold-a1\\independent-audit.json",
+    "sha256": "1cb9cc166b8d885aa6266d97bd2cf60e77cf1e0dbcf61d9607c70cebcb10ed72",
+    "size": 376574
+  },
+  "audit_summary": {
+    "complete_source_history_audited": true,
+    "source_model_revision": "53a459de5082d318f1737d09b478cf574327cb4bc0a88dc51d438ee69cf2daa9"
+  },
+  "frozen_model_verified": true,
+  "metrics": {
+    "validity": "valid",
+    "pooled_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "effective_threshold": 0.06760345444849075
+  },
+  "trials": [
+    {
+      "trial_id": "branch-count-M4/stopped-baseline/windows-a1/trial-0",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "spike_count": 1,
+      "target_hit": null,
+      "classification": "TP",
+      "maximum_potential": null
+    },
+    {
+      "trial_id": "branch-count-M4/stopped-baseline/windows-a1/trial-1",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "spike_count": 0,
+      "target_hit": null,
+      "classification": "TN",
+      "maximum_potential": null
+    },
+    {
+      "trial_id": "branch-count-M4/stopped-baseline/windows-a1/trial-2",
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "spike_count": 0,
+      "target_hit": null,
+      "classification": "TN",
+      "maximum_potential": null
+    },
+    {
+      "trial_id": "branch-count-M4/stopped-baseline/windows-a1/trial-3",
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "spike_count": 0,
+      "target_hit": null,
+      "classification": "TN",
+      "maximum_potential": null
+    },
+    {
+      "trial_id": "branch-count-M4/stopped-baseline/windows-a1/trial-4",
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "spike_count": 1,
+      "target_hit": null,
+      "classification": "FP",
+      "maximum_potential": null
+    },
+    {
+      "trial_id": "branch-count-M4/stopped-baseline/windows-a1/trial-5",
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "spike_count": 0,
+      "target_hit": null,
+      "classification": "TN",
+      "maximum_potential": null
+    },
+    {
+      "trial_id": "branch-count-M4/stopped-baseline/windows-a1/trial-6",
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "spike_count": 0,
+      "target_hit": null,
+      "classification": "TN",
+      "maximum_potential": null
+    },
+    {
+      "trial_id": "branch-count-M4/stopped-baseline/windows-a1/trial-7",
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "spike_count": 0,
+      "target_hit": null,
+      "classification": "TN",
+      "maximum_potential": null
+    }
+  ],
+  "source_sdk": {
+    "root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+    "pulse": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+    "rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+    "bin": "8cb6dba07b30432272984c8ce3136b48ad06f064"
+  },
+  "source_controls_root": "55138b26b173ba5cfb907d02829505280752dd3d",
+  "central_primary_publication_pending": true,
+  "all_pattern_visual_review_pending": true,
+  "physical_DATA_replay_pending": true,
+  "independently_heldout_evaluation": false,
+  "scientific_verdict": null
+}
