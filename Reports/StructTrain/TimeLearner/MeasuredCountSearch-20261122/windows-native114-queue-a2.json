@@ -1,0 +1,83 @@
+{
+  "kind": "timelearner_compact_measured_count_native114_queue",
+  "schema_version": 1,
+  "root": "17ea413eeca88c695d70d4fa900caa1b988abbb4",
+  "pulse": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+  "rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+  "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-sdk-native114-queue-a2",
+  "controls_commit": "692fc9ede016d8aa33595293028f4018c0d418a4",
+  "task": {
+    "scientific_verdict": null,
+    "instance": "{5FDB1730-335D-466F-B58E-C8127E2CCA9C}",
+    "execution_time_limit": "PT9H",
+    "task": "TimeLearner-windows-measured-count-sdk-native114-queue-a2",
+    "engine_pid": 15920
+  },
+  "observed_utc": "2026-11-22T02:07:06.061065+00:00",
+  "owner": {
+    "pid": 2656,
+    "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+    "creation_filetime": "134397866560937391"
+  },
+  "observed_owner": {
+    "pid": 2656,
+    "matching": true,
+    "running": true,
+    "identity": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134397866560937391"
+    }
+  },
+  "stage": "waiting-for-existing-27-trial-science-and-task-closure",
+  "control_records": {
+    "dispatch.json": {
+      "bytes": 224,
+      "sha256": "f579b5b2ef84f886cf4dffc3158d31334f94c7b1bf8409ab0edb1fc0dd550c64"
+    },
+    "prepare-native.py": {
+      "bytes": 7289,
+      "sha256": "091dc8cfd9378d0ef514fff06d3f44e95ffa0e58a6a3db6db431e9643a80f0f0"
+    },
+    "queue.json": {
+      "bytes": 2099,
+      "sha256": "d86e405ff71b48177a63a11e3224e0c5a27d3dc3b0cd929291d559c2a6d8aba1"
+    },
+    "supervisor.py": {
+      "bytes": 6446,
+      "sha256": "ca5fa625c4e8f53a1dbbe7d86662ea9452800d101ea85d728aabc65bdf37f88f"
+    }
+  },
+  "expected_native_tests": 114,
+  "expected_original_tests": 108,
+  "new_measured_count_fixtures": 4,
+  "additional_fresh_N0_checks": 2,
+  "actual_build_source_files": 5138,
+  "build_accepted": false,
+  "native114_executed": false,
+  "build_acceptance_not_yet_observed": true,
+  "waits_for_existing_science_task_and_kernel_closure": true,
+  "actual_science_native": {
+    "pid": 6280,
+    "matching": true,
+    "running": true,
+    "identity": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\NeuroModelerConsole.exe",
+      "creation_filetime": "134397848552384325"
+    }
+  },
+  "in_progress_raw_trial_files": 18,
+  "partial_files_are_not_classification_verdict": true,
+  "unchanged_worker_lock": "C:/Projects/TimeLearnerWorker/locks/worker.lock",
+  "sequence": [
+    "wait_existing_27_trial_science_closure",
+    "fresh_SDK_build",
+    "require_genuinely_accepted_build_and_closed_kernel",
+    "prepare_verified_native114_inputs",
+    "native114"
+  ],
+  "previous_failed_build_preserved": true,
+  "original_scientific_runtime_unchanged": true,
+  "scientific_worker_admitted": false,
+  "comparable_algorithm_AB_pending": true,
+  "scientific_verdict": null
+}
