@@ -1,0 +1,120 @@
+{
+  "kind": "timelearner_three_worker_actual_kernel_observation",
+  "schema_version": 1,
+  "rows": [
+    {
+      "worker": "elder",
+      "job": "s11-classic-count-training-elder-a1",
+      "observed_utc": "2026-11-22T02:50:10.646978+00:00",
+      "actual_native_kernel": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "ea0282ed856e07dc6d0c5be485c3fe45bafbebcaa56039819f36ecf20dd92c2f",
+          "unit": "timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+          "invocation_id": "b4c947258b63437aa89702d34f6c1834",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+          "initial_main_pid": 2836090,
+          "initial_start_ticks": "486111793",
+          "sha256": "22eba6ed2a2fe6c9792c1ec9c53b946d4a2c89b6564d77139c563433b8ef7e89"
+        }
+      },
+      "raw_trial_files_present": 429,
+      "elapsed_wall_seconds": 24463.550000000745,
+      "disk_free_bytes": 57559498752,
+      "raw_trial_files_are_not_logical_probes_or_convergence_percent": true,
+      "native_train_restarted": false,
+      "post_terminal_full_primary_audit_pending": true,
+      "scientific_verdict": null
+    },
+    {
+      "worker": "m40",
+      "job": "s11-classic-count-training-m40-a1",
+      "observed_utc": "2026-11-22T02:50:10.450651+00:00",
+      "actual_native_kernel": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "ef7ad78868de3e9515ab94aecf175effaf94b7245a4e1496d59a3b1e7171a222",
+          "unit": "timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+          "invocation_id": "07a94cfc2631458f988f19e653f65489",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+          "initial_main_pid": 173265,
+          "initial_start_ticks": "436251545",
+          "sha256": "dc90ba704f52ae142c785daf02d83f337574c2aa32924bcbf41404056a5f3a81"
+        }
+      },
+      "raw_trial_files_present": 584,
+      "elapsed_wall_seconds": 28492.66000000015,
+      "disk_free_bytes": 325266026496,
+      "raw_trial_files_are_not_logical_probes_or_convergence_percent": true,
+      "native_train_restarted": false,
+      "post_terminal_full_primary_audit_pending": true,
+      "scientific_verdict": null
+    },
+    {
+      "worker": "Windows .14",
+      "observed_utc": "2026-11-22T02:46:46.214147+00:00",
+      "job": "windows-measured-count-sdk-native114-queue-a2",
+      "phase": {
+        "stage": "fresh-sdk-build",
+        "observed_utc": "2026-11-22T02:23:09.369012+00:00",
+        "scientific_verdict": null
+      },
+      "actual_build_kernel": {
+        "pid": 20372,
+        "matching": true,
+        "running": true,
+        "identity": {
+          "executable": "C:\\Windows\\System32\\cmd.exe",
+          "creation_filetime": "134397878578587344"
+        },
+        "job_name": "Local\\TimeLearner-ce45a60c-ccf0-4b36-8733-6258d5663c32"
+      },
+      "actual_supervisor": {
+        "pid": 2656,
+        "matching": true,
+        "running": true,
+        "identity": {
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134397866560937391"
+        }
+      },
+      "source_root": "17ea413eeca88c695d70d4fa900caa1b988abbb4",
+      "source_files": 5138,
+      "build_accepted_not_yet_observed": true,
+      "native114_executed": false,
+      "scientific_worker_admitted": false,
+      "finished_science": {
+        "job": "windows-count-frozen-new-foils-a1",
+        "execution": "completed",
+        "validity": "valid",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 25,
+          "targets": 1,
+          "foils": 26,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.9629629629629629,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.038461538461538464
+        },
+        "all_processes_closed": true
+      },
+      "scientific_verdict": null
+    }
+  ],
+  "scientific_Train_live": 2,
+  "engineering_build_live": 1,
+  "finished_new_foil_trials": 27,
+  "legacy_runtimes_unchanged": true,
+  "whole_plan_complete": false
+}
