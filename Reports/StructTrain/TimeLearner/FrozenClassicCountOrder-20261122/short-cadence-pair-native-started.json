@@ -1,0 +1,204 @@
+{
+  "observed_utc": "2026-11-22T20:05:09.254269+00:00",
+  "job": "classic-count-short-cadence-pair-m40-k1",
+  "dispatch.json": {
+    "dispatched": true,
+    "job": "classic-count-short-cadence-pair-m40-k1",
+    "source_root": "94047f45fba5801ff1bcbb578baf56bb678c1069",
+    "controls_commit": "263030f124e50c74bcf5feea88c9969bd6c430d4",
+    "supervisor": {
+      "pid": 1006047,
+      "start_ticks": "445286010",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "cases": [
+      {
+        "id": "reset",
+        "job_id": "classic-count-short-cadence-pair-m40-k1-reset",
+        "run_id": "classic-count-short-cadence-pair-m40-k1/reset",
+        "reset_policy": "reset_per_trial",
+        "job_sha256": "1b1317245d3aabfad0463af966da2f9cee01a876460f514fc7781b5aafb2cd39",
+        "design": {
+          "protocol_id": "frozen_eight_pattern_cadence_and_reset_v1",
+          "rotation": 1,
+          "cadence": "short",
+          "following_trial_reset_policy": "reset_per_trial",
+          "first_trial_reset_policy": "reset_per_trial",
+          "duration_before_final_trial": 0.69,
+          "short_duration_rule": "ceil((max_original_last_input+0.2)*frequency)/frequency",
+          "final_quiet_tail_minimum_seconds": 2.0,
+          "final_observation_duration": 2.4905,
+          "frequency_hz": 2000,
+          "target_position": 7,
+          "source_pattern_hashes": [
+            "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+            "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+            "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+            "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+            "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+            "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+            "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6"
+          ],
+          "actual_onset_intervals_must_be_measured": true,
+          "complete_contiguous_observations_required": true,
+          "training_performed": false,
+          "threshold_selected": false,
+          "expected_response_counts": null,
+          "independent_stochastic_repetitions": false
+        },
+        "condition_fingerprint": "29d86c42aa64858e9946943eca6e052a1a46cbd6760a263090a10e2b5b1473ff"
+      },
+      {
+        "id": "preserve",
+        "job_id": "classic-count-short-cadence-pair-m40-k1-preserve",
+        "run_id": "classic-count-short-cadence-pair-m40-k1/preserve",
+        "reset_policy": "preserve_neuron_dynamics",
+        "job_sha256": "a28478448142067f83b15298a0aec88d94c3db041b23054b4fba6e544eff4627",
+        "design": {
+          "protocol_id": "frozen_eight_pattern_cadence_and_reset_v1",
+          "rotation": 1,
+          "cadence": "short",
+          "following_trial_reset_policy": "preserve_neuron_dynamics",
+          "first_trial_reset_policy": "reset_per_trial",
+          "duration_before_final_trial": 0.69,
+          "short_duration_rule": "ceil((max_original_last_input+0.2)*frequency)/frequency",
+          "final_quiet_tail_minimum_seconds": 2.0,
+          "final_observation_duration": 2.4905,
+          "frequency_hz": 2000,
+          "target_position": 7,
+          "source_pattern_hashes": [
+            "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+            "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+            "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+            "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+            "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+            "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+            "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6"
+          ],
+          "actual_onset_intervals_must_be_measured": true,
+          "complete_contiguous_observations_required": true,
+          "training_performed": false,
+          "threshold_selected": false,
+          "expected_response_counts": null,
+          "independent_stochastic_repetitions": false
+        },
+        "condition_fingerprint": "bc1a344ee9abb0b3a3c3371ebb84fd4a75ae9abca71d709b223e5c84d7a885c4"
+      }
+    ],
+    "expected_trials": 16,
+    "source_model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+    "threshold": 0.020736298148054874,
+    "native_result_not_yet_observed": true,
+    "training_performed": false,
+    "scientific_verdict": null
+  },
+  "owner.json": {
+    "pid": 1006047,
+    "start_ticks": "445286010",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
+  },
+  "state.json": {
+    "observed_utc": "2026-11-22T20:01:17.771377+00:00",
+    "case": "reset",
+    "stage": "running_native_paired_cadence_control",
+    "native_trials": 8,
+    "scientific_verdict": null
+  },
+  "supervisor_live": true,
+  "reset": {
+    "design-tests.json": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "actual_count_model_fixture": true
+    },
+    "outer": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "e6eec810c42f3513efcb2ed9eb6de2cca6ba5e80bbc61eb7b25e2b387b8bd96e",
+        "unit": "timelearner-c91158c3-4622-43d8-8785-2d81a29b9c8b.service",
+        "invocation_id": "6e80ec2d25504811bc5b8c8af6761c26",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c91158c3-4622-43d8-8785-2d81a29b9c8b.service",
+        "initial_main_pid": 1013871,
+        "initial_start_ticks": "445289368",
+        "sha256": "f8488e9889c0b3701c51f3dd8162b24a21eb3eb222cf48cac616d4b553d03a5d"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "1013871",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c91158c3-4622-43d8-8785-2d81a29b9c8b.service",
+        "MemoryMax": "2147483648",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt c91158c3-4622-43d8-8785-2d81a29b9c8b",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "6e80ec2d25504811bc5b8c8af6761c26"
+      },
+      "memory_max": 2147483648,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "native": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "2bb12ba9ef216963ef4e7f6e66366eeaf2776ace1206cdecc812da4bc9d36546",
+        "unit": "timelearner-2a7639a0-d1b0-4b66-bf23-e8a18738a7c3.service",
+        "invocation_id": "7a6449334e6641ecb6d9ee8d3012af6d",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2a7639a0-d1b0-4b66-bf23-e8a18738a7c3.service",
+        "initial_main_pid": 1076433,
+        "initial_start_ticks": "445299827",
+        "sha256": "e9851e4adbf71133ec63b6f78611ac4b8dcb0822d199774c08fcc667a7195d06"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "1076433",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2a7639a0-d1b0-4b66-bf23-e8a18738a7c3.service",
+        "MemoryMax": "2147483648",
+        "TasksMax": "64",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 2a7639a0-d1b0-4b66-bf23-e8a18738a7c3",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "7a6449334e6641ecb6d9ee8d3012af6d"
+      },
+      "memory_max": 2147483648,
+      "tasks_max": 64,
+      "scientific_verdict": null
+    },
+    "trial_files": 1
+  },
+  "preserve": {
+    "trial_files": 0
+  },
+  "reserved": {
+    "disk_bytes": 2147483648,
+    "memory_bytes": 4294967296,
+    "slots": 1
+  }
+}
