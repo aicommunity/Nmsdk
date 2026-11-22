@@ -1,0 +1,400 @@
+{
+  "kind": "timelearner_actual_classic_count_M4_same_matrix_result",
+  "schema_version": 1,
+  "observed_utc": "2026-11-22T07:25:22.874536+00:00",
+  "worker": "M40",
+  "study": "s11-classic-count-recognition-m40-a2",
+  "training_model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+  "recognition_model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+  "threshold": 0.020736298148054874,
+  "counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.14285714285714285
+  },
+  "original_training_outcome": "budget_exhausted",
+  "original_training_reason": "native_training_time_budget_exhausted",
+  "training_completed": false,
+  "Exact": false,
+  "protocol": "historical_same_matrix",
+  "independently_heldout_evaluation": false,
+  "actual_native_process": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 3368.1400381671265,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "7ef93691c86311ef72259382b0d4e950d910ed2fbd6aaed113649cf894e9a404",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "actual_native_closed": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "c444e932d6272ce08eb14ccad41415bd475cf4c3b5f697ab60f6f0b502ced168",
+      "unit": "timelearner-038d1638-17d5-4b55-9127-ccfd9e5e1d68.service",
+      "invocation_id": "6388a3deb6e04db4b30c57975a51407b",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-038d1638-17d5-4b55-9127-ccfd9e5e1d68.service",
+      "initial_main_pid": 2288232,
+      "initial_start_ticks": "440220031",
+      "sha256": "cfd7a36a06fceaf20574dd0aab647288e1b1fd8252db4a2967bd11eb86b94795"
+    }
+  },
+  "complete_source_history_audited": true,
+  "all_input_bytes_unchanged": true,
+  "frozen_model_verified": true,
+  "complete_independent_audit_record": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/s11-classic-count-recognition-m40-a2/threshold/independent-audit.json",
+    "sha256": "e7e6ef6fa3766383feb5234650da9bf48297836193865babdc30f9c57c8fb139",
+    "bytes": 255711
+  },
+  "report_family_response_requirement_met": true,
+  "all_eight_rows": [
+    {
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "run_id": "s11-classic-count-recognition-m40-a2/threshold",
+      "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-0",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.16,
+        0.24
+      ],
+      "stimulus_times": [
+        0.01,
+        0.09,
+        0.25,
+        0.49
+      ],
+      "spike_times": [
+        0.4935
+      ],
+      "relative_spikes_from_first": [
+        0.4835
+      ],
+      "relative_spikes_from_last": [
+        0.003500000000000003
+      ],
+      "classification": "TP",
+      "complete": true,
+      "valid": true,
+      "censored": false,
+      "samples": 4001,
+      "soma_channels": 4
+    },
+    {
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "run_id": "s11-classic-count-recognition-m40-a2/threshold",
+      "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-1",
+      "pattern_isi": [
+        0.01,
+        0.24,
+        0.16,
+        0.08
+      ],
+      "stimulus_times": [
+        2.0105,
+        2.2505,
+        2.4105,
+        2.4905
+      ],
+      "spike_times": [],
+      "relative_spikes_from_first": [],
+      "relative_spikes_from_last": [],
+      "classification": "TN",
+      "complete": true,
+      "valid": true,
+      "censored": false,
+      "samples": 4001,
+      "soma_channels": 4
+    },
+    {
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "run_id": "s11-classic-count-recognition-m40-a2/threshold",
+      "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-2",
+      "pattern_isi": [
+        0.01,
+        0.16,
+        0.08,
+        0.24
+      ],
+      "stimulus_times": [
+        4.011,
+        4.171,
+        4.251,
+        4.491
+      ],
+      "spike_times": [],
+      "relative_spikes_from_first": [],
+      "relative_spikes_from_last": [],
+      "classification": "TN",
+      "complete": true,
+      "valid": true,
+      "censored": false,
+      "samples": 4001,
+      "soma_channels": 4
+    },
+    {
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "run_id": "s11-classic-count-recognition-m40-a2/threshold",
+      "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-3",
+      "pattern_isi": [
+        0.01,
+        0.16,
+        0.16,
+        0.16
+      ],
+      "stimulus_times": [
+        6.0115,
+        6.1715,
+        6.3315,
+        6.4915
+      ],
+      "spike_times": [],
+      "relative_spikes_from_first": [],
+      "relative_spikes_from_last": [],
+      "classification": "TN",
+      "complete": true,
+      "valid": true,
+      "censored": false,
+      "samples": 4001,
+      "soma_channels": 4
+    },
+    {
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "run_id": "s11-classic-count-recognition-m40-a2/threshold",
+      "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-4",
+      "pattern_isi": [
+        0.01,
+        0.02,
+        0.22,
+        0.24
+      ],
+      "stimulus_times": [
+        8.012,
+        8.032,
+        8.252,
+        8.492
+      ],
+      "spike_times": [],
+      "relative_spikes_from_first": [],
+      "relative_spikes_from_last": [],
+      "classification": "TN",
+      "complete": true,
+      "valid": true,
+      "censored": false,
+      "samples": 4001,
+      "soma_channels": 4
+    },
+    {
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "run_id": "s11-classic-count-recognition-m40-a2/threshold",
+      "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-5",
+      "pattern_isi": [
+        0.01,
+        0.24,
+        0.22,
+        0.02
+      ],
+      "stimulus_times": [
+        10.0125,
+        10.2525,
+        10.4725,
+        10.4925
+      ],
+      "spike_times": [],
+      "relative_spikes_from_first": [],
+      "relative_spikes_from_last": [],
+      "classification": "TN",
+      "complete": true,
+      "valid": true,
+      "censored": false,
+      "samples": 4001,
+      "soma_channels": 4
+    },
+    {
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "run_id": "s11-classic-count-recognition-m40-a2/threshold",
+      "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-6",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.04,
+        0.4
+      ],
+      "stimulus_times": [
+        12.013,
+        12.053,
+        12.093,
+        12.493
+      ],
+      "spike_times": [
+        12.495
+      ],
+      "relative_spikes_from_first": [
+        0.4819999999999993
+      ],
+      "relative_spikes_from_last": [
+        0.0019999999999988916
+      ],
+      "classification": "FP",
+      "complete": true,
+      "valid": true,
+      "censored": false,
+      "samples": 4001,
+      "soma_channels": 4
+    },
+    {
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "run_id": "s11-classic-count-recognition-m40-a2/threshold",
+      "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-7",
+      "pattern_isi": [
+        0.01,
+        0.4,
+        0.04,
+        0.04
+      ],
+      "stimulus_times": [
+        14.0135,
+        14.4135,
+        14.4535,
+        14.4935
+      ],
+      "spike_times": [],
+      "relative_spikes_from_first": [],
+      "relative_spikes_from_last": [],
+      "classification": "TN",
+      "complete": true,
+      "valid": true,
+      "censored": false,
+      "samples": 4001,
+      "soma_channels": 4
+    }
+  ],
+  "full_nonspiking_peak_proposal": {
+    "kind": "prepared_same_matrix_threshold_proposal",
+    "schema_version": 1,
+    "baseline": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-recognition-m40-a2-baseline",
+    "baseline_execution_sha256": "20a17a33bb39bf5507a926275fb240ba82d864cd81b7626458c2b08cc057f336",
+    "source_model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+    "source_package_sha256": "c8441210415478595f72cd258d29909767fac37c32a2ca11b63184df172738f1",
+    "rows": [
+      {
+        "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-0",
+        "sample_id": "phasea-row-0",
+        "label": "target",
+        "lt_maximum": 0.02089192710472107
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-1",
+        "sample_id": "phasea-row-1",
+        "label": "foil",
+        "lt_maximum": 0.01728587710191659
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-2",
+        "sample_id": "phasea-row-2",
+        "label": "foil",
+        "lt_maximum": 0.01709755395536175
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-3",
+        "sample_id": "phasea-row-3",
+        "label": "foil",
+        "lt_maximum": 0.017097553766214524
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-4",
+        "sample_id": "phasea-row-4",
+        "label": "foil",
+        "lt_maximum": 0.02058066919138868
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-5",
+        "sample_id": "phasea-row-5",
+        "label": "foil",
+        "lt_maximum": 0.01702608020640828
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-6",
+        "sample_id": "phasea-row-6",
+        "label": "foil",
+        "lt_maximum": 0.024337161633552068
+      },
+      {
+        "trial_id": "s11-classic-count-recognition-m40-a2/baseline/trial-7",
+        "sample_id": "phasea-row-7",
+        "label": "foil",
+        "lt_maximum": 0.01728587710191659
+      }
+    ],
+    "threshold": 0.020736298148054874,
+    "full_matrix_peak_margin": -0.0034452345288309982,
+    "nonspiking_proxy": {
+      "TP": 1,
+      "FN": 0,
+      "FP": 1,
+      "TN": 6
+    },
+    "rule": "midpoint_of_target_maximum_and_highest_strictly_lower_foil_maximum",
+    "baseline_all_artifact_bytes_verified": true,
+    "original_resolved_job_digest_verified": true,
+    "source_inventory_unchanged": true,
+    "protocol": "historical_same_matrix",
+    "actual_threshold_confirmation_required": true,
+    "complete_source_history_preserved": true,
+    "training_completed": false,
+    "scientific_verdict": null
+  },
+  "new_measured_secant_search_used": false,
+  "scientific_verdict": null
+}
