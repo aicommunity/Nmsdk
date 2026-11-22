@@ -512,7 +512,7 @@ template<class Owner> void MeasuredCountNativeProposal(unsigned frequency) {
         if(search.Evidence().size()==before)continue; // The fresh anchor is not an active-input residual.
         const auto& e=search.Evidence().back();ASSERT_EQ(e.inputIndex,0u);ASSERT_TRUE(e.withinTiming);
         EXPECT_EQ(e.modelRevision,revision);EXPECT_EQ(e.fullParameters,f.owner->ReadNativeParameters());
-        EXPECT_DOUBLE_EQ(e.measuredRawPotential,f.attempt->Measurement()->rawPotential);
+        EXPECT_DOUBLE_EQ(e.measuredRawPotential,f.observedScalars.at(action->trialId).rawPotential);
         EXPECT_TRUE(std::isfinite(e.amplitudeResidual));measured.push_back(e);
         if(measured.size()==1)EXPECT_EQ(e.parameters.synapses,1);
         if(measured.size()==2) {

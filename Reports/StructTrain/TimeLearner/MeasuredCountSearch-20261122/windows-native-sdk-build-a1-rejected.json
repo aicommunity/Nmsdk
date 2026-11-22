@@ -1,0 +1,41 @@
+{
+  "kind": "timelearner_compact_measured_count_native_sdk_build_rejection",
+  "schema_version": 1,
+  "root": "39561ed24a085bf4c4c5c10c641a1e98e1f0efcd",
+  "pulse": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+  "build_accepted": false,
+  "terminal": {
+    "kind": "timelearner_windows_sdk_build",
+    "build_accepted": false,
+    "scientific_models_executed": false,
+    "scientific_worker_admitted": false,
+    "scientific_verdict": null
+  },
+  "exception": {
+    "reason": "owned_build_not_accepted",
+    "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a1\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\sdk-build.py\", line 173, in main\n    require(result['execution'] == 'completed' and result['validity'] == 'valid' and\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            result.get('all_processes_closed') is True, 'owned_build_not_accepted')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a1\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\sdk-build.py\", line 22, in require\n    raise RuntimeError(reason)\nRuntimeError: owned_build_not_accepted\n"
+  },
+  "raw_process": {
+    "execution": "descendants_remaining",
+    "validity": "valid",
+    "returncode": 13,
+    "reason": "descendants_remaining",
+    "all_processes_closed": true,
+    "wall_seconds": 2075.748719300027
+  },
+  "kernel": {
+    "name": "Local\\TimeLearner-a5630fff-a442-4167-a978-16a51dcf4998",
+    "open_error": 2
+  },
+  "scheduled_task": {
+    "last_result": 1,
+    "name": "TimeLearner-windows-measured-count-native-sdk-build-a1",
+    "instances": []
+  },
+  "reason": "new_fixture_accessed_private_ValidatedCompositeMeasurement_rawPotential",
+  "fix": "compare controller value against actually recorded selected raw peak in fixture.observedScalars",
+  "original_scientific_runtime_unchanged": true,
+  "frozen_27_trial_evaluation_not_cancelled": true,
+  "native114_not_executed": true,
+  "scientific_verdict": null
+}
