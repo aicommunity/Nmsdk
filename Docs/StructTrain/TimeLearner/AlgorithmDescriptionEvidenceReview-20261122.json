@@ -532,7 +532,39 @@
         "blob": "842e99ffca4ff8c6ed457524f0a4cdfb3a65c992",
         "bytes": 10004,
         "sha256": "3b2927dd623758c9fcb98dea026c606264f6624d21863f679d88630640aa43bc"
-      }
+      },
+      "followup_evaluations": [
+        {
+          "title": "26 новых отвлекающих паттернов и прежний целевой",
+          "table_title": "Дополнительная проверка фиксированной модели",
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 25,
+            "targets": 1,
+            "foils": 26,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.9629629629629629,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.038461538461538464
+          },
+          "source_ref": "Reports/StructTrain/TimeLearner/FrozenClassicCountNewFoils-20261122/result.json; commit 388dc4f25ef0ce3271b63e17ca34a91b9417913c",
+          "explanation": "Модель и порог зафиксированы до новой проверки. На 26 новых отвлекающих паттернах и точном повторе исходного целевого получены TP=1, FP=1, FN=0, TN=25. Новый ложный ответ относится к интервалам 40;80;360 мс. Исходный целевой паттерн не является новой положительной выборкой. Нового обучения и подбора порога нет.",
+          "training_completed": false,
+          "threshold_selected": false,
+          "new_positive_class_assessed": false,
+          "new_foils_excluded_from_calibration": true,
+          "primary": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/af/afb9100649ecd71f06a056f3beeeaf3308ba5e83178f506a38124fab69686461",
+            "sha256": "afb9100649ecd71f06a056f3beeeaf3308ba5e83178f506a38124fab69686461",
+            "bytes": 1300404
+          }
+        }
+      ]
     }
   ],
   "excluded_examples": [

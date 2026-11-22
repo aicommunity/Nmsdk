@@ -90,7 +90,8 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
     def table(doc,headers,rows,widths,title=None):
         if layout:
             if not title:raise ValueError('Named table required for the GOST draft')
-            para('В таблице '+str(layout.tables+1)+' представлены '+title[0].lower()+title[1:]+'.')
+            reference=para('Сведения представлены в таблице '+str(layout.tables+1)+'.')
+            reference.paragraph_format.keep_with_next=True
             layout.table_caption(title)
             widths=[w*float(layout.width)/914400/sum(widths) for w in widths]
         t=doc.add_table(rows=1,cols=len(headers));t.alignment=WD_TABLE_ALIGNMENT.CENTER;t.autofit=False
@@ -166,7 +167,9 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
             with Image.open(path) as im:width,height=im.size
             scale=min((float(layout.width)/914400 if layout else 6.35)/width,
                       (float(layout.height)/914400-1.2 if layout else 7.8)/height)
-            if layout:para('На рисунке '+str(len(used)+1)+' показана следующая иллюстрация.')
+            if layout:
+                reference=para('На рисунке '+str(len(used)+1)+' показана следующая иллюстрация.')
+                reference.paragraph_format.keep_with_next=True
             p=para('');p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.keep_with_next=True
             if layout:p.paragraph_format.first_line_indent=Pt(0)
             p.add_run().add_picture(str(path),width=Inches(width*scale),height=Inches(height*scale))
