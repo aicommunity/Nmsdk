@@ -441,6 +441,106 @@ TEST(NativeCompositeTraining,ClassicPreparedDeclarationExpiresAfterOwnerReset){P
 TEST(NativeCompositeTraining,BranchPreparedDeclarationExpiresAfterOwnerReset){PreparedOwnerReset<NNeuronTimeLearnerBranch>();}
 TEST(NativeCompositeTraining,ClassicN0FreshRepeatCaptureSearchFinal2000){SearchAndFinal<NNeuronTimeLearner>(2000,false,true);}
 TEST(NativeCompositeTraining,BranchN0FreshRepeatCaptureSearchFinal2000){SearchAndFinal<NNeuronTimeLearnerBranch>(2000,false,true);}
+
+namespace {
+template<class Owner> void SaveMeasuredCountGroup(NativeCompositeFixture<Owner>& f,const std::string& stage) {
+    const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;
+    const auto folder=QString::fromLocal8Bit(output)+"/measured-count/"+
+        (NativeCompositeFixture<Owner>::branch?"branch-":"classic-")+QString::number(f.frequency)+"/"+QString::fromStdString(stage);
+    Require(QDir().mkpath(folder),"measured_count_output_directory");
+    const auto write=[&](const QString& name,const QByteArray& bytes) {
+        QFile file(folder+"/"+name);Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"measured_count_output_new_only");
+        Require(file.write(bytes)==bytes.size() && file.flush(),"measured_count_output_write");
+    };
+    Require(bool(f.attempt->Group()),"measured_count_group_missing");
+    const auto& group=*f.attempt->Group();std::vector<const MatchedOmissionTrace*> traces{&group.witness.fullBefore};
+    for(const auto& t:group.witness.omitEachInput)traces.push_back(&t);traces.push_back(&group.witness.fullAfter);
+    MatchedOmissionPrimary primary;std::vector<QString> paths;
+    for(std::size_t i=0;i<traces.size();++i) {
+        const auto path=QString("trace-%1.csv").arg(qulonglong(i));paths.push_back(path);
+        const auto bytes=EncodeMatchedOmissionPrimaryTrace(*traces[i],group.packets[i]);primary.emplace(path,bytes);write(path,bytes);
+    }
+    write("group.json",QJsonDocument(EncodeMatchedOmissionEvidence(group,paths,primary)).toJson());
+    if(f.attempt->Selection())write("selection.json",QJsonDocument(EncodeNativeCompositeSelection(*f.attempt->Selection())).toJson());
+}
+
+// A warm recovery control, not a cold-training or classification result. Capture
+// actual per-input goals at Ns=8, deliberately return only input0 to Ns=1, then
+// ask the production controller to propose and MEASURE an integer from the two
+// actual same-geometry responses. No waveform, peak or reference is invented.
+template<class Owner> void MeasuredCountNativeProposal(unsigned frequency) {
+    NativeCompositeFixture<Owner> f(frequency,false,32,false,true);
+    const auto original=f.owner->ReadNativeParameters();auto captured=original;captured[0].synapses=8;
+    auto edit=f.owner->ApplyNativeParameters(captured);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    ASSERT_EQ(f.owner->ReadNativeParameters(),captured);
+    for(std::size_t i=0;i<f.protocol.inputs.size();++i) {
+        f.Run(f.Request(i,"count-reference","count-reference/"+std::to_string(i)),CompositeMeasurementPurpose::Reference);
+        SaveMeasuredCountGroup(f,"reference-"+std::to_string(i));
+        ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+        f.referenceMeasurements.push_back(*f.attempt->Measurement());
+    }
+    const auto references=CapturedReferences::CaptureComposite(f.protocol,f.referenceMeasurements);
+    edit=f.owner->ApplyNativeParameters(original);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    ASSERT_EQ(f.owner->ReadNativeParameters(),original);
+    BoundedTrainingConfig cfg;cfg.runId="native-measured-count";cfg.initialModelRevision=f.Revision();cfg.initialModelEpoch=1;
+    cfg.normalization=Normalization::SynapseCount;cfg.maximumProbes=32;cfg.maximumEdits=16;
+    cfg.maximumCandidatesPerInput=8;cfg.maximumSweeps=1;cfg.tolerances.sync=.2;
+    for(const auto& p:original)cfg.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
+    cfg.bounds[0].maximumSynapses=16;
+    BoundedTrainingSession search(references,cfg,original,false,f.owner->ReadNativeTrainingCapacitance());
+    std::vector<CandidateEvidence> measured;std::size_t actions=0;std::optional<int> expectedProposal;
+    while(const auto action=search.NextAction()) {
+        ASSERT_LT(++actions,32u);ASSERT_FALSE(action->finalVerification);EXPECT_FALSE(search.Certificate());
+        if(action->kind==TrainingActionKind::Edit) {
+            const auto before=f.owner->ReadNativeParameters();EXPECT_EQ(before,search.Parameters());
+            const auto changed=f.owner->ApplyNativeTrainingParameters(action->parameters,action->capacitance);
+            ASSERT_EQ(changed.status,NativeEditStatus::Applied)<<changed.reason;
+            const auto effective=f.owner->ReadNativeParameters();ASSERT_EQ(effective,action->parameters);
+            for(std::size_t i=0;i<effective.size();++i) {
+                EXPECT_EQ(effective[i].length,original[i].length);EXPECT_DOUBLE_EQ(effective[i].resistance,original[i].resistance);
+                if(i)EXPECT_EQ(effective[i].synapses,original[i].synapses);
+            }
+            search.Applied(action->serial,effective,f.Revision(),f.owner->ReadNativeTrainingCapacitance());continue;
+        }
+        ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+        const auto before=search.Evidence().size();const auto revision=f.Revision();
+        f.Run(f.Request(action->inputIndex,action->runId,action->trialId,action->modelEpoch),CompositeMeasurementPurpose::Search,
+            [&,serial=action->serial](const auto& prepared){search.ArmComposite(serial,prepared);});
+        SaveMeasuredCountGroup(f,"search-"+std::to_string(action->serial));
+        ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();ASSERT_EQ(f.Revision(),revision);
+        search.ConsumeComposite(*f.attempt->Measurement(),revision);
+        if(search.Evidence().size()==before)continue; // The fresh anchor is not an active-input residual.
+        const auto& e=search.Evidence().back();ASSERT_EQ(e.inputIndex,0u);ASSERT_TRUE(e.withinTiming);
+        EXPECT_EQ(e.modelRevision,revision);EXPECT_EQ(e.fullParameters,f.owner->ReadNativeParameters());
+        EXPECT_DOUBLE_EQ(e.measuredRawPotential,f.attempt->Measurement()->rawPotential);
+        EXPECT_TRUE(std::isfinite(e.amplitudeResidual));measured.push_back(e);
+        if(measured.size()==1)EXPECT_EQ(e.parameters.synapses,1);
+        if(measured.size()==2) {
+            EXPECT_EQ(e.parameters.synapses,2);
+            const auto& a=measured[0];const auto& b=measured[1];
+            ASSERT_LT(a.amplitudeResidual,0.);ASSERT_GT(b.amplitudeResidual,a.amplitudeResidual);
+            ASSERT_LT(b.amplitudeResidual,0.);
+            const double fitted=double(b.parameters.synapses)-b.amplitudeResidual*
+                (b.parameters.synapses-a.parameters.synapses)/(b.amplitudeResidual-a.amplitudeResidual);
+            ASSERT_TRUE(std::isfinite(fitted));expectedProposal=int(std::round(std::clamp(fitted,1.,16.)));
+            ASSERT_GT(*expectedProposal,2);
+        }
+        if(measured.size()==3) {
+            ASSERT_TRUE(expectedProposal);EXPECT_EQ(e.parameters.synapses,*expectedProposal);
+            EXPECT_NE(e.modelRevision,measured[1].modelRevision);EXPECT_FALSE(search.Certificate());
+            search.ExternalStop();break;
+        }
+    }
+    ASSERT_EQ(measured.size(),3u)<<search.Reason();EXPECT_EQ(search.Status(),TrainingStatus::ExternalStop);
+    EXPECT_FALSE(search.Certificate());EXPECT_EQ(search.AcceptedCompositeObservations(),6u);
+    EXPECT_EQ(search.IssuedProbes(),6u);EXPECT_EQ(f.attempt->IssuedNativeProbes(),32u);EXPECT_EQ(f.preparations,32u);
+}
+}
+TEST(NativeMeasuredCount,ClassicActualSameGeometry2000){MeasuredCountNativeProposal<NNeuronTimeLearner>(2000);}
+TEST(NativeMeasuredCount,BranchActualSameGeometry2000){MeasuredCountNativeProposal<NNeuronTimeLearnerBranch>(2000);}
+TEST(NativeMeasuredCount,ClassicActualSameGeometry20000){MeasuredCountNativeProposal<NNeuronTimeLearner>(20000);}
+TEST(NativeMeasuredCount,BranchActualSameGeometry20000){MeasuredCountNativeProposal<NNeuronTimeLearnerBranch>(20000);}
+
 TEST(NativeCompositeTraining,ClassicSetterStopBetweenFinalCloseAndConsume){RequestRemovedBeforeFinalConsume<NNeuronTimeLearner>(RequestStop::Setter);}
 TEST(NativeCompositeTraining,BranchSetterStopBetweenFinalCloseAndConsume){RequestRemovedBeforeFinalConsume<NNeuronTimeLearnerBranch>(RequestStop::Setter);}
 TEST(NativeCompositeTraining,ClassicDirectDataStopBetweenFinalCloseAndConsume){RequestRemovedBeforeFinalConsume<NNeuronTimeLearner>(RequestStop::DirectData);}
