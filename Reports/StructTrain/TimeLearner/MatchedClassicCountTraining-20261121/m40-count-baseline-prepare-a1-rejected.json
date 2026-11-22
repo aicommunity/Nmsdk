@@ -1,0 +1,110 @@
+{
+  "kind": "timelearner_m40_count_recognition_preparation_rejected",
+  "schema_version": 1,
+  "source_commit": "a440fd346e8b5951cda591d2f0c0327410c78922",
+  "rejection": {
+    "reason": "stopped_study_phase_failed:baseline-prepare",
+    "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/linux_stopped_recognition_study.py\", line 208, in supervise\n    require(result == 0 and load(directory/'worker-terminal.json')['completed'], 'stopped_study_phase_failed:'+phase)\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: stopped_study_phase_failed:baseline-prepare\n",
+    "original_Train_not_restarted": true,
+    "scientific_verdict": null
+  },
+  "phase": {
+    "supervisor-result.json": {
+      "reason": null,
+      "record_errors": [],
+      "last_before_cleanup": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "4acc89087f62f4db233a1e6c949ac8be722afeb81e185f9531d73766a2f27d83",
+          "unit": "timelearner-daf2eb25-9542-4eca-97b4-d50301ea04c1.service",
+          "invocation_id": "33c5f5bfee1e4c79bd33924ce89323a0",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-daf2eb25-9542-4eca-97b4-d50301ea04c1.service",
+          "initial_main_pid": 2025642,
+          "initial_start_ticks": "439624321",
+          "sha256": "29888c31e227ab60a9aa08b3c962f25ff4e1b357e0af1c78f46514bf5a067ec7"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "Result": "exit-code",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "1",
+          "ControlGroup": "",
+          "MemoryMax": "17179869184",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt daf2eb25-9542-4eca-97b4-d50301ea04c1",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "InvocationID": "33c5f5bfee1e4c79bd33924ce89323a0"
+        },
+        "memory_max": 17179869184,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "outer_binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "4acc89087f62f4db233a1e6c949ac8be722afeb81e185f9531d73766a2f27d83",
+        "unit": "timelearner-daf2eb25-9542-4eca-97b4-d50301ea04c1.service",
+        "invocation_id": "33c5f5bfee1e4c79bd33924ce89323a0",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-daf2eb25-9542-4eca-97b4-d50301ea04c1.service",
+        "initial_main_pid": 2025642,
+        "initial_start_ticks": "439624321",
+        "sha256": "29888c31e227ab60a9aa08b3c962f25ff4e1b357e0af1c78f46514bf5a067ec7"
+      },
+      "outer_closed": true,
+      "children_closed": [],
+      "disk_peak_increment": 3256549376,
+      "minimum_free": 322158084096,
+      "execution_success_not_inferred_from_cleanup": true,
+      "scientific_verdict": null
+    },
+    "outer-kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "4acc89087f62f4db233a1e6c949ac8be722afeb81e185f9531d73766a2f27d83",
+        "unit": "timelearner-daf2eb25-9542-4eca-97b4-d50301ea04c1.service",
+        "invocation_id": "33c5f5bfee1e4c79bd33924ce89323a0",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-daf2eb25-9542-4eca-97b4-d50301ea04c1.service",
+        "initial_main_pid": 2025642,
+        "initial_start_ticks": "439624321",
+        "sha256": "29888c31e227ab60a9aa08b3c962f25ff4e1b357e0af1c78f46514bf5a067ec7"
+      }
+    }
+  },
+  "public_failure_context": {
+    "baseline-prepare/process/contained/stdout.log": "",
+    "baseline-prepare/process/contained/stderr.log": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/linux_stopped_recognition_study.py\", line 248, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n                                             ^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/linux_stopped_recognition_study.py\", line 245, in main\n    return supervise(args.request) if args.action=='_supervise' else worker(args.request,args.phase)\n                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/linux_stopped_recognition_study.py\", line 129, in worker\n    write(control/'declaration.json',declaration);prepare(declaration)\n                                                  ^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/prepare_stopped_baseline.py\", line 90, in prepare\n    envelope=make_envelope(job,staged/source.name,inputs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/job_source_transport.py\", line 65, in make_envelope\n    source={'field':field,'path':relative,**_record(path),'package_sha256':job[field]['sha256']}\n                                            ^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/job_source_transport.py\", line 28, in _record\n    require(0 < before.st_size <= MAXIMUM_SOURCE_BYTES, 'job_source_declared_size')\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: job_source_declared_size\n",
+    "supervisor.log": "{\"kind\": \"STARTED\", \"binding\": {\"kind\": \"timelearner_contained_binding\", \"schema_version\": 1, \"request_sha256\": \"4acc89087f62f4db233a1e6c949ac8be722afeb81e185f9531d73766a2f27d83\", \"unit\": \"timelearner-daf2eb25-9542-4eca-97b4-d50301ea04c1.service\", \"invocation_id\": \"33c5f5bfee1e4c79bd33924ce89323a0\", \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-daf2eb25-9542-4eca-97b4-d50301ea04c1.service\", \"initial_main_pid\": 2025642, \"initial_start_ticks\": \"439624321\", \"sha256\": \"29888c31e227ab60a9aa08b3c962f25ff4e1b357e0af1c78f46514bf5a067ec7\"}}\nTraceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/linux_stopped_recognition_study.py\", line 248, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n                                             ^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/linux_stopped_recognition_study.py\", line 245, in main\n    return supervise(args.request) if args.action=='_supervise' else worker(args.request,args.phase)\n           ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/linux_stopped_recognition_study.py\", line 208, in supervise\n    require(result == 0 and load(directory/'worker-terminal.json')['completed'], 'stopped_study_phase_failed:'+phase)\n  File \"/media/user/Data/TimeLearnerRefactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: stopped_study_phase_failed:baseline-prepare\n",
+    "prepared_control_files": [
+      {
+        "name": "declaration.json",
+        "bytes": 1334
+      },
+      {
+        "name": "source-audit.json",
+        "bytes": 99688
+      }
+    ]
+  },
+  "actual_native_evaluation_started": false,
+  "original_Train_and_primary_unchanged": true,
+  "reason": "Audited original state1173768677 bytes exceeds checked-file-source1GiB. Existing lossless whitespace transport not connected in this preparation path.",
+  "fix": "Reuse production compact_json_transport into a fresh carrier after skipping the original package hard link; retain complete original source/history and native/Python1GiB limits.",
+  "semantic_package_readback_still_required": true,
+  "new_native_SDK_required": false,
+  "actual_fix_runtime_validation_pending": true,
+  "scientific_verdict": null
+}

@@ -9,7 +9,8 @@ import json
 import os
 from pathlib import Path
 
-from .job_source_transport import make_envelope
+from .job_source_transport import make_envelope, MAXIMUM_SOURCE_BYTES
+from .json_transport import compact_json_transport
 from .model_identity import canonical_model_sha256 as sha
 from .native_evidence import load, require
 from .prepared_diagnostic import inventory
@@ -86,8 +87,19 @@ def prepare(declaration):
         if path.is_dir():target.mkdir(parents=True,exist_ok=True)
         else:
             require(path.is_file(),'stopped_baseline_nonregular_source')
+            if path==source:continue
             target.parent.mkdir(parents=True,exist_ok=True);os.link(path,target)
-    envelope=make_envelope(job,staged/source.name,inputs)
+    carrier=staged/source.name;transport=None
+    if before['size']>MAXIMUM_SOURCE_BYTES:
+        # The original full audited package stays untouched. Reuse the same
+        # byte-token-preserving transport already used for physical export;
+        # never rewrite a hard link to the authoritative source.
+        transport=compact_json_transport(source,carrier,expected_bytes=before['size'],
+            expected_sha256=before['sha256'],maximum_output_bytes=MAXIMUM_SOURCE_BYTES)
+        _write(destination/'source-transport.json',transport)
+    else:
+        os.link(source,carrier)
+    envelope=make_envelope(job,carrier,inputs)
     _write(inputs/'native-job-source.json',envelope)
     python_source=Path(declaration['python_source']).resolve(strict=True)
     worker=python_source/'Scripts/StructTrain/TimeLearner/prepared_diagnostic.py'
@@ -110,12 +122,16 @@ def prepare(declaration):
         disk=dict(minimum_free_bytes=4*1024**3,maximum_output_bytes=24*1024**3),
         lock_file=str(inputs.parent.parent/'locks/worker.lock'))
     _write(destination/'specification.json',spec)
-    require(file_record(source)==before and file_record(staged/source.name)['sha256']==before['sha256'],
+    expected_carrier=before['sha256'] if transport is None else transport['transport']['sha256']
+    require(file_record(source)==before and file_record(carrier)['sha256']==expected_carrier,
             'stopped_baseline_source_changed_during_preparation')
     result=dict(kind='timelearner_stopped_baseline_preparation_result',schema_version=1,
         source_model_revision=package['model_revision'],source_package_sha256=package['sha256'],
         source_proof=file_record(proof_path),source_audit=spec['source_audit'],resolved_job_sha256=job['sha256'],
         staged_files=len(spec['input_inventory']),complete_source_namespace_preserved=True,
+        original_source_package=before,source_transport=transport,
+        transport_carrier_byte_identical_to_original=transport is None,
+        complete_source_fields_and_history_retained=True,
         source_decoded_once_without_history_copy=True,original_outcome='budget_exhausted',
         initial_threshold=model['initial_threshold'],trials=8,inputs=str(inputs),output=str(output),
         native_execution_started=False,scientific_verdict=None)

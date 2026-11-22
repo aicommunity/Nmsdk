@@ -1,0 +1,120 @@
+{
+  "kind": "timelearner_m40_classic_count_complete_primary_audit",
+  "schema_version": 1,
+  "actual_audit_kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "cc12543a7c97eaf260f7873493a2f2648d5905a6d726ce61ba7c6c3a34a23a42",
+      "unit": "timelearner-48cb26c5-1428-44fd-bd79-8aa6aa2a955b.service",
+      "invocation_id": "51c0d47499bd4607a1e1b367a073fcf7",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-48cb26c5-1428-44fd-bd79-8aa6aa2a955b.service",
+      "initial_main_pid": 1981985,
+      "initial_start_ticks": "439567100",
+      "sha256": "cdadedd1d7324a547d43a5955e8968e33ecdfad21fa0e60562ad79a6cb459cc4"
+    }
+  },
+  "validation": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "classic-count-full-primary-audit-m40-a3",
+    "package_fingerprint": "4a90cd7dcff85356ce0ae9a1b0eca146f3042c8c76fe865c78a0890c5eff0fee",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_closed_matched_count_training.ClosedMatchedCountTrainingTest.test_actual_complete_primary_and_single_package_decode"
+    ],
+    "executed_tests": 1,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_MATCHED_COUNT_NATIVE": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/train/native",
+        "files": 1992,
+        "fingerprint": "3cf32b1d13cb268493a3479b40e008a856765b0816e5fe8e99ac9be021771d7b"
+      },
+      "TIMELEARNER_MATCHED_COUNT_ORIGINAL": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-count-full-primary-audit-m40-a3/original-fixture",
+        "files": 1,
+        "fingerprint": "539d7d27813e4fdcba54d5d14a6d8e787a101326f3f30b2933d52239081fc5be"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "worker_terminal": {
+    "operation_passed": true,
+    "operation": "python-controller-validation",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "actual_process": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 565.0102404048666,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "40ba8c6e3724969bd7f3947ffea3d597402ef2e674ac0ab36802d782c86ac1e7",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "source_package": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/train/native/train_stopped_state.json",
+    "sha256": "11ca2ca242a93f107e7252c3dfad90b330932f2c95231a86c5131e14b0f9cc2f",
+    "size": 1173768677
+  },
+  "source_package_full_decodes": 1,
+  "original_outcome_unchanged": true,
+  "original_pending_terminal": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/terminal.json",
+    "sha256": "2185204fe7bb2469c359248d32fea6a7c5b885b1aeff164b1c0cf039cadc9fe9",
+    "size": 517
+  },
+  "proof_record": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-full-primary-audit-m40-a3/worker/tmp/matched-count-training-audit.json",
+    "sha256": "5e8b1874eaee84aaa474078f1cd62906457798297851b7339d3b0f6384c8a578",
+    "size": 112193
+  },
+  "training_outcome": "budget_exhausted",
+  "completed_boundary": false,
+  "model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+  "full_primary_audit_complete": true,
+  "classification_performed": false,
+  "complete_primary_archive_pending": true,
+  "scientific_verdict": null
+}
