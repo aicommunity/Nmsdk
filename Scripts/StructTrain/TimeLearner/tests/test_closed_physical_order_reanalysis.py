@@ -17,6 +17,10 @@ class ClosedPhysicalOrderReanalysisTest(unittest.TestCase):
         self.assertTrue(result['all_eight_target_positions_observed'])
         self.assertFalse(result['native_rerun_performed'])
         self.assertFalse(result['training_completed'])
+        self.assertIn(result['original_controller_execution'], ('completed','process_error'))
+        if result['original_controller_execution']=='process_error':
+            self.assertFalse(result['original_pipeline_success_claimed'])
+        self.assertEqual(result['schema_version'],2)
         self.assertIsNone(result['scientific_verdict'])
         # Changed responses/classifications, if measured, remain data. They
         # are not turned into validation failures or hidden by desired counts.

@@ -33,9 +33,12 @@ def audit_closed_order(controls, output):
     source_path = Path(declaration['source_manifest']).resolve(strict=True)
     comparison_path = Path(declaration['source_comparison']).resolve(strict=True)
     study_path = root/'run/run-manifest.json'
-    paths = [declaration_path, source_path, comparison_path, study_path, root/'terminal.json',
+    terminal_path = root/'terminal.json'
+    paths = [declaration_path, source_path, comparison_path, study_path, root/'design.json',
              root/'job.json', source_path.parent/'input/job.json', controls/'outer-result.json',
              root/'run/process/result.json']
+    if terminal_path.exists():
+        paths.append(terminal_path)
     # Full manifests bind all their primary files. Also retain independent
     # before/after hashes of every response being compared, not just a CSV.
     paths += sorted((source_path.parent/'native').glob('trial-*.json'))
@@ -46,9 +49,14 @@ def audit_closed_order(controls, output):
             'order_reanalysis_source_binding_changed')
     for process in (controls/'outer-process/contained', root/'run/process/contained'):
         require(inspect(process)['all_processes_closed'], 'order_reanalysis_process_still_live_or_unknown')
+    outer_process = load(controls/'outer-result.json')
     for process_result in (controls/'outer-result.json', root/'run/process/result.json'):
         process = load(process_result)
-        require(process['execution'] == 'completed' and process['all_processes_closed'] and
+        # The controller can fail after the complete native observation. Keep
+        # that execution failure; the independent data audit proves only the
+        # closed native study and its scientific measurements.
+        allowed = ('completed', 'process_error') if process_result == controls/'outer-result.json' else ('completed',)
+        require(process['execution'] in allowed and process['all_processes_closed'] and
                 process['runtime_provenance'] == 'loaded_files_captured',
                 'order_reanalysis_execution_not_confirmed')
     for manifest_path in (source_path, study_path):
@@ -60,8 +68,13 @@ def audit_closed_order(controls, output):
     baseline = load(source_path); study = load(study_path)
     source_job = load(source_path.parent/'input/job.json'); job = load(root/'job.json')
     model = source_job['source_model_data']
-    old_terminal = load(root/'terminal.json'); source_roundtrip = load(comparison_path)
-    require(old_terminal['execution'] == 'completed' and old_terminal['validity'] == 'valid' and
+    old_terminal = load(terminal_path) if terminal_path.exists() else None
+    design = load(root/'design.json')
+    require(all(records[str(path)] == design[key] for key, path in (
+                ('source_manifest',source_path), ('source_job',source_path.parent/'input/job.json'),
+                ('source_comparison',comparison_path))), 'order_reanalysis_design_sources_changed')
+    source_roundtrip = load(comparison_path)
+    require((old_terminal is None or (old_terminal['execution'] == 'completed' and old_terminal['validity'] == 'valid')) and
             source_roundtrip['all_eight_waveforms_and_events_preserved'] and
             source_roundtrip['source_model_data_sha256'] == model['sha256'],
             'order_reanalysis_requires_audited_source_roundtrip')
@@ -102,7 +115,7 @@ def audit_closed_order(controls, output):
     positions.update(r['target_position'] for r in rows if r['classification'] in ('TP', 'FN'))
     require(positions == set(range(8)) and {str(p): file_record(p) for p in paths} == records,
             'order_reanalysis_incomplete_positions_or_input_mutation')
-    result = dict(kind='timelearner_closed_physical_order_reanalysis', schema_version=1,
+    result = dict(kind='timelearner_closed_physical_order_reanalysis', schema_version=2,
         comparator_version=1, time_basis='actual_stimulus_onset', absolute_tolerance=1e-12,
         execution='completed', validity='valid', native_rerun_performed=False,
         source_control_trials=8, new_study_trials=56, rows=rows,
@@ -113,8 +126,10 @@ def audit_closed_order(controls, output):
         threshold=declaration['threshold'], all_eight_target_positions_observed=True,
         classifications_preserved=all(r['classification_preserved'] for r in rows),
         waveforms_and_events_preserved=all(r['response_comparison']['response_preserved'] for r in rows),
-        original_terminal=records[str(root/'terminal.json')],
-        original_absolute_clock_comparison_result=old_terminal['waveforms_and_events_preserved'],
+        original_terminal=records[str(terminal_path)] if old_terminal is not None else None,
+        original_controller_execution=outer_process['execution'],
+        original_pipeline_success_claimed=outer_process['execution']=='completed' and old_terminal is not None,
+        original_absolute_clock_comparison_result=old_terminal['waveforms_and_events_preserved'] if old_terminal is not None else None,
         input_records=list(records.values()), all_input_bytes_unchanged=True,
         training_completed=False, independently_heldout_evaluation=False,
         continuous_stream_verified=False, inter_pattern_interval_varied=False, scientific_verdict=None)

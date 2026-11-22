@@ -52,9 +52,9 @@ def run(controls):
     require(audited['run_evidence_consistent'] and baseline['operation'] == 'physical-model-evaluate' and
             baseline['execution'] == 'completed' and baseline['validity'] == 'valid',
             'physical_order_requires_complete_audited_DATA_run')
-    comparison = Path(declaration['source_comparison']).resolve(strict=True)
-    comparison_before = file_record(comparison)
-    comparison_result = json.loads(comparison.read_bytes())
+    comparison_path = Path(declaration['source_comparison']).resolve(strict=True)
+    comparison_before = file_record(comparison_path)
+    comparison_result = json.loads(comparison_path.read_bytes())
     require(comparison_before['sha256'] == declaration['source_comparison_sha256'] and
             comparison_result['all_eight_waveforms_and_events_preserved'],
             'physical_order_source_roundtrip_not_confirmed')
@@ -130,7 +130,7 @@ def run(controls):
         for measured in study['trials']:
             observation = observed_by_id[measured['trial_id']]
             expected = by_sample[observation['sample_id']]
-            comparison = compare(expected, observation)
+            response_comparison = compare(expected, observation)
             rows.append(dict(trial_id=measured['trial_id'],sample_id=measured['sample_id'],
                 rotation=declaration['rotations'][measured['presentation_index']//8],
                 target_position=next(i for i,t in enumerate(job['trials'][measured['presentation_index']//8*8:][:8])
@@ -138,18 +138,18 @@ def run(controls):
                 position=measured['presentation_index']%8,classification=measured['classification'],
                 source_classification=baseline_metrics[measured['sample_id']]['classification'],
                 classification_preserved=measured['classification']==baseline_metrics[measured['sample_id']]['classification'],
-                waveforms_equal_within_declared_tolerance=comparison['waveforms_equal_within_declared_tolerance'],
-                maximum_absolute_sample_difference=comparison['maximum_absolute_sample_difference'],
-                waveform_difference_reason=next(iter(comparison['difference_reasons']), None),
-                stimulus_and_spike_events_equal=comparison['stimulus_and_spike_events_equal'],
-                response_comparison=comparison))
+                waveforms_equal_within_declared_tolerance=response_comparison['waveforms_equal_within_declared_tolerance'],
+                maximum_absolute_sample_difference=response_comparison['maximum_absolute_sample_difference'],
+                waveform_difference_reason=next(iter(response_comparison['difference_reasons']), None),
+                stimulus_and_spike_events_equal=response_comparison['stimulus_and_spike_events_equal'],
+                response_comparison=response_comparison))
     positions={next(i for i,t in enumerate(patterns) if t['label']=='target')}
     positions.update(row['target_position'] for row in rows if row['classification'] in ('TP','FN'))
     require(positions == set(range(8)), 'physical_order_target_positions_incomplete')
     by_rotation=[dict(rotation=r,counts=dict(Counter(row['classification'] for row in rows if row['rotation']==r)))
                  for r in declaration['rotations']]
     require(file_record(source)==before and file_record(job_path)==source_job_before and
-            file_record(model_path)==model_before and file_record(comparison)==comparison_before,
+            file_record(model_path)==model_before and file_record(comparison_path)==comparison_before,
             'physical_order_source_mutated')
     _write(output/'terminal.json', dict(kind='timelearner_frozen_physical_order_result',schema_version=1,
         execution='completed',validity='valid',model_revision=model['model_revision'],
