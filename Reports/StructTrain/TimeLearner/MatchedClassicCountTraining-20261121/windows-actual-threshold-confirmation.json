@@ -86,7 +86,8 @@
       "target_hit_rate": 1.0,
       "foil_response_rate": 0.14285714285714285
     },
-    "effective_threshold": 0.06760345444849075
+    "effective_threshold": 0.06760345444849075,
+    "model_revision": "364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4"
   },
   "trials": [
     {
@@ -169,9 +170,29 @@
     "bin": "8cb6dba07b30432272984c8ce3136b48ad06f064"
   },
   "source_controls_root": "55138b26b173ba5cfb907d02829505280752dd3d",
-  "central_primary_publication_pending": true,
+  "central_primary_publication_pending": false,
   "all_pattern_visual_review_pending": true,
   "physical_DATA_replay_pending": true,
   "independently_heldout_evaluation": false,
-  "scientific_verdict": null
+  "scientific_verdict": null,
+  "training_state_revision": "53a459de5082d318f1737d09b478cf574327cb4bc0a88dc51d438ee69cf2daa9",
+  "recognition_model_revision": "364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4",
+  "revision_difference_reason": "effective threshold is part of semantic model identity; training/stopped state and calibrated recognition state are distinct",
+  "central_primary_archive": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/43/43d3d9016b839bc8b9b560c3469e6a2ff3b04e47fc8fac5b7c461e19d737426d",
+    "sha256": "43d3d9016b839bc8b9b560c3469e6a2ff3b04e47fc8fac5b7c461e19d737426d",
+    "bytes": 69683268
+  },
+  "primary_bundle": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/39/395580b98f0d7a24c03edbe4718617c417ee5d8277287e9394244b1771278185",
+    "sha256": "395580b98f0d7a24c03edbe4718617c417ee5d8277287e9394244b1771278185",
+    "bytes": 36578
+  },
+  "full_archive_member_restoration_pending": true
 }
