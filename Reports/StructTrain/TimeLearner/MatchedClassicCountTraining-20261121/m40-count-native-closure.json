@@ -1,0 +1,190 @@
+{
+  "kind": "timelearner_m40_classic_count_training_native_closure",
+  "schema_version": 1,
+  "observed_utc": "2026-11-22T04:11:11.268863+00:00",
+  "source_job": "s11-classic-count-training-m40-a1",
+  "original_pending_terminal": {
+    "execution": "completed",
+    "validity": "pending_full_primary_audit",
+    "job_sha256": "28b3c96d1b9c2229ce98c4fbe0227de86146957c5ef20c37906953a9bf8cfb4a",
+    "native_execution_sha256": "3e047bfd25a34c366687412f4223068dc412d8c1b14349b16c480a4c29119877",
+    "training_outcome": "budget_exhausted",
+    "completed_boundary": false,
+    "package_path": "train_stopped_state.json",
+    "full_primary_audit_complete": false,
+    "training_certificate_verified": false,
+    "evaluation_verdict": null,
+    "scientific_verdict": null
+  },
+  "actual_process_result": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 33113.393031236716,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "7ef93691c86311ef72259382b0d4e950d910ed2fbd6aaed113649cf894e9a404",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "native_source_records": {
+    "terminal.json": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/terminal.json",
+      "sha256": "2185204fe7bb2469c359248d32fea6a7c5b885b1aeff164b1c0cf039cadc9fe9",
+      "size": 517
+    },
+    "train/process/result.json": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/train/process/result.json",
+      "sha256": "8158e80d413758f54487d82c1752491680abf025895c2d5d133c3ef5c91a2fd4",
+      "size": 1177
+    },
+    "train/native/execution.json": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1/train/native/execution.json",
+      "sha256": "77d93f5c0dfab411efc15e1a3cb5b9af3ea4026abe98a92e0473762654e97116",
+      "size": 394510
+    }
+  },
+  "closed_source_native_kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "ef7ad78868de3e9515ab94aecf175effaf94b7245a4e1496d59a3b1e7171a222",
+      "unit": "timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+      "invocation_id": "07a94cfc2631458f988f19e653f65489",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+      "initial_main_pid": 173265,
+      "initial_start_ticks": "436251545",
+      "sha256": "dc90ba704f52ae142c785daf02d83f337574c2aa32924bcbf41404056a5f3a81"
+    }
+  },
+  "closed_source_controller": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "e857c5757caacd525c8b2e381f6de0ea50ba4d397f2e891016c868262d17f837",
+      "unit": "timelearner-b866cd9b-7595-470d-ba74-1a87675afd01.service",
+      "invocation_id": "e19e53b08f52478b992e27f3884b958e",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b866cd9b-7595-470d-ba74-1a87675afd01.service",
+      "initial_main_pid": 169513,
+      "initial_start_ticks": "436249423",
+      "sha256": "2b6887fc93b666400faf2d7282fbbdfe841ebc3f980a28c1eb1355019d06fe25"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-b866cd9b-7595-470d-ba74-1a87675afd01.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "source_supervisor_record": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1-controller/supervisor-result.json",
+    "sha256": "5da8fe8ab20323b4ba31790ba37a922796c5385fe0dc9b9a71f5ccbeef84f7b7",
+    "size": 8914
+  },
+  "execution": {
+    "sha256": "3e047bfd25a34c366687412f4223068dc412d8c1b14349b16c480a4c29119877",
+    "job_sha256": "28b3c96d1b9c2229ce98c4fbe0227de86146957c5ef20c37906953a9bf8cfb4a",
+    "training_outcome": "budget_exhausted",
+    "completed_boundary": false,
+    "model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+    "model_semantic_hash": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+    "native_execution_counts": {
+      "native_trials": 627,
+      "sampled_frames": 2254293
+    },
+    "model_ticks": 2254447,
+    "model_time_begin": 0,
+    "model_time_end": 1127.2235,
+    "frequency_hz": 2000,
+    "package_sha256": "c8441210415478595f72cd258d29909767fac37c32a2ca11b63184df172738f1",
+    "terminal_boundary": {
+      "actual_model_epoch": 48,
+      "actual_model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+      "historical_model_epoch": 48,
+      "historical_model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+      "historical_package_sha256": "cd37bd3432eb4742346cdd5663fd223a28882c14eb5ba0b96050e25a156035f9",
+      "package_sha256": "c8441210415478595f72cd258d29909767fac37c32a2ca11b63184df172738f1",
+      "terminal_event_sha256": "82e3ff0759ca5221fcd402993dae4ef332163af92110b148e415cb74dcd234b8",
+      "terminal_journal_sha256": "2e6a27f992d5492233f0837a2224c001a3aaeb97e779968f5743720df8d494fa"
+    }
+  },
+  "source_package_file_bytes": 1173768677,
+  "source_summary_file_bytes": 52795350,
+  "full_primary_audit": {
+    "status": "running",
+    "actual_kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "cc12543a7c97eaf260f7873493a2f2648d5905a6d726ce61ba7c6c3a34a23a42",
+        "unit": "timelearner-48cb26c5-1428-44fd-bd79-8aa6aa2a955b.service",
+        "invocation_id": "51c0d47499bd4607a1e1b367a073fcf7",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-48cb26c5-1428-44fd-bd79-8aa6aa2a955b.service",
+        "initial_main_pid": 1981985,
+        "initial_start_ticks": "439567100",
+        "sha256": "cdadedd1d7324a547d43a5955e8968e33ecdfad21fa0e60562ad79a6cb459cc4"
+      }
+    },
+    "memory_peak_bytes": 3687256064,
+    "memory_limit_bytes": 17179869184,
+    "original_pending_terminal_unchanged": true
+  },
+  "next_operation": "actual_stopped_model_evaluation_only_after_complete_primary_audit",
+  "new_Train_started": false,
+  "classification_performed": false,
+  "full_primary_audit_complete": false,
+  "scientific_publication_complete": false,
+  "complete_primary_archive_pending": true,
+  "scientific_verdict": null
+}
