@@ -138,7 +138,7 @@ def render(specification, output, *, matplotlib_libs=None):
             # Explicit margins are stable with twinned stimulus axes. Automatic
             # title positioning may otherwise overlap another row's ticks or
             # the two-line overall title after a short-window zoom.
-            fig.subplots_adjust(left=.13,right=.98,bottom=.40/height,
+            fig.subplots_adjust(left=.13,right=.98,bottom=.52/height,
                                 top=1-.67/height,hspace=.72,wspace=.31)
             peak_times=[]
             for values in potentials:
@@ -182,7 +182,7 @@ def render(specification, output, *, matplotlib_libs=None):
             # A zoom around events and maxima can end before a later, lower
             # positive lobe. Keep the full-time positive-scale view as well.
             full,full_axes=plt.subplots(count,1,figsize=(6.35,height),squeeze=False)
-            full.subplots_adjust(left=.13,right=.98,bottom=.40/height,
+            full.subplots_adjust(left=.13,right=.98,bottom=.52/height,
                                  top=1-.67/height,hspace=.72)
             for channel,values in enumerate(potentials):
                 axis=full_axes[channel,0];low,high=response_limits[(row['case_id'],channel)]

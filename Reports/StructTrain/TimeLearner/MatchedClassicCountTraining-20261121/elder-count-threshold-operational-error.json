@@ -1,0 +1,96 @@
+{
+  "kind": "timelearner_Elder_count_threshold_unaccepted_observations",
+  "schema_version": 1,
+  "observed_utc": "2026-11-22T08:03:58.833423+00:00",
+  "threshold": {
+    "actual_native": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "3d81b244fc0184004b32e85d0d46d1d9f3469cad88cd61e21096e7a5b224a30f",
+        "unit": "timelearner-7257218e-20be-44bb-ada4-b04a1ce836fd.service",
+        "invocation_id": "29cce16d410c4493a20d1e57fa47916a",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7257218e-20be-44bb-ada4-b04a1ce836fd.service",
+        "initial_main_pid": 627030,
+        "initial_start_ticks": "489986731",
+        "sha256": "8fbdf081bb74b749b996d4463885491c224d5e8a923e09724773bc3083915ce6"
+      }
+    },
+    "trial_files_present": 8,
+    "process-result.json": {
+      "kind": "timelearner_process_result",
+      "schema_version": 2,
+      "execution": "process_error",
+      "reason": "nonzero_exit_or_missing_terminal_status",
+      "returncode": 2,
+      "wall_seconds": 3889.8588794972748,
+      "model_time": null,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "runtime_fingerprint": "747839b156a004bc84e31ce23675ca1dc635037927da041429aeca5130c4ea9e",
+      "ownership_scope": "bound_cgroup",
+      "all_processes_closed": true,
+      "scientific_verdict": null,
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "needs_review",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 1,
+        "reasons": [],
+        "examples": [
+          {
+            "stream": "stderr.log",
+            "chunk": 1,
+            "severity": "unclassified",
+            "excerpt": "native_runtime_capture_not_acknowledged"
+          }
+        ],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 40,
+            "sha256": "b30fdef8f449908f786eb4f31d899fb10aa83e2072d9a0930cb058bf14958a27"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    }
+  },
+  "study_exception": {
+    "reason": "stopped_study_phase_failed:threshold-native",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/linux_stopped_recognition_study.py\", line 208, in supervise\n    require(result == 0 and load(directory/'worker-terminal.json')['completed'], 'stopped_study_phase_failed:'+phase)\n  File \"/home/user/timelearner-refactor/source-count-stopped-recognition-linux-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: stopped_study_phase_failed:threshold-native\n",
+    "original_Train_not_restarted": true,
+    "scientific_verdict": null
+  },
+  "archive_queue_exception": {
+    "reason": "recognition_failed_collect_with_explicit_negative_protocol_instead",
+    "traceback": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/requests/classic-count-closed-Train-primary-elder-a1/queue.py\", line 24, in <module>\n    assert not (study/'exception.json').exists(),'recognition_failed_collect_with_explicit_negative_protocol_instead'\nAssertionError: recognition_failed_collect_with_explicit_negative_protocol_instead\n",
+    "original_files_retained": true,
+    "scientific_verdict": null
+  },
+  "actual_queue": {
+    "exists": false
+  },
+  "original_Train_full_audit_passed": true,
+  "original_Train_outcome": "budget_exhausted",
+  "threshold_classification_not_accepted": true,
+  "raw_files_retained": true,
+  "scientific_verdict": null,
+  "evidence": {
+    "local_receipt": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\timelearner-elder-recognition-focused-observed-20261122-next-a3.json",
+    "sha256": "d86b2a72cd69a517ccad55492905c0d43381e3e08aa9f17b07720349ef59f54a",
+    "bytes": 210918
+  }
+}
