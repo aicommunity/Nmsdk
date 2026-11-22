@@ -13,7 +13,7 @@ import sys
 def read(path):return json.loads(Path(path).read_bytes())
 def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
-def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None):
+def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,content_file='revision4-content.ru.json'):
     from docx import Document
     from docx.shared import Inches,Pt,RGBColor
     from docx.oxml import OxmlElement
@@ -21,7 +21,7 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None)
     from docx.enum.text import WD_ALIGN_PARAGRAPH
     from docx.enum.table import WD_TABLE_ALIGNMENT,WD_CELL_VERTICAL_ALIGNMENT
     from PIL import Image
-    from .word_math import equation as native_equation,sub,sup,scripts,absolute,group
+    from .word_math import equation as native_equation,inline_math,sub,sup,scripts,absolute,group
     profile=read(format_profile) if format_profile else None
     if profile is not None:
         if not isinstance(profile,dict) or profile.get('kind')!='timelearner_scientific_report_format_profile' or profile.get('schema_version')!=1:
@@ -30,10 +30,22 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None)
             raise ValueError('GOST layout is draft-only until standards, structure and page review are accepted')
     source=Path(source).resolve(strict=True);output=Path(output).resolve()
     if output.exists():raise ValueError('Fresh output directory required')
-    content_path=source/'revision4-content.ru.json';content=read(content_path)
+    if Path(content_file).name!=content_file:raise ValueError('Content filename must be local to the source directory')
+    content_path=source/content_file;content=read(content_path)
+    next_edition=content_file!='revision4-content.ru.json'
+    if next_edition and (not draft or profile is None):
+        raise ValueError('New content currently requires the explicit GOST profile and --draft')
     review_path=source/content['review'];review=read(review_path)
-    evidence_path=source.parent/'AlgorithmDescriptionEvidenceReview-20261118.json'
-    cases={c['id']:c for c in read(evidence_path)['qualifying_examples']}
+    evidence_path=(source/content.get('evidence_review','../AlgorithmDescriptionEvidenceReview-20261118.json')).resolve(strict=True)
+    case_records=read(evidence_path)['qualifying_examples'];cases={c['id']:c for c in case_records}
+    if len(cases)!=len(case_records):raise ValueError('Duplicate evidence example ID')
+    selected=[identity for topology in ('classic','branch') for identity in content[topology]['example_order']]
+    if len(selected)!=len(set(selected)) or set(selected)!=set(cases):raise ValueError('Content and evidence examples must match exactly')
+    formula_path=(source/content['formula_definitions']).resolve(strict=True) if next_edition else None
+    formula_record=read(formula_path) if formula_path else None
+    if formula_record is not None and (formula_record.get('kind')!='timelearner_scientific_formula_definitions' or formula_record.get('schema_version')!=2):
+        raise ValueError('Known editable formula definitions required')
+    formula_definitions=formula_record['equations'] if formula_record else None
     if content.get('schema_version')!=1 or len(review['comments'])!=8:
         raise ValueError('Known reviewed scientific description required')
     if any(c['counts']['TP']<1 or c['counts']['TN']<2 for c in cases.values()):
@@ -132,6 +144,17 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None)
         def equation(document,*values):
             paragraph=native_equation(document,*values)
             if layout:layout.number_equation(paragraph)
+            if formula_definitions:
+                number=layout.equations
+                definitions=formula_definitions[number-1]
+                if definitions['number']!=number or not definitions['symbols']:raise ValueError('Ordered formula definitions required')
+                paragraph.paragraph_format.keep_with_next=True
+                for i,record in enumerate(definitions['symbols']):
+                    definition=para('где ' if i==0 else '')
+                    inline_math(definition,record['symbol'])
+                    definition.add_run(' — '+record['description'])
+                    definition.paragraph_format.keep_with_next=i<len(definitions['symbols'])-1
+                    definition.paragraph_format.keep_together=True
             return paragraph
         def image(path,caption,source_ref=None):
             path=Path(path)
@@ -164,8 +187,8 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None)
                  scripts('e','t,i','+'),' = ',scripts('t','i','+'),' − ',scripts('t','r','−'))
         equation(doc,['function','max',group(absolute(scripts('e','t,i','−')),', ',absolute(scripts('e','t,i','+')))],' ≤ ',sub('δ','t'),',   i ≠ r')
         equation(doc,sub('L','min,i'),' ≤ ',sub('L','i'),' ≤ ',sub('L','max,i'),',   ',sub('L','i'),' ∈ ℕ')
-        equation(doc,'N0:   ',sub('N','min,i'),' ≤ ',sub('N','s,i'),' ≤ ',sub('N','max,i'),',   ',sub('N','s,i'),' ∈ ℕ')
-        equation(doc,'N1:   0 < ',sub('R','min,i'),' ≤ ',sub('R','s,i'),' ≤ ',sub('R','max,i'))
+        equation(doc,'' if next_edition else 'N0:   ',sub('N','min,i'),' ≤ ',sub('N','s,i'),' ≤ ',sub('N','max,i'),',   ',sub('N','s,i'),' ∈ ℕ')
+        equation(doc,'' if next_edition else 'N1:   0 < ',sub('R','min,i'),' ≤ ',sub('R','s,i'),' ≤ ',sub('R','max,i'))
         head('Измерение закреплённого отклика');paras(common['measurement'])
         diagram(specific['diagram'],'Физическая организация модели. Стрелки показывают передачу сигнала, штриховые связи — перезарядку. Геометрический масштаб условный.')
         for identity in concept_ids[:5]:concept(identity)
@@ -213,6 +236,12 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None)
             if case.get('early_target'):para('Ответ на цель возник до последнего входного импульса. Это ограничивает вывод о распознавании полной временной структуры.')
             if case['unique_foil_patterns']==1:para('Отрицательные предъявления относятся к одному паттерну при двух условиях сброса, а не к двум разным отрицательным классам.')
             if case['training_outcome']=='budget_exhausted':para('Остановка по бюджету сохранена. Подбор порога не является доказательством сходимости обучения.')
+            for followup in case.get('followup_evaluations',[]):
+                para(followup['explanation'])
+                table(doc,['Набор','Обнаружения','Ложные ответы','Пропуски','Правильные отклонения'],
+                    [[followup['title'],*[followup['counts'][k] for k in ('TP','FP','FN','TN')]]],
+                    [2.4,1.,1.,.85,1.1],title=followup['table_title'])
+                para('Источник дополнительной проверки: '+followup['source_ref'])
             for key,label in [('train_configuration_ref','Обучающая конфигурация'),('test_configuration_ref','Проверочная конфигурация')]:
                 if info.get(key):para(label+': '+info[key])
             selected=[f for f in trial_figures if f['case_id']==identity]
@@ -221,11 +250,15 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None)
             para('Источник: '+case['source']['path']+'; версия '+case['source']['commit'])
         head('Реализация вычисления и владение моделью');paras(common['implementation'])
         diagram('logical-classes','Логическая UML диаграмма обязанностей компонентов обучения.')
-        table(doc,['Обязанность','Точное имя в программе'],[
+        implementation_rows=[
           ['Модуль обучения','NNeuronTimeLearner' if topology=='classic' else 'NNeuronTimeLearnerBranch'],
           ['Управление сессией','NativeTrainingService'],['Ограниченный поиск','BoundedTrainingSession'],
           ['Составное измерение','CompositeTrainingMeasurement'],['Общая проверка','FinalVerificationSession'],
-          ['Физическая модель','NPulseNeuron']],[3.,3.35],title='Соответствие обязанностей и компонентов программы')
+          ['Физическая модель','NPulseNeuron']]
+        if next_edition:implementation_rows.extend([
+          ['Нормализация числом синапсов','N0 / Normalization::SynapseCount'],
+          ['Нормализация сопротивлением','N1 / Normalization::TipResistance']])
+        table(doc,['Обязанность','Точное имя в программе'],implementation_rows,[3.,3.35],title='Соответствие обязанностей и компонентов программы')
         diagram('probe-sequence','UML последовательность пробы. Расчёт такта и сбор отсчётов повторяются до закрытия окна. Контроллер не вызывает вложенный расчёт модели.')
         head('Границы подтверждённого результата');paras(common['limitations'])
         head('Источники и происхождение иллюстраций')
@@ -234,17 +267,19 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None)
         para('Бахшиев А. В., Гунделах Ф. В. Математическая модель преобразования импульсов в естественных нейронах для разработки биологически вдохновлённых систем управления. Предоставленная авторами рукопись 2015 года; название приведено в переводе.')
         para('Полные временные отчёты содержат реакции на весь набор паттернов. Выбранные измеренные иллюстрации в этом документе не являются новыми независимыми опытами.')
         filename='TimeLearner'+('Classic' if topology=='classic' else 'Branch')+'Algorithms.ru.docx'
+        if formula_definitions and layout.equations!=len(formula_definitions):raise ValueError('Unconsumed formula definitions')
         path=output/filename;doc.core_properties.title=specific['title'];doc.core_properties.language='ru-RU';doc.save(path)
         results.append(dict(topology=topology,file=filename,bytes=path.stat().st_size,sha256=digest(path),
             figures=used,draft=draft,equation_format='native_OMML',render_and_visual_review_complete=False))
         if layout:results[-1]['layout_draft_counts']=dict(sections=layout.sections,tables=layout.tables,equations=layout.equations)
-    result=dict(kind='timelearner_algorithm_docx_build',schema_version=2,edition='2026-11-19-v4',documents=results,
+    result=dict(kind='timelearner_algorithm_docx_build',schema_version=2,edition=content.get('edition_id','2026-11-19-v4'),documents=results,
         inputs={str(p):digest(p) for p in (content_path,review_path,evidence_path,diagrams)},
         illustration_catalog_sha256=digest(figures) if figures else None,missing_illustrations_or_details=missing,
         draft=draft,all_comments_closed=False,visual_acceptance_complete=False,generated_binary_in_root_git=False)
+    if formula_path:result['inputs'][str(formula_path)]=digest(formula_path)
     if profile:
         result['format_profile']=dict(path=str(format_profile),sha256=digest(format_profile),
-            layout_implemented=True,standards_compliance_accepted=False,source_content_is_preserved_v4=True)
+            layout_implemented=True,standards_compliance_accepted=False,source_content_is_preserved_v4=not next_edition)
     (output/'build.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     return result
 
@@ -253,7 +288,8 @@ def main(argv=None):
     for name in ('source','output','diagrams'):parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--figures',type=Path);parser.add_argument('--draft',action='store_true')
     parser.add_argument('--format-profile',type=Path,help='Explicit GOST profile; currently requires --draft')
-    args=parser.parse_args(argv);result=build(args.source,args.output,diagrams=args.diagrams,figures=args.figures,draft=args.draft,format_profile=args.format_profile)
+    parser.add_argument('--content-file',default='revision4-content.ru.json',help='Local content filename; new editions currently require a GOST draft')
+    args=parser.parse_args(argv);result=build(args.source,args.output,diagrams=args.diagrams,figures=args.figures,draft=args.draft,format_profile=args.format_profile,content_file=args.content_file)
     print(json.dumps(dict(documents=[r['file'] for r in result['documents']],draft=args.draft,
         missing_illustrations_or_details=len(result['missing_illustrations_or_details']),visual_acceptance_complete=False)))
 

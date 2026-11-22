@@ -1,0 +1,46 @@
+{
+  "kind": "timelearner_recorded_physical_profile_readback",
+  "schema_version": 1,
+  "observed_at": "2026-11-22T05:28:47.198604+00:00",
+  "purpose": "Document the actual archived model; no native execution or numerical test",
+  "model_revision": "364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4",
+  "physical_model_package_sha256": "40b9066c9f262bee3ff1ededb19c7b5bf59b80dee315dbda38fd907186a8f1b6",
+  "model_file": {
+    "archive_member": "primary/data-inputs/model.json",
+    "bytes": 11537278,
+    "sha256": "6b89b79b09f90650ee1032f3f0bfdc5e328d8a74c44f910d9f4049fb68752e31"
+  },
+  "enclosing_cache_archive_sha256": "a0030bc14439e1dcf55b14793041db21d15bbe1cbd190184c6bd030f2fc1b10d",
+  "byte_identity_with_archived_member_verified": true,
+  "package_digest_and_file_digest_are_distinct": true,
+  "source_primary_archive_sha256": "3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c",
+  "effective_model": {
+    "class_name": "TLNativeFast3F2000_Neuron",
+    "node_count": 1196,
+    "classes": {
+      "TLNativeFast3F2000_Neuron": 1,
+      "TLNativeFast3F2000_Body_Membrane": 240,
+      "TLNativeFast3F2000_Body_ExcSynapse": 232,
+      "TLNativeFast3F2000_Body_InhSynapse": 240,
+      "TLNativeFast3F2000_Body_ExcChannel": 240,
+      "TLNativeFast3F2000_Body_InhChannel": 240,
+      "TLNativeFast3F2000_LTZone": 1,
+      "TLNativeFast3F2000_PositiveGenerator": 1,
+      "TLNativeFast3F2000_NegativeGenerator": 1
+    },
+    "frequency_hz": 2000,
+    "LTMembraneClassName": "",
+    "actual_LTMembrane_nodes": [],
+    "body_membranes": 240,
+    "excitatory_and_inhibitory_channel_capacity_F": 2.5e-10,
+    "channel_membrane_resistance_ohm": 10000000.0,
+    "average_synapses": false,
+    "secretion_time_constant_s": 0.001,
+    "dissociation_time_constant_s": 0.002,
+    "synapse_resistance_ohm": 86000000.0,
+    "presynaptic_inhibition": false
+  },
+  "class_definitions_alone_do_not_establish_graph_presence": true,
+  "new_scientific_execution": false,
+  "scientific_verdict": null
+}

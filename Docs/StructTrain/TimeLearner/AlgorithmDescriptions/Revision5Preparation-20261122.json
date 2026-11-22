@@ -1,0 +1,111 @@
+{
+  "kind": "timelearner_algorithm_revision5_preparation",
+  "schema_version": 1,
+  "observed_at": "2026-11-22T05:42:31.516703+00:00",
+  "draft": true,
+  "released": false,
+  "content_source": "revision5-content.ru.json",
+  "evidence_review": "../AlgorithmDescriptionEvidenceReview-20261122.json",
+  "working_examples": 10,
+  "prior_examples_preserved": 9,
+  "new_working_Branch_count_model": true,
+  "selected_trial_images": 37,
+  "new_selected_trial_images": 12,
+  "measurement_concept_images": 7,
+  "diagrams": 8,
+  "pulse_count_symbol": "M",
+  "source_measurements_and_native_classification_unchanged": true,
+  "documents": [
+    {
+      "topology": "Classic",
+      "file": "TimeLearnerClassicAlgorithms.ru.docx",
+      "bytes": 5676660,
+      "sha256": "3d5eeaac4f0144e8949324f4293fa7aeb63656288ae50f08020046d85c775dc7",
+      "displayed_equations": 11,
+      "editable_symbol_definitions": 42,
+      "tables": 2,
+      "pages_rendered": false,
+      "visual_acceptance_complete": false
+    },
+    {
+      "topology": "Branch",
+      "file": "TimeLearnerBranchAlgorithms.ru.docx",
+      "bytes": 5963508,
+      "sha256": "b70155bec9329bf4d7c642f7d2ce94bf65d02617c76b3d3dbf45d9774304ac76",
+      "displayed_equations": 11,
+      "editable_symbol_definitions": 42,
+      "tables": 3,
+      "pages_rendered": false,
+      "visual_acceptance_complete": false
+    }
+  ],
+  "diagram_layout_estimates": [
+    {
+      "id": "classic-topology",
+      "estimated_smallest_text_pt": 16.498,
+      "basis": "actual SVG geometry and text font sizes; raster DPI is not used",
+      "approximation_is_not_page_visual_acceptance": true
+    },
+    {
+      "id": "branch-topology",
+      "estimated_smallest_text_pt": 31.744,
+      "basis": "actual SVG geometry and text font sizes; raster DPI is not used",
+      "approximation_is_not_page_visual_acceptance": true
+    },
+    {
+      "id": "classic-learning",
+      "estimated_smallest_text_pt": 11.693,
+      "basis": "actual SVG geometry and text font sizes; raster DPI is not used",
+      "approximation_is_not_page_visual_acceptance": true
+    },
+    {
+      "id": "branch-learning",
+      "estimated_smallest_text_pt": 11.693,
+      "basis": "actual SVG geometry and text font sizes; raster DPI is not used",
+      "approximation_is_not_page_visual_acceptance": true
+    },
+    {
+      "id": "normalization-n0",
+      "estimated_smallest_text_pt": 9.963,
+      "basis": "actual SVG geometry and text font sizes; raster DPI is not used",
+      "approximation_is_not_page_visual_acceptance": true
+    },
+    {
+      "id": "normalization-n1",
+      "estimated_smallest_text_pt": 10.577,
+      "basis": "actual SVG geometry and text font sizes; raster DPI is not used",
+      "approximation_is_not_page_visual_acceptance": true
+    },
+    {
+      "id": "logical-classes",
+      "estimated_smallest_text_pt": 19.997,
+      "basis": "actual SVG geometry and text font sizes; raster DPI is not used",
+      "approximation_is_not_page_visual_acceptance": true
+    },
+    {
+      "id": "probe-sequence",
+      "estimated_smallest_text_pt": 12.814,
+      "basis": "actual SVG geometry and text font sizes; raster DPI is not used",
+      "approximation_is_not_page_visual_acceptance": true
+    }
+  ],
+  "prior_sources_and_DOCX_unchanged": {
+    "E:\\Science-Repo\\nmsdk-probe-budget-boundary\\Docs\\StructTrain\\TimeLearner\\AlgorithmDescriptions\\revision4-content.ru.json": "a595fd04568f1e14fb2cc0ddc582cf6a36f1f9d8b6cb6d0950968173fb17b6c9",
+    "E:\\Science-Repo\\nmsdk-probe-budget-boundary\\Docs\\StructTrain\\TimeLearner\\AlgorithmDescriptionEvidenceReview-20261118.json": "8d771fd03fae7ab3845699c11a78e3ca2e9278b7355eef40f282d3f04d661618",
+    "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-20-revision4\\TimeLearnerClassicAlgorithms.ru.docx": "1bd62f4f4d26276fdf306acf3249ce18870e01befab53cad06e484bfc0cf6d72",
+    "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-20-revision4\\TimeLearnerBranchAlgorithms.ru.docx": "0e08d32d9d65212ef5612dbd8e8cf34a868c653a3d50cbe3110967c61c710497"
+  },
+  "local_workspace": "E:/Science-Repo/TimeLearner-Documents/2026-11-22-revision5-preparation-a1",
+  "canonical_external_publication_complete": false,
+  "heavy_artifacts_in_root_Git": false,
+  "pending": [
+    "full standards corrections and bibliography review",
+    "full report structure and declared cover scope",
+    "diagram visual review at actual Word scale",
+    "bundled renderer availability and every-page QA",
+    "selected scientific graphs at actual page scale",
+    "external archive publication"
+  ],
+  "no_new_model_execution": true,
+  "full_plan_complete": false
+}

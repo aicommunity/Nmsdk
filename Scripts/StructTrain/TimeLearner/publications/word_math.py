@@ -40,6 +40,14 @@ def _put(parent, value):
     parent.append(node)
 
 
+def inline_math(paragraph, *values):
+    """Append editable notation to an existing prose paragraph."""
+    math=OxmlElement('m:oMath')
+    for value in values:_put(math,value)
+    paragraph._p.append(math)
+    return math
+
+
 def equation(document, *values):
     from docx.enum.text import WD_ALIGN_PARAGRAPH
     from docx.shared import Pt
@@ -47,9 +55,7 @@ def equation(document, *values):
     paragraph.paragraph_format.space_before=Pt(5)
     paragraph.paragraph_format.space_after=Pt(7)
     paragraph.paragraph_format.keep_together=True
-    math=OxmlElement('m:oMath')
-    for value in values:_put(math,value)
-    paragraph._p.append(math)
+    inline_math(paragraph,*values)
     return paragraph
 
 
