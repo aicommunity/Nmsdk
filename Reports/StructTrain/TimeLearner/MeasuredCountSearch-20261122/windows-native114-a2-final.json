@@ -1,0 +1,130 @@
+{
+  "kind": "timelearner_measured_count_native114_original_final_outcome",
+  "schema_version": 1,
+  "source_commit": "17ea413eeca88c695d70d4fa900caa1b988abbb4",
+  "actual_JUnit_audit": {
+    "expected": 114,
+    "observed": 114,
+    "failed_test_ids": [
+      "NativeMeasuredCount/ClassicActualSameGeometry2000",
+      "NativeMeasuredCount/BranchActualSameGeometry2000",
+      "NativeMeasuredCount/ClassicActualSameGeometry20000",
+      "NativeMeasuredCount/BranchActualSameGeometry20000"
+    ],
+    "assertion_status": "failed",
+    "sha256": "61bba800549f9602a89a8bc0da13755598258c8f2c36b402e3e287ff25530f4d"
+  },
+  "JUnit_record": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-native114-a2\\native-gate\\native.xml",
+    "sha256": "61bba800549f9602a89a8bc0da13755598258c8f2c36b402e3e287ff25530f4d",
+    "size": 44125
+  },
+  "process_result": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "process_error",
+    "validity": "valid",
+    "reason": "nonzero_exit",
+    "returncode": 1,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "completed",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 48,
+    "wall_seconds": 4315.010660600034,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-e3893f88-c41b-457a-b4fd-67782f2ff591"
+  },
+  "terminal": {
+    "native_checks_passed": false,
+    "original_build_outcome_unchanged": true,
+    "scientific_verdict": null,
+    "scientific_worker_admitted": false
+  },
+  "new_measured_count_cases": [
+    {
+      "name": "ClassicActualSameGeometry2000",
+      "file": "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp",
+      "line": "539",
+      "status": "run",
+      "result": "completed",
+      "time": "0.426",
+      "timestamp": "2026-11-22T06:19:19.857",
+      "classname": "NativeMeasuredCount",
+      "failures": [
+        "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp:474\nExpected equality of these values:\n  edit.status\n    Which is: 4-byte object <01-00 00-00>\n  NativeEditStatus::Applied\n    Which is: 4-byte object <00-00 00-00>\nnative_edit_requires_consumed_probe_boundary\n"
+      ]
+    },
+    {
+      "name": "BranchActualSameGeometry2000",
+      "file": "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp",
+      "line": "540",
+      "status": "run",
+      "result": "completed",
+      "time": "0.382",
+      "timestamp": "2026-11-22T06:19:20.283",
+      "classname": "NativeMeasuredCount",
+      "failures": [
+        "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp:474\nExpected equality of these values:\n  edit.status\n    Which is: 4-byte object <01-00 00-00>\n  NativeEditStatus::Applied\n    Which is: 4-byte object <00-00 00-00>\nnative_edit_requires_consumed_probe_boundary\n"
+      ]
+    },
+    {
+      "name": "ClassicActualSameGeometry20000",
+      "file": "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp",
+      "line": "541",
+      "status": "run",
+      "result": "completed",
+      "time": "0.425",
+      "timestamp": "2026-11-22T06:19:20.666",
+      "classname": "NativeMeasuredCount",
+      "failures": [
+        "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp:474\nExpected equality of these values:\n  edit.status\n    Which is: 4-byte object <01-00 00-00>\n  NativeEditStatus::Applied\n    Which is: 4-byte object <00-00 00-00>\nnative_edit_requires_consumed_probe_boundary\n"
+      ]
+    },
+    {
+      "name": "BranchActualSameGeometry20000",
+      "file": "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp",
+      "line": "542",
+      "status": "run",
+      "result": "completed",
+      "time": "0.427",
+      "timestamp": "2026-11-22T06:19:21.091",
+      "classname": "NativeMeasuredCount",
+      "failures": [
+        "C:\\Projects\\TimeLearnerWorker\\source-measured-count-native-win-a2\\Tests\\Integration\\Libraries\\Test_PulseLib_CompositeTraining.cpp:474\nExpected equality of these values:\n  edit.status\n    Which is: 4-byte object <01-00 00-00>\n  NativeEditStatus::Applied\n    Which is: 4-byte object <00-00 00-00>\nnative_edit_requires_consumed_probe_boundary\n"
+      ]
+    }
+  ],
+  "actual_original_PID": {
+    "pid": 19268,
+    "running": false,
+    "error": 87,
+    "job_name": "Local\\TimeLearner-e3893f88-c41b-457a-b4fd-67782f2ff591"
+  },
+  "original_110_other_cases_passed": true,
+  "new_four_failed_before_measurement": true,
+  "original_outcome_unchanged": true,
+  "corrected_build_actual_observation": {
+    "observed_utc": "2026-11-22T04:36:22.462985+00:00",
+    "queue-state": {
+      "stage": "running-fresh-corrected-sdk-build",
+      "observed_utc": "2026-11-22T04:30:20.942503+00:00",
+      "scientific_verdict": null
+    },
+    "actual_build": {
+      "pid": 20008,
+      "running": true,
+      "matching": true,
+      "identity": {
+        "executable": "C:\\Windows\\System32\\cmd.exe",
+        "creation_filetime": "134397955005365178"
+      },
+      "job_name": "Local\\TimeLearner-96482906-e3e6-449f-ae90-0184633868df"
+    }
+  },
+  "scientific_verdict": null
+}
