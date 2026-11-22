@@ -14,9 +14,10 @@
 
 // Native work has already finished. Keep the owned process alive while its
 // parent reads actual loaded modules; this does not calculate or reset a model.
-inline bool AwaitNativeRuntimeCapture(const QString& directory)
+inline bool AwaitNativeRuntimeCapture(const QString& directory, qint64 maximumWaitMilliseconds=120000)
 {
     if(directory.isEmpty())return true;
+    if(maximumWaitMilliseconds<=0)return false;
     const QDir folder(directory);
     const QString readyPath=folder.filePath("capture-ready.json"),ackPath=folder.filePath("capture-ack.json");
     if(!folder.exists() || QFileInfo::exists(readyPath) || QFileInfo::exists(ackPath))return false;
@@ -43,7 +44,11 @@ inline bool AwaitNativeRuntimeCapture(const QString& directory)
     const auto bytes=QJsonDocument(ready).toJson(QJsonDocument::Compact);
     if(file.write(bytes)!=bytes.size() || !file.commit())return false;
     QElapsedTimer elapsed;elapsed.start();
-    while(elapsed.elapsed()<10000)
+    // Hashing and durably publishing the loaded-file inventory can take more
+    // than ten seconds on a busy disk. This is an operational grace period,
+    // after the model has stopped. The owning runner still enforces its whole
+    // wall budget; the acknowledgement must retain the exact process identity.
+    while(elapsed.elapsed()<maximumWaitMilliseconds)
     {
         QFile ack(ackPath);
         if(ack.open(QIODevice::ReadOnly))
