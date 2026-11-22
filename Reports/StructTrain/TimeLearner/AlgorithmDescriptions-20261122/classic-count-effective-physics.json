@@ -1,0 +1,189 @@
+{
+  "kind": "timelearner_recorded_Classic_count_effective_physics",
+  "schema_version": 1,
+  "observed_utc": "2026-11-22T09:13:13.920480+00:00",
+  "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+  "model_file": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-DATA-followup-m40-a2-export/native/model.json",
+    "sha256": "e2756fe8366c27ae50dba1bd524a3155c4d28d0497b73d22b502e8d298cde12a",
+    "size": 20378901
+  },
+  "data_package_digest": "cc78a7305c19eea4cbb13ff98c1a16dd12dc3b8a501e250b99852db368bd49c7",
+  "audit": {
+    "kind": "physical_model_data_audit",
+    "schema_version": 1,
+    "data_only": true,
+    "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+    "pattern_size": 4,
+    "branch": false,
+    "frequency_hz": 2000.0,
+    "threshold_path": "$.LTZone",
+    "threshold_classes": [
+      "TLNativeFast3F2000_LTZone"
+    ],
+    "effective_threshold": 0.020736298148054874,
+    "source_training_evidence_checked": false,
+    "native_import_verified": false,
+    "training_certificate_transferred": false,
+    "calibration_confirmed": false,
+    "evaluation_verdict": null
+  },
+  "node_count": 2218,
+  "classes": {
+    "TLNativeFast3F2000_Neuron": 1,
+    "TLNativeFast3F2000_Body_Membrane": 448,
+    "TLNativeFast3F2000_Body_ExcSynapse": 422,
+    "TLNativeFast3F2000_Body_InhSynapse": 448,
+    "TLNativeFast3F2000_Body_ExcChannel": 448,
+    "TLNativeFast3F2000_Body_InhChannel": 448,
+    "TLNativeFast3F2000_LTZone": 1,
+    "TLNativeFast3F2000_PositiveGenerator": 1,
+    "TLNativeFast3F2000_NegativeGenerator": 1
+  },
+  "root_parameters": {
+    "LTMembraneClassName": ""
+  },
+  "channel_groups": [
+    {
+      "class_name": "TLNativeFast3F2000_Body_ExcChannel",
+      "capacity_F": 2.5e-10,
+      "resting_resistance_ohm": 10000000.0,
+      "frequency_hz": "2000",
+      "count": 448
+    },
+    {
+      "class_name": "TLNativeFast3F2000_Body_InhChannel",
+      "capacity_F": 2.5e-10,
+      "resting_resistance_ohm": 10000000.0,
+      "frequency_hz": "2000",
+      "count": 448
+    }
+  ],
+  "synapse_groups": [],
+  "actual_LT_nodes": [
+    {
+      "path": "$.LTZone",
+      "class_name": "TLNativeFast3F2000_LTZone",
+      "parameters": {
+        "Activity": true,
+        "AvgInterval": 1.0,
+        "MaxCalculationDuration": -1,
+        "NumChannelsInGroup": 2,
+        "PulseAmplitude": 1.0,
+        "PulseLength": 0.001,
+        "Threshold": 0.020736298148054874,
+        "ThresholdOff": 0.0,
+        "TimeStep": 2000,
+        "UseAveragePotential": true
+      }
+    }
+  ],
+  "learned_parameters": [
+    {
+      "length": 241,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 201,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "source_SDK": {
+    "root": {
+      "head": "5b6cb11ee46ae196ecbf81003eec45654b4c3fad",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "head": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "new_scientific_execution": false,
+  "scientific_verdict": null,
+  "first_recorded_excitatory_synapse": {
+    "class_name": "TLNativeFast3F2000_Body_ExcSynapse",
+    "path": "$.Dendrite1_241.ExcSynapse1",
+    "parameters": {
+      "DissociationTC": {
+        "type": "binary64",
+        "value": "3f60624dd2f1a9fc"
+      },
+      "InhibitionCoeff": {
+        "type": "binary64",
+        "value": "0000000000000000"
+      },
+      "Resistance": {
+        "type": "binary64",
+        "value": "4194810600000000"
+      },
+      "SecretionTC": {
+        "type": "binary64",
+        "value": "3f50624dd2f1a9fc"
+      },
+      "TimeStep": {
+        "type": "unsigned_integer",
+        "value": "2000"
+      },
+      "UsePresynapticInhibition": {
+        "type": "boolean",
+        "value": false
+      }
+    }
+  },
+  "verified_kinetics_seconds": {
+    "SecretionTC": 0.001,
+    "DissociationTC": 0.002
+  },
+  "source_primary_archive": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/75/75f96de0afedfa53dce6e86fdac5706d0181391d67a1f592d9e5eb7a79f45ca8",
+    "sha256": "75f96de0afedfa53dce6e86fdac5706d0181391d67a1f592d9e5eb7a79f45ca8",
+    "bytes": 81671384
+  },
+  "class_definitions_alone_do_not_establish_graph_presence": true
+}

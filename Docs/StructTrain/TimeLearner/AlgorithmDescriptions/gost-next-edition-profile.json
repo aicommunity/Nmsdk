@@ -3,18 +3,22 @@
   "schema_version": 1,
   "prepared_at": "2026-11-21",
   "status": "preparation_only_not_a_released_or_verified_DOCX",
-  "runtime_readiness_record": "DocumentRuntimeReadiness-20261122.json",
+  "runtime_readiness_record": "AuthorizedDocxRender-20261122.json",
   "draft_layout": {
     "builder": "Scripts/StructTrain/TimeLearner/publications/build_algorithm_docx.py",
     "helper": "Scripts/StructTrain/TimeLearner/publications/gost_layout.py",
     "requires_explicit_profile_and_draft": true,
     "structural_review": "GostDraftStructuralReview-20261122.json",
-    "source_content": "preserved revision4, not a new scientific edition",
+    "source_content": "revision5 draft, 11 working examples, not a released edition",
     "standards_compliance_accepted": false,
     "visual_acceptance_complete": false,
-    "legacy_runtime_readiness_is_not_bundled_renderer_acceptance": true
+    "legacy_runtime_readiness_is_not_bundled_renderer_acceptance": true,
+    "actual_render_record": "AuthorizedDocxRender-20261122.json"
   },
-  "applies_to": ["Classic", "Branch"],
+  "applies_to": [
+    "Classic",
+    "Branch"
+  ],
   "preserved_publication": "2026-11-20-v4",
   "standards": [
     {
@@ -23,7 +27,11 @@
       "catalog_status_on_checked_date": "active",
       "catalog": "https://protect.gost.ru/gost/details/7d280e43-7036-4a69-8e6e-d15867028343",
       "official_imprint_text_copy": "https://iriran.ru/sites/default/files/gost_7.32-2017.pdf",
-      "catalog_corrections": ["ИУС 2-2019", "ИУС 3-2020", "ИУС 1-2022"],
+      "catalog_corrections": [
+        "ИУС 2-2019",
+        "ИУС 3-2020",
+        "ИУС 1-2022"
+      ],
       "full_correction_text_review_complete": false
     },
     {
@@ -31,14 +39,21 @@
       "role": "bibliographic_description_only_not_citation_rules",
       "catalog_status_on_checked_date": "active",
       "catalog": "https://protect.gost.ru/gost/details/389dfd5a-535a-458a-81c3-14b729b1cee1",
-      "catalog_corrections": ["ИУС 3-2020"],
+      "catalog_corrections": [
+        "ИУС 3-2020"
+      ],
       "full_text_review_complete": false
     }
   ],
   "page": {
     "width_mm": 210,
     "height_mm": 297,
-    "margins_mm": {"left": 30, "right": 15, "top": 20, "bottom": 20},
+    "margins_mm": {
+      "left": 30,
+      "right": 15,
+      "top": 20,
+      "bottom": 20
+    },
     "clause": "7.32-2017:6.1.1"
   },
   "body": {
@@ -54,7 +69,10 @@
     "main_sections_start_new_page": true,
     "numbered_headings_bold_initial_capital_no_terminal_dot": true,
     "structural_headings_centered_uppercase": true,
-    "clauses": ["7.32-2017:6.2", "7.32-2017:6.4"]
+    "clauses": [
+      "7.32-2017:6.2",
+      "7.32-2017:6.4"
+    ]
   },
   "page_numbers": {
     "position": "bottom_center",
@@ -92,10 +110,15 @@
   "content_constraints": {
     "pulse_count_symbol": "M",
     "synapses_per_input_symbol": "N_s,i",
-    "technical_normalization_identifiers_unchanged": ["N0", "N1"],
+    "technical_normalization_identifiers_unchanged": [
+      "N0",
+      "N1"
+    ],
     "original_publication_bytes_unchanged": true,
     "experiments_take_priority": true,
     "pending_Train_has_no_invented_result": true,
     "heavy_outputs_in_root_Git": false
-  }
+  },
+  "previous_runtime_readiness_record": "DocumentRuntimeReadiness-20261122.json",
+  "user_authorized_installed_LibreOffice_for_this_pair": true
 }

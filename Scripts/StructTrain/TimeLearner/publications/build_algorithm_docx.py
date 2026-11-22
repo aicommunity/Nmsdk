@@ -8,6 +8,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 import sys
 
 def read(path):return json.loads(Path(path).read_bytes())
@@ -137,7 +138,11 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
             from .gost_layout import GostDraftLayout
             layout=GostDraftLayout(doc,profile)
         common=content['common'];specific=content[topology];used=[]
-        def para(text,style=None):return doc.add_paragraph(text,style=style)
+        def visible_reference(text):
+            if not next_edition:return text
+            return re.sub(r'(?<![0-9a-f])[0-9a-f]{40}(?:[0-9a-f]{24})?(?![0-9a-f])',
+                          lambda match:match.group(0)[:16]+'…',text)
+        def para(text,style=None):return doc.add_paragraph(visible_reference(text),style=style)
         def paras(values):
             for text in values:para(text)
         def head(text,level=1):return layout.heading(text,level) if layout else doc.add_heading(text,level=level)
@@ -167,7 +172,7 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
             p.add_run().add_picture(str(path),width=Inches(width*scale),height=Inches(height*scale))
             c=para('Рисунок '+str(len(used)+1)+(' — ' if layout else ' ')+caption,'Caption');c.paragraph_format.keep_together=True
             if source_ref:para('Источник измерений: '+source_ref,'Caption')
-            used.append(dict(file=str(path),sha256=digest(path),caption=caption))
+            used.append(dict(file=str(path),sha256=digest(path),caption=caption,source_ref=source_ref))
         def diagram(identity,caption):image(dr/(identity+'.png'),caption)
         def concept(identity):
             record=concepts.get(identity)
@@ -226,6 +231,9 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
               [[name(i),*[cases[i]['counts'][k] for k in ('TP','FP','FN','TN')]] for i in ids],[2.4,1.,1.,.85,1.1],
               title='Результаты экспериментальных примеров')
         para('Указаны числа предъявлений, а не число независимых обучений. Число разных отвлекающих паттернов приведено отдельно.')
+        if next_edition:
+            para('На временных графиках реакций синим показан измеренный потенциал сомы, оранжевым — фактические входные импульсы, красным пунктиром — выходные события нейрона. Время отсчитывается от первого фактического входа. Полный положительный отклик и полный диапазон с перезарядкой представлены отдельными видами; увеличение времени обозначено явно. Масштабы потенциала согласованы внутри набора одной модели. Если показаны четыре строки, это четыре сомных сегмента одного нейрона.')
+            para('В печатном тексте длинные контрольные суммы сокращены до первых шестнадцати знаков. Полные значения, исходные подписи и привязка каждого рисунка к наблюдению сохраняются в сопровождающем каталоге иллюстраций и сведениях о сборке документа.')
         for identity in ids:
             case=cases[identity];info=details.get(identity,{})
             head(name(identity),2)
@@ -245,7 +253,7 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
             for key,label in [('train_configuration_ref','Обучающая конфигурация'),('test_configuration_ref','Проверочная конфигурация')]:
                 if info.get(key):para(label+': '+info[key])
             selected=[f for f in trial_figures if f['case_id']==identity]
-            for f in selected:image(fr/f['png']['path'],f['caption'],f['source_ref'])
+            for f in selected:image(fr/f['png']['path'],f.get('short_caption',f['caption']),f['source_ref'])
             if not selected and draft:para('Черновик Графики правильных и ложных ответов подготавливаются.')
             para('Источник: '+case['source']['path']+'; версия '+case['source']['commit'])
         head('Реализация вычисления и владение моделью');paras(common['implementation'])
@@ -262,9 +270,13 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
         diagram('probe-sequence','UML последовательность пробы. Расчёт такта и сбор отсчётов повторяются до закрытия окна. Контроллер не вызывает вложенный расчёт модели.')
         head('Границы подтверждённого результата');paras(common['limitations'])
         head('Источники и происхождение иллюстраций')
-        para('Публикации авторов служат образцом стиля и терминологии. Объяснение действующего алгоритма основано на реализации и измерениях.')
-        para('Корсаков А. М., Астапова Л. А., Бахшиев А. В. Применение сегментной спайковой модели нейрона со структурной адаптацией для решения задач классификации. Информатика и автоматизация. 2022. Том 21. № 3. DOI 10.15622/ia.21.3.2.')
-        para('Бахшиев А. В., Гунделах Ф. В. Математическая модель преобразования импульсов в естественных нейронах для разработки биологически вдохновлённых систем управления. Предоставленная авторами рукопись 2015 года; название приведено в переводе.')
+        if next_edition:
+            para('Сегментные модели нейрона рассматриваются в работах [1, 2]. Действующий алгоритм и результаты этого отчёта описаны по приведённым версиям реализации и измерений.')
+            for reference in content['bibliography']:para(reference)
+        else:
+            para('Публикации авторов служат образцом стиля и терминологии. Объяснение действующего алгоритма основано на реализации и измерениях.')
+            para('Корсаков А. М., Астапова Л. А., Бахшиев А. В. Применение сегментной спайковой модели нейрона со структурной адаптацией для решения задач классификации. Информатика и автоматизация. 2022. Том 21. № 3. DOI 10.15622/ia.21.3.2.')
+            para('Бахшиев А. В., Гунделах Ф. В. Математическая модель преобразования импульсов в естественных нейронах для разработки биологически вдохновлённых систем управления. Предоставленная авторами рукопись 2015 года; название приведено в переводе.')
         para('Полные временные отчёты содержат реакции на весь набор паттернов. Выбранные измеренные иллюстрации в этом документе не являются новыми независимыми опытами.')
         filename='TimeLearner'+('Classic' if topology=='classic' else 'Branch')+'Algorithms.ru.docx'
         if formula_definitions and layout.equations!=len(formula_definitions):raise ValueError('Unconsumed formula definitions')

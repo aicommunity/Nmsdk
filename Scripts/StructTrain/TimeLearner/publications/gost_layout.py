@@ -51,6 +51,10 @@ class GostDraftLayout:
             style.font.bold = name.startswith('Heading')
             style.font.italic = False
             style.font.underline = False
+            properties = style.element.find(qn('w:pPr'))
+            if properties is not None:
+                for border in list(properties.findall(qn('w:pBdr'))):
+                    properties.remove(border)
             paragraph = style.paragraph_format
             paragraph.line_spacing = body['line_spacing']
             paragraph.first_line_indent = Mm(body['first_line_indent_mm'])
@@ -121,11 +125,13 @@ class GostDraftLayout:
         return paragraph
 
     def format_table(self, table):
-        for row in table.rows:
+        for row_index, row in enumerate(table.rows):
             for cell in row.cells:
                 for paragraph in cell.paragraphs:
                     paragraph.paragraph_format.first_line_indent = Mm(0)
                     paragraph.paragraph_format.line_spacing = 1.0
+                    if len(table.rows) <= 12:
+                        paragraph.paragraph_format.keep_with_next = row_index < len(table.rows) - 1
                     for run in paragraph.runs:
                         run.font.name = self.profile['body']['font']
                         run.font.size = Pt(12)

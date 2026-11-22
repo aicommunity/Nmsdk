@@ -1,0 +1,123 @@
+{
+  "kind": "timelearner_authorized_actual_DOCX_renders",
+  "schema_version": 1,
+  "observed_at": "2026-11-22T10:41:47.149618+00:00",
+  "user_explicitly_authorized_installed_LibreOffice": true,
+  "authorization_scope": "render these two updated DOCX and inspect pages",
+  "bundled_python_and_canonical_renderer_used": true,
+  "documents": {
+    "Classic": {
+      "kind": "timelearner_authorized_document_render",
+      "schema_version": 1,
+      "topology": "Classic",
+      "user_explicitly_authorized_installed_LibreOffice": true,
+      "canonical_renderer": "C:\\Users\\Bakhshiev\\.codex\\plugins\\cache\\openai-primary-runtime\\documents\\26.1117.12345\\skills\\documents\\render_docx.py",
+      "soffice": "C:\\Program Files\\LibreOffice\\program\\soffice.exe",
+      "pdfinfo": "C:\\Users\\Bakhshiev\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\Library\\bin\\pdfinfo.exe",
+      "bundled_python": "C:\\Users\\Bakhshiev\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "document": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\docx-draft-a6\\TimeLearnerClassicAlgorithms.ru.docx",
+        "bytes": 6593461,
+        "sha256": "b49f0105e183ddd8d49bfd0ab9e641ab25e2a03d500f40f2da4883a54296539b"
+      },
+      "returncode": 0,
+      "wall_seconds": 191.68800000008196,
+      "pages": 57,
+      "every_page_visually_reviewed": false,
+      "released": false
+    },
+    "Branch": {
+      "kind": "timelearner_authorized_document_render",
+      "schema_version": 1,
+      "topology": "Branch",
+      "user_explicitly_authorized_installed_LibreOffice": true,
+      "canonical_renderer": "C:\\Users\\Bakhshiev\\.codex\\plugins\\cache\\openai-primary-runtime\\documents\\26.1117.12345\\skills\\documents\\render_docx.py",
+      "soffice": "C:\\Program Files\\LibreOffice\\program\\soffice.exe",
+      "pdfinfo": "C:\\Users\\Bakhshiev\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\Library\\bin\\pdfinfo.exe",
+      "bundled_python": "C:\\Users\\Bakhshiev\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "document": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\docx-draft-a6\\TimeLearnerBranchAlgorithms.ru.docx",
+        "bytes": 5963142,
+        "sha256": "ed85ef0be7f590085abfb86d178f001740b92910720705110fde5bf573561e78"
+      },
+      "returncode": 0,
+      "wall_seconds": 171.31300000008196,
+      "pages": 57,
+      "every_page_visually_reviewed": false,
+      "released": false
+    }
+  },
+  "partial_visual_review": {
+    "kind": "timelearner_partial_DOCX_visual_review",
+    "schema_version": 1,
+    "observed_at": "2026-11-22T10:41:47.149618+00:00",
+    "draft": "a6",
+    "reviewed_pages": {
+      "classic": [
+        {
+          "page": 1,
+          "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\render-a6-authorized-d1-classic\\pages\\page-1.png",
+          "bytes": 49475,
+          "sha256": "5109e1fbda6b61c6a24a6c9dbb2fe500cac8d575de766734428658b74960f0ab"
+        },
+        {
+          "page": 39,
+          "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\render-a6-authorized-d1-classic\\pages\\page-39.png",
+          "bytes": 211015,
+          "sha256": "161b771b958bb310f9377a61c86ba61bdc7b6cc7885ac1e686621bf5a61df290"
+        },
+        {
+          "page": 40,
+          "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\render-a6-authorized-d1-classic\\pages\\page-40.png",
+          "bytes": 237698,
+          "sha256": "02c8e55056b09f15640024fd1460135241a898c7be8cfbd0bfeb1bcfc3292bcd"
+        }
+      ],
+      "branch": [
+        {
+          "page": 1,
+          "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\render-a6-authorized-d1-branch\\pages\\page-1.png",
+          "bytes": 49105,
+          "sha256": "51f1be4d2fa15bf422932504fde5315560c40bc75937c41f5ee81ec75f5df099"
+        },
+        {
+          "page": 34,
+          "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\render-a6-authorized-d1-branch\\pages\\page-34.png",
+          "bytes": 228412,
+          "sha256": "7d883999f6b8d7d3797bed62116bdf9a0ae205ad87a1d46e3aeee9421123c1be"
+        },
+        {
+          "page": 55,
+          "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\render-a6-authorized-d1-branch\\pages\\page-55.png",
+          "bytes": 239920,
+          "sha256": "d5d25a698d58523a98a3178fd7169e164d054ab8df6e79b261aa0e80abf33ad8"
+        },
+        {
+          "page": 57,
+          "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\render-a6-authorized-d1-branch\\pages\\page-57.png",
+          "bytes": 225250,
+          "sha256": "40c5e84a11389c41c405cbd927df759a92ca9d2ef998e166b3d20e6ddca817b2"
+        }
+      ]
+    },
+    "fixes_verified": [
+      "black titles without paragraph border",
+      "legible original potential curves and actual stimuli/events at Word page scale",
+      "complete small table on one page",
+      "full hashes retained in catalog while print uses readable prefixes"
+    ],
+    "remaining": [
+      "all other pages",
+      "final GOST corrections and parent report or cover scope",
+      "new Classic count 27-trial result in next draft",
+      "small grammar correction in table introductions",
+      "replace unexplained target in example configuration prose"
+    ],
+    "all_pages_reviewed": false,
+    "released": false
+  },
+  "all_pages_visually_reviewed": false,
+  "full_GOST_compliance_accepted": false,
+  "released": false,
+  "earlier_released_v4_unchanged": true
+}

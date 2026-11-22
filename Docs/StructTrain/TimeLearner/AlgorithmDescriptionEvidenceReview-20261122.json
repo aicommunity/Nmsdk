@@ -2,8 +2,8 @@
   "kind": "timelearner_algorithm_document_evidence_review",
   "schema_version": 1,
   "date": "2026-11-22",
-  "review_root": "ce77ad02261afa383ccd7b1514c76c3ecc2bbd98",
-  "scope": "Next edition preparation: prior nine scoped examples and one actual Branch count model; no new native execution.",
+  "review_root": "e1c97ac2042e155ffe907ad695975304d69664a2",
+  "scope": "Next edition preparation: ten prior scoped examples plus one audited cold Classic count model; no new model execution by this review.",
   "criterion": {
     "TP_minimum": 1,
     "TN_minimum": 2,
@@ -472,6 +472,67 @@
           "explanation": "При тех же модели и пороге дополнительно предъявлены 26 новых отвлекающих паттернов и точный исходный целевой паттерн. Получено одно правильное обнаружение, один ложный ответ и 25 правильных отклонений. Это проверка новых отрицательных примеров; повтор прежней цели не является новым положительным классом. Подбор порога и повторное обучение не выполнялись."
         }
       ]
+    },
+    {
+      "id": "classic-n0-count-budget-20261122",
+      "family": "captured-per-input-v2",
+      "topology": "Classic",
+      "normalization": "N0",
+      "pulse_count": 4,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6
+      },
+      "unique_foil_patterns": 7,
+      "training_outcome": "budget_exhausted",
+      "threshold": 0.020736298148054874,
+      "qualifies_user_tp_tn": true,
+      "independent_evaluation": false,
+      "source": {
+        "repository": "root",
+        "commit": "e1c97ac2042e155ffe907ad695975304d69664a2",
+        "path": "Reports/StructTrain/TimeLearner/MatchedClassicCountTraining-20261121/m40-count-actual-threshold-confirmed.json",
+        "blob": "b73c7d8b107635fbf2d34b9f03cf8c3cc5d39fca",
+        "bytes": 11648,
+        "sha256": "5179fa044100e5adf7a864ffea253b73f53e58d090803eeab6037ec87e9f7f30"
+      },
+      "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+      "training_model_revision": "b803678f5e47c7a393658d8847aba0a7b7f1237ece576043a6feb044473214d8",
+      "source_sdk": {
+        "root": "5b6cb11ee46ae196ecbf81003eec45654b4c3fad",
+        "pulse": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+        "rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "bin": "8cb6dba07b30432272984c8ce3136b48ad06f064"
+      },
+      "training_certificate": null,
+      "candidate_algorithm": "bounded measured local integer neighbours; no secant proposal",
+      "reset_policies": [
+        "reset_per_trial"
+      ],
+      "scope": "One cold M=4 Classic model; threshold selected and confirmed on the same eight patterns",
+      "physical_DATA_roundtrip_and_all_eight_responses_verified": true,
+      "maximum_replay_sample_and_event_difference": 0.0,
+      "new_foil_evaluation_pending": true,
+      "new_foil_result_not_invented": true,
+      "effective_physics_reference": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261122/classic-count-effective-physics.json",
+      "physical_replay_source": {
+        "repository": "root",
+        "commit": "e1c97ac2042e155ffe907ad695975304d69664a2",
+        "path": "Reports/StructTrain/TimeLearner/MatchedClassicCountTraining-20261121/m40-count-DATA-replay-completed.json",
+        "blob": "993a3d211b8341c9d8921c0cc3365af462b32f9e",
+        "bytes": 16063,
+        "sha256": "fc91ae5d05a2a4a83dd431d261953396b222e3c21875669671e145d6b7672e90"
+      },
+      "response_figures_source": {
+        "repository": "root",
+        "commit": "e1c97ac2042e155ffe907ad695975304d69664a2",
+        "path": "Reports/StructTrain/TimeLearner/MatchedClassicCountTraining-20261121/m40-count-reviewed-response-figures.json",
+        "blob": "842e99ffca4ff8c6ed457524f0a4cdfb3a65c992",
+        "bytes": 10004,
+        "sha256": "3b2927dd623758c9fcb98dea026c606264f6624d21863f679d88630640aa43bc"
+      }
     }
   ],
   "excluded_examples": [
@@ -557,5 +618,6 @@
   ],
   "docx_edition_updated": false,
   "source_primary_replay_complete_for_new_candidates": false,
-  "new_full_scientific_PASS_claimed": false
+  "new_full_scientific_PASS_claimed": false,
+  "updated_at": "2026-11-22T09:28:30.765741+00:00"
 }
