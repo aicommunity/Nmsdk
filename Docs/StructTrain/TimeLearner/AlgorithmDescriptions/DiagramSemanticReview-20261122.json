@@ -1,0 +1,110 @@
+{
+  "kind": "timelearner_draft_diagram_semantic_correction",
+  "schema_version": 1,
+  "observed_at": "2026-11-22T11:43:41.139554+00:00",
+  "affected": [
+    "normalization-n0",
+    "normalization-n1"
+  ],
+  "detected_in": {
+    "draft": "a8",
+    "Classic_page": 18,
+    "original_draft_released": false
+  },
+  "defect": "Repeated label declarations of node z silently changed the local-success route to recovery and budget termination",
+  "correction": "Distinct local-success, search-limit and invalid-observation routes; each labelled node declared once; per-input resistance bounds",
+  "semantic_routes_manually_followed": [
+    "valid observation and both tolerances satisfied returns local readiness",
+    "valid observation outside tolerance selects another legal candidate within budget or records search limitation",
+    "invalid observation allows bounded recovery or an explicit invalid-measurement outcome"
+  ],
+  "original_bad_source_commit": "5c34d9d965e583d7d6f0132f9506eefa3f489c29",
+  "sources": [
+    {
+      "id": "classic-topology",
+      "source": "classic-topology.dot",
+      "bytes": 1118,
+      "sha256": "00a1b9caa5996e1d20ed6c3b099ee61731000af27b250a658e3acc33c3f4f90f",
+      "duplicate_node_label_declarations": false
+    },
+    {
+      "id": "branch-topology",
+      "source": "branch-topology.dot",
+      "bytes": 959,
+      "sha256": "972930ede5a9df4cb1a9848d0bb5567c9067683072d2b1c39801d2e295015c15",
+      "duplicate_node_label_declarations": false
+    },
+    {
+      "id": "classic-learning",
+      "source": "classic-learning.dot",
+      "bytes": 1265,
+      "sha256": "638ca55dd63059b21eabe7dc1f4837fe0ef161d4a3347b190e167c8458757d0e",
+      "duplicate_node_label_declarations": false
+    },
+    {
+      "id": "branch-learning",
+      "source": "branch-learning.dot",
+      "bytes": 1385,
+      "sha256": "f649ff30313a9c3b265ec56570dcba9f66f7461d8b233b27f7d2df0487e8b1e4",
+      "duplicate_node_label_declarations": false
+    },
+    {
+      "id": "normalization-n0",
+      "source": "normalization-n0.dot",
+      "bytes": 1783,
+      "sha256": "1d2e3414662fba2ea93ee44cbb5da4968f7be99e2b70b41756bcbfdb0e9ca8ae",
+      "duplicate_node_label_declarations": false
+    },
+    {
+      "id": "normalization-n1",
+      "source": "normalization-n1.dot",
+      "bytes": 1863,
+      "sha256": "1c52706823262c4dc87a44b50708ff07592b432b68a79bbaedb5f8254b62e595",
+      "duplicate_node_label_declarations": false
+    },
+    {
+      "id": "logical-classes",
+      "source": "logical-classes.dot",
+      "bytes": 1131,
+      "sha256": "d0d1fccf3eafdb4132e42fea6b6b01e3882ef1083f5b33aeab06d3b8b294f055",
+      "duplicate_node_label_declarations": false
+    },
+    {
+      "id": "probe-sequence",
+      "source": "probe-sequence.dot",
+      "bytes": 1215,
+      "sha256": "88d35853ea785d568b69695b7fe10d35d172b7d74a93fab865b26878b58d79eb",
+      "duplicate_node_label_declarations": false
+    }
+  ],
+  "render_manifest": {
+    "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\manifest.json",
+    "sha256": "c35394ac2fd2ac99302ef30085845781fa10c8ee85856eedb5518bb088fdf37c"
+  },
+  "actual_Word_scale_pages_viewed": {
+    "Classic": [
+      18,
+      23
+    ],
+    "Branch": [
+      19,
+      24
+    ]
+  },
+  "documents": {
+    "Classic": {
+      "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\docx-draft-a9\\TimeLearnerClassicAlgorithms.ru.docx",
+      "bytes": 7749849,
+      "sha256": "cc9567dc922c526a3d3012cdbcc82341f2d5c8239d9255ae79ffd28c7f895e1e"
+    },
+    "Branch": {
+      "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\docx-draft-a9\\TimeLearnerBranchAlgorithms.ru.docx",
+      "bytes": 6194789,
+      "sha256": "53904263b536c98999e62a7b7989b9cf7806eb064258299666e5b620130d46a9"
+    }
+  },
+  "numerical_learning_code_changed": false,
+  "numerical_experiments_repeated": false,
+  "all_DOCX_pages_reviewed": false,
+  "released": false
+}

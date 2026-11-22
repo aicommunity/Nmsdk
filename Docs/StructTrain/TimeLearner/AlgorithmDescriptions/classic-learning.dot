@@ -1,0 +1,16 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad=0.08, nodesep=0.22, ranksep=0.28];
+node [fontname="Times New Roman", fontsize=22, shape=box, margin="0.08,0.04"];
+edge [fontname="Times New Roman", fontsize=18, arrowsize=0.8];
+a [label="Исходная модель и паттерн\nСобственные цели Aᵢ⁽⁰⁾",shape=ellipse];
+b [label="Опорный вход r=M−1"];
+c [label="Выбрать вход циклически\nи полный допустимый кандидат"];
+d [label="Завершить пробу\nизмерить время и амплитуду"];
+e [label="Локальные\nдопуски?",shape=diamond];
+f [label="Сохранить локальный результат\nВыбрать следующий вход"];
+g [label="Разрешён шаг\nи остался бюджет?",shape=diamond];
+h [label="Свежая проверка всех входов\nна конечной модели"];
+z [label="Модель и явный исход",shape=ellipse];
+a->b->c->d->e;e->f [label="да"];f->c [label="есть вход"];f->h [label="конец обхода"];
+e->g [label="нет"];d->g [label="недостоверно",constraint=false];g->c [label="да"];g->z [label="нет"];h->z;
+}

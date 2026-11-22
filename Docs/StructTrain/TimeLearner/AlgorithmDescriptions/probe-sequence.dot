@@ -1,0 +1,22 @@
+digraph G {
+graph [bgcolor=white,pad="0.1",overlap=true,splines=line,outputorder=edgesfirst];
+node [shape=box,fontname="Times New Roman",fontsize=22,margin="0.1,0.06",pin=true];
+edge [fontname="Times New Roman",fontsize=18,arrowsize=0.8];
+a [label="Контроллер",pos="0,5!"];b [label="Вычислитель",pos="2.4,5!"];
+c [label="Модель",pos="4.8,5!"];d [label="Измеритель",pos="7.2,5!"];
+node [shape=point,width=0.01,label=""];
+a1 [pos="0,4!"];b1 [pos="2.4,4!"];c1 [pos="4.8,4!"];d1 [pos="7.2,4!"];
+a2 [pos="0,3!"];b2 [pos="2.4,3!"];c2 [pos="4.8,3!"];d2 [pos="7.2,3!"];
+a3 [pos="0,2!"];b3 [pos="2.4,2!"];c3 [pos="4.8,2!"];d3 [pos="7.2,2!"];
+a4 [pos="0,1!"];b4 [pos="2.4,1!"];c4 [pos="4.8,1!"];d4 [pos="7.2,1!"];
+a5 [pos="0,0!"];b5 [pos="2.4,0!"];c5 [pos="4.8,0!"];d5 [pos="7.2,0!"];
+edge [style=dashed,arrowhead=none,color=gray];
+a->a1->a2->a3->a4->a5;b->b1->b2->b3->b4->b5;
+c->c1->c2->c3->c4->c5;d->d1->d2->d3->d4->d5;
+edge [style=solid,arrowhead=normal,color=black];
+a1->c1 [label="Правка и сброс"];
+a2->d2 [label="Открыть окно"];
+b3->c3 [label="Один такт"];
+c4->d4 [label="Отсчёт"];
+d5->a5 [label="Завершённое наблюдение"];
+}

@@ -173,7 +173,8 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
             p=para('');p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.keep_with_next=True
             if layout:p.paragraph_format.first_line_indent=Pt(0)
             p.add_run().add_picture(str(path),width=Inches(width*scale),height=Inches(height*scale))
-            c=para('Рисунок '+str(len(used)+1)+(' — ' if layout else ' ')+caption,'Caption');c.paragraph_format.keep_together=True
+            caption_text=caption.rstrip().rstrip('.') if layout else caption
+            c=para('Рисунок '+str(len(used)+1)+(' — ' if layout else ' ')+caption_text,'Caption');c.paragraph_format.keep_together=True
             if source_ref:para('Источник измерений: '+source_ref,'Caption')
             used.append(dict(file=str(path),sha256=digest(path),caption=caption,source_ref=source_ref))
         def diagram(identity,caption):image(dr/(identity+'.png'),caption)

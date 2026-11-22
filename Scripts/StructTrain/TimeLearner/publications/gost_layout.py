@@ -63,6 +63,9 @@ class GostDraftLayout:
         for name in ('Title', 'Subtitle', 'Caption'):
             document.styles[name].paragraph_format.first_line_indent = Mm(0)
             document.styles[name].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        # ГОСТ 7.32-2017:6.5.8 and 6.6.3: multi-line figure and table
+        # names use single spacing, independently of the body spacing.
+        document.styles['Caption'].paragraph_format.line_spacing = 1.0
         for name in ('Heading 1', 'Heading 2'):
             paragraph = document.styles[name].paragraph_format
             paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
@@ -119,7 +122,7 @@ class GostDraftLayout:
     def table_caption(self, title):
         self.tables += 1
         paragraph = self.document.add_paragraph(
-            f'Таблица {self.tables} — {title}', style='Caption')
+            f'Таблица {self.tables} — {title.rstrip().rstrip(".")}', style='Caption')
         paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
         paragraph.paragraph_format.keep_with_next = True
         return paragraph

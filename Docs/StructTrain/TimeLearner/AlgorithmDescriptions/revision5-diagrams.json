@@ -5,50 +5,50 @@
     {
       "id": "classic-topology",
       "caption": "Независимые дендритные пути и участки сомы",
-      "dot": "digraph G {\ngraph [rankdir=TB, bgcolor=\"white\", pad=0.08, nodesep=0.18, ranksep=0.24, label=\"Независимые пути при M=4\", labelloc=t, fontname=\"Times New Roman\", fontsize=22];\nnode [fontname=\"Times New Roman\", fontsize=20, shape=box, margin=\"0.08,0.05\"];\nedge [arrowsize=0.75];\npattern [label=\"Общая пачка\\nчетыре импульса\"];\nt0 [label=\"Вход 0\\nNₛ,₀ и Rₛ,₀\"]; t1 [label=\"Вход 1\\nNₛ,₁ и Rₛ,₁\"];\nt2 [label=\"Вход 2\\nNₛ,₂ и Rₛ,₂\"]; t3 [label=\"Вход 3\\nNₛ,₃ и Rₛ,₃\"];\nd0 [label=\"Путь L₀\"]; d1 [label=\"Путь L₁\"]; d2 [label=\"Путь L₂\"]; d3 [label=\"Путь L₃\"];\ns0 [label=\"Сома 1\"]; s1 [label=\"Сома 2\"]; s2 [label=\"Сома 3\"]; s3 [label=\"Сома 4\"];\nsum [label=\"Суммарный отклик\"];\nlt [label=\"Низкопороговая зона\\nи выходные события\"];\n{rank=same;t0;t1;t2;t3} {rank=same;d0;d1;d2;d3} {rank=same;s0;s1;s2;s3}\npattern -> {t0 t1 t2 t3}; t0->d0->s0; t1->d1->s1; t2->d2->s2; t3->d3->s3;\n{s0 s1 s2 s3}->sum; sum->lt;\nlt->sum [style=dashed,constraint=false];\n}",
-      "engine": "dot"
+      "engine": "dot",
+      "source": "classic-topology.dot"
     },
     {
       "id": "branch-topology",
       "caption": "Точки подключения на общей дендритной ветви",
-      "dot": "digraph G {\ngraph [rankdir=TB,bgcolor=\"white\",pad=0.08,nodesep=0.22,ranksep=0.2,label=\"Общая ветвь при M=4\",labelloc=t,fontname=\"Times New Roman\",fontsize=22];\nnode [fontname=\"Times New Roman\",fontsize=22,shape=box,margin=\"0.08,0.04\"];\nedge [arrowsize=0.75];\nu0 [label=\"Пачка → вход 0\\nNₛ,₀ и Rₛ,₀\"];u1 [label=\"Пачка → вход 1\\nNₛ,₁ и Rₛ,₁\"];\nu2 [label=\"Пачка → вход 2\\nNₛ,₂ и Rₛ,₂\"];u3 [label=\"Пачка → вход 3\\nNₛ,₃ и Rₛ,₃\"];\np0 [label=\"L₀\",shape=circle];p1 [label=\"L₁\",shape=circle];p2 [label=\"L₂\",shape=circle];p3 [label=\"L₃\",shape=circle];\n{rank=same;u0;p0} {rank=same;u1;p1} {rank=same;u2;p2} {rank=same;u3;p3}\nu0->p0;u1->p1;u2->p2;u3->p3;p0->p1->p2->p3;\nsoma [label=\"Сома\"];\nlt [label=\"Низкопороговая зона\\nи выходные события\"];\np3->soma->lt; lt->soma [style=dashed,constraint=false];\nu0->u1->u2->u3 [style=invis];\n}",
-      "engine": "dot"
+      "engine": "dot",
+      "source": "branch-topology.dot"
     },
     {
       "id": "classic-learning",
       "caption": "Структурная адаптация независимых путей",
-      "dot": "digraph G {\ngraph [rankdir=TB, bgcolor=\"white\", pad=0.08, nodesep=0.22, ranksep=0.28];\nnode [fontname=\"Times New Roman\", fontsize=22, shape=box, margin=\"0.08,0.04\"];\nedge [fontname=\"Times New Roman\", fontsize=18, arrowsize=0.8];\na [label=\"Исходная модель и паттерн\\nСобственные цели Aᵢ⁽⁰⁾\",shape=ellipse];\nb [label=\"Опорный вход r=M−1\"];\nc [label=\"Выбрать вход циклически\\nи полный допустимый кандидат\"];\nd [label=\"Завершить пробу\\nизмерить время и амплитуду\"];\ne [label=\"Локальные\\nдопуски?\",shape=diamond];\nf [label=\"Сохранить локальный результат\\nВыбрать следующий вход\"];\ng [label=\"Разрешён шаг\\nи остался бюджет?\",shape=diamond];\nh [label=\"Свежая проверка всех входов\\nна конечной модели\"];\nz [label=\"Модель и явный исход\",shape=ellipse];\na->b->c->d->e;e->f [label=\"да\"];f->c [label=\"есть вход\"];f->h [label=\"конец обхода\"];\ne->g [label=\"нет\"];d->g [label=\"недостоверно\",constraint=false];g->c [label=\"да\"];g->z [label=\"нет\"];h->z;\n}",
-      "engine": "dot"
+      "engine": "dot",
+      "source": "classic-learning.dot"
     },
     {
       "id": "branch-learning",
       "caption": "Структурная адаптация общей ветви",
-      "dot": "digraph G {\ngraph [rankdir=TB, bgcolor=\"white\", pad=0.08, nodesep=0.22, ranksep=0.28];\nnode [fontname=\"Times New Roman\", fontsize=22, shape=box, margin=\"0.08,0.04\"];\nedge [fontname=\"Times New Roman\", fontsize=18, arrowsize=0.8];\na [label=\"Общая ветвь и паттерн\\nСобственные цели Aᵢ⁽⁰⁾\",shape=ellipse];\nb [label=\"Опорный вход r=M−1\"];\nc [label=\"Вход в обратном порядке\\nДопустимые точки подключения\"];\nd [label=\"Изменить общий участок\\nснять затронутые подтверждения\"];\ne [label=\"Завершить пробу\\nизмерить время и амплитуду\"];\nf [label=\"Локальные\\nдопуски?\",shape=diamond];\nn [label=\"Сохранить локальный результат\\nВыбрать следующий вход\"];\ng [label=\"Разрешён шаг\\nи остался бюджет?\",shape=diamond];\nh [label=\"Свежая проверка всех входов\\nна конечной общей ветви\"];\nz [label=\"Модель и явный исход\",shape=ellipse];\na->b->c->d->e->f;f->n [label=\"да\"];n->c [label=\"есть вход\"];n->h [label=\"конец обхода\"];\nf->g [label=\"нет\"];e->g [label=\"недостоверно\",constraint=false];g->c [label=\"да\"];g->z [label=\"нет\"];h->z;\n}",
-      "engine": "dot"
+      "engine": "dot",
+      "source": "branch-learning.dot"
     },
     {
       "id": "normalization-n0",
       "caption": "Нормализация целым числом синапсов",
-      "dot": "digraph G {\ngraph [rankdir=TB, bgcolor=\"white\", pad=0.08, nodesep=0.22, ranksep=0.28];\nnode [fontname=\"Times New Roman\", fontsize=22, shape=box, margin=\"0.08,0.04\"];\nedge [fontname=\"Times New Roman\", fontsize=18, arrowsize=0.8];\na [label=\"Геометрия и цель Aᵢ⁽⁰⁾\",shape=ellipse];\nb [label=\"Выбрать целое Nₛ,ᵢ\\nПостроить и проверить граф\"];\nc [label=\"Свежие полные пачки\\nдля опоры и входа\"];\nd [label=\"Достоверный\\nотклик?\",shape=diamond];\ne [label=\"Сохранить измеренную точку\\nи ошибки времени и амплитуды\"];\nf [label=\"Оба допуска\\nвыполнены?\",shape=diamond];\ng [label=\"Соседи Nₛ,ᵢ при улучшении\\nлибо следующая геометрия\"];\nbad [label=\"Объявленное восстановление\\nили явная остановка\"];\nz [label=\"Локальный исход\\nЗатем общая проверка\",shape=ellipse];\na->b->c->d;d->e [label=\"да\"];d->bad [label=\"нет\"];bad->b [label=\"разрешено\",constraint=false];bad->z [label=\"остановка\"];e->f;f->bad [label=\"Объявленное восстановление\\nили явная остановка\"];\nz [label=\"да\"];f->g [label=\"нет\"];\ng->b [label=\"есть кандидат\",constraint=false];g->bad [label=\"Объявленное восстановление\\nили явная остановка\"];\nz [label=\"бюджет исчерпан\"];\n}",
-      "engine": "dot"
+      "engine": "dot",
+      "source": "normalization-n0.dot"
     },
     {
       "id": "normalization-n1",
       "caption": "Нормализация сопротивлением с повторным измерением времени",
-      "dot": "digraph G {\ngraph [rankdir=TB, bgcolor=\"white\", pad=0.08, nodesep=0.22, ranksep=0.28];\nnode [fontname=\"Times New Roman\", fontsize=22, shape=box, margin=\"0.08,0.04\"];\nedge [fontname=\"Times New Roman\", fontsize=18, arrowsize=0.8];\na [label=\"Геометрия и цель Aᵢ⁽⁰⁾\",shape=ellipse];\nb [label=\"Положительные границы Rₛ,ᵢ\\nи допустимый общий банк\"];\nc [label=\"Предложить сопротивление\\nпо измеренным точкам\"];\nd [label=\"Изменить между пробами\\nизмерить опору и вход\"];\ne [label=\"Достоверный\\nотклик?\",shape=diamond];\nf [label=\"Сохранить измеренную точку\\nи ошибки времени и амплитуды\"];\ng [label=\"Оба допуска\\nвыполнены?\",shape=diamond];\nh [label=\"Уточнить Rₛ,ᵢ\\nлибо перейти к длине\"];\nbad [label=\"Объявленное восстановление\\nили явная остановка\"];\nz [label=\"Локальный исход\\nЗатем общая проверка\",shape=ellipse];\na->b->c->d->e;e->f [label=\"да\"];e->bad [label=\"нет\"];bad->c [label=\"разрешено\",constraint=false];bad->z [label=\"остановка\"];f->g;g->bad [label=\"Объявленное восстановление\\nили явная остановка\"];\nz [label=\"да\"];g->h [label=\"нет\"];\nh->c [label=\"есть кандидат\",constraint=false];h->bad [label=\"Объявленное восстановление\\nили явная остановка\"];\nz [label=\"бюджет исчерпан\"];\n}",
-      "engine": "dot"
+      "engine": "dot",
+      "source": "normalization-n1.dot"
     },
     {
       "id": "logical-classes",
       "caption": "Логическая UML диаграмма компонентов обучения",
-      "dot": "digraph G {\ngraph [rankdir=TB,bgcolor=\"white\",pad=0.08,nodesep=0.22,ranksep=0.32];\nnode [shape=record,fontname=\"Times New Roman\",fontsize=20,margin=\"0.08,0.04\"];\nedge [fontname=\"Times New Roman\",fontsize=18,arrowsize=0.75];\nc [label=\"{Контроллер обучения|Предложить кандидат\\lСохранить историю\\l}\"];\no [label=\"{Наблюдение пробы|Пик и достоверность\\lВремя и амплитуда\\lРевизия модели\\l}\"];\nv [label=\"{Общая проверка|Свежие отклики\\lвсех входов\\l}\"];\na [label=\"{Адаптер независимых\\nпутей|Отдельные длины\\lи нормализаторы\\l}\"];\nb [label=\"{Адаптер общей ветви|Точки подключения\\lОбщие участки\\l}\"];\nn [label=\"{Дерево компонентов|Построить и сбросить\\lРассчитать штатный такт\\l}\"];\nc->o [label=\"читает\"];c->v [label=\"запускает\"];{rank=same;o;v}\nc->a;c->b;o->a [style=invis];v->b [style=invis];{rank=same;a;b}a->n;b->n;\n}",
-      "engine": "dot"
+      "engine": "dot",
+      "source": "logical-classes.dot"
     },
     {
       "id": "probe-sequence",
       "engine": "neato",
       "caption": "UML последовательность штатного измерения",
-      "dot": "digraph G {\ngraph [bgcolor=white,pad=\"0.1\",overlap=true,splines=line,outputorder=edgesfirst];\nnode [shape=box,fontname=\"Times New Roman\",fontsize=22,margin=\"0.1,0.06\",pin=true];\nedge [fontname=\"Times New Roman\",fontsize=18,arrowsize=0.8];\na [label=\"Контроллер\",pos=\"0,5!\"];b [label=\"Вычислитель\",pos=\"2.4,5!\"];\nc [label=\"Модель\",pos=\"4.8,5!\"];d [label=\"Измеритель\",pos=\"7.2,5!\"];\nnode [shape=point,width=0.01,label=\"\"];\na1 [pos=\"0,4!\"];b1 [pos=\"2.4,4!\"];c1 [pos=\"4.8,4!\"];d1 [pos=\"7.2,4!\"];\na2 [pos=\"0,3!\"];b2 [pos=\"2.4,3!\"];c2 [pos=\"4.8,3!\"];d2 [pos=\"7.2,3!\"];\na3 [pos=\"0,2!\"];b3 [pos=\"2.4,2!\"];c3 [pos=\"4.8,2!\"];d3 [pos=\"7.2,2!\"];\na4 [pos=\"0,1!\"];b4 [pos=\"2.4,1!\"];c4 [pos=\"4.8,1!\"];d4 [pos=\"7.2,1!\"];\na5 [pos=\"0,0!\"];b5 [pos=\"2.4,0!\"];c5 [pos=\"4.8,0!\"];d5 [pos=\"7.2,0!\"];\nedge [style=dashed,arrowhead=none,color=gray];\na->a1->a2->a3->a4->a5;b->b1->b2->b3->b4->b5;\nc->c1->c2->c3->c4->c5;d->d1->d2->d3->d4->d5;\nedge [style=solid,arrowhead=normal,color=black];\na1->c1 [label=\"Правка и сброс\"];\na2->d2 [label=\"Открыть окно\"];\nb3->c3 [label=\"Один такт\"];\nc4->d4 [label=\"Отсчёт\"];\nd5->a5 [label=\"Завершённое наблюдение\"];\n}"
+      "source": "probe-sequence.dot"
     }
   ],
   "edition": "2026-11-22-v5-draft",
