@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_failed_before_native",
+  "schema_version": 1,
+  "reason": "duplicate_reservation_resource",
+  "native_Train_started": false,
+  "original_closure": {
+    "process": [
+      "contained"
+    ],
+    "process/contained": [
+      "launch-result.json",
+      "launcher.py",
+      "limits-readback.json",
+      "owned-unit.json",
+      "ready.json",
+      "request.json",
+      "runtime.json",
+      "start.ack",
+      "stderr.log",
+      "stdout.log"
+    ],
+    "process/contained/stderr.log": "Traceback (most recent call last):\n  File \"/usr/lib/python3.10/runpy.py\", line 196, in _run_module_as_main\n    return _run_code(code, main_globals, None,\n  File \"/usr/lib/python3.10/runpy.py\", line 86, in _run_code\n    exec(code, run_globals)\n  File \"/home/user/timelearner-refactor/source-measured-count-native-linux-elder-c1/Scripts/StructTrain/TimeLearner/linux_count_training.py\", line 267, in <module>\n    raise SystemExit(main())\n  File \"/home/user/timelearner-refactor/source-measured-count-native-linux-elder-c1/Scripts/StructTrain/TimeLearner/linux_count_training.py\", line 263, in main\n    return _supervise(args.request) if args.action=='_supervise' else _worker(args.request)\n  File \"/home/user/timelearner-refactor/source-measured-count-native-linux-elder-c1/Scripts/StructTrain/TimeLearner/linux_count_training.py\", line 195, in _worker\n    lease=registry.reserve(spec['job_id'],resources,ttl_seconds=120,demands=demands)\n  File \"/home/user/timelearner-refactor/source-measured-count-native-linux-elder-c1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 285, in reserve\n    resources = _resources(resources);ttl_seconds = _ttl(ttl_seconds)\n  File \"/home/user/timelearner-refactor/source-measured-count-native-linux-elder-c1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 82, in _resources\n    _require(str(canonical) not in seen, 'duplicate_reservation_resource')\n  File \"/home/user/timelearner-refactor/source-measured-count-native-linux-elder-c1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 25, in _require\n    raise ReservationError(reason)\nScripts.StructTrain.TimeLearner.resource_reservations.ReservationError: duplicate_reservation_resource\n",
+    "process/contained/stdout.log": "",
+    "original-outcome.json": "{\n  \"kernel_before_stop\": {\n    \"execution\": \"unknown\",\n    \"all_processes_closed\": true,\n    \"reason\": \"kernel_cgroup_observed\",\n    \"binding\": {\n      \"kind\": \"timelearner_contained_binding\",\n      \"schema_version\": 1,\n      \"request_sha256\": \"cb582cd3dee6f12a4f90893c22b98cd4e4b3d21c857dd1957eb915dcdadb17c8\",\n      \"unit\": \"timelearner-ce470b4f-c12d-424e-a473-47c2189930f2.service\",\n      \"invocation_id\": \"bbda26e8ac314848910c966c04d44b57\",\n      \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ce470b4f-c12d-424e-a473-47c2189930f2.service\",\n      \"initial_main_pid\": 2585912,\n      \"initial_start_ticks\": \"494600316\",\n      \"sha256\": \"d337fb38706cf17421f2ee7c0895024e150377d3a0d995efb3b0a692401d74ca\"\n    },\n    \"state\": {\n      \"Type\": \"exec\",\n      \"Restart\": \"no\",\n      \"RemainAfterExit\": \"yes\",\n      \"MainPID\": \"0\",\n      \"Result\": \"exit-code\",\n      \"ExecMainCode\": \"1\",\n      \"ExecMainStatus\": \"1\",\n      \"ControlGroup\": \"\",\n      \"MemoryMax\": \"2147483648\",\n      \"TasksMax\": \"128\",\n      \"KillMode\": \"control-group\",\n      \"Description\": \"TimeLearner contained attempt ce470b4f-c12d-424e-a473-47c2189930f2\",\n      \"LoadState\": \"loaded\",\n      \"ActiveState\": \"failed\",\n      \"SubState\": \"failed\",\n      \"InvocationID\": \"bbda26e8ac314848910c966c04d44b57\"\n    },\n    \"memory_max\": 2147483648,\n    \"tasks_max\": 128,\n    \"scientific_verdict\": null\n  },\n  \"worker_terminal\": null,\n  \"cleanup_does_not_attest_execution_success\": true\n}\n",
+    "reservation-final.json": "[]\n"
+  },
+  "receipt": {
+    "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\timelearner-elder-Train-contained-failure-observed-20261122-k1.json",
+    "bytes": 3744,
+    "sha256": "e06b23e3b8e13cfa074b7b100e57b20be5febad86f916b4ee92700d9cf28c7f2"
+  },
+  "fix_scope": "Fold identical read resources when controller source and SDK are the same; retain registry duplicate rejection",
+  "new_attempt_required": true,
+  "scientific_verdict": null
+}

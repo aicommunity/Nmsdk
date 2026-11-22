@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_actual_page_review_corrections",
+  "schema_version": 1,
+  "source_illustrations_sha256": "eb568e2bec69e053aac9ea047c266415f9712668272fcb9f94ef87aa8e20c4aa",
+  "corrected_illustrations_sha256": "f4f605e53fbd7d8267223f3433e970c180b0d7afa1d292f1ae3abbb3b6ddc8ed",
+  "text_changes": [
+    {
+      "case_id": "classic-n1-native-n2",
+      "field": "train_configuration_ref",
+      "before": "Исходная конфигурация сохранена в пакете обученной модели; N=2, N1, опорный вход 1, допуски 0,02 с и 10⁻⁵.",
+      "after": "Исходная конфигурация сохранена в пакете обученной модели; M=2, нормализация сопротивлением N1, опорный вход 1, допуски 0,02 с и 10⁻⁵."
+    },
+    {
+      "case_id": "branch-n1-native-n2",
+      "field": "train_configuration_ref",
+      "before": "Исходная конфигурация сохранена в пакете обученной модели; N=2, N1, опорный вход 1, допуски 0,02 с и 10⁻⁵.",
+      "after": "Исходная конфигурация сохранена в пакете обученной модели; M=2, нормализация сопротивлением N1, опорный вход 1, допуски 0,02 с и 10⁻⁵."
+    }
+  ],
+  "prior_draft": "docx-draft-a9",
+  "observed_issues": [
+    {
+      "topology": "classic",
+      "page": 28,
+      "issue": "Residual N=2 instead of M=2"
+    },
+    {
+      "topology": "branch",
+      "page": 9,
+      "issue": "Three text lines stranded before an overlarge topology diagram"
+    }
+  ],
+  "layout_change": "Limit only the GOST Branch topology diagram to 6.5 inches; no measured graph resized or modified",
+  "scientific_results_changed": false,
+  "previous_drafts_preserved": true,
+  "released": false
+}

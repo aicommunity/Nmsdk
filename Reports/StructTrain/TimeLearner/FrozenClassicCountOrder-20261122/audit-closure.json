@@ -1,0 +1,119 @@
+{
+  "observed_utc": "2026-11-22T19:27:47.554375+00:00",
+  "result_record": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/closed-classic-count-order-audit-m40-i2/worker/tmp/closed-order-stimulus-relative-reanalysis.json",
+    "sha256": "d0f13f78936c3009525100f5854d55ff3cd7cad7a9af4c0f671405fd7bf6bfb5",
+    "size": 126798
+  },
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 74.71977552585304,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "3f4a834ae451a6983f00ad0b484f1965dc407d7e1d10549f4d209b32b1e31a08",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "worker/terminal.json": {
+    "operation_passed": true,
+    "operation": "python-controller-validation",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "worker/validation/result.json": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "closed-classic-count-order-audit-m40-i2",
+    "package_fingerprint": "809e97957a087b85569870f659d1532b9767dfa9a4ef8a695ffd7141255df49d",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_closed_physical_order_reanalysis.ClosedPhysicalOrderReanalysisTest.test_all_closed_native_observations_and_relative_responses"
+    ],
+    "executed_tests": 1,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_CLOSED_ORDER_CONTROLS": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-count-M4-frozen-order-m40-d3",
+        "files": 12,
+        "fingerprint": "96b059fa298c075aea2e1b60ce2c48a18789ca05219a7fa0c888a4e5dd5a3323"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "outer": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "87daebc4f1241aa68da62086067326e8dde81f41e9f60ce9d5e7a8f66eb7727b",
+      "unit": "timelearner-a9540d6b-85f0-4f1f-989a-6ceea2da9545.service",
+      "invocation_id": "2fb634de875f4f9d90e89c601f1cb50a",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a9540d6b-85f0-4f1f-989a-6ceea2da9545.service",
+      "initial_main_pid": 891483,
+      "initial_start_ticks": "445073046",
+      "sha256": "8416be1283152f37c1ba46e86814f0e83f66b9a7a220e9e5a6129520039b8c8f"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-a9540d6b-85f0-4f1f-989a-6ceea2da9545.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "reserved": {
+    "disk_bytes": 0,
+    "memory_bytes": 0,
+    "slots": 0
+  }
+}

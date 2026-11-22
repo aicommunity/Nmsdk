@@ -121,6 +121,22 @@ def _verify_sources_after(plan):
     require(source_closure(plan['sdk']) == plan['runtime']['source_closure'], 'count_linux_sdk_changed_after_execution')
 
 
+def _reservation_resources(plan):
+    # The tool source may be the very SDK tree being used. Reserve that read
+    # once; the registry deliberately rejects repeated canonical paths.
+    resources = {}
+    for path, access in (
+        (SOURCE, 'read'), (plan['sdk'], 'read'),
+        (Path(plan['runtime']['executable']['path']).parent, 'read'),
+        (plan['controls'], 'read'), (plan['output'], 'write'),
+        (plan['directory'], 'write')):
+        path = str(Path(path).resolve(strict=False))
+        require(path not in resources or resources[path] == access,
+                'count_linux_resource_access_collision')
+        resources[path] = access
+    return [dict(path=path, access=access) for path, access in resources.items()]
+
+
 def launch(request_path):
     plan = context(request_path);directory=plan['directory'];spec=plan['spec']
     require(not directory.exists() and not plan['output'].exists(), 'count_linux_fresh_attempt_required')
@@ -187,9 +203,7 @@ def _worker(request_path):
     output.mkdir();registry=Reservations.open_existing(plan['base']/'resource-reservations.sqlite3')
     maximum_memory=limits['controller_memory_bytes']+(limits['native_memory_bytes']
         if spec['operation']=='train' else limits['preflight_memory_bytes'])
-    resources=[dict(path=str(path),access=access) for path,access in (
-        (SOURCE,'read'),(plan['sdk'],'read'),(Path(plan['runtime']['executable']['path']).parent,'read'),
-        (plan['controls'],'read'),(output,'write'),(plan['directory'],'write'))]
+    resources = _reservation_resources(plan)
     demands=dict(slots=1,memory_bytes=maximum_memory,disk_bytes=spec['disk']['maximum_output_bytes'])
     require(not registry.managed_units, 'count_linux_quantity_registry_required')
     lease=registry.reserve(spec['job_id'],resources,ttl_seconds=120,demands=demands)

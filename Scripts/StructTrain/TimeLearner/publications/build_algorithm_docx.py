@@ -162,11 +162,13 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
                     definition.paragraph_format.keep_with_next=i<len(definitions['symbols'])-1
                     definition.paragraph_format.keep_together=True
             return paragraph
-        def image(path,caption,source_ref=None):
+        def image(path,caption,source_ref=None,*,maximum_height_inches=None):
             path=Path(path)
             with Image.open(path) as im:width,height=im.size
             scale=min((float(layout.width)/914400 if layout else 6.35)/width,
                       (float(layout.height)/914400-1.2 if layout else 7.8)/height)
+            if maximum_height_inches is not None:
+                scale=min(scale,maximum_height_inches/height)
             if layout:
                 reference=para('На рисунке '+str(len(used)+1)+' показана следующая иллюстрация.')
                 reference.paragraph_format.keep_with_next=True
@@ -177,7 +179,11 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
             c=para('Рисунок '+str(len(used)+1)+(' — ' if layout else ' ')+caption_text,'Caption');c.paragraph_format.keep_together=True
             if source_ref:para('Источник измерений: '+source_ref,'Caption')
             used.append(dict(file=str(path),sha256=digest(path),caption=caption,source_ref=source_ref))
-        def diagram(identity,caption):image(dr/(identity+'.png'),caption)
+        def diagram(identity,caption):
+            # Keep the vertical topology readable without expanding its labels
+            # to several times the body size and stranding three lines before it.
+            image(dr/(identity+'.png'),caption,
+                  maximum_height_inches=6.5 if layout and identity=='branch-topology' else None)
         def concept(identity):
             record=concepts.get(identity)
             if record:image(fr/record['png']['path'],record['caption'],record['source_ref'])
