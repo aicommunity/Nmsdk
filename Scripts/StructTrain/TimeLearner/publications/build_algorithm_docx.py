@@ -143,7 +143,13 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
             if not next_edition:return text
             return re.sub(r'(?<![0-9a-f])[0-9a-f]{40}(?:[0-9a-f]{24})?(?![0-9a-f])',
                           lambda match:match.group(0)[:16]+'…',text)
-        def para(text,style=None):return doc.add_paragraph(visible_reference(text),style=style)
+        def para(text,style=None):
+            paragraph=doc.add_paragraph(visible_reference(text),style=style)
+            if next_edition and style is None and text.startswith('Источник'):
+                # A long exact path must wrap without expanding the preceding
+                # Russian words to fill a justified line.
+                paragraph.alignment=WD_ALIGN_PARAGRAPH.LEFT
+            return paragraph
         def paras(values):
             for text in values:para(text)
         def head(text,level=1):return layout.heading(text,level) if layout else doc.add_heading(text,level=level)
@@ -243,9 +249,12 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
         head('Завершение обучения и распознавание');paras(common['finalization']);paras(common['recognition'])
         head('Экспериментальные примеры');ids=specific['example_order']
         name=lambda i:details.get(i,{}).get('title','Пример '+str(ids.index(i)+1))
-        table(doc,['Пример','Обнаружения','Ложные ответы','Пропуски','Правильные отклонения'],
+        response_headers=['Пример','TP','FP','FN','TN'] if next_edition else ['Пример','Обнаружения','Ложные ответы','Пропуски','Правильные отклонения']
+        table(doc,response_headers,
               [[name(i),*[cases[i]['counts'][k] for k in ('TP','FP','FN','TN')]] for i in ids],[2.4,1.,1.,.85,1.1],
               title='Результаты экспериментальных примеров')
+        if next_edition:
+            para('TP — правильное обнаружение цели; FP — ложный ответ на отвлекающий паттерн; FN — пропуск цели; TN — правильное отклонение отвлекающего паттерна.')
         para('Указаны числа предъявлений, а не число независимых обучений. Число разных отвлекающих паттернов приведено отдельно.')
         if next_edition:
             para('На временных графиках реакций синим показан измеренный потенциал сомы, оранжевым — фактические входные импульсы, красным пунктиром — выходные события нейрона. Время отсчитывается от первого фактического входа. Полный положительный отклик и полный диапазон с перезарядкой представлены отдельными видами; увеличение времени обозначено явно. Масштабы потенциала согласованы внутри набора одной модели. Если показаны четыре строки, это четыре сомных сегмента одного нейрона.')
@@ -262,7 +271,8 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
             if case['training_outcome']=='budget_exhausted':para('Остановка по бюджету сохранена. Подбор порога не является доказательством сходимости обучения.')
             for followup in case.get('followup_evaluations',[]):
                 para(followup['explanation'])
-                table(doc,['Набор','Обнаружения','Ложные ответы','Пропуски','Правильные отклонения'],
+                followup_headers=['Набор','TP','FP','FN','TN'] if next_edition else ['Набор','Обнаружения','Ложные ответы','Пропуски','Правильные отклонения']
+                table(doc,followup_headers,
                     [[followup['title'],*[followup['counts'][k] for k in ('TP','FP','FN','TN')]]],
                     [2.4,1.,1.,.85,1.1],title=followup['table_title'])
                 para('Источник дополнительной проверки: '+followup['source_ref'])
