@@ -6,6 +6,7 @@ experiment; this renderer never manufactures an evaluation verdict.
 """
 import argparse
 import hashlib
+import html
 import json
 import math
 from pathlib import Path
@@ -14,6 +15,37 @@ import sys
 
 def _digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _index(output, records):
+    response_ru={'TP':'Правильное обнаружение','FP':'Ложное срабатывание',
+                 'TN':'Правильное отклонение','FN':'Пропуск целевого паттерна'}
+    sections=[]
+    for i,row in enumerate(records,1):
+        positive=next(p['name'] for p in row['positive_full_view']['files'] if p['name'].endswith('.png'))
+        complete=next(p['name'] for p in row['files'] if p['name'].endswith('.png'))
+        sections.append('<section><h2>'+html.escape(row['title'])+'</h2><p>'+response_ru[row['response']]+
+            ' · '+html.escape(row['sample_id'])+'</p><figure><img src="'+positive+
+            '" alt="Полное окно положительного потенциала с входными импульсами"><figcaption>Рисунок '+str(i)+
+            '. Полный временной интервал в масштабе положительного отклика. Синий — потенциал сомы; '
+            'оранжевые линии — входные импульсы; красный пунктир — выходные импульсы.</figcaption></figure>'
+            '<details><summary>Полная перезарядка и временное увеличение</summary><img src="'+complete+
+            '" alt="Полный диапазон потенциала и временное увеличение"></details>'
+            '<p class="identity">Модель: '+html.escape(row['model_revision'])+'</p></section>')
+    text='''<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Фактические реакции: временные графики</title><style>
+body{max-width:1100px;margin:24px auto;padding:0 16px;font:17px/1.5 system-ui;color:#18222e}
+h1{font-size:1.7em}h2{font-size:1.2em}section{border-top:1px solid #ccd;margin-top:32px;padding-top:12px}
+figure{margin:12px 0}img{width:100%;height:auto}figcaption,.identity{font-size:.9em}.identity{overflow-wrap:anywhere;color:#52606d}
+summary{cursor:pointer;padding:8px 0}a{color:#1558a2}@media print{details{display:block}section{break-inside:avoid}}
+</style><h1>Временные графики фактических реакций</h1>
+<p>Показаны сохранённые отсчёты без прореживания. Начало отсчёта времени — первый зарегистрированный входной импульс каждой пробы.
+Масштаб потенциала одинаков для иллюстраций одного примера. Отдельный вид полного положительного отклика сохраняет поздние вершины;
+полный диапазон с перезарядкой доступен ниже каждого рисунка.</p>
+<p>Подписи ответов взяты из исходной декларации иллюстраций. Этот просмотр не пересчитывает классификацию и не подтверждает сходимость обучения.
+<a href="manifest.json">Источники, версии модели и контрольные суммы</a>.</p>'''+''.join(sections)+'</html>'
+    path=output/'index.html';path.write_text(text,encoding='utf-8',newline='\n')
+    return dict(name=path.name,bytes=path.stat().st_size,sha256=_digest(path))
 
 
 def render(specification, output, *, matplotlib_libs=None):
@@ -134,7 +166,7 @@ def render(specification, output, *, matplotlib_libs=None):
                     axis.ticklabel_format(axis='y',style='sci',scilimits=(-3,3),useMathText=True)
                     axis.set_title('Полное окно' if column==0 else 'Масштаб отклика',y=1.,pad=5)
                     if column==0:axis.set_ylabel('Сома '+str(channel+1)+'\nусл. ед.')
-                    if channel+1==count:axis.set_xlabel('Время, с')
+                    if channel+1==count:axis.set_xlabel('Время от первого импульса, с')
                     input_axis=axis.twinx();input_axis.set_ylim(0,1.25);input_axis.set_yticks([])
                     input_axis.vlines(stimuli,0,1,color='#df7b20',linewidth=.9,alpha=.8,zorder=2)
                     for time in spikes:
@@ -146,6 +178,31 @@ def render(specification, output, *, matplotlib_libs=None):
                 path=output/(row['id']+'.'+suffix)
                 fig.savefig(path,dpi=220);paths.append(path)
             plt.close(fig)
+
+            # A zoom around events and maxima can end before a later, lower
+            # positive lobe. Keep the full-time positive-scale view as well.
+            full,full_axes=plt.subplots(count,1,figsize=(6.35,height),squeeze=False)
+            full.subplots_adjust(left=.13,right=.98,bottom=.40/height,
+                                 top=1-.67/height,hspace=.72)
+            for channel,values in enumerate(potentials):
+                axis=full_axes[channel,0];low,high=response_limits[(row['case_id'],channel)]
+                span=max(high-low,abs(low)*.01,1e-8)
+                axis.plot(times,values,color='#1756a9',linewidth=1.25,zorder=3)
+                axis.set_xlim(left,right);axis.set_ylim(low-.05*span,high+.08*span)
+                axis.grid(alpha=.22,linewidth=.5)
+                axis.ticklabel_format(axis='y',style='sci',scilimits=(-3,3),useMathText=True)
+                axis.set_ylabel('Сома '+str(channel+1)+'\nусл. ед.')
+                if channel==0:axis.set_title('Положительный отклик — полное окно',y=1.,pad=5)
+                if channel+1==count:axis.set_xlabel('Время от первого импульса, с')
+                input_axis=axis.twinx();input_axis.set_ylim(0,1.25);input_axis.set_yticks([])
+                input_axis.vlines(stimuli,0,1,color='#df7b20',linewidth=.9,alpha=.8,zorder=2)
+                for time in spikes:axis.axvline(time,color='#a51b23',linestyle='--',linewidth=1,zorder=4)
+            full.suptitle(row['title']+'\n'+response_ru[row['response']],fontsize=11,y=1-.04/height)
+            full_paths=[]
+            for suffix in ('png','svg'):
+                path=output/(row['id']+'-positive-full.'+suffix)
+                full.savefig(path,dpi=220);full_paths.append(path)
+            plt.close(full)
             records.append(dict(id=row['id'],case_id=row['case_id'],response=row['response'],
                 title=row['title'],trial_id=row['trial_id'],sample_id=row['sample_id'],
                 source_primary=row['primary'],source_observation=row['observation'],
@@ -153,12 +210,17 @@ def render(specification, output, *, matplotlib_libs=None):
                 relative_stimulus_times=stimuli,relative_spike_times=spikes,
                 soma_count=count,limits_scope='all declared illustrated trials of this case',
                 response_limits_scope='right panels: above recorded initial level; shared within case and channel; full recharge remains in left panels',
+                positive_full_view=dict(full_observation_window=True,late_positive_lobes_retained=True,
+                    negative_recharge_shown_in_primary_full_window=True,
+                    amplitude_limits_shared_with_other_trials_of_case=True,
+                    files=[dict(name=p.name,bytes=p.stat().st_size,sha256=_digest(p)) for p in full_paths]),
                 data_rescaled=False,files=[dict(name=p.name,bytes=p.stat().st_size,sha256=_digest(p)) for p in paths]))
     result=dict(kind='timelearner_scientific_trial_figures',schema_version=1,
         sources_sha256=_digest(specification),figures=records,renderer='Matplotlib',
         matplotlib_version=matplotlib.__version__,scientific_verdict=None,
         classification_recomputed=False,archive_provenance_reaudited_by_renderer=False,
         visually_reviewed=False)
+    result['html_viewer']=_index(output,records)
     (output/'manifest.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',
                                       encoding='utf-8',newline='\n')
     return result
