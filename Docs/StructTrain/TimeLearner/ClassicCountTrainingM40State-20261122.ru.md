@@ -112,6 +112,23 @@ Target дал один выход через3,5мс после последне�
 [Экспорт, повтор и подготовка всех графиков](../../../Reports/StructTrain/TimeLearner/MatchedClassicCountTraining-20261121/m40-count-DATA-and-visual-followups.json).
 [Завершённый экспорт и все восемь сравнений](../../../Reports/StructTrain/TimeLearner/MatchedClassicCountTraining-20261121/m40-count-DATA-replay-completed.json).
 
+Все16 исправленных временных PNG просмотрены отдельно. Для каждого паттерна
+есть полный диапазон с перезарядкой, увеличение отклика и дополнительный
+вид полного окна в масштабе положительного потенциала. Последний сохраняет
+поздние вершины, которые могут не попасть в увеличение. Все4001 отсчёт,
+четыре канала сомных сегментов и фактические входные/выходные события
+сохранены. Четыре строки — части одной модели, не четыре отдельных нейрона.
+Синий — зарегистрированный потенциал, оранжевый — входные импульсы,
+красный пунктир — действительные события LT. Классификация не вычисляется
+повторно по отдельным вершинам этих кривых.
+[Полный воспроизводимый комплект и побайтовый протокол просмотра](../../../Reports/StructTrain/TimeLearner/MatchedClassicCountTraining-20261121/m40-count-reviewed-response-figures.json).
+
+Начат отдельный Test26 новых отвлекающих паттернов с повтором target,
+без изменения модели и порога. Его счётчики пока не получены; исходный
+Train остаётся budget_exhausted. Это проверка новых отрицательных примеров,
+а не независимая положительная выборка или случайное повторное обучение.
+[Фиксированная постановка и запуск](../../../Reports/StructTrain/TimeLearner/MatchedClassicCountTraining-20261121/m40-count-frozen-new-foils-running.json).
+
 Актуальные компактные доказательства:
 [исходные реакции и предложение порога](../../../Reports/StructTrain/TimeLearner/MatchedClassicCountTraining-20261121/linux-count-closed-trains-and-baselines-20261122-0650.json),
 [закрытый подтверждающий Test до полного аудита](../../../Reports/StructTrain/TimeLearner/MatchedClassicCountTraining-20261121/m40-count-threshold-native-closed-awaiting-audit.json).

@@ -1,0 +1,58 @@
+{
+  "kind": "timelearner_actual_frozen_Classic_count_new_foil_dispatch",
+  "schema_version": 1,
+  "job": "classic-count-frozen-new-foils-m40-b2",
+  "observed_utc": "2026-11-22T08:57:08.909959+00:00",
+  "dispatch": {
+    "dispatched": true,
+    "job": "classic-count-frozen-new-foils-m40-b2",
+    "controls_commit": "fd164deb25a5f6a947cfdf30fa53d905703e40c4",
+    "source_root": "168dcf6d8b1c6694ab7023837f5e5c78a8e65eb1",
+    "supervisor": {
+      "pid": 4087341,
+      "start_ticks": "441195806",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "fixed_model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+    "fixed_threshold": 0.020736298148054874,
+    "expected_trials": 27,
+    "training_started": false,
+    "original_Train_unchanged": true,
+    "scientific_verdict": null
+  },
+  "actual_native": {
+    "execution": "running",
+    "all_processes_closed": false,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "d61233243512e178fcdf05ecae4cba03a682e7086fb1f6a08e1f3f3d4c16d840",
+      "unit": "timelearner-2a65ed51-5324-4e0e-a8cb-a6d8de6cf12c.service",
+      "invocation_id": "47e9f2c5de734e6cae7d92cb218db3d0",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2a65ed51-5324-4e0e-a8cb-a6d8de6cf12c.service",
+      "initial_main_pid": 4107306,
+      "initial_start_ticks": "441200423",
+      "sha256": "4499f5e133b9a94ff9237946ba6c221a850b47a279453d4d24adfb8da6505391"
+    }
+  },
+  "actual_supervisor": {
+    "exists": true,
+    "matching": true
+  },
+  "condition": {
+    "condition_fingerprint": "9e989c1dfd15c895846907df0dfcea5724052bb38c91917931862c6bdfade21d"
+  },
+  "observed_trial_files": 4,
+  "declared_trials": 27,
+  "actual_result_not_yet_available": true,
+  "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+  "threshold": 0.020736298148054874,
+  "model_and_threshold_fixed": true,
+  "training_performed": false,
+  "independent_positive_class": false,
+  "previous_B1_request_rejected_before_native_execution": "reservation_requires_directory_tree",
+  "request_fix": "reserve the containing model directory, not a file",
+  "scientific_verdict": null
+}
