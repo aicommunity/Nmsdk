@@ -1,0 +1,26 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "30bf174ba17f97ec2fb051e178f578557dff79ed5a667184997673286c354ea5",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "dispatched": true,
+    "queued": true,
+    "job": "windows-measured-count-stopped-threshold-k1",
+    "controls_commit": "2cb826fb73e88d87e9f2e7cb59dc9a49a6c4f001",
+    "source_root": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{0BFE283D-DF61-4583-958C-E2E724364F4D}",
+      "execution_time_limit": "PT10H",
+      "task": "TimeLearner-windows-measured-count-stopped-threshold-k1",
+      "engine_pid": 14964
+    },
+    "depends_on": "windows-measured-count-stopped-baseline-k1",
+    "awaits_full_audit_and_task_closure": true,
+    "all_model_processes_use_shared_worker_lock": true,
+    "source_Train_not_restarted": true,
+    "scientific_verdict": null
+  }
+}

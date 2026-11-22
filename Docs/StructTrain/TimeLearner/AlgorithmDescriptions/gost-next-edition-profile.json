@@ -9,11 +9,13 @@
     "helper": "Scripts/StructTrain/TimeLearner/publications/gost_layout.py",
     "requires_explicit_profile_and_draft": true,
     "structural_review": "GostDraftStructuralReview-20261122.json",
-    "source_content": "revision5 draft, 11 working examples, not a released edition",
+    "source_content": "revision5 draft a10, 11 working examples, not released",
     "standards_compliance_accepted": false,
-    "visual_acceptance_complete": false,
+    "visual_acceptance_complete": true,
     "legacy_runtime_readiness_is_not_bundled_renderer_acceptance": true,
-    "actual_render_record": "AuthorizedDocxRender-20261122.json"
+    "actual_render_record": "AuthorizedDocxRender-20261122.json",
+    "actual_page_review_record": "CurrentPageReview-20261122.json",
+    "draft_builder_implemented": true
   },
   "applies_to": [
     "Classic",
@@ -104,8 +106,8 @@
     "bibliography_and_citations_reviewed": false,
     "administrative_cover_metadata_verified_or_parent_report_scope_declared": false,
     "builder_support_implemented": false,
-    "both_DOCX_rendered_and_every_page_reviewed": false,
-    "all_graphs_readable_at_Word_page_scale": false
+    "both_DOCX_rendered_and_every_page_reviewed": true,
+    "all_graphs_readable_at_Word_page_scale": true
   },
   "content_constraints": {
     "pulse_count_symbol": "M",
@@ -120,5 +122,6 @@
     "heavy_outputs_in_root_Git": false
   },
   "previous_runtime_readiness_record": "DocumentRuntimeReadiness-20261122.json",
-  "user_authorized_installed_LibreOffice_for_this_pair": true
+  "user_authorized_installed_LibreOffice_for_this_pair": true,
+  "remaining_content_update": "Update completed measured-count Train outcome and fixed-order56 result before next release; a10 remains unchanged"
 }
