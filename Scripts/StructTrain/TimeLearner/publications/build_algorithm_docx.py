@@ -13,7 +13,7 @@ import sys
 def read(path):return json.loads(Path(path).read_bytes())
 def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
-def build(source,output,*,diagrams,figures=None,draft=False):
+def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None):
     from docx import Document
     from docx.shared import Inches,Pt,RGBColor
     from docx.oxml import OxmlElement
@@ -21,7 +21,13 @@ def build(source,output,*,diagrams,figures=None,draft=False):
     from docx.enum.text import WD_ALIGN_PARAGRAPH
     from docx.enum.table import WD_TABLE_ALIGNMENT,WD_CELL_VERTICAL_ALIGNMENT
     from PIL import Image
-    from .word_math import equation,sub,sup,scripts,absolute,group
+    from .word_math import equation as native_equation,sub,sup,scripts,absolute,group
+    profile=read(format_profile) if format_profile else None
+    if profile is not None:
+        if not isinstance(profile,dict) or profile.get('kind')!='timelearner_scientific_report_format_profile' or profile.get('schema_version')!=1:
+            raise ValueError('Known scientific report format profile required')
+        if not draft:
+            raise ValueError('GOST layout is draft-only until standards, structure and page review are accepted')
     source=Path(source).resolve(strict=True);output=Path(output).resolve()
     if output.exists():raise ValueError('Fresh output directory required')
     content_path=source/'revision4-content.ru.json';content=read(content_path)
@@ -68,7 +74,12 @@ def build(source,output,*,diagrams,figures=None,draft=False):
         for key in ('ascii','hAnsi','eastAsia','cs'):fonts.set(qn('w:'+key),name)
         for key in ('asciiTheme','hAnsiTheme','eastAsiaTheme','cstheme'):fonts.attrib.pop(qn('w:'+key),None)
 
-    def table(doc,headers,rows,widths):
+    def table(doc,headers,rows,widths,title=None):
+        if layout:
+            if not title:raise ValueError('Named table required for the GOST draft')
+            para('В таблице '+str(layout.tables+1)+' представлены '+title[0].lower()+title[1:]+'.')
+            layout.table_caption(title)
+            widths=[w*float(layout.width)/914400/sum(widths) for w in widths]
         t=doc.add_table(rows=1,cols=len(headers));t.alignment=WD_TABLE_ALIGNMENT.CENTER;t.autofit=False
         for c,w in zip(t.columns,widths):c.width=Inches(w)
         for c,text in zip(t.rows[0].cells,headers):c.text=str(text)
@@ -78,11 +89,12 @@ def build(source,output,*,diagrams,figures=None,draft=False):
         borders=OxmlElement('w:tblBorders')
         for name in ('top','left','bottom','right','insideH','insideV'):
             edge=OxmlElement('w:'+name);edge.set(qn('w:val'),'single');edge.set(qn('w:sz'),'4')
-            edge.set(qn('w:color'),'D0D0D0');borders.append(edge)
+            edge.set(qn('w:color'),'D9D9D9' if layout else 'D0D0D0');borders.append(edge)
         t._tbl.tblPr.append(borders)
         for i,row in enumerate(t.rows):
             row._tr.get_or_add_trPr().append(OxmlElement('w:cantSplit'))
             for j,c in enumerate(row.cells):
+                if layout:c.width=Inches(widths[j])
                 c.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
                 if i==0:
                     shade=OxmlElement('w:shd');shade.set(qn('w:fill'),'EEEEEE');c._tc.get_or_add_tcPr().append(shade)
@@ -90,6 +102,7 @@ def build(source,output,*,diagrams,figures=None,draft=False):
                     p.paragraph_format.space_before=Pt(4);p.paragraph_format.space_after=Pt(4)
                     p.alignment=WD_ALIGN_PARAGRAPH.LEFT if j==0 else WD_ALIGN_PARAGRAPH.CENTER
                     for r in p.runs:r.font.size=Pt(10.5);r.bold=i==0
+        if layout:layout.format_table(t)
 
     for topology in ('classic','branch'):
         doc=Document();section=doc.sections[0]
@@ -107,18 +120,29 @@ def build(source,output,*,diagrams,figures=None,draft=False):
         code.paragraph_format.keep_with_next=True
         footer=section.footer.paragraphs[0];footer.alignment=WD_ALIGN_PARAGRAPH.CENTER
         footer.add_run('Страница ');field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),'PAGE');footer._p.append(field)
+        layout=None
+        if profile:
+            from .gost_layout import GostDraftLayout
+            layout=GostDraftLayout(doc,profile)
         common=content['common'];specific=content[topology];used=[]
         def para(text,style=None):return doc.add_paragraph(text,style=style)
         def paras(values):
             for text in values:para(text)
-        def head(text,level=1):return doc.add_heading(text,level=level)
+        def head(text,level=1):return layout.heading(text,level) if layout else doc.add_heading(text,level=level)
+        def equation(document,*values):
+            paragraph=native_equation(document,*values)
+            if layout:layout.number_equation(paragraph)
+            return paragraph
         def image(path,caption,source_ref=None):
             path=Path(path)
             with Image.open(path) as im:width,height=im.size
-            scale=min(6.35/width,7.8/height)
+            scale=min((float(layout.width)/914400 if layout else 6.35)/width,
+                      (float(layout.height)/914400-1.2 if layout else 7.8)/height)
+            if layout:para('На рисунке '+str(len(used)+1)+' показана следующая иллюстрация.')
             p=para('');p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.keep_with_next=True
+            if layout:p.paragraph_format.first_line_indent=Pt(0)
             p.add_run().add_picture(str(path),width=Inches(width*scale),height=Inches(height*scale))
-            c=para('Рисунок '+str(len(used)+1)+' '+caption,'Caption');c.paragraph_format.keep_together=True
+            c=para('Рисунок '+str(len(used)+1)+(' — ' if layout else ' ')+caption,'Caption');c.paragraph_format.keep_together=True
             if source_ref:para('Источник измерений: '+source_ref,'Caption')
             used.append(dict(file=str(path),sha256=digest(path),caption=caption))
         def diagram(identity,caption):image(dr/(identity+'.png'),caption)
@@ -128,6 +152,7 @@ def build(source,output,*,diagrams,figures=None,draft=False):
             elif draft:para('Черновик Измеренная иллюстрация '+identity+' подготавливается')
         para(specific['title'],'Title');para(content['edition'],'Subtitle')
         if draft:para('ЧЕРНОВИК Для внутренней проверки текста и верстки')
+        if layout:layout.structural_heading('Введение')
         paras(common['introduction'])
         head('Сегментная модель и входной паттерн')
         paras(common['model']);paras(specific['topology']);paras(common['stimulus'])
@@ -175,7 +200,8 @@ def build(source,output,*,diagrams,figures=None,draft=False):
         head('Экспериментальные примеры');ids=specific['example_order']
         name=lambda i:details.get(i,{}).get('title','Пример '+str(ids.index(i)+1))
         table(doc,['Пример','Обнаружения','Ложные ответы','Пропуски','Правильные отклонения'],
-              [[name(i),*[cases[i]['counts'][k] for k in ('TP','FP','FN','TN')]] for i in ids],[2.4,1.,1.,.85,1.1])
+              [[name(i),*[cases[i]['counts'][k] for k in ('TP','FP','FN','TN')]] for i in ids],[2.4,1.,1.,.85,1.1],
+              title='Результаты экспериментальных примеров')
         para('Указаны числа предъявлений, а не число независимых обучений. Число разных отвлекающих паттернов приведено отдельно.')
         for identity in ids:
             case=cases[identity];info=details.get(identity,{})
@@ -199,7 +225,7 @@ def build(source,output,*,diagrams,figures=None,draft=False):
           ['Модуль обучения','NNeuronTimeLearner' if topology=='classic' else 'NNeuronTimeLearnerBranch'],
           ['Управление сессией','NativeTrainingService'],['Ограниченный поиск','BoundedTrainingSession'],
           ['Составное измерение','CompositeTrainingMeasurement'],['Общая проверка','FinalVerificationSession'],
-          ['Физическая модель','NPulseNeuron']],[3.,3.35])
+          ['Физическая модель','NPulseNeuron']],[3.,3.35],title='Соответствие обязанностей и компонентов программы')
         diagram('probe-sequence','UML последовательность пробы. Расчёт такта и сбор отсчётов повторяются до закрытия окна. Контроллер не вызывает вложенный расчёт модели.')
         head('Границы подтверждённого результата');paras(common['limitations'])
         head('Источники и происхождение иллюстраций')
@@ -211,10 +237,14 @@ def build(source,output,*,diagrams,figures=None,draft=False):
         path=output/filename;doc.core_properties.title=specific['title'];doc.core_properties.language='ru-RU';doc.save(path)
         results.append(dict(topology=topology,file=filename,bytes=path.stat().st_size,sha256=digest(path),
             figures=used,draft=draft,equation_format='native_OMML',render_and_visual_review_complete=False))
+        if layout:results[-1]['layout_draft_counts']=dict(sections=layout.sections,tables=layout.tables,equations=layout.equations)
     result=dict(kind='timelearner_algorithm_docx_build',schema_version=2,edition='2026-11-19-v4',documents=results,
         inputs={str(p):digest(p) for p in (content_path,review_path,evidence_path,diagrams)},
         illustration_catalog_sha256=digest(figures) if figures else None,missing_illustrations_or_details=missing,
         draft=draft,all_comments_closed=False,visual_acceptance_complete=False,generated_binary_in_root_git=False)
+    if profile:
+        result['format_profile']=dict(path=str(format_profile),sha256=digest(format_profile),
+            layout_implemented=True,standards_compliance_accepted=False,source_content_is_preserved_v4=True)
     (output/'build.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     return result
 
@@ -222,7 +252,8 @@ def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     for name in ('source','output','diagrams'):parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--figures',type=Path);parser.add_argument('--draft',action='store_true')
-    args=parser.parse_args(argv);result=build(args.source,args.output,diagrams=args.diagrams,figures=args.figures,draft=args.draft)
+    parser.add_argument('--format-profile',type=Path,help='Explicit GOST profile; currently requires --draft')
+    args=parser.parse_args(argv);result=build(args.source,args.output,diagrams=args.diagrams,figures=args.figures,draft=args.draft,format_profile=args.format_profile)
     print(json.dumps(dict(documents=[r['file'] for r in result['documents']],draft=args.draft,
         missing_illustrations_or_details=len(result['missing_illustrations_or_details']),visual_acceptance_complete=False)))
 
