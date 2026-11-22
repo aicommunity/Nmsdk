@@ -1,0 +1,51 @@
+{
+  "kind": "timelearner_linux_count_closed_primary_wait_queues",
+  "schema_version": 1,
+  "workers": [
+    {
+      "queued": true,
+      "job": "classic-count-closed-Train-primary-m40-a1",
+      "worker_host": "M40",
+      "controls": "/media/user/Data/TimeLearnerRefactor/requests/classic-count-closed-Train-primary-m40-a1",
+      "controls_commit": "5e51c6c6d2430bfc82ba31eaead78eb51ef8b546",
+      "queue_identity": {
+        "pid": 2479497,
+        "start_ticks": "440620360",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "uid": 1000
+      },
+      "source_root": "401339a0efa7be313385e91446932e2e96998d96",
+      "wait_for_existing_recognition_closure": true,
+      "native_model_run_started": false,
+      "original_files_retained": true,
+      "no_file_deletion_authorized_or_performed": true,
+      "collected_archive_not_yet_published": true,
+      "scientific_verdict": null
+    },
+    {
+      "queued": true,
+      "job": "classic-count-closed-Train-primary-elder-a1",
+      "worker_host": "Elder-1",
+      "controls": "/home/user/timelearner-refactor/requests/classic-count-closed-Train-primary-elder-a1",
+      "controls_commit": "e52742306f9991aead41c639d3eae4adf1515789",
+      "queue_identity": {
+        "pid": 668536,
+        "start_ticks": "490078259",
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "uid": 1000
+      },
+      "source_root": "401339a0efa7be313385e91446932e2e96998d96",
+      "wait_for_existing_recognition_closure": true,
+      "native_model_run_started": false,
+      "original_files_retained": true,
+      "no_file_deletion_authorized_or_performed": true,
+      "collected_archive_not_yet_published": true,
+      "scientific_verdict": null
+    }
+  ],
+  "source_Train_and_audit_bytes_retained": true,
+  "no_native_model_executed": true,
+  "collection_begins_only_after_existing_recognition_and_reservation_closure": true,
+  "archives_not_yet_published": true,
+  "scientific_verdict": null
+}

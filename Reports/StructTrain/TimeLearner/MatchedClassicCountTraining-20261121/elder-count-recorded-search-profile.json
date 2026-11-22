@@ -1,0 +1,237 @@
+{
+  "kind": "timelearner_actual_N0_recorded_search_profile",
+  "schema_version": 1,
+  "host": "Elder-1",
+  "observed_utc": "2026-11-22T07:05:38.080155+00:00",
+  "source_summary": {
+    "path": "/home/user/timelearner-refactor/readbacks/s11-classic-count-training-elder-a1/train/native/train_stopped_summary.json",
+    "sha256": "d15df48651211104c4fc534af83e9861f787316b4103cde446336a37434730d2",
+    "size": 42116589
+  },
+  "source_prior_full_audit": {
+    "path": "/home/user/timelearner-refactor/readbacks/classic-count-full-primary-audit-elder-a3/worker/tmp/matched-count-training-audit.json",
+    "sha256": "0bc4c4d6f55e5c6d5196335c6eae7578e76d5717228474fe6b8c833a7c4e3619",
+    "size": 92250
+  },
+  "source_consumed_job": {
+    "path": "/home/user/timelearner-refactor/readbacks/s11-classic-count-training-elder-a1/train/native/job.json",
+    "sha256": "fc88da6005fd46ec63ab94a9769f88ef71265d0e8a800b5544f5f7bba96c14cb",
+    "size": 940935
+  },
+  "topology": "Classic",
+  "normalization": "N0",
+  "outcome": "budget_exhausted",
+  "reason": "native_training_time_budget_exhausted",
+  "actual_terminal_model_revision": "823f6a86f3924b9ee7e222362364ee27fca7b2c8e352d5cbe7a60957a552c824",
+  "actual_terminal_parameters": [
+    {
+      "length": 241,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 201,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "historical_model_revision": "6d8a33f1a7e1e0b3a355c6fb79cc501d8d29ec374de5ce309f7f55f15577fd90",
+  "historical_parameters": [
+    {
+      "length": 241,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 9,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "reference_complete": true,
+  "tolerances": {
+    "amplitude_absolute": 1e-05,
+    "amplitude_relative": 0,
+    "sync": 0.02
+  },
+  "recorded_candidates": 39,
+  "producer_search_probes": 80,
+  "producer_applied_edits": 38,
+  "by_input": [
+    {
+      "input_index": 0,
+      "measured_candidates": 25,
+      "timing_ready": 7,
+      "amplitude_ready": 1,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 24,
+      "repeated_commanded_vector_presentations": 1,
+      "recorded_lengths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        241
+      ],
+      "recorded_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "amplitude_residual_range": [
+        -0.024270498304848176,
+        0
+      ]
+    },
+    {
+      "input_index": 1,
+      "measured_candidates": 14,
+      "timing_ready": 6,
+      "amplitude_ready": 1,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 14,
+      "repeated_commanded_vector_presentations": 0,
+      "recorded_lengths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        201
+      ],
+      "recorded_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "amplitude_residual_range": [
+        -0.024033458249806294,
+        0
+      ]
+    },
+    {
+      "input_index": 2,
+      "measured_candidates": 0,
+      "timing_ready": 0,
+      "amplitude_ready": 0,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 0,
+      "repeated_commanded_vector_presentations": 0,
+      "recorded_lengths": [],
+      "recorded_counts": [],
+      "amplitude_residual_range": null
+    },
+    {
+      "input_index": 3,
+      "measured_candidates": 0,
+      "timing_ready": 0,
+      "amplitude_ready": 0,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 0,
+      "repeated_commanded_vector_presentations": 0,
+      "recorded_lengths": [],
+      "recorded_counts": [],
+      "amplitude_residual_range": null
+    }
+  ],
+  "terminal_fresh_all_input_verification": false,
+  "consumed_search_configuration": {
+    "bounds": [
+      {
+        "maximum_length": 256,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 128,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      },
+      {
+        "maximum_length": 256,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 128,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      },
+      {
+        "maximum_length": 256,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 128,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      },
+      {
+        "maximum_length": 1,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 1,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      }
+    ],
+    "maximum_candidates_per_input": 24,
+    "maximum_edits": 1280,
+    "maximum_invalid_observations": 4,
+    "maximum_probes": 160,
+    "maximum_sweeps": 1,
+    "resistance_subdivision_depth": 8,
+    "tolerances": {
+      "amplitude_absolute": 1e-05,
+      "amplitude_relative": 0,
+      "sync": 0.02
+    }
+  },
+  "command_vector_repetition_is_not_full_model_or_protocol_equivalence": true,
+  "full_primary_audit_not_repeated": true,
+  "classification_assessed": false,
+  "scientific_verdict": null,
+  "full_projection": {
+    "path": "/home/user/timelearner-refactor/readbacks/classic-count-recorded-search-profile-elder-a1/recorded-search-profile.json",
+    "sha256": "56f761cc1311525258be337ddd0899765f818f11fac4fdf8f11e27ab0aff0481",
+    "size": 53917
+  }
+}
