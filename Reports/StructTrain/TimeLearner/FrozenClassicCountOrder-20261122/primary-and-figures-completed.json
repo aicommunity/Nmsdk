@@ -1,0 +1,236 @@
+{
+  "observed_utc": "2026-11-22T19:55:48.701362+00:00",
+  "job": "classic-count-order-primary-and-figures-m40-k1",
+  "worker-terminal.json": {
+    "completed": true,
+    "primary_preserved": true,
+    "figures": 56,
+    "PNG": 112,
+    "visual_review_complete": false,
+    "scientific_verdict": null
+  },
+  "terminal.json": {
+    "execution": "completed",
+    "originals_retained": true,
+    "visual_review_complete": false,
+    "scientific_verdict": null
+  },
+  "primary-and-figures.json": {
+    "primary": {
+      "kind": "timelearner_complete_Classic_count_frozen_order_primary",
+      "schema_version": 1,
+      "objects": {
+        "primary.tar.xz": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/c2/c21cf720373d57be1eae0f62cdd09df880d632b4b5845e0ff741a9744fc54924",
+          "sha256": "c21cf720373d57be1eae0f62cdd09df880d632b4b5845e0ff741a9744fc54924",
+          "bytes": 2356420
+        },
+        "bundle.json": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/a9/a930cd7433b5018875623eed26e07dcb988b26c248927fe638be81152f165ac6",
+          "sha256": "a930cd7433b5018875623eed26e07dcb988b26c248927fe638be81152f165ac6",
+          "bytes": 32801
+        }
+      },
+      "members": 201,
+      "expanded_bytes": 359672318,
+      "archive_bytes": 2356420,
+      "source_primary_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-22/classic-count-M4-m40/baseline-and-threshold-primary-a1.json",
+      "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+      "threshold": 0.020736298148054874,
+      "counts": {
+        "TP": 7,
+        "FP": 7,
+        "FN": 0,
+        "TN": 42,
+        "targets": 7,
+        "foils": 49,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "by_rotation": [
+        {
+          "rotation": 1,
+          "counts": {
+            "TN": 6,
+            "FP": 1,
+            "TP": 1
+          }
+        },
+        {
+          "rotation": 2,
+          "counts": {
+            "TN": 6,
+            "FP": 1,
+            "TP": 1
+          }
+        },
+        {
+          "rotation": 3,
+          "counts": {
+            "TN": 6,
+            "FP": 1,
+            "TP": 1
+          }
+        },
+        {
+          "rotation": 4,
+          "counts": {
+            "TN": 6,
+            "FP": 1,
+            "TP": 1
+          }
+        },
+        {
+          "rotation": 5,
+          "counts": {
+            "TN": 6,
+            "FP": 1,
+            "TP": 1
+          }
+        },
+        {
+          "rotation": 6,
+          "counts": {
+            "FP": 1,
+            "TN": 6,
+            "TP": 1
+          }
+        },
+        {
+          "rotation": 7,
+          "counts": {
+            "TN": 6,
+            "TP": 1,
+            "FP": 1
+          }
+        }
+      ],
+      "all_target_positions_observed": true,
+      "original_controller_execution": "process_error",
+      "original_pipeline_success_claimed": false,
+      "every_native_artifact_and_observation_preserved": true,
+      "all_source_file_bytes_unchanged": true,
+      "training_performed": false,
+      "training_completed": false,
+      "threshold_selected": false,
+      "continuous_stream_verified": false,
+      "inter_pattern_interval_varied": false,
+      "independent_host_restoration_pending": true,
+      "scientific_verdict": null
+    },
+    "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-22/classic-count-m40-order-russian-k1",
+    "viewer": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-22/classic-count-m40-order-russian-k1/figures-full-response-k1/index.html",
+    "figures": 56,
+    "PNG": 112,
+    "actual_stimuli_and_LT_events_overlaid": true,
+    "shared_scales_and_full_positive_time_views": true,
+    "visual_review_complete": false,
+    "seconds": 67.65029269829392
+  },
+  "supervisor-result.json": {
+    "reason": null,
+    "record_errors": [],
+    "last_before_cleanup": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "dbf5a5fd7eed73e49ca90fe3fda436dc38613d8bd83730f47bc06a1d32cc0468",
+        "unit": "timelearner-03f62bba-3947-481d-9ecd-7929ffa97435.service",
+        "invocation_id": "019349aec0324bf98a897af7fd65bcaa",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-03f62bba-3947-481d-9ecd-7929ffa97435.service",
+        "initial_main_pid": 940717,
+        "initial_start_ticks": "445239203",
+        "sha256": "33c9537a9864cabd5a0aa5c9ed74a327107892163a84f3be4c66ab51476db645"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "2147483648",
+        "TasksMax": "64",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 03f62bba-3947-481d-9ecd-7929ffa97435",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "exited",
+        "InvocationID": "019349aec0324bf98a897af7fd65bcaa"
+      },
+      "memory_max": 2147483648,
+      "tasks_max": 64,
+      "scientific_verdict": null
+    },
+    "outer_binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "dbf5a5fd7eed73e49ca90fe3fda436dc38613d8bd83730f47bc06a1d32cc0468",
+      "unit": "timelearner-03f62bba-3947-481d-9ecd-7929ffa97435.service",
+      "invocation_id": "019349aec0324bf98a897af7fd65bcaa",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-03f62bba-3947-481d-9ecd-7929ffa97435.service",
+      "initial_main_pid": 940717,
+      "initial_start_ticks": "445239203",
+      "sha256": "33c9537a9864cabd5a0aa5c9ed74a327107892163a84f3be4c66ab51476db645"
+    },
+    "outer_closed": true,
+    "children_closed": [],
+    "disk_peak_increment": 129712128,
+    "minimum_free": 312086142976,
+    "execution_success_not_inferred_from_cleanup": true,
+    "scientific_verdict": null
+  },
+  "outer": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "dbf5a5fd7eed73e49ca90fe3fda436dc38613d8bd83730f47bc06a1d32cc0468",
+      "unit": "timelearner-03f62bba-3947-481d-9ecd-7929ffa97435.service",
+      "invocation_id": "019349aec0324bf98a897af7fd65bcaa",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-03f62bba-3947-481d-9ecd-7929ffa97435.service",
+      "initial_main_pid": 940717,
+      "initial_start_ticks": "445239203",
+      "sha256": "33c9537a9864cabd5a0aa5c9ed74a327107892163a84f3be4c66ab51476db645"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-03f62bba-3947-481d-9ecd-7929ffa97435.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "reserved": {
+    "disk_bytes": 0,
+    "memory_bytes": 0,
+    "slots": 0
+  }
+}
