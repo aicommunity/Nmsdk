@@ -1,0 +1,497 @@
+{
+  "kind": "timelearner_real_count_stopped_recognition_followup",
+  "schema_version": 1,
+  "source_commit": "a440fd346e8b5951cda591d2f0c0327410c78922",
+  "queues": [
+    {
+      "worker": "elder",
+      "dispatch": {
+        "queued": true,
+        "job": "s11-classic-count-recognition-elder-a1",
+        "supervisor": {
+          "pid": 135439,
+          "start_ticks": "488986863",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "output": "/home/user/timelearner-refactor/readbacks/s11-classic-count-recognition-elder-a1",
+        "source_primary_audit_must_complete": true,
+        "scientific_verdict": null,
+        "source_commit": "a440fd346e8b5951cda591d2f0c0327410c78922",
+        "source_projection_pack": {
+          "bytes": 4927676,
+          "sha256": "4992b9a0c76c191c1eb2d735067b60a7c2b6ebd54fd46d2f778eaad9b2c15516"
+        },
+        "controls_commit": "5178725c74a1148708a647da81c2b703991f84d6",
+        "native_baseline_not_started": true,
+        "original_Train_not_restarted": true,
+        "new_controller_requires_actual_runtime_validation": true
+      },
+      "actual_recognition_supervisor": {
+        "job": "s11-classic-count-recognition-elder-a1",
+        "dispatched.json": {
+          "pid": 135439,
+          "start_ticks": "488986863",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "supervisor-identity.json": {
+          "pid": 135439,
+          "start_ticks": "488986863",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "actual_supervisor": {
+          "exists": true,
+          "matching": true,
+          "identity": {
+            "pid": 135439,
+            "start_ticks": "488986863",
+            "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+            "uid": 1000
+          }
+        },
+        "phases": {}
+      },
+      "source_Train_kernel": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "ea0282ed856e07dc6d0c5be485c3fe45bafbebcaa56039819f36ecf20dd92c2f",
+          "unit": "timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+          "invocation_id": "b4c947258b63437aa89702d34f6c1834",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+          "initial_main_pid": 2836090,
+          "initial_start_ticks": "486111793",
+          "sha256": "22eba6ed2a2fe6c9792c1ec9c53b946d4a2c89b6564d77139c563433b8ef7e89"
+        }
+      },
+      "source_audit_queue": {
+        "reason": "waiting_for_original_native_and_controller_closure",
+        "observed_utc": "2026-11-22T04:02:27.623526+00:00",
+        "native_closed": false,
+        "controller_closed": false,
+        "elapsed_wait_seconds": 1983.621471508406,
+        "no_Train_restarted": true,
+        "scientific_verdict": null
+      },
+      "template": {
+        "host": "Elder-1",
+        "template": {
+          "path": "/home/user/timelearner-refactor/readbacks/s11-prepared-long-model-threshold-elder-a1-inputs/native-job-source.json",
+          "sha256": "458835c52d6b80e03846e33f8bb6c04b4a6323d5b053a932acb61f734585db2d",
+          "size": 5970
+        },
+        "criterion": {
+          "id": "post_anchor_target_whole_window_foil_v1",
+          "anchor": "onset",
+          "begin_offset": 0.0,
+          "end_offset": null,
+          "reject_target_outside_window": true
+        },
+        "coverage_policy": "per_trial_windows",
+        "trials": [
+          {
+            "sample_id": "phasea-row-0",
+            "label": "target",
+            "pattern_isi": [
+              0.01,
+              0.08,
+              0.16,
+              0.24
+            ],
+            "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-1",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.24,
+              0.16,
+              0.08
+            ],
+            "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-2",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.16,
+              0.08,
+              0.24
+            ],
+            "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-3",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.16,
+              0.16,
+              0.16
+            ],
+            "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-4",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.02,
+              0.22,
+              0.24
+            ],
+            "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-5",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.24,
+              0.22,
+              0.02
+            ],
+            "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-6",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.04,
+              0.04,
+              0.4
+            ],
+            "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-7",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.4,
+              0.04,
+              0.04
+            ],
+            "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          }
+        ],
+        "actual_count_configuration_is_Classic": true,
+        "original_count_request": {
+          "path": "/home/user/timelearner-refactor/requests/s11-classic-count-training-elder-a1/request.json",
+          "sha256": "87bcd88ab30cd3a5155bae80688b24d8dc55ff0dbf5aaaff43b07b71905cca9d",
+          "size": 1595
+        },
+        "native_runtime": {
+          "path": "/home/user/timelearner-refactor/requests/s11-classic-count-training-elder-a1/runtime.json",
+          "sha256": "5a9b5e546775adf23ae484a68e61ee61c52978dcc6a5b26ae23902cee9819d72",
+          "size": 12127
+        },
+        "sdk_source": "/home/user/timelearner-refactor/source-terminal-export-linux-a1",
+        "capacity": {
+          "disk_bytes": 15032385536,
+          "memory_bytes": 25769803776,
+          "slots": 1
+        },
+        "reserved": {
+          "disk_bytes": 8589934592,
+          "memory_bytes": 19327352832,
+          "slots": 1
+        }
+      }
+    },
+    {
+      "worker": "m40",
+      "dispatch": {
+        "queued": true,
+        "job": "s11-classic-count-recognition-m40-a1",
+        "supervisor": {
+          "pid": 1951775,
+          "start_ticks": "439529265",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-recognition-m40-a1",
+        "source_primary_audit_must_complete": true,
+        "scientific_verdict": null,
+        "source_commit": "a440fd346e8b5951cda591d2f0c0327410c78922",
+        "source_projection_pack": {
+          "bytes": 4927676,
+          "sha256": "4992b9a0c76c191c1eb2d735067b60a7c2b6ebd54fd46d2f778eaad9b2c15516"
+        },
+        "controls_commit": "39753e5fd4418a02fbd6f9bea29372f218b80acc",
+        "native_baseline_not_started": true,
+        "original_Train_not_restarted": true,
+        "new_controller_requires_actual_runtime_validation": true
+      },
+      "actual_recognition_supervisor": {
+        "job": "s11-classic-count-recognition-m40-a1",
+        "dispatched.json": {
+          "pid": 1951775,
+          "start_ticks": "439529265",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "supervisor-identity.json": {
+          "pid": 1951775,
+          "start_ticks": "439529265",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "actual_supervisor": {
+          "exists": true,
+          "matching": true,
+          "identity": {
+            "pid": 1951775,
+            "start_ticks": "439529265",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "uid": 1000
+          }
+        },
+        "phases": {}
+      },
+      "source_Train_kernel": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "ef7ad78868de3e9515ab94aecf175effaf94b7245a4e1496d59a3b1e7171a222",
+          "unit": "timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+          "invocation_id": "07a94cfc2631458f988f19e653f65489",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+          "initial_main_pid": 173265,
+          "initial_start_ticks": "436251545",
+          "sha256": "dc90ba704f52ae142c785daf02d83f337574c2aa32924bcbf41404056a5f3a81"
+        }
+      },
+      "source_audit_queue": {
+        "reason": "waiting_for_original_native_and_controller_closure",
+        "observed_utc": "2026-11-22T04:02:30.890917+00:00",
+        "native_closed": false,
+        "controller_closed": false,
+        "elapsed_wait_seconds": 2101.7266112649813,
+        "no_Train_restarted": true,
+        "scientific_verdict": null
+      },
+      "template": {
+        "host": "M40",
+        "template": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-prepared-long-model-threshold-m40-a1-inputs/native-job-source.json",
+          "sha256": "810cd728d2001432d1c89d6413bebd518fbeeb54812da13e8f73c075c83e00cc",
+          "size": 5948
+        },
+        "criterion": {
+          "id": "post_anchor_target_whole_window_foil_v1",
+          "anchor": "onset",
+          "begin_offset": 0.0,
+          "end_offset": null,
+          "reject_target_outside_window": true
+        },
+        "coverage_policy": "per_trial_windows",
+        "trials": [
+          {
+            "sample_id": "phasea-row-0",
+            "label": "target",
+            "pattern_isi": [
+              0.01,
+              0.08,
+              0.16,
+              0.24
+            ],
+            "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-1",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.24,
+              0.16,
+              0.08
+            ],
+            "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-2",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.16,
+              0.08,
+              0.24
+            ],
+            "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-3",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.16,
+              0.16,
+              0.16
+            ],
+            "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-4",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.02,
+              0.22,
+              0.24
+            ],
+            "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-5",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.24,
+              0.22,
+              0.02
+            ],
+            "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-6",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.04,
+              0.04,
+              0.4
+            ],
+            "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          },
+          {
+            "sample_id": "phasea-row-7",
+            "label": "foil",
+            "pattern_isi": [
+              0.01,
+              0.4,
+              0.04,
+              0.04
+            ],
+            "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+            "reset_policy": "reset_per_trial",
+            "duration": 2.0,
+            "maximum_samples": 4005,
+            "record_threshold_potential": true
+          }
+        ],
+        "actual_count_configuration_is_Classic": true,
+        "original_count_request": {
+          "path": "/media/user/Data/TimeLearnerRefactor/requests/s11-classic-count-training-m40-a1/request.json",
+          "sha256": "042841c860e52145c4954d242a566b24b46ecb7354043859576042b05155a716",
+          "size": 1612
+        },
+        "native_runtime": {
+          "path": "/media/user/Data/TimeLearnerRefactor/requests/s11-classic-count-training-m40-a1/runtime.json",
+          "sha256": "c970b104fd7f25730e40fe4f9983cc11608a668b6ee242efe3f6d89476c3b0ee",
+          "size": 12658
+        },
+        "sdk_source": "/media/user/Data/TimeLearnerRefactor/source-native-dynamics-continuity-sdk-a1",
+        "capacity": {
+          "disk_bytes": 34359738368,
+          "memory_bytes": 34359738368,
+          "slots": 1
+        },
+        "reserved": {
+          "disk_bytes": 17179869184,
+          "memory_bytes": 19327352832,
+          "slots": 1
+        }
+      }
+    }
+  ],
+  "new_controller_launched_and_kernel_verified": true,
+  "phase_execution_not_yet_verified": true,
+  "stages": [
+    "full_primary_audit_must_pass",
+    "baseline_prepare",
+    "actual_eight_pattern_baseline",
+    "complete_baseline_audit",
+    "same_matrix_threshold_prepare",
+    "actual_threshold_confirmation",
+    "complete_confirmation_audit"
+  ],
+  "old_Train_not_restarted": true,
+  "native_runtime_unchanged": true,
+  "mathematical_Train_goal_and_budgets_unchanged": true,
+  "reported_counts": null,
+  "source_Train_certificate_inferred": false,
+  "heavy_data_added_to_Git": false,
+  "scientific_verdict": null
+}
