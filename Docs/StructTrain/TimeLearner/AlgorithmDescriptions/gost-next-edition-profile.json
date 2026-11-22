@@ -34,7 +34,7 @@
         "ИУС 3-2020",
         "ИУС 1-2022"
       ],
-      "full_correction_text_review_complete": false
+      "full_correction_text_review_complete": true
     },
     {
       "designation": "ГОСТ Р 7.0.100-2018",
@@ -44,7 +44,8 @@
       "catalog_corrections": [
         "ИУС 3-2020"
       ],
-      "full_text_review_complete": false
+      "full_text_review_complete": false,
+      "full_correction_text_review_complete": true
     }
   ],
   "page": {
@@ -102,7 +103,7 @@
     "clause": "7.32-2017:6.8"
   },
   "release_gates": {
-    "applicable_corrections_reviewed": false,
+    "applicable_corrections_reviewed": true,
     "bibliography_and_citations_reviewed": false,
     "administrative_cover_metadata_verified_or_parent_report_scope_declared": false,
     "builder_support_implemented": false,
@@ -123,5 +124,6 @@
   },
   "previous_runtime_readiness_record": "DocumentRuntimeReadiness-20261122.json",
   "user_authorized_installed_LibreOffice_for_this_pair": true,
-  "remaining_content_update": "Refresh from subsequent audited model evaluations; matched Branch Train comparison and Classic56 order result are already incorporated in a12"
+  "remaining_content_update": "Refresh from subsequent audited model evaluations; matched Branch Train comparison and Classic56 order result are already incorporated in a12",
+  "correction_review": "GostCorrectionReview-20261122.json"
 }
