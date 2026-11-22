@@ -92,7 +92,7 @@ public:
     std::map<std::string,ValidatedProbeMeasurement> observedScalars;
     std::vector<double> groupBegins;
     unsigned frequency;std::size_t rawSamples=0,preparations=0;
-    NativeCompositeFixture(unsigned hz=2000,bool merged=false,std::size_t groupBudget=64,bool bindC0=false,bool n0=false,bool connectedNeed=false,std::size_t dimension=2,double wallBudget=0.,bool distinctAttachments=false,double probeDuration=0.,int maximumCableLength=8):frequency(hz) {
+    NativeCompositeFixture(unsigned hz=2000,bool merged=false,std::size_t groupBudget=64,bool bindC0=false,bool n0=false,bool connectedNeed=false,std::size_t dimension=2,double wallBudget=0.,bool distinctAttachments=false,double probeDuration=0.,int maximumCableLength=8,int initialFirstInputSynapses=1):frequency(hz) {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();storage=core.storage;environment=core.environment;
         environment->DestroyModel();environment->SetUseIndTimeStepFlag(false);environment->GetTime().SetTime(0);
         Require(environment->CreateModel("NModel"),"composite_fixture_model");model=dynamic_pointer_cast<UNet>(environment->GetModel());
@@ -109,7 +109,7 @@ public:
         NativeModelSpec s;s.branch=branch;s.frequencyHz=hz;s.neuronClass=registered.neuronClass;
         s.normalization=n0?Normalization::SynapseCount:Normalization::TipResistance;
         s.editPolicy.normalization=s.normalization;s.editPolicy.maximumCableLength=maximumCableLength;
-        for(std::size_t i=0;i<dimension;++i){s.inputs.push_back({distinctAttachments?int(dimension-i):(i+1==dimension?1:2),1,{}});s.initialIsi.push_back(i?((merged && i==1)?.001:.08):.01);}
+        for(std::size_t i=0;i<dimension;++i){s.inputs.push_back({distinctAttachments?int(dimension-i):(i+1==dimension?1:2),i?1:initialFirstInputSynapses,{}});s.initialIsi.push_back(i?((merged && i==1)?.001:.08):.01);}
         modelSpec=s;
         const auto built=owner->ConstructNativeModel(s);Require(built.status==NativeModelBuildStatus::Constructed,built.reason.c_str());
         model->Init();model->Reset();
@@ -469,9 +469,11 @@ template<class Owner> void SaveMeasuredCountGroup(NativeCompositeFixture<Owner>&
 // ask the production controller to propose and MEASURE an integer from the two
 // actual same-geometry responses. No waveform, peak or reference is invented.
 template<class Owner> void MeasuredCountNativeProposal(unsigned frequency) {
-    NativeCompositeFixture<Owner> f(frequency,false,32,false,true);
-    const auto original=f.owner->ReadNativeParameters();auto captured=original;captured[0].synapses=8;
-    auto edit=f.owner->ApplyNativeParameters(captured);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    // Declare the reference graph before native construction. Parameter edits
+    // require a consumed probe boundary; a newly built actor has none yet.
+    NativeCompositeFixture<Owner> f(frequency,false,32,false,true,false,2,0.,false,0.,8,8);
+    const auto captured=f.owner->ReadNativeParameters();auto original=captured;original[0].synapses=1;
+    ASSERT_EQ(captured[0].synapses,8);
     ASSERT_EQ(f.owner->ReadNativeParameters(),captured);
     for(std::size_t i=0;i<f.protocol.inputs.size();++i) {
         f.Run(f.Request(i,"count-reference","count-reference/"+std::to_string(i)),CompositeMeasurementPurpose::Reference);
@@ -480,14 +482,14 @@ template<class Owner> void MeasuredCountNativeProposal(unsigned frequency) {
         f.referenceMeasurements.push_back(*f.attempt->Measurement());
     }
     const auto references=CapturedReferences::CaptureComposite(f.protocol,f.referenceMeasurements);
-    edit=f.owner->ApplyNativeParameters(original);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    const auto edit=f.owner->ApplyNativeParameters(original);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
     ASSERT_EQ(f.owner->ReadNativeParameters(),original);
     BoundedTrainingConfig cfg;cfg.runId="native-measured-count";cfg.initialModelRevision=f.Revision();cfg.initialModelEpoch=1;
     cfg.normalization=Normalization::SynapseCount;cfg.maximumProbes=32;cfg.maximumEdits=16;
     cfg.maximumCandidatesPerInput=8;cfg.maximumSweeps=1;cfg.tolerances.sync=.2;
     for(const auto& p:original)cfg.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
     cfg.bounds[0].maximumSynapses=16;
-    BoundedTrainingSession search(references,cfg,original,false,f.owner->ReadNativeTrainingCapacitance());
+    BoundedTrainingSession search(references,cfg,original,NativeCompositeFixture<Owner>::branch,f.owner->ReadNativeTrainingCapacitance());
     std::vector<CandidateEvidence> measured;std::size_t actions=0;std::optional<int> expectedProposal;
     while(const auto action=search.NextAction()) {
         ASSERT_LT(++actions,32u);ASSERT_FALSE(action->finalVerification);EXPECT_FALSE(search.Certificate());

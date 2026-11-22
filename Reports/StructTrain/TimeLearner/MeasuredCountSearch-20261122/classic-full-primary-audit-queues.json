@@ -1,0 +1,207 @@
+{
+  "kind": "timelearner_classic_count_closed_primary_audit_queues",
+  "schema_version": 1,
+  "queues": [
+    {
+      "worker": "elder",
+      "queued": {
+        "queued": true,
+        "controls": "/home/user/timelearner-refactor/requests/classic-count-full-primary-audit-elder-a3",
+        "controls_commit": "30154644752e58843863621b6b6546e17960125d",
+        "source_commit": "130bea88482bf84ae3e38004cdd6a435c67e3844",
+        "queue_owner": {
+          "pid": 31504,
+          "start_ticks": "488793467",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "original_native_pid": 2836090,
+        "original_controller_pid": 2832337,
+        "waits_for_original_groups_and_reservations": true,
+        "full_primary_read_once": true,
+        "maximum_wait_seconds": 14400,
+        "audit_memory_bytes": 17179869184,
+        "actual_audit_not_yet_executed": true,
+        "new_Train_started": false,
+        "scientific_verdict": null
+      },
+      "actual_observation": {
+        "observed_utc": "2026-11-22T03:30:41.077788+00:00",
+        "host": "Elder-1",
+        "disk_free_bytes": 57510395904,
+        "job": "s11-classic-count-training-elder-a1",
+        "raw_trial_files_present": 450,
+        "native-kernel": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "reason": "kernel_cgroup_observed",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "ea0282ed856e07dc6d0c5be485c3fe45bafbebcaa56039819f36ecf20dd92c2f",
+            "unit": "timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+            "invocation_id": "b4c947258b63437aa89702d34f6c1834",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-90278466-d2c8-4061-8c1c-dca1d8570ab4.service",
+            "initial_main_pid": 2836090,
+            "initial_start_ticks": "486111793",
+            "sha256": "22eba6ed2a2fe6c9792c1ec9c53b946d4a2c89b6564d77139c563433b8ef7e89"
+          }
+        },
+        "controller-kernel": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "reason": "kernel_cgroup_observed",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "491ab45e0815cfe989174366805a286e184299d4bb4ceb8c48f8949db12ec7e0",
+            "unit": "timelearner-ff34a266-3a97-41dc-96c7-5c224233b87d.service",
+            "invocation_id": "bbd50aa93c9947d0bbd00e370f1a8bed",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ff34a266-3a97-41dc-96c7-5c224233b87d.service",
+            "initial_main_pid": 2832337,
+            "initial_start_ticks": "486110391",
+            "sha256": "4b34acf90cf82fb4d9c824548c414d625cd80269ecb7c1ec70aff9c2872abe04"
+          }
+        },
+        "audit_queue": {
+          "name": "classic-count-full-primary-audit-elder-a3",
+          "queue-state.json": {
+            "reason": "waiting_for_original_native_and_controller_closure",
+            "observed_utc": "2026-11-22T03:30:39.154032+00:00",
+            "native_closed": false,
+            "controller_closed": false,
+            "elapsed_wait_seconds": 75.15197825524956,
+            "no_Train_restarted": true,
+            "scientific_verdict": null
+          },
+          "queue-owner.json": {
+            "pid": 31504,
+            "start_ticks": "488793467",
+            "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+            "uid": 1000
+          },
+          "actual_owner": {
+            "exists": true,
+            "matching": true,
+            "identity": {
+              "pid": 31504,
+              "start_ticks": "488793467",
+              "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+              "uid": 1000
+            }
+          }
+        }
+      }
+    },
+    {
+      "worker": "m40",
+      "queued": {
+        "queued": true,
+        "controls": "/media/user/Data/TimeLearnerRefactor/requests/classic-count-full-primary-audit-m40-a3",
+        "controls_commit": "91fc73cd4fc626c583dd1567197476c8a56357b7",
+        "source_commit": "130bea88482bf84ae3e38004cdd6a435c67e3844",
+        "queue_owner": {
+          "pid": 1836091,
+          "start_ticks": "439324665",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "original_native_pid": 173265,
+        "original_controller_pid": 169513,
+        "waits_for_original_groups_and_reservations": true,
+        "full_primary_read_once": true,
+        "maximum_wait_seconds": 14400,
+        "audit_memory_bytes": 17179869184,
+        "actual_audit_not_yet_executed": true,
+        "new_Train_started": false,
+        "scientific_verdict": null
+      },
+      "actual_observation": {
+        "observed_utc": "2026-11-22T03:30:40.880751+00:00",
+        "host": "M40",
+        "disk_free_bytes": 325216518144,
+        "job": "s11-classic-count-training-m40-a1",
+        "raw_trial_files_present": 614,
+        "native-kernel": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "reason": "kernel_cgroup_observed",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "ef7ad78868de3e9515ab94aecf175effaf94b7245a4e1496d59a3b1e7171a222",
+            "unit": "timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+            "invocation_id": "07a94cfc2631458f988f19e653f65489",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+            "initial_main_pid": 173265,
+            "initial_start_ticks": "436251545",
+            "sha256": "dc90ba704f52ae142c785daf02d83f337574c2aa32924bcbf41404056a5f3a81"
+          }
+        },
+        "controller-kernel": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "reason": "kernel_cgroup_observed",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "e857c5757caacd525c8b2e381f6de0ea50ba4d397f2e891016c868262d17f837",
+            "unit": "timelearner-b866cd9b-7595-470d-ba74-1a87675afd01.service",
+            "invocation_id": "e19e53b08f52478b992e27f3884b958e",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b866cd9b-7595-470d-ba74-1a87675afd01.service",
+            "initial_main_pid": 169513,
+            "initial_start_ticks": "436249423",
+            "sha256": "2b6887fc93b666400faf2d7282fbbdfe841ebc3f980a28c1eb1355019d06fe25"
+          }
+        },
+        "audit_queue": {
+          "name": "classic-count-full-primary-audit-m40-a3",
+          "queue-state.json": {
+            "reason": "waiting_for_original_native_and_controller_closure",
+            "observed_utc": "2026-11-22T03:30:29.323136+00:00",
+            "native_closed": false,
+            "controller_closed": false,
+            "elapsed_wait_seconds": 180.1588301844895,
+            "no_Train_restarted": true,
+            "scientific_verdict": null
+          },
+          "queue-owner.json": {
+            "pid": 1836091,
+            "start_ticks": "439324665",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "uid": 1000
+          },
+          "actual_owner": {
+            "exists": true,
+            "matching": true,
+            "identity": {
+              "pid": 1836091,
+              "start_ticks": "439324665",
+              "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+              "uid": 1000
+            }
+          }
+        }
+      }
+    }
+  ],
+  "wait_for_original_native_controller_and_lease_closure": true,
+  "source_commit": "130bea88482bf84ae3e38004cdd6a435c67e3844",
+  "audit_memory_bytes": 17179869184,
+  "primary_audit_not_yet_executed": true,
+  "new_Train_started": false,
+  "Elder_delivery": {
+    "kind": "standalone_git_source_projection",
+    "selected_files": 918,
+    "bytes": 4922395,
+    "sha256": "16c78b77b16e42bfffc048df451418e0a8bc731eab493df5a0bc1b6b3f3ce4b2",
+    "reason": "Elder cannot resolve github.com; no DNS/system configuration changed; exact Git objects delivered through jump host."
+  },
+  "earlier_prepare_errors_preserved": [
+    "Elder hostname is Elder-1",
+    "stdin public operator has no readable __file__",
+    "outer Python wrapper indented an embedded string; fixed before dispatch"
+  ],
+  "heavy_primary_added_to_Git": false,
+  "scientific_verdict": null
+}
