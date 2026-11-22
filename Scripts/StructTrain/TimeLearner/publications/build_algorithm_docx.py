@@ -234,6 +234,12 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
                 para('Индексы a и b обозначают измеренные концы выбранного интервала с разными знаками амплитудной ошибки. Применимость уточнения проверяется до вычисления нового сопротивления.')
             if diagram_id:diagram(diagram_id,title+' с повторным измерением времени и амплитуды.')
             if concept_id:concept(concept_id)
+            if key=='n0' and specific.get('count_search_comparison'):
+                comparison=specific['count_search_comparison']
+                paras(comparison['explanation'])
+                table(doc,comparison['headers'],comparison['rows'],
+                      [.6,1.2,1.2,1.6,1.6],title=comparison['table_title'])
+                para(comparison['source_ref'])
         head('Завершение обучения и распознавание');paras(common['finalization']);paras(common['recognition'])
         head('Экспериментальные примеры');ids=specific['example_order']
         name=lambda i:details.get(i,{}).get('title','Пример '+str(ids.index(i)+1))
@@ -279,15 +285,17 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
         table(doc,['Обязанность','Точное имя в программе'],implementation_rows,[3.,3.35],title='Соответствие обязанностей и компонентов программы')
         diagram('probe-sequence','UML последовательность пробы. Расчёт такта и сбор отсчётов повторяются до закрытия окна. Контроллер не вызывает вложенный расчёт модели.')
         head('Границы подтверждённого результата');paras(common['limitations'])
-        head('Источники и происхождение иллюстраций')
         if next_edition:
             para('Сегментные модели нейрона рассматриваются в работах [1, 2]. Действующий алгоритм и результаты этого отчёта описаны по приведённым версиям реализации и измерений.')
+            para('Полные временные отчёты содержат реакции на весь набор паттернов. Выбранные измеренные иллюстрации в этом документе не являются новыми независимыми опытами.')
+            layout.structural_heading('Список использованных источников')
             for reference in content['bibliography']:para(reference)
         else:
+            head('Источники и происхождение иллюстраций')
             para('Публикации авторов служат образцом стиля и терминологии. Объяснение действующего алгоритма основано на реализации и измерениях.')
             para('Корсаков А. М., Астапова Л. А., Бахшиев А. В. Применение сегментной спайковой модели нейрона со структурной адаптацией для решения задач классификации. Информатика и автоматизация. 2022. Том 21. № 3. DOI 10.15622/ia.21.3.2.')
             para('Бахшиев А. В., Гунделах Ф. В. Математическая модель преобразования импульсов в естественных нейронах для разработки биологически вдохновлённых систем управления. Предоставленная авторами рукопись 2015 года; название приведено в переводе.')
-        para('Полные временные отчёты содержат реакции на весь набор паттернов. Выбранные измеренные иллюстрации в этом документе не являются новыми независимыми опытами.')
+            para('Полные временные отчёты содержат реакции на весь набор паттернов. Выбранные измеренные иллюстрации в этом документе не являются новыми независимыми опытами.')
         filename='TimeLearner'+('Classic' if topology=='classic' else 'Branch')+'Algorithms.ru.docx'
         if formula_definitions and layout.equations!=len(formula_definitions):raise ValueError('Unconsumed formula definitions')
         path=output/filename;doc.core_properties.title=specific['title'];doc.core_properties.language='ru-RU';doc.save(path)

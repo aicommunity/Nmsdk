@@ -1,0 +1,3288 @@
+{
+  "kind": "timelearner_actual_N0_recorded_search_profile",
+  "schema_version": 1,
+  "source_summary": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_summary.json",
+    "sha256": "9656a50156b7c456e3cec859f3337858b57f24322bc7b7904c0d7ed5216638b3",
+    "size": 28999225
+  },
+  "source_prior_full_audit": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-closed-measured-count-primary-audit-i1\\tmp\\matched-count-training-audit.json",
+    "sha256": "db1d56ad10c8b0c734753f08befab55a61690e6d0ef6c83eb59ba601f13ad96c",
+    "size": 171641
+  },
+  "source_consumed_job": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\job.json",
+    "sha256": "27402e299b0f1a184e448fd481ea6c05c5533e40ddf7903761350f87304cefba",
+    "size": 940886
+  },
+  "topology": "Branch",
+  "normalization": "N0",
+  "outcome": "budget_exhausted",
+  "reason": "maximum_sweeps_exhausted",
+  "actual_terminal_model_revision": "b3286d53576e57d37b753b244b8e6261a97086f034bc6cf7efbd610410ff9b23",
+  "actual_terminal_parameters": [
+    {
+      "length": 239,
+      "resistance": 86000000,
+      "synapses": 12
+    },
+    {
+      "length": 201,
+      "resistance": 86000000,
+      "synapses": 10
+    },
+    {
+      "length": 121,
+      "resistance": 86000000,
+      "synapses": 8
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "historical_model_revision": "2f47ac9e86552fa9f80f82e2a4a4d6fd554074a916a0e85529ce0d3d3ab47723",
+  "historical_parameters": [
+    {
+      "length": 239,
+      "resistance": 86000000,
+      "synapses": 12
+    },
+    {
+      "length": 201,
+      "resistance": 86000000,
+      "synapses": 10
+    },
+    {
+      "length": 121,
+      "resistance": 86000000,
+      "synapses": 8
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "reference_complete": true,
+  "tolerances": {
+    "amplitude_absolute": 1e-05,
+    "amplitude_relative": 0,
+    "sync": 0.02
+  },
+  "recorded_candidates": 75,
+  "producer_search_probes": 154,
+  "producer_applied_edits": 72,
+  "by_input": [
+    {
+      "input_index": 0,
+      "measured_candidates": 25,
+      "timing_ready": 7,
+      "amplitude_ready": 0,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 24,
+      "repeated_commanded_vector_presentations": 1,
+      "recorded_lengths": [
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        239
+      ],
+      "recorded_counts": [
+        1,
+        2,
+        3,
+        10,
+        11,
+        12
+      ],
+      "amplitude_residual_range": [
+        -0.02426538809989698,
+        -0.0010666490378833382
+      ]
+    },
+    {
+      "input_index": 1,
+      "measured_candidates": 25,
+      "timing_ready": 7,
+      "amplitude_ready": 0,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 24,
+      "repeated_commanded_vector_presentations": 1,
+      "recorded_lengths": [
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        201
+      ],
+      "recorded_counts": [
+        1,
+        2,
+        3,
+        4,
+        10
+      ],
+      "amplitude_residual_range": [
+        -0.024033458249806294,
+        -0.002245119356194647
+      ]
+    },
+    {
+      "input_index": 2,
+      "measured_candidates": 25,
+      "timing_ready": 7,
+      "amplitude_ready": 1,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 24,
+      "repeated_commanded_vector_presentations": 1,
+      "recorded_lengths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        24,
+        48,
+        96,
+        121
+      ],
+      "recorded_counts": [
+        1,
+        2,
+        3,
+        4,
+        8
+      ],
+      "amplitude_residual_range": [
+        -0.02347230991428706,
+        0
+      ]
+    },
+    {
+      "input_index": 3,
+      "measured_candidates": 0,
+      "timing_ready": 0,
+      "amplitude_ready": 0,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 0,
+      "repeated_commanded_vector_presentations": 0,
+      "recorded_lengths": [],
+      "recorded_counts": [],
+      "amplitude_residual_range": null
+    }
+  ],
+  "candidate_rows": [
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/2",
+      "model_revision": "ab751ba723852917588b694d156f1d8c9033b8b0a0ec7b8e93faacec0d747dc4",
+      "model_epoch": 0,
+      "parameters": {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": 0,
+      "timing_low": -0.23999999999999488,
+      "timing_high": -0.23999999999999488,
+      "within_timing": false,
+      "within_amplitude": true,
+      "parameter_change_cost": 0,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/2/composite/6",
+      "semantic_proof_id": "0d8a4119bb6f73ecdbbb0676f2af42783b8f584850ea579c56b2f25819e21f92"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/5",
+      "model_revision": "5139733fda463a9828f84dcbad21a522a5d8a48ca1cbb0a7f153998861371bcc",
+      "model_epoch": 1,
+      "parameters": {
+        "length": 2,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.005101293201065005,
+      "timing_low": -0.23799999999999955,
+      "timing_high": -0.23799999999999955,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 3,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/5/composite/8",
+      "semantic_proof_id": "ba5521a558f46b902ad43cd16484e77576c4255138a8bbeaa69586195c7dc8e8"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/8",
+      "model_revision": "343aa98f2e2c3ff8a523554602407eb15ef9c5c24a3237fd5203ff6e2ace31c2",
+      "model_epoch": 2,
+      "parameters": {
+        "length": 3,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 3,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.008111309598994643,
+      "timing_low": -0.2360000000000042,
+      "timing_high": -0.2360000000000042,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 6,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/8/composite/10",
+      "semantic_proof_id": "e5ab766ea42ebb002acf68cc03c3853df9ad4e8c1897e6003966bacac2a5ad86"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/11",
+      "model_revision": "fb3e9f279c7fbeebc93ff69841c04b3cff15a55c0511ad67b758dac094182c80",
+      "model_epoch": 3,
+      "parameters": {
+        "length": 6,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 6,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.01279131403812106,
+      "timing_low": -0.23000000000000398,
+      "timing_high": -0.23000000000000398,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 15,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/11/composite/12",
+      "semantic_proof_id": "4520653d02ecec12ce0065df004b0fd0b17eba98ea0e1abb76ca8a55209e29e0"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/14",
+      "model_revision": "cc7902337ce5fef7553a2aae57340193c34fa0f555f4fe109ebb8ef69e10f5af",
+      "model_epoch": 4,
+      "parameters": {
+        "length": 12,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 12,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.016579494047095578,
+      "timing_low": -0.2179999999999893,
+      "timing_high": -0.2179999999999893,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 33,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/14/composite/14",
+      "semantic_proof_id": "c703a5f3538766e1bedddf532b0e2e12854629efcf70f8368f9850c5313bbb3d"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/17",
+      "model_revision": "496cf20c63682440d71e680ee43f0b8c5907178ba1e304857323e4f7914f97c3",
+      "model_epoch": 5,
+      "parameters": {
+        "length": 24,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 24,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.01945183799036998,
+      "timing_low": -0.1939999999999884,
+      "timing_high": -0.1939999999999884,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 69,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/17/composite/16",
+      "semantic_proof_id": "4af690ff676713b7a1d391425929a216370aa40027902dddb2f73a5472b64bfa"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/20",
+      "model_revision": "d26becaf887827d67d872c39765311e1e94d1501ec7362ced474a22417b0a7bb",
+      "model_epoch": 6,
+      "parameters": {
+        "length": 48,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 48,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 48,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 48,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02155578532061153,
+      "timing_low": -0.146000000000015,
+      "timing_high": -0.146000000000015,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 141,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/20/composite/18",
+      "semantic_proof_id": "c8862156f88fdbd6f6e61de4a835e6a86cdfe026fb67e482ac030a4c0ea1221b"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/23",
+      "model_revision": "5dd3558e1fd235d0e2d1ed364ebabdeaffa8265bf4c3a3c8982d1f6939f743d7",
+      "model_epoch": 7,
+      "parameters": {
+        "length": 96,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 96,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 96,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 96,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.023070043640849636,
+      "timing_low": -0.04999999999998295,
+      "timing_high": -0.04999999999998295,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 285,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/23/composite/20",
+      "semantic_proof_id": "92c4a5ff73c574c963adb78255a2e415073ddab0d7243cc3e76b3fa0580c6939"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/26",
+      "model_revision": "8d29eec440c71954dbaf7a1bf961b80ccf13262d173e0972caf58e71da8b75f7",
+      "model_epoch": 8,
+      "parameters": {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02347230991428706,
+      "timing_low": -2.842170943040401e-14,
+      "timing_high": -2.842170943040401e-14,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 360,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/26/composite/22",
+      "semantic_proof_id": "4236b3646dd2d7c4f1187f76f0760cf6e3ec8ba79a9d5c558a1a2a4d24e65fb2"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/29",
+      "model_revision": "0dc9a4784a480254e8df3aa7b3b70925e8912c1902e139ff641fcf7e63e39b56",
+      "model_epoch": 9,
+      "parameters": {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02016885398420243,
+      "timing_low": 2.842170943040401e-14,
+      "timing_high": 2.842170943040401e-14,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 363,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/29/composite/24",
+      "semantic_proof_id": "881d37962c23b196c9318b102801af1f133b94724d4e2d6507f44f859b73405b"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/32",
+      "model_revision": "b81e244b448281c72c76056e67c04cc7847ce7ec83563d24a622b09cc1bf16cc",
+      "model_epoch": 10,
+      "parameters": {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 3
+      },
+      "full_parameters": [
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 3
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.016904481656080828,
+      "timing_low": 0,
+      "timing_high": 0,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 364,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/32/composite/26",
+      "semantic_proof_id": "fd26ec1a471c94b1d8dac06c29397286ea5fa7e2da5602b2a02a504c9420d3b7"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/35",
+      "model_revision": "8f7528c97b50124d39a104dcb3256a1d6a4e75b9e45b7b0a142d6503317c6586",
+      "model_epoch": 11,
+      "parameters": {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 8
+      },
+      "full_parameters": [
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.002128091681155686,
+      "timing_low": -0.00050000000004502,
+      "timing_high": -0.00050000000004502,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 369,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/35/composite/28",
+      "semantic_proof_id": "748f1dce16837c68c5e51f3cfbe009087b4e0bee93258cc86d43f93eef281467"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/38",
+      "model_revision": "911572dfdfb6888a4f5d9599d457e078aba1b14b6354c92566eec1ef18aa2faa",
+      "model_epoch": 12,
+      "parameters": {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02347230991428706,
+      "timing_low": 0,
+      "timing_high": 0,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 362,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/38/composite/30",
+      "semantic_proof_id": "b95246d5bcc4b33c03e26a3e9e2efc052205a5443867e7a1b40d249e6e137422"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/41",
+      "model_revision": "26ac57fbe7e2045a861e8954fecd77d44efca26f31ebc3d4b030962b8c210364",
+      "model_epoch": 13,
+      "parameters": {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 4
+      },
+      "full_parameters": [
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 4
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.013712268892014934,
+      "timing_low": 0,
+      "timing_high": 0,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 365,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/41/composite/32",
+      "semantic_proof_id": "af2313905ec32baedc68131803be8e7061367b1c88b46936ecba363033312a7c"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/44",
+      "model_revision": "e9d459c908290aa3cc2f79a6b833478ae8bf238d14f6d1ba8996452f99e426fb",
+      "model_epoch": 14,
+      "parameters": {
+        "length": 4,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 4,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.010146860621059184,
+      "timing_low": -0.2340000000000373,
+      "timing_high": -0.2340000000000373,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 9,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/44/composite/34",
+      "semantic_proof_id": "990017d4ddcd3a360dd5b3e6bccd9e8f4270c1a40430e6459499587f978882c4"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/47",
+      "model_revision": "46ac113b5b1567f97aaf85d14676cd18220c66e3393847194db82742e1fa9b9b",
+      "model_epoch": 15,
+      "parameters": {
+        "length": 5,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 5,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.011638586811235307,
+      "timing_low": -0.2319999999999709,
+      "timing_high": -0.2319999999999709,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 12,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/47/composite/36",
+      "semantic_proof_id": "24e6dc9cfe2b4e39a2fb909947c1f91eab5993d82aefae8ffdbf0df157518ebd"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/50",
+      "model_revision": "64ceb78b723f763870e411c8e8d831839b96262e242bdf712300d284067158f7",
+      "model_epoch": 16,
+      "parameters": {
+        "length": 7,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.013716228962919796,
+      "timing_low": -0.22800000000000864,
+      "timing_high": -0.22800000000000864,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 18,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/50/composite/38",
+      "semantic_proof_id": "b680a56bf844a1b568a3b6016efea56c35e10b223578c3e68fc908c5f094d485"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/53",
+      "model_revision": "1f3ae87d3c9a265cb510e26e568f66cb045a9d234aaa83c2c94207dcb9e0f07f",
+      "model_epoch": 17,
+      "parameters": {
+        "length": 8,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 8,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.014479478191391948,
+      "timing_low": -0.2259999999999991,
+      "timing_high": -0.2259999999999991,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 21,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/53/composite/40",
+      "semantic_proof_id": "e60e130ffaa4dbcf3144f47c7806eabcae220aabbcf1dbc49e648de412618bdf"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/56",
+      "model_revision": "28326a7899667fc3d6338077d30b39617572376f165639b9ba187f0814370c1f",
+      "model_epoch": 18,
+      "parameters": {
+        "length": 9,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 9,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.015123160538800584,
+      "timing_low": -0.22399999999998954,
+      "timing_high": -0.22399999999998954,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 24,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/56/composite/42",
+      "semantic_proof_id": "d834a822d34ec06b9722012c2978c5b070469e6ba9f3adc6524be1e7a5ab8b77"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/59",
+      "model_revision": "5bc4ca1b9a0b3b565ec5f761115abae04bdaa6589dd85e41d3ce31b1307f2236",
+      "model_epoch": 19,
+      "parameters": {
+        "length": 10,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 10,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.015675495905643655,
+      "timing_low": -0.22199999999998,
+      "timing_high": -0.22199999999998,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 27,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/59/composite/44",
+      "semantic_proof_id": "30bd2ed1babe52d36aa6db6f6b1b418c9bb407fdeb3e8e191b45a251a734033a"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/62",
+      "model_revision": "0e3399926584bf0057902ab9eddc523feae4639cbfe4d2ea55b505a490cdeea6",
+      "model_epoch": 20,
+      "parameters": {
+        "length": 11,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 11,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.016156195171524224,
+      "timing_low": -0.21999999999997044,
+      "timing_high": -0.21999999999997044,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 30,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/62/composite/46",
+      "semantic_proof_id": "342ce02c1fa24b7124a06651889ee2b88bfae29712fd6b1f5b7c57b3bb123a1c"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/65",
+      "model_revision": "dbf7d7bf8b0cdbde864b19ce4695ac4adc4980ea81299d6c5c0a34cd8e087b4b",
+      "model_epoch": 21,
+      "parameters": {
+        "length": 13,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 13,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.016955962978712713,
+      "timing_low": -0.21600000000000819,
+      "timing_high": -0.21600000000000819,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 36,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/65/composite/48",
+      "semantic_proof_id": "c95d14a4dd169efc1820edd4e2639b871c6b854ec8e91ea1d4107f762849d83c"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/68",
+      "model_revision": "f4d06f09fd10b303eec46b42f35beef2e04dc36bf4b621b8e4eb51d0d60dd572",
+      "model_epoch": 22,
+      "parameters": {
+        "length": 14,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 14,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.017293636385149358,
+      "timing_low": -0.2139999999999418,
+      "timing_high": -0.2139999999999418,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 39,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/68/composite/50",
+      "semantic_proof_id": "7910c15a4c55d390b01d970f483cb80cada102dd0b7ea2f7fd7fa7e350183d3d"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/71",
+      "model_revision": "8b0a7416ae6d363042e31498abba6e41b5c775e219f6c0bc1d3e6207c5022c21",
+      "model_epoch": 23,
+      "parameters": {
+        "length": 15,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.01759874420330254,
+      "timing_low": -0.21199999999998909,
+      "timing_high": -0.21199999999998909,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 42,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/71/composite/52",
+      "semantic_proof_id": "dc82e539f4c1db137a83f8f05e58a77f79cecc6ff41258c29a1b0429abb79e4b"
+    },
+    {
+      "input_index": 2,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/74",
+      "model_revision": "98147e587bfd4c0c413f50ce41d7627af2455c525b2f39f1be0dfbcfad57cf9b",
+      "model_epoch": 24,
+      "parameters": {
+        "length": 121,
+        "resistance": 86000000,
+        "synapses": 8
+      },
+      "full_parameters": [
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.002128091681155686,
+      "timing_low": -0.0004999999999881766,
+      "timing_high": -0.0004999999999881766,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 369,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/74/composite/54",
+      "semantic_proof_id": "44e638d38ec4edba0a956141cadec19890353b7467b4d232d56fcf8f9eebdaba"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/76",
+      "model_revision": "98147e587bfd4c0c413f50ce41d7627af2455c525b2f39f1be0dfbcfad57cf9b",
+      "model_epoch": 24,
+      "parameters": {
+        "length": 122,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.023442923705508156,
+      "timing_low": -0.15899999999999181,
+      "timing_high": -0.15899999999999181,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 0,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/76/composite/56",
+      "semantic_proof_id": "c1d90f52d20e4378e50562f7201e4cfe4b46d5f77b03564ae4f7b7d0b8f71e28"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/79",
+      "model_revision": "8346f8c80383b8d1b32ea1dab47f382a9e304194a389f14bb1c5722dda138f9d",
+      "model_epoch": 25,
+      "parameters": {
+        "length": 123,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 123,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 123,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.023455061388247822,
+      "timing_low": -0.1570000000000391,
+      "timing_high": -0.1570000000000391,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 2,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/79/composite/58",
+      "semantic_proof_id": "b35bbbf7edc480a4d9afb3ff547c5775d6b0a07793012d77ec80549adc866491"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/82",
+      "model_revision": "01b2747e466d9c7110c268fcf0b99bc0a519e0f7cec5e67a98310d1e3d7fb41c",
+      "model_epoch": 26,
+      "parameters": {
+        "length": 124,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 124,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 124,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02346702704365311,
+      "timing_low": -0.15499999999997272,
+      "timing_high": -0.15499999999997272,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 4,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/82/composite/60",
+      "semantic_proof_id": "548b677b53b9d6bb039bf4d0aaaa604df7ebb2d0bb1d583fab6745e9bb356050"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/85",
+      "model_revision": "ffc6c2f0bcde90f0fc81516abb80d40746ed5180d1472e89619f68bd2dd0839e",
+      "model_epoch": 27,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.024033458249806294,
+      "timing_low": -0.005499999999983629,
+      "timing_high": -0.005499999999983629,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 158,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/85/composite/62",
+      "semantic_proof_id": "4c5644d931e02b15d2c242ea8c0b2a159b66701e533f5da774ff4757e426afd9"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/88",
+      "model_revision": "8524d08450440166ef5993eff7d2442ebb55bbf827541d4516d369a0a774c8a0",
+      "model_epoch": 28,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 202,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.021291063925146236,
+      "timing_low": -0.005499999999983629,
+      "timing_high": -0.005499999999983629,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 160,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/88/composite/64",
+      "semantic_proof_id": "09a9637ddee53c6b5007a03b37c24c3e2753510f6aa05446b715607b53a26a01"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/91",
+      "model_revision": "aa79e5c3a17f1cd4aaf9c4ce8822cda79204daca20ef3189244e8028e91715d1",
+      "model_epoch": 29,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 3
+      },
+      "full_parameters": [
+        {
+          "length": 202,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 3
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.018581060675353145,
+      "timing_low": -0.005500000000097316,
+      "timing_high": -0.005500000000097316,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 161,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/91/composite/66",
+      "semantic_proof_id": "c9c9deead377f925458af400630767d392b4981b9eb565b240bb4f2b122a449a"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/94",
+      "model_revision": "18ec9c000bb27a02f17b3c6eedabce14f2344fa46514ac7a7d7f6de18d3640eb",
+      "model_epoch": 30,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 10
+      },
+      "full_parameters": [
+        {
+          "length": 202,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.002245119356194647,
+      "timing_low": -0.005499999999983629,
+      "timing_high": -0.005499999999983629,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 168,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/94/composite/68",
+      "semantic_proof_id": "0aba83f4b641b624934286988b9336b30a1fdafaeb73398f785768591014947d"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/97",
+      "model_revision": "b6a6e1869c91c2b1033047b1a2e4fa67191e04f34976e808faec1f21f9cb1786",
+      "model_epoch": 31,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 202,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.024033458249806294,
+      "timing_low": -0.005499999999983629,
+      "timing_high": -0.005499999999983629,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 159,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/97/composite/70",
+      "semantic_proof_id": "21306d704806a43c28806739852ed5e69aed500d61e1b43625735f11a6370852"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/100",
+      "model_revision": "843b12b073bfaaa5cf3dd4b365fb735326dafc7a15706d1adf2a1780bfb8074a",
+      "model_epoch": 32,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 4
+      },
+      "full_parameters": [
+        {
+          "length": 202,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 4
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.015930868249309782,
+      "timing_low": -0.005500000000097316,
+      "timing_high": -0.005500000000097316,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 162,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/100/composite/72",
+      "semantic_proof_id": "ee2320c2f3290cb008d08dee5f80e5f1cb7966b04cff274f26faef870768e1c9"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/103",
+      "model_revision": "ea09ba9e9e3ab9b41378ce68d87fc6f86bb85d4d4f2d06ffe52aec9f0d152cd3",
+      "model_epoch": 33,
+      "parameters": {
+        "length": 125,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 125,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 125,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.023478824042415747,
+      "timing_low": -0.15299999999990632,
+      "timing_high": -0.15299999999990632,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 6,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/103/composite/74",
+      "semantic_proof_id": "10426acdd2bcc48be7629d962821b30de361d7a7ed2feb869396157a5ad0bd3c"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/106",
+      "model_revision": "1e786aee5120753e8aeb6c67bdf9ef404657874f66443f77de6d2d44a6800f54",
+      "model_epoch": 34,
+      "parameters": {
+        "length": 126,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 126,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 126,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.023490455668405907,
+      "timing_low": -0.1510000000000673,
+      "timing_high": -0.1510000000000673,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 8,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/106/composite/76",
+      "semantic_proof_id": "c0b14b99831e11dc000f8d53446043c932631c380c259d494cac2bc609f5592b"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/109",
+      "model_revision": "73f0fed95ea47838edf9f685e584673dbcc6560ad7b77485ead8f733f0cff042",
+      "model_epoch": 35,
+      "parameters": {
+        "length": 127,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 127,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 127,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.023501925121616085,
+      "timing_low": -0.1490000000000009,
+      "timing_high": -0.1490000000000009,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 10,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/109/composite/78",
+      "semantic_proof_id": "811e9ea6b3a7c7d56777a2a357a9e530d2ada56a5f2d626f799a1098117c9f5e"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/112",
+      "model_revision": "ea1b6577862f5653ea540f5c246a53aa75d211ef2ae59dd232a3d9fa5f675b6c",
+      "model_epoch": 36,
+      "parameters": {
+        "length": 128,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 128,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 128,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.023513235520980502,
+      "timing_low": -0.14699999999993452,
+      "timing_high": -0.14699999999993452,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 12,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/112/composite/80",
+      "semantic_proof_id": "bb41eab1345e2527185d2a19832c5d84e2f296e132bc4eb46e2a88cac806fecd"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/115",
+      "model_revision": "d072f0d80e7071d5fb95c1528edb0e152f5558b8110f24af827ac839ac3d9fb2",
+      "model_epoch": 37,
+      "parameters": {
+        "length": 129,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 129,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 129,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.023524389907072396,
+      "timing_low": -0.1449999999999818,
+      "timing_high": -0.1449999999999818,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 14,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/115/composite/82",
+      "semantic_proof_id": "a7f2218044a220cf5e1fbdac7c828eff9712f37cd40c2b03eaa504a07194af5f"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/118",
+      "model_revision": "b634d2f15f84a56801b6fc2e39a78ea670f53ef8ff765e4b34fb453028973d59",
+      "model_epoch": 38,
+      "parameters": {
+        "length": 130,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 130,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 130,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.023535391244688952,
+      "timing_low": -0.14299999999991542,
+      "timing_high": -0.14299999999991542,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 16,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/118/composite/84",
+      "semantic_proof_id": "650c6400e541be876275ce29dfa167d29d4e4ffe146c8f84325eb279f5779def"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/121",
+      "model_revision": "b6604e4c6391048f6cc29cb124f9262597bc5def0bc0f7d517ecced7f00efbed",
+      "model_epoch": 39,
+      "parameters": {
+        "length": 131,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 131,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 131,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02354624242532677,
+      "timing_low": -0.1410000000000764,
+      "timing_high": -0.1410000000000764,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 18,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/121/composite/86",
+      "semantic_proof_id": "69828e7999fe63405db93549db9485f31710fb5e0421639c373940a4dc00ac4f"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/124",
+      "model_revision": "4edcddd8ce4a9012b8d6a80d5f3f2d68d8aeb65832bf5aad1dfc63045c2025eb",
+      "model_epoch": 40,
+      "parameters": {
+        "length": 132,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 132,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 132,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.023556946269554402,
+      "timing_low": -0.13900000000001,
+      "timing_high": -0.13900000000001,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 20,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/124/composite/88",
+      "semantic_proof_id": "055e86820db8f423aed54ded1ed42afbcb2375c28b477d36072116b79de7b070"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/127",
+      "model_revision": "9abe295c41de9293e16aac8fbdfdd165310270d94c3724e61071330f4131d7ca",
+      "model_epoch": 41,
+      "parameters": {
+        "length": 133,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 133,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 133,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.023567468436642147,
+      "timing_low": -0.1374999999999318,
+      "timing_high": -0.1374999999999318,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 22,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/127/composite/90",
+      "semantic_proof_id": "2a04fff8e56fb71a7916524dc098e1656d11dd8bfe7046363a0377dbc004cfc5"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/130",
+      "model_revision": "2c97d51d13b15f5d08f01bffe8675befbb574174b37fb7c13509ec99f83f2261",
+      "model_epoch": 42,
+      "parameters": {
+        "length": 134,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 134,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 134,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02357781127790015,
+      "timing_low": -0.13549999999997908,
+      "timing_high": -0.13549999999997908,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 24,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/130/composite/92",
+      "semantic_proof_id": "c64718c27ff1e17f7c69c03ff84f61b7f14c63d3e41f6a7b0999f2ac95d46938"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/133",
+      "model_revision": "4329264154e530d72736ce0cfe02afb9c8d1dae85635909644cb0b75f9a1b70a",
+      "model_epoch": 43,
+      "parameters": {
+        "length": 122,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 123,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 122,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.020110002724127884,
+      "timing_low": -0.1590000000001055,
+      "timing_high": -0.1590000000001055,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 2,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/133/composite/94",
+      "semantic_proof_id": "01deb00d4d4096433dd5a1df753730f15cd700c364b47dd02de28fd8ac16f4ec"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/136",
+      "model_revision": "ad332cb344808721746b0afe919cb8da9fea68ddefbc6d3277dec749c6ce699c",
+      "model_epoch": 44,
+      "parameters": {
+        "length": 123,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 124,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 123,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02013429234461983,
+      "timing_low": -0.1570000000000391,
+      "timing_high": -0.1570000000000391,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 4,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/136/composite/96",
+      "semantic_proof_id": "3ec5dabc79ae2f62e91a5bb338960ac621dbf799b572f8745a37ebd35c187a80"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/139",
+      "model_revision": "9d9a6e29baa40170a9a2a307b5bc270bfa292885683e3d9b03073ddf43c14ef5",
+      "model_epoch": 45,
+      "parameters": {
+        "length": 124,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 125,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 124,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02015823780030601,
+      "timing_low": -0.15499999999997272,
+      "timing_high": -0.15499999999997272,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 6,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/139/composite/98",
+      "semantic_proof_id": "59421516af11586757ab1cc58f3ec18fbb350a436da7dbbc52c7cc89f401456e"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/142",
+      "model_revision": "8cef8bca0b3c3f0b8eebd7b037c4f734d555fb6602b225825859ea6c66d5acb3",
+      "model_epoch": 46,
+      "parameters": {
+        "length": 125,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 126,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 125,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02018184583405991,
+      "timing_low": -0.15300000000002,
+      "timing_high": -0.15300000000002,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 8,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/142/composite/100",
+      "semantic_proof_id": "29833877709a3cd49905a3c3d0a7ab05b42d2f11f768ced06517abc525dec883"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/145",
+      "model_revision": "2e92017f4636edc19a6c7b32daf042e423c819d75569d58c4ecb8b2c814e2578",
+      "model_epoch": 47,
+      "parameters": {
+        "length": 126,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 127,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 126,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.020205123015019977,
+      "timing_low": -0.1510000000000673,
+      "timing_high": -0.1510000000000673,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 10,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/145/composite/102",
+      "semantic_proof_id": "bc5cc07a48c8f809dd41f65a1fb8ba6c16509838b6230dbd161fb2e1b0d1d0cf"
+    },
+    {
+      "input_index": 1,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/148",
+      "model_revision": "b6f759e67e1c54cb08c23d2605a2c3ae3db24b9ed660592ba106e13058ffb405",
+      "model_epoch": 48,
+      "parameters": {
+        "length": 201,
+        "resistance": 86000000,
+        "synapses": 10
+      },
+      "full_parameters": [
+        {
+          "length": 202,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.002245119356194647,
+      "timing_low": -0.005499999999983629,
+      "timing_high": -0.005499999999983629,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 168,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/148/composite/104",
+      "semantic_proof_id": "a83c6ce18d096872f7c5eac56e806d27c47ef75aa411e0c669374875ef8e2c2b"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/150",
+      "model_revision": "b6f759e67e1c54cb08c23d2605a2c3ae3db24b9ed660592ba106e13058ffb405",
+      "model_epoch": 48,
+      "parameters": {
+        "length": 202,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 202,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02413330801358038,
+      "timing_low": -0.07450000000017099,
+      "timing_high": -0.07450000000017099,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 0,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/150/composite/106",
+      "semantic_proof_id": "9a1ac4a1158be103ae7cbdfb87cdf22ac3d8f42acb941e71ab2a164825c93890"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/153",
+      "model_revision": "2df9f8f510792e489105a8066f46732cf3404d70457134f52afc2f2b94d07f6e",
+      "model_epoch": 49,
+      "parameters": {
+        "length": 203,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 203,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.024137925574944208,
+      "timing_low": -0.0724999999999909,
+      "timing_high": -0.0724999999999909,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 1,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/153/composite/108",
+      "semantic_proof_id": "5a2a82a4b4d03bc5d339b67953082d83779adf481168bd3d6df3cc034f8b0612"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/156",
+      "model_revision": "7f13fffda5b7092dd6cb6e0515a4e52fa37f973415afbfbe7af54c3d83b1f4a8",
+      "model_epoch": 50,
+      "parameters": {
+        "length": 204,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 204,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02414249310629979,
+      "timing_low": -0.0705000000000382,
+      "timing_high": -0.0705000000000382,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 2,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/156/composite/110",
+      "semantic_proof_id": "beb6294a9135e65433f352a6d2afb8b194396ebebfbdedf47e4aa94db040441b"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/159",
+      "model_revision": "ea74465e1133e73a1e3ef5f8a17c5c84e8a1a8262a8d16f626d7ec0e6ed59199",
+      "model_epoch": 51,
+      "parameters": {
+        "length": 239,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 239,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02426538809989698,
+      "timing_low": 0.0039999999999054126,
+      "timing_high": 0.0039999999999054126,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 37,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/159/composite/112",
+      "semantic_proof_id": "e489511ba03958534b0f3b42c5345a4eeb7d59fd956aeb70859438ee3b11321d"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/162",
+      "model_revision": "f395ae9661557787e5b4e24269f57190d6934b6aa38f3fbf48e0c1c88ec6d6ca",
+      "model_epoch": 52,
+      "parameters": {
+        "length": 239,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 239,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02175493761288194,
+      "timing_low": 0.0039999999999054126,
+      "timing_high": 0.0039999999999054126,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 38,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/162/composite/114",
+      "semantic_proof_id": "b97376cf782ebc034937988306c931aa10d9a5dd0f7f05925efa0794a1c9da31"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/165",
+      "model_revision": "d675d07ab0eb2bb235d200342401423f07e6a7c461dc63cd5a692317b4848b7f",
+      "model_epoch": 53,
+      "parameters": {
+        "length": 239,
+        "resistance": 86000000,
+        "synapses": 11
+      },
+      "full_parameters": [
+        {
+          "length": 239,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.0026354220904466485,
+      "timing_low": 0.003500000000030923,
+      "timing_high": 0.003500000000030923,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 47,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/165/composite/116",
+      "semantic_proof_id": "8a9d3ddf222a952dc19c919daed03383613d466136753b36cef62dbd322f3cc8"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/168",
+      "model_revision": "b3286d53576e57d37b753b244b8e6261a97086f034bc6cf7efbd610410ff9b23",
+      "model_epoch": 54,
+      "parameters": {
+        "length": 239,
+        "resistance": 86000000,
+        "synapses": 12
+      },
+      "full_parameters": [
+        {
+          "length": 239,
+          "resistance": 86000000,
+          "synapses": 12
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.0010666490378833382,
+      "timing_low": 0.003500000000030923,
+      "timing_high": 0.003500000000030923,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 48,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/168/composite/118",
+      "semantic_proof_id": "d577f38b643be230b0afe7dc5d6d28014f0fe6fa7e87f33f85486c1a3087f1eb"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/171",
+      "model_revision": "77e08e2e9e5616fd133427ad7405a715d0932b1fb84928169cc4f3ac22a94890",
+      "model_epoch": 55,
+      "parameters": {
+        "length": 239,
+        "resistance": 86000000,
+        "synapses": 3
+      },
+      "full_parameters": [
+        {
+          "length": 239,
+          "resistance": 86000000,
+          "synapses": 3
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.019274170733001306,
+      "timing_low": 0.004000000000132786,
+      "timing_high": 0.004000000000132786,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 39,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/171/composite/120",
+      "semantic_proof_id": "45db737c60350c8ad55801280ddfd3c9d3206c23c68b07191a9763c01844936d"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/174",
+      "model_revision": "3b9702a55bc3540badcfaadfb0531fe5719ed660ede0e6dcfc300ac785e6c77e",
+      "model_epoch": 56,
+      "parameters": {
+        "length": 239,
+        "resistance": 86000000,
+        "synapses": 10
+      },
+      "full_parameters": [
+        {
+          "length": 239,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.004319462960196696,
+      "timing_low": 0.003500000000030923,
+      "timing_high": 0.003500000000030923,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 46,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/174/composite/122",
+      "semantic_proof_id": "14d8bfd02c4cfa585bee7fbf7246256d522f63b99c41577efc46fe5ce61f7bba"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/177",
+      "model_revision": "9e4571e152778df572c1110b3c97deabc5803658d575f6f650c1c85597e7aedd",
+      "model_epoch": 57,
+      "parameters": {
+        "length": 205,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 205,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02414698336005683,
+      "timing_low": -0.06799999999998363,
+      "timing_high": -0.06799999999998363,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 3,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/177/composite/124",
+      "semantic_proof_id": "0c746efe20e553ca191e8cd1a29084bba1b6d25e254a5f6333f752e9c873c8e1"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/180",
+      "model_revision": "92ac9de4bb2ec5a4cd6118f614fdad3ef7fd33a357ee1cc01a2adfc551fce652",
+      "model_epoch": 58,
+      "parameters": {
+        "length": 206,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 206,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.024151376386156054,
+      "timing_low": -0.06599999999980355,
+      "timing_high": -0.06599999999980355,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 4,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/180/composite/126",
+      "semantic_proof_id": "06d8746e003290bcdfcaae92afaa5b2dcc837665aff0fc7448b177ee8ca7198a"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/183",
+      "model_revision": "2fcc0168f9f2cd077689c2f7d55a691b2cc847497efc09f8b2cc683433df8830",
+      "model_epoch": 59,
+      "parameters": {
+        "length": 207,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 207,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02415572218749218,
+      "timing_low": -0.06400000000007822,
+      "timing_high": -0.06400000000007822,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 5,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/183/composite/128",
+      "semantic_proof_id": "e109f2e2c1d7d821ab81af5dfb220f823abed2b2f1c88afbbce3f6dcdbf8dd7a"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/186",
+      "model_revision": "890de075b405c770c178a803216a907049ef26f3f2efd8f39a69e4f1db129f19",
+      "model_epoch": 60,
+      "parameters": {
+        "length": 208,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 208,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.024160021443163426,
+      "timing_low": -0.06200000000012551,
+      "timing_high": -0.06200000000012551,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 6,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/186/composite/130",
+      "semantic_proof_id": "dcda33b12d3092215b8f11e776f3bcbf3815f09a1c693f62d04d7414b3d35c28"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/189",
+      "model_revision": "aa7f13a18823fcff0f1dd7d2a25a19a37de75e1f33c97afb0f11aef550e958dc",
+      "model_epoch": 61,
+      "parameters": {
+        "length": 209,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 209,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.024164274821794507,
+      "timing_low": -0.05999999999994543,
+      "timing_high": -0.05999999999994543,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 7,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/189/composite/132",
+      "semantic_proof_id": "cac247fbc53bccf0dccc523cbc96f9e957312b123ba0630ed7044b45224a73a8"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/192",
+      "model_revision": "d66de83e205a4a88a7c05320293c61648e6b8e4539612d532d4e7c7eafb451f6",
+      "model_epoch": 62,
+      "parameters": {
+        "length": 210,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 210,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.024168475316397986,
+      "timing_low": -0.05749999999989086,
+      "timing_high": -0.05749999999989086,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 8,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/192/composite/134",
+      "semantic_proof_id": "3c46d5a584edc126b582541f8c7bf70b41b7ce9c0aff51023c7350359fbf5e08"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/195",
+      "model_revision": "d9f3edbc72465af5c4d4185e122dbc5ed50be8aa95c8287609b83913596fd5d0",
+      "model_epoch": 63,
+      "parameters": {
+        "length": 211,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 211,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02417256152062175,
+      "timing_low": -0.055499999999938154,
+      "timing_high": -0.055499999999938154,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 9,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/195/composite/136",
+      "semantic_proof_id": "27a6bfc033a300843b012988b5895f685f782e5375a498e855b1c4bd4dcfacdd"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/198",
+      "model_revision": "f07a36edf07242db9ad167b6424363cdd118533ea00ed3164044c67308be5c95",
+      "model_epoch": 64,
+      "parameters": {
+        "length": 212,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 212,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.024176604525485756,
+      "timing_low": -0.05349999999998545,
+      "timing_high": -0.05349999999998545,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 10,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/198/composite/138",
+      "semantic_proof_id": "e2cbc2ac0977f1ddffa9f25889e3474c0111751682d7cc1be1af6afcfe4b4c04"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/201",
+      "model_revision": "af28237cf2e0a736b406aa1dafb5bd9762c7a9204e020d54315055174dff71d4",
+      "model_epoch": 65,
+      "parameters": {
+        "length": 213,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 213,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.024180604954286422,
+      "timing_low": -0.05150000000003274,
+      "timing_high": -0.05150000000003274,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 11,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/201/composite/140",
+      "semantic_proof_id": "260b9b010565d5e24d23b75c14a48df2180dd959a97ae98a20193263f2e9425d"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/204",
+      "model_revision": "eda933bfe630e0f80aba186adcd00ad2fb17aa6486a7f2d22bfb0fb96c484a0b",
+      "model_epoch": 66,
+      "parameters": {
+        "length": 214,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      "full_parameters": [
+        {
+          "length": 214,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.024184563420660554,
+      "timing_low": -0.049500000000080036,
+      "timing_high": -0.049500000000080036,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 12,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/204/composite/142",
+      "semantic_proof_id": "9e8c3043f6fb3ab603320f345c9ee4c9e0c25232af871e3f162b58924ee3ca52"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/207",
+      "model_revision": "e92842f445fffccd070814908256b3ce3a9aebc1ba98ef838f85a8156d72b918",
+      "model_epoch": 67,
+      "parameters": {
+        "length": 202,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 202,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02149077509772901,
+      "timing_low": -0.07449999999994361,
+      "timing_high": -0.07449999999994361,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 1,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/207/composite/144",
+      "semantic_proof_id": "818830283f7109d6c2d007627c0515c5bcc2ac3233dc37c231924b866e2423f0"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/210",
+      "model_revision": "fdc08e1615538056df8bd91839e68da23ba583f4053d7c9a8188c2f88a2a92fc",
+      "model_epoch": 68,
+      "parameters": {
+        "length": 203,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 203,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.021499994521989363,
+      "timing_low": -0.0724999999999909,
+      "timing_high": -0.0724999999999909,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 2,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/210/composite/146",
+      "semantic_proof_id": "d587ed8ffc78aecea0b8692bf5798f377f7c437db118d9a2100f0bc8a987ad79"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/213",
+      "model_revision": "a0007bff0474933fa1099701e54e5efa1ea7c86c5b5946b0fc551f3dd66353ec",
+      "model_epoch": 69,
+      "parameters": {
+        "length": 204,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 204,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02150911402276534,
+      "timing_low": -0.0705000000000382,
+      "timing_high": -0.0705000000000382,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 3,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/213/composite/148",
+      "semantic_proof_id": "bba465c172e76a442e2e05293c2477e6863aa7d9baa55661265443fefb7cbc6e"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/216",
+      "model_revision": "b54f058cc68f79f393f2b7c652f46dec4b18677d2c8462478516a577cb6f3065",
+      "model_epoch": 70,
+      "parameters": {
+        "length": 205,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 205,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.02151813503048139,
+      "timing_low": -0.06849999999985812,
+      "timing_high": -0.06849999999985812,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 4,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/216/composite/150",
+      "semantic_proof_id": "a0efffc721c65a409a0fe43a48a3a339e57722a4de0cc158a33aa95a2bbf155e"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/219",
+      "model_revision": "df3b70b975d2dd1b0c65868fd3dbbf0b7a945c860bd7a4ad9aa82496a5d842b8",
+      "model_epoch": 71,
+      "parameters": {
+        "length": 206,
+        "resistance": 86000000,
+        "synapses": 2
+      },
+      "full_parameters": [
+        {
+          "length": 206,
+          "resistance": 86000000,
+          "synapses": 2
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.021526934978224332,
+      "timing_low": -0.06600000000003092,
+      "timing_high": -0.06600000000003092,
+      "within_timing": false,
+      "within_amplitude": false,
+      "parameter_change_cost": 5,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/219/composite/152",
+      "semantic_proof_id": "9c3af342b2b380e4838a7838858bbcfae08ab02911cdc56ed76621c37b2d8046"
+    },
+    {
+      "input_index": 0,
+      "trial_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/222",
+      "model_revision": "2f47ac9e86552fa9f80f82e2a4a4d6fd554074a916a0e85529ce0d3d3ab47723",
+      "model_epoch": 72,
+      "parameters": {
+        "length": 239,
+        "resistance": 86000000,
+        "synapses": 12
+      },
+      "full_parameters": [
+        {
+          "length": 239,
+          "resistance": 86000000,
+          "synapses": 12
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 10
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "amplitude_residual": -0.0010666490378833382,
+      "timing_low": 0.003500000000030923,
+      "timing_high": 0.003500000000030923,
+      "within_timing": true,
+      "within_amplitude": false,
+      "parameter_change_cost": 48,
+      "measurement_group_id": "measured-count-proposal/20261122/branch/M4/train-a1/session/1/search/222/composite/154",
+      "semantic_proof_id": "9908b6cfdfa5c87f7f400c344d75b3d6fe10838a779aa6db28cae4c349d6488d"
+    }
+  ],
+  "terminal_fresh_all_input_verification": false,
+  "command_vector_repetition_is_not_full_model_or_protocol_equivalence": true,
+  "full_primary_audit_not_repeated": true,
+  "classification_assessed": false,
+  "scientific_verdict": null
+}
