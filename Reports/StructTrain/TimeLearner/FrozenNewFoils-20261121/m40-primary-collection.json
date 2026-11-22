@@ -1,0 +1,186 @@
+{
+  "job": "s11-current-frozen-primary-m40-a1",
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 32.17322723288089,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "a4ff20574854c06e2def989efc3170f0a087ab9bc6f8bc7fe86f92e3e1d04ec3",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2,
+      "reasons": [],
+      "examples": [
+        {
+          "stream": "stderr.log",
+          "chunk": 1,
+          "severity": "unclassified",
+          "excerpt": "error: /media/user/Data/Nmsdk-GitCodeCache/root-cleanup-docs-20261114/.git/objects: ignoring alternate object stores, nesting too deep"
+        },
+        {
+          "stream": "stderr.log",
+          "chunk": 2,
+          "severity": "unclassified",
+          "excerpt": "error: /media/user/Data/Nmsdk-GitCodeCache/root-cleanup-docs-20261114/.git/objects: ignoring alternate object stores, nesting too deep"
+        }
+      ],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 270,
+          "sha256": "9f46ad68244bbbccfcfa3165449d5161c832dadc6a21bbe32304bbc172357e06"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "worker/terminal.json": {
+    "operation_passed": true,
+    "operation": "closed-primary-bundle",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "2ea5ecdcfe9e12ea4e1a1e3c54af75fabf4f11f3ca00494d6b69435e206d284c",
+      "unit": "timelearner-37c4aaef-7242-4458-99c0-4af67a85d7d2.service",
+      "invocation_id": "d5f4cbb1d0f04e30ab16def00a2f30f8",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-37c4aaef-7242-4458-99c0-4af67a85d7d2.service",
+      "initial_main_pid": 3911253,
+      "initial_start_ticks": "435162745",
+      "sha256": "32aac0421da864eb9e40716ff769f574a146ade5bba63396aad97857edc219b6"
+    }
+  },
+  "selected_recorded_timing": [
+    {
+      "index": 4,
+      "keys": [
+        "armed",
+        "begin",
+        "censored",
+        "closed_at",
+        "complete",
+        "end",
+        "evaluation_verdict",
+        "frequency_hz",
+        "kind",
+        "label",
+        "maximum_samples",
+        "model_after",
+        "model_before",
+        "pattern_hash",
+        "pattern_isi",
+        "reason",
+        "relative_spike_times",
+        "relative_stimulus_times",
+        "reset_policy",
+        "run_id",
+        "sample_id",
+        "samples",
+        "schema_version",
+        "spike_count",
+        "spike_times",
+        "stimulus_onset",
+        "stimulus_times",
+        "threshold_potential_source",
+        "trial_id",
+        "valid"
+      ],
+      "clocks": {
+        "begin": 8.002,
+        "end": 10.002,
+        "frequency_hz": 2000,
+        "sample_id": "unseen-isi-grid-v1-1-2-2",
+        "spike_times": [
+          8.454
+        ],
+        "stimulus_onset": 8.012,
+        "stimulus_times": [
+          8.012,
+          8.052,
+          8.212,
+          8.452
+        ],
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-1-2-2"
+      }
+    },
+    {
+      "index": 13,
+      "keys": [
+        "armed",
+        "begin",
+        "censored",
+        "closed_at",
+        "complete",
+        "end",
+        "evaluation_verdict",
+        "frequency_hz",
+        "kind",
+        "label",
+        "maximum_samples",
+        "model_after",
+        "model_before",
+        "pattern_hash",
+        "pattern_isi",
+        "reason",
+        "relative_spike_times",
+        "relative_stimulus_times",
+        "reset_policy",
+        "run_id",
+        "sample_id",
+        "samples",
+        "schema_version",
+        "spike_count",
+        "spike_times",
+        "stimulus_onset",
+        "stimulus_times",
+        "threshold_potential_source",
+        "trial_id",
+        "valid"
+      ],
+      "clocks": {
+        "begin": 26.0065,
+        "end": 28.0065,
+        "frequency_hz": 2000,
+        "sample_id": "phasea-row-0",
+        "spike_times": [
+          26.4995
+        ],
+        "stimulus_onset": 26.0165,
+        "stimulus_times": [
+          26.0165,
+          26.0965,
+          26.2565,
+          26.4965
+        ],
+        "trial_id": "actual-branch-frozen-unseen-ISI-grid/M4/a1/grid-2-2-2"
+      }
+    }
+  ]
+}

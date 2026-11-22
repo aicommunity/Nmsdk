@@ -1,0 +1,251 @@
+{
+  "kind": "timelearner_terminal_science_current_observation",
+  "schema_version": 1,
+  "recorded_at": "2026-11-20T12:50:30.878974+00:00",
+  "branch": {
+    "job": "s11-terminal-n4-branch-on-m40-a2",
+    "kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "9e85cee71e9ce90e4280f3daa04aab2cd6bee5634770cd43af56401799d8d119",
+        "unit": "timelearner-b9db012f-d19c-4fe7-86ea-f5839eb8bca6.service",
+        "invocation_id": "6d15aa748fdd42ae85732d16f0515156",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b9db012f-d19c-4fe7-86ea-f5839eb8bca6.service",
+        "initial_main_pid": 3865301,
+        "initial_start_ticks": "423621978",
+        "sha256": "c369c58680ab20b58812a5e16227077edc2e1dc9aa27d06eecfb5c1a702c3d27"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "3865301",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b9db012f-d19c-4fe7-86ea-f5839eb8bca6.service",
+        "MemoryMax": "25769803776",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt b9db012f-d19c-4fe7-86ea-f5839eb8bca6",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "6d15aa748fdd42ae85732d16f0515156"
+      },
+      "memory_max": 25769803776,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "written_probe_packets": 598,
+    "last_probe": {
+      "file": "raw-trial-598.json",
+      "trial_id": "terminal-science-ab/n4/branch/a1/on/session/1/search/195/composite/100/native/3",
+      "complete": true,
+      "valid": true,
+      "reason": null,
+      "begin_time": null,
+      "end_time": null
+    }
+  },
+  "classic": {
+    "job": "s11-terminal-n4-classic-on-elder-a1",
+    "process": {
+      "kind": "timelearner_process_result",
+      "schema_version": 2,
+      "execution": "timeout",
+      "reason": "wall_budget_exhausted",
+      "returncode": null,
+      "wall_seconds": 85200.59879153129,
+      "model_time": null,
+      "runtime_provenance": "incomplete_loaded_files",
+      "mapping_error": "cooperative_capture_not_ready",
+      "runtime_fingerprint": "138f0d50d67193f076bdde7cbc9d124f5cbac13a654d979d3e24c85f4f99f47f",
+      "ownership_scope": "bound_cgroup",
+      "all_processes_closed": true,
+      "scientific_verdict": null,
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "needs_review",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 30,
+        "reasons": [],
+        "examples": [
+          {
+            "stream": "stderr.log",
+            "chunk": 1,
+            "severity": "unclassified",
+            "excerpt": "*** Aborted at 1795175192 (unix time) try \"date -d @1795175192\" if you are using GNU date ***"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 2,
+            "severity": "unclassified",
+            "excerpt": "PC: @                0x0 (unknown)"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 3,
+            "severity": "unclassified",
+            "excerpt": "*** SIGTERM (@0x3e800299e1f) received by PID 2199106 (TID 0x7976f1e7ff40) from PID 2727455; stack trace: ***"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 4,
+            "severity": "unclassified",
+            "excerpt": "    @     0x7976f2759046 (unknown)"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 5,
+            "severity": "unclassified",
+            "excerpt": "    @     0x7976f1842520 (unknown)"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 6,
+            "severity": "unclassified",
+            "excerpt": "    @     0x7976f18a2660 (unknown)"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 7,
+            "severity": "unclassified",
+            "excerpt": "    @     0x7976f18a5413 free"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 8,
+            "severity": "unclassified",
+            "excerpt": "    @     0x62119ccafaba NMSDK::TimeLearner::NativeResponseDomainCapture::Append()"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 9,
+            "severity": "unclassified",
+            "excerpt": "    @     0x62119cf8700f NMSDK::TimeLearner::EncodeMatchedOmissionPrimaryTrace()"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 10,
+            "severity": "unclassified",
+            "excerpt": "    @     0x62119cf9598c NMSDK::TimeLearner::NativeBasinDetail::CheckNativeEnvelope()"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 11,
+            "severity": "unclassified",
+            "excerpt": "    @     0x62119cc8bff5 NMSDK::TimeLearner::SelectNativeDeclaredWindowBasinMaximum()"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 12,
+            "severity": "unclassified",
+            "excerpt": "    @     0x62119cc62789 NMSDK::TimeLearner::(anonymous namespace)::FreshSelection()"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 13,
+            "severity": "unclassified",
+            "excerpt": "    @     0x62119cc6ef7c NMSDK::TimeLearner::(anonymous namespace)::EncodeRecord()"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 14,
+            "severity": "unclassified",
+            "excerpt": "    @     0x62119cc81bdd NMSDK::TimeLearner::EncodeAndValidateNativeCandidateWindowServiceArchive()"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 15,
+            "severity": "unclassified",
+            "excerpt": "    @     0x62119cfb23ff NMSDK::TimeLearner::(anonymous namespace)::CompositeSummary<>()"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 16,
+            "severity": "unclassified",
+            "excerpt": "    @     0x62119cfbb9d8 NMSDK::TimeLearner::EncodeNativeCandidateWindowTrainingTranscript()"
+          }
+        ],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 2230,
+            "sha256": "ae94371fb521954c241a4c3544a557cd2ad02b4cdd253c076acb2a7460831851"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    },
+    "stderr": {
+      "bytes": 2230,
+      "tail": "*** Aborted at 1795175192 (unix time) try \"date -d @1795175192\" if you are using GNU date ***\nPC: @                0x0 (unknown)\n*** SIGTERM (@0x3e800299e1f) received by PID 2199106 (TID 0x7976f1e7ff40) from PID 2727455; stack trace: ***\n    @     0x7976f2759046 (unknown)\n    @     0x7976f1842520 (unknown)\n    @     0x7976f18a2660 (unknown)\n    @     0x7976f18a5413 free\n    @     0x62119ccafaba NMSDK::TimeLearner::NativeResponseDomainCapture::Append()\n    @     0x62119cf8700f NMSDK::TimeLearner::EncodeMatchedOmissionPrimaryTrace()\n    @     0x62119cf9598c NMSDK::TimeLearner::NativeBasinDetail::CheckNativeEnvelope()\n    @     0x62119cc8bff5 NMSDK::TimeLearner::SelectNativeDeclaredWindowBasinMaximum()\n    @     0x62119cc62789 NMSDK::TimeLearner::(anonymous namespace)::FreshSelection()\n    @     0x62119cc6ef7c NMSDK::TimeLearner::(anonymous namespace)::EncodeRecord()\n    @     0x62119cc81bdd NMSDK::TimeLearner::EncodeAndValidateNativeCandidateWindowServiceArchive()\n    @     0x62119cfb23ff NMSDK::TimeLearner::(anonymous namespace)::CompositeSummary<>()\n    @     0x62119cfbb9d8 NMSDK::TimeLearner::EncodeNativeCandidateWindowTrainingTranscript()\n    @     0x62119cda3def NMSDK::TimeLearner::EncodeNativeTrainingStateImpl()\n    @     0x62119cda5934 NMSDK::TimeLearner::EncodeNativeHistoricalTrainingState()\n    @     0x62119cd3036a NMSDK::TimeLearner::NativeTerminalStateFactory::Summary()\n    @     0x62119cd33aa9 NMSDK::TimeLearner::NativeTerminalStateFactory::Export()\n    @     0x62119cc99ad9 NMSDK::TimeLearner::ExportNativeLearnedBoundary()\n    @     0x62119c91d01e NMSDK::NNeuronTimeLearner::ExportNativeLearnedStateWithCapacitance()\n    @     0x62119c91d680 NMSDK::NNeuronTimeLearner::ExportNativeLearnedBoundary()\n    @     0x62119c347774 _ZZN12_GLOBAL__N_17ExecuteIN5NMSDK18NNeuronTimeLearnerEEEiRKNS_3JobERK7QStringbENKUlT_T0_T1_T2_E_clIN3RDK5UEPtrINSF_8UStorageEEENSG_INSF_12UEnvironmentEEENSG_INSF_10UContainerEEENSG_IS2_EEEEDaS9_SA_SB_SC_.constprop.0\n    @     0x62119c34a930 (anonymous namespace)::Execute<>()\n    @     0x62119c34ad5d RunTimeLearnerTrainingJob()\n    @     0x62119c2ff728 main\n    @     0x7976f1829d90 (unknown)\n    @     0x7976f1829e40 __libc_start_main\n    @     0x62119c304925 _start\n"
+    },
+    "retained_model_candidates": [
+      "initial-state.json"
+    ],
+    "renamed_probe_packets": 659,
+    "last_packets": [
+      {
+        "file": "train_stopped_trial_657.json",
+        "trial_id": "terminal-science-ab/n4/classic/a1/on/session/1/search/204/composite/110/native/2",
+        "complete": true,
+        "valid": true,
+        "reasons": [],
+        "model_revision": "803521078ead3ca142b0b60e35c3387056a816f63a0dc3302ddf01257fb81ae3",
+        "epoch": 50
+      },
+      {
+        "file": "train_stopped_trial_658.json",
+        "trial_id": "terminal-science-ab/n4/classic/a1/on/session/1/search/204/composite/110/native/3",
+        "complete": true,
+        "valid": true,
+        "reasons": [],
+        "model_revision": "803521078ead3ca142b0b60e35c3387056a816f63a0dc3302ddf01257fb81ae3",
+        "epoch": 50
+      },
+      {
+        "file": "train_stopped_trial_659.json",
+        "trial_id": "terminal-science-ab/n4/classic/a1/on/session/1/search/204/composite/110/native/4",
+        "complete": false,
+        "valid": false,
+        "reasons": [
+          "incomplete_observation",
+          "native_training_time_budget_exhausted"
+        ],
+        "model_revision": "803521078ead3ca142b0b60e35c3387056a816f63a0dc3302ddf01257fb81ae3",
+        "epoch": 50
+      }
+    ],
+    "primary_prepared": {
+      "job": "s11-terminal-n4-classic-timeout-primary-elder-a1",
+      "controls": "2efab7abc1a22149a986ff481fe5916879870fc7",
+      "tool_commit": "e93edd316443ac8ff92de72e12b972ed63724aa8",
+      "closed_units": 2,
+      "regular_files": 1376,
+      "expanded_bytes": 258327174
+    },
+    "primary_dispatch": {
+      "started": true,
+      "job": "s11-terminal-n4-classic-timeout-primary-elder-a1",
+      "pid": 2318101,
+      "request_sha256": "963350fb6c80a496c91e3d4cd387a9a3bc81dbab46c8e6ae471c48b0134ccad9",
+      "scientific_verdict": null
+    }
+  },
+  "scientific_verdict": null
+}

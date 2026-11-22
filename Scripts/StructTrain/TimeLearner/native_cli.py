@@ -17,16 +17,21 @@ from .native_evidence import require
 from .process_runner import verify_runtime
 
 OPERATIONS = frozenset(('train', 'export', 'evaluate', 'diagnostic-evaluate',
-                        'preflight', 'probe', 'calibrate', 'posttune'))
+                        'preflight', 'probe', 'calibrate', 'posttune',
+                        'physical-model-export', 'physical-model-evaluate'))
 MAX_HELP_BYTES = 128 * 1024
 MAX_HELP_SECONDS = 5.
 
 
-def inspect_native_cli(runtime, operations):
+def inspect_native_cli(runtime, operations, *, require_file_source=False, evidence_output=None):
+    require(type(require_file_source) is bool, 'native_cli_unknown_source_transport')
     require(type(operations) in (list, tuple) and bool(operations) and
             all(type(x) is str and x in OPERATIONS for x in operations),
             'native_cli_unknown_operation')
     requested = sorted(set(operations))
+    if os.name == 'nt':
+        require(evidence_output is not None, 'windows_cli_requires_owned_evidence_directory')
+        return _inspect_windows_cli(runtime, requested, Path(evidence_output), require_file_source)
     executable = verify_runtime(runtime)
     environment = dict(os.environ)
     for key in ('LD_LIBRARY_PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM'):
@@ -71,6 +76,8 @@ def inspect_native_cli(runtime, operations):
     present = {flag: bool(re.search(r'(?m)^\s*'+re.escape(flag)+r'(?:\s|,|=|$)', text))
                for flag in required}
     require(all(present.values()), 'native_cli_missing_advertised_operation')
+    require(not require_file_source or 'checked-file-source-v1' in text,
+            'native_cli_missing_file_source_transport')
     return {'kind': 'timelearner_native_cli_interface', 'schema_version': 1,
             'runtime_fingerprint': runtime['runtime_fingerprint'],
             'executable_sha256': runtime['executable']['sha256'],
@@ -79,3 +86,32 @@ def inspect_native_cli(runtime, operations):
             'help_sha256': hashlib.sha256(raw).hexdigest(),
             'returncode': process.returncode, 'wall_seconds': time.monotonic()-started,
             'native_job_executed': False, 'scientific_verdict': None}
+
+
+def _inspect_windows_cli(runtime, operations, output, require_file_source):
+    """The same capability contract using an owned Windows Job, not pidfds."""
+    from .native_gate import _environment
+    from .windows_process import execute
+    values = {key: runtime['loader_environment'].get(key)
+              for key in ('PATH','QT_PLUGIN_PATH','QT_QPA_PLATFORM')}
+    values.update(GTEST_FILTER='-*',GTEST_LIST_TESTS='1',GTEST_REPEAT='1',GTEST_SHUFFLE='0')
+    with _environment(values):
+        process = execute(runtime, ['--help'], Path(runtime['executable']['path']).parent,
+            output/'cli-process', memory_bytes=1024**3, maximum_processes=16,
+            maximum_wall_seconds=30, lock_file=output/'cli-probe.lock', cooperative_capture=False)
+    require(process['execution']=='completed' and process['returncode']==0 and
+            process['all_processes_closed'], 'windows_cli_process_incomplete')
+    files=[output/'cli-process'/name for name in ('stdout.log','stderr.log')]
+    require(sum(p.stat().st_size for p in files)<=MAX_HELP_BYTES, 'native_cli_help_output_limit')
+    raw=b''.join(p.read_bytes() for p in files)
+    text=raw.decode('utf-8',errors='strict')
+    flags=['--app-ini','--timelearner-output',*('--timelearner-'+op for op in operations)]
+    present={flag:bool(re.search(r'(?m)^\s*'+re.escape(flag)+r'(?:\s|,|=|$)',text)) for flag in flags}
+    require(all(present.values()), 'native_cli_missing_advertised_operation')
+    require(not require_file_source or 'checked-file-source-v1' in text,
+            'native_cli_missing_file_source_transport')
+    return dict(kind='timelearner_native_cli_interface',schema_version=1,
+        runtime_fingerprint=runtime['runtime_fingerprint'],executable_sha256=runtime['executable']['sha256'],
+        operations=operations,arguments=['--help'],advertised_options=present,help_text=text,
+        help_sha256=hashlib.sha256(raw).hexdigest(),returncode=0,wall_seconds=process['wall_seconds'],
+        native_job_executed=False,scientific_verdict=None)

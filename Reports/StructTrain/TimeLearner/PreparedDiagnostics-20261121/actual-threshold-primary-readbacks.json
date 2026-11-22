@@ -1,0 +1,419 @@
+{
+  "kind": "timelearner_actual_threshold_primary_readbacks",
+  "schema_version": 1,
+  "workers": {
+    "elder": {
+      "kind": "timelearner_actual_threshold_primary_readback",
+      "schema_version": 1,
+      "job": "s11-prepared-long-model-threshold-elder-a1",
+      "execution_sha256": "7a64e4fb003ed5ffa59c955ac407c31249195f64f5963f9f8e07982a9762e95a",
+      "model_revision": "ec82f91aaf806a562fcfcc29501eeabbfa0ccd0d2a93bccaf9a7190681c5cda3",
+      "rows": [
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 1,
+          "spike_times": [
+            0.4935
+          ],
+          "spike_times_relative_to_onset": [
+            0.4835
+          ],
+          "classification": "TP",
+          "soma_count": 4,
+          "lt_maximum": 0.025976868664180974
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 4,
+          "lt_maximum": 0.025459292990778953
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 4,
+          "lt_maximum": 0.02545932586406524
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 4,
+          "lt_maximum": 0.025459325864065185
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 1,
+          "spike_times": [
+            8.494
+          ],
+          "spike_times_relative_to_onset": [
+            0.4819999999999993
+          ],
+          "classification": "FP",
+          "soma_count": 4,
+          "lt_maximum": 0.029190001010410582
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 4,
+          "lt_maximum": 0.025507177936130276
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 1,
+          "spike_times": [
+            12.495
+          ],
+          "spike_times_relative_to_onset": [
+            0.4819999999999993
+          ],
+          "classification": "FP",
+          "soma_count": 4,
+          "lt_maximum": 0.027975600183236526
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 4,
+          "lt_maximum": 0.025459307132192965
+        }
+      ],
+      "actual_recorded_spike_counts": {
+        "TP": 1,
+        "FN": 0,
+        "FP": 2,
+        "TN": 5
+      },
+      "primary_sha256_checked": true,
+      "full_production_audit_required": true,
+      "training_completed": false,
+      "independently_heldout_evaluation": false,
+      "protocol": "historical_same_matrix",
+      "scientific_verdict": null,
+      "audit_exception.json": {
+        "reason": "threshold_native_prepared_worker_failed",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/requests/s11-long-threshold-independent-audit-elder-a1/queue.py\", line 13, in <module>\n    require(not (output/'exception.json').exists(),'threshold_native_prepared_worker_failed');require(time.monotonic()<deadline,'threshold_audit_queue_deadline');(c/'waiting.json').write_text(json.dumps(dict(waiting_for=str(output/'terminal.json'),wall_time=time.time(),native_unchanged=True,scientific_verdict=None))+'\\n');time.sleep(20)\n  File \"/home/user/timelearner-refactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: threshold_native_prepared_worker_failed\n"
+      }
+    },
+    "m40": {
+      "kind": "timelearner_actual_threshold_primary_readback",
+      "schema_version": 1,
+      "job": "s11-prepared-long-model-threshold-m40-a1",
+      "execution_sha256": "d1dcc9d9ea949a5e4327b31ddae348bc138585606cabe01b41f86972f54023e2",
+      "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+      "rows": [
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 1,
+          "spike_times": [
+            0.493
+          ],
+          "spike_times_relative_to_onset": [
+            0.483
+          ],
+          "classification": "TP",
+          "soma_count": 1,
+          "lt_maximum": 0.10124429345441299
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.07744171266563815
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.07856659683693601
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.057349213502528196
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 1,
+          "spike_times": [
+            8.4945
+          ],
+          "spike_times_relative_to_onset": [
+            0.48249999999999993
+          ],
+          "classification": "FP",
+          "soma_count": 1,
+          "lt_maximum": 0.10134074099314117
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.08000093447616519
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.09864974702793361
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.07459538421080303
+        }
+      ],
+      "actual_recorded_spike_counts": {
+        "TP": 1,
+        "FN": 0,
+        "FP": 1,
+        "TN": 6
+      },
+      "primary_sha256_checked": true,
+      "full_production_audit_required": true,
+      "training_completed": false,
+      "independently_heldout_evaluation": false,
+      "protocol": "historical_same_matrix",
+      "scientific_verdict": null
+    },
+    "windows": {
+      "kind": "timelearner_actual_threshold_primary_readback",
+      "schema_version": 1,
+      "job": "windows-prepared-long-model-threshold-a2",
+      "execution_sha256": "e31f8d1d3d24b4ae8006aa23ac944f357c4351edf4c3130b3e1ab972ca1f6b81",
+      "model_revision": "e3149bcebad4b9655060834c1f63e4730b2704ca27e6d92650209f66bb74e0d6",
+      "rows": [
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 1,
+          "spike_times": [
+            0.4925
+          ],
+          "spike_times_relative_to_onset": [
+            0.4825
+          ],
+          "classification": "TP",
+          "soma_count": 1,
+          "lt_maximum": 0.10074983443469898
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.07803748703589608
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.07916229640277728
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.05701810604111557
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 1,
+          "spike_times": [
+            8.4945
+          ],
+          "spike_times_relative_to_onset": [
+            0.48249999999999993
+          ],
+          "classification": "FP",
+          "soma_count": 1,
+          "lt_maximum": 0.10119032917664028
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.07984227200415395
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.09702647037105083
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "samples": 4001,
+          "complete": true,
+          "spike_count": 0,
+          "spike_times": [],
+          "spike_times_relative_to_onset": [],
+          "classification": "TN",
+          "soma_count": 1,
+          "lt_maximum": 0.0726300395803855
+        }
+      ],
+      "actual_recorded_spike_counts": {
+        "TP": 1,
+        "FN": 0,
+        "FP": 1,
+        "TN": 6
+      },
+      "primary_sha256_checked": true,
+      "full_production_audit_required": true,
+      "training_completed": false,
+      "independently_heldout_evaluation": false,
+      "protocol": "historical_same_matrix",
+      "scientific_verdict": null,
+      "audit_exception.json": {
+        "reason": "threshold_audit_host_memory_admission",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\controls\\windows-long-threshold-independent-audit-a1\\queue.py\", line 18, in <module>\n    m=Memory();m.length=ctypes.sizeof(m);require(ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(m)) and m.available_physical>=18*1024**3,'threshold_audit_host_memory_admission')\n                                         ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-json-transport-a1\\Scripts\\StructTrain\\TimeLearner\\native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: threshold_audit_host_memory_admission\n"
+      }
+    }
+  },
+  "full_production_audits_pending": true,
+  "scientific_verdict": null
+}

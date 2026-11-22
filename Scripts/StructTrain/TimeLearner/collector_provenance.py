@@ -69,6 +69,22 @@ def _identity(value):
     return (value.st_dev, value.st_ino, value.st_size, value.st_mtime_ns, value.st_ctime_ns)
 
 
+def _path_matches_opened(path, path_stat, opened):
+    if os.name != 'nt':
+        return _identity(path_stat) == _identity(opened)
+    # Windows stat and CRT fstat can expose different file-id widths. Compare
+    # path stats to path stats, and prove descriptor identity by opening the
+    # current path again and comparing two native fstat results. Do not mask
+    # inode bits or remove the path-to-open-handle identity check.
+    descriptor=os.open(path,os.O_RDONLY | getattr(os,'O_BINARY',0) | getattr(os,'O_NOFOLLOW',0))
+    try:
+        current=os.fstat(descriptor)
+        return (path_stat.st_size == opened.st_size and stat.S_ISREG(current.st_mode) and
+                _identity(current) == _identity(opened))
+    finally:
+        os.close(descriptor)
+
+
 def _frozen(path, maximum_bytes):
     require(type(maximum_bytes) is int and maximum_bytes > 0, "collector_invalid_size_budget")
     path = _canonical(path)
@@ -78,12 +94,14 @@ def _frozen(path, maximum_bytes):
     descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0))
     with os.fdopen(descriptor, "rb") as stream:
         opened = os.fstat(stream.fileno())
-        require(_identity(before) == _identity(opened), "collector_file_changed_during_read")
+        require(_path_matches_opened(path,before,opened), "collector_file_changed_during_read")
         raw = stream.read(before.st_size + 1)
         after_open = os.fstat(stream.fileno())
-    after_path = path.lstat()
+        after_path = path.lstat()
+        require(_path_matches_opened(path,after_path,after_open), "collector_file_changed_during_read")
+    _canonical(path)
     require(len(raw) == before.st_size and len(raw) <= maximum_bytes and
-            _identity(before) == _identity(after_open) == _identity(after_path),
+            _identity(before) == _identity(after_path) and _identity(opened) == _identity(after_open),
             "collector_file_changed_during_read")
     return raw, {"source_path": str(path), "bytes": len(raw), "sha256": _sha(raw)}
 
@@ -98,15 +116,19 @@ def frozen_digest(path, maximum_bytes):
     descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0))
     digest = hashlib.sha256();count = 0
     with os.fdopen(descriptor, "rb") as stream:
-        require(_identity(before) == _identity(os.fstat(stream.fileno())),
+        opened=os.fstat(stream.fileno())
+        require(_path_matches_opened(path,before,opened),
                 "collector_file_changed_during_read")
         while block := stream.read(1024*1024):
             count += len(block)
             require(count <= maximum_bytes, "collector_file_changed_during_read")
             digest.update(block)
         after_open = os.fstat(stream.fileno())
+        after_path = path.lstat()
+        require(_path_matches_opened(path,after_path,after_open), "collector_file_changed_during_read")
+    _canonical(path)
     require(count == before.st_size and
-            _identity(before) == _identity(after_open) == _identity(path.lstat()),
+            _identity(before) == _identity(after_path) and _identity(opened) == _identity(after_open),
             "collector_file_changed_during_read")
     return {"source_path": str(path), "bytes": count, "sha256": digest.hexdigest()}
 

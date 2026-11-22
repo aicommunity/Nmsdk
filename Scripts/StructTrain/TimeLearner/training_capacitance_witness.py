@@ -90,6 +90,12 @@ def validate_graph_input_parameters(declaration, identity, parameters):
     require(type(parameters) is list and len(parameters) == len(declaration['inputs']),
             'training_capacitance_parameter_dimensions_mismatch')
     nodes = _nodes(identity['model']); expected = set()
+    allow_muted = declaration.get('allow_muted_input_baseline', False)
+    require(type(allow_muted) is bool and (not allow_muted or declaration['branch'] is True),
+            'training_capacitance_invalid_muted_baseline')
+    incoming = {}
+    for binding in identity['model']['bindings']:
+        incoming.setdefault(binding['target'], []).append(binding)
     for index, value in enumerate(parameters):
         require(type(value) is dict and set(value) == {'length', 'synapses', 'resistance'},
                 'invalid_training_capacitance_input_parameters')
@@ -101,11 +107,21 @@ def validate_graph_input_parameters(declaration, identity, parameters):
         actual = nodes[membrane]['parameters']['NumExcitatorySynapses']
         require(actual['binding'] is False and actual['data']['type'] == 'signed_integer' and
                 actual['data']['value'] == str(synapses), 'training_capacitance_synapse_count_mismatch')
+        connected = None
         for member in range(1, synapses+1):
             path = f'{membrane}.ExcSynapse{member}'
             require(path in nodes and _physical(nodes[path], 'Resistance') == resistance,
                     'training_capacitance_resistance_mismatch')
-            expected.add(path+':Input')
+            target = path+':Input'; links = incoming.get(target, [])
+            require(len(links) <= 1, 'training_capacitance_stimulus_bank_mismatch')
+            active = bool(links)
+            if active:
+                require(links[0]['kind'] == 'stimulus_port' and links[0]['source'] == 'burst' and
+                        links[0]['slot'] == '0', 'training_capacitance_stimulus_bank_mismatch')
+                expected.add(target)
+            require((active or allow_muted) and (connected is None or connected == active),
+                    'training_capacitance_stimulus_bank_mismatch')
+            connected = active
     import re
     actual = [b['target'] for b in identity['model']['bindings'] if b['kind'] == 'stimulus_port'
               and b['source'] == 'burst' and re.fullmatch(r'\$\.Dendrite[1-9][0-9]*_[1-9][0-9]*\.ExcSynapse[1-9][0-9]*:Input', b['target'])]

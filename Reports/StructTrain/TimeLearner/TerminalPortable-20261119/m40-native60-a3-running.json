@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_native_terminal_portable_gate_status",
+  "schema_version": 1,
+  "source_root": "64b6e6e9959cd5e2ea4428a327cb860c327b73d8",
+  "source_pulse": "311937260912381c85c0539f94253479e7b543de",
+  "worker": "M40",
+  "job": "s07-terminal-portable-sdk-m40-a3",
+  "controls_commit": "533b1a5dbc3fe88927cda6a5ff9c8b5e3d832e87",
+  "cases_declared": 60,
+  "source": "/media/user/Data/TimeLearnerRefactor/source-terminal-portable-sdk-a3",
+  "completed_cases": null,
+  "native_acceptance": false,
+  "scientific_verdict": null,
+  "build": "/media/user/Data/TimeLearnerRefactor/build-terminal-portable-sdk-a3",
+  "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-terminal-portable-sdk-a3",
+  "canonical_preparation_passed": true,
+  "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-terminal-portable-sdk-m40-a3-controller",
+  "supervisor_identity": {
+    "pid": 199960,
+    "start_ticks": "413286290",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
+  },
+  "kernel_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "143fa6d7c1d7280aab8a209aa88e0c01cf5c81453784f7c4f9806a0edcaefc6b",
+    "unit": "timelearner-bd46b0a7-cda2-4d15-b4da-3848722d674e.service",
+    "invocation_id": "899bf29b826b4338a6f49cd2fc3df92f",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bd46b0a7-cda2-4d15-b4da-3848722d674e.service",
+    "initial_main_pid": 207497,
+    "initial_start_ticks": "413289473",
+    "sha256": "aaaf614d117216e67e0d7cf3a98300d9ce66b1e0b49a727c65ff454d4f3a713e"
+  },
+  "execution": "running"
+}

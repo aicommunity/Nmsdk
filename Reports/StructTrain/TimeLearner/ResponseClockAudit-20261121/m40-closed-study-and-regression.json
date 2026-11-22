@@ -1,0 +1,168 @@
+{
+  "name": "s11-order-clock-comparison-m40-a1",
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 64.926200193353,
+    "runtime_provenance": "loaded_files_captured",
+    "all_processes_closed": true
+  },
+  "worker/terminal.json": {
+    "operation_passed": true
+  },
+  "worker/validation/result.json": {
+    "kind": "timelearner_python_validation_result",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "executed_tests": 10,
+    "failures": [],
+    "errors": [],
+    "skipped": []
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "52ead2f9083379827ed6aac0bc8155eca441ac4b87cae3206b63bb0d4d5f5a90",
+      "unit": "timelearner-7c0c44ed-85d1-40ac-be8e-4a973433b881.service",
+      "invocation_id": "e227d959733345e697e67ab412a4c56c",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7c0c44ed-85d1-40ac-be8e-4a973433b881.service",
+      "initial_main_pid": 3415230,
+      "initial_start_ticks": "433975476",
+      "sha256": "c58e9956183c57176ace7a8b6d552b365e4932287a723f6ea50275e572bebcf5"
+    }
+  },
+  "actual_complete_study": {
+    "kind": "timelearner_closed_physical_order_reanalysis",
+    "schema_version": 1,
+    "comparator_version": 1,
+    "time_basis": "actual_stimulus_onset",
+    "absolute_tolerance": 1e-12,
+    "execution": "completed",
+    "validity": "valid",
+    "native_rerun_performed": false,
+    "source_control_trials": 8,
+    "new_study_trials": 56,
+    "source_control_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "new_study_counts": {
+      "TP": 7,
+      "FP": 7,
+      "FN": 0,
+      "TN": 42,
+      "targets": 7,
+      "foils": 49,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "by_rotation": [
+      {
+        "rotation": 1,
+        "counts": {
+          "TN": 6,
+          "FP": 1,
+          "TP": 1
+        }
+      },
+      {
+        "rotation": 2,
+        "counts": {
+          "TN": 6,
+          "FP": 1,
+          "TP": 1
+        }
+      },
+      {
+        "rotation": 3,
+        "counts": {
+          "TN": 6,
+          "FP": 1,
+          "TP": 1
+        }
+      },
+      {
+        "rotation": 4,
+        "counts": {
+          "FP": 1,
+          "TN": 6,
+          "TP": 1
+        }
+      },
+      {
+        "rotation": 5,
+        "counts": {
+          "TN": 6,
+          "TP": 1,
+          "FP": 1
+        }
+      },
+      {
+        "rotation": 6,
+        "counts": {
+          "TN": 6,
+          "TP": 1,
+          "FP": 1
+        }
+      },
+      {
+        "rotation": 7,
+        "counts": {
+          "TN": 6,
+          "TP": 1,
+          "FP": 1
+        }
+      }
+    ],
+    "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+    "source_model_data_sha256": "30e001e16191d840beaa7f65514ec79f1dd4aea8cfaafd4daf664f432c57b09d",
+    "threshold": 0.0999470202411733,
+    "all_eight_target_positions_observed": true,
+    "classifications_preserved": true,
+    "waveforms_and_events_preserved": true,
+    "original_terminal": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-branch-DATA-frozen-order-m40-a1/terminal.json",
+      "sha256": "a196cdf24485990bbeb746b96e6d581595d4e08e33c72d2ef3ca5c5b48d3677e",
+      "size": 31968
+    },
+    "original_absolute_clock_comparison_result": false,
+    "all_input_bytes_unchanged": true,
+    "training_completed": false,
+    "independently_heldout_evaluation": false,
+    "continuous_stream_verified": false,
+    "inter_pattern_interval_varied": false,
+    "scientific_verdict": null,
+    "maxima": {
+      "maximum_absolute_signal_difference": 0.0,
+      "maximum_relative_sample_time_difference": 1.4210854715202004e-14,
+      "maximum_relative_history_difference": 1.2503886814840826e-14,
+      "maximum_relative_event_time_difference": 1.2503886814840826e-14,
+      "maximum_window_offset_difference": 9.325873406851315e-15
+    },
+    "response_rows_preserved": 56,
+    "total_rows": 56,
+    "file": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-order-clock-comparison-m40-a1/worker/tmp/closed-order-stimulus-relative-reanalysis.json",
+      "bytes": 125586,
+      "sha256": "9d7f92e669f46ae9048d948e25fa06b26f08a4eb198da9ffeb69e30c5a0819d3"
+    }
+  },
+  "code_root_commit": "714077b1b1fb1ce7d4deeab68812c1a9d1a11a9b",
+  "controls_commit": "067f81ccd7eadb976f5f846d6e6def29e3be9c72"
+}

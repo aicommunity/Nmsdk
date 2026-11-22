@@ -1,0 +1,25 @@
+digraph G {
+ graph [rankdir=TB, bgcolor=white, pad="0.15", nodesep="0.25", ranksep="0.28", fontname=Arial];
+ node [shape=box, style="rounded", fontname=Arial, fontsize=18, margin="0.12,0.09"];
+ edge [fontname=Arial, fontsize=15, arrowsize=0.8];
+ x [label="Входная пачка\nx(t)"];
+ s0 [label="Синапсы\nNₛ,₀ и Rₛ,₀"];
+ s1 [label="Синапсы\nNₛ,₁ и Rₛ,₁"];
+ sr [label="Опорные\nсинапсы"];
+ d0 [label="Дендрит 0\nL₀ сегментов"];
+ d1 [label="Дендрит 1\nL₁ сегментов"];
+ dr [label="Опорный дендрит\nLᵣ сегментов"];
+ b0 [label="Участок\nсомы B₀"];
+ b1 [label="Участок\nсомы B₁"];
+ br [label="Участок\nсомы Bᵣ"];
+ avg [shape=circle, label="Σ / N"];
+ z [label="Низкопороговая\nзона"];
+ y [label="Выходной\nимпульс"];
+ x -> s0 -> d0 -> b0 -> avg;
+ x -> s1 -> d1 -> b1 -> avg;
+ x -> sr -> dr -> br -> avg;
+ avg -> z -> y;
+ z -> b0 [style=dashed, constraint=false, label="перезарядка"];
+ z -> b1 [style=dashed, constraint=false];
+ z -> br [style=dashed, constraint=false];
+}

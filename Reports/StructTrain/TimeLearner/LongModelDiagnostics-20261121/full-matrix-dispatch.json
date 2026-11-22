@@ -1,0 +1,96 @@
+{
+  "kind": "timelearner_actual_long_model_baseline_dispatch",
+  "schema_version": 1,
+  "workers": {
+    "elder": {
+      "prepared": true,
+      "started": true,
+      "job": "s11-long-model-baseline-elder-a1",
+      "launcher_pid": 559479,
+      "controls": "c8b8c2de58d94faf1978bdf863ccf587380d2aa0",
+      "request": "/home/user/timelearner-refactor/requests/long-model-baseline-elder-a1/Docs/StructTrain/TimeLearner/Experiments/LongModelBaseline-20261121/request.json",
+      "compact_source": {
+        "path": "/home/user/timelearner-refactor/readbacks/s11-json-carrier-elder-a1/worker/tmp/compact-native-source/source/train_stopped_state.json",
+        "bytes": 332050532,
+        "sha256": "4cf0abc620f3f9d3cca54585123babafd0c3775467931d7c2d36c59d9e64c0a6"
+      },
+      "compact_summary": {
+        "path": "/home/user/timelearner-refactor/readbacks/s11-json-carrier-elder-a1/worker/tmp/compact-native-source/source/train_stopped_summary.json",
+        "bytes": 58086068,
+        "sha256": "527001bece29720912df65933853fe9451f1892e1228a143704d02e539210b47"
+      },
+      "native_trials": 8,
+      "training_outcome": "budget_exhausted",
+      "scientific_verdict": null
+    },
+    "m40": {
+      "prepared": true,
+      "started": true,
+      "job": "s11-long-model-baseline-m40-a1",
+      "launcher_pid": 2257088,
+      "controls": "4abcde896395e3a0ce1d1e09ba2e274e7353bad6",
+      "request": "/media/user/Data/TimeLearnerRefactor/requests/long-model-baseline-m40-a1/Docs/StructTrain/TimeLearner/Experiments/LongModelBaseline-20261121/request.json",
+      "compact_source": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-json-carrier-m40-a1/worker/tmp/compact-native-source/source/train_stopped_state.json",
+        "bytes": 400189937,
+        "sha256": "ce3d25adaf1cb44a44dbb8d414ede8dec6a39c87d19e3c2cf0460c68061a7d9d"
+      },
+      "compact_summary": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-json-carrier-m40-a1/worker/tmp/compact-native-source/source/train_stopped_summary.json",
+        "bytes": 100184320,
+        "sha256": "d3ab6ef5fc346f007c6284d3220466d2223dd869f5eb3f9813ea90a9909e61b7"
+      },
+      "native_trials": 8,
+      "training_outcome": "budget_exhausted",
+      "scientific_verdict": null
+    },
+    "windows": {
+      "dispatched": true,
+      "job": "windows-long-model-baseline-a2",
+      "controls": "92f4a2ba0c05fc530c0dda3806b36d45e53858a2",
+      "task": {
+        "instance": "{1470E7D8-6DE6-4E8F-9577-558110F9A3D1}",
+        "execution_time_limit": "PT16H",
+        "task": "TimeLearner-windows-long-model-baseline-a2",
+        "engine_pid": 10908
+      },
+      "prior_failed_attempt_retained": true,
+      "native_trials": 8,
+      "source_model_revision": "01ff5ebf50a45cfd3a354de5902ae7702d9d7e5590945eca399f38674ed9c488",
+      "scientific_verdict": null
+    }
+  },
+  "threshold": 100,
+  "trials_per_model": 8,
+  "observation_seconds_per_trial": 2,
+  "reset_policy": "reset_per_trial",
+  "training_completed": false,
+  "expected_scientific_verdict": null,
+  "run_completion_not_granted_by_dispatch": true,
+  "prior_windows_attempt": {
+    "dispatch": {
+      "dispatched": true,
+      "job": "windows-long-model-baseline-a1",
+      "controls": "29289d2e856630f9cb7c8170e3d466df3277c049",
+      "task": {
+        "instance": "{D54B6B5E-1C59-4EF7-A8A7-69EC3308CA4F}",
+        "execution_time_limit": "PT16H",
+        "task": "TimeLearner-windows-long-model-baseline-a1",
+        "engine_pid": 18092
+      },
+      "source_model_revision": "01ff5ebf50a45cfd3a354de5902ae7702d9d7e5590945eca399f38674ed9c488",
+      "trials": 8,
+      "training_completed": false,
+      "scientific_verdict": null
+    },
+    "execution": {
+      "reason": "nonzero_exit",
+      "execution": "process_error",
+      "all_processes_closed": true
+    },
+    "source_error": "composite_primary_missing_or_escape",
+    "native_trial_packets": 0,
+    "native_execution_exists": false,
+    "original_attempt_retained": true
+  }
+}

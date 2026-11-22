@@ -1,0 +1,118 @@
+# Загрузка полных моделей: байтовый вход и строгий JSON
+
+Актуализация18.11: первая малая server-попытка завершилась до компиляции
+из-за неверного Qt5Core на M40 с Qt6Core6.4.2; в ней0/4 cases выполнено.
+Исправленный wrapper с явно объявленным Qt6 и сверкой actual toolchain
+прошёл отдельный gate `s05-large-summary-transport-m40-a1`:25/25 Python
+и вложенные4/4 actual production parser C++ cases. Те же четыре случая
+прошли в SDK a2, но полный SDK gate отклонён:226/228, два новых native
+model roundtrip отказали до пробы. [Текущее состояние](CurrentStatus-20261118.ru.md).
+
+Статус: четыре регрессии parser выполнены на M40; полный импорт крупных
+моделей и снижение RSS ещё не проверены. Код первоначально подготовлен
+в `codex/timelearner-json-byte-source`, затем включён в отдельную ветку
+`codex/timelearner-physical-model-data`. Исходный SDK N1 Root93894dd /
+Pulse52cb953 и runtime уже запущенных cold Train не менялись.
+
+## Основание и изменение
+
+`App/NeuroModelerConsole/TimeLearnerJobSource.h` читал весь файл в QByteArray,
+преобразовывал его в std::string, затем общий parser создавал ещё один
+QByteArray. Для сохранённых моделей761851830 и678423634 байт эти явные
+полные копии дороги. Это наблюдение по production-пути, а не измерение
+peak RSS новой реализации.
+
+Общий parser перенесён из `ConfiguredNativeTraining.cpp` в отдельные
+`PulseLib/Core/TimeLearner/StrictNativeJson.{h,cpp}`. Это тот же production
+parser для обычного конфигурационного входа и файлового транспорта.
+Вход `ParseStrictNativeJsonBytes` принимает исходный QByteArray; старый
+`ParseStrictNativeJsonObject(std::string)` сохранён и передаёт временный
+read-only view. Возвращаемый QJsonObject владеет разобранными данными.
+Пределы размера, глубины, проверки синтаксиса и дублирующихся ключей сохранены.
+
+Дополнительно закрыт обнаруженный разрыв проверки: Qt допускает UTF-8 BOM,
+а старый обход duplicate keys начинал с BOM как с primitive и не обходил
+члены объекта. Новый обход учитывает BOM, а после корневого объекта требует
+конца документа с допустимыми JSON-пробелами. NUL или другие хвостовые байты
+не должны превращаться в молчаливо отброшенные данные.
+
+## Проверки
+
+`Test_PulseLib_NativeJson.cpp` содержит четыре случая:
+
+- равенство байтового/строкового входов и сохранность результата после
+  изменения исходных буферов; Unicode, NUL внутри строки и128KiB payload;
+- nested и escaped duplicate keys;
+- обычный и дублирующий объект с UTF-8 BOM;
+- точные byte limits, многобайтная строка, malformed framing и trailing NUL.
+
+Production parser компилируется напрямую в `Test_PulseLib_NativeJson` через
+`NativeJson.cmake`. Этот малый Qt-only target доступен также из
+`Tests/Integration/Algorithms`, использует штатный runtime-capture main.
+Те же четыре случая включены в полный `StorageComponents`; тело функции
+не копируется в тестовый код. Малый target не подтверждает полный импорт
+обученной модели или физическую эквивалентность Train → Test.
+
+Следующая приёмка: полный Console/file-source cohort и actual большие
+stopped-model Test с явно объявленными лимитами и исходными полными
+моделями. Оценить execution, RSS, model identity, полноту8 наблюдений и
+неизменность frozen model. Не выдавать статическое устранение копий за
+измеренное уменьшение RSS или научный результат.
+
+## Граница с этапом5
+
+Это **не** компактная новая схема модели. Все существующие пакеты, история,
+проверки provenance и сертификатов читаются целиком. Отдельный полноценный
+model export должен отделять физический graph/storage/dataset/threshold
+от search history и controller checkpoint, иметь версионированную схему
+и проверяемую ссылку на доказательства в M40 archive. Удаление полей из
+старого пакета или ручной overlay не заменяют этот экспорт. Этот пункт
+исходного плана остаётся открытым.
+
+18 ноября подготовлена отдельная реализация
+[полного physical model DATA](PhysicalModelData-20261118.ru.md).
+Её первый собранный worker gate выявил две ошибки fixture до физических
+проб; исправленный fixture проверяется отдельно. Frozen evaluation пока
+не интегрирован; четыре parser cases не являются приёмкой model DATA.
+
+## Зафиксированная серверная подготовка
+
+Root `db483e081732e04620807d870d126b0b98b49a48`, Pulse
+`3b51b81495197a3871504867474514657871cc38` доставлены через Git в отдельный
+M40 `source-native-json-byte-a1`. Для малого production kernel4 созданы
+controls `3cb65bd702c0005e49a5a84f50d4a603603ae914`, job
+`s05-native-json-byte-kernel-m40-a1`. Source, suite, compiler и Git gtest
+объявлены отдельно; preflight не выполнял тесты.
+[Квитанция подготовки](../../../Reports/StructTrain/TimeLearner/NativeJsonByteSource-20261117/kernel-preparation.json).
+Эта первая попытка закончилась указанной выше ошибкой Qt5Core. Последующий
+закрытый gate Qt6 имеет controls `bb00c0a2e4cb68fdf6b9472731ac999ded666914`,
+Root `ea0b039f3bd4f7784ff76e32d90fb99a50032ac2`.
+[Квитанция25/25 и4/4](../../../Reports/StructTrain/TimeLearner/LargeSummaryTransport-20261118/closed-readback.json).
+
+## Фактический большой импорт — 18 ноября
+
+`s11-fair-input-cold-matrix-m40-a1` сохранил обе полные8-pattern native
+execution записи и exit0/loaded-files capture. Через checked-file-source-v1
+прочитаны source340881455 bytes Classic и636297940 bytes Branch; Python
+прошёл исходные summary57044127/167249672 bytes. Оба native Test сформировали
+по8 полных окон4001 отсчёт/2000Hz, frozen model revision сохранена.
+
+Это подтверждение конкретной большой интеграции существующего полного
+формата. Общий controller остановился по wall budget во время завершающего
+анализа; Classic run manifest готов, Branch run manifest отсутствует. Этот
+отрицательный исход не изменён; технический импорт не объявляется полным
+PASS всего pipeline или научной классификацией. Threshold100 дал молчание;
+отдельный опыт выбранных порогов выполняется.
+[Постановка и точные наблюдения](FairInputColdThresholdStudy-20261118.ru.md).
+[Compact readback](../../../Reports/StructTrain/TimeLearner/FairInputCold-20261118/nonspiking-matrix-observed.json).
+
+Windows Root03d/Pulsec54 дополнительно прошёл отдельный native227 cohort,
+включая production parser и исправленный physical DATA roundtrip fixture.
+[Полный проверенный corpus227 во внешнем archive](../../../Reports/StructTrain/TimeLearner/WindowsPhysicalModelData-20261118/native227-primary.archive.json).
+Новый frozen DATA API Pulse5f8 и Console/runner Rootb28 проверяются отдельно
+в source Rootc736; их сборка не является runtime приёмкой248/247 случаев.
+
+Новый Windows frozen DATA247 завершился230 PASS/9 failures/8 skips и не принят.
+Root28f исправляет3 fixture cases; их isolated build a2 идёт отдельно.
+[Точные причины и полный отрицательный corpus](WindowsFrozenDataGate-20261118.ru.md).
+Большой импорт прежнего full-source формата подтверждён отдельно от этого API.

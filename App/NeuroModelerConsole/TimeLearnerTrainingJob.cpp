@@ -260,12 +260,17 @@ template<class Owner> int Execute(const Job& job,const QString& output,const boo
                 {"model_time_end",environment->GetTime().GetDoubleTime()},{"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}},
                 {},QJsonValue(QJsonValue::Null),identity["sha256"],evidence->NativeTrials(),evidence->SampledFrames()));return 2;
         }
-        const auto exported=owner->ExportNativeLearnedBoundary(job.implementation);
-        const auto& package=exported.learnedState;
         const QString packageName=stopped?"train_stopped_state.json":"train_learned_state.json";
-        // Preserve the completed model if a later artifact write is interrupted.
-        // execution.json remains the final completion marker for the entire run.
-        artifacts.append(Write(output,packageName,package));
+        // Persist the checked model at the library's closed export boundary,
+        // BEFORE derived summary/publication work. execution.json remains the
+        // final completion marker; a model alone never claims a completed run.
+        QJsonObject savedPackage;
+        const auto exported=owner->ExportNativeLearnedBoundary(job.implementation,[&](const QJsonObject& ready) {
+            Require(savedPackage.isEmpty(),"training_job_duplicate_state_delivery");
+            artifacts.append(WriteStaged(output,packageName,ready));savedPackage=ready;
+        });
+        const auto& package=exported.learnedState;
+        Require(!savedPackage.isEmpty() && savedPackage==package,"training_job_saved_state_boundary_changed");
         const auto publication=PublishCheckedNativeCompositeArchive(output,package,artifacts);
         const auto compositeArchive=publication.Descriptor();
         artifacts.append(Write(output,stopped?"train_stopped_summary.json":"train_learned_summary.json",exported.summary));

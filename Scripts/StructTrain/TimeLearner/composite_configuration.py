@@ -86,6 +86,8 @@ def validate_composite_measurement(declaration, *, inputs, frequency, maximum_sa
 
 def project_composite_configuration(configuration):
     """Return an unchanged-meaning base view; never send the projection native."""
+    from .terminal_configuration import split_terminal_configuration
+    configuration,_=split_terminal_configuration(configuration)
     require(type(configuration) is dict and configuration.get('kind') == 'timelearner_native_cold_configuration',
             'unknown_composite_configuration_schema')
     require(count(configuration.get('schema_version')) == 6, 'unknown_composite_configuration_schema')
@@ -119,6 +121,11 @@ def project_composite_configuration(configuration):
                 'invalid_composite_declared_window')
     require(number(configuration['maximum_model_seconds']) > 0 and number(configuration['maximum_wall_seconds']) > 0,
             'invalid_composite_attempt_time_budget')
+    tolerances = configuration['search']['tolerances']
+    _keys(tolerances, {'amplitude_absolute', 'amplitude_relative', 'sync'},
+          'unknown_composite_search_tolerance_fields')
+    require(all(number(value) >= 0 for value in tolerances.values()),
+            'negative_composite_search_tolerance')
     validate_composite_measurement(configuration['composite_measurement'], inputs=len(inputs), frequency=frequency,
                                    maximum_samples=_count(configuration['maximum_samples']))
     projected = deepcopy(configuration)
@@ -128,6 +135,10 @@ def project_composite_configuration(configuration):
 
 def project_training_configuration(configuration):
     """Select the explicit envelope without changing legacy1–5 validation."""
+    if type(configuration) is dict and configuration.get('schema_version')==9:
+        from .terminal_configuration import split_terminal_configuration
+        base,_=split_terminal_configuration(configuration)
+        return project_training_configuration(base)
     if type(configuration) is dict and configuration.get('schema_version') in (7,8):
         from .candidate_window_contract import configuration_view
         return project_composite_configuration(configuration_view(configuration))

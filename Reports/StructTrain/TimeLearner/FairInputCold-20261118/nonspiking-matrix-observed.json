@@ -1,0 +1,948 @@
+{
+  "kind": "timelearner_cold_nonspiking_matrix_observed_readback",
+  "schema_version": 1,
+  "source_job": "s11-fair-input-cold-matrix-m40-a1",
+  "source_controller_whole_attempt": "wall_budget_exceeded",
+  "observation_scope": "native outputs/process readback; original Branch run manifest absent, full portable recovery not claimed",
+  "cases": {
+    "classic": {
+      "process/result.json": {
+        "kind": "timelearner_process_result",
+        "schema_version": 2,
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true,
+        "runtime_provenance": "loaded_files_captured"
+      },
+      "native/execution.json": {
+        "kind": "timelearner_native_diagnostic_evaluation_execution",
+        "schema_version": 1,
+        "execution": "completed",
+        "observed_trials": 8,
+        "expected_trials": 8,
+        "model_ticks": 32008,
+        "frequency_hz": 2000,
+        "model_time_begin": 0,
+        "model_time_end": 16.004,
+        "model_revision": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+        "artifacts": [
+          {
+            "bytes": 354353198,
+            "path": "job.json",
+            "sha256": "c0369f190359f7785e0768d88e287bf5882c0fbd510672dddcc82ee41a3ae3c2"
+          },
+          {
+            "bytes": 374808649,
+            "path": "model.json",
+            "sha256": "4caa0a5464a0c6315c876ec0ca614c2880565a7bc0d8d5cf3fa4649b7a45b565"
+          },
+          {
+            "bytes": 1750480,
+            "path": "trial-0.json",
+            "sha256": "f3b85996abca7a63c94703bee09930a774b5ef85543b1fe18be8d137493585fe"
+          },
+          {
+            "bytes": 1750481,
+            "path": "trial-1.json",
+            "sha256": "dbecf46a20506502a72a6f49740cf26675bcfe6d718eb29b29a58b8fee19ba8a"
+          },
+          {
+            "bytes": 1750418,
+            "path": "trial-2.json",
+            "sha256": "fc3f613cbd43745d405ea5c9e98f1c82905edcab50ac77513f046bd6140e632e"
+          },
+          {
+            "bytes": 1750227,
+            "path": "trial-3.json",
+            "sha256": "2d311018ade46e37f496da0226681edbb81ec9d0c16db4ce40593c03f0471ecf"
+          },
+          {
+            "bytes": 1750608,
+            "path": "trial-4.json",
+            "sha256": "3cb8dbe6f9726c6087da27e54379a9a6f1cdd5c5f27e8cf1780e5e46fa6c2615"
+          },
+          {
+            "bytes": 1754566,
+            "path": "trial-5.json",
+            "sha256": "314f4be985cbde55ae8e26f86599cae3125b7aa1cb80abb19b53974e6526e35d"
+          },
+          {
+            "bytes": 1755066,
+            "path": "trial-6.json",
+            "sha256": "da4d3d4c8584c7419c755b4e4718f579d0a9b12f18b37c689de2f8271e062974"
+          },
+          {
+            "bytes": 1755071,
+            "path": "trial-7.json",
+            "sha256": "89596f79e50a2acb2174e0b33d2d57b0546756b813817654f284fc817c565d63"
+          },
+          {
+            "bytes": 3995,
+            "path": "evaluation.json",
+            "sha256": "c77b20a6472669fdc8256e623a1ec66836dacb7fe3f30d765b019e1a3a855d23"
+          },
+          {
+            "bytes": 374808649,
+            "path": "model-after.json",
+            "sha256": "4caa0a5464a0c6315c876ec0ca614c2880565a7bc0d8d5cf3fa4649b7a45b565"
+          }
+        ],
+        "run_id": "classic/stopped-phasea-diagnostic"
+      },
+      "native/evaluation.json": {
+        "kind": "timelearner_diagnostic_recognition_evaluation_spec",
+        "schema_version": 1,
+        "model_revision": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+        "run_id": "classic/stopped-phasea-diagnostic",
+        "criterion": {
+          "anchor": "onset",
+          "begin_offset": 0,
+          "end_offset": null,
+          "id": "post_anchor_target_whole_window_foil_v1",
+          "reject_target_outside_window": true
+        },
+        "coverage_policy": "per_trial_windows"
+      },
+      "trials": [
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+          "model_before": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "model_after": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            0.01,
+            0.09,
+            0.25,
+            0.49
+          ],
+          "begin": 0,
+          "end": 2,
+          "closed_at": 2,
+          "samples": 4001,
+          "soma_max": [
+            0.024469780037959965,
+            0.002742755563599264,
+            0.02677621381340556,
+            0.02677621381340556
+          ],
+          "lt_potential_max": 0.019859704144444407,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+          "model_before": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "model_after": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            2.0105,
+            2.2505,
+            2.4105,
+            2.4905
+          ],
+          "begin": 2.0005,
+          "end": 4.000500000000001,
+          "closed_at": 4.0005,
+          "samples": 4001,
+          "soma_max": [
+            0.024469775289521323,
+            0.002742755536329078,
+            0.02677621381340556,
+            0.02677621381340556
+          ],
+          "lt_potential_max": 0.018918651319342422,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+          "model_before": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "model_after": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            4.011,
+            4.171,
+            4.251,
+            4.491
+          ],
+          "begin": 4.001,
+          "end": 6.001,
+          "closed_at": 6.001,
+          "samples": 4001,
+          "soma_max": [
+            0.024469775289521323,
+            0.002742755536329078,
+            0.02677621381340556,
+            0.02677621381340556
+          ],
+          "lt_potential_max": 0.0189361405334309,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+          "model_before": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "model_after": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            6.0115,
+            6.1715,
+            6.3315,
+            6.4915
+          ],
+          "begin": 6.0015,
+          "end": 8.0015,
+          "closed_at": 8.0015,
+          "samples": 4001,
+          "soma_max": [
+            0.02197832610873629,
+            0.002566761426104791,
+            0.026776213813405003,
+            0.026776213813405003
+          ],
+          "lt_potential_max": 0.018936140502434168,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+          "model_before": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "model_after": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            8.012,
+            8.032,
+            8.252,
+            8.492
+          ],
+          "begin": 8.002,
+          "end": 10.002,
+          "closed_at": 10.002,
+          "samples": 4001,
+          "soma_max": [
+            0.04215919116492617,
+            0.004884815239468154,
+            0.026840060407207322,
+            0.026840060407207322
+          ],
+          "lt_potential_max": 0.023712865234911368,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+          "model_before": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "model_after": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            10.0125,
+            10.2525,
+            10.4725,
+            10.4925
+          ],
+          "begin": 10.0025,
+          "end": 12.0025,
+          "closed_at": 12.0025,
+          "samples": 4001,
+          "soma_max": [
+            0.04215919195544082,
+            0.004884815246327223,
+            0.026840060407207322,
+            0.026840060407207322
+          ],
+          "lt_potential_max": 0.018950574616243304,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+          "model_before": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "model_after": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            12.013,
+            12.053,
+            12.093,
+            12.493
+          ],
+          "begin": 12.003,
+          "end": 14.003,
+          "closed_at": 14.003,
+          "samples": 4001,
+          "soma_max": [
+            0.044652261275457406,
+            0.004889553293319748,
+            0.02677623266862439,
+            0.02677623266862439
+          ],
+          "lt_potential_max": 0.022943473218361543,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+          "model_before": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "model_after": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            14.0135,
+            14.4135,
+            14.4535,
+            14.4935
+          ],
+          "begin": 14.0035,
+          "end": 16.003500000000003,
+          "closed_at": 16.0035,
+          "samples": 4001,
+          "soma_max": [
+            0.04465226127545785,
+            0.004889553293319859,
+            0.02677623266862439,
+            0.02677623266862439
+          ],
+          "lt_potential_max": 0.018918660715955105,
+          "lt_potential_recorded": true
+        }
+      ],
+      "direct_files": [
+        "run-manifest.json",
+        "runtime-cli-interface.json"
+      ]
+    },
+    "branch": {
+      "process/result.json": {
+        "kind": "timelearner_process_result",
+        "schema_version": 2,
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "all_processes_closed": true,
+        "runtime_provenance": "loaded_files_captured"
+      },
+      "native/execution.json": {
+        "kind": "timelearner_native_diagnostic_evaluation_execution",
+        "schema_version": 1,
+        "execution": "completed",
+        "observed_trials": 8,
+        "expected_trials": 8,
+        "model_ticks": 32008,
+        "frequency_hz": 2000,
+        "model_time_begin": 0,
+        "model_time_end": 16.004,
+        "model_revision": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+        "artifacts": [
+          {
+            "bytes": 672150008,
+            "path": "job.json",
+            "sha256": "87d8281ee97470f027b3f69c512ec26a5fab45decd6cd7045a021ca5a0231f77"
+          },
+          {
+            "bytes": 683355252,
+            "path": "model.json",
+            "sha256": "2ab866739e5c95286aa28f0608d62e379cebe56c468c5ea2aa4c0107b745b05c"
+          },
+          {
+            "bytes": 1294282,
+            "path": "trial-0.json",
+            "sha256": "376581cb1771a471260e6dcc7aba20c8985cc54f316ae272b9754122221ce8de"
+          },
+          {
+            "bytes": 1294508,
+            "path": "trial-1.json",
+            "sha256": "2cfc2dfdcfe095a8717af92788b5904c5c875b8ac4c7c7645770075980e49f3d"
+          },
+          {
+            "bytes": 1294376,
+            "path": "trial-2.json",
+            "sha256": "8b62b1527d09f8d7b5f77f1547dd056dc5da5698de7353a7699380ccd5ae0c37"
+          },
+          {
+            "bytes": 1294348,
+            "path": "trial-3.json",
+            "sha256": "2910ee0bef34c9af713fe903e75fb51650397f40583a7feb0e6c1665fb30a98d"
+          },
+          {
+            "bytes": 1294317,
+            "path": "trial-4.json",
+            "sha256": "25ca283ac5512723a0a326e5adc9a99b67e16bdacc25d40d3b6a1dbe7e21be3e"
+          },
+          {
+            "bytes": 1298495,
+            "path": "trial-5.json",
+            "sha256": "71b9e7fd92a9d5a0c141e26f1070a33b27a1e4cf5d6aedd9190a39d230a2e230"
+          },
+          {
+            "bytes": 1298635,
+            "path": "trial-6.json",
+            "sha256": "353cda861d88a372bdbcf4d767a06b2115e41be249dab89d1a400ccaafd5f22d"
+          },
+          {
+            "bytes": 1298668,
+            "path": "trial-7.json",
+            "sha256": "efcb2b0e53ae30d03ffc031bfee060abf1cb5850df81093fe02b44e205d4b17c"
+          },
+          {
+            "bytes": 3986,
+            "path": "evaluation.json",
+            "sha256": "e6ac4f5bfc430c15bd6b57e2f81843c3a1dfecb1310443fa3558ca1280e6c13f"
+          },
+          {
+            "bytes": 683355252,
+            "path": "model-after.json",
+            "sha256": "2ab866739e5c95286aa28f0608d62e379cebe56c468c5ea2aa4c0107b745b05c"
+          }
+        ],
+        "run_id": "branch/stopped-phasea-diagnostic"
+      },
+      "native/evaluation.json": {
+        "kind": "timelearner_diagnostic_recognition_evaluation_spec",
+        "schema_version": 1,
+        "model_revision": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+        "run_id": "branch/stopped-phasea-diagnostic",
+        "criterion": {
+          "anchor": "onset",
+          "begin_offset": 0,
+          "end_offset": null,
+          "id": "post_anchor_target_whole_window_foil_v1",
+          "reject_target_outside_window": true
+        },
+        "coverage_policy": "per_trial_windows"
+      },
+      "trials": [
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/0",
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+          "model_before": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "model_after": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            0.01,
+            0.09,
+            0.25,
+            0.49
+          ],
+          "begin": 0,
+          "end": 2,
+          "closed_at": 2,
+          "samples": 4001,
+          "soma_max": [
+            0.076077677337829
+          ],
+          "lt_potential_max": 0.076077677337829,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/1",
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+          "model_before": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "model_after": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            2.0105,
+            2.2505,
+            2.4105,
+            2.4905
+          ],
+          "begin": 2.0005,
+          "end": 4.000500000000001,
+          "closed_at": 4.0005,
+          "samples": 4001,
+          "soma_max": [
+            0.05249954525587164
+          ],
+          "lt_potential_max": 0.05249954525587164,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/2",
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+          "model_before": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "model_after": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            4.011,
+            4.171,
+            4.251,
+            4.491
+          ],
+          "begin": 4.001,
+          "end": 6.001,
+          "closed_at": 6.001,
+          "samples": 4001,
+          "soma_max": [
+            0.05320307119260992
+          ],
+          "lt_potential_max": 0.05320307119260992,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/3",
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+          "model_before": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "model_after": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            6.0115,
+            6.1715,
+            6.3315,
+            6.4915
+          ],
+          "begin": 6.0015,
+          "end": 8.0015,
+          "closed_at": 8.0015,
+          "samples": 4001,
+          "soma_max": [
+            0.05009325943570064
+          ],
+          "lt_potential_max": 0.05009325943570064,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/4",
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+          "model_before": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "model_after": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            8.012,
+            8.032,
+            8.252,
+            8.492
+          ],
+          "begin": 8.002,
+          "end": 10.002,
+          "closed_at": 10.002,
+          "samples": 4001,
+          "soma_max": [
+            0.07622052270211876
+          ],
+          "lt_potential_max": 0.07622052270211876,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/5",
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+          "model_before": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "model_after": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            10.0125,
+            10.2525,
+            10.4725,
+            10.4925
+          ],
+          "begin": 10.0025,
+          "end": 12.0025,
+          "closed_at": 12.0025,
+          "samples": 4001,
+          "soma_max": [
+            0.05280308354274721
+          ],
+          "lt_potential_max": 0.05280308354274721,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/6",
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+          "model_before": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "model_after": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            12.013,
+            12.053,
+            12.093,
+            12.493
+          ],
+          "begin": 12.003,
+          "end": 14.003,
+          "closed_at": 14.003,
+          "samples": 4001,
+          "soma_max": [
+            0.09631931654111847
+          ],
+          "lt_potential_max": 0.09631931654111847,
+          "lt_potential_recorded": true
+        },
+        {
+          "trial_id": "branch/stopped-phasea-diagnostic/rotation-0/7",
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+          "model_before": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "model_after": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+          "complete": true,
+          "censored": false,
+          "valid": true,
+          "reason": "window_closed",
+          "spike_count": 0,
+          "spike_times": [],
+          "stimulus_times": [
+            14.0135,
+            14.4135,
+            14.4535,
+            14.4935
+          ],
+          "begin": 14.0035,
+          "end": 16.003500000000003,
+          "closed_at": 16.0035,
+          "samples": 4001,
+          "soma_max": [
+            0.07158936690583229
+          ],
+          "lt_potential_max": 0.07158936690583229,
+          "lt_potential_recorded": true
+        }
+      ],
+      "direct_files": [
+        "runtime-cli-interface.json"
+      ]
+    }
+  },
+  "hypotheses": {
+    "classic": {
+      "kind": "retained_native_nonspiking_threshold_hypothesis",
+      "schema_version": 1,
+      "rule": "midpoint_of_target_maximum_and_highest_strictly_lower_foil_maximum",
+      "model_revision": "da62fde7b7ce7db67acd6f8abe4eedab4a33f07d7b3c561c84d55762cb253dee",
+      "rows": [
+        {
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "lt_maximum": 0.019859704144444407
+        },
+        {
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "lt_maximum": 0.018918651319342422
+        },
+        {
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "lt_maximum": 0.0189361405334309
+        },
+        {
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "lt_maximum": 0.018936140502434168
+        },
+        {
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "lt_maximum": 0.023712865234911368
+        },
+        {
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "lt_maximum": 0.018950574616243304
+        },
+        {
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "lt_maximum": 0.022943473218361543
+        },
+        {
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "lt_maximum": 0.018918660715955105
+        }
+      ],
+      "retained_observations": [
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/classic/native/trial-0.json",
+          "bytes": 1750480,
+          "sha256": "f3b85996abca7a63c94703bee09930a774b5ef85543b1fe18be8d137493585fe"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/classic/native/trial-1.json",
+          "bytes": 1750481,
+          "sha256": "dbecf46a20506502a72a6f49740cf26675bcfe6d718eb29b29a58b8fee19ba8a"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/classic/native/trial-2.json",
+          "bytes": 1750418,
+          "sha256": "fc3f613cbd43745d405ea5c9e98f1c82905edcab50ac77513f046bd6140e632e"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/classic/native/trial-3.json",
+          "bytes": 1750227,
+          "sha256": "2d311018ade46e37f496da0226681edbb81ec9d0c16db4ce40593c03f0471ecf"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/classic/native/trial-4.json",
+          "bytes": 1750608,
+          "sha256": "3cb8dbe6f9726c6087da27e54379a9a6f1cdd5c5f27e8cf1780e5e46fa6c2615"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/classic/native/trial-5.json",
+          "bytes": 1754566,
+          "sha256": "314f4be985cbde55ae8e26f86599cae3125b7aa1cb80abb19b53974e6526e35d"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/classic/native/trial-6.json",
+          "bytes": 1755066,
+          "sha256": "da4d3d4c8584c7419c755b4e4718f579d0a9b12f18b37c689de2f8271e062974"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/classic/native/trial-7.json",
+          "bytes": 1755071,
+          "sha256": "89596f79e50a2acb2174e0b33d2d57b0546756b813817654f284fc817c565d63"
+        }
+      ],
+      "threshold": 0.019405139380343855,
+      "lower_peak": 0.018950574616243304,
+      "upper_peak": 0.019859704144444407,
+      "nonspiking_proxy": {
+        "TP": 1,
+        "FN": 0,
+        "FP": 2,
+        "TN": 5
+      },
+      "full_source_training_audit_inferred": false,
+      "calibrated": false,
+      "classification_assessed": false,
+      "protocol": "historical_same_matrix",
+      "scientific_verdict": null
+    },
+    "branch": {
+      "kind": "retained_native_nonspiking_threshold_hypothesis",
+      "schema_version": 1,
+      "rule": "midpoint_of_target_maximum_and_highest_strictly_lower_foil_maximum",
+      "model_revision": "90d9dacecd08b165a3cf394558abdaf9446bf9ec1206409bb8e80b34009f63e0",
+      "rows": [
+        {
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "lt_maximum": 0.076077677337829
+        },
+        {
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "lt_maximum": 0.05249954525587164
+        },
+        {
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "lt_maximum": 0.05320307119260992
+        },
+        {
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "lt_maximum": 0.05009325943570064
+        },
+        {
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "lt_maximum": 0.07622052270211876
+        },
+        {
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "lt_maximum": 0.05280308354274721
+        },
+        {
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "lt_maximum": 0.09631931654111847
+        },
+        {
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "lt_maximum": 0.07158936690583229
+        }
+      ],
+      "retained_observations": [
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/branch/native/trial-0.json",
+          "bytes": 1294282,
+          "sha256": "376581cb1771a471260e6dcc7aba20c8985cc54f316ae272b9754122221ce8de"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/branch/native/trial-1.json",
+          "bytes": 1294508,
+          "sha256": "2cfc2dfdcfe095a8717af92788b5904c5c875b8ac4c7c7645770075980e49f3d"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/branch/native/trial-2.json",
+          "bytes": 1294376,
+          "sha256": "8b62b1527d09f8d7b5f77f1547dd056dc5da5698de7353a7699380ccd5ae0c37"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/branch/native/trial-3.json",
+          "bytes": 1294348,
+          "sha256": "2910ee0bef34c9af713fe903e75fb51650397f40583a7feb0e6c1665fb30a98d"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/branch/native/trial-4.json",
+          "bytes": 1294317,
+          "sha256": "25ca283ac5512723a0a326e5adc9a99b67e16bdacc25d40d3b6a1dbe7e21be3e"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/branch/native/trial-5.json",
+          "bytes": 1298495,
+          "sha256": "71b9e7fd92a9d5a0c141e26f1070a33b27a1e4cf5d6aedd9190a39d230a2e230"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/branch/native/trial-6.json",
+          "bytes": 1298635,
+          "sha256": "353cda861d88a372bdbcf4d767a06b2115e41be249dab89d1a400ccaafd5f22d"
+        },
+        {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-fair-input-cold-matrix-m40-a1/branch/native/trial-7.json",
+          "bytes": 1298668,
+          "sha256": "efcb2b0e53ae30d03ffc031bfee060abf1cb5850df81093fe02b44e205d4b17c"
+        }
+      ],
+      "threshold": 0.07383352212183064,
+      "lower_peak": 0.07158936690583229,
+      "upper_peak": 0.076077677337829,
+      "nonspiking_proxy": {
+        "TP": 1,
+        "FN": 0,
+        "FP": 2,
+        "TN": 5
+      },
+      "full_source_training_audit_inferred": false,
+      "calibrated": false,
+      "classification_assessed": false,
+      "protocol": "historical_same_matrix",
+      "scientific_verdict": null
+    }
+  },
+  "new_request_controls": "9b47fd86155f56bb695faffa0ce3e2b0eb324bfd",
+  "new_dispatch": {
+    "job": "s11-fair-input-threshold-m40-a1",
+    "request": "/media/user/Data/TimeLearnerRefactor/requests/fair-input-threshold-a1/request.json",
+    "controls": "9b47fd86155f56bb695faffa0ce3e2b0eb324bfd",
+    "launcher_pid": 2074064,
+    "thresholds": {
+      "classic": 0.019405139380343855,
+      "branch": 0.07383352212183064
+    },
+    "proxies": {
+      "classic": {
+        "TP": 1,
+        "FN": 0,
+        "FP": 2,
+        "TN": 5
+      },
+      "branch": {
+        "TP": 1,
+        "FN": 0,
+        "FP": 2,
+        "TN": 5
+      }
+    },
+    "native_trials": 16,
+    "scientific_verdict": null
+  },
+  "classification_at_candidate_threshold_assessed": false,
+  "full_primary_published": false,
+  "scientific_verdict": null
+}

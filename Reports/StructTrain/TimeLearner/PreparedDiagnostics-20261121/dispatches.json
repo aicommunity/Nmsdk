@@ -1,0 +1,63 @@
+{
+  "kind": "timelearner_complete_prepared_diagnostic_dispatches",
+  "schema_version": 1,
+  "workers": {
+    "elder": {
+      "started": true,
+      "job": "s11-prepared-long-model-baseline-elder-a2",
+      "controller_pid": 661200,
+      "controls": "9c304ca1079bd12d6976d4631e80189d40dc1186",
+      "worker_root": "c99ad6e24bf9dda4dedc21d8ff7a26120987abc1",
+      "worker_git_blob": "994a7c7d01a1fbb0dfb68bff5bb59fce32e27a14",
+      "source_model_revision": "483b379cfd982a26330714e469cb36d665f2661f7e22b08b02030d1a58672d61",
+      "input_files": 389,
+      "native_trials": 8,
+      "native_memory_bytes": 8589934592,
+      "disk": {
+        "minimum_free_bytes": 536870912,
+        "maximum_output_bytes": 2684354560
+      },
+      "originals_retained": true,
+      "scientific_verdict": null
+    },
+    "m40": {
+      "started": true,
+      "job": "s11-prepared-long-model-baseline-m40-a3",
+      "controller_pid": 2400122,
+      "controls": "c1aeee7976ac8043618f1bf0c26e2410ba8b24ed",
+      "worker_root": "c99ad6e24bf9dda4dedc21d8ff7a26120987abc1",
+      "worker_git_blob": "994a7c7d01a1fbb0dfb68bff5bb59fce32e27a14",
+      "source_model_revision": "ac29284570efcb7e733f4364daa245d35e6665cd249010962da465b32177040a",
+      "input_files": 953,
+      "native_trials": 8,
+      "native_memory_bytes": 8589934592,
+      "disk": {
+        "minimum_free_bytes": 2147483648,
+        "maximum_output_bytes": 4294967296
+      },
+      "originals_retained": true,
+      "scientific_verdict": null
+    },
+    "windows": {
+      "dispatched": true,
+      "job": "windows-prepared-long-model-baseline-a5",
+      "controls": "d38b7d459f04b1a33e55b67e21383fe1c0dd1fa1",
+      "task": {
+        "instance": "{7093C145-F166-4FC6-ACF3-96B8BDF33CF0}",
+        "execution_time_limit": "PT16H",
+        "task": "TimeLearner-windows-prepared-long-model-baseline-a5",
+        "engine_pid": 22124
+      },
+      "worker_root": "7e691d2600ce5be8e8128d2530b2f0bf7b498b5e",
+      "python_source": "C:\\Projects\\TimeLearnerWorker\\source-json-transport-a1",
+      "native_sdk": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5",
+      "source_model_revision": "01ff5ebf50a45cfd3a354de5902ae7702d9d7e5590945eca399f38674ed9c488",
+      "native_trials": 8,
+      "scientific_verdict": null
+    }
+  },
+  "source_history_fields_removed": false,
+  "preparation_and_execution_separate": true,
+  "training_completed": false,
+  "scientific_verdict": null
+}

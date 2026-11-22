@@ -31,7 +31,16 @@
 
 [Собственный read-only отчёт принят1/1](ValidationPlans/M40StockN0ClassicThresholdReportA2-20261114/RESULT.ru.md) из actual candidate run: все8 паттернов ×4 записанные сомы с фактическими входными импульсами; отдельно LTZone.Potential, настоящий threshold и реальные LT events. Общий максимум при Test описывает полный отклик, а не подменяет assigned-impulse максимум Train. Порог LTZone не наносится на отдельные Soma.SumPotential как будто это одна величина. Единицы модели, перевод в SI/mV не подтверждён. Просмотрены27 исходных выбранных PNG и11 дополнительных Soma Y-details. Полная gallery2534 PNG не выдаётся за целиком просмотренную. Отрицательный reset на full-range рисунках около−0.38 существенно больше положительного отклика; ниже отдельно показана положительная часть с явным clipping отрицательного участка. Это выбор масштаба оси, не удаление samples. В A1 найдена неверная подпись оси8 LT companions. [Исправленный A2 принят1/1](ValidationPlans/M40StockN0ClassicThresholdPositiveReportA2-20261114/RESULT.ru.md), все8 новых LT PNG просмотрены;11 Soma PNG побайтно равны принятой A1.
 
-[Полные модели, первичные трассы и receipts сохранены в Git без JSON rewrite](ValidationPlans/M40StockN0ClassicThresholdPrimaryA2-20261114/RESULT.ru.md):83,917,844B XZ/612 members; полная производная gallery остаётся кэшем M40. [Исходный fixed100 отчёт](ClassicN0FrozenScientificReport-20261114.ru.md) сохраняет свой отдельный результат. [Предыдущая A1](ValidationPlans/M40StockN0ClassicThresholdA1-20261114/RESULT.ru.md) отказала до новых native runs при несовпадении runtime; её proxy не выдаётся за эти actual spikes.
+Полные модели, первичные трассы и receipts сохранены без JSON rewrite;
+после согласованной миграции тяжёлый архив находится во внешнем M40 store,
+а в Git — [проверяемая ссылка](../../../Reports/StructTrain/TimeLearner/StockN0ClassicThreshold-20261114/primary/primary.tar.xz.archive.json)
+и bundle.json. Размер83,917,844B XZ/612 members и исходный SHA сохранены;
+[историческая квитанция публикации](ValidationPlans/M40StockN0ClassicThresholdPrimaryA2-20261114/RESULT.ru.md)
+описывает прежнее размещение. Полная производная gallery остаётся кэшем M40.
+[Исходный fixed100 отчёт](ClassicN0FrozenScientificReport-20261114.ru.md)
+сохраняет свой отдельный результат. [Предыдущая A1](ValidationPlans/M40StockN0ClassicThresholdA1-20261114/RESULT.ru.md)
+отказала до новых native runs при несовпадении runtime; её proxy не выдаётся
+за эти actual spikes. Изменение места хранения не меняет измерений или verdict.
 
 ## Все восемь паттернов: Soma1 и реальные входы
 

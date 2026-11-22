@@ -1,0 +1,69 @@
+{
+  "kind": "timelearner_frozen_order_temporal_render_acceptance",
+  "schema_version": 1,
+  "source_root": "48ad95433b3cea424863a7af34806f0ccb865416",
+  "controls": "7dbad823391f7f557936ff3394f98ef169fc8251",
+  "renderer_job": "s11-frozen-order-report-batch-elder-a1",
+  "collector_job": "s11-frozen-order-gallery-primary-elder-a1",
+  "collector_controls": "5409925f37ec205ad0369a3cdfa7ef492ebdf47c",
+  "python_result": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "s11-frozen-order-report-batch-elder-a1",
+    "package_fingerprint": "5ce2c69cc8289123d1bfb18c20b3d33a9d63bc481c0c433851dfc3205187c435",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_order_report.FrozenOrderReportTest.test_every_pattern_and_position_uses_common_native_soma_and_lt_views"
+    ],
+    "executed_tests": 1,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_FROZEN_ORDER_COMPLETED": {
+        "path": "/home/user/timelearner-refactor/readbacks/s11-frozen-order-native-elder-a2/worker/tmp/frozen-order",
+        "files": 124,
+        "fingerprint": "f86151a0fd2235a58e15823879376b5ab5ffb71ac47fa836c391dac75c8cc47c"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "expected_trials": 64,
+  "gallery_files": 30920,
+  "gallery_bytes": 2902077425,
+  "model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+  "primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/02/02e964efb23914e518aa35e93fc4f427d3fe1b7d2600ab5b3a4d1f9a86a10b60",
+    "sha256": "02e964efb23914e518aa35e93fc4f427d3fe1b7d2600ab5b3a4d1f9a86a10b60",
+    "bytes": 847744948
+  },
+  "bundle_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/d6/d68919573b8ba74b614347360f5a0c6c1f27635599dc57fd88dc7ab9853951bf",
+    "sha256": "d68919573b8ba74b614347360f5a0c6c1f27635599dc57fd88dc7ab9853951bf",
+    "bytes": 7012327
+  },
+  "all_processes_closed": true,
+  "representative_visual_review": "FrozenOrderTemporalVisualReview-20261117.json",
+  "representative_review_count": 18,
+  "all_figures_manually_reviewed": false,
+  "shared_readable_cache_publication": "completed_and_independently_readback_on_M40",
+  "shared_readable_cache_target": "report-cache/2026-11-17/frozen-order-64-elder-a1/index.html",
+  "native_primary_dependency": "012b8191633c37b4062ec1a1a54aeb9af5f840dd66faabc1dba0256c38022d60",
+  "training_completed": false,
+  "independent_evaluation": false,
+  "scientific_verdict": null,
+  "final_publication": "FrozenOrderTemporalGalleryPublication-20261117.archive.json",
+  "independent_m40_readback": {
+    "objects_verified": 4,
+    "selected_figures_verified": 18,
+    "index_sha256": "fbd9778266fa651f8b06460ce7ffc5ec23093319a0d59151411ae1ffcf433b78",
+    "all_processes_closed": true
+  }
+}

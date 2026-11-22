@@ -1,0 +1,45 @@
+{
+  "via_jump": "10.245.1.12",
+  "host": "10.245.1.14",
+  "operator_sha256": "8a8ec7d5fcb4898217a865bd6cda12bc612af9a6a22830af130e7be305932bd6",
+  "returncode": 0,
+  "stderr": "",
+  "observation": {
+    "controls.json": {
+      "commit": "baaddde3fe0fe38d4cdeb40ca9f2f57d08627826",
+      "directory": "C:\\Projects\\TimeLearnerWorker\\controls\\elder-baseline8-audit-recovery-a1"
+    },
+    "process/stdout.log": {
+      "bytes": 0,
+      "tail": ""
+    },
+    "process/stderr.log": {
+      "bytes": 0,
+      "tail": ""
+    },
+    "job_binding": {
+      "pid": 13468,
+      "creation_filetime": "134394930757956066",
+      "job_name": "Local\\TimeLearner-ce42dd6b-a70b-4b8b-9eb8-69858eb5024a"
+    },
+    "kernel_job": {
+      "limits": {
+        "flags": 8712,
+        "memory_bytes": 21474836480,
+        "maximum_processes": 32,
+        "peak_job_memory_bytes": 3074727936
+      },
+      "pids": [
+        13468,
+        11860
+      ]
+    },
+    "kernel_process": {
+      "identity": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134394930757956066"
+      },
+      "running": true
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "job": "s11-diagnostic-memory-checks-elder-a1",
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent"
+  },
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 49.25941038969904,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "873f43dbd41e388b3e808ea88f26cb5825153648ea5f8aae0e82777d6fe86aaa",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "worker/terminal.json": {
+    "operation_passed": true,
+    "operation": "python-controller-validation",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "worker/validation/result.json": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "s11-diagnostic-memory-checks-elder-a1",
+    "package_fingerprint": "84d05faf02e842400e87269ee5ec4db42fe0baf4b96190257dfdcc6f1b477f3f",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixJoinTest.test_explicit_runtime_must_match_original_request_bytes",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixJoinTest.test_failed_operation_cannot_be_rescued_by_successful_cleanup",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixJoinTest.test_invalid_report_destination_is_refused_before_backend_preflight",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixJoinTest.test_missing_plot_backend_refuses_before_expensive_audit_or_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixJoinTest.test_released_outer_group_cannot_replace_missing_case_groups",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixJoinTest.test_unreleased_reservation_refuses_data_acceptance",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_actual_large_summary_requires_an_explicit_bounded_profile_and_owner_memory",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_case_name_cannot_escape_or_alias_another_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_compressed_summary_requires_complete_consistent_bounded_raw_identity",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_diagnostic_threshold_is_an_explicit_finite_case_factor",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_explicit_diagnostic_request_keeps_two_finite_children",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_large_model_requires_explicit_file_transport_and_separate_native_and_owner_budgets",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_large_source_requires_its_explicit_bounded_profile",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_legacy_test_request_cannot_acquire_diagnostic_fields",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_long_windows_and_continuous_policy_do_not_default_invalid_factors",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_matrix_requires_exact_git_revision_and_bound_source_roles",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_no_unbound_missing_or_reused_input_role",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_one_immutable_source_can_feed_independent_declared_conditions",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_raw_model_size_and_digest_are_explicit_and_bounded",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_single_case_requires_exactly_its_own_inputs",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_summary_transport_keeps_exact_bytes_and_rejects_corruption",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_training_calibration_and_ordinary_evaluation_are_not_authorized",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_unknown_case_fields_and_missing_cases_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest.test_unknown_or_noop_transport_factor_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_changed_bytes_are_rejected_even_if_json_values_remain_equal",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_cold_job_cannot_import_a_file_source",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_complete_source_and_resolved_digest_survive_all_three_roles",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_physical_model_evaluation_has_a_distinct_lossless_data_role",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_projection_role_metadata_and_history_changes_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_size_guard_runs_before_reading",
+      "Scripts.StructTrain.TimeLearner.tests.test_job_source_transport.JobSourceTransportTest.test_source_cannot_escape_input_root"
+    ],
+    "executed_tests": 31,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {},
+    "scientific_verdict": null
+  }
+}

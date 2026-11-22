@@ -1,0 +1,120 @@
+{
+  "kind": "timelearner_prepared_diagnostic_original_failures",
+  "schema_version": 1,
+  "failures": {
+    "elder": {
+      "classic/run-manifest.json": {
+        "execution": "process_error",
+        "validity": "unverified_execution",
+        "analysis": null
+      },
+      "classic/process/result.json": {
+        "execution": "process_error",
+        "reason": "whole_group_closure_unproven:contained_processes_still_present",
+        "returncode": null,
+        "wall_seconds": 552.219606410712,
+        "all_processes_closed": false,
+        "runtime_provenance": "invalid_or_incomplete_runtime",
+        "operational_diagnostics": {
+          "kind": "timelearner_operational_diagnostics",
+          "schema_version": 1,
+          "policy": "owned-streams-v1",
+          "status": "needs_review",
+          "error_records": 0,
+          "warning_records": 0,
+          "unclassified_stderr_chunks": 0,
+          "reasons": [
+            "contained_stream_copy_mismatch",
+            "missing_or_aliased_stream:stderr.log",
+            "missing_or_aliased_stream:stdout.log"
+          ],
+          "examples": [],
+          "streams": [],
+          "contained_streams_match": false,
+          "scientific_verdict": null
+        }
+      },
+      "classic/process/contained/request.json": {}
+    },
+    "m40": {
+      "job": "s11-long-model-baseline-m40-a2",
+      "exists": true,
+      "outer": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent"
+      },
+      "supervisor-result.json": {
+        "reason": {
+          "reason": "owned_native_disk_budget",
+          "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 405, in _run_owned\n    require(growth<=disk['maximum_increment_bytes'],'owned_native_disk_budget')\n  File \"/media/user/Data/TimeLearnerRefactor/source-diagnostic-memory-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: owned_native_disk_budget\n"
+        },
+        "outer_closed": true,
+        "record_errors": []
+      },
+      "native_classic": {
+        "execution_exists": false,
+        "trial_packets": 0
+      },
+      "source_audit": {
+        "package_digest_verified": true,
+        "model_revision": "ac29284570efcb7e733f4364daa245d35e6665cd249010962da465b32177040a",
+        "model_epoch": 73,
+        "training_outcome": "budget_exhausted",
+        "terminal_events": 1
+      },
+      "native_branch": {
+        "execution_exists": false,
+        "trial_packets": 0
+      }
+    },
+    "windows-environment": {
+      "exists": true,
+      "exception.json": {
+        "reason": "",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\controls\\windows-long-model-baseline-a2/worker.py\", line 9, in <module>\n    runtime=load(c/'parent-runtime.json');result=execute(runtime,['-B','-X','utf8',str(c/'evaluate.py')],actor,out/'controller-process',memory_bytes=8*1024**3,maximum_processes=64,maximum_wall_seconds=3600,lock_file=b/'locks/python-controller.lock',cooperative_capture=False);write(out/'controller-result.json',result);assert result['execution']=='completed' and result['all_processes_closed'] and result['runtime_provenance']=='loaded_files_captured';assert load(out/'evaluation/terminal.json')['native_execution_and_observations_checked'];write(out/'terminal.json',dict(diagnostic_evaluation_checked=True,training_completed=False,scientific_verdict=None))\n                                                                                                                                                                                                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+      },
+      "controller-result.json": {
+        "reason": "nonzero_exit",
+        "execution": "process_error",
+        "all_processes_closed": true
+      },
+      "evaluation/exception.json": {
+        "reason": "environment can only contain strings",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\controls\\windows-long-model-baseline-a2\\evaluate.py\", line 24, in <module>\n    row=dict(name='branch',model_revision=package['model_revision'],topology='Branch',initial_threshold=model['initial_threshold']);job=job_for(row,package,matrix);assert len(job['trials'])==8 and all(t['reset_policy']=='reset_per_trial' and t['duration']==2 for t in job['trials']);inputs=out/'input';inputs.mkdir();snapshot=_snapshot_source(native/'train_stopped_state.json',inputs/'source',diagnostic=True);source_case=_load_source_case('diagnostic-evaluate',snapshot);validate_job('diagnostic-evaluate',job,source_case);_write(inputs/'job.json',job);_write(inputs/'native-job-source.json',make_envelope(job,snapshot,inputs));runtime=load(c/'native-runtime.json');write(out/'cli.json',inspect_native_cli(runtime,['diagnostic-evaluate'],require_file_source=True));write(out/'evaluation-started.json',dict(trials=8,source_package_sha256=spec['package_sha256'],source_model_revision=spec['model_revision'],training_completed=False,threshold=100,scientific_verdict=None))\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-json-transport-a1\\Scripts\\StructTrain\\TimeLearner\\native_cli.py\", line 45, in inspect_native_cli\n    process = subprocess.Popen([str(executable), '--help'], cwd=directory,\n        stdin=subprocess.DEVNULL, stdout=stream, stderr=subprocess.STDOUT,\n        env=environment, start_new_session=True)\n  File \"subprocess.py\", line 1038, in __init__\n  File \"subprocess.py\", line 1552, in _execute_child\nTypeError: environment can only contain strings\n"
+      },
+      "evaluation/source-audit.json": {
+        "package_digest_verified": true,
+        "model_revision": "01ff5ebf50a45cfd3a354de5902ae7702d9d7e5590945eca399f38674ed9c488",
+        "model_epoch": 65,
+        "training_outcome": "budget_exhausted",
+        "terminal_events": 1
+      },
+      "native_trial_packets": 0,
+      "native_execution_exists": false
+    },
+    "windows-help": {
+      "job": "windows-prepared-long-model-baseline-a3",
+      "exists": true,
+      "exception.json": {
+        "reason": "[WinError 32] Процесс не может получить доступ к файлу, так как этот файл занят другим процессом: 'C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Temp\\\\timelearner-cli-interface-ty6qxc8o\\\\help.log'",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5\\Scripts\\StructTrain\\TimeLearner\\native_cli.py\", line 50, in inspect_native_cli\n    pidfd = os.pidfd_open(process.pid)\n            ^^^^^^^^^^^^^\nAttributeError: module 'os' has no attribute 'pidfd_open'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5\\Scripts\\StructTrain\\TimeLearner\\native_cli.py\", line 63, in inspect_native_cli\n    os.killpg(process.pid, signal.SIGKILL)\n    ^^^^^^^^^\nAttributeError: module 'os' has no attribute 'killpg'. Did you mean: 'kill'?\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"shutil.py\", line 701, in _rmtree_unsafe\nPermissionError: [WinError 32] Процесс не может получить доступ к файлу, так как этот файл занят другим процессом: 'C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Temp\\\\timelearner-cli-interface-ty6qxc8o\\\\help.log'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\controls\\windows-prepared-long-model-baseline-a3/worker.py\", line 83, in main\n    write('cli.json', inspect_native_cli(runtime, ['diagnostic-evaluate'], require_file_source=True))\n                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5\\Scripts\\StructTrain\\TimeLearner\\native_cli.py\", line 43, in inspect_native_cli\n    with tempfile.TemporaryDirectory(prefix='timelearner-cli-interface-') as directory:\n         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"tempfile.py\", line 971, in __exit__\n  File \"tempfile.py\", line 975, in cleanup\n  File \"tempfile.py\", line 955, in _rmtree\n  File \"shutil.py\", line 852, in rmtree\n  File \"shutil.py\", line 705, in _rmtree_unsafe\n  File \"tempfile.py\", line 930, in onexc\nPermissionError: [WinError 32] Процесс не может получить доступ к файлу, так как этот файл занят другим процессом: 'C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Temp\\\\timelearner-cli-interface-ty6qxc8o\\\\help.log'\n"
+      },
+      "native_files": [],
+      "trial_packets": 0
+    },
+    "windows-backend-path": {
+      "job": "windows-prepared-long-model-baseline-a4",
+      "exists": true,
+      "exception.json": {
+        "reason": "windows_backend_changed",
+        "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\controls\\windows-prepared-long-model-baseline-a4/worker.py\", line 117, in main\n    write('cli.json', windows_cli(runtime, output, require) if os.name == 'nt' else\n                      ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\controls\\windows-prepared-long-model-baseline-a4/worker.py\", line 44, in windows_cli\n    process = execute(runtime, ['--help'], Path(runtime['executable']['path']).parent,\n        output/'cli-process', memory_bytes=1024**3, maximum_processes=16,\n        maximum_wall_seconds=30, lock_file=output/'cli-probe.lock', cooperative_capture=False)\n  File \"C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5\\Scripts\\StructTrain\\TimeLearner\\windows_process.py\", line 167, in execute\n    require(manifest.get('windows_backend') == backend and\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            manifest['build_flags'].get('windows_backend_sha256') == backend['sha256'],\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            'windows_backend_changed')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5\\Scripts\\StructTrain\\TimeLearner\\native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: windows_backend_changed\n"
+      },
+      "native_files": [],
+      "trial_packets": 0
+    }
+  },
+  "original_outcomes_retained": true,
+  "cleanup_is_not_execution_success": true,
+  "scientific_verdict": null
+}

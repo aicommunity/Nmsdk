@@ -1,0 +1,82 @@
+{
+  "kind": "timelearner_living_algorithm_docx",
+  "schema_version": 1,
+  "requested_at": "2026-11-16",
+  "criterion": {
+    "TP_minimum": 1,
+    "TN_minimum": 2,
+    "training_certificate_required": false,
+    "distinct_foil_count_must_be_reported": true
+  },
+  "deliverables": [
+    "TimeLearnerClassicAlgorithms.ru.docx",
+    "TimeLearnerBranchAlgorithms.ru.docx"
+  ],
+  "priorities": {
+    "experiments_first": true,
+    "defer_if_competing_with_experiments": true
+  },
+  "requirements": [
+    "families with shared core and explicit variant differences and result effects",
+    "mathematical formulae",
+    "flowcharts",
+    "UML class and sequence diagrams",
+    "explanations and real examples",
+    "multiple levels of detail",
+    "maintain alongside code and accepted experiments"
+  ],
+  "publication": {
+    "generated_binary_in_root_git": false,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "cache": "explicit output directory argument"
+  },
+  "status": "Fourth edition published2026-11-20; all61 pages rendered and visually reviewed",
+  "skill": "documents",
+  "render_gate": "render_docx.py plus visual review of every page",
+  "future_report_format": {
+    "required": "GOST",
+    "requested_at": "2026-11-20",
+    "scope": "subsequent reports and substantive new editions of both Classic and Branch",
+    "record_applicable_standards_and_editions_before_release": true,
+    "prepared_profile": "gost-next-edition-profile.json",
+    "profile_is_not_a_released_or_render_verified_edition": true,
+    "already_completed_documents_require_reformatting": false,
+    "preserved_current_edition": "2026-11-20-v4",
+    "rule": "../ScientificReportRules.ru.md#оформление-по-гост"
+  },
+  "revision4": {
+    "source": "revision4-content.ru.json",
+    "review": "Review-20261119.json",
+    "workflow": "revision4-workflow.ru.md",
+    "comments": 8,
+    "qualifying_examples": 9,
+    "real_trial_figures": 64,
+    "measurement_figures": 7,
+    "source_diagrams": 8,
+    "generated": true,
+    "render_accepted": true,
+    "original_annotated_document_preserved": true,
+    "publications_role": "style and terminology, not borrowed algorithm explanations",
+    "external_binary_storage_required": true,
+    "edition": "2026-11-20-v4",
+    "publication": "Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261120/publication.json",
+    "classic_pages": 32,
+    "branch_pages": 29,
+    "all_comments_processed": true
+  },
+  "historical_revision2_preparation_record": {
+    "source": "next-edition.json",
+    "review": "../AlgorithmDescriptionEvidenceReview-20261117.json",
+    "qualifying_examples": 7,
+    "classic_examples": 3,
+    "branch_examples": 4,
+    "new_measurement_detail": true,
+    "new_n0_flow": true,
+    "new_native_protocol_trials": 24,
+    "prior_baseline_trials": 8,
+    "generated": false,
+    "render_accepted": false,
+    "experiments_first": true,
+    "status": "sources and builder prepared; unchanged first DOCX edition remains the accepted publication"
+  }
+}

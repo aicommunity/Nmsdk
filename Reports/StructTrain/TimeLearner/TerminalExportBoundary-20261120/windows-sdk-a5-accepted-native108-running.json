@@ -1,0 +1,235 @@
+{
+  "kind": "timelearner_terminal_export_SDK_accepted_native108_running",
+  "schema_version": 1,
+  "recorded_at": "2026-11-20T14:08:35.977725+00:00",
+  "source_root": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+  "source_pulse": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+  "source_rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+  "sdk": {
+    "output_exists": true,
+    "records": {
+      "terminal.json": {
+        "kind": "timelearner_windows_sdk_build",
+        "build_accepted": true,
+        "scientific_models_executed": false,
+        "scientific_worker_admitted": false,
+        "scientific_verdict": null
+      },
+      "build-result.json": {
+        "kind": "timelearner_windows_process_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "validity": "valid",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "scientific_verdict": null,
+        "thread_limit_enforced": false,
+        "memory_limit_semantics": "job_committed_virtual_memory",
+        "wall_budget_scope": "whole_attempt_including_preparation",
+        "descendants_at_main_exit": [],
+        "all_processes_closed": true,
+        "cooperative_capture": "not_requested",
+        "runtime_provenance": "loaded_files_captured",
+        "observed_module_files": 12,
+        "wall_seconds": 2562.306458999985,
+        "child_resumed": true,
+        "job_name": "Local\\TimeLearner-a00627cc-bd5b-4883-b5bd-158135cf1cf9"
+      },
+      "build-process/owned-process.json": {
+        "executable": "C:\\Windows\\System32\\cmd.exe",
+        "creation_filetime": "134396531651864121",
+        "pid": 19300,
+        "job_name": "Local\\TimeLearner-a00627cc-bd5b-4883-b5bd-158135cf1cf9",
+        "runtime_fingerprint": "2eb82103f9766b107cd4759b3b0124c6e85232c3bb36bf4b9ab47362278c33ed",
+        "suspended_until_limits_applied": true
+      }
+    },
+    "kernel_job": {
+      "name": "Local\\TimeLearner-a00627cc-bd5b-4883-b5bd-158135cf1cf9",
+      "open_error": 2
+    },
+    "logs": [
+      {
+        "name": "build-process/stdout.log",
+        "bytes": 92499,
+        "tail": "eLearnerWorker\\build-a4\\vcpkg_installed\\x64-windows-tl\\bin\\z.dll -> C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\z.dll done\nC:\\Projects\\TimeLearnerWorker\\build-a4\\vcpkg_installed\\x64-windows-tl\\bin\\double-conversion.dll -> C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\double-conversion.dll done\nC:\\Projects\\TimeLearnerWorker\\build-a4\\vcpkg_installed\\x64-windows-tl\\bin\\pcre2-16.dll -> C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\pcre2-16.dll done\nC:\\Projects\\TimeLearnerWorker\\build-a4\\vcpkg_installed\\x64-windows-tl\\bin\\boost_program_options-vc145-mt-x64-1_92.dll -> C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\boost_program_options-vc145-mt-x64-1_92.dll done\nC:\\Projects\\TimeLearnerWorker\\build-a4\\vcpkg_installed\\x64-windows-tl\\bin\\boost_thread-vc145-mt-x64-1_92.dll -> C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\boost_thread-vc145-mt-x64-1_92.dll done\nC:\\Projects\\TimeLearnerWorker\\build-a4\\vcpkg_installed\\x64-windows-tl\\bin\\glog.dll -> C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\glog.dll done\nC:\\Projects\\TimeLearnerWorker\\build-a4\\vcpkg_installed\\x64-windows-tl\\bin\\gflags.dll -> C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\gflags.dll done\nC:\\Projects\\TimeLearnerWorker\\build-a4\\vcpkg_installed\\x64-windows-tl\\bin\\boost_filesystem-vc145-mt-x64-1_92.dll -> C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\boost_filesystem-vc145-mt-x64-1_92.dll done\n-- Deployed Release vcpkg DLLs from C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/bin\n[540/541] Linking CXX executable C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\Test_PulseLib_StorageComponents.exe\r\n"
+      },
+      {
+        "name": "build-process/stderr.log",
+        "bytes": 2403,
+        "tail": "v) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  Libraries/Rdk-CvBasicLib/CMakeLists.txt:47 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  App/NeuroModeler/CMakeLists.txt:271 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning (dev) at C:/Projects/TimeLearnerWorker/build-a4/vcpkg_installed/x64-windows-tl/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):\n  Policy CMP0167 is not set: The FindBoost module is removed.  Run \"cmake\n  --help-policy CMP0167\" for policy details.  Use the cmake_policy command to\n  set the policy and suppress this warning.\n\nCall Stack (most recent call first):\n  C:/vcpkg/scripts/buildsystems/vcpkg.cmake:893 (include)\n  App/NeuroModelerConsole/CMakeLists.txt:61 (find_package)\nThis warning is for project developers.  Use -Wno-dev to suppress it.\n\nCMake Warning:\n  Manually-specified variables were not used by the project:\n\n    VCPKG_OVERLAY_TRIPLETS\n\n\n"
+      }
+    ],
+    "preparation_files": [
+      {
+        "name": "build-result.json",
+        "bytes": 678
+      },
+      {
+        "name": "build-runtime.json",
+        "bytes": 4145
+      },
+      {
+        "name": "build.cmd",
+        "bytes": 2174
+      },
+      {
+        "name": "CMakeCache.txt",
+        "bytes": 43204
+      },
+      {
+        "name": "commands.json",
+        "bytes": 2128
+      },
+      {
+        "name": "dependencies-after.json.gz",
+        "bytes": 820985
+      },
+      {
+        "name": "dependencies-before.json.gz",
+        "bytes": 820985
+      },
+      {
+        "name": "producer.py",
+        "bytes": 11384
+      },
+      {
+        "name": "runtime-files.json.gz",
+        "bytes": 3412
+      },
+      {
+        "name": "source-before.json",
+        "bytes": 1304
+      },
+      {
+        "name": "specification.json",
+        "bytes": 1453
+      },
+      {
+        "name": "terminal.json",
+        "bytes": 180
+      },
+      {
+        "name": "tools-before.json",
+        "bytes": 1749
+      },
+      {
+        "name": "vcvars.log",
+        "bytes": 298
+      }
+    ],
+    "task": {
+      "last_result": 0,
+      "name": "TimeLearner-windows-terminal-physical-data8-sdk-build-a5",
+      "instances": []
+    }
+  },
+  "native_preparation": {
+    "prepared": true,
+    "started": false,
+    "action": "native",
+    "attempt": "windows-terminal-physical-data8-native108-a5",
+    "source": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5",
+    "source_commit": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+    "specification_blob": "92cc6217c19394279ba5604ffb5b469259a6b26e",
+    "controls": "C:\\Projects\\TimeLearnerWorker\\controls\\terminal-physical-data8-native108-win-a5",
+    "controls_commit": "b08eb052a7c151bfc3a3c6fb26160906aadb3b5c",
+    "worker_name": "validate-native.py",
+    "launch_script": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a5\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\launch-sdk-build.ps1",
+    "kernel": {
+      "original_named_job_absent": true,
+      "original_main_absent": true,
+      "pid_reused": false
+    },
+    "original_build_accepted": true,
+    "original_execution": "completed",
+    "successful_build_view": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-terminal-physical-data8-completed-build-view-a5",
+    "independent_rejected_build_auditor_executed": false,
+    "scientific_worker_admitted": false,
+    "expected_cpp_tests": 108
+  },
+  "native_dispatch": {
+    "dispatched": true,
+    "action": "native",
+    "receipt": {
+      "scientific_verdict": null,
+      "tool_commit": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+      "task": "TimeLearner-windows-terminal-physical-data8-native108-a5",
+      "specification_git_blob": "92cc6217c19394279ba5604ffb5b469259a6b26e",
+      "instance": "{79A94D04-C029-4C6A-9396-FB794EB714AE}",
+      "kind": "windows_native_validation_dispatch",
+      "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-terminal-physical-data8-native108-a5",
+      "worker_sha256": "cf6ca9fbbccda7e688ed94291b509656fe53339351ed7c92521eb426228d336c"
+    },
+    "kernel": {
+      "original_named_job_absent": true,
+      "original_main_absent": true,
+      "pid_reused": false
+    },
+    "controls_commit": "b08eb052a7c151bfc3a3c6fb26160906aadb3b5c",
+    "original_build_outcome_unchanged": true,
+    "scientific_verdict": null
+  },
+  "native_observation": {
+    "output_exists": true,
+    "records": {
+      "native-gate/process/owned-process.json": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\Test_PulseLib_StorageComponents.exe",
+        "creation_filetime": "134396567705304458",
+        "pid": 19084,
+        "job_name": "Local\\TimeLearner-0fd01d6b-18ef-43f3-b316-a2656ba2ba4c",
+        "runtime_fingerprint": "b29507842678b5016052aee90e774b93da554e0555945f04169aed4c4e597234",
+        "suspended_until_limits_applied": true
+      }
+    },
+    "kernel_job": {
+      "name": "Local\\TimeLearner-0fd01d6b-18ef-43f3-b316-a2656ba2ba4c",
+      "active_processes": 2,
+      "total_processes": 2
+    },
+    "logs": [
+      {
+        "name": "native-gate/process/stdout.log",
+        "bytes": 11943,
+        "tail": "edSelectionSurvivesAdvanceToFreshFinalVerification (1 ms)\r\n[ RUN      ] BoundedTrainingMeasuredBoundary.UnmeasuredEditAndBudgetStopCannotReplaceTheMeasuredSelection\r\n[       OK ] BoundedTrainingMeasuredBoundary.UnmeasuredEditAndBudgetStopCannotReplaceTheMeasuredSelection (1 ms)\r\n[ RUN      ] BoundedTrainingMeasuredBoundary.IncompleteN0RepeatsDoNotPublishARestoreSelection\r\n[       OK ] BoundedTrainingMeasuredBoundary.IncompleteN0RepeatsDoNotPublishARestoreSelection (0 ms)\r\n[----------] 3 tests from BoundedTrainingMeasuredBoundary (3 ms total)\r\n\r\n[----------] 2 tests from BoundedTrainingN1TimingNeighbourhood\r\n[ RUN      ] BoundedTrainingN1TimingNeighbourhood.TimingReadyAmplitudeMissProposesFreshNearbyGeometryInBothTopologies\r\n[       OK ] BoundedTrainingN1TimingNeighbourhood.TimingReadyAmplitudeMissProposesFreshNearbyGeometryInBothTopologies (2 ms)\r\n[ RUN      ] BoundedTrainingN1TimingNeighbourhood.N0KeepsItsExistingLengthAndNormalizerPolicy\r\n[       OK ] BoundedTrainingN1TimingNeighbourhood.N0KeepsItsExistingLengthAndNormalizerPolicy (2 ms)\r\n[----------] 2 tests from BoundedTrainingN1TimingNeighbourhood (4 ms total)\r\n\r\n[----------] 2 tests from BoundedTrainingBudgetBoundary\r\n[ RUN      ] BoundedTrainingBudgetBoundary.ExhaustedProbesCannotStageAnotherUnmeasurableCandidate\r\n[       OK ] BoundedTrainingBudgetBoundary.ExhaustedProbesCannotStageAnotherUnmeasurableCandidate (0 ms)\r\n[ RUN      ] BoundedTrainingBudgetBoundary.OddProbeRemainderCannotFundANewCandidatePairOrItsEdit\r\n[       OK ] BoundedTrainingBudgetBoundary.OddProbeRemainderCannotFundANewCandidatePairOrItsEdit (1 ms)\r\n[----------] 2 tests from BoundedTrainingBudgetBoundary (2 ms total)\r\n\r\n[----------] 14 tests from NativeRecoveryPackage7\r\n[ RUN      ] NativeRecoveryPackage7.ClassicN0StoppedRoundtripKeepsResponse\r\n"
+      },
+      {
+        "name": "native-gate/process/stderr.log",
+        "bytes": 0,
+        "tail": ""
+      }
+    ],
+    "preparation_files": [
+      {
+        "name": "gate.json",
+        "bytes": 7423
+      },
+      {
+        "name": "producer.py",
+        "bytes": 5819
+      },
+      {
+        "name": "runtime.json",
+        "bytes": 18905
+      },
+      {
+        "name": "specification.json",
+        "bytes": 8095
+      }
+    ],
+    "task": {
+      "last_result": 267009,
+      "name": "TimeLearner-windows-terminal-physical-data8-native108-a5",
+      "instances": [
+        {
+          "instance": "{79A94D04-C029-4C6A-9396-FB794EB714AE}",
+          "engine_pid": 17724,
+          "state": 4
+        }
+      ]
+    }
+  },
+  "full_native_complete": false,
+  "scientific_worker_admitted": false,
+  "scientific_verdict": null
+}

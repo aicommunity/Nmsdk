@@ -1,0 +1,50 @@
+{
+  "kind": "timelearner_physical_model_data_sdk_closed_readback",
+  "schema_version": 1,
+  "root": "944f7dd34bbe538346e20a183fb56d2cb5153bd0",
+  "pulse": "c54d9c0a65ac6eadeccfe1793672b7a9472ea559",
+  "controls": "908b24852d9c57d081238d40f68a27b7c7f97d5f",
+  "job": "s05-physical-model-data-sdk-m40-a2",
+  "processes_closed": true,
+  "terminal": {
+    "job_validation_passed": false,
+    "cohort_assertions_passed": false,
+    "built": true,
+    "expected_cpp_cases": 228,
+    "audited_completed_cpp_cases": 228,
+    "actual_audited_assertion_passed_cpp_cases": 226,
+    "actual_audited_failed_cpp_ids": [
+      "NativePhysicalModelData/ClassicCompleteGraphAndAsymmetricInputsRoundtripWithoutProofAuthority",
+      "NativePhysicalModelData/BranchCompleteGraphAndAsymmetricInputsRoundtripWithoutProofAuthority"
+    ],
+    "completed_leaf_gates": 1,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+  },
+  "junit": [
+    {
+      "path": "native-bounded-neighbourhood-and-regressions/native.xml",
+      "cases": 228,
+      "failures": [
+        {
+          "id": "NativePhysicalModelData/ClassicCompleteGraphAndAsymmetricInputsRoundtripWithoutProofAuthority",
+          "messages": [
+            "unknown file\nC++ exception with description \"native_model_requires_repair_after_failed_edit\" thrown in the test body.\n"
+          ]
+        },
+        {
+          "id": "NativePhysicalModelData/BranchCompleteGraphAndAsymmetricInputsRoundtripWithoutProofAuthority",
+          "messages": [
+            "unknown file\nC++ exception with description \"native_model_requires_repair_after_failed_edit\" thrown in the test body.\n"
+          ]
+        }
+      ]
+    }
+  ],
+  "fix_root": "f1b8ae9aea9c2ebdc95ca6d1b9e4e243fddcbc19",
+  "fix_runtime_verified": false,
+  "scientific_verdict": null
+}

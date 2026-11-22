@@ -1,0 +1,130 @@
+{
+  "kind": "timelearner_frozen_DATA_order_dispatches",
+  "schema_version": 1,
+  "worker_root": "4249d2e692b9c0c8bb2938550409ae1880631a70",
+  "worker_git_blob": "df05bd6f61cec20d93912d2677a4e74cb60a7143",
+  "protocol": "Docs/StructTrain/TimeLearner/FrozenPhysicalOrder-20261121.ru.md",
+  "classic_dispatch": {
+    "started": true,
+    "name": "s11-classic-DATA-frozen-order-elder-a1",
+    "controls_commit": "2735e41eae014b69e02e42735db02251dbe8af40",
+    "supervisor_pid": 1192124,
+    "source_control_trials": 8,
+    "new_native_trials": 56,
+    "target_positions": 8,
+    "model_revision": "ec82f91aaf806a562fcfcc29501eeabbfa0ccd0d2a93bccaf9a7190681c5cda3",
+    "threshold": 0.025742023300155625,
+    "worker_root": "4249d2e692b9c0c8bb2938550409ae1880631a70",
+    "worker_git_blob": "df05bd6f61cec20d93912d2677a4e74cb60a7143",
+    "maximum_native_wall_seconds": 28800,
+    "maximum_outer_wall_seconds": 32400,
+    "reset_policy": "reset_per_trial",
+    "new_training": false,
+    "new_threshold_selection": false,
+    "scientific_verdict": null
+  },
+  "classic_kernel": {
+    "job": "s11-classic-DATA-frozen-order-elder-a1",
+    "controls_exist": true,
+    "new_trial_packets": 2,
+    "outer_kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "3a98abe17c5a4763fde270c75523a822965db95226932700afd3de03c3897166",
+        "unit": "timelearner-6e55cc99-4885-4fc4-b65e-1ce0244e475b.service",
+        "invocation_id": "faa17cd2c81f4a5491a39f800d6db6b0",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6e55cc99-4885-4fc4-b65e-1ce0244e475b.service",
+        "initial_main_pid": 1192141,
+        "initial_start_ticks": "482679608",
+        "sha256": "4a0e8ea22e8fe78dabbfb6203c3ba1b9b007e47b7f744506c900caecbea57d04"
+      }
+    },
+    "native_kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "b3766472a8f9f8772dede69d84f4ada2e269a5b22fd45fd73af2f88e6fdc06b4",
+        "unit": "timelearner-3854e114-8b07-4e93-8863-d0a994914907.service",
+        "invocation_id": "df3de726475040848ef88cc5b6e0bd74",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3854e114-8b07-4e93-8863-d0a994914907.service",
+        "initial_main_pid": 1192624,
+        "initial_start_ticks": "482680639",
+        "sha256": "e2708d3c03b49b67613c286221725d77127419bbddce4e22a183e393dc7efc81"
+      }
+    },
+    "supervisor.log": "",
+    "outer-process/contained/stderr.log": ""
+  },
+  "branch_dispatch": {
+    "started": true,
+    "name": "s11-branch-DATA-frozen-order-m40-a1",
+    "controls_commit": "3d9ff2205370b8c9276bdd5b0c8bf875a112275a",
+    "supervisor_pid": 2907481,
+    "source_control_trials": 8,
+    "new_native_trials": 56,
+    "target_positions": 8,
+    "model_revision": "0fe43bddd70414e903ec41e68eb3433d9b85feaa5799448e2af7793ed8c5ff9f",
+    "threshold": 0.0999470202411733,
+    "worker_root": "4249d2e692b9c0c8bb2938550409ae1880631a70",
+    "worker_git_blob": "df05bd6f61cec20d93912d2677a4e74cb60a7143",
+    "maximum_native_wall_seconds": 28800,
+    "maximum_outer_wall_seconds": 32400,
+    "reset_policy": "reset_per_trial",
+    "new_training": false,
+    "new_threshold_selection": false,
+    "scientific_verdict": null
+  },
+  "branch_kernel": {
+    "job": "s11-branch-DATA-frozen-order-m40-a1",
+    "controls_exist": true,
+    "new_trial_packets": 2,
+    "outer_kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "8d1048391a3362298ee8e59e9083da9111c9a09b13dbec8a0a64f5031b82e1c4",
+        "unit": "timelearner-9a8eafcc-6be8-4e18-a512-2dd398e28c4d.service",
+        "invocation_id": "288f44a9217b415894773fb66d5d8aab",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9a8eafcc-6be8-4e18-a512-2dd398e28c4d.service",
+        "initial_main_pid": 2907497,
+        "initial_start_ticks": "433237666",
+        "sha256": "960fad6da143539b9cd8fd04fc5492bc73ecfbf9f5592b28f54527e5cdf508d6"
+      }
+    },
+    "native_kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "3a9e9ff646416645f374acbea6181e42b16426429c68e2e91d14dad9d4d3defc",
+        "unit": "timelearner-8f128cfc-634c-4219-b677-4182f5a3a420.service",
+        "invocation_id": "ddbbeee79e2d462a9bb6cef530010310",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8f128cfc-634c-4219-b677-4182f5a3a420.service",
+        "initial_main_pid": 2907875,
+        "initial_start_ticks": "433238447",
+        "sha256": "f8565f521d5f0c1e508b5a4a2a4484066508c75921bed0db6f89cf9df5b4f5e2"
+      }
+    },
+    "supervisor.log": "",
+    "outer-process/contained/stderr.log": ""
+  },
+  "source_control_trials_per_model": 8,
+  "new_trials_per_model": 56,
+  "all_target_positions_declared": 8,
+  "completed": false,
+  "inter_pattern_interval_varied": false,
+  "continuous_stream_verified": false,
+  "scientific_verdict": null
+}

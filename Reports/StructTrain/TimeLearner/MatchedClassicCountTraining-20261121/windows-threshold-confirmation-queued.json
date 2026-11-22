@@ -1,0 +1,90 @@
+{
+  "kind": "timelearner_actual_count_model_threshold_confirmation_queue",
+  "schema_version": 1,
+  "dispatch": {
+    "dispatched": true,
+    "queued": true,
+    "job": "windows-count-stopped-threshold-a1",
+    "controls_commit": "5a6da5af227c6746ea49ebfa1503717f87eed0eb",
+    "source_root": "55138b26b173ba5cfb907d02829505280752dd3d",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{5C8992A1-6755-4C04-ABBE-25E7D3C0194A}",
+      "execution_time_limit": "PT10H",
+      "task": "TimeLearner-windows-count-stopped-threshold-a1",
+      "engine_pid": 12204
+    },
+    "depends_on": "windows-count-stopped-baseline-a1",
+    "awaits_full_audit_and_task_closure": true,
+    "all_model_processes_use_shared_worker_lock": true,
+    "source_Train_not_restarted": true,
+    "scientific_verdict": null
+  },
+  "source_model_revision": "53a459de5082d318f1737d09b478cf574327cb4bc0a88dc51d438ee69cf2daa9",
+  "last_chain_observation": {
+    "observed_utc": "2026-11-21T22:41:14.926594+00:00",
+    "windows-count-stopped-baseline-a1": {
+      "owner.json": {
+        "pid": 10624,
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134397737807128959"
+      },
+      "state.json": {
+        "stage": "native-eight-pattern-baseline",
+        "observed_utc": "2026-11-21T22:30:16.647862+00:00",
+        "scientific_verdict": null
+      },
+      "native_owner": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a5\\NeuroModelerConsole.exe",
+        "creation_filetime": "134397738260741582",
+        "pid": 20716,
+        "job_name": "Local\\TimeLearner-9b434bf1-91d1-45ec-8c0a-7a00d333a7de",
+        "runtime_fingerprint": "f64090acc3775a12772e6287a83d3986b52bafb6085baa7896269b3c06b783fe",
+        "suspended_until_limits_applied": true
+      },
+      "event_files": [
+        {
+          "name": "EventsLog\\NeuroModeler.RYZEN7-5825U.User.log.INFO.20261122-013026.20716",
+          "bytes": 299
+        }
+      ]
+    },
+    "windows-count-stopped-threshold-a1": {
+      "owner.json": {
+        "pid": 6812,
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134397744265479311"
+      },
+      "state.json": {
+        "stage": "waiting-for-baseline-task-and-full-independent-audit",
+        "observed_utc": "2026-11-21T22:40:26.890740+00:00",
+        "scientific_verdict": null
+      }
+    }
+  },
+  "native_readonly_resource_observation": {
+    "pid": 20716,
+    "same_owner": true,
+    "running": true,
+    "cpu_kernel_seconds": 5.359375,
+    "cpu_user_seconds": 681.234375,
+    "working_set_bytes": 2673340416,
+    "committed_bytes": 3330506752,
+    "peak_committed_bytes": 4406386688
+  },
+  "source_stopped_outcome": "budget_exhausted",
+  "selection": "midpoint of target LT maximum and highest strictly lower foil LT maximum",
+  "protocol": "historical_same_matrix",
+  "threshold_confirmation_requires_actual_all_eight_trials": true,
+  "independent_full_audit_required_after_actual_confirmation": true,
+  "threshold_no_target_preserving_gap_is_recorded_as_nonseparable": true,
+  "shared_worker_lock_preserved_by_root": "55138b26b173ba5cfb907d02829505280752dd3d",
+  "memory_limit_each_heavy_stage_bytes": 17179869184,
+  "queue_wait_seconds": 10800,
+  "preparation_seconds": 3600,
+  "native_wall_seconds": 7200,
+  "full_audit_wall_seconds": 7200,
+  "original_Train_not_restarted": true,
+  "new_classification_not_yet_accepted": true,
+  "scientific_verdict": null
+}

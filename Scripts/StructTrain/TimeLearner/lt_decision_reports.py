@@ -52,7 +52,8 @@ def render_lt_decisions(spec, observations, threshold, output: Path, *, context_
             reference_level=threshold, context_label=context)
         views.extend(render_positive_lobe_views(projected, 0, descriptor["path"], folder,
             potential_axis_label="LT decision potential [model units; SI unverified]",
-            reference_level=threshold, context_label=context))
+            reference_level=threshold, context_label=context, shared_minimum=min(
+                v for _, _, _, row in available for v in row)))
         decisions.append(dict(sample_id=observation['sample_id'], trial_id=observation['trial_id'],
             folder=folder.name, source_descriptor=descriptor,
             observation_complete=observation['complete'], observation_valid=observation['valid'],

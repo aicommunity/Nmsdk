@@ -1,0 +1,86 @@
+{
+  "job": "s11-native-continuity-primary-m40-a1",
+  "controller-result.json": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 19.298476491123438,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "d4bd62f0c4a2b08e6ed9c267824754c6c5aacb97eece6de1e2fc64be952f606a",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "worker/terminal.json": {
+    "operation_passed": true,
+    "operation": "closed-primary-bundle",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "bundle": {
+    "kind": "compact_native_primary",
+    "schema_version": 2,
+    "archive_bytes": 1244508,
+    "archive_sha256": "ab7f007152e9ee041c28f1de7a7721e8945ffc2fd8abdcdeea3198bbabef585d",
+    "compression": {
+      "codec": "xz-lzma2",
+      "dictionary_bytes": 33554432,
+      "member_order": "content_sha256_then_logical_name",
+      "content_references": "earlier-regular-member-sha256-size-v1"
+    },
+    "expanded_bytes": 37366223,
+    "unique_content_bytes": 35985587,
+    "member_count": 114
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "d0dc49eb38e61ceb67ea5795f3906fe3c7e7ac1fafc23bda78e17559997ebdf4",
+      "unit": "timelearner-b1d3d224-b6f9-4271-af41-80f48a0520e8.service",
+      "invocation_id": "1f7dcfa3d9c04fafbbe77626ac3383a7",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b1d3d224-b6f9-4271-af41-80f48a0520e8.service",
+      "initial_main_pid": 4183748,
+      "initial_start_ticks": "435892158",
+      "sha256": "6ac9bc986e93f85c5fdf4faf44fc4430b4bde2a0c77f62f1e7c6c7a460e28b9d"
+    }
+  },
+  "plot_libraries": [
+    "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/lib/python3.12/site-packages",
+    "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1/lib/python3.12/site-packages"
+  ]
+}

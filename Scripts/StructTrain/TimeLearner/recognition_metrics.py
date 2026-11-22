@@ -9,7 +9,7 @@ from pathlib import Path
 
 from .model_identity import canonical_model_sha256
 from .native_evidence import EvidenceError, after, count, equal, load, number, require
-from .recognition_trial_evidence import audit_recognition_trial
+from .recognition_trial_evidence import _recognition_trial_batch
 from .recognition_evidence import _physical
 
 SPEC_FIELDS = {"kind", "schema_version", "run_id", "model_revision", "coverage_policy", "criterion", "trials"}
@@ -39,9 +39,11 @@ def _counts(rows):
             "foil_response_rate": counts["FP"]/foils if foils else None}
 
 
-def _score_recognition(spec, observations, package, *, calibration_probe, diagnostic=False, partial_diagnostic=False):
+def _score_recognition(spec, observations, package, *, calibration_probe, diagnostic=False, partial_diagnostic=False, physical_data=False):
     try:
         require(type(package) is dict, "unsupported_evaluation_model_package")
+        require(not physical_data or not (diagnostic or calibration_probe or partial_diagnostic),
+                "physical_data_is_a_distinct_evaluation_role")
         candidate = package.get("kind") == "timelearner_recognition_threshold_candidate"
         diagnostic_candidate = diagnostic and package.get("kind") == "timelearner_diagnostic_threshold_candidate"
         calibrated = package.get("kind") == "timelearner_calibrated_recognition_state"
@@ -52,8 +54,9 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
             calibrated_audit = audit_calibrated_state(package)
         physical_package = package["source_candidate"] if calibrated else package
         context = physical_package["source_recognition"] if candidate or calibrated or diagnostic_candidate else package
-        require(set(spec) == SPEC_FIELDS | ({"diagnostic_only", "source_stopped_sha256", "training_outcome"} if diagnostic else set())
-                and spec["kind"] == ("timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec")
+        extra = {"data_only", "source_boundary"} if physical_data else {"diagnostic_only", "source_stopped_sha256", "training_outcome"} if diagnostic else set()
+        kind = "timelearner_physical_model_data_evaluation_spec" if physical_data else "timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec"
+        require(set(spec) == SPEC_FIELDS | extra and spec["kind"] == kind
                 and type(spec["schema_version"]) is int and spec["schema_version"] == 1, "unknown_evaluation_spec")
         require(type(spec["run_id"]) is str and bool(spec["run_id"]) and spec["model_revision"] == package["model_revision"],
                 "evaluation_model_or_run_mismatch")
@@ -62,8 +65,11 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
                                 for o in package["calibration_proof"][phase]["observations"]}
             require(spec["run_id"] not in calibration_runs, "frozen_evaluation_reuses_calibration_run")
         require(spec["coverage_policy"] in ("per_trial_windows", "continuous_native_stream"), "unknown_evaluation_coverage")
-        source = context["source_solo"]
-        if diagnostic:
+        source = package if physical_data else context["source_solo"]
+        if physical_data:
+            require(package.get("kind") == "timelearner_physical_model_data" and spec["data_only"] is True
+                    and spec["source_boundary"] == package["source_boundary"], "physical_data_evaluation_source_mismatch")
+        elif diagnostic:
             from .stopped_evidence import OUTCOMES
             require(source["kind"] == "timelearner_stopped_state" and source["state_kind"] == "diagnostic"
                     and source["certificate"] is None and source["training_outcome"] in OUTCOMES
@@ -94,32 +100,26 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
         require(positions == set(range(len(expected))) and {t["label"] for t in expected.values()} == {"target", "foil"},
                 "incomplete_evaluation_positions_or_labels")
         actual, audits = {}, {}
-        for observation in observations:
-            # The calibrated proof was checked once above. Its physical graph
-            # equals this candidate exactly; avoid rescoring the entire proof
-            # once per evaluation trial. Direct trial auditing still checks it.
-            if diagnostic:
-                from .recognition_trial_evidence import _audit_recognition_trial
-                audit = _audit_recognition_trial(observation, physical_package, diagnostic=True)
-            else:
-                audit = audit_recognition_trial(observation, physical_package)
-            trial_id = audit["trial_id"]
-            require(audit["run_id"] == spec["run_id"] and trial_id in expected and trial_id not in actual,
-                    "unexpected_or_duplicate_evaluation_trial")
-            wanted = expected[trial_id]
-            require(all(observation[key] == wanted[key] for key in ("sample_id", "label", "pattern_hash", "reset_policy")),
-                    "evaluation_trial_metadata_mismatch")
-            if observation["armed"]:
-                require(equal(observation["end"], number(observation["begin"])+number(wanted["duration"])),
-                        "evaluation_trial_duration_mismatch")
-            actual[trial_id], audits[trial_id] = observation, audit
+        # Audit the fixed package once. Each observation still receives all
+        # native grid/event/frozen/shape checks; the scope also rejects mutation
+        # of the original package before any result can leave this loop.
+        with _recognition_trial_batch(physical_package, diagnostic=diagnostic, physical_data=physical_data) as audit_trial:
+            for observation in observations:
+                audit = audit_trial(observation)
+                trial_id = audit["trial_id"]
+                require(audit["run_id"] == spec["run_id"] and trial_id in expected and trial_id not in actual,
+                        "unexpected_or_duplicate_evaluation_trial")
+                wanted = expected[trial_id]
+                require(all(observation[key] == wanted[key] for key in ("sample_id", "label", "pattern_hash", "reset_policy")),
+                        "evaluation_trial_metadata_mismatch")
+                if observation["armed"]:
+                    require(equal(observation["end"], number(observation["begin"])+number(wanted["duration"])),
+                            "evaluation_trial_duration_mismatch")
+                actual[trial_id], audits[trial_id] = observation, audit
         require((diagnostic and partial_diagnostic) or set(actual) == set(expected), "missing_evaluation_trial")
         invalid = sorted((set(expected)-set(actual)) | {key for key, audit in audits.items() if not audit["valid_observation"]})
         calibration = package["neuron"]["metadata"]["calibration"]
-        if candidate or diagnostic_candidate:
-            from .threshold_candidate_evidence import audit_threshold_candidate, audit_diagnostic_threshold_candidate
-            (audit_diagnostic_threshold_candidate if diagnostic_candidate else audit_threshold_candidate)(package)
-        elif not calibrated:
+        if not physical_data and not candidate and not diagnostic_candidate and not calibrated:
             require(calibration["status"] == "fixed" and calibration["protocol"] == "fixed-inherited-from-solo"
                     and calibration["source_solo_sha256"] == source["sha256"], "unsupported_evaluation_calibration_claim")
         zones = [node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]
@@ -131,11 +131,15 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
                                        for t in sorted(expected.values(), key=lambda t: t["trial_id"])]}
         result = {"schema_version": 1, "criterion": copy.deepcopy(criterion), "evaluation_spec_digest": canonical_model_sha256(semantic),
                   "coverage_policy": spec["coverage_policy"], "run_id": spec["run_id"], "model_revision": spec["model_revision"],
-                  "declared_training_outcome": source["training_outcome"], "source_training_evidence_checked": False,
+                  "declared_training_outcome": None if physical_data else source["training_outcome"], "source_training_evidence_checked": False,
                   "calibration": copy.deepcopy(calibration), "effective_threshold": _physical(zones[0], "Threshold"), "native_execution_verified": False,
                   "evaluation_verdict": None, "invalid_trial_ids": invalid}
         if candidate:
             result["calibration_probe"] = True
+        if physical_data:
+            result.update(data_only=True, source_boundary=copy.deepcopy(package["source_boundary"]),
+                          training_completed=None, training_certificate_present=False,
+                          calibration_evidence_checked=False, calibration_confirmed=False)
         if diagnostic:
             result.update(diagnostic_only=True, training_completed=False, training_certificate_present=False)
             if diagnostic_candidate:
@@ -195,6 +199,11 @@ def score_recognition_evaluation(spec, observations, package):
     return _score_recognition(spec, observations, package, calibration_probe=False)
 
 
+def score_physical_model_data_evaluation(spec, observations, package):
+    """Whole-window response counts; no source-training/calibration authority."""
+    return _score_recognition(spec, observations, package, calibration_probe=False, physical_data=True)
+
+
 def score_diagnostic_recognition_evaluation(spec, observations, package, source_case):
     """Measured responses of stopped Train, never evidence of completed learning."""
     from .diagnostic_recognition_evidence import audit_diagnostic_recognition
@@ -222,10 +231,11 @@ def score_threshold_candidate(spec, observations, package):
     return _score_recognition(spec, observations, package, calibration_probe=True)
 
 
-def _load_evaluation(path: Path, *, diagnostic=False, missing=None):
+def _load_evaluation(path: Path, *, diagnostic=False, missing=None, physical_data=False):
     spec = load(path)
-    require(set(spec) == SPEC_FIELDS | ({"diagnostic_only", "source_stopped_sha256", "training_outcome"} if diagnostic else set())
-            and spec.get("kind") == ("timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec")
+    extra = {"data_only", "source_boundary"} if physical_data else {"diagnostic_only", "source_stopped_sha256", "training_outcome"} if diagnostic else set()
+    kind = "timelearner_physical_model_data_evaluation_spec" if physical_data else "timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec"
+    require(not (diagnostic and physical_data) and set(spec) == SPEC_FIELDS | extra and spec.get("kind") == kind
             and type(spec.get("schema_version")) is int and spec["schema_version"] == 1
             and type(spec.get("trials")) is list, "unknown_evaluation_spec")
     root = path.resolve(strict=True).parent
@@ -246,6 +256,10 @@ def _load_evaluation(path: Path, *, diagnostic=False, missing=None):
 
 def load_evaluation(path: Path):
     return _load_evaluation(path)
+
+
+def load_physical_model_data_evaluation(path: Path):
+    return _load_evaluation(path, physical_data=True)
 
 
 def load_diagnostic_evaluation(path: Path):

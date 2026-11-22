@@ -301,12 +301,18 @@ def render_soma(observation, channel, label, limits, output: Path, *,
 
 def render_positive_lobe_views(observation, channel, label, output: Path, *,
                                reference_level=None, context_label=None,
+                               shared_minimum=None,
                                potential_axis_label="Soma SumPotential [model units; SI unverified]"):
     """Companion display range; original recovery samples and views are retained."""
     values = [s["soma"][channel] for s in observation["samples"]]
     require(values and all(math.isfinite(v) for v in values), "invalid_positive_lobe_samples")
+    require(shared_minimum is None or
+            (type(shared_minimum) in (int, float) and math.isfinite(shared_minimum)
+             and shared_minimum <= min(values)), "invalid_positive_lobe_shared_minimum")
     positive = [v for v in values if v > 0.]
-    if min(values) >= 0. or not positive or (reference_level is not None and reference_level < 0.):
+    own_recovery = min(values) < 0.
+    shared_recovery = shared_minimum is not None and shared_minimum < 0.
+    if not (own_recovery or shared_recovery) or not positive or (reference_level is not None and reference_level < 0.):
         return []
     levels = [0., *positive]
     if reference_level is not None:
@@ -314,7 +320,7 @@ def render_positive_lobe_views(observation, channel, label, output: Path, *,
     folder = output/"positive-lobe-detail"
     folder.mkdir()
     context = ((context_label+" | ") if context_label else "")+(
-        "Positive lobe display; negative recovery outside Y; full recovery retained in ordinary views")
+        "Positive response display; full shared recovery range retained in ordinary views")
     views = render_soma(observation, channel, label, padded_limits(levels), folder,
         potential_axis_label=potential_axis_label, reference_level=reference_level,
         context_label=context)
@@ -324,6 +330,8 @@ def render_positive_lobe_views(observation, channel, label, output: Path, *,
         view["y_scale"] = "positive_lobe_detail"
         view["display_range_only"] = True
         view["ordinary_full_recovery_views_retained"] = True
+        view["positive_detail_reason"] = "own_negative_recovery" if own_recovery else "shared_negative_recovery"
+        view["shared_recorded_minimum"] = shared_minimum
         lo, hi = view["y_limits"]
         view["samples_outside_display_y"] = sum(
             not lo <= s["soma"][channel] <= hi for s in observation["samples"]

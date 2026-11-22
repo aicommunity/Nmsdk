@@ -1,0 +1,24 @@
+{
+  "host": "user-X99",
+  "samba_inspector_present": true,
+  "share": {
+    "force user": "user",
+    "path": "/mnt/nmsdk-structtrain-archive",
+    "read only": "No",
+    "valid users": "user"
+  },
+  "query_rc": 0,
+  "path_exists": true,
+  "archive_marker": {
+    "kind": "nmsdk_structtrain_external_experiment_archive",
+    "schema_version": 1,
+    "project": "Nmsdk",
+    "created_for": "2026-11-14 Git binary artifact migration",
+    "authoritative_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "history_backups_are_offline_only": true,
+    "original_scientific_bytes_must_be_preserved": true
+  },
+  "new_report_exists": true,
+  "target_png_exists": true,
+  "mount": "/mnt/nmsdk-structtrain-archive //10.245.1.17/Nmsdk-StructTrainExpArchive cifs"
+}

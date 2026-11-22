@@ -1,0 +1,22 @@
+digraph G {
+ graph [rankdir=TB, bgcolor=white, pad="0.12", nodesep="0.3", ranksep="0.35"];
+ node [shape=box, fontname=Arial, fontsize=18, margin="0.13,0.08"];
+ edge [fontname=Arial, fontsize=15, arrowsize=0.8];
+ start [shape=oval, label="Целевой паттерн и исходная ветвь"];
+ initial [label="Измерить собственные исходные Aᵢ⁽⁰⁾\nи отклик опорной точки r = N − 1"];
+ choose [label="Выбрать точку в обратном порядке\nПредложить допустимые места подключения"];
+ physical [label="Учесть общий кабель и общие банки\nПроверить физическую допустимость"];
+ measure [label="Проверить кандидаты N0 или N1\nПовторно измерить амплитуду и время\nзакреплённого импульса"];
+ invalidate [label="После изменения общего участка\nснять прежнее подтверждение\nзатронутых входов"];
+ local [shape=diamond, label="Вход готов\nпо измерениям?"];
+ budget [shape=diamond, label="Есть кандидаты\nи бюджет?"];
+ final [label="Свежая проверка всех входов\nна одной конечной ветви"];
+ end [shape=oval, label="Исход обучения и фактическая модель"];
+ start -> initial -> choose -> physical -> measure -> invalidate -> local;
+ local -> choose [label="следующая точка", constraint=false];
+ local -> final [label="проверены все"];
+ local -> budget [label="нет"];
+ budget -> choose [label="да", constraint=false];
+ budget -> end [label="нет"];
+ final -> end;
+}

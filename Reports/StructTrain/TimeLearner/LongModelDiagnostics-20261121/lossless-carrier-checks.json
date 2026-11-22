@@ -1,0 +1,320 @@
+{
+  "kind": "timelearner_actual_model_carrier_checks",
+  "schema_version": 1,
+  "python_actor_root": "80059519dc15b9bd23c22456bf166a3903d7cec7",
+  "workers": {
+    "elder": {
+      "result": {
+        "kind": "timelearner_python_validation_result",
+        "schema_version": 1,
+        "suite_id": "s11-json-carrier-elder-a1",
+        "package_fingerprint": "d48c1620d8d6823bdf7c460212e92d05289ec23fe3e3023c8ec2fe93c1bc6200",
+        "execution": "completed",
+        "assertion_status": "passed",
+        "expected_test_ids": [
+          "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_existing_destination_cannot_be_overwritten",
+          "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_output_limit_and_unterminated_string_cannot_publish",
+          "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_strings_escapes_utf8_and_exact_number_tokens_across_chunks",
+          "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_wrong_source_digest_cannot_publish_transport",
+          "Scripts.StructTrain.TimeLearner.tests.test_json_transport_actual.JsonTransportActualSourceTest.test_original_closed_source_and_all_primary_bytes_are_retained"
+        ],
+        "executed_tests": 5,
+        "failures": [],
+        "errors": [],
+        "skipped": [],
+        "fixtures": {
+          "TIMELEARNER_JSON_TRANSPORT_NATIVE_JSON": {
+            "path": "/home/user/timelearner-refactor/readbacks/s11-offline-n4-classic-on-elder-a2/classic-on/native",
+            "files": 389,
+            "fingerprint": "0b19bbc3f2510b32ba3285d4d6d2d2b41dad76f228f3044433df4a834ef05f1b"
+          },
+          "TIMELEARNER_JSON_TRANSPORT_NATIVE_CSV": {
+            "path": "/home/user/timelearner-refactor/readbacks/s11-offline-n4-classic-on-elder-a2/classic-on/native",
+            "files": 384,
+            "fingerprint": "445d0acf76aa07116a6e5563aac37d49051e4d43c7b16c611ea6770bd4f110c4"
+          }
+        },
+        "scientific_verdict": null
+      },
+      "process": {
+        "kind": "timelearner_process_result",
+        "schema_version": 2,
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 85.84287890978158,
+        "model_time": null,
+        "runtime_provenance": "loaded_files_captured",
+        "mapping_error": null,
+        "runtime_fingerprint": "93b9828df1907bfbf2ba1cd121727a02c2f002faed4577aa38564719ae89c892",
+        "ownership_scope": "bound_cgroup",
+        "all_processes_closed": true,
+        "scientific_verdict": null,
+        "operational_diagnostics": {
+          "kind": "timelearner_operational_diagnostics",
+          "schema_version": 1,
+          "policy": "owned-streams-v1",
+          "status": "clear",
+          "error_records": 0,
+          "warning_records": 0,
+          "unclassified_stderr_chunks": 0,
+          "reasons": [],
+          "examples": [],
+          "streams": [
+            {
+              "path": "stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "path": "stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "contained_streams_match": true,
+          "scientific_verdict": null
+        }
+      },
+      "carrier": {
+        "path": "/home/user/timelearner-refactor/readbacks/s11-json-carrier-elder-a1/worker/tmp/compact-native-source/manifest.json",
+        "records": [
+          {
+            "kind": "timelearner_lossless_json_transport",
+            "schema_version": 1,
+            "source": {
+              "path": "/home/user/timelearner-refactor/readbacks/s11-offline-n4-classic-on-elder-a2/classic-on/native/train_stopped_state.json",
+              "bytes": 776022626,
+              "sha256": "e60a3c2ad906dab29fa3659287c6d9ab0cd4a3edc2a139ae9977805563aabd34"
+            },
+            "transport": {
+              "path": "/home/user/timelearner-refactor/readbacks/s11-json-carrier-elder-a1/worker/tmp/compact-native-source/source/train_stopped_state.json",
+              "bytes": 332050532,
+              "sha256": "4cf0abc620f3f9d3cca54585123babafd0c3775467931d7c2d36c59d9e64c0a6"
+            },
+            "transformation": "remove_JSON_whitespace_outside_strings_only",
+            "number_tokens_parsed": false,
+            "model_fields_removed": false,
+            "source_modified": false,
+            "semantic_package_verified": false,
+            "strict_package_readback_required": true,
+            "scientific_verdict": null
+          },
+          {
+            "kind": "timelearner_lossless_json_transport",
+            "schema_version": 1,
+            "source": {
+              "path": "/home/user/timelearner-refactor/readbacks/s11-offline-n4-classic-on-elder-a2/classic-on/native/train_stopped_summary.json",
+              "bytes": 222265275,
+              "sha256": "aee8c435c58d770082ddc24b38a6669200d63f65373e908cf00a5091a4ec51d1"
+            },
+            "transport": {
+              "path": "/home/user/timelearner-refactor/readbacks/s11-json-carrier-elder-a1/worker/tmp/compact-native-source/source/train_stopped_summary.json",
+              "bytes": 58086068,
+              "sha256": "527001bece29720912df65933853fe9451f1892e1228a143704d02e539210b47"
+            },
+            "transformation": "remove_JSON_whitespace_outside_strings_only",
+            "number_tokens_parsed": false,
+            "model_fields_removed": false,
+            "source_modified": false,
+            "semantic_package_verified": false,
+            "strict_package_readback_required": true,
+            "scientific_verdict": null
+          }
+        ],
+        "model_revision": "483b379cfd982a26330714e469cb36d665f2661f7e22b08b02030d1a58672d61",
+        "package_sha256": "1c8dba5b4c3a8e866c5c2c4874bff955fa57a8e0af2d9f2a6f8c07d2a1c24b65"
+      }
+    },
+    "m40": {
+      "result": {
+        "kind": "timelearner_python_validation_result",
+        "schema_version": 1,
+        "suite_id": "s11-json-carrier-m40-a1",
+        "package_fingerprint": "d48c1620d8d6823bdf7c460212e92d05289ec23fe3e3023c8ec2fe93c1bc6200",
+        "execution": "completed",
+        "assertion_status": "passed",
+        "expected_test_ids": [
+          "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_existing_destination_cannot_be_overwritten",
+          "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_output_limit_and_unterminated_string_cannot_publish",
+          "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_strings_escapes_utf8_and_exact_number_tokens_across_chunks",
+          "Scripts.StructTrain.TimeLearner.tests.test_json_transport.JsonTransportTest.test_wrong_source_digest_cannot_publish_transport",
+          "Scripts.StructTrain.TimeLearner.tests.test_json_transport_actual.JsonTransportActualSourceTest.test_original_closed_source_and_all_primary_bytes_are_retained"
+        ],
+        "executed_tests": 5,
+        "failures": [],
+        "errors": [],
+        "skipped": [],
+        "fixtures": {
+          "TIMELEARNER_JSON_TRANSPORT_NATIVE_JSON": {
+            "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-terminal-n4-branch-on-m40-a2/branch-on/native",
+            "files": 953,
+            "fingerprint": "290d9dc8dcdda1e2a0508dcc1c43313a5a4318ae3969e576dbcf8bdcdfefd4e0"
+          },
+          "TIMELEARNER_JSON_TRANSPORT_NATIVE_CSV": {
+            "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-terminal-n4-branch-on-m40-a2/branch-on/native",
+            "files": 948,
+            "fingerprint": "db7c5409c053dfb03c53f5fd5bb95541880e29b0ed773f00d400191e33fc7d4d"
+          }
+        },
+        "scientific_verdict": null
+      },
+      "process": {
+        "kind": "timelearner_process_result",
+        "schema_version": 2,
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 87.44655426871032,
+        "model_time": null,
+        "runtime_provenance": "loaded_files_captured",
+        "mapping_error": null,
+        "runtime_fingerprint": "493cf118de377c2a88cfa5b833fe6640685f3326806b383c02e37c587a34a790",
+        "ownership_scope": "bound_cgroup",
+        "all_processes_closed": true,
+        "scientific_verdict": null,
+        "operational_diagnostics": {
+          "kind": "timelearner_operational_diagnostics",
+          "schema_version": 1,
+          "policy": "owned-streams-v1",
+          "status": "clear",
+          "error_records": 0,
+          "warning_records": 0,
+          "unclassified_stderr_chunks": 0,
+          "reasons": [],
+          "examples": [],
+          "streams": [
+            {
+              "path": "stdout.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "path": "stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "contained_streams_match": true,
+          "scientific_verdict": null
+        }
+      },
+      "carrier": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-json-carrier-m40-a1/worker/tmp/compact-native-source/manifest.json",
+        "records": [
+          {
+            "kind": "timelearner_lossless_json_transport",
+            "schema_version": 1,
+            "source": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-terminal-n4-branch-on-m40-a2/branch-on/native/train_stopped_state.json",
+              "bytes": 1164781893,
+              "sha256": "84e4632a47bacfcd3c926ae8411ad60ee0f4f37ffab601db3afcd63e657e33f0"
+            },
+            "transport": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-json-carrier-m40-a1/worker/tmp/compact-native-source/source/train_stopped_state.json",
+              "bytes": 400189937,
+              "sha256": "ce3d25adaf1cb44a44dbb8d414ede8dec6a39c87d19e3c2cf0460c68061a7d9d"
+            },
+            "transformation": "remove_JSON_whitespace_outside_strings_only",
+            "number_tokens_parsed": false,
+            "model_fields_removed": false,
+            "source_modified": false,
+            "semantic_package_verified": false,
+            "strict_package_readback_required": true,
+            "scientific_verdict": null
+          },
+          {
+            "kind": "timelearner_lossless_json_transport",
+            "schema_version": 1,
+            "source": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-terminal-n4-branch-on-m40-a2/branch-on/native/train_stopped_summary.json",
+              "bytes": 384127334,
+              "sha256": "bf7ecf97b15d15be60a0a7c1ec4900f549521e044b29d953460ea33347719535"
+            },
+            "transport": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-json-carrier-m40-a1/worker/tmp/compact-native-source/source/train_stopped_summary.json",
+              "bytes": 100184320,
+              "sha256": "d3ab6ef5fc346f007c6284d3220466d2223dd869f5eb3f9813ea90a9909e61b7"
+            },
+            "transformation": "remove_JSON_whitespace_outside_strings_only",
+            "number_tokens_parsed": false,
+            "model_fields_removed": false,
+            "source_modified": false,
+            "semantic_package_verified": false,
+            "strict_package_readback_required": true,
+            "scientific_verdict": null
+          }
+        ],
+        "model_revision": "ac29284570efcb7e733f4364daa245d35e6665cd249010962da465b32177040a",
+        "package_sha256": "defebe51276b9b84a4837d15ba6903663394f0fc1d93c435d7c10f4ad8564a2a"
+      }
+    },
+    "windows": {
+      "exists": true,
+      "terminal.json": {
+        "carrier_checks_passed": true
+      },
+      "process-result.json": {
+        "reason": "exit_zero",
+        "execution": "completed",
+        "all_processes_closed": true
+      },
+      "validation/result.json": {
+        "execution": "completed",
+        "assertion_status": "passed",
+        "executed_tests": 5
+      },
+      "tmp/compact-native-source/manifest.json": {
+        "records": [
+          {
+            "kind": "timelearner_lossless_json_transport",
+            "schema_version": 1,
+            "source": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-offline-n4-branch-on-a2\\science-train\\native\\train_stopped_state.json",
+              "bytes": 958088747,
+              "sha256": "6901d74806233bae3d41663b98c117cf11d07c9ff929aa581bb4871e24da99c9"
+            },
+            "transport": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-json-carrier-a1\\tmp\\compact-native-source\\source\\train_stopped_state.json",
+              "bytes": 338481963,
+              "sha256": "1accaf01982108506ecb48e4b9dad448e16f33b790384fd3834607f96cc6e807"
+            },
+            "transformation": "remove_JSON_whitespace_outside_strings_only",
+            "number_tokens_parsed": false,
+            "model_fields_removed": false,
+            "source_modified": false,
+            "semantic_package_verified": false,
+            "strict_package_readback_required": true,
+            "scientific_verdict": null
+          },
+          {
+            "kind": "timelearner_lossless_json_transport",
+            "schema_version": 1,
+            "source": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-offline-n4-branch-on-a2\\science-train\\native\\train_stopped_summary.json",
+              "bytes": 336129998,
+              "sha256": "c74b44ed349d6615d33d5c4a57444ee0f512b2d78509c83d249be234185a00d3"
+            },
+            "transport": {
+              "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-json-carrier-a1\\tmp\\compact-native-source\\source\\train_stopped_summary.json",
+              "bytes": 87666991,
+              "sha256": "f0a6f613cf54afbdd399fbb6cd7c74757c36817384526a8d776a24927135d971"
+            },
+            "transformation": "remove_JSON_whitespace_outside_strings_only",
+            "number_tokens_parsed": false,
+            "model_fields_removed": false,
+            "source_modified": false,
+            "semantic_package_verified": false,
+            "strict_package_readback_required": true,
+            "scientific_verdict": null
+          }
+        ],
+        "expected_package_sha256": "e318520a6b20167f65976f1adbf5174b9105e5fc9b9cb50e52678bad8a3290fc",
+        "expected_model_revision": "01ff5ebf50a45cfd3a354de5902ae7702d9d7e5590945eca399f38674ed9c488"
+      }
+    }
+  },
+  "semantic_package_acceptance_granted_by_carrier": false,
+  "native_import_acceptance_granted_by_carrier": false,
+  "scientific_verdict": null
+}

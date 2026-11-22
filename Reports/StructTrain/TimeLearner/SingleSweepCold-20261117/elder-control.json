@@ -1,0 +1,132 @@
+{
+  "job": "s10-single-complete-sweep-branch-elder-a3",
+  "controls_commit": "ccb172580062996b16521530207edd18a02d191c",
+  "request": "/home/user/timelearner-refactor/requests/single-complete-sweep-branch-a3/Docs/StructTrain/TimeLearner/ValidationPlans/ElderSingleCompleteSweepBranchA3-20261117/request.json",
+  "declaration": {
+    "kind": "timelearner_single_complete_sweep_control",
+    "schema_version": 1,
+    "cold": true,
+    "template_archive_sha256": "6a86940f1486ca6754a211bcf99f70f2d02a86312d6eb4fac432fbe5f49e74fd",
+    "template_member": "s10-finite-train-native-m40-a2/branch/input/job.json",
+    "template_member_sha256": "e8899a3bd7f02cdcebd10cfb96bd69760a672e1dc902cc674968646e530c5067",
+    "native_root": "0efbf25b074ca4dcf8439dde8160fa9e70697376",
+    "native_pulse": "5dabcb1b0c627d1de52bf2dccec35f33cb755e92",
+    "runtime_fingerprint": "d480a889fa70dd9511ed86667884b453af89a7571ebc6385f27b7f48592e7d83",
+    "coverage": {
+      "kind": "timelearner_declared_sweep_budget_coverage",
+      "schema_version": 1,
+      "inputs": 4,
+      "adjustable_inputs": 3,
+      "candidate_repetitions": 1,
+      "candidate_pair_probes": 144,
+      "best_restoration_probes": 6,
+      "final_all_input_probes": 4,
+      "valid_search_probe_upper_bound_per_sweep": 154,
+      "valid_search_probe_upper_bound_all_declared_sweeps": 154,
+      "declared_search_probes": 160,
+      "first_sweep_fits": true,
+      "all_declared_sweeps_fit": true,
+      "reference_capture_probes_separate": true,
+      "native_probes_per_valid_group": 6,
+      "composite_capacity": {
+        "required_groups": 158,
+        "required_native_probes": 948,
+        "required_maximum_samples": 3417540,
+        "groups_fit": true,
+        "native_probes_fit": true,
+        "samples_fit": true
+      },
+      "declared_window_model_seconds": 1706.4,
+      "assumptions": [
+        "valid complete measurements; no recovery/retry allowance included",
+        "legal edits; no additional wall/model-time overhead inferred",
+        "local candidate exhaustion may occur earlier than the configured cap"
+      ],
+      "execution_verified": false,
+      "convergence_verified": false,
+      "scientific_verdict": null
+    },
+    "search": {
+      "maximum_probes": 160,
+      "maximum_edits": 1280,
+      "maximum_candidates_per_input": 24,
+      "maximum_sweeps": 1,
+      "maximum_invalid_observations": 4,
+      "resistance_subdivision_depth": 8,
+      "bounds": [
+        {
+          "minimum_length": 1,
+          "maximum_length": 256,
+          "minimum_synapses": 1,
+          "maximum_synapses": 1,
+          "minimum_resistance": 1000000.0,
+          "maximum_resistance": 86000000.0
+        },
+        {
+          "minimum_length": 1,
+          "maximum_length": 256,
+          "minimum_synapses": 1,
+          "maximum_synapses": 1,
+          "minimum_resistance": 1000000.0,
+          "maximum_resistance": 86000000.0
+        },
+        {
+          "minimum_length": 1,
+          "maximum_length": 256,
+          "minimum_synapses": 1,
+          "maximum_synapses": 1,
+          "minimum_resistance": 1000000.0,
+          "maximum_resistance": 86000000.0
+        },
+        {
+          "minimum_length": 1,
+          "maximum_length": 1,
+          "minimum_synapses": 1,
+          "maximum_synapses": 1,
+          "minimum_resistance": 86000000.0,
+          "maximum_resistance": 86000000.0
+        }
+      ],
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0.0,
+        "sync": 0.02
+      }
+    },
+    "model_seconds": 10000,
+    "wall_seconds": 84600,
+    "group_model_seconds": 20,
+    "group_wall_seconds": 1800,
+    "physical_model_unchanged": true,
+    "optional_modes": {
+      "sync_capacitance_trim": 0,
+      "post_train_tuning": false,
+      "auto_calibrate_threshold": false
+    },
+    "unmodified": [
+      "storage profiles and physical model",
+      "assigned-pulse peak criterion",
+      "all original numeric tolerances",
+      "frequency 2000 Hz",
+      "native stimulus and measurement windows",
+      "C-trim Off"
+    ],
+    "explicit_changes": [
+      "single sweep",
+      "per-input candidate cap24",
+      "global search160",
+      "model time10000s",
+      "whole wall84600s",
+      "per-group wall1800s",
+      "new Pulse5d prevents extra edit after probe budget; no full-best restore claim"
+    ],
+    "reason": "Reach every adjustable input and fresh final sweep without starting a second sweep; threefold group-wall allowance follows actual Classic601s timeout at model8.8s/20s. Multiple execution factors are explicit: no single-factor causal claim.",
+    "disk_policy": "1.5GiB output ceiling, 1GiB free floor, enforced by finite owner; crossing any limit is an explicit incomplete/budget result.",
+    "convergence_promised": false,
+    "scientific_verdict": null
+  },
+  "observed_at": "2026-11-17T17:51:21Z",
+  "outer_execution": "running",
+  "native_execution": "running",
+  "whole_plan_complete": false
+}

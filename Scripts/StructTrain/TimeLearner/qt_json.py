@@ -7,11 +7,13 @@ import zlib
 from .native_evidence import EvidenceError, parse_json_bytes, require
 
 
-def read_qcompress_bytes(path, *, expected_bytes, expected_sha256):
+def read_qcompress_bytes(path, *, expected_bytes, expected_sha256, maximum_bytes=256*1024**2):
     path = Path(path)
     require(not path.is_symlink() and 4 < path.stat().st_size <= 64*1024**2,
             'recorded_qz_packed_size')
-    require(type(expected_bytes) is int and 0 < expected_bytes <= 256*1024**2,
+    require(type(maximum_bytes) is int and 0 < maximum_bytes <= 1024*1024**2,
+            'recorded_qz_explicit_bound')
+    require(type(expected_bytes) is int and 0 < expected_bytes <= maximum_bytes,
             'recorded_qz_declared_size')
     packed = path.read_bytes()
     declared = struct.unpack('>I', packed[:4])[0]
@@ -27,8 +29,8 @@ def read_qcompress_bytes(path, *, expected_bytes, expected_sha256):
     return raw
 
 
-def read_qcompress_json(path, *, expected_bytes, expected_sha256):
+def read_qcompress_json(path, *, expected_bytes, expected_sha256, maximum_bytes=256*1024**2):
     document = parse_json_bytes(read_qcompress_bytes(path, expected_bytes=expected_bytes,
-                                                   expected_sha256=expected_sha256))
+                                                   expected_sha256=expected_sha256, maximum_bytes=maximum_bytes))
     require(isinstance(document, dict), 'recorded_qz_json_object')
     return document

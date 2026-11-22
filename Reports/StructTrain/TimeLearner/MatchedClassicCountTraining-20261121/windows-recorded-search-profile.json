@@ -1,0 +1,263 @@
+{
+  "kind": "timelearner_actual_N0_recorded_search_profile",
+  "schema_version": 1,
+  "source_summary": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-m4-a3\\train\\native\\train_stopped_summary.json",
+    "sha256": "9eaa0bc238a54f563a8849bc7849c4a01d4f9747263f7beea7ddd18153bece86",
+    "size": 28609085
+  },
+  "source_prior_full_audit": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-closed-count-primary-audit-a2\\tmp\\matched-count-training-audit.json",
+    "sha256": "0c5bdef6f6d259e7e2a245b2a4ab82e4833f3c15e133944e0f2ee958e7b7d6aa",
+    "size": 170306
+  },
+  "source_consumed_job": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-m4-a3\\train\\native\\job.json",
+    "sha256": "3dd7701383b41adf85330dbbc02e6e28fa93bb24f621cc919854803c55e7745c",
+    "size": 940882
+  },
+  "topology": "Branch",
+  "normalization": "N0",
+  "outcome": "budget_exhausted",
+  "reason": "maximum_sweeps_exhausted",
+  "actual_terminal_model_revision": "53a459de5082d318f1737d09b478cf574327cb4bc0a88dc51d438ee69cf2daa9",
+  "actual_terminal_parameters": [
+    {
+      "length": 239,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 201,
+      "resistance": 86000000,
+      "synapses": 5
+    },
+    {
+      "length": 121,
+      "resistance": 86000000,
+      "synapses": 5
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "historical_model_revision": "8bbd41980bf026d3119f39644a51f83919c70ca4d50be55ddcd591542aeb732a",
+  "historical_parameters": [
+    {
+      "length": 239,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 201,
+      "resistance": 86000000,
+      "synapses": 5
+    },
+    {
+      "length": 121,
+      "resistance": 86000000,
+      "synapses": 5
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "reference_complete": true,
+  "tolerances": {
+    "amplitude_absolute": 1e-05,
+    "amplitude_relative": 0,
+    "sync": 0.02
+  },
+  "recorded_candidates": 75,
+  "producer_search_probes": 154,
+  "producer_applied_edits": 72,
+  "by_input": [
+    {
+      "input_index": 0,
+      "measured_candidates": 25,
+      "timing_ready": 7,
+      "amplitude_ready": 0,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 24,
+      "repeated_commanded_vector_presentations": 1,
+      "recorded_lengths": [
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        239
+      ],
+      "recorded_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "amplitude_residual_range": [
+        -0.02426538809989698,
+        -0.012239425930418601
+      ]
+    },
+    {
+      "input_index": 1,
+      "measured_candidates": 25,
+      "timing_ready": 7,
+      "amplitude_ready": 0,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 24,
+      "repeated_commanded_vector_presentations": 1,
+      "recorded_lengths": [
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        201
+      ],
+      "recorded_counts": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "amplitude_residual_range": [
+        -0.024033458249806294,
+        -0.013363223957548076
+      ]
+    },
+    {
+      "input_index": 2,
+      "measured_candidates": 25,
+      "timing_ready": 7,
+      "amplitude_ready": 1,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 24,
+      "repeated_commanded_vector_presentations": 1,
+      "recorded_lengths": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        24,
+        48,
+        96,
+        121
+      ],
+      "recorded_counts": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "amplitude_residual_range": [
+        -0.02347230991428706,
+        0
+      ]
+    },
+    {
+      "input_index": 3,
+      "measured_candidates": 0,
+      "timing_ready": 0,
+      "amplitude_ready": 0,
+      "jointly_ready": 0,
+      "distinct_commanded_vectors": 0,
+      "repeated_commanded_vector_presentations": 0,
+      "recorded_lengths": [],
+      "recorded_counts": [],
+      "amplitude_residual_range": null
+    }
+  ],
+  "terminal_fresh_all_input_verification": false,
+  "command_vector_repetition_is_not_full_model_or_protocol_equivalence": true,
+  "full_primary_audit_not_repeated": true,
+  "classification_assessed": false,
+  "scientific_verdict": null,
+  "source_projection_root": "55138b26b173ba5cfb907d02829505280752dd3d",
+  "projection": "training_search_report._project_summary on already audited historical summary8; actual terminal summary9 retained separately",
+  "consumed_search_configuration": {
+    "bounds": [
+      {
+        "maximum_length": 256,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 128,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      },
+      {
+        "maximum_length": 256,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 128,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      },
+      {
+        "maximum_length": 256,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 128,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      },
+      {
+        "maximum_length": 1,
+        "maximum_resistance": 86000000,
+        "maximum_synapses": 1,
+        "minimum_length": 1,
+        "minimum_resistance": 86000000,
+        "minimum_synapses": 1
+      }
+    ],
+    "maximum_candidates_per_input": 24,
+    "maximum_edits": 1280,
+    "maximum_invalid_observations": 4,
+    "maximum_probes": 160,
+    "maximum_sweeps": 1,
+    "resistance_subdivision_depth": 8,
+    "tolerances": {
+      "amplitude_absolute": 1e-05,
+      "amplitude_relative": 0,
+      "sync": 0.02
+    }
+  },
+  "primary_publication_reference": "windows-primary-full-archive.json",
+  "primary_job_member": "original-job/train/native/job.json",
+  "primary_summary_member": "original-job/train/native/train_stopped_summary.json"
+}

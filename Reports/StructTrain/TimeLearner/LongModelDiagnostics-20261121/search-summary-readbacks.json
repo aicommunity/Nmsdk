@@ -1,0 +1,340 @@
+{
+  "kind": "timelearner_actual_long_model_search_summary_metadata",
+  "schema_version": 1,
+  "rows": [
+    {
+      "worker": "elder",
+      "summary_transport": {
+        "path": "/home/user/timelearner-refactor/readbacks/s11-json-carrier-elder-a1/worker/tmp/compact-native-source/source/train_stopped_summary.json",
+        "bytes": 58086068,
+        "sha256": "527001bece29720912df65933853fe9451f1892e1228a143704d02e539210b47"
+      },
+      "model_revision": "483b379cfd982a26330714e469cb36d665f2661f7e22b08b02030d1a58672d61",
+      "outcome": "budget_exhausted",
+      "reason": "native_training_time_budget_exhausted",
+      "actual_exported_parameters": [
+        {
+          "length": 237,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "search_terminal_parameters": [
+        {
+          "length": 237,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "terminal_status": "restored",
+      "fresh_all_input_verification": false,
+      "counters": {
+        "archive": {
+          "groups": 64,
+          "native_probes": 384,
+          "primary_bytes": 148209196,
+          "sampled_frames": 1381689
+        },
+        "attempt": {
+          "logical_groups": 64,
+          "native_probes": 384,
+          "sampled_frames": 1381689
+        }
+      },
+      "search_probes": 60,
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      },
+      "latest_candidate_measurements": [
+        {
+          "trial_id": "offline-science/20261120/classic/N4/N1/a2/session/1/search/107",
+          "model_revision": "40f865f0382d92d70354f9553dcb9b71c36de36b8d42ce925b8d97e35c29b89b",
+          "model_epoch": 26,
+          "input_index": 1,
+          "parameters": {
+            "length": 2,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          "timing_low": -0.39799999999991087,
+          "timing_high": -0.39799999999991087,
+          "amplitude_residual": -0.005101293201060897,
+          "within_timing": false,
+          "within_amplitude": false
+        },
+        {
+          "trial_id": "offline-science/20261120/classic/N4/N1/a2/session/1/search/111",
+          "model_revision": "cece30aea45d28e7de056110ef59508d52622b4e8dcc7b57968bca11a54085a6",
+          "model_epoch": 27,
+          "input_index": 1,
+          "parameters": {
+            "length": 3,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          "timing_low": -0.39600000000007185,
+          "timing_high": -0.39600000000007185,
+          "amplitude_residual": -0.008111309598972771,
+          "within_timing": false,
+          "within_amplitude": false
+        }
+      ]
+    },
+    {
+      "worker": "m40",
+      "summary_transport": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-json-carrier-m40-a1/worker/tmp/compact-native-source/source/train_stopped_summary.json",
+        "bytes": 100184320,
+        "sha256": "d3ab6ef5fc346f007c6284d3220466d2223dd869f5eb3f9813ea90a9909e61b7"
+      },
+      "model_revision": "ac29284570efcb7e733f4364daa245d35e6665cd249010962da465b32177040a",
+      "outcome": "budget_exhausted",
+      "reason": "maximum_sweeps_exhausted",
+      "actual_exported_parameters": [
+        {
+          "length": 235,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 200,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "search_terminal_parameters": [
+        {
+          "length": 235,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 200,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "terminal_status": "restored",
+      "fresh_all_input_verification": false,
+      "counters": {
+        "archive": {
+          "groups": 158,
+          "native_probes": 948,
+          "primary_bytes": 136413912,
+          "sampled_frames": 3413748
+        },
+        "attempt": {
+          "logical_groups": 158,
+          "native_probes": 948,
+          "sampled_frames": 3413748
+        }
+      },
+      "search_probes": 154,
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      },
+      "latest_candidate_measurements": [
+        {
+          "trial_id": "terminal-science-ab/n4/branch/a1/on/session/1/search/296",
+          "model_revision": "0338c00819210d1cb823afac97deb78e59a01fc099d199bfb14d9e8e30bb3164",
+          "model_epoch": 71,
+          "input_index": 0,
+          "parameters": {
+            "length": 232,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          "timing_low": -0.010999999999967258,
+          "timing_high": -0.010999999999967258,
+          "amplitude_residual": -0.024246028159033428,
+          "within_timing": true,
+          "within_amplitude": false
+        },
+        {
+          "trial_id": "terminal-science-ab/n4/branch/a1/on/session/1/search/299",
+          "model_revision": "a68984b6a62569922c3e589ad7fea1141cd0563e176fdbee820e214c86a99732",
+          "model_epoch": 72,
+          "input_index": 0,
+          "parameters": {
+            "length": 235,
+            "resistance": 8090169.943749473,
+            "synapses": 1
+          },
+          "timing_low": -0.004999999999881766,
+          "timing_high": -0.004999999999881766,
+          "amplitude_residual": -0.0031436222513934187,
+          "within_timing": true,
+          "within_amplitude": false
+        }
+      ]
+    },
+    {
+      "worker": "windows",
+      "summary_transport": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-json-carrier-a1\\tmp\\compact-native-source\\source\\train_stopped_summary.json",
+        "bytes": 87666991,
+        "sha256": "f0a6f613cf54afbdd399fbb6cd7c74757c36817384526a8d776a24927135d971"
+      },
+      "model_revision": "01ff5ebf50a45cfd3a354de5902ae7702d9d7e5590945eca399f38674ed9c488",
+      "outcome": "budget_exhausted",
+      "reason": "native_training_time_budget_exhausted",
+      "actual_exported_parameters": [
+        {
+          "length": 237,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 200,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "search_terminal_parameters": [
+        {
+          "length": 237,
+          "resistance": 26377160.862429008,
+          "synapses": 1
+        },
+        {
+          "length": 200,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 121,
+          "resistance": 8090169.943749473,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "terminal_status": "restored",
+      "fresh_all_input_verification": false,
+      "counters": {
+        "archive": {
+          "groups": 137,
+          "native_probes": 822,
+          "primary_bytes": 119076740,
+          "sampled_frames": 2957518
+        },
+        "attempt": {
+          "logical_groups": 137,
+          "native_probes": 822,
+          "sampled_frames": 2957518
+        }
+      },
+      "search_probes": 133,
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      },
+      "latest_candidate_measurements": [
+        {
+          "trial_id": "offline-science/20261120/windows/branch/N4/N1/a2/session/1/search/260",
+          "model_revision": "86efb875bcbd852d13e54fbd52c4b219119b8d5a4dd1e3bfef0a8e9185bc0e3a",
+          "model_epoch": 62,
+          "input_index": 0,
+          "parameters": {
+            "length": 237,
+            "resistance": 86000000,
+            "synapses": 1
+          },
+          "timing_low": -0.0005000000001018634,
+          "timing_high": -0.0005000000001018634,
+          "amplitude_residual": -0.024260111844710885,
+          "within_timing": true,
+          "within_amplitude": false
+        },
+        {
+          "trial_id": "offline-science/20261120/windows/branch/N4/N1/a2/session/1/search/264",
+          "model_revision": "01ff5ebf50a45cfd3a354de5902ae7702d9d7e5590945eca399f38674ed9c488",
+          "model_epoch": 63,
+          "input_index": 0,
+          "parameters": {
+            "length": 237,
+            "resistance": 8090169.943749473,
+            "synapses": 1
+          },
+          "timing_low": -0.0005000000001018634,
+          "timing_high": -0.0005000000001018634,
+          "amplitude_residual": -0.0031952185936434674,
+          "within_timing": true,
+          "within_amplitude": false
+        }
+      ]
+    }
+  ],
+  "declared_summary_metadata_only": true,
+  "full_source_package_and_native_import_validation_pending": true,
+  "classification_measured": false,
+  "scientific_verdict": null
+}

@@ -31,8 +31,10 @@ FIELDS = {
 FIELDS["probe"] = {"owner_class", "implementation_id", "model", "profile_archives", "stimulus_profile", "probe",
                    "maximum_model_ticks", "maximum_wall_seconds"}
 FIELDS["diagnostic-evaluate"] = (FIELDS["evaluate"] - {"source_recognition"}) | {"source_stopped", "conversion_spec"}
+FIELDS["physical-model-evaluate"] = (FIELDS["evaluate"] - {"source_recognition"}) | {"source_model_data"}
 KINDS = {"preflight": "training", "train": "training", "export": "recognition_export", "evaluate": "evaluation", "diagnostic-evaluate": "diagnostic_evaluation"}
 EXECUTION_KINDS = {"preflight": "preflight", "train": "training", "export": "conversion", "evaluate": "evaluation", "diagnostic-evaluate": "diagnostic_evaluation"}
+KINDS["physical-model-evaluate"] = EXECUTION_KINDS["physical-model-evaluate"] = "physical_model_evaluation"
 COMMON_EXECUTION = {"kind", "schema_version", "execution", "job_sha256", "model_revision", "model_ticks",
                     "artifacts", "evaluation_verdict", "sha256"}
 EXECUTION_FIELDS = {
@@ -47,9 +49,13 @@ EXECUTION_FIELDS = {
 
 EXECUTION_FIELDS["diagnostic-evaluate"] = EXECUTION_FIELDS["evaluate"] | {
     "diagnostic_only", "source_stopped_sha256", "training_outcome", "training_reason"}
+EXECUTION_FIELDS["physical-model-evaluate"] = EXECUTION_FIELDS["evaluate"] | {
+    "data_only", "source_boundary", "training_certificate_transferred", "calibration_confirmed", "controller_checkpoint_restored"}
 
 
 def _load_source_case(mode, path):
+    if mode == "physical-model-evaluate":
+        return (load(path),)
     if mode in ("diagnostic-evaluate", "probe"):
         from .stopped_evidence import load_case as load_stopped
         return load_stopped(path)
@@ -57,7 +63,11 @@ def _load_source_case(mode, path):
 
 
 def _audit_source(job, source_case, mode):
-    if mode == "export":
+    if mode == "physical-model-evaluate":
+        from .physical_model_data_evidence import audit_physical_model_data
+        require(job["source_model_data"] == source_case[0], "pipeline_physical_data_source_changed")
+        audit_physical_model_data(source_case[0], frozen=True)
+    elif mode == "export":
         require(job["source_solo"] == source_case[0], "pipeline_source_solo_changed")
         audit_learned_state(*source_case)
     elif mode == "diagnostic-evaluate":
@@ -74,7 +84,10 @@ def _audit_source(job, source_case, mode):
 
 
 @_evidence_boundary
-def validate_job(mode, job, source_case=None):
+def _validate_job(mode, job, source_case=None, *, historical_evaluation_reset=False):
+    require(type(historical_evaluation_reset) is bool and
+            (not historical_evaluation_reset or mode in ('evaluate','diagnostic-evaluate','physical-model-evaluate')),
+            'unsupported_pipeline_historical_reset_scope')
     require(mode in FIELDS and type(job) is dict, "unknown_native_pipeline_job")
     if mode == "probe":
         from .native_characterization import validate_job as validate_probe_job
@@ -99,6 +112,9 @@ def validate_job(mode, job, source_case=None):
     if mode in ("train", "preflight"):
         require(source_case is None, "cold_training_does_not_import_learned_state")
         config = job["configuration"]
+        from .terminal_configuration import split_terminal_configuration
+        _, terminal_policy = split_terminal_configuration(config)
+        require(terminal_policy is None or not live, 'terminal_live_finalization_not_yet_supported')
         from .composite_configuration import project_training_configuration
         # Validate the policy envelope, but execute/hash the original record.
         # Effective support still requires the native strict codec/readback.
@@ -121,31 +137,59 @@ def validate_job(mode, job, source_case=None):
         require(source_case is not None, "pipeline_original_primary_source_required")
         _audit_source(job, source_case, mode)
         config = source_case[0]["configuration"]
-        source = job["source_solo"] if mode == "export" else job["source_stopped"] if mode == "diagnostic-evaluate" else job["source_recognition"]
+        source = job["source_model_data"] if mode == "physical-model-evaluate" else job["source_solo"] if mode == "export" else job["source_stopped"] if mode == "diagnostic-evaluate" else job["source_recognition"]
         require(job["implementation_id"] == source["implementation_id"], "pipeline_implementation_changed")
     if mode != "export":
         require(job["owner_class"] == "NNeuronTimeLearner"+("Branch" if config["model"]["branch"] else "") and
                 1 <= count(job["maximum_model_ticks"]) <= 1000000000, "pipeline_owner_or_tick_budget_invalid")
-    if mode in ("evaluate", "diagnostic-evaluate"):
-        # Version 1 deliberately supports only the verified reset-per-trial path.
-        # The native continuous option remains outside this production wrapper.
-        require(job["coverage_policy"] == "per_trial_windows", "pipeline_continuous_stream_not_yet_verified")
+    if mode in ("evaluate", "diagnostic-evaluate", "physical-model-evaluate"):
+        # Coverage and physical reset are independent declarations. Continuous
+        # coverage is verified from every recorded boundary by the scorer;
+        # preservation never implies that an unobserved gap may be ignored.
+        require(job["coverage_policy"] in ("per_trial_windows", "continuous_native_stream"),
+                "unknown_evaluation_coverage")
         trials = job["trials"]
         require(type(trials) is list and 1 <= len(trials) <= 10000 and type(job["run_id"]) is str and job["run_id"],
                 "invalid_evaluation_trial_design")
         from .calibrated_evidence import REQUEST_FIELDS
         require(all(type(t) is dict and set(t) == REQUEST_FIELDS and t["run_id"] == job["run_id"] for t in trials),
                 "invalid_evaluation_trial_scope")
+        if historical_evaluation_reset:
+            require(job['coverage_policy'] == 'per_trial_windows' and
+                    all(t['reset_policy'] in ('reset_per_trial','preserve_neuron_dynamics') for t in trials) and
+                    any(t['reset_policy']=='preserve_neuron_dynamics' for t in trials),
+                    'unsupported_pipeline_historical_reset_scope')
+        else:
+            require(all(t['reset_policy'] in ('reset_per_trial','preserve_neuron_dynamics') for t in trials),
+                    'pipeline_unknown_reset_policy')
         require(len({t["trial_id"] for t in trials}) == len(trials), "duplicate_evaluation_trial")
-        if mode == "diagnostic-evaluate":
+        if mode in ("diagnostic-evaluate", "physical-model-evaluate"):
             require(len(trials) >= 2 and {t["label"] for t in trials} == {"target", "foil"},
                     "incomplete_diagnostic_evaluation_labels")
     result = {"job_sha256": job["sha256"], "primary_source_checked": mode not in ("train", "preflight"),
               "effective_model_checked": False, "native_configuration_validation_required": True}
-    if mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 6:
+    if mode in ('evaluate','diagnostic-evaluate','physical-model-evaluate') and not historical_evaluation_reset and (
+            job['coverage_policy'] == 'continuous_native_stream' or
+            any(t['reset_policy'] == 'preserve_neuron_dynamics' for t in job['trials'])):
+        # A new execution records this contract. Old preserve manifests retain
+        # their old preflight through the explicit read-only historical adapter.
+        # This declaration is not native execution attestation or a PASS.
+        result['evaluation_presentation'] = dict(schema_version=1,
+            coverage_policy=job['coverage_policy'],
+            reset_policies=sorted({t['reset_policy'] for t in job['trials']}),
+            complete_primary_observations_required=True, frozen_model_required=True)
+    if mode == "physical-model-evaluate":
+        result.update(data_only=True, source_training_evidence_checked=False, training_certificate_transferred=False)
+    from .terminal_configuration import underlying_configuration_schema
+    configuration_schema = underlying_configuration_schema(job['configuration']) if mode in ('train', 'preflight') else None
+    if mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 9:
+        result['terminal_selection_declaration'] = dict(configuration_schema=9, base_schema=configuration_schema,
+            policy=job['configuration']['terminal_selection'], native_effective_preflight_required=True,
+            training_certificate_verified=False)
+    if configuration_schema == 6:
         from .composite_configuration import composite_declaration_scope
         result['composite_measurement_declaration'] = composite_declaration_scope(job['configuration'])
-    elif mode in ('train', 'preflight') and job['configuration'].get('schema_version') in (7,8):
+    elif configuration_schema in (7,8):
         from .candidate_window_contract import configuration_view
         configuration_view(job['configuration'])
         result['composite_measurement_declaration'] = dict(configuration_schema=job['configuration']['schema_version'],protocol_schema=5,
@@ -157,13 +201,18 @@ def validate_job(mode, job, source_case=None):
     return result
 
 
+def validate_job(mode, job, source_case=None):
+    """Admission of a new operation always uses the verified reset scope."""
+    return _validate_job(mode,job,source_case)
+
+
 def _artifact_records(directory, execution):
     records = execution["artifacts"]
     require(type(records) is list and all(type(r) is dict and set(r) == {"path", "bytes", "sha256"} and
             type(r["path"]) is str for r in records), "pipeline_artifact_schema")
     names = {r["path"] for r in records}
     require(len(names) == len(records), "duplicate_pipeline_artifact")
-    composite = execution.get('schema_version') in (3,4,5)
+    composite = execution.get('schema_version') in (3,4,5,6)
     if composite:
         from .composite_primary import _paths, filesystem_primary_resolver
         _paths(list(names)); resolve = filesystem_primary_resolver(directory)
@@ -188,8 +237,8 @@ def _artifact_records(directory, execution):
 
 
 @_evidence_boundary
-def audit_execution(mode, directory, job, source_case=None):
-    validate_job(mode, job, source_case)
+def _audit_execution(mode, directory, job, source_case=None, *, historical_evaluation_reset=False):
+    _validate_job(mode,job,source_case,historical_evaluation_reset=historical_evaluation_reset)
     if mode == "probe":
         from .native_characterization import audit_execution as audit_probe_execution
         require(load(Path(directory)/"job.json") == job, "pipeline_probe_job_changed")
@@ -197,10 +246,13 @@ def audit_execution(mode, directory, job, source_case=None):
     directory = Path(directory)
     execution = load(directory/"execution.json");_digest(execution)
     live = mode == "train" and job["schema_version"] == 2
-    recovery = mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 8
-    adaptive = mode in ('train', 'preflight') and job['configuration'].get('schema_version') in (7,8)
-    composite = mode in ('train', 'preflight') and job['configuration'].get('schema_version') in (6,7,8)
-    if composite:
+    from .terminal_configuration import underlying_configuration_schema
+    configuration_schema = underlying_configuration_schema(job['configuration']) if mode in ('train', 'preflight') else None
+    terminal = mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 9
+    recovery = configuration_schema == 8
+    adaptive = configuration_schema in (7,8)
+    composite = configuration_schema in (6,7,8)
+    if composite or terminal:
         from .composite_measurement_contract import integral_number_view
         execution = integral_number_view(execution)
     from .composite_execution_evidence import EXTRA_FIELDS, audit_composite_execution
@@ -210,10 +262,12 @@ def audit_execution(mode, directory, job, source_case=None):
         from .candidate_window_recovery_execution_evidence import (EXTRA_FIELDS as RECOVERY_FIELDS,
             audit_candidate_window_recovery_execution as audit_composite_execution)
         EXTRA_FIELDS = EXTRA_FIELDS | RECOVERY_FIELDS
+    if terminal:
+        from .terminal_execution_evidence import EXTRA_FIELDS, audit_terminal_execution, audit_terminal_start_failure
     from .live_training_worker import EXECUTION_FIELDS as LIVE_EXECUTION_FIELDS
-    require(set(execution) == COMMON_EXECUTION | EXECUTION_FIELDS[mode] | (LIVE_EXECUTION_FIELDS if live else set()) | (EXTRA_FIELDS if composite else set()) and
+    require(set(execution) == COMMON_EXECUTION | EXECUTION_FIELDS[mode] | (LIVE_EXECUTION_FIELDS if live else set()) | (EXTRA_FIELDS if composite or terminal else set()) and
             execution["kind"] == "timelearner_native_"+EXECUTION_KINDS[mode]+"_execution" and
-            type(execution["schema_version"]) is int and execution["schema_version"] == (5 if recovery else 4 if adaptive else 3 if composite else 2 if live else 1) and
+            type(execution["schema_version"]) is int and execution["schema_version"] == (6 if terminal else 5 if recovery else 4 if adaptive else 3 if composite else 2 if live else 1) and
             execution["job_sha256"] == job["sha256"] and load(directory/"job.json") == job and
             execution["evaluation_verdict"] is None, "pipeline_execution_scope_changed")
     names = _artifact_records(directory, execution)
@@ -230,7 +284,9 @@ def audit_execution(mode, directory, job, source_case=None):
                 equal(number(execution["model_time_end"])-number(execution["model_time_begin"]), ticks/frequency),
                 "pipeline_clock_changed")
     if mode == "preflight":
-        if composite:
+        if terminal:
+            audit_terminal_execution(execution, directory, names, mode=mode, job=job)
+        elif composite:
             audit_composite_execution(execution, directory, names, mode=mode, base_version=1)
         require(execution["execution"] == "completed" and ticks == 0 and
                 execution["training_started"] is False and execution["controller_state"] == "idle" and
@@ -269,6 +325,8 @@ def audit_execution(mode, directory, job, source_case=None):
                 "input_count": len(parameters), "integration_channels": len(channels), "training_started": False,
                 "native_execution_verified": False, "evaluation_verdict": None}
     if composite and mode == 'train' and execution['execution'] == 'training_start_failed':
+        if terminal:
+            return audit_terminal_start_failure(execution, directory, names, job)
         from .composite_execution_evidence import audit_composite_start_failure
         if adaptive:
             from .candidate_window_execution_evidence import audit_candidate_window_start_failure as audit_composite_start_failure
@@ -285,12 +343,18 @@ def audit_execution(mode, directory, job, source_case=None):
         require(type(completed) is bool, "invalid_training_boundary")
         filename = "train_learned_state.json" if completed else "train_stopped_state.json"
         require(execution["package_path"] == filename and filename in names, "pipeline_training_package_missing")
-        package = load(directory/filename)
         if completed:
-            audit = audit_learned_state(*load_case(directory/filename))
+            training_case = load_case(directory/filename)
+            audit = audit_learned_state(*training_case)
         else:
             from .stopped_evidence import audit_stopped_state, load_case as load_stopped
-            audit = audit_stopped_state(*load_stopped(directory/filename))
+            training_case = load_stopped(directory/filename)
+            audit = audit_stopped_state(*training_case)
+        # The tuple already owns the complete original package. Keeping an
+        # independently decoded copy here doubles large composite history trees
+        # while its primary evidence is audited. Reuse the very same object;
+        # none of the model, cold-start or execution checks below is skipped.
+        package = training_case[0]
         # A fresh service gives the first attempt its native session/1 identity.
         # The declared attempt id remains in execution.json; no physics changes.
         effective_config = {**job["configuration"], "run_id": job["configuration"]["run_id"]+"/session/1"}
@@ -312,7 +376,10 @@ def audit_execution(mode, directory, job, source_case=None):
             for p, declared in zip(initial["parameters"], inputs)), "pipeline_cold_parameters_changed")
         if composite:
             from .composite_execution_evidence import audit_initial_planning_configuration
-            audit_initial_planning_configuration(package, job, initial)
+            audit_initial_planning_configuration(package['historical_state'] if terminal else package, job, initial)
+        if terminal:
+            audit_terminal_execution(execution, directory, names, mode=mode, job=job, package=package)
+        elif composite:
             audit_composite_execution(execution, directory, names, mode=mode, base_version=1, package=package)
         require(execution["execution"] == "completed" or not completed, "interrupted_training_claims_completion")
         return {"training_audit": audit, "completed_boundary": completed, "training_outcome": package["training_outcome"],
@@ -328,8 +395,15 @@ def audit_execution(mode, directory, job, source_case=None):
         return {"recognition_source_audit": audit_recognition_source(model, source_case),
                 "native_execution_verified": False, "evaluation_verdict": None}
     diagnostic = mode == "diagnostic-evaluate"
+    physical_data = mode == "physical-model-evaluate"
     diagnostic_audit = None
-    if diagnostic:
+    if physical_data:
+        require(model == job["source_model_data"] and execution["data_only"] is True
+                and execution["source_boundary"] == model["source_boundary"]
+                and all(execution[k] is False for k in ("training_certificate_transferred", "calibration_confirmed",
+                                                        "controller_checkpoint_restored")),
+                "pipeline_physical_data_or_authority_changed")
+    elif diagnostic:
         from .diagnostic_recognition_evidence import audit_diagnostic_recognition
         threshold_candidate = job['schema_version'] == 2
         require(model['kind'] == ('timelearner_diagnostic_threshold_candidate' if threshold_candidate else 'timelearner_diagnostic_recognition_state'),
@@ -341,6 +415,12 @@ def audit_execution(mode, directory, job, source_case=None):
                 and execution["diagnostic_only"] is True and execution["source_stopped_sha256"] == job["source_stopped"]["sha256"]
                 and execution["training_outcome"] == job["source_stopped"]["training_outcome"]
                 and execution["training_reason"] == job["source_stopped"]["reason"], "pipeline_diagnostic_model_changed")
+        if historical_evaluation_reset:
+            # Recognition auditor2 required exact image-definition bytes. Its
+            # archived result cannot inherit auditor3's XML portability scope.
+            require(context['neuron']['class_definitions'] ==
+                    context['source_solo']['neuron']['class_definitions'],
+                    'historical_reset_recognition_images_not_byte_equal')
         diagnostic_audit = audit_diagnostic_recognition(model, source_case)
     else:
         require(model == job["source_recognition"], "pipeline_frozen_source_changed")
@@ -353,22 +433,33 @@ def audit_execution(mode, directory, job, source_case=None):
         design.append({**{k: v for k, v in q.items() if k not in
             ("run_id", "pattern_isi", "maximum_samples", "record_threshold_potential")},
             "presentation_index": index, "observation": f"trial-{index}.json"})
-    expected_spec = {"kind": "timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec",
+    expected_spec = {"kind": "timelearner_physical_model_data_evaluation_spec" if physical_data else "timelearner_diagnostic_recognition_evaluation_spec" if diagnostic else "timelearner_recognition_evaluation_spec",
                      "schema_version": 1, "run_id": job["run_id"], "model_revision": model["model_revision"],
                      "coverage_policy": job["coverage_policy"], "criterion": job["criterion"], "trials": design}
     if diagnostic:
         expected_spec.update(diagnostic_only=True, source_stopped_sha256=job["source_stopped"]["sha256"], training_outcome=job["source_stopped"]["training_outcome"])
+    if physical_data:
+        expected_spec.update(data_only=True, source_boundary=model["source_boundary"])
     require(spec == expected_spec, "pipeline_evaluation_design_changed")
     metrics = None
     if execution["execution"] == "completed":
         require(execution["observed_trials"] == len(design), "pipeline_evaluation_incomplete")
-        if diagnostic:
+        if physical_data:
+            from .recognition_metrics import load_physical_model_data_evaluation, score_physical_model_data_evaluation
+            metrics = score_physical_model_data_evaluation(*load_physical_model_data_evaluation(directory/"evaluation.json"), model)
+        elif diagnostic:
             from .recognition_metrics import load_diagnostic_evaluation, score_diagnostic_recognition_evaluation
             metrics = score_diagnostic_recognition_evaluation(*load_diagnostic_evaluation(directory/"evaluation.json"), model, source_case)
         else:
             metrics = score_recognition_evaluation(*load_evaluation(directory/"evaluation.json"), model)
         require(metrics["validity"] == "valid", "pipeline_evaluation_invalid")
-    return {"frozen_model_verified": True, **({"diagnostic_only": True, "source_diagnostic_audit": diagnostic_audit} if diagnostic else {}), "metrics": metrics, "native_execution_verified": False, "evaluation_verdict": None}
+    return {"frozen_model_verified": True, **({"diagnostic_only": True, "source_diagnostic_audit": diagnostic_audit} if diagnostic else {}),
+            **({"data_only": True, "source_training_evidence_checked": False} if physical_data else {}),
+            "metrics": metrics, "native_execution_verified": False, "evaluation_verdict": None}
+
+
+def audit_execution(mode, directory, job, source_case=None):
+    return _audit_execution(mode,directory,job,source_case)
 
 
 def _structured_live_exit(mode, job, process, directory):
@@ -390,19 +481,33 @@ def _structured_training_exit(mode, job, process, directory):
             and process["returncode"] == 2 and (Path(directory)/"execution.json").is_file())
 
 
-def _snapshot_source(source, destination, *, diagnostic=False):
+def _snapshot_source(source, destination, *, diagnostic=False, physical_data=False):
     source = Path(source).resolve(strict=True)
+    if physical_data:
+        from .physical_model_data_evidence import audit_physical_model_data
+        audit_physical_model_data(load(source), frozen=True)
+        require(source.is_file() and not source.is_symlink(), "pipeline_source_missing_or_symlink")
+        destination.mkdir()
+        (destination/source.name).write_bytes(source.read_bytes())
+        return destination/source.name
     stem = source.name.removesuffix("_stopped_state.json" if diagnostic else "_learned_state.json")
     package = load(source)
-    if package.get('schema_version') in (5,6,7):
+    terminal_composite = (package.get('schema_version') == 8 and
+                          package.get('historical_state', {}).get('schema_version') in (5,6,7))
+    if package.get('schema_version') in (5,6,7) or terminal_composite:
         from .composite_package_evidence import audit_composite_package
         from .composite_primary import capture_primary_blobs, write_primary_snapshot, _paths, filesystem_primary_resolver
         summary_path = source.with_name(stem + ('_stopped_summary.json' if diagnostic else '_learned_summary.json'))
         summary = load(summary_path) if summary_path.exists() else None
         # The supplied files are the transfer source. Embedded trace bytes must
         # not hide a missing or modified external primary, including package7.
-        audit_composite_package(package, summary, external_resolver=filesystem_primary_resolver(source.parent))
-        archive = package['measurement_archive']
+        if terminal_composite:
+            from .terminal_package_evidence import audit_terminal_package
+            audit_terminal_package(package, summary, {}, {}, external_resolver=filesystem_primary_resolver(source.parent))
+            archive = package['historical_state']['measurement_archive']
+        else:
+            audit_composite_package(package, summary, external_resolver=filesystem_primary_resolver(source.parent))
+            archive = package['measurement_archive']
         references = [trial['primary_ref'] for group in archive['records'] for trial in group['raw_trials']]
         primary = capture_primary_blobs(archive['primary_blobs'], references, archive['maximum_total_primary_bytes'])
         _paths(list(primary) + [source.name] + ([summary_path.name] if summary is not None else []))
@@ -422,23 +527,50 @@ def _snapshot_source(source, destination, *, diagnostic=False):
 
 
 @_evidence_boundary
-def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seconds, *, process_policy=None):
+def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seconds, *, process_policy=None,
+            job_source_transport=None):
     job = load(Path(job_path).resolve(strict=True))
     source_case = _load_source_case(mode, Path(source_path).resolve(strict=True)) if source_path is not None else None
     preflight = validate_job(mode, job, source_case)
     policy = validate_policy(process_policy, maximum_wall_seconds)
+    # Native78 and paired Classic/Branch Console completed/restored controls
+    # admit the versioned wire. New terminal Train requires whole-group ownership;
+    # this does not recommend every controller/physics mode or certify convergence.
+    require(not (mode == 'train' and job['configuration'].get('schema_version') == 9) or policy is not None,
+            'terminal_training_requires_contained_process')
+    require(mode != "physical-model-evaluate" or policy is not None, "physical_data_evaluation_requires_contained_process")
     runtime = load(Path(runtime_path).resolve(strict=True));executable = verify_runtime(runtime)
     require(number(maximum_wall_seconds) > 0, "invalid_pipeline_wall_budget")
     from .native_cli import inspect_native_cli
-    cli = inspect_native_cli(runtime, [mode])
+    from .job_source_transport import TRANSPORT,make_envelope
+    file_source=job_source_transport is not None
+    require(job_source_transport is None or job_source_transport==TRANSPORT,
+            'pipeline_unknown_job_source_transport')
+    require(not file_source or (mode in ('export','evaluate','diagnostic-evaluate','physical-model-evaluate') and
+            source_path is not None and policy is not None), 'pipeline_file_source_requires_contained_source_job')
+    cli = inspect_native_cli(runtime,[mode],require_file_source=True) if file_source else inspect_native_cli(runtime,[mode])
     output = Path(output).resolve();output.mkdir(parents=True, exist_ok=False)
     _write(output/"runtime-cli-interface.json", cli)
     inputs = output/"input";inputs.mkdir();source_relative = None
     if source_path is not None:
-        snapshot = _snapshot_source(source_path, inputs/"source", diagnostic=mode == "diagnostic-evaluate" or mode == "probe")
+        # Preflight is a small value record. Release its parsed source before
+        # the snapshot performs its own full audit and the captured bytes are
+        # reloaded below. Retaining the old tree until the assignment completes
+        # needlessly overlaps several full model/history copies. The snapshot,
+        # primary checks and preflight equality guard remain unchanged.
+        source_case = None
+        snapshot = _snapshot_source(source_path, inputs/"source", diagnostic=mode == "diagnostic-evaluate" or mode == "probe",
+                                    physical_data=mode == "physical-model-evaluate")
         source_case = _load_source_case(mode, snapshot);source_relative = snapshot.relative_to(output).as_posix()
         require(validate_job(mode, job, source_case) == preflight, "pipeline_source_changed_during_snapshot")
     _write(inputs/"job.json", job)
+    native_job_path=inputs/"job.json"
+    transport_record={}
+    if file_source:
+        native_job_path=inputs/"native-job-source.json"
+        envelope=make_envelope(job,snapshot,inputs)
+        _write(native_job_path,envelope)
+        transport_record={'transport':TRANSPORT,'path':'input/native-job-source.json'}
     if policy is not None:
         _write(inputs/"process-policy.json", policy)
     executor = execute if policy is None else execute_native
@@ -447,7 +579,7 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     # guard; restore the Python caller's environment even if execution fails.
     with applied_loader_environment(runtime):
         process = executor(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
-            "--timelearner-"+mode, str(inputs/"job.json"), "--timelearner-output", str(output/"native")],
+            "--timelearner-"+mode, str(native_job_path), "--timelearner-output", str(output/"native")],
             executable.parent, output/"process", maximum_wall_seconds, **options)
     verify_runtime(runtime)
     audit = None
@@ -458,8 +590,9 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
         audit = audit_execution(mode, output/"native", job, source_case)
         if process["execution"] != "completed":
             require(load(output/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
-    result = {"kind": "timelearner_native_pipeline_run_manifest", "schema_version": 4 if policy is not None else 3 if mode == "diagnostic-evaluate" else 2, "operation": mode,
+    result = {"kind": "timelearner_native_pipeline_run_manifest", "schema_version": 5 if file_source else 4 if policy is not None else 3 if mode == "diagnostic-evaluate" else 2, "operation": mode,
         **({"process_policy": policy} if policy is not None else {}),
+        **({'job_source_transport':transport_record} if file_source else {}),
         "execution": process["execution"], "validity": "valid" if audit else "unverified_execution",
         "job_sha256": job["sha256"], "source_package_path": source_relative,
         "runtime_fingerprint": runtime["runtime_fingerprint"], "source_closure": runtime["source_closure"],
@@ -472,19 +605,73 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     return result
 
 
+def _historical_reset_analysis(old, current, mode, job):
+    """Project only the audited recognition2 -> recognition3 metadata change.
+
+    Every numerical field, source audit and threshold proof remains identical.
+    The native audit above additionally enforces the original image byte scope.
+    """
+    if old == current and sha(old) == sha(current):
+        return current
+    require(mode == 'diagnostic-evaluate' and type(old) is dict and type(current) is dict,
+            'unsupported_historical_reset_analysis_transition')
+
+    def recognition(previous, measured):
+        require(type(previous) is dict and type(measured) is dict and
+                type(previous.get('auditor_version')) is int and previous['auditor_version'] == 2 and
+                type(measured.get('auditor_version')) is int and measured['auditor_version'] == 3 and
+                'storage_images' not in previous and
+                type(measured.get('storage_images')) is dict and
+                measured['storage_images'].get('xml_documents_byte_equal') is True,
+                'unsupported_historical_reset_recognition_version')
+        images = measured['storage_images']
+        require(set(images) == {'comparison','definitions','storage_images_sha256',
+                               'xml_documents_byte_equal','native_xml_reconstruction_verified'} and
+                images['comparison'] == 'validated-semantic-storage-images-v1' and
+                type(images['definitions']) is int and images['definitions'] >= 0 and
+                type(images['storage_images_sha256']) is str and
+                len(images['storage_images_sha256']) == 64 and
+                all(c in '0123456789abcdef' for c in images['storage_images_sha256']) and
+                images['native_xml_reconstruction_verified'] is False,
+                'unsupported_historical_reset_image_audit')
+        projected = {k:v for k,v in measured.items() if k != 'storage_images'}
+        projected['auditor_version'] = 2
+        require(previous == projected and sha(previous) == sha(projected),
+                'historical_reset_recognition_analysis_changed')
+        return projected
+
+    def diagnostic(previous, measured):
+        if job['schema_version'] == 1:
+            return recognition(previous, measured)
+        require(job['schema_version'] == 2 and type(previous) is dict and type(measured) is dict and
+                previous.get('schema_version') == measured.get('schema_version') == 1,
+                'unsupported_historical_reset_threshold_proof')
+        return {**measured, 'source_audit': recognition(previous['source_audit'], measured['source_audit'])}
+
+    projected = {**current,
+        'source_diagnostic_audit': diagnostic(old['source_diagnostic_audit'], current['source_diagnostic_audit']),
+        'metrics': {**current['metrics'], 'source_diagnostic_audit': diagnostic(
+            old['metrics']['source_diagnostic_audit'], current['metrics']['source_diagnostic_audit'])}}
+    require(old == projected and sha(old) == sha(projected), 'historical_reset_evaluation_analysis_changed')
+    return projected
+
+
 @_evidence_boundary
 def audit_run_manifest(path, *, historical_analysis=None):
     """Recompute portable source, native result and process/runtime bindings."""
     require(historical_analysis in (None, 'learned-v2-no-capacitance',
-                                   'training-v3-no-capacitance-history'), 'unknown_pipeline_historical_adapter')
+                                   'training-v3-no-capacitance-history',
+                                   'evaluation-v1-native-reset-policy'), 'unknown_pipeline_historical_adapter')
+    historical_reset = historical_analysis == 'evaluation-v1-native-reset-policy'
     path = Path(path).resolve(strict=True);root = path.parent
     manifest = load(path);_digest(manifest)
-    contained = type(manifest.get("schema_version")) is int and manifest["schema_version"] == 4
+    contained = type(manifest.get("schema_version")) is int and manifest["schema_version"] in (4,5)
+    file_source = type(manifest.get('schema_version')) is int and manifest['schema_version']==5
     require(set(manifest) == {"kind", "schema_version", "operation", "execution", "validity", "job_sha256",
             "source_package_path", "runtime_fingerprint", "source_closure", "preflight", "analysis", "analysis_code",
-            "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} | ({"process_policy"} if contained else set()) and
+            "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} | ({"process_policy"} if contained else set()) | ({'job_source_transport'} if file_source else set()) and
             manifest["kind"] == "timelearner_native_pipeline_run_manifest" and
-            type(manifest["schema_version"]) is int and manifest["schema_version"] in (1, 2, 3, 4) and
+            type(manifest["schema_version"]) is int and manifest["schema_version"] in (1, 2, 3, 4, 5) and
             (contained or (manifest["schema_version"] == 3) == (manifest["operation"] == "diagnostic-evaluate")) and
             manifest["operation"] in FIELDS and manifest["independent_partition_verified"] is False and
             manifest["evaluation_verdict"] is None, "unknown_native_pipeline_run_manifest")
@@ -500,15 +687,28 @@ def audit_run_manifest(path, *, historical_analysis=None):
         actual = root/r["path"]
         require(actual.resolve(strict=True).is_relative_to(root) and _record(actual, root) == r, "pipeline_run_artifact_changed")
     mode = manifest["operation"];source = manifest["source_package_path"];source_case = None
+    require(not historical_reset or mode in ('evaluate','diagnostic-evaluate','physical-model-evaluate'),
+            'unsupported_pipeline_historical_reset_scope')
     job = load(root/"input/job.json")
+    native_job_relative='input/job.json'
+    if file_source:
+        from .job_source_transport import TRANSPORT,verify_envelope
+        require(manifest['job_source_transport']=={'transport':TRANSPORT,'path':'input/native-job-source.json'} and
+                type(source) is str and source in names and mode in ('export','evaluate','diagnostic-evaluate','physical-model-evaluate'),
+                'pipeline_job_source_transport_schema')
+        native_job_relative='input/native-job-source.json'
+        require(native_job_relative in names, 'pipeline_job_source_transport_missing')
+        verify_envelope(load(root/native_job_relative),job,root/source,root/'input')
+        cli=load(root/'runtime-cli-interface.json')
+        require('checked-file-source-v1' in cli['help_text'], 'pipeline_file_source_capability_missing')
     if mode in ("train", "preflight") or (mode == "probe" and job['schema_version'] == 1):
         require(source is None, "pipeline_cold_training_has_source")
     else:
         require(type(source) is str and source in names and PurePosixPath(source).parent == PurePosixPath("input/source"),
                 "pipeline_source_path_changed")
         source_case = _load_source_case(mode, root/source)
-    job = load(root/"input/job.json")
-    require(manifest["job_sha256"] == job["sha256"] and validate_job(mode, job, source_case) == manifest["preflight"],
+    require(manifest["job_sha256"] == job["sha256"] and
+            _validate_job(mode,job,source_case,historical_evaluation_reset=historical_reset) == manifest["preflight"],
             "pipeline_run_preflight_changed")
     process, runtime = load(root/"process/result.json"), load(root/"process/runtime.json")
     from .runtime import digest_json, runtime_content_identity
@@ -530,7 +730,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
             arguments[1] == runtime["app_ini"]["path"], "pipeline_process_arguments_changed")
     output = PurePosixPath(arguments[5])
     require(output.is_absolute() and output.name == "native" and
-            PurePosixPath(arguments[3]) == output.parent/"input/job.json" and
+            PurePosixPath(arguments[3]) == output.parent/native_job_relative and
             request["working_directory"] == str(PurePosixPath(runtime["executable"]["path"]).parent) and
             number(request["maximum_wall_seconds"]) > 0 and request["model_time"] is None, "pipeline_process_scope_changed")
     structured_exit = _structured_live_exit if manifest["schema_version"] == 1 else _structured_training_exit
@@ -552,7 +752,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
                 owned["runtime_fingerprint"] == runtime["runtime_fingerprint"] and count(owned["pid"]) > 0 and
                 process["returncode"] == (0 if process["execution"] == "completed" else 2) and process["ownership_scope"] == ("bound_cgroup" if contained else "launched_executable_only") and
                 process["runtime_provenance"] == "loaded_files_captured", "pipeline_owned_runtime_changed")
-    audit = audit_execution(mode, root/"native", job, source_case) if auditable else None
+    audit = _audit_execution(mode,root/"native",job,source_case,historical_evaluation_reset=historical_reset) if auditable else None
     if mode in ("preflight", "probe") and auditable:
         arguments = request["arguments"]
         if "--timelearner-capture-directory" in arguments:
@@ -583,7 +783,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
         require(load(root/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
     comparison = audit
     adapter_used = False
-    if historical_analysis is not None:
+    if historical_analysis is not None and not historical_reset:
         # Recompute with the current auditor first. Only an explicitly selected,
         # known schema transition may project its result into the archived shape.
         # The final equality still checks every other field and all native/runtime
@@ -611,9 +811,16 @@ def audit_run_manifest(path, *, historical_analysis=None):
                     'unsupported_pipeline_historical_analysis')
             projected = {**current, 'auditor_version': 3}
         comparison = {**audit, 'training_audit': projected};adapter_used = True
+    elif historical_reset:
+        # This known audit-metadata transition never changes observations or
+        # numerical results and cannot authorize a new native operation.
+        comparison = _historical_reset_analysis(manifest['analysis'], audit, mode, job)
+        adapter_used = True
     require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
             "pipeline_run_analysis_changed")
     result = {"run_evidence_consistent": True, "operation": mode, "native_execution_verified": False,
             "independent_partition_verified": False, "evaluation_verdict": None}
     if adapter_used:result['historical_analysis_adapter'] = historical_analysis
+    if historical_reset:
+        result.update(new_execution_permitted=False,continuous_production_runner_verified=False)
     return result

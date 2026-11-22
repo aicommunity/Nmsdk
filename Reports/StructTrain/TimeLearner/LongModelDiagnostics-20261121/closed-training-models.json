@@ -1,0 +1,325 @@
+{
+  "kind": "timelearner_closed_actual_training_models_readback",
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-21T04:58:54.776322+00:00",
+  "rows": [
+    {
+      "host": "elder",
+      "native": "/home/user/timelearner-refactor/readbacks/s11-offline-n4-classic-on-elder-a2/classic-on/native",
+      "execution": {
+        "attempt_id": "offline-science/20261120/classic/N4/N1/a2",
+        "base_schema_version": 1,
+        "completed_boundary": false,
+        "evaluation_verdict": null,
+        "execution": "completed",
+        "frequency_hz": 2000,
+        "job_sha256": "6c1728e1f44add39c6f6ca51a6ea07e15f33f08c5b1bfb84d0c02633adcae46d",
+        "kind": "timelearner_native_training_execution",
+        "model_revision": "483b379cfd982a26330714e469cb36d665f2661f7e22b08b02030d1a58672d61",
+        "model_semantic_hash": "483b379cfd982a26330714e469cb36d665f2661f7e22b08b02030d1a58672d61",
+        "model_ticks": 1381809,
+        "model_time_begin": 0,
+        "model_time_end": 690.9045,
+        "native_execution_counts": {
+          "native_trials": 384,
+          "sampled_frames": 1381689
+        },
+        "package_path": "train_stopped_state.json",
+        "package_sha256": "1c8dba5b4c3a8e866c5c2c4874bff955fa57a8e0af2d9f2a6f8c07d2a1c24b65",
+        "schema_version": 6,
+        "sha256": "4eb03debf6d84a97e56ae5dbf396856c2d8ca73bcb317d5cbcd051baf2ffb7e1",
+        "source_measurements": {
+          "archive_counters": {
+            "groups": 64,
+            "native_probes": 384,
+            "primary_bytes": 148209196,
+            "sampled_frames": 1381689
+          },
+          "attempt_counters": {
+            "logical_groups": 64,
+            "native_probes": 384,
+            "sampled_frames": 1381689
+          },
+          "measurement_archive": {
+            "bytes": 635967538,
+            "path": "composite-measurements/index.json",
+            "sha256": "d3ab8caebb4b0846a329883c62acbccbeb485843cf43e66f574060918c3434bb"
+          },
+          "measurement_method": "declared-window-basin-necessity-v1",
+          "protocol_schema_version": 5,
+          "recovery_delivery_count": 0,
+          "recovery_ledger_sha256": "e3191bb4a4c98283513bbacd9c72065048271c93dc7790bc028e1fb707bd0f8f",
+          "source_origin": "f5baaf280320c8ecefd9f5f36a5274446acddcfce1a988cc6f8047e9d6c83ca6"
+        },
+        "training_outcome": "budget_exhausted"
+      },
+      "model_files": [
+        {
+          "name": "train_stopped_state.json",
+          "bytes": 776022626
+        },
+        {
+          "name": "initial-state.json",
+          "bytes": 223854
+        }
+      ],
+      "saved_trial_packets": {
+        "raw-trial-": 0,
+        "train_stopped_trial_": 384,
+        "train_state_trial_": 0
+      },
+      "process": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 32918.20658761449,
+        "runtime_provenance": "loaded_files_captured",
+        "all_processes_closed": true
+      },
+      "operator_readback_sha256": "1b5207759de53e360b3e3344014c92701fa78da76bb3eece4836e2228cbe18dd",
+      "scientific_verdict": null,
+      "source_closure": {
+        "root": {
+          "head": "bd9ea23aedd3520c2695fc6cb1d083921053f888",
+          "status": ""
+        },
+        "Bin": {
+          "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+          "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+          "status": ""
+        },
+        "Libraries/Nmsdk-MotionControlLib": {
+          "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "status": ""
+        },
+        "Libraries/Nmsdk-PulseLib": {
+          "recorded_gitlink": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+          "head": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+          "status": ""
+        },
+        "Libraries/Rdk-BasicLib": {
+          "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "status": ""
+        },
+        "Libraries/Rdk-CvBasicLib": {
+          "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "status": ""
+        },
+        "Libraries/Rdk-HardwareLib": {
+          "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+          "head": "de40b008e990105856726e01230dde19f42a90a9",
+          "status": ""
+        },
+        "Rdk": {
+          "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+          "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+          "status": ""
+        }
+      }
+    },
+    {
+      "host": "m40",
+      "native": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-terminal-n4-branch-on-m40-a2/branch-on/native",
+      "execution": {
+        "attempt_id": "terminal-science-ab/n4/branch/a1/on",
+        "base_schema_version": 1,
+        "completed_boundary": false,
+        "evaluation_verdict": null,
+        "execution": "completed",
+        "frequency_hz": 2000,
+        "job_sha256": "86fe17bd51caa4b69a54be2e78ab67ad741fb466f69f5125a43d957999678d5b",
+        "kind": "timelearner_native_training_execution",
+        "model_revision": "ac29284570efcb7e733f4364daa245d35e6665cd249010962da465b32177040a",
+        "model_semantic_hash": "ac29284570efcb7e733f4364daa245d35e6665cd249010962da465b32177040a",
+        "model_ticks": 3414056,
+        "model_time_begin": 0,
+        "model_time_end": 1707.028,
+        "native_execution_counts": {
+          "native_trials": 948,
+          "sampled_frames": 3413748
+        },
+        "package_path": "train_stopped_state.json",
+        "package_sha256": "defebe51276b9b84a4837d15ba6903663394f0fc1d93c435d7c10f4ad8564a2a",
+        "schema_version": 6,
+        "sha256": "d2e4f24cba03d463dc063d16629316daa623992a1f7755f8fc0382d18b9633fc",
+        "source_measurements": {
+          "archive_counters": {
+            "groups": 158,
+            "native_probes": 948,
+            "primary_bytes": 136413912,
+            "sampled_frames": 3413748
+          },
+          "attempt_counters": {
+            "logical_groups": 158,
+            "native_probes": 948,
+            "sampled_frames": 3413748
+          },
+          "measurement_archive": {
+            "bytes": 991351183,
+            "path": "composite-measurements/index.json",
+            "sha256": "c6d5ffbdacd842133f8d09a632efd102b401198d72ee37b551543ac23fbb8c19"
+          },
+          "measurement_method": "declared-window-basin-necessity-v1",
+          "protocol_schema_version": 5,
+          "recovery_delivery_count": 0,
+          "recovery_ledger_sha256": "9470ac9b6d5509682eb4e4dac92c47c00cd0a478d46cbabb0c6ff8c323302982",
+          "source_origin": "3968029f88d697e663b8f2f01ee5070e6ee4f09f46f99074d903ae11a4576be8"
+        },
+        "training_outcome": "budget_exhausted"
+      },
+      "model_files": [
+        {
+          "name": "initial-state.json",
+          "bytes": 72894
+        },
+        {
+          "name": "train_stopped_state.json",
+          "bytes": 1164781893
+        }
+      ],
+      "saved_trial_packets": {
+        "raw-trial-": 0,
+        "train_stopped_trial_": 948,
+        "train_state_trial_": 0
+      },
+      "process": {
+        "execution": "completed",
+        "reason": "exit_zero_and_whole_group_closed",
+        "returncode": 0,
+        "wall_seconds": 40586.18652960565,
+        "runtime_provenance": "loaded_files_captured",
+        "all_processes_closed": true
+      },
+      "operator_readback_sha256": "8f161793e26695e52d131ae4cd2baee38a1da13d7c66d8f212039e03f1818025",
+      "scientific_verdict": null,
+      "source_closure": {
+        "root": {
+          "head": "893b7344eb8794e5ef981eb133e669b6060e5aa3",
+          "status": ""
+        },
+        "Bin": {
+          "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+          "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+          "status": ""
+        },
+        "Libraries/Nmsdk-MotionControlLib": {
+          "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "status": ""
+        },
+        "Libraries/Nmsdk-PulseLib": {
+          "recorded_gitlink": "c508392a8c963ceb639050d737717bff0d853b3a",
+          "head": "c508392a8c963ceb639050d737717bff0d853b3a",
+          "status": ""
+        },
+        "Libraries/Rdk-BasicLib": {
+          "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "status": ""
+        },
+        "Libraries/Rdk-CvBasicLib": {
+          "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "status": ""
+        },
+        "Libraries/Rdk-HardwareLib": {
+          "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+          "head": "de40b008e990105856726e01230dde19f42a90a9",
+          "status": ""
+        },
+        "Rdk": {
+          "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+          "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+          "status": ""
+        }
+      }
+    },
+    {
+      "host": "windows",
+      "native": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-offline-n4-branch-on-a2\\science-train\\native",
+      "execution": {
+        "attempt_id": "offline-science/20261120/windows/branch/N4/N1/a2",
+        "base_schema_version": 1,
+        "completed_boundary": false,
+        "evaluation_verdict": null,
+        "execution": "completed",
+        "frequency_hz": 2000,
+        "job_sha256": "b74a742e9c2b67edb298dd18d23ba9879f14f1c05b2e345b821fc16e599e1eb3",
+        "kind": "timelearner_native_training_execution",
+        "model_revision": "01ff5ebf50a45cfd3a354de5902ae7702d9d7e5590945eca399f38674ed9c488",
+        "model_semantic_hash": "01ff5ebf50a45cfd3a354de5902ae7702d9d7e5590945eca399f38674ed9c488",
+        "model_ticks": 2957790,
+        "model_time_begin": 0,
+        "model_time_end": 1478.895,
+        "native_execution_counts": {
+          "native_trials": 822,
+          "sampled_frames": 2957518
+        },
+        "package_path": "train_stopped_state.json",
+        "package_sha256": "e318520a6b20167f65976f1adbf5174b9105e5fc9b9cb50e52678bad8a3290fc",
+        "schema_version": 6,
+        "sha256": "3d7fd1d013b62221f21b6905d6adad93692425293ccc2d147f65fdd873b6c31a",
+        "source_measurements": {
+          "archive_counters": {
+            "groups": 137,
+            "native_probes": 822,
+            "primary_bytes": 119076740,
+            "sampled_frames": 2957518
+          },
+          "attempt_counters": {
+            "logical_groups": 137,
+            "native_probes": 822,
+            "sampled_frames": 2957518
+          },
+          "measurement_archive": {
+            "bytes": 808217444,
+            "path": "composite-measurements/index.json",
+            "sha256": "2e6077b320efb7be852561476c06e4d2c53a97ecbb4b10072a3dc5cbfaee4cd3"
+          },
+          "measurement_method": "declared-window-basin-necessity-v1",
+          "protocol_schema_version": 5,
+          "recovery_delivery_count": 0,
+          "recovery_ledger_sha256": "73b24d2e8a398cec9dc5f91ce35b36e789de51b3ec112e9c377c1549992dc553",
+          "source_origin": "7dcceb90f3c5dbec119872bb3586a6cb7c22be6de1734f99a1a23d0ff37a158c"
+        },
+        "training_outcome": "budget_exhausted"
+      },
+      "model_files": [
+        {
+          "name": "initial-state.json",
+          "bytes": 72894
+        },
+        {
+          "name": "train_stopped_state.json",
+          "bytes": 958088747
+        }
+      ],
+      "saved_trial_packets": {
+        "raw-trial-": 0,
+        "train_stopped_trial_": 822,
+        "train_state_trial_": 0
+      },
+      "process": {
+        "execution": "completed",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "wall_seconds": 33368.1019728001,
+        "runtime_provenance": "loaded_files_captured",
+        "all_processes_closed": true
+      },
+      "operator_readback_sha256": "44976aa289840bec97b6913db85aa0fd09f3a499cd3ff8daa51ea7ab411835ff",
+      "scientific_verdict": null
+    }
+  ],
+  "fully_accepted_stages": [
+    0
+  ],
+  "training_convergence_claimed": false,
+  "classification_measured": false,
+  "original_primary_retained_on_workers": true,
+  "central_primary_archive_publication_pending": true,
+  "scientific_verdict": null
+}

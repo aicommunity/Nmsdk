@@ -8,6 +8,7 @@
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QFile>
 #include <cmath>
 #include <cstdlib>
 #include <filesystem>
@@ -19,6 +20,53 @@ namespace {
 using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
+
+TEST(CanonicalModelHash, PreservesPortableGoldenDigests)
+{
+    // Expected digests were produced independently by the production Python
+    // length-framed UTF8/binary64 encoder. Include UTF16 key ordering, framing,
+    // signed zero and numerical values used in physical model declarations.
+    const std::pair<const char*,const char*> fixtures[]{
+        {"null","1b16b1df538ba12dc3f97edbb85caa7050d46c148134290feba80f8236c83db9"},
+        {R"({"a":[true,false,null,0.0,-0.0,1.0,1e-9,1e300,-1e-300],"b":{}})",
+         "e89df982af75dcc9ce4b876837b0b0647371804559a6edcf98d7bcd2f6a5c921"},
+        {R"({"\u043a\u043b\u044e\u0447":"\u0441\u0442\u0440\u043e\u043a\u0430:\ud83d\ude00\n","\ud800\udc00":"astral","\ue000":"private","empty":[]})",
+         "369527a943cab422398fd7c837b25a9df0e2703a1416f4fc75bc1c3fcc6f422d"},
+        {R"({"primary_blobs":{"abc":{"bytes":7,"base64":"AAEC:=="}},"schema_version":2})",
+         "c779fc3802354b42e41944aebe30ca98ef17b308a204f10e87db1728519b3f12"},
+        {R"(["ab","a","b","2:ab","",{},[]])",
+         "2d10614716c6a8d97080d3e07eaec2b3395ca93ce87e95dd172c900d4e166a00"}
+    };
+    for(const auto& fixture:fixtures) {
+        SCOPED_TRACE(fixture.first);
+        QJsonParseError error;
+        const auto wrapper=QJsonDocument::fromJson(QByteArray("[")+fixture.first+"]",&error);
+        ASSERT_EQ(error.error,QJsonParseError::NoError);
+        ASSERT_TRUE(wrapper.isArray());ASSERT_EQ(wrapper.array().size(),1);
+        EXPECT_EQ(NmsdkTools::CanonicalModelDataSha256(wrapper.array()[0]),QString::fromLatin1(fixture.second));
+    }
+}
+
+#if defined(NMSDK_RECORDED_MODEL_INPUT_TESTS)
+TEST(CanonicalModelHashRecorded, PreservesActualLargeTrainingPackageDigest)
+{
+    const auto path=std::getenv("TIMELEARNER_CANONICAL_PACKAGE");
+    if(!path)GTEST_SKIP()<<"Explicit immutable native package fixture required";
+    QJsonObject object;qint64 size=0;
+    {
+        QFile file(QString::fromLocal8Bit(path));ASSERT_TRUE(file.open(QIODevice::ReadOnly));
+        size=file.size();ASSERT_GE(size,100*1024*1024);ASSERT_LE(size,512LL*1024*1024);
+        QJsonParseError error;const auto source=QJsonDocument::fromJson(file.readAll(),&error);
+        ASSERT_EQ(error.error,QJsonParseError::NoError);ASSERT_TRUE(source.isObject());object=source.object();
+    }
+    const auto expected=object.take("sha256").toString();ASSERT_EQ(expected.size(),64);
+    const auto begin=std::chrono::steady_clock::now();
+    const auto actual=NmsdkTools::CanonicalModelDataSha256(object);
+    const auto seconds=std::chrono::duration<double>(std::chrono::steady_clock::now()-begin).count();
+    EXPECT_EQ(actual,expected);RecordProperty("fixture_bytes",std::to_string(size));
+    RecordProperty("hash_seconds",std::to_string(seconds));RecordProperty("observed_digest",actual.toStdString());
+}
+#endif
 
 class IdentityGraph : public UNet
 {

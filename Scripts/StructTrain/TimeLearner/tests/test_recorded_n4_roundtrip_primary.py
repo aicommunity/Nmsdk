@@ -134,6 +134,23 @@ class RecordedN4RoundtripPrimaryTest(unittest.TestCase):
 
 
 class RecordedQcompressFramingTest(unittest.TestCase):
+    def test_explicit_profile_bound_preserves_framing_size_and_hash_requirements(self):
+        raw=b'{"schema_version":7}'
+        with tempfile.TemporaryDirectory() as temporary:
+            path=Path(temporary)/'model.qz'
+            path.write_bytes(struct.pack('>I',len(raw))+zlib.compress(raw))
+            options=dict(expected_bytes=len(raw),expected_sha256=hashlib.sha256(raw).hexdigest())
+            self.assertEqual(read_qcompress(path,maximum_bytes=512*1024**2,**options),{'schema_version':7})
+            for maximum in (True,0,513*1024**2):
+                with self.subTest(maximum=maximum),self.assertRaises(EvidenceError):
+                    read_qcompress(path,maximum_bytes=maximum,**options)
+            declared=256*1024**2+1
+            path.write_bytes(struct.pack('>I',declared)+zlib.compress(raw))
+            for maximum in (256*1024**2,512*1024**2):
+                with self.subTest(maximum=maximum),self.assertRaises(EvidenceError):
+                    read_qcompress(path,maximum_bytes=maximum,expected_bytes=declared,
+                                   expected_sha256=hashlib.sha256(raw).hexdigest())
+
     def test_corrupted_size_stream_hash_and_trailing_bytes_rejected(self):
         raw = b'{"schema_version":7}'
         correct = struct.pack('>I', len(raw))+zlib.compress(raw)

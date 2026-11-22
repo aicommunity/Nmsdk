@@ -1,6 +1,7 @@
 #pragma once
 #include "TimeLearner/ConfiguredNativeTraining.h"
 #include "TimeLearner/ModelIdentity.h"
+#include "TimeLearnerJobSource.h"
 #include "../../../Rdk/Deploy/Include/rdk_cpp_init.h"
 #include <QCryptographicHash>
 #include <QDir>
@@ -39,12 +40,19 @@ inline QJsonObject WriteBytes(const QString& directory,const QString& name,const
 }
 inline QJsonObject Write(const QString& directory,const QString& name,const QJsonObject& value)
 {return WriteBytes(directory,name,QJsonDocument(value).toJson());}
-inline QJsonObject ReadDocument(const QString& path)
+inline QJsonObject WriteStaged(const QString& directory,const QString& name,const QJsonObject& value)
 {
-    QFile file(path);Require(file.open(QIODevice::ReadOnly),"job_input_unreadable");
-    Require(file.size()>0 && file.size()<=256*1024*1024,"job_input_size_out_of_range");
-    return NMSDK::TimeLearner::ParseStrictNativeJsonObject(file.readAll().toStdString(),256*1024*1024);
+    // Keep an interrupted write distinguishable from a complete artifact.
+    // Both creation and rename reject existing names; rename stays on the
+    // same filesystem. The final job marker is published separately.
+    const auto pending=name+".pending";
+    auto record=WriteBytes(directory,pending,QJsonDocument(value).toJson());
+    QFile file(QDir(directory).filePath(pending));
+    Require(file.rename(QDir(directory).filePath(name)),"job_staged_artifact_publish_failed");
+    record["path"]=name;return record;
 }
+inline QJsonObject ReadDocument(const QString& path)
+{return ReadNativeJobDocument(path);}
 inline void Keys(const QJsonObject& object,const std::set<QString>& keys)
 {Require(object.size()==int(keys.size()),"job_field_set_mismatch");for(const auto& key:keys)Require(object.contains(key),"job_missing_field");}
 struct ModelScope {

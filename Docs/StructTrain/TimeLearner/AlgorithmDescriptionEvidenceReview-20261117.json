@@ -1,0 +1,400 @@
+{
+  "kind": "timelearner_algorithm_document_evidence_review",
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "review_root": "0769002c32468160b8fb2c41f685558311bed199",
+  "scope": "Finite reviewed published reports/receipts for next maintained DOCX edition. Not a claim that the full August-to-present inventory or original stages1-12 are accepted.",
+  "criterion": {
+    "TP_minimum": 1,
+    "TN_minimum": 2,
+    "training_certificate_required": false,
+    "unique_foil_count_reported": true
+  },
+  "review_role": "documentation reconciliation; no new native experiment or independent primary replay",
+  "qualifying_examples": [
+    {
+      "id": "branch-n1-native-n2",
+      "family": "captured-per-input-v2",
+      "topology": "Branch",
+      "normalization": "N1",
+      "counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2
+      },
+      "unique_foil_patterns": 1,
+      "training_outcome": "exact",
+      "threshold": null,
+      "qualifies_user_tp_tn": true,
+      "independent_evaluation": false,
+      "source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/evidence-register.json",
+        "blob": "d29148a94f7914cb5e6112b4492300bbd2a26e91",
+        "bytes": 12872,
+        "sha256": "d8dc3fcc55b5b7f1bd3596bf6a6d3ef214abf09b4ff341c396f245dfa9ce1269"
+      },
+      "model_revision": "4844f0819a3189688d299b3261e8ccb4cb1e22d882d78b0162cc503c00008573",
+      "effective_threshold_source": "retained calibrated model; do not substitute training threshold",
+      "reset_policies": [
+        "preserve_neuron_dynamics",
+        "reset_per_trial"
+      ],
+      "published_first_edition": true,
+      "source_top_level_suite_passed": false,
+      "selected_native_case_passed": true,
+      "scope": "integration control; one unique foil in two reset policies"
+    },
+    {
+      "id": "classic-n1-native-n2",
+      "family": "captured-per-input-v2",
+      "topology": "Classic",
+      "normalization": "N1",
+      "counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2
+      },
+      "unique_foil_patterns": 1,
+      "training_outcome": "exact",
+      "threshold": null,
+      "qualifies_user_tp_tn": true,
+      "independent_evaluation": false,
+      "source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/evidence-register.json",
+        "blob": "d29148a94f7914cb5e6112b4492300bbd2a26e91",
+        "bytes": 12872,
+        "sha256": "d8dc3fcc55b5b7f1bd3596bf6a6d3ef214abf09b4ff341c396f245dfa9ce1269"
+      },
+      "model_revision": "65520ce549adb3b570150f5c0ea89e2f0f88a9e725ab0d3372b3635edaa66416",
+      "effective_threshold_source": "retained calibrated model; do not substitute training threshold",
+      "reset_policies": [
+        "preserve_neuron_dynamics",
+        "reset_per_trial"
+      ],
+      "published_first_edition": true,
+      "source_top_level_suite_passed": false,
+      "selected_native_case_passed": true,
+      "scope": "integration control; one unique foil in two reset policies"
+    },
+    {
+      "id": "classic-n0-stock-20261114",
+      "family": "captured-per-input-v2",
+      "topology": "Classic",
+      "normalization": "N0",
+      "counts": {
+        "TP": 1,
+        "FP": 4,
+        "FN": 0,
+        "TN": 3
+      },
+      "unique_foil_patterns": 7,
+      "training_outcome": "invalid_observation/ambiguous",
+      "threshold": 0.012765548843211696,
+      "qualifies_user_tp_tn": true,
+      "independent_evaluation": false,
+      "source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/ClassicN0ThresholdScientificReport-20261114.ru.md",
+        "blob": "f8ab440973c8022d9a5f1dd6ae4cff07e98cb5c8",
+        "bytes": 16029,
+        "sha256": "ac90dffeaf19b2118c41e8e57865c893b1895b1ae0928db42ccae382b29c5ad2"
+      },
+      "model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+      "pulse": "7c6c94785af0c83104d348bb3b733ed1f149c8a8",
+      "runtime_root": "74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e",
+      "lengths": [
+        45,
+        1,
+        1,
+        1
+      ],
+      "target_spike": 0.503,
+      "last_input": 0.49,
+      "early_target": false,
+      "published_first_edition": false,
+      "matched_causal_effect_claimed": false,
+      "physics": "stock NSPNeuronGen without LTMembrane,2000Hz",
+      "primary_sha256": "e4f4c50a328919a8f5d7c823e969b26a830ffb190454a5313aa67c130e821541",
+      "primary_bytes": 83917844,
+      "additional_source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/ClassicN0OrderScientificReport-20261114.ru.md",
+        "blob": "42f172f8cc4851e28c34c46c0e1da35eba27e767",
+        "bytes": 13412,
+        "sha256": "4907d9a6ea1d54791b74c30d2ea76e25a2edf8b0bd320582373b24e86823b09e"
+      },
+      "scope": "same-matrix, fixed actual threshold, eight target positions reported; old code before N0 geometry fix"
+    },
+    {
+      "id": "branch-n1-coupled-stock-20261114",
+      "family": "captured-per-input-v2",
+      "topology": "Branch",
+      "normalization": "N1",
+      "counts": {
+        "TP": 1,
+        "FP": 5,
+        "FN": 0,
+        "TN": 2
+      },
+      "unique_foil_patterns": 7,
+      "training_outcome": "invalid_observation/ambiguous",
+      "threshold": 0.03578062022182049,
+      "qualifies_user_tp_tn": true,
+      "independent_evaluation": false,
+      "source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/BranchCoupledThresholdScientificReport-20261114.ru.md",
+        "blob": "fe8ce0a8a792ac344d986f33a67cb5374abc2c35",
+        "bytes": 16359,
+        "sha256": "f538f24fec034236dc37ef6e55ad9eb19fe593b9d486c53044afdc7c3aef2225"
+      },
+      "lengths": [
+        28,
+        27,
+        27,
+        1
+      ],
+      "resistances": [
+        86000000.0,
+        21232304.307596,
+        21232304.307596,
+        86000000.0
+      ],
+      "target_spike": 0.262,
+      "last_input": 0.49,
+      "early_target": true,
+      "published_first_edition": false,
+      "physics": "stock NSPNeuronGen without LTMembrane,2000Hz",
+      "matched_causal_effect_claimed": false,
+      "scope": "qualifies weak user TP/TN criterion despite early target and poor selectivity; not full-pattern causal recognition"
+    },
+    {
+      "id": "branch-n1-fast-terminal7200",
+      "family": "captured-per-input-v2",
+      "topology": "Branch",
+      "normalization": "N1",
+      "counts": {
+        "TP": 1,
+        "FP": 3,
+        "FN": 0,
+        "TN": 4
+      },
+      "unique_foil_patterns": 7,
+      "training_outcome": "budget_exhausted",
+      "threshold": 0.0560090535350351,
+      "qualifies_user_tp_tn": true,
+      "independent_evaluation": false,
+      "source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/FastN1ThresholdScientificAcceptance-20261116.json",
+        "blob": "4b7365b903f907babdb77901ee34f3ae319fb073",
+        "bytes": 15307,
+        "sha256": "3b39157d9d2b5834f39572ed7c705c7e2bc1509357c0da69e3ea13be081a68f0"
+      },
+      "target_spike": 0.2535,
+      "last_input": 0.49,
+      "early_target": true,
+      "published_first_edition": true,
+      "physics": "Fast3 storage profile,2000Hz",
+      "matched_causal_effect_claimed": false,
+      "scope": "same-matrix; different final models and thresholds, not a single-factor budget effect",
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/79/79c4e07750874b6cf26310c0e034b404748cf987c61fb6781d8597150a0ed28d",
+        "sha256": "79c4e07750874b6cf26310c0e034b404748cf987c61fb6781d8597150a0ed28d",
+        "bytes": 53513428
+      },
+      "provenance_primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/30/302251afbbcee9ae3ac61d2ef8f0e230d96fce57565fc80b35c91f55033fd4b8",
+        "sha256": "302251afbbcee9ae3ac61d2ef8f0e230d96fce57565fc80b35c91f55033fd4b8",
+        "bytes": 350266
+      }
+    },
+    {
+      "id": "branch-n1-fast-terminal21600",
+      "family": "captured-per-input-v2",
+      "topology": "Branch",
+      "normalization": "N1",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6
+      },
+      "unique_foil_patterns": 7,
+      "training_outcome": "budget_exhausted",
+      "threshold": 0.054353792695896797,
+      "qualifies_user_tp_tn": true,
+      "independent_evaluation": false,
+      "source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/FastN1FullTrainingThresholdScientificAcceptance-20261116.json",
+        "blob": "60d01102710571df13be06c75f34508a3db24d37",
+        "bytes": 15079,
+        "sha256": "5943c61fdb1ade4a5d8ea24b2e1fc9d230c6b3de2da3c2e225da7d3b5b828086"
+      },
+      "target_spike": 0.493,
+      "last_input": 0.49,
+      "early_target": false,
+      "published_first_edition": true,
+      "physics": "Fast3 storage profile,2000Hz",
+      "matched_causal_effect_claimed": false,
+      "scope": "same-matrix; different final models and thresholds, not a single-factor budget effect",
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/64/64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768",
+        "sha256": "64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768",
+        "bytes": 58742968
+      },
+      "provenance_primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/d2/d2b9e1a3941d22950f67bf534698e5b47e6c3686e22936f4cb31df6944c08656",
+        "sha256": "d2b9e1a3941d22950f67bf534698e5b47e6c3686e22936f4cb31df6944c08656",
+        "bytes": 364368
+      }
+    },
+    {
+      "id": "classic-phasea-saved6of8",
+      "family": "historical-phasea-legacy",
+      "topology": "Classic",
+      "normalization": "unknown until original effective configuration reviewed",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "unique_foil_patterns": 7,
+      "training_outcome": "saved model replay; new Train not performed",
+      "threshold": 0.0135,
+      "qualifies_user_tp_tn": true,
+      "independent_evaluation": false,
+      "source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/HistoricalFrozenProtocolMatrixScientificReport-2026-11-07.ru.md",
+        "blob": "bfc3e0d1bc5601580abe2d0bec18a0aa84150495",
+        "bytes": 13849,
+        "sha256": "cd38f5734a4d9b461ef42a90b81bb7234d578a0a4072352b5d68dcec75dc6a66"
+      },
+      "runtime_root": "de02a3809395dd0bbd11e2ba792bfc04a51c89f3",
+      "pulse": "cbf76fbe077a7003dccf72b142d7136721fa1afb",
+      "lengths": [
+        49,
+        41,
+        25,
+        1
+      ],
+      "model_revision": "ca025286e43839d8442e134978603f1328017b2b1b5234138878206c0e3b82f3",
+      "published_first_edition": false,
+      "scope": "one saved August model; sixteen cyclic-order/delay conditions, no new cold Train; native historical reset within each matrix; do not assign V2 or guessed normalization",
+      "conditions": 16,
+      "independent_trainings": 0,
+      "matched_causal_effect_claimed": false
+    }
+  ],
+  "excluded_examples": [
+    {
+      "source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/N1ModerateThresholdScientificAcceptance-20261116.json",
+        "blob": "a0c45c98f69b8484fae590a7ff9b8773e57e45a0",
+        "bytes": 7322,
+        "sha256": "8331f48bc235cb1e3bce12d638d0c58ab3bf2dbd4d677ba277a999c62b5ce3de"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 6,
+        "FN": 0,
+        "TN": 1
+      },
+      "reason": "TN<2",
+      "qualifies_user_tp_tn": false
+    },
+    {
+      "source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/PresynapticThresholdScientificAcceptance-20261116.json",
+        "blob": "fc8cdb6f5418bff3358fa93e9be4339e5a84b2b3",
+        "bytes": 7655,
+        "sha256": "23eb18980263f8b5b9bbf25a3f2417f8378736ee97d984a8f1b05dc39d60918a"
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 6,
+        "FN": 0,
+        "TN": 1
+      },
+      "reason": "TN<2",
+      "qualifies_user_tp_tn": false
+    },
+    {
+      "id": "fresh-short-classic-n1",
+      "counts": {
+        "TP": 1,
+        "FP": 6,
+        "FN": 0,
+        "TN": 1
+      },
+      "reason": "TN<2",
+      "source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/FreshColdN4ScientificReport-20261117.ru.md",
+        "blob": "9fbe9714c0f36a187e46943720ae3e27e13ae9e4",
+        "bytes": 8709,
+        "sha256": "095529dcaa0bc0c8e7eab31811f910d6c60df0a3309317f5219aab2ee6601754"
+      }
+    },
+    {
+      "id": "fresh-short-branch-n1",
+      "counts": {
+        "TP": 1,
+        "FP": 6,
+        "FN": 0,
+        "TN": 1
+      },
+      "reason": "TN<2",
+      "source": {
+        "repository": "root",
+        "commit": "0769002c32468160b8fb2c41f685558311bed199",
+        "path": "Docs/StructTrain/TimeLearner/FreshColdN4ScientificReport-20261117.ru.md",
+        "blob": "9fbe9714c0f36a187e46943720ae3e27e13ae9e4",
+        "bytes": 8709,
+        "sha256": "095529dcaa0bc0c8e7eab31811f910d6c60df0a3309317f5219aab2ee6601754"
+      }
+    }
+  ],
+  "grouping_rules": [
+    "Common V2 captured-per-input measured structural search; N0 integer Ns and N1 bounded Rs are variant normalizers.",
+    "Keep independent paths and shared cable descriptions separate.",
+    "Keep physical-profile, source-version, threshold and protocol differences explicit; no unmatched causal attribution.",
+    "Keep historical PhaseA legacy in a separately versioned family until original algorithm/normalizer verified.",
+    "Counts from repeated conditions of one model are not independent cold trainings."
+  ],
+  "docx_edition_updated": false,
+  "source_primary_replay_complete_for_new_candidates": false,
+  "new_full_scientific_PASS_claimed": false
+}

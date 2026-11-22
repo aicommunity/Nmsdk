@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 from ..native_data_checks import validate_request
 from .test_native_data_checks import declaration
-from ..recorded_diagnostic_matrix import audit_matrix, report_matrix
+from ..recorded_diagnostic_matrix import audit_matrix, report_matrix, read_summary, validate_declaration
 from ..native_evidence import EvidenceError, load
 
 
@@ -142,6 +142,123 @@ class RecordedDiagnosticMatrixPrimaryTest(unittest.TestCase):
 
 
 class RecordedDiagnosticMatrixDeclarationTest(unittest.TestCase):
+    def test_actual_large_summary_requires_an_explicit_bounded_profile_and_owner_memory(self):
+        value=self.repeated_model()
+        for row in value['cases']:
+            row.update(summary_raw_bytes=167249672,summary_raw_sha256='e'*64,
+                       maximum_summary_raw_bytes=256*1024**2)
+        value['limits'].update(memory_bytes=16*1024**3,leaf_memory_bytes=16*1024**3,
+                               reservation_memory_bytes=32*1024**3)
+        self.assertEqual(validate_request(value),value)
+        for maximum in (None,True,0,128*1024**2,1024*1024**2+1):
+            invalid=deepcopy(value)
+            if maximum is None:invalid['cases'][0].pop('maximum_summary_raw_bytes')
+            else:invalid['cases'][0]['maximum_summary_raw_bytes']=maximum
+            with self.subTest(maximum=maximum),self.assertRaises(EvidenceError):validate_request(invalid)
+        invalid=deepcopy(value);invalid['limits']['memory_bytes']=8*1024**3
+        with self.assertRaisesRegex(EvidenceError,'large_summary_resource_declaration'):validate_request(invalid)
+        invalid=diagnostic_request();invalid['cases'][0]['maximum_summary_raw_bytes']=256*1024**2
+        with self.assertRaisesRegex(EvidenceError,'summary_limit'):validate_request(invalid)
+
+    def test_large_model_requires_explicit_file_transport_and_separate_native_and_owner_budgets(self):
+        value=diagnostic_request()
+        for row in value['cases']:
+            row.update(source_raw_bytes=761851830,maximum_source_raw_bytes=1024*1024**2,
+                       job_source_transport='checked-file-source-v1')
+        value['limits'].update(memory_bytes=16*1024**3,leaf_memory_bytes=16*1024**3,
+                               reservation_memory_bytes=32*1024**3)
+        self.assertIsNone(validate_declaration(value))
+        for changed in ('transport','owner','native','ceiling'):
+            invalid=deepcopy(value)
+            if changed=='transport':invalid['cases'][0].pop('job_source_transport')
+            elif changed=='owner':invalid['limits']['memory_bytes']=8*1024**3
+            elif changed=='native':invalid['limits']['leaf_memory_bytes']=8*1024**3
+            else:invalid['cases'][0]['maximum_source_raw_bytes']=1024*1024**2+1
+            with self.subTest(changed=changed),self.assertRaises(EvidenceError):validate_declaration(invalid)
+
+    def test_unknown_or_noop_transport_factor_is_rejected(self):
+        for mode in (None,True,'auto','checked-file-source-v2'):
+            value=diagnostic_request();value['cases'][0]['job_source_transport']=mode
+            with self.subTest(mode=mode),self.assertRaises(EvidenceError):validate_declaration(value)
+
+    def test_compressed_summary_requires_complete_consistent_bounded_raw_identity(self):
+        value=self.repeated_model()
+        for row in value['cases']:
+            row.update(summary_raw_bytes=72709345,summary_raw_sha256='e'*64)
+        self.assertEqual(validate_request(value),value)
+        for change in ({'summary_raw_bytes':True},{'summary_raw_bytes':0},
+                       {'summary_raw_bytes':128*1024**2+1},{'summary_raw_sha256':'bad'},
+                       {'summary_raw_bytes':12}):
+            changed=deepcopy(value);changed['cases'][1].update(change)
+            with self.subTest(change=change),self.assertRaises(EvidenceError):validate_request(changed)
+        for field in ('summary_raw_bytes','summary_raw_sha256'):
+            changed=deepcopy(value);changed['cases'][0].pop(field)
+            with self.subTest(missing=field),self.assertRaises(EvidenceError):validate_request(changed)
+
+    def test_summary_transport_keeps_exact_bytes_and_rejects_corruption(self):
+        import zlib
+        raw=b'{"retained_history":"unchanged"}\n'
+        row=dict(summary_name='summary.qz',summary_raw_bytes=len(raw),
+                 summary_raw_sha256=hashlib.sha256(raw).hexdigest())
+        with tempfile.TemporaryDirectory() as temporary:
+            folder=Path(temporary);path=folder/row['summary_name']
+            packed=len(raw).to_bytes(4,'big')+zlib.compress(raw);path.write_bytes(packed)
+            self.assertEqual(read_summary(folder,row),raw)
+            self.assertEqual(read_summary(folder,{**row,'maximum_summary_raw_bytes':len(raw)}),raw)
+            with self.assertRaises(EvidenceError):
+                read_summary(folder,{**row,'maximum_summary_raw_bytes':len(raw)-1})
+            for invalid in (packed[:-1],packed+b'garbage',(len(raw)+1).to_bytes(4,'big')+packed[4:]):
+                path.write_bytes(invalid)
+                with self.subTest(packed_bytes=len(invalid)),self.assertRaises(EvidenceError):read_summary(folder,row)
+            path.write_bytes(packed)
+            with self.assertRaises(EvidenceError):read_summary(folder,{**row,'summary_raw_sha256':'0'*64})
+            legacy=dict(summary_name='summary.json');(folder/'summary.json').write_bytes(raw)
+            self.assertEqual(read_summary(folder,legacy),raw)
+
+    def repeated_model(self):
+        value=diagnostic_request();base=value['cases'][0]
+        value['inputs']=[r for r in value['inputs'] if not r['name'].startswith('branch')]
+        value['cases']=[dict(base,name=name,duration=duration,reset_policy=policy,
+                             diagnostic_threshold=.054353792695896797)
+            for name,duration,policy in [('long-reset',4.,'reset_per_trial'),
+                ('continuous',2.,'preserve_neuron_dynamics'),
+                ('long-continuous',4.,'preserve_neuron_dynamics')]]
+        value['limits']['maximum_wall_seconds']=1000
+        return value
+
+    def test_one_immutable_source_can_feed_independent_declared_conditions(self):
+        value=self.repeated_model();self.assertEqual(validate_request(value),value)
+        self.assertEqual(len(value['inputs']),4)
+        for change in (dict(source_raw_sha256='e'*64),dict(source_raw_bytes=999),
+                       dict(summary_name='phasea.csv')):
+            changed=deepcopy(value);changed['cases'][1].update(change)
+            with self.subTest(change=change),self.assertRaises(EvidenceError):validate_request(changed)
+
+    def test_long_windows_and_continuous_policy_do_not_default_invalid_factors(self):
+        for change in (dict(duration=True),dict(duration=1.),dict(duration=float('nan')),
+                       dict(duration=31),dict(reset_policy=None),dict(reset_policy='unknown')):
+            value=self.repeated_model();value['cases'][0].update(change)
+            with self.subTest(change=change),self.assertRaises(EvidenceError):validate_request(value)
+
+    def test_large_source_requires_its_explicit_bounded_profile(self):
+        value=self.repeated_model()
+        for row in value['cases']:
+            row.update(source_raw_bytes=271032927,maximum_source_raw_bytes=512*1024**2)
+        self.assertEqual(validate_request(value),value)
+        for maximum in (None,True,0,256*1024**2,513*1024**2):
+            changed=deepcopy(value)
+            if maximum is None:changed['cases'][0].pop('maximum_source_raw_bytes')
+            else:changed['cases'][0]['maximum_source_raw_bytes']=maximum
+            with self.subTest(maximum=maximum),self.assertRaises(EvidenceError):validate_request(changed)
+
+    def test_diagnostic_threshold_is_an_explicit_finite_case_factor(self):
+        for threshold in (0., .054353792695896797, -1.):
+            value=diagnostic_request();value['cases'][0]['diagnostic_threshold']=threshold
+            with self.subTest(threshold=threshold):self.assertEqual(validate_request(value),value)
+        for invalid in (True,None,float('nan'),float('inf'),'0.1'):
+            value=diagnostic_request();value['cases'][0]['diagnostic_threshold']=invalid
+            with self.subTest(invalid=invalid),self.assertRaises(EvidenceError):validate_request(value)
+
     def test_explicit_diagnostic_request_keeps_two_finite_children(self):
         value = diagnostic_request();self.assertEqual(validate_request(value), value)
         self.assertEqual([r['name'] for r in value['cases']], ['classic', 'branch'])

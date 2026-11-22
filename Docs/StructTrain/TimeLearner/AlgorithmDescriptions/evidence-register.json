@@ -1,0 +1,378 @@
+{
+  "kind": "timelearner_algorithm_description_evidence",
+  "schema_version": 1,
+  "updated_at": "2026-11-16T20:19:18.291Z",
+  "working_rule": {
+    "TP_at_least": 1,
+    "TN_at_least": 2,
+    "training_certificate_required": false,
+    "unique_foil_count_reported": true
+  },
+  "scope": "First maintained edition; current verified V2 N1 examples. Historical August observations preserved separately; unqualified modes are not declared nonfunctional.",
+  "native_n2_cases": [
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-scoring-batch-native-controls-m40-a1/worker/tmp/batch-native-controls/native/Branch_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_calibrated_state.json",
+      "model_file": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-scoring-batch-native-controls-m40-a1/worker/tmp/batch-native-controls/native/Branch_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_calibrated_state.json",
+        "sha256": "188c106d18daf45db5e449377f9b4b03f0ac29848eace165b845a90cf53097fa",
+        "size": 5724959
+      },
+      "kind": "timelearner_calibrated_recognition_state",
+      "model_revision": "4844f0819a3189688d299b3261e8ccb4cb1e22d882d78b0162cc503c00008573",
+      "model_spec": {
+        "neuron_class": "Branch_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_Neuron",
+        "branch": true,
+        "frequency_hz": 2000,
+        "initial_isi": [
+          0.01,
+          0.03
+        ],
+        "normalization": "N1"
+      },
+      "source_configuration_keys": [
+        "duration",
+        "kind",
+        "maximum_invalid_reference_probes",
+        "maximum_model_seconds",
+        "maximum_reference_probes",
+        "maximum_sample_gap",
+        "maximum_samples",
+        "maximum_wall_seconds",
+        "minimum_amplitude",
+        "model",
+        "peak_selection",
+        "protocol_revision",
+        "record_spikes",
+        "run_id",
+        "sample_id",
+        "schema_version",
+        "search",
+        "stimulus_profile",
+        "windows"
+      ],
+      "training_outcome": "exact",
+      "counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0
+      },
+      "qualifies_user_tp_tn": true,
+      "unique_foil_patterns": 1,
+      "reset_policies": [
+        "preserve_neuron_dynamics",
+        "reset_per_trial"
+      ],
+      "criterion": {
+        "anchor": "last_stimulus",
+        "begin_offset": 0,
+        "end_offset": null,
+        "id": "post_anchor_target_whole_window_foil_v1",
+        "reject_target_outside_window": true
+      },
+      "run_id": "Branch_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_calibrated_frozen",
+      "observations": [
+        {
+          "trial_id": "trial_0",
+          "sample_id": "training_target",
+          "label": "target",
+          "spike_times": [
+            41.6942
+          ],
+          "stimulus_times": [
+            41.6557,
+            41.6857
+          ],
+          "frequency_hz": 2000
+        },
+        {
+          "trial_id": "trial_1",
+          "sample_id": "foil_dispersed",
+          "label": "foil",
+          "spike_times": [],
+          "stimulus_times": [
+            41.7262,
+            41.9662
+          ],
+          "frequency_hz": 2000
+        },
+        {
+          "trial_id": "trial_2",
+          "sample_id": "training_target",
+          "label": "target",
+          "spike_times": [
+            42.0447
+          ],
+          "stimulus_times": [
+            42.0067,
+            42.0367
+          ],
+          "frequency_hz": 2000
+        },
+        {
+          "trial_id": "trial_3",
+          "sample_id": "foil_dispersed",
+          "label": "foil",
+          "spike_times": [],
+          "stimulus_times": [
+            42.0772,
+            42.3172
+          ],
+          "frequency_hz": 2000
+        }
+      ],
+      "source_top_level_suite_passed": false,
+      "selected_native_case_passed": true,
+      "evidence_role": "native integration frozen test; one unique foil in two reset policies"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-scoring-batch-native-controls-m40-a1/worker/tmp/batch-native-controls/native/Classic_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_calibrated_state.json",
+      "model_file": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-scoring-batch-native-controls-m40-a1/worker/tmp/batch-native-controls/native/Classic_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_calibrated_state.json",
+        "sha256": "06758fe0b8f811c180a6c09b61b061eeefc114f18cc045c249785d2df3b7fefc",
+        "size": 6154879
+      },
+      "kind": "timelearner_calibrated_recognition_state",
+      "model_revision": "65520ce549adb3b570150f5c0ea89e2f0f88a9e725ab0d3372b3635edaa66416",
+      "model_spec": {
+        "neuron_class": "Classic_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_Neuron",
+        "branch": false,
+        "frequency_hz": 2000,
+        "initial_isi": [
+          0.01,
+          0.03
+        ],
+        "normalization": "N1"
+      },
+      "source_configuration_keys": [
+        "duration",
+        "kind",
+        "maximum_invalid_reference_probes",
+        "maximum_model_seconds",
+        "maximum_reference_probes",
+        "maximum_sample_gap",
+        "maximum_samples",
+        "maximum_wall_seconds",
+        "minimum_amplitude",
+        "model",
+        "peak_selection",
+        "protocol_revision",
+        "record_spikes",
+        "run_id",
+        "sample_id",
+        "schema_version",
+        "search",
+        "stimulus_profile",
+        "windows"
+      ],
+      "training_outcome": "exact",
+      "counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0
+      },
+      "qualifies_user_tp_tn": true,
+      "unique_foil_patterns": 1,
+      "reset_policies": [
+        "preserve_neuron_dynamics",
+        "reset_per_trial"
+      ],
+      "criterion": {
+        "anchor": "last_stimulus",
+        "begin_offset": 0,
+        "end_offset": null,
+        "id": "post_anchor_target_whole_window_foil_v1",
+        "reject_target_outside_window": true
+      },
+      "run_id": "Classic_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_calibrated_frozen",
+      "observations": [
+        {
+          "trial_id": "trial_0",
+          "sample_id": "training_target",
+          "label": "target",
+          "spike_times": [
+            34.0002
+          ],
+          "stimulus_times": [
+            33.9617,
+            33.9917
+          ],
+          "frequency_hz": 2000
+        },
+        {
+          "trial_id": "trial_1",
+          "sample_id": "foil_dispersed",
+          "label": "foil",
+          "spike_times": [],
+          "stimulus_times": [
+            34.0322,
+            34.2722
+          ],
+          "frequency_hz": 2000
+        },
+        {
+          "trial_id": "trial_2",
+          "sample_id": "training_target",
+          "label": "target",
+          "spike_times": [
+            34.3507
+          ],
+          "stimulus_times": [
+            34.3127,
+            34.3427
+          ],
+          "frequency_hz": 2000
+        },
+        {
+          "trial_id": "trial_3",
+          "sample_id": "foil_dispersed",
+          "label": "foil",
+          "spike_times": [],
+          "stimulus_times": [
+            34.3832,
+            34.6232
+          ],
+          "frequency_hz": 2000
+        }
+      ],
+      "source_top_level_suite_passed": false,
+      "selected_native_case_passed": true,
+      "evidence_role": "native integration frozen test; one unique foil in two reset policies"
+    }
+  ],
+  "branch_n4_cases": [
+    {
+      "id": "fast-terminal7200",
+      "normalization": "N1",
+      "topology": "Branch",
+      "TP": 1,
+      "FP": 3,
+      "FN": 0,
+      "TN": 4,
+      "threshold": 0.0560090535350351,
+      "target_last_input_time": 0.49,
+      "target_spike_time": 0.2535,
+      "training_completed": false,
+      "report": "../FastN1RecognitionScientificReport-20261116.ru.md",
+      "scope": "Same-Matrix stopped diagnostic; target event before last input"
+    },
+    {
+      "id": "fast-terminal21600",
+      "normalization": "N1",
+      "topology": "Branch",
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "threshold": 0.054353792695896797,
+      "target_last_input_time": 0.49,
+      "target_spike_time": 0.493,
+      "training_completed": false,
+      "model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+      "report": "../FastN1FullTrainingRecognitionScientificReport-20261116.ru.md",
+      "primary": "64c9d5499c4000ecd686e79731bce4a37ca725a0eb04971850631f6b343f0768",
+      "scope": "Same-Matrix stopped diagnostic"
+    },
+    {
+      "id": "fast-frozen-order64",
+      "normalization": "N1",
+      "topology": "Branch",
+      "TP_per_position": 1,
+      "FP_per_position": 1,
+      "FN_per_position": 0,
+      "TN_per_position": 6,
+      "positions": 8,
+      "trials": 64,
+      "training_completed": false,
+      "independent_trainings": 0,
+      "model_revision": "2f22a5732cff349873805d1c6ba637f262ed27792739129b85cbf5a411fa0764",
+      "threshold": 0.054353792695896797,
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/01/012b8191633c37b4062ec1a1a54aeb9af5f840dd66faabc1dba0256c38022d60",
+        "sha256": "012b8191633c37b4062ec1a1a54aeb9af5f840dd66faabc1dba0256c38022d60",
+        "bytes": 41658804
+      },
+      "scope": "Fixed model/threshold; reset_per_trial; rotations only; one unique false foil phasea-row-4",
+      "report": "../FastN1FrozenOrderScientificReport-20261116.ru.md"
+    }
+  ],
+  "not_qualified_examples": [
+    {
+      "family": "Stock moderate N1 and PSI2.5 N1",
+      "TP": 1,
+      "TN": 1,
+      "reason": "TN below user minimum; no general impossibility claim"
+    },
+    {
+      "family": "Fast stopped model at threshold100",
+      "TP": 0,
+      "TN": 7,
+      "reason": "Silent target; no successful detection"
+    },
+    {
+      "family": "Cold groupwall600 OOM",
+      "TP": null,
+      "TN": null,
+      "reason": "No final model or native Test; unknown recognition quality"
+    }
+  ],
+  "historical": {
+    "august_visual_observations": "4/8 to5-6/8 confirmed by user in original protocol; poor separability; no permutation or longer ITI checks then",
+    "machine_tp_tn_registry": "continue historical source audit; do not invent missing TP/TN"
+  },
+  "algorithm_code": {
+    "PulseLib": "23d039e44f927eb8040473845d3c391270d9d15e",
+    "science_runtime_PulseLib": "9e7653a400761d6c2f3ea68fddcd40a4307d85e7",
+    "core_equivalence": "Core bodies equal as accepted in source closure evidence",
+    "Rdk": "de4134235c0dcb8b91fd9a43b267348ad1a163ca"
+  },
+  "native_n2_external_primary": {
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/85/858354233267b5ef6b5b6079249ea4f4ca0327ef4d4349ecf371afa81300ac04",
+      "sha256": "858354233267b5ef6b5b6079249ea4f4ca0327ef4d4349ecf371afa81300ac04",
+      "bytes": 2968992
+    },
+    "bundle_manifest": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/92/92bab30e1492a6c9cf199eb7f0f939bd30452bef83e2a450ef519cd55d619fdb",
+      "sha256": "92bab30e1492a6c9cf199eb7f0f939bd30452bef83e2a450ef519cd55d619fdb",
+      "bytes": 196410
+    },
+    "provenance_primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/10/100e4ec52718a68a4d001d8467daafc6523461f148b0731a4895e31a2a83337d",
+      "sha256": "100e4ec52718a68a4d001d8467daafc6523461f148b0731a4895e31a2a83337d",
+      "bytes": 259445
+    },
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-16/scoring-batch/primary-a1.json",
+    "closed_source_jobs": [
+      "s03-scoring-batch-native-controls-m40-a1",
+      "s03-scoring-batch-large-m40-a1",
+      "s03-scoring-batch-small-m40-a2"
+    ],
+    "full_mode_matrix_accepted": false
+  }
+}

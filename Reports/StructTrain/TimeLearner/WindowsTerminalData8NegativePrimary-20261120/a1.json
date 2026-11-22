@@ -1,0 +1,92 @@
+{
+  "published": true,
+  "catalog": "experiments/2026-11-20/windows-terminal-DATA8/negative-a1.json",
+  "record": {
+    "kind": "timelearner_closed_windows_negative_primary",
+    "schema_version": 1,
+    "source_attempt": "windows-terminal-physical-data8-a1",
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/0a/0aa34992d887dadd325ea15703982c96dc2f8ad309883161c97c9ab73cb1b33d",
+      "sha256": "0aa34992d887dadd325ea15703982c96dc2f8ad309883161c97c9ab73cb1b33d",
+      "bytes": 5664584
+    },
+    "bundle_manifest": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d9/d9f171c4458aba641fcc585d3e735cbfe267878b317b4e68ca3fb7da1bbf3883",
+      "sha256": "d9f171c4458aba641fcc585d3e735cbfe267878b317b4e68ca3fb7da1bbf3883",
+      "bytes": 302730
+    },
+    "collection": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/1a/1abfa47998041306664639e8827e31ffca29551e7966e23c574e6fddf50964e6",
+      "sha256": "1abfa47998041306664639e8827e31ffca29551e7966e23c574e6fddf50964e6",
+      "bytes": 3137
+    },
+    "collection_controls": "3d37b29d95f28c3f3e77e718bd11f8fa6df65592",
+    "members": 1252,
+    "expanded_bytes": 588156595,
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "0aa34992d887dadd325ea15703982c96dc2f8ad309883161c97c9ab73cb1b33d",
+      "archive_members_verified": 1252,
+      "retained_regular_files": 1252,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "original_native_tests": 78,
+    "original_native_passed": 59,
+    "original_native_failed": 19,
+    "original_sdk_accepted": false,
+    "original_native_gate": {
+      "assertion_status": "failed",
+      "execution": "process_error",
+      "inventory": {
+        "assertion_status": "failed",
+        "expected": 78,
+        "failed_test_ids": [
+          "NativeActualCompositeTerminalRestore/ClassicFixedN0",
+          "NativeActualCompositeTerminalRestore/BranchFixedN0",
+          "NativeActualCompositeTerminalRestore/ClassicFixedN1",
+          "NativeActualCompositeTerminalRestore/BranchFixedN1",
+          "NativeActualCompositeTerminalRestore/ClassicWindowN0",
+          "NativeActualCompositeTerminalRestore/BranchWindowN0",
+          "NativeActualCompositeTerminalRestore/ClassicWindowN1",
+          "NativeActualCompositeTerminalRestore/BranchWindowN1",
+          "NativeTerminalConfiguredEntry/ClassicFixedN0",
+          "NativeTerminalConfiguredEntry/BranchFixedN0",
+          "NativeTerminalConfiguredEntry/ClassicFixedN1",
+          "NativeTerminalConfiguredEntry/BranchFixedN1",
+          "NativeTerminalConfiguredEntry/ClassicWindowN0",
+          "NativeTerminalConfiguredEntry/BranchWindowN0",
+          "NativeTerminalConfiguredEntry/ClassicWindowN1",
+          "NativeTerminalConfiguredEntry/BranchWindowN1",
+          "NativeJointCapacitance/ClassicRollback",
+          "NativeJointCapacitance/BranchRollback",
+          "NativeTerminalSelection/ClassicFailedAttachmentRetainsOriginalModel"
+        ],
+        "observed": 78,
+        "sha256": "a7eca2157561ac19e7551f3c08f76bc5fd039061280f99840bbeea5d70b448e8"
+      },
+      "kind": "timelearner_native_test_gate_result",
+      "reason": "complete_declared_test_inventory",
+      "schema_version": 1,
+      "scientific_verdict": null,
+      "validity": "valid"
+    },
+    "original_outcomes_unchanged": true,
+    "source_files_modified": false,
+    "portable_archive_verifies_bytes_not_original_execution": true,
+    "scientific_verdict": null
+  }
+}

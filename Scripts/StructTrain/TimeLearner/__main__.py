@@ -23,11 +23,14 @@ def analyze(args: argparse.Namespace) -> dict:
             "primary_inventory_is_only_for_live_finalization")
     require(args.format == "domain" or not args.allow_legacy, "legacy_adapter_is_only_for_domains")
     require(args.format in ("probe", "legacy-posttune-freerun") or args.trace is None, "trace_option_is_only_for_probes")
-    require(args.format in ("recognition-trial", "recognition-evaluation", "native-calibration-assessment") or args.model is None, "model_option_is_only_for_recognition_trials")
+    require(args.format in ("recognition-trial", "recognition-evaluation", "physical-model-evaluation", "native-calibration-assessment") or args.model is None, "model_option_is_only_for_recognition_trials")
     require(args.format in ("threshold-candidate", "native-calibration-assessment", "calibrated-state", "calibration-transaction", "posttune-transaction") or args.source_solo is None, "source_solo_option_is_only_for_threshold_candidates")
     require(args.format == "native-calibration-assessment" or args.evaluation is None, "evaluation_option_is_only_for_native_calibration")
     source = args.source.resolve(strict=True)
-    if args.format == "native-composite-measurements":
+    if args.format == "native-continuity":
+        from .native_continuity_reports import read_fixture
+        _, result = read_fixture(source)
+    elif args.format == "native-composite-measurements":
         from .composite_archive_case import audit_composite_archive_case
         require(args.output is None or not args.output.resolve().is_relative_to(source),
                 'composite_analysis_output_overlaps_original_case')
@@ -84,6 +87,13 @@ def analyze(args: argparse.Namespace) -> dict:
     elif args.format == "stopped-final-pass":
         from .stopped_final_pass import audit_negative_final_pass, load_inputs
         result = audit_negative_final_pass(*load_inputs(source))
+    elif args.format == "physical-model-data":
+        from .physical_model_data_evidence import audit_physical_model_data
+        result = audit_physical_model_data(load(source), frozen=True)
+    elif args.format == "physical-model-evaluation":
+        from .recognition_metrics import load_physical_model_data_evaluation, score_physical_model_data_evaluation
+        require(args.model is not None, "physical_model_data_required")
+        result = score_physical_model_data_evaluation(*load_physical_model_data_evaluation(source), load(args.model.resolve(strict=True)))
     elif args.format == "recognition-evaluation":
         from .recognition_metrics import load_evaluation, score_recognition_evaluation
         require(args.model is not None, "recognition_model_package_required")
@@ -157,6 +167,9 @@ def _process_policy(args):
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
+    count_training = commands.add_parser('count-training', help='prepare or launch a matched count-normalization cold Train on a Linux worker')
+    count_training.add_argument('action', choices=('prepare','launch'))
+    count_training.add_argument('request', type=Path)
     controller_ab = commands.add_parser("controller-ab", help="compare pinned pure controller kernels on a Linux worker")
     controller_ab.add_argument("specification", type=Path)
     controller_ab.add_argument("--root-repository", type=Path, required=True)
@@ -193,10 +206,13 @@ def main(argv: list[str] | None = None) -> int:
     prepare = commands.add_parser("prepare", help="prepare a declared native cold-job matrix without running models")
     prepare.add_argument("specification", type=Path)
     prepare.add_argument("--output", type=Path, required=True, help="new immutable job matrix directory")
-    for operation in ("train", "preflight", "export", "evaluate", "diagnostic-evaluate", "probe"):
+    for operation in ("train", "preflight", "export", "evaluate", "diagnostic-evaluate", "physical-model-evaluate", "probe"):
         native = commands.add_parser(operation, help="run an owned native Console "+operation+" job")
         native.add_argument("specification", type=Path)
-        if operation == "diagnostic-evaluate":
+        if operation == "physical-model-evaluate":
+            native.add_argument("--source-model-data", dest="source_solo", type=Path, required=True,
+                                help="complete frozen recognition DATA; source-training proof is audited separately")
+        elif operation == "diagnostic-evaluate":
             native.add_argument("--source-stopped", dest="source_solo", type=Path, required=True,
                                 help="stopped package with its original primary trial siblings; never completed Train")
         elif operation == "probe":
@@ -283,7 +299,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument('--include-related', action='store_true', help='schema3 review catalog: also match TimeLearner tokens in committed script content; never execute tools')
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=('capacitance-region', 'capacitance-history', 'capacitance-witness', 'capacitance-binding', 'training-capacitance-bridge', 'domain', 'probe', 'learned-solo', 'stopped-solo', 'recognition', 'recognition-owner', 'recognition-trial', 'recognition-evaluation', 'threshold-candidate', 'calibrated-state', 'calibration-transaction', 'posttune-transaction', 'calibration-run', 'posttune-run', 'pipeline-run', 'native-calibration-assessment', 'posttune-reconstruction', 'posttune-transient', 'legacy-posttune-freerun', 'native-live-finalization', 'branch-dynamics', 'historical-selectivity', 'stopped-final-pass', 'legacy-statistic-traces', 'native-composite-measurements', 'native-search-history'), required=True)
+    analysis.add_argument("--format", choices=('capacitance-region', 'capacitance-history', 'capacitance-witness', 'capacitance-binding', 'training-capacitance-bridge', 'domain', 'probe', 'learned-solo', 'stopped-solo', 'recognition', 'recognition-owner', 'recognition-trial', 'recognition-evaluation', 'physical-model-data', 'physical-model-evaluation', 'threshold-candidate', 'calibrated-state', 'calibration-transaction', 'posttune-transaction', 'calibration-run', 'posttune-run', 'pipeline-run', 'native-calibration-assessment', 'posttune-reconstruction', 'posttune-transient', 'legacy-posttune-freerun', 'native-live-finalization', 'branch-dynamics', 'historical-selectivity', 'stopped-final-pass', 'legacy-statistic-traces', 'native-composite-measurements', 'native-search-history', 'native-continuity'), required=True)
     analysis.add_argument("--expected-trial-ids", nargs="+", help="independently declared IDs required for historical-selectivity CSV")
     analysis.add_argument("--rest-bound", type=float, help="descriptive channel envelope for branch-dynamics; legacy default 1")
     analysis.add_argument("--soma-abs-limit", type=float, help="optional descriptive soma bound for branch-dynamics")
@@ -295,12 +311,12 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--trace", type=Path, help="original primary CSV, required for probe")
     analysis.add_argument("--allow-legacy", action="store_true", help="descriptive domain schema-1 adapter only")
     analysis.add_argument("--historical-analysis", choices=("learned-v2-no-capacitance",
-                         "training-v3-no-capacitance-history"),
-                         help="explicit archived training analysis adapter for pipeline-run only; defaults to strict equality")
+                         "training-v3-no-capacitance-history", "evaluation-v1-native-reset-policy"),
+                         help="explicit archived analysis adapter for pipeline-run only; never changes new-job admission")
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "native-archive-transfer-pair", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "physical-model-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "native-archive-transfer-pair", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization", "frozen-order", "native-continuity"), default="recognition-evaluation")
     report.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
@@ -372,6 +388,14 @@ def main(argv: list[str] | None = None) -> int:
     scales.add_argument("--frequency-hz", type=float)
     scales.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
+    if args.command == 'count-training':
+        from .linux_count_training import main as count_main
+        from .native_evidence import EvidenceError
+        try:
+            return count_main([args.action,str(args.request)])
+        except (EvidenceError,OSError,ValueError,KeyError,TypeError) as error:
+            print(json.dumps(dict(kind='timelearner_count_training_error',reason=str(error),scientific_verdict=None)),file=sys.stderr)
+            return 2
     if args.command == "audit-time-scales":
         from .declared_time_scales import audit_config_tree
         from .native_evidence import EvidenceError
@@ -560,7 +584,7 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"kind": "timelearner_frozen_diagnostic_order_error",
                               "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
             return 2
-    if args.command in ("train", "preflight", "export", "evaluate", "diagnostic-evaluate", "probe"):
+    if args.command in ("train", "preflight", "export", "evaluate", "diagnostic-evaluate", "physical-model-evaluate", "probe"):
         from .native_evidence import EvidenceError, require
         from .native_pipeline_worker import run_job
         try:
@@ -710,7 +734,17 @@ def main(argv: list[str] | None = None) -> int:
             require(args.format == "posttune-transaction" or args.source_solo is None, "report_source_solo_is_only_for_posttune")
             require(args.format == "native-live-finalization" or args.primary_inventory is None,
                     "primary_inventory_is_only_for_live_finalization")
-            if args.format == "native-archive-transfer-pair":
+            if args.format == "native-continuity":
+                from .native_continuity_reports import render_fixture
+                require(args.artifacts is None and args.trace is None and args.model is None,
+                        "continuity_report_uses_recorded_fixture_only")
+                result = render_fixture(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "frozen-order":
+                from .frozen_order_reports import render_frozen_order
+                require(args.trace is None and args.model is None,
+                        "frozen_order_report_declares_its_models_and_observations")
+                result = render_frozen_order(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "native-archive-transfer-pair":
                 from .archive_transfer_reports import render_gate_pair
                 require(args.trace is None and args.model is None,
                         "archive_transfer_report_declares_its_own_primary_files")
@@ -777,6 +811,11 @@ def main(argv: list[str] | None = None) -> int:
                 require(args.trace is not None and args.model is None, "probe_report_requires_trace_not_model")
                 result = render_probe(args.source.resolve(strict=True), args.trace.resolve(strict=True), args.output.resolve(),
                                       allow_incomplete=args.format=="probe-diagnostic")
+            elif args.format == 'physical-model-evaluation':
+                from .reports import render_physical_data_evaluation
+                require(args.model is not None and args.trace is None and args.source_solo is None and args.artifacts is None,
+                        'physical_report_requires_own_model_and_evaluation')
+                result = render_physical_data_evaluation(args.source.resolve(strict=True), args.model.resolve(strict=True), args.output.resolve())
             else:
                 require(args.model is not None and args.trace is None, "recognition_report_requires_model_not_trace")
                 result = render_evaluation(args.source.resolve(strict=True), args.model.resolve(strict=True), args.output.resolve(),

@@ -1,0 +1,70 @@
+{
+  "kind": "actual_recognition_DATA_effective_physics",
+  "schema_version": 1,
+  "model_revision": "ec82f91aaf806a562fcfcc29501eeabbfa0ccd0d2a93bccaf9a7190681c5cda3",
+  "source_boundary": {
+    "kind": "timelearner_diagnostic_threshold_candidate",
+    "model_revision": "ec82f91aaf806a562fcfcc29501eeabbfa0ccd0d2a93bccaf9a7190681c5cda3",
+    "schema_version": 1,
+    "sha256": "85b4b86d652ff4da110b3ea425497736ff15cc7cb6058d8a1770c9671d4bf0ec",
+    "state_kind": "diagnostic_recognition"
+  },
+  "controls": {
+    "calculate_mode": 0,
+    "controller_version": 2,
+    "structure_build_mode": 1
+  },
+  "parameters": [
+    {
+      "length": 237,
+      "resistance": 8090169.943749473,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "lt_nodes": [
+    {
+      "path": "$.LTZone",
+      "class_name": "TLNativeFast3F2000_LTZone",
+      "frequency_hz": "2000",
+      "parameters": {
+        "Threshold": 0.025742023300155625,
+        "TimeStep": 2000,
+        "UseAveragePotential": true
+      },
+      "child_order": []
+    }
+  ],
+  "channel_groups": [
+    {
+      "class_name": "TLNativeFast3F2000_Body_ExcChannel",
+      "capacity": 2.5e-10,
+      "resting_resistance": 10000000.0,
+      "frequency_hz": "2000",
+      "count": 244
+    },
+    {
+      "class_name": "TLNativeFast3F2000_Body_InhChannel",
+      "capacity": 2.5e-10,
+      "resting_resistance": 10000000.0,
+      "frequency_hz": "2000",
+      "count": 244
+    }
+  ],
+  "no_new_simulation": true,
+  "scientific_verdict": null
+}

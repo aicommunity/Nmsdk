@@ -1,0 +1,95 @@
+{
+  "kind": "timelearner_windows_native86_xml_cache_followup",
+  "schema_version": 1,
+  "created_at": "2026-11-20T09:21:14.591106+00:00",
+  "original_root": "cbc1ac36f6be9b7abe4edb52f1c2c8f6dffbad60",
+  "original_pulse": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+  "original_rdk": "cb6fe50da94ca9cbc9d5e4c0811d42b37b44a14a",
+  "original_job": "windows-terminal-physical-data8-native81-a3",
+  "native": {
+    "assertion_status": "failed",
+    "execution": "process_error",
+    "inventory": {
+      "assertion_status": "failed",
+      "expected": 81,
+      "failed_test_ids": [
+        "RdkIntegralXml/LegacyDecimalPrefixesRemainReadable"
+      ],
+      "observed": 81,
+      "sha256": "fa9fe6b341f1544dbdff2f4341908368e608a7c7c9a64b8dfcdf4bb46fb7ad3b"
+    },
+    "kind": "timelearner_native_test_gate_result",
+    "reason": "complete_declared_test_inventory",
+    "schema_version": 1,
+    "scientific_verdict": null,
+    "validity": "valid"
+  },
+  "process": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "process_error",
+    "validity": "valid",
+    "reason": "nonzero_exit",
+    "returncode": 1,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "completed",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 48,
+    "wall_seconds": 2855.862326900009,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-8f76cbe8-c204-46c4-9f1c-102d76ca9cbc"
+  },
+  "kernel": {
+    "name": "Local\\TimeLearner-8f76cbe8-c204-46c4-9f1c-102d76ca9cbc",
+    "open_error": 2
+  },
+  "task": {
+    "last_result": 1,
+    "name": "TimeLearner-windows-terminal-physical-data8-native81-a3",
+    "instances": []
+  },
+  "failure_assertions": [
+    {
+      "case": "RdkIntegralXml/LegacyDecimalPrefixesRemainReadable",
+      "message": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a3\\Tests\\Integration\\Libraries\\Test_PulseLib_ClassImages.cpp:59\nExpected equality of these values:\n  value\n    Which is: 17\n  -23\n"
+    },
+    {
+      "case": "RdkIntegralXml/LegacyDecimalPrefixesRemainReadable",
+      "message": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a3\\Tests\\Integration\\Libraries\\Test_PulseLib_ClassImages.cpp:60\nExpected equality of these values:\n  mask\n    Which is: 17\n  std::numeric_limits<unsigned int>::max()\n    Which is: 4294967295\n"
+    },
+    {
+      "case": "RdkIntegralXml/LegacyDecimalPrefixesRemainReadable",
+      "message": "C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a3\\Tests\\Integration\\Libraries\\Test_PulseLib_ClassImages.cpp:62\nExpected equality of these values:\n  value\n    Which is: 17\n  0\n"
+    }
+  ],
+  "original_expected": 81,
+  "original_observed": 81,
+  "original_passed": 80,
+  "original_failed": 1,
+  "all_original_78_passed": true,
+  "source_observation": {
+    "local_file": "timelearner-windows-terminal-data8-native81-observed-20261120-a3-c3.json",
+    "bytes": 6271,
+    "sha256": "cc9045ccbe664fb96a5437221e0efb627ee804943d616eabae9adfd9511a5199"
+  },
+  "fix_rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+  "next_expected_cpp_tests": 86,
+  "previous_81_preserved": true,
+  "new_cache_cases": 4,
+  "new_direct_unsigned_case": 1,
+  "next_sdk_started": false,
+  "next_native_executed": false,
+  "new_path_accepted": false,
+  "python3_executed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "fully_accepted_stages": [
+    0
+  ],
+  "heavy_primary_external_publication_pending": true
+}

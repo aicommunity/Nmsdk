@@ -1,0 +1,149 @@
+{
+  "junit": {
+    "bytes": 110576,
+    "sha256": "50ce30485b7c82287530eed3382b9cd49afaca4838fb0a9c26a26031911dced0"
+  },
+  "cases": 21,
+  "passed": 19,
+  "failed": [
+    {
+      "id": "NativeCalibrationPersistence/ClassicN1_2000",
+      "failures": 97,
+      "unique_messages": [
+        "/media/user/Data/TimeLearnerRefactor/source-calibration-readout-sdk-a1/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:211\nValue of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)\n  Actual: false\nExpected: true\n"
+      ]
+    },
+    {
+      "id": "NativeCalibrationPersistence/BranchN1_2000",
+      "failures": 93,
+      "unique_messages": [
+        "/media/user/Data/TimeLearnerRefactor/source-calibration-readout-sdk-a1/Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp:211\nValue of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)\n  Actual: false\nExpected: true\n"
+      ]
+    }
+  ],
+  "all_failure_assertions_are_exclusive_artifact_open": true,
+  "artifact_examples": [
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_calibration_assessment.json",
+      "bytes": 5557
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_calibration_design.json",
+      "bytes": 2711
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_calibration_persistence.json",
+      "bytes": 238
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_frozen_expectation.json",
+      "bytes": 293
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_frozen_trial_0.json",
+      "bytes": 448430
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_frozen_trial_1.json",
+      "bytes": 1817447
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_frozen_trial_2.json",
+      "bytes": 455778
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_frozen_trial_3.json",
+      "bytes": 1824652
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_frozen_trial_cancelled.json",
+      "bytes": 1699
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_frozen_trial_gap.json",
+      "bytes": 1714
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_primary_calibration_assessment.json",
+      "bytes": 3417
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_high_recognition_candidate.json",
+      "bytes": 3633020
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_calibration_assessment.json",
+      "bytes": 5607
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_calibration_design.json",
+      "bytes": 2710
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_calibration_persistence.json",
+      "bytes": 238
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_frozen_expectation.json",
+      "bytes": 297
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_frozen_trial_0.json",
+      "bytes": 477630
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_frozen_trial_1.json",
+      "bytes": 1959221
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_frozen_trial_2.json",
+      "bytes": 535474
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_frozen_trial_3.json",
+      "bytes": 2257821
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_frozen_trial_cancelled.json",
+      "bytes": 1709
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_frozen_trial_gap.json",
+      "bytes": 1703
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_primary_calibration_assessment.json",
+      "bytes": 3436
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_candidate_low_recognition_candidate.json",
+      "bytes": 3633041
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_learned_state.json",
+      "bytes": 1169636
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_learned_summary.json",
+      "bytes": 816293
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_legacy_v1_candidate.json",
+      "bytes": 3633041
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_numeric_domain_negative_candidate.json",
+      "bytes": 3633025
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_numeric_domain_negative_zero_candidate.json",
+      "bytes": 3633021
+    },
+    {
+      "name": "Branch_20000_N1_learned_boundary_configured_recognition_10_production_calibration_seed_numeric_domain_zero_candidate.json",
+      "bytes": 3633020
+    }
+  ],
+  "failure_means_calibration_assertion": false,
+  "scientific_verdict": null
+}

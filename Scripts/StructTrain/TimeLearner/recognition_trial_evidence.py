@@ -4,6 +4,8 @@ The native run/runtime and source training evidence are audited separately.
 Silence is a valid response. No training/convergence/selectivity PASS is inferred.
 """
 import sys
+from contextlib import contextmanager
+from dataclasses import dataclass, replace
 from .model_identity import canonical_model_sha256
 from .native_evidence import EvidenceError, after, count, equal, number, require
 
@@ -22,10 +24,27 @@ def _events(values, begin, closed):
     return result
 
 
-def _audit_recognition_trial(observation, package, *, diagnostic=False):
+@dataclass(frozen=True)
+class _TrialModel:
+    """Small immutable projection; no observation reads a mutable model/history."""
+    revision: str
+    pattern_size: int
+    branch: bool
+    frequency_hz: float
+    threshold_path: str
+    threshold_classes: tuple
+    calibrated_sha256: str | None = None
+
+
+def _prepare_trial_model(package, *, diagnostic=False, physical_data=False):
     try:
-        o = observation
         require(type(package) is dict, "unsupported_trial_model_package")
+        if physical_data:
+            require(not diagnostic, "physical_data_is_a_distinct_evaluation_role")
+            from .physical_model_data_evidence import audit_physical_model_data
+            model = audit_physical_model_data(package, frozen=True)
+            return _TrialModel(model["model_revision"], model["pattern_size"], model["branch"],
+                model["frequency_hz"], model["threshold_path"], model["threshold_classes"])
         diagnostic_candidate = diagnostic and package.get("kind") == "timelearner_diagnostic_threshold_candidate"
         if diagnostic:
             source = package.get("source_recognition", {}) if diagnostic_candidate else package
@@ -37,18 +56,13 @@ def _audit_recognition_trial(observation, package, *, diagnostic=False):
             audit_calibrated_state(package)
             # The proof audit establishes exact equality of candidate/final
             # physical graph and serialized model; only provenance differs.
-            result = audit_recognition_trial(observation, package["source_candidate"])
-            return {**result, "calibrated_model_sha256": package["sha256"], "calibration_evidence_checked": True}
-        require(type(o) is dict, "unknown_recognition_trial_schema")
-        schema = o.get("schema_version")
-        require(type(schema) is int and schema in (1, 2), "unknown_recognition_trial_schema")
+            result = _prepare_trial_model(package["source_candidate"])
+            return replace(result, calibrated_sha256=package["sha256"])
         candidate = diagnostic_candidate or (not diagnostic and package.get("kind") == "timelearner_recognition_threshold_candidate")
         if candidate:
             from .threshold_candidate_evidence import audit_threshold_candidate, audit_diagnostic_threshold_candidate
             (audit_diagnostic_threshold_candidate if diagnostic_candidate else audit_threshold_candidate)(package)
         context = package["source_recognition"] if candidate else package
-        require(set(o) == FIELDS | ({"threshold_potential_source"} if schema == 2 else set()), "recognition_trial_field_set_mismatch")
-        require(o["kind"] == "native_recognition_trial", "unknown_recognition_trial_schema")
         require((candidate or package["kind"] == ("timelearner_diagnostic_recognition_state" if diagnostic else "timelearner_recognition_state")) and type(package["schema_version"]) is int
                 and package["schema_version"] == 1 and package["state_kind"] == ("diagnostic_recognition" if diagnostic else "recognition")
                 and package["dynamic_checkpoint"] is False and package["recognition_certificate"] is None,
@@ -58,14 +72,33 @@ def _audit_recognition_trial(observation, package, *, diagnostic=False):
         identity = package["neuron"]["graph"]["identity"]
         require(canonical_model_sha256(identity["model"]) == identity["sha256"] == package["model_revision"],
                 "recognition_model_digest_mismatch")
+        model = context["source_solo"]["configuration"]["model"]
+        path = package["neuron"]["metadata"]["calibration"]["ltzone_path"]
+        classes = tuple(node["class"] for node in identity["model"]["nodes"] if node["path"] == path)
+        require(type(path) is str and all(type(value) is str for value in classes),
+                "invalid_recognition_model_threshold_descriptor")
+        return _TrialModel(package["model_revision"], len(context["recognition_inputs"]),
+                           bool(model["branch"]), number(model["frequency_hz"]), path, classes)
+    except EvidenceError:
+        raise
+    except (KeyError, TypeError, ValueError, OverflowError, ZeroDivisionError) as error:
+        raise EvidenceError("malformed_recognition_trial:" + str(error)) from error
+
+
+def _audit_recognition_observation(observation, model):
+    try:
+        o = observation
+        require(type(o) is dict, "unknown_recognition_trial_schema")
+        schema = o.get("schema_version")
+        require(type(schema) is int and schema in (1, 2), "unknown_recognition_trial_schema")
+        require(set(o) == FIELDS | ({"threshold_potential_source"} if schema == 2 else set()), "recognition_trial_field_set_mismatch")
+        require(o["kind"] == "native_recognition_trial", "unknown_recognition_trial_schema")
         if schema == 2:
             descriptor = o["threshold_potential_source"]
             if descriptor is None:
                 require(o["armed"] is False and o["samples"] == [], "missing_threshold_potential_source")
             else:
-                path = package["neuron"]["metadata"]["calibration"]["ltzone_path"]
-                zones = [node for node in identity["model"]["nodes"] if node["path"] == path]
-                require(len(zones) == 1 and descriptor == {"path": path+".Potential", "class": zones[0]["class"],
+                require(len(model.threshold_classes) == 1 and descriptor == {"path": model.threshold_path+".Potential", "class": model.threshold_classes[0],
                     "sample_phase": "native_after_children", "units": "model_units_SI_unverified"},
                     "threshold_potential_source_mismatch")
         require(o["evaluation_verdict"] is None, "unsupported_trial_verdict")
@@ -73,7 +106,7 @@ def _audit_recognition_trial(observation, package, *, diagnostic=False):
             require(type(o[name]) is str and bool(o[name]), "invalid_recognition_identity")
         require(o["label"] in ("target", "foil") and o["reset_policy"] in
                 ("reset_per_trial", "preserve_neuron_dynamics"), "invalid_recognition_label_or_reset")
-        require(type(o["pattern_isi"]) is list and len(o["pattern_isi"]) == len(context["recognition_inputs"])
+        require(type(o["pattern_isi"]) is list and len(o["pattern_isi"]) == model.pattern_size
                 and bool(o["pattern_isi"]) and all(number(v) >= 0 for v in o["pattern_isi"]),
                 "invalid_recognition_pattern")
         require(canonical_model_sha256(o["pattern_isi"]) == o["pattern_hash"], "recognition_pattern_hash_mismatch")
@@ -85,10 +118,9 @@ def _audit_recognition_trial(observation, package, *, diagnostic=False):
         frequency = number(o["frequency_hz"])
         budget = count(o["maximum_samples"])
         require(budget >= 2 and type(o["samples"]) is list and len(o["samples"]) <= budget, "invalid_recognition_budget")
-        source_model = context["source_solo"]["configuration"]["model"]
-        channels = 1 if source_model["branch"] else len(o["pattern_isi"])
+        channels = 1 if model.branch else len(o["pattern_isi"])
         if o["armed"]:
-            require(frequency > 0 and frequency == number(source_model["frequency_hz"]) and end > begin,
+            require(frequency > 0 and frequency == number(model.frequency_hz) and end > begin,
                     "invalid_recognition_clock")
             require(1/frequency > 64*sys.float_info.epsilon*max(1., abs(begin), abs(end)),
                     "unresolvable_recognition_sample_interval")
@@ -140,7 +172,7 @@ def _audit_recognition_trial(observation, package, *, diagnostic=False):
         if o["complete"]:
             require(bool(o["samples"]) and equal(closed, end), "incomplete_recognition_window")
         if o["valid"]:
-            require(o["reason"] == "window_closed" and o["model_before"] == o["model_after"] == package["model_revision"],
+            require(o["reason"] == "window_closed" and o["model_before"] == o["model_after"] == model.revision,
                     "recognition_frozen_model_changed")
             require(len(stimuli) == len(o["pattern_isi"]), "recognition_stimulus_count_mismatch")
             planned = begin
@@ -156,11 +188,34 @@ def _audit_recognition_trial(observation, package, *, diagnostic=False):
             descriptor = o["threshold_potential_source"]
             result["threshold_potential_source"] = None if descriptor is None else dict(descriptor)
             result["threshold_potential_samples"] = len(o["samples"])
+        if model.calibrated_sha256 is not None:
+            result.update(calibrated_model_sha256=model.calibrated_sha256,
+                          calibration_evidence_checked=True)
         return result
     except EvidenceError:
         raise
     except (KeyError, TypeError, ValueError, OverflowError, ZeroDivisionError) as error:
         raise EvidenceError("malformed_recognition_trial:" + str(error)) from error
+
+
+def _audit_recognition_trial(observation, package, *, diagnostic=False):
+    return _audit_recognition_observation(observation, _prepare_trial_model(package, diagnostic=diagnostic))
+
+
+@contextmanager
+def _recognition_trial_batch(package, *, diagnostic=False, physical_data=False):
+    """One call, one audited model; standalone auditing never trusts this scope.
+
+    Physical scalars are copied into an immutable projection, so a caller cannot
+    change the physics used halfway through the observation loop. The final
+    digest guard refuses publication if the bound package has changed. There is
+    no cross-call cache, user-controlled bypass flag or retained proof token.
+    """
+    model = _prepare_trial_model(package, diagnostic=diagnostic, physical_data=physical_data)
+    expected = package["sha256"]
+    yield lambda observation: _audit_recognition_observation(observation, model)
+    require(package.get("sha256") == expected and expected == canonical_model_sha256(
+        {k: v for k, v in package.items() if k != "sha256"}), "recognition_model_changed_during_batch")
 
 
 def audit_recognition_trial(observation, package):
@@ -170,14 +225,15 @@ def audit_recognition_trial(observation, package):
 def audit_recognition_trial_set(observations, expected, package):
     """Expected keys are (run_id, trial_id); metadata comes from the job spec."""
     result = {}
-    for observation in observations:
-        item = audit_recognition_trial(observation, package)
-        key = (item["run_id"], item["trial_id"])
-        require(key not in result and key in expected, "duplicate_or_unexpected_recognition_trial")
-        wanted = expected[key]
-        require((item["sample_id"], item["label"], observation["pattern_hash"]) ==
-                (wanted["sample_id"], wanted["label"], wanted["pattern_hash"]), "recognition_trial_metadata_mismatch")
-        result[key] = item
+    with _recognition_trial_batch(package) as audit:
+        for observation in observations:
+            item = audit(observation)
+            key = (item["run_id"], item["trial_id"])
+            require(key not in result and key in expected, "duplicate_or_unexpected_recognition_trial")
+            wanted = expected[key]
+            require((item["sample_id"], item["label"], observation["pattern_hash"]) ==
+                    (wanted["sample_id"], wanted["label"], wanted["pattern_hash"]), "recognition_trial_metadata_mismatch")
+            result[key] = item
     require(set(result) == set(expected), "missing_recognition_trial")
     return {"schema_version": 1, "trials": len(result),
             "all_observations_valid": all(item["valid_observation"] for item in result.values()),

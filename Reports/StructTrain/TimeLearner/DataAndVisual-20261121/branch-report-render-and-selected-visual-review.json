@@ -1,0 +1,176 @@
+{
+  "kind": "audited_branch_diagnostic_render_progress",
+  "schema_version": 1,
+  "m40_dispatch": {
+    "started": true,
+    "name": "s11-n4-branch-long-threshold-render-m40-a1",
+    "controls_commit": "738d8bf47e54849cac0af380150e3eb7082b6f27",
+    "supervisor_pid": 2761971,
+    "output": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-21/n4-branch-long-threshold-m40-a1",
+    "renderer_root": "b46ca8a39a56f3026b69cc9bc9b72537472f6adf",
+    "renderer_git_blob": "4c3d4edc2fe730c671333005feaf2c7d8bf2e47f",
+    "environment": {
+      "python": "3.12.3",
+      "python_executable": "/usr/bin/python3",
+      "matplotlib": "3.9.4",
+      "pillow": "13.0.0"
+    },
+    "counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "all8_patterns": true,
+    "native_zoom_minimum_pixels_per_tick": 14.208,
+    "full_native_grid_preserved": true,
+    "visual_acceptance_complete": false,
+    "scientific_verdict": null
+  },
+  "m40_terminal": {
+    "controls": "/media/user/Data/TimeLearnerRefactor/requests/s11-n4-branch-long-threshold-render-m40-a1",
+    "terminal.json": {
+      "render_completed": true,
+      "output": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-21/n4-branch-long-threshold-m40-a1",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "figures": 2068
+    },
+    "process-result.json": {
+      "kind": "timelearner_process_result",
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 550.1054440895095,
+      "all_processes_closed": true
+    },
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "59d357809b7b538c2e005bd93f5abaa458eb90e9c64d21d906cb2d72a72d7d62",
+        "unit": "timelearner-39567c87-a7f7-48df-af07-f1e74c1da9ce.service",
+        "invocation_id": "93363a9772a04192ab80ac3675246722",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-39567c87-a7f7-48df-af07-f1e74c1da9ce.service",
+        "initial_main_pid": 2761993,
+        "initial_start_ticks": "432843070",
+        "sha256": "4655de268f58523ba6b690ea59820cdc058cc686147e2a354c5f9b725e5af412"
+      }
+    },
+    "png_files": 2068,
+    "process/contained/stderr.log": "",
+    "supervisor.log": ""
+  },
+  "windows_dispatch": {
+    "started": true,
+    "name": "windows-n4-branch-long-threshold-render-a1",
+    "controls_commit": "d994ba47d2b8b7ab9d94bbd849de37d1c61a145e",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{3DF3A743-EA14-4B6A-8CA9-C8285BAE009E}",
+      "execution_time_limit": "PT4H",
+      "task": "TimeLearner-windows-n4-branch-long-threshold-render-a1",
+      "engine_pid": 15940
+    },
+    "output": "C:\\Projects\\TimeLearnerWorker\\report-cache\\2026-11-21\\n4-branch-long-threshold-windows-a1",
+    "renderer_root": "216659623fe5e82efc7be06de9445f6526592738",
+    "renderer_git_blob": "4c3d4edc2fe730c671333005feaf2c7d8bf2e47f",
+    "plotting_runtime": {
+      "python": "3.14.2",
+      "python_executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "matplotlib": "3.11.2",
+      "pillow": "13.0.0"
+    },
+    "source_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "all8_patterns": true,
+    "native_zoom_minimum_pixels_per_tick": 14.208,
+    "transfer_to_M40_external_cache_required": true,
+    "publication_ready": false,
+    "scientific_verdict": null
+  },
+  "selected_cache_file_records": [
+    {
+      "path": "trial-00-soma-1/overview.png",
+      "bytes": 134326,
+      "sha256": "84e28e3361e5061760aff06843bf2ccf33b06e3d353a14e92be152082967dfb4",
+      "mode": "0o664",
+      "uid": 1000
+    },
+    {
+      "path": "trial-04-soma-1/overview.png",
+      "bytes": 137049,
+      "sha256": "d4c140db1fef7091780d272d3d5845ada6f4688eac52f62eb450b4d3e15d04f4",
+      "mode": "0o664",
+      "uid": 1000
+    },
+    {
+      "path": "trial-0000-lt-decision/zoom-010.png",
+      "bytes": 152390,
+      "sha256": "5c88808d17a0042ea1627b83b37c8d935f8fbf8306844628851f9dbc8e07849b",
+      "mode": "0o664",
+      "uid": 1000
+    },
+    {
+      "path": "trial-00-soma-1/positive-lobe-detail/overview.png",
+      "bytes": 166572,
+      "sha256": "6fafcc29f75c51cdf542edc52f8e29392167b1c75a292555302a24625ef02f87",
+      "mode": "0o664",
+      "uid": 1000
+    },
+    {
+      "path": "trial-04-soma-1/positive-lobe-detail/overview.png",
+      "bytes": 170612,
+      "sha256": "e469bb3bca79a232de05e41b075780cc2a2b738cfe0aa46eb6fd789a0cff763a",
+      "mode": "0o664",
+      "uid": 1000
+    },
+    {
+      "path": "trial-0000-lt-decision/positive-lobe-detail/zoom-010.png",
+      "bytes": 162491,
+      "sha256": "d3a58ec361e63e26bc835cb6295f4a0a8da9e06610738755939ab9c3796e2baa",
+      "mode": "0o664",
+      "uid": 1000
+    }
+  ],
+  "manually_viewed_files": [
+    "trial-00-soma-1/overview.png",
+    "trial-04-soma-1/overview.png",
+    "trial-0000-lt-decision/zoom-010.png",
+    "trial-00-soma-1/positive-lobe-detail/overview.png",
+    "trial-0000-lt-decision/positive-lobe-detail/zoom-010.png"
+  ],
+  "selected_review": "Axes, legends, inputs, actual LT markers and positive response enlargement readable; full negative recovery retained.",
+  "all_figures_manually_accepted": false,
+  "publication_ready": false,
+  "scientific_verdict": null
+}

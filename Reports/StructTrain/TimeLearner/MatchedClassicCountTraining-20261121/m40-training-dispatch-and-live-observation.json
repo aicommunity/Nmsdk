@@ -1,0 +1,64 @@
+{
+  "kind": "timelearner_matched_count_train_progress",
+  "schema_version": 1,
+  "dispatch": {
+    "dispatched": true,
+    "job": "s11-classic-count-training-m40-a1",
+    "supervisor_pid": 165864,
+    "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1-controller",
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-training-m40-a1",
+    "original_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+    "job_sha256": "28b3c96d1b9c2229ce98c4fbe0227de86146957c5ef20c37906953a9bf8cfb4a",
+    "scientific_verdict": null,
+    "controls_commit": "3b3874778cb9bd251e3e100fe2def3425cd94fa9",
+    "root_commit": "401339a0efa7be313385e91446932e2e96998d96",
+    "native_wall_seconds": 39600,
+    "internal_search_wall_seconds": 32400,
+    "maximum_synapses": 128,
+    "native_memory_bytes": 17179869184,
+    "whole_wall_seconds": 43200,
+    "original_initial_graph_verified_on_Elder_and_M40": true,
+    "fresh_own_preflights_required": true,
+    "full_primary_audit_required": true
+  },
+  "observation": {
+    "job": "s11-classic-count-training-m40-a1",
+    "train-kernel": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "ef7ad78868de3e9515ab94aecf175effaf94b7245a4e1496d59a3b1e7171a222",
+        "unit": "timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+        "invocation_id": "07a94cfc2631458f988f19e653f65489",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9e252d01-3d18-4e1e-9d3d-30fff8134130.service",
+        "initial_main_pid": 173265,
+        "initial_start_ticks": "436251545",
+        "sha256": "dc90ba704f52ae142c785daf02d83f337574c2aa32924bcbf41404056a5f3a81"
+      }
+    },
+    "outer": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "e857c5757caacd525c8b2e381f6de0ea50ba4d397f2e891016c868262d17f837",
+        "unit": "timelearner-b866cd9b-7595-470d-ba74-1a87675afd01.service",
+        "invocation_id": "e19e53b08f52478b992e27f3884b958e",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b866cd9b-7595-470d-ba74-1a87675afd01.service",
+        "initial_main_pid": 169513,
+        "initial_start_ticks": "436249423",
+        "sha256": "2b6887fc93b666400faf2d7282fbbdfe841ebc3f980a28c1eb1355019d06fe25"
+      }
+    },
+    "raw_trial_files_present": 80
+  },
+  "raw_files_are_not_independent_trials": true,
+  "full_primary_audit_required": true,
+  "training_certificate_verified": false,
+  "scientific_verdict": null
+}

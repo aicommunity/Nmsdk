@@ -23,6 +23,11 @@ def render_evaluation(source: Path, model: Path, output: Path, *, calibration_pr
     return _render_evaluation(source, model, output, calibration_probe=calibration_probe)
 
 
+def render_physical_data_evaluation(source: Path, model: Path, output: Path):
+    """Frozen physical DATA responses, without transferring source authority."""
+    return _render_evaluation(source, model, output, physical_data=True)
+
+
 def render_diagnostic_evaluation(source: Path, model: Path, stopped: Path, output: Path):
     """Stopped Train responses, including censored/unstarted declared trials."""
     from .stopped_evidence import load_case
@@ -39,17 +44,26 @@ def render_diagnostic_evaluation_case(source: Path, model: Path, source_case, ou
     return _render_evaluation(source, model, output, source_case=source_case)
 
 
-def _render_evaluation(source, model, output, *, calibration_probe=False, source_case=None):
+def _render_evaluation(source, model, output, *, calibration_probe=False, source_case=None, physical_data=False):
     runtime = plotting_runtime()
     diagnostic = source_case is not None
+    require(not physical_data or not (diagnostic or calibration_probe), 'physical_report_scope_conflict')
     from .recognition_metrics import load_partial_diagnostic_evaluation, score_partial_diagnostic_evaluation
     if diagnostic:
         spec, observations, missing = load_partial_diagnostic_evaluation(source)
+    elif physical_data:
+        from .recognition_metrics import load_physical_model_data_evaluation
+        spec, observations = load_physical_model_data_evaluation(source)
     else:
         spec, observations = load_evaluation(source)
     package = load(model)
     context_label = 'Stopped Train: '+source_case[0]["training_outcome"] if diagnostic else None
-    scorer = score_threshold_candidate if calibration_probe else score_recognition_evaluation
+    if physical_data:
+        from .recognition_metrics import score_physical_model_data_evaluation
+        context_label = 'Физическая DATA-модель; обучение и калибровка не подтверждены'
+        scorer = score_physical_model_data_evaluation
+    else:
+        scorer = score_threshold_candidate if calibration_probe else score_recognition_evaluation
     analysis = (score_partial_diagnostic_evaluation(spec, observations, package, source_case)
                 if diagnostic else scorer(spec, observations, package))
     calibrated = package.get("kind") == "timelearner_calibrated_recognition_state"
@@ -59,7 +73,11 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
     context = package["source_candidate"]["source_recognition"] if calibrated else (
         package["source_recognition"] if calibration_probe or diagnostic_candidate else package)
     # Descriptors: native binding enumerates Soma1..N (Branch has one soma).
-    count = 1 if context["source_solo"]["configuration"]["model"]["branch"] else len(context["recognition_inputs"])
+    if physical_data:
+        definition = package['configuration']['model']
+        count = 1 if definition['branch'] else len(definition['inputs'])
+    else:
+        count = 1 if context["source_solo"]["configuration"]["model"]["branch"] else len(context["recognition_inputs"])
     nodes = {node["path"]: node for node in package["neuron"]["graph"]["identity"]["model"]["nodes"]}
     descriptors = []
     for i in range(count):
@@ -69,13 +87,15 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
                             "units": "model_units_SI_unverified", "adapter": "native_recognition_soma"})
     require(all((diagnostic or o["samples"]) and all(len(s["soma"]) == count for s in o["samples"]) for o in observations),
             "missing_report_soma_samples")
-    limits = []
+    limits, shared_minima = [], []
     for i in range(count):
         values = [s["soma"][i] for o in observations for s in o["samples"]]
         if not values:
             limits.append(None)
+            shared_minima.append(None)
             continue
         lo, hi = min(values), max(values)
+        shared_minima.append(lo)
         padding = (hi-lo)*.08 if hi > lo else max(abs(lo)*.08, 1e-12)
         limits.append((lo-padding, hi+padding))
     # Never overwrite an existing report, source data or completed job directory.
@@ -123,7 +143,7 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
             views = render_soma(o, descriptor["index"], descriptor["path"], limits[descriptor["index"]], folder,
                                 context_label=context_label)
             views.extend(render_positive_lobe_views(o, descriptor["index"], descriptor["path"], folder,
-                context_label=context_label))
+                context_label=context_label, shared_minimum=shared_minima[descriptor["index"]]))
             for view in views:
                 view["files"] = [f"{folder.name}/{p}" for p in view["files"]]
             figures.append({"trial_id": o["trial_id"], "sample_id": o["sample_id"], "label": o["label"],
@@ -192,11 +212,19 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
                                           "sample_count": len(by_id[t["trial_id"]]["samples"]) if t["trial_id"] in by_id else 0}
                                          for t in spec["trials"]],
                         observed_trial_soma_pairs=len(figures))
+    if physical_data:
+        manifest.update(purpose='physical_model_data_evaluation_diagnostic', data_only=True,
+                        source_boundary=package['source_boundary'],
+                        source_training_evidence_checked=False, training_certificate_transferred=False,
+                        calibration_confirmed=False, native_import_verified=False,
+                        controller_checkpoint_restored=False)
     _write(output/"manifest.json", manifest)
     (output/"index.html").write_text('<!doctype html><html lang="en"><meta charset="utf-8">'
         '<title>TimeLearner visual diagnostic report</title><style>body{font:18px sans-serif;margin:2em}'
         'img{display:block;width:100%;max-width:1920px}p{max-width:90em}</style>'
         '<h1>TimeLearner visual diagnostic report</h1>'
+        + ('<p>Физическая DATA-модель: графики и метрики описывают записанные реакции. '
+           'Обучение, импорт исходной модели и калибровка этим отчётом не подтверждаются.</p>' if physical_data else '')
         + ('<p>Unfinished Train: '+html.escape(source_case[0]["training_outcome"])+'. Diagnostic responses only; no convergence certificate. Missing curves mean unobserved trials.</p>' if diagnostic else '')
         + ('<p>Threshold candidate probe: this report does not certify calibration or independent evaluation.</p>' if calibration_probe else '')
         + '<p>Actual soma SumPotential and shared input samples. '
@@ -213,6 +241,8 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
     return {"kind": manifest["kind"], "status": manifest["status"],
             "trial_soma_pairs": len(figures), "lt_decision_trial_pairs": len(decisions["trials"]),
             "files": len(sums), "evaluation_verdict": None,
+            **({"data_only": True, "source_training_evidence_checked": False,
+                "training_certificate_transferred": False, "calibration_confirmed": False} if physical_data else {}),
             **({"diagnostic_only": manifest["diagnostic_only"],
                 "training_completed": manifest["training_completed"],
                 "source_training_outcome": manifest["source_training_outcome"]} if diagnostic else {})}

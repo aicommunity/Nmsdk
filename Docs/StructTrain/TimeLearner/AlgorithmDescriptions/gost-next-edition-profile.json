@@ -1,0 +1,90 @@
+{
+  "kind": "timelearner_scientific_report_format_profile",
+  "schema_version": 1,
+  "prepared_at": "2026-11-21",
+  "status": "preparation_only_not_a_released_or_verified_DOCX",
+  "applies_to": ["Classic", "Branch"],
+  "preserved_publication": "2026-11-20-v4",
+  "standards": [
+    {
+      "designation": "ГОСТ 7.32-2017",
+      "role": "research_report_structure_and_presentation",
+      "catalog_status_on_checked_date": "active",
+      "catalog": "https://protect.gost.ru/gost/details/7d280e43-7036-4a69-8e6e-d15867028343",
+      "official_imprint_text_copy": "https://iriran.ru/sites/default/files/gost_7.32-2017.pdf",
+      "catalog_corrections": ["ИУС 2-2019", "ИУС 3-2020", "ИУС 1-2022"],
+      "full_correction_text_review_complete": false
+    },
+    {
+      "designation": "ГОСТ Р 7.0.100-2018",
+      "role": "bibliographic_description_only_not_citation_rules",
+      "catalog_status_on_checked_date": "active",
+      "catalog": "https://protect.gost.ru/gost/details/389dfd5a-535a-458a-81c3-14b729b1cee1",
+      "catalog_corrections": ["ИУС 3-2020"],
+      "full_text_review_complete": false
+    }
+  ],
+  "page": {
+    "width_mm": 210,
+    "height_mm": 297,
+    "margins_mm": {"left": 30, "right": 15, "top": 20, "bottom": 20},
+    "clause": "7.32-2017:6.1.1"
+  },
+  "body": {
+    "font": "Times New Roman",
+    "project_font_size_pt": 14,
+    "standard_minimum_font_size_pt": 12,
+    "line_spacing": 1.5,
+    "first_line_indent_mm": 12.5,
+    "color": "000000",
+    "clause": "7.32-2017:6.1.1"
+  },
+  "headings": {
+    "main_sections_start_new_page": true,
+    "numbered_headings_bold_initial_capital_no_terminal_dot": true,
+    "structural_headings_centered_uppercase": true,
+    "clauses": ["7.32-2017:6.2", "7.32-2017:6.4"]
+  },
+  "page_numbers": {
+    "position": "bottom_center",
+    "format": "arabic_digits_only",
+    "title_counted_but_number_hidden": true,
+    "clause": "7.32-2017:6.3"
+  },
+  "figures": {
+    "caption": "Рисунок {number} — {title}",
+    "caption_alignment": "center_below_explanatory_text",
+    "first_mention_cross_reference_required": true,
+    "clause": "7.32-2017:6.5"
+  },
+  "tables": {
+    "caption": "Таблица {number} — {title}",
+    "caption_alignment": "left_above_table_without_indent",
+    "continued_table_caption_required": true,
+    "clause": "7.32-2017:6.6"
+  },
+  "equations": {
+    "editable_format": "OMML",
+    "alignment": "center",
+    "number": "right_parenthesized_arabic",
+    "symbols_explained_immediately_below": true,
+    "clause": "7.32-2017:6.8"
+  },
+  "release_gates": {
+    "applicable_corrections_reviewed": false,
+    "bibliography_and_citations_reviewed": false,
+    "administrative_cover_metadata_verified_or_parent_report_scope_declared": false,
+    "builder_support_implemented": false,
+    "both_DOCX_rendered_and_every_page_reviewed": false,
+    "all_graphs_readable_at_Word_page_scale": false
+  },
+  "content_constraints": {
+    "pulse_count_symbol": "M",
+    "synapses_per_input_symbol": "N_s,i",
+    "technical_normalization_identifiers_unchanged": ["N0", "N1"],
+    "original_publication_bytes_unchanged": true,
+    "experiments_take_priority": true,
+    "pending_Train_has_no_invented_result": true,
+    "heavy_outputs_in_root_Git": false
+  }
+}

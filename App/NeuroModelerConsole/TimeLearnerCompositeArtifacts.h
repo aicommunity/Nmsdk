@@ -30,6 +30,28 @@ private:
 };
 inline NativeCompositePublication PublishCheckedNativeCompositeArchive(const QString& output,const QJsonObject& package,QJsonArray& artifacts) {
     const auto schema=package.value("schema_version");
+    if(schema==QJsonValue(8)) {
+        // The actual restored model and its measured source are distinct.
+        // Publish the unchanged historical archive, but bind the receipt to
+        // the whole outer package, including its actual terminal model.
+        auto body=package;body.remove("sha256");
+        Require(package.value("sha256")==QJsonValue(NmsdkTools::CanonicalModelDataSha256(body)),
+            "terminal_publication_package_digest");
+        const auto history=Object(package.value("historical_state"));
+        auto historicalBody=history;historicalBody.remove("sha256");
+        Require(history.value("sha256")==QJsonValue(NmsdkTools::CanonicalModelDataSha256(historicalBody)),
+            "terminal_publication_historical_digest");
+        const auto historicalSchema=history.value("schema_version");
+        Require(historicalSchema.isDouble() && historicalSchema.toDouble()>=1. && historicalSchema.toDouble()<=7. &&
+            std::floor(historicalSchema.toDouble())==historicalSchema.toDouble(),"terminal_publication_recursive_history");
+        for(const auto* key:{"kind","state_kind","implementation_id","controller_version","calculate_mode",
+            "structure_build_mode","configuration","protocol","session_attempt","training_outcome","certificate"})
+            Require(package.value(key)==history.value(key),"terminal_publication_historical_metadata");
+        const auto published=PublishCheckedNativeCompositeArchive(output,history,artifacts);
+        const auto descriptor=published.Descriptor();
+        const auto deliveries=published.RecoveryDeliveries(history,descriptor);
+        return NativeCompositePublication(package,descriptor,deliveries);
+    }
     if(schema!=QJsonValue(5) && schema!=QJsonValue(6) && schema!=QJsonValue(7)) {
         Require(schema==QJsonValue(1) || schema==QJsonValue(2) || schema==QJsonValue(3) || schema==QJsonValue(4),
             "unsupported_composite_publication_package_schema");return NativeCompositePublication(package,QJsonValue(QJsonValue::Null),0);
@@ -142,9 +164,62 @@ inline QJsonObject WrapNativeRecoveryCandidateWindowExecution(QJsonObject base,c
     const QJsonValue& actualModel,std::size_t rawTrials,std::size_t sampledFrames,bool preflight=false,const NativeCompositePublication* publication=nullptr) {
     return WrapNativeCandidateWindowFamilyExecution(std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight,true,publication);
 }
+// Execution6 records actual final model and historical measurement accounting
+// separately. Never manufacture an execution3/4/5 bound to a restored model.
+inline QJsonObject WrapNativeTerminalExecution(const NMSDK::TimeLearner::ConfiguredNativeTraining& configuration,
+    QJsonObject base,const QJsonObject& package,const QJsonValue& archive,const QJsonValue& actualModel,
+    std::size_t rawTrials,std::size_t sampledFrames,bool preflight,const NativeCompositePublication* publication) {
+    const auto configured=NMSDK::TimeLearner::EncodeConfiguredNativeTraining(configuration);
+    Require(configured.value("schema_version")==QJsonValue(9),"terminal_execution_requires_configuration9");
+    const QJsonValue baseSchema=base.value("schema_version");
+    Require(baseSchema==QJsonValue(1),"terminal_execution_live_finalization_not_yet_supported");
+    Require(rawTrials<=9007199254740991ULL && sampledFrames<=9007199254740991ULL,
+        "terminal_execution_inexact_counter");
+    Require(actualModel==base.value("model_revision"),"terminal_execution_actual_model_binding");
+    base["base_schema_version"]=baseSchema;base["schema_version"]=6;
+    base["model_semantic_hash"]=actualModel;base["terminal_selection"]=configured.value("terminal_selection");
+    base["terminal_boundary"]=QJsonValue(QJsonValue::Null);base["source_measurements"]=QJsonValue(QJsonValue::Null);
+    base["native_execution_counts"]=QJsonObject{{"native_trials",double(rawTrials)},{"sampled_frames",double(sampledFrames)}};
+    if(package.isEmpty()) {
+        Require(archive.isNull(),"terminal_execution_archive_without_package");
+        Require(!preflight || (rawTrials==0 && sampledFrames==0),"terminal_preflight_has_execution");
+        return Signed(base);
+    }
+    Require(!preflight && package.value("schema_version")==QJsonValue(8) &&
+        package.value("model_revision")==actualModel && package.value("terminal_policy")==configured.value("terminal_selection"),
+        "terminal_execution_package_or_policy_binding");
+    Require(publication!=nullptr,"terminal_execution_requires_checked_publication");
+    const auto deliveries=publication->RecoveryDeliveries(package,archive);
+    const auto history=Object(package.value("historical_state"));const auto sourceSchema=history.value("schema_version");
+    const auto event=package.value("terminal_event");
+    base["terminal_boundary"]=QJsonObject{{"package_sha256",package.value("sha256")},
+        {"actual_model_revision",package.value("model_revision")},{"actual_model_epoch",package.value("model_epoch")},
+        {"historical_package_sha256",history.value("sha256")},{"historical_model_revision",history.value("model_revision")},
+        {"historical_model_epoch",history.value("model_epoch")},
+        {"terminal_event_sha256",event.isNull()?QJsonValue(QJsonValue::Null):Object(event).value("sha256")},
+        {"terminal_journal_sha256",NmsdkTools::CanonicalModelDataSha256(QJsonObject{{"entries",Array(package.value("terminal_journal"))}})}};
+    QJsonObject measurements{{"protocol_schema_version",Object(history.value("protocol")).value("schema_version")},
+        {"measurement_method",QJsonValue(QJsonValue::Null)},{"measurement_archive",archive},
+        {"source_origin",QJsonValue(QJsonValue::Null)},{"attempt_counters",QJsonValue(QJsonValue::Null)},
+        {"archive_counters",QJsonValue(QJsonValue::Null)},{"recovery_ledger_sha256",QJsonValue(QJsonValue::Null)},
+        {"recovery_delivery_count",QJsonValue(QJsonValue::Null)}};
+    if(sourceSchema==QJsonValue(5) || sourceSchema==QJsonValue(6) || sourceSchema==QJsonValue(7)) {
+        Require(archive.isObject(),"terminal_execution_source_archive_missing");
+        const auto source=Object(history.value("measurement_archive"));const auto counters=Object(source.value("counters"));
+        measurements["measurement_method"]=NMSDK::TimeLearner::DeclaredWindowBasinResult::MethodId();
+        measurements["source_origin"]=source.value("source_origin");measurements["attempt_counters"]=counters.value("attempt");
+        measurements["archive_counters"]=counters.value("archive");
+        if(sourceSchema==QJsonValue(7)) {
+            measurements["recovery_ledger_sha256"]=Object(history.value("recovery_ledger")).value("sha256");
+            measurements["recovery_delivery_count"]=double(deliveries);
+        } else Require(deliveries==0,"terminal_execution_unexpected_recovery_deliveries");
+    } else Require(archive.isNull() && deliveries==0,"terminal_plain_execution_has_composite_archive");
+    base["source_measurements"]=measurements;return Signed(base);
+}
 inline QJsonObject WrapConfiguredNativeExecution(const NMSDK::TimeLearner::ConfiguredNativeTraining& configuration,QJsonObject base,
     const QJsonObject& package,const QJsonValue& archive,const QJsonValue& actualModel,std::size_t rawTrials,std::size_t sampledFrames,bool preflight=false,const NativeCompositePublication* publication=nullptr) {
     const auto schema=NMSDK::TimeLearner::EncodeConfiguredNativeTraining(configuration).value("schema_version");
+    if(schema==QJsonValue(9))return WrapNativeTerminalExecution(configuration,std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight,publication);
     if(schema==QJsonValue(8))return WrapNativeRecoveryCandidateWindowExecution(std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight,publication);
     if(schema==QJsonValue(7))return WrapNativeCandidateWindowExecution(std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight);
     if(schema==QJsonValue(6))return WrapNativeCompositeExecution(true,std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight);

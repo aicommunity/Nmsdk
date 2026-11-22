@@ -1,0 +1,90 @@
+{
+  "preflight": {
+    "caches": [
+      {
+        "path": "/home/user/timelearner-refactor/build-terminal-export-linux-a1",
+        "cmake": [
+          "CMAKE_BUILD_TYPE:STRING=Release",
+          "CMAKE_CACHEFILE_DIR:INTERNAL=/home/user/timelearner-refactor/build-terminal-export-linux-a1",
+          "CMAKE_HOME_DIRECTORY:INTERNAL=/home/user/timelearner-refactor/source-terminal-export-linux-a1"
+        ],
+        "files": 2456,
+        "git_metadata": false
+      },
+      {
+        "path": "/home/user/timelearner-refactor/build-terminal-recognition-sdk-a1",
+        "cmake": [
+          "CMAKE_BUILD_TYPE:STRING=Release",
+          "CMAKE_CACHEFILE_DIR:INTERNAL=/home/user/timelearner-refactor/build-terminal-recognition-sdk-a1",
+          "CMAKE_HOME_DIRECTORY:INTERNAL=/home/user/timelearner-refactor/source-terminal-recognition-sdk-a1"
+        ],
+        "files": 2456,
+        "git_metadata": false
+      }
+    ],
+    "uses": [],
+    "baseline_bytes": 70359076,
+    "baseline_native_bytes": 49629859
+  },
+  "retirement": {
+    "kind": "timelearner_confirmed_owned_build_cache_retirement",
+    "removed": [
+      {
+        "path": "/home/user/timelearner-refactor/build-terminal-export-linux-a1",
+        "logical_bytes": 214701558
+      },
+      {
+        "path": "/home/user/timelearner-refactor/build-terminal-recognition-sdk-a1",
+        "logical_bytes": 214547717
+      }
+    ],
+    "free_bytes_before": 1146908672,
+    "free_bytes_after": 1594294272,
+    "runtime_executable_unchanged": {
+      "path": "/home/user/timelearner-refactor/runtime-terminal-export-linux-a1/NeuroModelerConsole",
+      "sha256": "58673e1018ee82caa1fb17d43f23629e1b895f57312c5ea785d232c1aa5bdd3f",
+      "size": 27335856
+    },
+    "build_configuration_preserved": true,
+    "source_and_experiment_data_deleted": false,
+    "user_checkouts_changed": false,
+    "scientific_verdict": null
+  },
+  "admission_before_cleanup": {
+    "free_bytes": 1146859520,
+    "resources": {
+      "capacity": {
+        "disk_bytes": 15032385536,
+        "memory_bytes": 25769803776,
+        "slots": 1
+      },
+      "reserved": {
+        "disk_bytes": 0,
+        "memory_bytes": 0,
+        "slots": 0
+      }
+    },
+    "controls_exist": false,
+    "output_exists": false,
+    "files": [],
+    "source_native": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent"
+    },
+    "source_outer": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent"
+    }
+  },
+  "original_no_child_preflight_receipt": {
+    "reason": "",
+    "traceback": "Traceback (most recent call last):\n  File \"<string>\", line 8, in <module>\nAssertionError\n",
+    "scientific_verdict": null
+  },
+  "new_output_budget_bytes": 536870912,
+  "minimum_free_bytes": 536870912,
+  "baseline_measured_bytes": 70359076,
+  "source_experiment_data_deleted": false
+}

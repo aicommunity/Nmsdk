@@ -1,0 +1,131 @@
+{
+  "kind": "timelearner_closed_windows_sdk_artifact_audit",
+  "schema_version": 1,
+  "compiled_root": "7047c695dbf33c9a2901e4209f9425ca727085e8",
+  "pulse": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+  "original_build": {
+    "terminal.json": {
+      "kind": "timelearner_windows_sdk_build",
+      "build_accepted": false,
+      "scientific_models_executed": false,
+      "scientific_worker_admitted": false,
+      "scientific_verdict": null
+    },
+    "exception.json": {
+      "reason": "owned_build_not_accepted",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a1\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\sdk-build.py\", line 173, in main\n    require(result['execution'] == 'completed' and result['validity'] == 'valid' and\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            result.get('all_processes_closed') is True, 'owned_build_not_accepted')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-terminal-physical-data8-win-a1\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\sdk-build.py\", line 22, in require\n    raise RuntimeError(reason)\nRuntimeError: owned_build_not_accepted\n"
+    },
+    "build-result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "descendants_remaining",
+      "validity": "valid",
+      "reason": "descendants_remaining",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [
+        10752
+      ],
+      "all_processes_closed": true,
+      "cooperative_capture": "not_requested",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 12,
+      "wall_seconds": 2279.7906535000075,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-2cb67bbf-e69d-46ba-b436-072255982a2b"
+    },
+    "build-process/owned-process.json": {
+      "executable": "C:\\Windows\\System32\\cmd.exe",
+      "creation_filetime": "134395723910228896",
+      "pid": 16040,
+      "job_name": "Local\\TimeLearner-2cb67bbf-e69d-46ba-b436-072255982a2b",
+      "runtime_fingerprint": "ed83e2c9782702781791e8447e1188ddf107d66086394f37d20cb8de6c4d57cc",
+      "suspended_until_limits_applied": true
+    }
+  },
+  "original_kernel": {
+    "name": "Local\\TimeLearner-2cb67bbf-e69d-46ba-b436-072255982a2b",
+    "open_error": 2
+  },
+  "artifact_audit": {
+    "terminal.json": {
+      "audit_passed": true,
+      "compiled_tests_executed": false,
+      "original_build_outcome_unchanged": true,
+      "scientific_verdict": null,
+      "scientific_worker_admitted": false,
+      "wall_seconds": 43.607256899937056
+    },
+    "audit.json": {
+      "compiled_tests_executed": false,
+      "dependency_files": 17287,
+      "original_build_accepted": false,
+      "original_execution": "descendants_remaining",
+      "runtime_files": 62,
+      "scientific_verdict": null,
+      "scientific_worker_admitted": false,
+      "source_closure": {
+        "Bin": {
+          "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+          "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+          "status": ""
+        },
+        "Libraries/Nmsdk-MotionControlLib": {
+          "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "status": ""
+        },
+        "Libraries/Nmsdk-PulseLib": {
+          "head": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+          "recorded_gitlink": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+          "status": ""
+        },
+        "Libraries/Rdk-BasicLib": {
+          "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "status": ""
+        },
+        "Libraries/Rdk-CvBasicLib": {
+          "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "status": ""
+        },
+        "Libraries/Rdk-HardwareLib": {
+          "head": "de40b008e990105856726e01230dde19f42a90a9",
+          "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+          "status": ""
+        },
+        "Rdk": {
+          "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+          "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+          "status": ""
+        },
+        "root": {
+          "head": "7047c695dbf33c9a2901e4209f9425ca727085e8",
+          "status": ""
+        }
+      },
+      "source_commit": "7047c695dbf33c9a2901e4209f9425ca727085e8",
+      "targets": {
+        "NeuroModelerConsole.exe": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a1\\NeuroModelerConsole.exe",
+          "sha256": "2f2f8f34f3c5c07131ff1d21edbb94b00e5c326a46e898aa37e6e270708f9638",
+          "size": 12481024
+        },
+        "Test_PulseLib_StorageComponents.exe": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\runtime-terminal-physical-data8-win-a1\\Test_PulseLib_StorageComponents.exe",
+          "sha256": "77c96aab8d0db72433c0b4e1d7daf0b746e9db872264a295f7321268269f248f",
+          "size": 26913792
+        }
+      },
+      "verified_source_files": 5092
+    }
+  },
+  "artifact_audit_controls": "cd94f64059e261f463cdbced45920eb5edf7a76d",
+  "original_build_outcome_unchanged": true,
+  "whole_stage5_accepted": false,
+  "scientific_verdict": null
+}

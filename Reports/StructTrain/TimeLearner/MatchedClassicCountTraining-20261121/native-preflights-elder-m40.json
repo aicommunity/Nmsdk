@@ -1,0 +1,147 @@
+{
+  "kind": "timelearner_matched_count_native_preflights",
+  "schema_version": 1,
+  "tool_commit": "401339a0efa7be313385e91446932e2e96998d96",
+  "actual_cold_graph_equal_on_both_hosts": true,
+  "positive_factor_changes_real_graph": true,
+  "rows": [
+    {
+      "host": "elder",
+      "job": "s11-classic-count-preflight-elder-a1",
+      "terminal": {
+        "execution": "completed",
+        "validity": "valid",
+        "preflight_only": true,
+        "training_started": false,
+        "training_certificate_verified": false,
+        "scientific_verdict": null
+      },
+      "accepted": {
+        "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+        "same_actual_cold_graph_as_resistance_control": true,
+        "job_sha256": "1ae5c08b6a83718ed8c7468fdb7147baec9c89194e97b45709353cee23507243",
+        "factor_model_revision": "e23cda6cb58312d2e51a92df035baf9fb8629efc42aecbad4da1e39a47d7864e",
+        "factor_synapses": 2,
+        "initial_nodes": 44,
+        "factor_nodes": 45,
+        "training_started": false,
+        "scientific_verdict": null
+      },
+      "phases": {
+        "preflight": {
+          "execution": "completed",
+          "validity": "valid",
+          "analysis": {
+            "effective_initial_model_checked": true,
+            "model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+            "input_count": 4,
+            "integration_channels": 16,
+            "training_started": false,
+            "native_execution_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        "factor-preflight": {
+          "execution": "completed",
+          "validity": "valid",
+          "analysis": {
+            "effective_initial_model_checked": true,
+            "model_revision": "e23cda6cb58312d2e51a92df035baf9fb8629efc42aecbad4da1e39a47d7864e",
+            "input_count": 4,
+            "integration_channels": 16,
+            "training_started": false,
+            "native_execution_verified": false,
+            "evaluation_verdict": null
+          }
+        }
+      },
+      "outer_binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "d6e331024c018de09852ed5f94664a94793a9bd038aaef424e5d8b4de0bf1fd3",
+        "unit": "timelearner-057f9b61-0100-436e-9315-9eb3aa577495.service",
+        "invocation_id": "157f6ba729b449f1b4adc75f9dfa59e3",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-057f9b61-0100-436e-9315-9eb3aa577495.service",
+        "initial_main_pid": 2688241,
+        "initial_start_ticks": "485637158",
+        "sha256": "73e3980ec72f2f37418f0c217f592a1300cb40c308af68b505f52c50c47d346e"
+      },
+      "all_processes_closed": true,
+      "closed_children": 2,
+      "record_errors": [],
+      "disk_peak_increment": 5513216,
+      "minimum_free_bytes": 1181474816,
+      "scientific_verdict": null
+    },
+    {
+      "host": "m40",
+      "job": "s11-classic-count-preflight-m40-a1",
+      "terminal": {
+        "execution": "completed",
+        "validity": "valid",
+        "preflight_only": true,
+        "training_started": false,
+        "training_certificate_verified": false,
+        "scientific_verdict": null
+      },
+      "accepted": {
+        "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+        "same_actual_cold_graph_as_resistance_control": true,
+        "job_sha256": "85c7e46332113653d0055fc1f1634245171f25695b3d0f59b01ad89ad33c6153",
+        "factor_model_revision": "e23cda6cb58312d2e51a92df035baf9fb8629efc42aecbad4da1e39a47d7864e",
+        "factor_synapses": 2,
+        "initial_nodes": 44,
+        "factor_nodes": 45,
+        "training_started": false,
+        "scientific_verdict": null
+      },
+      "phases": {
+        "preflight": {
+          "execution": "completed",
+          "validity": "valid",
+          "analysis": {
+            "effective_initial_model_checked": true,
+            "model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+            "input_count": 4,
+            "integration_channels": 16,
+            "training_started": false,
+            "native_execution_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        "factor-preflight": {
+          "execution": "completed",
+          "validity": "valid",
+          "analysis": {
+            "effective_initial_model_checked": true,
+            "model_revision": "e23cda6cb58312d2e51a92df035baf9fb8629efc42aecbad4da1e39a47d7864e",
+            "input_count": 4,
+            "integration_channels": 16,
+            "training_started": false,
+            "native_execution_verified": false,
+            "evaluation_verdict": null
+          }
+        }
+      },
+      "outer_binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "f00c2a6a9ef153030be89d3ca5a59e4dc31489ebb0c65f9b894fd6b96b2be7a6",
+        "unit": "timelearner-7d7dbb02-d151-4c1a-97c7-bc8e4e141045.service",
+        "invocation_id": "7f6dd114dd7342778d88991ddfa3d495",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7d7dbb02-d151-4c1a-97c7-bc8e4e141045.service",
+        "initial_main_pid": 147886,
+        "initial_start_ticks": "436215399",
+        "sha256": "a38ebf359ef9b9130e12e44dffbe3741ec517e34d056d21483051ff9c835d142"
+      },
+      "all_processes_closed": true,
+      "closed_children": 2,
+      "record_errors": [],
+      "disk_peak_increment": 5529600,
+      "minimum_free_bytes": 325962534912,
+      "scientific_verdict": null
+    }
+  ],
+  "not_training_results": true,
+  "scientific_verdict": null
+}

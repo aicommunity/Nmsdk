@@ -1,0 +1,50 @@
+{
+  "kind": "timelearner_conditional_closed_count_audit",
+  "schema_version": 1,
+  "dispatch": {
+    "dispatched": true,
+    "job": "windows-closed-count-primary-audit-a1",
+    "controls_commit": "04b49e16a4002a54cf8b65efe6a84654270a0462",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{ED292A4E-BC47-4797-9453-5E4B47E15ED0}",
+      "execution_time_limit": "PT6H",
+      "task": "TimeLearner-windows-closed-count-primary-audit-a1",
+      "engine_pid": 2376
+    },
+    "source_root": "122dcb772be19a6bb1ff58813ef745fc6aecd37e",
+    "source_training_job": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-m4-a3",
+    "expected_original_native_pid": 19640,
+    "waiting_before_memory_reservation": true,
+    "memory_bytes": 17179869184,
+    "maximum_wait_seconds": 10800,
+    "maximum_audit_seconds": 7200,
+    "original_Train_not_restarted": true,
+    "scientific_verdict": null
+  },
+  "observed_queue_owner": {
+    "pid": 19664,
+    "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+    "creation_filetime": "134397711801247201"
+  },
+  "observed_kernel_owner": {
+    "pid": 19664,
+    "same_creation": true,
+    "same_executable": true,
+    "running": true
+  },
+  "state": {
+    "reason": "waiting_for_exact_native_Train",
+    "source_native_running": true,
+    "elapsed_wait_seconds": 370.0397587000625,
+    "observed_utc": "2026-11-21T21:52:30.376293+00:00",
+    "no_Train_restarted": true,
+    "scientific_verdict": null
+  },
+  "native_training_not_restarted": true,
+  "full_primary_audit_complete": false,
+  "package_single_decode_runtime_verified": false,
+  "scientific_verdict": null,
+  "public_dispatch_sha256": "1abc064015b206333b4d0a4bdf4e4f6a598a58d4f0332bf3bb15393423934c8a",
+  "public_observation_sha256": "7999174926709d22a11370693baf28db4c50247aea3b921cf1a9b07e8256a761"
+}

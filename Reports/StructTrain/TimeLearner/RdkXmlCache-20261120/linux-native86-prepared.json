@@ -1,0 +1,159 @@
+{
+  "kind": "timelearner_linux_native86_prepared",
+  "schema_version": 1,
+  "controls": {
+    "prepared": true,
+    "started": false,
+    "job": "s05-terminal-physical-data8-linux-m40-a4",
+    "controls": "83ad499a799bca610cd5175237681eeae32a393a",
+    "source": "/media/user/Data/TimeLearnerRefactor/source-terminal-physical-data8-linux-a4",
+    "root": "de5287ca0ae54dc1de9334992bec27c527543d6e",
+    "namespace_files": 4668,
+    "cases": 86,
+    "canonical_request": "/media/user/Data/TimeLearnerRefactor/requests/terminal-physical-data8-linux-a4/Docs/StructTrain/TimeLearner/ValidationPlans/M40TerminalPhysicalData8LinuxA4-20261120/canonical-request.json",
+    "native_job": "/media/user/Data/TimeLearnerRefactor/requests/terminal-physical-data8-linux-a4/Docs/StructTrain/TimeLearner/ValidationPlans/M40TerminalPhysicalData8LinuxA4-20261120/native-job.json",
+    "live_runtime_protected": "/media/user/Data/TimeLearnerRefactor/runtime-terminal-portable-sdk-a8",
+    "reservation_available": {
+      "disk_bytes": 21474836480,
+      "memory_bytes": 0,
+      "slots": 0
+    },
+    "reason_not_started": "active_scientific_Train_owns_the_only_slot",
+    "scientific_verdict": null
+  },
+  "source": {
+    "kind": "timelearner_terminal_data8_linux_source_prepared",
+    "schema_version": 1,
+    "source": "/media/user/Data/TimeLearnerRefactor/source-terminal-physical-data8-linux-a4",
+    "root": "de5287ca0ae54dc1de9334992bec27c527543d6e",
+    "pulse": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+    "rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+    "records": [
+      {
+        "role": "Rdk",
+        "commit": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "transport": "exact remote Git shallow filtered fetch"
+      },
+      {
+        "role": "Bin",
+        "commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "transport": "verified preexisting exact Git projection pack"
+      },
+      {
+        "role": "Libraries/Rdk-BasicLib",
+        "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "transport": "verified preexisting exact Git projection pack"
+      },
+      {
+        "role": "Libraries/Rdk-CvBasicLib",
+        "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "transport": "verified preexisting exact Git projection pack"
+      },
+      {
+        "role": "Libraries/Rdk-HardwareLib",
+        "commit": "de40b008e990105856726e01230dde19f42a90a9",
+        "transport": "verified preexisting exact Git projection pack"
+      },
+      {
+        "role": "Libraries/Nmsdk-MotionControlLib",
+        "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "transport": "verified preexisting exact Git projection pack"
+      },
+      {
+        "role": "Libraries/Nmsdk-PulseLib",
+        "commit": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+        "transport": "exact remote Git shallow filtered fetch"
+      }
+    ],
+    "source_closure": {
+      "root": {
+        "head": "de5287ca0ae54dc1de9334992bec27c527543d6e",
+        "status": ""
+      },
+      "Bin": {
+        "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+        "status": ""
+      },
+      "Libraries/Nmsdk-MotionControlLib": {
+        "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "status": ""
+      },
+      "Libraries/Nmsdk-PulseLib": {
+        "recorded_gitlink": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+        "head": "0cf335ae08347f2d042d7eb3f5d05ef70a55789c",
+        "status": ""
+      },
+      "Libraries/Rdk-BasicLib": {
+        "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "status": ""
+      },
+      "Libraries/Rdk-CvBasicLib": {
+        "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "status": ""
+      },
+      "Libraries/Rdk-HardwareLib": {
+        "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+        "head": "de40b008e990105856726e01230dde19f42a90a9",
+        "status": ""
+      },
+      "Rdk": {
+        "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+        "status": ""
+      }
+    },
+    "build_started": false,
+    "native_started": false,
+    "active_sources_and_runtime_unchanged": true,
+    "scientific_verdict": null
+  },
+  "capacity_observations": {
+    "elder": {
+      "host": "Elder-1",
+      "database": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+      "capacity": {
+        "disk_bytes": 15032385536,
+        "memory_bytes": 25769803776,
+        "slots": 1
+      },
+      "reserved": {
+        "disk_bytes": 12884901888,
+        "memory_bytes": 17179869184,
+        "slots": 1
+      },
+      "available": {
+        "disk_bytes": 2147483648,
+        "memory_bytes": 8589934592,
+        "slots": 0
+      },
+      "held_leases": 1,
+      "read_only": true
+    },
+    "m40": {
+      "host": "M40",
+      "database": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+      "capacity": {
+        "disk_bytes": 34359738368,
+        "memory_bytes": 34359738368,
+        "slots": 1
+      },
+      "reserved": {
+        "disk_bytes": 12884901888,
+        "memory_bytes": 34359738368,
+        "slots": 1
+      },
+      "available": {
+        "disk_bytes": 21474836480,
+        "memory_bytes": 0,
+        "slots": 0
+      },
+      "held_leases": 1,
+      "read_only": true
+    }
+  },
+  "scientific_verdict": null
+}

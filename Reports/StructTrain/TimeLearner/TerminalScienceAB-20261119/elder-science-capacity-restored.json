@@ -1,0 +1,48 @@
+{
+  "catalog": "operations/timelearner/elder-archived-duplicates-retired-20261119-b1.json",
+  "record": {
+    "kind": "timelearner_verified_archived_duplicate_retirement",
+    "schema_version": 1,
+    "retired": true,
+    "plan": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/49/49ff6eb1c350b8d4b35a7f4431f6a71f791175116207d6d6461533972c06fc43",
+      "sha256": "49ff6eb1c350b8d4b35a7f4431f6a71f791175116207d6d6461533972c06fc43",
+      "bytes": 2171137
+    },
+    "deleted_files": 4064,
+    "deleted_logical_bytes": 12913000466,
+    "free_before": 2103238656,
+    "free_after": 15023624192,
+    "roots": [
+      "/home/user/timelearner-refactor/readbacks/s11-frozen-protocol-finite-elder-a4",
+      "/home/user/timelearner-refactor/readbacks/s11-frozen-order-native-elder-a2",
+      "/home/user/timelearner-refactor/readbacks/s11-fast-threshold-primary-replay-elder-a2"
+    ],
+    "kernel_units_checked": 11,
+    "unmatched_files_retained": true,
+    "source_or_runtime_deleted": false,
+    "unique_primary_deleted": false,
+    "scientific_verdict": null
+  },
+  "local_archive_duplicate_retirement": {
+    "kind": "timelearner_verified_local_archive_duplicate_retirement",
+    "schema_version": 1,
+    "deleted_path": "/home/user/timelearner-refactor/operations/terminal-console-remaining12-primary-a1/primary.tar.gz",
+    "bytes": 54046962,
+    "retained_primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/17/172c58cf55fb7a17bd10dd59a790ddce64c66a26a2e25a2631db3952f2cf0852",
+      "sha256": "172c58cf55fb7a17bd10dd59a790ddce64c66a26a2e25a2631db3952f2cf0852",
+      "bytes": 54046962
+    },
+    "free_before": 15023611904,
+    "free_after": 15077666816,
+    "unique_primary_deleted": false,
+    "scientific_verdict": null
+  }
+}

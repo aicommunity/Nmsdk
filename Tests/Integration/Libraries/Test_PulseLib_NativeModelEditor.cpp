@@ -24,6 +24,7 @@
 #include "TimeLearner/NativeTrainingBindings.h"
 #include "TimeLearner/NativePostTuneBoundary.h"
 #include "TimeLearner/NativeFinalizationBoundary.h"
+#include "TimeLearner/NativeMeasuredTrainingBoundary.h"
 #include "TimeLearner/NumericChecks.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
@@ -42,6 +43,7 @@
 #include <type_traits>
 #include <limits>
 #include <chrono>
+#include <thread>
 #include <algorithm>
 #include <cmath>
 #include <functional>
@@ -208,7 +210,9 @@ void Artifact(const std::string& name,const QByteArray& data)
     {
         EXPECT_TRUE(QDir().mkpath(QString::fromLocal8Bit(directory)));
         QFile file(QString::fromLocal8Bit(directory)+"/"+QString::fromStdString(name));
-        ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));ASSERT_EQ(file.write(data),data.size());
+        ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly))
+            <<file.fileName().toStdString()<<": "<<file.errorString().toStdString();
+        ASSERT_EQ(file.write(data),data.size());
     }
 }
 QProcessEnvironment LearnedStateChildEnvironment(const std::string& name,const QString& temporaryRoot)
@@ -2163,11 +2167,58 @@ TEST(NativeLearnedState,FreshProcessImport)
         ASSERT_EQ(result.status,NativeModelBuildStatus::Adopted)<<result.reason;
         // A boundary export is taken before Reset clears temporary controller
         // state. Frozen evaluation must not depend on a surviving stop status.
-        const auto importedBoundary=(package["schema_version"]==QJsonValue(3) || package["schema_version"]==QJsonValue(4))?
+        const auto importedBoundary=(package["schema_version"]==QJsonValue(3) || package["schema_version"]==QJsonValue(4) || package["schema_version"]==QJsonValue(8))?
             target->ExportNativeLearnedState(stopped?"native-stopped-boundary-fixture-v1":"native-learned-boundary-fixture-v1"):QJsonObject{};
         const auto importedHistory=target->NativeTrainingController().CapacitanceHistory();
+        std::optional<NativeTrainingPlan> terminalWarm;
+        if(package["schema_version"]==QJsonValue(8)) {
+            EXPECT_EQ(importedBoundary.value("schema_version"),QJsonValue(8));
+            EXPECT_EQ(importedBoundary.value("terminal_journal"),package.value("terminal_journal"));
+            EXPECT_EQ(importedBoundary.value("terminal_event"),package.value("terminal_event"));
+            EXPECT_FALSE(target->NativeTrainingController().Search());
+            if(stopped){terminalWarm=target->NativeTrainingController().Plan();terminalWarm->search.runId="fresh-terminal-warm-control";}
+        }
         target->Build();target->Init();model->Init();model->Reset();
         ASSERT_TRUE(target->NativeModelEditFailure().empty())<<target->NativeModelEditFailure();
+        ASSERT_TRUE(target->IsReady() && target->IsInit());
+        // Start only after the same native lifecycle used by the frozen probe.
+        // Importing DATA intentionally does not initialize a fresh learner.
+        if(terminalWarm) {
+            const auto actualCapacitance=target->ReadNativeTrainingCapacitanceWitness();
+            const auto historyBeforeWarm=target->NativeTrainingController().CapacitanceHistory();
+            if(historyBeforeWarm) {
+                ASSERT_TRUE(actualCapacitance);
+                // The original L3 transcript and restored L2 model may have
+                // different inventories. Import/Init/Reset must not rewrite
+                // either side merely to make warm admission pass.
+                ASSERT_TRUE(importedHistory);
+                EXPECT_EQ(EncodeNativeTrainingCapacitanceWitness(historyBeforeWarm->witnesses.at(
+                    historyBeforeWarm->currentWitnessId)),EncodeNativeTrainingCapacitanceWitness(
+                    importedHistory->witnesses.at(importedHistory->currentWitnessId)));
+            }
+            RecordNativeTrainingProof(*terminalWarm,"terminal_imported_warm",c.model.branch?1u:c.model.inputs.size(),"_trial_");
+            target->IsNeedToTrain=true;target->BeginNativeTraining(*terminalWarm);
+            ASSERT_TRUE(target->NativeTrainingController().State()==NativeTrainingState::CapturingReferences ||
+                target->NativeTrainingController().State()==NativeTrainingState::Searching)<<target->NativeTrainingController().Reason();
+            if(historyBeforeWarm) {
+                const auto& admitted=target->NativeTrainingController().CapacitanceHistory();ASSERT_TRUE(admitted);
+                EXPECT_EQ(EncodeNativeTrainingCapacitanceWitness(admitted->witnesses.at(admitted->currentWitnessId)),
+                    EncodeNativeTrainingCapacitanceWitness(*actualCapacitance));
+            }
+            target->IsNeedToTrain=false;
+            ASSERT_EQ(target->NativeTrainingController().State(),NativeTrainingState::Finished);
+            ASSERT_EQ(target->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+            EXPECT_EQ(target->NativeTrainingController().SessionAttempt(),std::size_t(package.value("session_attempt").toDouble())+1);
+            const auto warmExport=target->ExportNativeLearnedBoundary("native-stopped-boundary-fixture-v1");const auto& warmPackage=warmExport.learnedState;
+            EXPECT_EQ(warmPackage.value("schema_version"),QJsonValue(8));
+            EXPECT_EQ(warmPackage.value("terminal_journal"),package.value("terminal_journal"));
+            EXPECT_EQ(warmPackage.value("model_revision"),package.value("model_revision"));
+            EXPECT_EQ(warmPackage.value("model_epoch"),package.value("model_epoch"));
+            auto warmPrepared=PrepareNativeLearnedState(warmPackage,core.storage,core.environment,"native-stopped-boundary-fixture-v1");
+            EXPECT_EQ(warmPrepared->service.State(),NativeTrainingState::Finished);EXPECT_FALSE(warmPrepared->service.Search());
+            Artifact("terminal_imported_warm_control.json",QJsonDocument(warmPackage).toJson());
+            Artifact("terminal_imported_warm_summary.json",QJsonDocument(warmExport.summary).toJson());
+        }
         auto neuron=target->template GetComponentL<NPulseNeuron>("Neuron",true);
         auto source=target->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(neuron);ASSERT_TRUE(source);
         const auto identity=NmsdkTools::IdentifyModel(neuron,{{&source->Output,"burst"}});
@@ -2195,6 +2246,11 @@ TEST(NativeLearnedState,FreshProcessImport)
         EXPECT_EQ(NmsdkTools::IdentifyModel(neuron,{{&source->Output,"burst"}})["sha256"],package["model_revision"]);
         QJsonObject record{{"model",identity},{"certificate",stopped?QJsonValue(QJsonValue::Null):QJsonValue(EncodeTrainingCertificate(*target->NativeTrainingController().Certificate()))},
             {"probe",EncodeNativeProbeEvidence(*probe)},{"need",target->IsNeedToTrain.GetData()}};
+        if(package["schema_version"]==QJsonValue(8)) {
+            QJsonArray journal;for(const auto& e:target->NativeTrainingController().TerminalJournal())journal.append(e);
+            EXPECT_EQ(QJsonValue(journal),package.value("terminal_journal"));record["terminal_journal"]=journal;
+            EXPECT_EQ(target->ImportedNativeCapacitanceState(),package.value("capacitance_state").toObject());
+        }
         if(package["schema_version"]==QJsonValue(2) || (package["schema_version"]==QJsonValue(3) || package["schema_version"]==QJsonValue(4)))
         {
             EXPECT_EQ(target->ImportedNativeCapacitanceState(),package["capacitance_state"].toObject());
@@ -3394,6 +3450,8 @@ struct BoundaryExtras {
     std::optional<CapacitanceSearchPolicy> capacitanceSearch;
     std::optional<bool> expectedFrozenSpikes;
     bool ownerRecognitionSource=false;
+    bool persistenceReadout=false;
+    bool inspectMeasuredNativeBoundary=false;
 };
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
     std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.,unsigned n0Repeats=1,
@@ -3421,6 +3479,10 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(productionCalibrationSeed)suffix+="_production_calibration_seed";
     if(trackedCapacitance)suffix+="_history";
     if(capacitanceSearch)suffix+="_csearch";
+    // Persistence and readout intentionally exercise the same native path.
+    // Keep both proofs when their cases share one execution output directory.
+    if(extras.persistenceReadout)suffix+="_persistence";
+    if(extras.inspectMeasuredNativeBoundary)suffix+="_measured_native_boundary";
     ASSERT_FALSE(trackedCapacitance && !withCapacitance);
     if(extras.ownerRecognitionSource)
     {
@@ -3446,7 +3508,8 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         if(productionCalibrationSeed)
         {
             ASSERT_EQ(normalization,1);ASSERT_EQ(inputs,2u);ASSERT_DOUBLE_EQ(sync,.02);
-            ASSERT_EQ(recognition,RecognitionCase::CalibratedThreshold);
+            ASSERT_TRUE(recognition && (*recognition==RecognitionCase::CalibratedThreshold ||
+                *recognition==RecognitionCase::ThresholdPotential || *recognition==RecognitionCase::ThresholdCandidates));
             ASSERT_FALSE(withCapacitance);ASSERT_FALSE(withDormantCapacitance);
             // The downstream calibration contract needs a measured Exact
             // source. Reuse the declared, successful production cold-Train
@@ -3456,7 +3519,8 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
             auto& c=*configuredPlan;c.model.initialIsi=rig.isi;
             c.model.allocatedCableLengths.assign(rig.branch?1u:inputs,1);
             for(auto& input:c.model.inputs){input.attachment=1;input.synapses=1;input.resistance=86.e6;}
-            c.duration=rig.duration;c.windows.assign(inputs,{0.,rig.duration});c.maximumSamples=540;
+            c.duration=rig.duration;c.windows.assign(inputs,{0.,rig.duration});
+            c.maximumSamples=std::size_t(std::ceil(rig.duration*frequency))+20;
             c.maximumReferenceProbes=2;c.maximumModelSeconds=180.;
             c.search.maximumProbes=256;c.search.maximumEdits=128;c.search.maximumCandidatesPerInput=80;
             c.search.maximumSweeps=1;c.search.resistanceSubdivisionDepth=4;
@@ -3636,6 +3700,10 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         plan.maximumWallSeconds=1800.;
     }
     std::ostringstream trace;std::size_t observations=0;
+    std::map<std::string,QJsonObject> witnessedModels,witnessedDatasets,witnessedCapacitances;
+    std::shared_ptr<const NativeMeasuredTrainingBoundary> firstRetainedBoundary;
+    QJsonObject firstRetainedIdentity;bool changedAfterFirstBoundary=false;
+    std::size_t lastBoundaryEpoch=std::numeric_limits<std::size_t>::max();
     plan.probe.onPrepared=[&](const auto&,const auto&) {
         trace.str({});trace.clear();trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
         for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)trace<<",soma"<<i;trace<<'\n';
@@ -3647,13 +3715,65 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         const auto base=rig.name+"_state_trial_"+std::to_string(++observations);
         Artifact(base+".json",QJsonDocument(EncodeNativeProbeEvidence(result)).toJson());
         Artifact(base+".csv",QByteArray::fromStdString(trace.str()));
+        if(extras.inspectMeasuredNativeBoundary && result.requestedSpecification && result.observation && result.observation->valid)
+        {
+            const auto neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+            const auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+            const auto generator=dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);
+            const auto id=result.requestedSpecification->trialId;
+            witnessedModels[id]=NmsdkTools::IdentifyModel(neuron.Get(),{{&generator->Output,"burst"}});
+            witnessedDatasets[id]=NmsdkTools::IdentifyModel(dataset.Get());
+            witnessedCapacitances[id]=rig.learner->OwnedNativeCapacitanceState();
+        }
     };
     if(configured)rig.learner->SetConfiguredNativeEvidenceSinks({plan.probe.onPrepared,plan.probe.onSample,plan.observationSink});
     else rig.learner->BeginNativeTraining(plan);
     for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
-    {ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    {
+        ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+        if(extras.inspectMeasuredNativeBoundary)
+        {
+            const auto& retained=rig.learner->NativeTrainingController().SelectedNativeBoundary();
+            if(retained && !firstRetainedBoundary){firstRetainedBoundary=retained;firstRetainedIdentity=retained->NeuronIdentity();}
+            const auto epoch=rig.learner->NativeTrainingController().ModelEpoch();
+            if(firstRetainedBoundary && epoch!=lastBoundaryEpoch)
+            {
+                lastBoundaryEpoch=epoch;
+                EXPECT_EQ(firstRetainedBoundary->NeuronIdentity(),firstRetainedIdentity);
+                const auto neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+                const auto generator=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+                changedAfterFirstBoundary=changedAfterFirstBoundary ||
+                    NmsdkTools::IdentifyModel(neuron.Get(),{{&generator->Output,"burst"}})!=firstRetainedIdentity;
+            }
+        }
+    }
     const auto& service=rig.learner->NativeTrainingController();
     const bool diagnostic=expectation==BoundaryExpectation::DiagnosticSweepBudget;
+    if(extras.inspectMeasuredNativeBoundary)
+    {
+        const auto& retained=service.SelectedNativeBoundary();ASSERT_TRUE(retained)<<service.Reason();
+        ASSERT_TRUE(service.Search());ASSERT_TRUE(service.Search()->SelectedMeasuredBoundary());
+        const auto& chosen=service.Search()->SelectedMeasuredBoundary()->candidate;
+        EXPECT_EQ(retained->Selection().serial,service.Search()->SelectedMeasuredBoundary()->serial);
+        EXPECT_EQ(retained->Selection().candidate.fullParameters,chosen.fullParameters);
+        EXPECT_EQ(retained->Selection().candidate.capacitance,chosen.capacitance);
+        ASSERT_TRUE(witnessedModels.contains(chosen.trialId));
+        EXPECT_EQ(retained->NeuronIdentity(),witnessedModels.at(chosen.trialId));
+        EXPECT_EQ(retained->DatasetIdentity(),witnessedDatasets.at(chosen.trialId));
+        EXPECT_EQ(retained->CapacitanceState(),witnessedCapacitances.at(chosen.trialId));
+        EXPECT_EQ(retained->NeuronIdentity()["sha256"].toString().toStdString(),chosen.modelRevision);
+        EXPECT_GT(retained->RetainedBytes(),0u);EXPECT_LE(retained->RetainedBytes(),NativeMeasuredTrainingBoundary::MaximumRetainedBytes);
+        EXPECT_EQ(retained->StorageFingerprint().size(),64u);
+        ASSERT_TRUE(firstRetainedBoundary);
+        EXPECT_EQ(firstRetainedBoundary->NeuronIdentity(),firstRetainedIdentity);
+        if(diagnostic)EXPECT_TRUE(changedAfterFirstBoundary);
+        Artifact(rig.name+"_retained_native_boundary.json",QJsonDocument(QJsonObject{
+            {"kind","native_measured_training_boundary_readback"},{"schema_version",1},
+            {"selection_serial",double(retained->Selection().serial)},{"trial_id",QString::fromStdString(chosen.trialId)},
+            {"neuron_identity",retained->NeuronIdentity()},{"dataset_identity",retained->DatasetIdentity()},
+            {"capacitance_state",retained->CapacitanceState()},{"storage_fingerprint",QString::fromStdString(retained->StorageFingerprint())},
+            {"first_snapshot_survived_later_edits",changedAfterFirstBoundary},{"terminal_graph_restoration_implemented",false}}).toJson());
+    }
     // Preserve the real failure boundary before a downstream transport
     // precondition assertion. Missing convergence must never erase the search
     // summary or be mistaken for an import/calibration failure.
@@ -4076,21 +4196,41 @@ TEST(NativeThresholdContract,SignedIaFImageProducesMeasuredSpike)
     dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();
 }
 
-template<class Learner> void CalibrationBoundaryFixture(int normalization,unsigned frequency,bool potential=false)
+template<class Learner> void CalibrationBoundaryFixture(int normalization,unsigned frequency,bool potential=false,
+    bool persistence=false)
 {
     // Explicit transport-fixture allowance, recorded in configuration/state.
     // ASan at 20 kHz exhausted 600 s while building the source model. Production
     // defaults, model-time budget, tolerances and search bounds are unchanged.
+    // These tests exercise downstream readout/candidate persistence after an
+    // actual Exact source. N1 uses the already declared production seed domain,
+    // with the original .02 tolerance and measured per-input amplitude goal.
+    // The old .08/narrow-domain heterogeneous source remains an explicit
+    // NativeCalibrationPrecondition negative at both frequencies below.
     LearnedBoundary<Learner>(normalization,.02,frequency,2,true,
-        potential?RecognitionCase::ThresholdPotential:RecognitionCase::ThresholdCandidates,false,1.,1,1800.);
+        potential?RecognitionCase::ThresholdPotential:RecognitionCase::ThresholdCandidates,false,1.,1,1800.,
+        BoundaryExpectation::Completed,false,false,
+        {.productionCalibrationSeed=normalization==1,.persistenceReadout=persistence});
 }
 TEST(NativeThresholdCandidate,ClassicN0_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(0,2000);}
 TEST(NativeThresholdPotential,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000,true);}
 TEST(NativeThresholdPotential,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000,true);}
 TEST(NativeThresholdPotential,ClassicN1_20000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,20000,true);}
 TEST(NativeThresholdPotential,BranchN1_20000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,20000,true);}
-TEST(NativeCalibrationPersistence,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000,true);}
-TEST(NativeCalibrationPersistence,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000,true);}
+TEST(NativeCalibrationPersistence,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000,true,true);}
+TEST(NativeCalibrationPersistence,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000,true,true);}
+TEST(NativeMeasuredBoundary,ClassicN1CompletedPhysicalSnapshot)
+{LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::ThresholdPotential,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.productionCalibrationSeed=true,.inspectMeasuredNativeBoundary=true});}
+TEST(NativeMeasuredBoundary,BranchN1CompletedPhysicalSnapshot)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdPotential,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.productionCalibrationSeed=true,.inspectMeasuredNativeBoundary=true});}
+TEST(NativeMeasuredBoundary,ClassicN0SnapshotIsNotOverwrittenBySubsequentEdits)
+{LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::DiagnosticSweepBudget,false,false,{.inspectMeasuredNativeBoundary=true});}
+TEST(NativeMeasuredBoundary,BranchN0SnapshotIsNotOverwrittenBySubsequentEdits)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::DiagnosticSweepBudget,false,false,{.inspectMeasuredNativeBoundary=true});}
+TEST(NativeMeasuredBoundary,ClassicOwnedHeterogeneousAndDormantCapacitanceSnapshot)
+{LearnedBoundary<NNeuronTimeLearner>(0,.2,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::Completed,true,true,{.inspectMeasuredNativeBoundary=true});}
+TEST(NativeMeasuredBoundary,BranchOwnedHeterogeneousAndDormantCapacitanceSnapshot)
+{LearnedBoundary<NNeuronTimeLearnerBranch>(0,.2,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::Completed,true,true,{.inspectMeasuredNativeBoundary=true});}
 TEST(NativeCalibrationTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
 TEST(NativeCalibrationTransaction,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
 TEST(NativePostTuneTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
@@ -4108,6 +4248,8 @@ TEST(NativeCalibratedModelSpec2,BranchN1_2000){LearnedBoundary<NNeuronTimeLearne
 // when Train exhausted its sweep budget before producing a certificate.
 TEST(NativeCalibrationPrecondition,LegacyClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
 TEST(NativeCalibrationPrecondition,LegacyBranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
+TEST(NativeCalibrationPrecondition,LegacyClassicN1_20000){LearnedBoundary<NNeuronTimeLearner>(1,.02,20000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
+TEST(NativeCalibrationPrecondition,LegacyBranchN1_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,20000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
 TEST(NativeCalibrationPrecondition,LegacyClassicModelSpec2N1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget,false,false,{.modelSpec2=true});}
 TEST(NativeCalibrationPrecondition,LegacyBranchModelSpec2N1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget,false,false,{.modelSpec2=true});}
 TEST(NativeThresholdCandidate,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000);}
@@ -6199,6 +6341,242 @@ TEST(NativeTrainingTermination,BranchN0SweepBudgetBoundary){NativeSweepBudgetBou
 TEST(NativeTrainingTermination,BranchN1SweepBudgetBoundary){NativeSweepBudgetBoundary<NNeuronTimeLearnerBranch>(1);}
 
 namespace {
+enum class TerminalFixtureKind { Restore,ExternalStop,OwnerReset,NoEditAllowance,AttachRollback };
+template<class Owner> void NativeTerminalPortableBoundary(EditingRig<Owner>& rig,const QJsonObject& expectedModel)
+{
+    const bool stopped=!rig.learner->NativeTrainingController().Certificate();
+    const std::string implementation=stopped?"native-stopped-boundary-fixture-v1":"native-learned-boundary-fixture-v1";
+    const auto clock=rig.environment->GetTime().GetTime();std::vector<NativeProbeSample> before;
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+        [&](const auto& sample){before.push_back(sample);}).status,NativeProbeStatus::Completed);
+    const auto exported=rig.learner->ExportNativeLearnedBoundary(implementation);const auto& package=exported.learnedState;
+    EXPECT_EQ(exported.summary,EncodeNativeTrainingState(rig.learner->NativeTrainingController(),rig.Revision(),rig.learner->ReadNativeParameters()));
+    if(package.value("historical_state").toObject().value("configuration").toObject().value("schema_version")==QJsonValue(9)) {
+        const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+        EXPECT_THROW(PrepareNativeLearnedState(package.value("historical_state").toObject(),core.storage,core.environment,implementation),
+            std::invalid_argument);
+    }
+    Artifact(rig.name+"_terminal_package.json",QJsonDocument(package).toJson());
+    Artifact(rig.name+"_terminal_summary.json",QJsonDocument(exported.summary).toJson());
+    const auto test=::testing::UnitTest::GetInstance()->current_test_info();ASSERT_TRUE(test);
+    Artifact(rig.name+"_terminal_case.json",QJsonDocument(QJsonObject{
+        {"kind","native_terminal_portable_case"},{"schema_version",1},
+        {"test_id",QString::fromStdString(std::string(test->test_suite_name())+"/"+test->name())},
+        {"package",QString::fromStdString(rig.name+"_terminal_package.json")},
+        {"summary",QString::fromStdString(rig.name+"_terminal_summary.json")},
+        {"primary_prefix",QString::fromStdString(rig.name+"_terminal_source_")},
+        {"warm_folder",stopped?QJsonValue(QString::fromStdString("native-child-processes/"+rig.name+"_terminal")):QJsonValue(QJsonValue::Null)}}).toJson());
+    ASSERT_EQ(package.value("schema_version"),QJsonValue(8));EXPECT_EQ(package.value("certificate").isNull(),stopped);
+    EXPECT_EQ(exported.summary.value("schema_version"),QJsonValue(9));
+    EXPECT_EQ(exported.summary.value("actual_model_revision"),expectedModel.value("sha256"));
+    const auto historicalSummary=exported.summary.value("historical_summary").toObject();ASSERT_FALSE(historicalSummary.isEmpty());
+    const auto history=package.value("historical_state").toObject();
+    EXPECT_EQ(historicalSummary.value("model_epoch"),history.value("model_epoch"));
+    EXPECT_EQ(historicalSummary.value("actual_model_revision"),history.value("model_revision"));
+    EXPECT_EQ(historicalSummary.value("actual_parameters"),history.value("trained_inputs"));
+    EXPECT_EQ(historicalSummary.value("certificate"),history.value("certificate"));
+    EXPECT_EQ(package.value("model_revision"),expectedModel.value("sha256"));
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();const auto oldTime=rig.environment->GetTime().GetTime();
+    auto restored=PrepareNativeLearnedState(package,core.storage,core.environment,implementation);
+    EXPECT_EQ(rig.environment->GetTime().GetTime(),oldTime);EXPECT_EQ(rig.Revision(),expectedModel.value("sha256").toString().toStdString());
+    EXPECT_EQ(restored->service.State(),NativeTrainingState::Finished);EXPECT_FALSE(restored->service.Search());EXPECT_EQ(!restored->service.Certificate(),stopped);
+    EXPECT_EQ(restored->service.ModelEpoch(),rig.learner->NativeTrainingController().ModelEpoch());
+    EXPECT_EQ(restored->service.TranscriptModelEpoch(),rig.learner->NativeTrainingController().TranscriptModelEpoch());
+    EXPECT_EQ(restored->parameters,rig.learner->ReadNativeParameters());EXPECT_EQ(restored->capacitanceState,rig.learner->OwnedNativeCapacitanceState());
+    // Rehashing the container cannot turn a substituted actual epoch or graph
+    // parameter into a valid learned model. Exercise the production importer.
+    for(int mutation=0;mutation<3;++mutation) {
+        auto damaged=package;
+        if(mutation==0)damaged["model_epoch"]=damaged.value("model_epoch").toDouble()+1.;
+        if(mutation==1){auto values=damaged.value("trained_inputs").toArray();auto p=values.at(0).toObject();p["resistance"]=p.value("resistance").toDouble()*1.01;values[0]=p;damaged["trained_inputs"]=values;}
+        if(mutation==2){auto physical=damaged.value("neuron").toObject();auto images=physical.value("class_definitions").toArray();ASSERT_FALSE(images.isEmpty());images.removeLast();physical["class_definitions"]=images;damaged["neuron"]=physical;}
+        damaged.remove("sha256");damaged["sha256"]=NmsdkTools::CanonicalModelDataSha256(damaged);
+        EXPECT_THROW(PrepareNativeLearnedState(damaged,core.storage,core.environment,implementation),std::invalid_argument);
+    }
+    QTemporaryDir directory;ASSERT_TRUE(directory.isValid());const auto path=directory.path()+"/terminal.json",output=directory.path()+"/readback.json";
+    QFile serialized(path);ASSERT_TRUE(serialized.open(QIODevice::WriteOnly|QIODevice::NewOnly));ASSERT_GT(serialized.write(QJsonDocument(package).toJson()),0);serialized.close();
+    QProcess child;auto environment=LearnedStateChildEnvironment(rig.name+"_terminal",directory.path());
+    environment.insert("TIMELEARNER_LEARNED_IMPORT",path);environment.insert("TIMELEARNER_LEARNED_OUTPUT",output);
+    environment.insert("TIMELEARNER_LEARNED_START_US",QString::number(clock));child.setProcessEnvironment(environment);
+    child.setProgram(QString::fromStdString(NmsdkTests::PulseLibTestExecutable()));child.setArguments({"--gtest_filter=NativeLearnedState.FreshProcessImport"});
+    child.start();ASSERT_TRUE(child.waitForStarted(30000));ASSERT_TRUE(child.waitForFinished(120000));
+    Artifact(rig.name+"_terminal_fresh_process.log",child.readAllStandardOutput()+child.readAllStandardError());ASSERT_EQ(child.exitCode(),0);
+    QFile result(output);ASSERT_TRUE(result.open(QIODevice::ReadOnly));const auto record=QJsonDocument::fromJson(result.readAll()).object();
+    EXPECT_EQ(record.value("model").toObject(),expectedModel);EXPECT_EQ(record.value("certificate"),package.value("certificate"));EXPECT_EQ(record.value("need"),QJsonValue(false));
+    EXPECT_EQ(record.value("terminal_journal"),package.value("terminal_journal"));
+    Artifact(rig.name+"_terminal_fresh_process.json",QJsonDocument(record).toJson());
+    std::ostringstream trace;trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<"time,stimulus";
+    for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)trace<<",soma"<<i;trace<<'\n';
+    for(const auto& sample:before){trace<<sample.time<<','<<sample.stimulus;for(double v:sample.potentials)trace<<','<<v;trace<<'\n';}
+    QFile csv(output+".csv");ASSERT_TRUE(csv.open(QIODevice::ReadOnly));const auto raw=csv.readAll();
+    EXPECT_EQ(raw,QByteArray::fromStdString(trace.str()));Artifact(rig.name+"_terminal_fresh_process.csv",raw);
+}
+template<class Learner> void NativeTerminalRestore(TerminalFixtureKind kind,int normalization,bool withCapacitance=false)
+{
+    using Owner=ImportRollbackLearner<Learner>;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    const std::string className="TerminalRestoreOwner_"+std::string(std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value?"Branch":"Classic")+
+        "_N"+std::to_string(normalization)+"_"+std::to_string(int(kind))+(withCapacitance?"_C":"");
+    core.storage->AddClass(new UComponentFactoryMethod(core.storage,+[]()->UComponent*{return new Owner;},className),className);
+    EditingRig<Owner> rig(2000,normalization,"terminal_restore_"+std::to_string(int(kind))+(withCapacitance?"_C":""),
+        false,2,true,2,1,false,className);
+    if(withCapacitance) {NativeCapacitanceCorrection correction;ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,correction));}
+    // This fixture must observe an actual unmeasured edit before forcing the
+    // real deadline. Windows A1 exhausted10s before that precondition; C0 also
+    // serializes a native witness per trial. Use the existing30s C0 allowance
+    // for both engineering fixtures; preserve model-time/edit budgets and
+    // scientific tolerances.
+    auto plan=TrainingPlan(rig);plan.maximumWallSeconds=30.;plan.maximumModelSeconds=20.;
+    plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
+    plan.recordCapacitanceHistory=withCapacitance;
+    plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
+    if(kind==TerminalFixtureKind::NoEditAllowance)plan.search.maximumEdits=2;
+    std::map<std::string,std::vector<NativeProbeSample>> measuredWaves;
+    std::vector<NativeProbeSample> samples;
+    plan.probe.onPrepared=[&](const auto&,const auto&){samples.clear();};
+    plan.probe.onSample=[&](const auto& sample){samples.push_back(sample);};
+    plan.observationSink=[&](const NativeProbeResult& result) {
+        if(result.requestedSpecification && result.observation && result.observation->valid)
+            measuredWaves[result.requestedSpecification->trialId]=samples;
+    };
+    RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount,"_terminal_source_");
+    const auto fixtureWallStart=NativeTrainingWallTime();
+    rig.learner->BeginNativeTraining(plan);
+    const double deadline=NativeTrainingWallTime()+plan.maximumWallSeconds+.01;
+    bool sawUnmeasuredEdit=false;
+    for(unsigned tick=0;;++tick)
+    {
+        const auto state=rig.learner->NativeTrainingController().State();
+        if(state==NativeTrainingState::Finalizing || state==NativeTrainingState::Finished)break;
+        ASSERT_LT(tick,50000u);
+        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+        const auto& service=rig.learner->NativeTrainingController();const auto& selected=service.SelectedNativeBoundary();
+        if(!sawUnmeasuredEdit && selected && service.State()==NativeTrainingState::Searching &&
+            service.ModelEpoch()>selected->Selection().candidate.modelEpoch)
+        {
+            auto neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+            auto source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+            if(NmsdkTools::IdentifyModel(neuron.Get(),{{&source->Output,"burst"}})!=selected->NeuronIdentity())
+            {
+                sawUnmeasuredEdit=true;
+                // Exercise the real wall deadline after a real native edit.
+                // No forged clock, synthetic observation or manual model edit.
+                const auto remaining=deadline-NativeTrainingWallTime();
+                if(remaining>0.)std::this_thread::sleep_for(std::chrono::duration<double>(remaining));
+            }
+        }
+    }
+    const auto& service=rig.learner->NativeTrainingController();
+    Artifact(rig.name+"_terminal_selection_precondition.json",QJsonDocument(QJsonObject{
+        {"kind","native_terminal_selection_test_precondition"},{"schema_version",2},
+        {"state",NativeTrainingStateName(service.State())},{"outcome",TrainingStatusName(service.Outcome())},
+        {"reason",QString::fromStdString(service.Reason())},{"real_unmeasured_edit_observed",sawUnmeasuredEdit},
+        {"measurement_wall_budget",plan.maximumWallSeconds},{"finalization_wall_budget",plan.terminalSelection->maximumWallSeconds},
+        {"fixture_scope","native_restore_lifecycle_transport"},{"owned_C0_primary",withCapacitance},
+        {"wall_elapsed",NativeTrainingWallTime()-fixtureWallStart},
+        {"valid_raw_trials",double(measuredWaves.size())},{"selected_boundary_available",bool(service.SelectedNativeBoundary())},
+        {"search_probes",service.Search()?QJsonValue(double(service.Search()->IssuedProbes())):QJsonValue(QJsonValue::Null)},
+        {"measured_candidates",service.Search()?QJsonValue(double(service.Search()->Evidence().size())):QJsonValue(QJsonValue::Null)},
+        {"maximum_edits",double(plan.search.maximumEdits)},{"native_plan_only",true}}).toJson());
+    ASSERT_TRUE(sawUnmeasuredEdit)<<service.Reason();ASSERT_EQ(service.State(),NativeTrainingState::Finalizing)<<service.Reason();
+    const auto selected=service.SelectedNativeBoundary();ASSERT_TRUE(selected);
+    auto source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    const auto before=NmsdkTools::IdentifyModel(rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true).Get(),{{&source->Output,"burst"}});
+    const auto beforeDataset=NmsdkTools::IdentifyModel(rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get());
+    const auto beforeCapacitance=rig.learner->OwnedNativeCapacitanceState();
+    const auto previousEpoch=service.ModelEpoch();const auto transcriptEpoch=service.TranscriptModelEpoch();
+    if(kind==TerminalFixtureKind::ExternalStop)rig.learner->IsNeedToTrain=false;
+    if(kind==TerminalFixtureKind::OwnerReset)rig.learner->Reset();
+    if(kind==TerminalFixtureKind::AttachRollback)rig.learner->failNeuronAttach=true;
+    rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    rig.ports={{&rig.source->Output,"burst"}};
+    const auto after=NmsdkTools::IdentifyModel(rig.neuron.Get(),rig.ports);
+    Artifact(rig.name+"_terminal_selection_readback.json",QJsonDocument(QJsonObject{
+        {"kind","native_terminal_selection_test_readback"},{"schema_version",1},
+        {"before",before},{"after",after},{"selected",selected->NeuronIdentity()},
+        {"previous_epoch",double(previousEpoch)},{"actual_epoch",double(service.ModelEpoch())},
+        {"transcript_epoch",double(service.TranscriptModelEpoch())},{"event",service.TerminalSelectionEvent()},
+        {"actual_C_state",rig.learner->OwnedNativeCapacitanceState()},
+        {"selected_C_state",selected->CapacitanceState()}}).toJson());
+    ASSERT_FALSE(service.Certificate());
+    if(kind==TerminalFixtureKind::OwnerReset)
+    {
+        EXPECT_EQ(service.State(),NativeTrainingState::Idle);EXPECT_FALSE(service.SelectedNativeBoundary());
+        EXPECT_FALSE(service.TerminalSourceBoundary());
+        EXPECT_TRUE(service.TerminalSelectionEvent().isEmpty());EXPECT_EQ(after,before);return;
+    }
+    ASSERT_EQ(service.State(),NativeTrainingState::Finished)<<service.Reason();
+    if(kind==TerminalFixtureKind::ExternalStop)
+    {
+        EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);EXPECT_EQ(after,before);
+        EXPECT_FALSE(service.TerminalSourceBoundary());
+        EXPECT_EQ(service.ModelEpoch(),previousEpoch);EXPECT_EQ(service.TerminalSelectionTransactions(),0u);
+        ASSERT_NO_FATAL_FAILURE(NativeTerminalPortableBoundary(rig,after));return;
+    }
+    Artifact(rig.name+"_terminal_selection.json",QJsonDocument(service.TerminalSelectionEvent()).toJson());
+    ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();
+    EXPECT_EQ(service.TranscriptModelEpoch(),transcriptEpoch);EXPECT_TRUE(service.RequiresTerminalSelectionArchive());
+    EXPECT_EQ(service.TerminalSelectionEvent()["portable_export_supported"],QJsonValue(true));
+    EXPECT_EQ(service.TerminalSelectionEvent()["fresh_all_input_verification"],QJsonValue(false));
+    const auto sourceBoundary=service.TerminalSourceBoundary();ASSERT_TRUE(sourceBoundary);
+    EXPECT_EQ(sourceBoundary->NeuronIdentity(),before);
+    EXPECT_EQ(sourceBoundary->DatasetIdentity(),beforeDataset);
+    EXPECT_EQ(sourceBoundary->CapacitanceState(),beforeCapacitance);
+    EXPECT_EQ(sourceBoundary->NeuronSnapshot().value("identity"),QJsonValue(before));
+    EXPECT_EQ(sourceBoundary->DatasetSnapshot().value("identity"),QJsonValue(beforeDataset));
+    EXPECT_EQ(service.TerminalSelectionEvent().value("source_neuron_identity"),QJsonValue(before));
+    EXPECT_EQ(service.TerminalSelectionEvent().value("source_dataset_identity"),QJsonValue(beforeDataset));
+    EXPECT_EQ(service.TerminalSelectionEvent().value("source_capacitance_state"),QJsonValue(beforeCapacitance));
+    Artifact(rig.name+"_terminal_source_graph.json",QJsonDocument(QJsonObject{
+        {"kind","native_terminal_source_graph_readback"},{"schema_version",1},
+        {"neuron",sourceBoundary->NeuronSnapshot()},{"dataset",sourceBoundary->DatasetSnapshot()},
+        {"capacitance_state",sourceBoundary->CapacitanceState()},
+        {"historical_epoch",double(transcriptEpoch)}}).toJson());
+    if(kind==TerminalFixtureKind::NoEditAllowance)
+    {
+        EXPECT_EQ(after,before);EXPECT_EQ(service.TerminalSelectionEvent()["status"],QJsonValue("budget_exhausted"));
+        EXPECT_EQ(service.TerminalSelectionTransactions(),0u);EXPECT_EQ(service.ModelEpoch(),previousEpoch);
+        ASSERT_NO_FATAL_FAILURE(NativeTerminalPortableBoundary(rig,after));return;
+    }
+    if(kind==TerminalFixtureKind::AttachRollback)
+    {
+        EXPECT_EQ(after,before);EXPECT_EQ(service.TerminalSelectionEvent()["status"],QJsonValue("rejected"));
+        EXPECT_EQ(service.TerminalSelectionTransactions(),1u);EXPECT_EQ(service.ModelEpoch(),previousEpoch+1);
+        ASSERT_NO_FATAL_FAILURE(NativeTerminalPortableBoundary(rig,after));return;
+    }
+    EXPECT_EQ(service.TerminalSelectionEvent()["status"],QJsonValue("restored"));
+    EXPECT_EQ(after,selected->NeuronIdentity());EXPECT_EQ(service.ModelEpoch(),previousEpoch+1);
+    EXPECT_EQ(service.TerminalSelectionTransactions(),1u);
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),selected->Selection().candidate.fullParameters);
+    EXPECT_EQ(rig.learner->OwnedNativeCapacitanceState(),selected->CapacitanceState());
+    ASSERT_TRUE(measuredWaves.contains(selected->Selection().candidate.trialId));
+    std::vector<NativeProbeSample> replay;
+    const auto observed=rig.Probe(selected->Selection().candidate.inputIndex,nullptr,nullptr,
+        PeakSelectionPolicy::AssignedBurstWave,true,false,[&](const auto& sample){replay.push_back(sample);});
+    ASSERT_EQ(observed.status,NativeProbeStatus::Completed);
+    SameNativeWave(measuredWaves.at(selected->Selection().candidate.trialId),replay);
+    ASSERT_NO_FATAL_FAILURE(NativeTerminalPortableBoundary(rig,after));
+}
+}
+TEST(NativeTerminalSelection,ClassicN0DeadlineRestoresFullMeasuredModel){NativeTerminalRestore<NNeuronTimeLearner>(TerminalFixtureKind::Restore,0);}
+TEST(NativeTerminalSelection,BranchN0DeadlineRestoresFullMeasuredModel){NativeTerminalRestore<NNeuronTimeLearnerBranch>(TerminalFixtureKind::Restore,0);}
+TEST(NativeTerminalSelection,ClassicN1DeadlineRestoresFullMeasuredModel){NativeTerminalRestore<NNeuronTimeLearner>(TerminalFixtureKind::Restore,1);}
+TEST(NativeTerminalSelection,BranchN1DeadlineRestoresFullMeasuredModel){NativeTerminalRestore<NNeuronTimeLearnerBranch>(TerminalFixtureKind::Restore,1);}
+TEST(NativeTerminalSelection,ClassicExternalStopDoesNotRestore){NativeTerminalRestore<NNeuronTimeLearner>(TerminalFixtureKind::ExternalStop,0);}
+TEST(NativeTerminalSelection,BranchExternalStopDoesNotRestore){NativeTerminalRestore<NNeuronTimeLearnerBranch>(TerminalFixtureKind::ExternalStop,1);}
+TEST(NativeTerminalSelection,ClassicResetRevokesPendingSelection){NativeTerminalRestore<NNeuronTimeLearner>(TerminalFixtureKind::OwnerReset,0);}
+TEST(NativeTerminalSelection,BranchResetRevokesPendingSelection){NativeTerminalRestore<NNeuronTimeLearnerBranch>(TerminalFixtureKind::OwnerReset,1);}
+TEST(NativeTerminalSelection,ClassicCapacitanceStateAndWaveformAreRestored){NativeTerminalRestore<NNeuronTimeLearner>(TerminalFixtureKind::Restore,0,true);}
+TEST(NativeTerminalSelection,BranchCapacitanceStateAndWaveformAreRestored){NativeTerminalRestore<NNeuronTimeLearnerBranch>(TerminalFixtureKind::Restore,1,true);}
+TEST(NativeTerminalSelection,ClassicInsufficientEditReservationDoesNotMutate){NativeTerminalRestore<NNeuronTimeLearner>(TerminalFixtureKind::NoEditAllowance,0);}
+TEST(NativeTerminalSelection,BranchInsufficientEditReservationDoesNotMutate){NativeTerminalRestore<NNeuronTimeLearnerBranch>(TerminalFixtureKind::NoEditAllowance,1);}
+TEST(NativeTerminalSelection,ClassicFailedAttachmentRetainsOriginalModel){NativeTerminalRestore<NNeuronTimeLearner>(TerminalFixtureKind::AttachRollback,0);}
+TEST(NativeTerminalSelection,BranchFailedAttachmentRetainsOriginalModel){NativeTerminalRestore<NNeuronTimeLearnerBranch>(TerminalFixtureKind::AttachRollback,1);}
+
+namespace {
 template<class Learner> void NativeFiniteCandidateRanking(int normalization)
 {
     EditingRig<Learner> rig(2000,normalization,"finite_ranking_zero_sync",false,2,true);
@@ -6726,3 +7104,36 @@ TEST(CandidateRecoveryConfiguration,ClassicN0){CandidateRecoveryCodec<NNeuronTim
 TEST(CandidateRecoveryConfiguration,ClassicN1){CandidateRecoveryCodec<NNeuronTimeLearner>(1);}
 TEST(CandidateRecoveryConfiguration,BranchN0){CandidateRecoveryCodec<NNeuronTimeLearnerBranch>(0);}
 TEST(CandidateRecoveryConfiguration,BranchN1){CandidateRecoveryCodec<NNeuronTimeLearnerBranch>(1);}
+
+namespace {
+template<class Learner> void NativeTerminalCompletedPlainPackage(int normalization)
+{
+    const std::string prefix=std::string("terminal_plain_completed_")+
+        (std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value?"branch":"classic")+"_N"+std::to_string(normalization);
+    EditingRig<Learner> rig(2000,normalization,prefix);rig.learner->ControllerVersion.SetDataDirect(2);
+    ASSERT_EQ(rig.learner->SyncCapacitanceTrim.GetData(),0);
+    // Engineering transport control with the pre-existing broad sync tolerance.
+    // It must not be reported as scientific convergence at the .02 default.
+    auto plan=TrainingPlan(rig,.2);plan.terminalSelection=NativeTerminalSelectionPolicy{30.};
+    plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
+    for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
+    plan.search.bounds.clear();for(const auto& p:rig.learner->ReadNativeParameters())
+        plan.search.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
+    plan.search.maximumCandidatesPerInput=1;plan.search.maximumSweeps=1;plan.search.n0CandidateRepeats=1;
+    RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount,"_terminal_source_");
+    rig.learner->IsNeedToTrain=true;rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)
+    {ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*rig.frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();
+    ASSERT_TRUE(service.Certificate());EXPECT_TRUE(service.TerminalSelectionEvent().isEmpty());EXPECT_TRUE(service.TerminalJournal().empty());
+    EXPECT_EQ(service.ModelEpoch(),service.TranscriptModelEpoch());
+    auto neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    auto source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    const auto identity=NmsdkTools::IdentifyModel(neuron.Get(),{{&source->Output,"burst"}});
+    ASSERT_NO_FATAL_FAILURE(NativeTerminalPortableBoundary(rig,identity));
+}
+}
+TEST(NativeTerminalPlainPackage,ClassicCompletedN0WithoutTransition){NativeTerminalCompletedPlainPackage<NNeuronTimeLearner>(0);}
+TEST(NativeTerminalPlainPackage,BranchCompletedN0WithoutTransition){NativeTerminalCompletedPlainPackage<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeTerminalPlainPackage,ClassicCompletedN1WithoutTransition){NativeTerminalCompletedPlainPackage<NNeuronTimeLearner>(1);}
+TEST(NativeTerminalPlainPackage,BranchCompletedN1WithoutTransition){NativeTerminalCompletedPlainPackage<NNeuronTimeLearnerBranch>(1);}

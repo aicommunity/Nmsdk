@@ -1,0 +1,171 @@
+{
+  "kind": "timelearner_fresh_short_train_readout_publication",
+  "schema_version": 1,
+  "date": "2026-11-17",
+  "source_actor": "bc81b4c4bd953e310d13aad3626414d495bf8f9b",
+  "native_root": "9b7fb0eac7107093d2fd87748b85c532c4f2ad9e",
+  "native_pulse": "9883f9493d0672e603dfb4a03dc572955469ccdf",
+  "runtime_fingerprint": "f46d94b6fe3979663b8432250136da36a3419d8dc2f1e26d26b2d4f392bab28c",
+  "fresh_train_jobs": [
+    "s10-finite-train-native-m40-a2"
+  ],
+  "native_train_cases": 2,
+  "model_seconds_each": 120,
+  "training_outcome": "external_stop",
+  "training_certificate_present": false,
+  "full_759_probe_oom_resolved": false,
+  "native_evaluation_observations": 32,
+  "baseline": {
+    "threshold": 100,
+    "counts_each": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7
+    }
+  },
+  "candidate": {
+    "classic_threshold": 0.02277503092148453,
+    "branch_threshold": 0.03939337360819445,
+    "counts_each": {
+      "TP": 1,
+      "FP": 6,
+      "FN": 0,
+      "TN": 1
+    }
+  },
+  "working_example_criterion_met": false,
+  "independent_evaluation": false,
+  "bundles": [
+    {
+      "collector": "s11-fresh-train-baseline-primary-m40-a1",
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6a/6a86940f1486ca6754a211bcf99f70f2d02a86312d6eb4fac432fbe5f49e74fd",
+        "sha256": "6a86940f1486ca6754a211bcf99f70f2d02a86312d6eb4fac432fbe5f49e74fd",
+        "bytes": 10020292
+      },
+      "bundle_manifest": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/09/09dc0c2cdf6b76eda08621fb499280d8ba3715340a8041e48ea7a0cc15bb4b40",
+        "sha256": "09dc0c2cdf6b76eda08621fb499280d8ba3715340a8041e48ea7a0cc15bb4b40",
+        "bytes": 191784
+      },
+      "members": 942,
+      "expanded_bytes": 749312747
+    },
+    {
+      "collector": "s11-fresh-candidate-report-primary-m40-a1",
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/72/727d27a71ff04b53ff3fc75c73f7b5ca413766f12e629886801230c28d8ca2e0",
+        "sha256": "727d27a71ff04b53ff3fc75c73f7b5ca413766f12e629886801230c28d8ca2e0",
+        "bytes": 627172180
+      },
+      "bundle_manifest": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/3d/3d44a16b17d28e5b53b4aa0a2053fd294a951ddeb3e2e625260bbd432b9216b6",
+        "sha256": "3d44a16b17d28e5b53b4aa0a2053fd294a951ddeb3e2e625260bbd432b9216b6",
+        "bytes": 5881759
+      },
+      "members": 23472,
+      "expanded_bytes": 2138963217
+    }
+  ],
+  "provenance_primary": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/eb/eb39b4e94e27552f5219ba266aa6aa75b1d5af3c9ce6ac9a8584e8441d554324",
+    "sha256": "eb39b4e94e27552f5219ba266aa6aa75b1d5af3c9ce6ac9a8584e8441d554324",
+    "bytes": 4770612
+  },
+  "provenance_files": 261,
+  "temporal_cache": {
+    "kind": "timelearner_fresh_matrix_temporal_cache",
+    "schema_version": 1,
+    "renderer_job": "s11-fresh-matrices-report-m40-a1",
+    "source": "82281d3cd01cf62cc650f0d78441b5c727e73bff",
+    "renderer_controls": "4326942015145acb77263dbacec97bc6863c25b6",
+    "cache_relative": "report-cache/2026-11-17/fresh-n4-matrices-a1",
+    "cache_entrypoint": "index.html",
+    "gallery_files": 22983,
+    "gallery_bytes": 1587199708,
+    "cache_inventory": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/6e/6e7521c363b5e108b31ebb7f793ee7785872702ef690d4682948042fc159fcee",
+      "sha256": "6e7521c363b5e108b31ebb7f793ee7785872702ef690d4682948042fc159fcee",
+      "bytes": 4194576
+    },
+    "visual_selection": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/8a/8ade6b6b0d82401703de07cc8f245ebf78764be4ecf9b66699e3466c9c27b515",
+      "sha256": "8ade6b6b0d82401703de07cc8f245ebf78764be4ecf9b66699e3466c9c27b515",
+      "bytes": 11080
+    },
+    "native_observations": 32,
+    "trial_soma_pairs": 80,
+    "automated_report_passed": 1,
+    "selected_review_required": 33,
+    "representative_visual_review_complete": false,
+    "all_figures_manually_reviewed": false,
+    "scientific_verdict": null
+  },
+  "visual_selection": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/f6/f67fa96b508bc03bea6661e463a45cffda07baed3654661e4a5e0cd019e38fa5",
+    "sha256": "f67fa96b508bc03bea6661e463a45cffda07baed3654661e4a5e0cd019e38fa5",
+    "bytes": 12008
+  },
+  "representative_visual_review_complete": true,
+  "all_figures_manually_reviewed": false,
+  "combined_contract_tests_passed": 70,
+  "all_published_source_processes_closed": true,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "generated_binary_in_root_git": false,
+  "catalog_relative": "experiments/2026-11-17/fresh-n4-readouts/primary-a1.json",
+  "visual_acceptance": {
+    "kind": "timelearner_representative_temporal_visual_publication",
+    "schema_version": 1,
+    "selection": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/f6/f67fa96b508bc03bea6661e463a45cffda07baed3654661e4a5e0cd019e38fa5",
+      "sha256": "f67fa96b508bc03bea6661e463a45cffda07baed3654661e4a5e0cd019e38fa5",
+      "bytes": 12008
+    },
+    "visual_acceptance": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d2/d2c67e47cafc80f3dba4cd77c87639fe2e3227d417c94ee2e7139603c69cd6b5",
+      "sha256": "d2c67e47cafc80f3dba4cd77c87639fe2e3227d417c94ee2e7139603c69cd6b5",
+      "bytes": 22094
+    },
+    "representative_visual_review_complete": true,
+    "reviewed_figures": 33,
+    "all_figures_manually_reviewed": false,
+    "generated_png_figures": 7630,
+    "scientific_verdict": null,
+    "generated_binary_in_root_git": false,
+    "cache_relative": "report-cache/2026-11-17/fresh-n4-matrices-a1",
+    "cache_entrypoint": "index.html"
+  },
+  "temporal_cache_initial_selection_retained": true
+}

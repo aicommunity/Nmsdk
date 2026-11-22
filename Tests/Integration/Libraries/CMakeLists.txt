@@ -7,6 +7,7 @@ set(PULSELIB_TEST_OUTPUT_DIR "${DEPLOY_ROOT}")
 set(NMSDK_TRAINING_ALGORITHM_SOURCE_ROOT "${CMAKE_SOURCE_DIR}")
 set(NMSDK_TRAINING_ALGORITHM_RUNTIME "${PULSELIB_TEST_OUTPUT_DIR}")
 include("${CMAKE_CURRENT_LIST_DIR}/TrainingAlgorithms.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/NativeJson.cmake")
 
 add_executable(Test_Rdk_RuntimeDescriptions
     Test_Rdk_RuntimeDescriptions.cpp ../Support/ProbeAlgorithmMain.cpp
@@ -189,8 +190,11 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_ProbeObservation.cpp
     Test_PulseLib_NativeProbe.cpp
     Test_PulseLib_NativeExecution.cpp
+    Test_PulseLib_NativeJobSource.cpp
+    Test_PulseLib_NativeJson.cpp
     Test_PulseLib_SinglePulseCharacterization.cpp
     Test_PulseLib_PreparedModel.cpp
+    Test_PulseLib_PhysicalModelData.cpp
     Test_PulseLib_FinalVerification.cpp
     Test_PulseLib_BoundedTraining.cpp
     Test_PulseLib_N0Geometry.cpp
