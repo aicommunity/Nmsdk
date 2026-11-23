@@ -84,3 +84,14 @@ def condition(job, design, runtime, *, threshold):
     return dict(condition=spec.to_object(), condition_fingerprint=spec.fingerprint,
         artifacts={item['sha256']:item for item in artifacts.values()},
         descriptor_integrity_only=True, scientific_verdict=None)
+
+
+def run_case(declaration, runtime_path, output, *, run_id, predecessor, cadence,
+             reset_policy, maximum_wall_seconds, process_policy):
+    """Execute both actual patterns with the ordinary native runtime and scorer."""
+    from .frozen_physical_trial_study import run_declared_case
+    return run_declared_case(declaration, runtime_path, output, run_id=run_id,
+        study=dict(predecessor=predecessor, cadence=cadence, reset_policy=reset_policy),
+        declare_job=declare_job, bind_condition=condition, expected_trials=2,
+        protocol_id=PROTOCOL, result_kind='timelearner_frozen_predecessor_reset_result',
+        maximum_wall_seconds=maximum_wall_seconds, process_policy=process_policy)

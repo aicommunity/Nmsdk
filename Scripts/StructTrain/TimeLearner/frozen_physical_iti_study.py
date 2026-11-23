@@ -9,7 +9,7 @@ from copy import deepcopy
 
 from .condition import ConditionSpec, artifact
 from .model_identity import canonical_model_sha256 as sha
-from .native_evidence import after, equal, number, require
+from .native_evidence import equal, number, require
 from .native_pipeline_worker import validate_job
 from .runtime import file_record, runtime_content_identity
 
@@ -110,64 +110,9 @@ def condition(job, design, runtime, *, threshold):
 def run_case(declaration, runtime_path, output, *, run_id, rotation, cadence,
              reset_policy, maximum_wall_seconds, process_policy):
     """Use the ordinary native pipeline; resource admission belongs to its owner."""
-    from pathlib import Path
-    from .frozen_physical_source import frozen_physical_source
-    from .native_calibration_worker import _write
-    from .native_evidence import load
-    from .native_pipeline_worker import run_job
-    from .recognition_metrics import load_physical_model_data_evaluation
-    output = Path(output).resolve()
-    require(not output.exists(), 'iti_fresh_output_required')
-    source_root = Path(declaration['source_manifest']).resolve(strict=True).parent
-    require(not output.is_relative_to(source_root) and not source_root.is_relative_to(output),
-            'iti_output_overlaps_original_source')
-    runtime_path = Path(runtime_path).resolve(strict=True)
-    runtime_before = file_record(runtime_path)
-    runtime = load(runtime_path)
-    with frozen_physical_source(declaration) as source:
-        job, design = declare_job(source['job'],run_id,rotation=rotation,cadence=cadence,
-                                  reset_policy=reset_policy)
-        binding = condition(job,design,runtime,threshold=declaration['threshold'])
-        output.mkdir()
-        _write(output/'job.json',job)
-        _write(output/'design.json',design)
-        _write(output/'condition.json',binding)
-        run = run_job('physical-model-evaluate',output/'job.json',source['model_path'],
-            runtime_path,output/'run',maximum_wall_seconds,process_policy=process_policy)
-        require(run['execution'] == 'completed' and run['validity'] == 'valid', 'iti_native_run_incomplete')
-        metrics = run['analysis']['metrics']
-        require(metrics['validity'] == 'valid' and metrics['data_only'] and
-                metrics['model_revision'] == declaration['model_revision'] and
-                metrics['effective_threshold'] == declaration['threshold'] and
-                len(metrics['trials']) == 8, 'iti_frozen_model_or_complete_design_changed')
-        _, observations = load_physical_model_data_evaluation(output/'run/native/evaluation.json')
-        by_id = {o['trial_id']:o for o in observations}
-        ordered = [by_id[t['trial_id']] for t in job['trials']]
-        require(len(ordered) == len(by_id) == 8, 'iti_observation_set_changed')
-        last = ordered[-1]
-        quiet = number(last['end'])-number(last['stimulus_times'][-1])
-        require(quiet > 2 or equal(quiet,2), 'iti_final_quiet_tail_incomplete')
-        rows = []
-        for index, observation in enumerate(ordered):
-            # The scorer has already checked every complete sample window,
-            # event count and the absence of gaps between consecutive windows.
-            rows.append(dict(trial_id=observation['trial_id'],sample_id=observation['sample_id'],
-                reset_policy=observation['reset_policy'],stimulus_times=observation['stimulus_times'],
-                spike_times=observation['spike_times'],
-                events_before_current_first_input=[t for t in observation['spike_times']
-                    if after(observation['stimulus_times'][0],t)],
-                first_input_interval_from_previous=None if index == 0 else
-                    observation['stimulus_times'][0]-ordered[index-1]['stimulus_times'][0]))
-        terminal = dict(kind='timelearner_frozen_cadence_reset_result',schema_version=1,
-            execution='completed',validity='valid',protocol_id=PROTOCOL,
-            model_revision=declaration['model_revision'],threshold=declaration['threshold'],design=design,
-            condition_fingerprint=binding['condition_fingerprint'],counts=metrics['pooled_counts'],
-            trials=metrics['trials'],actual_timing_and_events=rows,final_quiet_tail_seconds=quiet,
-            frozen_model_verified=run['analysis']['frozen_model_verified'],
-            complete_contiguous_observations_verified=True,threshold_selected=False,
-            training_performed=False,source_training_certificate_inferred=False,
-            carryover_events_not_causally_assigned_to_a_single_pattern=True,
-            scientific_verdict=None)
-    require(file_record(runtime_path) == runtime_before, 'iti_runtime_changed')
-    _write(output/'terminal.json',terminal)
-    return terminal
+    from .frozen_physical_trial_study import run_declared_case
+    return run_declared_case(declaration, runtime_path, output, run_id=run_id,
+        study=dict(rotation=rotation, cadence=cadence, reset_policy=reset_policy),
+        declare_job=declare_job, bind_condition=condition, expected_trials=8,
+        protocol_id=PROTOCOL, result_kind='timelearner_frozen_cadence_reset_result',
+        maximum_wall_seconds=maximum_wall_seconds, process_policy=process_policy)

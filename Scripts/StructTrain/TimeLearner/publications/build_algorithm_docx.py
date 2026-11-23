@@ -59,6 +59,15 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
     if fc and (fc.get('kind')!='timelearner_algorithm_illustration_catalog' or fc.get('schema_version')!=1):
         raise ValueError('Known illustration catalog required')
     trial_figures=fc.get('trials',[]);concepts={c['id']:c for c in fc.get('concepts',[])}
+    supplementary_records=fc.get('supplementary',[])
+    supplementary={c['id']:c for c in supplementary_records}
+    if len(supplementary)!=len(supplementary_records):
+        raise ValueError('Duplicate supplementary illustration ID')
+    for topology in ('classic','branch'):
+        for section in content[topology].get('result_updates',[]):
+            for identity in section.get('figures',[]):
+                if identity not in supplementary:
+                    raise ValueError('Supplementary measured illustration missing: '+identity)
     details=fc.get('case_details',{})
     concept_ids=('assigned-peak','separate-early-peak','merged-peaks','missing-peak',
                  'incomplete-window','n0-measured-search','n1-measured-search')
@@ -71,7 +80,7 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
                     'test_configuration_ref','source_collection_ref','frequency_hz','measurement_version'):
             if details.get(identity,{}).get(key) is None:missing.append(identity+':'+key)
     if missing and not draft:raise ValueError('Measured figures/details missing: '+', '.join(missing))
-    for record in [*trial_figures,*concepts.values()]:
+    for record in [*trial_figures,*concepts.values(),*supplementary.values()]:
         rel=Path(record['png']['path']);path=(fr/rel).resolve(strict=True)
         if rel.is_absolute() or '..' in rel.parts or not path.is_relative_to(fr):raise ValueError('Local figure required')
         if path.stat().st_size!=record['png']['bytes'] or digest(path)!=record['png']['sha256']:
@@ -287,6 +296,20 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
             for f in selected:image(fr/f['png']['path'],f.get('short_caption',f['caption']),f['source_ref'])
             if not selected and draft:para('Черновик Графики правильных и ложных ответов подготавливаются.')
             para('Источник: '+case['source']['path']+'; версия '+case['source']['commit'])
+        updates=specific.get('result_updates',[])
+        if updates:
+            head('Дополнительные проверки обученных моделей')
+            for update in updates:
+                head(update['title'],2);paras(update['explanation'])
+                if update.get('table'):
+                    values=update['table']
+                    table(doc,values['headers'],values['rows'],values['widths'],
+                          title=values['title'])
+                for identity in update.get('figures',[]):
+                    record=supplementary[identity]
+                    image(fr/record['png']['path'],record['caption'],record['source_ref'])
+                for reference in update.get('sources',[]):
+                    para('Источник дополнительной проверки: '+reference)
         head('Реализация вычисления и владение моделью');paras(common['implementation'])
         diagram('logical-classes','Логическая UML диаграмма обязанностей компонентов обучения.')
         implementation_rows=[
