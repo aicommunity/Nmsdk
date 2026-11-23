@@ -1,0 +1,84 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/classic-measured-count-M4-elder/full-primary-z19.json",
+  "record": {
+    "kind": "timelearner_stopped_classic_full_primary_archive",
+    "schema_version": 1,
+    "published_at": "2026-11-23T09:41:13.202366+00:00",
+    "original_training_job": "classic-measured-count-m4-elder-k1",
+    "recognition_job": "classic-measured-count-recognition-elder-s1",
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/61/615cf8153358500a0646bc8ddbecbd91097ed32d7a76e478167a5a0298194ad0",
+      "sha256": "615cf8153358500a0646bc8ddbecbd91097ed32d7a76e478167a5a0298194ad0",
+      "bytes": 125624684
+    },
+    "bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7c/7c5de03b2ded81fbe1f8beefe63b8f6a138ccc802e3b78cd25e8537fe7c2f6fb",
+      "sha256": "7c5de03b2ded81fbe1f8beefe63b8f6a138ccc802e3b78cd25e8537fe7c2f6fb",
+      "bytes": 928140
+    },
+    "byte_verification": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/89/895d4f0878dab610d7b3f5cc423c845423b6521354b10df352713f8afe2842f9",
+      "sha256": "895d4f0878dab610d7b3f5cc423c845423b6521354b10df352713f8afe2842f9",
+      "bytes": 2377
+    },
+    "source_inventory": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b1/b151a67a56d44ccb144b9b6da8bd7e8439a72e3c3f7c1c756e4868f40c6aebdd",
+      "sha256": "b151a67a56d44ccb144b9b6da8bd7e8439a72e3c3f7c1c756e4868f40c6aebdd",
+      "bytes": 919727
+    },
+    "members": 5129,
+    "expanded_bytes": 12970896542,
+    "unique_content_bytes": 6098864768,
+    "all_members_verified": true,
+    "all_original_source_files_unchanged": true,
+    "closed_original_units": 12,
+    "independent_host_restoration_performed": false,
+    "source_Train_outcome": "budget_exhausted",
+    "training_completed": false,
+    "protocol": "historical_same_matrix",
+    "baseline_counts": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0
+    },
+    "actual_threshold_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "threshold": 0.02612267090554031,
+    "original_source_code": {
+      "root": "e1c97ac2042e155ffe907ad695975304d69664a2",
+      "PulseLib": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+      "Rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "Bin": "8cb6dba07b30432272984c8ce3136b48ad06f064"
+    },
+    "scientific_verdict": null
+  }
+}
