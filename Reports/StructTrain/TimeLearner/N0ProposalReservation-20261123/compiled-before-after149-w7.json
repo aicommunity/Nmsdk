@@ -1,0 +1,64 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/n0-proposal-reservation-cpp-ab-m40-w2/primary-w7.json",
+  "record": {
+    "kind": "timelearner_n0_reservation_compiled_cpp_AB_primary",
+    "schema_version": 1,
+    "job": "n0-proposal-reservation-cpp-ab-m40-w2",
+    "source_revisions": {
+      "before": {
+        "directory": "/media/user/Data/TimeLearnerRefactor/source-n0-reservation-before-20261123-x3",
+        "root_commit": "91f1c77408a57d10162c8a57114eea992b2cadb1",
+        "pulse_commit": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4"
+      },
+      "after": {
+        "directory": "/media/user/Data/TimeLearnerRefactor/source-n0-reservation-after-20261123-x3",
+        "root_commit": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+        "pulse_commit": "3f5a2205a4e6c02de545cdc214172482ac53c4b2"
+      }
+    },
+    "metrics": {
+      "before": {
+        "expected": 149,
+        "observed": 149,
+        "failed_test_ids": [
+          "BoundedTrainingMeasuredCount/ClassicRefinesBeforeReservingOrdinaryNeighbours",
+          "BoundedTrainingMeasuredCount/BranchRefinesBeforeReservingOrdinaryNeighbours",
+          "BoundedTrainingMeasuredCount/DeferredNeighboursNeverReplaceAFreshFinalCertificate"
+        ],
+        "assertion_status": "failed",
+        "sha256": "f50539f7a58994950376a9462d2dcd099232cca8db4132aec79461c2586192e1"
+      },
+      "after": {
+        "expected": 149,
+        "observed": 149,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "3d46c90839acf4c7c87594c3e22444db3356d27c566e1cc76d0dae6f1a2b5401"
+      }
+    },
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/39/39eeef211277b8542d0c0d56cb2ca7184b1b5f6d4dbe9a4807b3dcb2cfef1200",
+      "sha256": "39eeef211277b8542d0c0d56cb2ca7184b1b5f6d4dbe9a4807b3dcb2cfef1200",
+      "bytes": 943524
+    },
+    "bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/52/5297c444099a9f75ec79721db628c3adad217f0005a880b89b8adfdee9a8ae8f",
+      "sha256": "5297c444099a9f75ec79721db628c3adad217f0005a880b89b8adfdee9a8ae8f",
+      "bytes": 17495
+    },
+    "members": 108,
+    "expanded_bytes": 8295820,
+    "all_member_bytes_verified": true,
+    "independent_host_restoration_performed": false,
+    "source_controls_commit": "7dbfb599090129c0d0448544390af790dbb94f93",
+    "physical_models_executed": false,
+    "native_sdk_admitted": false,
+    "scientific_verdict": null
+  }
+}

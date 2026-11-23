@@ -1,0 +1,101 @@
+{
+  "dispatched": true,
+  "job": "n0-proposal-reservation-cpp-ab-m40-w2",
+  "controls_commit": "7dbfb599090129c0d0448544390af790dbb94f93",
+  "supervisor": {
+    "pid": 986861,
+    "start_ticks": "449803060",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
+  },
+  "correction": {
+    "original_queue": "n0-proposal-reservation-cpp-ab-m40-x13",
+    "original_closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "dc0dd3b7a4b92b0186f46f5cac9c44548f64720284b00bd9bb52192b56e96457",
+        "unit": "timelearner-79186b18-a872-491d-9ebc-8f5ca8d7c01e.service",
+        "invocation_id": "dcf4a1f2e5564e0fb2aa034002ea3f5f",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-79186b18-a872-491d-9ebc-8f5ca8d7c01e.service",
+        "initial_main_pid": 921322,
+        "initial_start_ticks": "449429125",
+        "sha256": "b61f51aa4d7822858739a778872a19989373e73524caa92743c7c832d8185f58"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "4294967296",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 79186b18-a872-491d-9ebc-8f5ca8d7c01e",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "dcf4a1f2e5564e0fb2aa034002ea3f5f"
+      },
+      "memory_max": 4294967296,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "original_unit_cohort_not_executed": true,
+    "original_validation_log": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/n0-proposal-reservation-cpp-ab-m40-x13/worker/validation/unittest.log",
+      "sha256": "a36f8134d0c8547dbd721c5d816234708cdfb654f90eb4e46dfb7c318914f7fd",
+      "size": 1363
+    },
+    "old_declared_count": 146,
+    "correct_source_count": 149,
+    "reason": "replace one ad-hoc regex inventory with existing pinned production collector literal dialect, including four checked macro instances",
+    "cpp_source_and_tool_source_unchanged": true,
+    "source_revisions": {
+      "before": {
+        "directory": "/media/user/Data/TimeLearnerRefactor/source-n0-reservation-before-20261123-x3",
+        "root_commit": "91f1c77408a57d10162c8a57114eea992b2cadb1",
+        "pulse_commit": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4"
+      },
+      "after": {
+        "directory": "/media/user/Data/TimeLearnerRefactor/source-n0-reservation-after-20261123-x3",
+        "root_commit": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+        "pulse_commit": "3f5a2205a4e6c02de545cdc214172482ac53c4b2"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "before": {
+    "directory": "/media/user/Data/TimeLearnerRefactor/source-n0-reservation-before-20261123-x3",
+    "root_commit": "91f1c77408a57d10162c8a57114eea992b2cadb1",
+    "pulse_commit": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4"
+  },
+  "after": {
+    "directory": "/media/user/Data/TimeLearnerRefactor/source-n0-reservation-after-20261123-x3",
+    "root_commit": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+    "pulse_commit": "3f5a2205a4e6c02de545cdc214172482ac53c4b2"
+  },
+  "expected_cpp_cases": 149,
+  "expected_before_failures": [
+    "BoundedTrainingMeasuredCount/ClassicRefinesBeforeReservingOrdinaryNeighbours",
+    "BoundedTrainingMeasuredCount/BranchRefinesBeforeReservingOrdinaryNeighbours",
+    "BoundedTrainingMeasuredCount/DeferredNeighboursNeverReplaceAFreshFinalCertificate"
+  ],
+  "controls_backup": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/87/87ed16014c76e61962b5848c631236326a4f0051d78a598f1aca23f813edf3e6",
+    "sha256": "87ed16014c76e61962b5848c631236326a4f0051d78a598f1aca23f813edf3e6",
+    "bytes": 10792
+  },
+  "controls_backup_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-controls/20261123-n0-proposal-reservation-cpp-ab-w2.json",
+  "native_scientific_admission": false,
+  "scientific_verdict": null
+}

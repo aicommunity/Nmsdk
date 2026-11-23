@@ -1,0 +1,50 @@
+{
+  "kind": "timelearner_preserved_cpp_preparation_rejection",
+  "job": "n0-proposal-reservation-cpp-ab-m40-x13",
+  "declared_cases": 146,
+  "actual_compiled_discovery_cases": 149,
+  "reason": "ad_hoc_inventory_counted_macro_definition_and_missed_four_expansions",
+  "cohort_not_executed": true,
+  "validation": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "n0-proposal-reservation-cpp-ab-m40-x13",
+    "package_fingerprint": "e4417dacab98451d47661f5c91b91437ee7e0fe782a9626f28a0deb31a18ab64",
+    "execution": "completed",
+    "assertion_status": "failed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_n0_proposal_reservation_cpp_ab.N0ProposalReservationCppABTest.test_before_exposes_starvation_and_after_passes_complete_decision_cohort"
+    ],
+    "executed_tests": 1,
+    "failures": [
+      "Scripts.StructTrain.TimeLearner.tests.test_n0_proposal_reservation_cpp_ab.N0ProposalReservationCppABTest.test_before_exposes_starvation_and_after_passes_complete_decision_cohort"
+    ],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_N0_PROPOSAL_RESERVATION_CPP_CONTROLS": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/n0-proposal-reservation-cpp-ab-m40-x13/fixture",
+        "files": 1,
+        "fingerprint": "8caf732e2c2541ac109b22f55508d2255ccbedf6aabeeb7d17111c7167572769"
+      },
+      "TIMELEARNER_N0_PROPOSAL_BEFORE_SOURCE": {
+        "path": "/media/user/Data/TimeLearnerRefactor/source-n0-reservation-before-20261123-x3",
+        "files": 60,
+        "fingerprint": "5ab437a48691809ac5ad0070559281319155385083bfde6374956829424b7713"
+      },
+      "TIMELEARNER_N0_PROPOSAL_BEFORE_PULSE": {
+        "path": "/media/user/Data/TimeLearnerRefactor/source-n0-reservation-before-20261123-x3/Libraries/Nmsdk-PulseLib",
+        "files": 179,
+        "fingerprint": "4ef3f22c935fe660dfaa18db61fbccfe38fc9aed88ff5c8a622a9919da4de1fd"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "unit_log": {
+    "bytes": 1363,
+    "tail": "test_before_exposes_starvation_and_after_passes_complete_decision_cohort (Scripts.StructTrain.TimeLearner.tests.test_n0_proposal_reservation_cpp_ab.N0ProposalReservationCppABTest.test_before_exposes_starvation_and_after_passes_complete_decision_cohort) ... FAIL\n\n======================================================================\nFAIL: test_before_exposes_starvation_and_after_passes_complete_decision_cohort (Scripts.StructTrain.TimeLearner.tests.test_n0_proposal_reservation_cpp_ab.N0ProposalReservationCppABTest.test_before_exposes_starvation_and_after_passes_complete_decision_cohort)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-n0-reservation-after-20261123-x3/Scripts/StructTrain/TimeLearner/tests/test_n1_geometry_cpp_ab.py\", line 131, in test_before_exposes_starvation_and_after_passes_complete_decision_cohort\n    self.assertEqual(set(ids), set(expected))\nAssertionError: Items in the first set but not the second:\n'TrainingInvalidBudget/ClassicN1'\n'TrainingInvalidBudget/ClassicN0'\n'TrainingInvalidBudget/BranchN0'\n'TrainingInvalidBudget/BranchN1'\nItems in the second set but not the first:\n'TrainingInvalidBudget/name'\n\n----------------------------------------------------------------------\nRan 1 test in 36.671s\n\nFAILED (failures=1)\n"
+  },
+  "corrected_by": "production-inventory-corrected-dispatch-w2.json",
+  "physical_models_executed": false,
+  "scientific_verdict": null
+}

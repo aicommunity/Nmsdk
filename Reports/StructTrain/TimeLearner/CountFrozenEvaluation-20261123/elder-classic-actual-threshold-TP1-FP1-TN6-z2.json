@@ -1,0 +1,801 @@
+{
+  "kind": "timelearner_actual_stopped_classic_recognition_result",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T09:26:59.824258+00:00",
+  "job": "classic-measured-count-recognition-elder-s1",
+  "source_Train_job": "classic-measured-count-m4-elder-k1",
+  "source_root_commit": "e1c97ac2042e155ffe907ad695975304d69664a2",
+  "source_PulseLib_commit": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+  "source_Rdk_commit": "561986e9f336ee5914e2d119de90b005e06f3639",
+  "source_Bin_commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+  "recognition_controls_commit": "5ccd384ffda182f5667a5995e39d8d6f9b9a58e6",
+  "training_completed": false,
+  "original_Train_outcome": "budget_exhausted",
+  "independently_heldout_evaluation": false,
+  "protocol": "historical_same_matrix",
+  "terminal": {
+    "execution": "completed",
+    "validity": "valid",
+    "baseline_counts": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0
+    },
+    "actual_threshold_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "threshold": 0.02612267090554031,
+    "report_family_response_requirement_met": true,
+    "complete_source_history_audited": true,
+    "original_Train_outcome": "budget_exhausted",
+    "training_completed": false,
+    "independently_heldout_evaluation": false,
+    "scientific_verdict": null
+  },
+  "proposal": {
+    "kind": "prepared_same_matrix_threshold_proposal",
+    "schema_version": 1,
+    "baseline": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-baseline",
+    "baseline_execution_sha256": "e97ee2b612420b8d4dbb24e19095daa0195eeba714f4b86bb9f1aabfca6473dd",
+    "source_model_revision": "6621bea3bed8bfea358099a2a9c55a2564552de0bc607995bf29874219f5b81d",
+    "source_package_sha256": "339abc193e4bc2edb9fbf2feb93e9f74e2898d787563c5673bcfcfa8c7f4aef3",
+    "rows": [
+      {
+        "trial_id": "classic-measured-count-recognition-elder-s1/baseline/trial-0",
+        "sample_id": "phasea-row-0",
+        "label": "target",
+        "lt_maximum": 0.0262352134585693
+      },
+      {
+        "trial_id": "classic-measured-count-recognition-elder-s1/baseline/trial-1",
+        "sample_id": "phasea-row-1",
+        "label": "foil",
+        "lt_maximum": 0.01988471745845044
+      },
+      {
+        "trial_id": "classic-measured-count-recognition-elder-s1/baseline/trial-2",
+        "sample_id": "phasea-row-2",
+        "label": "foil",
+        "lt_maximum": 0.019912987492147594
+      },
+      {
+        "trial_id": "classic-measured-count-recognition-elder-s1/baseline/trial-3",
+        "sample_id": "phasea-row-3",
+        "label": "foil",
+        "lt_maximum": 0.019912987165229934
+      },
+      {
+        "trial_id": "classic-measured-count-recognition-elder-s1/baseline/trial-4",
+        "sample_id": "phasea-row-4",
+        "label": "foil",
+        "lt_maximum": 0.02601012835251132
+      },
+      {
+        "trial_id": "classic-measured-count-recognition-elder-s1/baseline/trial-5",
+        "sample_id": "phasea-row-5",
+        "label": "foil",
+        "lt_maximum": 0.01977052620372277
+      },
+      {
+        "trial_id": "classic-measured-count-recognition-elder-s1/baseline/trial-6",
+        "sample_id": "phasea-row-6",
+        "label": "foil",
+        "lt_maximum": 0.03214409264233928
+      },
+      {
+        "trial_id": "classic-measured-count-recognition-elder-s1/baseline/trial-7",
+        "sample_id": "phasea-row-7",
+        "label": "foil",
+        "lt_maximum": 0.01988471745845044
+      }
+    ],
+    "threshold": 0.02612267090554031,
+    "full_matrix_peak_margin": -0.005908879183769977,
+    "nonspiking_proxy": {
+      "TP": 1,
+      "FN": 0,
+      "FP": 1,
+      "TN": 6
+    },
+    "rule": "midpoint_of_target_maximum_and_highest_strictly_lower_foil_maximum",
+    "baseline_all_artifact_bytes_verified": true,
+    "original_resolved_job_digest_verified": true,
+    "source_inventory_unchanged": true,
+    "protocol": "historical_same_matrix",
+    "actual_threshold_confirmation_required": true,
+    "complete_source_history_preserved": true,
+    "training_completed": false,
+    "scientific_verdict": null
+  },
+  "phases": {
+    "baseline": {
+      "audit_file": {
+        "path": "/home/user/timelearner-refactor/requests/classic-measured-count-recognition-elder-s1/baseline/independent-audit.json",
+        "sha256": "765e3014e2bb3d0bc03c71bade444dcf57ae548f9081719baab03706cc810e89",
+        "size": 199506
+      },
+      "validity": "valid",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0.0,
+        "foil_response_rate": 0.0
+      },
+      "model_revision": "6621bea3bed8bfea358099a2a9c55a2564552de0bc607995bf29874219f5b81d",
+      "threshold": 100.0,
+      "trials": [
+        {
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "classification": "FN",
+          "pattern_isi": [
+            0.01,
+            0.08,
+            0.16,
+            0.24
+          ],
+          "stimulus_times": [
+            0.01,
+            0.09,
+            0.25,
+            0.49
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.08,
+            0.24,
+            0.48
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.0262352134585693,
+          "samples": 4001,
+          "window": [
+            0,
+            2
+          ],
+          "model_revision": "6621bea3bed8bfea358099a2a9c55a2564552de0bc607995bf29874219f5b81d",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-baseline/native/trial-0.json",
+            "sha256": "b5946c6629a284212e37d1533ffc25cbb484789b7401b03fc95b3e1b0839787e",
+            "size": 1748914
+          }
+        },
+        {
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.24,
+            0.16,
+            0.08
+          ],
+          "stimulus_times": [
+            2.0105,
+            2.2505,
+            2.4105,
+            2.4905
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.2400000000000002,
+            0.3999999999999999,
+            0.48
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.01988471745845044,
+          "samples": 4001,
+          "window": [
+            2.0005,
+            4.000500000000001
+          ],
+          "model_revision": "6621bea3bed8bfea358099a2a9c55a2564552de0bc607995bf29874219f5b81d",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-baseline/native/trial-1.json",
+            "sha256": "27eb83a9372c26cd737ee46b8e1d03621fb3a3c68e4afb420560f50f0daba818",
+            "size": 1748956
+          }
+        },
+        {
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.16,
+            0.08,
+            0.24
+          ],
+          "stimulus_times": [
+            4.011,
+            4.171,
+            4.251,
+            4.491
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.16000000000000014,
+            0.2400000000000002,
+            0.47999999999999954
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.019912987492147594,
+          "samples": 4001,
+          "window": [
+            4.001,
+            6.001
+          ],
+          "model_revision": "6621bea3bed8bfea358099a2a9c55a2564552de0bc607995bf29874219f5b81d",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-baseline/native/trial-2.json",
+            "sha256": "759dd161a465eb64b956d8a793f460eea2730fd64f557c06181528142208c742",
+            "size": 1749000
+          }
+        },
+        {
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.16,
+            0.16,
+            0.16
+          ],
+          "stimulus_times": [
+            6.0115,
+            6.1715,
+            6.3315,
+            6.4915
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.16000000000000014,
+            0.3200000000000003,
+            0.4800000000000004
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.019912987165229934,
+          "samples": 4001,
+          "window": [
+            6.0015,
+            8.0015
+          ],
+          "model_revision": "6621bea3bed8bfea358099a2a9c55a2564552de0bc607995bf29874219f5b81d",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-baseline/native/trial-3.json",
+            "sha256": "b72b46961599956b7f727960e78ef7ff619fb076f24081c13a556f4f7ea96dca",
+            "size": 1748495
+          }
+        },
+        {
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.02,
+            0.22,
+            0.24
+          ],
+          "stimulus_times": [
+            8.012,
+            8.032,
+            8.252,
+            8.492
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.019999999999999574,
+            0.2400000000000002,
+            0.4800000000000004
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.02601012835251132,
+          "samples": 4001,
+          "window": [
+            8.002,
+            10.002
+          ],
+          "model_revision": "6621bea3bed8bfea358099a2a9c55a2564552de0bc607995bf29874219f5b81d",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-baseline/native/trial-4.json",
+            "sha256": "8212a54eb8cd5f9e750bf47fbd98e61d89fdc2e22394316a176a2f781725acff",
+            "size": 1749184
+          }
+        },
+        {
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.24,
+            0.22,
+            0.02
+          ],
+          "stimulus_times": [
+            10.0125,
+            10.2525,
+            10.4725,
+            10.4925
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.2400000000000002,
+            0.46000000000000085,
+            0.4800000000000004
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.01977052620372277,
+          "samples": 4001,
+          "window": [
+            10.0025,
+            12.0025
+          ],
+          "model_revision": "6621bea3bed8bfea358099a2a9c55a2564552de0bc607995bf29874219f5b81d",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-baseline/native/trial-5.json",
+            "sha256": "da3235e52ec0894b373cc9a78ef438782686897b422d5b1feb462dec667824f3",
+            "size": 1753275
+          }
+        },
+        {
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.04,
+            0.04,
+            0.4
+          ],
+          "stimulus_times": [
+            12.013,
+            12.053,
+            12.093,
+            12.493
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.040000000000000924,
+            0.08000000000000007,
+            0.4800000000000004
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.03214409264233928,
+          "samples": 4001,
+          "window": [
+            12.003,
+            14.003
+          ],
+          "model_revision": "6621bea3bed8bfea358099a2a9c55a2564552de0bc607995bf29874219f5b81d",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-baseline/native/trial-6.json",
+            "sha256": "cb0aa18fb68d7693e92a645066bd4e206d2cfbd32087e7c01361e4d1ad7524e9",
+            "size": 1754041
+          }
+        },
+        {
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.4,
+            0.04,
+            0.04
+          ],
+          "stimulus_times": [
+            14.0135,
+            14.4135,
+            14.4535,
+            14.4935
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.40000000000000036,
+            0.4399999999999995,
+            0.47999999999999865
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.01988471745845044,
+          "samples": 4001,
+          "window": [
+            14.0035,
+            16.003500000000003
+          ],
+          "model_revision": "6621bea3bed8bfea358099a2a9c55a2564552de0bc607995bf29874219f5b81d",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-baseline/native/trial-7.json",
+            "sha256": "9c228dec38ac59c766d96881e5d563eda5c8538b0da5a502e306fb5f42edc832",
+            "size": 1754064
+          }
+        }
+      ]
+    },
+    "threshold": {
+      "audit_file": {
+        "path": "/home/user/timelearner-refactor/requests/classic-measured-count-recognition-elder-s1/threshold/independent-audit.json",
+        "sha256": "ded244c88f8f4c7aeb862f080a7c3253f278d5d129b3f6fd5ff5e20b51bd5171",
+        "size": 209862
+      },
+      "validity": "valid",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+      "threshold": 0.02612267090554031,
+      "trials": [
+        {
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "classification": "TP",
+          "pattern_isi": [
+            0.01,
+            0.08,
+            0.16,
+            0.24
+          ],
+          "stimulus_times": [
+            0.01,
+            0.09,
+            0.25,
+            0.49
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.08,
+            0.24,
+            0.48
+          ],
+          "spike_times": [
+            0.4935
+          ],
+          "relative_spike_times": [
+            0.4835
+          ],
+          "lt_maximum": 0.0262352134585693,
+          "samples": 4001,
+          "window": [
+            0,
+            2
+          ],
+          "model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-threshold/native/trial-0.json",
+            "sha256": "0a923f2c73b7b99182347829cd52fcac2e9967d6d5d47c31a92faa8e73771ba0",
+            "size": 1816825
+          }
+        },
+        {
+          "sample_id": "phasea-row-1",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.24,
+            0.16,
+            0.08
+          ],
+          "stimulus_times": [
+            2.0105,
+            2.2505,
+            2.4105,
+            2.4905
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.2400000000000002,
+            0.3999999999999999,
+            0.48
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.01988471745845044,
+          "samples": 4001,
+          "window": [
+            2.0005,
+            4.000500000000001
+          ],
+          "model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-threshold/native/trial-1.json",
+            "sha256": "7f7275f1ca2b0d204cb7b9d773a71a4add512fa8ecc54a16f990f20664405088",
+            "size": 1748957
+          }
+        },
+        {
+          "sample_id": "phasea-row-2",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.16,
+            0.08,
+            0.24
+          ],
+          "stimulus_times": [
+            4.011,
+            4.171,
+            4.251,
+            4.491
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.16000000000000014,
+            0.2400000000000002,
+            0.47999999999999954
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.019912987492147594,
+          "samples": 4001,
+          "window": [
+            4.001,
+            6.001
+          ],
+          "model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-threshold/native/trial-2.json",
+            "sha256": "f050826f76d32e14be84c7d6f79f1f9585a06699c75c295206754b986da5e523",
+            "size": 1749001
+          }
+        },
+        {
+          "sample_id": "phasea-row-3",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.16,
+            0.16,
+            0.16
+          ],
+          "stimulus_times": [
+            6.0115,
+            6.1715,
+            6.3315,
+            6.4915
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.16000000000000014,
+            0.3200000000000003,
+            0.4800000000000004
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.019912987165229934,
+          "samples": 4001,
+          "window": [
+            6.0015,
+            8.0015
+          ],
+          "model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-threshold/native/trial-3.json",
+            "sha256": "7479c145fb6c64a2ecae9a4f459953567152cdcd132c735434994362a9a61087",
+            "size": 1748496
+          }
+        },
+        {
+          "sample_id": "phasea-row-4",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.02,
+            0.22,
+            0.24
+          ],
+          "stimulus_times": [
+            8.012,
+            8.032,
+            8.252,
+            8.492
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.019999999999999574,
+            0.2400000000000002,
+            0.4800000000000004
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.02601012835251132,
+          "samples": 4001,
+          "window": [
+            8.002,
+            10.002
+          ],
+          "model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-threshold/native/trial-4.json",
+            "sha256": "ea94309b7a4c7c7bdd8bb0319ac9c9774c3ad51fa02d653392bf4dff5afa588b",
+            "size": 1749185
+          }
+        },
+        {
+          "sample_id": "phasea-row-5",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.24,
+            0.22,
+            0.02
+          ],
+          "stimulus_times": [
+            10.0125,
+            10.2525,
+            10.4725,
+            10.4925
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.2400000000000002,
+            0.46000000000000085,
+            0.4800000000000004
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.01977052620372277,
+          "samples": 4001,
+          "window": [
+            10.0025,
+            12.0025
+          ],
+          "model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-threshold/native/trial-5.json",
+            "sha256": "38f42d8673a30e56a56b8e244288ca7ad2c78937a4d72e75ae1c7f370f1eb13c",
+            "size": 1753276
+          }
+        },
+        {
+          "sample_id": "phasea-row-6",
+          "label": "foil",
+          "classification": "FP",
+          "pattern_isi": [
+            0.01,
+            0.04,
+            0.04,
+            0.4
+          ],
+          "stimulus_times": [
+            12.013,
+            12.053,
+            12.093,
+            12.493
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.040000000000000924,
+            0.08000000000000007,
+            0.4800000000000004
+          ],
+          "spike_times": [
+            12.4945
+          ],
+          "relative_spike_times": [
+            0.4815000000000005
+          ],
+          "lt_maximum": 0.029829611677835488,
+          "samples": 4001,
+          "window": [
+            12.003,
+            14.003
+          ],
+          "model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-threshold/native/trial-6.json",
+            "sha256": "7ff4a1f41582442801978b2a7a96797f1e93ee0b7256e5c0906530fa1c4745ca",
+            "size": 1825040
+          }
+        },
+        {
+          "sample_id": "phasea-row-7",
+          "label": "foil",
+          "classification": "TN",
+          "pattern_isi": [
+            0.01,
+            0.4,
+            0.04,
+            0.04
+          ],
+          "stimulus_times": [
+            14.0135,
+            14.4135,
+            14.4535,
+            14.4935
+          ],
+          "relative_stimulus_times": [
+            0,
+            0.40000000000000036,
+            0.4399999999999995,
+            0.47999999999999865
+          ],
+          "spike_times": [],
+          "relative_spike_times": [],
+          "lt_maximum": 0.01988471745845044,
+          "samples": 4001,
+          "window": [
+            14.0035,
+            16.003500000000003
+          ],
+          "model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+          "trial_file": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-threshold/native/trial-7.json",
+            "sha256": "29405027bacbf1e85ef613089b8bc56a6b89f6c353621313eb278309c16eb5b6",
+            "size": 1754065
+          }
+        }
+      ]
+    }
+  },
+  "archive_collection_dispatched": {
+    "job": "classic-measured-count-closed-primary-elder-z3",
+    "owner": {
+      "pid": 686653,
+      "start_ticks": "499591073",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "controls_commit": "dfe589befcd354aee0c1a04887626919ad9f247e",
+    "controls_bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/58/58e538aa3f01587e99c1d27b793729f4edf30a91479179864e8caec0278f37a0",
+      "sha256": "58e538aa3f01587e99c1d27b793729f4edf30a91479179864e8caec0278f37a0",
+      "bytes": 102081
+    },
+    "controls_catalog": "/mnt/nmsdk-structtrain-archive/operations/timelearner/prepared-controls/20261123-classic-measured-count-closed-primary-elder-z3.json",
+    "source_Train_outcome_unchanged": true,
+    "roots": 11,
+    "closed_units": 12,
+    "scientific_verdict": null
+  },
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null
+}
