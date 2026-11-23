@@ -13,6 +13,7 @@ from .native_evidence import load, require
 from .recognition_metrics import load_evaluation, score_recognition_evaluation, score_threshold_candidate
 from .plotting import render_soma, render_series, plotting_runtime, render_positive_lobe_views
 from .lt_decision_reports import render_lt_decisions
+from .trial_response_timing import summarize_trial_timing, timing_html
 
 
 def _write(path, value):
@@ -66,6 +67,8 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         scorer = score_threshold_candidate if calibration_probe else score_recognition_evaluation
     analysis = (score_partial_diagnostic_evaluation(spec, observations, package, source_case)
                 if diagnostic else scorer(spec, observations, package))
+    timing = (summarize_trial_timing(spec,observations,analysis)
+              if analysis['validity']=='valid' else None)
     calibrated = package.get("kind") == "timelearner_calibrated_recognition_state"
     diagnostic_candidate = diagnostic and package.get('kind') == 'timelearner_diagnostic_threshold_candidate'
     if diagnostic_candidate:
@@ -156,6 +159,7 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
                              f'<a href="{png}">full PNG</a></p><img src="{png}" alt="{view["view"]}">')
     _write(primary/"evaluation.json", copied_spec)
     _write(output/"analysis.json", analysis)
+    if timing is not None:_write(output/'timing-summary.json',timing)
     # Preserve actual presentation order and gaps in a separate series view.
     ordered = [by_id[t["trial_id"]] for t in sorted(spec["trials"], key=lambda t: t["presentation_index"]) if t["trial_id"] in by_id]
     series = []
@@ -202,6 +206,10 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
 
                                 "visual acceptance pending"],
                 "visual_acceptance_complete": False, "evaluation_verdict": None}
+    manifest['event_timing'] = dict(available=timing is not None,
+        path='timing-summary.json' if timing is not None else None,
+        source_classifications_unchanged=True, new_response_criterion=False,
+        reason=None if timing is not None else 'incomplete_or_invalid_declared_trials')
     if diagnostic:
         manifest.update(purpose="stopped_training_recognition_diagnostic", diagnostic_only=True,
                         training_completed=False, source_training_outcome=source_case[0]["training_outcome"],
@@ -232,6 +240,8 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         '<a href="primary/model.json">model</a>. <a href="analysis.json">Metrics</a>. '
         'SI units unverified; diagnostic report, visual acceptance pending. '
         'Click full PNG/SVG/PDF for readable scale. Purple dotted markers: actual LT spike events.</p>'
+        +(timing_html(timing) if timing is not None else
+          '<p>Временная диагностика недоступна: полный набор достоверных наблюдений отсутствует.</p>')
         +'<h2>Presentation-order series</h2><p><a href="series.json">timing table and series manifest</a></p>'
         +''.join(f'<p>{v["view"]}: <a href="{p}">{p}</a></p>' for item in series for v in item["views"] for p in v["files"])
         +"\n".join(links)+'</html>\n', encoding="utf-8")

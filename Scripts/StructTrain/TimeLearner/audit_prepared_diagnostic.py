@@ -22,6 +22,7 @@ def audit(controls):
     from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256 as sha
     from Scripts.StructTrain.TimeLearner.stopped_evidence import load_case
     from Scripts.StructTrain.TimeLearner.native_pipeline_worker import audit_execution
+    from Scripts.StructTrain.TimeLearner.prepared_report_inputs import capture_report_primary
 
     worker_path = controls/'worker.py'
     require(file_record(worker_path)['sha256'] == spec['worker_sha256'], 'prepared_audit_worker_changed')
@@ -36,6 +37,7 @@ def audit(controls):
     require(terminal['native_process_completed'] and process['execution'] == 'completed' and
             process['all_processes_closed'] and process['runtime_provenance'] == 'loaded_files_captured',
             'prepared_audit_process_incomplete')
+    report_primary=capture_report_primary(output/'native')
     envelope = json.loads((inputs/'native-job-source.json').read_bytes())
     require(envelope['sha256'] == sha({k:v for k,v in envelope.items() if k != 'sha256'}) and
             envelope['source']['field'] == 'source_stopped' and
@@ -51,12 +53,15 @@ def audit(controls):
             result['metrics']['validity'] == 'valid' and len(result['metrics']['trials']) == 8,
             'prepared_audit_native_evidence_invalid')
     require(worker.inventory(inputs, file_record) == spec['input_inventory'], 'prepared_audit_input_changed_after')
+    require(capture_report_primary(output/'native')==report_primary,
+            'prepared_audit_report_primary_changed_during_audit')
     metrics = result['metrics']
     counts = metrics['pooled_counts']
     return dict(kind='timelearner_prepared_diagnostic_independent_audit', schema_version=1,
         controls=str(controls), output=str(output), source_package_sha256=source_case[0]['sha256'],
         source_model_revision=spec['source_model_revision'], resolved_job_sha256=job['sha256'],
         native_evidence=result, complete_source_history_audited=True, all_input_bytes_unchanged=True,
+        report_primary_binding=report_primary,
         report_family_response_requirement_met=counts['TP'] >= 1 and counts['TN'] >= 2,
         protocol='historical_same_matrix' if job['schema_version'] == 2 else 'fixed_threshold_baseline',
         process_result_sha256=file_record(output/'process-result.json')['sha256'],
