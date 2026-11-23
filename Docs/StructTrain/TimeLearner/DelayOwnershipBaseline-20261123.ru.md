@@ -128,3 +128,26 @@ SDK, Console и Test_PulseLib_StorageComponents, VS2026 Release, один
 
 [Фактическая сборка](../../../Reports/StructTrain/TimeLearner/DelayCandidateAndBranchQueue-20261124/actual-build-and-Branch-queue-av14.json),
 [восстановленные Git-условия и отдельное точное описание build-task](../../../Reports/StructTrain/TimeLearner/DelayCandidateAndBranchQueue-20261124/controls-independent-recovery-av11.json).
+
+## Закрытие сборки и настоящее исполнение132
+
+Сборка av3 завершилась с returncode0, но первоначальный build_accepted=false
+сохранён: в момент выхода основного процесса ещё имелся потомок14824.
+После закрытия всей группы штатный audit-closed-build.py действительно
+проверил5173 исходных файла, исходные tools/dependencies и runtime;
+отдельный аудит завершён успешно за15,21с. Исходный отказ не переписывался.
+
+После фактического закрытия Branch av9 задача
+TimeLearnerQueue-delay-native132-av26 поставила штатный validate-native.py.
+На23.11 в23:30 UTC native19224, creation_filetime134399492304046606,
+подтверждён ядром. Выполняются132 точных ID,8ГиБ,32 процесса,2ч.
+Итог JUnit ещё не получен; промежуточные OK не заменяют полного результата.
+
+Первая detached-очередь av21 исчезла до запуска любого worker: оба
+каталога requests/jobs аудита и тестов отсутствовали, владелец21228
+подтверждён закрытым. Новая av26 использует сохранённую задачу Windows;
+её владелец11800 подтверждён после завершения управляющего подключения.
+Исходный научный опыт не перезапускался. Все9 файлов условий новой очереди,
+включая точные Task XML и launcher, независимо восстановлены на M40.
+[Процессы и артефактный аудит](../../../Reports/StructTrain/TimeLearner/FixedBranchDurationHoldout-20261124/actual-artifact-audit-and-native132-running-av32.json),
+[внешние Git-условия](../../../Reports/StructTrain/TimeLearner/FixedBranchDurationHoldout-20261124/native132-persistent-queue-controls-av28.json).

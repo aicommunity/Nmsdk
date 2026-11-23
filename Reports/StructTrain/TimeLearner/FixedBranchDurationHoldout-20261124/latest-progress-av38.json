@@ -1,0 +1,97 @@
+{
+  "kind": "timelearner_latest_three_host_progress_after_new_scientific_results",
+  "schema_version": 1,
+  "observed_M40_utc": "2026-11-23T23:51:44.031092+00:00",
+  "M40_Data_free_bytes": 280880840704,
+  "M40_Classic_publication": {
+    "owner.json": {
+      "pid": 1042159,
+      "start_ticks": "455273071",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "kernel_live": true
+  },
+  "observed_Elder_utc": "2026-11-23T23:51:44.067003+00:00",
+  "Elder_native": {
+    "baseline": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "2bb5b81f66235b6838bd5bce8fd375b100f302c9a219cfc3794fb95e21ad6d95",
+        "unit": "timelearner-1d6d8b42-48ac-4eb5-963a-b159077d44f7.service",
+        "invocation_id": "00ad1b27450842f8ba8305c2231df521",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1d6d8b42-48ac-4eb5-963a-b159077d44f7.service",
+        "initial_main_pid": 3455914,
+        "initial_start_ticks": "503940890",
+        "sha256": "7c6d2aec6a5c8d44db599ec08cf2d14d506bfbde565be08037ae93d5375c4a69"
+      },
+      "actual_observations": 8
+    },
+    "threshold": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "f8d7f0e0d7de407e8e8bf7123d18cf82da15a5d68035787d999490970372380a",
+        "unit": "timelearner-630881c7-8241-48c4-972b-1bb4cb5c4472.service",
+        "invocation_id": "24836739dc7b42139208c4281ed3cbcd",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-630881c7-8241-48c4-972b-1bb4cb5c4472.service",
+        "initial_main_pid": 3676494,
+        "initial_start_ticks": "504460912",
+        "sha256": "e74c1e5dfdcbd4cd28100f635ed84fff3c0f18e8dac36006862eceaf193c8854"
+      },
+      "actual_observations": 5
+    }
+  },
+  "Elder_supervisor": {
+    "pid": 3440422,
+    "start_ticks": "503934189",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000
+  },
+  "Elder_supervisor_live": true,
+  "Elder_threshold": 0.02342413248481376,
+  "Windows_native132": {
+    "task": {
+      "last_result": 267009,
+      "instances": 1,
+      "state": 4
+    },
+    "files": {
+      "jobs/windows-delay-candidate-native132-av26/native-gate/process/owned-process.json": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-delay-candidate-native-win-av3\\Test_PulseLib_StorageComponents.exe",
+        "creation_filetime": "134399492304046606",
+        "pid": 19224,
+        "job_name": "Local\\TimeLearner-6e9c3973-0d14-44d2-983b-fd26dd1252ee",
+        "runtime_fingerprint": "04cf77828a27af3c455d9c2b14a34825d811d45893d50f0f2ebbe9351273d8c2",
+        "suspended_until_limits_applied": true
+      },
+      "controls/windows-delay-closed-audit-native132-queue-av26/state.json": {
+        "stage": "running-production-native132-without-scientific-admission",
+        "observed_utc": "2026-11-23T23:13:44.511234+00:00",
+        "scientific_verdict": null
+      }
+    },
+    "public_log_tails": {
+      "native-gate/process/stdout.log": {
+        "bytes": 22774,
+        "tail": "\r\n[       OK ] NativeRecoveryPackage7.ClassicImportedWarmRetryRetainsEarlierRecovery (64709 ms)\r\n[ RUN      ] NativeRecoveryPackage7.BranchImportedWarmRetryRetainsEarlierRecovery\r\n[       OK ] NativeRecoveryPackage7.BranchImportedWarmRetryRetainsEarlierRecovery (52287 ms)\r\n[ RUN      ] NativeRecoveryPackage7.ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner\r\n[       OK ] NativeRecoveryPackage7.ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner (8076 ms)\r\n[ RUN      ] NativeRecoveryPackage7.BranchMissingForeignOrDuplicateLedgerCannotMutateOwner\r\n[       OK ] NativeRecoveryPackage7.BranchMissingForeignOrDuplicateLedgerCannotMutateOwner (6776 ms)\r\n[ RUN      ] NativeRecoveryPackage7.ClassicLegacy6CannotMasqueradeAsRecovery7\r\n[       OK ] NativeRecoveryPackage7.ClassicLegacy6CannotMasqueradeAsRecovery7 (40891 ms)\r\n[ RUN      ] NativeRecoveryPackage7.BranchLegacy6CannotMasqueradeAsRecovery7\r\n[       OK ] NativeRecoveryPackage7.BranchLegacy6CannotMasqueradeAsRecovery7 (33107 ms)\r\n[----------] 14 tests from NativeRecoveryPackage7 (1198004 ms total)\r\n\r\n[----------] 12 tests from NativeTerminalCompositePackage\r\n[ RUN      ] NativeTerminalCompositePackage.ClassicFixedN0Stopped\r\n[       OK ] NativeTerminalCompositePackage.ClassicFixedN0Stopped (43211 ms)\r\n[ RUN      ] NativeTerminalCompositePackage.BranchFixedN0Stopped\r\n[       OK ] NativeTerminalCompositePackage.BranchFixedN0Stopped (34691 ms)\r\n[ RUN      ] NativeTerminalCompositePackage.ClassicFixedN1Stopped\r\n[       OK ] NativeTerminalCompositePackage.ClassicFixedN1Stopped (43759 ms)\r\n[ RUN      ] NativeTerminalCompositePackage.BranchFixedN1Stopped\r\n[       OK ] NativeTerminalCompositePackage.BranchFixedN1Stopped (34157 ms)\r\n[ RUN      ] NativeTerminalCompositePackage.ClassicWindowN0Stopped\r\n[       OK ] NativeTerminalCompositePackage.ClassicWindowN0Stopped (72164 ms)\r\n[ RUN      ] NativeTerminalCompositePackage.BranchWindowN0Stopped\r\n[       OK ] NativeTerminalCompositePackage.BranchWindowN0Stopped (57999 ms)\r\n[ RUN      ] NativeTerminalCompositePackage.ClassicWindowN1Stopped\r\n[       OK ] NativeTerminalCompositePackage.ClassicWindowN1Stopped (70882 ms)\r\n[ RUN      ] NativeTerminalCompositePackage.BranchWindowN1Stopped\r\n[       OK ] NativeTerminalCompositePackage.BranchWindowN1Stopped (57760 ms)\r\n[ RUN      ] NativeTerminalCompositePackage.ClassicFixedCompletedWithoutTransition\r\n[       OK ] NativeTerminalCompositePackage.ClassicFixedCompletedWithoutTransition (29217 ms)\r\n[ RUN      ] NativeTerminalCompositePackage.BranchFixedCompletedWithoutTransition\r\n[       OK ] NativeTerminalCompositePackage.BranchFixedCompletedWithoutTransition (22862 ms)\r\n[ RUN      ] NativeTerminalCompositePackage.ClassicWindowCompletedWithoutTransition\r\n[       OK ] NativeTerminalCompositePackage.ClassicWindowCompletedWithoutTransition (41203 ms)\r\n[ RUN      ] NativeTerminalCompositePackage.BranchWindowCompletedWithoutTransition\r\n[       OK ] NativeTerminalCompositePackage.BranchWindowCompletedWithoutTransition (33375 ms)\r\n[----------] 12 tests from NativeTerminalCompositePackage (541286 ms total)\r\n\r\n[----------] 8 tests from NativeActualCompositeTerminalRestore\r\n[ RUN      ] NativeActualCompositeTerminalRestore.ClassicFixedN0\r\n[       OK ] NativeActualCompositeTerminalRestore.ClassicFixedN0 (71312 ms)\r\n[ RUN      ] NativeActualCompositeTerminalRestore.BranchFixedN0\r\n[       OK ] NativeActualCompositeTerminalRestore.BranchFixedN0 (53289 ms)\r\n[ RUN      ] NativeActualCompositeTerminalRestore.ClassicFixedN1\r\n"
+      },
+      "native-gate/process/stderr.log": {
+        "bytes": 0,
+        "tail": ""
+      }
+    },
+    "native_handle_live": true
+  },
+  "all_original_Trains_unchanged": true,
+  "full_goal_0_12_unchanged": true,
+  "fully_accepted_stages": [
+    0
+  ],
+  "scientific_verdict": null
+}

@@ -1,0 +1,51 @@
+{
+  "kind": "timelearner_actual_closed_artifact_audit_and_native132_running",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T23:30:54.727384+00:00",
+  "tasks": {
+    "TimeLearnerQueue-delay-native132-av26": {
+      "last_result": 267009,
+      "instances": 1,
+      "state": 4
+    },
+    "TimeLearner-windows-delay-candidate-closed-build-audit-av26": {
+      "last_result": 0,
+      "instances": 0,
+      "state": 3
+    },
+    "TimeLearner-windows-delay-candidate-native132-av26": {
+      "last_result": 267009,
+      "instances": 1,
+      "state": 4
+    }
+  },
+  "native_owned_process": {
+    "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-delay-candidate-native-win-av3\\Test_PulseLib_StorageComponents.exe",
+    "creation_filetime": "134399492304046606",
+    "pid": 19224,
+    "job_name": "Local\\TimeLearner-6e9c3973-0d14-44d2-983b-fd26dd1252ee",
+    "runtime_fingerprint": "04cf77828a27af3c455d9c2b14a34825d811d45893d50f0f2ebbe9351273d8c2",
+    "suspended_until_limits_applied": true
+  },
+  "native_handle_live": true,
+  "audit_terminal": {
+    "audit_passed": true,
+    "compiled_tests_executed": false,
+    "original_build_outcome_unchanged": true,
+    "scientific_verdict": null,
+    "scientific_worker_admitted": false,
+    "wall_seconds": 15.212801800109446
+  },
+  "queue_state": {
+    "stage": "running-production-native132-without-scientific-admission",
+    "observed_utc": "2026-11-23T23:13:44.511234+00:00",
+    "scientific_verdict": null
+  },
+  "old_unstarted_av21_owner_absent": true,
+  "declared_native_cases": 132,
+  "actual_final_native_result_not_yet_observed": true,
+  "original_build_accepted": false,
+  "source_root": "a303fbacb42e860a6298944151f0674ff447dda3",
+  "PulseLib": "01eed43124e6dbb424c192d7a5b2045c1d4a22cf",
+  "scientific_verdict": null
+}

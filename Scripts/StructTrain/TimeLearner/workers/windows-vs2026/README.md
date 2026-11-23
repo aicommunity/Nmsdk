@@ -136,3 +136,20 @@ Linux managed-runner, reservation and publication support must not be inferred
 from this dedicated Windows native gate. Full compressed audit inventories and
 native primary data still require their separate Git publication; the linked
 metadata receipts alone do not constitute that full archive.
+
+
+Long dependency queues must survive the controlling SSH connection. Use a
+registered Scheduled Task with a saved XML definition and launcher, and verify
+its owner PID/creation time again after the dispatch connection has returned.
+A detached Popen receipt proves only that the process existed at dispatch;
+it does not prove that the queue persisted. An unstarted lost queue may be
+replaced only after its original owner is absent and both downstream attempt
+names are proven unused. Never restart a model merely because an observer or
+queue disappeared.
+
+A waiting coordinator may use the distinct `TimeLearnerQueue-*` task prefix;
+actual build/audit/native workers retain `TimeLearner-*` and the existing
+launcher exclusion and worker lock. The prefix does not grant parallel model
+capacity: verify the exact preceding Task, owner and all owned Windows Job
+handles are closed before dispatching the next production worker. Preserve
+original build rejections when a later independent closed-artifact audit passes.
