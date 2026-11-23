@@ -68,8 +68,15 @@ class ClassicCountPrimaryRestorationTest(unittest.TestCase):
             execution = load(restored/'original-Train/train/native/execution.json')
             self.assertEqual(execution['training_outcome'], 'budget_exhausted')
             self.assertFalse(execution['completed_boundary'])
-            self.assertEqual(len(list((restored/'original-Train/train/native').glob('raw-trial-*.json'))),
-                             496)
+            native = restored/'original-Train/train/native'
+            # EvidenceWriter finalizes a closed stopped Train by renaming the
+            # live raw-trial files. Checking the transient name would reject a
+            # completely recovered original archive after all bytes matched.
+            expected_trials = {'train_stopped_trial_'+str(i)+suffix
+                               for i in range(1, 497) for suffix in ('.json', '.csv')}
+            self.assertEqual({p.name for p in native.glob('train_stopped_trial_*')},
+                             expected_trials)
+            self.assertEqual(list(native.glob('raw-trial-*')), [])
             for role in ('baseline-run', 'threshold-run'):
                 spec, observations = load_diagnostic_evaluation(restored/role/'native/evaluation.json')
                 self.assertEqual(len(spec['trials']), 8)
