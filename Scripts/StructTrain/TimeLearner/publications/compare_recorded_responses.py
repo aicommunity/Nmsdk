@@ -12,8 +12,12 @@ from ..native_evidence import equal, number, require
 from ..plotting import plotting_runtime, padded_limits
 
 
-def _read(record):
-    path = Path(record['path']).resolve(strict=True)
+def _read(record, root):
+    requested = Path(record['path'])
+    if not requested.is_absolute():
+        require('..' not in requested.parts, 'response_comparison_relative_source_escape')
+        requested = root / requested
+    path = requested.resolve(strict=True)
     before = path.stat()
     raw = path.read_bytes()
     after = path.stat()
@@ -25,7 +29,8 @@ def _read(record):
 
 
 def read_sources(path):
-    specification = json.loads(Path(path).read_bytes())
+    path = Path(path).resolve(strict=True)
+    specification = json.loads(path.read_bytes())
     require(specification['kind'] == 'timelearner_recorded_response_comparison_sources'
             and specification['schema_version'] == 1
             and 1 <= len(specification['cohorts']) <= 16, 'response_comparison_schema')
@@ -36,7 +41,7 @@ def read_sources(path):
                 and all(c.isascii() and (c.isalnum() or c == '-') for c in name),
                 'response_comparison_cohort_id')
         names.add(name)
-        score_rows = _read(cohort['source_audit'])
+        score_rows = _read(cohort['source_audit'], path.parent)
         for key in cohort['score_rows_path']:
             score_rows = score_rows[key]
         require(type(score_rows) is list, 'response_comparison_source_score_rows')
@@ -46,7 +51,7 @@ def read_sources(path):
         threshold = number(cohort['threshold'])
         ids, rows, observations = set(), [], []
         for declared in cohort['observations']:
-            o = _read(declared['file'])
+            o = _read(declared['file'], path.parent)
             require(o['trial_id'] == declared['trial_id'] and o['trial_id'] not in ids,
                     'response_comparison_trial_identity')
             ids.add(o['trial_id'])
