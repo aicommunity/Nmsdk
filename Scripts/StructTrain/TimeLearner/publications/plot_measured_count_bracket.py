@@ -69,7 +69,7 @@ def read_bracket(native, audit_path, input_index, length, counts):
     reference=number(references[0]['raw_potential']);tolerance=history['tolerances']
     epsilon=number(tolerance['amplitude_absolute'])+number(tolerance['amplitude_relative'])*abs(reference)
     require(epsilon>0, 'count_bracket_positive_amplitude_tolerance_required')
-    rows=[];background=None;actual_stimuli=None
+    rows=[];background=None;actual_stimuli=None;actual_stimulus_frames=None
     for ns in counts:
         candidates=[c for c in history['candidates'] if c['input_index']==input_index and
             c['parameters']['length']==length and c['parameters']['synapses']==ns]
@@ -103,7 +103,9 @@ def read_bracket(native, audit_path, input_index, length, counts):
         samples=[{k:number(float(v)) for k,v in row.items()} for row in reader]
         require(len(samples)==group['native_packets'][0]['observation']['sample_count'] and
             equal(samples[0]['time'],spec['begin']) and equal(samples[-1]['time'],spec['end']) and
-            all(equal(b['time']-a['time'],spec['maximum_sample_gap']) for a,b in zip(samples,samples[1:])),
+            all(equal(row['time'],spec['begin']+i*spec['maximum_sample_gap'])
+                for i,row in enumerate(samples)) and
+            all(a['time']<b['time'] for a,b in zip(samples,samples[1:])),
             'count_bracket_incomplete_trace')
         require(spec['effective_model_revision']==candidate['model_revision'] and
             spec['expected_stimulus_ids']==[r['id'] for r in trial['actual_stimuli']],
@@ -115,9 +117,13 @@ def read_bracket(native, audit_path, input_index, length, counts):
                 'count_bracket_actual_input_edge')
         times=[s['time']-spec['begin'] for s in samples]
         stimuli=[r['time']-spec['begin'] for r in trial['actual_stimuli']]
-        require(actual_stimuli is None or len(stimuli)==len(actual_stimuli) and
-            all(equal(a,b) for a,b in zip(actual_stimuli,stimuli)), 'count_bracket_different_input_times')
-        actual_stimuli=stimuli
+        frames=[r['frame_index'] for r in trial['actual_stimuli']]
+        # Compare observed frame identities. Subtracting different large model
+        # clocks and then comparing tiny intervals loses their original ULP
+        # scale; it must not introduce a new physical timing tolerance.
+        require(actual_stimulus_frames is None or frames==actual_stimulus_frames,
+                'count_bracket_different_input_times')
+        if actual_stimuli is None:actual_stimuli=stimuli;actual_stimulus_frames=frames
         channel=group['method_specification']['channel'];values=[s['soma'+str(channel)] for s in samples]
         index=selected['first_sample']
         require(0<=index<len(values) and equal(samples[index]['time'],selected['time']) and
@@ -133,6 +139,7 @@ def read_bracket(native, audit_path, input_index, length, counts):
             time=times,potential=values,stimulus=[s['stimulus'] for s in samples]))
     return dict(rows=rows,records=records,reference=reference,amplitude_tolerance=epsilon,
         sync_tolerance=number(tolerance['sync']),actual_stimuli=actual_stimuli,
+        actual_stimulus_frames=actual_stimulus_frames,
         input_index=input_index,length=length,full_audit_file=str(audit_path),
         actual_final_model_revision=summary['actual_model_revision'],
         mathematical_scope='measured integer neighbours at one geometry; no global infeasibility or convergence',
