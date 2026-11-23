@@ -1,0 +1,127 @@
+{
+  "dispatch": {
+    "dispatched": true,
+    "job": "classic-count-closed-campaign-archive-m40-m3",
+    "source_root": "c2dc90a4225ddaa844617c201bb1d9c173e86e86",
+    "controls_commit": "1efd1186d4a7047b559af06f0dbe0a086b0b1ef3",
+    "supervisor": {
+      "pid": 3350557,
+      "start_ticks": "448126691",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "studies": [
+      {
+        "name": "classic-count-short-cadence-orders-m40-q1",
+        "output": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-short-cadence-orders-m40-q1",
+        "controls": "/media/user/Data/TimeLearnerRefactor/requests/classic-count-short-cadence-orders-m40-q1",
+        "trials": 112,
+        "trials_per_case": 8,
+        "cases": [
+          "rotation-0-reset",
+          "rotation-0-preserve",
+          "rotation-2-reset",
+          "rotation-2-preserve",
+          "rotation-3-reset",
+          "rotation-3-preserve",
+          "rotation-4-reset",
+          "rotation-4-preserve",
+          "rotation-5-reset",
+          "rotation-5-preserve",
+          "rotation-6-reset",
+          "rotation-6-preserve",
+          "rotation-7-reset",
+          "rotation-7-preserve"
+        ]
+      },
+      {
+        "name": "classic-count-predecessor-m40-j1",
+        "output": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1",
+        "controls": "/media/user/Data/TimeLearnerRefactor/requests/classic-count-predecessor-m40-j1",
+        "trials": 28,
+        "trials_per_case": 2,
+        "cases": [
+          "phasea-row-1-reset",
+          "phasea-row-1-preserve",
+          "phasea-row-2-reset",
+          "phasea-row-2-preserve",
+          "phasea-row-3-reset",
+          "phasea-row-3-preserve",
+          "phasea-row-4-reset",
+          "phasea-row-4-preserve",
+          "phasea-row-5-reset",
+          "phasea-row-5-preserve",
+          "phasea-row-6-reset",
+          "phasea-row-6-preserve",
+          "phasea-row-7-reset",
+          "phasea-row-7-preserve"
+        ]
+      },
+      {
+        "name": "classic-count-long-predecessor-m40-k2",
+        "output": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-long-predecessor-m40-k2",
+        "controls": "/media/user/Data/TimeLearnerRefactor/requests/classic-count-long-predecessor-m40-k2",
+        "trials": 28,
+        "trials_per_case": 2,
+        "cases": [
+          "phasea-row-1-reset",
+          "phasea-row-1-preserve",
+          "phasea-row-2-reset",
+          "phasea-row-2-preserve",
+          "phasea-row-3-reset",
+          "phasea-row-3-preserve",
+          "phasea-row-4-reset",
+          "phasea-row-4-preserve",
+          "phasea-row-5-reset",
+          "phasea-row-5-preserve",
+          "phasea-row-6-reset",
+          "phasea-row-6-preserve",
+          "phasea-row-7-reset",
+          "phasea-row-7-preserve"
+        ]
+      }
+    ],
+    "expected_new_observations": 168,
+    "expected_PNG": 336,
+    "controls_backup_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-controls/20261123-classic-closed-campaign-m3.json",
+    "controls_backup": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/1c/1cc41a4db45a583c3e3a4f7e2a99867788f9a0b2ea4427b011d875902b2d738c",
+      "sha256": "1cc41a4db45a583c3e3a4f7e2a99867788f9a0b2ea4427b011d875902b2d738c",
+      "bytes": 6511
+    },
+    "no_native_model_execution": true,
+    "no_running_sources_changed": true,
+    "waits_for_complete_scientific_studies": true,
+    "scientific_verdict": null
+  },
+  "actual_readback": {
+    "observed_utc": "2026-11-23T03:55:24.399060+00:00",
+    "supervisor_live": true,
+    "state": {
+      "observed_utc": "2026-11-23T03:55:16.565632+00:00",
+      "stage": "waiting_for_all_three_closed_Classic_studies",
+      "scientific_verdict": null
+    },
+    "worker_matches": true,
+    "source_declarations_match": true,
+    "controls_backup": {
+      "job": "classic-count-closed-campaign-archive-m40-m3",
+      "commit": "1efd1186d4a7047b559af06f0dbe0a086b0b1ef3",
+      "tree": "39be72fccc5e7123533e905244a1cdabe36f1215",
+      "bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/1c/1cc41a4db45a583c3e3a4f7e2a99867788f9a0b2ea4427b011d875902b2d738c",
+        "sha256": "1cc41a4db45a583c3e3a4f7e2a99867788f9a0b2ea4427b011d875902b2d738c",
+        "bytes": 6511
+      },
+      "independent_bare_restore_verified": true
+    },
+    "expected_observations": 168,
+    "expected_PNG": 336
+  }
+}
