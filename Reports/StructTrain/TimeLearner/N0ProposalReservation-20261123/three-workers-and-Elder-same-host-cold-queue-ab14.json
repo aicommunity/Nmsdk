@@ -1,0 +1,168 @@
+{
+  "kind": "timelearner_actual_three_workers_and_same_host_cold_queue",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T11:11:39.864956+00:00",
+  "M40": {
+    "job": "classic-n0-proposal-cold-m40-aa21",
+    "execution": "running",
+    "kernel_train": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "25a0f26d3387252760fb3ea14bc7cb9aee36c33a7a8a196af84791ecb603d8d2",
+        "unit": "timelearner-7a061d31-ad66-4886-9a29-2d8250c54c1d.service",
+        "invocation_id": "52237d6a949b4028a998cfe11c4b4cf0",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7a061d31-ad66-4886-9a29-2d8250c54c1d.service",
+        "initial_main_pid": 1423053,
+        "initial_start_ticks": "450583490",
+        "sha256": "0582602e51c99dbd686fe7edbcca36a72691a108f7f06c10828839fab9e4687f"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "1423053",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7a061d31-ad66-4886-9a29-2d8250c54c1d.service",
+        "MemoryMax": "17179869184",
+        "TasksMax": "64",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 7a061d31-ad66-4886-9a29-2d8250c54c1d",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "52237d6a949b4028a998cfe11c4b4cf0"
+      },
+      "memory_max": 17179869184,
+      "tasks_max": 64,
+      "scientific_verdict": null
+    },
+    "raw_trials": 85,
+    "preflight": {
+      "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+      "same_actual_cold_graph_as_resistance_control": true,
+      "job_sha256": "c1ede5a2ca7ff394d0f93f73f9a30c6953199b8df1a82b01f713461245e2bd66",
+      "factor_model_revision": "e23cda6cb58312d2e51a92df035baf9fb8629efc42aecbad4da1e39a47d7864e",
+      "factor_synapses": 2,
+      "initial_nodes": 44,
+      "factor_nodes": 45,
+      "training_started": false,
+      "scientific_verdict": null
+    },
+    "binding": {
+      "original_before_job": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-n0-proposal-cold-m40-aa21/input/before-count-job.json",
+        "sha256": "78c1d1bf7bfd67f44dcd7bad43dece867d1dc23c732a75b009cafc4ca60d7103",
+        "size": 674070
+      },
+      "SDK_terminal": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/n0-proposal-full-sdk-m40-w14/terminal.json",
+        "sha256": "7c4b9e7fe84dffebbe0bf6c21d2d9212b928b63c90aa0430981d6f8a6ecdf057",
+        "size": 432
+      },
+      "native_SDK_terminal": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n0-proposal-full-sdk-m40-w14/terminal.json",
+        "sha256": "53b05f8e4982c0af956d5e7ff0c1aa2a790b361d0b004d611e8879d43b3982b9",
+        "size": 508
+      },
+      "cold_case_identical_except_attempt_run_id": true,
+      "physical_preflights_and_Ns2_positive_control_still_required": true,
+      "search_probes": 160,
+      "maximum_sweeps": 1,
+      "search_wall_seconds": 32400,
+      "scientific_verdict": null
+    },
+    "preflight_training_started_field_is_historical": true
+  },
+  "Elder": {
+    "observed_utc": "2026-11-23T11:11:41.972802+00:00",
+    "SDK": {
+      "outer": {
+        "owner.json": {
+          "pid": 716739,
+          "start_ticks": "499801227",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "native-launch.json": {
+          "controller": "/home/user/timelearner-refactor/readbacks/s07-n0-proposal-full-sdk-elder-aa15-controller",
+          "request": {
+            "path": "/home/user/timelearner-refactor/readbacks/s07-n0-proposal-full-sdk-elder-aa15-prepared/owned-native-request.json",
+            "sha256": "b3676642a2cda921b3638674dcc55f5b660d4beb7c572ac5043943504ce080fc",
+            "size": 714
+          },
+          "source_commit": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+          "selected_tests": 114,
+          "scientific_verdict": null
+        },
+        "canonical-returncode.json": {
+          "returncode": 0
+        },
+        "kernel_owner_live": true
+      },
+      "raw_trials": 0
+    },
+    "cold": {
+      "queue": {
+        "owner.json": {
+          "pid": 835337,
+          "start_ticks": "500054512",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "kernel_owner_live": true
+      },
+      "raw_trials": 0
+    },
+    "cold_job": "classic-n0-proposal-cold-elder-ab3",
+    "execution": "queued_waiting_for_SDK114",
+    "same_host_compiler_comparison_pending": true
+  },
+  "Windows": {
+    "job": "windows-branch-count-two-sweeps-g2",
+    "raw_trials": 1001,
+    "kernel_train": {
+      "pid": 21328,
+      "identity": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+        "creation_filetime": "134398728342403660"
+      },
+      "identity_matches": true,
+      "running": true
+    },
+    "training_terminal": null,
+    "training_exception": null
+  },
+  "observation_receipts": [
+    {
+      "name": "timelearner-m40-SDK-and-cold-status-20261123-ab13.json",
+      "bytes": 16730,
+      "sha256": "98bef53f98b1767f87efd26e4069358c428401b455a08f8ab9d47d28fd21108c"
+    },
+    {
+      "name": "timelearner-elder-SDK-and-cold-status-20261123-ab13.json",
+      "bytes": 1049,
+      "sha256": "5913284e1f4d2336544cfcf99acb55a63a5e49390c9321229151800afc79b3bb"
+    },
+    {
+      "name": "timelearner-windows-count-poll-20261123-ab13.json",
+      "bytes": 13827,
+      "sha256": "4b2229271d26a8cc06f5bc255cf79dc8266c0fb259454245c118a4cfa668b97a"
+    }
+  ],
+  "no_live_runtime_changes": true,
+  "no_jobs_restarted": true,
+  "new_training_scientific_outcome": null,
+  "all_plan_stages_accepted": false,
+  "limits": [
+    "M40 and former Elder cold runs use different hosts and runtimes; the equal mathematical job and wall budget do not isolate algorithmic performance.",
+    "Elder cold queue records actual compiler hashes and relevant flags on SDK acceptance; queued is not training.",
+    "Raw trial counts are execution observations, not convergence percentages.",
+    "Preflight training_started=false describes the preflight boundary; later native kernel state proves Train running."
+  ]
+}
