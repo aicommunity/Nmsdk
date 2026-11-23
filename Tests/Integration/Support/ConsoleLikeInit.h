@@ -11,6 +11,7 @@ namespace NmsdkTests {
 
 struct ConsoleInitResult
 {
+    RDK::UApplication*          application{};
     RDK::UEPtr<RDK::UStorage>     storage;
     RDK::UEPtr<RDK::UEnvironment> environment;
     RDK::UEPtr<RDK::UEngine>      engine;

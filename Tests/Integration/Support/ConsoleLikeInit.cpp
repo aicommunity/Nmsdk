@@ -62,6 +62,7 @@ const ConsoleInitResult& InitEngineForPulseLibTests()
     }
 
     // После успешной инициализации ядра Storage/Environment/Engine доступны через C API
+    g_result.application = &g_appCore.application;
     g_result.storage     = RDK::GetStorage();
     g_result.environment = RDK::GetEnvironment();
     g_result.engine      = RDK::GetEngine();
