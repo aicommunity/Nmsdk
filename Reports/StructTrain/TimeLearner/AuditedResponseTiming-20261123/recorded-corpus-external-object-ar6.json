@@ -1,0 +1,94 @@
+{
+  "catalog": "experiments/2026-11-23/Recorded-report-rule-fixture-ar6/index.json",
+  "record": {
+    "kind": "timelearner_recorded_report_rule_fixture_external_publication",
+    "schema_version": 1,
+    "archive": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/31/31e791bdbe3a6eb628c16b06806cb63a45a9b6f8fe7f7bbab2edebcf91cf4b6d",
+      "sha256": "31e791bdbe3a6eb628c16b06806cb63a45a9b6f8fe7f7bbab2edebcf91cf4b6d",
+      "bytes": 455524
+    },
+    "members": {
+      "original-audit.json": {
+        "bytes": 209862,
+        "sha256": "ded244c88f8f4c7aeb862f080a7c3253f278d5d129b3f6fd5ff5e20b51bd5171"
+      },
+      "native/execution.json": {
+        "bytes": 3109,
+        "sha256": "81a516543d6827a68d41c46c3b6039cbdfb420ffa95b69a082aea1b37dac8f38"
+      },
+      "native/evaluation.json": {
+        "bytes": 4127,
+        "sha256": "7b68764d9be5ddc0155d382c0157d9568102d49989557ed6678224314d2e083a"
+      },
+      "native/trial-0.json": {
+        "bytes": 1816825,
+        "sha256": "0a923f2c73b7b99182347829cd52fcac2e9967d6d5d47c31a92faa8e73771ba0"
+      },
+      "native/trial-1.json": {
+        "bytes": 1748957,
+        "sha256": "7f7275f1ca2b0d204cb7b9d773a71a4add512fa8ecc54a16f990f20664405088"
+      },
+      "native/trial-2.json": {
+        "bytes": 1749001,
+        "sha256": "f050826f76d32e14be84c7d6f79f1f9585a06699c75c295206754b986da5e523"
+      },
+      "native/trial-3.json": {
+        "bytes": 1748496,
+        "sha256": "7479c145fb6c64a2ecae9a4f459953567152cdcd132c735434994362a9a61087"
+      },
+      "native/trial-4.json": {
+        "bytes": 1749185,
+        "sha256": "ea94309b7a4c7c7bdd8bb0319ac9c9774c3ad51fa02d653392bf4dff5afa588b"
+      },
+      "native/trial-5.json": {
+        "bytes": 1753276,
+        "sha256": "38f42d8673a30e56a56b8e244288ca7ad2c78937a4d72e75ae1c7f370f1eb13c"
+      },
+      "native/trial-6.json": {
+        "bytes": 1825040,
+        "sha256": "7ff4a1f41582442801978b2a7a96797f1e93ee0b7256e5c0906530fa1c4745ca"
+      },
+      "native/trial-7.json": {
+        "bytes": 1754065,
+        "sha256": "29405027bacbf1e85ef613089b8bc56a6b89f6c353621313eb278309c16eb5b6"
+      },
+      "fixture-provenance.json": {
+        "bytes": 1095,
+        "sha256": "abf71cef630bbf627efd4879786c75b07da124c0add8c10c3d1dae819fe6de06"
+      }
+    },
+    "metadata": {
+      "kind": "timelearner_actual_prepared_report_rule_fixture",
+      "schema_version": 1,
+      "source_audit": "/home/user/timelearner-refactor/requests/classic-measured-count-recognition-elder-s1/threshold/independent-audit.json",
+      "source_native": "/home/user/timelearner-refactor/readbacks/classic-measured-count-recognition-elder-s1-threshold/native",
+      "source_audit_sha256": "ded244c88f8f4c7aeb862f080a7c3253f278d5d129b3f6fd5ff5e20b51bd5171",
+      "source_execution_sha256": "0007b04b59e51bfaa069bc3ff33db7039c1e3118aa44a5664dcd6561442b9a0b",
+      "source_model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "source_recorded_by_prior_full_audit": true,
+      "new_full_model_reaudit_performed": false,
+      "derived_binding_is_rule_test_fixture_only": true,
+      "new_native_model_executed": false,
+      "scientific_verdict": null
+    },
+    "new_native_model_executed": false,
+    "new_full_model_reaudit_performed": false,
+    "scientific_verdict": null
+  }
+}
