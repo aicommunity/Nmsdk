@@ -1,0 +1,226 @@
+{
+  "kind": "timelearner_Classic_count_pair_independent_primary_restoration",
+  "schema_version": 1,
+  "producer_host": "M40 .17",
+  "restoration_host": "local Windows",
+  "members": 155,
+  "expanded_bytes": 258566315,
+  "primary": {
+    "kind": "timelearner_complete_Classic_count_short_cadence_pair_primary",
+    "schema_version": 1,
+    "objects": {
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/fe/fe07056754f9621ebc52e0a985a5f3fa4100ce7dca6c7b2bffb0f34113a969aa",
+        "sha256": "fe07056754f9621ebc52e0a985a5f3fa4100ce7dca6c7b2bffb0f34113a969aa",
+        "bytes": 826972
+      },
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/50/500d712b077b533c027aa0ab1f53b20e8e3baf84e12d26012cc66e27a767402f",
+        "sha256": "500d712b077b533c027aa0ab1f53b20e8e3baf84e12d26012cc66e27a767402f",
+        "bytes": 27670
+      }
+    },
+    "members": 155,
+    "expanded_bytes": 258566315,
+    "archive_bytes": 826972,
+    "source_primary_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-22/classic-count-M4-m40/baseline-and-threshold-primary-a1.json",
+    "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+    "threshold": 0.020736298148054874,
+    "conditions": [
+      {
+        "id": "reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "design": {
+          "protocol_id": "frozen_eight_pattern_cadence_and_reset_v1",
+          "rotation": 1,
+          "cadence": "short",
+          "following_trial_reset_policy": "reset_per_trial",
+          "first_trial_reset_policy": "reset_per_trial",
+          "duration_before_final_trial": 0.69,
+          "short_duration_rule": "ceil((max_original_last_input+0.2)*frequency)/frequency",
+          "final_quiet_tail_minimum_seconds": 2.0,
+          "final_observation_duration": 2.4905,
+          "frequency_hz": 2000,
+          "target_position": 7,
+          "source_pattern_hashes": [
+            "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+            "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+            "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+            "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+            "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+            "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+            "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6"
+          ],
+          "actual_onset_intervals_must_be_measured": true,
+          "complete_contiguous_observations_required": true,
+          "training_performed": false,
+          "threshold_selected": false,
+          "expected_response_counts": null,
+          "independent_stochastic_repetitions": false
+        }
+      },
+      {
+        "id": "preserve",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "design": {
+          "protocol_id": "frozen_eight_pattern_cadence_and_reset_v1",
+          "rotation": 1,
+          "cadence": "short",
+          "following_trial_reset_policy": "preserve_neuron_dynamics",
+          "first_trial_reset_policy": "reset_per_trial",
+          "duration_before_final_trial": 0.69,
+          "short_duration_rule": "ceil((max_original_last_input+0.2)*frequency)/frequency",
+          "final_quiet_tail_minimum_seconds": 2.0,
+          "final_observation_duration": 2.4905,
+          "frequency_hz": 2000,
+          "target_position": 7,
+          "source_pattern_hashes": [
+            "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+            "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+            "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+            "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+            "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+            "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+            "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6"
+          ],
+          "actual_onset_intervals_must_be_measured": true,
+          "complete_contiguous_observations_required": true,
+          "training_performed": false,
+          "threshold_selected": false,
+          "expected_response_counts": null,
+          "independent_stochastic_repetitions": false
+        }
+      }
+    ],
+    "comparison": [
+      {
+        "sample_id": "phasea-row-0",
+        "reset": [
+          5.327
+        ],
+        "preserve": [
+          5.0865,
+          5.327
+        ],
+        "reset_events_before_last_input": [],
+        "preserve_events_before_last_input": [
+          5.0865
+        ],
+        "classification_preserved": true
+      },
+      {
+        "sample_id": "phasea-row-1",
+        "reset": [],
+        "preserve": [],
+        "reset_events_before_last_input": [],
+        "preserve_events_before_last_input": [],
+        "classification_preserved": true
+      },
+      {
+        "sample_id": "phasea-row-2",
+        "reset": [],
+        "preserve": [],
+        "reset_events_before_last_input": [],
+        "preserve_events_before_last_input": [],
+        "classification_preserved": true
+      },
+      {
+        "sample_id": "phasea-row-3",
+        "reset": [],
+        "preserve": [],
+        "reset_events_before_last_input": [],
+        "preserve_events_before_last_input": [],
+        "classification_preserved": true
+      },
+      {
+        "sample_id": "phasea-row-4",
+        "reset": [],
+        "preserve": [],
+        "reset_events_before_last_input": [],
+        "preserve_events_before_last_input": [],
+        "classification_preserved": true
+      },
+      {
+        "sample_id": "phasea-row-5",
+        "reset": [],
+        "preserve": [],
+        "reset_events_before_last_input": [],
+        "preserve_events_before_last_input": [],
+        "classification_preserved": true
+      },
+      {
+        "sample_id": "phasea-row-6",
+        "reset": [
+          3.9445
+        ],
+        "preserve": [
+          3.9445
+        ],
+        "reset_events_before_last_input": [],
+        "preserve_events_before_last_input": [],
+        "classification_preserved": true
+      },
+      {
+        "sample_id": "phasea-row-7",
+        "reset": [],
+        "preserve": [],
+        "reset_events_before_last_input": [],
+        "preserve_events_before_last_input": [],
+        "classification_preserved": true
+      }
+    ],
+    "all_native_artifacts_and_observations_preserved": true,
+    "all_source_file_bytes_unchanged": true,
+    "training_performed": false,
+    "training_completed": false,
+    "threshold_selected": false,
+    "all_target_positions_tested": false,
+    "independent_host_restoration_pending": true,
+    "scientific_verdict": null
+  },
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "fe07056754f9621ebc52e0a985a5f3fa4100ce7dca6c7b2bffb0f34113a969aa",
+    "archive_members_verified": 155,
+    "retained_regular_files": 155,
+    "compatibility": "retain-regular-glog-aliases-v1",
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "original_producer_files_preserved": true,
+  "numerical_or_model_reexecution": false,
+  "scientific_verdict": null
+}

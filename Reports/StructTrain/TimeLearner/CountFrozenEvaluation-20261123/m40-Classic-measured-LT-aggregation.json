@@ -1,0 +1,163 @@
+{
+  "kind": "timelearner_Classic_measured_decision_potential_identity",
+  "schema_version": 1,
+  "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+  "model_data_sha256": "cc78a7305c19eea4cbb13ff98c1a16dd12dc3b8a501e250b99852db368bd49c7",
+  "full_graph_nodes": 2218,
+  "parameters": [
+    {
+      "length": 241,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 201,
+      "resistance": 86000000,
+      "synapses": 6
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "LT_class": "TLNativeFast3F2000_LTZone",
+  "LT_path": "$.LTZone",
+  "LT_parameters": {
+    "Threshold": {
+      "binding": false,
+      "data": {
+        "type": "binary64",
+        "value": "3f953be5698b43dc"
+      },
+      "mask": "257"
+    },
+    "UseAveragePotential": {
+      "binding": false,
+      "data": {
+        "type": "boolean",
+        "value": true
+      },
+      "mask": "257"
+    },
+    "NumChannelsInGroup": {
+      "binding": false,
+      "data": {
+        "type": "signed_integer",
+        "value": "2"
+      },
+      "mask": "257"
+    }
+  },
+  "LT_input_bindings": [
+    {
+      "kind": "property_pointer",
+      "slot": "0",
+      "source": "$.Soma1.ExcChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "1",
+      "source": "$.Soma1.InhChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "2",
+      "source": "$.Soma2.ExcChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "3",
+      "source": "$.Soma2.InhChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "4",
+      "source": "$.Soma3.ExcChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "5",
+      "source": "$.Soma3.InhChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "6",
+      "source": "$.Soma4.ExcChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "7",
+      "source": "$.Soma4.InhChannel:Output",
+      "target": "$.LTZone:Inputs"
+    }
+  ],
+  "threshold": 0.020736298148054874,
+  "LTMembrane_paths": [],
+  "recorded_samples": 29298,
+  "comparison": "recorded LTZone.Potential versus arithmetic mean of four recorded Soma.SumPotential values at each actual sample",
+  "maximum_absolute_difference": 2.220446049250313e-16,
+  "original_samples_and_graph_unchanged": true,
+  "model_or_numerical_simulation_reexecuted": false,
+  "individual_soma_curve_is_not_the_LT_decision_potential": true,
+  "scope": "this exact four-soma two-channel-per-soma model; not a universal heterogeneous-graph formula",
+  "scientific_verdict": null,
+  "LT_base_class": "NPulseLTZoneThreshold",
+  "runtime_source_closure": {
+    "root": {
+      "head": "5b6cb11ee46ae196ecbf81003eec45654b4c3fad",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "head": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "verified_common_LT_source_blob_unchanged_between_runtime_and_current": "12a9861d18896987d0255220e8ab8f5a40bc8d71",
+  "current_PulseLib_source": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+  "source_code_path": "Core/NPulseLTZoneCommon.cpp",
+  "reviewed_graphic_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/classic-count-M4-m40/short-cadence-pair-reviewed-temporal-figures-k6.json"
+}

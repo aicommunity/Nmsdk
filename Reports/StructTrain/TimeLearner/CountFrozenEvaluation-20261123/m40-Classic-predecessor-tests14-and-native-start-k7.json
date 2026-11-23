@@ -1,0 +1,105 @@
+{
+  "classic-count-predecessor-m40-j1": {
+    "supervisor_live": true,
+    "state": {
+      "observed_utc": "2026-11-23T03:16:39.774925+00:00",
+      "case": "phasea-row-1-reset",
+      "stage": "running_native_predecessor_control",
+      "native_trials": 2,
+      "scientific_verdict": null
+    },
+    "completed_cases": [],
+    "declaration_tests": {
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "actual_count_model_fixture": true
+    },
+    "actual_native": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "b1644dced30e0e799fc140df837d436c798a2e032646d47469c0caa7330ddb13",
+        "unit": "timelearner-256abfe1-9edb-435e-af38-01b3e279ac1d.service",
+        "invocation_id": "d9d8fca046bd495d8624aadc2cbd65ce",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-256abfe1-9edb-435e-af38-01b3e279ac1d.service",
+        "initial_main_pid": 1832164,
+        "initial_start_ticks": "447928921",
+        "sha256": "0c57c2ad1d09a5fbdd841b7fe73c721c130423f84b63ed074a73f48ffdb9837c"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "1832164",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-256abfe1-9edb-435e-af38-01b3e279ac1d.service",
+        "MemoryMax": "2147483648",
+        "TasksMax": "64",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 256abfe1-9edb-435e-af38-01b3e279ac1d",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "d9d8fca046bd495d8624aadc2cbd65ce"
+      },
+      "memory_max": 2147483648,
+      "tasks_max": 64,
+      "scientific_verdict": null
+    },
+    "native_case": "phasea-row-1-reset",
+    "closed_trial_files": 0,
+    "actual_controller": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "9e36f087ecdb4baf9923bab3fde4fca78f51844e06433fae23578ee1913a229b",
+        "unit": "timelearner-b0f820b8-d69f-4c9e-928b-2422bc03d607.service",
+        "invocation_id": "7587c690546044a49577f23061c1f968",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b0f820b8-d69f-4c9e-928b-2422bc03d607.service",
+        "initial_main_pid": 1612105,
+        "initial_start_ticks": "447900760",
+        "sha256": "357134efcedb556995ad2ae1f0a094556794c5cfdaba9d4b6f1378ee5d89b264"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "1612105",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b0f820b8-d69f-4c9e-928b-2422bc03d607.service",
+        "MemoryMax": "2147483648",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt b0f820b8-d69f-4c9e-928b-2422bc03d607",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "7587c690546044a49577f23061c1f968"
+      },
+      "memory_max": 2147483648,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    }
+  },
+  "classic-count-long-predecessor-m40-k2": {
+    "supervisor_live": true,
+    "state": {
+      "observed_utc": "2026-11-23T03:22:48.996752+00:00",
+      "stage": "waiting_for_closed_Classic_short_predecessor_series",
+      "scientific_verdict": null
+    },
+    "completed_cases": []
+  }
+}

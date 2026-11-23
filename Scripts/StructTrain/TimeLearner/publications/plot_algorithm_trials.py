@@ -17,6 +17,20 @@ def _digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def physical_trial_title(observation):
+    """Name the actual trial boundary, including the first reset of a stream."""
+    from ..native_evidence import number, require
+    labels={'target':'Целевой паттерн','foil':'Отвлекающий паттерн'}
+    policies={'reset_per_trial':'сброс динамики',
+              'preserve_neuron_dynamics':'сохранение динамики'}
+    label=observation['label'];policy=observation['reset_policy']
+    require(label in labels and policy in policies,'known_measured_figure_condition_required')
+    intervals=observation['pattern_isi']
+    require(type(intervals) is list and bool(intervals),'measured_figure_pattern_required')
+    values='; '.join(format(number(v)*1000,'.8g') for v in intervals[1:])
+    return labels[label]+' · '+policies[policy]+' · '+(values+' мс' if values else 'один импульс')
+
+
 def _index(output, records):
     response_ru={'TP':'Правильное обнаружение','FP':'Ложное срабатывание',
                  'TN':'Правильное отклонение','FN':'Пропуск целевого паттерна'}
@@ -79,6 +93,9 @@ def render(specification, output, *, matplotlib_libs=None):
         observation=load(path)
         require(observation.get('trial_id')==row['trial_id'] and observation.get('sample_id')==row['sample_id'],
                 'figure_observation_identity_mismatch')
+        if 'reset_policy' in row:
+            require(row['reset_policy']==observation.get('reset_policy'),
+                    'figure_declared_reset_policy_mismatch')
         require(observation.get('model_before')==row['model_revision'] and
                 observation.get('model_after')==row['model_revision'],'figure_frozen_model_changed')
         require(observation.get('complete') is True and observation.get('valid') is True and
@@ -205,6 +222,7 @@ def render(specification, output, *, matplotlib_libs=None):
             plt.close(full)
             records.append(dict(id=row['id'],case_id=row['case_id'],response=row['response'],
                 title=row['title'],trial_id=row['trial_id'],sample_id=row['sample_id'],
+                actual_reset_policy=observation.get('reset_policy'),
                 source_primary=row['primary'],source_observation=row['observation'],
                 model_revision=row['model_revision'],onset=observation['stimulus_onset'],
                 relative_stimulus_times=stimuli,relative_spike_times=spikes,

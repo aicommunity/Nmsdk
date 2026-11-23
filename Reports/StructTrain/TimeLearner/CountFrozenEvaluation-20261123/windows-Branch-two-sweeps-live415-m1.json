@@ -1,0 +1,338 @@
+{
+  "job": "windows-branch-count-two-sweeps-g2",
+  "owner.json": {
+    "pid": 22292,
+    "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+    "creation_filetime": "134398717021562168"
+  },
+  "state.json": {
+    "stage": "preflight-and-new-cold-two-sweep-Train",
+    "observed_utc": "2026-11-23T01:58:55.397266+00:00",
+    "scientific_verdict": null
+  },
+  "previous-matrix-closure.json": {
+    "task": {
+      "last_result": 0,
+      "instances": 0,
+      "state": 3
+    },
+    "terminal": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-predecessor-matrix-e1\\orchestration-terminal.json",
+      "sha256": "f7c25dc359b452c79d780370942cff491259b2c1812c8ad98554530ec8aadfc8",
+      "size": 48573
+    },
+    "closed_native_cases": [
+      {
+        "case": "foil-1-reset",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-reset\\process-result.json",
+          "sha256": "b47a23d121b794989cbf15895ab75d360ea81374fb1fcd41ffb97917d431e823",
+          "size": 675
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-1-preserve",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-1-preserve\\process-result.json",
+          "sha256": "4c43c59a4aa2a741aebb3a095a137cf152265a7c7fd32ff37a87322a42de0bee",
+          "size": 675
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-2-reset",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-reset\\process-result.json",
+          "sha256": "86d06b56c4dea4025a82552f29c9993b5708fe235215857908a1c035e811aee8",
+          "size": 674
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-2-preserve",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-2-preserve\\process-result.json",
+          "sha256": "e5423e920c0798e88c35bb560ebca4b7407bac7965a4417b73d7061bf5e034f1",
+          "size": 675
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-3-reset",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-reset\\process-result.json",
+          "sha256": "919cfd6274d6f629836a538ce34c7a127c63ec438e1b0cd3b8e4b24cabc279ef",
+          "size": 675
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-3-preserve",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-3-preserve\\process-result.json",
+          "sha256": "3f366f3979ff54868b8a6c62a9d8eeb54811bd423189225fafc2219cbe0dca23",
+          "size": 674
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-4-reset",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-reset\\process-result.json",
+          "sha256": "6211fe79039c57ec1336eb26e0b3731502501d0f5b93117d44fbcffb217d02d2",
+          "size": 674
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-4-preserve",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-4-preserve\\process-result.json",
+          "sha256": "d25e3da08d3f197c9d26daa6b57973238ec2247f8535ff37e4068d18f1615fc6",
+          "size": 675
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-5-reset",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-reset\\process-result.json",
+          "sha256": "6212f74d9cd219ef1d054227e1cdce7cf36a280f3a3b8375312c5bcec4e6dbf3",
+          "size": 674
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-5-preserve",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-5-preserve\\process-result.json",
+          "sha256": "41eb6cdb9da9d685c74f8d2ddc26b25af910d640a8ee21bdbe910337d4f4540e",
+          "size": 675
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-6-reset",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-reset\\process-result.json",
+          "sha256": "112de53ab6e3a6c7a9daf9e991c87206679fe9464105764274c9419a24a6f00d",
+          "size": 675
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-6-preserve",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-6-preserve\\process-result.json",
+          "sha256": "d9aeb76fc19eb0cd9f29b9a24803f5b461bfb4e1d277e4c82ae6b4f550bcda5c",
+          "size": 675
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-7-reset",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-reset\\process-result.json",
+          "sha256": "058184bd294a4761814151b28605aac72cc67f70a9083ea400f9b1edb31464e9",
+          "size": 675
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      },
+      {
+        "case": "foil-7-preserve",
+        "process": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-predecessor-matrix-e1-foil-7-preserve\\process-result.json",
+          "sha256": "56c98116410a5652d8df2cbe5e71a702cb56acafd6b3ff8f6d9f2b424fa61bf2",
+          "size": 675
+        },
+        "kernel": {
+          "original_named_job_absent": true,
+          "original_main_absent": true,
+          "pid_reused": false
+        }
+      }
+    ],
+    "all_fourteen_native_groups_closed": true,
+    "scientific_verdict": null
+  },
+  "resource-admission.json": {
+    "available_physical_bytes": 20861075456,
+    "free_disk_bytes": 1420615286784,
+    "native_memory_bytes": 17179869184,
+    "maximum_output_bytes": 17179869184,
+    "min_free_disk_bytes": 10737418240,
+    "whole_attempt_seconds": 93600,
+    "native_wall_seconds": 79200,
+    "scientific_verdict": null
+  },
+  "cold_start_comparison": {
+    "source": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\preflight\\native\\initial-state.json",
+      "sha256": "5f6f4e974ef7d7e38a751ad774d1cc86b5bc23247d22b45e7af7ad7bfb624b3f",
+      "size": 72894
+    },
+    "observed": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\preflight\\native\\initial-state.json",
+      "sha256": "48c623740d04c4962da17d6e5490bcb4cf88003492635abb3d552ccb2c1888e7",
+      "size": 72894
+    },
+    "physical_graph_and_parameters_preserved": true,
+    "controller_budget_changed": true,
+    "training_started": false,
+    "scientific_verdict": null
+  },
+  "preflight_owner": {
+    "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+    "creation_filetime": "134398728271741977",
+    "pid": 10196,
+    "job_name": "Local\\TimeLearner-a90896e7-2f6a-4531-a495-5a8fc28b0e23",
+    "runtime_fingerprint": "09bff57ff10faa264e483a191810bd3c4048153408f9420f3f1b63d3239bdf3f",
+    "suspended_until_limits_applied": true
+  },
+  "preflight_result": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "completed",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 47,
+    "wall_seconds": 3.415651199989952,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-a90896e7-2f6a-4531-a495-5a8fc28b0e23"
+  },
+  "factor-preflight_owner": {
+    "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+    "creation_filetime": "134398728307276617",
+    "pid": 12016,
+    "job_name": "Local\\TimeLearner-88666439-e760-473d-8cf4-71fe3ea91623",
+    "runtime_fingerprint": "09bff57ff10faa264e483a191810bd3c4048153408f9420f3f1b63d3239bdf3f",
+    "suspended_until_limits_applied": true
+  },
+  "factor-preflight_result": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "completed",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 47,
+    "wall_seconds": 3.4140935000032187,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-88666439-e760-473d-8cf4-71fe3ea91623"
+  },
+  "train_owner": {
+    "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+    "creation_filetime": "134398728342403660",
+    "pid": 21328,
+    "job_name": "Local\\TimeLearner-ba240411-ffe3-4283-a9ff-c7b2cfc3812a",
+    "runtime_fingerprint": "09bff57ff10faa264e483a191810bd3c4048153408f9420f3f1b63d3239bdf3f",
+    "suspended_until_limits_applied": true
+  },
+  "actual_supervisor_kernel": {
+    "pid": 22292,
+    "identity": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134398717021562168"
+    },
+    "identity_matches": true,
+    "running": true
+  },
+  "actual_train_kernel": {
+    "pid": 21328,
+    "identity": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+      "creation_filetime": "134398728342403660"
+    },
+    "identity_matches": true,
+    "running": true
+  },
+  "closed_raw_trials": 415,
+  "effective_preflight_admission": {
+    "job_sha256": "912ffb859015898ecb200adfa4e87387c58b2af31f675c8758b14df75ed28cbd",
+    "normalization": "N0",
+    "initial_model_revision": "ab751ba723852917588b694d156f1d8c9033b8b0a0ec7b8e93faacec0d747dc4",
+    "effective_initial_model_checked": true,
+    "factor_control_synapses": 2,
+    "initial_nodes": 14,
+    "factor_control_nodes": 15,
+    "factor_control_input_indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "factor_control_is_a_separate_initial_state": true,
+    "full_training_audit_pending": true,
+    "scientific_verdict": null
+  }
+}
