@@ -1,0 +1,143 @@
+{
+  "kind": "timelearner_measured_count_bracket_visual_review",
+  "schema_version": 1,
+  "publication": {
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/measured-Classic-count-bracket-at13/index.json",
+    "record": {
+      "kind": "timelearner_actual_reservation_fix6_and_count_bracket_render",
+      "schema_version": 1,
+      "source_root": "615a14563856d633827b7ee26326ddd55cede998",
+      "resource_tests_source_root": "83c0839e84c846214e2b01ff32fb74e72c2a1d59",
+      "resource_tests_repeated": false,
+      "host": "M40",
+      "tests": {
+        "expected": 6,
+        "executed": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": true
+      },
+      "tests_log": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b8/b8856cb33e984b09551f0df90c77a451be3d836f819b15fb862288d06461a24a",
+        "sha256": "b8856cb33e984b09551f0df90c77a451be3d836f819b15fb862288d06461a24a",
+        "bytes": 1500
+      },
+      "full_primary_audit": {
+        "file": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-n0-proposal-full-primary-audit-m40-ac6/worker/tmp/matched-count-training-audit.json",
+          "sha256": "9402aebcaaa4d016409e7b6812c7b9f0eede3efd7af53909bebc00b0db929307",
+          "size": 118074
+        },
+        "validation": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-n0-proposal-full-primary-audit-m40-ac6/worker/validation/result.json",
+          "sha256": "f28095a39c7cf8c72183bcc1e7f4ee91c73fb59fbb8d52e1b290e911935351f9",
+          "size": 1165
+        },
+        "native_files": 2024,
+        "training_outcome": "budget_exhausted",
+        "completed_boundary": false,
+        "source_package": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-n0-proposal-cold-m40-aa21/train/native/train_stopped_state.json",
+          "sha256": "9efa29fe523c16f2d2fb1edffa1e7d38fb771427b16fb519ed3745a478131281",
+          "size": 1203258866
+        }
+      },
+      "rendered_cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-23/measured-Classic-count-bracket-at13",
+      "figures": {
+        "measured-count-bracket.png": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/77/77254d6309b30b580938813b9d69fbfe6fe4118fc232a518666a64fe7373059c",
+          "sha256": "77254d6309b30b580938813b9d69fbfe6fe4118fc232a518666a64fe7373059c",
+          "bytes": 420900
+        },
+        "measured-count-bracket.svg": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/ea/eabe0ec70f48b001a4a35f1d074f051f082565361c22016f638d73170c6d37ee",
+          "sha256": "eabe0ec70f48b001a4a35f1d074f051f082565361c22016f638d73170c6d37ee",
+          "bytes": 68236
+        },
+        "figure-data.json": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/5a/5aea5f49079c58295868481fa14c566d2564281e6eb3c48f51f3a03d53808027",
+          "sha256": "5aea5f49079c58295868481fa14c566d2564281e6eb3c48f51f3a03d53808027",
+          "bytes": 12247
+        }
+      },
+      "derived_rows": [
+        {
+          "synapses": 12,
+          "group_file": "composite-measurements/group-000018.json",
+          "trace_file": "composite-measurements/group-000018/full-before.csv",
+          "samples": 3601,
+          "selected_time": 0.501499999999993,
+          "selected_potential": 0.025657426523912563,
+          "global_time": 0.5634999999999764,
+          "global_potential": 0.02673451072499189,
+          "global_is_selected": false,
+          "amplitude_tolerance_units": -111.8787289492329
+        },
+        {
+          "synapses": 13,
+          "group_file": "composite-measurements/group-000020.json",
+          "trace_file": "composite-measurements/group-000020/full-before.csv",
+          "samples": 3601,
+          "selected_time": 0.501499999999993,
+          "selected_potential": 0.027113373597419055,
+          "global_time": 0.5635000000000048,
+          "global_potential": 0.02825161086016159,
+          "global_is_selected": false,
+          "amplitude_tolerance_units": 33.715978401416265
+        },
+        {
+          "synapses": 14,
+          "group_file": "composite-measurements/group-000022.json",
+          "trace_file": "composite-measurements/group-000022/full-before.csv",
+          "samples": 3601,
+          "selected_time": 0.5015000000000214,
+          "selected_potential": 0.0284665879272753,
+          "global_time": 0.5635000000000048,
+          "global_potential": 0.029661664295590584,
+          "global_is_selected": false,
+          "amplitude_tolerance_units": 169.03741138704075
+        }
+      ],
+      "visual_review_complete": false,
+      "recognition_recovery_not_yet_dispatched": true,
+      "new_native_experiment": false,
+      "scientific_verdict": null,
+      "observed_utc": "2026-11-23T20:22:10.204967+00:00"
+    }
+  },
+  "visual_review": {
+    "reviewed_utc": "2026-11-23T21:25:42.338592+00:00",
+    "file": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/77/77254d6309b30b580938813b9d69fbfe6fe4118fc232a518666a64fe7373059c",
+      "sha256": "77254d6309b30b580938813b9d69fbfe6fe4118fc232a518666a64fe7373059c",
+      "bytes": 420900
+    },
+    "method": "actual full PNG displayed with view_image",
+    "accepted": true,
+    "width": 2720,
+    "height": 2080,
+    "findings": [
+      "all three measured traces, actual inputs, assigned and global maxima distinguishable",
+      "Ns13 reduces assigned amplitude error compared to Ns12, but all three miss original amplitude tolerance",
+      "timing residual8ms is within original20ms, no Exact implied"
+    ]
+  },
+  "new_native_execution": false,
+  "scientific_verdict": null
+}

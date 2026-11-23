@@ -1,0 +1,149 @@
+{
+  "observed_utc": "2026-11-23T20:54:40.139081+00:00",
+  "tasks": {
+    "windows-branch-count-two-sweeps-g2": {
+      "last_result": 0,
+      "instances": 0,
+      "state": 3
+    },
+    "windows-two-sweep-primary-audit-ad4": {
+      "last_result": 0,
+      "instances": 0,
+      "state": 3
+    },
+    "windows-two-sweep-recognition-aq7": {
+      "last_result": 1,
+      "instances": 0,
+      "state": 3
+    }
+  },
+  "files": {
+    "jobs/windows-branch-count-two-sweeps-g2/terminal.json": {
+      "execution": "completed",
+      "validity": "pending_full_primary_audit",
+      "job_sha256": "912ffb859015898ecb200adfa4e87387c58b2af31f675c8758b14df75ed28cbd",
+      "native_execution_sha256": "2ae83e5b01e38ab5be93cfd67983831114900e4c88ce6bf49730b49a3d5703f0",
+      "training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "package_path": "train_stopped_state.json",
+      "full_primary_audit_complete": false,
+      "training_certificate_verified": false,
+      "scientific_verdict": null
+    },
+    "jobs/windows-branch-count-two-sweeps-g2/train/process-result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "completed",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 47,
+      "wall_seconds": 66345.34915699996,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-ba240411-ffe3-4283-a9ff-c7b2cfc3812a"
+    },
+    "jobs/windows-two-sweep-primary-audit-ad4/validation/result.json": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "windows-two-sweep-primary-audit-ad4",
+      "package_fingerprint": "d4540bd243aa2da1481ce5b2e388e43b073e45490d110022b81d70edc0a4fb3b",
+      "execution": "completed",
+      "assertion_status": "passed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_closed_doubled_count_training.ClosedDoubledCountTrainingTest.test_actual_complete_primary_and_single_package_decode"
+      ],
+      "executed_tests": 1,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {
+        "TIMELEARNER_MATCHED_COUNT_NATIVE": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native",
+          "files": 4791,
+          "fingerprint": "1bc26a1721e363ee0b8bbc749057915ce882bf2f92a1c907e6d6b39717a3633b"
+        },
+        "TIMELEARNER_MATCHED_COUNT_ORIGINAL": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-two-sweep-primary-audit-ad4\\original-fixture",
+          "files": 1,
+          "fingerprint": "313b1e666df46de50c0dedc6f7de8149d111f51183ad2533cfb527da6a641e5c"
+        }
+      },
+      "scientific_verdict": null
+    },
+    "jobs/windows-two-sweep-primary-audit-ad4/tmp/two-sweep-count-training-audit.json": {
+      "kind": "timelearner_closed_doubled_count_training_audit",
+      "schema_version": 1,
+      "source_package_full_decodes": 1,
+      "consumed_job_sha256": "912ffb859015898ecb200adfa4e87387c58b2af31f675c8758b14df75ed28cbd",
+      "source_package": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native\\train_stopped_state.json",
+        "sha256": "87a69986520a1c8c9be0af82f512909c4d339c683d306317fa64a292686dd989",
+        "size": 2030868597
+      },
+      "training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "full_primary_keys": [
+        "training_audit",
+        "completed_boundary",
+        "training_outcome",
+        "native_execution_verified",
+        "evaluation_verdict"
+      ]
+    },
+    "controls/windows-two-sweep-primary-audit-ad4/terminal.json": {
+      "execution": "completed",
+      "validity": "valid",
+      "full_primary_audit_complete": true,
+      "validation": {
+        "kind": "timelearner_python_validation_result",
+        "schema_version": 1,
+        "suite_id": "windows-two-sweep-primary-audit-ad4",
+        "package_fingerprint": "d4540bd243aa2da1481ce5b2e388e43b073e45490d110022b81d70edc0a4fb3b",
+        "execution": "completed",
+        "assertion_status": "passed",
+        "expected_test_ids": [
+          "Scripts.StructTrain.TimeLearner.tests.test_closed_doubled_count_training.ClosedDoubledCountTrainingTest.test_actual_complete_primary_and_single_package_decode"
+        ],
+        "executed_tests": 1,
+        "failures": [],
+        "errors": [],
+        "skipped": [],
+        "fixtures": {
+          "TIMELEARNER_MATCHED_COUNT_NATIVE": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\native",
+            "files": 4791,
+            "fingerprint": "1bc26a1721e363ee0b8bbc749057915ce882bf2f92a1c907e6d6b39717a3633b"
+          },
+          "TIMELEARNER_MATCHED_COUNT_ORIGINAL": {
+            "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-two-sweep-primary-audit-ad4\\original-fixture",
+            "files": 1,
+            "fingerprint": "313b1e666df46de50c0dedc6f7de8149d111f51183ad2533cfb527da6a641e5c"
+          }
+        },
+        "scientific_verdict": null
+      },
+      "actual_training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "next_operation": "diagnostic_evaluation_of_actual_stopped_model",
+      "source_package_full_decodes": 1,
+      "source_root": "3d23acecf1308207c9f715be561a13bc2678a619",
+      "new_model_executed": false,
+      "classification_performed": false,
+      "scientific_verdict": null
+    },
+    "jobs/windows-two-sweep-recognition-aq7/exception.json": {
+      "reason": "[WinError 31] Присоединенное к системе устройство не работает.",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\source-two-sweep-recognition-worker-win-aq6\\Scripts\\StructTrain\\TimeLearner\\windows_stopped_recognition_study.py\", line 237, in supervise\n    running=[live(api,k,v)for v in identities]\n             ~~~~^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-two-sweep-recognition-worker-win-aq6\\Scripts\\StructTrain\\TimeLearner\\windows_stopped_recognition_study.py\", line 149, in live\n    actual=api.identity(h)\n  File \"C:\\Projects\\TimeLearnerWorker\\source-two-sweep-recognition-worker-win-aq6\\Scripts\\StructTrain\\TimeLearner\\windows_process.py\", line 125, in identity\n    self.check(self.image_name(process, 0, path, C.byref(size)))\n    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-two-sweep-recognition-worker-win-aq6\\Scripts\\StructTrain\\TimeLearner\\windows_process.py\", line 99, in check\n    if not value:raise C.WinError(C.get_last_error())\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nPermissionError: [WinError 31] Присоединенное к системе устройство не работает.\n",
+      "original_Train_not_restarted": true,
+      "scientific_verdict": null
+    }
+  }
+}

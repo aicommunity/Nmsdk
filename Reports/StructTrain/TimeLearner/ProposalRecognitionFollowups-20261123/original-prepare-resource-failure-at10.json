@@ -1,0 +1,26 @@
+{
+  "kind": "timelearner_actual_recognition_preparation_failure",
+  "schema_version": 1,
+  "observed_utc": "2026-11-23T20:13:26.938176+00:00",
+  "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/media/user/Data/TimeLearnerRefactor/source-n0-proposal-full-sdk-m40-w6/Scripts/StructTrain/TimeLearner/linux_stopped_recognition_study.py\", line 248, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n                                             ^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-n0-proposal-full-sdk-m40-w6/Scripts/StructTrain/TimeLearner/linux_stopped_recognition_study.py\", line 245, in main\n    return supervise(args.request) if args.action=='_supervise' else worker(args.request,args.phase)\n                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-n0-proposal-full-sdk-m40-w6/Scripts/StructTrain/TimeLearner/linux_stopped_recognition_study.py\", line 108, in worker\n    lease = registry.reserve(spec['job_id']+'-'+phase,\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-n0-proposal-full-sdk-m40-w6/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 285, in reserve\n    resources = _resources(resources);ttl_seconds = _ttl(ttl_seconds)\n                ^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-n0-proposal-full-sdk-m40-w6/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 82, in _resources\n    _require(str(canonical) not in seen, 'duplicate_reservation_resource')\n  File \"/media/user/Data/TimeLearnerRefactor/source-n0-proposal-full-sdk-m40-w6/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 25, in _require\n    raise ReservationError(reason)\nScripts.StructTrain.TimeLearner.resource_reservations.ReservationError: duplicate_reservation_resource\n",
+  "closed_process_observation": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "fe40f766d3772a562221dfda94ff25f1f03a9663cd788c23cb89439c6b6e121d",
+      "unit": "timelearner-4eb8245a-a649-4887-a0a0-e1e6143d66a0.service",
+      "invocation_id": "2f0f087a783848a7ae6f69a02558cfc7",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4eb8245a-a649-4887-a0a0-e1e6143d66a0.service",
+      "initial_main_pid": 3538968,
+      "initial_start_ticks": "453960585",
+      "sha256": "3d93929208235bb5c806ecd917c918d844df3fe2f694226684376e3c1692d1de"
+    },
+    "memory_max": 17179869184
+  },
+  "native_evaluation_not_started": true,
+  "not_Train_failure": true,
+  "scientific_verdict": null
+}

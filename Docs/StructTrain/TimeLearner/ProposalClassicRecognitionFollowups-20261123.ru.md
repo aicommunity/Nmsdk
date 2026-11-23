@@ -2,8 +2,17 @@
 
 23.11.2026. На M40 и Elder поставлены две очереди, продолжающие именно
 нынешние холодные обучения после изменения порядка предложения числа
-синапсов в PulseLib3f. Обе подтверждены ядром и пока ждут; новых реакций
-или выбранных порогов этих моделей ещё нет.
+синапсов в PulseLib3f. Первоначальные очереди ao3 описаны ниже как историческая постановка.
+На M40 Train и аудит2024 уже завершены; старый ao3 остановился до native
+из-за повторной заявки SOURCE=SDK. Исправление общего объединения read-заявок
+прошло6/6; strict registry guard и запрет read/write коллизий сохранены.
+Новый at15 выполняется, получены5/8 базовых наблюдений. На Elder Train
+оформляет итог; новый at22 ждёт конкретный исход старого ao3 и закрытие
+групп. SDK и Train не менялись. Controls at15/at22 независимо восстановлены.
+[Ошибка](../../../Reports/StructTrain/TimeLearner/ProposalRecognitionFollowups-20261123/original-prepare-resource-failure-at10.json),
+[проверка6](../../../Reports/StructTrain/TimeLearner/ProposalRecognitionFollowups-20261123/resource-fix6-at13.json),
+[процессы](../../../Reports/StructTrain/TimeLearner/ProposalRecognitionFollowups-20261123/three-workers-actual-20261124-au1-au3.json),
+[Git-восстановление](../../../Reports/StructTrain/TimeLearner/MatchedDurationHoldout-20261123/reviewed-gallery-and-controls-au5.json).
 
 ## Связь с исходными опытами
 
