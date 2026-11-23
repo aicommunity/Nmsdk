@@ -1,0 +1,25 @@
+{
+  "dispatched": true,
+  "queued": true,
+  "job": "windows-measured-count-physical-export-replay-queue-q1",
+  "controls_commit": "014801f1afb68b534dafe11b17e2389d6ecaec8f",
+  "source_root": "cc6f271ec37a631994e22b6bf2973afe1e9ce4ea",
+  "task": {
+    "scientific_verdict": null,
+    "instance": "{A956CE1D-BBED-48CF-B345-A9D60DD46303}",
+    "execution_time_limit": "PT10H",
+    "task": "TimeLearner-windows-measured-count-physical-export-replay-queue-q1",
+    "engine_pid": 1912
+  },
+  "preparer_actual_fixture_tests_passed": 4,
+  "depends_on": "windows-measured-count-stopped-threshold-k1",
+  "stages": [
+    "complete physical export preparation",
+    "native physical export and import audit",
+    "production DATA replay preparation",
+    "native eight-pattern replay and exact waveform/event comparison"
+  ],
+  "no_new_Train": true,
+  "all_model_stages_use_shared_worker_lock": true,
+  "scientific_verdict": null
+}

@@ -1,0 +1,60 @@
+{
+  "observed_utc": "2026-11-22T23:53:20.285277+00:00",
+  "terminal": {
+    "native_process_completed": true,
+    "physical_roundtrip_verified": true,
+    "portable_model_audit": {
+      "kind": "physical_model_data_audit",
+      "schema_version": 1,
+      "data_only": true,
+      "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+      "pattern_size": 4,
+      "branch": true,
+      "frequency_hz": 2000.0,
+      "threshold_path": "$.LTZone",
+      "threshold_classes": [
+        "TLNativeFast3F2000_LTZone"
+      ],
+      "effective_threshold": 0.0858575482028458,
+      "source_training_evidence_checked": false,
+      "native_import_verified": false,
+      "training_certificate_transferred": false,
+      "calibration_confirmed": false,
+      "evaluation_verdict": null
+    },
+    "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+    "model_sha256": "3a0b5d78210209c8b34693024679078881d58c886cb1df7b8de056bef23db3e9",
+    "source_package_sha256": "3e0b4da0de9826f4195f55c5ff730bfa257b90094d69b3d4b065e0793060d464",
+    "source_evidence_included": false,
+    "training_certificate_transferred": false,
+    "original_execution_reclassified": false,
+    "scientific_verdict": null
+  },
+  "process": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "completed",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 47,
+    "wall_seconds": 352.77204329997767,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-1cfae4ba-0eec-4ca9-aeec-b0c4195f817e"
+  },
+  "replay_status": {
+    "stage": "native-eight-pattern-DATA-replay",
+    "observed_utc": "2026-11-22T23:53:07.302813+00:00",
+    "scientific_verdict": null
+  },
+  "replay_complete": false,
+  "scientific_verdict": null
+}

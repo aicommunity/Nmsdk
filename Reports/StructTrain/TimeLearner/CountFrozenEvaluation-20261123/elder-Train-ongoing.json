@@ -1,0 +1,124 @@
+{
+  "observed_utc": "2026-11-22T23:53:34.142982+00:00",
+  "job": "classic-measured-count-m4-elder-k1",
+  "supervisor_live": true,
+  "outer": {
+    "execution": "running",
+    "all_processes_closed": false,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "2775d11934bc188e56d37e8fb1f89f86c7ff338c86d962be460cfbf7851dd279",
+      "unit": "timelearner-a4d2a868-c0e5-4b2d-b66d-7e0c5382e83c.service",
+      "invocation_id": "d6cbc0ea56954d15afc20febe4a2b456",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a4d2a868-c0e5-4b2d-b66d-7e0c5382e83c.service",
+      "initial_main_pid": 2612912,
+      "initial_start_ticks": "494672745",
+      "sha256": "59e636789643dec604bfc1de4ea6b9e3e06468af996d42ddff5346e0718ab5ae"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "2612912",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a4d2a868-c0e5-4b2d-b66d-7e0c5382e83c.service",
+      "MemoryMax": "2147483648",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt a4d2a868-c0e5-4b2d-b66d-7e0c5382e83c",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "d6cbc0ea56954d15afc20febe4a2b456"
+    },
+    "memory_max": 2147483648,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "native": {
+    "execution": "running",
+    "all_processes_closed": false,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "0d199f9f3447391cd6de9d2583f8227cb2d011353cee6f897051af50f11b724e",
+      "unit": "timelearner-a2ed26c0-e5ae-4f8c-806d-edae1f1285a9.service",
+      "invocation_id": "328cf9612c324a93828da40d25ba0e22",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a2ed26c0-e5ae-4f8c-806d-edae1f1285a9.service",
+      "initial_main_pid": 2617049,
+      "initial_start_ticks": "494674224",
+      "sha256": "48f1df3630a402e010f254f1892fd5a24cd6179e6ca810590fcf47d552d7f71f"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "2617049",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a2ed26c0-e5ae-4f8c-806d-edae1f1285a9.service",
+      "MemoryMax": "17179869184",
+      "TasksMax": "64",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt a2ed26c0-e5ae-4f8c-806d-edae1f1285a9",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "328cf9612c324a93828da40d25ba0e22"
+    },
+    "memory_max": 17179869184,
+    "tasks_max": 64,
+    "scientific_verdict": null
+  },
+  "native_primary_file_counts": {
+    "raw-trial-*.json": 372,
+    "probe_trial_*.json": 0,
+    "train_stopped_trial_*.json": 0,
+    "composite*.json": 0
+  },
+  "native_recent_files": [
+    {
+      "name": "raw-trial-369.csv",
+      "bytes": 383291
+    },
+    {
+      "name": "raw-trial-370.csv",
+      "bytes": 383522
+    },
+    {
+      "name": "raw-trial-370.json",
+      "bytes": 5107
+    },
+    {
+      "name": "raw-trial-371.csv",
+      "bytes": 383674
+    },
+    {
+      "name": "raw-trial-371.json",
+      "bytes": 5089
+    },
+    {
+      "name": "raw-trial-372.csv",
+      "bytes": 382711
+    },
+    {
+      "name": "raw-trial-372.json",
+      "bytes": 5333
+    },
+    {
+      "name": "raw-trial-373.csv",
+      "bytes": 310192
+    }
+  ],
+  "reserved": {
+    "disk_bytes": 8589934592,
+    "memory_bytes": 19327352832,
+    "slots": 1
+  }
+}
