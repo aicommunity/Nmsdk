@@ -1,0 +1,619 @@
+{
+  "previous_five_negative_checks": [
+    {
+      "case": "exclusive_modes",
+      "rejected": true,
+      "reason": "Draft and release candidate are separate build modes",
+      "no_output_created": true
+    },
+    {
+      "case": "profile_required",
+      "rejected": true,
+      "reason": "A release candidate requires an explicit reviewed format profile",
+      "no_output_created": true
+    },
+    {
+      "case": "preserved_v4_rejected",
+      "rejected": true,
+      "reason": "The preserved fourth edition is not a new release candidate",
+      "no_output_created": true
+    },
+    {
+      "case": "explicit_mode_required",
+      "rejected": true,
+      "reason": "Select draft or unreleased candidate before format and page acceptance",
+      "no_output_created": true
+    },
+    {
+      "case": "missing_real_supplementary_figure",
+      "rejected": true,
+      "reason": "Supplementary measured illustration missing: classic-short-target-preserve",
+      "no_output_created": true
+    }
+  ],
+  "guards_unchanged_after_threshold_display_only_correction": true,
+  "current_builder": {
+    "path": "E:\\Science-Repo\\nmsdk-probe-budget-boundary\\Scripts\\StructTrain\\TimeLearner\\publications\\build_algorithm_docx.py",
+    "bytes": 34718,
+    "sha256": "37adcdef02526b820154da3022cc4103bb4706045603087a03f8e6d882cd1874"
+  },
+  "both_current_DOCX": [
+    {
+      "topology": "classic",
+      "file": "TimeLearnerClassicAlgorithms.ru.docx",
+      "bytes": 8683467,
+      "sha256": "0ca37806f5fbd885d967a65cff606da86f115c4f3479c9ac9ee5cda5f63f5c17",
+      "figures": [
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\classic-topology.png",
+          "sha256": "af69799fdd503bed8043804950278b5ddb66304e1a2cd5871bfcf791a4f14986",
+          "caption": "Физическая организация модели. Стрелки показывают передачу сигнала, штриховые связи — перезарядку. Геометрический масштаб условный.",
+          "source_ref": null
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\49-assigned-peak.png",
+          "sha256": "17d9bdeb0de1b660756ba8c3a3dcb1601084511ed09501b64503431448819841",
+          "caption": "Первый вход двухвходового проверочного примера. Кружок отмечает закреплённую вершину по измерителю исходного опыта, крест — более поздний максимум всей пачки. Для обучения первого входа эти величины не взаимозаменяемы.",
+          "source_ref": "Первичный архив 858354233267b5ef…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\50-separate-early-peak.png",
+          "sha256": "7ec1f75706d14e80676c97120291a15c6b4b949952930bbc7a5195bfe6f4deb3",
+          "caption": "Увеличение раннего участка той же измеренной волны. Между вершинами сохраняется локальный минимум. Раздельную раннюю вершину разрешено использовать при обучении; её принадлежность в новом протоколе дополнительно проверяется пробами с исключением импульсов.",
+          "source_ref": "Первичный архив 858354233267b5ef…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\51-merged-peaks.png",
+          "sha256": "b2a3464692655dbd81377ea1e73e58b23dfb64b6e018ffe861190e5491e9d80c",
+          "caption": "Измеренный отклик диагностической пробы обычной топологии. Увеличен участок пика и плеча. Форма полной волны не определяет принадлежность закреплённому импульсу. Точный смысл трёх вершин на четыре импульса требует отдельной проверки; физическое исчезновение одного отклика по этому графику не утверждается.",
+          "source_ref": "Первичный архив 68ed19d2cc07afbd…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\52-missing-peak.png",
+          "sha256": "aff0d58f8f25324f81ce3150b7771d0ddd3b89e4ac6ff7a95b1a3c066b427460",
+          "caption": "Полная запись того же диагностического опыта. Старый измеритель не определил требуемую закреплённую вершину и сохранил причины burst_missing и peak_missing. Это отказ способа назначения вершины, а не утверждение об отсутствии любого ответа мембраны.",
+          "source_ref": "Первичный архив 68ed19d2cc07afbd…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\53-incomplete-window.png",
+          "sha256": "ba838e28855dadd0d53066fc070ebeea7a683b3b882819a9219088dd590e8344",
+          "caption": "Методическое пояснение на реальной полной записи: часть отсчётов справа намеренно скрыта серой областью. Исходный опыт был завершённым. Если бы запись действительно оборвалась здесь, ещё нельзя было бы исключить поздний пик или позднее ложное срабатывание. Этот рисунок не объявляется зарегистрированной неполной пробой.",
+          "source_ref": "Первичный архив 858354233267b5ef…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\classic-learning.png",
+          "sha256": "23eeac0a2973e1e6fe4b325aa84cd67b5fb075b234b5f7d98e7a53c8e3b5fbdc",
+          "caption": "Основная последовательность обучения. Локальная готовность и свежая проверка всех входов являются разными условиями.",
+          "source_ref": null
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\normalization-n0.png",
+          "sha256": "0c5433797fa2c30f1a267185f28e747ac65ed75987f0e755bcf0dc9bd3730f56",
+          "caption": "Нормализация числом синапсов с повторным измерением времени и амплитуды.",
+          "source_ref": null
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\54-n0-measured-search.png",
+          "sha256": "64df9d86eea591b054f3bed60b4f8fb5ea569c29be83007c187cb6a12de12909",
+          "caption": "Реальные шаги двухвходового N0-поиска. Под каждой точкой указаны все изменяемые параметры. При L=3 соседние числа синапсов 1 и 2 дают ошибки по разные стороны от нуля, вне узкого допуска. Возвращённый кандидат L=2 имеет нулевую амплитудную ошибку, но не удовлетворяет времени. График не доказывает глобальной недостижимости решения.",
+          "source_ref": "Первичный архив 858354233267b5ef…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\normalization-n1.png",
+          "sha256": "075813a32eb0700a6a106172a78012be4f96fe53f6aa7ee2f7cebc5461394e42",
+          "caption": "Нормализация сопротивлением с повторным измерением времени и амплитуды.",
+          "source_ref": null
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\55-n1-measured-search.png",
+          "sha256": "ae9c9cc2072ec2597b18a5e029980ad830d4120b6c6faacee227cee376ee12e5",
+          "caption": "Реальные шаги двухвходового N1-поиска. Изменение L с 1 на 2 улучшает время; затем уточняется сопротивление. Конечная амплитудная ошибка −4,5713·10⁻⁶ попадает в исходный допуск 10⁻⁵, временная ошибка −0,019 с — в допуск 0,02 с. Это последовательность разных кандидатов, а не гладкая однофакторная зависимость.",
+          "source_ref": "Первичный архив 858354233267b5ef…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\18-classic-n2-0.png",
+          "sha256": "439185658258c9a36656d3ffdc345c7835759cbb5cc4b3c21a19ae36ed11d3b5",
+          "caption": "Правильное обнаружение целевого паттерна. Проба training_target.",
+          "source_ref": "Первичный архив 858354233267b5ef…; идентификатор модели 65520ce549adb3b5…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\19-classic-n2-1.png",
+          "sha256": "46a1025f73a6405c3bf90afb0dc382e00b5d5c729ee6a0e4234fadf469e2186f",
+          "caption": "Правильное отклонение отвлекающего паттерна. Проба foil_dispersed.",
+          "source_ref": "Первичный архив 858354233267b5ef…; идентификатор модели 65520ce549adb3b5…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\0-stock-classic-0.png",
+          "sha256": "41232197a7e61603df77cfb79a59a5f4dcb1e499f644385fa8004aaff240c314",
+          "caption": "Правильное обнаружение целевого паттерна. Проба phasea-row-0.",
+          "source_ref": "Первичный архив e4f4c50a328919a8…; идентификатор модели b6739683cbb5be38…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\1-stock-classic-1.png",
+          "sha256": "04beb7d76624f516c923e14e83500b601c7182494b14b12d1311c0ea8be46efa",
+          "caption": "Правильное отклонение отвлекающего паттерна. Проба phasea-row-1.",
+          "source_ref": "Первичный архив e4f4c50a328919a8…; идентификатор модели b6739683cbb5be38…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\2-stock-classic-4.png",
+          "sha256": "c965a64839f32972a783757228cdf2f4e833f3a778e6eb9d3eb8321f35b46f0a",
+          "caption": "Ложное срабатывание на отвлекающий паттерн. Проба phasea-row-4.",
+          "source_ref": "Первичный архив e4f4c50a328919a8…; идентификатор модели b6739683cbb5be38…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\37-classic-count-m40-00-positive-full.png",
+          "sha256": "5c7d0eb6100dd1934c6dbec296a6c0410cff9dd6476e11a128be5c7fa996942d",
+          "caption": "Правильное обнаружение. Независимые дендритные пути с нормализацией числом синапсов, M=4. Паттерн 1, полное окно положительного отклика.",
+          "source_ref": "Первичный архив 75f96de0afedfa53dce6e86fdac5706d0181391d67a1f592d9e5eb7a79f45ca8; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба s11-classic-count-recognition-m40-a2/baseline/trial-0"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\38-classic-count-m40-00.png",
+          "sha256": "f6ec3b4b6e5f5b4a1758401967de7e3c337aa2e77a0aea97fc6e389f228944ab",
+          "caption": "Правильное обнаружение. Независимые дендритные пути с нормализацией числом синапсов, M=4. Паттерн 1, полный диапазон и временное увеличение.",
+          "source_ref": "Первичный архив 75f96de0afedfa53dce6e86fdac5706d0181391d67a1f592d9e5eb7a79f45ca8; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба s11-classic-count-recognition-m40-a2/baseline/trial-0"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\39-classic-count-m40-06-positive-full.png",
+          "sha256": "1a56dcd3507fedd05aa3ccab729a0956d6f1c98e506775a525d930c9e8114311",
+          "caption": "Ложное срабатывание. Независимые дендритные пути с нормализацией числом синапсов, M=4. Паттерн 7, полное окно положительного отклика.",
+          "source_ref": "Первичный архив 75f96de0afedfa53dce6e86fdac5706d0181391d67a1f592d9e5eb7a79f45ca8; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба s11-classic-count-recognition-m40-a2/baseline/trial-6"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\40-classic-count-m40-06.png",
+          "sha256": "ace55092d0bfa0c89ddb9bb2cf01593a3a049696c33bc9a4734f00c13992c640",
+          "caption": "Ложное срабатывание. Независимые дендритные пути с нормализацией числом синапсов, M=4. Паттерн 7, полный диапазон и временное увеличение.",
+          "source_ref": "Первичный архив 75f96de0afedfa53dce6e86fdac5706d0181391d67a1f592d9e5eb7a79f45ca8; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба s11-classic-count-recognition-m40-a2/baseline/trial-6"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\41-classic-count-m40-07-positive-full.png",
+          "sha256": "96790c6605a4f8614556d2c6f73ebf7753b3055bbbbc7a808ec84730aada0dce",
+          "caption": "Правильное отклонение. Независимые дендритные пути с нормализацией числом синапсов, M=4. Паттерн 8, полное окно положительного отклика.",
+          "source_ref": "Первичный архив 75f96de0afedfa53dce6e86fdac5706d0181391d67a1f592d9e5eb7a79f45ca8; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба s11-classic-count-recognition-m40-a2/baseline/trial-7"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\42-classic-count-m40-07.png",
+          "sha256": "149f9db14d1a8058990c63e5c4d970e4b1f6d9ffbcef107c1c111a82ef83f81c",
+          "caption": "Правильное отклонение. Независимые дендритные пути с нормализацией числом синапсов, M=4. Паттерн 8, полный диапазон и временное увеличение.",
+          "source_ref": "Первичный архив 75f96de0afedfa53dce6e86fdac5706d0181391d67a1f592d9e5eb7a79f45ca8; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба s11-classic-count-recognition-m40-a2/baseline/trial-7"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\43-classic-count-new-foil-13.png",
+          "sha256": "aaf41c2c70cec024200d76c76924a1da9efd392c6b6b48df885c549839bc803a",
+          "caption": "Правильное обнаружение на новой сетке. Интервалы 80; 160; 240 мс; полный диапазон и увеличенный отклик.",
+          "source_ref": "Первичный архив afb9100649ecd71f06a056f3beeeaf3308ba5e83178f506a38124fab69686461; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба classic-count-frozen-new-foils-m40-b2/frozen-new-foils/grid-2-2-2"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\44-classic-count-new-foil-13-positive-full.png",
+          "sha256": "cdcdb331ba9b063cd642d4653c865a3b93f7ce1c66eb8b8ac46a00b14f739285",
+          "caption": "Правильное обнаружение на новой сетке. Интервалы 80; 160; 240 мс; полное окно положительного отклика.",
+          "source_ref": "Первичный архив afb9100649ecd71f06a056f3beeeaf3308ba5e83178f506a38124fab69686461; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба classic-count-frozen-new-foils-m40-b2/frozen-new-foils/grid-2-2-2"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\45-classic-count-new-foil-02.png",
+          "sha256": "7851dbf34e895328493e39aa62368c8b44ccb55a17a0594a337da9597e94b8f3",
+          "caption": "Ложное срабатывание на новой сетке. Интервалы 40; 80; 360 мс; полный диапазон и увеличенный отклик.",
+          "source_ref": "Первичный архив afb9100649ecd71f06a056f3beeeaf3308ba5e83178f506a38124fab69686461; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба classic-count-frozen-new-foils-m40-b2/frozen-new-foils/grid-1-1-3"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\46-classic-count-new-foil-02-positive-full.png",
+          "sha256": "dd3d56c22c66bf45f26c271f6937d3793f99fcff6ae93e4d82cea07a39854b7d",
+          "caption": "Ложное срабатывание на новой сетке. Интервалы 40; 80; 360 мс; полное окно положительного отклика.",
+          "source_ref": "Первичный архив afb9100649ecd71f06a056f3beeeaf3308ba5e83178f506a38124fab69686461; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба classic-count-frozen-new-foils-m40-b2/frozen-new-foils/grid-1-1-3"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\47-classic-count-new-foil-00.png",
+          "sha256": "c2fe823ebf75f5b5320ee5723ac9e60723f9490ed6ad07053a123af98f818531",
+          "caption": "Правильное отклонение на новой сетке. Интервалы 40; 80; 120 мс; полный диапазон и увеличенный отклик.",
+          "source_ref": "Первичный архив afb9100649ecd71f06a056f3beeeaf3308ba5e83178f506a38124fab69686461; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба classic-count-frozen-new-foils-m40-b2/frozen-new-foils/grid-1-1-1"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\48-classic-count-new-foil-00-positive-full.png",
+          "sha256": "05f27d3fd5e0bd243adb39bfd1282e318cbb54d8466a4d94f0b785c453635801",
+          "caption": "Правильное отклонение на новой сетке. Интервалы 40; 80; 120 мс; полное окно положительного отклика.",
+          "source_ref": "Первичный архив afb9100649ecd71f06a056f3beeeaf3308ba5e83178f506a38124fab69686461; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; проба classic-count-frozen-new-foils-m40-b2/frozen-new-foils/grid-1-1-1"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\12-cold-classic-0.png",
+          "sha256": "e2eb55618f324aed706adc207b5fb17e684286673a019b78ee4caed8331382a6",
+          "caption": "Правильное обнаружение целевого паттерна. Проба phasea-row-0.",
+          "source_ref": "Первичный архив 17457e13cecdefa8…; идентификатор модели 27112e8ad8ef2d0e…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\13-cold-classic-1.png",
+          "sha256": "9a4964f313d9592b4b47c8ddfefcf4e803f82da9afb450d59a85b6f5b5c02815",
+          "caption": "Правильное отклонение отвлекающего паттерна. Проба phasea-row-1.",
+          "source_ref": "Первичный архив 17457e13cecdefa8…; идентификатор модели 27112e8ad8ef2d0e…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\14-cold-classic-4.png",
+          "sha256": "0a2abb189695ae83833c3c726649ab0f8f5c604edafde1964f64a359ce1e765f",
+          "caption": "Ложное срабатывание на отвлекающий паттерн. Проба phasea-row-4.",
+          "source_ref": "Первичный архив 17457e13cecdefa8…; идентификатор модели 27112e8ad8ef2d0e…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\22-historical-0.png",
+          "sha256": "da694a01e4b3583ce9487b20512332a83f65cc4f281d1251a2c4b2606415d572",
+          "caption": "Правильное отклонение отвлекающего паттерна. Проба phasea-2.",
+          "source_ref": "Первичный архив 22f18e5fbf5315f7…; идентификатор модели ca025286e43839d8…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\23-historical-2.png",
+          "sha256": "43d89f3964182fc1342fdb13bb97fbba687ecbe94b86bff40ecef50b9ebb9700",
+          "caption": "Ложное срабатывание на отвлекающий паттерн. Проба phasea-4.",
+          "source_ref": "Первичный архив 22f18e5fbf5315f7…; идентификатор модели ca025286e43839d8…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\24-historical-6.png",
+          "sha256": "1010501a81056e22d116785aa31b539ad187a874b0ec1c3dca749454d5747d62",
+          "caption": "Правильное обнаружение целевого паттерна. Проба phasea-0.",
+          "source_ref": "Первичный архив 22f18e5fbf5315f7…; идентификатор модели ca025286e43839d8…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\classic-short-target-reset.png",
+          "sha256": "8d1fedb2171ab2a309759f78da100ed99432501f4e6b57884962b9fe22f16385",
+          "caption": "Цель после семи отвлекающих паттернов со сбросом динамики перед каждой пробой. Единственный выход через 3,5 мс после последнего входа",
+          "source_ref": "Проба classic-count-short-cadence-pair-m40-k1/reset/rotation-1/position-7; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; архив fe07056754f9621ebc52e0a985a5f3fa4100ce7dca6c7b2bffb0f34113a969aa"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\classic-short-target-preserve.png",
+          "sha256": "369955afd983f799430a46d351b8d790746f92b5d2da47054ba04327ec3dbc90",
+          "caption": "Та же цель при сохранении динамики. Дополнительный выход через 3 мс после третьего входа и за 237 мс до последнего",
+          "source_ref": "Проба classic-count-short-cadence-pair-m40-k1/preserve/rotation-1/position-7; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; архив fe07056754f9621ebc52e0a985a5f3fa4100ce7dca6c7b2bffb0f34113a969aa"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\classic-short-target-reset-positive.png",
+          "sha256": "194070890c92e3478d2ca5e083fdf17afbd4f77dfa940f2c92c3920a7361fcf7",
+          "caption": "Положительный отклик на цель со сбросом в полном объявленном окне. Полный диапазон с перезарядкой доступен в парном виде той же реакции со сбросом",
+          "source_ref": "Проба classic-count-short-cadence-pair-m40-k1/reset/rotation-1/position-7; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; архив fe07056754f9621ebc52e0a985a5f3fa4100ce7dca6c7b2bffb0f34113a969aa"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\classic-short-target-preserve-positive.png",
+          "sha256": "c6c3dcb8def006e2a9e1fb4f324194f7f0f9a6eca8b9e94837bdf4a1edc87248",
+          "caption": "Положительный отклик на цель без сброса в полном окне. Поздние вершины сохранены; исходные значения не преобразованы",
+          "source_ref": "Проба classic-count-short-cadence-pair-m40-k1/preserve/rotation-1/position-7; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; архив fe07056754f9621ebc52e0a985a5f3fa4100ce7dca6c7b2bffb0f34113a969aa"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\classic-short-false-preserve.png",
+          "sha256": "8874baf93fec8b02389c82126303a72f6cdc3207fdf44e9552e7d31445e0a337",
+          "caption": "Ложное срабатывание на интервалы 40; 40; 400 мс в непрерывном потоке. Порог относится к общей низкопороговой зоне",
+          "source_ref": "Проба classic-count-short-cadence-pair-m40-k1/preserve/rotation-1/position-5; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; архив fe07056754f9621ebc52e0a985a5f3fa4100ce7dca6c7b2bffb0f34113a969aa"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\classic-short-negative-preserve.png",
+          "sha256": "5cae0f30d1e3d93cb782633f6883103e6f012bcca6257723b5e198804373ff2b",
+          "caption": "Правильное отклонение паттерна 400; 40; 40 мс в том же непрерывном потоке. Отсутствие выхода не означает полного покоя на границе окна",
+          "source_ref": "Проба classic-count-short-cadence-pair-m40-k1/preserve/rotation-1/position-6; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b; архив fe07056754f9621ebc52e0a985a5f3fa4100ce7dca6c7b2bffb0f34113a969aa"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\logical-classes.png",
+          "sha256": "6955f324495831ce3a9ab9ba05d895c74a136143ead765ad60eea56e993465b7",
+          "caption": "Логическая UML диаграмма обязанностей компонентов обучения.",
+          "source_ref": null
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\probe-sequence.png",
+          "sha256": "bcb31a889c1c735cabb27c3b2035e1f120467d1f19fde5f87842a1ca31b64413",
+          "caption": "UML последовательность пробы. Расчёт такта и сбор отсчётов повторяются до закрытия окна. Контроллер не вызывает вложенный расчёт модели.",
+          "source_ref": null
+        }
+      ],
+      "draft": false,
+      "release_candidate": true,
+      "released": false,
+      "equation_format": "native_OMML",
+      "render_and_visual_review_complete": false,
+      "layout_draft_counts": {
+        "sections": 12,
+        "tables": 5,
+        "equations": 11
+      }
+    },
+    {
+      "topology": "branch",
+      "file": "TimeLearnerBranchAlgorithms.ru.docx",
+      "bytes": 6859242,
+      "sha256": "572ceefb3495bca5bc0ded39dd9b7862acd30cf55ff06020f4cd33e42d285914",
+      "figures": [
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\branch-topology.png",
+          "sha256": "4bd61f55699bd86e02a119c2e7d8e59cc99de6c85cad654cda1031fa4dd8e572",
+          "caption": "Физическая организация модели. Стрелки показывают передачу сигнала, штриховые связи — перезарядку. Геометрический масштаб условный.",
+          "source_ref": null
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\49-assigned-peak.png",
+          "sha256": "17d9bdeb0de1b660756ba8c3a3dcb1601084511ed09501b64503431448819841",
+          "caption": "Первый вход двухвходового проверочного примера. Кружок отмечает закреплённую вершину по измерителю исходного опыта, крест — более поздний максимум всей пачки. Для обучения первого входа эти величины не взаимозаменяемы.",
+          "source_ref": "Первичный архив 858354233267b5ef…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\50-separate-early-peak.png",
+          "sha256": "7ec1f75706d14e80676c97120291a15c6b4b949952930bbc7a5195bfe6f4deb3",
+          "caption": "Увеличение раннего участка той же измеренной волны. Между вершинами сохраняется локальный минимум. Раздельную раннюю вершину разрешено использовать при обучении; её принадлежность в новом протоколе дополнительно проверяется пробами с исключением импульсов.",
+          "source_ref": "Первичный архив 858354233267b5ef…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\51-merged-peaks.png",
+          "sha256": "b2a3464692655dbd81377ea1e73e58b23dfb64b6e018ffe861190e5491e9d80c",
+          "caption": "Измеренный отклик диагностической пробы обычной топологии. Увеличен участок пика и плеча. Форма полной волны не определяет принадлежность закреплённому импульсу. Точный смысл трёх вершин на четыре импульса требует отдельной проверки; физическое исчезновение одного отклика по этому графику не утверждается.",
+          "source_ref": "Первичный архив 68ed19d2cc07afbd…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\52-missing-peak.png",
+          "sha256": "aff0d58f8f25324f81ce3150b7771d0ddd3b89e4ac6ff7a95b1a3c066b427460",
+          "caption": "Полная запись того же диагностического опыта. Старый измеритель не определил требуемую закреплённую вершину и сохранил причины burst_missing и peak_missing. Это отказ способа назначения вершины, а не утверждение об отсутствии любого ответа мембраны.",
+          "source_ref": "Первичный архив 68ed19d2cc07afbd…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\53-incomplete-window.png",
+          "sha256": "ba838e28855dadd0d53066fc070ebeea7a683b3b882819a9219088dd590e8344",
+          "caption": "Методическое пояснение на реальной полной записи: часть отсчётов справа намеренно скрыта серой областью. Исходный опыт был завершённым. Если бы запись действительно оборвалась здесь, ещё нельзя было бы исключить поздний пик или позднее ложное срабатывание. Этот рисунок не объявляется зарегистрированной неполной пробой.",
+          "source_ref": "Первичный архив 858354233267b5ef…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\branch-learning.png",
+          "sha256": "86c3a5fb61c2895339987ee3d74c9fc554ae7a08908ebee51948107c0f698d17",
+          "caption": "Основная последовательность обучения. Локальная готовность и свежая проверка всех входов являются разными условиями.",
+          "source_ref": null
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\normalization-n0.png",
+          "sha256": "0c5433797fa2c30f1a267185f28e747ac65ed75987f0e755bcf0dc9bd3730f56",
+          "caption": "Нормализация числом синапсов с повторным измерением времени и амплитуды.",
+          "source_ref": null
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\54-n0-measured-search.png",
+          "sha256": "64df9d86eea591b054f3bed60b4f8fb5ea569c29be83007c187cb6a12de12909",
+          "caption": "Реальные шаги двухвходового N0-поиска. Под каждой точкой указаны все изменяемые параметры. При L=3 соседние числа синапсов 1 и 2 дают ошибки по разные стороны от нуля, вне узкого допуска. Возвращённый кандидат L=2 имеет нулевую амплитудную ошибку, но не удовлетворяет времени. График не доказывает глобальной недостижимости решения.",
+          "source_ref": "Первичный архив 858354233267b5ef…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\normalization-n1.png",
+          "sha256": "075813a32eb0700a6a106172a78012be4f96fe53f6aa7ee2f7cebc5461394e42",
+          "caption": "Нормализация сопротивлением с повторным измерением времени и амплитуды.",
+          "source_ref": null
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\55-n1-measured-search.png",
+          "sha256": "ae9c9cc2072ec2597b18a5e029980ad830d4120b6c6faacee227cee376ee12e5",
+          "caption": "Реальные шаги двухвходового N1-поиска. Изменение L с 1 на 2 улучшает время; затем уточняется сопротивление. Конечная амплитудная ошибка −4,5713·10⁻⁶ попадает в исходный допуск 10⁻⁵, временная ошибка −0,019 с — в допуск 0,02 с. Это последовательность разных кандидатов, а не гладкая однофакторная зависимость.",
+          "source_ref": "Первичный архив 858354233267b5ef…; полный путь и контрольные суммы включены в сопроводительный каталог."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\20-branch-n2-0.png",
+          "sha256": "082ba15c8c06aad9adc78fd180406dc53277f2f30b28dafc07cb0d591ad098ae",
+          "caption": "Правильное обнаружение целевого паттерна. Проба training_target.",
+          "source_ref": "Первичный архив 858354233267b5ef…; идентификатор модели 4844f0819a318968…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\21-branch-n2-1.png",
+          "sha256": "3a268736519777a7f6f7cc1bb3fc638d011028686586c2881cce7b7615fd5d26",
+          "caption": "Правильное отклонение отвлекающего паттерна. Проба foil_dispersed.",
+          "source_ref": "Первичный архив 858354233267b5ef…; идентификатор модели 4844f0819a318968…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\25-branch-count-m4-00.png",
+          "sha256": "042b6810c483081304a2b78644f312f38660b8a0a660fe5068cfcd9cb06a77ad",
+          "caption": "Общая ветвь с нормализацией числом синапсов TP. Набор «исходная матрица», Целевой паттерн · интервалы 80; 160; 240 мс. Вид: полный диапазон и увеличение.",
+          "source_ref": "Первичный архив 3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/physical-DATA-replay/windows-a1/trial-0"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\26-branch-count-m4-00-positive-full.png",
+          "sha256": "13e31a8b4115e649a60d869fdb9db666ad8e6b74b09d1e140b1dcbc3891e4cbc",
+          "caption": "Общая ветвь с нормализацией числом синапсов TP. Набор «исходная матрица», Целевой паттерн · интервалы 80; 160; 240 мс. Вид: полное окно положительного отклика.",
+          "source_ref": "Первичный архив 3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/physical-DATA-replay/windows-a1/trial-0"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\27-branch-count-m4-01.png",
+          "sha256": "92bcb58aedf7a2e1ab5f04d2df98d42def91e8605d8b3e7bc311a663e0015680",
+          "caption": "Общая ветвь с нормализацией числом синапсов TN. Набор «исходная матрица», Отвлекающий паттерн 1 · интервалы 240; 160; 80 мс. Вид: полный диапазон и увеличение.",
+          "source_ref": "Первичный архив 3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/physical-DATA-replay/windows-a1/trial-1"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\28-branch-count-m4-01-positive-full.png",
+          "sha256": "41f16dbc1680dd3f1d604974d2dbd68c9a2a81713671ff1175b9e240f484e66b",
+          "caption": "Общая ветвь с нормализацией числом синапсов TN. Набор «исходная матрица», Отвлекающий паттерн 1 · интервалы 240; 160; 80 мс. Вид: полное окно положительного отклика.",
+          "source_ref": "Первичный архив 3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/physical-DATA-replay/windows-a1/trial-1"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\29-branch-count-m4-04.png",
+          "sha256": "44b2b368ff958e1c9d37b57d868aa92b69a35401c418977b00c09fd48d79b46d",
+          "caption": "Общая ветвь с нормализацией числом синапсов FP. Набор «исходная матрица», Отвлекающий паттерн 4 · интервалы 20; 220; 240 мс. Вид: полный диапазон и увеличение.",
+          "source_ref": "Первичный архив 3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/physical-DATA-replay/windows-a1/trial-4"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\30-branch-count-m4-04-positive-full.png",
+          "sha256": "a38c8a82efe8a99d4058e974aa18a7f60a043b7eb8ee291df85410b3d038717a",
+          "caption": "Общая ветвь с нормализацией числом синапсов FP. Набор «исходная матрица», Отвлекающий паттерн 4 · интервалы 20; 220; 240 мс. Вид: полное окно положительного отклика.",
+          "source_ref": "Первичный архив 3e177b6b76e0ba6c6e163fbb98327df84f16e313bc5a21300aa60ed91317a66c; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/physical-DATA-replay/windows-a1/trial-4"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\31-branch-count-new-13.png",
+          "sha256": "d29fd87540b13e8950a7a6370ab8570e09c7395630004f8a1be3387fbe526dfa",
+          "caption": "Общая ветвь с нормализацией числом синапсов TP. Набор «новые отвлекающие паттерны», Целевой паттерн · интервалы 80; 160; 240 мс. Вид: полный диапазон и увеличение.",
+          "source_ref": "Первичный архив 45582bf94b2d01b35e009bef0453d1943839848b24cea17c4851a3373f4ed7c5; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/frozen-new-foils/windows-a1/grid-2-2-2"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\32-branch-count-new-13-positive-full.png",
+          "sha256": "0957f7d74d55ebfa2cb03f3f5b7623474c70e19a24b7b376cc72c349bd1a66f7",
+          "caption": "Общая ветвь с нормализацией числом синапсов TP. Набор «новые отвлекающие паттерны», Целевой паттерн · интервалы 80; 160; 240 мс. Вид: полное окно положительного отклика.",
+          "source_ref": "Первичный архив 45582bf94b2d01b35e009bef0453d1943839848b24cea17c4851a3373f4ed7c5; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/frozen-new-foils/windows-a1/grid-2-2-2"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\33-branch-count-new-04.png",
+          "sha256": "628d3c5294be2290e14ad2e04369b543bd502f0f144d8dc0dc46b0fda6d918c1",
+          "caption": "Общая ветвь с нормализацией числом синапсов FP. Набор «новые отвлекающие паттерны», Новый отвлекающий паттерн 4 · интервалы 40; 160; 240 мс. Вид: полный диапазон и увеличение.",
+          "source_ref": "Первичный архив 45582bf94b2d01b35e009bef0453d1943839848b24cea17c4851a3373f4ed7c5; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/frozen-new-foils/windows-a1/grid-1-2-2"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\34-branch-count-new-04-positive-full.png",
+          "sha256": "8b08b941dbfa516833d5f0a77b21b2e3e3a13c9a4be858a83769d3538c014ec5",
+          "caption": "Общая ветвь с нормализацией числом синапсов FP. Набор «новые отвлекающие паттерны», Новый отвлекающий паттерн 4 · интервалы 40; 160; 240 мс. Вид: полное окно положительного отклика.",
+          "source_ref": "Первичный архив 45582bf94b2d01b35e009bef0453d1943839848b24cea17c4851a3373f4ed7c5; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/frozen-new-foils/windows-a1/grid-1-2-2"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\35-branch-count-new-00.png",
+          "sha256": "86c85f4fa4299f407465ce17d3a2fb431e5cdf85fac8f7699b70b74b36ce7354",
+          "caption": "Общая ветвь с нормализацией числом синапсов TN. Набор «новые отвлекающие паттерны», Новый отвлекающий паттерн 0 · интервалы 40; 80; 120 мс. Вид: полный диапазон и увеличение.",
+          "source_ref": "Первичный архив 45582bf94b2d01b35e009bef0453d1943839848b24cea17c4851a3373f4ed7c5; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/frozen-new-foils/windows-a1/grid-1-1-1"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\36-branch-count-new-00-positive-full.png",
+          "sha256": "02a07796bda20cdc2868ffcc4938ce551d1250895ec8f70ddb1d85e4a046734d",
+          "caption": "Общая ветвь с нормализацией числом синапсов TN. Набор «новые отвлекающие паттерны», Новый отвлекающий паттерн 0 · интервалы 40; 80; 120 мс. Вид: полное окно положительного отклика.",
+          "source_ref": "Первичный архив 45582bf94b2d01b35e009bef0453d1943839848b24cea17c4851a3373f4ed7c5; модель 364de8215f2f818c7ecebf2c31f3650afa719f7c53b20901374dea6c8d68a5d4; проба branch-count-M4/frozen-new-foils/windows-a1/grid-1-1-1"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\3-stock-branch-0.png",
+          "sha256": "64cb07f7d5a000d02e5073aee38a91ce0901e971a24cd802a3b3ac5d9dc28889",
+          "caption": "Правильное обнаружение целевого паттерна. Проба phasea-row-0.",
+          "source_ref": "Первичный архив ae966e7fdd8c507d…; идентификатор модели 543d0d886a1181ea…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\4-stock-branch-1.png",
+          "sha256": "7075d69d37b4ce15a00d85ba99ef601d051608645cf679eb67cb6a173e6f5350",
+          "caption": "Правильное отклонение отвлекающего паттерна. Проба phasea-row-1.",
+          "source_ref": "Первичный архив ae966e7fdd8c507d…; идентификатор модели 543d0d886a1181ea…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\5-stock-branch-2.png",
+          "sha256": "07eb04870931aa075d5872a195f5877b65e61aa5ec133d56054384c0a548f795",
+          "caption": "Ложное срабатывание на отвлекающий паттерн. Проба phasea-row-2.",
+          "source_ref": "Первичный архив ae966e7fdd8c507d…; идентификатор модели 543d0d886a1181ea…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\6-fast7200-0.png",
+          "sha256": "20a024e1120f1887c42d1abcfac058fdc937e53aca12f7ddc0be041eac716995",
+          "caption": "Правильное обнаружение целевого паттерна. Проба phasea-row-0.",
+          "source_ref": "Первичный архив 79c4e07750874b6c…; идентификатор модели d0977f960a87ae75…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\7-fast7200-1.png",
+          "sha256": "71797028ef3aa7b3273b30a894162803410e53433291d535bea3048be1f0b92d",
+          "caption": "Правильное отклонение отвлекающего паттерна. Проба phasea-row-1.",
+          "source_ref": "Первичный архив 79c4e07750874b6c…; идентификатор модели d0977f960a87ae75…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\8-fast7200-2.png",
+          "sha256": "294ac7cf30638907a2ad0a8b6c4cb35b7a6b187fd456c3db119962b955055056",
+          "caption": "Ложное срабатывание на отвлекающий паттерн. Проба phasea-row-2.",
+          "source_ref": "Первичный архив 79c4e07750874b6c…; идентификатор модели d0977f960a87ae75…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\9-fast21600-0.png",
+          "sha256": "52346279bceb3386e79c4d10fedaf29ad07c5053b50fd4d6a1ec88e11e305340",
+          "caption": "Правильное обнаружение целевого паттерна. Проба phasea-row-0.",
+          "source_ref": "Первичный архив 64c9d5499c4000ec…; идентификатор модели 2f22a5732cff3498…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\10-fast21600-1.png",
+          "sha256": "2c29529ad6f40e8bec9e4f57642a277b0fe7eac11c0ae274d7b5cdab721c417c",
+          "caption": "Правильное отклонение отвлекающего паттерна. Проба phasea-row-1.",
+          "source_ref": "Первичный архив 64c9d5499c4000ec…; идентификатор модели 2f22a5732cff3498…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\11-fast21600-4.png",
+          "sha256": "ad17e46252b060dd61956dc7b3e1a094e6a5c4a061cea8acb89c6255c401d68a",
+          "caption": "Ложное срабатывание на отвлекающий паттерн. Проба phasea-row-4.",
+          "source_ref": "Первичный архив 64c9d5499c4000ec…; идентификатор модели 2f22a5732cff3498…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\15-cold-branch-0.png",
+          "sha256": "d112e2ea2213db86e86bc78ead00748f1dec4f9d5041a6398380bcc35bb59b42",
+          "caption": "Правильное обнаружение целевого паттерна. Проба phasea-row-0.",
+          "source_ref": "Первичный архив 17457e13cecdefa8…; идентификатор модели 74786bc43e78e8f5…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\16-cold-branch-1.png",
+          "sha256": "d6db02727f48b5450eb3fbd0843890d9abc1d2d199e78e949fe0f9763af2bec3",
+          "caption": "Правильное отклонение отвлекающего паттерна. Проба phasea-row-1.",
+          "source_ref": "Первичный архив 17457e13cecdefa8…; идентификатор модели 74786bc43e78e8f5…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\17-cold-branch-4.png",
+          "sha256": "1f63063dac4417e96290c72cb607946c4730ca0753a99332a4e4bde746388666",
+          "caption": "Ложное срабатывание на отвлекающий паттерн. Проба phasea-row-4.",
+          "source_ref": "Первичный архив 17457e13cecdefa8…; идентификатор модели 74786bc43e78e8f5…."
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\branch-new-target.png",
+          "sha256": "cd86ab314afebebf0f690ffd70b9e5ad1505480aacfef0d9f9bb3ddcbebafc21",
+          "caption": "Целевой паттерн новой Branch модели с интервалами 80; 160; 240 мс. Полное окно и увеличение. Правильное обнаружение после четвёртого входа",
+          "source_ref": "Проба branch-measured-count-M4/physical-DATA-replay/windows-q1/trial-0; модель 007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970; архив 3c7f742428f76cb39a77e2466a498ce453d44245a3ae4d114a1280b8702973d2"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\branch-new-false.png",
+          "sha256": "acac5cc949687ca4abb86b9876e2e79ada214e443a7d1baf3959af384f625b78",
+          "caption": "Ложный ответ новой Branch модели на интервалы 20; 220; 240 мс. Полное окно и увеличение",
+          "source_ref": "Проба branch-measured-count-M4/physical-DATA-replay/windows-q1/trial-4; модель 007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970; архив 3c7f742428f76cb39a77e2466a498ce453d44245a3ae4d114a1280b8702973d2"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\branch-new-negative.png",
+          "sha256": "2addf600df8896a67ec2b03729c5e831f9175ab33a563acb7acf15b373b105fe",
+          "caption": "Правильное отклонение новой Branch моделью интервалов 160; 80; 240 мс. Поздние входы совпадают с целевыми, весь паттерн различается",
+          "source_ref": "Проба branch-measured-count-M4/physical-DATA-replay/windows-q1/trial-2; модель 007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970; архив 3c7f742428f76cb39a77e2466a498ce453d44245a3ae4d114a1280b8702973d2"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\branch-new-grid-false.png",
+          "sha256": "235aeb7a56eb2c3790a7206df00afc41ddee98b99cbcbac82916645f3801a6be",
+          "caption": "Единственный ложный ответ на сетке 27 паттернов. Интервалы 40; 160; 240 мс. Выход следует через 1,5 мс после последнего входа",
+          "source_ref": "Проба branch-measured-count-M4/frozen-new-foils/windows-s1/grid-1-2-2; модель 007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970; архив 214f432a3bc965f97b6a122681a30b53a396731998f8426f0accae056d69660f"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\branch-pred5-reset.png",
+          "sha256": "a57a0f76968ac3cb60483fb476708786f5f1194c1a84e320693bc73376d25c34",
+          "caption": "Реакция цели после паттерна №5 со сбросом динамики. Один выход после четвёртого импульса",
+          "source_ref": "Проба windows-measured-count-predecessor-matrix-e1/foil-5-reset/position-1; модель 007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970; архив cfcb9f913b858071612b32c2d6b1b0187cf154399d61fcee28635a397172aa41"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\branch-pred5-preserve.png",
+          "sha256": "cc2be4fef51495f344695adbb6c785b71bc4c75430aaa4cf6ace582e5bfae64b",
+          "caption": "Реакция цели после паттерна №5 при сохранении динамики. Дополнительный выход после третьего импульса",
+          "source_ref": "Проба windows-measured-count-predecessor-matrix-e1/foil-5-preserve/position-1; модель 007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970; архив cfcb9f913b858071612b32c2d6b1b0187cf154399d61fcee28635a397172aa41"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\branch-pred7-reset.png",
+          "sha256": "6bb67709f95f2c4343843b1e394ea578e64d10e103f3a934f9dea3cf30d73282",
+          "caption": "Реакция цели после паттерна №7 со сбросом динамики. Один выход после четвёртого импульса",
+          "source_ref": "Проба windows-measured-count-predecessor-matrix-e1/foil-7-reset/position-1; модель 007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970; архив cfcb9f913b858071612b32c2d6b1b0187cf154399d61fcee28635a397172aa41"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\assets\\branch-pred7-preserve.png",
+          "sha256": "b4990056a022ee24f3ab12c484922d2988abb2d3d170fa00c1cea33fb6603f78",
+          "caption": "Реакция цели после паттерна №7 при сохранении динамики. Дополнительный выход после третьего импульса",
+          "source_ref": "Проба windows-measured-count-predecessor-matrix-e1/foil-7-preserve/position-1; модель 007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970; архив cfcb9f913b858071612b32c2d6b1b0187cf154399d61fcee28635a397172aa41"
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\logical-classes.png",
+          "sha256": "6955f324495831ce3a9ab9ba05d895c74a136143ead765ad60eea56e993465b7",
+          "caption": "Логическая UML диаграмма обязанностей компонентов обучения.",
+          "source_ref": null
+        },
+        {
+          "file": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-22-revision5-preparation-a1\\diagrams-a6\\probe-sequence.png",
+          "sha256": "bcb31a889c1c735cabb27c3b2035e1f120467d1f19fde5f87842a1ca31b64413",
+          "caption": "UML последовательность пробы. Расчёт такта и сбор отсчётов повторяются до закрытия окна. Контроллер не вызывает вложенный расчёт модели.",
+          "source_ref": null
+        }
+      ],
+      "draft": false,
+      "release_candidate": true,
+      "released": false,
+      "equation_format": "native_OMML",
+      "render_and_visual_review_complete": false,
+      "layout_draft_counts": {
+        "sections": 12,
+        "tables": 6,
+        "equations": 11
+      }
+    }
+  ],
+  "render_and_structure_records": [
+    "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/CandidateDocxRender-20261123.json",
+    "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/CandidateStructureReview-20261123.json"
+  ],
+  "released": false,
+  "full_page_review_complete": false,
+  "no_numerical_or_integration_tests_run_locally": true
+}

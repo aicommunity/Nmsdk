@@ -2,19 +2,19 @@
   "kind": "timelearner_scientific_report_format_profile",
   "schema_version": 1,
   "prepared_at": "2026-11-21",
-  "status": "draft_rendered_and_visually_reviewed_standards_review_pending",
+  "status": "candidate_layout_implemented_current_page_review_pending",
   "runtime_readiness_record": "AuthorizedDocxRender-20261122.json",
   "draft_layout": {
     "builder": "Scripts/StructTrain/TimeLearner/publications/build_algorithm_docx.py",
     "helper": "Scripts/StructTrain/TimeLearner/publications/gost_layout.py",
     "requires_explicit_profile_and_draft": true,
-    "structural_review": "CurrentDraftStructuralReview-20261122.json",
-    "source_content": "revision5 draft a13, 11 working examples, 62/53 reviewed pages, not released",
+    "structural_review": "CandidateStructureReview-20261123.json",
+    "source_content": "revision5 candidate n5, complete Classic128 and selected reviewed short-pair figures, new Branch evidence",
     "standards_compliance_accepted": false,
-    "visual_acceptance_complete": true,
+    "visual_acceptance_complete": false,
     "legacy_runtime_readiness_is_not_bundled_renderer_acceptance": true,
-    "actual_render_record": "AuthorizedDocxRender-20261122.json",
-    "actual_page_review_record": "CurrentPageReview-20261122.json",
+    "actual_render_record": "CandidateDocxRender-20261123.json",
+    "actual_page_review_record": "CandidatePageReview-20261123.json",
     "draft_builder_implemented": true
   },
   "applies_to": [
@@ -106,9 +106,9 @@
     "applicable_corrections_reviewed": true,
     "bibliography_and_citations_reviewed": true,
     "administrative_cover_metadata_verified_or_parent_report_scope_declared": true,
-    "builder_support_implemented": false,
-    "both_DOCX_rendered_and_every_page_reviewed": true,
-    "all_graphs_readable_at_Word_page_scale": true
+    "builder_support_implemented": true,
+    "both_DOCX_rendered_and_every_page_reviewed": false,
+    "all_graphs_readable_at_Word_page_scale": false
   },
   "content_constraints": {
     "pulse_count_symbol": "M",
@@ -124,7 +124,33 @@
   },
   "previous_runtime_readiness_record": "DocumentRuntimeReadiness-20261122.json",
   "user_authorized_installed_LibreOffice_for_this_pair": true,
-  "remaining_content_update": "Current a13 text, bibliography and page review are complete for this scientific snapshot; update from later audited model evaluations. Final release support/acceptance and external archive publication remain.",
+  "remaining_content_update": "Current scientific content prepared; render and review every page of both actual candidates, verify applicable format requirements and publish unchanged accepted bytes. Pending Train outcomes remain excluded.",
   "correction_review": "GostCorrectionReview-20261122.json",
-  "bibliography_review": "BibliographyReview-20261122.json"
+  "bibliography_review": "BibliographyReview-20261122.json",
+  "reviewed_historical_draft_a13": {
+    "builder": "Scripts/StructTrain/TimeLearner/publications/build_algorithm_docx.py",
+    "helper": "Scripts/StructTrain/TimeLearner/publications/gost_layout.py",
+    "requires_explicit_profile_and_draft": true,
+    "structural_review": "CurrentDraftStructuralReview-20261122.json",
+    "source_content": "revision5 draft a13, 11 working examples, 62/53 reviewed pages, not released",
+    "standards_compliance_accepted": false,
+    "visual_acceptance_complete": true,
+    "legacy_runtime_readiness_is_not_bundled_renderer_acceptance": true,
+    "actual_render_record": "AuthorizedDocxRender-20261122.json",
+    "actual_page_review_record": "CurrentPageReview-20261122.json",
+    "draft_builder_implemented": true
+  },
+  "candidate_build": {
+    "explicit_flag": "--release-candidate",
+    "missing_measurements_or_figures_forbidden": true,
+    "does_not_certify_standards": true,
+    "does_not_publish": true,
+    "review_requires_actual_candidate_document_hashes": true
+  },
+  "current_candidate_frozen_format_input": {
+    "external_package_name": "format-profile.candidate-n5.json",
+    "sha256": "c199626a7cefc9892a7d9ce5fd00d9738c2c2f2fab4c50fa6c8f7e16e2dae77b",
+    "metadata_pointers_in_maintained_profile_updated_after_render": true,
+    "layout_parameters_unchanged": true
+  }
 }

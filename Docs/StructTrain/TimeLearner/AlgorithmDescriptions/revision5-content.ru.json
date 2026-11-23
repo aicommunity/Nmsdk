@@ -1,8 +1,8 @@
 {
   "kind": "timelearner_scientific_algorithm_description",
   "schema_version": 1,
-  "edition": "23 ноября 2026 года Пятая редакция Исходники после завершения Classic128",
-  "status": "unreleased_draft",
+  "edition": "23 ноября 2026 года Пятая редакция",
+  "status": "Подготовлен для проверки окончательной вёрстки",
   "review": "Review-20261119.json",
   "style_reference_role": "Стиль и терминология публикаций авторов; объяснение алгоритма основано на реализации и измерениях",
   "common": {
@@ -108,8 +108,8 @@
           "title": "Выходы цели в завершённых парных условиях Classic",
           "headers": [
             "Позиция цели",
-            "Со сбросом с",
-            "Без сброса с"
+            "Со сбросом, с",
+            "Без сброса, с"
           ],
           "rows": [
             [
@@ -159,7 +159,14 @@
             2.2
           ]
         },
-        "figures": [],
+        "figures": [
+          "classic-short-target-reset",
+          "classic-short-target-preserve",
+          "classic-short-target-reset-positive",
+          "classic-short-target-preserve-positive",
+          "classic-short-false-preserve",
+          "classic-short-negative-preserve"
+        ],
         "sources": [
           "Docs/StructTrain/TimeLearner/ClassicCountContinuousCadenceResults-20261123.ru.md; модель cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
           "Reports/StructTrain/TimeLearner/CountFrozenEvaluation-20261123/m40-short-complete-fourteen-conditions-k4.json",
@@ -350,10 +357,10 @@
       }
     ]
   },
-  "edition_id": "2026-11-23-v5-source-after-Classic128",
+  "edition_id": "2026-11-23-v5-candidate-n5",
   "evidence_review": "../AlgorithmDescriptionEvidenceReview-20261122.json",
   "formula_definitions": "revision5-formula-definitions.ru.json",
-  "publication_status": "unreleased_draft",
+  "publication_status": "unreleased_candidate",
   "prior_publication_preserved": "2026-11-20-v4",
   "bibliography": [
     "1. Применение сегментной спайковой модели нейрона со структурной адаптацией для решения задач классификации / А. М. Корсаков, Л. А. Астапова, А. В. Бахшиев. — DOI 10.15622/ia.21.3.2. — Текст : электронный // Информатика и автоматизация. — 2022. — Т. 21, № 3. — С. 493–520. — URL: https://ia.spcras.ru/index.php/sp/article/view/15257 (дата обращения: 22.11.2026). — Дата публикации: 30.05.2022.",

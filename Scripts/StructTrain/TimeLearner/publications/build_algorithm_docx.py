@@ -14,7 +14,8 @@ import sys
 def read(path):return json.loads(Path(path).read_bytes())
 def digest(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
-def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,content_file='revision4-content.ru.json'):
+def build(source,output,*,diagrams,figures=None,draft=False,release_candidate=False,
+          format_profile=None,content_file='revision4-content.ru.json'):
     from docx import Document
     from docx.shared import Inches,Pt,RGBColor
     from docx.oxml import OxmlElement
@@ -23,19 +24,25 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
     from docx.enum.table import WD_TABLE_ALIGNMENT,WD_CELL_VERTICAL_ALIGNMENT
     from PIL import Image
     from .word_math import equation as native_equation,inline_math,sub,sup,scripts,absolute,group
+    if draft and release_candidate:
+        raise ValueError('Draft and release candidate are separate build modes')
+    if release_candidate and format_profile is None:
+        raise ValueError('A release candidate requires an explicit reviewed format profile')
     profile=read(format_profile) if format_profile else None
     if profile is not None:
         if not isinstance(profile,dict) or profile.get('kind')!='timelearner_scientific_report_format_profile' or profile.get('schema_version')!=1:
             raise ValueError('Known scientific report format profile required')
-        if not draft:
-            raise ValueError('GOST layout is draft-only until standards, structure and page review are accepted')
+        if not (draft or release_candidate):
+            raise ValueError('Select draft or unreleased candidate before format and page acceptance')
     source=Path(source).resolve(strict=True);output=Path(output).resolve()
     if output.exists():raise ValueError('Fresh output directory required')
     if Path(content_file).name!=content_file:raise ValueError('Content filename must be local to the source directory')
     content_path=source/content_file;content=read(content_path)
     next_edition=content_file!='revision4-content.ru.json'
-    if next_edition and (not draft or profile is None):
-        raise ValueError('New content currently requires the explicit GOST profile and --draft')
+    if next_edition and (not (draft or release_candidate) or profile is None):
+        raise ValueError('New content requires an explicit GOST profile and draft or unreleased candidate mode')
+    if release_candidate and not next_edition:
+        raise ValueError('The preserved fourth edition is not a new release candidate')
     review_path=source/content['review'];review=read(review_path)
     evidence_path=(source/content.get('evidence_review','../AlgorithmDescriptionEvidenceReview-20261118.json')).resolve(strict=True)
     case_records=read(evidence_path)['qualifying_examples'];cases={c['id']:c for c in case_records}
@@ -279,7 +286,10 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
             paras(info.get('explanation',['Черновик Подробные условия сверяются по первичным данным.']))
             para('Разных отвлекающих паттернов: '+str(case['unique_foil_patterns'])+'.')
             threshold=info.get('threshold',case.get('threshold'))
-            para('Порог: '+(format(threshold,'.17g') if isinstance(threshold,(int,float)) else 'уточняется по пакету модели в черновике')+'.')
+            threshold_text=(format(threshold,'.17g') if isinstance(threshold,(int,float))
+                            else 'уточняется по пакету модели в черновике')
+            if next_edition:threshold_text=threshold_text.replace('.',',')
+            para('Порог: '+threshold_text+'.')
             if case.get('early_target'):para('Ответ на цель возник до последнего входного импульса. Это ограничивает вывод о распознавании полной временной структуры.')
             if case['unique_foil_patterns']==1:para('Отрицательные предъявления относятся к одному паттерну при двух условиях сброса, а не к двум разным отрицательным классам.')
             if case['training_outcome']=='budget_exhausted':para('Остановка по бюджету сохранена. Подбор порога не является доказательством сходимости обучения.')
@@ -338,12 +348,14 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
         if formula_definitions and layout.equations!=len(formula_definitions):raise ValueError('Unconsumed formula definitions')
         path=output/filename;doc.core_properties.title=specific['title'];doc.core_properties.language='ru-RU';doc.save(path)
         results.append(dict(topology=topology,file=filename,bytes=path.stat().st_size,sha256=digest(path),
-            figures=used,draft=draft,equation_format='native_OMML',render_and_visual_review_complete=False))
+            figures=used,draft=draft,release_candidate=release_candidate,released=False,
+            equation_format='native_OMML',render_and_visual_review_complete=False))
         if layout:results[-1]['layout_draft_counts']=dict(sections=layout.sections,tables=layout.tables,equations=layout.equations)
     result=dict(kind='timelearner_algorithm_docx_build',schema_version=2,edition=content.get('edition_id','2026-11-19-v4'),documents=results,
         inputs={str(p):digest(p) for p in (content_path,review_path,evidence_path,diagrams)},
         illustration_catalog_sha256=digest(figures) if figures else None,missing_illustrations_or_details=missing,
-        draft=draft,all_comments_closed=False,visual_acceptance_complete=False,generated_binary_in_root_git=False)
+        draft=draft,release_candidate=release_candidate,released=False,
+        all_comments_closed=False,visual_acceptance_complete=False,generated_binary_in_root_git=False)
     if formula_path:result['inputs'][str(formula_path)]=digest(formula_path)
     if profile:
         result['format_profile']=dict(path=str(format_profile),sha256=digest(format_profile),
@@ -354,11 +366,16 @@ def build(source,output,*,diagrams,figures=None,draft=False,format_profile=None,
 def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     for name in ('source','output','diagrams'):parser.add_argument('--'+name,type=Path,required=True)
-    parser.add_argument('--figures',type=Path);parser.add_argument('--draft',action='store_true')
-    parser.add_argument('--format-profile',type=Path,help='Explicit GOST profile; currently requires --draft')
-    parser.add_argument('--content-file',default='revision4-content.ru.json',help='Local content filename; new editions currently require a GOST draft')
-    args=parser.parse_args(argv);result=build(args.source,args.output,diagrams=args.diagrams,figures=args.figures,draft=args.draft,format_profile=args.format_profile,content_file=args.content_file)
+    parser.add_argument('--figures',type=Path)
+    mode=parser.add_mutually_exclusive_group()
+    mode.add_argument('--draft',action='store_true')
+    mode.add_argument('--release-candidate',action='store_true',
+        help='Final layout for review; does not certify or publish either document')
+    parser.add_argument('--format-profile',type=Path,help='Explicit GOST profile for a draft or unreleased candidate')
+    parser.add_argument('--content-file',default='revision4-content.ru.json',help='Local content filename; new editions require an explicit profile and build mode')
+    args=parser.parse_args(argv);result=build(args.source,args.output,diagrams=args.diagrams,figures=args.figures,draft=args.draft,release_candidate=args.release_candidate,format_profile=args.format_profile,content_file=args.content_file)
     print(json.dumps(dict(documents=[r['file'] for r in result['documents']],draft=args.draft,
+        release_candidate=args.release_candidate,released=False,
         missing_illustrations_or_details=len(result['missing_illustrations_or_details']),visual_acceptance_complete=False)))
 
 if __name__=='__main__':
