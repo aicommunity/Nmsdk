@@ -76,6 +76,14 @@ def build(source,output,*,diagrams,figures=None,draft=False,release_candidate=Fa
                 if identity not in supplementary:
                     raise ValueError('Supplementary measured illustration missing: '+identity)
     details=fc.get('case_details',{})
+    # Scientific prose belongs to the maintained content. The figure catalog
+    # continues to own measured values, source references and image identity.
+    explanations=content.get('example_explanations',{})
+    if (not isinstance(explanations,dict) or set(explanations)-set(cases)
+            or any(not isinstance(value,list) or not value
+                   or any(not isinstance(text,str) or not text.strip() for text in value)
+                   for value in explanations.values())):
+        raise ValueError('Known example IDs and nonempty explanation paragraphs required')
     concept_ids=('assigned-peak','separate-early-peak','merged-peaks','missing-peak',
                  'incomplete-window','n0-measured-search','n1-measured-search')
     missing=['concept:'+i for i in concept_ids if i not in concepts]
@@ -283,7 +291,8 @@ def build(source,output,*,diagrams,figures=None,draft=False,release_candidate=Fa
         for identity in ids:
             case=cases[identity];info=details.get(identity,{})
             head(name(identity),2)
-            paras(info.get('explanation',['Черновик Подробные условия сверяются по первичным данным.']))
+            paras(explanations.get(identity,info.get('explanation',
+                  ['Черновик Подробные условия сверяются по первичным данным.'])))
             para('Разных отвлекающих паттернов: '+str(case['unique_foil_patterns'])+'.')
             threshold=info.get('threshold',case.get('threshold'))
             threshold_text=(format(threshold,'.17g') if isinstance(threshold,(int,float))
@@ -315,11 +324,14 @@ def build(source,output,*,diagrams,figures=None,draft=False,release_candidate=Fa
                     values=update['table']
                     table(doc,values['headers'],values['rows'],values['widths'],
                           title=values['title'])
+                # Introduce the evidence before the measured illustrations.
+                # A trailing reference alone must not occupy a new page just
+                # before the mandatory page break of the following section.
+                for reference in update.get('sources',[]):
+                    para('Источник дополнительной проверки: '+reference)
                 for identity in update.get('figures',[]):
                     record=supplementary[identity]
                     image(fr/record['png']['path'],record['caption'],record['source_ref'])
-                for reference in update.get('sources',[]):
-                    para('Источник дополнительной проверки: '+reference)
         head('Реализация вычисления и владение моделью');paras(common['implementation'])
         diagram('logical-classes','Логическая UML диаграмма обязанностей компонентов обучения.')
         implementation_rows=[
