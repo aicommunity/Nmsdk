@@ -124,17 +124,18 @@ def _verify_sources_after(plan):
 def _reservation_resources(plan):
     # The tool source may be the very SDK tree being used. Reserve that read
     # once; the registry deliberately rejects repeated canonical paths.
-    resources = {}
-    for path, access in (
+    from .resource_reservations import coalesce_resource_requests, ReservationError
+    resources = [dict(path=str(path),access=access) for path,access in (
         (SOURCE, 'read'), (plan['sdk'], 'read'),
         (Path(plan['runtime']['executable']['path']).parent, 'read'),
         (plan['controls'], 'read'), (plan['output'], 'write'),
-        (plan['directory'], 'write')):
-        path = str(Path(path).resolve(strict=False))
-        require(path not in resources or resources[path] == access,
-                'count_linux_resource_access_collision')
-        resources[path] = access
-    return [dict(path=path, access=access) for path, access in resources.items()]
+        (plan['directory'], 'write'))]
+    try:
+        return coalesce_resource_requests(resources)
+    except ReservationError as error:
+        if str(error)=='reservation_resource_access_collision':
+            require(False,'count_linux_resource_access_collision')
+        raise
 
 
 def launch(request_path):

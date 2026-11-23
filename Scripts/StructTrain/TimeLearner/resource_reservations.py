@@ -90,6 +90,24 @@ def _overlap(left, right):
     return a == b or a.is_relative_to(b) or b.is_relative_to(a)
 
 
+def coalesce_resource_requests(values):
+    """Merge identical producer requests; retain the registry's strict guard.
+
+    A shared tool/SDK tree legitimately has two readers in the producer's
+    description. A source/output collision must never become a write lease.
+    Keep the first requested spelling so the normal alias guard remains active.
+    """
+    _require(type(values) is list and 1<=len(values)<=64, 'invalid_reservation_resources')
+    result={}
+    for value in values:
+        parsed=_resources([value])[0];key=parsed['canonical_path']
+        if key in result:
+            _require(result[key]['access']==value['access'], 'reservation_resource_access_collision')
+        else:
+            result[key]=dict(value)
+    return list(result.values())
+
+
 def _disk_device(path):
     path = Path(path)
     while not path.exists():

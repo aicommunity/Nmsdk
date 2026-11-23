@@ -83,6 +83,15 @@ def phase_paths(plan, phase):
     return control, plan['base']/'readbacks'/name, plan['base']/'readbacks'/(name+'-inputs')
 
 
+def reservation_resources(plan, output, inputs):
+    from .resource_reservations import coalesce_resource_requests
+    return coalesce_resource_requests([dict(path=str(p),access=access) for p,access in (
+        (SOURCE,'read'),(plan['paths']['source_train'],'read'),(plan['paths']['source_audit_job'],'read'),
+        (plan['paths']['source_request'].parent,'read'),(plan['sdk'],'read'),
+        (plan['paths']['template_envelope'].parent,'read'),(plan['controls'],'write'),
+        (plan['output'],'write'),(output,'write'),(inputs,'write'))])
+
+
 def worker(request_path, phase):
     plan = context(request_path);spec = plan['spec'];directory = plan['output']/phase
     from .contained_process import inspect
@@ -106,11 +115,7 @@ def worker(request_path, phase):
     else:
         registry = Reservations.open_existing(plan['base']/'resource-reservations.sqlite3')
         lease = registry.reserve(spec['job_id']+'-'+phase,
-            [dict(path=str(p),access=access) for p,access in ((SOURCE,'read'),
-                (plan['paths']['source_train'],'read'),(plan['paths']['source_audit_job'],'read'),
-                (plan['paths']['source_request'].parent,'read'),(plan['sdk'],'read'),
-                (plan['paths']['template_envelope'].parent,'read'),(plan['controls'],'write'),
-                (plan['output'],'write'),(output,'write'),(inputs,'write'))],
+            reservation_resources(plan,output,inputs),
             ttl_seconds=7800,demands=dict(slots=1,memory_bytes=16*GIB,disk_bytes=8*GIB))
         write(directory/'reservation.json',lease)
         # No early lease release: the shared supervisor closes the exact owner
