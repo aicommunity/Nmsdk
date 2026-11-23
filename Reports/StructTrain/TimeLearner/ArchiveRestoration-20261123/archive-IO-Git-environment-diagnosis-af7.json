@@ -1,0 +1,23 @@
+{
+  "kind": "timelearner_archive_IO_regressions",
+  "schema_version": 1,
+  "expected": 14,
+  "observed": 14,
+  "failures": 0,
+  "errors": 1,
+  "skipped": 0,
+  "passed": false,
+  "native_execution": false,
+  "diagnostic_child_errors": [
+    {
+      "case": "Scripts.StructTrain.TimeLearner.tests.test_external_archive.ExternalArchiveTest.test_private_revision_alias_is_shared_with_linked_worktree",
+      "captured_child_output": "error: missing config value GIT_CONFIG_VALUE_0\nfatal: unable to parse command-line config\n"
+    }
+  ],
+  "log_sha256": "6892494d59bae63e16325d9e65d9b060f4281264c4c8ffbe5c79f98431562726",
+  "finished_utc": "2026-11-23T13:20:43.579405+00:00",
+  "prior_attempts_not_hidden": [
+    "initial14 had Git init128 before alias lookup; exact one-case later passed",
+    "af6 isolated14 had same Git init128; output retained"
+  ]
+}

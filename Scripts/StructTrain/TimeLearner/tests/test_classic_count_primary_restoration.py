@@ -12,7 +12,7 @@ import socket
 import tempfile
 import unittest
 
-from ..external_archive import locate, resolve
+from ..external_archive import locate, resolve, _native_path
 from ..native_evidence import load
 from ..portable_primary import RETAIN_ALIASES, restore_native_bundle
 from ..recognition_metrics import load_diagnostic_evaluation
@@ -51,8 +51,10 @@ class ClassicCountPrimaryRestorationTest(unittest.TestCase):
                          expected_prefixes)
         trials = []
         with tempfile.TemporaryDirectory(prefix='classic-full-primary-',
-                                         dir=os.environ['TMPDIR']) as temporary:
-            restored = Path(temporary)/'restored'
+                dir=_native_path(os.environ['TMPDIR'], long_descendants=True)) as temporary:
+            # Keep traversal/readback in the same Windows namespace as the
+            # production restorer; historical descendant names can be long.
+            restored = _native_path(Path(temporary)/'restored', long_descendants=True)
             receipt = restore_native_bundle(bundle_path, restored, compatibility=RETAIN_ALIASES)
             self.assertEqual(receipt['archive_members_verified'], 5129)
             self.assertEqual(receipt['retained_regular_files'], 5129)

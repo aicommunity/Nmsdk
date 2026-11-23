@@ -1,0 +1,20 @@
+test_complete_Elder_primary_and_all_recorded_recognition_trials_restore (Scripts.StructTrain.TimeLearner.tests.test_classic_count_primary_restoration.ClassicCountPrimaryRestorationTest.test_complete_Elder_primary_and_all_recorded_recognition_trials_restore) ... ERROR
+
+======================================================================
+ERROR: test_complete_Elder_primary_and_all_recorded_recognition_trials_restore (Scripts.StructTrain.TimeLearner.tests.test_classic_count_primary_restoration.ClassicCountPrimaryRestorationTest.test_complete_Elder_primary_and_all_recorded_recognition_trials_restore)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Science-Repo\nmsdk-probe-budget-boundary\Scripts\StructTrain\TimeLearner\tests\test_classic_count_primary_restoration.py", line 56, in test_complete_Elder_primary_and_all_recorded_recognition_trials_restore
+    receipt = restore_native_bundle(bundle_path, restored, compatibility=RETAIN_ALIASES)
+  File "E:\Science-Repo\nmsdk-probe-budget-boundary\Scripts\StructTrain\TimeLearner\portable_primary.py", line 265, in restore_native_bundle
+    with source, path.open("xb") as destination:
+                 ~~~~~~~~~^^^^^^
+  File "C:\Users\Bakhshiev\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py", line 537, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-classic-primary-independent-local-af3\\temporary-expansion\\classic-full-primary-5p3x58p7\\restored\\original-Train\\factor-preflight\\native.events-log\\EventsLog\\NeuroModeler.Elder-1.user.log.INFO.20261122-224929.2616952'
+
+----------------------------------------------------------------------
+Ran 1 test in 39.983s
+
+FAILED (errors=1)

@@ -231,13 +231,13 @@ def restore_native_bundle(bundle_path, output, *, compatibility=None):
                 'bundle_content_reference_totals_invalid')
     require(compatibility in (ALIAS_ADAPTER, RETAIN_ALIASES) or not any(_alias(n) for n in members),
             "bundle_legacy_alias_requires_explicit_adapter")
-    from .external_archive import locate
+    from .external_archive import locate, _native_path
     archive = locate(bundle_path.parent/"primary.tar.xz")
     before = archive.stat()
     require(type(bundle.get("archive_bytes")) is int and bundle["archive_bytes"] == before.st_size
             and type(bundle.get("archive_sha256")) is str and _sha(archive) == bundle["archive_sha256"],
             "bundle_archive_hash_mismatch")
-    output = Path(output).absolute()
+    output = _native_path(output, long_descendants=True).absolute()
     require(not output.exists() and not output.is_symlink(), "bundle_output_already_exists")
     output = output.parent.resolve(strict=True)/output.name
     output.mkdir(exist_ok=False)

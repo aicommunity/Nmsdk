@@ -93,7 +93,8 @@ def create(sources, rows, output, *, maximum_total_bytes, dictionary_bytes=32*10
 
 def restore(bundle_path, output, *, compatibility=None):
     """Restore all original bytes before any production artifact audit."""
-    bundle_path=Path(bundle_path)
+    from .external_archive import _native_path
+    bundle_path=_native_path(bundle_path,long_descendants=True)
     bundle_path=bundle_path.resolve(strict=True) if bundle_path.is_file() else bundle_path.absolute()
     package=bundle_path.parent
     index=load(bundle_path);_digest(index)
@@ -131,7 +132,7 @@ def restore(bundle_path, output, *, compatibility=None):
     portable_primary._bundle_version(literal_index)
     require(literal_index['members'] == {n:r for n,r in records.items() if n not in recipes},
             'envelope_bundle_literal_members_changed')
-    output=Path(output).resolve();require(not output.exists() and not output.is_relative_to(package) and
+    output=_native_path(output,long_descendants=True).resolve();require(not output.exists() and not output.is_relative_to(package) and
         not package.is_relative_to(output), 'envelope_bundle_new_separate_restore_required')
     portable_primary.restore_native_bundle(package/literal['path'],output,compatibility=compatibility)
     cached_key=None;reference=None;prepared=None

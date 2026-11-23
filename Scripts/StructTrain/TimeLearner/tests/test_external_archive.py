@@ -1,4 +1,5 @@
 """Exercise production archive I/O, collision handling and tamper rejection."""
+import contextlib
 import json
 import gzip
 import os
@@ -13,6 +14,21 @@ from ..native_evidence import EvidenceError
 
 
 class ExternalArchiveTest(unittest.TestCase):
+    @contextlib.contextmanager
+    def configured_archive(self):
+        # Restore only this fixture's key. Clearing/repopulating os.environ
+        # drops inherited empty values from the native Windows environment
+        # and can leave Git's GIT_CONFIG_COUNT/KEY_n without VALUE_n.
+        previous = os.environ.get(archive.ROOT_ENV)
+        os.environ[archive.ROOT_ENV] = str(self.root)
+        try:
+            yield
+        finally:
+            if previous is None:
+                os.environ.pop(archive.ROOT_ENV, None)
+            else:
+                os.environ[archive.ROOT_ENV] = previous
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(); self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)/'archive'; self.root.mkdir()
@@ -97,7 +113,7 @@ class ExternalArchiveTest(unittest.TestCase):
         index = folder/'bundle.json'; index_record = archive.store(index, self.root)
         index.with_name(index.name+'.archive.json').write_text(json.dumps(index_record)); index.unlink()
         output = Path(self.temp.name)/'restored'
-        with patch.dict('os.environ', {archive.ROOT_ENV: str(self.root)}):
+        with self.configured_archive():
             restore_native_bundle(folder/'bundle.json', output)
         self.assertEqual((output/'signals.csv').read_bytes(), self.source.read_bytes())
         self.assertFalse(payload.exists())
@@ -108,7 +124,7 @@ class ExternalArchiveTest(unittest.TestCase):
         path.write_bytes(gzip.compress(b'{"timestamp_ns":1794650123456789123}\n'))
         reference = archive.store(path, self.root)
         path.with_name(path.name+'.archive.json').write_text(json.dumps(reference)); path.unlink()
-        with patch.dict('os.environ', {archive.ROOT_ENV: str(self.root)}):
+        with self.configured_archive():
             self.assertEqual(load(path), {'timestamp_ns': 1794650123456789123})
 
     def test_materialization_is_explicit_and_never_overwrites_different_bytes(self):
@@ -133,7 +149,7 @@ class ExternalArchiveTest(unittest.TestCase):
         self.assertFalse((output/'package/primary.tar.xz').exists())
         self.assertEqual((output/'package/bundle.json').read_bytes(), before['bundle.json'])
         self.assertEqual({p.name: p.read_bytes() for p in source.iterdir()}, before)
-        with patch.dict('os.environ', {archive.ROOT_ENV: str(self.root)}):
+        with self.configured_archive():
             restore_native_bundle(output/'package/bundle.json', Path(self.temp.name)/'publication-restored')
         self.assertEqual((Path(self.temp.name)/'publication-restored/signals.csv').read_bytes(), self.source.read_bytes())
 
@@ -178,7 +194,7 @@ class ExternalArchiveTest(unittest.TestCase):
             (maps/('RootRevisionMap-'+name+'.json')).write_text(json.dumps({
                 'kind': 'nmsdk_root_revision_aliases', 'schema_version': 1, 'mapping': mapping}))
         self.assertEqual(resolve_revision(repo, original)['resolved_revision'], final)
-        with patch.dict('os.environ', {archive.ROOT_ENV: str(self.root)}):
+        with self.configured_archive():
             self.assertEqual(read_bytes(repo, original, 'primary.tar.xz'), self.source.read_bytes())
             with self.assertRaisesRegex(EvidenceError, 'historical_blob_budget_exceeded'):
                 read_bytes(repo, original, 'primary.tar.xz', maximum_bytes=1)

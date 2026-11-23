@@ -1,0 +1,92 @@
+{
+  "kind": "timelearner_complete_Elder_count_primary_recovery",
+  "schema_version": 1,
+  "recovery_host": "TimLenovo",
+  "original_host": "Elder",
+  "archive_reference": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/61/615cf8153358500a0646bc8ddbecbd91097ed32d7a76e478167a5a0298194ad0",
+    "sha256": "615cf8153358500a0646bc8ddbecbd91097ed32d7a76e478167a5a0298194ad0",
+    "bytes": 125624684
+  },
+  "source_archive": {
+    "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-classic-primary-independent-local-af3\\local-CAS-cache\\objects\\sha256\\61\\615cf8153358500a0646bc8ddbecbd91097ed32d7a76e478167a5a0298194ad0",
+    "sha256": "615cf8153358500a0646bc8ddbecbd91097ed32d7a76e478167a5a0298194ad0",
+    "size": 125624684
+  },
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "615cf8153358500a0646bc8ddbecbd91097ed32d7a76e478167a5a0298194ad0",
+    "archive_members_verified": 5129,
+    "retained_regular_files": 5129,
+    "compatibility": "retain-regular-glog-aliases-v1",
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "expanded_bytes": 12970896542,
+  "recovered_prefixes": {
+    "original-Train": 1666,
+    "original-Train-controls": 8,
+    "full-Train-audit": 42,
+    "full-Train-audit-controls": 12,
+    "recognition-study": 137,
+    "recognition-controls": 17,
+    "baseline-run": 40,
+    "threshold-run": 40,
+    "baseline-inputs": 1578,
+    "threshold-inputs": 1578,
+    "native-runtime": 11
+  },
+  "recognition_observations": [
+    {
+      "role": "baseline-run",
+      "trials": 8,
+      "samples_per_trial": 4001,
+      "model_revision": "6621bea3bed8bfea358099a2a9c55a2564552de0bc607995bf29874219f5b81d",
+      "complete_observations_read_from_restored_tree": true
+    },
+    {
+      "role": "threshold-run",
+      "trials": 8,
+      "samples_per_trial": 4001,
+      "model_revision": "dda7e4f787a4654d4b5b4f7d74e9d45d771aa0047f3a101fa403c77c0d06cf3b",
+      "complete_observations_read_from_restored_tree": true
+    }
+  ],
+  "every_original_member_verified": true,
+  "independently_recovered_from_external_archive": true,
+  "disposable_expanded_cache_removed": true,
+  "original_Train_outcome": "budget_exhausted",
+  "original_outcome_unchanged": true,
+  "new_full_training_or_recognition_audit_performed": false,
+  "new_native_execution": false,
+  "scientific_verdict": null,
+  "verification_kind": "local_archived_data_restoration_and_analysis_only",
+  "no_new_numerical_or_integration_model_tests": true,
+  "run_start_root_commit": "af32e75daeba0ec95bed3d6380144b0819033d43",
+  "working_source_changed": true,
+  "production_sources": {
+    "Scripts\\StructTrain\\TimeLearner\\tests\\test_classic_count_primary_restoration.py": {
+      "bytes": 6710,
+      "sha256": "a05389c750f08d55152d184d71739d0a17aa0d062f472960ec4f8f3df14adb54"
+    },
+    "Scripts\\StructTrain\\TimeLearner\\portable_primary.py": {
+      "bytes": 16861,
+      "sha256": "a856700f7b02d4aad60906ba7f9282a881ebf39f166490cfb222b0359e47b63c"
+    },
+    "Scripts\\StructTrain\\TimeLearner\\external_archive.py": {
+      "bytes": 12942,
+      "sha256": "75420d9788c367284ec32789fa8c88f74406bd85f78a665b70555ccdf435606e"
+    },
+    "Scripts\\StructTrain\\TimeLearner\\recognition_metrics.py": {
+      "bytes": 19052,
+      "sha256": "cd78185f3b0b87cbc913b6eb0f16706a83e15de9b07b039149d5687b9023752e"
+    }
+  },
+  "finished_utc": "2026-11-23T13:17:17.771686+00:00"
+}
