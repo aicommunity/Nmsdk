@@ -1,0 +1,1485 @@
+{
+  "kind": "timelearner_current_scientific_progress",
+  "schema_version": 1,
+  "recorded_utc": "2026-11-23T04:59:03.595129+00:00",
+  "sources": {
+    "Classic_closed_comparisons": {
+      "path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-m40-controls-fresh-r8-1795409868674-327074839.json",
+      "bytes": 13482,
+      "sha256": "a9ba3637499c5061a0beb4e0541cc93b337483ba57438a376e764f00f19b856e"
+    },
+    "M40_kernel_and_queues": {
+      "path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-m40-kernel-fresh-r8-1795409868674-327074839.json",
+      "bytes": 14565,
+      "sha256": "a88ef7a9a0c15678236e2495ebc5d0eae05366d2d011499467dc70978507889d"
+    },
+    "Elder_primary_audit_queue": {
+      "path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-elder-audit-fresh-r8-1795409868674-327074839.json",
+      "bytes": 5283,
+      "sha256": "ab5b26aee5603cd05b7e54e8cb1a72244be84fc272c0c51e1078f0ffb693615c"
+    }
+  },
+  "Classic_closed_comparisons": {
+    "observed_utc": "2026-11-23T04:57:51.272711+00:00",
+    "scientific_verdict": null,
+    "studies": {
+      "classic-count-predecessor-m40-j1": {
+        "supervisor_live": true,
+        "state": {
+          "observed_utc": "2026-11-23T04:51:12.086267+00:00",
+          "case": "phasea-row-7-preserve",
+          "stage": "running_native_predecessor_control",
+          "native_trials": 2,
+          "scientific_verdict": null
+        },
+        "completed_cases": [
+          {
+            "id": "phasea-row-1-reset",
+            "counts": {
+              "TP": 1,
+              "FP": 0,
+              "FN": 0,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 1.0,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-1-reset/measurement/terminal.json",
+              "sha256": "a90811e21652f5f618795c7b01e75a6888e3736ac9f7780aa94f8cfdae19f867",
+              "size": 3813
+            }
+          },
+          {
+            "id": "phasea-row-1-preserve",
+            "counts": {
+              "TP": 1,
+              "FP": 0,
+              "FN": 0,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 1.0,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-1-preserve/measurement/terminal.json",
+              "sha256": "415fb6dcf8556802c198237d29f9d70a03829f1446beed1177e29ed46147fa3f",
+              "size": 3852
+            }
+          },
+          {
+            "id": "phasea-row-2-reset",
+            "counts": {
+              "TP": 1,
+              "FP": 0,
+              "FN": 0,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 1.0,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-2-reset/measurement/terminal.json",
+              "sha256": "5df357bd91e5dca645ef8618d752b91580ee6cadd1ec99645f0c43b0cf4c161f",
+              "size": 3813
+            }
+          },
+          {
+            "id": "phasea-row-2-preserve",
+            "counts": {
+              "TP": 1,
+              "FP": 0,
+              "FN": 0,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 1.0,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-2-preserve/measurement/terminal.json",
+              "sha256": "e82df35f8babbc4c584cf76537d12ec984b8f2421335e0a310d86ba62f85e19e",
+              "size": 3852
+            }
+          },
+          {
+            "id": "phasea-row-3-reset",
+            "counts": {
+              "TP": 1,
+              "FP": 0,
+              "FN": 0,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 1.0,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-3-reset/measurement/terminal.json",
+              "sha256": "ba067a913b04da5a5b018ae02e9b2889c5d47db9ca310f2d7804cdc90bc4e145",
+              "size": 3813
+            }
+          },
+          {
+            "id": "phasea-row-3-preserve",
+            "counts": {
+              "TP": 1,
+              "FP": 0,
+              "FN": 0,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 1.0,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-3-preserve/measurement/terminal.json",
+              "sha256": "daad2946d7da3ffa1b3c7a3dcc77cd8bc5e8f979d4fb1c1d0206b02ecaab2dd4",
+              "size": 3852
+            }
+          },
+          {
+            "id": "phasea-row-4-reset",
+            "counts": {
+              "TP": 1,
+              "FP": 0,
+              "FN": 0,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 1.0,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-4-reset/measurement/terminal.json",
+              "sha256": "7a25fdf93a2e9f2f6c90ebbbfa8defd9ce8c7ea37d6aff9f171b220e82543279",
+              "size": 3813
+            }
+          },
+          {
+            "id": "phasea-row-4-preserve",
+            "counts": {
+              "TP": 1,
+              "FP": 0,
+              "FN": 0,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 1.0,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-4-preserve/measurement/terminal.json",
+              "sha256": "7556800e7471aeeb7dc15261e7972c2209d9ac4f7f55bc00ec2854707bdf6adb",
+              "size": 3852
+            }
+          },
+          {
+            "id": "phasea-row-5-reset",
+            "counts": {
+              "TP": 1,
+              "FP": 0,
+              "FN": 0,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 1.0,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-5-reset/measurement/terminal.json",
+              "sha256": "5d84cdb263e48b6cda62e5463ce628f823fa2675360f76ac6f995ac59ec68b43",
+              "size": 3813
+            }
+          },
+          {
+            "id": "phasea-row-5-preserve",
+            "counts": {
+              "TP": 1,
+              "FP": 0,
+              "FN": 0,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 1.0,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-5-preserve/measurement/terminal.json",
+              "sha256": "4f08c229d2b4f31076484855cf7c06d8f0486895478556041cf75b72c1bdbd1f",
+              "size": 3852
+            }
+          },
+          {
+            "id": "phasea-row-6-reset",
+            "counts": {
+              "TP": 1,
+              "FP": 1,
+              "FN": 0,
+              "TN": 0,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 0.5,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 1.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-6-reset/measurement/terminal.json",
+              "sha256": "099db15215ec6f584d7b5bcefc0e1b1d9294b8d4d020430f0cffa8c256e584dc",
+              "size": 3855
+            }
+          },
+          {
+            "id": "phasea-row-6-preserve",
+            "counts": {
+              "TP": 1,
+              "FP": 1,
+              "FN": 0,
+              "TN": 0,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 0.5,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 1.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-6-preserve/measurement/terminal.json",
+              "sha256": "5de0135fc0adff44440a6291af30879f2a1dc48817fc6456528f320392d2138b",
+              "size": 3894
+            }
+          },
+          {
+            "id": "phasea-row-7-reset",
+            "counts": {
+              "TP": 1,
+              "FP": 0,
+              "FN": 0,
+              "TN": 1,
+              "targets": 1,
+              "foils": 1,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 1.0,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.0
+            },
+            "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+            "threshold": 0.020736298148054874,
+            "complete": true,
+            "valid": true,
+            "stimulus_times": [
+              0.7005,
+              0.7805,
+              0.9405,
+              1.1805
+            ],
+            "spike_times": [
+              1.184
+            ],
+            "events_before_target_last_input": [],
+            "terminal": {
+              "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-predecessor-m40-j1/phasea-row-7-reset/measurement/terminal.json",
+              "sha256": "b896348c395472d6ba946e19a4b452861d110a8102226d972d68a8e449a0d7bf",
+              "size": 3813
+            }
+          }
+        ],
+        "closed_case_count": 13,
+        "controls": [
+          {
+            "comparison": "same first predecessor phasea-row-1",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          },
+          {
+            "comparison": "same first predecessor phasea-row-2",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          },
+          {
+            "comparison": "same first predecessor phasea-row-3",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          },
+          {
+            "comparison": "same first predecessor phasea-row-4",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          },
+          {
+            "comparison": "same first predecessor phasea-row-5",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          },
+          {
+            "comparison": "same first predecessor phasea-row-6",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          },
+          {
+            "comparison": "same reset target phasea-row-1-reset vs phasea-row-2-reset",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          },
+          {
+            "comparison": "same reset target phasea-row-1-reset vs phasea-row-3-reset",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          },
+          {
+            "comparison": "same reset target phasea-row-1-reset vs phasea-row-4-reset",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          },
+          {
+            "comparison": "same reset target phasea-row-1-reset vs phasea-row-5-reset",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          },
+          {
+            "comparison": "same reset target phasea-row-1-reset vs phasea-row-6-reset",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          },
+          {
+            "comparison": "same reset target phasea-row-1-reset vs phasea-row-7-reset",
+            "actual_conditions_equal": true,
+            "sample_times_equal": true,
+            "all_sample_fields_exact": true,
+            "maximum_abs_signal_difference": 0,
+            "spike_times_equal": true,
+            "stimulus_times_equal": true
+          }
+        ],
+        "expected_control_comparisons": 13,
+        "completed_control_comparisons": 12,
+        "all_observed_controls_exact": true,
+        "all14_cases_and13_controls_complete": false
+      },
+      "classic-count-long-predecessor-m40-k2": {
+        "supervisor_live": true,
+        "state": {
+          "observed_utc": "2026-11-23T04:57:45.624183+00:00",
+          "stage": "waiting_for_closed_Classic_short_predecessor_series",
+          "scientific_verdict": null
+        },
+        "completed_cases": [],
+        "closed_case_count": 0,
+        "controls": [],
+        "expected_control_comparisons": 13,
+        "completed_control_comparisons": 0,
+        "all_observed_controls_exact": null,
+        "all14_cases_and13_controls_complete": false
+      }
+    }
+  },
+  "M40_kernel_and_queues": {
+    "classic-count-predecessor-m40-j1": {
+      "supervisor_live": true,
+      "state": {
+        "observed_utc": "2026-11-23T04:51:12.086267+00:00",
+        "case": "phasea-row-7-preserve",
+        "stage": "running_native_predecessor_control",
+        "native_trials": 2,
+        "scientific_verdict": null
+      },
+      "completed_cases": [
+        {
+          "id": "phasea-row-1-reset",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-1-reset/position-0",
+              "sample_id": "phasea-row-1",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.25,
+                0.41,
+                0.49
+              ],
+              "spike_times": [],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-1-reset/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "25f857e1629d5e95d208197771781aa0b5aaa64041ae88b038d35fab1de45096"
+        },
+        {
+          "id": "phasea-row-1-preserve",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-1-preserve/position-0",
+              "sample_id": "phasea-row-1",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.25,
+                0.41,
+                0.49
+              ],
+              "spike_times": [],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-1-preserve/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "preserve_neuron_dynamics",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "faf4d4fdbd1a33cd33cf35f98b895886f445339bf2126c6523ba809ace5cdfe0"
+        },
+        {
+          "id": "phasea-row-2-reset",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-2-reset/position-0",
+              "sample_id": "phasea-row-2",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.17,
+                0.25,
+                0.49
+              ],
+              "spike_times": [],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-2-reset/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "7526b52f2c39d64206ab6ad77293ce3c1468f137921b7120c59dc2409fe8c493"
+        },
+        {
+          "id": "phasea-row-2-preserve",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-2-preserve/position-0",
+              "sample_id": "phasea-row-2",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.17,
+                0.25,
+                0.49
+              ],
+              "spike_times": [],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-2-preserve/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "preserve_neuron_dynamics",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "5da4fe40b7bdbb00237ebecd918dc30f17cc81e93abc3a8e31597536d12f8550"
+        },
+        {
+          "id": "phasea-row-3-reset",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-3-reset/position-0",
+              "sample_id": "phasea-row-3",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.17,
+                0.33,
+                0.49
+              ],
+              "spike_times": [],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-3-reset/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "e048189882c369eb3222eb07d0a1591f77eca11fbd802db009647b072f30c5bc"
+        },
+        {
+          "id": "phasea-row-3-preserve",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-3-preserve/position-0",
+              "sample_id": "phasea-row-3",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.17,
+                0.33,
+                0.49
+              ],
+              "spike_times": [],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-3-preserve/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "preserve_neuron_dynamics",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "99353100754ea13b82ab34a86d478ff9fa6668d2f7d4b201cda9d80c9a724221"
+        },
+        {
+          "id": "phasea-row-4-reset",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-4-reset/position-0",
+              "sample_id": "phasea-row-4",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.03,
+                0.25,
+                0.49
+              ],
+              "spike_times": [],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-4-reset/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "659051b10a8c2ffee486bc546ed70d799bdf9fbef6615fd6b158eee059d7299d"
+        },
+        {
+          "id": "phasea-row-4-preserve",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-4-preserve/position-0",
+              "sample_id": "phasea-row-4",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.03,
+                0.25,
+                0.49
+              ],
+              "spike_times": [],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-4-preserve/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "preserve_neuron_dynamics",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "499cfc639c3e9c5393c9cea1e2c53f25f16119cceda6c13992431599d6db67c9"
+        },
+        {
+          "id": "phasea-row-5-reset",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-5-reset/position-0",
+              "sample_id": "phasea-row-5",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.25,
+                0.47,
+                0.49
+              ],
+              "spike_times": [],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-5-reset/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "b28317292f34f9f8d246e84c5d314816e670f64f7d20c5b80cf38bc676db0bb4"
+        },
+        {
+          "id": "phasea-row-5-preserve",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-5-preserve/position-0",
+              "sample_id": "phasea-row-5",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.25,
+                0.47,
+                0.49
+              ],
+              "spike_times": [],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-5-preserve/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "preserve_neuron_dynamics",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "f6c5c72c9c7a4ac6e346cde1ea88de902d7d50d0b4639cc8222adbbdfc6cf0c4"
+        },
+        {
+          "id": "phasea-row-6-reset",
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 0,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.5,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 1.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-6-reset/position-0",
+              "sample_id": "phasea-row-6",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.05,
+                0.09,
+                0.49
+              ],
+              "spike_times": [
+                0.492
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-6-reset/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "0a8b1258c792b2af2eff3891c75a713bdaee668b5533c49da4740592675065ec"
+        },
+        {
+          "id": "phasea-row-6-preserve",
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 0,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.5,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 1.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-6-preserve/position-0",
+              "sample_id": "phasea-row-6",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.05,
+                0.09,
+                0.49
+              ],
+              "spike_times": [
+                0.492
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-6-preserve/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "preserve_neuron_dynamics",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "04841b087beb52450fa47c22b424aed311696f396fe22586988426d9bbc00204"
+        },
+        {
+          "id": "phasea-row-7-reset",
+          "counts": {
+            "TP": 1,
+            "FP": 0,
+            "FN": 0,
+            "TN": 1,
+            "targets": 1,
+            "foils": 1,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0
+          },
+          "actual_events": [
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-7-reset/position-0",
+              "sample_id": "phasea-row-7",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.01,
+                0.41,
+                0.45,
+                0.49
+              ],
+              "spike_times": [],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": null
+            },
+            {
+              "trial_id": "classic-count-predecessor-m40-j1/phasea-row-7-reset/position-1",
+              "sample_id": "phasea-row-0",
+              "reset_policy": "reset_per_trial",
+              "stimulus_times": [
+                0.7005,
+                0.7805,
+                0.9405,
+                1.1805
+              ],
+              "spike_times": [
+                1.184
+              ],
+              "events_before_current_first_input": [],
+              "first_input_interval_from_previous": 0.6905
+            }
+          ],
+          "validity": "valid",
+          "condition_fingerprint": "f30507d205d1f02a75a0482e68c4d4bcc27327665959489d184c22ffd02395c6"
+        }
+      ],
+      "declaration_tests": {
+        "tests": 14,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "actual_count_model_fixture": true
+      },
+      "actual_controller": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "2af64f3f14d7e8ae14a74cd0adab11b8ff6cc5c9dc01067a165c86c75dc4f7fd",
+          "unit": "timelearner-230ce982-81f1-4ed3-8785-fa9a7c0fc3e7.service",
+          "invocation_id": "998f235024ea4e1c8adc77a8ac00cf19",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-230ce982-81f1-4ed3-8785-fa9a7c0fc3e7.service",
+          "initial_main_pid": 2402969,
+          "initial_start_ticks": "448468046",
+          "sha256": "a6f17491fd237eeddc3e75c772be52a900c906dea24e65fb1d3aaf7ae8d17afb"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "2402969",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-230ce982-81f1-4ed3-8785-fa9a7c0fc3e7.service",
+          "MemoryMax": "2147483648",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt 230ce982-81f1-4ed3-8785-fa9a7c0fc3e7",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "998f235024ea4e1c8adc77a8ac00cf19"
+        },
+        "memory_max": 2147483648,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      }
+    },
+    "classic-count-long-predecessor-m40-k2": {
+      "supervisor_live": true,
+      "state": {
+        "observed_utc": "2026-11-23T04:57:45.624183+00:00",
+        "stage": "waiting_for_closed_Classic_short_predecessor_series",
+        "scientific_verdict": null
+      },
+      "completed_cases": []
+    },
+    "classic-count-closed-campaign-archive-m40-m3": {
+      "supervisor_live": true,
+      "state": {
+        "observed_utc": "2026-11-23T04:57:43.830320+00:00",
+        "stage": "waiting_for_all_three_closed_Classic_studies",
+        "scientific_verdict": null
+      }
+    }
+  },
+  "Elder_primary_audit_queue": {
+    "observed_utc": "2026-11-23T04:57:51.544550+00:00",
+    "job": "classic-measured-count-full-primary-audit-elder-r5",
+    "controls_exist": true,
+    "audit_output_exists": false,
+    "resubmitted": false,
+    "declaration": {
+      "name": "classic-measured-count-full-primary-audit-elder-r5",
+      "host": "Elder-1",
+      "base": "/home/user/timelearner-refactor",
+      "source": "/home/user/timelearner-refactor/source-count-reservation-fix-elder-k1",
+      "source_commit": "83f1369fd50ace51f834e40b7f2bd8bd2fd76e2e",
+      "original": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1",
+      "controller": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1-controller",
+      "native_owner": {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/process/contained/owned-unit.json",
+        "sha256": "48a4cdf282ce35929eae228459a0ac048efc45587b0eb56aaf4b160de96aad66",
+        "size": 566
+      },
+      "outer_owner": {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1-controller/process/contained/owned-unit.json",
+        "sha256": "2d45094ecbcdde71a14acff49b2a6421e7a6920d92620a451e1a4359cf9cf6e4",
+        "size": 566
+      },
+      "native_binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "0d199f9f3447391cd6de9d2583f8227cb2d011353cee6f897051af50f11b724e",
+        "unit": "timelearner-a2ed26c0-e5ae-4f8c-806d-edae1f1285a9.service",
+        "invocation_id": "328cf9612c324a93828da40d25ba0e22",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a2ed26c0-e5ae-4f8c-806d-edae1f1285a9.service",
+        "initial_main_pid": 2617049,
+        "initial_start_ticks": "494674224",
+        "sha256": "48f1df3630a402e010f254f1892fd5a24cd6179e6ca810590fcf47d552d7f71f"
+      },
+      "outer_binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "2775d11934bc188e56d37e8fb1f89f86c7ff338c86d962be460cfbf7851dd279",
+        "unit": "timelearner-a4d2a868-c0e5-4b2d-b66d-7e0c5382e83c.service",
+        "invocation_id": "d6cbc0ea56954d15afc20febe4a2b456",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a4d2a868-c0e5-4b2d-b66d-7e0c5382e83c.service",
+        "initial_main_pid": 2612912,
+        "initial_start_ticks": "494672745",
+        "sha256": "59e636789643dec604bfc1de4ea6b9e3e06468af996d42ddff5346e0718ab5ae"
+      },
+      "original_request": {
+        "path": "/home/user/timelearner-refactor/requests/classic-measured-count-m4-elder-k1/request.json",
+        "sha256": "e4133e612efc94cd4ebd7c6d16d5e2164c3d942034bf128cc60e8b97863a0733",
+        "size": 1606
+      },
+      "original_resistance_job": {
+        "path": "/home/user/timelearner-refactor/requests/classic-measured-count-m4-elder-k1/input/original-job.json",
+        "sha256": "01140d02c38b17b57216a9122c5703013df429c1f20e10c0fd44f7a2261a625a",
+        "size": 674051
+      },
+      "supervisor": {
+        "path": "/home/user/timelearner-refactor/requests/classic-measured-count-full-primary-audit-elder-r5/supervisor.py",
+        "sha256": "688796104cb6fa44576d3719b55940800757e0b62f7e51255892dbccd8b0dd77",
+        "size": 6201
+      },
+      "package_fingerprint": "a6419d6c687fc224c409a5f8158001c17ef89cd60a61a173ed7011b6527063b4",
+      "maximum_wait_seconds": 14400,
+      "limits": {
+        "memory_bytes": 17179869184,
+        "maximum_audit_seconds": 7200
+      },
+      "new_Train_started": false,
+      "scientific_verdict": null
+    },
+    "controls_commit": "1c139fa5be7d72ea4032fe05479b68292a853319",
+    "dispatch.json": {
+      "pid": 112924,
+      "start_ticks": "497959216",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "queue-owner.json": {
+      "pid": 112924,
+      "start_ticks": "497959216",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "queue-state.json": {
+      "reason": "waiting_for_original_native_and_controller_closure",
+      "observed_utc": "2026-11-23T04:57:46.576912+00:00",
+      "native_closed": false,
+      "controller_closed": false,
+      "elapsed_wait_seconds": 45.09185874648392,
+      "no_Train_restarted": true,
+      "scientific_verdict": null
+    },
+    "queue-owner.json_kernel_matches": true,
+    "dispatch.json_kernel_matches": true,
+    "original_native": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "0d199f9f3447391cd6de9d2583f8227cb2d011353cee6f897051af50f11b724e",
+        "unit": "timelearner-a2ed26c0-e5ae-4f8c-806d-edae1f1285a9.service",
+        "invocation_id": "328cf9612c324a93828da40d25ba0e22",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a2ed26c0-e5ae-4f8c-806d-edae1f1285a9.service",
+        "initial_main_pid": 2617049,
+        "initial_start_ticks": "494674224",
+        "sha256": "48f1df3630a402e010f254f1892fd5a24cd6179e6ca810590fcf47d552d7f71f"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "2617049",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a2ed26c0-e5ae-4f8c-806d-edae1f1285a9.service",
+        "MemoryMax": "17179869184",
+        "TasksMax": "64",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt a2ed26c0-e5ae-4f8c-806d-edae1f1285a9",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "328cf9612c324a93828da40d25ba0e22"
+      },
+      "memory_max": 17179869184,
+      "tasks_max": 64,
+      "scientific_verdict": null
+    },
+    "reserved": {
+      "disk_bytes": 8589934592,
+      "memory_bytes": 19327352832,
+      "slots": 1
+    }
+  },
+  "dispatch_response": {
+    "transport_exit_code": 1,
+    "response_not_consumed": true,
+    "original_queue_found_by_fresh_successful_read": true,
+    "resubmitted": false
+  },
+  "primary_audit": {
+    "actual_execution_not_yet_observed": true,
+    "uses_production_closed_matched_count_training_test": true,
+    "maximum_wait_seconds": 14400,
+    "maximum_audit_seconds": 7200,
+    "memory_bytes": 17179869184,
+    "maximum_output_bytes": 2147483648,
+    "requires_native_and_outer_closure": true,
+    "requires_original_runtime_capture": true,
+    "requires_released_slot": true,
+    "original_Train_unchanged": true,
+    "new_model_run": false
+  },
+  "scientific_verdict": null
+}
