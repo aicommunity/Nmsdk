@@ -1,0 +1,58 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/fixed-Classic-matched-duration-holdout-as6/index.json",
+  "record": {
+    "kind": "timelearner_queued_predeclared_fixed_DATA_duration_holdout",
+    "schema_version": 1,
+    "job": "fixed-classic-matched-duration-holdout-m40-as6",
+    "source_root": "6574ae49e7286c0ee437eaa1146d11e3ac32bfcc",
+    "controls_commit": "dea704e3d96c15bd0d6ac7de71828eeb5ee7f27e",
+    "controls_bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e4/e4791debbeda349641ff2abcd88c23aa438e47450781209e9961778a8a8b6f1a",
+      "sha256": "e4791debbeda349641ff2abcd88c23aa438e47450781209e9961778a8a8b6f1a",
+      "bytes": 22184
+    },
+    "queue_owner": {
+      "pid": 3197579,
+      "start_ticks": "453825710",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "protocol_sha256": "510c96b0d61f5e42e8f6cc599c706fe994cebf7cd3d0eaa0f4b26e702672ef0e",
+    "model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+    "threshold": 0.020736298148054874,
+    "native_frequency_hz": 2000,
+    "expected_trials": 8,
+    "new_negative_patterns": 7,
+    "positive_control_position": 5,
+    "threshold_selection": false,
+    "training_performed": false,
+    "negative_patterns_only_independent": true,
+    "new_native_results": null,
+    "job_sha256": "ea98de97a619d46e6f2b45ad354aae1b2cb340ceb0fe5df434e469d34d56838c",
+    "matrix_condition_fingerprint": "d0144ebfa778f99972c68b2e213caaa9b9e9b1ea36324a7fb1dc845e8a447f92",
+    "case_condition_fingerprints": {
+      "heldout-M4-ticks-447-311-202": "ae88840b5b3c2989dabeb6d613f0699c4d4dc3aeadcf4f0470a6291ff7e4ee4f",
+      "heldout-M4-ticks-347-255-358": "33f455bf0c57a5d9328968d84ce16892b24101317d4e4f1e33739c621e48785d",
+      "heldout-M4-ticks-461-379-120": "68eb49b4ca9e0eea87d56685ae0d9033ff6dda14837b920f697024ea70dda5c6",
+      "heldout-M4-ticks-137-413-410": "c3f8f6a282ff9a7926759252ac0ae3636f299d24fa02abf1da0ee56faa3a9770",
+      "heldout-M4-ticks-562-127-271": "9edefd78716ceb4b979e50aba4ed6e026e927b34aefa3e73843f9c28ede8f8a2",
+      "phasea-row-0": "5e24d01d5451c546744e1ad9dce3a97c57c54b661b02dd2c12be430cbcc95636",
+      "heldout-M4-ticks-385-176-399": "73cb801e73875d5d372a37ba5bde50e3defa0ad1db91c6a1f7d7a400e6f46543",
+      "heldout-M4-ticks-454-328-178": "d9990bf0566e582023a50b89d2742cb28d6dd72f0e61c0b166fccc482e64552e"
+    },
+    "waits_for": [
+      "primary",
+      "delay",
+      "recognition"
+    ],
+    "maximum_native_wall_seconds": 7200,
+    "maximum_controller_wall_seconds": 9000,
+    "registry_slots_unchanged": true,
+    "worker_tests_not_claimed": true,
+    "scientific_verdict": null,
+    "observed_utc": "2026-11-23T19:44:19.491097+00:00"
+  }
+}

@@ -1,0 +1,251 @@
+{
+  "observed_utc": "2026-11-23T19:45:55.315331+00:00",
+  "source_Train_or_native_not_restarted": true,
+  "source_model_revision": "cbf49f5990229085ec8395a98b1c85418e2b6744b8e6bc1255ce8bf69de1bf7b",
+  "threshold": 0.020736298148054874,
+  "source_counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.14285714285714285
+  },
+  "source_runtime_fingerprint": "7ef93691c86311ef72259382b0d4e950d910ed2fbd6aaed113649cf894e9a404",
+  "source_code_closure": {
+    "root": {
+      "head": "5b6cb11ee46ae196ecbf81003eec45654b4c3fad",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "head": "1c8d0112061cb9025ef9205b0d8d735d62fcbe39",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "source_job_sha256": "42ea8b1527a2ecf6135e19fd22b282535c02739b891c1b8b8e14a75cacf95e00",
+  "source_manifest": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-DATA-followup-m40-a2-replay/run-manifest.json",
+    "sha256": "c54f51b71dc3b1db5a32ffcfd4e35383ff5749dcd0979ea961ef0e2501ee617f",
+    "size": 51872
+  },
+  "source_saved_model": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-classic-count-DATA-followup-m40-a2-export/native/model.json",
+    "sha256": "e2756fe8366c27ae50dba1bd524a3155c4d28d0497b73d22b502e8d298cde12a",
+    "size": 20378901
+  },
+  "native_morphology_keys": [
+    "certificate",
+    "configuration",
+    "configuration_text",
+    "controls",
+    "conversion_record",
+    "data_only",
+    "dataset",
+    "dynamic_checkpoint",
+    "implementation_id",
+    "kind",
+    "model_revision",
+    "neuron",
+    "parameters",
+    "protocol",
+    "schema_version",
+    "sha256",
+    "source_boundary",
+    "source_solo_revision"
+  ],
+  "effective_model_configuration": {
+    "allocated_cable_lengths": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "allow_muted_input_baseline": false,
+    "branch": false,
+    "configured_minimum_resistance": 0,
+    "dataset_class": "NDatasetMatrix",
+    "frequency_hz": 2000,
+    "generator_class": "NPulseGeneratorTransit",
+    "inhibition": [],
+    "initial_isi": [
+      0.01,
+      0.08,
+      0.16,
+      0.24
+    ],
+    "initial_threshold": 100,
+    "inputs": [
+      {
+        "attachment": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "attachment": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "attachment": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "attachment": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "maximum_cable_length": 256,
+    "maximum_resistance_ratio": 1000,
+    "neuron_class": "TLNativeFast3F2000_Neuron",
+    "neuron_structure_mode": 2,
+    "normalization": "N0",
+    "preserve_allocated_cable": false,
+    "scale_inhibition_with_input": true,
+    "schema_version": 2
+  },
+  "source_controller_configuration": null,
+  "eight_trial_metadata": [
+    {
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.16,
+        0.24
+      ],
+      "duration": 2.0,
+      "maximum_samples": 4005,
+      "reset_policy": "reset_per_trial"
+    },
+    {
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.24,
+        0.16,
+        0.08
+      ],
+      "duration": 2.0,
+      "maximum_samples": 4005,
+      "reset_policy": "reset_per_trial"
+    },
+    {
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.16,
+        0.08,
+        0.24
+      ],
+      "duration": 2.0,
+      "maximum_samples": 4005,
+      "reset_policy": "reset_per_trial"
+    },
+    {
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.16,
+        0.16,
+        0.16
+      ],
+      "duration": 2.0,
+      "maximum_samples": 4005,
+      "reset_policy": "reset_per_trial"
+    },
+    {
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.02,
+        0.22,
+        0.24
+      ],
+      "duration": 2.0,
+      "maximum_samples": 4005,
+      "reset_policy": "reset_per_trial"
+    },
+    {
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.24,
+        0.22,
+        0.02
+      ],
+      "duration": 2.0,
+      "maximum_samples": 4005,
+      "reset_policy": "reset_per_trial"
+    },
+    {
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.04,
+        0.4
+      ],
+      "duration": 2.0,
+      "maximum_samples": 4005,
+      "reset_policy": "reset_per_trial"
+    },
+    {
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.4,
+        0.04,
+        0.04
+      ],
+      "duration": 2.0,
+      "maximum_samples": 4005,
+      "reset_policy": "reset_per_trial"
+    }
+  ],
+  "new_observations": null
+}
