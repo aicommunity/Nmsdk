@@ -48,6 +48,11 @@ def declare(original, run_id, study, runtime, *, threshold, memory_bytes, wall_s
         job, design = declare_job(original, run_id, rotation=study['rotation'],
             cadence=study['cadence'], reset_policy=study['reset_policy'])
         identity = condition(job, design, runtime, threshold=threshold)
+    elif set(study) == {'protocol', 'predecessor', 'cadence', 'reset_policy'} and study['protocol'] == 'predecessor':
+        from .frozen_physical_predecessor_study import declare_job, condition
+        job, design = declare_job(original, run_id, predecessor=study['predecessor'],
+            cadence=study['cadence'], reset_policy=study['reset_policy'])
+        identity = condition(job, design, runtime, threshold=threshold)
     else:
         raise ValueError('physical_study_protocol_schema')
     return job, design, identity
@@ -224,9 +229,10 @@ def run(controls):
                 require(comparison['response_preserved'], 'physical_study_reset_control_changed')
                 comparisons.append(comparison)
         cadence_evidence = None
-        if spec['study']['protocol'] == 'cadence':
+        if spec['study']['protocol'] in ('cadence', 'predecessor'):
             from .native_evidence import number, equal, after
-            observed = [json.loads((output/'native'/f'trial-{i}.json').read_bytes()) for i in range(8)]
+            observed = [json.loads((output/'native'/f'trial-{i}.json').read_bytes())
+                        for i in range(spec['expected_trials'])]
             quiet = number(observed[-1]['end'])-number(observed[-1]['stimulus_times'][-1])
             require(quiet > 2 or equal(quiet, 2), 'physical_study_final_quiet_tail_incomplete')
             cadence_evidence = dict(final_quiet_tail_seconds=quiet,
@@ -236,6 +242,7 @@ def run(controls):
                 actual_timing_and_events=[dict(trial_id=o['trial_id'], sample_id=o['sample_id'],
                     reset_policy=o['reset_policy'], stimulus_times=o['stimulus_times'], spike_times=o['spike_times'],
                     events_before_current_first_input=[t for t in o['spike_times'] if after(o['stimulus_times'][0], t)],
+                    events_before_current_last_input=[t for t in o['spike_times'] if after(o['stimulus_times'][-1], t)],
                     first_input_interval_from_previous=None if i == 0 else
                         o['stimulus_times'][0]-observed[i-1]['stimulus_times'][0]) for i,o in enumerate(observed)])
         unchanged(); require(file_record(controls/'runtime.json') == runtime_before and
