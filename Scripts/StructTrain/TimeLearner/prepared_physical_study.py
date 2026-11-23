@@ -43,6 +43,12 @@ def declare(original, run_id, study, runtime, *, threshold, memory_bytes, wall_s
         job, design = declare_job(original, run_id)
         identity = condition(job, design, runtime, dict(threshold=threshold,
             native_memory_bytes=memory_bytes, maximum_native_wall_seconds=wall_seconds))
+    elif set(study) == {'protocol', 'protocol_document'} and study['protocol'] == 'heldout_matched_duration':
+        require(type(study['protocol_document']) is dict, 'physical_study_holdout_protocol_required')
+        from .frozen_physical_foil_study import declare_job, condition
+        job, design = declare_job(original, run_id, holdout_protocol=study['protocol_document'])
+        identity = condition(job, design, runtime, dict(threshold=threshold,
+            native_memory_bytes=memory_bytes, maximum_native_wall_seconds=wall_seconds))
     elif set(study) == {'protocol', 'rotation', 'cadence', 'reset_policy'} and study['protocol'] == 'cadence':
         from .frozen_physical_iti_study import declare_job, condition
         job, design = declare_job(original, run_id, rotation=study['rotation'],
@@ -219,8 +225,8 @@ def run(controls):
         # different conditions. Paired reset/preserve runs need their own
         # SAME-cadence first-trial comparison at the matrix level.
         controls_to_compare = [i for i,t in enumerate(job['trials']) if
-            t['sample_id'] in source_trials and spec['study']['protocol'] == 'new_foils']
-        require(spec['study']['protocol'] != 'new_foils' or len(controls_to_compare) == 1,
+            t['sample_id'] in source_trials and spec['study']['protocol'] in ('new_foils','heldout_matched_duration')]
+        require(spec['study']['protocol'] not in ('new_foils','heldout_matched_duration') or len(controls_to_compare) == 1,
             'physical_study_missing_repeated_control')
         with trial_response_comparison(model, physical_data=True) as compare:
             for i in controls_to_compare:
@@ -248,16 +254,20 @@ def run(controls):
         unchanged(); require(file_record(controls/'runtime.json') == runtime_before and
             source_closure(sdk) == runtime['source_closure'], 'physical_study_runtime_changed')
         _actor(Path(spec['python_source']).resolve(strict=True), spec['python_root'])
-        _write(output/'terminal.json', dict(kind='timelearner_actual_windows_frozen_physical_study', schema_version=1,
+        terminal = dict(kind='timelearner_actual_windows_frozen_physical_study', schema_version=1,
             execution='completed', validity='valid', study=spec['study'], model_revision=spec['model_revision'],
             threshold=spec['threshold'], trials=spec['expected_trials'], counts=metrics['pooled_counts'],
             condition_fingerprint=spec['condition_fingerprint'], repeated_control_comparisons=comparisons,
-            source_protocol_repeated_control_checked=spec['study']['protocol'] == 'new_foils',
+            source_protocol_repeated_control_checked=spec['study']['protocol'] in ('new_foils','heldout_matched_duration'),
             cadence_evidence=cadence_evidence,
             frozen_model_verified=True, complete_native_observations=True, threshold_selected=False,
             training_performed=False, source_training_completed=False,
-            new_foils_excluded_from_calibration=spec['study']['protocol'] == 'new_foils',
-            independently_heldout_positive_class=False, scientific_verdict=None))
+            new_foils_excluded_from_calibration=spec['study']['protocol'] in ('new_foils','heldout_matched_duration'),
+            independently_heldout_positive_class=False, scientific_verdict=None)
+        if spec['study']['protocol'] == 'heldout_matched_duration':
+            terminal.update(source_training_completed=None,
+                protocol_sha256=design['protocol_sha256'], independence_scope=design['independence_scope'])
+        _write(output/'terminal.json', terminal)
     except BaseException as error:
         _write(output/'exception.json', dict(reason=str(error), traceback=traceback.format_exc(), scientific_verdict=None))
         raise

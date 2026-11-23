@@ -67,9 +67,13 @@ def declare_trials(source_job, run_id):
         interpretation='new_foil_sensitivity; no_new_positive_class_or_stochastic_replicates')
 
 
-def declare_job(original, run_id):
+def declare_job(original, run_id, *, holdout_protocol=None):
     job=deepcopy(original);job.pop('sha256');job['run_id']=run_id
-    job['trials'],design=declare_trials(original,run_id)
+    if holdout_protocol is None:
+        job['trials'],design=declare_trials(original,run_id)
+    else:
+        from .frozen_duration_holdout import declare_trials as heldout_trials
+        job['trials'],design=heldout_trials(original,run_id,holdout_protocol)
     frequency=original['source_model_data']['configuration']['model']['frequency_hz']
     job['maximum_model_ticks']=sum(math.ceil(t['duration']*frequency)+4 for t in job['trials'])
     job['sha256']=sha(job)
@@ -77,24 +81,40 @@ def declare_job(original, run_id):
     return job,design
 
 
-def condition(job, design, runtime, declaration):
+def condition(job, design, runtime, declaration, *, _trial_index=None):
     """Use the production serializer; paths and attempt IDs do not enter it."""
     model = job['source_model_data']; config = model['configuration']
-    trials = [{k:v for k,v in t.items() if k not in ('run_id','trial_id')} for t in job['trials']]
+    from .frozen_duration_holdout import PROTOCOL as HOLDOUT_PROTOCOL
+    heldout = design['protocol_id'] == HOLDOUT_PROTOCOL
+    require(design['protocol_id'] in (PROTOCOL, HOLDOUT_PROTOCOL), 'foil_condition_protocol')
+    require(_trial_index is None or heldout and type(_trial_index) is int and
+            0 <= _trial_index < len(job['trials']), 'foil_condition_trial_scope')
+    selected = job['trials'] if _trial_index is None else [job['trials'][_trial_index]]
+    trials = [{k:v for k,v in t.items() if k not in ('run_id','trial_id')} for t in selected]
+    presentation = dict(design=design, reset_policy='reset_per_trial')
+    ticks = job['maximum_model_ticks']
+    if _trial_index is not None:
+        # A reset-per-trial case is identified by its own input/window, frozen
+        # model and runtime. Other holdout members or their sampling provenance
+        # belong to the matrix, not to this case's scientific identity.
+        presentation = dict(reset_policy='reset_per_trial', protocol_id=HOLDOUT_PROTOCOL,
+            matched_total_interval_ticks=design['matched_total_interval_ticks'],
+            label_rule=design['label_rule'], time_frame='relative_to_trial_onset')
+        ticks = math.ceil(selected[0]['duration']*config['model']['frequency_hz'])+4
     payloads=dict(
-        algorithm=dict(protocol_id=PROTOCOL,implementation_id=job['implementation_id'],
+        algorithm=dict(protocol_id=design['protocol_id'],implementation_id=job['implementation_id'],
                        native_runtime_content=runtime_content_identity(runtime)),
         model_spec=config['model'],
         storage_profiles=dict(effective_graph_sha256=model['model_revision'],
                               neuron_class=config['model']['neuron_class']),
         initial_state=dict(frozen_recognition_graph=model['model_revision'],dynamic_checkpoint=False),
         training_plan=dict(performed=False),input_data=dict(trials=trials),
-        presentation_protocol=dict(design=design,reset_policy='reset_per_trial'),
+        presentation_protocol=presentation,
         calibration_spec=dict(performed=False,fixed_threshold=declaration['threshold'],
                               selected_on_previous_eight_pattern_matrix=True),
         evaluation_spec=dict(criterion=job['criterion'],coverage_policy=job['coverage_policy'],
                              new_positive_class_assessed=False),
-        execution_policy=dict(maximum_model_ticks=job['maximum_model_ticks'],
+        execution_policy=dict(maximum_model_ticks=ticks,
             native_memory_bytes=declaration['native_memory_bytes'],
             native_wall_seconds=declaration['maximum_native_wall_seconds']),
         randomness_spec=dict(random_factors=[],independent_stochastic_repetitions=False))
@@ -102,25 +122,36 @@ def condition(job, design, runtime, declaration):
     spec=ConditionSpec(controller_version=2,amplitude_goal='captured_per_input',
                        **{role:item['sha256'] for role,item in artifacts.items()})
     require(ConditionSpec.loads(spec.dumps()) == spec, 'foil_grid_condition_roundtrip')
-    return dict(condition=spec.to_object(),condition_fingerprint=spec.fingerprint,
-                artifacts={item['sha256']:item for item in artifacts.values()},
-                descriptor_integrity_only=True,scientific_verdict=None)
+    result = dict(condition=spec.to_object(),condition_fingerprint=spec.fingerprint,
+                  artifacts={item['sha256']:item for item in artifacts.values()},
+                  descriptor_integrity_only=True,scientific_verdict=None)
+    if heldout and _trial_index is None:
+        result['condition_scope'] = 'matrix'
+        result['case_conditions'] = {t['sample_id']:condition(job,design,runtime,declaration,_trial_index=i)
+                                     for i,t in enumerate(job['trials'])}
+    return result
 
 
 def run(controls):
     from .contained_process import inspect
-    controls=Path(controls).resolve(strict=True);d=load(controls/'declaration.json')
+    controls=Path(controls).resolve(strict=True);declaration_record=file_record(controls/'declaration.json')
+    d=load(controls/'declaration.json')
     fields={'kind','schema_version','base','actor','name','inputs','output','source_original','source_export',
             'sdk_source','source_manifest','source_manifest_sha256','source_comparison','source_comparison_sha256',
             'model_revision','threshold','worker_root','worker_sha256','protocol_id','run_id','reset_policy',
             'native_memory_bytes','maximum_native_wall_seconds','maximum_outer_wall_seconds','outer_memory_bytes',
             'minimum_free_bytes','maximum_output_bytes','prepared_job_sha256','prepared_design_sha256',
             'condition_fingerprint'}
-    require(type(d) is dict and set(d)==fields and
-            d['kind']=='timelearner_frozen_new_foil_declaration' and type(d['schema_version']) is int and d['schema_version']==1 and
-            d['protocol_id']==PROTOCOL and d['reset_policy']=='reset_per_trial' and
+    from .frozen_duration_holdout import PROTOCOL as HOLDOUT_PROTOCOL
+    version = d.get('schema_version') if type(d) is dict else None
+    require(type(version) is int and version in (1,2), 'foil_study_declaration_schema')
+    expected = fields if version == 1 else fields | {'protocol_document'}
+    require(type(d) is dict and set(d)==expected and
+            d['kind']=='timelearner_frozen_new_foil_declaration' and
+            d['protocol_id']==(PROTOCOL if version==1 else HOLDOUT_PROTOCOL) and d['reset_policy']=='reset_per_trial' and
             d['native_memory_bytes']==2*1024**3 and d['maximum_native_wall_seconds']==7200,
             'foil_study_declaration_scope')
+    require(version == 1 or type(d['protocol_document']) is dict, 'foil_study_holdout_protocol_required')
     require(file_record(Path(__file__))['sha256']==d['worker_sha256'], 'foil_study_worker_changed')
     owner=inspect(controls/'outer-process/contained')
     require(owner['execution']=='running' and owner['binding']['initial_main_pid']==os.getpid(),
@@ -131,8 +162,9 @@ def run(controls):
             controls.is_relative_to(base/'requests') and output.is_relative_to(base/'readbacks') and
             not output.exists(),'foil_study_fresh_output_required');output.mkdir()
     with frozen_physical_source(d) as source:
-        job,design=declare_job(source['job'],d['run_id'])
-        require(job['sha256']==d['prepared_job_sha256'] and sha(design)==d['prepared_design_sha256'],
+        job,design=declare_job(source['job'],d['run_id'],holdout_protocol=d.get('protocol_document'))
+        require(design['protocol_id']==d['protocol_id'] and
+                job['sha256']==d['prepared_job_sha256'] and sha(design)==d['prepared_design_sha256'],
                 'foil_study_predeclared_matrix_changed')
         _write(output/'job.json',job)
         _write(output/'design.json',dict(kind='timelearner_frozen_new_foil_design',schema_version=1,
@@ -158,7 +190,7 @@ def run(controls):
         expected=next(o for o in source['observations'] if o['label']=='target')
         comparison=compare_trial_responses(expected,observed,source['model'],physical_data=True)
         terminal=dict(kind='timelearner_frozen_new_foil_result',schema_version=1,execution='completed',validity='valid',
-            protocol_id=PROTOCOL,model_revision=d['model_revision'],threshold=d['threshold'],
+            protocol_id=d['protocol_id'],model_revision=d['model_revision'],threshold=d['threshold'],
             new_foil_trials=design['new_foil_trials'],target_position=design['target_position'],
             counts=metrics['pooled_counts'],trials=metrics['trials'],target_control_comparison=comparison,
             target_control_preserved=comparison['response_preserved'],
@@ -167,7 +199,13 @@ def run(controls):
             threshold_selected_on_previous_matrix=True,new_positive_class_assessed=False,
             independent_stochastic_repetitions=False,continuous_stream_verified=False,
             inter_pattern_interval_varied=False,scientific_verdict=None)
+        if version == 2:
+            terminal.pop('training_completed')
+            terminal.update(kind='timelearner_frozen_duration_holdout_result', training_performed=False,
+                source_training_completed=None, protocol_sha256=design['protocol_sha256'],
+                independence_scope=design['independence_scope'])
     require(file_record(controls/'runtime.json')==runtime_before,'foil_study_runtime_changed')
+    require(file_record(controls/'declaration.json')==declaration_record,'foil_study_declaration_changed')
     _write(output/'terminal.json',terminal)
 
 
