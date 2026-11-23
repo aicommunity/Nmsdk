@@ -8,6 +8,7 @@
 #include <limits>
 #include <stdexcept>
 #include <type_traits>
+#include <utility>
 
 namespace {
 using namespace RDK;
@@ -61,7 +62,7 @@ struct Scope {
     }
 };
 
-template<class Owner> UEPtr<Owner> Legacy(Scope& scope, bool automatic)
+template<class Owner> UEPtr<Owner> Legacy(Scope& scope, bool automatic, double initialDelay = 3.)
 {
     constexpr bool branch = std::is_same_v<Owner, NNeuronTimeLearnerBranch>;
     auto owner = scope.Take<Owner>();
@@ -81,7 +82,7 @@ template<class Owner> UEPtr<Owner> Legacy(Scope& scope, bool automatic)
     pattern(1, 0) = .03;
     owner->InputPattern = pattern;
     owner->AutoScaleIterationGap = automatic;
-    owner->Delay = 3.;
+    owner->Delay = initialDelay;
     owner->IsNeedToTrain = true;
     scope.environment->ModelInit();
     scope.model->Reset();
@@ -149,6 +150,68 @@ template<class Owner> void RejectNonFinite()
     }
 }
 
+template<class Owner> void ColdConfiguredDelay()
+{
+    Scope scope;
+    auto owner = Legacy<Owner>(scope, false, 5.);
+    EXPECT_DOUBLE_EQ(owner->Delay.GetData(), 5.);
+    EXPECT_DOUBLE_EQ(Dataset(owner)->Delay.GetData(), 5.);
+}
+
+template<class Owner> void NonPositiveLegacyFallback()
+{
+    Scope scope;
+    auto owner = Legacy<Owner>(scope, false);
+    for (const double value : {0., -1.}) {
+        EXPECT_NO_THROW(owner->Delay.SetData(value));
+        EXPECT_DOUBLE_EQ(owner->Delay.GetData(), value);
+        EXPECT_DOUBLE_EQ(Dataset(owner)->Delay.GetData(), 1.55);
+    }
+}
+
+template<class Owner> void ConnectedDatasetOwnership()
+{
+    Scope scope;
+    auto owner = Legacy<Owner>(scope, false);
+    auto dataset = Dataset(owner);
+    owner->IterationGap = 5.;
+    ASSERT_TRUE(dataset->Delay.AttachTo(&owner->IterationGap));
+    ASSERT_TRUE(dataset->Delay.IsConnected());
+    EXPECT_NO_THROW(owner->Delay.SetData(5.));
+    EXPECT_DOUBLE_EQ(owner->Delay.GetData(), 5.);
+    EXPECT_DOUBLE_EQ(dataset->Delay.GetData(), 5.);
+    EXPECT_DOUBLE_EQ(owner->IterationGap.GetData(), 5.);
+    EXPECT_THROW(owner->Delay.SetData(6.), UIProperty::EPropertySetterFail);
+    EXPECT_DOUBLE_EQ(owner->Delay.GetData(), 5.);
+    EXPECT_DOUBLE_EQ(dataset->Delay.GetData(), 5.);
+    EXPECT_DOUBLE_EQ(owner->IterationGap.GetData(), 5.);
+    EXPECT_TRUE(dataset->Delay.IsConnected());
+    dataset->Delay.DetachFrom();
+}
+
+template<class Owner> void QueuedProbeOwnership()
+{
+    Scope scope;
+    auto owner = Legacy<Owner>(scope, false);
+    auto dataset = Dataset(owner);
+    const auto time = scope.environment->GetTime().GetDoubleTime();
+    const double before = owner->Delay.GetData();
+    const double effective = dataset->Delay.GetData();
+    NativeProbeRequest request;
+    request.specification.runId = "delay-probe-ownership";
+    request.specification.trialId = "queued-before-first-tick";
+    owner->QueueNativeProbe(std::move(request));
+    ASSERT_TRUE(owner->NativeProbeOwnsControl());
+    ASSERT_EQ(owner->NativeProbeState(), NativeProbeStatus::Queued);
+    EXPECT_THROW(owner->Delay.SetData(before + 2.), UIProperty::EPropertySetterFail);
+    EXPECT_DOUBLE_EQ(owner->Delay.GetData(), before);
+    EXPECT_DOUBLE_EQ(dataset->Delay.GetData(), effective);
+    EXPECT_NO_THROW(owner->Delay.SetData(before));
+    EXPECT_EQ(owner->NativeProbeState(), NativeProbeStatus::Queued);
+    EXPECT_DOUBLE_EQ(scope.environment->GetTime().GetDoubleTime(), time);
+    owner->CancelNativeProbe("delay-fixture-finished-before-stimulus");
+}
+
 template<class Owner> void NativeOwnership()
 {
     constexpr bool branch = std::is_same_v<Owner, NNeuronTimeLearnerBranch>;
@@ -197,3 +260,11 @@ TEST(TimeLearnerDelayOwnership, ClassicRejectsNonFiniteDelay) { RejectNonFinite<
 TEST(TimeLearnerDelayOwnership, BranchRejectsNonFiniteDelay) { RejectNonFinite<NNeuronTimeLearnerBranch>(); }
 TEST(TimeLearnerDelayOwnership, ClassicNativeOwnedMutationRejected) { NativeOwnership<NNeuronTimeLearner>(); }
 TEST(TimeLearnerDelayOwnership, BranchNativeOwnedMutationRejected) { NativeOwnership<NNeuronTimeLearnerBranch>(); }
+TEST(TimeLearnerDelayOwnership, ClassicColdConfiguredDelay) { ColdConfiguredDelay<NNeuronTimeLearner>(); }
+TEST(TimeLearnerDelayOwnership, BranchColdConfiguredDelay) { ColdConfiguredDelay<NNeuronTimeLearnerBranch>(); }
+TEST(TimeLearnerDelayOwnership, ClassicNonPositiveLegacyFallback) { NonPositiveLegacyFallback<NNeuronTimeLearner>(); }
+TEST(TimeLearnerDelayOwnership, BranchNonPositiveLegacyFallback) { NonPositiveLegacyFallback<NNeuronTimeLearnerBranch>(); }
+TEST(TimeLearnerDelayOwnership, ClassicConnectedDatasetOwnership) { ConnectedDatasetOwnership<NNeuronTimeLearner>(); }
+TEST(TimeLearnerDelayOwnership, BranchConnectedDatasetOwnership) { ConnectedDatasetOwnership<NNeuronTimeLearnerBranch>(); }
+TEST(TimeLearnerDelayOwnership, ClassicQueuedProbeOwnership) { QueuedProbeOwnership<NNeuronTimeLearner>(); }
+TEST(TimeLearnerDelayOwnership, BranchQueuedProbeOwnership) { QueuedProbeOwnership<NNeuronTimeLearnerBranch>(); }
