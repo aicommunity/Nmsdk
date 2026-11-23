@@ -112,3 +112,54 @@ TEST(BoundedTrainingMeasuredCount, KnownUnstableRepeatsDoNotCreateAFittedJump)
     EXPECT_EQ(std::find(measured.begin(),measured.end(),8),measured.end());
     if(session.Certificate())EXPECT_FALSE(session.Certificate()->Exact());
 }
+
+namespace {
+void RefinesBeforeReservingOrdinaryNeighbours(ProbeRouting routing,bool damageFinal=false)
+{
+    const auto protocol=Protocol(2,routing);auto cfg=Configuration();
+    cfg.maximumCandidatesPerInput=8;cfg.maximumProbes=160;
+    cfg.bounds={{2,2,1,16,1.,100.},{1,1,1,1,1.,100.}};
+    BoundedTrainingSession session(References(protocol),cfg,{{2,1,10.},{1,1,10.}});
+    std::vector<int> measured;
+    DriveTraining(session,protocol,[&](const TrainingAction& a,auto& delay,auto& raw) {
+        const int n=a.parameters[0].synapses;delay[0]=.13;
+        // Controlled complete observations exercise the production controller,
+        // not a physical-neuron result. The monotone response needs several
+        // measured refinements; its first secant does not solve the amplitude.
+        const double residual=n<=2?-.00265+.00025*n:
+            n<=11?-.00215+(n-2)*(.00215-.0002684)/9.:
+            n==12?-.0001118:.0001*(n-13);
+        raw[0]+=residual;
+        if(a.finalVerification && damageFinal)raw[0]+=.001;
+        if(!a.finalVerification && a.inputIndex==0)
+        {
+            measured.push_back(n);
+            EXPECT_NE(session.Status(),TrainingStatus::Exact);
+            EXPECT_FALSE(session.Certificate());
+        }
+    });
+    // The old eager neighbour reservations consume the same finite local
+    // allowance before Ns=13, then fall back to 3,4,... until this budget ends.
+    EXPECT_EQ(measured,(std::vector<int>{1,2,11,12,13}));
+    EXPECT_EQ(session.Parameters()[0].synapses,13);
+    EXPECT_LE(session.IssuedProbes(),cfg.maximumProbes);
+    EXPECT_LE(session.AppliedEdits(),cfg.maximumEdits);
+    if(damageFinal)
+    {
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+        if(session.Certificate())EXPECT_FALSE(session.Certificate()->Exact());
+    }
+    else
+    {
+        ASSERT_EQ(session.Status(),TrainingStatus::Exact);
+        ASSERT_TRUE(session.Certificate());EXPECT_TRUE(session.Certificate()->Exact());
+        EXPECT_EQ(session.Certificate()->Residuals().size(),2);
+    }
+}
+}
+TEST(BoundedTrainingMeasuredCount, ClassicRefinesBeforeReservingOrdinaryNeighbours)
+{RefinesBeforeReservingOrdinaryNeighbours(ProbeRouting::ClassicBurst);}
+TEST(BoundedTrainingMeasuredCount, BranchRefinesBeforeReservingOrdinaryNeighbours)
+{RefinesBeforeReservingOrdinaryNeighbours(ProbeRouting::BranchSoloBurst);}
+TEST(BoundedTrainingMeasuredCount, DeferredNeighboursNeverReplaceAFreshFinalCertificate)
+{RefinesBeforeReservingOrdinaryNeighbours(ProbeRouting::BranchSoloBurst,true);}
