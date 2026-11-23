@@ -136,13 +136,15 @@ def render(source, output):
                     values.append(cohort['threshold'])
                 limits.append((padded_limits(values), padded_limits([0., max(values)])))
             for view in ('full', 'positive', 'last-input-detail'):
+                height = 2.1*(channels+1)+1.8
                 fig, axes = plt.subplots(channels+1, len(selected), squeeze=False,
-                    figsize=(6.5*len(selected), 2.1*(channels+1)+1.2), dpi=150)
-                fig.subplots_adjust(left=.08, right=.98, bottom=.07, top=.90,
-                                    hspace=.55, wspace=.26)
+                    figsize=(6.5*len(selected), height), dpi=150)
+                fig.subplots_adjust(left=.08, right=.98, bottom=.75/height,
+                                    top=1.-1.05/height, hspace=.65, wspace=.26)
                 try:
-                    fig.suptitle(cohort['title']+'\nСохранённые реакции при фиксированном пороге; '
-                                 'синяя линия — потенциал, оранжевые — входы, красный пунктир — выходы', fontsize=12)
+                    fig.suptitle(cohort['title']+'\nСиний — потенциал; оранжевые линии — входы; '
+                        'красный пунктир — выходы.\nПотенциалы — в условных единицах модели; '
+                        'зелёный пунктир — фактический порог только пороговой зоны.', fontsize=12)
                     for column, (declared, o) in enumerate(selected):
                         anchor = o['stimulus_times'][-1] if view == 'last-input-detail' else o['stimulus_times'][0]
                         x = [(s['time']-anchor)*1000 for s in o['samples']]
@@ -162,8 +164,8 @@ def render(source, output):
                             axis.set_ylim(*limits[channel][0 if view == 'full' else 1])
                             axis.set_xlim(((-10., 20.) if view == 'last-input-detail' else (x[0], x[-1])))
                             axis.grid(alpha=.22)
-                            axis.set_ylabel(('Потенциал пороговой зоны' if lt else 'Потенциал сомы '+str(channel+1))+
-                                            '\nУсловные единицы модели')
+                            axis.set_ylabel(('Пороговая зона' if lt else 'Сома '+str(channel+1))+
+                                            '\nПотенциал, усл. ед.')
                             axis.set_xlabel('Время от '+('последнего' if view == 'last-input-detail' else 'первого')+' входа, мс')
                     for extension in ('png', 'svg'):
                         p = output/(cohort['id']+'-'+view+'.'+extension)
