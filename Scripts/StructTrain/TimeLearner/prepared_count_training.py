@@ -112,7 +112,8 @@ def run(controls):
     require(type(spec) is dict and set(spec) == {'kind','schema_version','python_source','python_root',
             'sdk_source','original_job','job_file','factor_job_file','run_id','maximum_synapses','output',
             'worker_sha256','native_memory_bytes','native_wall_seconds','preflight_wall_seconds',
-            'minimum_free_bytes','maximum_output_bytes'} and
+            'minimum_free_bytes','maximum_output_bytes'} |
+                ({'source_initial_state'} if spec.get('kind') == 'timelearner_count_two_sweep_training' else set()) and
             os.name == 'nt' and spec['kind'] in
                 ('timelearner_matched_count_training', 'timelearner_count_two_sweep_training') and
             spec['schema_version'] == 1, 'count_train_worker_scope')
@@ -199,6 +200,21 @@ def run(controls):
                     initial = load(destination/'native/initial-state.json')
                     if phase == 'preflight':
                         baseline_initial = initial
+                        if extension:
+                            source_record = spec['source_initial_state']
+                            source_path = Path(source_record['path'])
+                            require(file_record(source_path) == source_record,
+                                    'count_extension_initial_source_changed')
+                            previous = load(source_path)
+                            require(initial['identity'] == previous['identity'] and
+                                    initial['parameters'] == previous['parameters'],
+                                    'count_extension_cold_graph_changed')
+                            _write(output/'cold-start-comparison.json', dict(
+                                source=source_record,
+                                observed=file_record(destination/'native/initial-state.json'),
+                                physical_graph_and_parameters_preserved=True,
+                                controller_budget_changed=True, training_started=False,
+                                scientific_verdict=None))
                     else:
                         require(initial['parameters'][0]['synapses'] == 2 and
                                 len(initial['identity']['model']['nodes']) >
@@ -228,6 +244,9 @@ def run(controls):
                 file_record(runtime_path) == runtime_before and source_closure(sdk) == runtime['source_closure'],
                 'count_train_source_changed_after_execution')
         _source_snapshot(Path(spec['python_source']), spec['python_root'])
+        if extension:
+            require(file_record(Path(spec['source_initial_state']['path'])) == spec['source_initial_state'],
+                    'count_extension_initial_source_changed')
         _write(output/'terminal.json',terminal)
     except BaseException as error:
         import traceback
