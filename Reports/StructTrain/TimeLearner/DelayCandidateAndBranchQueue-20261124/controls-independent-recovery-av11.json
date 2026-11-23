@@ -1,0 +1,203 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Delay-acceptance-and-fixed-Branch-holdout-controls-av11.json",
+  "record": {
+    "kind": "timelearner_Delay_candidate_build_and_fixed_Branch_holdout_controls_recovery",
+    "schema_version": 1,
+    "observed_utc": "2026-11-23T22:38:09.665874+00:00",
+    "source_observed_utc": "2026-11-23T22:32:37.683542+00:00",
+    "records": {
+      "preparation": {
+        "controls_commit": "8dea0c71cd4de8df137efce8b258cfa42561bd1c",
+        "initial_controls_commit": "410892724aaa1ea301547577f4c179f7414c4457",
+        "bundle": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/d5/d5f2d00868ba95474777aeeef7f0692f109b8a99cb82281acf9f040f42083e65",
+          "sha256": "d5f2d00868ba95474777aeeef7f0692f109b8a99cb82281acf9f040f42083e65",
+          "bytes": 8687
+        },
+        "recovered_files": {
+          ".gitattributes": {
+            "bytes": 9,
+            "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+          },
+          ".gitignore": {
+            "bytes": 245,
+            "sha256": "ac0e4315af8ed9fc8d62ea16b257fdadce8de016560cd7d1c074fb9aa6498e79"
+          },
+          "launch.cmd": {
+            "bytes": 437,
+            "sha256": "d74226804234f8802a1f13d395ad61491252ccb0f054aabd3dfe61b9bcf8915d"
+          },
+          "prepare.py": {
+            "bytes": 13959,
+            "sha256": "1218399078199f952dd023901051a4bdeed07d92b28a0beaf719bd94dce4ebe3"
+          },
+          "request.json": {
+            "bytes": 317,
+            "sha256": "fd54992d1e30c033d25ca541a8da564017d9db964f60184f17bc168a345d9e4a"
+          },
+          "supervise.py": {
+            "bytes": 4035,
+            "sha256": "c4b7ce680a415199ef0b7cc14f8be8688df00db9f15dc17f1f957d3808bd5a1e"
+          },
+          "task.xml": {
+            "bytes": 1248,
+            "sha256": "88cd5b188573c1453663c166175018df0f74b01b418d33306323c79b0d6a1b52"
+          }
+        },
+        "all_git_blobs_recovered": true,
+        "task_observation": {
+          "last_result": 0,
+          "instances": 0,
+          "state": 3
+        },
+        "original_native_source_and_runtime_unchanged": true
+      },
+      "build": {
+        "controls_commit": "d24a02604cbcab9993189415cc4a291dad108f7e",
+        "initial_controls_commit": "d24a02604cbcab9993189415cc4a291dad108f7e",
+        "bundle": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/17/174875bef9282f719a5a769f4dceda954b9bf06d94ac041c79006b1e6f42eea3",
+          "sha256": "174875bef9282f719a5a769f4dceda954b9bf06d94ac041c79006b1e6f42eea3",
+          "bytes": 396691
+        },
+        "recovered_files": {
+          ".gitattributes": {
+            "bytes": 8,
+            "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+          },
+          "PLAN.ru.md": {
+            "bytes": 375,
+            "sha256": "a8e9989d6904bb582c05c917048b303c76e35938c526599fd31325c5cdda4f74"
+          },
+          "build-specification.json": {
+            "bytes": 1453,
+            "sha256": "accd9589166ac3c477c1acecd41454d2749ea2984987a6fc3f9fdf2ad8a6d0b4"
+          },
+          "cohort.json": {
+            "bytes": 9595,
+            "sha256": "6a28a79730c5d8d9c274267a3c4f272c444205d710da425b8df6fa31c17f48eb"
+          },
+          "git-delivery.json": {
+            "bytes": 2344,
+            "sha256": "025657636ce061f9e74db68bb90051a70fb3d675f882e9b7798877c6bbf8eb11"
+          },
+          "git-policy-hydration.json": {
+            "bytes": 1158,
+            "sha256": "c1ea5d8d8b4be4fb8a2ff4639f149b072e8067f9b47e3a7f7721524a39c35120"
+          },
+          "namespace.json": {
+            "bytes": 1320224,
+            "sha256": "6bab3db75bd0d52d9d81519abe112232bdf4c7fddc8039a4e04e271f4be1ead1"
+          },
+          "prepare.py": {
+            "bytes": 13959,
+            "sha256": "1218399078199f952dd023901051a4bdeed07d92b28a0beaf719bd94dce4ebe3"
+          },
+          "source-closure.json": {
+            "bytes": 1304,
+            "sha256": "94fc878549208e8d08bbd646e6ba857702257668a30f2ca745dad119c245c82d"
+          }
+        },
+        "all_git_blobs_recovered": true,
+        "task_observation": {
+          "last_result": 267009,
+          "instances": 1,
+          "state": 4
+        },
+        "original_native_source_and_runtime_unchanged": true
+      },
+      "Branch": {
+        "controls_commit": "e0b2074b6e0da0694698b9002048432436f7ac26",
+        "initial_controls_commit": "f66d12c224628124e953b6cd413e5dc4db3cea15",
+        "bundle": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/ef/ef07fe7d72f97dfc5602a1663ff0dbdf7f6ea395d4119f166175ed424c976a6c",
+          "sha256": "ef07fe7d72f97dfc5602a1663ff0dbdf7f6ea395d4119f166175ed424c976a6c",
+          "bytes": 7657
+        },
+        "recovered_files": {
+          ".gitattributes": {
+            "bytes": 9,
+            "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+          },
+          ".gitignore": {
+            "bytes": 262,
+            "sha256": "bdc9db8a5ee6d822761c9d7d727239225887e1f646ddd623c5145bdd72e5fce8"
+          },
+          "dispatch.ps1": {
+            "bytes": 1381,
+            "sha256": "12fb95e08bdd2f48dff2e3a8e0d82d5492c87ed3f0f1eb56ff61aeafb2209644"
+          },
+          "launch.cmd": {
+            "bytes": 505,
+            "sha256": "a4b39ef4c9be2a7bd93202ab0076f95ab3d2ef93c98b3e059b9d2dc6a52dcb3a"
+          },
+          "orchestration.json": {
+            "bytes": 1048,
+            "sha256": "052a51fc8acc6d1e6e4bcb30ab29482948cb216f8f47e1027353484e57fa35f9"
+          },
+          "preparation.json": {
+            "bytes": 4728,
+            "sha256": "ea5e16ab7caf87027181d81c9fcc00b552e79888ef846504e5ab8114f32c8f34"
+          },
+          "supervisor.py": {
+            "bytes": 6287,
+            "sha256": "a9bc5bb2e0ed3d1829f533bf9b70bec4116d977c9584c0eb9283278713d7824a"
+          },
+          "task.xml": {
+            "bytes": 1309,
+            "sha256": "e29245426848c4bf9dcfe6ca36b4bfafd1bf3df220ab63494ba8ff0d5bb6f3a2"
+          }
+        },
+        "all_git_blobs_recovered": true,
+        "task_observation": {
+          "last_result": 267009,
+          "instances": 1,
+          "state": 4
+        },
+        "original_native_source_and_runtime_unchanged": true
+      },
+      "build-task-definition": {
+        "controls_commit": "84aafbe53670990c52fd30d382d142716ca1d62a",
+        "initial_controls_commit": null,
+        "bundle": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/2a/2a60c23eb0946ebe88fdc06079618fa486853455de7c3fd24f350695faf6e825",
+          "sha256": "2a60c23eb0946ebe88fdc06079618fa486853455de7c3fd24f350695faf6e825",
+          "bytes": 1199
+        },
+        "recovered_files": {
+          "source-controls.json": {
+            "bytes": 203,
+            "sha256": "17df9f14779b95a602f38f4e79a6d887e5222892607edf96552941a47377b6e4"
+          },
+          "task.xml": {
+            "bytes": 1227,
+            "sha256": "8f7d78a93d0ded8a153df289f2ad70e1acda5c70635873d98a422c59ecdf3642"
+          }
+        },
+        "all_git_blobs_recovered": true,
+        "task_observation": null,
+        "original_native_source_and_runtime_unchanged": true
+      }
+    },
+    "new_source_root": "a303fbacb42e860a6298944151f0674ff447dda3",
+    "candidate_PulseLib": "01eed43124e6dbb424c192d7a5b2045c1d4a22cf",
+    "declared_cpp_cases": 132,
+    "original_native114_plus_Delay18": true,
+    "native_cpp_tests_executed_by_this_operation": 0,
+    "scientific_models_executed_by_this_operation": 0,
+    "Branch_uses_prior_verified_model_and_native_SDK": true,
+    "scientific_verdict": null
+  }
+}
