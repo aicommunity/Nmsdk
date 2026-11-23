@@ -1,0 +1,85 @@
+{
+  "catalog": "experiments/2026-11-23/Windows-two-sweep-recognition-followup-aq10/index.json",
+  "record": {
+    "kind": "timelearner_Windows_doubled_recognition_followup_and_source_admission_publication",
+    "schema_version": 1,
+    "source_root": "5868b10c8deceec801e60962cadda70e74fb9c1c",
+    "source_admission_root": "4514e5844ed2f12bc78e0d53ecc5970912933717",
+    "job": "windows-two-sweep-recognition-aq7",
+    "objects": {
+      "recognition_controls_bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/17/17e397792e42690dfa180f1a8f360d73ba833cc2c6eb18fde2867df67bcdd385",
+        "bytes": 4254,
+        "sha256": "17e397792e42690dfa180f1a8f360d73ba833cc2c6eb18fde2867df67bcdd385"
+      },
+      "admission_controls_bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a1/a1cd9710473189b6e6f18fc3a2de91eba775b58b63749bfda87108cc494992e2",
+        "bytes": 4001,
+        "sha256": "a1cd9710473189b6e6f18fc3a2de91eba775b58b63749bfda87108cc494992e2"
+      },
+      "admission_primary_archive": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/cf/cf3a9d9fbd05c4da012f71c4a2a6404019de37eb4e042c06e4a8f8186c2a5270",
+        "bytes": 22448,
+        "sha256": "cf3a9d9fbd05c4da012f71c4a2a6404019de37eb4e042c06e4a8f8186c2a5270"
+      },
+      "queued": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/1b/1bb6b74ba3a7278895919d0c5bcef1694d00b198e9c08d0d4483fe62da702b41",
+        "bytes": 1939,
+        "sha256": "1bb6b74ba3a7278895919d0c5bcef1694d00b198e9c08d0d4483fe62da702b41"
+      },
+      "failed_transport": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ab/aba6794c28205b3a7a56c41d12e0660575dc67ef630ae7377fc65271a2e699d4",
+        "bytes": 725,
+        "sha256": "aba6794c28205b3a7a56c41d12e0660575dc67ef630ae7377fc65271a2e699d4"
+      }
+    },
+    "independent_Git_controls_restored": {
+      "recognition": {
+        "commit": "999137a8f08baf8b9a59f01a61123c3d2aca782c",
+        "independent_bare_repository": "experiments/2026-11-23/Windows-two-sweep-recognition-followup-aq10/recognition-independent-restored.git",
+        "verified": true
+      },
+      "admission": {
+        "commit": "7c48326005dac01b510336a23a0b0b1779e2cd9a",
+        "independent_bare_repository": "experiments/2026-11-23/Windows-two-sweep-recognition-followup-aq10/admission-independent-restored.git",
+        "verified": true
+      }
+    },
+    "admission_independent_restoration": {
+      "members": 31,
+      "expanded_bytes": 1408562,
+      "all_member_sha256_verified": true,
+      "executed_tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "queue_owner": {
+      "pid": 18148,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134399321290196236"
+    },
+    "kernel_live_at_export": true,
+    "observed_utc": "2026-11-23T18:30:00.926578+00:00",
+    "actual_scientific_native_reactions_not_yet_available": true,
+    "original_Train_restarted": false,
+    "new_native_model_executed_in_validation": false,
+    "whole_plan_complete": false,
+    "scientific_verdict": null
+  }
+}

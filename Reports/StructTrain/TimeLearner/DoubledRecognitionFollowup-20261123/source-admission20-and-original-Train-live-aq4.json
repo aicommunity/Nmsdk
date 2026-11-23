@@ -1,0 +1,150 @@
+{
+  "observed_utc": "2026-11-23T18:21:24.036108+00:00",
+  "job": "windows-doubled-source-admission-aq3",
+  "terminal.json": {
+    "passed": true,
+    "process": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "not_requested",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 32,
+      "wall_seconds": 4.197539699962363,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-d5641259-7cc3-47a0-be6d-e61080f2feac"
+    },
+    "validation": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "windows-doubled-source-admission-aq3",
+      "package_fingerprint": "9b69e01920eb7d6b6bedac1cafe9dda11d2854d4b0b1b78a5460aa9b5a0b14c7",
+      "execution": "completed",
+      "assertion_status": "passed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_a_non_cold_synapse_count_is_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_a_second_extension_is_not_an_implicit_budget_escalation",
+        "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_empty_or_nontext_run_identity_is_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_existing_matched_count_declaration_is_unchanged",
+        "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_existing_positive_control_still_constructs_a_shared_bank",
+        "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_only_declared_search_effort_and_run_identity_change",
+        "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_production_preflight_and_train_accept_the_same_new_declaration",
+        "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_resistance_search_cannot_be_hidden_in_the_source",
+        "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_resistance_training_cannot_be_silently_changed_to_count_training",
+        "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_source_file_and_decoded_source_remain_unchanged",
+        "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_source_hash_damage_is_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_a_completed_boundary_cannot_be_relabelled_as_stopped",
+        "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_forged_role_and_kind_still_fail_actual_sweep_count",
+        "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_job_or_original_bytes_changed_after_audit_are_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_one_sweep_retains_original_kind_and_role",
+        "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_partial_decode_or_changed_audit_is_not_complete_evidence",
+        "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_renaming_one_sweep_proof_does_not_extend_its_budget",
+        "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_resigned_different_probe_budget_is_not_the_declared_case",
+        "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_two_sweeps_retains_separate_kind_and_cold_count_origin",
+        "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_unknown_kind_and_boolean_schema_are_rejected"
+      ],
+      "executed_tests": 20,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {
+        "TIMELEARNER_TWO_SWEEP_SOURCE": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\fixtures\\count-two-sweep-source-admission-aq3",
+          "files": 3,
+          "fingerprint": "e9731c41a22112031f2b915a9f9b2bacb1b477c8b70c48a10a70bd945e72b39e"
+        }
+      },
+      "scientific_verdict": null
+    },
+    "source_root": "4514e5844ed2f12bc78e0d53ecc5970912933717",
+    "native_model_executed": false,
+    "concurrent_training_not_restarted": true,
+    "scientific_verdict": null
+  },
+  "process-result.json": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "not_requested",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 32,
+    "wall_seconds": 4.197539699962363,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-d5641259-7cc3-47a0-be6d-e61080f2feac"
+  },
+  "validation": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "windows-doubled-source-admission-aq3",
+    "package_fingerprint": "9b69e01920eb7d6b6bedac1cafe9dda11d2854d4b0b1b78a5460aa9b5a0b14c7",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_a_non_cold_synapse_count_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_a_second_extension_is_not_an_implicit_budget_escalation",
+      "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_empty_or_nontext_run_identity_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_existing_matched_count_declaration_is_unchanged",
+      "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_existing_positive_control_still_constructs_a_shared_bank",
+      "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_only_declared_search_effort_and_run_identity_change",
+      "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_production_preflight_and_train_accept_the_same_new_declaration",
+      "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_resistance_search_cannot_be_hidden_in_the_source",
+      "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_resistance_training_cannot_be_silently_changed_to_count_training",
+      "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_source_file_and_decoded_source_remain_unchanged",
+      "Scripts.StructTrain.TimeLearner.tests.test_count_two_sweep_declaration.CountTwoSweepDeclarationTest.test_source_hash_damage_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_a_completed_boundary_cannot_be_relabelled_as_stopped",
+      "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_forged_role_and_kind_still_fail_actual_sweep_count",
+      "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_job_or_original_bytes_changed_after_audit_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_one_sweep_retains_original_kind_and_role",
+      "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_partial_decode_or_changed_audit_is_not_complete_evidence",
+      "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_renaming_one_sweep_proof_does_not_extend_its_budget",
+      "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_resigned_different_probe_budget_is_not_the_declared_case",
+      "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_two_sweeps_retains_separate_kind_and_cold_count_origin",
+      "Scripts.StructTrain.TimeLearner.tests.test_stopped_baseline_source.StoppedBaselineSourceTest.test_unknown_kind_and_boolean_schema_are_rejected"
+    ],
+    "executed_tests": 20,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_TWO_SWEEP_SOURCE": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\fixtures\\count-two-sweep-source-admission-aq3",
+        "files": 3,
+        "fingerprint": "e9731c41a22112031f2b915a9f9b2bacb1b477c8b70c48a10a70bd945e72b39e"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "unit_process": {
+    "pid": 19764,
+    "kernel_handle_missing": true
+  },
+  "current_native": {
+    "pid": 21328,
+    "identity": {
+      "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+      "creation_filetime": "134398728342403660"
+    },
+    "identity_matches": true,
+    "running": true
+  },
+  "raw_trials": 1416,
+  "candidate_templates": []
+}

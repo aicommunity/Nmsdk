@@ -1,0 +1,16 @@
+{
+  "kind": "timelearner_dispatch_transport_refusal",
+  "schema_version": 1,
+  "remote_return_code": 1,
+  "source_record": {
+    "via_jump": "10.245.1.12",
+    "host": "10.245.1.14",
+    "operator_sha256": "86236b8ef0d1fcc0b6cbc332f372a67944ba6dbe8ea8b2c8a741dde3ce8716f5",
+    "returncode": 1,
+    "stderr": "Traceback (most recent call last):\r\n  File \"C:\\Projects\\TimeLearnerWorker\\git-transfers\\timing-neighbourhood-win-a1\\timelearner-windows-doubled-recognition-dispatch-20261123-aq7.py\", line 4, in <module>\r\n    payload=json.loads(sys.stdin.buffer.read());base=Path('C:/Projects/TimeLearnerWorker')\r\n  File \"json\\__init__.py\", line 352, in loads\r\n  File \"json\\decoder.py\", line 345, in decode\r\n  File \"json\\decoder.py\", line 363, in raw_decode\r\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\r\n"
+  },
+  "created_controls_or_started_model": false,
+  "correction": "Only the 5948-byte checked matrix template was embedded in the public transfer program; no private adapter inspection or change.",
+  "later_valid_dispatch": "aq8",
+  "scientific_verdict": null
+}

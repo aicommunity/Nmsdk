@@ -1,0 +1,51 @@
+{
+  "queued": true,
+  "job": "windows-two-sweep-recognition-aq7",
+  "source_root": "5868b10c8deceec801e60962cadda70e74fb9c1c",
+  "controls_commit": "999137a8f08baf8b9a59f01a61123c3d2aca782c",
+  "request": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-two-sweep-recognition-aq7\\request.json",
+    "sha256": "b8c9438fbc191181bec21b153a7eedc0744e7ab758b2a7573e110fb63b554720",
+    "size": 1508
+  },
+  "task": {
+    "scientific_verdict": null,
+    "instance": "{A427EEF4-7A01-4771-A7EB-FF265B756639}",
+    "execution_time_limit": "PT36H",
+    "task": "TimeLearner-windows-two-sweep-recognition-aq7",
+    "engine_pid": 7772
+  },
+  "original_native": {
+    "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+    "creation_filetime": "134398728342403660",
+    "pid": 21328,
+    "job_name": "Local\\TimeLearner-ba240411-ffe3-4283-a9ff-c7b2cfc3812a",
+    "runtime_fingerprint": "09bff57ff10faa264e483a191810bd3c4048153408f9420f3f1b63d3239bdf3f",
+    "suspended_until_limits_applied": true
+  },
+  "original_primary_owner": {
+    "pid": 17604,
+    "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+    "creation_filetime": "134399078813119744"
+  },
+  "original_native_running": true,
+  "original_primary_running": true,
+  "declared_conditional_outcome": "audited budget_exhausted and no completed boundary only",
+  "six_declared_phases": [
+    "baseline-prepare",
+    "baseline-native",
+    "baseline-audit",
+    "threshold-prepare",
+    "threshold-native",
+    "threshold-audit"
+  ],
+  "maximum_wait_seconds": 86400,
+  "maximum_phase_wall_seconds": 9000,
+  "minimum_phase_free_disk_bytes": 25769803776,
+  "native_memory_bytes": 17179869184,
+  "native_wall_seconds": 7200,
+  "source_admission_tests": 20,
+  "native_execution_started": false,
+  "original_Train_restarted": false,
+  "scientific_verdict": null
+}
