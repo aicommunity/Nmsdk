@@ -7,7 +7,7 @@ import unittest
 from ..frozen_duration_holdout import make_protocol, validate_protocol
 from ..frozen_physical_foil_study import declare_job, condition
 from ..model_identity import canonical_model_sha256 as sha
-from ..native_evidence import EvidenceError, load
+from ..native_evidence import EvidenceError, load, number
 from ..prepared_physical_study import declare
 from ..runtime import file_record
 
@@ -15,11 +15,34 @@ from ..runtime import file_record
 class FrozenDurationHoldoutTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        source = Path(os.environ['TIMELEARNER_FOIL_SOURCE'])
-        cls.paths = [source/'input/job.json', source/'process/runtime.json', source/'run-manifest.json']
+        descriptor = os.environ.get('TIMELEARNER_DURATION_HOLDOUT_FIXTURE')
+        if descriptor:
+            fixture = load(Path(descriptor))
+            if not (set(fixture) == {'kind','schema_version','job','runtime','source_terminal'} and
+                    fixture.get('kind') == 'timelearner_duration_holdout_recorded_DATA_fixture' and
+                    type(fixture.get('schema_version')) is int and fixture['schema_version'] == 1):
+                raise AssertionError('unsupported actual DATA fixture')
+            cls.paths = [Path(fixture[k]['path']) for k in ('job','runtime','source_terminal')]
+            if any(file_record(p) != fixture[k] for p,k in zip(cls.paths,('job','runtime','source_terminal'))):
+                raise AssertionError('actual DATA fixture bytes changed')
+            cls.original = load(cls.paths[0]); cls.runtime = load(cls.paths[1]); terminal = load(cls.paths[2])
+            model = cls.original['source_model_data']
+            if not (terminal['kind'] == 'timelearner_actual_windows_physical_replay' and
+                    terminal['execution'] == 'completed' and terminal['validity'] == 'valid' and
+                    terminal['transfer_valid'] and terminal['all_eight_waveforms_and_events_preserved'] and
+                    len(terminal['rows']) == 8 and all(r['waveform_preserved'] and
+                        r['stimulus_and_spike_events_preserved'] for r in terminal['rows']) and
+                    terminal['model_revision'] == model['model_revision'] and
+                    terminal['source_model_data_sha256'] == model['sha256']):
+                raise AssertionError('actual recorded DATA roundtrip is not verified')
+            cls.threshold = number(terminal['threshold'])
+            cls.paths.append(Path(descriptor))
+        else:
+            source = Path(os.environ['TIMELEARNER_FOIL_SOURCE'])
+            cls.paths = [source/'input/job.json', source/'process/runtime.json', source/'run-manifest.json']
+            cls.original = load(cls.paths[0]); cls.runtime = load(cls.paths[1])
+            cls.threshold = load(cls.paths[2])['analysis']['metrics']['effective_threshold']
         cls.records = [file_record(p) for p in cls.paths]
-        cls.original = load(cls.paths[0]); cls.runtime = load(cls.paths[1])
-        cls.threshold = load(cls.paths[2])['analysis']['metrics']['effective_threshold']
         cls.target = next(t for t in cls.original['trials'] if t['label'] == 'target')
 
     @classmethod
