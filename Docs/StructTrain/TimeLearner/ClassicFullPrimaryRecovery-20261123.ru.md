@@ -61,12 +61,15 @@ Controls commit `cf5e72bd181b0d7b89fba4e6dd3114517ee17fb8` и bundle
 отдельной живой очереди аудита нового Train и не удаляется.
 [Точные496 пар, одинаковый исходный writer и преемник](../../../Reports/StructTrain/TimeLearner/CountFrozenEvaluation-20261123/full-primary5129-finalized-trials-and-corrected-preparation-ad11.json).
 
-До запуска исправленной постановки необходимо
+В момент подготовки до запуска исправленной постановки требовалось
 проверить закрытие всех групп текущего Classic, освобождение слота и
 приоритет следующего научного этапа — аудита/распознавания его модели.
 
 Описанная подготовка M40 сохраняется как история допуска.
 Независимое полное восстановление5129 файлов теперь завершено на TimLenovo.
-Незапущенная постановкаad10 ещё должна быть выведена из допуска как
-избыточная, чтобы не занимать слот после текущего научного Train.
+Незапущенная постановкаad10 выведена из допуска как избыточная:
+`request.json` переименован, сохранён обычный Git-коммит
+`2e44c7cc2e99b8614cebfa14d1f6f682eb778837` и controls bundle во внешнем архиве.
+Повторное восстановление после текущего научного Train не планируется.
+[Публикация результата и вывод запроса](../../../Reports/StructTrain/TimeLearner/ArchiveRestoration-20261123/external-publication-and-unused-recovery-retirement-af9.json).
 [Точный отказ и подготовленная постановка](../../../Reports/StructTrain/TimeLearner/CountFrozenEvaluation-20261123/full-primary5129-recovery-prepared-and-admission-refusal-ac4.json).

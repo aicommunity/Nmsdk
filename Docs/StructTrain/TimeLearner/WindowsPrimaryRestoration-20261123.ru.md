@@ -28,7 +28,9 @@ Git-репозитория. Диагностический повтор уста
 окружении Windows; счётчик Git оставался. Fixture теперь меняет и возвращает
 только собственную переменную корня архива. Производственный resolver
 истории не менялся. Итог: **14/14, без ошибок, отказов и пропусков**.
-Предыдущие отказы сохранены. Подтверждение изменения на POSIX ещё требуется.
+Предыдущие отказы сохранены. На M40/Linux тот же набор подтвердил13 успешных
+случаев и один объявленный пропуск Windows-specific проверки; ошибок нет.
+Обе новые проверки длинных логических имён выполнены и на Linux.
 
 Это проверки архивного ввода/вывода и данных. Численные расчёты модели
 и её интеграционные проверки здесь не выполнялись.
@@ -56,3 +58,14 @@ SHA256 до и после восстановления:
 [диагностика окружения](../../../Reports/StructTrain/TimeLearner/ArchiveRestoration-20261123/archive-IO-Git-environment-diagnosis-af7.json),
 [14 итоговых проверок](../../../Reports/StructTrain/TimeLearner/ArchiveRestoration-20261123/archive-IO-regressions-after-env-fix-af8.log),
 [контрольные суммы исходников](../../../Reports/StructTrain/TimeLearner/ArchiveRestoration-20261123/Windows-restoration-fix-source-and-checks-af9.json).
+
+[Подтверждение POSIX на точном Git source9d58c9069](../../../Reports/StructTrain/TimeLearner/ArchiveRestoration-20261123/POSIX-archive-IO-regressions-ag3.json).
+Его первая подготовка остановилась до запуска тестов; процесс закрыт,
+рабочее дерево не создано. Подтверждающий запуск получил точный исходник
+из origin, прежняя неудачная подготовка сохранена отдельно.
+
+Квитанции опубликованы во внешнем каталоге M40
+`experiments/2026-11-23/classic-measured-count-M4-elder/full-primary-independent-local-af9.json`.
+Избыточная незапущенная постановка M40ad10 выведена из допуска обычным
+Git-коммитом `2e44c7cc2e99b8614cebfa14d1f6f682eb778837`.
+[Публикация и сохранённый controls bundle](../../../Reports/StructTrain/TimeLearner/ArchiveRestoration-20261123/external-publication-and-unused-recovery-retirement-af9.json).
