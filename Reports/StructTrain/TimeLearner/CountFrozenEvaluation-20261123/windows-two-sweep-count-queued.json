@@ -1,0 +1,51 @@
+{
+  "dispatch": {
+    "queued": true,
+    "job": "windows-branch-count-two-sweeps-g2",
+    "controls_commit": "07fd64bd1928d0002671b70c1aa52517bb23294d",
+    "source_root": "65fa411969a7c60b27cedb73e6e72c39854d2229",
+    "SDK_source_root": "80330fc51c4713c7bd1936be98e43ec0217b2337",
+    "new_job_sha256": "912ffb859015898ecb200adfa4e87387c58b2af31f675c8758b14df75ed28cbd",
+    "condition_fingerprint": "baacfb171b6e79b925f9a1fbc958c6be9c574495fc3dd609a61ab98be4715929",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{D42A6562-EA90-480B-B701-32DA44D9A4E4}",
+      "execution_time_limit": "PT26H",
+      "task": "TimeLearner-windows-branch-count-two-sweeps-g2",
+      "engine_pid": 7020
+    },
+    "waits_for": "windows-measured-count-predecessor-matrix-e1",
+    "training_started": false,
+    "declaration_tests_passed": 11,
+    "cold_graph_comparison_required": true,
+    "maximum_sweeps": 2,
+    "maximum_probes": 320,
+    "maximum_candidates_per_input": 24,
+    "maximum_whole_attempt_wall_seconds": 93600,
+    "native_wall_seconds": 79200,
+    "scientific_verdict": null
+  },
+  "observation": {
+    "job": "windows-branch-count-two-sweeps-g2",
+    "owner.json": {
+      "pid": 22292,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134398717021562168"
+    },
+    "state.json": {
+      "stage": "waiting-for-predecessor-matrix-and-kernel-closure",
+      "observed_utc": "2026-11-23T01:41:42.344492+00:00",
+      "scientific_verdict": null
+    },
+    "actual_supervisor_kernel": {
+      "pid": 22292,
+      "identity": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134398717021562168"
+      },
+      "identity_matches": true,
+      "running": true
+    }
+  },
+  "scientific_verdict": null
+}

@@ -106,3 +106,11 @@ Job `classic-count-short-cadence-orders-m40-q1`, управляющий commit
 измерен в трёх непервых положениях; полноценный вывод по всем8 ещё открыт.
 Серия рассчитывает `rotation-4-reset`.
 [Все6 закрытых условий, времена и хэши](../../../Reports/StructTrain/TimeLearner/CountFrozenEvaluation-20261123/m40-short-paired-four-target-positions-readback.json).
+
+На01:45UTC закрыта также пара поворота4: цель на позиции4. Со сбросом
+её выход3,2555с, с сохранением динамики —3,015 и3,2555с. Ошибочный
+`phasea-row-6` отвечает в1,873с; оба условия сохраняют TP1/FP1/FN0/TN6.
+Итого закрыты8 из14 новых условий,64 из112 проб; с прежними16 —80
+наблюдений и5 из8 положений цели. В четырёх непервых положениях имеется
+дополнительный ранний целевой выход. Полного результата ещё нет.
+[События всех8 закрытых условий](../../../Reports/StructTrain/TimeLearner/CountFrozenEvaluation-20261123/m40-short-paired-five-target-positions-readback.json).

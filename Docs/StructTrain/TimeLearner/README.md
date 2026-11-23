@@ -1,3 +1,7 @@
+Следующий научный контроль23.11: [холодный Branch с двумя проходами](TwoSweepCountExperimentDesign-20261123.ru.md),
+тот же SDK/физика,11/11 проверок декларации. Поставлен после матрицы
+предшественников; результаты обучения пока не получены.
+
 Актуально23.11: [состояние полного плана](CurrentStatus-20261123.ru.md),
 [новая Branch-сетка27: TP1/FP1/FN0/TN25 и54 просмотренных рисунка](MeasuredCountBranchNewFoilsResults-20261123.ru.md),
 [исходная восьмёрка новой модели: TP1/FP2/FN0/TN5](MeasuredCountBranchRecognitionResults-20261123.ru.md),
