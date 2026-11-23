@@ -1,4 +1,9 @@
-# Миграция скриптов TimeLearner — актуально14.11.2026
+# Миграция скриптов TimeLearner — актуально23.11.2026
+
+Кандидат361: четыре исторических AsymRm leaf-инструмента удалены в отдельной
+ветке Bin. Полный history CLI и отрицательный контроль на двух Linux workers
+ещё не приняты; последняя принятая проверка —357. `complete=false` сохраняется.
+[Источники, callers и точная область](AsymRmLeafToolRetirement-20261123.ru.md).
 
 Приняты357 записей:353 retired и4 moved, complete=false. [Production history CLI357 и восстановление последнего старого пути как отрицательный контроль проверены на M40 и Elder](Migration357CliVerification.ru.md); положительные receipts побайтово равны. Полнота миграции всех Bin analysis/matrix/shared tools и их callers ещё не подтверждена. Основные научные отчёты и CLI находятся в корневом пакете; исторические файлы извлекаются из Git по [manifest](script_migration.json), wrappers на старых местах не сохраняются.
 
