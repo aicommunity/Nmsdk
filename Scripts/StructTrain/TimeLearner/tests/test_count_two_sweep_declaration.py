@@ -13,10 +13,11 @@ from ..prepared_count_training import doubled_sweep_count_job, factor_control_jo
 class CountTwoSweepDeclarationTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.path = Path(os.environ['TIMELEARNER_TWO_SWEEP_SOURCE_JOB']).resolve(strict=True)
+        root = Path(os.environ['TIMELEARNER_TWO_SWEEP_SOURCE']).resolve(strict=True)
+        cls.path = root/'count-job.json'
         cls.original_bytes = cls.path.read_bytes()
         cls.original = load(cls.path)
-        cls.resistance = load(Path(os.environ['TIMELEARNER_TWO_SWEEP_N1_SOURCE_JOB']))
+        cls.resistance = load(root/'resistance-job.json')
 
     def changed(self, edit):
         original = deepcopy(self.original)
