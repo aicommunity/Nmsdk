@@ -1,0 +1,149 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/classic-measured-count-M4-elder/visual-cache-reconciled-aa30.json",
+  "record": {
+    "kind": "timelearner_full_visual_cache_publication_reconciliation",
+    "schema_version": 1,
+    "observed_utc": "2026-11-23T10:39:09.722957+00:00",
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/classic-measured-count-M4-elder/visual-cache-aa23.json",
+      "sha256": "864c2a340f85e889a8d9c4da4ea533d0a928faf2276b399d6b0c362a33498309",
+      "size": 2881
+    },
+    "publication": {
+      "kind": "timelearner_stopped_classic_full_temporal_visual_cache",
+      "schema_version": 1,
+      "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-23/classic-measured-count-elder-z14",
+      "index": "index.html",
+      "inventory": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/50/50e5c7dacb77544451194785d17d9058cc392bdfe39c7dfdfde9807f9917bfc3",
+        "sha256": "50e5c7dacb77544451194785d17d9058cc392bdfe39c7dfdfde9807f9917bfc3",
+        "bytes": 3429131
+      },
+      "reports": {
+        "baseline": {
+          "report": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-visuals-elder-z14/baseline/report.json",
+            "sha256": "89f62dbc56151fbefabac2e7f649dbab0b6345e65e06cfa7d803795cb0de1139",
+            "size": 1618436
+          },
+          "index": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-visuals-elder-z14/baseline/index.html",
+            "sha256": "201251940b92d4e18d3142ed74bf487a58ea087c94000abc83be88a9e042ea43",
+            "size": 368423
+          },
+          "png_count": 2216,
+          "trial_count": 8,
+          "soma_count": 4,
+          "counts": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 1,
+            "TN": 7,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 0.0,
+            "foil_response_rate": 0.0
+          },
+          "all_patterns_and_somas_rendered": true,
+          "visual_acceptance_complete": false
+        },
+        "threshold": {
+          "report": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-visuals-elder-z14/threshold/report.json",
+            "sha256": "25e823f212cc028f8b31cdcaffd79194488d997169639887150c24ab7bf34725",
+            "size": 4070993
+          },
+          "index": {
+            "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-visuals-elder-z14/threshold/index.html",
+            "sha256": "8a69cf40944bf28dfe71c6d5ae42b9a63097089595670fec36e405ca376792d0",
+            "size": 827350
+          },
+          "png_count": 4492,
+          "trial_count": 8,
+          "soma_count": 4,
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 6,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.14285714285714285
+          },
+          "all_patterns_and_somas_rendered": true,
+          "visual_acceptance_complete": false
+        }
+      },
+      "files_verified": 20128,
+      "bytes": 1161201508,
+      "all16observations_and4somas": true,
+      "native_input_overlay": true,
+      "downsampling": false,
+      "source_files_unchanged": true,
+      "visual_acceptance_complete": false,
+      "publication_ready": false,
+      "scientific_verdict": null
+    },
+    "phases": {
+      "baseline": {
+        "trials": 8,
+        "somas": 4,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0.0,
+          "foil_response_rate": 0.0
+        },
+        "threshold": 100.0,
+        "report": {
+          "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-23/classic-measured-count-elder-z14/baseline/report.json",
+          "sha256": "89f62dbc56151fbefabac2e7f649dbab0b6345e65e06cfa7d803795cb0de1139",
+          "size": 1618436
+        }
+      },
+      "threshold": {
+        "trials": 8,
+        "somas": 4,
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "threshold": 0.02612267090554031,
+        "report": {
+          "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-23/classic-measured-count-elder-z14/threshold/report.json",
+          "sha256": "25e823f212cc028f8b31cdcaffd79194488d997169639887150c24ab7bf34725",
+          "size": 4070993
+        }
+      }
+    },
+    "all_cache_member_bytes_independently_verified_on_M40": true,
+    "files_verified": 20128,
+    "PNG_count": 6708,
+    "publication_restarted": false,
+    "original_copy_observation": "SSH wrapper returned1; completion determined from final catalog and actual destination hashes",
+    "all_technical_PNG_visually_reviewed": false,
+    "scientific_verdict": null
+  }
+}
