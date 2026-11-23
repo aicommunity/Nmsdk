@@ -12,6 +12,14 @@ from ..runtime import file_record
 
 
 class ClosedMatchedCountTrainingTest(unittest.TestCase):
+    EXPECTED_SWEEPS = 1
+    PROOF_KIND = 'timelearner_closed_matched_count_training_audit'
+    PROOF_NAME = 'matched-count-training-audit.json'
+    SOURCE_RECORD_KEY = 'original_resistance_normalization_job'
+
+    def declared_job(self, original, run_id):
+        return matched_count_job(original, run_id, maximum_synapses=128)
+
     def test_actual_complete_primary_and_single_package_decode(self):
         native=Path(os.environ['TIMELEARNER_MATCHED_COUNT_NATIVE']).resolve(strict=True)
         outer=native.parent.parent
@@ -24,8 +32,9 @@ class ClosedMatchedCountTrainingTest(unittest.TestCase):
         job=load(native/'job.json');execution=load(native/'execution.json')
         original_path=Path(os.environ['TIMELEARNER_MATCHED_COUNT_ORIGINAL'])/'job.json'
         original=load(original_path)
-        self.assertEqual(job,matched_count_job(original,job['configuration']['run_id'],maximum_synapses=128))
+        self.assertEqual(job,self.declared_job(original,job['configuration']['run_id']))
         self.assertEqual(job['configuration']['model']['normalization'],'N0')
+        self.assertEqual(job['configuration']['search']['maximum_sweeps'], self.EXPECTED_SWEEPS)
         self.assertEqual(len(job['configuration']['model']['inputs']),4)
         self.assertEqual(job['sha256'],terminal['job_sha256'])
         self.assertEqual(execution['job_sha256'],job['sha256'])
@@ -50,9 +59,8 @@ class ClosedMatchedCountTrainingTest(unittest.TestCase):
         self.assertEqual(audit['completed_boundary'],execution['completed_boundary'])
         self.assertFalse(audit['native_execution_verified'])
         self.assertIsNone(audit['evaluation_verdict'])
-        result=dict(kind='timelearner_closed_matched_count_training_audit',schema_version=1,
+        result=dict(kind=self.PROOF_KIND,schema_version=1,
             native=str(native),consumed_job_sha256=job['sha256'],
-            original_resistance_normalization_job=file_record(original_path),
             original_physics_target_tolerances_and_budgets_preserved=True,
             consumed_job_file=file_record(native/'job.json'),execution_file=file_record(native/'execution.json'),
             original_pending_terminal=file_record(outer/'terminal.json'),source_package=before,
@@ -61,6 +69,9 @@ class ClosedMatchedCountTrainingTest(unittest.TestCase):
             next_operation='export_completed_solo' if audit['completed_boundary'] else 'diagnostic_evaluation_of_actual_stopped_model',
             original_outcome_unchanged=True,native_execution_attested_by_portable_reader=False,
             classification_performed=False,scientific_verdict=None)
-        path=Path(os.environ['TMPDIR'])/'matched-count-training-audit.json'
+        # Keep the established one-sweep field and proof name. A two-sweep
+        # source is explicitly a former cold N0 job, never mislabeled as N1.
+        result[self.SOURCE_RECORD_KEY]=file_record(original_path)
+        path=Path(os.environ['TMPDIR'])/self.PROOF_NAME
         require(not path.exists(),'closed_count_audit_fresh_output_required')
         path.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n',encoding='utf-8')
