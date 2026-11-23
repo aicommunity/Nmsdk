@@ -849,6 +849,24 @@
           "accepted": true,
           "notes": "Просмотрены схема нормализации и измеренные кандидаты с амплитудными и временными ошибками. Подписи ветвей условий, допуски, все изменённые параметры и источник читаемы. Физическая недостижимость не выводится из локальной последовательности; нижний абзац корректно продолжается на следующей странице.",
           "reviewed_utc": "2026-11-23T04:57:52.414647+00:00"
+        },
+        "22": {
+          "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\render-candidate-n5-branch\\pages\\page-22.png",
+          "bytes": 347309,
+          "sha256": "8ad80870a1aa7fd331050d1b7d2413d33356b14fa5fd8c5ca1b02b26d480b6e4",
+          "individually_opened_at_full_resolution": true,
+          "accepted": true,
+          "notes": "Просмотрены нормализация сопротивлением и формулы9–10. Требования к измеренной монотонности, исходным точкам и индивидуальным границам читаемы; символы и номера формул не обрезаны. Открытые замечания к страницам20–21 остаются нерешёнными.",
+          "reviewed_utc": "2026-11-23T06:18:16.642650+00:00"
+        },
+        "23": {
+          "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\render-candidate-n5-branch\\pages\\page-23.png",
+          "bytes": 256133,
+          "sha256": "344ed53a429818213917e6a4656d27a775d199ed86ad3f159c0330a757f1216e",
+          "individually_opened_at_full_resolution": true,
+          "accepted": true,
+          "notes": "Просмотрены нормализация сопротивлением и формулы9–10. Требования к измеренной монотонности, исходным точкам и индивидуальным границам читаемы; символы и номера формул не обрезаны. Открытые замечания к страницам20–21 остаются нерешёнными.",
+          "reviewed_utc": "2026-11-23T06:18:16.643652+00:00"
         }
       },
       "all_pages_reviewed": false
@@ -856,5 +874,41 @@
   },
   "released": false,
   "all_pages_reviewed": false,
-  "standards_compliance_accepted": false
+  "standards_compliance_accepted": false,
+  "open_findings": [
+    {
+      "page": 20,
+      "document": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\docx-candidate-n5\\TimeLearnerBranchAlgorithms.ru.docx",
+        "bytes": 6859242,
+        "sha256": "572ceefb3495bca5bc0ded39dd9b7862acd30cf55ff06020f4cd33e42d285914"
+      },
+      "rendered_page": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\render-candidate-n5-branch\\pages\\page-20.png",
+        "bytes": 362231,
+        "sha256": "254b145ec3abd2a6013e9656901a74d3208dde7874781e8284cf02cf4ed137d4"
+      },
+      "visually_examined": true,
+      "accepted": false,
+      "requires_content_revision": true,
+      "notes": "Перед выпуском заменить необъяснённые terminal-revision, Same-Matrix и DATA-повтор русскими терминами; добавить межсловные пробелы возле чисел в новых абзацах."
+    },
+    {
+      "page": 21,
+      "document": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\docx-candidate-n5\\TimeLearnerBranchAlgorithms.ru.docx",
+        "bytes": 6859242,
+        "sha256": "572ceefb3495bca5bc0ded39dd9b7862acd30cf55ff06020f4cd33e42d285914"
+      },
+      "rendered_page": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-23-revision5-update-a15\\render-candidate-n5-branch\\pages\\page-21.png",
+        "bytes": 303759,
+        "sha256": "e8daeacb3dedc9c90f1684a366a15c43ca531e3fe9ab70a00c39bebca3c2925b"
+      },
+      "visually_examined": true,
+      "accepted": false,
+      "requires_content_revision": true,
+      "notes": "Исправить сочетание «одинакового первого отклика reset-цели»: явно указать первые отклики и целевые отклики после сброса; расставить межсловные пробелы возле чисел."
+    }
+  ]
 }
