@@ -6,9 +6,9 @@
 На M40 Train и аудит2024 уже завершены; старый ao3 остановился до native
 из-за повторной заявки SOURCE=SDK. Исправление общего объединения read-заявок
 прошло6/6; strict registry guard и запрет read/write коллизий сохранены.
-Новый at15 выполняется, получены5/8 базовых наблюдений. На Elder Train
-оформляет итог; новый at22 ждёт конкретный исход старого ao3 и закрытие
-групп. SDK и Train не менялись. Controls at15/at22 независимо восстановлены.
+В at15 получены8/8 базовых наблюдений, их аудит выполняется. На Elder
+Train и полный аудит1618 закрыты. Старый ao3 дал тот же отказ до native;
+новый at22 уже выполняет физический базовый прогон. SDK и Train не менялись. Controls at15/at22 независимо восстановлены.
 [Ошибка](../../../Reports/StructTrain/TimeLearner/ProposalRecognitionFollowups-20261123/original-prepare-resource-failure-at10.json),
 [проверка6](../../../Reports/StructTrain/TimeLearner/ProposalRecognitionFollowups-20261123/resource-fix6-at13.json),
 [процессы](../../../Reports/StructTrain/TimeLearner/ProposalRecognitionFollowups-20261123/three-workers-actual-20261124-au1-au3.json),

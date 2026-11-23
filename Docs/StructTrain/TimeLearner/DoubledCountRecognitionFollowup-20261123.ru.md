@@ -8,7 +8,13 @@
 После независимого подтверждения закрытия обеих исходных групп запущен
 `windows-two-sweep-recognition-at29`, controls eabff1e7; все4 управляющих
 файла независимо восстановлены на M40. Владелец3976 и native13196
-подтверждены kernel handles. Базовый прогон выполняется, Train не повторялся.
+подтверждены kernel handles. Базовый прогон затем остановился до первой реакции: native вернул2,
+stderr сообщает bad allocation. Все4 handle попытки отсутствуют;
+повтор автоматически не запущен. При лимите16ГиБ полный пакет истории
+составляет2030868597байт. Пик памяти не измерен, конкретное место
+нехватки памяти внутри импорта ещё не локализовано.
+[Точный отказ и закрытие](../../../Reports/StructTrain/TimeLearner/DoubledRecognitionFollowup-20261123/native-memory-failure-all-closed-au12.json).
+Train не повторялся.
 [Полный аудит и исход](../../../Reports/StructTrain/TimeLearner/DoubledRecognitionFollowup-20261123/closed-Train-and-actual4791-audit-at27.json),
 [актуальные процессы](../../../Reports/StructTrain/TimeLearner/ProposalRecognitionFollowups-20261123/three-workers-actual-20261124-au1-au3.json). Ветвящаяся топология,
 M=4 и нормализация числом синапсов — три отдельных характеристики постановки.
