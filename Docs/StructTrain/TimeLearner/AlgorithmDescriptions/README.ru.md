@@ -17,6 +17,11 @@ Branch63 страницы. Classic содержит завершённую ко�
 Classic8/71,Branch4/63. Текущие страницы не подменяются просмотром n4.
 До полной приёмки это кандидат, а выпущенной остаётся четвёртая редакция.
 
+Кандидат n5 и все необходимые исходники сохранены на M40 во внешнем
+пакете41517790байт,129 членов проверены по hashes. Он явно не выпущен:
+`documents/TimeLearner/2026-11-23-revision5-n5-unreleased-candidate.json`.
+[Внешний архив и точные DOCX](../../../../Reports/StructTrain/TimeLearner/AlgorithmDescriptions-20261123/candidate-n5-external-archive.json).
+
 Локальный рабочий каталог:
 `E:/Science-Repo/TimeLearner-Documents/2026-11-23-revision5-update-a15`.
 Точные источники оформления сохранены в `format-profile.candidate-n5.json`;
