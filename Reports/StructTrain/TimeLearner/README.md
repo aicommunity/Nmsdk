@@ -1,3 +1,9 @@
+23.11: [актуальная сводка](../../../Docs/StructTrain/TimeLearner/CurrentStatus-20261123.ru.md).
+[Действительные8 ответов нового Branch](CountFrozenEvaluation-20261123/windows-new-count-actual-eight-results.json),
+[16 наблюдений короткого потока Classic](CountFrozenEvaluation-20261123/m40-short-pair-actual-events.json),
+[полный новый Train и независимое восстановление3135 файлов](CountFrozenEvaluation-20261123/windows-complete-Train-primary-index.json).
+Первичные архивы остаются вне Git; здесь только компактные текстовые квитанции.
+
 > Storage policy superseded on 14 November 2026: experiment payloads and full galleries belong in the shared M40 archive; Git contains metadata and checked `*.archive.json` references. Dated paragraphs below preserve earlier publication history, including former “in Git” wording. [Current archive/access/restore contract](../../../Docs/StructTrain/TimeLearner/ExternalExperimentArchive.ru.md). History replacement is still in progress; it is not scientific acceptance.
 
 Preserved14.11: [actual Classic N0 order64 whole primary](ClassicN0OrderMatrix-20261114/primary/bundle.json),55,527,604B literal XZ/396 logical members. [Production1/1 accepted](../../../Docs/StructTrain/TimeLearner/ValidationPlans/M40ClassicN0OrderMatrixA3-20261114/RESULT.ru.md): TP8/FP32/FN0/TN24, same classifications for every sample in every position, target13ms after the last input. First8 waveforms and frozen model bytes exactly match the original baseline; stopped-model Same-Matrix scope, no completed Train/independent Test. [Own scientific report is ready](../../../Docs/StructTrain/TimeLearner/ClassicN0OrderScientificReport-20261114.ru.md),13 selected originals reviewed including target in every position and native-scale peaks; independent semantic restore of this archive remains pending.

@@ -80,8 +80,20 @@ SDK 80330fc; новый Train не запускается. Сначала све
 [Постановка переноса](../../../Reports/StructTrain/TimeLearner/CountFrozenEvaluation-20261123/windows-physical-transfer-dispatched.json).
 [Сопоставление математических ошибок обучения](MeasuredCountMatchedBranchResults-20261122.ru.md).
 
-Полные первичные данные новой модели остаются в
-`C:/Projects/TimeLearnerWorker/jobs/windows-branch-measured-count-M4-a3`,
-а восемь реакций — в `jobs/windows-measured-count-stopped-threshold-k1`
-того же собственного worker. Центральное архивирование и восстановление
-на другом хосте ещё не закрыты. В Git сохранены только текстовые квитанции.
+Полный Train теперь сохранён во внешнем архиве M40:3135 файлов,
+2892950690байт восстановленных данных,46842204байт сжатого объекта.
+SHA-256 архива:
+`3012c1aba5cabcccc5e19b4ca569a12d18906fe214e532ebecc04ec47a77c77e`.
+Все3135 файлов восстановлены на другой машине с проверкой каждого хэша.
+Это проверка сохранности данных; повторного численного обучения не было.
+Каталог:
+`/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/branch-measured-count-M4-windows/complete-Train-primary-u1.json`.
+[Ссылки на объекты и независимое восстановление](../../../Reports/StructTrain/TimeLearner/CountFrozenEvaluation-20261123/windows-complete-Train-primary-index.json).
+
+Оригиналы Windows сохранены. Восемь новых реакций остаются в
+`C:/Projects/TimeLearnerWorker/jobs/windows-measured-count-stopped-threshold-k1`;
+полная упаковка исходного высокого порога, калибровки и их входов поставлена
+отдельно. Её центральная публикация ещё не подтверждена. В Git добавлены
+только текстовые квитанции. Временный независимый распакованный кэш
+около2,89ГБ пока оставлен: автоматическая проверка отклонила его удаление
+с причиной «blocked by policy». Архивы и первичные файлы этим не затронуты.
