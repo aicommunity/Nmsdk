@@ -22,6 +22,56 @@ def _write(path, value):
         json.dump(value,stream,indent=2,allow_nan=False);stream.write('\n')
 
 
+def closed_count_source(proof, native, audit):
+    """Bind a known one/two-sweep proof to its actual declared cold Train.
+
+    This admission reads only small job/execution records. The completed
+    primary audit remains mandatory; its complete package/history is not
+    decoded here. A different proof name cannot turn one sweep into two.
+    """
+    from .prepared_count_training import matched_count_job, doubled_sweep_count_job
+    protocols = {
+        'timelearner_closed_matched_count_training_audit':
+            (1, 'original_resistance_normalization_job', matched_count_job),
+        'timelearner_closed_doubled_count_training_audit':
+            (2, 'original_cold_count_normalization_job', doubled_sweep_count_job),
+    }
+    require(type(proof) is dict and proof.get('kind') in protocols and
+            type(proof.get('schema_version')) is int and proof['schema_version'] == 1,
+            'stopped_baseline_unknown_count_audit_protocol')
+    sweeps, role, factory = protocols[proof['kind']]
+    native = Path(native).resolve(strict=True)
+    require(Path(proof['native']).resolve(strict=True) == native and
+            type(proof.get('source_package_full_decodes')) is int and
+            proof['source_package_full_decodes'] == 1 and proof['original_outcome_unchanged'] is True and
+            proof.get('original_physics_target_tolerances_and_budgets_preserved') is True and
+            proof['full_primary_audit']['completed_boundary'] is False and
+            proof['full_primary_audit']['training_outcome'] == 'budget_exhausted' and
+            audit == proof['full_primary_audit']['training_audit'] and
+            audit['package_digest_verified'] is True and audit['training_outcome'] == 'budget_exhausted',
+            'stopped_baseline_requires_complete_original_primary_audit')
+    other_roles = {p[1] for p in protocols.values()} - {role}
+    require(role in proof and not any(key in proof for key in other_roles),
+            'stopped_baseline_original_case_role_mismatch')
+    for key, path in (('consumed_job_file', native/'job.json'),
+                      ('execution_file', native/'execution.json')):
+        require(file_record(path) == proof[key], 'stopped_baseline_audited_input_changed:'+key)
+    original_path = Path(proof[role]['path']).resolve(strict=True)
+    require(file_record(original_path) == proof[role], 'stopped_baseline_original_case_changed')
+    job = load(native/'job.json'); execution = load(native/'execution.json')
+    require(job['sha256'] == sha({k:v for k,v in job.items() if k != 'sha256'}) and
+            job['sha256'] == proof['consumed_job_sha256'] == execution['job_sha256'] and
+            type(job['configuration']['search']['maximum_sweeps']) is int and
+            job['configuration']['search']['maximum_sweeps'] == sweeps and
+            execution['completed_boundary'] is False and execution['training_outcome'] == 'budget_exhausted',
+            'stopped_baseline_proof_job_or_outcome_mismatch')
+    expected = factory(load(original_path), job['configuration']['run_id'])
+    require(job == expected, 'stopped_baseline_declared_cold_case_changed')
+    return dict(proof_kind=proof['kind'], maximum_sweeps=sweeps,
+                consumed_job_sha256=job['sha256'], original_case_role=role,
+                original_case=proof[role], original_training_outcome='budget_exhausted')
+
+
 def prepare(declaration):
     expected={'kind','schema_version','source_native','source_proof','source_audit','template_envelope',
               'native_runtime','sdk_source','destination','inputs','output','run_id','python_source'}
@@ -38,14 +88,7 @@ def prepare(declaration):
     proof_path=Path(declaration['source_proof']).resolve(strict=True)
     audit_path=Path(declaration['source_audit']).resolve(strict=True)
     proof=load(proof_path);audit=load(audit_path)
-    require(proof['kind']=='timelearner_closed_matched_count_training_audit' and
-            Path(proof['native']).resolve(strict=True)==native and
-            proof['source_package_full_decodes']==1 and proof['original_outcome_unchanged'] is True and
-            proof['full_primary_audit']['completed_boundary'] is False and
-            proof['full_primary_audit']['training_outcome']=='budget_exhausted' and
-            audit==proof['full_primary_audit']['training_audit'] and
-            audit['package_digest_verified'] is True and audit['training_outcome']=='budget_exhausted',
-            'stopped_baseline_requires_complete_original_primary_audit')
+    protocol=closed_count_source(proof,native,audit)
     source=native/'train_stopped_state.json';before=file_record(source)
     require(before==proof['source_package'],'stopped_baseline_audited_package_bytes_changed')
     package=load(source)
@@ -117,6 +160,7 @@ def prepare(declaration):
         inputs=str(inputs),output=str(output),worker_sha256=file_record(destination/'worker.py')['sha256'],
         input_inventory=inventory(inputs,file_record),resolved_job_sha256=job['sha256'],
         source_package_sha256=package['sha256'],source_model_revision=package['model_revision'],
+        source_training_protocol=protocol,
         source_audit=dict(path=str(audit_path),sha256=file_record(audit_path)['sha256']),
         memory_bytes=16*1024**3,maximum_wall_seconds=7200,
         disk=dict(minimum_free_bytes=4*1024**3,maximum_output_bytes=24*1024**3),
@@ -127,6 +171,7 @@ def prepare(declaration):
             'stopped_baseline_source_changed_during_preparation')
     result=dict(kind='timelearner_stopped_baseline_preparation_result',schema_version=1,
         source_model_revision=package['model_revision'],source_package_sha256=package['sha256'],
+        source_training_protocol=protocol,
         source_proof=file_record(proof_path),source_audit=spec['source_audit'],resolved_job_sha256=job['sha256'],
         staged_files=len(spec['input_inventory']),complete_source_namespace_preserved=True,
         original_source_package=before,source_transport=transport,
