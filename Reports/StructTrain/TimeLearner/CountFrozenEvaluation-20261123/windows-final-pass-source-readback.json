@@ -1,0 +1,84 @@
+{
+  "source_summary": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_summary.json",
+    "sha256": "9656a50156b7c456e3cec859f3337858b57f24322bc7b7904c0d7ed5216638b3",
+    "size": 28999225
+  },
+  "historical_keys": [
+    "accepted_parameters",
+    "actual_model_revision",
+    "actual_parameters",
+    "applied_edits",
+    "candidates",
+    "capture_epoch",
+    "capture_revision",
+    "certificate",
+    "certificate_matches_actual_model",
+    "composite_counters",
+    "contains_controller_checkpoint",
+    "contains_evaluation_verdict",
+    "final_group_ids",
+    "final_semantic_proof_ids",
+    "kind",
+    "measurement_method",
+    "model_epoch",
+    "model_state_kind",
+    "outcome",
+    "owner_family_binding",
+    "reason",
+    "recovery_ledger",
+    "reference_complete",
+    "reference_group_ids",
+    "reference_semantic_proof_ids",
+    "references",
+    "rejections",
+    "resistance_domains",
+    "runtime_plan",
+    "schema_version",
+    "search_history_retained",
+    "search_probes",
+    "source_origin",
+    "state",
+    "tolerances"
+  ],
+  "historical_revision": "2f47ac9e86552fa9f80f82e2a4a4d6fd554074a916a0e85529ce0d3d3ab47723",
+  "actual_revision": "b3286d53576e57d37b753b244b8e6261a97086f034bc6cf7efbd610410ff9b23",
+  "historical_verification_fields": {
+    "certificate": null,
+    "certificate_matches_actual_model": false,
+    "final_group_ids": [
+      "measured-count-proposal/20261122/branch/M4/train-a1/session/1/final/0/verify/72/4/composite/158",
+      "measured-count-proposal/20261122/branch/M4/train-a1/session/1/final/0/verify/72/3/composite/157",
+      "measured-count-proposal/20261122/branch/M4/train-a1/session/1/final/0/verify/72/2/composite/156",
+      "measured-count-proposal/20261122/branch/M4/train-a1/session/1/final/0/verify/72/1/composite/155"
+    ],
+    "final_semantic_proof_ids": [
+      "d2c648b91456b96a0a35ea76bf7bda1f0582e2d969f171e1822f3670f871778a",
+      "54a5202ca2a0185136770147ef95e7d9f72017bc3732e0b82023f71056e5c5d9",
+      "62613f10707c9c5b10cb93f84e56591e8e4963ce461481bb16030c2494be7a70",
+      "23d5232d5e0d507eef6d519c7545a38be52491e28d87f4e66056d0fddbb414cd"
+    ]
+  },
+  "terminal_selection_event": {
+    "actual_model_epoch": 73,
+    "actual_model_revision": "b3286d53576e57d37b753b244b8e6261a97086f034bc6cf7efbd610410ff9b23",
+    "fresh_all_input_verification": false,
+    "historical_measurements_rebound_to_actual_epoch": false,
+    "native_transactions": 1,
+    "search_terminal_epoch": 72,
+    "search_terminal_revision": "2f47ac9e86552fa9f80f82e2a4a4d6fd554074a916a0e85529ce0d3d3ab47723",
+    "status": "restored"
+  },
+  "prior_audit_record": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-closed-measured-count-primary-audit-i1\\tmp\\matched-count-training-audit.json",
+    "sha256": "db1d56ad10c8b0c734753f08befab55a61690e6d0ef6c83eb59ba601f13ad96c",
+    "size": 171641
+  },
+  "prior_audit_keys": [
+    "training_audit",
+    "completed_boundary",
+    "training_outcome",
+    "native_execution_verified",
+    "evaluation_verdict"
+  ]
+}

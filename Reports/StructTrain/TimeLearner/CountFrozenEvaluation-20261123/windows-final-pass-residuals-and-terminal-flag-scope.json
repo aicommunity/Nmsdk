@@ -1,0 +1,99 @@
+{
+  "kind": "timelearner_recorded_historical_final_pass_report",
+  "schema_version": 1,
+  "historical_final_all_input_measurements_complete": true,
+  "recorded_final_inputs": 4,
+  "prior_full_primary_audit_reused": true,
+  "all_selected_group_bytes_matched_native_execution": true,
+  "raw_native_calculations_repeated": false,
+  "prior_full_audit": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-closed-measured-count-primary-audit-i1\\tmp\\matched-count-training-audit.json",
+    "sha256": "db1d56ad10c8b0c734753f08befab55a61690e6d0ef6c83eb59ba601f13ad96c",
+    "size": 171641
+  },
+  "source_summary": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\train_stopped_summary.json",
+    "sha256": "9656a50156b7c456e3cec859f3337858b57f24322bc7b7904c0d7ed5216638b3",
+    "size": 28999225
+  },
+  "source_groups": [
+    {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\composite-measurements\\group-000155.json",
+      "sha256": "b51d9d7ca022034fd19e297ba2f7fff4b35aa09a439cd72f3a5408aea545f7c0",
+      "size": 6733740
+    },
+    {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\composite-measurements\\group-000156.json",
+      "sha256": "503d21f19c8e9a2685b4ab117b846bc4a6454fa42ad13ff508a5ba7adacd6bd0",
+      "size": 6733788
+    },
+    {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\composite-measurements\\group-000157.json",
+      "sha256": "529f495677df08b71e0d18e2e0412bcd0b3fea669ea22a718f0953fd01b1af57",
+      "size": 6733606
+    },
+    {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-measured-count-M4-a3\\train\\native\\composite-measurements\\group-000158.json",
+      "sha256": "47d70c87ed855e4e884f93996529a34449413c2a95d19efdf2a1c47726d12cb1",
+      "size": 6733720
+    }
+  ],
+  "historical_model_revision": "2f47ac9e86552fa9f80f82e2a4a4d6fd554074a916a0e85529ce0d3d3ab47723",
+  "historical_epoch": 72,
+  "rows": [
+    {
+      "input_index": 0,
+      "reference_raw": 0.026776213813404892,
+      "measured_raw": 0.025709564775521554,
+      "amplitude_residual": -0.0010666490378833382,
+      "amplitude_tolerance": 1e-05,
+      "timing_low": 0.003500000000030923,
+      "timing_high": 0.003500000000030923,
+      "within_timing": true,
+      "within_amplitude": false
+    },
+    {
+      "input_index": 1,
+      "reference_raw": 0.02677621381340556,
+      "measured_raw": 0.02453109445721091,
+      "amplitude_residual": -0.002245119356194647,
+      "amplitude_tolerance": 1e-05,
+      "timing_low": -0.005499999999983629,
+      "timing_high": -0.005499999999983629,
+      "within_timing": true,
+      "within_amplitude": false
+    },
+    {
+      "input_index": 2,
+      "reference_raw": 0.026776213813405003,
+      "measured_raw": 0.024648122132249317,
+      "amplitude_residual": -0.002128091681155686,
+      "amplitude_tolerance": 1e-05,
+      "timing_low": -0.0005000000001018634,
+      "timing_high": -0.0005000000001018634,
+      "within_timing": true,
+      "within_amplitude": false
+    },
+    {
+      "input_index": 3,
+      "reference_raw": 0.026776213813405003,
+      "measured_raw": 0.026776213813405003,
+      "amplitude_residual": 0.0,
+      "amplitude_tolerance": 1e-05,
+      "timing_low": 0.0,
+      "timing_high": 0.0,
+      "within_timing": true,
+      "within_amplitude": true
+    }
+  ],
+  "all_historical_residuals_within_tolerance": false,
+  "terminal_selection_fresh_all_input_verification": false,
+  "flag_scope": "terminal selection, not completeness of historical final pass",
+  "actual_terminal_revision": "b3286d53576e57d37b753b244b8e6261a97086f034bc6cf7efbd610410ff9b23",
+  "actual_terminal_epoch": 73,
+  "fresh_verification_of_actual_terminal_model_attested": false,
+  "certificate": null,
+  "training_outcome": "budget_exhausted",
+  "training_reason": "maximum_sweeps_exhausted",
+  "scientific_verdict": null
+}
