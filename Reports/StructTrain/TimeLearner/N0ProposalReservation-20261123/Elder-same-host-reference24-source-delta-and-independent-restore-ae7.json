@@ -1,0 +1,994 @@
+{
+  "kind": "timelearner_Elder_same_host_initial_reference_control",
+  "schema_version": 1,
+  "original_comparison": {
+    "catalog": "/mnt/nmsdk-structtrain-archive/experiments/2026-11-23/n0-proposal-cold-Classic-elder/initial-reference24-ae3.json",
+    "record": {
+      "kind": "timelearner_same_host_compiler_initial_reference24_comparison",
+      "schema_version": 1,
+      "observed_utc": "2026-11-23T12:25:24.114566+00:00",
+      "before_Train": "classic-measured-count-m4-elder-k1",
+      "after_Train": "classic-n0-proposal-cold-elder-ab3",
+      "same_host": "Elder-1",
+      "same_compiler_executable_bytes": true,
+      "source_roles": {
+        "root": {
+          "before": "e1c97ac2042e155ffe907ad695975304d69664a2",
+          "after": "b2c3cb65ab572c680a56f28b86d40445b9392b0c"
+        },
+        "Bin": {
+          "before": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+          "after": "8cb6dba07b30432272984c8ce3136b48ad06f064"
+        },
+        "Libraries/Nmsdk-MotionControlLib": {
+          "before": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "after": "85e4494e8596b0998feebff7da2f8d421a6df66f"
+        },
+        "Libraries/Nmsdk-PulseLib": {
+          "before": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+          "after": "3f5a2205a4e6c02de545cdc214172482ac53c4b2"
+        },
+        "Libraries/Rdk-BasicLib": {
+          "before": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "after": "2927cad5a7456b301217b7abb228f12c9a359ea9"
+        },
+        "Libraries/Rdk-CvBasicLib": {
+          "before": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "after": "c471297811367abd348c6258bdaeaf8e1a40c7bd"
+        },
+        "Libraries/Rdk-HardwareLib": {
+          "before": "de40b008e990105856726e01230dde19f42a90a9",
+          "after": "de40b008e990105856726e01230dde19f42a90a9"
+        },
+        "Rdk": {
+          "before": "561986e9f336ee5914e2d119de90b005e06f3639",
+          "after": "561986e9f336ee5914e2d119de90b005e06f3639"
+        }
+      },
+      "resolved_library_content_multisets_equal": true,
+      "compiler_flags": {
+        "CMAKE_BUILD_TYPE": {
+          "before": "Release",
+          "after": "Release"
+        },
+        "CMAKE_CXX_FLAGS": {
+          "before": "",
+          "after": ""
+        },
+        "CMAKE_CXX_FLAGS_RELEASE": {
+          "before": "-O3 -DNDEBUG",
+          "after": "-O3 -DNDEBUG"
+        },
+        "RDK_USE_LLM": {
+          "before": null,
+          "after": null
+        },
+        "RDK_LLM_BUILD_EMBEDDED": {
+          "before": "OFF",
+          "after": "OFF"
+        }
+      },
+      "reference_native_trials": 24,
+      "all24_CSV_byte_identical": true,
+      "all24_base_revisions_equal": true,
+      "raw_primaries": [
+        {
+          "index": 1,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_1.json",
+              "sha256": "f3bf486ac07cc01e903ff961cb1b0d273b6cd70bfff5e7cd54114e12ac5ddcdd",
+              "size": 5298
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_1.csv",
+              "sha256": "f6b485c9686ec45df20dadb221e986cc46acdc448e2283b64624dbf70014c4d3",
+              "size": 392576
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-1.json",
+              "sha256": "ddf7e463b4321f6b259532afc41f93b7dcfec657dd7c2c992e8483182f3f54d5",
+              "size": 5398
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-1.csv",
+              "sha256": "f6b485c9686ec45df20dadb221e986cc46acdc448e2283b64624dbf70014c4d3",
+              "size": 392576
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 2,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_2.json",
+              "sha256": "4b9c3b6686c19feb5bb59020a6afc9c8f4584c509baea8432c41b9e6119c5bee",
+              "size": 5090
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_2.csv",
+              "sha256": "44ad3456351b4a464d2e88e26f7d2300667fc84e8705cffe24dd5ecbcf46ceb8",
+              "size": 379437
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-2.json",
+              "sha256": "d4b2f85792e26bef94c296021256bb518b10d2f2d3dd7ccfac843fce30039b7b",
+              "size": 5190
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-2.csv",
+              "sha256": "44ad3456351b4a464d2e88e26f7d2300667fc84e8705cffe24dd5ecbcf46ceb8",
+              "size": 379437
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 3,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_3.json",
+              "sha256": "87c3688c2f0b10b90e74e44360d956d9358fca0b2b11a6d1bcb164182159ef7f",
+              "size": 5098
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_3.csv",
+              "sha256": "765980c097ebb86d948247154343a4c2a584476388f2d5a87294729404d4f5f3",
+              "size": 397915
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-3.json",
+              "sha256": "3451747247718caf87ec664a218a5badb98e082d839f1ce573d17a8bb3c3cc4f",
+              "size": 5198
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-3.csv",
+              "sha256": "765980c097ebb86d948247154343a4c2a584476388f2d5a87294729404d4f5f3",
+              "size": 397915
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 4,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_4.json",
+              "sha256": "81732f559373444dc1f1c7f71282f4fb2766f4723aaf1ff0981f38feb8b147ae",
+              "size": 5106
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_4.csv",
+              "sha256": "43f2f9c22027c2904c890e2978344e72d505ae777277e4756027560ac0b01856",
+              "size": 399034
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-4.json",
+              "sha256": "90961418b2184b6bce4c5db143257234609ffd43821322c22ad19d12864bc36f",
+              "size": 5206
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-4.csv",
+              "sha256": "43f2f9c22027c2904c890e2978344e72d505ae777277e4756027560ac0b01856",
+              "size": 399034
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 5,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_5.json",
+              "sha256": "ae9831193c4533f9a43aac20bf4ce1e7a890633f64dd016e07f7843fb4c66ffc",
+              "size": 5098
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_5.csv",
+              "sha256": "a29102900cbdcce565901d25ac47901ffe9dec36a6b637b20ff119eaf4ae833e",
+              "size": 400640
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-5.json",
+              "sha256": "b47b5673ce1478c2206afbaa78f549fa83eacfca582896c41046653c2671e707",
+              "size": 5198
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-5.csv",
+              "sha256": "a29102900cbdcce565901d25ac47901ffe9dec36a6b637b20ff119eaf4ae833e",
+              "size": 400640
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 6,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_6.json",
+              "sha256": "e419b759fbce42570837c9805dcf151afaf47df5582c2eaa2994dff64dddb66f",
+              "size": 5337
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_6.csv",
+              "sha256": "2d574d21ca1a8ac08951b9d0cf823023fd1644c63238bfeaa3726e8898eabc4e",
+              "size": 392257
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-6.json",
+              "sha256": "9089799b810d2b1448a92780ae916c5fb584ea3d02690a1e6265e031e17fc21e",
+              "size": 5437
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-6.csv",
+              "sha256": "2d574d21ca1a8ac08951b9d0cf823023fd1644c63238bfeaa3726e8898eabc4e",
+              "size": 392257
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 7,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_7.json",
+              "sha256": "229da7347fc4746ff40162a5f434c007beafbf9e67e8277181fd0058e4802ac2",
+              "size": 5355
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_7.csv",
+              "sha256": "ea62d9be987dcbfa95ceef1e2a7ca0e68658f163f17e1928f7007bbf01c926bb",
+              "size": 380535
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-7.json",
+              "sha256": "caec58dfb0720dd77dc0ff9dede5c1667bcec43865ef906c9890a6fb509b6da9",
+              "size": 5455
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-7.csv",
+              "sha256": "ea62d9be987dcbfa95ceef1e2a7ca0e68658f163f17e1928f7007bbf01c926bb",
+              "size": 380535
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 8,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_8.json",
+              "sha256": "196851993c82d307ca327e551a0831a5ae9d30601c60f2d404005f3a5d8e659f",
+              "size": 5102
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_8.csv",
+              "sha256": "6780a27d656a0e4c29a76af25397750e0867ed83e3b0efad4709bdb503aade76",
+              "size": 367370
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-8.json",
+              "sha256": "cfd0b5d8532332108224058f4a00f140964c8f071567f507790c8bad0d65c2b6",
+              "size": 5202
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-8.csv",
+              "sha256": "6780a27d656a0e4c29a76af25397750e0867ed83e3b0efad4709bdb503aade76",
+              "size": 367370
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 9,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_9.json",
+              "sha256": "ee461da5814f6c489c66ebee5094ca7516bcf6670bdbfa9e31a8a5666f7564b9",
+              "size": 5097
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_9.csv",
+              "sha256": "b967def9b10d1a65f81d5db36504212fbfb1dfcd2e1621d8d21a00002fd3c302",
+              "size": 382206
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-9.json",
+              "sha256": "e6ebde081e9be7ee538f2b55f5d52853c07e7d97db00f12ab71fda6011c7dbbd",
+              "size": 5197
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-9.csv",
+              "sha256": "b967def9b10d1a65f81d5db36504212fbfb1dfcd2e1621d8d21a00002fd3c302",
+              "size": 382206
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 10,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_10.json",
+              "sha256": "fac879babeb9809b7e90276dc66e1aa1f6ab00db96891877b6fcdaacbd2877e1",
+              "size": 5118
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_10.csv",
+              "sha256": "a9f28180180b63889775e3303917e8ca2ddfe297975b634c07b0512a7db7ab89",
+              "size": 392789
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-10.json",
+              "sha256": "95c40a6420c0238cd1323a15ca87f40419186fe4dc9a68bb0b26335e69e73d74",
+              "size": 5218
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-10.csv",
+              "sha256": "a9f28180180b63889775e3303917e8ca2ddfe297975b634c07b0512a7db7ab89",
+              "size": 392789
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 11,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_11.json",
+              "sha256": "c78a364255c4f77d056702cea98fad911aba5a5dbf8e9f63c4ccc83360911c3b",
+              "size": 5097
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_11.csv",
+              "sha256": "a4821b9395e30c91122af5547ec724eb3a2b28dd81e98574dca9af874e95c8c0",
+              "size": 392827
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-11.json",
+              "sha256": "0715c9d54fb8a08f71e7c8f4660db32ca2dfd879cdecbf4c629c1bb2ef9ee7c0",
+              "size": 5197
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-11.csv",
+              "sha256": "a4821b9395e30c91122af5547ec724eb3a2b28dd81e98574dca9af874e95c8c0",
+              "size": 392827
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 12,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_12.json",
+              "sha256": "b8ed5d65e15663b1bb606c68eeaf3f5589f1b8bcab181b23123272863ca07627",
+              "size": 5349
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_12.csv",
+              "sha256": "a6ad603fee6a63302747c576d5d7db1f7e9fd02e9d3ce897a317910dc0047906",
+              "size": 392506
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-12.json",
+              "sha256": "d346de8d7d4ca40602289e528139eeb7d90ed0ddb0e7aa3bde77baf8835b0e30",
+              "size": 5449
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-12.csv",
+              "sha256": "a6ad603fee6a63302747c576d5d7db1f7e9fd02e9d3ce897a317910dc0047906",
+              "size": 392506
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 13,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_13.json",
+              "sha256": "7716d195c254727cd216ac1b1126de2da3118613d7b8e86fda7daaf64ddef116",
+              "size": 5361
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_13.csv",
+              "sha256": "802341a37fade0042fc5013e290c982809c73f0c8088c3a5093ac5b0bd0ab1eb",
+              "size": 392554
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-13.json",
+              "sha256": "185bc817a9d37924b5e3ed171e789177aff2c769e08b256e08816f1dac4f5c60",
+              "size": 5461
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-13.csv",
+              "sha256": "802341a37fade0042fc5013e290c982809c73f0c8088c3a5093ac5b0bd0ab1eb",
+              "size": 392554
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 14,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_14.json",
+              "sha256": "5e2b30b2a7624cfe0b0cc41a1fd6cd3b75d6043253cb8fe8853662eacd2b4665",
+              "size": 5109
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_14.csv",
+              "sha256": "266e576d0573da50fe578285cbf99c2a74d52b760b4cccb6aef6410db219e421",
+              "size": 379380
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-14.json",
+              "sha256": "a09a804c2f15fcc1fe5db2284050c33cb3ade4a64c0690b597eababfff19eab5",
+              "size": 5209
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-14.csv",
+              "sha256": "266e576d0573da50fe578285cbf99c2a74d52b760b4cccb6aef6410db219e421",
+              "size": 379380
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 15,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_15.json",
+              "sha256": "c161bc0ee593d96278a75cbf43118dc64fc93ae1fead7f48867fe0db2b39374c",
+              "size": 5103
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_15.csv",
+              "sha256": "c5d8ae363815a3e35a98cc5a485287c38ba9e3fd6d93b94e93b761ad7ca37b5f",
+              "size": 392785
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-15.json",
+              "sha256": "153dc700001bcbb7cb5fef47e2f5e815b3dfd01c23d493bac748895c450dcd7d",
+              "size": 5203
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-15.csv",
+              "sha256": "c5d8ae363815a3e35a98cc5a485287c38ba9e3fd6d93b94e93b761ad7ca37b5f",
+              "size": 392785
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 16,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_16.json",
+              "sha256": "cfbfe52d13dfa76d65513a5fcea33216bbf86e95609b9fa72216a2d2f8f0e8e0",
+              "size": 5112
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_16.csv",
+              "sha256": "64ff3adcc4447a9d006878dca4204b13ff079317b4e4d57e8f7ab5fc100779ec",
+              "size": 392827
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-16.json",
+              "sha256": "7d47fe2768cea4a0057d069c43eac3b4d7562c4c7a798e7449390e68b1ef900c",
+              "size": 5212
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-16.csv",
+              "sha256": "64ff3adcc4447a9d006878dca4204b13ff079317b4e4d57e8f7ab5fc100779ec",
+              "size": 392827
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 17,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_17.json",
+              "sha256": "1a7eac7dca10d948c1b6444e240eeda375a37f0f4ca3153eed1766c08944c78f",
+              "size": 5104
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_17.csv",
+              "sha256": "5e4c3ba061d258ac77ecdc6529688a4c851b07fdf3d5dd2cecae354f5a516739",
+              "size": 392801
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-17.json",
+              "sha256": "3e2d841158f5127f12dd4caf0e1ee84de7a9f3c81f88fa53425acd8beb63aac3",
+              "size": 5204
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-17.csv",
+              "sha256": "5e4c3ba061d258ac77ecdc6529688a4c851b07fdf3d5dd2cecae354f5a516739",
+              "size": 392801
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 18,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_18.json",
+              "sha256": "0c4cf905f91a8bbeb763ad2e3b90dc5c556fadd64ef1abded45f49ce3603079d",
+              "size": 5333
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_18.csv",
+              "sha256": "264fe065dd5bfecf3c2ecd4eb416afece20089a311dfc6adc285b83d9f4500fb",
+              "size": 393917
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-18.json",
+              "sha256": "fa3345f3543d368623db6b64618eb8a8c5e90f67249942c40f4efcfbdf366812",
+              "size": 5433
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-18.csv",
+              "sha256": "264fe065dd5bfecf3c2ecd4eb416afece20089a311dfc6adc285b83d9f4500fb",
+              "size": 393917
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 19,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_19.json",
+              "sha256": "9e9af85bfc163ce1f405554cd9a6a8fde0dcff8d7ce7253daf855944f70bf415",
+              "size": 5340
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_19.csv",
+              "sha256": "6e76a791f421c8f3aa9bb370b74f9d9aab0cdcd160092592bb100f94056e31bc",
+              "size": 398492
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-19.json",
+              "sha256": "cd812264ba6056d59ae33f45272e22e7508a93cbaacb1e3a4c5a2abec925493f",
+              "size": 5440
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-19.csv",
+              "sha256": "6e76a791f421c8f3aa9bb370b74f9d9aab0cdcd160092592bb100f94056e31bc",
+              "size": 398492
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 20,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_20.json",
+              "sha256": "977eec3c2d2782c81c53c5035575ade1355b737211f26037c6a29d853cd3ea13",
+              "size": 5100
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_20.csv",
+              "sha256": "5455acb995d96820aeab100f64e7c48e75153e281835e8a0f99feb7b0b319aa1",
+              "size": 385331
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-20.json",
+              "sha256": "7c42308da4b3a4497f6a898d32a9a9da53397eba80dfccec1600762d0af91e62",
+              "size": 5200
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-20.csv",
+              "sha256": "5455acb995d96820aeab100f64e7c48e75153e281835e8a0f99feb7b0b319aa1",
+              "size": 385331
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 21,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_21.json",
+              "sha256": "18a4a2dc8c866bf2bb5995c5d01eb3fec768f53384fbec4d5b067a84423b910b",
+              "size": 5095
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_21.csv",
+              "sha256": "3d15474b47b61a6cb0f1db4231459907e7771333c7d496b368a9167189fffaaf",
+              "size": 398855
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-21.json",
+              "sha256": "0ac957a7882fbfeb88ffeed502ad895d193da5266ac26d1d92fcb35f60ba2263",
+              "size": 5195
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-21.csv",
+              "sha256": "3d15474b47b61a6cb0f1db4231459907e7771333c7d496b368a9167189fffaaf",
+              "size": 398855
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 22,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_22.json",
+              "sha256": "e61d7884023aeabb3be8a32a3d3dacd275dab161d57eabd5095ba26ac6ce3d93",
+              "size": 5116
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_22.csv",
+              "sha256": "0ffa1001a23098819428716de51bd92014922a4391dc91227dd08d9a4ffba8c3",
+              "size": 398856
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-22.json",
+              "sha256": "59d5fa2a46e160f94eb292d505af4579084aac9b42d50b2e0e09879a7655ed00",
+              "size": 5216
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-22.csv",
+              "sha256": "0ffa1001a23098819428716de51bd92014922a4391dc91227dd08d9a4ffba8c3",
+              "size": 398856
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 23,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_23.json",
+              "sha256": "cdbaff1ffe06b694b29735d292143e7c565bf297b37ae3d326d183214b3ef163",
+              "size": 5097
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_23.csv",
+              "sha256": "5c774e72b32d88f4a656859863abd5300094fca71746a3ea37f52799018dd099",
+              "size": 398765
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-23.json",
+              "sha256": "73f3aec158f070670c670bc4424802cb7b0fa2db5d579723901015fcd524e2f5",
+              "size": 5197
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-23.csv",
+              "sha256": "5c774e72b32d88f4a656859863abd5300094fca71746a3ea37f52799018dd099",
+              "size": 398765
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        },
+        {
+          "index": 24,
+          "before": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_24.json",
+              "sha256": "d96ec80ffbba62a68f07463cf64e9ac6b5620a64aa64f137ac34bd57e978ff4b",
+              "size": 5359
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-measured-count-m4-elder-k1/train/native/train_stopped_trial_24.csv",
+              "sha256": "4222be5842de3c7253a536397531222aebbb2975629d958df1b0f641d14e426d",
+              "size": 398492
+            }
+          },
+          "after": {
+            ".json": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-24.json",
+              "sha256": "56ab78f888e03e998643c623b2147ee19847d525e492c689f318ceadd867c95d",
+              "size": 5459
+            },
+            ".csv": {
+              "path": "/home/user/timelearner-refactor/readbacks/classic-n0-proposal-cold-elder-ab3/train/native/raw-trial-24.csv",
+              "sha256": "4222be5842de3c7253a536397531222aebbb2975629d958df1b0f641d14e426d",
+              "size": 398492
+            }
+          },
+          "CSV_bytes_equal": true,
+          "base_model_revision_equal": true,
+          "base_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+          "routing_equal": true,
+          "input_id_equal": true,
+          "complete_before": true,
+          "complete_after": true
+        }
+      ],
+      "archive": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/04/0452349eac13a2514566b3fec1484a84f7cda52c65a900b589387c1e685f6a3a",
+        "sha256": "0452349eac13a2514566b3fec1484a84f7cda52c65a900b589387c1e685f6a3a",
+        "bytes": 146132
+      },
+      "bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6b/6b1cc20f47da6a6695282bb9901a62142c3ac15151aa48d3d9e95963abfb408d",
+        "sha256": "6b1cc20f47da6a6695282bb9901a62142c3ac15151aa48d3d9e95963abfb408d",
+        "bytes": 15747
+      },
+      "members": 102,
+      "expanded_bytes": 21124418,
+      "original_files_unchanged": true,
+      "after_Train_still_unfinished": true,
+      "scope": "First24 closed reference observations only; not search trajectory, final learned state, final certificate or classification",
+      "new_native_execution": false,
+      "scientific_verdict": null
+    }
+  },
+  "independent_recovery": {
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/n0-proposal-cold-Classic-elder/initial-reference24-independent-restore-ae6.json",
+    "record": {
+      "kind": "timelearner_initial24_comparison_independent_primary_restore",
+      "schema_version": 1,
+      "observed_utc": "2026-11-23T12:31:24.206578+00:00",
+      "source_host": "Elder-1",
+      "restoration_host": "M40",
+      "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/n0-proposal-cold-Classic-elder/initial-reference24-ae3.json",
+      "archive": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/04/0452349eac13a2514566b3fec1484a84f7cda52c65a900b589387c1e685f6a3a",
+        "sha256": "0452349eac13a2514566b3fec1484a84f7cda52c65a900b589387c1e685f6a3a",
+        "bytes": 146132
+      },
+      "bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6b/6b1cc20f47da6a6695282bb9901a62142c3ac15151aa48d3d9e95963abfb408d",
+        "sha256": "6b1cc20f47da6a6695282bb9901a62142c3ac15151aa48d3d9e95963abfb408d",
+        "bytes": 15747
+      },
+      "restore": {
+        "kind": "timelearner_native_bundle_restoration",
+        "schema_version": 1,
+        "archive_sha256": "0452349eac13a2514566b3fec1484a84f7cda52c65a900b589387c1e685f6a3a",
+        "archive_members_verified": 102,
+        "retained_regular_files": 102,
+        "compatibility": "retain-regular-glog-aliases-v1",
+        "omitted_redundant_aliases": [],
+        "source_archive_modified": false,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      },
+      "all96_raw_primary_member_hashes_rechecked": true,
+      "conditions_members_also_restored": true,
+      "restored_directory": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-23/elder-same-host-initial24-ae6/restored",
+      "scope": "First24 closed reference probes and their actual initial source/runtime only; not completed Train or classification",
+      "new_native_execution": false,
+      "scientific_verdict": null
+    }
+  },
+  "source_scope": {
+    "before_root": "e1c97ac2042e155ffe907ad695975304d69664a2",
+    "after_root": "b2c3cb65ab572c680a56f28b86d40445b9392b0c",
+    "before_PulseLib": "b03e13857cd7656a8ff1ff3162d28b25e90bb5a4",
+    "after_PulseLib": "3f5a2205a4e6c02de545cdc214172482ac53c4b2",
+    "root_runtime_source_scope": [
+      "App",
+      "CMakeLists.txt",
+      "Libraries",
+      "Rdk",
+      "Bin"
+    ],
+    "root_runtime_scope_delta_paths": [
+      "Libraries/Nmsdk-PulseLib"
+    ],
+    "PulseLib_all_delta_paths": [
+      "Core/TimeLearner/BoundedTraining.cpp"
+    ],
+    "root_App_Cpp_and_root_CMake_identical": true,
+    "other_recorded_child_heads_identical": true
+  },
+  "all24_first_reference_waves_identical": true,
+  "all24_observation_windows_complete": true,
+  "source_parameter_physics_and_initial_reference_control_verified": true,
+  "new_final_Train_outcome": null,
+  "new_classification": null,
+  "scope_limits": [
+    "Initial reference control does not certify final timing/amplitude residuals or search convergence.",
+    "Same host/compiler/library content and identical declared budget improve comparability; OS load and wall-time throughput are not experimentally fixed.",
+    "Root runtime source scope is explicit; this is not an equality claim for all repository documentation/tests/scripts."
+  ],
+  "scientific_verdict": null
+}
