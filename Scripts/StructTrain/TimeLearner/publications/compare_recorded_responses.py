@@ -5,6 +5,7 @@ reader does not attest execution, convergence, causation or a new threshold.
 """
 import argparse
 import hashlib
+import html
 import json
 from pathlib import Path
 
@@ -117,6 +118,41 @@ def read_sources(path):
     return specification, prepared, summaries
 
 
+def write_index(result, output):
+    sections = []
+    for cohort in result['cohorts']:
+        name = cohort['id']
+        counts = ', '.join(key+'='+str(cohort['counts'][key]) for key in ('TP', 'FP', 'FN', 'TN'))
+        pictures = []
+        for view, caption in [('positive', 'Полное окно в масштабе положительного отклика'),
+                              ('last-input-detail', 'Увеличение около последнего входа'),
+                              ('full', 'Полный диапазон с отрицательной перезарядкой')]:
+            filename = name+'-'+view+'.png'
+            pictures.append('<h3>'+caption+'</h3><p><a href="'+filename+'">Открыть исходный PNG</a></p>'
+                '<div class="trace"><img src="'+filename+'" alt="'+caption+'"></div>')
+        sections.append('<section><h2>'+html.escape(cohort['title'])+'</h2><p>'+counts+
+            '</p><p>Порог '+html.escape(str(cohort['threshold']).replace('.', ','))+
+            '; модель <code>'+html.escape(cohort['model_revision'])+'</code>.</p>'+''.join(pictures)+'</section>')
+    text = '''<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Целевые и ложноположительные реакции</title><style>
+body{font:17px/1.5 system-ui;color:#17232f;margin:24px}section{border-top:1px solid #bbc;margin-top:30px}
+.trace{overflow:auto;border:1px solid #ddd}img{max-width:none;width:auto;height:auto}code{overflow-wrap:anywhere}
+h1{font-size:1.7em}h2{font-size:1.3em}h3{font-size:1.1em}</style>
+<h1>Целевые и ложноположительные реакции</h1>
+<p>Сопоставлены ранее записанные отклики. Новое обучение или подбор порога не выполнялись.
+TP — обнаружение цели, FP — ложное срабатывание, FN — пропуск цели, TN — правильное отклонение.</p>
+<p>Счётчики относятся ко всему исходному набору; графики сопоставляют все его TP и FP.
+Рисунки показаны в исходном разрешении с прокруткой. Каждый содержит реальные входы и выходы.
+Положительный масштаб дан рядом с полным диапазоном; увеличение сохраняет исходные отсчёты.</p>
+<p><a href="comparison.json">Все43 наблюдения и происхождение данных</a>.
+Само сопоставление не подтверждает сходимость обучения.</p>'''.replace('Все43', 'Численные наблюдения')
+    path = Path(output)/'index.html'
+    require(not path.exists(), 'response_comparison_index_already_exists')
+    path.write_text(text+''.join(sections)+'</html>', encoding='utf-8', newline='\n')
+    return dict(name=path.name, bytes=path.stat().st_size,
+                sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+
+
 def render(source, output):
     specification, prepared, summaries = read_sources(source)
     environment = plotting_runtime()
@@ -186,6 +222,7 @@ def render(source, output):
         waveform_scope='after-children potential at the actually executed threshold; includes output feedback',
         classification_recomputed=False, new_native_execution=False, threshold_selected=False,
         training_certificate_created=False, scientific_verdict=None, visual_review_complete=False)
+    result['index'] = write_index(result, output)
     (output/'comparison.json').write_text(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False)+'\n', encoding='utf-8')
     return result
 
