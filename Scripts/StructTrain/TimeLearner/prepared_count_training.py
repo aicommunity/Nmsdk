@@ -2,6 +2,8 @@
 
 The native SDK, initial physics, target, tolerances and search budgets stay
 fixed. The permitted normalization variable changes from Rs to integer Ns.
+An explicitly separate budget experiment can extend a completed cold N0
+declaration to two sweeps; it does not resume the stopped model or change physics.
 Preflight is audited before Train. A closed Train still requires the separate
 full primary-history audit; this worker never equates process exit with Exact.
 """
@@ -43,6 +45,38 @@ def matched_count_job(original, run_id, *, maximum_synapses=128):
     return job
 
 
+def doubled_sweep_count_job(original, run_id):
+    """Declare two cold N0 sweeps with twice the logical-probe/wall allowance.
+
+    Keep each input's candidate allowance, numerical tolerances, references,
+    physical model and every other limit unchanged. This is a different search
+    effort, not a repeat at identical conditions or a learned-state continuation.
+    """
+    require(type(run_id) is str and bool(run_id.strip()), 'count_extension_run_id')
+    require(type(original) is dict and original.get('sha256') == sha(
+            {k:v for k,v in original.items() if k != 'sha256'}), 'count_extension_source_digest')
+    from .native_pipeline_worker import validate_job
+    validate_job('train', original)
+    c = original['configuration']; search = c['search']; model = c['model']
+    require(model['normalization'] == 'N0' and search['maximum_sweeps'] == 1 and
+            type(search['maximum_sweeps']) is int and
+            type(search['maximum_probes']) is int and search['maximum_probes'] > 0 and
+            0 < number(c['maximum_wall_seconds']) <= 86400,
+            'count_extension_requires_one_sweep_count_source')
+    require(all(item['synapses'] == 1 for item in model['inputs']) and
+            all(bound['minimum_resistance'] == bound['maximum_resistance'] == item['resistance']
+                for item,bound in zip(model['inputs'], search['bounds'])),
+            'count_extension_requires_original_cold_count_physics')
+    job = deepcopy(original); c = job['configuration']
+    c['run_id'] = run_id
+    c['search']['maximum_sweeps'] = 2
+    c['search']['maximum_probes'] *= 2
+    c['maximum_wall_seconds'] *= 2
+    job['sha256'] = sha({k:v for k,v in job.items() if k != 'sha256'})
+    validate_job('train', job)
+    return job
+
+
 def _write(path, value):
     with Path(path).open('x', encoding='utf-8', newline='\n') as f:
         json.dump(value, f, ensure_ascii=False, indent=2, allow_nan=False);f.write('\n')
@@ -72,13 +106,15 @@ def run(controls):
     from .native_gate import _environment
     from .runtime import file_record, source_closure
     from .windows_process import execute
+    from .owned_python_job import _source_snapshot
     controls = Path(controls).resolve(strict=True)
     spec = load(controls/'specification.json')
     require(type(spec) is dict and set(spec) == {'kind','schema_version','python_source','python_root',
             'sdk_source','original_job','job_file','factor_job_file','run_id','maximum_synapses','output',
             'worker_sha256','native_memory_bytes','native_wall_seconds','preflight_wall_seconds',
             'minimum_free_bytes','maximum_output_bytes'} and
-            os.name == 'nt' and spec['kind'] == 'timelearner_matched_count_training' and
+            os.name == 'nt' and spec['kind'] in
+                ('timelearner_matched_count_training', 'timelearner_count_two_sweep_training') and
             spec['schema_version'] == 1, 'count_train_worker_scope')
     base = Path('C:/Projects/TimeLearnerWorker').resolve(strict=True)
     output = Path(spec['output']).absolute()
@@ -88,12 +124,18 @@ def run(controls):
     stop = threading.Event(); failures = []
     try:
         require(file_record(Path(__file__))['sha256'] == spec['worker_sha256'], 'count_train_worker_changed')
+        _source_snapshot(Path(spec['python_source']), spec['python_root'])
         original_path = Path(spec['original_job']['path'])
         require(file_record(original_path) == spec['original_job'], 'count_train_original_job_changed')
         original = load(original_path); job_path = controls/'job.json'
         require(file_record(job_path) == spec['job_file'], 'count_train_job_file_changed')
         job = load(job_path)
-        require(job == matched_count_job(original, spec['run_id'], maximum_synapses=spec['maximum_synapses']),
+        extension = spec['kind'] == 'timelearner_count_two_sweep_training'
+        expected = doubled_sweep_count_job(original, spec['run_id']) if extension else \
+            matched_count_job(original, spec['run_id'], maximum_synapses=spec['maximum_synapses'])
+        require(job == expected and (not extension or all(
+                    bound['maximum_synapses'] <= spec['maximum_synapses']
+                    for bound in job['configuration']['search']['bounds'])),
                 'count_train_matched_case_changed')
         validate_job('train', job)
         factor_path = controls/'factor-job.json'
@@ -103,12 +145,14 @@ def run(controls):
         runtime_path = controls/'runtime.json'; runtime = load(runtime_path)
         runtime_before = file_record(runtime_path); sdk = Path(spec['sdk_source'])
         require(source_closure(sdk) == runtime['source_closure'], 'count_train_sdk_changed')
-        require(spec['native_memory_bytes'] == 16*1024**3 and spec['native_wall_seconds'] == 39600 and
+        multiplier = 2 if extension else 1
+        require(spec['native_memory_bytes'] == 16*1024**3 and spec['native_wall_seconds'] == 39600*multiplier and
                 spec['preflight_wall_seconds'] == 900 and
-                job['configuration']['maximum_wall_seconds'] == original['configuration']['maximum_wall_seconds'] == 32400,
+                original['configuration']['maximum_wall_seconds'] == 32400 and
+                job['configuration']['maximum_wall_seconds'] == 32400*multiplier,
                 'count_train_declared_finite_budgets')
         require(type(spec['minimum_free_bytes']) is int and spec['minimum_free_bytes'] >= 10*1024**3 and
-                type(spec['maximum_output_bytes']) is int and 0 < spec['maximum_output_bytes'] <= 8*1024**3,
+                type(spec['maximum_output_bytes']) is int and 0 < spec['maximum_output_bytes'] <= 8*1024**3*multiplier,
                 'count_train_disk_limits')
         require(shutil.disk_usage(output).free >= spec['minimum_free_bytes']+spec['maximum_output_bytes'],
                 'count_train_capacity_preflight')
@@ -183,6 +227,7 @@ def run(controls):
                 file_record(factor_path) == spec['factor_job_file'] and not failures and
                 file_record(runtime_path) == runtime_before and source_closure(sdk) == runtime['source_closure'],
                 'count_train_source_changed_after_execution')
+        _source_snapshot(Path(spec['python_source']), spec['python_root'])
         _write(output/'terminal.json',terminal)
     except BaseException as error:
         import traceback
