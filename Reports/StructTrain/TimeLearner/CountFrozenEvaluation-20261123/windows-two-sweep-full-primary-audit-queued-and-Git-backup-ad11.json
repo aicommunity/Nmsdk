@@ -1,0 +1,141 @@
+{
+  "kind": "timelearner_two_sweep_actual_primary_audit_queued",
+  "schema_version": 1,
+  "dispatch": {
+    "dispatched": true,
+    "job": "windows-two-sweep-primary-audit-ad4",
+    "controls_commit": "30bb0e3719a083aa55469a3992d48a35d0871973",
+    "task": {
+      "scientific_verdict": null,
+      "instance": "{5594C8DD-126C-4127-898E-A98AB48D6088}",
+      "execution_time_limit": "PT24H",
+      "task": "TimeLearner-windows-two-sweep-primary-audit-ad4",
+      "engine_pid": 7056
+    },
+    "source_root": "3d23acecf1308207c9f715be561a13bc2678a619",
+    "source_training_job": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2",
+    "expected_original_native_pid": 21328,
+    "waiting_before_memory_reservation": true,
+    "memory_bytes": 17179869184,
+    "maximum_wait_seconds": 72000,
+    "maximum_audit_seconds": 7200,
+    "original_Train_not_restarted": true,
+    "scientific_verdict": null
+  },
+  "kernel_observation": {
+    "observed_utc": "2026-11-23T11:46:07.048161+00:00",
+    "queue_kernel": {
+      "pid": 17604,
+      "identity": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134399078813119744"
+      },
+      "identity_matches": true,
+      "running": true
+    },
+    "Train_kernel": {
+      "pid": 21328,
+      "identity": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-measured-count-native-win-a3\\NeuroModelerConsole.exe",
+        "creation_filetime": "134398728342403660"
+      },
+      "identity_matches": true,
+      "running": true
+    },
+    "queue-state.json": {
+      "reason": "waiting_for_exact_native_Train",
+      "source_native_running": true,
+      "elapsed_wait_seconds": 80.00976549996994,
+      "observed_utc": "2026-11-23T11:46:01.540784+00:00",
+      "no_Train_restarted": true,
+      "scientific_verdict": null
+    },
+    "raw_trials": 1038
+  },
+  "source": {
+    "source_ready": true,
+    "source": "C:\\Projects\\TimeLearnerWorker\\source-two-sweep-primary-audit-win-ad3",
+    "root_commit": "3d23acecf1308207c9f715be561a13bc2678a619",
+    "status": "",
+    "source_method": "Git sparse clone of exact published root; no submodule checkout or update",
+    "selected_files": {
+      "prepared_count_training.py": {
+        "bytes": 16710,
+        "sha256": "e86ae41141ffec4eb19f8ddfd803c08f1d74b20b835e1a6b51765571b24ca043"
+      },
+      "windows_process.py": {
+        "bytes": 21831,
+        "sha256": "807617af18ed91483cf905c87716bb89eebb708ae1cb6f290a29ac6f82524d9e"
+      },
+      "tests/test_closed_matched_count_training.py": {
+        "bytes": 4704,
+        "sha256": "d18e9150848634103abef4e9f68bd0a87c4134fcc2df6a5bcebd786e86ed61c2"
+      },
+      "tests/test_closed_doubled_count_training.py": {
+        "bytes": 829,
+        "sha256": "3fd10d4b59090b1d75b0c97035b74cf5b5d4fa42bf46a8d3f6802095dc083233"
+      }
+    },
+    "seconds": 6.255390400066972,
+    "existing_workers_and_user_checkouts_unchanged": true,
+    "scientific_verdict": null
+  },
+  "bound_original_source": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-branch-measured-count-M4-a3\\job.json",
+    "sha256": "511f835596d1611ab5044f561ce3938cf2ff6a7570af8b04ab8e6ab1385338de",
+    "size": 674042
+  },
+  "actual_training_specification": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-branch-count-two-sweeps-g2\\specification.json",
+    "sha256": "92c077af3c11dbf4a72ca2f7d00aed6cf84ac3168336d5d39cfb34a18900c3ad",
+    "size": 1720
+  },
+  "controls_publication": {
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-23/windows-two-sweep-count-primary-audit-ad4-controls.json",
+    "record": {
+      "kind": "timelearner_windows_two_sweep_primary_audit_controls",
+      "schema_version": 1,
+      "source_root": "3d23acecf1308207c9f715be561a13bc2678a619",
+      "controls_commit": "30bb0e3719a083aa55469a3992d48a35d0871973",
+      "controls_tree": "fb1c1ff40753f2d3115011573569c139a9b330d8",
+      "bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/61/619969de5afb7b174a3c03563d4a34307fcc15e0003442365f5723543504116c",
+        "sha256": "619969de5afb7b174a3c03563d4a34307fcc15e0003442365f5723543504116c",
+        "bytes": 4914
+      },
+      "bundle_restored_independently_on_M40": true,
+      "restored_bare_repository": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/windows-two-sweep-primary-audit-controls-ad6/restored.git",
+      "original_job": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-branch-measured-count-M4-a3\\job.json",
+        "sha256": "511f835596d1611ab5044f561ce3938cf2ff6a7570af8b04ab8e6ab1385338de",
+        "size": 674042
+      },
+      "source_owner": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-branch-count-two-sweeps-g2\\train\\process\\owned-process.json",
+        "sha256": "b1080e74a9df5d0fd6dfd12ed5220e2675c619ce20112eb85fafe25ba25fd313",
+        "size": 386
+      },
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_closed_doubled_count_training.ClosedDoubledCountTrainingTest.test_actual_complete_primary_and_single_package_decode"
+      ],
+      "maximum_wait_seconds": 72000,
+      "maximum_audit_seconds": 7200,
+      "memory_bytes": 17179869184,
+      "transport": "Git bundle over authenticated SSH via jump host; Samba access denied in Windows SSH context",
+      "new_neural_data_transferred": false,
+      "current_Train_or_audit_queue_restarted": false,
+      "full_primary_audit_not_yet_performed": true,
+      "scientific_verdict": null
+    }
+  },
+  "original_Samba_access_error": "[WinError 5] Отказано в доступе: '\\\\\\\\10.245.1.12\\\\Nmsdk-StructTrainExpArchive\\\\'",
+  "Samba_error_did_not_restart_or_stop_Train": true,
+  "exact_two_sweep_job_compared_with_bound_cold_source_before_queue": true,
+  "full_primary_audit_started": false,
+  "new_scientific_training_outcome": null,
+  "original_Train_runtime_and_conditions_unchanged": true,
+  "scientific_verdict": null
+}

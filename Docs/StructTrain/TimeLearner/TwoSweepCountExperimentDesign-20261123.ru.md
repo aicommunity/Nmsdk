@@ -155,3 +155,20 @@ base model revisions совпали; метки подмножеств и хэш
 случай. Это обнаружение тестов, не их выполнение. Новая двухпроходная
 проверка ещё не выполнена и должна начаться только после подтверждённого
 закрытия нынешнего native Train и его Windows controller task.
+
+Очередь `windows-two-sweep-primary-audit-ad4` поставлена. Actor root
+`3d23acecf1308207c9f715be561a13bc2678a619` получен отдельным точным
+Git checkout; SDK и исходники работающего Train не обновлялись.
+До постановки весь фактический job сравнивался с `doubled_sweep_count_job`
+из файла, закреплённого исходным `specification.json`. Native PID21328 и
+creation time сохранены; очередь17604 проверена по собственному kernel handle.
+Она ждёт native и controller closure, после чего выделит16ГБ и выполнит
+одну полную проверку с лимитом7200с. Ожидание ограничено20ч, Task —24ч;
+это операционные лимиты очереди, а не увеличение бюджета обучения.
+
+Controls commit `30bb0e3719a083aa55469a3992d48a35d0871973`, дерево
+`fb1c1ff40753f2d3115011573569c139a9b330d8` сохранены в Git bundle4914байт.
+Он независимо восстановлен в bare-репозитории M40, SHA commit/tree совпали.
+Недоступность Samba в Windows SSH-контексте обойдена Git-транспортом через
+jump host; нейронные данные этим пакетом не передавались.
+[Постановка, живые процессы и внешняя копия](../../../Reports/StructTrain/TimeLearner/CountFrozenEvaluation-20261123/windows-two-sweep-full-primary-audit-queued-and-Git-backup-ad11.json).
