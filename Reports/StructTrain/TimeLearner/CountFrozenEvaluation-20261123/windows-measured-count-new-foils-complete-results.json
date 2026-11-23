@@ -1,0 +1,674 @@
+{
+  "kind": "timelearner_measured_count_complete_new_foil_result",
+  "schema_version": 1,
+  "terminal": {
+    "kind": "timelearner_actual_windows_frozen_physical_study",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "study": {
+      "protocol": "new_foils"
+    },
+    "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+    "threshold": 0.0858575482028458,
+    "trials": 27,
+    "counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 25,
+      "targets": 1,
+      "foils": 26,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.9629629629629629,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.038461538461538464
+    },
+    "condition_fingerprint": "6e71296f0a61217665d20b1cefafcb6732087f7699da5e8437c866d808cf5ffc",
+    "repeated_control_comparisons": [
+      {
+        "kind": "timelearner_trial_response_comparison",
+        "schema_version": 1,
+        "comparator_version": 1,
+        "time_basis": "actual_stimulus_onset",
+        "absolute_tolerance": 1e-12,
+        "observation_schema_version": 2,
+        "source_trial_id": "branch-measured-count-M4/physical-DATA-replay/windows-q1/trial-0",
+        "observed_trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-2-2-2",
+        "sample_id": "phasea-row-0",
+        "model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+        "source_begin": 0,
+        "observed_begin": 26.0065,
+        "source_stimulus_onset": 0.01,
+        "observed_stimulus_onset": 26.0165,
+        "absolute_clock_shift": 26.0065,
+        "source_samples": 4001,
+        "observed_samples": 4001,
+        "sample_counts_equal": true,
+        "window_offsets_equal": true,
+        "maximum_absolute_signal_difference": 0.0,
+        "maximum_relative_sample_time_difference": 2.4424906541753444e-15,
+        "maximum_relative_history_difference": 1.7069679003611782e-15,
+        "maximum_relative_event_time_difference": 1.7069679003611782e-15,
+        "maximum_window_offset_difference": 1.5629858518551032e-15,
+        "maximum_absolute_sample_difference": 2.4424906541753444e-15,
+        "waveforms_equal_within_declared_tolerance": true,
+        "stimulus_and_spike_events_equal": true,
+        "response_preserved": true,
+        "difference_reasons": [],
+        "pre_window_history_compared": false,
+        "scientific_verdict": null
+      }
+    ],
+    "frozen_model_verified": true,
+    "complete_native_observations": true,
+    "threshold_selected": false,
+    "training_performed": false,
+    "source_training_completed": false,
+    "new_foils_excluded_from_calibration": true,
+    "independently_heldout_positive_class": false,
+    "scientific_verdict": null
+  },
+  "process": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "completed",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 47,
+    "wall_seconds": 3138.1546987999463,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-5c0b69c5-f393-412a-b0bf-812a8f114cd2"
+  },
+  "trial_count": 27,
+  "trials": [
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-1-1-1",
+      "sample_id": "unseen-isi-grid-v1-1-1-1",
+      "label": "foil",
+      "presentation_index": 0,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 0.01,
+      "response_end": 2.0,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.08,
+        0.12
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-1-1-2",
+      "sample_id": "unseen-isi-grid-v1-1-1-2",
+      "label": "foil",
+      "presentation_index": 1,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 2.0105,
+      "response_end": 4.000500000000001,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.08,
+        0.24
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-1-1-3",
+      "sample_id": "unseen-isi-grid-v1-1-1-3",
+      "label": "foil",
+      "presentation_index": 2,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 4.011,
+      "response_end": 6.001,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.08,
+        0.36
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-1-2-1",
+      "sample_id": "unseen-isi-grid-v1-1-2-1",
+      "label": "foil",
+      "presentation_index": 3,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 6.0115,
+      "response_end": 8.0015,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.16,
+        0.12
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-1-2-2",
+      "sample_id": "unseen-isi-grid-v1-1-2-2",
+      "label": "foil",
+      "presentation_index": 4,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 8.012,
+      "response_end": 10.002,
+      "spike_count": 1,
+      "window_spikes": [
+        8.4535
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FP",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.16,
+        0.24
+      ],
+      "actual_stimulus_times": [
+        8.012,
+        8.052,
+        8.212,
+        8.452
+      ],
+      "actual_spike_times": [
+        8.4535
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-1-2-3",
+      "sample_id": "unseen-isi-grid-v1-1-2-3",
+      "label": "foil",
+      "presentation_index": 5,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 10.0125,
+      "response_end": 12.0025,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.16,
+        0.36
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-1-3-1",
+      "sample_id": "unseen-isi-grid-v1-1-3-1",
+      "label": "foil",
+      "presentation_index": 6,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 12.013,
+      "response_end": 14.003,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.24,
+        0.12
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-1-3-2",
+      "sample_id": "unseen-isi-grid-v1-1-3-2",
+      "label": "foil",
+      "presentation_index": 7,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 14.0135,
+      "response_end": 16.003500000000003,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.24,
+        0.24
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-1-3-3",
+      "sample_id": "unseen-isi-grid-v1-1-3-3",
+      "label": "foil",
+      "presentation_index": 8,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 16.014,
+      "response_end": 18.004,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.04,
+        0.24,
+        0.36
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-2-1-1",
+      "sample_id": "unseen-isi-grid-v1-2-1-1",
+      "label": "foil",
+      "presentation_index": 9,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 18.0145,
+      "response_end": 20.0045,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.08,
+        0.12
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-2-1-2",
+      "sample_id": "unseen-isi-grid-v1-2-1-2",
+      "label": "foil",
+      "presentation_index": 10,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 20.015,
+      "response_end": 22.005,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.08,
+        0.24
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-2-1-3",
+      "sample_id": "unseen-isi-grid-v1-2-1-3",
+      "label": "foil",
+      "presentation_index": 11,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 22.0155,
+      "response_end": 24.0055,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.08,
+        0.36
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-2-2-1",
+      "sample_id": "unseen-isi-grid-v1-2-2-1",
+      "label": "foil",
+      "presentation_index": 12,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 24.016,
+      "response_end": 26.006,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.16,
+        0.12
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-2-2-2",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "presentation_index": 13,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 26.0165,
+      "response_end": 28.0065,
+      "spike_count": 1,
+      "window_spikes": [
+        26.498
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TP",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.16,
+        0.24
+      ],
+      "actual_stimulus_times": [
+        26.0165,
+        26.0965,
+        26.2565,
+        26.4965
+      ],
+      "actual_spike_times": [
+        26.498
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-2-2-3",
+      "sample_id": "unseen-isi-grid-v1-2-2-3",
+      "label": "foil",
+      "presentation_index": 14,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 28.017,
+      "response_end": 30.007,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.16,
+        0.36
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-2-3-1",
+      "sample_id": "unseen-isi-grid-v1-2-3-1",
+      "label": "foil",
+      "presentation_index": 15,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 30.0175,
+      "response_end": 32.0075,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.24,
+        0.12
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-2-3-2",
+      "sample_id": "unseen-isi-grid-v1-2-3-2",
+      "label": "foil",
+      "presentation_index": 16,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 32.018,
+      "response_end": 34.008,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.24,
+        0.24
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-2-3-3",
+      "sample_id": "unseen-isi-grid-v1-2-3-3",
+      "label": "foil",
+      "presentation_index": 17,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 34.0185,
+      "response_end": 36.0085,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.24,
+        0.36
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-3-1-1",
+      "sample_id": "unseen-isi-grid-v1-3-1-1",
+      "label": "foil",
+      "presentation_index": 18,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 36.019,
+      "response_end": 38.009,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.08,
+        0.12
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-3-1-2",
+      "sample_id": "unseen-isi-grid-v1-3-1-2",
+      "label": "foil",
+      "presentation_index": 19,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 38.0195,
+      "response_end": 40.0095,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.08,
+        0.24
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-3-1-3",
+      "sample_id": "unseen-isi-grid-v1-3-1-3",
+      "label": "foil",
+      "presentation_index": 20,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 40.02,
+      "response_end": 42.01,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.08,
+        0.36
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-3-2-1",
+      "sample_id": "unseen-isi-grid-v1-3-2-1",
+      "label": "foil",
+      "presentation_index": 21,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 42.0205,
+      "response_end": 44.0105,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.16,
+        0.12
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-3-2-2",
+      "sample_id": "unseen-isi-grid-v1-3-2-2",
+      "label": "foil",
+      "presentation_index": 22,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 44.021,
+      "response_end": 46.011,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.16,
+        0.24
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-3-2-3",
+      "sample_id": "unseen-isi-grid-v1-3-2-3",
+      "label": "foil",
+      "presentation_index": 23,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 46.0215,
+      "response_end": 48.0115,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.16,
+        0.36
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-3-3-1",
+      "sample_id": "unseen-isi-grid-v1-3-3-1",
+      "label": "foil",
+      "presentation_index": 24,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 48.022,
+      "response_end": 50.012,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.24,
+        0.12
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-3-3-2",
+      "sample_id": "unseen-isi-grid-v1-3-3-2",
+      "label": "foil",
+      "presentation_index": 25,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 50.0225,
+      "response_end": 52.0125,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.24,
+        0.24
+      ]
+    },
+    {
+      "trial_id": "branch-measured-count-M4/frozen-new-foils/windows-s1/grid-3-3-3",
+      "sample_id": "unseen-isi-grid-v1-3-3-3",
+      "label": "foil",
+      "presentation_index": 26,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 52.023,
+      "response_end": 54.013,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN",
+      "pattern_isi": [
+        0.01,
+        0.12,
+        0.24,
+        0.36
+      ]
+    }
+  ],
+  "source_audit": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-frozen-new-foils-s1\\audit.json",
+    "sha256": "9a9f85bcdd101fd19467a651f4909ee6cd42c26ae1b19e452b0b15d4e93ce4c2",
+    "size": 15651
+  },
+  "source_execution": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\windows-measured-count-frozen-new-foils-s1\\native\\execution.json",
+    "sha256": "ae907700c2206e52778c6e8e70a1de5a4c99f3cc5b2db238bc00a740ff2f1886",
+    "size": 6742
+  },
+  "source_specification": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-frozen-new-foils-s1\\specification.json",
+    "sha256": "f4e8d24876fbfd967153dfdd82a2f53cf18da9c17f8c32adceecf3e116790dea",
+    "size": 7955
+  },
+  "source_original_data_control": "C:\\Projects\\TimeLearnerWorker\\controls\\windows-measured-count-recognition-physical-replay-q1",
+  "scientific_verdict": null
+}

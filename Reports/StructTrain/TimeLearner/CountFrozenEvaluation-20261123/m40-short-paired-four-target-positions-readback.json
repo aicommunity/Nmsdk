@@ -1,0 +1,868 @@
+{
+  "observed_utc": "2026-11-23T01:25:38.455880+00:00",
+  "job": "classic-count-short-cadence-orders-m40-q1",
+  "supervisor_live": true,
+  "state": {
+    "observed_utc": "2026-11-23T01:15:58.331379+00:00",
+    "case": "rotation-4-reset",
+    "stage": "running_native_paired_cadence_control",
+    "native_trials": 8,
+    "scientific_verdict": null
+  },
+  "completed_cases": [
+    {
+      "id": "rotation-0-reset",
+      "rotation": 0,
+      "target_position": 0,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "actual_timing_and_events": [
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-reset/rotation-0/position-0",
+          "sample_id": "phasea-row-0",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            0.01,
+            0.09,
+            0.25,
+            0.49
+          ],
+          "spike_times": [
+            0.4935
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": null
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-reset/rotation-0/position-1",
+          "sample_id": "phasea-row-1",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            0.7005,
+            0.9405,
+            1.1005,
+            1.1805
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-reset/rotation-0/position-2",
+          "sample_id": "phasea-row-2",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            1.391,
+            1.551,
+            1.631,
+            1.871
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-reset/rotation-0/position-3",
+          "sample_id": "phasea-row-3",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            2.0815,
+            2.2415,
+            2.4015,
+            2.5615
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-reset/rotation-0/position-4",
+          "sample_id": "phasea-row-4",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            2.772,
+            2.792,
+            3.012,
+            3.252
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-reset/rotation-0/position-5",
+          "sample_id": "phasea-row-5",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            3.4625,
+            3.7025,
+            3.9225,
+            3.9425
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-reset/rotation-0/position-6",
+          "sample_id": "phasea-row-6",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            4.153,
+            4.193,
+            4.233,
+            4.633
+          ],
+          "spike_times": [
+            4.635
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-reset/rotation-0/position-7",
+          "sample_id": "phasea-row-7",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            4.8435,
+            5.2435,
+            5.2835,
+            5.3235
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        }
+      ],
+      "native_process_closed": true,
+      "source_terminal": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-short-cadence-orders-m40-q1/rotation-0-reset/measurement/terminal.json",
+        "sha256": "702ef4abe561358af4c24ad72b88dbc8e43f96003186b29c2bb06b0da39b801e",
+        "size": 9374
+      },
+      "condition_fingerprint": "0092544b4995ac11ab7eb971b9e1eefc4090c6d730b4647dfe2c09b58c00d485"
+    },
+    {
+      "id": "rotation-0-preserve",
+      "rotation": 0,
+      "target_position": 0,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "actual_timing_and_events": [
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-preserve/rotation-0/position-0",
+          "sample_id": "phasea-row-0",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            0.01,
+            0.09,
+            0.25,
+            0.49
+          ],
+          "spike_times": [
+            0.4935
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": null
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-preserve/rotation-0/position-1",
+          "sample_id": "phasea-row-1",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            0.7005,
+            0.9405,
+            1.1005,
+            1.1805
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-preserve/rotation-0/position-2",
+          "sample_id": "phasea-row-2",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            1.391,
+            1.551,
+            1.631,
+            1.871
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-preserve/rotation-0/position-3",
+          "sample_id": "phasea-row-3",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            2.0815,
+            2.2415,
+            2.4015,
+            2.5615
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-preserve/rotation-0/position-4",
+          "sample_id": "phasea-row-4",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            2.772,
+            2.792,
+            3.012,
+            3.252
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-preserve/rotation-0/position-5",
+          "sample_id": "phasea-row-5",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            3.4625,
+            3.7025,
+            3.9225,
+            3.9425
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-preserve/rotation-0/position-6",
+          "sample_id": "phasea-row-6",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            4.153,
+            4.193,
+            4.233,
+            4.633
+          ],
+          "spike_times": [
+            4.635
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-0-preserve/rotation-0/position-7",
+          "sample_id": "phasea-row-7",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            4.8435,
+            5.2435,
+            5.2835,
+            5.3235
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        }
+      ],
+      "native_process_closed": true,
+      "source_terminal": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-short-cadence-orders-m40-q1/rotation-0-preserve/measurement/terminal.json",
+        "sha256": "22d90a75cb416e1d0c5f14808fb5b80053898d0524c6aebd5f1b2d3a43dc390b",
+        "size": 9557
+      },
+      "condition_fingerprint": "72228426727f26ba02a7cdb9b6cb4e7576000bcb27cbfe078168f735540f1e13"
+    },
+    {
+      "id": "rotation-2-reset",
+      "rotation": 2,
+      "target_position": 6,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "actual_timing_and_events": [
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-reset/rotation-2/position-0",
+          "sample_id": "phasea-row-2",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            0.01,
+            0.17,
+            0.25,
+            0.49
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": null
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-reset/rotation-2/position-1",
+          "sample_id": "phasea-row-3",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            0.7005,
+            0.8605,
+            1.0205,
+            1.1805
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-reset/rotation-2/position-2",
+          "sample_id": "phasea-row-4",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            1.391,
+            1.411,
+            1.631,
+            1.871
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-reset/rotation-2/position-3",
+          "sample_id": "phasea-row-5",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            2.0815,
+            2.3215,
+            2.5415,
+            2.5615
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-reset/rotation-2/position-4",
+          "sample_id": "phasea-row-6",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            2.772,
+            2.812,
+            2.852,
+            3.252
+          ],
+          "spike_times": [
+            3.254
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-reset/rotation-2/position-5",
+          "sample_id": "phasea-row-7",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            3.4625,
+            3.8625,
+            3.9025,
+            3.9425
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-reset/rotation-2/position-6",
+          "sample_id": "phasea-row-0",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            4.153,
+            4.233,
+            4.393,
+            4.633
+          ],
+          "spike_times": [
+            4.6365
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-reset/rotation-2/position-7",
+          "sample_id": "phasea-row-1",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            4.8435,
+            5.0835,
+            5.2435,
+            5.3235
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        }
+      ],
+      "native_process_closed": true,
+      "source_terminal": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-short-cadence-orders-m40-q1/rotation-2-reset/measurement/terminal.json",
+        "sha256": "8de6f8c01e0cca12ef337dd6526133db527472507ed7d4df276785cf18e47ab4",
+        "size": 9374
+      },
+      "condition_fingerprint": "b829a95b1bdbe57eae29e94f22a2e637b58a9a130ef994b9c4fb178829a401d4"
+    },
+    {
+      "id": "rotation-2-preserve",
+      "rotation": 2,
+      "target_position": 6,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "actual_timing_and_events": [
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-preserve/rotation-2/position-0",
+          "sample_id": "phasea-row-2",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            0.01,
+            0.17,
+            0.25,
+            0.49
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": null
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-preserve/rotation-2/position-1",
+          "sample_id": "phasea-row-3",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            0.7005,
+            0.8605,
+            1.0205,
+            1.1805
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-preserve/rotation-2/position-2",
+          "sample_id": "phasea-row-4",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            1.391,
+            1.411,
+            1.631,
+            1.871
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-preserve/rotation-2/position-3",
+          "sample_id": "phasea-row-5",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            2.0815,
+            2.3215,
+            2.5415,
+            2.5615
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-preserve/rotation-2/position-4",
+          "sample_id": "phasea-row-6",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            2.772,
+            2.812,
+            2.852,
+            3.252
+          ],
+          "spike_times": [
+            3.254
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-preserve/rotation-2/position-5",
+          "sample_id": "phasea-row-7",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            3.4625,
+            3.8625,
+            3.9025,
+            3.9425
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-preserve/rotation-2/position-6",
+          "sample_id": "phasea-row-0",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            4.153,
+            4.233,
+            4.393,
+            4.633
+          ],
+          "spike_times": [
+            4.396,
+            4.6365
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-2-preserve/rotation-2/position-7",
+          "sample_id": "phasea-row-1",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            4.8435,
+            5.0835,
+            5.2435,
+            5.3235
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        }
+      ],
+      "native_process_closed": true,
+      "source_terminal": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-short-cadence-orders-m40-q1/rotation-2-preserve/measurement/terminal.json",
+        "sha256": "31c5fe95b49ddc7c1e87a2baeef2255cb23f4beb35c9bedf0c5e6f07a84826e1",
+        "size": 9587
+      },
+      "condition_fingerprint": "52bbcc4856ae9ac0609e50f272a699261f226db88c55106870f21006f8c83455"
+    },
+    {
+      "id": "rotation-3-reset",
+      "rotation": 3,
+      "target_position": 5,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "actual_timing_and_events": [
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-reset/rotation-3/position-0",
+          "sample_id": "phasea-row-3",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            0.01,
+            0.17,
+            0.33,
+            0.49
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": null
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-reset/rotation-3/position-1",
+          "sample_id": "phasea-row-4",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            0.7005,
+            0.7205,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-reset/rotation-3/position-2",
+          "sample_id": "phasea-row-5",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            1.391,
+            1.631,
+            1.851,
+            1.871
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-reset/rotation-3/position-3",
+          "sample_id": "phasea-row-6",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            2.0815,
+            2.1215,
+            2.1615,
+            2.5615
+          ],
+          "spike_times": [
+            2.5635
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-reset/rotation-3/position-4",
+          "sample_id": "phasea-row-7",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            2.772,
+            3.172,
+            3.212,
+            3.252
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-reset/rotation-3/position-5",
+          "sample_id": "phasea-row-0",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            3.4625,
+            3.5425,
+            3.7025,
+            3.9425
+          ],
+          "spike_times": [
+            3.946
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-reset/rotation-3/position-6",
+          "sample_id": "phasea-row-1",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            4.153,
+            4.393,
+            4.553,
+            4.633
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-reset/rotation-3/position-7",
+          "sample_id": "phasea-row-2",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            4.8435,
+            5.0035,
+            5.0835,
+            5.3235
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        }
+      ],
+      "native_process_closed": true,
+      "source_terminal": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-short-cadence-orders-m40-q1/rotation-3-reset/measurement/terminal.json",
+        "sha256": "4df6edbfb92a06ecffd8fbc46dd1dde8d577ab004e6062f91fc826a809d1f571",
+        "size": 9374
+      },
+      "condition_fingerprint": "7b048244713bbb9d72f1d67f6e2df28ab60a173044949819a8c2450fba60c51c"
+    },
+    {
+      "id": "rotation-3-preserve",
+      "rotation": 3,
+      "target_position": 5,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "actual_timing_and_events": [
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-preserve/rotation-3/position-0",
+          "sample_id": "phasea-row-3",
+          "reset_policy": "reset_per_trial",
+          "stimulus_times": [
+            0.01,
+            0.17,
+            0.33,
+            0.49
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": null
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-preserve/rotation-3/position-1",
+          "sample_id": "phasea-row-4",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            0.7005,
+            0.7205,
+            0.9405,
+            1.1805
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-preserve/rotation-3/position-2",
+          "sample_id": "phasea-row-5",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            1.391,
+            1.631,
+            1.851,
+            1.871
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-preserve/rotation-3/position-3",
+          "sample_id": "phasea-row-6",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            2.0815,
+            2.1215,
+            2.1615,
+            2.5615
+          ],
+          "spike_times": [
+            2.5635
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-preserve/rotation-3/position-4",
+          "sample_id": "phasea-row-7",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            2.772,
+            3.172,
+            3.212,
+            3.252
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-preserve/rotation-3/position-5",
+          "sample_id": "phasea-row-0",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            3.4625,
+            3.5425,
+            3.7025,
+            3.9425
+          ],
+          "spike_times": [
+            3.7055,
+            3.946
+          ],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-preserve/rotation-3/position-6",
+          "sample_id": "phasea-row-1",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            4.153,
+            4.393,
+            4.553,
+            4.633
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6904999999999997
+        },
+        {
+          "trial_id": "classic-count-short-cadence-orders-m40-q1/rotation-3-preserve/rotation-3/position-7",
+          "sample_id": "phasea-row-2",
+          "reset_policy": "preserve_neuron_dynamics",
+          "stimulus_times": [
+            4.8435,
+            5.0035,
+            5.0835,
+            5.3235
+          ],
+          "spike_times": [],
+          "events_before_current_first_input": [],
+          "first_input_interval_from_previous": 0.6905000000000001
+        }
+      ],
+      "native_process_closed": true,
+      "source_terminal": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count-short-cadence-orders-m40-q1/rotation-3-preserve/measurement/terminal.json",
+        "sha256": "1a5dbddebf28d81dd1e90b916124965bd2607fcfa518046551b5e000db13d662",
+        "size": 9589
+      },
+      "condition_fingerprint": "9ef2d70ad368070581ab844250ddea1705080cac0181048bbf8e0f9bfbd6a79c"
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "job": "windows-predecessor-preparation-validation-e1",
+  "terminal.json": {
+    "passed": true,
+    "process": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "reason": "exit_zero",
+      "returncode": 0,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "descendants_at_main_exit": [],
+      "all_processes_closed": true,
+      "cooperative_capture": "not_requested",
+      "runtime_provenance": "loaded_files_captured",
+      "observed_module_files": 36,
+      "wall_seconds": 169.6129268000368,
+      "child_resumed": true,
+      "job_name": "Local\\TimeLearner-767dc971-3b0f-40fe-9592-3c42d7ad5d8f"
+    },
+    "validation": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "windows-predecessor-preparation-validation-e1",
+      "package_fingerprint": "75d2f15d0227a4b1c56d38cb618edb25734386b96414d26cdadd3991a580e290",
+      "execution": "completed",
+      "assertion_status": "passed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_cadence_uses_shared_tick_grid_and_distinct_reset_factor",
+        "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_condition_identity_survives_new_attempt_ids",
+        "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_new_foils_keep_model_threshold_and_only_repeat_original_target",
+        "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_rebound_trial_job_cannot_replace_predeclared_matrix",
+        "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_rejects_corrupt_observation_even_if_old_terminal_claims_success",
+        "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_rejects_unverified_source_before_creating_inputs",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_all_target_positions_have_complete_patterns_and_explicit_first_reset",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_attempt_and_binary_path_do_not_change_condition_but_real_factors_do",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_coverage_and_reset_are_separate_axes_with_explicit_new_preflight",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_invalid_rotation_labels_and_tick_grid_are_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_real_matrix_float_sum_cannot_add_a_native_tick",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_reset_and_preserve_controls_share_the_same_timing_and_last_tail",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_all_seven_predecessors_and_both_reset_policies_keep_the_model_frozen",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_attempt_and_binary_location_do_not_change_the_scientific_condition",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_native_grid_full_coverage_and_final_quiet_tail_are_declared",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_only_the_second_reset_policy_changes_in_each_paired_control",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_target_timing_is_identical_for_different_predecessors",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_unknown_predecessor_target_alias_and_invalid_cadence_are_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_unused_foil_change_does_not_change_this_case_when_the_cadence_is_unchanged",
+        "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_windows_production_dispatch_reuses_the_same_declaration_and_identity"
+      ],
+      "executed_tests": 20,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {
+        "TIMELEARNER_ACTUAL_PHYSICAL_STUDY": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\fixtures\\predecessor-preparation-e1",
+          "files": 3,
+          "fingerprint": "75f9e138ca07ea95bd55851bfd9fbda2af64330bea34093ffd7f59f2b53f7030"
+        },
+        "TIMELEARNER_ITI_SOURCE": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\fixtures\\predecessor-preparation-e1",
+          "files": 3,
+          "fingerprint": "75f9e138ca07ea95bd55851bfd9fbda2af64330bea34093ffd7f59f2b53f7030"
+        },
+        "TIMELEARNER_PREDECESSOR_SOURCE": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\fixtures\\predecessor-preparation-e1",
+          "files": 3,
+          "fingerprint": "75f9e138ca07ea95bd55851bfd9fbda2af64330bea34093ffd7f59f2b53f7030"
+        }
+      },
+      "scientific_verdict": null
+    },
+    "source_root": "efa727302fe9c28292925a64dc0fb471acd25dec",
+    "native_model_executed": false,
+    "concurrent_training_not_restarted": true,
+    "scientific_verdict": null
+  },
+  "process-result.json": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "not_requested",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 36,
+    "wall_seconds": 169.6129268000368,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-767dc971-3b0f-40fe-9592-3c42d7ad5d8f"
+  },
+  "process/owned-process.json": {
+    "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+    "creation_filetime": "134398693042712700",
+    "pid": 5768,
+    "job_name": "Local\\TimeLearner-767dc971-3b0f-40fe-9592-3c42d7ad5d8f",
+    "runtime_fingerprint": "efc8c4e66006c7144437b91ee42007563ed73892ed6cadebd419c54fbdad3205",
+    "suspended_until_limits_applied": true
+  },
+  "process/result.json": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [],
+    "all_processes_closed": true,
+    "cooperative_capture": "not_requested",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 36,
+    "wall_seconds": 169.6129268000368,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-767dc971-3b0f-40fe-9592-3c42d7ad5d8f"
+  },
+  "validation": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "windows-predecessor-preparation-validation-e1",
+    "package_fingerprint": "75d2f15d0227a4b1c56d38cb618edb25734386b96414d26cdadd3991a580e290",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_cadence_uses_shared_tick_grid_and_distinct_reset_factor",
+      "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_condition_identity_survives_new_attempt_ids",
+      "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_new_foils_keep_model_threshold_and_only_repeat_original_target",
+      "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_rebound_trial_job_cannot_replace_predeclared_matrix",
+      "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_rejects_corrupt_observation_even_if_old_terminal_claims_success",
+      "Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_rejects_unverified_source_before_creating_inputs",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_all_target_positions_have_complete_patterns_and_explicit_first_reset",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_attempt_and_binary_path_do_not_change_condition_but_real_factors_do",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_coverage_and_reset_are_separate_axes_with_explicit_new_preflight",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_invalid_rotation_labels_and_tick_grid_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_real_matrix_float_sum_cannot_add_a_native_tick",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_reset_and_preserve_controls_share_the_same_timing_and_last_tail",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_all_seven_predecessors_and_both_reset_policies_keep_the_model_frozen",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_attempt_and_binary_location_do_not_change_the_scientific_condition",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_native_grid_full_coverage_and_final_quiet_tail_are_declared",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_only_the_second_reset_policy_changes_in_each_paired_control",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_target_timing_is_identical_for_different_predecessors",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_unknown_predecessor_target_alias_and_invalid_cadence_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_unused_foil_change_does_not_change_this_case_when_the_cadence_is_unchanged",
+      "Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_windows_production_dispatch_reuses_the_same_declaration_and_identity"
+    ],
+    "executed_tests": 20,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_ACTUAL_PHYSICAL_STUDY": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\fixtures\\predecessor-preparation-e1",
+        "files": 3,
+        "fingerprint": "75f9e138ca07ea95bd55851bfd9fbda2af64330bea34093ffd7f59f2b53f7030"
+      },
+      "TIMELEARNER_ITI_SOURCE": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\fixtures\\predecessor-preparation-e1",
+        "files": 3,
+        "fingerprint": "75f9e138ca07ea95bd55851bfd9fbda2af64330bea34093ffd7f59f2b53f7030"
+      },
+      "TIMELEARNER_PREDECESSOR_SOURCE": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\fixtures\\predecessor-preparation-e1",
+        "files": 3,
+        "fingerprint": "75f9e138ca07ea95bd55851bfd9fbda2af64330bea34093ffd7f59f2b53f7030"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "test_log_tail": "test_cadence_uses_shared_tick_grid_and_distinct_reset_factor (Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_cadence_uses_shared_tick_grid_and_distinct_reset_factor) ... ok\r\ntest_condition_identity_survives_new_attempt_ids (Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_condition_identity_survives_new_attempt_ids) ... ok\r\ntest_new_foils_keep_model_threshold_and_only_repeat_original_target (Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_new_foils_keep_model_threshold_and_only_repeat_original_target) ... ok\r\ntest_rebound_trial_job_cannot_replace_predeclared_matrix (Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_rebound_trial_job_cannot_replace_predeclared_matrix) ... ok\r\ntest_rejects_corrupt_observation_even_if_old_terminal_claims_success (Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_rejects_corrupt_observation_even_if_old_terminal_claims_success) ... ok\r\ntest_rejects_unverified_source_before_creating_inputs (Scripts.StructTrain.TimeLearner.tests.test_actual_physical_study.ActualPhysicalStudyTest.test_rejects_unverified_source_before_creating_inputs) ... ok\r\ntest_all_target_positions_have_complete_patterns_and_explicit_first_reset (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_all_target_positions_have_complete_patterns_and_explicit_first_reset) ... ok\r\ntest_attempt_and_binary_path_do_not_change_condition_but_real_factors_do (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_attempt_and_binary_path_do_not_change_condition_but_real_factors_do) ... ok\r\ntest_coverage_and_reset_are_separate_axes_with_explicit_new_preflight (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_coverage_and_reset_are_separate_axes_with_explicit_new_preflight) ... ok\r\ntest_invalid_rotation_labels_and_tick_grid_are_rejected (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_invalid_rotation_labels_and_tick_grid_are_rejected) ... ok\r\ntest_real_matrix_float_sum_cannot_add_a_native_tick (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_real_matrix_float_sum_cannot_add_a_native_tick) ... ok\r\ntest_reset_and_preserve_controls_share_the_same_timing_and_last_tail (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design.FrozenPhysicalItiDesignTest.test_reset_and_preserve_controls_share_the_same_timing_and_last_tail) ... ok\r\ntest_all_seven_predecessors_and_both_reset_policies_keep_the_model_frozen (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_all_seven_predecessors_and_both_reset_policies_keep_the_model_frozen) ... ok\r\ntest_attempt_and_binary_location_do_not_change_the_scientific_condition (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_attempt_and_binary_location_do_not_change_the_scientific_condition) ... ok\r\ntest_native_grid_full_coverage_and_final_quiet_tail_are_declared (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_native_grid_full_coverage_and_final_quiet_tail_are_declared) ... ok\r\ntest_only_the_second_reset_policy_changes_in_each_paired_control (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_only_the_second_reset_policy_changes_in_each_paired_control) ... ok\r\ntest_target_timing_is_identical_for_different_predecessors (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_target_timing_is_identical_for_different_predecessors) ... ok\r\ntest_unknown_predecessor_target_alias_and_invalid_cadence_are_rejected (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_unknown_predecessor_target_alias_and_invalid_cadence_are_rejected) ... ok\r\ntest_unused_foil_change_does_not_change_this_case_when_the_cadence_is_unchanged (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_unused_foil_change_does_not_change_this_case_when_the_cadence_is_unchanged) ... ok\r\ntest_windows_production_dispatch_reuses_the_same_declaration_and_identity (Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_predecessor_design.FrozenPhysicalPredecessorDesignTest.test_windows_production_dispatch_reuses_the_same_declaration_and_identity) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 20 tests in 167.002s\r\n\r\nOK\r\n"
+}

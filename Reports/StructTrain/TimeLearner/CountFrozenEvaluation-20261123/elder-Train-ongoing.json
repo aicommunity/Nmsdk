@@ -1,6 +1,21 @@
 {
-  "observed_utc": "2026-11-22T23:53:34.142982+00:00",
+  "observed_utc": "2026-11-23T01:25:38.715138+00:00",
   "job": "classic-measured-count-m4-elder-k1",
+  "launch-context.json": {
+    "request_sha256": "e4133e612efc94cd4ebd7c6d16d5e2164c3d942034bf128cc60e8b97863a0733",
+    "tool_commit": "83f1369fd50ace51f834e40b7f2bd8bd2fd76e2e",
+    "original_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+    "job_sha256": "62ed2197480f90219ea12b35727977095361e81c5806e143c5777da9f538f4db",
+    "factor_job_sha256": "cc6120d921fac7b171c7661014f10e460cf06bfec1dd98e48747f75278d3d690",
+    "operation": "train",
+    "scientific_verdict": null
+  },
+  "supervisor-identity.json": {
+    "pid": 2609066,
+    "start_ticks": "494671983",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000
+  },
   "supervisor_live": true,
   "outer": {
     "execution": "running",
@@ -76,44 +91,56 @@
     "tasks_max": 64,
     "scientific_verdict": null
   },
+  "preflight-accepted.json": {
+    "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+    "same_actual_cold_graph_as_resistance_control": true,
+    "job_sha256": "62ed2197480f90219ea12b35727977095361e81c5806e143c5777da9f538f4db",
+    "factor_model_revision": "e23cda6cb58312d2e51a92df035baf9fb8629efc42aecbad4da1e39a47d7864e",
+    "factor_synapses": 2,
+    "initial_nodes": 44,
+    "factor_nodes": 45,
+    "training_started": false,
+    "scientific_verdict": null
+  },
   "native_primary_file_counts": {
-    "raw-trial-*.json": 372,
+    "raw-trial-*.json": 403,
     "probe_trial_*.json": 0,
     "train_stopped_trial_*.json": 0,
     "composite*.json": 0
   },
+  "native_file_count": 809,
   "native_recent_files": [
     {
-      "name": "raw-trial-369.csv",
-      "bytes": 383291
-    },
-    {
-      "name": "raw-trial-370.csv",
-      "bytes": 383522
-    },
-    {
-      "name": "raw-trial-370.json",
+      "name": "raw-trial-400.json",
       "bytes": 5107
     },
     {
-      "name": "raw-trial-371.csv",
-      "bytes": 383674
+      "name": "raw-trial-401.csv",
+      "bytes": 382970
     },
     {
-      "name": "raw-trial-371.json",
+      "name": "raw-trial-401.json",
       "bytes": 5089
     },
     {
-      "name": "raw-trial-372.csv",
-      "bytes": 382711
+      "name": "raw-trial-402.csv",
+      "bytes": 381689
     },
     {
-      "name": "raw-trial-372.json",
-      "bytes": 5333
+      "name": "raw-trial-402.json",
+      "bytes": 5339
     },
     {
-      "name": "raw-trial-373.csv",
-      "bytes": 310192
+      "name": "raw-trial-403.csv",
+      "bytes": 381683
+    },
+    {
+      "name": "raw-trial-403.json",
+      "bytes": 5321
+    },
+    {
+      "name": "raw-trial-404.csv",
+      "bytes": 48995
     }
   ],
   "reserved": {
