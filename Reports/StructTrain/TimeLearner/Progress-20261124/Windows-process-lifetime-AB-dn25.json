@@ -1,0 +1,83 @@
+{
+  "kind": "timelearner_Windows_process_lifetime_AB_external_evidence",
+  "schema_version": 1,
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Windows-process-lifetime-AB-dn25.json",
+  "catalog_record": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Windows-process-lifetime-AB-dn25.json",
+    "sha256": "6556af7527cd12280f6e9dc7ec2455af5a30a680944bfeb54ef9ae6f226f9579",
+    "size": 5530
+  },
+  "objects": {
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a8/a81a5992f44b5fb36822878de460c0f1e53be7df820bd8a19d1b186101ef1a08",
+      "sha256": "a81a5992f44b5fb36822878de460c0f1e53be7df820bd8a19d1b186101ef1a08",
+      "bytes": 26800
+    },
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/47/47d1f4d7099307a04d95f47dfd7f6b5577ec554ef7eb9cae9c61fe6cfe714e8b",
+      "sha256": "47d1f4d7099307a04d95f47dfd7f6b5577ec554ef7eb9cae9c61fe6cfe714e8b",
+      "bytes": 5837
+    },
+    "terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/12/12d22289d9fba7c6cd9ca5dd47250926610753e2bd03c370d5b04434092ca2b5",
+      "sha256": "12d22289d9fba7c6cd9ca5dd47250926610753e2bd03c370d5b04434092ca2b5",
+      "bytes": 1027
+    },
+    "initial-preparation-error.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/91/91088a0f94ca437c5c09cf146a5ae46b3d5db828e6574a228cbdf066ce4489eb",
+      "sha256": "91088a0f94ca437c5c09cf146a5ae46b3d5db828e6574a228cbdf066ce4489eb",
+      "bytes": 683
+    }
+  },
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "a81a5992f44b5fb36822878de460c0f1e53be7df820bd8a19d1b186101ef1a08",
+    "archive_members_verified": 36,
+    "retained_regular_files": 36,
+    "compatibility": null,
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "source_root": "52cb5019f2e9b5ef3e0333e6fd70f530d2fa69fd",
+  "checks": {
+    "before": {
+      "checks": {
+        "testsRun": 5,
+        "failures": 0,
+        "errors": 2,
+        "skipped": 0,
+        "successful": false
+      },
+      "all_processes_closed": true
+    },
+    "after": {
+      "checks": {
+        "testsRun": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "successful": true
+      },
+      "all_processes_closed": true
+    }
+  },
+  "original_errors_preserved": true,
+  "full_stage10_accepted": false,
+  "native_neuron_execution": false,
+  "scientific_verdict": null
+}
