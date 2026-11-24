@@ -1,0 +1,109 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/N0-length-production-controls-ax15.json",
+  "record": {
+    "kind": "timelearner_N0_length_production_controls_archive",
+    "schema_version": 1,
+    "objects": {
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/7d/7db7880c18f51249e1538c62625b8e458bc36e487f156587fed11903d0925d7a",
+        "sha256": "7db7880c18f51249e1538c62625b8e458bc36e487f156587fed11903d0925d7a",
+        "bytes": 810024
+      },
+      "bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/46/46c329763792bdfb95397505e673bf10a22ca6f07843c8b7858bfacf3a36343d",
+        "sha256": "46c329763792bdfb95397505e673bf10a22ca6f07843c8b7858bfacf3a36343d",
+        "bytes": 6085
+      }
+    },
+    "members": 37,
+    "expanded_bytes": 3312545,
+    "archive_bytes": 810024,
+    "independent_restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "7db7880c18f51249e1538c62625b8e458bc36e487f156587fed11903d0925d7a",
+      "archive_members_verified": 37,
+      "retained_regular_files": 37,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "result": {
+      "kind": "timelearner_N0_measured_length_neighborhood_production_controls",
+      "schema_version": 1,
+      "root": "49c4f08cc4cbc4675ce3e6dba160b931ab18d556",
+      "PulseLib": "f52713ce3d807c9a0abd8655caff82daba400519",
+      "inventory": {
+        "expected": 155,
+        "observed": 155,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "4253d3636302c3534bc73f61753d1f6642aca23344a1c4d3d1e5ef2456d923b1"
+      },
+      "process": {
+        "kind": "timelearner_process_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "wall_seconds": 0.32385978661477566,
+        "model_time": null,
+        "runtime_provenance": "loaded_files_captured",
+        "mapping_error": null,
+        "runtime_fingerprint": "b216565a5be01d8962af76d69c3f48427488c87b04a609f06e881eb8dde2f3d2",
+        "ownership_scope": "launched_executable_only",
+        "scientific_verdict": null,
+        "operational_diagnostics": {
+          "kind": "timelearner_operational_diagnostics",
+          "schema_version": 1,
+          "policy": "owned-streams-v1",
+          "status": "clear",
+          "error_records": 0,
+          "warning_records": 0,
+          "unclassified_stderr_chunks": 0,
+          "reasons": [],
+          "examples": [],
+          "streams": [
+            {
+              "path": "stdout.log",
+              "bytes": 32183,
+              "sha256": "dbe1924e49f03ff565cd28c01936fb39205d6dc7bb5852ca05e2a66985db2025"
+            },
+            {
+              "path": "stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "contained_streams_match": null,
+          "scientific_verdict": null
+        }
+      },
+      "Python_modules": [
+        "test_n0_length_policy",
+        "test_candidate_window_runtime2",
+        "test_candidate_window_runtime3"
+      ],
+      "Python_returncode": 0,
+      "source_unchanged": true,
+      "executable_unchanged": true,
+      "original_compile_and_failed_inventory_preserved": true,
+      "physical_models_executed": false,
+      "scientific_admission": false,
+      "scientific_verdict": null
+    },
+    "actual_Python_tests": 33,
+    "original_inventory_mismatch_preserved": true,
+    "physical_models_executed": false,
+    "scientific_admission": false,
+    "scientific_verdict": null
+  }
+}

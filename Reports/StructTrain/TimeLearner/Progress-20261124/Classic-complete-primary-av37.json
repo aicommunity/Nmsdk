@@ -1,0 +1,204 @@
+{
+  "kind": "timelearner_complete_actual_Classic_proposal_recognition_primary",
+  "schema_version": 1,
+  "objects": {
+    "primary": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/f6/f61d5c2239d1863520376cd5769bbd855fe690721af64795174f27dc0355ca7b",
+      "sha256": "f61d5c2239d1863520376cd5769bbd855fe690721af64795174f27dc0355ca7b",
+      "bytes": 135954516
+    },
+    "bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/24/249dbda5cbe914d648046ccf3e948710fcb6b7433f3ae1894604f0ac35efbf59",
+      "sha256": "249dbda5cbe914d648046ccf3e948710fcb6b7433f3ae1894604f0ac35efbf59",
+      "bytes": 772013
+    }
+  },
+  "members": 4296,
+  "expanded_bytes": 13154995530,
+  "archive_bytes": 135954516,
+  "independent_byte_restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "f61d5c2239d1863520376cd5769bbd855fe690721af64795174f27dc0355ca7b",
+    "archive_members_verified": 4296,
+    "retained_regular_files": 4296,
+    "compatibility": "retain-regular-glog-aliases-v1",
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "baseline_counts": {
+    "TP": 0,
+    "FP": 0,
+    "FN": 1,
+    "TN": 7,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 0.0,
+    "foil_response_rate": 0.0
+  },
+  "actual_threshold_counts": {
+    "TP": 1,
+    "FP": 2,
+    "FN": 0,
+    "TN": 5,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.75,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.2857142857142857
+  },
+  "threshold": 0.02342413248481376,
+  "model_revision": "169d0090482014456785a7c3f4a6927a29527e4c225306a4c628b6335cc4faa9",
+  "trials": [
+    {
+      "trial_id": "classic-proposal-stopped-recognition-m40-at15/baseline/trial-0",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "presentation_index": 0,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 0.01,
+      "response_end": 2.0,
+      "spike_count": 1,
+      "window_spikes": [
+        0.492
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TP"
+    },
+    {
+      "trial_id": "classic-proposal-stopped-recognition-m40-at15/baseline/trial-1",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "presentation_index": 1,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 2.0105,
+      "response_end": 4.000500000000001,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    },
+    {
+      "trial_id": "classic-proposal-stopped-recognition-m40-at15/baseline/trial-2",
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "presentation_index": 2,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 4.011,
+      "response_end": 6.001,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    },
+    {
+      "trial_id": "classic-proposal-stopped-recognition-m40-at15/baseline/trial-3",
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "presentation_index": 3,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 6.0115,
+      "response_end": 8.0015,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    },
+    {
+      "trial_id": "classic-proposal-stopped-recognition-m40-at15/baseline/trial-4",
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "presentation_index": 4,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 8.012,
+      "response_end": 10.002,
+      "spike_count": 1,
+      "window_spikes": [
+        8.494
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FP"
+    },
+    {
+      "trial_id": "classic-proposal-stopped-recognition-m40-at15/baseline/trial-5",
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "presentation_index": 5,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 10.0125,
+      "response_end": 12.0025,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    },
+    {
+      "trial_id": "classic-proposal-stopped-recognition-m40-at15/baseline/trial-6",
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "presentation_index": 6,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 12.013,
+      "response_end": 14.003,
+      "spike_count": 1,
+      "window_spikes": [
+        12.494
+      ],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FP"
+    },
+    {
+      "trial_id": "classic-proposal-stopped-recognition-m40-at15/baseline/trial-7",
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "presentation_index": 7,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 14.0135,
+      "response_end": 16.003500000000003,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    }
+  ],
+  "protocol": "historical_same_matrix",
+  "complete_source_history_audited": true,
+  "training_completed": false,
+  "original_Train_outcome": "budget_exhausted",
+  "original_Train_not_restarted": true,
+  "source_package_and_native_SDK_unchanged": true,
+  "scientific_verdict": null,
+  "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-24/Classic-proposal-stopped-recognition-av37",
+  "viewer": "/media/user/Data/Nmsdk-StructTrainExpArchive/report-cache/2026-11-24/Classic-proposal-stopped-recognition-av37/figures/index.html",
+  "figures": 8,
+  "PNG": 16,
+  "visual_review_complete": false,
+  "figure_manifest": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/68/687607182aaae72bbc564deb8c9394d0736ce819a624d609f845cbd0b3da2d30",
+    "sha256": "687607182aaae72bbc564deb8c9394d0736ce819a624d609f845cbd0b3da2d30",
+    "bytes": 21770
+  },
+  "observed_utc": "2026-11-23T23:53:10.570965+00:00"
+}
