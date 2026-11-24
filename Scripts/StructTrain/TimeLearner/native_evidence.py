@@ -338,6 +338,10 @@ def validate_configured_repeat_policy(configuration: dict[str, Any], summary: di
     search, measured = configuration["search"], summary["configuration"]
     from .n0_length_policy import bind_n0_length_policy
     bind_n0_length_policy(dict(search, normalization=configuration['model']['normalization']), measured)
+    from .input_traversal import bind_input_traversal
+    bind_input_traversal(search, measured, branch=configuration['model']['branch'],
+        normalization=configuration['model']['normalization'],
+        capacitance_search=configuration.get('capacitance_search'))
     if schema == 4:
         from .capacitance_policy import audit_capacitance_search_policy
         policy = configuration.get('capacitance_search')
@@ -496,6 +500,10 @@ def _audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str
     require(configuration["normalization"] in {"synapse_count", "tip_resistance"}, "unknown_normalization")
     from .n0_length_policy import audit_n0_length_policy
     audit_n0_length_policy(configuration)
+    from .input_traversal import FIELD as INPUT_TRAVERSAL_FIELD, audit_input_traversal
+    if INPUT_TRAVERSAL_FIELD in configuration:
+        routes={packets[ref['trial_id']]['prepared']['routing'] for ref in refs}
+        audit_input_traversal(configuration,branch=routes!={'classic_burst'})
 
     def parameters_legal(parameters: dict[str, Any], index: int) -> None:
         bound = bounds[index]

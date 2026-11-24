@@ -135,6 +135,14 @@ def project_composite_configuration(configuration):
 
 def project_training_configuration(configuration):
     """Select the explicit envelope without changing legacy1–5 validation."""
+    if type(configuration) is dict and type(configuration.get('search')) is dict and 'input_traversal' in configuration['search']:
+        from .input_traversal import audit_input_traversal
+        model=configuration.get('model')
+        require(type(model) is dict and type(model.get('branch')) is bool and
+                model.get('normalization') in ('N0','N1'),'input_traversal_requires_model_context')
+        audit_input_traversal(configuration['search'],branch=model['branch'],
+            normalization=model['normalization'],
+            capacitance_search=configuration.get('capacitance_search'))
     if type(configuration) is dict and configuration.get('schema_version')==9:
         from .terminal_configuration import split_terminal_configuration
         base,_=split_terminal_configuration(configuration)

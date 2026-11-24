@@ -49,7 +49,7 @@ class ClassicInputRoundRobinCppTest(unittest.TestCase):
             '--parallel', '2'], output/'build.log', 600)
         executable = build/'runtime/Test_PulseLib_ClassicInputRoundRobin'
         expected = spec['expected_case_ids'];ids = _discover(executable, output/'discovery.log')
-        require(type(expected) is list and len(expected) == len(set(expected)) == 14 and
+        require(type(expected) is list and len(expected) == len(set(expected)) == 18 and
             set(ids) == set(expected) and len(ids) == len(expected), 'round_robin_cpp_case_inventory')
         runtime = dict(schema_version=2,
             source_closure={'root': {'head': declared['root_commit'], 'status': ''},

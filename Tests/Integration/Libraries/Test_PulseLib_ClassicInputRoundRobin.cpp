@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "Test_PulseLib_BoundedFixture.h"
 #include "TimeLearner/TrainingCapacitance.h"
+#include "TimeLearner/InputTraversalJson.h"
 #include <algorithm>
 #include <map>
 #include <set>
@@ -220,14 +221,86 @@ TEST(ClassicInputRoundRobin, ExternalStopCannotPromoteEarlierInputMeasurements)
     EXPECT_EQ(session.Status(),TrainingStatus::ExternalStop);EXPECT_FALSE(session.NextAction());EXPECT_FALSE(session.Certificate());
 }
 
-TEST(ClassicInputRoundRobin, UnboundNativeCodecCannotSilentlyLoseTheOptInPolicy)
+TEST(ClassicInputRoundRobin, NativeTraversalGuardRejectsUnknownOrUnusedChoices)
 {
     auto config=RoundRobin();
+    EXPECT_NO_THROW(ValidateNativeInputTraversalConfiguration(config));
+    config.candidatesPerInputVisit=3;
     EXPECT_THROW(ValidateNativeInputTraversalConfiguration(config),std::invalid_argument);
+    config.candidatesPerInputVisit=1;
     config.inputTraversal=InputTraversalPolicy::Sequential;
     EXPECT_NO_THROW(ValidateNativeInputTraversalConfiguration(config));
     config.maximumTraversalSeedElements=42;
     EXPECT_THROW(ValidateNativeInputTraversalConfiguration(config),std::invalid_argument);
+}
+
+TEST(ClassicInputRoundRobin, ThreeFreshLengthPointsPerVisitCanProposeBeforeAnotherBackgroundEdit)
+{
+    for(const std::size_t quantum:{1u,3u})
+    {
+        const auto protocol=Protocol(3);auto config=RoundRobin(3);
+        config.maximumCandidatesPerInput=4;config.candidatesPerInputVisit=quantum;
+        config.tolerances.sync=.006;config.bounds.assign(3,{1,64,1,1,10.,10.});
+        BoundedTrainingSession session(References(protocol),config,std::vector<InputParameters>(3,{1,1,10.}));
+        std::vector<std::size_t> order;std::set<std::size_t> distant;
+        DriveTraining(session,protocol,[&](const auto& action,auto& delay,auto&) {
+            for(std::size_t i=0;i<2;++i)delay[i]=.003+.005*action.parameters[i].length;
+            if(!action.finalVerification && action.inputIndex<2) {
+                order.push_back(action.inputIndex);
+                if(action.parameters[action.inputIndex].length>=20)distant.insert(action.inputIndex);
+            }
+        });
+        if(quantum==3)
+        {
+            ASSERT_GE(order.size(),6u);
+            EXPECT_EQ((std::vector<std::size_t>(order.begin(),order.begin()+6)),
+                (std::vector<std::size_t>{0,0,0,1,1,1}));
+            EXPECT_EQ(distant,(std::set<std::size_t>{0,1}));
+        }
+        else EXPECT_TRUE(distant.empty());
+        // These controlled observations compare proposals, not physical
+        // convergence. All actual residuals and final gates remain active.
+        EXPECT_LE(session.IssuedProbes(),config.maximumProbes);
+        EXPECT_LE(session.AppliedEdits(),config.maximumEdits);
+    }
+}
+
+TEST(InputTraversalCodec, OmissionResetsTheOldPolicyWithoutInventingFields)
+{
+    auto configuration=RoundRobin();configuration.maximumTraversalSeedElements=4096;
+    QJsonObject search{{"other",5}};TakeInputTraversalDeclaration(search,configuration);
+    EXPECT_EQ(configuration.inputTraversal,InputTraversalPolicy::Sequential);
+    EXPECT_EQ(configuration.candidatesPerInputVisit,1u);EXPECT_EQ(configuration.maximumTraversalSeedElements,131072u);
+    AppendInputTraversalDeclaration(search,configuration);EXPECT_EQ(search,QJsonObject({{"other",5}}));
+}
+
+TEST(InputTraversalCodec, RoundTripRetainsTheWholeDeclaredQuantumAndSeedLimit)
+{
+    auto before=RoundRobin();before.maximumCandidatesPerInput=8;before.candidatesPerInputVisit=3;
+    before.maximumTraversalSeedElements=4096;QJsonObject search;AppendInputTraversalDeclaration(search,before);
+    const auto declaration=search;auto after=Configuration(4);
+    TakeInputTraversalDeclaration(search,after);EXPECT_TRUE(search.isEmpty());
+    EXPECT_EQ(after.inputTraversal,before.inputTraversal);EXPECT_EQ(after.candidatesPerInputVisit,3u);
+    EXPECT_EQ(after.maximumTraversalSeedElements,4096u);AppendInputTraversalDeclaration(search,after);
+    EXPECT_EQ(search,declaration);
+}
+
+TEST(InputTraversalCodec, UnknownSchemaBooleanCountsAndExtraFieldsDoNotPartlyMutateInput)
+{
+    auto original=RoundRobin();QJsonObject encoded;AppendInputTraversalDeclaration(encoded,original);
+    for(int defect=0;defect<6;++defect)
+    {
+        auto search=encoded;auto value=search["input_traversal"].toObject();
+        if(defect==0)value["schema_version"]=2;
+        else if(defect==1)value["maximum_seed_elements"]=true;
+        else if(defect==2)value["candidates_per_visit"]=.5;
+        else if(defect==3)value["policy"]="sequential";
+        else if(defect==4)value["unknown"]=1;
+        else value.remove("candidates_per_visit");
+        search["input_traversal"]=value;const auto before=search;auto target=Configuration(4);
+        EXPECT_THROW(TakeInputTraversalDeclaration(search,target),std::invalid_argument);
+        EXPECT_EQ(search,before);EXPECT_EQ(target.inputTraversal,InputTraversalPolicy::Sequential);
+    }
 }
 
 TEST(ClassicInputCapacitanceOwner, RestoreKeepsOtherCurrentCorrectionsIncludingPrefixNeighbour)
