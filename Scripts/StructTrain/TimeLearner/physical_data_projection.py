@@ -126,11 +126,15 @@ def main():
     parser.add_argument('source', type=Path);parser.add_argument('destination', type=Path)
     parser.add_argument('--expected-bytes', type=int, required=True)
     parser.add_argument('--expected-sha256', required=True)
+    parser.add_argument('--maximum-source-bytes', type=int, default=1024**3)
+    parser.add_argument('--maximum-output-bytes', type=int, default=32*1024**2)
     parser.add_argument('--receipt', type=Path, required=True)
     args = parser.parse_args()
     require(not args.receipt.exists(), 'physical_projection_receipt_exists')
     result = project_file(args.source, args.destination, expected_bytes=args.expected_bytes,
-                          expected_sha256=args.expected_sha256)
+                          expected_sha256=args.expected_sha256,
+                          maximum_source_bytes=args.maximum_source_bytes,
+                          maximum_output_bytes=args.maximum_output_bytes)
     with args.receipt.open('x', encoding='utf-8', newline='\n') as stream:
         json.dump(result, stream, indent=2, allow_nan=False);stream.write('\n')
 
