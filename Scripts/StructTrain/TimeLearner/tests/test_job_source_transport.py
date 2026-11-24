@@ -73,6 +73,15 @@ class JobSourceTransportTest(unittest.TestCase):
             modified=json.loads(json.dumps(envelope));modified[section][key]=value
             with self.assertRaises(EvidenceError):verify_envelope(modified,job,self.path,self.root)
 
+    def test_physical_threshold_binds_source_and_requested_value(self):
+        body=dict(kind='timelearner_native_physical_threshold_candidate_job',schema_version=1,
+                  implementation_id='transport-test',source_model_data=self.package,threshold=.03)
+        job={**body,'sha256':sha(body)};envelope=make_envelope(job,self.path,self.root)
+        self.assertEqual(envelope['source']['field'],'source_model_data')
+        self.assertEqual(verify_envelope(envelope,job,self.path,self.root)['resolved_job_sha256'],job['sha256'])
+        changed=json.loads(json.dumps(envelope));changed['job']['threshold']=.04
+        with self.assertRaises(EvidenceError):verify_envelope(changed,job,self.path,self.root)
+
     def test_source_cannot_escape_input_root(self):
         job=self.job(next(iter(SOURCE_FIELDS)))
         other=self.root/'other';other.mkdir()

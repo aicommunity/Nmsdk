@@ -2,6 +2,8 @@
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativePhysicalModelData.h"
+#include "TimeLearner/NativeThresholdCandidate.h"
+#include <limits>
 #include "TimeLearner/NativeRecognitionState.h"
 #include "TimeLearner/NativeRecognitionTrial.h"
 #include "TimeLearner/NativeRecognitionObservationValidation.h"
@@ -265,15 +267,20 @@ TEST(NativePhysicalModelData,DataCannotAcquireCertificateCheckpointOrDifferentTr
     EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
 }
 
-template<class Owner> void FrozenDataMatchesOriginalRecognition(bool explicitDataConversion=false)
+template<class Owner> void FrozenDataMatchesOriginalRecognition(bool explicitDataConversion=false,bool thresholdCandidate=false)
 {
     Fixture fixture;fixture.Create<Owner>();ASSERT_FALSE(::testing::Test::HasFatalFailure());
-    const auto recognition=ConvertNativeStoppedToDiagnosticRecognition(fixture.source,NativeRecognitionSpec{},
+    auto recognition=ConvertNativeStoppedToDiagnosticRecognition(fixture.source,NativeRecognitionSpec{},
         fixture.storage,fixture.environment,Implementation);
-    const auto data=explicitDataConversion?ConvertNativeSoloPhysicalModelDataToRecognition(
+    auto data=explicitDataConversion?ConvertNativeSoloPhysicalModelDataToRecognition(
         ExportNativePhysicalModelData(fixture.source,fixture.storage,fixture.environment,Implementation),NativeRecognitionSpec{}, {},
         fixture.storage,fixture.environment,Implementation):
         ExportNativePhysicalModelData(recognition,fixture.storage,fixture.environment,Implementation);
+    if(thresholdCandidate)
+    {
+        recognition=CreateNativeDiagnosticThresholdCandidate(recognition,1e-5,fixture.storage,fixture.environment,Implementation);
+        data=CreateNativePhysicalThresholdCandidate(data,1e-5,fixture.storage,fixture.environment,Implementation);
+    }
     const auto create=[&](const char* name) {
         auto owner=dynamic_pointer_cast<Owner>(fixture.storage->TakeObject(
             std::is_same_v<Owner,NNeuronTimeLearnerBranch>?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
@@ -335,11 +342,12 @@ template<class Owner> void FrozenDataMatchesOriginalRecognition(bool explicitDat
             auto value=NativeRecognitionTrialJson(observation);value.remove("run_id");return value;
         };
         EXPECT_EQ(comparable(*before),comparable(*after));
+        if(thresholdCandidate)EXPECT_GT(NativeRecognitionTrialJson(*before)["spike_count"].toInt(),0);
         EXPECT_EQ(restored->ExportNativePhysicalModelData(Implementation),data);
         EXPECT_EQ(original->ExportNativeRecognitionState(Implementation),recognition);
         if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
         {
-            const QString stem=QString(explicitDataConversion?"physical-data-converted-":"physical-data-frozen-")+
+            const QString stem=QString(thresholdCandidate?"physical-data-threshold-":explicitDataConversion?"physical-data-converted-":"physical-data-frozen-")+
                 (std::is_same_v<Owner,NNeuronTimeLearnerBranch>?"Branch":"Classic")+(pattern?"-foil":"-target");
             QFile json(QDir(QString::fromLocal8Bit(output)).filePath(stem+".json"));
             ASSERT_TRUE(json.open(QIODevice::WriteOnly|QIODevice::NewOnly));
@@ -350,7 +358,7 @@ template<class Owner> void FrozenDataMatchesOriginalRecognition(bool explicitDat
             ASSERT_EQ(json.write(bytes),bytes.size());
             if(pattern==0)
             {
-                const auto prefix=QString(explicitDataConversion?"physical-data-converted-":"physical-data-frozen-")+
+                const auto prefix=QString(thresholdCandidate?"physical-data-threshold-":explicitDataConversion?"physical-data-converted-":"physical-data-frozen-")+
                     (std::is_same_v<Owner,NNeuronTimeLearnerBranch>?"Branch":"Classic");
                 for(const auto& item:{std::make_pair("-model-data.json",data),std::make_pair("-source.json",recognition)})
                 {
@@ -599,6 +607,58 @@ TEST(NativePhysicalDataConversion,BranchN1UsesDeclaredReferenceDataAndNativeBoun
     EXPECT_EQ(result,ConvertNativeSoloPhysicalModelDataToRecognition(solo,specification,{1.,2.},fixture.storage,fixture.environment,Implementation));
     EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
 }
+
+TEST(NativePhysicalThresholdCandidate,NativeData1AndData2MatchFullCandidateGraphAndKeepOriginalBoundary)
+{
+    for(bool branch:{false,true})for(bool convertedSource:{false,true})
+    {
+        Fixture fixture;if(branch)fixture.Create<NNeuronTimeLearnerBranch>();else fixture.Create<NNeuronTimeLearner>();
+        ASSERT_FALSE(::testing::Test::HasFatalFailure());
+        const auto recognition=ConvertNativeStoppedToDiagnosticRecognition(fixture.source,{},fixture.storage,fixture.environment,Implementation);
+        const auto source=convertedSource?ConvertNativeSoloPhysicalModelDataToRecognition(
+            ExportNativePhysicalModelData(fixture.source,fixture.storage,fixture.environment,Implementation),{}, {},
+            fixture.storage,fixture.environment,Implementation):ExportNativePhysicalModelData(recognition,fixture.storage,fixture.environment,Implementation);
+        for(double threshold:{-1e-3,0.,1e-5,100.})
+        {
+            const auto full=CreateNativeDiagnosticThresholdCandidate(recognition,threshold,fixture.storage,fixture.environment,Implementation);
+            const auto candidate=CreateNativePhysicalThresholdCandidate(source,threshold,fixture.storage,fixture.environment,Implementation);
+            EXPECT_EQ(candidate["schema_version"],QJsonValue(3));EXPECT_TRUE(candidate["certificate"].isNull());
+            EXPECT_EQ(candidate["source_boundary"],source["source_boundary"]);EXPECT_EQ(candidate["source_recognition_data"],QJsonValue(source));
+            EXPECT_EQ(candidate["parameters"],source["parameters"]);EXPECT_EQ(candidate["model_revision"],full["model_revision"]);
+            EXPECT_EQ(candidate["neuron"].toObject()["graph"].toObject()["identity"],full["neuron"].toObject()["graph"].toObject()["identity"]);
+            EXPECT_FALSE(candidate["candidate_record"].toObject()["calibrated"].toBool(true));
+            const auto restored=PrepareNativeFrozenPhysicalModelData(candidate,fixture.storage,fixture.environment,Implementation);
+            EXPECT_EQ(restored->modelRevision,candidate["model_revision"].toString().toStdString());
+            EXPECT_EQ(candidate,CreateNativePhysicalThresholdCandidate(source,threshold,fixture.storage,fixture.environment,Implementation));
+            EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
+        }
+    }
+}
+TEST(NativePhysicalThresholdCandidate,RejectsSoloChainingNonfiniteAndResignedExtraEdits)
+{
+    Fixture fixture;fixture.Create<NNeuronTimeLearnerBranch>();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    const auto solo=ExportNativePhysicalModelData(fixture.source,fixture.storage,fixture.environment,Implementation);
+    EXPECT_THROW(CreateNativePhysicalThresholdCandidate(solo,1e-5,fixture.storage,fixture.environment,Implementation),std::invalid_argument);
+    const auto source=ConvertNativeSoloPhysicalModelDataToRecognition(solo,{}, {},fixture.storage,fixture.environment,Implementation);
+    const auto candidate=CreateNativePhysicalThresholdCandidate(source,1e-5,fixture.storage,fixture.environment,Implementation);
+    EXPECT_THROW(CreateNativePhysicalThresholdCandidate(candidate,2e-5,fixture.storage,fixture.environment,Implementation),std::invalid_argument);
+    EXPECT_THROW(CreateNativePhysicalThresholdCandidate(source,std::numeric_limits<double>::infinity(),fixture.storage,fixture.environment,Implementation),std::invalid_argument);
+    for(int fault=0;fault<5;++fault)
+    {
+        auto damaged=candidate;
+        if(fault==0)damaged["threshold"]=2e-5;
+        if(fault==1)damaged["source_recognition_data"]=candidate;
+        if(fault==2)damaged["certificate"]=QJsonObject{};
+        if(fault==3){auto boundary=damaged["source_boundary"].toObject();boundary["kind"]="timelearner_recognition_state";boundary["state_kind"]="recognition";damaged["source_boundary"]=boundary;}
+        if(fault==4){auto archive=damaged["neuron"].toObject();auto metadata=archive["metadata"].toObject();auto verification=metadata["recognition_verification"].toObject();verification["status"]="verified";verification["certificate"]=QJsonObject{};metadata["recognition_verification"]=verification;archive["metadata"]=metadata;damaged["neuron"]=Signed(archive);}
+        EXPECT_THROW(PrepareNativeFrozenPhysicalModelData(Signed(damaged),fixture.storage,fixture.environment,Implementation),std::invalid_argument);
+        EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
+    }
+}
+TEST(NativePhysicalThresholdCandidate,ClassicTargetAndFoilMatchFullCandidateWithActualSpikes)
+{FrozenDataMatchesOriginalRecognition<NNeuronTimeLearner>(true,true);}
+TEST(NativePhysicalThresholdCandidate,BranchTargetAndFoilMatchFullCandidateWithActualSpikes)
+{FrozenDataMatchesOriginalRecognition<NNeuronTimeLearnerBranch>(true,true);}
 
 TEST(NativePhysicalDynamicsContinuity,Classic2000){FrozenPhysicalDynamicsContinuity<NNeuronTimeLearner>(2000);}
 TEST(NativePhysicalDynamicsContinuity,Branch2000){FrozenPhysicalDynamicsContinuity<NNeuronTimeLearnerBranch>(2000);}

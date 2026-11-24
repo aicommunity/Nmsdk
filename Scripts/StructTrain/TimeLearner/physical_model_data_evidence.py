@@ -10,6 +10,7 @@ from .native_evidence import EvidenceError, count, number, require
 from .native_model_spec import validate_model_spec
 from .recognition_evidence import _physical
 from .training_capacitance_witness import validate_graph_input_parameters
+import copy
 
 FIELDS = set(('kind schema_version data_only dynamic_checkpoint certificate implementation_id source_boundary '
     'configuration configuration_text protocol controls parameters model_revision source_solo_revision conversion_record '
@@ -29,6 +30,48 @@ def _sha(value):
 
 
 CONVERSION_FIELDS = {'source_model_data', 'conversion_spec', 'reference_amplitudes'}
+THRESHOLD_FIELDS = {'source_recognition_data', 'threshold', 'candidate_record'}
+
+
+def _threshold_source(package):
+    source=package['source_recognition_data']
+    require(type(source) is dict and type(source.get('schema_version')) is int and
+            source['schema_version'] in (1,2), 'physical_threshold_requires_base_recognition_data')
+    audit_physical_model_data(source,frozen=True)
+    require(source['schema_version']==2 or source['source_boundary']['kind'] in
+            ('timelearner_recognition_state','timelearner_diagnostic_recognition_state'),
+            'physical_threshold_requires_base_recognition_data')
+    require(all(package[k]==source[k] for k in ('source_boundary','source_solo_revision','configuration',
+            'configuration_text','protocol','controls','parameters','conversion_record','dataset','implementation_id')),
+            'physical_threshold_changed_source_conditions')
+    require(_images(package['neuron']['class_definitions'])==_images(source['neuron']['class_definitions']),
+            'physical_threshold_changed_storage_physics')
+    threshold=number(package['threshold']);record=package['candidate_record']
+    keys(record,{'schema_version','algorithm','source_recognition_sha256','source_model_revision',
+         'model_revision','ltzone_path','original_threshold','threshold','calibrated'},'physical_threshold_record_fields')
+    old_metadata=source['neuron']['metadata'];calibration=old_metadata['calibration'];path=calibration['ltzone_path']
+    require(type(record['schema_version']) is int and record['schema_version']==1 and
+            record['algorithm']=='explicit-native-threshold-v2' and record['source_recognition_sha256']==source['sha256'] and
+            record['source_model_revision']==source['model_revision'] and record['model_revision']==package['model_revision'] and
+            record['ltzone_path']==path and number(record['original_threshold'])==number(calibration['threshold']) and
+            number(record['threshold'])==threshold and record['calibrated'] is False,'physical_threshold_record_scope')
+    expected=copy.deepcopy(old_metadata)
+    expected['calibration'].update(status='fixed',protocol='threshold-candidate-not-calibrated',
+                                   threshold=threshold,candidate_record=record)
+    expected['recognition_verification'].update(model_identity=package['model_revision'],status='unverified',certificate=None)
+    require(package['neuron']['metadata']==expected,'physical_threshold_metadata_scope')
+    # Native import is still a separate proof. This portable comparison also
+    # rejects signed changes to any other part of the archived semantic graph.
+    before=source['neuron']['graph']['identity']['model']
+    after=copy.deepcopy(package['neuron']['graph']['identity']['model'])
+    source_nodes={n['path']:n for n in before['nodes']};changed_nodes={n['path']:n for n in after['nodes']}
+    require(path in source_nodes and path in changed_nodes,'physical_threshold_path_missing')
+    old=source_nodes[path]['parameters']['Threshold'];new=changed_nodes[path]['parameters']['Threshold']
+    require(old['binding'] is False and new['binding'] is False and
+            old['data']['type']==new['data']['type']=='binary64','physical_threshold_not_fixed_scalar')
+    new['data']['value']=old['data']['value']
+    require(after==before,'physical_threshold_changed_other_graph_physics')
+    return source
 
 
 def _conversion_source(package):
@@ -96,9 +139,10 @@ def audit_physical_model_data(package, *, frozen=False):
     """Check retained physics; XML import and source-evidence joins stay separate."""
     try:
         converted = type(package) is dict and package.get('schema_version') == 2
-        keys(package, FIELDS | (CONVERSION_FIELDS if converted else set()), 'physical_data_field_set')
+        candidate = type(package) is dict and package.get('schema_version') == 3
+        keys(package, FIELDS | (CONVERSION_FIELDS if converted else THRESHOLD_FIELDS if candidate else set()), 'physical_data_field_set')
         require(package['kind'] == 'timelearner_physical_model_data' and type(package['schema_version']) is int
-                and package['schema_version'] in (1, 2) and package['data_only'] is True
+                and package['schema_version'] in (1, 2, 3) and package['data_only'] is True
                 and package['dynamic_checkpoint'] is False and package['certificate'] is None,
                 'physical_data_not_certificate_or_checkpoint')
         _sha(package['sha256'])
@@ -115,9 +159,11 @@ def audit_physical_model_data(package, *, frozen=False):
                 (8 if boundary['kind'] in SOLO else 7), 'physical_data_source_kind')
         for value in (boundary['sha256'], boundary['model_revision'], package['source_solo_revision']):
             _sha(value)
-        require(converted or boundary['model_revision'] == package['model_revision'], 'physical_data_source_revision')
-        solo = boundary['kind'] in SOLO and not converted
-        if converted:
+        require(converted or candidate or boundary['model_revision'] == package['model_revision'], 'physical_data_source_revision')
+        solo = boundary['kind'] in SOLO and not converted and not candidate
+        if candidate:
+            _threshold_source(package)
+        elif converted:
             _conversion_source(package)
         require((package['conversion_record'] is None) if solo else type(package['conversion_record']) is dict,
                 'physical_data_conversion_scope')
@@ -154,9 +200,11 @@ def audit_physical_model_data(package, *, frozen=False):
                 and protocol['maximum_sample_gap'] == configuration['maximum_sample_gap']
                 and protocol['stimulus_profile'] == configuration['stimulus_profile'], 'physical_data_protocol_scope')
         metadata = archive['metadata']; training = metadata['training']; calibration = metadata['calibration']
+        expected_state=(package['source_recognition_data']['neuron']['metadata']['state_kind'] if candidate else
+            ('diagnostic_recognition' if boundary['kind']=='timelearner_stopped_state' else 'recognition') if converted else
+            boundary['state_kind'])
         require(metadata['implementation_id'] == package['implementation_id']
-                and metadata['state_kind'] == (('diagnostic_recognition' if boundary['kind'] == 'timelearner_stopped_state'
-                                               else 'recognition') if converted else boundary['state_kind'])
+                and metadata['state_kind'] == expected_state
                 and training['trainer'] == ('Branch' if model['branch'] else 'Classic')
                 and training['normalization'] == model['normalization']
                 and training['target_pattern'] == model['initial_isi']
@@ -173,7 +221,8 @@ def audit_physical_model_data(package, *, frozen=False):
             frequency_hz=number(model['frequency_hz']), threshold_path=path, threshold_classes=(nodes[path]['class'],),
             effective_threshold=threshold, source_training_evidence_checked=False, native_import_verified=False,
             training_certificate_transferred=False, calibration_confirmed=False, evaluation_verdict=None,
-            explicit_conversion_data=converted, native_conversion_verified=False)
+            explicit_conversion_data=converted, native_conversion_verified=False,
+            **(dict(explicit_threshold_candidate_data=True,native_threshold_candidate_verified=False) if candidate else {}))
     except EvidenceError:
         raise
     except (KeyError, TypeError, ValueError, OverflowError, ZeroDivisionError) as error:

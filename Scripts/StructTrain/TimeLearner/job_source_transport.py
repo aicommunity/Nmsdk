@@ -18,6 +18,7 @@ SOURCE_FIELDS = {'timelearner_native_diagnostic_evaluation_job':'source_stopped'
                  'timelearner_native_evaluation_job':'source_recognition',
                  'timelearner_native_physical_model_export_job':'source_state',
                  'timelearner_native_physical_model_conversion_job':'source_model_data',
+                 'timelearner_native_physical_threshold_candidate_job':'source_model_data',
                  'timelearner_native_physical_model_evaluation_job':'source_model_data'}
 
 
