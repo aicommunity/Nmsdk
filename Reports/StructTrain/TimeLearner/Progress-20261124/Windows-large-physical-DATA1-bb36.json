@@ -1,0 +1,74 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Windows-large-physical-DATA1-bb36.json",
+  "record": {
+    "kind": "timelearner_large_stopped_model_physical_DATA1_catalog",
+    "schema_version": 1,
+    "objects": {
+      "primary": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c7/c764793d037a6b5ba2e9870c00209a5ec5330ae4683de6c83d08813bf04318ed",
+        "sha256": "c764793d037a6b5ba2e9870c00209a5ec5330ae4683de6c83d08813bf04318ed",
+        "bytes": 41384
+      },
+      "bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ae/ae89f8b3ca36a251aa0ff5e3aa96db5b76eb4c6aa6e7d70d42aec7a310e33b71",
+        "sha256": "ae89f8b3ca36a251aa0ff5e3aa96db5b76eb4c6aa6e7d70d42aec7a310e33b71",
+        "bytes": 3157
+      }
+    },
+    "members": 17,
+    "restored_members": 17,
+    "expanded_bytes": 8860924,
+    "archive_bytes": 41384,
+    "model_bytes": 8828902,
+    "model_file_sha256": "79fd1e00605c919c416ada26a6de8cea152c944483c7ef574b6a85c1fabdb809",
+    "source_bytes": 671057982,
+    "source_boundary": {
+      "kind": "timelearner_stopped_state",
+      "schema_version": 8,
+      "state_kind": "diagnostic",
+      "sha256": "edc39ca26fd9674a2ac1e5b0f2812dd2f538934684718193acaa31b837c92170",
+      "model_revision": "61db0dff81019d4368e2918d59e05e0badf2b2157f25470c1fec3d8b59244235"
+    },
+    "model_revision": "61db0dff81019d4368e2918d59e05e0badf2b2157f25470c1fec3d8b59244235",
+    "parameters": [
+      {
+        "length": 239,
+        "resistance": 86000000,
+        "synapses": 12
+      },
+      {
+        "length": 199,
+        "resistance": 86000000,
+        "synapses": 11
+      },
+      {
+        "length": 124,
+        "resistance": 86000000,
+        "synapses": 9
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "frequency_hz": 2000,
+    "wall_seconds": 47.592661400092766,
+    "peak_job_memory_bytes": 3648036864,
+    "memory_limit_bytes": 12884901888,
+    "source_unchanged": true,
+    "source_Train_restarted": false,
+    "model_cache": "operations/timelearner/Windows-large-physical-DATA1-bb36/independent-restored/projection/model-data.json",
+    "complete_source_history_archived": false,
+    "native_import_verified": false,
+    "recognition_conversion_performed": false,
+    "training_certificate_transferred": false,
+    "scientific_verdict": null
+  }
+}

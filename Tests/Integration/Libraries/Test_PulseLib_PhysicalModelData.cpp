@@ -52,6 +52,9 @@ struct Fixture {
         ConfiguredNativeTraining configuration;auto& declaration=configuration.model;
         declaration.branch=branch;declaration.frequencyHz=frequency;declaration.neuronClass="NSPNeuronGen";
         declaration.normalization=normalization;declaration.inputs={{2,2,86e6},{1,1,91e6}};
+        // N1 varies resistance with one synapse per bank. The asymmetric N0
+        // fixture intentionally has two synapses in its first bank.
+        if(normalization==Normalization::TipResistance)declaration.inputs.front().synapses=1;
         declaration.initialIsi={.01,.08};declaration.editPolicy.normalization=normalization;
         declaration.editPolicy.maximumCableLength=8;
         configuration.stimulusProfile={"NPulseGeneratorTransit",1.,.001,double(frequency),0.,false,false};
