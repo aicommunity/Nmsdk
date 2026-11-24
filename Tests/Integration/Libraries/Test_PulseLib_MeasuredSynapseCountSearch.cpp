@@ -79,7 +79,8 @@ TEST(BoundedTrainingN0LengthNeighborhood, LegacyOrderAndOneProposalKeepTheFinite
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
     for(const std::size_t allowance:{0u,1u})
     {
-        SCOPED_TRACE(int(routing));SCOPED_TRACE(allowance);
+        SCOPED_TRACE(int(routing));
+        SCOPED_TRACE(allowance);
         const auto protocol=Protocol(2,routing);auto cfg=Configuration();
         cfg.maximumCandidatesPerInput=8;cfg.maximumN0LengthProposals=allowance;
         cfg.bounds={{2,8,1,2,1.,100.},{1,1,1,1,1.,100.}};

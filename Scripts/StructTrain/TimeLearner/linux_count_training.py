@@ -48,9 +48,10 @@ def context(request_path):
     request_path = Path(request_path).resolve(strict=True);spec = load(request_path)
     require(type(spec) is dict and set(spec) == {'kind','schema_version','job_id','worker_host',
             'execution_root','tool_commit','sdk_source','original_job','original_initial_state',
-            'runtime','run_id','maximum_synapses','operation','limits','disk'} and
+            'runtime','run_id','maximum_synapses','operation','limits','disk'} |
+                ({'maximum_n0_length_proposals'} if spec.get('schema_version') == 2 else set()) and
             spec['kind'] == 'timelearner_linux_matched_count_training' and
-            type(spec['schema_version']) is int and spec['schema_version'] == 1 and
+            type(spec['schema_version']) is int and spec['schema_version'] in (1, 2) and
             sys.platform == 'linux', 'count_linux_request_schema')
     base = Path(spec['execution_root'])
     require(base in BASES and base.resolve(strict=True) == base and SOURCE.is_relative_to(base) and
@@ -73,6 +74,9 @@ def context(request_path):
             initial['identity']['valid'] is True and
             initial['identity']['sha256'] == sha(initial['identity']['model']), 'count_linux_original_cold_binding')
     job = matched_count_job(original, spec['run_id'], maximum_synapses=spec['maximum_synapses'])
+    if spec['schema_version'] == 2:
+        from .n0_length_policy import declare_n0_length_job
+        job = declare_n0_length_job(job, spec['run_id'], spec['maximum_n0_length_proposals'])
     factor = factor_control_job(job)
     from .native_pipeline_worker import validate_job
     validate_job('train', job);validate_job('preflight', factor)

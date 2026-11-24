@@ -20,3 +20,31 @@ def bind_n0_length_policy(declared, observed):
     actual = audit_n0_length_policy(observed)
     require(expected == actual, 'configuration_summary_n0_length_policy_mismatch')
     return expected
+
+
+def declare_n0_length_job(original, run_id, maximum_proposals):
+    """Change only attempt identity and this explicitly declared N0 factor.
+
+    Zero in this operational request means the legacy policy and is omitted
+    from the native configuration. All candidate/probe/time allowances and
+    the complete physical specification are retained verbatim.
+    """
+    from copy import deepcopy
+    from .model_identity import canonical_model_sha256 as sha
+    from .native_pipeline_worker import validate_job
+
+    validate_job('train', original)
+    require(type(run_id) is str and bool(run_id.strip()), 'n0_length_job_run_id')
+    require(type(maximum_proposals) is int and maximum_proposals >= 0,
+            'n0_length_job_allowance')
+    require(original['configuration']['model']['normalization'] == 'N0',
+            'n0_length_job_requires_count_normalization')
+    job = deepcopy(original)
+    config = job['configuration']; config['run_id'] = run_id
+    search = config['search']; search.pop(FIELD, None)
+    if maximum_proposals:
+        search[FIELD] = maximum_proposals
+    audit_n0_length_policy(search)
+    job['sha256'] = sha({k:v for k,v in job.items() if k != 'sha256'})
+    validate_job('train', job)
+    return job
