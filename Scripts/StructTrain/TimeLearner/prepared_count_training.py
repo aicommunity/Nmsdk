@@ -232,7 +232,9 @@ def run(controls):
                                 source=source_record,
                                 observed=file_record(destination/'native/initial-state.json'),
                                 physical_graph_and_parameters_preserved=True,
-                                controller_budget_changed=True, training_started=False,
+                                controller_budget_changed=(extension or
+                                    spec['maximum_candidates_per_input']!=original['configuration']['search']['maximum_candidates_per_input']),
+                                training_started=False,
                                 scientific_verdict=None))
                     else:
                         require(initial['parameters'][0]['synapses'] == 2 and
