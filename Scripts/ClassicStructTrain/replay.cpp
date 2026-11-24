@@ -33,6 +33,7 @@ struct LearnerAccess : NNeuronLearner {
   n.*(&LearnerAccess::Neuron)=neuron; n.*(&LearnerAccess::Generators)=sources;
   n.DendriteNeuronAmplitude.Assign(6,1,0.0); n.SomaNeuronAmplitude.Assign(6,1,0.0); n.Output.Assign(1,1,0.0);
  }
+ static void resetCount(NNeuronLearner& n) { n.*(&LearnerAccess::CountIteration)=0; }
  static int count(const NNeuronLearner& n) { return n.*(&LearnerAccess::CountIteration); }
  static bool first(const NNeuronLearner& n) { return n.*(&LearnerAccess::IsFirstBeat); }
  static const std::vector<int>& ds(const NNeuronLearner& n) { return n.*(&LearnerAccess::DendStatus); }
@@ -54,6 +55,8 @@ struct TrainerAccess : NNeuronTrainer {
  static const std::vector<int>& syn(const NNeuronTrainer& n) { return n.*(&TrainerAccess::SynapseNum); }
  static const std::vector<double>& dy(const NNeuronTrainer& n) { return n.*(&TrainerAccess::dissynchronization); }
  static const std::vector<double>& maxima(const NNeuronTrainer& n) { return n.*(&TrainerAccess::max_iter_dend_amp); }
+ static const std::vector<double>& initial(const NNeuronTrainer& n) { return n.*(&TrainerAccess::InitialDendritePotential); }
+ static const std::vector<int>& status(const NNeuronTrainer& n) { return n.*(&TrainerAccess::dend_status); }
  static void structure(NNeuronTrainer& n, const std::vector<int>& d, const std::vector<int>& s) {
   n.*(&TrainerAccess::DendriteLength)=d; n.*(&TrainerAccess::SynapseNum)=s;
  }
@@ -127,6 +130,7 @@ struct Replay {
  }
 
  void writeResult(json record) {
+  if(manifest.contains("variant")) record["variant"]=manifest.at("variant");
   record["suite"]=suite; record["case"]=key; record["repeat"]=repeat;
   results << record.dump() << '\n'; results.flush();
   std::cout << "[ClassicReplay] " << suite << '/' << key << " repeat=" << repeat
@@ -194,6 +198,8 @@ struct Replay {
    r["signal_present"]=absmax(LearnerAccess::maxima(*learner)) > 1e-9;
    r["physical_bounds_pass"]=absmax(LearnerAccess::dy(*learner))<=.0050000001 && absmax(LearnerAccess::amp(*learner))<=.0002850001;
   } else {
+   r["initial_dendrite_potential"]=TrainerAccess::initial(*trainer);
+   r["dend_status"]=TrainerAccess::status(*trainer);
    r["dissynchronization"]=TrainerAccess::dy(*trainer); r["soma_maxima"]=TrainerAccess::maxima(*trainer);
    r["synchronized"]=TrainerAccess::sync(*trainer);
    r["threshold"]=trainer->LTZThreshold.GetData(); r["calculate_mode"]=trainer->CalculateMode.GetData();
@@ -211,7 +217,7 @@ struct Replay {
   if(cold) load(kind);
   if(learner) {
    learner->ExperimentMode=false;
-   learner->CalculateMode=fixedIterations ? 1 : (cold ? 0 : 1);
+   learner->CalculateMode=fixedIterations ? 1 : (cold ? (suite=="repro"?manifest.at("repro_job").value("cold_mode_override",0):0) : 1);
    learner->IsNeedToTrain=true;
    pattern(p);
    // Use the existing second-pattern status rule for synapse-only phases.
@@ -237,6 +243,14 @@ struct Replay {
     waveforms << json({{"suite",suite},{"case",key},{"repeat",repeat},{"iteration",beforeCount},
                        {"time",time()-1.0/2000},{"soma_potential",soma}}).dump() << '\n';
    }
+   if(manifest.contains("repro_job") && manifest.at("repro_job").value("record_training_waveform",false)) {
+    const auto& job=manifest.at("repro_job");const int iteration=learner?beforeCount:iterations;
+    if(iteration>=job.value("trace_from_iteration",0) && iteration<=job.value("trace_to_iteration",1000)) {
+     const auto& values=learner?learner->SomaNeuronAmplitude.GetData():trainer->SomaNeuronAmplitude.GetData();
+     std::vector<double> soma;for(int i=0;i<values.GetRows();++i)soma.push_back(values(i,0));
+     waveforms<<json({{"case",key},{"kind",kind},{"repeat",repeat},{"iteration",iteration},{"time",time()-1.0/2000},{"soma_potential",soma}}).dump()<<'\n';
+    }
+   }
    bool boundary=false;
    if(learner) {
     int count=LearnerAccess::count(*learner);
@@ -253,7 +267,12 @@ struct Replay {
    }
    if(boundary) {
     auto h=state(); h["suite"]=suite; h["case"]=key; h["repeat"]=repeat; h["iteration"]=iterations;
-    const auto readback=structureReadback();
+    auto readback=structureReadback();
+    if(!readback["all_initialized"].get<bool>() && manifest.value("allow_initialization_grace_tick",false)) {
+     h["before_initialization_grace_tick"]=readback;
+     step();++ticks;readback=structureReadback();
+     h["after_initialization_grace_tick"]=readback;
+    }
     if(!readback["all_initialized"].get<bool>()) {
      h["structure_readback"]=readback;
      history << h.dump() << '\n'; history.flush();
@@ -378,20 +397,28 @@ struct Replay {
   kind="learner";
   const auto p=manifest["mode_patterns"].get<std::vector<std::vector<double>>>();
   for(const auto& test : manifest["mode_cases"]) {
-   key=test["case"]; const int row=test["source_row"]; const auto& v=test["values"];
+   json precondition=nullptr; key=test["case"]; const int row=test["source_row"]; const auto& v=test["values"];
    if(row>=35) {
     auto trained=train(p[0],true);
+    if(trained["status"]=="completed" && needs() && learner->CalculateMode.GetData()==0
+       && zero(LearnerAccess::ds(*learner)) && zero(LearnerAccess::ss(*learner))) step();
+    if(trained["status"]=="completed" && needs()) trained["status"]="native_completion_failed";
+    precondition=state();
     if(trained["status"]!="completed") { trained["phase"]="precondition"; trained["source_row"]=row; writeResult(trained); continue; }
     learner->CalculateMode=v["H"].get<int>(); learner->IsNeedToTrain=v["I"]=="об";
     auto before=state(); json changes=json::array();
     for(size_t i=1;i<p.size();++i) { pattern(p[i]); advancePeriods(2); changes.push_back(state()); }
-    writeResult({{"status","recorded"},{"source_row",row},{"before",before},{"pattern_changes",changes}});
+    writeResult({{"training_precondition",precondition},{"status","recorded"},{"source_row",row},{"before",before},{"pattern_changes",changes}});
     continue;
    }
    const bool fresh=row>=28;
    const bool same=v["L"]=="обучен";
    if(!fresh) {
     auto trained=train(p[0],true);
+    if(trained["status"]=="completed" && needs() && learner->CalculateMode.GetData()==0
+       && zero(LearnerAccess::ds(*learner)) && zero(LearnerAccess::ss(*learner))) step();
+    if(trained["status"]=="completed" && needs()) trained["status"]="native_completion_failed";
+    precondition=state();
     if(trained["status"]!="completed") { trained["phase"]="precondition"; trained["source_row"]=row; writeResult(trained); continue; }
     learner->CalculateMode=v["H"].get<int>();
     learner->IsNeedToTrain=v["I"]=="об";
@@ -406,7 +433,7 @@ struct Replay {
    auto after=state();
    const bool thresholdOk=std::abs(immediate["threshold"].get<double>()-(targetTrain ? 100.0 : .0115))<1e-12;
    const bool recognitionStable=targetTrain || (dend()==d && syn()==s);
-   writeResult({{"status","recorded"},{"source_row",row},{"before",before},{"immediate",immediate},{"after_two_periods",after},
+   writeResult({{"training_precondition",precondition},{"status","recorded"},{"source_row",row},{"before",before},{"immediate",immediate},{"after_two_periods",after},
          {"threshold_matches_requested_mode",thresholdOk},{"recognition_structure_unchanged",recognitionStable},
          {"archived_transition_note",v["M"]},{"target_pattern_already_learned",same}});
   }
@@ -455,6 +482,7 @@ struct Replay {
  void run(const std::string& selectedSuite, int selectedRepeat, int onlyId) {
   suite=selectedSuite; repeat=selectedRepeat;
   if(suite=="legacy") { legacy(); return; }
+  if(suite=="repro") { repro(); return; }
   const auto ids=manifest["selected_ids"].get<std::vector<int>>();
   if(suite=="smoke" || suite=="cold" || suite=="structures") {
    std::vector<int> selected=ids;
@@ -557,6 +585,8 @@ struct Replay {
  }
 
 #include "legacy_replay.inc"
+#include "training_file_protocol.inc"
+#include "training_replay.inc"
 };
 }
 

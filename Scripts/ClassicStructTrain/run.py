@@ -47,8 +47,12 @@ def supervise(binary, manifest, output, suite, repeat, only_id, idle_timeout):
     timed_out = False
     print(f"Starting {suite}, repeat {repeat}", flush=True)
     with (output / "stdout.log").open("wb") as stdout, (output / "stderr.log").open("wb") as stderr:
-        proc = subprocess.Popen(command, cwd=binary.parent, env=env, stdout=stdout, stderr=stderr)
+        # Use the same scheduler class across independently started controllers.
+        creation_flags = subprocess.NORMAL_PRIORITY_CLASS if os.name == 'nt' else 0
+        proc = subprocess.Popen(command, cwd=binary.parent, env=env, stdout=stdout, stderr=stderr,
+                                creationflags=creation_flags)
         metadata["pid"] = proc.pid
+        metadata["process_priority"] = "Normal" if os.name == 'nt' else "default"
         save(status_file, metadata)
         while proc.poll() is None:
             paths = [output / "results.jsonl", output / "iterations.jsonl"]

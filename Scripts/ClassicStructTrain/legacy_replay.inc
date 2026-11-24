@@ -15,6 +15,7 @@ void legacyBind(const json& job) {
  if(learner) { LearnerAccess::bind(*learner,n,sources); learner->DendriteLength.SetDataDirect(d); learner->NumSynapse.SetDataDirect(s); }
  else { TrainerAccess::bind(*trainer,n,sources); TrainerAccess::structure(*trainer,d,s); }
  SavedNeuronAccess::bind(*n);
+ if(job.value("preserve_native_order",false)) return;
  // This is the native variable-length dendrite computation order. Mode zero
 // intentionally prevents NPulseNeuron::BuildStructure and needs explicit order.
  int position=0;
@@ -60,6 +61,7 @@ json legacyInference(const json& job, const std::vector<json>& data, bool indepe
  auto subject=learner ? static_cast<UNet*>(learner.Get()) : static_cast<UNet*>(trainer.Get());
  auto n=subject->GetComponentL<NPulseNeuron>("Neuron",true);
  auto ltz=n->GetComponentL<NLTZone>("LTZone",true);
+ auto pulseZone=dynamic_pointer_cast<NPulseLTZoneCommon>(ltz);
  if(!ltz) throw std::runtime_error("Saved LTZone missing");
  std::vector<UEPtr<NPulseMembrane>> somaNodes;
  std::vector<UEPtr<NPulseGeneratorTransit>> sourceNodes;
@@ -74,6 +76,7 @@ json legacyInference(const json& job, const std::vector<json>& data, bool indepe
  const double frequency=learner ? learner->SpikesFrequency.GetData() : trainer->SpikesFrequency.GetData();
  const int ticks=int(std::ceil(2000.0/frequency));
  json answers=json::array(), ids=json::array(), peaks=json::array(), firstSpikes=json::array();
+ json zonePeaks=json::array(),wrapperAnswers=json::array();
  int tp=0,fp=0,fn=0,tn=0;
  for(const auto& sample:data) {
   if(independent && !env->Reset()) throw std::runtime_error("Independent Reset failed");
@@ -92,7 +95,7 @@ json legacyInference(const json& job, const std::vector<json>& data, bool indepe
    drives[i]->Frequency=frequency;
    if(patternChanged || job.value("reset_drive_on_equal_pattern",true)) drives[i]->Reset();
   }
-  bool fired=false; double peak=0,first=-1; std::vector<double> somaMax(5,0.0),somaTime(5,0.0);
+  bool fired=false,wrapperFired=false; double peak=0,first=-1,zonePeak=0; std::vector<double> somaMax(5,0.0),somaTime(5,0.0);
   const double start=time();
   const bool saveTrace=trace && (sample.at("id")==job.value("target_id",0) || sample.at("id")==22 || sample.at("id")==51 || sample.at("id")==61 || sample.at("id")==129);
   for(int tick=0;tick<ticks;++tick) {
@@ -105,11 +108,15 @@ json legacyInference(const json& job, const std::vector<json>& data, bool indepe
     if(saveTrace) sourceValues.push_back(sourceNodes[i-1]->Output(0,0));
    }
    peak=std::max(peak,sum);
+   if(pulseZone && pulseZone->OutputPotential.GetRows()>0) zonePeak=std::max(zonePeak,pulseZone->OutputPotential(0,0));
+   const auto& wrapper=learner?learner->Output.GetData():trainer->Output.GetData();
+   if(wrapper.GetRows()>0 && wrapper(0,0)>.001)wrapperFired=true;
    if(ltz->Output(0,0)>.001) { if(!fired) first=time()-start; fired=true; }
    if(saveTrace) waveforms << json({{"case",key},{"repeat",repeat},{"input_id",sample.at("id")},{"tick",tick},
     {"time",time()-start},{"sum_soma",sum},{"soma",soma},{"sources",sourceValues},{"LTZone",ltz->Output(0,0)}}).dump()<<'\n';
   }
   ids.push_back(sample.at("id")); answers.push_back(fired?1:0); peaks.push_back(peak); firstSpikes.push_back(first<0?json(nullptr):json(first));
+  zonePeaks.push_back(zonePeak);wrapperAnswers.push_back(wrapperFired?1:0);
   if(time()-start<.66) throw std::runtime_error("Model time did not advance through the stimulus window");
   bool own=sample.at("class").get<int>()==target;
   if(own) { if(fired)++tp;else ++fn; } else { if(fired)++fp;else ++tn; }
@@ -117,7 +124,7 @@ json legacyInference(const json& job, const std::vector<json>& data, bool indepe
  }
  waveforms.flush(); const auto after=structureReadback();
  return {{"status","completed"},{"kind",kind},{"protocol",independent?"independent_reset":"continuous"},{"input_ids",ids},{"answers",answers},
-  {"peaks",peaks},{"first_spikes",firstSpikes},{"TP",tp},{"FP",fp},{"FN",fn},{"TN",tn},
+  {"peaks",peaks},{"zone_potential_peaks",zonePeaks},{"wrapper_answers",wrapperAnswers},{"first_spikes",firstSpikes},{"TP",tp},{"FP",fp},{"FN",fn},{"TN",tn},
   {"target_class",target},{"ticks_per_input",ticks},{"dendrites",dend()},{"synapses",syn()},
   {"readback_before",before},{"readback_after",after},{"structure_unchanged",before==after},
   {"training_disabled",!needs()},{"cache_adapter","native object pointers, observation buffers, native computation order; no graph reconstruction"}};

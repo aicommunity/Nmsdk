@@ -85,6 +85,20 @@ if(MSVC)
 endif()
 deploy_vcpkg_dlls(ClassicSavedStateCheck)
 
+add_executable(ClassicTrainingRepro
+    ${CMAKE_SOURCE_DIR}/Scripts/ClassicStructTrain/replay.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Libraries.cpp
+    ${CMAKE_SOURCE_DIR}/Tests/Integration/Support/ConsoleLikeInit.cpp
+)
+get_target_property(_classic_repro_links ClassicStructTrainReplay LINK_LIBRARIES)
+target_link_libraries(ClassicTrainingRepro PRIVATE ${_classic_repro_links})
+target_include_directories(ClassicTrainingRepro PRIVATE
+    ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include ${CMAKE_SOURCE_DIR}/Libraries)
+if(MSVC)
+    target_compile_options(ClassicTrainingRepro PRIVATE /utf-8)
+endif()
+deploy_vcpkg_dlls(ClassicTrainingRepro)
+
 # Opt-in canonical runtime location for the historical experiment workflow.
 # The shared folder is used only by Release, never by a Debug configuration.
 set(NMSDK_CLASSIC_RUNTIME_DIR "" CACHE PATH "Classic experiment Release runtime directory")
@@ -92,7 +106,7 @@ if(NMSDK_CLASSIC_RUNTIME_DIR)
     if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
         message(FATAL_ERROR "NMSDK_CLASSIC_RUNTIME_DIR requires a single-config Release build")
     endif()
-    foreach(_classic_target NeuroModelerConsole ClassicStructTrainReplay ClassicSavedStateCheck Test_PulseLib_StorageComponents)
+    foreach(_classic_target NeuroModelerConsole ClassicStructTrainReplay ClassicSavedStateCheck ClassicTrainingRepro Test_PulseLib_StorageComponents)
         set_target_properties(${_classic_target} PROPERTIES
             RUNTIME_OUTPUT_DIRECTORY "${NMSDK_CLASSIC_RUNTIME_DIR}"
             RUNTIME_OUTPUT_DIRECTORY_RELEASE "${NMSDK_CLASSIC_RUNTIME_DIR}")
