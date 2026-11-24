@@ -1,0 +1,120 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-heldout-cache-restored-dn42.json",
+  "catalog_record": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-heldout-cache-restored-dn42.json",
+    "sha256": "dfe1a94b74e5170c45333433a5aa3e564914dc4a7180eff05b311fdb4e57f7a0",
+    "size": 5007
+  },
+  "kind": "timelearner_Classic_heldout_physical_gallery_independent_restoration",
+  "schema_version": 1,
+  "objects": {
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e3/e31bb7ced27a6519dddfacbbf60a63da436c5a4afbc67c002eb534a3a9b3de68",
+      "sha256": "e31bb7ced27a6519dddfacbbf60a63da436c5a4afbc67c002eb534a3a9b3de68",
+      "bytes": 347618832
+    },
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/06/069d951494989e2e4de9218b6b04b1ecaebf7c28ed2dbed34bd94205010f385b",
+      "sha256": "069d951494989e2e4de9218b6b04b1ecaebf7c28ed2dbed34bd94205010f385b",
+      "bytes": 3060899
+    },
+    "validation.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/22/22ab995bab491acc0da6c0e7989c86455eb82997512c4e823ad5b46bc42b8f4b",
+      "sha256": "22ab995bab491acc0da6c0e7989c86455eb82997512c4e823ad5b46bc42b8f4b",
+      "bytes": 1861
+    },
+    "terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b3/b3eafd1b55c1f134804221d81ea5c7bc8e386d02f495c16c1d0693fee56134e2",
+      "sha256": "b3eafd1b55c1f134804221d81ea5c7bc8e386d02f495c16c1d0693fee56134e2",
+      "bytes": 3186
+    }
+  },
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "e31bb7ced27a6519dddfacbbf60a63da436c5a4afbc67c002eb534a3a9b3de68",
+    "archive_members_verified": 14102,
+    "retained_regular_files": 14102,
+    "compatibility": null,
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "validation": {
+    "kind": "timelearner_completed_physical_cache_revalidation",
+    "schema_version": 1,
+    "source_python_root": "b41e9f9f1cd0222ebeb3b5a77041868afbc4f940",
+    "source_snapshot_files_verified": 865,
+    "source_native_execution": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-policy4-data3-matched-duration-heldout-dk19\\native\\execution.json",
+      "sha256": "53fd4a819531d5687f344b192b5a2f4605d0fce8f1b1d6b177228f5ffaa11529",
+      "size": 3346
+    },
+    "cache": "C:\\Projects\\TimeLearnerWorker\\report-cache\\Classic-policy4-heldout-eight-dm5",
+    "manifest": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\report-cache\\Classic-policy4-heldout-eight-dm5\\manifest.json",
+      "sha256": "1446ba1694a781fce92d54b45b97603d55a3a7936da9454bb9b0e23715a8ed00",
+      "size": 3459145
+    },
+    "SHA256SUMS": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\report-cache\\Classic-policy4-heldout-eight-dm5\\SHA256SUMS.json",
+      "sha256": "d0cc6a02f5c9c2c0c983eb29c60feed4a9e36ebd506ef05e76add828f81da021",
+      "size": 1602438
+    },
+    "files_verified": 13429,
+    "PNG_files": 4471,
+    "complete_observations": 8,
+    "trial_soma_pairs": 32,
+    "counts": {
+      "TP": 1,
+      "FP": 0,
+      "FN": 0,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 1.0,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.0
+    },
+    "model_revision": "eee84b64692115508ccd8ca7e69b29477d29198b9b0758e69f16a781f4093367",
+    "full_source_and_copied_observations_equal": true,
+    "all_LT_trials_rendered": true,
+    "original_render_postcheck_failed": true,
+    "original_render_exit_code": 1,
+    "corrected_postcheck_uses_physical_schema": true,
+    "original_failure_preserved": true,
+    "rerendered": false,
+    "native_model_not_rerun": true,
+    "visual_acceptance_complete": false,
+    "publication_ready": false,
+    "scientific_verdict": null
+  },
+  "cache": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Classic-heldout-cache-restored-dn42/restored/report-cache/Classic-policy4-heldout-eight-dm5",
+  "index": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Classic-heldout-cache-restored-dn42/restored/report-cache/Classic-policy4-heldout-eight-dm5/index.html",
+  "all_member_bytes_verified": true,
+  "producer": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/Classic-heldout-cache-restore-dn42/worker.py",
+    "sha256": "3b1603832f83a76aac7e36e8dfe52e4b02d534b05c9b7d9932c45a33374ce21a",
+    "size": 4180
+  },
+  "upstream_primary_catalog": "experiments/2026-11-24/Classic-policy4-heldout-eight-and-unique15-dl13.json",
+  "original_postcheck_error_preserved": true,
+  "native_model_not_rerun": true,
+  "visual_acceptance_complete": false,
+  "Russian_publication_ready": false,
+  "scientific_verdict": null
+}
