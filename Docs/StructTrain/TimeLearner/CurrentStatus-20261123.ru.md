@@ -1,6 +1,6 @@
 # TimeLearner: состояние на23 ноября2026
 
-Обновлено24 ноября2026; учтены завершённые проверки до01:04 UTC.
+Обновлено24 ноября2026; точное время каждого наблюдения указано в квитанциях.
 
 Новый независимый отрицательный набор Branch завершён: **TP1/FP0/FN0/TN7**.
 Модель007f82de и порог0,0858575482028458 сохранены; семь новых отвлекающих
@@ -40,13 +40,14 @@ Train завершён по бюджету. Полный пакет опубли
 вернул false до проверки learner. Процесс и вся группа закрыты.
 Fixture исправлен на штатный SetPointer. На отдельном свежем Windows-SDK
 после аудита5173 файлов **прошли18/18 проверок Delay**, в том числе оба
-подключения. Полного нового прогона132/132 не было. Архивирование всех
-первичных данных прежнего и нового прогонов выполняется отдельно.
+подключения. Полного нового прогона132/132 не было. Все2195 файлов первичных
+данных прежнего и нового прогонов независимо восстановлены на M40.
 [Аудит и процесс](../../../Reports/StructTrain/TimeLearner/FixedBranchDurationHoldout-20261124/actual-artifact-audit-and-native132-running-av32.json),
 [восстановленные условия очереди](../../../Reports/StructTrain/TimeLearner/FixedBranchDurationHoldout-20261124/native132-persistent-queue-controls-av28.json).
 [Причина двух сбоев и исправление fixture](DelayConnectedFixture-20261124.ru.md),
 [полный итог132](../../../Reports/StructTrain/TimeLearner/Progress-20261124/Windows-actual132-closed-two-fixture-failures-ax1.json).
 [Новые18/18](../../../Reports/StructTrain/TimeLearner/Progress-20261124/Windows-actual18-passed-ax41.json).
+[Полные первичные данные](../../../Reports/StructTrain/TimeLearner/Progress-20261124/Windows-complete-Delay-primary-restored-ax50.json).
 Windows at29 с bad allocation остаётся отдельной закрытой ошибкой,
 до первого наблюдения; повтор не поставлен.
 

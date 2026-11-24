@@ -1,0 +1,52 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Windows-complete-Delay-native-proof-ax50.json",
+  "record": {
+    "kind": "timelearner_complete_Windows_Delay_native_primary_restored",
+    "schema_version": 1,
+    "objects": {
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a6/a67d07e90b1a27f5451347c08a43d9ba12997efd330d8fb2e4458b3a9896e272",
+        "sha256": "a67d07e90b1a27f5451347c08a43d9ba12997efd330d8fb2e4458b3a9896e272",
+        "bytes": 12667324
+      },
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f1/f1bcd80e4369b141b1bae72d34d9835246bb64fdd73030abdd06fabe4e6027a9",
+        "sha256": "f1bcd80e4369b141b1bae72d34d9835246bb64fdd73030abdd06fabe4e6027a9",
+        "bytes": 543519
+      }
+    },
+    "members": 2195,
+    "expanded_bytes": 1331477556,
+    "archive_bytes": 12667324,
+    "independent_restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "a67d07e90b1a27f5451347c08a43d9ba12997efd330d8fb2e4458b3a9896e272",
+      "archive_members_verified": 2195,
+      "retained_regular_files": 2195,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "previous132_result": {
+      "observed": 132,
+      "passed": 130,
+      "fixture_preparation_failures": 2
+    },
+    "new_targeted_Delay_result": {
+      "observed": 18,
+      "passed": 18
+    },
+    "current_control_histories_included": true,
+    "previous_native_data_not_discarded": true,
+    "scientific_verdict": null
+  }
+}
