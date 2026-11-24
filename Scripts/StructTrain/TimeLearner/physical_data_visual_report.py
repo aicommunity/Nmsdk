@@ -52,7 +52,9 @@ def render(manifest_path, output, python_source, matplotlib_libs=None):
     count=len(observations[0]['samples'][0]['soma'])
     require(0<count<=256 and all(len(s['soma'])==count for o in observations for s in o['samples']),
             'physical_visual_report_soma_dimension_changed')
-    shared=padded_limits([v for o in observations for s in o['samples'] for v in s['soma']])
+    values=[v for o in observations for s in o['samples'] for v in s['soma']]
+    shared=padded_limits(values)
+    shared_minimum,shared_maximum=min(values),max(values)
     plotted=[]
     for trial in metrics['trials']:
         observation=by_id[trial['trial_id']]
@@ -65,7 +67,7 @@ def render(manifest_path, output, python_source, matplotlib_libs=None):
             views=render_soma(display,channel,f'Soma channel {channel+1}',shared,folder,
                 context_label='Fixed DATA Test; actual '+trial['classification'])
             views.extend(render_positive_lobe_views(display,channel,f'Soma channel {channel+1}',folder,
-                shared_minimum=min(v for o in observations for s in o['samples'] for v in s['soma']),
+                shared_minimum=shared_minimum,shared_maximum=shared_maximum,
                 context_label='Fixed DATA Test; actual '+trial['classification']))
             plotted.append(dict(trial_id=trial['trial_id'],sample_id=trial['sample_id'],
                 classification=trial['classification'],soma_index=channel,folder=folder.name,views=views))

@@ -1,0 +1,251 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/DATA3-N0-source-targeted43-proof-df12.json",
+  "object": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/ba/ba14fd229d9912dadf2a6b9441a3d4144f959a3ed0f8b502c0727e319ffb5112",
+    "sha256": "ba14fd229d9912dadf2a6b9441a3d4144f959a3ed0f8b502c0727e319ffb5112",
+    "bytes": 18221
+  },
+  "source_closure": {
+    "root": {
+      "head": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "2c285cb472134fc92394153c089603a830a03f70",
+      "head": "2c285cb472134fc92394153c089603a830a03f70",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+      "head": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "passed": 43,
+  "failed": 0,
+  "skipped": 0,
+  "all_process_groups_closed": true,
+  "N0_source_preconditions": [
+    {
+      "name": "Branch_20000_N0_learned_boundary_configured_recognition_9_count_calibration_burst_003_transport_training_precondition.json",
+      "outcome": "exact",
+      "reason": "exact",
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      },
+      "actual_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "applied_edits": 0,
+      "certificate_matches_actual_model": true
+    },
+    {
+      "name": "Branch_20000_N0_learned_boundary_configured_transport_training_precondition.json",
+      "outcome": "budget_exhausted",
+      "reason": "maximum_sweeps_exhausted",
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      },
+      "actual_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "applied_edits": 4,
+      "certificate_matches_actual_model": false
+    },
+    {
+      "name": "Branch_2000_N0_learned_boundary_configured_recognition_9_count_calibration_burst_003_transport_training_precondition.json",
+      "outcome": "exact",
+      "reason": "exact",
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      },
+      "actual_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "applied_edits": 0,
+      "certificate_matches_actual_model": true
+    },
+    {
+      "name": "Branch_2000_N0_learned_boundary_configured_transport_training_precondition.json",
+      "outcome": "budget_exhausted",
+      "reason": "maximum_sweeps_exhausted",
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      },
+      "actual_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "applied_edits": 4,
+      "certificate_matches_actual_model": false
+    },
+    {
+      "name": "Classic_20000_N0_learned_boundary_configured_recognition_9_count_calibration_burst_003_transport_training_precondition.json",
+      "outcome": "exact",
+      "reason": "exact",
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      },
+      "actual_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "applied_edits": 0,
+      "certificate_matches_actual_model": true
+    },
+    {
+      "name": "Classic_20000_N0_learned_boundary_configured_transport_training_precondition.json",
+      "outcome": "budget_exhausted",
+      "reason": "maximum_sweeps_exhausted",
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      },
+      "actual_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "applied_edits": 4,
+      "certificate_matches_actual_model": false
+    },
+    {
+      "name": "Classic_2000_N0_learned_boundary_configured_recognition_9_count_calibration_burst_003_transport_training_precondition.json",
+      "outcome": "exact",
+      "reason": "exact",
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      },
+      "actual_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "applied_edits": 0,
+      "certificate_matches_actual_model": true
+    },
+    {
+      "name": "Classic_2000_N0_learned_boundary_configured_transport_training_precondition.json",
+      "outcome": "budget_exhausted",
+      "reason": "maximum_sweeps_exhausted",
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      },
+      "actual_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "applied_edits": 4,
+      "certificate_matches_actual_model": false
+    }
+  ],
+  "whole_plan_complete": false
+}
