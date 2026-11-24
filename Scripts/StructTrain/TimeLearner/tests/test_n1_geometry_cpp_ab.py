@@ -147,7 +147,8 @@ class N1GeometryCppABTest(unittest.TestCase):
                 process = execute(runtime, ['--gtest_output=xml:'+str(junit),
                     '--gtest_filter=*', '--gtest_repeat=1'], folder,
                     folder/'process', 120., cooperative_capture=True)
-            self.assertEqual(process['returncode'], 1 if name == 'before' else 0)
+            self.assertEqual(process['returncode'],
+                1 if name == 'before' and spec['expected_before_failures'] else 0)
             self.assertEqual(process['runtime_provenance'], 'loaded_files_captured')
             inventory = audit_junit(junit, expected)
             wanted = spec['expected_before_failures'] if name == 'before' else []
@@ -161,5 +162,6 @@ class N1GeometryCppABTest(unittest.TestCase):
         (output/'source-inventories.json').write_text(json.dumps(snapshots, indent=2)+'\n')
         (output/'dependency-inventory.json').write_text(json.dumps(dependency_before, indent=2)+'\n')
         (output/'result.json').write_text(json.dumps(dict(kind=self.result_kind,
-            schema_version=1, results=results, before_expected_failure=True, physical_models_executed=False,
+            schema_version=1, results=results,
+            before_expected_failure=bool(spec['expected_before_failures']), physical_models_executed=False,
             scientific_verdict=None), indent=2, allow_nan=False)+'\n')
