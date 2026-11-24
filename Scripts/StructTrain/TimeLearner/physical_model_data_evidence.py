@@ -43,7 +43,11 @@ def _conversion_source(package):
     require(package['configuration'] == expected and all(package[k] == source[k] for k in
             ('configuration_text', 'protocol', 'controls', 'dataset', 'implementation_id')),
             'physical_data_conversion_changed_source_conditions')
-    require(package['neuron']['class_definitions'] == source['neuron']['class_definitions'],
+    # Windows and Linux may serialize equivalent native XML with different
+    # attribute order/formatting. Validate both byte digests and compare the
+    # complete semantic storage closure (including future growth selectors).
+    # Only the native importer proves that XML reconstructs those identities.
+    require(_images(package['neuron']['class_definitions']) == _images(source['neuron']['class_definitions']),
             'physical_data_conversion_changed_storage_physics')
     spec = package['conversion_spec']; require(type(spec) is dict, 'physical_data_conversion_spec_object')
     version = spec.get('schema_version')
