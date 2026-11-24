@@ -1,0 +1,117 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-policy4-heldout-eight-and-unique15-dl13.json",
+  "catalog_record": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-policy4-heldout-eight-and-unique15-dl13.json",
+    "sha256": "d4bd7aa09414d8bef6f2c08a03a2b6245a646f74c5539d731954c415fdeab163",
+    "size": 4289
+  },
+  "kind": "timelearner_Classic_policy4_fixed_negative_holdout_primary",
+  "schema_version": 1,
+  "observed_utc": "2026-11-24T16:51:07.478606+00:00",
+  "objects": {
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/67/6749d0b78c288141e82a6f42e59f13f1940fb8459b3d40a23f0775a28964582c",
+      "sha256": "6749d0b78c288141e82a6f42e59f13f1940fb8459b3d40a23f0775a28964582c",
+      "bytes": 877336
+    },
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/42/4212ec8e6cfced5bf2db4930fd2bee4459b65f2365d9850eba41057eda3d9596",
+      "sha256": "4212ec8e6cfced5bf2db4930fd2bee4459b65f2365d9850eba41057eda3d9596",
+      "bytes": 19496
+    },
+    "proof.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ee/ee99eeb2bb98fa49c7e5b79d0d9b0a5b612e24db88b0d618a80e49609903f47c",
+      "sha256": "ee99eeb2bb98fa49c7e5b79d0d9b0a5b612e24db88b0d618a80e49609903f47c",
+      "bytes": 25652
+    },
+    "terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/79/79ebd5e0af53176c489d738a60ace96683f2dfe3b1fb1918bb9961730d3dc912",
+      "sha256": "79ebd5e0af53176c489d738a60ace96683f2dfe3b1fb1918bb9961730d3dc912",
+      "bytes": 1371
+    }
+  },
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "6749d0b78c288141e82a6f42e59f13f1940fb8459b3d40a23f0775a28964582c",
+    "archive_members_verified": 96,
+    "retained_regular_files": 96,
+    "compatibility": null,
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "heldout_counts": {
+    "TP": 1,
+    "FP": 0,
+    "FN": 0,
+    "TN": 7,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 1.0,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.0
+  },
+  "unique_input_counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 13
+  },
+  "unique_sampled_inputs": 15,
+  "target_comparison": {
+    "kind": "timelearner_trial_response_comparison",
+    "schema_version": 1,
+    "comparator_version": 1,
+    "time_basis": "actual_stimulus_onset",
+    "absolute_tolerance": 1e-12,
+    "observation_schema_version": 2,
+    "source_trial_id": "classic-policy4-data3-midgap-eight-dk10/trial-0",
+    "observed_trial_id": "classic-policy4-data3-matched-duration-heldout-dk19/repeated-target",
+    "sample_id": "phasea-row-0",
+    "model_revision": "eee84b64692115508ccd8ca7e69b29477d29198b9b0758e69f16a781f4093367",
+    "source_begin": 0,
+    "observed_begin": 10.0025,
+    "source_stimulus_onset": 0.01,
+    "observed_stimulus_onset": 10.0125,
+    "absolute_clock_shift": 10.0025,
+    "source_samples": 4001,
+    "observed_samples": 4001,
+    "sample_counts_equal": true,
+    "window_offsets_equal": true,
+    "maximum_absolute_signal_difference": 0.0,
+    "maximum_relative_sample_time_difference": 1.609823385706477e-15,
+    "maximum_relative_history_difference": 1.1657341758564144e-15,
+    "maximum_relative_event_time_difference": 1.1657341758564144e-15,
+    "maximum_window_offset_difference": 2.220446049250313e-16,
+    "maximum_absolute_sample_difference": 1.609823385706477e-15,
+    "waveforms_equal_within_declared_tolerance": true,
+    "stimulus_and_spike_events_equal": true,
+    "response_preserved": true,
+    "difference_reasons": [],
+    "pre_window_history_compared": false,
+    "scientific_verdict": null
+  },
+  "source_model_revision": "eee84b64692115508ccd8ca7e69b29477d29198b9b0758e69f16a781f4093367",
+  "fixed_threshold": 0.02620777717403984,
+  "independent_negative_patterns": 7,
+  "new_positive_classes": 0,
+  "source_training_outcome": "budget_exhausted",
+  "model_training_completed": false,
+  "plots_pending": true,
+  "scientific_verdict": null
+}
