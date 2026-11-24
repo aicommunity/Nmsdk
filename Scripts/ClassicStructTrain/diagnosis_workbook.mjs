@@ -250,7 +250,7 @@ for (const figure of report.sections.flatMap(section => section.charts ?? [])) {
   chart.displayBlanksAs = 'gap';
   chart.titleTextStyle.fontSize = 17;
   chart.legend = { position: 'top', textStyle: { fontSize: 14 } };
-  chart.xAxis = { axisType: 'textAxis', title: { text: x }, textStyle: { fontSize: 13 } };
+  chart.xAxis = { axisType: 'textAxis', tickLabelPosition: 'low', title: { text: x }, textStyle: { fontSize: 13 } };
   chart.yAxis = { min, max, title: { text: y }, textStyle: { fontSize: 13 },
     ...(figure.major_unit === undefined ? {} : { majorUnit: figure.major_unit }),
     numberFormatCode: figure.format ?? '0', numberFormatSourceLinked: false };
