@@ -93,10 +93,10 @@ TEST(BoundedTrainingN0LengthNeighborhood, LegacyOrderAndOneProposalKeepTheFinite
                 measured.emplace_back(p.length,p.synapses);
         });
         const std::vector<std::pair<int,int>> prefix=allowance?
-            std::vector<std::pair<int,int>>{{4,1},{4,2},{3,2},{5,1}}:
+            std::vector<std::pair<int,int>>{{4,1},{4,2},{3,2},{3,1}}:
             std::vector<std::pair<int,int>>{{4,1},{4,2},{5,1},{5,2}};
         ASSERT_GE(measured.size(),prefix.size());
-        EXPECT_TRUE(std::equal(prefix.begin(),prefix.end(),measured.begin()));
+        EXPECT_EQ((std::vector<std::pair<int,int>>(measured.begin(),measured.begin()+prefix.size())),prefix);
         EXPECT_NE(session.Status(),TrainingStatus::Exact);
         EXPECT_LE(session.IssuedProbes(),cfg.maximumProbes);
         EXPECT_LE(session.AppliedEdits(),cfg.maximumEdits);

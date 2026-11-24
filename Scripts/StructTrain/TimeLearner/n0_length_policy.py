@@ -44,7 +44,7 @@ def declare_n0_length_job(original, run_id, maximum_proposals):
     search = config['search']; search.pop(FIELD, None)
     if maximum_proposals:
         search[FIELD] = maximum_proposals
-    audit_n0_length_policy(search)
+    audit_n0_length_policy(dict(search, normalization=config['model']['normalization']))
     job['sha256'] = sha({k:v for k,v in job.items() if k != 'sha256'})
     validate_job('train', job)
     return job
