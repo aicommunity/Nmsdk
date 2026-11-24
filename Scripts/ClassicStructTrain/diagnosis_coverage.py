@@ -44,10 +44,17 @@ def run():
     order_expansion = WORK / "training-order-expansion.json"
     if order_expansion.exists():
         expected["training-ten-order"] = sum(14 for row in load(order_expansion) if row["expanded"])
-    for phase in (WORK / "runs").glob("warm-order-prefix-*"):
-        if phase.is_dir():
-            schedule = WORK / f"{phase.name}-schedule.json"
-            expected[phase.name] = len(load(schedule)["runs"]) if schedule.exists() else 3
+    for name in ("matched-training-order", "matched-warm-order"):
+        if (WORK / "runs" / name).exists():
+            expected[name] = 54 if name == "matched-training-order" else 9
+    for prefix in ("warm-order-prefix-", "matched-warm-order-prefix-"):
+        for phase in (WORK / "runs").glob(prefix + "*"):
+            if phase.is_dir():
+                schedule = WORK / f"{phase.name}-schedule.json"
+                expected[phase.name] = len(load(schedule)["runs"]) if schedule.exists() else 3
+    matched_expansion = WORK / "matched-training-order-expansion.json"
+    if matched_expansion.exists():
+        expected["matched-training-ten-order"] = sum(14 for row in load(matched_expansion) if row["expanded"])
     snapshot_resolution = WORK / "snapshot-resolution.json"
     snapshots = load(snapshot_resolution) if snapshot_resolution.exists() else {}
     if snapshots:

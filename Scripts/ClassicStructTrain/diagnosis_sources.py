@@ -179,9 +179,16 @@ def run():
     duplicate_a = RESEARCH / "0 на 1/output_data1.txt"
     duplicate_b = duplicate_a.with_name("output_data2.txt")
     assert sha(duplicate_a) == sha(duplicate_b)
+    variant_fields = ("id", "binary_sha256", "pulselib_sha", "rdk_sha",
+                      "controller_sha256", "training_adapter_sha256")
+    order_legacy = []
+    for name in ("VB", "FO"):
+        metadata = load(PREVIOUS / "variants" / f"{name}.json")
+        order_legacy.append({field: metadata[field] for field in variant_fields})
     save(WORK / "source-audit.json", {
         "recognition_cells_verified": len(answer_rows), "protocols": state_rows,
         "structure": {**structural_source, "path": relative(structural_book)},
+        "retained_order_variants": order_legacy,
         "unmapped_records": discrepancies, "unpaired_files": unpaired,
         "duplicate_single_iteration_files": [relative(duplicate_a), relative(duplicate_b)],
         "original_2022_callable_recognition_chain_recovered": False,

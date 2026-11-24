@@ -120,6 +120,7 @@ def audit():
     training = {}
     trace_comparisons = []
     sequences = defaultdict(list)
+    matched_inputs = {}
     for process in sorted((WORK / "runs").glob("*/*/process.json")):
         metadata = load(process)
         folder = process.parent
@@ -130,6 +131,15 @@ def audit():
                           "seconds": metadata.get("elapsed_wall_seconds")})
         if metadata["status"] != "completed":
             continue
+        if group.startswith(("matched-training-", "matched-warm-")):
+            command = metadata["command"]
+            manifest = load(Path(command[command.index("--manifest") + 1]))
+            assert manifest.pop("diagnostic_core") == {
+                "disable_neuron_reorder": "disabled" in run_id.split("-")
+            }, run_id
+            pair_key = (group, run_id.removeprefix("matched-").removeprefix("warm-").split("-", 1)[1])
+            common = (metadata["binary_sha256"], manifest)
+            assert matched_inputs.setdefault(pair_key, common) == common, (group, run_id)
         source = folder / "results.jsonl"
         if not source.exists() or source.stat().st_size == 0:
             continue
@@ -139,8 +149,8 @@ def audit():
             inference[group, run_id] = row, folder
         if row.get("record_type") == "training":
             training[group, run_id] = row, folder
-        if group in {"sequences", "warm-order"} or group.startswith("warm-order-prefix-"):
-            key = f"{group}/{run_id}" if group.startswith("warm-order-prefix-") else run_id
+        if group in {"sequences", "warm-order"} or group.startswith(("warm-order-prefix-", "matched-warm-")):
+            key = f"{group}/{run_id}" if group not in {"sequences", "warm-order"} else run_id
             for entry in run:
                 sequences[key].append({field: entry.get(field) for field in (
                     "record_type", "stage_index", "dendrites", "synapses", "status", "stop_reason", "iterations",
@@ -302,6 +312,8 @@ def audit():
         profile_controls.append({
             "label": label, "profile": profile, "repeat": int(repeat[1:]), "changed_ids": changed_ids,
             "metrics": {k: row[k] for k in ("TP", "FP", "FN", "TN")},
+            "physical_match": baseline is not None and all(row[key] == baseline[0][key] for key in (
+                "input_ids", "answers", "zone_potential_peaks", "first_spikes", "decode_windows")),
             "actual_profile": actual_profile(folder / "after/Model_00.xml"), "parameter_changes": dict(changes),
             "directory": relative(folder),
         })
@@ -334,6 +346,11 @@ def audit():
         ("training-order", "native-", "disabled-", "Явное обновление порядка при обучении"),
         ("training-order", "native-", "reversal-", "Возврат обновления порядка при обучении"),
         ("training-ten-order", "native-", "disabled-", "Явное обновление порядка на контрольной десятке"),
+        ("matched-training-order", "matched-native-", "matched-disabled-", "Изоляция обновления порядка на одном бинарнике"),
+        ("matched-training-order", "matched-native-", "matched-reversal-", "Возврат обновления порядка на одном бинарнике"),
+        ("matched-training-ten-order", "matched-native-", "matched-disabled-", "Обновление порядка на десятке на одном бинарнике"),
+        ("matched-warm-order", "warm-native-", "warm-disabled-", "Первое различие учебного цикла в последовательности № 22 → № 37"),
+        ("matched-warm-order", "warm-native-", "warm-reversal-", "Возврат исходной траектории № 22 → № 37"),
     )
     for phase, before, after, title in combinations:
         for (group, name), (a, ap) in training.items():
@@ -355,18 +372,23 @@ def audit():
         structural[row["algorithm"], row["input_id"]].append(row)
     order_structure = []
     for (phase, identifier), (native, native_path) in training.items():
-        if phase not in {"training-order", "training-ten-order"} or not (
-                identifier.startswith("native-") and identifier.endswith("-r1")):
+        if phase not in {"training-order", "training-ten-order", "matched-training-order",
+                         "matched-training-ten-order"} or not identifier.endswith("-r1"):
             continue
-        _, kind, target, _ = identifier.split("-")
+        mode = identifier.removeprefix("matched-")
+        if not mode.startswith("native-"):
+            continue
+        _, kind, target, _ = mode.split("-")
         tag = "NL" if kind == "learner" else "NT"
-        comparison = training.get((phase, "disabled-" + identifier.removeprefix("native-")))
+        flavor = "matched-" if phase.startswith("matched-") else ""
+        comparison = training.get((phase, flavor + "disabled-" + mode.removeprefix("native-")))
         entries = structural.get((tag, int(target)), [])
         if comparison is None or not entries:
             continue
         disabled, disabled_path = comparison
         order_structure.append({
             "kind": tag, "target": int(target), "historical_d": sorted({tuple(r["dendrites"]) for r in entries}),
+            "matched": bool(flavor),
             "cells": sorted({r["length_range"] for r in entries}),
             "source": source["path"], "sha256": source["sha256"],
             "native_d": native["dendrites"], "disabled_d": disabled["dendrites"],
@@ -427,21 +449,23 @@ def audit():
             "log": relative(WORK / "runs/sequences" / name / "results.jsonl"),
         })
     warm_order = []
-    for mode in ("native", "disabled", "reversal"):
-        for repeat in range(1, 4):
-            key = f"warm-{mode}-r{repeat}"
-            entries = sequences.get(key, [])
-            if not entries:
-                continue
-            stages = [row for row in entries if row["record_type"] == "training"]
-            warm_order.append({
-                "mode": mode, "repeat": repeat, "stages": stages,
-                "log": relative(WORK / "runs/warm-order" / key / "results.jsonl"),
-            })
+    for phase in ("warm-order", "matched-warm-order"):
+        for mode in ("native", "disabled", "reversal"):
+            for repeat in range(1, 4):
+                run_id = f"warm-{mode}-r{repeat}"
+                key = run_id if phase == "warm-order" else f"{phase}/{run_id}"
+                entries = sequences.get(key, [])
+                if not entries:
+                    continue
+                stages = [row for row in entries if row["record_type"] == "training"]
+                warm_order.append({
+                    "mode": mode, "repeat": repeat, "stages": stages, "matched": phase == "matched-warm-order",
+                    "log": relative(WORK / "runs" / phase / run_id / "results.jsonl"),
+                })
     historical_warm = {r["transition"]: r for r in previous_data["warm_comparisons"] if r["repeat"] == 1}
     warm_extensions = []
     for key, entries in sequences.items():
-        if not key.startswith("warm-order-prefix-"):
+        if not key.startswith(("warm-order-prefix-", "matched-warm-order-prefix-")):
             continue
         for row in entries:
             stage = row["stage_index"]

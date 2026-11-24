@@ -57,6 +57,13 @@ table('Источники и состояния', 'Соответствие ис
   ['Лист', 'Состояние', 'Диапазон', 'Файл', 'SHA256', 'Число ответов', 'Лишние значения', 'Дендриты и синапсы'],
   source.protocols.map(r => [r.sheet, r.state, r.range, r.file, r.file_sha256, r.mapped_answers,
     r.unmapped_answer_lines.join(', '), r.graph_ds.join(', ')]), [44, 15, 18, 64, 68, 18, 18, 34]);
+if (source.retained_order_variants?.length) {
+  table('Сборки порядка', 'Происхождение раздельно собранных вариантов изменения порядка',
+    ['Условие', 'SHA256 бинарника', 'Ревизия PulseLib', 'Ревизия Rdk',
+     'SHA256 контроллера', 'SHA256 адаптера обучения'],
+    source.retained_order_variants.map(r => [r.id, r.binary_sha256, r.pulselib_sha, r.rdk_sha,
+      r.controller_sha256, r.training_adapter_sha256]), [16, 68, 48, 48, 68, 68]);
+}
 const historicalSchemes = new Map([['Схема 0 на 1', ['0_1', 1]],
   ['Схема 0 на 1+4 для 150 примеров', ['0_1_4_full', 2]]]);
 const byContext = new Map(data.sequence_context.filter(r => r.repeat === 1)
@@ -91,12 +98,13 @@ if (source.structure) {
 }
 if (data.order_structure?.length) {
   table('Длины в контрольной десятке', 'Длины дендритов из первичной книги и двух учебных условий',
-    ['Алгоритм', 'Объект', 'Ячейки', 'Исторические длины', 'Длины исходные', 'Длины без вызова',
+    ['Сборки', 'Алгоритм', 'Объект', 'Ячейки', 'Исторические длины', 'Длины исходные', 'Длины без перестановки',
      'Исходное совпадение', 'Совпадение без вызова', 'Файл', 'SHA256', 'Журнал исходный', 'Журнал без вызова'],
-    data.order_structure.map(r => [r.kind, r.target, r.cells.join(', '), r.historical_d.map(d=>d.join(', ')).join(' / '),
+    data.order_structure.map(r => [r.matched ? 'Одна' : 'Раздельные', r.kind, r.target, r.cells.join(', '),
+      r.historical_d.map(d=>d.join(', ')).join(' / '),
       r.native_d.join(', '), r.disabled_d.join(', '), r.native_matches ? 'да' : 'нет',
       r.disabled_matches ? 'да' : 'нет', r.source, r.sha256, ...r.logs]),
-    [14, 12, 21, 28, 25, 25, 22, 22, 62, 68, 60, 60]);
+    [17, 14, 12, 21, 28, 25, 25, 22, 22, 62, 68, 60, 60]);
 }
 const raw = table('Архивные ответы', 'Исходные ответы и ответы двух предыдущих серий',
   ['Модель', 'Стартовый снимок', 'Объект Iris', 'Ячейка', 'История', 'Проверка снимка', 'Новое обучение',
@@ -149,11 +157,12 @@ table('Первый переход', 'Префикс непрерывного п
     r.historical_d.join(', '), r.observed_d.join(', '), r.historical_s.join(', '), r.observed_s.join(', '),
     r.stop_reason, r.log]), [13, 15, 15, 21, 21, 25, 25, 25, 25, 24, 60]);
 table('Порядок при переобучении', 'Отдельная проверка обновления порядка в переходе № 22 → № 37',
-  ['Условие', 'Повтор', 'Целевой объект', 'Итерации', 'Такты', 'Длины', 'Синапсы', 'Статус', 'Журнал'],
+  ['Сборки', 'Условие', 'Повтор', 'Целевой объект', 'Итерации', 'Такты', 'Длины', 'Синапсы', 'Статус', 'Журнал'],
   (data.warm_order ?? []).flatMap(r => r.stages.map((s, index) => [
-    r.mode, r.repeat, index === 0 ? 22 : 37, s.iterations, s.ticks, s.dendrites.join(', '),
+    r.matched ? 'Одна' : 'Раздельные', r.mode, r.repeat, index === 0 ? 22 : 37, s.iterations, s.ticks,
+    s.dendrites.join(', '),
     s.synapses.join(', '), s.status, r.log])),
-  [22, 14, 17, 14, 14, 25, 25, 23, 58]);
+  [18, 22, 14, 17, 14, 14, 25, 25, 23, 58]);
 if (data.warm_extensions?.length) {
   table('Удлинённый префикс', 'Влияние обновления порядка на более длинную последовательность',
     ['Процесс', 'Переход', 'С входа', 'На вход', 'Длины архив', 'Длины новые', 'Синапсы архив',

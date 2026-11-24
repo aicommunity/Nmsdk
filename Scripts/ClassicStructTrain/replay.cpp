@@ -118,11 +118,13 @@ struct Replay {
   if(!results || !history) throw std::runtime_error("Cannot open replay outputs");
   maxIterations=manifest["defaults"]["max_iterations"];
   wallTimeout=manifest["defaults"]["wall_timeout_seconds"];
-  for(const auto name:{"NMSDK_DIAG_PROFILE","NMSDK_DIAG_NT_STOP"}) qunsetenv(name);
+  for(const auto name:{"NMSDK_DIAG_PROFILE","NMSDK_DIAG_NT_STOP","NMSDK_DIAG_DISABLE_NEURON_REORDER"})
+   qunsetenv(name);
   if(manifest.contains("diagnostic_core")) {
    const auto& options=manifest.at("diagnostic_core");
    if(options.contains("profile")) qputenv("NMSDK_DIAG_PROFILE",QByteArray::fromStdString(options.at("profile").get<std::string>()));
    if(options.contains("nt_stop")) qputenv("NMSDK_DIAG_NT_STOP",QByteArray::fromStdString(options.at("nt_stop").get<std::string>()));
+   if(options.value("disable_neuron_reorder",false)) qputenv("NMSDK_DIAG_DISABLE_NEURON_REORDER","1");
   }
   app=NmsdkTests::InitEngineForPulseLibTests().application;
   if(!app) throw std::runtime_error("No application from test engine initialization");

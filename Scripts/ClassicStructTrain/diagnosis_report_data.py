@@ -47,6 +47,7 @@ def run():
         "Для распознавания использованы исходные столбцы книги «Распознавание.xlsx». Для схем использованы книга «Обучение нескольким примерам.xlsx» и первичные output_data. Структурный реестр опирается на «Инофрмация о длинах дендритов и числе синапсов.xlsx». Точные диапазоны и контрольные суммы находятся в сопровождающей книге и реестре.",
         "Даты сохранения рабочих документов относятся к 2022 году. Дата создания шаблона XLSX в метаданных не датирует эксперимент. Версии основного репозитория за 18 марта и 15 апреля 2022 года указывают на доступные ревизии PulseLib без исходников требуемых NNeuronTrainer и NNeuronLearner.",
         "В ревизиях 5f3f06d от 15 апреля и 0be546f от 27 июня есть изменения конструктора синапса. В обеих фабричный профиль Bio для регистрации класса указывает 86 МОм и 5 мс. Применённые в расчёте значения установлены по отдельным моделям и проверяются после всех настроек создаваемого компонента.",
+        "Метод явной перестановки появился в доступной истории NPulseNeuron 24 апреля 2023 года в ревизии 8f47c01. Для NNeuronLearner изменение 805fda1 от 5 августа 2026 года затрагивает порядок расчёта и восстановление связей. В контроле с одним исполняемым файлом переключается только перестановка в UpdateComputationOrder.",
     ] + ([f"С первичными ячейками длин и числа синапсов сверены {sources['structure']['records']} записей, включая четыре пары согласованных архивных вариантов. Пропуски и значения в скобках сохранены. Дополненные из других источников параметры подписаны отдельно."] if "structure" in sources else []), [history_chart]))
 
     parser_runs = [p for p in data["processes"] if p["phase"] == "parser" and p["status"] == "completed"]
@@ -230,18 +231,22 @@ def run():
             paragraphs.append(f"{factor}. Для NT22 в первом повторе первая расходящаяся запись имеет номер {first['record']}. "
                               f"Число итераций в паре {local['iterations'][0]} и {local['iterations'][1]}. "
                               "Изменившиеся поля и измеренные такты приведены в книге.")
-    order_expansion = WORK / "training-order-expansion.json"
+    order_expansion = WORK / "matched-training-order-expansion.json"
+    matched = order_expansion.exists()
+    if not matched:
+        order_expansion = WORK / "training-order-expansion.json"
     if order_expansion.exists():
         accepted = [r["kind"] for r in load(order_expansion) if r["expanded"]]
         named = {"learner": "NL", "trainer": "NT"}
-        enlarged = [r for r in data["training_comparisons"]
-                    if r["factor"] == "Явное обновление порядка на контрольной десятке"]
+        name = ("Обновление порядка на десятке на одном бинарнике" if matched else
+                "Явное обновление порядка на контрольной десятке")
+        enlarged = [r for r in data["training_comparisons"] if r["factor"] == name]
         if accepted:
             paragraphs.append(f"Для {', '.join(named[kind] for kind in accepted)} вариант с изменённым вызовом UpdateComputationOrder "
                               "сохранил ответ на свой вход во всех трёх проверках № 22. "
                               f"За пределами пилотных объектов измерено {len(enlarged)} пар. "
                               f"В {sum(r['first_difference'] is not None for r in enlarged)} из них различается траектория учебных событий.")
-        comparable = data.get("order_structure", [])
+        comparable = [r for r in data.get("order_structure", []) if r["matched"] == matched]
         if comparable:
             paragraphs.append(f"В основной исторической таблице есть длины для {len(comparable)} сочетаний алгоритма и входа из контрольной десятки. "
                               f"В исходном условии совпали {sum(r['native_matches'] for r in comparable)} векторов длин, без явного обновления — "
@@ -250,8 +255,9 @@ def run():
                          if row["input_id"] == 22), None)
         if archived:
             for kind, tag, identifier in (("trainer", "NT", "R12"), ("learner", "NL", "R13")):
-                variants = [next((r for r in trained if r["phase"] == "training-order" and
-                                  r["run"] == f"{mode}-{kind}-22-r1"), None)
+                flavor = "matched-" if matched else ""
+                variants = [next((r for r in trained if r["phase"] == flavor + "training-order" and
+                                  r["run"] == f"{flavor}{mode}-{kind}-22-r1"), None)
                             for mode in ("native", "disabled")]
                 if not all(variants):
                     continue
@@ -259,7 +265,7 @@ def run():
                 rows = [[str(i + 1), historical[i], *(row["d"][i] for row in variants)] for i in range(5)]
                 training_charts.append(chart(identifier, f"Исторические и измеренные длины {tag}22",
                     "Номер входного канала", "Длина дендрита, сегм.",
-                    ["Канал", "Книга 2022 г.", "Исходное обучение", "Без явного вызова"], rows,
+                    ["Канал", "Книга 2022 г.", "Исходное обучение", "Без перестановки"], rows,
                     "Длины из исходной структурной таблицы сопоставлены с результатом первого повтора. "
                     "Для этого входа источник не содержит полного числа синапсов. Совпадение длин допускает несколько физических графов."))
     decision_path = WORK / "training-expansion-decision.json"
@@ -293,7 +299,13 @@ def run():
                           f"Число итераций {first['historical_iterations']} и {first['observed_iterations']}. "
                           f"Всего измерено {len(warm)} повторов. Архивная таблица содержит конечные значения, поэтому точный такт расходящегося исторического решения остаётся неизвестным.")
         variants = defaultdict(dict)
+        matched_warm = any(r["matched"] for r in data.get("warm_order", []))
+        if data.get("warm_order"):
+            paragraphs.append("Первые проверки с раздельными исполняемыми файлами VB и FO установили совпадение с архивом. "
+                              "Хеши их контроллеров различаются. Изоляция влияния перестановки проверяется отдельным сравнением на одной сборке.")
         for row in data.get("warm_order", []):
+            if row["matched"] != matched_warm:
+                continue
             if len(row["stages"]) > 1:
                 variants[row["mode"]][row["repeat"]] = row["stages"][1]
 
@@ -305,7 +317,8 @@ def run():
         if disabled:
             repeated = set(variants["native"]) & set(disabled) & set(variants["reversal"])
             reversed_paths = sum(variants["native"][i] == variants["reversal"][i] for i in repeated)
-            paragraphs.append(f"Без явного учебного вызова UpdateComputationOrder архивная структура и число итераций "
+            build = "в одной сборке" if matched_warm else "в сравнении сборок VB и FO"
+            paragraphs.append(f"При отключённой перестановке в UpdateComputationOrder {build} архивная структура и число итераций "
                               f"совпали в {sum(matches_history(row) for row in disabled.values())} из {len(disabled)} сравнений. "
                               f"Возврат вызова восстановил исходные учебные записи в {reversed_paths} из {len(repeated)} пар. "
                               "Сохранённые исторические числа позволяют проверить этот переход. Полная история внутренних сигналов отсутствует.")
@@ -329,8 +342,9 @@ def run():
                 records = sorted(rows, key=lambda r: r["transition"])
                 first = next((r for r in records if not r["matches"]), None)
                 condition = titles[key.split("/")[-1]]
+                build = "один бинарник" if key.startswith("matched-") else "раздельные сборки"
                 length = key.split("/")[0].rsplit("-", 1)[-1]
-                paragraphs.append(f"Последовательность из {length} переходов, условие «{condition}». "
+                paragraphs.append(f"Последовательность из {length} переходов, {build}, условие «{condition}». "
                                   f"Архивные структуры и число итераций совпали в {sum(r['matches'] for r in records)} "
                                   f"из {len(records)} переходов."
                                   + (f" Первое различие на переходе № {first['from_id']} → № {first['to_id']}."
@@ -406,6 +420,36 @@ def run():
         ["Точное восстановление исторического исполняемого файла", "Не установлено",
          "Архивный фрагмент и реализации из Git относятся к разным версиям."],
     ]
+    order_by_run = {(r["mode"], r["repeat"]): r["stages"] for r in data.get("warm_order", []) if r["matched"]}
+    paired_order = [i for i in (1, 2, 3) if all((mode, i) in order_by_run
+                    for mode in ("native", "disabled", "reversal"))]
+    if paired_order:
+        changed = all(order_by_run["native", i] != order_by_run["disabled", i] and
+                      order_by_run["native", i] == order_by_run["reversal", i] for i in paired_order)
+        findings.append(["Перестановка внутри NPulseNeuron при переобучении",
+             "Подтверждено экспериментом" if changed and len(paired_order) == 3 else "Поддерживается ограниченными данными",
+             f"Парных сравнений на одном Release-бинарнике — {len(paired_order)}. Оценены учебные состояния перед переходом и после него."])
+    elif data.get("warm_order"):
+        findings.append(["Перестановка при переобучении в опыте VB и FO", "Поддерживается ограниченными данными",
+                         "Совпадение с архивом зафиксировано в раздельно собранных вариантах. Хеши контроллеров различаются."])
+    for label in ("NL22", "NT45"):
+        pair = [r for r in data["profile_inference"] if r["label"] == label and r["profile"] == "reversal"]
+        for profile, title in (("dissociation2", "Диссоциация 2 мс"), ("resistance100", "Сопротивление 100 МОм")):
+            rows = [r for r in data["profile_inference"] if r["label"] == label and r["profile"] == profile]
+            if not any(r["changed_ids"] for r in rows):
+                continue
+            stable = (len(rows) == len(pair) == 3 and all(r["physical_match"] for r in pair) and
+                      len({tuple(r["changed_ids"]) for r in rows}) == 1)
+            findings.append([f"{title}, фиксированный граф {label}",
+                 "Подтверждено экспериментом" if stable else "Поддерживается ограниченными данными",
+                 f"В первом полном измерении изменено {len(rows[0]['changed_ids'])} ответов. "
+                 "Параметры измерены на том же графе, возврат сверяется по ответам, потенциалам и времени."])
+    keep = [r for r in factors if r["run"].startswith("stop-keep-trainer-22-")]
+    reverted = [r for r in factors if r["run"].startswith("stop-reversal-trainer-22-")]
+    if len(keep) == len(reverted) == 3 and all(r["status"] == "wall_timeout" for r in keep):
+        findings.append(["Продолжение NT22 после удаления синапса", "Подтверждено экспериментом",
+                         "При исходном правиле и после его возврата наблюдалось завершение. "
+                         "В изменённом условии три вычисления достигли 600 секунд."])
     for key in sorted(by_factor):
         group = by_factor[key]
         if not any(r["changed"] for r in group):

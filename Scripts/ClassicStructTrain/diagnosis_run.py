@@ -410,20 +410,32 @@ def factor_training(workers):
              core={"profile": "default" if profile == "reversal" else profile}), inference_tasks, workers)
 
 
-def training_order(workers):
+def ordered_training(phase, name, repeat, job, binary, matched):
+    if matched:
+        trace = 4100 if repeat == 1 and job["target_id"] == 22 and phase in {
+            "matched-training-order", "matched-warm-order"} else 0
+        return train(phase, name, repeat, job, "matched-order",
+                     trace_ticks=trace, core={"disable_neuron_reorder": "disabled" in name.split("-")})
+    return train(phase, name, repeat, job, binary)
+
+
+def training_order(workers, matched=False):
     jobs = [job for job in pilot_jobs() if job["target_id"] in {22, 64, 111}]
-    tasks = [(f"{mode}-{job['id']}", repeat, job, binary)
+    prefix = "matched-" if matched else ""
+    tasks = [(f"{prefix}{mode}-{job['id']}", repeat, job, binary)
              for job in jobs for repeat in range(1, 4)
              for mode, binary in (("native", "VB"), ("disabled", "FO"), ("reversal", "VB"))]
-    parallel(lambda *args: train("training-order", *args), tasks, workers)
+    parallel(lambda *args: ordered_training(prefix + "training-order", *args, matched), tasks, workers)
 
 
-def warm_order(workers, transitions=1, requested=None):
+def warm_order(workers, transitions=1, requested=None, matched=False):
     job = warm_job()
     if not 1 <= transitions <= len(job["stages"]):
         raise ValueError("Requested warm prefix must contain between 1 and 90 transitions")
     job["stages"] = job["stages"][:transitions]
     phase = "warm-order" if transitions == 1 else f"warm-order-prefix-{transitions}"
+    if matched:
+        phase = "matched-" + phase
     modes = (("native", "VB"), ("disabled", "FO"), ("reversal", "VB"))
     if requested:
         modes = tuple((label, binary) for label, binary in modes if label in requested)
@@ -432,7 +444,7 @@ def warm_order(workers, transitions=1, requested=None):
              for label, binary in modes]
     save(WORK / f"{phase}-schedule.json", {"length": transitions, "runs": [f"{name}-r{repeat}"
          for name, repeat, _, _ in tasks]})
-    parallel(lambda *args: train(phase, *args), tasks, workers)
+    parallel(lambda *args: ordered_training(phase, *args, matched), tasks, workers)
 
 
 def training_expansion(workers):
@@ -484,16 +496,17 @@ def training_expansion(workers):
                    core={"profile": profile, "nt_stop": criterion}), jobs, workers)
 
 
-def expand_training_order(workers):
+def expand_training_order(workers, matched=False):
     candidates = []
-    directory = WORK / "runs/training-order"
+    prefix = "matched-" if matched else ""
+    directory = WORK / "runs" / (prefix + "training-order")
     for kind in ("learner", "trainer"):
         reference = []
         altered = []
         reversals = []
         for repeat in range(1, 4):
             for name, dataset in (("native", reference), ("disabled", altered), ("reversal", reversals)):
-                dataset.append(result(directory / f"{name}-{kind}-22-r{repeat}"))
+                dataset.append(result(directory / f"{prefix}{name}-{kind}-22-r{repeat}"))
         def signature(row):
             return row["status"], row["iterations"], row["dendrites"], row["synapses"]
         eligible = ([signature(row) for row in reference] == [signature(row) for row in reversals]
@@ -502,12 +515,12 @@ def expand_training_order(workers):
         own = []
         if eligible:
             for repeat, row in enumerate(altered, 1):
-                name = f"disabled-{kind}-22-r{repeat}"
+                name = f"{prefix}disabled-{kind}-22-r{repeat}"
                 item = frozen_case(name, directory / name / "trained", row, [22])
                 own.append(result(infer("snapshot-inference", item, "baseline", 1))["answers"][0])
         candidates.append({"kind": kind, "reversal_reproduced": eligible, "own_after_reload": own,
                            "expanded": eligible and own == [1, 1, 1]})
-    save(WORK / "training-order-expansion.json", candidates)
+    save(WORK / f"{prefix}training-order-expansion.json", candidates)
     tasks = []
     for row in candidates:
         if not row["expanded"]:
@@ -516,8 +529,8 @@ def expand_training_order(workers):
         for target in (37, 45, 60, 84, 90, 129, 134):
             job = {"id": f"{kind}-{target}", "kind": kind, "target_id": target, "target_class": (target-1)//50+1}
             for label, binary in (("native", "VB"), ("disabled", "FO")):
-                tasks.append((f"{label}-{kind}-{target}", 1, job, binary))
-    parallel(lambda *args: train("training-ten-order", *args), tasks, workers)
+                tasks.append((f"{prefix}{label}-{kind}-{target}", 1, job, binary))
+    parallel(lambda *args: ordered_training(prefix + "training-ten-order", *args, matched), tasks, workers)
 
 
 def differences(left, right):
@@ -674,7 +687,8 @@ def snapshots(workers):
             jobs.append(frozen_case(identifier, source, row, row["job"]["evaluation_ids"]))
     # Test the trained input on exact saved states of the first detected factor
     # pairs and the plain/traced pilots. The mean uses its recorded vector.
-    for group in ("training-pilot", "training-factors", "training-order", "training-ten", "training-ten-order"):
+    for group in ("limits", "training-pilot", "training-factors", "training-order", "training-ten", "training-ten-order",
+                  "matched-training-order", "matched-training-ten-order"):
         for run in sorted((WORK / "runs" / group).glob("*/results.jsonl")):
             if load(run.with_name("process.json"))["status"] != "completed":
                 continue
@@ -716,6 +730,7 @@ def main():
     parser.add_argument("--factor", action="append", choices=tuple(FACTORS))
     parser.add_argument("--warm-transitions", type=int, default=1)
     parser.add_argument("--warm-mode", action="append", choices=("native", "disabled", "reversal"))
+    parser.add_argument("--matched-order", action="store_true")
     args = parser.parse_args()
     if args.action == "package":
         print(package(args.variant))
@@ -738,13 +753,13 @@ def main():
     elif args.action == "factors":
         factor_training(args.workers)
     elif args.action == "training-order":
-        training_order(args.workers)
+        training_order(args.workers, args.matched_order)
     elif args.action == "warm-order":
-        warm_order(args.workers, args.warm_transitions, args.warm_mode)
+        warm_order(args.workers, args.warm_transitions, args.warm_mode, args.matched_order)
     elif args.action == "training-expansion":
         training_expansion(args.workers)
     elif args.action == "expand-training-order":
-        expand_training_order(args.workers)
+        expand_training_order(args.workers, args.matched_order)
     elif args.action == "traces":
         trace_controls(args.workers, args.factor)
     elif args.action == "expansion":

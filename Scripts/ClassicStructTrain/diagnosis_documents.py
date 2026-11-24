@@ -106,7 +106,8 @@ def report(checkpoint=False):
             p.add_run().add_picture(str(image), width=Cm(16.5))
             caption = doc.add_paragraph(f"Рисунок {len(images)+1} — {chart['title']}", "Caption")
             caption.paragraph_format.keep_with_next = True
-            paragraph(doc, chart["analysis"])
+            explanation = doc.add_paragraph(chart["analysis"])
+            explanation.paragraph_format.keep_together = True
             images.append(hashlib.sha256(image.read_bytes()).hexdigest())
     destination = WORK / "checkpoint" if checkpoint else DELIVERY
     target = destination / "DiscrepancyDiagnosis.docx"
