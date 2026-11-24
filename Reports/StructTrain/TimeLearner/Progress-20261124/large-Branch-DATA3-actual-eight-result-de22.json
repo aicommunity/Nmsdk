@@ -1,0 +1,170 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/large-Branch-DATA3-actual-eight-result-de22.json",
+  "object": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/62/62a2f4edcf1de99d9ce8abce348c1f719266844a64a342394120daa3bf2a03f5",
+    "sha256": "62a2f4edcf1de99d9ce8abce348c1f719266844a64a342394120daa3bf2a03f5",
+    "bytes": 11114
+  },
+  "counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.14285714285714285
+  },
+  "threshold": 0.09864679711103091,
+  "model_revision": "a71ae5270f9c8fe9c03bc479e473b3d08ea9e798bf134c32ad8aa559a2e34d8a",
+  "run_manifest": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/large-Branch-DATA3-threshold-mid-eight-diagnostic-de6/run-manifest.json",
+    "sha256": "daf37812eaaff8ca11b948bad8eb32bedf6b2dc19cf3331e6ee117a435e09b19",
+    "size": 53247
+  },
+  "audit": {
+    "run_evidence_consistent": true,
+    "operation": "physical-model-evaluate",
+    "native_execution_verified": false,
+    "independent_partition_verified": false,
+    "evaluation_verdict": null
+  },
+  "all_processes_closed": true,
+  "trials": [
+    {
+      "sample_id": "phasea-row-0",
+      "classification": "TP",
+      "input_times_from_trial_begin": [
+        0.01,
+        0.09,
+        0.25,
+        0.49
+      ],
+      "spike_times_from_trial_begin": [
+        0.4935
+      ],
+      "samples": 4001,
+      "complete": true,
+      "valid": true,
+      "model_frozen": true
+    },
+    {
+      "sample_id": "phasea-row-1",
+      "classification": "TN",
+      "input_times_from_trial_begin": [
+        0.009999999999999787,
+        0.25,
+        0.4099999999999997,
+        0.48999999999999977
+      ],
+      "spike_times_from_trial_begin": [],
+      "samples": 4001,
+      "complete": true,
+      "valid": true,
+      "model_frozen": true
+    },
+    {
+      "sample_id": "phasea-row-2",
+      "classification": "TN",
+      "input_times_from_trial_begin": [
+        0.009999999999999787,
+        0.16999999999999993,
+        0.25,
+        0.4899999999999993
+      ],
+      "spike_times_from_trial_begin": [],
+      "samples": 4001,
+      "complete": true,
+      "valid": true,
+      "model_frozen": true
+    },
+    {
+      "sample_id": "phasea-row-3",
+      "classification": "TN",
+      "input_times_from_trial_begin": [
+        0.009999999999999787,
+        0.16999999999999993,
+        0.33000000000000007,
+        0.4900000000000002
+      ],
+      "spike_times_from_trial_begin": [],
+      "samples": 4001,
+      "complete": true,
+      "valid": true,
+      "model_frozen": true
+    },
+    {
+      "sample_id": "phasea-row-4",
+      "classification": "FP",
+      "input_times_from_trial_begin": [
+        0.009999999999999787,
+        0.02999999999999936,
+        0.25,
+        0.4900000000000002
+      ],
+      "spike_times_from_trial_begin": [
+        0.49299999999999855
+      ],
+      "samples": 4001,
+      "complete": true,
+      "valid": true,
+      "model_frozen": true
+    },
+    {
+      "sample_id": "phasea-row-5",
+      "classification": "TN",
+      "input_times_from_trial_begin": [
+        0.009999999999999787,
+        0.25,
+        0.47000000000000064,
+        0.4900000000000002
+      ],
+      "spike_times_from_trial_begin": [],
+      "samples": 4001,
+      "complete": true,
+      "valid": true,
+      "model_frozen": true
+    },
+    {
+      "sample_id": "phasea-row-6",
+      "classification": "TN",
+      "input_times_from_trial_begin": [
+        0.009999999999999787,
+        0.05000000000000071,
+        0.08999999999999986,
+        0.4900000000000002
+      ],
+      "spike_times_from_trial_begin": [],
+      "samples": 4001,
+      "complete": true,
+      "valid": true,
+      "model_frozen": true
+    },
+    {
+      "sample_id": "phasea-row-7",
+      "classification": "TN",
+      "input_times_from_trial_begin": [
+        0.009999999999999787,
+        0.41000000000000014,
+        0.4499999999999993,
+        0.48999999999999844
+      ],
+      "spike_times_from_trial_begin": [],
+      "samples": 4001,
+      "complete": true,
+      "valid": true,
+      "model_frozen": true
+    }
+  ],
+  "completed_Train": false,
+  "independently_heldout": false,
+  "matches_user_document_rule": true,
+  "full_primary_archive": false,
+  "visual_review_complete": false,
+  "whole_SDK_accepted": false
+}
