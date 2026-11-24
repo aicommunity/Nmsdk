@@ -1,0 +1,66 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-policy4-event-timing-and-heldout-dk23.json",
+  "catalog_record": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-policy4-event-timing-and-heldout-dk23.json",
+    "sha256": "c9effc416f1912479f96aab2eaee457c1ce58d6e4088a70be5604931dca4a1fe",
+    "size": 2227
+  },
+  "kind": "timelearner_Classic_policy4_actual_timing_and_frozen_followup",
+  "schema_version": 1,
+  "timing": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/2a/2a4adf249dc939571b8a748d8f08ed0a04fdffbcc15e249149c8378aa5d23120",
+    "sha256": "2a4adf249dc939571b8a748d8f08ed0a04fdffbcc15e249149c8378aa5d23120",
+    "bytes": 7219
+  },
+  "declarations": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/a6/a6a47033191fb600cbef256535ebf43475a125c610b100eea3ec35744232629a",
+    "sha256": "a6a47033191fb600cbef256535ebf43475a125c610b100eea3ec35744232629a",
+    "bytes": 10348
+  },
+  "heldout_controls": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/6b/6b0ee215a9b331244fb8b8ef159275ae202e51f5606014d16cf590a5734c8100",
+    "sha256": "6b0ee215a9b331244fb8b8ef159275ae202e51f5606014d16cf590a5734c8100",
+    "bytes": 11121
+  },
+  "heldout_controls_commit": "174e18f132fba5859e485baf914641536ea130dc",
+  "gallery_controls": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/78/786eeb3814f0fdc6ed40f9c0ab3526f91b227c957251b467b3b9261823bfbc7a",
+    "sha256": "786eeb3814f0fdc6ed40f9c0ab3526f91b227c957251b467b3b9261823bfbc7a",
+    "bytes": 24744
+  },
+  "actual_counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.14285714285714285
+  },
+  "target_output_from_last_input_seconds": [
+    0.003500000000000003
+  ],
+  "false_positive_sample_ids": [
+    "phasea-row-6"
+  ],
+  "target_before_last_input": false,
+  "heldout_result_pending": true,
+  "gallery_visual_acceptance_pending": true,
+  "source_training_outcome": "budget_exhausted",
+  "scientific_verdict": null
+}

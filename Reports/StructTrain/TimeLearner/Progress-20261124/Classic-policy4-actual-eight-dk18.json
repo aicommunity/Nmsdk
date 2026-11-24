@@ -1,0 +1,115 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-policy4-actual-threshold-eight-restored-dk18.json",
+  "catalog_record": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-policy4-actual-threshold-eight-restored-dk18.json",
+    "sha256": "9773b4081e6d2ea355761b8c947a44617e9b18c0896bcd6f6d776fd09dacd8b8",
+    "size": 3987
+  },
+  "capacity": {
+    "disk_bytes": 34359738368,
+    "memory_bytes": 34359738368,
+    "slots": 1
+  },
+  "reserved": {
+    "disk_bytes": 32212254720,
+    "memory_bytes": 12884901888,
+    "slots": 1
+  },
+  "kind": "timelearner_Classic_policy4_actual_eight_external_primary",
+  "schema_version": 1,
+  "observed_utc": "2026-11-24T15:42:17.687204+00:00",
+  "objects": {
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/bf/bfc72d2dfe2f201fec15fd4b26a30c830a586d7ae1fea391054418ccc7e2970f",
+      "sha256": "bfc72d2dfe2f201fec15fd4b26a30c830a586d7ae1fea391054418ccc7e2970f",
+      "bytes": 1619552
+    },
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b1/b10f2736e724adaa57cfdf1e25a42a5ad7e13124fe9e355bed2437f4b927c5e8",
+      "sha256": "b10f2736e724adaa57cfdf1e25a42a5ad7e13124fe9e355bed2437f4b927c5e8",
+      "bytes": 62722
+    },
+    "terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/bd/bdfdbe7de14846817ad19a7594d83104377a03efa5665514bcbe85d091f7a4de",
+      "sha256": "bdfdbe7de14846817ad19a7594d83104377a03efa5665514bcbe85d091f7a4de",
+      "bytes": 3694
+    }
+  },
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "bfc72d2dfe2f201fec15fd4b26a30c830a586d7ae1fea391054418ccc7e2970f",
+    "archive_members_verified": 321,
+    "retained_regular_files": 321,
+    "compatibility": null,
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "actual_result": {
+    "kind": "timelearner_Classic_policy4_actual_same_matrix_threshold_result",
+    "schema_version": 1,
+    "actual_evaluation": {
+      "kind": "timelearner_initial_windows_physical_evaluation",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "native_execution_verified": true,
+      "frozen_model_verified": true,
+      "replay_equality_claimed": false,
+      "model_revision": "eee84b64692115508ccd8ca7e69b29477d29198b9b0758e69f16a781f4093367",
+      "source_model_data_sha256": "bbd8cc1800937ad8004c409bdde28d3797df9f2ba84067da6cdd3c284b94dfdc",
+      "threshold": 0.02620777717403984,
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "complete_observations": 8,
+      "native_execution": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-policy4-data3-midgap-eight-dk10\\native\\execution.json",
+        "sha256": "fe704f5f8156cc95699a85f1d86c176724309b369e31bd4b459c4a1c13f7ff62",
+        "size": 3334
+      },
+      "source_training_outcome_unchanged": true,
+      "training_certificate_transferred": false,
+      "calibration_confirmed": false,
+      "scientific_verdict": null
+    },
+    "source_model_revision": "0b98eb811e865a3f86c06a0b18d2680653a86bd07b5f3513b1720e710e967469",
+    "threshold_proposal": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\physical-threshold-proposal-dk8\\proposal.json",
+      "sha256": "bb1326dc87cd0a86614821ee31ef1f917590c308a0a5ddfe299667b2b1c179a4",
+      "size": 6215
+    },
+    "source_training_outcome": "budget_exhausted",
+    "source_unchanged": true,
+    "training_certificate_transferred": false,
+    "calibration_confirmed": false,
+    "independent_evaluation": false,
+    "new_Train": false,
+    "scientific_verdict": null
+  },
+  "all_source_native_owners_closed": true,
+  "independent_byte_restoration_only": true,
+  "independent_metric_reaudit_pending": true,
+  "visual_review_pending": true,
+  "scientific_verdict": null
+}
