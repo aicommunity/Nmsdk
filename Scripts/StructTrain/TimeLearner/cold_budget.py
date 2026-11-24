@@ -11,6 +11,7 @@ from .model_identity import canonical_model_sha256
 from .native_evidence import number, require
 from .native_pipeline_worker import validate_job
 from .terminal_configuration import split_terminal_configuration
+from .n0_length_policy import audit_n0_length_policy
 
 # One native tick notices the search time limit, the next performs the queued
 # full-model finalization. This is execution completion capacity, never extra
@@ -23,6 +24,7 @@ def coverage(job):
     raw=job['configuration'];base,terminal_policy=split_terminal_configuration(raw)
     view=project_training_configuration(raw)
     search=view['search'];n=len(view['model']['inputs']);adjustable=max(0,n-1)
+    audit_n0_length_policy(dict(search, normalization=view['model']['normalization']))
     repeats=search.get('n0_candidate_repeats',1)
     # A candidate uses a fresh anchor/input pair for every required repetition.
     # At local exhaustion, the current implementation also probes restored best.

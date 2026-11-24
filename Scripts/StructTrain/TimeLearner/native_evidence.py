@@ -336,6 +336,8 @@ def validate_configured_repeat_policy(configuration: dict[str, Any], summary: di
     require(type(summary.get("schema_version")) is int and summary["schema_version"] == schema,
             "configuration_summary_repeat_schema_mismatch")
     search, measured = configuration["search"], summary["configuration"]
+    from .n0_length_policy import bind_n0_length_policy
+    bind_n0_length_policy(dict(search, normalization=configuration['model']['normalization']), measured)
     if schema == 4:
         from .capacitance_policy import audit_capacitance_search_policy
         policy = configuration.get('capacitance_search')
@@ -492,6 +494,8 @@ def _audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str
     bounds = configuration["bounds"]
     require(len(bounds) == len(summary["actual_parameters"]) == len(refs), "parameter_dimension_mismatch")
     require(configuration["normalization"] in {"synapse_count", "tip_resistance"}, "unknown_normalization")
+    from .n0_length_policy import audit_n0_length_policy
+    audit_n0_length_policy(configuration)
 
     def parameters_legal(parameters: dict[str, Any], index: int) -> None:
         bound = bounds[index]

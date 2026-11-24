@@ -4,6 +4,7 @@ from .composite_configuration import validate_composite_measurement
 from .composite_source_evidence import keys
 from .native_evidence import count, number, require
 from .response_domain_evidence import _same, _text
+from .n0_length_policy import FIELD as N0_LENGTH_FIELD, audit_n0_length_policy
 
 PLAN_FIELDS = set(('schema_version run_id initial_model_revision initial_model_epoch search '
     'maximum_reference_probes maximum_invalid_reference_probes maximum_model_seconds maximum_wall_seconds '
@@ -22,7 +23,9 @@ def audit_runtime_plan(plan, configuration, protocol, *, capacitance_state=None)
     count(plan['maximum_reference_probes']);count(plan['maximum_invalid_reference_probes'])
     require(number(plan['maximum_model_seconds'])>0 and number(plan['maximum_wall_seconds'])>0
             and type(plan['record_capacitance_history']) is bool,'composite_runtime_clock_or_history_policy')
-    n=len(protocol['inputs']);search=plan['search'];keys(search,SEARCH_FIELDS,'unknown_composite_runtime_search_fields')
+    n=len(protocol['inputs']);search=plan['search']
+    keys(search,SEARCH_FIELDS | ({N0_LENGTH_FIELD} if N0_LENGTH_FIELD in search else set()),'unknown_composite_runtime_search_fields')
+    audit_n0_length_policy(search)
     require(search['normalization'] in ('N0','N1') and search['normalization']==configuration['model']['normalization']
             and search['invalid_measurement_recovery']=='retry_same_candidate',
             'composite_runtime_normalization_or_recovery')

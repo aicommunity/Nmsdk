@@ -166,6 +166,22 @@ TEST(CandidateWindowCold7,EveryRepeatAndCapacitanceBaseKeepsItsOwnDeclaration) {
         const auto wire=EncodeConfiguredNativeTraining(c);EXPECT_EQ(wire["base_schema_version"],QJsonValue(base));
         EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);}
 }
+TEST(CandidateWindowCold7,N0LengthNeighborhoodSurvivesEveryBaseAndLegacyOmitsIt) {
+    for(int base=1;base<=4;++base) {
+        auto c=Cold7Declaration();if(base>=2)c.search.n0CandidateRepeats=2;
+        if(base>=3){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+        if(base==4)c.search.capacitanceSearch=CapacitanceSearchPolicy{};
+        auto wire=EncodeConfiguredNativeTraining(c);
+        EXPECT_FALSE(wire["search"].toObject().contains("maximum_n0_length_proposals"));
+        c.search.maximumN0LengthProposals=4;wire=EncodeConfiguredNativeTraining(c);
+        EXPECT_EQ(DecodeConfiguredNativeTraining(wire).search.maximumN0LengthProposals,4u);
+        EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+        for(const QJsonValue bad:{QJsonValue(0),QJsonValue(true),QJsonValue(1.5),QJsonValue(33)}) {
+            auto damaged=wire;auto search=wire["search"].toObject();search["maximum_n0_length_proposals"]=bad;
+            damaged["search"]=search;EXPECT_THROW(DecodeConfiguredNativeTraining(damaged),std::invalid_argument);
+        }
+    }
+}
 TEST(CandidateWindowCold7,Cold6RejectsCandidatePolicyInsteadOfPromotingVersion) {
     auto wire=EncodeConfiguredNativeTraining(Cold7Declaration());wire["schema_version"]=6;
     EXPECT_THROW(DecodeConfiguredNativeTraining(wire),std::invalid_argument);
@@ -284,6 +300,16 @@ TEST(CandidateWindowRuntime2,RoundtripPreservesBoundRuntimeWithoutColdConfigurat
     EXPECT_EQ(decoded.search.initialModelRevision,plan.search.initialModelRevision);EXPECT_EQ(decoded.search.initialModelEpoch,7u);
     EXPECT_FALSE(decoded.observationSink);EXPECT_FALSE(decoded.compositeSink);EXPECT_FALSE(decoded.beforeCompositeConsume);
     EXPECT_TRUE(decoded.inputWindows.empty());
+}
+TEST(CandidateWindowRuntime2,N0LengthPolicyRoundtripsWithoutAColdConfiguration) {
+    auto plan=Runtime2Declaration();plan.search.maximumN0LengthProposals=4;
+    auto wire=EncodeCandidateWindowRuntimePlan(plan);
+    EXPECT_EQ(DecodeCandidateWindowRuntimePlan(wire,plan.protocol).search.maximumN0LengthProposals,4u);
+    EXPECT_EQ(EncodeCandidateWindowRuntimePlan(DecodeCandidateWindowRuntimePlan(wire,plan.protocol)),wire);
+    auto search=wire["search"].toObject();search["maximum_n0_length_proposals"]=0;wire["search"]=search;
+    EXPECT_THROW(DecodeCandidateWindowRuntimePlan(wire,plan.protocol),std::invalid_argument);
+    plan.search.normalization=Normalization::TipResistance;
+    EXPECT_THROW(EncodeCandidateWindowRuntimePlan(plan),std::invalid_argument);
 }
 TEST(CandidateWindowRuntime2,SerializedNumbersOwnStorageAfterAllTemporaryDocumentsAreDestroyed) {
     const auto plan=Runtime2Declaration();QByteArray bytes;

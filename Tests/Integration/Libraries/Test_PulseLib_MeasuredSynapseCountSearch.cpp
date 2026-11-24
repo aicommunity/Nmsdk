@@ -6,6 +6,74 @@
 using namespace NMSDK::TimeLearner;
 using namespace NmsdkBoundedTrainingTest;
 
+TEST(MeasuredSynapseCountSearch, AdjacentLocalBracketsDoNotAssumeGlobalMonotonicity)
+{
+    const auto brackets=MeasuredAdjacentSynapseCountBrackets(
+        {{1,-.003,true},{2,.001,true},{3,-.002,true},{6,.004,true}},1,8,1e-5);
+    ASSERT_EQ(brackets.size(),2u);
+    EXPECT_EQ(brackets[0].lower,1);EXPECT_EQ(brackets[0].upper,2);
+    EXPECT_EQ(brackets[1].lower,2);EXPECT_EQ(brackets[1].upper,3);
+    EXPECT_TRUE(MeasuredAdjacentSynapseCountBrackets({{1,-.003,true},{3,.001,true}},1,8,1e-5).empty());
+}
+TEST(MeasuredSynapseCountSearch, LocalBracketsRequireStableFiniteTimingReadyEvidence)
+{
+    EXPECT_TRUE(MeasuredAdjacentSynapseCountBrackets({{1,-.003,true},{2,.001,false}},1,8,1e-5).empty());
+    EXPECT_TRUE(MeasuredAdjacentSynapseCountBrackets({{1,-.003,true},{2,.001,true},{2,.002,true}},1,8,1e-5).empty());
+    EXPECT_TRUE(MeasuredAdjacentSynapseCountBrackets({{1,-.003,true},{2,0.,true}},1,8,1e-5).empty());
+    EXPECT_TRUE(MeasuredAdjacentSynapseCountBrackets({{1,-.003,true},{2,std::numeric_limits<double>::infinity(),true}},1,8,1e-5).empty());
+    EXPECT_THROW(MeasuredAdjacentSynapseCountBrackets({},0,8,1e-5),std::invalid_argument);
+}
+
+namespace {
+void CoupledLengthSearch(ProbeRouting routing,bool damageFinal=false)
+{
+    const auto protocol=Protocol(2,routing);auto cfg=Configuration();
+    cfg.maximumCandidatesPerInput=6;cfg.maximumN0LengthProposals=2;
+    cfg.bounds={{2,8,1,2,1.,100.},{1,1,1,1,1.,100.}};
+    BoundedTrainingSession session(References(protocol),cfg,{{4,1,10.},{1,1,10.}});
+    std::vector<std::pair<int,int>> measured;
+    DriveTraining(session,protocol,[&](const TrainingAction& action,auto& delay,auto& raw) {
+        const auto& p=action.parameters[0];delay[0]=.13;
+        // Two legal counts straddle the goal at L=4, but neither meets it.
+        // The lower neighbour is worse; the other side must remain reachable.
+        const double error=p.length==5 && p.synapses==2?0.:
+            p.length==4?(p.synapses==1?-.00004:.00002):.00003;
+        raw[0]+=error;
+        if(action.finalVerification && damageFinal)raw[0]+=.001;
+        if(!action.finalVerification && action.inputIndex==0) {
+            measured.emplace_back(p.length,p.synapses);
+            EXPECT_NE(session.Status(),TrainingStatus::Exact);
+            EXPECT_FALSE(session.Certificate());
+        }
+    });
+    ASSERT_GE(measured.size(),4u);
+    EXPECT_EQ((std::vector<std::pair<int,int>>(measured.begin(),measured.begin()+4)),
+              (std::vector<std::pair<int,int>>{{4,1},{4,2},{3,2},{5,2}}));
+    if(damageFinal) {
+        EXPECT_NE(session.Status(),TrainingStatus::Exact);
+        if(session.Certificate())EXPECT_FALSE(session.Certificate()->Exact());
+    } else {
+        ASSERT_EQ(session.Status(),TrainingStatus::Exact);
+        ASSERT_TRUE(session.Certificate());EXPECT_TRUE(session.Certificate()->Exact());
+        EXPECT_EQ(session.Certificate()->Residuals().size(),2u);
+    }
+}
+}
+TEST(BoundedTrainingN0LengthNeighborhood, ClassicMeasuresBothSidesAndVerifiesAllInputs)
+{CoupledLengthSearch(ProbeRouting::ClassicBurst);}
+TEST(BoundedTrainingN0LengthNeighborhood, BranchMeasuresBothSidesAndVerifiesAllInputs)
+{CoupledLengthSearch(ProbeRouting::BranchSoloBurst);}
+TEST(BoundedTrainingN0LengthNeighborhood, AChangedFinalResponseCannotReuseTheSearchCertificate)
+{CoupledLengthSearch(ProbeRouting::BranchSoloBurst,true);}
+TEST(BoundedTrainingN0LengthNeighborhood, InvalidModeOrBudgetIsRejectedBeforeMeasurement)
+{
+    const auto protocol=Protocol();auto cfg=Configuration();cfg.maximumN0LengthProposals=4;
+    cfg.maximumCandidatesPerInput=3;
+    EXPECT_THROW((BoundedTrainingSession(References(protocol),cfg,{{2,1,10.},{1,1,10.}})),std::invalid_argument);
+    cfg.maximumCandidatesPerInput=8;cfg.normalization=Normalization::TipResistance;
+    EXPECT_THROW((BoundedTrainingSession(References(protocol),cfg,{{2,1,10.},{1,1,10.}})),std::invalid_argument);
+}
+
 TEST(MeasuredSynapseCountSearch, TwoMeasuredPointsProposeBeyondTheNearestNeighbour)
 {
     EXPECT_EQ(ProposeMeasuredSynapseCount({{1,-.022,true},{2,-.020,true}},1,128,1e-5),12);
