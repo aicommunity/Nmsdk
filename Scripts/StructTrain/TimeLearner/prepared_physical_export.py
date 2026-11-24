@@ -18,6 +18,82 @@ def _write(path, value):
         stream.write('\n')
 
 
+def prepare_conversion(plan_path):
+    """Bind an explicit DATA1 -> DATA2 operation to an immutable native SDK.
+
+    The original source boundary remains diagnostic/solo when applicable.
+    Neither an uncompleted Train nor supplied reference data acquires proof.
+    """
+    from Scripts.StructTrain.TimeLearner.runtime import file_record, source_closure
+    from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256 as sha
+    from Scripts.StructTrain.TimeLearner.native_evidence import require
+    from Scripts.StructTrain.TimeLearner.physical_model_data_evidence import audit_physical_model_data
+    from Scripts.StructTrain.TimeLearner.job_source_transport import make_envelope
+    from Scripts.StructTrain.TimeLearner.process_runner import verify_runtime
+    plan_path=Path(plan_path).resolve(strict=True)
+    plan=json.loads(plan_path.read_bytes())
+    require(set(plan)=={'kind','schema_version','source_data','runtime_manifest','sdk_source',
+            'python_source','controls','inputs','output','job_id','conversion_spec','reference_amplitudes'} and
+            plan['kind']=='timelearner_prepared_physical_conversion_plan' and plan['schema_version']==1,
+            'physical_conversion_preparation_scope')
+    source_path=Path(plan['source_data']['path']).resolve(strict=True)
+    runtime_path=Path(plan['runtime_manifest']['path']).resolve(strict=True)
+    require(file_record(source_path)==plan['source_data'] and
+            file_record(runtime_path)==plan['runtime_manifest'],'physical_conversion_plan_input_changed')
+    source=json.loads(source_path.read_bytes())
+    audit_physical_model_data(source)
+    require(source['schema_version']==1 and source['source_boundary']['kind'] in
+            ('timelearner_solo_state','timelearner_stopped_state'), 'physical_conversion_requires_original_solo_DATA1')
+    base=Path('C:/Projects/TimeLearnerWorker') if os.name=='nt' else Path(plan['output']).parent.parent
+    allowed=(Path('C:/Projects/TimeLearnerWorker'),) if os.name=='nt' else (
+        Path('/home/user/timelearner-refactor'),Path('/media/user/Data/TimeLearnerRefactor'))
+    area=base/('jobs' if os.name=='nt' else 'readbacks')
+    controls=Path(plan['controls']);inputs=Path(plan['inputs']);output=Path(plan['output'])
+    require(base in allowed and base.resolve(strict=True)==base and
+            controls.parent==base/('controls' if os.name=='nt' else 'requests') and
+            inputs.parent==output.parent==area and output.name==plan['job_id'] and
+            len({controls,inputs,output})==3 and all(p.is_absolute() and not p.exists() and not p.is_symlink()
+            for p in (controls,inputs,output)), 'physical_conversion_fresh_paths_required')
+    for parent in (controls.parent,area):
+        require(parent.resolve(strict=True)==parent,'physical_conversion_parent_alias')
+    python_source=Path(plan['python_source']).resolve(strict=True)
+    sdk_source=Path(plan['sdk_source']).resolve(strict=True)
+    require(file_record(python_source/'Scripts/StructTrain/TimeLearner/prepared_physical_export.py')==
+            file_record(Path(__file__)), 'physical_conversion_worker_source_mismatch')
+    runtime=json.loads(runtime_path.read_bytes())
+    require(source_closure(sdk_source)==runtime['source_closure'],'physical_conversion_sdk_changed')
+    verify_runtime(runtime)
+    controls.mkdir();inputs.mkdir()
+    carrier=inputs/'solo-physical-data.json'
+    # A private copy prevents mutations through a hard-linked source alias.
+    shutil.copyfile(source_path,carrier)
+    require(file_record(source_path)==plan['source_data'] and
+            file_record(carrier)['sha256']==plan['source_data']['sha256'], 'physical_conversion_source_changed')
+    job=dict(kind='timelearner_native_physical_model_conversion_job',schema_version=1,
+        implementation_id=source['implementation_id'],source_model_data=source,
+        conversion_spec=plan['conversion_spec'],reference_amplitudes=plan['reference_amplitudes'])
+    job['sha256']=sha(job)
+    _write(inputs/'native-job-source.json',make_envelope(job,carrier,inputs))
+    (controls/'worker.py').write_bytes(Path(__file__).read_bytes())
+    _write(controls/'runtime.json',runtime)
+    _write(controls/'specification.json',dict(kind='timelearner_prepared_physical_conversion',schema_version=1,
+        job_id=plan['job_id'],execution_root=str(base),python_source=str(python_source),sdk_source=str(sdk_source),
+        inputs=str(inputs),output=str(output),worker_sha256=file_record(controls/'worker.py')['sha256'],
+        input_inventory={p.name:dict(bytes=p.stat().st_size,sha256=file_record(p)['sha256']) for p in inputs.iterdir()},
+        source_model_revision=source['model_revision'],source_package_sha256=source['source_boundary']['sha256'],
+        source_model_data_sha256=source['sha256'],conversion_spec=plan['conversion_spec'],
+        reference_amplitudes=plan['reference_amplitudes'],resolved_job_sha256=job['sha256'],
+        memory_bytes=8*1024**3,maximum_wall_seconds=3600,lock_file=str(base/'locks/worker.lock'),
+        disk=dict(minimum_free_bytes=512*1024**2,maximum_output_bytes=256*1024**2)))
+    _write(controls/'proposal.json',dict(kind='physical_DATA1_recognition_conversion_preparation',
+        preparation_plan=file_record(plan_path),source_model_data=plan['source_data'],
+        source_boundary=source['source_boundary'],runtime_manifest=plan['runtime_manifest'],
+        training_completed=False,training_certificate_transferred=False,calibration_confirmed=False,
+        original_execution_reclassified=False,scientific_verdict=None))
+    require(file_record(source_path)==plan['source_data'] and file_record(runtime_path)==plan['runtime_manifest'],
+            'physical_conversion_plan_changed_during_preparation')
+
+
 def prepare(controls, destination, inputs, output, run_id, python_source=None):
     controls = Path(controls).resolve(strict=True)
     prior = json.loads((controls/'specification.json').read_bytes())
@@ -110,7 +186,9 @@ def run(controls):
     from Scripts.StructTrain.TimeLearner.native_cli import inspect_native_cli
     from Scripts.StructTrain.TimeLearner.physical_model_data_evidence import audit_physical_model_data
     from Scripts.StructTrain.TimeLearner.native_pipeline_worker import _artifact_records
-    require(os.name in ('posix','nt') and spec['kind'] == 'timelearner_prepared_physical_export' and
+    conversion=spec['kind']=='timelearner_prepared_physical_conversion'
+    require(os.name in ('posix','nt') and spec['kind'] in ('timelearner_prepared_physical_export',
+            'timelearner_prepared_physical_conversion') and
             spec['schema_version'] == 1, 'physical_export_worker_scope')
     inputs = Path(spec['inputs']).resolve(strict=True)
     output = Path(spec['output']).absolute()
@@ -190,7 +268,8 @@ def run(controls):
         native=output/'native'
         execution=json.loads((native/'execution.json').read_bytes())
         require(execution['sha256']==sha({k:v for k,v in execution.items() if k!='sha256'}) and
-                execution['kind']=='timelearner_native_physical_model_export_execution' and
+                execution['kind']==('timelearner_native_physical_model_conversion_execution' if conversion else
+                                   'timelearner_native_physical_model_export_execution') and
                 execution['execution']=='completed' and execution['job_sha256']==spec['resolved_job_sha256'] and
                 execution['physical_roundtrip_verified'] and not execution['source_evidence_included'] and
                 not execution['training_certificate_transferred'] and not execution['controller_checkpoint_created'],
@@ -200,17 +279,26 @@ def run(controls):
         projection=json.loads((native/'input-projection.json').read_bytes())
         require(projection['sha256']==sha({k:v for k,v in projection.items() if k!='sha256'}) and
                 projection['job_sha256']==spec['resolved_job_sha256'] and
-                model['sha256']==execution['model_sha256'] and model['model_revision']==spec['source_model_revision'] and
+                model['sha256']==execution['model_sha256'] and
+                (model['source_solo_revision'] if conversion else model['model_revision'])==spec['source_model_revision'] and
                 model['source_boundary']['sha256']==spec['source_package_sha256'] and
                 execution['source_boundary']==projection['source_boundary']==model['source_boundary'],
                 'physical_export_boundary_changed')
+        if conversion:
+            require(model['schema_version']==2 and execution['source_model_data_sha256']==
+                    projection['source_model_data_sha256']==model['source_model_data']['sha256']==
+                    spec['source_model_data_sha256'] and model['conversion_spec']==projection['conversion_spec']==
+                    spec['conversion_spec'] and model['reference_amplitudes']==projection['reference_amplitudes']==
+                    spec['reference_amplitudes'] and execution['calibration_confirmed'] is False,
+                    'physical_conversion_operation_changed')
         audit=audit_physical_model_data(model,frozen=True)
         require(inventory()==spec['input_inventory'] and
                 source_closure(Path(spec['sdk_source']))==runtime['source_closure'], 'physical_export_inputs_changed_after')
         _write(output/'terminal.json',dict(native_process_completed=True,physical_roundtrip_verified=True,
             portable_model_audit=audit,model_revision=model['model_revision'],model_sha256=model['sha256'],
             source_package_sha256=spec['source_package_sha256'],source_evidence_included=False,
-            training_certificate_transferred=False,original_execution_reclassified=False,scientific_verdict=None))
+            explicit_conversion=conversion,training_certificate_transferred=False,
+            calibration_confirmed=False,original_execution_reclassified=False,scientific_verdict=None))
     except BaseException as error:
         import traceback
         _write(output/'exception.json',dict(reason=str(error),traceback=traceback.format_exc(),scientific_verdict=None))
@@ -223,10 +311,17 @@ def run(controls):
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument('--controls',required=True)
+    parser.add_argument('--controls')
+    parser.add_argument('--conversion-plan')
     for name in ('destination','inputs','output','run-id'):parser.add_argument('--'+name)
     parser.add_argument('--python-source')
     args=parser.parse_args()
+    if args.conversion_plan:
+        if any((args.controls,args.destination,args.inputs,args.output,args.run_id,args.python_source)):
+            parser.error('--conversion-plan cannot be combined with other modes')
+        prepare_conversion(args.conversion_plan)
+        return
+    if not args.controls:parser.error('--controls required for export preparation or execution')
     if any((args.destination,args.inputs,args.output,args.run_id)):
         if not all((args.destination,args.inputs,args.output,args.run_id)):parser.error('all preparation paths required')
         prepare(args.controls,args.destination,args.inputs,args.output,args.run_id,args.python_source)

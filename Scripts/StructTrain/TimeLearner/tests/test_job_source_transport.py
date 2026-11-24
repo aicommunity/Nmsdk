@@ -23,7 +23,7 @@ class JobSourceTransportTest(unittest.TestCase):
               SOURCE_FIELDS[kind]:self.package}
         return {**body,'sha256':sha(body)}
 
-    def test_complete_source_and_resolved_digest_survive_all_three_roles(self):
+    def test_complete_source_and_resolved_digest_survive_all_declared_roles(self):
         for kind,field in SOURCE_FIELDS.items():
             job=self.job(kind);envelope=make_envelope(job,self.path,self.root)
             self.assertNotIn(field,envelope['job'])
@@ -50,6 +50,20 @@ class JobSourceTransportTest(unittest.TestCase):
         self.assertEqual(restored,job)
         self.assertEqual(verify_envelope(envelope,job,self.path,self.root)['resolved_job_sha256'],job['sha256'])
         changed=json.loads(json.dumps(envelope));changed['source']['field']='source_recognition'
+        with self.assertRaises(EvidenceError):verify_envelope(changed,job,self.path,self.root)
+
+    def test_physical_conversion_binds_the_source_and_the_declared_edit(self):
+        body={'kind':'timelearner_native_physical_model_conversion_job','schema_version':1,
+              'implementation_id':'transport-test','source_model_data':self.package,
+              'conversion_spec':{'schema_version':1,'mode':'identity','resistance_bounds':[]},
+              'reference_amplitudes':[]}
+        job={**body,'sha256':sha(body)}
+        envelope=make_envelope(job,self.path,self.root)
+        restored={**envelope['job'],'source_model_data':json.loads(self.path.read_bytes())}
+        self.assertEqual(restored,job)
+        self.assertEqual(envelope['source']['field'],'source_model_data')
+        self.assertEqual(verify_envelope(envelope,job,self.path,self.root)['resolved_job_sha256'],job['sha256'])
+        changed=json.loads(json.dumps(envelope));changed['job']['reference_amplitudes']=[1.]
         with self.assertRaises(EvidenceError):verify_envelope(changed,job,self.path,self.root)
 
     def test_projection_role_metadata_and_history_changes_are_rejected(self):
