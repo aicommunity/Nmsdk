@@ -175,7 +175,9 @@ template<class Owner> void ConnectedDatasetOwnership()
     auto owner = Legacy<Owner>(scope, false);
     auto dataset = Dataset(owner);
     owner->IterationGap = 5.;
-    ASSERT_TRUE(dataset->Delay.AttachTo(&owner->IterationGap));
+    // UProperty's generic AttachTo returns false. Scalar connections are
+    // installed through the same SetPointer contract used by Rdk connectors.
+    ASSERT_TRUE(dataset->Delay.SetPointer(0, &owner->IterationGap));
     ASSERT_TRUE(dataset->Delay.IsConnected());
     EXPECT_NO_THROW(owner->Delay.SetData(5.));
     EXPECT_DOUBLE_EQ(owner->Delay.GetData(), 5.);
@@ -185,6 +187,14 @@ template<class Owner> void ConnectedDatasetOwnership()
     EXPECT_DOUBLE_EQ(owner->Delay.GetData(), 5.);
     EXPECT_DOUBLE_EQ(dataset->Delay.GetData(), 5.);
     EXPECT_DOUBLE_EQ(owner->IterationGap.GetData(), 5.);
+    EXPECT_TRUE(dataset->Delay.IsConnected());
+    owner->IterationGap = 6.;
+    ASSERT_DOUBLE_EQ(dataset->Delay.GetData(), 6.);
+    EXPECT_NO_THROW(owner->Delay.SetData(6.));
+    EXPECT_DOUBLE_EQ(owner->Delay.GetData(), 6.);
+    EXPECT_THROW(owner->Delay.SetData(7.), UIProperty::EPropertySetterFail);
+    EXPECT_DOUBLE_EQ(dataset->Delay.GetData(), 6.);
+    EXPECT_DOUBLE_EQ(owner->IterationGap.GetData(), 6.);
     EXPECT_TRUE(dataset->Delay.IsConnected());
     dataset->Delay.DetachFrom();
 }
