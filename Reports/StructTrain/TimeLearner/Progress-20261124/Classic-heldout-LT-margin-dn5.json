@@ -1,0 +1,106 @@
+{
+  "readback": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/b9/b9b03986a681a0c8bd1aabaf6dc5cf8c4bc39af0b08115030d093cb35efb0210",
+    "sha256": "b9b03986a681a0c8bd1aabaf6dc5cf8c4bc39af0b08115030d093cb35efb0210",
+    "bytes": 3614
+  },
+  "kind": "timelearner_Classic_new_negative_LT_margin_readback",
+  "schema_version": 1,
+  "observed_utc": "2026-11-24T17:38:59.062132+00:00",
+  "source": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/17/1723aee902de635ec1462ed8cc614a4b1ce316eba12bdbdebe4d42845f49dee1",
+    "sha256": "1723aee902de635ec1462ed8cc614a4b1ce316eba12bdbdebe4d42845f49dee1",
+    "bytes": 7550
+  },
+  "model_revision": "eee84b64692115508ccd8ca7e69b29477d29198b9b0758e69f16a781f4093367",
+  "threshold": 0.02620777717403984,
+  "rows": [
+    {
+      "sample_id": "heldout-M4-ticks-447-311-202",
+      "label": "foil",
+      "classification": "TN",
+      "actual_LT_maximum": 0.019974172079057245,
+      "mean_of_individual_soma_maxima": 0.026130498540064218,
+      "threshold_minus_actual_LT_maximum": 0.006233605094982594
+    },
+    {
+      "sample_id": "heldout-M4-ticks-347-255-358",
+      "label": "foil",
+      "classification": "TN",
+      "actual_LT_maximum": 0.020025250254650517,
+      "mean_of_individual_soma_maxima": 0.025915851009832513,
+      "threshold_minus_actual_LT_maximum": 0.006182526919389322
+    },
+    {
+      "sample_id": "heldout-M4-ticks-461-379-120",
+      "label": "foil",
+      "classification": "TN",
+      "actual_LT_maximum": 0.01997415709458819,
+      "mean_of_individual_soma_maxima": 0.030085805192580972,
+      "threshold_minus_actual_LT_maximum": 0.006233620079451649
+    },
+    {
+      "sample_id": "heldout-M4-ticks-137-413-410",
+      "label": "foil",
+      "classification": "TN",
+      "actual_LT_maximum": 0.02620724006403749,
+      "mean_of_individual_soma_maxima": 0.028439371503154037,
+      "threshold_minus_actual_LT_maximum": 5.371100023493502e-07
+    },
+    {
+      "sample_id": "heldout-M4-ticks-562-127-271",
+      "label": "foil",
+      "classification": "TN",
+      "actual_LT_maximum": 0.01997415275461839,
+      "mean_of_individual_soma_maxima": 0.02936049656315093,
+      "threshold_minus_actual_LT_maximum": 0.006233624419421449
+    },
+    {
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "classification": "TP",
+      "actual_LT_maximum": 0.02639918752597037,
+      "mean_of_individual_soma_maxima": 0.027040825882718444,
+      "threshold_minus_actual_LT_maximum": -0.00019141035193052935
+    },
+    {
+      "sample_id": "heldout-M4-ticks-385-176-399",
+      "label": "foil",
+      "classification": "TN",
+      "actual_LT_maximum": 0.0199785093522373,
+      "mean_of_individual_soma_maxima": 0.026533913512417906,
+      "threshold_minus_actual_LT_maximum": 0.006229267821802539
+    },
+    {
+      "sample_id": "heldout-M4-ticks-454-328-178",
+      "label": "foil",
+      "classification": "TN",
+      "actual_LT_maximum": 0.019974162034068155,
+      "mean_of_individual_soma_maxima": 0.02648816314289107,
+      "threshold_minus_actual_LT_maximum": 0.006233615139971685
+    }
+  ],
+  "closest_negative": {
+    "sample_id": "heldout-M4-ticks-137-413-410",
+    "label": "foil",
+    "classification": "TN",
+    "actual_LT_maximum": 0.02620724006403749,
+    "mean_of_individual_soma_maxima": 0.028439371503154037,
+    "threshold_minus_actual_LT_maximum": 5.371100023493502e-07
+  },
+  "negative_count": 7,
+  "positive_unique_classes": 1,
+  "gap_units": "model_potential_units_SI_unverified",
+  "threshold_not_retuned": true,
+  "source_classifications_unchanged": true,
+  "new_tolerance_introduced": false,
+  "max_of_simultaneous_mean_is_not_mean_of_individual_maxima": true,
+  "new_model_execution": false,
+  "scientific_verdict": null
+}
