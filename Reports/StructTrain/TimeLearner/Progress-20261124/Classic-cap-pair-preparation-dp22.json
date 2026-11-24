@@ -1,0 +1,124 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-cap-pair-preparation-dp22.json",
+  "catalog_record": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-cap-pair-preparation-dp22.json",
+    "sha256": "29e6d2096e425651654377881cfff804812cbe8cb3fcdb8d5bf4b069fa99508d",
+    "size": 5126
+  },
+  "kind": "timelearner_Classic_candidate_cap_preparation_external_catalog",
+  "schema_version": 1,
+  "observed_utc": "2026-11-24T20:48:55.435572+00:00",
+  "objects": {
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/37/370d883ec85bd863cad0b797d56f6353ef7166e5cc85ebc5f0b7f16346d31234",
+      "sha256": "370d883ec85bd863cad0b797d56f6353ef7166e5cc85ebc5f0b7f16346d31234",
+      "bytes": 492936
+    },
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/5b/5b8a890dc79b268bc2198cf2586c2ba0402a60a0a3e1fc76d1d68ec7942e7313",
+      "sha256": "5b8a890dc79b268bc2198cf2586c2ba0402a60a0a3e1fc76d1d68ec7942e7313",
+      "bytes": 23125
+    },
+    "terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/1a/1aa6f7439f1dbcc22aaf927127658a3e82fbbf556d6a1c354f4579a64e9e3350",
+      "sha256": "1aa6f7439f1dbcc22aaf927127658a3e82fbbf556d6a1c354f4579a64e9e3350",
+      "bytes": 22759
+    },
+    "timelearner-Windows-candidate-cap-Git-diagnostic-20261124-dp7.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/75/756ab99da6f589bee015391e55d4b81aa8becc7de980906ab2092e29219ba221",
+      "sha256": "756ab99da6f589bee015391e55d4b81aa8becc7de980906ab2092e29219ba221",
+      "bytes": 1331
+    },
+    "timelearner-Windows-candidate-cap-initialize-index-20261124-dp10.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/6a/6a5545d5e99100585e917989ab900ce9dd6f7672da2e25f2e2e2c4a2705fae8a",
+      "sha256": "6a5545d5e99100585e917989ab900ce9dd6f7672da2e25f2e2e2c4a2705fae8a",
+      "bytes": 565
+    },
+    "timelearner-Windows-Classic-cap-pair-progress-20261124-dp19.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/83/834852b481246e2324916177b5d8f7c5f177f08f7ebb45ff865629c203f58c3c",
+      "sha256": "834852b481246e2324916177b5d8f7c5f177f08f7ebb45ff865629c203f58c3c",
+      "bytes": 11338
+    }
+  },
+  "members": 129,
+  "expanded_bytes": 10595970,
+  "Windows_independent_restore": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "370d883ec85bd863cad0b797d56f6353ef7166e5cc85ebc5f0b7f16346d31234",
+    "archive_members_verified": 129,
+    "retained_regular_files": 129,
+    "compatibility": null,
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "M40_independent_restore_complete": false,
+  "tool_root": "177cc36df02caf33af859852bc7ef4e14fb7ddea",
+  "native_sdk_root": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+  "tests": {
+    "run": 26,
+    "successful": true,
+    "skipped": 0
+  },
+  "cap8_cold_graph": {
+    "source": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-n0-length4-cap8-dp17\\input\\initial-state.json",
+      "sha256": "95540f8e3f55df4d953fb99bdaea9b3cc95956b1770c541ced221bd184262271",
+      "size": 223854
+    },
+    "observed": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-n0-length4-cap8-dp17\\preflight\\native\\initial-state.json",
+      "sha256": "b851dddd95b3860f7b15b9d0e5278bd3dfa46ca9254e94e06d0078a60a0067bf",
+      "size": 223854
+    },
+    "physical_graph_and_parameters_preserved": true,
+    "controller_budget_changed": true,
+    "training_started": false,
+    "scientific_verdict": null
+  },
+  "cap8_positive_control": {
+    "job_sha256": "ae8fa0410ebcf850966509d39dbef7a8ae55fa9ec84269dcff550556b778dcf6",
+    "normalization": "N0",
+    "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+    "effective_initial_model_checked": true,
+    "factor_control_synapses": 2,
+    "initial_nodes": 44,
+    "factor_control_nodes": 45,
+    "factor_control_input_indices": [
+      0
+    ],
+    "factor_control_is_a_separate_initial_state": true,
+    "full_training_audit_pending": true,
+    "scientific_verdict": null
+  },
+  "condition_fingerprints": {
+    "8": "fb9100f4061909b642ed062c7d28523d49bfe825d7c9740fbe0c32252985720d",
+    "24": "2792ed60890930bb0e46ca418cd62beeb81e442381b97c8c93a2bcc73960c01d"
+  },
+  "matrix_fingerprint": "df9e3c27549a779367f359e02be75794dcbaaeb618c536c27dc469992571175f",
+  "scientific_result_not_yet_known": true,
+  "whole_Train_primary_not_included": true,
+  "prior_preparation_failures_preserved": true,
+  "training_process_not_stopped_or_modified": true,
+  "scientific_verdict": null
+}
