@@ -9,12 +9,16 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from diagnosis_run import ROOT, WORK, CONFIG, DELIVERY, RUNTIME, relative, save, sha, load
+from report_paths import PLANS
 
 
 def evidence_files():
     files = set()
-    for directory in (WORK / "runs", WORK / "variants", WORK / "source-snapshots", WORK / "charts", CONFIG, DELIVERY):
+    for directory in (WORK / "runs", WORK / "variants", WORK / "source-snapshots", WORK / "charts", CONFIG):
         files.update(p for p in directory.rglob("*") if p.is_file() and p.suffix != ".lock")
+    reports = (DELIVERY / "DiscrepancyDiagnosis.docx", DELIVERY / "DiscrepancyDiagnosis.xlsx",
+               PLANS / "DiscrepancyDiagnosisPlan.docx")
+    files.update(file for file in reports if file.is_file())
     files.update(WORK.glob("*.json"))
     files.update(WORK.glob("*.patch"))
     files.update(p for p in Path(__file__).parent.glob("diagnosis_*") if p.is_file())

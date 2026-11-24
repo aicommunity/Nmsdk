@@ -22,7 +22,7 @@ from zipfile import ZipFile
 REPO = Path(__file__).resolve().parents[2]
 ARCHIVE = REPO / "Docs/ClassicStructTrainExperiments"
 CONFIGS = REPO / "Bin/Configs/StructTrainClassic"
-REPORTS = REPO / "Reports/StructTrainClassic"
+REPORTS = REPO / "Reports/StructTrainClassic/_work"
 IDS = [22, 37, 45, 60, 64, 84, 90, 111, 129, 134]
 NS = {"s": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
       "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships"}

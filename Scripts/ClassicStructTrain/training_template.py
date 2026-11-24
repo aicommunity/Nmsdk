@@ -7,7 +7,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 from training_repro import WORK,DELIVERY,sha,save
 
 def main():
- source=DELIVERY.parent/'ScientificComparisons/ScientificComparisons.docx'
+ source=DELIVERY/'ScientificComparisons.docx'
  folder=WORK/'template';folder.mkdir(parents=True,exist_ok=True);reference=folder/'Reference.docx'
  if not reference.exists():shutil.copy2(source,reference)
  assert sha(reference)==sha(source)

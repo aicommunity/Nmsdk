@@ -3,6 +3,7 @@ from pathlib import Path
 import sys,json
 import xml.etree.ElementTree as ET
 sys.path.insert(0,str(Path(__file__).resolve().parent))
+from report_paths import report_path
 from training_repro import ROOT,WORK,CONFIG,load,save,component_order,sha
 from training_report_data import inference_result
 from legacy_recover import physical
@@ -18,9 +19,9 @@ def manifest(folder):
 def main():
  mismatches=[];pending=[];count=0
  for p in (WORK/'inference').glob('*/*/*/*/reuse.json'):
-  target=p.parent;data=load(p);source=ROOT/data['source'];seen={target}
+  target=p.parent;data=load(p);source=report_path(data['source']);seen={target}
   while (source/'reuse.json').exists() and not (source/'process.json').exists():
-   assert source not in seen;seen.add(source);source=ROOT/load(source/'reuse.json')['source']
+   assert source not in seen;seen.add(source);source=report_path(load(source/'reuse.json')['source'])
   if not (source/'process.json').exists() or load(source/'process.json')['status']!='completed':pending.append(str(p.relative_to(ROOT)));continue
   a,ah=manifest(target);b,bh=manifest(source);ar=ET.parse((ROOT/a['legacy_job']['config']).parent/'Model_00.xml').getroot();br=ET.parse((ROOT/b['legacy_job']['config']).parent/'Model_00.xml').getroot()
   pattern=lambda root:[float(v) for v in root.findtext('Model/Components/Subject/Parameters/InputPattern').split()]

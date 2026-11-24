@@ -2,6 +2,7 @@
 from pathlib import Path
 import argparse,copy,hashlib,json,shutil,subprocess,sys,xml.etree.ElementTree as ET
 sys.path.insert(0,str(Path(__file__).resolve().parent))
+from report_paths import report_path
 from legacy_execute import ROOT,PLAN,CONFIG,OUT,save
 from legacy_recover import fingerprint
 def load(p):return json.loads(p.read_text(encoding='utf-8-sig'))
@@ -13,7 +14,7 @@ def prepare():
     assert all(j['id'] in a['first_by_job'] for j in expected),'All recovered physical states must be measured or equivalently reused'
     unique={r['case']:r for r in a['first_by_job'].values()};jobs=[];verified=[]
     for case,r in unique.items():
-        source=ROOT/r['directory']/'after';destination=CONFIG/'Verified'/case;destination.mkdir(parents=True,exist_ok=True)
+        source=report_path(r['directory'])/'after';destination=CONFIG/'Verified'/case;destination.mkdir(parents=True,exist_ok=True)
         for filename in ['Model_00.xml','Parameters_00.xml','project.ini']:shutil.copy2(source/filename,destination/filename)
         (destination/'Interface.xml').write_text('<Interfaces />\n',encoding='utf8')
         job=copy.deepcopy(r['job']);job.update(id=case+'-all-init',audit_only=True,trace=False,roundtrip=False,

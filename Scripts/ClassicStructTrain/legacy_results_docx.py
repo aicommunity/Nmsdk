@@ -6,9 +6,11 @@ from docx.shared import Inches,Pt,RGBColor
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from report_paths import report_path
 ROOT=Path(__file__).resolve().parents[2]
-WORK=ROOT/'Reports/StructTrainClassic/LegacyChecks-20261123'
-OUT=ROOT/'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/LegacyChecks'
+WORK=ROOT/'Reports/StructTrainClassic/_work/LegacyChecks-20261123'
+OUT=ROOT/'Reports/StructTrainClassic'
 def load(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 def pc(x):return '—' if x is None else f'{100*x:.1f}%'.replace('.',',')
 def num(x,n=4):return f'{x:.{n}f}'.replace('.',',')
@@ -231,9 +233,9 @@ def main():
             prefixes=['f57e7053','9266ab41'] if '111' in f['title'] else ['4ed6e8b5'] if '129' in f['title'] else ['f6b043a3']
             if len(prefixes)==2:
                 for prefix in prefixes:
-                    asset=next(x for x in data['figures'] if x['asset'].startswith(prefix));p().add_run().add_picture(asset['preview'],width=Inches(6.3))
+                    asset=next(x for x in data['figures'] if x['asset'].startswith(prefix));p().add_run().add_picture(str(report_path(asset['preview'])),width=Inches(6.3))
             else:
-                asset=next(x for x in data['figures'] if x['asset'].startswith(prefixes[0]));p().add_run().add_picture(asset['preview'],width=Inches(6.7))
+                asset=next(x for x in data['figures'] if x['asset'].startswith(prefixes[0]));p().add_run().add_picture(str(report_path(asset['preview'])),width=Inches(6.7))
             p('Архивный источник: ВКР, рисунки '+('15 и 16 — обучение на итерациях 6–10.' if len(prefixes)==2 else '17 — обучение при переходе 22→129.' if '129' in f['title'] else '18 — обучение при переходе 22→37.'))
             pending_break=True;normal_count=0
         else:normal_count+=1

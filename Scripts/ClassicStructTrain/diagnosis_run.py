@@ -11,12 +11,13 @@ from xml.etree import ElementTree as ET
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from run import supervise
+from report_paths import report_path
 from training_repro import ROOT, WORK as PREVIOUS, OLD, BASE, RUNTIME, load, save, sha, git, pilot_jobs
 from training_protocols import scheme_jobs, warm_job
 
-WORK = ROOT / "Reports/StructTrainClassic/DiscrepancyDiagnosis-20261124"
+WORK = ROOT / "Reports/StructTrainClassic/_work/DiscrepancyDiagnosis-20261124"
 CONFIG = ROOT / "Bin/Configs/StructTrainClassic/DiscrepancyDiagnosis"
-DELIVERY = PREVIOUS.parent / "outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/DiscrepancyDiagnosis"
+DELIVERY = ROOT / "Reports/StructTrainClassic"
 
 
 def relative(path):
@@ -24,7 +25,7 @@ def relative(path):
 
 
 def records(path):
-    with path.open(encoding="utf-8") as stream:
+    with report_path(path).open(encoding="utf-8") as stream:
         return [json.loads(line) for line in stream if line.strip()]
 
 
@@ -150,7 +151,7 @@ def cases():
 
     def old_case(label, job):
         row = old_records[job]
-        return previous_case(label, ROOT / row["directory"], row["answers"])
+        return previous_case(label, report_path(row["directory"]), row["answers"])
 
     index = {x["label"]: x for x in new["recognition"]}
     items = []
@@ -170,7 +171,7 @@ def cases():
     for row in science["baselines"]:
         items.append(old_case("mean-51-61" if row["label"] == "Среднее" else "input-" + row["label"], row["job"]))
     nt111 = next(x for x in new["models"] if x["kind"] == "trainer" and x["target"] == 111)
-    items.append(previous_case("new-NT111", ROOT / nt111["runs"][0]["inference_source"]))
+    items.append(previous_case("new-NT111", report_path(nt111["runs"][0]["inference_source"])))
     return items
 
 

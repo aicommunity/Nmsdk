@@ -7,9 +7,9 @@ from datetime import datetime,timezone
 import xml.etree.ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[2]
-PLAN=ROOT/'Reports/StructTrainClassic/LegacyInferencePlan-20261123/work/plan-data.json'
+PLAN=ROOT/'Reports/StructTrainClassic/_work/LegacyInferencePlan-20261123/work/plan-data.json'
 CONFIG=ROOT/'Bin/Configs/StructTrainClassic/LegacyInference'
-OUT=ROOT/'Reports/StructTrainClassic/LegacyChecks-20261123'
+OUT=ROOT/'Reports/StructTrainClassic/_work/LegacyChecks-20261123'
 PYTHON=None
 BINARY=ROOT/'Bin/Platform/Win/ClassicStructTrainReplay.exe'
 

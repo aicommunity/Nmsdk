@@ -6,19 +6,20 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime,timezone
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from run import supervise
+from report_paths import report_path
 ROOT=Path(__file__).resolve().parents[2]
-WORK=ROOT/'Reports/StructTrainClassic/TrainingReproducibility-20261123'
+WORK=ROOT/'Reports/StructTrainClassic/_work/TrainingReproducibility-20261123'
 CONFIG=ROOT/'Bin/Configs/StructTrainClassic/TrainingReproducibility'
-DELIVERY=ROOT/'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/TrainingReproducibility'
-OLD=ROOT/'Reports/StructTrainClassic/LegacyChecks-20261123'
+DELIVERY=ROOT/'Reports/StructTrainClassic'
+OLD=ROOT/'Reports/StructTrainClassic/_work/LegacyChecks-20261123'
 SOURCE=ROOT/'Docs/ClassicStructTrainExperiments'
 RUNTIME=ROOT/'Bin/Platform/Win'
 BASE=ROOT/'Bin/Configs/StructTrainClassic/Prepared/manifest.json'
 VARIANTS={'V0':'Исходный autoPreset','V1':'Инициализация; предварительный контроль остановки','V1C':'Исправлена только инициализация','V2':'Инициализация и параметры синапсов 2022 года','V3':'Архивный цикл обучения на современной инфраструктуре'}
-def load(p):return json.loads(Path(p).read_text(encoding='utf-8-sig'))
+def load(p):return json.loads(report_path(p).read_text(encoding='utf-8-sig'))
 def save(p,d):
  p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(d,ensure_ascii=False,indent=2,allow_nan=False)+'\n',encoding='utf8')
-def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def sha(p):return hashlib.sha256(report_path(p).read_bytes()).hexdigest()
 
 def component_order(root):
  result=[]
@@ -36,11 +37,11 @@ def git(*args,repo=ROOT):return subprocess.check_output(['git',*args],cwd=repo,e
 def setup():
  WORK.mkdir(parents=True,exist_ok=True);CONFIG.mkdir(parents=True,exist_ok=True);DELIVERY.mkdir(parents=True,exist_ok=True)
  locked=[OLD/'scientific-comparison-data.json',OLD/'assessment.json',OLD/'final-audit.json']
- locked+=list((DELIVERY.parent/'ScientificComparisons').glob('*'))
+ locked += [DELIVERY / ('ScientificComparisons' + suffix) for suffix in ('.docx', '.xlsx')]
  locked+=list((ROOT/'Bin/Configs/StructTrainClassic/Prepared').rglob('*'))
  record={str(p.relative_to(ROOT)).replace('\\','/'):sha(p) for p in locked if p.is_file()}
  lock=WORK/'prior-evidence-lock.json'
- if lock.exists():assert load(lock)==record,'Prior evidence changed'
+ if lock.exists():assert {report_path(p):h for p,h in load(lock).items()}=={report_path(p):h for p,h in record.items()},'Prior evidence changed'
  else:save(lock,record)
  for kind in ['learner','trainer']:
   source=ROOT/'Bin/Configs/StructTrainClassic/Prepared'/kind;target=CONFIG/'Inputs'/kind

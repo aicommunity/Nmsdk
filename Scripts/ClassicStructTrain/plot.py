@@ -7,6 +7,7 @@ import sys
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / ".deps/classic-plot-python"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from report_paths import report_path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -29,7 +30,7 @@ def records(path):
 def main(run):
     output = run / "figures"
     output.mkdir(exist_ok=True)
-    evidence = json.loads((REPO / "Reports/StructTrainClassic/archive-evidence.json").read_text(encoding="utf-8"))
+    evidence = json.loads((REPO / "Reports/StructTrainClassic/_work/archive-evidence.json").read_text(encoding="utf-8"))
     actual = [r for p in sorted(run.glob("recognition*/results.jsonl")) for r in records(p)
               if r.get("frozen_archive_structure") and r.get("status") == "completed"]
     if actual:
@@ -56,7 +57,7 @@ def main(run):
         fig.savefig(output / "frozen-recognition.png", dpi=170)
         fig.savefig(output / "frozen-recognition.pdf")
         plt.close(fig)
-    trace = records(REPO / "Reports/StructTrainClassic/smoke-20261123-a1/smoke-r1/iterations.jsonl")
+    trace = records(REPO / "Reports/StructTrainClassic/_work/smoke-20261123-a1/smoke-r1/iterations.jsonl")
     trace = [r for r in trace if r.get("case") == "learner-22"]
     if trace:
         fig, axes = plt.subplots(2, 1, figsize=(8.5, 6), sharex=True, layout="constrained")
@@ -79,4 +80,4 @@ def main(run):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run", type=Path)
-    main(parser.parse_args().run.resolve())
+    main(report_path(parser.parse_args().run.resolve()))

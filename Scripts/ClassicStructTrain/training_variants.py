@@ -91,7 +91,7 @@ def archival():
    start,end=span(current,'bool NNeuronLearner::Training');current=current[:start]+adapted+current[end:]
    records.append({'class':cls,'method':'Training','source':str(source.relative_to(ROOT)),'original_sha256':hashlib.sha256(old.encode()).hexdigest(),'adaptation':'Function and measurement method renamed to current private interfaces; loop logic retained'})
   path.write_text(current,encoding='utf8')
- work=ROOT/'Reports/StructTrainClassic/TrainingReproducibility-20261123/variants';work.mkdir(parents=True,exist_ok=True)
+ work=ROOT/'Reports/StructTrainClassic/_work/TrainingReproducibility-20261123/variants';work.mkdir(parents=True,exist_ok=True)
  (work/'V3-adaptation.json').write_text(json.dumps({'methods':records,'classification':'Partial archival algorithm on modern infrastructure; not a complete 2022 binary','limitations':['Complete 2022 learner and trainer sources are absent from the available Git history.','Archived 2022 loop and earliest available 2023 decision functions have different provenances.','The archived loop does not contain the modern dendrite-freezing guard; the synapse-only schedule requires a separately documented adapter.']},ensure_ascii=False,indent=2),encoding='utf8')
  print('Applied documented partial archival algorithm; modern physical engine and lifecycle correction retained')
 if __name__=='__main__':

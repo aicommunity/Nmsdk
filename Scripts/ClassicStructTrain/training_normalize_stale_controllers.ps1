@@ -12,5 +12,5 @@ foreach($taskEntry in $taskProcesses){
   $taskProc.PriorityClass='Normal'
  }
 }
-$taskRows | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $taskRepo 'Reports/StructTrainClassic/TrainingReproducibility-20261123/stale-controller-priority-correction.json') -Encoding utf8
+$taskRows | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $taskRepo 'Reports/StructTrainClassic/_work/TrainingReproducibility-20261123/stale-controller-priority-correction.json') -Encoding utf8
 Write-Output "Normalized $($taskRows.Count) stale study processes to Normal"

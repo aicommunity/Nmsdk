@@ -10,6 +10,9 @@ import json
 import math
 from pathlib import Path
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from report_paths import report_path
 REPO = Path(__file__).resolve().parents[2]
 
 
@@ -153,7 +156,7 @@ def metrics(answers, classes, target):
 
 def evaluate(run_dir):
     manifest = read_json(REPO / "Bin/Configs/StructTrainClassic/Prepared/manifest.json")
-    evidence = read_json(REPO / "Reports/StructTrainClassic/archive-evidence.json")
+    evidence = read_json(REPO / "Reports/StructTrainClassic/_work/archive-evidence.json")
     rows, processes, coverage_errors = [], [], []
     repeat_signatures = defaultdict(list)
     for process_file in sorted(run_dir.glob("*/process.json")):
@@ -314,4 +317,4 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run", type=Path)
     args = parser.parse_args()
-    evaluate(args.run.resolve())
+    evaluate(report_path(args.run.resolve()))

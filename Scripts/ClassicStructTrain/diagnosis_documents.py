@@ -13,6 +13,7 @@ from docx.shared import Cm, Pt, RGBColor
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from diagnosis_run import DELIVERY, WORK, load, save, relative
+from report_paths import PLANS
 
 
 def document(title):
@@ -81,8 +82,8 @@ def plan():
     paragraph(doc, "NT80 повторить трижды последовательно при прежних пределах. Строгий NT22 исследовать до 1000 итераций или 1800 секунд на попытку. Сверять общие префиксы. Вывод о невозможности сходимости требует инварианта или повторения полного динамического состояния. Подтвердившиеся изменения исследовать на контрольной десятке и соответствующих последовательностях.")
     paragraph(doc, "Подтверждение дефекта требует воспроизвести его, устранить одним изменением и вернуть обратным контролем. Ошибка исторической записи устанавливается по первичному источнику и независимому пересчёту. В отчёте указать для каждого вывода степень подтверждения и условия применимости.")
     paragraph(doc, "Работа ведётся в исследовательских ветках, в Release из Bin/Platform/Win. Скрипты располагаются в Scripts, конфигурации — в Bin/Configs/StructTrainClassic. Исправления стенда и диагностические изменения ядра фиксируются отдельно. Итоговый DOCX включает диаграммы из XLSX и их анализ. Книга хранит ответы по каждому входу, параметры, протоколы и ссылки на журналы.")
-    DELIVERY.mkdir(parents=True, exist_ok=True)
-    doc.save(DELIVERY / "DiscrepancyDiagnosisPlan.docx")
+    PLANS.mkdir(parents=True, exist_ok=True)
+    doc.save(PLANS / "DiscrepancyDiagnosisPlan.docx")
 
 
 def report(checkpoint=False):

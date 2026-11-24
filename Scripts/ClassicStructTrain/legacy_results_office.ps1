@@ -2,7 +2,8 @@
 param([string]$WorkbookPath)
 $ErrorActionPreference='Stop'
 $repoRoot=(Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
-$workRoot=Join-Path $repoRoot 'Reports\StructTrainClassic\LegacyChecks-20261123'
+$workRoot=Join-Path $repoRoot 'Reports\StructTrainClassic\_work\LegacyChecks-20261123'
+if(!$WorkbookPath){$WorkbookPath=Join-Path $repoRoot 'Reports\StructTrainClassic\LegacyModelChecks.xlsx'}
 $figures=Get-Content -LiteralPath (Join-Path $workRoot 'figures.json') -Raw -Encoding utf8 | ConvertFrom-Json
 $imageRoot=Join-Path $workRoot 'excel-charts'
 New-Item -ItemType Directory -Force -Path $imageRoot | Out-Null

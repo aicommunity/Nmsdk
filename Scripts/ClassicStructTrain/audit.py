@@ -5,6 +5,9 @@ import json
 from pathlib import Path
 import subprocess
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from report_paths import report_path
 REPO = Path(__file__).resolve().parents[2]
 
 
@@ -66,4 +69,4 @@ def main(run):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run", type=Path)
-    raise SystemExit(main(parser.parse_args().run.resolve()))
+    raise SystemExit(main(report_path(parser.parse_args().run.resolve())))

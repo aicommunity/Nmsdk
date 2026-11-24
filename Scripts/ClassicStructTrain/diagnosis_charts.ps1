@@ -2,8 +2,8 @@
 param([switch] $Checkpoint)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../..')).Path
-$study = Join-Path $repo 'Reports/StructTrainClassic/DiscrepancyDiagnosis-20261124'
-$book = Join-Path $repo 'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/DiscrepancyDiagnosis/DiscrepancyDiagnosis.xlsx'
+$study = Join-Path $repo 'Reports/StructTrainClassic/_work/DiscrepancyDiagnosis-20261124'
+$book = Join-Path $repo 'Reports/StructTrainClassic/DiscrepancyDiagnosis.xlsx'
 $chartDirectory = Join-Path $study 'charts'
 $indexDirectory = $study
 if ($Checkpoint) {

@@ -2,8 +2,8 @@
 param()
 $ErrorActionPreference='Stop'
 $taskRepo=(Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../..')).Path
-$taskWork=Join-Path $taskRepo 'Reports/StructTrainClassic/TrainingReproducibility-20261123'
-$taskBookPath=Join-Path $taskRepo 'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/TrainingReproducibility/TrainingReproducibility.xlsx'
+$taskWork=Join-Path $taskRepo 'Reports/StructTrainClassic/_work/TrainingReproducibility-20261123'
+$taskBookPath=Join-Path $taskRepo 'Reports/StructTrainClassic/TrainingReproducibility.xlsx'
 $taskFigures=Get-Content -LiteralPath (Join-Path $taskWork 'report-figures.json') -Raw -Encoding utf8 | ConvertFrom-Json
 $taskData=Get-Content -LiteralPath (Join-Path $taskWork 'report-data.json') -Raw -Encoding utf8 | ConvertFrom-Json
 $taskProvenance=Get-Content -LiteralPath (Join-Path $taskWork 'workbook-provenance.json') -Raw -Encoding utf8 | ConvertFrom-Json

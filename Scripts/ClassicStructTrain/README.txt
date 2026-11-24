@@ -10,7 +10,7 @@ Preparation and provenance
 Run prepare.py with Python 3.10 or later. It reads the local archive under
 Docs/ClassicStructTrainExperiments, verifies the 22 verbatim configuration files
 under Bin/Configs/StructTrainClassic, extracts cached spreadsheet observations,
-and writes Prepared/manifest.json plus Reports/StructTrainClassic/archive-evidence.json.
+and writes Prepared/manifest.json plus Reports/StructTrainClassic/_work/archive-evidence.json.
 No source Office file or verbatim configuration is edited. Prepared/learner and
 Prepared/trainer are documented reconstructions from archived scalar settings,
 with fresh native structures instead of previously trained saved states.
@@ -48,10 +48,10 @@ Commands from the repository root
   python Scripts/ClassicStructTrain/test_archive.py
   powershell -File Scripts/ClassicStructTrain/build.ps1
   python Scripts/ClassicStructTrain/run.py --suite smoke --repeats 1
-  python Scripts/ClassicStructTrain/run.py --suite all --repeats 3 --jobs 4 --output Reports/StructTrainClassic/run-unique
-  python Scripts/ClassicStructTrain/evaluate.py Reports/StructTrainClassic/run-unique
-  python Scripts/ClassicStructTrain/plot.py Reports/StructTrainClassic/run-unique
-  python Scripts/ClassicStructTrain/audit.py Reports/StructTrainClassic/run-unique
+  python Scripts/ClassicStructTrain/run.py --suite all --repeats 3 --jobs 4 --output Reports/StructTrainClassic/_work/run-unique
+  python Scripts/ClassicStructTrain/evaluate.py Reports/StructTrainClassic/_work/run-unique
+  python Scripts/ClassicStructTrain/plot.py Reports/StructTrainClassic/_work/run-unique
+  python Scripts/ClassicStructTrain/audit.py Reports/StructTrainClassic/_work/run-unique
 
 Use the bundled Python executable in Codex. On this machine -I ignores an
 incompatible inherited PYTHONHOME; extraction and supervision need no third-party
@@ -137,7 +137,7 @@ Saved-state checks and scientific comparisons (23 November 2026)
 
 The final scientific report is ScientificComparisons.docx and its editable
 comparison workbook is ScientificComparisons.xlsx, both under
-Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/ScientificComparisons.
+Reports/StructTrainClassic.
 These supersede the earlier LegacyChecks report for interpretation of the
 historical scientific graphs. The final report contains 15 direct historical
 comparisons and three explicitly conditional waveform comparisons.
@@ -148,11 +148,11 @@ Its 145 structural records and variants include 14 complete reconstructions
 and 131 records with insufficient synapse counts. It supplies structures;
 historical recognition measurements have separate source references.
 
-The versioned evidence includes extracted source data, aggregate assessments,
-completed-process records, chart source images, native Excel chart exports,
-and the final audit results. Full runtime XML copies, waveform logs, dependency
-directories and document rendering caches remain local. The unchanged source
-archive is also local; preparation/source-inventory.json records its hashes.
+Final reports and workbooks are listed in Reports/StructTrainClassic/README.md.
+Extracted source data, assessments, process records, chart exports, audit
+results and waveform logs are stored in the ignored Reports/StructTrainClassic/_work
+directory. Its preparation/source-inventory.json records the hashes of the
+local source archive. Use report_paths.py to resolve a path from older evidence.
 Office regeneration uses the bundled artifact-tool runtime, Python document
 libraries and Microsoft Excel. Recorded absolute paths describe this execution.
 

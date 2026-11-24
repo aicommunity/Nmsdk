@@ -23,7 +23,7 @@ def colnum(s):
     for c in s:n=n*26+ord(c)-64
     return n
 def main():
-    evidence=json.loads((ROOT/'Reports/StructTrainClassic/archive-evidence.json').read_text(encoding='utf8'))
+    evidence=json.loads((ROOT/'Reports/StructTrainClassic/_work/archive-evidence.json').read_text(encoding='utf8'))
     data=json.loads(PLAN.read_text(encoding='utf8'));recovered=json.loads((CONFIG/'recovered-jobs.json').read_text(encoding='utf8'))
     lookup={(j['kind'],tuple(j['dendrites']),tuple(j['synapses'])):j for j in recovered}
     jobs={};refs=[];gaps=[]

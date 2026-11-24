@@ -17,7 +17,7 @@ logging.getLogger("pypdf").setLevel(logging.ERROR)
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "Docs/ClassicStructTrainExperiments"
-WORK = ROOT / "Reports/StructTrainClassic/LegacyInferencePlan-20261123/work"
+WORK = ROOT / "Reports/StructTrainClassic/_work/LegacyInferencePlan-20261123/work"
 NS = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
       "a": "http://schemas.openxmlformats.org/drawingml/2006/main",
       "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
@@ -169,7 +169,7 @@ def main():
                         if not warm: break
         for cap in doc["captions"]: captions.append({"doc":ident,**cap})
 
-    evidence=json.loads((ROOT/"Reports/StructTrainClassic/archive-evidence.json").read_text(encoding="utf-8"))
+    evidence=json.loads((ROOT/"Reports/StructTrainClassic/_work/archive-evidence.json").read_text(encoding="utf-8"))
     def walk(node, prefix, active, project):
         cls=node.get("Class",""); path=prefix
         ps=node.find("Parameters"); params={p.tag:" ".join(p.itertext()).strip() for p in ps} if ps is not None else {}
