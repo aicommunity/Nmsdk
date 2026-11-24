@@ -1,5 +1,6 @@
 """Audit controlled results, preserving per-input and per-iteration attribution."""
 from collections import Counter, defaultdict
+from concurrent.futures import ProcessPoolExecutor
 from copy import copy
 from functools import lru_cache
 from itertools import zip_longest
@@ -68,17 +69,33 @@ def observed_confusion(row, size):
     return dict(TP=count[True, 1], FP=count[False, 1], FN=count[True, 0], TN=count[False, 0])
 
 
-def trace_differences(left, right):
+def registered_rows(path, expected_ticks):
+    seen = set()
+    first_ticks = {}
+    for row in rows_of(path):
+        if "registered" not in row:
+            continue
+        identifier = row["input_id"]
+        if identifier in expected_ticks:
+            seen.add(identifier)
+            if row["registered"]:
+                first_ticks.setdefault(identifier, row["tick"])
+        yield identifier, row["tick"], row
+    actual_ticks = {i: first_ticks.get(i, -1) for i in seen}
+    assert actual_ticks == expected_ticks, (path, actual_ticks, expected_ticks)
+
+
+def trace_differences(left, right, expected_left, expected_right):
     first = {}
     fields = ("drives", "generators", "synapses", "soma", "zone_V", "zone_output", "wrapper_output", "registered")
-    left_rows = ((row["input_id"], row["tick"], row) for row in rows_of(left) if "registered" in row)
-    right_rows = ((row["input_id"], row["tick"], row) for row in rows_of(right) if "registered" in row)
+    left_rows = registered_rows(left, expected_left)
+    right_rows = registered_rows(right, expected_right)
     b = next(right_rows, None)
     for i, t, a in left_rows:
         while b is not None and b[:2] < (i, t):
             b = next(right_rows, None)
         if b is None:
-            break
+            continue
         if b[:2] != (i, t):
             continue
         for field in fields:
@@ -95,6 +112,8 @@ def trace_differences(left, right):
                 first[key] = {"input_id": i, "quantity": field, "tick": t,
                               "component_index": location, "before": before, "after": after,
                               "baseline_time_s": a["time_from_input_s"], "changed_time_s": b[2]["time_from_input_s"]}
+    for _ in right_rows:
+        pass
     return list(first.values())
 
 
@@ -119,6 +138,7 @@ def audit():
     inference = {}
     training = {}
     trace_comparisons = []
+    trace_jobs = []
     sequences = defaultdict(list)
     matched_inputs = {}
     for process in sorted((WORK / "runs").glob("*/*/process.json")):
@@ -278,10 +298,23 @@ def audit():
         if not all(prefix[key] == original[0][key][:len(prefix["input_ids"])]
                    for prefix, original in ((a, original_a), (b, original_b)) for key in prefix_fields):
             raise AssertionError(("Prefix failed full sequence validation", label, factor))
+        assert a["answer_source"] == b["answer_source"] == "LTZone", (label, factor)
+        changes = {i for i, x, y in zip(original_a[0]["input_ids"], original_a[0]["answers"],
+                                        original_b[0]["answers"], strict=True) if x != y}
+        assert changes and changes <= set(a["input_ids"]) & set(b["input_ids"]), (label, factor, changes)
+        expected = [{r["input_id"]: r["first_zone_tick"] for r in row["decode_windows"]
+                     if r["input_id"] in changes} for row in (a, b)]
         trace_comparisons.append({"label": label, "factor": factor, "logs": [relative(ap), relative(bp)],
                                   "validated_prefix": len(a["input_ids"]),
-                                  "thresholds_V": {str(r["input_id"]): r["threshold_V"] for r in a["decode_windows"]},
-                                  "first_events": trace_differences(ap / "waveforms.jsonl", bp / "waveforms.jsonl")})
+                                  "validated_changed_inputs": sorted(changes),
+                                  "thresholds_V": {str(r["input_id"]): r["threshold_V"] for r in a["decode_windows"]}})
+        trace_jobs.append((ap / "waveforms.jsonl", bp / "waveforms.jsonl", *expected))
+    if trace_jobs:
+        # Each pair is independent and the waveform files dominate audit time.
+        with ProcessPoolExecutor(max_workers=min(len(trace_jobs), 4)) as executor:
+            events = executor.map(trace_differences, *zip(*trace_jobs))
+            for review, first_events in zip(trace_comparisons, events, strict=True):
+                review["first_events"] = first_events
     observed = []
     for (group, run_id), (row, folder) in training.items():
         observation = snapshot(run_id + "-baseline-r1")

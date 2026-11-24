@@ -102,12 +102,15 @@ def report(checkpoint=False):
             p = doc.add_paragraph()
             p.paragraph_format.first_line_indent = Cm(0)
             p.paragraph_format.keep_with_next = True
+            p.paragraph_format.line_spacing = 1.0
+            p.paragraph_format.space_after = Pt(2)
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
             p.add_run().add_picture(str(image), width=Cm(16.5))
             caption = doc.add_paragraph(f"Рисунок {len(images)+1} — {chart['title']}", "Caption")
             caption.paragraph_format.keep_with_next = True
             explanation = doc.add_paragraph(chart["analysis"])
             explanation.paragraph_format.keep_together = True
+            explanation.paragraph_format.line_spacing = 1.15
             images.append(hashlib.sha256(image.read_bytes()).hexdigest())
     destination = WORK / "checkpoint" if checkpoint else DELIVERY
     target = destination / "DiscrepancyDiagnosis.docx"

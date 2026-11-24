@@ -21,6 +21,10 @@ def evidence_files():
     for file in (WORK / "variants").glob("*.json"):
         binary = ROOT / load(file)["binary"]
         files.update([binary, binary.with_suffix(".ini")])
+    for module in load(WORK / "runtime-provenance.json")["local_modules_observed"]:
+        binary = ROOT / module["path"]
+        assert sha(binary) == module["sha256"], binary
+        files.add(binary)
     for item in load(WORK / "locked-inference-cases.json"):
         files.update(ROOT / path for path in item["files"])
     return sorted(files)
@@ -36,26 +40,30 @@ def archive():
                                         cwd=sdk)
         (WORK / (metadata.stem + "-sdk.patch")).write_bytes(patch)
 
+    files = evidence_files()
     index, unique = [], {}
-    part, length, bundle = 0, 0, None
-    try:
-        for file in evidence_files():
-            size = file.stat().st_size
-            digest = sha(file)
-            if digest not in unique:
-                if bundle is None or length + size > 96 * 1024 * 1024:
-                    if bundle is not None:
-                        bundle.close()
-                    part += 1
-                    length = 0
-                    bundle = ZipFile(destination / f"data-{part:03}.zip", "w", ZIP_DEFLATED, compresslevel=4)
-                bundle.write(file, digest)
-                unique[digest] = part
-                length += size
-            index.append({"path": relative(file), "sha256": digest, "bytes": size, "part": unique[digest]})
-    finally:
-        if bundle is not None:
-            bundle.close()
+    for prefix, files_in_group in (("data", (p for p in files if p.name != "waveforms.jsonl")),
+                                   ("waveforms", (p for p in files if p.name == "waveforms.jsonl"))):
+        part, length, bundle = 0, 0, None
+        try:
+            for file in files_in_group:
+                size = file.stat().st_size
+                digest = sha(file)
+                if digest not in unique:
+                    if bundle is None or length + size > 96 * 1024 * 1024:
+                        if bundle is not None:
+                            bundle.close()
+                        part += 1
+                        length = 0
+                        name = f"{prefix}-{part:03}.zip"
+                        bundle = ZipFile(destination / name, "w", ZIP_DEFLATED, compresslevel=4)
+                    bundle.write(file, digest)
+                    unique[digest] = name
+                    length += size
+                index.append({"path": relative(file), "sha256": digest, "bytes": size, "archive": unique[digest]})
+        finally:
+            if bundle is not None:
+                bundle.close()
     with gzip.open(destination / "index.json.gz", "wt", encoding="utf-8") as output:
         json.dump(index, output, ensure_ascii=False, separators=(",", ":"))
     archives = []
@@ -71,7 +79,7 @@ def archive():
     save(destination / "verification.json", {
         "passed": True, "files": len(index), "unique_bytesets": len(unique), "archives": archives,
         "index_sha256": sha(destination / "index.json.gz"),
-        "restore": "Read index.json.gz, select the corresponding data-###.zip, and extract the SHA256 member to the listed path.",
+        "restore": "Read index.json.gz, open each entry's archive, and extract the SHA256 member to its path.",
     })
     print(f"Verified {len(index)} files in {len(archives)} archives")
 

@@ -67,7 +67,27 @@ try {
         $chartObject.Width = 976
         $chartObject.Height = 542
         $png = Join-Path $chartDirectory ($figure.id + '.png')
-        if (!$chart.Export($png, 'PNG', $false)) { throw "Chart export failed for $($figure.id)" }
+        $published = $false
+        # Excel can report success before a chart has actually been rendered.
+        # Keep the last verified file until a complete PNG is available.
+        for ($attempt = 1; $attempt -le 4; $attempt++) {
+            $temporary = Join-Path $chartDirectory ($figure.id + '-' + [guid]::NewGuid().ToString('N') + '.png')
+            try {
+                $chartObject.Activate()
+                Start-Sleep -Milliseconds (250 * $attempt)
+                if (!$chart.Export($temporary, 'PNG', $false) -or !(Test-Path -LiteralPath $temporary)) { continue }
+                $bytes = [System.IO.File]::ReadAllBytes($temporary)
+                if ($bytes.Length -lt 32 -or
+                    [BitConverter]::ToString($bytes, 0, 8) -ne '89-50-4E-47-0D-0A-1A-0A' -or
+                    [BitConverter]::ToString($bytes, $bytes.Length - 8, 8) -ne '49-45-4E-44-AE-42-60-82') { continue }
+                [System.IO.File]::Move($temporary, $png, $true)
+                $published = $true
+                break
+            } finally {
+                if (Test-Path -LiteralPath $temporary) { Remove-Item -LiteralPath $temporary }
+            }
+        }
+        if (!$published) { throw "Excel did not produce a complete PNG for $($figure.id)" }
         $checks += [ordered]@{ id = $figure.id; sha256 = (Get-FileHash -LiteralPath $png -Algorithm SHA256).Hash }
     }
 } finally {

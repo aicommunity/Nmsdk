@@ -84,6 +84,14 @@ def run():
         if full:
             paragraphs.append(f"{label}. В {sum(not r['changed'] for r in full)} из {len(full)} полных пилотных "
                               "сопоставлений весь вектор бинарных ответов сохранился.")
+    for factor, label in (("order", "Порядок расчёта"), ("reset", "Сброс"), ("window", "Длительность окна"),
+                          ("precision", "Округление задержек")):
+        expanded = [r for r in pairs if r["label"] not in PILOT and r["repeat"] == 1 and r["factor"] == factor]
+        if expanded:
+            switches = [row for r in expanded for row in r["changed"]]
+            paragraphs.append(f"{label} в расширенной проверке. Изменения в {sum(bool(r['changed']) for r in expanded)} "
+                              f"из {len(expanded)} случаев. Переходов 0 → 1 было {sum(c['after'] == 1 for c in switches)}, "
+                              f"переходов 1 → 0 было {sum(c['after'] == 0 for c in switches)}.")
     controls = (("NL22", "order"), ("new-NT111", "reset"))
     for index, key in enumerate(controls, 2):
         group = certified.get(key, by_factor.get(key, []))
@@ -192,6 +200,11 @@ def run():
     if nt80:
         paragraphs.append(f"NT80 при последовательных запусках завершился в {sum(r['status']=='completed' for r in nt80)} из {len(nt80)} попыток. Число итераций по повторам {', '.join(str(r['iterations']) for r in nt80)}. Ранее одна попытка была ограничена по времени после 42 совпавших итераций. Полученные результаты связывают отличие прежней попытки с границей запуска.")
     if strict:
+        earlier_limit = [next(rows_of(p)) for p in sorted((PREVIOUS / "runs/FZ/stopping").glob("trainer-22-r*/results.jsonl"))]
+        if earlier_limit:
+            paragraphs.append("В предыдущем варианте FZ с пределом 600 секунд остановки по времени получены "
+                              f"на итерациях {', '.join(str(r['iterations']) for r in earlier_limit)}. "
+                              "Исходные журналы этой серии сохранены в составе TrainingReproducibility.")
         first = ROOT / strict[0]["directory"]
         prefixes = [first_iteration(first, ROOT / row["directory"]) for row in strict[1:]]
         common = min((diff["record"] - 1 for diff in prefixes if diff), default=strict[0]["iterations"])
@@ -210,6 +223,10 @@ def run():
     factors = [row for row in trained if row["phase"] == "training-factors"]
     own = sum(row["own_recognized"] is not None for row in factors)
     paragraphs.append(f"По изолированным факторам получено {len(factors)} записей обучения и {own} проверок своего входа после загрузки. Физические параметры взяты из сохранённых графов. Частично восстановленный учебный цикл сочетает архивный фрагмент и решения из Git. Результаты относятся к этой реализации на современном ядре.")
+    paragraphs.append("В частично восстановленном цикле NL проверка завершения и длительность итерации опираются на сохранённый фрагмент. "
+                      "Решения NT о синхронизации и настройке сом взяты из ранней доступной реализации. "
+                      "Применены современные механизмы инициализации добавленных компонентов, сохранения графа и регистрации сигналов. "
+                      "Ревизия варианта — 33cc4af.")
     crossed = [[algorithm, profile, [r for r in factors if r["run"].startswith(f"{algorithm}-{profile}-")]]
                for algorithm in ("modern", "archive") for profile in ("default", "secretion2")]
     if all(rows for _, _, rows in crossed):
@@ -384,6 +401,8 @@ def run():
             titles = {"warm-native-r1": "исходный", "warm-disabled-r1": "без явного обновления",
                       "warm-reversal-r1": "возврат"}
             for key, rows in sorted(extended.items()):
+                if not key.startswith("matched-") and len(extended.get("matched-" + key, [])) == len(rows):
+                    continue
                 records = sorted(rows, key=lambda r: r["transition"])
                 first = next((r for r in records if not r["matches"]), None)
                 condition = titles[key.split("/")[-1]]
@@ -507,6 +526,11 @@ def run():
                 f"{row['phase']} ({row['completed_processes']}/{row['planned']})" for row in pending) + "."
         else:
             coverage_line = "Покрытие запланированных процессов сведено в таблицу книги."
+        if coverage.get("trace_pairs_planned"):
+            coverage_line += (f" Потактово сверено {coverage['trace_pairs_verified']} из "
+                              f"{coverage['trace_pairs_planned']} сочетаний с изменёнными ответами. "
+                              f"Первый зарегистрированный импульс проверен по трассе для "
+                              f"{coverage['trace_answers_verified']} из {coverage['trace_answers_planned']} смен ответа.")
         if coverage["snapshots_reused"]:
             snapshot_line = (f"При оценке снимков {coverage['snapshots_reused']} запросов сведены к представителям "
                              "с одинаковыми байтами загружаемых файлов, одинаковым заданием и той же сборкой. "
@@ -515,7 +539,7 @@ def run():
         "Подтверждены только эффекты с измеренным вмешательством и проверкой возврата. Для исторических расхождений полный комплект первичных сигналов и исходных кодов 2022 года отсутствует. Архивные альтернативы графа, различия порядка и состояния при предъявлении дают несколько совместимых объяснений.",
         "Доказанный дефект регистрации стенда исправлен. Подтверждение ошибки исторической таблицы требует расхождения с первичным файлом при согласованной привязке. Совпадение опубликованных счётов с первичными файлами подтверждает их арифметику. Источник необъяснённой 31-й строки и конкретная причина оставшихся исторических расхождений не установлены.",
         f"По журналам учтено {len(data['processes'])} процессов. Завершено {counts['completed']}. Остальные случаи и достигнутые внутри процесса ограничения доступны в книге. Использована сборка Release и запуск из Bin/Platform/Win. Степень подтверждения отдельных факторов следует оценивать по конкретным экспериментам и числу доступных повторов.",
-        "Источники предшествующей проверки — ScientificComparisons и TrainingReproducibility. Исходные материалы находятся в Docs/ClassicStructTrainExperiments/Эксперименты. Реестр, нативные журналы и контрольные суммы находятся в Reports/StructTrainClassic/DiscrepancyDiagnosis-20261124.",
+        "Источники предшествующей проверки — ScientificComparisons и TrainingReproducibility. Исходные материалы находятся в Docs/ClassicStructTrainExperiments/Эксперименты. Реестр, нативные журналы и контрольные суммы находятся в Reports/StructTrainClassic/DiscrepancyDiagnosis-20261124. Индекс архива Evidence связывает каждый файл с его контрольной суммой и архивной частью. Полные потактовые ряды сохранены в локальных частях waveforms в этом архиве.",
     ] + [line for line in (coverage_line, snapshot_line) if line]))
     sections.append(section("7 Использованные источники", [
         "1. «Инофрмация о длинах дендритов и числе синапсов.xlsx». Лист «Дендриты и синапсы», основной источник структур NT и NL. Docs/ClassicStructTrainExperiments/Эксперименты.",
@@ -576,6 +600,15 @@ def run():
         findings.append(["Продолжение NT22 после удаления синапса", "Подтверждено экспериментом",
                          "При исходном правиле и после его возврата наблюдалось завершение. "
                          "В изменённом условии три вычисления достигли 600 секунд."])
+    live_vs_pause = [r for r in data.get("sequence_repeats", []) if r["scheme"] == "0_1_4_full"
+                     and r["mode"] in {"live", "pause"}]
+    if len(live_vs_pause) == 2 and all(r["repeats"] == 3 and r["same_training"] for r in live_vs_pause):
+        different = sum(r["scheme"] == "0_1_4_full" and r["d"][2] is not None and
+                        (r["d"][0], r["s"][0]) != (r["d"][2], r["s"][2]) for r in contexts)
+        if different:
+            findings.append(["Живой тест и пауза между этапами № 51 → № 61", "Подтверждено экспериментом",
+                             f"Живой тест и пауза с выключенными генераторами дали разные структуры на {different} "
+                             "учебных этапах по трём повторам. Контроль относится к интервалам одинаковой длительности."])
     for key in sorted(by_factor):
         group = by_factor[key]
         if not any(r["changed"] for r in group):

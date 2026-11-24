@@ -14,6 +14,9 @@ const report = await read('diagnosis-report.json');
 const historical = await read('archival-answers.json');
 const source = await read('source-audit.json');
 const coverage = await read('diagnosis-coverage.json');
+const runtime = await read('runtime-provenance.json');
+const history = JSON.parse(await fs.readFile(path.join(root,
+  'Reports/StructTrainClassic/TrainingReproducibility-20261123/history.json'), 'utf8'));
 const workbook = Workbook.create();
 const chartIndex = [];
 
@@ -57,6 +60,13 @@ table('Источники и состояния', 'Соответствие ис
   ['Лист', 'Состояние', 'Диапазон', 'Файл', 'SHA256', 'Число ответов', 'Лишние значения', 'Дендриты и синапсы'],
   source.protocols.map(r => [r.sheet, r.state, r.range, r.file, r.file_sha256, r.mapped_answers,
     r.unmapped_answer_lines.join(', '), r.graph_ds.join(', ')]), [44, 15, 18, 64, 68, 18, 18, 34]);
+table('Датировка источников', 'Даты редактирования документов и сохранения конфигураций',
+  ['Источник', 'Создан', 'Изменён', 'Сохранения конфигурации', 'SHA256'],
+  history.documents.map(r => [r.path, r.created, r.modified, r.saves?.join(', '), r.sha256]), [62, 28, 28, 72, 68]);
+table('Ревизии PulseLib', 'Изменения PulseLib по датам из предшествующей проверки',
+  ['Ревизия', 'Дата автора', 'Сообщение коммита', 'Предмет проверки', 'SHA256 патча', 'Патч'],
+  history.commits.map(r => [r.sha, r.author_date, r.subject, r.factor, r.patch_sha256, r.patch]),
+  [47, 29, 64, 61, 68, 61]);
 if (source.retained_order_variants?.length) {
   table('Сборки порядка', 'Происхождение раздельно собранных вариантов изменения порядка',
     ['Условие', 'SHA256 бинарника', 'Ревизия PulseLib', 'Ревизия Rdk',
@@ -187,12 +197,17 @@ if (data.warm_extensions?.length) {
       r.previous_iterations, r.iterations, r.matches ? 'да' : 'нет', r.status, r.log]),
     [39, 13, 13, 13, 25, 25, 25, 25, 16, 18, 16, 17, 20, 58]);
 }
+const signalNames = {
+  drives: 'Управление генераторами', generators: 'Выходы генераторов', synapses: 'Сигналы синапсов',
+  soma: 'Потенциалы сом', zone_V: 'Потенциал LTZone, В', zone_output: 'Выход LTZone',
+  wrapper_output: 'Выход оболочки', registered: 'Регистрация импульса',
+};
 table('Первые различия', 'Первый наблюдаемый такт расхождения по сигналу',
   ['Модель', 'Фактор', 'Объект Iris', 'Величина', 'Такт', 'Компонент', 'Значение до', 'Значение после',
    'Время до, с', 'Время после, с', 'Трасса'],
-  data.tick_comparisons.flatMap(r => r.first_events.map(e => [r.label, r.factor, e.input_id, e.quantity,
+  data.tick_comparisons.flatMap(r => r.first_events.map(e => [r.label, r.factor, e.input_id, signalNames[e.quantity] ?? e.quantity,
     e.tick, JSON.stringify(e.component_index), JSON.stringify(e.before), JSON.stringify(e.after),
-    e.baseline_time_s, e.changed_time_s, r.logs[1]])), [24, 18, 16, 23, 13, 14, 31, 31, 18, 18, 58]);
+    e.baseline_time_s, e.changed_time_s, r.logs[1]])), [24, 18, 16, 31, 13, 14, 31, 31, 18, 18, 58]);
 table('Первые учебные различия', 'Сравнение решений и состояний обучения по общему префиксу',
   ['Фактор', 'Задание', 'Первая запись', 'Поля', 'Первые такты по величине', 'Итерации до', 'Итерации после',
    'Статус до', 'Статус после', 'База', 'Изменение'],
@@ -203,10 +218,17 @@ table('Запуски', 'Идентификация независимых пр�
   ['Серия', 'Задание', 'Статус', 'Время, с', 'SHA256 программы', 'SHA256 задания', 'Журнал'],
   data.processes.map(p => [p.phase, p.run, p.status, p.seconds, p.binary_sha256, p.manifest_sha256, p.path]),
   [24, 42, 24, 16, 68, 68, 60]);
+table('Среда Release', `${runtime.os} ${runtime.os_build}, ${runtime.executable_directory}`,
+  ['Загруженная библиотека', 'Версия файла', 'SHA256'],
+  runtime.local_modules_observed.map(r => [r.path, r.version, r.sha256]), [59, 21, 68]);
 table('Покрытие', 'Сопоставление запланированных и выполненных серий',
   ['Серия', 'Запланировано', 'Завершено', 'Выполняется', 'Неуспешные процессы', 'Ожидают запуска'],
   coverage.phases.map(r => [r.phase, r.planned, r.completed_processes, r.running,
     r.failed_processes, r.pending_processes]), [31, 19, 17, 19, 26, 23]);
+if (coverage.trace_pairs_pending?.length) {
+  table('Ожидаемые трассы', 'Сочетания с изменёнными ответами, для которых ожидается потактовая сверка',
+    ['Модель', 'Вмешательство'], coverage.trace_pairs_pending, [26, 28]);
+}
 table('Повтор прежних ответов', 'Контроль прежних измерений по закреплённым графам',
   ['Модель', 'Вектор совпал', 'Тот же бинарник', 'Фактический SHA256', 'Исторический SHA256', 'Журнал'],
   (data.reference_audit ?? []).map(r => [r.label, r.matches ? 'да' : 'нет', r.exact_original_binary ? 'да' : 'нет',

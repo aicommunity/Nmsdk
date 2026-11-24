@@ -34,10 +34,18 @@ def run():
             status["pilot-extra", process["status"]] += 1
     expansion = WORK / "expansion-decision.json"
     training_expansion = WORK / "training-expansion-decision.json"
+    trace_pairs = set()
+    trace_answers = 0
     if expansion.exists():
         decision = load(expansion)
         expected["expansion"] = len(decision["out_of_pilot_models"]) * (
             2 + len(decision["factors_with_repeatable_binary_effect"]))
+        trace_cases = [r for r in data["inference_comparisons"] if r["repeat"] == 1 and r["changed"] and
+                       r["factor"] in decision["factors_with_repeatable_binary_effect"]]
+        trace_pairs = {(r["label"], r["factor"]) for r in trace_cases}
+        trace_answers = sum(len(r["changed"]) for r in trace_cases)
+    verified_traces = {(r["label"], r["factor"]): len(r["validated_changed_inputs"]) for r in data["tick_comparisons"]}
+    verified_pairs = trace_pairs & verified_traces.keys()
     if training_expansion.exists():
         expected["training-ten"] = sum((10 - len(row["pilot_ids"])) for row in load(training_expansion)
                                        if row["expanded"])
@@ -78,6 +86,11 @@ def run():
         "training_order_expansion_decided": order_expansion.exists(),
         "snapshots_measured": status["snapshot-inference", "completed"],
         "snapshots_reused": len(snapshots.get("aliases", {})),
+        "trace_pairs_planned": len(trace_pairs),
+        "trace_pairs_verified": len(verified_pairs),
+        "trace_pairs_pending": sorted(trace_pairs - verified_pairs),
+        "trace_answers_planned": trace_answers,
+        "trace_answers_verified": sum(verified_traces[key] for key in verified_pairs),
         "traces_measured": sum(n for (phase, result), n in status.items()
                                 if phase.startswith("tick-") and result == "completed"),
     })
