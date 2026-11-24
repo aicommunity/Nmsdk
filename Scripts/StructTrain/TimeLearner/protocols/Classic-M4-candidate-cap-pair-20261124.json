@@ -1,0 +1,86 @@
+{
+  "kind": "timelearner_cold_candidate_cap_pair_protocol",
+  "schema_version": 1,
+  "protocol_id": "classic_M4_N0_length4_candidate_cap_8_24_v1",
+  "worker": "Windows14",
+  "study_order": [
+    8,
+    24
+  ],
+  "source_job_sha256": "f04cb676753ff37d11d7666ae80db5de74578cbd203e693926237e355f876c00",
+  "source_signed_job_sha256": "9ba7d7faa34c0c7de6a831793f439b872db74a67d75919e01399566f75bed54d",
+  "source_initial_file_sha256": "95540f8e3f55df4d953fb99bdaea9b3cc95956b1770c541ced221bd184262271",
+  "source_initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+  "sdk_root": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+  "pulse_head": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+  "rdk_head": "561986e9f336ee5914e2d119de90b005e06f3639",
+  "binary_sha256": "4718804b91b715c06732a0c9110f94314caffcb98595b62eab6ec16eaca4a517",
+  "normalization": "N0",
+  "pulse_count": 4,
+  "maximum_n0_length_proposals": 4,
+  "maximum_candidates_per_input": [
+    8,
+    24
+  ],
+  "fixed_global_budgets": {
+    "maximum_probes": 160,
+    "maximum_edits": 1280,
+    "maximum_sweeps": 1,
+    "maximum_invalid_observations": 4,
+    "maximum_wall_seconds": 32400,
+    "maximum_model_seconds": 10000,
+    "maximum_model_ticks": 20000002
+  },
+  "fixed_tolerances": {
+    "amplitude_absolute": 1e-05,
+    "amplitude_relative": 0.0,
+    "sync": 0.02
+  },
+  "initial_inputs": [
+    {
+      "attachment": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "attachment": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "attachment": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "attachment": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "optional_modes": {
+    "sync_capacitance_trim": 0,
+    "post_train_tuning": false,
+    "auto_calibrate_threshold": false
+  },
+  "train_measurement": "native declared burst, assigned impulse maximum, CapturedPerInput",
+  "primary_endpoints": [
+    "per-input measured candidate coverage",
+    "timing and amplitude residuals at actually exported model",
+    "fresh all-input final verification and typed training outcome",
+    "actual consumed logical groups, physical probes, edits and wall/model times"
+  ],
+  "secondary_evaluation": "after separate full primary audit and native physical import; declared same-matrix threshold calibration followed by frozen original, heldout and third-pulse matrices; no template evaluation",
+  "physical_cold_preflight_required": true,
+  "source_initial_graph_and_parameters_must_match": true,
+  "positive_control": "separate Ns=2 graph with additional effective nodes",
+  "native_factor_readback_required": true,
+  "independent_stochastic_repetitions": false,
+  "new_positive_classes": 0,
+  "not_a_round_robin_implementation": true,
+  "proposal_mesh_can_change_with_cap": true,
+  "existing_live_jobs_or_runtime_modified": false,
+  "expected_training_outcomes": null,
+  "expected_classification_counts": null,
+  "scientific_verdict": null
+}

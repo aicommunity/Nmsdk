@@ -4,6 +4,8 @@ The native SDK, initial physics, target, tolerances and search budgets stay
 fixed. The permitted normalization variable changes from Rs to integer Ns.
 An explicitly separate budget experiment can extend a completed cold N0
 declaration to two sweeps; it does not resume the stopped model or change physics.
+Another explicit intervention changes only the local candidate cap while
+preserving global budgets and requiring the declared initial graph to match.
 Preflight is audited before Train. A closed Train still requires the separate
 full primary-history audit; this worker never equates process exit with Exact.
 """
@@ -113,9 +115,13 @@ def run(controls):
             'sdk_source','original_job','job_file','factor_job_file','run_id','maximum_synapses','output',
             'worker_sha256','native_memory_bytes','native_wall_seconds','preflight_wall_seconds',
             'minimum_free_bytes','maximum_output_bytes'} |
-                ({'source_initial_state'} if spec.get('kind') == 'timelearner_count_two_sweep_training' else set()) and
+                ({'source_initial_state'} if spec.get('kind') in
+                    ('timelearner_count_two_sweep_training','timelearner_count_candidate_limit_training') else set()) |
+                ({'maximum_candidates_per_input'} if spec.get('kind') ==
+                    'timelearner_count_candidate_limit_training' else set()) and
             os.name == 'nt' and spec['kind'] in
-                ('timelearner_matched_count_training', 'timelearner_count_two_sweep_training') and
+                ('timelearner_matched_count_training', 'timelearner_count_two_sweep_training',
+                 'timelearner_count_candidate_limit_training') and
             spec['schema_version'] == 1, 'count_train_worker_scope')
     base = Path('C:/Projects/TimeLearnerWorker').resolve(strict=True)
     output = Path(spec['output']).absolute()
@@ -132,9 +138,18 @@ def run(controls):
         require(file_record(job_path) == spec['job_file'], 'count_train_job_file_changed')
         job = load(job_path)
         extension = spec['kind'] == 'timelearner_count_two_sweep_training'
-        expected = doubled_sweep_count_job(original, spec['run_id']) if extension else \
-            matched_count_job(original, spec['run_id'], maximum_synapses=spec['maximum_synapses'])
-        require(job == expected and (not extension or all(
+        candidate_limit = spec['kind'] == 'timelearner_count_candidate_limit_training'
+        if candidate_limit:
+            from .cold_budget import declare_candidate_limit
+            require(original['configuration']['model']['normalization']=='N0' and
+                    type(spec['maximum_synapses']) is int and 2<=spec['maximum_synapses']<=128,
+                    'count_candidate_limit_requires_count_source')
+            expected=declare_candidate_limit(original,run_id=spec['run_id'],
+                candidates_per_input=spec['maximum_candidates_per_input'])
+        else:
+            expected = doubled_sweep_count_job(original, spec['run_id']) if extension else \
+                matched_count_job(original, spec['run_id'], maximum_synapses=spec['maximum_synapses'])
+        require(job == expected and (not (extension or candidate_limit) or all(
                     bound['maximum_synapses'] <= spec['maximum_synapses']
                     for bound in job['configuration']['search']['bounds'])),
                 'count_train_matched_case_changed')
@@ -200,13 +215,17 @@ def run(controls):
                     initial = load(destination/'native/initial-state.json')
                     if phase == 'preflight':
                         baseline_initial = initial
-                        if extension:
+                        if extension or candidate_limit:
                             source_record = spec['source_initial_state']
                             source_path = Path(source_record['path'])
                             require(file_record(source_path) == source_record,
                                     'count_extension_initial_source_changed')
                             previous = load(source_path)
-                            require(initial['identity'] == previous['identity'] and
+                            require(previous['training_started'] is False and
+                                    previous['dynamics_checkpoint'] is False and
+                                    previous['identity']['valid'] is True and
+                                    previous['sha256']==sha({k:v for k,v in previous.items() if k!='sha256'}) and
+                                    initial['identity'] == previous['identity'] and
                                     initial['parameters'] == previous['parameters'],
                                     'count_extension_cold_graph_changed')
                             _write(output/'cold-start-comparison.json', dict(
@@ -244,7 +263,7 @@ def run(controls):
                 file_record(runtime_path) == runtime_before and source_closure(sdk) == runtime['source_closure'],
                 'count_train_source_changed_after_execution')
         _source_snapshot(Path(spec['python_source']), spec['python_root'])
-        if extension:
+        if extension or candidate_limit:
             require(file_record(Path(spec['source_initial_state']['path'])) == spec['source_initial_state'],
                     'count_extension_initial_source_changed')
         _write(output/'terminal.json',terminal)

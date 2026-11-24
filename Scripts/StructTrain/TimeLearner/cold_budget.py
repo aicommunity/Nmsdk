@@ -19,6 +19,32 @@ from .n0_length_policy import audit_n0_length_policy
 TERMINAL_COMPLETION_TICKS = 2
 
 
+def declare_candidate_limit(job, *, run_id, candidates_per_input):
+    """Change only the per-input candidate limit and attempt identity.
+
+    Global probe/edit/sweep/wall/model-time limits, cold model, target and
+    measurement protocol are retained. The limit also bounds some proposal
+    meshes: this is a declared search-effort intervention, not equivalent
+    enumeration, a round-robin scheduler or a guarantee of all-input coverage.
+    Native preflight/readback and the final certificate remain separate gates.
+    """
+    validate_job('train', job)
+    require(type(run_id) is str and bool(run_id.strip()) and
+            type(candidates_per_input) is int and candidates_per_input > 0,
+            'candidate_limit_explicit_declaration')
+    changed=deepcopy(job)
+    changed['configuration']['run_id']=run_id
+    changed['configuration']['search']['maximum_candidates_per_input']=candidates_per_input
+    changed.pop('sha256')
+    changed['sha256']=canonical_model_sha256(changed)
+    validate_job('train', changed)
+    # In particular, never silently reduce an already declared N0 length turn
+    # to make it fit the new limit or fund a larger global budget.
+    view=project_training_configuration(changed['configuration'])
+    audit_n0_length_policy(dict(view['search'],normalization=view['model']['normalization']))
+    return changed
+
+
 def coverage(job):
     validate_job('train', job)
     raw=job['configuration'];base,terminal_policy=split_terminal_configuration(raw)
