@@ -146,7 +146,17 @@ def live(api,k,identity):
         require(C.get_last_error() in (87,1168),'windows_recognition_process_observation_failed')
         return False
     try:
-        actual=api.identity(h)
+        # A terminated process can retain an open kernel handle while its
+        # executable mapping is already unavailable (QueryFullProcessImageName
+        # then reports WinError31). Check this handle's lifetime first, and
+        # distinguish an exit during the identity query from a live-process
+        # access failure. Never classify an unobservable live process as dead.
+        if not api.running(h):return False
+        try:
+            actual=api.identity(h)
+        except OSError:
+            if not api.running(h):return False
+            raise
         # A reused PID is a different process; never signal it or wait on it.
         return (actual['creation_filetime']==identity['creation_filetime'] and
                 os.path.samefile(actual['executable'],identity['executable']) and api.running(h))
