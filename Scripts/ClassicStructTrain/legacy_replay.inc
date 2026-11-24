@@ -74,13 +74,23 @@ json legacyInference(const json& job, const std::vector<json>& data, bool indepe
  const auto before=structureReadback();
  const int target=job.at("target_class");
  const double frequency=learner ? learner->SpikesFrequency.GetData() : trainer->SpikesFrequency.GetData();
- const int ticks=int(std::ceil(2000.0/frequency));
+ const int ticks=job.value("ticks_per_input_override",int(std::ceil(2000.0/frequency)));
+ const int firstObservedTick=job.value("first_observed_tick",0);
+ const bool useWrapper=job.value("observe_wrapper",false);
+ const bool diagnostic=job.value("diagnostic",false);
+ const auto diagnosticIds=job.value("diagnostic_trace_ids",std::vector<int>{});
+ if(ticks<=0 || firstObservedTick<0 || firstObservedTick>=ticks)
+  throw std::runtime_error("Invalid diagnostic observation window");
+ const double threshold=learner?learner->LTZThreshold.GetData():trainer->LTZThreshold.GetData();
  json answers=json::array(), ids=json::array(), peaks=json::array(), firstSpikes=json::array();
  json zonePeaks=json::array(),wrapperAnswers=json::array();
+ json zoneAnswers=json::array(),decodeWindows=json::array();
  int tp=0,fp=0,fn=0,tn=0;
  for(const auto& sample:data) {
   if(independent && !env->Reset()) throw std::runtime_error("Independent Reset failed");
   const auto p=sample.at("pattern").get<std::vector<double>>();
+  const int inputId=sample.at("id");
+  const bool diagnosticTrace=std::find(diagnosticIds.begin(),diagnosticIds.end(),inputId)!=diagnosticIds.end();
   const auto& previous=learner?learner->InputPattern.GetData():trainer->InputPattern.GetData();
   bool patternChanged=false;
   for(int i=0;i<5;++i) if(previous(i,0)!=p[i]) patternChanged=true;
@@ -95,7 +105,9 @@ json legacyInference(const json& job, const std::vector<json>& data, bool indepe
    drives[i]->Frequency=frequency;
    if(patternChanged || job.value("reset_drive_on_equal_pattern",true)) drives[i]->Reset();
   }
-  bool fired=false,wrapperFired=false; double peak=0,first=-1,zonePeak=0; std::vector<double> somaMax(5,0.0),somaTime(5,0.0);
+  bool zoneFired=false,wrapperFired=false; double peak=0,first=-1,zonePeak=0;
+  int firstZone=-1,firstWrapper=-1;
+  std::vector<double> somaMax(5,0.0),somaTime(5,0.0);
   const double start=time();
   const bool saveTrace=trace && (sample.at("id")==job.value("target_id",0) || sample.at("id")==22 || sample.at("id")==51 || sample.at("id")==61 || sample.at("id")==129);
   for(int tick=0;tick<ticks;++tick) {
@@ -108,14 +120,32 @@ json legacyInference(const json& job, const std::vector<json>& data, bool indepe
     if(saveTrace) sourceValues.push_back(sourceNodes[i-1]->Output(0,0));
    }
    peak=std::max(peak,sum);
-   if(pulseZone && pulseZone->OutputPotential.GetRows()>0) zonePeak=std::max(zonePeak,pulseZone->OutputPotential(0,0));
-   const auto& wrapper=learner?learner->Output.GetData():trainer->Output.GetData();
-   if(wrapper.GetRows()>0 && wrapper(0,0)>.001)wrapperFired=true;
-   if(ltz->Output(0,0)>.001) { if(!fired) first=time()-start; fired=true; }
+   if(tick>=firstObservedTick) {
+    if(pulseZone && pulseZone->OutputPotential.GetRows()>0) zonePeak=std::max(zonePeak,pulseZone->OutputPotential(0,0));
+    const auto& wrapper=learner?learner->Output.GetData():trainer->Output.GetData();
+    if(wrapper.GetRows()>0 && wrapper(0,0)>.001 && !wrapperFired) {
+     firstWrapper=tick;wrapperFired=true;if(useWrapper) first=time()-start;
+    }
+    if(ltz->Output(0,0)>.001 && !zoneFired) {
+     firstZone=tick;zoneFired=true;if(!useWrapper) first=time()-start;
+    }
+   }
+   if(diagnosticTrace) {
+    auto event=observedSignals(true);
+    event["input_id"]=inputId;event["case"]=key;event["tick"]=tick;
+    event["time_from_input_s"]=time()-start;event["observed"]=tick>=firstObservedTick;
+    event["registered"]=useWrapper?wrapperFired:zoneFired;
+    waveforms<<event.dump()<<'\n';
+   }
    if(saveTrace) waveforms << json({{"case",key},{"repeat",repeat},{"input_id",sample.at("id")},{"tick",tick},
     {"time",time()-start},{"sum_soma",sum},{"soma",soma},{"sources",sourceValues},{"LTZone",ltz->Output(0,0)}}).dump()<<'\n';
   }
-  ids.push_back(sample.at("id")); answers.push_back(fired?1:0); peaks.push_back(peak); firstSpikes.push_back(first<0?json(nullptr):json(first));
+  const bool fired=useWrapper?wrapperFired:zoneFired;
+  ids.push_back(inputId); answers.push_back(fired?1:0); peaks.push_back(peak); firstSpikes.push_back(first<0?json(nullptr):json(first));
+  zoneAnswers.push_back(zoneFired?1:0);
+  if(diagnostic) decodeWindows.push_back({{"input_id",inputId},{"delays_s",p},{"start_model_s",start},
+   {"end_model_s",time()},{"first_zone_tick",firstZone},{"first_wrapper_tick",firstWrapper},
+   {"peak_zone_V",zonePeak},{"threshold_V",threshold},{"margin_V",zonePeak-threshold}});
   zonePeaks.push_back(zonePeak);wrapperAnswers.push_back(wrapperFired?1:0);
   if(time()-start<.66) throw std::runtime_error("Model time did not advance through the stimulus window");
   bool own=sample.at("class").get<int>()==target;
@@ -124,10 +154,15 @@ json legacyInference(const json& job, const std::vector<json>& data, bool indepe
  }
  waveforms.flush(); const auto after=structureReadback();
  return {{"status","completed"},{"kind",kind},{"protocol",independent?"independent_reset":"continuous"},{"input_ids",ids},{"answers",answers},
-  {"peaks",peaks},{"zone_potential_peaks",zonePeaks},{"wrapper_answers",wrapperAnswers},{"first_spikes",firstSpikes},{"TP",tp},{"FP",fp},{"FN",fn},{"TN",tn},
+  {"peaks",peaks},{"zone_potential_peaks",zonePeaks},{"wrapper_answers",wrapperAnswers},{"zone_answers",zoneAnswers},
+  {"first_spikes",firstSpikes},{"TP",tp},{"FP",fp},{"FN",fn},{"TN",tn},
+  {"decode_windows",decodeWindows},{"first_observed_tick",firstObservedTick},{"answer_source",useWrapper?"wrapper":"LTZone"},
+  {"component_order",{{"model",componentOrder(model.Get())},{"subject",componentOrder(subject)},{"neuron",componentOrder(n.Get())}}},
   {"target_class",target},{"ticks_per_input",ticks},{"dendrites",dend()},{"synapses",syn()},
   {"readback_before",before},{"readback_after",after},{"structure_unchanged",before==after},
-  {"training_disabled",!needs()},{"cache_adapter","native object pointers, observation buffers, native computation order; no graph reconstruction"}};
+  {"training_disabled",!needs()},
+  {"requested_order",job.value("preserve_native_order",false)?"as_loaded":"manual_saved_state_order"},
+  {"cache_adapter","native object pointers and observation buffers"}};
 }
 
 void legacy() {

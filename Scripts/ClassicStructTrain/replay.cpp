@@ -4,6 +4,7 @@
 #include "../../Libraries/Nmsdk-PulseLib/Core/NNeuronTrainer.h"
 #include "../../Libraries/Nmsdk-PulseLib/Core/NSpikeClassifier.h"
 #include "../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
+#include "../../Libraries/Nmsdk-PulseLib/Core/NPulseSynapse.h"
 #include "../../Tests/Integration/Support/ConsoleLikeInit.h"
 #include <QCoreApplication>
 #include <QLockFile>
@@ -117,6 +118,12 @@ struct Replay {
   if(!results || !history) throw std::runtime_error("Cannot open replay outputs");
   maxIterations=manifest["defaults"]["max_iterations"];
   wallTimeout=manifest["defaults"]["wall_timeout_seconds"];
+  for(const auto name:{"NMSDK_DIAG_PROFILE","NMSDK_DIAG_NT_STOP"}) qunsetenv(name);
+  if(manifest.contains("diagnostic_core")) {
+   const auto& options=manifest.at("diagnostic_core");
+   if(options.contains("profile")) qputenv("NMSDK_DIAG_PROFILE",QByteArray::fromStdString(options.at("profile").get<std::string>()));
+   if(options.contains("nt_stop")) qputenv("NMSDK_DIAG_NT_STOP",QByteArray::fromStdString(options.at("nt_stop").get<std::string>()));
+  }
   app=NmsdkTests::InitEngineForPulseLibTests().application;
   if(!app) throw std::runtime_error("No application from test engine initialization");
   app->SetApplicationFileName("ClassicStructTrainReplay-"+std::to_string(QCoreApplication::applicationPid())+".exe");
@@ -231,11 +238,20 @@ struct Replay {
   int iterations=0, dendriteIterations=0, synapseIterations=0;
   const auto wallStart=std::chrono::steady_clock::now(); const double started=time();
   std::string status="completed";
+  std::string stopReason="native_completion";
   int ticks=0;
+  const int observedTicks=manifest.value("training_trace_ticks",0);
   while(true) {
    const int beforeCount=learner ? LearnerAccess::count(*learner) : 0;
    const bool beforeFirst=trainer && TrainerAccess::first(*trainer);
+   const bool observe=ticks<observedTicks;
+   json before;
+   if(observe) before=state();
    step(); ++ticks;
+   if(observe) {
+    auto after=state();
+    writeDiagnosticTick("training",ticks,before,after);
+   }
    if(learner && key=="learner-111" && beforeCount>=5 && beforeCount<=10) {
     const auto& m=learner->SomaNeuronAmplitude.GetData();
     std::vector<double> soma;
@@ -277,20 +293,23 @@ struct Replay {
      h["structure_readback"]=readback;
      history << h.dump() << '\n'; history.flush();
      status="uninitialized_dynamic_structure";
+     stopReason=status;
      break;
     }
     history << h.dump() << '\n';
    }
-   if(fixedIterations>0 && iterations>=fixedIterations && (!learner || LearnerAccess::first(*learner))) break;
+   if(fixedIterations>0 && iterations>=fixedIterations && (!learner || LearnerAccess::first(*learner))) {stopReason="scheduled_iterations";break;}
    if(!fixedIterations && !needs()) break;
    if(!fixedIterations && learner && iterations>0 && LearnerAccess::first(*learner)
-       && zero(LearnerAccess::ds(*learner)) && zero(LearnerAccess::ss(*learner))) break;
-   if(iterations>=maxIterations || time()-started>maxIterations/1.5+1) { status="iteration_limit"; break; }
+       && zero(LearnerAccess::ds(*learner)) && zero(LearnerAccess::ss(*learner))) {stopReason="zero_status_at_boundary";break;}
+   if(iterations>=maxIterations) {status="iteration_limit";stopReason=status;break;}
+   if(time()-started>maxIterations/1.5+1) {status="model_time_limit";stopReason=status;break;}
    if(ticks%1024==0 && std::chrono::duration<double>(std::chrono::steady_clock::now()-wallStart).count()>wallTimeout) {
-    status="wall_timeout"; break;
+    status="wall_timeout";stopReason=status;break;
    }
   }
   auto r=state(); r["status"]=status; r["kind"]=kind; r["pattern"]=p; r["iterations"]=iterations;
+  r["stop_reason"]=stopReason;
   r["dendrite_iterations"]=dendriteIterations; r["ticks"]=ticks; r["elapsed_model_time"]=time()-started;
   r["synapse_iterations"]=learner ? synapseIterations : iterations-dendriteIterations;
   r["model_time_from_iterations"]=iterations/1.5;
@@ -584,6 +603,7 @@ struct Replay {
   }
  }
 
+#include "diagnosis_trace.inc"
 #include "legacy_replay.inc"
 #include "training_file_protocol.inc"
 #include "training_replay.inc"
