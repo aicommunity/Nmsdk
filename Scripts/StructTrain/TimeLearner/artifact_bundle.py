@@ -101,7 +101,7 @@ def verify_packaged_run_inventory(records, manifests):
                     "packaged_pipeline_schema_operation_mismatch")
             if run['schema_version'] == 5:
                 from .job_source_transport import TRANSPORT
-                require(run['operation'] in ('export', 'evaluate', 'diagnostic-evaluate') and
+                require(run['operation'] in ('export', 'evaluate', 'diagnostic-evaluate', 'physical-model-evaluate') and
                         run.get('job_source_transport') ==
                             {'transport': TRANSPORT, 'path': 'input/native-job-source.json'} and
                         'process_policy' in run,

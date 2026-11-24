@@ -24,8 +24,8 @@ class FileSourceArchiveInventoryContractTest(unittest.TestCase):
         files['run/run-manifest.json'] = json.dumps(body).encode()
         return files
 
-    def test_all_three_roles_retain_original_job_envelope_and_complete_source(self):
-        for operation in ('export', 'evaluate', 'diagnostic-evaluate'):
+    def test_all_source_roles_retain_original_job_envelope_and_complete_source(self):
+        for operation in ('export', 'evaluate', 'diagnostic-evaluate', 'physical-model-evaluate'):
             files = self.files(operation)
             result = verify_packaged_run_closure(files)
             records = {n: dict(bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest()) for n, raw in files.items()}
@@ -36,13 +36,14 @@ class FileSourceArchiveInventoryContractTest(unittest.TestCase):
             self.assertNotIn('validity', result)
 
     def test_dropped_or_changed_envelope_and_source_fail_byte_inclusion(self):
-        for name in ('run/input/job.json', 'run/input/native-job-source.json', 'run/input/source/state.json'):
-            for mutation in ('drop', 'change'):
-                files = self.files()
-                if mutation == 'drop':files.pop(name)
-                else:files[name] += b'changed'
-                with self.subTest(name=name, mutation=mutation), self.assertRaises(EvidenceError):
-                    verify_packaged_run_closure(files)
+        for operation in ('export', 'evaluate', 'diagnostic-evaluate', 'physical-model-evaluate'):
+            for name in ('run/input/job.json', 'run/input/native-job-source.json', 'run/input/source/state.json'):
+                for mutation in ('drop', 'change'):
+                    files = self.files(operation)
+                    if mutation == 'drop':files.pop(name)
+                    else:files[name] += b'changed'
+                    with self.subTest(operation=operation, name=name, mutation=mutation), self.assertRaises(EvidenceError):
+                        verify_packaged_run_closure(files)
 
     def test_rehashed_cold_or_wrong_transport_roles_cannot_acquire_schema_five(self):
         for changes in (dict(operation='train'), dict(operation='preflight'), dict(operation='probe'),
