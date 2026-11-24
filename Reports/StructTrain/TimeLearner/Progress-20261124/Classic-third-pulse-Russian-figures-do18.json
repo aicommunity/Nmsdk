@@ -1,0 +1,80 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-third-pulse-Russian-figures-do18.json",
+  "catalog_record": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/Classic-third-pulse-Russian-figures-do18.json",
+    "sha256": "fe0fbac4e7ded0c8031419ef9cd5863c429f6af43e6db6e33b152b562a6485e5",
+    "size": 2446
+  },
+  "kind": "timelearner_Classic_third_pulse_Russian_figure_external_catalog",
+  "schema_version": 1,
+  "observed_utc": "2026-11-24T19:53:29.834613+00:00",
+  "objects": {
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/71/711012bcd8d78cac81304f28c7517fc0ee7111fa0c0a0ad8c6b36e6659b7caf9",
+      "sha256": "711012bcd8d78cac81304f28c7517fc0ee7111fa0c0a0ad8c6b36e6659b7caf9",
+      "bytes": 2903484
+    },
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ef/ef423eebb963484ae349bd682d879346c1d91c2847fc455364935579cd1d15ba",
+      "sha256": "ef423eebb963484ae349bd682d879346c1d91c2847fc455364935579cd1d15ba",
+      "bytes": 11457
+    },
+    "terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/07/079e8e79eb2243d74b198a258f5e39ca823578899f3458ad9c48dd54783a331c",
+      "sha256": "079e8e79eb2243d74b198a258f5e39ca823578899f3458ad9c48dd54783a331c",
+      "bytes": 930
+    },
+    "visual-review.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/75/7514db476367fc9d60fd7c49a417c83555f0f8a0c7aecdabf0e41d0667327d68",
+      "sha256": "7514db476367fc9d60fd7c49a417c83555f0f8a0c7aecdabf0e41d0667327d68",
+      "bytes": 3642
+    },
+    "restore-worker.py": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ff/ffba3dc80b94ea31ccac077052ac6cd15a538f2727678ac4b8dbce20f82d72fb",
+      "sha256": "ffba3dc80b94ea31ccac077052ac6cd15a538f2727678ac4b8dbce20f82d72fb",
+      "bytes": 5070
+    }
+  },
+  "figures": 8,
+  "PNG_files": 16,
+  "trial_soma_pairs": 32,
+  "reviewed_PNG": 16,
+  "Russian_captions_and_axes_reviewed": true,
+  "full_windows_and_positive_lobes_reviewed": true,
+  "M40_independent_restore_complete": false,
+  "native_event_tick_zoom_review_complete": false,
+  "final_DOCX_accepted": false,
+  "scientific_verdict": null,
+  "restore_worker": {
+    "dispatched": true,
+    "controls": "/media/user/Data/TimeLearnerRefactor/requests/Classic-third-pulse-restored-do19",
+    "owner": {
+      "pid": 3435269,
+      "start_ticks": "462520765",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "controls_commit": "e3359e0d1db718ceea41f94a6360aa1984cb0f22",
+    "controls_bundle": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/Classic-third-pulse-restored-do19/controls.bundle",
+      "sha256": "320cf9dcb86e28df58ae415e5be9ae575c77649f2fa8d26aa83383bd98b1979d",
+      "size": 2763
+    },
+    "native_model_not_started": true
+  }
+}
