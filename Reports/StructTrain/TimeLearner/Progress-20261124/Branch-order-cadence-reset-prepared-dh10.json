@@ -1,0 +1,127 @@
+{
+  "kind": "timelearner_frozen_Branch_matrix_preparation",
+  "schema_version": 1,
+  "dispatch": {
+    "queued": true,
+    "job": "/media/user/Data/TimeLearnerRefactor/requests/large-Branch-DATA3-order-cadence-reset-dh10",
+    "owner": {
+      "pid": 2243591,
+      "start_ticks": "459533664",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "controls_commit": "0052333e88eee0f49f5b82d63203ff76d6ef342d",
+    "controls_bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a8/a852c2f75da7773ce7feb0e5e3c9ea24b50248d9e635c37b3cecf8e2b89a2bc4",
+      "sha256": "a852c2f75da7773ce7feb0e5e3c9ea24b50248d9e635c37b3cecf8e2b89a2bc4",
+      "bytes": 5115
+    },
+    "worker_sha256": "26f97d38ec2ee64affecd44214ca5652ab92fa59dfdf5e02cf18f6a088165a18",
+    "declared_case_count": 32,
+    "declared_observations": 256,
+    "threshold": 0.09864679711103091,
+    "model_revision": "a71ae5270f9c8fe9c03bc479e473b3d08ea9e798bf134c32ad8aa559a2e34d8a",
+    "first_case_is_source_replay_control": true,
+    "all_conditions_committed_before_native_evaluation": true,
+    "new_training": false,
+    "new_calibration": false,
+    "scientific_verdict": null,
+    "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/large-Branch-DATA3-order-cadence-reset-prepared-dh10.json"
+  },
+  "constructor_checks": {
+    "testsRun": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true
+  },
+  "observed_utc": "2026-11-24T11:44:20.733705+00:00",
+  "controller_live_as_observed": true,
+  "native_case_results_verified": false,
+  "new_training": false,
+  "new_calibration": false,
+  "full_primary_archive": false,
+  "visual_review_complete": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null,
+  "all32_predeclared": {
+    "cases": 32,
+    "condition_fingerprints": 32,
+    "target_positions": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "all_cases": [
+      "r0-long-reset",
+      "r0-long-preserve",
+      "r0-short-reset",
+      "r0-short-preserve",
+      "r1-long-reset",
+      "r1-long-preserve",
+      "r1-short-reset",
+      "r1-short-preserve",
+      "r2-long-reset",
+      "r2-long-preserve",
+      "r2-short-reset",
+      "r2-short-preserve",
+      "r3-long-reset",
+      "r3-long-preserve",
+      "r3-short-reset",
+      "r3-short-preserve",
+      "r4-long-reset",
+      "r4-long-preserve",
+      "r4-short-reset",
+      "r4-short-preserve",
+      "r5-long-reset",
+      "r5-long-preserve",
+      "r5-short-reset",
+      "r5-short-preserve",
+      "r6-long-reset",
+      "r6-long-preserve",
+      "r6-short-reset",
+      "r6-short-preserve",
+      "r7-long-reset",
+      "r7-long-preserve",
+      "r7-short-reset",
+      "r7-short-preserve"
+    ]
+  },
+  "committed_declaration": {
+    "commit": "975e5b17fb1f21d0765537cd61a931b07d3fbbe1",
+    "bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/15/1565e7dbcee86bc772f4f3d994d0c51bcfae7f93d9dd6acbc8f1bddfd7c74eb2",
+      "sha256": "1565e7dbcee86bc772f4f3d994d0c51bcfae7f93d9dd6acbc8f1bddfd7c74eb2",
+      "bytes": 28181
+    },
+    "model_executed": false,
+    "all32_predeclared": true
+  },
+  "first_native_case_running": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/large-Branch-DATA3-order-cadence-reset-dh10/r0-long-reset/process/contained",
+    "execution": "running",
+    "all_processes_closed": false,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "27c25aaef1af29524fc85f79483825d564fe90b7c1d6081ff2c6700f70831d03",
+      "unit": "timelearner-73042ad7-2b46-4e16-9c7e-b80f201a1197.service",
+      "invocation_id": "b78811ad8b25460bb2f5193a8be1b966",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-73042ad7-2b46-4e16-9c7e-b80f201a1197.service",
+      "initial_main_pid": 2250412,
+      "initial_start_ticks": "459585348",
+      "sha256": "d5dcb7cb16adc097fe5813f2b793d8bbb9f5c22bf12a579380ae35906d7ff57b"
+    }
+  }
+}
