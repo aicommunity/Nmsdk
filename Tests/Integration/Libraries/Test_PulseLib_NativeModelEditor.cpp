@@ -3446,6 +3446,7 @@ enum class BoundaryExpectation { Completed, DiagnosticSweepBudget };
 struct BoundaryExtras {
     bool modelSpec2=false;
     bool productionCalibrationSeed=false;
+    bool countCalibrationSource=false;
     bool trackedCapacitance=false;
     std::optional<CapacitanceSearchPolicy> capacitanceSearch;
     std::optional<bool> expectedFrozenSpikes;
@@ -3459,6 +3460,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     bool withDormantCapacitance=false,BoundaryExtras extras={})
 {
     const bool modelSpec2=extras.modelSpec2,productionCalibrationSeed=extras.productionCalibrationSeed;
+    const bool countCalibrationSource=extras.countCalibrationSource;
     const bool trackedCapacitance=extras.trackedCapacitance;
     const auto& capacitanceSearch=extras.capacitanceSearch;
     if(extras.expectedFrozenSpikes)
@@ -3477,6 +3479,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(withDormantCapacitance)suffix+="_dormant";
     if(modelSpec2)suffix+="_model_spec2";
     if(productionCalibrationSeed)suffix+="_production_calibration_seed";
+    if(countCalibrationSource)suffix+="_count_calibration_burst_003";
     if(trackedCapacitance)suffix+="_history";
     if(capacitanceSearch)suffix+="_csearch";
     // Persistence and readout intentionally exercise the same native path.
@@ -3496,7 +3499,16 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     // whose measured timing can plausibly fit this small transport domain.
     // Old .01/.08 failures remain reproducible at root4f; this is a new input
     // condition, not an algorithm repair or an assertion of scientific success.
-    const auto ownerIsi=extras.ownerRecognitionSource?
+    // The count-calibration fixture also needs an actual completed source.
+    // Declare its shorter burst before capturing references; retain the same
+    // heterogeneous physics, integer-Ns search domain and original tolerances.
+    // This is a downstream transport fixture, not a repaired .08-ISI Train.
+    if(countCalibrationSource)
+    {
+        ASSERT_EQ(normalization,0);ASSERT_EQ(inputs,2u);ASSERT_TRUE(configured);
+        ASSERT_DOUBLE_EQ(sync,.02);ASSERT_FALSE(productionCalibrationSeed);
+    }
+    const auto ownerIsi=(extras.ownerRecognitionSource || countCalibrationSource)?
         std::optional<std::vector<double>>{std::vector<double>{.01,.03}}:std::nullopt;
     EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,!configured,2,1,false,{},1,initialThreshold,
         "NSPNeuronGen",{},ownerIsi);
@@ -3790,7 +3802,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         ASSERT_FALSE(recognition); // Diagnostic probes do not authorize completed-Train recognition.
     }
     else ASSERT_TRUE(service.Certificate())<<service.Reason();
-    if(productionCalibrationSeed)ASSERT_TRUE(service.Certificate()->Exact());
+    if(productionCalibrationSeed || countCalibrationSource)ASSERT_TRUE(service.Certificate()->Exact());
     if(sync==.2 && inputs==2 && n0Repeats==1)EXPECT_TRUE(service.Certificate()->Exact());
     if(withDormantCapacitance)ASSERT_FALSE(rig.neuron->GetComponentL("Dendrite1_2",true));
     ASSERT_EQ(service.ReferencePackets().size(),inputs);ASSERT_EQ(service.FinalPackets().size(),inputs);
@@ -4203,14 +4215,16 @@ template<class Learner> void CalibrationBoundaryFixture(int normalization,unsign
     // ASan at 20 kHz exhausted 600 s while building the source model. Production
     // defaults, model-time budget, tolerances and search bounds are unchanged.
     // These tests exercise downstream readout/candidate persistence after an
-    // actual Exact source. N1 uses the already declared production seed domain,
-    // with the original .02 tolerance and measured per-input amplitude goal.
+    // actual Exact source. N1 uses the already declared production seed domain;
+    // N0 uses the declared .03-ISI burst with its original heterogeneous model
+    // and integer search domain. Both retain .02 sync and CapturedPerInput.
     // The old .08/narrow-domain heterogeneous source remains an explicit
     // NativeCalibrationPrecondition negative at both frequencies below.
     LearnedBoundary<Learner>(normalization,.02,frequency,2,true,
         potential?RecognitionCase::ThresholdPotential:RecognitionCase::ThresholdCandidates,false,1.,1,1800.,
         BoundaryExpectation::Completed,false,false,
-        {.productionCalibrationSeed=normalization==1,.persistenceReadout=persistence});
+        {.productionCalibrationSeed=normalization==1,.countCalibrationSource=normalization==0,
+         .persistenceReadout=persistence});
 }
 TEST(NativeThresholdCandidate,ClassicN0_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(0,2000);}
 TEST(NativeThresholdPotential,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000,true);}
@@ -4246,6 +4260,10 @@ TEST(NativeCalibratedModelSpec2,BranchN1_2000){LearnedBoundary<NNeuronTimeLearne
 // Preserve the old .08-ISI / narrow-domain / heterogeneous-C experiment as a
 // negative training/transport control. It must not claim to test calibration
 // when Train exhausted its sweep budget before producing a certificate.
+TEST(NativeCalibrationPrecondition,LegacyClassicN0_2000){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
+TEST(NativeCalibrationPrecondition,LegacyBranchN0_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
+TEST(NativeCalibrationPrecondition,LegacyClassicN0_20000){LearnedBoundary<NNeuronTimeLearner>(0,.02,20000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
+TEST(NativeCalibrationPrecondition,LegacyBranchN0_20000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,20000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
 TEST(NativeCalibrationPrecondition,LegacyClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
 TEST(NativeCalibrationPrecondition,LegacyBranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
 TEST(NativeCalibrationPrecondition,LegacyClassicN1_20000){LearnedBoundary<NNeuronTimeLearner>(1,.02,20000,2,true,{},false,1.,1,1800.,BoundaryExpectation::DiagnosticSweepBudget);}
