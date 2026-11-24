@@ -66,6 +66,8 @@ if (source.retained_order_variants?.length) {
 }
 const historicalSchemes = new Map([['Схема 0 на 1', ['0_1', 1]],
   ['Схема 0 на 1+4 для 150 примеров', ['0_1_4_full', 2]]]);
+const protocolLabels = { '0_1': 'Одиночные итерации для № 61',
+  '0_1_4_full': 'Переход № 51 → № 61 с настройкой синапсов' };
 const byContext = new Map(data.sequence_context.filter(r => r.repeat === 1)
   .map(r => [r.scheme + '/' + r.stage, r]));
 const perStimulus = source.protocols.flatMap(r => {
@@ -106,6 +108,12 @@ if (data.order_structure?.length) {
       r.disabled_matches ? 'да' : 'нет', r.source, r.sha256, ...r.logs]),
     [17, 14, 12, 21, 28, 25, 25, 22, 22, 62, 68, 60, 60]);
 }
+if (data.order_rechecks?.length) {
+  table('Перепроверка сборок', 'Результаты повторения опытов на одном исполняемом файле',
+    ['Задание', 'Совпали статус, итерации и структура', 'Журнал раздельных сборок', 'Журнал одной сборки'],
+    data.order_rechecks.map(r => [r.job, r.same ? 'да' : 'нет', r.previous_log, r.matched_log]),
+    [38, 36, 65, 65]);
+}
 const raw = table('Архивные ответы', 'Исходные ответы и ответы двух предыдущих серий',
   ['Модель', 'Стартовый снимок', 'Объект Iris', 'Ячейка', 'История', 'Проверка снимка', 'Новое обучение',
    'Различие со снимком', 'Различие с новым', 'Файл', 'SHA256', 'Журнал проверки', 'Журнал новой модели'],
@@ -117,10 +125,12 @@ raw.getRange(`H4:I${historical.length + 3}`).formulas = historical.map((_, index
 });
 table('Опыты инференса', 'Обратные контроли на неизменных графах',
   ['Модель', 'Фактор', 'Повтор', 'Изменилось', 'Возврат', 'История до', 'История после', 'TP до', 'FP до', 'FN до',
-   'TN до', 'TP после', 'FP после', 'FN после', 'TN после', 'Входов', 'Тип наблюдения', 'Журнал вмешательства'],
+   'TN до', 'TP после', 'FP после', 'FN после', 'TN после', 'Входов', 'Тип наблюдения', 'Возврат физического сигнала',
+   'Макс. изменение пика, мкВ', 'Объект макс. изменения', 'Макс. сдвиг времени ответа, с', 'Журнал вмешательства'],
   data.inference_comparisons.map(r => [r.label, r.factor, r.repeat, r.changed.length, r.reversal ? 'да' : 'нет',
     r.history_diff_before, r.history_diff_after, ...Object.values(r.metrics_before), ...Object.values(r.metrics_after),
-    r.tested_inputs, r.observation_mode, r.logs[1]]), [20, 16, 12, 15, 12, 17, 17]);
+    r.tested_inputs, r.observation_mode, r.physical_reversal ? 'да' : 'нет', r.largest_peak_change_uV,
+    r.largest_peak_change_id, r.largest_response_delay_change_s, r.logs[1]]), [20, 16, 12, 15, 12, 17, 17]);
 table('Изменённые ответы', 'Ответ и запас до порога для каждого переключения',
   ['Модель', 'Фактор', 'Повтор', 'Объект Iris', 'До', 'После', 'История', 'До, мкВ', 'После, мкВ', 'Первый такт до', 'Первый такт после', 'Журнал'],
   data.inference_comparisons.flatMap(r => r.changed.map(c => [r.label, r.factor, r.repeat, c.id, c.before,
@@ -146,10 +156,15 @@ table('Контекст обучения', 'Живой тест, отдельн�
   ['Схема', 'Повтор', 'Этап стенда', 'Итерации живой', 'Итерации снимок', 'Итерации пауза', 'Ошибки живой', 'Ошибки снимок',
    'Длины живой', 'Длины снимок', 'Длины пауза', 'Синапсы живой', 'Синапсы снимок', 'Синапсы пауза',
    'Изменения при переходе к снимку', 'Журнал снимка'],
-  data.sequence_context.map(r => [r.scheme, r.repeat, r.stage, ...r.iterations, r.live_Q, r.snapshot_Q,
-    ...r.d.map(x => x.join(', ')), ...r.s.map(x => x.join(', ')),
+  data.sequence_context.map(r => [protocolLabels[r.scheme], r.repeat, r.stage, ...r.iterations, r.live_Q, r.snapshot_Q,
+    ...r.d.map(x => x?.join(', ')), ...r.s.map(x => x?.join(', ')),
     r.changes?.map(([id, before, after]) => `${id} ${before}→${after}`).join(', '), r.snapshot_log]),
-  [20, 13, 14, 18, 18, 18, 18, 18]);
+  [39, 13, 14, 18, 18, 18, 18, 18]);
+table('Повторы последовательностей', 'Повторяемость структуры и ответов внутри условий',
+  ['Протокол', 'Условие', 'Полных повторов', 'Совпадение учебных рядов', 'Измеренных состояний', 'Совпадение векторов'],
+  (data.sequence_repeats ?? []).map(r => [protocolLabels[r.scheme], r.mode, r.repeats,
+    r.same_training ? 'да' : 'нет', r.evaluation_states, r.same_answers == null ? null : r.same_answers ? 'да' : 'нет']),
+  [39, 19, 19, 26, 23, 26]);
 table('Первый переход', 'Префикс непрерывного переобучения от № 22 к № 37',
   ['Повтор', 'С входа', 'На вход', 'Итерации архив', 'Итерации сейчас', 'Длины архив', 'Длины сейчас',
    'Синапсы архив', 'Синапсы сейчас', 'Причина завершения', 'Журнал'],
@@ -166,11 +181,11 @@ table('Порядок при переобучении', 'Отдельная пр
 if (data.warm_extensions?.length) {
   table('Удлинённый префикс', 'Влияние обновления порядка на более длинную последовательность',
     ['Процесс', 'Переход', 'С входа', 'На вход', 'Длины архив', 'Длины новые', 'Синапсы архив',
-     'Синапсы новые', 'Итерации архив', 'Итерации новые', 'Совпадение', 'Статус', 'Журнал'],
+     'Синапсы новые', 'Итерации архив', 'Итерации в прежнем повторе', 'Итерации новые', 'Совпадение', 'Статус', 'Журнал'],
     data.warm_extensions.map(r => [r.series, r.transition, r.from_id, r.to_id, r.historical_d.join(', '),
       r.d.join(', '), r.historical_s.join(', '), r.s.join(', '), r.historical_iterations,
-      r.iterations, r.matches ? 'да' : 'нет', r.status, r.log]),
-    [39, 13, 13, 13, 25, 25, 25, 25, 16, 16, 17, 20, 58]);
+      r.previous_iterations, r.iterations, r.matches ? 'да' : 'нет', r.status, r.log]),
+    [39, 13, 13, 13, 25, 25, 25, 25, 16, 18, 16, 17, 20, 58]);
 }
 table('Первые различия', 'Первый наблюдаемый такт расхождения по сигналу',
   ['Модель', 'Фактор', 'Объект Iris', 'Величина', 'Такт', 'Компонент', 'Значение до', 'Значение после',

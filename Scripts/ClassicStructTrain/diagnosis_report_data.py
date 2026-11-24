@@ -4,7 +4,7 @@ from pathlib import Path
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from diagnosis_run import ROOT, WORK, PREVIOUS, load, save, relative
+from diagnosis_run import ROOT, WORK, PREVIOUS, PILOT, load, save, relative
 from diagnosis_analysis import rows_of, first_iteration
 
 
@@ -43,6 +43,7 @@ def run():
     sections.append(section("1 Источники и исходные расхождения", [
         "NT обозначает NNeuronTrainer, NL — NNeuronLearner. Число после букв — номер обучающего объекта Iris. Число в скобках обозначает архивный вариант графа. Средний вход задаётся покомпонентным средним пяти задержек объектов № 51 и № 61.",
         "№ 51 и № 61 относятся к одному целевому классу Iris. TP — верные срабатывания, FP — ложные срабатывания, FN — пропуски целевого класса, TN — верные отказы. Число ошибок равно сумме FP и FN.",
+        "LTZone — пороговая зона модели. Запас до порога равен максимальному потенциалу LTZone в окне наблюдения за вычетом действующего порога. Импульс регистрируется по выходному сигналу.",
         f"Сверены {sources['recognition_cells_verified']} исходных ячеек и {len(sources['protocols'])} состояний из пяти схем. В 14 состояниях перехода № 51 → № 61 совпали четыре счёта классификации. Пятнадцатый файл содержит восемь ответов. У 26 файлов 31-я строка ответа содержит 0 и находится за пределом опубликованного диапазона из 30 входов. Два первых файла одиночных итераций совпадают побайтно.",
         "Для распознавания использованы исходные столбцы книги «Распознавание.xlsx». Для схем использованы книга «Обучение нескольким примерам.xlsx» и первичные output_data. Структурный реестр опирается на «Инофрмация о длинах дендритов и числе синапсов.xlsx». Точные диапазоны и контрольные суммы находятся в сопровождающей книге и реестре.",
         "Даты сохранения рабочих документов относятся к 2022 году. Дата создания шаблона XLSX в метаданных не датирует эксперимент. Версии основного репозитория за 18 марта и 15 апреля 2022 года указывают на доступные ревизии PulseLib без исходников требуемых NNeuronTrainer и NNeuronLearner.",
@@ -76,6 +77,13 @@ def run():
     ]
     if any(r.get("tested_inputs", 150) < 150 or r.get("observation_mode") != "separate_process" for r in pairs):
         paragraphs.append("Первые проходы физических вариантов используют исходную последовательность. Для независимых повторов допустим проверенный префикс, включающий все обнаруженные переключения и наибольшие отклонения потенциала у факторов без смены ответа. Префикс сверяется по времени и пикам. Два выходных сигнала могут читаться в одном проходе. Если в первом такте импульса нет, исключение этого такта не меняет бинарный ответ.")
+    for factor, label in (("wrapper", "Выбор выхода оболочки или LTZone"),
+                          ("first-tick", "Исключение первого такта"), ("precision", "Округление задержек")):
+        full = [r for r in pairs if r["label"] in PILOT and r["repeat"] == 1 and r["factor"] == factor
+                and r["tested_inputs"] == 150]
+        if full:
+            paragraphs.append(f"{label}. В {sum(not r['changed'] for r in full)} из {len(full)} полных пилотных "
+                              "сопоставлений весь вектор бинарных ответов сохранился.")
     controls = (("NL22", "order"), ("new-NT111", "reset"))
     for index, key in enumerate(controls, 2):
         group = certified.get(key, by_factor.get(key, []))
@@ -89,7 +97,8 @@ def run():
         effect = (f" В полном проходе число отличий от архивного столбца изменилось с "
                   f"{row['history_diff_before']} до {row['history_diff_after']}."
                   if row["history_diff_before"] is not None and row["tested_inputs"] == 150 else "")
-        paragraphs.append(f"{key[0]}, {name}. Эффект {status}. Изменились ответы на входы № {ids}."
+        model = "Новый NT111" if key[0] == "new-NT111" else key[0]
+        paragraphs.append(f"{model}, {name}. Эффект {status}. Изменились ответы на входы № {ids}."
                           + effect)
         if index == 2:
             paths = defaultdict(list)
@@ -103,7 +112,7 @@ def run():
                 maximum=1, major_unit=1))
         else:
             rows = [[f"№ {c['id']}", c["margin_before_uV"], c["margin_after_uV"]] for c in changes]
-            inference_charts.append(chart("R03", "Влияние сброса на запас до порога", "Вход Iris", "Запас, мкВ",
+            inference_charts.append(chart("R03", "Запас до порога нового NT111", "Вход Iris", "Запас, мкВ",
                 ["Объект", "Непрерывно", "Со сбросом"], rows,
                 "Изменение знака запаса наблюдается на том же графе. Историческое применение сброса требует отдельного источника.",
                 type="bar", format="0", major_unit=10, minimum=min(-10, min(r[2] for r in rows) - 1),
@@ -119,20 +128,41 @@ def run():
                               f"на такте {first['first_zone_before']}, который входит в оба интервала. "
                               "Два независимых повторных префикса подтвердили эффект. Результат относится к изменению длительности "
                               "предъявления и сохраняемого динамического состояния в непрерывной последовательности.")
+    precision_test = certified.get(("NL111", "precision"))
+    if precision_test:
+        first = next((c for c in precision_test[0]["changed"] if c["id"] == 126), None)
+        if first:
+            paragraphs.append(f"Для NL111 округление задержек в секундах до четырёх знаков после запятой изменило "
+                              f"ответ на вход № 126 с {first['before']} на {first['after']}. "
+                              f"Запас до порога изменился с {first['margin_before_uV']:+.1f} до "
+                              f"{first['margin_after_uV']:+.1f} мкВ. Эффект воспроизведён с обратным контролем.")
     paragraphs.append(f"Потактовые журналы сопоставлены для {len(data['tick_comparisons'])} комбинаций. Измеряемая цепочка включает входную подачу, внутренний генератор, входы и выходы синапсов, сомы, LTZone и регистрируемое решение. В книге указана первая обнаруженная разность каждой величины в наблюдаемом окне.")
     for trace in data["tick_comparisons"]:
         trace_keys = {("NL22", "order"): (9, "R10"), ("new-NT111", "reset"): (84, "R11"),
-                      ("NT45", "window"): (13, "R16")}
+                      ("NT45", "window"): (13, "R16"), ("NL111", "precision"): (126, "R19")}
         trace_key = trace_keys.get((trace["label"], trace["factor"]))
         if trace_key is None:
             continue
         witness, identifier = trace_key
+        name = "нового NT111" if trace["label"] == "new-NT111" else trace["label"]
         events = {r["quantity"]: r["tick"] for r in trace["first_events"] if r["input_id"] == witness}
         if "synapses" in events and "registered" in events:
-            paragraphs.append(f"Для {trace['label']} префикс из {trace['validated_prefix']} входов сверён с полным проходом. "
+            paragraphs.append(f"Для {name} префикс из {trace['validated_prefix']} входов сверён с полным проходом. "
                               f"У входа № {witness} различие синаптического сигнала видно с такта {events['synapses']}, "
                               f"разность регистрируемого ответа — с такта {events['registered']}. "
                               "Ранние различия включают очень малые остаточные величины. Связь с бинарным ответом проверена обратным переключением фактора.")
+            if identifier == "R19" and "generators" in events:
+                event = next(r for r in trace["first_events"]
+                             if r["input_id"] == witness and r["quantity"] == "generators")
+                channel = event["component_index"]
+                pulses = [next((r["tick"] for r in rows_of(ROOT / log / "waveforms.jsonl")
+                                if "generators" in r and r.get("input_id") == witness and r["tick"] >= event["tick"]
+                                and r["generators"][channel - 1] > 0.001), None)
+                          for log in trace["logs"]]
+                if all(t is not None for t in pulses):
+                    paragraphs.append(f"После округления начало импульса канала № {channel} сместилось "
+                                      f"с такта {pulses[0]} на такт {pulses[1]}. "
+                                      f"Различие выходов LTZone наблюдалось с такта {events['registered']}.")
             center = events["registered"]
             voltages = []
             for log in trace["logs"]:
@@ -142,8 +172,9 @@ def run():
                                  and center-10 <= r["tick"] <= center})
             ticks = sorted(set.intersection(*(set(v) for v in voltages)))
             if ticks:
-                rows = [[str(tick), voltages[0][tick], voltages[1][tick], 11.5] for tick in ticks]
-                inference_charts.append(chart(identifier, f"LTZone перед сменой ответа на вход № {witness}",
+                threshold_mV = 1000 * trace["thresholds_V"][str(witness)]
+                rows = [[str(tick), voltages[0][tick], voltages[1][tick], threshold_mV] for tick in ticks]
+                inference_charts.append(chart(identifier, f"Потенциал LTZone {name} на входе № {witness}",
                     "Такт наблюдения от смены входа", "Потенциал LTZone, мВ",
                     ["Такт", "Исходное условие", "Изменённое условие", "Порог"], rows,
                     f"Показаны десять предшествующих тактов и первое различие зарегистрированного ответа на такте {center}. "
@@ -223,7 +254,8 @@ def run():
                           f"{len(fixed['reversal']['changed_ids'])} различий с исходным вектором. "
                           "Числа относятся к применённым параметрам этого графа.")
     for factor in ("Фактическая диссоциация", "Фактическое сопротивление", "Допуск амплитуды",
-                   "Продолжение после удаления", "Пересечение цели", "Явное обновление порядка при обучении"):
+                   "Продолжение после удаления", "Пересечение цели",
+                   "Изоляция обновления порядка на одном бинарнике"):
         comparisons = [r for r in data.get("training_comparisons", []) if r["factor"] == factor]
         local = next((r for r in comparisons if r["job"] == "trainer-22-r1"), None)
         if local and local["first_difference"]:
@@ -231,11 +263,22 @@ def run():
             paragraphs.append(f"{factor}. Для NT22 в первом повторе первая расходящаяся запись имеет номер {first['record']}. "
                               f"Число итераций в паре {local['iterations'][0]} и {local['iterations'][1]}. "
                               "Изменившиеся поля и измеренные такты приведены в книге.")
+            if factor == "Изоляция обновления порядка на одном бинарнике" and local["first_training_ticks"]:
+                signals = local["first_training_ticks"]
+                tick = min(signals.values())
+                stage = (" На этом такте различаются потенциалы сом и LTZone."
+                         if signals.get("soma") == signals.get("zone_V") == tick else "")
+                paragraphs.append(f"Первое различие потактовых записей в этой паре видно на такте {tick}."
+                                  + stage + " В книге приведены первые такты по каждой расходящейся величине.")
     order_expansion = WORK / "matched-training-order-expansion.json"
     matched = order_expansion.exists()
     if not matched:
         order_expansion = WORK / "training-order-expansion.json"
     if order_expansion.exists():
+        rechecks = data.get("order_rechecks", [])
+        if rechecks:
+            paragraphs.append(f"По статусу, числу итераций, длинам и числу синапсов общий исполняемый файл "
+                              f"воспроизвёл {sum(r['same'] for r in rechecks)} из {len(rechecks)} исходов раздельных сборок.")
         accepted = [r["kind"] for r in load(order_expansion) if r["expanded"]]
         named = {"learner": "NL", "trainer": "NT"}
         name = ("Обновление порядка на десятке на одном бинарнике" if matched else
@@ -288,7 +331,9 @@ def run():
     contexts = data["sequence_context"]
     context_charts = []
     paragraphs = [
-        f"По двум протоколам получено {len(contexts)} сопоставленных учебных этапов в живом режиме, режиме снимков и режиме пауз. Сопоставлены физическая структура, число итераций и время модели. Инференс снимка выполняется в отдельном процессе на замороженном графе.",
+        f"По двум протоколам сопоставлены {len(contexts)} учебных этапов живого режима и режима снимков. "
+        f"Для {sum(r['events'][2] is not None for r in contexts)} этапов доступен также контроль с паузой. "
+        "Сопоставлены физическая структура, число итераций и время модели. Инференс снимка выполняется в отдельном процессе на замороженном графе.",
         "Обе последовательности начинаются с полного обучения входу № 51. В первой затем выполняется по одной итерации обучения входу № 61. Во второй каждый цикл включает одну совместную итерацию для дендритов и синапсов и четыре итерации для синапсов. В первой используются 30 тестовых входов, во второй все 150.",
     ]
     if data.get("warm_prefix_22_37"):
@@ -349,23 +394,88 @@ def run():
                                   f"из {len(records)} переходов."
                                   + (f" Первое различие на переходе № {first['from_id']} → № {first['to_id']}."
                                      if first else ""))
+                if length == "90":
+                    paragraphs[-1] += (f" Суммарно {sum(r['iterations'] for r in records)} итераций в повторе и "
+                                       f"{sum(r['historical_iterations'] for r in records)} в архиве.")
+                    paragraphs.append(f"Отдельно совпали длины дендритов на {sum(r['d'] == r['historical_d'] for r in records)} переходах, "
+                                      f"числа синапсов на {sum(r['s'] == r['historical_s'] for r in records)}, "
+                                      f"число итераций на {sum(r['iterations'] == r['historical_iterations'] for r in records)}.")
+                if length == "90" and key.startswith("matched-") and first:
+                    changes = []
+                    for term, old_key, new_key in (("сегменты", "historical_d", "d"),
+                                                  ("синапсы", "historical_s", "s")):
+                        changes += [f"{term} канала № {i}, {old} → {new}"
+                                    for i, (old, new) in enumerate(zip(first[old_key], first[new_key], strict=True), 1)
+                                    if old != new]
+                    if changes:
+                        paragraphs.append(f"На первом различающемся переходе изменились {', '.join(changes)}. "
+                                          f"Число итераций в архиве {first['historical_iterations']}, в повторе {first['iterations']}. "
+                                          "В архиве сохранён результат перехода. Потактовое решение, вызвавшее оставшееся расхождение, не установлено.")
+            complete = next((sorted(extended[series], key=lambda r: r["transition"]) for series in (
+                "matched-warm-order-prefix-90/warm-disabled-r1", "warm-order-prefix-90/warm-disabled-r1")
+                if len(extended.get(series, [])) == 90), None)
+            earlier = {r["transition"]: r for r in extended.get("warm-order-prefix-90/warm-disabled-r1", [])}
+            shared = extended.get("matched-warm-order-prefix-90/warm-disabled-r1", [])
+            if len(earlier) == len(shared) == 90:
+                fields = ("d", "s", "iterations", "status")
+                same = sum(all(r[field] == earlier[r["transition"]][field] for field in fields) for r in shared)
+                paragraphs.append(f"Вариант без перестановки дал одинаковые структуры, числа итераций и статусы "
+                                  f"в раздельной и общей сборках на {same} из 90 переходов.")
+            if complete:
+                previous_delta = 0
+                current_delta = 0
+                rows = []
+                for row in complete:
+                    previous_delta += row["previous_iterations"] - row["historical_iterations"]
+                    current_delta += row["iterations"] - row["historical_iterations"]
+                    if row["transition"] == 1 or row["transition"] % 10 == 0:
+                        rows.append([str(row["transition"]), 0, previous_delta, current_delta])
+                values = [value for row in rows for value in row[1:]]
+                context_charts.append(chart("R17", "Накопленное отклонение в последовательности переобучения",
+                    "Номер направленного перехода", "Отклонение от архива, итераций",
+                    ["Переход", "Архив (0)", "Предыдущий повтор", "Без перестановки"], rows,
+                    "В каждой точке показана разность накопленных итераций с начала последовательности. "
+                    "Итоговая сумма не отражает изменения отдельных структур. Сравнение всех 90 строк приведено в книге.",
+                    major_unit=5, minimum=((min(values) - 1) // 5) * 5, maximum=((max(values) + 5) // 5) * 5))
     for scheme, identifier in (("0_1", "R06"), ("0_1_4_full", "R07")):
         protocol = "одиночные итерации для № 61" if scheme == "0_1" else "переход от № 51 к № 61 с настройкой синапсов"
+        repeat_check = next((r for r in data.get("sequence_repeats", []) if r["scheme"] == scheme
+                             and r["mode"] == "live" and r["repeats"] == 3), None)
+        if repeat_check and repeat_check["same_training"] and repeat_check["same_answers"]:
+            paragraphs.append(f"Протокол «{protocol}», все три живых повтора. На учебных этапах совпали "
+                              "длины, числа синапсов и число итераций. "
+                              f"Совпали пообъектные векторы во всех {repeat_check['evaluation_states']} контрольных состояниях.")
         relevant = [r for r in contexts if r["scheme"] == scheme and r["repeat"] == 1]
         differing = [r for r in relevant if (r["d"][0], r["s"][0]) != (r["d"][1], r["s"][1])]
-        pause_diff = [r for r in relevant if (r["d"][1], r["s"][1]) != (r["d"][2], r["s"][2])]
+        pause_diff = [r for r in relevant if r["d"][2] is not None and
+                      (r["d"][1], r["s"][1]) != (r["d"][2], r["s"][2])]
         if relevant:
             paragraphs.append(f"Протокол «{protocol}», первый повтор. При сравнении живого теста с обучением без теста различий графа на учебных этапах {len(differing)} из {len(relevant)}."
                               + (f" Первое наблюдаемое различие на этапе {differing[0]['stage']}." if differing else ""))
         if pause_diff:
             first = pause_diff[0]["stage"]
             where = f"в контрольном состоянии {first + 1}" if scheme == "0_1" else f"на учебном этапе {first} контроллера"
+            paused = [r for r in relevant if r["d"][2] is not None]
             paragraphs.append(f"При запрете импульсов во время модельной паузы первое различие в протоколе «{protocol}» возникло {where}. "
                               f"Различаются {len(pause_diff)} графов. Вмешательство сочетает продвижение среды и подавление генерации. Причину внутри этого сочетания следует связывать с измеренными фазами и импульсами.")
+            paragraphs.append(f"Относительно живого теста после модельной паузы совпали длины и числа синапсов "
+                              f"на {sum((r['d'][0], r['s'][0]) == (r['d'][2], r['s'][2]) for r in paused)} "
+                              f"из {len(paused)} сопоставленных этапов первого повтора.")
         source_sheet = "Схема 0 на 1" if scheme == "0_1" else "Схема 0 на 1+4 для 150 примеров"
         historical_q = {r["state"]: r["metrics"]["FP"] + r["metrics"]["FN"] for r in sources["protocols"]
                         if r["sheet"] == source_sheet}
         stride = 1 if scheme == "0_1" else 2
+        tests = [r for r in relevant if r["changes"] is not None]
+        switches = [r for r in tests if r["changes"]]
+        if tests:
+            paragraphs.append(f"По бинарным ответам живой тест и снимок разошлись в {len(switches)} "
+                              f"из {len(tests)} состояний. Общее число переключений по этим состояниям — "
+                              f"{sum(len(r['changes']) for r in switches)}.")
+            equal_count = next((r for r in switches if r["live_Q"] == r["snapshot_Q"]), None)
+            if equal_count:
+                ids = ", ".join(str(row[0]) for row in equal_count["changes"])
+                paragraphs.append(f"В состоянии {equal_count['stage']//stride+1} оба измерения дали "
+                                  f"{equal_count['live_Q']} ошибок. Ответы различались для входов № {ids}.")
         rows = [[str(r["stage"]//stride+1), historical_q.get(r["stage"]//stride+1), r["live_Q"], r["snapshot_Q"]]
                 for r in relevant if r["live_Q"] is not None and r["snapshot_Q"] is not None]
         if rows:
@@ -374,11 +484,18 @@ def run():
             context_charts.append(chart(identifier, title, "Номер контрольного состояния",
                 f"Ошибки на {tested}, шт.", ["Состояние", "История", "Живой тест", "Отдельный снимок"], rows,
                 "Историческая линия рассчитана из первичных пообъектных ответов. Сравнение включает возможное изменение последующего обучения и контекст измерения. Структурные траектории и результаты пауз приведены отдельно."))
-        if pause_diff and scheme == "0_1":
-            rows = [[str(r["stage"]+1), *[sum(s) for s in r["s"]]] for r in relevant]
-            context_charts.append(chart("R08", "Структура при одиночных итерациях № 61", "Номер контрольного состояния",
-                "Синапсы, шт.", ["Состояние", "Живой тест", "Без теста", "Пауза без импульсов"], rows,
-                "Совпадающие линии перекрываются. Пауза продвигает модельное время при отключённых генераторах, после чего их активность восстанавливается."))
+        if pause_diff:
+            historical_synapses = {r["state"]: sum(r["graph_ds"][5:]) for r in sources["protocols"]
+                                   if r["sheet"] == source_sheet}
+            rows = [[str(r["stage"]//stride+1), historical_synapses.get(r["stage"]//stride+1),
+                     *[sum(s) if s is not None else None for s in r["s"]]]
+                    for r in relevant if r["stage"] % stride == 0]
+            identifier = "R08" if scheme == "0_1" else "R18"
+            title = "Структура при одиночных итерациях № 61" if scheme == "0_1" else "Структура при переходе № 51 → № 61"
+            context_charts.append(chart(identifier, title, "Номер контрольного состояния",
+                "Синапсы, шт.", ["Состояние", "История", "Живой тест", "Без теста", "Пауза без импульсов"], rows,
+                "На диаграмме показана сумма по пяти каналам. Отдельные каналы доступны в книге. "
+                "Пауза продвигает модельное время при отключённых генераторах, после чего их активность восстанавливается."))
     sections.append(section("5 Влияние оценки на последующее обучение", paragraphs, context_charts))
 
     coverage_line = ""
@@ -400,6 +517,15 @@ def run():
         f"По журналам учтено {len(data['processes'])} процессов. Завершено {counts['completed']}. Остальные случаи и достигнутые внутри процесса ограничения доступны в книге. Использована сборка Release и запуск из Bin/Platform/Win. Степень подтверждения отдельных факторов следует оценивать по конкретным экспериментам и числу доступных повторов.",
         "Источники предшествующей проверки — ScientificComparisons и TrainingReproducibility. Исходные материалы находятся в Docs/ClassicStructTrainExperiments/Эксперименты. Реестр, нативные журналы и контрольные суммы находятся в Reports/StructTrainClassic/DiscrepancyDiagnosis-20261124.",
     ] + [line for line in (coverage_line, snapshot_line) if line]))
+    sections.append(section("7 Использованные источники", [
+        "1. «Инофрмация о длинах дендритов и числе синапсов.xlsx». Лист «Дендриты и синапсы», основной источник структур NT и NL. Docs/ClassicStructTrainExperiments/Эксперименты.",
+        "2. «Распознавание.xlsx». Первичные столбцы ответов для 150 входов. Docs/ClassicStructTrainExperiments/Эксперименты/Тестирование/Распознавание.",
+        "3. «Обучение нескольким примерам.xlsx» и соответствующие файлы output_data. Первичные ответы и формулы пяти последовательностей. Docs/ClassicStructTrainExperiments/Эксперименты/Исследование.",
+        "4. «Код для тестирования переобучения.txt» и «код CalculateProcess.txt». Сохранённые фрагменты контроллера и архивная последовательность входов в подкаталогах «Тестирование» и «Исследование». Точные пути исходных данных указаны в книге.",
+        "5. ScientificComparisons.docx и ScientificComparisons.xlsx. Результаты проверки сохранённых и реконструированных графов. Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/ScientificComparisons.",
+        "6. TrainingReproducibility.docx и TrainingReproducibility.xlsx. Предшествующее повторное обучение и инференс. Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/TrainingReproducibility.",
+        "7. История Git библиотек Nmsdk-PulseLib и Rdk. Полные идентификаторы сборок, исходные файлы диагностики и контрольные суммы приведены в журналах выполнения.",
+    ]))
     overview = [
         ["Архивные ответы", sources["recognition_cells_verified"], "Сверено с ячейками первичной книги"],
         ["Состояния в схемах", len(sources["protocols"]), "Сверены структура и пообъектные ответы"],

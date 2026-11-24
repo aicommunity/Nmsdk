@@ -233,6 +233,11 @@ def audit():
                             "start_before_s": a["decode_windows"][index]["start_model_s"],
                             "start_after_s": b["decode_windows"][index]["start_model_s"],
                         })
+                peaks = [abs(x - y) for x, y in zip(a["zone_potential_peaks"],
+                         b["zone_potential_peaks"], strict=True)]
+                largest = max(range(len(peaks)), key=peaks.__getitem__)
+                timing = [abs(x - y) for x, y in zip(a["first_spikes"], b["first_spikes"], strict=True)
+                          if x is not None and y is not None]
                 compare.append({
                     "label": label, "factor": factor, "repeat": repeat, "changed": changed,
                     "same_original": before == item["expected"][:len(before)], "reversal": before == c["answers"],
@@ -245,7 +250,12 @@ def audit():
                     "metrics_after": observed_confusion(b, len(before)),
                     "history_diff_before": sum(x != y for x, y in zip(before, history, strict=True)) if history else None,
                     "history_diff_after": sum(x != y for x, y in zip(b["answers"], history, strict=True)) if history else None,
-                    "same_peaks": a["zone_potential_peaks"] == b["zone_potential_peaks"],
+                    "largest_peak_change_uV": (peaks[largest] * 1e6
+                                               if effect_type != "no_event_on_excluded_tick" else None),
+                    "largest_peak_change_id": (a["input_ids"][largest]
+                                               if peaks[largest] and effect_type != "no_event_on_excluded_tick" else None),
+                    "largest_response_delay_change_s": (max(timing, default=None)
+                                                        if effect_type == "separate_process" else None),
                     "logs": [relative(path / "results.jsonl") for path in (ap, bp, cp)],
                 })
     for group, run_id in inference:
@@ -270,6 +280,7 @@ def audit():
             raise AssertionError(("Prefix failed full sequence validation", label, factor))
         trace_comparisons.append({"label": label, "factor": factor, "logs": [relative(ap), relative(bp)],
                                   "validated_prefix": len(a["input_ids"]),
+                                  "thresholds_V": {str(r["input_id"]): r["threshold_V"] for r in a["decode_windows"]},
                                   "first_events": trace_differences(ap / "waveforms.jsonl", bp / "waveforms.jsonl")})
     observed = []
     for (group, run_id), (row, folder) in training.items():
@@ -370,8 +381,18 @@ def audit():
     source = load(WORK / "source-audit.json").get("structure", {})
     for row in source.get("rows", []):
         structural[row["algorithm"], row["input_id"]].append(row)
-    order_structure = []
+    order_structure, order_rechecks = [], []
     for (phase, identifier), (native, native_path) in training.items():
+        if phase == "matched-training-order":
+            original = training.get(("training-order", identifier.removeprefix("matched-")))
+            if original:
+                previous, previous_path = original
+                order_rechecks.append({
+                    "job": identifier, "same": all(native[key] == previous[key] for key in (
+                        "status", "iterations", "dendrites", "synapses")),
+                    "previous_log": relative(previous_path / "results.jsonl"),
+                    "matched_log": relative(native_path / "results.jsonl"),
+                })
         if phase not in {"training-order", "training-ten-order", "matched-training-order",
                          "matched-training-ten-order"} or not identifier.endswith("-r1"):
             continue
@@ -400,12 +421,13 @@ def audit():
     for scheme in ("0_1", "0_1_4_full"):
         for repeat in range(1, 4):
             keys = [f"{scheme}-{name}-r{repeat}" for name in ("live", "snapshot", "pause")]
-            if any(key not in sequences for key in keys):
+            if any(key not in sequences for key in keys[:2]):
                 continue
-            by_type = [{row["stage_index"] or 0: row for row in sequences[key] if row["record_type"] == "training"} for key in keys]
-            aligned = sorted(set.intersection(*(set(row) for row in by_type)))
+            by_type = [{row["stage_index"] or 0: row for row in sequences.get(key, [])
+                        if row["record_type"] == "training"} for key in keys]
+            aligned = sorted(by_type[0].keys() & by_type[1].keys())
             for stage in aligned:
-                a, b, c = (row[stage] for row in by_type)
+                aligned_rows = [row.get(stage, {}) for row in by_type]
                 evaluated = snapshot(f"{keys[1]}-s{stage}-baseline-r1")
                 live = next((row for row in sequences[keys[0]] if row["record_type"] == "evaluation_in_protocol"
                              and row["stage_index"] == stage), None)
@@ -418,10 +440,10 @@ def audit():
                                if a != b]
                 context.append({
                     "scheme": scheme, "repeat": repeat, "stage": stage,
-                    "iterations": [row["iterations"] for row in (a, b, c)],
-                    "time_s": [row["model_time"] for row in (a, b, c)],
-                    "d": [row["dendrites"] for row in (a, b, c)], "s": [row["synapses"] for row in (a, b, c)],
-                    "events": [row["status"] for row in (a, b, c)],
+                    "iterations": [row.get("iterations") for row in aligned_rows],
+                    "time_s": [row.get("model_time") for row in aligned_rows],
+                    "d": [row.get("dendrites") for row in aligned_rows], "s": [row.get("synapses") for row in aligned_rows],
+                    "events": [row.get("status") for row in aligned_rows],
                     "live_Q": live["FP"] + live["FN"] if live else None,
                     "snapshot_Q": evaluated[0]["FP"] + evaluated[0]["FN"] if evaluated else None,
                     "live_answers": live["answers"] if live else None,
@@ -478,15 +500,33 @@ def audit():
                 "d": row["dendrites"], "s": row["synapses"], "iterations": row["iterations"],
                 "historical_d": old["dendrites"], "historical_s": old["synapses"],
                 "historical_iterations": old["iterations"], "status": row["status"],
+                "previous_iterations": prior["new"]["iterations"],
                 "matches": (row["dendrites"], row["synapses"], row["iterations"]) ==
                            (old["dendrites"], old["synapses"], old["iterations"]),
                 "log": relative(WORK / "runs" / key / "results.jsonl"),
             })
+    sequence_repeats = []
+    for scheme in ("0_1", "0_1_4_full"):
+        for mode in ("live", "snapshot", "pause"):
+            trials = [sequences.get(f"{scheme}-{mode}-r{repeat}") for repeat in range(1, 4)]
+            trials = [trial for trial in trials if trial]
+            if not trials:
+                continue
+            structures = [[(r["stage_index"], r["iterations"], r["dendrites"], r["synapses"], r["status"])
+                           for r in trial if r["record_type"] == "training"] for trial in trials]
+            vectors = [[r["answers"] for r in trial if r["record_type"] == "evaluation_in_protocol"]
+                       for trial in trials]
+            sequence_repeats.append({"scheme": scheme, "mode": mode, "repeats": len(trials),
+                 "same_training": all(trial == structures[0] for trial in structures[1:]),
+                 "evaluation_states": len(vectors[0]),
+                 "same_answers": all(trial == vectors[0] for trial in vectors[1:]) if vectors[0] else None})
     save(WORK / "diagnosis-analysis.json", {
         "processes": processes, "inference_comparisons": compare, "training": observed,
         "observer_pairs": observer, "tick_comparisons": trace_comparisons, "sequence_context": context,
+        "sequence_repeats": sequence_repeats,
         "training_comparisons": training_comparisons, "profile_inference": profile_controls,
         "order_structure": order_structure,
+        "order_rechecks": order_rechecks,
         "warm_prefix_22_37": warm,
         "warm_order": warm_order,
         "warm_extensions": warm_extensions,

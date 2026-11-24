@@ -555,7 +555,7 @@ def trace_inference(item, factor, full_left, full_right, changed):
                 raise ValueError(f"Prefix changes {field}: {folder}")
 
 
-def expansion(workers, requested=None):
+def expansion(workers, requested=None, trace_ready=False):
     items = cases()
     measured = set()
     for item in items:
@@ -584,9 +584,10 @@ def expansion(workers, requested=None):
          "selected_for_this_batch": sorted(permissible), "pilot": sorted(PILOT),
          "out_of_pilot_models": [item["label"] for item in items if item["label"] not in PILOT]})
 
-    tasks = [(item, condition, repeat) for item in items if item["label"] not in PILOT
-             for repeat in (1,) for condition in ("baseline", *sorted(permissible), "reversal")]
-    parallel(lambda *args: infer("expansion", *args), tasks, workers)
+    if not trace_ready:
+        tasks = [(item, condition, 1) for item in items if item["label"] not in PILOT
+                 for condition in ("baseline", *sorted(permissible), "reversal")]
+        parallel(lambda *args: infer("expansion", *args), tasks, workers)
 
     tasks = []
     for item in items:
@@ -728,6 +729,7 @@ def main():
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--variant", default="main")
     parser.add_argument("--factor", action="append", choices=tuple(FACTORS))
+    parser.add_argument("--trace-ready", action="store_true")
     parser.add_argument("--warm-transitions", type=int, default=1)
     parser.add_argument("--warm-mode", action="append", choices=("native", "disabled", "reversal"))
     parser.add_argument("--matched-order", action="store_true")
@@ -763,7 +765,7 @@ def main():
     elif args.action == "traces":
         trace_controls(args.workers, args.factor)
     elif args.action == "expansion":
-        expansion(args.workers, args.factor)
+        expansion(args.workers, args.factor, args.trace_ready)
     elif args.action == "snapshots":
         snapshots(args.workers)
     else:
