@@ -10,9 +10,10 @@ from docx import Document
 from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0,str(Path(__file__).resolve().parent))
+from report_paths import report_path
 from prepare import workbook
 ROOT=Path(__file__).resolve().parents[2]
-WORK=ROOT/'Reports/StructTrainClassic/LegacyInferencePlan-20261123/work'
+WORK=ROOT/'Reports/StructTrainClassic/_work/LegacyInferencePlan-20261123/work'
 
 
 def load(path): return json.loads(path.read_text(encoding='utf-8-sig'))
@@ -42,7 +43,7 @@ FAMILIES=[
 
 
 def main():
-    x=load(WORK/'inventory.json'); evidence=load(ROOT/'Reports/StructTrainClassic/archive-evidence.json')
+    x=load(WORK/'inventory.json'); evidence=load(ROOT/'Reports/StructTrainClassic/_work/archive-evidence.json')
     docs={d['id']:d for d in x['documents']}
     preferred={}
     for d in sorted(x['documents'],key=lambda d:(not d['path'].startswith('Эксперименты/'), d['role']!='local',d['path'])):
@@ -125,7 +126,7 @@ def main():
         canvas=Image.new('RGB',(1480,1380),'white'); draw=ImageDraw.Draw(canvas)
         for k,r in enumerate(rendered[offset:offset+6]):
             col,row=k%2,k//2
-            with Image.open(r['preview']) as im:
+            with Image.open(report_path(r['preview'])) as im:
                 im.thumbnail((720,420));canvas.paste(im,(col*740,row*460+30))
             draw.text((col*740+10,row*460+5),r['id']+' '+r['sheet'][:52],font=font,fill='black')
         canvas.save(WORK/f"charts-contact-{offset//6+1:02}.png")

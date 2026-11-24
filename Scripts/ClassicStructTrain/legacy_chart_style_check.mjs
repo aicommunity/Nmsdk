@@ -17,5 +17,5 @@ const l=sh.charts.add('line',[sh.getRange('A7:A11'),sh.getRange('B7:B11')]);l.ti
 l.series.items[0].marker={symbol:'circle',size:9,fill:'none',line:{fill:'#176A8A',width:1.5,style:'solid'}};
 l.series.items[0].line={style:'dashed',fill:'#176A8A',width:2};
 l.yAxis={min:0,max:.09,numberFormatCode:'0.000',minorGridlines:null,majorGridlines:{fill:'#D7DEE5',width:.6,style:'solid'}};
-const file=await SpreadsheetFile.exportXlsx(wb);await file.save(path.join(repo,'Reports/StructTrainClassic/LegacyChecks-20261123/chart-style-check.xlsx'));console.log('Style check exported');
+const file=await SpreadsheetFile.exportXlsx(wb);await file.save(path.join(repo,'Reports/StructTrainClassic/_work/LegacyChecks-20261123/chart-style-check.xlsx'));console.log('Style check exported');
 }catch(e){console.error(e.message);process.exit(1);}

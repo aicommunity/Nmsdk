@@ -2,9 +2,10 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {Workbook,SpreadsheetFile} from '@oai/artifact-tool';
+import {reportPath,savePublishedWorkbook} from './report_paths.mjs';
 process.on('uncaughtException',e=>{console.error(e.message);console.error(e.stack.split('\n').filter(s=>s.includes('legacy_scientific_workbook')).join('\n'));process.exit(1);});
-const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..'),work=path.join(root,'Reports/StructTrainClassic/LegacyChecks-20261123');
-const out=path.join(root,'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/ScientificComparisons');
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..'),work=path.join(root,'Reports/StructTrainClassic/_work/LegacyChecks-20261123');
+const out=path.join(root,'Reports/StructTrainClassic');
 const read=async p=>JSON.parse(await fs.readFile(p,'utf8'));
 const d=await read(path.join(work,'scientific-comparison-data.json')),a=await read(path.join(work,'assessment.json'));
 const plan=await read(path.join(work,'execution-plan-data.json')),mapping=await read(path.join(work,'recovered-mapping.json'));
@@ -110,7 +111,7 @@ for(const f of d.figures){
    s.marker={symbol:i%2===0?'circle':'diamond',size:i%2===0?10:8,fill:i%2===0?'none':color,line:{fill:color,width:1.3,style:'solid'}};
   }else if(dense){s.line={fill:['#B33B39','#216483','#C07439','#51816C','#8B6599','#766046'][i%6],width:1.8,style:'solid'};s.marker={symbol:'none'};}
  });
- if(f.source_image){const bytes=await fs.readFile(f.source_image),w=bytes.readUInt32BE(16),h=bytes.readUInt32BE(20);
+ if(f.source_image){const bytes=await fs.readFile(reportPath(f.source_image)),w=bytes.readUInt32BE(16),h=bytes.readUInt32BE(20);
   sh.images.add({dataUrl:'data:image/png;base64,'+bytes.toString('base64'),anchor:{from:{row:dense?35:plotRow,col:16},extent:{widthPx:900,heightPx:900*h/w}}});}
  const foot=dense?31:plotRow+27,footStart=dense?'J':'A',footEnd=dense?'X':'O';
  sh.getRange(`${footStart}${foot}:${footEnd}${foot+2}`).merge();sh.getRange(`${footStart}${foot}`).values=[[f.description]];sh.getRange(`${footStart}${foot}:${footEnd}${foot+2}`).format={wrapText:true,font:{name:'Arial',size:10},verticalAlignment:'top'};
@@ -161,5 +162,7 @@ await fs.writeFile(path.join(work,'scientific-formula-check.json'),JSON.stringif
 const search=await wb.inspect({kind:'match',searchTerm:'#REF!|#DIV/0!|#VALUE!|#NAME\\?|#NUM!',options:{useRegex:true,maxResults:10},maxChars:1200});console.log(search.ndjson);
 await fs.writeFile(path.join(work,'scientific-figures.json'),JSON.stringify(figures,null,2));
 await fs.writeFile(path.join(work,'scientific-previews.json'),JSON.stringify(previews,null,2));
-const file=await SpreadsheetFile.exportXlsx(wb);await file.save(path.join(out,'ScientificComparisons.xlsx'));console.log('Scientific workbook exported');
+const file=await SpreadsheetFile.exportXlsx(wb);
+await savePublishedWorkbook(file,path.join(out,'ScientificComparisons.xlsx'),work);
+console.log('Scientific workbook exported');
 for(const p of previews){if(figures.find(f=>f.sheet===p.sheet)?.kind==='line_dense')continue;const blob=await wb.render({sheetName:p.sheet,range:p.range,scale:1.1,format:'png'});await fs.writeFile(path.join(work,'scientific-xlsx-qa',p.sheet.replace(/[^a-zA-Z0-9А-Яа-яЁё-]/g,'_')+'.png'),new Uint8Array(await blob.arrayBuffer()));}

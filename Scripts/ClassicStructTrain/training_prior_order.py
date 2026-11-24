@@ -5,7 +5,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parent))
 from training_repro import ROOT,WORK,CONFIG,BASE,load,save,sha
 from run import supervise
 
-science=load(ROOT/'Reports/StructTrainClassic/LegacyChecks-20261123/scientific-comparison-data.json')
+science=load(ROOT/'Reports/StructTrainClassic/_work/LegacyChecks-20261123/scientific-comparison-data.json')
 identifier=next(r['job'] for r in science['recognition'] if r['label']=='NL22')
 job=next(r for r in load(ROOT/'Bin/Configs/StructTrainClassic/LegacyInference/recovered-jobs.json') if r['id']==identifier)
 model=(ROOT/job['config']).parent/'Model_00.xml';before=sha(model);results=[]

@@ -4,6 +4,7 @@ import hashlib,json,sys
 import numpy as np
 from PIL import Image
 sys.path.insert(0,str(Path(__file__).resolve().parent))
+from report_paths import report_path
 from legacy_execute import ROOT,PLAN,OUT,save
 SPECS=[('H111NL','f57e7053',[(62,9.1),(416,10.8)],'ВКР рисунок 15, обучение NL111, итерации 6–10'),
  ('H111NT','9266ab41',[(61,9.1),(413,10.8)],'ВКР рисунок 16, обучение NT111, итерации 6–10'),
@@ -12,7 +13,7 @@ SPECS=[('H111NL','f57e7053',[(62,9.1),(416,10.8)],'ВКР рисунок 15, о�
 def main():
     data=json.loads(PLAN.read_text(encoding='utf8'));curves=[]
     for ident,prefix,ticks,source in SPECS:
-        asset=next(f for f in data['figures'] if f['asset'].startswith(prefix));file=Path(asset['preview']);im=np.array(Image.open(file).convert('RGB'))
+        asset=next(f for f in data['figures'] if f['asset'].startswith(prefix));file=report_path(asset['preview']);im=np.array(Image.open(file).convert('RGB'))
         red=(im[:,:,0]>180)&(im[:,:,0].astype(int)-im[:,:,1]>80)&(im[:,:,0].astype(int)-im[:,:,2]>80)
         gray=(im[:,:,0]==im[:,:,1])&(im[:,:,1]==im[:,:,2])&(im[:,:,0]>185)&(im[:,:,0]<250)
         top=next(y for y,c in enumerate(gray[:,55:-3].sum(1)) if y>20 and c>(im.shape[1]-60)*.8)

@@ -117,6 +117,13 @@ save.tmp
 /Testing/
 Reports/*
 !Reports/README.md
+!/Reports/StructTrainClassic/
+/Reports/StructTrainClassic/*
+!/Reports/StructTrainClassic/.gitattributes
+!/Reports/StructTrainClassic/*.docx
+!/Reports/StructTrainClassic/*.xlsx
+!/Reports/StructTrainClassic/*.md
+/Reports/StructTrainClassic/~$*
 
 # Persistent dependencies and local build validation logs
 /.deps/

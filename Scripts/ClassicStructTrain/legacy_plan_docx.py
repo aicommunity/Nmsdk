@@ -7,8 +7,8 @@ from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
 ROOT=Path(__file__).resolve().parents[2]
-WORK=ROOT/'Reports/StructTrainClassic/LegacyInferencePlan-20261123/work'
-OUT=ROOT/'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9'
+WORK=ROOT/'Reports/StructTrainClassic/_work/LegacyInferencePlan-20261123/work'
+OUT=ROOT/'Reports/StructTrainClassic/_work/plans'
 
 
 def main():

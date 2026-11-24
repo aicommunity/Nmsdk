@@ -2,12 +2,13 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Workbook, SpreadsheetFile } from '@oai/artifact-tool';
+import { savePublishedWorkbook } from './report_paths.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const work = path.join(root, 'Reports/StructTrainClassic/DiscrepancyDiagnosis-20261124');
+const work = path.join(root, 'Reports/StructTrainClassic/_work/DiscrepancyDiagnosis-20261124');
 const checkpoint = process.argv.includes('--checkpoint');
 const delivery = checkpoint ? path.join(work, 'checkpoint') :
-  path.join(root, 'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/DiscrepancyDiagnosis');
+  path.join(root, 'Reports/StructTrainClassic');
 const read = async name => JSON.parse(await fs.readFile(path.join(work, name), 'utf8'));
 const data = await read('diagnosis-analysis.json');
 const report = await read('diagnosis-report.json');
@@ -16,7 +17,7 @@ const source = await read('source-audit.json');
 const coverage = await read('diagnosis-coverage.json');
 const runtime = await read('runtime-provenance.json');
 const history = JSON.parse(await fs.readFile(path.join(root,
-  'Reports/StructTrainClassic/TrainingReproducibility-20261123/history.json'), 'utf8'));
+  'Reports/StructTrainClassic/_work/TrainingReproducibility-20261123/history.json'), 'utf8'));
 const workbook = Workbook.create();
 const chartIndex = [];
 
@@ -268,5 +269,9 @@ for (const figure of report.sections.flatMap(section => section.charts ?? [])) {
 
 const xlsx = await SpreadsheetFile.exportXlsx(workbook);
 await fs.mkdir(delivery, { recursive: true });
-await xlsx.save(path.join(delivery, 'DiscrepancyDiagnosis.xlsx'));
+if (checkpoint) {
+  await xlsx.save(path.join(delivery, 'DiscrepancyDiagnosis.xlsx'));
+} else {
+  await savePublishedWorkbook(xlsx, path.join(delivery, 'DiscrepancyDiagnosis.xlsx'), work);
+}
 await fs.writeFile(path.join(checkpoint ? delivery : work, 'chart-index.json'), JSON.stringify(chartIndex, null, 2));

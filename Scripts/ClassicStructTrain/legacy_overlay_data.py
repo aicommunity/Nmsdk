@@ -2,6 +2,7 @@
 from pathlib import Path
 import json,sys,numpy as np
 sys.path.insert(0,str(Path(__file__).resolve().parent))
+from report_paths import report_path
 from legacy_execute import ROOT,OUT,save
 def main():
     a=json.loads((OUT/'assessment.json').read_text(encoding='utf8'));curves=json.loads((OUT/'digitized-waves.json').read_text(encoding='utf8'));byid={c['id']:c for c in curves}
@@ -11,7 +12,7 @@ def main():
         records=[r for r in a['protocols'] if match in r['case'] and r['repeat']==1]
         series=[];native=[];statistics=[]
         for r in records:
-            raw=[json.loads(s) for s in (ROOT/r['directory']/'waveforms.jsonl').read_text().splitlines() if s.strip()];period=-1;points=[]
+            raw=[json.loads(s) for s in (report_path(r['directory'])/'waveforms.jsonl').read_text().splitlines() if s.strip()];period=-1;points=[]
             for p in raw:
                 if p['tick']==0:period+=1
                 points.append([p['time']+period*1334/2000,p['sum_soma']])

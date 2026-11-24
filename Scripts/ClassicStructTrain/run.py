@@ -13,6 +13,8 @@ import subprocess
 import sys
 import time
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from report_paths import report_path
 REPO = Path(__file__).resolve().parents[2]
 DEFAULT_BINARY = REPO / "Bin/Platform/Win/ClassicStructTrainReplay.exe"
 MANIFEST = REPO / "Bin/Configs/StructTrainClassic/Prepared/manifest.json"
@@ -90,7 +92,7 @@ def main():
         parser.error("Classic experiments must use Release; Debug binaries are not allowed")
     if not binary.is_file() or not manifest.is_file():
         parser.error("Build the replay binary and run prepare.py first")
-    output = (args.output or REPO / "Reports/StructTrainClassic" / ("run-" + datetime.now().strftime("%Y%m%d-%H%M%S"))).resolve()
+    output = report_path((args.output or REPO / "Reports/StructTrainClassic/_work" / ("run-" + datetime.now().strftime("%Y%m%d-%H%M%S"))).resolve())
     if output.exists() and any(output.iterdir()):
         parser.error("Output directory is not empty; use a new run directory to preserve evidence")
     output.mkdir(parents=True, exist_ok=True)

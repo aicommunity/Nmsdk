@@ -72,7 +72,7 @@ def main():
     comparisons=[]
     # Canonical response columns are matched only by original kind, target ID,
     # and documented structure; 110/132 never become 111/134.
-    evidence=load(ROOT/'Reports/StructTrainClassic/archive-evidence.json')
+    evidence=load(ROOT/'Reports/StructTrainClassic/_work/archive-evidence.json')
     canonical=load(ROOT/'Bin/Configs/StructTrainClassic/Prepared/manifest.json')['recognition_models']
     for index,ref in enumerate(evidence['recognition']):
         model=canonical[index]

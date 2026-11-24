@@ -10,13 +10,14 @@ import sys
 from xml.etree import ElementTree as ET
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from report_paths import report_path
 from diagnosis_run import ROOT, WORK, PREVIOUS, FACTORS, PILOT, records, load, save, sha, relative
 from legacy_recover import physical
 from training_repro import component_order
 
 
 def rows_of(path):
-    with path.open(encoding="utf-8") as stream:
+    with report_path(path).open(encoding="utf-8") as stream:
         for line in stream:
             if line.strip():
                 yield json.loads(line)

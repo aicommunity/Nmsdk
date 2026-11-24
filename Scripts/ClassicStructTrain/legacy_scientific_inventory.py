@@ -12,7 +12,7 @@ def col(n):
     return s
 
 def main():
-    data=load(OUT/'execution-plan-data.json');evidence=load(ROOT/'Reports/StructTrainClassic/archive-evidence.json')
+    data=load(OUT/'execution-plan-data.json');evidence=load(ROOT/'Reports/StructTrainClassic/_work/archive-evidence.json')
     book=ROOT/'Docs/ClassicStructTrainExperiments/Эксперименты/Исследование/Обучение нескольким примерам.xlsx'
     charts=[]
     with zipfile.ZipFile(book) as archive:

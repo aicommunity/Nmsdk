@@ -2,10 +2,11 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {Workbook,SpreadsheetFile} from '@oai/artifact-tool';
+import {reportPath,savePublishedWorkbook} from './report_paths.mjs';
 process.on('uncaughtException',e=>{console.error(e.message);console.error(e.stack.split('\n').filter(s=>s.includes('legacy_results_workbook')).join('\n'));process.exit(1);});
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
-const work=path.join(repo,'Reports/StructTrainClassic/LegacyChecks-20261123');
-const out=path.join(repo,'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/LegacyChecks');
+const work=path.join(repo,'Reports/StructTrainClassic/_work/LegacyChecks-20261123');
+const out=path.join(repo,'Reports/StructTrainClassic');
 const read=async p=>JSON.parse(await fs.readFile(p,'utf8'));
 const a=await read(path.join(work,'assessment.json'));
 const d=await read(path.join(work,'execution-plan-data.json'));
@@ -120,7 +121,7 @@ async function traceFor(jobId,input){
  const measured=a.first_by_job[jobId];const record=measured||protocolResults.get(jobId);if(!record)return [];
  const directory=measured?measured.directory:record.directory;
  if(!waveCache.has(directory)){
-  const raw=await fs.readFile(path.join(repo,directory,'waveforms.jsonl'),'utf8');waveCache.set(directory,raw.trim().split('\n').filter(Boolean).map(x=>JSON.parse(x)));
+  const raw=await fs.readFile(path.join(reportPath(directory),'waveforms.jsonl'),'utf8');waveCache.set(directory,raw.trim().split('\n').filter(Boolean).map(x=>JSON.parse(x)));
  }
  return waveCache.get(directory).filter(x=>x.input_id===input&&x.repeat===1);
 }
@@ -141,7 +142,7 @@ const five=a.protocols.filter(r=>r.repeat===1&&r.case.includes('-five111'));
 if(five.length>=2){
  const series=[];
  for(const record of five){
-  const raw=await fs.readFile(path.join(repo,record.directory,'waveforms.jsonl'),'utf8');const points=raw.trim().split('\n').filter(Boolean).map(x=>JSON.parse(x));let period=-1;
+  const raw=await fs.readFile(path.join(reportPath(record.directory),'waveforms.jsonl'),'utf8');const points=raw.trim().split('\n').filter(Boolean).map(x=>JSON.parse(x));let period=-1;
   series.push({label:`${record.kind==='learner'?'NL':'NT'}111, ${record.job.threshold_control?'учебный порог 100':'порог 0,0115'}`,values:points.map(p=>{if(p.tick===0)period++;return [p.time+period*1334/2000,p.sum_soma];})});
  }
  const row=4030,last=row+series[0].values.length;
@@ -159,7 +160,7 @@ for(const after of [129,37]){
  const candidates=a.protocols.filter(r=>r.repeat===1&&r.case.endsWith(`-transition22to${after}`));if(!candidates.length)continue;
  const columns=[];
  for(const record of candidates){
-  const raw=await fs.readFile(path.join(repo,record.directory,'waveforms.jsonl'),'utf8');
+  const raw=await fs.readFile(path.join(reportPath(record.directory),'waveforms.jsonl'),'utf8');
   const trace=raw.trim().split('\n').filter(Boolean).map(x=>JSON.parse(x));
   const values=[];let index=-1,lastInput=null;
   for(const point of trace){if(point.tick===0)index++;values.push([point.time+index*1334/2000,point.sum_soma]);}
@@ -216,7 +217,7 @@ note(sh,'Время: линейная калибровка по видимым �
 sh.getRange(`D6:G${pixelRows.length+5}`).setNumberFormat('0.000000');
 sh.getRange('M5:R9').values=[['Рисунок','Секунд / пиксель','Свободный член','Нулевая линия Y','Верх шкалы Y','Невязка меток, с'],...digitized.map(c=>[c.id,c.time_slope,c.time_intercept,c.voltage_zero_pixel,c.voltage_top_pixel,c.tick_fit_max_residual])];
 for(let i=0;i<digitized.length;i++){
- const c=digitized[i],bytes=await fs.readFile(c.image),w=bytes.readUInt32BE(16),h=bytes.readUInt32BE(20),row=12+i*35;
+ const c=digitized[i],bytes=await fs.readFile(reportPath(c.image)),w=bytes.readUInt32BE(16),h=bytes.readUInt32BE(20),row=12+i*35;
  sh.getRange(`M${row}`).values=[[c.source]];
  sh.images.add({dataUrl:'data:image/png;base64,'+bytes.toString('base64'),anchor:{from:{row:row,col:12},extent:{widthPx:900,heightPx:900*h/w}}});
 }
@@ -266,7 +267,8 @@ wb.recalculate();console.log((await wb.inspect({kind:'match',searchTerm:'#REF!|#
 // A real input perturbation must update the dependent classification build.
 const test=sheets[names[0]],original=test.getRange('G6').values;test.getRange('G6').values=[[0]];wb.recalculate();const changed=test.getRange('K6:P6').values;test.getRange('G6').values=original;wb.recalculate();
 await fs.writeFile(path.join(work,'formula-check.json'),JSON.stringify({changed,restored:test.getRange('K6:P6').values},null,2));
-const file=await SpreadsheetFile.exportXlsx(wb);await file.save(path.join(out,'LegacyModelChecks.xlsx'));
+const file=await SpreadsheetFile.exportXlsx(wb);
+await savePublishedWorkbook(file,path.join(out,'LegacyModelChecks.xlsx'),work);
 await fs.writeFile(path.join(work,'figures.json'),JSON.stringify(figures,null,2));
 for(let i=0;i<previews.length;i++){let p=previews[i];const blob=await wb.render({sheetName:p.sheet,range:p.range,scale:1.2,format:'png'});await fs.writeFile(path.join(work,'xlsx-qa',`sheet-${i+1}.png`),new Uint8Array(await blob.arrayBuffer()));}
 for(const f of figures){const blob=await wb.render({sheetName:f.sheet,range:f.range,scale:1.2,format:'png'});await fs.writeFile(path.join(work,'xlsx-qa',f.id+'.png'),new Uint8Array(await blob.arrayBuffer()));}

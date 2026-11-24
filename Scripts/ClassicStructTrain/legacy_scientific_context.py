@@ -3,7 +3,7 @@ from pathlib import Path
 import json,re,zipfile,hashlib
 import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[2]
-WORK=ROOT/'Reports/StructTrainClassic/LegacyChecks-20261123'
+WORK=ROOT/'Reports/StructTrainClassic/_work/LegacyChecks-20261123'
 PRIMARY='Эксперименты/Инофрмация о длинах дендритов и числе синапсов.xlsx'
 def load(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 def enrich(data,plan,assessment):

@@ -17,7 +17,7 @@ try {
  foreach($taskSource in $taskSources){if((Get-FileHash -LiteralPath (Join-Path $taskRepo $taskSource) -Algorithm SHA256).Hash -ne $taskBefore[$taskSource]){throw 'Native controller sources changed during the build'}}
  if((git -C (Join-Path $taskRepo 'Libraries/Nmsdk-PulseLib') rev-parse HEAD) -ne $taskPulseBefore -or (git -C (Join-Path $taskRepo 'Rdk') rev-parse HEAD) -ne $taskRdkBefore){throw 'Native module revision changed during the build'}
  $taskBuildRecord=[ordered]@{sources=$taskBefore;pulselib_sha=$taskPulseBefore;rdk_sha=$taskRdkBefore;binary_sha256=(Get-FileHash -LiteralPath (Join-Path $taskRepo 'Bin/Platform/Win/ClassicTrainingRepro.exe') -Algorithm SHA256).Hash;source_stability_verified=$true}
- $taskBuildRecord | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $taskRepo 'Reports/StructTrainClassic/TrainingReproducibility-20261123/last-build.json') -Encoding utf8
+ $taskBuildRecord | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $taskRepo 'Reports/StructTrainClassic/_work/TrainingReproducibility-20261123/last-build.json') -Encoding utf8
 } finally {
  if($null -eq $taskPreviousVcpkg){Remove-Item Env:VCPKG_ROOT -ErrorAction SilentlyContinue}else{$env:VCPKG_ROOT=$taskPreviousVcpkg}
 }

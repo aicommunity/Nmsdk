@@ -5,9 +5,12 @@ import xml.etree.ElementTree as ET
 from collections import Counter
 from pypdf import PdfReader
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from report_paths import report_path
 ROOT = Path(__file__).resolve().parents[2]
-WORK = ROOT / 'Reports/StructTrainClassic/LegacyChecks-20261123'
-OUT = ROOT / 'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/ScientificComparisons'
+WORK = ROOT / 'Reports/StructTrainClassic/_work/LegacyChecks-20261123'
+OUT = ROOT / 'Reports/StructTrainClassic'
 NS = {'m': 'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
 def load(name): return json.loads((WORK / name).read_text(encoding='utf-8-sig'))
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -68,7 +71,7 @@ def main():
         for row in range(6,91):
             assert passports.get(f'A{row}') and passports.get(f'D{row}')
             for col in ['F','G']: assert len(passports[f'{col}{row}'].split(',')) == 5
-            directory = ROOT / passports[f'H{row}']
+            directory = report_path(passports[f'H{row}'])
             process = json.loads((directory / 'process.json').read_text(encoding='utf-8-sig'))
             assert process['status'] == 'completed' and process['exit_code'] == 0
             evidence.append(str(directory))

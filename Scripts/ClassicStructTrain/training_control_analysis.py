@@ -3,6 +3,7 @@ from pathlib import Path
 import sys,json,collections,hashlib,statistics
 import xml.etree.ElementTree as ET
 sys.path.insert(0,str(Path(__file__).resolve().parent))
+from report_paths import report_path
 from training_repro import ROOT,WORK,BASE,OLD,load,save,sha
 from training_report_data import lines,metrics
 from legacy_recover import physical
@@ -18,12 +19,12 @@ def main():
  if len(out['prior_order'])==3:
   states={r['condition']:r for r in out['prior_order']};a,b,c=[states[k] for k in ['manual','native-order','manual-reversal']]
   source=next(r for r in load(OLD/'scientific-comparison-data.json')['recognition'] if r['label']=='NL22')
-  historical=next(r['answers'] for r in load(ROOT/'Reports/StructTrainClassic/archive-evidence.json')['recognition'] if r['source_range']==source['range'])
+  historical=next(r['answers'] for r in load(ROOT/'Reports/StructTrainClassic/_work/archive-evidence.json')['recognition'] if r['source_range']==source['range'])
   previous=load(OLD/'assessment.json')['first_by_job'][source['job']]['answers'];changed=[i+1 for i,x,y in zip(range(150),a['answers'],b['answers']) if x!=y]
   out['prior_order_effect']={'changed_ids':changed,'manual_matches_previous_report':a['answers']==previous,'native_matches_all_historical_answers':b['answers']==historical,
-   'manual_reversal_matches':a['answers']==c['answers'],'same_loaded_physical_graph':len({digest_physical(ROOT/r['directory']/'loaded') for r in [a,b,c]})==1,
+   'manual_reversal_matches':a['answers']==c['answers'],'same_loaded_physical_graph':len({digest_physical(report_path(r['directory'])/'loaded') for r in [a,b,c]})==1,
    'rows':[['Ручной порядок']+[a['answers'][i-1] for i in changed],['Штатный порядок']+[b['answers'][i-1] for i in changed],['Ручной повторно']+[c['answers'][i-1] for i in changed]]}
-  original_model=ROOT/load(WORK/'prior-order-completion.json')['original_model'];before=physical(ET.parse(original_model).getroot());after=physical(ET.parse(ROOT/a['directory']/'loaded/Model_00.xml').getroot())
+  original_model=ROOT/load(WORK/'prior-order-completion.json')['original_model'];before=physical(ET.parse(original_model).getroot());after=physical(ET.parse(report_path(a['directory'])/'loaded/Model_00.xml').getroot())
   assert before['links']==after['links'] and before['nodes'].keys()==after['nodes'].keys()
   additions=[]
   for name,node in before['nodes'].items():
@@ -46,9 +47,9 @@ def main():
  if len(out['geometry_engine'])==4:
   states={r['condition']:r for r in out['geometry_engine']};a,b,c=[states[k] for k in ['manual','native-order','manual-reversal']]
   source=next(r for r in load(OLD/'scientific-comparison-data.json')['recognition'] if r['label']=='NL22')
-  historical=next(r['answers'] for r in load(ROOT/'Reports/StructTrainClassic/archive-evidence.json')['recognition'] if r['source_range']==source['range'])
+  historical=next(r['answers'] for r in load(ROOT/'Reports/StructTrainClassic/_work/archive-evidence.json')['recognition'] if r['source_range']==source['range'])
   changed=[i+1 for i,x,y in zip(range(150),a['answers'],b['answers']) if x!=y]
-  directories=[ROOT/r['directory'] for r in [a,b,c]]
+  directories=[report_path(r['directory']) for r in [a,b,c]]
   out['geometry_effect']={'changed_ids':changed,'native_matches_all_historical_answers':b['answers']==historical,'manual_reversal_matches':a['answers']==c['answers'],
    'same_loaded_physical_graph':len({digest_physical(p/'loaded') for p in directories})==1,
    'rows':[['Ручной порядок']+[a['answers'][i-1] for i in changed],['Штатный порядок']+[b['answers'][i-1] for i in changed],['Ручной повторно']+[c['answers'][i-1] for i in changed]]}

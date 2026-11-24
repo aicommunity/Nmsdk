@@ -3,7 +3,7 @@ from pathlib import Path
 import json,re
 from pypdf import PdfReader
 ROOT=Path(__file__).resolve().parents[2]
-WORK=ROOT/'Reports/StructTrainClassic/LegacyChecks-20261123'
+WORK=ROOT/'Reports/StructTrainClassic/_work/LegacyChecks-20261123'
 def norm(s):return re.sub(r'\s+',' ',s).strip()
 def main():
  pages=PdfReader(WORK/'scientific-docx-gost-render/ScientificComparisons.pdf').pages

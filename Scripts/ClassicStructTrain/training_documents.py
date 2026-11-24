@@ -2,7 +2,8 @@
 from pathlib import Path
 import sys,json
 sys.path.insert(0,str(Path(__file__).resolve().parent))
-from training_repro import ROOT,WORK,DELIVERY,load
+from training_repro import ROOT,WORK,load
+from report_paths import PLANS
 from docx import Document
 from docx.shared import Cm,Pt,RGBColor
 from docx.oxml import OxmlElement
@@ -87,5 +88,5 @@ def plan():
  paragraph(d,'После пилота оцениваются длительность и объём полной матрицы. Паспорт запуска содержит версии, правки, параметры, начальное состояние, стимулы, события изменения структуры и причину остановки. Повторные одинаковые прогоны показывают воспроизводимость исполнения, но не создают независимые наборы Iris.')
  paragraph(d,'Результаты представляются в DOCX и XLSX. DOCX включает диаграммы из XLSX, описание протоколов и анализ. Научные графики сравнивают историческое обучение, новые обученные состояния и инференс предыдущего отчёта. Оси и единицы подписываются; для редких измерений используются крупные маркеры и пунктир. Структурные различия приводятся отдельно.')
  paragraph(d,'Работа завершается, когда каждый запланированный случай имеет результат либо конкретную причину невыполнения. Объяснения получают один из статусов: подтверждено экспериментом; поддерживается ограниченными данными; гипотеза; не установлено. Отрицательные результаты сохраняются. Исходный отчёт и его данные проверяются по контрольным суммам.')
- DELIVERY.mkdir(parents=True,exist_ok=True);d.save(DELIVERY/'TrainingReproducibilityPlan.docx');print('Created DOCX research plan')
+ PLANS.mkdir(parents=True,exist_ok=True);d.save(PLANS/'TrainingReproducibilityPlan.docx');print('Created DOCX research plan')
 if __name__=='__main__':plan()

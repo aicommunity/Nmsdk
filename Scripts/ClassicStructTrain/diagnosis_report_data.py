@@ -4,6 +4,7 @@ from pathlib import Path
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from report_paths import report_path
 from diagnosis_run import ROOT, WORK, PREVIOUS, PILOT, load, save, relative
 from diagnosis_analysis import rows_of, first_iteration
 
@@ -209,15 +210,15 @@ def run():
             paragraphs.append("В предыдущем варианте FZ с пределом 600 секунд остановки по времени получены "
                               f"на итерациях {', '.join(str(r['iterations']) for r in earlier_limit)}. "
                               "Исходные журналы этой серии сохранены в составе TrainingReproducibility.")
-        first = ROOT / strict[0]["directory"]
-        prefixes = [first_iteration(first, ROOT / row["directory"]) for row in strict[1:]]
+        first = report_path(strict[0]["directory"])
+        prefixes = [first_iteration(first, report_path(row["directory"])) for row in strict[1:]]
         common = min((diff["record"] - 1 for diff in prefixes if diff), default=strict[0]["iterations"])
         paragraphs.append(f"Строгий NT22 с пределами 1000 итераций и 1800 секунд завершил наблюдение на итерациях {', '.join(str(r['iterations']) for r in strict)}. "
                           f"Общий совпадающий префикс включает {common} зарегистрированных записей. "
                           "Завершение по учебному критерию не наблюдалось. Для общего вывода о сходимости необходимы дополнительные сведения о полном состоянии алгоритма.")
         def sample(path):
             return {r["iteration"]: sum(r["synapses"]) for r in rows_of(path / "iterations.jsonl")}
-        series = [sample(ROOT / r["directory"]) for r in strict]
+        series = [sample(report_path(r["directory"])) for r in strict]
         indices = range(1, max(max(s) for s in series) + 1, 25)
         rows = [[str(i), *[s.get(i) for s in series]] for i in indices]
         training_charts.append(chart("R04", "Траектория строгого варианта NT22", "Учебная итерация", "Синапсы, шт.",
@@ -543,7 +544,7 @@ def run():
         "Подтверждены только эффекты с измеренным вмешательством и проверкой возврата. Для исторических расхождений полный комплект первичных сигналов и исходных кодов 2022 года отсутствует. Архивные альтернативы графа, различия порядка и состояния при предъявлении дают несколько совместимых объяснений.",
         "Доказанный дефект регистрации стенда исправлен. Подтверждение ошибки исторической таблицы требует расхождения с первичным файлом при согласованной привязке. Совпадение опубликованных счётов с первичными файлами подтверждает их арифметику. Источник необъяснённой 31-й строки и конкретная причина оставшихся исторических расхождений не установлены.",
         f"По журналам учтено {len(data['processes'])} процессов. Завершено {counts['completed']}. Остальные случаи и достигнутые внутри процесса ограничения доступны в книге. Использована сборка Release и запуск из Bin/Platform/Win. Степень подтверждения отдельных факторов следует оценивать по конкретным экспериментам и числу доступных повторов.",
-        "Источники предшествующей проверки — ScientificComparisons и TrainingReproducibility. Исходные материалы находятся в Docs/ClassicStructTrainExperiments/Эксперименты. Реестр, нативные журналы и контрольные суммы находятся в Reports/StructTrainClassic/DiscrepancyDiagnosis-20261124. Индекс архива Evidence связывает каждый файл с его контрольной суммой и архивной частью. Полные потактовые ряды сохранены в локальных частях waveforms в этом архиве.",
+        "Источники предшествующей проверки — ScientificComparisons и TrainingReproducibility. Исходные материалы находятся в Docs/ClassicStructTrainExperiments/Эксперименты. Реестр, нативные журналы и контрольные суммы находятся в Reports/StructTrainClassic/_work/DiscrepancyDiagnosis-20261124. Индекс архива Evidence связывает каждый файл с его контрольной суммой и архивной частью. Полные потактовые ряды сохранены в локальных частях waveforms в этом архиве.",
     ] + [line for line in (coverage_line, snapshot_line) if line]
       + ([f"В ранней очереди прекращено {counts['superseded']} дополнительных полных повторов после перехода на проверенные префиксы. "
           "Первые полные проходы и все предусмотренные независимые контроли выполнены отдельно."] if counts["superseded"] else [])))
@@ -552,8 +553,8 @@ def run():
         "2. «Распознавание.xlsx». Первичные столбцы ответов для 150 входов. Docs/ClassicStructTrainExperiments/Эксперименты/Тестирование/Распознавание.",
         "3. «Обучение нескольким примерам.xlsx» и соответствующие файлы output_data. Первичные ответы и формулы пяти последовательностей. Docs/ClassicStructTrainExperiments/Эксперименты/Исследование.",
         "4. «Код для тестирования переобучения.txt» и «код CalculateProcess.txt». Сохранённые фрагменты контроллера и архивная последовательность входов в подкаталогах «Тестирование» и «Исследование». Точные пути исходных данных указаны в книге.",
-        "5. ScientificComparisons.docx и ScientificComparisons.xlsx. Результаты проверки сохранённых и реконструированных графов. Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/ScientificComparisons.",
-        "6. TrainingReproducibility.docx и TrainingReproducibility.xlsx. Предшествующее повторное обучение и инференс. Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/TrainingReproducibility.",
+        "5. ScientificComparisons.docx и ScientificComparisons.xlsx. Результаты проверки сохранённых и реконструированных графов. Reports/StructTrainClassic.",
+        "6. TrainingReproducibility.docx и TrainingReproducibility.xlsx. Предшествующее повторное обучение и инференс. Reports/StructTrainClassic.",
         "7. История Git библиотек Nmsdk-PulseLib и Rdk. Полные идентификаторы сборок, исходные файлы диагностики и контрольные суммы приведены в журналах выполнения.",
     ]))
     overview = [

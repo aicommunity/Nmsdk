@@ -6,7 +6,7 @@ param(
 )
 $ErrorActionPreference='Stop'
 $repoRoot=(Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
-$workRoot=Join-Path $repoRoot 'Reports\StructTrainClassic\LegacyInferencePlan-20261123\work'
+$workRoot=Join-Path $repoRoot 'Reports\StructTrainClassic\_work\LegacyInferencePlan-20261123\work'
 New-Item -ItemType Directory -Force -Path $workRoot | Out-Null
 if($Mode -eq 'RenderDocx') {
  $wordApp=New-Object -ComObject Word.Application

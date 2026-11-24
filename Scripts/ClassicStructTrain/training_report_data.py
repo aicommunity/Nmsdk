@@ -3,6 +3,7 @@ from pathlib import Path
 import sys,json,statistics,hashlib,math
 from collections import Counter,defaultdict
 sys.path.insert(0,str(Path(__file__).resolve().parent))
+from report_paths import report_path
 from training_repro import ROOT,WORK,OLD,SOURCE,load,save,verify_lock,state_identity
 def lines(path):
  if not path.exists():return []
@@ -14,7 +15,7 @@ def lines(path):
 def inference_result(folder):
  seen=set()
  while (folder/'reuse.json').exists() and not ((folder/'process.json').exists() and load(folder/'process.json')['status']=='completed' and (folder/'results.jsonl').exists()):
-  assert folder not in seen,'Inference reuse cycle';seen.add(folder);folder=ROOT/load(folder/'reuse.json')['source']
+  assert folder not in seen,'Inference reuse cycle';seen.add(folder);folder=report_path(load(folder/'reuse.json')['source'])
  rs=lines(folder/'results.jsonl')
  return (rs[-1] if rs else None),str(folder.relative_to(ROOT)).replace('\\','/')
 def metrics(r):
@@ -24,7 +25,7 @@ def metrics(r):
   'risk':(fp+fn)/(tp+fp+fn+tn) if tp+fp+fn+tn else None}
 def collect():
  verify_lock();science=load(OLD/'scientific-comparison-data.json');history=load(WORK/'history.json');records=[];processes=[]
- archive=load(ROOT/'Reports/StructTrainClassic/archive-evidence.json');previous_assessment=load(OLD/'assessment.json')
+ archive=load(ROOT/'Reports/StructTrainClassic/_work/archive-evidence.json');previous_assessment=load(OLD/'assessment.json')
  previous_jobs={j['id']:j for p in (ROOT/'Bin/Configs/StructTrainClassic/LegacyInference').glob('*-jobs.json') for j in load(p) if isinstance(j,dict) and 'id' in j}
  for p in sorted((WORK/'runs').glob('*/*/*/process.json')):
   meta=load(p);variant=p.parents[2].name;phase=p.parents[1].name
@@ -39,7 +40,7 @@ def collect():
   source=next((x for x in archive['modes'] if x['case']==r['case']),None)
   r['historical_cells']=source['values'] if source else None
  for r in evaluations:
-  ident=state_identity(ROOT/r['directory'],r['stage_index'])
+  ident=state_identity(report_path(r['directory']),r['stage_index'])
   inf,origin=inference_result(WORK/'inference/VP1/all/reference'/ident)
   if inf and len(inf.get('answers',[]))==150:
    ids=r.get('input_ids',r['job']['evaluation_ids']);answers=[inf['answers'][i-1] for i in ids];counts={k:0 for k in ['TP','FP','FN','TN']}
@@ -87,7 +88,7 @@ def collect():
   target=int(re.search(r'\d+',label).group());new=next((r for r in model_rows if r['kind']==kind and r['target']==target),None)
   raw=next((r for r in archive['recognition'] if r['source_range']==old['range']),None)
   prior=previous_assessment['first_by_job'].get(old['job'])
-  prior_native=next((r for r in lines(ROOT/prior['directory']/'results.jsonl') if r.get('answers')==prior['answers']),None) if prior else None
+  prior_native=next((r for r in lines(report_path(prior['directory'])/'results.jsonl') if r.get('answers')==prior['answers']),None) if prior else None
   assert prior is None or prior_native is not None,'Previous physical signals must use the same native observation as its published answers'
   if prior_native:assert len(prior_native['peaks'])==150 and len(prior_native['first_spikes'])==150
   prior_job=previous_jobs.get(old['job'])

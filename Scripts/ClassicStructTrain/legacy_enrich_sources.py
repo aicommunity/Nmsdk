@@ -4,7 +4,7 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from legacy_execute import ROOT,PLAN,CONFIG,OUT,save
 def main():
-    data=json.loads(PLAN.read_text(encoding='utf8'));e=json.loads((ROOT/'Reports/StructTrainClassic/archive-evidence.json').read_text(encoding='utf8'))
+    data=json.loads(PLAN.read_text(encoding='utf8'));e=json.loads((ROOT/'Reports/StructTrainClassic/_work/archive-evidence.json').read_text(encoding='utf8'))
     jobs=json.loads((CONFIG/'recovered-jobs.json').read_text(encoding='utf8'));lookup={(j['kind'],tuple(j['dendrites']),tuple(j['synapses'])):j for j in jobs}
     mapping=[r for r in json.loads((OUT/'recovered-mapping.json').read_text(encoding='utf8')) if not r['row'].startswith('W')]
     source=next(d['path'] for d in data['documents'] if d['path'].startswith('Эксперименты/') and d['path'].endswith('Протоколы экспериментов.xlsx'))

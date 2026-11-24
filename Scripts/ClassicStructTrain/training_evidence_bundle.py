@@ -3,6 +3,7 @@ from pathlib import Path,PurePosixPath
 import sys,json,gzip,hashlib,zipfile,argparse,subprocess
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from training_repro import ROOT,WORK,CONFIG,SOURCE,OLD,DELIVERY,load,save,sha
+from report_paths import PLANS,report_path
 
 DEST=WORK/'Evidence'
 def digest_stream(stream):
@@ -39,12 +40,14 @@ def pack():
  files.extend(OLD/name for name in ['assessment.json','scientific-comparison-data.json','digitized-waves.json'])
  previous=load(OLD/'assessment.json')['first_by_job']
  for row in load(OLD/'scientific-comparison-data.json')['recognition']:
-  folder=ROOT/previous[row['job']]['directory']
+  folder=report_path(previous[row['job']]['directory'])
   files.extend(p for p in folder.rglob('*') if p.is_file())
  prior_source=ROOT/load(WORK/'prior-order-completion.json')['original_model']
  files.extend(p for p in prior_source.parent.rglob('*') if p.is_file())
- files.extend(p for p in (DELIVERY.parent/'ScientificComparisons').iterdir() if p.is_file() and p.suffix.lower() in ['.docx','.xlsx'])
- files.extend(p for p in DELIVERY.iterdir() if p.is_file() and p.suffix.lower() in ['.docx','.xlsx'])
+ reports=[DELIVERY/(name+suffix) for name in ('ScientificComparisons','TrainingReproducibility')
+          for suffix in ('.docx','.xlsx')]
+ reports.append(PLANS/'TrainingReproducibilityPlan.docx')
+ files.extend(p for p in reports if p.is_file())
  binaries={ROOT/load(WORK/'reference.json')['native_reference']}
  binaries.update(ROOT/load(p)['binary'] for p in (WORK/'variants').glob('*.json') if 'binary' in load(p))
  files.extend(binaries)
@@ -93,7 +96,7 @@ def restore(root):
    for r in index():
     if r['part']!=number:continue
     rel=PurePosixPath(r['path']);assert not rel.is_absolute() and '..' not in rel.parts
-    target=(root/Path(*rel.parts)).resolve();assert target.is_relative_to(root)
+    target=report_path(Path(*rel.parts),root=root).resolve();assert target.is_relative_to(root)
     if target.exists():assert target.is_file() and sha(target)==r['sha256'],'Conflicting existing file: '+str(target);continue
     target.parent.mkdir(parents=True,exist_ok=True)
     with target.open('xb') as output,z.open('sha256/'+r['sha256']) as source:

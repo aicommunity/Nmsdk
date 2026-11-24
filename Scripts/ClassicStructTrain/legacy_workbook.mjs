@@ -2,10 +2,11 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Workbook, SpreadsheetFile } from '@oai/artifact-tool';
+import { reportPath } from './report_paths.mjs';
 process.on('uncaughtException',e=>{console.error(e.message);console.error(e.stack.split('\n').filter(s=>s.includes('legacy_workbook.mjs')).join('\n'));process.exit(1);});
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const work=path.join(repo,'Reports/StructTrainClassic/LegacyInferencePlan-20261123/work');
-const out=path.join(repo,'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9');
+const work=path.join(repo,'Reports/StructTrainClassic/_work/LegacyInferencePlan-20261123/work');
+const out=path.join(repo,'Reports/StructTrainClassic/_work/plans');
 const d=JSON.parse(await fs.readFile(path.join(work,'plan-data.json'),'utf8'));
 const wb=Workbook.create();
 const names=['План','Модели','Состояния','Сравнение инференса','Эпохи и графики','Проекции Iris','Осциллограммы','Реестр рисунков','Ряды архива','Источники'];
@@ -70,7 +71,7 @@ note(sh,'A3','361 полная запись и 136 неполных. 70 груп
 sh.getRange(`F6:O${d.restoration_rows.length+5}`).setNumberFormat('0');sh.freezePanes.freezeColumns(3);
 
 const previous=[];
-const runDir=path.join(repo,'Reports/StructTrainClassic/run-20261123-a2');
+const runDir=path.join(repo,'Reports/StructTrainClassic/_work/run-20261123-a2');
 for(const entry of await fs.readdir(runDir,{withFileTypes:true})){
  if(!entry.isDirectory()||!entry.name.startsWith('recognition'))continue;
  const file=path.join(runDir,entry.name,'results.jsonl');
@@ -164,7 +165,7 @@ note(sh,'A3','Исторические изображения ниже — эт�
 const waveAssets=['c3a2737b','f57e7053','9266ab41','4ed6e8b5','f6b043a3'];
 for(let i=0;i<waveAssets.length;i++){
  const f=d.figures.find(r=>r.asset.startsWith(waveAssets[i]));if(!f?.preview)continue;
- const bytes=await fs.readFile(f.preview);
+ const bytes=await fs.readFile(reportPath(f.preview));
  const imageWidth=bytes.readUInt32BE(16),imageHeight=bytes.readUInt32BE(20);
  const widthPx=Math.min(900,280*imageWidth/imageHeight),heightPx=widthPx*imageHeight/imageWidth;
  sh.getRange(`A${12+i*18}`).values=[[`${f.family}   ${f.source}   ${f.location}`]];

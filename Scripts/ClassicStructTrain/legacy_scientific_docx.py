@@ -7,9 +7,12 @@ from docx.shared import Cm,Pt,RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH,WD_TAB_ALIGNMENT,WD_TAB_LEADER
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from report_paths import report_path
 ROOT=Path(__file__).resolve().parents[2]
-WORK=ROOT/'Reports/StructTrainClassic/LegacyChecks-20261123'
-OUT=ROOT/'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/ScientificComparisons'
+WORK=ROOT/'Reports/StructTrainClassic/_work/LegacyChecks-20261123'
+OUT=ROOT/'Reports/StructTrainClassic'
 def load(n):return json.loads((WORK/n).read_text(encoding='utf-8-sig'))
 def pc(x):return f'{100*x:.2f}%'.replace('.',',')
 def main():
@@ -59,7 +62,7 @@ def main():
    el=OxmlElement('w:'+side);el.set(qn('w:val'),'single');el.set(qn('w:sz'),'4');el.set(qn('w:color'),'808080');borders.append(el)
   t._tbl.tblPr.append(borders);p()
  def pic(path,cap=None,ident=None):
-  path=Path(path)
+  path=report_path(path)
   with Image.open(path) as im:w,ht=im.size
   width=16.4 if cap is None else min(16.4,cap*w/ht)
   q=p();q.alignment=1;q.paragraph_format.first_line_indent=Cm(0);q.paragraph_format.line_spacing=1;q.paragraph_format.keep_with_next=True
@@ -162,7 +165,7 @@ def main():
  p('Установлены различия архивных вариантов и проверены ограниченные контрольные условия. Общая физическая причина расхождений реакций не установлена. Для её определения нужна отдельная постановка; новые расчёты обучения в этой работе не проводились.')
  h('СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ',True)
  base='E:\\Science-Repo\\nmsdk-git\\Docs\\ClassicStructTrainExperiments\\'
- refs=[d['primary_source']['path']+'. Лист «Дендриты и синапсы». Основной структурный источник.',base+'Эксперименты\\Исследование\\Обучение по двум примерам.docx.',base+'Эксперименты\\Исследование\\Средние нейроны.docx. Условия и выводы опытов.',base+'Эксперименты\\Исследование\\Обучение нескольким примерам.xlsx.',base+'ВКР_ЕременкоЕА.docx. Рисунки 15–21, таблицы 6–8, приложения.',base+'Эксперименты\\Тестирование\\Распознавание\\Распознавание.xlsx.',base+'Тексты Презентации\\Дополнительные материалы\\черновик для таблиц.xlsx.',base+'Защита ВКР Ерёменко.pptx.','Сохранённые конфигурации. Реестр: E:\\Science-Repo\\nmsdk-git\\Reports\\StructTrainClassic\\archive-evidence.json.','Результаты проверки 23.11.2026. E:\\Science-Repo\\nmsdk-git\\Reports\\StructTrainClassic\\LegacyChecks-20261123. Книга ScientificComparisons.xlsx.','ГОСТ 7.32–2017. Отчёт о научно-исследовательской работе. Структура и правила оформления. Официальное издание. URL: https://iriran.ru/sites/default/files/gost_7.32-2017.pdf (дата обращения: 23.11.2026).']
+ refs=[d['primary_source']['path']+'. Лист «Дендриты и синапсы». Основной структурный источник.',base+'Эксперименты\\Исследование\\Обучение по двум примерам.docx.',base+'Эксперименты\\Исследование\\Средние нейроны.docx. Условия и выводы опытов.',base+'Эксперименты\\Исследование\\Обучение нескольким примерам.xlsx.',base+'ВКР_ЕременкоЕА.docx. Рисунки 15–21, таблицы 6–8, приложения.',base+'Эксперименты\\Тестирование\\Распознавание\\Распознавание.xlsx.',base+'Тексты Презентации\\Дополнительные материалы\\черновик для таблиц.xlsx.',base+'Защита ВКР Ерёменко.pptx.','Сохранённые конфигурации. Реестр: E:\\Science-Repo\\nmsdk-git\\Reports\\StructTrainClassic\\_work\\archive-evidence.json.','Результаты проверки 23.11.2026. E:\\Science-Repo\\nmsdk-git\\Reports\\StructTrainClassic\\_work\\LegacyChecks-20261123. Книга ScientificComparisons.xlsx.','ГОСТ 7.32–2017. Отчёт о научно-исследовательской работе. Структура и правила оформления. Официальное издание. URL: https://iriran.ru/sites/default/files/gost_7.32-2017.pdf (дата обращения: 23.11.2026).']
  for i,t in enumerate(refs,1):
   q=p(str(i)+' '+t);q.alignment=WD_ALIGN_PARAGRAPH.LEFT;q.paragraph_format.first_line_indent=Cm(0);q.paragraph_format.line_spacing=1;q.paragraph_format.space_after=Pt(6);q.paragraph_format.keep_together=True
   for r in q.runs:r.font.size=Pt(12)
