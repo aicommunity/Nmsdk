@@ -1,0 +1,113 @@
+{
+  "kind": "timelearner_physical_threshold_DATA3_candidate_dispatch",
+  "schema_version": 1,
+  "SDK": {
+    "dispatched": true,
+    "job": "physical-threshold-DATA3-sdk33-m40-cc47",
+    "controls_commit": "3323fb63a222a5f5a6cd20bfbabd35b328141ca4",
+    "supervisor": {
+      "pid": 1696119,
+      "start_ticks": "457946644",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "source": "/media/user/Data/TimeLearnerRefactor/source-physical-threshold-DATA3-m40-cc46",
+    "source_commit": "4a87682c301a8f9db5f7021af956274518ccf919",
+    "pulse": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+    "Rdk": "561986e9f336ee5914e2d119de90b005e06f3639",
+    "expected_cpp_cases": 33,
+    "namespace_files": 4606,
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-physical-threshold-DATA3-sdk33-m40-cc47",
+    "native_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-physical-threshold-DATA3-sdk33-m40-cc47",
+    "controls_backup": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/33/3383b426b173b396c72913487a0444a719e93da3c80a3a814cfa411fdc716e88",
+      "sha256": "3383b426b173b396c72913487a0444a719e93da3c80a3a814cfa411fdc716e88",
+      "bytes": 375455
+    },
+    "controls_backup_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-controls/20261124-physical-threshold-DATA3-sdk33-m40-cc47.json",
+    "old_runtime_and_sources_unchanged": true,
+    "new_Train_started": false,
+    "scientific_verdict": null
+  },
+  "subsequent_tests_and_scientific_repeat": {
+    "queued": true,
+    "job": "/media/user/Data/TimeLearnerRefactor/requests/DATA3-Python23-and-large-Branch-threshold-repeat-cc51",
+    "owner": {
+      "pid": 1774327,
+      "start_ticks": "457980161",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "controls_commit": "3ff3b8c08e3d409ef21f9286db65860068fbf27d",
+    "controls_bundle": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/44/44cb11aa7adf269a4031573bb9bf81233ea966eb1e3957dcecab5e7835a8a057",
+      "sha256": "44cb11aa7adf269a4031573bb9bf81233ea966eb1e3957dcecab5e7835a8a057",
+      "bytes": 3934
+    },
+    "waiting_for": "physical-threshold-DATA3-sdk33-m40-cc47 closed actual33 pass",
+    "expected_Python_tests": 23,
+    "threshold": 0.09864679711103091,
+    "planned_real_trials": 8,
+    "source_Train_restarted": false,
+    "scientific_verdict": null
+  },
+  "latest_kernel_observation": {
+    "observed_utc": "2026-11-24T07:19:28.058412+00:00",
+    "records": {
+      "readbacks/physical-threshold-DATA3-sdk33-m40-cc47/owner.json": {
+        "pid": 1696119,
+        "start_ticks": "457946644",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "uid": 1000
+      },
+      "readbacks/physical-threshold-DATA3-sdk33-m40-cc47/native-launch.json": {
+        "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-physical-threshold-DATA3-sdk33-m40-cc47-controller",
+        "request": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-physical-threshold-DATA3-sdk33-m40-cc47-prepared/owned-native-request.json",
+          "sha256": "363e60f098fb25763979602b23f43a7254f1533ffc7d255b131c791472e36788",
+          "size": 749
+        },
+        "source_commit": "4a87682c301a8f9db5f7021af956274518ccf919",
+        "selected_tests": 33,
+        "scientific_verdict": null
+      }
+    },
+    "groups": [],
+    "queue": {
+      "owner.json": {
+        "pid": 1774327,
+        "start_ticks": "457980161",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "uid": 1000
+      },
+      "owner_live": true
+    },
+    "physical-threshold-DATA3-sdk33-m40-cc47_owner_live": true,
+    "controller": {
+      "supervisor_live": true,
+      "outer_execution": "running",
+      "outer_closed": false,
+      "outer_binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "dfdc01f85067bcbb24120559b61508907cb0e84da1c5b084caec1d83ac6fc926",
+        "unit": "timelearner-af6fa3d9-3699-4695-9dd3-d841265f3799.service",
+        "invocation_id": "230e5dc6fcf84a67a531a8470db0639e",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-af6fa3d9-3699-4695-9dd3-d841265f3799.service",
+        "initial_main_pid": 1771849,
+        "initial_start_ticks": "457969442",
+        "sha256": "61a3881f7860123c4fe0ebbd73cf71ed74aaba5dbf1975d10c93813e1f2f6ac2"
+      },
+      "result_reason": null
+    }
+  },
+  "tests_passed_not_yet_established": true,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
