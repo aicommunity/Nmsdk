@@ -1,0 +1,55 @@
+{
+  "kind": "timelearner_Elder_corrected_SDK_current_readback",
+  "schema_version": 1,
+  "observed_utc": "2026-11-24T01:41:19.638395+00:00",
+  "owner_live": true,
+  "files": {
+    "owner.json": {
+      "pid": 4022113,
+      "start_ticks": "505408756",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "waiting-for-visual-closure.json": {
+      "predecessor": "/home/user/timelearner-refactor/readbacks/classic-measured-count-visuals-elder-z14",
+      "wait_budget_seconds": 10800,
+      "scientific_verdict": null
+    },
+    "native-launch.json": {
+      "controller": "/home/user/timelearner-refactor/readbacks/s07-n0-length-full-sdk-elder-ax35-controller",
+      "request": {
+        "path": "/home/user/timelearner-refactor/readbacks/s07-n0-length-full-sdk-elder-ax35-prepared/owned-native-request.json",
+        "sha256": "798d4bfc19e281f978ab1b1ebe8a469da53eb9aa39c346fd1dbd30295fec0cb9",
+        "size": 708
+      },
+      "source_commit": "49c4f08cc4cbc4675ce3e6dba160b931ab18d556",
+      "selected_tests": 114,
+      "scientific_verdict": null
+    },
+    "canonical-returncode.json": {
+      "returncode": 0
+    }
+  },
+  "reserved": {
+    "disk_bytes": 8589934592,
+    "memory_bytes": 12884901888,
+    "slots": 1
+  },
+  "held_leases": [
+    {
+      "job_id": "s07-n0-length-full-sdk-elder-ax35",
+      "state": "held",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 4092589,
+        "start_ticks": "505420180",
+        "uid": 1000
+      },
+      "owner_status": "identity_live",
+      "heartbeat_expired": false
+    }
+  ],
+  "original_resource_mismatch_closed_before_build": true,
+  "scientific_verdict": null
+}
