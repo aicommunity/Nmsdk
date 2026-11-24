@@ -5,12 +5,15 @@ import { Workbook, SpreadsheetFile } from '@oai/artifact-tool';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const work = path.join(root, 'Reports/StructTrainClassic/DiscrepancyDiagnosis-20261124');
-const delivery = path.join(root, 'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/DiscrepancyDiagnosis');
+const checkpoint = process.argv.includes('--checkpoint');
+const delivery = checkpoint ? path.join(work, 'checkpoint') :
+  path.join(root, 'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/DiscrepancyDiagnosis');
 const read = async name => JSON.parse(await fs.readFile(path.join(work, name), 'utf8'));
 const data = await read('diagnosis-analysis.json');
 const report = await read('diagnosis-report.json');
 const historical = await read('archival-answers.json');
 const source = await read('source-audit.json');
+const coverage = await read('diagnosis-coverage.json');
 const workbook = Workbook.create();
 const chartIndex = [];
 
@@ -47,10 +50,23 @@ function table(name, title, headers, rows, widths = []) {
 
 table('Обзор', 'Диагностика расхождений NMSDK', ['Наблюдение', 'Результат', 'Граница вывода'],
   report.overview, [52, 24, 88]);
+const findings = table('Статусы причин', 'Степень подтверждения причин и границы измерений',
+  ['Наблюдение', 'Статус', 'Основание'], report.findings, [50, 39, 78]);
+findings.getRange(`A4:C${report.findings.length + 3}`).format = { rowHeight: 43, wrapText: true };
 table('Источники и состояния', 'Соответствие исторических файлов и исходных ячеек',
   ['Лист', 'Состояние', 'Диапазон', 'Файл', 'SHA256', 'Число ответов', 'Лишние значения', 'Дендриты и синапсы'],
   source.protocols.map(r => [r.sheet, r.state, r.range, r.file, r.file_sha256, r.mapped_answers,
     r.unmapped_answer_lines.join(', '), r.graph_ds.join(', ')]), [44, 15, 18, 64, 68, 18, 18, 34]);
+if (source.structure) {
+  const p = source.structure;
+  table('Структурный источник', 'Исторические длины и числа синапсов NT и NL',
+    ['Запись', 'Объект', 'Алгоритм', 'Вариант', 'Лист', 'Ячейки длин', 'Ячейки синапсов', 'Длины',
+     'Синапсы в источнике', 'Использовано для графа', 'Файл', 'SHA256', 'Проверка'],
+    p.rows.map(r => [r.record, r.input_id, r.algorithm, r.label, p.sheet, r.length_range, r.synapse_range,
+      r.dendrites.join(', '), r.original_synapses.map(v => v ?? '—').join(', '),
+      r.effective_synapses?.join(', '), p.path, p.sha256, r.directory]),
+    [15, 13, 14, 33, 26, 21, 21, 26, 30, 24, 56, 68, 58]);
+}
 const raw = table('Архивные ответы', 'Исходные ответы и ответы двух предыдущих серий',
   ['Модель', 'Стартовый снимок', 'Объект Iris', 'Ячейка', 'История', 'Проверка снимка', 'Новое обучение',
    'Различие со снимком', 'Различие с новым', 'Файл', 'SHA256', 'Журнал проверки', 'Журнал новой модели'],
@@ -62,10 +78,10 @@ raw.getRange(`H4:I${historical.length + 3}`).formulas = historical.map((_, index
 });
 table('Опыты инференса', 'Обратные контроли на неизменных графах',
   ['Модель', 'Фактор', 'Повтор', 'Изменилось', 'Возврат', 'История до', 'История после', 'TP до', 'FP до', 'FN до',
-   'TN до', 'TP после', 'FP после', 'FN после', 'TN после', 'Журнал вмешательства'],
+   'TN до', 'TP после', 'FP после', 'FN после', 'TN после', 'Входов', 'Тип наблюдения', 'Журнал вмешательства'],
   data.inference_comparisons.map(r => [r.label, r.factor, r.repeat, r.changed.length, r.reversal ? 'да' : 'нет',
     r.history_diff_before, r.history_diff_after, ...Object.values(r.metrics_before), ...Object.values(r.metrics_after),
-    r.logs[1]]), [20, 16, 12, 15, 12, 17, 17]);
+    r.tested_inputs, r.observation_mode, r.logs[1]]), [20, 16, 12, 15, 12, 17, 17]);
 table('Изменённые ответы', 'Ответ и запас до порога для каждого переключения',
   ['Модель', 'Фактор', 'Повтор', 'Объект Iris', 'До', 'После', 'История', 'До, мкВ', 'После, мкВ', 'Первый такт до', 'Первый такт после', 'Журнал'],
   data.inference_comparisons.flatMap(r => r.changed.map(c => [r.label, r.factor, r.repeat, c.id, c.before,
@@ -73,23 +89,37 @@ table('Изменённые ответы', 'Ответ и запас до пор
   [22, 17, 12, 14, 10, 10, 12, 16, 16, 19, 19, 58]);
 table('Траектории обучения', 'Нативные результаты и ограничения',
   ['Серия', 'Задание', 'Статус', 'Причина', 'Итерации', 'Такты', 'Модельное время, с', 'Время запуска, с',
-   'Дендриты', 'Синапсы', 'Свой вход', 'Журнал'],
+   'Дендриты', 'Синапсы', 'Свой вход', 'Пик LTZone, мВ', 'Журнал обучения', 'Журнал своего входа'],
   data.training.map(r => [r.phase, r.run, r.status, r.stop_reason, r.iterations, r.ticks, r.elapsed_model_s,
-    r.elapsed_wall_s, r.d.join(', '), r.s.join(', '), r.own_recognized, r.directory]),
-  [23, 43, 27, 34, 13, 13, 18, 18, 22, 22, 15, 58]);
+    r.elapsed_wall_s, r.d.join(', '), r.s.join(', '), r.own_recognized, r.own_zone_mV, r.directory, r.own_log]),
+  [23, 43, 27, 34, 13, 13, 18, 18, 22, 22, 15, 19, 58]);
 table('Физические параметры', 'Параметры в сохранённом графе после обучения',
   ['Серия', 'Задание', 'Сопротивление, Ом', 'Секреция, с', 'Диссоциация, с', 'Число компонентов'],
   data.training.flatMap(r => r.profile.map(p => [r.phase, r.run, +p.resistance_ohm, +p.secretion_s,
     +p.dissociation_s, p.components])), [25, 48, 23, 18, 21, 22]);
+table('Профиль фиксированного графа', 'Применённые параметры синапса при инференсе без обучения',
+  ['Модель', 'Профиль', 'Повтор', 'Срабатывания TP', 'Ложные FP', 'Пропуски FN', 'Отказы TN', 'Изменённые ID',
+   'Сопротивление, Ом', 'Секреция, с', 'Диссоциация, с', 'Компоненты', 'Журнал'],
+  data.profile_inference.flatMap(r => r.actual_profile.map(p => [r.label, r.profile, r.repeat,
+    ...Object.values(r.metrics), r.changed_ids.join(', '), +p.resistance_ohm, +p.secretion_s,
+    +p.dissociation_s, p.components, r.directory])), [18, 23, 12, 17, 17, 18, 18, 48, 24, 18, 21, 18, 56]);
 table('Контекст обучения', 'Живой тест, отдельный снимок и пауза',
   ['Схема', 'Повтор', 'Этап стенда', 'Итерации живой', 'Итерации снимок', 'Итерации пауза', 'Ошибки живой', 'Ошибки снимок',
-   'Длины живой', 'Длины снимок', 'Длины пауза', 'Синапсы живой', 'Синапсы снимок', 'Синапсы пауза'],
+   'Длины живой', 'Длины снимок', 'Длины пауза', 'Синапсы живой', 'Синапсы снимок', 'Синапсы пауза', 'Журнал снимка'],
   data.sequence_context.map(r => [r.scheme, r.repeat, r.stage, ...r.iterations, r.live_Q, r.snapshot_Q,
-    ...r.d.map(x => x.join(', ')), ...r.s.map(x => x.join(', '))]), [20, 13, 14, 18, 18, 18, 18, 18]);
+    ...r.d.map(x => x.join(', ')), ...r.s.map(x => x.join(', ')), r.snapshot_log]), [20, 13, 14, 18, 18, 18, 18, 18]);
+table('Первый переход', 'Префикс непрерывного переобучения от № 22 к № 37',
+  ['Повтор', 'С входа', 'На вход', 'Итерации архив', 'Итерации сейчас', 'Длины архив', 'Длины сейчас',
+   'Синапсы архив', 'Синапсы сейчас', 'Причина завершения', 'Журнал'],
+  data.warm_prefix_22_37.map(r => [r.repeat, r.from_id, r.to_id, r.historical_iterations, r.observed_iterations,
+    r.historical_d.join(', '), r.observed_d.join(', '), r.historical_s.join(', '), r.observed_s.join(', '),
+    r.stop_reason, r.log]), [13, 15, 15, 21, 21, 25, 25, 25, 25, 24, 60]);
 table('Первые различия', 'Первый наблюдаемый такт расхождения по сигналу',
-  ['Модель', 'Фактор', 'Объект Iris', 'Величина', 'Такт', 'Время до, с', 'Время после, с', 'Трасса'],
+  ['Модель', 'Фактор', 'Объект Iris', 'Величина', 'Такт', 'Компонент', 'Значение до', 'Значение после',
+   'Время до, с', 'Время после, с', 'Трасса'],
   data.tick_comparisons.flatMap(r => r.first_events.map(e => [r.label, r.factor, e.input_id, e.quantity,
-    e.tick, e.baseline_time_s, e.changed_time_s, r.logs[1]])), [24, 18, 16, 23, 13, 18, 18, 58]);
+    e.tick, JSON.stringify(e.component_index), JSON.stringify(e.before), JSON.stringify(e.after),
+    e.baseline_time_s, e.changed_time_s, r.logs[1]])), [24, 18, 16, 23, 13, 14, 31, 31, 18, 18, 58]);
 table('Первые учебные различия', 'Сравнение решений и состояний обучения по общему префиксу',
   ['Фактор', 'Задание', 'Первая запись', 'Поля', 'Первые такты по величине', 'Итерации до', 'Итерации после',
    'Статус до', 'Статус после', 'База', 'Изменение'],
@@ -100,6 +130,18 @@ table('Запуски', 'Идентификация независимых пр�
   ['Серия', 'Задание', 'Статус', 'Время, с', 'SHA256 программы', 'SHA256 задания', 'Журнал'],
   data.processes.map(p => [p.phase, p.run, p.status, p.seconds, p.binary_sha256, p.manifest_sha256, p.path]),
   [24, 42, 24, 16, 68, 68, 60]);
+table('Покрытие', 'Сопоставление запланированных и выполненных серий',
+  ['Серия', 'Запланировано', 'Завершено', 'Выполняется', 'Неуспешные процессы', 'Ожидают запуска'],
+  coverage.phases.map(r => [r.phase, r.planned, r.completed_processes, r.running,
+    r.failed_processes, r.pending_processes]), [31, 19, 17, 19, 26, 23]);
+table('Повтор прежних ответов', 'Контроль прежних измерений по закреплённым графам',
+  ['Модель', 'Вектор совпал', 'Тот же бинарник', 'Фактический SHA256', 'Исторический SHA256', 'Журнал'],
+  (data.reference_audit ?? []).map(r => [r.label, r.matches ? 'да' : 'нет', r.exact_original_binary ? 'да' : 'нет',
+    r.actual_binary, r.original_binary, r.log]), [27, 18, 19, 68, 68, 63]);
+table('Загрузка после сохранения', 'Реакция первого входа после повторного открытия',
+  ['Серия', 'Задание', 'Тот же ответ', 'Тот же пик сом', 'Журнал'],
+  (data.roundtrip_controls ?? []).map(r => [r.phase, r.run, r.same_first_answer ? 'да' : 'нет',
+    r.same_first_peak ? 'да' : 'нет', r.log]), [22, 42, 19, 21, 65]);
 
 const palette = ['#606972', '#166280', '#A35627', '#54765A'];
 for (const figure of report.sections.flatMap(section => section.charts ?? [])) {
@@ -122,7 +164,7 @@ for (const figure of report.sections.flatMap(section => section.charts ?? [])) {
     if (!figure.type || figure.type === 'line') {
       series.line = { fill: color, width: 2, style: 'dashed' };
       series.marker = { symbol: ['circle', 'square', 'diamond', 'triangle'][index % 4], size: 10,
-        fill: index === 0 ? 'none' : color, line: { fill: color, width: 1.4 } };
+        fill: index === 0 ? 'none' : color, line: { fill: color, width: 1.4, style: 'solid' } };
     }
   });
   chartIndex.push({ id, min, max, rows, x, y });
@@ -131,4 +173,4 @@ for (const figure of report.sections.flatMap(section => section.charts ?? [])) {
 const xlsx = await SpreadsheetFile.exportXlsx(workbook);
 await fs.mkdir(delivery, { recursive: true });
 await xlsx.save(path.join(delivery, 'DiscrepancyDiagnosis.xlsx'));
-await fs.writeFile(path.join(work, 'chart-index.json'), JSON.stringify(chartIndex, null, 2));
+await fs.writeFile(path.join(checkpoint ? delivery : work, 'chart-index.json'), JSON.stringify(chartIndex, null, 2));

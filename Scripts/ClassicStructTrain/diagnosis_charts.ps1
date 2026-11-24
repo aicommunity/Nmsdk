@@ -1,12 +1,18 @@
 [CmdletBinding()]
-param()
+param([switch] $Checkpoint)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../..')).Path
 $study = Join-Path $repo 'Reports/StructTrainClassic/DiscrepancyDiagnosis-20261124'
 $book = Join-Path $repo 'Reports/StructTrainClassic/outputs/01a20798-0fce-7661-bd9d-b3506770ffc9/DiscrepancyDiagnosis/DiscrepancyDiagnosis.xlsx'
 $chartDirectory = Join-Path $study 'charts'
+$indexDirectory = $study
+if ($Checkpoint) {
+    $indexDirectory = Join-Path $study 'checkpoint'
+    $chartDirectory = Join-Path $indexDirectory 'charts'
+    $book = Join-Path $indexDirectory 'DiscrepancyDiagnosis.xlsx'
+}
 New-Item -Path $chartDirectory -ItemType Directory -Force | Out-Null
-$figures = Get-Content -LiteralPath (Join-Path $study 'chart-index.json') -Encoding utf8 -Raw | ConvertFrom-Json
+$figures = Get-Content -LiteralPath (Join-Path $indexDirectory 'chart-index.json') -Encoding utf8 -Raw | ConvertFrom-Json
 $digest = (Get-FileHash -LiteralPath $book -Algorithm SHA256).Hash
 $excel = New-Object -ComObject Excel.Application
 $ownExcel = !$excel.Visible -and $excel.Workbooks.Count -eq 0
@@ -32,15 +38,22 @@ try {
         if ($chart.Axes(1).AxisTitle.Text -ne $figure.x -or $chart.Axes(2).AxisTitle.Text -ne $figure.y) {
             throw "Incorrect axis labels for $($figure.id)"
         }
+        $lastCell = $sheet.Cells.Item($figure.rows.Count + 3, $figure.rows[0].Count)
+        $values = $sheet.Range($sheet.Cells.Item(4, 1), $lastCell).Value2
+        $minimum = $chart.Axes(2).MinimumScale
+        $maximum = $chart.Axes(2).MaximumScale
         for ($row = 0; $row -lt $figure.rows.Count; $row++) {
+            if ([string] $values[($row + 1), 1] -ne [string] $figure.rows[$row][0]) {
+                throw "Incorrect category label in $($figure.id)"
+            }
             for ($column = 1; $column -lt $figure.rows[$row].Count; $column++) {
                 $expected = $figure.rows[$row][$column]
-                $actual = $sheet.Cells.Item($row + 4, $column + 1).Value2
+                $actual = $values[($row + 1), ($column + 1)]
                 if ($null -eq $expected) {
                     if ($null -ne $actual -and $actual -ne '') { throw "Unexpected value in $($figure.id)" }
                 } elseif ($null -eq $actual -or [Math]::Abs($actual - $expected) -gt 1e-9) {
                     throw "Chart source values differ for $($figure.id)"
-                } elseif ($actual -lt $chart.Axes(2).MinimumScale -or $actual -gt $chart.Axes(2).MaximumScale) {
+                } elseif ($actual -lt $minimum -or $actual -gt $maximum) {
                     throw "Value clipped by axis for $($figure.id)"
                 }
             }
@@ -59,4 +72,4 @@ try {
 if ($digest -ne (Get-FileHash -LiteralPath $book -Algorithm SHA256).Hash) { throw 'Read only workbook changed' }
 [ordered]@{ passed = $true; xlsx_sha256 = $digest; charts = $checks } |
     ConvertTo-Json -Depth 5 |
-    Set-Content -LiteralPath (Join-Path $study 'native-chart-audit.json') -Encoding utf8
+    Set-Content -LiteralPath (Join-Path $indexDirectory 'native-chart-audit.json') -Encoding utf8

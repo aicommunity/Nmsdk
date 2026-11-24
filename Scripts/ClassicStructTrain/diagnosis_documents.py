@@ -85,9 +85,12 @@ def plan():
     doc.save(DELIVERY / "DiscrepancyDiagnosisPlan.docx")
 
 
-def report():
+def report(checkpoint=False):
     data = load(WORK / "diagnosis-report.json")
     doc = document("Диагностика расхождений исторического обучения и инференса NMSDK")
+    if checkpoint:
+        paragraph(doc, "Промежуточная версия. Включены завершившиеся наблюдения на момент формирования книги.")
+    chart_root = WORK / "checkpoint/charts" if checkpoint else WORK / "charts"
     paragraph(doc, data["lead"])
     images = []
     for section in data["sections"]:
@@ -95,7 +98,7 @@ def report():
         for text in section["paragraphs"]:
             paragraph(doc, text)
         for chart in section.get("charts", []):
-            image = WORK / "charts" / (chart["id"] + ".png")
+            image = chart_root / (chart["id"] + ".png")
             p = doc.add_paragraph()
             p.paragraph_format.first_line_indent = Cm(0)
             p.paragraph_format.keep_with_next = True
@@ -104,16 +107,23 @@ def report():
             doc.add_paragraph(f"Рисунок {len(images)+1} — {chart['title']}", "Caption")
             paragraph(doc, chart["analysis"])
             images.append(hashlib.sha256(image.read_bytes()).hexdigest())
-    target = DELIVERY / "DiscrepancyDiagnosis.docx"
+    destination = WORK / "checkpoint" if checkpoint else DELIVERY
+    target = destination / "DiscrepancyDiagnosis.docx"
     doc.save(target)
     with ZipFile(target) as archive:
         actual = [hashlib.sha256(archive.read(name)).hexdigest() for name in archive.namelist()
                   if name.startswith("word/media/")]
     assert actual == images
-    save(WORK / "docx-image-audit.json", {"passed": True, "images": images, "file": relative(target)})
+    audit = destination if checkpoint else WORK
+    save(audit / "docx-image-audit.json", {"passed": True, "images": images, "file": relative(target)})
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("file", choices=["plan", "report"])
-    {"plan": plan, "report": report}[parser.parse_args().file]()
+    parser.add_argument("--checkpoint", action="store_true")
+    options = parser.parse_args()
+    if options.file == "plan":
+        plan()
+    else:
+        report(options.checkpoint)

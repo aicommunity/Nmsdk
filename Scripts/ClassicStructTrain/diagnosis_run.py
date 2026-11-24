@@ -32,6 +32,13 @@ def result(folder):
     return records(folder / "results.jsonl")[0]
 
 
+def snapshot_folder(name, aliases):
+    key = name + "-baseline-r1"
+    directory = WORK / "runs/snapshot-inference"
+    known = directory / key
+    return known if (known / "results.jsonl").exists() else directory / aliases.get(key, key)
+
+
 def old_variant(name):
     return load(PREVIOUS / "variants" / (name + ".json"))
 
@@ -74,12 +81,19 @@ def launch(group, name, repeat, manifest, binary_meta, suite, timeout=660):
         raise ValueError(f"Invalid Release binary: {binary}")
     old_process = folder / "process.json"
     job_path = CONFIG / "Jobs" / group / (folder.name + ".json")
-    if old_process.exists():
-        previous = load(old_process)
-        while previous["status"] == "running":
-            time.sleep(1)
-            previous = load(old_process)
-        if previous["status"] == "completed":
+    try:
+        folder.mkdir(parents=True, exist_ok=False)
+    except FileExistsError:
+        deadline = time.monotonic() + timeout + 150
+        previous = {}
+        while previous.get("status") in (None, "running") and time.monotonic() < deadline:
+            try:
+                previous = load(old_process)
+            except (FileNotFoundError, json.JSONDecodeError):
+                previous = {}
+            if previous.get("status") in (None, "running"):
+                time.sleep(1)
+        if previous.get("status") == "completed":
             if previous["binary_sha256"] != binary_meta["binary_sha256"] or load(job_path) != manifest:
                 raise ValueError(f"Manifest changed under an existing run ID: {folder}")
             return folder
@@ -162,6 +176,7 @@ FACTORS = {
     "reset": {"independent_reset": True},
     "wrapper": {"observe_wrapper": True},
 }
+MEASURED_FACTORS = ("order", "window", "precision", "reset")
 PILOT = {
     "NL22", "NT45", "NT60", "NT64(8)", "NT64(9)", "NT111", "new-NT111",
     "NL111", "mean-51-61", "transition-03", "transition-13",
@@ -218,6 +233,85 @@ def baseline_and_pilot(items, workers):
                 folder = WORK / "runs/pilot" / f"{item['label']}-{control}-r{repeat}"
                 if result(folder)["answers"] != baseline:
                     raise ValueError(f"Instrumented baseline is not repeatable: {folder}")
+
+
+def adaptive_pilot(items, workers):
+    """Use full first passes and verify shorter independent repeats against them."""
+    selected = [item for item in items if item["label"] in PILOT]
+    for_first = ("baseline", *MEASURED_FACTORS, "reversal")
+    parallel(lambda item, mode: infer("pilot", item, mode, 1),
+             [(item, mode) for item in selected for mode in for_first], workers)
+
+    requests = []
+    schedule = []
+    for item in selected:
+        label = item["label"]
+        originals = {mode: result(WORK / "runs/pilot" / f"{label}-{mode}-r1") for mode in for_first}
+        base = originals["baseline"]
+        assert base["answers"] == originals["reversal"]["answers"], label
+        indices = [0]
+        interventions = list(MEASURED_FACTORS)
+        if any(window["first_zone_tick"] == 0 for window in base["decode_windows"]):
+            interventions.append("first-tick")
+            originals["first-tick"] = result(infer("pilot", item, "first-tick", 1))
+        for mode in interventions:
+            changed = originals[mode]
+            ids = differences(base, changed)
+            indices.extend(base["input_ids"].index(identifier) for identifier in ids)
+            if not ids:
+                index = max(range(len(base["answers"])), key=lambda i: abs(
+                    base["zone_potential_peaks"][i] - changed["zone_potential_peaks"][i]))
+                indices.append(index)
+        # Preserve the complete prefix through every changed binary answer and,
+        # for null binary effects, through the largest observed peak difference.
+        prefix = base["input_ids"][:max(indices) + 1]
+        subset = deepcopy(item)
+        subset["manifest"]["legacy_job"]["input_ids"] = prefix
+        schedule.append({"label": label, "full": len(base["input_ids"]), "verified_prefix": len(prefix),
+                         "physical_factors": interventions})
+        for repeat in (2, 3):
+            for mode in ("baseline", *interventions, "reversal"):
+                requests.append((subset, mode, repeat, originals[mode]))
+    save(WORK / "verified-prefix-schedule.json", schedule)
+
+    def compare(item, mode, repeat, original):
+        folder = infer("pilot-prefix", item, mode, repeat)
+        observed = result(folder)
+        length = len(observed["input_ids"])
+        fields = ("input_ids", "answers", "zone_potential_peaks", "first_spikes", "decode_windows")
+        assert all(observed[key] == original[key][:length] for key in fields), (item["label"], mode, repeat)
+
+    parallel(compare, requests, workers)
+
+
+def targeted_window(workers):
+    item = next(item for item in cases() if item["label"] == "NT45")
+    base = result(WORK / "runs/pilot/NT45-baseline-r1")
+    altered = result(WORK / "runs/pilot/NT45-window-r1")
+    changed = differences(base, altered)
+    assert changed, "The window intervention has no binary change to localize"
+    length = max(base["input_ids"].index(input_id) for input_id in changed) + 1
+    prefix = deepcopy(item)
+    prefix["manifest"]["legacy_job"]["input_ids"] = base["input_ids"][:length]
+    fields = ("input_ids", "answers", "zone_potential_peaks", "first_spikes", "decode_windows")
+
+    def compare(mode, repeat):
+        observed = result(infer("pilot-window", prefix, mode, repeat))
+        original = altered if mode == "window" else base
+        assert all(observed[key] == original[key][:length] for key in fields), (mode, repeat)
+
+    tasks = [(mode, repeat) for repeat in (2, 3) for mode in ("baseline", "window", "reversal")]
+    parallel(compare, tasks, workers)
+
+
+def measured_run(label, condition, repeat, phase="pilot"):
+    """Prefer full passes and fall back to independently validated prefixes."""
+    for group in (phase, "pilot-prefix", "pilot-window") if phase == "pilot" else (phase,):
+        folder = WORK / "runs" / group / f"{label}-{condition}-r{repeat}"
+        metadata = folder / "process.json"
+        if metadata.exists() and load(metadata)["status"] == "completed":
+            return result(folder), folder
+    return None
 
 
 def run_references(items, workers):
@@ -321,6 +415,8 @@ def training_order(workers):
 def training_expansion(workers):
     chosen = []
     directory = WORK / "runs/training-factors"
+    resolution = WORK / "snapshot-resolution.json"
+    aliases = load(resolution)["aliases"] if resolution.exists() else {}
     ten = [22, 37, 45, 60, 64, 84, 90, 111, 129, 134]
     choices = [
         ("archive-default", "archive", "default", "default", ("trainer", "learner")),
@@ -336,9 +432,9 @@ def training_expansion(workers):
             name = f"{prefix}-{kind}-22"
             tested = [result(directory / f"{name}-r{rep}") for rep in range(1, 4)]
             base = result(directory / f"modern-default-{kind}-22-r1")
-            own = [result(WORK / "runs/snapshot-inference" / f"{name}-r{rep}-baseline-r1")["answers"][0]
-                   if (WORK / "runs/snapshot-inference" / f"{name}-r{rep}-baseline-r1" / "results.jsonl").exists() else None
-                   for rep in range(1, 4)]
+            folders = [snapshot_folder(f"{name}-r{rep}", aliases) for rep in range(1, 4)]
+            own = [result(folder)["answers"][0] if (folder / "results.jsonl").exists() else None
+                   for folder in folders]
             def signature(row):
                 return row["status"], row["iterations"], row["dendrites"], row["synapses"]
             changed = all(signature(test) == signature(tested[0]) for test in tested[1:])
@@ -350,13 +446,48 @@ def training_expansion(workers):
             if not passed:
                 continue
             for target in (i for i in ten if i not in existing):
-                for repeat in range(1, 4):
-                    job = {"id": f"{kind}-{target}", "kind": kind, "target_id": target, "target_class": (target-1)//50+1}
-                    jobs.append((f"{prefix}-{kind}-{target}", repeat, job, binary, profile, criterion))
+                job = {"id": f"{kind}-{target}", "kind": kind, "target_id": target, "target_class": (target-1)//50+1}
+                jobs.append((f"{prefix}-{kind}-{target}", 1, job, binary, profile, criterion))
     save(WORK / "training-expansion-decision.json", chosen)
     parallel(lambda name, rep, job, binary, profile, criterion:
              train("training-ten", name, rep, job, binary,
                    core={"profile": profile, "nt_stop": criterion}), jobs, workers)
+
+
+def expand_training_order(workers):
+    candidates = []
+    directory = WORK / "runs/training-order"
+    for kind in ("learner", "trainer"):
+        reference = []
+        altered = []
+        reversals = []
+        for repeat in range(1, 4):
+            for name, dataset in (("native", reference), ("disabled", altered), ("reversal", reversals)):
+                dataset.append(result(directory / f"{name}-{kind}-22-r{repeat}"))
+        def signature(row):
+            return row["status"], row["iterations"], row["dendrites"], row["synapses"]
+        eligible = ([signature(row) for row in reference] == [signature(row) for row in reversals]
+                    and all(signature(a) != signature(b) for a, b in zip(reference, altered, strict=True))
+                    and all(row["status"] == "completed" for row in altered))
+        own = []
+        if eligible:
+            for repeat, row in enumerate(altered, 1):
+                name = f"disabled-{kind}-22-r{repeat}"
+                item = frozen_case(name, directory / name / "trained", row, [22])
+                own.append(result(infer("snapshot-inference", item, "baseline", 1))["answers"][0])
+        candidates.append({"kind": kind, "reversal_reproduced": eligible, "own_after_reload": own,
+                           "expanded": eligible and own == [1, 1, 1]})
+    save(WORK / "training-order-expansion.json", candidates)
+    tasks = []
+    for row in candidates:
+        if not row["expanded"]:
+            continue
+        kind = row["kind"]
+        for target in (37, 45, 60, 84, 90, 129, 134):
+            job = {"id": f"{kind}-{target}", "kind": kind, "target_id": target, "target_class": (target-1)//50+1}
+            for label, binary in (("native", "VB"), ("disabled", "FO")):
+                tasks.append((f"{label}-{kind}-{target}", 1, job, binary))
+    parallel(lambda *args: train("training-ten-order", *args), tasks, workers)
 
 
 def differences(left, right):
@@ -364,7 +495,24 @@ def differences(left, right):
             if a != b]
 
 
-def expansion(workers):
+def trace_inference(item, factor, full_left, full_right, changed):
+    # Retain the exact leading stimulus sequence. Validate prefix results and
+    # model clocks against independently calculated full passes in both arms.
+    sample_order = full_left["input_ids"]
+    positions = [sample_order.index(identifier) for identifier in changed]
+    trace_ids = sorted(set(changed) | {sample_order[i-1] for i in positions if i})
+    prefix = sample_order[:max(positions)+1]
+    prefix_item = deepcopy(item)
+    prefix_item["manifest"]["legacy_job"]["input_ids"] = prefix
+    for condition, expected in (("baseline", full_left), (factor, full_right)):
+        folder = infer("tick-" + factor, prefix_item, condition, 1, trace_ids, binary_name="modern")
+        measured = result(folder)
+        for field in ("input_ids", "answers", "zone_potential_peaks", "first_spikes", "decode_windows"):
+            if measured[field] != expected[field][:len(prefix)]:
+                raise ValueError(f"Prefix changes {field}: {folder}")
+
+
+def expansion(workers, requested=None):
     items = cases()
     measured = set()
     for item in items:
@@ -373,36 +521,56 @@ def expansion(workers):
         for factor in FACTORS:
             changes = []
             for repeat in range(1, 4):
-                left = result(WORK / "runs/pilot" / f"{item['label']}-baseline-r{repeat}")
-                right = result(WORK / "runs/pilot" / f"{item['label']}-{factor}-r{repeat}")
+                measured_control = [measured_run(item["label"], control, repeat)
+                                    for control in ("baseline", factor, "reversal")]
+                if any(row is None for row in measured_control):
+                    break
+                left, right, reversal = (row[0] for row in measured_control)
+                n = min(len(row["answers"]) for row in (left, right, reversal))
+                if left["answers"][:n] != reversal["answers"][:n]:
+                    break
+                left, right = [dict(r, answers=r["answers"][:n], input_ids=r["input_ids"][:n]) for r in (left, right)]
                 changes.append(differences(left, right))
-            if changes[0] and all(row == changes[0] for row in changes[1:]):
+            if len(changes) == 3 and changes[0] and all(row == changes[0] for row in changes[1:]):
                 measured.add(factor)
+    permissible = measured if requested is None else measured.intersection(requested)
+    if not permissible:
+        print("No requested inference factor has passed three reversible independent controls", flush=True)
+        return
     save(WORK / "expansion-decision.json", {"factors_with_repeatable_binary_effect": sorted(measured),
-         "pilot": sorted(PILOT), "out_of_pilot_models": [item["label"] for item in items if item["label"] not in PILOT]})
+         "selected_for_this_batch": sorted(permissible), "pilot": sorted(PILOT),
+         "out_of_pilot_models": [item["label"] for item in items if item["label"] not in PILOT]})
 
     tasks = [(item, condition, repeat) for item in items if item["label"] not in PILOT
-             for repeat in range(1, 4) for condition in ("baseline", *sorted(measured), "reversal")]
+             for repeat in (1,) for condition in ("baseline", *sorted(permissible), "reversal")]
     parallel(lambda *args: infer("expansion", *args), tasks, workers)
-
-    def trace(item, factor, changed):
-        # First pass uses the entire original stream. Only detailed tracing is
-        # restricted to changed windows and their immediately preceding window.
-        sample_order = [sample["id"] for sample in item["manifest"]["dataset"]]
-        ids = sorted(set(changed) | {sample_order[sample_order.index(i)-1] for i in changed if sample_order.index(i)})
-        for condition in ("baseline", factor):
-            infer("tick-" + factor, item, condition, 1, ids, binary_name="modern")
 
     tasks = []
     for item in items:
         group = "pilot" if item["label"] in PILOT else "expansion"
-        left = result(WORK / "runs" / group / f"{item['label']}-baseline-r1")
-        for factor in FACTORS if group == "pilot" else sorted(measured):
-            right = result(WORK / "runs" / group / f"{item['label']}-{factor}-r1")
+        left_dir = WORK / "runs" / group / f"{item['label']}-baseline-r1"
+        if not (left_dir / "process.json").exists() or load(left_dir / "process.json")["status"] != "completed":
+            continue
+        left = result(left_dir)
+        for factor in sorted(permissible):
+            right_dir = WORK / "runs" / group / f"{item['label']}-{factor}-r1"
+            if not (right_dir / "process.json").exists() or load(right_dir / "process.json")["status"] != "completed":
+                continue
+            right = result(right_dir)
             changed = differences(left, right)
             if changed:
-                tasks.append((item, factor, changed))
-    parallel(trace, tasks, min(workers, 3))
+                tasks.append((item, factor, left, right, changed))
+    parallel(trace_inference, tasks, min(workers, 3))
+
+
+def trace_controls(workers):
+    items = {item["label"]: item for item in cases()}
+    jobs = []
+    for label, factor in (("NL22", "order"), ("new-NT111", "reset")):
+        base = result(WORK / "runs/pilot" / f"{label}-baseline-r1")
+        changed = result(WORK / "runs/pilot" / f"{label}-{factor}-r1")
+        jobs.append((items[label], factor, base, changed, differences(base, changed)))
+    parallel(trace_inference, jobs, workers)
 
 
 def frozen_case(label, source, training, ids=None):
@@ -442,7 +610,17 @@ def frozen_case(label, source, training, ids=None):
     if ids is not None:
         job["input_ids"] = ids
     manifest["legacy_job"] = job
-    return {"label": label, "manifest": manifest}
+    return {"label": label, "manifest": manifest,
+            "files": {relative(file): sha(file) for file in target.iterdir()
+                      if file.is_file() and file.name != "adapter-audit.json"}}
+
+
+def frozen_signature(item):
+    manifest = deepcopy(item["manifest"])
+    manifest["legacy_job"].pop("id")
+    manifest["legacy_job"].pop("config")
+    file_hashes = {Path(name).name: digest for name, digest in item["files"].items()}
+    return json.dumps([manifest, file_hashes], sort_keys=True, separators=(",", ":"))
 
 
 def snapshots(workers):
@@ -461,7 +639,7 @@ def snapshots(workers):
             jobs.append(frozen_case(identifier, source, row, row["job"]["evaluation_ids"]))
     # Test the trained input on exact saved states of the first detected factor
     # pairs and the plain/traced pilots. The mean uses its recorded vector.
-    for group in ("training-pilot", "training-factors", "training-order", "training-ten"):
+    for group in ("training-pilot", "training-factors", "training-order", "training-ten", "training-ten-order"):
         for run in sorted((WORK / "runs" / group).glob("*/results.jsonl")):
             if load(run.with_name("process.json"))["status"] != "completed":
                 continue
@@ -473,16 +651,34 @@ def snapshots(workers):
             if not target:
                 item["manifest"]["dataset"][0] = {"id": 1, "class": 2, "pattern": row["job"]["pattern"]}
             jobs.append(item)
-    parallel(lambda item: infer("snapshot-inference", item, "baseline", 1), [(job,) for job in jobs], workers)
+    representatives = {}
+    aliases = {}
+    # Keep prior measurements where available. Reuse only byte-identical
+    # frozen configurations with identical manifests and the same Release.
+    jobs.sort(key=lambda item: not (WORK / "runs/snapshot-inference"
+                                    / (item["label"] + "-baseline-r1")).exists())
+    for item in jobs:
+        signature = frozen_signature(item)
+        existing = representatives.setdefault(signature, item)
+        if existing is not item:
+            aliases[item["label"] + "-baseline-r1"] = existing["label"] + "-baseline-r1"
+    save(WORK / "snapshot-resolution.json", {
+        "variant": variant("main")["binary_sha256"], "requested": len(jobs), "aliases": aliases,
+        "representatives": [item["label"] + "-baseline-r1" for item in representatives.values()],
+    })
+    parallel(lambda item: infer("snapshot-inference", item, "baseline", 1),
+             [(job,) for job in representatives.values()], workers)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=["package", "inference", "training", "sequences", "nt80", "strict",
                                           "parser", "factors", "expansion", "snapshots", "reference",
-                                          "training-order", "training-expansion"])
+                                          "training-order", "training-expansion", "traces", "adaptive-pilot",
+                                          "expand-training-order", "targeted-window"])
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--variant", default="main")
+    parser.add_argument("--factor", action="append", choices=tuple(FACTORS))
     args = parser.parse_args()
     if args.action == "package":
         print(package(args.variant))
@@ -490,6 +686,10 @@ def main():
         items = cases()
         save(WORK / "locked-inference-cases.json", items)
         baseline_and_pilot(items, args.workers)
+    elif args.action == "adaptive-pilot":
+        adaptive_pilot(cases(), args.workers)
+    elif args.action == "targeted-window":
+        targeted_window(args.workers)
     elif args.action == "reference":
         run_references(cases(), args.workers)
     elif args.action == "training":
@@ -504,8 +704,12 @@ def main():
         training_order(args.workers)
     elif args.action == "training-expansion":
         training_expansion(args.workers)
+    elif args.action == "expand-training-order":
+        expand_training_order(args.workers)
+    elif args.action == "traces":
+        trace_controls(args.workers)
     elif args.action == "expansion":
-        expansion(args.workers)
+        expansion(args.workers, args.factor)
     elif args.action == "snapshots":
         snapshots(args.workers)
     else:

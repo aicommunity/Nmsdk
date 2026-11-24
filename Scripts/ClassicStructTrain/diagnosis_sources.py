@@ -21,7 +21,7 @@ SOURCE_NAMES = {
 }
 
 
-def numeric_cells(path, sheet):
+def source_cells(path, sheet, with_text=False):
     with ZipFile(path) as archive:
         workbook = ET.fromstring(archive.read("xl/workbook.xml"))
         node = next(row for row in workbook.findall(".//{*}sheet") if row.get("name") == sheet)
@@ -30,9 +30,18 @@ def numeric_cells(path, sheet):
         target = next(row.get("Target") for row in targets if row.get("Id") == relationship)
         member = target.lstrip("/") if target.startswith("/") else posixpath.normpath("xl/" + target)
         xml = ET.fromstring(archive.read(member))
-        return {cell.get("r"): float(cell.findtext("{*}v"))
-                for cell in xml.findall(".//{*}sheetData/{*}row/{*}c")
-                if cell.get("t", "n") == "n" and cell.findtext("{*}v") is not None}
+        shared = (["".join(node.itertext()) for node in ET.fromstring(archive.read("xl/sharedStrings.xml"))]
+                  if with_text else [])
+        values = {}
+        for cell in xml.findall(".//{*}sheetData/{*}row/{*}c"):
+            kind, value = cell.get("t", "n"), cell.findtext("{*}v")
+            if value is None:
+                continue
+            if kind == "n":
+                values[cell.get("r")] = float(value)
+            elif with_text and kind == "s":
+                values[cell.get("r")] = shared[int(value)]
+        return values
 
 
 def confusion(answers, ids, target):
@@ -53,7 +62,7 @@ def run():
         assert sha(ROOT / item["path"]) == item["sha256"], item["path"]
     diagnostic = load(PREVIOUS / "report-data.json")
     book = ARCHIVE / "Тестирование/Распознавание/Распознавание.xlsx"
-    cells = numeric_cells(book, "Sheet1")
+    cells = source_cells(book, "Sheet1")
     book_hash = sha(book)
     answer_rows = []
     for column in diagnostic["recognition"]:
@@ -74,9 +83,19 @@ def run():
 
     book = RESEARCH / "Обучение нескольким примерам.xlsx"
     book_hash = sha(book)
-    cache = {name: numeric_cells(book, name) for name in SOURCE_NAMES}
+    cache = {name: source_cells(book, name) for name in SOURCE_NAMES}
     references = load(OLD / "protocol-references.json")
     science = load(OLD / "scientific-comparison-data.json")
+    structural_source = science["primary_source"]
+    structural_book = ROOT / "Docs/ClassicStructTrainExperiments" / structural_source["relative"]
+    assert sha(structural_book) == structural_source["sha256"]
+    structural_cells = source_cells(structural_book, structural_source["sheet"], with_text=True)
+    for row in structural_source["rows"]:
+        columns = (list("GHIJK"), list("RSTUV")) if row["algorithm"] == "NT" else (
+            list("LMNOP"), ["W", "X", "Y", "Z", "AA"])
+        assert structural_cells[f"A{row['row']}"] == row["input_id"]
+        for field, keys in zip(("dendrites", "original_synapses"), columns, strict=True):
+            assert row[field] == [structural_cells.get(f"{key}{row['row']}") for key in keys], row["record"]
     state_rows, discrepancies = [], []
     for row in references:
         folder, offset = SOURCE_NAMES[row["sheet"]]
@@ -117,6 +136,7 @@ def run():
     assert sha(duplicate_a) == sha(duplicate_b)
     save(WORK / "source-audit.json", {
         "recognition_cells_verified": len(answer_rows), "protocols": state_rows,
+        "structure": {**structural_source, "path": relative(structural_book)},
         "unmapped_records": discrepancies, "unpaired_files": unpaired,
         "duplicate_single_iteration_files": [relative(duplicate_a), relative(duplicate_b)],
         "original_2022_callable_recognition_chain_recovered": False,
