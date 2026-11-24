@@ -22,6 +22,8 @@ def project_terminal_search_summary(summary, model):
             'search_report_terminal_summary_not_closed')
     history = summary['historical_summary']
     historical = _project_summary(history, model)
+    require(summary['outcome'] == historical['outcome'] and summary['reason'] == historical['reason'],
+            'search_report_terminal_training_outcome_changed')
     transcript_epoch = count(summary['transcript_model_epoch'])
     actual_epoch = count(summary['model_epoch'])
     require(transcript_epoch == count(history['model_epoch']) and actual_epoch >= transcript_epoch,
@@ -37,7 +39,8 @@ def project_terminal_search_summary(summary, model):
         require(journal and event == journal[-1] and
                 event['kind'] == 'timelearner_native_terminal_selection_event' and
                 type(event['schema_version']) is int and event['schema_version'] == 2 and
-                event['session_attempt'] == summary['session_attempt'],
+                event['session_attempt'] == summary['session_attempt'] and
+                event['stopped_outcome'] == summary['outcome'] and event['stopped_reason'] == summary['reason'],
                 'search_report_terminal_current_event')
         require(event['search_terminal_epoch'] == transcript_epoch and
                 event['search_terminal_revision'] == historical['actual_model_revision'] and

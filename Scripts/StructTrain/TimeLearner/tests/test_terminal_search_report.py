@@ -11,6 +11,7 @@ from .test_training_search_report import fixture
 def terminal_fixture():
     history, model = fixture()
     history['model_epoch'] = 33
+    history['reason'] = 'wall'
     history['actual_parameters'][0]['length'] = 202
     history['final_group_ids'] = ['historical-final/0', 'historical-final/1']
     actual = deepcopy(history['actual_parameters']); actual[0]['length'] = 200
@@ -85,6 +86,16 @@ class TerminalSearchReportTest(unittest.TestCase):
 
     def test_resigned_fresh_certificate_claim_is_rejected(self):
         summary, model = terminal_fixture(); summary['terminal_event']['fresh_all_input_verification'] = True
+        resign(summary)
+        with self.assertRaises(EvidenceError): project_terminal_search_summary(summary, model)
+
+    def test_resigned_changed_training_outcome_is_rejected(self):
+        summary, model = terminal_fixture(); summary['outcome'] = 'exact'
+        resign(summary)
+        with self.assertRaises(EvidenceError): project_terminal_search_summary(summary, model)
+
+    def test_resigned_changed_stop_reason_is_rejected(self):
+        summary, model = terminal_fixture(); summary['reason'] = 'different'
         resign(summary)
         with self.assertRaises(EvidenceError): project_terminal_search_summary(summary, model)
 
