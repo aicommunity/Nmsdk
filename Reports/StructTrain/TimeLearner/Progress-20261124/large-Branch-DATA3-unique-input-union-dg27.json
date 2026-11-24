@@ -1,0 +1,278 @@
+{
+  "catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-24/large-Branch-DATA3-unique-input-union-dg27.json",
+  "object": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/09/0907218a7c2b5a4d734323e5e88709d86937fc6310cf12d9657d51f37508005c",
+    "sha256": "0907218a7c2b5a4d734323e5e88709d86937fc6310cf12d9657d51f37508005c",
+    "bytes": 9831
+  },
+  "proof": {
+    "kind": "timelearner_unique_observed_inputs_union",
+    "schema_version": 1,
+    "observed_utc": "2026-11-24T10:38:53.832400+00:00",
+    "model_revision": "a71ae5270f9c8fe9c03bc479e473b3d08ea9e798bf134c32ad8aa559a2e34d8a",
+    "threshold": 0.09864679711103091,
+    "source_runs": [
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/large-Branch-DATA3-threshold-mid-eight-diagnostic-de6/run-manifest.json",
+        "sha256": "daf37812eaaff8ca11b948bad8eb32bedf6b2dc19cf3331e6ee117a435e09b19",
+        "size": 53247
+      },
+      {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/large-Branch-DATA3-matched-duration-holdout-df4/run-manifest.json",
+        "sha256": "42a6dc27e0b132eb6d04394bf2d492f69011ec9c9a2f7a7b8211b17205941c11",
+        "size": 53394
+      }
+    ],
+    "observations": 16,
+    "unique_sampled_input_vectors": 15,
+    "counts_over_unique_inputs": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 13
+    },
+    "deduplication": "Exact 4001-sample native stimulus vector at equal 2000Hz,2s trial window and reset-per-trial; duplicate original target counted once",
+    "positive_unique_patterns": 1,
+    "negative_unique_patterns": 14,
+    "original_FP_retained": true,
+    "new_model_training_performed": false,
+    "independent_positive_classes_evaluated": false,
+    "population_generalization_claim": false,
+    "members": [
+      {
+        "run_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6",
+        "trial_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6/trial-0",
+        "label": "target",
+        "classification": "TP",
+        "sampled_input_sha256": "f2ba0d77e503f2fa8d17624c1009ef2ea11ee849cc156f9c2fdbc63840112fa0",
+        "stimulus_seconds_from_trial_begin": [
+          0.01,
+          0.09,
+          0.25,
+          0.49
+        ],
+        "spike_seconds_from_trial_begin": [
+          0.4935
+        ]
+      },
+      {
+        "run_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6",
+        "trial_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6/trial-1",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "5426d2255456e625b54a7b05f941c387076b4198e4153831dfe963dcc5509231",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.25,
+          0.4099999999999997,
+          0.48999999999999977
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6",
+        "trial_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6/trial-2",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "05f20ad29451ae1c3612da22681a9467ff64189d0d64d767342b480248d85902",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.16999999999999993,
+          0.25,
+          0.4899999999999993
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6",
+        "trial_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6/trial-3",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "1b224deb73244f516c5241bdf58b63c885cda58829098f9431571bcd79d03198",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.16999999999999993,
+          0.33000000000000007,
+          0.4900000000000002
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6",
+        "trial_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6/trial-4",
+        "label": "foil",
+        "classification": "FP",
+        "sampled_input_sha256": "ef6d6e3b72b7d4b0b19de1d6ece800037733854113f863f7ca1a4690033db483",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.02999999999999936,
+          0.25,
+          0.4900000000000002
+        ],
+        "spike_seconds_from_trial_begin": [
+          0.49299999999999855
+        ]
+      },
+      {
+        "run_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6",
+        "trial_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6/trial-5",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "bb65e53298114c74765c274fe14685c8839b081c1ca4354d762bc55e64b649e8",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.25,
+          0.47000000000000064,
+          0.4900000000000002
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6",
+        "trial_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6/trial-6",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "89aaec41c025bf4f8c47ca28c402879662cdfe754cb8c560d967f4653c6557d9",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.05000000000000071,
+          0.08999999999999986,
+          0.4900000000000002
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6",
+        "trial_id": "large-Branch-DATA3-threshold-mid-eight-diagnostic-de6/trial-7",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "58bb5a6a9b4cad5d6cd7363d8da4e0356ce5a5457cd4d8c3d4d4bb61dfbe616b",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.41000000000000014,
+          0.4499999999999993,
+          0.48999999999999844
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-matched-duration-holdout-df4",
+        "trial_id": "large-Branch-DATA3-matched-duration-holdout-df4/heldout-M4-ticks-447-311-202",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "6cedb8055edaa6d8608e6fa3dcc5da08e9ecb255d6450da800273f120f564ed3",
+        "stimulus_seconds_from_trial_begin": [
+          0.01,
+          0.2335,
+          0.389,
+          0.49
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-matched-duration-holdout-df4",
+        "trial_id": "large-Branch-DATA3-matched-duration-holdout-df4/heldout-M4-ticks-347-255-358",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "0b87518b091b1613a65e978c588a3ea7e6932a58ce938a8ab64611e9adc84602",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.1835,
+          0.31099999999999994,
+          0.48999999999999977
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-matched-duration-holdout-df4",
+        "trial_id": "large-Branch-DATA3-matched-duration-holdout-df4/heldout-M4-ticks-461-379-120",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "63e0b93f5116356fd6798da921da93b3ac351cefa82b58758d1d3ab580381df3",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.24049999999999994,
+          0.4299999999999997,
+          0.4899999999999993
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-matched-duration-holdout-df4",
+        "trial_id": "large-Branch-DATA3-matched-duration-holdout-df4/heldout-M4-ticks-137-413-410",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "21b5a143d07307a58df86701a04120406fced5096f298f1cb1d073f8df835f93",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.07850000000000001,
+          0.28500000000000014,
+          0.4900000000000002
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-matched-duration-holdout-df4",
+        "trial_id": "large-Branch-DATA3-matched-duration-holdout-df4/heldout-M4-ticks-562-127-271",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "6f5df7e645a13af6d62cd52671cef711651502d15312ad88023fa3bb58afabcb",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.2909999999999986,
+          0.3544999999999998,
+          0.4900000000000002
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-matched-duration-holdout-df4",
+        "trial_id": "large-Branch-DATA3-matched-duration-holdout-df4/repeated-target",
+        "label": "target",
+        "classification": "TP",
+        "sampled_input_sha256": "f2ba0d77e503f2fa8d17624c1009ef2ea11ee849cc156f9c2fdbc63840112fa0",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.08999999999999986,
+          0.25,
+          0.4900000000000002
+        ],
+        "spike_seconds_from_trial_begin": [
+          0.49350000000000094
+        ]
+      },
+      {
+        "run_id": "large-Branch-DATA3-matched-duration-holdout-df4",
+        "trial_id": "large-Branch-DATA3-matched-duration-holdout-df4/heldout-M4-ticks-385-176-399",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "cf93a0f7a7d5ec9fe54d7bf17d48233b827203c4717e16093136da073bfbb6fc",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.20250000000000057,
+          0.29049999999999976,
+          0.4900000000000002
+        ],
+        "spike_seconds_from_trial_begin": []
+      },
+      {
+        "run_id": "large-Branch-DATA3-matched-duration-holdout-df4",
+        "trial_id": "large-Branch-DATA3-matched-duration-holdout-df4/heldout-M4-ticks-454-328-178",
+        "label": "foil",
+        "classification": "TN",
+        "sampled_input_sha256": "c624384ff9580d44b99f10c0beb89d40b52f09fc3aab8de51b5fab7abf5ed5cd",
+        "stimulus_seconds_from_trial_begin": [
+          0.009999999999999787,
+          0.2370000000000001,
+          0.4009999999999998,
+          0.48999999999999844
+        ],
+        "spike_seconds_from_trial_begin": []
+      }
+    ],
+    "whole_plan_complete": false
+  }
+}
