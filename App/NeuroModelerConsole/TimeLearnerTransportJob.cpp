@@ -173,6 +173,38 @@ int RunTimeLearnerPhysicalModelExportJob(const QString& input,const QString& out
     try
     {
         const auto document=ReadDocument(input);
+        if(document["kind"]==QJsonValue("timelearner_native_physical_model_conversion_job"))
+        {
+            Keys(document,{"kind","schema_version","implementation_id","source_model_data","conversion_spec","reference_amplitudes","sha256"});
+            Header(document,"timelearner_native_physical_model_conversion_job");
+            const auto source=Object(document["source_model_data"]);
+            const auto implementation=Text(document["implementation_id"]);
+            const auto specification=DecodeNativeRecognitionSpec(Object(document["conversion_spec"]));
+            Require(document["reference_amplitudes"].isArray(),"physical_conversion_reference_array");
+            std::vector<double> amplitudes;
+            for(const auto& amplitude:document["reference_amplitudes"].toArray())amplitudes.push_back(Number(amplitude));
+            const auto frequency=DecodeConfiguredNativeTraining(Object(source["configuration"])).model.frequencyHz;
+            return WithFreshModel(frequency,[&](auto storage,auto environment,auto) {
+                const auto model=ConvertNativeSoloPhysicalModelDataToRecognition(source,specification,amplitudes,storage,environment,implementation);
+                const auto imported=PrepareNativeFrozenPhysicalModelData(model,storage,environment,implementation);
+                Require(imported->modelRevision==Text(model["model_revision"]),"physical_conversion_roundtrip_changed_model");
+                Require(QDir().mkdir(output),"job_output_exists_or_parent_missing");QJsonArray artifacts;
+                artifacts.append(Write(output,"model.json",model));
+                artifacts.append(Write(output,"input-projection.json",Signed({{"kind","timelearner_physical_model_conversion_input_projection"},
+                    {"schema_version",1},{"job_sha256",document["sha256"]},{"source_model_data_sha256",source["sha256"]},
+                    {"source_boundary",source["source_boundary"]},{"conversion_spec",document["conversion_spec"]},
+                    {"reference_amplitudes",document["reference_amplitudes"]}})));
+                Write(output,"execution.json",Signed({{"kind","timelearner_native_physical_model_conversion_execution"},
+                    {"schema_version",1},{"execution","completed"},{"job_sha256",document["sha256"]},
+                    {"source_model_data_sha256",source["sha256"]},{"source_boundary",model["source_boundary"]},
+                    {"model_sha256",model["sha256"]},{"model_revision",model["model_revision"]},
+                    {"physical_roundtrip_verified",true},{"source_evidence_included",false},
+                    {"training_certificate_transferred",false},{"calibration_confirmed",false},
+                    {"controller_checkpoint_created",false},{"model_ticks",0},
+                    {"scientific_verdict",QJsonValue(QJsonValue::Null)},{"artifacts",artifacts}}));
+                return 0;
+            });
+        }
         Keys(document,{"kind","schema_version","implementation_id","source_state","sha256"});
         Header(document,"timelearner_native_physical_model_export_job");
         const auto source=Object(document["source_state"]);const auto implementation=Text(document["implementation_id"]);

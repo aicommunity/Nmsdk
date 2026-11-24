@@ -27,12 +27,74 @@ def _sha(value):
             'physical_data_invalid_sha256')
 
 
+
+CONVERSION_FIELDS = {'source_model_data', 'conversion_spec', 'reference_amplitudes'}
+
+
+def _conversion_source(package):
+    source = package['source_model_data']
+    require(type(source) is dict and source.get('schema_version') == 1,
+            'physical_data_conversion_requires_solo_data1')
+    audit_physical_model_data(source)
+    require(source['source_boundary']['kind'] in SOLO and package['source_boundary'] == source['source_boundary']
+            and package['source_solo_revision'] == source['model_revision'], 'physical_data_conversion_source_boundary')
+    expected = dict(source['configuration']); expected['model'] = dict(expected['model'])
+    expected['model']['allow_muted_input_baseline'] = False
+    require(package['configuration'] == expected and all(package[k] == source[k] for k in
+            ('configuration_text', 'protocol', 'controls', 'dataset', 'implementation_id')),
+            'physical_data_conversion_changed_source_conditions')
+    require(package['neuron']['class_definitions'] == source['neuron']['class_definitions'],
+            'physical_data_conversion_changed_storage_physics')
+    spec = package['conversion_spec']; require(type(spec) is dict, 'physical_data_conversion_spec_object')
+    version = spec.get('schema_version')
+    require(type(version) is int and version in (1, 2), 'physical_data_conversion_spec_schema')
+    keys(spec, {'schema_version', 'mode', 'resistance_bounds'} | ({'post_tune'} if version == 2 else set()),
+         'physical_data_conversion_spec_fields')
+    references = package['reference_amplitudes']; mode = spec['mode']
+    require(type(references) is list and mode in ('identity', 'historical_branch_n1_v1'),
+            'physical_data_conversion_mode_or_references')
+    n = len(source['parameters'])
+    require((not references and spec['resistance_bounds'] == []) if mode == 'identity' else
+            (source['configuration']['model']['branch'] is True and
+             source['configuration']['model']['normalization'] == 'N1' and len(references) == n and
+             all(number(a) > 0 for a in references) and type(spec['resistance_bounds']) is list and
+             len(spec['resistance_bounds']) == n), 'physical_data_conversion_reference_scope')
+    for bound in spec['resistance_bounds']:
+        keys(bound, {'minimum', 'maximum'}, 'physical_data_conversion_bounds')
+        require(0 < number(bound['minimum']) <= number(bound['maximum']), 'physical_data_conversion_bounds')
+    record = package['conversion_record']
+    require(record['schema_version'] == version and record['algorithm'] == mode and
+            record['source_solo_sha256'] == source['source_boundary']['sha256'] and
+            record['source_solo_identity'] == source['model_revision'] and
+            record['result_identity'] == package['model_revision'] and
+            len(record['decisions']) == n, 'physical_data_conversion_record_scope')
+    metadata = package['neuron']['metadata']
+    require(metadata['conversion']['record'] == record and
+            metadata['conversion']['source_solo_sha256'] == source['source_boundary']['sha256'] and
+            metadata['recognition_verification']['model_identity'] == package['model_revision'] and
+            metadata['recognition_verification']['status'] == 'unverified' and
+            metadata['recognition_verification']['certificate'] is None, 'physical_data_conversion_metadata_scope')
+    if version == 2:
+        post = spec['post_tune']
+        keys(post, {'mode', 'source_model_revision', 'canonical_floor', 'canonical_last',
+                    'requested_resistances', 'resistance_bounds'}, 'physical_data_post_tune_fields')
+        require(post['mode'] in ('off', 'keep_done', 'canon_rmin', 'flat_last_r', 'search_synthetic_candidate')
+                and record['post_tune']['mode'] == post['mode'] and
+                record['post_tune']['source_model_revision'] == post['source_model_revision'] and
+                record['post_tune']['selection_status'] == 'candidate_unmeasured' and
+                record['post_tune']['calibration_status'] == 'unconfirmed', 'physical_data_post_tune_scope')
+    # This checks retained conditions and declared provenance. Only the native
+    # importer re-derives every graph edit and compares the entire DATA document.
+    return source
+
+
 def audit_physical_model_data(package, *, frozen=False):
     """Check retained physics; XML import and source-evidence joins stay separate."""
     try:
-        keys(package, FIELDS, 'physical_data_field_set')
+        converted = type(package) is dict and package.get('schema_version') == 2
+        keys(package, FIELDS | (CONVERSION_FIELDS if converted else set()), 'physical_data_field_set')
         require(package['kind'] == 'timelearner_physical_model_data' and type(package['schema_version']) is int
-                and package['schema_version'] == 1 and package['data_only'] is True
+                and package['schema_version'] in (1, 2) and package['data_only'] is True
                 and package['dynamic_checkpoint'] is False and package['certificate'] is None,
                 'physical_data_not_certificate_or_checkpoint')
         _sha(package['sha256'])
@@ -49,8 +111,10 @@ def audit_physical_model_data(package, *, frozen=False):
                 (8 if boundary['kind'] in SOLO else 7), 'physical_data_source_kind')
         for value in (boundary['sha256'], boundary['model_revision'], package['source_solo_revision']):
             _sha(value)
-        require(boundary['model_revision'] == package['model_revision'], 'physical_data_source_revision')
-        solo = boundary['kind'] in SOLO
+        require(converted or boundary['model_revision'] == package['model_revision'], 'physical_data_source_revision')
+        solo = boundary['kind'] in SOLO and not converted
+        if converted:
+            _conversion_source(package)
         require((package['conversion_record'] is None) if solo else type(package['conversion_record']) is dict,
                 'physical_data_conversion_scope')
         require(not solo or package['source_solo_revision'] == package['model_revision'], 'physical_data_solo_revision')
@@ -87,7 +151,8 @@ def audit_physical_model_data(package, *, frozen=False):
                 and protocol['stimulus_profile'] == configuration['stimulus_profile'], 'physical_data_protocol_scope')
         metadata = archive['metadata']; training = metadata['training']; calibration = metadata['calibration']
         require(metadata['implementation_id'] == package['implementation_id']
-                and metadata['state_kind'] == boundary['state_kind']
+                and metadata['state_kind'] == (('diagnostic_recognition' if boundary['kind'] == 'timelearner_stopped_state'
+                                               else 'recognition') if converted else boundary['state_kind'])
                 and training['trainer'] == ('Branch' if model['branch'] else 'Classic')
                 and training['normalization'] == model['normalization']
                 and training['target_pattern'] == model['initial_isi']
@@ -103,7 +168,8 @@ def audit_physical_model_data(package, *, frozen=False):
             model_revision=package['model_revision'], pattern_size=len(model['inputs']), branch=model['branch'],
             frequency_hz=number(model['frequency_hz']), threshold_path=path, threshold_classes=(nodes[path]['class'],),
             effective_threshold=threshold, source_training_evidence_checked=False, native_import_verified=False,
-            training_certificate_transferred=False, calibration_confirmed=False, evaluation_verdict=None)
+            training_certificate_transferred=False, calibration_confirmed=False, evaluation_verdict=None,
+            explicit_conversion_data=converted, native_conversion_verified=False)
     except EvidenceError:
         raise
     except (KeyError, TypeError, ValueError, OverflowError, ZeroDivisionError) as error:
