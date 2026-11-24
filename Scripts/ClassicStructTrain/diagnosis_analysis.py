@@ -139,11 +139,12 @@ def audit():
             inference[group, run_id] = row, folder
         if row.get("record_type") == "training":
             training[group, run_id] = row, folder
-        if group == "sequences":
+        if group in {"sequences", "warm-order"} or group.startswith("warm-order-prefix-"):
+            key = f"{group}/{run_id}" if group.startswith("warm-order-prefix-") else run_id
             for entry in run:
-                sequences[run_id].append({key: entry.get(key) for key in (
+                sequences[key].append({field: entry.get(field) for field in (
                     "record_type", "stage_index", "dendrites", "synapses", "status", "stop_reason", "iterations",
-                    "ticks", "model_time", "elapsed_model_time", "TP", "FP", "FN", "TN", "answers",
+                    "ticks", "model_time", "elapsed_model_time", "TP", "FP", "FN", "TN", "answers", "input_ids",
                 )})
     resolution = WORK / "snapshot-resolution.json"
     aliases = load(resolution)["aliases"] if resolution.exists() else {}
@@ -219,6 +220,8 @@ def audit():
                             "margin_after_uV": b["decode_windows"][index]["margin_V"] * 1e6,
                             "first_zone_before": a["decode_windows"][index]["first_zone_tick"],
                             "first_zone_after": b["decode_windows"][index]["first_zone_tick"],
+                            "start_before_s": a["decode_windows"][index]["start_model_s"],
+                            "start_after_s": b["decode_windows"][index]["start_model_s"],
                         })
                 compare.append({
                     "label": label, "factor": factor, "repeat": repeat, "changed": changed,
@@ -346,6 +349,31 @@ def audit():
                     "first_training_ticks": first_training_tick(ap, bp),
                     "logs": [relative(ap), relative(bp)],
                 })
+    structural = defaultdict(list)
+    source = load(WORK / "source-audit.json").get("structure", {})
+    for row in source.get("rows", []):
+        structural[row["algorithm"], row["input_id"]].append(row)
+    order_structure = []
+    for (phase, identifier), (native, native_path) in training.items():
+        if phase not in {"training-order", "training-ten-order"} or not (
+                identifier.startswith("native-") and identifier.endswith("-r1")):
+            continue
+        _, kind, target, _ = identifier.split("-")
+        tag = "NL" if kind == "learner" else "NT"
+        comparison = training.get((phase, "disabled-" + identifier.removeprefix("native-")))
+        entries = structural.get((tag, int(target)), [])
+        if comparison is None or not entries:
+            continue
+        disabled, disabled_path = comparison
+        order_structure.append({
+            "kind": tag, "target": int(target), "historical_d": sorted({tuple(r["dendrites"]) for r in entries}),
+            "cells": sorted({r["length_range"] for r in entries}),
+            "source": source["path"], "sha256": source["sha256"],
+            "native_d": native["dendrites"], "disabled_d": disabled["dendrites"],
+            "native_matches": any(native["dendrites"] == r["dendrites"] for r in entries),
+            "disabled_matches": any(disabled["dendrites"] == r["dendrites"] for r in entries),
+            "logs": [relative(folder / "results.jsonl") for folder in (native_path, disabled_path)],
+        })
     context = []
     for scheme in ("0_1", "0_1_4_full"):
         for repeat in range(1, 4):
@@ -359,6 +387,13 @@ def audit():
                 evaluated = snapshot(f"{keys[1]}-s{stage}-baseline-r1")
                 live = next((row for row in sequences[keys[0]] if row["record_type"] == "evaluation_in_protocol"
                              and row["stage_index"] == stage), None)
+                changes = []
+                if live and evaluated:
+                    ids = evaluated[0]["input_ids"]
+                    if live["input_ids"] is not None:
+                        assert live["input_ids"] == ids
+                    changes = [[i, a, b] for i, a, b in zip(ids, live["answers"], evaluated[0]["answers"], strict=True)
+                               if a != b]
                 context.append({
                     "scheme": scheme, "repeat": repeat, "stage": stage,
                     "iterations": [row["iterations"] for row in (a, b, c)],
@@ -367,7 +402,10 @@ def audit():
                     "events": [row["status"] for row in (a, b, c)],
                     "live_Q": live["FP"] + live["FN"] if live else None,
                     "snapshot_Q": evaluated[0]["FP"] + evaluated[0]["FN"] if evaluated else None,
+                    "live_answers": live["answers"] if live else None,
+                    "snapshot_answers": evaluated[0]["answers"] if evaluated else None,
                     "snapshot_log": relative(evaluated[1] / "results.jsonl") if evaluated else None,
+                    "changes": changes if live and evaluated else None,
                 })
     warm = []
     previous_data = load(PREVIOUS / "report-data.json")
@@ -388,11 +426,46 @@ def audit():
             "observed_iterations": stage["iterations"], "stop_reason": stage["stop_reason"],
             "log": relative(WORK / "runs/sequences" / name / "results.jsonl"),
         })
+    warm_order = []
+    for mode in ("native", "disabled", "reversal"):
+        for repeat in range(1, 4):
+            key = f"warm-{mode}-r{repeat}"
+            entries = sequences.get(key, [])
+            if not entries:
+                continue
+            stages = [row for row in entries if row["record_type"] == "training"]
+            warm_order.append({
+                "mode": mode, "repeat": repeat, "stages": stages,
+                "log": relative(WORK / "runs/warm-order" / key / "results.jsonl"),
+            })
+    historical_warm = {r["transition"]: r for r in previous_data["warm_comparisons"] if r["repeat"] == 1}
+    warm_extensions = []
+    for key, entries in sequences.items():
+        if not key.startswith("warm-order-prefix-"):
+            continue
+        for row in entries:
+            stage = row["stage_index"]
+            if row["record_type"] != "training" or not stage:
+                continue
+            prior = historical_warm[stage]
+            old = prior["old"]
+            warm_extensions.append({
+                "series": key, "transition": stage, "from_id": prior["from_id"], "to_id": prior["to_id"],
+                "d": row["dendrites"], "s": row["synapses"], "iterations": row["iterations"],
+                "historical_d": old["dendrites"], "historical_s": old["synapses"],
+                "historical_iterations": old["iterations"], "status": row["status"],
+                "matches": (row["dendrites"], row["synapses"], row["iterations"]) ==
+                           (old["dendrites"], old["synapses"], old["iterations"]),
+                "log": relative(WORK / "runs" / key / "results.jsonl"),
+            })
     save(WORK / "diagnosis-analysis.json", {
         "processes": processes, "inference_comparisons": compare, "training": observed,
         "observer_pairs": observer, "tick_comparisons": trace_comparisons, "sequence_context": context,
         "training_comparisons": training_comparisons, "profile_inference": profile_controls,
+        "order_structure": order_structure,
         "warm_prefix_22_37": warm,
+        "warm_order": warm_order,
+        "warm_extensions": warm_extensions,
         "roundtrip_controls": roundtrip_controls,
         "reference_audit": reference_audit,
     })

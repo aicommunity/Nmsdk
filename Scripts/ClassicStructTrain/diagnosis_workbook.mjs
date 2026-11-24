@@ -57,6 +57,28 @@ table('Источники и состояния', 'Соответствие ис
   ['Лист', 'Состояние', 'Диапазон', 'Файл', 'SHA256', 'Число ответов', 'Лишние значения', 'Дендриты и синапсы'],
   source.protocols.map(r => [r.sheet, r.state, r.range, r.file, r.file_sha256, r.mapped_answers,
     r.unmapped_answer_lines.join(', '), r.graph_ds.join(', ')]), [44, 15, 18, 64, 68, 18, 18, 34]);
+const historicalSchemes = new Map([['Схема 0 на 1', ['0_1', 1]],
+  ['Схема 0 на 1+4 для 150 примеров', ['0_1_4_full', 2]]]);
+const byContext = new Map(data.sequence_context.filter(r => r.repeat === 1)
+  .map(r => [r.scheme + '/' + r.stage, r]));
+const perStimulus = source.protocols.flatMap(r => {
+  const link = historicalSchemes.get(r.sheet);
+  const observed = link && byContext.get(link[0] + '/' + ((r.state - 1) * link[1]));
+  const column = r.range.split('2:')[0];
+  return (r.input_ids ?? []).map((id, index) => [r.sheet, r.state, r.job, id, column + (index + 2),
+    r.file, index + 2, r.file_sha256, r.answers[index], observed?.live_answers?.[index],
+    observed?.snapshot_answers?.[index], observed?.snapshot_log]);
+});
+table('Ответы исторических схем', 'Первичные ответы и новые измерения в первом повторе',
+  ['Лист', 'Состояние', 'Граф из прошлого отчёта', 'Объект Iris', 'Ячейка', 'Файл первичных ответов',
+   'Строка файла', 'SHA256', 'Исторический ответ', 'Живой тест', 'Инференс снимка', 'Журнал инференса снимка'],
+  perStimulus, [43, 14, 24, 15, 13, 61, 17, 68, 19, 16, 19, 57]);
+table('Пересчёт архивных итогов', 'Проверка итоговых ячеек по первичным ответам',
+  ['Лист', 'Состояние', 'Ячейка итога', 'Показатель', 'Пересчёт', 'Формула или формула общей группы',
+   'Общая формула', 'Строки ответов', 'SHA256'],
+  source.protocols.flatMap(r => (r.summary_audit ?? []).map(m => [r.sheet, r.state, m.cell, m.metric,
+    m.recalculated, m.formula, m.shared_formula ? 'да' : 'нет', m.answer_rows?.join('–'), r.sha256])),
+  [43, 14, 16, 15, 18, 42, 17, 18, 68]);
 if (source.structure) {
   const p = source.structure;
   table('Структурный источник', 'Исторические длины и числа синапсов NT и NL',
@@ -66,6 +88,15 @@ if (source.structure) {
       r.dendrites.join(', '), r.original_synapses.map(v => v ?? '—').join(', '),
       r.effective_synapses?.join(', '), p.path, p.sha256, r.directory]),
     [15, 13, 14, 33, 26, 21, 21, 26, 30, 24, 56, 68, 58]);
+}
+if (data.order_structure?.length) {
+  table('Длины в контрольной десятке', 'Длины дендритов из первичной книги и двух учебных условий',
+    ['Алгоритм', 'Объект', 'Ячейки', 'Исторические длины', 'Длины исходные', 'Длины без вызова',
+     'Исходное совпадение', 'Совпадение без вызова', 'Файл', 'SHA256', 'Журнал исходный', 'Журнал без вызова'],
+    data.order_structure.map(r => [r.kind, r.target, r.cells.join(', '), r.historical_d.map(d=>d.join(', ')).join(' / '),
+      r.native_d.join(', '), r.disabled_d.join(', '), r.native_matches ? 'да' : 'нет',
+      r.disabled_matches ? 'да' : 'нет', r.source, r.sha256, ...r.logs]),
+    [14, 12, 21, 28, 25, 25, 22, 22, 62, 68, 60, 60]);
 }
 const raw = table('Архивные ответы', 'Исходные ответы и ответы двух предыдущих серий',
   ['Модель', 'Стартовый снимок', 'Объект Iris', 'Ячейка', 'История', 'Проверка снимка', 'Новое обучение',
@@ -105,15 +136,33 @@ table('Профиль фиксированного графа', 'Применё�
     +p.dissociation_s, p.components, r.directory])), [18, 23, 12, 17, 17, 18, 18, 48, 24, 18, 21, 18, 56]);
 table('Контекст обучения', 'Живой тест, отдельный снимок и пауза',
   ['Схема', 'Повтор', 'Этап стенда', 'Итерации живой', 'Итерации снимок', 'Итерации пауза', 'Ошибки живой', 'Ошибки снимок',
-   'Длины живой', 'Длины снимок', 'Длины пауза', 'Синапсы живой', 'Синапсы снимок', 'Синапсы пауза', 'Журнал снимка'],
+   'Длины живой', 'Длины снимок', 'Длины пауза', 'Синапсы живой', 'Синапсы снимок', 'Синапсы пауза',
+   'Изменения при переходе к снимку', 'Журнал снимка'],
   data.sequence_context.map(r => [r.scheme, r.repeat, r.stage, ...r.iterations, r.live_Q, r.snapshot_Q,
-    ...r.d.map(x => x.join(', ')), ...r.s.map(x => x.join(', ')), r.snapshot_log]), [20, 13, 14, 18, 18, 18, 18, 18]);
+    ...r.d.map(x => x.join(', ')), ...r.s.map(x => x.join(', ')),
+    r.changes?.map(([id, before, after]) => `${id} ${before}→${after}`).join(', '), r.snapshot_log]),
+  [20, 13, 14, 18, 18, 18, 18, 18]);
 table('Первый переход', 'Префикс непрерывного переобучения от № 22 к № 37',
   ['Повтор', 'С входа', 'На вход', 'Итерации архив', 'Итерации сейчас', 'Длины архив', 'Длины сейчас',
    'Синапсы архив', 'Синапсы сейчас', 'Причина завершения', 'Журнал'],
   data.warm_prefix_22_37.map(r => [r.repeat, r.from_id, r.to_id, r.historical_iterations, r.observed_iterations,
     r.historical_d.join(', '), r.observed_d.join(', '), r.historical_s.join(', '), r.observed_s.join(', '),
     r.stop_reason, r.log]), [13, 15, 15, 21, 21, 25, 25, 25, 25, 24, 60]);
+table('Порядок при переобучении', 'Отдельная проверка обновления порядка в переходе № 22 → № 37',
+  ['Условие', 'Повтор', 'Целевой объект', 'Итерации', 'Такты', 'Длины', 'Синапсы', 'Статус', 'Журнал'],
+  (data.warm_order ?? []).flatMap(r => r.stages.map((s, index) => [
+    r.mode, r.repeat, index === 0 ? 22 : 37, s.iterations, s.ticks, s.dendrites.join(', '),
+    s.synapses.join(', '), s.status, r.log])),
+  [22, 14, 17, 14, 14, 25, 25, 23, 58]);
+if (data.warm_extensions?.length) {
+  table('Удлинённый префикс', 'Влияние обновления порядка на более длинную последовательность',
+    ['Процесс', 'Переход', 'С входа', 'На вход', 'Длины архив', 'Длины новые', 'Синапсы архив',
+     'Синапсы новые', 'Итерации архив', 'Итерации новые', 'Совпадение', 'Статус', 'Журнал'],
+    data.warm_extensions.map(r => [r.series, r.transition, r.from_id, r.to_id, r.historical_d.join(', '),
+      r.d.join(', '), r.historical_s.join(', '), r.s.join(', '), r.historical_iterations,
+      r.iterations, r.matches ? 'да' : 'нет', r.status, r.log]),
+    [39, 13, 13, 13, 25, 25, 25, 25, 16, 16, 17, 20, 58]);
+}
 table('Первые различия', 'Первый наблюдаемый такт расхождения по сигналу',
   ['Модель', 'Фактор', 'Объект Iris', 'Величина', 'Такт', 'Компонент', 'Значение до', 'Значение после',
    'Время до, с', 'Время после, с', 'Трасса'],
@@ -153,10 +202,11 @@ for (const figure of report.sections.flatMap(section => section.charts ?? [])) {
   chart.setPosition(`A${top}`, `P${top + 22}`);
   chart.title = title;
   chart.displayBlanksAs = 'gap';
-  chart.titleTextStyle.fontSize = 15;
-  chart.legend = { position: 'top', textStyle: { fontSize: 11 } };
-  chart.xAxis = { axisType: 'textAxis', title: { text: x }, textStyle: { fontSize: 11 } };
-  chart.yAxis = { min, max, title: { text: y }, textStyle: { fontSize: 11 },
+  chart.titleTextStyle.fontSize = 17;
+  chart.legend = { position: 'top', textStyle: { fontSize: 14 } };
+  chart.xAxis = { axisType: 'textAxis', title: { text: x }, textStyle: { fontSize: 13 } };
+  chart.yAxis = { min, max, title: { text: y }, textStyle: { fontSize: 13 },
+    ...(figure.major_unit === undefined ? {} : { majorUnit: figure.major_unit }),
     numberFormatCode: figure.format ?? '0', numberFormatSourceLinked: false };
   chart.series.items.forEach((series, index) => {
     const color = palette[index % palette.length];
@@ -167,7 +217,7 @@ for (const figure of report.sections.flatMap(section => section.charts ?? [])) {
         fill: index === 0 ? 'none' : color, line: { fill: color, width: 1.4, style: 'solid' } };
     }
   });
-  chartIndex.push({ id, min, max, rows, x, y });
+  chartIndex.push({ id, min, max, rows, x, y, major_unit: figure.major_unit });
 }
 
 const xlsx = await SpreadsheetFile.exportXlsx(workbook);

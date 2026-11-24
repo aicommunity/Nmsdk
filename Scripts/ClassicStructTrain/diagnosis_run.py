@@ -86,12 +86,18 @@ def launch(group, name, repeat, manifest, binary_meta, suite, timeout=660):
     except FileExistsError:
         deadline = time.monotonic() + timeout + 150
         previous = {}
+        markers = [old_process, folder / "iterations.jsonl", folder / "results.jsonl"]
+        last_progress = None
         while previous.get("status") in (None, "running") and time.monotonic() < deadline:
             try:
                 previous = load(old_process)
             except (FileNotFoundError, json.JSONDecodeError):
                 previous = {}
             if previous.get("status") in (None, "running"):
+                activity = tuple(marker.stat().st_mtime_ns if marker.exists() else None for marker in markers)
+                if activity != last_progress:
+                    last_progress = activity
+                    deadline = time.monotonic() + timeout + 150
                 time.sleep(1)
         if previous.get("status") == "completed":
             if previous["binary_sha256"] != binary_meta["binary_sha256"] or load(job_path) != manifest:
@@ -412,6 +418,23 @@ def training_order(workers):
     parallel(lambda *args: train("training-order", *args), tasks, workers)
 
 
+def warm_order(workers, transitions=1, requested=None):
+    job = warm_job()
+    if not 1 <= transitions <= len(job["stages"]):
+        raise ValueError("Requested warm prefix must contain between 1 and 90 transitions")
+    job["stages"] = job["stages"][:transitions]
+    phase = "warm-order" if transitions == 1 else f"warm-order-prefix-{transitions}"
+    modes = (("native", "VB"), ("disabled", "FO"), ("reversal", "VB"))
+    if requested:
+        modes = tuple((label, binary) for label, binary in modes if label in requested)
+    tasks = [(f"warm-{label}", repeat, job, binary)
+             for repeat in (range(1, 4) if transitions == 1 else (1,))
+             for label, binary in modes]
+    save(WORK / f"{phase}-schedule.json", {"length": transitions, "runs": [f"{name}-r{repeat}"
+         for name, repeat, _, _ in tasks]})
+    parallel(lambda *args: train(phase, *args), tasks, workers)
+
+
 def training_expansion(workers):
     chosen = []
     directory = WORK / "runs/training-factors"
@@ -432,13 +455,20 @@ def training_expansion(workers):
             name = f"{prefix}-{kind}-22"
             tested = [result(directory / f"{name}-r{rep}") for rep in range(1, 4)]
             base = result(directory / f"modern-default-{kind}-22-r1")
-            folders = [snapshot_folder(f"{name}-r{rep}", aliases) for rep in range(1, 4)]
-            own = [result(folder)["answers"][0] if (folder / "results.jsonl").exists() else None
-                   for folder in folders]
             def signature(row):
                 return row["status"], row["iterations"], row["dendrites"], row["synapses"]
             changed = all(signature(test) == signature(tested[0]) for test in tested[1:])
             changed = changed and signature(tested[0]) != signature(base)
+            own = []
+            for repeat, row in enumerate(tested, 1):
+                source = f"{name}-r{repeat}"
+                folder = snapshot_folder(source, aliases)
+                if (changed and row["status"] == "completed"
+                        and not row["whole_initialization_audit"]["uninitialized"]
+                        and not (folder / "results.jsonl").exists()):
+                    item = frozen_case(source, directory / source / "trained", row, [22])
+                    folder = infer("snapshot-inference", item, "baseline", 1)
+                own.append(result(folder)["answers"][0] if (folder / "results.jsonl").exists() else None)
             passed = changed and own == [1, 1, 1]
             existing = {22, 64, 111} if prefix == "archive-default" else {22}
             chosen.append({"variant": prefix, "kind": kind, "stable_structural_or_completion_effect": changed,
@@ -563,10 +593,15 @@ def expansion(workers, requested=None):
     parallel(trace_inference, tasks, min(workers, 3))
 
 
-def trace_controls(workers):
+def trace_controls(workers, requested=None):
     items = {item["label"]: item for item in cases()}
     jobs = []
-    for label, factor in (("NL22", "order"), ("new-NT111", "reset")):
+    controls = [("NL22", "order"), ("new-NT111", "reset")]
+    if (WORK / "runs/pilot-window/NT45-window-r3/results.jsonl").exists():
+        controls.append(("NT45", "window"))
+    for label, factor in controls:
+        if requested and factor not in requested:
+            continue
         base = result(WORK / "runs/pilot" / f"{label}-baseline-r1")
         changed = result(WORK / "runs/pilot" / f"{label}-{factor}-r1")
         jobs.append((items[label], factor, base, changed, differences(base, changed)))
@@ -675,10 +710,12 @@ def main():
     parser.add_argument("action", choices=["package", "inference", "training", "sequences", "nt80", "strict",
                                           "parser", "factors", "expansion", "snapshots", "reference",
                                           "training-order", "training-expansion", "traces", "adaptive-pilot",
-                                          "expand-training-order", "targeted-window"])
+                                          "expand-training-order", "targeted-window", "warm-order"])
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--variant", default="main")
     parser.add_argument("--factor", action="append", choices=tuple(FACTORS))
+    parser.add_argument("--warm-transitions", type=int, default=1)
+    parser.add_argument("--warm-mode", action="append", choices=("native", "disabled", "reversal"))
     args = parser.parse_args()
     if args.action == "package":
         print(package(args.variant))
@@ -702,12 +739,14 @@ def main():
         factor_training(args.workers)
     elif args.action == "training-order":
         training_order(args.workers)
+    elif args.action == "warm-order":
+        warm_order(args.workers, args.warm_transitions, args.warm_mode)
     elif args.action == "training-expansion":
         training_expansion(args.workers)
     elif args.action == "expand-training-order":
         expand_training_order(args.workers)
     elif args.action == "traces":
-        trace_controls(args.workers)
+        trace_controls(args.workers, args.factor)
     elif args.action == "expansion":
         expansion(args.workers, args.factor)
     elif args.action == "snapshots":

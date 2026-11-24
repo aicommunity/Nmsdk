@@ -2,7 +2,9 @@
 from collections import Counter
 from pathlib import Path
 import json
+import math
 import posixpath
+import re
 import sys
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
@@ -21,15 +23,19 @@ SOURCE_NAMES = {
 }
 
 
+def sheet_xml(archive, sheet):
+    workbook = ET.fromstring(archive.read("xl/workbook.xml"))
+    node = next(row for row in workbook.findall(".//{*}sheet") if row.get("name") == sheet)
+    relationship = node.get("{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id")
+    targets = ET.fromstring(archive.read("xl/_rels/workbook.xml.rels"))
+    target = next(row.get("Target") for row in targets if row.get("Id") == relationship)
+    member = target.lstrip("/") if target.startswith("/") else posixpath.normpath("xl/" + target)
+    return ET.fromstring(archive.read(member))
+
+
 def source_cells(path, sheet, with_text=False):
     with ZipFile(path) as archive:
-        workbook = ET.fromstring(archive.read("xl/workbook.xml"))
-        node = next(row for row in workbook.findall(".//{*}sheet") if row.get("name") == sheet)
-        relationship = node.get("{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id")
-        targets = ET.fromstring(archive.read("xl/_rels/workbook.xml.rels"))
-        target = next(row.get("Target") for row in targets if row.get("Id") == relationship)
-        member = target.lstrip("/") if target.startswith("/") else posixpath.normpath("xl/" + target)
-        xml = ET.fromstring(archive.read(member))
+        xml = sheet_xml(archive, sheet)
         shared = (["".join(node.itertext()) for node in ET.fromstring(archive.read("xl/sharedStrings.xml"))]
                   if with_text else [])
         values = {}
@@ -42,6 +48,41 @@ def source_cells(path, sheet, with_text=False):
             elif with_text and kind == "s":
                 values[cell.get("r")] = shared[int(value)]
         return values
+
+
+def summary_formulas(path, sheet):
+    with ZipFile(path) as archive:
+        formulas = {c.get("r"): c.find("{*}f") for c in sheet_xml(archive, sheet).findall(".//{*}c")
+                    if c.find("{*}f") is not None}
+    shared = {f.get("si"): f.text for f in formulas.values() if f.get("si") is not None and f.text}
+    return {cell: (f.text or shared[f.get("si")], f.text is None) for cell, f in formulas.items()}
+
+
+def audit_summaries(cells, formulas, column, state, ids, metrics):
+    expected = []
+    if len(ids) == 150:
+        suffix = str(state + 1)
+        tp, fp, fn, tn = (metrics[k] for k in ("TP", "FP", "FN", "TN"))
+        expected = [(col + suffix, name, value, None) for col, name, value in (
+            ("AC", "TP", tp), ("AD", "FP", fp), ("AE", "FN", fn), ("AF", "TN", tn),
+            ("AG", "precision", tp/(tp+fp)), ("AH", "recall", tp/(tp+fn)), ("AI", "Q", fp+fn))]
+    elif len(ids) == 30:
+        expected = [(column + "32", "TP", metrics["TP"], (12, 21)),
+                    (column + "33", "FP", metrics["FP"], (22, 31))]
+    elif len(ids) == 10:
+        expected = [(column + "12", "TP", metrics["TP"], (2, 11))]
+    audited = []
+    for cell, name, value, interval in expected:
+        formula, shared = formulas.get(cell, (None, False))
+        if interval:
+            match = re.fullmatch(r"SUM\(([A-Z]+)(\d+):([A-Z]+)(\d+)\)", formula or "")
+            assert match and match[1] == match[3] and (int(match[2]), int(match[4])) == interval, cell
+            assert shared or match[1] == column, cell
+            assert sum(cells[f"{column}{i}"] for i in range(interval[0], interval[1] + 1)) == value, cell
+        assert math.isclose(cells[cell], value, rel_tol=1e-12, abs_tol=1e-12), (cell, name, value)
+        audited.append({"cell": cell, "metric": name, "recalculated": value, "formula": formula,
+                        "shared_formula": shared, "answer_rows": interval})
+    return audited
 
 
 def confusion(answers, ids, target):
@@ -84,6 +125,7 @@ def run():
     book = RESEARCH / "Обучение нескольким примерам.xlsx"
     book_hash = sha(book)
     cache = {name: source_cells(book, name) for name in SOURCE_NAMES}
+    formulas = {name: summary_formulas(book, name) for name in SOURCE_NAMES}
     references = load(OLD / "protocol-references.json")
     science = load(OLD / "scientific-comparison-data.json")
     structural_source = science["primary_source"]
@@ -117,6 +159,9 @@ def run():
             "range": row["source_range"], "state": row["state"], "file": relative(filename),
             "file_sha256": sha(filename), "graph_ds": structure, "metrics": metrics,
             "mapped_answers": len(ids), "unmapped_answer_lines": answers[len(ids):],
+            "input_ids": ids, "answers": actual,
+            "summary_audit": audit_summaries(cache[row["sheet"]], formulas[row["sheet"]], col,
+                                             row["state"], ids, metrics),
             "job": row["job"],
         })
         if len(answers) != len(ids):

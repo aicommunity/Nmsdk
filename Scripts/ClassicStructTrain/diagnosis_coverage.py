@@ -20,6 +20,7 @@ def run():
         "pilot-prefix": 2 * (len(PILOT) * physical_conditions + first_tick),
         "training-pilot": 54, "sequences": 21, "limits": 6, "parser": 3,
         "training-factors": 99, "profile-inference": 24, "training-order": 54,
+        "pilot-window": 6, "warm-order": 9,
     }
     # Extra full repeats are recorded as additional evidence. They cannot
     # satisfy a missing condition from the scheduled first-pass cohort.
@@ -43,6 +44,10 @@ def run():
     order_expansion = WORK / "training-order-expansion.json"
     if order_expansion.exists():
         expected["training-ten-order"] = sum(14 for row in load(order_expansion) if row["expanded"])
+    for phase in (WORK / "runs").glob("warm-order-prefix-*"):
+        if phase.is_dir():
+            schedule = WORK / f"{phase.name}-schedule.json"
+            expected[phase.name] = len(load(schedule)["runs"]) if schedule.exists() else 3
     snapshot_resolution = WORK / "snapshot-resolution.json"
     snapshots = load(snapshot_resolution) if snapshot_resolution.exists() else {}
     if snapshots:

@@ -35,6 +35,9 @@ try {
         $sheet.Activate()
         $chartObject = $sheet.ChartObjects().Item(1)
         $chart = $chartObject.Chart
+        if ($chart.SeriesCollection().Count -ne $figure.rows[0].Count - 1) {
+            throw "Incorrect number of series in $($figure.id)"
+        }
         if ($chart.Axes(1).AxisTitle.Text -ne $figure.x -or $chart.Axes(2).AxisTitle.Text -ne $figure.y) {
             throw "Incorrect axis labels for $($figure.id)"
         }
@@ -42,6 +45,9 @@ try {
         $values = $sheet.Range($sheet.Cells.Item(4, 1), $lastCell).Value2
         $minimum = $chart.Axes(2).MinimumScale
         $maximum = $chart.Axes(2).MaximumScale
+        if ($null -ne $figure.major_unit -and $chart.Axes(2).MajorUnit -ne $figure.major_unit) {
+            throw "Incorrect major scale unit for $($figure.id)"
+        }
         for ($row = 0; $row -lt $figure.rows.Count; $row++) {
             if ([string] $values[($row + 1), 1] -ne [string] $figure.rows[$row][0]) {
                 throw "Incorrect category label in $($figure.id)"
