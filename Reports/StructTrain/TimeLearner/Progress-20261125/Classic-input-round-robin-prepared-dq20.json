@@ -1,0 +1,73 @@
+{
+  "kind": "timelearner_classic_candidate_round_robin_prepared",
+  "schema_version": 1,
+  "source_root_commit": "1c4d03f47f65dc0374e4755d2fdf76f604652230",
+  "source_pulse_commit": "9757cdb7611b92c385e481f5989e4021610ac364",
+  "baseline_root_commit": "ae5a2633d328b0351329153b2f6fc6c0cd21a867",
+  "baseline_pulse_commit": "e7667ea0a0a3a8e0e6c65f554fb4052d7a5de15e",
+  "dispatch": {
+    "dispatched": true,
+    "job": "classic-input-round-robin-cpp-m40-dq20",
+    "controls_commit": "682f5c4adde7fcec2ddcea2dbb4f0e5cd956e0d4",
+    "supervisor": {
+      "pid": 3546402,
+      "start_ticks": "463330382",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "source": {
+      "before": {
+        "directory": "/media/user/Data/TimeLearnerRefactor/source-classic-input-rr-before-20261125-dq20",
+        "root_commit": "ae5a2633d328b0351329153b2f6fc6c0cd21a867",
+        "pulse_commit": "e7667ea0a0a3a8e0e6c65f554fb4052d7a5de15e"
+      },
+      "after": {
+        "directory": "/media/user/Data/TimeLearnerRefactor/source-classic-input-rr-after-20261125-dq20",
+        "root_commit": "1c4d03f47f65dc0374e4755d2fdf76f604652230",
+        "pulse_commit": "9757cdb7611b92c385e481f5989e4021610ac364"
+      }
+    },
+    "expected_default_cases_per_side": 157,
+    "expected_round_robin_cases": 14,
+    "expected_before_failures": [],
+    "priority_wait_for": "input-search-state-cpp-parity-m40-dq8",
+    "controls_catalog": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-controls/20261125-classic-input-round-robin-dq20.json",
+    "controls_backup": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/8e/8e2ae6f1b5856ced37872b9f7f139f4a1f9e28d5003fdbd1a70476d5f23db9ca",
+      "sha256": "8e2ae6f1b5856ced37872b9f7f139f4a1f9e28d5003fdbd1a70476d5f23db9ca",
+      "bytes": 9272
+    },
+    "no_live_source_or_runtime_modified": true,
+    "native_configuration_enabled": false,
+    "native_scientific_admission": false,
+    "scientific_verdict": null
+  },
+  "observed_utc": "2026-11-24T22:09:21.723846+00:00",
+  "queue_owner": {
+    "pid": 3546402,
+    "start_ticks": "463330382",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
+  },
+  "queue_owner_live": true,
+  "queue_state": {
+    "stage": "waiting-for-successful-closed-mechanical-parity-and-free-slot",
+    "observed_utc": "2026-11-24T22:09:06.270378+00:00",
+    "scientific_verdict": null
+  },
+  "expected_default_cpp_cases_per_side": 157,
+  "expected_opt_in_cpp_cases": 14,
+  "completed_cpp_cases": 0,
+  "compiled_validation_pending": true,
+  "core_algorithm_implemented": true,
+  "native_configuration_enabled": false,
+  "native_configuration_rejected_until_codec_bound": true,
+  "native_integration_verified": false,
+  "action_trace_equivalence_verified": false,
+  "runtime_of_live_scientific_jobs_unchanged": true,
+  "stage_accepted": false,
+  "scientific_verdict": null
+}
