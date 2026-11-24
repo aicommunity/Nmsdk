@@ -38,12 +38,15 @@ Train завершён по бюджету. Полный пакет опубли
 132 настоящих C++-случая (114 прежних +18 Delay) завершены: **130 прошли**.
 Два сбоя произошли при подготовке связанного свойства: общий AttachTo
 вернул false до проверки learner. Процесс и вся группа закрыты.
-Fixture исправлен на штатный SetPointer; отдельная свежая Windows-сборка
-запущена, её приёмка ещё не выполнена.
+Fixture исправлен на штатный SetPointer. На отдельном свежем Windows-SDK
+после аудита5173 файлов **прошли18/18 проверок Delay**, в том числе оба
+подключения. Полного нового прогона132/132 не было. Архивирование всех
+первичных данных прежнего и нового прогонов выполняется отдельно.
 [Аудит и процесс](../../../Reports/StructTrain/TimeLearner/FixedBranchDurationHoldout-20261124/actual-artifact-audit-and-native132-running-av32.json),
 [восстановленные условия очереди](../../../Reports/StructTrain/TimeLearner/FixedBranchDurationHoldout-20261124/native132-persistent-queue-controls-av28.json).
 [Причина двух сбоев и исправление fixture](DelayConnectedFixture-20261124.ru.md),
 [полный итог132](../../../Reports/StructTrain/TimeLearner/Progress-20261124/Windows-actual132-closed-two-fixture-failures-ax1.json).
+[Новые18/18](../../../Reports/StructTrain/TimeLearner/Progress-20261124/Windows-actual18-passed-ax41.json).
 Windows at29 с bad allocation остаётся отдельной закрытой ошибкой,
 до первого наблюдения; повтор не поставлен.
 
