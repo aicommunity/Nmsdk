@@ -125,6 +125,20 @@ Reports/*
 !/Reports/StructTrainClassic/*.md
 /Reports/StructTrainClassic/~$*
 
+# Local IDE and assistant state
+/.idea/
+/.gigaide/
+/.gigacode_vsc/
+
+# Local research sources, dependencies and scratch files
+/Docs/ClassicStructTrainExperiments/
+/Scripts/ClassicStructTrain/node_modules
+/temp/
+
+# Machine-specific wrappers for older MSVC presets
+/build-win-msvc.bat
+/build-with-vs-env.bat
+
 # Persistent dependencies and local build validation logs
 /.deps/
 /.build-audit/
