@@ -38,6 +38,7 @@
 - [GUI](GUI/Overview.md) - графический интерфейс пользователя
   - [Справочник виджетов](GUI/Widgets-Reference.md) - описание основных виджетов
   - [Система стилей](GUI/Style-System.md) - темы и стилизация
+  - [Структурное обучение и распознавание в NeuroModeler](GUI/Classic-Structural-Training/README.md) — NNeuronTrainer, NNeuronLearner и графики
 
 #### Библиотеки
 
@@ -202,6 +203,7 @@ Welcome to the documentation of **Nmsdk (Neuro Modeler SDK)** - SDK for neural n
 - [GUI](GUI/Overview.md) - graphical user interface
   - [Widgets Reference](GUI/Widgets-Reference.md) - description of main widgets
   - [Style System](GUI/Style-System.md) - themes and styling
+  - [Classic structural training and inference](GUI/Classic-Structural-Training/README.md) — NNeuronTrainer, NNeuronLearner and Watch (in Russian)
 
 #### Libraries
 
