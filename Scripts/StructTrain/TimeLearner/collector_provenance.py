@@ -703,6 +703,56 @@ def _clean_closure(root):
     return value
 
 
+def capture_training_algorithm_inventory(source_root):
+    """Read this decision target's complete declared cohort from pinned Git bytes.
+
+    This is a decision-unit source projection, not full SDK admission. The
+    supported CMake declaration is deliberately literal; a changed dialect must
+    fail before compilation rather than silently omit a translation unit. The
+    compiled GoogleTest discovery must still match these IDs exactly.
+    """
+    root = _canonical(source_root)
+    commit = _git(root, "rev-parse", "HEAD").decode().strip()
+    require(_COMMIT.fullmatch(commit) is not None and not _git(
+            root, "status", "--porcelain", "--untracked-files=no",
+            "--ignore-submodules=all").strip(), "collector_decision_source_not_clean")
+
+    def read(path):
+        raw, record = _git_blob(root, commit, path)
+        working, _ = _frozen(root/path, 16*1024**2)
+        require(raw == working, "collector_worktree_git_bytes_changed")
+        return raw, record
+
+    raw, declaration = read("Tests/Integration/Libraries/TrainingAlgorithms.cmake")
+    blocks = re.findall(r"^add_executable\(Test_PulseLib_TrainingAlgorithms\s*\n"
+                        r"(.*?)^\)", raw.decode("utf-8"), re.M | re.S)
+    require(len(blocks) == 1, "collector_decision_cmake_dialect")
+    entries = re.findall(r'"([^"\n]+)"', blocks[0])
+    require(entries and len(entries) == len(set(entries)) and
+            not re.sub(r'"[^"\n]+"', "", blocks[0]).strip() and
+            all(re.fullmatch(r"\$\{_tl_(?:tests|core)\}/[A-Za-z0-9_/]+\.cpp", value)
+                for value in entries), "collector_decision_cmake_dialect")
+    paths = ["Tests/Integration/"+value[len("${_tl_tests}/"):]
+             for value in entries if value.startswith("${_tl_tests}/Libraries/Test_")]
+    require(paths, "collector_decision_test_sources_missing")
+    sources, identities = {}, []
+    for path in paths:
+        content, record = read(path)
+        ids, outside = _literal_cases(content)
+        require(not outside, "collector_test_dialect_unsupported")
+        sources[path] = {**record, "dialect": DIALECT, "ids": ids}
+        identities += ids
+    require(len(identities) == len(set(identities)), "collector_inventory_duplicate_case")
+    require(_git(root, "rev-parse", "HEAD").decode().strip() == commit and not _git(
+            root, "status", "--porcelain", "--untracked-files=no",
+            "--ignore-submodules=all").strip(), "collector_source_changed_during_capture")
+    return {"kind": "timelearner_decision_target_git_inventory", "schema_version": 1,
+            "root_commit": commit, "declaration": declaration, "sources": sources,
+            "ids": identities, "count": len(identities), "compiled_inventory_verified": False,
+            "SDK_source_verified": False, "test_success_attested": False,
+            "scientific_verdict": None}
+
+
 def capture_git_case_inventory(source_root, *, selections, inventory_documents=()):
     """Derive declared cases/hash from actual Git bytes, not copied nested hashes.
 

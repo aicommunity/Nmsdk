@@ -10,7 +10,7 @@ import re
 import subprocess
 import unittest
 
-from ..collector_provenance import frozen_digest
+from ..collector_provenance import capture_training_algorithm_inventory, frozen_digest
 from ..native_evidence import load, require
 from ..native_gate import audit_junit, _environment
 from ..process_runner import execute
@@ -113,6 +113,11 @@ class N1GeometryCppABTest(unittest.TestCase):
             type(spec['expected_before_failures']) is list and
             len(set(spec['expected_before_failures'])) == len(spec['expected_before_failures']) and
             set(spec['expected_before_failures']) <= set(expected), 'decision_cpp_expected_inventory')
+        declared_inventories = {name: capture_training_algorithm_inventory(Path(spec[name]['directory']))
+                                for name in ('before', 'after')}
+        for inventory in declared_inventories.values():
+            require(set(inventory['ids']) == set(expected) and inventory['count'] == len(expected),
+                    'decision_cpp_expected_inventory_differs_from_target_sources')
         for name in ('before', 'after'):
             root = Path(spec[name]['directory']);folder = output/name;folder.mkdir()
             build = folder/'build'
@@ -161,6 +166,8 @@ class N1GeometryCppABTest(unittest.TestCase):
         self.assertEqual(dependency_before, {str(f): frozen_digest(f, 32*1024**2) for f in dependencies})
         (output/'source-inventories.json').write_text(json.dumps(snapshots, indent=2)+'\n')
         (output/'dependency-inventory.json').write_text(json.dumps(dependency_before, indent=2)+'\n')
+        (output/'declared-case-inventories.json').write_text(
+            json.dumps(declared_inventories, indent=2)+'\n')
         (output/'result.json').write_text(json.dumps(dict(kind=self.result_kind,
             schema_version=1, results=results,
             before_expected_failure=bool(spec['expected_before_failures']), physical_models_executed=False,
