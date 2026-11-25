@@ -41,6 +41,33 @@ def _file(record, root):
     return path
 
 
+def declared_count_job(original, spec):
+    """Apply only declared search factors; preserve the original cold source."""
+    version = spec['schema_version']
+    require(type(version) is int and version in (1, 2, 3), 'count_linux_request_version')
+    require(('input_traversal' in spec) == (version == 3) and
+            ('maximum_n0_length_proposals' in spec) == (version >= 2),
+            'count_linux_request_factor_version')
+    job = matched_count_job(original, spec['run_id'], maximum_synapses=spec['maximum_synapses'])
+    if version >= 2:
+        from .n0_length_policy import declare_n0_length_job
+        job = declare_n0_length_job(job, spec['run_id'], spec['maximum_n0_length_proposals'])
+    if version == 3:
+        from .composite_configuration import project_training_configuration
+        from .input_traversal import FIELD, audit_input_traversal, declare_input_traversal_job
+        view = project_training_configuration(job['configuration'])
+        search = {**view['search'], FIELD: spec[FIELD]}
+        wire = audit_input_traversal(search, branch=view['model']['branch'],
+            normalization=view['model']['normalization'], capacitance_search=view.get('capacitance_search'))
+        require(wire is not None, 'count_linux_traversal_declaration_required')
+        job = declare_input_traversal_job(job, spec['run_id'], policy=wire['policy'],
+            candidates_per_visit=wire['candidates_per_visit'],
+            maximum_seed_elements=wire['maximum_seed_elements'])
+        require(job['configuration']['search'][FIELD] == spec[FIELD],
+                'count_linux_traversal_not_applied')
+    return job
+
+
 def context(request_path):
     from .owned_python_job import _source_snapshot
     from .runtime import source_closure
@@ -49,9 +76,10 @@ def context(request_path):
     require(type(spec) is dict and set(spec) == {'kind','schema_version','job_id','worker_host',
             'execution_root','tool_commit','sdk_source','original_job','original_initial_state',
             'runtime','run_id','maximum_synapses','operation','limits','disk'} |
-                ({'maximum_n0_length_proposals'} if spec.get('schema_version') == 2 else set()) and
+                ({'maximum_n0_length_proposals'} if spec.get('schema_version') in (2, 3) else set()) |
+                ({'input_traversal'} if spec.get('schema_version') == 3 else set()) and
             spec['kind'] == 'timelearner_linux_matched_count_training' and
-            type(spec['schema_version']) is int and spec['schema_version'] in (1, 2) and
+            type(spec['schema_version']) is int and spec['schema_version'] in (1, 2, 3) and
             sys.platform == 'linux', 'count_linux_request_schema')
     base = Path(spec['execution_root'])
     require(base in BASES and base.resolve(strict=True) == base and SOURCE.is_relative_to(base) and
@@ -73,10 +101,7 @@ def context(request_path):
             initial['training_started'] is False and initial['dynamics_checkpoint'] is False and
             initial['identity']['valid'] is True and
             initial['identity']['sha256'] == sha(initial['identity']['model']), 'count_linux_original_cold_binding')
-    job = matched_count_job(original, spec['run_id'], maximum_synapses=spec['maximum_synapses'])
-    if spec['schema_version'] == 2:
-        from .n0_length_policy import declare_n0_length_job
-        job = declare_n0_length_job(job, spec['run_id'], spec['maximum_n0_length_proposals'])
+    job = declared_count_job(original, spec)
     factor = factor_control_job(job)
     from .native_pipeline_worker import validate_job
     validate_job('train', job);validate_job('preflight', factor)
