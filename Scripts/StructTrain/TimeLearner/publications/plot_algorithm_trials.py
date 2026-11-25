@@ -11,10 +11,21 @@ import json
 import math
 from pathlib import Path
 import sys
+import textwrap
 
 
 def _digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _checked_heading(figure, lines, height):
+    """Keep the complete scientific title inside the exported image."""
+    title = figure.suptitle('\n'.join(lines), fontsize=11, y=1-.04/height)
+    figure.canvas.draw()
+    extent = title.get_window_extent(figure.canvas.get_renderer())
+    bounds = figure.bbox
+    if extent.x0 < bounds.x0 or extent.x1 > bounds.x1 or extent.y0 < bounds.y0 or extent.y1 > bounds.y1:
+        raise ValueError('Scientific figure heading exceeds the image bounds')
 
 
 def physical_trial_title(observation):
@@ -150,13 +161,17 @@ def render(specification, output, *, matplotlib_libs=None):
     with plt.rc_context(style):
         for row,observation,times,potentials,stimuli,spikes,left,right in prepared:
             count=len(potentials)
-            height=max(3.,1.7*count+.6)
+            heading = [part for line in row['title'].splitlines()
+                       for part in textwrap.wrap(line, width=66, break_on_hyphens=False)]
+            heading.append(response_ru[row['response']])
+            extra_header = .2 * max(0, len(heading)-2)
+            height=max(3.,1.7*count+.6) + extra_header
             fig,axes=plt.subplots(count,2,figsize=(6.35,height),squeeze=False)
             # Explicit margins are stable with twinned stimulus axes. Automatic
             # title positioning may otherwise overlap another row's ticks or
             # the two-line overall title after a short-window zoom.
             fig.subplots_adjust(left=.13,right=.98,bottom=.52/height,
-                                top=1-.67/height,hspace=.72,wspace=.31)
+                                top=1-(.67+extra_header)/height,hspace=.72,wspace=.31)
             peak_times=[]
             for values in potentials:
                 maximum=max(v for v in values if math.isfinite(v))
@@ -188,7 +203,7 @@ def render(specification, output, *, matplotlib_libs=None):
                     input_axis.vlines(stimuli,0,1,color='#df7b20',linewidth=.9,alpha=.8,zorder=2)
                     for time in spikes:
                         axis.axvline(time,color='#a51b23',linestyle='--',linewidth=1,zorder=4)
-            fig.suptitle(row['title']+'\n'+response_ru[row['response']],fontsize=11,y=1-.04/height)
+            _checked_heading(fig, heading, height)
             # Explicit prose caption in the DOCX explains the common colour key.
             paths=[]
             for suffix in ('png','svg'):
@@ -200,7 +215,7 @@ def render(specification, output, *, matplotlib_libs=None):
             # positive lobe. Keep the full-time positive-scale view as well.
             full,full_axes=plt.subplots(count,1,figsize=(6.35,height),squeeze=False)
             full.subplots_adjust(left=.13,right=.98,bottom=.52/height,
-                                 top=1-.67/height,hspace=.72)
+                                 top=1-(.67+extra_header)/height,hspace=.72)
             for channel,values in enumerate(potentials):
                 axis=full_axes[channel,0];low,high=response_limits[(row['case_id'],channel)]
                 span=max(high-low,abs(low)*.01,1e-8)
@@ -214,7 +229,7 @@ def render(specification, output, *, matplotlib_libs=None):
                 input_axis=axis.twinx();input_axis.set_ylim(0,1.25);input_axis.set_yticks([])
                 input_axis.vlines(stimuli,0,1,color='#df7b20',linewidth=.9,alpha=.8,zorder=2)
                 for time in spikes:axis.axvline(time,color='#a51b23',linestyle='--',linewidth=1,zorder=4)
-            full.suptitle(row['title']+'\n'+response_ru[row['response']],fontsize=11,y=1-.04/height)
+            _checked_heading(full, heading, height)
             full_paths=[]
             for suffix in ('png','svg'):
                 path=output/(row['id']+'-positive-full.'+suffix)
@@ -223,6 +238,7 @@ def render(specification, output, *, matplotlib_libs=None):
             records.append(dict(id=row['id'],case_id=row['case_id'],response=row['response'],
                 title=row['title'],trial_id=row['trial_id'],sample_id=row['sample_id'],
                 actual_reset_policy=observation.get('reset_policy'),
+                complete_heading_within_image=True, heading_lines=heading,
                 source_primary=row['primary'],source_observation=row['observation'],
                 model_revision=row['model_revision'],onset=observation['stimulus_onset'],
                 relative_stimulus_times=stimuli,relative_spike_times=spikes,
