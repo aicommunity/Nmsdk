@@ -1,0 +1,328 @@
+{
+  "kind": "timelearner_Classic_cyclic_search_actual_visits_and_recognition_queue",
+  "schema_version": 1,
+  "source_commit": "0c015238bb73afcac05d643b5423fc42b3695a49",
+  "source_actor": "/home/user/timelearner-refactor/source-Linux-DATA-recognition-elder-ee16",
+  "queue": {
+    "job": "classic-q3-native-recognition-sequence-elder-ee16",
+    "owner": {
+      "pid": 1670960,
+      "start_ticks": "517253701",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "controls_commit": "9cc4d04d2b130605c2e063e9dd6c0d198b71970c",
+    "controls_bundle": {
+      "path": "/home/user/timelearner-refactor/requests/classic-q3-native-recognition-sequence-elder-ee16/controls.bundle",
+      "sha256": "c788adfc6ea0016deac60f5dc0f95064df9b35471101fc36f025b707132d780e",
+      "size": 1458
+    },
+    "request": {
+      "path": "/home/user/timelearner-refactor/requests/classic-q3-native-recognition-sequence-elder-ee16/request.json",
+      "sha256": "42497c5bc4b80705a1b63e2524eace3800b3ab7db129db76a84552b74e32ed61",
+      "size": 3105
+    },
+    "live_at": "2026-11-25T10:33:19.215948+00:00",
+    "actual_owner_live": true,
+    "predecessor": {
+      "utc": "2026-11-25T10:32:53.377658+00:00",
+      "audit_owner_live": true,
+      "waiting_for": "exact_full_primary_audit_DATA_and_free_slot",
+      "native_recognition_started": false
+    },
+    "prior_pending_controller": {
+      "owner_live": false,
+      "cancel_requested": true,
+      "native_source_binding_created": false
+    }
+  },
+  "external_controls": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-native-recognition-controls-ee19.json",
+      "sha256": "109db57686b3f9510eff11a3f78d1cff90a8ac0028298b4631fb899637f69b85",
+      "size": 1863
+    },
+    "record": {
+      "kind": "timelearner_Elder_actual_q3_recognition_controls_independent_preservation",
+      "schema_version": 1,
+      "root_protocol_commit": "0c015238bb73afcac05d643b5423fc42b3695a49",
+      "controls_commit": "9cc4d04d2b130605c2e063e9dd6c0d198b71970c",
+      "controls_bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c7/c788adfc6ea0016deac60f5dc0f95064df9b35471101fc36f025b707132d780e",
+        "sha256": "c788adfc6ea0016deac60f5dc0f95064df9b35471101fc36f025b707132d780e",
+        "bytes": 1458
+      },
+      "actual_registration_evidence": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/25/2538a64192a0517c083a3042665c6fe8c97af0d36bf21c8d52f70b23171089ad",
+        "sha256": "2538a64192a0517c083a3042665c6fe8c97af0d36bf21c8d52f70b23171089ad",
+        "bytes": 18782
+      },
+      "source_projection_catalog": {
+        "path": "/mnt/nmsdk-structtrain-archive/operations/timelearner/prepared-sources/20261125-Linux-DATA-recognition-ee15.json",
+        "sha256": "d95acd90b8c04d71d973ea13f96d2ba52807c8529031151891a98150cfeb749e",
+        "size": 1022
+      },
+      "source_pack": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/32/320e7e3598dcfb19a2b4cf08b4941f5ce8f3f0d33836305b1b409e4f5d52f161",
+        "sha256": "320e7e3598dcfb19a2b4cf08b4941f5ce8f3f0d33836305b1b409e4f5d52f161",
+        "bytes": 5067291
+      },
+      "restored_declaration_into_empty_Git": true,
+      "request_bytes_verified": true,
+      "controller_live_at_observation_utc": "2026-11-25T10:33:19.215948+00:00",
+      "native_recognition_executed": false,
+      "scientific_verdict": null
+    }
+  },
+  "source_projection": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-sources/20261125-Linux-DATA-recognition-ee15.json",
+      "sha256": "d95acd90b8c04d71d973ea13f96d2ba52807c8529031151891a98150cfeb749e",
+      "size": 1022
+    },
+    "record": {
+      "kind": "timelearner_immutable_Linux_DATA_sequence_source",
+      "schema_version": 1,
+      "root_commit": "0c015238bb73afcac05d643b5423fc42b3695a49",
+      "source_pack": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/32/320e7e3598dcfb19a2b4cf08b4941f5ce8f3f0d33836305b1b409e4f5d52f161",
+        "sha256": "320e7e3598dcfb19a2b4cf08b4941f5ce8f3f0d33836305b1b409e4f5d52f161",
+        "bytes": 5067291
+      },
+      "projection_manifest": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c0/c03b91160763cbcb9ad013eaa0ed43d7441959adfc76cebb62dcc3a8e1f0b3ed",
+        "sha256": "c03b91160763cbcb9ad013eaa0ed43d7441959adfc76cebb62dcc3a8e1f0b3ed",
+        "bytes": 245876
+      },
+      "selected_Scripts_files": 969,
+      "full_SDK_claimed": false,
+      "active_sources_unchanged": true,
+      "scientific_verdict": null
+    }
+  },
+  "live_search_diagnostic": {
+    "external": {
+      "catalog": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-Classic-q3-live-input-visits-ee12.json",
+        "sha256": "576a3427bacd8edbf285a99cc0333118b0f1768912da8992d7fe4d5ead8049e6",
+        "size": 1148
+      },
+      "record": {
+        "kind": "timelearner_Classic_q3_live_input_visit_diagnostic_preservation",
+        "schema_version": 1,
+        "source": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/11/11b1505d6d3ee13ab8a076684c189a0cc9963d0ab019b4c756398724c43c8703",
+          "sha256": "11b1505d6d3ee13ab8a076684c189a0cc9963d0ab019b4c756398724c43c8703",
+          "bytes": 159708
+        },
+        "observation_utc": "2026-11-25T10:29:39.070807+00:00",
+        "native_owner": {
+          "pid": 305068,
+          "start_ticks": "514620464",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "native_live_at_observation": true,
+        "probe_documents": 272,
+        "search_groups_seen": 42,
+        "search_groups_per_input": {
+          "input3": 21,
+          "input0": 9,
+          "input1": 6,
+          "input2": 6
+        },
+        "raw_header_states": {
+          "completed/True/True": 272
+        },
+        "full_primary_audit_performed": false,
+        "whole_group_completeness_not_inferred_from_individual_probe": true,
+        "training_convergence_assessed": false,
+        "classification_performed": false,
+        "scientific_verdict": null
+      }
+    },
+    "utc": "2026-11-25T10:29:39.070807+00:00",
+    "native_owner": {
+      "pid": 305068,
+      "start_ticks": "514620464",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "search_groups_seen": 42,
+    "search_groups_per_input": {
+      "input3": 21,
+      "input0": 9,
+      "input1": 6,
+      "input2": 6
+    },
+    "first_search_groups": [
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/1/composite/5",
+        "input_id": "input3",
+        "epoch": 0,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/2/composite/6",
+        "input_id": "input0",
+        "epoch": 0,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/4/composite/7",
+        "input_id": "input3",
+        "epoch": 1,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/5/composite/8",
+        "input_id": "input0",
+        "epoch": 1,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/7/composite/9",
+        "input_id": "input3",
+        "epoch": 2,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/8/composite/10",
+        "input_id": "input0",
+        "epoch": 2,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/9/composite/11",
+        "input_id": "input3",
+        "epoch": 2,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/10/composite/12",
+        "input_id": "input1",
+        "epoch": 2,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/12/composite/13",
+        "input_id": "input3",
+        "epoch": 3,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/13/composite/14",
+        "input_id": "input1",
+        "epoch": 3,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/15/composite/15",
+        "input_id": "input3",
+        "epoch": 4,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/16/composite/16",
+        "input_id": "input1",
+        "epoch": 4,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/17/composite/17",
+        "input_id": "input3",
+        "epoch": 4,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/18/composite/18",
+        "input_id": "input2",
+        "epoch": 4,
+        "closed_probe_documents": 6
+      }
+    ],
+    "last_search_groups": [
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/50/composite/39",
+        "input_id": "input3",
+        "epoch": 15,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/51/composite/40",
+        "input_id": "input2",
+        "epoch": 15,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/53/composite/41",
+        "input_id": "input3",
+        "epoch": 16,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/54/composite/42",
+        "input_id": "input0",
+        "epoch": 16,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/56/composite/43",
+        "input_id": "input3",
+        "epoch": 17,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/57/composite/44",
+        "input_id": "input0",
+        "epoch": 17,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/59/composite/45",
+        "input_id": "input3",
+        "epoch": 18,
+        "closed_probe_documents": 6
+      },
+      {
+        "group": "classic-candidate-round-robin-q3-cold-elder-dv31/session/1/search/60/composite/46",
+        "input_id": "input0",
+        "epoch": 18,
+        "closed_probe_documents": 2
+      }
+    ],
+    "group_count_is_not_candidate_count": true,
+    "last_group_incomplete": true,
+    "full_primary_audit_performed": false,
+    "training_convergence_assessed": false,
+    "classification_performed": false
+  },
+  "acceptance": {
+    "source_selected_file_bytes_verified": 969,
+    "python_AST_valid": true,
+    "production_request_context_admitted": true,
+    "controller_live_verified": true,
+    "native_recognition_executed": false,
+    "all_eight_actual_observations_available": false,
+    "stage_acceptance": false
+  },
+  "scientific_verdict": null
+}
