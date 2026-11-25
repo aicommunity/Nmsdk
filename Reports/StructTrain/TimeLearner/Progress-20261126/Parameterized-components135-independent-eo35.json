@@ -1,0 +1,430 @@
+{
+  "kind": "timelearner_parameterized_component_acceptance",
+  "schema_version": 1,
+  "tool_commit": "5871619e033b56967d9042fa5208320cc0da94b4",
+  "test_source_roots": [
+    "618f18c63ba393d1a83fef2bee25ed566c1d9775",
+    "9ebc50da47345412c96133d4f894edfccde019cd"
+  ],
+  "linked_production_SDK": "d2c7487a88a5c1c372f825dc708a543c03234fcb",
+  "linked_production_PulseLib": "e36996cd53a545782b54c76d610162c602567399",
+  "independent_primary": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Parameterized-components-primary-independent-eo31.json",
+      "sha256": "94b5217f8bc7da4e3c7f5a18766be6d46072f288a961d67dd254f6f23c7f07b6",
+      "size": 28285
+    },
+    "members": 858,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/fb/fb8250cb40c139032e3de243f78ff939c2aba448b111ea6759d8dba9f06238ee",
+        "sha256": "fb8250cb40c139032e3de243f78ff939c2aba448b111ea6759d8dba9f06238ee",
+        "bytes": 151249
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/40/4099368978b3d5c08faa33bf35bf82ce92b35fe5a7be0a19d857877c53abea35",
+        "sha256": "4099368978b3d5c08faa33bf35bf82ce92b35fe5a7be0a19d857877c53abea35",
+        "bytes": 59309796
+      }
+    },
+    "unique_verified_passed_cases": 135,
+    "all_current_cases_passed": true,
+    "missing": [],
+    "dataset": [
+      {
+        "name": "DatasetEvents_contiguous_2000.json",
+        "frequency_hz": 2000,
+        "samples": 80,
+        "actual_events": [
+          0.01,
+          0.011,
+          0.012,
+          0.013
+        ],
+        "rising_edges": 1
+      },
+      {
+        "name": "DatasetEvents_contiguous_20000.json",
+        "frequency_hz": 20000,
+        "samples": 800,
+        "actual_events": [
+          0.01,
+          0.011,
+          0.012,
+          0.013
+        ],
+        "rising_edges": 1
+      },
+      {
+        "name": "DatasetEvents_separated_2000.json",
+        "frequency_hz": 2000,
+        "samples": 80,
+        "actual_events": [
+          0.01,
+          0.013,
+          0.016,
+          0.019
+        ],
+        "rising_edges": 4
+      },
+      {
+        "name": "DatasetEvents_separated_20000.json",
+        "frequency_hz": 20000,
+        "samples": 800,
+        "actual_events": [
+          0.01,
+          0.013,
+          0.016,
+          0.019
+        ],
+        "rising_edges": 4
+      }
+    ],
+    "legacy_controls": 8,
+    "loaded_runtime_files": 35,
+    "restored": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Parameterized-components-primary-independent-eo31/restored"
+  },
+  "actual_groups": [
+    {
+      "role": "original133",
+      "cases": 2,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 5,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 4,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 4,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 4,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 2,
+      "validity": "valid",
+      "assertion_status": "failed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 4,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 32,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 8,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 4,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 32,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 12,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 4,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 8,
+      "validity": "incomplete_test_observation",
+      "assertion_status": "not_assessed",
+      "reason": "native_gate_skipped_or_unfinished_case"
+    },
+    {
+      "role": "original133",
+      "cases": 4,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "original133",
+      "cases": 4,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "compatibility8-negative",
+      "cases": 8,
+      "validity": "valid",
+      "assertion_status": "failed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "compatibility16-fixed",
+      "cases": 16,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    {
+      "role": "dataset4-fixed",
+      "cases": 4,
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    }
+  ],
+  "all_primary_members_restored": 858,
+  "all_recorded_groups_closed": true,
+  "observed_closed_groups": 26,
+  "independently_recomputed_dataset_waveforms": [
+    {
+      "name": "DatasetEvents_contiguous_2000.json",
+      "frequency_hz": 2000,
+      "samples": 80,
+      "actual_events": [
+        0.01,
+        0.011,
+        0.012,
+        0.013
+      ],
+      "rising_edges": 1
+    },
+    {
+      "name": "DatasetEvents_contiguous_20000.json",
+      "frequency_hz": 20000,
+      "samples": 800,
+      "actual_events": [
+        0.01,
+        0.011,
+        0.012,
+        0.013
+      ],
+      "rising_edges": 1
+    },
+    {
+      "name": "DatasetEvents_separated_2000.json",
+      "frequency_hz": 2000,
+      "samples": 80,
+      "actual_events": [
+        0.01,
+        0.013,
+        0.016,
+        0.019
+      ],
+      "rising_edges": 4
+    },
+    {
+      "name": "DatasetEvents_separated_20000.json",
+      "frequency_hz": 20000,
+      "samples": 800,
+      "actual_events": [
+        0.01,
+        0.013,
+        0.016,
+        0.019
+      ],
+      "rising_edges": 4
+    }
+  ],
+  "actual_legacy_controller_controls": [
+    {
+      "name": "Branch-N0-f2000.json",
+      "case": "Branch-N0-f2000",
+      "frequency_hz": 2000,
+      "model_ticks": 6000,
+      "waveform_range": [
+        0,
+        0.015828572406203167
+      ]
+    },
+    {
+      "name": "Branch-N0-f20000.json",
+      "case": "Branch-N0-f20000",
+      "frequency_hz": 20000,
+      "model_ticks": 60000,
+      "waveform_range": [
+        0,
+        0.013671159307544367
+      ]
+    },
+    {
+      "name": "Branch-N1-f2000.json",
+      "case": "Branch-N1-f2000",
+      "frequency_hz": 2000,
+      "model_ticks": 6000,
+      "waveform_range": [
+        0,
+        0.015828572406203167
+      ]
+    },
+    {
+      "name": "Branch-N1-f20000.json",
+      "case": "Branch-N1-f20000",
+      "frequency_hz": 20000,
+      "model_ticks": 60000,
+      "waveform_range": [
+        0,
+        0.013671159307544367
+      ]
+    },
+    {
+      "name": "Classic-N0-f2000.json",
+      "case": "Classic-N0-f2000",
+      "frequency_hz": 2000,
+      "model_ticks": 6000,
+      "waveform_range": [
+        0,
+        0.06331428962481267
+      ]
+    },
+    {
+      "name": "Classic-N0-f20000.json",
+      "case": "Classic-N0-f20000",
+      "frequency_hz": 20000,
+      "model_ticks": 60000,
+      "waveform_range": [
+        0,
+        0.05468463723017747
+      ]
+    },
+    {
+      "name": "Classic-N1-f2000.json",
+      "case": "Classic-N1-f2000",
+      "frequency_hz": 2000,
+      "model_ticks": 6000,
+      "waveform_range": [
+        0,
+        0.06331428962481267
+      ]
+    },
+    {
+      "name": "Classic-N1-f20000.json",
+      "case": "Classic-N1-f20000",
+      "frequency_hz": 20000,
+      "model_ticks": 60000,
+      "waveform_range": [
+        0,
+        0.05468463723017747
+      ]
+    }
+  ],
+  "missing_current_cases": [],
+  "unique_passed_cases": 135,
+  "new_current_controls": 2,
+  "actual_schema_and_environment_validation": 33,
+  "production_libraries_changed": false,
+  "whole_new_SDK_build_claimed": false,
+  "legacy_vs_v2_equivalence_claimed": false,
+  "latest_scientific_workers": {
+    "Elder": {
+      "utc": "2026-11-25T22:50:36.770009+00:00",
+      "owner_live": true,
+      "grid_observations": 26,
+      "grid_closed": false,
+      "grid_binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "abcd3feb53da836e5981b60496623d8588482066c117855d1b0358eb17a847bf",
+        "unit": "timelearner-8ec63028-e070-42a6-9967-69160f3934f0.service",
+        "invocation_id": "b04188e52a444b14b83facf1976bf805",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8ec63028-e070-42a6-9967-69160f3934f0.service",
+        "initial_main_pid": 3253053,
+        "initial_start_ticks": "520450804",
+        "sha256": "71fda980c5cd889c20fab6b2c2bf4e57348f778eb6c9393a6e03fe549890b7f6"
+      }
+    },
+    "M40": {
+      "utc": "2026-11-25T22:38:31.905590+00:00",
+      "pair_owner_live": true,
+      "q3_train": {
+        "closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "e65051146b9d4008327b07176702610ab72c0fa4aa3756b2bd19b62dacee0e06",
+          "unit": "timelearner-2e1bafb5-dc4d-4f8e-b9e3-c80e1526985d.service",
+          "invocation_id": "6b86df7a44a04650b0cba82c43ab668d",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2e1bafb5-dc4d-4f8e-b9e3-c80e1526985d.service",
+          "initial_main_pid": 2577509,
+          "initial_start_ticks": "470464122",
+          "sha256": "4265dd80410681eca3885b1a58ad9487721f6b5c643bbf2dd7ded1268f47d172"
+        }
+      }
+    },
+    "Windows": {
+      "utc": "2026-11-25T22:46:56.373681+00:00",
+      "grid_observations": 25,
+      "grid_owners": [
+        {
+          "owner": {
+            "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-physical-threshold-DATA3-sdk43-win-dg21\\NeuroModelerConsole.exe",
+            "creation_filetime": "134401117795540171",
+            "pid": 8444,
+            "job_name": "Local\\TimeLearner-cab2588a-fac7-434a-8189-3e995ab3d23e",
+            "runtime_fingerprint": "77fa25c0e052822dea3e3093d304bcd7cf19343308248441af3029ba86da0791",
+            "suspended_until_limits_applied": true
+          },
+          "live": true
+        }
+      ],
+      "cap24_owner_live": true
+    }
+  },
+  "fully_accepted_stages": [
+    0
+  ],
+  "full_stage_acceptance": false,
+  "scientific_verdict": null
+}
