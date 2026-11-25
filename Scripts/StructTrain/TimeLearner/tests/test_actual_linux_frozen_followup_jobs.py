@@ -31,6 +31,56 @@ class ActualLinuxFrozenFollowupJobs(unittest.TestCase):
     def declared(self, phase, run_id='frozen-preparation-fixture'):
         return declared_job(self.original, run_id, phase)
 
+    def test_windows_third_pulse_uses_the_same_shared_native_declaration(self):
+        from Scripts.StructTrain.TimeLearner.prepared_physical_study import declare
+        from Scripts.StructTrain.TimeLearner.frozen_physical_condition import condition as shared_condition
+        before = sha(self.original)
+        job, design, identity = declare(self.original, 'third-cross-worker', {'protocol': 'third_pulse'},
+            self.runtime, threshold=100., memory_bytes=4*1024**3, wall_seconds=7200)
+        expected, expected_design = self.declared('third-pulse', 'third-cross-worker')
+        self.assertEqual(job, expected)
+        self.assertEqual(design, expected_design)
+        self.assertEqual(identity, shared_condition(job, design, self.runtime, 7200, memory_bytes=4*1024**3))
+        self.assertEqual(sha(self.original), before)
+        self.assertEqual(sum(t['label'] == 'target' for t in job['trials']), 1)
+
+    def test_windows_third_pulse_binds_real_memory_for_matrix_and_every_case(self):
+        from Scripts.StructTrain.TimeLearner.prepared_physical_study import declare
+        values = []
+        for memory in (4*1024**3, 8*1024**3):
+            _, _, identity = declare(self.original, 'third-memory', {'protocol': 'third_pulse'},
+                self.runtime, threshold=100., memory_bytes=memory, wall_seconds=7200)
+            values.append(identity['condition_fingerprint'])
+            for binding in [identity, *identity['case_conditions'].values()]:
+                execution = [v['payload'] for v in binding['artifacts'].values()
+                             if v['role'] == 'execution_policy']
+                self.assertEqual(len(execution), 1)
+                self.assertEqual(execution[0]['native_memory_bytes'], memory)
+        self.assertNotEqual(*values)
+
+    def test_windows_third_pulse_rejects_hidden_factors_and_invalid_memory(self):
+        from Scripts.StructTrain.TimeLearner.prepared_physical_study import declare
+        for memory in (True, 4.0, 0, 65*1024**3):
+            with self.subTest(memory=memory), self.assertRaises(EvidenceError):
+                declare(self.original, 'invalid-memory', {'protocol': 'third_pulse'},
+                    self.runtime, threshold=100., memory_bytes=memory, wall_seconds=7200)
+        with self.assertRaisesRegex(ValueError, 'physical_study_protocol_schema'):
+            declare(self.original, 'hidden-factor', {'protocol': 'third_pulse', 'threshold': 1},
+                self.runtime, threshold=100., memory_bytes=4*1024**3, wall_seconds=7200)
+
+    def test_windows_study_limits_are_declared_and_legacy_values_preserved(self):
+        from Scripts.StructTrain.TimeLearner.prepared_physical_study import preparation_limits
+        self.assertEqual(preparation_limits({'schema_version': 1}), (4*1024**3, 7200))
+        explicit = dict(schema_version=2, execution_limits=dict(memory_bytes=8*1024**3, maximum_wall_seconds=18000))
+        self.assertEqual(preparation_limits(explicit), (8*1024**3, 18000))
+        for key,value in [('memory_bytes', True), ('memory_bytes', 0), ('maximum_wall_seconds', True),
+                          ('maximum_wall_seconds', 18000.), ('maximum_wall_seconds', 86401)]:
+            bad = deepcopy(explicit); bad['execution_limits'][key] = value
+            with self.subTest(key=key,value=value), self.assertRaises(EvidenceError):
+                preparation_limits(bad)
+        with self.assertRaises(EvidenceError):
+            preparation_limits(dict(schema_version=1, execution_limits=explicit['execution_limits']))
+
     def test_repeat_changes_only_attempt_and_trial_identifiers(self):
         job, design = self.declared('repeat')
         normalized = lambda j: {k:([{f:v for f,v in t.items() if f not in ('run_id','trial_id')}

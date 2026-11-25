@@ -38,7 +38,12 @@ def _actor(actor, commit):
 def declare(original, run_id, study, runtime, *, threshold, memory_bytes, wall_seconds):
     """Reuse the production mathematical protocols; never infer an expected score."""
     require(type(study) is dict, 'physical_study_protocol_schema')
-    if study == {'protocol': 'new_foils'}:
+    if study == {'protocol': 'third_pulse'}:
+        from .frozen_third_pulse_study import declare_job
+        from .frozen_physical_condition import condition
+        job, design = declare_job(original, run_id)
+        identity = condition(job, design, runtime, wall_seconds, memory_bytes=memory_bytes)
+    elif study == {'protocol': 'new_foils'}:
         from .frozen_physical_foil_study import declare_job, condition
         job, design = declare_job(original, run_id)
         identity = condition(job, design, runtime, dict(threshold=threshold,
@@ -104,13 +109,30 @@ def _source(controls):
         output=output, runtime=json.loads((controls/'runtime.json').read_bytes()), records=records)
 
 
+def preparation_limits(declaration):
+    """Version 1 keeps its limits; version 2 binds explicit native budgets."""
+    version = declaration.get('schema_version')
+    require(type(version) is int and version in (1, 2), 'physical_study_preparation_schema')
+    if version == 1:
+        require('execution_limits' not in declaration, 'physical_study_preparation_schema')
+        return 4*1024**3, 7200
+    limits = declaration.get('execution_limits')
+    require(type(limits) is dict and set(limits) == {'memory_bytes', 'maximum_wall_seconds'} and
+            type(limits['memory_bytes']) is int and 32*1024**2 <= limits['memory_bytes'] <= 64*1024**3 and
+            type(limits['maximum_wall_seconds']) is int and 30 <= limits['maximum_wall_seconds'] <= 86400,
+            'physical_study_explicit_execution_limits')
+    return limits['memory_bytes'], limits['maximum_wall_seconds']
+
+
 def prepare(declaration):
     fields = {'kind', 'schema_version', 'source_controls', 'destination', 'inputs', 'output',
         'run_id', 'study', 'python_source', 'python_root'}
-    require(type(declaration) is dict and set(declaration) == fields and
+    require(type(declaration) is dict and
+        set(declaration) == fields | ({'execution_limits'} if declaration.get('schema_version') == 2 else set()) and
         declaration['kind'] == 'timelearner_physical_study_preparation' and
-        type(declaration['schema_version']) is int and declaration['schema_version'] == 1,
+        type(declaration['schema_version']) is int and declaration['schema_version'] in (1, 2),
         'physical_study_preparation_schema')
+    memory_bytes, wall_seconds = preparation_limits(declaration)
     base = Path('C:/Projects/TimeLearnerWorker').resolve(strict=True)
     actor = Path(declaration['python_source']).resolve(strict=True)
     destination = Path(declaration['destination']).resolve(strict=True)
@@ -120,7 +142,6 @@ def prepare(declaration):
         not inputs.exists() and not output.exists(), 'physical_study_fresh_worker_paths')
     _actor(actor, declaration['python_root'])
     source = _source(declaration['source_controls'])
-    memory_bytes, wall_seconds = 4*1024**3, 7200
     job, design, identity = declare(source['job'], declaration['run_id'], declaration['study'], source['runtime'],
         threshold=source['metrics']['effective_threshold'], memory_bytes=memory_bytes, wall_seconds=wall_seconds)
     require(job['source_model_data'] == source['model'], 'physical_study_declaration_changed_model')
@@ -222,14 +243,14 @@ def run(controls):
         source_observations = {r['sample_id']: json.loads((source['output']/'native'/f'trial-{i}.json').read_bytes())
             for i, r in enumerate(source['job']['trials'])}
         comparisons = []
-        # Only a new-foil grid repeats the source observation protocol. Cadence
+        # New-foil and third-pulse controls repeat the source observation protocol. Cadence
         # changes the coverage/window length, even for its first reset trial;
         # comparing it with the original full two-second source would conflate
         # different conditions. Paired reset/preserve runs need their own
         # SAME-cadence first-trial comparison at the matrix level.
         controls_to_compare = [i for i,t in enumerate(job['trials']) if
-            t['sample_id'] in source_trials and spec['study']['protocol'] in ('new_foils','heldout_matched_duration')]
-        require(spec['study']['protocol'] not in ('new_foils','heldout_matched_duration') or len(controls_to_compare) == 1,
+            t['sample_id'] in source_trials and spec['study']['protocol'] in ('new_foils','heldout_matched_duration','third_pulse')]
+        require(spec['study']['protocol'] not in ('new_foils','heldout_matched_duration','third_pulse') or len(controls_to_compare) == 1,
             'physical_study_missing_repeated_control')
         with trial_response_comparison(model, physical_data=True) as compare:
             for i in controls_to_compare:
@@ -254,6 +275,11 @@ def run(controls):
                     events_before_current_last_input=[t for t in o['spike_times'] if after(o['stimulus_times'][-1], t)],
                     first_input_interval_from_previous=None if i == 0 else
                         o['stimulus_times'][0]-observed[i-1]['stimulus_times'][0]) for i,o in enumerate(observed)])
+        if spec['study']['protocol'] == 'third_pulse':
+            from .recognition_metrics import load_physical_model_data_evaluation
+            from .trial_response_timing import summarize_trial_timing
+            evaluation_spec, observations = load_physical_model_data_evaluation(output/'native/evaluation.json')
+            _write(output/'timing.json', summarize_trial_timing(evaluation_spec, observations, metrics))
         unchanged(); require(file_record(controls/'runtime.json') == runtime_before and
             source_closure(sdk) == runtime['source_closure'], 'physical_study_runtime_changed')
         _actor(Path(spec['python_source']).resolve(strict=True), spec['python_root'])
@@ -261,7 +287,7 @@ def run(controls):
             execution='completed', validity='valid', study=spec['study'], model_revision=spec['model_revision'],
             threshold=spec['threshold'], trials=spec['expected_trials'], counts=metrics['pooled_counts'],
             condition_fingerprint=spec['condition_fingerprint'], repeated_control_comparisons=comparisons,
-            source_protocol_repeated_control_checked=spec['study']['protocol'] in ('new_foils','heldout_matched_duration'),
+            source_protocol_repeated_control_checked=spec['study']['protocol'] in ('new_foils','heldout_matched_duration','third_pulse'),
             cadence_evidence=cadence_evidence,
             frozen_model_verified=True, complete_native_observations=True, threshold_selected=False,
             # DATA and a preserved response do not attest the original Train
@@ -272,6 +298,8 @@ def run(controls):
         if spec['study']['protocol'] == 'heldout_matched_duration':
             terminal.update(protocol_sha256=design['protocol_sha256'],
                 independence_scope=design['independence_scope'])
+        if spec['study']['protocol'] == 'third_pulse':
+            terminal['native_event_timing'] = file_record(output/'timing.json')
         _write(output/'terminal.json', terminal)
     except BaseException as error:
         _write(output/'exception.json', dict(reason=str(error), traceback=traceback.format_exc(), scientific_verdict=None))
