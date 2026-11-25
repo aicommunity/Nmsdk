@@ -1,0 +1,1166 @@
+{
+  "kind": "timelearner_checked_cap8_repeat_third_pulse_and_cap24_preparation",
+  "schema_version": 1,
+  "source_worker_root": "7085d5f0678905d0b145f5fc552a33d498672002",
+  "science_primary": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-cap8-repeat-and-third-independent-em15.json",
+      "sha256": "a94906a2218280ec736bd6715a88e2060f2a06f2fa96a580c38ac51c770539b9",
+      "size": 31891
+    },
+    "members": 124,
+    "restored": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-cap8-repeat-and-third-independent-em15/restored",
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/26/26fd427faf7b7d499a068286be0d7ff8f0622abe5cd33613f4bc49a9106f3aed",
+        "sha256": "26fd427faf7b7d499a068286be0d7ff8f0622abe5cd33613f4bc49a9106f3aed",
+        "bytes": 20636
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/99/99a722f266ece8b2d966d25d9586908234a2356a8c048c3e77582e53a23a9976",
+        "sha256": "99a722f266ece8b2d966d25d9586908234a2356a8c048c3e77582e53a23a9976",
+        "bytes": 1790924
+      },
+      "source-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/93/932fa4fd32f4602c3f6e9088b57732da5e33b8d248462c52195e8461454061cd",
+        "sha256": "932fa4fd32f4602c3f6e9088b57732da5e33b8d248462c52195e8461454061cd",
+        "bytes": 5611
+      }
+    }
+  },
+  "phases": {
+    "repeat": {
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "threshold": 0.026339412714535534,
+      "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+      "timing": {
+        "kind": "timelearner_actual_trial_event_timing",
+        "schema_version": 1,
+        "source_run_id": "classic-cap8-fresh-physical-repeat-ek2",
+        "source_model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+        "declared_criterion": {
+          "anchor": "onset",
+          "begin_offset": 0,
+          "end_offset": null,
+          "id": "post_anchor_target_whole_window_foil_v1",
+          "reject_target_outside_window": true
+        },
+        "declared_counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "source_classifications_unchanged": true,
+        "full_declared_trial_set": true,
+        "trials": [
+          {
+            "trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-0",
+            "sample_id": "phasea-row-0",
+            "label": "target",
+            "presentation_index": 0,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TP",
+            "first_actual_input": 0.01,
+            "last_actual_input": 0.49,
+            "native_spike_times": [
+              0.493
+            ],
+            "spike_times_from_last_input": [
+              0.0030000000000000027
+            ],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [
+              0.493
+            ],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 1,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-1",
+            "sample_id": "phasea-row-1",
+            "label": "foil",
+            "presentation_index": 1,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 2.0105,
+            "last_actual_input": 2.4905,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-2",
+            "sample_id": "phasea-row-2",
+            "label": "foil",
+            "presentation_index": 2,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 4.011,
+            "last_actual_input": 4.491,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-3",
+            "sample_id": "phasea-row-3",
+            "label": "foil",
+            "presentation_index": 3,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 6.0115,
+            "last_actual_input": 6.4915,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-4",
+            "sample_id": "phasea-row-4",
+            "label": "foil",
+            "presentation_index": 4,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "FP",
+            "first_actual_input": 8.012,
+            "last_actual_input": 8.492,
+            "native_spike_times": [
+              8.495
+            ],
+            "spike_times_from_last_input": [
+              0.0029999999999983373
+            ],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [
+              8.495
+            ],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 1,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-5",
+            "sample_id": "phasea-row-5",
+            "label": "foil",
+            "presentation_index": 5,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 10.0125,
+            "last_actual_input": 10.4925,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-6",
+            "sample_id": "phasea-row-6",
+            "label": "foil",
+            "presentation_index": 6,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 12.013,
+            "last_actual_input": 12.493,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-7",
+            "sample_id": "phasea-row-7",
+            "label": "foil",
+            "presentation_index": 7,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 14.0135,
+            "last_actual_input": 14.4935,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          }
+        ],
+        "target_trials_with_before_last_output": [],
+        "target_trials_with_at_or_after_last_output": [
+          "classic-cap8-fresh-physical-repeat-ek2/trial-0"
+        ],
+        "target_trials_without_output": [],
+        "timing_scope": "actual_events_relative_to_last_recorded_input; necessary condition only, no inferred latency limit",
+        "native_execution_attested": false,
+        "new_response_criterion": false,
+        "scientific_verdict": null
+      },
+      "comparisons": [
+        {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "classic-cap8-data3-confirmation8-ej22/trial-0",
+          "observed_trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-0",
+          "sample_id": "phasea-row-0",
+          "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+          "source_begin": 0,
+          "observed_begin": 0,
+          "source_stimulus_onset": 0.01,
+          "observed_stimulus_onset": 0.01,
+          "absolute_clock_shift": 0,
+          "source_samples": 4001,
+          "observed_samples": 4001,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0,
+          "maximum_relative_sample_time_difference": 0,
+          "maximum_relative_history_difference": 0,
+          "maximum_relative_event_time_difference": 0,
+          "maximum_window_offset_difference": 0,
+          "maximum_absolute_sample_difference": 0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        },
+        {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "classic-cap8-data3-confirmation8-ej22/trial-1",
+          "observed_trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-1",
+          "sample_id": "phasea-row-1",
+          "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+          "source_begin": 2.0005,
+          "observed_begin": 2.0005,
+          "source_stimulus_onset": 2.0105,
+          "observed_stimulus_onset": 2.0105,
+          "absolute_clock_shift": 0,
+          "source_samples": 4001,
+          "observed_samples": 4001,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0,
+          "maximum_relative_sample_time_difference": 0,
+          "maximum_relative_history_difference": 0,
+          "maximum_relative_event_time_difference": 0,
+          "maximum_window_offset_difference": 0,
+          "maximum_absolute_sample_difference": 0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        },
+        {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "classic-cap8-data3-confirmation8-ej22/trial-2",
+          "observed_trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-2",
+          "sample_id": "phasea-row-2",
+          "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+          "source_begin": 4.001,
+          "observed_begin": 4.001,
+          "source_stimulus_onset": 4.011,
+          "observed_stimulus_onset": 4.011,
+          "absolute_clock_shift": 0,
+          "source_samples": 4001,
+          "observed_samples": 4001,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0,
+          "maximum_relative_sample_time_difference": 0,
+          "maximum_relative_history_difference": 0,
+          "maximum_relative_event_time_difference": 0,
+          "maximum_window_offset_difference": 0,
+          "maximum_absolute_sample_difference": 0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        },
+        {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "classic-cap8-data3-confirmation8-ej22/trial-3",
+          "observed_trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-3",
+          "sample_id": "phasea-row-3",
+          "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+          "source_begin": 6.0015,
+          "observed_begin": 6.0015,
+          "source_stimulus_onset": 6.0115,
+          "observed_stimulus_onset": 6.0115,
+          "absolute_clock_shift": 0,
+          "source_samples": 4001,
+          "observed_samples": 4001,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0,
+          "maximum_relative_sample_time_difference": 0,
+          "maximum_relative_history_difference": 0,
+          "maximum_relative_event_time_difference": 0,
+          "maximum_window_offset_difference": 0,
+          "maximum_absolute_sample_difference": 0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        },
+        {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "classic-cap8-data3-confirmation8-ej22/trial-4",
+          "observed_trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-4",
+          "sample_id": "phasea-row-4",
+          "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+          "source_begin": 8.002,
+          "observed_begin": 8.002,
+          "source_stimulus_onset": 8.012,
+          "observed_stimulus_onset": 8.012,
+          "absolute_clock_shift": 0,
+          "source_samples": 4001,
+          "observed_samples": 4001,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0,
+          "maximum_relative_sample_time_difference": 0,
+          "maximum_relative_history_difference": 0,
+          "maximum_relative_event_time_difference": 0,
+          "maximum_window_offset_difference": 0,
+          "maximum_absolute_sample_difference": 0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        },
+        {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "classic-cap8-data3-confirmation8-ej22/trial-5",
+          "observed_trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-5",
+          "sample_id": "phasea-row-5",
+          "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+          "source_begin": 10.0025,
+          "observed_begin": 10.0025,
+          "source_stimulus_onset": 10.0125,
+          "observed_stimulus_onset": 10.0125,
+          "absolute_clock_shift": 0,
+          "source_samples": 4001,
+          "observed_samples": 4001,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0,
+          "maximum_relative_sample_time_difference": 0,
+          "maximum_relative_history_difference": 0,
+          "maximum_relative_event_time_difference": 0,
+          "maximum_window_offset_difference": 0,
+          "maximum_absolute_sample_difference": 0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        },
+        {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "classic-cap8-data3-confirmation8-ej22/trial-6",
+          "observed_trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-6",
+          "sample_id": "phasea-row-6",
+          "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+          "source_begin": 12.003,
+          "observed_begin": 12.003,
+          "source_stimulus_onset": 12.013,
+          "observed_stimulus_onset": 12.013,
+          "absolute_clock_shift": 0,
+          "source_samples": 4001,
+          "observed_samples": 4001,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0,
+          "maximum_relative_sample_time_difference": 0,
+          "maximum_relative_history_difference": 0,
+          "maximum_relative_event_time_difference": 0,
+          "maximum_window_offset_difference": 0,
+          "maximum_absolute_sample_difference": 0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        },
+        {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "classic-cap8-data3-confirmation8-ej22/trial-7",
+          "observed_trial_id": "classic-cap8-fresh-physical-repeat-ek2/trial-7",
+          "sample_id": "phasea-row-7",
+          "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+          "source_begin": 14.0035,
+          "observed_begin": 14.0035,
+          "source_stimulus_onset": 14.0135,
+          "observed_stimulus_onset": 14.0135,
+          "absolute_clock_shift": 0,
+          "source_samples": 4001,
+          "observed_samples": 4001,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0,
+          "maximum_relative_sample_time_difference": 0,
+          "maximum_relative_history_difference": 0,
+          "maximum_relative_event_time_difference": 0,
+          "maximum_window_offset_difference": 0,
+          "maximum_absolute_sample_difference": 0,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      ],
+      "complete_observations": 8,
+      "samples_per_observation": 4001,
+      "all_recorded_loaded_files_match_original": true,
+      "production_native_inventory_and_metrics_independently_verified": true
+    },
+    "third-pulse": {
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0
+      },
+      "threshold": 0.026339412714535534,
+      "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+      "timing": {
+        "kind": "timelearner_actual_trial_event_timing",
+        "schema_version": 1,
+        "source_run_id": "classic-cap8-frozen-third-grid-win-ek12-third-pulse",
+        "source_model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+        "declared_criterion": {
+          "anchor": "onset",
+          "begin_offset": 0,
+          "end_offset": null,
+          "id": "post_anchor_target_whole_window_foil_v1",
+          "reject_target_outside_window": true
+        },
+        "declared_counts": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1,
+          "target_hit_rate": 1,
+          "foil_response_rate": 0
+        },
+        "source_classifications_unchanged": true,
+        "full_declared_trial_set": true,
+        "trials": [
+          {
+            "trial_id": "classic-cap8-frozen-third-grid-win-ek12-third-pulse/tick-240",
+            "sample_id": "third-pulse-tick-240",
+            "label": "foil",
+            "presentation_index": 0,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 0.01,
+            "last_actual_input": 0.49,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-frozen-third-grid-win-ek12-third-pulse/tick-320",
+            "sample_id": "third-pulse-tick-320",
+            "label": "foil",
+            "presentation_index": 1,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 2.0105,
+            "last_actual_input": 2.4905,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-frozen-third-grid-win-ek12-third-pulse/tick-400",
+            "sample_id": "third-pulse-tick-400",
+            "label": "foil",
+            "presentation_index": 2,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 4.011,
+            "last_actual_input": 4.491,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-frozen-third-grid-win-ek12-third-pulse/tick-480",
+            "sample_id": "phasea-row-0",
+            "label": "target",
+            "presentation_index": 3,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TP",
+            "first_actual_input": 6.0115,
+            "last_actual_input": 6.4915,
+            "native_spike_times": [
+              6.4945
+            ],
+            "spike_times_from_last_input": [
+              0.0030000000000001137
+            ],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [
+              6.4945
+            ],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 1,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-frozen-third-grid-win-ek12-third-pulse/tick-560",
+            "sample_id": "third-pulse-tick-560",
+            "label": "foil",
+            "presentation_index": 4,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 8.012,
+            "last_actual_input": 8.492,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-frozen-third-grid-win-ek12-third-pulse/tick-640",
+            "sample_id": "third-pulse-tick-640",
+            "label": "foil",
+            "presentation_index": 5,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 10.0125,
+            "last_actual_input": 10.4925,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-frozen-third-grid-win-ek12-third-pulse/tick-720",
+            "sample_id": "third-pulse-tick-720",
+            "label": "foil",
+            "presentation_index": 6,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 12.013,
+            "last_actual_input": 12.493,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          },
+          {
+            "trial_id": "classic-cap8-frozen-third-grid-win-ek12-third-pulse/tick-800",
+            "sample_id": "third-pulse-tick-800",
+            "label": "foil",
+            "presentation_index": 7,
+            "reset_policy": "reset_per_trial",
+            "declared_classification": "TN",
+            "first_actual_input": 14.0135,
+            "last_actual_input": 14.4935,
+            "native_spike_times": [],
+            "spike_times_from_last_input": [],
+            "spikes_before_last_input": [],
+            "spikes_at_or_after_last_input": [],
+            "before_last_input_count": 0,
+            "at_or_after_last_input_count": 0,
+            "timing_verdict": null
+          }
+        ],
+        "target_trials_with_before_last_output": [],
+        "target_trials_with_at_or_after_last_output": [
+          "classic-cap8-frozen-third-grid-win-ek12-third-pulse/tick-480"
+        ],
+        "target_trials_without_output": [],
+        "timing_scope": "actual_events_relative_to_last_recorded_input; necessary condition only, no inferred latency limit",
+        "native_execution_attested": false,
+        "new_response_criterion": false,
+        "scientific_verdict": null
+      },
+      "comparisons": [
+        {
+          "kind": "timelearner_trial_response_comparison",
+          "schema_version": 1,
+          "comparator_version": 1,
+          "time_basis": "actual_stimulus_onset",
+          "absolute_tolerance": 1e-12,
+          "observation_schema_version": 2,
+          "source_trial_id": "classic-cap8-data3-confirmation8-ej22/trial-0",
+          "observed_trial_id": "classic-cap8-frozen-third-grid-win-ek12-third-pulse/tick-480",
+          "sample_id": "phasea-row-0",
+          "model_revision": "1549d396c21dd14034263084f867066655292fa2de17590973c4be16779176dc",
+          "source_begin": 0,
+          "observed_begin": 6.0015,
+          "source_stimulus_onset": 0.01,
+          "observed_stimulus_onset": 6.0115,
+          "absolute_clock_shift": 6.0015,
+          "source_samples": 4001,
+          "observed_samples": 4001,
+          "sample_counts_equal": true,
+          "window_offsets_equal": true,
+          "maximum_absolute_signal_difference": 0,
+          "maximum_relative_sample_time_difference": 6.661338147750939e-16,
+          "maximum_relative_history_difference": 5.551115123125783e-16,
+          "maximum_relative_event_time_difference": 5.551115123125783e-16,
+          "maximum_window_offset_difference": 2.220446049250313e-16,
+          "maximum_absolute_sample_difference": 6.661338147750939e-16,
+          "waveforms_equal_within_declared_tolerance": true,
+          "stimulus_and_spike_events_equal": true,
+          "response_preserved": true,
+          "difference_reasons": [],
+          "pre_window_history_compared": false,
+          "scientific_verdict": null
+        }
+      ],
+      "complete_observations": 8,
+      "samples_per_observation": 4001,
+      "all_recorded_loaded_files_match_original": true,
+      "production_native_inventory_and_metrics_independently_verified": true
+    }
+  },
+  "source_Train_outcome": "budget_exhausted",
+  "source_completed_boundary": false,
+  "original_matrix_counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 1,
+    "foil_response_rate": 0.14285714285714285
+  },
+  "third_pulse_result": {
+    "TP": 1,
+    "FP": 0,
+    "FN": 0,
+    "TN": 7,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 1,
+    "target_hit_rate": 1,
+    "foil_response_rate": 0
+  },
+  "actual_rows": {
+    "kind": "timelearner_actual_cap8_third_pulse_rows",
+    "schema_version": 1,
+    "rows": [
+      {
+        "presentation_index": 0,
+        "sample_id": "third-pulse-tick-240",
+        "label": "foil",
+        "classification": "TN",
+        "inputs_ms_from_first": [
+          0,
+          80,
+          120.00000000000001,
+          480
+        ],
+        "spike_times": [],
+        "spike_ms_from_last": [],
+        "actual_LT_maximum": 0.022614148548421392,
+        "actual_LT_maximum_ms_from_first": 483.5,
+        "complete": true,
+        "samples": 4001
+      },
+      {
+        "presentation_index": 1,
+        "sample_id": "third-pulse-tick-320",
+        "label": "foil",
+        "classification": "TN",
+        "inputs_ms_from_first": [
+          0,
+          80.00000000000007,
+          160.00000000000014,
+          480
+        ],
+        "spike_times": [],
+        "spike_ms_from_last": [],
+        "actual_LT_maximum": 0.02015421113382737,
+        "actual_LT_maximum_ms_from_first": 483.5000000000003,
+        "complete": true,
+        "samples": 4001
+      },
+      {
+        "presentation_index": 2,
+        "sample_id": "third-pulse-tick-400",
+        "label": "foil",
+        "classification": "TN",
+        "inputs_ms_from_first": [
+          0,
+          80.00000000000007,
+          200.00000000000017,
+          479.99999999999955
+        ],
+        "spike_times": [],
+        "spike_ms_from_last": [],
+        "actual_LT_maximum": 0.02190233262405966,
+        "actual_LT_maximum_ms_from_first": 483.5000000000003,
+        "complete": true,
+        "samples": 4001
+      },
+      {
+        "presentation_index": 3,
+        "sample_id": "phasea-row-0",
+        "label": "target",
+        "classification": "TP",
+        "inputs_ms_from_first": [
+          0,
+          80.00000000000007,
+          240.00000000000023,
+          480.00000000000045
+        ],
+        "spike_times": [
+          6.4945
+        ],
+        "spike_ms_from_last": [
+          3.0000000000001137
+        ],
+        "actual_LT_maximum": 0.02669427555709611,
+        "actual_LT_maximum_ms_from_first": 483.5000000000003,
+        "complete": true,
+        "samples": 4001
+      },
+      {
+        "presentation_index": 4,
+        "sample_id": "third-pulse-tick-560",
+        "label": "foil",
+        "classification": "TN",
+        "inputs_ms_from_first": [
+          0,
+          80.00000000000007,
+          279.9999999999994,
+          480.00000000000045
+        ],
+        "spike_times": [],
+        "spike_ms_from_last": [],
+        "actual_LT_maximum": 0.021526794951748363,
+        "actual_LT_maximum_ms_from_first": 483.4999999999994,
+        "complete": true,
+        "samples": 4001
+      },
+      {
+        "presentation_index": 5,
+        "sample_id": "third-pulse-tick-640",
+        "label": "foil",
+        "classification": "TN",
+        "inputs_ms_from_first": [
+          0,
+          80.00000000000007,
+          320.0000000000003,
+          480.00000000000045
+        ],
+        "spike_times": [],
+        "spike_ms_from_last": [],
+        "actual_LT_maximum": 0.019910702540339248,
+        "actual_LT_maximum_ms_from_first": 483.50000000000114,
+        "complete": true,
+        "samples": 4001
+      },
+      {
+        "presentation_index": 6,
+        "sample_id": "third-pulse-tick-720",
+        "label": "foil",
+        "classification": "TN",
+        "inputs_ms_from_first": [
+          0,
+          80.00000000000007,
+          359.99999999999943,
+          480.00000000000045
+        ],
+        "spike_times": [],
+        "spike_ms_from_last": [],
+        "actual_LT_maximum": 0.01990077759244646,
+        "actual_LT_maximum_ms_from_first": 483.4999999999994,
+        "complete": true,
+        "samples": 4001
+      },
+      {
+        "presentation_index": 7,
+        "sample_id": "third-pulse-tick-800",
+        "label": "foil",
+        "classification": "TN",
+        "inputs_ms_from_first": [
+          0,
+          80.00000000000007,
+          400.00000000000034,
+          479.99999999999864
+        ],
+        "spike_times": [],
+        "spike_ms_from_last": [],
+        "actual_LT_maximum": 0.019900777324317553,
+        "actual_LT_maximum_ms_from_first": 483.4999999999994,
+        "complete": true,
+        "samples": 4001
+      }
+    ],
+    "LT_maximum_is_actual_spiking_observation": true,
+    "classification_source": "restored/third-pulse/job/audit.json",
+    "new_scorer_or_threshold": false
+  },
+  "figures": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-cap8-third-pulse8-scientific-figures-independent-em20.json",
+      "sha256": "8ebd328fd22ffe3df956afed7174ff9c41f60d1f48798985cdb00d91adbbca5a",
+      "size": 2293
+    },
+    "members": 48,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/32/3241604823ab7e2ef794b9f005a55355efb8554e2fda68148c6e081033b3c3ed",
+        "sha256": "3241604823ab7e2ef794b9f005a55355efb8554e2fda68148c6e081033b3c3ed",
+        "bytes": 8711
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/9a/9acaed6054d5638cf7cbc1ed2fff6d592fbc17af47cb5e70e60f06ee5fd00627",
+        "sha256": "9acaed6054d5638cf7cbc1ed2fff6d592fbc17af47cb5e70e60f06ee5fd00627",
+        "bytes": 2802584
+      },
+      "source-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/aa/aafdc52fb90f1630f3c8484901d9ccb3c7d91e5b8b5e3d9a8900995cccad8541",
+        "sha256": "aafdc52fb90f1630f3c8484901d9ccb3c7d91e5b8b5e3d9a8900995cccad8541",
+        "bytes": 790
+      }
+    },
+    "restored": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-cap8-third-pulse8-scientific-figures-em20/restored",
+    "reviewed_PNG": 16
+  },
+  "reviewed_scientific_PNG": 16,
+  "cap24_preparation": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-closed-training-gate-and-queue-independent-em15.json",
+      "sha256": "ff2a64cc366ed3e254d11c52aa465cb22358f1035917acbe223d7c014b827b59",
+      "size": 4557
+    },
+    "members": 44,
+    "restored": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-closed-training-gate-and-queue-em15/restored",
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/30/30e349b03672680494f32a39ea66c37ad1c63ab9bc4f9f05a652f6e74aebf377",
+        "sha256": "30e349b03672680494f32a39ea66c37ad1c63ab9bc4f9f05a652f6e74aebf377",
+        "bytes": 8007
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/79/792934fe470785ddea450ba8909a7d31950223476a90d03a522bf51c4c32a6be",
+        "sha256": "792934fe470785ddea450ba8909a7d31950223476a90d03a522bf51c4c32a6be",
+        "bytes": 5119140
+      },
+      "source-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/d9/d9468e998290fd2224952a3758df9477fc1c89442c18a424d58810dd7ef6ffdf",
+        "sha256": "d9468e998290fd2224952a3758df9477fc1c89442c18a424d58810dd7ef6ffdf",
+        "bytes": 1403
+      }
+    }
+  },
+  "cap24_registration": {
+    "dispatched": true,
+    "source_root": "7085d5f0678905d0b145f5fc552a33d498672002",
+    "request": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-closed-native-recognition-em8\\request.json",
+      "sha256": "c8d85f8316643a272cdfbf163285a202a901e4ae3f9ef09138691b99ce0a7a17",
+      "size": 2617
+    },
+    "controls_commit": "756d6c90ade6d4cbc14567b8a8fcfc432705d207",
+    "controls_bundle": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-cap24-closed-native-recognition-em8\\controls.bundle",
+      "sha256": "d08a38c2f59cc8c515056703cdfacf96ba590a41615e763448b10a7e0268522e",
+      "size": 2404
+    },
+    "task": {
+      "instance": "{BC18A738-48D5-4000-B77E-0BD183926C75}",
+      "registered": true,
+      "task": "TimeLearner-classic-cap24-closed-native-recognition-em8"
+    },
+    "gate": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\readbacks\\closed-training-actual-preparation-gate-em6\\result.json",
+      "sha256": "9b46ce565864c50ac003172ba00dca0dd4d25fc53fb6613ebf4cd3e0153941b7",
+      "size": 1731
+    },
+    "accepted_tests": 17,
+    "archive_source_result": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\readbacks\\closed-training-gate-and-queue-em9\\source-result.json",
+      "sha256": "d9468e998290fd2224952a3758df9477fc1c89442c18a424d58810dd7ef6ffdf",
+      "size": 1403
+    },
+    "archive_objects": {
+      "bundle.json": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\readbacks\\closed-training-gate-and-queue-em9\\packed\\bundle.json",
+        "sha256": "30e349b03672680494f32a39ea66c37ad1c63ab9bc4f9f05a652f6e74aebf377",
+        "size": 8007
+      },
+      "primary.tar.xz": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\readbacks\\closed-training-gate-and-queue-em9\\packed\\primary.tar.xz",
+        "sha256": "792934fe470785ddea450ba8909a7d31950223476a90d03a522bf51c4c32a6be",
+        "size": 5119140
+      }
+    },
+    "predecessors": [
+      {
+        "owner": {
+          "pid": 14936,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400625073052967"
+        },
+        "live": false
+      },
+      {
+        "owner": {
+          "pid": 4712,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134401051553912453"
+        },
+        "live": true
+      }
+    ],
+    "new_Train": false,
+    "recognition_not_yet_measured": true,
+    "scientific_verdict": null
+  },
+  "actual_Windows_preparation_tests": 17,
+  "actual_test_skips": 0,
+  "cap24_native_evaluation_not_yet_started": true,
+  "latest_workers": {
+    "Elder": {
+      "utc": "2026-11-25T20:54:02.422140+00:00",
+      "controller_live": true,
+      "grid_closed": false,
+      "completed_trial_files": 11,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "abcd3feb53da836e5981b60496623d8588482066c117855d1b0358eb17a847bf",
+        "unit": "timelearner-8ec63028-e070-42a6-9967-69160f3934f0.service",
+        "invocation_id": "b04188e52a444b14b83facf1976bf805",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8ec63028-e070-42a6-9967-69160f3934f0.service",
+        "initial_main_pid": 3253053,
+        "initial_start_ticks": "520450804",
+        "sha256": "71fda980c5cd889c20fab6b2c2bf4e57348f778eb6c9393a6e03fe549890b7f6"
+      }
+    },
+    "M40": {
+      "utc": "2026-11-25T20:54:01.828283+00:00",
+      "controller_live": true,
+      "q3": {
+        "closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "e65051146b9d4008327b07176702610ab72c0fa4aa3756b2bd19b62dacee0e06",
+          "unit": "timelearner-2e1bafb5-dc4d-4f8e-b9e3-c80e1526985d.service",
+          "invocation_id": "6b86df7a44a04650b0cba82c43ab668d",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2e1bafb5-dc4d-4f8e-b9e3-c80e1526985d.service",
+          "initial_main_pid": 2577509,
+          "initial_start_ticks": "470464122",
+          "sha256": "4265dd80410681eca3885b1a58ad9487721f6b5c643bbf2dd7ded1268f47d172"
+        }
+      }
+    },
+    "Windows": {
+      "utc": "2026-11-25T20:50:22.697514+00:00",
+      "grid": [
+        {
+          "owner": {
+            "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-physical-threshold-DATA3-sdk43-win-dg21\\NeuroModelerConsole.exe",
+            "creation_filetime": "134401117795540171",
+            "pid": 8444,
+            "job_name": "Local\\TimeLearner-cab2588a-fac7-434a-8189-3e995ab3d23e",
+            "runtime_fingerprint": "77fa25c0e052822dea3e3093d304bcd7cf19343308248441af3029ba86da0791",
+            "suspended_until_limits_applied": true
+          },
+          "live": true
+        }
+      ],
+      "completed_trial_files": 4,
+      "cap24": {
+        "files": {
+          "owner.json": {
+            "pid": 17628,
+            "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+            "creation_filetime": "134401122126898643"
+          },
+          "waiting.json": {
+            "phase": "exact_predecessors",
+            "observed": [
+              {
+                "owner": {
+                  "pid": 14936,
+                  "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+                  "creation_filetime": "134400625073052967"
+                },
+                "live": false
+              },
+              {
+                "owner": {
+                  "pid": 4712,
+                  "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+                  "creation_filetime": "134401051553912453"
+                },
+                "live": true
+              }
+            ],
+            "preparation_or_native_started": false
+          }
+        },
+        "exists": true,
+        "live": true,
+        "log_tail": ""
+      }
+    }
+  },
+  "source_runtime_not_changed": true,
+  "full_goal_and_all_original_stages_preserved": true,
+  "fully_accepted_stages": [
+    0
+  ],
+  "DOCX_v5_unchanged": true,
+  "scientific_verdict": null
+}
