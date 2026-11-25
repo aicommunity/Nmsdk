@@ -601,3 +601,12 @@ candidate anchor либо final verification. Исправлен exact expected 
 `analyze INPUTS.json --format legacy-statistic-traces --output NEW.json` — строгий описательный адаптер числовых StatisticLog; явные layout/width/hash, без trial или training PASS. [Схема и область](../../../Docs/StructTrain/TimeLearner/LegacyStatisticTraceReader.ru.md). Elder12/12 и M40 12/12 приняты; это не сертификат обучения.
 
 Managed pipeline schema2 добавляет вычисляемый ConditionSpec и journal binding; schema1 сохраняет historical operational semantics. [Схема, границы и pending приёмка](../../../Docs/StructTrain/TimeLearner/PipelineConditionBinding.ru.md).
+
+`python -m Scripts.StructTrain.TimeLearner.linux_physical_recognition_sequence --supervise REQUEST.json`
+ожидает точного владельца полного аудита Linux Train и затем выполняет
+штатный импорт DATA, восемь baseline-реакций, предложение одного порога
+и реальный пороговый повтор. Новый Train не запускается. Все четыре фазы
+имеют отдельные ограниченные группы владельца и нативного потомка;
+используются production native pipeline, ConditionSpec и первичные аудиторы.
+Это Same-Matrix diagnostic, не независимый Test и не сертификат сходимости.
+[Точная постановка и незавершённая приёмка](../../../Docs/StructTrain/TimeLearner/ClassicRoundRobinRecognitionContinuation-20261125.ru.md).
