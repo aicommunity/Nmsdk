@@ -1,5 +1,6 @@
 #include "Plot/TimeSeriesEnvelope.h"
 #include "UParameterFormEdits.h"
+#include "WindowWorkArea.h"
 
 #include <QApplication>
 #include <QCheckBox>
@@ -9,6 +10,23 @@
 
 namespace
 {
+TEST(WatchWindowGeometry, FitsAnOversizedRestoredWindowOnASmallerScreen)
+{
+    const QRect workArea(-1280, 180, 1280, 680);
+    const QRect restored(-500, 100, 1500, 980);
+    EXPECT_EQ(NMSDK::Gui::fitWindowFrameToWorkArea(restored, workArea), workArea);
+}
+
+TEST(WatchWindowGeometry, KeepsAVisibleWindowAndClampsAnOverlappingFrame)
+{
+    const QRect workArea(1920, -240, 960, 500);
+    const QRect visible(1940, -212, 650, 400);
+    EXPECT_EQ(NMSDK::Gui::fitWindowFrameToWorkArea(visible, workArea), visible);
+    const QRect overlapping(2690, 220, 640, 350);
+    EXPECT_EQ(NMSDK::Gui::fitWindowFrameToWorkArea(overlapping, workArea),
+              QRect(2240, -90, 640, 350));
+}
+
 TEST(WatchReliability, KeepsOneTickExtremaWithinTheDrawBudget)
 {
     std::list<double> times;
