@@ -1,0 +1,175 @@
+{
+  "kind": "timelearner_q3_effective_readout_review",
+  "schema_version": 1,
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-effective-readout-audit-complete-ei22.json",
+    "sha256": "c75061547d6de085152e2ec3c2f45d06e092fa05fed8640c9f14ea87f730083a",
+    "size": 15656
+  },
+  "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+  "UseAveragePotential": true,
+  "NumChannelsInGroup": "2",
+  "soma_paths": [
+    "$.Soma1",
+    "$.Soma2",
+    "$.Soma3",
+    "$.Soma4"
+  ],
+  "LT_membrane_paths": [],
+  "LT_input_bindings": [
+    {
+      "kind": "property_pointer",
+      "slot": "0",
+      "source": "$.Soma1.ExcChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "1",
+      "source": "$.Soma1.InhChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "2",
+      "source": "$.Soma2.ExcChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "3",
+      "source": "$.Soma2.InhChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "4",
+      "source": "$.Soma3.ExcChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "5",
+      "source": "$.Soma3.InhChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "6",
+      "source": "$.Soma4.ExcChannel:Output",
+      "target": "$.LTZone:Inputs"
+    },
+    {
+      "kind": "property_pointer",
+      "slot": "7",
+      "source": "$.Soma4.InhChannel:Output",
+      "target": "$.LTZone:Inputs"
+    }
+  ],
+  "active_stimulus_synapses": 34,
+  "all_34_stimulus_synapses_active": true,
+  "LT_equals_four_soma_arithmetic_mean_on_all_32008_samples": true,
+  "maximum_per_trial_LT_minus_mean_soma": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "per_trial_channel_maxima": [
+    {
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "soma_maxima": [
+        0.029661664295590584,
+        0.02637063519024918,
+        0.02495901671003775,
+        0.02677621381340556
+      ],
+      "LT_maximum": 0.026396363213189417
+    },
+    {
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "soma_maxima": [
+        0.029661658426021642,
+        0.026370634938300386,
+        0.024959016710039528,
+        0.02677621381340556
+      ],
+      "LT_maximum": 0.019862751830133724
+    },
+    {
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "soma_maxima": [
+        0.029661658426021642,
+        0.026370634938300386,
+        0.024959016710039528,
+        0.02677621381340556
+      ],
+      "LT_maximum": 0.02010904349989795
+    },
+    {
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "soma_maxima": [
+        0.026640560192110363,
+        0.024678215326830566,
+        0.024648122132247874,
+        0.026776213813405003
+      ],
+      "LT_maximum": 0.013956639144183158
+    },
+    {
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "soma_maxima": [
+        0.051101671873393206,
+        0.046956144897719265,
+        0.045400007653380925,
+        0.026840060407207322
+      ],
+      "LT_maximum": 0.02669636495569902
+    },
+    {
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "soma_maxima": [
+        0.05110167282520539,
+        0.04695614496017719,
+        0.04540000765339369,
+        0.026840060407207322
+      ],
+      "LT_maximum": 0.019878713478584165
+    },
+    {
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "soma_maxima": [
+        0.054127098425167275,
+        0.047012372681967673,
+        0.03782350872788054,
+        0.02677623266862439
+      ],
+      "LT_maximum": 0.026481360222372102
+    },
+    {
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "soma_maxima": [
+        0.05412709842516761,
+        0.047012372681967896,
+        0.03782350872788054,
+        0.02677623266862439
+      ],
+      "LT_maximum": 0.019800067842758673
+    }
+  ],
+  "classification_inferred": false,
+  "native_calculation_repeated": false,
+  "scientific_verdict": null
+}

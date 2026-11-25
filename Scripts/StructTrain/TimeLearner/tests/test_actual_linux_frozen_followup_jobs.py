@@ -107,6 +107,18 @@ class ActualLinuxFrozenFollowupJobs(unittest.TestCase):
         b = condition(job, design, self.runtime, 5400, index=0)
         self.assertEqual(a, b)
 
+    def test_DATA2_condition_uses_the_actual_native_threshold_without_a_candidate_field(self):
+        self.assertEqual(self.model['schema_version'], 2)
+        self.assertNotIn('threshold', self.model)
+        native_zone = next(n for n in self.model['neuron']['graph']['identity']['model']['nodes']
+                           if n['path'] == '$.LTZone')
+        native_threshold = native_zone['parameters']['Threshold']['data']['value']
+        self.assertEqual(native_threshold, 100.)
+        job, design = self.declared('third-pulse')
+        identity = condition(job, design, self.runtime, 5400)
+        role = identity['condition']['calibration_spec']
+        self.assertEqual(identity['artifacts'][role]['payload']['fixed_threshold'], native_threshold)
+
     def request(self):
         return dict(kind='timelearner_linux_frozen_physical_followups',schema_version=1,
             job_id='actual-q3-frozen-followups',worker_host='actual-worker',

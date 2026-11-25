@@ -15,7 +15,7 @@ import sys
 import time
 import traceback
 
-from .native_evidence import load, require
+from .native_evidence import load, number, require
 from .runtime import file_record
 from .linux_physical_recognition_sequence import BASES, GIB, write
 
@@ -177,7 +177,10 @@ def condition(job, design, runtime, wall_seconds, *, index=None):
         storage_profiles=dict(effective_graph_sha256=model['model_revision']),
         initial_state=dict(frozen_recognition_graph=model['model_revision'], dynamic_checkpoint=False),
         training_plan=dict(performed=False), input_data=dict(trials=trials), presentation_protocol=presentation,
-        calibration_spec=dict(performed=False, fixed_threshold=model['threshold'],
+        # DATA1/2 carry their native threshold in model metadata. DATA3 adds
+        # a top-level candidate field; it is not part of the base DATA wire.
+        calibration_spec=dict(performed=False,
+                              fixed_threshold=number(model['neuron']['metadata']['calibration']['threshold']),
                               selected_on_previous_eight_pattern_matrix=True),
         evaluation_spec=dict(criterion=job['criterion'], coverage_policy=job['coverage_policy'],
                              new_positive_class_assessed=False),
