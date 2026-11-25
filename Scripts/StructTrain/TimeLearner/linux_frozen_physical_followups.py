@@ -22,21 +22,32 @@ from .linux_physical_recognition_sequence import BASES, GIB, write
 SOURCE = Path(__file__).resolve().parents[3]
 MODULE = 'Scripts.StructTrain.TimeLearner.linux_frozen_physical_followups'
 PHASES = ('repeat', 'third-pulse', 'new-foils')
+CADENCE_PHASES = tuple(f'{cadence}-r{rotation}-{policy}'
+    for cadence in ('long', 'short') for rotation in range(8) for policy in ('reset', 'preserve'))
 FIELDS = {'kind', 'schema_version', 'job_id', 'worker_host', 'execution_root', 'tool_commit',
           'source_recognition_request', 'source_recognition_owner', 'native_wall_seconds', 'validation_request'}
+
+
+def phases(q):
+    """Version 1 retains its three phases; version 2 is the full cadence matrix."""
+    return CADENCE_PHASES if q.get('schema_version') == 2 else PHASES
+
+
+def whole_wall_seconds(q):
+    return 118000 if q['schema_version'] == 1 else sum(q['native_wall_seconds'].values())+400*len(phases(q))+3600
 
 
 def validate_request(q):
     from .owned_native_job import _validate_identity
     require(type(q) is dict and set(q) == FIELDS and
             q['kind'] == 'timelearner_linux_frozen_physical_followups' and
-            type(q['schema_version']) is int and q['schema_version'] == 1,
+            type(q['schema_version']) is int and q['schema_version'] in (1, 2),
             'linux_frozen_followups_request_schema')
     require(type(q['job_id']) is str and 1 <= len(q['job_id']) <= 60 and
             all(c in 'abcdefghijklmnopqrstuvwxyz0123456789-_' for c in q['job_id']) and
             type(q['tool_commit']) is str and len(q['tool_commit']) == 40 and
             all(c in '0123456789abcdef' for c in q['tool_commit']), 'linux_frozen_followups_identity')
-    require(type(q['native_wall_seconds']) is dict and set(q['native_wall_seconds']) == set(PHASES) and
+    require(type(q['native_wall_seconds']) is dict and set(q['native_wall_seconds']) == set(phases(q)) and
             all(type(v) is int and 0 < v <= 36000 for v in q['native_wall_seconds'].values()),
             'linux_frozen_followups_wall_budgets')
     _validate_identity(q['source_recognition_owner'])
@@ -72,26 +83,34 @@ def context(request):
             validation_path.resolve(strict=True) == validation_path and
             file_record(validation_path) == q['validation_request'], 'linux_frozen_followups_validation_binding')
     gate = validation_request(load(validation_path)); operation = gate['operation']
+    fixtures = {'TIMELEARNER_LINUX_DATA_SEQUENCE_FIXTURE', 'TIMELEARNER_LINUX_FROZEN_TIMING_FIXTURE'}
+    if q['schema_version'] == 2:
+        fixtures.add('TIMELEARNER_ITI_SOURCE')
     require(gate['tool_commit'] == q['tool_commit'] and gate['execution_root'] == str(base) and
             gate['worker_host'] == q['worker_host'] and gate['job_id'] == q['job_id']+'-scope-gate' and
             operation['kind'] == 'python-validation' and operation['source'] ==
             dict(path=str(SOURCE), commit=q['tool_commit']) and
-            set(operation['fixtures']) == {'TIMELEARNER_LINUX_DATA_SEQUENCE_FIXTURE',
-                                          'TIMELEARNER_LINUX_FROZEN_TIMING_FIXTURE'},
+            set(operation['fixtures']) == fixtures,
             'linux_frozen_followups_validation_scope')
     suite_path = Path(operation['suite']['path'])
     require(suite_path == controls/'scope-gate/suite.json' and
             file_record(suite_path)['sha256'] == operation['suite']['sha256'],
             'linux_frozen_followups_validation_suite_binding')
     suite = load(suite_path)
-    require(suite['modules'] == ['Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job',
-            'Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs'],
+    modules = ['Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job',
+               'Scripts.StructTrain.TimeLearner.tests.test_actual_linux_frozen_followup_jobs']
+    if q['schema_version'] == 2:
+        modules.append('Scripts.StructTrain.TimeLearner.tests.test_frozen_physical_iti_design')
+        modules.append('Scripts.StructTrain.TimeLearner.tests.test_linux_cadence_matrix')
+    require(suite['modules'] == modules,
             'linux_frozen_followups_required_validation_modules')
     return dict(q=q, base=base, controls=controls, output=output, request=request, gate=gate,
                 request_record=file_record(request), source=source)
 
 
 def guard(p):
+    require('deadline' not in p or time.monotonic() < p['deadline'],
+            'linux_frozen_followups_whole_attempt_budget_exhausted')
     require(file_record(p['request']) == p['request_record'] and
             file_record(p['source']['request']) == p['q']['source_recognition_request'] and
             file_record(Path(p['q']['validation_request']['path'])) == p['q']['validation_request'] and
@@ -149,6 +168,11 @@ def confirmed_source(p):
 def declared_job(original, run_id, phase):
     from .model_identity import canonical_model_sha256 as sha
     from .native_pipeline_worker import validate_job
+    if phase in CADENCE_PHASES:
+        from .frozen_physical_iti_study import declare_job
+        cadence, rotation, policy = phase.split('-')
+        return declare_job(original, run_id, rotation=int(rotation[1:]), cadence=cadence,
+            reset_policy='reset_per_trial' if policy == 'reset' else 'preserve_neuron_dynamics')
     if phase == 'third-pulse':
         from .frozen_third_pulse_study import declare_job
         return declare_job(original, run_id)
@@ -184,12 +208,13 @@ def phase_worker(request, phase):
     from .job_source_transport import TRANSPORT
     from .trial_response_comparison import trial_response_comparison
     p = context(request); q = p['q']; guard(p); _source_snapshot(SOURCE, q['tool_commit'])
+    require(phase in phases(q), 'linux_frozen_followups_unknown_phase')
     directory = p['output']/phase; output = p['base']/'readbacks'/(q['job_id']+'-'+phase)
     state = inspect(directory/'process/contained')
     require(not state['all_processes_closed'] and state['binding']['initial_main_pid'] == os.getpid(),
             'linux_frozen_followups_worker_not_bound_main')
     source = confirmed_source(p); require(not source['no_candidate'], 'linux_frozen_followups_no_threshold_candidate')
-    if phase != 'repeat':
+    if q['schema_version'] == 1 and phase != 'repeat':
         repeat = load(p['output']/'repeat/terminal.json')
         require(repeat['execution'] == 'completed' and repeat['validity'] == 'valid' and
                 repeat['all_eight_waveforms_and_events_preserved'] and
@@ -203,7 +228,11 @@ def phase_worker(request, phase):
         demands=dict(slots=1, memory_bytes=12*GIB, disk_bytes=2*GIB))
     write(directory/'reservation.json', lease)
     job, design = declared_job(source['job'], q['job_id']+'-'+phase, phase)
-    binding = condition(job, design, runtime, wall)
+    if q['schema_version'] == 2:
+        from .frozen_physical_iti_study import condition as cadence_condition
+        binding = cadence_condition(job, design, runtime, threshold=source['model']['threshold'])
+    else:
+        binding = condition(job, design, runtime, wall)
     write(directory/'job.json', job); write(directory/'design.json', design); write(directory/'condition.json', binding)
     write(directory/'source-records.json', source['records'])
     policy = validate_policy(dict(kind='timelearner_native_process_policy', schema_version=1,
@@ -219,16 +248,36 @@ def phase_worker(request, phase):
             metrics['model_revision'] == source['model']['model_revision'] and
             metrics['effective_threshold'] == source['model']['threshold'], 'linux_frozen_followups_metrics_changed')
     observations = [load(output/'native'/f'trial-{i}.json') for i in range(expected_count)]
-    require(all(o['complete'] and o['valid'] and not o['censored'] and len(o['samples']) == 4001
-                for o in observations), 'linux_frozen_followups_incomplete_observation_window')
+    require(all(o['complete'] and o['valid'] and not o['censored'] and
+                len(o['samples']) == round(t['duration']*o['frequency_hz'])+1
+                for o, t in zip(observations, job['trials'])), 'linux_frozen_followups_incomplete_observation_window')
     prior = {t['sample_id']:load(source['run']/'native'/f'trial-{i}.json') for i,t in enumerate(source['job']['trials'])}
     comparisons = []
     with trial_response_comparison(source['model'], physical_data=True) as compare:
-        for row in observations:
-            if row['sample_id'] in prior:
-                comparisons.append(compare(prior[row['sample_id']], row))
-    require(len(comparisons) == (8 if phase == 'repeat' else 1) and
+        if q['schema_version'] == 1:
+            for row in observations:
+                if row['sample_id'] in prior:
+                    comparisons.append(compare(prior[row['sample_id']], row))
+        elif phase.endswith('-preserve'):
+            reset_phase = phase.removesuffix('-preserve')+'-reset'
+            paired = p['base']/'readbacks'/(q['job_id']+'-'+reset_phase)
+            reset_result = load(p['output']/reset_phase/'terminal.json')
+            require(reset_result['validity'] == 'valid' and reset_result['frozen_model_verified'] and
+                    inspect(paired/'process/contained')['all_processes_closed'],
+                    'linux_frozen_followups_paired_reset_not_closed')
+            comparisons.append(compare(load(paired/'native/trial-0.json'), observations[0]))
+    expected_comparisons = (8 if phase == 'repeat' else 1) if q['schema_version'] == 1 else int(phase.endswith('-preserve'))
+    require(len(comparisons) == expected_comparisons and
             all(r['response_preserved'] for r in comparisons), 'linux_frozen_followups_actual_control_changed')
+    cadence_evidence = None
+    if q['schema_version'] == 2:
+        from .native_evidence import equal
+        quiet = number(observations[-1]['end'])-number(observations[-1]['stimulus_times'][-1])
+        require(quiet > 2 or equal(quiet, 2), 'linux_frozen_followups_final_quiet_tail_incomplete')
+        cadence_evidence = dict(final_quiet_tail_seconds=quiet, target_position=design['target_position'],
+            paired_same_cadence_first_trial_verified=bool(comparisons),
+            complete_contiguous_observations_verified=True,
+            carryover_events_not_causally_assigned_to_a_single_pattern=True)
     write(directory/'response-comparisons.json', comparisons)
     write(directory/'timing.json', physical_evaluation_timing(output/'native/evaluation.json', metrics))
     require(all(file_record(Path(f)) == r for f,r in source['records'].items()),
@@ -239,7 +288,11 @@ def phase_worker(request, phase):
         complete_observations=expected_count, model_revision=source['model']['model_revision'],
         source_model_data_sha256=source['model']['sha256'], threshold=source['model']['threshold'],
         condition_fingerprint=binding['condition_fingerprint'], frozen_model_verified=True,
-        compared_source_controls=len(comparisons), all_eight_waveforms_and_events_preserved=phase == 'repeat',
+        compared_source_controls=len(comparisons) if q['schema_version'] == 1 else 0,
+        compared_paired_first_trials=len(comparisons) if q['schema_version'] == 2 else 0,
+        all_eight_waveforms_and_events_preserved=phase == 'repeat',
+        comparison_scope='original_eight' if q['schema_version'] == 1 else 'paired_same_cadence_first_reset_trial',
+        cadence_evidence=cadence_evidence,
         source_training_outcome=source['terminal']['actual_source']['source_training_outcome'],
         source_completed_boundary=source['terminal']['actual_source']['completed_boundary'],
         training_performed=False, threshold_selected=False, independent_positive_class=False,
@@ -255,10 +308,11 @@ def supervise(request):
     p = context(request); q = p['q']; root = p['output']; root.mkdir()
     write(p['controls']/'owner.json', _identity()); _source_snapshot(SOURCE, q['tool_commit'])
     registry = Reservations.open_existing(p['base']/'resource-reservations.sqlite3'); begun = time.monotonic()
+    p['deadline'] = begun+whole_wall_seconds(q)
     try:
         while True:
             guard(p)
-            require(time.monotonic()-begun < 118000 and not (p['controls']/'cancel.request').exists(),
+            require(time.monotonic()-begun < whole_wall_seconds(q) and not (p['controls']/'cancel.request').exists(),
                     'linux_frozen_followups_predecessor_wait_budget_or_cancel')
             require(load(p['source']['controls']/'owner.json') == q['source_recognition_owner'] and
                     not (p['source']['controls']/'exception.json').exists(), 'linux_frozen_followups_predecessor_failed')
@@ -280,12 +334,28 @@ def supervise(request):
         write(root/'actual-source.json', dict(model_revision=source['model']['model_revision'],
             threshold=source['model']['threshold'], records=source['records'],
             actual_training=source['terminal']['actual_source'], scientific_verdict=None))
+        if q['schema_version'] == 2:
+            runtime = load(p['source']['runtime'])
+            from .frozen_physical_iti_study import condition as cadence_condition
+            declarations = []
+            for phase in phases(q):
+                job, design = declared_job(source['job'], q['job_id']+'-'+phase, phase)
+                binding = cadence_condition(job, design, runtime, threshold=source['model']['threshold'])
+                declarations.append(dict(phase=phase, job_sha256=job['sha256'], design=design,
+                    condition_fingerprint=binding['condition_fingerprint']))
+            require(len({d['condition_fingerprint'] for d in declarations}) == 32 and
+                    {d['design']['target_position'] for d in declarations} == set(range(8)),
+                    'linux_frozen_followups_cadence_matrix_incomplete')
+            write(root/'matrix-design.json', dict(cases=declarations, native_trials=256,
+                whole_wall_seconds=whole_wall_seconds(q), training_performed=False,
+                threshold_selected=False, expected_response_counts=None, scientific_verdict=None))
         del source
         # Numerical work keeps priority. The contained preparation checks wait
         # for the exact predecessor and run before any new native calculation.
         from .owned_python_job import run as run_validation
         from .contained_process import inspect
-        wait_capacity(p, registry, begun, 'scope-gate', check_guard=guard)
+        wait_capacity(p, registry, time.monotonic() if q['schema_version'] == 2 else begun,
+                      'scope-gate', check_guard=guard)
         require(run_validation(Path(q['validation_request']['path'])) == 0,
                 'linux_frozen_followups_scope_gate_failed_no_native_start')
         gate_output = p['base']/'readbacks'/p['gate']['job_id']
@@ -299,8 +369,9 @@ def supervise(request):
             executed_tests=checked['executed_tests'], skipped=0, all_processes_closed=True,
             metadata_only=True, native_response_preservation_not_yet_proven=True))
         results = {}
-        for phase in PHASES:
-            wait_capacity(p, registry, begun, phase, check_guard=guard)
+        for phase in phases(q):
+            wait_capacity(p, registry, time.monotonic() if q['schema_version'] == 2 else begun,
+                          phase, check_guard=guard)
             directory = root/phase; directory.mkdir()
             runtime = dict(schema_version=2, source_closure=dict(kind='frozen_physical_followups_controller', tool_root=q['tool_commit']),
                 executable=file_record(Path(sys.executable)), app_ini=p['request_record'], compiler=file_record(Path(sys.executable)),
@@ -331,7 +402,7 @@ def main():
     group.add_argument('--supervise', type=Path); group.add_argument('--worker', nargs=2)
     args = parser.parse_args()
     if args.worker:
-        require(args.worker[1] in PHASES, 'linux_frozen_followups_unknown_phase')
+        require(args.worker[1] in PHASES+CADENCE_PHASES, 'linux_frozen_followups_unknown_phase')
         phase_worker(Path(args.worker[0]), args.worker[1])
     else:
         supervise(args.supervise)
