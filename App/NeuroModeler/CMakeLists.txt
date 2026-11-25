@@ -256,11 +256,13 @@ if (RDK_USE_OPENCV AND OpenCV_FOUND)
   target_link_libraries(NeuroModeler PRIVATE ${OpenCV_LIBS})
 endif()
 
-# App-local styles and shared help preserve the GUI's existing lookup rules
+# App-local GUI assets and shared help preserve the lookup rules
 # with isolated runtime/<configuration> output directories.
 add_custom_command(TARGET NeuroModeler POST_BUILD
   COMMAND "${CMAKE_COMMAND}" -E copy_directory
     "${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Styles" "$<TARGET_FILE_DIR:NeuroModeler>/Styles"
+  COMMAND "${CMAKE_COMMAND}" -E copy_directory
+    "${CMAKE_SOURCE_DIR}/Bin/WatchPresets" "$<TARGET_FILE_DIR:NeuroModeler>/WatchPresets"
   COMMAND "${CMAKE_COMMAND}" -E copy_directory
     "${CMAKE_SOURCE_DIR}/Bin/Help" "$<TARGET_FILE_DIR:NeuroModeler>/../Help"
   VERBATIM COMMENT "Deploy application styles and help")
