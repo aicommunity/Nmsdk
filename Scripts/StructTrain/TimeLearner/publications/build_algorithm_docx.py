@@ -212,7 +212,10 @@ def build(source,output,*,diagrams,figures=None,draft=False,release_candidate=Fa
             p.add_run().add_picture(str(path),width=Inches(width*scale),height=Inches(height*scale))
             caption_text=caption.rstrip().rstrip('.') if layout else caption
             c=para('Рисунок '+str(len(used)+1)+(' — ' if layout else ' ')+caption_text,'Caption');c.paragraph_format.keep_together=True
-            if source_ref:para('Источник измерений: '+source_ref,'Caption')
+            if source_ref:
+                c.paragraph_format.keep_with_next=True
+                provenance=para('Источник измерений: '+source_ref,'Caption')
+                provenance.paragraph_format.keep_together=True
             used.append(dict(file=str(path),sha256=digest(path),caption=caption,source_ref=source_ref))
         def diagram(identity,caption):
             # Keep the vertical topology readable without expanding its labels
