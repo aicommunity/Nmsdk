@@ -1,0 +1,71 @@
+{
+  "utc": "2026-11-25T08:03:39.084617+00:00",
+  "jobs": {
+    "Classic-cap8-physical-projection-dz13": {
+      "exists": true,
+      "files": {
+        "owner.json": {
+          "pid": 18816,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400665982507767"
+        },
+        "terminal.json": {
+          "execution": "completed",
+          "validity": "valid",
+          "physical_projection_complete": true,
+          "all_processes_closed": true,
+          "output": "C:\\Projects\\TimeLearnerWorker\\jobs\\Classic-cap8-physical-projection-dz13",
+          "native_import_and_calibration_pending": true,
+          "source_files_not_removed": true,
+          "scientific_verdict": null
+        },
+        "process-result.json": {
+          "kind": "timelearner_windows_process_result",
+          "schema_version": 1,
+          "execution": "completed",
+          "validity": "valid",
+          "reason": "exit_zero",
+          "returncode": 0,
+          "scientific_verdict": null,
+          "thread_limit_enforced": false,
+          "memory_limit_semantics": "job_committed_virtual_memory",
+          "wall_budget_scope": "whole_attempt_including_preparation",
+          "descendants_at_main_exit": [],
+          "all_processes_closed": true,
+          "cooperative_capture": "not_requested",
+          "runtime_provenance": "loaded_files_captured",
+          "observed_module_files": 37,
+          "wall_seconds": 234.96151719987392,
+          "child_resumed": true,
+          "job_name": "Local\\TimeLearner-aaf24660-59b2-46bf-a407-011135c30194"
+        }
+      },
+      "owners": [
+        {
+          "owner": {
+            "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+            "creation_filetime": "134400665995538173",
+            "pid": 21696,
+            "job_name": "Local\\TimeLearner-aaf24660-59b2-46bf-a407-011135c30194",
+            "runtime_fingerprint": "5d5fc5b7e9a22988d70eb39794a4b80ba4bf130664d4763b2a0aa8dfde874533",
+            "suspended_until_limits_applied": true
+          },
+          "live": false
+        }
+      ],
+      "owner_live": false
+    },
+    "Classic-cap8-native-conversion-after-cap24-dz21": {
+      "exists": true,
+      "files": {
+        "owner.json": {
+          "pid": 11864,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400673778285243"
+        }
+      },
+      "owners": [],
+      "owner_live": true
+    }
+  }
+}
