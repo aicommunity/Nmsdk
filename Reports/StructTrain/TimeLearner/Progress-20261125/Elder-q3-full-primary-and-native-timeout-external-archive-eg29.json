@@ -1,0 +1,101 @@
+{
+  "kind": "timelearner_closed_q3_full_primary_external_publication",
+  "schema_version": 1,
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-full-Train-and-native-timeout-primary-eg23.json",
+    "sha256": "09e918d02d975bfc362fde74bd44507eb63c4d9173517c041b9b68c6b4ba689e",
+    "size": 6528
+  },
+  "independent_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-full-primary-independent-eg27.json",
+    "sha256": "241a3270e3c395e50af514caa0471bd35757e6462e31addeba84c52e84449a5e",
+    "size": 3551
+  },
+  "objects": {
+    "full_Train": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ff/fff70c58f9c74b3c0ef3e3ad53d7056adcd478a9224e50be2372b24326642cc7",
+        "sha256": "fff70c58f9c74b3c0ef3e3ad53d7056adcd478a9224e50be2372b24326642cc7",
+        "bytes": 240066
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ec/ec3b8e9f49089a5d126ff04a977b7df044ad024bd686aef9f43e1b7f7477882f",
+        "sha256": "ec3b8e9f49089a5d126ff04a977b7df044ad024bd686aef9f43e1b7f7477882f",
+        "bytes": 36401060
+      }
+    },
+    "provenance_and_failed_evaluation": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a3/a3ffb39089c3e0adeed0defbc6ad9728fa370d6f89c571cd62ea5995bc7356f5",
+        "sha256": "a3ffb39089c3e0adeed0defbc6ad9728fa370d6f89c571cd62ea5995bc7356f5",
+        "bytes": 28784
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/03/03b0ad0cda410e96a4a8326ebd6f8304ee2b9224603c607e84b80c181b8347bf",
+        "sha256": "03b0ad0cda410e96a4a8326ebd6f8304ee2b9224603c607e84b80c181b8347bf",
+        "bytes": 1226172
+      }
+    }
+  },
+  "full_Train": {
+    "members": 1106,
+    "expanded_bytes": 2120497533,
+    "archive_bytes": 36401060,
+    "native_outcome": "budget_exhausted",
+    "runtime_binary_included": true
+  },
+  "failed_evaluation_and_provenance": {
+    "members": 173,
+    "expanded_bytes": 410446755,
+    "archive_bytes": 1226172,
+    "closed_python_collection_included": true
+  },
+  "restorations": {
+    "full_Train": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "ec3b8e9f49089a5d126ff04a977b7df044ad024bd686aef9f43e1b7f7477882f",
+      "archive_members_verified": 1106,
+      "retained_regular_files": 1106,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "provenance_and_failed_evaluation": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "03b0ad0cda410e96a4a8326ebd6f8304ee2b9224603c607e84b80c181b8347bf",
+      "archive_members_verified": 173,
+      "retained_regular_files": 173,
+      "compatibility": "retain-regular-glog-aliases-v1",
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    }
+  },
+  "total_member_bytes_verified": 1279,
+  "source_package_sha256": "9102eded37a51f981107c466fe9a831755c2086603b3506bd012d49f0bda0dd2",
+  "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+  "original_Train_outcome": "budget_exhausted",
+  "completed_boundary": false,
+  "failed_native_execution": "timeout",
+  "positive_eight_pattern_verdict_forbidden": true,
+  "original_source_files_unchanged": true,
+  "heavy_outputs_in_root_Git": false,
+  "scientific_verdict": null
+}
