@@ -16,6 +16,14 @@ from . import gtest_full_names
 
 FIELDS = {"kind", "schema_version", "runtime_manifest", "source_root", "expected_test_ids",
           "maximum_wall_seconds", "asan_options"}
+ARTIFACT_ENVIRONMENT = frozenset(('TIMELEARNER_ARCHIVE_TEST_DIR', 'TIMELEARNER_COMPAT_OUTPUT',
+    'TIMELEARNER_PROFILE_TEST_DIR', 'TIMELEARNER_PROBE_OUTPUT', 'TL_HOT_READOUT_DIR', 'TL_LOADED_READOUT_DIR'))
+
+
+def artifact_directories_valid(values):
+    return (type(values) is dict and set(values) <= ARTIFACT_ENVIRONMENT and
+            all(type(v) is str and re.fullmatch(r'[A-Za-z][A-Za-z0-9_-]*', v) for v in values.values()) and
+            len(set(values.values())) == len(values))
 
 
 def supported_specification(spec):
@@ -30,9 +38,10 @@ def supported_specification(spec):
         return set(spec) == FIELDS
     if spec['schema_version'] == 6:
         limits, inputs = spec.get('process_limits'), spec.get('data_inputs')
-        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits', 'data_inputs'} and
+        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits', 'data_inputs', 'artifact_directories'} and
                 spec['cooperative_runtime_capture'] is True and type(inputs) is list and
                 (not inputs or native_gate_inputs.valid_declarations(inputs)) and
+                artifact_directories_valid(spec['artifact_directories']) and
                 type(limits) is dict and set(limits) == {'memory_bytes', 'tasks'} and
                 type(limits['memory_bytes']) is int and 0 < limits['memory_bytes'] <= 2**63-1 and
                 type(limits['tasks']) is int and 0 < limits['tasks'] <= 2**31-1)
@@ -156,6 +165,15 @@ def run_native_gate(specification, output):
     environment.update(ASAN_OPTIONS=spec["asan_options"],
                        TIMELEARNER_EXECUTION_OUTPUT=str(output/"native"),
                        TIMELEARNER_COMPOSITE_OUTPUT=str(output/"native-composite"))
+    if full_names:
+        # Never inherit fixture selectors/baselines from the operator shell.
+        environment.update({name: None for name in ARTIFACT_ENVIRONMENT})
+        environment.update(TIMELEARNER_COMPAT_BASELINE=None, TIMELEARNER_COMPAT_CHILD=None,
+                           TIMELEARNER_ARCHIVE_CHILD_INPUT=None, TIMELEARNER_ARCHIVE_CHILD_OUTPUT=None)
+        for name, directory in spec['artifact_directories'].items():
+            path = output/'test-artifacts'/directory
+            path.mkdir(parents=True, exist_ok=False)
+            environment[name] = str(path)
     with _environment(environment):
         runner, limits = execute, {}
         if spec['schema_version'] in (3, 5, 6):

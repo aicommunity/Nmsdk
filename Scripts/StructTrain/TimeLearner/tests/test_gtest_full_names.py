@@ -12,7 +12,7 @@ from xml.etree import ElementTree as ET
 
 from .. import gtest_full_names as subject
 from ..native_evidence import EvidenceError
-from ..native_gate import audit_junit, supported_specification
+from ..native_gate import audit_junit, supported_specification, artifact_directories_valid
 
 
 class ActualCompiledGTestNames(unittest.TestCase):
@@ -37,8 +37,13 @@ class ActualCompiledGTestNames(unittest.TestCase):
     def test_saved_listing_exactly_matches_all_compiled_ids(self):
         self.assertTrue(self.crosscheck['accepted'])
         old = [n.replace('.', '/', 1) for n in self.names]
-        self.assertEqual(set(old), set(self.crosscheck['compiled']))
-        self.assertEqual(len(old), len(self.crosscheck['compiled']))
+        # Explicit adapter: the historical worker retained one space before
+        # GetParam comments. Current selectors still reject all whitespace.
+        historical = self.crosscheck['compiled']
+        self.assertTrue(all(n == n.rstrip() or (n.endswith(' ') and not n.endswith('  '))
+                            for n in historical))
+        self.assertEqual(set(old), {n.rstrip() for n in historical})
+        self.assertEqual(len(old), len(historical))
         self.assertGreater(len(old), len(self.crosscheck['expected']))
 
     def test_parameterized_suite_and_case_slashes_survive_filter(self):
@@ -129,10 +134,10 @@ class ActualCompiledGTestNames(unittest.TestCase):
                 audit_junit(self.xml, names, full_names=True)
 
     def test_schema6_requires_explicit_inputs_capture_and_integer_process_limits(self):
-        spec = dict(self.legacy, schema_version=6, data_inputs=[], cooperative_runtime_capture=True)
+        spec = dict(self.legacy, schema_version=6, data_inputs=[], artifact_directories={}, cooperative_runtime_capture=True)
         spec['process_limits'] = dict(memory_bytes=4*1024**3, tasks=32)
         self.assertTrue(supported_specification(spec))
-        for key in ('data_inputs', 'cooperative_runtime_capture', 'process_limits'):
+        for key in ('data_inputs', 'artifact_directories', 'cooperative_runtime_capture', 'process_limits'):
             missing = dict(spec); del missing[key]
             self.assertFalse(supported_specification(missing))
         for change in (dict(data_inputs=None), dict(data_inputs=[{}]),
@@ -151,6 +156,17 @@ class ActualCompiledGTestNames(unittest.TestCase):
         self.assertTrue(supported_specification(self.legacy))
         expected = self.legacy['expected_test_ids']
         self.assertTrue(all(n.count('/') == 1 and '.' not in n for n in expected))
+
+    def test_artifact_outputs_are_declared_owned_directories_instead_of_arbitrary_environment(self):
+        self.assertTrue(artifact_directories_valid({}))
+        self.assertTrue(artifact_directories_valid(dict(TIMELEARNER_PROFILE_TEST_DIR='profiles',
+                                                        TL_HOT_READOUT_DIR='hot-reset')))
+        for value in (None, [], {'PATH':'bin'}, {'TIMELEARNER_COMPAT_CHILD':'yes'},
+                      {'TIMELEARNER_PROFILE_TEST_DIR':'../outside'},
+                      {'TIMELEARNER_PROFILE_TEST_DIR':'/absolute'},
+                      {'TIMELEARNER_PROFILE_TEST_DIR':'nested/path'},
+                      {'TIMELEARNER_PROFILE_TEST_DIR':'same', 'TL_HOT_READOUT_DIR':'same'}):
+            self.assertFalse(artifact_directories_valid(value))
 
 
 if __name__ == '__main__':
