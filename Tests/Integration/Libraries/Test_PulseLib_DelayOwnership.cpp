@@ -428,9 +428,22 @@ template<class Owner> void ActiveProbeOwnership(unsigned frequency, unsigned inp
         EXPECT_TRUE(dataset->Delay.IsConnected());
         dataset->Delay.DetachFrom();
     }
+    QJsonArray rawTraces;
+    for (const auto& trace : traces) {
+        QJsonArray frames;
+        for (const auto& sample : trace) {
+            QJsonArray potentials, events;
+            for (double value : sample.potentials) potentials.append(value);
+            for (const auto& event : sample.newStimuli)
+                events.append(QJsonObject{{"id", QString::fromStdString(event.id)}, {"time", event.time}});
+            frames.append(QJsonObject{{"time", sample.time}, {"stimulus", sample.stimulus},
+                {"soma", potentials}, {"actual_stimuli", events}});
+        }
+        rawTraces.append(frames);
+    }
     WriteActiveEvidence(name, {{"kind", "active_native_delay_ownership"}, {"schema_version", 1},
         {"frequency_hz", int(frequency)}, {"input_count", int(inputs)}, {"mode", int(mode)},
-        {"configured_delay", configured}, {"effective_original_delay", effective}, {"packets", packets},
+        {"configured_delay", configured}, {"effective_original_delay", effective}, {"packets", packets}, {"traces", rawTraces},
         {"waveforms_compared", mode == ProbeDelayMode::GuardDuringCapture},
         {"training_or_convergence_claimed", false}, {"scientific_verdict", QJsonValue(QJsonValue::Null)}});
 }
