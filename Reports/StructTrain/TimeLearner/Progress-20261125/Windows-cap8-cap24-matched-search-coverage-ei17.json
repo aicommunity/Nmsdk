@@ -1,0 +1,395 @@
+{
+  "kind": "timelearner_Classic_candidate_limit_matched_search_coverage",
+  "schema_version": 1,
+  "cap24_source_archive": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Windows-Classic-cap24-audit-and-search-readback-ei15.json",
+      "sha256": "1831978223b5ace4f077d448fabd575a89cb5a5182e47816380def1b825760fa",
+      "size": 2237
+    },
+    "record": {
+      "kind": "timelearner_Windows_cap24_full_audit_and_derived_readback_archive",
+      "schema_version": 1,
+      "utc": "2026-11-25T16:28:44.264533+00:00",
+      "objects": {
+        "full_primary_audit": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/80/80637368906aa15248893a3fb49ef1b51de3ee095285bd236cb4db3cbeec8036",
+          "sha256": "80637368906aa15248893a3fb49ef1b51de3ee095285bd236cb4db3cbeec8036",
+          "bytes": 96161
+        },
+        "derived_readback_gzip": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/92/922cba543ba1fb9838b47aaa0f7acee5402f30d919187b3ccd7e1e6d7904f0c4",
+          "sha256": "922cba543ba1fb9838b47aaa0f7acee5402f30d919187b3ccd7e1e6d7904f0c4",
+          "bytes": 177371
+        }
+      },
+      "derived_readback_decoded_bytes": 14423898,
+      "derived_readback_decoded_sha256": "4bb9e79e0ce6dc28f77287a0f3b06af5c9b2dffd5f0a2d57e59c7e38d08b6124",
+      "source_summary": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-n0-length4-cap24-dp17\\train\\native\\train_stopped_summary.json",
+        "sha256": "cb644a3b31acc0fbd1603be47063ab13f390dbdf6eeaf71f960fc19025f0e7bf",
+        "size": 42593193
+      },
+      "job_sha256": "632aa8a3f1823351e94dab93a3b6c1dbd4042079c4d5ba2a3601b87fde5b3713",
+      "model_revision": "b2d695ee456bdc92dc913b662a4e63c267ce02f20b9838f86df4b0518124b9dd",
+      "actual_parameters": [
+        {
+          "length": 243,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 199,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "candidate_records_per_input": {
+        "0": 25,
+        "1": 18,
+        "2": 0,
+        "3": 0
+      },
+      "training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "source_full_Train_primary_archival_still_pending": true,
+      "derived_readback_not_full_primary_bundle": true,
+      "classification_performed": false,
+      "scientific_verdict": null
+    }
+  },
+  "matched_conditions": {
+    "kind": "timelearner_actual_cap8_cap24_condition_comparison",
+    "schema_version": 1,
+    "same_all_job_fields_except_cap_and_attempt": true,
+    "same_runtime_content": true,
+    "same_native_wall_and_memory": true,
+    "cases": [
+      {
+        "cap": 8,
+        "job": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-n0-length4-cap8-dp17\\job.json",
+          "sha256": "1f56057739a06312e2ce96de24e0daf06c62565cd313ddcbbf8183e49a1b2da7",
+          "size": 674046
+        },
+        "runtime": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-n0-length4-cap8-dp17\\runtime.json",
+          "sha256": "bc2594b73f5c189175d8e28f9616400fb9212ede0bb6d287661b2110c6379b47",
+          "size": 22221
+        },
+        "native_wall_seconds": 39600,
+        "native_memory_bytes": 17179869184,
+        "search": {
+          "bounds": [
+            {
+              "maximum_length": 256,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 128,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 256,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 128,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 256,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 128,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 1,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            }
+          ],
+          "maximum_candidates_per_input": 8,
+          "maximum_edits": 1280,
+          "maximum_invalid_observations": 4,
+          "maximum_n0_length_proposals": 4,
+          "maximum_probes": 160,
+          "maximum_sweeps": 1,
+          "resistance_subdivision_depth": 8,
+          "tolerances": {
+            "amplitude_absolute": 0.00001,
+            "amplitude_relative": 0,
+            "sync": 0.02
+          }
+        },
+        "training_maximum_wall_seconds": 32400,
+        "maximum_model_ticks": 20000002
+      },
+      {
+        "cap": 24,
+        "job": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-n0-length4-cap24-dp17\\job.json",
+          "sha256": "b817e650410c3276c4d8e140d5bb33a4cd66a9a354d924ac6ca28d913ff6125f",
+          "size": 674048
+        },
+        "runtime": {
+          "path": "C:\\Projects\\TimeLearnerWorker\\controls\\classic-n0-length4-cap24-dp17\\runtime.json",
+          "sha256": "bc2594b73f5c189175d8e28f9616400fb9212ede0bb6d287661b2110c6379b47",
+          "size": 22221
+        },
+        "native_wall_seconds": 39600,
+        "native_memory_bytes": 17179869184,
+        "search": {
+          "bounds": [
+            {
+              "maximum_length": 256,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 128,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 256,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 128,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 256,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 128,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            },
+            {
+              "maximum_length": 1,
+              "maximum_resistance": 86000000,
+              "maximum_synapses": 1,
+              "minimum_length": 1,
+              "minimum_resistance": 86000000,
+              "minimum_synapses": 1
+            }
+          ],
+          "maximum_candidates_per_input": 24,
+          "maximum_edits": 1280,
+          "maximum_invalid_observations": 4,
+          "maximum_n0_length_proposals": 4,
+          "maximum_probes": 160,
+          "maximum_sweeps": 1,
+          "resistance_subdivision_depth": 8,
+          "tolerances": {
+            "amplitude_absolute": 0.00001,
+            "amplitude_relative": 0,
+            "sync": 0.02
+          }
+        },
+        "training_maximum_wall_seconds": 32400,
+        "maximum_model_ticks": 20000002
+      }
+    ],
+    "normalization_scope": "only top-level sha256 and configuration.run_id and search.maximum_candidates_per_input omitted",
+    "scientific_verdict": null
+  },
+  "cap8_candidate_records_per_input": {
+    "0": 9,
+    "1": 9,
+    "2": 8,
+    "3": 0
+  },
+  "cap8_actual_lengths": [
+    241,
+    201,
+    121,
+    1
+  ],
+  "cap8_actual_synapses": [
+    13,
+    11,
+    9,
+    1
+  ],
+  "cap24_candidate_records_per_input": {
+    "0": 25,
+    "1": 18,
+    "2": 0,
+    "3": 0
+  },
+  "cap24_candidate_count": 43,
+  "cap24_actual_parameters": [
+    {
+      "length": 243,
+      "resistance": 86000000,
+      "synapses": 13
+    },
+    {
+      "length": 199,
+      "resistance": 86000000,
+      "synapses": 11
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "cap24_model_revision": "b2d695ee456bdc92dc913b662a4e63c267ce02f20b9838f86df4b0518124b9dd",
+  "cap24_source_summary": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-n0-length4-cap24-dp17\\train\\native\\train_stopped_summary.json",
+    "sha256": "cb644a3b31acc0fbd1603be47063ab13f390dbdf6eeaf71f960fc19025f0e7bf",
+    "size": 42593193
+  },
+  "cap24_source_full_primary_audit": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\controls\\Classic-cap24-after-cap8-audit-dx29\\original-case\\full-primary-audit.json",
+    "sha256": "80637368906aa15248893a3fb49ef1b51de3ee095285bd236cb4db3cbeec8036",
+    "size": 96161
+  },
+  "cap24_search_probes": 87,
+  "cap24_applied_edits": 42,
+  "cap24_training_outcome": "budget_exhausted",
+  "cap24_completed_boundary": false,
+  "cap24_terminal_event_compact": {
+    "actual_model_epoch": 43,
+    "actual_model_revision": "b2d695ee456bdc92dc913b662a4e63c267ce02f20b9838f86df4b0518124b9dd",
+    "actual_parameters": [
+      {
+        "length": 243,
+        "resistance": 86000000,
+        "synapses": 13
+      },
+      {
+        "length": 199,
+        "resistance": 86000000,
+        "synapses": 11
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "certificate": null,
+    "edit_budget": {
+      "maximum_edits": 1280,
+      "maximum_finalization_wall_seconds": 30,
+      "reserved_transactions": 2,
+      "search_applied_edits": 42
+    },
+    "fresh_all_input_verification": false,
+    "historical_measurements_rebound_to_actual_epoch": false,
+    "kind": "timelearner_native_terminal_selection_event",
+    "native_transactions": 1,
+    "portable_export_supported": true,
+    "reason": "",
+    "rollback_attempted": false,
+    "rollback_succeeded": false,
+    "schema_version": 2,
+    "search_terminal_epoch": 42,
+    "search_terminal_parameters": [
+      {
+        "length": 243,
+        "resistance": 86000000,
+        "synapses": 13
+      },
+      {
+        "length": 8,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      },
+      {
+        "length": 1,
+        "resistance": 86000000,
+        "synapses": 1
+      }
+    ],
+    "search_terminal_revision": "482ced5880afd937d19676fcc831ac230b079a9bd56264b3d981b7c625a39eca",
+    "selected_probe_packets": [],
+    "session_attempt": 1,
+    "sha256": "ef436d8b324f5e191ada570fea5b22d59ec8d777f2f6d5976d89ff8b811a4cb8",
+    "source_capacitance_state": {},
+    "status": "restored",
+    "stopped_outcome": "budget_exhausted",
+    "stopped_reason": "native_training_time_budget_exhausted",
+    "wall_seconds": 6.417408299865201,
+    "selected": {
+      "anchor_trial_id": "candidate-cap/20261124/classic/M4/cap24/session/1/search/105",
+      "capacitance_state": {},
+      "input_index": 1,
+      "input_position": 1,
+      "model_epoch": 34,
+      "parameters": [
+        {
+          "length": 243,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 199,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "serial": 15,
+      "storage_fingerprint": "9412aafd8b840e93dc2c0d9c91377a145e667798a378e0701648767f7e71e591",
+      "sweep": 0,
+      "trial_id": "candidate-cap/20261124/classic/M4/cap24/session/1/search/106",
+      "dataset_identity_sha256": "09ed024b9785151fb9a333085b54f07fa130ee3dab507dc96a6c750d9df42d6a",
+      "neuron_identity_sha256": "b2d695ee456bdc92dc913b662a4e63c267ce02f20b9838f86df4b0518124b9dd"
+    },
+    "source_dataset_identity_sha256": "09ed024b9785151fb9a333085b54f07fa130ee3dab507dc96a6c750d9df42d6a",
+    "source_neuron_identity_sha256": "482ced5880afd937d19676fcc831ac230b079a9bd56264b3d981b7c625a39eca"
+  },
+  "cap24_full_Train_primary_archive_pending": true,
+  "classification_compared": false,
+  "round_robin_causal_advantage_inferred": false,
+  "scientific_verdict": null
+}
