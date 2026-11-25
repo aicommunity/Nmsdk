@@ -257,6 +257,43 @@
   "original_user_comments_preserved": true,
   "preserved_v4_unchanged": true,
   "ready_for_external_publication": true,
-  "externally_published": false,
-  "scientific_verdict": null
+  "externally_published": true,
+  "scientific_verdict": null,
+  "external_publication": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/documents/TimeLearner/2026-11-25-algorithm-descriptions-v5.json",
+      "sha256": "5f47b9166acf4d3547f14e837efc70e517176ce7405fe276f46514196a1d0dcc",
+      "size": 3822
+    },
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f1/f16e186edb0572fb78f8d787429513e7c87ea63cbc05ad191822a9a3d8d90dbc",
+        "sha256": "f16e186edb0572fb78f8d787429513e7c87ea63cbc05ad191822a9a3d8d90dbc",
+        "bytes": 46447
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/33/33f3304655df669118e139ba09ef4efbf226a8b8f746311452f1ceafac9b4e32",
+        "sha256": "33f3304655df669118e139ba09ef4efbf226a8b8f746311452f1ceafac9b4e32",
+        "bytes": 72781444
+      }
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "33f3304655df669118e139ba09ef4efbf226a8b8f746311452f1ceafac9b4e32",
+      "archive_members_verified": 288,
+      "retained_regular_files": 288,
+      "compatibility": null,
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    }
+  }
 }
