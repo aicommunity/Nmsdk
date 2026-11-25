@@ -57,8 +57,10 @@ class OwnedNativeKernelTest(unittest.TestCase):
 
     def execute_fixture(self,mode,*,wall=20,guard=None):
         args=['-B','-m','Scripts.StructTrain.TimeLearner.tests.owned_native_fixture',mode,str(self.root),'--reserve']
+        expected=([self.output/branch/'evaluation/process/contained'for branch in('heldout','third-pulse')]
+                  if mode=='same-leaf-name'else[self.output/'leaf/process/contained'])
         code=subject._run_owned(self.runtime,args,Path(__file__).resolve().parents[4],self.controller,
-            self.output,[self.output/'leaf/process/contained'],self.registry,self.root.name,
+            self.output,expected,self.registry,self.root.name,
             {'memory_bytes':256*1024**2,'tasks':32,'maximum_wall_seconds':wall},
             {'minimum_free_bytes':1024**2,'maximum_increment_bytes':32*1024**2},[self.root],control_guard=guard)
         result=json.loads((self.controller/'supervisor-result.json').read_bytes())
@@ -111,6 +113,20 @@ class OwnedNativeKernelTest(unittest.TestCase):
         child=result['children_closed'][0]
         self.assertTrue(child['closure']['all_processes_closed'])
         self.assertTrue(inspect(child['directory'])['all_processes_closed'])
+
+    def test_actual_two_nested_evaluations_preserve_both_receipts_and_close(self):
+        code,result,row=self.execute_fixture('same-leaf-name')
+        self.assertEqual(code,0,result);self.assertEqual(row['state'],'released')
+        self.assertEqual(len(result['children_closed']),2)
+        self.assertFalse(result['record_errors'])
+        expected={str(self.output/branch/'evaluation/process/contained')for branch in('heldout','third-pulse')}
+        for prefix in('child-intent-','child-binding-'):
+            receipts=list(self.controller.glob(prefix+'*.json'))
+            self.assertEqual(len(receipts),2)
+            self.assertEqual({json.loads(p.read_bytes())['directory']for p in receipts},expected)
+        for child in result['children_closed']:
+            self.assertTrue(child['closure']['all_processes_closed'])
+            self.assertTrue(inspect(child['directory'])['all_processes_closed'])
 
     def test_actual_unbound_child_intent_adopted_only_after_dead_worker(self):
         code,result,row=self.execute_fixture('unbound')

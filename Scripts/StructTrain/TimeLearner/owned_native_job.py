@@ -354,8 +354,21 @@ def _finish(directory, output, expected, registry, job_id, *, errors, known=None
     return before,closed,children
 
 
+def _child_receipt_names(expected):
+    """Keep existing leaf names; disambiguate repeated names by their full path."""
+    paths=[str(path) for path in expected]
+    require(len(paths)==len(set(paths)), 'owned_native_duplicate_child_directory')
+    leaves=[path.parent.parent.name for path in expected]
+    names={str(path):leaf if leaves.count(leaf)==1 else
+           leaf+'-'+hashlib.sha256(str(path).encode('utf-8')).hexdigest()[:16]
+           for path,leaf in zip(expected,leaves)}
+    require(len(set(names.values()))==len(paths), 'owned_native_child_receipt_collision')
+    return names
+
+
 def _run_owned(runtime, arguments, cwd, directory, output, expected, registry, job_id, limits, disk, scopes, *, control_guard=None):
     """Shared real ownership loop. Tests may supply a pinned tiny process, never a public request override."""
+    expected=tuple(expected);child_names=_child_receipt_names(expected)
     process = directory/'process'
     errors, binding, reason, last = [], None, None, None
     begun, baseline, minimum, peak = time.monotonic(), _allocated(scopes), shutil.disk_usage(scopes[0]).free, 0
@@ -384,7 +397,7 @@ def _run_owned(runtime, arguments, cwd, directory, output, expected, registry, j
                     continue
                 if str(path) not in seen:
                     seen.add(str(path))
-                    record('child-intent-'+path.parent.parent.name+'.json',{'directory':str(path)})
+                    record('child-intent-'+child_names[str(path)]+'.json',{'directory':str(path)})
                 _canonical(path)
                 try:
                     request = _child_request(path,outer_request,binding)
@@ -398,7 +411,7 @@ def _run_owned(runtime, arguments, cwd, directory, output, expected, registry, j
                             (str(path) not in known or known[str(path)]==binding_now), 'owned_native_live_child_binding_changed')
                     if str(path) not in known:
                         known[str(path)] = binding_now
-                        record('child-binding-'+path.parent.parent.name+'.json',{'directory':str(path),'binding':binding_now})
+                        record('child-binding-'+child_names[str(path)]+'.json',{'directory':str(path),'binding':binding_now})
             free = shutil.disk_usage(scopes[0]).free;growth = _allocated(scopes)-baseline
             minimum,peak = min(minimum,free),max(peak,growth)
             require(free>=disk['minimum_free_bytes'],'owned_native_disk_floor')
@@ -566,9 +579,10 @@ def recover(controller):
     expected=[Path(job['paths']['output'])/r['name']/'process/contained' for r in preparation['current']['runplan']]
     known=_json(_frozen(directory/'recorded-child-bindings.json',16*1024**2)[0]) if (directory/'recorded-child-bindings.json').exists() else {}
     seen=_json(_frozen(directory/'seen-child-intents.json',16*1024**2)[0]) if (directory/'seen-child-intents.json').exists() else []
+    child_names=_child_receipt_names(expected)
     for path in expected:
-        intent_path=directory/('child-intent-'+path.parent.parent.name+'.json')
-        binding_path=directory/('child-binding-'+path.parent.parent.name+'.json')
+        intent_path=directory/('child-intent-'+child_names[str(path)]+'.json')
+        binding_path=directory/('child-binding-'+child_names[str(path)]+'.json')
         if intent_path.exists():
             observed=_json(_frozen(intent_path,1024**2)[0])
             require(observed=={'directory':str(path)},'owned_native_durable_intent_changed')
