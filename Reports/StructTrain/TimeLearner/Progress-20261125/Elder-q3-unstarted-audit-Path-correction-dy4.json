@@ -1,0 +1,56 @@
+{
+  "dispatched": true,
+  "job": "classic-q3-full-primary-audit-and-DATA-elder-dy4",
+  "owner": {
+    "pid": 1006221,
+    "start_ticks": "515975773",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000
+  },
+  "controls_commit": "43e6526aff8d8847c462751a4f80fae34c946498",
+  "controls_bundle": {
+    "path": "/home/user/timelearner-refactor/requests/classic-q3-full-primary-audit-and-DATA-elder-dy4/controls.bundle",
+    "sha256": "89afe9f816df4f216e479f26ff4fc6669ca8757d4a3aec8a54e44ba097485f0e",
+    "size": 5117
+  },
+  "cancelled_only_previous_unstarted_analysis": {
+    "kind": "timelearner_cancel_unstarted_analysis_for_caller_correction",
+    "schema_version": 1,
+    "utc": "2026-11-25T06:59:46.877314+00:00",
+    "old_owner": {
+      "pid": 480763,
+      "start_ticks": "514951540",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "original_Train_owner": {
+      "pid": 297325,
+      "start_ticks": "514618148",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "old_analysis_not_started": true,
+    "correction": "convert original_job path to pathlib.Path at existing production loader call",
+    "native_Train_unchanged": true,
+    "scientific_verdict": null
+  },
+  "original_worker": {
+    "path": "/home/user/timelearner-refactor/requests/classic-q3-full-primary-audit-and-DATA-elder-dw16/worker.py",
+    "sha256": "ca295a58098d40a9c6fea249f67f102827edc514e1d6e34b04eeba9ad0c4f164",
+    "size": 5755
+  },
+  "corrected_worker": {
+    "path": "/home/user/timelearner-refactor/requests/classic-q3-full-primary-audit-and-DATA-elder-dy4/worker.py",
+    "sha256": "b2b3937f6ab5f21ce05c1d1d4c6636a6d6371fa78e2a5e7b35a6e7572fbf06b1",
+    "size": 5761
+  },
+  "same_native_Train_owner": {
+    "pid": 297325,
+    "start_ticks": "514618148",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000
+  },
+  "audit_memory_bytes": 25769803776,
+  "no_native_Train_restart_or_source_edit": true,
+  "scientific_verdict": null
+}
