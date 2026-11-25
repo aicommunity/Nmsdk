@@ -1,0 +1,278 @@
+{
+  "kind": "timelearner_current_scientific_wrapped_figure_selected_review",
+  "schema_version": 1,
+  "source_commit": "6abe647c1a747042df2d29879f50abc8d656b0e0",
+  "server_completion": {
+    "record": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/current-scientific-figure-headings-m40-dw25/terminal.json",
+      "sha256": "040c2babd072d93701c7c0c2655a6a50532a4cbae90552df343461288e786920",
+      "size": 5460
+    },
+    "value": {
+      "returncode": 0,
+      "catalog": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/documents/TimeLearner/2026-11-25-current-scientific-figures-wrapped-dw25.json",
+        "sha256": "99c869563d1fb35ba7fcca660869c05c2471eff768907fe4ddf7af06a851b394",
+        "size": 5865
+      },
+      "results": {
+        "classic": {
+          "execution": "completed",
+          "validity": "valid",
+          "counts": {
+            "heldout": {
+              "TP": 1,
+              "FP": 1,
+              "FN": 0,
+              "TN": 6,
+              "targets": 1,
+              "foils": 7,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 0.875,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.14285714285714285
+            },
+            "third-pulse": {
+              "TP": 1,
+              "FP": 7,
+              "FN": 0,
+              "TN": 0,
+              "targets": 1,
+              "foils": 7,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 0.125,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 1.0
+            }
+          },
+          "unique_original_and_heldout_counts": {
+            "TP": 1,
+            "FP": 3,
+            "FN": 0,
+            "TN": 11
+          },
+          "target_controls_preserved": true,
+          "all_metric_fields_equal_original": true,
+          "logical_members_restored": 511,
+          "PNG": 32,
+          "patterns": 16,
+          "figure_objects": {
+            "bundle.json": {
+              "kind": "nmsdk_structtrain_external_object",
+              "schema_version": 1,
+              "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+              "object": "objects/sha256/43/43d7dcf816b71857cf2707ea9530bc1c720a3477d412c7ebcae353aaca35bbed",
+              "sha256": "43d7dcf816b71857cf2707ea9530bc1c720a3477d412c7ebcae353aaca35bbed",
+              "bytes": 14111
+            },
+            "primary.tar.xz": {
+              "kind": "nmsdk_structtrain_external_object",
+              "schema_version": 1,
+              "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+              "object": "objects/sha256/1e/1ef1d4ae15a77deb771111fedcd6e7daa71edeea4149dba4a99f1c54055afc7a",
+              "sha256": "1ef1d4ae15a77deb771111fedcd6e7daa71edeea4149dba4a99f1c54055afc7a",
+              "bytes": 5892500
+            }
+          },
+          "training_completed": false,
+          "threshold": 0.02342413248481376,
+          "model_revision": "15ac527dc7fdfb38bf335caac70f5c6d63c1fc4e435b18b53bfc1d5c77a65f48",
+          "visual_acceptance_complete": false,
+          "original_combined_parent_execution_failed": true,
+          "heldout_repeated": false,
+          "scientific_verdict": null
+        },
+        "branch": {
+          "execution": "completed",
+          "validity": "valid",
+          "counts": {
+            "baseline": {
+              "TP": 1,
+              "FP": 1,
+              "FN": 0,
+              "TN": 6,
+              "targets": 1,
+              "foils": 7,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 0.875,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.14285714285714285
+            },
+            "short-reset": {
+              "TP": 1,
+              "FP": 1,
+              "FN": 0,
+              "TN": 6,
+              "targets": 1,
+              "foils": 7,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 0.875,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.14285714285714285
+            },
+            "short-preserve": {
+              "TP": 1,
+              "FP": 1,
+              "FN": 0,
+              "TN": 6,
+              "targets": 1,
+              "foils": 7,
+              "target_trials_with_outside_spikes": 0,
+              "accuracy": 0.875,
+              "target_hit_rate": 1.0,
+              "foil_response_rate": 0.14285714285714285
+            }
+          },
+          "model_revision": "a71ae5270f9c8fe9c03bc479e473b3d08ea9e798bf134c32ad8aa559a2e34d8a",
+          "observations_reanalyzed": 24,
+          "illustrated_observations": 10,
+          "PNG": 20,
+          "soma_channels_per_observation": 1,
+          "all_metric_fields_equal_original": true,
+          "objects": {
+            "bundle.json": {
+              "kind": "nmsdk_structtrain_external_object",
+              "schema_version": 1,
+              "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+              "object": "objects/sha256/a1/a1d25f9388ba1611eedd0434b63af00ab770bfcc122f7c2b1584a5f7cc76fd40",
+              "sha256": "a1d25f9388ba1611eedd0434b63af00ab770bfcc122f7c2b1584a5f7cc76fd40",
+              "bytes": 11553
+            },
+            "primary.tar.xz": {
+              "kind": "nmsdk_structtrain_external_object",
+              "schema_version": 1,
+              "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+              "object": "objects/sha256/5b/5bdbeaeb00e447a2ecd3a1e67c6a1dca3537bb7cad25884fd7ff89c7cb60f8dd",
+              "sha256": "5bdbeaeb00e447a2ecd3a1e67c6a1dca3537bb7cad25884fd7ff89c7cb60f8dd",
+              "bytes": 2178844
+            }
+          },
+          "restoration": {
+            "kind": "timelearner_native_bundle_restoration",
+            "schema_version": 1,
+            "archive_sha256": "5bdbeaeb00e447a2ecd3a1e67c6a1dca3537bb7cad25884fd7ff89c7cb60f8dd",
+            "archive_members_verified": 69,
+            "retained_regular_files": 69,
+            "compatibility": "retain-regular-glog-aliases-v1",
+            "omitted_redundant_aliases": [],
+            "source_archive_modified": false,
+            "native_execution_attested": false,
+            "scientific_verdict": null
+          },
+          "training_or_calibration_performed": false,
+          "no_model_rerun": true,
+          "visual_acceptance_complete": false,
+          "released": false,
+          "scientific_verdict": null
+        }
+      },
+      "scientific_verdict": null
+    }
+  },
+  "local_restoration": {
+    "classic": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "1ef1d4ae15a77deb771111fedcd6e7daa71edeea4149dba4a99f1c54055afc7a",
+      "archive_members_verified": 87,
+      "retained_regular_files": 87,
+      "compatibility": null,
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "branch": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "5bdbeaeb00e447a2ecd3a1e67c6a1dca3537bb7cad25884fd7ff89c7cb60f8dd",
+      "archive_members_verified": 69,
+      "retained_regular_files": 69,
+      "compatibility": null,
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    }
+  },
+  "reviewed_PNG": {
+    "classic": [
+      {
+        "name": "policy0-heldout-0.png",
+        "bytes": 202326,
+        "sha256": "fdb3611d42cbe3194d1e99e28ac06de318bc875732f8c78ae5df598627fd28b5",
+        "accepted": true
+      },
+      {
+        "name": "policy0-heldout-0-positive-full.png",
+        "bytes": 166207,
+        "sha256": "b5d7ab0b24865236173455d17d9c1eef669a13e10e9e6dafbd9fdc9f5d4ffbbb",
+        "accepted": true
+      },
+      {
+        "name": "policy0-heldout-3.png",
+        "bytes": 199941,
+        "sha256": "0580c2eb1433b0c41e8b60ee4bc2215f6a764b9acc7cf5cd5af67828a0bad84f",
+        "accepted": true
+      },
+      {
+        "name": "policy0-heldout-3-positive-full.png",
+        "bytes": 171797,
+        "sha256": "68d939d5401d71c7c52b7853b7821b4a6748fcbb087ef3f137a755312792c102",
+        "accepted": true
+      },
+      {
+        "name": "policy0-third-pulse-0.png",
+        "bytes": 202163,
+        "sha256": "cefc666f8088788738b0e36e8c4db10bddd7c956b91f73162efd8719778b2e47",
+        "accepted": true
+      },
+      {
+        "name": "policy0-third-pulse-0-positive-full.png",
+        "bytes": 166971,
+        "sha256": "83950388d666ddff770321a87339eb52accbad43ce0991b6465a1cdfe983c4d4",
+        "accepted": true
+      }
+    ],
+    "branch": [
+      {
+        "name": "branch-large-baseline-0-positive-full.png",
+        "bytes": 94220,
+        "sha256": "843a3b0e0d90ece347c55e1cf32fb1c94be4efd528a36bc4047492d92da16044",
+        "accepted": true
+      },
+      {
+        "name": "branch-large-baseline-4-positive-full.png",
+        "bytes": 96823,
+        "sha256": "59e5a86edeb1c3c2d51723f9520e08e90eadbca40fac7f902f88b8b7f41734ee",
+        "accepted": true
+      },
+      {
+        "name": "branch-large-baseline-1-positive-full.png",
+        "bytes": 91916,
+        "sha256": "76fdafc17ba5a4182a4d0bc9bb997537d3447d472db0c11245041f554f8ab70c",
+        "accepted": true
+      },
+      {
+        "name": "branch-large-short-reset-5-positive-full.png",
+        "bytes": 98235,
+        "sha256": "029088bed452957363c449dd83d65e546995b66c7958aa28ff4cb588b8d43fbd",
+        "accepted": true
+      },
+      {
+        "name": "branch-large-short-preserve-5-positive-full.png",
+        "bytes": 106110,
+        "sha256": "50f868b9e7c4cbbb2e999c5120c78f29b6c80ef68a331ae20271b9969352e58b",
+        "accepted": true
+      }
+    ]
+  },
+  "individually_reviewed_PNG": 11,
+  "total_PNG": 52,
+  "all52_PNG_reviewed": false,
+  "all_headings_programmatically_within_canvas": true,
+  "original_clipped_images_retained": true,
+  "no_Train_or_model_rerun": true,
+  "released_DOCX": false,
+  "scientific_verdict": null
+}

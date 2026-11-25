@@ -1,0 +1,77 @@
+{
+  "kind": "timelearner_frozen_Branch_third_pulse_owned_start_receipt",
+  "schema_version": 1,
+  "dispatch": {
+    "dispatched": true,
+    "job": "large-Branch-third-pulse-frozen-m40-dw39",
+    "owner": {
+      "pid": 298896,
+      "start_ticks": "466063596",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "controls_commit": "ff0a1080255ac01afb8035827353900ff918953a",
+    "controls_bundle": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/large-Branch-third-pulse-frozen-m40-dw39/controls.bundle",
+      "sha256": "8e00003df8979906e352e9efdf28d77b48d05d4c61f3cd56c5a8a5e675a8a794",
+      "size": 509842
+    },
+    "job_sha256": "04fcaf2d301677e9c358d388f98cad5bdaa863d947d2ed6a6cd0fbf662429feb",
+    "condition_fingerprint": "48c38d96c17690605e4b9e5c33960b1f4cb9d476a88a334975a4aca216f18eab",
+    "source_model": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/large-Branch-DATA3-threshold-mid-eight-diagnostic-de6/native/model.json",
+      "sha256": "e42f63721836773a4543dac1514a5559dcde976dda5026edaa5ffb98603fca2c",
+      "size": 36465638
+    },
+    "model_revision": "a71ae5270f9c8fe9c03bc479e473b3d08ea9e798bf134c32ad8aa559a2e34d8a",
+    "threshold": 0.09864679711103091,
+    "same_original_native_executable": {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-physical-threshold-DATA3-sdk33-m40-cc47/NeuroModelerConsole",
+      "sha256": "e1f1675429143a67bfba0584f9435a3fe078e06c59b7769a6f46fd6b8908de29",
+      "size": 27082864
+    },
+    "preregistration_root_commit": "433f7d5bc5fcda7eb9ae1e80ea11fb6301f5dc76",
+    "expected_observations": 8,
+    "no_new_Train_or_calibration": true,
+    "scientific_verdict": null
+  },
+  "last_verified": {
+    "utc": "2026-11-25T05:45:17.310006+00:00",
+    "job": "large-Branch-third-pulse-frozen-m40-dw39",
+    "owner_live": true,
+    "observations": 0,
+    "files": {},
+    "units": {
+      "controller": {
+        "closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "cee4e090d6984891b8726832133d52754a11ba2e9f3d6ca9feb23d500bcde69a",
+          "unit": "timelearner-b862513f-1646-4128-a34d-23954b24ee32.service",
+          "invocation_id": "9f1ef17ca7e14ac98c65354310734213",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b862513f-1646-4128-a34d-23954b24ee32.service",
+          "initial_main_pid": 302738,
+          "initial_start_ticks": "466065207",
+          "sha256": "875fa59fd9b078e448b4b75b20ae1516827cb55b6cc6ccc1ee01c62977d0829a"
+        }
+      },
+      "native": {
+        "closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "9152acd6866e6d059782de1907adc294a8edaf52cff03ce98f332c11abb78eda",
+          "unit": "timelearner-4eccba7c-7054-4559-a13a-7fa34f92028e.service",
+          "invocation_id": "3605360ce43449c0be7d688db24bf94e",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4eccba7c-7054-4559-a13a-7fa34f92028e.service",
+          "initial_main_pid": 302945,
+          "initial_start_ticks": "466066290",
+          "sha256": "935edd9cc53f4782af780af563766fbe30f1de7e8d4310346031ca30cea22d71"
+        }
+      }
+    }
+  },
+  "completed": false,
+  "scientific_verdict": null
+}
