@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_queued_followup_compact_receipt",
+  "schema_version": 1,
+  "dispatch": {
+    "dispatched": true,
+    "job": "large-Branch-current-Russian-publication-figures-m40-dw19",
+    "owner": {
+      "pid": 189592,
+      "start_ticks": "465527430",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "controls_commit": "5bb27e05aa74a723bbcd500084e293a747e68d69",
+    "controls_bundle": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/large-Branch-current-Russian-publication-figures-m40-dw19/controls.bundle",
+      "sha256": "cb39ba6af0e26c9f91ab61b7b9fa1dc6adffa92938edfef1f5ba823217ab8aea",
+      "size": 5527
+    },
+    "expected_PNG": 20,
+    "baseline_patterns": 8,
+    "additional_reset_preserve_target_pair": true,
+    "waits_for_existing_scientific_followup_publication": true,
+    "no_native_model_rerun": true,
+    "released": false,
+    "scientific_verdict": null
+  },
+  "only_preparation_verified": true,
+  "execution_completed": false,
+  "scientific_result": null,
+  "source_commit": "028e85e26966ec2ea5dc5d54d9cbaadb898e5ec1",
+  "heavy_data_in_root_git": false
+}
