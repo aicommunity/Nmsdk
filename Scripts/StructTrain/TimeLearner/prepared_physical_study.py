@@ -67,6 +67,9 @@ def declare(original, run_id, study, runtime, *, threshold, memory_bytes, wall_s
 def _source(controls):
     from .native_pipeline_worker import audit_execution, validate_job
     controls = Path(controls).resolve(strict=True)
+    if (controls/'repeat-binding.json').is_file():
+        from .prepared_physical_repeat import source_for_study
+        return source_for_study(controls)
     spec = json.loads((controls/'specification.json').read_bytes())
     inputs = Path(spec['inputs']).resolve(strict=True)
     output = Path(spec['output']).resolve(strict=True)

@@ -1,0 +1,30 @@
+{
+  "dispatched": true,
+  "job": "Classic-cap8-baseline-midgap-confirmation-ea4",
+  "controls_commit": "a2800086fa1b37f81b8792fee223fa5c576eca80",
+  "controls_bundle": {
+    "path": "C:\\Projects\\TimeLearnerWorker\\controls\\Classic-cap8-baseline-midgap-confirmation-ea4\\controls.bundle",
+    "sha256": "5e5ac2c211bdc91f371005a6b772be0debe0a8a7abb4bb6b99ab381d6a23591b",
+    "size": 48162
+  },
+  "task": {
+    "instance": "{1DD51AC0-F7D3-45C2-9BEE-A507428163DF}",
+    "registered": true,
+    "task": "TimeLearner-Classic-cap8-baseline-midgap-confirmation-ea4"
+  },
+  "parent_training_condition": "fb9100f4061909b642ed062c7d28523d49bfe825d7c9740fbe0c32252985720d",
+  "producer_owner": {
+    "pid": 11864,
+    "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+    "creation_filetime": "134400673778285243"
+  },
+  "phases": [
+    "native_nonspiking_baseline8",
+    "full_primary_threshold_proposal",
+    "one_native_threshold_candidate",
+    "actual_native_confirmation8"
+  ],
+  "same_matrix_diagnostic": true,
+  "no_new_Train": true,
+  "scientific_verdict": null
+}
