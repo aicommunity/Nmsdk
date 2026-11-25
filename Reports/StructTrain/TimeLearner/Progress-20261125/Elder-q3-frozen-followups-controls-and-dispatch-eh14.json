@@ -1,0 +1,328 @@
+{
+  "kind": "timelearner_Classic_q3_frozen_followups_preparation_and_dispatch",
+  "schema_version": 1,
+  "source_commit": "750b271723bbb5bf71084e1c5520573315c90ca0",
+  "protocol_root_commit": "a04b71ecc4eca6172362f4d188983b572797b15c",
+  "source_catalog": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-sources/20261125-Linux-frozen-physical-followups-eh8.json",
+      "sha256": "a1c783e9af2317c3b5ae4049fb484197a5ef7e71b5c7f887cfc222d8c746c2dc",
+      "size": 1034
+    },
+    "record": {
+      "kind": "timelearner_immutable_Linux_frozen_physical_followups_source",
+      "schema_version": 1,
+      "root_commit": "750b271723bbb5bf71084e1c5520573315c90ca0",
+      "source_pack": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/00/00f8492f38db1b8ee9c727de31a49291c7911bdd8aa4cfbc48d8abae64239b49",
+        "sha256": "00f8492f38db1b8ee9c727de31a49291c7911bdd8aa4cfbc48d8abae64239b49",
+        "bytes": 5083792
+      },
+      "projection_manifest": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/3e/3eb60997a13277919317e010270c22ee0b17c7fbc9a1180c85b9337858d46afd",
+        "sha256": "3eb60997a13277919317e010270c22ee0b17c7fbc9a1180c85b9337858d46afd",
+        "bytes": 457752
+      },
+      "selected_Scripts_files": 973,
+      "full_SDK_claimed": false,
+      "active_sources_unchanged": true,
+      "scientific_verdict": null
+    }
+  },
+  "dispatch": {
+    "utc": "2026-11-25T15:13:02.453660+00:00",
+    "dispatched": true,
+    "job": "classic-q3-frozen-followups-elder-eh10",
+    "owner": {
+      "pid": 2476330,
+      "start_ticks": "518935329",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "source_actor": "/home/user/timelearner-refactor/source-Linux-frozen-followups-elder-eh10",
+    "source_commit": "750b271723bbb5bf71084e1c5520573315c90ca0",
+    "source_selected_files_verified": 973,
+    "source_catalog": {
+      "path": "/mnt/nmsdk-structtrain-archive/operations/timelearner/prepared-sources/20261125-Linux-frozen-physical-followups-eh8.json",
+      "sha256": "a1c783e9af2317c3b5ae4049fb484197a5ef7e71b5c7f887cfc222d8c746c2dc",
+      "size": 1034
+    },
+    "controls_commit": "69aabe043b3f416dfa5190aa19648413f9fd7ad8",
+    "controls_bundle": {
+      "path": "/home/user/timelearner-refactor/requests/classic-q3-frozen-followups-elder-eh10/controls.bundle",
+      "sha256": "74ba201c301f9febf47bd69d8887e60c484b29d2c633b8eba3d24d4656defb92",
+      "size": 3767
+    },
+    "request": {
+      "path": "/home/user/timelearner-refactor/requests/classic-q3-frozen-followups-elder-eh10/request.json",
+      "sha256": "f163126c895f81494b7aadf9c81ed41440e75880e6e95193d632ce6fa9989359",
+      "size": 1047
+    },
+    "preregistration": {
+      "path": "/home/user/timelearner-refactor/requests/classic-q3-frozen-followups-elder-eh10/preregistration.json",
+      "sha256": "f20269ff951b8c16e1c431ec3f83b7f711a08bc04f2d927483010943b7a6ebd4",
+      "size": 2872
+    },
+    "expected_tests": 17,
+    "gate_not_yet_run": true,
+    "exact_predecessor_owner": {
+      "pid": 2346026,
+      "start_ticks": "518700939",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "native_followups_not_yet_started": true,
+    "existing_runtime_unchanged": true,
+    "new_Train": false,
+    "new_threshold_selection": false,
+    "scientific_verdict": null
+  },
+  "last_authoritative_observation": {
+    "utc": "2026-11-25T15:13:58.839473+00:00",
+    "files": {
+      "owner.json": {
+        "pid": 2476330,
+        "start_ticks": "518935329",
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "uid": 1000
+      },
+      "waiting.json": {
+        "utc": "2026-11-25T15:13:39.732639+00:00",
+        "predecessor_live": true,
+        "exact_owner": {
+          "pid": 2346026,
+          "start_ticks": "518700939",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "waiting_for": "actual_complete_original_eight_and_threshold_confirmation",
+        "native_started": false
+      },
+      "dispatch.json": {
+        "utc": "2026-11-25T15:13:02.453660+00:00",
+        "dispatched": true,
+        "job": "classic-q3-frozen-followups-elder-eh10",
+        "owner": {
+          "pid": 2476330,
+          "start_ticks": "518935329",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "source_actor": "/home/user/timelearner-refactor/source-Linux-frozen-followups-elder-eh10",
+        "source_commit": "750b271723bbb5bf71084e1c5520573315c90ca0",
+        "source_selected_files_verified": 973,
+        "source_catalog": {
+          "path": "/mnt/nmsdk-structtrain-archive/operations/timelearner/prepared-sources/20261125-Linux-frozen-physical-followups-eh8.json",
+          "sha256": "a1c783e9af2317c3b5ae4049fb484197a5ef7e71b5c7f887cfc222d8c746c2dc",
+          "size": 1034
+        },
+        "controls_commit": "69aabe043b3f416dfa5190aa19648413f9fd7ad8",
+        "controls_bundle": {
+          "path": "/home/user/timelearner-refactor/requests/classic-q3-frozen-followups-elder-eh10/controls.bundle",
+          "sha256": "74ba201c301f9febf47bd69d8887e60c484b29d2c633b8eba3d24d4656defb92",
+          "size": 3767
+        },
+        "request": {
+          "path": "/home/user/timelearner-refactor/requests/classic-q3-frozen-followups-elder-eh10/request.json",
+          "sha256": "f163126c895f81494b7aadf9c81ed41440e75880e6e95193d632ce6fa9989359",
+          "size": 1047
+        },
+        "preregistration": {
+          "path": "/home/user/timelearner-refactor/requests/classic-q3-frozen-followups-elder-eh10/preregistration.json",
+          "sha256": "f20269ff951b8c16e1c431ec3f83b7f711a08bc04f2d927483010943b7a6ebd4",
+          "size": 2872
+        },
+        "expected_tests": 17,
+        "gate_not_yet_run": true,
+        "exact_predecessor_owner": {
+          "pid": 2346026,
+          "start_ticks": "518700939",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "uid": 1000
+        },
+        "native_followups_not_yet_started": true,
+        "existing_runtime_unchanged": true,
+        "new_Train": false,
+        "new_threshold_selection": false,
+        "scientific_verdict": null
+      }
+    },
+    "phases": {
+      "repeat": {
+        "files": {},
+        "groups": {}
+      },
+      "third-pulse": {
+        "files": {},
+        "groups": {}
+      },
+      "new-foils": {
+        "files": {},
+        "groups": {}
+      }
+    },
+    "live": true,
+    "predecessor_live": true
+  },
+  "controls_archive": {
+    "catalog": {
+      "path": "/mnt/nmsdk-structtrain-archive/experiments/2026-11-25/Elder-q3-frozen-followups-controls-eh12.json",
+      "sha256": "ecc0d5284ef69bde50362eae5b329ca0c1d04a4b0e3d7249e1ea5286e7538300",
+      "size": 1504
+    },
+    "record": {
+      "kind": "timelearner_predeclared_Linux_frozen_followup_controls_archive",
+      "schema_version": 1,
+      "source_commit": "750b271723bbb5bf71084e1c5520573315c90ca0",
+      "controls_commit": "69aabe043b3f416dfa5190aa19648413f9fd7ad8",
+      "objects": {
+        "bundle.json": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/45/45c8759cdf25016677890a70e201e3b74da93bbf5a9af98ca6f877a5a7e524e6",
+          "sha256": "45c8759cdf25016677890a70e201e3b74da93bbf5a9af98ca6f877a5a7e524e6",
+          "bytes": 1418
+        },
+        "primary.tar.xz": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/a6/a644fe0642d1962970e5679781c29e1e5d63484247806f191f6821b195f745b5",
+          "sha256": "a644fe0642d1962970e5679781c29e1e5d63484247806f191f6821b195f745b5",
+          "bytes": 6868
+        }
+      },
+      "members": 7,
+      "expanded_bytes": 14450,
+      "source_pack_catalog": {
+        "path": "/mnt/nmsdk-structtrain-archive/operations/timelearner/prepared-sources/20261125-Linux-frozen-physical-followups-eh8.json",
+        "sha256": "a1c783e9af2317c3b5ae4049fb484197a5ef7e71b5c7f887cfc222d8c746c2dc",
+        "size": 1034
+      },
+      "expected_tests": 17,
+      "gate_passage_not_claimed": true,
+      "native_followups_not_yet_attested": true,
+      "independent_restoration_pending": true,
+      "scientific_verdict": null
+    }
+  },
+  "controls_independent_restoration": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-frozen-controls-independent-eh13.json",
+      "sha256": "007414830e35e7ad0ddfcf5fd3463cd6e06bb14e2ed965da6eb53571642af6de",
+      "size": 2166
+    },
+    "record": {
+      "kind": "timelearner_Linux_frozen_controls_independent_restoration",
+      "schema_version": 1,
+      "utc": "2026-11-25T15:14:47.976067+00:00",
+      "source_catalog": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-frozen-followups-controls-eh12.json",
+        "sha256": "ecc0d5284ef69bde50362eae5b329ca0c1d04a4b0e3d7249e1ea5286e7538300",
+        "size": 1504
+      },
+      "source_projection_catalog": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/prepared-sources/20261125-Linux-frozen-physical-followups-eh8.json",
+        "sha256": "a1c783e9af2317c3b5ae4049fb484197a5ef7e71b5c7f887cfc222d8c746c2dc",
+        "size": 1034
+      },
+      "source_commit": "750b271723bbb5bf71084e1c5520573315c90ca0",
+      "controls_commit": "69aabe043b3f416dfa5190aa19648413f9fd7ad8",
+      "objects": {
+        "bundle.json": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/45/45c8759cdf25016677890a70e201e3b74da93bbf5a9af98ca6f877a5a7e524e6",
+          "sha256": "45c8759cdf25016677890a70e201e3b74da93bbf5a9af98ca6f877a5a7e524e6",
+          "bytes": 1418
+        },
+        "primary.tar.xz": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/a6/a644fe0642d1962970e5679781c29e1e5d63484247806f191f6821b195f745b5",
+          "sha256": "a644fe0642d1962970e5679781c29e1e5d63484247806f191f6821b195f745b5",
+          "bytes": 6868
+        }
+      },
+      "restoration": {
+        "kind": "timelearner_native_bundle_restoration",
+        "schema_version": 1,
+        "archive_sha256": "a644fe0642d1962970e5679781c29e1e5d63484247806f191f6821b195f745b5",
+        "archive_members_verified": 7,
+        "retained_regular_files": 7,
+        "compatibility": null,
+        "omitted_redundant_aliases": [],
+        "source_archive_modified": false,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      },
+      "declared_tests": 17,
+      "tests_passed_not_claimed": true,
+      "model_experiments_not_yet_attested": true,
+      "scientific_verdict": null
+    }
+  },
+  "actual_predecessor_native_trial_progress": {
+    "utc": "2026-11-25T15:11:45.775123+00:00",
+    "sequence_owner_live": true,
+    "groups": {
+      "native": {
+        "closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "9eebc34919038391b580903a9ace7879fa07ed8b95dc95a6f162c0a14dd52a98",
+          "unit": "timelearner-67cb3735-e553-41ba-8d03-dda2160313ec.service",
+          "invocation_id": "37a9fde3a68445c0b5bcece262536e87",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-67cb3735-e553-41ba-8d03-dda2160313ec.service",
+          "initial_main_pid": 2364800,
+          "initial_start_ticks": "518711181",
+          "sha256": "d9e0c867f5f1503c465aa0102bd2872144c01ebedbe338cee890ff83aa64621d"
+        }
+      }
+    },
+    "trials": [
+      {
+        "name": "trial-0.json",
+        "bytes": 1744287,
+        "mtime_utc": "2026-11-25T14:43:41.414891+00:00"
+      },
+      {
+        "name": "trial-1.json",
+        "bytes": 1744537,
+        "mtime_utc": "2026-11-25T14:51:16.574833+00:00"
+      },
+      {
+        "name": "trial-2.json",
+        "bytes": 1744488,
+        "mtime_utc": "2026-11-25T14:58:49.839751+00:00"
+      },
+      {
+        "name": "trial-3.json",
+        "bytes": 1743978,
+        "mtime_utc": "2026-11-25T15:06:23.804678+00:00"
+      }
+    ],
+    "native_limits": {
+      "maximum_wall_seconds": 5400,
+      "memory_bytes": 8589934592,
+      "tasks": 64
+    },
+    "native_elapsed_wall_seconds": 2164.8100000005215,
+    "native_cpu_seconds": 2242.37
+  },
+  "gate_passage_not_claimed": true,
+  "new_native_responses_not_claimed": true,
+  "new_Train": false,
+  "new_threshold_selection": false,
+  "scientific_verdict": null
+}
