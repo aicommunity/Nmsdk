@@ -35,14 +35,30 @@ def write(path, value):
         stream.write('\n')
 
 
+def evaluation_limits(q):
+    """Preserve schema1 budgets; schema2 declares its evaluation wall budget.
+
+    The Python owner and reservation must outlive the contained native process.
+    These are execution limits only; no physical/model time is changed.
+    """
+    version = q.get('schema_version') if type(q) is dict else None
+    fields = FIELDS | {'native_evaluation_wall_seconds'} if version == 2 else FIELDS
+    require(type(version) is int and version in (1, 2) and set(q) == fields and
+            q['kind'] == 'timelearner_linux_audited_DATA_recognition_sequence',
+            'linux_DATA_sequence_request_schema')
+    seconds = q['native_evaluation_wall_seconds'] if version == 2 else 3600
+    require(type(seconds) is int and 0 < seconds <= 36000,
+            'linux_DATA_sequence_evaluation_wall_budget')
+    return dict(native_wall_seconds=seconds, python_phase_wall_seconds=seconds+400,
+                reservation_ttl_seconds=seconds+600)
+
+
 def context(request_path):
     from .model_identity import canonical_model_sha256 as sha
     request_path = Path(request_path).resolve(strict=True)
     q = load(request_path)
-    require(sys.platform == 'linux' and type(q) is dict and set(q) == FIELDS and
-            q['kind'] == 'timelearner_linux_audited_DATA_recognition_sequence' and
-            type(q['schema_version']) is int and q['schema_version'] == 1,
-            'linux_DATA_sequence_request_schema')
+    limits = evaluation_limits(q)
+    require(sys.platform == 'linux', 'linux_DATA_sequence_request_schema')
     base = Path(q['execution_root']); name = q['job_id']
     require(base in BASES and base.resolve(strict=True) == base and SOURCE.is_relative_to(base) and
             q['worker_host'] == socket.gethostname() and type(name) is str and 1 <= len(name) <= 75 and
@@ -77,7 +93,7 @@ def context(request_path):
                 row['pattern_hash'] == sha(row['pattern_isi']), 'linux_DATA_sequence_pattern_changed')
     return dict(q=q, base=base, controls=controls, output=base/'readbacks'/name,
                 request=request_path, request_record=file_record(request_path), training=training,
-                runtime=runtime, sdk=Path(training['sdk_source']))
+                runtime=runtime, sdk=Path(training['sdk_source']), evaluation_limits=limits)
 
 
 def guard(p):
@@ -121,6 +137,11 @@ def bind_condition(p, phase, job, model, directory):
     from .condition import ConditionSpec, artifact
     from .physical_threshold_proposal import RULE
     runtime = load(p['runtime'])
+    limits = evaluation_limits(p['q'])
+    execution_policy = dict(native_memory_bytes=8*GIB,
+        native_wall_seconds=limits['native_wall_seconds'], automatic_retry=False)
+    if p['q']['schema_version'] == 2:
+        execution_policy['python_phase_wall_seconds'] = limits['python_phase_wall_seconds']
     payloads = dict(
         algorithm=dict(implementation_id=model['implementation_id'],
                        native_executable_sha256=runtime['executable']['sha256']),
@@ -134,7 +155,7 @@ def bind_condition(p, phase, job, model, directory):
                               one_candidate=True, actual_confirmation_required=True),
         evaluation_spec=dict(criterion=job['criterion'], coverage_policy=job['coverage_policy'],
                              effective_model_revision=model['model_revision']),
-        execution_policy=dict(native_memory_bytes=8*GIB, native_wall_seconds=3600, automatic_retry=False),
+        execution_policy=execution_policy,
         randomness_spec=dict(stochastic_source_declared=False))
     artifacts = {key:artifact(key, value) for key, value in payloads.items()}
     condition = ConditionSpec(controller_version=2, amplitude_goal='captured_per_input',
@@ -229,7 +250,7 @@ def phase_worker(request_path, phase):
             [(SOURCE, 'read'), (p['sdk'], 'read'), (p['controls'], 'read'), (p['output'], 'write'),
              (Path(native_runtime['executable']['path']).parent, 'read'),
              (outputs['conversion'], 'read'), *([(outputs['threshold'], 'read')] if phase == 'confirmation' else []),
-             (outputs[phase], 'write')]], ttl_seconds=4200,
+             (outputs[phase], 'write')]], ttl_seconds=p['evaluation_limits']['reservation_ttl_seconds'],
             demands=dict(slots=1, memory_bytes=12*GIB, disk_bytes=2*GIB))
         write(directory/'reservation.json', lease)
         data = outputs['conversion' if phase == 'baseline' else 'threshold']/'native/model.json'
@@ -239,7 +260,8 @@ def phase_worker(request_path, phase):
         policy = validate_policy(dict(kind='timelearner_native_process_policy', schema_version=1,
             backend='bound_cgroup', memory_bytes=8*GIB, tasks=64, cooperative_capture=True))
         result = run_job('physical-model-evaluate', directory/'job.json', data, p['runtime'],
-                         outputs[phase], 3600, process_policy=policy, job_source_transport=TRANSPORT)
+                         outputs[phase], p['evaluation_limits']['native_wall_seconds'],
+                         process_policy=policy, job_source_transport=TRANSPORT)
         require(result['execution'] == 'completed' and result['validity'] == 'valid' and
                 result['analysis']['frozen_model_verified'] and
                 result['analysis']['metrics']['validity'] == 'valid' and
@@ -314,7 +336,8 @@ def supervise(request_path):
             code = _run_owned(runtime, ['-B', '-m', MODULE, '--worker', str(p['request']), phase], SOURCE,
                 directory, directory, [child], registry, q['job_id']+'-'+phase,
                 dict(memory_bytes=(1 if phase in ('conversion', 'threshold') else 4)*GIB,
-                     tasks=128, maximum_wall_seconds=4000),
+                     tasks=128, maximum_wall_seconds=(p['evaluation_limits']['python_phase_wall_seconds']
+                         if phase in ('baseline', 'confirmation') else 4000)),
                 dict(minimum_free_bytes=4*GIB, maximum_increment_bytes=2*GIB),
                 [root, p['base']/'readbacks'/(q['job_id']+'-'+phase)], control_guard=lambda:guard(p))
             require(code == 0, 'linux_DATA_sequence_phase_failed_preserved:'+phase)

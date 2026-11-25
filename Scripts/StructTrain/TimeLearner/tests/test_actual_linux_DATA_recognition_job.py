@@ -8,8 +8,10 @@ import os
 from pathlib import Path
 import sys
 import unittest
+from tempfile import TemporaryDirectory
 
-from Scripts.StructTrain.TimeLearner.linux_physical_recognition_sequence import job_for
+from Scripts.StructTrain.TimeLearner.linux_physical_recognition_sequence import (
+    bind_condition, evaluation_limits, job_for)
 from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256 as sha
 from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError, load
 from Scripts.StructTrain.TimeLearner.native_pipeline_worker import _load_source_case, validate_job
@@ -25,6 +27,8 @@ class ActualLinuxDATARecognitionJob(unittest.TestCase):
         cls.request = load(root/'request.json')
         cls.source_case = _load_source_case('physical-model-evaluate', root/'model.json')
         cls.rejected_job = load(root/'rejected-job.json')
+        cls.runtime = root/'runtime.json'
+        cls.actual_legacy_condition = load(root/'legacy-condition.json')
 
     def generated(self, phase):
         return job_for({'q': self.request}, phase, self.source_case[0])
@@ -62,6 +66,51 @@ class ActualLinuxDATARecognitionJob(unittest.TestCase):
         job['sha256'] = sha({k: v for k, v in job.items() if k != 'sha256'})
         with self.assertRaisesRegex(EvidenceError, 'invalid_evaluation_trial_scope'):
             validate_job('physical-model-evaluate', job, self.source_case)
+
+    def conditions(self, request):
+        with TemporaryDirectory() as temporary:
+            destination = Path(temporary)
+            model = self.source_case[0]
+            job = job_for({'q': request}, 'baseline', model)
+            bind_condition({'q': request, 'runtime': self.runtime}, 'baseline', job, model, destination)
+            return job, load(destination/'condition.json')
+
+    def test_legacy_condition_matches_the_actual_before_timeout_declaration(self):
+        _, condition = self.conditions(self.request)
+        self.assertEqual(condition, self.actual_legacy_condition)
+        limits = evaluation_limits(self.request)
+        self.assertEqual(limits['native_wall_seconds'], 3600)
+        self.assertGreater(limits['python_phase_wall_seconds'], limits['native_wall_seconds'])
+        self.assertGreater(limits['reservation_ttl_seconds'], limits['python_phase_wall_seconds'])
+
+    def test_declared_budget_changes_only_the_actual_execution_condition_axis(self):
+        request = dict(self.request, schema_version=2, native_evaluation_wall_seconds=5400)
+        before_job, before = self.conditions(self.request)
+        after_job, after = self.conditions(request)
+        self.assertEqual(before_job, after_job)
+        self.assertNotEqual(before['fingerprint'], after['fingerprint'])
+        changed = [role for role in before['artifacts']
+                   if before['artifacts'][role] != after['artifacts'][role]]
+        self.assertEqual(changed, ['execution_policy'])
+        limits = evaluation_limits(request)
+        self.assertEqual(limits['native_wall_seconds'], 5400)
+        self.assertGreater(limits['python_phase_wall_seconds'], 5400)
+        self.assertGreater(limits['reservation_ttl_seconds'], limits['python_phase_wall_seconds'])
+
+    def test_invalid_declared_budgets_are_rejected(self):
+        for value in (True, 0, -1, 36001, 1.5, '5400', None, float('inf')):
+            with self.subTest(value=value):
+                request = dict(self.request, schema_version=2, native_evaluation_wall_seconds=value)
+                with self.assertRaisesRegex(EvidenceError, 'evaluation_wall_budget'):
+                    evaluation_limits(request)
+
+    def test_schema_version_cannot_silently_add_or_drop_the_execution_budget(self):
+        for request in (dict(self.request, native_evaluation_wall_seconds=5400),
+                        dict(self.request, schema_version=2), dict(self.request, schema_version=True),
+                        dict(self.request, schema_version=3, native_evaluation_wall_seconds=5400)):
+            with self.subTest(version=request['schema_version']):
+                with self.assertRaisesRegex(EvidenceError, 'request_schema'):
+                    evaluation_limits(request)
 
 
 if __name__ == '__main__':

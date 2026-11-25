@@ -1,0 +1,75 @@
+{
+  "kind": "timelearner_closed_DATA_recognition_wall_budget_failure",
+  "schema_version": 1,
+  "utc": "2026-11-25T14:06:13.534599+00:00",
+  "job": "classic-q3-native-recognition-sequence-elder-ef27-baseline",
+  "source_training_outcome": "budget_exhausted",
+  "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+  "execution": {
+    "execution": "timeout",
+    "reason": "wall_budget_exhausted",
+    "wall_seconds": 3600.2693303031847,
+    "all_processes_closed": true,
+    "runtime_provenance": "incomplete_loaded_files",
+    "mapping_error": "cooperative_capture_not_ready"
+  },
+  "native_limits": {
+    "memory_bytes": 8589934592,
+    "maximum_wall_seconds": 3600
+  },
+  "binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "68c3d01ded122631a204834abb2d5ff3c98c35ab661194e37c932fd9324c15cb",
+    "unit": "timelearner-4e0c8747-f195-483b-a479-541d90173abe.service",
+    "invocation_id": "d96eb1e3bf254bd2aaa90154f74213d4",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4e0c8747-f195-483b-a479-541d90173abe.service",
+    "initial_main_pid": 2104764,
+    "initial_start_ticks": "518136995",
+    "sha256": "320f7d5e8c79a073ab5caeb85459ab7436384ac263ccc192758450170ca367b0"
+  },
+  "retained_trial_files": [
+    {
+      "name": "trial-0.json",
+      "bytes": 1744287,
+      "mtime": 1795612072.3228304
+    },
+    {
+      "name": "trial-1.json",
+      "bytes": 1744537,
+      "mtime": 1795612520.3086793
+    },
+    {
+      "name": "trial-2.json",
+      "bytes": 1744488,
+      "mtime": 1795612967.7325208
+    },
+    {
+      "name": "trial-3.json",
+      "bytes": 1743978,
+      "mtime": 1795613416.648382
+    },
+    {
+      "name": "trial-4.json",
+      "bytes": 1744863,
+      "mtime": 1795613864.120224
+    },
+    {
+      "name": "trial-5.json",
+      "bytes": 1748955,
+      "mtime": 1795614313.638093
+    },
+    {
+      "name": "trial-6.json",
+      "bytes": 1749617,
+      "mtime": 1795614762.779957
+    }
+  ],
+  "phase_outer_closed": true,
+  "all_native_and_python_groups_closed": true,
+  "source_model_not_replaced": true,
+  "threshold_candidate_not_proposed": true,
+  "new_Train": false,
+  "positive_eight_trial_verdict_forbidden": true,
+  "scientific_verdict": null
+}
