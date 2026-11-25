@@ -195,6 +195,8 @@ def phase_worker(request_path, phase):
     outputs = {v:p['base']/'readbacks'/names[v] for v in PHASES}
     if phase in ('conversion', 'threshold'):
         data = Path(bound['source_DATA']['path']) if phase == 'conversion' else outputs['conversion']/'native/model.json'
+        if phase == 'conversion':
+            require(file_record(data) == bound['source_DATA'], 'linux_DATA_sequence_audited_DATA_changed_before_import')
         plan = dict(kind='timelearner_prepared_physical_'+phase+'_plan' if phase == 'conversion' else
                          'timelearner_prepared_physical_threshold_plan', schema_version=1,
             source_data=file_record(data), runtime_manifest=p['training']['runtime'],
@@ -228,7 +230,7 @@ def phase_worker(request_path, phase):
              (Path(native_runtime['executable']['path']).parent, 'read'),
              (outputs['conversion'], 'read'), *([(outputs['threshold'], 'read')] if phase == 'confirmation' else []),
              (outputs[phase], 'write')]], ttl_seconds=4200,
-            demands=dict(slots=1, memory_bytes=12*GIB, disk_bytes=GIB))
+            demands=dict(slots=1, memory_bytes=12*GIB, disk_bytes=2*GIB))
         write(directory/'reservation.json', lease)
         data = outputs['conversion' if phase == 'baseline' else 'threshold']/'native/model.json'
         before = file_record(data); model = load(data); audit_physical_model_data(model, frozen=True)
