@@ -2,7 +2,7 @@
   "kind": "timelearner_scientific_report_format_profile",
   "schema_version": 1,
   "prepared_at": "2026-11-21",
-  "status": "candidate_layout_implemented_current_page_review_pending",
+  "status": "current_v5_accepted_for_external_publication",
   "runtime_readiness_record": "AuthorizedDocxRender-20261122.json",
   "draft_layout": {
     "builder": "Scripts/StructTrain/TimeLearner/publications/build_algorithm_docx.py",
@@ -15,7 +15,8 @@
     "legacy_runtime_readiness_is_not_bundled_renderer_acceptance": true,
     "actual_render_record": "CandidateDocxRender-20261123.json",
     "actual_page_review_record": "CandidatePageReview-20261123.json",
-    "draft_builder_implemented": true
+    "draft_builder_implemented": true,
+    "historical_snapshot": true
   },
   "applies_to": [
     "Classic",
@@ -107,8 +108,8 @@
     "bibliography_and_citations_reviewed": true,
     "administrative_cover_metadata_verified_or_parent_report_scope_declared": true,
     "builder_support_implemented": true,
-    "both_DOCX_rendered_and_every_page_reviewed": false,
-    "all_graphs_readable_at_Word_page_scale": false
+    "both_DOCX_rendered_and_every_page_reviewed": true,
+    "all_graphs_readable_at_Word_page_scale": true
   },
   "content_constraints": {
     "pulse_count_symbol": "M",
@@ -124,7 +125,7 @@
   },
   "previous_runtime_readiness_record": "DocumentRuntimeReadiness-20261122.json",
   "user_authorized_installed_LibreOffice_for_this_pair": true,
-  "remaining_content_update": "Current scientific content prepared; render and review every page of both actual candidates, verify applicable format requirements and publish unchanged accepted bytes. Pending Train outcomes remain excluded.",
+  "remaining_content_update": "Publish the exact accepted eg1 bytes externally with independent restoration. Subsequent scientific results require a new content snapshot and render; active Train has no invented result.",
   "correction_review": "GostCorrectionReview-20261122.json",
   "bibliography_review": "BibliographyReview-20261122.json",
   "reviewed_historical_draft_a13": {
@@ -152,5 +153,13 @@
     "sha256": "c199626a7cefc9892a7d9ce5fd00d9738c2c2f2fab4c50fa6c8f7e16e2dae77b",
     "metadata_pointers_in_maintained_profile_updated_after_render": true,
     "layout_parameters_unchanged": true
+  },
+  "current_accepted_pair": {
+    "edition": "2026-11-25-v5",
+    "candidate": "eg1",
+    "review": "CurrentScienceReleaseReview-20261125.json",
+    "standards_scope": "Thematic scientific sections; parent report administrative cover handled on inclusion",
+    "all155_page_pixels_reviewed": true,
+    "previous_v4_unchanged": true
   }
 }

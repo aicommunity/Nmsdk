@@ -1,0 +1,262 @@
+{
+  "kind": "timelearner_scientific_DOCX_content_format_and_visual_acceptance",
+  "schema_version": 1,
+  "edition": "2026-11-25-v5",
+  "candidate": "eg1",
+  "utc": "2026-11-25T13:28:25.851Z",
+  "documents": {
+    "classic": {
+      "document": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-25-revision5-editable-index-eg1\\docx\\TimeLearnerClassicAlgorithms.ru.docx",
+        "bytes": 9552694,
+        "sha256": "8973714c546ff9b3897d73b88b3542d11ba7f94a98914d61fc6ece180d82b4f9"
+      },
+      "pages": 81,
+      "canonical_render_returncode": 0,
+      "structural_readback": {
+        "document": {
+          "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-25-revision5-editable-index-eg1\\docx\\TimeLearnerClassicAlgorithms.ru.docx",
+          "bytes": 9552694,
+          "sha256": "8973714c546ff9b3897d73b88b3542d11ba7f94a98914d61fc6ece180d82b4f9"
+        },
+        "sections": 1,
+        "page_mm": {
+          "width": 210.00861111111112,
+          "height": 297.0036111111111
+        },
+        "margins_mm": {
+          "left": 30.00375,
+          "right": 14.993055555555555,
+          "top": 20.0025,
+          "bottom": 20.0025
+        },
+        "body": {
+          "font": "Times New Roman",
+          "size_pt": 14,
+          "line_spacing": 1.5,
+          "first_line_mm": 12.505972222222223
+        },
+        "caption_line_spacing": 1,
+        "title_counted_without_number": true,
+        "footer_fields": [
+          "PAGE"
+        ],
+        "editable_OMML_nodes": 53,
+        "numbered_editable_equations": 11,
+        "table_rows": [
+          6,
+          2,
+          2,
+          9,
+          9,
+          9
+        ],
+        "tables": 6,
+        "repeat_headers": 6,
+        "illustrations": 48,
+        "heading_outline": [
+          "Структурное обучение нейрона с независимыми дендритными путями",
+          "ВВЕДЕНИЕ",
+          "1 Сегментная модель и входной паттерн",
+          "2 Математическая цель обучения",
+          "3 Измерение закреплённого отклика",
+          "4 Последовательность структурной адаптации",
+          "5 Синхронизация",
+          "6 Нормализация числом синапсов",
+          "7 Нормализация сопротивлением",
+          "8 Завершение обучения и распознавание",
+          "9 Экспериментальные примеры",
+          "9.1 Двухвходовый проверочный пример",
+          "9.2 Нормализация числом синапсов: исходный профиль",
+          "9.3 Нормализация числом синапсов при четырёх импульсах на независимых путях",
+          "9.4 Холодное обучение: быстрый профиль",
+          "9.5 Августовская сохранённая модель: 6 из 8",
+          "10 Дополнительные проверки обученных моделей",
+          "10.1 Время ответа в коротком непрерывном потоке",
+          "10.2 Сопоставление ограниченного поиска соседних длин",
+          "11 Реализация вычисления и владение моделью",
+          "12 Границы подтверждённого результата",
+          "СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ"
+        ],
+        "first_paragraphs": [
+          "Структурное обучение нейрона с независимыми дендритными путями",
+          "25 ноября 2026 года Пятая редакция",
+          "ВВЕДЕНИЕ",
+          "Структурная адаптация настраивает сегментную спайковую модель нейрона на заданную последовательность входных импульсов. Для этого меняются длины дендритных путей и параметры передачи сигнала через синапсы. Изменение длины позволяет управлять задержкой отклика, а нормализация компенсирует изменение его амплитуды. Их совместная задача состоит в том, чтобы отклики закреплённых импульсов приходили к соме согласованно по времени и сохраняли собственные исходные амплитуды.",
+          "В отчёте разделены задача обучения и проверка распознавания. Обучение оценивается по измеренным ошибкам времени и амплитуды. Распознавание оценивается по фактическим выходным импульсам нейрона на целевой и отвлекающие паттерны. Модель может давать полезную классификацию после остановки поиска, даже если все исходные допуски обучения ещё не выполнены. Эти два результата указываются раздельно.",
+          "Работающим примером для включения в отчёт считается модель, обнаружившая целевой паттерн и правильно отвергнувшая не менее двух предъявлений отвлекающих паттернов. Для каждого примера дополнительно приведены ложные ответы, пропуски, число разных отвлекающих паттернов, условия предъявления и способ выбора порога. Этот критерий не означает полной разделимости или завершённой проверки всех вариантов алгоритма.",
+          "Материал подготовлен как тематический раздел для включения в научный отчёт. Общие реквизиты отчёта и сведения об исполнителях оформляются при объединении его разделов. Здесь описаны математическая задача, реализованный порядок обучения, измеренные примеры и ограничения выводов.",
+          "1 Сегментная модель и входной паттерн",
+          "Мембрана представлена связанными сегментами. Каждый сегмент содержит механизмы, формирующие возбуждающий и тормозной вклад в мембранный потенциал. Синапсы преобразуют входные импульсы в воздействие на эти механизмы. Распространение и суммирование сигналов по цепочке сегментов создают зависящий от структуры временной отклик."
+        ],
+        "bibliography": [
+          "1. Применение сегментной спайковой модели нейрона со структурной адаптацией для решения задач классификации / А. М. Корсаков, Л. А. Астапова, А. В. Бахшиев. — DOI 10.15622/ia.21.3.2. — Текст : электронный // Информатика и автоматизация. — 2022. — Т. 21, № 3. — С. 493–520. — URL: https://ia.spcras.ru/index.php/sp/article/view/15257 (дата обращения: 22.11.2026). — Дата публикации: 30.05.2022.",
+          "2. Mathematical Model of the Impulses Transformation Processes in Natural Neurons for Biologically Inspired Control Systems Development / A. V. Bakhshiev, F. V. Gundelakh. — Текст : электронный // Supplementary Proceedings of the 4th International Conference on Analysis of Images, Social Networks and Texts (AIST’2015) / edited by Mikhail Yu. Khachay [et al.]. — 2015. — (CEUR Workshop Proceedings ; vol. 1452). — P. 1–12. — URL: https://ceur-ws.org/Vol-1452/paper1.pdf (дата обращения: 22.11.2026). — Дата публикации: 15.10.2015."
+        ],
+        "external_comments": false
+      },
+      "directly_viewed_changed_pages": [
+        {
+          "page": 22,
+          "bytes": 256399,
+          "sha256": "0c397cd7ba3cf592a4f2168581e8f409e28407855188737893922da7c2b4d3d1",
+          "layout_accepted": true
+        }
+      ],
+      "exact_prior_pixels": 80,
+      "all_page_pixels_reviewed": true
+    },
+    "branch": {
+      "document": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-25-revision5-editable-index-eg1\\docx\\TimeLearnerBranchAlgorithms.ru.docx",
+        "bytes": 7584185,
+        "sha256": "1d9db25eaa38f0e15505b6a24a881f5fcfd749dfdad2ab2ef978d52b97b97d8b"
+      },
+      "pages": 74,
+      "canonical_render_returncode": 0,
+      "structural_readback": {
+        "document": {
+          "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-25-revision5-editable-index-eg1\\docx\\TimeLearnerBranchAlgorithms.ru.docx",
+          "bytes": 7584185,
+          "sha256": "1d9db25eaa38f0e15505b6a24a881f5fcfd749dfdad2ab2ef978d52b97b97d8b"
+        },
+        "sections": 1,
+        "page_mm": {
+          "width": 210.00861111111112,
+          "height": 297.0036111111111
+        },
+        "margins_mm": {
+          "left": 30.00375,
+          "right": 14.993055555555555,
+          "top": 20.0025,
+          "bottom": 20.0025
+        },
+        "body": {
+          "font": "Times New Roman",
+          "size_pt": 14,
+          "line_spacing": 1.5,
+          "first_line_mm": 12.505972222222223
+        },
+        "caption_line_spacing": 1,
+        "title_counted_without_number": true,
+        "footer_fields": [
+          "PAGE"
+        ],
+        "editable_OMML_nodes": 53,
+        "numbered_editable_equations": 11,
+        "table_rows": [
+          4,
+          7,
+          2,
+          5,
+          4,
+          5,
+          9,
+          9
+        ],
+        "tables": 8,
+        "repeat_headers": 8,
+        "illustrations": 55,
+        "heading_outline": [
+          "Структурное обучение нейрона с общей дендритной ветвью",
+          "ВВЕДЕНИЕ",
+          "1 Сегментная модель и входной паттерн",
+          "2 Математическая цель обучения",
+          "3 Измерение закреплённого отклика",
+          "4 Последовательность структурной адаптации",
+          "5 Синхронизация",
+          "6 Нормализация числом синапсов",
+          "7 Нормализация сопротивлением",
+          "8 Завершение обучения и распознавание",
+          "9 Экспериментальные примеры",
+          "9.1 Двухвходовый проверочный пример",
+          "9.2 Нормализация числом синапсов при четырёх импульсах",
+          "9.3 Нормализация сопротивлением: связанная ветвь",
+          "9.4 Быстрый профиль: бюджет 7200 с",
+          "9.5 Быстрый профиль: бюджет 21600 с",
+          "9.6 Холодное обучение: быстрый профиль",
+          "10 Дополнительные проверки обученных моделей",
+          "10.1 Новая модель после измеренного поиска числа синапсов",
+          "10.2 Проверка на сетке новых отвлекающих паттернов",
+          "10.3 Влияние предшествующего паттерна на время выхода",
+          "10.4 Большая модель той же семьи и влияние условий предъявления",
+          "10.5 Различение третьего импульса большой моделью общей ветви",
+          "11 Реализация вычисления и владение моделью",
+          "12 Границы подтверждённого результата",
+          "СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ"
+        ],
+        "first_paragraphs": [
+          "Структурное обучение нейрона с общей дендритной ветвью",
+          "25 ноября 2026 года Пятая редакция",
+          "ВВЕДЕНИЕ",
+          "Структурная адаптация настраивает сегментную спайковую модель нейрона на заданную последовательность входных импульсов. Для этого меняются длины дендритных путей и параметры передачи сигнала через синапсы. Изменение длины позволяет управлять задержкой отклика, а нормализация компенсирует изменение его амплитуды. Их совместная задача состоит в том, чтобы отклики закреплённых импульсов приходили к соме согласованно по времени и сохраняли собственные исходные амплитуды.",
+          "В отчёте разделены задача обучения и проверка распознавания. Обучение оценивается по измеренным ошибкам времени и амплитуды. Распознавание оценивается по фактическим выходным импульсам нейрона на целевой и отвлекающие паттерны. Модель может давать полезную классификацию после остановки поиска, даже если все исходные допуски обучения ещё не выполнены. Эти два результата указываются раздельно.",
+          "Работающим примером для включения в отчёт считается модель, обнаружившая целевой паттерн и правильно отвергнувшая не менее двух предъявлений отвлекающих паттернов. Для каждого примера дополнительно приведены ложные ответы, пропуски, число разных отвлекающих паттернов, условия предъявления и способ выбора порога. Этот критерий не означает полной разделимости или завершённой проверки всех вариантов алгоритма.",
+          "Материал подготовлен как тематический раздел для включения в научный отчёт. Общие реквизиты отчёта и сведения об исполнителях оформляются при объединении его разделов. Здесь описаны математическая задача, реализованный порядок обучения, измеренные примеры и ограничения выводов.",
+          "1 Сегментная модель и входной паттерн",
+          "Мембрана представлена связанными сегментами. Каждый сегмент содержит механизмы, формирующие возбуждающий и тормозной вклад в мембранный потенциал. Синапсы преобразуют входные импульсы в воздействие на эти механизмы. Распространение и суммирование сигналов по цепочке сегментов создают зависящий от структуры временной отклик."
+        ],
+        "bibliography": [
+          "1. Применение сегментной спайковой модели нейрона со структурной адаптацией для решения задач классификации / А. М. Корсаков, Л. А. Астапова, А. В. Бахшиев. — DOI 10.15622/ia.21.3.2. — Текст : электронный // Информатика и автоматизация. — 2022. — Т. 21, № 3. — С. 493–520. — URL: https://ia.spcras.ru/index.php/sp/article/view/15257 (дата обращения: 22.11.2026). — Дата публикации: 30.05.2022.",
+          "2. Mathematical Model of the Impulses Transformation Processes in Natural Neurons for Biologically Inspired Control Systems Development / A. V. Bakhshiev, F. V. Gundelakh. — Текст : электронный // Supplementary Proceedings of the 4th International Conference on Analysis of Images, Social Networks and Texts (AIST’2015) / edited by Mikhail Yu. Khachay [et al.]. — 2015. — (CEUR Workshop Proceedings ; vol. 1452). — P. 1–12. — URL: https://ceur-ws.org/Vol-1452/paper1.pdf (дата обращения: 22.11.2026). — Дата публикации: 15.10.2015."
+        ],
+        "external_comments": false
+      },
+      "directly_viewed_changed_pages": [
+        {
+          "page": 24,
+          "bytes": 256223,
+          "sha256": "cdb0c8f836b8a19008e7e7a834370b6abd98ffdc796ddb26e4df9932544a2e84",
+          "layout_accepted": true
+        }
+      ],
+      "exact_prior_pixels": 73,
+      "all_page_pixels_reviewed": true
+    }
+  },
+  "prior_review": "CurrentScienceClarifiedCandidate-20261125.json",
+  "basis": {
+    "full_dy12_pages_individually_opened": 155,
+    "ef13_changed_pages_individually_opened": 18,
+    "eg1_changed_pages_individually_opened": 2,
+    "complete_PNG_byte_equivalence_for_all_other_pages": true,
+    "no_montage_only_acceptance": true
+  },
+  "standards_scope": {
+    "report_part": true,
+    "parent_report_administrative_metadata_deferred_by_explicit_scope": true,
+    "standards": [
+      "ГОСТ 7.32-2017",
+      "ГОСТ Р 7.0.100-2018 — применимые библиографические записи"
+    ],
+    "applicable_corrections": "GostCorrectionReview-20261122.json",
+    "bibliography_review": "BibliographyReview-20261122.json",
+    "profile": "gost-next-edition-profile.json",
+    "page_and_body_profile_verified": true,
+    "each_figure_caption_source_and_readability_reviewed": true,
+    "all_tables_whole_on_page": true,
+    "numbered_editable_equations_per_document": 11,
+    "all_symbols_explained": true,
+    "math_index_range_native_editable": true
+  },
+  "scientific_scope": {
+    "mathematical_goal": "CapturedPerInput",
+    "training_maximum": "assigned impulse",
+    "recognition": "recorded whole response and actual native spikes",
+    "different_topologies_grouped_separately": true,
+    "normalization_and_M_distinguished": true,
+    "working_example_criterion": "TP>=1 and TN>=2",
+    "no_new_Train_result_invented": true,
+    "not_all_stopped_models_converged": true,
+    "diagnostic_not_blind": true,
+    "whole_plan_complete": false
+  },
+  "all155_pages_have_reviewed_pixels": true,
+  "content_acceptance_complete": true,
+  "applicable_format_requirements_accepted": true,
+  "original_user_comments_preserved": true,
+  "preserved_v4_unchanged": true,
+  "ready_for_external_publication": true,
+  "externally_published": false,
+  "scientific_verdict": null
+}

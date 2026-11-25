@@ -1,0 +1,482 @@
+{
+  "kind": "timelearner_actual_DATA_scope_repair_validation_and_native_resume",
+  "schema_version": 1,
+  "tool_commit": "9698ead2f105f4d2b8728b6fa4844962d7771bb2",
+  "gate": {
+    "utc": "2026-11-25T12:56:26.399094+00:00",
+    "owner": {
+      "pid": 2061866,
+      "start_ticks": "518103856",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "group_closed": true,
+    "result": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "actual-Linux-DATA-run-scope-ef27",
+      "package_fingerprint": "218eabc036f3d556505d496cee835f28da0b35249c3f31101591e4c4c40ae070",
+      "execution": "completed",
+      "assertion_status": "passed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_baseline_passes_production_validator_on_actual_DATA",
+        "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_confirmation_uses_complete_schema_and_its_own_run_scope",
+        "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_foreign_run_scope_is_rejected_even_with_a_valid_digest",
+        "Scripts.StructTrain.TimeLearner.tests.test_actual_linux_DATA_recognition_job.ActualLinuxDATARecognitionJob.test_original_rejected_payload_still_fails_before_native_execution"
+      ],
+      "executed_tests": 4,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {
+        "TIMELEARNER_LINUX_DATA_SEQUENCE_FIXTURE": {
+          "path": "/home/user/timelearner-refactor/requests/classic-q3-native-recognition-sequence-elder-ef27/scope-gate/fixture",
+          "files": 3,
+          "fingerprint": "4a89c37177807a9e5450bc2426f42b486e42f972e72bf9da189ea3b91ff54790"
+        }
+      },
+      "scientific_verdict": null
+    },
+    "process": {
+      "kind": "timelearner_process_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 53.47004878800362,
+      "model_time": null,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "runtime_fingerprint": "896f54ef2e751a65f9b0cbfe4798ee69d02433ff2abdaba57ce0762a43301033",
+      "ownership_scope": "bound_cgroup",
+      "all_processes_closed": true,
+      "scientific_verdict": null,
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "clear",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 0,
+        "reasons": [],
+        "examples": [],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 1342,
+            "sha256": "1000e21723f07e5952f6ac60fc7f74907be3f0a4b05d38026ca6e01084e93031"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    },
+    "monitor": {
+      "guard_triggered": false,
+      "original_reason": null,
+      "peak_allocated_bytes": 1323008,
+      "minimum_free_bytes": 19207618560
+    }
+  },
+  "native_resume": {
+    "observation_utc": "2026-11-25T13:07:03.738674+00:00",
+    "dispatch": {
+      "utc": "2026-11-25T12:58:15.917948+00:00",
+      "dispatched": true,
+      "job": "classic-q3-native-recognition-sequence-elder-ef27",
+      "owner": {
+        "pid": 2085985,
+        "start_ticks": "518126675",
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "uid": 1000
+      },
+      "source_actor": "/home/user/timelearner-refactor/source-Linux-DATA-scope-elder-ef27",
+      "source_commit": "9698ead2f105f4d2b8728b6fa4844962d7771bb2",
+      "controls_commit": "5538023e90aba67febca4a22cca9f2eaec358c91",
+      "controls_bundle": {
+        "path": "/home/user/timelearner-refactor/requests/classic-q3-native-recognition-sequence-elder-ef27/controls.bundle",
+        "sha256": "48baf7eb23f3526beef54b4e429fb054eecb27020ed4b9f621b85c7b7eac1f95",
+        "size": 3406
+      },
+      "request": {
+        "path": "/home/user/timelearner-refactor/requests/classic-q3-native-recognition-sequence-elder-ef27/request.json",
+        "sha256": "9c480b792623dc476ce3c45831ebd840ba43f1121317b8bb1a27f54e0d07d159",
+        "size": 3105
+      },
+      "scope_gate": {
+        "result": {
+          "path": "/home/user/timelearner-refactor/readbacks/python-classic-q3-eval-scope-ef27/worker/validation/result.json",
+          "sha256": "cf8c83ab460f51b7db861ff482cbc5228d62130b7a5b40e7a0485fdb9bb000ad",
+          "size": 1422
+        },
+        "passed": 4,
+        "skipped": 0,
+        "all_processes_closed": true
+      },
+      "old_failed_attempt_preserved": true,
+      "new_Train": false,
+      "same_actual_Train_DATA_source": true,
+      "scientific_verdict": null
+    },
+    "live": true,
+    "actual_source": {
+      "kind": "timelearner_actual_audited_Train_to_DATA_source_binding",
+      "schema_version": 1,
+      "job_sha256": "c990d360d49d8d73fc5fb2f620f750d671d3c305796bc94e4921aae238a56b5c",
+      "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+      "source_training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "full_primary_audit": {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-q3-full-primary-audit-and-DATA-elder-dy4/full-primary-audit.json",
+        "sha256": "acd6940f6ffd3a3aa442b1553e5074c32d433c722635b8349d29c69a830d6f3b",
+        "size": 53246
+      },
+      "source_DATA": {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-q3-full-primary-audit-and-DATA-elder-dy4/physical-model-DATA.json",
+        "sha256": "98843604f5fff95ec8df31e50eabb06ac8c73162fa81ca30c3dc1e0582694eb1",
+        "size": 19766451
+      },
+      "source_package": {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-candidate-round-robin-q3-cold-elder-dv31/train/native/train_stopped_state.json",
+        "sha256": "9102eded37a51f981107c466fe9a831755c2086603b3506bd012d49f0bda0dd2",
+        "size": 789868017
+      },
+      "original_training_unchanged": true,
+      "scientific_verdict": null
+    },
+    "conversion_terminal": {
+      "phase": "conversion",
+      "execution": "completed",
+      "validity": "valid",
+      "result": {
+        "native_process_completed": true,
+        "physical_roundtrip_verified": true,
+        "portable_model_audit": {
+          "kind": "physical_model_data_audit",
+          "schema_version": 1,
+          "data_only": true,
+          "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+          "pattern_size": 4,
+          "branch": false,
+          "frequency_hz": 2000,
+          "threshold_path": "$.LTZone",
+          "threshold_classes": [
+            "TLNativeFast3F2000_LTZone"
+          ],
+          "effective_threshold": 100,
+          "source_training_evidence_checked": false,
+          "native_import_verified": false,
+          "training_certificate_transferred": false,
+          "calibration_confirmed": false,
+          "evaluation_verdict": null,
+          "explicit_conversion_data": true,
+          "native_conversion_verified": false
+        },
+        "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+        "model_sha256": "ca60599ec14e639a65b449a96038073407cc614d73d6e94802b7acdcda043ea1",
+        "source_package_sha256": "11c280aff0fb6acc6fb246db636c1f95e700aa978eb349188fbfbc6f05380ab7",
+        "source_evidence_included": false,
+        "explicit_conversion": true,
+        "explicit_threshold_candidate": false,
+        "training_certificate_transferred": false,
+        "calibration_confirmed": false,
+        "original_execution_reclassified": false,
+        "scientific_verdict": null
+      },
+      "actual_source_training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "training_certificate_transferred": false,
+      "calibration_certificate_transferred": false,
+      "new_Train": false,
+      "scientific_verdict": null
+    },
+    "baseline_groups": {
+      "controller": {
+        "closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "b245580d982487033eef2bb2d401b5af8864c40c78e3058b3ef958d849b3c317",
+          "unit": "timelearner-e36c07dd-b4c6-433e-8e79-48530700dea0.service",
+          "invocation_id": "41179727bee645a69cff06a896faf734",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e36c07dd-b4c6-433e-8e79-48530700dea0.service",
+          "initial_main_pid": 2100498,
+          "initial_start_ticks": "518134008",
+          "sha256": "914e7522a4ff4b027a70ae48e33212e63e4d7a6c3f60e593df8bc958258041aa"
+        }
+      },
+      "native": {
+        "closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "68c3d01ded122631a204834abb2d5ff3c98c35ab661194e37c932fd9324c15cb",
+          "unit": "timelearner-4e0c8747-f195-483b-a479-541d90173abe.service",
+          "invocation_id": "d96eb1e3bf254bd2aaa90154f74213d4",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4e0c8747-f195-483b-a479-541d90173abe.service",
+          "initial_main_pid": 2104764,
+          "initial_start_ticks": "518136995",
+          "sha256": "320f7d5e8c79a073ab5caeb85459ab7436384ac263ccc192758450170ca367b0"
+        }
+      }
+    }
+  },
+  "new_Train": false,
+  "classification_measured": false,
+  "primary_archival_pending": true,
+  "scientific_verdict": null,
+  "external_scope_gate_archive": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-actual-DATA-run-scope-validation-independent-ef41.json",
+      "sha256": "7321a415825cd3769f0a486e88f9147799a4a2f00c1bc413d75208989d2d0cf5",
+      "size": 1911
+    },
+    "kind": "timelearner_actual_DATA_run_scope_validation_independent_restoration",
+    "schema_version": 1,
+    "utc": "2026-11-25T13:15:17.509026+00:00",
+    "source_catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Elder-q3-actual-DATA-run-scope-validation-ef40.json",
+      "sha256": "c7dadcf110b7c941c470734b5231c98f0f19bd48ff02eeb5c7ec2044241346ff",
+      "size": 3099
+    },
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/18/183e5a1188d09f81dd87d1f6cd5a4d1b27f1d0d781076dc5d1d61fc4e6478f49",
+        "sha256": "183e5a1188d09f81dd87d1f6cd5a4d1b27f1d0d781076dc5d1d61fc4e6478f49",
+        "bytes": 9582
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ec/ec79806cdd123dd03d223739bb5bbddb01c0fd01278c7fcb5b89b37b871e88d3",
+        "sha256": "ec79806cdd123dd03d223739bb5bbddb01c0fd01278c7fcb5b89b37b871e88d3",
+        "bytes": 319376
+      }
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "ec79806cdd123dd03d223739bb5bbddb01c0fd01278c7fcb5b89b37b871e88d3",
+      "archive_members_verified": 57,
+      "retained_regular_files": 57,
+      "compatibility": null,
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "passed": 4,
+    "skipped": 0,
+    "fixtures_included": true,
+    "actual_model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+    "no_new_native_calculation": true,
+    "complete_Train_primary_archive_included": false,
+    "scientific_verdict": null
+  },
+  "training_readback": {
+    "observation_utc": "2026-11-25T13:08:01.558318+00:00",
+    "compact_source": {
+      "path": "/home/user/timelearner-refactor/readbacks/classic-candidate-round-robin-q3-cold-elder-dv31/train/native/train_stopped_summary.json",
+      "sha256": "656c9ef0caddeb0d5d07ad56453e2d0d9209eb496897ee120c9c6ddfef59272b",
+      "size": 68268305
+    },
+    "actual_terminal": {
+      "actual_model_epoch": 21,
+      "search_terminal_epoch": 20,
+      "actual_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 14
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "search_terminal_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 14
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 12
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "fresh_all_input_verification": false,
+      "status": "restored",
+      "stopped_outcome": "budget_exhausted",
+      "stopped_reason": "native_training_time_budget_exhausted",
+      "reason": "",
+      "wall_seconds": 12.455717340111732
+    },
+    "historical": {
+      "accepted_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 14
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 12
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "actual_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 14
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 12
+        },
+        {
+          "length": 121,
+          "resistance": 86000000,
+          "synapses": 8
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "applied_edits": 20,
+      "search_probes": 46,
+      "composite_counters": {
+        "archive": {
+          "groups": 50,
+          "native_probes": 300,
+          "primary_bytes": 114249397,
+          "sampled_frames": 1077621
+        },
+        "attempt": {
+          "logical_groups": 50,
+          "native_probes": 300,
+          "sampled_frames": 1077621
+        }
+      },
+      "final_group_ids": [],
+      "outcome": "budget_exhausted",
+      "reason": "native_training_time_budget_exhausted",
+      "tolerances": {
+        "amplitude_absolute": 0.00001,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      }
+    },
+    "candidate_count": 22,
+    "candidate_records_per_input": {
+      "0": 9,
+      "1": 7,
+      "2": 6,
+      "3": 0
+    },
+    "actual_traversal": {
+      "candidates_per_visit": 3,
+      "kind": "timelearner_input_traversal",
+      "maximum_seed_elements": 131072,
+      "policy": "classic_candidate_round_robin",
+      "schema_version": 1
+    },
+    "archive_prepared_not_started": {
+      "prepared_not_started": true,
+      "job_id": "python-classic-q3-full-primary-bundle-ef44",
+      "controls_commit": "38d0a502c22ed028e337912a0dbfe864ec9a3f33",
+      "controls_bundle": {
+        "path": "/home/user/timelearner-refactor/requests/python-classic-q3-full-primary-bundle-ef44/controls.bundle",
+        "sha256": "71d2bdbab298e4fb4fc303a500fcac35a754bcec3523373c19a337d495a0c6ee",
+        "size": 54637
+      },
+      "request": {
+        "path": "/home/user/timelearner-refactor/requests/python-classic-q3-full-primary-bundle-ef44/request.json",
+        "sha256": "6fdd72672a2ce6d676a5cc4e81ff9e2e072668f7bd6760027f215adf78fe9e36",
+        "size": 747
+      },
+      "manifest": {
+        "path": "/home/user/timelearner-refactor/requests/python-classic-q3-full-primary-bundle-ef44/manifest.json",
+        "sha256": "9f7a9b805f90f9bf08cb934f3c1afbb3150df990f262e0ee0af8e25b72d47e18",
+        "size": 208713
+      },
+      "roots": [
+        {
+          "directory": "/home/user/timelearner-refactor/readbacks/classic-candidate-round-robin-q3-cold-elder-dv31",
+          "files": 1042,
+          "links": 3,
+          "bytes": 2073077528
+        },
+        {
+          "directory": "/home/user/timelearner-refactor/readbacks/classic-candidate-round-robin-q3-cold-elder-dv31-controller",
+          "files": 29,
+          "links": 0,
+          "bytes": 40734
+        },
+        {
+          "directory": "/home/user/timelearner-refactor/readbacks/classic-q3-full-primary-audit-and-DATA-elder-dy4",
+          "files": 26,
+          "links": 0,
+          "bytes": 19884417
+        },
+        {
+          "directory": "/home/user/timelearner-refactor/readbacks/classic-q3-archive-fixed-controls-ef44",
+          "files": 6,
+          "links": 0,
+          "bytes": 27494104
+        }
+      ],
+      "closed_units": 5,
+      "predecessor_live": true,
+      "native_experiment_restarted": false,
+      "scientific_verdict": null
+    },
+    "scientific_verdict": null
+  }
+}
