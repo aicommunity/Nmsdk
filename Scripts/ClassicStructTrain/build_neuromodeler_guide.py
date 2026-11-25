@@ -183,6 +183,9 @@ def build():
             paragraph.paragraph_format.keep_with_next = True
             paragraph.paragraph_format.line_spacing = 1.0
             paragraph.paragraph_format.space_after = Pt(2)
+            preceding = paragraph._p.getprevious()
+            if preceding is not None and preceding.tag == qn("w:tbl"):
+                paragraph.paragraph_format.space_before = Pt(6)
             image_path = GUIDE / file
             picture_size = Image.from_file(str(image_path))
             width_cm = min(16.5, picture_size.px_width / 45,
