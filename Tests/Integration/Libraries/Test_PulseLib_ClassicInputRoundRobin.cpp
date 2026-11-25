@@ -160,7 +160,16 @@ TEST(ClassicInputRoundRobin, ChangedBackgroundNeverRestoresOtherInputParameters)
     const auto protocol=Protocol(4);auto config=RoundRobin();
     BoundedTrainingSession session(References(protocol),config,std::vector<InputParameters>(4,{1,1,10.}));
     std::vector<InputParameters> previous(4,{1,1,10.});
-    DriveTraining(session,protocol,[&](const auto& action,auto&,auto&) {
+    std::set<std::size_t> improvedPaths;
+    DriveTraining(session,protocol,[&](const auto& action,auto& delay,auto&) {
+        // Make L=2 a measured improvement on EVERY path, still outside the
+        // timing tolerance. With a length-independent response L=1 legitimately
+        // wins the change-cost tie; requiring final L=2 would test no invariant.
+        for(std::size_t i=0;i<3;++i)
+            if(action.parameters[i].length==2) {
+                delay[i]+=.05*(3-i);
+                if(action.inputIndex==i && !action.finalVerification)improvedPaths.insert(i);
+            }
         std::size_t changed=0;
         for(std::size_t i=0;i<4;++i)if(action.parameters[i]!=previous[i])++changed;
         // Every independent path may change its own candidate. A re-entry or
@@ -169,6 +178,7 @@ TEST(ClassicInputRoundRobin, ChangedBackgroundNeverRestoresOtherInputParameters)
         previous=action.parameters;
     });
     EXPECT_NE(session.Status(),TrainingStatus::Exact);
+    EXPECT_EQ(improvedPaths,(std::set<std::size_t>{0,1,2}));
     for(std::size_t i=0;i<3;++i)EXPECT_EQ(session.Parameters()[i].length,2);
 }
 
