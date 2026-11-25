@@ -1,3 +1,9 @@
+25.11: [Classic cap8, полный первичный архив и графики](Progress-20261125/Windows-cap8-recognition-and-complete-temporal-report-el8.json):
+TP1/FP1/FN0/TN6; 306 первичных и 666 файлов отчётности независимо
+восстановлены во внешнем архиве M40. В Git только эта текстовая квитанция.
+[Научный разбор](../../../Docs/StructTrain/TimeLearner/ClassicCandidateCap8RecognitionResults-20261125.ru.md),
+[текущая сводка](../../../Docs/StructTrain/TimeLearner/CurrentStatus-20261125.ru.md).
+
 23.11: [актуальная сводка](../../../Docs/StructTrain/TimeLearner/CurrentStatus-20261123.ru.md).
 [Действительные8 ответов нового Branch](CountFrozenEvaluation-20261123/windows-new-count-actual-eight-results.json),
 [16 наблюдений короткого потока Classic](CountFrozenEvaluation-20261123/m40-short-pair-actual-events.json),
