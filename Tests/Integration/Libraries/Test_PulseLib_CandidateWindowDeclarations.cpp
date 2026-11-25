@@ -165,7 +165,10 @@ TEST(InputTraversalNativeDeclarations,ColdScalarCompositeCandidateAndTerminalEnv
     for(const int protocol:{3,4,5})
     for(const bool capacitance:{false,true})
     for(const bool terminal:{false,true}) {
+        SCOPED_TRACE(::testing::Message()<<"normalization="<<static_cast<int>(normalization)
+            <<" protocol="<<protocol<<" capacitance="<<capacitance<<" terminal="<<terminal);
         auto c=Cold7Declaration();c.model.normalization=c.search.normalization=normalization;
+        c.model.editPolicy.normalization=normalization;
         c.search.inputTraversal=InputTraversalPolicy::ClassicCandidateRoundRobin;
         c.search.candidatesPerInputVisit=3;c.search.maximumTraversalSeedElements=2048;
         if(protocol==3){c.candidateWindowPolicy.reset();c.composite.reset();}
@@ -205,6 +208,8 @@ TEST(InputTraversalNativeDeclarations,RuntimePlansRetainTheirOwnWarmQuantumAndRe
 TEST(InputTraversalNativeDeclarations,BranchUnknownVersionAndInsufficientSeedBudgetCannotBeNormalizedAway) {
     auto c=Cold7Declaration();c.search.inputTraversal=InputTraversalPolicy::ClassicCandidateRoundRobin;
     c.search.candidatesPerInputVisit=3;const auto original=EncodeConfiguredNativeTraining(c);
+    auto inconsistent=c;inconsistent.model.editPolicy.normalization=Normalization::TipResistance;
+    EXPECT_THROW(EncodeConfiguredNativeTraining(inconsistent),std::invalid_argument);
     c.model.branch=true;EXPECT_THROW(EncodeConfiguredNativeTraining(c),std::invalid_argument);
     for(const int defect:{0,1,2,3}) {
         auto wire=original;auto search=wire["search"].toObject();auto traversal=search["input_traversal"].toObject();
