@@ -112,7 +112,8 @@ class ActualLinuxFrozenFollowupJobs(unittest.TestCase):
         self.assertNotIn('threshold', self.model)
         native_zone = next(n for n in self.model['neuron']['graph']['identity']['model']['nodes']
                            if n['path'] == '$.LTZone')
-        native_threshold = native_zone['parameters']['Threshold']['data']['value']
+        from Scripts.StructTrain.TimeLearner.recognition_evidence import _physical
+        native_threshold = _physical(native_zone, 'Threshold')
         self.assertEqual(native_threshold, 100.)
         job, design = self.declared('third-pulse')
         identity = condition(job, design, self.runtime, 5400)
