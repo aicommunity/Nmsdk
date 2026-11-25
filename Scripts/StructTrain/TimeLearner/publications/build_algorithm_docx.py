@@ -84,6 +84,14 @@ def build(source,output,*,diagrams,figures=None,draft=False,release_candidate=Fa
                    or any(not isinstance(text,str) or not text.strip() for text in value)
                    for value in explanations.values())):
         raise ValueError('Known example IDs and nonempty explanation paragraphs required')
+    # Current scientific wording is maintained alongside the report text;
+    # immutable figure catalogs retain their original captions and provenance.
+    captions=content.get('illustration_captions',{}) if next_edition else {}
+    if (not isinstance(captions,dict)
+            or set(captions)-(set(concepts)|set(supplementary))
+            or any(not isinstance(text,str) or not text.strip()
+                   for text in captions.values())):
+        raise ValueError('Known illustration IDs and nonempty captions required')
     concept_ids=('assigned-peak','separate-early-peak','merged-peaks','missing-peak',
                  'incomplete-window','n0-measured-search','n1-measured-search')
     missing=['concept:'+i for i in concept_ids if i not in concepts]
@@ -224,7 +232,7 @@ def build(source,output,*,diagrams,figures=None,draft=False,release_candidate=Fa
                   maximum_height_inches=6.5 if layout and identity=='branch-topology' else None)
         def concept(identity):
             record=concepts.get(identity)
-            if record:image(fr/record['png']['path'],record['caption'],record['source_ref'])
+            if record:image(fr/record['png']['path'],captions.get(identity,record['caption']),record['source_ref'])
             elif draft:para('Черновик Измеренная иллюстрация '+identity+' подготавливается')
         para(specific['title'],'Title');para(content['edition'],'Subtitle')
         if draft:para('ЧЕРНОВИК Для внутренней проверки текста и верстки')
@@ -334,7 +342,7 @@ def build(source,output,*,diagrams,figures=None,draft=False,release_candidate=Fa
                     para('Источник дополнительной проверки: '+reference)
                 for identity in update.get('figures',[]):
                     record=supplementary[identity]
-                    image(fr/record['png']['path'],record['caption'],record['source_ref'])
+                    image(fr/record['png']['path'],captions.get(identity,record['caption']),record['source_ref'])
         head('Реализация вычисления и владение моделью');paras(common['implementation'])
         diagram('logical-classes','Логическая UML диаграмма обязанностей компонентов обучения.')
         implementation_rows=[

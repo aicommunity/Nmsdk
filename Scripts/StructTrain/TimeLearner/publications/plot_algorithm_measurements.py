@@ -110,7 +110,7 @@ def render(source, output, *, matplotlib_libs=None):
             axes[1].axhspan(-sync,sync,color='#dcebd9');axes[1].axhline(0,color='gray',lw=.7)
             axes[1].plot(index,low,'o-',color='#1756a9',lw=1,label='Нижняя граница')
             axes[1].plot(index,high,'x--',color='#a51b23',lw=.8,label='Верхняя граница');axes[1].set_ylabel('Ошибка времени, с')
-            axes[1].set_xticks(index,labels);axes[1].set_xlabel('Последовательность измеренных кандидатов; Rₛ / 10⁶')
+            axes[1].set_xticks(index,labels);axes[1].set_xlabel('Последовательность измеренных кандидатов; Rₛ, МОм')
             axes[0].set_xticks(index);axes[0].set_xlabel('Номер измеренного кандидата')
             axes[2].axhspan(-amp,amp,color='#dcebd9');axes[2].axhline(0,color='gray',lw=.7)
             axes[2].axhline(amp,color='#548447',ls='--',lw=.8);axes[2].axhline(-amp,color='#548447',ls='--',lw=.8)
