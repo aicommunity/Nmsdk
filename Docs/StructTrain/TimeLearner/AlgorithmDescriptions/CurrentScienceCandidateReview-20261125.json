@@ -57,6 +57,9 @@
       7,
       8,
       9,
+      10,
+      11,
+      12,
       68,
       69,
       70,
@@ -72,6 +75,9 @@
       7,
       8,
       9,
+      10,
+      11,
+      12,
       64,
       65,
       66,
@@ -91,6 +97,7 @@
       7,
       8,
       9,
+      10,
       68,
       69,
       70,
@@ -106,6 +113,7 @@
       7,
       8,
       9,
+      10,
       64,
       65,
       66,
@@ -115,8 +123,14 @@
     ]
   },
   "rejected": {
-    "classic": {},
-    "branch": {}
+    "classic": {
+      "11": "In the exact rendered page the introductory reference to figure 4 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable.",
+      "12": "In the exact rendered page the introductory reference to figure 5 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable."
+    },
+    "branch": {
+      "11": "In the exact rendered page the introductory reference to figure 4 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable.",
+      "12": "In the exact rendered page the introductory reference to figure 5 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable."
+    }
   },
   "checks": [
     "Exact current page PNGs individually viewed at full page resolution.",
@@ -130,7 +144,7 @@
     "Replace generic illustration introduction text with specific references when revising the corresponding sections; no data or layout failure inferred.",
     "Clarify combined-potential block label of the high-level Classic diagram alongside the profile-specific arithmetic mean described in the text."
   ],
-  "reviewed_pages": 28,
+  "reviewed_pages": 34,
   "total_pages": 155,
   "all_pages_reviewed": false,
   "standards_compliance_accepted": false,
@@ -184,6 +198,21 @@
         "bytes": 250709,
         "sha256": "394d21dcb212981d5c2c20446ccb1334ec94b69a139d3e3b4997ced8578177f4",
         "accepted": true
+      },
+      "10": {
+        "bytes": 309424,
+        "sha256": "34720255640044f8c92482ec00c6537061d45603872d0578c62e1b07788de84b",
+        "accepted": true
+      },
+      "11": {
+        "bytes": 163679,
+        "sha256": "bb5126eb88791ac44dc9b388ff668dec937d9ef75b8bfba20f940ea2d271d2c9",
+        "accepted": false
+      },
+      "12": {
+        "bytes": 225746,
+        "sha256": "f5a8f1fbe6f253d78d98b12f991856aacdb9f0da28b400e0810aff2bf9e4e881",
+        "accepted": false
       },
       "68": {
         "bytes": 382983,
@@ -252,6 +281,21 @@
         "sha256": "00375986adb04dc21d1858910cf671590c0790378c2d6c4a503b720a8b1a3186",
         "accepted": true
       },
+      "10": {
+        "bytes": 309424,
+        "sha256": "34720255640044f8c92482ec00c6537061d45603872d0578c62e1b07788de84b",
+        "accepted": true
+      },
+      "11": {
+        "bytes": 163679,
+        "sha256": "bb5126eb88791ac44dc9b388ff668dec937d9ef75b8bfba20f940ea2d271d2c9",
+        "accepted": false
+      },
+      "12": {
+        "bytes": 225746,
+        "sha256": "f5a8f1fbe6f253d78d98b12f991856aacdb9f0da28b400e0810aff2bf9e4e881",
+        "accepted": false
+      },
       "64": {
         "bytes": 171915,
         "sha256": "202cd998a657ee9feed815dc0d688a9f7ace0fb189e4f2b95db6a00ae5d0a7ba",
@@ -288,8 +332,14 @@
     "file": "individual-page-review.json",
     "sha256": "47fbe0f44710422cd1146f3df4c1d4db81e31ee1cada58640a62884787a80541"
   },
-  "review_update_utc": "2026-11-25T07:55:07.965Z",
-  "review_scope": "Individual current rendered pages; remaining pages and standards gate still pending",
+  "review_update_utc": "2026-11-25T09:13:43.080Z",
+  "review_scope": "Six additional exact current rendered pages individually viewed, source PNGs and OOXML inspected for four observed layout defects; release remains blocked by actual layout and remaining pages.",
+  "accepted_pages": 30,
+  "rejected_pages": 4,
+  "previous_review28": {
+    "file": "individual-page-review-dz16.json",
+    "sha256": "b796c0f70e96f8986c8002ace160d439168ad05e7fee4d494824c236d052fe75"
+  },
   "previous_candidate_review": {
     "root_commit": "4cacc9580ca01a4d9f8f5def84f2d3391dbcfbb6",
     "path": "Docs/StructTrain/TimeLearner/AlgorithmDescriptions/CurrentScienceCandidateReview-20261125.json",
@@ -467,5 +517,87 @@
     "all155_pages_reviewed": false,
     "standards_compliance_accepted": false,
     "released": false
+  },
+  "external_six_page_review": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/documents/TimeLearner/2026-11-25-current-DOCX-six-page-review-ea27.json",
+      "sha256": "8a576fc069cea9f72f42298dc0e40bd70f73a049f920b897e2b1828dcf3eb2da",
+      "size": 3629
+    },
+    "kind": "timelearner_current_DOCX_six_additional_pages_actual_visual_review",
+    "schema_version": 1,
+    "candidate": "dy12",
+    "documents": {
+      "classic": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-25-revision5-Branch-third-moment-dy12\\docx\\TimeLearnerClassicAlgorithms.ru.docx",
+        "bytes": 9538837,
+        "sha256": "c9827c7ed93638d6d9172719cb45932783f92d3e37d0a8cbff2b6263a9c4960a"
+      },
+      "branch": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-25-revision5-Branch-third-moment-dy12\\docx\\TimeLearnerBranchAlgorithms.ru.docx",
+        "bytes": 7570301,
+        "sha256": "807f8e6350acfc175377df0c60c8a9336e9f5195879280563c586bb1c9c6c4e4"
+      }
+    },
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/eb/eb3bece6ffef3a9100ffd231e9ac6e4a927bd64398b9fcab46046e155459a387",
+        "sha256": "eb3bece6ffef3a9100ffd231e9ac6e4a927bd64398b9fcab46046e155459a387",
+        "bytes": 1818
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/be/be2199c5d794ea7407b375f631115130794e4533135eb8336834b21eca4d6cbc",
+        "sha256": "be2199c5d794ea7407b375f631115130794e4533135eb8336834b21eca4d6cbc",
+        "bytes": 723244
+      }
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "be2199c5d794ea7407b375f631115130794e4533135eb8336834b21eca4d6cbc",
+      "archive_members_verified": 9,
+      "retained_regular_files": 9,
+      "compatibility": null,
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "new_individually_viewed_pages": {
+      "classic": [
+        10,
+        11,
+        12
+      ],
+      "branch": [
+        10,
+        11,
+        12
+      ]
+    },
+    "reviewed_pages": 34,
+    "accepted_pages": 30,
+    "rejected_pages": 4,
+    "rejection": {
+      "classic": {
+        "11": "In the exact rendered page the introductory reference to figure 4 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable.",
+        "12": "In the exact rendered page the introductory reference to figure 5 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable."
+      },
+      "branch": {
+        "11": "In the exact rendered page the introductory reference to figure 4 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable.",
+        "12": "In the exact rendered page the introductory reference to figure 5 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable."
+      }
+    },
+    "new_render_required": true,
+    "all_pages_reviewed": false,
+    "standards_compliance_accepted": false,
+    "released": false,
+    "scientific_verdict": null
   }
 }
