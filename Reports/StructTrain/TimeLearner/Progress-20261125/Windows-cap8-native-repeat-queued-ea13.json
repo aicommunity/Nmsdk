@@ -1,0 +1,55 @@
+{
+  "kind": "timelearner_cap8_full_native_repeat_queue_status",
+  "schema_version": 1,
+  "dispatch": {
+    "dispatched": true,
+    "job": "Classic-cap8-native-repeat-after-confirmation-ea13",
+    "controls_commit": "daa9bee6cb4952552d0887144fab5a3d9c0cecb5",
+    "controls_bundle": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\controls\\Classic-cap8-native-repeat-after-confirmation-ea13\\controls.bundle",
+      "sha256": "a835e15354f07feefc6cf20f436bda8cc085df7342167fc9a26c8f2067b0c9e8",
+      "size": 2839
+    },
+    "task": {
+      "instance": "{BE9019BE-15B6-4784-8F6D-E6FBF5DED200}",
+      "registered": true,
+      "task": "TimeLearner-Classic-cap8-native-repeat-ea13"
+    },
+    "actor_root": "75110fa16336416f15adf7f2ea2cd8b17051b521",
+    "accepted_metadata_tests": 6,
+    "exact_predecessor_owner": {
+      "pid": 17256,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134400683268625988"
+    },
+    "actual_native_repeat_not_yet_started": true,
+    "no_new_Train": true,
+    "no_new_threshold_selection": true,
+    "scientific_verdict": null
+  },
+  "last_observation": {
+    "files": {
+      "owner.json": {
+        "pid": 22564,
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134400702405844120"
+      },
+      "waiting.json": {
+        "utc": "2026-11-25T09:00:20.546014+00:00",
+        "source_owner_live": true,
+        "exact_predecessor": {
+          "pid": 17256,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400683268625988"
+        },
+        "native_repeat_started": false
+      }
+    },
+    "owners": [],
+    "owner_live": true
+  },
+  "observation_utc": "2026-11-25T09:00:44.697101+00:00",
+  "metadata_tests_passed": 6,
+  "native_repeat_completed": false,
+  "scientific_verdict": null
+}
