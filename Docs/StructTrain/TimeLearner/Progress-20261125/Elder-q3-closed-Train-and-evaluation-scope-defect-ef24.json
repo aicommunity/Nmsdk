@@ -1,0 +1,192 @@
+{
+  "kind": "timelearner_Linux_recognition_trial_scope_defect",
+  "schema_version": 1,
+  "observation_utc": "2026-11-25T12:34:18.631334+00:00",
+  "Train_not_restarted": true,
+  "source_binding": {
+    "kind": "timelearner_actual_audited_Train_to_DATA_source_binding",
+    "schema_version": 1,
+    "job_sha256": "c990d360d49d8d73fc5fb2f620f750d671d3c305796bc94e4921aae238a56b5c",
+    "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+    "source_training_outcome": "budget_exhausted",
+    "completed_boundary": false,
+    "full_primary_audit": {
+      "path": "/home/user/timelearner-refactor/readbacks/classic-q3-full-primary-audit-and-DATA-elder-dy4/full-primary-audit.json",
+      "sha256": "acd6940f6ffd3a3aa442b1553e5074c32d433c722635b8349d29c69a830d6f3b",
+      "size": 53246
+    },
+    "source_DATA": {
+      "path": "/home/user/timelearner-refactor/readbacks/classic-q3-full-primary-audit-and-DATA-elder-dy4/physical-model-DATA.json",
+      "sha256": "98843604f5fff95ec8df31e50eabb06ac8c73162fa81ca30c3dc1e0582694eb1",
+      "size": 19766451
+    },
+    "source_package": {
+      "path": "/home/user/timelearner-refactor/readbacks/classic-candidate-round-robin-q3-cold-elder-dv31/train/native/train_stopped_state.json",
+      "sha256": "9102eded37a51f981107c466fe9a831755c2086603b3506bd012d49f0bda0dd2",
+      "size": 789868017
+    },
+    "original_training_unchanged": true,
+    "scientific_verdict": null
+  },
+  "training_terminal": {
+    "execution": "completed",
+    "validity": "pending_full_primary_audit",
+    "job_sha256": "c990d360d49d8d73fc5fb2f620f750d671d3c305796bc94e4921aae238a56b5c",
+    "native_execution_sha256": "bb5e305a9848511d1bb8e0f7521d7d7cb56ebd9dffa68a44618e4d82086335ff",
+    "training_outcome": "budget_exhausted",
+    "completed_boundary": false,
+    "package_path": "train_stopped_state.json",
+    "full_primary_audit_complete": false,
+    "training_certificate_verified": false,
+    "evaluation_verdict": null,
+    "scientific_verdict": null
+  },
+  "full_audit_terminal": {
+    "returncode": 0,
+    "analysis": {
+      "execution": "completed",
+      "validity": "valid",
+      "full_primary_audit": {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-q3-full-primary-audit-and-DATA-elder-dy4/full-primary-audit.json",
+        "sha256": "acd6940f6ffd3a3aa442b1553e5074c32d433c722635b8349d29c69a830d6f3b",
+        "size": 53246
+      },
+      "compact": {
+        "path": "/home/user/timelearner-refactor/readbacks/classic-q3-full-primary-audit-and-DATA-elder-dy4/compact-training-readback.json",
+        "sha256": "dca809e31db790a7a5b2d6f6c05b6eda1ed1b44a89f40ab3a393b9ea107ac9eb",
+        "size": 38148
+      },
+      "physical_projection": {
+        "kind": "timelearner_physical_DATA_projection",
+        "schema_version": 1,
+        "source": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-candidate-round-robin-q3-cold-elder-dv31/train/native/train_stopped_state.json",
+          "sha256": "9102eded37a51f981107c466fe9a831755c2086603b3506bd012d49f0bda0dd2",
+          "size": 789868017
+        },
+        "output": {
+          "path": "/home/user/timelearner-refactor/readbacks/classic-q3-full-primary-audit-and-DATA-elder-dy4/physical-model-DATA.json",
+          "sha256": "98843604f5fff95ec8df31e50eabb06ac8c73162fa81ca30c3dc1e0582694eb1",
+          "size": 19766451
+        },
+        "source_boundary": {
+          "kind": "timelearner_stopped_state",
+          "schema_version": 8,
+          "state_kind": "diagnostic",
+          "sha256": "11c280aff0fb6acc6fb246db636c1f95e700aa978eb349188fbfbc6f05380ab7",
+          "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc"
+        },
+        "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+        "physical_model_data_sha256": "4941b2caf75e6e8b5653b72eafc6395cf68c901e2d85d1a9b26ccbe0e0b4686f",
+        "source_unchanged": true,
+        "source_history_retained_separately": true,
+        "source_training_evidence_checked": false,
+        "native_import_verified": false,
+        "training_certificate_transferred": false,
+        "calibration_confirmed": false,
+        "scientific_verdict": null
+      },
+      "original_training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "native_import_verified": false,
+      "calibration_performed": false,
+      "classification_performed": false,
+      "source_original_unchanged": true,
+      "scientific_verdict": null
+    },
+    "no_native_Train_started_or_restarted": true,
+    "classification_performed": false,
+    "scientific_verdict": null
+  },
+  "conversion_terminal": {
+    "phase": "conversion",
+    "execution": "completed",
+    "validity": "valid",
+    "result": {
+      "native_process_completed": true,
+      "physical_roundtrip_verified": true,
+      "portable_model_audit": {
+        "kind": "physical_model_data_audit",
+        "schema_version": 1,
+        "data_only": true,
+        "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+        "pattern_size": 4,
+        "branch": false,
+        "frequency_hz": 2000,
+        "threshold_path": "$.LTZone",
+        "threshold_classes": [
+          "TLNativeFast3F2000_LTZone"
+        ],
+        "effective_threshold": 100,
+        "source_training_evidence_checked": false,
+        "native_import_verified": false,
+        "training_certificate_transferred": false,
+        "calibration_confirmed": false,
+        "evaluation_verdict": null,
+        "explicit_conversion_data": true,
+        "native_conversion_verified": false
+      },
+      "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+      "model_sha256": "ca60599ec14e639a65b449a96038073407cc614d73d6e94802b7acdcda043ea1",
+      "source_package_sha256": "11c280aff0fb6acc6fb246db636c1f95e700aa978eb349188fbfbc6f05380ab7",
+      "source_evidence_included": false,
+      "explicit_conversion": true,
+      "explicit_threshold_candidate": false,
+      "training_certificate_transferred": false,
+      "calibration_confirmed": false,
+      "original_execution_reclassified": false,
+      "scientific_verdict": null
+    },
+    "actual_source_training_outcome": "budget_exhausted",
+    "completed_boundary": false,
+    "training_certificate_transferred": false,
+    "calibration_certificate_transferred": false,
+    "new_Train": false,
+    "scientific_verdict": null
+  },
+  "baseline_failure": {
+    "reason": "invalid_evaluation_trial_scope",
+    "stderr": "warning: lazy fetching disabled; some objects may not be available\nTraceback (most recent call last):\n  File \"/usr/lib/python3.10/runpy.py\", line 196, in _run_module_as_main\n    return _run_code(code, main_globals, None,\n  File \"/usr/lib/python3.10/runpy.py\", line 86, in _run_code\n    exec(code, run_globals)\n  File \"/home/user/timelearner-refactor/source-Linux-DATA-recognition-elder-ee16/Scripts/StructTrain/TimeLearner/linux_physical_recognition_sequence.py\", line 350, in <module>\n    main()\n  File \"/home/user/timelearner-refactor/source-Linux-DATA-recognition-elder-ee16/Scripts/StructTrain/TimeLearner/linux_physical_recognition_sequence.py\", line 344, in main\n    phase_worker(Path(args.worker[0]), args.worker[1])\n  File \"/home/user/timelearner-refactor/source-Linux-DATA-recognition-elder-ee16/Scripts/StructTrain/TimeLearner/linux_physical_recognition_sequence.py\", line 241, in phase_worker\n    result = run_job('physical-model-evaluate', directory/'job.json', data, p['runtime'],\n  File \"/home/user/timelearner-refactor/source-Linux-DATA-recognition-elder-ee16/Scripts/StructTrain/TimeLearner/native_calibration_worker.py\", line 39, in checked\n    return function(*args, **kwargs)\n  File \"/home/user/timelearner-refactor/source-Linux-DATA-recognition-elder-ee16/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py\", line 534, in run_job\n    preflight = validate_job(mode, job, source_case)\n  File \"/home/user/timelearner-refactor/source-Linux-DATA-recognition-elder-ee16/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py\", line 206, in validate_job\n    return _validate_job(mode,job,source_case)\n  File \"/home/user/timelearner-refactor/source-Linux-DATA-recognition-elder-ee16/Scripts/StructTrain/TimeLearner/native_calibration_worker.py\", line 39, in checked\n    return function(*args, **kwargs)\n  File \"/home/user/timelearner-refactor/source-Linux-DATA-recognition-elder-ee16/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py\", line 155, in _validate_job\n    require(all(type(t) is dict and set(t) == REQUEST_FIELDS and t[\"run_id\"] == job[\"run_id\"] for t in trials),\n  File \"/home/user/timelearner-refactor/source-Linux-DATA-recognition-elder-ee16/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: invalid_evaluation_trial_scope\n",
+    "outer_closed": true,
+    "unit_state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "4294967296",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt f38708d1-f490-4959-9b89-c4f7a2f1aed5",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "faf443aa31b44782bc9dfe09339c5d3f"
+    },
+    "registered_native_children": [],
+    "baseline_native_output_exists": false,
+    "failure_before_native_worker": true
+  },
+  "pool_at_observation": {
+    "capacity": {
+      "disk_bytes": 15032385536,
+      "memory_bytes": 25769803776,
+      "slots": 1
+    },
+    "reserved": {
+      "disk_bytes": 0,
+      "memory_bytes": 0,
+      "slots": 0
+    },
+    "available": {
+      "disk_bytes": 15032385536,
+      "memory_bytes": 25769803776,
+      "slots": 1
+    }
+  },
+  "classification_performed": false,
+  "scientific_verdict": null
+}

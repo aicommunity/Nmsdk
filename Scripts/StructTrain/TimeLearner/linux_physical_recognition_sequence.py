@@ -106,7 +106,7 @@ def job_for(p, phase, model):
     from .model_identity import canonical_model_sha256 as sha
     from .physical_threshold_proposal import CRITERION
     name = p['q']['job_id']+'-'+phase
-    rows = [dict(row, trial_id=name+'-'+str(i), duration=2., maximum_samples=4005,
+    rows = [dict(row, run_id=name, trial_id=name+'-'+str(i), duration=2., maximum_samples=4005,
                  reset_policy='reset_per_trial', record_threshold_potential=True)
             for i, row in enumerate(p['q']['patterns'])]
     job = dict(kind='timelearner_native_physical_model_evaluation_job', schema_version=1,
