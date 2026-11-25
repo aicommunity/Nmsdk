@@ -10,7 +10,7 @@ import unittest
 
 from Scripts.StructTrain.TimeLearner.linux_physical_recognition_sequence import job_for
 from Scripts.StructTrain.TimeLearner.linux_frozen_physical_followups import (
-    PHASES, condition, declared_job, validate_request)
+    PHASES, condition, declared_job, physical_evaluation_timing, validate_request)
 from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256 as sha
 from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError, load
 from Scripts.StructTrain.TimeLearner.native_pipeline_worker import _load_source_case, validate_job
@@ -146,6 +146,36 @@ class ActualLinuxFrozenFollowupJobs(unittest.TestCase):
         for field, value in [('threshold',.01),('new_Train',True),('expected_counts',{'TP':1,'TN':7})]:
             q = self.request(); q[field] = value
             with self.subTest(field=field), self.assertRaisesRegex(EvidenceError,'request_schema'): validate_request(q)
+
+
+class ActualLinuxFrozenTiming(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        name = os.environ.get('TIMELEARNER_LINUX_FROZEN_TIMING_FIXTURE')
+        data = os.environ.get('TIMELEARNER_LINUX_DATA_SEQUENCE_FIXTURE')
+        if sys.platform != 'linux' or not name or not data:
+            raise unittest.SkipTest('requires the actual completed Linux recognition observations')
+        cls.fixture = Path(name).resolve(strict=True)
+        cls.execution_job = Path(data).resolve(strict=True)/'rejected-job.json'
+        cls.metrics = load(cls.fixture/'metrics.json')
+
+    def test_actual_confirmation_timing_keeps_all_eight_classifications_and_events(self):
+        timing = physical_evaluation_timing(self.fixture/'evaluation.json', self.metrics)
+        self.assertEqual(timing['declared_counts'], self.metrics['pooled_counts'])
+        self.assertEqual((timing['declared_counts']['TP'], timing['declared_counts']['FP'],
+                          timing['declared_counts']['TN']), (1, 2, 5))
+        self.assertEqual(len(timing['trials']), 8)
+        self.assertTrue(timing['full_declared_trial_set'])
+        self.assertTrue(timing['source_classifications_unchanged'])
+        self.assertFalse(timing['native_execution_attested'])
+        for index, row in enumerate(timing['trials']):
+            observation = load(self.fixture/f'trial-{index}.json')
+            self.assertEqual(row['trial_id'], observation['trial_id'])
+            self.assertEqual(row['native_spike_times'], observation['spike_times'])
+
+    def test_actual_execution_job_cannot_substitute_for_the_evaluation_specification(self):
+        with self.assertRaisesRegex(EvidenceError, 'unknown_evaluation_spec'):
+            physical_evaluation_timing(self.execution_job, self.metrics)
 
 
 if __name__ == '__main__':

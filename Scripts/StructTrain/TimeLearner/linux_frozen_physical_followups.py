@@ -76,7 +76,8 @@ def context(request):
             gate['worker_host'] == q['worker_host'] and gate['job_id'] == q['job_id']+'-scope-gate' and
             operation['kind'] == 'python-validation' and operation['source'] ==
             dict(path=str(SOURCE), commit=q['tool_commit']) and
-            set(operation['fixtures']) == {'TIMELEARNER_LINUX_DATA_SEQUENCE_FIXTURE'},
+            set(operation['fixtures']) == {'TIMELEARNER_LINUX_DATA_SEQUENCE_FIXTURE',
+                                          'TIMELEARNER_LINUX_FROZEN_TIMING_FIXTURE'},
             'linux_frozen_followups_validation_scope')
     suite_path = Path(operation['suite']['path'])
     require(suite_path == controls/'scope-gate/suite.json' and
@@ -201,6 +202,14 @@ def condition(job, design, runtime, wall_seconds, *, index=None):
     return result
 
 
+def physical_evaluation_timing(path, metrics):
+    """Use the produced observation specification, not the execution job."""
+    from .recognition_metrics import load_physical_model_data_evaluation
+    from .trial_response_timing import summarize_trial_timing
+    spec, observations = load_physical_model_data_evaluation(Path(path))
+    return summarize_trial_timing(spec, observations, metrics)
+
+
 def phase_worker(request, phase):
     from .contained_process import inspect
     from .owned_python_job import _source_snapshot
@@ -209,7 +218,6 @@ def phase_worker(request, phase):
     from .native_pipeline_worker import run_job, audit_run_manifest
     from .job_source_transport import TRANSPORT
     from .trial_response_comparison import trial_response_comparison
-    from .trial_response_timing import summarize_trial_timing
     p = context(request); q = p['q']; guard(p); _source_snapshot(SOURCE, q['tool_commit'])
     directory = p['output']/phase; output = p['base']/'readbacks'/(q['job_id']+'-'+phase)
     state = inspect(directory/'process/contained')
@@ -257,7 +265,7 @@ def phase_worker(request, phase):
     require(len(comparisons) == (8 if phase == 'repeat' else 1) and
             all(r['response_preserved'] for r in comparisons), 'linux_frozen_followups_actual_control_changed')
     write(directory/'response-comparisons.json', comparisons)
-    write(directory/'timing.json', summarize_trial_timing(job, observations, metrics))
+    write(directory/'timing.json', physical_evaluation_timing(output/'native/evaluation.json', metrics))
     require(all(file_record(Path(f)) == r for f,r in source['records'].items()),
             'linux_frozen_followups_original_source_bytes_changed')
     guard(p); _source_snapshot(SOURCE, q['tool_commit'])
