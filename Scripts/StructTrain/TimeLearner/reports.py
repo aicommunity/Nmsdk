@@ -221,9 +221,9 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         path='timing-summary.json' if timing is not None else None,
         source_classifications_unchanged=True, new_response_criterion=False,
         reason=None if timing is not None else 'incomplete_or_invalid_declared_trials')
-    if physical_data:
-        manifest['time_view_policy'] = ('all-native-tiles' if include_native_tiles else
-                                        'full-window-and-measured-peak-details')
+    if physical_data and not include_native_tiles:
+        manifest['schema_version'] = 2
+        manifest['time_view_policy'] = 'full-window-and-measured-peak-details'
     if diagnostic:
         manifest.update(purpose="stopped_training_recognition_diagnostic", diagnostic_only=True,
                         training_completed=False, source_training_outcome=source_case[0]["training_outcome"],
