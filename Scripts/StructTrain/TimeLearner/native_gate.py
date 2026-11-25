@@ -12,12 +12,11 @@ from .process_runner import execute, verify_runtime
 from .runtime import source_closure
 from . import native_gate_inputs
 from . import gtest_full_names
+from .native_test_environment import ARTIFACT_ENVIRONMENT
 
 
 FIELDS = {"kind", "schema_version", "runtime_manifest", "source_root", "expected_test_ids",
           "maximum_wall_seconds", "asan_options"}
-ARTIFACT_ENVIRONMENT = frozenset(('TIMELEARNER_ARCHIVE_TEST_DIR', 'TIMELEARNER_COMPAT_OUTPUT',
-    'TIMELEARNER_PROFILE_TEST_DIR', 'TIMELEARNER_PROBE_OUTPUT', 'TL_HOT_READOUT_DIR', 'TL_LOADED_READOUT_DIR'))
 
 
 def artifact_directories_valid(values):

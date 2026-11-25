@@ -14,7 +14,8 @@ from . import test_process_runner as process_fixture
 from .. import contained_process
 from ..contained_runner import execute, inspect_attempt
 from ..native_evidence import EvidenceError
-from ..native_gate import FIELDS, supported_specification
+from ..native_gate import FIELDS, supported_specification, _environment
+from ..native_test_environment import ARTIFACT_ENVIRONMENT
 
 
 @unittest.skipUnless(sys.platform == 'linux', 'actual Linux cgroup worker required')
@@ -55,6 +56,27 @@ class ContainedRunnerTest(unittest.TestCase):
         self.assertEqual(result['execution'],'completed')
         self.assertEqual(result['returncode'],0)
         self.assertEqual(result['operational_diagnostics']['status'],'error')
+
+    def test_declared_native_artifact_variables_reach_actual_contained_process(self):
+        names = sorted(ARTIFACT_ENVIRONMENT)
+        values = {name: str(self.root/('artifact directory '+str(i))) for i,name in enumerate(names)}
+        script = 'printf \'%s\\n\' '+' '.join('"$'+name+'"' for name in names)+'; sleep .3'
+        with _environment(values):
+            result = self.run_process(self.manifest(name='artifact-env.rs2', binary='/bin/sh'), ['-c',script])
+        self.assertEqual(result['execution'], 'completed', result)
+        self.assertEqual(result['runtime_provenance'], 'loaded_files_captured', result)
+        self.assertTrue(result['all_processes_closed'])
+        self.assertEqual((self.root/'attempt/stdout.log').read_text().splitlines(), list(values.values()))
+        request = json.loads((self.root/'attempt/contained/request.json').read_text())
+        self.assertEqual({name:request['environment'][name] for name in names}, values)
+
+    def test_unrecognized_TL_variable_is_still_rejected_before_launch(self):
+        output = self.root/'unrecognized-env'
+        with self.assertRaisesRegex(EvidenceError, 'contained_environment_invalid'):
+            contained_process.start(self.manifest(), ['.3'], self.root, output,
+                memory_bytes=128*1024**2, tasks=32, maximum_wall_seconds=4,
+                environment={'TL_ARBITRARY_OVERRIDE':'not an artifact output'})
+        self.assertFalse(output.exists())
 
     def wait(self, callback, timeout=8):
         deadline = time.monotonic()+timeout

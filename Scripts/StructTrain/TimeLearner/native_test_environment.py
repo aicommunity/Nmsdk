@@ -1,0 +1,4 @@
+"""Known output variables of real PulseLib fixtures, shared by gate/backends."""
+
+ARTIFACT_ENVIRONMENT = frozenset(('TIMELEARNER_ARCHIVE_TEST_DIR', 'TIMELEARNER_COMPAT_OUTPUT',
+    'TIMELEARNER_PROFILE_TEST_DIR', 'TIMELEARNER_PROBE_OUTPUT', 'TL_HOT_READOUT_DIR', 'TL_LOADED_READOUT_DIR'))
