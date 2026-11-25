@@ -115,7 +115,7 @@ def prepare(plan_path):
     return controls
 
 
-def run(controls):
+def run(controls, *, cancel_file=None):
     from .job_source_transport import verify_envelope
     from .model_identity import canonical_model_sha256 as sha
     from .native_cli import inspect_native_cli
@@ -177,7 +177,7 @@ def run(controls):
             process = execute(runtime, args, Path(runtime['executable']['path']).parent, output/'process',
                 memory_bytes=spec['memory_bytes'], maximum_processes=64,
                 maximum_wall_seconds=spec['maximum_wall_seconds'], lock_file=BASE/'locks/worker.lock',
-                cooperative_capture=True, monitor=monitor)
+                cancel_file=cancel_file, cooperative_capture=True, monitor=monitor)
         _write(output/'process-result.json', process)
         require(process['execution'] == 'completed' and process['returncode'] == 0 and
                 process['all_processes_closed'] and process['runtime_provenance'] == 'loaded_files_captured',

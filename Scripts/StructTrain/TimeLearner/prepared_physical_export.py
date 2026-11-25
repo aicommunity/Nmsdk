@@ -196,7 +196,7 @@ def prepare(controls, destination, inputs, output, run_id, python_source=None):
     require(file_record(source_path) == before, 'physical_export_source_changed_during_preparation')
 
 
-def run(controls):
+def run(controls, *, cancel_file=None):
     controls = Path(controls).resolve(strict=True)
     spec = json.loads((controls/'specification.json').read_bytes())
     sys.path.insert(0, spec['python_source'])
@@ -209,6 +209,7 @@ def run(controls):
     from Scripts.StructTrain.TimeLearner.native_pipeline_worker import _artifact_records
     conversion=spec['kind']=='timelearner_prepared_physical_conversion'
     threshold_candidate=spec['kind']=='timelearner_prepared_physical_threshold'
+    require(cancel_file is None or os.name=='nt','physical_export_cancel_requires_windows_backend')
     require(os.name in ('posix','nt') and spec['kind'] in ('timelearner_prepared_physical_export',
             'timelearner_prepared_physical_conversion','timelearner_prepared_physical_threshold') and
             spec['schema_version'] == 1, 'physical_export_worker_scope')
@@ -280,7 +281,7 @@ def run(controls):
                 result=execute(runtime,arguments,Path(runtime['executable']['path']).parent,output/'process',
                     memory_bytes=spec['memory_bytes'],maximum_processes=64,
                     maximum_wall_seconds=spec['maximum_wall_seconds'],lock_file=shared_lock,
-                    cooperative_capture=True,monitor=monitor)
+                    cancel_file=cancel_file,cooperative_capture=True,monitor=monitor)
         else:
             with applied_loader_environment(runtime):
                 result=execute(runtime,arguments,Path(runtime['executable']['path']).parent,output/'process',

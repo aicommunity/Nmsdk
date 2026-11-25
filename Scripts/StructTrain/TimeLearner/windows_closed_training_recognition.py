@@ -305,7 +305,7 @@ def supervise(request):
         with _environment({n:helper['loader_environment'].get(n)for n in ('PATH','QT_PLUGIN_PATH','QT_QPA_PLATFORM')}):
             process=execute(helper,['-B','-m',MODULE,'--primary-worker',str(request)],SOURCE,c/'preparation-process',
                 memory_bytes=16*GIB,maximum_processes=16,maximum_wall_seconds=q['preparation_wall_seconds'],
-                lock_file=BASE/'locks/worker.lock',cooperative_capture=False)
+                lock_file=BASE/'locks/worker.lock',cancel_file=c/'cancel.request',cooperative_capture=False)
         write(c/'preparation-process-result.json',process)
         require(process['execution']=='completed' and process['all_processes_closed'] and
                 process['runtime_provenance']=='loaded_files_captured' and
@@ -320,7 +320,8 @@ def supervise(request):
             if threshold is None:plan.update(conversion_spec=dict(schema_version=1,mode='identity',resistance_bounds=[]),reference_amplitudes=[])
             else:plan['threshold']=threshold
             path=c/(phase+'-plan.json');write(path,plan)
-            (prepare_conversion if threshold is None else prepare_threshold)(path);physical_edit(Path(plan['controls']))
+            (prepare_conversion if threshold is None else prepare_threshold)(path)
+            physical_edit(Path(plan['controls']),cancel_file=c/'cancel.request')
             output=Path(plan['output']);terminal=load(output/'terminal.json')
             require(terminal['native_process_completed'] and terminal['physical_roundtrip_verified'] and
                     _all_owned_closed(output,api,kernel),'closed_training_native_edit_failed')
@@ -335,7 +336,8 @@ def supervise(request):
                     path='Scripts/StructTrain/TimeLearner/prepared_physical_evaluation.py',
                     sha256=file_record(Path(evaluation.__file__))['sha256']),job=wire,
                 execution_limits=dict(memory_bytes=8*GIB,maximum_wall_seconds=q['native_evaluation_wall_seconds']))
-            path=c/(phase+'-plan.json');write(path,plan);controls=evaluation.prepare(path);evaluation.run(controls)
+            path=c/(phase+'-plan.json');write(path,plan);controls=evaluation.prepare(path)
+            evaluation.run(controls,cancel_file=c/'cancel.request')
             verified=_closed_evaluation(controls);spec,obs=load_physical_model_data_evaluation(verified['output']/'native/evaluation.json')
             write(c/(phase+'-timing.json'),summarize_trial_timing(spec,obs,verified['metrics']))
             return verified
