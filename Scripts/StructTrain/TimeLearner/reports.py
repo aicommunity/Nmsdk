@@ -24,9 +24,9 @@ def render_evaluation(source: Path, model: Path, output: Path, *, calibration_pr
     return _render_evaluation(source, model, output, calibration_probe=calibration_probe)
 
 
-def render_physical_data_evaluation(source: Path, model: Path, output: Path):
+def render_physical_data_evaluation(source: Path, model: Path, output: Path, *, include_native_tiles=True):
     """Frozen physical DATA responses, without transferring source authority."""
-    return _render_evaluation(source, model, output, physical_data=True)
+    return _render_evaluation(source, model, output, physical_data=True, include_native_tiles=include_native_tiles)
 
 
 def render_diagnostic_evaluation(source: Path, model: Path, stopped: Path, output: Path):
@@ -45,7 +45,10 @@ def render_diagnostic_evaluation_case(source: Path, model: Path, source_case, ou
     return _render_evaluation(source, model, output, source_case=source_case)
 
 
-def _render_evaluation(source, model, output, *, calibration_probe=False, source_case=None, physical_data=False):
+def _render_evaluation(source, model, output, *, calibration_probe=False, source_case=None, physical_data=False,
+                       include_native_tiles=True):
+    require(type(include_native_tiles) is bool and (include_native_tiles or physical_data),
+            'compact_views_require_physical_DATA_report')
     runtime = plotting_runtime()
     diagnostic = source_case is not None
     require(not physical_data or not (diagnostic or calibration_probe), 'physical_report_scope_conflict')
@@ -145,11 +148,16 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         for descriptor in descriptors:
             folder = output/f'trial-{index:04d}-soma-{descriptor["index"]+1:03d}'
             folder.mkdir()
-            views = render_soma(o, descriptor["index"], descriptor["path"], limits[descriptor["index"]], folder,
-                                context_label=context_label)
-            views.extend(render_positive_lobe_views(o, descriptor["index"], descriptor["path"], folder,
+            display = o
+            if not include_native_tiles:
+                maximum = max(range(len(o['samples'])), key=lambda i:o['samples'][i]['soma'][descriptor['index']])
+                display = {**o, 'diagnostic_peak_indices':
+                           [maximum] if 0 < maximum < len(o['samples'])-1 else []}
+            views = render_soma(display, descriptor["index"], descriptor["path"], limits[descriptor["index"]], folder,
+                                context_label=context_label, include_native_tiles=include_native_tiles)
+            views.extend(render_positive_lobe_views(display, descriptor["index"], descriptor["path"], folder,
                 context_label=context_label, shared_minimum=shared_minima[descriptor["index"]],
-                shared_maximum=shared_maxima[descriptor["index"]]))
+                shared_maximum=shared_maxima[descriptor["index"]], include_native_tiles=include_native_tiles))
             for view in views:
                 view["files"] = [f"{folder.name}/{p}" for p in view["files"]]
             figures.append({"trial_id": o["trial_id"], "sample_id": o["sample_id"], "label": o["label"],
@@ -178,7 +186,7 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         series.append({"descriptor": descriptor, **rendered})
     _write(output/"series.json", series)
     decisions = render_lt_decisions(spec, observations, analysis.get('effective_threshold'), output,
-                                   context_label=context_label)
+                                   context_label=context_label, include_native_tiles=include_native_tiles)
     _write(output/'lt-decision-views.json', decisions)
     links.append('<h2>LT decision potential and actual spike events</h2>'
                  '<p>Threshold belongs to the LT decision channel. Local Y views explicitly mark an off-scale threshold. '
@@ -213,6 +221,9 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
         path='timing-summary.json' if timing is not None else None,
         source_classifications_unchanged=True, new_response_criterion=False,
         reason=None if timing is not None else 'incomplete_or_invalid_declared_trials')
+    if physical_data:
+        manifest['time_view_policy'] = ('all-native-tiles' if include_native_tiles else
+                                        'full-window-and-measured-peak-details')
     if diagnostic:
         manifest.update(purpose="stopped_training_recognition_diagnostic", diagnostic_only=True,
                         training_completed=False, source_training_outcome=source_case[0]["training_outcome"],
