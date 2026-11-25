@@ -1,0 +1,73 @@
+{
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/checks/2026-11-25/Classic-policy0-complete-metrics-comparison-dv21.json",
+    "sha256": "81c00c8b2bab901788d1bd2bd33e29f38e52777d817b5091962ef1f02bf9ce50",
+    "size": 1976
+  },
+  "object": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/81/81c00c8b2bab901788d1bd2bd33e29f38e52777d817b5091962ef1f02bf9ce50",
+    "sha256": "81c00c8b2bab901788d1bd2bd33e29f38e52777d817b5091962ef1f02bf9ce50",
+    "bytes": 1976
+  },
+  "result": {
+    "kind": "timelearner_policy0_full_independent_metrics_comparison",
+    "schema_version": 1,
+    "recomputed_metrics": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/Classic-policy0-independent-reanalysis-and-Russian-figures-m40-dv14/recomputed-metrics.json",
+      "sha256": "4aa456efeac9efa2f53055c229fdc924ba9935bbcfd555706a9c67a29c8107c1",
+      "size": 12432
+    },
+    "comparisons": {
+      "baseline": {
+        "original_manifest": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/Classic-policy0-independent-reanalysis-and-Russian-figures-m40-dv14/independent-primary/baseline/run-manifest.json",
+          "sha256": "a61949069ccd92c451c39c5f75389372a9cad0db2dc8acd51606128264c087ac",
+          "size": 53282
+        },
+        "all_metric_fields_equal": true,
+        "expected_trials": 8,
+        "observed_trials": 8,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0.0,
+          "foil_response_rate": 0.0
+        }
+      },
+      "actual": {
+        "original_manifest": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/Classic-policy0-independent-reanalysis-and-Russian-figures-m40-dv14/independent-primary/actual/run-manifest.json",
+          "sha256": "e1b66689a50508e976e538ad9bff163de277f73d7f139f9174caf09a39414c38",
+          "size": 53973
+        },
+        "all_metric_fields_equal": true,
+        "expected_trials": 8,
+        "observed_trials": 8,
+        "counts": {
+          "TP": 1,
+          "FP": 2,
+          "FN": 0,
+          "TN": 5,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.75,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.2857142857142857
+        }
+      }
+    },
+    "all_metric_fields_equal": true,
+    "no_scoring_or_model_execution_repeated": true,
+    "scientific_verdict": null
+  }
+}
