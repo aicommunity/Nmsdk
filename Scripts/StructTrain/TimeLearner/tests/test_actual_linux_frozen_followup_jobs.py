@@ -23,9 +23,9 @@ class ActualLinuxFrozenFollowupJobs(unittest.TestCase):
         if sys.platform != 'linux' or not fixture:
             raise unittest.SkipTest('requires the actual closed Linux Train/DATA fixture')
         cls.fixture = Path(fixture).resolve(strict=True)
-        cls.request = load(cls.fixture/'request.json')
+        cls.source_request = load(cls.fixture/'request.json')
         cls.model = _load_source_case('physical-model-evaluate', cls.fixture/'model.json')[0]
-        cls.original = job_for({'q':cls.request}, 'confirmation', cls.model)
+        cls.original = job_for({'q':cls.source_request}, 'confirmation', cls.model)
         cls.runtime = load(cls.fixture/'runtime.json')
 
     def declared(self, phase, run_id='frozen-preparation-fixture'):
