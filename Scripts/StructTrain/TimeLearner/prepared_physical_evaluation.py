@@ -18,6 +18,24 @@ from .runtime import file_record, source_closure
 BASE = Path('C:/Projects/TimeLearnerWorker')
 
 
+def evaluation_limits(plan):
+    """Keep legacy limits; version 2 must declare both execution budgets."""
+    fields = {'kind', 'schema_version', 'job_id', 'source_data',
+              'runtime_manifest', 'sdk_source', 'worker_origin', 'job'}
+    version = plan.get('schema_version') if type(plan) is dict else None
+    require(type(version) is int and version in (1, 2) and
+            set(plan) == fields | ({'execution_limits'} if version == 2 else set()) and
+            plan['kind'] == 'timelearner_prepared_physical_evaluation_plan',
+            'physical_evaluation_preparation_scope')
+    limits = plan['execution_limits'] if version == 2 else dict(
+        memory_bytes=8*1024**3, maximum_wall_seconds=3600)
+    require(type(limits) is dict and set(limits) == {'memory_bytes', 'maximum_wall_seconds'} and
+            type(limits['memory_bytes']) is int and 4*1024**3 <= limits['memory_bytes'] <= 16*1024**3 and
+            type(limits['maximum_wall_seconds']) is int and 0 < limits['maximum_wall_seconds'] <= 36000,
+            'physical_evaluation_explicit_execution_limits')
+    return dict(limits)
+
+
 def _write(path, value):
     with Path(path).open('x', encoding='utf-8', newline='\n') as stream:
         json.dump(value, stream, indent=2, allow_nan=False)
@@ -44,11 +62,8 @@ def prepare(plan_path):
     plan_path = Path(plan_path).resolve(strict=True)
     before = file_record(plan_path)
     plan = json.loads(plan_path.read_bytes())
-    require(os.name == 'nt' and set(plan) == {'kind', 'schema_version', 'job_id', 'source_data',
-            'runtime_manifest', 'sdk_source', 'worker_origin', 'job'} and
-            plan['kind'] == 'timelearner_prepared_physical_evaluation_plan' and
-            type(plan['schema_version']) is int and plan['schema_version'] == 1,
-            'physical_evaluation_preparation_scope')
+    limits = evaluation_limits(plan)
+    require(os.name == 'nt', 'physical_evaluation_preparation_platform')
     name = plan['job_id']
     require(type(name) is str and 1 <= len(name) <= 100 and
             all(c in 'abcdefghijklmnopqrstuvwxyz0123456789-_' for c in name), 'physical_evaluation_job_id')
@@ -89,8 +104,8 @@ def prepare(plan_path):
         source_runtime=plan['runtime_manifest'], preparation_plan=before, inputs=str(inputs), output=str(output),
         input_inventory=_inventory(inputs), resolved_job_sha256=job['sha256'],
         model_revision=model['model_revision'], document_sha256=model['sha256'],
-        effective_threshold=audited['effective_threshold'], memory_bytes=8*1024**3,
-        maximum_wall_seconds=3600, minimum_free_bytes=2*1024**3, maximum_output_bytes=512*1024**2))
+        effective_threshold=audited['effective_threshold'], **limits,
+        minimum_free_bytes=2*1024**3, maximum_output_bytes=512*1024**2))
     require(file_record(source_path) == plan['source_data'] and file_record(runtime_path) == plan['runtime_manifest']
             and file_record(plan_path) == before, 'physical_evaluation_preparation_inputs_changed')
     _write(controls/'proposal.json', dict(kind='initial_frozen_physical_evaluation_preparation',
