@@ -102,9 +102,9 @@ def guard(p):
             file_record(p['runtime']) == p['training']['runtime'], 'linux_DATA_sequence_bound_input_changed')
 
 
-def wait_capacity(p, registry, begun, phase):
+def wait_capacity(p, registry, begun, phase, *, check_guard=guard):
     while True:
-        guard(p)
+        check_guard(p)
         require(time.monotonic()-begun < 118000 and not (p['controls']/'cancel.request').exists(),
                 'linux_DATA_sequence_capacity_wait_budget_or_cancel')
         available = int(next(v.split()[1] for v in Path('/proc/meminfo').read_text().splitlines()
