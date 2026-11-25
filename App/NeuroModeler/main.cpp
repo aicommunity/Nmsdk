@@ -162,21 +162,9 @@ int main(int argc, char *argv[])
     // (QApplication наследуется от QCoreApplication, поэтому можем использовать его методы)
     diagnoseQtPlugins();
 
-    // Initialize style manager and apply global styles
     UStyleManager* styleManager = UStyleManager::instance();
-
-    // Get styles path (handles Bin/Platform/Linux/ case)
-    QString stylesDir = styleManager->getStylesPath();
-
-    if (!styleManager->loadTheme(stylesDir + "theme.json"))
-    {
-        qWarning() << "Failed to load theme from:" << (stylesDir + "theme.json");
-    }
-    if (!styleManager->loadStyleSheet(stylesDir + "default.qss"))
-    {
-        qWarning() << "Failed to load stylesheet from:" << (stylesDir + "default.qss");
-    }
-    styleManager->applyGlobalStyleSheet(&a);
+    if (!styleManager->switchTheme(QStringLiteral("Modern Light"), &a))
+        styleManager->applySystemUiFonts(&a);
 
     QCommandLineParser parser;
     parser.setApplicationDescription("NeuroModeler automation arguments");

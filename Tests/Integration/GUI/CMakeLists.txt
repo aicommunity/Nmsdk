@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
 
+add_executable(Test_WatchReliability Test_WatchReliability.cpp)
+target_include_directories(Test_WatchReliability PRIVATE "${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt")
+target_link_libraries(Test_WatchReliability PRIVATE GTest::gtest Qt${QT_VERSION_MAJOR}::Widgets)
+add_test(NAME WatchReliabilityTest COMMAND Test_WatchReliability)
+set_tests_properties(WatchReliabilityTest PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+
 option(NMSDK_ENABLE_INTERACTIVE_GUI_TESTS
     "Build and run interactive/flaky GUI integration tests"
     OFF)
