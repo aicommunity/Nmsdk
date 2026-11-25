@@ -60,10 +60,28 @@
       10,
       11,
       12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
       68,
       69,
       70,
-      71
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81
     ],
     "branch": [
       1,
@@ -78,12 +96,25 @@
       10,
       11,
       12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
       64,
       65,
       66,
       67,
       68,
-      69
+      69,
+      70,
+      71,
+      72,
+      73,
+      74
     ]
   },
   "accepted": {
@@ -98,10 +129,30 @@
       8,
       9,
       10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
       68,
       69,
       70,
-      71
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81
     ],
     "branch": [
       1,
@@ -114,23 +165,32 @@
       8,
       9,
       10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
       64,
       65,
       66,
       67,
       68,
-      69
+      69,
+      70,
+      71,
+      72,
+      73,
+      74
     ]
   },
   "rejected": {
-    "classic": {
-      "11": "In the exact rendered page the introductory reference to figure 4 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable.",
-      "12": "In the exact rendered page the introductory reference to figure 5 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable."
-    },
-    "branch": {
-      "11": "In the exact rendered page the introductory reference to figure 4 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable.",
-      "12": "In the exact rendered page the introductory reference to figure 5 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable."
-    }
+    "classic": {},
+    "branch": {}
   },
   "checks": [
     "Exact current page PNGs individually viewed at full page resolution.",
@@ -138,13 +198,15 @@
     "Text, numerical values, captions and source line stay within margins; plotted positive response and late lobes readable.",
     "Both topologies retain CapturedPerInput and assigned-impulse training goal; recognition and convergence remain separate.",
     "Both actual covers, formula definitions 1 through 8, measurement section and physical topology diagrams viewed.",
-    "Current Branch third-impulse section, all eight table rows and three selected waveform pages viewed with input impulses and readable shared scales."
+    "Current Branch third-impulse section, all eight table rows and three selected waveform pages viewed with input impulses and readable shared scales.",
+    "Additional actual flowcharts, synchronization and normalization prose, measured two-input search, four-soma Classic FP/TN examples, both UML sections, conclusion scope and bibliography individually viewed.",
+    "The alleged loss of introductory words was disproved on original PNG pixels and exact enlarged crops; neither document builder nor scientific data was changed."
   ],
   "editorial_followup": [
     "Replace generic illustration introduction text with specific references when revising the corresponding sections; no data or layout failure inferred.",
     "Clarify combined-potential block label of the high-level Classic diagram alongside the profile-specific arithmetic mean described in the text."
   ],
-  "reviewed_pages": 34,
+  "reviewed_pages": 65,
   "total_pages": 155,
   "all_pages_reviewed": false,
   "standards_compliance_accepted": false,
@@ -207,12 +269,52 @@
       "11": {
         "bytes": 163679,
         "sha256": "bb5126eb88791ac44dc9b388ff668dec937d9ef75b8bfba20f940ea2d271d2c9",
-        "accepted": false
+        "accepted": true
       },
       "12": {
         "bytes": 225746,
         "sha256": "f5a8f1fbe6f253d78d98b12f991856aacdb9f0da28b400e0810aff2bf9e4e881",
-        "accepted": false
+        "accepted": true
+      },
+      "13": {
+        "bytes": 175241,
+        "sha256": "62d78fdfc6bf6174088ae1d3e47022def69fbea2ebc7ad052cfcb06a3a4a6484",
+        "accepted": true
+      },
+      "14": {
+        "bytes": 277967,
+        "sha256": "1a48d217951775370d49001e5f34d093544ea4d691154b6478ae461353556ec9",
+        "accepted": true
+      },
+      "15": {
+        "bytes": 348073,
+        "sha256": "25f755b22b28422dab160a548ba2c6c954597af942910d16923a6a6aee9f838e",
+        "accepted": true
+      },
+      "16": {
+        "bytes": 123301,
+        "sha256": "76ade08dd736aedfdd97d092158ae4541b390f564871c8dbffebb99112bbca4d",
+        "accepted": true
+      },
+      "17": {
+        "bytes": 189680,
+        "sha256": "685dfa4f8ca9bf6559388b912c48a0c67e46f0cfeacff57ed2ce8d3aab73ffd6",
+        "accepted": true
+      },
+      "18": {
+        "bytes": 354415,
+        "sha256": "760b0b201481cdb2b5da5d609c393415fd36a79b9894375d63816258e00618ba",
+        "accepted": true
+      },
+      "19": {
+        "bytes": 344307,
+        "sha256": "2f80c9487b645d4d8d664eef101b31da0e6204fe68cdc63a39ab8ede9512d8df",
+        "accepted": true
+      },
+      "20": {
+        "bytes": 231993,
+        "sha256": "c510a6e5b18991125db7d611ab75579c5c1072d4e01b2541fae08c56dc097d80",
+        "accepted": true
       },
       "68": {
         "bytes": 382983,
@@ -232,6 +334,56 @@
       "71": {
         "bytes": 223416,
         "sha256": "3883823ed90b1d675fbbc4ce27a4db58c445411793164196003fc46710ad5a61",
+        "accepted": true
+      },
+      "72": {
+        "bytes": 227667,
+        "sha256": "4ff0202ae9590c8626b56b999243554ecb199c33687823a2a0343f546ec295f3",
+        "accepted": true
+      },
+      "73": {
+        "bytes": 222372,
+        "sha256": "7fb95b7b0f142c2bfbe4a4e8fae30681ae1286d28eeded3b25dcf5b49647bf04",
+        "accepted": true
+      },
+      "74": {
+        "bytes": 221814,
+        "sha256": "532aface39d103f38236ff4059fb4b2c0b9675f9fb0b1d955186a55806e744b0",
+        "accepted": true
+      },
+      "75": {
+        "bytes": 380116,
+        "sha256": "637b284b248bc631855daeeff32986356345ea2023f59d70f41f0f7d4a58870a",
+        "accepted": true
+      },
+      "76": {
+        "bytes": 234376,
+        "sha256": "06672cd9f592db3b7e3be24080c69c901e5179335af41a826bd1323e6553d1fe",
+        "accepted": true
+      },
+      "77": {
+        "bytes": 151070,
+        "sha256": "fc34d7230f73a3f8693aa02e52387ba9ef0aa9dfeffa4f79609903fc0eef66da",
+        "accepted": true
+      },
+      "78": {
+        "bytes": 396822,
+        "sha256": "9458a5ad5400f745650890d6bee696a5d70640e5956c6ffeb1c2283a082dcd98",
+        "accepted": true
+      },
+      "79": {
+        "bytes": 247530,
+        "sha256": "cb3f49395636cfe2d81b3822247ff88f726b20641f66d0e40367fa4e86512d89",
+        "accepted": true
+      },
+      "80": {
+        "bytes": 226225,
+        "sha256": "7c80cd3955d245a047304ea55e18e061be2f67a69d576da00cbd431c0b7dc9c9",
+        "accepted": true
+      },
+      "81": {
+        "bytes": 215434,
+        "sha256": "ebdb7de50df741fe3161916378c931bf341adf7172c11b9cb01c59d43a2b8f52",
         "accepted": true
       }
     },
@@ -289,12 +441,52 @@
       "11": {
         "bytes": 163679,
         "sha256": "bb5126eb88791ac44dc9b388ff668dec937d9ef75b8bfba20f940ea2d271d2c9",
-        "accepted": false
+        "accepted": true
       },
       "12": {
         "bytes": 225746,
         "sha256": "f5a8f1fbe6f253d78d98b12f991856aacdb9f0da28b400e0810aff2bf9e4e881",
-        "accepted": false
+        "accepted": true
+      },
+      "13": {
+        "bytes": 175241,
+        "sha256": "62d78fdfc6bf6174088ae1d3e47022def69fbea2ebc7ad052cfcb06a3a4a6484",
+        "accepted": true
+      },
+      "14": {
+        "bytes": 277967,
+        "sha256": "1a48d217951775370d49001e5f34d093544ea4d691154b6478ae461353556ec9",
+        "accepted": true
+      },
+      "15": {
+        "bytes": 368531,
+        "sha256": "b0d6340e46a16c7b60d4904f22c3f7525d46e64e6fe61e25529953419ce94545",
+        "accepted": true
+      },
+      "16": {
+        "bytes": 123301,
+        "sha256": "76ade08dd736aedfdd97d092158ae4541b390f564871c8dbffebb99112bbca4d",
+        "accepted": true
+      },
+      "17": {
+        "bytes": 189680,
+        "sha256": "685dfa4f8ca9bf6559388b912c48a0c67e46f0cfeacff57ed2ce8d3aab73ffd6",
+        "accepted": true
+      },
+      "18": {
+        "bytes": 354415,
+        "sha256": "760b0b201481cdb2b5da5d609c393415fd36a79b9894375d63816258e00618ba",
+        "accepted": true
+      },
+      "19": {
+        "bytes": 344307,
+        "sha256": "2f80c9487b645d4d8d664eef101b31da0e6204fe68cdc63a39ab8ede9512d8df",
+        "accepted": true
+      },
+      "20": {
+        "bytes": 297954,
+        "sha256": "78e2f667487858909ab19bdec12028dd57ddcd0a1f4f0851611e0e5613becc78",
+        "accepted": true
       },
       "64": {
         "bytes": 171915,
@@ -325,6 +517,31 @@
         "bytes": 169352,
         "sha256": "eddabad3b8e9afc7c029bf4c73a99f3b85702366f1a9e7f66b65631bbee1e1d0",
         "accepted": true
+      },
+      "70": {
+        "bytes": 151465,
+        "sha256": "afdc520fb97ac207c21007edc1e178e74eacf075965187266703852fb8391a0b",
+        "accepted": true
+      },
+      "71": {
+        "bytes": 396222,
+        "sha256": "ba5c9aed00bc90612dabefae771cdc03426b82c9f38ce83fa2ff5252e482e918",
+        "accepted": true
+      },
+      "72": {
+        "bytes": 248782,
+        "sha256": "0d6aa39f5f928a90f719783c863eb3b00057fff75de9c56e88425f2dfc0638a8",
+        "accepted": true
+      },
+      "73": {
+        "bytes": 225754,
+        "sha256": "d604730771ae4b32beeb3dd6e124b59c0e271856cafbb0607d697e4d12ffa756",
+        "accepted": true
+      },
+      "74": {
+        "bytes": 215200,
+        "sha256": "9ab7afb9cbe473ddadabb6a99dd62cf57ff5160a01838ee760b30562112fe32a",
+        "accepted": true
       }
     }
   },
@@ -332,10 +549,10 @@
     "file": "individual-page-review.json",
     "sha256": "47fbe0f44710422cd1146f3df4c1d4db81e31ee1cada58640a62884787a80541"
   },
-  "review_update_utc": "2026-11-25T09:13:43.080Z",
-  "review_scope": "Six additional exact current rendered pages individually viewed, source PNGs and OOXML inspected for four observed layout defects; release remains blocked by actual layout and remaining pages.",
-  "accepted_pages": 30,
-  "rejected_pages": 4,
+  "review_update_utc": "2026-11-25T09:28:33.851Z",
+  "review_scope": "65 exact canonical current page PNGs individually inspected, including 31 additional pages. Four earlier rejected figure-reference introductions reassessed from exact enlarged source-pixel crops, original pixel identity and unchanged source PDF text: no actual layout defect established. All unreviewed pages and standards acceptance still pending.",
+  "accepted_pages": 65,
+  "rejected_pages": 0,
   "previous_review28": {
     "file": "individual-page-review-dz16.json",
     "sha256": "b796c0f70e96f8986c8002ace160d439168ad05e7fee4d494824c236d052fe75"
@@ -599,5 +816,220 @@
     "standards_compliance_accepted": false,
     "released": false,
     "scientific_verdict": null
-  }
+  },
+  "false_layout_diagnosis_correction": {
+    "kind": "timelearner_correction_of_false_figure_reference_layout_diagnosis",
+    "schema_version": 1,
+    "observed_fact": "All four original canonical PNGs contain the same complete rasterized prefix, including 793 dark pixels in the alleged missing-text region. Exact enlarged source-pixel crops and source PDF text were inspected. No layout correction is supported.",
+    "original_DOCX_or_PDF_modified": false,
+    "canonical_PNG_modified": false,
+    "rejected_layout_pages_reassessed_as_accepted": [
+      {
+        "topology": "classic",
+        "page": 11,
+        "canonical_png_sha256": "bb5126eb88791ac44dc9b388ff668dec937d9ef75b8bfba20f940ea2d271d2c9",
+        "prefix_box": [
+          280,
+          130,
+          430,
+          175
+        ],
+        "prefix_pixels_sha256": "61c80a19e966c71dba53f860a929d32e49b6097ee14489016ed4a4f3e8302375",
+        "prefix_dark_pixels": 793
+      },
+      {
+        "topology": "classic",
+        "page": 12,
+        "canonical_png_sha256": "f5a8f1fbe6f253d78d98b12f991856aacdb9f0da28b400e0810aff2bf9e4e881",
+        "prefix_box": [
+          280,
+          130,
+          430,
+          175
+        ],
+        "prefix_pixels_sha256": "61c80a19e966c71dba53f860a929d32e49b6097ee14489016ed4a4f3e8302375",
+        "prefix_dark_pixels": 793
+      },
+      {
+        "topology": "branch",
+        "page": 11,
+        "canonical_png_sha256": "bb5126eb88791ac44dc9b388ff668dec937d9ef75b8bfba20f940ea2d271d2c9",
+        "prefix_box": [
+          280,
+          130,
+          430,
+          175
+        ],
+        "prefix_pixels_sha256": "61c80a19e966c71dba53f860a929d32e49b6097ee14489016ed4a4f3e8302375",
+        "prefix_dark_pixels": 793
+      },
+      {
+        "topology": "branch",
+        "page": 12,
+        "canonical_png_sha256": "f5a8f1fbe6f253d78d98b12f991856aacdb9f0da28b400e0810aff2bf9e4e881",
+        "prefix_box": [
+          280,
+          130,
+          430,
+          175
+        ],
+        "prefix_pixels_sha256": "61c80a19e966c71dba53f860a929d32e49b6097ee14489016ed4a4f3e8302375",
+        "prefix_dark_pixels": 793
+      }
+    ],
+    "prior_review": "individual-page-review-ea24.json",
+    "all_document_pages_accepted": false,
+    "released": false
+  },
+  "superseded_rejected_pages": {
+    "classic": {
+      "11": "In the exact rendered page the introductory reference to figure 4 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable.",
+      "12": "In the exact rendered page the introductory reference to figure 5 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable."
+    },
+    "branch": {
+      "11": "In the exact rendered page the introductory reference to figure 4 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable.",
+      "12": "In the exact rendered page the introductory reference to figure 5 is not fully visible: only its numeral remains above the illustration. The full paragraph exists in OOXML and the embedded source PNG is intact. Layout correction and a new render are required; the scientific curve itself is readable."
+    }
+  },
+  "new_pages_this_review": {
+    "classic": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81
+    ],
+    "branch": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      70,
+      71,
+      72,
+      73,
+      74
+    ]
+  },
+  "previous_review34": {
+    "file": "individual-page-review-ea24.json",
+    "sha256": "7af12885f974791779b06ed4b6ad6daa12945f6f9603f256f496dd458262968e",
+    "layout_rejection_diagnosis_superseded": true
+  },
+  "external_review65_and_correction": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/documents/TimeLearner/2026-11-25-current-DOCX-review65-and-correction-eb10.json",
+      "sha256": "bd8443394b137e0e331f798a638e473b35c055904cc4f6542795c0bd42a3b356",
+      "size": 2630
+    },
+    "kind": "timelearner_current_DOCX_65_pages_review_and_prior_false_diagnosis_correction",
+    "schema_version": 1,
+    "candidate": "dy12",
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/eb/ebd40491843adec789522dcdc0eb2254b9d70d5470bcfa0377ed08bcac9f9ae7",
+        "sha256": "ebd40491843adec789522dcdc0eb2254b9d70d5470bcfa0377ed08bcac9f9ae7",
+        "bytes": 6013
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/77/77305e6e1c5aa5b8ebf1d5f077cc9b6ed324470c9c02d2516a02b7b5d0f595dd",
+        "sha256": "77305e6e1c5aa5b8ebf1d5f077cc9b6ed324470c9c02d2516a02b7b5d0f595dd",
+        "bytes": 4689636
+      }
+    },
+    "restoration": {
+      "kind": "timelearner_native_bundle_restoration",
+      "schema_version": 1,
+      "archive_sha256": "77305e6e1c5aa5b8ebf1d5f077cc9b6ed324470c9c02d2516a02b7b5d0f595dd",
+      "archive_members_verified": 37,
+      "retained_regular_files": 37,
+      "compatibility": null,
+      "omitted_redundant_aliases": [],
+      "source_archive_modified": false,
+      "native_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "documents": {
+      "classic": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-25-revision5-Branch-third-moment-dy12\\docx\\TimeLearnerClassicAlgorithms.ru.docx",
+        "bytes": 9538837,
+        "sha256": "c9827c7ed93638d6d9172719cb45932783f92d3e37d0a8cbff2b6263a9c4960a"
+      },
+      "branch": {
+        "path": "E:\\Science-Repo\\TimeLearner-Documents\\2026-11-25-revision5-Branch-third-moment-dy12\\docx\\TimeLearnerBranchAlgorithms.ru.docx",
+        "bytes": 7570301,
+        "sha256": "807f8e6350acfc175377df0c60c8a9336e9f5195879280563c586bb1c9c6c4e4"
+      }
+    },
+    "reviewed_pages": 65,
+    "accepted_pages": 65,
+    "rejected_pages": 0,
+    "new_pages_this_review": {
+      "classic": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81
+      ],
+      "branch": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        70,
+        71,
+        72,
+        73,
+        74
+      ]
+    },
+    "prior_four_layout_rejections_superseded": true,
+    "original_DOCX_PDF_PNG_and_builder_unchanged": true,
+    "all_pages_reviewed": false,
+    "standards_compliance_accepted": false,
+    "released": false,
+    "scientific_verdict": null
+  },
+  "external_six_page_review_scope": "Historical snapshot ea27; its four inferred layout rejections are superseded by exact source-pixel and crop review in external_review65_and_correction."
 }
