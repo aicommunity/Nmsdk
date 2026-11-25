@@ -264,12 +264,14 @@ def run(controls):
             source_protocol_repeated_control_checked=spec['study']['protocol'] in ('new_foils','heldout_matched_duration'),
             cadence_evidence=cadence_evidence,
             frozen_model_verified=True, complete_native_observations=True, threshold_selected=False,
-            training_performed=False, source_training_completed=False,
+            # DATA and a preserved response do not attest the original Train
+            # boundary. Its separate full audit may prove either outcome.
+            training_performed=False, source_training_completed=None,
             new_foils_excluded_from_calibration=spec['study']['protocol'] in ('new_foils','heldout_matched_duration'),
             independently_heldout_positive_class=False, scientific_verdict=None)
         if spec['study']['protocol'] == 'heldout_matched_duration':
-            terminal.update(source_training_completed=None,
-                protocol_sha256=design['protocol_sha256'], independence_scope=design['independence_scope'])
+            terminal.update(protocol_sha256=design['protocol_sha256'],
+                independence_scope=design['independence_scope'])
         _write(output/'terminal.json', terminal)
     except BaseException as error:
         _write(output/'exception.json', dict(reason=str(error), traceback=traceback.format_exc(), scientific_verdict=None))
