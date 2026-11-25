@@ -1,0 +1,58 @@
+{
+  "utc": "2026-11-25T07:53:45.157329+00:00",
+  "job": "Classic-cap8-physical-projection-dz13",
+  "files": {
+    "controls\\Classic-cap8-physical-projection-dz13\\owner.json": {
+      "pid": 18816,
+      "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+      "creation_filetime": "134400665982507767"
+    },
+    "jobs\\Classic-cap8-physical-projection-dz13\\physical-projection.json": {
+      "kind": "timelearner_physical_DATA_projection",
+      "schema_version": 1,
+      "source": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-n0-length4-cap8-dp17\\train\\native\\train_stopped_state.json",
+        "sha256": "40ccc972552c0f5064944f097d66618a1d17d9a8f024c401942c21775396aea9",
+        "size": 1037366786
+      },
+      "output": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\Classic-cap8-physical-projection-dz13\\physical-model-DATA.json",
+        "sha256": "c59a598667418354f32085ce2d0681df01add8c08ec5113bd1acf23ae29a1280",
+        "size": 20162851
+      },
+      "source_boundary": {
+        "kind": "timelearner_stopped_state",
+        "schema_version": 8,
+        "state_kind": "diagnostic",
+        "sha256": "3afdcca6ae55f6daea2d7c6a4f93c99c21f62ae1fe95ce6edb3ed2e4370db1b7",
+        "model_revision": "b82b884e18fb1871a1db8d6925586c2e50946cb073598d7726b8bcf79c938e56"
+      },
+      "model_revision": "b82b884e18fb1871a1db8d6925586c2e50946cb073598d7726b8bcf79c938e56",
+      "physical_model_data_sha256": "92670dc9758f2e71aa39a716eed94fb311ffcd5f1710dcac361a78b0dec4f2bd",
+      "source_unchanged": true,
+      "source_history_retained_separately": true,
+      "source_training_evidence_checked": false,
+      "native_import_verified": false,
+      "training_certificate_transferred": false,
+      "calibration_confirmed": false,
+      "scientific_verdict": null
+    },
+    "controls\\Classic-cap8-physical-projection-dz13\\stderr.log": "",
+    "controls\\Classic-cap8-physical-projection-dz13\\process\\stderr.log": "",
+    "controls\\Classic-cap8-physical-projection-dz13\\process\\stdout.log": ""
+  },
+  "owners": [
+    {
+      "owner": {
+        "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+        "creation_filetime": "134400665995538173",
+        "pid": 21696,
+        "job_name": "Local\\TimeLearner-aaf24660-59b2-46bf-a407-011135c30194",
+        "runtime_fingerprint": "5d5fc5b7e9a22988d70eb39794a4b80ba4bf130664d4763b2a0aa8dfde874533",
+        "suspended_until_limits_applied": true
+      },
+      "live": true
+    }
+  ],
+  "supervisor_live": true
+}
