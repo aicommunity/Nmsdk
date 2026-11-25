@@ -1,0 +1,85 @@
+{
+  "utc": "2026-11-25T03:14:49.686926+00:00",
+  "job": "classic-candidate-round-robin-q3-cold-elder-dv31",
+  "files": {
+    "readbacks/classic-candidate-round-robin-q3-cold-elder-dv31/preflight-accepted.json": {
+      "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+      "same_actual_cold_graph_as_resistance_control": true,
+      "job_sha256": "c990d360d49d8d73fc5fb2f620f750d671d3c305796bc94e4921aae238a56b5c",
+      "factor_model_revision": "e23cda6cb58312d2e51a92df035baf9fb8629efc42aecbad4da1e39a47d7864e",
+      "factor_synapses": 2,
+      "initial_nodes": 44,
+      "factor_nodes": 45,
+      "training_started": false,
+      "scientific_verdict": null
+    },
+    "readbacks/classic-candidate-round-robin-q3-cold-elder-dv31-controller/supervisor-identity.json": {
+      "pid": 297325,
+      "start_ticks": "514618148",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    }
+  },
+  "units": {
+    "controller": {
+      "closed": false,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "a33184fba39c58f9d60e3a367b960a89a95c50e6b493944f4415ead6a6511543",
+        "unit": "timelearner-7ea0f92b-a9b7-42df-b19e-16cfc2cd7b7b.service",
+        "invocation_id": "fb1fe7e7e2ec44439556200e7f2cfe53",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7ea0f92b-a9b7-42df-b19e-16cfc2cd7b7b.service",
+        "initial_main_pid": 301026,
+        "initial_start_ticks": "514618917",
+        "sha256": "9359694e550eb081df73cfeb4fd713683272823835b63d428ce0399a12ff71d1"
+      }
+    },
+    "preflight": {
+      "closed": true,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "cdb0211a87dae28849fdcaaa2cf5fe9b7031affa6418c6a02d3bfc7ab51be613",
+        "unit": "timelearner-6f8478ca-bc34-4b9c-9b40-c429e6eeed75.service",
+        "invocation_id": "8f859ab80ebe46babc8ddc4e37e54463",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6f8478ca-bc34-4b9c-9b40-c429e6eeed75.service",
+        "initial_main_pid": 304863,
+        "initial_start_ticks": "514619860",
+        "sha256": "a846c2b70e7680533429a30c2d1f6ac950a3c2b18834dbe73be84036c1d455f6"
+      }
+    },
+    "factor-preflight": {
+      "closed": true,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "73f5147f1fbdce505ef147d16c8c433a129432a1088efa24566aa1d79d451c9d",
+        "unit": "timelearner-9fc17c0e-51e1-4904-95a6-d74d340e9e92.service",
+        "invocation_id": "578827bfe74040a6816b22dc46b62b53",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9fc17c0e-51e1-4904-95a6-d74d340e9e92.service",
+        "initial_main_pid": 304967,
+        "initial_start_ticks": "514620184",
+        "sha256": "98be1811870deb5e5395d11c76c14b9edbe394932b4709bb6ed5c42a5c0a0592"
+      }
+    },
+    "train": {
+      "closed": false,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "7de0f62c288551d381be7895137ee59ff540551915afc68bfc21d5aefd152cc7",
+        "unit": "timelearner-c5f09dc1-9957-408a-93b8-e5a5fd1c6be3.service",
+        "invocation_id": "d79a51bc575941bc829cb16b70ed0949",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c5f09dc1-9957-408a-93b8-e5a5fd1c6be3.service",
+        "initial_main_pid": 305068,
+        "initial_start_ticks": "514620464",
+        "sha256": "2e2b3f7ccff0e722d2ec3ed923090f1e31f4a8777b1ec4e129e3cc6cbea39c8d"
+      }
+    }
+  },
+  "disk_free": 21517000704,
+  "supervisor_live": true,
+  "readbacks/classic-candidate-round-robin-q3-cold-elder-dv31-controller/supervisor.log": "{\"kind\": \"STARTED\", \"binding\": {\"kind\": \"timelearner_contained_binding\", \"schema_version\": 1, \"request_sha256\": \"a33184fba39c58f9d60e3a367b960a89a95c50e6b493944f4415ead6a6511543\", \"unit\": \"timelearner-7ea0f92b-a9b7-42df-b19e-16cfc2cd7b7b.service\", \"invocation_id\": \"fb1fe7e7e2ec44439556200e7f2cfe53\", \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7ea0f92b-a9b7-42df-b19e-16cfc2cd7b7b.service\", \"initial_main_pid\": 301026, \"initial_start_ticks\": \"514618917\", \"sha256\": \"9359694e550eb081df73cfeb4fd713683272823835b63d428ce0399a12ff71d1\"}}\n",
+  "readbacks/classic-candidate-round-robin-q3-cold-elder-dv31-controller/process/contained/stderr.log": ""
+}
