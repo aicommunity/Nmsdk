@@ -9,7 +9,8 @@ from .native_evidence import number, require
 from .plotting import padded_limits, render_soma, render_positive_lobe_views
 
 
-def render_lt_decisions(spec, observations, threshold, output: Path, *, context_label=None):
+def render_lt_decisions(spec, observations, threshold, output: Path, *, context_label=None,
+                        include_native_tiles=True):
     by_id = {o['trial_id']: o for o in observations}
     require(len(by_id) == len(observations), 'lt_plot_duplicate_observation')
     trials = sorted(spec['trials'], key=lambda t: t['presentation_index'])
@@ -50,10 +51,11 @@ def render_lt_decisions(spec, observations, threshold, output: Path, *, context_
         context = context_label
         views = render_soma(projected, 0, descriptor['path'], limits, folder,
             potential_axis_label='LT decision potential [model units; SI unverified]',
-            reference_level=threshold, context_label=context)
+            reference_level=threshold, context_label=context, include_native_tiles=include_native_tiles)
         views.extend(render_positive_lobe_views(projected, 0, descriptor["path"], folder,
             potential_axis_label="LT decision potential [model units; SI unverified]",
             reference_level=threshold, context_label=context,
+            include_native_tiles=include_native_tiles,
             shared_minimum=shared_minimum, shared_maximum=shared_maximum))
         decisions.append(dict(sample_id=observation['sample_id'], trial_id=observation['trial_id'],
             folder=folder.name, source_descriptor=descriptor,

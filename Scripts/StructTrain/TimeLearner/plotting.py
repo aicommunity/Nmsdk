@@ -213,10 +213,11 @@ def render_soma(observation, channel, label, limits, output: Path, *,
             first, last = max(0,index-10), min(len(samples)-1,index+10)
             left, right = samples[first]["time"], samples[last]["time"]
             detail = detail_limits(samples, channel, left, right, limits)
+            scale = "local_detail" if detail is not None else comparison_scope
             if detail is None:
-                continue
+                detail = limits  # Time enlargement is useful even without a tighter Y range.
             name = f"measured-peak-{index:05d}-detail"
-            views.append((name,left,right,detail,"local_detail","measured_peak_detail"))
+            views.append((name,left,right,detail,scale,"measured_peak_detail"))
             peak_details[name] = {"peak_sample_index":index,"peak_sample_time":samples[index]["time"],
                                   "first_sample_index":first,"last_sample_index":last}
         for name, left, right, y_limits, scale, time_view in views:
@@ -304,7 +305,8 @@ def render_soma(observation, channel, label, limits, output: Path, *,
 def render_positive_lobe_views(observation, channel, label, output: Path, *,
                                reference_level=None, context_label=None,
                                shared_minimum=None, shared_maximum=None,
-                               potential_axis_label="Soma SumPotential [model units; SI unverified]"):
+                               potential_axis_label="Soma SumPotential [model units; SI unverified]",
+                               include_native_tiles=True):
     """Companion display range; original recovery samples and views are retained."""
     values = [s["soma"][channel] for s in observation["samples"]]
     require(values and all(math.isfinite(v) for v in values), "invalid_positive_lobe_samples")
@@ -331,6 +333,7 @@ def render_positive_lobe_views(observation, channel, label, output: Path, *,
     views = render_soma(observation, channel, label, padded_limits(levels), folder,
         potential_axis_label=potential_axis_label, reference_level=reference_level,
         context_label=context,
+        include_native_tiles=include_native_tiles,
         comparison_scope="shared" if shared_maximum is not None else "per_observation")
     for view in views:
         view["files"] = [folder.name+"/"+name for name in view["files"]]

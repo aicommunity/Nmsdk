@@ -11,7 +11,8 @@ from pathlib import Path
 import sys
 
 
-def render(manifest_path, output, python_source, matplotlib_libs=None):
+def render(manifest_path, output, python_source, matplotlib_libs=None, *, archived_source=False,
+           include_native_tiles=True):
     sys.path.insert(0,str(Path(python_source).resolve(strict=True)))
     if matplotlib_libs:sys.path.insert(0,str(Path(matplotlib_libs).resolve(strict=True)))
     sys.dont_write_bytecode=True
@@ -28,8 +29,16 @@ def render(manifest_path, output, python_source, matplotlib_libs=None):
     require(audited['run_evidence_consistent'] and manifest['operation']=='physical-model-evaluate' and
             manifest['execution']=='completed' and manifest['validity']=='valid',
             'physical_visual_report_requires_complete_production_audit')
-    require(inspect(manifest_path.parent/'process/contained')['all_processes_closed'],
-            'physical_visual_report_model_process_not_closed')
+    require(type(archived_source) is bool and type(include_native_tiles) is bool,
+            'physical_visual_report_source_policy_invalid')
+    if not archived_source:
+        require(inspect(manifest_path.parent/'process/contained')['all_processes_closed'],
+                'physical_visual_report_model_process_not_closed')
+    # Portable production audit above still binds every primary byte, the
+    # original runtime/process evidence and its complete observation set.
+    # A report cache on another host cannot re-observe the original kernel.
+    # This option authorizes rendering only; it never authorizes execution or
+    # upgrades an archived process claim into a fresh native attestation.
     metrics=manifest['analysis']['metrics'];expected=len(metrics['trials'])
     require(metrics['validity']=='valid' and metrics['data_only'] and expected>=2,
             'physical_visual_report_incomplete_metrics')
@@ -65,13 +74,16 @@ def render(manifest_path, output, python_source, matplotlib_libs=None):
             maximum=max(range(len(observation['samples'])),key=lambda i:observation['samples'][i]['soma'][channel])
             display={**observation,'diagnostic_peak_indices':([maximum] if 0<maximum<len(observation['samples'])-1 else [])}
             views=render_soma(display,channel,f'Soma channel {channel+1}',shared,folder,
+                include_native_tiles=include_native_tiles,
                 context_label='Fixed DATA Test; actual '+trial['classification'])
             views.extend(render_positive_lobe_views(display,channel,f'Soma channel {channel+1}',folder,
                 shared_minimum=shared_minimum,shared_maximum=shared_maximum,
+                include_native_tiles=include_native_tiles,
                 context_label='Fixed DATA Test; actual '+trial['classification']))
             plotted.append(dict(trial_id=trial['trial_id'],sample_id=trial['sample_id'],
                 classification=trial['classification'],soma_index=channel,folder=folder.name,views=views))
     lt=render_lt_decisions(spec,observations,metrics['effective_threshold'],output,
+                          include_native_tiles=include_native_tiles,
                           context_label='Fixed DATA Test; native LT decision/events')
     require(lt['all_declared_trials_rendered'] and lt['all_observations_complete'],
             'physical_visual_report_lt_coverage_incomplete')
@@ -82,6 +94,9 @@ def render(manifest_path, output, python_source, matplotlib_libs=None):
         plotting_runtime=runtime,all_patterns_and_somas_rendered=True,native_input_overlay=True,
         full_observation_windows=True,downsampling=False,minimum_native_zoom_tick_pixels=14.208,
         native_spike_events_authoritative=True,visual_acceptance_complete=False,publication_ready=False,
+        source_process_policy='archived-evidence-only' if archived_source else 'live-host-closure',
+        source_kernel_closure_reobserved=not archived_source,native_execution_attested=False,
+        time_view_policy='all-native-tiles' if include_native_tiles else 'full-window-and-measured-peak-details',
         training_completed=None,source_training_evidence_checked=False,independently_heldout_evaluation=None,scientific_verdict=None)
     (output/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2,allow_nan=False)+'\n',encoding='utf-8')
     def section(title,folder,views):
@@ -105,8 +120,13 @@ def main():
     parser=argparse.ArgumentParser()
     for name in ('manifest','output','python-source'):parser.add_argument('--'+name,required=True)
     parser.add_argument('--matplotlib-libs')
+    parser.add_argument('--archived-source', action='store_true',
+                        help='Render audited archived bytes without re-attesting the original host kernel')
+    parser.add_argument('--compact-views', action='store_true',
+                        help='Full windows and measured peak details; omit exhaustive native-tick tiles')
     args=parser.parse_args()
-    result=render(args.manifest,args.output,args.python_source,args.matplotlib_libs)
+    result=render(args.manifest,args.output,args.python_source,args.matplotlib_libs,
+                  archived_source=args.archived_source, include_native_tiles=not args.compact_views)
     print(json.dumps({k:result[k] for k in ('kind','counts','soma_count','trial_count','all_patterns_and_somas_rendered','visual_acceptance_complete','scientific_verdict')}))
 
 
