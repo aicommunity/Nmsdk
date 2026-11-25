@@ -60,5 +60,33 @@
   "standards_compliance_accepted": false,
   "released": false,
   "does_not_include_24_25_November_science": true,
-  "observed_utc": "2026-11-25T03:38:18.139251+00:00"
+  "observed_utc": "2026-11-25T03:38:18.139251+00:00",
+  "external_archive": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/checks/2026-11-25/DOCX-caption-source-layout-dw10.json",
+      "sha256": "147d6e2e922695f23cfdf7ddb866c5267b7e333b238f0c645c92e906bc541c9a",
+      "size": 5909
+    },
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/74/74989a4737b7d0108275e0621861f6b09ec97da9aa7e73786eb77a4bc7b51445",
+        "sha256": "74989a4737b7d0108275e0621861f6b09ec97da9aa7e73786eb77a4bc7b51445",
+        "bytes": 2626
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/9f/9f3c5077015f72dae43115730e86affa43f17e7f6034bb7ff2898d309cfbb488",
+        "sha256": "9f3c5077015f72dae43115730e86affa43f17e7f6034bb7ff2898d309cfbb488",
+        "bytes": 15332796
+      }
+    },
+    "restored_members": 14,
+    "selected_reviewed_PNG": 4,
+    "released": false
+  }
 }

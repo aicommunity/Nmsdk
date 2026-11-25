@@ -1,0 +1,52 @@
+{
+  "kind": "timelearner_nested_child_receipt_regression22",
+  "schema_version": 1,
+  "source_root": "028e85e26966ec2ea5dc5d54d9cbaadb898e5ec1",
+  "validation": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "owned-child-receipts-kernel22-m40-dw6",
+    "package_fingerprint": "0797d6e73c4a1f5c3ed01cbfccfe7886c805db1a18b18e0ea17747aedff51b8e",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_nested_repeated_leaf_names_are_distinct_and_order_independent",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_repeated_child_path_is_rejected_before_launch",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_request_has_no_user_command_or_worker_module_extension",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_boolean_and_unknown_schema_are_not_v1",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_short_commit_and_bad_bound_digest_fail_before_launch",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_relative_or_extra_input_binding_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_bound_input_real_bytes_and_symlink_alias",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_replaced_identical_control_bytes_are_not_the_original_consumption_file",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_same_inode_rewrite_and_restore_is_still_a_consumption_change",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_malformed_launch_does_not_create_controller_or_other_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_process_identity_cannot_turn_unknown_or_boolean_pid_into_closed",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job.OwnedNativeMetadataTest.test_recover_cannot_treat_absent_supervisor_identity_as_dead",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_exit_zero_closes_outer_before_exact_worker_lease_release",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_nonzero_actual_exit_is_not_converted_into_completed_by_cleanup",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_whole_deadline_closes_owned_unit_without_success",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_cancel_request_closes_owned_unit_without_restart",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_nested_child_closes_before_worker_lease_release",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_two_nested_evaluations_preserve_both_receipts_and_close",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_actual_unbound_child_intent_adopted_only_after_dead_worker",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_partial_final_request_holds_lease_and_does_not_invent_child_closure",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_started_receipt_fault_still_closes_actual_outer_and_holds_lease",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_native_job_kernel.OwnedNativeKernelTest.test_observer_broken_pipe_cannot_abort_actual_unit_cleanup"
+    ],
+    "executed_tests": 22,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_OWNED_NATIVE_TEST_OUTPUT": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/owned-child-receipts-kernel22-m40-dw6/kernel-fixture",
+        "files": 1,
+        "fingerprint": "655423df8c3b420724d729827980247052962515554ab95e009f263a954815c9"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "full_primary_archive_pending": "experiments/2026-11-25/Classic-policy0-heldout-third-pulse-full-primary-dw9.json",
+  "physics_or_cpp_executed": false,
+  "scientific_verdict": null
+}
