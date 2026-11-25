@@ -1,0 +1,89 @@
+{
+  "kind": "timelearner_readonly_audit_recovery_live",
+  "schema_version": 1,
+  "initial_detached_start_not_executed": {
+    "via_jump": "10.245.1.12",
+    "host": "10.245.1.14",
+    "operator_sha256": "2ed407d74b885ebb8ba2d16dd11d47027c9c4c4a93d48329c3ed6b98c11cd295",
+    "returncode": 0,
+    "stderr": "",
+    "observation": {
+      "utc": "2026-11-25T06:24:12.398685+00:00",
+      "pid": 10676,
+      "files": {},
+      "open_process_error": 87,
+      "supervisor.stdout": "",
+      "supervisor.stderr": ""
+    }
+  },
+  "scheduled_dispatch": {
+    "via_jump": "10.245.1.12",
+    "host": "10.245.1.14",
+    "operator_sha256": "29620ab4c1a4b28b06ab30da69b224d1097d85535e6d459303c2ee4bfbcb0ae2",
+    "returncode": 0,
+    "stderr": "",
+    "observation": {
+      "dispatched": true,
+      "task": {
+        "instance": "{84046346-5315-4D6C-A130-D4263574A731}",
+        "registered": true,
+        "task": "TimeLearner-cap8-readonly-audit16-dx16",
+        "principal_run_level": 0,
+        "principal_logon_type": 2
+      },
+      "control": "C:\\Projects\\TimeLearnerWorker\\controls\\cap8-readonly-audit16-dx11",
+      "controls_commit": "3e0fce8585c18e6fd06b8f255e4972fa00bbf98a",
+      "controls_bundle": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\controls\\cap8-readonly-audit16-dx11\\scheduled-controls.bundle",
+        "sha256": "e4fadad8bd2fd39e9157081ec6360ff1ffd5ed8b57e5ffba9d6bd921716814fd",
+        "size": 44862
+      },
+      "audit_memory_bytes": 17179869184,
+      "no_native_Train_or_Test": true,
+      "original_failure_preserved": true,
+      "initial_missing_supervisor_verified_before_scheduling": true,
+      "scientific_verdict": null
+    }
+  },
+  "last_observation": {
+    "via_jump": "10.245.1.12",
+    "host": "10.245.1.14",
+    "operator_sha256": "4516688596c5a0c7a33e1fa3819aa4a44950b45c6a75370658309c0149246da8",
+    "returncode": 0,
+    "stderr": "",
+    "observation": {
+      "utc": "2026-11-25T06:26:12.301383+00:00",
+      "control": "C:\\Projects\\TimeLearnerWorker\\controls\\cap8-readonly-audit16-dx11",
+      "files": {
+        "owner.json": {
+          "pid": 20028,
+          "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+          "creation_filetime": "134400615230232475"
+        },
+        "audit-process/resource-preflight.json": {
+          "available_physical_bytes": 19881857024,
+          "total_physical_bytes": 32107872256,
+          "memory_budget_bytes": 17179869184
+        }
+      },
+      "owners": [
+        {
+          "owner": {
+            "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+            "creation_filetime": "134400615251579018",
+            "pid": 18024,
+            "job_name": "Local\\TimeLearner-af495237-464b-4d3c-be89-05c8c291408d",
+            "runtime_fingerprint": "6f1910031f133fe17f5c1e9df3342ebc6dcfe284847c1e7ceea0459927441524",
+            "suspended_until_limits_applied": true
+          },
+          "live": true
+        }
+      ],
+      "cap24_started": false,
+      "supervisor_live": true
+    }
+  },
+  "training_not_repeated": true,
+  "cap24_not_started": true,
+  "full_audit_complete": false
+}
