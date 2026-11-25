@@ -1,0 +1,424 @@
+{
+  "kind": "timelearner_active_Delay26_checked_receipt",
+  "schema_version": 1,
+  "test_source_root": "59c9fff5893eff1dd45dcff7c170aac927824620",
+  "actual_gate": {
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/active-delay-actual26-en7",
+    "terminal": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/active-delay-actual26-en7/terminal.json",
+      "sha256": "efc643e4bf5837e3ee52ddda3161b993217be4d46ac60b5838624a467791cd51",
+      "size": 2271
+    },
+    "gate": {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 26,
+        "observed": 26,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "5ca7baa809c37188d4ceeee97c6cdfd164e0e0b927fe4b5ef3c9343c40052f71"
+      },
+      "scientific_verdict": null
+    }
+  },
+  "independent_primary": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Active-Delay26-complete-independent-en13.json",
+      "sha256": "d0cb163d8c0f58fe0f398da2ba0a8a5eca4b7deb0ef0a26df2fb33a1883dbc51",
+      "size": 7796
+    },
+    "members": 118,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/96/9681d0df4b071beb8c9878f36faa4a69b173a84b05aa99ebcbf175fc902080c1",
+        "sha256": "9681d0df4b071beb8c9878f36faa4a69b173a84b05aa99ebcbf175fc902080c1",
+        "bytes": 19703
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f7/f7210b1b6833cbd6951b122d3c87bd7e4b28fb75a6e482191c0caf588f7b481b",
+        "sha256": "f7210b1b6833cbd6951b122d3c87bd7e4b28fb75a6e482191c0caf588f7b481b",
+        "bytes": 25232260
+      }
+    },
+    "actual_inventory": {
+      "expected": 26,
+      "observed": 26,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "5ca7baa809c37188d4ceeee97c6cdfd164e0e0b927fe4b5ef3c9343c40052f71"
+    },
+    "records": [
+      {
+        "name": "Branch_active_delay_20000_M4_0.json",
+        "mode": 0,
+        "frequency_hz": 20000,
+        "input_count": 4,
+        "trace_lengths": [
+          4001,
+          4001
+        ],
+        "native_status": [
+          "completed",
+          "completed"
+        ],
+        "all_actual_frames_and_stimuli_compared": true,
+        "maximum_absolute_soma_difference": 0
+      },
+      {
+        "name": "Branch_active_delay_2000_M2_0.json",
+        "mode": 0,
+        "frequency_hz": 2000,
+        "input_count": 2,
+        "trace_lengths": [
+          401,
+          401
+        ],
+        "native_status": [
+          "completed",
+          "completed"
+        ],
+        "all_actual_frames_and_stimuli_compared": true,
+        "maximum_absolute_soma_difference": 0
+      },
+      {
+        "name": "Branch_active_delay_2000_M2_1.json",
+        "mode": 1,
+        "frequency_hz": 2000,
+        "input_count": 2,
+        "trace_lengths": [
+          401
+        ],
+        "native_status": [
+          "completed"
+        ]
+      },
+      {
+        "name": "Branch_active_delay_2000_M2_2.json",
+        "mode": 2,
+        "frequency_hz": 2000,
+        "input_count": 2,
+        "trace_lengths": [
+          0
+        ],
+        "native_status": [
+          "rejected"
+        ]
+      },
+      {
+        "name": "Classic_active_delay_20000_M4_0.json",
+        "mode": 0,
+        "frequency_hz": 20000,
+        "input_count": 4,
+        "trace_lengths": [
+          4001,
+          4001
+        ],
+        "native_status": [
+          "completed",
+          "completed"
+        ],
+        "all_actual_frames_and_stimuli_compared": true,
+        "maximum_absolute_soma_difference": 0
+      },
+      {
+        "name": "Classic_active_delay_2000_M2_0.json",
+        "mode": 0,
+        "frequency_hz": 2000,
+        "input_count": 2,
+        "trace_lengths": [
+          401,
+          401
+        ],
+        "native_status": [
+          "completed",
+          "completed"
+        ],
+        "all_actual_frames_and_stimuli_compared": true,
+        "maximum_absolute_soma_difference": 0
+      },
+      {
+        "name": "Classic_active_delay_2000_M2_1.json",
+        "mode": 1,
+        "frequency_hz": 2000,
+        "input_count": 2,
+        "trace_lengths": [
+          401
+        ],
+        "native_status": [
+          "completed"
+        ]
+      },
+      {
+        "name": "Classic_active_delay_2000_M2_2.json",
+        "mode": 2,
+        "frequency_hz": 2000,
+        "input_count": 2,
+        "trace_lengths": [
+          0
+        ],
+        "native_status": [
+          "rejected"
+        ]
+      }
+    ],
+    "loaded_files": 28,
+    "restored": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/ActiveDelay26-complete-independent-en13/restored"
+  },
+  "original_linked_SDK_source_closure": {
+    "root": {
+      "head": "d2c7487a88a5c1c372f825dc708a543c03234fcb",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "2c285cb472134fc92394153c089603a830a03f70",
+      "head": "2c285cb472134fc92394153c089603a830a03f70",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "e36996cd53a545782b54c76d610162c602567399",
+      "head": "e36996cd53a545782b54c76d610162c602567399",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "production_code_changed": false,
+  "source_runtime_not_rebuilt": true,
+  "whole_new_SDK_acceptance": false,
+  "full_stage_acceptance": false,
+  "fully_accepted_stages": [
+    0
+  ],
+  "DOCX_v5_unchanged": true,
+  "scientific_verdict": null,
+  "independent_nonzero_response_check": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-25/Active-Delay26-nonzero-controls-en16.json",
+      "sha256": "50dbcadf5ccbb5f6d8b5856ca3ad1cec26d4c4228513a1ce103dfc0ae55b7e0b",
+      "size": 3137
+    },
+    "rows": [
+      {
+        "file": "Branch_active_delay_20000_M4_0.json",
+        "attempt": 0,
+        "frames": 4001,
+        "channels": 1,
+        "maximum_absolute_excursion_from_native_initial_sample": [
+          0.004103686142297613
+        ]
+      },
+      {
+        "file": "Branch_active_delay_20000_M4_0.json",
+        "attempt": 1,
+        "frames": 4001,
+        "channels": 1,
+        "maximum_absolute_excursion_from_native_initial_sample": [
+          0.004103686142297613
+        ]
+      },
+      {
+        "file": "Branch_active_delay_2000_M2_0.json",
+        "attempt": 0,
+        "frames": 401,
+        "channels": 1,
+        "maximum_absolute_excursion_from_native_initial_sample": [
+          0.004500290389617301
+        ]
+      },
+      {
+        "file": "Branch_active_delay_2000_M2_0.json",
+        "attempt": 1,
+        "frames": 401,
+        "channels": 1,
+        "maximum_absolute_excursion_from_native_initial_sample": [
+          0.004500290389617301
+        ]
+      },
+      {
+        "file": "Branch_active_delay_2000_M2_1.json",
+        "attempt": 0,
+        "frames": 401,
+        "channels": 1,
+        "maximum_absolute_excursion_from_native_initial_sample": [
+          0.004500290389617301
+        ]
+      },
+      {
+        "file": "Classic_active_delay_20000_M4_0.json",
+        "attempt": 0,
+        "frames": 4001,
+        "channels": 4,
+        "maximum_absolute_excursion_from_native_initial_sample": [
+          0.004103686142297613,
+          0.0042473303275089025,
+          0.004560413054457868,
+          0.005408481947640209
+        ]
+      },
+      {
+        "file": "Classic_active_delay_20000_M4_0.json",
+        "attempt": 1,
+        "frames": 4001,
+        "channels": 4,
+        "maximum_absolute_excursion_from_native_initial_sample": [
+          0.004103686142297613,
+          0.0042473303275089025,
+          0.004560413054457868,
+          0.005408481947640209
+        ]
+      },
+      {
+        "file": "Classic_active_delay_2000_M2_0.json",
+        "attempt": 0,
+        "frames": 401,
+        "channels": 2,
+        "maximum_absolute_excursion_from_native_initial_sample": [
+          0.004500290389617301,
+          0.005492406840386876
+        ]
+      },
+      {
+        "file": "Classic_active_delay_2000_M2_0.json",
+        "attempt": 1,
+        "frames": 401,
+        "channels": 2,
+        "maximum_absolute_excursion_from_native_initial_sample": [
+          0.004500290389617301,
+          0.005492406840386876
+        ]
+      },
+      {
+        "file": "Classic_active_delay_2000_M2_1.json",
+        "attempt": 0,
+        "frames": 401,
+        "channels": 2,
+        "maximum_absolute_excursion_from_native_initial_sample": [
+          0.004500290389617301,
+          0.005492406840386876
+        ]
+      }
+    ]
+  },
+  "latest_scientific_workers": {
+    "Elder": {
+      "utc": "2026-11-25T21:57:46.055667+00:00",
+      "controller_live": true,
+      "grid_closed": false,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "abcd3feb53da836e5981b60496623d8588482066c117855d1b0358eb17a847bf",
+        "unit": "timelearner-8ec63028-e070-42a6-9967-69160f3934f0.service",
+        "invocation_id": "b04188e52a444b14b83facf1976bf805",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8ec63028-e070-42a6-9967-69160f3934f0.service",
+        "initial_main_pid": 3253053,
+        "initial_start_ticks": "520450804",
+        "sha256": "71fda980c5cd889c20fab6b2c2bf4e57348f778eb6c9393a6e03fe549890b7f6"
+      },
+      "recorded_trial_files": 19
+    },
+    "M40": {
+      "utc": "2026-11-25T21:57:45.478381+00:00",
+      "controller_live": true,
+      "q3": {
+        "closed": false,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "e65051146b9d4008327b07176702610ab72c0fa4aa3756b2bd19b62dacee0e06",
+          "unit": "timelearner-2e1bafb5-dc4d-4f8e-b9e3-c80e1526985d.service",
+          "invocation_id": "6b86df7a44a04650b0cba82c43ab668d",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2e1bafb5-dc4d-4f8e-b9e3-c80e1526985d.service",
+          "initial_main_pid": 2577509,
+          "initial_start_ticks": "470464122",
+          "sha256": "4265dd80410681eca3885b1a58ad9487721f6b5c643bbf2dd7ded1268f47d172"
+        }
+      }
+    },
+    "Windows": {
+      "utc": "2026-11-25T21:54:06.096298+00:00",
+      "new_foil_native": [
+        {
+          "owner": {
+            "executable": "C:\\Projects\\TimeLearnerWorker\\runtime-physical-threshold-DATA3-sdk43-win-dg21\\NeuroModelerConsole.exe",
+            "creation_filetime": "134401117795540171",
+            "pid": 8444,
+            "job_name": "Local\\TimeLearner-cab2588a-fac7-434a-8189-3e995ab3d23e",
+            "runtime_fingerprint": "77fa25c0e052822dea3e3093d304bcd7cf19343308248441af3029ba86da0791",
+            "suspended_until_limits_applied": true
+          },
+          "live": true
+        }
+      ],
+      "recorded_trial_files": 16,
+      "cap24": {
+        "files": {
+          "owner.json": {
+            "pid": 17628,
+            "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+            "creation_filetime": "134401122126898643"
+          },
+          "waiting.json": {
+            "phase": "exact_predecessors",
+            "observed": [
+              {
+                "owner": {
+                  "pid": 14936,
+                  "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+                  "creation_filetime": "134400625073052967"
+                },
+                "live": false
+              },
+              {
+                "owner": {
+                  "pid": 4712,
+                  "executable": "C:\\Projects\\TimeLearnerWorker\\downloads\\tools\\python\\python-3.14.2-x64-1\\python.exe",
+                  "creation_filetime": "134401051553912453"
+                },
+                "live": true
+              }
+            ],
+            "preparation_or_native_started": false
+          }
+        },
+        "exists": true,
+        "live": true,
+        "log_tail": ""
+      }
+    }
+  }
+}
