@@ -42,11 +42,17 @@ def _sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
-def _identity(pid=None):
+def _identity_with_state(pid=None):
     pid = os.getpid() if pid is None else pid
     directory = Path('/proc')/str(pid)
-    return {'pid':pid, 'start_ticks':directory.joinpath('stat').read_text().rsplit(') ',1)[1].split()[19],
-            'boot_id':Path('/proc/sys/kernel/random/boot_id').read_text().strip(), 'uid':directory.stat().st_uid}
+    fields = directory.joinpath('stat').read_text().rsplit(') ',1)[1].split()
+    return ({'pid':pid, 'start_ticks':fields[19],
+             'boot_id':Path('/proc/sys/kernel/random/boot_id').read_text().strip(),
+             'uid':directory.stat().st_uid}, fields[0])
+
+
+def _identity(pid=None):
+    return _identity_with_state(pid)[0]
 
 
 def _validate_identity(identity):
@@ -67,7 +73,12 @@ def _validate_identity(identity):
 def _same_process(identity):
     _validate_identity(identity)
     try:
-        return _identity(identity['pid']) == identity
+        actual, state = _identity_with_state(identity['pid'])
+        # A dead, unreaped child retains its PID and start time in /proc.
+        # Waiting for its parent to reap it can deadlock a coordinator which
+        # is itself that parent. This is liveness only, never cgroup closure
+        # or evidence that the worker completed successfully.
+        return actual == identity and state not in ('Z', 'X', 'x')
     except (FileNotFoundError, ProcessLookupError):
         return False
 
