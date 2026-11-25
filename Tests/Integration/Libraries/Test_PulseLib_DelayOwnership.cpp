@@ -3,8 +3,15 @@
 #include "NNeuronTimeLearnerBranch.h"
 #include "NDatasetMatrix.h"
 #include "TimeLearner/StorageProfiles.h"
+#include "TimeLearner/ModelIdentity.h"
+#include "TimeLearner/ProbeEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
+#include <QDir>
+#include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
 #include <cmath>
+#include <cstdlib>
 #include <limits>
 #include <stdexcept>
 #include <type_traits>
@@ -25,7 +32,8 @@ struct Scope {
     UEPtr<UStorage> storage;
     UEPtr<UEnvironment> environment;
     UEPtr<UNet> model;
-    Scope()
+    unsigned frequency;
+    explicit Scope(unsigned frequency = Frequency): frequency(frequency)
     {
         const auto& engine = NmsdkTests::InitEngineForPulseLibTests();
         storage = engine.storage;
@@ -35,7 +43,7 @@ struct Scope {
         Require(environment->CreateModel("NModel"), "delay_fixture_model");
         model = dynamic_pointer_cast<UNet>(environment->GetModel());
         Require(bool(model), "delay_fixture_root");
-        model->SetGlobalTimeStep(Frequency);
+        model->SetGlobalTimeStep(frequency);
     }
     ~Scope()
     {
@@ -55,7 +63,7 @@ struct Scope {
         owner->EnablePostTrainTuning = false;
         owner->AutoCalibrateFixedLTZThreshold = false;
         owner->IsNeedToTrain = false;
-        owner->SetGlobalTimeStep(Frequency);
+        owner->SetGlobalTimeStep(frequency);
         UEPtr<UContainer> component = owner;
         Require(model->AddComponent(component) != ForbiddenId, "delay_fixture_attach");
         return owner;
@@ -258,6 +266,174 @@ template<class Owner> void NativeOwnership()
     EXPECT_EQ(owner->ReadNativeParameters(), parameters);
     EXPECT_DOUBLE_EQ(scope.environment->GetTime().GetDoubleTime(), time);
 }
+
+void WriteActiveEvidence(const std::string& name, const QJsonObject& value)
+{
+    if (const char* directory = std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
+        const auto folder = QString::fromLocal8Bit(directory);
+        Require(QDir().mkpath(folder), "active_delay_output_directory");
+        QFile file(QDir(folder).filePath(QString::fromStdString(name)+".json"));
+        Require(file.open(QIODevice::WriteOnly | QIODevice::NewOnly), "active_delay_output_exists");
+        const auto bytes = QJsonDocument(value).toJson();
+        Require(file.write(bytes) == bytes.size() && file.flush(), "active_delay_output_write");
+    }
+}
+
+enum class ProbeDelayMode { GuardDuringCapture, ConnectedSufficient, ConnectedTooShort };
+
+// The trace is produced by the real Environment/scheduler and native probe.
+// No test copy of SetDelay, recorder, or model calculation is used.
+template<class Owner> void ActiveProbeOwnership(unsigned frequency, unsigned inputs, ProbeDelayMode mode)
+{
+    constexpr bool branch = std::is_same_v<Owner, NNeuronTimeLearnerBranch>;
+    Scope scope(frequency);
+    auto owner = scope.Take<Owner>();
+    const std::string name = std::string(branch ? "Branch" : "Classic")+"_active_delay_"+
+        std::to_string(frequency)+"_M"+std::to_string(inputs)+"_"+std::to_string(int(mode));
+    StorageProfileSpec profile;
+    profile.name = name;
+    profile.frequencyHz = frequency;
+    profile.neuronBaseClass = "NSPNeuronGen";
+    const auto registered = RegisterStorageProfile(scope.storage, scope.environment, profile);
+    NativeModelSpec specification;
+    specification.branch = branch;
+    specification.frequencyHz = frequency;
+    specification.neuronClass = registered.neuronClass;
+    specification.normalization = Normalization::SynapseCount;
+    specification.editPolicy.normalization = specification.normalization;
+    specification.editPolicy.maximumCableLength = 8;
+    for (unsigned i = 0; i < inputs; ++i) {
+        specification.initialIsi.push_back(i ? .03 : .01);
+        specification.inputs.push_back({int(inputs-i), 1, 86e6});
+    }
+    const auto built = owner->ConstructNativeModel(specification);
+    ASSERT_EQ(built.status, NativeModelBuildStatus::Constructed) << built.reason;
+    scope.model->Init();
+    scope.model->Reset();
+    auto dataset = Dataset(owner);
+    auto neuron = owner->template GetComponentL<NPulseNeuron>("Neuron", true);
+    auto generator = dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1", true);
+    ASSERT_TRUE(neuron);
+    ASSERT_TRUE(generator);
+    const NmsdkTools::ModelBoundarySources ports{{&generator->Output, "burst"}};
+    const auto revision = [&] {
+        const auto identity = NmsdkTools::IdentifyModel(neuron, ports);
+        Require(identity["valid"].toBool(), "active_delay_model_identity");
+        return identity["sha256"].toString().toStdString();
+    };
+    const auto originalRevision = revision();
+    const auto parameters = owner->ReadNativeParameters();
+    const double configured = owner->Delay.GetData();
+    constexpr double duration = .2;
+    if (mode != ProbeDelayMode::GuardDuringCapture) {
+        owner->IterationGap = mode == ProbeDelayMode::ConnectedSufficient ? 5. : .05;
+        ASSERT_TRUE(dataset->Delay.SetPointer(0, &owner->IterationGap));
+        ASSERT_TRUE(dataset->Delay.IsConnected());
+    }
+    const double effective = dataset->Delay.GetData();
+    const auto sources = dataset->Delay.GetDataSources();
+    std::vector<std::vector<NativeProbeSample>> traces;
+    QJsonArray packets;
+    const unsigned attempts = mode == ProbeDelayMode::GuardDuringCapture ? 2 : 1;
+    for (unsigned attempt = 0; attempt < attempts; ++attempt) {
+        traces.emplace_back();
+        bool changedAttempted = false;
+        NativeProbeRequest request;
+        request.routing = branch ? ProbeRouting::BranchSoloBurst : ProbeRouting::ClassicBurst;
+        request.activeInput = 0;
+        request.inputId = "input0";
+        request.protocolRevision = "active-delay-ownership-v1";
+        request.baseModelRevision = originalRevision;
+        request.expectedInputIsi = specification.initialIsi;
+        request.readModelRevision = revision;
+        auto& s = request.specification;
+        s.runId = name;
+        s.trialId = name+"/trial-"+std::to_string(attempt);
+        s.sampleId = "control";
+        QJsonArray pattern;
+        for (const auto gap : specification.initialIsi) pattern.append(gap);
+        s.patternHash = NmsdkTools::CanonicalModelDataSha256(pattern).toStdString();
+        s.end = duration;
+        s.maximumSampleGap = 1./frequency;
+        s.maximumSamples = std::size_t((duration+.01)*frequency);
+        for (unsigned i = 0; i < inputs; ++i) s.expectedStimulusIds.push_back("pulse"+std::to_string(i));
+        s.windows = {{"input0", 0, .01, .15, "pulse0"}};
+        request.onSample = [&](const NativeProbeSample& sample) {
+            traces.back().push_back(sample);
+            if (attempt != 1 || changedAttempted || traces.back().size() < frequency/50) return;
+            ASSERT_EQ(owner->NativeProbeState(), NativeProbeStatus::Running);
+            ASSERT_TRUE(owner->NativeProbeOwnsControl());
+            const auto clock = scope.environment->GetTime().GetDoubleTime();
+            const auto currentRevision = revision();
+            const double during = dataset->Delay.GetData();
+            EXPECT_THROW(owner->Delay.SetData(configured+2.), UIProperty::EPropertySetterFail);
+            EXPECT_NO_THROW(owner->Delay.SetData(configured));
+            EXPECT_DOUBLE_EQ(owner->Delay.GetData(), configured);
+            EXPECT_DOUBLE_EQ(dataset->Delay.GetData(), during);
+            EXPECT_EQ(owner->ReadNativeParameters(), parameters);
+            EXPECT_EQ(revision(), currentRevision);
+            EXPECT_EQ(owner->NativeProbeState(), NativeProbeStatus::Running);
+            EXPECT_DOUBLE_EQ(scope.environment->GetTime().GetDoubleTime(), clock);
+            changedAttempted = true;
+        };
+        owner->QueueNativeProbe(std::move(request));
+        for (unsigned ticks = 0; owner->NativeProbeState() == NativeProbeStatus::Queued ||
+                                owner->NativeProbeState() == NativeProbeStatus::Running; ++ticks) {
+            ASSERT_LT(ticks, unsigned((duration+.02)*frequency));
+            scope.model->Calculate();
+            scope.environment->IncreaseModelTimeByStep();
+        }
+        const auto result = owner->TakeNativeProbeResult();
+        ASSERT_TRUE(result);
+        packets.append(EncodeNativeProbeEvidence(*result));
+        if (mode == ProbeDelayMode::ConnectedTooShort) {
+            EXPECT_EQ(result->status, NativeProbeStatus::Rejected);
+            EXPECT_TRUE(!result->observation || !result->observation->complete);
+            EXPECT_TRUE(traces.back().empty());
+        } else {
+            ASSERT_EQ(result->status, NativeProbeStatus::Completed);
+            ASSERT_TRUE(result->observation);
+            EXPECT_TRUE(result->observation->complete);
+            EXPECT_GE(traces.back().size(), unsigned(duration*frequency));
+            if (attempt == 1) EXPECT_TRUE(changedAttempted);
+        }
+        EXPECT_DOUBLE_EQ(owner->Delay.GetData(), configured);
+        EXPECT_DOUBLE_EQ(dataset->Delay.GetData(), effective);
+        EXPECT_EQ(dataset->Delay.GetDataSources(), sources);
+        EXPECT_EQ(owner->ReadNativeParameters(), parameters);
+        EXPECT_EQ(revision(), originalRevision);
+    }
+    if (mode == ProbeDelayMode::GuardDuringCapture) {
+        ASSERT_EQ(traces[0].size(), traces[1].size());
+        unsigned stimuli = 0;
+        for (std::size_t i = 0; i < traces[0].size(); ++i) {
+            const auto& a = traces[0][i];
+            const auto& b = traces[1][i];
+            EXPECT_NEAR(a.time-traces[0][0].time, b.time-traces[1][0].time, 1e-12);
+            EXPECT_DOUBLE_EQ(a.stimulus, b.stimulus);
+            ASSERT_EQ(a.potentials.size(), b.potentials.size());
+            for (std::size_t channel = 0; channel < a.potentials.size(); ++channel)
+                EXPECT_NEAR(a.potentials[channel], b.potentials[channel], 1e-12);
+            ASSERT_EQ(a.newStimuli.size(), b.newStimuli.size());
+            stimuli += unsigned(a.newStimuli.size());
+            for (std::size_t event = 0; event < a.newStimuli.size(); ++event) {
+                EXPECT_EQ(a.newStimuli[event].id, b.newStimuli[event].id);
+                EXPECT_NEAR(a.newStimuli[event].time-traces[0][0].time,
+                            b.newStimuli[event].time-traces[1][0].time, 1e-12);
+            }
+        }
+        EXPECT_EQ(stimuli, inputs);
+    } else {
+        EXPECT_DOUBLE_EQ(owner->IterationGap.GetData(), effective);
+        EXPECT_TRUE(dataset->Delay.IsConnected());
+        dataset->Delay.DetachFrom();
+    }
+    WriteActiveEvidence(name, {{"kind", "active_native_delay_ownership"}, {"schema_version", 1},
+        {"frequency_hz", int(frequency)}, {"input_count", int(inputs)}, {"mode", int(mode)},
+        {"configured_delay", configured}, {"effective_original_delay", effective}, {"packets", packets},
+        {"waveforms_compared", mode == ProbeDelayMode::GuardDuringCapture},
+        {"training_or_convergence_claimed", false}, {"scientific_verdict", QJsonValue(QJsonValue::Null)}});
+}
 }
 
 TEST(TimeLearnerDelayOwnership, ClassicLegacyCandidateAppliedImmediately) { LegacyCandidate<NNeuronTimeLearner>(); }
@@ -278,3 +454,11 @@ TEST(TimeLearnerDelayOwnership, ClassicConnectedDatasetOwnership) { ConnectedDat
 TEST(TimeLearnerDelayOwnership, BranchConnectedDatasetOwnership) { ConnectedDatasetOwnership<NNeuronTimeLearnerBranch>(); }
 TEST(TimeLearnerDelayOwnership, ClassicQueuedProbeOwnership) { QueuedProbeOwnership<NNeuronTimeLearner>(); }
 TEST(TimeLearnerDelayOwnership, BranchQueuedProbeOwnership) { QueuedProbeOwnership<NNeuronTimeLearnerBranch>(); }
+TEST(TimeLearnerDelayOwnership, ClassicActiveProbe2000M2PreservesActualTrace) { ActiveProbeOwnership<NNeuronTimeLearner>(2000, 2, ProbeDelayMode::GuardDuringCapture); }
+TEST(TimeLearnerDelayOwnership, BranchActiveProbe2000M2PreservesActualTrace) { ActiveProbeOwnership<NNeuronTimeLearnerBranch>(2000, 2, ProbeDelayMode::GuardDuringCapture); }
+TEST(TimeLearnerDelayOwnership, ClassicActiveProbe20000M4PreservesActualTrace) { ActiveProbeOwnership<NNeuronTimeLearner>(20000, 4, ProbeDelayMode::GuardDuringCapture); }
+TEST(TimeLearnerDelayOwnership, BranchActiveProbe20000M4PreservesActualTrace) { ActiveProbeOwnership<NNeuronTimeLearnerBranch>(20000, 4, ProbeDelayMode::GuardDuringCapture); }
+TEST(TimeLearnerDelayOwnership, ClassicConnectedProbeSufficientDelay) { ActiveProbeOwnership<NNeuronTimeLearner>(2000, 2, ProbeDelayMode::ConnectedSufficient); }
+TEST(TimeLearnerDelayOwnership, BranchConnectedProbeSufficientDelay) { ActiveProbeOwnership<NNeuronTimeLearnerBranch>(2000, 2, ProbeDelayMode::ConnectedSufficient); }
+TEST(TimeLearnerDelayOwnership, ClassicConnectedProbeTooShortCannotComplete) { ActiveProbeOwnership<NNeuronTimeLearner>(2000, 2, ProbeDelayMode::ConnectedTooShort); }
+TEST(TimeLearnerDelayOwnership, BranchConnectedProbeTooShortCannotComplete) { ActiveProbeOwnership<NNeuronTimeLearnerBranch>(2000, 2, ProbeDelayMode::ConnectedTooShort); }
