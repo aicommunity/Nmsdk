@@ -49,11 +49,24 @@ def _index(output, records):
     for i,row in enumerate(records,1):
         positive=next(p['name'] for p in row['positive_full_view']['files'] if p['name'].endswith('.png'))
         complete=next(p['name'] for p in row['files'] if p['name'].endswith('.png'))
-        sections.append('<section><h2>'+html.escape(row['title'])+'</h2><p>'+response_ru[row['response']]+
-            ' · '+html.escape(row['sample_id'])+'</p><figure><img src="'+positive+
-            '" alt="Полное окно положительного потенциала с входными импульсами"><figcaption>Рисунок '+str(i)+
-            '. Полный временной интервал в масштабе положительного отклика. Синий — потенциал сомы; '
-            'оранжевые линии — входные импульсы; красный пунктир — выходные импульсы.</figcaption></figure>'
+        stimuli='; '.join(format(v,'.8g') for v in row['relative_stimulus_times'])
+        spikes=row['relative_spike_times']
+        events=('Выходные импульсы зарегистрированы в моменты '+
+                '; '.join(format(v,'.8g') for v in spikes)+' с и отмечены красным пунктиром.'
+                if spikes else 'Выходные импульсы в полном окне не зарегистрированы.')
+        pattern='целевой' if row['response'] in ('TP','FN') else 'отвлекающий'
+        description=('На рисунке '+str(i)+' приведены записанные потенциалы '+str(row['soma_count'])+
+            ' участков сомы при предъявлении '+('целевого' if pattern=='целевой' else 'отвлекающего')+
+            ' паттерна '+row['sample_id']+'. Каждая панель соответствует отдельной соме; '+
+            'синяя кривая показывает её потенциал, оранжевые линии — фактические входные импульсы '+
+            'в моменты '+stimuli+' с от первого зарегистрированного входа. '+events+' '+
+            'Полное окно сохраняет поздние отклики; шкала положительного потенциала одинакова '+
+            'для одной и той же сомы во всех показанных паттернах этого примера.')
+        caption='Рисунок '+str(i)+' — '+response_ru[row['response']]+' паттерна '+row['sample_id']
+        sections.append('<section><h2>'+html.escape(row['title'])+'</h2><p>'+html.escape(description)+
+            '</p><figure><img src="'+positive+
+            '" alt="Полное окно потенциала сом с входными импульсами"><figcaption>'+html.escape(caption)+
+            '</figcaption></figure>'
             '<details><summary>Полная перезарядка и временное увеличение</summary><img src="'+complete+
             '" alt="Полный диапазон потенциала и временное увеличение"></details>'
             '<p class="identity">Модель: '+html.escape(row['model_revision'])+'</p></section>')
