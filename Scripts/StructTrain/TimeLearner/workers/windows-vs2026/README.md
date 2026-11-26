@@ -127,6 +127,21 @@ separate from scientific-worker admission and the original build outcome.
 The backend reports Job committed-memory semantics; a thread-count limit is not
 claimed. Specify the native wall/memory/process budgets for each new attempt.
 
+Validation specification version2 declares `partitions`: each has a unique
+safe name, exact `expected_test_ids` and `maximum_wall_seconds`. Their disjoint
+union must equal the complete top-level test inventory, and their wall limits
+must fit the top-level limit. Each partition uses a fresh native Job and output;
+the worker stops at the first failed or invalid group. Version1 retains its
+single-gate layout. This supports the declared SDK cohorts without combining
+tests that were intended to run in separate processes.
+
+Read-only Python observers must use `python -B` or set
+`sys.dont_write_bytecode=True` before importing SDK modules. A generated
+`__pycache__` changes the physical source namespace even when Git ignores it.
+Do not weaken namespace verification to hide such files. Reconciliation is
+allowed only after confirmed job closure and verification of every declared
+source byte; preserve the failed audit and identify each removed cache file.
+
 Actual scope on .14: Root `4eb58ccc62204c663dfe2815cda680534fb34353`, Pulse
 `f1df2500d43ecab4723d2536cd4a7ce073416feb`. The closed-build audit passed with
 4067 SDK files/eight repositories, 17287 dependency files and 62 runtime files
