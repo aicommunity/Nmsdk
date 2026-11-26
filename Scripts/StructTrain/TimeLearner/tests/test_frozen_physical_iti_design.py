@@ -107,3 +107,39 @@ class FrozenPhysicalItiDesignTest(unittest.TestCase):
             broken.pop('sha256');broken['sha256']=sha(broken)
             with self.subTest(mutation=mutation),self.assertRaises(EvidenceError):
                 declare_job(broken,'bad-condition',rotation=0,cadence='short',reset_policy='preserve_neuron_dynamics')
+
+    def test_completed_long_reset_source_keeps_its_tail_and_declares_the_same_jobs(self):
+        source, _ = self.job(run_id='source-with-native-tail', cadence='long',
+                             reset_policy='reset_per_trial')
+        before = deepcopy(source)
+        self.assertGreater(source['trials'][-1]['duration'], 2.)
+        for rotation in range(8):
+            for cadence in ('long', 'short'):
+                for policy in ('reset_per_trial', 'preserve_neuron_dynamics'):
+                    expected = self.job(rotation=rotation, cadence=cadence, reset_policy=policy)
+                    observed = declare_job(source, 'iti-declaration/a1', rotation=rotation,
+                                           cadence=cadence, reset_policy=policy)
+                    self.assertEqual(observed, expected)
+        self.assertEqual(source, before)
+
+    def test_arbitrary_tail_early_extension_and_unobserved_coverage_are_rejected(self):
+        source, _ = self.job(cadence='long', reset_policy='reset_per_trial')
+        for mutation in ('short_tail', 'extra_tail', 'early_extension', 'sample_budget', 'coverage'):
+            broken = deepcopy(source)
+            frequency = int(broken['source_model_data']['configuration']['model']['frequency_hz'])
+            if mutation in ('short_tail', 'extra_tail'):
+                change = -1 if mutation == 'short_tail' else 1
+                broken['trials'][-1]['duration'] += change/frequency
+                broken['trials'][-1]['maximum_samples'] += change
+            elif mutation == 'early_extension':
+                broken['trials'][0]['duration'] += 1/frequency
+                broken['trials'][0]['maximum_samples'] += 1
+            elif mutation == 'sample_budget':
+                broken['trials'][-1]['maximum_samples'] += 1
+            else:
+                broken['coverage_policy'] = 'per_trial_windows'
+            broken['maximum_model_ticks'] = sum(t['maximum_samples']-1 for t in broken['trials'])
+            broken.pop('sha256'); broken['sha256'] = sha(broken)
+            with self.subTest(mutation=mutation), self.assertRaises(EvidenceError):
+                declare_job(broken, 'invalid-tail', rotation=3, cadence='short',
+                            reset_policy='preserve_neuron_dynamics')

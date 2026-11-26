@@ -126,3 +126,15 @@ class FrozenFourthPulseHistoryTest(unittest.TestCase):
         self.assertEqual(other, job)
         self.assertEqual(od, design)
         self.assertEqual(identity, condition(job, design, self.runtime, threshold=self.threshold))
+
+    def test_actual_native_closing_tail_does_not_change_any_of_the16_protocols(self):
+        source, _ = cadence_job(self.original, 'completed-long-reset-source', rotation=0,
+                               cadence='long', reset_policy='reset_per_trial')
+        before = deepcopy(source)
+        for policy in ('reset_per_trial', 'preserve_neuron_dynamics'):
+            for tick in FOURTH_TICKS:
+                expected = self.job(tick, policy)
+                observed = declare_job(source, 'fourth-history/check',
+                    fourth_from_first_ticks=tick, reset_policy=policy)
+                self.assertEqual(observed, expected)
+        self.assertEqual(source, before)

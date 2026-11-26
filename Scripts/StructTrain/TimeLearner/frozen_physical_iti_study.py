@@ -17,6 +17,28 @@ from .runtime import file_record, runtime_content_identity
 PROTOCOL = 'frozen_eight_pattern_cadence_and_reset_v1'
 
 
+def _source_windows(original, frequency, last_input_ticks):
+    """Accept the historical baseline or our exact, fully observed closing tail.
+
+    The source can itself be a completed long/reset cadence control. Its final
+    observation includes two quiet seconds after the last input and the native
+    onset tick. Requiring exactly two seconds there rejects our own output.
+    This admits that one declared extension only; it does not shorten the
+    retained source or accept arbitrary windows or a preserved source history.
+    Actual observation completeness remains the source reader's responsibility.
+    """
+    trials = original['trials']
+    if all(t['duration'] == 2 for t in trials):
+        return
+    last = trials[-1]
+    ticks = max(2*frequency, last_input_ticks[last['pattern_hash']]+1+2*frequency)
+    require(original.get('coverage_policy') == 'continuous_native_stream' and
+            all(t['duration'] == 2 for t in trials[:-1]) and
+            last['duration'] == ticks/frequency and
+            last['maximum_samples'] == ticks+5,
+            'iti_requires_original_windows_or_exact_native_closing_tail')
+
+
 def declare_job(original, run_id, *, rotation, cadence, reset_policy):
     require(type(run_id) is str and bool(run_id) and type(rotation) is int and 0 <= rotation < 8 and
             cadence in ('long', 'short') and reset_policy in ('reset_per_trial', 'preserve_neuron_dynamics'),
@@ -28,7 +50,7 @@ def declare_job(original, run_id, *, rotation, cadence, reset_policy):
             len({t['pattern_hash'] for t in trials}) == 8 and
             sum(t['label'] == 'target' for t in trials) == 1 and
             sum(t['label'] == 'foil' for t in trials) == 7 and
-            all(t['reset_policy'] == 'reset_per_trial' and t['duration'] == 2 and
+            all(t['reset_policy'] == 'reset_per_trial' and
                 t['record_threshold_potential'] is True and
                 t['pattern_hash'] == sha(t['pattern_isi']) for t in trials),
             'iti_requires_complete_original_eight_pattern_reset_design')
@@ -46,6 +68,7 @@ def declare_job(original, run_id, *, rotation, cadence, reset_policy):
     # Summing their binary floats and applying ceil can add a spurious tick
     # (e.g. .01+.4+.04+.04+.2). Carry out boundary arithmetic as integer ticks.
     last_input_ticks = {t['pattern_hash']:sum(round(v*frequency) for v in t['pattern_isi']) for t in trials}
+    _source_windows(original, frequency, last_input_ticks)
     short_ticks = max(last_input_ticks.values()) + round(.2*frequency)
     short_duration = short_ticks/frequency
     require(0 < short_duration < 2, 'iti_requires_native_tick_patterns_and_shorter_cadence')
