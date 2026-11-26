@@ -1,0 +1,59 @@
+{
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/Windows8-native-transfer-fn72.json",
+    "bytes": 2494,
+    "sha256": "5e2a88f6930b6aeb8bee0cc4fb74faed94126dbc8164f5e13058e28937c4551f"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/93/93b6ba02dd01c2af65de1d06b9f139d50dfb63837db955c482052a68f97177ac",
+      "sha256": "93b6ba02dd01c2af65de1d06b9f139d50dfb63837db955c482052a68f97177ac",
+      "bytes": 17050
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ff/fff3a0c6cf8eef59779e59ba64d00893072f6ced5c791f6b0f041f093221e8e4",
+      "sha256": "fff3a0c6cf8eef59779e59ba64d00893072f6ced5c791f6b0f041f093221e8e4",
+      "bytes": 659288
+    },
+    "reader.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/34/3458ef3a4ff5a2940065ab222adf75fd4a9df67b3262788b9ec2f1bc1d15c71d",
+      "sha256": "3458ef3a4ff5a2940065ab222adf75fd4a9df67b3262788b9ec2f1bc1d15c71d",
+      "bytes": 12927
+    },
+    "producer-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/10/10d5ebf3ec9b5776aeabed3416f611a6727a3b8cec6df90b011ed3898c79fbb7",
+      "sha256": "10d5ebf3ec9b5776aeabed3416f611a6727a3b8cec6df90b011ed3898c79fbb7",
+      "bytes": 1646
+    }
+  },
+  "members": 100,
+  "all_member_bytes_and_eight_responses_independently_verified": true,
+  "counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.14285714285714285
+  },
+  "kind": "timelearner_Windows8_native_transfer_external_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "scope": "Native reconstruction and eight complete cross-host frozen responses; not a new training or a direct original DATA3 import fix"
+}
