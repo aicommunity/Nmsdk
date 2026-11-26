@@ -154,7 +154,8 @@ These checks do not establish package6 roundtrip, complete Console Train-to-Test
 cross-platform numerical equivalence or classification performance. General
 Linux managed-runner, reservation and publication support must not be inferred
 from this dedicated Windows native gate. Full compressed audit inventories and
-native primary data still require their separate Git publication; the linked
+native primary data require publication and independent restoration in the
+external M40 archive, with compact verified references in Git; the linked
 metadata receipts alone do not constitute that full archive.
 
 
