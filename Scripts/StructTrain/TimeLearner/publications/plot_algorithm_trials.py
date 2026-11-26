@@ -45,9 +45,10 @@ def physical_trial_title(observation):
 def _index(output, records):
     response_ru={'TP':'Правильное обнаружение','FP':'Ложное срабатывание',
                  'TN':'Правильное отклонение','FN':'Пропуск целевого паттерна'}
-    sections=[]
+    sections=[];sources=[]
     for i,row in enumerate(records,1):
         positive=next(p['name'] for p in row['positive_full_view']['files'] if p['name'].endswith('.png'))
+        positive_svg=next(p['name'] for p in row['positive_full_view']['files'] if p['name'].endswith('.svg'))
         complete=next(p['name'] for p in row['files'] if p['name'].endswith('.png'))
         stimuli='; '.join(format(v,'.8g') for v in row['relative_stimulus_times'])
         spikes=row['relative_spike_times']
@@ -57,31 +58,53 @@ def _index(output, records):
         pattern='целевой' if row['response'] in ('TP','FN') else 'отвлекающий'
         description=('На рисунке '+str(i)+' приведены записанные потенциалы '+str(row['soma_count'])+
             ' участков сомы при предъявлении '+('целевого' if pattern=='целевой' else 'отвлекающего')+
-            ' паттерна '+row['sample_id']+'. Каждая панель соответствует отдельной соме; '+
-            'синяя кривая показывает её потенциал, оранжевые линии — фактические входные импульсы '+
+            ' паттерна '+row['sample_id']+'. Каждая панель соответствует регистрируемому участку; '+
+            'синяя кривая показывает его потенциал, оранжевые линии — фактические входные импульсы '+
             'в моменты '+stimuli+' с от первого зарегистрированного входа. '+events+' '+
             'Полное окно сохраняет поздние отклики; шкала положительного потенциала одинакова '+
-            'для одной и той же сомы во всех показанных паттернах этого примера.')
+            'для одного участка во всех показанных паттернах этого примера.')
         caption='Рисунок '+str(i)+' — '+response_ru[row['response']]+' паттерна '+row['sample_id']
+        if spikes:
+            delta=spikes[0]-row['relative_stimulus_times'][-1]
+            relation=('через '+format(delta*1000,'.8g')+' мс после последнего входного импульса'
+                      if delta>=0 else 'за '+format(-delta*1000,'.8g')+' мс до последнего входного импульса')
+            analysis=('В полном окне зарегистрировано выходных импульсов: '+str(len(spikes))+
+                      '. Первый отмечен в '+format(spikes[0],'.8g')+' с, '+relation+'. ')
+        else:
+            analysis=('Во всём записанном окне от '+format(row['relative_begin'],'.8g')+
+                      ' до '+format(row['relative_end'],'.8g')+' с выходных импульсов нет. ')
+        maxima='; '.join(str(j+1)+': '+format(v,'.8g')+' с'
+                         for j,v in enumerate(row['recorded_soma_maximum_times']))
+        analysis+=('Впервые наибольшие записанные потенциалы участков достигнуты в моменты '+maxima+
+                   '. Времена отсчитаны от первого входного импульса. ')
+        analysis+='Результат по принятому в опыте критерию: '+response_ru[row['response']].lower()+'.'
         sections.append('<section><h2>'+html.escape(row['title'])+'</h2><p>'+html.escape(description)+
-            '</p><figure><img src="'+positive+
-            '" alt="Полное окно потенциала сом с входными импульсами"><figcaption>'+html.escape(caption)+
-            '</figcaption></figure>'
-            '<details><summary>Полная перезарядка и временное увеличение</summary><img src="'+complete+
-            '" alt="Полный диапазон потенциала и временное увеличение"></details>'
-            '<p class="identity">Модель: '+html.escape(row['model_revision'])+'</p></section>')
+            '</p><figure><a href="'+positive+'"><img src="'+positive+
+            '" alt="Потенциалы участков сомы с входными импульсами"></a><figcaption>'+html.escape(caption)+
+            '</figcaption></figure><p class="source">Источник измерений <a href="#source-'+str(i)+'">['+str(i)+']</a>.</p>'+
+            '<p>'+html.escape(analysis)+'</p>'+
+            '<p><a href="'+positive_svg+'">Векторный рисунок для увеличения</a>.</p>'+
+            '<details><summary>Полная перезарядка и временное увеличение</summary><a href="'+complete+'"><img src="'+complete+
+            '" alt="Полный диапазон потенциала и временное увеличение"></a></details>'
+            '</section>')
+        observation=row['source_observation']['path']
+        source=('Данные опыта '+row['case_id']+'. Проба '+row['trial_id']+', паттерн '+row['sample_id']+
+                '. Частота регистрации '+format(row['frequency_hz'],'.8g')+' Гц. Архив первичных данных: '+
+                row['source_primary']['object']+'. SHA-256: '+row['source_primary']['sha256']+'. ')
+        sources.append('<li id="source-'+str(i)+'">'+html.escape(source)+
+                       '<a href="../'+html.escape(observation,quote=True)+'">Исходное наблюдение</a>.</li>')
     text='''<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Фактические реакции: временные графики</title><style>
 body{max-width:1100px;margin:24px auto;padding:0 16px;font:17px/1.5 system-ui;color:#18222e}
 h1{font-size:1.7em}h2{font-size:1.2em}section{border-top:1px solid #ccd;margin-top:32px;padding-top:12px}
-figure{margin:12px 0}img{width:100%;height:auto}figcaption,.identity{font-size:.9em}.identity{overflow-wrap:anywhere;color:#52606d}
+figure{margin:12px 0}img{width:100%;height:auto}figcaption,.source{font-size:.9em}li{overflow-wrap:anywhere}
 summary{cursor:pointer;padding:8px 0}a{color:#1558a2}@media print{details{display:block}section{break-inside:avoid}}
 </style><h1>Временные графики фактических реакций</h1>
 <p>Показаны сохранённые отсчёты без прореживания. Начало отсчёта времени — первый зарегистрированный входной импульс каждой пробы.
 Масштаб потенциала одинаков для иллюстраций одного примера. Отдельный вид полного положительного отклика сохраняет поздние вершины;
 полный диапазон с перезарядкой доступен ниже каждого рисунка.</p>
-<p>Подписи ответов взяты из исходной декларации иллюстраций. Этот просмотр не пересчитывает классификацию и не подтверждает сходимость обучения.
-<a href="manifest.json">Источники, версии модели и контрольные суммы</a>.</p>'''+''.join(sections)+'</html>'
+'''+''.join(sections)+'<h2>Список источников</h2><ol>'+''.join(sources)+\
+        '</ol><p><a href="manifest.json">Технический каталог измерений и рисунков</a>.</p></html>'
     path=output/'index.html';path.write_text(text,encoding='utf-8',newline='\n')
     return dict(name=path.name,bytes=path.stat().st_size,sha256=_digest(path))
 
@@ -173,6 +196,7 @@ def render(specification, output, *, matplotlib_libs=None):
            'svg.fonttype':'none','savefig.facecolor':'white'}
     with plt.rc_context(style):
         for row,observation,times,potentials,stimuli,spikes,left,right in prepared:
+            frequency=number(observation['frequency_hz'])
             count=len(potentials)
             heading = [part for line in row['title'].splitlines()
                        for part in textwrap.wrap(line, width=66, break_on_hyphens=False)]
@@ -210,7 +234,7 @@ def render(specification, output, *, matplotlib_libs=None):
                     axis.grid(alpha=.22,linewidth=.5)
                     axis.ticklabel_format(axis='y',style='sci',scilimits=(-3,3),useMathText=True)
                     axis.set_title('Полное окно' if column==0 else 'Масштаб отклика',y=1.,pad=5)
-                    if column==0:axis.set_ylabel('Сома '+str(channel+1)+'\nусл. ед.')
+                    if column==0:axis.set_ylabel('Участок '+str(channel+1)+'\nусл. ед.')
                     if channel+1==count:axis.set_xlabel('Время от первого импульса, с')
                     input_axis=axis.twinx();input_axis.set_ylim(0,1.25);input_axis.set_yticks([])
                     input_axis.vlines(stimuli,0,1,color='#df7b20',linewidth=.9,alpha=.8,zorder=2)
@@ -236,7 +260,7 @@ def render(specification, output, *, matplotlib_libs=None):
                 axis.set_xlim(left,right);axis.set_ylim(low-.05*span,high+.08*span)
                 axis.grid(alpha=.22,linewidth=.5)
                 axis.ticklabel_format(axis='y',style='sci',scilimits=(-3,3),useMathText=True)
-                axis.set_ylabel('Сома '+str(channel+1)+'\nусл. ед.')
+                axis.set_ylabel('Участок '+str(channel+1)+'\nусл. ед.')
                 if channel==0:axis.set_title('Положительный отклик — полное окно',y=1.,pad=5)
                 if channel+1==count:axis.set_xlabel('Время от первого импульса, с')
                 input_axis=axis.twinx();input_axis.set_ylim(0,1.25);input_axis.set_yticks([])
@@ -255,6 +279,8 @@ def render(specification, output, *, matplotlib_libs=None):
                 source_primary=row['primary'],source_observation=row['observation'],
                 model_revision=row['model_revision'],onset=observation['stimulus_onset'],
                 relative_stimulus_times=stimuli,relative_spike_times=spikes,
+                relative_begin=left,relative_end=right,frequency_hz=frequency,
+                recorded_soma_maximum_times=peak_times,
                 soma_count=count,limits_scope='all declared illustrated trials of this case',
                 response_limits_scope='right panels: above recorded initial level; shared within case and channel; full recharge remains in left panels',
                 positive_full_view=dict(full_observation_window=True,late_positive_lobes_retained=True,
