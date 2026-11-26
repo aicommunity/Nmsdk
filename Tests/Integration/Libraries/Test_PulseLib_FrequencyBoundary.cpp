@@ -5,6 +5,7 @@
 #include "NPulseSynapse.h"
 #include "NPulseLTZoneCommon.h"
 #include "NPulseGenerator.h"
+#include "NDatasetMatrix.h"
 #include "TimeLearner/NativeModelBuilder.h"
 #include "TimeLearner/ModelInspection.h"
 #include "TimeLearner/ModelIdentity.h"
@@ -126,6 +127,10 @@ protected:
         model->SetGlobalTimeStep(previousFrequency);
         auto warm=BuildOwner("Warm",initial);ASSERT_NE(model->AddComponent(warm),ForbiddenId);
         model->Init();environment->GetTime().SetTime(0);model->Reset();
+        // Native construction leaves playback stopped. Arm the declared burst
+        // at the measurement boundary, before the scheduler calculates children.
+        auto warmDataset=warm->GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+        ASSERT_TRUE(warmDataset);warmDataset->StateGeneration=1;
         auto warmNeuron=warm->GetComponentL<NPulseNeuron>("Neuron",true);
         auto warmSource=warm->GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
         ASSERT_TRUE(warmNeuron);ASSERT_TRUE(warmSource);
@@ -146,12 +151,12 @@ protected:
             }
             warming<<'\n';
         }
+        Artifact(name+"_warm.csv",QByteArray::fromStdString(warming.str()));
         ASSERT_GE(oldEdges,2u);
         double warmPotentialRange=0.;
         for(std::size_t k=0;k<a.size();++k)if(a[k].name.find("SumPotential")!=std::string::npos)
             warmPotentialRange=std::max(warmPotentialRange,warmHigh[k]-warmLow[k]);
         ASSERT_GT(warmPotentialRange,1e-8) << "a flat warm model cannot test resetting real dynamics";
-        Artifact(name+"_warm.csv",QByteArray::fromStdString(warming.str()));
         // Fresh target graph is built detached at f. It never calculates at f0.
         auto target=initial;target.frequencyHz=targetFrequency;fresh=BuildOwner("Fresh",target);
         model->SetGlobalTimeStep(targetFrequency);
@@ -160,6 +165,8 @@ protected:
         // This is the ordinary physical-model boundary. No learner Build,
         // parameter self-assignment or nested Calculate repairs the transition.
         environment->GetTime().SetTime(0);model->Reset();
+        auto freshDataset=fresh->GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+        ASSERT_TRUE(freshDataset);warmDataset->StateGeneration=1;freshDataset->StateGeneration=1;
         CheckRate(warm,targetFrequency);CheckRate(fresh,targetFrequency);ASSERT_FALSE(HasFatalFailure());
         auto freshNeuron=fresh->GetComponentL<NPulseNeuron>("Neuron",true);
         auto freshSource=fresh->GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
