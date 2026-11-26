@@ -58,16 +58,15 @@ TEST(ClassicInputRoundRobin, RepetitionsAndAnchorInputPairsCloseBeforeYield)
     EXPECT_EQ(session.Status(),TrainingStatus::Exact);
 }
 
-TEST(ClassicInputRoundRobin, GlobalOddProbeBudgetCannotBeReplenishedAtInputSwitch)
+TEST(ClassicInputRoundRobin, InsufficientBudgetCannotStageAnUnmeasuredSelection)
 {
     const auto protocol=Protocol(4);auto config=RoundRobin();config.maximumProbes=7;
     BoundedTrainingSession session(References(protocol),config,std::vector<InputParameters>(4,{1,1,10.}));
     DriveTraining(session,protocol);
-    ASSERT_EQ(session.Evidence().size(),3u);
-    for(std::size_t i=0;i<3;++i)EXPECT_EQ(session.Evidence()[i].inputIndex,i);
-    EXPECT_EQ(session.IssuedProbes(),6u);EXPECT_EQ(session.AppliedEdits(),0u);
+    EXPECT_TRUE(session.Evidence().empty());
+    EXPECT_EQ(session.IssuedProbes(),0u);EXPECT_EQ(session.AppliedEdits(),0u);
     EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
-    EXPECT_EQ(session.Reason(),"candidate_probe_pair_budget_exhausted");
+    EXPECT_EQ(session.Reason(),"cyclic_selection_has_no_admissible_proposal");
     EXPECT_FALSE(session.Certificate());
 }
 
@@ -190,15 +189,20 @@ TEST(ClassicInputRoundRobin, CapacitanceContextsRemainFiniteAcrossInputSwitches)
         {{"Dendrite1_1",.95},{"Dendrite1_3",.97},{"Dendrite2_1",1.05},
          {"Dendrite3_1",.9},{"Dendrite4_1",1.1}}};
     BoundedTrainingSession session(References(protocol),config,std::vector<InputParameters>(4,{1,1,10.}),false,initial);
-    std::map<std::size_t,std::size_t> measured;
+    std::map<std::size_t,std::size_t> measured,rechecks,restores;
     DriveTraining(session,protocol,[&](const auto& action,auto&,auto&) {
         ASSERT_TRUE(action.capacitance);EXPECT_EQ(action.capacitance->origin,initial.origin);
         EXPECT_EQ(action.capacitance->membraneScales.at("Dendrite1_3"),.97);
         EXPECT_EQ(action.capacitance->membraneScales.at("Dendrite4_1"),1.1);
-        if(!action.finalVerification && action.inputIndex<3)++measured[action.inputIndex];
+        if(!action.finalVerification && action.inputIndex<3) {
+            if(action.purpose==TrainingMeasurementPurpose::Exploration)++measured[action.inputIndex];
+            if(action.purpose==TrainingMeasurementPurpose::ProposalRecheck)++rechecks[action.inputIndex];
+            if(action.purpose==TrainingMeasurementPurpose::SelectedStateRestore)++restores[action.inputIndex];
+        }
     });
     for(std::size_t i=0;i<3;++i)
-    {EXPECT_GT(measured[i],0u);EXPECT_LE(measured[i],config.maximumCandidatesPerInput+1);}
+    {EXPECT_GT(measured[i],0u);EXPECT_LE(measured[i],config.maximumCandidatesPerInput);
+     EXPECT_LE(rechecks[i],config.maximumCandidatesPerInput);EXPECT_LE(restores[i],1u);}
     EXPECT_NE(session.Status(),TrainingStatus::Exact);
     EXPECT_LE(session.AppliedEdits(),config.maximumEdits);
 }
@@ -306,6 +310,92 @@ TEST(ClassicInputRoundRobin, EarlierVisitBestRemainsARecheckProposalN0)
 {EarlierVisitBestMustRemainARecheckProposal(Normalization::SynapseCount);}
 TEST(ClassicInputRoundRobin, EarlierVisitBestRemainsARecheckProposalN1)
 {EarlierVisitBestMustRemainARecheckProposal(Normalization::TipResistance);}
+
+TEST(ClassicInputRoundRobin, EarlierCoordinatesCompeteOnlyAfterFreshMeasurementInChangedBackground)
+{
+    const auto protocol=Protocol(3);auto config=RoundRobin(3);
+    config.candidatesPerInputVisit=3;config.maximumCandidatesPerInput=6;
+    config.bounds.assign(3,{1,6,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,std::vector<InputParameters>(3,{1,1,10.}));
+    bool oldPointRemeasured=false,newPointRemeasured=false;
+    DriveTraining(session,protocol,[&](const auto& action,auto& delay,auto& raw) {
+        const int a=action.parameters[0].length,b=action.parameters[1].length;
+        delay[0]=a==2 && b<=3?.23:a==4?.215:.03;
+        delay[1]=b==6?.13:.03;
+        raw[0]+=.0001;raw[1]+=.0001;
+        if(action.inputIndex==0 && action.purpose==TrainingMeasurementPurpose::ProposalRecheck) {
+            EXPECT_EQ(b,6);oldPointRemeasured|=a==2;newPointRemeasured|=a==4;
+        }
+    });
+    EXPECT_TRUE(oldPointRemeasured);EXPECT_TRUE(newPointRemeasured);
+    EXPECT_EQ(session.Parameters()[0].length,4);EXPECT_EQ(session.Parameters()[1].length,6);
+    EXPECT_NE(session.Status(),TrainingStatus::Exact);
+}
+
+TEST(ClassicInputRoundRobin, SelectionReservesFiniteGlobalBudgetsAtQuantumOneAndThree)
+{
+    for(const std::size_t quantum:{1u,3u})for(const std::size_t limit:{7u,17u,23u,31u,39u,45u,60u})
+    {
+        const auto protocol=Protocol(3);auto config=RoundRobin(3);
+        config.candidatesPerInputVisit=quantum;config.maximumCandidatesPerInput=6;
+        config.maximumProbes=limit;config.bounds.assign(3,{1,6,1,1,10.,10.});
+        BoundedTrainingSession session(References(protocol),config,std::vector<InputParameters>(3,{1,1,10.}));
+        std::size_t observed=0;std::set<std::size_t> explored;
+        DriveTraining(session,protocol,[&](const auto& action,auto&,auto& raw) {
+            ++observed;for(auto& value:raw)value+=.0001;
+            if(action.inputIndex<2 && action.purpose==TrainingMeasurementPurpose::Exploration)
+                explored.insert(action.inputIndex);
+        });
+        EXPECT_EQ(session.IssuedProbes(),observed);EXPECT_LE(observed,limit);
+        EXPECT_LE(session.AppliedEdits(),config.maximumEdits);
+        if(limit>=31)EXPECT_EQ(explored,(std::set<std::size_t>{0,1}));
+        EXPECT_NE(session.Status(),TrainingStatus::Exact);
+        if(session.Certificate())EXPECT_FALSE(session.Certificate()->Exact());
+    }
+}
+
+TEST(ClassicInputRoundRobin, RetainedProposalRechecksRepeatEveryAnchorInputPair)
+{
+    const auto protocol=Protocol(3);auto config=RoundRobin(3);
+    config.n0CandidateRepeats=2;config.candidatesPerInputVisit=1;
+    config.maximumCandidatesPerInput=4;config.bounds.assign(3,{1,4,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,std::vector<InputParameters>(3,{1,1,10.}));
+    DriveTraining(session,protocol,[&](const auto& action,auto&,auto& raw) {
+        if(action.inputIndex<2)raw[action.inputIndex]+=.0001;
+    });
+    std::size_t rechecked=0;
+    for(const auto& e:session.Evidence())if(e.purpose==TrainingMeasurementPurpose::ProposalRecheck)++rechecked;
+    EXPECT_GT(rechecked,0u);
+    for(const auto& group:session.CandidateRepeats()) {
+        EXPECT_TRUE(group.complete);EXPECT_EQ(group.trialIds.size(),2u);EXPECT_EQ(group.anchorTrialIds.size(),2u);
+    }
+    EXPECT_LE(session.IssuedProbes(),config.maximumProbes);EXPECT_NE(session.Status(),TrainingStatus::Exact);
+}
+
+TEST(ClassicInputRoundRobin, HistoricalN1CoordinatesCannotBorrowAnOldResistanceDomain)
+{
+    const auto protocol=Protocol(3);auto config=RoundRobin(3);
+    config.normalization=Normalization::TipResistance;config.maximumCandidatesPerInput=4;
+    config.bounds.assign(3,{1,3,1,1,1.,100.});
+    BoundedTrainingSession session(References(protocol),config,std::vector<InputParameters>(3,{1,1,10.}),true);
+    std::size_t freshDomains=0,rechecked=0;
+    DriveTraining(session,protocol,[&](const auto& action,auto&,auto&) {
+        if(action.purpose==TrainingMeasurementPurpose::ProposalRecheck)++rechecked;
+    },[&](const auto& action) {
+        ResistanceDomainAssessment domain;domain.status=ResistanceDomainStatus::Available;
+        domain.baseModelRevision=action.baseModelRevision;domain.geometry=action.parameters;
+        domain.capacitance=action.capacitance;domain.inputIndex=action.inputIndex;domain.sourceAmplitude=1.;
+        domain.previewModelRevision="selection-preview/"+std::to_string(action.serial);
+        const bool selection=action.purpose!=TrainingMeasurementPurpose::Exploration;
+        if(selection)++freshDomains;
+        domain.minimumResistance=selection?25.:1.;domain.maximumResistance=selection?75.:100.;return domain;
+    });
+    EXPECT_GT(freshDomains,0u);EXPECT_EQ(rechecked,0u);
+    EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);EXPECT_FALSE(session.Certificate());
+    EXPECT_TRUE(std::any_of(session.Rejected().begin(),session.Rejected().end(),[](const auto& r) {
+        return r.reason=="proposal_selection:historical_resistance_outside_fresh_domain";
+    }));
+}
 
 TEST(InputTraversalCodec, OmissionResetsTheOldPolicyWithoutInventingFields)
 {
