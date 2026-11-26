@@ -4,7 +4,7 @@
 #include "NPulseMembraneCommon.h"
 #include "NPulseSynapse.h"
 #include "NPulseLTZoneCommon.h"
-#include "NPulseGeneratorTransit.h"
+#include "NPulseGenerator.h"
 #include "TimeLearner/NativeModelBuilder.h"
 #include "TimeLearner/ModelInspection.h"
 #include "TimeLearner/ModelIdentity.h"
