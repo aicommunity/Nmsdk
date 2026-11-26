@@ -10,7 +10,8 @@ from .runtime import file_record
 
 def run_declared_case(declaration, runtime_path, output, *, run_id, study,
                       declare_job, bind_condition, expected_trials, protocol_id,
-                      result_kind, maximum_wall_seconds, process_policy):
+                      result_kind, maximum_wall_seconds, process_policy,
+                      job_source_transport=None):
     from pathlib import Path
     from .frozen_physical_source import frozen_physical_source
     from .native_calibration_worker import _write
@@ -35,7 +36,8 @@ def run_declared_case(declaration, runtime_path, output, *, run_id, study,
         _write(output/'design.json',design)
         _write(output/'condition.json',binding)
         run = run_job('physical-model-evaluate',output/'job.json',source['model_path'],
-            runtime_path,output/'run',maximum_wall_seconds,process_policy=process_policy)
+            runtime_path,output/'run',maximum_wall_seconds,process_policy=process_policy,
+            job_source_transport=job_source_transport)
         require(run['execution'] == 'completed' and run['validity'] == 'valid', 'frozen_study_native_run_incomplete')
         metrics = run['analysis']['metrics']
         require(run['analysis']['frozen_model_verified'] and

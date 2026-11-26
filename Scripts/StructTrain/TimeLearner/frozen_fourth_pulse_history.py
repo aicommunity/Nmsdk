@@ -108,8 +108,10 @@ def condition(job, design, runtime, *, threshold):
 def run_case(declaration, runtime_path, output, *, run_id, fourth_from_first_ticks,
              reset_policy, maximum_wall_seconds, process_policy):
     from .frozen_physical_trial_study import run_declared_case
+    from .job_source_transport import TRANSPORT
     return run_declared_case(declaration, runtime_path, output, run_id=run_id,
         study=dict(fourth_from_first_ticks=fourth_from_first_ticks, reset_policy=reset_policy),
         declare_job=declare_job, bind_condition=condition, expected_trials=8,
         protocol_id=PROTOCOL, result_kind='timelearner_frozen_fourth_history_result',
-        maximum_wall_seconds=maximum_wall_seconds, process_policy=process_policy)
+        maximum_wall_seconds=maximum_wall_seconds, process_policy=process_policy,
+        job_source_transport=TRANSPORT)
