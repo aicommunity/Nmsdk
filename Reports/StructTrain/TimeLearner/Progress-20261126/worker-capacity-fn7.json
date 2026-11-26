@@ -1,0 +1,60 @@
+{
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/worker-capacity-fn6.json",
+    "sha256": "02dc9a2c3a3fcc50585c74d8f390a01a2ada0c51ab8f02b437582e5544884e30",
+    "bytes": 1495
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/1f/1fe737bcbca0b379fcc4e6823f2a249d95597ef2c485786b072d7f67ce12b192",
+      "sha256": "1fe737bcbca0b379fcc4e6823f2a249d95597ef2c485786b072d7f67ce12b192",
+      "bytes": 2391
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/9c/9ce990a04b9f0cb5170d913ac5da15e374c59bca3a1873ec9fb74a872f5b1883",
+      "sha256": "9ce990a04b9f0cb5170d913ac5da15e374c59bca3a1873ec9fb74a872f5b1883",
+      "bytes": 18360
+    },
+    "independent-reader.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b0/b0d1246592e8546a545178cf9736a5959e42b1c589c7f619322b82e6ac114856",
+      "sha256": "b0d1246592e8546a545178cf9736a5959e42b1c589c7f619322b82e6ac114856",
+      "bytes": 734
+    }
+  },
+  "members": 11,
+  "all_member_hashes_verified": true,
+  "kind": "timelearner_worker_capacity_assessment_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "cpu_sample_scope_seconds": 2,
+  "scientific_verdict": null,
+  "new_native_experiments_started": false,
+  "active_jobs_modified": false,
+  "observed_running_compute_hosts": 3,
+  "Windows8_scientific_admission_pending": true,
+  "additional_machines_user_reported_approximate": [
+    {
+      "os": "Ubuntu 22.04",
+      "RAM_GB": 32,
+      "CPU": "i5",
+      "reported_cores": 4
+    },
+    {
+      "os": "Ubuntu 22.04",
+      "RAM_GB": 32,
+      "CPU": "Xeon",
+      "reported_cores": 28
+    }
+  ],
+  "additional_machines_measured": false,
+  "full_plan_complete": false
+}

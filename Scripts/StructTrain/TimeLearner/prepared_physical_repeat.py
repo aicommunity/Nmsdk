@@ -28,16 +28,17 @@ def _closed_evaluation(controls):
     from .job_source_transport import verify_envelope
     from .model_identity import canonical_model_sha256 as sha
     from .native_pipeline_worker import audit_execution, validate_job
-    from .prepared_physical_evaluation import _inventory
+    from .prepared_physical_evaluation import _inventory, worker_root
     from .windows_stopped_recognition_study import _kernel, live
 
     controls = Path(controls).resolve(strict=True)
-    require(os.name == 'nt' and controls.parent == BASE/'controls', 'physical_repeat_source_scope')
     spec = load(controls/'specification.json')
+    base = worker_root(spec, explicit_schema=2, legacy_schemas=(1,))
+    require(os.name == 'nt' and controls.parent == base/'controls', 'physical_repeat_source_scope')
     require(spec['kind'] == 'timelearner_prepared_physical_evaluation' and
-            spec['schema_version'] == 1, 'physical_repeat_source_kind')
+            spec['schema_version'] in (1, 2), 'physical_repeat_source_kind')
     inputs, output = Path(spec['inputs']), Path(spec['output'])
-    require(inputs.parent == output.parent == BASE/'jobs' and
+    require(inputs.parent == output.parent == base/'jobs' and
             inputs.resolve(strict=True) == inputs and output.resolve(strict=True) == output,
             'physical_repeat_source_paths')
     require(_inventory(inputs) == spec['input_inventory'], 'physical_repeat_source_inputs_changed')
@@ -82,15 +83,20 @@ def prepare(declaration):
     from .owned_python_job import _source_snapshot
 
     fields = {'kind', 'schema_version', 'source_controls', 'run_id', 'python_source', 'python_root'}
-    require(type(declaration) is dict and set(declaration) == fields and
+    version = declaration.get('schema_version') if type(declaration) is dict else None
+    require(type(declaration) is dict and
+            set(declaration) == fields | ({'worker_root'} if version == 2 else set()) and
             declaration['kind'] == 'timelearner_physical_repeat_preparation' and
-            type(declaration['schema_version']) is int and declaration['schema_version'] == 1,
+            type(version) is int and version in (1, 2),
             'physical_repeat_preparation_schema')
+    base = evaluation.worker_root(declaration, explicit_schema=2, legacy_schemas=(1,))
     actor = Path(declaration['python_source']).resolve(strict=True)
     require(Path(__file__).resolve(strict=True) == actor/'Scripts/StructTrain/TimeLearner/prepared_physical_repeat.py',
             'physical_repeat_actor_mismatch')
     _source_snapshot(actor, declaration['python_root'])
     source = _closed_evaluation(declaration['source_controls'])
+    require(Path(declaration['source_controls']).resolve(strict=True).parent == base/'controls',
+            'physical_repeat_source_worker_changed')
     job = deepcopy(source['job'])
     job.pop('sha256'); job.pop('source_model_data')
     job['run_id'] = declaration['run_id']
@@ -102,11 +108,14 @@ def prepare(declaration):
                 sdk_source=source['spec']['sdk_source'], worker_origin=dict(root_commit=declaration['python_root'],
                 path='Scripts/StructTrain/TimeLearner/prepared_physical_evaluation.py',
                 sha256=file_record(Path(evaluation.__file__))['sha256']), job=job)
+    if version == 2:
+        plan.update(schema_version=3, worker_root=str(base), execution_limits={
+            k: source['spec'][k] for k in ('memory_bytes', 'maximum_wall_seconds')})
     # Let the production preparer validate all scopes before creating controls.
     name = job['run_id']
     require(type(name) is str and 1 <= len(name) <= 100 and
             all(c in 'abcdefghijklmnopqrstuvwxyz0123456789-_' for c in name), 'physical_repeat_run_id')
-    plan_path = BASE/'controls'/(name+'-repeat-plan.json')
+    plan_path = base/'controls'/(name+'-repeat-plan.json')
     require(not plan_path.exists(), 'physical_repeat_plan_exists')
     _write(plan_path, plan)
     controls = evaluation.prepare(plan_path)

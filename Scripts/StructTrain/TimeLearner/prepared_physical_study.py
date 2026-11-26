@@ -117,7 +117,7 @@ def _source(controls):
 def preparation_limits(declaration):
     """Version 1 keeps its limits; version 2 binds explicit native budgets."""
     version = declaration.get('schema_version')
-    require(type(version) is int and version in (1, 2), 'physical_study_preparation_schema')
+    require(type(version) is int and version in (1, 2, 3), 'physical_study_preparation_schema')
     if version == 1:
         require('execution_limits' not in declaration, 'physical_study_preparation_schema')
         return 4*1024**3, 7200
@@ -130,15 +130,18 @@ def preparation_limits(declaration):
 
 
 def prepare(declaration):
+    from .prepared_physical_evaluation import worker_root
     fields = {'kind', 'schema_version', 'source_controls', 'destination', 'inputs', 'output',
         'run_id', 'study', 'python_source', 'python_root'}
+    version = declaration.get('schema_version') if type(declaration) is dict else None
     require(type(declaration) is dict and
-        set(declaration) == fields | ({'execution_limits'} if declaration.get('schema_version') == 2 else set()) and
+        set(declaration) == fields | ({'execution_limits'} if version in (2, 3) else set()) |
+            ({'worker_root'} if version == 3 else set()) and
         declaration['kind'] == 'timelearner_physical_study_preparation' and
-        type(declaration['schema_version']) is int and declaration['schema_version'] in (1, 2),
+        type(version) is int and version in (1, 2, 3),
         'physical_study_preparation_schema')
     memory_bytes, wall_seconds = preparation_limits(declaration)
-    base = Path('C:/Projects/TimeLearnerWorker').resolve(strict=True)
+    base = worker_root(declaration, explicit_schema=3, legacy_schemas=(1, 2))
     actor = Path(declaration['python_source']).resolve(strict=True)
     destination = Path(declaration['destination']).resolve(strict=True)
     inputs, output = [Path(declaration[n]).absolute() for n in ('inputs', 'output')]
@@ -147,10 +150,15 @@ def prepare(declaration):
         not inputs.exists() and not output.exists(), 'physical_study_fresh_worker_paths')
     _actor(actor, declaration['python_root'])
     source = _source(declaration['source_controls'])
+    require(Path(declaration['source_controls']).resolve(strict=True).is_relative_to(base/'controls'),
+        'physical_study_source_worker_changed')
     job, design, identity = declare(source['job'], declaration['run_id'], declaration['study'], source['runtime'],
         threshold=source['metrics']['effective_threshold'], memory_bytes=memory_bytes, wall_seconds=wall_seconds)
     require(job['source_model_data'] == source['model'], 'physical_study_declaration_changed_model')
     inputs.mkdir(parents=True); os.link(source['model_path'], inputs/'model.json'); _write(inputs/'job.json', job)
+    if version == 3:
+        from .job_source_transport import make_envelope
+        _write(inputs/'native-job-source.json', make_envelope(job, inputs/'model.json', inputs))
     _write(destination/'design.json', design); _write(destination/'condition.json', identity)
     runtime = source['runtime']
     from .runtime import runtime_content_identity, digest_json
@@ -159,7 +167,9 @@ def prepare(declaration):
     runtime['windows_backend'] = backend; runtime['runtime_identity'] = runtime_content_identity(runtime)
     runtime['runtime_fingerprint'] = digest_json(runtime['runtime_identity']); _write(destination/'runtime.json', runtime)
     worker = actor/'Scripts/StructTrain/TimeLearner/prepared_physical_study.py'
-    spec = dict(kind='timelearner_prepared_physical_study', schema_version=1, python_source=str(actor),
+    spec = dict(kind='timelearner_prepared_physical_study', schema_version=2 if version == 3 else 1,
+        **({'worker_root': str(base), 'job_source_transport': 'checked-file-source-v1'} if version == 3 else {}),
+        python_source=str(actor),
         python_root=declaration['python_root'], sdk_source=source['spec']['sdk_source'], inputs=str(inputs),
         output=str(output), worker_sha256=file_record(worker)['sha256'], source_controls=declaration['source_controls'],
         source_records=source['records'], study=declaration['study'], run_id=declaration['run_id'],
@@ -185,12 +195,13 @@ def run(controls):
     from .runtime import source_closure
     from .windows_process import execute
     from .trial_response_comparison import trial_response_comparison
+    from .prepared_physical_evaluation import worker_root
     controls = Path(controls).resolve(strict=True); spec = json.loads((controls/'specification.json').read_bytes())
     require(os.name == 'nt' and spec['kind'] == 'timelearner_prepared_physical_study' and
-        spec['schema_version'] == 1 and file_record(Path(__file__))['sha256'] == spec['worker_sha256'],
+        spec['schema_version'] in (1, 2) and file_record(Path(__file__))['sha256'] == spec['worker_sha256'],
         'physical_study_worker_changed')
     _actor(Path(spec['python_source']).resolve(strict=True), spec['python_root'])
-    base = Path('C:/Projects/TimeLearnerWorker').resolve(strict=True)
+    base = worker_root(spec, explicit_schema=2, legacy_schemas=(1,))
     inputs = Path(spec['inputs']).resolve(strict=True); output = Path(spec['output']).absolute()
     require(controls.is_relative_to(base/'controls') and inputs.is_relative_to(base/'jobs') and
         output.is_relative_to(base/'jobs') and not output.exists() and
@@ -213,6 +224,12 @@ def run(controls):
         json.loads((controls/'design.json').read_bytes()) == design and
         identity == json.loads((controls/'condition.json').read_bytes()) and
         identity['condition_fingerprint'] == spec['condition_fingerprint'], 'physical_study_predeclared_job_changed')
+    job_path = inputs/'job.json'
+    if spec['schema_version'] == 2:
+        from .job_source_transport import verify_envelope
+        require(spec['job_source_transport'] == 'checked-file-source-v1', 'physical_study_source_transport')
+        job_path = inputs/'native-job-source.json'
+        verify_envelope(json.loads(job_path.read_bytes()), job, inputs/'model.json', inputs)
     validate_job('physical-model-evaluate', job, (model,)); output.mkdir(parents=True)
     try:
         _write(output/'preflight.json', inspect_native_cli(runtime, ['physical-model-evaluate'],
@@ -230,7 +247,7 @@ def run(controls):
                 except FileNotFoundError: pass
             require(total <= spec['maximum_output_bytes'], 'physical_study_output_budget')
         args = ['--app-ini', runtime['app_ini']['path'], '--timelearner-physical-model-evaluate',
-            str(inputs/'job.json'), '--timelearner-output', str(output/'native')]
+            str(job_path), '--timelearner-output', str(output/'native')]
         with _environment({k: runtime['loader_environment'].get(k) for k in ('PATH','QT_PLUGIN_PATH','QT_QPA_PLATFORM')}):
             process = execute(runtime, args, Path(runtime['executable']['path']).parent, output/'process',
                 memory_bytes=spec['memory_bytes'], maximum_processes=64,

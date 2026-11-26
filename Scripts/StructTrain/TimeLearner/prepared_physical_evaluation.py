@@ -7,7 +7,7 @@ does not transfer a Train certificate or establish threshold calibration.
 import argparse
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import shutil
 import time
 
@@ -18,16 +18,39 @@ from .runtime import file_record, source_closure
 BASE = Path('C:/Projects/TimeLearnerWorker')
 
 
+def worker_root(document, *, explicit_schema, legacy_schemas):
+    """Bind a new worker tree explicitly; retain the original C tree for old jobs."""
+    version = document.get('schema_version')
+    require(type(version) is int and version in (*legacy_schemas, explicit_schema),
+            'physical_worker_root_schema')
+    if version == explicit_schema:
+        value = document.get('worker_root')
+        require(type(value) is str and bool(value), 'physical_worker_root_required')
+    else:
+        require('worker_root' not in document, 'physical_legacy_worker_root_override')
+        value = str(BASE)
+    logical = PureWindowsPath(value)
+    require(logical.is_absolute() and len(logical.drive) == 2 and logical.drive[1] == ':' and
+            logical != PureWindowsPath(logical.anchor) and '..' not in logical.parts,
+            'physical_worker_root_must_be_local_absolute_tree')
+    root = Path(value)
+    require(os.name == 'nt' and root.is_dir() and root.resolve(strict=True) == root and
+            not any(p.is_symlink() or getattr(p, 'is_junction', lambda: False)()
+                    for p in (root, *root.parents)), 'physical_worker_root_alias_or_missing')
+    return root
+
+
 def evaluation_limits(plan):
     """Keep legacy limits; version 2 must declare both execution budgets."""
     fields = {'kind', 'schema_version', 'job_id', 'source_data',
               'runtime_manifest', 'sdk_source', 'worker_origin', 'job'}
     version = plan.get('schema_version') if type(plan) is dict else None
-    require(type(version) is int and version in (1, 2) and
-            set(plan) == fields | ({'execution_limits'} if version == 2 else set()) and
+    require(type(version) is int and version in (1, 2, 3) and
+            set(plan) == fields | ({'execution_limits'} if version in (2, 3) else set()) |
+                ({'worker_root'} if version == 3 else set()) and
             plan['kind'] == 'timelearner_prepared_physical_evaluation_plan',
             'physical_evaluation_preparation_scope')
-    limits = plan['execution_limits'] if version == 2 else dict(
+    limits = plan['execution_limits'] if version in (2, 3) else dict(
         memory_bytes=8*1024**3, maximum_wall_seconds=3600)
     require(type(limits) is dict and set(limits) == {'memory_bytes', 'maximum_wall_seconds'} and
             type(limits['memory_bytes']) is int and 4*1024**3 <= limits['memory_bytes'] <= 16*1024**3 and
@@ -64,16 +87,16 @@ def prepare(plan_path):
     plan = json.loads(plan_path.read_bytes())
     limits = evaluation_limits(plan)
     require(os.name == 'nt', 'physical_evaluation_preparation_platform')
+    base = worker_root(plan, explicit_schema=3, legacy_schemas=(1, 2))
     name = plan['job_id']
     require(type(name) is str and 1 <= len(name) <= 100 and
             all(c in 'abcdefghijklmnopqrstuvwxyz0123456789-_' for c in name), 'physical_evaluation_job_id')
-    require(BASE.resolve(strict=True) == BASE, 'physical_evaluation_base_alias')
-    controls, inputs, output = BASE/'controls'/name, BASE/'jobs'/(name+'-inputs'), BASE/'jobs'/name
+    controls, inputs, output = base/'controls'/name, base/'jobs'/(name+'-inputs'), base/'jobs'/name
     require(all(p.parent.resolve(strict=True) == p.parent and not p.exists() and not p.is_symlink()
                 for p in (controls, inputs, output)), 'physical_evaluation_fresh_paths_required')
     source_path = Path(plan['source_data']['path']).resolve(strict=True)
     runtime_path = Path(plan['runtime_manifest']['path']).resolve(strict=True)
-    require(source_path.is_relative_to(BASE/'jobs') and
+    require(source_path.is_relative_to(base/'jobs') and
             file_record(source_path) == plan['source_data'] and
             file_record(runtime_path) == plan['runtime_manifest'], 'physical_evaluation_source_changed')
     model = json.loads(source_path.read_bytes())
@@ -99,7 +122,9 @@ def prepare(plan_path):
     (controls/'worker.py').write_bytes(Path(__file__).read_bytes())
     _write(controls/'runtime.json', runtime)
     _write(controls/'specification.json', dict(kind='timelearner_prepared_physical_evaluation',
-        schema_version=1, job_id=name, sdk_source=str(sdk), worker_origin=plan['worker_origin'],
+        schema_version=2 if plan['schema_version'] == 3 else 1,
+        **({'worker_root': str(base)} if plan['schema_version'] == 3 else {}),
+        job_id=name, sdk_source=str(sdk), worker_origin=plan['worker_origin'],
         worker_sha256=file_record(controls/'worker.py')['sha256'], source_data=plan['source_data'],
         source_runtime=plan['runtime_manifest'], preparation_plan=before, inputs=str(inputs), output=str(output),
         input_inventory=_inventory(inputs), resolved_job_sha256=job['sha256'],
@@ -126,12 +151,13 @@ def run(controls, *, cancel_file=None):
 
     controls = Path(controls).resolve(strict=True)
     spec = json.loads((controls/'specification.json').read_bytes())
+    base = worker_root(spec, explicit_schema=2, legacy_schemas=(1,))
     require(os.name == 'nt' and spec['kind'] == 'timelearner_prepared_physical_evaluation' and
-            spec['schema_version'] == 1 and controls == BASE/'controls'/spec['job_id'],
+            spec['schema_version'] in (1, 2) and controls == base/'controls'/spec['job_id'],
             'physical_evaluation_worker_scope')
     inputs, output = Path(spec['inputs']), Path(spec['output'])
-    require(inputs == BASE/'jobs'/(spec['job_id']+'-inputs') and
-            output == BASE/'jobs'/spec['job_id'] and inputs.resolve(strict=True) == inputs and
+    require(inputs == base/'jobs'/(spec['job_id']+'-inputs') and
+            output == base/'jobs'/spec['job_id'] and inputs.resolve(strict=True) == inputs and
             not output.exists() and not output.is_symlink(), 'physical_evaluation_paths')
     output.mkdir()
     try:
@@ -151,7 +177,7 @@ def run(controls, *, cancel_file=None):
                 'physical_evaluation_resolved_job_changed')
         verify_envelope(envelope, job, inputs/'model.json', inputs)
         _write(output/'admission.json', validate_job('physical-model-evaluate', job, (model,)))
-        require(shutil.disk_usage(BASE).free >= spec['minimum_free_bytes']+spec['maximum_output_bytes'],
+        require(shutil.disk_usage(base).free >= spec['minimum_free_bytes']+spec['maximum_output_bytes'],
                 'physical_evaluation_disk_admission')
         _write(output/'cli.json', inspect_native_cli(runtime, ['physical-model-evaluate'],
             require_file_source=True, evidence_output=output))
@@ -160,7 +186,7 @@ def run(controls, *, cancel_file=None):
             if time.monotonic()-last[0] < 1:
                 return
             last[0] = time.monotonic()
-            require(shutil.disk_usage(BASE).free >= spec['minimum_free_bytes'], 'physical_evaluation_disk_floor')
+            require(shutil.disk_usage(base).free >= spec['minimum_free_bytes'], 'physical_evaluation_disk_floor')
             total = 0
             for path in output.rglob('*'):
                 try:
@@ -176,7 +202,7 @@ def run(controls, *, cancel_file=None):
                            for k in ('PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM')}):
             process = execute(runtime, args, Path(runtime['executable']['path']).parent, output/'process',
                 memory_bytes=spec['memory_bytes'], maximum_processes=64,
-                maximum_wall_seconds=spec['maximum_wall_seconds'], lock_file=BASE/'locks/worker.lock',
+                maximum_wall_seconds=spec['maximum_wall_seconds'], lock_file=base/'locks/worker.lock',
                 cancel_file=cancel_file, cooperative_capture=True, monitor=monitor)
         _write(output/'process-result.json', process)
         require(process['execution'] == 'completed' and process['returncode'] == 0 and
