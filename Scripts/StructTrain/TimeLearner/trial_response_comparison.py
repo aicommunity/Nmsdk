@@ -26,7 +26,7 @@ def _maximum(values):
     return None if any(v is None for v in values) else max(values, default=0.)
 
 
-def _compare(expected, observed, audit, tolerance):
+def _compare(expected, observed, audit, tolerance, *, reset_intervention=False):
     for item in (expected, observed):
         result = audit(item)
         require(result['valid_observation'] and result['complete'] and
@@ -35,6 +35,8 @@ def _compare(expected, observed, audit, tolerance):
             'response_comparison_observation_schema_changed')
     for key in ('sample_id', 'label', 'pattern_hash', 'pattern_isi', 'reset_policy',
                 'frequency_hz', 'model_before', 'model_after'):
+        if reset_intervention and key == 'reset_policy':
+            continue  # Both policies were validated by the observation auditor.
         require(expected[key] == observed[key], 'response_comparison_condition_changed:'+key)
     if expected['schema_version'] == 2:
         require(expected['threshold_potential_source'] == observed['threshold_potential_source'],
@@ -79,7 +81,7 @@ def _compare(expected, observed, audit, tolerance):
                          (events_same, 'response_relative_events_changed')):
         if not okay:
             reasons.append(reason)
-    return dict(kind='timelearner_trial_response_comparison', schema_version=1,
+    result = dict(kind='timelearner_trial_response_comparison', schema_version=1,
         comparator_version=1, time_basis='actual_stimulus_onset',
         absolute_tolerance=tolerance, observation_schema_version=expected['schema_version'],
         source_trial_id=expected['trial_id'], observed_trial_id=observed['trial_id'],
@@ -99,6 +101,20 @@ def _compare(expected, observed, audit, tolerance):
         stimulus_and_spike_events_equal=events_same,
         response_preserved=waveform_same and events_same, difference_reasons=reasons,
         pre_window_history_compared=False, scientific_verdict=None)
+    if reset_intervention:
+        changed = expected['reset_policy'] != observed['reset_policy']
+        # Numerical equality under a declared intervention must never be
+        # promoted to preservation of the original same-condition protocol.
+        result.update(kind='timelearner_trial_reset_intervention_comparison',
+            source_reset_policy=expected['reset_policy'],
+            observed_reset_policy=observed['reset_policy'],
+            declared_condition_changes=['reset_policy'] if changed else [],
+            comparison_purpose='declared_reset_policy_intervention',
+            observed_responses_equal=waveform_same and events_same,
+            same_condition_response_preserved=not changed and waveform_same and events_same,
+            response_preserved=not changed and waveform_same and events_same,
+            causal_pattern_attribution_proven=False)
+    return result
 
 
 @contextmanager
@@ -114,3 +130,20 @@ def trial_response_comparison(package, *, physical_data=False, diagnostic=False,
 def compare_trial_responses(expected, observed, package, **options):
     with trial_response_comparison(package, **options) as compare:
         return compare(expected, observed)
+
+
+@contextmanager
+def trial_reset_intervention_comparison(package, *, physical_data=False, diagnostic=False,
+                                        absolute_tolerance=1e-12):
+    """Compare a declared Reset/preserve intervention without rewriting data.
+
+    Only reset_policy may differ. Model, frequency, pattern, complete windows
+    and all numerical evidence retain the ordinary comparator's contracts.
+    Default same-condition comparison and its persisted output stay unchanged.
+    This numerical comparison alone establishes no causal pattern attribution.
+    """
+    tolerance = number(absolute_tolerance)
+    require(tolerance == 1e-12, 'response_comparison_fixed_tolerance_required')
+    with _recognition_trial_batch(package, physical_data=physical_data, diagnostic=diagnostic) as audit:
+        yield lambda expected, observed: _compare(expected, observed, audit, tolerance,
+                                                  reset_intervention=True)
