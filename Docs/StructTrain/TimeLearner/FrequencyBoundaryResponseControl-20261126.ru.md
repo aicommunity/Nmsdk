@@ -57,3 +57,8 @@ immutable ModelSpec живого learner, multirate либо продолжен�
 NPulseGeneratorTransit объявлен в NPulseGenerator.h, отдельного файла
 NPulseGeneratorTransit.h нет. Include исправлен. Отказ и закрытие
 компиляторской группы сохранены; исходным научным заданиям он не относится.
+
+Вторая компиляция выявила обращение fixture к protected PreOutput.
+Наблюдение переведено на существующий штатный GetPreOutputForAudit;
+видимость полей и код компонентов не меняются. Численных случаев
+в двух отказавших компиляциях не было.

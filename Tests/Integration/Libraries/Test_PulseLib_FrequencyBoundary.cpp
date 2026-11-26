@@ -51,7 +51,7 @@ void Signals(UEPtr<UContainer> node,const std::string& path,std::vector<Signal>&
         result.push_back({path+".Output",1e-12,[channel]{return Scalar(channel->Output.GetData());}});
     if(auto synapse=dynamic_pointer_cast<NPulseSynapse>(node)) {
         result.push_back({path+".Output",1e-20,[synapse]{return Scalar(synapse->Output.GetData());}});
-        result.push_back({path+".PreOutput",1e-12,[synapse]{return synapse->PreOutput.GetData();}});
+        result.push_back({path+".PreOutput",1e-12,[synapse]{return synapse->GetPreOutputForAudit();}});
     }
     if(auto zone=dynamic_pointer_cast<NLTZone>(node)) {
         result.push_back({path+".Potential",1e-12,[zone]{return zone->Potential.GetData();}});
