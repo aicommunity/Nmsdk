@@ -127,6 +127,15 @@ separate from scientific-worker admission and the original build outcome.
 The backend reports Job committed-memory semantics; a thread-count limit is not
 claimed. Specify the native wall/memory/process budgets for each new attempt.
 
+The dedicated `prepared_count_training` launch declaration version1 retains
+8 GiB for each preflight and16 GiB for Train. Version2 requires explicit integer
+`preflight_memory_bytes` and `native_memory_bytes`, within the production Windows
+backend's 32 MiB–64 GiB range. It changes no model, search, tolerance or wall-time
+condition. There is no automatic fallback when memory is unavailable: the backend
+still checks available physical memory and verifies Job limits before resuming
+the process. Declare a fresh attempt when changing resource limits, preserving
+any rejected predecessor. Record the actual phase limits with the attempt.
+
 Validation specification version2 declares `partitions`: each has a unique
 safe name, exact `expected_test_ids` and `maximum_wall_seconds`. Their disjoint
 union must equal the complete top-level test inventory, and their wall limits

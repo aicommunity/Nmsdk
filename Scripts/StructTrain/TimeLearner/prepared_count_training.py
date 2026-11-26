@@ -102,6 +102,40 @@ def factor_control_job(job):
     return control
 
 
+def worker_resource_limits(spec):
+    """Validate explicit process limits while leaving the model job unchanged.
+
+    Version1 retains fixed8/16 GiB limits. Version2 declares both phase
+    limits; the Windows backend still checks available memory and applies
+    Job limits before resuming any child process.
+    """
+    kinds = ('timelearner_matched_count_training', 'timelearner_count_two_sweep_training',
+             'timelearner_count_candidate_limit_training')
+    require(type(spec) is dict and spec.get('kind') in kinds and
+            type(spec.get('schema_version')) is int and spec['schema_version'] in (1, 2),
+            'count_train_worker_scope')
+    fields = {'kind','schema_version','python_source','python_root','sdk_source','original_job',
+              'job_file','factor_job_file','run_id','maximum_synapses','output','worker_sha256',
+              'native_memory_bytes','native_wall_seconds','preflight_wall_seconds',
+              'minimum_free_bytes','maximum_output_bytes'}
+    if spec['kind'] in kinds[1:]: fields.add('source_initial_state')
+    if spec['kind'] == kinds[2]: fields.add('maximum_candidates_per_input')
+    if spec['schema_version'] == 2: fields.add('preflight_memory_bytes')
+    require(set(spec) == fields, 'count_train_worker_scope')
+    multiplier = 2 if spec['kind'] == kinds[1] else 1
+    require(type(spec['native_wall_seconds']) in (int, float) and
+            spec['native_wall_seconds'] == 39600*multiplier and
+            type(spec['preflight_wall_seconds']) in (int, float) and
+            spec['preflight_wall_seconds'] == 900, 'count_train_declared_finite_budgets')
+    native = spec['native_memory_bytes']
+    preflight = 8*1024**3 if spec['schema_version'] == 1 else spec['preflight_memory_bytes']
+    require(all(type(value) is int and 32*1024**2 <= value <= 64*1024**3
+                for value in (preflight, native)), 'count_train_declared_memory_limits')
+    if spec['schema_version'] == 1:
+        require(native == 16*1024**3, 'count_train_legacy_memory_limits')
+    return {'preflight_memory_bytes': preflight, 'native_memory_bytes': native}
+
+
 def run(controls):
     from .native_cli import inspect_native_cli
     from .native_pipeline_worker import audit_execution, validate_job
@@ -111,18 +145,8 @@ def run(controls):
     from .owned_python_job import _source_snapshot
     controls = Path(controls).resolve(strict=True)
     spec = load(controls/'specification.json')
-    require(type(spec) is dict and set(spec) == {'kind','schema_version','python_source','python_root',
-            'sdk_source','original_job','job_file','factor_job_file','run_id','maximum_synapses','output',
-            'worker_sha256','native_memory_bytes','native_wall_seconds','preflight_wall_seconds',
-            'minimum_free_bytes','maximum_output_bytes'} |
-                ({'source_initial_state'} if spec.get('kind') in
-                    ('timelearner_count_two_sweep_training','timelearner_count_candidate_limit_training') else set()) |
-                ({'maximum_candidates_per_input'} if spec.get('kind') ==
-                    'timelearner_count_candidate_limit_training' else set()) and
-            os.name == 'nt' and spec['kind'] in
-                ('timelearner_matched_count_training', 'timelearner_count_two_sweep_training',
-                 'timelearner_count_candidate_limit_training') and
-            spec['schema_version'] == 1, 'count_train_worker_scope')
+    limits = worker_resource_limits(spec)
+    require(os.name == 'nt', 'count_train_worker_scope')
     base = Path('C:/Projects/TimeLearnerWorker').resolve(strict=True)
     output = Path(spec['output']).absolute()
     require(controls.is_relative_to(base/'controls') and output.is_relative_to(base/'jobs') and
@@ -162,9 +186,7 @@ def run(controls):
         runtime_before = file_record(runtime_path); sdk = Path(spec['sdk_source'])
         require(source_closure(sdk) == runtime['source_closure'], 'count_train_sdk_changed')
         multiplier = 2 if extension else 1
-        require(spec['native_memory_bytes'] == 16*1024**3 and spec['native_wall_seconds'] == 39600*multiplier and
-                spec['preflight_wall_seconds'] == 900 and
-                original['configuration']['maximum_wall_seconds'] == 32400 and
+        require(original['configuration']['maximum_wall_seconds'] == 32400 and
                 job['configuration']['maximum_wall_seconds'] == 32400*multiplier,
                 'count_train_declared_finite_budgets')
         require(type(spec['minimum_free_bytes']) is int and spec['minimum_free_bytes'] >= 10*1024**3 and
@@ -195,9 +217,9 @@ def run(controls):
                            for k in ('PATH','QT_PLUGIN_PATH','QT_QPA_PLATFORM')}):
             _write(output/'cli.json', inspect_native_cli(runtime, ['preflight','train'], evidence_output=output))
             for phase,mode,path,case,wall,memory in [
-                    ('preflight','preflight',job_path,job,spec['preflight_wall_seconds'],8*1024**3),
-                    ('factor-preflight','preflight',factor_path,factor,spec['preflight_wall_seconds'],8*1024**3),
-                    ('train','train',job_path,job,spec['native_wall_seconds'],spec['native_memory_bytes'])]:
+                    ('preflight','preflight',job_path,job,spec['preflight_wall_seconds'],limits['preflight_memory_bytes']),
+                    ('factor-preflight','preflight',factor_path,factor,spec['preflight_wall_seconds'],limits['preflight_memory_bytes']),
+                    ('train','train',job_path,job,spec['native_wall_seconds'],limits['native_memory_bytes'])]:
                 require(not failures and file_record(job_path) == spec['job_file'], 'count_train_input_or_guard_changed')
                 destination = output/phase;destination.mkdir()
                 result = execute(runtime, ['--app-ini',runtime['app_ini']['path'],'--timelearner-'+mode,
