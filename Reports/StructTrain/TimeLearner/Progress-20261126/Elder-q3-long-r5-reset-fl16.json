@@ -1,0 +1,90 @@
+{
+  "kind": "timelearner_Elder_q3_long_rotation5_reset_verified_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/Elder-q3-long-r5-reset-independent-fl5.json",
+    "sha256": "0c3794f938cb936b7670374626ba01e2bd483880624881e171485fe307199422",
+    "bytes": 24848
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b1/b15ea3e6a9f15402ba3787cb20443033923047d214f137c321f6ea1c3f88d22f",
+      "sha256": "b15ea3e6a9f15402ba3787cb20443033923047d214f137c321f6ea1c3f88d22f",
+      "bytes": 12248
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/9d/9dfa628230c25bc0d012af984f4b6ffc36c3393964efe73bfab260a7bc0c3a71",
+      "sha256": "9dfa628230c25bc0d012af984f4b6ffc36c3393964efe73bfab260a7bc0c3a71",
+      "bytes": 1234380
+    }
+  },
+  "members": 77,
+  "counts": {
+    "TP": 1,
+    "FP": 2,
+    "FN": 0,
+    "TN": 5,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.75,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.2857142857142857
+  },
+  "target_position_zero_based": 3,
+  "rotation": 5,
+  "declared_position_matches_actual_labels": true,
+  "complete_observations": 8,
+  "common_full_windows_compared": 6,
+  "common_window_maximum_signal_difference": 0.0,
+  "different_windows_retained_unclipped": [
+    "phasea-row-7",
+    "phasea-row-4"
+  ],
+  "reader_sources": {
+    "catalog": {
+      "relative_path": "experiments/2026-11-26/Elder-q3-long-r5-reader-sources-fl13.json",
+      "sha256": "a906e91b152e9e32b2550ee13828edada2e0deee774fac650f220aa454ce1f8f",
+      "bytes": 1708
+    },
+    "objects": {
+      "failed-reader.py": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/74/74d51f6619dda86ed0842fd5244465e31769c5e8b12a621fdf7a15ed55eb09d6",
+        "sha256": "74d51f6619dda86ed0842fd5244465e31769c5e8b12a621fdf7a15ed55eb09d6",
+        "bytes": 5851
+      },
+      "failed-reader-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c5/c5fa8e24a567a32f1e385e9968fe553b443002702d474788e3de8ffa9760a802",
+        "sha256": "c5fa8e24a567a32f1e385e9968fe553b443002702d474788e3de8ffa9760a802",
+        "bytes": 135
+      },
+      "reader.py": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/e9/e9acef015aca21cca4f955ff361ada360af37b9af13e9809430f598a108549f5",
+        "sha256": "e9acef015aca21cca4f955ff361ada360af37b9af13e9809430f598a108549f5",
+        "bytes": 6285
+      }
+    }
+  },
+  "prior_reader_wrong_position_assumption_rejected_and_preserved": true,
+  "source_training_outcome": "budget_exhausted",
+  "new_training": false,
+  "new_calibration": false,
+  "whole32_case_matrix_complete": false,
+  "scientific_verdict": null
+}
