@@ -1,0 +1,121 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-26/Branch-fourth-t560-pair-accepted-fq18.json",
+    "bytes": 6622,
+    "sha256": "163c09ba7a038ce75ab91fff4b51df6523091bf7822439b18c267b32f5031e65"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/38/38ea709442aba9e6dbae2953a28e41d0768268c64d6ed9302d9816282202ef17",
+      "sha256": "38ea709442aba9e6dbae2953a28e41d0768268c64d6ed9302d9816282202ef17",
+      "bytes": 61669
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/3c/3c20ac7c053b75cea4a8341c03a107ce7cb67011da09b451c488cb54e03aebbc",
+      "sha256": "3c20ac7c053b75cea4a8341c03a107ce7cb67011da09b451c488cb54e03aebbc",
+      "bytes": 1933712
+    },
+    "analysis-t560-reset.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/83/839a3bf62c305ef66a45f3ade7cbb8d95546d81040ca12fb16834526e02e8ff6",
+      "sha256": "839a3bf62c305ef66a45f3ade7cbb8d95546d81040ca12fb16834526e02e8ff6",
+      "bytes": 16458
+    },
+    "analysis-t560-preserve.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/f2/f26bc52cfbf03d04bc7de3333b98995d471de48862f85bdc1868566a9f2a4953",
+      "sha256": "f26bc52cfbf03d04bc7de3333b98995d471de48862f85bdc1868566a9f2a4953",
+      "bytes": 16601
+    },
+    "reader.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e8/e8d419fc78c0ba918447b878409198a913dd1dd3c5cf60538ca7586c62239f1f",
+      "sha256": "e8d419fc78c0ba918447b878409198a913dd1dd3c5cf60538ca7586c62239f1f",
+      "bytes": 4462
+    },
+    "producer-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/49/49478ce0213ee6dc6c3076beaeb8a716076e43ed130df568a0a5258075829840",
+      "sha256": "49478ce0213ee6dc6c3076beaeb8a716076e43ed130df568a0a5258075829840",
+      "bytes": 1460
+    }
+  },
+  "members": 351,
+  "all351_primary_member_bytes_independently_verified": true,
+  "full_native_runs_reaudited": 4,
+  "analyses": [
+    {
+      "policy": "reset_per_trial",
+      "counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "reference_counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "prefix_verified": true
+    },
+    {
+      "policy": "preserve_neuron_dynamics",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "reference_counts": {
+        "TP": 1,
+        "FP": 1,
+        "FN": 0,
+        "TN": 6,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.14285714285714285
+      },
+      "prefix_verified": true
+    }
+  ]
+}
