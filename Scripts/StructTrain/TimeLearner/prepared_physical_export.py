@@ -41,12 +41,14 @@ def _prepare_physical_edit(plan_path,*,threshold_candidate):
     from Scripts.StructTrain.TimeLearner.process_runner import verify_runtime
     plan_path=Path(plan_path).resolve(strict=True)
     plan=json.loads(plan_path.read_bytes())
+    version=plan.get('schema_version')
     require(set(plan)=={'kind','schema_version','source_data','runtime_manifest','sdk_source',
             'python_source','controls','inputs','output','job_id'} |
+            ({'worker_root'} if version==2 else set()) |
             ({'threshold'} if threshold_candidate else {'conversion_spec','reference_amplitudes'}) and
             plan['kind']==('timelearner_prepared_physical_threshold_plan' if threshold_candidate else
                           'timelearner_prepared_physical_conversion_plan') and
-            type(plan['schema_version']) is int and plan['schema_version']==1,
+            type(version) is int and version in (1,2),
             'physical_conversion_preparation_scope')
     source_path=Path(plan['source_data']['path']).resolve(strict=True)
     runtime_path=Path(plan['runtime_manifest']['path']).resolve(strict=True)
@@ -62,9 +64,13 @@ def _prepare_physical_edit(plan_path,*,threshold_candidate):
     else:
         require(source['schema_version']==1 and source['source_boundary']['kind'] in
                 ('timelearner_completed_state','timelearner_stopped_state'), 'physical_conversion_requires_original_solo_DATA1')
-    base=Path('C:/Projects/TimeLearnerWorker') if os.name=='nt' else Path(plan['output']).parent.parent
-    allowed=(Path('C:/Projects/TimeLearnerWorker'),) if os.name=='nt' else (
-        Path('/home/user/timelearner-refactor'),Path('/media/user/Data/TimeLearnerRefactor'))
+    if version==2:
+        from Scripts.StructTrain.TimeLearner.prepared_physical_evaluation import worker_root
+        base=worker_root(plan,explicit_schema=2,legacy_schemas=(1,));allowed=(base,)
+    else:
+        base=Path('C:/Projects/TimeLearnerWorker') if os.name=='nt' else Path(plan['output']).parent.parent
+        allowed=(Path('C:/Projects/TimeLearnerWorker'),) if os.name=='nt' else (
+            Path('/home/user/timelearner-refactor'),Path('/media/user/Data/TimeLearnerRefactor'))
     area=base/('jobs' if os.name=='nt' else 'readbacks')
     controls=Path(plan['controls']);inputs=Path(plan['inputs']);output=Path(plan['output'])
     require(base in allowed and base.resolve(strict=True)==base and
@@ -97,7 +103,8 @@ def _prepare_physical_edit(plan_path,*,threshold_candidate):
     (controls/'worker.py').write_bytes(Path(__file__).read_bytes())
     _write(controls/'runtime.json',runtime)
     _write(controls/'specification.json',dict(kind=('timelearner_prepared_physical_threshold' if threshold_candidate else
-        'timelearner_prepared_physical_conversion'),schema_version=1,
+        'timelearner_prepared_physical_conversion'),schema_version=version,
+        **({'worker_root':str(base)} if version==2 else {}),
         job_id=plan['job_id'],execution_root=str(base),python_source=str(python_source),sdk_source=str(sdk_source),
         inputs=str(inputs),output=str(output),worker_sha256=file_record(controls/'worker.py')['sha256'],
         input_inventory={p.name:dict(bytes=p.stat().st_size,sha256=file_record(p)['sha256']) for p in inputs.iterdir()},
@@ -212,12 +219,19 @@ def run(controls, *, cancel_file=None):
     require(cancel_file is None or os.name=='nt','physical_export_cancel_requires_windows_backend')
     require(os.name in ('posix','nt') and spec['kind'] in ('timelearner_prepared_physical_export',
             'timelearner_prepared_physical_conversion','timelearner_prepared_physical_threshold') and
-            spec['schema_version'] == 1, 'physical_export_worker_scope')
+            type(spec['schema_version']) is int and spec['schema_version'] in (1,2) and
+            (spec['schema_version']==1 or conversion or threshold_candidate), 'physical_export_worker_scope')
     inputs = Path(spec['inputs']).resolve(strict=True)
     output = Path(spec['output']).absolute()
     base = Path(spec['execution_root']).resolve(strict=True)
-    allowed = (Path('C:/Projects/TimeLearnerWorker'),) if os.name=='nt' else (
-        Path('/home/user/timelearner-refactor'),Path('/media/user/Data/TimeLearnerRefactor'))
+    if spec['schema_version']==2:
+        from Scripts.StructTrain.TimeLearner.prepared_physical_evaluation import worker_root
+        declared_base=worker_root(spec,explicit_schema=2,legacy_schemas=(1,))
+        require(base==declared_base and controls.parent==base/'controls', 'physical_export_worker_root_changed')
+        allowed=(declared_base,)
+    else:
+        allowed = (Path('C:/Projects/TimeLearnerWorker'),) if os.name=='nt' else (
+            Path('/home/user/timelearner-refactor'),Path('/media/user/Data/TimeLearnerRefactor'))
     area = base/('jobs' if os.name=='nt' else 'readbacks')
     require(base in allowed and output.is_relative_to(area) and inputs.is_relative_to(area) and
             not output.exists(), 'physical_export_paths')
