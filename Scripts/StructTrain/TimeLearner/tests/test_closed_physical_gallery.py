@@ -15,7 +15,7 @@ from ..runtime import file_record
 class ClosedPhysicalGalleryTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.plan = load(Path(os.environ['TIMELEARNER_CLOSED_GALLERY_PLAN']))
+        cls.plan = load(Path(os.environ['TIMELEARNER_CLOSED_GALLERY_SOURCE'])/'plan.json')
         cls.plan['cases'] = cls.plan['cases'][:1]
 
     def test_actual_complete_run_keeps_labels_events_and_primary_bindings(self):
