@@ -5,6 +5,7 @@ from pathlib import Path
 import unittest
 
 from ..composite_primary import filesystem_primary_resolver
+from ..candidate_measurement_purpose import PURPOSES
 from ..terminal_package_evidence import audit_terminal_package
 from ..model_identity import canonical_model_sha256 as digest
 from ..native_evidence import EvidenceError, audit_probe, audit_training_summary, load, require
@@ -30,7 +31,7 @@ class NativeCandidateMeasurementPurposeTest(unittest.TestCase):
             directory=composite/(topology.lower()+'-terminal-window5-N0-stopped')
             package=load(directory/'terminal-state8.json');summary=load(directory/'terminal-summary9.json')
             history=summary['historical_summary']
-            require(history['candidates'] and all(c.get('measurement_purpose')=='exploration'for c in history['candidates']),
+            require(history['candidates'] and all(c.get('measurement_purpose')in PURPOSES for c in history['candidates']),
                     'actual_new_composite_producer_labels_required')
             cls.composite.append((package,summary,directory))
 
@@ -46,6 +47,9 @@ class NativeCandidateMeasurementPurposeTest(unittest.TestCase):
             result=audit_terminal_package(package,summary,{}, {},external_resolver=filesystem_primary_resolver(directory))
             self.assertIsNone(result['evaluation_verdict'])
             self.assertFalse(result['native_execution_verified'])
+            inventory=result['source_audit']['summary']['candidate_measurement_purpose_inventory']
+            self.assertEqual(inventory['records_by_purpose']['selected_state_restore'],1)
+            self.assertEqual(inventory['measurement_records'],len(summary['historical_summary']['candidates']))
 
     def test_plain_legacy_absence_is_accepted_without_inventing_phase_labels(self):
         for summary,packets,origin in self.plain:
@@ -75,3 +79,18 @@ class NativeCandidateMeasurementPurposeTest(unittest.TestCase):
             changed['sha256']=digest({k:v for k,v in changed.items()if k!='sha256'})
             with self.assertRaises(EvidenceError):
                 audit_terminal_package(package,changed,{}, {},external_resolver=filesystem_primary_resolver(directory))
+
+    def test_composite_unknown_purpose_rejected_after_valid_primary_binding(self):
+        for package,summary,directory in self.composite:
+            changed=deepcopy(summary);changed['historical_summary']['candidates'][0]['measurement_purpose']='unknown'
+            changed['sha256']=digest({k:v for k,v in changed.items()if k!='sha256'})
+            with self.assertRaisesRegex(EvidenceError,'unknown_candidate_measurement_purpose'):
+                audit_terminal_package(package,changed,{}, {},external_resolver=filesystem_primary_resolver(directory))
+
+    def test_composite_legacy_absence_keeps_primary_checks_without_phase_claims(self):
+        for package,summary,directory in self.composite:
+            changed=deepcopy(summary)
+            for candidate in changed['historical_summary']['candidates']:del candidate['measurement_purpose']
+            changed['sha256']=digest({k:v for k,v in changed.items()if k!='sha256'})
+            result=audit_terminal_package(package,changed,{}, {},external_resolver=filesystem_primary_resolver(directory))
+            self.assertNotIn('candidate_measurement_purpose_inventory',result['source_audit']['summary'])
