@@ -1,6 +1,10 @@
+26.11: [Полный повтор cap24: все восемь реакций сохранены](Progress-20261126/Windows-cap24-complete-frozen-repeat-er30.json).
+63 первичных члена независимо восстановлены; максимальная разность сигналов0.
+Модель и порог фиксированы, после допуска выполняется направленная восьмёрка.
+
 26.11: [Classic cap24: TP1/FP1/FN0/TN6 и полный независимый архив](Progress-20261126/Windows-cap24-recognition-and-temporal-report-er5.json).
 Все 265 первичных членов распознавания и 89 членов галереи восстановлены;
-32 PNG, просмотрены 8. [Научный разбор](../../../Docs/StructTrain/TimeLearner/ClassicCandidateCap24RecognitionResults-20261126.ru.md).
+32 PNG, все просмотрены; [полная визуальная приёмка](Progress-20261126/Windows-cap24-complete-visual-review-er28.json). [Научный разбор](../../../Docs/StructTrain/TimeLearner/ClassicCandidateCap24RecognitionResults-20261126.ru.md).
 
 26.11: [Подготовка матрицы порядка/пауз Elder: 33/33, 64 первичных члена](Progress-20261126/Elder-q3-cadence33-admission-er6.json).
 Допуск метаданных принят, первый физический случай начат; итог 256 предъявлений ещё не получен.
