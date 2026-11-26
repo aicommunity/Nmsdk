@@ -1,0 +1,67 @@
+{
+  "kind": "timelearner_cyclic_proposal_selection_controlled_acceptance",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "root": "923f4d784982ed5b1280804b99b0fb12577d57af",
+  "PulseLib": "ddcb03ffe673ae15892a72386f40666d5fe3d192",
+  "prior_negative_baseline": "Cyclic-incumbent-loss-baseline-ew17.json",
+  "independent_catalog": {
+    "relative_path": "experiments/2026-11-26/Elder-cyclic-proposal-selection24-independent-ex14.json",
+    "sha256": "59e087611601b71dadc6dcabf9e80f59f6927ab18b9ca2eb712170bc0b6bbcd0",
+    "bytes": 10401
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a2/a27c7508e0a8d20d800d107c025befce58ddc447e191bedee6069f2a02d43ce8",
+      "sha256": "a27c7508e0a8d20d800d107c025befce58ddc447e191bedee6069f2a02d43ce8",
+      "bytes": 60714
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/c9/c92ea2c8571cf43d6b4d7ff4437d0252d16f58c10e2c759e78caa623db8c2bd7",
+      "sha256": "c92ea2c8571cf43d6b4d7ff4437d0252d16f58c10e2c759e78caa623db8c2bd7",
+      "bytes": 24840968
+    }
+  },
+  "restored_members": 353,
+  "actual_loaded_byte_objects": 27,
+  "expected_tests": 24,
+  "observed_tests": 24,
+  "failed_tests": 0,
+  "skipped_tests": 0,
+  "closed_process_groups": 4,
+  "known_terminal_metadata_label_correction": {
+    "terminal_known_baseline_flag": true,
+    "correct_known_baseline_flag": false,
+    "reason": "copied_terminal_label_only_actual_24_case_JUnit_and_new_component_build_flags_verified"
+  },
+  "scope": "actual_complete_production_BoundedTraining_translation_unit_and_complete_fixture_against_unchanged_other_SDK_libraries",
+  "linked_original_SDK_root": "d2c7487a88a5c1c372f825dc708a543c03234fcb",
+  "new_full_SDK_verified": false,
+  "physical_neuron_experiment": false,
+  "new_scientific_Train": false,
+  "stage7_complete": false,
+  "full_SDK_job": {
+    "job_id": "cyclic-selection-native237-m40-ex11",
+    "owner": {
+      "pid": 557448,
+      "start_ticks": "474208282",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "expected_tests": 237,
+    "scientific_priority_owner": {
+      "pid": 357950,
+      "start_ticks": "473863870",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "prepared_root": "923f4d784982ed5b1280804b99b0fb12577d57af"
+  },
+  "scientific_verdict": null
+}
