@@ -10,6 +10,7 @@
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QCryptographicHash>
 #include <QDir>
 #include <QFile>
 #include <algorithm>
@@ -19,6 +20,8 @@
 #include <sstream>
 #include <type_traits>
 #include <utility>
+#include <functional>
+#include <map>
 
 namespace {
 using namespace RDK;
@@ -688,6 +691,145 @@ TEST(NativePhysicalModelData,FrozenDataRejectsSoloAndResignedThresholdMetadata)
         // frozen DATA adapter. Preserve its typed diagnostic contract.
         EXPECT_EQ(error.code,"calibration_model_mismatch");
         EXPECT_NE(std::string(error.what()).find("$.LTZone"),std::string::npos);
+    }
+    EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
+}
+}
+
+namespace {
+using XmlEdit=std::function<void(RDK::USerStorageXML&,std::size_t&)>;
+void EditXmlTree(RDK::USerStorageXML& xml,const XmlEdit& edit,std::size_t& changes)
+{
+    edit(xml,changes);
+    const int children=xml.GetNumNodes();
+    for(int index=0;index<children;++index)
+    {
+        if(!xml.SelectNode(index))throw std::logic_error("portable_fixture_child");
+        EditXmlTree(xml,edit,changes);xml.SelectUp();
+    }
+}
+QJsonObject EditSnapshotXml(QJsonObject snapshot,const XmlEdit& edit,std::size_t& changes)
+{
+    RDK::USerStorageXML xml;
+    if(!xml.Load(snapshot["native_xml"].toString().toStdString(),"TimeLearnerNativeGraph"))
+        throw std::logic_error("portable_fixture_xml");
+    EditXmlTree(xml,edit,changes);std::string encoded;
+    if(!xml.Save(encoded))throw std::logic_error("portable_fixture_save");
+    snapshot["native_xml"]=QString::fromStdString(encoded);
+    snapshot["native_xml_sha256"]=QString::fromLatin1(QCryptographicHash::hash(
+        QByteArray::fromStdString(encoded),QCryptographicHash::Sha256).toHex());
+    return snapshot;
+}
+QJsonObject EditDataArchive(QJsonObject data,const XmlEdit& edit,bool definitionsOnly=false)
+{
+    auto archive=data["neuron"].toObject();std::size_t changes=0;
+    if(!definitionsOnly)archive["graph"]=EditSnapshotXml(archive["graph"].toObject(),edit,changes);
+    auto definitions=archive["class_definitions"].toArray();
+    for(int index=0;index<definitions.size();++index)
+    {
+        auto definition=definitions[index].toObject();
+        definition["snapshot"]=EditSnapshotXml(definition["snapshot"].toObject(),edit,changes);
+        definitions[index]=definition;
+    }
+    if(!changes)throw std::logic_error("portable_fixture_did_not_edit_xml");
+    archive["class_definitions"]=definitions;data["neuron"]=Signed(archive);return Signed(data);
+}
+const XmlEdit OtherCompilerScalarSpellings=[](RDK::USerStorageXML& xml,std::size_t& changes) {
+    // Test input only. Use real production XML and native import; alter only
+    // compiler spellings. Unknown/container types retain their original bytes.
+    const std::map<std::string,std::string> aliases{{"b","bool"},{"bool","b"},
+        {"i","int"},{"int","i"},{"j","unsigned int"},{"unsigned int","j"},
+        {"d","double"},{"double","d"}};
+    for(const auto* name:{"Type","elemType","elemVecType"})
+    {
+        const auto found=aliases.find(xml.GetNodeAttribute(name));
+        if(found!=aliases.end())
+        {if(!xml.SetNodeAttribute(name,found->second))throw std::logic_error("portable_fixture_attribute");++changes;}
+    }
+};
+
+template<class Owner> void PortableDataRoundtrip(Normalization normalization)
+{
+    Fixture fixture;fixture.Create<Owner>(2000,normalization);ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    const auto solo=ExportNativePhysicalModelData(fixture.source,fixture.storage,fixture.environment,Implementation);
+    const auto source=ConvertNativeSoloPhysicalModelDataToRecognition(solo,{}, {},fixture.storage,fixture.environment,Implementation);
+    const auto candidate=CreateNativePhysicalThresholdCandidate(source,1e-5,fixture.storage,fixture.environment,Implementation);
+    for(const auto& original:{source,candidate})
+    {
+        const auto foreign=EditDataArchive(original,OtherCompilerScalarSpellings);
+        ASSERT_NE(foreign,original);
+        EXPECT_TRUE(NmsdkTools::SamePortableModelArchive(original["neuron"].toObject(),foreign["neuron"].toObject()));
+        const auto imported=PrepareNativeFrozenPhysicalModelData(foreign,fixture.storage,fixture.environment,Implementation);
+        EXPECT_EQ(imported->modelRevision,original["model_revision"].toString().toStdString());
+        EXPECT_EQ(imported->sourceBoundary,original["source_boundary"].toObject());
+        EXPECT_FALSE(imported->calibrationConfirmed);EXPECT_TRUE(foreign["certificate"].isNull());
+        EXPECT_EQ(foreign["source_solo_revision"],original["source_solo_revision"]);
+        EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
+        EXPECT_EQ(original["sha256"],Signed(original)["sha256"]);
+    }
+    // An actual DATA3 generated from an already foreign-spelled DATA2 also
+    // keeps the exact immutable nested source and passes native reconstruction.
+    const auto foreignSource=EditDataArchive(source,OtherCompilerScalarSpellings);
+    const auto fromForeign=CreateNativePhysicalThresholdCandidate(foreignSource,1e-5,
+        fixture.storage,fixture.environment,Implementation);
+    EXPECT_EQ(fromForeign["source_recognition_data"],QJsonValue(foreignSource));
+    EXPECT_EQ(fromForeign["model_revision"],candidate["model_revision"]);
+    EXPECT_NO_THROW(PrepareNativeFrozenPhysicalModelData(fromForeign,fixture.storage,fixture.environment,Implementation));
+    EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
+}
+TEST(NativePhysicalPortableData,ClassicN0ImportsConvertedAndThresholdDataWithOtherCompilerSpellings)
+{PortableDataRoundtrip<NMSDK::NNeuronTimeLearner>(NMSDK::TimeLearner::Normalization::SynapseCount);}
+TEST(NativePhysicalPortableData,ClassicN1ImportsConvertedAndThresholdDataWithOtherCompilerSpellings)
+{PortableDataRoundtrip<NMSDK::NNeuronTimeLearner>(NMSDK::TimeLearner::Normalization::TipResistance);}
+TEST(NativePhysicalPortableData,BranchN0ImportsConvertedAndThresholdDataWithOtherCompilerSpellings)
+{PortableDataRoundtrip<NMSDK::NNeuronTimeLearnerBranch>(NMSDK::TimeLearner::Normalization::SynapseCount);}
+TEST(NativePhysicalPortableData,BranchN1ImportsConvertedAndThresholdDataWithOtherCompilerSpellings)
+{PortableDataRoundtrip<NMSDK::NNeuronTimeLearnerBranch>(NMSDK::TimeLearner::Normalization::TipResistance);}
+
+TEST(NativePhysicalPortableData,ResignedDifferentXmlTypesAreRejectedInGraphAndStorageImages)
+{
+    Fixture fixture;fixture.Create<NMSDK::NNeuronTimeLearnerBranch>();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    const auto source=ConvertNativeSoloPhysicalModelDataToRecognition(
+        ExportNativePhysicalModelData(fixture.source,fixture.storage,fixture.environment,Implementation),{}, {},
+        fixture.storage,fixture.environment,Implementation);
+    const auto candidate=CreateNativePhysicalThresholdCandidate(source,1e-5,fixture.storage,fixture.environment,Implementation);
+    const XmlEdit wrongType=[](RDK::USerStorageXML& xml,std::size_t& changes) {
+        const auto type=xml.GetNodeAttribute("Type");
+        if(type=="d" || type=="double")
+        {if(!xml.SetNodeAttribute("Type","int"))throw std::logic_error("portable_fixture_attribute");++changes;}
+    };
+    for(const auto& original:{source,candidate})for(bool imagesOnly:{false,true})
+    {
+        const auto corrupted=EditDataArchive(original,wrongType,imagesOnly);
+        EXPECT_FALSE(NmsdkTools::SamePortableModelArchive(original["neuron"].toObject(),corrupted["neuron"].toObject()));
+        EXPECT_THROW(PrepareNativeFrozenPhysicalModelData(corrupted,fixture.storage,fixture.environment,Implementation),std::invalid_argument);
+    }
+    EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
+}
+
+TEST(NativePhysicalPortableData,OriginalArchiveAndXmlDigestsRemainMandatory)
+{
+    Fixture fixture;fixture.Create<NMSDK::NNeuronTimeLearner>();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    const auto original=ConvertNativeSoloPhysicalModelDataToRecognition(
+        ExportNativePhysicalModelData(fixture.source,fixture.storage,fixture.environment,Implementation),{}, {},
+        fixture.storage,fixture.environment,Implementation);
+    for(int fault=0;fault<3;++fault)
+    {
+        auto corrupted=EditDataArchive(original,OtherCompilerScalarSpellings);auto archive=corrupted["neuron"].toObject();
+        if(fault==0)archive["sha256"]=QString(64,'0');
+        if(fault==1)
+        {
+            auto graph=archive["graph"].toObject();graph["native_xml_sha256"]=QString(64,'0');
+            archive["graph"]=graph;archive=Signed(archive);
+        }
+        if(fault==2)
+        {
+            auto graph=archive["graph"].toObject();graph["native_xml"]=graph["native_xml"].toString()+"corrupt";
+            archive["graph"]=graph;archive=Signed(archive);
+        }
+        corrupted["neuron"]=archive;corrupted=Signed(corrupted);
+        EXPECT_FALSE(NmsdkTools::SamePortableModelArchive(original["neuron"].toObject(),archive));
+        EXPECT_THROW(PrepareNativeFrozenPhysicalModelData(corrupted,fixture.storage,fixture.environment,Implementation),std::invalid_argument);
     }
     EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
 }
