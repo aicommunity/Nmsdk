@@ -64,6 +64,11 @@ def declare(original, run_id, study, runtime, *, threshold, memory_bytes, wall_s
         job, design = declare_job(original, run_id, predecessor=study['predecessor'],
             cadence=study['cadence'], reset_policy=study['reset_policy'])
         identity = condition(job, design, runtime, threshold=threshold)
+    elif set(study) == {'protocol', 'fourth_from_first_ticks', 'reset_policy'} and study['protocol'] == 'fourth_pulse_history':
+        from .frozen_fourth_pulse_history import declare_job, condition
+        job, design = declare_job(original, run_id,
+            fourth_from_first_ticks=study['fourth_from_first_ticks'], reset_policy=study['reset_policy'])
+        identity = condition(job, design, runtime, threshold=threshold)
     else:
         raise ValueError('physical_study_protocol_schema')
     return job, design, identity
