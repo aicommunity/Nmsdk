@@ -1,0 +1,122 @@
+{
+  "kind": "timelearner_additional_q3_long_cadence_independent_primaries",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "cases": [
+    {
+      "phase": "long-r2-preserve",
+      "catalog": {
+        "relative_path": "experiments/2026-11-26/Elder-q3-long-r2-preserve-independent-fe10.json",
+        "bytes": 28905,
+        "sha256": "d219fd69c3a71e86326a4871acb4ac36eb58bb9962f7bcf83894b2a4841afdc5"
+      },
+      "objects": {
+        "bundle.json": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/ae/ae6ea437673f4ebe3d17f7771b9d3ea26bb10e9c6b75a197769d9d5eee50f23e",
+          "sha256": "ae6ea437673f4ebe3d17f7771b9d3ea26bb10e9c6b75a197769d9d5eee50f23e",
+          "bytes": 12256
+        },
+        "primary.tar.xz": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/be/be9520488109fbdf78dcbf4b33f34bb367d2b2aebe1abd31f2c3235591f0b31b",
+          "sha256": "be9520488109fbdf78dcbf4b33f34bb367d2b2aebe1abd31f2c3235591f0b31b",
+          "bytes": 1229332
+        }
+      },
+      "members": 77,
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "target_position": 6,
+      "all8_observations_complete": true,
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "threshold": 0.023252703356543683,
+      "actual_first_input_interval_seconds": 2.0005,
+      "last_quiet_tail_seconds": 2.0005000000000006,
+      "comparison_policy": "reset_vs_preserve_same_order_and_windows",
+      "complete_window_pairs_compared": 8,
+      "all_compared_signals_equal_within_declared_tolerance": true,
+      "all_compared_events_equal": true,
+      "maximum_absolute_signal_difference": 5.3734794391857577e-14,
+      "different_window_samples_not_clipped": [],
+      "gallery_review_pending": true,
+      "new_Train": false,
+      "new_threshold": false
+    },
+    {
+      "phase": "long-r3-reset",
+      "catalog": {
+        "relative_path": "experiments/2026-11-26/Elder-q3-long-r3-reset-independent-fe11.json",
+        "bytes": 23012,
+        "sha256": "693f3737fdc5ce613eccbc2c2d70cdce5720081f8ec4ecf026c9ebb1b11f44db"
+      },
+      "objects": {
+        "bundle.json": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/94/948f48bfb180ae7a39988038ee111dd27ee22dd367e8226ff5804ee4934a98b1",
+          "sha256": "948f48bfb180ae7a39988038ee111dd27ee22dd367e8226ff5804ee4934a98b1",
+          "bytes": 12248
+        },
+        "primary.tar.xz": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/5e/5e465c63717cf20ba383d87f7703af754b6df3d29b3e04f2c03fcbbdd77ad53e",
+          "sha256": "5e465c63717cf20ba383d87f7703af754b6df3d29b3e04f2c03fcbbdd77ad53e",
+          "bytes": 1242496
+        }
+      },
+      "members": 77,
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "target_position": 5,
+      "all8_observations_complete": true,
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "threshold": 0.023252703356543683,
+      "actual_first_input_interval_seconds": 2.0005,
+      "last_quiet_tail_seconds": 2.0005000000000006,
+      "comparison_policy": "changed_order_same_reset_policy",
+      "complete_window_pairs_compared": 6,
+      "all_compared_signals_equal_within_declared_tolerance": true,
+      "all_compared_events_equal": true,
+      "maximum_absolute_signal_difference": 0,
+      "different_window_samples_not_clipped": [
+        "phasea-row-7",
+        "phasea-row-2"
+      ],
+      "gallery_review_pending": true,
+      "new_Train": false,
+      "new_threshold": false
+    }
+  ],
+  "independently_accepted_primary_cases_total": 7,
+  "fully_reviewed_galleries_total": 3,
+  "full32_case_matrix_complete": false,
+  "scientific_verdict": null
+}
