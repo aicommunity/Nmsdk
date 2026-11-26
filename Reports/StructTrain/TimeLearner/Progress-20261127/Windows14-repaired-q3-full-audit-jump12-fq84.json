@@ -1,0 +1,58 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+  "catalog": {
+    "relative_path": "experiments/2026-11-27/Windows14-repaired-q3-full-audit-jump12-fq84.json",
+    "bytes": 2456,
+    "sha256": "54838404acc72e6a0c42234f4c76cfbc47a46395c72b9d111c6061fb3b1471c5"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a8/a8f5916a1915ba04902aef78439fd9652910113fb0ce4110b14ac0819b4f92d1",
+      "sha256": "a8f5916a1915ba04902aef78439fd9652910113fb0ce4110b14ac0819b4f92d1",
+      "bytes": 5120
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ce/ce65ede5565afde32af707dd9e58cea876578ed4cb9201e3311c8e2ba9bd742e",
+      "sha256": "ce65ede5565afde32af707dd9e58cea876578ed4cb9201e3311c8e2ba9bd742e",
+      "bytes": 7528
+    }
+  },
+  "members": 31,
+  "source_catalog": "experiments/2026-11-27/Windows14-repaired-q3-collected-primary-fq64.json",
+  "full_primary_audit": {
+    "path": "/home/user/Nmsdk-experiments/Windows14-q3-full-primary-audit-fq66/full-primary-audit.json",
+    "sha256": "5ea9528bde43a2fb505b7104f5321d50846ecabfe8b89caf5f5305d8e69ee37d",
+    "size": 54158
+  },
+  "source_job_sha256": "4404473788adb0addc5d8b89004007a220a45373f253f4c52e601c64251c317f",
+  "actual_model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+  "training_outcome": "budget_exhausted",
+  "completed_boundary": false,
+  "certificate_present": false,
+  "all1115_original_primary_members_restored": true,
+  "source_primary_expanded_bytes": 2187391032,
+  "all_actual_auditor_loaded_file_bytes_stored": true,
+  "auditor_group_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "965224c3060643b0cd10f7b63ba282b54a15dc32e0572835741ff1e3d8c92508",
+    "unit": "timelearner-870046ff-46c4-4c12-a32e-c354cc66fd56.service",
+    "invocation_id": "15e9a8b176f1495e99a44d519b4cf601",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-870046ff-46c4-4c12-a32e-c354cc66fd56.service",
+    "initial_main_pid": 1532640,
+    "initial_start_ticks": "636352232",
+    "sha256": "fc1399a8a38a6806fa888e868db5f524f99692f367b17c6bd407814a50a07b29"
+  },
+  "auditor_all_processes_closed": true,
+  "classification_not_yet_measured": true,
+  "independent_archive_restoration_pending": true,
+  "scientific_verdict": null
+}
