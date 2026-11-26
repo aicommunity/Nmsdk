@@ -7155,3 +7155,109 @@ TEST(NativeTerminalPlainPackage,ClassicCompletedN0WithoutTransition){NativeTermi
 TEST(NativeTerminalPlainPackage,BranchCompletedN0WithoutTransition){NativeTerminalCompletedPlainPackage<NNeuronTimeLearnerBranch>(0);}
 TEST(NativeTerminalPlainPackage,ClassicCompletedN1WithoutTransition){NativeTerminalCompletedPlainPackage<NNeuronTimeLearner>(1);}
 TEST(NativeTerminalPlainPackage,BranchCompletedN1WithoutTransition){NativeTerminalCompletedPlainPackage<NNeuronTimeLearnerBranch>(1);}
+namespace {
+template<class Learner> void LiveTrainingFrequencyContext(unsigned originalFrequency,int normalization,bool duringSearch)
+{
+    EditingRig<Learner> rig(originalFrequency,normalization,
+        duringSearch?"frequency_context_search":"frequency_context_capture",false,2,true);
+    const unsigned changedFrequency=originalFrequency==2000?20000:2000;
+    auto plan=TrainingPlan(rig);bool pending=false,injected=false,recovering=false;
+    std::size_t actualInputs=0;double maximumPotential=0.;std::vector<NativeProbeResult> packets;
+    QJsonArray samples;
+    plan.probe.onSample=[&](const NativeProbeSample& sample) {
+        const auto state=rig.learner->NativeTrainingController().State();
+        QJsonArray potential;for(double value:sample.potentials)potential.append(value);
+        samples.append(QJsonObject{{"time",sample.time},{"input",sample.stimulus},
+            {"potentials",potential},{"state",NativeTrainingStateName(state)},
+            {"after_frequency_edit",injected},{"recovering",recovering},
+            {"effective_frequency_hz",int(rig.learner->GetTimeStep())}});
+        if(recovering || injected)return;
+        const auto target=duringSearch?NativeTrainingState::Searching:NativeTrainingState::CapturingReferences;
+        if(state!=target)return;
+        actualInputs+=sample.newStimuli.size();
+        for(double value:sample.potentials)maximumPotential=std::max(maximumPotential,std::abs(value));
+        if(actualInputs>=2 && maximumPotential>1e-12)pending=true;
+    };
+    plan.observationSink=[&](const NativeProbeResult& result){packets.push_back(result);};
+    RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount,"_frequency_context_");
+    rig.learner->BeginNativeTraining(plan);
+    std::string beforeRevision,changedRevision;std::size_t referenceCountAtEdit=0;
+    for(unsigned tick=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick) {
+        ASSERT_LT(tick,originalFrequency*8u);
+        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+        if(pending && !injected) {
+            // Simulate an external edit BETWEEN native ticks. The sample sink
+            // itself remains read-only; no nested model calculation is used.
+            const auto& controller=rig.learner->NativeTrainingController();
+            referenceCountAtEdit=controller.ReferencePackets().size();
+            beforeRevision=rig.Revision();rig.model->SetGlobalTimeStep(changedFrequency);
+            changedRevision=rig.Revision();injected=true;
+        }
+    }
+    const auto& stopped=rig.learner->NativeTrainingController();
+    ASSERT_TRUE(injected)<<stopped.Reason();ASSERT_GE(actualInputs,2u);ASSERT_GT(maximumPotential,1e-12);
+    EXPECT_EQ(referenceCountAtEdit,duringSearch?rig.inputCount:0u);
+    EXPECT_NE(beforeRevision,changedRevision);EXPECT_FALSE(stopped.Certificate());
+    EXPECT_TRUE(stopped.Outcome()==TrainingStatus::InvalidModel || stopped.Outcome()==TrainingStatus::InvalidObservation)
+        <<TrainingStatusName(stopped.Outcome())<<":"<<stopped.Reason();
+    const auto failure=stopped.Reason();
+    EXPECT_TRUE(failure.find("revision")!=std::string::npos || failure.find("frequency")!=std::string::npos ||
+        failure.find("context")!=std::string::npos || failure.find("rebuild")!=std::string::npos)
+        <<failure;
+    ASSERT_FALSE(packets.empty());
+    EXPECT_FALSE(packets.back().observation && packets.back().observation->valid &&
+        packets.back().status==NativeProbeStatus::Completed);
+    const auto failedOutcome=stopped.Outcome();QJsonArray beforeRestartPackets;
+    for(const auto& packet:packets)beforeRestartPackets.append(EncodeNativeProbeEvidence(packet));
+    // A warm restart cannot turn historical references into evidence at a new
+    // frequency, or silently rewrite the immutable model declaration.
+    rig.learner->BeginNativeTraining(plan);
+    const auto& refused=rig.learner->NativeTrainingController();
+    EXPECT_EQ(refused.State(),NativeTrainingState::Finished);
+    EXPECT_EQ(refused.Outcome(),TrainingStatus::InvalidModel);EXPECT_FALSE(refused.Certificate());
+    EXPECT_EQ(refused.IssuedReferenceProbes(),0u);const auto restartReason=refused.Reason();
+    EXPECT_FALSE(restartReason.empty());EXPECT_EQ(rig.learner->GetTimeStep(),changedFrequency);
+    // Explicit recovery restores the declared physical clock and requests fresh
+    // references. A real complete probe, rather than a bool, proves recovery.
+    rig.model->SetGlobalTimeStep(originalFrequency);recovering=true;packets.clear();
+    rig.learner->BeginNativeTraining(plan,true);
+    ASSERT_EQ(rig.learner->NativeTrainingController().State(),NativeTrainingState::CapturingReferences)
+        <<rig.learner->NativeTrainingController().Reason();
+    for(unsigned tick=0;packets.empty();++tick) {
+        ASSERT_LT(tick,originalFrequency*2u);
+        ASSERT_NE(rig.learner->NativeTrainingController().State(),NativeTrainingState::Finished)
+            <<rig.learner->NativeTrainingController().Reason();
+        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    }
+    ASSERT_EQ(packets.front().status,NativeProbeStatus::Completed);ASSERT_TRUE(packets.front().observation);
+    EXPECT_TRUE(packets.front().observation->valid);EXPECT_EQ(rig.learner->GetTimeStep(),originalFrequency);
+    EXPECT_EQ(rig.learner->NativeTrainingController().ReferencePackets().size(),1u);
+    EXPECT_FALSE(rig.learner->NativeTrainingController().Certificate());rig.learner->IsNeedToTrain=false;
+    Artifact(rig.name+"_frequency_context.json",QJsonDocument(QJsonObject{
+        {"kind","native_live_training_frequency_context"},{"schema_version",1},{"branch",rig.branch},
+        {"normalization",normalization},{"original_frequency_hz",int(originalFrequency)},
+        {"changed_frequency_hz",int(changedFrequency)},{"during_search",duringSearch},
+        {"actual_inputs_before_edit",double(actualInputs)},{"maximum_potential_before_edit",maximumPotential},
+        {"reference_packets_at_edit",double(referenceCountAtEdit)},{"before_revision",QString::fromStdString(beforeRevision)},
+        {"changed_revision",QString::fromStdString(changedRevision)},{"failed_outcome",TrainingStatusName(failedOutcome)},
+        {"failure",QString::fromStdString(failure)},{"warm_restart_reason",QString::fromStdString(restartReason)},
+        {"before_restart_packets",beforeRestartPackets},{"recovery_packet",EncodeNativeProbeEvidence(packets.front())},
+        {"samples",samples},{"new_scientific_Train",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+}
+TEST(NativeTrainingFrequencyContext,ClassicN0At2000Capture){LiveTrainingFrequencyContext<NNeuronTimeLearner>(2000,0,false);}
+TEST(NativeTrainingFrequencyContext,ClassicN0At2000Search){LiveTrainingFrequencyContext<NNeuronTimeLearner>(2000,0,true);}
+TEST(NativeTrainingFrequencyContext,ClassicN0At20000Capture){LiveTrainingFrequencyContext<NNeuronTimeLearner>(20000,0,false);}
+TEST(NativeTrainingFrequencyContext,ClassicN0At20000Search){LiveTrainingFrequencyContext<NNeuronTimeLearner>(20000,0,true);}
+TEST(NativeTrainingFrequencyContext,ClassicN1At2000Capture){LiveTrainingFrequencyContext<NNeuronTimeLearner>(2000,1,false);}
+TEST(NativeTrainingFrequencyContext,ClassicN1At2000Search){LiveTrainingFrequencyContext<NNeuronTimeLearner>(2000,1,true);}
+TEST(NativeTrainingFrequencyContext,ClassicN1At20000Capture){LiveTrainingFrequencyContext<NNeuronTimeLearner>(20000,1,false);}
+TEST(NativeTrainingFrequencyContext,ClassicN1At20000Search){LiveTrainingFrequencyContext<NNeuronTimeLearner>(20000,1,true);}
+TEST(NativeTrainingFrequencyContext,BranchN0At2000Capture){LiveTrainingFrequencyContext<NNeuronTimeLearnerBranch>(2000,0,false);}
+TEST(NativeTrainingFrequencyContext,BranchN0At2000Search){LiveTrainingFrequencyContext<NNeuronTimeLearnerBranch>(2000,0,true);}
+TEST(NativeTrainingFrequencyContext,BranchN0At20000Capture){LiveTrainingFrequencyContext<NNeuronTimeLearnerBranch>(20000,0,false);}
+TEST(NativeTrainingFrequencyContext,BranchN0At20000Search){LiveTrainingFrequencyContext<NNeuronTimeLearnerBranch>(20000,0,true);}
+TEST(NativeTrainingFrequencyContext,BranchN1At2000Capture){LiveTrainingFrequencyContext<NNeuronTimeLearnerBranch>(2000,1,false);}
+TEST(NativeTrainingFrequencyContext,BranchN1At2000Search){LiveTrainingFrequencyContext<NNeuronTimeLearnerBranch>(2000,1,true);}
+TEST(NativeTrainingFrequencyContext,BranchN1At20000Capture){LiveTrainingFrequencyContext<NNeuronTimeLearnerBranch>(20000,1,false);}
+TEST(NativeTrainingFrequencyContext,BranchN1At20000Search){LiveTrainingFrequencyContext<NNeuronTimeLearnerBranch>(20000,1,true);}
