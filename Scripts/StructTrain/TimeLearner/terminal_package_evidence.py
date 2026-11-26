@@ -139,6 +139,8 @@ def _physical(package):
 
 def _selected(event, package, source_audit, packets, traces, used):
     selected=event['selected'];protocol=package['protocol'];index=count(selected['input_index'])
+    from .candidate_measurement_purpose import measurement_purpose_inventory
+    measurement_purpose_inventory([selected])
     require(index<len(protocol['inputs']), 'terminal_selected_input')
     audit_identity(selected['neuron_identity']);audit_identity(selected['dataset_identity'])
     validate_graph_input_parameters(package['configuration']['model'],selected['neuron_identity'],selected['parameters'])

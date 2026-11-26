@@ -518,6 +518,8 @@ def _audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str
 
     for index, parameters in enumerate(summary["actual_parameters"]):
         parameters_legal(parameters, index)
+    from .candidate_measurement_purpose import measurement_purpose_inventory
+    purposes = measurement_purpose_inventory(summary["candidates"])
     for candidate in summary["candidates"]:
         index = count(candidate["input_index"])
         require(index in indices and index + 1 < len(refs), "unknown_or_fixed_candidate_input")
@@ -576,10 +578,13 @@ def _audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str
         require(covered == set(candidates), "candidate_repeat_coverage_incomplete")
     repeat_validation = ({"training_summary_schema": 2, "candidate_repeat_groups_checked": len(summary["candidate_repeat_groups"])}
                          if schema == 2 else {})
-    return {"auditor_version": AUDITOR_VERSION, "certificate_consistent": certificate is not None, "exact": exact, **repeat_validation,
+    result = {"auditor_version": AUDITOR_VERSION, "certificate_consistent": certificate is not None, "exact": exact, **repeat_validation,
             "search_history_retained": history_retained,
             "model_revision": certificate["model_revision"] if certificate is not None else summary["actual_model_revision"], "reference_count": len(refs),
             "candidate_count": len(summary["candidates"]), "evaluation_verdict": None}
+    if purposes is not None:
+        result['candidate_measurement_purpose_inventory'] = purposes
+    return result
 
 
 def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str, Any]],
