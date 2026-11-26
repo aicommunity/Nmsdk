@@ -27,6 +27,9 @@ PHASES = ('conversion', 'baseline', 'threshold', 'confirmation')
 FIELDS = {'kind', 'schema_version', 'job_id', 'worker_host', 'execution_root', 'tool_commit',
           'source_training_request', 'source_audit_controls', 'source_audit_owner',
           'source_audit_output', 'expected_job_sha256', 'protocol_root_commit', 'patterns'}
+PROJECTED_FIELDS = (FIELDS-{'source_audit_controls', 'source_audit_owner'}) | {
+    'native_evaluation_wall_seconds', 'source_audit_terminal', 'source_contained_groups',
+    'predecessor_controls', 'predecessor_owner'}
 
 
 def write(path, value):
@@ -42,11 +45,11 @@ def evaluation_limits(q):
     These are execution limits only; no physical/model time is changed.
     """
     version = q.get('schema_version') if type(q) is dict else None
-    fields = FIELDS | {'native_evaluation_wall_seconds'} if version == 2 else FIELDS
-    require(type(version) is int and version in (1, 2) and set(q) == fields and
+    fields = PROJECTED_FIELDS if version == 3 else FIELDS | {'native_evaluation_wall_seconds'} if version == 2 else FIELDS
+    require(type(version) is int and version in (1, 2, 3) and set(q) == fields and
             q['kind'] == 'timelearner_linux_audited_DATA_recognition_sequence',
             'linux_DATA_sequence_request_schema')
-    seconds = q['native_evaluation_wall_seconds'] if version == 2 else 3600
+    seconds = q['native_evaluation_wall_seconds'] if version in (2, 3) else 3600
     require(type(seconds) is int and 0 < seconds <= 36000,
             'linux_DATA_sequence_evaluation_wall_budget')
     return dict(native_wall_seconds=seconds, python_phase_wall_seconds=seconds+400,
@@ -76,10 +79,34 @@ def context(request_path):
     runtime = Path(training['runtime']['path'])
     require(runtime.resolve(strict=True) == runtime and runtime.is_relative_to(base) and
             file_record(runtime) == training['runtime'], 'linux_DATA_sequence_runtime_binding')
-    for key, area in [('source_audit_controls', 'requests'), ('source_audit_output', 'readbacks')]:
+    audit_paths = [('source_audit_output', 'readbacks')]
+    if q['schema_version'] != 3:
+        audit_paths.append(('source_audit_controls', 'requests'))
+    for key, area in audit_paths:
         p = Path(q[key])
         require(p.parent == base/area and p.resolve(strict=True) == p,
                 'linux_DATA_sequence_audit_path:'+key)
+    if q['schema_version'] == 3:
+        from .owned_native_job import _validate_identity
+        _validate_identity(q['predecessor_owner'])
+        predecessor = Path(q['predecessor_controls'])
+        require(predecessor.parent == base/'requests' and predecessor.resolve(strict=True) == predecessor and
+                predecessor != controls, 'linux_DATA_sequence_predecessor_scope')
+        terminal = q['source_audit_terminal']
+        require(type(terminal) is dict and set(terminal) == {'path','sha256','size'} and
+                Path(terminal['path']) == Path(q['source_audit_output'])/'worker-terminal.json' and
+                file_record(Path(terminal['path'])) == terminal, 'linux_DATA_sequence_original_audit_terminal')
+        expected_groups = {'train': base/'readbacks'/training['job_id']/'train/process/contained',
+                           'audit': Path(q['source_audit_output'])/'process/contained'}
+        require(type(q['source_contained_groups']) is dict and set(q['source_contained_groups']) == set(expected_groups),
+                'linux_DATA_sequence_original_groups_required')
+        for role, directory in expected_groups.items():
+            row = q['source_contained_groups'][role]
+            require(type(row) is dict and set(row) == {'directory','binding_sha256'} and
+                    row['directory'] == str(directory) and directory.resolve(strict=True) == directory and
+                    type(row['binding_sha256']) is str and len(row['binding_sha256']) == 64 and
+                    all(c in '0123456789abcdef' for c in row['binding_sha256']),
+                    'linux_DATA_sequence_original_group_binding:'+role)
     patterns = q['patterns']
     require(type(patterns) is list and len(patterns) == 8 and
             len({r['sample_id'] for r in patterns}) == len({r['pattern_hash'] for r in patterns}) == 8 and
@@ -100,6 +127,9 @@ def guard(p):
     require(file_record(p['request']) == p['request_record'] and
             file_record(Path(p['q']['source_training_request']['path'])) == p['q']['source_training_request'] and
             file_record(p['runtime']) == p['training']['runtime'], 'linux_DATA_sequence_bound_input_changed')
+    if p['q']['schema_version'] == 3:
+        row = p['q']['source_audit_terminal']
+        require(file_record(Path(row['path'])) == row, 'linux_DATA_sequence_original_audit_changed')
 
 
 def wait_capacity(p, registry, begun, phase, *, check_guard=guard):
@@ -140,7 +170,7 @@ def bind_condition(p, phase, job, model, directory):
     limits = evaluation_limits(p['q'])
     execution_policy = dict(native_memory_bytes=8*GIB,
         native_wall_seconds=limits['native_wall_seconds'], automatic_retry=False)
-    if p['q']['schema_version'] == 2:
+    if p['q']['schema_version'] in (2, 3):
         execution_policy['python_phase_wall_seconds'] = limits['python_phase_wall_seconds']
     payloads = dict(
         algorithm=dict(implementation_id=model['implementation_id'],
@@ -171,17 +201,22 @@ def bind_condition(p, phase, job, model, directory):
 def source_binding(p):
     q = p['q']; audit = Path(q['source_audit_output'])
     terminal = load(audit/'worker-terminal.json')
+    projected_here = q['schema_version'] == 3
     require(terminal['execution'] == 'completed' and terminal['validity'] == 'valid' and
-            terminal['source_original_unchanged'] is True, 'linux_DATA_sequence_audit_not_accepted')
+            (projected_here or terminal.get('source_original_unchanged') is True),
+            'linux_DATA_sequence_audit_not_accepted')
     proof_path = Path(terminal['full_primary_audit']['path'])
     require(proof_path == audit/'full-primary-audit.json' and
             file_record(proof_path) == terminal['full_primary_audit'], 'linux_DATA_sequence_audit_record')
-    proof = load(proof_path); projected = load(audit/'physical-projection.json')
-    data = audit/'physical-model-DATA.json'
+    proof = load(proof_path)
+    projection_root = p['output']/'preparation' if projected_here else audit
+    projected = load(projection_root/'physical-projection.json')
+    data = projection_root/'physical-model-DATA.json'
     native = p['base']/'readbacks'/p['training']['job_id']/'train/native'
     execution = load(native/'execution.json')
     require(execution['job_sha256'] == load(native/'job.json')['sha256'] == q['expected_job_sha256'] and
-            execution['training_outcome'] == proof['training_outcome'] == terminal['original_training_outcome'] and
+            execution['training_outcome'] == proof['training_outcome'] ==
+                terminal['training_outcome' if projected_here else 'original_training_outcome'] and
             type(execution['completed_boundary']) is bool and
             execution['completed_boundary'] == proof['completed_boundary'] == terminal['completed_boundary'] and
             execution['model_revision'] == projected['model_revision'] == proof['training_audit']['model_revision'] and
@@ -194,11 +229,41 @@ def source_binding(p):
     require(type(filename) is str and Path(filename).name == filename and '/' not in filename and
             '\\' not in filename and filename in ('train_stopped_state.json', 'train_learned_state.json') and
             file_record(native/filename) == compact['source_package'], 'linux_DATA_sequence_actual_package_changed')
+    if projected_here:
+        require(projected['source'] == compact['source_package'] and projected['source_unchanged'] is True and
+                projected['source_training_evidence_checked'] is False and
+                projected['training_certificate_transferred'] is False and
+                projected['native_import_verified'] is False, 'linux_DATA_sequence_projection_scope_changed')
     return dict(kind='timelearner_actual_audited_Train_to_DATA_source_binding', schema_version=1,
         job_sha256=q['expected_job_sha256'], model_revision=execution['model_revision'],
         source_training_outcome=execution['training_outcome'], completed_boundary=execution['completed_boundary'],
         full_primary_audit=terminal['full_primary_audit'], source_DATA=file_record(data),
         source_package=compact['source_package'], original_training_unchanged=True, scientific_verdict=None)
+
+
+def original_projection_source(p):
+    """Bind the actual closed Train and its prior full audit, without reauditing history."""
+    from .contained_process import inspect
+    q = p['q']; require(q['schema_version'] == 3, 'linux_DATA_sequence_explicit_projection_required')
+    for role, row in q['source_contained_groups'].items():
+        observed = inspect(Path(row['directory']))
+        require(observed['all_processes_closed'] and observed['binding']['sha256'] == row['binding_sha256'],
+                'linux_DATA_sequence_original_group_not_closed:'+role)
+    audit = Path(q['source_audit_output']); terminal = load(audit/'worker-terminal.json')
+    proof = load(audit/'full-primary-audit.json'); compact = load(audit/'compact-training-readback.json')
+    native = p['base']/'readbacks'/p['training']['job_id']/'train/native'
+    execution = load(native/'execution.json'); package = compact['source_package']
+    require(execution['package_path'] in ('train_stopped_state.json','train_learned_state.json') and
+            terminal['execution'] == 'completed' and terminal['validity'] == 'valid' and
+            file_record(audit/'full-primary-audit.json') == terminal['full_primary_audit'] and
+            file_record(audit/'compact-training-readback.json') == terminal['compact'] and
+            execution['job_sha256'] == compact['job_sha256'] == q['expected_job_sha256'] and
+            package['path'] == str(native/execution['package_path']) and
+            execution['model_revision'] == proof['training_audit']['model_revision'] and
+            execution['training_outcome'] == proof['training_outcome'] == terminal['training_outcome'] and
+            execution['completed_boundary'] == proof['completed_boundary'] == terminal['completed_boundary'],
+            'linux_DATA_sequence_original_primary_source_mismatch')
+    return dict(package=package, execution=execution, terminal=terminal, native=native, audit=audit)
 
 
 def phase_worker(request_path, phase):
@@ -211,6 +276,29 @@ def phase_worker(request_path, phase):
     state = inspect(directory/'process/contained')
     require(not state['all_processes_closed'] and state['binding']['initial_main_pid'] == os.getpid(),
             'linux_DATA_sequence_phase_not_bound_main')
+    if phase == 'preparation':
+        require(q['schema_version'] == 3, 'linux_DATA_sequence_preparation_requires_explicit_schema3')
+        from .physical_data_projection import project_file
+        from .resource_reservations import Reservations
+        original = original_projection_source(p)
+        native, audit, package = original['native'], original['audit'], original['package']
+        registry = Reservations.open_existing(p['base']/'resource-reservations.sqlite3')
+        lease = registry.reserve(q['job_id']+'-preparation', [dict(path=str(v), access=a) for v,a in
+            [(SOURCE,'read'),(p['controls'],'read'),(native,'read'),(audit,'read'),(directory,'write')]],
+            ttl_seconds=2100, demands=dict(slots=1, memory_bytes=16*GIB, disk_bytes=2*GIB))
+        write(directory/'reservation.json', lease)
+        projection = project_file(Path(package['path']), directory/'physical-model-DATA.json',
+            expected_bytes=package['size'], expected_sha256=package['sha256'],
+            maximum_source_bytes=4*GIB, maximum_output_bytes=128*1024**2)
+        require(projection['model_revision'] == original['execution']['model_revision'],
+                'linux_DATA_sequence_projection_graph_changed')
+        write(directory/'physical-projection.json', projection)
+        guard(p); _source_snapshot(SOURCE, q['tool_commit'])
+        write(directory/'terminal.json', dict(execution='completed', validity='valid',
+            model_revision=projection['model_revision'], prior_primary_audit=original['terminal']['full_primary_audit'],
+            original_history_reaudited_here=False, native_import_verified=False,
+            training_certificate_transferred=False, scientific_verdict=None))
+        return
     bound = load(p['output']/'actual-source-binding.json')
     names = {v:q['job_id']+'-'+v for v in PHASES}
     outputs = {v:p['base']/'readbacks'/names[v] for v in PHASES}
@@ -295,14 +383,24 @@ def supervise(request_path):
     registry = Reservations.open_existing(p['base']/'resource-reservations.sqlite3')
     begun = time.monotonic()
     try:
-        audit_control = Path(q['source_audit_controls']); audit_output = Path(q['source_audit_output'])
+        audit_output = Path(q['source_audit_output']); projected_here = q['schema_version'] == 3
+        audit_control = Path(q['predecessor_controls'] if projected_here else q['source_audit_controls'])
+        expected_owner = q['predecessor_owner'] if projected_here else q['source_audit_owner']
         while True:
             guard(p); require(time.monotonic()-begun < 100000, 'linux_DATA_sequence_audit_wait_budget')
             require(not (p['controls']/'cancel.request').exists(), 'linux_DATA_sequence_cancelled')
-            require(load(audit_control/'owner.json') == q['source_audit_owner'], 'linux_DATA_sequence_audit_owner_changed')
-            live = _same_process(q['source_audit_owner'])
-            require(not (audit_control/'exception.json').exists(), 'linux_DATA_sequence_original_audit_failed_no_retry')
-            if not live and (audit_control/'terminal.json').is_file() and registry.inspect()['reserved']['slots'] == 0:
+            require(load(audit_control/'owner.json') == expected_owner, 'linux_DATA_sequence_audit_owner_changed')
+            live = _same_process(expected_owner)
+            if not projected_here:
+                require(not (audit_control/'exception.json').exists(), 'linux_DATA_sequence_original_audit_failed_no_retry')
+            ready = not live and registry.inspect()['reserved']['slots'] == 0
+            if ready and projected_here:
+                for role, row in q['source_contained_groups'].items():
+                    observed = inspect(Path(row['directory']))
+                    require(observed['all_processes_closed'] and observed['binding']['sha256'] == row['binding_sha256'],
+                            'linux_DATA_sequence_original_group_not_closed:'+role)
+                break
+            if ready and (audit_control/'terminal.json').is_file():
                 require(load(audit_control/'terminal.json')['returncode'] == 0 and
                         inspect(audit_output/'process/contained')['all_processes_closed'],
                         'linux_DATA_sequence_audit_closure')
@@ -312,9 +410,11 @@ def supervise(request_path):
                 audit_owner_live=live, waiting_for='exact_full_primary_audit_DATA_and_free_slot',
                 native_recognition_started=False))+'\n')
             os.replace(pending, p['controls']/'waiting.json'); time.sleep(30)
-        bound = source_binding(p); write(root/'actual-source-binding.json', bound)
+        bound = None
+        if not projected_here:
+            bound = source_binding(p); write(root/'actual-source-binding.json', bound)
         results = {}
-        for phase in PHASES:
+        for phase in (('preparation',)+PHASES if projected_here else PHASES):
             guard(p)
             if phase == 'threshold' and load(root/'baseline/threshold-proposal.json')['status'] != 'candidate':
                 write(root/'terminal.json', dict(execution='completed', validity='valid',
@@ -334,14 +434,17 @@ def supervise(request_path):
             write(directory/'runtime.json', runtime)
             child = p['base']/'readbacks'/(q['job_id']+'-'+phase)/'process/contained'
             code = _run_owned(runtime, ['-B', '-m', MODULE, '--worker', str(p['request']), phase], SOURCE,
-                directory, directory, [child], registry, q['job_id']+'-'+phase,
-                dict(memory_bytes=(1 if phase in ('conversion', 'threshold') else 4)*GIB,
+                directory, directory, [] if phase == 'preparation' else [child], registry, q['job_id']+'-'+phase,
+                dict(memory_bytes=(16 if phase == 'preparation' else 1 if phase in ('conversion', 'threshold') else 4)*GIB,
                      tasks=128, maximum_wall_seconds=(p['evaluation_limits']['python_phase_wall_seconds']
-                         if phase in ('baseline', 'confirmation') else 4000)),
+                         if phase in ('baseline', 'confirmation') else 1800 if phase == 'preparation' else 4000)),
                 dict(minimum_free_bytes=4*GIB, maximum_increment_bytes=2*GIB),
+                [root] if phase == 'preparation' else
                 [root, p['base']/'readbacks'/(q['job_id']+'-'+phase)], control_guard=lambda:guard(p))
             require(code == 0, 'linux_DATA_sequence_phase_failed_preserved:'+phase)
             results[phase] = load(directory/'terminal.json')
+            if phase == 'preparation':
+                bound = source_binding(p); write(root/'actual-source-binding.json', bound)
         actual = results['confirmation']['result']; counts = actual['counts']
         write(root/'terminal.json', dict(execution='completed', validity='valid', actual_source=bound,
             baseline=results['baseline']['result'], actual_evaluation=actual,
@@ -363,7 +466,7 @@ def main():
     group.add_argument('--worker', nargs=2, metavar=('REQUEST', 'PHASE'))
     args = parser.parse_args()
     if args.worker:
-        require(args.worker[1] in PHASES, 'linux_DATA_sequence_unknown_phase')
+        require(args.worker[1] in ('preparation',)+PHASES, 'linux_DATA_sequence_unknown_phase')
         phase_worker(Path(args.worker[0]), args.worker[1])
     else:
         supervise(args.supervise)
