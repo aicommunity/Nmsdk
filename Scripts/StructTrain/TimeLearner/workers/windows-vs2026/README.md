@@ -108,10 +108,15 @@ build and runtime separate, and do not edit a running attempt.
 
 `audit-closed-build.py` audits artifacts from a terminal owned build. It requires
 the original main process and named Job to be absent, verifies the original
-negative result and bound records, compares the entire physical SDK namespace,
+result and bound records, compares the entire physical SDK namespace,
 dependency/tool inventories and runtime before/after, and checks the selected
 executable hashes. It executes no compiled test. An independent successful audit
 does not rewrite `build_accepted=false` or excuse remaining descendants.
+It accepts a successful build only with `build_accepted=true`, execution
+`completed`, integer exit code zero, valid observations and whole-Job closure.
+Its historical recovery case remains restricted to the original negative
+`descendants_remaining` result with zero exit code and subsequent kernel absence.
+The audit records the actual original acceptance value in either case.
 
 `validate-native.py` consumes that exact audit and the unchanged source/runtime.
 It invokes the **production schema4 native gate and Windows Job backend from the

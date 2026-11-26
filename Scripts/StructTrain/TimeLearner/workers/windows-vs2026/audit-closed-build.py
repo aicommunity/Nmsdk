@@ -86,6 +86,27 @@ def verify_original_kernel(owned):
     return {'original_named_job_absent': True, 'original_main_absent': True, 'pid_reused': reused}
 
 
+def original_build_outcome(terminal, result):
+    """Admit a healthy build or the original narrowly supported recovery case.
+
+    Kernel absence and immutable source/runtime checks are still mandatory in
+    main(). A recovered build keeps its original negative acceptance result.
+    """
+    require(type(terminal) is dict and terminal.get('kind') == 'timelearner_windows_sdk_build' and
+            type(terminal.get('build_accepted')) is bool and type(result) is dict and
+            result.get('kind') == 'timelearner_windows_process_result' and
+            type(result.get('schema_version')) is int and result['schema_version'] == 1 and
+            type(result.get('returncode')) is int and result['returncode'] == 0 and
+            result.get('validity') == 'valid' and result.get('all_processes_closed') is True,
+            'unexpected_original_build_outcome')
+    accepted = terminal['build_accepted']
+    execution = result.get('execution')
+    require((accepted and execution == 'completed') or
+            (not accepted and execution == 'descendants_remaining'),
+            'unexpected_original_build_outcome')
+    return {'original_execution': execution, 'original_build_accepted': accepted}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--specification', required=True, type=Path)
@@ -129,9 +150,7 @@ def main():
                 private_path(original_spec['installed_dependencies']) == dependencies and
                 original_spec['source_commit'] == spec['source_commit'] and
                 original_spec['namespace_git_blob'] == spec['namespace_git_blob'], 'original_build_binding_changed')
-        require(terminal['build_accepted'] is False and result['returncode'] == 0 and
-                result['validity'] == 'valid' and result['all_processes_closed'] is True and
-                result['execution'] == 'descendants_remaining', 'unexpected_original_build_outcome')
+        original_outcome = original_build_outcome(terminal, result)
         emit(output, 'kernel-before.json', verify_original_kernel(json.loads((original/'build-process/owned-process.json').read_bytes())))
         require(git(source, 'rev-parse', 'HEAD') == spec['source_commit'], 'source_head_changed')
         namespace = json.loads(git(source, 'cat-file', 'blob', spec['namespace_git_blob']))
@@ -179,7 +198,7 @@ def main():
         emit(output, 'audit.json', {'source_commit': spec['source_commit'], 'source_closure': closure_before,
             'verified_source_files': len(namespace), 'dependency_files': len(dependency_after), 'runtime_files': len(runtime_before),
             'targets': {name:file_record(runtime/name) for name in spec['expected_targets']},
-            'original_execution': result['execution'], 'original_build_accepted': False,
+            **original_outcome,
             'compiled_tests_executed': False, 'scientific_worker_admitted': False, 'scientific_verdict': None})
         guard();passed = True
     except BaseException as error:
