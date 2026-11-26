@@ -136,6 +136,13 @@ still checks available physical memory and verifies Job limits before resuming
 the process. Declare a fresh attempt when changing resource limits, preserving
 any rejected predecessor. Record the actual phase limits with the attempt.
 
+Initialize every new standalone controls Git repository with a tracked
+`.gitattributes` containing `* -text` before its first add. System Git on
+Windows can otherwise normalize CRLF metadata and command files. Preserve
+actual archived bytes and Git blobs separately when auditing an older control
+bundle; identify any exact EOL-only differences explicitly. Do not rewrite
+the inputs or controls commit of a running experiment to repair its history.
+
 Validation specification version2 declares `partitions`: each has a unique
 safe name, exact `expected_test_ids` and `maximum_wall_seconds`. Their disjoint
 union must equal the complete top-level test inventory, and their wall limits
