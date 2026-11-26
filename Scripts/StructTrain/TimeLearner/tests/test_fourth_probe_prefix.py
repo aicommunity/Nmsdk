@@ -36,6 +36,11 @@ class FourthProbePrefixTest(unittest.TestCase):
             shifted[k] += 64.
         for k in ('stimulus_times', 'spike_times'):
             shifted[k] = [t+64. for t in shifted[k]]
+        # Derived fields must describe the translated binary64 clocks exactly;
+        # retaining their old spelling can violate the native roundoff check.
+        for absolute, relative in (('stimulus_times', 'relative_stimulus_times'),
+                                   ('spike_times', 'relative_spike_times')):
+            shifted[relative] = [t-shifted['stimulus_onset'] for t in shifted[absolute]]
         for sample in shifted['samples']:
             sample['time'] += 64.
             for k in ('stimulus_history', 'spike_history'):
