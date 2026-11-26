@@ -1,10 +1,14 @@
-"""Replay current C++ exports and primary data; labels add no measurement proof."""
+"""Replay current C++ exports and primary data; labels add no measurement proof.
+
+The component fixture embeds its complete raw primary in the original package.
+It does not publish separate mirrored files; the production auditor verifies
+those embedded bytes rather than inventing an external filesystem mirror.
+"""
 from copy import deepcopy
 import os
 from pathlib import Path
 import unittest
 
-from ..composite_primary import filesystem_primary_resolver
 from ..candidate_measurement_purpose import PURPOSES
 from ..terminal_package_evidence import audit_terminal_package
 from ..model_identity import canonical_model_sha256 as digest
@@ -44,7 +48,7 @@ class NativeCandidateMeasurementPurposeTest(unittest.TestCase):
 
     def test_actual_composite_exports_replay_measurement_and_terminal_bindings(self):
         for package,summary,directory in self.composite:
-            result=audit_terminal_package(package,summary,{}, {},external_resolver=filesystem_primary_resolver(directory))
+            result=audit_terminal_package(package,summary,{}, {})
             self.assertIsNone(result['evaluation_verdict'])
             self.assertFalse(result['native_execution_verified'])
             inventory=result['source_audit']['summary']['candidate_measurement_purpose_inventory']
@@ -78,19 +82,19 @@ class NativeCandidateMeasurementPurposeTest(unittest.TestCase):
             changed=deepcopy(summary);changed['historical_summary']['candidates'][0]['amplitude_residual']+=.001
             changed['sha256']=digest({k:v for k,v in changed.items()if k!='sha256'})
             with self.assertRaises(EvidenceError):
-                audit_terminal_package(package,changed,{}, {},external_resolver=filesystem_primary_resolver(directory))
+                audit_terminal_package(package,changed,{}, {})
 
     def test_composite_unknown_purpose_rejected_after_valid_primary_binding(self):
         for package,summary,directory in self.composite:
             changed=deepcopy(summary);changed['historical_summary']['candidates'][0]['measurement_purpose']='unknown'
             changed['sha256']=digest({k:v for k,v in changed.items()if k!='sha256'})
             with self.assertRaisesRegex(EvidenceError,'unknown_candidate_measurement_purpose'):
-                audit_terminal_package(package,changed,{}, {},external_resolver=filesystem_primary_resolver(directory))
+                audit_terminal_package(package,changed,{}, {})
 
     def test_composite_legacy_absence_keeps_primary_checks_without_phase_claims(self):
         for package,summary,directory in self.composite:
             changed=deepcopy(summary)
             for candidate in changed['historical_summary']['candidates']:del candidate['measurement_purpose']
             changed['sha256']=digest({k:v for k,v in changed.items()if k!='sha256'})
-            result=audit_terminal_package(package,changed,{}, {},external_resolver=filesystem_primary_resolver(directory))
+            result=audit_terminal_package(package,changed,{}, {})
             self.assertNotIn('candidate_measurement_purpose_inventory',result['source_audit']['summary'])
