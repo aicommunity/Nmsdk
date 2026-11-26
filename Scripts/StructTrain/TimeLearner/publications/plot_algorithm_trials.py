@@ -56,8 +56,10 @@ def _index(output, records):
                 '; '.join(format(v,'.8g') for v in spikes)+' с и отмечены красным пунктиром.'
                 if spikes else 'Выходные импульсы в полном окне не зарегистрированы.')
         pattern='целевой' if row['response'] in ('TP','FN') else 'отвлекающий'
-        description=('На рисунке '+str(i)+' приведены записанные потенциалы '+str(row['soma_count'])+
-            ' участков сомы при предъявлении '+('целевого' if pattern=='целевой' else 'отвлекающего')+
+        recorded=('приведён записанный потенциал сомы' if row['soma_count']==1 else
+                  'приведены записанные потенциалы участков сомы')
+        description=('На рисунке '+str(i)+' '+recorded+
+            ' при предъявлении '+('целевого' if pattern=='целевой' else 'отвлекающего')+
             ' паттерна '+row['sample_id']+'. Каждая панель соответствует регистрируемому участку; '+
             'синяя кривая показывает его потенциал, оранжевые линии — фактические входные импульсы '+
             'в моменты '+stimuli+' с от первого зарегистрированного входа. '+events+' '+
@@ -75,8 +77,12 @@ def _index(output, records):
                       ' до '+format(row['relative_end'],'.8g')+' с выходных импульсов нет. ')
         maxima='; '.join(str(j+1)+': '+format(v,'.8g')+' с'
                          for j,v in enumerate(row['recorded_soma_maximum_times']))
-        analysis+=('Впервые наибольшие записанные потенциалы участков достигнуты в моменты '+maxima+
-                   '. Времена отсчитаны от первого входного импульса. ')
+        if row['soma_count']==1:
+            analysis+=('Наибольший записанный потенциал сомы впервые достигнут в '+
+                format(row['recorded_soma_maximum_times'][0],'.8g')+' с от первого входного импульса. ')
+        else:
+            analysis+=('Впервые наибольшие записанные потенциалы участков достигнуты в моменты '+maxima+
+                       '. Времена отсчитаны от первого входного импульса. ')
         analysis+='Результат по принятому в опыте критерию: '+response_ru[row['response']].lower()+'.'
         sections.append('<section><h2>'+html.escape(row['title'])+'</h2><p>'+html.escape(description)+
             '</p><figure><a href="'+positive+'"><img src="'+positive+
