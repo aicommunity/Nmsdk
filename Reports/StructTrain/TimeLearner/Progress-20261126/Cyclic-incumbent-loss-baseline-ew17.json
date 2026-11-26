@@ -1,0 +1,170 @@
+{
+  "kind": "timelearner_independent_cyclic_incumbent_loss_baseline",
+  "schema_version": 1,
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Elder-cyclic-incumbent-baseline-independent-ew12.json",
+    "sha256": "f15d93b85bb541925f4fe21922a34bbf75fac0a69aa35102649f96cbfa326ec1",
+    "size": 6423
+  },
+  "utc": "2026-11-26T03:40:54.173921+00:00",
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Elder-cyclic-incumbent-baseline-primary-ew10.json",
+    "sha256": "edf22e90d0540c3513da6a693798fc12eb10ec0929ea3d1dd01be2df611c140a",
+    "size": 1672
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/92/92f7ff45caab0c8db1c4522e0d34adbebf905aaa16ac25baacccfe2c6fa0db0b",
+      "sha256": "92f7ff45caab0c8db1c4522e0d34adbebf905aaa16ac25baacccfe2c6fa0db0b",
+      "bytes": 19124
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/1b/1b34ffae3345794a0d6cd67db711a65de668e53bf1637f23c286ace496252257",
+      "sha256": "1b34ffae3345794a0d6cd67db711a65de668e53bf1637f23c286ace496252257",
+      "bytes": 24388184
+    }
+  },
+  "restoration": {
+    "kind": "timelearner_native_bundle_restoration",
+    "schema_version": 1,
+    "archive_sha256": "1b34ffae3345794a0d6cd67db711a65de668e53bf1637f23c286ace496252257",
+    "archive_members_verified": 106,
+    "retained_regular_files": 106,
+    "compatibility": null,
+    "omitted_redundant_aliases": [],
+    "source_archive_modified": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "members": 106,
+  "test_source_root": "2162b9d6dd074bd2348a27ba1c025ce0030c58ad",
+  "linked_SDK": {
+    "root": {
+      "head": "d2c7487a88a5c1c372f825dc708a543c03234fcb",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "2c285cb472134fc92394153c089603a830a03f70",
+      "head": "2c285cb472134fc92394153c089603a830a03f70",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "e36996cd53a545782b54c76d610162c602567399",
+      "head": "e36996cd53a545782b54c76d610162c602567399",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    }
+  },
+  "actual_loaded_byte_objects_verified": 27,
+  "closed_groups": [
+    {
+      "directory": "/home/user/timelearner-refactor/readbacks/cyclic-history-baseline2-ew6/validation/process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "219e4ad3783113e46fb2d2c8d2fa8e7bc94a68bbf461d5921c380ba6f141e888",
+        "unit": "timelearner-afbb725d-4257-425b-9774-ebe3c387d26b.service",
+        "invocation_id": "da6cc8bb99c34209aab464915be7ef8d",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-afbb725d-4257-425b-9774-ebe3c387d26b.service",
+        "initial_main_pid": 438089,
+        "initial_start_ticks": "523375636",
+        "sha256": "e03eac692ab02432bce36b9be88a4e4ea4f26edf79d51fcb06c511dd92874f24"
+      }
+    },
+    {
+      "directory": "/home/user/timelearner-refactor/readbacks/cyclic-history-baseline2-ew6/compile-process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "50a904d4c49e34405fa48556ccf414d1be81c1a74a32da3a3c9255233905ad56",
+        "unit": "timelearner-4c18a784-0dd1-4662-a7ab-9dbc6d8ea38f.service",
+        "invocation_id": "2013b9f2891a4d7f9c292e18b41b125f",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4c18a784-0dd1-4662-a7ab-9dbc6d8ea38f.service",
+        "initial_main_pid": 436780,
+        "initial_start_ticks": "523374201",
+        "sha256": "798025695474acc213d69d59f5aa53885775ab1df8bffc21997be717f3d77ff9"
+      }
+    },
+    {
+      "directory": "/home/user/timelearner-refactor/readbacks/cyclic-history-baseline2-ew6/link-process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "cfb9fd199089fee50ef8cd0bf6a5a1e27c5de57a01d0f8136552ff8878bd2265",
+        "unit": "timelearner-85d3e156-985b-453f-9b36-42a3c97a9129.service",
+        "invocation_id": "9778a674af3a47d3b5560b4efca3a56a",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-85d3e156-985b-453f-9b36-42a3c97a9129.service",
+        "initial_main_pid": 437600,
+        "initial_start_ticks": "523375198",
+        "sha256": "5b780ae15d9db8bc503ab506fc2b829b79ba8b1b56f8df7cae1ccac92530957f"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "test_id": "ClassicInputRoundRobin.EarlierVisitBestRemainsARecheckProposalN0",
+      "actual_terminal_lengths": [
+        6,
+        6
+      ],
+      "expected_freshly_rechecked_lengths": [
+        2,
+        2
+      ],
+      "failed_assertions": 2,
+      "all_other_assertions_passed": true
+    },
+    {
+      "test_id": "ClassicInputRoundRobin.EarlierVisitBestRemainsARecheckProposalN1",
+      "actual_terminal_lengths": [
+        6,
+        6
+      ],
+      "expected_freshly_rechecked_lengths": [
+        2,
+        2
+      ],
+      "failed_assertions": 2,
+      "all_other_assertions_passed": true
+    }
+  ],
+  "regression_reproduced": true,
+  "controlled_observation_fixture": true,
+  "physical_component_experiment_claimed": false,
+  "new_scientific_Train": false,
+  "production_algorithm_fix_pending": true,
+  "original_scientific_runtime_unchanged": true,
+  "scientific_verdict": null,
+  "N1_native_domain_mode_not_attested": true,
+  "full_stage7_complete": false
+}

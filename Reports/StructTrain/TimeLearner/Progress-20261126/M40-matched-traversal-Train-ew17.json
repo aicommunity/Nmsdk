@@ -1,0 +1,729 @@
+{
+  "kind": "timelearner_matched_traversal_complete_training_metadata",
+  "schema_version": 1,
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/M40-matched-traversal-closed-metadata-ew15.json",
+    "sha256": "859dca84708dd4dc261adecc9e9d2942b15124c86dc36a35008c3a0ae0cc473a",
+    "size": 21579
+  },
+  "utc": "2026-11-26T03:44:33.453309+00:00",
+  "objects": {
+    "coordinator/terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/32/3239170c9ac6a4876ec5a5abaff6ddcab3dd9a3c5b49145023f541571625c5f5",
+      "sha256": "3239170c9ac6a4876ec5a5abaff6ddcab3dd9a3c5b49145023f541571625c5f5",
+      "bytes": 2044
+    },
+    "coordinator/queue.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ff/ff59f142e3eef5d469d503c60d01a06ce4f20acc8a2afd172190c4f6d701a69a",
+      "sha256": "ff59f142e3eef5d469d503c60d01a06ce4f20acc8a2afd172190c4f6d701a69a",
+      "bytes": 1451
+    },
+    "coordinator/sequential-native-closure.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/66/66d48f8f2f29486fc36961d510ac1dcaaa1542a2dcf71c5a88cce342052274fd",
+      "sha256": "66d48f8f2f29486fc36961d510ac1dcaaa1542a2dcf71c5a88cce342052274fd",
+      "bytes": 3320
+    },
+    "coordinator/round-robin-q3-native-closure.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/91/91b4d87cfbe7c44fbbfd3d0bf5b02d3b8000d3fbca90d7ba468d9659856581fa",
+      "sha256": "91b4d87cfbe7c44fbbfd3d0bf5b02d3b8000d3fbca90d7ba468d9659856581fa",
+      "bytes": 3341
+    },
+    "sequential/request.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/05/05dbd9217f8065620a3ecd2ea1b2ed6a4e309e86faa4885d236cd3541fe2e42f",
+      "sha256": "05dbd9217f8065620a3ecd2ea1b2ed6a4e309e86faa4885d236cd3541fe2e42f",
+      "bytes": 1648
+    },
+    "sequential/runtime.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a5/a5c0ca3fcddda3be1377e2544e94ce608942531aafe4013227ef530deff5f01c",
+      "sha256": "a5c0ca3fcddda3be1377e2544e94ce608942531aafe4013227ef530deff5f01c",
+      "bytes": 12615
+    },
+    "sequential/job.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/29/29055899b55a3468f4707920d03c4ff7ef3bae1c358e48011f6779af2bf6e831",
+      "sha256": "29055899b55a3468f4707920d03c4ff7ef3bae1c358e48011f6779af2bf6e831",
+      "bytes": 940922
+    },
+    "sequential/execution.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/16/16e04b5454d53ee1a77d543fa71125eb359cf153507951eead2744f9fa6e55af",
+      "sha256": "16e04b5454d53ee1a77d543fa71125eb359cf153507951eead2744f9fa6e55af",
+      "bytes": 400013
+    },
+    "sequential/compact-training-readback.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b9/b95cd86f954f08772db7b5ac0a672b3761380986d1051fb6f8ba3b0c33b4d974",
+      "sha256": "b95cd86f954f08772db7b5ac0a672b3761380986d1051fb6f8ba3b0c33b4d974",
+      "bytes": 78949
+    },
+    "sequential/full-primary-audit.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/67/67bb142fc124a92a823a61bcc159249a53a82c1864b844b77ed2905fecc8c8db",
+      "sha256": "67bb142fc124a92a823a61bcc159249a53a82c1864b844b77ed2905fecc8c8db",
+      "bytes": 104594
+    },
+    "sequential/worker-terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/4d/4daef7ea86b292e3ad5d64d62d769c983a8a3425999d32babde3e81691f1b708",
+      "sha256": "4daef7ea86b292e3ad5d64d62d769c983a8a3425999d32babde3e81691f1b708",
+      "bytes": 746
+    },
+    "sequential/supervisor-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/3a/3af2eccdad1ed0c6fef5cebe25839b3ba078a95a9e8180b4d691cd060530f6f1",
+      "sha256": "3af2eccdad1ed0c6fef5cebe25839b3ba078a95a9e8180b4d691cd060530f6f1",
+      "bytes": 2247
+    },
+    "round-robin-q3/request.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/0f/0f0c1c8ca47570ea4b599dde719cf304865d502560a4c6daf7452bcf87edee3b",
+      "sha256": "0f0c1c8ca47570ea4b599dde719cf304865d502560a4c6daf7452bcf87edee3b",
+      "bytes": 1878
+    },
+    "round-robin-q3/runtime.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a5/a5c0ca3fcddda3be1377e2544e94ce608942531aafe4013227ef530deff5f01c",
+      "sha256": "a5c0ca3fcddda3be1377e2544e94ce608942531aafe4013227ef530deff5f01c",
+      "bytes": 12615
+    },
+    "round-robin-q3/job.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/0e/0ea46fdbe7272bc5709b5f8323f5506b922f6a6d78e51de5aa9cf695e234b085",
+      "sha256": "0ea46fdbe7272bc5709b5f8323f5506b922f6a6d78e51de5aa9cf695e234b085",
+      "bytes": 941216
+    },
+    "round-robin-q3/execution.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/8c/8c95b960e13ad15ca74acc30472c9883a47f74687b6b96878d5a9561a9fbb9f4",
+      "sha256": "8c95b960e13ad15ca74acc30472c9883a47f74687b6b96878d5a9561a9fbb9f4",
+      "bytes": 594543
+    },
+    "round-robin-q3/compact-training-readback.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/cf/cf282b2bf9d6b0f1f6ee4a2e4388087ae716da155642bf9edf3459e0c7ac5747",
+      "sha256": "cf282b2bf9d6b0f1f6ee4a2e4388087ae716da155642bf9edf3459e0c7ac5747",
+      "bytes": 118268
+    },
+    "round-robin-q3/full-primary-audit.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/d7/d70a2d70c3cd50edc4584d1f2e070dafa4ca77e225a06a1f2d943635c7d6fa85",
+      "sha256": "d70a2d70c3cd50edc4584d1f2e070dafa4ca77e225a06a1f2d943635c7d6fa85",
+      "bytes": 154800
+    },
+    "round-robin-q3/worker-terminal.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7f/7f11bbe27833523681e83343005b1e71477541b626d1bf097561439604ce97d8",
+      "sha256": "7f11bbe27833523681e83343005b1e71477541b626d1bf097561439604ce97d8",
+      "bytes": 755
+    },
+    "round-robin-q3/supervisor-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/61/612e1fb75570de022fb0c65768eb2068aa3111071ebc665542c8aeef2751d64a",
+      "sha256": "612e1fb75570de022fb0c65768eb2068aa3111071ebc665542c8aeef2751d64a",
+      "bytes": 2245
+    }
+  },
+  "cases": {
+    "sequential": {
+      "source_job_sha256": "97d97ebcd30671a704ffe20bb136cb84fc31c6a9a7aee9f17ca89d336b74cea8",
+      "source_model_revision": "8a8b447f4ecb17f7e9140aa5504f5dedea523ce4e6d802b4a032dc7cd3d44412",
+      "source_package": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5/train/native/train_stopped_state.json",
+        "sha256": "9881c643cd9c70db739a2c6f1801bf58751f6f00fcb8d8f9785547b331ff21de",
+        "size": 1185881421
+      },
+      "outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "stop_reason": "native_training_time_budget_exhausted",
+      "actual_parameters": [
+        {
+          "length": 241,
+          "resistance": 86000000,
+          "synapses": 13
+        },
+        {
+          "length": 201,
+          "resistance": 86000000,
+          "synapses": 11
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "candidate_records": 50,
+      "candidate_records_per_input": {
+        "0": 25,
+        "1": 25,
+        "2": 0,
+        "3": 0
+      },
+      "input_traversal": null,
+      "logical_groups": 106,
+      "raw_native_probes": 636,
+      "sampled_frames": 2287181,
+      "final_group_ids": [],
+      "final_group_input_indices": [],
+      "terminal_fresh_all_input_verification": false,
+      "closed_units": [
+        {
+          "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5/factor-preflight/process/contained",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "5f88daf6d3330222cfa3d93057b6893148c81dbfefba202269b85011bde71616",
+            "unit": "timelearner-97efb321-4983-4295-bc34-55db4e0029f9.service",
+            "invocation_id": "9706f6a6f6024d579f41420968b1422b",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-97efb321-4983-4295-bc34-55db4e0029f9.service",
+            "initial_main_pid": 685466,
+            "initial_start_ticks": "466696701",
+            "sha256": "c46a065fd58efac795734029716817b16bc3eb530993b0ecaa6eabfe6f85af99"
+          }
+        },
+        {
+          "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5/train/process/contained",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "997f52a7a8ac8d5a706b305adcee250016d90f96f74ec19b2c484216b913ad0c",
+            "unit": "timelearner-c1a9fbd9-2f8f-4f22-9c39-d72df329ea91.service",
+            "invocation_id": "18eb1261bcf245b5b701fc739d171bec",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c1a9fbd9-2f8f-4f22-9c39-d72df329ea91.service",
+            "initial_main_pid": 685550,
+            "initial_start_ticks": "466696927",
+            "sha256": "0e9898edeba35ddd1ecbec5bc3057aed4440408e1a347f820247a30949130984"
+          }
+        },
+        {
+          "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5/preflight/process/contained",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "3b6c24eae239e640f83729961f66216fd96c639c12234e23b4cee8619aafcd6c",
+            "unit": "timelearner-a80ce1e3-641c-4a0e-b5eb-31eff67ae24a.service",
+            "invocation_id": "1e35ec05deed448db5deaf6c4676e8ac",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a80ce1e3-641c-4a0e-b5eb-31eff67ae24a.service",
+            "initial_main_pid": 685369,
+            "initial_start_ticks": "466696419",
+            "sha256": "0d75c450b5c808ed3a540db5cc243326cbeeb8a818228df08a8697eb311e2c26"
+          }
+        },
+        {
+          "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5-controller/process/contained",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "80cae07adce6f08c4f3e02e64a352956b126b516e15015a715e5477e97c92b08",
+            "unit": "timelearner-3e343dd5-8069-42f8-903b-80c6681628b5.service",
+            "invocation_id": "b69276898f3c423fa7103f9b3aff29d1",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3e343dd5-8069-42f8-903b-80c6681628b5.service",
+            "initial_main_pid": 681310,
+            "initial_start_ticks": "466694715",
+            "sha256": "44b8a50513c2d6dac0f1e100cdd3063d5203eaca1367b5d4b6025b14ba64e8e2"
+          }
+        },
+        {
+          "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5-audit/process/contained",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "2b1b4bd38b131d666e38b70f2718c043d515a6c4c25b988e5338e6a66d4c36f4",
+            "unit": "timelearner-eb6781f7-07b8-4deb-bf39-6d7f5eaccf22.service",
+            "invocation_id": "6e06ec489b454df088f4b1731cf4c971",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-eb6781f7-07b8-4deb-bf39-6d7f5eaccf22.service",
+            "initial_main_pid": 2550833,
+            "initial_start_ticks": "470407188",
+            "sha256": "111135debc6ea2a241d96dd10e8eb9c4b8d29fd482ea42fe1a9eac90e8eba8ee"
+          }
+        }
+      ],
+      "classification_performed": false,
+      "full_primary_archival_pending": true
+    },
+    "round-robin-q3": {
+      "source_job_sha256": "2ca1c5f6557f8b834dfcf5eb7d7c74c1b176d2b7d4426a817bf3ae38ec2cf522",
+      "source_model_revision": "c114c8c2a34d6757ef62bef03eb52be938143c40d54ed1984fe20cbfd7af518a",
+      "source_package": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-round-robin-q3-m40-dy5/train/native/train_stopped_state.json",
+        "sha256": "82233436899e34c47939a8f7ec187cf7538565067bc29557b5e63834b41f2c27",
+        "size": 1265970945
+      },
+      "outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "stop_reason": "maximum_sweeps_exhausted",
+      "actual_parameters": [
+        {
+          "length": 16,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 17,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "candidate_records": 75,
+      "candidate_records_per_input": {
+        "0": 25,
+        "1": 25,
+        "2": 25,
+        "3": 0
+      },
+      "input_traversal": {
+        "candidates_per_visit": 3,
+        "kind": "timelearner_input_traversal",
+        "maximum_seed_elements": 131072,
+        "policy": "classic_candidate_round_robin",
+        "schema_version": 1
+      },
+      "logical_groups": 158,
+      "raw_native_probes": 948,
+      "sampled_frames": 3413748,
+      "final_group_ids": [
+        "classic-traversal-round-robin-q3-m40-dy5/session/1/final/0/verify/72/1/composite/155",
+        "classic-traversal-round-robin-q3-m40-dy5/session/1/final/0/verify/72/2/composite/156",
+        "classic-traversal-round-robin-q3-m40-dy5/session/1/final/0/verify/72/3/composite/157",
+        "classic-traversal-round-robin-q3-m40-dy5/session/1/final/0/verify/72/4/composite/158"
+      ],
+      "final_group_input_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "terminal_fresh_all_input_verification": false,
+      "closed_units": [
+        {
+          "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-round-robin-q3-m40-dy5/factor-preflight/process/contained",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "97ce6ee75461f119b97b8c17313af3b318bb36de82d23489b1ee22ecf9c5504c",
+            "unit": "timelearner-c153f896-3472-4133-aa3b-e5a08667cc7d.service",
+            "invocation_id": "1d9277c5e63d44248d155e9408293c8d",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c153f896-3472-4133-aa3b-e5a08667cc7d.service",
+            "initial_main_pid": 2577320,
+            "initial_start_ticks": "470463893",
+            "sha256": "819b89ea1de068f3e0d3426f92162187ad82a5f1d3b0f6bdecb6f09349e722e1"
+          }
+        },
+        {
+          "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-round-robin-q3-m40-dy5/train/process/contained",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "e65051146b9d4008327b07176702610ab72c0fa4aa3756b2bd19b62dacee0e06",
+            "unit": "timelearner-2e1bafb5-dc4d-4f8e-b9e3-c80e1526985d.service",
+            "invocation_id": "6b86df7a44a04650b0cba82c43ab668d",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2e1bafb5-dc4d-4f8e-b9e3-c80e1526985d.service",
+            "initial_main_pid": 2577509,
+            "initial_start_ticks": "470464122",
+            "sha256": "4265dd80410681eca3885b1a58ad9487721f6b5c643bbf2dd7ded1268f47d172"
+          }
+        },
+        {
+          "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-round-robin-q3-m40-dy5/preflight/process/contained",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "f8937a04c67c75b4be6ef8eba24b49e588c5350d105a561f0953131895104418",
+            "unit": "timelearner-7e6065b1-20f6-45e9-a7a5-5560f82e1d3c.service",
+            "invocation_id": "12012c95cc694f8db08ae9919a2e4cc2",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7e6065b1-20f6-45e9-a7a5-5560f82e1d3c.service",
+            "initial_main_pid": 2577218,
+            "initial_start_ticks": "470463593",
+            "sha256": "8ad02bcc9d54a76ce676b8e862cc1c306810bbb4a9246b5d9b28585a9bffab89"
+          }
+        },
+        {
+          "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-round-robin-q3-m40-dy5-controller/process/contained",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "1e390354f950495dbf33de58ddff277e7b9cebe0f9a6f0599756e0d48d09ed8d",
+            "unit": "timelearner-0b782dcb-3390-46c0-a96f-94625696f3ac.service",
+            "invocation_id": "4bda807ee28a46838f1216a66edd836c",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0b782dcb-3390-46c0-a96f-94625696f3ac.service",
+            "initial_main_pid": 2573251,
+            "initial_start_ticks": "470461832",
+            "sha256": "49b37a8b0858b8f0f13a47d7e957bb094df5a8e801d76ceb3a42c81106e54a4f"
+          }
+        },
+        {
+          "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-round-robin-q3-m40-dy5-audit/process/contained",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "7c657a73659cb8179d762ba18f383dc19a455467d4add364ef84ebbccbbaba58",
+            "unit": "timelearner-baab3524-ab44-4b66-b65e-9f6ecdd7d168.service",
+            "invocation_id": "4928c6e7b13340b0bde49f7fe1e410bd",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-baab3524-ab44-4b66-b65e-9f6ecdd7d168.service",
+            "initial_main_pid": 311700,
+            "initial_start_ticks": "473784574",
+            "sha256": "e6dcc39115034dc1a2f2d8eca2ca10d776dcb5ca7d3d8df0a0b9b62aea2bca2c"
+          }
+        }
+      ],
+      "classification_performed": false,
+      "full_primary_archival_pending": true
+    }
+  },
+  "only_declared_traversal_and_run_identity_differ": true,
+  "initial_source": {
+    "source_origin": "23f478471ba0e83f43e36ab8f33350277a03190d153ede55f76ebedb96a38c6e",
+    "initial_model_revision": "5c97864335ce7cc91a3bcd071514e2bceb8b88e38aa122e055d8306881450964",
+    "initial_epoch": 0,
+    "storage_images": 31,
+    "C0_present": false,
+    "native_import_verified": false
+  },
+  "runtime": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-traversal-sequential-m40-dy5/runtime.json",
+    "sha256": "a5c0ca3fcddda3be1377e2544e94ce608942531aafe4013227ef530deff5f01c",
+    "size": 12615
+  },
+  "common_probe_budget": 160,
+  "common_candidates_per_input": 24,
+  "common_sweeps": 1,
+  "common_training_wall_seconds": 32400,
+  "source_Train_not_restarted": true,
+  "both_original_full_primary_audits_passed": true,
+  "full_raw_archival_and_independent_restore_pending": true,
+  "classification_results_pending": true,
+  "wall_time_performance_effect_not_inferred": true,
+  "scientific_verdict": null,
+  "recognition_preregistration": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/M40-q3-same-runtime-preregistration-independent-ew16.json",
+      "sha256": "69b88ec744c15306b56cdc23d998339652c781645cad001fc47a30beb09108b0",
+      "size": 4315
+    },
+    "kind": "timelearner_independent_q3_same_runtime_recognition_preregistration",
+    "schema_version": 1,
+    "utc": "2026-11-26T03:45:47.563573+00:00",
+    "source_catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/M40-q3-same-runtime-recognition-preregistration-ew3.json",
+      "sha256": "9322360faeb01968d9bc2b2daf87d5c0065f36b891b2232d381d87de2a1df053",
+      "size": 4789
+    },
+    "objects": {
+      "request.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/83/83e8681c89eb25da9e4412ee96865dffdf8c33624e724f559b656acce190a83c",
+        "sha256": "83e8681c89eb25da9e4412ee96865dffdf8c33624e724f559b656acce190a83c",
+        "bytes": 3942
+      },
+      "preregistration.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a5/a516708e616cc9a53f8c63c71229dab5d76d7dea30caac455f487254609c1131",
+        "sha256": "a516708e616cc9a53f8c63c71229dab5d76d7dea30caac455f487254609c1131",
+        "bytes": 4833
+      },
+      "source-admission-tests.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/50/500338f72c2b778327589080112b85ced2abbade66b58eced320794aefabef44",
+        "sha256": "500338f72c2b778327589080112b85ced2abbade66b58eced320794aefabef44",
+        "bytes": 740
+      },
+      "source-admission-tests.log": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/0d/0d9abaab29ac1e5c5578554e131004ae87ada3ff48cad115979bf5988649a82e",
+        "sha256": "0d9abaab29ac1e5c5578554e131004ae87ada3ff48cad115979bf5988649a82e",
+        "bytes": 1754
+      },
+      "controls.bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a9/a9237085a837c2c3c61c7778479a843bca0a7260806618703d1b33a39e2a16b1",
+        "sha256": "a9237085a837c2c3c61c7778479a843bca0a7260806618703d1b33a39e2a16b1",
+        "bytes": 4289
+      },
+      "dispatch.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/df/dfbd8d65943a4cb304fd2e3f68b1fd70bc8053a4264f5579acf51db513b13a03",
+        "sha256": "dfbd8d65943a4cb304fd2e3f68b1fd70bc8053a4264f5579acf51db513b13a03",
+        "bytes": 2533
+      },
+      "source.pack": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/fa/fa720f5af30fc8ed072b3a13a78ebd4986fb5433ddac56eab894dadf591487c6",
+        "sha256": "fa720f5af30fc8ed072b3a13a78ebd4986fb5433ddac56eab894dadf591487c6",
+        "bytes": 4951708
+      },
+      "projection.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/e2/e2c698d5524f1139ad079918402c87e0f0205372e5b651e64dfce1af11aad805",
+        "sha256": "e2c698d5524f1139ad079918402c87e0f0205372e5b651e64dfce1af11aad805",
+        "bytes": 437965
+      }
+    },
+    "controls_commit": "aa8c92ac51ef9ba2bfc05b77d0cecadf75c3c847",
+    "source_commit": "a7dc41ffb49b1485075725bbcd1129e7440d8d36",
+    "source_model_revision": "c114c8c2a34d6757ef62bef03eb52be938143c40d54ed1984fe20cbfd7af518a",
+    "all8_declaration_objects_verified": true,
+    "Git_bundle_request_bytes_equal": true,
+    "metadata_admission_tests": 6,
+    "paired_metadata_catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/M40-matched-traversal-closed-metadata-ew15.json",
+      "sha256": "859dca84708dd4dc261adecc9e9d2942b15124c86dc36a35008c3a0ae0cc473a",
+      "size": 21579
+    },
+    "paired_metadata_objects_verified": 20,
+    "paired_full_raw_archival_still_pending": true,
+    "new_native_calculation": false,
+    "scientific_verdict": null
+  },
+  "full_primary_preparations": [
+    {
+      "catalog": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/M40-sequential-full-primary-preparation-ew8.json",
+        "sha256": "a76149f8edd5bd98259d993924dd5320bb4cdfc3fbaa3dc1d4dbc042fefe1d0d",
+        "size": 2942
+      },
+      "record": {
+        "kind": "timelearner_same_runtime_Train_archive_prepared",
+        "schema_version": 1,
+        "role": "sequential",
+        "job_id": "python-m40-sequential-full-primary-ew8",
+        "source_commit": "a7dc41ffb49b1485075725bbcd1129e7440d8d36",
+        "controls_commit": "ace0c1352219cbf154b2bfc872c6cd473dcd7565",
+        "objects": {
+          "manifest.json": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/49/495453d17cf51a8b98dca4cae0d915ade26ab57bd3f7ff8edbd47e385b4b1113",
+            "sha256": "495453d17cf51a8b98dca4cae0d915ade26ab57bd3f7ff8edbd47e385b4b1113",
+            "bytes": 412753
+          },
+          "request.json": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/3c/3cf1c1abdcf327f65be7b20caa1f6358d3795243c89d129216a029c2455c1a1f",
+            "sha256": "3cf1c1abdcf327f65be7b20caa1f6358d3795243c89d129216a029c2455c1a1f",
+            "bytes": 745
+          },
+          "dispatch-precondition.json": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/c4/c4da8a4b844bccb5bc74c266b0d8e9de3f024e28bee00e3ad5176454dc008f9c",
+            "sha256": "c4da8a4b844bccb5bc74c266b0d8e9de3f024e28bee00e3ad5176454dc008f9c",
+            "bytes": 485
+          },
+          "controls.bundle": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/78/7890c24d9868820fe65dad902cd32a1878ea8992fe2b58e61e71bc2f533d8e28",
+            "sha256": "7890c24d9868820fe65dad902cd32a1878ea8992fe2b58e61e71bc2f533d8e28",
+            "bytes": 106065
+          }
+        },
+        "roots": [
+          {
+            "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5",
+            "files": 2106,
+            "links": 3,
+            "bytes": 3290980526
+          },
+          {
+            "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5-controller",
+            "files": 29,
+            "links": 0,
+            "bytes": 40510
+          },
+          {
+            "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-sequential-m40-dy5-audit",
+            "files": 24,
+            "links": 0,
+            "bytes": 207077
+          },
+          {
+            "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/m40-sequential-archive-fixed-controls-ew8",
+            "files": 34,
+            "links": 0,
+            "bytes": 109211301
+          }
+        ],
+        "closed_units": 5,
+        "predecessor_owner": {
+          "pid": 357950,
+          "start_ticks": "473863870",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "prepared_not_started": true,
+        "native_recognition_has_priority": true,
+        "full_primary_archival_pending": true,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "catalog": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/M40-q3-full-primary-preparation-ew8.json",
+        "sha256": "4edf31f536ef55bec93e796100b53cb204f911871d5a8142b8fe98d3d60a8310",
+        "size": 2942
+      },
+      "record": {
+        "kind": "timelearner_same_runtime_Train_archive_prepared",
+        "schema_version": 1,
+        "role": "round-robin-q3",
+        "job_id": "python-m40-q3-full-primary-ew8",
+        "source_commit": "a7dc41ffb49b1485075725bbcd1129e7440d8d36",
+        "controls_commit": "13eaf001d2466d19d830adc2175e9dbe61800630",
+        "objects": {
+          "manifest.json": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/54/54bedbbd72e09b407c37309bb34f0ff5f2a06bef650fde2b90ce078217830437",
+            "sha256": "54bedbbd72e09b407c37309bb34f0ff5f2a06bef650fde2b90ce078217830437",
+            "bytes": 596447
+          },
+          "request.json": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/a2/a2eaac0b50f2793c3660a3214c469bde7e37e4a81ab61ce97281551426183914",
+            "sha256": "a2eaac0b50f2793c3660a3214c469bde7e37e4a81ab61ce97281551426183914",
+            "bytes": 729
+          },
+          "dispatch-precondition.json": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/c4/c4da8a4b844bccb5bc74c266b0d8e9de3f024e28bee00e3ad5176454dc008f9c",
+            "sha256": "c4da8a4b844bccb5bc74c266b0d8e9de3f024e28bee00e3ad5176454dc008f9c",
+            "bytes": 485
+          },
+          "controls.bundle": {
+            "kind": "nmsdk_structtrain_external_object",
+            "schema_version": 1,
+            "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+            "object": "objects/sha256/c3/c37cd58b769edc6d0441927c7b4db8b8ccf9cfffce29a91c947eb175b9835f19",
+            "sha256": "c37cd58b769edc6d0441927c7b4db8b8ccf9cfffce29a91c947eb175b9835f19",
+            "bytes": 151942
+          }
+        },
+        "roots": [
+          {
+            "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-round-robin-q3-m40-dy5",
+            "files": 3094,
+            "links": 3,
+            "bytes": 3733104388
+          },
+          {
+            "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-round-robin-q3-m40-dy5-controller",
+            "files": 29,
+            "links": 0,
+            "bytes": 40687
+          },
+          {
+            "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-traversal-round-robin-q3-m40-dy5-audit",
+            "files": 24,
+            "links": 0,
+            "bytes": 296750
+          },
+          {
+            "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/m40-q3-archive-fixed-controls-ew8",
+            "files": 34,
+            "links": 0,
+            "bytes": 109211903
+          }
+        ],
+        "closed_units": 5,
+        "predecessor_owner": {
+          "pid": 357950,
+          "start_ticks": "473863870",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "uid": 1000
+        },
+        "prepared_not_started": true,
+        "native_recognition_has_priority": true,
+        "full_primary_archival_pending": true,
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "whole_plan_complete": false
+}
