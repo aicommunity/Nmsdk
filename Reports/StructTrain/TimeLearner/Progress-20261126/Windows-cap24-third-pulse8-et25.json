@@ -1,0 +1,322 @@
+{
+  "kind": "timelearner_cap24_frozen_third_pulse_primary_and_temporal_report",
+  "schema_version": 1,
+  "checked_at": "2026-11-26T02:18:16.345Z",
+  "primary": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Windows-cap24-third-pulse8-independent-et17.json",
+      "sha256": "72c8d8f806ad38f5f801fe687b291a5eb6bb8d46a3c57d26e8beb178c9a1ea7c",
+      "size": 14830
+    },
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/df/df8dea29a53561e43ddd510bc38f070e993dc526f36f79e02b118efd19a2017c",
+        "sha256": "df8dea29a53561e43ddd510bc38f070e993dc526f36f79e02b118efd19a2017c",
+        "bytes": 8448
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/d1/d1fe84e03c5933598be364e1490c40e44b2d9ac95290adaf5f1668c4161e75bc",
+        "sha256": "d1fe84e03c5933598be364e1490c40e44b2d9ac95290adaf5f1668c4161e75bc",
+        "bytes": 958120
+      },
+      "source-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/9c/9c101c3f615b886ec9ad115982f4754bda80ae620241c7d5af70326f50130be8",
+        "sha256": "9c101c3f615b886ec9ad115982f4754bda80ae620241c7d5af70326f50130be8",
+        "bytes": 6804
+      }
+    },
+    "members": 52
+  },
+  "gallery": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Windows-cap24-third-pulse8-scientific-figures-independent-et24.json",
+      "sha256": "4d954ccb043f5a9c5bf8165d8334f7592373e4d9f56b2656b0e521fc11b1cb4f",
+      "size": 2291
+    },
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a0/a03d8600351349f4eb1563eb76e4189eba8344f3863bb7097285a74b8cd0e4b3",
+        "sha256": "a03d8600351349f4eb1563eb76e4189eba8344f3863bb7097285a74b8cd0e4b3",
+        "bytes": 8642
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f7/f779483d0870d8b522c7ad784aa54797dfb84a600df1c318dcc71f35d442da8c",
+        "sha256": "f779483d0870d8b522c7ad784aa54797dfb84a600df1c318dcc71f35d442da8c",
+        "bytes": 2687456
+      },
+      "source-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/2f/2f05761c4615b1b2b55ba2630d59039e0be7e843c38be425631ddc0130cf39c8",
+        "sha256": "2f05761c4615b1b2b55ba2630d59039e0be7e843c38be425631ddc0130cf39c8",
+        "bytes": 779
+      }
+    },
+    "members": 48,
+    "reviewed_PNG": 16
+  },
+  "counts": {
+    "TP": 1,
+    "FP": 7,
+    "FN": 0,
+    "TN": 0,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.125,
+    "target_hit_rate": 1,
+    "foil_response_rate": 1
+  },
+  "rows": [
+    {
+      "index": 0,
+      "sample_id": "third-pulse-tick-240",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.04,
+        0.36
+      ],
+      "classification": "FP",
+      "relative_input_ms": [
+        0,
+        80,
+        120.00000000000001,
+        480
+      ],
+      "relative_spike_ms": [
+        482
+      ],
+      "spikes_after_last_input_ms": [
+        2.0000000000000018
+      ]
+    },
+    {
+      "index": 1,
+      "sample_id": "third-pulse-tick-320",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.08,
+        0.32
+      ],
+      "classification": "FP",
+      "relative_input_ms": [
+        0,
+        80.00000000000007,
+        160.00000000000014,
+        480
+      ],
+      "relative_spike_ms": [
+        483.0000000000001
+      ],
+      "spikes_after_last_input_ms": [
+        3.0000000000001137
+      ]
+    },
+    {
+      "index": 2,
+      "sample_id": "third-pulse-tick-400",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.12,
+        0.28
+      ],
+      "classification": "FP",
+      "relative_input_ms": [
+        0,
+        80.00000000000007,
+        200.00000000000017,
+        479.99999999999955
+      ],
+      "relative_spike_ms": [
+        483.5000000000003
+      ],
+      "spikes_after_last_input_ms": [
+        3.5000000000007248
+      ]
+    },
+    {
+      "index": 3,
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.16,
+        0.24
+      ],
+      "classification": "TP",
+      "relative_input_ms": [
+        0,
+        80.00000000000007,
+        240.00000000000023,
+        480.00000000000045
+      ],
+      "relative_spike_ms": [
+        483.5000000000003
+      ],
+      "spikes_after_last_input_ms": [
+        3.4999999999998366
+      ]
+    },
+    {
+      "index": 4,
+      "sample_id": "third-pulse-tick-560",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.2,
+        0.2
+      ],
+      "classification": "FP",
+      "relative_input_ms": [
+        0,
+        80.00000000000007,
+        279.9999999999994,
+        480.00000000000045
+      ],
+      "relative_spike_ms": [
+        483.4999999999994
+      ],
+      "spikes_after_last_input_ms": [
+        3.4999999999989484
+      ]
+    },
+    {
+      "index": 5,
+      "sample_id": "third-pulse-tick-640",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.24,
+        0.16
+      ],
+      "classification": "FP",
+      "relative_input_ms": [
+        0,
+        80.00000000000007,
+        320.0000000000003,
+        480.00000000000045
+      ],
+      "relative_spike_ms": [
+        483.50000000000114
+      ],
+      "spikes_after_last_input_ms": [
+        3.5000000000007248
+      ]
+    },
+    {
+      "index": 6,
+      "sample_id": "third-pulse-tick-720",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.28,
+        0.12
+      ],
+      "classification": "FP",
+      "relative_input_ms": [
+        0,
+        80.00000000000007,
+        359.99999999999943,
+        480.00000000000045
+      ],
+      "relative_spike_ms": [
+        483.4999999999994
+      ],
+      "spikes_after_last_input_ms": [
+        3.4999999999989484
+      ]
+    },
+    {
+      "index": 7,
+      "sample_id": "third-pulse-tick-800",
+      "label": "foil",
+      "pattern_isi": [
+        0.01,
+        0.08,
+        0.32,
+        0.08
+      ],
+      "classification": "FP",
+      "relative_input_ms": [
+        0,
+        80.00000000000007,
+        400.00000000000034,
+        479.99999999999864
+      ],
+      "relative_spike_ms": [
+        483.4999999999994
+      ],
+      "spikes_after_last_input_ms": [
+        3.5000000000007248
+      ]
+    }
+  ],
+  "model_revision": "cefb18c0cdf799e782bc973ecdfcb13e5089eb323235115d83a56a61062ef02d",
+  "threshold": 0.026094309839601246,
+  "comparison": {
+    "kind": "timelearner_trial_response_comparison",
+    "schema_version": 1,
+    "comparator_version": 1,
+    "time_basis": "actual_stimulus_onset",
+    "absolute_tolerance": 1e-12,
+    "observation_schema_version": 2,
+    "source_trial_id": "classic-cap24-frozen-repeat-win-eq15/trial-0",
+    "observed_trial_id": "classic-cap24-frozen-third-grid-win-eq31-third-pulse/tick-480",
+    "sample_id": "phasea-row-0",
+    "model_revision": "cefb18c0cdf799e782bc973ecdfcb13e5089eb323235115d83a56a61062ef02d",
+    "source_begin": 0,
+    "observed_begin": 6.0015,
+    "source_stimulus_onset": 0.01,
+    "observed_stimulus_onset": 6.0115,
+    "absolute_clock_shift": 6.0015,
+    "source_samples": 4001,
+    "observed_samples": 4001,
+    "sample_counts_equal": true,
+    "window_offsets_equal": true,
+    "maximum_absolute_signal_difference": 0,
+    "maximum_relative_sample_time_difference": 6.661338147750939e-16,
+    "maximum_relative_history_difference": 4.440892098500626e-16,
+    "maximum_relative_event_time_difference": 4.440892098500626e-16,
+    "maximum_window_offset_difference": 2.220446049250313e-16,
+    "maximum_absolute_sample_difference": 6.661338147750939e-16,
+    "waveforms_equal_within_declared_tolerance": true,
+    "stimulus_and_spike_events_equal": true,
+    "response_preserved": true,
+    "difference_reasons": [],
+    "pre_window_history_compared": false,
+    "scientific_verdict": null
+  },
+  "complete_4001_samples_each": true,
+  "source_training_outcome": "budget_exhausted",
+  "no_all_input_certificate": true,
+  "new_Train": false,
+  "new_threshold": false,
+  "independent_positive_class": false,
+  "scientific_verdict": null
+}
