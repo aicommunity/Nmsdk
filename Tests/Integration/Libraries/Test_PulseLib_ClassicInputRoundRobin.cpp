@@ -275,6 +275,38 @@ TEST(ClassicInputRoundRobin, ThreeFreshLengthPointsPerVisitCanProposeBeforeAnoth
     }
 }
 
+void EarlierVisitBestMustRemainARecheckProposal(Normalization normalization)
+{
+    const auto protocol=Protocol(3);auto config=RoundRobin(3);
+    config.normalization=normalization;config.candidatesPerInputVisit=3;
+    config.maximumCandidatesPerInput=6;config.bounds.assign(3,{1,6,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,std::vector<InputParameters>(3,{1,1,10.}));
+    std::set<std::size_t> timingReady;
+    DriveTraining(session,protocol,[&](const auto& action,auto& delay,auto& raw) {
+        for(std::size_t input=0;input<2;++input) {
+            const int length=action.parameters[input].length;
+            // A useful measured basin appears in the first visit; later legal
+            // enumeration points are worse. No amplitude point is Exact.
+            delay[input]=.03+(length==2?.1*(2-input):.005*(length-1));
+            if(length==2)raw[input]+=.0001;
+            if(length==2 && !action.finalVerification && action.inputIndex==input)
+                timingReady.insert(input);
+        }
+    });
+    ASSERT_EQ(timingReady,(std::set<std::size_t>{0,1}));
+    EXPECT_NE(session.Status(),TrainingStatus::Exact);
+    EXPECT_LE(session.IssuedProbes(),config.maximumProbes);
+    EXPECT_LE(session.AppliedEdits(),config.maximumEdits);
+    // Old residuals cannot certify a changed graph. The earlier coordinates
+    // must be retained as proposals and remeasured before final selection.
+    for(std::size_t input=0;input<2;++input)EXPECT_EQ(session.Parameters()[input].length,2);
+}
+
+TEST(ClassicInputRoundRobin, EarlierVisitBestRemainsARecheckProposalN0)
+{EarlierVisitBestMustRemainARecheckProposal(Normalization::SynapseCount);}
+TEST(ClassicInputRoundRobin, EarlierVisitBestRemainsARecheckProposalN1)
+{EarlierVisitBestMustRemainARecheckProposal(Normalization::TipResistance);}
+
 TEST(InputTraversalCodec, OmissionResetsTheOldPolicyWithoutInventingFields)
 {
     auto configuration=RoundRobin();configuration.maximumTraversalSeedElements=4096;
