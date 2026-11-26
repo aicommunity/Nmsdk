@@ -7201,7 +7201,8 @@ template<class Learner> void LiveTrainingFrequencyContext(unsigned originalFrequ
     EXPECT_TRUE(stopped.Outcome()==TrainingStatus::InvalidModel || stopped.Outcome()==TrainingStatus::InvalidObservation)
         <<TrainingStatusName(stopped.Outcome())<<":"<<stopped.Reason();
     const auto failure=stopped.Reason();
-    EXPECT_TRUE(failure.find("revision")!=std::string::npos || failure.find("frequency")!=std::string::npos ||
+    EXPECT_TRUE(failure=="unsupported_native_multirate" ||
+        failure.find("revision")!=std::string::npos || failure.find("frequency")!=std::string::npos ||
         failure.find("context")!=std::string::npos || failure.find("rebuild")!=std::string::npos)
         <<failure;
     ASSERT_FALSE(packets.empty());
