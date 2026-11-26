@@ -1,0 +1,137 @@
+{
+  "kind": "timelearner_closed_sequential_recognition_progress",
+  "schema_version": 1,
+  "catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/M40-sequential-recognition-preregistration-eq13.json",
+    "sha256": "bc1beeaa0cca8780060febddc0e3ce3fa01269cd077669ead437751a36c04e90",
+    "size": 4776
+  },
+  "archive": {
+    "kind": "timelearner_sequential_M40_recognition_preregistration_archive",
+    "schema_version": 1,
+    "utc": "2026-11-26T00:25:35.374858+00:00",
+    "source_commit": "2804ea60c85c155a79f728c85aae54d7324711bb",
+    "controls_commit": "08e9409c256f118b6b16e2c1f954ca1084555439",
+    "objects": {
+      "request.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ce/ce4c89ae3a33df07ad033297303e3196c9e2f640f99f66bf2f11532501ce4618",
+        "sha256": "ce4c89ae3a33df07ad033297303e3196c9e2f640f99f66bf2f11532501ce4618",
+        "bytes": 3925
+      },
+      "preregistration.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/32/328379734511422e87153f60d8e960207c548578f46b200c44336759c0a2b95e",
+        "sha256": "328379734511422e87153f60d8e960207c548578f46b200c44336759c0a2b95e",
+        "bytes": 4807
+      },
+      "source-admission-tests.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/bc/bca6eedd929357e6df8c85f04d81ecd45cdbd131950e53857544c426098871a2",
+        "sha256": "bca6eedd929357e6df8c85f04d81ecd45cdbd131950e53857544c426098871a2",
+        "bytes": 736
+      },
+      "source-admission-tests.log": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f3/f3d56170df784d0246085aa400c9082af65a8028321d2ab68a3b233b3c705f4e",
+        "sha256": "f3d56170df784d0246085aa400c9082af65a8028321d2ab68a3b233b3c705f4e",
+        "bytes": 1724
+      },
+      "controls.bundle": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/47/47f8f631aef80a04ca3cc614a3fd576da0fa182158b5501a109fde5dddac8fc7",
+        "sha256": "47f8f631aef80a04ca3cc614a3fd576da0fa182158b5501a109fde5dddac8fc7",
+        "bytes": 4261
+      },
+      "dispatch.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/60/606efc641fe156d8104d97533c652cd4e54b09bd44fad383c65fcbb1928b1d5b",
+        "sha256": "606efc641fe156d8104d97533c652cd4e54b09bd44fad383c65fcbb1928b1d5b",
+        "bytes": 2518
+      },
+      "source.pack": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/50/504ce82f1a84943f216a6ce323e7154b40d74537af9270f5f392966de22469d5",
+        "sha256": "504ce82f1a84943f216a6ce323e7154b40d74537af9270f5f392966de22469d5",
+        "bytes": 4950594
+      },
+      "projection.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/55/55a134022433fa4283be054ea3071322c1dfcd727dc99f15c7be64114c2c8c3a",
+        "sha256": "55a134022433fa4283be054ea3071322c1dfcd727dc99f15c7be64114c2c8c3a",
+        "bytes": 437638
+      }
+    },
+    "job": "classic-sequential-native-recognition-m40-eq11",
+    "exact_owner": {
+      "pid": 3954946,
+      "start_ticks": "472786112",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "owner_live_at_publication": true,
+    "source_model_revision": "8a8b447f4ecb17f7e9140aa5504f5dedea523ce4e6d802b4a032dc7cd3d44412",
+    "source_training_outcome": "budget_exhausted",
+    "source_completed_boundary": false,
+    "metadata_admission_tests": {
+      "kind": "timelearner_actual_closed_source_preparation_tests",
+      "schema_version": 1,
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": true,
+      "request": {
+        "path": "/media/user/Data/TimeLearnerRefactor/requests/classic-sequential-native-recognition-m40-eq11/request.json",
+        "sha256": "ce4c89ae3a33df07ad033297303e3196c9e2f640f99f66bf2f11532501ce4618",
+        "size": 3925
+      },
+      "source_commit": "2804ea60c85c155a79f728c85aae54d7324711bb",
+      "read_only_source_admission": true,
+      "native_execution_attested": false,
+      "metadata_test_process": {
+        "pid": 3950993,
+        "start_ticks": "472785481",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "uid": 1000
+      },
+      "scientific_verdict": null
+    },
+    "native_import_and_classification_not_attested": true,
+    "existing_experiments_not_restarted": true,
+    "scientific_verdict": null
+  },
+  "observation_utc": "2026-11-26T00:57:14.724104+00:00",
+  "owner": {
+    "pid": 3954946,
+    "start_ticks": "472786112",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000
+  },
+  "owner_live_at_observation": true,
+  "waiting": {
+    "utc": "2026-11-26T00:56:58.743252+00:00",
+    "audit_owner_live": true,
+    "waiting_for": "exact_full_primary_audit_DATA_and_free_slot",
+    "native_recognition_started": false
+  },
+  "native_execution_not_started": true,
+  "metadata_admission_only": true,
+  "scientific_verdict": null
+}

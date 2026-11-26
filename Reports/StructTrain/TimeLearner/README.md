@@ -1,3 +1,12 @@
+26.11: [Classic cap24: TP1/FP1/FN0/TN6 и полный независимый архив](Progress-20261126/Windows-cap24-recognition-and-temporal-report-er5.json).
+Все 265 первичных членов распознавания и 89 членов галереи восстановлены;
+32 PNG, просмотрены 8. [Научный разбор](../../../Docs/StructTrain/TimeLearner/ClassicCandidateCap24RecognitionResults-20261126.ru.md).
+
+26.11: [Подготовка матрицы порядка/пауз Elder: 33/33, 64 первичных члена](Progress-20261126/Elder-q3-cadence33-admission-er6.json).
+Допуск метаданных принят, первый физический случай начат; итог 256 предъявлений ещё не получен.
+[Очередь распознавания закрытой модели M40](Progress-20261126/M40-sequential-recognition-preregistration-er7.json)
+допущена 6/6 проверками исходных метаданных и ждёт прежнюю пару.
+
 26.11: [Полные первичные байты Train cap24 независимо восстановлены](Progress-20261126/Windows-cap24-training-primary-bytes-ep31.json).
 1891 файл, включая исходный пакет1,12GB и47 загруженных модулей;
 архив68,3MB находится на M40. Это проверка доступности байтов,

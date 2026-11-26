@@ -1,0 +1,377 @@
+{
+  "kind": "timelearner_cap24_recognition_scientific_publication",
+  "schema_version": 1,
+  "scientific_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Windows-cap24-complete-recognition-independent-eq27.json",
+    "sha256": "bca3264b44f5ce99d0d37ba161144ce93ae4fa8cbdece4c7ee1da529e8f3144d",
+    "size": 22537
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/e1/e16013ff705891d18709d0410ef6d9ab55ded3c9384b994b3217bb420de181f0",
+      "sha256": "e16013ff705891d18709d0410ef6d9ab55ded3c9384b994b3217bb420de181f0",
+      "bytes": 43770
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/fa/fa38958248ce1742c7eec38f89664f99b769a4a4bac6de1e1a2f6dec3024edc2",
+      "sha256": "fa38958248ce1742c7eec38f89664f99b769a4a4bac6de1e1a2f6dec3024edc2",
+      "bytes": 20365340
+    },
+    "source-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/6c/6c6e952dd1f865a57b60e08172ca45f8a2fbd7da2119940a52b7fb514bf13158",
+      "sha256": "6c6e952dd1f865a57b60e08172ca45f8a2fbd7da2119940a52b7fb514bf13158",
+      "bytes": 3011
+    }
+  },
+  "independently_restored_members": 265,
+  "source_training_catalog": {
+    "relative_path": "experiments/2026-11-26/Windows-cap24-training-primary-bytes-independent-ep29.json",
+    "sha256": "f2363b49b3962a47f19ddddc0ad4b8dfff2105346ec53912678701d2637a38f3",
+    "bytes": 17632
+  },
+  "source_training_members": 1891,
+  "baseline_counts": {
+    "TP": 0,
+    "FP": 0,
+    "FN": 1,
+    "TN": 7,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 0,
+    "foil_response_rate": 0
+  },
+  "confirmation_counts": {
+    "TP": 1,
+    "FP": 1,
+    "FN": 0,
+    "TN": 6,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.875,
+    "target_hit_rate": 1,
+    "foil_response_rate": 0.14285714285714285
+  },
+  "threshold": 0.026094309839601246,
+  "model_revision": "cefb18c0cdf799e782bc973ecdfcb13e5089eb323235115d83a56a61062ef02d",
+  "source_parameters": [
+    {
+      "length": 243,
+      "resistance": 86000000,
+      "synapses": 13
+    },
+    {
+      "length": 199,
+      "resistance": 86000000,
+      "synapses": 11
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    },
+    {
+      "length": 1,
+      "resistance": 86000000,
+      "synapses": 1
+    }
+  ],
+  "rows": [
+    {
+      "index": 0,
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+      "pattern_isi_s": [
+        0.01,
+        0.08,
+        0.16,
+        0.24
+      ],
+      "classification": "TP",
+      "relative_input_ms": [
+        0,
+        80,
+        240,
+        480
+      ],
+      "spikes_after_last_input_ms": [
+        3.500000000000003
+      ],
+      "spike_count": 1
+    },
+    {
+      "index": 1,
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+      "pattern_isi_s": [
+        0.01,
+        0.24,
+        0.16,
+        0.08
+      ],
+      "classification": "TN",
+      "relative_input_ms": [
+        0,
+        240.00000000000023,
+        399.9999999999999,
+        480
+      ],
+      "spikes_after_last_input_ms": [],
+      "spike_count": 0
+    },
+    {
+      "index": 2,
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+      "pattern_isi_s": [
+        0.01,
+        0.16,
+        0.08,
+        0.24
+      ],
+      "classification": "TN",
+      "relative_input_ms": [
+        0,
+        160.00000000000014,
+        240.00000000000023,
+        479.99999999999955
+      ],
+      "spikes_after_last_input_ms": [],
+      "spike_count": 0
+    },
+    {
+      "index": 3,
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+      "pattern_isi_s": [
+        0.01,
+        0.16,
+        0.16,
+        0.16
+      ],
+      "classification": "TN",
+      "relative_input_ms": [
+        0,
+        160.00000000000014,
+        320.0000000000003,
+        480.00000000000045
+      ],
+      "spikes_after_last_input_ms": [],
+      "spike_count": 0
+    },
+    {
+      "index": 4,
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+      "pattern_isi_s": [
+        0.01,
+        0.02,
+        0.22,
+        0.24
+      ],
+      "classification": "TN",
+      "relative_input_ms": [
+        0,
+        19.999999999999574,
+        240.00000000000023,
+        480.00000000000045
+      ],
+      "spikes_after_last_input_ms": [],
+      "spike_count": 0
+    },
+    {
+      "index": 5,
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+      "pattern_isi_s": [
+        0.01,
+        0.24,
+        0.22,
+        0.02
+      ],
+      "classification": "TN",
+      "relative_input_ms": [
+        0,
+        240.00000000000023,
+        460.00000000000085,
+        480.00000000000045
+      ],
+      "spikes_after_last_input_ms": [],
+      "spike_count": 0
+    },
+    {
+      "index": 6,
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+      "pattern_isi_s": [
+        0.01,
+        0.04,
+        0.04,
+        0.4
+      ],
+      "classification": "FP",
+      "relative_input_ms": [
+        0,
+        40.000000000000924,
+        80.00000000000007,
+        480.00000000000045
+      ],
+      "spikes_after_last_input_ms": [
+        1.5000000000000568
+      ],
+      "spike_count": 1
+    },
+    {
+      "index": 7,
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+      "pattern_isi_s": [
+        0.01,
+        0.4,
+        0.04,
+        0.04
+      ],
+      "classification": "TN",
+      "relative_input_ms": [
+        0,
+        400.00000000000034,
+        439.9999999999995,
+        479.99999999999864
+      ],
+      "spikes_after_last_input_ms": [],
+      "spike_count": 0
+    }
+  ],
+  "source_training_outcome": "budget_exhausted",
+  "source_completed_boundary": false,
+  "training_certificate_transferred": false,
+  "calibration_protocol": "historical_same_matrix",
+  "independent_evaluation": false,
+  "all16_observations_complete": true,
+  "loaded_module_bytes_verified": 47,
+  "original_Windows_kernel_not_reattested": true,
+  "gallery": {
+    "catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Windows-cap24-native-recognition-scientific-figures-independent-er4.json",
+      "sha256": "769127ed9289a27ef059b3b3c85ab2785823b1f3c5e3b5b8047babeb0d2582f1",
+      "size": 2069
+    },
+    "record": {
+      "kind": "timelearner_independent_cap24_native_recognition_scientific_figures",
+      "schema_version": 1,
+      "utc": "2026-11-26T00:58:38.659400+00:00",
+      "objects": {
+        "bundle.json": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/d2/d2ff11dcf780e9c850f57976d8366a940fdaee43beb9dbdf3f12623a7c8526b8",
+          "sha256": "d2ff11dcf780e9c850f57976d8366a940fdaee43beb9dbdf3f12623a7c8526b8",
+          "bytes": 16249
+        },
+        "primary.tar.xz": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/d2/d28ccc1a5a2c856b45c590aa31a6851bc956a09adb9f4f83c57ffca4334585a5",
+          "sha256": "d28ccc1a5a2c856b45c590aa31a6851bc956a09adb9f4f83c57ffca4334585a5",
+          "bytes": 5433704
+        }
+      },
+      "restoration": {
+        "kind": "timelearner_native_bundle_restoration",
+        "schema_version": 1,
+        "archive_sha256": "d28ccc1a5a2c856b45c590aa31a6851bc956a09adb9f4f83c57ffca4334585a5",
+        "archive_members_verified": 89,
+        "retained_regular_files": 89,
+        "compatibility": null,
+        "omitted_redundant_aliases": [],
+        "source_archive_modified": false,
+        "native_execution_attested": false,
+        "scientific_verdict": null
+      },
+      "source_scientific_catalog": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-26/Windows-cap24-complete-recognition-independent-eq27.json",
+        "sha256": "bca3264b44f5ce99d0d37ba161144ce93ae4fa8cbdece4c7ee1da529e8f3144d",
+        "size": 22537
+      },
+      "all_16_source_observations_match_independently_restored_native_primary": true,
+      "figure_rows": 16,
+      "PNG_count": 32,
+      "reviewed_PNG": 8,
+      "remaining_PNG_visual_review": 24,
+      "all_scientific_PNG_reviewed": false,
+      "renderer_root_commit": "2804ea60c85c155a79f728c85aae54d7324711bb",
+      "native_classification_not_reinferred_from_plots": true,
+      "new_native_calculation": false,
+      "scientific_verdict": null
+    },
+    "restored": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/Windows-cap24-native-recognition-scientific-figures-er4/restored"
+  },
+  "local_cache": "E:/Science-Repo/TimeLearner-Documents/2026-11-26-cap24-recognition-eq24",
+  "new_Train": false,
+  "scientific_verdict": null,
+  "publication_tool_root_commit": "2804ea60c85c155a79f728c85aae54d7324711bb",
+  "recognition_python_root_commit": "7085d5f0678905d0b145f5fc552a33d498672002",
+  "native_runtime_fingerprint": "77fa25c0e052822dea3e3093d304bcd7cf19343308248441af3029ba86da0791",
+  "native_source_closure": {
+    "Bin": {
+      "head": "2c285cb472134fc92394153c089603a830a03f70",
+      "recorded_gitlink": "2c285cb472134fc92394153c089603a830a03f70",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "head": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+      "recorded_gitlink": "f2ea795b5a9c4166b1c6b5329bf61b0fff298b3f",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "head": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "recorded_gitlink": "561986e9f336ee5914e2d119de90b005e06f3639",
+      "status": ""
+    },
+    "root": {
+      "head": "891a75b39b2b020025aedc7e6158f89fd2f25ed2",
+      "status": ""
+    }
+  }
+}
