@@ -47,21 +47,37 @@
   "new_scientific_Train": false,
   "stage7_complete": false,
   "full_SDK_job": {
-    "job_id": "cyclic-selection-native237-m40-ex11",
+    "job_id": "cyclic-selection-native237-m40-ex28",
     "owner": {
-      "pid": 557448,
-      "start_ticks": "474208282",
+      "pid": 769704,
+      "start_ticks": "474756091",
       "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
       "uid": 1000
     },
+    "root": "e6ed1b43c96e0ff69492ce19ba6106013188ca27",
+    "PulseLib": "446e17ea4e900cae63db9158f34e85d7992046ab",
     "expected_tests": 237,
-    "scientific_priority_owner": {
-      "pid": 357950,
-      "start_ticks": "473863870",
-      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
-      "uid": 1000
+    "last_verified_UTC": "2026-11-26T05:53:38.015786+00:00",
+    "owner_verified_live": true,
+    "controls_commit": "867cf218738d297ee88cc3e23192c5c8144b7f38",
+    "controls_bundle": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/cyclic-selection-native237-m40-ex28/controls.bundle",
+      "sha256": "d443c2fe4584d89ff2a523b11e4e45513f0c4f37fbc916cdcd83ec2ab1ef3642",
+      "size": 383707
     },
-    "prepared_root": "923f4d784982ed5b1280804b99b0fb12577d57af"
+    "fix": "explicit QString::fromLatin1 in both measurement-purpose writers; numeric controller unchanged",
+    "validation_pending": true
   },
-  "scientific_verdict": null
+  "scientific_verdict": null,
+  "prior_full_SDK_attempt": {
+    "job_id": "cyclic-selection-native237-m40-ex11",
+    "outcome": "compile_error",
+    "completed_tests": 0,
+    "all_processes_closed": true,
+    "catalog": {
+      "relative_path": "experiments/2026-11-26/M40-sdk237-first-build-failure-ex30.json",
+      "sha256": "06444220c90ef6d26549cb215b53fcf85a612704660c2953aaa3408b6aa6e3f7",
+      "bytes": 11038
+    }
+  }
 }
