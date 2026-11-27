@@ -1,0 +1,53 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/M40-sequential-Train-independent-bytes-fr140.json",
+    "bytes": 2060,
+    "sha256": "c3f5d3659d317abf189c4d368b359cd0dc2a269dd24e39b8f5b1e49d9cc86a8e"
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/8d/8d61d79993ea8f0c25d21e7a30778ee6525c4914713f184b13c78092c24c2fa1",
+      "sha256": "8d61d79993ea8f0c25d21e7a30778ee6525c4914713f184b13c78092c24c2fa1",
+      "bytes": 401563
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/b4/b482792688f3f93ae064567d5274b8eedf492f7f3840543a19c68bac78336652",
+      "sha256": "b482792688f3f93ae064567d5274b8eedf492f7f3840543a19c68bac78336652",
+      "bytes": 80225972
+    },
+    "restoration": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/14/14ce297130e68a639409c3d38848b8f7c58fe1214ecabb4bdd1d23df21bdac8b",
+      "sha256": "14ce297130e68a639409c3d38848b8f7c58fe1214ecabb4bdd1d23df21bdac8b",
+      "bytes": 427
+    }
+  },
+  "members": 2166,
+  "native_artifacts": 2004,
+  "all_primary_members_restored": true,
+  "all_original_declared_artifacts_hash_verified": true,
+  "all_actual_native_loaded_bytes_verified": true,
+  "model_revision": "8a8b447f4ecb17f7e9140aa5504f5dedea523ce4e6d802b4a032dc7cd3d44412",
+  "training_outcome": "budget_exhausted",
+  "completed_boundary": false,
+  "full_algorithm_training_audit_separate": true,
+  "original_kernel_closure_reattested": false,
+  "recognition_not_yet_measured": true,
+  "new_Train": false,
+  "scientific_verdict": null,
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/M40-sequential-actual-Train-collected-fr132.json",
+    "bytes": 1612,
+    "sha256": "0e9ab3656571b837f5231eac77c3bcb432404bdd7706bda4f72583b33a626384"
+  }
+}
