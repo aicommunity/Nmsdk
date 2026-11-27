@@ -58,7 +58,7 @@ class AuditedTrainingIdentity(unittest.TestCase):
         docs = self.documents(); docs[1]['configuration']['run_id'] = 'other-Train'
         with self.assertRaisesRegex(EvidenceError, 'digest_mismatch'):self.resolve(docs)
         docs = self.documents(); body={k:v for k,v in docs[2].items()if k!='sha256'}
-        body['job_sha256']='0'*64;docs[2]=signed(body)
+        body['job_sha256']='0'*64;docs[2].clear();docs[2].update(signed(body))
         with self.assertRaisesRegex(EvidenceError, 'original_job_changed'):self.resolve(docs)
 
     def test_legacy_adapter_cannot_promote_completion_or_classification(self):
