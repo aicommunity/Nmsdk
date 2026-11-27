@@ -1,0 +1,133 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/windows-interactive-access-fr502/server-acceptance.json",
+    "sha256": "4ac78b4f9a70f0a27248c7aacf281ee03660eca75d3003765898ae9c2c1ca690",
+    "size": 4541
+  },
+  "catalog": {
+    "kind": "timelearner_Windows_interactive_shared_archive_actual_server_readback",
+    "schema_version": 1,
+    "UTC": "2026-11-27T17:03:00.876347+00:00",
+    "clients": {
+      "8": {
+        "worker": "win8",
+        "hostname": "MiniPC",
+        "PID": 17020,
+        "paths": [
+          {
+            "path": "X:/Nmsdk-StructTrainExpArchive",
+            "status": "written_pending_M40_server_confirmation",
+            "filename": "win8-0.json",
+            "bytes": 199,
+            "sha256": "f0f608ecdd8bb0bb7b12c5f37bf4ddada67b78155286d35788a5346e44dc8899"
+          },
+          {
+            "path": "//10.245.1.17/disk4tb/Nmsdk-StructTrainExpArchive",
+            "status": "written_pending_M40_server_confirmation",
+            "filename": "win8-1.json",
+            "bytes": 199,
+            "sha256": "743240dbe5180d649e77f27d7a6564b8af86bf18d1eb66f7b523c8733906f85f"
+          }
+        ],
+        "purpose": "shared archive access only; no model execution",
+        "matplotlib": {
+          "version": "3.10.3",
+          "Agg_ready": true
+        }
+      },
+      "14": {
+        "worker": "win14",
+        "hostname": "Ryzen7-5825U",
+        "PID": 3716,
+        "paths": [
+          {
+            "path": "X:/Nmsdk-StructTrainExpArchive",
+            "status": "written_pending_M40_server_confirmation",
+            "filename": "win14-0.json",
+            "bytes": 205,
+            "sha256": "f7d3d14c397e4ee3c1111c5e15852ea74f21c6fb534772743fcb3f4274efa153"
+          },
+          {
+            "path": "//10.245.1.17/disk4tb/Nmsdk-StructTrainExpArchive",
+            "status": "written_pending_M40_server_confirmation",
+            "filename": "win14-1.json",
+            "bytes": 205,
+            "sha256": "4bb8b2e0c10e44b7c8111341e447999be84426ab9d3510941f7dfad008464ffd"
+          }
+        ],
+        "purpose": "shared archive access only; no model execution",
+        "matplotlib": {
+          "Agg_ready": false,
+          "error": "No module named 'matplotlib'"
+        }
+      }
+    },
+    "server_rows": [
+      {
+        "worker": "win8",
+        "source_path": "X:/Nmsdk-StructTrainExpArchive",
+        "server_path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/windows-interactive-access-fr502/win8-0.json",
+        "bytes": 199,
+        "sha256": "f0f608ecdd8bb0bb7b12c5f37bf4ddada67b78155286d35788a5346e44dc8899",
+        "content": {
+          "kind": "timelearner_windows_interactive_shared_archive_probe",
+          "worker": "win8",
+          "PID": 17020,
+          "hostname": "MiniPC",
+          "nonce": "014bf6e8-870e-43b8-8320-218b99d52ac1",
+          "path_index": 0
+        }
+      },
+      {
+        "worker": "win8",
+        "source_path": "//10.245.1.17/disk4tb/Nmsdk-StructTrainExpArchive",
+        "server_path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/windows-interactive-access-fr502/win8-1.json",
+        "bytes": 199,
+        "sha256": "743240dbe5180d649e77f27d7a6564b8af86bf18d1eb66f7b523c8733906f85f",
+        "content": {
+          "kind": "timelearner_windows_interactive_shared_archive_probe",
+          "worker": "win8",
+          "PID": 17020,
+          "hostname": "MiniPC",
+          "nonce": "014bf6e8-870e-43b8-8320-218b99d52ac1",
+          "path_index": 1
+        }
+      },
+      {
+        "worker": "win14",
+        "source_path": "X:/Nmsdk-StructTrainExpArchive",
+        "server_path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/windows-interactive-access-fr502/win14-0.json",
+        "bytes": 205,
+        "sha256": "f7d3d14c397e4ee3c1111c5e15852ea74f21c6fb534772743fcb3f4274efa153",
+        "content": {
+          "kind": "timelearner_windows_interactive_shared_archive_probe",
+          "worker": "win14",
+          "PID": 3716,
+          "hostname": "Ryzen7-5825U",
+          "nonce": "5de0ced5-e2e1-4469-b5b5-bdc1a29f09d9",
+          "path_index": 0
+        }
+      },
+      {
+        "worker": "win14",
+        "source_path": "//10.245.1.17/disk4tb/Nmsdk-StructTrainExpArchive",
+        "server_path": "/media/user/Data/Nmsdk-StructTrainExpArchive/operations/timelearner/windows-interactive-access-fr502/win14-1.json",
+        "bytes": 205,
+        "sha256": "4bb8b2e0c10e44b7c8111341e447999be84426ab9d3510941f7dfad008464ffd",
+        "content": {
+          "kind": "timelearner_windows_interactive_shared_archive_probe",
+          "worker": "win14",
+          "PID": 3716,
+          "hostname": "Ryzen7-5825U",
+          "nonce": "5de0ced5-e2e1-4469-b5b5-bdc1a29f09d9",
+          "path_index": 1
+        }
+      }
+    ],
+    "existing_interactive_token": true,
+    "Windows_connection_credentials_not_changed": true,
+    "no_model_execution": true,
+    "SSH_access_still_separate": true,
+    "scientific_verdict": null
+  }
+}

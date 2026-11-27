@@ -1,0 +1,134 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Classic-count8-and-owner-independent-accepted-fr547.json",
+    "sha256": "093e8f26deb42f08836b731d6942677d223646dd28cd55bca5b14129e8445a4f",
+    "size": 4854
+  },
+  "catalog": {
+    "kind": "actual_Classic_Count8_Train_recognition_gallery_and_owner_replay_independent_accepted",
+    "schema_version": 1,
+    "reader_evidence_objects": {
+      "0": {
+        "bundle.json": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/94/94ad73b4b7c0b3c9ce95a77073200139950f44174fd241a7b52d0f06c6286fcb",
+          "sha256": "94ad73b4b7c0b3c9ce95a77073200139950f44174fd241a7b52d0f06c6286fcb",
+          "bytes": 13221
+        },
+        "primary.tar.xz": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/4d/4d481c0b644dfb490bdaf2a79de8cdd14f0b5337070ab4f2b0207f7a3f78c40e",
+          "sha256": "4d481c0b644dfb490bdaf2a79de8cdd14f0b5337070ab4f2b0207f7a3f78c40e",
+          "bytes": 6059924
+        }
+      },
+      "1": {
+        "bundle.json": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/38/38310a0e1d1678c206227c0dd7689c7cf92ef4cda4527604419071b91ca1def5",
+          "sha256": "38310a0e1d1678c206227c0dd7689c7cf92ef4cda4527604419071b91ca1def5",
+          "bytes": 6730
+        },
+        "primary.tar.xz": {
+          "kind": "nmsdk_structtrain_external_object",
+          "schema_version": 1,
+          "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+          "object": "objects/sha256/19/19a735bd5a1dace798b8082e76f16f81cb48709ff9431587b44d85d07079f283",
+          "sha256": "19a735bd5a1dace798b8082e76f16f81cb48709ff9431587b44d85d07079f283",
+          "bytes": 6063548
+        }
+      }
+    },
+    "reader_source_catalogs": [
+      {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Worker4-Classic-and-owner-reader-evidence-fr543.json",
+        "sha256": "beebc24b8e3115f2dfda07c2fee9824c9462251a034e91fcb6f27cc1a48e560d",
+        "size": 5335
+      },
+      {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Elder-Classic1408-reader-evidence-fr543.json",
+        "sha256": "148702b516137e4d1a088b4af89a0539dddc4d95fa0c661fa1c27eaa1fe9b014",
+        "size": 2159
+      }
+    ],
+    "rows": [
+      {
+        "label": "owner",
+        "primary_members": 176,
+        "reader_controls_commit": "e4418008a8e3ee9682811b5642063382b1ad6cc7",
+        "actual_reader_files_before": 18,
+        "actual_reader_files_after": 18,
+        "source_catalogs": [
+          {
+            "relative_path": "experiments/2026-11-27/Linux-owner4-replay16-primary-fr512.json",
+            "bytes": 1357,
+            "sha256": "61ecabe1032fba9a90a33a36e4eaf0315276da6f68a23273720d77ff6adb8d68"
+          }
+        ],
+        "all_declared_reader_bytes_verified": true
+      },
+      {
+        "label": "recognition",
+        "primary_members": 477,
+        "reader_controls_commit": "c3e59b0e745268a8bd7ccec4d7edbb78b11dacde",
+        "actual_reader_files_before": 18,
+        "actual_reader_files_after": 18,
+        "source_catalogs": [
+          {
+            "relative_path": "experiments/2026-11-27/M40-Classic-Count8-recognition16-primary-fr517.json",
+            "bytes": 9828,
+            "sha256": "54bdee06361776eb48675b27a816189c6969127507b30541d17a104455b95418"
+          },
+          {
+            "relative_path": "experiments/2026-11-27/M40-Classic-Count8-gallery-fr517.json",
+            "bytes": 1318,
+            "sha256": "cd39ed68956eb7ffd3a56521c48b88a187a20d3929ec93ac969acdade4a622b7"
+          }
+        ],
+        "all_declared_reader_bytes_verified": true
+      },
+      {
+        "label": "train",
+        "primary_members": 1408,
+        "reader_controls_commit": "1b4a09e7232a810da6491e8b8642488ab22c5495",
+        "actual_reader_files_before": 18,
+        "actual_reader_files_after": 18,
+        "source_catalogs": [
+          {
+            "relative_path": "experiments/2026-11-27/M40-Classic-Count8-complete-Train-primary-fr504.json",
+            "bytes": 7689,
+            "sha256": "f5330509609ec11ac0e9fc75047fd75cc917f289b156102a68e3736f3c043ee0"
+          }
+        ],
+        "all_declared_reader_bytes_verified": true
+      }
+    ],
+    "Classic_Train_primary_members": 1408,
+    "Classic_recognition_primary_members": 332,
+    "Classic_gallery_members": 145,
+    "Classic_observations": 16,
+    "Classic_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6
+    },
+    "target_response_ms": 483.5,
+    "only_FP_response_ms": 481.5,
+    "owner_primary_members": 176,
+    "owner_addressed_tests": 4,
+    "owner_native_replays": 16,
+    "all_primary_independently_restored": true,
+    "all_declared_reader_bytes_verified": true,
+    "original_process_ownership_not_reattested": true,
+    "auxiliary_publication_process_maps_not_captured": true,
+    "new_model_calculation": false,
+    "scientific_verdict": null
+  }
+}

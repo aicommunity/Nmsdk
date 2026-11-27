@@ -1,0 +1,342 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/M40-Classic-Count8-recognition16-primary-fr517.json",
+    "sha256": "54bdee06361776eb48675b27a816189c6969127507b30541d17a104455b95418",
+    "size": 9828
+  },
+  "catalog": {
+    "kind": "actual_Classic_Count8_recognition16_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/da/da07031cefb42d9ad7273b4277da8d3b997976f6108e2bf93c80ae725597a0d8",
+        "sha256": "da07031cefb42d9ad7273b4277da8d3b997976f6108e2bf93c80ae725597a0d8",
+        "bytes": 58189
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/12/1257a8b8abbb2290e07599a9ccf60ecda457abd6af72f5a118ab3aa52f7559e9",
+        "sha256": "1257a8b8abbb2290e07599a9ccf60ecda457abd6af72f5a118ab3aa52f7559e9",
+        "bytes": 41047316
+      }
+    },
+    "members": 332,
+    "expanded_bytes": 780843351,
+    "observations": 16,
+    "native_capture_inventory": [
+      {
+        "path": "conversion/process/loaded-files.json",
+        "files": 28
+      },
+      {
+        "path": "baseline/process/loaded-files.json",
+        "files": 28
+      },
+      {
+        "path": "threshold/process/loaded-files.json",
+        "files": 28
+      },
+      {
+        "path": "confirmation/process/loaded-files.json",
+        "files": 28
+      }
+    ],
+    "baseline_counts": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0
+    },
+    "confirmation_counts": {
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "TN": 6,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.875,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.14285714285714285
+    },
+    "threshold": 0.026100997379370133,
+    "training_outcome": "budget_exhausted",
+    "completed_boundary": false,
+    "actual_source": {
+      "kind": "timelearner_actual_audited_Train_to_DATA_source_binding",
+      "schema_version": 1,
+      "job_sha256": "5e4d30866adfd414e7cc19ddda0a828a21af4c17d7637a67252250633eea069b",
+      "model_revision": "cce61e402b5325ae47a8d2ce89df633680d1765e5a78f0ad63c2330db5893ef2",
+      "source_training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "full_primary_audit": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count8-full-audit-fr480/full-primary-audit.json",
+        "sha256": "fc150389748bd876ceac5c7f47a76504d72cc35d01b4b44c90682a7b6b43e72e",
+        "size": 61890
+      },
+      "source_DATA": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-count8-full-audit-fr480/physical-model-DATA.json",
+        "sha256": "4f7339da1d4aac8cb825a158bfeb479da3ca4e8070865ac8b59b370109f33202",
+        "size": 13028660
+      },
+      "source_package": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/classic-repaired-count-cap8-m40-fr221/train/native/train_stopped_state.json",
+        "sha256": "c8203e6067ee47394af804632d8c2b80e696762db97787a41f7fed5160df0da9",
+        "size": 979078246
+      },
+      "original_training_unchanged": true,
+      "scientific_verdict": null
+    },
+    "timing": {
+      "observations": [
+        {
+          "phase": "baseline",
+          "index": 0,
+          "label": "target",
+          "sample_id": "phasea-row-0",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.08,
+            0.24,
+            0.48
+          ],
+          "model_revision": "cce61e402b5325ae47a8d2ce89df633680d1765e5a78f0ad63c2330db5893ef2"
+        },
+        {
+          "phase": "baseline",
+          "index": 1,
+          "label": "foil",
+          "sample_id": "phasea-row-1",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.2400000000000002,
+            0.3999999999999999,
+            0.48
+          ],
+          "model_revision": "cce61e402b5325ae47a8d2ce89df633680d1765e5a78f0ad63c2330db5893ef2"
+        },
+        {
+          "phase": "baseline",
+          "index": 2,
+          "label": "foil",
+          "sample_id": "phasea-row-2",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.16000000000000014,
+            0.2400000000000002,
+            0.47999999999999954
+          ],
+          "model_revision": "cce61e402b5325ae47a8d2ce89df633680d1765e5a78f0ad63c2330db5893ef2"
+        },
+        {
+          "phase": "baseline",
+          "index": 3,
+          "label": "foil",
+          "sample_id": "phasea-row-3",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.16000000000000014,
+            0.3200000000000003,
+            0.4800000000000004
+          ],
+          "model_revision": "cce61e402b5325ae47a8d2ce89df633680d1765e5a78f0ad63c2330db5893ef2"
+        },
+        {
+          "phase": "baseline",
+          "index": 4,
+          "label": "foil",
+          "sample_id": "phasea-row-4",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.019999999999999574,
+            0.2400000000000002,
+            0.4800000000000004
+          ],
+          "model_revision": "cce61e402b5325ae47a8d2ce89df633680d1765e5a78f0ad63c2330db5893ef2"
+        },
+        {
+          "phase": "baseline",
+          "index": 5,
+          "label": "foil",
+          "sample_id": "phasea-row-5",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.2400000000000002,
+            0.46000000000000085,
+            0.4800000000000004
+          ],
+          "model_revision": "cce61e402b5325ae47a8d2ce89df633680d1765e5a78f0ad63c2330db5893ef2"
+        },
+        {
+          "phase": "baseline",
+          "index": 6,
+          "label": "foil",
+          "sample_id": "phasea-row-6",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.040000000000000924,
+            0.08000000000000007,
+            0.4800000000000004
+          ],
+          "model_revision": "cce61e402b5325ae47a8d2ce89df633680d1765e5a78f0ad63c2330db5893ef2"
+        },
+        {
+          "phase": "baseline",
+          "index": 7,
+          "label": "foil",
+          "sample_id": "phasea-row-7",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.40000000000000036,
+            0.4399999999999995,
+            0.47999999999999865
+          ],
+          "model_revision": "cce61e402b5325ae47a8d2ce89df633680d1765e5a78f0ad63c2330db5893ef2"
+        },
+        {
+          "phase": "confirmation",
+          "index": 0,
+          "label": "target",
+          "sample_id": "phasea-row-0",
+          "relative_spikes": [
+            0.4835
+          ],
+          "relative_stimuli": [
+            0,
+            0.08,
+            0.24,
+            0.48
+          ],
+          "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+        },
+        {
+          "phase": "confirmation",
+          "index": 1,
+          "label": "foil",
+          "sample_id": "phasea-row-1",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.2400000000000002,
+            0.3999999999999999,
+            0.48
+          ],
+          "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+        },
+        {
+          "phase": "confirmation",
+          "index": 2,
+          "label": "foil",
+          "sample_id": "phasea-row-2",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.16000000000000014,
+            0.2400000000000002,
+            0.47999999999999954
+          ],
+          "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+        },
+        {
+          "phase": "confirmation",
+          "index": 3,
+          "label": "foil",
+          "sample_id": "phasea-row-3",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.16000000000000014,
+            0.3200000000000003,
+            0.4800000000000004
+          ],
+          "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+        },
+        {
+          "phase": "confirmation",
+          "index": 4,
+          "label": "foil",
+          "sample_id": "phasea-row-4",
+          "relative_spikes": [
+            0.4814999999999987
+          ],
+          "relative_stimuli": [
+            0,
+            0.019999999999999574,
+            0.2400000000000002,
+            0.4800000000000004
+          ],
+          "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+        },
+        {
+          "phase": "confirmation",
+          "index": 5,
+          "label": "foil",
+          "sample_id": "phasea-row-5",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.2400000000000002,
+            0.46000000000000085,
+            0.4800000000000004
+          ],
+          "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+        },
+        {
+          "phase": "confirmation",
+          "index": 6,
+          "label": "foil",
+          "sample_id": "phasea-row-6",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.040000000000000924,
+            0.08000000000000007,
+            0.4800000000000004
+          ],
+          "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+        },
+        {
+          "phase": "confirmation",
+          "index": 7,
+          "label": "foil",
+          "sample_id": "phasea-row-7",
+          "relative_spikes": [],
+          "relative_stimuli": [
+            0,
+            0.40000000000000036,
+            0.4399999999999995,
+            0.47999999999999865
+          ],
+          "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226"
+        }
+      ],
+      "source_training_completed": false,
+      "diagnostic_only": true,
+      "scientific_verdict": null
+    },
+    "protocol": "historical_same_matrix",
+    "independent_evaluation": false,
+    "new_Train": false,
+    "independent_primary_readback_pending": true,
+    "scientific_verdict": null
+  }
+}
