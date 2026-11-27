@@ -886,7 +886,13 @@ TEST(NativePhysicalPortableData,ResignedData1ScalarDeclarationsMustMatchTypedIde
     for(bool imagesOnly:{false,true})
     {
         const auto bad=EditDataArchive(solo,wrong,imagesOnly);
-        EXPECT_THROW(ConvertNativeSoloPhysicalModelDataToRecognition(bad,{}, {},fixture.storage,fixture.environment,Implementation),std::invalid_argument);
+        try
+        {
+            ConvertNativeSoloPhysicalModelDataToRecognition(bad,{}, {},fixture.storage,fixture.environment,Implementation);
+            FAIL()<<"Contradictory DATA1 scalar declaration was accepted";
+        }
+        catch(const NmsdkTools::ModelArchiveError& error)
+        {EXPECT_EQ(error.code,"archive_parameter_type_or_value_mismatch");}
         EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
     }
 }
