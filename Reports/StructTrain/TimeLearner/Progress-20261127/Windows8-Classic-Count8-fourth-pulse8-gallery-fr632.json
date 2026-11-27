@@ -1,0 +1,170 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Windows8-Classic-Count8-fourth-pulse8-gallery-fr632.json",
+    "size": 4142,
+    "sha256": "467aa348267c5fc276331c2c6cba5520bca1584b29be7f20ec53c0d7c50c3e06"
+  },
+  "catalog": {
+    "kind": "Win8_Classic_Count8_fourth_pulse8_complete_gallery",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6f/6f74a1dce5d1f5dd14b9032ae8c18873bc2d1ef40725231371ee6af9b58df0ae",
+        "sha256": "6f74a1dce5d1f5dd14b9032ae8c18873bc2d1ef40725231371ee6af9b58df0ae",
+        "bytes": 17893
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/72/723a9d16edfd9554840cb07acbd37294aaaa508fae14eba42630b894b71b0167",
+        "sha256": "723a9d16edfd9554840cb07acbd37294aaaa508fae14eba42630b894b71b0167",
+        "bytes": 22347364
+      }
+    },
+    "members": 98,
+    "source_primary": {
+      "relative_path": "experiments/2026-11-27/Windows8-Classic-Count8-fourth-pulse8-primary-fr623.json",
+      "bytes": 5012,
+      "sha256": "a8745fdef5fb91be8f79eb2761ff59a5d73064dead3c5ef845d379b80abae16e"
+    },
+    "counts": {
+      "TP": 1,
+      "FP": 0,
+      "FN": 0,
+      "TN": 7,
+      "targets": 1,
+      "foils": 7,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 1.0,
+      "target_hit_rate": 1.0,
+      "foil_response_rate": 0.0
+    },
+    "events": [
+      {
+        "index": 0,
+        "label": "foil",
+        "sample_id": "fourth-pulse-320ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08,
+          0.24,
+          0.32
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "index": 1,
+        "label": "foil",
+        "sample_id": "fourth-pulse-360ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.2400000000000002,
+          0.3599999999999999
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "index": 2,
+        "label": "foil",
+        "sample_id": "fourth-pulse-400ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.2400000000000002,
+          0.39999999999999947
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "index": 3,
+        "label": "foil",
+        "sample_id": "fourth-pulse-440ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.2400000000000002,
+          0.4400000000000004
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "index": 4,
+        "label": "target",
+        "sample_id": "fourth-pulse-480ms",
+        "classification": "TP",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.2400000000000002,
+          0.4800000000000004
+        ],
+        "actual_spikes": [
+          0.4834999999999994
+        ],
+        "early_spike_before_fourth": false
+      },
+      {
+        "index": 5,
+        "label": "foil",
+        "sample_id": "fourth-pulse-520ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.2400000000000002,
+          0.5200000000000014
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "index": 6,
+        "label": "foil",
+        "sample_id": "fourth-pulse-560ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.2400000000000002,
+          0.5600000000000005
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      },
+      {
+        "index": 7,
+        "label": "foil",
+        "sample_id": "fourth-pulse-640ms",
+        "classification": "TN",
+        "actual_stimuli": [
+          0,
+          0.08000000000000007,
+          0.2400000000000002,
+          0.6399999999999988
+        ],
+        "actual_spikes": [],
+        "early_spike_before_fourth": false
+      }
+    ],
+    "PNG": 16,
+    "SVG": 16,
+    "visual_review_complete": false,
+    "independent_primary_readback_pending": true,
+    "new_Train": false,
+    "new_calibration": false,
+    "scientific_verdict": null
+  }
+}

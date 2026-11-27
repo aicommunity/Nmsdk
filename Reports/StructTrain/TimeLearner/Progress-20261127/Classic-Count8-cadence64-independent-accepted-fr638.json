@@ -1,0 +1,198 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Classic-Count8-cadence64-independent-accepted-fr638.json",
+    "size": 5433,
+    "sha256": "e71dfaac6290113ea01cbdb8dbd1089e2d42d0d2427a6941d599abcb677d7179"
+  },
+  "catalog": {
+    "kind": "Classic_Count8_all_eight_cadence_cases_primary_gallery_visual_independently_accepted",
+    "schema_version": 1,
+    "peer_catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Classic-Count8-cadence64-independent-fr628.json",
+      "size": 5362,
+      "sha256": "29db327d2a9aa7186b963382990d5e26bbb3c71676ee3c40533564778272fe0d"
+    },
+    "peer_reader_evidence": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ce/cea0b718e3477cb103c90c8d91d5aae394c0a69edc613fb3bc3019d452350d76",
+        "sha256": "cea0b718e3477cb103c90c8d91d5aae394c0a69edc613fb3bc3019d452350d76",
+        "bytes": 7178
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ec/ec6fc70735a80e5e4f97995abedd04ed0fceb2408522ff2123dd3fc747900a7b",
+        "sha256": "ec6fc70735a80e5e4f97995abedd04ed0fceb2408522ff2123dd3fc747900a7b",
+        "bytes": 6053552
+      }
+    },
+    "peer_controls_bundle_member": "controls.bundle",
+    "peer_controls_commit": "19378d588bca461f1e4ffbef3e4b0cd6a80ed5bf",
+    "peer_reader_members": 38,
+    "primary_members": 883,
+    "gallery_members": 394,
+    "observations": 64,
+    "rows": [
+      {
+        "case": "r0-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "observations": 8
+      },
+      {
+        "case": "r0-short-continuous",
+        "counts": {
+          "TP": 1,
+          "FP": 3,
+          "FN": 0,
+          "TN": 4,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.625,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.42857142857142855
+        },
+        "observations": 8
+      },
+      {
+        "case": "r3-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "observations": 8
+      },
+      {
+        "case": "r3-short-continuous",
+        "counts": {
+          "TP": 1,
+          "FP": 3,
+          "FN": 0,
+          "TN": 4,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.625,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.42857142857142855
+        },
+        "observations": 8
+      },
+      {
+        "case": "r0-long-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "observations": 8
+      },
+      {
+        "case": "r0-long-continuous",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "observations": 8
+      },
+      {
+        "case": "r3-long-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "observations": 8
+      },
+      {
+        "case": "r3-long-continuous",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "observations": 8
+      }
+    ],
+    "actual_peer_reader_loaded_maps": [
+      {
+        "phase": "before",
+        "files": 18,
+        "all_bytes_verified": true
+      },
+      {
+        "phase": "after",
+        "files": 18,
+        "all_bytes_verified": true
+      }
+    ],
+    "actual_native_loaded_byte_sets_verified_by_peer": 8,
+    "PNG_visually_reviewed": 128,
+    "SVG_bytes_verified": 128,
+    "review_method": "all_128_PNG_represented_by_32_readable_JPEG_contact_sheets_from_exact_original_figures",
+    "all_original_PNG_separately_opened_at_full_resolution": false,
+    "source_gallery_visual_review": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/M40-Classic-Count8-cadence64-visual-reviewed-fr637.json",
+      "size": 749,
+      "sha256": "2b69156ff8fe5d272de0ff42254c602435923e9c228563e0354722bc3dd856c4"
+    },
+    "remaining_full_64_series_not_complete": false,
+    "source_pending_flags_preserved_and_superseded_for_this_64_observation_scope": true,
+    "auxiliary_acceptor_loaded_map": "unknown",
+    "original_process_ownership_not_reattested": true,
+    "new_model_calculation": false,
+    "scientific_verdict": null
+  }
+}

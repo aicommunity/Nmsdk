@@ -1,0 +1,191 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Classic-Count8-cadence64-independent-fr628.json",
+    "size": 5362,
+    "sha256": "29db327d2a9aa7186b963382990d5e26bbb3c71676ee3c40533564778272fe0d"
+  },
+  "catalog": {
+    "kind": "Classic_Count8_cadence64_primary_and_gallery_independently_read",
+    "schema_version": 1,
+    "analysis": {
+      "kind": "actual_Classic_Count8_cadence_short_comparison64_independent_readback",
+      "source_catalogs": {
+        "primary": {
+          "relative_path": "experiments/2026-11-27/M40-Classic-Count8-cadence64-primary-fr608.json",
+          "bytes": 5602,
+          "sha256": "dbdde3b0933a472a45a9b0c7918fa9951c647bd9547fe058ea55d75c6245f2d6"
+        },
+        "gallery": {
+          "relative_path": "experiments/2026-11-27/M40-Classic-Count8-cadence64-gallery-fr608.json",
+          "bytes": 1309,
+          "sha256": "c09e6c76d0bf82b7ff4c6d1908eb447d2acae62d5afbfab9ac89aece29441342"
+        }
+      },
+      "primary_members": 883,
+      "gallery_members": 394,
+      "observations": 64,
+      "rows": [
+        {
+          "case": "r0-short-reset",
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 6,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.14285714285714285
+          },
+          "observations": 8
+        },
+        {
+          "case": "r0-short-continuous",
+          "counts": {
+            "TP": 1,
+            "FP": 3,
+            "FN": 0,
+            "TN": 4,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.625,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.42857142857142855
+          },
+          "observations": 8
+        },
+        {
+          "case": "r3-short-reset",
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 6,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.14285714285714285
+          },
+          "observations": 8
+        },
+        {
+          "case": "r3-short-continuous",
+          "counts": {
+            "TP": 1,
+            "FP": 3,
+            "FN": 0,
+            "TN": 4,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.625,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.42857142857142855
+          },
+          "observations": 8
+        },
+        {
+          "case": "r0-long-reset",
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 6,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.14285714285714285
+          },
+          "observations": 8
+        },
+        {
+          "case": "r0-long-continuous",
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 6,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.14285714285714285
+          },
+          "observations": 8
+        },
+        {
+          "case": "r3-long-reset",
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 6,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.14285714285714285
+          },
+          "observations": 8
+        },
+        {
+          "case": "r3-long-continuous",
+          "counts": {
+            "TP": 1,
+            "FP": 1,
+            "FN": 0,
+            "TN": 6,
+            "targets": 1,
+            "foils": 7,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 0.875,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.14285714285714285
+          },
+          "observations": 8
+        }
+      ],
+      "PNG_bytes_verified": 128,
+      "SVG_bytes_verified": 128,
+      "actual_native_loaded_byte_sets_verified": 8,
+      "actual_primary_reader_bytes_verified": true,
+      "independent_source_unchanged": true,
+      "original_process_ownership_not_reattested": true,
+      "new_model_calculation": false,
+      "all_64_observations_completed": true,
+      "scientific_verdict": null
+    },
+    "reader_controls_commit": "19378d588bca461f1e4ffbef3e4b0cd6a80ed5bf",
+    "reader_evidence": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ce/cea0b718e3477cb103c90c8d91d5aae394c0a69edc613fb3bc3019d452350d76",
+        "sha256": "cea0b718e3477cb103c90c8d91d5aae394c0a69edc613fb3bc3019d452350d76",
+        "bytes": 7178
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/ec/ec6fc70735a80e5e4f97995abedd04ed0fceb2408522ff2123dd3fc747900a7b",
+        "sha256": "ec6fc70735a80e5e4f97995abedd04ed0fceb2408522ff2123dd3fc747900a7b",
+        "bytes": 6053552
+      }
+    },
+    "reader_members": 38,
+    "reader_loaded_maps_and_bytes_retained": true,
+    "visual_review_complete": false,
+    "scientific_verdict": null
+  }
+}

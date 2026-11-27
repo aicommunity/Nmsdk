@@ -1,0 +1,154 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Windows8-Classic-Count8-fourth-pulse8-primary-fr623.json",
+    "size": 5012,
+    "sha256": "a8745fdef5fb91be8f79eb2761ff59a5d73064dead3c5ef845d379b80abae16e"
+  },
+  "catalog": {
+    "kind": "actual_Windows8_frozen_Classic_fourth_pulse8_complete_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/7b/7b87adf66280c94790ee18ec4fbcdf24a55127ac1ebbae292441220e8304984a",
+        "sha256": "7b87adf66280c94790ee18ec4fbcdf24a55127ac1ebbae292441220e8304984a",
+        "bytes": 85237
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/35/35230b6423b7062faf126eb3385e11019607d72d00ef25891a7e3f28ea92719d",
+        "sha256": "35230b6423b7062faf126eb3385e11019607d72d00ef25891a7e3f28ea92719d",
+        "bytes": 28231660
+      }
+    },
+    "members": 494,
+    "expanded_bytes": 344534666,
+    "analysis": {
+      "kind": "actual_Win8_Classic_frozen_fourth_pulse8",
+      "schema_version": 1,
+      "controls": [
+        {
+          "role": "bootstrap",
+          "commit": "7110c006e8f312873462a8e824e9847034e0c181"
+        },
+        {
+          "role": "owner",
+          "commit": "3cd60335af1dba5216531da416818ff1050875dc"
+        },
+        {
+          "role": "native",
+          "commit": "c355471531bf7ba1645327cb89f37dcea5f1cc7e"
+        },
+        {
+          "role": "publisher",
+          "commit": "91e9ff6d4e515869e0ba403e509a333e6fe84c39"
+        }
+      ],
+      "current_source_closure": {
+        "Bin": {
+          "head": "2c285cb472134fc92394153c089603a830a03f70",
+          "recorded_gitlink": "2c285cb472134fc92394153c089603a830a03f70",
+          "status": ""
+        },
+        "Libraries/Nmsdk-MotionControlLib": {
+          "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+          "status": ""
+        },
+        "Libraries/Nmsdk-PulseLib": {
+          "head": "5f36aebb9bfdef747c04319f3ab065be199de67c",
+          "recorded_gitlink": "5f36aebb9bfdef747c04319f3ab065be199de67c",
+          "status": ""
+        },
+        "Libraries/Rdk-BasicLib": {
+          "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+          "status": ""
+        },
+        "Libraries/Rdk-CvBasicLib": {
+          "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+          "status": ""
+        },
+        "Libraries/Rdk-HardwareLib": {
+          "head": "de40b008e990105856726e01230dde19f42a90a9",
+          "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+          "status": ""
+        },
+        "Rdk": {
+          "head": "26129caa576a6b727ee2d76718e9fe9b2674e811",
+          "recorded_gitlink": "26129caa576a6b727ee2d76718e9fe9b2674e811",
+          "status": ""
+        },
+        "root": {
+          "head": "cde0b851a3c156b3c31e6dbadc27b320de9a3884",
+          "status": ""
+        }
+      },
+      "native_loaded_files": 48,
+      "native_actual_bytes_preserved": true,
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226",
+      "model_document_sha256": "a8fb12c9f37c4d4e62ea7c37b7c995bd3a49cd7c437fb2558d6265188a5dcc53",
+      "runtime_fingerprint": "59851cfe93895d39ee83930c1b4c4164f8317131d38a4076498da3e815b8ebb7",
+      "old_SDK_unchanged": true,
+      "new_build_performed": false,
+      "new_Train": false,
+      "new_calibration": false,
+      "fourth_pulse_ms": [
+        320,
+        360,
+        400,
+        440,
+        480,
+        520,
+        560,
+        640
+      ],
+      "fixed_first_three_ms": [
+        0,
+        80,
+        240
+      ],
+      "target_position": 4,
+      "previously_seen_positive": true,
+      "new_negative_patterns": 7,
+      "qualified_original_control": {
+        "path": "D:\\Projects\\TimeLearnerWorker\\jobs\\classic-count8-control-owner-fr584\\terminal.json",
+        "sha256": "beaa2e7365110a1c4eacc7ef32f843187db44bf7984fc7b13f04bf3b9df09336",
+        "size": 627
+      },
+      "source_origin_catalog": {
+        "relative_path": "experiments/2026-11-27/Windows14-current-runtime-for-Win8-fr579.json",
+        "bytes": 2991,
+        "sha256": "99cb8de77ce1f42c80510ec08bf3c7b311513eaa04de9fbdb5a239b768ca548c"
+      },
+      "source_control_catalog": {
+        "relative_path": "experiments/2026-11-27/Windows8-current-runtime-Classic-control8-primary-fr598.json",
+        "bytes": 4689,
+        "sha256": "2260b0233b168b20258e2252e2d78eaec90ae918a4719b7d535626e5184520bd"
+      },
+      "full_independent_readback_pending": true,
+      "scientific_verdict": null
+    },
+    "independent_readback_pending": true,
+    "auxiliary_old_bootstrap_CLI_loaded_maps_only_as_originally_recorded": true,
+    "no_reattestation_of_old_process_ownership": true,
+    "scientific_verdict": null
+  }
+}
