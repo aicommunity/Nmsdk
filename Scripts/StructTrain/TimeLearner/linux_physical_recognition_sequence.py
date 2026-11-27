@@ -56,6 +56,31 @@ def evaluation_limits(q):
                 reservation_ttl_seconds=seconds+600)
 
 
+def training_sdk_source(training, base):
+    """Accept a native SDK shared with the reader, within the worker tree.
+
+    Source identity is verified against the runtime by the native preparation
+    path; different directory names are not evidence of different roles.
+    """
+    require(training['operation'] == 'train' and training['execution_root'] == str(base) and
+            type(training['sdk_source']) is str, 'linux_DATA_sequence_native_training_scope')
+    sdk = Path(training['sdk_source'])
+    require(sdk.is_absolute() and sdk.is_relative_to(base) and sdk.is_dir() and
+            sdk.resolve(strict=True) == sdk, 'linux_DATA_sequence_native_training_scope')
+    return sdk
+
+
+def evaluation_resources(p, phase, outputs, native_runtime):
+    """Coalesce shared readers while retaining every output and writer guard."""
+    from .resource_reservations import coalesce_resource_requests
+    require(phase in ('baseline', 'confirmation'), 'linux_DATA_sequence_evaluation_phase')
+    return coalesce_resource_requests([dict(path=str(v), access=a) for v, a in
+        [(SOURCE, 'read'), (p['sdk'], 'read'), (p['controls'], 'read'), (p['output'], 'write'),
+         (Path(native_runtime['executable']['path']).parent, 'read'),
+         (outputs['conversion'], 'read'), *([(outputs['threshold'], 'read')] if phase == 'confirmation' else []),
+         (outputs[phase], 'write')]])
+
+
 def context(request_path):
     from .model_identity import canonical_model_sha256 as sha
     request_path = Path(request_path).resolve(strict=True)
@@ -74,8 +99,7 @@ def context(request_path):
     require(original.is_relative_to(base/'requests') and original.resolve(strict=True) == original and
             file_record(original) == q['source_training_request'], 'linux_DATA_sequence_training_request')
     training = load(original)
-    require(training['operation'] == 'train' and training['execution_root'] == str(base) and
-            training['sdk_source'] != str(SOURCE), 'linux_DATA_sequence_native_training_scope')
+    sdk = training_sdk_source(training, base)
     runtime = Path(training['runtime']['path'])
     require(runtime.resolve(strict=True) == runtime and runtime.is_relative_to(base) and
             file_record(runtime) == training['runtime'], 'linux_DATA_sequence_runtime_binding')
@@ -120,7 +144,7 @@ def context(request_path):
                 row['pattern_hash'] == sha(row['pattern_isi']), 'linux_DATA_sequence_pattern_changed')
     return dict(q=q, base=base, controls=controls, output=base/'readbacks'/name,
                 request=request_path, request_record=file_record(request_path), training=training,
-                runtime=runtime, sdk=Path(training['sdk_source']), evaluation_limits=limits)
+                runtime=runtime, sdk=sdk, evaluation_limits=limits)
 
 
 def guard(p):
@@ -339,11 +363,8 @@ def phase_worker(request_path, phase):
         from .job_source_transport import TRANSPORT
         registry = Reservations.open_existing(p['base']/'resource-reservations.sqlite3')
         native_runtime = load(p['runtime'])
-        lease = registry.reserve(names[phase], [dict(path=str(v), access=a) for v, a in
-            [(SOURCE, 'read'), (p['sdk'], 'read'), (p['controls'], 'read'), (p['output'], 'write'),
-             (Path(native_runtime['executable']['path']).parent, 'read'),
-             (outputs['conversion'], 'read'), *([(outputs['threshold'], 'read')] if phase == 'confirmation' else []),
-             (outputs[phase], 'write')]], ttl_seconds=p['evaluation_limits']['reservation_ttl_seconds'],
+        lease = registry.reserve(names[phase], evaluation_resources(p, phase, outputs, native_runtime),
+            ttl_seconds=p['evaluation_limits']['reservation_ttl_seconds'],
             demands=dict(slots=1, memory_bytes=12*GIB, disk_bytes=2*GIB))
         write(directory/'reservation.json', lease)
         data = outputs['conversion' if phase == 'baseline' else 'threshold']/'native/model.json'
