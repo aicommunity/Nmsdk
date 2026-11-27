@@ -1,0 +1,129 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "original-serialization.txt": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/0d/0df956f11143f64b811fb211edab081e95e2b8e54f8b6800ea04899e00182bd2",
+      "sha256": "0df956f11143f64b811fb211edab081e95e2b8e54f8b6800ea04899e00182bd2",
+      "bytes": 22150
+    },
+    "diagnostic.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/0d/0df956f11143f64b811fb211edab081e95e2b8e54f8b6800ea04899e00182bd2",
+      "sha256": "0df956f11143f64b811fb211edab081e95e2b8e54f8b6800ea04899e00182bd2",
+      "bytes": 22150
+    }
+  },
+  "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+  "same_graph_identity": true,
+  "different_training_histories": true,
+  "XML_difference_count": 67125,
+  "all_XML_differences_are_type_attributes": true,
+  "type_pairs": [
+    {
+      "attribute": "Type",
+      "left": "int",
+      "right": "i",
+      "count": 5295
+    },
+    {
+      "attribute": "Type",
+      "left": "bool",
+      "right": "b",
+      "count": 11148
+    },
+    {
+      "attribute": "Type",
+      "left": "unsigned int",
+      "right": "j",
+      "count": 5914
+    },
+    {
+      "attribute": "Type",
+      "left": "__int64",
+      "right": "x",
+      "count": 5884
+    },
+    {
+      "attribute": "Type",
+      "left": "MVector<double>",
+      "right": "MVector<d>",
+      "count": 2942
+    },
+    {
+      "attribute": "Type",
+      "left": "double",
+      "right": "d",
+      "count": 18857
+    },
+    {
+      "attribute": "Type",
+      "left": "unsigned __int64",
+      "right": "y",
+      "count": 2942
+    },
+    {
+      "attribute": "Type",
+      "left": "MDMatrix<double>",
+      "right": "MDMatrix<d>",
+      "count": 11758
+    },
+    {
+      "attribute": "elemType",
+      "left": "class RDK::MDMatrix<double>",
+      "right": "N3RDK8MDMatrixIdEE",
+      "count": 2331
+    },
+    {
+      "attribute": "elemType",
+      "left": "double",
+      "right": "d",
+      "count": 9
+    },
+    {
+      "attribute": "Type",
+      "left": "unsigned __int64",
+      "right": "m",
+      "count": 24
+    },
+    {
+      "attribute": "elemType",
+      "left": "int",
+      "right": "i",
+      "count": 4
+    },
+    {
+      "attribute": "Type",
+      "left": "MDMatrix<int>",
+      "right": "MDMatrix<i>",
+      "count": 9
+    },
+    {
+      "attribute": "elemVecType",
+      "left": "class std::vector<class std::vector<class std::vector<int,class std::allocator<int> >,class std::allocator<class std::vector<int,class std::allocator<int> > > >,class std::allocator<class std::vector<class std::vector<int,class std::allocator<int> >,class std::allocator<class std::vector<int,class std::allocator<int> > > > > >",
+      "right": "St6vectorIS_IS_IiSaIiEESaIS1_EESaIS3_EE",
+      "count": 4
+    },
+    {
+      "attribute": "elemType",
+      "left": "class std::vector<class std::vector<class std::vector<class std::vector<int,class std::allocator<int> >,class std::allocator<class std::vector<int,class std::allocator<int> > > >,class std::allocator<class std::vector<class std::vector<int,class std::allocator<int> >,class std::allocator<class std::vector<int,class std::allocator<int> > > > > >,class std::allocator<class std::vector<class std::vector<class std::vector<int,class std::allocator<int> >,class std::allocator<class std::vector<int,class std::allocator<int> > > >,class std::allocator<class std::vector<class std::vector<int,class std::allocator<int> >,class std::allocator<class std::vector<int,class std::allocator<int> > > > > > > >",
+      "right": "St6vectorIS_IS_IS_IiSaIiEESaIS1_EESaIS3_EESaIS5_EE",
+      "count": 4
+    }
+  ],
+  "diagnostic_only": true,
+  "native_transition_replay_performed": false,
+  "import_fix_accepted": false,
+  "original_output_literal_newline_preserved": false,
+  "scientific_verdict": null,
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Portable-native-serialization-type-diagnostic-fr98.json",
+    "bytes": 4144,
+    "sha256": "2be99a7004cec6b47ba4d6f6411bf9f788b64dded2251532518cb2bc26a3a336"
+  }
+}
