@@ -1,0 +1,59 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "members": 119,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/5f/5f41e8adc86f6122980fd0f8eff060388be8fbdd3f42e5885a9413beffa78264",
+      "sha256": "5f41e8adc86f6122980fd0f8eff060388be8fbdd3f42e5885a9413beffa78264",
+      "bytes": 21978
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/4c/4c2843f0b71cab37b096f57d737d1aa68b34656528a187837a6091cf9cc3b574",
+      "sha256": "4c2843f0b71cab37b096f57d737d1aa68b34656528a187837a6091cf9cc3b574",
+      "bytes": 19205660
+    }
+  },
+  "observations": 8,
+  "all8_full_responses_preserved": true,
+  "actual_main_native_loaded_bytes_preserved": true,
+  "auxiliary_CLI_runtime_mapping_not_observed": true,
+  "native_and_controller_closed": true,
+  "source_members": 94,
+  "source_model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+  "threshold": 0.0858575482028458,
+  "counts": {
+    "TP": 1,
+    "FP": 2,
+    "FN": 0,
+    "TN": 5,
+    "targets": 1,
+    "foils": 7,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.75,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.2857142857142857
+  },
+  "native_job_kind_not_relabelled": true,
+  "new_Train": false,
+  "new_calibration": false,
+  "followup_native_jobs_not_started": true,
+  "scientific_verdict": null,
+  "source_kind": "timelearner_closed_Branch_actual_repeat_and_retained_controller_failure",
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Branch-Windows14-closed-repeat-primary-fr288.json",
+    "bytes": 1693,
+    "sha256": "67d0a9891b7477db4d342b066241707e6e9fe9810c9c867fb114ad8da9fe52ad"
+  },
+  "separate_independent_validation": {
+    "relative_path": "experiments/2026-11-27/Archived-repeat-data-validation13-jump12-fr297.json",
+    "bytes": 1877,
+    "sha256": "d7e8023a6ebd4841b00baea86df5795c1453c6bce1b68fba6d35b36523f4f31e"
+  }
+}
