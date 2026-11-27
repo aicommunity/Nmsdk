@@ -131,11 +131,17 @@ def prepare(declaration):
 def _binding(controls):
     controls = Path(controls).resolve(strict=True)
     binding = load(controls/'repeat-binding.json')
-    require(set(binding) == {'kind', 'schema_version', 'source_controls', 'source_records',
+    version = binding.get('schema_version') if type(binding) is dict else None
+    common = {'kind', 'schema_version', 'source_records',
             'model_revision', 'threshold', 'source_counts', 'preparation', 'absolute_tolerance',
-            'training_certificate_transferred', 'calibration_confirmed', 'scientific_verdict'} and
-            binding['kind'] == 'timelearner_physical_repeat_binding' and binding['schema_version'] == 1 and
+            'training_certificate_transferred', 'calibration_confirmed', 'scientific_verdict'}
+    require(type(version) is int and version in (1, 2) and
+            set(binding) == common | ({'source_controls'} if version == 1 else {'source_archive'}) and
+            binding['kind'] == 'timelearner_physical_repeat_binding' and
             binding['absolute_tolerance'] == 1e-12, 'physical_repeat_binding_schema')
+    if version == 1:
+        require(not os.path.samefile(Path(binding['source_controls']), controls),
+                'physical_repeat_self_reference')
     require(all(file_record(Path(p)) == r for p,r in binding['source_records'].items()),
             'physical_repeat_original_bytes_changed')
     return binding
@@ -143,13 +149,30 @@ def _binding(controls):
 
 def verify(controls):
     """Recompute every response comparison; saved booleans alone grant nothing."""
-    from .trial_response_comparison import trial_response_comparison
-
     controls = Path(controls).resolve(strict=True)
     binding = _binding(controls)
-    source = _closed_evaluation(binding['source_controls'])
+    if binding['schema_version'] == 2:
+        from .archived_physical_evaluation import read_source
+        source = read_source(binding['source_archive'])
+    else:
+        source = _closed_evaluation(binding['source_controls'])
     observed = _closed_evaluation(controls)
+    return compare_closed(source, observed, binding), observed
+
+
+def compare_closed(source, observed, binding):
+    """Use the same full-response proof for current and archived baselines."""
+    from .trial_response_comparison import trial_response_comparison
+
+    require(not os.path.samefile(source['output'], observed['output']),
+            'physical_repeat_self_reference')
+    require(source['job']['run_id'] != observed['job']['run_id'] and
+            not ({t['trial_id'] for t in source['job']['trials']} &
+                 {t['trial_id'] for t in observed['job']['trials']}),
+            'physical_repeat_same_attempt_identity')
     require(source['records'] == binding['source_records'] and source['model'] == observed['model'] and
+            binding['model_revision'] == source['model']['model_revision'] and
+            binding['absolute_tolerance'] == 1e-12 and
             binding['model_revision'] == source['model']['model_revision'] and
             binding['source_counts'] == source['metrics']['pooled_counts'] and
             binding['training_certificate_transferred'] is False and binding['calibration_confirmed'] is False and
@@ -178,7 +201,37 @@ def verify(controls):
     require(all(file_record(Path(p)) == r for context in (source, observed)
                 for p,r in context['records'].items()),
             'physical_repeat_original_bytes_changed')
-    return result, observed
+    return result
+
+
+def bind_closed_archive(controls, source_archive):
+    """Certify an already calculated repeat; never launch or relabel a job.
+
+    V2 binds a complete native primary when its original worker controls are
+    unavailable on this worker. Both native job kinds remain unchanged. The
+    proof is recomputed before any metadata is written and on every later use.
+    """
+    from .archived_physical_evaluation import read_source
+
+    controls = Path(controls).resolve(strict=True)
+    observed = _closed_evaluation(controls)
+    target = observed['output']/'repeat-terminal.json'
+    require(not (controls/'repeat-binding.json').exists() and not target.exists(),
+            'physical_repeat_binding_or_proof_exists')
+    source = read_source(source_archive)
+    binding = dict(kind='timelearner_physical_repeat_binding', schema_version=2,
+        source_archive=source_archive, source_records=source['records'],
+        model_revision=source['model']['model_revision'],
+        threshold=source['metrics']['effective_threshold'], source_counts=source['metrics']['pooled_counts'],
+        preparation=dict(kind='closed_archive_repeat_binding', native_execution_started=False,
+                         original_job_kind_preserved=True, original_process_ownership_reattested=False),
+        absolute_tolerance=1e-12, training_certificate_transferred=False,
+        calibration_confirmed=False, scientific_verdict=None)
+    result = compare_closed(source, observed, binding)
+    _write(controls/'repeat-binding.json', binding)
+    _write(target, result)
+    require(verify(controls)[0] == result, 'physical_repeat_archive_proof_changed')
+    return result
 
 
 def source_for_study(controls):
@@ -209,8 +262,18 @@ def main(argv=None):
     mode.add_argument('--prepare', type=Path)
     mode.add_argument('--run', type=Path)
     mode.add_argument('--verify', type=Path)
+    mode.add_argument('--bind-archive', type=Path)
     args = parser.parse_args(argv)
-    if args.prepare:
+    if args.bind_archive:
+        declaration = load(args.bind_archive)
+        require(type(declaration) is dict and set(declaration) ==
+                {'kind', 'schema_version', 'controls', 'source_archive'} and
+                declaration['kind'] == 'timelearner_closed_archive_repeat_binding' and
+                type(declaration['schema_version']) is int and declaration['schema_version'] == 1,
+                'physical_repeat_archive_request_schema')
+        print(json.dumps(bind_closed_archive(declaration['controls'], declaration['source_archive']),
+                         allow_nan=False))
+    elif args.prepare:
         print(prepare(load(args.prepare)))
     else:
         print(json.dumps((verify(args.verify)[0] if args.verify else run(args.run)), allow_nan=False))
