@@ -1,0 +1,56 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Algorithm-matrix432-plus-isolated14-independent-fr430.json",
+    "sha256": "106b6bd1fe61aed86a83b58d3e7eeae03f66001120524f4323779101ccc3f4cd",
+    "size": 1969
+  },
+  "catalog": {
+    "kind": "timelearner_complete_native_matrix_independent_readback_accepted",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/e0/e084461993e82c374c81ae40cc73bc82a8fe297162a205b0e05b650fd48c71de",
+        "sha256": "e084461993e82c374c81ae40cc73bc82a8fe297162a205b0e05b650fd48c71de",
+        "bytes": 7185
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/27/27fad564318205071a4b830cabf4959974e32aacb5f4f772d8d85b45c47cc329",
+        "sha256": "27fad564318205071a4b830cabf4959974e32aacb5f4f772d8d85b45c47cc329",
+        "bytes": 5304372
+      }
+    },
+    "reader_evidence_members": 37,
+    "all_primary_members_read": 4620,
+    "original_tests": 432,
+    "original_passed": 408,
+    "original_failed": 24,
+    "isolated_manual_tests": 14,
+    "isolated_manual_passed": 14,
+    "recognition_preconditions_unresolved": 10,
+    "actual_reader_native_files_before": 16,
+    "actual_reader_native_files_after": 16,
+    "reader_controls_commit": "07f686622717720ba829aa5641f0c910b11abbc3",
+    "source_catalogs": [
+      {
+        "relative_path": "experiments/2026-11-27/Algorithm-matrix-worker4-combined432-primary-fr418.json",
+        "bytes": 6174,
+        "sha256": "896159626d874d728183169f89eab555b244fff2caec03592f074fbeebb8703f"
+      },
+      {
+        "relative_path": "experiments/2026-11-27/Algorithm-matrix-worker4-isolated14-primary-fr418.json",
+        "bytes": 12926,
+        "sha256": "9fa6309d0cbe80148f785a3dbbe51d7aa5215b8437adf30ed155592078e9b5da"
+      }
+    ],
+    "reader_capture_scope": "point_in_time_before_and_after_not_lifetime",
+    "reader_source_before_snapshot_not_captured": true,
+    "native_tests_not_repeated": true,
+    "scientific_verdict": null
+  }
+}

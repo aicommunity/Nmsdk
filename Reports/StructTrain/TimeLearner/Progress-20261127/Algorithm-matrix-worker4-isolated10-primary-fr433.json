@@ -1,0 +1,297 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Algorithm-matrix-worker4-isolated10-primary-fr433.json",
+    "sha256": "1381f2088ca31858eb7ed1c84f14898e520d0add950b24b607a6f45f51ed2997",
+    "size": 10322
+  },
+  "catalog": {
+    "kind": "timelearner_worker4_completed_native_matrix_primary",
+    "schema_version": 1,
+    "cohort": "isolated10",
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f9/f920972bb0dde2ceaaafc0141fd8331b139f692f4cf99c80eac46df7db48008b",
+        "sha256": "f920972bb0dde2ceaaafc0141fd8331b139f692f4cf99c80eac46df7db48008b",
+        "bytes": 117664
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c4/c4d154777747ecabb3bdc88ae9de812131eb44f4b7c6287e403b9a36d281aefb",
+        "sha256": "c4d154777747ecabb3bdc88ae9de812131eb44f4b7c6287e403b9a36d281aefb",
+        "bytes": 27161620
+      }
+    },
+    "metadata": {
+      "terminal.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/0e/0e6487b9dd7ffffd42d9ece53dea2a9b55b9882d7ea8c07b74809d4da61b14f9",
+        "sha256": "0e6487b9dd7ffffd42d9ece53dea2a9b55b9882d7ea8c07b74809d4da61b14f9",
+        "bytes": 154
+      },
+      "producer-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/9e/9e652a37fc26ef816b5bd57bc2071dbae7870ada7a422b382d8155a0ab1a9b08",
+        "sha256": "9e652a37fc26ef816b5bd57bc2071dbae7870ada7a422b382d8155a0ab1a9b08",
+        "bytes": 8098
+      },
+      "outcomes.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/4f/4f6c50c988736526f76d5e61d8718032b4091b13f0703ff59f06232cfa8ccaeb",
+        "sha256": "4f6c50c988736526f76d5e61d8718032b4091b13f0703ff59f06232cfa8ccaeb",
+        "bytes": 7290
+      }
+    },
+    "members": 640,
+    "tests": 10,
+    "outcomes": {
+      "expected": 10,
+      "observed": 10,
+      "results": [
+        {
+          "test_id": "NativeCalibrationTransaction.ClassicN1_2000",
+          "leaf": "case-00",
+          "result": {
+            "kind": "timelearner_native_test_gate_result",
+            "schema_version": 1,
+            "execution": "process_error",
+            "validity": "valid",
+            "assertion_status": "failed",
+            "reason": "complete_declared_test_inventory",
+            "inventory": {
+              "expected": 1,
+              "observed": 1,
+              "failed_test_ids": [
+                "NativeCalibrationTransaction.ClassicN1_2000"
+              ],
+              "assertion_status": "failed",
+              "sha256": "243a19b37a8843e83e83b09fd0b469b5f40d653603fd47d9a8f3bb182861823e"
+            },
+            "scientific_verdict": null
+          }
+        },
+        {
+          "test_id": "NativeCalibrationTransaction.BranchN1_2000",
+          "leaf": "case-01",
+          "result": {
+            "kind": "timelearner_native_test_gate_result",
+            "schema_version": 1,
+            "execution": "process_error",
+            "validity": "valid",
+            "assertion_status": "failed",
+            "reason": "complete_declared_test_inventory",
+            "inventory": {
+              "expected": 1,
+              "observed": 1,
+              "failed_test_ids": [
+                "NativeCalibrationTransaction.BranchN1_2000"
+              ],
+              "assertion_status": "failed",
+              "sha256": "95f9b35d9b0efdd1ee84f3764db8c0abbbe11b33d3d5020a3808c0140364c7f3"
+            },
+            "scientific_verdict": null
+          }
+        },
+        {
+          "test_id": "NativePostTuneTransaction.ClassicN1_2000",
+          "leaf": "case-02",
+          "result": {
+            "kind": "timelearner_native_test_gate_result",
+            "schema_version": 1,
+            "execution": "process_error",
+            "validity": "valid",
+            "assertion_status": "failed",
+            "reason": "complete_declared_test_inventory",
+            "inventory": {
+              "expected": 1,
+              "observed": 1,
+              "failed_test_ids": [
+                "NativePostTuneTransaction.ClassicN1_2000"
+              ],
+              "assertion_status": "failed",
+              "sha256": "12db0b0298f2d3de54a8b85054859545a29f300013c657f15c46d073d048c469"
+            },
+            "scientific_verdict": null
+          }
+        },
+        {
+          "test_id": "NativePostTuneTransaction.BranchN1_2000",
+          "leaf": "case-03",
+          "result": {
+            "kind": "timelearner_native_test_gate_result",
+            "schema_version": 1,
+            "execution": "process_error",
+            "validity": "valid",
+            "assertion_status": "failed",
+            "reason": "complete_declared_test_inventory",
+            "inventory": {
+              "expected": 1,
+              "observed": 1,
+              "failed_test_ids": [
+                "NativePostTuneTransaction.BranchN1_2000"
+              ],
+              "assertion_status": "failed",
+              "sha256": "dee438dfed731d3a402a19224c715af73e78a710b30ba67dfc4d385b89c7a5e8"
+            },
+            "scientific_verdict": null
+          }
+        },
+        {
+          "test_id": "NativePostTuneTransaction.ClassicN0_2000",
+          "leaf": "case-04",
+          "result": {
+            "kind": "timelearner_native_test_gate_result",
+            "schema_version": 1,
+            "execution": "process_error",
+            "validity": "valid",
+            "assertion_status": "failed",
+            "reason": "complete_declared_test_inventory",
+            "inventory": {
+              "expected": 1,
+              "observed": 1,
+              "failed_test_ids": [
+                "NativePostTuneTransaction.ClassicN0_2000"
+              ],
+              "assertion_status": "failed",
+              "sha256": "9477218071908eba55dbc343c4478b3d0973d41418cd465fabe7fc9a08a5b61a"
+            },
+            "scientific_verdict": null
+          }
+        },
+        {
+          "test_id": "NativePostTuneTransaction.BranchN0_2000",
+          "leaf": "case-05",
+          "result": {
+            "kind": "timelearner_native_test_gate_result",
+            "schema_version": 1,
+            "execution": "process_error",
+            "validity": "valid",
+            "assertion_status": "failed",
+            "reason": "complete_declared_test_inventory",
+            "inventory": {
+              "expected": 1,
+              "observed": 1,
+              "failed_test_ids": [
+                "NativePostTuneTransaction.BranchN0_2000"
+              ],
+              "assertion_status": "failed",
+              "sha256": "897db7ee167a339142d53edfd1585ce2635fca9d969da6f877a8245b5bc2afa3"
+            },
+            "scientific_verdict": null
+          }
+        },
+        {
+          "test_id": "NativePostTuneCandidates.ClassicN0",
+          "leaf": "case-06",
+          "result": {
+            "kind": "timelearner_native_test_gate_result",
+            "schema_version": 1,
+            "execution": "process_error",
+            "validity": "valid",
+            "assertion_status": "failed",
+            "reason": "complete_declared_test_inventory",
+            "inventory": {
+              "expected": 1,
+              "observed": 1,
+              "failed_test_ids": [
+                "NativePostTuneCandidates.ClassicN0"
+              ],
+              "assertion_status": "failed",
+              "sha256": "103f90212170345d15283b8466f03f0e6a148df4f04858be8013c70d936f82c4"
+            },
+            "scientific_verdict": null
+          }
+        },
+        {
+          "test_id": "NativePostTuneCandidates.BranchN0",
+          "leaf": "case-07",
+          "result": {
+            "kind": "timelearner_native_test_gate_result",
+            "schema_version": 1,
+            "execution": "process_error",
+            "validity": "valid",
+            "assertion_status": "failed",
+            "reason": "complete_declared_test_inventory",
+            "inventory": {
+              "expected": 1,
+              "observed": 1,
+              "failed_test_ids": [
+                "NativePostTuneCandidates.BranchN0"
+              ],
+              "assertion_status": "failed",
+              "sha256": "d6f7bea540e43933247891af37cb2059a68c4090c5d0b380d5fc30c45cd6464f"
+            },
+            "scientific_verdict": null
+          }
+        },
+        {
+          "test_id": "NativePostTuneCandidates.ClassicN1",
+          "leaf": "case-08",
+          "result": {
+            "kind": "timelearner_native_test_gate_result",
+            "schema_version": 1,
+            "execution": "process_error",
+            "validity": "valid",
+            "assertion_status": "failed",
+            "reason": "complete_declared_test_inventory",
+            "inventory": {
+              "expected": 1,
+              "observed": 1,
+              "failed_test_ids": [
+                "NativePostTuneCandidates.ClassicN1"
+              ],
+              "assertion_status": "failed",
+              "sha256": "74bd2065f79a5ad284ca19bdf327e3b771a5b9831ee83a7ab47abdf9c5027798"
+            },
+            "scientific_verdict": null
+          }
+        },
+        {
+          "test_id": "NativePostTuneCandidates.BranchN1",
+          "leaf": "case-09",
+          "result": {
+            "kind": "timelearner_native_test_gate_result",
+            "schema_version": 1,
+            "execution": "process_error",
+            "validity": "valid",
+            "assertion_status": "failed",
+            "reason": "complete_declared_test_inventory",
+            "inventory": {
+              "expected": 1,
+              "observed": 1,
+              "failed_test_ids": [
+                "NativePostTuneCandidates.BranchN1"
+              ],
+              "assertion_status": "failed",
+              "sha256": "40e1d8a4019d2b4f730ed82c88661d68ec7f7336a297246f8752ac3490be5a97"
+            },
+            "scientific_verdict": null
+          }
+        }
+      ],
+      "all_assertions_passed": false,
+      "original_combined_invocation_failed": true,
+      "original_binary_unchanged": true,
+      "scientific_verdict": null
+    },
+    "all_native_groups_closed": true,
+    "assertion_failures_preserved": true,
+    "source_or_runtime_not_modified": true,
+    "archive_path": "/mnt/disk4tb/Nmsdk-StructTrainExpArchive",
+    "canonical_archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "prior_expected_mount_was_missing": true,
+    "publication_does_not_repeat_native_tests": true,
+    "complete_primary_independent_readback_pending": true,
+    "scientific_verdict": null
+  }
+}
