@@ -588,6 +588,33 @@ void RepeatedPrivateImageRestRoundtrip(unsigned int frequency)
             << "private image rest state must survive native import and pool reuse; cycle=" << cycle;
         EXPECT_EQ(again, original) << "cycle=" << cycle;
         EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(before, imported)["match"].toBool());
+        // Keep the raw archive comparison above: a disconnected input shape
+        // difference is evidence to diagnose, not permission to discard state.
+        // Independently check whether that difference changes a native probe.
+        QJsonArray sourceInputs, sourceSoma, sourceClock;
+        QJsonArray importedInputs, importedSoma, importedClock;
+        const auto sourceResponse = Waveform(source, frequency, nullptr,
+            &sourceInputs, &sourceSoma, &sourceClock);
+        const auto importedResponse = Waveform(imported, frequency, nullptr,
+            &importedInputs, &importedSoma, &importedClock);
+        EXPECT_EQ(importedInputs, sourceInputs) << "cycle=" << cycle;
+        EXPECT_EQ(importedClock, sourceClock) << "cycle=" << cycle;
+        EXPECT_EQ(importedResponse, sourceResponse) << "cycle=" << cycle;
+        EXPECT_EQ(importedSoma, sourceSoma) << "cycle=" << cycle;
+        double peak = 0.;
+        for(const auto& value : sourceSoma) peak = std::max(peak, std::abs(value.toDouble()));
+        EXPECT_GT(peak, 0.) << "silent fixture cannot confirm response preservation";
+        if(const char* output = std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+        {
+            std::filesystem::create_directories(output);
+            Write(QString::fromLocal8Bit(output) + "/image-rest-response-" +
+                QString::number(frequency) + "-cycle-" + QString::number(cycle) + ".json",
+                QJsonObject{{"frequency_hz", int(frequency)}, {"cycle", cycle},
+                    {"source_inputs", sourceInputs}, {"imported_inputs", importedInputs},
+                    {"source_clock", sourceClock}, {"imported_clock", importedClock},
+                    {"source_channel_response", sourceResponse}, {"imported_channel_response", importedResponse},
+                    {"source_soma_response", sourceSoma}, {"imported_soma_response", importedSoma}});
+        }
         core.storage->ReturnObject(imported);
     }
     EXPECT_EQ(NmsdkTools::IdentifyModel(source), before);
