@@ -1,0 +1,97 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Native-matrix436-lifecycle-counters-independent-fr596.json",
+    "size": 3033,
+    "sha256": "c795c311c27ca7a4bb1334e1dc57b2989d9de00c7d4f949043eed28fb0c3da89"
+  },
+  "catalog": {
+    "kind": "actual_relative_counter_matrix436_independent_full_primary_readback",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b0/b07754a1b7bef9671b9c734eebdb37d950c08d1f5e1485ae234bee89869c2403",
+        "sha256": "b07754a1b7bef9671b9c734eebdb37d950c08d1f5e1485ae234bee89869c2403",
+        "bytes": 5200
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b3/b3bbf86fe39ec923ff0ab940bcbf8e8a61d49ad7c1c8e970aaf1d090d314c912",
+        "sha256": "b3bbf86fe39ec923ff0ab940bcbf8e8a61d49ad7c1c8e970aaf1d090d314c912",
+        "bytes": 6311508
+      }
+    },
+    "members": 26,
+    "primary_members": 4805,
+    "analysis": {
+      "kind": "actual_matrix436_full_independent_primary_readback",
+      "schema_version": 1,
+      "source_catalog": {
+        "relative_path": "experiments/2026-11-27/Native-matrix436-lifecycle-counters-primary-fr590.json",
+        "bytes": 2494,
+        "sha256": "3661436d2df656ad3baef093243860658b9590e282fbd811822d43af8b82112c"
+      },
+      "members": 4805,
+      "tests": 436,
+      "passed": 436,
+      "failed": 0,
+      "rows": [
+        {
+          "name": "search",
+          "inventory": {
+            "expected": 169,
+            "observed": 169,
+            "failed_test_ids": [],
+            "assertion_status": "passed",
+            "sha256": "1993f64cdc452493a915ae492339e00c881a15f6b48e19e348e7ada96a77c21b"
+          }
+        },
+        {
+          "name": "lifecycle",
+          "inventory": {
+            "expected": 191,
+            "observed": 191,
+            "failed_test_ids": [],
+            "assertion_status": "passed",
+            "sha256": "eeddbe226f80c2d0caf6058f58334967d88033ab10e124f3811dc02a69854d4f"
+          }
+        },
+        {
+          "name": "recognition",
+          "inventory": {
+            "expected": 72,
+            "observed": 72,
+            "failed_test_ids": [],
+            "assertion_status": "passed",
+            "sha256": "9c2ea1bdf7a254d024816858175ed0e37d55285f0fb70478de24f8973b0d4e54"
+          }
+        },
+        {
+          "name": "legacy-negative",
+          "inventory": {
+            "expected": 4,
+            "observed": 4,
+            "failed_test_ids": [],
+            "assertion_status": "passed",
+            "sha256": "64797b494e986049b39f9de02b833432e71e152f96bd0f5ab33662443a305141"
+          }
+        }
+      ],
+      "actual_native_loaded_bytes_verified": true,
+      "original_controls_Git_verified": true,
+      "source_before_after_equal": true,
+      "old_runtime_before_after_equal": true,
+      "original_native_ownership_not_reattested": true,
+      "new_native_computation": false,
+      "scientific_verdict": null
+    },
+    "controls_commit": "88f550c88d896070fff6e8903bda351565104a4b",
+    "reader_loaded_maps_and_bytes_retained": true,
+    "M40_acceptance_pending": true,
+    "scientific_verdict": null
+  }
+}

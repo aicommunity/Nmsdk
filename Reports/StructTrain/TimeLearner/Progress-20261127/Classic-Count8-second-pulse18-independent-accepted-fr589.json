@@ -1,0 +1,106 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Classic-Count8-second-pulse18-independent-accepted-fr589.json",
+    "size": 3186,
+    "sha256": "ee16dc9317fd96c0d711131cf3ba935419b59c735bb324938af448b761ae4b4c"
+  },
+  "catalog": {
+    "kind": "Classic_Count8_second_pulse18_primary_gallery_visual_independently_accepted",
+    "schema_version": 1,
+    "peer_catalog": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Classic-Count8-second-pulse18-independent-fr586.json",
+      "size": 2970,
+      "sha256": "bb75c6d45429b59f6955113e5b5698989d08143876eb33d0c8c12dd84c382d72"
+    },
+    "peer_reader_evidence": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/35/35ad4f8b3eb3fd43cb56d3c0beaf2cc2c07c11df63b4ab54341fc89943574dc5",
+        "sha256": "35ad4f8b3eb3fd43cb56d3c0beaf2cc2c07c11df63b4ab54341fc89943574dc5",
+        "bytes": 6584
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/e3/e3fa724db349b15c6fcbe33903891c7e399705b54c93fe3b5e82390df67c0326",
+        "sha256": "e3fa724db349b15c6fcbe33903891c7e399705b54c93fe3b5e82390df67c0326",
+        "bytes": 6056032
+      }
+    },
+    "peer_controls_bundle_member": "controls.bundle",
+    "peer_controls_commit": "38d506dd93ed71227fdb814a1e15a565cadd1d7a",
+    "peer_reader_members": 34,
+    "primary_members": 185,
+    "gallery_members": 154,
+    "observations": 18,
+    "rows": [
+      {
+        "case": "control",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "observations": 8
+      },
+      {
+        "case": "second-pulse",
+        "counts": {
+          "TP": 1,
+          "FP": 6,
+          "FN": 0,
+          "TN": 3,
+          "targets": 1,
+          "foils": 9,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.4,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.6666666666666666
+        },
+        "observations": 10
+      }
+    ],
+    "unseen_negative_seven": {
+      "FP": 5,
+      "TN": 2
+    },
+    "original_eight_control_waveforms_preserved": true,
+    "threshold_retuned": false,
+    "actual_peer_reader_loaded_maps": [
+      {
+        "phase": "before",
+        "files": 18,
+        "all_bytes_verified": true
+      },
+      {
+        "phase": "after",
+        "files": 18,
+        "all_bytes_verified": true
+      }
+    ],
+    "actual_native_loaded_byte_sets_verified_by_peer": 2,
+    "PNG_visually_reviewed": 36,
+    "SVG_bytes_verified": 36,
+    "source_gallery_visual_review": {
+      "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/M40-Classic-Count8-second-pulse18-all-PNG-reviewed-fr588.json",
+      "size": 577,
+      "sha256": "9bc80aad24e4020a469409660b5fabac9511eacc4540ff7427679f3199169988"
+    },
+    "all_18_observations_complete": true,
+    "source_pending_flags_preserved_and_superseded_for_this_18_observation_scope": true,
+    "auxiliary_acceptor_loaded_map": "unknown",
+    "original_process_ownership_not_reattested": true,
+    "new_model_calculation": false,
+    "scientific_verdict": null
+  }
+}

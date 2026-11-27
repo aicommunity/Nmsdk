@@ -1,0 +1,52 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Native-matrix436-lifecycle-counters-independent-accepted-fr599.json",
+    "size": 1896,
+    "sha256": "11de4f7dc7c503993316cb58802f4c772c2cb7ecd6e73ba8c82598a74bba724d"
+  },
+  "catalog": {
+    "kind": "actual_relative_counter_matrix436_full_independent_readback_accepted",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b0/b07754a1b7bef9671b9c734eebdb37d950c08d1f5e1485ae234bee89869c2403",
+        "sha256": "b07754a1b7bef9671b9c734eebdb37d950c08d1f5e1485ae234bee89869c2403",
+        "bytes": 5200
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b3/b3bbf86fe39ec923ff0ab940bcbf8e8a61d49ad7c1c8e970aaf1d090d314c912",
+        "sha256": "b3bbf86fe39ec923ff0ab940bcbf8e8a61d49ad7c1c8e970aaf1d090d314c912",
+        "bytes": 6311508
+      }
+    },
+    "reader_evidence_members": 26,
+    "primary_members": 4805,
+    "tests": 436,
+    "passed": 436,
+    "failed": 0,
+    "original_source_catalog": {
+      "path": "/mnt/disk4tb/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Native-matrix436-lifecycle-counters-primary-fr590.json",
+      "sha256": "3661436d2df656ad3baef093243860658b9590e282fbd811822d43af8b82112c",
+      "size": 2494
+    },
+    "reader_catalog": {
+      "path": "/mnt/disk4tb/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Native-matrix436-lifecycle-counters-independent-fr596.json",
+      "sha256": "c795c311c27ca7a4bb1334e1dc57b2989d9de00c7d4f949043eed28fb0c3da89",
+      "size": 3033
+    },
+    "reader_controls_commit": "88f550c88d896070fff6e8903bda351565104a4b",
+    "actual_reader_native_files_before": 15,
+    "actual_reader_native_files_after": 15,
+    "all_declared_reader_bytes_verified": true,
+    "source_before_after_equal": true,
+    "original_process_ownership_not_reattested": true,
+    "new_native_computation": false,
+    "scientific_verdict": null
+  }
+}
