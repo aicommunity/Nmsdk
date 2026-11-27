@@ -125,6 +125,12 @@ def store(source, root=None):
             os.link(temporary, target)
         except FileExistsError:
             pass
+        # The target now owns the complete, exclusively published inode (or
+        # was already present). Release our staging name before opening it:
+        # CIFS can reject that open while both names remain cached. Existing
+        # objects are still never replaced and must pass the full readback.
+        temporary.unlink()
+        temporary = None
         resolve(record, root)
         return record
     finally:
