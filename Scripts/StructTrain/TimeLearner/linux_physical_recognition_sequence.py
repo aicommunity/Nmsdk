@@ -228,6 +228,7 @@ def bind_condition(p, phase, job, model, directory):
 
 
 def source_binding(p):
+    from .audited_training_identity import compact_job_identity
     q = p['q']; audit = Path(q['source_audit_output'])
     terminal = load(audit/'worker-terminal.json')
     projected_here = q['schema_version'] == 3
@@ -253,7 +254,8 @@ def source_binding(p):
     compact_path = Path(terminal['compact']['path'])
     require(file_record(compact_path) == terminal['compact'], 'linux_DATA_sequence_compact_changed')
     compact = load(compact_path)
-    require(compact['job_sha256'] == q['expected_job_sha256'], 'linux_DATA_sequence_compact_job_changed')
+    compact_identity = compact_job_identity(compact, load(native/'job.json'), execution,
+                                           proof, q['expected_job_sha256'])
     filename = execution['package_path']
     require(type(filename) is str and Path(filename).name == filename and '/' not in filename and
             '\\' not in filename and filename in ('train_stopped_state.json', 'train_learned_state.json') and
@@ -263,8 +265,10 @@ def source_binding(p):
                 projected['source_training_evidence_checked'] is False and
                 projected['training_certificate_transferred'] is False and
                 projected['native_import_verified'] is False, 'linux_DATA_sequence_projection_scope_changed')
-    return dict(kind='timelearner_actual_audited_Train_to_DATA_source_binding', schema_version=1,
+    return dict(kind='timelearner_actual_audited_Train_to_DATA_source_binding', schema_version=2,
         job_sha256=q['expected_job_sha256'], model_revision=execution['model_revision'],
+        compact_job_identity=compact_identity,
+        source_job=file_record(native/'job.json'), source_execution=file_record(native/'execution.json'),
         source_training_outcome=execution['training_outcome'], completed_boundary=execution['completed_boundary'],
         full_primary_audit=terminal['full_primary_audit'], source_DATA=file_record(data),
         source_package=compact['source_package'], original_training_unchanged=True, scientific_verdict=None)
@@ -273,6 +277,7 @@ def source_binding(p):
 def original_projection_source(p):
     """Bind the actual closed Train and its prior full audit, without reauditing history."""
     from .contained_process import inspect
+    from .audited_training_identity import compact_job_identity
     q = p['q']; require(q['schema_version'] == 3, 'linux_DATA_sequence_explicit_projection_required')
     for role, row in q['source_contained_groups'].items():
         observed = inspect(Path(row['directory']))
@@ -282,17 +287,20 @@ def original_projection_source(p):
     proof = load(audit/'full-primary-audit.json'); compact = load(audit/'compact-training-readback.json')
     native = p['base']/'readbacks'/p['training']['job_id']/'train/native'
     execution = load(native/'execution.json'); package = compact['source_package']
+    compact_identity = compact_job_identity(compact, load(native/'job.json'), execution,
+                                           proof, q['expected_job_sha256'])
     require(execution['package_path'] in ('train_stopped_state.json','train_learned_state.json') and
             terminal['execution'] == 'completed' and terminal['validity'] == 'valid' and
             file_record(audit/'full-primary-audit.json') == terminal['full_primary_audit'] and
             file_record(audit/'compact-training-readback.json') == terminal['compact'] and
-            execution['job_sha256'] == compact['job_sha256'] == q['expected_job_sha256'] and
+            execution['job_sha256'] == compact_identity['job_sha256'] == q['expected_job_sha256'] and
             package['path'] == str(native/execution['package_path']) and
             execution['model_revision'] == proof['training_audit']['model_revision'] and
             execution['training_outcome'] == proof['training_outcome'] == terminal['training_outcome'] and
             execution['completed_boundary'] == proof['completed_boundary'] == terminal['completed_boundary'],
             'linux_DATA_sequence_original_primary_source_mismatch')
-    return dict(package=package, execution=execution, terminal=terminal, native=native, audit=audit)
+    return dict(package=package, execution=execution, terminal=terminal, native=native, audit=audit,
+                compact_job_identity=compact_identity)
 
 
 def phase_worker(request_path, phase):
@@ -325,6 +333,7 @@ def phase_worker(request_path, phase):
         guard(p); _source_snapshot(SOURCE, q['tool_commit'])
         write(directory/'terminal.json', dict(execution='completed', validity='valid',
             model_revision=projection['model_revision'], prior_primary_audit=original['terminal']['full_primary_audit'],
+            compact_job_identity=original['compact_job_identity'],
             original_history_reaudited_here=False, native_import_verified=False,
             training_certificate_transferred=False, scientific_verdict=None))
         return
