@@ -1,0 +1,167 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "members": 7,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/aa/aa4630dd1898cb8cd3c135a4beba2f8d2996468fd2c9a07cd648ad053d8eeb4c",
+      "sha256": "aa4630dd1898cb8cd3c135a4beba2f8d2996468fd2c9a07cd648ad053d8eeb4c",
+      "bytes": 1433
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/cb/cb50a65638c47fdd22fd5c064e373a7c592e1cfacf2f531adb061545457d96a2",
+      "sha256": "cb50a65638c47fdd22fd5c064e373a7c592e1cfacf2f531adb061545457d96a2",
+      "bytes": 12136
+    }
+  },
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Elder-cadence-closed10-full-response-comparison-fr50.json",
+    "bytes": 4759,
+    "sha256": "008c2e943189b84e879b19eb733ff91bcdf4f317dd6595fad10282f54c245d91"
+  },
+  "pairs": [
+    {
+      "pair": "long-r6",
+      "trials": 8,
+      "observed_responses_equal": 8,
+      "maximum_recorded_signal_difference": 5.3512749786932545e-14,
+      "output_event_lists_equal": true,
+      "target_events": [
+        {
+          "pair": "long-r6",
+          "presentation_index": 2,
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "reset_spikes": [
+            0.4814999999999996
+          ],
+          "preserve_spikes": [
+            0.4814999999999996
+          ],
+          "reset_onset": 4.011,
+          "preserve_onset": 4.011,
+          "reset_frequency": 2000,
+          "preserve_frequency": 2000
+        }
+      ]
+    },
+    {
+      "pair": "long-r7",
+      "trials": 8,
+      "observed_responses_equal": 8,
+      "maximum_recorded_signal_difference": 5.3734794391857577e-14,
+      "output_event_lists_equal": true,
+      "target_events": [
+        {
+          "pair": "long-r7",
+          "presentation_index": 1,
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "reset_spikes": [
+            0.48150000000000004
+          ],
+          "preserve_spikes": [
+            0.48150000000000004
+          ],
+          "reset_onset": 2.0105,
+          "preserve_onset": 2.0105,
+          "reset_frequency": 2000,
+          "preserve_frequency": 2000
+        }
+      ]
+    },
+    {
+      "pair": "short-r0",
+      "trials": 8,
+      "observed_responses_equal": 1,
+      "maximum_recorded_signal_difference": 1.4400000000000004,
+      "output_event_lists_equal": false,
+      "target_events": [
+        {
+          "pair": "short-r0",
+          "presentation_index": 0,
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "reset_spikes": [
+            0.4815
+          ],
+          "preserve_spikes": [
+            0.4815
+          ],
+          "reset_onset": 0.01,
+          "preserve_onset": 0.01,
+          "reset_frequency": 2000,
+          "preserve_frequency": 2000
+        }
+      ]
+    },
+    {
+      "pair": "short-r1",
+      "trials": 8,
+      "observed_responses_equal": 1,
+      "maximum_recorded_signal_difference": 1.44,
+      "output_event_lists_equal": false,
+      "target_events": [
+        {
+          "pair": "short-r1",
+          "presentation_index": 7,
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "reset_spikes": [
+            0.4815000000000005
+          ],
+          "preserve_spikes": [
+            0.24049999999999994,
+            0.4815000000000005
+          ],
+          "reset_onset": 4.8435,
+          "preserve_onset": 4.8435,
+          "reset_frequency": 2000,
+          "preserve_frequency": 2000
+        }
+      ]
+    },
+    {
+      "pair": "short-r2",
+      "trials": 8,
+      "observed_responses_equal": 1,
+      "maximum_recorded_signal_difference": 1.44,
+      "output_event_lists_equal": false,
+      "target_events": [
+        {
+          "pair": "short-r2",
+          "presentation_index": 6,
+          "sample_id": "phasea-row-0",
+          "label": "target",
+          "reset_spikes": [
+            0.4815000000000005
+          ],
+          "preserve_spikes": [
+            0.24050000000000082,
+            0.4815000000000005
+          ],
+          "reset_onset": 4.153,
+          "preserve_onset": 4.153,
+          "reset_frequency": 2000,
+          "preserve_frequency": 2000
+        }
+      ]
+    }
+  ],
+  "total_complete_response_pairs": 40,
+  "classification_recomputed": false,
+  "new_native_experiment": false,
+  "maximum_recorded_signal_difference_units": "mixed_native_recorded_channels_SI_unverified",
+  "scientific_verdict": null,
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/Elder-cadence-closed10-native-accepted-gallery-prepared-fr29.json",
+    "bytes": 8579,
+    "sha256": "7112f4fcb59736997bc7951827ae003d4b5be8a2b288b4e16f8adffa777b95d4"
+  }
+}

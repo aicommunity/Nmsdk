@@ -1,3 +1,9 @@
+27.11: [Следующие десять случаев Classic независимо приняты](Progress-20261127/Elder-cadence-closed10-native-accepted-gallery-prepared-fr29.json),
+все80 наблюдений и762 первичных файла. [40 сравнений полных реакций](Progress-20261127/Elder-cadence-closed10-full-response-comparison-fr50.json)
+показывают изменение времени ответа при сохранении динамики в коротких
+сериях, хотя TP1 / FP2 / TN5 остаются прежними. Полный визуальный просмотр
+новой галереи ещё не завершён.
+
 27.11: [Реальная классификация конечной модели исправленного циклического Classic](Progress-20261127/Classic-repaired-q3-recognition-accepted-fq67.json):
 TP1 / FP4 / FN0 / TN3, полный независимый аудит210 членов; исходное
 обучение сохраняет `budget_exhausted`. [Все32 PNG просмотрены](Progress-20261127/Classic-repaired-q3-figures-accepted-fq74.json).
