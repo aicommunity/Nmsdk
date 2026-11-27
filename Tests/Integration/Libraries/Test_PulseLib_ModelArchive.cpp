@@ -570,6 +570,20 @@ void RepeatedPrivateImageRestRoundtrip(unsigned int frequency)
             "native-archive-fixture-v1");
         ASSERT_TRUE(imported) << "cycle=" << cycle;
         const auto again = NmsdkTools::ExportModelArchive(imported, Metadata());
+        if(again != original)
+        {
+            // Preserve the actual production archives before reporting the
+            // comparison failure. A shared-storage/order-dependent difference
+            // must be diagnosed from its fields, without weakening equality.
+            if(const char* output = std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+            {
+                std::filesystem::create_directories(output);
+                const auto prefix = QString::fromLocal8Bit(output) + "/image-rest-" +
+                    QString::number(frequency) + "-cycle-" + QString::number(cycle);
+                Write(prefix + "-before.json", original);
+                Write(prefix + "-after.json", again);
+            }
+        }
         EXPECT_EQ(again["class_definitions"], original["class_definitions"])
             << "private image rest state must survive native import and pool reuse; cycle=" << cycle;
         EXPECT_EQ(again, original) << "cycle=" << cycle;
