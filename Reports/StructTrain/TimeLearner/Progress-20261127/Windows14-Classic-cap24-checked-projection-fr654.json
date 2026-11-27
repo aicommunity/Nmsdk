@@ -1,0 +1,90 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Windows14-Classic-cap24-checked-projection-fr654.json",
+    "size": 3778,
+    "sha256": "f61620b57594788d8463fc84571e7d8b27fb348e9361222c1f75d9c256625612"
+  },
+  "catalog": {
+    "kind": "actual_Windows14_cap24_checked_projection_for_diagnostic_import",
+    "schema_version": 1,
+    "source_projection": {
+      "kind": "timelearner_physical_DATA_projection",
+      "schema_version": 1,
+      "source": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-repaired-cap24-win14-fr395\\train\\native\\train_stopped_state.json",
+        "sha256": "e2c5e6cdadb2c869f7e7de90390d23e99062cc65771a1ab882bfb392bc838038",
+        "size": 801385236
+      },
+      "output": {
+        "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-cap24-full-audit-fr629\\physical-model-DATA.json",
+        "sha256": "1e0336fff5ed2d05fe65e898cbd2bd011d8f04669e63698bb6017583ea12d175",
+        "size": 20163211
+      },
+      "source_boundary": {
+        "kind": "timelearner_stopped_state",
+        "schema_version": 8,
+        "state_kind": "diagnostic",
+        "sha256": "b74204c4d1c54bfdbdab5753c521a58a8b8bb785119ef59c3007f9ca71fcdd88",
+        "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc"
+      },
+      "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+      "physical_model_data_sha256": "63853c379ee1764fb14f5abc96c2ecf55e143a3695312901ae5a94f4ccf56da2",
+      "source_unchanged": true,
+      "source_history_retained_separately": true,
+      "source_training_evidence_checked": false,
+      "native_import_verified": false,
+      "training_certificate_transferred": false,
+      "calibration_confirmed": false,
+      "scientific_verdict": null
+    },
+    "source_audit": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-cap24-full-audit-fr629\\full-primary-audit.json",
+      "sha256": "61862c92630aaf06fbe31c8451ff5b938b424c09ca721c30ffac358c02682ea0",
+      "size": 54046
+    },
+    "source_audit_terminal": {
+      "path": "C:\\Projects\\TimeLearnerWorker\\jobs\\classic-cap24-full-audit-fr629\\worker-terminal.json",
+      "sha256": "398f7322929a921d02592a73cd3dcd9d61765229962450804ad892985d6e4eb0",
+      "size": 2100
+    },
+    "objects": {
+      "physical-model-DATA.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/1e/1e0336fff5ed2d05fe65e898cbd2bd011d8f04669e63698bb6017583ea12d175",
+        "sha256": "1e0336fff5ed2d05fe65e898cbd2bd011d8f04669e63698bb6017583ea12d175",
+        "bytes": 20163211
+      },
+      "full-primary-audit.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/61/61862c92630aaf06fbe31c8451ff5b938b424c09ca721c30ffac358c02682ea0",
+        "sha256": "61862c92630aaf06fbe31c8451ff5b938b424c09ca721c30ffac358c02682ea0",
+        "bytes": 54046
+      },
+      "worker-terminal.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/39/398f7322929a921d02592a73cd3dcd9d61765229962450804ad892985d6e4eb0",
+        "sha256": "398f7322929a921d02592a73cd3dcd9d61765229962450804ad892985d6e4eb0",
+        "bytes": 2100
+      },
+      "compact-training-readback.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/0c/0cb2dd628bb74599356c0adb9ac98fbde98a6655599b632ed711bd871b5d5621",
+        "sha256": "0cb2dd628bb74599356c0adb9ac98fbde98a6655599b632ed711bd871b5d5621",
+        "bytes": 3779
+      }
+    },
+    "original_train_full_primary_publication_pending": true,
+    "native_import_verified": false,
+    "training_certificate_verified": false,
+    "classification_performed": false,
+    "scientific_verdict": null
+  }
+}

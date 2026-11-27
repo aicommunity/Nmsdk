@@ -1,4 +1,9 @@
 27.11: [Classic: ранний ответ при изменении четвёртого импульса](../../../Docs/StructTrain/TimeLearner/ClassicFourthPulseHistoryResults-20261127.ru.md).
+
+28.11: [актуальная сводка](../../../Docs/StructTrain/TimeLearner/CurrentStatus-20261128.ru.md),
+[принятые третья и четвёртая серии Classic](Progress-20261128/Classic-third-fourth-independent-accepted-fr682.json).
+Первичные файлы и все рисунки находятся во внешнем архиве; этот раздел
+содержит проверенные компактные каталоги.
 Все64 наблюдения .12/.4 независимо приняты:
 [280 мс](Progress-20261127/Classic-fourth280-independent-fr153.json),
 [320 мс](Progress-20261127/Classic-fourth320-independent-fr159.json).
@@ -711,7 +716,7 @@ Stock fixed-geometry resistance gate: two real Elder zero-tick cold preflights h
 - 04.11: s03-native-probe-phases-elder-a1 и s03-native-probe-phases-m40-a1 — imported baseline/main interruption,12 jobs и7 readers на worker,2 cold regressions, compact reuse7362 primary files. См. Docs/StructTrain/TimeLearner/NativeProbePhases.ru.md.
 
 
-04.11: [исправленный временной preview stock stopped Train](s11-stock-stopped-title-preview-a4/preview.png)
+04.11: [архив исправленного временного preview stock stopped Train](s11-stock-stopped-title-preview-a4/preview.png.archive.json)
 и [его provenance](s11-stock-stopped-title-preview-a4/preview.json). Полный trial ID
 больше не обрезан;1920×960, фактический soma potential и входные импульсы.
 Визуально проверено только это изображение. Полный новый80-pair кэш A4 ещё

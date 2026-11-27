@@ -1,0 +1,111 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Windows8-Classic-fourth-pulse8-independent-fr646.json",
+    "size": 3630,
+    "sha256": "57b530ab682bdc448603178cdbdd3b8e8318450588e4906ec3bbecb5bccf21fe"
+  },
+  "catalog": {
+    "kind": "actual_Win8_fourth_pulse8_full_independent_reader_evidence",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/6d/6d15a5ece45896465e266abbd804517ebf1514a359e7663ac81162854f09009a",
+        "sha256": "6d15a5ece45896465e266abbd804517ebf1514a359e7663ac81162854f09009a",
+        "bytes": 6588
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/8c/8ce08ad38da0a46c6687187a1d06595bac76323531355df465b37b600443c953",
+        "sha256": "8ce08ad38da0a46c6687187a1d06595bac76323531355df465b37b600443c953",
+        "bytes": 6053320
+      }
+    },
+    "members": 34,
+    "analysis": {
+      "kind": "actual_Win8_Classic_fourth_pulse8_complete_independent_readback",
+      "schema_version": 1,
+      "source_catalogs": {
+        "primary": {
+          "relative_path": "experiments/2026-11-27/Windows8-Classic-Count8-fourth-pulse8-primary-fr623.json",
+          "bytes": 5012,
+          "sha256": "a8745fdef5fb91be8f79eb2761ff59a5d73064dead3c5ef845d379b80abae16e"
+        },
+        "gallery": {
+          "relative_path": "experiments/2026-11-27/Windows8-Classic-Count8-fourth-pulse8-gallery-fr632.json",
+          "bytes": 4142,
+          "sha256": "467aa348267c5fc276331c2c6cba5520bca1584b29be7f20ec53c0d7c50c3e06"
+        }
+      },
+      "qualified_control_catalog": {
+        "relative_path": "experiments/2026-11-27/Windows8-current496-independent-accepted-fr631.json",
+        "bytes": 3106,
+        "sha256": "afe7b6ef8c5e0ff1f2d70383d55bb9b0ef142009b7c4099f28ef193e7b585014"
+      },
+      "primary_members": 494,
+      "gallery_members": 98,
+      "all_declared_members_restored": true,
+      "native_observations": 8,
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "target_full_response_comparison_performed": false,
+      "target_sample_identity_differs": true,
+      "target_early_output": false,
+      "all_actual_input_times_checked": true,
+      "actual_native_loaded_files": 48,
+      "actual_native_and_publisher_loaded_bytes_verified": true,
+      "all_four_controls_Git_verified": [
+        {
+          "role": "bootstrap",
+          "commit": "7110c006e8f312873462a8e824e9847034e0c181",
+          "files": 6,
+          "all_bytes_verified": true
+        },
+        {
+          "role": "owner",
+          "commit": "3cd60335af1dba5216531da416818ff1050875dc",
+          "files": 5,
+          "all_bytes_verified": true
+        },
+        {
+          "role": "native",
+          "commit": "c355471531bf7ba1645327cb89f37dcea5f1cc7e",
+          "files": 4,
+          "all_bytes_verified": true
+        },
+        {
+          "role": "publisher",
+          "commit": "91e9ff6d4e515869e0ba403e509a333e6fe84c39",
+          "files": 5,
+          "all_bytes_verified": true
+        }
+      ],
+      "source_before_after_equal": true,
+      "model_document_identical_to_previous_control": true,
+      "PNG_bytes_verified": 16,
+      "SVG_bytes_verified": 16,
+      "new_Train": false,
+      "new_calibration": false,
+      "original_closed_process_ownership_not_reattested": true,
+      "scientific_verdict": null
+    },
+    "reader_controls_commit": "e804fea2836862226798c9245738c0bb06593fbe",
+    "reader_loaded_maps_and_bytes_retained": true,
+    "acceptance_pending": true,
+    "scientific_verdict": null
+  }
+}

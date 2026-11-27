@@ -1,0 +1,93 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-28/Classic-cap24-1274-independent-fr685.json",
+    "size": 3090,
+    "sha256": "1530065f4b409e27042a6071057870ba229fc20dd1372f6318768a063bc1fb67"
+  },
+  "catalog": {
+    "kind": "Classic_cap24_1274_independent_reader_evidence",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/05/05ed938b3ec5edb19cc6353a57a60346d9830c2d0f7ce2c477c07e05665d6f57",
+        "sha256": "05ed938b3ec5edb19cc6353a57a60346d9830c2d0f7ce2c477c07e05665d6f57",
+        "bytes": 6281
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/be/be182d5b95ec66a2f7f191bde77989b99400e9010706bc4ced6603d8a24ed61f",
+        "sha256": "be182d5b95ec66a2f7f191bde77989b99400e9010706bc4ced6603d8a24ed61f",
+        "bytes": 6117676
+      }
+    },
+    "members": 32,
+    "analysis": {
+      "kind": "actual_Classic_cap24_complete_primary_independent_readback",
+      "schema_version": 1,
+      "source_catalog": {
+        "relative_path": "experiments/2026-11-27/Windows14-Classic-cap24-closed-training-primary-fr660.json",
+        "bytes": 5538,
+        "sha256": "c96968a5ac0c49d7f7c02ad53be1052cf2076e6d5cdf231190e95f5cabc4f568"
+      },
+      "primary_members": 1274,
+      "full_production_audit_matches_original": true,
+      "physical_projection_bytes_equal": true,
+      "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc",
+      "source_package": {
+        "path": "/home/user/Nmsdk-experiments/Classic-cap24-1274-independent-fr685/restored/training/train/native/train_stopped_state.json",
+        "sha256": "e2c5e6cdadb2c869f7e7de90390d23e99062cc65771a1ab882bfb392bc838038",
+        "size": 801385236
+      },
+      "training_outcome": "budget_exhausted",
+      "completed_boundary": false,
+      "loaded_file_sets": [
+        {
+          "role": "native",
+          "records": 47,
+          "all_actual_loaded_bytes_verified": true
+        },
+        {
+          "role": "audit",
+          "records": 41,
+          "all_actual_loaded_bytes_verified": true
+        }
+      ],
+      "controls_Git_verified": [
+        {
+          "role": "training",
+          "commit": "bd6cafce50bf2099fc6ea4c01cf450c867b07493",
+          "files": 11,
+          "all_bytes_verified": true
+        },
+        {
+          "role": "audit",
+          "commit": "b7129d17299626beecc886440a4e6d54e3363cc5",
+          "files": 4,
+          "all_bytes_verified": true
+        },
+        {
+          "role": "publisher",
+          "commit": "1381a558fa35fe22b7ae6238c01df06674f7e951",
+          "files": 4,
+          "all_bytes_verified": true
+        }
+      ],
+      "native_import_verified_by_this_reader": false,
+      "classification_performed": false,
+      "new_Train": false,
+      "new_calibration": false,
+      "original_closed_native_process_ownership_not_reattested": true,
+      "auxiliary_final_publisher_loaded_map": "unknown",
+      "scientific_verdict": null
+    },
+    "reader_controls_commit": "812f44454663ddccb9fbf56cbad166b59c11dcf7",
+    "reader_loaded_maps_and_bytes_retained": true,
+    "acceptance_pending": true,
+    "scientific_verdict": null
+  }
+}

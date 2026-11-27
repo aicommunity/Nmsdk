@@ -1,0 +1,109 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-28/Classic-third-fourth-independent-accepted-fr682.json",
+    "size": 3919,
+    "sha256": "b28809eb739b90eed0bebaeda1d3f9a308b538d52d598d27144f68e660e8a82c"
+  },
+  "catalog": {
+    "kind": "Classic_third_and_fourth_pulse_independent_and_visual_acceptance",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/72/728c8fbed0a9aeaaeb1a991f9b671cdb192fc1b4c39449af44a781e8b28bf51b",
+        "sha256": "728c8fbed0a9aeaaeb1a991f9b671cdb192fc1b4c39449af44a781e8b28bf51b",
+        "bytes": 5353
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b8/b8f8d72a89b2355bd758071291759b3756c41e784097f9c414d0b4b1b7dc84c5",
+        "sha256": "b8f8d72a89b2355bd758071291759b3756c41e784097f9c414d0b4b1b7dc84c5",
+        "bytes": 6313176
+      }
+    },
+    "members": 27,
+    "analysis": {
+      "rows": [
+        {
+          "role": "fourth",
+          "peer_reader_members": 34,
+          "primary_members": 494,
+          "gallery_members": 98,
+          "native_observations": 8,
+          "PNG_reviewed": 16,
+          "SVG_bytes_verified": 16,
+          "reader_controls_commit": "e804fea2836862226798c9245738c0bb06593fbe",
+          "all_reader_Git_and_loaded_bytes_verified": true,
+          "all_source_catalog_hashes_checked": true,
+          "visual_method": "all_48_PNG_seen_on_12_readable_four_tile_contact_sheets",
+          "all_original_figures_individually_full_resolution": false,
+          "scientific_verdict": null
+        },
+        {
+          "role": "third",
+          "peer_reader_members": 33,
+          "primary_members": 187,
+          "gallery_members": 139,
+          "native_observations": 16,
+          "PNG_reviewed": 32,
+          "SVG_bytes_verified": 32,
+          "reader_controls_commit": "4711d72969e0b49095e53de3c406ed944c2a8570",
+          "all_reader_Git_and_loaded_bytes_verified": true,
+          "all_source_catalog_hashes_checked": true,
+          "visual_method": "all_48_PNG_seen_on_12_readable_four_tile_contact_sheets",
+          "all_original_figures_individually_full_resolution": false,
+          "scientific_verdict": null
+        }
+      ],
+      "visual_review": {
+        "relative_path": "experiments/2026-11-28/Classic-third-fourth-complete-visual-review-fr681.json",
+        "bytes": 998,
+        "sha256": "11409f5d47098be51153d0f770f8573a3f5e0463b57030d574ba9dd04c5664e2"
+      },
+      "original_closed_native_ownership_not_reattested": true,
+      "main_scientific_primary_evidence_not_weakened": true,
+      "whole_plan_or_stage_acceptance": false
+    },
+    "readers": [
+      {
+        "role": "fourth",
+        "catalog": {
+          "relative_path": "experiments/2026-11-27/Windows8-Classic-fourth-pulse8-independent-fr646.json",
+          "bytes": 3630,
+          "sha256": "57b530ab682bdc448603178cdbdd3b8e8318450588e4906ec3bbecb5bccf21fe"
+        },
+        "observations": 8,
+        "PNG": 16,
+        "primary_members": 494,
+        "loaded_verification_field": "actual_native_and_publisher_loaded_bytes_verified"
+      },
+      {
+        "role": "third",
+        "catalog": {
+          "relative_path": "experiments/2026-11-28/Classic-third-pulse16-independent-fr678.json",
+          "bytes": 3520,
+          "sha256": "cd34ef41981f123d17b8fc227f6556de4f4638c440287400bf9f0646191ffbf1"
+        },
+        "observations": 16,
+        "PNG": 32,
+        "primary_members": 187,
+        "loaded_verification_field": "actual_native_and_both_readers_loaded_bytes_verified"
+      }
+    ],
+    "visual_review": {
+      "relative_path": "experiments/2026-11-28/Classic-third-fourth-complete-visual-review-fr681.json",
+      "bytes": 998,
+      "sha256": "11409f5d47098be51153d0f770f8573a3f5e0463b57030d574ba9dd04c5664e2"
+    },
+    "source_before_after_equal": true,
+    "original_pending_flags_preserved_but_superseded_by_this_acceptance": true,
+    "new_native_calculation": false,
+    "new_Train": false,
+    "new_calibration": false,
+    "scientific_verdict": null
+  }
+}
