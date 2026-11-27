@@ -91,7 +91,7 @@ public:
     std::vector<ValidatedCompositeMeasurement> referenceMeasurements;
     std::map<std::string,ValidatedProbeMeasurement> observedScalars;
     std::vector<double> groupBegins;
-    unsigned frequency;std::size_t rawSamples=0,preparations=0;
+    unsigned frequency;std::size_t rawSamples=0,preparations=0,serviceAttemptAtConstruction=0;
     NativeCompositeFixture(unsigned hz=2000,bool merged=false,std::size_t groupBudget=64,bool bindC0=false,bool n0=false,bool connectedNeed=false,std::size_t dimension=2,double wallBudget=0.,bool distinctAttachments=false,double probeDuration=0.,int maximumCableLength=8,int initialFirstInputSynapses=1):frequency(hz) {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();storage=core.storage;environment=core.environment;
         environment->DestroyModel();environment->SetUseIndTimeStepFlag(false);environment->GetTime().SetTime(0);
@@ -113,6 +113,10 @@ public:
         modelSpec=s;
         const auto built=owner->ConstructNativeModel(s);Require(built.status==NativeModelBuildStatus::Constructed,built.reason.c_str());
         model->Init();model->Reset();
+        // Storage may reuse a learner instance. The service's monotonic session
+        // identity survives Reset/InvalidateTarget; count this case's starts
+        // relative to that identity, without resetting production authority.
+        serviceAttemptAtConstruction=owner->NativeTrainingController().SessionAttempt();
         owner->IsNeedToTrain=true;
         if(connectedNeed) {
             flag=UEPtr<CompositeTrainingFlag>(new CompositeTrainingFlag);flag->SetStorage(storage);flag->SetEnvironment(environment);flag->Default();
@@ -631,7 +635,7 @@ template<class Owner> void ServiceWarmReset() {
     const auto& warm=f.owner->NativeTrainingController();ASSERT_EQ(warm.Outcome(),TrainingStatus::Exact)<<warm.Reason();
     EXPECT_EQ(warm.CompositeSourceBinding(),source);EXPECT_EQ(warm.CompositeReferenceGroupIds(),references);
     EXPECT_NE(warm.Certificate()->CompositeProofIds(),oldProof);EXPECT_EQ(f.owner->ReadNativeTrainingCapacitance()->origin,oldC0);
-    EXPECT_EQ(f.preparations-prepared,4*warm.Search()->IssuedProbes());EXPECT_EQ(warm.SessionAttempt(),2u);
+    EXPECT_EQ(f.preparations-prepared,4*warm.Search()->IssuedProbes());EXPECT_EQ(warm.SessionAttempt(),f.serviceAttemptAtConstruction+2);
     EXPECT_EQ(warm.CompositeNativeProbes(),f.preparations-prepared);
     ASSERT_GE(warm.CompositeMeasurements().size(),2u);
     EXPECT_NE(warm.CompositeMeasurements().front().liveAttemptBinding,warm.CompositeMeasurements().back().liveAttemptBinding);
@@ -700,7 +704,7 @@ template<class Owner> void ServiceWarmDoesNotReplayCancelledRaw() {
     };
     ServiceStart(f,p);ServiceTicks(f);ASSERT_EQ(closed,1u);ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
     f.owner->Reset();f.owner->BeginNativeTraining(p);EXPECT_EQ(closed,1u);ServiceTicks(f);
-    const auto& service=f.owner->NativeTrainingController();EXPECT_EQ(service.SessionAttempt(),2u);
+    const auto& service=f.owner->NativeTrainingController();EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+2);
     EXPECT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();EXPECT_TRUE(service.Certificate());
     EXPECT_EQ(closed,1+service.CompositeNativeProbes());EXPECT_EQ(identities.size(),closed);
 }
@@ -2643,8 +2647,8 @@ template<class Owner> void CandidateWindowServiceStartsBeforeAnyNativeQueue() {
     const auto plan=MakeConfiguredNativeTrainingPlan(configuration);const auto initial=f.Revision();f.attempt.reset();
     f.owner->BeginNativeTraining(plan);const auto& service=f.owner->NativeTrainingController();
     ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();
-    EXPECT_EQ(service.SessionAttempt(),1u);EXPECT_EQ(service.Plan().protocol.schemaVersion,5u);
-    EXPECT_EQ(service.Configuration().runId,configuration.runId+"/session/1");
+    EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);EXPECT_EQ(service.Plan().protocol.schemaVersion,5u);
+    EXPECT_EQ(service.Configuration().runId,configuration.runId+"/session/"+std::to_string(f.serviceAttemptAtConstruction+1));
     EXPECT_EQ(service.CompositeInitialConfiguration()["schema_version"],QJsonValue(7));
     EXPECT_EQ(service.CompositeInitialConfiguration()["run_id"],QJsonValue(QString::fromStdString(configuration.runId)));
     EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());EXPECT_TRUE(service.CompositeReferenceGroupIds().empty());
@@ -2743,7 +2747,7 @@ template<class Owner> void WindowServiceGrowth(bool warm) {
         SaveWindowService(f,"grown-before-warm");f.owner->Reset();bool stoppedOnFreshInput=false;
         plan.compositeSink=[&](const auto& record){if(record.purpose==CompositeMeasurementPurpose::Search && record.logical.inputIndex==0 && record.consumed){
             stoppedOnFreshInput=true;f.owner->IsNeedToTrain=false;}};
-        f.owner->BeginNativeTraining(plan);ASSERT_EQ(first.State(),NativeTrainingState::Searching)<<first.Reason();EXPECT_EQ(first.SessionAttempt(),2u);
+        f.owner->BeginNativeTraining(plan);ASSERT_EQ(first.State(),NativeTrainingState::Searching)<<first.Reason();EXPECT_EQ(first.SessionAttempt(),f.serviceAttemptAtConstruction+2);
         EXPECT_EQ(first.CompositeMeasurements().size(),history);EXPECT_EQ(first.CompositeGroups(),0u);EXPECT_EQ(first.CompositeNativeProbes(),0u);
         EXPECT_EQ(first.References()->Inputs(),references.Inputs());EXPECT_EQ(f.owner->ReadNativeParameters()[0].length,3);
         ServiceTicks(f);ASSERT_TRUE(stoppedOnFreshInput);EXPECT_EQ(first.Outcome(),TrainingStatus::ExternalStop);EXPECT_FALSE(first.Certificate());
@@ -2784,7 +2788,7 @@ template<class Owner> void WindowServicePartialWarm() {
     ASSERT_EQ(service.CompositeMeasurements().size(),1u);const auto old=service.CompositeMeasurements()[0].groupId;const auto source=service.CompositeSourceBinding();
     EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);EXPECT_FALSE(service.CompositeMeasurements()[0].trainingRequestedAtConsume);SaveWindowService(f,"partial-before-warm");
     f.owner->Reset();f.owner->BeginNativeTraining(plan);ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();
-    EXPECT_EQ(service.SessionAttempt(),2u);EXPECT_FALSE(service.References());EXPECT_EQ(service.CompositeGroups(),0u);ServiceTicks(f);
+    EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+2);EXPECT_FALSE(service.References());EXPECT_EQ(service.CompositeGroups(),0u);ServiceTicks(f);
     ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();ASSERT_TRUE(service.References());EXPECT_EQ(service.CompositeSourceBinding(),source);
     ASSERT_FALSE(service.CompositeMeasurements().empty());EXPECT_EQ(service.CompositeMeasurements()[0].groupId,old);EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);
     EXPECT_FALSE(service.CompositeMeasurements()[0].trainingRequestedAtConsume);for(const auto& id:service.CompositeReferenceGroupIds())EXPECT_NE(id,old);
@@ -2903,7 +2907,7 @@ template<class Owner> void WindowManualClosedMeasurementAuthority(bool foreignSe
         ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
         ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();
         ASSERT_TRUE(service.Search());ASSERT_EQ(service.Search()->AppliedEdits(),0u);
-        ASSERT_EQ(service.SessionAttempt(),1u);ASSERT_NE(service.CompositeOwnerFamilyBinding(),oldFamily);
+        ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);ASSERT_NE(service.CompositeOwnerFamilyBinding(),oldFamily);
         ASSERT_EQ(retainedManual->IssuedGroups(),oldGroups);ASSERT_EQ(retainedManual->IssuedNativeProbes(),oldProbes);
         SaveWindowService(f,"foreign-finished-while-manual-proof-pending");
     } else {
@@ -3059,10 +3063,10 @@ template<class Owner> void WindowManualOtherServiceTakeover(ManualTakeoverKind k
     const auto& service=f.owner->NativeTrainingController();
     if(kind==ManualTakeoverKind::FailedBegin) {
         ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_EQ(service.Outcome(),TrainingStatus::InvalidModel);
-        ASSERT_EQ(service.SessionAttempt(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_EQ(f.Time(),beforeTime);
+        ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_EQ(f.Time(),beforeTime);
         ASSERT_TRUE(service.CompositeSourceBinding().isEmpty()); // Failed BEFORE any service-owned actor exists.
     } else {
-        ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();ASSERT_EQ(service.SessionAttempt(),1u);
+        ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);
         ASSERT_EQ(service.Plan().protocol.schemaVersion,kind==ManualTakeoverKind::ScalarThree?3u:4u);
         ServiceTicks(f);ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_GT(f.Time(),beforeTime);
         ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();
@@ -3230,7 +3234,7 @@ template<class Owner> void WindowManualImportedNoActorPublicInterruptRevokes() {
     f.owner->Build();f.model->Init();f.model->Reset();ASSERT_TRUE(f.owner->IsReady());ASSERT_TRUE(f.owner->IsInit());
     ASSERT_EQ(f.owner->ControllerVersion.GetData(),2);const auto& service=f.owner->NativeTrainingController();
     ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.Plan().protocol.schemaVersion,4u);
-    ASSERT_EQ(service.SessionAttempt(),1u);ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_FALSE(service.Search());
+    ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_FALSE(service.Search());
     const auto importedSource=service.CompositeSourceBinding();ASSERT_FALSE(importedSource.isEmpty());
     f.owner->IsNeedToTrain=true; // V2 edge Reset happens BEFORE the new manual observation.
     const auto earliest=f.Time(),earliestWall=Wall();EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f);
@@ -3242,7 +3246,7 @@ template<class Owner> void WindowManualImportedNoActorPublicInterruptRevokes() {
     SaveCompositeArchive(historical,(std::string(name)+"/old-manual-journal").c_str());
     // Queued manual trials suppress V2 autostart. The imported service still
     // holds only portable proof, not a native actor, throughout these groups.
-    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),1u);
+    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);
     ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_EQ(service.CompositeSourceBinding(),importedSource);
     const auto life=f.owner->ObserveLifecycle();const auto revision=f.Revision();const auto beforeTime=f.Time();
     const auto neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
@@ -3260,7 +3264,7 @@ template<class Owner> void WindowManualImportedNoActorPublicInterruptRevokes() {
     ASSERT_EQ(f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true).Get(),source.Get());
     const auto afterSourceIdentity=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(afterSourceIdentity["valid"].toBool());
     ASSERT_EQ(afterSourceIdentity["model"],sourceIdentity["model"]);
-    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),1u);ASSERT_EQ(service.CompositeSourceBinding(),importedSource);
+    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);ASSERT_EQ(service.CompositeSourceBinding(),importedSource);
     ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);
     const auto replay=DecodeNativeCompositeTrainingArchive(historical.document);ASSERT_EQ(replay.Records().back().semanticProofId,pending.SemanticProofId());
     ASSERT_LT(f.Time()-record.startModel,record.maximumGroupModelSeconds);ASSERT_LT(Wall()-record.startWall,record.maximumGroupWallSeconds);
@@ -3974,7 +3978,7 @@ template<class Owner> void ObservedRequestRestart(bool connected,int mode,bool s
     if(stopPartial)sinks.onSample=[&](const auto&){++samples;};
     f.owner->SetConfiguredNativeEvidenceSinks(sinks);request(true);
     ServiceTicks(f,[&](){if(stopPartial && samples && !stopped){stopped=true;request(false);}});
-    const auto& service=f.owner->NativeTrainingController();ASSERT_EQ(service.SessionAttempt(),1u);
+    const auto& service=f.owner->NativeTrainingController();ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);
     ASSERT_EQ(service.Outcome(),stopPartial?TrainingStatus::ExternalStop:TrainingStatus::Exact)<<service.Reason();
     ASSERT_EQ(bool(service.Certificate()),!stopPartial);ASSERT_EQ(bool(service.References()),!stopPartial);
     const auto source=service.CompositeSourceBinding(),configuration=service.CompositeInitialConfiguration();
@@ -3988,13 +3992,13 @@ template<class Owner> void ObservedRequestRestart(bool connected,int mode,bool s
     if(!stopPartial && (connected || mode==1)) {
         ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());
         for(unsigned i=0;i<8;++i)tick();
-        EXPECT_EQ(service.SessionAttempt(),1u);EXPECT_EQ(service.State(),NativeTrainingState::Finished);
+        EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);EXPECT_EQ(service.State(),NativeTrainingState::Finished);
         // An unobserved connected/direct false->true between native ticks is
         // not claimed as an edge. This deliberately bypasses the local setter.
-        request(false);request(true);tick();EXPECT_EQ(service.SessionAttempt(),1u);
+        request(false);request(true);tick();EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+1);
     }
     request(false);tick();ASSERT_EQ(service.State(),NativeTrainingState::Finished);
-    request(true);tick();ASSERT_EQ(service.SessionAttempt(),2u)<<service.Reason();
+    request(true);tick();ASSERT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+2)<<service.Reason();
     EXPECT_EQ(service.CompositeSourceBinding(),source);EXPECT_EQ(service.CompositeInitialConfiguration(),configuration);
     EXPECT_EQ(service.CompositeOwnerFamilyBinding(),family);EXPECT_EQ(service.CaptureRevision(),capture);EXPECT_EQ(service.CaptureEpoch(),epoch);
     EXPECT_EQ(f.Revision(),revision);EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
@@ -4005,16 +4009,17 @@ template<class Owner> void ObservedRequestRestart(bool connected,int mode,bool s
     }
     EXPECT_EQ(EncodeCompositeRawPrimary(service.CompositeMeasurements().front().rawTrials.front()),firstRaw);
     ServiceTicks(f);ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();ASSERT_TRUE(service.Certificate());
-    EXPECT_EQ(service.SessionAttempt(),2u);EXPECT_EQ(service.CompositeSourceBinding(),source);EXPECT_EQ(service.CompositeOwnerFamilyBinding(),family);
+    EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+2);EXPECT_EQ(service.CompositeSourceBinding(),source);EXPECT_EQ(service.CompositeOwnerFamilyBinding(),family);
     EXPECT_EQ(service.CaptureRevision(),capture);EXPECT_EQ(service.CaptureEpoch(),epoch);
     EXPECT_GT(service.CompositeMeasurements().size(),oldGroups);EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
     EXPECT_EQ(EncodeCompositeRawPrimary(service.CompositeMeasurements().front().rawTrials.front()),firstRaw);
     if(captured)EXPECT_EQ(service.References()->Inputs(),captured->Inputs());
     SaveWindowPackage(f,"request-warm",f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation));
-    for(unsigned i=0;i<8;++i)tick();EXPECT_EQ(service.SessionAttempt(),2u);
+    for(unsigned i=0;i<8;++i)tick();EXPECT_EQ(service.SessionAttempt(),f.serviceAttemptAtConstruction+2);
     SavePortableObject(NativeCompositeFixture<Owner>::branch?"branch-observed-request":"classic-observed-request","request-boundary.json",
         {{"kind","native_observed_request_restart"},{"schema_version",1},{"connected",connected},{"calculate_mode",mode},
-         {"stopped_partial",stopPartial},{"observed_raw_samples",double(samples)},{"initial_attempt",1},{"warm_attempt",2},
+         {"stopped_partial",stopPartial},{"observed_raw_samples",double(samples)},
+         {"initial_attempt",double(f.serviceAttemptAtConstruction+1)},{"warm_attempt",double(f.serviceAttemptAtConstruction+2)},
          {"original_family_preserved",service.CompositeOwnerFamilyBinding()==family},{"original_source_preserved",service.CompositeSourceBinding()==source},
          {"scientific_acceptance",false}});
 }
