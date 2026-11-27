@@ -1,0 +1,49 @@
+{
+  "source_catalog": {
+    "path": "/mnt/nmsdk-structtrain-archive/experiments/2026-11-27/Elder-duplicate-verification-cache-retirement-fr345.json",
+    "sha256": "b3c0058288c3820c75c537624f5c3344c0aba17779fb2873e1eca41e251b8831",
+    "size": 1749
+  },
+  "canonical_archive_path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Elder-duplicate-verification-cache-retirement-fr345.json",
+  "catalog": {
+    "kind": "timelearner_verified_archive_restoration_cache_retirement",
+    "schema_version": 1,
+    "objects": {
+      "validated-cache-plan.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a7/a7151b1c17d282b2d98cfbe1096803fc2947820dba8a3dabf9a5577db6d05bcc",
+        "sha256": "a7151b1c17d282b2d98cfbe1096803fc2947820dba8a3dabf9a5577db6d05bcc",
+        "bytes": 726
+      },
+      "summary.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/be/be0a845000b4c092e3dbcf155ebe04af7c2243c3c5625d26babbff4618b75655",
+        "sha256": "be0a845000b4c092e3dbcf155ebe04af7c2243c3c5625d26babbff4618b75655",
+        "bytes": 440
+      },
+      "producer.py": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/b8/b8b2bcf7df47a0049e29d82498f21276a857866836d49acbaf305787d619c5e0",
+        "sha256": "b8b2bcf7df47a0049e29d82498f21276a857866836d49acbaf305787d619c5e0",
+        "bytes": 3577
+      }
+    },
+    "summary": {
+      "execution": "completed",
+      "removed_cache": "/mnt/nmsdk-structtrain-archive/operations/timelearner/Elder-duplicate-independent-jump12-fr334/restored",
+      "removed_cache_members": 70,
+      "removed_cache_bytes": 17762074366,
+      "free_archive_before_bytes": 65966919680,
+      "free_archive_after_bytes": 83729571840,
+      "compressed_source_and_independent_acceptance_kept": true,
+      "no_original_data_removed": true,
+      "scientific_verdict": null
+    }
+  }
+}
