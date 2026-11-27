@@ -1,0 +1,135 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Branch-followups35-independent-gallery-fr384.json",
+    "size": 4767,
+    "sha256": "c94d03df06f99700c2e342abff42bfde6ace43526febf12357f88aebf61f5e62"
+  },
+  "catalog": {
+    "kind": "timelearner_Branch_fixed_model_35_followups_independent_gallery_acceptance",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/0a/0a3cd0640ba24e6914769999a19b9da5cb1e10951b4b3e0f87cbb4d5a77afeb6",
+        "sha256": "0a3cd0640ba24e6914769999a19b9da5cb1e10951b4b3e0f87cbb4d5a77afeb6",
+        "bytes": 142600
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/be/bed9432a77855900acf08f0e0266f6c3869b96714a34171a5fb8198834e30ae4",
+        "sha256": "bed9432a77855900acf08f0e0266f6c3869b96714a34171a5fb8198834e30ae4",
+        "bytes": 27350164
+      }
+    },
+    "producer_result": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7f/7f40f9200ea214545d2e1bd7b28f77b66da738f7ca45d7da2ccff10f32caf993",
+      "sha256": "7f40f9200ea214545d2e1bd7b28f77b66da738f7ca45d7da2ccff10f32caf993",
+      "bytes": 5476
+    },
+    "restoration": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/2b/2bba86961498eb42afc82ccfddf02d664e57cea82afdc89e2901a81c08400ff9",
+      "sha256": "2bba86961498eb42afc82ccfddf02d664e57cea82afdc89e2901a81c08400ff9",
+      "bytes": 425
+    },
+    "original_restoration": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/bb/bb431027c74336dc251d8428a9b950e702c7c895c69ebe6cfb637763c6e75f11",
+      "sha256": "bb431027c74336dc251d8428a9b950e702c7c895c69ebe6cfb637763c6e75f11",
+      "bytes": 425
+    },
+    "controls_readback": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/05/05f275948ae6f93926f1ea654217d95b2800a1d1cbd1967ef4ab7586a3fa94f0",
+      "sha256": "05f275948ae6f93926f1ea654217d95b2800a1d1cbd1967ef4ab7586a3fa94f0",
+      "bytes": 721
+    },
+    "prior_reader_metadata_failure": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/03/030e1011f236a9df885c7663808ee5a62e301bb9013581287b8277e270f2833e",
+      "sha256": "030e1011f236a9df885c7663808ee5a62e301bb9013581287b8277e270f2833e",
+      "bytes": 131
+    },
+    "analysis": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/ef/efc69c39cba097c4ec040034692e57bfb6c8575192f73f1310cb5b669ec4077a",
+      "sha256": "efc69c39cba097c4ec040034692e57bfb6c8575192f73f1310cb5b669ec4077a",
+      "bytes": 45271
+    },
+    "source_catalog": {
+      "relative_path": "experiments/2026-11-27/Branch-Windows14-followups35-primary-fr376.json",
+      "bytes": 4249,
+      "sha256": "4d120e1ee5681938c7e81ea9010fedcb0f64070cd999391265e9a635f08a11c6"
+    },
+    "source_members": 189,
+    "gallery_members": 732,
+    "observations": 35,
+    "PNG": 70,
+    "SVG": 70,
+    "analyses": [
+      {
+        "phase": "new-foils",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 25,
+          "targets": 1,
+          "foils": 26,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.9629629629629629,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.038461538461538464
+        },
+        "observations": 27
+      },
+      {
+        "phase": "third-pulse",
+        "counts": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        },
+        "observations": 8
+      }
+    ],
+    "all35_observations_reaudited_and_byte_compared": true,
+    "all_reader_loaded_bytes_verified": true,
+    "all_reader_module_bytes_verified": true,
+    "all_original_main_native_loaded_bytes_verified": true,
+    "all_reader_processes_closed": true,
+    "correct_star_minus_text_attribute_declared": true,
+    "all_control_blobs_exactly_verified": true,
+    "visual_review_complete": false,
+    "new_Train": false,
+    "new_calibration": false,
+    "independent_positive_holdout": false,
+    "counts_not_pooled": true,
+    "auxiliary_CLI_capture_gap_retained": true,
+    "scientific_verdict": null
+  }
+}

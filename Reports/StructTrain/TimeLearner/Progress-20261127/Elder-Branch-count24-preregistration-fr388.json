@@ -1,0 +1,79 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Elder-Branch-count24-preregistration-fr388.json",
+    "sha256": "cb55c84866bb515ccf8272798e27403478f33b961a48866709c1d9be21295d9c",
+    "size": 2488
+  },
+  "catalog": {
+    "kind": "timelearner_Elder_Branch_count24_preregistration",
+    "schema_version": 1,
+    "details": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/63/639cfe2746227355fbb57d36c76845aa720972858e793bc620ae652c8b6e9f26",
+      "sha256": "639cfe2746227355fbb57d36c76845aa720972858e793bc620ae652c8b6e9f26",
+      "bytes": 85812
+    },
+    "controls_commit": "8f4cf1ce4dac436f6f681601974f3a8fff7bb95a",
+    "files": 168,
+    "actual_admission_loaded_files": 28,
+    "source_closure": {
+      "root": {
+        "head": "eab050bdaa969bc9fdfd36e0a4e6f33cad0e1c2c",
+        "status": ""
+      },
+      "Bin": {
+        "recorded_gitlink": "2c285cb472134fc92394153c089603a830a03f70",
+        "head": "2c285cb472134fc92394153c089603a830a03f70",
+        "status": ""
+      },
+      "Libraries/Nmsdk-MotionControlLib": {
+        "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "status": ""
+      },
+      "Libraries/Nmsdk-PulseLib": {
+        "recorded_gitlink": "5f36aebb9bfdef747c04319f3ab065be199de67c",
+        "head": "5f36aebb9bfdef747c04319f3ab065be199de67c",
+        "status": ""
+      },
+      "Libraries/Rdk-BasicLib": {
+        "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "status": ""
+      },
+      "Libraries/Rdk-CvBasicLib": {
+        "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "status": ""
+      },
+      "Libraries/Rdk-HardwareLib": {
+        "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+        "head": "de40b008e990105856726e01230dde19f42a90a9",
+        "status": ""
+      },
+      "Rdk": {
+        "recorded_gitlink": "26129caa576a6b727ee2d76718e9fe9b2674e811",
+        "head": "26129caa576a6b727ee2d76718e9fe9b2674e811",
+        "status": ""
+      }
+    },
+    "M": 4,
+    "frequency_hz": 2000,
+    "normalization": "SynapseCount",
+    "per_input_candidates": 24,
+    "probes": 160,
+    "maximum_sweeps": 1,
+    "maximum_model_seconds": 7200,
+    "search_wall_seconds": 21600,
+    "native_wall_seconds": 25200,
+    "controller_wall_seconds": 28800,
+    "initial_graph_matches_historical_N0": true,
+    "stock_without_LT_membrane": true,
+    "actual39_assertions_passed": true,
+    "training_outcome_not_claimed": true,
+    "independent_archive_readback_pending": true,
+    "scientific_verdict": null
+  }
+}

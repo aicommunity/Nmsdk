@@ -1,0 +1,130 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Branch-Windows14-followups35-primary-fr376.json",
+    "sha256": "4d120e1ee5681938c7e81ea9010fedcb0f64070cd999391265e9a635f08a11c6",
+    "size": 4249
+  },
+  "catalog": {
+    "kind": "timelearner_fixed_Branch_newfoil_and_thirdpulse_complete_primary",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a4/a4e49cdeda003dee296dfe5ba0161a7ad477f769bac5b53beea7e94c20538272",
+        "sha256": "a4e49cdeda003dee296dfe5ba0161a7ad477f769bac5b53beea7e94c20538272",
+        "bytes": 33585
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f9/f9843aee8549bcd8a635c62b8d10b0de1421e47aff07880bdaef79d6733587f4",
+        "sha256": "f9843aee8549bcd8a635c62b8d10b0de1421e47aff07880bdaef79d6733587f4",
+        "bytes": 20355796
+      },
+      "producer-result.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/e0/e0faa5571c3c29a7e154fd5f73e11da138f4e375b9b4bcc95ec409819d887555",
+        "sha256": "e0faa5571c3c29a7e154fd5f73e11da138f4e375b9b4bcc95ec409819d887555",
+        "bytes": 3559
+      },
+      "terminal.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f2/f263dafbd888018ecc5644a7abf519c1a5166879764ed8f47b968006ddfc7271",
+        "sha256": "f263dafbd888018ecc5644a7abf519c1a5166879764ed8f47b968006ddfc7271",
+        "bytes": 108
+      }
+    },
+    "members": 189,
+    "expanded_bytes": 210536451,
+    "observations": 35,
+    "phases": [
+      {
+        "phase": "new-foils",
+        "observations": 27,
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 25,
+          "targets": 1,
+          "foils": 26,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.9629629629629629,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.038461538461538464
+        },
+        "source_model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+        "threshold": 0.0858575482028458,
+        "condition_fingerprint": "350f598dd315660e8ca3f99db75a39cd1ef0e28f6a7016d5879ee9c8e56607ab"
+      },
+      {
+        "phase": "third-pulse",
+        "observations": 8,
+        "counts": {
+          "TP": 1,
+          "FP": 0,
+          "FN": 0,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        },
+        "source_model_revision": "007f82de139e7c4e3bfdbc7a8351b306003dcd8eeb39854e66b3ec39ee8b6970",
+        "threshold": 0.0858575482028458,
+        "condition_fingerprint": "bf980eeb4a6996d559fb99055fe7d98f1ce9794914f7e1e722ee8d5762c2a40b"
+      }
+    ],
+    "process_capture_roles": [
+      {
+        "phase": "new-foils",
+        "role": "cli-process",
+        "runtime_provenance": "not_captured",
+        "reason": "windows_executable_mapping_not_observed",
+        "captured_files": 0,
+        "missing_capture_retained": true
+      },
+      {
+        "phase": "new-foils",
+        "role": "process",
+        "runtime_provenance": "loaded_files_captured",
+        "reason": "exit_zero",
+        "captured_files": 47,
+        "missing_capture_retained": false
+      },
+      {
+        "phase": "third-pulse",
+        "role": "cli-process",
+        "runtime_provenance": "not_captured",
+        "reason": "windows_executable_mapping_not_observed",
+        "captured_files": 0,
+        "missing_capture_retained": true
+      },
+      {
+        "phase": "third-pulse",
+        "role": "process",
+        "runtime_provenance": "loaded_files_captured",
+        "reason": "exit_zero",
+        "captured_files": 47,
+        "missing_capture_retained": false
+      }
+    ],
+    "all_captured_main_native_loaded_bytes_preserved": true,
+    "auxiliary_help_process_mapping_unknown": true,
+    "original8_already_archived_not_repacked": true,
+    "independent_reader_and_all_pattern_figures_pending": true,
+    "new_Train": false,
+    "new_calibration": false,
+    "independently_heldout_positive_class": false,
+    "scientific_verdict": null
+  }
+}
