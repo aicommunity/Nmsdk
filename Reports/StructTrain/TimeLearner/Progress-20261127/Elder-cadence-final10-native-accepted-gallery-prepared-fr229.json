@@ -1,0 +1,270 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Elder-cadence-final10-native-accepted-gallery-prepared-fr229.json",
+    "bytes": 8582,
+    "sha256": "503d96caa1d140344a1362084985efe58b0766c2b0d67502f7d33ec5f54550a2"
+  },
+  "source_objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/f3/f362b8a0951c630469445d52ebedd712ad86e7d8a27a119e96a7b19e29fdad35",
+      "sha256": "f362b8a0951c630469445d52ebedd712ad86e7d8a27a119e96a7b19e29fdad35",
+      "bytes": 134872
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/f5/f5eb8548c450c9551f178a011adeb992f3b80cf688e3fa055ac62e5971461c49",
+      "sha256": "f5eb8548c450c9551f178a011adeb992f3b80cf688e3fa055ac62e5971461c49",
+      "bytes": 29090080
+    }
+  },
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/2d/2de11ca9795e308829e10b2362a64f98197a3b9fa54c5e11dc947ec661a34f1e",
+      "sha256": "2de11ca9795e308829e10b2362a64f98197a3b9fa54c5e11dc947ec661a34f1e",
+      "bytes": 79072
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/db/dbe916e58ca99be941f12052ae1cd72160b1ec96033226091159d1ca03b06c4b",
+      "sha256": "dbe916e58ca99be941f12052ae1cd72160b1ec96033226091159d1ca03b06c4b",
+      "bytes": 18043084
+    },
+    "independent-reader.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/67/67cbe5120e07a91d827838a3beb7d66e8f0d1597790b733fcc74f539fcf42b26",
+      "sha256": "67cbe5120e07a91d827838a3beb7d66e8f0d1597790b733fcc74f539fcf42b26",
+      "bytes": 5244
+    },
+    "restoration.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/82/82107ccd81454bdfa095ec40041d00f38aa2f0c95145120fd83ccebf0c59c409",
+      "sha256": "82107ccd81454bdfa095ec40041d00f38aa2f0c95145120fd83ccebf0c59c409",
+      "bytes": 397
+    },
+    "source-restoration.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/99/991f29c9b6237a3cb97cf422a5c827e1bf7e5bfb240b8a86a4090bf5b78beb91",
+      "sha256": "991f29c9b6237a3cb97cf422a5c827e1bf7e5bfb240b8a86a4090bf5b78beb91",
+      "bytes": 425
+    },
+    "producer-result.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/9c/9ca58c9b2b930eedb7dd08717c23cea32b1017f9be1585d2990f7441829071c5",
+      "sha256": "9ca58c9b2b930eedb7dd08717c23cea32b1017f9be1585d2990f7441829071c5",
+      "bytes": 6711
+    }
+  },
+  "source_members": 762,
+  "reader_members": 478,
+  "cases": [
+    {
+      "phase": "short-r3-reset",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8
+    },
+    {
+      "phase": "short-r3-preserve",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8
+    },
+    {
+      "phase": "short-r4-reset",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8
+    },
+    {
+      "phase": "short-r4-preserve",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8
+    },
+    {
+      "phase": "short-r5-reset",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8
+    },
+    {
+      "phase": "short-r5-preserve",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8
+    },
+    {
+      "phase": "short-r6-reset",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8
+    },
+    {
+      "phase": "short-r6-preserve",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8
+    },
+    {
+      "phase": "short-r7-reset",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8
+    },
+    {
+      "phase": "short-r7-preserve",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6",
+      "observations": 8
+    }
+  ],
+  "observations": 80,
+  "all80_native_observations_independently_accepted": true,
+  "all_loaded_native_controller_and_reader_bytes_verified": true,
+  "paired_first_complete_responses_verified": 5,
+  "PNG": 160,
+  "SVG": 160,
+  "all320_figure_bytes_and80_observation_bindings_verified": true,
+  "visual_review_complete": false,
+  "whole_matrix_closed": true,
+  "independent_holdout": false,
+  "training_performed": false,
+  "threshold_selected": false,
+  "scientific_verdict": null,
+  "source_kind": "timelearner_ten_closed_cadence_native_acceptance_gallery_preparation",
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/Elder-cadence-final10-primary-fr206.json",
+    "bytes": 55890,
+    "sha256": "6519a84f84ad2acc07dd01ceb77819788c0a8a00637787c8ffcc8b3a22dd4b90"
+  }
+}
