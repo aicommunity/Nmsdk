@@ -1,0 +1,84 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/SharedSDK8-Identity8-independent-accepted-fr561.json",
+    "size": 2714,
+    "sha256": "fa12f13f0cb835987e263dd8ed383a784494e9dc237c764f016bd7c1fc8e619d"
+  },
+  "catalog": {
+    "kind": "shared_SDK8_native_identity8_independently_accepted",
+    "schema_version": 1,
+    "source_catalog": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/shared-sdk-identity-independent-fr561/restored/gate/after-loaded-files.json",
+      "size": 1677,
+      "sha256": "08e95a66b0d4a4863077c56dcdb9bd85a473c3adf830ad2cda87cf5ef17c16d2"
+    },
+    "analysis": {
+      "kind": "independent_shared_SDK8_native_identity8_readback",
+      "members": 104,
+      "metadata_tests": 8,
+      "native_tests": 8,
+      "junit": {
+        "expected": 8,
+        "observed": 8,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "a32c750447fd5386035cd829e147dabd9f8975c8f14938143a7b21f5dc5642e9"
+      },
+      "actual_loaded_bytes": [
+        {
+          "role": "gate/gate/process/loaded-files.json",
+          "files": 28,
+          "all_bytes_verified": true
+        },
+        {
+          "role": "gate/before-loaded-files.json",
+          "files": 18,
+          "all_bytes_verified": true
+        },
+        {
+          "role": "gate/after-loaded-files.json",
+          "files": 22,
+          "all_bytes_verified": true
+        }
+      ],
+      "controls_commit": "7e14898079ab51dc3a870397fbcf75e800ff5945",
+      "identity_cost": {
+        "dynamics_calculated": false,
+        "frequency_hz": 2000,
+        "full_seconds": 5.911425095,
+        "kind": "model_revision_observer_cost",
+        "measurement_only": true,
+        "model_sha256": "567e07e56ddca7a007e13f92afb4f3ba4e3bf2883c7440341dec1b24860793cc",
+        "nodes": 169,
+        "observer_seconds": 0.077229404,
+        "reads": 128
+      },
+      "production_same_tree_native_roundtrip_executed": false,
+      "full_goal_stages_not_closed": true,
+      "new_model_calculation": false,
+      "scientific_verdict": null
+    },
+    "reader_evidence": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/c1/c1b81bc85d48b58cd14f1ade916f39ed7faf0bb6ced0551f1c89b177fa6dc076",
+        "sha256": "c1b81bc85d48b58cd14f1ade916f39ed7faf0bb6ced0551f1c89b177fa6dc076",
+        "bytes": 4914
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/f4/f4fadfb71ad5c731c3aa0d8c5dd0d0e09a51a522391498587a15d017ec781422",
+        "sha256": "f4fadfb71ad5c731c3aa0d8c5dd0d0e09a51a522391498587a15d017ec781422",
+        "bytes": 6308072
+      }
+    },
+    "reader_controls_commit": "57fa1d05e764cb6837a866d4cc6d36f5f45ec368",
+    "reader_members": 24,
+    "reader_actual_loaded_maps_and_bytes_saved": true,
+    "scientific_verdict": null
+  }
+}

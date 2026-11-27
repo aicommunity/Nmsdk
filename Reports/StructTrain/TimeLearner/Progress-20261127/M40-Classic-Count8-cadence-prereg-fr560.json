@@ -1,0 +1,135 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/M40-Classic-Count8-cadence-prereg-fr560.json",
+    "size": 4214,
+    "sha256": "0d68b34ccfbe3a76bd5a733f9a04a5cb2eecdb73459c89220030d13b3a41af56"
+  },
+  "catalog": {
+    "kind": "frozen_Classic_Count8_cadence_reset_order_preregistration",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a8/a86a607f95a5fa0dcc05504261b978e4c03fcaeeaabf446aef123ba1871c464a",
+        "sha256": "a86a607f95a5fa0dcc05504261b978e4c03fcaeeaabf446aef123ba1871c464a",
+        "bytes": 6118
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/08/08868b9261e0b83632aad4b4e60a54c679e3bb71ae40bafca4db234982f583f1",
+        "sha256": "08868b9261e0b83632aad4b4e60a54c679e3bb71ae40bafca4db234982f583f1",
+        "bytes": 1092772
+      }
+    },
+    "members": 38,
+    "expanded_bytes": 335577703,
+    "controls_commit": "19a994986e30045a078fda71c621e13491c5bc12",
+    "source_commit": "feb18fe2f17bc4616938a0187b848607ed58a7dc",
+    "source_model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226",
+    "fixed_threshold": 0.026100997379370133,
+    "cases": [
+      {
+        "case": "r0-short-reset",
+        "study": {
+          "protocol": "cadence",
+          "rotation": 0,
+          "cadence": "short",
+          "reset_policy": "reset_per_trial"
+        },
+        "target_position": 0,
+        "condition_fingerprint": "10b1d9545de8e6853886863e6d86f82af77d224ef28ee323f47125c07d60b82c"
+      },
+      {
+        "case": "r0-short-continuous",
+        "study": {
+          "protocol": "cadence",
+          "rotation": 0,
+          "cadence": "short",
+          "reset_policy": "preserve_neuron_dynamics"
+        },
+        "target_position": 0,
+        "condition_fingerprint": "85189d8b0bd33c2feaf5b668139be807ec811adf84dedeaba13b359d0676b901"
+      },
+      {
+        "case": "r3-short-reset",
+        "study": {
+          "protocol": "cadence",
+          "rotation": 3,
+          "cadence": "short",
+          "reset_policy": "reset_per_trial"
+        },
+        "target_position": 5,
+        "condition_fingerprint": "68a2262bbb0a8574a78f912e447eb216e62e5e51396131d1f9486a8aff3e71e9"
+      },
+      {
+        "case": "r3-short-continuous",
+        "study": {
+          "protocol": "cadence",
+          "rotation": 3,
+          "cadence": "short",
+          "reset_policy": "preserve_neuron_dynamics"
+        },
+        "target_position": 5,
+        "condition_fingerprint": "f202f440b3d11a69ae255c43c17506aa398b72ad8d42d075922ba88ad50da89e"
+      },
+      {
+        "case": "r0-long-reset",
+        "study": {
+          "protocol": "cadence",
+          "rotation": 0,
+          "cadence": "long",
+          "reset_policy": "reset_per_trial"
+        },
+        "target_position": 0,
+        "condition_fingerprint": "acd07b997e1420a8b612f48832ad8b4ee623fd4b1af287115a7233c3224caf7b"
+      },
+      {
+        "case": "r0-long-continuous",
+        "study": {
+          "protocol": "cadence",
+          "rotation": 0,
+          "cadence": "long",
+          "reset_policy": "preserve_neuron_dynamics"
+        },
+        "target_position": 0,
+        "condition_fingerprint": "25f12ab9dabcf978de820ecfec6c4d25404885ac9f843d8b24d8f59bc98f6425"
+      },
+      {
+        "case": "r3-long-reset",
+        "study": {
+          "protocol": "cadence",
+          "rotation": 3,
+          "cadence": "long",
+          "reset_policy": "reset_per_trial"
+        },
+        "target_position": 5,
+        "condition_fingerprint": "88f28819b19a2240e1b7f7d2b1726b1033bccecb4a5a6471d035eb37547bc4b3"
+      },
+      {
+        "case": "r3-long-continuous",
+        "study": {
+          "protocol": "cadence",
+          "rotation": 3,
+          "cadence": "long",
+          "reset_policy": "preserve_neuron_dynamics"
+        },
+        "target_position": 5,
+        "condition_fingerprint": "6d3092f069d29dbf12f6f84eed7c4d936b59fef6fa44c39cb9ce6b6da8c0936a"
+      }
+    ],
+    "expected_observations": 64,
+    "source_eight_patterns_only": true,
+    "new_Train": false,
+    "new_calibration": false,
+    "immutable_declaration_bytes_preserved": true,
+    "production_declaration_recomputed_here": false,
+    "all_case_execution_completed": false,
+    "complete_result_archival_pending": true,
+    "auxiliary_publisher_loaded_map": "unknown",
+    "scientific_verdict": null
+  }
+}
