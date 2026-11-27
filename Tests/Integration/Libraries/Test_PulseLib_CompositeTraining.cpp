@@ -1873,7 +1873,14 @@ template<class Owner> void EnableCandidateWindow(NativeCompositeFixture<Owner>& 
 }
 template<class Owner> void SaveCandidateWindowGroup(NativeCompositeFixture<Owner>& f,const std::string& stage) {
     const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;
-    const std::string directory=std::string(NativeCompositeFixture<Owner>::branch?"branch-native-window5/":"classic-native-window5/")+stage;
+    const auto* test=::testing::UnitTest::GetInstance()->current_test_info();
+    Require(test,"window5_current_test_required");
+    const auto testId=std::string(test->test_suite_name())+"."+test->name();
+    // A stage name is unique within a case, not within a combined invocation.
+    // Keep NewOnly and a bounded path component on Windows as well as Linux.
+    const auto scope=QCryptographicHash::hash(QByteArray::fromStdString(testId),QCryptographicHash::Sha256).toHex();
+    const std::string directory="case-"+scope.toStdString()+"/"+
+        (NativeCompositeFixture<Owner>::branch?"branch-native-window5/":"classic-native-window5/")+stage;
     const auto base=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(directory);Require(QDir().mkpath(base),"window5_output_directory");
     const auto write=[&](const QString& name,const QByteArray& bytes){QFile file(base+"/"+name);Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"window5_output_new_only");
         Require(file.write(bytes)==bytes.size() && file.flush(),"window5_output_write");};

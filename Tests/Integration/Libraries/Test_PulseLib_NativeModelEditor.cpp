@@ -3447,6 +3447,7 @@ struct BoundaryExtras {
     bool modelSpec2=false;
     bool productionCalibrationSeed=false;
     bool countCalibrationSource=false;
+    bool downstreamSource=false;
     bool trackedCapacitance=false;
     std::optional<CapacitanceSearchPolicy> capacitanceSearch;
     std::optional<bool> expectedFrozenSpikes;
@@ -3480,6 +3481,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(modelSpec2)suffix+="_model_spec2";
     if(productionCalibrationSeed)suffix+="_production_calibration_seed";
     if(countCalibrationSource)suffix+="_count_calibration_burst_003";
+    if(extras.downstreamSource)suffix+="_downstream_burst_003";
     if(trackedCapacitance)suffix+="_history";
     if(capacitanceSearch)suffix+="_csearch";
     // Persistence and readout intentionally exercise the same native path.
@@ -3508,7 +3510,19 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         ASSERT_EQ(normalization,0);ASSERT_EQ(inputs,2u);ASSERT_TRUE(configured);
         ASSERT_DOUBLE_EQ(sync,.02);ASSERT_FALSE(productionCalibrationSeed);
     }
-    const auto ownerIsi=(extras.ownerRecognitionSource || countCalibrationSource)?
+    if(extras.downstreamSource)
+    {
+        ASSERT_EQ(inputs,2u);ASSERT_DOUBLE_EQ(sync,.02);
+        ASSERT_TRUE(recognition && (*recognition==RecognitionCase::ThresholdGrid ||
+            *recognition==RecognitionCase::PostTuneTransaction || *recognition==RecognitionCase::PostTuneCandidates));
+        ASSERT_FALSE(productionCalibrationSeed || countCalibrationSource || extras.ownerRecognitionSource);
+    }
+    // Calibration and PostTune must reach their operations from a measured
+    // completed Train. Use the already exercised .01/.03 burst condition;
+    // retain the .02 timing tolerance, 1e-5 amplitude tolerance, heterogeneous
+    // channels and bounded search. The .01/.08 diagnostic controls below
+    // remain unchanged. This does not repair convergence for that old input.
+    const auto ownerIsi=(extras.ownerRecognitionSource || countCalibrationSource || extras.downstreamSource)?
         std::optional<std::vector<double>>{std::vector<double>{.01,.03}}:std::nullopt;
     EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,!configured,2,1,false,{},1,initialThreshold,
         "NSPNeuronGen",{},ownerIsi);
@@ -3802,7 +3816,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         ASSERT_FALSE(recognition); // Diagnostic probes do not authorize completed-Train recognition.
     }
     else ASSERT_TRUE(service.Certificate())<<service.Reason();
-    if(productionCalibrationSeed || countCalibrationSource)ASSERT_TRUE(service.Certificate()->Exact());
+    if(productionCalibrationSeed || countCalibrationSource || extras.downstreamSource)ASSERT_TRUE(service.Certificate()->Exact());
     if(sync==.2 && inputs==2 && n0Repeats==1)EXPECT_TRUE(service.Certificate()->Exact());
     if(withDormantCapacitance)ASSERT_FALSE(rig.neuron->GetComponentL("Dendrite1_2",true));
     ASSERT_EQ(service.ReferencePackets().size(),inputs);ASSERT_EQ(service.FinalPackets().size(),inputs);
@@ -4245,12 +4259,12 @@ TEST(NativeMeasuredBoundary,ClassicOwnedHeterogeneousAndDormantCapacitanceSnapsh
 {LearnedBoundary<NNeuronTimeLearner>(0,.2,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::Completed,true,true,{.inspectMeasuredNativeBoundary=true});}
 TEST(NativeMeasuredBoundary,BranchOwnedHeterogeneousAndDormantCapacitanceSnapshot)
 {LearnedBoundary<NNeuronTimeLearnerBranch>(0,.2,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::Completed,true,true,{.inspectMeasuredNativeBoundary=true});}
-TEST(NativeCalibrationTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
-TEST(NativeCalibrationTransaction,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
-TEST(NativePostTuneTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
-TEST(NativePostTuneTransaction,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
-TEST(NativePostTuneTransaction,ClassicN0_2000){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
-TEST(NativePostTuneTransaction,BranchN0_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
+TEST(NativeCalibrationTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.downstreamSource=true});}
+TEST(NativeCalibrationTransaction,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.downstreamSource=true});}
+TEST(NativePostTuneTransaction,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.downstreamSource=true});}
+TEST(NativePostTuneTransaction,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.downstreamSource=true});}
+TEST(NativePostTuneTransaction,ClassicN0_2000){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.downstreamSource=true});}
+TEST(NativePostTuneTransaction,BranchN0_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.downstreamSource=true});}
 TEST(NativeCalibratedState,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.productionCalibrationSeed=true});}
 TEST(NativeCalibratedState,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,{.productionCalibrationSeed=true});}
 // Engineering LT profile and primary-pair calibration. These are native
@@ -4348,10 +4362,10 @@ TEST(NativeRecognitionOwner,ClassicAutomatic){LearnedBoundary<NNeuronTimeLearner
 TEST(NativeRecognitionOwner,BranchAutomatic){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::OwnedIdentity,true);}
 
 TEST(NativeRecognitionState,ClassicN0Identity){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,RecognitionCase::Identity);}
-TEST(NativePostTuneCandidates,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,RecognitionCase::PostTuneCandidates);}
-TEST(NativePostTuneCandidates,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::PostTuneCandidates);}
-TEST(NativePostTuneCandidates,ClassicN1){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,false,RecognitionCase::PostTuneCandidates);}
-TEST(NativePostTuneCandidates,BranchN1){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,false,RecognitionCase::PostTuneCandidates);}
+TEST(NativePostTuneCandidates,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,RecognitionCase::PostTuneCandidates,false,1.,1,600.,BoundaryExpectation::Completed,false,false,{.downstreamSource=true});}
+TEST(NativePostTuneCandidates,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::PostTuneCandidates,false,1.,1,600.,BoundaryExpectation::Completed,false,false,{.downstreamSource=true});}
+TEST(NativePostTuneCandidates,ClassicN1){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,false,RecognitionCase::PostTuneCandidates,false,1.,1,600.,BoundaryExpectation::Completed,false,false,{.downstreamSource=true});}
+TEST(NativePostTuneCandidates,BranchN1){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,false,RecognitionCase::PostTuneCandidates,false,1.,1,600.,BoundaryExpectation::Completed,false,false,{.downstreamSource=true});}
 TEST(NativePostTuneCandidates,StrictSpecification)
 {
     NativeRecognitionSpec spec;NativePostTuneSpec post;post.sourceModelRevision=std::string(64,'a');spec.postTune=post;
