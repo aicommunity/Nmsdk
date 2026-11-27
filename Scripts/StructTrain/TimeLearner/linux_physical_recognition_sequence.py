@@ -150,13 +150,18 @@ def wait_capacity(p, registry, begun, phase, *, check_guard=guard):
 
 def job_for(p, phase, model):
     from .model_identity import canonical_model_sha256 as sha
+    from .physical_model_data_evidence import audit_physical_model_data
     from .physical_threshold_proposal import CRITERION
+    # The owner is part of the native job contract, not the orchestration
+    # process. Derive it only from the complete, checked physical ModelSpec.
+    audit_physical_model_data(model, frozen=True)
+    owner = 'NNeuronTimeLearner' + ('Branch' if model['configuration']['model']['branch'] else '')
     name = p['q']['job_id']+'-'+phase
     rows = [dict(row, run_id=name, trial_id=name+'-'+str(i), duration=2., maximum_samples=4005,
                  reset_policy='reset_per_trial', record_threshold_potential=True)
             for i, row in enumerate(p['q']['patterns'])]
     job = dict(kind='timelearner_native_physical_model_evaluation_job', schema_version=1,
-        owner_class='NNeuronTimeLearner', implementation_id=model['implementation_id'],
+        owner_class=owner, implementation_id=model['implementation_id'],
         maximum_model_ticks=32032, run_id=name, coverage_policy='per_trial_windows',
         criterion=CRITERION, trials=rows, source_model_data=model)
     job['sha256'] = sha(job)
@@ -342,7 +347,7 @@ def phase_worker(request_path, phase):
             demands=dict(slots=1, memory_bytes=12*GIB, disk_bytes=2*GIB))
         write(directory/'reservation.json', lease)
         data = outputs['conversion' if phase == 'baseline' else 'threshold']/'native/model.json'
-        before = file_record(data); model = load(data); audit_physical_model_data(model, frozen=True)
+        before = file_record(data); model = load(data)
         job = job_for(p, phase, model); write(directory/'job.json', job)
         fingerprint = bind_condition(p, phase, job, model, directory)
         policy = validate_policy(dict(kind='timelearner_native_process_policy', schema_version=1,
