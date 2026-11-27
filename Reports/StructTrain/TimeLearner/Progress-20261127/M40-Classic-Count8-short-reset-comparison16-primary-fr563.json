@@ -1,0 +1,80 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/M40-Classic-Count8-short-reset-comparison16-primary-fr563.json",
+    "size": 2435,
+    "sha256": "a11254116e2021bd4d46535fdb1febc5a21d99c46a9942494dafe009122bdf4f"
+  },
+  "catalog": {
+    "kind": "partial_closed_Classic_Count8_cadence_short_reset_comparison",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/a2/a2dc9d6b147250c8650bd970f66f0908915d28a36503fb26e778a2b1fe6ba1a4",
+        "sha256": "a2dc9d6b147250c8650bd970f66f0908915d28a36503fb26e778a2b1fe6ba1a4",
+        "bytes": 34623
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/5b/5b37bf499a089a2b602d22843982992b78f786c26238d1b659c63ae43e3bcde5",
+        "sha256": "5b37bf499a089a2b602d22843982992b78f786c26238d1b659c63ae43e3bcde5",
+        "bytes": 40579268
+      }
+    },
+    "members": 185,
+    "expanded_bytes": 782505755,
+    "rows": [
+      {
+        "case": "r0-short-reset",
+        "counts": {
+          "TP": 1,
+          "FP": 1,
+          "FN": 0,
+          "TN": 6,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.14285714285714285
+        },
+        "frozen_model_verified": true,
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "condition_fingerprint": "10b1d9545de8e6853886863e6d86f82af77d224ef28ee323f47125c07d60b82c"
+      },
+      {
+        "case": "r0-short-continuous",
+        "counts": {
+          "TP": 1,
+          "FP": 3,
+          "FN": 0,
+          "TN": 4,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.625,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.42857142857142855
+        },
+        "frozen_model_verified": true,
+        "final_quiet_tail_seconds": 2.0004999999999997,
+        "condition_fingerprint": "85189d8b0bd33c2feaf5b668139be807ec811adf84dedeaba13b359d0676b901"
+      }
+    ],
+    "observations": 16,
+    "total_declared_observations": 64,
+    "completed_cases_in_this_package": 2,
+    "total_cases": 8,
+    "model_revision": "8d66abe56a9ce8468e3888834b32017f23fc724d70cd2cd7a33ffe678797d226",
+    "fixed_threshold": 0.026100997379370133,
+    "new_Train": false,
+    "new_calibration": false,
+    "source_run_still_active": true,
+    "full_primary_independent_readback_pending": true,
+    "scientific_verdict": null
+  }
+}
