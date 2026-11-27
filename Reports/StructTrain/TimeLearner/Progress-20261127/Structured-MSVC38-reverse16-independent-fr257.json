@@ -1,0 +1,161 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "members": 279,
+  "original_GCC_members": 299,
+  "native_groups": [
+    {
+      "group": "portable15",
+      "tests": 15,
+      "failures": 0,
+      "skips": 0,
+      "junit": {
+        "expected": 15,
+        "observed": 15,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "652fbb47b328e242d4b118e1adb53d9029954f7f5992dd72af1c462652eaa580"
+      }
+    },
+    {
+      "group": "archive23",
+      "tests": 23,
+      "failures": 0,
+      "skips": 0,
+      "junit": {
+        "expected": 23,
+        "observed": 23,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "617568ca68b012440918aeea58590751488c75036ffd7d003d6a2c18b1ae6207"
+      }
+    }
+  ],
+  "reverse_phases": [
+    {
+      "phase": "baseline",
+      "observations": 8,
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0.0,
+        "foil_response_rate": 0.0
+      },
+      "model_revision": "8a8b447f4ecb17f7e9140aa5504f5dedea523ce4e6d802b4a032dc7cd3d44412",
+      "all8_full_responses_preserved": true
+    },
+    {
+      "phase": "confirmation",
+      "observations": 8,
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "model_revision": "169d0090482014456785a7c3f4a6927a29527e4c225306a4c628b6335cc4faa9",
+      "all8_full_responses_preserved": true
+    }
+  ],
+  "observations": 16,
+  "all16_full_responses_preserved": true,
+  "all6_process_loaded_lists_and_actual_bytes_verified": true,
+  "all_declared_groups_closed": true,
+  "full16_Windows_not_claimed": true,
+  "wrong_negative_fixture_excluded": true,
+  "new_Train": false,
+  "new_calibration": false,
+  "candidate_accepted": false,
+  "entire_stage5_accepted": false,
+  "scientific_verdict": null,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/a1/a107ff7da74c6f1815eb4480d771721e6da3e74b6884eccb85a04f45202d12dd",
+      "sha256": "a107ff7da74c6f1815eb4480d771721e6da3e74b6884eccb85a04f45202d12dd",
+      "bytes": 52610
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/8d/8d69ae6c47512a048ec35fd1ed40512e3d09c9deefbbc1d0443fca178007bad2",
+      "sha256": "8d69ae6c47512a048ec35fd1ed40512e3d09c9deefbbc1d0443fca178007bad2",
+      "bytes": 29494628
+    }
+  },
+  "analysis": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/bb/bbe31b18c34041b48f2d08d83cdb076630511771ef940d8bde721d9c632829f9",
+    "sha256": "bbe31b18c34041b48f2d08d83cdb076630511771ef940d8bde721d9c632829f9",
+    "bytes": 2227
+  },
+  "original_GCC_source_catalog": {
+    "relative_path": "experiments/2026-11-27/Sequential-M40-actual-recognition-fr188.json",
+    "bytes": 2828,
+    "sha256": "4378a7cea027aa7fc268ba3d7b72db1fffb8bcc14f785631fab96e8df7a51831"
+  },
+  "source_root": {
+    "root": {
+      "head": "cde0b851a3c156b3c31e6dbadc27b320de9a3884",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "2c285cb472134fc92394153c089603a830a03f70",
+      "head": "2c285cb472134fc92394153c089603a830a03f70",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "5f36aebb9bfdef747c04319f3ab065be199de67c",
+      "head": "5f36aebb9bfdef747c04319f3ab065be199de67c",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "26129caa576a6b727ee2d76718e9fe9b2674e811",
+      "head": "26129caa576a6b727ee2d76718e9fe9b2674e811",
+      "status": ""
+    }
+  },
+  "source_kind": "timelearner_structured_MSVC38_and_reverse16_independent_acceptance",
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Structured-MSVC38-reverse16-independent-fr257.json",
+    "bytes": 5015,
+    "sha256": "8c119d9e9691406304f171608035da8f11e2ba8748397d493bab5ea73ba8cd85"
+  }
+}
