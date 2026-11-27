@@ -1,0 +1,65 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/7d/7d6f2e618aef4bd2779a389a9ba41a05af41aa16742eb4ec36adfc9626341a0c",
+      "sha256": "7d6f2e618aef4bd2779a389a9ba41a05af41aa16742eb4ec36adfc9626341a0c",
+      "bytes": 33701
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/25/255d7ec7a8d6afcbe051d9d442e6d6126ebc0470102c3316d133cffe75371f47",
+      "sha256": "255d7ec7a8d6afcbe051d9d442e6d6126ebc0470102c3316d133cffe75371f47",
+      "bytes": 33419708
+    }
+  },
+  "acceptance": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/76/76fe27657e9c7ea422c2b9f17c5a13cb0d0e8a62277c1e8cf4a3016da5b811d0",
+    "sha256": "76fe27657e9c7ea422c2b9f17c5a13cb0d0e8a62277c1e8cf4a3016da5b811d0",
+    "bytes": 818
+  },
+  "members": 188,
+  "analyses": [
+    {
+      "group": "portable16",
+      "tests": 16,
+      "failures": 0,
+      "skips": 0
+    },
+    {
+      "group": "archive-regression",
+      "tests": 23,
+      "failures": 0,
+      "skips": 0
+    }
+  ],
+  "observations": 0,
+  "all_actual_loaded_file_bytes_verified": true,
+  "all_declared_processes_closed": true,
+  "primary_independently_restored": true,
+  "new_Train": false,
+  "new_calibration": false,
+  "entire_stage5_accepted": false,
+  "candidate_accepted": false,
+  "scientific_verdict": null,
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/Structured-CPP39-Jump12-primary-fr203.json",
+    "bytes": 1497,
+    "sha256": "48fc3a1f7f348561e67b6b0a1e83b8323155e22acafd4d597510f9916136d763"
+  },
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Structured-CPP39-independent-fr209.json",
+    "bytes": 2021,
+    "sha256": "8eb7d46419b7682eb7ab006fafabbea19911997f53d77e353cb666701c997b7c"
+  },
+  "source_kind": "timelearner_structured_DATA_native_evidence_independent_acceptance"
+}

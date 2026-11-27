@@ -181,3 +181,12 @@ DATA2/DATA3 Classic на GCC M40 завершён: все16 полных реа�
 повторное чтение остаются до приёмки исправления и merge в develop.
 Проблема зависимости NativeImageRestSnapshot от предыстории общего
 storage этим межкомпиляторным исправлением не объявляется решённой.
+
+
+Независимая приёмка новых первичных комплектов завершена:
+[188 файлов и39 C++-проверок](../../../Reports/StructTrain/TimeLearner/Progress-20261127/Structured-CPP39-independent-fr209.json),
+[127 файлов и16 прямых реакций Classic](../../../Reports/StructTrain/TimeLearner/Progress-20261127/Structured-Classic16-independent-fr209.json),
+[106 файлов и8 прямых реакций Branch](../../../Reports/StructTrain/TimeLearner/Progress-20261127/Structured-Branch8-independent-fr209.json).
+Все фактически загруженные байты проверены; сравнения полных реакций
+повторены по исходным наблюдениям. Отдельный обратный GCC→MSVC перенос
+ещё выполняется, весь этап5 и исправление NativeImageRestSnapshot не приняты.

@@ -1,0 +1,69 @@
+{
+  "kind": "timelearner_external_scientific_result_reference",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/c2/c2fd651b53ebad6c4dafeb07f4f3474d0fbfe43d03bdd9982fa7c4977bc1a68c",
+      "sha256": "c2fd651b53ebad6c4dafeb07f4f3474d0fbfe43d03bdd9982fa7c4977bc1a68c",
+      "bytes": 18962
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/63/63d5f8a2207b9789eb5a2485ae01beb3f23448f8889f2f05868dde3d11aa019e",
+      "sha256": "63d5f8a2207b9789eb5a2485ae01beb3f23448f8889f2f05868dde3d11aa019e",
+      "bytes": 33276648
+    }
+  },
+  "acceptance": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/d5/d53ea565a828006250b84838eb9200f8b5c81b179a46bc84551ceea2417f1c3e",
+    "sha256": "d53ea565a828006250b84838eb9200f8b5c81b179a46bc84551ceea2417f1c3e",
+    "bytes": 996
+  },
+  "members": 106,
+  "analyses": [
+    {
+      "phase": "Branch",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "all8_full_responses_preserved": true
+    }
+  ],
+  "observations": 8,
+  "all_actual_loaded_file_bytes_verified": true,
+  "all_declared_processes_closed": true,
+  "primary_independently_restored": true,
+  "new_Train": false,
+  "new_calibration": false,
+  "entire_stage5_accepted": false,
+  "candidate_accepted": false,
+  "scientific_verdict": null,
+  "upstream_source_catalog": {
+    "relative_path": "experiments/2026-11-27/Original-MSVC-Branch-direct-GCC-primary-fr208.json",
+    "bytes": 1222,
+    "sha256": "0bfec4b494dda2df33ca610c4588b4df764509c398dfab0ca6ce6d89e253c140"
+  },
+  "source_catalog": {
+    "relative_path": "experiments/2026-11-27/Structured-Branch8-independent-fr209.json",
+    "bytes": 2197,
+    "sha256": "c7ff3d0cda5c8c6d0abe7cbb5a8ee9c52be92c918e21832a7aece4cb072b9ddb"
+  },
+  "source_kind": "timelearner_structured_DATA_native_evidence_independent_acceptance"
+}
