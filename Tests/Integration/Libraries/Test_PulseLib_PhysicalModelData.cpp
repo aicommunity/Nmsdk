@@ -22,6 +22,9 @@
 #include <utility>
 #include <functional>
 #include <map>
+#include <set>
+#include <typeinfo>
+#include <vector>
 
 namespace {
 using namespace RDK;
@@ -748,6 +751,43 @@ const XmlEdit OtherCompilerScalarSpellings=[](RDK::USerStorageXML& xml,std::size
     }
 };
 
+const XmlEdit OtherCompilerContainerSpellings=[](RDK::USerStorageXML& xml,std::size_t& changes) {
+    OtherCompilerScalarSpellings(xml,changes);
+    const auto vector=[](std::string type,unsigned depth) {
+        for(unsigned i=0;i<depth;++i)type="class std::vector<"+type+",class std::allocator<"+type+"> >";
+        return type;
+    };
+    using V3=std::vector<std::vector<std::vector<int>>>;
+    using V4=std::vector<V3>;
+    const std::string v3="St6vectorIS_IS_IiSaIiEESaIS1_EESaIS3_EE";
+    const std::string v4="St6vectorIS_IS_IS_IiSaIiEESaIS1_EESaIS3_EESaIS5_EE";
+    const std::map<std::string,std::string> aliases{
+        {"MVector<d>","MVector<double>"},{"MVector<double>","MVector<d>"},
+        {"MDMatrix<d>","MDMatrix<double>"},{"MDMatrix<double>","MDMatrix<d>"},
+        {"MDMatrix<i>","MDMatrix<int>"},{"MDMatrix<int>","MDMatrix<i>"},
+        {typeid(RDK::MDMatrix<double>).name(),std::string(typeid(RDK::MDMatrix<double>).name())=="N3RDK8MDMatrixIdEE"?"class RDK::MDMatrix<double>":"N3RDK8MDMatrixIdEE"},
+        {typeid(V3).name(),std::string(typeid(V3).name())==v3?vector("int",3):v3},
+        {typeid(V4).name(),std::string(typeid(V4).name())==v4?vector("int",4):v4},
+        {"x","__int64"},{"__int64","x"},{"y","unsigned __int64"},{"unsigned __int64","y"}};
+    for(const auto* name:{"Type","elemType","elemVecType"})
+    {
+        const auto found=aliases.find(xml.GetNodeAttribute(name));
+        if(found!=aliases.end())
+        {if(!xml.SetNodeAttribute(name,found->second))throw std::logic_error("portable_container_fixture_attribute");++changes;}
+    }
+    // size_t has different nominal C++ types in LP64 and LLP64. These are
+    // real NNet size_t parameters, declared as unsigned_integer in identity;
+    // no untyped state or other arbitrary ulong field is rewritten here.
+    static const std::set<std::string> sizes{"NumLayers","LayerWidth","LayerHeight",
+        "ReceptorFieldWidth","ReceptorFieldHeight","LinkOrganizationMode"};
+    if(sizes.count(xml.GetNodeName()))
+    {
+        const auto type=xml.GetNodeAttribute("Type");
+        if(type=="m" || type=="y" || type=="unsigned __int64")
+        {if(!xml.SetNodeAttribute("Type",type=="m"?"unsigned __int64":"m"))throw std::logic_error("portable_size_fixture_attribute");++changes;}
+    }
+};
+
 template<class Owner> void PortableDataRoundtrip(Normalization normalization)
 {
     Fixture fixture;fixture.Create<Owner>(2000,normalization);ASSERT_FALSE(::testing::Test::HasFatalFailure());
@@ -756,7 +796,7 @@ template<class Owner> void PortableDataRoundtrip(Normalization normalization)
     const auto candidate=CreateNativePhysicalThresholdCandidate(source,1e-5,fixture.storage,fixture.environment,Implementation);
     for(const auto& original:{source,candidate})
     {
-        const auto foreign=EditDataArchive(original,OtherCompilerScalarSpellings);
+        const auto foreign=EditDataArchive(original,OtherCompilerContainerSpellings);
         ASSERT_NE(foreign,original);
         EXPECT_TRUE(NmsdkTools::SamePortableModelArchive(original["neuron"].toObject(),foreign["neuron"].toObject()));
         const auto imported=PrepareNativeFrozenPhysicalModelData(foreign,fixture.storage,fixture.environment,Implementation);
@@ -769,7 +809,7 @@ template<class Owner> void PortableDataRoundtrip(Normalization normalization)
     }
     // An actual DATA3 generated from an already foreign-spelled DATA2 also
     // keeps the exact immutable nested source and passes native reconstruction.
-    const auto foreignSource=EditDataArchive(source,OtherCompilerScalarSpellings);
+    const auto foreignSource=EditDataArchive(source,OtherCompilerContainerSpellings);
     const auto fromForeign=CreateNativePhysicalThresholdCandidate(foreignSource,1e-5,
         fixture.storage,fixture.environment,Implementation);
     EXPECT_EQ(fromForeign["source_recognition_data"],QJsonValue(foreignSource));
@@ -832,5 +872,22 @@ TEST(NativePhysicalPortableData,OriginalArchiveAndXmlDigestsRemainMandatory)
         EXPECT_THROW(PrepareNativeFrozenPhysicalModelData(corrupted,fixture.storage,fixture.environment,Implementation),std::invalid_argument);
     }
     EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
+}
+
+TEST(NativePhysicalPortableData,ResignedData1ScalarDeclarationsMustMatchTypedIdentityBeforeLoad)
+{
+    Fixture fixture;fixture.Create<NMSDK::NNeuronTimeLearner>();ASSERT_FALSE(::testing::Test::HasFatalFailure());
+    const auto solo=ExportNativePhysicalModelData(fixture.source,fixture.storage,fixture.environment,Implementation);
+    const XmlEdit wrong=[](RDK::USerStorageXML& xml,std::size_t& changes) {
+        const auto type=xml.GetNodeAttribute("Type");
+        if(type=="d" || type=="double")
+        {if(!xml.SetNodeAttribute("Type","int"))throw std::logic_error("portable_data1_fixture_attribute");++changes;}
+    };
+    for(bool imagesOnly:{false,true})
+    {
+        const auto bad=EditDataArchive(solo,wrong,imagesOnly);
+        EXPECT_THROW(ConvertNativeSoloPhysicalModelDataToRecognition(bad,{}, {},fixture.storage,fixture.environment,Implementation),std::invalid_argument);
+        EXPECT_EQ(fixture.CurrentIdentity(),fixture.initialIdentity);
+    }
 }
 }
