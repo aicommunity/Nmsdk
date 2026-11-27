@@ -1,0 +1,98 @@
+{
+  "source_catalog": {
+    "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Elder-Branch1442-and-negative640-independent-fr448.json",
+    "sha256": "3b75373389e12e57668204f757b6dfdcfd6befb8f75151d19ebf043d6ddff4d1",
+    "size": 3114
+  },
+  "catalog": {
+    "kind": "timelearner_Branch_Count24_and_negative10_full_readback_accepted",
+    "schema_version": 1,
+    "objects": {
+      "bundle.json": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/08/083db48925ce7217c9b7614e152b14178ca0bfde773649ffdbd52d172ead424d",
+        "sha256": "083db48925ce7217c9b7614e152b14178ca0bfde773649ffdbd52d172ead424d",
+        "bytes": 7548
+      },
+      "primary.tar.xz": {
+        "kind": "nmsdk_structtrain_external_object",
+        "schema_version": 1,
+        "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+        "object": "objects/sha256/79/79ab71dba537ceb58b9026cfe30655a25a0100c718305c56037507084b683eb7",
+        "sha256": "79ab71dba537ceb58b9026cfe30655a25a0100c718305c56037507084b683eb7",
+        "bytes": 6054508
+      }
+    },
+    "reader_evidence_members": 39,
+    "all_primary_members_read": 2082,
+    "source_catalogs": {
+      "Algorithm-matrix-worker4-isolated10-primary-fr433.json": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Algorithm-matrix-worker4-isolated10-primary-fr433.json",
+        "sha256": "1381f2088ca31858eb7ed1c84f14898e520d0add950b24b607a6f45f51ed2997",
+        "size": 10322
+      },
+      "Elder-Branch-Count24-closed-primary-fr440.json": {
+        "path": "/media/user/Data/Nmsdk-StructTrainExpArchive/experiments/2026-11-27/Elder-Branch-Count24-closed-primary-fr440.json",
+        "sha256": "620aba9fc7e79cdb5e4f6cb60a635c77333afa7bea201b1d6474a20b8f3cb2b5",
+        "size": 6952
+      }
+    },
+    "Branch": {
+      "cohort": "Branch",
+      "members": 1442,
+      "full_primary_audit_reproduced": true,
+      "original_native_loaded_files": 28,
+      "training_outcome": "invalid_observation",
+      "training_reason": "rejected_candidate_window:ambiguous",
+      "completed_boundary": false,
+      "actual_parameters": [
+        {
+          "length": 82,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 82,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 27,
+          "resistance": 86000000,
+          "synapses": 4
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "logical_groups": 64,
+      "native_probes": 384,
+      "final_group_ids": [],
+      "scientific_verdict": null
+    },
+    "negative10": {
+      "cohort": "negative10",
+      "members": 640,
+      "tests": 10,
+      "assertions_passed": 0,
+      "assertions_failed": 10,
+      "original_negative_training_preconditions_preserved": true,
+      "post_tune_operations_not_reached": true,
+      "source_catalog_inherited_mount_flag_not_evidence_of_missing_mount_in_this_cohort": true,
+      "scientific_verdict": null
+    },
+    "actual_reader_loaded_files": {
+      "before": 18,
+      "after": 18
+    },
+    "reader_controls_commit": "92b33a11fb6d20f4caeae2e4177618d1ac6e4960",
+    "source_before_after_match": true,
+    "reader_capture_scope": "point_in_time_before_and_after_not_lifetime",
+    "native_calculations_not_repeated": true,
+    "scientific_verdict": null
+  }
+}
