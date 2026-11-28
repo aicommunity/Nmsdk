@@ -159,3 +159,21 @@ Bin/**/settings.qt
 # Explicitly restored native regression fixtures are local archive caches.
 /Tests/Integration/Data/NativeWindowPackage6Classic/learned-state.json.qz
 /Tests/Integration/Data/NativeWindowPackage6BranchC0/learned-state.json.qz
+
+# Axonal research: compact metadata only, external experiment payloads.
+!Reports/StructTrain/AxoneTimeLearner/
+!Reports/StructTrain/AxoneTimeLearner/**
+/Reports/StructTrain/AxoneTimeLearner/**/*.png
+/Reports/StructTrain/AxoneTimeLearner/**/*.svg
+/Reports/StructTrain/AxoneTimeLearner/**/*.pdf
+/Reports/StructTrain/AxoneTimeLearner/**/*.xz
+/Reports/StructTrain/AxoneTimeLearner/**/*.gz
+/Reports/StructTrain/AxoneTimeLearner/**/*.zip
+/Reports/StructTrain/AxoneTimeLearner/**/*.tar
+/Reports/StructTrain/AxoneTimeLearner/**/*.qz
+/Reports/StructTrain/AxoneTimeLearner/**/*.bin
+/Reports/StructTrain/AxoneTimeLearner/**/*.log
+/Reports/StructTrain/AxoneTimeLearner/**/primary/
+/Reports/StructTrain/AxoneTimeLearner/**/StatisticLog/
+/Reports/StructTrain/AxoneTimeLearner/**/EventsLog/
+/.axone-timelearner-cache/
