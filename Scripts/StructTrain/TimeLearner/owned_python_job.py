@@ -137,7 +137,8 @@ def _source_snapshot(root, commit):
     root = _canonical(Path(root))
     def git(*args):
         return subprocess.check_output(['git', '-C', str(root), *args],
-            env={**os.environ, 'GIT_NO_LAZY_FETCH': '1', 'GIT_OPTIONAL_LOCKS': '0'})
+            env={**os.environ, 'GIT_NO_LAZY_FETCH': '1', 'GIT_OPTIONAL_LOCKS': '0'},
+            creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
     require(git('rev-parse', 'HEAD').decode().strip() == commit and
             not git('status', '--porcelain', '--untracked-files=all', '--ignore-submodules=all').strip(),
             'owned_job_source_epoch_or_status')

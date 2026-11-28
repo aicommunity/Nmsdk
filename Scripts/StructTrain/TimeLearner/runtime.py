@@ -116,7 +116,8 @@ def loaded_process_files(pid: int, executable: Path, proc_root: Path = Path("/pr
 def source_closure(root: Path) -> dict:
     root = root.resolve(strict=True)
     def git(directory: Path, *args: str) -> str:
-        return subprocess.check_output(["git", "-C", str(directory), *args]).decode("utf-8").strip()
+        return subprocess.check_output(["git", "-C", str(directory), *args],
+            creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0)).decode("utf-8").strip()
     def require_worktree(directory: Path, name: str) -> None:
         requested = directory.resolve(strict=True)
         actual = Path(git(requested, "rev-parse", "--show-toplevel")).resolve(strict=True)
@@ -125,7 +126,8 @@ def source_closure(root: Path) -> dict:
     require_worktree(root, "root")
     closure = {"root": {"head": git(root, "rev-parse", "HEAD"),
                         "status": git(root, "status", "--porcelain", "--untracked-files=no")}}
-    records = subprocess.check_output(["git", "-C", str(root), "ls-tree", "-r", "-z", "HEAD"])
+    records = subprocess.check_output(["git", "-C", str(root), "ls-tree", "-r", "-z", "HEAD"],
+        creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
     for record in records.split(b"\0"):
         if not record:
             continue

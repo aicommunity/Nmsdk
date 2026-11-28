@@ -272,11 +272,12 @@ class OwnedPythonJobTest(unittest.TestCase):
 
     def git_source(self, root):
         (root/'Scripts').mkdir();(root/'Scripts/fixture.py').write_bytes(b'# source metadata only\n')
-        subprocess.run(['git', 'init', '--quiet', str(root)], check=True)
-        subprocess.run(['git', '-C', str(root), 'add', '.'], check=True)
+        options = dict(creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
+        subprocess.run(['git', 'init', '--quiet', str(root)], check=True, **options)
+        subprocess.run(['git', '-C', str(root), 'add', '.'], check=True, **options)
         subprocess.run(['git', '-C', str(root), '-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid',
-                        'commit', '--quiet', '-m', 'source metadata fixture'], check=True)
-        return subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip()
+                        'commit', '--quiet', '-m', 'source metadata fixture'], check=True, **options)
+        return subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True, **options).strip()
 
     def test_source_projection_is_verified_against_exact_git_blob_bytes(self):
         with tempfile.TemporaryDirectory() as directory:

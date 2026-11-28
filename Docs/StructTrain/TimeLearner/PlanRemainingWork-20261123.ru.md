@@ -1,5 +1,9 @@
 # Остатки плана TimeLearner на 23 ноября 2026 года
 
+Уточнение28.11,00:51UTC: [настоящий Test cap24 завершён](ClassicRepairedCap24RecognitionResults-20261128.ru.md),
+TP1/FP2/FN0/TN5. Публикация обоих Test, графики и независимая приёмка
+ещё не закрыты. Исход Train не изменяется на Exact.
+
 Уточнение28.11,00:36UTC: [принят полный первичный архив cap24](../../../Reports/StructTrain/TimeLearner/Progress-20261128/Classic-cap24-complete-primary-accepted-fr707.json).
 [Разобраны23 измеренных кандидата](ClassicCap24SearchHistory-20261128.ru.md):
 сработало время, предел24 не достигнут; итоговый граф не является

@@ -282,7 +282,8 @@ def capture_owned_supervisor(container, *, supervisor_log, worker_stdout, maximu
 
 def _git(repository, *arguments):
     return subprocess.check_output(["git", "-C", str(repository), *arguments],
-        env={**os.environ, "GIT_NO_LAZY_FETCH": "1", "GIT_OPTIONAL_LOCKS": "0"}, stderr=subprocess.PIPE)
+        env={**os.environ, "GIT_NO_LAZY_FETCH": "1", "GIT_OPTIONAL_LOCKS": "0"}, stderr=subprocess.PIPE,
+        creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
 
 
 def _relative(path):
