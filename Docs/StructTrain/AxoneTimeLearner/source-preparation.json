@@ -1,0 +1,41 @@
+{
+  "kind": "axone_local_source_preparation",
+  "schema_version": 1,
+  "date": "2026-11-28",
+  "baseline_root_commit": "492d38c55f2290d081c54ad59c5f0c95b871827d",
+  "child_integration_commits": {
+    "Bin": "a38b7e79edf73dfc27108175101423e554c4b893",
+    "Libraries/Nmsdk-PulseLib": "b01ed53304c62ed675baf1975056a91637f07477",
+    "Rdk": "5b1ab4f34ee24aec239aecc702154b8272bfc9b3"
+  },
+  "configuration_source_review": {
+    "protocol_id": "P1-component-baseline-v1",
+    "cases": 45,
+    "files_checked": 315,
+    "total_input_bytes": 1783029,
+    "largest_input_bytes": 17527,
+    "hash": "sha256",
+    "frequencies_hz": [
+      2000,
+      20000,
+      40000
+    ],
+    "cases_per_frequency": 15,
+    "scientific_result": null
+  },
+  "documentation_relative_links_checked": 13,
+  "native_build_performed": false,
+  "native_tests_performed": false,
+  "experiment_performed": false,
+  "acceptance": "source_prepared_only",
+  "remaining": [
+    "server_environment_and_runtime_preflight",
+    "native_configuration_readback",
+    "complete_P1_burst_and_lifecycle_measurements",
+    "axon_component_selection",
+    "NAxoneTreeChain_implementation_and_acceptance",
+    "NNeuronAxoneTimeLearner_implementation_and_acceptance",
+    "P2_to_P8_scientific_programme",
+    "clean_clone_reproduction_and_scientific_report"
+  ]
+}
