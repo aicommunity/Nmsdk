@@ -171,6 +171,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_AxoneHistoricalSourceClock.cpp
     Test_PulseLib_AxoneBurstDiagnostic.cpp
     Test_PulseLib_AxoneManualSynchronization.cpp
+    Test_PulseLib_AxoneTimeLearner.cpp
     Test_PulseLib_DeclaredWindowBasinAssignment.cpp
     Test_PulseLib_MatchedOmissionEvidence.cpp
     Test_PulseLib_MatchedOmissionAssignment.cpp

@@ -62,13 +62,13 @@ def compiler_record(cache: Path, file_record) -> tuple[dict, dict]:
 
 
 def declared_tests(recipe: dict, cpp: str, partition: str) -> list[str]:
-    if recipe.get("kind") in ("axone_event_assignment_contract", "axone_factory_diagnostic_contract", "axone_local_timing_rule_contract", "axone_regeneration_comparison_contract", "axone_historical_source_clock_contract", "axone_stabilized_burst_contract", "axone_manual_synchronization_contract"):
+    if recipe.get("kind") in ("axone_event_assignment_contract", "axone_factory_diagnostic_contract", "axone_local_timing_rule_contract", "axone_regeneration_comparison_contract", "axone_historical_source_clock_contract", "axone_stabilized_burst_contract", "axone_manual_synchronization_contract", "axone_terminal_controller_contract"):
         require(recipe.get("schema_version") == 1 and partition == "all", "invalid_observation_contract")
         tests = recipe["expected_test_ids"]
         count = {"axone_event_assignment_contract": 10, "axone_factory_diagnostic_contract": 9,
                  "axone_local_timing_rule_contract": 11, "axone_regeneration_comparison_contract": 54,
                  "axone_historical_source_clock_contract": 15, "axone_stabilized_burst_contract": 60,
-                 "axone_manual_synchronization_contract": 15}[recipe["kind"]]
+                 "axone_manual_synchronization_contract": 15, "axone_terminal_controller_contract": 8}[recipe["kind"]]
         require(len(tests) == count and len(set(tests)) == count, "observation_inventory_changed")
         return tests
     require(recipe.get("kind") == "axone_native_contract_inputs" and recipe.get("schema_version") == 1,
@@ -144,7 +144,7 @@ def run(args) -> dict:
 
         protocol_before = file_record(protocol)
         recipe = json.loads(protocol.read_bytes())
-        if recipe.get("kind") in ("axone_event_assignment_contract", "axone_factory_diagnostic_contract", "axone_local_timing_rule_contract", "axone_regeneration_comparison_contract", "axone_historical_source_clock_contract", "axone_stabilized_burst_contract", "axone_manual_synchronization_contract"):
+        if recipe.get("kind") in ("axone_event_assignment_contract", "axone_factory_diagnostic_contract", "axone_local_timing_rule_contract", "axone_regeneration_comparison_contract", "axone_historical_source_clock_contract", "axone_stabilized_burst_contract", "axone_manual_synchronization_contract", "axone_terminal_controller_contract"):
             for record in recipe["source_records"]:
                 declared = (source / record["workspace_path"]).resolve(strict=True)
                 require(declared.is_relative_to(source), "declared_source_outside_sdk")
