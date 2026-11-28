@@ -30,6 +30,17 @@ double Scalar(const MDMatrix<double>& value){Need(value.GetSize()==1 && std::isf
 QJsonArray Events(const std::vector<AxonePulseEvent>& values){QJsonArray result;
     for(const auto& event:values)result.append(QJsonObject{{"onset_tick",int(event.onsetTick)},{"end_tick",int(event.endTick)},
         {"peak",event.peak},{"right_censored",event.rightCensored}});return result;}
+QJsonObject Association(const AxoneConductionAssignment& match,unsigned frequency){
+    QJsonArray pairs,possibleInputs,possibleOutputs,inputUnmatched,outputUnmatched;
+    for(const auto& pair:match.certainPairs)pairs.append(QJsonObject{{"input",int(pair.input)},{"output",int(pair.output)},{"lag_ticks",int(pair.lagTicks)}});
+    for(const auto& candidates:match.possibleInputs){QJsonArray values;for(auto value:candidates)values.append(int(value));possibleInputs.append(values);}
+    for(const auto& candidates:match.possibleOutputs){QJsonArray values;for(auto value:candidates)values.append(int(value));possibleOutputs.append(values);}
+    for(bool value:match.inputCanBeUnmatched)inputUnmatched.append(value);for(bool value:match.outputCanBeUnmatched)outputUnmatched.append(value);
+    return {{"complete_one_to_one",match.completeOneToOne},{"ambiguous",match.ambiguous},{"maximum_matched",int(match.maximumMatched)},
+        {"certain_pairs",pairs},{"possible_inputs",possibleInputs},{"possible_outputs",possibleOutputs},
+        {"input_can_be_unmatched",inputUnmatched},{"output_can_be_unmatched",outputUnmatched},
+        {"minimum_lag_ticks",0},{"maximum_lag_ticks",int(frequency/5)}};
+}
 void Save(const std::string& name,const QByteArray& bytes){
     const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT");if(!output)return;
     const auto folder=QDir(QString::fromLocal8Bit(output)).filePath("AxoneRecoveryDiagnostic");
@@ -106,7 +117,7 @@ TEST_P(AxoneRecoveryDiagnostic,CapturesMatchedPairAndOmissionControls){
                 const double time=environment->GetTime().GetDoubleTime();Need(std::abs(time-double(tick)/request.frequency)<=1e-12,"recovery_clock_grid");
                 const double input=Scalar(source->Output.GetData()),output=Scalar(axon->Output.GetData());
                 const std::array<double,11> values{Scalar(inertial->Output.GetData()),Scalar(exc->Output.GetData()),Scalar(inh->Output.GetData()),
-                    Scalar(soma->SumPotential.GetData()),zone->NeuralPotential.GetData(),zone->PrePotential.GetData(),zone->Potential.GetData(),
+                    Scalar(soma->SumPotential.GetData()),zone->GetNeuralPotential(),zone->PrePotential.GetData(),zone->Potential.GetData(),
                     output,Scalar(soma->InputFeedbackSignal.GetData()),exc->TimeConstant.GetData(),inh->TimeConstant.GetData()};
                 inputs.push_back(input);outputs.push_back(output);csv<<tick<<','<<time<<','<<input;
                 for(double value:values){Need(std::isfinite(value),"recovery_nonfinite_state");csv<<','<<value;}csv<<'\n';
@@ -117,13 +128,11 @@ TEST_P(AxoneRecoveryDiagnostic,CapturesMatchedPairAndOmissionControls){
         catch(...){reason="unknown_native_exception";failure=std::current_exception();}
         const auto sourceEvents=ExtractAxonePulseEvents(inputs,.5),outputEvents=ExtractAxonePulseEvents(outputs,.5);
         const auto after=NmsdkTools::IdentifyModel(axon,ports);
-        const auto match=AssignAxoneConductionEvents(sourceEvents,outputEvents,0,request.frequency/5);QJsonArray certain;
-        for(const auto& pair:match.certainPairs)certain.append(QJsonObject{{"input",int(pair.input)},{"output",int(pair.output)},{"lag_ticks",int(pair.lagTicks)}});
+        const auto match=AssignAxoneConductionEvents(sourceEvents,outputEvents,0,request.frequency/5);
         const int expected=phase=="silent"?0:(phase=="pair"?2:1);
         const QJsonObject row{{"phase",QString::fromStdString(phase)},{"complete",complete},{"error",QString::fromStdString(reason)},
             {"expected_source_events",expected},{"source_events",Events(sourceEvents)},{"output_events",Events(outputEvents)},
-            {"axon_identity_after",after},{"temporal_association",QJsonObject{{"complete_one_to_one",match.completeOneToOne},
-                {"ambiguous",match.ambiguous},{"maximum_matched",int(match.maximumMatched)},{"certain_pairs",certain}}}};
+            {"axon_identity_after",after},{"temporal_association",Association(match,request.frequency)}};
         phases.append(row);Save(request.id+"_"+phase+".csv",QByteArray::fromStdString(csv.str()));
         Save(request.id+"_"+phase+".json",QJsonDocument(row).toJson());
         EXPECT_TRUE(complete);EXPECT_EQ(after,identity);EXPECT_EQ(sourceEvents.size(),std::size_t(expected));

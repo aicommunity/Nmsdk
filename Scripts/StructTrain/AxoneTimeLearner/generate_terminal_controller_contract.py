@@ -9,7 +9,7 @@ import re
 ROOT=Path(__file__).resolve().parents[3]
 CPP="Tests/Integration/Libraries/Test_PulseLib_AxoneTimeLearner.cpp"
 BASE="Bin/Configs/SpikeSamples/StructTrain/AxoneTimeLearner"
-DESTINATION=ROOT/BASE/"protocols/P2-terminal-controller-v3.json"
+DESTINATION=ROOT/BASE/"protocols/P2-terminal-controller-v4.json"
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
@@ -19,13 +19,14 @@ def main():
     if len(tests)!=8 or len(set(tests))!=8:raise ValueError("terminal_controller_inventory_changed")
     sources=[]
     for source in (CPP,"Libraries/Nmsdk-PulseLib/Core/NNeuronAxoneTimeLearner.h",
-                   "Libraries/Nmsdk-PulseLib/Core/NNeuronAxoneTimeLearner.cpp"):
+                   "Libraries/Nmsdk-PulseLib/Core/NNeuronAxoneTimeLearner.cpp",
+                   "Libraries/Nmsdk-PulseLib/Core/NPulseLTZoneCommon.h"):
         payload=(ROOT/source).read_bytes().replace(b"\r\n",b"\n")
         sources.append({"workspace_path":source,"canonical_lf_bytes":len(payload),
                         "canonical_lf_sha256":hashlib.sha256(payload).hexdigest()})
     document={"kind":"axone_terminal_controller_contract","schema_version":1,
-              "protocol_id":"P2-terminal-controller-v3","status":"source_prepared",
-              "supersedes_source_declaration":"P2-terminal-controller-v2; d2fbaf4d build exposed incorrect namespace of global property flags; no native execution",
+              "protocol_id":"P2-terminal-controller-v4","status":"source_prepared",
+              "supersedes_source_declaration":"P2-terminal-controller-v3; 31883b41 preflight exposed protected NeuralPotential; add read-only observation API; no native execution",
               "test_target":"Test_PulseLib_StorageComponents","source_records":sources,
               "expected_test_ids":["AxoneTimeLearner."+name for name in tests],
               "frequency_hz":2000,"window_s":.3,"source_isi_s":[.01,.08],"expected_source_ticks":[20,180],

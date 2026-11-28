@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[3]
 CPP="Tests/Integration/Libraries/Test_PulseLib_AxoneRecoveryDiagnostic.cpp"
-DESTINATION=ROOT/"Bin/Configs/SpikeSamples/StructTrain/AxoneTimeLearner/protocols/P1-node-recovery-v1.json"
+DESTINATION=ROOT/"Bin/Configs/SpikeSamples/StructTrain/AxoneTimeLearner/protocols/P1-node-recovery-v2.json"
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument("--overwrite",action="store_true")
@@ -20,10 +20,14 @@ def main():
                     cases.append({"id":identity,"frequency_hz":frequency,"capacity_f":capacity,
                                   "lt_time_constant_s":tau,"gap_ms":gap,
                                   "expected_test_id":"P1Recovery/AxoneRecoveryDiagnostic.CapturesMatchedPairAndOmissionControls/"+identity})
-    payload=(ROOT/CPP).read_bytes().replace(b"\r\n",b"\n")
-    document={"kind":"axone_recovery_diagnostic_contract","schema_version":1,"protocol_id":"P1-node-recovery-v1",
+    sources=[]
+    for source in (CPP,"Libraries/Nmsdk-PulseLib/Core/NPulseLTZoneCommon.h"):
+        payload=(ROOT/source).read_bytes().replace(b"\r\n",b"\n")
+        sources.append({"workspace_path":source,"canonical_lf_bytes":len(payload),"canonical_lf_sha256":hashlib.sha256(payload).hexdigest()})
+    document={"kind":"axone_recovery_diagnostic_contract","schema_version":1,"protocol_id":"P1-node-recovery-v2",
+              "supersedes_source_declaration":"P1-node-recovery-v1, replaced before native execution to use read-only LT input API",
               "status":"source_prepared","test_target":"Test_PulseLib_StorageComponents",
-              "source_records":[{"workspace_path":CPP,"canonical_lf_bytes":len(payload),"canonical_lf_sha256":hashlib.sha256(payload).hexdigest()}],
+              "source_records":sources,
               "cases":cases,"expected_test_ids":[case["expected_test_id"] for case in cases],
               "carrier":"NAxoneSegment","membrane_base":"NPMembraneBio",
               "fixed_ltzone":{"base_image":"NPLTZone","threshold":.02,"threshold_off":0,"pulse_amplitude":1,

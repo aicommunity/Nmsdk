@@ -132,7 +132,7 @@ try {
                 foreach($target in $PreflightTargets){
                     $preflightIndex++
                     $ErrorActionPreference='Continue'
-                    & $CMakeExecutable --build $BuildRoot --parallel 2 --target $target 2>&1 |
+                    & $CMakeExecutable --build $BuildRoot --parallel $Jobs --target $target 2>&1 |
                         ForEach-Object { $_.ToString() } | Tee-Object -FilePath (Join-Path $EvidenceRoot "preflight-$preflightIndex.log")
                     $code=$LASTEXITCODE
                     $ErrorActionPreference='Stop'
