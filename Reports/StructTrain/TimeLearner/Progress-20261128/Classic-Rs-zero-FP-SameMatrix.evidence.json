@@ -16,7 +16,12 @@
   "candidate_audit_logical_path": "candidate/orchestration/independent-audit.json",
   "candidate_audit_bytes": 178717,
   "candidate_audit_sha256": "79c7e849b2592bb83e5bce7f5d09926181a8c3d39744f4b52950e0125e1f1158",
-  "actual_counts": {"TP": 1, "FP": 0, "FN": 0, "TN": 7},
+  "actual_counts": {
+    "TP": 1,
+    "FP": 0,
+    "FN": 0,
+    "TN": 7
+  },
   "threshold": 0.008765648135529838,
   "protocol": "historical_same_matrix",
   "M": 4,
@@ -37,9 +42,25 @@
   "resistance_amplitude_normalization_success_established": false,
   "independently_heldout_evaluation": false,
   "robustness_verified": false,
-  "independent_archive_readback_complete": false,
+  "independent_archive_readback_complete": true,
   "full_visual_review_complete": false,
   "new_DOCX_release_complete": false,
   "original_plan_complete": false,
-  "scientific_note": "Docs/StructTrain/TimeLearner/ClassicResistanceRecognition-20261128.ru.md"
+  "scientific_note": "Docs/StructTrain/TimeLearner/ClassicResistanceRecognition-20261128.ru.md",
+  "independent_archive_reader_catalog": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/2a/2a68bc70f8e93c8a29317a567688090afc13a461935747446038e7b4441f8f49",
+    "sha256": "2a68bc70f8e93c8a29317a567688090afc13a461935747446038e7b4441f8f49",
+    "bytes": 4540
+  },
+  "complete_temporal_gallery_catalog": {
+    "kind": "nmsdk_structtrain_external_object",
+    "schema_version": 1,
+    "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+    "object": "objects/sha256/71/7170bc2df06ef146377297f303a6fcecd8ca394995e49fa2443710b002bd1c4d",
+    "sha256": "7170bc2df06ef146377297f303a6fcecd8ca394995e49fa2443710b002bd1c4d",
+    "bytes": 2640
+  }
 }
