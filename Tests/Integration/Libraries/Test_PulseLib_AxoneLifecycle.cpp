@@ -28,6 +28,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <typeinfo>
 
 namespace {
 using namespace RDK;
@@ -70,12 +71,25 @@ protected:
         environment->GetTime().SetTime(ULongTime(0));
     }
 
+    template<class Action> void Cleanup(const char* phase, Action action)
+    {
+        try { action(); }
+        catch(const UException& error) {
+            ADD_FAILURE() << phase << ": " << typeid(error).name()
+                << " type=" << error.GetType() << " number=" << error.GetNumber()
+                << " file=" << error.GetExFileName() << ":" << error.GetExLineNumber()
+                << " object=" << error.GetObjectName() << " message=" << error.GetMessage();
+        }
+        catch(const std::exception& error) { ADD_FAILURE() << phase << ": " << error.what(); }
+        catch(...) { ADD_FAILURE() << phase << ": unknown native exception"; }
+    }
+
     void TearDown() override
     {
-        if(model) model->BreakLinks();
+        if(model) Cleanup("BreakLinks", [&] { model->BreakLinks(); });
         if(environment) {
-            environment->DestroyModel();
-            environment->GetTime().SetTime(originalTime);
+            Cleanup("DestroyModel", [&] { environment->DestroyModel(); });
+            Cleanup("RestoreClock", [&] { environment->GetTime().SetTime(originalTime); });
         }
     }
 
