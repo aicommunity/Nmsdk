@@ -1,0 +1,20 @@
+digraph Components {
+ graph [rankdir=TB,bgcolor=white,pad=0.12,nodesep=0.35,ranksep=0.32];
+ node [shape=record,fontname="Times New Roman",fontsize=15,margin="0.10,0.08"];
+ edge [fontname="Times New Roman",fontsize=14,arrowsize=0.65];
+ classic [label="{NNeuronTimeLearner|Независимые пути\l}"];
+ branch [label="{NNeuronTimeLearnerBranch|Общая ветвь\l}"];
+ service [label="{NativeTrainingService|Start()\lBeforeTick()\lAfterTick()\l|Состояние текущего этапа\l}"];
+ search [label="{BoundedTrainingSession|NextAction()\lApplied()\lConsume()\l|Кандидаты и измеренные ошибки\l}"];
+ final [label="{FinalVerificationSession|NextRequest()\lConsume()\l|Свежие измерения всех путей\l}"];
+ adapter [label="{NativeTrainingAdapter|readModelRevision\lapply и queue\lprobeState и takeResult\l|Доступ к реальной модели\l}"];
+ neuron [label="{NPulseNeuron|Структура и связи\lПараметры и динамика\l}"];
+ {rank=same;classic;branch;}
+ classic->service [label="использует"];branch->service [label="использует"];
+ service->search [label="управляет"];
+ search->final [label="создаёт",dir=both,arrowtail=diamond,arrowhead=none];
+ service->adapter [style=dashed,label="вызывает операции"];
+ adapter->neuron [style=dashed,label="читает и изменяет"];
+ {rank=same;search;adapter;}
+ {rank=same;final;neuron;}
+}
