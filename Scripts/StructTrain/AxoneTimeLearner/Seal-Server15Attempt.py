@@ -111,6 +111,13 @@ def terminal(attempt, role):
                 "assertion_status": document.get("gate", {}).get("assertion_status"),
                 "native_checks_passed": document.get("native_checks_passed"),
                 "scientific_verdict": None}
+    if role == "analysis":
+        document = read(attempt/"result.json")
+        require(document.get("kind") in ("axone_factory_diagnostic_analysis", "axone_p1_sparse_baseline_analysis") and
+                type(document.get("analysis_complete")) is bool, "analysis_not_terminal")
+        return {"role": role, "analysis_complete": document["analysis_complete"],
+                "process_closure": "not_captured_for_auxiliary_analysis_process",
+                "scientific_verdict": None}
     if role == "build":
         document = read(attempt/"build-result.json")
         require(document.get("kind") == "axone_server15_build_result" and
@@ -198,7 +205,7 @@ def main():
     parser.add_argument("--verify-pointer", type=Path)
     parser.add_argument("--archive-id", required=True)
     parser.add_argument("--seal-id")
-    parser.add_argument("--role", choices=("setup", "build", "native"))
+    parser.add_argument("--role", choices=("setup", "build", "native", "analysis"))
     parser.add_argument("--maximum-bytes", type=int, default=4*1024**3)
     parser.add_argument("--maximum-files", type=int, default=20000)
     args = parser.parse_args()
