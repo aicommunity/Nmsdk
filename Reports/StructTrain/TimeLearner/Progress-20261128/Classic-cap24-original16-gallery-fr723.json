@@ -1,0 +1,317 @@
+{
+  "kind": "Classic_cap24_original16_complete_audited_gallery",
+  "schema_version": 1,
+  "objects": {
+    "bundle.json": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/4a/4ac42a37ec444b2ae7d4fb6003b87c984fab95ba1f7238e7a5483b6f9f18ae62",
+      "sha256": "4ac42a37ec444b2ae7d4fb6003b87c984fab95ba1f7238e7a5483b6f9f18ae62",
+      "bytes": 24915
+    },
+    "primary.tar.xz": {
+      "kind": "nmsdk_structtrain_external_object",
+      "schema_version": 1,
+      "archive_root": "/media/user/Data/Nmsdk-StructTrainExpArchive",
+      "object": "objects/sha256/09/09b30efea97ad84c24d2b31a1965ec46086230f6ad629783d7336425360d78ea",
+      "sha256": "09b30efea97ad84c24d2b31a1965ec46086230f6ad629783d7336425360d78ea",
+      "bytes": 25019728
+    }
+  },
+  "members": 145,
+  "source_primary": {
+    "relative_path": "experiments/2026-11-28/Windows8-Classic-cap24-baseline-confirmation-primary-fr705.json",
+    "bytes": 4975,
+    "sha256": "cf26ec0b10575915557f027d52bd15ee27135f9e70f2f3fcf2f125f651253870"
+  },
+  "rows": [
+    {
+      "role": "baseline",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.875,
+        "target_hit_rate": 0.0,
+        "foil_response_rate": 0.0
+      },
+      "threshold": 100.0,
+      "model_revision": "b1430c16b95da83567a01dcd314dbec36c92d2f6965308119ba66b0e14d0f2fc"
+    },
+    {
+      "role": "confirmation",
+      "counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5,
+        "targets": 1,
+        "foils": 7,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 0.75,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.2857142857142857
+      },
+      "threshold": 0.023252703356543683,
+      "model_revision": "2783e83684eef31e0a258e271e0c2c3acf30a9a9ab175fc20632577b5b9028a6"
+    }
+  ],
+  "events": [
+    {
+      "role": "baseline",
+      "index": 0,
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "classification": "FN",
+      "stimulus_times": [
+        0,
+        0.08,
+        0.24,
+        0.48
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "baseline",
+      "index": 1,
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.2400000000000002,
+        0.3999999999999999,
+        0.48
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "baseline",
+      "index": 2,
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.16000000000000014,
+        0.2400000000000002,
+        0.47999999999999954
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "baseline",
+      "index": 3,
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.16000000000000014,
+        0.3200000000000003,
+        0.4800000000000004
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "baseline",
+      "index": 4,
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.019999999999999574,
+        0.2400000000000002,
+        0.4800000000000004
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "baseline",
+      "index": 5,
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.2400000000000002,
+        0.46000000000000085,
+        0.4800000000000004
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "baseline",
+      "index": 6,
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.040000000000000924,
+        0.08000000000000007,
+        0.4800000000000004
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "baseline",
+      "index": 7,
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.40000000000000036,
+        0.4399999999999995,
+        0.47999999999999865
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "confirmation",
+      "index": 0,
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "classification": "TP",
+      "stimulus_times": [
+        0,
+        0.08,
+        0.24,
+        0.48
+      ],
+      "spike_times": [
+        0.4815
+      ],
+      "early_output": false
+    },
+    {
+      "role": "confirmation",
+      "index": 1,
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.2400000000000002,
+        0.3999999999999999,
+        0.48
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "confirmation",
+      "index": 2,
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.16000000000000014,
+        0.2400000000000002,
+        0.47999999999999954
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "confirmation",
+      "index": 3,
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.16000000000000014,
+        0.3200000000000003,
+        0.4800000000000004
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "confirmation",
+      "index": 4,
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "classification": "FP",
+      "stimulus_times": [
+        0,
+        0.019999999999999574,
+        0.2400000000000002,
+        0.4800000000000004
+      ],
+      "spike_times": [
+        0.48099999999999987
+      ],
+      "early_output": false
+    },
+    {
+      "role": "confirmation",
+      "index": 5,
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.2400000000000002,
+        0.46000000000000085,
+        0.4800000000000004
+      ],
+      "spike_times": [],
+      "early_output": false
+    },
+    {
+      "role": "confirmation",
+      "index": 6,
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "classification": "FP",
+      "stimulus_times": [
+        0,
+        0.040000000000000924,
+        0.08000000000000007,
+        0.4800000000000004
+      ],
+      "spike_times": [
+        0.4815000000000005
+      ],
+      "early_output": false
+    },
+    {
+      "role": "confirmation",
+      "index": 7,
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "classification": "TN",
+      "stimulus_times": [
+        0,
+        0.40000000000000036,
+        0.4399999999999995,
+        0.47999999999999865
+      ],
+      "spike_times": [],
+      "early_output": false
+    }
+  ],
+  "PNG": 32,
+  "SVG": 32,
+  "visual_review_pending": true,
+  "independent_gallery_readback_pending": true,
+  "scientific_verdict": null
+}
