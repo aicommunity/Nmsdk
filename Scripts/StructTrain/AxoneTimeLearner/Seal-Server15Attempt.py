@@ -116,7 +116,7 @@ def terminal(attempt, role):
         require(document.get("kind") in ("axone_factory_diagnostic_analysis", "axone_p1_sparse_baseline_analysis",
                                         "axone_regeneration_diagnostic_analysis",
                                         "axone_calibrated_delay_input_generation",
-                                        "axone_conduction_matrix_analysis") and
+                                        "axone_conduction_matrix_analysis", "axone_conduction_figures") and
                 type(document.get("analysis_complete")) is bool, "analysis_not_terminal")
         return {"role": role, "analysis_complete": document["analysis_complete"],
                 "process_closure": "not_captured_for_auxiliary_analysis_process",
