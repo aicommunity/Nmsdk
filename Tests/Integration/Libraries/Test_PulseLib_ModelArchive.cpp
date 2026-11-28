@@ -630,4 +630,78 @@ TEST(NativeImageRestSnapshot, RepeatedArchiveAndPoolReuseAt20000)
 {
     RepeatedPrivateImageRestRoundtrip(20000);
 }
+
+QJsonObject RewriteFeedbackBuffer(QJsonObject snapshot,const std::vector<std::string>& componentPath,
+                                 const char* rows,const char* cols,const char* value)
+{
+    USerStorageXML xml;
+    if(!xml.Load(snapshot["native_xml"].toString().toStdString(),"TimeLearnerNativeGraph") ||
+       !xml.SelectNode(snapshot["component_name"].toString().toStdString()))
+        throw std::runtime_error("fixture feedback XML root missing");
+    for(const auto& name:componentPath)
+        if(!xml.SelectNode(name))throw std::runtime_error("fixture feedback component missing");
+    if(!xml.SelectNode("State") || !xml.SelectNode("InputFeedbackSignal") ||
+       !xml.SetNodeAttribute("Rows",rows) || !xml.SetNodeAttribute("Cols",cols) || !xml.SetNodeText(value))
+        throw std::runtime_error("fixture feedback buffer missing");
+    xml.SelectRoot();std::string bytes;
+    if(!xml.Save(bytes))throw std::runtime_error("fixture feedback XML Save failed");
+    snapshot["native_xml"]=QString::fromStdString(bytes);
+    snapshot["native_xml_sha256"]=QString::fromLatin1(QCryptographicHash::hash(
+        QByteArray::fromStdString(bytes),QCryptographicHash::Sha256).toHex());
+    return snapshot;
+}
+
+QJsonObject WithPrivateFeedbackBuffer(QJsonObject archive,const char* rows,const char* cols,const char* value)
+{
+    auto definitions=archive["class_definitions"].toArray();bool changed=false;
+    for(int i=0;i<definitions.size();++i)
+    {
+        auto definition=definitions[i].toObject();
+        if(definition["kind"]!=QJsonValue("derived_image") ||
+           definition["base_class"]!=QJsonValue("NPMembraneBio"))continue;
+        definition["snapshot"]=RewriteFeedbackBuffer(definition["snapshot"].toObject(),{},rows,cols,value);
+        definitions[i]=definition;changed=true;break;
+    }
+    if(!changed)throw std::runtime_error("fixture native membrane image missing");
+    archive["class_definitions"]=definitions;Seal(archive);return archive;
+}
+
+TEST(NativeImageRestSnapshot, LegacyNeutralPrivateFeedbackCacheHasCanonicalDefinition)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();auto source=Prepared(2000,true,true);
+    const auto identity=NmsdkTools::IdentifyModel(source);
+    const auto original=NmsdkTools::ExportModelArchive(source,Metadata());
+    const auto empty=WithPrivateFeedbackBuffer(original,"0","0","");
+    const auto legacy=WithPrivateFeedbackBuffer(original,"1","1","0");
+    EXPECT_EQ(original,empty) << "new class image definitions must already use the canonical empty cache";
+    EXPECT_NE(legacy,empty);
+    EXPECT_TRUE(NmsdkTools::SamePortableModelArchive(empty,legacy));
+    EXPECT_TRUE(NmsdkTools::SamePortableModelArchive(legacy,empty));
+    // Comparison leaves both signed documents and the live model untouched.
+    EXPECT_NE(legacy,empty);
+    EXPECT_EQ(NmsdkTools::IdentifyModel(source),identity);
+    core.storage->ReturnObject(source);
+}
+
+TEST(NativeImageRestSnapshot, NonNeutralAndWiderPrivateFeedbackBuffersRemainDistinct)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();auto source=Prepared(2000,true,true);
+    const auto original=NmsdkTools::ExportModelArchive(source,Metadata());
+    EXPECT_FALSE(NmsdkTools::SamePortableModelArchive(original,WithPrivateFeedbackBuffer(original,"1","1","0.5")));
+    EXPECT_FALSE(NmsdkTools::SamePortableModelArchive(original,WithPrivateFeedbackBuffer(original,"1","2","0 0")));
+    auto legacy=WithPrivateFeedbackBuffer(original,"1","1","0");
+    legacy["sha256"]="unverified";
+    EXPECT_FALSE(NmsdkTools::SamePortableModelArchive(original,legacy));
+    core.storage->ReturnObject(source);
+}
+
+TEST(NativeImageRestSnapshot, GraphInputStateIsNotAClassImageCache)
+{
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();auto source=Prepared(2000,true,true);
+    const auto original=NmsdkTools::ExportModelArchive(source,Metadata());auto empty=original,one=original;
+    empty["graph"]=RewriteFeedbackBuffer(original["graph"].toObject(),{"Components","Soma1"},"0","0","");Seal(empty);
+    one["graph"]=RewriteFeedbackBuffer(original["graph"].toObject(),{"Components","Soma1"},"1","1","0");Seal(one);
+    EXPECT_FALSE(NmsdkTools::SamePortableModelArchive(empty,one));
+    core.storage->ReturnObject(source);
+}
 }
